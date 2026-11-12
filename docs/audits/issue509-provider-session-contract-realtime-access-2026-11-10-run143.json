@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 143,
+  "review_date_utc": "2026-11-10",
+  "provider_project_ref": "azviqqejypsefzilgonr",
+  "context": {
+    "development_parent_sha": "3283bb3ceffc20aa6589e3f7a586b71cf82758d8",
+    "main_sha": "11e1e8c7c36dad488519476d8a969bb682915d31",
+    "release_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
+    "provider_status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.11.0.003",
+    "migrations_observed": 59,
+    "edge_functions_observed": 3
+  },
+  "scope": "Targeted follow-up of Run142 session_status presentation contracts; separate live Realtime subscription ACL/RLS/definition risk confirmation; direct GitHub current call sites. No repeat claim of original function/code review.",
+  "live_functions": [
+    {
+      "signature": "private.session_status()",
+      "md5": "0aa8e57bb4846aac7dd8e3b6c0cf690c",
+      "chars": 729,
+      "definition_reviewed_char_range": [
+        1,
+        729
+      ],
+      "security_definer": true,
+      "anon_execute": false,
+      "authenticated_execute": true,
+      "service_role_execute": false,
+      "semantic_verdict": "The live function computes authenticated, admitted, admin, emailVerified, and approvalState from authorization and membership state, then appends constant backupConfigured=false, communityLive=false, mode=owner-test. Constants do not currently drive admission, but may inaccurately describe product capabilities; remove/change only with compatibility authority. Full live body hash unchanged from Run142."
+    },
+    {
+      "signature": "public.dic_session_status()",
+      "md5": "742e5bd0fc8544807886b514d95d6688",
+      "chars": 165,
+      "definition_reviewed_char_range": [
+        1,
+        165
+      ],
+      "security_definer": false,
+      "anon_execute": false,
+      "authenticated_execute": true,
+      "service_role_execute": true,
+      "semantic_verdict": "Invoker bridge into private.session_status, search_path empty, no direct public anonymous execution. Dynamic return is not an admission bearer on its own."
+    }
+  ],
+  "github_callers": [
+    {
+      "path": "site/cloud/client.js",
+      "blob_sha": "d3a4d92f66a49f311d18ab42500b7a8cdabbe096",
+      "lines_total": 104,
+      "call_line": 44,
+      "reviewed_ranges": [
+        [
+          37,
+          47
+        ]
+      ],
+      "behavior": "status() invokes sdk.rpc('dic_session_status') and returns JSON; no use of constant presentation keys inside this file."
+    },
+    {
+      "path": "site/cloud/main.js",
+      "blob_sha": "cef43de79da7920097915cd050534cd1d6d0fbb4",
+      "lines_total": 1070,
+      "reviewed_ranges": [
+        [
+          109,
+          192
+        ],
+        [
+          239,
+          258
+        ],
+        [
+          280,
+          310
+        ],
+        [
+          375,
+          425
+        ]
+      ],
+      "behavior": "Live UI/auth polling uses admitted/admin/approvalState/emailVerified. Exact module search found no backupConfigured/communityLive/owner-test access. Preserve revocation/offline behavior."
+    },
+    {
+      "path": "site/admin/main.js",
+      "blob_sha": "2fcf2a33b72bcaba0ec371feabd8ffc6fe59eba7",
+      "lines_total": 443,
+      "reviewed_ranges": [
+        [
+          45,
+          56
+        ]
+      ],
+      "behavior": "Admin gate requires authenticated, admitted and admin; no constant presentation key consumed."
+    }
+  ],
+  "realtime_subscription": {
+    "schema": "realtime",
+    "table": "subscription",
+    "catalog_definition_review": "9/9 current columns, 2 constraints, 3 indexes, 1 custom trigger, complete DDL directly examined; prior baseline components not newly credited",
+    "columns": [
+      "id bigint NOT NULL",
+      "subscription_id uuid NOT NULL",
+      "entity regclass NOT NULL",
+      "filters realtime.user_defined_filter[] NOT NULL",
+      "claims jsonb NOT NULL",
+      "claims_role regrole NOT NULL",
+      "created_at timestamp without time zone NOT NULL",
+      "action_filter text nullable",
+      "selected_columns text[] nullable"
+    ],
+    "constraints": [
+      "pk_subscription PRIMARY KEY(id)",
+      "subscription_action_filter_check action_filter IN (*, INSERT, UPDATE, DELETE)"
+    ],
+    "indexes": [
+      "ix_realtime_subscription_entity btree(entity)",
+      "pk_subscription unique btree(id)",
+      "subscription_subscription_id_entity_filters_action_filter_selec unique btree(subscription_id,entity,filters,action_filter,coalesce(selected_columns,empty_array))"
+    ],
+    "trigger": "tr_check_filters BEFORE INSERT OR UPDATE -> realtime.subscription_check_filters()",
+    "anon_schema_usage": true,
+    "authenticated_schema_usage": true,
+    "anon_select": true,
+    "authenticated_select": true,
+    "rls_enabled": false,
+    "force_rls": false,
+    "subscriber_rows_aggregate": 0,
+    "analysis": "An exposed realtime.subscription REST/SQL surface could reveal subscriber claims/filters due to ordinary-role SELECT and no table RLS. No live records and no proven API exposure; PostgREST exposed schemas and real HTTP role behavior are inaccessible to this safe database-only read. This is a pre-existing UNVERIFIED platform permission boundary, not a new demonstrated leak. Do not unilaterally change platform-managed grants/RLS."
+  },
+  "related_realtime": {
+    "messages": "Anon/authenticated SELECT granted but table RLS enabled with zero policies, direct access fail-closed unless privileged bypass.",
+    "schema_migrations": "No anon/authenticated SELECT."
+  },
+  "hosted_config": {
+    "current_setting_pgrst_db_schemas": null,
+    "interpretation": "NULL means this SQL session did not expose that setting, not evidence whether realtime schema is exposed by hosted PostgREST.",
+    "api_auth_jwt_private_console": "UNVERIFIED",
+    "external_legacy_clients": "UNVERIFIED",
+    "native_provider_runtime": "UNVERIFIED"
+  },
+  "query_receipts": [
+    "read-only SQL: two current pg_get_functiondef complete bodies/MD5, effective EXECUTE",
+    "read-only catalog: realtime.subscription 9 columns, 2 constraints, 3 indexes, one trigger",
+    "read-only catalog: three realtime table grants, schema usage, RLS and policy counts, count(*) subscription=0",
+    "exact development source file retrieval and context-specific semantic call site review"
+  ],
+  "newly_directly_reviewed_source_characters": 0,
+  "repeated_current_function_chars_revalidated": 894,
+  "new_confirmed_defects": 0,
+  "source_fix": false,
+  "production_changes": false,
+  "app_test_runs": "NOT_REQUIRED_DOC_ONLY",
+  "full_provider_baseline": "IN_PROGRESS",
+  "next": "Continue next provider material delta/unreviewed authoritative definition; investigate hosted Realtime REST schema exposure only with permitted read-only configuration/bounded evidence, coordinate #96. Do not assume unauthorized access. Monitor changed SQL/Edge and existing admission constraint if subsequently deployed."
+}

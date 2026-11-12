@@ -12,6 +12,7 @@
     "current_owner_admin_one_click_resolution_and_dose_warning_20261021",
     "current_owner_admin_records_edit_20261021",
     "current_owner_admin_review_delete_20261023",
+    "current_owner_admin_web_push_20261110",
     "current_owner_approved_adaptive_extractor_production_release_20261020",
     "current_owner_approved_agtron_narrative",
     "current_owner_approved_community_nested_layout_20261018",
@@ -979,7 +980,9 @@
           "path": "tests/browser/cloud_owner_qa.py",
           "contains": "issue1756_admin_badge_mobile_dark.png"
         }
-      ]
+      ],
+      "deployed_release_id": "DIC-20261110-READY4-28",
+      "deployed_receipt": "docs/releases/2026-11-10_READY4_DEPLOYED_VERIFIED.md"
     }
   ],
   "active_gap_flags": [
@@ -2248,10 +2251,10 @@
   },
   "current_owner_signup_admin_approval_20261109": {
     "decision_id": "ACCESS-ADMIN-SIGNUP-APPROVAL-NO-INVITES-20261109",
-    "state": "SOURCE_READY_NOT_DEPLOYED",
+    "state": "DEPLOYED_VERIFIED",
     "issue": 1756,
     "scope": "Admin-only signup approval and verified-only task alerts on main Settings/Admin entry; old invite codes retired only on future authorized Publish with encrypted recovery.",
-    "release": "NOT_AUTHORIZED",
+    "release": "DIC-20261110-READY4-28",
     "source_branch": "feature/issue1756-admin-approval-no-invites",
     "source_head": "1fa8ddc9d886025e404f936b75a106864916793b",
     "real_device_acceptance": "NOT_PERFORMED",
@@ -2266,6 +2269,19 @@
       42758790255,
       42758790069,
       42758789992
-    ]
+    ],
+    "production_git_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
+    "netlify_deploy_id": "6af2ad72c2aa765f588abc75"
+  },
+  "current_owner_admin_web_push_20261110": {
+    "decision_id": "ACCESS-ADMIN-HOMESCREEN-WEB-PUSH-20261110",
+    "state": "TESTING_VAULT_EDGE_SIGNING",
+    "issue": 1938,
+    "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1938",
+    "scope": "Opt-in off-screen Apple Home Screen Web Push for action-required verified signup approvals, pending/conflict coffees, unfinished deletions; private payload prohibited; server role gating, dedup and opt-out required.",
+    "source_branch": "feat/admin-web-push-1938",
+    "real_device_acceptance": "NOT_PERFORMED",
+    "provider_secrets": "SUPABASE_VAULT_P256_PENDING_RUNTIME; NETLIFY_NO_PRIVATE_CREDENTIALS_REQUIRED",
+    "publication": "OWNER_AUTHORIZED_ONE_BATCH_WITH_ALL_READY_NOT_YET_RELEASED"
   }
 }

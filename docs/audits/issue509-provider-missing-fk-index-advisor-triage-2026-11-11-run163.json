@@ -1,0 +1,356 @@
+{
+  "issue": 509,
+  "run": 163,
+  "observed_at_utc": "2026-11-11T06:52:32.701Z",
+  "project_ref": "azviqqejypsefzilgonr",
+  "origin": "fresh current Supabase performance advisor 0001 + direct complete FK DDL and all child-table index DDL with safe numeric pg_stat_user_tables/pg_total_relation_size only",
+  "remediation_url": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys",
+  "complete_constraint_review_count": 13,
+  "affected_tables": [
+    "private.admin_access_events",
+    "private.admin_content_edits",
+    "private.dic_admin_account_delete_operations",
+    "private.dic_coffee_audit",
+    "private.dic_coffee_first_entry",
+    "private.dic_roaster_aliases",
+    "private.dic_signup_review_events",
+    "private.dic_source_attempts",
+    "private.import_control"
+  ],
+  "all_constraints_validated": true,
+  "largest_estimated_rows": 12,
+  "estimated_rows_zero_constraints": 4,
+  "full_fk_source_credit": "direct complete 1-EOF for each constraint, index DDL; first-time original word credit 0, reused historical provider source reviews",
+  "disposition": "INFO; no index justified by these limited current small-table activity statistics alone; future parent delete/update/actual query plans must be checked before adding indexes; no source or provider modifications",
+  "issues": [
+    {
+      "schema": "private",
+      "table_name": "admin_access_events",
+      "fk_name": "admin_access_events_actor_id_fkey",
+      "full_fk_ddl": "FOREIGN KEY (actor_id) REFERENCES auth.users(id) ON DELETE SET NULL",
+      "fk_ddl_md5": "bd237ddc6ddd109915445a1acecb5c41",
+      "convalidated": true,
+      "total_bytes": 32768,
+      "estimated_rows": 2,
+      "inserts": 13,
+      "updates": 0,
+      "deletes": 11,
+      "seq_scans": 82,
+      "idx_scans": 0,
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX admin_access_events_pkey ON private.admin_access_events USING btree (id)",
+          "index": "admin_access_events_pkey",
+          "ddl_md5": "c2482d2a7c75e728fc0ac60b22cf7ffc"
+        }
+      ],
+      "source_range": "full constraint DDL 1-EOF and all corresponding current table index DDL 1-EOF",
+      "semantic_verdict": "Parent delete nulls references; currently tiny. Missing child FK index warning not proof of latency; verify actual parent mutation paths before index."
+    },
+    {
+      "schema": "private",
+      "table_name": "admin_access_events",
+      "fk_name": "admin_access_events_member_id_fkey",
+      "full_fk_ddl": "FOREIGN KEY (member_id) REFERENCES auth.users(id) ON DELETE SET NULL",
+      "fk_ddl_md5": "d00fde192d5a9de1a19f2702dfb6f74e",
+      "convalidated": true,
+      "total_bytes": 32768,
+      "estimated_rows": 2,
+      "inserts": 13,
+      "updates": 0,
+      "deletes": 11,
+      "seq_scans": 82,
+      "idx_scans": 0,
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX admin_access_events_pkey ON private.admin_access_events USING btree (id)",
+          "index": "admin_access_events_pkey",
+          "ddl_md5": "c2482d2a7c75e728fc0ac60b22cf7ffc"
+        }
+      ],
+      "source_range": "full constraint DDL 1-EOF and all corresponding current table index DDL 1-EOF",
+      "semantic_verdict": "Parent delete nulls references; currently tiny. Missing child FK index warning not proof of latency; verify actual parent mutation paths before index."
+    },
+    {
+      "schema": "private",
+      "table_name": "admin_content_edits",
+      "fk_name": "admin_content_edits_actor_id_fkey",
+      "full_fk_ddl": "FOREIGN KEY (actor_id) REFERENCES auth.users(id)",
+      "fk_ddl_md5": "508a4cf20410e80e6cb722233bc03330",
+      "convalidated": true,
+      "total_bytes": 49152,
+      "estimated_rows": 2,
+      "inserts": 2,
+      "updates": 0,
+      "deletes": 0,
+      "seq_scans": 87,
+      "idx_scans": 0,
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX admin_content_edits_pkey ON private.admin_content_edits USING btree (id)",
+          "index": "admin_content_edits_pkey",
+          "ddl_md5": "420e0969af4dba5e965d44583e9ef23f"
+        }
+      ],
+      "source_range": "full constraint DDL 1-EOF and all corresponding current table index DDL 1-EOF",
+      "semantic_verdict": "Default NO ACTION parent delete/update requires referential checks; tiny current relation and no measured slow path. Preserve audit relationships; no auto-index."
+    },
+    {
+      "schema": "private",
+      "table_name": "admin_content_edits",
+      "fk_name": "admin_content_edits_subject_owner_id_fkey",
+      "full_fk_ddl": "FOREIGN KEY (subject_owner_id) REFERENCES auth.users(id)",
+      "fk_ddl_md5": "69f64337961955c61ed35ec6014c5b3b",
+      "convalidated": true,
+      "total_bytes": 49152,
+      "estimated_rows": 2,
+      "inserts": 2,
+      "updates": 0,
+      "deletes": 0,
+      "seq_scans": 87,
+      "idx_scans": 0,
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX admin_content_edits_pkey ON private.admin_content_edits USING btree (id)",
+          "index": "admin_content_edits_pkey",
+          "ddl_md5": "420e0969af4dba5e965d44583e9ef23f"
+        }
+      ],
+      "source_range": "full constraint DDL 1-EOF and all corresponding current table index DDL 1-EOF",
+      "semantic_verdict": "Default NO ACTION parent delete/update requires referential checks; tiny current relation and no measured slow path. Preserve audit relationships; no auto-index."
+    },
+    {
+      "schema": "private",
+      "table_name": "dic_admin_account_delete_operations",
+      "fk_name": "dic_admin_account_delete_operations_actor_id_fkey",
+      "full_fk_ddl": "FOREIGN KEY (actor_id) REFERENCES auth.users(id) ON DELETE SET NULL",
+      "fk_ddl_md5": "bd237ddc6ddd109915445a1acecb5c41",
+      "convalidated": true,
+      "total_bytes": 24576,
+      "estimated_rows": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0,
+      "seq_scans": 36,
+      "idx_scans": 5,
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX dic_admin_account_delete_operations_pkey ON private.dic_admin_account_delete_operations USING btree (id)",
+          "index": "dic_admin_account_delete_operations_pkey",
+          "ddl_md5": "e0f079dfaf4e46241f745870978dac9f"
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX dic_admin_account_delete_one_active ON private.dic_admin_account_delete_operations USING btree (target_id) WHERE (phase <> 'completed'::text)",
+          "index": "dic_admin_account_delete_one_active",
+          "ddl_md5": "12d4f772dbb990780fd4780afe56da18"
+        }
+      ],
+      "source_range": "full constraint DDL 1-EOF and all corresponding current table index DDL 1-EOF",
+      "semantic_verdict": "Parent delete nulls references; currently tiny. Missing child FK index warning not proof of latency; verify actual parent mutation paths before index."
+    },
+    {
+      "schema": "private",
+      "table_name": "dic_coffee_audit",
+      "fk_name": "dic_coffee_audit_coffee_id_fkey",
+      "full_fk_ddl": "FOREIGN KEY (coffee_id) REFERENCES coffees(id)",
+      "fk_ddl_md5": "bc4131ca1700b897e12a0deb212de16c",
+      "convalidated": true,
+      "total_bytes": 32768,
+      "estimated_rows": 12,
+      "inserts": 20,
+      "updates": 0,
+      "deletes": 0,
+      "seq_scans": 136,
+      "idx_scans": 0,
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX dic_coffee_audit_pkey ON private.dic_coffee_audit USING btree (id)",
+          "index": "dic_coffee_audit_pkey",
+          "ddl_md5": "b3b65fd2f73cbb19bf754483d2b66a8b"
+        }
+      ],
+      "source_range": "full constraint DDL 1-EOF and all corresponding current table index DDL 1-EOF",
+      "semantic_verdict": "Default NO ACTION parent delete/update requires referential checks; tiny current relation and no measured slow path. Preserve audit relationships; no auto-index."
+    },
+    {
+      "schema": "private",
+      "table_name": "dic_coffee_audit",
+      "fk_name": "dic_coffee_audit_submission_id_fkey",
+      "full_fk_ddl": "FOREIGN KEY (submission_id) REFERENCES coffee_submissions(id) ON DELETE SET NULL",
+      "fk_ddl_md5": "d1950d6c8ce68798b3129eeffd56a0e2",
+      "convalidated": true,
+      "total_bytes": 32768,
+      "estimated_rows": 12,
+      "inserts": 20,
+      "updates": 0,
+      "deletes": 0,
+      "seq_scans": 136,
+      "idx_scans": 0,
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX dic_coffee_audit_pkey ON private.dic_coffee_audit USING btree (id)",
+          "index": "dic_coffee_audit_pkey",
+          "ddl_md5": "b3b65fd2f73cbb19bf754483d2b66a8b"
+        }
+      ],
+      "source_range": "full constraint DDL 1-EOF and all corresponding current table index DDL 1-EOF",
+      "semantic_verdict": "Parent delete nulls references; currently tiny. Missing child FK index warning not proof of latency; verify actual parent mutation paths before index."
+    },
+    {
+      "schema": "private",
+      "table_name": "dic_coffee_first_entry",
+      "fk_name": "dic_coffee_first_entry_first_submission_id_fkey",
+      "full_fk_ddl": "FOREIGN KEY (first_submission_id) REFERENCES coffee_submissions(id) ON DELETE SET NULL",
+      "fk_ddl_md5": "ff175bc832cc8f821ab0335db323706a",
+      "convalidated": true,
+      "total_bytes": 32768,
+      "estimated_rows": 8,
+      "inserts": 13,
+      "updates": 2,
+      "deletes": 0,
+      "seq_scans": 103,
+      "idx_scans": 166,
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX dic_coffee_first_entry_pkey ON private.dic_coffee_first_entry USING btree (coffee_id)",
+          "index": "dic_coffee_first_entry_pkey",
+          "ddl_md5": "4cfa3db723722658b6460b29b849ed0d"
+        }
+      ],
+      "source_range": "full constraint DDL 1-EOF and all corresponding current table index DDL 1-EOF",
+      "semantic_verdict": "Parent delete nulls references; currently tiny. Missing child FK index warning not proof of latency; verify actual parent mutation paths before index."
+    },
+    {
+      "schema": "private",
+      "table_name": "dic_roaster_aliases",
+      "fk_name": "dic_roaster_aliases_roaster_id_fkey",
+      "full_fk_ddl": "FOREIGN KEY (roaster_id) REFERENCES private.dic_roaster_directory(id) ON DELETE CASCADE",
+      "fk_ddl_md5": "5a6a9d168b6753cf0fab819252f5f4d7",
+      "convalidated": true,
+      "total_bytes": 32768,
+      "estimated_rows": 4,
+      "inserts": 36,
+      "updates": 0,
+      "deletes": 0,
+      "seq_scans": 92,
+      "idx_scans": 258,
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX dic_roaster_aliases_pkey ON private.dic_roaster_aliases USING btree (alias_key)",
+          "index": "dic_roaster_aliases_pkey",
+          "ddl_md5": "976d3ac9dbcaf5b32f57cbe36ac6aef0"
+        }
+      ],
+      "source_range": "full constraint DDL 1-EOF and all corresponding current table index DDL 1-EOF",
+      "semantic_verdict": "Parent delete cascades to aliases; current alias relation tiny. Monitor growth/parent-delete plans; no proven bottleneck."
+    },
+    {
+      "schema": "private",
+      "table_name": "dic_signup_review_events",
+      "fk_name": "dic_signup_review_events_actor_id_fkey",
+      "full_fk_ddl": "FOREIGN KEY (actor_id) REFERENCES auth.users(id) ON DELETE SET NULL",
+      "fk_ddl_md5": "bd237ddc6ddd109915445a1acecb5c41",
+      "convalidated": true,
+      "total_bytes": 16384,
+      "estimated_rows": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0,
+      "seq_scans": 4,
+      "idx_scans": 0,
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX dic_signup_review_events_pkey ON private.dic_signup_review_events USING btree (id)",
+          "index": "dic_signup_review_events_pkey",
+          "ddl_md5": "75c4f59fedb94f7500d07a2744957c4a"
+        }
+      ],
+      "source_range": "full constraint DDL 1-EOF and all corresponding current table index DDL 1-EOF",
+      "semantic_verdict": "Parent delete nulls references; currently tiny. Missing child FK index warning not proof of latency; verify actual parent mutation paths before index."
+    },
+    {
+      "schema": "private",
+      "table_name": "dic_signup_review_events",
+      "fk_name": "dic_signup_review_events_member_id_fkey",
+      "full_fk_ddl": "FOREIGN KEY (member_id) REFERENCES auth.users(id) ON DELETE SET NULL",
+      "fk_ddl_md5": "d00fde192d5a9de1a19f2702dfb6f74e",
+      "convalidated": true,
+      "total_bytes": 16384,
+      "estimated_rows": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0,
+      "seq_scans": 4,
+      "idx_scans": 0,
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX dic_signup_review_events_pkey ON private.dic_signup_review_events USING btree (id)",
+          "index": "dic_signup_review_events_pkey",
+          "ddl_md5": "75c4f59fedb94f7500d07a2744957c4a"
+        }
+      ],
+      "source_range": "full constraint DDL 1-EOF and all corresponding current table index DDL 1-EOF",
+      "semantic_verdict": "Parent delete nulls references; currently tiny. Missing child FK index warning not proof of latency; verify actual parent mutation paths before index."
+    },
+    {
+      "schema": "private",
+      "table_name": "dic_source_attempts",
+      "fk_name": "dic_source_attempts_owner_id_fkey",
+      "full_fk_ddl": "FOREIGN KEY (owner_id) REFERENCES auth.users(id)",
+      "fk_ddl_md5": "a29babec2ba68361c14144513470a194",
+      "convalidated": true,
+      "total_bytes": 8192,
+      "estimated_rows": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0,
+      "seq_scans": 99,
+      "idx_scans": 14,
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX dic_source_attempts_pkey ON private.dic_source_attempts USING btree (submission_id)",
+          "index": "dic_source_attempts_pkey",
+          "ddl_md5": "a66e6f9ea6bc252c880318a12cab1d29"
+        }
+      ],
+      "source_range": "full constraint DDL 1-EOF and all corresponding current table index DDL 1-EOF",
+      "semantic_verdict": "Default NO ACTION parent delete/update requires referential checks; tiny current relation and no measured slow path. Preserve audit relationships; no auto-index."
+    },
+    {
+      "schema": "private",
+      "table_name": "import_control",
+      "fk_name": "import_control_owner_only_exception_owner_id_fkey",
+      "full_fk_ddl": "FOREIGN KEY (owner_only_exception_owner_id) REFERENCES auth.users(id)",
+      "fk_ddl_md5": "7f3fa57ca62ee03b08cac6bbd09852a7",
+      "convalidated": true,
+      "total_bytes": 24576,
+      "estimated_rows": 1,
+      "inserts": 1,
+      "updates": 8,
+      "deletes": 0,
+      "seq_scans": 219,
+      "idx_scans": 88,
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX import_control_pkey ON private.import_control USING btree (singleton)",
+          "index": "import_control_pkey",
+          "ddl_md5": "f81388a000ca770797cb8a3ef2d62f97"
+        }
+      ],
+      "source_range": "full constraint DDL 1-EOF and all corresponding current table index DDL 1-EOF",
+      "semantic_verdict": "Default NO ACTION parent delete/update requires referential checks; tiny current relation and no measured slow path. Preserve audit relationships; no auto-index."
+    }
+  ],
+  "new_confirmed_defects": 0,
+  "source_changes": 0,
+  "live_writes": 0,
+  "baseline_complete": false,
+  "unverified": [
+    "future parent delete plan under growth",
+    "actual high-frequency delete/update contention",
+    "hosted Auth/PostgREST runtime",
+    "compiled provider internals"
+  ],
+  "next_cursor": "migration ordinal 60 if created, else new/changed provider object; continue provider semantic review without repeating source-credit",
+  "github_development_parent": "d9212e793b607f69ecbeaab38ba48c2d28c35f9e"
+}

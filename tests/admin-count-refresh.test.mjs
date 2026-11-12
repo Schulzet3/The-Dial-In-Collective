@@ -25,3 +25,11 @@ test('all collapsed/Admin summary counts update from bounded backend summary on 
  assert.match(js,/node.textContent=String\(Number\(count\)\)/);
  assert.doesNotMatch(js,/setInterval\?\.\(\(\)=>refresh\(\)/);
 });
+
+test('New Account Requests sits directly above Accounts, below Logged Shots',()=>{
+ const html=dom();
+ const sections=[...html.matchAll(/id="admin-(pending|conflicts|approved|shots|new-members|accounts)"/g)].map(match=>match[1]);
+ assert.deepEqual(sections,['pending','conflicts','approved','shots','new-members','accounts']);
+ assert.match(html,/id="admin-new-members"[^]*?New Account Requests/);
+ assert.match(html,/id="admin-accounts"[^]*?Accounts/);
+});

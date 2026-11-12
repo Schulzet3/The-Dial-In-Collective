@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "A11",
+  "type": "APPEND_ONLY_NEXT_POINTER_CORRECTION_NO_ADDITIONAL_CREDIT",
+  "original_receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F154-191-220-P412-P413-20261110-A11.json",
+  "original_receipt_commit": "eef9b0a9bbf636b027cbb0548a46a2b980a07b3b",
+  "incorrect_next": {
+    "manifest_index": 414,
+    "path": "tests/restore-continuity.test.mjs",
+    "line": 1
+  },
+  "correct_next": {
+    "manifest_index": 414,
+    "path": "tests/required-check-workflows.test.mjs",
+    "line": 1,
+    "source_blob_sha": "88288618e9cdfb85ffd71a073ec74b479df6fcc6",
+    "pin_commit": "9707553a64f88127826e8f5b2b36cd0651296e83"
+  },
+  "credit_delta": 0,
+  "reason": "Original A11 next.path was a guessed unverified name; exact pinned inventory index 414 readback governs. The 85 reviewed source-line records are unaffected.",
+  "source_provenance": "docs/audits/issue267-v2-current-code-inventory-20261101.json"
+}

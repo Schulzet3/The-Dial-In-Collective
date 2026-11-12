@@ -1,0 +1,9 @@
+# Issue #267 A38L post-pin CSS direct review — November 11, 2026
+
+Development-only, SAME-COMMIT source receipt: [32 direct numbered live-only lines](../audits/issue267-v2-strict-batches/S2-POSTPIN-LIVE-VISUAL-330-361-20261111-A38L.json). Source development `1ea2a7ac1eacee45cc523a22014f63ded87e9a71`, source `site/visual.css` exact blob `c9e05a2fd773b789b1108ad6b0e7c04b41681bf8`, owner-approved #1596 source introduced in commit `30373e503975d1a4f339f733db8c9ba70619c275`.
+
+Exact immutable original CSS pin `9707553a64f88127826e8f5b2b36cd0651296e83` blob `36ba832f1529d4a4ea980437a8385092a314e139` ends at physical line 329. Verified **all 329** pinned source prefix lines equal live literal at same position (machine diff locator only, NO semantic credit). New physical lines **330–361** contain two individually read blank separators and the #1596 onboarding CSS. All 32 new lines were fetched, AI-read and have individually grounded behavior/risk/testability/Locked/counterpart/disposition records; exactly 32 unique keys. No earlier pinned positions double counted; all-prior postpin receipts globally unreconciled.
+
+Owner-approved #1596 welcome uses native captioned video/guide/Settings reminder, admitting first-setup users only, preserving existing setup bypass. CSS only cannot attest actual Auth or runtime browser behavior. Small 11–12px labels/24px markers/36px transcript link and narrow progress are **unconfirmed** accessibility checks, not reproduced defects. No source changes, deletions, device/browser/Node/SQL/Auth/provider tests, READY promotion or deploy. Exact-source docs governance CI pending.
+
+Next: original frozen F158:166, pinned P124:121, independent post-pin changes elsewhere, all-source de-dup and final findings. Issue #267 remains OPEN, not 100%, and previous other-account task state unknown.

@@ -1,0 +1,544 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 164,
+  "project_ref": "azviqqejypsefzilgonr",
+  "source_parent_snapshot": "eb340ee16173039c845739426e43b702141eed58",
+  "provider_observed_at_utc": "2026-11-11 07:53:33.825493+00",
+  "scope": "Complete direct review of 3 deployed extension/Vault view source definitions + effective four-role ACL/schema controls + 25 numerical temp spill query fingerprints + cumulative role temp stats + 13 safe settings + DB stats + bounded 24-hour log source counts",
+  "views": [
+    {
+      "identity": "extensions.pg_stat_statements",
+      "owner": "postgres",
+      "definition_md5": "b123763d3bfc8f8cb240c37c7d00dc7a",
+      "prior_direct_review_md5": "b123763d3bfc8f8cb240c37c7d00dc7a",
+      "complete_source_hash_same": true,
+      "source_characters": 1847,
+      "range": "1..EOF",
+      "full_definition_sql": " SELECT userid,\n    dbid,\n    toplevel,\n    queryid,\n    query,\n    plans,\n    total_plan_time,\n    min_plan_time,\n    max_plan_time,\n    mean_plan_time,\n    stddev_plan_time,\n    calls,\n    total_exec_time,\n    min_exec_time,\n    max_exec_time,\n    mean_exec_time,\n    stddev_exec_time,\n    rows,\n    shared_blks_hit,\n    shared_blks_read,\n    shared_blks_dirtied,\n    shared_blks_written,\n    local_blks_hit,\n    local_blks_read,\n    local_blks_dirtied,\n    local_blks_written,\n    temp_blks_read,\n    temp_blks_written,\n    shared_blk_read_time,\n    shared_blk_write_time,\n    local_blk_read_time,\n    local_blk_write_time,\n    temp_blk_read_time,\n    temp_blk_write_time,\n    wal_records,\n    wal_fpi,\n    wal_bytes,\n    jit_functions,\n    jit_generation_time,\n    jit_inlining_count,\n    jit_inlining_time,\n    jit_optimization_count,\n    jit_optimization_time,\n    jit_emission_count,\n    jit_emission_time,\n    jit_deform_count,\n    jit_deform_time,\n    stats_since,\n    minmax_stats_since\n   FROM pg_stat_statements(true) pg_stat_statements(userid, dbid, toplevel, queryid, query, plans, total_plan_time, min_plan_time, max_plan_time, mean_plan_time, stddev_plan_time, calls, total_exec_time, min_exec_time, max_exec_time, mean_exec_time, stddev_exec_time, rows, shared_blks_hit, shared_blks_read, shared_blks_dirtied, shared_blks_written, local_blks_hit, local_blks_read, local_blks_dirtied, local_blks_written, temp_blks_read, temp_blks_written, shared_blk_read_time, shared_blk_write_time, local_blk_read_time, local_blk_write_time, temp_blk_read_time, temp_blk_write_time, wal_records, wal_fpi, wal_bytes, jit_functions, jit_generation_time, jit_inlining_count, jit_inlining_time, jit_optimization_count, jit_optimization_time, jit_emission_count, jit_emission_time, jit_deform_count, jit_deform_time, stats_since, minmax_stats_since);",
+      "privileges": {
+        "anon_schema_usage": true,
+        "authenticated_schema_usage": true,
+        "anon_select": true,
+        "authenticated_select": true,
+        "service_select": true
+      },
+      "assessment": "Provider monitoring view wraps native pg_stat_statements and may select SQL query text or reset metadata. Catalog SELECT and schema USAGE are present for anon/auth, but neither can pg_read_all_stats; hosted API exposure and native masking remain unverified; no disclosure confirmed."
+    },
+    {
+      "identity": "extensions.pg_stat_statements_info",
+      "owner": "postgres",
+      "definition_md5": "4535ca37bd2670cfc7d0f68a0d17048b",
+      "prior_direct_review_md5": "4535ca37bd2670cfc7d0f68a0d17048b",
+      "complete_source_hash_same": true,
+      "source_characters": 113,
+      "range": "1..EOF",
+      "full_definition_sql": " SELECT dealloc,\n    stats_reset\n   FROM pg_stat_statements_info() pg_stat_statements_info(dealloc, stats_reset);",
+      "privileges": {
+        "anon_schema_usage": true,
+        "authenticated_schema_usage": true,
+        "anon_select": true,
+        "authenticated_select": true,
+        "service_select": true
+      },
+      "assessment": "Provider monitoring view wraps native pg_stat_statements and may select SQL query text or reset metadata. Catalog SELECT and schema USAGE are present for anon/auth, but neither can pg_read_all_stats; hosted API exposure and native masking remain unverified; no disclosure confirmed."
+    },
+    {
+      "identity": "vault.decrypted_secrets",
+      "owner": "supabase_admin",
+      "definition_md5": "9e1db3e90b5e70179976bdeca1d39eee",
+      "prior_direct_review_md5": "9e1db3e90b5e70179976bdeca1d39eee",
+      "complete_source_hash_same": true,
+      "source_characters": 383,
+      "range": "1..EOF",
+      "full_definition_sql": " SELECT id,\n    name,\n    description,\n    secret,\n    convert_from(vault._crypto_aead_det_decrypt(message => decode(secret, 'base64'::text), additional => convert_to(id::text, 'utf8'::name), key_id => 0::bigint, context => '\\x7067736f6469756d'::bytea, nonce => nonce), 'utf8'::name) AS decrypted_secret,\n    key_id,\n    nonce,\n    created_at,\n    updated_at\n   FROM vault.secrets s;",
+      "privileges": {
+        "anon_schema_usage": false,
+        "authenticated_schema_usage": false,
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_select": true
+      },
+      "assessment": "Sensitive decryption view; anon and authenticated lack both schema USAGE and SELECT, no Vault secret rows selected. Provider-managed crypto internals unavailable."
+    }
+  ],
+  "roles": [
+    {
+      "rolname": "anon",
+      "read_all_stats": false,
+      "monitor": false,
+      "vault_schema": false,
+      "vault_select": false
+    },
+    {
+      "rolname": "authenticated",
+      "read_all_stats": false,
+      "monitor": false,
+      "vault_schema": false,
+      "vault_select": false
+    },
+    {
+      "rolname": "authenticator",
+      "read_all_stats": false,
+      "monitor": false,
+      "vault_schema": false,
+      "vault_select": false
+    },
+    {
+      "rolname": "service_role",
+      "read_all_stats": false,
+      "monitor": false,
+      "vault_schema": true,
+      "vault_select": true
+    }
+  ],
+  "stats": {
+    "temp_writer_roles": [
+      {
+        "role_name": "postgres",
+        "fingerprints": 79,
+        "calls": 150,
+        "temp_written_blocks": 164991,
+        "temp_read_blocks": 172874,
+        "total_ms": "10165.505"
+      }
+    ],
+    "largest_temp_statement_fingerprints_numeric_only": [
+      {
+        "role_name": "postgres",
+        "queryid": "-985663203708294994",
+        "calls": 21,
+        "total_ms": "1034.854",
+        "mean_ms": "49.279",
+        "max_ms": "70.734",
+        "temp_blks_written": 31437,
+        "temp_blks_read": 31437,
+        "stats_since": "2026-11-09 05:42:02.941478+00"
+      },
+      {
+        "role_name": "postgres",
+        "queryid": "-3809464596996367937",
+        "calls": 1,
+        "total_ms": "2275.732",
+        "mean_ms": "2275.732",
+        "max_ms": "2275.732",
+        "temp_blks_written": 21441,
+        "temp_blks_read": 21383,
+        "stats_since": "2026-11-10 21:49:23.276533+00"
+      },
+      {
+        "role_name": "postgres",
+        "queryid": "6077630922003849905",
+        "calls": 1,
+        "total_ms": "2282.361",
+        "mean_ms": "2282.361",
+        "max_ms": "2282.361",
+        "temp_blks_written": 21425,
+        "temp_blks_read": 21367,
+        "stats_since": "2026-11-10 12:47:14.184055+00"
+      },
+      {
+        "role_name": "postgres",
+        "queryid": "8124640585516817739",
+        "calls": 10,
+        "total_ms": "496.586",
+        "mean_ms": "49.659",
+        "max_ms": "58.618",
+        "temp_blks_written": 14967,
+        "temp_blks_read": 14967,
+        "stats_since": "2026-11-09 04:42:12.45742+00"
+      },
+      {
+        "role_name": "postgres",
+        "queryid": "-6647321518519684408",
+        "calls": 18,
+        "total_ms": "506.393",
+        "mean_ms": "28.133",
+        "max_ms": "30.876",
+        "temp_blks_written": 8962,
+        "temp_blks_read": 8962,
+        "stats_since": "2026-11-09 03:48:20.497354+00"
+      },
+      {
+        "role_name": "postgres",
+        "queryid": "-8872362405544609931",
+        "calls": 5,
+        "total_ms": "324.323",
+        "mean_ms": "64.865",
+        "max_ms": "72.240",
+        "temp_blks_written": 7500,
+        "temp_blks_read": 7500,
+        "stats_since": "2026-11-09 05:44:00.018089+00"
+      },
+      {
+        "role_name": "postgres",
+        "queryid": "188586204786340295",
+        "calls": 2,
+        "total_ms": "83.122",
+        "mean_ms": "41.561",
+        "max_ms": "41.878",
+        "temp_blks_written": 3123,
+        "temp_blks_read": 3123,
+        "stats_since": "2026-11-09 19:51:41.336635+00"
+      },
+      {
+        "role_name": "postgres",
+        "queryid": "-7676570971996265111",
+        "calls": 1,
+        "total_ms": "70.036",
+        "mean_ms": "70.036",
+        "max_ms": "70.036",
+        "temp_blks_written": 2595,
+        "temp_blks_read": 2595,
+        "stats_since": "2026-11-09 18:49:13.497117+00"
+      },
+      {
+        "role_name": "postgres",
+        "queryid": "6406993402688551059",
+        "calls": 5,
+        "total_ms": "210.179",
+        "mean_ms": "42.036",
+        "max_ms": "43.678",
+        "temp_blks_written": 2485,
+        "temp_blks_read": 2485,
+        "stats_since": "2026-11-09 02:46:22.289325+00"
+      },
+      {
+        "role_name": "postgres",
+        "queryid": "-8261297280577151289",
+        "calls": 3,
+        "total_ms": "89.283",
+        "mean_ms": "29.761",
+        "max_ms": "41.850",
+        "temp_blks_written": 1764,
+        "temp_blks_read": 1764,
+        "stats_since": "2026-11-11 07:51:19.264006+00"
+      },
+      {
+        "role_name": "postgres",
+        "queryid": "-5093119401908572421",
+        "calls": 3,
+        "total_ms": "56.631",
+        "mean_ms": "18.877",
+        "max_ms": "20.073",
+        "temp_blks_written": 1731,
+        "temp_blks_read": 1731,
+        "stats_since": "2026-11-10 23:44:20.164939+00"
+      },
+      {
+        "role_name": "postgres",
+        "queryid": "-5134470852064102930",
+        "calls": 3,
+        "total_ms": "91.944",
+        "mean_ms": "30.648",
+        "max_ms": "31.368",
+        "temp_blks_written": 1675,
+        "temp_blks_read": 1675,
+        "stats_since": "2026-11-10 08:53:41.384022+00"
+      },
+      {
+        "role_name": "postgres",
+        "queryid": "7928582132639131587",
+        "calls": 1,
+        "total_ms": "54.455",
+        "mean_ms": "54.455",
+        "max_ms": "54.455",
+        "temp_blks_written": 1500,
+        "temp_blks_read": 5500,
+        "stats_since": "2026-11-09 05:43:44.221401+00"
+      },
+      {
+        "role_name": "postgres",
+        "queryid": "97952691048724221",
+        "calls": 1,
+        "total_ms": "48.682",
+        "mean_ms": "48.682",
+        "max_ms": "48.682",
+        "temp_blks_written": 1497,
+        "temp_blks_read": 1497,
+        "stats_since": "2026-11-09 05:41:13.138115+00"
+      },
+      {
+        "role_name": "postgres",
+        "queryid": "-1533960521925066695",
+        "calls": 1,
+        "total_ms": "43.083",
+        "mean_ms": "43.083",
+        "max_ms": "43.083",
+        "temp_blks_written": 1497,
+        "temp_blks_read": 1497,
+        "stats_since": "2026-11-09 05:43:33.741428+00"
+      },
+      {
+        "role_name": "postgres",
+        "queryid": "-5938046332871820784",
+        "calls": 1,
+        "total_ms": "114.899",
+        "mean_ms": "114.899",
+        "max_ms": "114.899",
+        "temp_blks_written": 1494,
+        "temp_blks_read": 1494,
+        "stats_since": "2026-11-09 04:41:54.332904+00"
+      },
+      {
+        "role_name": "postgres",
+        "queryid": "-6671068353761250187",
+        "calls": 3,
+        "total_ms": "108.237",
+        "mean_ms": "36.079",
+        "max_ms": "45.675",
+        "temp_blks_written": 1488,
+        "temp_blks_read": 1488,
+        "stats_since": "2026-11-09 01:52:38.295795+00"
+      },
+      {
+        "role_name": "postgres",
+        "queryid": "7187122176551122085",
+        "calls": 3,
+        "total_ms": "41.421",
+        "mean_ms": "13.807",
+        "max_ms": "14.590",
+        "temp_blks_written": 1274,
+        "temp_blks_read": 1274,
+        "stats_since": "2026-11-06 17:45:14.648226+00"
+      },
+      {
+        "role_name": "postgres",
+        "queryid": "5870246088649585515",
+        "calls": 2,
+        "total_ms": "80.432",
+        "mean_ms": "40.216",
+        "max_ms": "62.280",
+        "temp_blks_written": 1176,
+        "temp_blks_read": 1176,
+        "stats_since": "2026-11-11 07:51:20.665503+00"
+      },
+      {
+        "role_name": "postgres",
+        "queryid": "7151673597349973949",
+        "calls": 2,
+        "total_ms": "34.016",
+        "mean_ms": "17.008",
+        "max_ms": "17.692",
+        "temp_blks_written": 1041,
+        "temp_blks_read": 1041,
+        "stats_since": "2026-11-09 19:51:32.404892+00"
+      },
+      {
+        "role_name": "postgres",
+        "queryid": "-5822148032411726239",
+        "calls": 2,
+        "total_ms": "33.070",
+        "mean_ms": "16.535",
+        "max_ms": "16.642",
+        "temp_blks_written": 1041,
+        "temp_blks_read": 1041,
+        "stats_since": "2026-11-09 19:51:35.48622+00"
+      },
+      {
+        "role_name": "postgres",
+        "queryid": "3412508465361125895",
+        "calls": 1,
+        "total_ms": "31.925",
+        "mean_ms": "31.925",
+        "max_ms": "31.925",
+        "temp_blks_written": 1038,
+        "temp_blks_read": 1038,
+        "stats_since": "2026-11-09 19:49:18.199699+00"
+      },
+      {
+        "role_name": "postgres",
+        "queryid": "48725060970672977",
+        "calls": 1,
+        "total_ms": "59.966",
+        "mean_ms": "59.966",
+        "max_ms": "59.966",
+        "temp_blks_written": 1000,
+        "temp_blks_read": 1000,
+        "stats_since": "2026-11-09 05:45:54.936359+00"
+      },
+      {
+        "role_name": "postgres",
+        "queryid": "-326274427304673618",
+        "calls": 1,
+        "total_ms": "42.288",
+        "mean_ms": "42.288",
+        "max_ms": "42.288",
+        "temp_blks_written": 1000,
+        "temp_blks_read": 5000,
+        "stats_since": "2026-11-09 05:43:52.905278+00"
+      },
+      {
+        "role_name": "postgres",
+        "queryid": "-4926152766725591431",
+        "calls": 1,
+        "total_ms": "32.450",
+        "mean_ms": "32.450",
+        "max_ms": "32.450",
+        "temp_blks_written": 1000,
+        "temp_blks_read": 1000,
+        "stats_since": "2026-11-09 05:46:52.536262+00"
+      }
+    ],
+    "db_cumulative": {
+      "datname": "postgres",
+      "numbackends": 7,
+      "xact_commit": 2028906,
+      "xact_rollback": 414,
+      "blks_read": 1880,
+      "blks_hit": 62185305,
+      "temp_files": 50299,
+      "temp_bytes": 139787067255,
+      "deadlocks": 0,
+      "checksum_failures": 0,
+      "stats_reset": "2026-10-02 18:01:15.201525+00",
+      "database_bytes": 16823987
+    },
+    "settings": [
+      {
+        "name": "effective_cache_size",
+        "setting": "49152",
+        "unit": "8kB",
+        "pending_restart": false,
+        "source": "configuration file"
+      },
+      {
+        "name": "idle_in_transaction_session_timeout",
+        "setting": "0",
+        "unit": "ms",
+        "pending_restart": false,
+        "source": "default"
+      },
+      {
+        "name": "jit",
+        "setting": "off",
+        "unit": null,
+        "pending_restart": false,
+        "source": "configuration file"
+      },
+      {
+        "name": "lock_timeout",
+        "setting": "0",
+        "unit": "ms",
+        "pending_restart": false,
+        "source": "default"
+      },
+      {
+        "name": "log_temp_files",
+        "setting": "-1",
+        "unit": "kB",
+        "pending_restart": false,
+        "source": "default"
+      },
+      {
+        "name": "maintenance_work_mem",
+        "setting": "32768",
+        "unit": "kB",
+        "pending_restart": false,
+        "source": "configuration file"
+      },
+      {
+        "name": "max_connections",
+        "setting": "60",
+        "unit": null,
+        "pending_restart": false,
+        "source": "configuration file"
+      },
+      {
+        "name": "max_locks_per_transaction",
+        "setting": "64",
+        "unit": null,
+        "pending_restart": false,
+        "source": "default"
+      },
+      {
+        "name": "max_worker_processes",
+        "setting": "6",
+        "unit": null,
+        "pending_restart": false,
+        "source": "configuration file"
+      },
+      {
+        "name": "shared_buffers",
+        "setting": "28672",
+        "unit": "8kB",
+        "pending_restart": false,
+        "source": "configuration file"
+      },
+      {
+        "name": "statement_timeout",
+        "setting": "120000",
+        "unit": "ms",
+        "pending_restart": false,
+        "source": "configuration file"
+      },
+      {
+        "name": "temp_file_limit",
+        "setting": "-1",
+        "unit": "kB",
+        "pending_restart": false,
+        "source": "default"
+      },
+      {
+        "name": "work_mem",
+        "setting": "2184",
+        "unit": "kB",
+        "pending_restart": false,
+        "source": "configuration file"
+      }
+    ],
+    "provider_counts": {
+      "sampled_at": "2026-11-11 07:53:33.825493+00",
+      "migrations": 59,
+      "buckets": 0,
+      "subscriptions": 0,
+      "waiting_locks": 0,
+      "invalid_app_indexes": 0
+    }
+  },
+  "logs_24h_counts_only": {
+    "window_utc": [
+      "2026-11-10T07:50:00Z",
+      "2026-11-11T07:47:00Z"
+    ],
+    "counts": {
+      "pgbouncer_logs": 72,
+      "edge_logs": 45,
+      "postgres_logs": 33,
+      "supavisor_logs": 11,
+      "auth_logs": 6,
+      "auth_audit_logs": 2
+    },
+    "raw_log_text_read": false
+  },
+  "verdicts": [
+    {
+      "object": "extensions.pg_stat_statements",
+      "status": "EXISTING_KNOWN_METADATA_GRANT_EXPOSURE_HOSTED_API_UNVERIFIED",
+      "basis": "Client catalog SELECT present but no pg_read_all_stats/pg_monitor role, API exposure and runtime masking unverified; no leak demonstrated"
+    },
+    {
+      "object": "vault.decrypted_secrets",
+      "status": "CLIENT_SELECT_DENIED_NO_NEW_ISSUE",
+      "basis": "Client roles cannot use vault schema nor select sensitive view; no secret rows queried"
+    },
+    {
+      "object": "postgres temp I/O",
+      "status": "PRIOR_RUN155_RISK_UNCHANGED_NO_NEW_OUTAGE",
+      "basis": "cumulative since 2026-10-02; all current identified temp-writing statements run as postgres, prior auditor-induced 53100 already corrected; temp_file_limit -1 but no tested disk headroom"
+    }
+  ],
+  "new_first_time_source_words": 0,
+  "issue267_source_lines": 0,
+  "new_confirmed_defects": 0,
+  "source_fixes": 0,
+  "provider_writes": 0,
+  "unverified": [
+    "hosted GoTrue/JWT/PostgREST exposed-schema settings",
+    "native compiled view/crypto/pgss internals",
+    "actual disk capacity",
+    "genuine live signed-in access testing #96"
+  ],
+  "baseline_complete": false,
+  "next_cursor": "First newly added stored migration #60, else changed/new/unreviewed provider definition; if none, provider-semantic cross-layer coverage or hosted API if genuinely available; no first-time word recredit"
+}

@@ -2,8 +2,8 @@
 begin;
 do $source_worker$
 declare
- member_id uuid:=gen_random_uuid(); revoked_id uuid:=gen_random_uuid();
- pending_id uuid; legacy_id uuid; revoked_pending uuid; stale_id uuid; r jsonb; evidence jsonb;
+ member_id uuid:=gen_random_uuid(); revoked_id uuid:=gen_random_uuid(); unadmitted_id uuid:=gen_random_uuid();
+ pending_id uuid; legacy_id uuid; revoked_pending uuid; unadmitted_pending uuid; stale_id uuid; r jsonb; evidence jsonb;
  denied boolean; before_coffees bigint; before_attempts bigint; before_shots bigint;
 begin
  if current_database()<>'dic_ci' then raise exception 'Disposable dic_ci database required';end if;
@@ -11,7 +11,8 @@ begin
  select count(*) into before_shots from public.shots;
  insert into auth.users(id,aud,role,email) values
  (member_id,'authenticated','authenticated',member_id::text||'@example.invalid'),
- (revoked_id,'authenticated','authenticated',revoked_id::text||'@example.invalid');
+ (revoked_id,'authenticated','authenticated',revoked_id::text||'@example.invalid'),
+ (unadmitted_id,'authenticated','authenticated',unadmitted_id::text||'@example.invalid');
  insert into private.beta_members(owner_id,enabled,admitted_at)
  values(member_id,true,now()),(revoked_id,true,now())
  on conflict(owner_id) do update set enabled=true,admitted_at=now();
@@ -30,6 +31,14 @@ begin
   '{"name":"Revoked Worker Fixture","roaster":"Sweet Bloom","release_label":"2028"}')
  returning id into revoked_pending;
  insert into public.library_entries(owner_id,submission_id) values(revoked_id,revoked_pending);
+ -- New pending signup: record exists, but neither API nor trusted worker may process it.
+ insert into public.coffee_submissions(owner_id,source_url,proposed_data)
+ values(unadmitted_id,'https://sweetbloomcoffee.com/products/unadmitted-worker-fixture',
+  '{"name":"Unadmitted Worker Fixture","roaster":"Sweet Bloom"}')
+ returning id into unadmitted_pending;
+ if (select enabled from private.beta_members where owner_id=unadmitted_id)
+    or (select admitted_at from private.beta_members where owner_id=unadmitted_id) is not null then
+  raise exception 'Pending signup was already admitted in fixture';end if;
 
  evidence:=jsonb_build_object('checked_url','https://sweetbloomcoffee.com/products/json-worker-fixture',
   'product_name','JSON Worker Fixture','title_matches',true,'evidence_kind','jsonld_product',
@@ -70,6 +79,11 @@ begin
  perform set_config('request.jwt.claim.role','',true);
  perform set_config('request.jwt.claims','{"role":"service_role"}',true);
  execute 'set local role service_role';
+ if public.dic_source_check_target(unadmitted_pending) is not null then
+  raise exception 'Pending signup source target leaked to worker';end if;
+ r:=public.dic_source_claim(unadmitted_pending);
+ if r->>'allowed' is distinct from 'false' or r->>'reason' is distinct from 'not_admitted' then
+  raise exception 'Pending signup consumed service source-verification budget';end if;
  r:=public.dic_source_check_target(pending_id);
  if r->>'submission_id' is distinct from pending_id::text then raise exception 'JSON service target failed';end if;
   if r->>'producer' is distinct from 'Wuri Washing Station' then raise exception 'Verifier omitted producer';end if;

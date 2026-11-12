@@ -4,6 +4,7 @@ import {e} from '../lib/ui.js';
 import {applyAppearance,readAppearance} from '../cloud/appearance.js';
 applyAppearance(readAppearance(),{remember:false});
 import {renderAdminDashboard,renderAdminDenied,renderAdminDeleteAccountPrompt} from './view.js';
+import {enableAdminPush,disableAdminPush} from './push.js';
 
 const root=document.querySelector('#admin-root');
 const RECORD_KINDS=['pending','conflicts','approved','shots','accounts'];
@@ -285,11 +286,11 @@ async function start(){
      // Never retrieve plaintext from an overview endpoint.
     guarded(()=>refresh());return;
    }
-   if(action==='enable-admin-notifications'){
+   if(action==='enable-admin-push'||action==='disable-admin-push'){
      guarded(async()=>{
-      if(typeof globalThis.Notification?.requestPermission!=='function')throw new Error('Browser notifications unavailable; in-app attention remains available.');
-      const permission=await globalThis.Notification.requestPermission();
-      actionMessage(permission==='granted'?'Browser alerts enabled while Admin is open.':'Browser alerts not enabled; in-app alerts remain available.');
+      // User-click handler retains permission activation. Server validates admission/role.
+      const result=await (action==='enable-admin-push'?enableAdminPush(sdk):disableAdminPush(sdk));
+      actionMessage(result);
      });return;
     }
     if(action==='signup-page'){

@@ -252,6 +252,23 @@ function escapeAttributeAngles(page,onTruncated){
  if(output.length>2_000_000){onTruncated?.();return '';}
  return output;
 }
+// WooCommerce comments are opinions, not selected seller facts. Keep raw HTML
+// unchanged in evidence artifacts; exclude only identified review-tab DOM.
+function withoutWooCommerceReviews(page){
+ const ranges=[];
+ for(const n of coffeeHtmlElements(page).nodes){
+  if(n.tag!=='div'&&n.tag!=='section')continue;
+  const a=coffeeHtmlAttributes(n.attributes);
+  if(/(?:^|\s)woocommerce-(?:Reviews|Tabs-panel--reviews)(?:\s|$)/i.test(String(a.class||'')))
+   ranges.push([n.start,n.end]);
+ }
+ let cursor=0,out='';
+ for(const [from,to] of ranges.sort((a,b)=>a[0]-b[0])){
+  if(from<cursor||to<=from)continue;
+  out+=page.slice(cursor,from)+' ';cursor=to;
+ }
+ return out+page.slice(cursor);
+}
 // Text parsers must share the same product scope. Structured JSON is read
 // separately; scripts, navigation and recommendation cards are never facts.
 export function productMarkup(html,{onTruncated}={}){
@@ -264,6 +281,7 @@ export function productMarkup(html,{onTruncated}={}){
  const scan=coffeeHtmlElements(page);if(scan.truncated)onTruncated?.();
  const main=scan.nodes.find(node=>node.tag==='main');
  if(main)page=page.slice(main.headEnd,main.contentEnd);
+ page=withoutWooCommerceReviews(page);
  page=withoutRelatedProducts(page,onTruncated);
  // Retain public linked profile for supplemental review; canonical parser applies a separate boundary.
  // The remaining asides are narrowly identified selected-product cost or

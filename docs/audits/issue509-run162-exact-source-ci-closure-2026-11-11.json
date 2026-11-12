@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 162,
+  "status": "MERGED_EXACT_SOURCE_APPLICABLE_CI_SUCCESS_READY_NOT_DEPLOYED",
+  "project_ref": "azviqqejypsefzilgonr",
+  "pr": 1992,
+  "pr_head_sha": "32c4bff455a65f76161b0c9845e355cf5482ad64",
+  "merged_sha": "0bc7f0ac30434e28c5951d33bd1fe914b56c3037",
+  "source_blob_parity": {
+    "changed_files": 6,
+    "matched": 6
+  },
+  "pr_head_ci": {
+    "success": [
+      42968207909,
+      42968207920,
+      42968207930,
+      42968207932,
+      42968207935
+    ],
+    "skipped": [
+      42968207941
+    ],
+    "skipped_scope": "original frozen603, not applicable"
+  },
+  "merged_ci": {
+    "success": [
+      42968529340,
+      42968529302,
+      42968529400
+    ],
+    "unchanged_pr_source_ci_reused": [
+      42968207932,
+      42968207930
+    ],
+    "node22_pass": 3753,
+    "node22_fail": 0,
+    "node22_skip": 6
+  },
+  "live_provider": {
+    "edge_slug": "dic-delete-member-account",
+    "version": 1,
+    "verify_jwt": true,
+    "ezbr_sha256": "a2418951c7c4457723cd7b5e7e8d39f4cb1b3a02f76c6099573a9d576f32bf18",
+    "deployed_correction": false
+  },
+  "change": "Map RequestBodyError HTTP 400/408/413/415 instead of generic retryable HTTP 503; unexpected failures retain generic 503",
+  "coverage": {
+    "read_deployed_edge_file_sources": 2,
+    "chars": 6847,
+    "new_first_time_source_words": 0,
+    "issue267_lines": 0,
+    "baseline_complete": false
+  },
+  "constraints": {
+    "production_sql_writes": 0,
+    "auth_writes": 0,
+    "storage_writes": 0,
+    "edge_deployment": 0,
+    "netlify_deployment": 0,
+    "publication_authorized": false
+  },
+  "blockers": [
+    "Hosted GoTrue/JWT/PostgREST settings not available",
+    "Provider compiled internals and disk headroom unverified",
+    "Real production signed-in misuse/impact not demonstrated"
+  ],
+  "next": "Stored migration #60 if created or first newly changed/unreviewed accessible provider definition; re-audit hosted #96/API only if available."
+}

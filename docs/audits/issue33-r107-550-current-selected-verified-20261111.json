@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "review": "R107",
+  "status": "VERIFIED_SCOPED_READY_DEVELOPMENT_ONLY",
+  "date_utc": "2026-11-11",
+  "source_case": {
+    "number": 550,
+    "product": "Ethiopia Natural Kembata Grade 1 (GP)",
+    "roaster": "Vermont Roasted Specialty Coffee",
+    "official_url": "https://www.roasted-beans.com/products/ethiopia-natural-kembata-grade-1-gp",
+    "current_exact_selected_H1": [
+      "Ethiopia Natural Kembata Grade 1 (GP)"
+    ],
+    "published_facts": {
+      "origin": "Durame Village of Kembata, Ethiopia",
+      "elevation": "2100 m",
+      "variety": "Ethiopian Heirloom",
+      "milling_process": "Natural",
+      "drying": "Raised beds",
+      "tasting_notes": [
+        "blueberry",
+        "strawberry"
+      ],
+      "harvest_months": [
+        "November",
+        "January"
+      ],
+      "no_release_year_inferred": true
+    },
+    "before_observed_origin": "Durame Village of Kembata, Ethiopia, Kembata, Durame",
+    "after_current_parser": {
+      "name": "Ethiopia Natural Kembata Grade 1 (GP)",
+      "roaster": "Vermont Roasted Specialty Coffee",
+      "elevation_m": "2100 m",
+      "variety": "Ethiopian Heirloom",
+      "process": "Natural",
+      "tasting_notes": "blueberry and strawberry",
+      "origin": "Durame Village of Kembata, Ethiopia"
+    },
+    "unpublished_named_producer_not_inferred": true,
+    "source_facts_retained": true,
+    "conflicts": []
+  },
+  "source_pr": 1986,
+  "pr_reviewed_head": "7e1867a3142845f32f50f0bef19c7c52e8a7bfc7",
+  "code_merged_sha": "b4b480ae041ed769654c240a6dc56bfba03d865c",
+  "nonforce_squash_merge": true,
+  "head_and_merged_seven_git_blobs_equal": true,
+  "merged_git_blobs": {
+    ".github/workflows/issue33-r107-550.yml": "ea6be99511151a41f66567bc3dad0ccf6c5f6fcf",
+    "docs/RELEASE_QUEUE.json": "73930479a2386230a1d2c169300e7ac896c7b91c",
+    "docs/workstreams/ops-issue33-r107-550-20261111.md": "d487e56961d34bc849175fda43be9ecba0b7ec55",
+    "scripts/audit/issue33-r107-550-check.mjs": "59fca59935305777373e7a9b23d038b3a4613070",
+    "src/server/coffee-fact-compatibility.mjs": "ea342f2be4ca130d90107d27d612bda1055617f3",
+    "src/server/coffee-page-metadata.mjs": "0210df1b1381da01acb3b7a0f7ba56a2b7955f2e",
+    "tests/coffee-issue33-r107-550.test.mjs": "e3f6ef632801c9a5adb8adc61db189544fe74480"
+  },
+  "tests": {
+    "first_failed_run": 42963456363,
+    "first_failed_reasons": [
+      "Synthetic flattened fixture caused variety not to parse when merchant labels were erroneously placed in one <p>",
+      "Real parser duplicated Kembata/Durame after the complete origin; reproduced in actual code"
+    ],
+    "after_fix_pr_head_focused_run": 42963835672,
+    "after_fix_focused_pass": 8,
+    "after_fix_focused_fail": 0,
+    "pr_head_node_lint": 42963835520,
+    "pr_head_node_pass": 3746,
+    "pr_head_node_fail": 0,
+    "pr_head_node_skip": 6,
+    "pr_head_lint_pass": true,
+    "pr_head_approval": 42963835477,
+    "pr_head_cloud_mobile": 42963835409,
+    "pr_head_isolated_sql": 42963835403,
+    "pr_head_python": 42963835571,
+    "pr_head_private_source": 42963835449,
+    "pr_head_security": 42963835406,
+    "merged_live_official": 42964152525,
+    "merged_live_official_pass": true,
+    "merged_node_lint": 42964152512,
+    "merged_node_pass": 3746,
+    "merged_node_fail": 0,
+    "merged_node_skip": 6,
+    "merged_lint_pass": true,
+    "merged_cloud_mobile": 42964152716,
+    "merged_approval": 42964153820,
+    "merged_python": 42964152759,
+    "adversarial_boundaries": [
+      "recycled/changed title fails selected H1",
+      "unrelated navigation/aside facts excluded",
+      "changed origin/process invalidates direct literal",
+      "other-country and unrelated-place suffix retained",
+      "no country disagreement rewritten",
+      "no implied release year",
+      "explicit Add Coffee/Source Review preserved"
+    ]
+  },
+  "exact_merged_evidence": {
+    "source_sha": "b4b480ae041ed769654c240a6dc56bfba03d865c",
+    "source_HTML_sha256": "5a51e597ed12a7657e8d177967348284cb3d7f384b56260a56b0a89ec2f44c26",
+    "source_HTML_bytes": 138820,
+    "focused_evidence_JSON_sha256": "d5bab7660ba29bcd2d137d77595477740ba13f4d3d548938714942f8543c7e91",
+    "afterproof_JSON_sha256": "868cd5070408d9800f6d09ce5eb56658b53a8d7ed534d55eeb7cd2e03f284534",
+    "github_artifact_id": 13830258101,
+    "artifact_zip_sha256": "03b988a5d46f3e64511fb90be383b148ab3e67e0f95fe4c50e5bc6611c71aad0",
+    "artifact_independently_downloaded_rehashed": true,
+    "passed": true,
+    "failures": [],
+    "manual_certified": 0,
+    "add_coffee_source_review": true,
+    "production_operations": 0
+  },
+  "known_separate_unavailable_sources": {
+    "cases": [
+      566,
+      567,
+      594
+    ],
+    "failed_merged_unrelated_workflows": [
+      42964152679,
+      42964152747
+    ],
+    "status": "UNCHANGED_OWNER_ESCALATION_NOT_REQUIRED"
+  },
+  "queue_item": "DIC-Q-33-original603-550-geographic-duplicate-suffix",
+  "production_deployed": false,
+  "no_release": true,
+  "netlify_publish": false,
+  "member_provider_auth_sql_edge_operations": 0,
+  "other_scope_owners": [
+    267,
+    96
+  ],
+  "issue33_remains_open": true,
+  "immutable_original": {
+    "original_coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "original_csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "original_csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "original_csv_modified": false,
+    "original_oracle_scorer_modified": false,
+    "full_manual_semantic_603_certification": false,
+    "full_frozen603_workflow": "SKIPPED_NOT_PASS"
+  }
+}

@@ -1,0 +1,569 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "2026-11-10-run142",
+  "provider_project_ref": "azviqqejypsefzilgonr",
+  "provider_status": "ACTIVE_HEALTHY_POSTGRES_17_11",
+  "source_heads": {
+    "development": "8dcedae3179945a036aa774f45c21e4dc920c39b",
+    "ops_main": "11e1e8c7c36dad488519476d8a969bb682915d31",
+    "publication": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0"
+  },
+  "method": "Read-only pg_get_functiondef complete text and MD5 for every current changed-or-new function vs pinned 99 baseline; read each full body, roles and semantics. Direct 19/19 hash and length cross-check to Run141; no private records or production function invocation.",
+  "counts": {
+    "original_99": 99,
+    "current_106": 106,
+    "old_unchanged": 87,
+    "old_changed": 6,
+    "new": 13,
+    "retired": 6,
+    "full_delta_review": 19,
+    "total_chars": 36089,
+    "total_whitespace_words": 2995,
+    "first_time_original_baseline_word_credit": 0
+  },
+  "run141": "docs/audits/issue509-provider-runtime-drift-telemetry-2026-11-10-run141.json",
+  "later_receipts_checked": [
+    "docs/audits/issue509-provider-ready5-postrelease-2026-11-10-run134.json",
+    "docs/audits/issue509-provider-ready4-three-migrations-2026-11-10-run138.json",
+    "docs/audits/issue509-provider-member-admission-gate-2026-11-10-run139.json"
+  ],
+  "reviewed": [
+    {
+      "cursor": 1,
+      "signature": "private.dic_admin_access_overview()",
+      "baseline": "CHANGED_ORIGINAL",
+      "original_md5": "640a5fd16a194578228963d73d079810",
+      "current_md5": "e377ac910af0115040ad8f881cb01bfc",
+      "char_count": 1432,
+      "line_count": 35,
+      "whitespace_words": 117,
+      "reviewed_character_range": [
+        1,
+        1432
+      ],
+      "semantic_review": "READ_COMPLETE_CURRENT_SQL",
+      "assessment": "Requires admitted admin; lists admitted members and caller-owned unfinished deletions.",
+      "matching_prior_full_receipts": [
+        "docs/audits/issue509-provider-member-admission-gate-2026-11-10-run139.json"
+      ],
+      "privileges": {
+        "security_definer": true,
+        "anon_execute": false,
+        "authenticated_execute": true,
+        "service_role_execute": false
+      },
+      "complete_sql": "CREATE OR REPLACE FUNCTION private.dic_admin_access_overview()\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n perform private.require_member();\n if auth.uid() is null or not private.is_admin() then\n  raise exception using errcode='42501',message='Administrator access required.';\n end if;\n return jsonb_build_object(\n  'members_total',(select count(*) from private.beta_members where admitted_at is not null),\n  'members',coalesce((\n   select jsonb_agg(jsonb_build_object(\n    'id',m.owner_id,'email',u.email,'enabled',m.enabled,\n    'admin',a.owner_id is not null,'admitted_at',m.admitted_at\n   ) order by (a.owner_id is not null) desc,m.admitted_at desc,m.owner_id)\n   from (select owner_id,enabled,admitted_at from private.beta_members\n     where admitted_at is not null order by admitted_at desc,owner_id limit 50) m\n   join auth.users u on u.id=m.owner_id\n   left join private.app_admins a on a.owner_id=m.owner_id\n  ),'[]'::jsonb),\n  'pending_deletions',coalesce((\n   select jsonb_agg(jsonb_build_object(\n    'id',op.id,'target_id',op.target_id,\n    'email',op.expected_impact->>'email',\n    'community_mode',op.community_mode,'phase',op.phase,'requested_at',op.requested_at\n   ) order by op.requested_at desc,op.id desc)\n   from private.dic_admin_account_delete_operations op\n   where op.actor_id=auth.uid() and op.phase<>'completed'\n  ),'[]'::jsonb)\n );\nend $function$\n"
+    },
+    {
+      "cursor": 2,
+      "signature": "private.dic_admin_account_delete_finish(p_operation_id uuid, p_actor_id uuid)",
+      "baseline": "ADDED_AFTER_ORIGINAL",
+      "original_md5": null,
+      "current_md5": "51cd64deed985a9ddf622926b8784a84",
+      "char_count": 2492,
+      "line_count": 45,
+      "whitespace_words": 221,
+      "reviewed_character_range": [
+        1,
+        2492
+      ],
+      "semantic_review": "READ_COMPLETE_CURRENT_SQL",
+      "assessment": "Service-only finish checks actor, Auth user absent, and selected Community cleanup.",
+      "matching_prior_full_receipts": [
+        "docs/audits/issue509-provider-ready5-postrelease-2026-11-10-run134.json"
+      ],
+      "privileges": {
+        "security_definer": true,
+        "anon_execute": false,
+        "authenticated_execute": false,
+        "service_role_execute": true
+      },
+      "complete_sql": "CREATE OR REPLACE FUNCTION private.dic_admin_account_delete_finish(p_operation_id uuid, p_actor_id uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare op private.dic_admin_account_delete_operations; removed integer:=0; community_ids uuid[]:='{}'::uuid[];\nbegin\n select * into op from private.dic_admin_account_delete_operations where id=p_operation_id for update;\n if not found or op.actor_id is distinct from p_actor_id then\n  raise exception using errcode='42501',message='Deletion operation unavailable.';\n end if;\n if op.phase='completed' then\n  return jsonb_build_object('ok',true,'completed',true,'community_removed',op.community_removed,'retry',true);\n end if;\n if op.phase<>'prepared' then raise exception using errcode='23514',message='Deletion was not prepared.'; end if;\n -- Never trust an edge-reported success alone. The DB verifies Auth is gone.\n if exists(select 1 from auth.users where id=op.target_id) then\n  raise exception using errcode='23514',message='Auth account still exists.';\n end if;\n if op.community_mode='remove' then\n  -- Capture IDs BEFORE removing their private association; only this member's\n  -- immutable contributor IDs may be selected, including detached old shots.\n  select coalesce(array_agg(cl.community_shot_id order by cl.community_shot_id),'{}'::uuid[])\n    into community_ids from private.contribution_links cl\n    where cl.contributor_id=any(op.contributor_ids);\n  -- Keep private review audit records but remove public references to purged shots.\n  update public.admin_reviews set community_shot_id=null\n    where community_shot_id=any(community_ids);\n  delete from private.contribution_links where community_shot_id=any(community_ids)\n    and contributor_id=any(op.contributor_ids);\n  delete from public.community_shots where id=any(community_ids);\n  get diagnostics removed=row_count;\n  -- Contributor tokens for removed data have no future weighting role.\n  delete from private.contributors c where c.id=any(op.contributor_ids)\n    and c.owner_id is null and not exists(\n      select 1 from private.contribution_links cl where cl.contributor_id=c.id);\n end if;\n update private.dic_admin_account_delete_operations\n  set phase='completed',community_removed=removed,completed_at=now(),\n      expected_impact=expected_impact-'email'-'member_id',\n      contributor_ids='{}'::uuid[] where id=op.id;\n return jsonb_build_object('ok',true,'completed',true,'community_removed',removed);\nend $function$\n"
+    },
+    {
+      "cursor": 3,
+      "signature": "private.dic_admin_account_delete_impact(p_member_id uuid)",
+      "baseline": "ADDED_AFTER_ORIGINAL",
+      "original_md5": null,
+      "current_md5": "a20e399d6c87c60be0661c80a17728d4",
+      "char_count": 1588,
+      "line_count": 30,
+      "whitespace_words": 133,
+      "reviewed_character_range": [
+        1,
+        1588
+      ],
+      "semantic_review": "READ_COMPLETE_CURRENT_SQL",
+      "assessment": "Privileged admitted-user impact counts including email; not executable directly by ordinary role.",
+      "matching_prior_full_receipts": [
+        "docs/audits/issue509-provider-ready5-postrelease-2026-11-10-run134.json"
+      ],
+      "privileges": {
+        "security_definer": true,
+        "anon_execute": false,
+        "authenticated_execute": false,
+        "service_role_execute": false
+      },
+      "complete_sql": "CREATE OR REPLACE FUNCTION private.dic_admin_account_delete_impact(p_member_id uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare member_email text;\nbegin\n select u.email into member_email from auth.users u\n join private.beta_members m on m.owner_id=u.id and m.admitted_at is not null\n where u.id=p_member_id;\n if not found then raise exception using errcode='22023',message='Admitted account unavailable.'; end if;\n return jsonb_build_object(\n  'member_id',p_member_id,'email',member_email,\n  'enabled',(select enabled from private.beta_members where owner_id=p_member_id),\n  'shots',(select count(*) from public.shots where owner_id=p_member_id),\n  'notes',(select count(*) from public.shot_notes where owner_id=p_member_id),\n  'library_entries',(select count(*) from public.library_entries where owner_id=p_member_id),\n  'submissions',(select count(*) from public.coffee_submissions where owner_id=p_member_id),\n  'setups',(select count(*) from public.setups where owner_id=p_member_id),\n  'community_shots',(select count(*) from private.contribution_links cl\n    join private.contributors c on c.id=cl.contributor_id where c.owner_id=p_member_id),\n  'eligible_community_shots',(select count(*) from private.contribution_links cl\n    join private.contributors c on c.id=cl.contributor_id\n    join public.community_shots cs on cs.id=cl.community_shot_id\n    where c.owner_id=p_member_id and cs.quality_state='eligible'),\n  'contributors',(select count(*) from private.contributors where owner_id=p_member_id)\n );\nend $function$\n"
+    },
+    {
+      "cursor": 4,
+      "signature": "private.dic_admin_account_delete_prepare(p_operation_id uuid, p_actor_id uuid)",
+      "baseline": "ADDED_AFTER_ORIGINAL",
+      "original_md5": null,
+      "current_md5": "6e7e0589cbda1bc5023771724ce8b77f",
+      "char_count": 3899,
+      "line_count": 72,
+      "whitespace_words": 365,
+      "reviewed_character_range": [
+        1,
+        3899
+      ],
+      "semantic_review": "READ_COMPLETE_CURRENT_SQL",
+      "assessment": "Service-only checks admin admission, preview, Storage and immutable-audit blockers before disabling target.",
+      "matching_prior_full_receipts": [
+        "docs/audits/issue509-provider-ready5-postrelease-2026-11-10-run134.json"
+      ],
+      "privileges": {
+        "security_definer": true,
+        "anon_execute": false,
+        "authenticated_execute": false,
+        "service_role_execute": true
+      },
+      "complete_sql": "CREATE OR REPLACE FUNCTION private.dic_admin_account_delete_prepare(p_operation_id uuid, p_actor_id uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare op private.dic_admin_account_delete_operations; ids uuid[]; actual jsonb; storage_blocked boolean:=false;\nbegin\n select * into op from private.dic_admin_account_delete_operations\n where id=p_operation_id for update;\n if not found or op.actor_id is distinct from p_actor_id then\n  raise exception using errcode='42501',message='Deletion operation unavailable.';\n end if;\n if op.phase='completed' then return jsonb_build_object('ok',true,'completed',true); end if;\n if not exists(select 1 from private.app_admins where owner_id=p_actor_id)\n    or not exists(select 1 from private.beta_members\n       where owner_id=p_actor_id and enabled and admitted_at is not null) then\n  raise exception using errcode='42501',message='Administrator no longer admitted.';\n end if;\n if exists(select 1 from private.app_admins where owner_id=op.target_id)\n    or op.target_id=p_actor_id then\n  raise exception using errcode='42501',message='Administrator accounts are protected.';\n end if;\n if op.phase='requested' then\n  if not exists(select 1 from auth.users where id=op.target_id) then\n   raise exception using errcode='23514',message='Target account is missing before preparation.';\n  end if;\n  -- Recheck the same preview under the service-side record lock.\n  -- No JWT actor impersonation or unsafe service-role bypass of an admin check.\n  actual:=private.dic_admin_account_delete_impact(op.target_id);\n  if actual is distinct from op.expected_impact then\n   raise exception using errcode='PT409',message='Account changed after confirmation.';\n  end if;\n  select coalesce(array_agg(c.id order by c.id),'{}'::uuid[]) into ids\n  from private.contributors c where c.owner_id=op.target_id;\n  -- Supabase Auth deletion refuses users who own Storage objects. Fail before\n  -- changing admission when the live provider exposes that table.\n  if to_regclass('storage.objects') is not null then\n   execute 'select exists(select 1 from storage.objects where owner=$1 or owner_id=$1::text)'\n     into storage_blocked using op.target_id;\n   if storage_blocked then\n    raise exception using errcode='23514',message='Member has Storage-owned objects; review before deletion.';\n   end if;\n  end if;\n  -- Prevent deletion of prior actor audit evidence if a formerly privileged user\n  -- was subsequently demoted. Do not silently erase immutable admin audits.\n  if exists(select 1 from private.admin_content_edits where actor_id=op.target_id) then\n   raise exception using errcode='23514',message='Historical administrative actor audit requires separate review.';\n  end if;\n  update private.beta_members set enabled=false where owner_id=op.target_id;\n  -- Eliminate restrictive user references; retain minimum action/timestamp audit.\n  update private.admin_content_edits\n     set subject_owner_id=null,before_values='{}'::jsonb,after_values='{}'::jsonb\n     where subject_owner_id=op.target_id;\n  delete from private.dic_source_attempts where owner_id=op.target_id;\n  update private.import_control\n     set owner_only_exception_owner_id=null,owner_only_exception_approved_at=null,\n         owner_only_exception_expires_at=null\n     where owner_only_exception_owner_id=op.target_id;\n  update private.dic_admin_account_delete_operations\n     set phase='prepared',contributor_ids=ids,prepared_at=now()\n     where id=op.id;\n  op.phase:='prepared';op.contributor_ids:=ids;\n end if;\n if op.phase='prepared' and exists(\n  select 1 from private.beta_members where owner_id=op.target_id and enabled\n ) then\n  raise exception using errcode='23514',message='Admission unexpectedly restored while deleting.';\n end if;\n return jsonb_build_object('ok',true,'target_id',op.target_id,'mode',op.community_mode,'phase',op.phase);\nend $function$\n"
+    },
+    {
+      "cursor": 5,
+      "signature": "private.dic_admin_account_delete_preview(p_member_id uuid)",
+      "baseline": "ADDED_AFTER_ORIGINAL",
+      "original_md5": null,
+      "current_md5": "55ad6325a6a3b8eb97d830bd4a5acc26",
+      "char_count": 687,
+      "line_count": 19,
+      "whitespace_words": 67,
+      "reviewed_character_range": [
+        1,
+        687
+      ],
+      "semantic_review": "READ_COMPLETE_CURRENT_SQL",
+      "assessment": "Checks admitted admin and protects own/other administrator accounts.",
+      "matching_prior_full_receipts": [
+        "docs/audits/issue509-provider-ready5-postrelease-2026-11-10-run134.json"
+      ],
+      "privileges": {
+        "security_definer": true,
+        "anon_execute": false,
+        "authenticated_execute": true,
+        "service_role_execute": false
+      },
+      "complete_sql": "CREATE OR REPLACE FUNCTION private.dic_admin_account_delete_preview(p_member_id uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare actor uuid:=auth.uid();\nbegin\n perform private.require_member();\n if actor is null or not private.is_admin() then\n  raise exception using errcode='42501',message='Administrator required.';\n end if;\n if p_member_id is null or p_member_id=actor or\n    exists(select 1 from private.app_admins where owner_id=p_member_id) then\n  raise exception using errcode='42501',message='Administrator accounts are protected.';\n end if;\n return private.dic_admin_account_delete_impact(p_member_id);\nend $function$\n"
+    },
+    {
+      "cursor": 6,
+      "signature": "private.dic_admin_account_delete_request(p_member_id uuid, p_community_mode text, p_expected_impact jsonb)",
+      "baseline": "ADDED_AFTER_ORIGINAL",
+      "original_md5": null,
+      "current_md5": "b91e425cd94b4c749b28adf8fd0b96a1",
+      "char_count": 1949,
+      "line_count": 37,
+      "whitespace_words": 174,
+      "reviewed_character_range": [
+        1,
+        1949
+      ],
+      "semantic_review": "READ_COMPLETE_CURRENT_SQL",
+      "assessment": "Checks admitted admin, matching preview, strict retry actor comparison and serialized request.",
+      "matching_prior_full_receipts": [],
+      "privileges": {
+        "security_definer": true,
+        "anon_execute": false,
+        "authenticated_execute": true,
+        "service_role_execute": false
+      },
+      "complete_sql": "CREATE OR REPLACE FUNCTION private.dic_admin_account_delete_request(p_member_id uuid, p_community_mode text, p_expected_impact jsonb)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare actor uuid:=auth.uid(); actual jsonb; prior private.dic_admin_account_delete_operations; opid uuid;\nbegin\n perform private.require_member();\n if actor is null or not private.is_admin() then\n  raise exception using errcode='42501',message='Administrator required.';\n end if;\n if p_community_mode not in ('keep','remove') or p_community_mode is null\n    or p_expected_impact is null or p_member_id is null then\n  raise exception using errcode='22023',message='Invalid account deletion confirmation.';\n end if;\n if p_member_id=actor or exists(select 1 from private.app_admins where owner_id=p_member_id) then\n  raise exception using errcode='42501',message='Administrator accounts are protected.';\n end if;\n select * into prior from private.dic_admin_account_delete_operations\n where target_id=p_member_id and phase<>'completed' for update;\n if found then\n  if prior.actor_id is distinct from actor or prior.community_mode<>p_community_mode then\n   raise exception using errcode='23514',message='Another deletion is already in progress.';\n  end if;\n  return jsonb_build_object('ok',true,'operation_id',prior.id,'phase',prior.phase,'retry',true);\n end if;\n perform 1 from auth.users where id=p_member_id for update;\n actual:=private.dic_admin_account_delete_preview(p_member_id);\n if actual is distinct from p_expected_impact then\n  raise exception using errcode='PT409',message='Account records changed. Review deletion impact again.';\n end if;\n insert into private.dic_admin_account_delete_operations(actor_id,target_id,community_mode,expected_impact)\n values(actor,p_member_id,p_community_mode,actual) returning id into opid;\n return jsonb_build_object('ok',true,'operation_id',opid,'phase','requested');\nend $function$\n"
+    },
+    {
+      "cursor": 7,
+      "signature": "private.dic_admin_dashboard_read()",
+      "baseline": "CHANGED_ORIGINAL",
+      "original_md5": "e9f2b19f77b1365c57fe74e35c71d023",
+      "current_md5": "5fa33bbe05e8408c1c2fe1b82d73a8ee",
+      "char_count": 2901,
+      "line_count": 57,
+      "whitespace_words": 221,
+      "reviewed_character_range": [
+        1,
+        2901
+      ],
+      "semantic_review": "READ_COMPLETE_CURRENT_SQL",
+      "assessment": "Checks admin and presents bounded pending-coffee queue, distinct verified-signup count.",
+      "matching_prior_full_receipts": [
+        "docs/audits/issue509-provider-member-admission-gate-2026-11-10-run139.json"
+      ],
+      "privileges": {
+        "security_definer": true,
+        "anon_execute": false,
+        "authenticated_execute": true,
+        "service_role_execute": false
+      },
+      "complete_sql": "CREATE OR REPLACE FUNCTION private.dic_admin_dashboard_read()\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n  if (select auth.uid()) is null or not private.is_admin() then\n    raise exception using errcode='42501', message='Administrator access required.';\n  end if;\n  return jsonb_build_object(\n    'review_only', true,\n    'generated_at', now(),\n    'counts', jsonb_build_object(\n      'pending_coffees', (select count(*) from public.coffee_submissions where status='pending'),\n      'conflicts', (select count(*) from public.coffee_submissions where status='conflict'),\n      'pending_canonical', (select count(*) from public.coffees where verification_state='pending'),\n      'verified_coffees', (select count(*) from public.coffees where verification_state='verified'),\n      'active_accounts', (select count(*) from private.beta_members where enabled),\n      'pending_accounts', (select count(*) from private.beta_members m where m.admitted_at is null and m.signup_review_state='pending'),\n      'pending_verified_accounts', (select count(*) from private.beta_members m join auth.users u on u.id=m.owner_id where m.admitted_at is null and m.signup_review_state='pending' and u.email_confirmed_at is not null),\n      'unfinished_account_deletions', (select count(*) from private.dic_admin_account_delete_operations where phase<>'completed'),\n      'shot_records', (select count(*) from public.shots where hidden_at is null)\n    ),\n    'queue_total', (select count(*) from public.coffee_submissions where status in ('pending','conflict')),\n    'queue', coalesce((\n      select jsonb_agg(item.data order by item.created_at, item.id)\n      from (\n        select id, created_at,\n          jsonb_build_object(\n            'id', id,\n            'created_at', created_at,\n            'status', status,\n            'revision', revision,\n            'canonical_coffee_id', canonical_coffee_id,\n            'base_coffee_revision', base_coffee_revision,\n            'source_url', source_url,\n            'name', left(coalesce(proposed_data->>'name',''),200),\n            'roaster', left(coalesce(proposed_data->>'roaster',''),200),\n            'release_label', left(coalesce(proposed_data->>'release_label',''),200),\n            'origin', left(coalesce(proposed_data->>'origin',''),300),\n            'process', left(coalesce(proposed_data->>'process',''),300),\n            'roast_level', left(coalesce(proposed_data->>'roast_level',''),100)\n          ) as data\n        from public.coffee_submissions\n        where status in ('pending','conflict')\n        order by created_at, id\n        limit 50\n      ) item\n    ),'[]'::jsonb),\n    'backups', jsonb_build_object(\n      'status', 'external_not_connected',\n      'explanation', 'Backup results are verified in GitHub/Drive; this SQL endpoint does not assert backup freshness.'\n    )\n  );\nend $function$\n"
+    },
+    {
+      "cursor": 8,
+      "signature": "private.dic_admin_records(p_kind text, p_offset integer, p_limit integer)",
+      "baseline": "CHANGED_ORIGINAL",
+      "original_md5": "3c4086808ee07058a867a1af9e8270bd",
+      "current_md5": "6976e717b7c5cbb34d8e3c41bc2aeba2",
+      "char_count": 5386,
+      "line_count": 90,
+      "whitespace_words": 385,
+      "reviewed_character_range": [
+        1,
+        5386
+      ],
+      "semantic_review": "READ_COMPLETE_CURRENT_SQL",
+      "assessment": "Checks member/admin; bounds pagination and permits Admin to view private shot/notes (not regular user).",
+      "matching_prior_full_receipts": [
+        "docs/audits/issue509-provider-member-admission-gate-2026-11-10-run139.json"
+      ],
+      "privileges": {
+        "security_definer": true,
+        "anon_execute": false,
+        "authenticated_execute": true,
+        "service_role_execute": false
+      },
+      "complete_sql": "CREATE OR REPLACE FUNCTION private.dic_admin_records(p_kind text, p_offset integer DEFAULT 0, p_limit integer DEFAULT 50)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare n bigint; listing jsonb:='[]'::jsonb;\nbegin\n perform private.require_member();\n if auth.uid() is null or not private.is_admin() then\n  raise exception using errcode='42501',message='Administrator required.';\n end if;\n if p_kind is null or p_kind not in ('pending','conflicts','approved','shots','accounts')\n   or p_offset is null or p_offset<0 or p_offset>1000000\n   or p_limit is null or p_limit<1 or p_limit>50 then\n  raise exception using errcode='22023',message='Invalid listing parameters.';\n end if;\n if p_kind in ('pending','conflicts') then\n  select count(*) into n from public.coffee_submissions s\n   where s.status=case when p_kind='pending' then 'pending' else 'conflict' end;\n  select coalesce(jsonb_agg(v.row_data order by v.created_at,v.id),'[]'::jsonb) into listing\n  from (select s.id,s.created_at,jsonb_build_object(\n   'id',s.id,'revision',s.revision,'status',s.status,'created_at',s.created_at,\n   'creator_id',s.owner_id,'creator_email',u.email,'name',s.proposed_data->>'name',\n   'roaster',s.proposed_data->>'roaster','release_label',s.proposed_data->>'release_label',\n   'origin',s.proposed_data->>'origin','process',s.proposed_data->>'process',\n   'roast_level',s.proposed_data->>'roast_level','variety',s.proposed_data->>'variety',\n   'producer',s.proposed_data->>'producer','elevation_m',s.proposed_data->>'elevation_m',\n   'tasting_notes',s.proposed_data->>'tasting_notes','summary',s.proposed_data->>'summary',\n   'espressoNotes',s.proposed_data->>'espressoNotes','source_url',s.source_url\n  ) row_data from public.coffee_submissions s\n  left join auth.users u on u.id=s.owner_id\n  where s.status=case when p_kind='pending' then 'pending' else 'conflict' end\n  order by s.created_at,s.id limit p_limit offset p_offset) v;\n elsif p_kind='approved' then\n  select count(*) into n from public.coffees where verification_state='verified' and merged_into_id is null;\n  select coalesce(jsonb_agg(v.row_data order by v.created_at,v.id),'[]'::jsonb) into listing\n  from (select c.id,c.created_at,jsonb_build_object(\n   'id',c.id,'revision',c.revision,'created_at',c.created_at,\n   'creator_id',s.owner_id,'creator_email',u.email,\n   'name',c.name,'roaster',c.roaster,'release_label',c.release_label,\n   'origin',c.origin,'process',c.process,'roast_level',c.roast_level,\n   'variety',c.variety,'producer',c.producer,'elevation_m',c.elevation_m,\n   'tasting_notes',c.tasting_notes,'summary',c.summary,'espressoNotes',c.espresso_notes,\n   'source_url',(select x.source_url from public.coffee_sources x\n    where x.coffee_id=c.id order by x.checked_at desc,x.id desc limit 1)\n  ) row_data from public.coffees c\n  left join private.dic_coffee_first_entry f on f.coffee_id=c.id\n  left join public.coffee_submissions s on s.id=f.first_submission_id\n  left join auth.users u on u.id=s.owner_id\n  where c.verification_state='verified' and c.merged_into_id is null\n  order by c.created_at,c.id limit p_limit offset p_offset) v;\n elsif p_kind='shots' then\n  select count(*) into n from public.shots;\n  select coalesce(jsonb_agg(v.row_data order by v.pulled_at desc,v.id desc),'[]'::jsonb) into listing\n  from (select s.id,s.pulled_at,jsonb_build_object(\n   'id',s.id,'revision',s.revision,'created_at',s.created_at,'pulled_at',s.pulled_at,\n   'creator_id',s.owner_id,'creator_email',u.email,'hidden',s.hidden_at is not null,\n   'coffee_name',coalesce(c.name,p.proposed_data->>'name','Coffee unavailable'),\n   'library_entry_id',l.id,'coffee_id',l.coffee_id,'submission_id',l.submission_id,\n   'coffee_roaster',coalesce(c.roaster,p.proposed_data->>'roaster',''),\n   'style',s.style,'dose_g',s.dose_g,'yield_g',s.yield_g,'time_s',s.time_s,\n   'grind_setting',s.grind_setting,'temperature_c',s.temperature_c,\n   'extraction',s.extraction,'body',s.body,'clarity',s.clarity,\n   'sweetness',s.sweetness,'astringency',s.astringency,'notes',notes.notes,\n   'is_dialed_in',s.is_dialed_in\n  ) row_data from public.shots s\n  left join public.library_entries l on l.id=s.library_entry_id and l.owner_id=s.owner_id\n  left join public.coffees c on c.id=l.coffee_id\n  left join public.coffee_submissions p on p.id=l.submission_id\n  left join public.shot_notes notes on notes.owner_id=s.owner_id and notes.shot_id=s.id\n  left join auth.users u on u.id=s.owner_id\n  order by s.pulled_at desc,s.id desc limit p_limit offset p_offset) v;\n else\n  select count(*) into n from private.beta_members where admitted_at is not null;\n  select coalesce(jsonb_agg(v.row_data order by v.admitted_at desc,v.id),'[]'::jsonb) into listing\n  from (select m.owner_id id,m.admitted_at,jsonb_build_object(\n   'id',m.owner_id,'email',u.email,'created_at',m.created_at,'admitted_at',m.admitted_at,\n   'creator_id',m.owner_id,'creator_email',u.email,'enabled',m.enabled,\n   'admin',a.owner_id is not null\n  ) row_data from private.beta_members m\n  left join auth.users u on u.id=m.owner_id\n  left join private.app_admins a on a.owner_id=m.owner_id\n  where m.admitted_at is not null\n  order by m.admitted_at desc,m.owner_id limit p_limit offset p_offset) v;\n end if;\n return jsonb_build_object('kind',p_kind,'total',n,'offset',p_offset,\n   'items',coalesce(listing,'[]'::jsonb));\nend $function$\n"
+    },
+    {
+      "cursor": 9,
+      "signature": "private.dic_admin_review_signup(p_member_id uuid, p_action text, p_expected_state text)",
+      "baseline": "ADDED_AFTER_ORIGINAL",
+      "original_md5": null,
+      "current_md5": "7e0d3bf10542694b60177fcfa9c6f7be",
+      "char_count": 2073,
+      "line_count": 43,
+      "whitespace_words": 199,
+      "reviewed_character_range": [
+        1,
+        2073
+      ],
+      "semantic_review": "READ_COMPLETE_CURRENT_SQL",
+      "assessment": "Checks admin, stale pending status, verified email and atomically sets approved/admitted/enabled.",
+      "matching_prior_full_receipts": [
+        "docs/audits/issue509-provider-ready4-three-migrations-2026-11-10-run138.json"
+      ],
+      "privileges": {
+        "security_definer": true,
+        "anon_execute": false,
+        "authenticated_execute": true,
+        "service_role_execute": false
+      },
+      "complete_sql": "CREATE OR REPLACE FUNCTION private.dic_admin_review_signup(p_member_id uuid, p_action text, p_expected_state text DEFAULT 'pending'::text)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare actor uuid:=auth.uid(); member private.beta_members; verified boolean;\nbegin\n perform private.require_member();\n if actor is null or not private.is_admin() then\n  raise exception using errcode='42501',message='Administrator required.';\n end if;\n if p_member_id is null or p_member_id=actor or p_action is null or p_action not in ('approve','reject')\n  or p_expected_state is distinct from 'pending' then\n  raise exception using errcode='22023',message='Invalid signup review.';\n end if;\n if exists(select 1 from private.app_admins where owner_id=p_member_id) then\n  raise exception using errcode='42501',message='Administrator protected.';\n end if;\n select * into member from private.beta_members where owner_id=p_member_id for update;\n if not found then\n  raise exception using errcode='22023',message='Account unavailable.';\n end if;\n -- A repeat click or concurrent reviewer must be safely rejected as stale.\n if member.signup_review_state <> p_expected_state or\n    member.admitted_at is not null or member.enabled then\n  return jsonb_build_object('ok',false,'code','stale_review');\n end if;\n select u.email_confirmed_at is not null into verified\n from auth.users u where u.id=p_member_id;\n if p_action='approve' and verified is distinct from true then\n  return jsonb_build_object('ok',false,'code','verify_email_first');\n end if;\n update private.beta_members set\n   signup_review_state=case when p_action='approve' then 'approved' else 'rejected' end,\n   enabled=(p_action='approve'),\n   admitted_at=case when p_action='approve' then now() else null end\n where owner_id=p_member_id;\n insert into private.dic_signup_review_events(member_id,actor_id,action,previous_state)\n values(p_member_id,actor,p_action,member.signup_review_state);\n return jsonb_build_object('ok',true,'decision',p_action,'member_id',p_member_id);\nend $function$\n"
+    },
+    {
+      "cursor": 10,
+      "signature": "private.dic_admin_search_records(p_kind text, p_query text, p_offset integer, p_limit integer)",
+      "baseline": "CHANGED_ORIGINAL",
+      "original_md5": "fa84ffd4d121ba5b9aa4dc6ec3b98642",
+      "current_md5": "253a3fe2fe1e1e65f61b5a71a2063fdd",
+      "char_count": 7574,
+      "line_count": 108,
+      "whitespace_words": 526,
+      "reviewed_character_range": [
+        1,
+        7574
+      ],
+      "semantic_review": "READ_COMPLETE_CURRENT_SQL",
+      "assessment": "Checks admitted admin; bounds query and pagination, no obsolete invite branches.",
+      "matching_prior_full_receipts": [
+        "docs/audits/issue509-provider-member-admission-gate-2026-11-10-run139.json"
+      ],
+      "privileges": {
+        "security_definer": true,
+        "anon_execute": false,
+        "authenticated_execute": true,
+        "service_role_execute": false
+      },
+      "complete_sql": "CREATE OR REPLACE FUNCTION private.dic_admin_search_records(p_kind text, p_query text, p_offset integer DEFAULT 0, p_limit integer DEFAULT 50)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare n bigint; listing jsonb:='[]'::jsonb; q text;\nbegin\n perform private.require_member();\n if auth.uid() is null or not private.is_admin() then\n  raise exception using errcode='42501',message='Administrator required.';\n end if;\n if p_kind is null or p_kind not in ('pending','conflicts','approved','shots','accounts')\n   or p_offset is null or p_offset<0 or p_offset>1000000\n   or p_limit is null or p_limit<1 or p_limit>50 then\n  raise exception using errcode='22023',message='Invalid listing parameters.';\n end if;\n if p_query is null or length(p_query)>80 then\n  raise exception using errcode='22023',message='Invalid search query.';\n end if;\n q:=lower(btrim(p_query));\n if p_kind in ('pending','conflicts') then\n  select count(*) into n from public.coffee_submissions s\n   left join auth.users u on u.id=s.owner_id\n   where s.status=case when p_kind='pending' then 'pending' else 'conflict' end and (q='' or strpos(lower(concat_ws(' ',s.proposed_data->>'name',s.proposed_data->>'roaster',s.proposed_data->>'release_label',s.proposed_data->>'origin',s.proposed_data->>'process',s.proposed_data->>'tasting_notes',s.source_url,u.email)),q)>0);\n  select coalesce(jsonb_agg(v.row_data order by v.created_at,v.id),'[]'::jsonb) into listing\n  from (select s.id,s.created_at,jsonb_build_object(\n   'id',s.id,'revision',s.revision,'status',s.status,'created_at',s.created_at,\n   'creator_id',s.owner_id,'creator_email',u.email,'name',s.proposed_data->>'name',\n   'roaster',s.proposed_data->>'roaster','release_label',s.proposed_data->>'release_label',\n   'origin',s.proposed_data->>'origin','process',s.proposed_data->>'process',\n   'roast_level',s.proposed_data->>'roast_level','variety',s.proposed_data->>'variety',\n   'producer',s.proposed_data->>'producer','elevation_m',s.proposed_data->>'elevation_m',\n   'tasting_notes',s.proposed_data->>'tasting_notes','summary',s.proposed_data->>'summary',\n   'espressoNotes',s.proposed_data->>'espressoNotes','source_url',s.source_url\n  ) row_data from public.coffee_submissions s\n  left join auth.users u on u.id=s.owner_id\n  where s.status=case when p_kind='pending' then 'pending' else 'conflict' end and (q='' or strpos(lower(concat_ws(' ',s.proposed_data->>'name',s.proposed_data->>'roaster',s.proposed_data->>'release_label',s.proposed_data->>'origin',s.proposed_data->>'process',s.proposed_data->>'tasting_notes',s.source_url,u.email)),q)>0)\n  order by s.created_at,s.id limit p_limit offset p_offset) v;\n elsif p_kind='approved' then\n  select count(*) into n from public.coffees c\n  left join private.dic_coffee_first_entry f on f.coffee_id=c.id\n  left join public.coffee_submissions s on s.id=f.first_submission_id\n  left join auth.users u on u.id=s.owner_id\n  where c.verification_state='verified' and c.merged_into_id is null and (q='' or strpos(lower(concat_ws(' ',c.name,c.roaster,c.release_label,c.origin,c.process,c.producer,c.variety,c.tasting_notes,u.email)),q)>0);\n  select coalesce(jsonb_agg(v.row_data order by v.created_at,v.id),'[]'::jsonb) into listing\n  from (select c.id,c.created_at,jsonb_build_object(\n   'id',c.id,'revision',c.revision,'created_at',c.created_at,\n   'creator_id',s.owner_id,'creator_email',u.email,\n   'name',c.name,'roaster',c.roaster,'release_label',c.release_label,\n   'origin',c.origin,'process',c.process,'roast_level',c.roast_level,\n   'variety',c.variety,'producer',c.producer,'elevation_m',c.elevation_m,\n   'tasting_notes',c.tasting_notes,'summary',c.summary,'espressoNotes',c.espresso_notes,\n   'source_url',(select x.source_url from public.coffee_sources x\n    where x.coffee_id=c.id order by x.checked_at desc,x.id desc limit 1)\n  ) row_data from public.coffees c\n  left join private.dic_coffee_first_entry f on f.coffee_id=c.id\n  left join public.coffee_submissions s on s.id=f.first_submission_id\n  left join auth.users u on u.id=s.owner_id\n  where c.verification_state='verified' and c.merged_into_id is null and (q='' or strpos(lower(concat_ws(' ',c.name,c.roaster,c.release_label,c.origin,c.process,c.producer,c.variety,c.tasting_notes,u.email)),q)>0)\n  order by c.created_at,c.id limit p_limit offset p_offset) v;\n elsif p_kind='shots' then\n  select count(*) into n from public.shots s\n  left join public.library_entries l on l.id=s.library_entry_id and l.owner_id=s.owner_id\n  left join public.coffees c on c.id=l.coffee_id\n  left join public.coffee_submissions p on p.id=l.submission_id\n  left join public.shot_notes notes on notes.owner_id=s.owner_id and notes.shot_id=s.id\n  left join auth.users u on u.id=s.owner_id\n  where (q='' or strpos(lower(concat_ws(' ',coalesce(c.name,p.proposed_data->>'name',''),coalesce(c.roaster,p.proposed_data->>'roaster',''),s.style,notes.notes,u.email)),q)>0);\n  select coalesce(jsonb_agg(v.row_data order by v.pulled_at desc,v.id desc),'[]'::jsonb) into listing\n  from (select s.id,s.pulled_at,jsonb_build_object(\n   'id',s.id,'revision',s.revision,'created_at',s.created_at,'pulled_at',s.pulled_at,\n   'creator_id',s.owner_id,'creator_email',u.email,'hidden',s.hidden_at is not null,\n   'coffee_name',coalesce(c.name,p.proposed_data->>'name','Coffee unavailable'),\n   'library_entry_id',l.id,'coffee_id',l.coffee_id,'submission_id',l.submission_id,\n   'coffee_roaster',coalesce(c.roaster,p.proposed_data->>'roaster',''),\n   'style',s.style,'dose_g',s.dose_g,'yield_g',s.yield_g,'time_s',s.time_s,\n   'grind_setting',s.grind_setting,'temperature_c',s.temperature_c,\n   'extraction',s.extraction,'body',s.body,'clarity',s.clarity,\n   'sweetness',s.sweetness,'astringency',s.astringency,'notes',notes.notes,\n   'is_dialed_in',s.is_dialed_in\n  ) row_data from public.shots s\n  left join public.library_entries l on l.id=s.library_entry_id and l.owner_id=s.owner_id\n  left join public.coffees c on c.id=l.coffee_id\n  left join public.coffee_submissions p on p.id=l.submission_id\n  left join public.shot_notes notes on notes.owner_id=s.owner_id and notes.shot_id=s.id\n  left join auth.users u on u.id=s.owner_id\n  where (q='' or strpos(lower(concat_ws(' ',coalesce(c.name,p.proposed_data->>'name',''),coalesce(c.roaster,p.proposed_data->>'roaster',''),s.style,notes.notes,u.email)),q)>0)\n  order by s.pulled_at desc,s.id desc limit p_limit offset p_offset) v;\n else\n  select count(*) into n from private.beta_members m\n  left join auth.users u on u.id=m.owner_id\n  where m.admitted_at is not null and (q='' or strpos(lower(concat_ws(' ',u.email,m.owner_id::text,case when m.enabled then 'active' else 'removed' end)),q)>0);\n  select coalesce(jsonb_agg(v.row_data order by v.admitted_at desc,v.id),'[]'::jsonb) into listing\n  from (select m.owner_id id,m.admitted_at,jsonb_build_object(\n   'id',m.owner_id,'email',u.email,'created_at',m.created_at,'admitted_at',m.admitted_at,\n   'creator_id',m.owner_id,'creator_email',u.email,'enabled',m.enabled,\n   'admin',a.owner_id is not null\n  ) row_data from private.beta_members m\n  left join auth.users u on u.id=m.owner_id\n  left join private.app_admins a on a.owner_id=m.owner_id\n  where m.admitted_at is not null and (q='' or strpos(lower(concat_ws(' ',u.email,m.owner_id::text,case when m.enabled then 'active' else 'removed' end)),q)>0)\n  order by m.admitted_at desc,m.owner_id limit p_limit offset p_offset) v;\n end if;\n return jsonb_build_object('kind',p_kind,'total',n,'offset',p_offset,\n   'items',coalesce(listing,'[]'::jsonb));\nend $function$\n"
+    },
+    {
+      "cursor": 11,
+      "signature": "private.dic_admin_set_member_access(p_member_id uuid, p_enabled boolean)",
+      "baseline": "CHANGED_ORIGINAL",
+      "original_md5": "19e71a0286d222f03f59604aae1c2ab8",
+      "current_md5": "d7a339f277e9da0d8393d5efcdbc0e89",
+      "char_count": 2354,
+      "line_count": 44,
+      "whitespace_words": 250,
+      "reviewed_character_range": [
+        1,
+        2354
+      ],
+      "semantic_review": "READ_COMPLETE_CURRENT_SQL",
+      "assessment": "Checks admin and previously admitted account, verified email, protects admins and active deletion.",
+      "matching_prior_full_receipts": [
+        "docs/audits/issue509-provider-ready4-three-migrations-2026-11-10-run138.json"
+      ],
+      "privileges": {
+        "security_definer": true,
+        "anon_execute": false,
+        "authenticated_execute": true,
+        "service_role_execute": false
+      },
+      "complete_sql": "CREATE OR REPLACE FUNCTION private.dic_admin_set_member_access(p_member_id uuid, p_enabled boolean)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare actor uuid:=auth.uid();m private.beta_members;found_member uuid;\nbegin\n if actor is null or not private.is_admin() then\n  raise exception using errcode='42501',message='Administrator access required.';\n end if;\n if p_member_id is null or p_enabled is null then\n  raise exception using errcode='22023',message='Member and desired access are required.';\n end if;\n -- Never allow an administrator to revoke themself OR ANY administrator.\n -- The underlying permanent admin role has no expiration.\n if p_member_id=actor or exists(select 1 from private.app_admins where owner_id=p_member_id) then\n  raise exception using errcode='42501',message='Administrator accounts cannot be removed here.';\n end if;\n -- Permanently deleting a member supersedes reversible Restore/Remove.\n if exists(select 1 from private.dic_admin_account_delete_operations\n   where target_id=p_member_id and phase<>'completed') then\n  raise exception using errcode='23514',message='Permanent deletion is underway; finish it before changing access.';\n end if;\n select * into m from private.beta_members where owner_id=p_member_id for update;\n if not found or m.admitted_at is null then\n  raise exception using errcode='22023',message='Only previously admitted members can be changed.';\n end if;\n if p_enabled and not exists(select 1 from auth.users where id=p_member_id and email_confirmed_at is not null) then\n  raise exception using errcode='42501',message='Verified email required.';\n end if;\n if m.enabled=p_enabled then\n  return jsonb_build_object('ok',true,'enabled',p_enabled,'unchanged',true);\n end if;\n update private.beta_members set enabled=p_enabled\n where owner_id=p_member_id returning owner_id into found_member;\n insert into private.admin_access_events(actor_id,action,member_id)\n values(actor,case when p_enabled then 'restore_access' else 'remove_access' end,found_member);\n -- No auth.users deletion, note deletion, contribution identity reidentification,\n -- historical mutation, or implicit sign-out of already issued Supabase tokens.\n -- All member RPCs and RLS must recheck private.is_member().\n return jsonb_build_object('ok',true,'enabled',p_enabled);\nend $function$\n"
+    },
+    {
+      "cursor": 12,
+      "signature": "private.dic_admin_signup_requests(p_offset integer, p_limit integer)",
+      "baseline": "ADDED_AFTER_ORIGINAL",
+      "original_md5": null,
+      "current_md5": "663c13571f70bb29b6a4351e8e6a45eb",
+      "char_count": 1411,
+      "line_count": 31,
+      "whitespace_words": 134,
+      "reviewed_character_range": [
+        1,
+        1411
+      ],
+      "semantic_review": "READ_COMPLETE_CURRENT_SQL",
+      "assessment": "Checks admitted admin, paginated pending approvals and verified-email flags.",
+      "matching_prior_full_receipts": [
+        "docs/audits/issue509-provider-ready4-three-migrations-2026-11-10-run138.json"
+      ],
+      "privileges": {
+        "security_definer": true,
+        "anon_execute": false,
+        "authenticated_execute": true,
+        "service_role_execute": false
+      },
+      "complete_sql": "CREATE OR REPLACE FUNCTION private.dic_admin_signup_requests(p_offset integer DEFAULT 0, p_limit integer DEFAULT 50)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare total bigint; listing jsonb;\nbegin\n perform private.require_member();\n if auth.uid() is null or not private.is_admin() then\n  raise exception using errcode='42501', message='Administrator required.';\n end if;\n if p_offset is null or p_offset<0 or p_offset>1000000\n    or p_limit is null or p_limit<1 or p_limit>50 then\n  raise exception using errcode='22023',message='Invalid paging.';\n end if;\n select count(*) into total from private.beta_members m\n where m.admitted_at is null and m.signup_review_state='pending';\n select coalesce(jsonb_agg(v.record order by v.created_at,v.id),'[]'::jsonb) into listing\n from (select m.owner_id as id,u.created_at,\n   jsonb_build_object(\n    'id',m.owner_id,'email',left(coalesce(u.email,''),254),\n    'created_at',u.created_at,'email_verified',u.email_confirmed_at is not null,\n    'review_state',m.signup_review_state\n   ) as record\n   from private.beta_members m join auth.users u on u.id=m.owner_id\n   where m.admitted_at is null and m.signup_review_state='pending'\n   order by u.created_at,m.owner_id limit p_limit offset p_offset) v;\n return jsonb_build_object('total',total,'offset',p_offset,'items',coalesce(listing,'[]'::jsonb));\nend $function$\n"
+    },
+    {
+      "cursor": 13,
+      "signature": "private.session_status()",
+      "baseline": "CHANGED_ORIGINAL",
+      "original_md5": "f69fcc8be4b6f4dd2bdfe12679137519",
+      "current_md5": "0aa8e57bb4846aac7dd8e3b6c0cf690c",
+      "char_count": 729,
+      "line_count": 19,
+      "whitespace_words": 67,
+      "reviewed_character_range": [
+        1,
+        729
+      ],
+      "semantic_review": "READ_COMPLETE_CURRENT_SQL",
+      "assessment": "Live membership and approval calculated; constant backupConfigured/communityLive/mode placeholders require caller review.",
+      "matching_prior_full_receipts": [
+        "docs/audits/issue509-provider-member-admission-gate-2026-11-10-run139.json"
+      ],
+      "privileges": {
+        "security_definer": true,
+        "anon_execute": false,
+        "authenticated_execute": true,
+        "service_role_execute": false
+      },
+      "complete_sql": "CREATE OR REPLACE FUNCTION private.session_status()\n RETURNS jsonb\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nselect jsonb_build_object(\n 'authenticated',auth.uid() is not null,\n 'admitted',private.is_member(),\n 'admin',private.is_admin(),\n 'emailVerified',exists(select 1 from auth.users u where u.id=auth.uid() and u.email_confirmed_at is not null),\n 'approvalState',coalesce((\n   select case when m.admitted_at is not null and m.enabled then 'approved'\n     when m.admitted_at is not null then 'revoked'\n     else m.signup_review_state end\n   from private.beta_members m where m.owner_id=auth.uid()),'pending'),\n 'backupConfigured',false,'communityLive',false,'mode','owner-test');\n$function$\n"
+    },
+    {
+      "cursor": 14,
+      "signature": "public.dic_admin_account_delete_finish(p_operation_id uuid, p_actor_id uuid)",
+      "baseline": "ADDED_AFTER_ORIGINAL",
+      "original_md5": null,
+      "current_md5": "2fc16586443318c1594d1939544920dd",
+      "char_count": 257,
+      "line_count": 8,
+      "whitespace_words": 21,
+      "reviewed_character_range": [
+        1,
+        257
+      ],
+      "semantic_review": "READ_COMPLETE_CURRENT_SQL",
+      "assessment": "Invoker wrapper service-role-only; private implementation enforces operation.",
+      "matching_prior_full_receipts": [
+        "docs/audits/issue509-provider-ready5-postrelease-2026-11-10-run134.json"
+      ],
+      "privileges": {
+        "security_definer": false,
+        "anon_execute": false,
+        "authenticated_execute": false,
+        "service_role_execute": true
+      },
+      "complete_sql": "CREATE OR REPLACE FUNCTION public.dic_admin_account_delete_finish(p_operation_id uuid, p_actor_id uuid)\n RETURNS jsonb\n LANGUAGE sql\n SET search_path TO ''\nAS $function$\n select private.dic_admin_account_delete_finish(p_operation_id,p_actor_id);\n$function$\n"
+    },
+    {
+      "cursor": 15,
+      "signature": "public.dic_admin_account_delete_prepare(p_operation_id uuid, p_actor_id uuid)",
+      "baseline": "ADDED_AFTER_ORIGINAL",
+      "original_md5": null,
+      "current_md5": "a0c67fbfbbfd122a8e16596c79333092",
+      "char_count": 259,
+      "line_count": 8,
+      "whitespace_words": 21,
+      "reviewed_character_range": [
+        1,
+        259
+      ],
+      "semantic_review": "READ_COMPLETE_CURRENT_SQL",
+      "assessment": "Invoker wrapper service-role-only; private implementation enforces operation.",
+      "matching_prior_full_receipts": [
+        "docs/audits/issue509-provider-ready5-postrelease-2026-11-10-run134.json"
+      ],
+      "privileges": {
+        "security_definer": false,
+        "anon_execute": false,
+        "authenticated_execute": false,
+        "service_role_execute": true
+      },
+      "complete_sql": "CREATE OR REPLACE FUNCTION public.dic_admin_account_delete_prepare(p_operation_id uuid, p_actor_id uuid)\n RETURNS jsonb\n LANGUAGE sql\n SET search_path TO ''\nAS $function$\n select private.dic_admin_account_delete_prepare(p_operation_id,p_actor_id);\n$function$\n"
+    },
+    {
+      "cursor": 16,
+      "signature": "public.dic_admin_account_delete_preview(p_member_id uuid)",
+      "baseline": "ADDED_AFTER_ORIGINAL",
+      "original_md5": null,
+      "current_md5": "b8f41cc6faf702f27c678a45127d0723",
+      "char_count": 233,
+      "line_count": 9,
+      "whitespace_words": 20,
+      "reviewed_character_range": [
+        1,
+        233
+      ],
+      "semantic_review": "READ_COMPLETE_CURRENT_SQL",
+      "assessment": "Invoker wrapper to private admin-gated preview.",
+      "matching_prior_full_receipts": [
+        "docs/audits/issue509-provider-ready5-postrelease-2026-11-10-run134.json"
+      ],
+      "privileges": {
+        "security_definer": false,
+        "anon_execute": false,
+        "authenticated_execute": true,
+        "service_role_execute": true
+      },
+      "complete_sql": "CREATE OR REPLACE FUNCTION public.dic_admin_account_delete_preview(p_member_id uuid)\n RETURNS jsonb\n LANGUAGE sql\n STABLE\n SET search_path TO ''\nAS $function$\n select private.dic_admin_account_delete_preview(p_member_id);\n$function$\n"
+    },
+    {
+      "cursor": 17,
+      "signature": "public.dic_admin_account_delete_request(p_member_id uuid, p_community_mode text, p_expected_impact jsonb)",
+      "baseline": "ADDED_AFTER_ORIGINAL",
+      "original_md5": null,
+      "current_md5": "779f19212d19ebbfb88f2a859fd92c21",
+      "char_count": 308,
+      "line_count": 8,
+      "whitespace_words": 23,
+      "reviewed_character_range": [
+        1,
+        308
+      ],
+      "semantic_review": "READ_COMPLETE_CURRENT_SQL",
+      "assessment": "Invoker wrapper to private admin-gated request.",
+      "matching_prior_full_receipts": [
+        "docs/audits/issue509-provider-ready5-postrelease-2026-11-10-run134.json"
+      ],
+      "privileges": {
+        "security_definer": false,
+        "anon_execute": false,
+        "authenticated_execute": true,
+        "service_role_execute": true
+      },
+      "complete_sql": "CREATE OR REPLACE FUNCTION public.dic_admin_account_delete_request(p_member_id uuid, p_community_mode text, p_expected_impact jsonb)\n RETURNS jsonb\n LANGUAGE sql\n SET search_path TO ''\nAS $function$\n select private.dic_admin_account_delete_request(p_member_id,p_community_mode,p_expected_impact);\n$function$\n"
+    },
+    {
+      "cursor": 18,
+      "signature": "public.dic_admin_review_signup(p_member_id uuid, p_action text, p_expected_state text)",
+      "baseline": "ADDED_AFTER_ORIGINAL",
+      "original_md5": null,
+      "current_md5": "ebfec67f4da9cf3adc0d3e3431f2a295",
+      "char_count": 295,
+      "line_count": 8,
+      "whitespace_words": 25,
+      "reviewed_character_range": [
+        1,
+        295
+      ],
+      "semantic_review": "READ_COMPLETE_CURRENT_SQL",
+      "assessment": "Invoker wrapper to private admin-gated signup approval.",
+      "matching_prior_full_receipts": [],
+      "privileges": {
+        "security_definer": false,
+        "anon_execute": false,
+        "authenticated_execute": true,
+        "service_role_execute": true
+      },
+      "complete_sql": "CREATE OR REPLACE FUNCTION public.dic_admin_review_signup(p_member_id uuid, p_action text, p_expected_state text DEFAULT 'pending'::text)\n RETURNS jsonb\n LANGUAGE sql\n SET search_path TO ''\nAS $function$\n select private.dic_admin_review_signup(p_member_id,p_action,p_expected_state);\n$function$\n"
+    },
+    {
+      "cursor": 19,
+      "signature": "public.dic_admin_signup_requests(p_offset integer, p_limit integer)",
+      "baseline": "ADDED_AFTER_ORIGINAL",
+      "original_md5": null,
+      "current_md5": "ab3a82cfe5d926fa485c39b153aa701e",
+      "char_count": 262,
+      "line_count": 9,
+      "whitespace_words": 26,
+      "reviewed_character_range": [
+        1,
+        262
+      ],
+      "semantic_review": "READ_COMPLETE_CURRENT_SQL",
+      "assessment": "Invoker wrapper to private admin-gated signup list.",
+      "matching_prior_full_receipts": [],
+      "privileges": {
+        "security_definer": false,
+        "anon_execute": false,
+        "authenticated_execute": true,
+        "service_role_execute": true
+      },
+      "complete_sql": "CREATE OR REPLACE FUNCTION public.dic_admin_signup_requests(p_offset integer DEFAULT 0, p_limit integer DEFAULT 50)\n RETURNS jsonb\n LANGUAGE sql\n STABLE\n SET search_path TO ''\nAS $function$\n select private.dic_admin_signup_requests(p_offset,p_limit);\n$function$\n"
+    }
+  ],
+  "retired": [
+    {
+      "signature": "private.dic_admin_issue_invite(p_label text)",
+      "old_md5": "98f1ee7c95ab2ff1f49269cb9db65180",
+      "disposition": "SUPERSEDED_AND_REMOVED_BY_APPROVED_SIGNUP_REVIEW"
+    },
+    {
+      "signature": "private.dic_admin_revoke_invite(p_invite_id uuid)",
+      "old_md5": "db081b0e313f47a78c50789879e590cb",
+      "disposition": "SUPERSEDED_AND_REMOVED_BY_APPROVED_SIGNUP_REVIEW"
+    },
+    {
+      "signature": "private.redeem_beta_invite(token text)",
+      "old_md5": "e942168297d4fe96b4639d5a9f9eeaa9",
+      "disposition": "SUPERSEDED_AND_REMOVED_BY_APPROVED_SIGNUP_REVIEW"
+    },
+    {
+      "signature": "public.dic_admin_issue_invite(p_label text)",
+      "old_md5": "bcbb34a87e9354a83f8114d7e61ea07d",
+      "disposition": "SUPERSEDED_AND_REMOVED_BY_APPROVED_SIGNUP_REVIEW"
+    },
+    {
+      "signature": "public.dic_admin_revoke_invite(p_invite_id uuid)",
+      "old_md5": "4b1c53645b52aacfa4fbbbbbdf035e5e",
+      "disposition": "SUPERSEDED_AND_REMOVED_BY_APPROVED_SIGNUP_REVIEW"
+    },
+    {
+      "signature": "public.dic_redeem_invite(token text)",
+      "old_md5": "bd904728300c973e60486deb2634b736",
+      "disposition": "SUPERSEDED_AND_REMOVED_BY_APPROVED_SIGNUP_REVIEW"
+    }
+  ],
+  "conclusion": {
+    "new_verified_defects": 0,
+    "changed_from_run141": 0,
+    "verified_retirement": "Six legacy invitation RPCs absent, matching owner-locked replacement",
+    "pending_investigation": "session_status hard-coded backupConfigured/communityLive/mode fields need exact-source consumer trace; not proven current defect",
+    "provider_changes": false,
+    "source_changes": false,
+    "full_provider_baseline": "IN_PROGRESS",
+    "limits": [
+      "Hosted Auth/JWT/API dashboard settings unverified",
+      "Compiled native provider internals unverified",
+      "No genuine-member/Auth deletion performed",
+      "No independent per-function release-migration byte-identity asserted beyond prior stored migration receipts"
+    ]
+  },
+  "CI": "DOCS_ONLY_GOVERNANCE_PENDING"
+}

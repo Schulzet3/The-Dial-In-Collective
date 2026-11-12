@@ -1,0 +1,599 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 177,
+  "date_utc": "2026-11-11",
+  "project_ref": "azviqqejypsefzilgonr",
+  "github_development_source_sha": "0074e99e8778a642daebefcdeb46fc11fcdff3de",
+  "github_main_sha": "f2673889d71b3f440bfd0fcfe5e8e294574509bb",
+  "github_release_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
+  "read_only_review": "FULL_CURRENT_SOURCE_REVIEW_SELECTED_POST_64_MIGRATION_ADMISSION_CHAIN",
+  "source_credit": "re-review only; 0 first-time provider migration words; 0 #267 code lines",
+  "scope": "11 full SQL function definitions, 1 Auth user creation trigger, all 39 app RLS expressions, current effective roles and CHECK/member aggregate read-only elsewhere in same run",
+  "functions": [
+    {
+      "identity": "private.dic_admin_review_signup(p_member_id uuid, p_action text, p_expected_state text)",
+      "live_md5": "7e0d3bf10542694b60177fcfa9c6f7be",
+      "source_chars": 2073,
+      "security_definer": true,
+      "safe_config": [
+        "search_path=\"\""
+      ],
+      "complete_definition": "CREATE OR REPLACE FUNCTION private.dic_admin_review_signup(p_member_id uuid, p_action text, p_expected_state text DEFAULT 'pending'::text)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare actor uuid:=auth.uid(); member private.beta_members; verified boolean;\nbegin\n perform private.require_member();\n if actor is null or not private.is_admin() then\n  raise exception using errcode='42501',message='Administrator required.';\n end if;\n if p_member_id is null or p_member_id=actor or p_action is null or p_action not in ('approve','reject')\n  or p_expected_state is distinct from 'pending' then\n  raise exception using errcode='22023',message='Invalid signup review.';\n end if;\n if exists(select 1 from private.app_admins where owner_id=p_member_id) then\n  raise exception using errcode='42501',message='Administrator protected.';\n end if;\n select * into member from private.beta_members where owner_id=p_member_id for update;\n if not found then\n  raise exception using errcode='22023',message='Account unavailable.';\n end if;\n -- A repeat click or concurrent reviewer must be safely rejected as stale.\n if member.signup_review_state <> p_expected_state or\n    member.admitted_at is not null or member.enabled then\n  return jsonb_build_object('ok',false,'code','stale_review');\n end if;\n select u.email_confirmed_at is not null into verified\n from auth.users u where u.id=p_member_id;\n if p_action='approve' and verified is distinct from true then\n  return jsonb_build_object('ok',false,'code','verify_email_first');\n end if;\n update private.beta_members set\n   signup_review_state=case when p_action='approve' then 'approved' else 'rejected' end,\n   enabled=(p_action='approve'),\n   admitted_at=case when p_action='approve' then now() else null end\n where owner_id=p_member_id;\n insert into private.dic_signup_review_events(member_id,actor_id,action,previous_state)\n values(p_member_id,actor,p_action,member.signup_review_state);\n return jsonb_build_object('ok',true,'decision',p_action,'member_id',p_member_id);\nend $function$\n",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Private member/admin function checked for authorization, stale state and side effects"
+    },
+    {
+      "identity": "private.dic_admin_set_member_access(p_member_id uuid, p_enabled boolean)",
+      "live_md5": "d7a339f277e9da0d8393d5efcdbc0e89",
+      "source_chars": 2354,
+      "security_definer": true,
+      "safe_config": [
+        "search_path=\"\""
+      ],
+      "complete_definition": "CREATE OR REPLACE FUNCTION private.dic_admin_set_member_access(p_member_id uuid, p_enabled boolean)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare actor uuid:=auth.uid();m private.beta_members;found_member uuid;\nbegin\n if actor is null or not private.is_admin() then\n  raise exception using errcode='42501',message='Administrator access required.';\n end if;\n if p_member_id is null or p_enabled is null then\n  raise exception using errcode='22023',message='Member and desired access are required.';\n end if;\n -- Never allow an administrator to revoke themself OR ANY administrator.\n -- The underlying permanent admin role has no expiration.\n if p_member_id=actor or exists(select 1 from private.app_admins where owner_id=p_member_id) then\n  raise exception using errcode='42501',message='Administrator accounts cannot be removed here.';\n end if;\n -- Permanently deleting a member supersedes reversible Restore/Remove.\n if exists(select 1 from private.dic_admin_account_delete_operations\n   where target_id=p_member_id and phase<>'completed') then\n  raise exception using errcode='23514',message='Permanent deletion is underway; finish it before changing access.';\n end if;\n select * into m from private.beta_members where owner_id=p_member_id for update;\n if not found or m.admitted_at is null then\n  raise exception using errcode='22023',message='Only previously admitted members can be changed.';\n end if;\n if p_enabled and not exists(select 1 from auth.users where id=p_member_id and email_confirmed_at is not null) then\n  raise exception using errcode='42501',message='Verified email required.';\n end if;\n if m.enabled=p_enabled then\n  return jsonb_build_object('ok',true,'enabled',p_enabled,'unchanged',true);\n end if;\n update private.beta_members set enabled=p_enabled\n where owner_id=p_member_id returning owner_id into found_member;\n insert into private.admin_access_events(actor_id,action,member_id)\n values(actor,case when p_enabled then 'restore_access' else 'remove_access' end,found_member);\n -- No auth.users deletion, note deletion, contribution identity reidentification,\n -- historical mutation, or implicit sign-out of already issued Supabase tokens.\n -- All member RPCs and RLS must recheck private.is_member().\n return jsonb_build_object('ok',true,'enabled',p_enabled);\nend $function$\n",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Private member/admin function checked for authorization, stale state and side effects"
+    },
+    {
+      "identity": "private.dic_admin_signup_requests(p_offset integer, p_limit integer)",
+      "live_md5": "663c13571f70bb29b6a4351e8e6a45eb",
+      "source_chars": 1411,
+      "security_definer": true,
+      "safe_config": [
+        "search_path=\"\""
+      ],
+      "complete_definition": "CREATE OR REPLACE FUNCTION private.dic_admin_signup_requests(p_offset integer DEFAULT 0, p_limit integer DEFAULT 50)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare total bigint; listing jsonb;\nbegin\n perform private.require_member();\n if auth.uid() is null or not private.is_admin() then\n  raise exception using errcode='42501', message='Administrator required.';\n end if;\n if p_offset is null or p_offset<0 or p_offset>1000000\n    or p_limit is null or p_limit<1 or p_limit>50 then\n  raise exception using errcode='22023',message='Invalid paging.';\n end if;\n select count(*) into total from private.beta_members m\n where m.admitted_at is null and m.signup_review_state='pending';\n select coalesce(jsonb_agg(v.record order by v.created_at,v.id),'[]'::jsonb) into listing\n from (select m.owner_id as id,u.created_at,\n   jsonb_build_object(\n    'id',m.owner_id,'email',left(coalesce(u.email,''),254),\n    'created_at',u.created_at,'email_verified',u.email_confirmed_at is not null,\n    'review_state',m.signup_review_state\n   ) as record\n   from private.beta_members m join auth.users u on u.id=m.owner_id\n   where m.admitted_at is null and m.signup_review_state='pending'\n   order by u.created_at,m.owner_id limit p_limit offset p_offset) v;\n return jsonb_build_object('total',total,'offset',p_offset,'items',coalesce(listing,'[]'::jsonb));\nend $function$\n",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Private member/admin function checked for authorization, stale state and side effects"
+    },
+    {
+      "identity": "private.handle_new_auth_user()",
+      "live_md5": "ba4f31790060a75e074148034f26dfbe",
+      "source_chars": 372,
+      "security_definer": true,
+      "safe_config": [
+        "search_path=\"\""
+      ],
+      "complete_definition": "CREATE OR REPLACE FUNCTION private.handle_new_auth_user()\n RETURNS trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n  insert into public.account_preferences(owner_id) values(new.id);\n  insert into private.beta_members(owner_id) values(new.id);\n  insert into private.contributors(owner_id) values(new.id);\n  return new;\nend $function$\n",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Private member/admin function checked for authorization, stale state and side effects"
+    },
+    {
+      "identity": "private.is_admin()",
+      "live_md5": "396d3e8e29dbd4550ec7ac26b7589a63",
+      "source_chars": 264,
+      "security_definer": true,
+      "safe_config": [
+        "search_path=\"\""
+      ],
+      "complete_definition": "CREATE OR REPLACE FUNCTION private.is_admin()\n RETURNS boolean\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\n  select private.is_member() and exists(select 1 from private.app_admins a where a.owner_id=(select auth.uid()));\n$function$\n",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Private member/admin function checked for authorization, stale state and side effects"
+    },
+    {
+      "identity": "private.is_member()",
+      "live_md5": "e406adb7ba7c86dcb000cb089b2693d1",
+      "source_chars": 311,
+      "security_definer": true,
+      "safe_config": [
+        "search_path=\"\""
+      ],
+      "complete_definition": "CREATE OR REPLACE FUNCTION private.is_member()\n RETURNS boolean\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\n  SELECT EXISTS(\n    SELECT 1 FROM private.beta_members m\n    WHERE m.owner_id=(SELECT auth.uid())\n      AND m.enabled\n      AND m.admitted_at IS NOT NULL\n  );\n$function$\n",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Private member/admin function checked for authorization, stale state and side effects"
+    },
+    {
+      "identity": "private.require_member()",
+      "live_md5": "27ff3a2a7fcf231171778a2d584b1851",
+      "source_chars": 347,
+      "security_definer": true,
+      "safe_config": [
+        "search_path=\"\""
+      ],
+      "complete_definition": "CREATE OR REPLACE FUNCTION private.require_member()\n RETURNS uuid\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare u uuid:=auth.uid();\nbegin\n if u is null or not private.is_member() then raise exception using errcode='42501',message='An admitted beta account is required.'; end if;\n return u;\nend $function$\n",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Private member/admin function checked for authorization, stale state and side effects"
+    },
+    {
+      "identity": "public.dic_admin_review_signup(p_member_id uuid, p_action text, p_expected_state text)",
+      "live_md5": "ebfec67f4da9cf3adc0d3e3431f2a295",
+      "source_chars": 295,
+      "security_definer": false,
+      "safe_config": [
+        "search_path=\"\""
+      ],
+      "complete_definition": "CREATE OR REPLACE FUNCTION public.dic_admin_review_signup(p_member_id uuid, p_action text, p_expected_state text DEFAULT 'pending'::text)\n RETURNS jsonb\n LANGUAGE sql\n SET search_path TO ''\nAS $function$\n select private.dic_admin_review_signup(p_member_id,p_action,p_expected_state);\n$function$\n",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Wrapper/preflight checked for member/admin gate"
+    },
+    {
+      "identity": "public.dic_admin_set_member_access(p_member_id uuid, p_enabled boolean)",
+      "live_md5": "67ea2ae8b4603b266e910bc8f6ff7240",
+      "source_chars": 244,
+      "security_definer": false,
+      "safe_config": [
+        "search_path=\"\""
+      ],
+      "complete_definition": "CREATE OR REPLACE FUNCTION public.dic_admin_set_member_access(p_member_id uuid, p_enabled boolean)\n RETURNS jsonb\n LANGUAGE sql\n SET search_path TO ''\nAS $function$\n select private.dic_admin_set_member_access(p_member_id,p_enabled);\n$function$\n",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Wrapper/preflight checked for member/admin gate"
+    },
+    {
+      "identity": "public.dic_admin_signup_requests(p_offset integer, p_limit integer)",
+      "live_md5": "ab3a82cfe5d926fa485c39b153aa701e",
+      "source_chars": 262,
+      "security_definer": false,
+      "safe_config": [
+        "search_path=\"\""
+      ],
+      "complete_definition": "CREATE OR REPLACE FUNCTION public.dic_admin_signup_requests(p_offset integer DEFAULT 0, p_limit integer DEFAULT 50)\n RETURNS jsonb\n LANGUAGE sql\n STABLE\n SET search_path TO ''\nAS $function$\n select private.dic_admin_signup_requests(p_offset,p_limit);\n$function$\n",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Wrapper/preflight checked for member/admin gate"
+    },
+    {
+      "identity": "public.dic_preview_preflight(p_cached boolean)",
+      "live_md5": "3fe0716484f4d97faa43f49917a921e4",
+      "source_chars": 2079,
+      "security_definer": true,
+      "safe_config": [
+        "search_path=\"\""
+      ],
+      "complete_definition": "CREATE OR REPLACE FUNCTION public.dic_preview_preflight(p_cached boolean DEFAULT false)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare me uuid:=auth.uid(); rec private.dic_url_preview_attempts; clock timestamptz:=now(); ticket uuid;\nbegin\n if me is null or auth.role() is distinct from 'authenticated' or not private.is_member() then\n  return jsonb_build_object('allowed',false,'reason','admitted_member_required');\n end if;\n if not exists(select 1 from auth.users u where u.id=me and u.email_confirmed_at is not null) then\n  return jsonb_build_object('allowed',false,'reason','verify_email');\n end if;\n if p_cached is null then\n  return jsonb_build_object('allowed',false,'reason','invalid_cached_flag');\n end if;\n insert into private.dic_url_preview_attempts(owner_id,window_started_at,last_attempt_at,attempts)\n values(me,clock,clock-interval '1 minute',0) on conflict(owner_id) do nothing;\n select * into strict rec from private.dic_url_preview_attempts where owner_id=me for update;\n if rec.window_started_at<clock-interval '24 hours' then\n  update private.dic_url_preview_attempts\n    set window_started_at=clock,attempts=0,preview_ticket=null,preview_ticket_at=null\n    where owner_id=me;\n  rec.attempts:=0;\n end if;\n -- A cached public result consumes cooldown but never a daily retrieval claim.\n if not p_cached and rec.attempts>=12 then\n  return jsonb_build_object('allowed',false,'reason','daily_preview_limit');\n end if;\n if rec.last_attempt_at>clock-interval '30 seconds' then\n  return jsonb_build_object('allowed',false,'reason','preview_cooldown');\n end if;\n if p_cached then\n  update private.dic_url_preview_attempts\n    set last_attempt_at=clock,preview_ticket=null,preview_ticket_at=null where owner_id=me;\n  return jsonb_build_object('allowed',true,'cached',true);\n end if;\n ticket:=gen_random_uuid();\n update private.dic_url_preview_attempts\n  set last_attempt_at=clock,preview_ticket=ticket,preview_ticket_at=clock where owner_id=me;\n return jsonb_build_object('allowed',true,'ticket',ticket);\nend $function$\n",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Wrapper/preflight checked for member/admin gate"
+    }
+  ],
+  "auth_trigger": [
+    {
+      "identity": "auth.users/dic_auth_user_created",
+      "complete_definition": "CREATE TRIGGER dic_auth_user_created AFTER INSERT ON auth.users FOR EACH ROW EXECUTE FUNCTION private.handle_new_auth_user()",
+      "ddl_md5": "2d76ca52f72e405dcd11190278c6a40b",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "New auth.user creates disabled beta membership using false default; admission not implicit"
+    }
+  ],
+  "rls_policies": [
+    {
+      "identity": "private.admin_access_events/no_client_access",
+      "command": "*",
+      "permissive": true,
+      "using_sql": "false",
+      "with_check_sql": "false",
+      "expression_md5": "c9b5694b43a3c9f06fce7b675505326c",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Explicit false direct client policy"
+    },
+    {
+      "identity": "private.admin_content_edits/no_direct_user_content_edits",
+      "command": "*",
+      "permissive": true,
+      "using_sql": "false",
+      "with_check_sql": "false",
+      "expression_md5": "c9b5694b43a3c9f06fce7b675505326c",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Explicit false direct client policy"
+    },
+    {
+      "identity": "private.app_admins/no_client_access",
+      "command": "*",
+      "permissive": true,
+      "using_sql": "false",
+      "with_check_sql": "false",
+      "expression_md5": "c9b5694b43a3c9f06fce7b675505326c",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Explicit false direct client policy"
+    },
+    {
+      "identity": "private.backup_runs/no_client_access",
+      "command": "*",
+      "permissive": true,
+      "using_sql": "false",
+      "with_check_sql": "false",
+      "expression_md5": "c9b5694b43a3c9f06fce7b675505326c",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Explicit false direct client policy"
+    },
+    {
+      "identity": "private.beta_members/no_client_access",
+      "command": "*",
+      "permissive": true,
+      "using_sql": "false",
+      "with_check_sql": "false",
+      "expression_md5": "c9b5694b43a3c9f06fce7b675505326c",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Explicit false direct client policy"
+    },
+    {
+      "identity": "private.community_quality_checks/no_client_access",
+      "command": "*",
+      "permissive": true,
+      "using_sql": "false",
+      "with_check_sql": "false",
+      "expression_md5": "c9b5694b43a3c9f06fce7b675505326c",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Explicit false direct client policy"
+    },
+    {
+      "identity": "private.contribution_links/no_client_access",
+      "command": "*",
+      "permissive": true,
+      "using_sql": "false",
+      "with_check_sql": "false",
+      "expression_md5": "c9b5694b43a3c9f06fce7b675505326c",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Explicit false direct client policy"
+    },
+    {
+      "identity": "private.contributors/no_client_access",
+      "command": "*",
+      "permissive": true,
+      "using_sql": "false",
+      "with_check_sql": "false",
+      "expression_md5": "c9b5694b43a3c9f06fce7b675505326c",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Explicit false direct client policy"
+    },
+    {
+      "identity": "private.dic_roaster_aliases/no_client_access",
+      "command": "*",
+      "permissive": true,
+      "using_sql": "false",
+      "with_check_sql": "false",
+      "expression_md5": "c9b5694b43a3c9f06fce7b675505326c",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Explicit false direct client policy"
+    },
+    {
+      "identity": "private.dic_roaster_directory/no_client_access",
+      "command": "*",
+      "permissive": true,
+      "using_sql": "false",
+      "with_check_sql": "false",
+      "expression_md5": "c9b5694b43a3c9f06fce7b675505326c",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Explicit false direct client policy"
+    },
+    {
+      "identity": "private.dic_url_preview_attempts/no_client_access",
+      "command": "*",
+      "permissive": true,
+      "using_sql": "false",
+      "with_check_sql": "false",
+      "expression_md5": "c9b5694b43a3c9f06fce7b675505326c",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Explicit false direct client policy"
+    },
+    {
+      "identity": "private.import_batches/no_client_access",
+      "command": "*",
+      "permissive": true,
+      "using_sql": "false",
+      "with_check_sql": "false",
+      "expression_md5": "c9b5694b43a3c9f06fce7b675505326c",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Explicit false direct client policy"
+    },
+    {
+      "identity": "private.import_control/no_client_access",
+      "command": "*",
+      "permissive": true,
+      "using_sql": "false",
+      "with_check_sql": "false",
+      "expression_md5": "c9b5694b43a3c9f06fce7b675505326c",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Explicit false direct client policy"
+    },
+    {
+      "identity": "private.mutation_receipts/no_client_access",
+      "command": "*",
+      "permissive": true,
+      "using_sql": "false",
+      "with_check_sql": "false",
+      "expression_md5": "c9b5694b43a3c9f06fce7b675505326c",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Explicit false direct client policy"
+    },
+    {
+      "identity": "private.shot_audit/no_client_access",
+      "command": "*",
+      "permissive": true,
+      "using_sql": "false",
+      "with_check_sql": "false",
+      "expression_md5": "c9b5694b43a3c9f06fce7b675505326c",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Explicit false direct client policy"
+    },
+    {
+      "identity": "public.account_preferences/owner_read",
+      "command": "r",
+      "permissive": true,
+      "using_sql": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "with_check_sql": "",
+      "expression_md5": "a323ef4f26f812aace97016e5671ecf1",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Direct private.is_member() membership check in USING or CHECK"
+    },
+    {
+      "identity": "public.account_preferences/owner_update",
+      "command": "w",
+      "permissive": true,
+      "using_sql": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "with_check_sql": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "expression_md5": "6d9e5de8c51143dfab86c02839464278",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Direct private.is_member() membership check in USING or CHECK"
+    },
+    {
+      "identity": "public.admin_reviews/review_read",
+      "command": "r",
+      "permissive": true,
+      "using_sql": "( SELECT private.is_admin() AS is_admin)",
+      "with_check_sql": "",
+      "expression_md5": "56fd17a1e25a7fef61599a6f7cb6e972",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Admin transitive admission guard"
+    },
+    {
+      "identity": "public.bags/owner_read",
+      "command": "r",
+      "permissive": true,
+      "using_sql": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "with_check_sql": "",
+      "expression_md5": "a323ef4f26f812aace97016e5671ecf1",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Direct private.is_member() membership check in USING or CHECK"
+    },
+    {
+      "identity": "public.basket_versions/owner_read",
+      "command": "r",
+      "permissive": true,
+      "using_sql": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "with_check_sql": "",
+      "expression_md5": "a323ef4f26f812aace97016e5671ecf1",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Direct private.is_member() membership check in USING or CHECK"
+    },
+    {
+      "identity": "public.baskets/owner_read",
+      "command": "r",
+      "permissive": true,
+      "using_sql": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "with_check_sql": "",
+      "expression_md5": "a323ef4f26f812aace97016e5671ecf1",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Direct private.is_member() membership check in USING or CHECK"
+    },
+    {
+      "identity": "public.coffee_groups/group_read",
+      "command": "r",
+      "permissive": true,
+      "using_sql": "(( SELECT private.is_member() AS is_member) AND (EXISTS ( SELECT 1\n   FROM coffees c\n  WHERE ((c.group_id = coffee_groups.id) AND (c.verification_state = 'verified'::text)))))",
+      "with_check_sql": "",
+      "expression_md5": "07c62be5936063a5253a9e43a2be0e9a",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Direct private.is_member() membership check in USING or CHECK"
+    },
+    {
+      "identity": "public.coffee_sources/source_read",
+      "command": "r",
+      "permissive": true,
+      "using_sql": "(( SELECT private.is_member() AS is_member) AND (EXISTS ( SELECT 1\n   FROM coffees c\n  WHERE ((c.id = coffee_sources.coffee_id) AND (c.verification_state = 'verified'::text)))))",
+      "with_check_sql": "",
+      "expression_md5": "221993e3e0ff91c9c144d2f4e308a1f3",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Direct private.is_member() membership check in USING or CHECK"
+    },
+    {
+      "identity": "public.coffee_submissions/submission_insert",
+      "command": "a",
+      "permissive": true,
+      "using_sql": "",
+      "with_check_sql": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)) AND ((canonical_coffee_id IS NULL) OR (EXISTS ( SELECT 1\n   FROM coffees c\n  WHERE ((c.id = coffee_submissions.canonical_coffee_id) AND (c.verification_state = 'verified'::text))))))",
+      "expression_md5": "f10ca8e902c511b9c88ab0752e583274",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Direct private.is_member() membership check in USING or CHECK"
+    },
+    {
+      "identity": "public.coffee_submissions/submission_read",
+      "command": "r",
+      "permissive": true,
+      "using_sql": "(( SELECT private.is_member() AS is_member) AND ((owner_id = ( SELECT auth.uid() AS uid)) OR ( SELECT private.is_admin() AS is_admin)))",
+      "with_check_sql": "",
+      "expression_md5": "196671f0a8416edd3ec1d9af1824892e",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Direct private.is_member() membership check in USING or CHECK"
+    },
+    {
+      "identity": "public.coffees/coffee_read",
+      "command": "r",
+      "permissive": true,
+      "using_sql": "(( SELECT private.is_member() AS is_member) AND ((verification_state = 'verified'::text) OR ( SELECT private.is_admin() AS is_admin)))",
+      "with_check_sql": "",
+      "expression_md5": "f6657902444247c36dc10338c0020a21",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Direct private.is_member() membership check in USING or CHECK"
+    },
+    {
+      "identity": "public.community_shots/community_read",
+      "command": "r",
+      "permissive": true,
+      "using_sql": "(( SELECT private.is_member() AS is_member) AND (quality_state = 'eligible'::text) AND (EXISTS ( SELECT 1\n   FROM coffees c\n  WHERE ((c.id = community_shots.coffee_id) AND (c.verification_state = 'verified'::text)))))",
+      "with_check_sql": "",
+      "expression_md5": "2eb49615841a085a7cf9cd959fa9a0fb",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Direct private.is_member() membership check in USING or CHECK"
+    },
+    {
+      "identity": "public.grinder_calibrations/owner_read",
+      "command": "r",
+      "permissive": true,
+      "using_sql": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "with_check_sql": "",
+      "expression_md5": "a323ef4f26f812aace97016e5671ecf1",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Direct private.is_member() membership check in USING or CHECK"
+    },
+    {
+      "identity": "public.library_entries/library_read",
+      "command": "r",
+      "permissive": true,
+      "using_sql": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "with_check_sql": "",
+      "expression_md5": "a323ef4f26f812aace97016e5671ecf1",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Direct private.is_member() membership check in USING or CHECK"
+    },
+    {
+      "identity": "public.personal_recipe_families/owner_read",
+      "command": "r",
+      "permissive": true,
+      "using_sql": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "with_check_sql": "",
+      "expression_md5": "a323ef4f26f812aace97016e5671ecf1",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Direct private.is_member() membership check in USING or CHECK"
+    },
+    {
+      "identity": "public.recipe_families/family_read",
+      "command": "r",
+      "permissive": true,
+      "using_sql": "(( SELECT private.is_member() AS is_member) AND (EXISTS ( SELECT 1\n   FROM coffees c\n  WHERE ((c.id = recipe_families.coffee_id) AND (c.verification_state = 'verified'::text)))))",
+      "with_check_sql": "",
+      "expression_md5": "0308725ecf0fc7986bcdc8fca57093f3",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Direct private.is_member() membership check in USING or CHECK"
+    },
+    {
+      "identity": "public.recipe_preferences/owner_read",
+      "command": "r",
+      "permissive": true,
+      "using_sql": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "with_check_sql": "",
+      "expression_md5": "a323ef4f26f812aace97016e5671ecf1",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Direct private.is_member() membership check in USING or CHECK"
+    },
+    {
+      "identity": "public.setup_preferences/owner_read",
+      "command": "r",
+      "permissive": true,
+      "using_sql": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "with_check_sql": "",
+      "expression_md5": "a323ef4f26f812aace97016e5671ecf1",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Direct private.is_member() membership check in USING or CHECK"
+    },
+    {
+      "identity": "public.setup_versions/owner_read",
+      "command": "r",
+      "permissive": true,
+      "using_sql": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "with_check_sql": "",
+      "expression_md5": "a323ef4f26f812aace97016e5671ecf1",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Direct private.is_member() membership check in USING or CHECK"
+    },
+    {
+      "identity": "public.setups/owner_read",
+      "command": "r",
+      "permissive": true,
+      "using_sql": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "with_check_sql": "",
+      "expression_md5": "a323ef4f26f812aace97016e5671ecf1",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Direct private.is_member() membership check in USING or CHECK"
+    },
+    {
+      "identity": "public.shot_notes/owner_read",
+      "command": "r",
+      "permissive": true,
+      "using_sql": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "with_check_sql": "",
+      "expression_md5": "a323ef4f26f812aace97016e5671ecf1",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Direct private.is_member() membership check in USING or CHECK"
+    },
+    {
+      "identity": "public.shots/owner_read",
+      "command": "r",
+      "permissive": true,
+      "using_sql": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "with_check_sql": "",
+      "expression_md5": "a323ef4f26f812aace97016e5671ecf1",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Direct private.is_member() membership check in USING or CHECK"
+    },
+    {
+      "identity": "public.workspace_coffees/owner_read",
+      "command": "r",
+      "permissive": true,
+      "using_sql": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "with_check_sql": "",
+      "expression_md5": "a323ef4f26f812aace97016e5671ecf1",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Direct private.is_member() membership check in USING or CHECK"
+    },
+    {
+      "identity": "public.workspace_state/owner_read",
+      "command": "r",
+      "permissive": true,
+      "using_sql": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "with_check_sql": "",
+      "expression_md5": "a323ef4f26f812aace97016e5671ecf1",
+      "reviewed_range": "1-EOF",
+      "review_verdict": "Direct private.is_member() membership check in USING or CHECK"
+    }
+  ],
+  "review_counts": {
+    "functions": 11,
+    "trigger": 1,
+    "policies": 39,
+    "policy_groups": {
+      "private_explicit_deny": 15,
+      "public_member_gate": 23,
+      "public_admin_only": 1
+    },
+    "full_function_source_chars": 10012
+  },
+  "post_migration_semantic_checks": {
+    "member_both_flags": true,
+    "admin_transitively_member": true,
+    "signup_member_admin_and_email": true,
+    "restoration_prior_admission": true,
+    "new_user_beta_member": true,
+    "cached_null_precedes_write": true
+  },
+  "member_check_constraint": {
+    "name": "beta_members_enabled_requires_admission",
+    "definition": "CHECK (NOT enabled OR admitted_at IS NOT NULL)",
+    "validated": true
+  },
+  "member_aggregate": {
+    "total": 11,
+    "enabled_unadmitted": 0,
+    "pending_unsafe": 0,
+    "rejected_enabled": 0,
+    "enabled_admitted": 5,
+    "disabled_admitted": 6,
+    "source": "read-only aggregate in this run; no member identities selected"
+  },
+  "privileges": {
+    "source": "eight role/schema rows examined in current read-only query",
+    "anon_private_schema_usage": false,
+    "anon_admin_review_rpc_execute": false,
+    "authenticated_private_require_member_execute": false,
+    "authenticated_public_admin_review_rpc_execute": true,
+    "actual_user_role_admin_gate_required": true
+  },
+  "stored_migrations_at_run": 64,
+  "edge_functions_at_run": 3,
+  "semantics": "Current new-user trigger has no auto-admission; private.is_member requires enabled and admitted_at, admin gate inherits member; every public RLS policy checks one of those; admin review requires admitted existing admin and verified email for approval, access restore requires admission; preview explicit null guard precedes write. No reproduced new bypass; static catalog is not live signed-in acceptance.",
+  "unknown": "Hosted GoTrue/JWT/PostgREST source/config and disk free headroom; compiled internals; #96 genuine signed-in access post-release not rerun.",
+  "new_confirmed_defects": 0,
+  "provider_writes": 0,
+  "app_fix": 0,
+  "queue_promotions": 0,
+  "baseline_complete": false,
+  "next_exact_cursor": "Stored migration #65 if new; else first changed/unreviewed provider definition or newly accessible hosted Auth/API configuration in #96 coordination"
+}

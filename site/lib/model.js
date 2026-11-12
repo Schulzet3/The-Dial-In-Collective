@@ -16,7 +16,7 @@ export function selectedBasket(s,coffeeId,version=activeVersion(s)) {
  const b=coffeeState(s,coffeeId).basketId;
  return version.baskets.find(x=>x.id===b&&!x.archived)||version.baskets.find(x=>x.id===version.defaultBasketId&&!x.archived)||version.baskets.find(x=>!x.archived);
 }
-export function feedMode(v) {return v?.advanced.slowFeed ? (v.slowFeed?'slow':'standard') : 'standard';}
+export function feedMode(v) {return v?.advanced?.slowFeed ? (v.slowFeed?'slow':'standard') : 'standard';}
 export function logAudit(s,action,detail) {s.audit.push({id:newId('audit'),at:now(),action,detail});}
 export function createSetup(s,input) {
  const dose=num(input.basketDoseG), lo=num(input.grinderMin), hi=num(input.grinderMax);
@@ -48,6 +48,8 @@ export function reviseSetup(s,input) {
  setup.name=input.name.trim();
  for(const k of ['machine','grinder','burrs'])v[k]=input[k]?.trim()||'';
  v.tempUnit=input.tempUnit||'F';
+ // Missing optional legacy controls default off until a member explicitly enables them.
+ v.advanced ||= {temperature:false,slowFeed:false,baskets:false};
  for(const k of ['temperature','slowFeed','baskets']) {
   const enabled=!!input[k];
   if(k==='slowFeed' && enabled!==v.advanced[k])v.slowFeed=false;
@@ -70,7 +72,7 @@ export function addBasket(s,input) {
  const v=activeVersion(s);const dose=num(input.doseG);
  if(dose==null||dose<5||dose>40)throw new Error('Enter a Basket Dose between 5 and 40 g.');
  const b={id:newId('basket'),name:input.name?.trim()||`${dose} g basket`,doseG:dose,archived:false,createdAt:now()};
- v.baskets.push(b);v.advanced.baskets=true;return b;
+ v.baskets.push(b);v.advanced ||= {temperature:false,slowFeed:false,baskets:false};v.advanced.baskets=true;return b;
 }
 export function correctBasketDose(s,id,value) {
  const v=activeVersion(s),b=v.baskets.find(x=>x.id===id),dose=num(value);
@@ -159,11 +161,40 @@ export function hasLocalSuccess(s,coffeeId,style) {
  // A historical success is usable for the Coffee overview only when its
  // five original ratings AND actual measurements meet existing Log Shot bounds.
  // Keep unloggable imported originals and their green History badge untouched.
- const physical=sh=>['doseG','yieldG','timeS'].every(field=>{
-  const [lo,hi]=CONFIG.bounds[field],value=sh[field];
-  return typeof value==='number'&&Number.isFinite(value)&&value>=lo&&value<=hi;
- });
- const v=activeVersion(s);return !!v&&s.shots.some(sh=>!sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&physical(sh));
+ const v=activeVersion(s);
+ const physical=sh=>{
+  const measured=['doseG','yieldG','timeS'].every(field=>{
+   const [lo,hi]=CONFIG.bounds[field],value=sh[field];
+   return typeof value==='number'&&Number.isFinite(value)&&value>=lo&&value<=hi;
+  });
+  if(!measured||typeof sh.grindSetting!=='number'||!Number.isFinite(sh.grindSetting)||
+     sh.grindSetting<0)return false;
+  // Original measured espresso ranges govern historical success: an old
+  // calibrated dial is not a present-scale grind recommendation. Keep every
+  // original shot/green History badge intact, including rejected imports.
+  const old=sh.snapshot;
+  const calibration=v?.calibrations?.find(c=>c.id===sh.calibrationId);
+  const oldMin=Number.isFinite(old?.grinderMin)?old.grinderMin:
+   Number.isFinite(calibration?.min)?calibration.min:null;
+  const oldMax=Number.isFinite(old?.grinderMax)?old.grinderMax:
+   Number.isFinite(calibration?.max)?calibration.max:null;
+  // Unknown historical scales retain the existing conservative current-range
+  // fallback, never fabricate original bounds or transfer a previous dial.
+  const min=oldMin??(Number.isFinite(v?.grinderMin)?v.grinderMin:null);
+  const max=oldMax??(Number.isFinite(v?.grinderMax)?v.grinderMax:null);
+  if((min!=null&&max!=null&&max<=min)||
+     (min!=null&&sh.grindSetting<min)||
+     (max!=null&&sh.grindSetting>max))return false;
+  // An absent optional temperature is allowed; invalid recorded values
+  // remain visible in original private History but cannot prove a recipe.
+  if(sh.tempC!=null){
+   const [lo,hi]=CONFIG.bounds.tempC;
+   if(typeof sh.tempC!=='number'||!Number.isFinite(sh.tempC)||
+      sh.tempC<lo||sh.tempC>hi)return false;
+  }
+  return true;
+ };
+ return !!v&&s.shots.some(sh=>!sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&physical(sh));
 }
 export function validateShot(d,{allowLegacyCustom=false}={}) {
  const errors=[];

@@ -2379,7 +2379,7 @@
       "decision": "All future Auth email/password signups enter pending non-admitted state, require email verification and explicit server-authorized admin Approve or Reject. Preserve already admitted users and their Auth/personal/Community data. Entire old invite-code issuance/redemption/UI and used/unused token history must be removed only in future authorized provider migration. Admin has an attention queue/badge and optional permissioned browser notifications while open; off-app delivery requires separate actual verification.",
       "scope": "Issue #1756 Auth/signup/DB migration, Admin review/notifications, invitation-code cleanup, tests and READY only; no publication or production mutation by this build instruction.",
       "supersedes": "Invitation-only beta signup/legacy code issuance/redemption/deletion parts of ACCESS-PERMANENT-20261018-01, ACCESS-SINGLE-USE-20261018 and PILOT-INVITE-ONLY-TECHNICAL-20261018; preserves owner/admin account permanence and all other locked features.",
-      "delivery": "SOURCE_READY_NOT_DEPLOYED",
+      "delivery": "DEPLOYED_VERIFIED",
       "refinement_20261110": "Email-verified pending signup approvals only are actionable; also pending/conflicting coffees and incomplete deletions. Signed-in Admin main Settings gear/Admin Dashboard entry displays non-sensitive read-only badge. Preserve role checks, private data, offline and stale-session boundaries; no push/email or production publication.",
       "verified_source": {
         "pr": 1776,
@@ -2397,7 +2397,9 @@
           42758790069,
           42758789992
         ],
-        "production": "NOT_DEPLOYED"
+        "production": "DIC-20261110-READY4-28 | Git a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0 | Netlify 6af2ad72c2aa765f588abc75 READY/current 2026-11-10T05:37:05.508Z",
+        "release_receipt": "docs/releases/2026-11-10_READY4_DEPLOYED_VERIFIED.md",
+        "real_device_acceptance": "NOT_PERFORMED"
       }
     }
   ],
@@ -4859,7 +4861,7 @@
     "decision": "All future Auth email/password signups enter pending non-admitted state, require email verification and explicit server-authorized admin Approve or Reject. Preserve already admitted users and their Auth/personal/Community data. Entire old invite-code issuance/redemption/UI and used/unused token history must be removed only in future authorized provider migration. Admin has an attention queue/badge and optional permissioned browser notifications while open; off-app delivery requires separate actual verification.",
     "scope": "Issue #1756 Auth/signup/DB migration, Admin review/notifications, invitation-code cleanup, tests and READY only; no publication or production mutation by this build instruction.",
     "supersedes": "Invitation-only beta signup/legacy code issuance/redemption/deletion parts of ACCESS-PERMANENT-20261018-01, ACCESS-SINGLE-USE-20261018 and PILOT-INVITE-ONLY-TECHNICAL-20261018; preserves owner/admin account permanence and all other locked features.",
-    "delivery": "SOURCE_READY_NOT_DEPLOYED",
+    "delivery": "DEPLOYED_VERIFIED",
     "refinement_20261110": "Email-verified pending signup approvals only are actionable; also pending/conflicting coffees and incomplete deletions. Signed-in Admin main Settings gear/Admin Dashboard entry displays non-sensitive read-only badge. Preserve role checks, private data, offline and stale-session boundaries; no push/email or production publication.",
     "verified_source": {
       "pr": 1776,
@@ -4877,7 +4879,31 @@
         42758790069,
         42758789992
       ],
-      "production": "NOT_DEPLOYED"
+      "production": "DIC-20261110-READY4-28 | Git a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0 | Netlify 6af2ad72c2aa765f588abc75 READY/current 2026-11-10T05:37:05.508Z",
+      "release_receipt": "docs/releases/2026-11-10_READY4_DEPLOYED_VERIFIED.md",
+      "real_device_acceptance": "NOT_PERFORMED"
+    }
+  },
+  "current_owner_admin_web_push_20261110": {
+    "id": "ACCESS-ADMIN-HOMESCREEN-WEB-PUSH-20261110",
+    "status": "Locked",
+    "date": "2026-11-10",
+    "issue": 1938,
+    "title": "Permissioned off-screen push for actionable administrator tasks",
+    "owner_source": "Owner explicitly requested push notifications even outside the Admin screen on Nov 10, 2026.",
+    "decision": "Notify opted-in admitted administrators on iOS Home Screen when new email-verified signup approvals, pending/conflicting coffees or unfinished account deletions require action. Preserve in-app badges. Deliver generic, content-free Web Push without member identity, notes or shot data; administrator Auth revalidated for registration, live admin role rechecked for every scheduled delivery, no alerts for unverified signups. Offer device opt-out and remove stale subscriptions.",
+    "scope": "Source-only Netlify scheduled sender, verified Admin subscription API, strict VAPID endpoint validation, service-only Supabase SQL table/aggregate, PWA worker/client, tests and queue; separate owner Publish and verified runtime secrets required for delivery.",
+    "supersedes": "Only the previous absence of off-app delivery in #1756; preserves all signup approval, Auth, admin isolation, offline/Community, source-isolation and publication gates.",
+    "source_status": "TESTING",
+    "production_status": "NOT_DEPLOYED",
+    "provider_limit": "Netlify Free cannot protect Functions-only VAPID secrets. Owner Nov11 authorized fixing/publishing #1938 with all READY; this scope-preserving implementation keeps generic Netlify 5-minute cron plus Admin API, and places P-256 VAPID key encryption in Supabase Vault with signing inside role-rechecked service-only Supabase Edge. No VAPID/private service key in Netlify, GitHub or browser. Live Edge/migration/Apple device delivery must be verified before DEPLOYED.",
+    "implementation_revision_20261112": {
+      "status": "OWNER_SCOPE_PRESERVING_IMPLEMENTATION",
+      "owner_source": "Owner November 11, 2026, 'Publish #1938 and all queue items' and 'prioritize fixing #1938 ... published with the other items'",
+      "changes": "Netlify scheduled cron triggers a content-free Supabase Edge poll; Supabase Vault holds the VAPID private key encrypted, Supabase service credentials remain server-only. Edge independently verifies admitted administrator on manage and refreshes admitted admin set before notification; public cron is protected by rate-limited atomic SQL claim.",
+      "preserves": "All original ACCESS-ADMIN-HOMESCREEN-WEB-PUSH-20261110 Locked functionality and privacy, RLS, role checks, consent/opt-out, and single-use release gates.",
+      "source_status": "TESTED_PR_HEAD_NOT_DEPLOYED",
+      "device_status": "NOT_PERFORMED"
     }
   }
 }

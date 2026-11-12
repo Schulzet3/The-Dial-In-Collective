@@ -1,0 +1,899 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 145,
+  "project_ref": "azviqqejypsefzilgonr",
+  "scope": "Direct current provider full table definition components and 24-role-membership cross-boundary verification after owner-authorized READY4 release; no data rows, raw logs or secrets",
+  "source_development_parent_sha": "2433dd6e996529cbf99117bf54de7fdf742582b4",
+  "source_main_sha": "11e1e8c7c36dad488519476d8a969bb682915d31",
+  "source_release_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
+  "provider": "Supabase ACTIVE_HEALTHY PostgreSQL 17.11; 59 applied migrations and three ACTIVE JWT-required Edge functions independently checked this run",
+  "totals": {
+    "tables": 5,
+    "columns": 35,
+    "constraints": 18,
+    "indexes": 7,
+    "policies": 3,
+    "triggers": 1,
+    "source_chars": 9899
+  },
+  "objects": [
+    {
+      "object": "private.beta_members",
+      "provider_source_md5": "f3961d18bb93302eaf11da9fe1ba4a5e",
+      "provider_source_characters": 1506,
+      "source_1_based_range": [
+        1,
+        1506
+      ],
+      "source_complete": true,
+      "ddl_components": {
+        "rls": true,
+        "columns": [
+          {
+            "type": "uuid",
+            "column": "owner_id",
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "type": "boolean",
+            "column": "enabled",
+            "default": "false",
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "admitted_at",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "created_at",
+            "default": "now()",
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "type": "text",
+            "column": "signup_review_state",
+            "default": "'pending'::text",
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          }
+        ],
+        "indexes": [
+          {
+            "name": "beta_members_pkey",
+            "definition": "CREATE UNIQUE INDEX beta_members_pkey ON private.beta_members USING btree (owner_id)"
+          }
+        ],
+        "policies": [
+          {
+            "cmd": "*",
+            "name": "no_client_access",
+            "qual": "false",
+            "check": "false"
+          }
+        ],
+        "triggers": null,
+        "force_rls": false,
+        "anon_select": false,
+        "constraints": [
+          {
+            "name": "beta_members_owner_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "beta_members_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (owner_id)"
+          },
+          {
+            "name": "beta_members_signup_review_state_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (signup_review_state = ANY (ARRAY['pending'::text, 'approved'::text, 'rejected'::text]))"
+          }
+        ],
+        "authenticated_insert": false,
+        "authenticated_select": false,
+        "authenticated_update": false
+      },
+      "semantic_verdict": "REVIEWED_CURRENT_FULL_ACCESSIBLE_DEFINITION_NO_NEW_VERIFIED_DEFECT",
+      "assessment": "Reviewed all five columns, three validated constraints including approved/pending/rejected state but NO enabled=>admitted CHECK in live schema; owner-approved dev-only CHECK migration exists and remains deliberately unpublished. Owner primary key and auth.users CASCADE, RLS true, client operations denied by both grants and explicit false policy."
+    },
+    {
+      "object": "private.dic_admin_account_delete_operations",
+      "provider_source_md5": "068f194d2b90873575fa996b57fb518a",
+      "provider_source_characters": 2662,
+      "source_1_based_range": [
+        1,
+        2662
+      ],
+      "source_complete": true,
+      "ddl_components": {
+        "rls": true,
+        "columns": [
+          {
+            "type": "uuid",
+            "column": "id",
+            "default": "gen_random_uuid()",
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "type": "uuid",
+            "column": "actor_id",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "type": "uuid",
+            "column": "target_id",
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "type": "text",
+            "column": "community_mode",
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "type": "jsonb",
+            "column": "expected_impact",
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "type": "text",
+            "column": "phase",
+            "default": "'requested'::text",
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "type": "uuid[]",
+            "column": "contributor_ids",
+            "default": "'{}'::uuid[]",
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "type": "integer",
+            "column": "community_removed",
+            "default": "0",
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "requested_at",
+            "default": "now()",
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "prepared_at",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "completed_at",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          }
+        ],
+        "indexes": [
+          {
+            "name": "dic_admin_account_delete_one_active",
+            "definition": "CREATE UNIQUE INDEX dic_admin_account_delete_one_active ON private.dic_admin_account_delete_operations USING btree (target_id) WHERE (phase <> 'completed'::text)"
+          },
+          {
+            "name": "dic_admin_account_delete_operations_pkey",
+            "definition": "CREATE UNIQUE INDEX dic_admin_account_delete_operations_pkey ON private.dic_admin_account_delete_operations USING btree (id)"
+          }
+        ],
+        "policies": null,
+        "triggers": null,
+        "force_rls": false,
+        "anon_select": false,
+        "constraints": [
+          {
+            "name": "dic_admin_account_delete_operations_actor_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (actor_id) REFERENCES auth.users(id) ON DELETE SET NULL"
+          },
+          {
+            "name": "dic_admin_account_delete_operations_community_mode_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (community_mode = ANY (ARRAY['keep'::text, 'remove'::text]))"
+          },
+          {
+            "name": "dic_admin_account_delete_operations_phase_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (phase = ANY (ARRAY['requested'::text, 'prepared'::text, 'completed'::text]))"
+          },
+          {
+            "name": "dic_admin_account_delete_operations_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          }
+        ],
+        "authenticated_insert": false,
+        "authenticated_select": false,
+        "authenticated_update": false
+      },
+      "semantic_verdict": "REVIEWED_CURRENT_FULL_ACCESSIBLE_DEFINITION_NO_NEW_VERIFIED_DEFECT",
+      "assessment": "Reviewed 11 columns, four validated constraints, two indexes including active-target unique partial index. Actor FK ON DELETE SET NULL permits safe deletion retry; noncompleted target uniqueness, phase enumeration, no client grants and no client RLS policies. Internal prepare/finish function behavior separately source-reviewed in prior receipt; no personal rows inspected."
+    },
+    {
+      "object": "private.dic_admin_delete_receipts",
+      "provider_source_md5": "612e3cd068d9354f37967564d7414fc9",
+      "provider_source_characters": 1176,
+      "source_1_based_range": [
+        1,
+        1176
+      ],
+      "source_complete": true,
+      "ddl_components": {
+        "rls": true,
+        "columns": [
+          {
+            "type": "bigint",
+            "column": "id",
+            "default": null,
+            "identity": "a",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "type": "uuid",
+            "column": "actor_id",
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "type": "text",
+            "column": "record_kind",
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "type": "uuid",
+            "column": "record_id",
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "type": "jsonb",
+            "column": "impact",
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "deleted_at",
+            "default": "now()",
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          }
+        ],
+        "indexes": [
+          {
+            "name": "dic_admin_delete_receipts_pkey",
+            "definition": "CREATE UNIQUE INDEX dic_admin_delete_receipts_pkey ON private.dic_admin_delete_receipts USING btree (id)"
+          }
+        ],
+        "policies": null,
+        "triggers": null,
+        "force_rls": false,
+        "anon_select": false,
+        "constraints": [
+          {
+            "name": "dic_admin_delete_receipts_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          }
+        ],
+        "authenticated_insert": false,
+        "authenticated_select": false,
+        "authenticated_update": false
+      },
+      "semantic_verdict": "REVIEWED_CURRENT_FULL_ACCESSIBLE_DEFINITION_NO_NEW_VERIFIED_DEFECT",
+      "assessment": "Reviewed six columns including actor UUID NOT NULL, primary-key identity, no direct client privileges/policies. Retains deletion accountability; actor linkage has no FK in this table, not an automatically safe removal; preserve immutable receipts."
+    },
+    {
+      "object": "private.dic_signup_review_events",
+      "provider_source_md5": "6e23f6cfdca974b0c1df444a3cbe3ed7",
+      "provider_source_characters": 1679,
+      "source_1_based_range": [
+        1,
+        1679
+      ],
+      "source_complete": true,
+      "ddl_components": {
+        "rls": true,
+        "columns": [
+          {
+            "type": "bigint",
+            "column": "id",
+            "default": null,
+            "identity": "a",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "type": "uuid",
+            "column": "member_id",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "type": "uuid",
+            "column": "actor_id",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "type": "text",
+            "column": "action",
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "type": "text",
+            "column": "previous_state",
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "reviewed_at",
+            "default": "now()",
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          }
+        ],
+        "indexes": [
+          {
+            "name": "dic_signup_review_events_pkey",
+            "definition": "CREATE UNIQUE INDEX dic_signup_review_events_pkey ON private.dic_signup_review_events USING btree (id)"
+          }
+        ],
+        "policies": null,
+        "triggers": null,
+        "force_rls": false,
+        "anon_select": false,
+        "constraints": [
+          {
+            "name": "dic_signup_review_events_action_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (action = ANY (ARRAY['approve'::text, 'reject'::text]))"
+          },
+          {
+            "name": "dic_signup_review_events_actor_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (actor_id) REFERENCES auth.users(id) ON DELETE SET NULL"
+          },
+          {
+            "name": "dic_signup_review_events_member_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (member_id) REFERENCES auth.users(id) ON DELETE SET NULL"
+          },
+          {
+            "name": "dic_signup_review_events_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          }
+        ],
+        "authenticated_insert": false,
+        "authenticated_select": false,
+        "authenticated_update": false
+      },
+      "semantic_verdict": "REVIEWED_CURRENT_FULL_ACCESSIBLE_DEFINITION_NO_NEW_VERIFIED_DEFECT",
+      "assessment": "Reviewed six columns, four validated constraints including approve/reject enumeration and member/actor FKs ON DELETE SET NULL. Intentional audit-event retention after account removal, RLS without client policy and no direct client ACL."
+    },
+    {
+      "object": "public.account_preferences",
+      "provider_source_md5": "88b984e7a57e0bce89f048f9380c3df8",
+      "provider_source_characters": 2876,
+      "source_1_based_range": [
+        1,
+        2876
+      ],
+      "source_complete": true,
+      "ddl_components": {
+        "rls": true,
+        "columns": [
+          {
+            "type": "uuid",
+            "column": "owner_id",
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "type": "text",
+            "column": "theme",
+            "default": "'system'::text",
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "type": "text",
+            "column": "tasting_preferences",
+            "default": "''::text",
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "type": "bigint",
+            "column": "revision",
+            "default": "1",
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "created_at",
+            "default": "now()",
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "updated_at",
+            "default": "now()",
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "type": "uuid",
+            "column": "active_setup_id",
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          }
+        ],
+        "indexes": [
+          {
+            "name": "account_active_setup_idx",
+            "definition": "CREATE INDEX account_active_setup_idx ON public.account_preferences USING btree (owner_id, active_setup_id)"
+          },
+          {
+            "name": "account_preferences_pkey",
+            "definition": "CREATE UNIQUE INDEX account_preferences_pkey ON public.account_preferences USING btree (owner_id)"
+          }
+        ],
+        "policies": [
+          {
+            "cmd": "r",
+            "name": "owner_read",
+            "qual": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+            "check": null
+          },
+          {
+            "cmd": "w",
+            "name": "owner_update",
+            "qual": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+            "check": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))"
+          }
+        ],
+        "triggers": [
+          {
+            "name": "bump_revision",
+            "function": "private.bump_revision()",
+            "definition": "CREATE TRIGGER bump_revision BEFORE UPDATE ON public.account_preferences FOR EACH ROW EXECUTE FUNCTION private.bump_revision()"
+          }
+        ],
+        "force_rls": false,
+        "anon_select": false,
+        "constraints": [
+          {
+            "name": "account_active_setup_fk",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (owner_id, active_setup_id) REFERENCES setups(owner_id, id) DEFERRABLE INITIALLY DEFERRED"
+          },
+          {
+            "name": "account_preferences_owner_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "account_preferences_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (owner_id)"
+          },
+          {
+            "name": "account_preferences_revision_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (revision > 0)"
+          },
+          {
+            "name": "account_preferences_tasting_preferences_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (length(tasting_preferences) <= 4000)"
+          },
+          {
+            "name": "account_preferences_theme_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (theme = ANY (ARRAY['system'::text, 'light'::text, 'dark'::text]))"
+          }
+        ],
+        "authenticated_insert": false,
+        "authenticated_select": true,
+        "authenticated_update": false
+      },
+      "semantic_verdict": "REVIEWED_CURRENT_FULL_ACCESSIBLE_DEFINITION_NO_NEW_VERIFIED_DEFECT",
+      "assessment": "Reviewed seven columns, six validated constraints, two indexes, two owner-only RLS policies and revision trigger. Owner auth UID+private.is_member() gates read/write rows; authenticated SELECT grant but no direct UPDATE/INSERT grant, preserving RPC-mediated mutations and protected active setup integrity."
+    }
+  ],
+  "pg_auth_members": {
+    "records_total": 24,
+    "complete_source_records": [
+      {
+        "member_role": "authenticator",
+        "granted_role": "anon",
+        "grantor_role": "supabase_admin",
+        "admin_option": false,
+        "inherit_option": false,
+        "set_option": true,
+        "ordinal": 1,
+        "verdict": "BUILTIN_PROVIDER_ROLE_EDGE_REVALIDATED_NO_NEW_UNEXPECTED_CLIENT_ESCALATION"
+      },
+      {
+        "member_role": "authenticator",
+        "granted_role": "authenticated",
+        "grantor_role": "supabase_admin",
+        "admin_option": false,
+        "inherit_option": false,
+        "set_option": true,
+        "ordinal": 2,
+        "verdict": "BUILTIN_PROVIDER_ROLE_EDGE_REVALIDATED_NO_NEW_UNEXPECTED_CLIENT_ESCALATION"
+      },
+      {
+        "member_role": "authenticator",
+        "granted_role": "service_role",
+        "grantor_role": "supabase_admin",
+        "admin_option": false,
+        "inherit_option": false,
+        "set_option": true,
+        "ordinal": 3,
+        "verdict": "BUILTIN_PROVIDER_ROLE_EDGE_REVALIDATED_NO_NEW_UNEXPECTED_CLIENT_ESCALATION"
+      },
+      {
+        "member_role": "pg_monitor",
+        "granted_role": "pg_read_all_settings",
+        "grantor_role": "supabase_admin",
+        "admin_option": false,
+        "inherit_option": true,
+        "set_option": true,
+        "ordinal": 4,
+        "verdict": "BUILTIN_PROVIDER_ROLE_EDGE_REVALIDATED_NO_NEW_UNEXPECTED_CLIENT_ESCALATION"
+      },
+      {
+        "member_role": "pg_monitor",
+        "granted_role": "pg_read_all_stats",
+        "grantor_role": "supabase_admin",
+        "admin_option": false,
+        "inherit_option": true,
+        "set_option": true,
+        "ordinal": 5,
+        "verdict": "BUILTIN_PROVIDER_ROLE_EDGE_REVALIDATED_NO_NEW_UNEXPECTED_CLIENT_ESCALATION"
+      },
+      {
+        "member_role": "pg_monitor",
+        "granted_role": "pg_stat_scan_tables",
+        "grantor_role": "supabase_admin",
+        "admin_option": false,
+        "inherit_option": true,
+        "set_option": true,
+        "ordinal": 6,
+        "verdict": "BUILTIN_PROVIDER_ROLE_EDGE_REVALIDATED_NO_NEW_UNEXPECTED_CLIENT_ESCALATION"
+      },
+      {
+        "member_role": "postgres",
+        "granted_role": "anon",
+        "grantor_role": "supabase_admin",
+        "admin_option": true,
+        "inherit_option": true,
+        "set_option": true,
+        "ordinal": 7,
+        "verdict": "BUILTIN_PROVIDER_ROLE_EDGE_REVALIDATED_NO_NEW_UNEXPECTED_CLIENT_ESCALATION"
+      },
+      {
+        "member_role": "postgres",
+        "granted_role": "authenticated",
+        "grantor_role": "supabase_admin",
+        "admin_option": true,
+        "inherit_option": true,
+        "set_option": true,
+        "ordinal": 8,
+        "verdict": "BUILTIN_PROVIDER_ROLE_EDGE_REVALIDATED_NO_NEW_UNEXPECTED_CLIENT_ESCALATION"
+      },
+      {
+        "member_role": "postgres",
+        "granted_role": "authenticator",
+        "grantor_role": "supabase_admin",
+        "admin_option": true,
+        "inherit_option": true,
+        "set_option": true,
+        "ordinal": 9,
+        "verdict": "BUILTIN_PROVIDER_ROLE_EDGE_REVALIDATED_NO_NEW_UNEXPECTED_CLIENT_ESCALATION"
+      },
+      {
+        "member_role": "postgres",
+        "granted_role": "pg_create_subscription",
+        "grantor_role": "supabase_admin",
+        "admin_option": true,
+        "inherit_option": true,
+        "set_option": true,
+        "ordinal": 10,
+        "verdict": "BUILTIN_PROVIDER_ROLE_EDGE_REVALIDATED_NO_NEW_UNEXPECTED_CLIENT_ESCALATION"
+      },
+      {
+        "member_role": "postgres",
+        "granted_role": "pg_monitor",
+        "grantor_role": "supabase_admin",
+        "admin_option": true,
+        "inherit_option": true,
+        "set_option": true,
+        "ordinal": 11,
+        "verdict": "BUILTIN_PROVIDER_ROLE_EDGE_REVALIDATED_NO_NEW_UNEXPECTED_CLIENT_ESCALATION"
+      },
+      {
+        "member_role": "postgres",
+        "granted_role": "pg_read_all_data",
+        "grantor_role": "supabase_admin",
+        "admin_option": true,
+        "inherit_option": true,
+        "set_option": true,
+        "ordinal": 12,
+        "verdict": "BUILTIN_PROVIDER_ROLE_EDGE_REVALIDATED_NO_NEW_UNEXPECTED_CLIENT_ESCALATION"
+      },
+      {
+        "member_role": "postgres",
+        "granted_role": "pg_signal_backend",
+        "grantor_role": "supabase_admin",
+        "admin_option": true,
+        "inherit_option": true,
+        "set_option": true,
+        "ordinal": 13,
+        "verdict": "BUILTIN_PROVIDER_ROLE_EDGE_REVALIDATED_NO_NEW_UNEXPECTED_CLIENT_ESCALATION"
+      },
+      {
+        "member_role": "postgres",
+        "granted_role": "service_role",
+        "grantor_role": "supabase_admin",
+        "admin_option": true,
+        "inherit_option": true,
+        "set_option": true,
+        "ordinal": 14,
+        "verdict": "BUILTIN_PROVIDER_ROLE_EDGE_REVALIDATED_NO_NEW_UNEXPECTED_CLIENT_ESCALATION"
+      },
+      {
+        "member_role": "postgres",
+        "granted_role": "supabase_privileged_role",
+        "grantor_role": "supabase_admin",
+        "admin_option": false,
+        "inherit_option": true,
+        "set_option": true,
+        "ordinal": 15,
+        "verdict": "BUILTIN_PROVIDER_ROLE_EDGE_REVALIDATED_NO_NEW_UNEXPECTED_CLIENT_ESCALATION"
+      },
+      {
+        "member_role": "supabase_etl_admin",
+        "granted_role": "pg_monitor",
+        "grantor_role": "supabase_admin",
+        "admin_option": false,
+        "inherit_option": true,
+        "set_option": true,
+        "ordinal": 16,
+        "verdict": "BUILTIN_PROVIDER_ROLE_EDGE_REVALIDATED_NO_NEW_UNEXPECTED_CLIENT_ESCALATION"
+      },
+      {
+        "member_role": "supabase_etl_admin",
+        "granted_role": "pg_read_all_data",
+        "grantor_role": "supabase_admin",
+        "admin_option": false,
+        "inherit_option": true,
+        "set_option": true,
+        "ordinal": 17,
+        "verdict": "BUILTIN_PROVIDER_ROLE_EDGE_REVALIDATED_NO_NEW_UNEXPECTED_CLIENT_ESCALATION"
+      },
+      {
+        "member_role": "supabase_etl_admin",
+        "granted_role": "supabase_privileged_role",
+        "grantor_role": "supabase_admin",
+        "admin_option": false,
+        "inherit_option": true,
+        "set_option": true,
+        "ordinal": 18,
+        "verdict": "BUILTIN_PROVIDER_ROLE_EDGE_REVALIDATED_NO_NEW_UNEXPECTED_CLIENT_ESCALATION"
+      },
+      {
+        "member_role": "supabase_read_only_user",
+        "granted_role": "pg_monitor",
+        "grantor_role": "supabase_admin",
+        "admin_option": false,
+        "inherit_option": true,
+        "set_option": true,
+        "ordinal": 19,
+        "verdict": "BUILTIN_PROVIDER_ROLE_EDGE_REVALIDATED_NO_NEW_UNEXPECTED_CLIENT_ESCALATION"
+      },
+      {
+        "member_role": "supabase_read_only_user",
+        "granted_role": "pg_read_all_data",
+        "grantor_role": "supabase_admin",
+        "admin_option": false,
+        "inherit_option": true,
+        "set_option": true,
+        "ordinal": 20,
+        "verdict": "BUILTIN_PROVIDER_ROLE_EDGE_REVALIDATED_NO_NEW_UNEXPECTED_CLIENT_ESCALATION"
+      },
+      {
+        "member_role": "supabase_realtime_admin",
+        "granted_role": "anon",
+        "grantor_role": "supabase_admin",
+        "admin_option": false,
+        "inherit_option": false,
+        "set_option": true,
+        "ordinal": 21,
+        "verdict": "BUILTIN_PROVIDER_ROLE_EDGE_REVALIDATED_NO_NEW_UNEXPECTED_CLIENT_ESCALATION"
+      },
+      {
+        "member_role": "supabase_realtime_admin",
+        "granted_role": "authenticated",
+        "grantor_role": "supabase_admin",
+        "admin_option": false,
+        "inherit_option": false,
+        "set_option": true,
+        "ordinal": 22,
+        "verdict": "BUILTIN_PROVIDER_ROLE_EDGE_REVALIDATED_NO_NEW_UNEXPECTED_CLIENT_ESCALATION"
+      },
+      {
+        "member_role": "supabase_realtime_admin",
+        "granted_role": "service_role",
+        "grantor_role": "supabase_admin",
+        "admin_option": false,
+        "inherit_option": false,
+        "set_option": true,
+        "ordinal": 23,
+        "verdict": "BUILTIN_PROVIDER_ROLE_EDGE_REVALIDATED_NO_NEW_UNEXPECTED_CLIENT_ESCALATION"
+      },
+      {
+        "member_role": "supabase_storage_admin",
+        "granted_role": "authenticator",
+        "grantor_role": "supabase_admin",
+        "admin_option": false,
+        "inherit_option": false,
+        "set_option": true,
+        "ordinal": 24,
+        "verdict": "BUILTIN_PROVIDER_ROLE_EDGE_REVALIDATED_NO_NEW_UNEXPECTED_CLIENT_ESCALATION"
+      }
+    ],
+    "source_range": [
+      1,
+      24
+    ],
+    "already_reviewed_in_prior_run": 27
+  },
+  "role_boundary": {
+    "anon_member_service": false,
+    "auth_member_service": false,
+    "authenticator_member_service": true,
+    "anon_privileged": false,
+    "auth_privileged": false
+  },
+  "app_rls": [
+    {
+      "schema": "private",
+      "tables": 23,
+      "rls_enabled": 23
+    },
+    {
+      "schema": "public",
+      "tables": 22,
+      "rls_enabled": 22
+    }
+  ],
+  "membership_aggregate": {
+    "total": 11,
+    "enabled": 5,
+    "enabled_unadmitted": 0,
+    "enabled_not_approved": 0
+  },
+  "development_only_unpublished_migration": {
+    "path": "supabase/migrations/20261110073500_dic_enabled_requires_admission_check.sql",
+    "blob_sha": "d042982a4a5bbf6c34015090faf943d548f38087",
+    "check": "CHECK (NOT enabled OR admitted_at IS NOT NULL)",
+    "live_constraint_present": false,
+    "status": "READY_DEVELOPMENT_ONLY_NOT_APPLIED_TO_PRODUCTION",
+    "note": "Known dev-vs-live release delta, not novel drift or an alert; zero currently enabled-unadmitted accounts."
+  },
+  "advisor_status": "Fresh security/performance/health advisors rechecked: same eight intentionally no-policy private tables, ten client-callable SECURITY DEFINER RPCs, breached-password feature disabled under prior explicit beta owner decision, thirteen unindexed FK observations, eight stats-unused indexes; no source-bound proof of new exploit or safe drops.",
+  "source_credit": "Previously covered table, role and RLS definitions partially revalidated after source changes; 0 new #267 code lines and no invented first-time whole-provider semantic completion.",
+  "limitations": [
+    "Hosted REST schema exposure, Auth/JWT console settings, native compiled source, external clients and genuine GoTrue sessions remain UNVERIFIED.",
+    "Tables are catalog definitions, not contents. No private Auth identities/member/shot/notes rows examined.",
+    "Local isolated tests not rerun because no development code or tests changed."
+  ],
+  "provider_writes": false,
+  "github_code_changes": false,
+  "production_deploy": false,
+  "new_confirmed_defects": 0,
+  "exact_next": "First unreviewed/changed provider catalog declaration or deployed Edge source, and safe post-release hash/ACL drift; coordinate external API/Auth boundary with #96."
+}

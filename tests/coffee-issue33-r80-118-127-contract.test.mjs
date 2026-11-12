@@ -1,0 +1,18 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {selected118,selected127} from '../scripts/audit/issue33-r80-118-127-check.mjs';
+const title118='electrify espresso';
+const title127='Colombia – Lisandro Cárdenas — Finca Las Brisas';
+const src118='Guatemala - Ceiba Core - (Washed Process), Colombia - Kumanday (Natural Process), and Ethiopia - Yirgacheffe - Koke Washing Station (Honey Process). Medium Roast: This energizing espresso blend can be brewed in so much more than just an espresso machine. Which means that the flavors of milk chocolate, roasted almonds and dried fruits come out more clearly!';
+const src127='The Taste: Plush and fruit-saturated with notes of cooked cherry, soft florals, a winey sweetness, and a smooth, sugary finish. The Bean: 100% Gesha. Origin & Producer: Grown at 1,400–2,000 masl in Huila, Colombia by second-generation master farmer Lisandro Cárdenas. The Process: Meticulous Natural. The Roast: Light-Medium.';
+const page=(n,s)=>'<main><h1>'+n+'</h1><section><p>'+s+'</p></section></main>';
+test('118 explicit selected multiple origins, three distinct processes, medium and notes',()=>assert.deepEqual(Object.values(selected118(page(title118,src118),[title118])),Array(5).fill(true)));
+test('127 direct current product unique producer/variety/process/roast/taste',()=>assert.deepEqual(Object.values(selected127(page(title127,src127),[title127])),Array(6).fill(true)));
+test('missing or competing identity fails closed for either coffee',()=>{for(const heads of [[],[title118,title118],['Other Espresso']])assert.equal(selected118(page(title118,src118),heads).identity,false);for(const heads of [[],[title127,title127],['Brazil – Light']])assert.equal(selected127(page(title127,src127),heads).identity,false)});
+test('mixed 118 component methods cannot be silently collapsed to natural-only',()=>assert.equal(selected118(page(title118,src118.replace('(Washed Process)','(Natural Process)')),[title118]).separateGreenProcesses,false));
+test('118 excludes unrelated menu descriptions and product recommendation notes',()=>{const d=selected118(page(title118,'')+'<nav>'+src118+'</nav><aside>'+src118+'</aside>',[title118]);assert.equal(d.threeNamedComponents,false);assert.equal(d.selectedNotes,false)});
+test('118 cannot infer roast or components from unrelated same-host product',()=>{const d=selected118(page(title118,src118.replace('Medium Roast','Dark Roast').replace('Ceiba Core','Other Blend')),[title118]);assert.equal(d.selectedMedium,false);assert.equal(d.threeNamedComponents,false)});
+test('127 rejects changed selected grower even when rest of details remain',()=>assert.equal(selected127(page(title127,src127.replace('Lisandro Cárdenas','Different Farmer')),[title127]).selectedGrower,false));
+test('127 rejects conditional roast ambiguity and changed processing',()=>{let d=selected127(page(title127,src127.replace('The Roast: Light-Medium','The Roast: Dark').replace('Meticulous Natural','Meticulous Washed')),[title127]);assert.equal(d.selectedRoast,false);assert.equal(d.selectedNatural,false)});
+test('127 rejects unrelated related-product/process menu',()=>{const d=selected127(page(title127,'')+'<footer>'+src127+'</footer><nav>'+src127+'</nav>',[title127]);assert.equal(d.selectedNatural,false);assert.equal(d.selectedTaste,false)});
+test('127 rejects changed tasting description rather than importing another coffee',()=>assert.equal(selected127(page(title127,src127.replace('cooked cherry','lemon peel')),[title127]).selectedTaste,false));

@@ -1,0 +1,263 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 170,
+  "date_utc": "2026-11-11",
+  "project_ref": "azviqqejypsefzilgonr",
+  "read_only": true,
+  "repository": "Schulzet3/The-Dial-In-Collective",
+  "development_parent_sha": "2ca1f8a93c6b32814cc61165cab82346752568d4",
+  "ops_main_sha": "11e1e8c7c36dad488519476d8a969bb682915d31",
+  "published_release_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
+  "provider_status": "ACTIVE_HEALTHY",
+  "postgres": "17.11.0.003",
+  "review_scope": "Direct current deployed Edge complete file-byte equality to exact current development/release source + code-level auth/CORS/official host/manual redirect/request budget/server RPC route semantic check; current across-schema catalog and bounded aggregate statement/index/lock/temp metrics; no runtime invocation.",
+  "coverage": {
+    "deployed_edge_functions": 3,
+    "edge_file_occurrences": 13,
+    "distinct_repo_paths": 9,
+    "release_full_file_exact_match_count": 10,
+    "development_full_file_exact_match_count": 9,
+    "first_time_provider_source_words": 0,
+    "github_issue267_source_lines": 0,
+    "prior_provider_full_edge_review": "docs/audits/issue509-edge-release-bundle-parity-2026-11-10-run146.json",
+    "new_source_lines_reviewed_full": "none credited; semantic cross-check reuses archived complete source reviews"
+  },
+  "deployed_functions": [
+    {
+      "slug": "dic-verify-coffee",
+      "version": 8,
+      "verify_jwt": true,
+      "bundle_sha256": "d59e9da29335f2d626a2779238b4f1176148f5f8f3d54539bf831ff20aa6a77e"
+    },
+    {
+      "slug": "dic-preview-coffee",
+      "version": 4,
+      "verify_jwt": true,
+      "bundle_sha256": "ac928ceb4898414555fbcc96afb30b0963f7c819c5d7e211abd5b3893090648c"
+    },
+    {
+      "slug": "dic-delete-member-account",
+      "version": 1,
+      "verify_jwt": true,
+      "bundle_sha256": "a2418951c7c4457723cd7b5e7e8d39f4cb1b3a02f76c6099573a9d576f32bf18"
+    }
+  ],
+  "file_variants": [
+    {
+      "slug": "dic-verify-coffee",
+      "path": "dic-verify-coffee/index.ts",
+      "deployed_chars": 6909,
+      "release_exact_full_text_match": true,
+      "development_exact_full_text_match": true,
+      "github_matching_or_current_release_blob_sha": "2aa8d133a86aba8513d91f1557cdea230e24fa0e",
+      "source_range": "complete file 1-EOF",
+      "verdict": "RELEASE_SOURCE_MATCH"
+    },
+    {
+      "slug": "dic-verify-coffee",
+      "path": "_shared/request-budget.mjs",
+      "deployed_chars": 2455,
+      "release_exact_full_text_match": true,
+      "development_exact_full_text_match": true,
+      "github_matching_or_current_release_blob_sha": "d8b70824cb71d4dc4a747a8f20e23b429abb3094",
+      "source_range": "complete file 1-EOF",
+      "verdict": "RELEASE_SOURCE_MATCH"
+    },
+    {
+      "slug": "dic-verify-coffee",
+      "path": "dic-verify-coffee/evidence.mjs",
+      "deployed_chars": 11492,
+      "release_exact_full_text_match": true,
+      "development_exact_full_text_match": true,
+      "github_matching_or_current_release_blob_sha": "3cfb7a1b0a8c2064168ca41314085c48a0f768d1",
+      "source_range": "complete file 1-EOF",
+      "verdict": "RELEASE_SOURCE_MATCH"
+    },
+    {
+      "slug": "dic-verify-coffee",
+      "path": "_shared/html-scan.mjs",
+      "deployed_chars": 1723,
+      "release_exact_full_text_match": false,
+      "development_exact_full_text_match": false,
+      "github_matching_or_current_release_blob_sha": "c731e22fc2a05b1559b4619cd05e0deb24ddbcc5",
+      "source_range": "complete file 1-EOF",
+      "verdict": "KNOWN_PREVIOUS_SOURCE_VARIANT_NOT_PROVEN_DEFECT"
+    },
+    {
+      "slug": "dic-verify-coffee",
+      "path": "_shared/coffee-release-label.mjs",
+      "deployed_chars": 2250,
+      "release_exact_full_text_match": true,
+      "development_exact_full_text_match": true,
+      "github_matching_or_current_release_blob_sha": "2a3c0f10ea4d808accc05223c99d1afdcffa3761",
+      "source_range": "complete file 1-EOF",
+      "verdict": "RELEASE_SOURCE_MATCH"
+    },
+    {
+      "slug": "dic-preview-coffee",
+      "path": "dic-preview-coffee/index.ts",
+      "deployed_chars": 5864,
+      "release_exact_full_text_match": true,
+      "development_exact_full_text_match": true,
+      "github_matching_or_current_release_blob_sha": "e85b700d2d735b1c16b5ce719a50aa7560b45ac3",
+      "source_range": "complete file 1-EOF",
+      "verdict": "RELEASE_SOURCE_MATCH"
+    },
+    {
+      "slug": "dic-preview-coffee",
+      "path": "_shared/request-budget.mjs",
+      "deployed_chars": 2455,
+      "release_exact_full_text_match": true,
+      "development_exact_full_text_match": true,
+      "github_matching_or_current_release_blob_sha": "d8b70824cb71d4dc4a747a8f20e23b429abb3094",
+      "source_range": "complete file 1-EOF",
+      "verdict": "RELEASE_SOURCE_MATCH"
+    },
+    {
+      "slug": "dic-preview-coffee",
+      "path": "dic-preview-coffee/preview.mjs",
+      "deployed_chars": 7799,
+      "release_exact_full_text_match": true,
+      "development_exact_full_text_match": true,
+      "github_matching_or_current_release_blob_sha": "14b6b982ce4e78a354bf98d912c19d6ed32cad0c",
+      "source_range": "complete file 1-EOF",
+      "verdict": "RELEASE_SOURCE_MATCH"
+    },
+    {
+      "slug": "dic-preview-coffee",
+      "path": "_shared/html-scan.mjs",
+      "deployed_chars": 1723,
+      "release_exact_full_text_match": false,
+      "development_exact_full_text_match": false,
+      "github_matching_or_current_release_blob_sha": "c731e22fc2a05b1559b4619cd05e0deb24ddbcc5",
+      "source_range": "complete file 1-EOF",
+      "verdict": "KNOWN_PREVIOUS_SOURCE_VARIANT_NOT_PROVEN_DEFECT"
+    },
+    {
+      "slug": "dic-preview-coffee",
+      "path": "dic-verify-coffee/evidence.mjs",
+      "deployed_chars": 10032,
+      "release_exact_full_text_match": false,
+      "development_exact_full_text_match": false,
+      "github_matching_or_current_release_blob_sha": "3cfb7a1b0a8c2064168ca41314085c48a0f768d1",
+      "source_range": "complete file 1-EOF",
+      "verdict": "KNOWN_PREVIOUS_SOURCE_VARIANT_NOT_PROVEN_DEFECT"
+    },
+    {
+      "slug": "dic-preview-coffee",
+      "path": "dic-preview-coffee/agtron-roast.mjs",
+      "deployed_chars": 4209,
+      "release_exact_full_text_match": true,
+      "development_exact_full_text_match": true,
+      "github_matching_or_current_release_blob_sha": "1c6d74452aefc9a35455816178ae4845a057a7f3",
+      "source_range": "complete file 1-EOF",
+      "verdict": "RELEASE_SOURCE_MATCH"
+    },
+    {
+      "slug": "dic-delete-member-account",
+      "path": "dic-delete-member-account/index.ts",
+      "deployed_chars": 4392,
+      "release_exact_full_text_match": true,
+      "development_exact_full_text_match": false,
+      "github_matching_or_current_release_blob_sha": "51f332cf57eb753957bff6566324253faa81df3f",
+      "source_range": "complete file 1-EOF",
+      "verdict": "RELEASE_SOURCE_MATCH"
+    },
+    {
+      "slug": "dic-delete-member-account",
+      "path": "_shared/request-budget.mjs",
+      "deployed_chars": 2455,
+      "release_exact_full_text_match": true,
+      "development_exact_full_text_match": true,
+      "github_matching_or_current_release_blob_sha": "d8b70824cb71d4dc4a747a8f20e23b429abb3094",
+      "source_range": "complete file 1-EOF",
+      "verdict": "RELEASE_SOURCE_MATCH"
+    }
+  ],
+  "semantic_assessment": [
+    "All three deployed handlers retain JWT-required metadata and perform server-side token identity checks; endpoint actual gateway JWT enforcement remains unverified without genuine signed-session tests (#96).",
+    "Verify and preview each enforce admitted-member session RPC, allowlisted CORS origins, exact official-host HTTPS URL selection, no redirects, bounded HTML fetch (950000 bytes, 10000ms) and JSON body budget (4200 bytes, 5000ms), with prepared server RPCs. Static review not live-endpoint proof.",
+    "Delete-member-account v1 enforces admitted admin before service-role delete operations; previously confirmed broad catch returns 503 on bounded body validation instead of precise 4xx, fixed in development only (#509 Run162).",
+    "Three old bundle-source variants are identical to prior run146/159 known drift: preview embedded older evidence.mjs, and verify/preview both embed older html-scan.mjs. Two live HTML-scan variants 1723 chars vs current source 2109 chars. No demonstrated new security vulnerability or safe immediate deletion.",
+    "All 13 deployed file occurrences directly compared as complete strings against exact GitHub development and release file contents; no new source drift. App current release branch is a Git publication pointer and does not independently verify provider deployment for all interfaces."
+  ],
+  "provider_catalog_now": {
+    "application_tables": 45,
+    "application_routines": 106,
+    "application_indexes": 96,
+    "application_policies": 39,
+    "stored_migrations": 59,
+    "schemas": 13,
+    "invalid_application_indexes": 0,
+    "lock_waiters": 0,
+    "replication_slots": 0,
+    "realtime_published_tables": 0,
+    "storage_buckets": 0,
+    "pg_stat_statement_fingerprints": 4763
+  },
+  "resource_telemetry": {
+    "reset_at_utc": "2026-10-02T18:01:15Z",
+    "cumulative_temp_bytes": "142464670563",
+    "cumulative_temp_files": "50951",
+    "previous_run168_temp_bytes": "141550012990",
+    "delta_since_run168_bytes": "914657573",
+    "top_5_temp_statement_fingerprints": [
+      {
+        "id": "-985663203708294994",
+        "calls": 21,
+        "mean_ms": 49.28,
+        "temp_blocks_written": 31437
+      },
+      {
+        "id": "8124640585516817739",
+        "calls": 10,
+        "mean_ms": 49.66,
+        "temp_blocks_written": 14967
+      },
+      {
+        "id": "-6647321518519684408",
+        "calls": 18,
+        "mean_ms": 28.13,
+        "temp_blocks_written": 8962
+      },
+      {
+        "id": "-8872362405544609931",
+        "calls": 5,
+        "mean_ms": 64.86,
+        "temp_blocks_written": 7500
+      },
+      {
+        "id": "6406993402688551059",
+        "calls": 5,
+        "mean_ms": 42.04,
+        "temp_blocks_written": 2485
+      }
+    ],
+    "private_data_rows_read": 0,
+    "interpretation": "Cumulative since reset; no demonstrated attributable end-user latency, backend outage or safe index removal; numeric-only fingerprint queries do not identify application SQL."
+  },
+  "advisors": {
+    "health_findings": 0,
+    "performance_missing_fk_indexes": 13,
+    "performance_zero_scan_indexes": 8,
+    "security_no_policy_private_rls": 8,
+    "security_authenticated_definer_warn": 10,
+    "unchanged_previous_triage": true
+  },
+  "limitations": [
+    "Hosted GoTrue/API exposed schemas, JWT platform enforcement, PostgREST and provider-console settings UNVERIFIED",
+    "Disk free headroom, underlying compiled provider code, execution side effects and genuine authenticated runtime behavior UNVERIFIED",
+    "Previous first-time source coverage remains unchanged; per-file complete source text is preserved in earlier run receipts, not reprinted here",
+    "No member identities, shots, notes, credentials, raw log message dumps or production writes."
+  ],
+  "outcome": {
+    "new_confirmed_defects": 0,
+    "github_source_fixes": 0,
+    "production_writes": 0,
+    "tests_rerun": 0,
+    "publication": false,
+    "baseline_complete": false,
+    "next_cursor": "Stored migration ordinal #60 if added; else first new/changed/unreviewed provider definition or newly accessible hosted API/Auth control; monitor existing known unfixed live Edge HTTP handling until owner-authorized release."
+  }
+}

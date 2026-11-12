@@ -1,0 +1,11 @@
+# #267 A24 strict source-bound journal — November 10, 2026
+
+Parent development `c886695d036f19b963567b813a935fa88bb1775e` tree `eb3c4d2b2295dd11e1ff32f19895322d08079ab0`. Development-only, NO deploy, production SQL/Auth/Edge/provider/member/shot/Community writes, force push, purchase or READY claim.
+
+**153 newly directly read immutable source/era lines**: frozen F154 `docs/archive/2026-10-23-reconciliation/ACTIVE_WORK.previous.md:1295–1354` (60; blob `0583d24466c1fca349e0d9caab7ce3d57a0d908b`), pinned P432 `tests/universal-coffee-preview.test.mjs:652–684` (33; `838f683080912445240f3f321a8473fb236372de`), pinned P433 `tests/ux-refinements.test.mjs:1–60` (60; `a6a0fb7886fbe2cbbeb72b82e25de9799f258461`). [A24 every-line receipt](../audits/issue267-v2-strict-batches/S2-DISJOINT-F154-1295-1354-P432-652-684-P433-001-060-LIVE-20261110-A24.json) records 1-based literal/path/blob, behavior, quality, security/privacy/performance, obsolete/dead/duplicate, exact current counterpart, tests, improvement, Locked fit and disposition. Three historic private backup identifiers redacted only in new public text; immutable original source unchanged.
+
+Re-read original F001:1–41 and S2-001 **41/41 exact** with zero duplicate credit. Prior A23B ended F154:1294/P432:651. P433 starts at line1. No old V1/R2/C2 automatic promotion or machine-scan credit. Current `tests/ux-refinements.test.mjs` blob `a4972cbf906f24f3d6ea9f8706e5cc88770538e7`: 59/60 pinned lines retained with mapped offsets; original redundant line59 already removed. Two live current test lines (10 Settings ordering helper, 55 explicit shot context presence) directly inspected but **ZERO global uniqueness credit** until D2 reconciliation; remaining live drift unreviewed.
+
+No confirmed new active app defect requiring code edit. Archived October release grant/migrations not current authority; current Nov9 Admin approval and Nov10 push Locked supersessions govern. #33 owns source extractor, #96 owns Auth/privacy. Node22/lint/build/browser/offline/mobile/SQL/JWT and production checks **NOT_RUN** for this docs-only receipt; actual PR-head/merged-source approval CI must be checked, not presumed. No publication.
+
+**Next frozen F154:1355, pinned P433:61**, continue separate live-drift review. Both 579,961 historic and 57,913 pinned denominators plus postpin drift still INCOMPLETE; #267 stays OPEN.

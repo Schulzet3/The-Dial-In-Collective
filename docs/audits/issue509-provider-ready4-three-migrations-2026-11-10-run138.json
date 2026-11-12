@@ -1,0 +1,152 @@
+{
+  "issue": 509,
+  "run": "138",
+  "date_utc": "2026-11-10",
+  "provider_project_ref": "azviqqejypsefzilgonr",
+  "provider_status": "ACTIVE_HEALTHY",
+  "postgres_version": "17.11.0.003",
+  "github_refs_at_review": {
+    "development_parent": "1ceb353e0327e4f6d83323f1a8e347f23c9a8218",
+    "main": "33445fcc782fc99c8473f6c93f31ad2d0d73444d",
+    "release_production": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0"
+  },
+  "released_batch": "DIC-20261110-READY4-28",
+  "authorization_evidence": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1756#issuecomment-6760017247",
+  "read_scope": "All accessible stored SQL text of three NEWLY applied live migration records, 1-based full range, directly compared character by character with exact release Git source, plus live signup/Auth-trigger SQL bodies, two private table DDL components, complete delete guard and direct ACL evaluation. Earlier 56 stored migration bodies already reviewed; no repeated baseline credit.",
+  "migration_total_prior": 56,
+  "migration_total_live": 59,
+  "new_live_full_sql_direct_reviewed": 3,
+  "current_total_stored_sql_semantic_reviewed": 59,
+  "new_characters": 29282,
+  "new_lines": 491,
+  "new_whitespace_words": 2416,
+  "migrations": [
+    {
+      "version": "20261110020500",
+      "name": "dic_admin_signup_approval_retire_invites",
+      "provider_md5": "5c1795c0166c632b764c620c59cf3cbc",
+      "git_blob": "fea285d31190b996160d7672c1d90887f3d0c647",
+      "chars": 26198,
+      "lines": 442,
+      "words": 2117,
+      "semantic": "New unadmitted signup default, admin-only pending/reject/approve with email verification and stale guards, role-restricted wrappers, admin inbox, removal of legacy invitation tables/RPCs/code-only logs; existing admitted members preserved; explicit role/guard checks. Original 17 code records removed under separately authorized READY4, not by this audit.",
+      "path": "supabase/migrations/20261110020500_dic_admin_signup_approval_retire_invites.sql",
+      "range": "1-442",
+      "provider_equals_release_git_exact": true
+    },
+    {
+      "version": "20261110035000",
+      "name": "dic_account_delete_orphaned_actor_retry_guard",
+      "provider_md5": "4be5ce2c1e673646d73dee611f0e66a6",
+      "git_blob": "557ca8181421aa09f5dffdcfb3ccd6b258e40edc",
+      "chars": 2255,
+      "lines": 38,
+      "words": 215,
+      "semantic": "Nullable deleted prior administrator actor must use IS DISTINCT FROM to fail closed against another admin retry; preserves admin identity, community-mode and impact matching.",
+      "path": "supabase/migrations/20261110035000_dic_account_delete_orphaned_actor_retry_guard.sql",
+      "range": "1-38",
+      "provider_equals_release_git_exact": true
+    },
+    {
+      "version": "20261110045500",
+      "name": "dic_admin_private_delete_acl_hardening",
+      "provider_md5": "e6c2b4d0de95158b571d8c82af592b5c",
+      "git_blob": "0ea32f93848b16b96f2b6cd8e75d9b3b4e9fa4c5",
+      "chars": 829,
+      "lines": 11,
+      "words": 84,
+      "semantic": "Revokes default PUBLIC EXECUTE on two private destructive definer functions; authenticated/service_role retained; no SQL body/guard changes.",
+      "path": "supabase/migrations/20261110045500_dic_admin_private_delete_acl_hardening.sql",
+      "range": "1-11",
+      "provider_equals_release_git_exact": true
+    }
+  ],
+  "live_source_function_receipts": [
+    {
+      "identity": "private.dic_admin_review_signup(uuid,text,text)",
+      "chars": 2073,
+      "md5": "7e0d3bf10542694b60177fcfa9c6f7be",
+      "verdict": "ADMIN_ONLY_VERIFIED_EMAIL_APPROVAL_STALE_LOCK"
+    },
+    {
+      "identity": "private.dic_admin_signup_requests(integer,integer)",
+      "chars": 1411,
+      "md5": "663c13571f70bb29b6a4351e8e6a45eb",
+      "verdict": "ADMIN_ONLY_PAGINATED_ACCESS_EMAIL_NOT_PUBLIC"
+    },
+    {
+      "identity": "private.handle_new_auth_user()",
+      "chars": 372,
+      "md5": "ba4f31790060a75e074148034f26dfbe",
+      "verdict": "UNADMITTED_DEFAULT_ENABLED_FALSE_TRIGGER"
+    },
+    {
+      "identity": "private.is_member()",
+      "chars": 257,
+      "md5": "dbc163d07f45e8b5831f6a6394a70ab8",
+      "verdict": "ENABLED_BASED_ROLE_GUARD; ONLY_ADMITTED_CAN_TOGGLE_VIA_ADMIN_ACCESS_FUNCTION"
+    },
+    {
+      "identity": "private.dic_admin_set_member_access(uuid,boolean)",
+      "chars": 2354,
+      "md5": "d7a339f277e9da0d8393d5efcdbc0e89",
+      "verdict": "ADMIN_ONLY; PREVIOUS_ADMISSION_REQUIRED_FOR_ENABLE"
+    }
+  ],
+  "table_component_receipts": [
+    {
+      "object": "private.beta_members",
+      "columns": 5,
+      "constraints": 3,
+      "indexes": 1,
+      "rls": true,
+      "policy": "no_client_access all false",
+      "acl": "postgres/service_role only",
+      "new_column": "signup_review_state text not null default pending CHECK pending/approved/rejected"
+    },
+    {
+      "object": "private.dic_signup_review_events",
+      "columns": 6,
+      "constraints": 4,
+      "indexes": 1,
+      "rls": true,
+      "policies": 0,
+      "acl": "postgres/service_role only",
+      "fk": "both actor and member SET NULL preserving private audit"
+    }
+  ],
+  "safe_aggregate_integrity": {
+    "retired_invite_tables_remaining": 0,
+    "retired_invite_rpcs_remaining": 0,
+    "members_total": 11,
+    "admitted": 11,
+    "pending": 0,
+    "rejected": 0,
+    "admitted_without_approved_status": 0,
+    "unadmitted_enabled": 0,
+    "account_deletion_null_actor_retry_guard_live": true,
+    "private_destructive_definers_reviewed": 2,
+    "private_destructive_definer_least_privilege_live": true,
+    "application_public_execute_definers_remaining": 0
+  },
+  "advisor_counts_current": {
+    "security_no_policy_info": 8,
+    "security_authenticated_definer_warn": 10,
+    "auth_leaked_password_beta_exception_warn": 1,
+    "performance_unindexed_fk_info": 13,
+    "performance_zero_use_indexes_info": 8
+  },
+  "advisory_semantics": "No current warning alone establishes leakage, unnecessary index, or app defect; private deny-all RLS is intentional, auth leaked-password warning is prior owner beta exception. Source and current callers required before change.",
+  "status": "CHANGED_DEPLOYED_MIGRATION_SOURCES_DIRECTLY_REVIEWED_EXACT_RELEASE_IDENTITY_NO_NEW_CONFIRMED_DEFECT",
+  "provider_writes": false,
+  "github_code_changes": false,
+  "new_confirmed_defect": 0,
+  "full_provider_baseline_complete": false,
+  "unverified": [
+    "Hosted Auth/JWT/API private dashboard configuration",
+    "compiled/native managed provider implementation",
+    "real signed-in production deletion/approval end-to-end with personal data",
+    "full original/current GitHub historical source word audit owned by #267"
+  ],
+  "next": "Continue next genuinely unreviewed provider definition or changed live schema/role/Edge bundle, reconcile drift, bounded logs, and provider-console-only inaccessible setting inventory; do not double-credit stored 59/59 migration words."
+}

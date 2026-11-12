@@ -15,7 +15,7 @@ export function renderAdminAttention(stats={}){
  return '<section class="admin-panel admin-attention" aria-labelledby="admin-attention-heading">'
   +'<div class="admin-attention-header"><h2 id="admin-attention-heading">Requires Your Attention</h2><span class="admin-attention-count" role="status" aria-live="polite" aria-label="Items requiring attention">'+formatCount(a+b+c+d)+'</span></div>'
   +'<p class="helper">Ready account approvals '+formatCount(a)+' · Coffee reviews '+formatCount(b)+' · Conflicts '+formatCount(c)+' · Unfinished deletions '+formatCount(d)+'</p>'
-  +'<button type="button" class="ghost compact" data-action="enable-admin-notifications">Enable browser alerts while Admin is open</button></section>';
+  +'<div class="admin-member-actions"><button type="button" class="ghost compact" data-action="enable-admin-push">Enable Push Alerts</button><button type="button" class="ghost compact" data-action="disable-admin-push">Disable Push Alerts</button></div><p class="helper">On iPhone, open the Home Screen app and allow notifications once. Alerts can arrive when Admin is closed.</p></section>';
 }
 export function renderPendingSignups(page={},fallback=null){
  const loaded=Array.isArray(page?.items)&&!page.error,items=loaded?page.items:[],total=loaded?page.total:fallback;
@@ -94,7 +94,6 @@ export function renderAdminDashboard(data={},access=null,_legacySlot=null,candid
  ${stat('Approved Coffees',count('approved',stats.verified_coffees),'approved')}${stat('Logged Shots',count('shots',stats.shot_records),'shots')}
  ${stat('New Accounts',stats.pending_accounts,'new-members')}${stat('Admitted Accounts',count('accounts',stats.active_accounts),'accounts')}
  </section>
- <section class="admin-panel admin-record-section" id="admin-new-members" tabindex="-1">${renderPendingSignups(options.signupRequests,stats.pending_accounts)}</section>
  <section class="admin-panel admin-record-section" id="admin-pending" tabindex="-1">
  ${adminDisclosure('Pending Coffee Review','pending',count('pending',stats.pending_coffees),reviewSection('pending','No pending coffee submissions.'),{expanded:options.openSections?.has('pending')})}
  </section>
@@ -103,6 +102,7 @@ export function renderAdminDashboard(data={},access=null,_legacySlot=null,candid
  </section>
  ${renderAdminRecordCollection('approved',records.approved||(options.openSections?.has('approved')?{loading:true}:{total:stats.verified_coffees}),{expanded:options.openSections?.has('approved')})}
  ${renderAdminRecordCollection('shots',records.shots||(options.openSections?.has('shots')?{loading:true}:{total:stats.shot_records}),{expanded:options.openSections?.has('shots'),openCoffeeGroups:options.openCoffeeGroups})}
+ <section class="admin-panel admin-record-section" id="admin-new-members" tabindex="-1">${renderPendingSignups(options.signupRequests,stats.pending_accounts)}</section>
  <section class="admin-panel admin-record-section" id="admin-accounts" tabindex="-1">${adminDisclosure('Accounts','accounts',count('accounts',stats.active_accounts),access?renderAdminAccessPanel(access,records.accounts):'<p class="helper" role="status">'+(options.openSections?.has('accounts')?'Loading account records…':'Open to load account records.')+'</p>',{expanded:options.openSections?.has('accounts')})}</section>
  <section class="admin-panel admin-health" id="admin-infrastructure" tabindex="-1">${adminDisclosure('Infrastructure','infrastructure',null,'<p>Database status and access are checked on refresh. Verified backup freshness is managed separately in GitHub and private Google Drive; it is not reported as healthy without evidence.</p><p class="helper">Manual coffee review is administrator-only. A manually approved coffee is not mislabeled as independently source-verified. Account approval is administrator-only.</p>',{expanded:options.openSections?.has('infrastructure')})}</section>`;
 }

@@ -56,12 +56,36 @@ function validRecordedTemperature(value){
  const [low,high]=CONFIG.bounds.tempC;
  return finite(value)&&value>=low&&value<=high;
 }
+// Recovered all-green History remains immutable. A recipe family's measured
+// ratios/times cannot be established by explicitly impossible recorded
+// grinder/temperature controls. Prefer the shot's original calibration snapshot
+// over today's active dial range; old calibrated ranges are not interchangeable.
+// Missing optional legacy controls remain eligible for their measured ratio.
+function familyEvidenceShots(s,shots) {
+ const byVersion=new Map((s.setups||[]).flatMap(set=>set.versions||[]).map(v=>[v.id,v]));
+ return measuredRecipeShots(shots).filter(sh=>{
+  if(sh.tempC!=null&&!validRecordedTemperature(sh.tempC))return false;
+  if(sh.grindSetting==null)return true;
+  if(!finite(sh.grindSetting)||sh.grindSetting<0)return false;
+  const version=byVersion.get(sh.setupVersionId);
+  const calibration=version?.calibrations?.find(c=>c.id===sh.calibrationId);
+  const fromSnapshot=sh.snapshot;
+  const low=finite(fromSnapshot?.grinderMin)?fromSnapshot.grinderMin:
+   finite(calibration?.min)?calibration.min:
+   sh.calibrationId===version?.calibrationId?version?.grinderMin:null;
+  const high=finite(fromSnapshot?.grinderMax)?fromSnapshot.grinderMax:
+   finite(calibration?.max)?calibration.max:
+   sh.calibrationId===version?.calibrationId?version?.grinderMax:null;
+  if(finite(low)&&finite(high)&&high<=low)return false;
+  return (!finite(low)||sh.grindSetting>=low)&&(!finite(high)||sh.grindSetting<=high);
+ });
+}
 export function familyStats(s,id) {
  const historical=familyShots(s,id);if(!historical.length)return null;
- const shots=measuredRecipeShots(historical);
+ const shots=familyEvidenceShots(s,historical);
  return {ratio:stats(shots.map(x=>x.yieldG/x.doseG),{singleWidth:1/(mean(shots.map(x=>x.doseG))||18)}),time:stats(shots.map(x=>x.timeS),{singleWidth:2}),count:shots.length,confirmed:shots.length>=2};
 }
-export function familiesFor(s,coffeeId,style) {return s.families.filter(f=>f.coffeeId===coffeeId&&f.style===style&&measuredRecipeShots(familyShots(s,f.id)).length);}
+export function familiesFor(s,coffeeId,style) {return s.families.filter(f=>f.coffeeId===coffeeId&&f.style===style&&familyEvidenceShots(s,familyShots(s,f.id)).length);}
 export function assignFamily(s,shot) {
  const ratio=shot.yieldG/shot.doseG;
  let best=null,dist=Infinity;
@@ -92,7 +116,7 @@ function recipeHardwareTier(sh,version,basket,feed){
 }
 export function chooseRecipeFamily(s,coffeeId,style,version,basket,feed,p=coffeeState(s,coffeeId)){
  const options=familiesFor(s,coffeeId,style).map(f=>{
-  const shots=measuredRecipeShots(familyShots(s,f.id).filter(sh=>sh.coffeeId===coffeeId&&sh.style===style));
+  const shots=familyEvidenceShots(s,familyShots(s,f.id).filter(sh=>sh.coffeeId===coffeeId&&sh.style===style));
   if(!shots.length)return null;
   const tier=Math.max(...shots.map(sh=>recipeHardwareTier(sh,version,basket,feed)));
   const matched=shots.filter(sh=>recipeHardwareTier(sh,version,basket,feed)===tier);
@@ -161,7 +185,9 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
  // they cannot establish a proven personal grind setting or paired feed-mode effect.
  // Temperature was optional: null remains eligible, and valid 70-100 C readings
  // retain their original evidence status under existing Log Shot bounds.
- const v=activeVersion(s),measured=measuredRecipeShots(s.shots).filter(sh=>
+ // Preserve source shots in History; only original-calibration-valid measurements
+ // may establish a personal grinder dial or measured Standard/Slow Feed offset.
+ const v=activeVersion(s),measured=familyEvidenceShots(s,s.shots).filter(sh=>
   sh.tempC==null||validRecordedTemperature(sh.tempC)),qual=measured.filter(sh=>!sh.hidden&&validSuccess(sh)&&sh.style===style&&sh.feedMode===feed&&hardwareMatch(sh,v)&&finite(sh.grindSetting));
  // Current-calibration history outside the entered espresso range remains
   // untouched in History, but is not proven current-scale grind evidence.
@@ -275,7 +301,10 @@ export function learnSensitivity(shots,version=null) {
 // Five green ratings and an in-range temperature are insufficient when the
 // imported shot's dose/yield/time are physically invalid. Preserve History.
 function temperatureGuidance(s,c,style,v,defaultC,familyId=null) {
- const sh=measuredRecipeShots(s.shots).filter(sh=>!sh.hidden&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&
+ // Archived five-green temperatures cannot establish personal equipment guidance
+ // when an explicitly recorded grinder setting was impossible in its original
+ // espresso calibration. Preserve original History and missing legacy optionals.
+ const sh=familyEvidenceShots(s,s.shots).filter(sh=>!sh.hidden&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&
   sh.coffeeId===c.id&&validRecordedTemperature(sh.tempC)&&
   (sh.setupVersionId===v.id||(norm(v.machine)&&norm(sh.snapshot?.machine)===norm(v.machine))));
  if(familyId){
@@ -293,12 +322,23 @@ export function personalSimilarCoffeeReference(s,coffee,version,style,feed,baske
  if(targetRank<0)return null;
  const byId=new Map(s.coffees.map(c=>[c.id,c]));
  const matches=[],nearby=[];
+ // A donor shot must be possible on its ORIGINAL grinder calibration, not
+ // just today's active range. Preserve invalid imported shots in History.
+ const originalCalibrationEligible=new Set(familyEvidenceShots(s,s.shots));
  for(const sh of s.shots){
+  if(!originalCalibrationEligible.has(sh))continue;
   if(sh.hidden||sh.dialedIn!==true||!isDialed(sh.tasteScales)||sh.coffeeId===coffee.id||
      sh.setupVersionId!==version.id||sh.style!==style||sh.feedMode!==feed||
      // Reuse current Log Shot physical bounds for historical *evidence* only.
      // Imported originals remain untouched in private shot History.
-     !measuredRecipeShots([sh]).length)continue;
+     !measuredRecipeShots([sh]).length||
+     // Historical optional controls may be absent, but explicitly impossible
+     // values cannot certify a comparable five-green other-coffee donor.
+     (sh.grindSetting!=null&&(
+      !finite(sh.grindSetting)||sh.grindSetting<0||
+      (finite(version.grinderMin)&&sh.grindSetting<version.grinderMin)||
+      (finite(version.grinderMax)&&sh.grindSetting>version.grinderMax)))||
+     (sh.tempC!=null&&!validRecordedTemperature(sh.tempC)))continue;
   const other=byId.get(sh.coffeeId);
   const rank=roastIndex(other?.roastLevel);
   if(rank<0)continue;
@@ -323,6 +363,35 @@ export function personalSimilarCoffeeReference(s,coffee,version,style,feed,baske
   coffees:new Set(eligible.map(x=>x.sh.coffeeId)).size,
   closeness:highest,nearby:!matches.length};
 }
+// Cross-style ratios are deliberately weak STARTING hints, not a way for a
+// malformed imported five-green record to suppress a better same-style prior.
+// Honor the shot's actual grinder calibration, never transplant a raw dial from
+// another version. Missing historical optional readings remain admissible.
+function crossStyleControlsUsable(s,sh,version){
+ // Reuse original measured-shot eligibility, not today's grinder range, for
+ // ratio-only cross-style evidence. An old dial is NEVER transferred to a
+ // different style or current calibration.
+ if(!familyEvidenceShots(s,[sh]).length)return false;
+ if(sh.grindSetting==null)return true;
+ const originalVersion=(s.setups||[]).flatMap(set=>set.versions||[])
+  .find(x=>x.id===sh.setupVersionId);
+ const calibration=originalVersion?.calibrations?.find(x=>x.id===sh.calibrationId);
+ const low=finite(sh.snapshot?.grinderMin)?sh.snapshot.grinderMin:
+  finite(calibration?.min)?calibration.min:
+  sh.calibrationId===originalVersion?.calibrationId?originalVersion?.grinderMin:null;
+ const high=finite(sh.snapshot?.grinderMax)?sh.snapshot.grinderMax:
+  finite(calibration?.max)?calibration.max:
+  sh.calibrationId===originalVersion?.calibrationId?originalVersion?.grinderMax:null;
+ if(finite(low)&&finite(high))return true;
+ // Unknown/partial original limits retain prior conservative current-range
+ // fallback. Never infer that an unrecorded older calibration was valid.
+ const same=sh.setupVersionId===version.id;
+ const fallbackLow=same?version.grinderMin:sh.snapshot?.grinderMin;
+ const fallbackHigh=same?version.grinderMax:sh.snapshot?.grinderMax;
+ return (!finite(fallbackLow)||sh.grindSetting>=fallbackLow)&&
+  (!finite(fallbackHigh)||sh.grindSetting<=fallbackHigh)&&
+  (!finite(fallbackLow)||!finite(fallbackHigh)||fallbackHigh>fallbackLow);
+}
 export function recommendation(s,coffeeId,options={}) {
  const c=s.coffees.find(c=>c.id===coffeeId),v=activeVersion(s),p=coffeeState(s,coffeeId);
  if(!c||!v)return null;
@@ -335,7 +404,8 @@ export function recommendation(s,coffeeId,options={}) {
  // Imported success markers cannot suppress or transfer style evidence without all five original ideal scores.
  // Archived five-green rows are not physical evidence unless dose/yield/time
  // meet existing Log Shot bounds; original History remains untouched.
- const exactOther=measuredRecipeShots(s.shots).some(sh=>!sh.hidden&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style!==style&&sh.style!=='Custom');
+ const exactOther=measuredRecipeShots(s.shots).some(sh=>!sh.hidden&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style!==style&&sh.style!=='Custom'&&
+  crossStyleControlsUsable(s,sh,v));
  // For Fast-Flow, comparable same-style successes outrank a Turbo cross-style fallback.
  const provisional=style==='Custom'||(exactOther&&style!=='Fast-Flow')?null:personalSimilarCoffeeReference(s,c,v,style,feed,basket.id);
  const familyChoice=chooseRecipeFamily(s,coffeeId,style,v,basket,feed,p);
@@ -411,7 +481,7 @@ export function recommendation(s,coffeeId,options={}) {
   // Never import its measured time, grind, family, confirmation or shot count.
   const turbo=measuredRecipeShots(s.shots).filter(sh=>!sh.hidden&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&sh.style==='Turbo'&&
    sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.basketId===basket.id&&
-   sh.feedMode===feed&&sh.timeS>=8&&sh.timeS<=20&&
+   sh.feedMode===feed&&crossStyleControlsUsable(s,sh,v)&&sh.timeS>=8&&sh.timeS<=20&&
    sh.yieldG/sh.doseG>=1.8&&sh.yieldG/sh.doseG<=3.2);
   if(turbo.length){
    const r=roastIndex(c.roastLevel)<0?roastIndex('Medium'):roastIndex(c.roastLevel);
@@ -429,7 +499,7 @@ export function recommendation(s,coffeeId,options={}) {
   // style's starting ratio; no cross-style time or grind transfer.
   const other=measuredRecipeShots(s.shots).filter(sh=>!sh.hidden&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&
    sh.coffeeId===coffeeId&&sh.style!==style&&sh.style!=='Fast-Flow'&&
-   sh.style!=='Custom'&&RATIOS[sh.style]);
+   sh.style!=='Custom'&&RATIOS[sh.style]&&crossStyleControlsUsable(s,sh,v));
   if(other.length){const r=roastIndex(c.roastLevel)<0?roastIndex('Medium'):roastIndex(c.roastLevel);const residual=mean(other.map(sh=>sh.yieldG/sh.doseG-RATIOS[sh.style][r]));const bias=clamp(residual*.2,-.15,.15);for(const k of ['low','high','center'])rec.ratio[k]+=bias;rec.reasons.push('Small ratio adjustment informed by your other styles; time and grind stay style-specific.');}
  }
  rec.grind=grindGuidance(s,c,style,basket,feed,rec.familyId);
@@ -447,7 +517,10 @@ export function recommendation(s,coffeeId,options={}) {
  // An unloggable archived shot must never replace a usable fresh recommendation
   // with a cached adjustment or diagnostic based on impossible measured controls.
   // Preserve that shot, its original notes/ratings and its saved suggestion in History.
-  const last=measuredRecipeShots(s.shots).filter(sh=>!sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&sh.basketId===basket.id&&sh.feedMode===feed&&sh.calibrationId===v.calibrationId&&
+  // Imported non-green feedback must also be valid on its ORIGINAL recorded
+  // grinder calibration. A corrupted newer snapshot stays in private History,
+  // but cannot replace an older valid measured shot's next-shot advice.
+  const last=familyEvidenceShots(s,measuredRecipeShots(s.shots)).filter(sh=>!sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&sh.basketId===basket.id&&sh.feedMode===feed&&sh.calibrationId===v.calibrationId&&
    finite(sh.grindSetting)&&sh.grindSetting>=v.grinderMin&&sh.grindSetting<=v.grinderMax&&
    (sh.tempC==null||validRecordedTemperature(sh.tempC))&&
    typeof sh.timestamp==='string'&&sh.timestamp.trim()&&Number.isFinite(Date.parse(sh.timestamp))).sort((a,b)=>Date.parse(b.timestamp)-Date.parse(a.timestamp))[0];
@@ -457,9 +530,23 @@ export function recommendation(s,coffeeId,options={}) {
  // A success on another basket, feed mode or grinder calibration is still
  // valid history, but cannot veto feedback for this exact measured recipe
  // context. Preserve successful families and all five original taste scores.
- const measuredLocalSuccess=measuredRecipeShots(s.shots).some(sh=>
+ // Reuse the existing original-calibration evidence gate for archived
+ // green success; today's espresso range cannot prove a past dial possible.
+ const measuredLocalSuccess=familyEvidenceShots(s,measuredRecipeShots(s.shots)).some(sh=>
   !sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&
   sh.basketId===basket.id&&sh.feedMode===feed&&sh.calibrationId===v.calibrationId&&
+  // Imported green history without a trustworthy chronological measurement
+  // cannot veto feedback from the latest valid, timestamped rated shot.
+  // Leave the original five ratings, notes and archived record untouched.
+  typeof sh.timestamp==='string'&&sh.timestamp.trim()&&
+  Number.isFinite(Date.parse(sh.timestamp))&&
+  // An archived green label cannot veto actual latest feedback if its
+  // recorded grind/temperature could not have been entered for this setup.
+  // Preserve original ratings, measurements and private History unchanged.
+  finite(sh.grindSetting)&&sh.grindSetting>=0&&
+  (!finite(v.grinderMin)||sh.grindSetting>=v.grinderMin)&&
+  (!finite(v.grinderMax)||sh.grindSetting<=v.grinderMax)&&
+  (sh.tempC==null||validRecordedTemperature(sh.tempC))&&
   sh.dialedIn===true&&isDialed(sh.tasteScales));
  if(!options.ignoreAdvice&&last&&!measuredLocalSuccess){
   // Keep the recipe card consistent with fresh taste feedback, even before a
@@ -496,7 +583,12 @@ export function recommendation(s,coffeeId,options={}) {
     cachedNext.grindSetting!=null&&cachedNext.grindSetting!==last.grindSetting,
     cachedNext.tempC!=null&&cachedNext.tempC!==last.tempC]
     .filter(Boolean).length>1);
-  const a=(oldNoOp||oldSmallYield||unsafeCachedNext)?nextAdvice(s,last,rec):cached||nextAdvice(s,last,rec);
+  // A saved correction has no cached next step. Recalculate from the EDITED
+  // five ratings rather than silently showing an unrelated starting recipe.
+  // A legitimate no-action/bounds result remains a no-action result; the
+  // original stored suggestion, notes and measured history are not rewritten.
+  const missingActionCache=!!cached&&!cached.next&&cached.kind!=='diagnostic';
+  const a=(oldNoOp||oldSmallYield||unsafeCachedNext||missingActionCache)?nextAdvice(s,last,rec):cached||nextAdvice(s,last,rec);
   if(a.next||a.kind==='diagnostic'){
    // An applied next-shot adjustment keeps every other measured control
    // steady. Do not silently reset dose/temperature to starting defaults.
@@ -543,7 +635,35 @@ export function prefill(s,coffeeId,options={}) {
  // Only a physically measured, loggable historical shot may seed numeric
  // Log Shot prefills. Keep incomplete/invalid imports and private notes in
  // History unchanged; they do not outrank an older valid measurement.
- const measured=measuredRecipeShots(shots);
+ // An archived shot with a corrupted explicit grinder or recorded temperature
+ // must not supply a new shot's dose, grind or temperature. Original History
+ // stays untouched; missing optional controls retain legacy compatibility.
+ // Prefer the older shot's own espresso range, never silently translate grind.
+ // A historical calibration may be disjoint from today's active espresso range.
+ // The shared familyEvidenceShots gate already verifies original physical
+ // eligibility; use the recorded scale for prefills, not today's scale.
+ // Unknown legacy calibration still falls back to the active range.
+ const versionsById=new Map((s.setups||[]).flatMap(set=>set.versions||[]).map(x=>[x.id,x]));
+ const admissible=sh=>{
+  if(sh.grindSetting!=null){
+   const originalVersion=versionsById.get(sh.setupVersionId);
+   const originalCalibration=originalVersion?.calibrations?.find(c=>c.id===sh.calibrationId);
+   const min=finite(sh.snapshot?.grinderMin)?sh.snapshot.grinderMin:
+    finite(originalCalibration?.min)?originalCalibration.min:
+    sh.calibrationId===originalVersion?.calibrationId?originalVersion?.grinderMin:v.grinderMin;
+   const max=finite(sh.snapshot?.grinderMax)?sh.snapshot.grinderMax:
+    finite(originalCalibration?.max)?originalCalibration.max:
+    sh.calibrationId===originalVersion?.calibrationId?originalVersion?.grinderMax:v.grinderMax;
+   if(!finite(sh.grindSetting)||sh.grindSetting<0||
+      (finite(min)&&sh.grindSetting<min)||
+      (finite(max)&&sh.grindSetting>max)||
+      (finite(min)&&finite(max)&&max<=min))return false;
+  }
+  return sh.tempC==null||validRecordedTemperature(sh.tempC);
+ };
+ // Original saved grinder calibration, not today's range, must qualify
+ // archived measurements before they prefill a fresh Log Shot.
+ const measured=familyEvidenceShots(s,shots).filter(admissible);
  const doses=measured.filter(x=>x.basketId===basket.id&&finite(x.doseG)&&x.doseG>=minDose&&x.doseG<=maxDose),
   grinds=measured.filter(x=>x.basketId===basket.id&&x.style===style&&x.feedMode===feed&&x.calibrationId===v.calibrationId&&
    finite(x.grindSetting)&&x.grindSetting>=v.grinderMin&&x.grindSetting<=v.grinderMax);
@@ -551,7 +671,7 @@ export function prefill(s,coffeeId,options={}) {
   // with impossible dose/yield/time is not a reliable prior actual shot.
   // Reuse existing Log Shot bounds; do not invent temperature thresholds.
   const temps=measured.filter(x=>validRecordedTemperature(x.tempC)),same=temps.find(x=>x.style===style),temp=same||temps[0];
- return {doseG:doses[0]?.doseG??basket.doseG,yieldG:'',timeS:'',grindSetting:grinds[0]?.grindSetting??'',tempC:v.advanced.temperature?(temp?.tempC??null):null,tempSource:temp&&temp.style!==style?`Last used on ${temp.style}`:'',style,basketId:basket.id,feedMode:feed,tasteScales:{extraction:null,body:null,clarity:null,sweetness:null,astringency:null},notes:''};
+ return {doseG:doses[0]?.doseG??basket.doseG,yieldG:'',timeS:'',grindSetting:grinds[0]?.grindSetting??'',tempC:v.advanced?.temperature?(temp?.tempC??null):null,tempSource:temp&&temp.style!==style?`Last used on ${temp.style}`:'',style,basketId:basket.id,feedMode:feed,tasteScales:{extraction:null,body:null,clarity:null,sweetness:null,astringency:null},notes:''};
 }
 
  // Owner-approved measured-yield exploration (2026-11-04, #455).
@@ -575,7 +695,12 @@ function comparableSweetnessYields(s,shot){
  // not by lexical text; an invalid legacy date cannot establish chronology.
  const shotAt=typeof shot.timestamp==='string'?Date.parse(shot.timestamp):NaN;
  if(keys.some(key=>shot[key]==null)||!Number.isFinite(shotAt))return [];
+ // Only original-calibration-valid measured history can infer a same-coffee
+ // sweetness direction. Retain impossible archived readings in History but
+ // never let their apparent yield difference steer the next shot.
+ const measured=new Set(familyEvidenceShots(s,s.shots));
  return s.shots.filter(prior=>{
+  if(!measured.has(prior))return false;
   if(prior.id===shot.id||prior.hidden||keys.some(key=>prior[key]!==shot[key]))return false;
   const priorAt=typeof prior.timestamp==='string'?Date.parse(prior.timestamp):NaN;
   if(!Number.isFinite(priorAt)||priorAt>=shotAt)return false;
@@ -675,7 +800,7 @@ function nextAdviceRaw(s,shot,rec) {
    text:'Keep dose and grind steady; aim around '+center.toFixed(1)+' g out. Let taste decide.',
    next:{grindSetting:shot.grindSetting,yieldCenter:center}};
  }
- if(t.astringency>1&&v.advanced.temperature&&finite(shot.tempC)&&shot.tempC>70){const temp=clamp(shot.tempC-1,70,100);return {title:'Try a small temperature change',text:'Try about 1 degree C (2 degrees F) cooler while keeping the other variables steady.',next:{grindSetting:shot.grindSetting,yieldCenter:shot.yieldG,tempC:temp}};}
+ if(t.astringency>1&&v.advanced?.temperature&&finite(shot.tempC)&&shot.tempC>70){const temp=clamp(shot.tempC-1,70,100);return {title:'Try a small temperature change',text:'Try about 1 degree C (2 degrees F) cooler while keeping the other variables steady.',next:{grindSetting:shot.grindSetting,yieldCenter:shot.yieldG,tempC:temp}};}
  if(t.extraction===3&&t.body===3&&t.clarity===5&&t.astringency===1&&t.sweetness<5)
   return sweetnessOnlyYieldAdvice(s,shot);
  const center=yieldTarget(shot,1);
@@ -700,7 +825,23 @@ export function isExtreme(s,shot) {
  // An imported positive but out-of-entry-bounds measurement is not a
  // qualifying reference for the mandatory four-shot outlier baseline.
  // Keep the original archived row and all five original ratings untouched.
- const prior=measuredRecipeShots(s.shots).filter(x=>!x.hidden&&x.dialedIn===true&&isDialed(x.tasteScales)&&
+ // Older offline/archived rows can omit optional equipment readings;
+ // keep that compatibility. But explicitly recorded impossible controls
+ // cannot supply the four measured all-green outlier references. Same-version
+ // espresso limits are the existing setup's bounds, not new taste targets.
+ const version=s.setups?.flatMap(set=>set.versions||[])
+  .find(v=>v.id===shot.setupVersionId);
+ const eligibleControls=x=>{
+  if(x.grindSetting!=null&&(
+   !finite(x.grindSetting)||x.grindSetting<0||
+   (finite(version?.grinderMin)&&x.grindSetting<version.grinderMin)||
+   (finite(version?.grinderMax)&&x.grindSetting>version.grinderMax)))return false;
+  return x.tempC==null||validRecordedTemperature(x.tempC);
+ };
+ // Imported all-green outlier references must also be possible on their
+ // own recorded grinder calibration, not only today's dial range.
+ const prior=familyEvidenceShots(s,s.shots).filter(x=>!x.hidden&&x.dialedIn===true&&isDialed(x.tasteScales)&&
+  eligibleControls(x)&&
   x.coffeeId===shot.coffeeId&&x.style===shot.style&&
   x.setupVersionId===shot.setupVersionId&&x.id!==shot.id&&
   // Do not let *explicitly different* feed, basket, or grind-calibration
@@ -738,7 +879,7 @@ export function saveShot(s,coffeeId,input,{allowLegacyCustom=false}={}) {
  if(!v.baskets?.some(b=>b.id===input.basketId&&!b.archived))
   throw new Error('Select an active basket before saving this shot.');
  const p=ensureCoffeeState(s,coffeeId);
- const sh={id:input.id||newId('shot'),coffeeId,setupId:set.id,setupVersionId:v.id,calibrationId:v.calibrationId,basketId:input.basketId,style:input.style,timestamp:input.timestamp||now(),doseG:round(input.doseG),yieldG:round(input.yieldG),timeS:round(input.timeS),grindSetting:round(input.grindSetting),tempC:v.advanced.temperature?num(input.tempC):null,feedMode:input.feedMode,notes:String(input.notes||''),tasteScales:{...input.tasteScales},dialedIn:isDialed(input.tasteScales),snapshot:snapshot(s,coffeeId,input.basketId),hidden:false,usedRecommendation:input.usedRecommendation||{},revision:1};
+ const sh={id:input.id||newId('shot'),coffeeId,setupId:set.id,setupVersionId:v.id,calibrationId:v.calibrationId,basketId:input.basketId,style:input.style,timestamp:input.timestamp||now(),doseG:round(input.doseG),yieldG:round(input.yieldG),timeS:round(input.timeS),grindSetting:round(input.grindSetting),tempC:v.advanced?.temperature?num(input.tempC):null,feedMode:input.feedMode,notes:String(input.notes||''),tasteScales:{...input.tasteScales},dialedIn:isDialed(input.tasteScales),snapshot:snapshot(s,coffeeId,input.basketId),hidden:false,usedRecommendation:input.usedRecommendation||{},revision:1};
  if(s.shots.some(x=>x.id===sh.id))return s.shots.find(x=>x.id===sh.id); // idempotent save
  sh.outlierReview=isExtreme(s,sh)?'pending':'not_needed';
  sh.suggestion=nextAdvice(s,sh,recommendation(s,coffeeId,{style:input.style,basketId:input.basketId,feedMode:input.feedMode}));
@@ -746,7 +887,7 @@ export function saveShot(s,coffeeId,input,{allowLegacyCustom=false}={}) {
  s.shots.push(sh);
  if(sh.dialedIn&&!p.currentFamilies[sh.style])p.currentFamilies[sh.style]=sh.familyId;
  p.style=sh.style;p.basketId=sh.basketId;
- if(v.advanced.slowFeed)v.slowFeed=sh.feedMode==='slow';
+ if(v.advanced?.slowFeed)v.slowFeed=sh.feedMode==='slow';
  const w=workspace(s);w.currentCoffeeId=coffeeId;w.recent[coffeeId]=now();
  logAudit(s,'shot.saved',{shotId:sh.id});return sh;
 }
@@ -788,7 +929,22 @@ export function makeCurrent(s,shotId) {
  // An old five-green marker does not certify unloggable imported measurements.
  // Keep original History/notes; a chosen Current must qualify as recipe evidence.
  if(!measuredRecipeShots([sh]).length)throw new Error('Choose a shot with valid recorded dose, yield and time.');
- if(sh.setupVersionId!==activeVersion(s).id)throw new Error('This is a reference from another setup. Log a successful shot here first.');
+ const version=activeVersion(s);
+ if(sh.setupVersionId!==version?.id)throw new Error('This is a reference from another setup. Log a successful shot here first.');
+ // Keep original all-green imported history even if an explicitly recorded
+ // grinder or temperature could not be entered today. Such a shot cannot
+ // become the chosen Current recipe; missing legacy optionals remain eligible.
+ if(sh.grindSetting!=null&&(!finite(sh.grindSetting)||sh.grindSetting<0||
+    (finite(version.grinderMin)&&sh.grindSetting<version.grinderMin)||
+    (finite(version.grinderMax)&&sh.grindSetting>version.grinderMax)))
+  throw new Error('Choose a shot with a valid recorded grinder setting for this setup.');
+ if(sh.tempC!=null&&!validRecordedTemperature(sh.tempC))
+  throw new Error('Choose a shot with a valid recorded temperature.');
+ // A historical all-green row must be physically possible on its ORIGINAL
+ // grinder calibration, not only within today's active espresso range.
+ // Preserve the original shot/notes even when it cannot become Current.
+ if(!familyEvidenceShots(s,[sh]).length)
+  throw new Error('Choose a shot with a valid recorded original grinder calibration.');
  // Do not store a phantom currentFamilies/favoriteShots key for malformed
  // imported all-green rows missing their historical recipe-family identity.
  if(typeof sh.familyId!=='string'||!sh.familyId.trim())throw new Error('Choose a shot with an assigned recipe family. The original history remains unchanged.');

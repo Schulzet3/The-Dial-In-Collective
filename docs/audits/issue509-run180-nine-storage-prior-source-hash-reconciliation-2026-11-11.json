@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "180-source-reconciliation",
+  "observed_utc": "2026-11-11",
+  "provider_source_basis": "Run180 current PostgreSQL direct md5 pg_get_functiondef; source unchanged between comparison and original Run180",
+  "source_commit": "0f971449c938eb964c4807476cf680fedc18275d",
+  "reason": "The first Run180 comparison joined the 42-function partial platform_function_review.objects list and adjacent function hashes, omitting nine already fully reviewed Storage functions. This was a receipt INDEX omission, not a provider definition change.",
+  "prior_complete_source_receipt_paths": [
+    "docs/audits/issue509-provider-realtime-001-018-storage-001-011-20261106-run28c.json",
+    "docs/audits/issue509-provider-storage-functions-012-019-20261106-run28d.json"
+  ],
+  "previously_matched": 39,
+  "additional_verified_exact_matches": 9,
+  "corrected_current_provider_full_source_fingerprint_parity": "48/48",
+  "source_corrections": [
+    {
+      "current_provider_ordinal": 35,
+      "function": "storage.list_multipart_uploads_with_delimiter",
+      "current_provider_md5": "961eef74f03a12751abf768384b84371",
+      "prior_complete_source_md5": "961eef74f03a12751abf768384b84371",
+      "prior_full_source_chars": 2378,
+      "prior_receipt": "docs/audits/issue509-provider-realtime-001-018-storage-001-011-20261106-run28c.json",
+      "verdict": "EXACT_CURRENT_SOURCE_HASH_MATCHES_PRIOR_COMPLETE_SOURCE_RECEIPT"
+    },
+    {
+      "current_provider_ordinal": 36,
+      "function": "storage.list_objects_with_delimiter",
+      "current_provider_md5": "7747efec8583d78cd01449d9b99cd2eb",
+      "prior_complete_source_md5": "7747efec8583d78cd01449d9b99cd2eb",
+      "prior_full_source_chars": 32892,
+      "prior_receipt": "docs/audits/issue509-provider-storage-functions-012-019-20261106-run28d.json",
+      "verdict": "EXACT_CURRENT_SOURCE_HASH_MATCHES_PRIOR_COMPLETE_SOURCE_RECEIPT"
+    },
+    {
+      "current_provider_ordinal": 37,
+      "function": "storage.operation",
+      "current_provider_md5": "0720a7c3d1b49f9a8eee19e90d73bb97",
+      "prior_complete_source_md5": "0720a7c3d1b49f9a8eee19e90d73bb97",
+      "prior_full_source_chars": 178,
+      "prior_receipt": "docs/audits/issue509-provider-storage-functions-012-019-20261106-run28d.json",
+      "verdict": "EXACT_CURRENT_SOURCE_HASH_MATCHES_PRIOR_COMPLETE_SOURCE_RECEIPT"
+    },
+    {
+      "current_provider_ordinal": 38,
+      "function": "storage.protect_bucket_control_columns",
+      "current_provider_md5": "7c31ae406e2f6281ead4009fff69fc68",
+      "prior_complete_source_md5": "7c31ae406e2f6281ead4009fff69fc68",
+      "prior_full_source_chars": 1858,
+      "prior_receipt": "docs/audits/issue509-provider-storage-functions-012-019-20261106-run28d.json",
+      "verdict": "EXACT_CURRENT_SOURCE_HASH_MATCHES_PRIOR_COMPLETE_SOURCE_RECEIPT"
+    },
+    {
+      "current_provider_ordinal": 39,
+      "function": "storage.protect_delete",
+      "current_provider_md5": "4371ae544fb1ef704f9c5d42265ac324",
+      "prior_complete_source_md5": "4371ae544fb1ef704f9c5d42265ac324",
+      "prior_full_source_chars": 535,
+      "prior_receipt": "docs/audits/issue509-provider-storage-functions-012-019-20261106-run28d.json",
+      "verdict": "EXACT_CURRENT_SOURCE_HASH_MATCHES_PRIOR_COMPLETE_SOURCE_RECEIPT"
+    },
+    {
+      "current_provider_ordinal": 40,
+      "function": "storage.search",
+      "current_provider_md5": "fed15c85bb96faaa21ec40176026a0fd",
+      "prior_complete_source_md5": "fed15c85bb96faaa21ec40176026a0fd",
+      "prior_full_source_chars": 31522,
+      "prior_receipt": "docs/audits/issue509-provider-storage-functions-012-019-20261106-run28d.json",
+      "verdict": "EXACT_CURRENT_SOURCE_HASH_MATCHES_PRIOR_COMPLETE_SOURCE_RECEIPT"
+    },
+    {
+      "current_provider_ordinal": 41,
+      "function": "storage.search_by_timestamp",
+      "current_provider_md5": "323c4e2739e9c9bcfc082f7f14289338",
+      "prior_complete_source_md5": "323c4e2739e9c9bcfc082f7f14289338",
+      "prior_full_source_chars": 6929,
+      "prior_receipt": "docs/audits/issue509-provider-storage-functions-012-019-20261106-run28d.json",
+      "verdict": "EXACT_CURRENT_SOURCE_HASH_MATCHES_PRIOR_COMPLETE_SOURCE_RECEIPT"
+    },
+    {
+      "current_provider_ordinal": 42,
+      "function": "storage.search_v2",
+      "current_provider_md5": "7a010a87c94770b1c8f0b49a616082f4",
+      "prior_complete_source_md5": "7a010a87c94770b1c8f0b49a616082f4",
+      "prior_full_source_chars": 2862,
+      "prior_receipt": "docs/audits/issue509-provider-storage-functions-012-019-20261106-run28d.json",
+      "verdict": "EXACT_CURRENT_SOURCE_HASH_MATCHES_PRIOR_COMPLETE_SOURCE_RECEIPT"
+    },
+    {
+      "current_provider_ordinal": 43,
+      "function": "storage.update_updated_at_column",
+      "current_provider_md5": "bfecc08a6034296258f0c3e10193076c",
+      "prior_complete_source_md5": "bfecc08a6034296258f0c3e10193076c",
+      "prior_full_source_chars": 178,
+      "prior_receipt": "docs/audits/issue509-provider-storage-functions-012-019-20261106-run28d.json",
+      "verdict": "EXACT_CURRENT_SOURCE_HASH_MATCHES_PRIOR_COMPLETE_SOURCE_RECEIPT"
+    }
+  ],
+  "first_time_source_words": 0,
+  "new_app_bug": false,
+  "live_writes": 0,
+  "ci_at_observation": {
+    "run_id": 43122819288,
+    "head_sha": "0f971449c938eb964c4807476cf680fedc18275d",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/43122819288"
+  },
+  "baseline_complete": false,
+  "next": "migration #65 if introduced; else ordinal #33 storage.get_common_prefix onward for current source full re-audit; hosted API/Auth and disk remain unverified."
+}

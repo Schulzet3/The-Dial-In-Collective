@@ -23,6 +23,21 @@ begin
     to_regprocedure('public.dic_redeem_invite(text)') is not null or
     to_regprocedure('public.dic_admin_issue_invite(text)') is not null then
   raise exception 'Old invitation tokens or RPCs remain';end if;
+ -- #509 R140: even trusted writes cannot enable a pending/unadmitted account.
+ -- An invalid synthetic update MUST be rejected by the table constraint.
+ denied:=false;
+ begin
+  update private.beta_members set enabled=true where owner_id=unverified_id;
+ exception when check_violation then denied:=true;
+ end;
+ if not denied then raise exception 'Enabled-without-admission constraint absent';end if;
+ perform set_config('request.jwt.claim.sub',unverified_id::text,true);
+ perform set_config('request.jwt.claims',jsonb_build_object('sub',unverified_id,'role','authenticated')::text,true);
+ execute 'set local role authenticated';
+ if private.is_member() or (public.dic_session_status()->>'admitted') is distinct from 'false' then
+  raise exception 'Enabled-but-unadmitted synthetic signup passed the member gate';
+ end if;
+ execute 'reset role';
  -- A confirmed new user has identity but no authorization or admin data.
  perform set_config('request.jwt.claim.sub',pending_id::text,true);
  perform set_config('request.jwt.claims',jsonb_build_object('sub',pending_id,'role','authenticated')::text,true);

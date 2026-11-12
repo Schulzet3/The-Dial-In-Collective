@@ -1,0 +1,9 @@
+# Issue #267 A40 — source-bound direct review — November 11, 2026
+
+Development-only SAME-COMMIT [80-source-line receipt](../audits/issue267-v2-strict-batches/S2-DISJOINT-F158-206-245-P124-161-200-20261111-A40.json). Parent development `efe1e8e4e993dd514857ab0e7646be96c20125e1`.
+
+Frozen original F158 `docs/archive/2026-10-23-reconciliation/CURRENT_STATUS.previous.md:206–245`, blob `569b768998f7d2fe3d4d2806483e1859b2a166bc`, 40 physical positions at `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9`; pinned executable P124 `site/visual.css:161–200`, blob `36ba832f1529d4a4ea980437a8385092a314e139`, 40 positions at `9707553a64f88127826e8f5b2b36cd0651296e83`. All 80 directly read, source text/line identity/behavior/quality/security/privacy/performance/dead/redundancy/current counterpart/testability/Locked disposition on each including blanks. Original/live same-number text 80/80 equal, unique identities 80/80; boundary predecessor A39 ends F158:205/P124:160 (blob `4234f8729002f88bc1f829a0e5c86b2a206c25b3`) read back without duplicate credit. AI source review, no independent human certification.
+
+Historical Oct21 Hide Shot data/SQL counts and privileged handler are dated, not a new live mutation or active flaw; later explicit owner Locked retirement governs. Responsive 10–12px UI, sync marker and scroll-hidden shot summaries are **unconfirmed** visual/accessibility candidates pending mobile/keyboard/contrast reproduction. No safely unused current code proven. No runtime changes, member/shot/Community/offline data edits, migrations, Auth/Edge/provider/production actions, release or publication.
+
+Node22/lint/build/browser/mobile/offline/SQL/Auth/603 NOT_RUN on docs-only work. Exact head and merged-source governance CI pending separate verification. Global cross-all-receipts semantic dedup, full frozen/current inventory and post-pin live changes still incomplete; issue remains OPEN. Next F158:246 and P124:201.

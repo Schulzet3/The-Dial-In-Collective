@@ -1,5 +1,9 @@
 # Scoped GitHub Work Journals
 
+- [Issue #33 R101 #513/#516/#528 verified exact current official source READY development only](ops-issue33-r101-513-516-528-20261110.md) — merged-source source/CI and permanent receipt; #33 full603 OPEN
+
+- [Issue #33 R100 original603 Ki-Saya #501 and AMCOS #504 selected-source TESTING](ops-issue33-r100-501-504-20261110.md) — exact guarded official source and parser CI pending, parent OPEN
+
 - [Issue #1591: first-shot starting-style guidance until shot is saved](issue-1591.md) — owner-Nov-8 Locked supersession, merged tests and queue READY; not deployed
 
 The central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md) remains the recovery entrypoint. For each code/test/CI commit, update either that central checkpoint or one of the named workstream journals in the same commit. Preserve tested SHA, affected paths, decision source, failures, privacy/release constraints and next action. Reconcile issue, CURRENT_STATUS, release queue and central checkpoint at READY and handoff. Never infer production publication.

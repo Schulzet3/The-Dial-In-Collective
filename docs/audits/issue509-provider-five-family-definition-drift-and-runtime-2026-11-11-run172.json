@@ -1,0 +1,3512 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 172,
+  "provider_ref": "azviqqejypsefzilgonr",
+  "observed_utc": "2026-11-11T15:47:39.897154+00",
+  "github_development_parent": "6264a42cf60682cd0d1e6fe6a13e8295dfba6fd8",
+  "main_sha": "11e1e8c7c36dad488519476d8a969bb682915d31",
+  "publication_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
+  "method": "Current PostgreSQL MD5 definition inventory compared per object against previously directly reviewed full source receipts; policy command/permissive/NULL canonical normalized before textual expression comparison. Current provider queries executed individually, no new source word credits.",
+  "referenced_full_semantic_receipts": {
+    "functions": "docs/audits/issue509-function-execute-acl-and-deployed-admin-edge-2026-11-11-run168.json",
+    "constraints": "docs/audits/issue509-application-constraint-integrity-semantics-2026-11-11-run167.json",
+    "indexes": "docs/audits/issue509-provider-app-telemetry-delta-2026-11-11-run160.json",
+    "policies": "docs/audits/issue509-provider-rls-policy-acl-admission-boundary-2026-11-11-run166.json",
+    "triggers": "docs/audits/issue509-provider-noninternal-trigger-raw-001-033-2026-11-08-run105.json"
+  },
+  "objects": [
+    {
+      "category": "function",
+      "object": "private.apply_prototype_import(u uuid, doc jsonb)",
+      "md5": "479cc03d9ea9862176b0c663d99369b0",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.bump_revision()",
+      "md5": "651239ce95a684d072c16fdb895ead7d",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.capture_equipment_snapshot()",
+      "md5": "90c66b59638b48d360e9fd949db63707",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.classify_personal_shot(shotid uuid)",
+      "md5": "5183deb46474c10468638cef08d2bd05",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_admin_access_overview()",
+      "md5": "e377ac910af0115040ad8f881cb01bfc",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_admin_account_delete_finish(p_operation_id uuid, p_actor_id uuid)",
+      "md5": "51cd64deed985a9ddf622926b8784a84",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_admin_account_delete_impact(p_member_id uuid)",
+      "md5": "a20e399d6c87c60be0661c80a17728d4",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_admin_account_delete_prepare(p_operation_id uuid, p_actor_id uuid)",
+      "md5": "6e7e0589cbda1bc5023771724ce8b77f",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_admin_account_delete_preview(p_member_id uuid)",
+      "md5": "55ad6325a6a3b8eb97d830bd4a5acc26",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_admin_account_delete_request(p_member_id uuid, p_community_mode text, p_expected_impact jsonb)",
+      "md5": "b91e425cd94b4c749b28adf8fd0b96a1",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_admin_coffee_candidates(p_submission_id uuid)",
+      "md5": "cb3cc3677b37f577643d248db1060a43",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_admin_dashboard_read()",
+      "md5": "5fa33bbe05e8408c1c2fe1b82d73a8ee",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_admin_delete_preview(p_kind text, p_record_id uuid)",
+      "md5": "733e337473ef8f190e3a78ebf5ebfad1",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_admin_delete_record(p_kind text, p_record_id uuid, p_expected_revision bigint, p_expected_impact jsonb)",
+      "md5": "71d4703233388fb04e263767caa5b57b",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_admin_edit_record(p_record_id uuid, p_expected_revision bigint, p_details jsonb, p_reason text, p_kind text)",
+      "md5": "290b98b6bb6f99a1afb73b13ff315b12",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_admin_records(p_kind text, p_offset integer, p_limit integer)",
+      "md5": "6976e717b7c5cbb34d8e3c41bc2aeba2",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_admin_review_candidates(p_submission_id uuid)",
+      "md5": "952b9cd2a21463f1073494a4d05b468f",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_admin_review_coffee(p_submission_id uuid, p_expected_revision bigint, p_action text, p_reason text, p_canonical_id uuid)",
+      "md5": "cb5c264aceb9699a498177f3f6861783",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_admin_review_signup(p_member_id uuid, p_action text, p_expected_state text)",
+      "md5": "7e0d3bf10542694b60177fcfa9c6f7be",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_admin_search_records(p_kind text, p_query text, p_offset integer, p_limit integer)",
+      "md5": "253a3fe2fe1e1e65f61b5a71a2063fdd",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_admin_set_member_access(p_member_id uuid, p_enabled boolean)",
+      "md5": "d7a339f277e9da0d8393d5efcdbc0e89",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_admin_signup_requests(p_offset integer, p_limit integer)",
+      "md5": "663c13571f70bb29b6a4351e8e6a45eb",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_backfill_library_contributions(p_owner uuid, p_entry uuid, p_canonical uuid)",
+      "md5": "424a5c87c53165a918f7094bf67d25bb",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_canonical_roaster_key(value text)",
+      "md5": "55aeb461080be1221e82d8a86a9d270d",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_capture_first_decaf_method()",
+      "md5": "9a47ec8959cf43d08f1d326e4b0bce4f",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_capture_recommendation_context()",
+      "md5": "962e12faeac2a7b5a671bd837c6c5c41",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_claim_first_style_prompt_impl(p_library_entry_id uuid)",
+      "md5": "31f06eec62a745bf998b749af71816db",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_coffee_key(value text)",
+      "md5": "8f6840ddd7e530e311c096591c01ce15",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_community_fingerprint(c community_shots)",
+      "md5": "06eaeadaef87a445b99d431ae67dd409",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_confirm_coffee_existing(mid uuid, p jsonb)",
+      "md5": "0fcc44bb8a05f46e87694d3474eb7c23",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_edit_my_coffee(p_library_entry uuid, p_expected_revision bigint, p_details jsonb, p_source_url text)",
+      "md5": "5a52eee42d3427ccbad8b7272ff8df90",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_find_coffee_matches(p jsonb)",
+      "md5": "0ba424a2a66e99dc98629a89d485680b",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_link_pending_coffee(sid uuid, canonical uuid, event_name text, evidence jsonb)",
+      "md5": "140c211a4bfef175b041c037561a1e37",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_member_retry_pending_approval(p_submission_id uuid, p_expected_revision bigint)",
+      "md5": "5ebb55ad50529a080b3c2332a29d3309",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_on_community_coffee_verification()",
+      "md5": "cefee7b991e40185eadbacde89def3aa",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_on_library_coffee_change()",
+      "md5": "b6cbc45072b0e9f8ebb511b2eca3895f",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_promote_pending_coffee(sid uuid, method text, evidence jsonb, distinct_confirmed boolean)",
+      "md5": "f9c37ac804b3b2c425cd86284020b581",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_recheck_after_link()",
+      "md5": "9fc3b44ef631cb87bc0b40e689c123b8",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_review_community_shot(p_id uuid)",
+      "md5": "c5aea4d32aa8027a39d80341feade406",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_review_pending_community(p_limit integer)",
+      "md5": "ff876442da558f60f7eccb36bd6dbe62",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_roaster_key(value text)",
+      "md5": "e553ae6c1cf99c3784f5d14a4f05d355",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_shared_preview_claim(account_id uuid)",
+      "md5": "b99b6cbd392562af334c68e056ce33d8",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_source_key(value text)",
+      "md5": "07e0ef286246fdae29b9151018296f79",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.dic_submit_coffee_auto(mid uuid, p jsonb)",
+      "md5": "e2b11c83a686a5a9949699cd23b52e13",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.handle_new_auth_user()",
+      "md5": "ba4f31790060a75e074148034f26dfbe",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.import_id(u uuid, kind text, source_id text)",
+      "md5": "d8dacedebb77db30037b10ee1bac97aa",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.import_operation(expected_owner uuid, doc jsonb, save boolean, review_hash text, recovery_saved boolean)",
+      "md5": "b684a6af862302d9d4bb7c212208f5e0",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.is_admin()",
+      "md5": "396d3e8e29dbd4550ec7ac26b7589a63",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.is_member()",
+      "md5": "dbc163d07f45e8b5831f6a6394a70ab8",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.mutate(mid uuid, action text, p jsonb)",
+      "md5": "d1050c2ee3b2896c6fbd8b90bdba9052",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.mutate_workspace(mid uuid, action text, p jsonb)",
+      "md5": "f3eb1b5086e4396625f3efa38f4c9165",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.project_shot()",
+      "md5": "79e6fd0668fa4502c8785b3e92a14a61",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.protect_shot_provenance()",
+      "md5": "9700d82ba097c7eba83b76135acbdac1",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.read_personal_state()",
+      "md5": "037d248b67cc3e8490c1689d3200990f",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.refresh_personal_family(fid uuid)",
+      "md5": "e6a15e6de21f56345479574cc575cf95",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.reject_version_update()",
+      "md5": "1679d0091bcc8e9608d9af0914955864",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.remember_feed_condition()",
+      "md5": "417b99a5145e27b5941b504d1d7509c1",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.rename_setup(mid uuid, p jsonb)",
+      "md5": "d5efbc70d20f75d6e3aeea4b64ab078b",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.require_member()",
+      "md5": "27ff3a2a7fcf231171778a2d584b1851",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.required_revision(p jsonb)",
+      "md5": "d14d1f80af2c73f953a37818f8488ca0",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "private.session_status()",
+      "md5": "0aa8e57bb4846aac7dd8e3b6c0cf690c",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_admin_access_overview()",
+      "md5": "15ea6e60d84362b6fa32f9f40f567df8",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_admin_account_delete_finish(p_operation_id uuid, p_actor_id uuid)",
+      "md5": "2fc16586443318c1594d1939544920dd",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_admin_account_delete_prepare(p_operation_id uuid, p_actor_id uuid)",
+      "md5": "a0c67fbfbbfd122a8e16596c79333092",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_admin_account_delete_preview(p_member_id uuid)",
+      "md5": "b8f41cc6faf702f27c678a45127d0723",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_admin_account_delete_request(p_member_id uuid, p_community_mode text, p_expected_impact jsonb)",
+      "md5": "779f19212d19ebbfb88f2a859fd92c21",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_admin_approve_own_coffee(submission_id uuid)",
+      "md5": "dad5489e9916e30aef63110f7b666954",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_admin_coffee_candidates(p_submission_id uuid)",
+      "md5": "cb857122b118c9c3b3e7190bae52168a",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_admin_dashboard()",
+      "md5": "10cb975d77d22778ebd72d59dba6e934",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_admin_delete_preview(p_kind text, p_record_id uuid)",
+      "md5": "102b8d2797413ed02a943d093cc60427",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_admin_delete_record(p_kind text, p_record_id uuid, p_expected_revision bigint, p_expected_impact jsonb)",
+      "md5": "54ad38cc86048b526c158f4f34867398",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_admin_edit_coffee(p_record_id uuid, p_expected_revision bigint, p_details jsonb, p_reason text, p_kind text)",
+      "md5": "24e3081d08de58a97f7eeaa65cb568bc",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_admin_edit_shot(p_record_id uuid, p_expected_revision bigint, p_details jsonb, p_reason text, p_kind text)",
+      "md5": "b4e2f07488e5ebc93d1569ca46ad0fbd",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_admin_records(p_kind text, p_offset integer, p_limit integer)",
+      "md5": "bfdf280c85fdf95c72bd2f7f545659b1",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_admin_review_candidates(p_submission_id uuid)",
+      "md5": "a03f0e34a59684c9b0810ce8b1f79b96",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_admin_review_coffee(p_submission_id uuid, p_expected_revision bigint, p_action text, p_reason text, p_canonical_id uuid)",
+      "md5": "249b84c409201e14f1b75235f9ae3ffa",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_admin_review_signup(p_member_id uuid, p_action text, p_expected_state text)",
+      "md5": "ebfec67f4da9cf3adc0d3e3431f2a295",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_admin_search_records(p_kind text, p_query text, p_offset integer, p_limit integer)",
+      "md5": "de9c08308b98e3de0d7d1db084dae375",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_admin_set_member_access(p_member_id uuid, p_enabled boolean)",
+      "md5": "67ea2ae8b4603b266e910bc8f6ff7240",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_admin_signup_requests(p_offset integer, p_limit integer)",
+      "md5": "ab3a82cfe5d926fa485c39b153aa701e",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_apply_client_change(expected_owner uuid, mutation_id uuid, action text, payload jsonb)",
+      "md5": "da434f17a21539d72ebb8fc04c13f214",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_browse_community_shots(p_limit integer, p_offset integer)",
+      "md5": "edcc2c6a9fb24b3455a446d964a2ed2d",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_claim_first_style_prompt(p_library_entry_id uuid)",
+      "md5": "5f652895cd7e0775e9fecd39f36fc34e",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_claim_universal_preview()",
+      "md5": "8f4bc6ecd8687594ff7200cda26104b5",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_commit_import(expected_owner uuid, backup jsonb, review_hash text, recovery_saved boolean)",
+      "md5": "13e59d7da1efb928dc307f90a2e08dca",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_community_evidence_counts(p_coffee_id uuid, p_style text)",
+      "md5": "1bddea7e3160c0282bea1d6e74d1fbaf",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_community_recommendation_evidence(p_library_entry_id uuid, p_style text)",
+      "md5": "085f92a3814dce624e5b9a3759e893ef",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_confirm_community_outlier(p_shot_id uuid, p_expected_revision bigint)",
+      "md5": "0657114255a0375b7f3fc502f780aa54",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_edit_my_coffee(p_library_entry uuid, p_expected_revision bigint, p_details jsonb, p_source_url text)",
+      "md5": "fa2193422c742ae9f42e2239c166f245",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_find_coffee_matches(payload jsonb)",
+      "md5": "b3e36084c168cabe7a11a6d176e8951f",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_member_retry_pending_approval(p_submission_id uuid, p_expected_revision bigint)",
+      "md5": "3d8aa15468f134fc78f79357ec783a60",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_mutate(mutation_id uuid, action text, payload jsonb)",
+      "md5": "86cd376e257d80b09b1e228236a87dff",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_my_community_outliers()",
+      "md5": "312b59594de640adacb12ab0aa0d18e4",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_preview_cached_verified(p_source_url text)",
+      "md5": "86a08b5ae97f89c13b8c727ebdd0c50f",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_preview_complete(p_ticket uuid)",
+      "md5": "abc5f79b029d51593f29fe4774488d0b",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_preview_import(expected_owner uuid, backup jsonb)",
+      "md5": "001e3dd5b495ca6d1fd096bf35a473dd",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_preview_preflight(p_cached boolean)",
+      "md5": "a437026d8c1b75f0db24c0ef840cae24",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_read_personal_state()",
+      "md5": "811aee397f3505117fcc38715e09af94",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_roaster_preview_target(host text)",
+      "md5": "d264ace83ea27e01b12f789b2e2b4542",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_search_community_shots(p_query text, p_style text, p_limit integer, p_offset integer)",
+      "md5": "1124d2bbfec7f47d38d06ceb2e049fe4",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_session_status()",
+      "md5": "742e5bd0fc8544807886b514d95d6688",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_source_check_target(submission_id uuid)",
+      "md5": "6af6fa312bed8eb0ed26b31dc94da3b6",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_source_claim(submission_id uuid)",
+      "md5": "68bc86486e485565d4273daf3655e0d3",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_trusted_source_verify(submission_id uuid, evidence jsonb)",
+      "md5": "59dfb6ecc6a2b8324fa9ba8512fdaaa3",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.dic_url_preview_claim(account_id uuid)",
+      "md5": "25b95f9449aeb73cc1937f880358c22f",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "function",
+      "object": "public.rls_auto_enable()",
+      "md5": "846ec2fbff751d24b890656d63c3a9bf",
+      "comparison": "EQUAL_RUN168"
+    },
+    {
+      "category": "constraint",
+      "object": "private.admin_access_events.admin_access_events_action_check",
+      "md5": "f902cbbb2f514940fb2284fcfd374290",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.admin_access_events.admin_access_events_actor_id_fkey",
+      "md5": "bd237ddc6ddd109915445a1acecb5c41",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.admin_access_events.admin_access_events_member_id_fkey",
+      "md5": "d00fde192d5a9de1a19f2702dfb6f74e",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.admin_access_events.admin_access_events_pkey",
+      "md5": "4c6419b3704337bbfe50f018842a9ad3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.admin_content_edits.admin_content_edits_actor_id_fkey",
+      "md5": "508a4cf20410e80e6cb722233bc03330",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.admin_content_edits.admin_content_edits_pkey",
+      "md5": "4c6419b3704337bbfe50f018842a9ad3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.admin_content_edits.admin_content_edits_reason_check",
+      "md5": "fc9d11bf0e9a27f4dc5657c9468d031e",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.admin_content_edits.admin_content_edits_record_kind_check",
+      "md5": "dbd61b5b0a13804230d4d1de071fdd74",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.admin_content_edits.admin_content_edits_subject_owner_id_fkey",
+      "md5": "69f64337961955c61ed35ec6014c5b3b",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.app_admins.app_admins_owner_id_fkey",
+      "md5": "50d81623a219dd2c5064b1dd59c06929",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.app_admins.app_admins_pkey",
+      "md5": "9aab00d33b03b16a1ea3d19bf92cb077",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.backup_runs.backup_runs_coverage_check",
+      "md5": "0f672854e4a042bbc1b38464807e8b46",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.backup_runs.backup_runs_pkey",
+      "md5": "4c6419b3704337bbfe50f018842a9ad3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.backup_runs.backup_runs_status_check",
+      "md5": "409cf807af0489977bc002491e8fc08b",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.beta_members.beta_members_owner_id_fkey",
+      "md5": "50d81623a219dd2c5064b1dd59c06929",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.beta_members.beta_members_pkey",
+      "md5": "9aab00d33b03b16a1ea3d19bf92cb077",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.beta_members.beta_members_signup_review_state_check",
+      "md5": "6f830a2786412b381ef2909a42b2a204",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.community_quality_checks.community_quality_checks_community_shot_id_fkey",
+      "md5": "e01a96f6f6a252407f7eb18dc96b84fb",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.community_quality_checks.community_quality_checks_outcome_check",
+      "md5": "542697cefb04716cc3852603b1bc7a0c",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.community_quality_checks.community_quality_checks_pkey",
+      "md5": "6b6595c74c6e27d1ae3998189a92cd56",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.community_quality_checks.community_quality_checks_reason_check",
+      "md5": "3e0243cfba8610ed985c8830ffd45ea8",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.contribution_links.contribution_links_community_shot_id_fkey",
+      "md5": "cb861c11fab81762470fd935ff629716",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.contribution_links.contribution_links_contributor_id_fkey",
+      "md5": "cdf8052624903b65eaeaf9fd601d23d3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.contribution_links.contribution_links_pkey",
+      "md5": "6b6595c74c6e27d1ae3998189a92cd56",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.contribution_links.contribution_links_shot_id_fkey",
+      "md5": "6344c04b64f4b0897b8640f7245a3a52",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.contribution_links.contribution_links_shot_id_key",
+      "md5": "7e34ea3d4fdd92cbc2c49baa573e788d",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.contributors.contributors_owner_id_fkey",
+      "md5": "70b9289e2a39c27efd4e724f74f04ccd",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.contributors.contributors_owner_id_key",
+      "md5": "1a91c0b3a3df12a3b2863cfdb8b77e48",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.contributors.contributors_pkey",
+      "md5": "4c6419b3704337bbfe50f018842a9ad3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_admin_account_delete_operations.dic_admin_account_delete_operations_actor_id_fkey",
+      "md5": "bd237ddc6ddd109915445a1acecb5c41",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_admin_account_delete_operations.dic_admin_account_delete_operations_community_mode_check",
+      "md5": "7e78c9cc663a15b13379af6b18129af6",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_admin_account_delete_operations.dic_admin_account_delete_operations_phase_check",
+      "md5": "1d32521f002bff819c38c522a54648b8",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_admin_account_delete_operations.dic_admin_account_delete_operations_pkey",
+      "md5": "4c6419b3704337bbfe50f018842a9ad3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_admin_delete_receipts.dic_admin_delete_receipts_pkey",
+      "md5": "4c6419b3704337bbfe50f018842a9ad3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_coffee_aliases.dic_coffee_aliases_alias_key_check",
+      "md5": "efe57867bad63eb6f108960dcffd0f0e",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_coffee_aliases.dic_coffee_aliases_coffee_id_fkey",
+      "md5": "bc4131ca1700b897e12a0deb212de16c",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_coffee_aliases.dic_coffee_aliases_origin_kind_check",
+      "md5": "c67ea6eef9f025aba625660013f63fb3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_coffee_aliases.dic_coffee_aliases_original_name_check",
+      "md5": "e63ea75815ba5388731bed146f8a02d3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_coffee_aliases.dic_coffee_aliases_pkey",
+      "md5": "1fcfd6e6beac4d53715df8ed76d2a320",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_coffee_audit.dic_coffee_audit_coffee_id_fkey",
+      "md5": "bc4131ca1700b897e12a0deb212de16c",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_coffee_audit.dic_coffee_audit_event_kind_check",
+      "md5": "a2cf33af4da334ac5ad65cff2cb3f319",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_coffee_audit.dic_coffee_audit_evidence_check",
+      "md5": "2f18b4d83e30a25133449ce32c202d64",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_coffee_audit.dic_coffee_audit_pkey",
+      "md5": "4c6419b3704337bbfe50f018842a9ad3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_coffee_audit.dic_coffee_audit_submission_id_fkey",
+      "md5": "d1950d6c8ce68798b3129eeffd56a0e2",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_coffee_first_entry.dic_coffee_first_entry_coffee_id_fkey",
+      "md5": "bc4131ca1700b897e12a0deb212de16c",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_coffee_first_entry.dic_coffee_first_entry_first_submission_id_fkey",
+      "md5": "ff175bc832cc8f821ab0335db323706a",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_coffee_first_entry.dic_coffee_first_entry_pkey",
+      "md5": "a2a8a8708db009e1e0b2878db2288817",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_coffee_first_entry.dic_coffee_first_entry_primary_name_check",
+      "md5": "a259c67748137618ac3915dc26cf1fce",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_first_style_prompt_seen.dic_first_style_prompt_seen_owner_id_fkey",
+      "md5": "50d81623a219dd2c5064b1dd59c06929",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_first_style_prompt_seen.dic_first_style_prompt_seen_owner_id_library_entry_id_fkey",
+      "md5": "a5961707c3efe2168ac92bb6dc461d4f",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_first_style_prompt_seen.dic_first_style_prompt_seen_pkey",
+      "md5": "82674d53ca2cd471014889f8dc2e31f5",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_roaster_aliases.dic_roaster_aliases_alias_key_check",
+      "md5": "ef9b5f00ac1e36f09a9f8edb387755fa",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_roaster_aliases.dic_roaster_aliases_evidence_url_check",
+      "md5": "cd70b1e98955323a0d2f979a02eb5e69",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_roaster_aliases.dic_roaster_aliases_pkey",
+      "md5": "094a964096d1cb70d572fcf0bf012822",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_roaster_aliases.dic_roaster_aliases_roaster_id_fkey",
+      "md5": "5a6a9d168b6753cf0fab819252f5f4d7",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_roaster_directory.dic_roaster_directory_canonical_key_check",
+      "md5": "927f5d82f0116db6afe62267a0107ae0",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_roaster_directory.dic_roaster_directory_canonical_key_key",
+      "md5": "e76288610c3781e7c08ae769a1510143",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_roaster_directory.dic_roaster_directory_canonical_name_check",
+      "md5": "4793111aeb7551a59e4346a15c77ca2c",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_roaster_directory.dic_roaster_directory_evidence_url_check",
+      "md5": "cd70b1e98955323a0d2f979a02eb5e69",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_roaster_directory.dic_roaster_directory_official_domain_check",
+      "md5": "35a2bb3f060803d9fa6d065625daf05e",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_roaster_directory.dic_roaster_directory_pkey",
+      "md5": "4c6419b3704337bbfe50f018842a9ad3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_signup_review_events.dic_signup_review_events_action_check",
+      "md5": "d769fd915bb95f9be24c1c731757c38e",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_signup_review_events.dic_signup_review_events_actor_id_fkey",
+      "md5": "bd237ddc6ddd109915445a1acecb5c41",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_signup_review_events.dic_signup_review_events_member_id_fkey",
+      "md5": "d00fde192d5a9de1a19f2702dfb6f74e",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_signup_review_events.dic_signup_review_events_pkey",
+      "md5": "4c6419b3704337bbfe50f018842a9ad3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_source_attempts.dic_source_attempts_attempts_check",
+      "md5": "b0ac05c5100e196ac03ecf60ed50ddcf",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_source_attempts.dic_source_attempts_owner_id_fkey",
+      "md5": "a29babec2ba68361c14144513470a194",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_source_attempts.dic_source_attempts_pkey",
+      "md5": "3aed3b147e20892d51d99e7e6b368029",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_source_attempts.dic_source_attempts_submission_id_fkey",
+      "md5": "138442955ac78c716ec101fc2b46155c",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_url_preview_attempts.dic_url_preview_attempts_attempts_check",
+      "md5": "4221aaecadfd0a5a1d01adfc8698b3f6",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_url_preview_attempts.dic_url_preview_attempts_owner_id_fkey",
+      "md5": "50d81623a219dd2c5064b1dd59c06929",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.dic_url_preview_attempts.dic_url_preview_attempts_pkey",
+      "md5": "9aab00d33b03b16a1ea3d19bf92cb077",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.import_batches.import_batches_owner_id_fkey",
+      "md5": "50d81623a219dd2c5064b1dd59c06929",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.import_batches.import_batches_pkey",
+      "md5": "42f03d969b7d4c00cf487f23b6b16fd8",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.import_batches.import_batches_source_hash_check",
+      "md5": "071851e88a167156008df2e2dd52ceec",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.import_control.import_control_check",
+      "md5": "0cd2f86f312d2705747d4d60b7576a04",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.import_control.import_control_exception_complete_check",
+      "md5": "e4696c7c592f7549ec4c523414b080f4",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.import_control.import_control_owner_only_exception_owner_id_fkey",
+      "md5": "7f3fa57ca62ee03b08cac6bbd09852a7",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.import_control.import_control_pkey",
+      "md5": "7511e9a8e50c073e1d6eff73afcc0f24",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.import_control.import_control_singleton_check",
+      "md5": "ae6f6dfbe38290d5bfa8f3e96d1aff91",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.mutation_receipts.mutation_receipts_owner_id_fkey",
+      "md5": "50d81623a219dd2c5064b1dd59c06929",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.mutation_receipts.mutation_receipts_pkey",
+      "md5": "075fa704a9a36a48706b02090adefbe0",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.shot_audit.shot_audit_owner_id_fkey",
+      "md5": "50d81623a219dd2c5064b1dd59c06929",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "private.shot_audit.shot_audit_pkey",
+      "md5": "4c6419b3704337bbfe50f018842a9ad3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.account_preferences.account_active_setup_fk",
+      "md5": "73f842309150ed51aa3699229e62f2ae",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.account_preferences.account_preferences_owner_id_fkey",
+      "md5": "50d81623a219dd2c5064b1dd59c06929",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.account_preferences.account_preferences_pkey",
+      "md5": "9aab00d33b03b16a1ea3d19bf92cb077",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.account_preferences.account_preferences_revision_check",
+      "md5": "c89fd39547f9f210c335be16751472e2",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.account_preferences.account_preferences_tasting_preferences_check",
+      "md5": "0d6dd29164fae3cf4b2b7061870d9972",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.account_preferences.account_preferences_theme_check",
+      "md5": "e4ab06ad2c9c5b043970d3d393af81d0",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.admin_reviews.admin_reviews_action_check",
+      "md5": "9b33a0ac9b7e3bf032e54d303aa883a6",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.admin_reviews.admin_reviews_community_shot_id_fkey",
+      "md5": "cb861c11fab81762470fd935ff629716",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.admin_reviews.admin_reviews_evidence_check",
+      "md5": "156ee49b4a0008bb869af4680b485dba",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.admin_reviews.admin_reviews_pkey",
+      "md5": "4c6419b3704337bbfe50f018842a9ad3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.admin_reviews.admin_reviews_reason_check",
+      "md5": "57bb748b557e359767dc4cf2e5bc6174",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.admin_reviews.admin_reviews_reviewer_id_fkey",
+      "md5": "ef8c9772fb78a7a0f5d3684d2302a16d",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.admin_reviews.admin_reviews_submission_id_fkey",
+      "md5": "d1950d6c8ce68798b3129eeffd56a0e2",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.bags.bags_owner_id_fkey",
+      "md5": "50d81623a219dd2c5064b1dd59c06929",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.bags.bags_owner_id_library_entry_id_fkey",
+      "md5": "a5961707c3efe2168ac92bb6dc461d4f",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.bags.bags_owner_id_library_entry_id_id_key",
+      "md5": "9b636df7a613a81cc39691e3d6c4dd49",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.bags.bags_pkey",
+      "md5": "4c6419b3704337bbfe50f018842a9ad3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.bags.bags_revision_check",
+      "md5": "c89fd39547f9f210c335be16751472e2",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.basket_versions.basket_versions_basket_dose_g_check",
+      "md5": "db77c92a585337b2c2c66269caab647b",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.basket_versions.basket_versions_owner_id_fkey",
+      "md5": "50d81623a219dd2c5064b1dd59c06929",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.basket_versions.basket_versions_owner_id_setup_id_basket_id_fkey",
+      "md5": "8c50151ac985e7c051c0b0c0b8f87ee9",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.basket_versions.basket_versions_owner_id_setup_id_id_key",
+      "md5": "fc18b7d8502098650347aa2038b181c2",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.basket_versions.basket_versions_pkey",
+      "md5": "4c6419b3704337bbfe50f018842a9ad3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.baskets.baskets_name_check",
+      "md5": "7f7595a4270a2b30ecf65cd7b30c28ba",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.baskets.baskets_owner_id_fkey",
+      "md5": "50d81623a219dd2c5064b1dd59c06929",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.baskets.baskets_owner_id_setup_id_fkey",
+      "md5": "f22e7a043e329ab9d74e95092292301a",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.baskets.baskets_owner_id_setup_id_id_key",
+      "md5": "fc18b7d8502098650347aa2038b181c2",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.baskets.baskets_pkey",
+      "md5": "4c6419b3704337bbfe50f018842a9ad3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.baskets.baskets_revision_check",
+      "md5": "c89fd39547f9f210c335be16751472e2",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffee_groups.coffee_groups_label_check",
+      "md5": "20914cb920cbfaef6d48462fe1da72ab",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffee_groups.coffee_groups_pkey",
+      "md5": "4c6419b3704337bbfe50f018842a9ad3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffee_sources.coffee_sources_coffee_id_fkey",
+      "md5": "bc4131ca1700b897e12a0deb212de16c",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffee_sources.coffee_sources_evidence_excerpt_check",
+      "md5": "f534efbc3c4d89bdb970d94ba25e1e14",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffee_sources.coffee_sources_field_values_check",
+      "md5": "cefc840b57e4d2e1ef8111ae9c7a273a",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffee_sources.coffee_sources_pkey",
+      "md5": "4c6419b3704337bbfe50f018842a9ad3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffee_sources.coffee_sources_source_kind_check",
+      "md5": "5d053da1057277a836e69ce5cdcb99e4",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffee_sources.coffee_sources_source_url_check",
+      "md5": "40ff741ecf8c8c1f99ecbbefc8e37929",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffee_submissions.coffee_submissions_base_coffee_revision_check",
+      "md5": "c8c20bc295d5989fcdae817ef0c0c805",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffee_submissions.coffee_submissions_canonical_coffee_id_fkey",
+      "md5": "0ac8fbd03f5c55aeb7d391e5f83702ee",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffee_submissions.coffee_submissions_owner_id_fkey",
+      "md5": "50d81623a219dd2c5064b1dd59c06929",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffee_submissions.coffee_submissions_owner_id_id_key",
+      "md5": "abb719d656caa17f66680eac0829d266",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffee_submissions.coffee_submissions_pkey",
+      "md5": "4c6419b3704337bbfe50f018842a9ad3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffee_submissions.coffee_submissions_proposed_data_check",
+      "md5": "b83af8554dd46c38980b9717683cc118",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffee_submissions.coffee_submissions_revision_check",
+      "md5": "c89fd39547f9f210c335be16751472e2",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffee_submissions.coffee_submissions_source_url_check",
+      "md5": "40ff741ecf8c8c1f99ecbbefc8e37929",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffee_submissions.coffee_submissions_status_check",
+      "md5": "a105f8a65a2ea356c1517337218de549",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffees.coffee_decaffeination_method_values_check",
+      "md5": "ec716582cbd3a8252970d52790e24706",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffees.coffee_decaffeination_only_when_decaf_check",
+      "md5": "847231457964d8876060db55eb21934b",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffees.coffees_availability_check",
+      "md5": "ee2cb97a904c0ac18ac12287c2fc98c3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffees.coffees_check",
+      "md5": "dced9d06f0e9f9e44a6439d82adcaf82",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffees.coffees_check1",
+      "md5": "3d49cf88cec3246a58290e669b5777a7",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffees.coffees_group_id_fkey",
+      "md5": "c5d44f8f1055adea450045f52a110d19",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffees.coffees_merged_into_id_fkey",
+      "md5": "f7263b01471372181df7d9fbcdd0e79f",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffees.coffees_name_check",
+      "md5": "2c72d5ed2f59c3e19d94e539afadbdce",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffees.coffees_pkey",
+      "md5": "4c6419b3704337bbfe50f018842a9ad3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffees.coffees_revision_check",
+      "md5": "c89fd39547f9f210c335be16751472e2",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffees.coffees_roast_level_check",
+      "md5": "d3ec6da9a15069bc89fb3196a6fe9f46",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffees.coffees_roaster_check",
+      "md5": "51634fd2721296a679a55ecf417f41e8",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffees.coffees_roaster_recipe_check",
+      "md5": "7eff4c6ebe68fc6a8ced4dbba0876d4b",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.coffees.coffees_verification_state_check",
+      "md5": "276c8859390f49531e002095e11e4776",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.community_shots.community_shots_astringency_check",
+      "md5": "3acf08bd0824e9d3fd110000c3c60450",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.community_shots.community_shots_body_check",
+      "md5": "b1957b47e4fa9bc04ec007b6c707a8f5",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.community_shots.community_shots_clarity_check",
+      "md5": "811ee3f3b42716551da845dabb1463bf",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.community_shots.community_shots_coffee_id_fkey",
+      "md5": "bc4131ca1700b897e12a0deb212de16c",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.community_shots.community_shots_coffee_id_style_family_id_fkey",
+      "md5": "4fa968b64fed180e5c21a27de6f811c2",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.community_shots.community_shots_dose_g_check",
+      "md5": "bc78967d9a09ad01afbb7b6fc0694206",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.community_shots.community_shots_extraction_check",
+      "md5": "2f328dbd995265dba3a15738d97bddf8",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.community_shots.community_shots_feed_mode_check",
+      "md5": "74ab95623b56edceba8661b0c98a9006",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.community_shots.community_shots_grind_setting_check",
+      "md5": "fbfa9385458684d73181819308ba0043",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.community_shots.community_shots_pkey",
+      "md5": "4c6419b3704337bbfe50f018842a9ad3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.community_shots.community_shots_quality_state_check",
+      "md5": "06541cc87b91891863eee2a8bba20608",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.community_shots.community_shots_style_check",
+      "md5": "510c8656dec731dad315c87ef0c66ea6",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.community_shots.community_shots_sweetness_check",
+      "md5": "78e8827cfa5cde76e2c40afb8ee36212",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.community_shots.community_shots_temperature_c_check",
+      "md5": "3ae9c88f91a11b5da1565dfcaf320930",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.community_shots.community_shots_time_s_check",
+      "md5": "3de9aa60257a16620756ec15c0a3e5be",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.community_shots.community_shots_yield_g_check",
+      "md5": "2eaad7beb9e3f98201af8c81d476b706",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.grinder_calibrations.grinder_calibrations_check",
+      "md5": "323cc766c8e868991fd621c56538f98e",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.grinder_calibrations.grinder_calibrations_check1",
+      "md5": "a178f59927f6146136522d1bddc7a9cc",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.grinder_calibrations.grinder_calibrations_finest_setting_check",
+      "md5": "a603ccc8edbdff6de6de4388e587b55b",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.grinder_calibrations.grinder_calibrations_owner_id_fkey",
+      "md5": "50d81623a219dd2c5064b1dd59c06929",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.grinder_calibrations.grinder_calibrations_owner_id_setup_id_fkey",
+      "md5": "f22e7a043e329ab9d74e95092292301a",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.grinder_calibrations.grinder_calibrations_owner_id_setup_id_id_key",
+      "md5": "fc18b7d8502098650347aa2038b181c2",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.grinder_calibrations.grinder_calibrations_owner_id_setup_id_previous_calibratio_fkey",
+      "md5": "a2605c29afefd41f64396d34aca2034b",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.grinder_calibrations.grinder_calibrations_pkey",
+      "md5": "4c6419b3704337bbfe50f018842a9ad3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.library_entries.library_entries_check",
+      "md5": "bcd35819ae2bcda423cba7caea269e3e",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.library_entries.library_entries_coffee_id_fkey",
+      "md5": "bc4131ca1700b897e12a0deb212de16c",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.library_entries.library_entries_owner_id_fkey",
+      "md5": "50d81623a219dd2c5064b1dd59c06929",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.library_entries.library_entries_owner_id_id_key",
+      "md5": "abb719d656caa17f66680eac0829d266",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.library_entries.library_entries_owner_id_submission_id_fkey",
+      "md5": "165a7d6be7a44193266fe99f28b26359",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.library_entries.library_entries_pkey",
+      "md5": "4c6419b3704337bbfe50f018842a9ad3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.library_entries.library_entries_revision_check",
+      "md5": "c89fd39547f9f210c335be16751472e2",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.personal_recipe_families.personal_recipe_families_community_family_id_fkey",
+      "md5": "2407621f85c11c4a00176e335a50b0af",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.personal_recipe_families.personal_recipe_families_evidence_state_check",
+      "md5": "dac0a9712ef5ed63b1b038f8a1efb679",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.personal_recipe_families.personal_recipe_families_owner_id_fkey",
+      "md5": "50d81623a219dd2c5064b1dd59c06929",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.personal_recipe_families.personal_recipe_families_owner_id_library_entry_id_fkey",
+      "md5": "a5961707c3efe2168ac92bb6dc461d4f",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.personal_recipe_families.personal_recipe_families_owner_id_library_entry_id_style_id_key",
+      "md5": "196a63fbf6ab6929f9e0ce387806dd3a",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.personal_recipe_families.personal_recipe_families_pkey",
+      "md5": "4c6419b3704337bbfe50f018842a9ad3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.personal_recipe_families.personal_recipe_families_statistics_check",
+      "md5": "09e81075a888d96d76d51a0461779506",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.personal_recipe_families.personal_recipe_families_style_check",
+      "md5": "510c8656dec731dad315c87ef0c66ea6",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.recipe_families.recipe_families_check",
+      "md5": "8a523d29a86d95eec7ab4c759b0019ff",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.recipe_families.recipe_families_coffee_id_fkey",
+      "md5": "bc4131ca1700b897e12a0deb212de16c",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.recipe_families.recipe_families_coffee_id_style_id_key",
+      "md5": "6422903319076b6413094cef20ea57f6",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.recipe_families.recipe_families_evidence_state_check",
+      "md5": "01a188e927e1c97f91356d3d39bfb975",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.recipe_families.recipe_families_pkey",
+      "md5": "4c6419b3704337bbfe50f018842a9ad3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.recipe_families.recipe_families_ratio_high_check",
+      "md5": "c6ae70b5d1cbf0d15c85c5332e751e0c",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.recipe_families.recipe_families_ratio_low_check",
+      "md5": "203952cc4f57e74777490e6c4cdda276",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.recipe_families.recipe_families_style_check",
+      "md5": "510c8656dec731dad315c87ef0c66ea6",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.recipe_preferences.preferred_example_fk",
+      "md5": "f27a01d31d52dda9b2e6ad08f331163f",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.recipe_preferences.recipe_preferences_owner_id_fkey",
+      "md5": "50d81623a219dd2c5064b1dd59c06929",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.recipe_preferences.recipe_preferences_owner_id_library_entry_id_fkey",
+      "md5": "a5961707c3efe2168ac92bb6dc461d4f",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.recipe_preferences.recipe_preferences_owner_id_library_entry_id_style_current_fkey",
+      "md5": "172882f5cdd3440a437b3d5bc8f974f4",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.recipe_preferences.recipe_preferences_owner_id_library_entry_id_style_referen_fkey",
+      "md5": "dff2149897305db9d150e076b1a34793",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.recipe_preferences.recipe_preferences_owner_id_setup_id_setup_version_id_fkey",
+      "md5": "3a5a91012e8c4c9869ca7789f5e22b53",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.recipe_preferences.recipe_preferences_pkey",
+      "md5": "ab932c0ddfd82a7a775c6fc763bd3927",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.recipe_preferences.recipe_preferences_revision_check",
+      "md5": "c89fd39547f9f210c335be16751472e2",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.recipe_preferences.recipe_preferences_style_check",
+      "md5": "510c8656dec731dad315c87ef0c66ea6",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.setup_preferences.setup_preferences_check",
+      "md5": "07dcb59f8f97a6324b29d92428d4b0a0",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.setup_preferences.setup_preferences_owner_id_fkey",
+      "md5": "50d81623a219dd2c5064b1dd59c06929",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.setup_preferences.setup_preferences_owner_id_setup_id_calibration_id_fkey",
+      "md5": "8e4c34b3042792d22c0632a16e894add",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.setup_preferences.setup_preferences_owner_id_setup_id_default_basket_version_fkey",
+      "md5": "e2ecb28ee26f442cee9cb828c3272231",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.setup_preferences.setup_preferences_owner_id_setup_id_setup_version_id_fkey",
+      "md5": "3a5a91012e8c4c9869ca7789f5e22b53",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.setup_preferences.setup_preferences_pkey",
+      "md5": "2b678482ca5a5f4195bc9453bdf60b38",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.setup_preferences.setup_preferences_revision_check",
+      "md5": "c89fd39547f9f210c335be16751472e2",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.setup_preferences.setup_preferences_temperature_unit_check",
+      "md5": "2acebb84373f7b16afdb05b0da9ed1ba",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.setup_versions.setup_versions_owner_id_fkey",
+      "md5": "50d81623a219dd2c5064b1dd59c06929",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.setup_versions.setup_versions_owner_id_setup_id_fkey",
+      "md5": "f22e7a043e329ab9d74e95092292301a",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.setup_versions.setup_versions_owner_id_setup_id_id_key",
+      "md5": "fc18b7d8502098650347aa2038b181c2",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.setup_versions.setup_versions_pkey",
+      "md5": "4c6419b3704337bbfe50f018842a9ad3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.setups.setup_active_version_fk",
+      "md5": "ea72233f10c6f929e5a031c6adcfd8cc",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.setups.setups_name_check",
+      "md5": "7f7595a4270a2b30ecf65cd7b30c28ba",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.setups.setups_owner_id_fkey",
+      "md5": "50d81623a219dd2c5064b1dd59c06929",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.setups.setups_owner_id_id_key",
+      "md5": "abb719d656caa17f66680eac0829d266",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.setups.setups_pkey",
+      "md5": "4c6419b3704337bbfe50f018842a9ad3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.setups.setups_revision_check",
+      "md5": "c89fd39547f9f210c335be16751472e2",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shot_notes.shot_notes_notes_check",
+      "md5": "b74c081e2499b1f8f6bd81398b7bb2d4",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shot_notes.shot_notes_owner_id_fkey",
+      "md5": "50d81623a219dd2c5064b1dd59c06929",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shot_notes.shot_notes_owner_id_shot_id_fkey",
+      "md5": "727b8f6380d756d883f2f8a44823fa59",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shot_notes.shot_notes_pkey",
+      "md5": "0b76c14eedc501f002153243ebf72e21",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shots.shots_astringency_check",
+      "md5": "e7c6da45bddbb792344a800486f8aea4",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shots.shots_body_check",
+      "md5": "7a5e0d9bfc9c37039ea2dfd31ac46130",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shots.shots_check",
+      "md5": "2bf0663987bcf6680fd5d5931bd8687d",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shots.shots_clarity_check",
+      "md5": "96aca301e1496e6080f8770de5332c50",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shots.shots_dose_g_check",
+      "md5": "bc78967d9a09ad01afbb7b6fc0694206",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shots.shots_equipment_snapshot_check",
+      "md5": "6689967edcce9651da83dfab290e147b",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shots.shots_extraction_check",
+      "md5": "fdcd4cfe5efed2126cc71d57002d79ed",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shots.shots_feed_mode_check",
+      "md5": "74ab95623b56edceba8661b0c98a9006",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shots.shots_grind_setting_check",
+      "md5": "fbfa9385458684d73181819308ba0043",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shots.shots_owner_id_fkey",
+      "md5": "50d81623a219dd2c5064b1dd59c06929",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shots.shots_owner_id_id_key",
+      "md5": "abb719d656caa17f66680eac0829d266",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shots.shots_owner_id_library_entry_id_bag_id_fkey",
+      "md5": "60018353d5032a0093ef4b35eec470ed",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shots.shots_owner_id_library_entry_id_fkey",
+      "md5": "a5961707c3efe2168ac92bb6dc461d4f",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shots.shots_owner_id_library_entry_id_style_personal_family_id_fkey",
+      "md5": "37f81075e763c239bb7faa436ead5b36",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shots.shots_owner_id_setup_id_basket_version_id_fkey",
+      "md5": "fa88b16cdcf3a9fc60bcbbc7bbeae3c9",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shots.shots_owner_id_setup_id_calibration_id_fkey",
+      "md5": "8e4c34b3042792d22c0632a16e894add",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shots.shots_owner_id_setup_id_setup_version_id_fkey",
+      "md5": "622d6d95b56ff2eedcc61eedbf5c5285",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shots.shots_owner_id_setup_id_setup_version_id_library_entry_id_s_key",
+      "md5": "0c021b20d358d54a80f0cc1a959a8861",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shots.shots_pkey",
+      "md5": "4c6419b3704337bbfe50f018842a9ad3",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shots.shots_recommendation_context_check",
+      "md5": "5f2ecddf5bc9d7a4b3f7bc15fa508a15",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shots.shots_revision_check",
+      "md5": "c89fd39547f9f210c335be16751472e2",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shots.shots_style_check",
+      "md5": "510c8656dec731dad315c87ef0c66ea6",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shots.shots_sweetness_check",
+      "md5": "ccaccd932b77642615aeca229ec8a482",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shots.shots_temperature_c_check",
+      "md5": "3ae9c88f91a11b5da1565dfcaf320930",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shots.shots_time_s_check",
+      "md5": "3de9aa60257a16620756ec15c0a3e5be",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.shots.shots_yield_g_check",
+      "md5": "2eaad7beb9e3f98201af8c81d476b706",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.workspace_coffees.workspace_coffees_owner_id_fkey",
+      "md5": "50d81623a219dd2c5064b1dd59c06929",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.workspace_coffees.workspace_coffees_owner_id_library_entry_id_fkey",
+      "md5": "a5961707c3efe2168ac92bb6dc461d4f",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.workspace_coffees.workspace_coffees_owner_id_setup_id_basket_version_id_fkey",
+      "md5": "fa88b16cdcf3a9fc60bcbbc7bbeae3c9",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.workspace_coffees.workspace_coffees_owner_id_setup_id_setup_version_id_fkey",
+      "md5": "3a5a91012e8c4c9869ca7789f5e22b53",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.workspace_coffees.workspace_coffees_pkey",
+      "md5": "97fe2b4b42d4087730d4f1d91cc99d3f",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.workspace_coffees.workspace_coffees_revision_check",
+      "md5": "c89fd39547f9f210c335be16751472e2",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.workspace_coffees.workspace_coffees_selected_style_check",
+      "md5": "d85537496bad01fa012d595290c793b8",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.workspace_state.workspace_state_owner_id_current_library_entry_id_fkey",
+      "md5": "a35ad0d41b656b5601bd3681a0a73cbb",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.workspace_state.workspace_state_owner_id_fkey",
+      "md5": "50d81623a219dd2c5064b1dd59c06929",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.workspace_state.workspace_state_owner_id_setup_id_setup_version_id_fkey",
+      "md5": "3a5a91012e8c4c9869ca7789f5e22b53",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.workspace_state.workspace_state_pkey",
+      "md5": "2b678482ca5a5f4195bc9453bdf60b38",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.workspace_state.workspace_state_revision_check",
+      "md5": "c89fd39547f9f210c335be16751472e2",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "constraint",
+      "object": "public.workspace_state.workspace_state_sort_order_check",
+      "md5": "5df9950302fc9df01bb79df0ae6b729a",
+      "comparison": "EQUAL_RUN167"
+    },
+    {
+      "category": "index",
+      "object": "private.admin_access_events.admin_access_events_pkey",
+      "md5": "c2482d2a7c75e728fc0ac60b22cf7ffc",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "private.admin_content_edits.admin_content_edits_pkey",
+      "md5": "420e0969af4dba5e965d44583e9ef23f",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "private.app_admins.app_admins_pkey",
+      "md5": "3361d3fc6f794ca4c3d11cad6d27254a",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "private.backup_runs.backup_runs_pkey",
+      "md5": "654d8d07304420add2c23d96620ee42a",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "private.beta_members.beta_members_pkey",
+      "md5": "b56c5cbe36151ede45a0a9b82d52eb26",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "private.community_quality_checks.community_quality_checks_pkey",
+      "md5": "e3bdedd80e5c5a7298b2dfbce91a4dd6",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "private.contribution_links.contribution_contributor_idx",
+      "md5": "805b999f5273584ba8d2a1c025c97334",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "private.contribution_links.contribution_links_pkey",
+      "md5": "ef1be011b9bae878dbeb2733a828fcc6",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "private.contribution_links.contribution_links_shot_id_key",
+      "md5": "a1b2f1f72abc863cfe0236ae60b2d7a4",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "private.contributors.contributors_owner_id_key",
+      "md5": "ec6e3c7634b5f66f0c90444912d9a998",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "private.contributors.contributors_pkey",
+      "md5": "3f8ffef47af732b27bb93064dff9bd82",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "private.dic_admin_account_delete_operations.dic_admin_account_delete_one_active",
+      "md5": "12d4f772dbb990780fd4780afe56da18",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "private.dic_admin_account_delete_operations.dic_admin_account_delete_operations_pkey",
+      "md5": "e0f079dfaf4e46241f745870978dac9f",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "private.dic_admin_delete_receipts.dic_admin_delete_receipts_pkey",
+      "md5": "f9f5e705c1b88157f81d01bdc73360dc",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "private.dic_coffee_aliases.dic_coffee_aliases_pkey",
+      "md5": "2189585ef718f6fe259fe441a97cd4d4",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "private.dic_coffee_audit.dic_coffee_audit_pkey",
+      "md5": "b3b65fd2f73cbb19bf754483d2b66a8b",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "private.dic_coffee_first_entry.dic_coffee_first_entry_pkey",
+      "md5": "4cfa3db723722658b6460b29b849ed0d",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "private.dic_first_style_prompt_seen.dic_first_style_prompt_seen_pkey",
+      "md5": "28104c950298be1231060df629d984cc",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "private.dic_roaster_aliases.dic_roaster_aliases_pkey",
+      "md5": "976d3ac9dbcaf5b32f57cbe36ac6aef0",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "private.dic_roaster_directory.dic_roaster_directory_canonical_key_key",
+      "md5": "2b8e82f348db2e99e0e78c3a5ff3953b",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "private.dic_roaster_directory.dic_roaster_directory_pkey",
+      "md5": "09fa54fc1d020d3c42c563e5e232bb99",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "private.dic_signup_review_events.dic_signup_review_events_pkey",
+      "md5": "75c4f59fedb94f7500d07a2744957c4a",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "private.dic_source_attempts.dic_source_attempts_pkey",
+      "md5": "a66e6f9ea6bc252c880318a12cab1d29",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "private.dic_url_preview_attempts.dic_url_preview_attempts_pkey",
+      "md5": "69bcf836083a08c57e12826a3358f8f0",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "private.import_batches.import_batches_pkey",
+      "md5": "84c2cb594ce4c2e1d0d4c7ca1b0d0bcd",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "private.import_control.import_control_pkey",
+      "md5": "f81388a000ca770797cb8a3ef2d62f97",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "private.mutation_receipts.mutation_receipts_pkey",
+      "md5": "d1c3c121dee8e39ff67acacfbdc5fe47",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "private.shot_audit.shot_audit_owner_idx",
+      "md5": "bf93b1c41c29eeea7198058ed259d7a5",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "private.shot_audit.shot_audit_pkey",
+      "md5": "11a81d2dc6deb982780355b9c0968cb1",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.account_preferences.account_active_setup_idx",
+      "md5": "7dc1ed03428bff7ca9f061d7919abfe6",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.account_preferences.account_preferences_pkey",
+      "md5": "e72ff7d524d65731a98ab37794299fc2",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.admin_reviews.admin_reviews_pkey",
+      "md5": "0b975d3cb1500fbc2100da6833f4e4dc",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.admin_reviews.review_reviewer_idx",
+      "md5": "ba64042e363720504a79b1fdbd98b3b6",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.admin_reviews.review_shot_idx",
+      "md5": "7d5173285dbe281070add443bfc9057e",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.admin_reviews.review_submission_idx",
+      "md5": "e3bdc4f30c411c346bb9932cd9983aae",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.bags.bag_active_once_idx",
+      "md5": "053474898a266bc0e50609524021da08",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.bags.bags_owner_id_library_entry_id_id_key",
+      "md5": "5fc46ffeabbb2ea8ff40315f118cbb8c",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.bags.bags_pkey",
+      "md5": "18b51a136578b74c0dbc7bf34d4fe0a4",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.basket_versions.basket_version_basket_idx",
+      "md5": "215ee0f2e2ec7d633698753d7fe6e3f8",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.basket_versions.basket_versions_owner_id_setup_id_id_key",
+      "md5": "c03e0b0d4fe491bb37d498d91d7bfe13",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.basket_versions.basket_versions_pkey",
+      "md5": "853b6afd83e98c06d08e5f10ad5b4a96",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.baskets.baskets_owner_id_setup_id_id_key",
+      "md5": "d4fa2d0d4c1a3dbb353a4594939ad1c2",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.baskets.baskets_pkey",
+      "md5": "f3467d40a4fdcd51ddc2b894ad33381e",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.coffee_groups.coffee_groups_pkey",
+      "md5": "66fd36023a6432b639d1a90ad8a0091e",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.coffee_sources.coffee_sources_pkey",
+      "md5": "221026538141a5a097c0b1de03946f5c",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.coffee_sources.sources_coffee_idx",
+      "md5": "03ae5debb96ac22f8ee02a907e09ae64",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.coffee_submissions.coffee_submissions_owner_id_id_key",
+      "md5": "a7ce9c4f2cf642772b87ec42fb041835",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.coffee_submissions.coffee_submissions_pkey",
+      "md5": "1bcfa28881afd741b880a27dc2030616",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.coffee_submissions.submissions_coffee_idx",
+      "md5": "209e1a60f18674d80d33ffefaf7496f8",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.coffees.coffees_group_idx",
+      "md5": "916f831dc9945cfa2b4741ad5afcb92f",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.coffees.coffees_merge_idx",
+      "md5": "c14a33640553e7d1cba75e259786b068",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.coffees.coffees_pkey",
+      "md5": "cf760199bf9a2f771b9efd77ac56adf1",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.community_shots.community_eligible_idx",
+      "md5": "eb44fda326974932d8ec8852a77ba3e3",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.community_shots.community_family_idx",
+      "md5": "3c646c5aa0c92da502c689d52d82e76f",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.community_shots.community_shots_pkey",
+      "md5": "b29f8b965478a7a93ad524885dde0349",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.grinder_calibrations.calibration_previous_idx",
+      "md5": "5205ca8d9d04a65c518ae33875854989",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.grinder_calibrations.grinder_calibrations_owner_id_setup_id_id_key",
+      "md5": "6cf8de8427d307eef5376fba027ca65e",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.grinder_calibrations.grinder_calibrations_pkey",
+      "md5": "a085ba54ad3923287b9d5d79d3b9ffc8",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.library_entries.library_coffee_idx",
+      "md5": "2554ad2f0370868ea974650805379527",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.library_entries.library_coffee_once_idx",
+      "md5": "fd2d89496fe0ca4745af8f7f0e675078",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.library_entries.library_entries_owner_id_id_key",
+      "md5": "627005f96c140ce14e9823f8cb508683",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.library_entries.library_entries_pkey",
+      "md5": "a008b99efd7b82a31ba0321428a01207",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.library_entries.library_submission_once_idx",
+      "md5": "2580cf27147fe53bfe763b876edf109c",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.personal_recipe_families.personal_family_community_idx",
+      "md5": "910aa33f83e53574f2a82391872388c5",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.personal_recipe_families.personal_recipe_families_owner_id_library_entry_id_style_id_key",
+      "md5": "3d8eac9285a3a249fc09e4f50ef5dd1f",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.personal_recipe_families.personal_recipe_families_pkey",
+      "md5": "71c88cc5b37185a9c3f24e04f87f3893",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.recipe_families.recipe_families_coffee_id_style_id_key",
+      "md5": "4934659ea302e80261402cedf3570e36",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.recipe_families.recipe_families_pkey",
+      "md5": "db045001515181d20ef0d723896d481c",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.recipe_preferences.preference_current_family_idx",
+      "md5": "61400647d269ea90c4298caea9b2a912",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.recipe_preferences.preference_reference_family_idx",
+      "md5": "86123d05800e002791f30a48e2fe8fc0",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.recipe_preferences.preferred_example_idx",
+      "md5": "2a29e901b93ef1405297d1ddbbb4e22b",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.recipe_preferences.recipe_preferences_pkey",
+      "md5": "93c5714f32863ecd7320867c6011560b",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.setup_preferences.preferences_basket_idx",
+      "md5": "ea257d5ac534c9a876a6000c6ebb3ad8",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.setup_preferences.preferences_calibration_idx",
+      "md5": "e3b9dc26e0d0bc73c82d65e1be0fd1bf",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.setup_preferences.setup_preferences_pkey",
+      "md5": "86aab20660414ae9e014bfc42c4ffb2f",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.setup_versions.setup_versions_owner_id_setup_id_id_key",
+      "md5": "1bc41090d543d3593660ac7f639c32a0",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.setup_versions.setup_versions_pkey",
+      "md5": "dd167da7bb7754925fd3527eb12cb89e",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.setups.setup_active_version_idx",
+      "md5": "47ad3cdc52ee50265faf8b299e0d7d4a",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.setups.setups_owner_id_id_key",
+      "md5": "43caee64e94e009d3ffcb3f05e9b2e92",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.setups.setups_pkey",
+      "md5": "9e7a96f6e75d8335df71c50fd0ef65b4",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.shot_notes.shot_notes_pkey",
+      "md5": "e7a8134053c07a2240acb36d84accd20",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.shots.shot_bag_idx",
+      "md5": "602d753532f41f6fbac274f16585f0c4",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.shots.shot_basket_idx",
+      "md5": "32e2d561e2c0cd74a2eeeb5b44517d5c",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.shots.shot_calibration_idx",
+      "md5": "03e03e07edc047cd77b2cd30c537aa80",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.shots.shot_family_idx",
+      "md5": "b9b597f88bc5c829f2ab726a967b674e",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.shots.shot_legacy_once_idx",
+      "md5": "eb774d6400c67504ee19ea55133fc502",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.shots.shot_library_time_idx",
+      "md5": "90b66f180ed9a647561614bfdd511b44",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.shots.shots_owner_id_id_key",
+      "md5": "49fb847b777b3676c5c851a4a6607a72",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.shots.shots_owner_id_setup_id_setup_version_id_library_entry_id_s_key",
+      "md5": "7170e6844d2c2d62bdf6a340d16173b6",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.shots.shots_pkey",
+      "md5": "336c64a930eab4ef632feb0210680a83",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.workspace_coffees.workspace_coffee_basket_idx",
+      "md5": "bdef29d39b0cba04853e9e4fefd398e1",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.workspace_coffees.workspace_coffee_library_idx",
+      "md5": "900a305b3907b3bfae0776166915059d",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.workspace_coffees.workspace_coffees_pkey",
+      "md5": "2828daaae679ea225f3255a8da743e50",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.workspace_coffees.workspace_recent_idx",
+      "md5": "d1e37a88742277cf745ac28ce785c890",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.workspace_state.workspace_current_idx",
+      "md5": "b94de13f58b930ccce8db410a6f98ed9",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "index",
+      "object": "public.workspace_state.workspace_state_pkey",
+      "md5": "7e195381fdb46d958449accc43b8c772",
+      "comparison": "EQUAL_RUN160"
+    },
+    {
+      "category": "policy",
+      "object": "private.admin_access_events.no_client_access",
+      "expression": {
+        "cmd": "*",
+        "roles": "{anon,authenticated}",
+        "using": "false",
+        "check": "false"
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "private.admin_content_edits.no_direct_user_content_edits",
+      "expression": {
+        "cmd": "*",
+        "roles": "{anon,authenticated}",
+        "using": "false",
+        "check": "false"
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "private.app_admins.no_client_access",
+      "expression": {
+        "cmd": "*",
+        "roles": "{anon,authenticated}",
+        "using": "false",
+        "check": "false"
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "private.backup_runs.no_client_access",
+      "expression": {
+        "cmd": "*",
+        "roles": "{anon,authenticated}",
+        "using": "false",
+        "check": "false"
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "private.beta_members.no_client_access",
+      "expression": {
+        "cmd": "*",
+        "roles": "{anon,authenticated}",
+        "using": "false",
+        "check": "false"
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "private.community_quality_checks.no_client_access",
+      "expression": {
+        "cmd": "*",
+        "roles": "{anon,authenticated}",
+        "using": "false",
+        "check": "false"
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "private.contribution_links.no_client_access",
+      "expression": {
+        "cmd": "*",
+        "roles": "{anon,authenticated}",
+        "using": "false",
+        "check": "false"
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "private.contributors.no_client_access",
+      "expression": {
+        "cmd": "*",
+        "roles": "{anon,authenticated}",
+        "using": "false",
+        "check": "false"
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "private.dic_roaster_aliases.no_client_access",
+      "expression": {
+        "cmd": "*",
+        "roles": "{anon,authenticated}",
+        "using": "false",
+        "check": "false"
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "private.dic_roaster_directory.no_client_access",
+      "expression": {
+        "cmd": "*",
+        "roles": "{anon,authenticated}",
+        "using": "false",
+        "check": "false"
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "private.dic_url_preview_attempts.no_client_access",
+      "expression": {
+        "cmd": "*",
+        "roles": "{anon,authenticated}",
+        "using": "false",
+        "check": "false"
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "private.import_batches.no_client_access",
+      "expression": {
+        "cmd": "*",
+        "roles": "{anon,authenticated}",
+        "using": "false",
+        "check": "false"
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "private.import_control.no_client_access",
+      "expression": {
+        "cmd": "*",
+        "roles": "{anon,authenticated}",
+        "using": "false",
+        "check": "false"
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "private.mutation_receipts.no_client_access",
+      "expression": {
+        "cmd": "*",
+        "roles": "{anon,authenticated}",
+        "using": "false",
+        "check": "false"
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "private.shot_audit.no_client_access",
+      "expression": {
+        "cmd": "*",
+        "roles": "{anon,authenticated}",
+        "using": "false",
+        "check": "false"
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "public.account_preferences.owner_read",
+      "expression": {
+        "cmd": "r",
+        "roles": "{authenticated}",
+        "using": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check": ""
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "public.account_preferences.owner_update",
+      "expression": {
+        "cmd": "w",
+        "roles": "{authenticated}",
+        "using": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))"
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "public.admin_reviews.review_read",
+      "expression": {
+        "cmd": "r",
+        "roles": "{authenticated}",
+        "using": "( SELECT private.is_admin() AS is_admin)",
+        "check": ""
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "public.bags.owner_read",
+      "expression": {
+        "cmd": "r",
+        "roles": "{authenticated}",
+        "using": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check": ""
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "public.basket_versions.owner_read",
+      "expression": {
+        "cmd": "r",
+        "roles": "{authenticated}",
+        "using": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check": ""
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "public.baskets.owner_read",
+      "expression": {
+        "cmd": "r",
+        "roles": "{authenticated}",
+        "using": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check": ""
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "public.coffee_groups.group_read",
+      "expression": {
+        "cmd": "r",
+        "roles": "{authenticated}",
+        "using": "(( SELECT private.is_member() AS is_member) AND (EXISTS ( SELECT 1\n   FROM coffees c\n  WHERE ((c.group_id = coffee_groups.id) AND (c.verification_state = 'verified'::text)))))",
+        "check": ""
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "public.coffee_sources.source_read",
+      "expression": {
+        "cmd": "r",
+        "roles": "{authenticated}",
+        "using": "(( SELECT private.is_member() AS is_member) AND (EXISTS ( SELECT 1\n   FROM coffees c\n  WHERE ((c.id = coffee_sources.coffee_id) AND (c.verification_state = 'verified'::text)))))",
+        "check": ""
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "public.coffee_submissions.submission_insert",
+      "expression": {
+        "cmd": "a",
+        "roles": "{authenticated}",
+        "using": "",
+        "check": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)) AND ((canonical_coffee_id IS NULL) OR (EXISTS ( SELECT 1\n   FROM coffees c\n  WHERE ((c.id = coffee_submissions.canonical_coffee_id) AND (c.verification_state = 'verified'::text))))))"
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "public.coffee_submissions.submission_read",
+      "expression": {
+        "cmd": "r",
+        "roles": "{authenticated}",
+        "using": "(( SELECT private.is_member() AS is_member) AND ((owner_id = ( SELECT auth.uid() AS uid)) OR ( SELECT private.is_admin() AS is_admin)))",
+        "check": ""
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "public.coffees.coffee_read",
+      "expression": {
+        "cmd": "r",
+        "roles": "{authenticated}",
+        "using": "(( SELECT private.is_member() AS is_member) AND ((verification_state = 'verified'::text) OR ( SELECT private.is_admin() AS is_admin)))",
+        "check": ""
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "public.community_shots.community_read",
+      "expression": {
+        "cmd": "r",
+        "roles": "{authenticated}",
+        "using": "(( SELECT private.is_member() AS is_member) AND (quality_state = 'eligible'::text) AND (EXISTS ( SELECT 1\n   FROM coffees c\n  WHERE ((c.id = community_shots.coffee_id) AND (c.verification_state = 'verified'::text)))))",
+        "check": ""
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "public.grinder_calibrations.owner_read",
+      "expression": {
+        "cmd": "r",
+        "roles": "{authenticated}",
+        "using": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check": ""
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "public.library_entries.library_read",
+      "expression": {
+        "cmd": "r",
+        "roles": "{authenticated}",
+        "using": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check": ""
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "public.personal_recipe_families.owner_read",
+      "expression": {
+        "cmd": "r",
+        "roles": "{authenticated}",
+        "using": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check": ""
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "public.recipe_families.family_read",
+      "expression": {
+        "cmd": "r",
+        "roles": "{authenticated}",
+        "using": "(( SELECT private.is_member() AS is_member) AND (EXISTS ( SELECT 1\n   FROM coffees c\n  WHERE ((c.id = recipe_families.coffee_id) AND (c.verification_state = 'verified'::text)))))",
+        "check": ""
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "public.recipe_preferences.owner_read",
+      "expression": {
+        "cmd": "r",
+        "roles": "{authenticated}",
+        "using": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check": ""
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "public.setup_preferences.owner_read",
+      "expression": {
+        "cmd": "r",
+        "roles": "{authenticated}",
+        "using": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check": ""
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "public.setup_versions.owner_read",
+      "expression": {
+        "cmd": "r",
+        "roles": "{authenticated}",
+        "using": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check": ""
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "public.setups.owner_read",
+      "expression": {
+        "cmd": "r",
+        "roles": "{authenticated}",
+        "using": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check": ""
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "public.shot_notes.owner_read",
+      "expression": {
+        "cmd": "r",
+        "roles": "{authenticated}",
+        "using": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check": ""
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "public.shots.owner_read",
+      "expression": {
+        "cmd": "r",
+        "roles": "{authenticated}",
+        "using": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check": ""
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "public.workspace_coffees.owner_read",
+      "expression": {
+        "cmd": "r",
+        "roles": "{authenticated}",
+        "using": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check": ""
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "policy",
+      "object": "public.workspace_state.owner_read",
+      "expression": {
+        "cmd": "r",
+        "roles": "{authenticated}",
+        "using": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check": ""
+      },
+      "comparison": "EQUAL_LIVE_NORMALIZED_RUN166"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "auth.users.dic_auth_user_created",
+      "md5": "2d76ca52f72e405dcd11190278c6a40b",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "private.contribution_links.dic_recheck_after_link",
+      "md5": "f64dfbb01e72a941b9759e5022ee418b",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "public.account_preferences.bump_revision",
+      "md5": "a374e5b8e4c33454888bc9d8dcce7e0f",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "public.bags.bump_revision",
+      "md5": "e148fb18bd48630230e4d98e28945efe",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "public.basket_versions.immutable_version",
+      "md5": "14d90dc4b099a4c24e5a43b1f77f4e60",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "public.baskets.bump_revision",
+      "md5": "6765d8ddf713350b9c54dccb3d46b558",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "public.coffee_submissions.bump_revision",
+      "md5": "c553cba05a513a4866f5eb339eb689ff",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "public.coffee_submissions.dic_capture_first_decaf_method",
+      "md5": "4f521162116a79500dfa65a7017a226d",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "public.coffees.bump_revision",
+      "md5": "4c4f88a69c1539fec6c6b50cbc378f31",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "public.coffees.dic_on_community_coffee_verification",
+      "md5": "94d28933513a93592e6d0baf82229887",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "public.grinder_calibrations.immutable_version",
+      "md5": "30b114b69bce80c91ab061bafa4ab7fb",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "public.library_entries.bump_revision",
+      "md5": "ee3f03b6dc5c5369686e7fd7871da110",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "public.library_entries.dic_on_library_coffee_change",
+      "md5": "b3d7c46d58ca71f146262d6536e494b8",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "public.recipe_preferences.bump_revision",
+      "md5": "adccc6522750cf008388d4dce5ae94a5",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "public.setup_preferences.bump_revision",
+      "md5": "9aaf596ec477a0e2919d3c1e673e9389",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "public.setup_versions.immutable_version",
+      "md5": "80d5023c2a392e9657c0f2846df1416f",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "public.setups.bump_revision",
+      "md5": "8d7349731e21f37311aa5433f1f7b2b2",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "public.shots.bump_revision",
+      "md5": "75d14347c148551cbbcc52f50bf0f76c",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "public.shots.capture_equipment_snapshot",
+      "md5": "cf6a0608c442590e34a931a6bff576f6",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "public.shots.dic_capture_recommendation_context",
+      "md5": "4bb48538bd382376da63717879413b80",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "public.shots.project_shot",
+      "md5": "e0fd8beba7a8c8bcdc00acdf6274e179",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "public.shots.protect_shot_provenance",
+      "md5": "3d2c11af188a0e02b94f3983db8a6b71",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "public.shots.remember_feed_condition",
+      "md5": "8637c64eec5b1e8ee727a039c851f765",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "public.workspace_coffees.bump_revision",
+      "md5": "2d20e35e6293e6bef2026fb1b2b95ed6",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "public.workspace_state.bump_revision",
+      "md5": "380c322c3d90508f8c62bdbe15244e1d",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "realtime.subscription.tr_check_filters",
+      "md5": "5b8936f1aa0adc9b448dfa768d78bd42",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "storage.buckets.enforce_bucket_name_length_trigger",
+      "md5": "7774f4b5e39e4ad07a16a589aef6277c",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "storage.buckets.protect_bucket_control_insert",
+      "md5": "5c2f86adf97481d45808f2ed4eb4673b",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "storage.buckets.protect_bucket_control_update",
+      "md5": "ae169c5f8d35b69020459ddddbe65d7e",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "storage.buckets.protect_bucket_control_update_role",
+      "md5": "34d64d2c71ac2a26720ae99bd0da100b",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "storage.buckets.protect_buckets_delete",
+      "md5": "50288cfc0da92cd8f2f573c018c16382",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "storage.objects.protect_objects_delete",
+      "md5": "45c5692d486583888bac16ef789d847f",
+      "comparison": "EQUAL_RUN105"
+    },
+    {
+      "category": "noninternal_trigger",
+      "object": "storage.objects.update_objects_updated_at",
+      "md5": "7457963f6a733c584baf08e4e7a451d0",
+      "comparison": "EQUAL_RUN105"
+    }
+  ],
+  "coverage": {
+    "functions": 106,
+    "constraints": 261,
+    "indexes": 96,
+    "policies": 39,
+    "noninternal_triggers": 33,
+    "total_compared": 535,
+    "matched": 535,
+    "changed": 0,
+    "new": 0,
+    "missing": 0,
+    "invalid": 0,
+    "first_time_original_word_credits": 0,
+    "issue267_code_lines": 0,
+    "stored_migrations": 59,
+    "active_edge_functions": 3
+  },
+  "telemetry": {
+    "database_bytes": 16823987,
+    "cumulative_temp_bytes": 143416522965,
+    "cumulative_temp_files": 51181,
+    "previous_run170_cumulative_temp_bytes": 142464670563,
+    "delta_cumulative_temp_bytes": 951852402,
+    "pg_stat_database_stats_reset": "2026-10-02T18:01:15.201525+00",
+    "deadlocks": 0,
+    "waiting_lock_sessions": 0,
+    "long_transactions_over_five_minutes": 0,
+    "active_sessions": 1,
+    "total_sessions": 6,
+    "pg_stat_statements_numeric_top_temp_fingerprints_reviewed": 25,
+    "pg_stat_user_table_numeric_rows_reviewed": 35,
+    "pg_stat_user_index_numeric_rows_reviewed": 30,
+    "logs_24h_source_counts": {
+      "pgbouncer_logs": 74,
+      "edge_logs": 45,
+      "postgres_logs": 28,
+      "supavisor_logs": 11,
+      "auth_logs": 6,
+      "auth_audit_logs": 2
+    },
+    "log_window_utc": [
+      "2026-11-10T15:44:00Z",
+      "2026-11-11T15:44:00Z"
+    ],
+    "no_raw_messages_or_query_text": true,
+    "limitations": "Temp bytes are cumulative temporary churn, not current persistent storage or disk headroom. No causal attribution to application query; log severity inferred from available status attributes only, not proof of zero errors."
+  },
+  "advisors": {
+    "security": [
+      {
+        "name": "rls_enabled_no_policy",
+        "count": 8
+      },
+      {
+        "name": "authenticated_security_definer_function_executable",
+        "count": 10
+      },
+      {
+        "name": "auth_leaked_password_protection",
+        "count": 1
+      }
+    ],
+    "performance": [
+      {
+        "name": "unindexed_foreign_keys",
+        "count": 13
+      },
+      {
+        "name": "unused_index",
+        "count": 8
+      }
+    ],
+    "health": []
+  },
+  "semantic_disposition": "RETAIN: no changed/new/missing or invalid definitions; all current 535 definitions previously directly reviewed in cited receipts. Existing advisor warnings unchanged; no proof of safe index drops or newly confirmed security bug.",
+  "unverified": [
+    "Hosted GoTrue configuration and password/identity settings beyond advisor",
+    "Hosted JWT and PostgREST exposed API schema configuration and genuine signed-in Auth enforcement (#96)",
+    "Provider native compiled source beyond visible catalog declarations",
+    "Disk free headroom"
+  ],
+  "provider_writes": 0,
+  "source_fixes": 0,
+  "deployments": 0,
+  "baseline_complete": false,
+  "next_cursor": "Stored migration #60 if created, otherwise first genuinely changed/new/unreviewed provider definition or newly accessible hosted API/Auth control; preserve #96 scope.",
+  "source_bound_CI": "PENDING_NEW_DOCS_COMMIT"
+}

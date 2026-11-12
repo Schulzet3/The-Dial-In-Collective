@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 153,
+  "closed_at_utc": "2026-11-10",
+  "project_ref": "azviqqejypsefzilgonr",
+  "repository": "Schulzet3/The-Dial-In-Collective",
+  "pr_number": 1911,
+  "pr_head_sha": "d374b9fe0bebc5528f035563d50a1d9a4d2f024c",
+  "merged_development_sha": "62a1eac89f4653545a7bffe91e4dace3a2740da4",
+  "source_blob_parity": {
+    "migration": "c5878798feae9a37e29ce0da4d073507a266b50f",
+    "synthetic_sql_test": "273ef4937429e9fc7558ae599be81393aaaea1d3",
+    "isolated_sql_driver": "1df17bd0cd2922435efc7393a32a9fc57d596d37",
+    "full_provider_sql_review": "a11852ece529cae3e65d7e7bc39764015bba8291",
+    "pr_and_merge": "IDENTICAL_CHECKED_BY_LIVE_GITHUB_TREE"
+  },
+  "verified_pr_head": [
+    {
+      "id": 42899962093,
+      "type": "isolated_postgresql_signed_jwt",
+      "conclusion": "SUCCESS"
+    },
+    {
+      "id": 42899962642,
+      "type": "node22_lint",
+      "conclusion": "SUCCESS"
+    },
+    {
+      "id": 42899961948,
+      "type": "browser_visual_auth_offline",
+      "conclusion": "SUCCESS"
+    },
+    {
+      "id": 42899962433,
+      "type": "queue_governance",
+      "conclusion": "SUCCESS"
+    }
+  ],
+  "verified_merge": [
+    {
+      "id": 42900390547,
+      "type": "isolated_postgresql_signed_jwt",
+      "conclusion": "SUCCESS"
+    },
+    {
+      "id": 42900390810,
+      "type": "node22_lint",
+      "conclusion": "SUCCESS"
+    },
+    {
+      "id": 42900391060,
+      "type": "browser_visual_auth_offline",
+      "conclusion": "SUCCESS"
+    },
+    {
+      "id": 42900390549,
+      "type": "queue_governance",
+      "conclusion": "SUCCESS"
+    }
+  ],
+  "diagnostics_and_scope": {
+    "historical_test_unchanged": true,
+    "synthetic_test": "final-schema disposable SQL test PASS 7 separated credential spellings, nested access-token and benign metadata control",
+    "node22": "3606 pass, 0 fail, 6 intentional skips of 3612",
+    "jwt": "Isolated signed bearer HTTP authorization PASS; prior corpus 94 signed-JWT assertions not independently counted in this run",
+    "browser": "Real isolated Chromium local app acceptance PASS; real GoTrue/production accounts NOT tested",
+    "governance": "queue intake PASS; scope tracked"
+  },
+  "earlier_ci_failures_retained": [
+    42899103968,
+    42899105276,
+    42899495806,
+    42899736777
+  ],
+  "github_fix_status": "MERGED_READY_DEVELOPMENT_ONLY",
+  "queue_item": "DIC-Q-509-import-credential-field-separator-guard",
+  "provider_source_md5": "479cc03d9ea9862176b0c663d99369b0",
+  "live_applied_migration_count": 0,
+  "live_open_import_gates": 0,
+  "live_archived_import_batches_aggregate": 1,
+  "actual_incident_or_exposure": "UNVERIFIED; no identities, archived source documents, secret values or member records read",
+  "owner_permission": "NO_PRODUCTION_SQL_EDGE_AUTH_STORAGE_DATA_MUTATION_OR_PUBLICATION; separate one-use owner publish authorization required",
+  "audit_baseline_complete": false,
+  "unverified": [
+    "Hosted Auth/JWT/PostgREST provider-only configuration",
+    "Compiled native code",
+    "Existing member imported backup credential content; never read"
+  ],
+  "next": "Continue newly changed provider object semantic review from ordered cursor, telemetry, and #96-coordinated hosted Auth/API boundary; no repeat baseline or #267 credit."
+}

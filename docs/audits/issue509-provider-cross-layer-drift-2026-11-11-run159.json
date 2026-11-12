@@ -1,0 +1,1872 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 159,
+  "project_ref": "azviqqejypsefzilgonr",
+  "observed_utc": "2026-11-11 02:51–02:54 UTC",
+  "source_refs_at_start": {
+    "development": "ef669d3dd6203e206421e4f5858678da3eeab706",
+    "main": "11e1e8c7c36dad488519476d8a969bb682915d31",
+    "release": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0"
+  },
+  "scope": "READ_ONLY_FRESH_FULL_PER_OBJECT_APP_SCHEMA_HASH_DRIFT_AND_DEPLOYED_EDGE_SOURCE_PARITY_AND_24H_AGGREGATE_LOG_CHECK",
+  "provenance": {
+    "full_previous_function_review": "docs/audits/issue509-provider-function-execution-boundary-2026-11-10-run150.json",
+    "full_previous_index_review": "docs/audits/issue509-provider-index-structural-perf-drift-2026-11-10-run151.json",
+    "full_previous_policy_review": "docs/audits/issue509-provider-complete-policy-fk-advisor-2026-11-10-run147.json",
+    "previous_edge_parity": "docs/audits/issue509-edge-release-bundle-parity-2026-11-10-run146.json"
+  },
+  "function_review": {
+    "reviewed": 106,
+    "prior": 106,
+    "new_or_changed": [],
+    "missing": [],
+    "per_object_current_def_hashes": [
+      {
+        "signature": "private.apply_prototype_import(u uuid, doc jsonb)",
+        "full_def_md5": "479cc03d9ea9862176b0c663d99369b0",
+        "source_chars": 16423,
+        "security_definer": true
+      },
+      {
+        "signature": "private.bump_revision()",
+        "full_def_md5": "651239ce95a684d072c16fdb895ead7d",
+        "source_chars": 261,
+        "security_definer": false
+      },
+      {
+        "signature": "private.capture_equipment_snapshot()",
+        "full_def_md5": "90c66b59638b48d360e9fd949db63707",
+        "source_chars": 1166,
+        "security_definer": true
+      },
+      {
+        "signature": "private.classify_personal_shot(shotid uuid)",
+        "full_def_md5": "5183deb46474c10468638cef08d2bd05",
+        "source_chars": 3219,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_admin_access_overview()",
+        "full_def_md5": "e377ac910af0115040ad8f881cb01bfc",
+        "source_chars": 1432,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_admin_account_delete_finish(p_operation_id uuid, p_actor_id uuid)",
+        "full_def_md5": "51cd64deed985a9ddf622926b8784a84",
+        "source_chars": 2492,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_admin_account_delete_impact(p_member_id uuid)",
+        "full_def_md5": "a20e399d6c87c60be0661c80a17728d4",
+        "source_chars": 1588,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_admin_account_delete_prepare(p_operation_id uuid, p_actor_id uuid)",
+        "full_def_md5": "6e7e0589cbda1bc5023771724ce8b77f",
+        "source_chars": 3899,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_admin_account_delete_preview(p_member_id uuid)",
+        "full_def_md5": "55ad6325a6a3b8eb97d830bd4a5acc26",
+        "source_chars": 687,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_admin_account_delete_request(p_member_id uuid, p_community_mode text, p_expected_impact jsonb)",
+        "full_def_md5": "b91e425cd94b4c749b28adf8fd0b96a1",
+        "source_chars": 1949,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_admin_coffee_candidates(p_submission_id uuid)",
+        "full_def_md5": "cb3cc3677b37f577643d248db1060a43",
+        "source_chars": 2032,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_admin_dashboard_read()",
+        "full_def_md5": "5fa33bbe05e8408c1c2fe1b82d73a8ee",
+        "source_chars": 2901,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_admin_delete_preview(p_kind text, p_record_id uuid)",
+        "full_def_md5": "733e337473ef8f190e3a78ebf5ebfad1",
+        "source_chars": 4060,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_admin_delete_record(p_kind text, p_record_id uuid, p_expected_revision bigint, p_expected_impact jsonb)",
+        "full_def_md5": "71d4703233388fb04e263767caa5b57b",
+        "source_chars": 4091,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_admin_edit_record(p_record_id uuid, p_expected_revision bigint, p_details jsonb, p_reason text, p_kind text)",
+        "full_def_md5": "290b98b6bb6f99a1afb73b13ff315b12",
+        "source_chars": 13186,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_admin_records(p_kind text, p_offset integer, p_limit integer)",
+        "full_def_md5": "6976e717b7c5cbb34d8e3c41bc2aeba2",
+        "source_chars": 5386,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_admin_review_candidates(p_submission_id uuid)",
+        "full_def_md5": "952b9cd2a21463f1073494a4d05b468f",
+        "source_chars": 2362,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_admin_review_coffee(p_submission_id uuid, p_expected_revision bigint, p_action text, p_reason text, p_canonical_id uuid)",
+        "full_def_md5": "cb5c264aceb9699a498177f3f6861783",
+        "source_chars": 4526,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_admin_review_signup(p_member_id uuid, p_action text, p_expected_state text)",
+        "full_def_md5": "7e0d3bf10542694b60177fcfa9c6f7be",
+        "source_chars": 2073,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_admin_search_records(p_kind text, p_query text, p_offset integer, p_limit integer)",
+        "full_def_md5": "253a3fe2fe1e1e65f61b5a71a2063fdd",
+        "source_chars": 7574,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_admin_set_member_access(p_member_id uuid, p_enabled boolean)",
+        "full_def_md5": "d7a339f277e9da0d8393d5efcdbc0e89",
+        "source_chars": 2354,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_admin_signup_requests(p_offset integer, p_limit integer)",
+        "full_def_md5": "663c13571f70bb29b6a4351e8e6a45eb",
+        "source_chars": 1411,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_backfill_library_contributions(p_owner uuid, p_entry uuid, p_canonical uuid)",
+        "full_def_md5": "424a5c87c53165a918f7094bf67d25bb",
+        "source_chars": 2360,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_canonical_roaster_key(value text)",
+        "full_def_md5": "55aeb461080be1221e82d8a86a9d270d",
+        "source_chars": 573,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_capture_first_decaf_method()",
+        "full_def_md5": "9a47ec8959cf43d08f1d326e4b0bce4f",
+        "source_chars": 1211,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_capture_recommendation_context()",
+        "full_def_md5": "962e12faeac2a7b5a671bd837c6c5c41",
+        "source_chars": 1760,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_claim_first_style_prompt_impl(p_library_entry_id uuid)",
+        "full_def_md5": "31f06eec62a745bf998b749af71816db",
+        "source_chars": 940,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_coffee_key(value text)",
+        "full_def_md5": "8f6840ddd7e530e311c096591c01ce15",
+        "source_chars": 251,
+        "security_definer": false
+      },
+      {
+        "signature": "private.dic_community_fingerprint(c community_shots)",
+        "full_def_md5": "06eaeadaef87a445b99d431ae67dd409",
+        "source_chars": 478,
+        "security_definer": false
+      },
+      {
+        "signature": "private.dic_confirm_coffee_existing(mid uuid, p jsonb)",
+        "full_def_md5": "0fcc44bb8a05f46e87694d3474eb7c23",
+        "source_chars": 3239,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_edit_my_coffee(p_library_entry uuid, p_expected_revision bigint, p_details jsonb, p_source_url text)",
+        "full_def_md5": "5a52eee42d3427ccbad8b7272ff8df90",
+        "source_chars": 7162,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_find_coffee_matches(p jsonb)",
+        "full_def_md5": "0ba424a2a66e99dc98629a89d485680b",
+        "source_chars": 6024,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_link_pending_coffee(sid uuid, canonical uuid, event_name text, evidence jsonb)",
+        "full_def_md5": "140c211a4bfef175b041c037561a1e37",
+        "source_chars": 3954,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_member_retry_pending_approval(p_submission_id uuid, p_expected_revision bigint)",
+        "full_def_md5": "5ebb55ad50529a080b3c2332a29d3309",
+        "source_chars": 2166,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_on_community_coffee_verification()",
+        "full_def_md5": "cefee7b991e40185eadbacde89def3aa",
+        "source_chars": 1065,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_on_library_coffee_change()",
+        "full_def_md5": "b6cbc45072b0e9f8ebb511b2eca3895f",
+        "source_chars": 347,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_promote_pending_coffee(sid uuid, method text, evidence jsonb, distinct_confirmed boolean)",
+        "full_def_md5": "f9c37ac804b3b2c425cd86284020b581",
+        "source_chars": 11956,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_recheck_after_link()",
+        "full_def_md5": "9fc3b44ef631cb87bc0b40e689c123b8",
+        "source_chars": 251,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_review_community_shot(p_id uuid)",
+        "full_def_md5": "c5aea4d32aa8027a39d80341feade406",
+        "source_chars": 7734,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_review_pending_community(p_limit integer)",
+        "full_def_md5": "ff876442da558f60f7eccb36bd6dbe62",
+        "source_chars": 944,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_roaster_key(value text)",
+        "full_def_md5": "e553ae6c1cf99c3784f5d14a4f05d355",
+        "source_chars": 388,
+        "security_definer": false
+      },
+      {
+        "signature": "private.dic_shared_preview_claim(account_id uuid)",
+        "full_def_md5": "b99b6cbd392562af334c68e056ce33d8",
+        "source_chars": 1380,
+        "security_definer": true
+      },
+      {
+        "signature": "private.dic_source_key(value text)",
+        "full_def_md5": "07e0ef286246fdae29b9151018296f79",
+        "source_chars": 981,
+        "security_definer": false
+      },
+      {
+        "signature": "private.dic_submit_coffee_auto(mid uuid, p jsonb)",
+        "full_def_md5": "e2b11c83a686a5a9949699cd23b52e13",
+        "source_chars": 3771,
+        "security_definer": true
+      },
+      {
+        "signature": "private.handle_new_auth_user()",
+        "full_def_md5": "ba4f31790060a75e074148034f26dfbe",
+        "source_chars": 372,
+        "security_definer": true
+      },
+      {
+        "signature": "private.import_id(u uuid, kind text, source_id text)",
+        "full_def_md5": "d8dacedebb77db30037b10ee1bac97aa",
+        "source_chars": 436,
+        "security_definer": false
+      },
+      {
+        "signature": "private.import_operation(expected_owner uuid, doc jsonb, save boolean, review_hash text, recovery_saved boolean)",
+        "full_def_md5": "b684a6af862302d9d4bb7c212208f5e0",
+        "source_chars": 3124,
+        "security_definer": true
+      },
+      {
+        "signature": "private.is_admin()",
+        "full_def_md5": "396d3e8e29dbd4550ec7ac26b7589a63",
+        "source_chars": 264,
+        "security_definer": true
+      },
+      {
+        "signature": "private.is_member()",
+        "full_def_md5": "dbc163d07f45e8b5831f6a6394a70ab8",
+        "source_chars": 257,
+        "security_definer": true
+      },
+      {
+        "signature": "private.mutate(mid uuid, action text, p jsonb)",
+        "full_def_md5": "d1050c2ee3b2896c6fbd8b90bdba9052",
+        "source_chars": 10881,
+        "security_definer": true
+      },
+      {
+        "signature": "private.mutate_workspace(mid uuid, action text, p jsonb)",
+        "full_def_md5": "f3eb1b5086e4396625f3efa38f4c9165",
+        "source_chars": 6384,
+        "security_definer": true
+      },
+      {
+        "signature": "private.project_shot()",
+        "full_def_md5": "79e6fd0668fa4502c8785b3e92a14a61",
+        "source_chars": 3045,
+        "security_definer": true
+      },
+      {
+        "signature": "private.protect_shot_provenance()",
+        "full_def_md5": "9700d82ba097c7eba83b76135acbdac1",
+        "source_chars": 683,
+        "security_definer": false
+      },
+      {
+        "signature": "private.read_personal_state()",
+        "full_def_md5": "037d248b67cc3e8490c1689d3200990f",
+        "source_chars": 2339,
+        "security_definer": true
+      },
+      {
+        "signature": "private.refresh_personal_family(fid uuid)",
+        "full_def_md5": "e6a15e6de21f56345479574cc575cf95",
+        "source_chars": 2134,
+        "security_definer": true
+      },
+      {
+        "signature": "private.reject_version_update()",
+        "full_def_md5": "1679d0091bcc8e9608d9af0914955864",
+        "source_chars": 270,
+        "security_definer": false
+      },
+      {
+        "signature": "private.remember_feed_condition()",
+        "full_def_md5": "417b99a5145e27b5941b504d1d7509c1",
+        "source_chars": 702,
+        "security_definer": false
+      },
+      {
+        "signature": "private.rename_setup(mid uuid, p jsonb)",
+        "full_def_md5": "d5efbc70d20f75d6e3aeea4b64ab078b",
+        "source_chars": 1792,
+        "security_definer": true
+      },
+      {
+        "signature": "private.require_member()",
+        "full_def_md5": "27ff3a2a7fcf231171778a2d584b1851",
+        "source_chars": 347,
+        "security_definer": true
+      },
+      {
+        "signature": "private.required_revision(p jsonb)",
+        "full_def_md5": "d14d1f80af2c73f953a37818f8488ca0",
+        "source_chars": 382,
+        "security_definer": false
+      },
+      {
+        "signature": "private.session_status()",
+        "full_def_md5": "0aa8e57bb4846aac7dd8e3b6c0cf690c",
+        "source_chars": 729,
+        "security_definer": true
+      },
+      {
+        "signature": "public.dic_admin_access_overview()",
+        "full_def_md5": "15ea6e60d84362b6fa32f9f40f567df8",
+        "source_chars": 192,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_admin_account_delete_finish(p_operation_id uuid, p_actor_id uuid)",
+        "full_def_md5": "2fc16586443318c1594d1939544920dd",
+        "source_chars": 257,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_admin_account_delete_prepare(p_operation_id uuid, p_actor_id uuid)",
+        "full_def_md5": "a0c67fbfbbfd122a8e16596c79333092",
+        "source_chars": 259,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_admin_account_delete_preview(p_member_id uuid)",
+        "full_def_md5": "b8f41cc6faf702f27c678a45127d0723",
+        "source_chars": 233,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_admin_account_delete_request(p_member_id uuid, p_community_mode text, p_expected_impact jsonb)",
+        "full_def_md5": "779f19212d19ebbfb88f2a859fd92c21",
+        "source_chars": 308,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_admin_approve_own_coffee(submission_id uuid)",
+        "full_def_md5": "dad5489e9916e30aef63110f7b666954",
+        "source_chars": 380,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_admin_coffee_candidates(p_submission_id uuid)",
+        "full_def_md5": "cb857122b118c9c3b3e7190bae52168a",
+        "source_chars": 231,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_admin_dashboard()",
+        "full_def_md5": "10cb975d77d22778ebd72d59dba6e934",
+        "source_chars": 186,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_admin_delete_preview(p_kind text, p_record_id uuid)",
+        "full_def_md5": "102b8d2797413ed02a943d093cc60427",
+        "source_chars": 237,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_admin_delete_record(p_kind text, p_record_id uuid, p_expected_revision bigint, p_expected_impact jsonb)",
+        "full_def_md5": "54ad38cc86048b526c158f4f34867398",
+        "source_chars": 318,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_admin_edit_coffee(p_record_id uuid, p_expected_revision bigint, p_details jsonb, p_reason text, p_kind text)",
+        "full_def_md5": "24e3081d08de58a97f7eeaa65cb568bc",
+        "source_chars": 550,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_admin_edit_shot(p_record_id uuid, p_expected_revision bigint, p_details jsonb, p_reason text, p_kind text)",
+        "full_def_md5": "b4e2f07488e5ebc93d1569ca46ad0fbd",
+        "source_chars": 548,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_admin_records(p_kind text, p_offset integer, p_limit integer)",
+        "full_def_md5": "bfdf280c85fdf95c72bd2f7f545659b1",
+        "source_chars": 266,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_admin_review_candidates(p_submission_id uuid)",
+        "full_def_md5": "a03f0e34a59684c9b0810ce8b1f79b96",
+        "source_chars": 231,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_admin_review_coffee(p_submission_id uuid, p_expected_revision bigint, p_action text, p_reason text, p_canonical_id uuid)",
+        "full_def_md5": "249b84c409201e14f1b75235f9ae3ffa",
+        "source_chars": 366,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_admin_review_signup(p_member_id uuid, p_action text, p_expected_state text)",
+        "full_def_md5": "ebfec67f4da9cf3adc0d3e3431f2a295",
+        "source_chars": 295,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_admin_search_records(p_kind text, p_query text, p_offset integer, p_limit integer)",
+        "full_def_md5": "de9c08308b98e3de0d7d1db084dae375",
+        "source_chars": 302,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_admin_set_member_access(p_member_id uuid, p_enabled boolean)",
+        "full_def_md5": "67ea2ae8b4603b266e910bc8f6ff7240",
+        "source_chars": 244,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_admin_signup_requests(p_offset integer, p_limit integer)",
+        "full_def_md5": "ab3a82cfe5d926fa485c39b153aa701e",
+        "source_chars": 262,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_apply_client_change(expected_owner uuid, mutation_id uuid, action text, payload jsonb)",
+        "full_def_md5": "da434f17a21539d72ebb8fc04c13f214",
+        "source_chars": 1286,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_browse_community_shots(p_limit integer, p_offset integer)",
+        "full_def_md5": "edcc2c6a9fb24b3455a446d964a2ed2d",
+        "source_chars": 3222,
+        "security_definer": true
+      },
+      {
+        "signature": "public.dic_claim_first_style_prompt(p_library_entry_id uuid)",
+        "full_def_md5": "5f652895cd7e0775e9fecd39f36fc34e",
+        "source_chars": 236,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_claim_universal_preview()",
+        "full_def_md5": "8f4bc6ecd8687594ff7200cda26104b5",
+        "source_chars": 618,
+        "security_definer": true
+      },
+      {
+        "signature": "public.dic_commit_import(expected_owner uuid, backup jsonb, review_hash text, recovery_saved boolean)",
+        "full_def_md5": "13e59d7da1efb928dc307f90a2e08dca",
+        "source_chars": 295,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_community_evidence_counts(p_coffee_id uuid, p_style text)",
+        "full_def_md5": "1bddea7e3160c0282bea1d6e74d1fbaf",
+        "source_chars": 694,
+        "security_definer": true
+      },
+      {
+        "signature": "public.dic_community_recommendation_evidence(p_library_entry_id uuid, p_style text)",
+        "full_def_md5": "085f92a3814dce624e5b9a3759e893ef",
+        "source_chars": 6171,
+        "security_definer": true
+      },
+      {
+        "signature": "public.dic_confirm_community_outlier(p_shot_id uuid, p_expected_revision bigint)",
+        "full_def_md5": "0657114255a0375b7f3fc502f780aa54",
+        "source_chars": 1432,
+        "security_definer": true
+      },
+      {
+        "signature": "public.dic_edit_my_coffee(p_library_entry uuid, p_expected_revision bigint, p_details jsonb, p_source_url text)",
+        "full_def_md5": "fa2193422c742ae9f42e2239c166f245",
+        "source_chars": 331,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_find_coffee_matches(payload jsonb)",
+        "full_def_md5": "b3e36084c168cabe7a11a6d176e8951f",
+        "source_chars": 208,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_member_retry_pending_approval(p_submission_id uuid, p_expected_revision bigint)",
+        "full_def_md5": "3d8aa15468f134fc78f79357ec783a60",
+        "source_chars": 283,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_mutate(mutation_id uuid, action text, payload jsonb)",
+        "full_def_md5": "86cd376e257d80b09b1e228236a87dff",
+        "source_chars": 256,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_my_community_outliers()",
+        "full_def_md5": "312b59594de640adacb12ab0aa0d18e4",
+        "source_chars": 1318,
+        "security_definer": true
+      },
+      {
+        "signature": "public.dic_preview_cached_verified(p_source_url text)",
+        "full_def_md5": "86a08b5ae97f89c13b8c727ebdd0c50f",
+        "source_chars": 1658,
+        "security_definer": true
+      },
+      {
+        "signature": "public.dic_preview_complete(p_ticket uuid)",
+        "full_def_md5": "abc5f79b029d51593f29fe4774488d0b",
+        "source_chars": 1145,
+        "security_definer": true
+      },
+      {
+        "signature": "public.dic_preview_import(expected_owner uuid, backup jsonb)",
+        "full_def_md5": "001e3dd5b495ca6d1fd096bf35a473dd",
+        "source_chars": 239,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_preview_preflight(p_cached boolean)",
+        "full_def_md5": "a437026d8c1b75f0db24c0ef840cae24",
+        "source_chars": 1967,
+        "security_definer": true
+      },
+      {
+        "signature": "public.dic_read_personal_state()",
+        "full_def_md5": "811aee397f3505117fcc38715e09af94",
+        "source_chars": 175,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_roaster_preview_target(host text)",
+        "full_def_md5": "d264ace83ea27e01b12f789b2e2b4542",
+        "source_chars": 852,
+        "security_definer": true
+      },
+      {
+        "signature": "public.dic_search_community_shots(p_query text, p_style text, p_limit integer, p_offset integer)",
+        "full_def_md5": "1124d2bbfec7f47d38d06ceb2e049fe4",
+        "source_chars": 3949,
+        "security_definer": true
+      },
+      {
+        "signature": "public.dic_session_status()",
+        "full_def_md5": "742e5bd0fc8544807886b514d95d6688",
+        "source_chars": 165,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_source_check_target(submission_id uuid)",
+        "full_def_md5": "6af6fa312bed8eb0ed26b31dc94da3b6",
+        "source_chars": 1401,
+        "security_definer": true
+      },
+      {
+        "signature": "public.dic_source_claim(submission_id uuid)",
+        "full_def_md5": "68bc86486e485565d4273daf3655e0d3",
+        "source_chars": 2348,
+        "security_definer": true
+      },
+      {
+        "signature": "public.dic_trusted_source_verify(submission_id uuid, evidence jsonb)",
+        "full_def_md5": "59dfb6ecc6a2b8324fa9ba8512fdaaa3",
+        "source_chars": 557,
+        "security_definer": false
+      },
+      {
+        "signature": "public.dic_url_preview_claim(account_id uuid)",
+        "full_def_md5": "25b95f9449aeb73cc1937f880358c22f",
+        "source_chars": 413,
+        "security_definer": true
+      },
+      {
+        "signature": "public.rls_auto_enable()",
+        "full_def_md5": "846ec2fbff751d24b890656d63c3a9bf",
+        "source_chars": 1223,
+        "security_definer": true
+      }
+    ]
+  },
+  "index_review": {
+    "reviewed": 96,
+    "prior": 96,
+    "new_or_changed": [],
+    "missing": [],
+    "per_object_current_ddl_hashes": [
+      {
+        "schema_name": "private",
+        "table_name": "admin_access_events",
+        "index_name": "admin_access_events_pkey",
+        "source_md5": "c2482d2a7c75e728fc0ac60b22cf7ffc"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "admin_content_edits",
+        "index_name": "admin_content_edits_pkey",
+        "source_md5": "420e0969af4dba5e965d44583e9ef23f"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "app_admins",
+        "index_name": "app_admins_pkey",
+        "source_md5": "3361d3fc6f794ca4c3d11cad6d27254a"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "backup_runs",
+        "index_name": "backup_runs_pkey",
+        "source_md5": "654d8d07304420add2c23d96620ee42a"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "beta_members",
+        "index_name": "beta_members_pkey",
+        "source_md5": "b56c5cbe36151ede45a0a9b82d52eb26"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "community_quality_checks",
+        "index_name": "community_quality_checks_pkey",
+        "source_md5": "e3bdedd80e5c5a7298b2dfbce91a4dd6"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "contribution_links",
+        "index_name": "contribution_contributor_idx",
+        "source_md5": "805b999f5273584ba8d2a1c025c97334"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "contribution_links",
+        "index_name": "contribution_links_pkey",
+        "source_md5": "ef1be011b9bae878dbeb2733a828fcc6"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "contribution_links",
+        "index_name": "contribution_links_shot_id_key",
+        "source_md5": "a1b2f1f72abc863cfe0236ae60b2d7a4"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "contributors",
+        "index_name": "contributors_owner_id_key",
+        "source_md5": "ec6e3c7634b5f66f0c90444912d9a998"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "contributors",
+        "index_name": "contributors_pkey",
+        "source_md5": "3f8ffef47af732b27bb93064dff9bd82"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "dic_admin_account_delete_operations",
+        "index_name": "dic_admin_account_delete_one_active",
+        "source_md5": "12d4f772dbb990780fd4780afe56da18"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "dic_admin_account_delete_operations",
+        "index_name": "dic_admin_account_delete_operations_pkey",
+        "source_md5": "e0f079dfaf4e46241f745870978dac9f"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "dic_admin_delete_receipts",
+        "index_name": "dic_admin_delete_receipts_pkey",
+        "source_md5": "f9f5e705c1b88157f81d01bdc73360dc"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "dic_coffee_aliases",
+        "index_name": "dic_coffee_aliases_pkey",
+        "source_md5": "2189585ef718f6fe259fe441a97cd4d4"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "dic_coffee_audit",
+        "index_name": "dic_coffee_audit_pkey",
+        "source_md5": "b3b65fd2f73cbb19bf754483d2b66a8b"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "dic_coffee_first_entry",
+        "index_name": "dic_coffee_first_entry_pkey",
+        "source_md5": "4cfa3db723722658b6460b29b849ed0d"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "dic_first_style_prompt_seen",
+        "index_name": "dic_first_style_prompt_seen_pkey",
+        "source_md5": "28104c950298be1231060df629d984cc"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "dic_roaster_aliases",
+        "index_name": "dic_roaster_aliases_pkey",
+        "source_md5": "976d3ac9dbcaf5b32f57cbe36ac6aef0"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "dic_roaster_directory",
+        "index_name": "dic_roaster_directory_canonical_key_key",
+        "source_md5": "2b8e82f348db2e99e0e78c3a5ff3953b"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "dic_roaster_directory",
+        "index_name": "dic_roaster_directory_pkey",
+        "source_md5": "09fa54fc1d020d3c42c563e5e232bb99"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "dic_signup_review_events",
+        "index_name": "dic_signup_review_events_pkey",
+        "source_md5": "75c4f59fedb94f7500d07a2744957c4a"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "dic_source_attempts",
+        "index_name": "dic_source_attempts_pkey",
+        "source_md5": "a66e6f9ea6bc252c880318a12cab1d29"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "dic_url_preview_attempts",
+        "index_name": "dic_url_preview_attempts_pkey",
+        "source_md5": "69bcf836083a08c57e12826a3358f8f0"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "import_batches",
+        "index_name": "import_batches_pkey",
+        "source_md5": "84c2cb594ce4c2e1d0d4c7ca1b0d0bcd"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "import_control",
+        "index_name": "import_control_pkey",
+        "source_md5": "f81388a000ca770797cb8a3ef2d62f97"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "mutation_receipts",
+        "index_name": "mutation_receipts_pkey",
+        "source_md5": "d1c3c121dee8e39ff67acacfbdc5fe47"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "shot_audit",
+        "index_name": "shot_audit_owner_idx",
+        "source_md5": "bf93b1c41c29eeea7198058ed259d7a5"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "shot_audit",
+        "index_name": "shot_audit_pkey",
+        "source_md5": "11a81d2dc6deb982780355b9c0968cb1"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "account_preferences",
+        "index_name": "account_active_setup_idx",
+        "source_md5": "7dc1ed03428bff7ca9f061d7919abfe6"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "account_preferences",
+        "index_name": "account_preferences_pkey",
+        "source_md5": "e72ff7d524d65731a98ab37794299fc2"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "admin_reviews",
+        "index_name": "admin_reviews_pkey",
+        "source_md5": "0b975d3cb1500fbc2100da6833f4e4dc"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "admin_reviews",
+        "index_name": "review_reviewer_idx",
+        "source_md5": "ba64042e363720504a79b1fdbd98b3b6"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "admin_reviews",
+        "index_name": "review_shot_idx",
+        "source_md5": "7d5173285dbe281070add443bfc9057e"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "admin_reviews",
+        "index_name": "review_submission_idx",
+        "source_md5": "e3bdc4f30c411c346bb9932cd9983aae"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "bags",
+        "index_name": "bag_active_once_idx",
+        "source_md5": "053474898a266bc0e50609524021da08"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "bags",
+        "index_name": "bags_owner_id_library_entry_id_id_key",
+        "source_md5": "5fc46ffeabbb2ea8ff40315f118cbb8c"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "bags",
+        "index_name": "bags_pkey",
+        "source_md5": "18b51a136578b74c0dbc7bf34d4fe0a4"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "basket_versions",
+        "index_name": "basket_version_basket_idx",
+        "source_md5": "215ee0f2e2ec7d633698753d7fe6e3f8"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "basket_versions",
+        "index_name": "basket_versions_owner_id_setup_id_id_key",
+        "source_md5": "c03e0b0d4fe491bb37d498d91d7bfe13"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "basket_versions",
+        "index_name": "basket_versions_pkey",
+        "source_md5": "853b6afd83e98c06d08e5f10ad5b4a96"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "baskets",
+        "index_name": "baskets_owner_id_setup_id_id_key",
+        "source_md5": "d4fa2d0d4c1a3dbb353a4594939ad1c2"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "baskets",
+        "index_name": "baskets_pkey",
+        "source_md5": "f3467d40a4fdcd51ddc2b894ad33381e"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "coffee_groups",
+        "index_name": "coffee_groups_pkey",
+        "source_md5": "66fd36023a6432b639d1a90ad8a0091e"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "coffee_sources",
+        "index_name": "coffee_sources_pkey",
+        "source_md5": "221026538141a5a097c0b1de03946f5c"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "coffee_sources",
+        "index_name": "sources_coffee_idx",
+        "source_md5": "03ae5debb96ac22f8ee02a907e09ae64"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "coffee_submissions",
+        "index_name": "coffee_submissions_owner_id_id_key",
+        "source_md5": "a7ce9c4f2cf642772b87ec42fb041835"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "coffee_submissions",
+        "index_name": "coffee_submissions_pkey",
+        "source_md5": "1bcfa28881afd741b880a27dc2030616"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "coffee_submissions",
+        "index_name": "submissions_coffee_idx",
+        "source_md5": "209e1a60f18674d80d33ffefaf7496f8"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "coffees",
+        "index_name": "coffees_group_idx",
+        "source_md5": "916f831dc9945cfa2b4741ad5afcb92f"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "coffees",
+        "index_name": "coffees_merge_idx",
+        "source_md5": "c14a33640553e7d1cba75e259786b068"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "coffees",
+        "index_name": "coffees_pkey",
+        "source_md5": "cf760199bf9a2f771b9efd77ac56adf1"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "community_shots",
+        "index_name": "community_eligible_idx",
+        "source_md5": "eb44fda326974932d8ec8852a77ba3e3"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "community_shots",
+        "index_name": "community_family_idx",
+        "source_md5": "3c646c5aa0c92da502c689d52d82e76f"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "community_shots",
+        "index_name": "community_shots_pkey",
+        "source_md5": "b29f8b965478a7a93ad524885dde0349"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "grinder_calibrations",
+        "index_name": "calibration_previous_idx",
+        "source_md5": "5205ca8d9d04a65c518ae33875854989"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "grinder_calibrations",
+        "index_name": "grinder_calibrations_owner_id_setup_id_id_key",
+        "source_md5": "6cf8de8427d307eef5376fba027ca65e"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "grinder_calibrations",
+        "index_name": "grinder_calibrations_pkey",
+        "source_md5": "a085ba54ad3923287b9d5d79d3b9ffc8"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "library_entries",
+        "index_name": "library_coffee_idx",
+        "source_md5": "2554ad2f0370868ea974650805379527"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "library_entries",
+        "index_name": "library_coffee_once_idx",
+        "source_md5": "fd2d89496fe0ca4745af8f7f0e675078"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "library_entries",
+        "index_name": "library_entries_owner_id_id_key",
+        "source_md5": "627005f96c140ce14e9823f8cb508683"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "library_entries",
+        "index_name": "library_entries_pkey",
+        "source_md5": "a008b99efd7b82a31ba0321428a01207"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "library_entries",
+        "index_name": "library_submission_once_idx",
+        "source_md5": "2580cf27147fe53bfe763b876edf109c"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "personal_recipe_families",
+        "index_name": "personal_family_community_idx",
+        "source_md5": "910aa33f83e53574f2a82391872388c5"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "personal_recipe_families",
+        "index_name": "personal_recipe_families_owner_id_library_entry_id_style_id_key",
+        "source_md5": "3d8eac9285a3a249fc09e4f50ef5dd1f"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "personal_recipe_families",
+        "index_name": "personal_recipe_families_pkey",
+        "source_md5": "71c88cc5b37185a9c3f24e04f87f3893"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "recipe_families",
+        "index_name": "recipe_families_coffee_id_style_id_key",
+        "source_md5": "4934659ea302e80261402cedf3570e36"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "recipe_families",
+        "index_name": "recipe_families_pkey",
+        "source_md5": "db045001515181d20ef0d723896d481c"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "recipe_preferences",
+        "index_name": "preference_current_family_idx",
+        "source_md5": "61400647d269ea90c4298caea9b2a912"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "recipe_preferences",
+        "index_name": "preference_reference_family_idx",
+        "source_md5": "86123d05800e002791f30a48e2fe8fc0"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "recipe_preferences",
+        "index_name": "preferred_example_idx",
+        "source_md5": "2a29e901b93ef1405297d1ddbbb4e22b"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "recipe_preferences",
+        "index_name": "recipe_preferences_pkey",
+        "source_md5": "93c5714f32863ecd7320867c6011560b"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "setup_preferences",
+        "index_name": "preferences_basket_idx",
+        "source_md5": "ea257d5ac534c9a876a6000c6ebb3ad8"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "setup_preferences",
+        "index_name": "preferences_calibration_idx",
+        "source_md5": "e3b9dc26e0d0bc73c82d65e1be0fd1bf"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "setup_preferences",
+        "index_name": "setup_preferences_pkey",
+        "source_md5": "86aab20660414ae9e014bfc42c4ffb2f"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "setup_versions",
+        "index_name": "setup_versions_owner_id_setup_id_id_key",
+        "source_md5": "1bc41090d543d3593660ac7f639c32a0"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "setup_versions",
+        "index_name": "setup_versions_pkey",
+        "source_md5": "dd167da7bb7754925fd3527eb12cb89e"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "setups",
+        "index_name": "setup_active_version_idx",
+        "source_md5": "47ad3cdc52ee50265faf8b299e0d7d4a"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "setups",
+        "index_name": "setups_owner_id_id_key",
+        "source_md5": "43caee64e94e009d3ffcb3f05e9b2e92"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "setups",
+        "index_name": "setups_pkey",
+        "source_md5": "9e7a96f6e75d8335df71c50fd0ef65b4"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "shot_notes",
+        "index_name": "shot_notes_pkey",
+        "source_md5": "e7a8134053c07a2240acb36d84accd20"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "shots",
+        "index_name": "shot_bag_idx",
+        "source_md5": "602d753532f41f6fbac274f16585f0c4"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "shots",
+        "index_name": "shot_basket_idx",
+        "source_md5": "32e2d561e2c0cd74a2eeeb5b44517d5c"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "shots",
+        "index_name": "shot_calibration_idx",
+        "source_md5": "03e03e07edc047cd77b2cd30c537aa80"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "shots",
+        "index_name": "shot_family_idx",
+        "source_md5": "b9b597f88bc5c829f2ab726a967b674e"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "shots",
+        "index_name": "shot_legacy_once_idx",
+        "source_md5": "eb774d6400c67504ee19ea55133fc502"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "shots",
+        "index_name": "shot_library_time_idx",
+        "source_md5": "90b66f180ed9a647561614bfdd511b44"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "shots",
+        "index_name": "shots_owner_id_id_key",
+        "source_md5": "49fb847b777b3676c5c851a4a6607a72"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "shots",
+        "index_name": "shots_owner_id_setup_id_setup_version_id_library_entry_id_s_key",
+        "source_md5": "7170e6844d2c2d62bdf6a340d16173b6"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "shots",
+        "index_name": "shots_pkey",
+        "source_md5": "336c64a930eab4ef632feb0210680a83"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "workspace_coffees",
+        "index_name": "workspace_coffee_basket_idx",
+        "source_md5": "bdef29d39b0cba04853e9e4fefd398e1"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "workspace_coffees",
+        "index_name": "workspace_coffee_library_idx",
+        "source_md5": "900a305b3907b3bfae0776166915059d"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "workspace_coffees",
+        "index_name": "workspace_coffees_pkey",
+        "source_md5": "2828daaae679ea225f3255a8da743e50"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "workspace_coffees",
+        "index_name": "workspace_recent_idx",
+        "source_md5": "d1e37a88742277cf745ac28ce785c890"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "workspace_state",
+        "index_name": "workspace_current_idx",
+        "source_md5": "b94de13f58b930ccce8db410a6f98ed9"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "workspace_state",
+        "index_name": "workspace_state_pkey",
+        "source_md5": "7e195381fdb46d958449accc43b8c772"
+      }
+    ]
+  },
+  "policy_review": {
+    "reviewed": 39,
+    "prior": 39,
+    "new_or_changed_expression_or_permissiveness": [],
+    "missing": [],
+    "per_object_current_policy_source": [
+      {
+        "schema_name": "private",
+        "table_name": "admin_access_events",
+        "policy_name": "no_client_access",
+        "command_code": "*",
+        "permissive": true,
+        "using_expression": "false",
+        "check_expression": "false",
+        "roles": "{anon,authenticated}"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "admin_content_edits",
+        "policy_name": "no_direct_user_content_edits",
+        "command_code": "*",
+        "permissive": true,
+        "using_expression": "false",
+        "check_expression": "false",
+        "roles": "{anon,authenticated}"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "app_admins",
+        "policy_name": "no_client_access",
+        "command_code": "*",
+        "permissive": true,
+        "using_expression": "false",
+        "check_expression": "false",
+        "roles": "{anon,authenticated}"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "backup_runs",
+        "policy_name": "no_client_access",
+        "command_code": "*",
+        "permissive": true,
+        "using_expression": "false",
+        "check_expression": "false",
+        "roles": "{anon,authenticated}"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "beta_members",
+        "policy_name": "no_client_access",
+        "command_code": "*",
+        "permissive": true,
+        "using_expression": "false",
+        "check_expression": "false",
+        "roles": "{anon,authenticated}"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "community_quality_checks",
+        "policy_name": "no_client_access",
+        "command_code": "*",
+        "permissive": true,
+        "using_expression": "false",
+        "check_expression": "false",
+        "roles": "{anon,authenticated}"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "contribution_links",
+        "policy_name": "no_client_access",
+        "command_code": "*",
+        "permissive": true,
+        "using_expression": "false",
+        "check_expression": "false",
+        "roles": "{anon,authenticated}"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "contributors",
+        "policy_name": "no_client_access",
+        "command_code": "*",
+        "permissive": true,
+        "using_expression": "false",
+        "check_expression": "false",
+        "roles": "{anon,authenticated}"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "dic_roaster_aliases",
+        "policy_name": "no_client_access",
+        "command_code": "*",
+        "permissive": true,
+        "using_expression": "false",
+        "check_expression": "false",
+        "roles": "{anon,authenticated}"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "dic_roaster_directory",
+        "policy_name": "no_client_access",
+        "command_code": "*",
+        "permissive": true,
+        "using_expression": "false",
+        "check_expression": "false",
+        "roles": "{anon,authenticated}"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "dic_url_preview_attempts",
+        "policy_name": "no_client_access",
+        "command_code": "*",
+        "permissive": true,
+        "using_expression": "false",
+        "check_expression": "false",
+        "roles": "{anon,authenticated}"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "import_batches",
+        "policy_name": "no_client_access",
+        "command_code": "*",
+        "permissive": true,
+        "using_expression": "false",
+        "check_expression": "false",
+        "roles": "{anon,authenticated}"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "import_control",
+        "policy_name": "no_client_access",
+        "command_code": "*",
+        "permissive": true,
+        "using_expression": "false",
+        "check_expression": "false",
+        "roles": "{anon,authenticated}"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "mutation_receipts",
+        "policy_name": "no_client_access",
+        "command_code": "*",
+        "permissive": true,
+        "using_expression": "false",
+        "check_expression": "false",
+        "roles": "{anon,authenticated}"
+      },
+      {
+        "schema_name": "private",
+        "table_name": "shot_audit",
+        "policy_name": "no_client_access",
+        "command_code": "*",
+        "permissive": true,
+        "using_expression": "false",
+        "check_expression": "false",
+        "roles": "{anon,authenticated}"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "account_preferences",
+        "policy_name": "owner_read",
+        "command_code": "r",
+        "permissive": true,
+        "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check_expression": "",
+        "roles": "{authenticated}"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "account_preferences",
+        "policy_name": "owner_update",
+        "command_code": "w",
+        "permissive": true,
+        "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "roles": "{authenticated}"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "admin_reviews",
+        "policy_name": "review_read",
+        "command_code": "r",
+        "permissive": true,
+        "using_expression": "( SELECT private.is_admin() AS is_admin)",
+        "check_expression": "",
+        "roles": "{authenticated}"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "bags",
+        "policy_name": "owner_read",
+        "command_code": "r",
+        "permissive": true,
+        "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check_expression": "",
+        "roles": "{authenticated}"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "basket_versions",
+        "policy_name": "owner_read",
+        "command_code": "r",
+        "permissive": true,
+        "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check_expression": "",
+        "roles": "{authenticated}"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "baskets",
+        "policy_name": "owner_read",
+        "command_code": "r",
+        "permissive": true,
+        "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check_expression": "",
+        "roles": "{authenticated}"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "coffee_groups",
+        "policy_name": "group_read",
+        "command_code": "r",
+        "permissive": true,
+        "using_expression": "(( SELECT private.is_member() AS is_member) AND (EXISTS ( SELECT 1\n   FROM coffees c\n  WHERE ((c.group_id = coffee_groups.id) AND (c.verification_state = 'verified'::text)))))",
+        "check_expression": "",
+        "roles": "{authenticated}"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "coffee_sources",
+        "policy_name": "source_read",
+        "command_code": "r",
+        "permissive": true,
+        "using_expression": "(( SELECT private.is_member() AS is_member) AND (EXISTS ( SELECT 1\n   FROM coffees c\n  WHERE ((c.id = coffee_sources.coffee_id) AND (c.verification_state = 'verified'::text)))))",
+        "check_expression": "",
+        "roles": "{authenticated}"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "coffee_submissions",
+        "policy_name": "submission_insert",
+        "command_code": "a",
+        "permissive": true,
+        "using_expression": "",
+        "check_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)) AND ((canonical_coffee_id IS NULL) OR (EXISTS ( SELECT 1\n   FROM coffees c\n  WHERE ((c.id = coffee_submissions.canonical_coffee_id) AND (c.verification_state = 'verified'::text))))))",
+        "roles": "{authenticated}"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "coffee_submissions",
+        "policy_name": "submission_read",
+        "command_code": "r",
+        "permissive": true,
+        "using_expression": "(( SELECT private.is_member() AS is_member) AND ((owner_id = ( SELECT auth.uid() AS uid)) OR ( SELECT private.is_admin() AS is_admin)))",
+        "check_expression": "",
+        "roles": "{authenticated}"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "coffees",
+        "policy_name": "coffee_read",
+        "command_code": "r",
+        "permissive": true,
+        "using_expression": "(( SELECT private.is_member() AS is_member) AND ((verification_state = 'verified'::text) OR ( SELECT private.is_admin() AS is_admin)))",
+        "check_expression": "",
+        "roles": "{authenticated}"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "community_shots",
+        "policy_name": "community_read",
+        "command_code": "r",
+        "permissive": true,
+        "using_expression": "(( SELECT private.is_member() AS is_member) AND (quality_state = 'eligible'::text) AND (EXISTS ( SELECT 1\n   FROM coffees c\n  WHERE ((c.id = community_shots.coffee_id) AND (c.verification_state = 'verified'::text)))))",
+        "check_expression": "",
+        "roles": "{authenticated}"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "grinder_calibrations",
+        "policy_name": "owner_read",
+        "command_code": "r",
+        "permissive": true,
+        "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check_expression": "",
+        "roles": "{authenticated}"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "library_entries",
+        "policy_name": "library_read",
+        "command_code": "r",
+        "permissive": true,
+        "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check_expression": "",
+        "roles": "{authenticated}"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "personal_recipe_families",
+        "policy_name": "owner_read",
+        "command_code": "r",
+        "permissive": true,
+        "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check_expression": "",
+        "roles": "{authenticated}"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "recipe_families",
+        "policy_name": "family_read",
+        "command_code": "r",
+        "permissive": true,
+        "using_expression": "(( SELECT private.is_member() AS is_member) AND (EXISTS ( SELECT 1\n   FROM coffees c\n  WHERE ((c.id = recipe_families.coffee_id) AND (c.verification_state = 'verified'::text)))))",
+        "check_expression": "",
+        "roles": "{authenticated}"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "recipe_preferences",
+        "policy_name": "owner_read",
+        "command_code": "r",
+        "permissive": true,
+        "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check_expression": "",
+        "roles": "{authenticated}"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "setup_preferences",
+        "policy_name": "owner_read",
+        "command_code": "r",
+        "permissive": true,
+        "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check_expression": "",
+        "roles": "{authenticated}"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "setup_versions",
+        "policy_name": "owner_read",
+        "command_code": "r",
+        "permissive": true,
+        "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check_expression": "",
+        "roles": "{authenticated}"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "setups",
+        "policy_name": "owner_read",
+        "command_code": "r",
+        "permissive": true,
+        "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check_expression": "",
+        "roles": "{authenticated}"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "shot_notes",
+        "policy_name": "owner_read",
+        "command_code": "r",
+        "permissive": true,
+        "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check_expression": "",
+        "roles": "{authenticated}"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "shots",
+        "policy_name": "owner_read",
+        "command_code": "r",
+        "permissive": true,
+        "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check_expression": "",
+        "roles": "{authenticated}"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "workspace_coffees",
+        "policy_name": "owner_read",
+        "command_code": "r",
+        "permissive": true,
+        "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check_expression": "",
+        "roles": "{authenticated}"
+      },
+      {
+        "schema_name": "public",
+        "table_name": "workspace_state",
+        "policy_name": "owner_read",
+        "command_code": "r",
+        "permissive": true,
+        "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+        "check_expression": "",
+        "roles": "{authenticated}"
+      }
+    ]
+  },
+  "edge_source_readback": {
+    "active_versions": [
+      {
+        "slug": "dic-verify-coffee",
+        "version": 8,
+        "verify_jwt": true
+      },
+      {
+        "slug": "dic-preview-coffee",
+        "version": 4,
+        "verify_jwt": true
+      },
+      {
+        "slug": "dic-delete-member-account",
+        "version": 1,
+        "verify_jwt": true
+      }
+    ],
+    "bundle_hashes": {
+      "dic-delete-member-account": "a2418951c7c4457723cd7b5e7e8d39f4cb1b3a02f76c6099573a9d576f32bf18",
+      "dic-preview-coffee": "ac928ceb4898414555fbcc96afb30b0963f7c819c5d7e211abd5b3893090648c",
+      "dic-verify-coffee": "d59e9da29335f2d626a2779238b4f1176148f5f8f3d54539bf831ff20aa6a77e"
+    },
+    "complete_deployed_file_occurrences": 13,
+    "exact_both_source_occurrences": 10,
+    "prior_known_nonmatches": 3,
+    "distinct_nonmatching_paths": 2,
+    "files": [
+      {
+        "slug": "dic-delete-member-account",
+        "path": "dic-delete-member-account/index.ts",
+        "provider_file_source_chars": 4392,
+        "provider_lines": 70,
+        "provider_bundle_sha256": "a2418951c7c4457723cd7b5e7e8d39f4cb1b3a02f76c6099573a9d576f32bf18",
+        "github_release_and_development_blob_sha": "51f332cf57eb753957bff6566324253faa81df3f",
+        "full_text_compared": true,
+        "exact_both_sources": true,
+        "verdict": "SOURCE_MATCH"
+      },
+      {
+        "slug": "dic-delete-member-account",
+        "path": "_shared/request-budget.mjs",
+        "provider_file_source_chars": 2455,
+        "provider_lines": 45,
+        "provider_bundle_sha256": "a2418951c7c4457723cd7b5e7e8d39f4cb1b3a02f76c6099573a9d576f32bf18",
+        "github_release_and_development_blob_sha": "d8b70824cb71d4dc4a747a8f20e23b429abb3094",
+        "full_text_compared": true,
+        "exact_both_sources": true,
+        "verdict": "SOURCE_MATCH"
+      },
+      {
+        "slug": "dic-preview-coffee",
+        "path": "dic-preview-coffee/index.ts",
+        "provider_file_source_chars": 5864,
+        "provider_lines": 87,
+        "provider_bundle_sha256": "ac928ceb4898414555fbcc96afb30b0963f7c819c5d7e211abd5b3893090648c",
+        "github_release_and_development_blob_sha": "e85b700d2d735b1c16b5ce719a50aa7560b45ac3",
+        "full_text_compared": true,
+        "exact_both_sources": true,
+        "verdict": "SOURCE_MATCH"
+      },
+      {
+        "slug": "dic-preview-coffee",
+        "path": "_shared/request-budget.mjs",
+        "provider_file_source_chars": 2455,
+        "provider_lines": 45,
+        "provider_bundle_sha256": "ac928ceb4898414555fbcc96afb30b0963f7c819c5d7e211abd5b3893090648c",
+        "github_release_and_development_blob_sha": "d8b70824cb71d4dc4a747a8f20e23b429abb3094",
+        "full_text_compared": true,
+        "exact_both_sources": true,
+        "verdict": "SOURCE_MATCH"
+      },
+      {
+        "slug": "dic-preview-coffee",
+        "path": "dic-preview-coffee/preview.mjs",
+        "provider_file_source_chars": 7799,
+        "provider_lines": 136,
+        "provider_bundle_sha256": "ac928ceb4898414555fbcc96afb30b0963f7c819c5d7e211abd5b3893090648c",
+        "github_release_and_development_blob_sha": "14b6b982ce4e78a354bf98d912c19d6ed32cad0c",
+        "full_text_compared": true,
+        "exact_both_sources": true,
+        "verdict": "SOURCE_MATCH"
+      },
+      {
+        "slug": "dic-preview-coffee",
+        "path": "_shared/html-scan.mjs",
+        "provider_file_source_chars": 1723,
+        "provider_lines": 34,
+        "provider_bundle_sha256": "ac928ceb4898414555fbcc96afb30b0963f7c819c5d7e211abd5b3893090648c",
+        "github_release_and_development_blob_sha": "c731e22fc2a05b1559b4619cd05e0deb24ddbcc5",
+        "full_text_compared": true,
+        "exact_both_sources": false,
+        "verdict": "ALREADY_DOCUMENTED_UNDEPLOYED_SOURCE_DIVERGENCE_RUN146"
+      },
+      {
+        "slug": "dic-preview-coffee",
+        "path": "dic-verify-coffee/evidence.mjs",
+        "provider_file_source_chars": 10032,
+        "provider_lines": 182,
+        "provider_bundle_sha256": "ac928ceb4898414555fbcc96afb30b0963f7c819c5d7e211abd5b3893090648c",
+        "github_release_and_development_blob_sha": "3cfb7a1b0a8c2064168ca41314085c48a0f768d1",
+        "full_text_compared": true,
+        "exact_both_sources": false,
+        "verdict": "ALREADY_DOCUMENTED_UNDEPLOYED_SOURCE_DIVERGENCE_RUN146"
+      },
+      {
+        "slug": "dic-preview-coffee",
+        "path": "dic-preview-coffee/agtron-roast.mjs",
+        "provider_file_source_chars": 4209,
+        "provider_lines": 66,
+        "provider_bundle_sha256": "ac928ceb4898414555fbcc96afb30b0963f7c819c5d7e211abd5b3893090648c",
+        "github_release_and_development_blob_sha": "1c6d74452aefc9a35455816178ae4845a057a7f3",
+        "full_text_compared": true,
+        "exact_both_sources": true,
+        "verdict": "SOURCE_MATCH"
+      },
+      {
+        "slug": "dic-verify-coffee",
+        "path": "dic-verify-coffee/index.ts",
+        "provider_file_source_chars": 6909,
+        "provider_lines": 112,
+        "provider_bundle_sha256": "d59e9da29335f2d626a2779238b4f1176148f5f8f3d54539bf831ff20aa6a77e",
+        "github_release_and_development_blob_sha": "2aa8d133a86aba8513d91f1557cdea230e24fa0e",
+        "full_text_compared": true,
+        "exact_both_sources": true,
+        "verdict": "SOURCE_MATCH"
+      },
+      {
+        "slug": "dic-verify-coffee",
+        "path": "_shared/request-budget.mjs",
+        "provider_file_source_chars": 2455,
+        "provider_lines": 45,
+        "provider_bundle_sha256": "d59e9da29335f2d626a2779238b4f1176148f5f8f3d54539bf831ff20aa6a77e",
+        "github_release_and_development_blob_sha": "d8b70824cb71d4dc4a747a8f20e23b429abb3094",
+        "full_text_compared": true,
+        "exact_both_sources": true,
+        "verdict": "SOURCE_MATCH"
+      },
+      {
+        "slug": "dic-verify-coffee",
+        "path": "dic-verify-coffee/evidence.mjs",
+        "provider_file_source_chars": 11492,
+        "provider_lines": 203,
+        "provider_bundle_sha256": "d59e9da29335f2d626a2779238b4f1176148f5f8f3d54539bf831ff20aa6a77e",
+        "github_release_and_development_blob_sha": "3cfb7a1b0a8c2064168ca41314085c48a0f768d1",
+        "full_text_compared": true,
+        "exact_both_sources": true,
+        "verdict": "SOURCE_MATCH"
+      },
+      {
+        "slug": "dic-verify-coffee",
+        "path": "_shared/html-scan.mjs",
+        "provider_file_source_chars": 1723,
+        "provider_lines": 34,
+        "provider_bundle_sha256": "d59e9da29335f2d626a2779238b4f1176148f5f8f3d54539bf831ff20aa6a77e",
+        "github_release_and_development_blob_sha": "c731e22fc2a05b1559b4619cd05e0deb24ddbcc5",
+        "full_text_compared": true,
+        "exact_both_sources": false,
+        "verdict": "ALREADY_DOCUMENTED_UNDEPLOYED_SOURCE_DIVERGENCE_RUN146"
+      },
+      {
+        "slug": "dic-verify-coffee",
+        "path": "_shared/coffee-release-label.mjs",
+        "provider_file_source_chars": 2250,
+        "provider_lines": 36,
+        "provider_bundle_sha256": "d59e9da29335f2d626a2779238b4f1176148f5f8f3d54539bf831ff20aa6a77e",
+        "github_release_and_development_blob_sha": "2a3c0f10ea4d808accc05223c99d1afdcffa3761",
+        "full_text_compared": true,
+        "exact_both_sources": true,
+        "verdict": "SOURCE_MATCH"
+      }
+    ]
+  },
+  "metadata": {
+    "status": "ACTIVE_HEALTHY",
+    "database": "PostgreSQL 17.11",
+    "migrations": 59,
+    "app_routines": 106,
+    "app_indexes": 96,
+    "app_policies": 39,
+    "storage_buckets": 0,
+    "realtime_subscriptions": 0,
+    "waiting_locks": 0,
+    "temporary_io_writer_fingerprints": 72,
+    "deadlocks_cumulative": 0,
+    "hosting_pgrst_db_schemas_visible_in_postgres_settings": false,
+    "hosting_pgrst_jwt_visible_in_postgres_settings": false,
+    "meaning_of_false": "These settings are not exposed to this Postgres connection, NOT evidence of disabled host settings."
+  },
+  "bounded_logs": {
+    "start_utc": "2026-11-10T02:50:00Z",
+    "end_utc": "2026-11-11T02:49:59Z",
+    "only_grouped_counts": true,
+    "by_source": {
+      "pgbouncer_logs": 72,
+      "edge_logs": 52,
+      "postgres_logs": 47,
+      "supavisor_logs": 28,
+      "postgrest_logs": 14,
+      "auth_logs": 9,
+      "auth_audit_logs": 4
+    },
+    "postgres_log_sqlstate_53100_mentions": 1,
+    "other_source_53100_mentions": 0,
+    "note": "Counts are string-mention aggregates, not total API errors/outages. Earlier catalog query 53100 already investigated in Run155; unchanged risk classification."
+  },
+  "advisors": {
+    "health": 0,
+    "security": {
+      "private_rls_no_policy_info": 8,
+      "authenticated_definer_warn": 10,
+      "leaked_password_warn": 1
+    },
+    "performance": {
+      "foreign_keys_info": 13,
+      "unused_index_info": 8
+    },
+    "disposition": "No automatic index deletion/permission revocation solely on lints."
+  },
+  "semantic_assessment": "Current app SQL/index/RLS sources unchanged versus complete pinned receipts. 3 Edge deployment/source differences exactly reproduce Run146 known changes, not new risk; all remain JWT gated. No current new safe code change. Full hosted Auth/JWT/PostgREST management settings and compiled PostgreSQL/native internals inaccessible and unverified.",
+  "first_time_provider_word_credit": 0,
+  "issue267_code_line_credit": 0,
+  "app_source_changes": 0,
+  "provider_writes": 0,
+  "deploys": 0,
+  "baseline_complete": false,
+  "next_cursor": "After a new migration ordinal #60 or genuinely new/changed provider object, start at its first line; otherwise next distinct accessible hosted configuration or source-bound API evidence, coordinate #96; maintain drift scans."
+}

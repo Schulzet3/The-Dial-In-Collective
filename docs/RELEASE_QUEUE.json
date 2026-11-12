@@ -2,11 +2,49 @@
   "schema_version": 1,
   "authority": "OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022",
   "published_base": {
-    "tested_source_sha": "2cb38e3020a2ab7dc0d7d0c62b5db79f14b64c88",
-    "release_sha": "bf3a82484ab2443a5d8b4dc78075ca5a4d875532",
-    "netlify_deploy_id": "6af27603a5fade7d94df9e99"
+    "tested_source_sha": "925c957a84d3f3e83cd15f062b7f78189adfc4cb",
+    "release_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
+    "netlify_deploy_id": "6af2ad72c2aa765f588abc75"
   },
   "items": [
+    {
+      "id": "DIC-Q-33-original603-26-selected-unlabeled-flavor-review-context",
+      "issue": 33,
+      "pr": 1785,
+      "title": "Preserve additional literal current selected coffee flavor sentence as source-review context without merging into canonical labeled notes",
+      "state": "READY",
+      "merged_source_sha": "6aceea0de6ab61a15123e62551ea1b9f4a2c8fbd",
+      "scope_paths": [
+        "src/server/coffee-selected-description-sensory.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "tests": [
+        "R78 original selected #26 fresh official run 42765699519: raw selected H1/HTTPS and 8 focused tests PASS, actual parser five labeled flavor notes but additional tangerine/citrus/wine/berry direct sentence not in canonical. Initial fail-closed four canonical expectations genuinely FAILED, source SHA 990dca2bc35a8b7a70c215913108ee9015c006a2b3b53db91bc51f8a88d20447.",
+        "R78 review-only generic correction preliminary PR-head official 42766090498 PASS: 12/12 focused tests; raw current selected source SHA256 c8a8462091bf4484dc58a3db55a0c29be4cd696114aa124459a46ffa3083af50. True parser keeps five explicit Flavor notes, distinct additional sensory_context source fact 'tangerine, citrus, wine, berry', Washed, no roast inferred, Add Coffee and Source Review rendered; source SHA in PR CI is synthetic merge b6578e30e0920716d35012be4990bb3ec2da2100.",
+        "PR-head approval run42766090163 genuinely FAILED: source scope_paths absent from release-queue intake. Adding IN_PROGRESS queue item without altering 267 preexisting items and states. Exact rerun and nonforce merge pending.",
+        "PR #1785 reviewed and non-force squash merged 6aceea0de6ab61a15123e62551ea1b9f4a2c8fbd; all seven reviewed src/test/workflow/queue/scoped-journal Git blobs byte-identical to merged sources; explicit [skip netlify] title, no prod.",
+        "Final PR-head after queue intake correction: Node/lint/build42766245333 SUCCESS 3365 total/3359 PASS/0 FAIL/6 intentional SKIP; cloud/mobile42766245290, SQL42766245218, approval42766245247, security42766245273, Python42766245478, private source42766245490, source-selected R78 42766245449 SUCCESS; frozen60342766245397 SKIPPED, not PASS.",
+        "Exact MERGED Node/lint/build42766562569 SUCCESS 3365/3359 PASS/0 FAIL/6 SKIP, cloud/mobile42766563079, approval42766562819, Python42766562731 SUCCESS, selected official actual parser/Add Coffee/Source Review 42766562935 SUCCESS. Four extra selected literal fruit notes strictly SOURCE REVIEW ONLY, stronger direct Flavor five remain canonical; roast conditional not promoted.",
+        "Independently downloaded exact MERGED artifact 13738969798 ZIP 50,114B SHA256 b2ac2ae368a9179b40422ac213c9aeb9fe4f47d7ec99ab06d7c4761fbce2e5f5 matches provider; raw current official selected HTML SHA256 3ad7676fccfb58f286b5c13dc3330d0ed5cc6d8cd5d3a76106631f0c6965e393, source JSON c80dd3aef624157b625859629e539e2d4978a69dba15c5eb9a8425c1050dbffc, afterproof e102608f7d2f853f480a7b9dcbb58fcdf6858d02373f345454e8f30da916fc45. Exact source SHA bound, failures [], manual_certified=0, no production operations."
+      ],
+      "ci_runs": [
+        42765699519,
+        42766090498,
+        42766090163,
+        42766245333,
+        42766245290,
+        42766245218,
+        42766245247,
+        42766245449,
+        42766562569,
+        42766563079,
+        42766562819,
+        42766562935
+      ],
+      "blockers": [],
+      "owner_source": "Issue #33 original603 independent official selected product semantic review; latest owner Nov6 notification and dev-only no publish instructions.",
+      "notes": "NARROW verified READY DEVELOPMENT ONLY. Current original #26 selected direct named Flavor canonical five, separate direct unlabeled fruit four available only as source fact, not autofill. Full 603/201/1197 semantic certification remains IN_PROGRESS; no release or production authorization."
+    },
     {
       "id": "DIC-Q-33-original603-597-current-selected-inline-compound-region",
       "issue": 33,
@@ -10782,7 +10820,7 @@
       "issue": 1756,
       "pr": 1776,
       "title": "Remove beta invitation codes and require verified administrator approval for new accounts with attention notifications",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "1fa8ddc9d886025e404f936b75a106864916793b",
       "scope_paths": [
         "site/cloud/client.js",
@@ -10833,14 +10871,20 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1756",
-      "notes": "Owner explicit Locked supersession recorded in BOTH docs/MASTER_SPECIFICATION.md and DECISION_LEDGER.json. Development-only source, not deployed. Existing members, Auth identities and all history protected; every legacy invitation token/code still present in production pending future authorized SQL migration. No off-app email/push promise; in-portal attention badge and optional browser alerts while Admin open. | #1756 SOURCE READY 2026-11-10 UTC, NOT DEPLOYED. Existing hosted Auth11/admitted11/shots26/notes26/Community12 and 17 used/unused invitation code records unchanged. New source migration must only purge historical codes on a separately explicitly owner-authorized production Publish and after verifying fresh encrypted backups, preserving Auth/member/Community history. In-app Admin attention mandatory, browser notifications only with permission while Admin open, no external email/push provider claim. #96/#267/#509 preserved. | 2026-11-10: original READY was incomplete for out-of-portal alerts and email-verified actionable counts. Temporarily TESTING pending scoped source/CI. No Supabase/Netlify writes. | 2026-11-10 #1756 development SOURCE READY only, NOT DEPLOYED. Verified-only new signups + coffee/conflicts/unfinished account deletion attention shown in in-Admin center and main app Settings gear/Admin Dashboard; optional browser permission only, no off-app push or email. Existing Auth/member/shot/Community data unaffected; all legacy used/unused invite code records still live in hosted production until fresh owner Publish with independently verified encrypted Drive archive and recovery."
+      "notes": "Owner explicit Locked supersession recorded in BOTH docs/MASTER_SPECIFICATION.md and DECISION_LEDGER.json. Development-only source, not deployed. Existing members, Auth identities and all history protected; every legacy invitation token/code still present in production pending future authorized SQL migration. No off-app email/push promise; in-portal attention badge and optional browser alerts while Admin open. | #1756 SOURCE READY 2026-11-10 UTC, NOT DEPLOYED. Existing hosted Auth11/admitted11/shots26/notes26/Community12 and 17 used/unused invitation code records unchanged. New source migration must only purge historical codes on a separately explicitly owner-authorized production Publish and after verifying fresh encrypted backups, preserving Auth/member/Community history. In-app Admin attention mandatory, browser notifications only with permission while Admin open, no external email/push provider claim. #96/#267/#509 preserved. | 2026-11-10: original READY was incomplete for out-of-portal alerts and email-verified actionable counts. Temporarily TESTING pending scoped source/CI. No Supabase/Netlify writes. | 2026-11-10 #1756 development SOURCE READY only, NOT DEPLOYED. Verified-only new signups + coffee/conflicts/unfinished account deletion attention shown in in-Admin center and main app Settings gear/Admin Dashboard; optional browser permission only, no off-app push or email. Existing Auth/member/shot/Community data unaffected; all legacy used/unused invite code records still live in hosted production until fresh owner Publish with independently verified encrypted Drive archive and recovery.",
+      "delivered_release_id": "DIC-20261110-READY4-28",
+      "delivered_provider": "Netlify production Git-connected",
+      "delivered_at_utc": "2026-11-10T05:37:05.508Z",
+      "delivered_tested_source_sha": "925c957a84d3f3e83cd15f062b7f78189adfc4cb",
+      "delivered_release_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
+      "delivered_netlify_deploy_id": "6af2ad72c2aa765f588abc75"
     },
     {
       "id": "DIC-Q-509-account-delete-null-actor-retry-guard",
       "issue": 509,
       "pr": null,
       "title": "Reject orphaned administrator retry tokens during member account deletion",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "b4ed15a1515013dad43ba04dc4ff4a91db53a577",
       "scope_paths": [
         "supabase/migrations/20261110035000_dic_account_delete_orphaned_actor_retry_guard.sql"
@@ -10865,14 +10909,20 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
-      "notes": "Development-only fail-closed conditional NULL-actor control-flow fix. No current affected live rows. No actor takeover, real account deletion, provider mutation, release approval or deployment. This is not READY or DEPLOYED; release after independent exact candidate testing and owner publish authority.\nNovember 10 Run136d: independently source-bound PostgreSQL/signed-JWT, Node22, cloud/browser, and corrected governance CI all SUCCESS. Actual source b4ed and docs-only head 584 verified; READY for separate candidate assembly, not published/deployed. No owner action requested under #509 routine-fix notification policy."
+      "notes": "Development-only fail-closed conditional NULL-actor control-flow fix. No current affected live rows. No actor takeover, real account deletion, provider mutation, release approval or deployment. This is not READY or DEPLOYED; release after independent exact candidate testing and owner publish authority.\nNovember 10 Run136d: independently source-bound PostgreSQL/signed-JWT, Node22, cloud/browser, and corrected governance CI all SUCCESS. Actual source b4ed and docs-only head 584 verified; READY for separate candidate assembly, not published/deployed. No owner action requested under #509 routine-fix notification policy.",
+      "delivered_release_id": "DIC-20261110-READY4-28",
+      "delivered_provider": "Netlify production Git-connected",
+      "delivered_at_utc": "2026-11-10T05:37:05.508Z",
+      "delivered_tested_source_sha": "925c957a84d3f3e83cd15f062b7f78189adfc4cb",
+      "delivered_release_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
+      "delivered_netlify_deploy_id": "6af2ad72c2aa765f588abc75"
     },
     {
       "id": "DIC-Q-509-private-delete-definer-execute-acl",
       "issue": 509,
       "pr": null,
       "title": "Tighten PUBLIC EXECUTE on two private admin deletion SECURITY DEFINER functions",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "5964553fcdb3ba58db91584645f1e2b2a99ebbb2",
       "scope_paths": [
         "supabase/migrations/20261110045500_dic_admin_private_delete_acl_hardening.sql"
@@ -10891,14 +10941,20 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
-      "notes": "Defense-in-depth least-privilege normalization only, no verified current privacy incident, no production deploy or member deletion. Do not publish without separate one-use owner command.\nRun137b: exact code source 5964553fcdb3ba58db91584645f1e2b2a99ebbb2 all four applicable CI COMPLETED SUCCESS; READY development-only after individual 68-function ACL coverage. Production still has the original grants, no owner release consent."
+      "notes": "Defense-in-depth least-privilege normalization only, no verified current privacy incident, no production deploy or member deletion. Do not publish without separate one-use owner command.\nRun137b: exact code source 5964553fcdb3ba58db91584645f1e2b2a99ebbb2 all four applicable CI COMPLETED SUCCESS; READY development-only after individual 68-function ACL coverage. Production still has the original grants, no owner release consent.",
+      "delivered_release_id": "DIC-20261110-READY4-28",
+      "delivered_provider": "Netlify production Git-connected",
+      "delivered_at_utc": "2026-11-10T05:37:05.508Z",
+      "delivered_tested_source_sha": "925c957a84d3f3e83cd15f062b7f78189adfc4cb",
+      "delivered_release_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
+      "delivered_netlify_deploy_id": "6af2ad72c2aa765f588abc75"
     },
     {
       "id": "DIC-Q-455-new-shot-timestamp-replay-recency",
       "issue": 455,
       "pr": 1775,
       "title": "Reject malformed explicitly supplied new-shot instants before saving, while preserving offline existing-ID historical replay",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "774402b32e4a5909a4aba95d398fd930b24a42fa",
       "scope_paths": [
         "site/lib/engine.js"
@@ -10923,7 +10979,1639 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "READY only for source-isolated #455 R153 safety guard on development, NOT deployed. Approval is Option B SAFE Locked-compatible correctness, no new timestamp UI capture, roast/numeric science/Locked target, five sensory change, history/notes mutation, production member/SQL/Auth/Edge/provider write, or Netlify release. Canceled merged workflow jobs distinguished from reusable passing exact PR-head code/test/SQL receipts. Concurrent #509/#1756 preserve isolation and separate READY publication. #630 temporary public visibility unchanged."
+      "notes": "READY only for source-isolated #455 R153 safety guard on development, NOT deployed. Approval is Option B SAFE Locked-compatible correctness, no new timestamp UI capture, roast/numeric science/Locked target, five sensory change, history/notes mutation, production member/SQL/Auth/Edge/provider write, or Netlify release. Canceled merged workflow jobs distinguished from reusable passing exact PR-head code/test/SQL receipts. Concurrent #509/#1756 preserve isolation and separate READY publication. #630 temporary public visibility unchanged.",
+      "delivered_release_id": "DIC-20261110-READY4-28",
+      "delivered_provider": "Netlify production Git-connected",
+      "delivered_at_utc": "2026-11-10T05:37:05.508Z",
+      "delivered_tested_source_sha": "925c957a84d3f3e83cd15f062b7f78189adfc4cb",
+      "delivered_release_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
+      "delivered_netlify_deploy_id": "6af2ad72c2aa765f588abc75"
+    },
+    {
+      "id": "DIC-Q-509-admitted-member-gate",
+      "issue": 509,
+      "pr": null,
+      "title": "Require admitted_at before enabled beta member may access private RPC/RLS state",
+      "state": "READY",
+      "merged_source_sha": "69fa32bcc272173954db6a98e3d142dda747f461",
+      "scope_paths": [
+        "supabase/migrations/20261110065000_dic_admitted_member_gate.sql"
+      ],
+      "tests": [
+        "Run139 live SQL/constraint/aggregate: private.is_member previously used enabled only; 0 live enabled-without-admission rows.",
+        "Disposable PostgreSQL admin_invitation_controls.sql new intentionally misflagged pending account negative + existing admin approved/rejected and member tests: CI PENDING.",
+        "Isolated signed JWT/Node/cloud and exact-source governance: PENDING; no passing claim.",
+        "Exact-source isolated PostgreSQL + 94 genuine HMAC-signed synthetic PostgREST HTTP assertions run42771181975 SUCCESS; decoded SQL log applied 20261110065000 migration and explicitly ran admin_invitation_controls.sql PASS. No live PostgreSQL or GoTrue.",
+        "Exact-source Node22/build run42771182102 COMPLETED SUCCESS; browser/mobile and cloud applicability run42771181853 COMPLETED SUCCESS; exact governance run42771182097 COMPLETED SUCCESS with queue intake PASS and same-commit journal continuity PASS.",
+        "Source-bound narrower runtime gate READY; additional direct enabled-only checks on SERVICE_ROLE source-worker functions separately tracked as follow-up; full provider baseline IN_PROGRESS."
+      ],
+      "ci_runs": [
+        42771181975,
+        42771182102,
+        42771181853,
+        42771182097
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
+      "notes": "Development-only conditional fail-closed admitted member gate; no observed live bad admission, production change, or completed CI.\nRun139b: exact-source isolated SQL, signed JWT, Node22, browser, governance COMPLETED SUCCESS (4/4 workflows), synthetic pending flag regression PASS. READY development source ONLY. No production authorization. Separate service-role source worker may gate inconsistent enabled-without-admission until provider-level constraint verified; follow-up tracked as REVIEW_PENDING, zero current live inconsistent rows."
+    },
+    {
+      "id": "DIC-Q-509-enabled-requires-admission-constraint",
+      "issue": 509,
+      "pr": null,
+      "title": "Ensure trusted service source-verification never processes enabled-but-unadmitted accounts",
+      "state": "READY",
+      "merged_source_sha": "2f1427fcfc63eee0d3b682e5eafbf130cf7a1213",
+      "scope_paths": [
+        "supabase/migrations/20261110073500_dic_enabled_requires_admission_check.sql"
+      ],
+      "tests": [
+        "Source-only additive CHECK and synthetic isolated negative tests in admin_invitation_controls.sql, source_worker_auth_and_admission.sql; exact-source CI PENDING.",
+        "Initial exact-source ef639539 SQL run42778586115 FAILED during url_preview_release.sql, because older synthetic admitted fixture enabled a new member without admitted_at. This is a fixture compatibility failure after the new CHECK, not a live defect; migration applied and admin_invitation_controls PASS. Run140b source test repair stages both values atomically; new CI required.",
+        "Corrected exact-source 2f1427fcfc63eee0d3b682e5eafbf130cf7a1213 isolated PostgreSQL all-migrations, full source_worker_auth_and_admission, admin_invitation_controls, url_preview_release, and backup recovery run42778797903 COMPLETED SUCCESS; raw log 94/94 synthetic HMAC-signed PostgREST assertions PASS; no hosted GoTrue or production sessions tested.",
+        "Corrected exact-source 2f1427fcfc63eee0d3b682e5eafbf130cf7a1213 Node22/lint/build run42778797849 COMPLETED SUCCESS: 3370 pass, 6 intentional skips, 0 failures; governance run42778797822 COMPLETED SUCCESS, approval coverage PASS, queue intake PASS, same-commit continuity PASS.",
+        "Unchanged initial app/migration source ef639539 cloud UX run42778586122 COMPLETED SUCCESS; later 2f142 only corrected synthetic test and scoped docs; no app/worker/migration source change."
+      ],
+      "ci_runs": [
+        42778586115,
+        42778586116,
+        42778586122,
+        42778797822,
+        42778797903,
+        42778797849
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
+      "notes": "Run140 provider read-only 11 admitted records/0 inconsistent states; source-only constraint closes enabled-only service-role latent admission gap. No live changes. Coordinate Issue #33, no source worker code edited; owner one-use release authorization remains necessary.\nRun140c: corrected synthetic fixture at 2f1427fcfc63eee0d3b682e5eafbf130cf7a1213 with independently verified exact-source SQL/JWT 42778797903, Node22 42778797849, approval/governance 42778797822 all COMPLETED SUCCESS. First 42778586115 SQL fixture failure preserved as historical, not unresolved. Prior cloud UX evidence source ef639539 applies because no product/worker code changed thereafter. READY development migration only; NOT deployed. Full hosted provider baseline IN_PROGRESS. No live SQL/Edge/Auth/data writes or deployment. Separate owner single-use publishing, exact candidate CI and private recovery are mandatory."
+    },
+    {
+      "id": "DIC-Q-455-local-success-grind-temp-eligibility",
+      "issue": 455,
+      "pr": 1802,
+      "title": "Exclude historical invalid grind and recorded temperature from measured all-green Coffee overview",
+      "state": "READY",
+      "merged_source_sha": "1df0a4dae38fcc2937bab18d8428b10a383aea42",
+      "scope_paths": [
+        "site/lib/model.js"
+      ],
+      "tests": [
+        "R455-157 bounded source inspection reproduces model.hasLocalSuccess invalid-grind/temp green overview discrepancy; safe code+5 focused synthetic regressions committed with journal at b7c46ac56947936f2701d8268fb690718d704159. Unexecuted at intake.",
+        "Exact source Node22, applicable browser/mobile/offline, isolated SQL/auth and PR governance NOT YET VERIFIED.",
+        "Initial PR-head approval/governance run42785313945 FAILED queue intake because tests/*.mjs was incorrectly included in deployable scope_paths; exact corrective queue-only intake removes test path while retaining regression test evidence and preserving failure receipt. Retest required.",
+        "Final exact PR-head 1a5fb02bcc453fca310272c0d935d5ed3715ff6e: Node22/lint/build 42785553513 SUCCESS 3,385 PASS/0 FAIL/6 intentional SKIP, all five R157 tests PASS; approval 42785553860 SUCCESS after initial 42785313945 queue-scope failure fixed, security 42785553845 SUCCESS, SQL/signed-JWT 42785553520 SUCCESS, cloud/mobile/browser 42785553935 SUCCESS (targeted cloud tests NOT_APPLICABLE). Frozen original603 job SKIPPED, not passed.",
+        "PR #1802 nonforce SQUASH MERGED into development 1df0a4dae38fcc2937bab18d8428b10a383aea42 over original development e951531567825ca688c9772628a4d8f09736487f; all six merged Git blobs byte-identical to passing head, no unrelated paths. Original code model Git blob 5ea712305d9ba0f948ef3aa2d576dd27aa51b31c -> merged 00c027c5f10d938fa2cc050572286eb9570817de.",
+        "Exact merged-source Node22/lint 42786065900 SUCCESS: 3,385 pass, 0 fail, 6 intentional skip, all five R157 tests PASS; merged approval 42786065890 SUCCESS and browser/mobile 42786066030 SUCCESS. PR-head isolated SQL tests not repeated on merge because no SQL changed; source code/test blobs identical. No live SQL/Auth/Edge/member/provider writes, publication, Netlify or policy change."
+      ],
+      "ci_runs": [
+        42785313945,
+        42785553513,
+        42785553860,
+        42785553845,
+        42785553520,
+        42785553935,
+        42786065900,
+        42786065890,
+        42786066030
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Locked-compatible source-only guard, preserves History/all five original taste ratings, no live providers, data migration, product redesign, release or publication. R455-157.\nR157 FINAL: development-only READY at exact merged 1df0a4dae38fcc2937bab18d8428b10a383aea42; no approval to deploy; initial intake failure preserved and fixed. R157 final reconciliation separate docs-only PR."
+    },
+    {
+      "id": "DIC-Q-455-invalid-archived-green-advice-veto",
+      "issue": 455,
+      "pr": 1809,
+      "title": "Reject impossible archived five-green grinder/temperature as a veto of valid latest shot feedback",
+      "state": "READY",
+      "merged_source_sha": "befc282154c5ddc15a123fc2d5ee37e87b2112f6",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "R455-158 source-bound causal defect: invalid historic five-green grinder/temperature still vetoed latest measured non-green recommendation while existing Coffee overview and UI rejected that record. Engine exact original blob 74ef8567741c0c2ebaa08ea60c274af4e1810665. No real member incident.",
+        "Original PR-head governance 42794010439 FAILED with untracked engine.js deployable intake. Docs-only corrective same-PR commit added engine-only IN_PROGRESS queue item without altering passing source/test blobs; failure preserved for audit.",
+        "PR #1809 final head 695a98e5a8f09962b2ab5d7ce5f74a310ac265ff Node22/lint/build 42794221112 SUCCESS: 3402 PASS, 0 FAIL, 6 intentional SKIP; all five R158 synthetic positive/negative groups PASS. Approval/intake 42794220738, source security 42794221038, isolated SQL 42794220735, cloud app/browser/mobile/offline 42794221169 all SUCCESS. Original frozen 603 42794220748 SKIPPED, not PASS.",
+        "PR #1809 nonforce squash merged befc282154c5ddc15a123fc2d5ee37e87b2112f6 onto prior e6d4285019374e399f35daf10124aa11e781d11d preserving disjoint concurrent #509 changes; exactly five intended paths. All five merged source blobs byte-identical to reviewed final head, code engine 9b0071f2bdd89b931662fe3232d4659524ad2e67, five focused regressions 627d1b0a8e64f3bcfe0810a72c1c24c98ad6851e. Release branch and main unchanged.",
+        "Exact merged-source Node22/lint 42794766623 SUCCESS: 3402 PASS/0 FAIL/6 intentional SKIP including all five R158 tests; merged approval/governance 42794766933 and merged cloud/browser/mobile/offline 42794766605 SUCCESS. No repeated live SQL/Auth/Edge/member write; no physical human espresso trial or source science inference."
+      ],
+      "ci_runs": [
+        42794010439,
+        42794221112,
+        42794220735,
+        42794220738,
+        42794221038,
+        42794221169,
+        42794766623,
+        42794766605,
+        42794766933
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "R158 VERIFIED READY in development only, NOT published. True measured all-five-green retains success; invalid historic grind/temp never vetoes current actionable non-green taste feedback. Original shots, notes, all five tastes and private History untouched. Owner Option B SAFE; no Locked or numeric changes, no provider/member/production writes. Failed initial queue intake preserved and fixed. Exact R158 source SHA bound. Separate release authorization required."
+    },
+    {
+      "id": "DIC-Q-33-original603-400-selected-direct-two-broad-region-blend",
+      "issue": 33,
+      "pr": 1831,
+      "title": "Preserve both exact selected broad blend sourcing regions on VT Artisan Dark Decaf without inventing countries",
+      "state": "READY",
+      "merged_source_sha": "b0d11bee27194dfc9968d89e045ecbabde2eed1f",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-selected-broad-blend-regions.mjs"
+      ],
+      "tests": [
+        "2026-11-10 initial exact guarded official run42813089807 SUCCESS 11/11 focused, exposed actual source-backed omission: selected Dark Decaf source says Central American & African beans, parser only Central America; original immutable expected Central America, Africa.",
+        "R85 same-commit generic strict selected two-broad-regions parser correction + three regressions (14 total) PR-head official run42813805147 SUCCESS: current selected origin Central America, Africa; Mountain Water Water Process, Medium-Dark, exact selected H1/Add Coffee/Source Review, no guessed green process/country; raw HTML SHA256 fc3bde9bb5f949b35c348c083296929a30199ee3c95a6b9d60db68ae4aca21bd.",
+        "PR-head approval run42813804885 FAILED because new app helper not yet in queue intake. This queue row is the explicit repair; exact corrected approval and Node/cloud/mobile/security checks require rerun.",
+        "Current frozen603 replay SKIPPED, individual 603 manual semantic certification NOT VERIFIED, no publication/production writes.",
+        "Final reviewed PR-head a542e8561314df92c357f776e434f8efe2d804fc applicable CI: Node/lint/build42814046603 SUCCESS 3462 PASS/0 FAIL/6 intentional SKIP; R85 focused official42814046901 SUCCESS 14/14, cloud/mobile42814046608 SUCCESS, approval/intake42814046553 SUCCESS following earlier failure, security42814046709, isolated SQL42814046540, Python42814046635 SUCCESS. frozen603 skipped, not PASS.",
+        "PR #1831 nonforce SQUASH MERGED b0d11bee27194dfc9968d89e045ecbabde2eed1f; all seven changed HEAD/MERGED source blobs independently byte-identical, branch readback; subsequent #267 commit 5156486d43c60674d009e7af10c6b16acfcfea26 touched only #267 docs.",
+        "Exact MERGED-source official current run42814483938 SUCCESS 14/14 with unique selected H1 Dark Decaf, literal Central American & African source and parsed origin Central America, Africa; roast Medium-Dark; Water Process decaffeination; no unsupported tasting notes/green processing/country, zero conflicts, real Add Coffee and Source Review. Artifact ZIP #13762724210 independently downloaded and SHA256 4203b5db81edc09b0487329c8f578eb40accfab52e439bd42009d5ad3a42ec76 matches provider; raw HTML 260692 bytes SHA256 3081aba16f04b993d1a7a481277508043e71f573934fb643f296c4ac2650694c; evidence JSON 43c52284e453c5d7eac54bf2e25582607190dfc72ef0ce9f74c21f28fdde62b0; afterproof bd4299b35a840504aad14871b38e050000a85e728bc903e099497fb1db9be4fa passed true / failures [] and source_sha exact merged.",
+        "Merged Node/lint/build42814483894 SUCCESS 3462 PASS/0 FAIL/6 intentional SKIP; merged cloud/mobile42814483845, approval42814484408, Python42814483680 SUCCESS. Prior original source jobs R54 42814483739 (#594 unavailable) and R64 42814483736 (#566/#567 unavailable) FAILED on already documented inaccessible official URLs. These are separate unresolved original603 source exceptions, not successful #400 certification and not induced by new generic parser source; never hide failures.",
+        "Original frozen603 CSV/oracle/scorer unchanged, full original603 manual individual certification still UNVERIFIED, no deployment/production SQL/Edge/Auth/member/provider writes."
+      ],
+      "ci_runs": [
+        42813089807,
+        42813805147,
+        42813804885,
+        42814046603,
+        42814046901,
+        42814046608,
+        42814046553,
+        42814046709,
+        42814046540,
+        42814046635,
+        42814483938,
+        42814483894,
+        42814483845,
+        42814484408,
+        42814483680,
+        42814483739,
+        42814483736
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "NARROW SOURCE-BOUND VERIFIED READY in development only; #400 literal Central American & African blend now retained without countries guessed. Full 603 individual semantic certification remains UNVERIFIED; unrelated inaccessible #566/#567/#594 not resolved. No deployment/publication authorization."
+    },
+    {
+      "id": "DIC-Q-33-original603-402-sourcing-not-sensory-review",
+      "issue": 33,
+      "pr": 1838,
+      "title": "Keep selected Notes: Farm-Direct as sourcing evidence, not false tasting-note Source Review fact",
+      "state": "READY",
+      "merged_source_sha": "0b65f88305b11d3c9412e8d0057440c5b7427301",
+      "scope_paths": [
+        "src/server/coffee-source-facts.mjs"
+      ],
+      "tests": [
+        "Initial R86 exact current guarded official run 42821858501 SUCCESS 12/12 and actual parser, but source_facts independently showed false typed tasting_notes value Farm Direct despite proper canonical selected tasting; reproduced after passing tests.",
+        "SAME-COMMIT targeted generic source-review type correction and three new positive/hostile tests; corrected live source and exact-source CI PENDING, not PASS.",
+        "Final PR-head 153a7b02ba96dc8d56d091e8f6e579195f874747 focused official42822657637 15 PASS/0 FAIL, direct exact #402 selected H1/HTML/parser, Source Review preserves Farm Direct raw untyped; official PR-head HTML SHA256 1a96a733add138a1600738b3e88c993c8b7ec25ec2843254223c4ed5e5ac26ea.",
+        "PR-head Node/lint/build42822657342 SUCCESS 3477 PASS/0 FAIL/6 intentional SKIP, cloud/mobile42822657518, isolated SQL42822657460, Python42822657383, security42822657541, approval42822657561 SUCCESS; original frozen603 SKIPPED not PASS.",
+        "PR #1838 nonforce squash merged exact source 0b65f88305b11d3c9412e8d0057440c5b7427301; 6/6 original reviewed Git blobs independently byte-identical. Exact official merged42823210303 15 focused PASS/0 FAIL, approved unchanged current selected fields, raw source exact 270593 bytes SHA256 345f6c4e584468809b71d610f1038f0bd647ce4830a93cbc4092d3ae979d4170, source review Notes Farm Direct field untyped, all 7 selected direct proofs true, no conflicts, Add Coffee and Source Review, failures []. Artifact 13766374245 ZIP SHA256 031ce248cbf5f3100c85a41d1ca6f140ece4bb8e645efea6f032c486085bd3ca matching GitHub digest, independently rehashed; evidence JSON 27d0ac080c7b61d0fcc1b3935a289ea687e89cdd9cdbf2fd7f47227dd60fc5f6; afterproof SHA256 d7cf9b29d3302c3f5cdfcf2a2f713881d9ec5099994bc05852b38f1335ce7ca0.",
+        "Exact merged Node/lint/build42823210249 SUCCESS 3477 PASS/0 FAIL/6 intentional SKIP, cloud/mobile42823210284, Python42823210255, approval42823210364 SUCCESS. Original frozen603 and broad probes SKIPPED, not PASS. Dev only no publication/prod writes. Individual full 603 semantic certification remains UNVERIFIED."
+      ],
+      "ci_runs": [
+        42821858501,
+        42822657637,
+        42822657342,
+        42822657518,
+        42822657460,
+        42822657383,
+        42822657541,
+        42822657561,
+        42823210303,
+        42823210249,
+        42823210284,
+        42823210255,
+        42823210364
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "NARROW ORIGINAL #402 SOURCE REVIEW CORRECTION independently VERIFIED, READY in development only; Farm Direct remains a sourced fact with untyped role, no spurious tasting notes. Exact selected Gayo official origin/process/sensory and frozen original CSV preserved. Complete 603 individual semantic audit unfinished, #33 remains OPEN. No production release."
+    },
+    {
+      "id": "DIC-Q-455-outlier-explicit-controls",
+      "issue": 455,
+      "pr": 1857,
+      "title": "Exclude explicitly invalid historical grinder and optional temperature from mandatory four-success outlier reference cohort",
+      "state": "READY",
+      "merged_source_sha": "c26a9a9c5f44cb77dc9e3a92429da5a10d9980ce",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Five focused R164 synthetic positive/negative regression groups: explicitly impossible grinder/temperature fourth record cannot establish outlier quorum; authentic valid fourth can.",
+        "Preserves legacy missing control fields, inclusive current same-version espresso range/temperature, owner-existing four-donor >1.25 ratio and >25s time thresholds, five taste ratings, private historical notes and saveShot integration.",
+        "Exact PR-head run 42848265754 Node22 3529 PASS/0 FAIL/6 intentional SKIP, lint/build SUCCESS; cloud UX 42848265650, SQL 42848265687, source security 42848265636, approval 42848265878 SUCCESS.",
+        "Exact merged-source Node/lint/build run 42848800485 3529 PASS/0 FAIL/6 intentional SKIP; cloud/browser/mobile/offline 42848800567 SUCCESS, approval 42848800532 SUCCESS; original frozen603 42848265924 SKIPPED, not PASS.",
+        "PR #1857 head 9f8d713a63cf596b589b0fecd565b62be43f74b0 merged nonforce c26a9a9c5f44cb77dc9e3a92429da5a10d9980ce; four reviewed head Git blobs read back exactly identical on merge."
+      ],
+      "ci_runs": [
+        42848265754,
+        42848265650,
+        42848265687,
+        42848265636,
+        42848265878,
+        42848800485,
+        42848800567,
+        42848800532
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "SAFE bounded evidence-eligibility fix only, no changed Locked product policy, numeric espresso targets or added capture. Development READY only; NOT DEPLOYED. No actual user/member risk occurrence or espresso quality improvement claimed. #267 literal audit credit zero; standalone original S019 inaccessible; Issue #455 remains open."
+    },
+    {
+      "id": "DIC-Q-509-preview-preflight-null-cached-guard",
+      "issue": 509,
+      "pr": 1869,
+      "title": "Reject explicit NULL cached flag before issuing stale two-phase URL preview tickets",
+      "state": "READY",
+      "merged_source_sha": "1237de47741b785a356347106aea058478e81956",
+      "scope_paths": [
+        "supabase/migrations/20261110164500_dic_preview_preflight_null_flag_guard.sql"
+      ],
+      "tests": [
+        "Production read-only pg_get_functiondef full function and pure-expression NULL-at-cap truth table confirmed malformed flag can yield allowed ticket, despite complete() deny",
+        "Run149 PR-head CI exact source e18a70a: SQL/JWT 42859036281, Node22 42859036232, cloud/mobile 42859036238, governance 42859036239 all completed success.",
+        "Run149 merged-source CI 1237de4: isolated PostgreSQL/synthetic signed JWT 42859566468, Node22 42859566023 (3548 pass, 0 fail, 6 skip, lint/build pass), cloud/browser 42859565950, approval continuity 42859566196 all completed success.",
+        "Identical 6/6 PR-head vs merged Git object blobs, no production deployment, regression in supabase/tests/preview_two_phase_cache.sql executes only in disposable dic_ci."
+      ],
+      "ci_runs": [
+        42859036281,
+        42859036232,
+        42859036238,
+        42859036239,
+        42859566468,
+        42859566023,
+        42859565950,
+        42859566196
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
+      "notes": "Run149 development-only hardening of older authenticated SQL RPC; no proven current Edge extraction bypass, no live change, not production READY. Preserve fixed behavior for true/false/default and existing clients.\nRun149 exact-source CI READY development-only; evidence docs/audits/issue509-run149-exact-source-ci-closure-2026-11-10.json; owner publication separate."
+    },
+    {
+      "id": "DIC-Q-33-original603-433-435-blackcoffee-current-selected",
+      "issue": 33,
+      "pr": 1871,
+      "title": "Correct current selected Black Coffee AM tasting list and unsupported roast SEO/customer-review contamination; verify Red Room and The Dark",
+      "state": "READY",
+      "merged_source_sha": "40d80267f5a21b4a67a79d334fa8ed500dfcf411",
+      "scope_paths": [
+        "src/server/coffee-product-scope.mjs",
+        "src/server/coffee-flavor-evidence.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "tests": [
+        "R94 original603 selected #433-435 independent current official selected-H1/identity, 3 bounded guarded HTTPS captures; frozen 603/201/1197 raw CSV and immutable oracle untouched.",
+        "Initial PR f229dd2 first strict source afterproof workflow 42860634982 FAILED: selected AM expected Graham cracker/cashew/hibiscus/lemon and unsupported Lighter, current parser returned only lemon and sunrise plus incorrectly inferred Medium from stale Yoast SEO.",
+        "Same-commit parser fix 43e5234825052a4d47c928ac4c7e74608a749877, generic WooCommerce reviews exclusion, direct selected literal opening tasting, lower-ranked SEO roast blocked by unsupported direct comparative label; 10 focused positive/adversarial tests.",
+        "Exact PR synthetic merged SHA f9821dfc0188cb462841f6fa124751f9274cac6e official current workflow 42862060021 SUCCESS: 3 current guarded official pages FETCHED, exact unique product H1 and URL, raw HTML hashes, actual parser/Add Coffee/Source Review PASS; #433 now keeps 4 named literal flavors and no unsupported roast, #434/#435 remain correct.",
+        "PR-head approval workflow 42862060255 FAILED exclusively because scoped source paths absent from release queue intake. This queue row fixes intake, rerun required; no acceptance/READY yet.",
+        "PR #1871 nonforce squash merged 40d80267f5a21b4a67a79d334fa8ed500dfcf411. All 8 original reviewed code/test/workflow/queue/scoped journal Git blob SHAs byte-identical to exact development merged tree; no Netlify publish.",
+        "PR latest clean two-parent head 5d41e7e669bfbaceb16c2f883cd4e529fb45660f after preserving #509 READY; exact PR CI selected source 42862831431, Node 42862831457 3558 pass/0 fail/6 skip (3564), cloud/mobile 42862831436, approval 42862831550, Python 42862831583, isolated SQL 42862831643 and security all SUCCESS; original full frozen603 SKIPPED.",
+        "Exact MERGED source official real selected source 42863470442 SUCCESS: case 433 AM full direct flavors and roast blank (unsupported Lighter); case434 Red Room three flavors/Dark; case435 The Dark direct Dark and no review chocolate. Exact independent merged artifact #13786347181 ZIP 145724 bytes SHA256 8ee8eeb548c0042c2259155ceacd4cdf57f4f23b333623109ccabfe7cf2e9f0e; source JSON SHA256 791f4b681ad8e2d872aab99ead1a148b8dac1ccb294cc224adf0e6771ea5550e; three individual raw HTML SHA256 independently recomputed; zero source afterproof failures and 0 production operations.",
+        "Exact merged Node 42863470590 SUCCESS 3558 PASS / 0 FAIL / 6 SKIP; cloud/mobile 42863471007, approval 42863470522, Python 42863470821 SUCCESS. Unchanged independent #33 R64 42863470883 and R54 42863470762 FAIL-CLOSED because original #566/#567 and #594 official links remain inaccessible; no new scope regression, no claims that the full 603 set is certified."
+      ],
+      "ci_runs": [
+        42862060021,
+        42862060255,
+        42862831431,
+        42862831457,
+        42862831436,
+        42862831550,
+        42862831583,
+        42862831643,
+        42863470442,
+        42863470590,
+        42863471007,
+        42863470522,
+        42863470821
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "Development-only source-bound R94; avoid owner notification unless attention needed. No Netlify, production, SQL/Edge/Auth/provider/member writes; preserve original603 immutable and separate #267 V2/#96. Narrow source package READY only for DEVELOPMENT; parent #33 remains OPEN until independently completed original603 adjudication. Known #566/#567/#594 source access remains blocked; no deployment authorization."
+    },
+    {
+      "id": "DIC-Q-455-similar-coffee-explicit-control-evidence-guard",
+      "issue": 455,
+      "pr": 1878,
+      "title": "Exclude invalid archived grinder and temperature from same-style other-coffee starting evidence",
+      "state": "READY",
+      "merged_source_sha": "f7f9eb97fb864f255a90bccbcacaa9d52b2e35a4",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Original source parent 56eeeda0a47d9cc95d75521f559f0d4d95344290, engine old blob 66a2f42419451a83d0f4c3153a6e4e436ff5f6ff; R166 deterministic imported similar-coffee control eligibility bug reproduced source-bound, no actual member incident.",
+        "PR #1878 exact head fc4f485c3d944d559c9d2a636c02f38cdab59cfe Node22/lint 42868381707 SUCCESS: 3571 PASS/0 FAIL/6 intentional SKIP; all six R166 direct positive/negative tests passed; compiled Chromium/mobile/offline/a11y 42868381690 SUCCESS, approval 42868381713 SUCCESS, isolated SQL/JWT 42868381734 SUCCESS, security 42868381641 SUCCESS.",
+        "PR #1878 nonforce squash MERGED f7f9eb97fb864f255a90bccbcacaa9d52b2e35a4 onto concurrent disjoint #33 documentation at df9e639ae4ddeacd0b0db55afbc77a302a4a4803; five intended PR head/merge Git blob identities EXACTLY MATCH, no unrelated files.",
+        "Exact merged-source Node22/lint 42868950685 SUCCESS: 3571 PASS/0 FAIL/6 SKIP and all six R166 tests; compiled Chromium/mobile/offline 42868951122 SUCCESS; governance 42868950443 SUCCESS. Frozen603 42868381714 SKIPPED, not PASS; cloud-tests wrapper inner subtests SKIPPED, not independent PASS.",
+        "Original all five taste values, shots/notes/private history, same-coffee preference, grinder range/calibration, style/feed, missing optional legacy readings preserved. No numeric target/policy/production changes."
+      ],
+      "ci_runs": [
+        42868381707,
+        42868381690,
+        42868381713,
+        42868381734,
+        42868381641,
+        42868950685,
+        42868951122,
+        42868950443
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "SAFE dev-only R166, no numerical/Locked changes or deployment. scope_paths only deployable engine.js.\nR166 FINAL: READY development-only at exact code merge f7f9eb97fb864f255a90bccbcacaa9d52b2e35a4; release authorization NOT GRANTED. Documentation reconciliation subject to separate PR exact-source governance."
+    },
+    {
+      "id": "DIC-Q-33-original603-445-two-lot-selected-growing-regions",
+      "issue": 33,
+      "pr": 1880,
+      "title": "Recover two literal current selected growing regions of one same-country blend without inventing single blend elevation",
+      "state": "READY",
+      "merged_source_sha": "7ecd26d45f5f9d9832fa939ee58ccf77edaa932a",
+      "scope_paths": [
+        "src/server/coffee-selected-two-region-blend.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "tests": [
+        "R96 source at original #445 https://www.bluejazzcoffee.com/products/guatemala-antigua: official H1 Guatemala, own direct Lake Atitlan washed 1800-2000m and HueHuetenengo washed 1500-1700m component growing regions; exact #446 unrelated identity/fields no regression, initial official PR-head 42870637967 PASS 6 focused and live parser before correction.",
+        "Initial new helper PR-head 42871214289 failed 8/9, actual preexisting parser retained one exact component region; helper now allows only that specific corroborated first component, not arbitrary region.",
+        "Second revised PR-head 42871396986 FAILED 8/10 because synthetic test fixture omitted literal qualifying current source text; guarded source skipped; corrected full authentic selected wording and standalone fixture. Approval failed only because newly introduced app source path absent queue; this intake row maintains IN_PROGRESS pending exact PR-head and merged CI.",
+        "PR #1880 exact final PR-head e9df48689aeb1d7beac858d96c07d6c8ca4ba443: official guarded source workflow 42871886305 SUCCESS, 10/10 focused tests, selected #445 two current regional lots and #446 exact current Medium-Light corroborated; code, parser, Add Coffee and Source Review. Downloaded artifact #13790305994 independently rehashed ZIP 89663 B sha256 75b1b27bc241f69d1e3cab4af59b5a432c2957cb8537b4340738b58c4df29dd9 matching GitHub; original raw HTML and afterproof SHA matched.",
+        "PR #1880 safe nonforce squash MERGED 7ecd26d45f5f9d9832fa939ee58ccf77edaa932a, all seven reviewed head/merged Git blobs identical; no production/publish. Exact merged official 42872555239 SUCCESS 10 focused tests and parser/Add Coffee/Source Review for two current official selected pages, zero proof failures, source SHA bound; raw #445 SHA256 cfe5e889a49a933dec3e810b6d5c2f42814626dfa371d8917757b0713afb7e44 and #446 992c425637f12161680de5532ff48f120e0c4fbc519ff355f4d6238030e4c1f6. Downloaded artifact #13790676056 ZIP 89657 B SHA256 b4b5196fa59b92ff8ad804dd8dae489799829481212ce926c4c61ec00a0378d6 matches GitHub digest, source evidence JSON SHA256 93a098bf60fc74b3ca13af5bf36b4bbb4dc230e85c07684333193caccd9ff8ce, afterproof SHA256 ef1597e018542e587eb710a0cf8fea101295ae7737ade3b10c403647fd6b7c4a and exact source SHA; manual_certified:0, production_operations:0.",
+        "Exact merged Node/lint/build 42872555451 SUCCESS 3581 PASS/0 FAIL/6 configuration SKIP, cloud/mobile 42872555554 SUCCESS, approval 42872555641, Python 42872555654 SUCCESS. Original full frozen603 and other optional jobs SKIPPED, not PASS. Independent legacy original #566/#567/#594 selected source checks remain FAILED due unchanged invalid/unavailable official product URLs (runs 42872555856, 42872555286), not new regressions or certification."
+      ],
+      "ci_runs": [
+        42870637967,
+        42871214289,
+        42871396986,
+        42871886305,
+        42872555239,
+        42872555451,
+        42872555554,
+        42872555641,
+        42872555654
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "NARROW READY FOR DEVELOPMENT RELEASE QUEUE ONLY after verified merged code and exact current source. Original #445 two regions preserved without fake whole-blend elevation, #446 unchanged correct. Parent #33 OPEN pending independent full603 semantic adjudication. Previously known original #566/#567/#594 inaccessible sources unverified; #267 V2 and #96 own their separate scopes. No production SQL/Auth/Edge/member writes or Netlify publication authorized."
+    },
+    {
+      "id": "DIC-Q-455-prefill-archived-control-integrity",
+      "issue": 455,
+      "pr": 1889,
+      "title": "Reject impossible archived grinder or temperature as Log Shot dose/grind/temperature prefill evidence while preserving private History",
+      "state": "READY",
+      "merged_source_sha": "11e2735ebbbd19d9ceb0fc9afab0b8252b334dbe",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Source parent af1a56d57b8472d7a8686b6336fe11c048f76538; original engine blob f8028270254d15a1b6e9494aa431a8eca4f33c15; source gap latest archived invalid grinder/temp prefill, synthetic only, not real member incident.",
+        "PR #1889 exact tested head 4d7f8add0fbc1d6d7ca08f1a3dd3682b5c9e924a Node22/lint/build 42879075862 SUCCESS: 3586 PASS / 0 FAIL / 6 intentional SKIP. All five issue455-prefill-archived-controls.test.mjs focused direct positive/negative tests PASS. UX mobile/browser/offline/a11y 42879075745 SUCCESS; isolated SQL/JWT 42879075957 SUCCESS; source-security 42879075919 SUCCESS; governance 42879075822 SUCCESS.",
+        "PR #1889 nonforce squash merged 11e2735ebbbd19d9ceb0fc9afab0b8252b334dbe over parent d91eaeaeba8154d968bbde7111484b543ed9bcda. All four changed reviewed Git blobs byte-identical PR head / merged source. Concurrent #267 source preserved and subsequent #267/#509 docs changes untouched.",
+        "Exact merged Node22/lint/build 42879850975 SUCCESS: 3586 PASS / 0 FAIL / 6 intentional SKIP including five R167 tests; merged Chromium/mobile/offline 42879850988 SUCCESS. Merged approval push 42879850983 CANCELLED due concurrent source supersession, NOT PASS; PR-head approval 42879075822 SUCCESS and final docs-only governance independently required.",
+        "Frozen original603 42879075737 SKIPPED/NOT PASS, cloud wrapper inner relevant tests may be NOT_APPLICABLE; no physical-device or real-member testing claimed."
+      ],
+      "ci_runs": [
+        42879075862,
+        42879075745,
+        42879075957,
+        42879075919,
+        42879075822,
+        42879075737,
+        42879850975,
+        42879850988,
+        42879850983
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "R455-167 safe Locked-compatible prefill-only guard, five original taste inputs/private shot history/notes and missing legacy optionals preserved. READY development only, not deployed. Exact merged-source Node/browser SUCCESS; merged governance push canceled rather than passed; distinct docs-only approval/queue CI required for this reconciliation. No main/release/production/provider/member write, no owner approval needed."
+    },
+    {
+      "id": "DIC-Q-33-original603-448-selected-growing-valley-region",
+      "merged_source_sha": "942da0c045f6fc534a7e514ab09c9aa6ff2437cc",
+      "issue": 33,
+      "pr": 1895,
+      "title": "Preserve literally selected present growing-valley locality where independently accepted country and exact current product H1 agree",
+      "state": "READY",
+      "scope_paths": [
+        "src/server/coffee-selected-growing-valley-origin.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "tests": [
+        "R97 original603 #448 exact Buona product source 2026-11-10: unique current H1 Guatemala Huehuetenango Los Laureles, seller own present location in Huehuetenango valleys, prior actual extractor only returned Guatemala. PR-head official 42881373939 PASS six focused and three real HTTP selected URLs, genuine gap diagnosed from fields. New generic helper and hostile tests await source/CI verification before READY.",
+        "R97 first correction PR-head exact run42882418537: 10/10 focused PASS, 3/3 fresh guarded current exact public official HTTPS, actual parser/Add Coffee/Source Review and strict afterproof PASS; PR-head 42882418169 Node22 3596 PASS/0 FAIL/6 intentional SKIP, cloud mobile42882418396, approval42882418516, isolated SQL42882418499, Python42882418184 all SUCCESS; full original frozen603 SKIPPED.",
+        "PR #1895 nonforce squash MERGED 942da0c045f6fc534a7e514ab09c9aa6ff2437cc; all seven changed reviewed PR-head / merged Git blob hashes MATCH, no unrelated source edits. New origin helper only refines exact selected present Huehuetenango valley for #448; conflicts for two selected Variety lists remain flag and autofill blank.",
+        "Exact MERGED official workflow42883004446 10/10 focused and current selected raw exact URLs 448-450 SUCCESS; tested source SHA exactly 942da0c045f6fc534a7e514ab09c9aa6ff2437cc, strict afterproof passed:true/failures:[], original CSV SHA256 2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353 unchanged, manual_certified:0 and production_operations:0.",
+        "Independently downloaded exact MERGED GitHub artifact13794802541: ZIP 142452 bytes SHA256 7a5ffa545964550c0dce92ded83da63c72594eaab9c54fc44d25bcc15567c20c equal published provider digest; raw HTML #448 SHA256 d708b99552229509e089d7a22e910a1c5eddf10ae56f24eab1ab24e2f7e1425c, #449 222ab6388d3886e9e138e7485f2765f2ed3d9a0fa4e13027c9c9ced64b35f685, #450 f9f53028954a4a0703a39e3beb1d6ebde375bd13e8852385167d085137cf140d all independently rehashed from ZIP against current source manifest; source JSON SHA256 79ffe9f4bfb826c6f264243a5b8f589082df04237c16b9786b2243638f4a8c28; afterproof JSON SHA256 99c6fcff3414a2d6b82729b0729a685dafa0ccc03f06e4ac43bbd15b312c1fde.",
+        "Exact MERGED Node/lint/build42883003581 3602 total, 3596 PASS/0 FAIL/6 intentional SKIP, cloud/mobile/offline UX42883004514, approval42883003668, Python42883004168 SUCCESS. Unchanged previous original #566/#567/#594 official access exceptions are not certified. No Netlify publication or production writes."
+      ],
+      "ci_runs": [
+        42881373939,
+        42882418537,
+        42882418169,
+        42882418396,
+        42882418516,
+        42882418499,
+        42882418184,
+        42883004446,
+        42883003581,
+        42883004514,
+        42883003668,
+        42883004168
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "NARROW VERIFIED READY DEVELOPMENT ONLY for selected current original603 #448 region, with #449/#450 identity/own-field independent recheck. Two genuine selected #448 Variety labels remain conflicting and canonical variety withheld for member review. Full 603 individual manual semantic certification UNVERIFIED; Issue #33 OPEN; known inaccessible originals #566/#567/#594 outstanding. No release/Netlify/production/member/auth writes."
+    },
+    {
+      "id": "DIC-Q-455-community-aggregate-numeric-type-integrity",
+      "issue": 455,
+      "pr": 1901,
+      "title": "Exclude Boolean/array-coerced ratio and shot duration from unproven Community starting evidence",
+      "state": "READY",
+      "scope_paths": [
+        "site/lib/community-evidence.js"
+      ],
+      "tests": [
+        "Original Git blob 74c93c7ff7814337752e0ef9052412eaf55890e3 verified byte-identical locally; before code, true ratio => 1, true duration => 1, arrays coerced to plausible readings; synthetic only.",
+        "R455-168 four direct positive/negative local Node22 test groups PASS after safe type guard; GitHub PR-head/merged source Node/browser/offline/SQL/security/governance NOT YET VERIFIED.",
+        "Initial PR-head approval workflow 42887528841 genuinely FAILED because site/lib/community-evidence.js lacked a trackable queue item; adding this IN_PROGRESS source-only scope item, not certifying READY.",
+        "Second exact PR-head approval 42887791722 FAILED because schema requires explicitly null (not absent) merged_source_sha for an unmerged IN_PROGRESS item. Read scripts/release/release-queue.mjs and corrected null sentinel without certifying merge or changing code.",
+        "PR #1901 exact final reviewed head 3b65c3cb47b0a31d65f92e461ccd438b944ac541 Node22 42887964674 SUCCESS 3600 PASS/0 FAIL/6 intentional SKIP, four new positive/negative synthetic numeric-type tests PASS; lint/build SUCCESS.",
+        "PR-head mobile/Chromium/offline/a11y 42887964682, isolated SQL 42887964407, source-security 42887965516 and approval/release-intake 42887964596 all SUCCESS. Original frozen603 42887965178 SKIPPED NOT PASS. Earlier governance 42887528841 and 42887791722 FAILED for missing queue item and missing null merged_source_sha sentinel, corrected without altering code/tests/ledger bytes.",
+        "Nonforce squash merge 767e12c8e763959f0b6677f4de7ad7e69ce80cf3 at exact dev parent 2cdfa50691d48e4d1dad0fc1e9b659c302a897d5. All five PR-head/merged Git blobs match byte-for-byte. Exact merged Node22 42888613274 SUCCESS 3600 PASS/0 FAIL/6 SKIP, including all 4 new tests and lint/build; mobile/browser/offline 42888613128 SUCCESS; merged governance 42888613001 SUCCESS. No live member/provider/production changes."
+      ],
+      "ci_runs": [
+        42887528841,
+        42887791722,
+        42887964596,
+        42887964674,
+        42887964682,
+        42887964407,
+        42887965516,
+        42887965178,
+        42888613274,
+        42888613128,
+        42888613001
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "R455-168 READY development ONLY after all final exact-source CI, no deployment or publication. Type-only filter rejects Boolean/array/object numeric coercions from weak Community aggregate; preserved decimal strings, original numeric limits, all five sensory ratings, private shot history, Community privacy and Locked rules. Synthetic test only, no actual member/espresso quality outcome.",
+      "merged_source_sha": "767e12c8e763959f0b6677f4de7ad7e69ce80cf3"
+    },
+    {
+      "id": "DIC-Q-509-admin-delete-null-kind-guard",
+      "issue": 509,
+      "pr": 1902,
+      "title": "Reject NULL Admin deletion kind before canonical coffee routing and impact-block bypass",
+      "state": "READY",
+      "merged_source_sha": "a823c3439f77073919718b31161d792b2fd46b87",
+      "scope_paths": [
+        "supabase/migrations/20261110194500_dic_admin_delete_null_kind_guard.sql"
+      ],
+      "tests": [
+        "Read-only live full SQL/MD5 and constant-expression NULL behavior confirmed; isolated disposable PostgreSQL synthetic admin_safe_delete.sql pending.",
+        "Source-bound SQL/JWT/Node22/approval CI PENDING; no claims of success or deployment.",
+        "PR head a713beaac2b4acba4d4fbb7b474af3eb3a7eda22 all four source-bound checks SUCCESS: isolated PostgreSQL+94 signed JWT assertions 42888999868, Node22 3600 pass/0 fail/6 skip 42888999866, compiled Chromium/browser 42889000364, approval governance 42889000057.",
+        "Exact nonforce squash-merged app source a823c3439f77073919718b31161d792b2fd46b87 all four checks SUCCESS: applied new migration and admin_safe_delete in disposable dic_ci, signed JWT 94/94 42889504318, Node22 3600 pass/0 fail/6 skip+lint 42889504349, browser/cloud 42889504478, governance 42889504431."
+      ],
+      "ci_runs": [
+        42888999868,
+        42888999866,
+        42889000364,
+        42889000057,
+        42889504318,
+        42889504349,
+        42889504478,
+        42889504431
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
+      "notes": "Admin-only malformed NULL input fall-through; not a demonstrated live deletion. Source-only additive migration and disposable synthetic regression; do not deploy absent owner one-use publish approval.\nRun152: Only source READY after independently verifying 8/8 applicable PR-head and merged SHA-bound CI successes and matching all six changed source Git blobs; no production migration, member delete, or actual hosted Auth sessions. Initial pre-correction SQL attempt 42888872639 failed (missing statement delimiters), corrected at PR head a713b, all final checks success. FKs NO ACTION separately protect referential integrity for canonical Community/merged data; no proven production loss."
+    },
+    {
+      "id": "DIC-Q-509-import-credential-field-separator-guard",
+      "issue": 509,
+      "pr": 1911,
+      "title": "Reject separator-spelled credential keys in native backup import before archiving private source JSON",
+      "state": "READY",
+      "merged_source_sha": "62a1eac89f4653545a7bffe91e4dace3a2740da4",
+      "scope_paths": [
+        "supabase/migrations/20261110205500_dic_import_credential_field_separator_guard.sql"
+      ],
+      "tests": [
+        "Verified current private.apply_prototype_import whole-source MD5 479cc03d9ea9862176b0c663d99369b0 and read-only SQL shows hyphen/space/period credential names bypass old underscore-only normalization. One stored import batch; its contents intentionally not inspected and no incident claimed.",
+        "Exact PR-head 4/4 PASS: isolated SQL/JWT 42899962093, Node22 42899962642, browser/UX 42899961948, governance 42899962433. Synthetic final-schema test directly rejects seven forbidden key spellings and nested synthetic access-token while allowing benign metadata.",
+        "Exact nonforce-squash merged development 62a1eac89f4653545a7bffe91e4dace3a2740da4; migration, synthetic SQL test, SQL CI driver and provider receipt blobs match PR head.",
+        "Exact merged-source 4/4 PASS: isolated PostgreSQL/JWT 42900390547; Node22 42900390810 (3606 pass/0 fail/6 intentional skip); browser/UX 42900391060; governance 42900390549. Original corpus run skipped, not certified.",
+        "Read-only provider postmerge still has prior import function MD5 and zero application of new additive migration; no live SQL/Auth/Storage/Edge/data changes. No owner one-command publish permission."
+      ],
+      "ci_runs": [
+        42899962093,
+        42899962642,
+        42899961948,
+        42899962433,
+        42900390547,
+        42900390810,
+        42900391060,
+        42900390549
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
+      "notes": "Development-only guarded pg_get_functiondef substitution; no private imported JSON inspected, no live production SQL/data/Auth/Storage/Edge changes or publication. Preserve immutable migrations, backups and Locked privacy rules. Queue remains IN_PROGRESS pending exact PR/merged CI.\n2026-11-10 Run153 CI closure: Exact PR head d374b9fe and merged development 62a1eac8 8/8 applicable workflows COMPLETED SUCCESS after fixing historical-boundary synthetic-test placement, queue intake, and dynamic pg_get_functiondef SQL quoting. Source-only READY; no production deployment. Previous CI failures preserved in receipt docs/audits/issue509-run153-exact-source-ci-closure-2026-11-10.json."
+    },
+    {
+      "id": "DIC-Q-455-make-current-explicit-control-integrity",
+      "issue": 455,
+      "pr": 1928,
+      "title": "Keep explicitly invalid recorded grinder or optional temperature out of local Current and History Make Current",
+      "state": "READY",
+      "merged_source_sha": "8df0ad57565377b4e8d61035f938eda4e9f0a350",
+      "scope_paths": [
+        "site/lib/engine.js",
+        "site/cloud/shot_card.js",
+        "site/cloud/main.js"
+      ],
+      "tests": [
+        "Source-bound PR-head and merged-source Node22 3629 tests: 3623 PASS, 0 FAIL, 6 intentional SKIP (R171 five new positive/negative cases PASS); PR-head validate 42918987481 and merged validate 42919460283 SUCCESS.",
+        "Source-bound PR-head mobile/browser/offline/UX 42918987597, isolated SQL 42918987603, approval 42918987447 and security 42918987446 completed SUCCESS. Exact merged-source UX 42919463996 and governance 42919460291 completed SUCCESS.",
+        "Reviewed seven code/test/journal/ledger/queue Git blobs identical at PR head 741fe2cae4e9c39a1e114de317bedd3e2b2cd796 and squash merge 8df0ad57565377b4e8d61035f938eda4e9f0a350. Frozen603 42918987527 SKIPPED, NOT PASS.",
+        "Synthetic guarded five-rating, invalid grinder, optional temperature, calibration version, missing historical optional values and inclusive control behavior; no physical tasting, production signed-in workflow or measured quality asserted."
+      ],
+      "ci_runs": [
+        42918987481,
+        42918987597,
+        42918987603,
+        42918987447,
+        42918987446,
+        42919460283,
+        42919463996,
+        42919460291
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "SAFE Locked-compatible Make Current eligibility correction; legacy missing optionals, all five ratings, notes/history, family alternatives and privacy preserved. Source PR #1928 nonforce squash merged on development; direct current source CI verified. READY DEVELOPMENT-ONLY, not a publish/release permission. No main/release/provider/Netlify/live SQL/Auth/Edge/member mutation. R171 final journal docs/workstreams/ops-issue455-r171-final-verification-20261110.md."
+    },
+    {
+      "id": "DIC-Q-1935-verified-auth-startup-no-false-pending",
+      "issue": 1935,
+      "title": "Do not display approval pending while signed-in admission is still being checked",
+      "state": "READY",
+      "merged_source_sha": "5cac3799fd7b8e3a901532c92c1779f0ccc7eb5b",
+      "scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "tests": [
+        "5 new deterministic startup regression cases PASS: initial INITIAL_SESSION admitted user never briefly sees pending; server-confirmed unverified pending receives correct review gate; rejected/revoked accuracy retained; network failure shows neutral retry; account switch removes stale admission. No private workspace read before admission. Source: tests/cloud-auth-startup-verification.test.mjs.",
+        "Exact PR-head Node22 validate 42924465733 SUCCESS: 3634 total tests/3628 PASS/0 FAIL/6 intentional SKIP, lint PASS, build PASS; high Auth classified. First PR-head 42924063295 had passing Node tests but lint FAILED on missing test-only import; corrected in same-commit journal; no false pass.",
+        "Exact PR-head SQL/signed JWT/RLS 42924465657, security inventory 42924465651, approval governance 42924465862, 390px browser/mobile/offline 42924465771 all SUCCESS. Frozen603 SKIPPED and cloud-tests NOT_APPLICABLE, not counted PASS.",
+        "PR #1936 nonforce squash merged 5cac3799fd7b8e3a901532c92c1779f0ccc7eb5b; deployed app source and test Git blobs byte-identical to tested PR head 17408c3e63473a30b709860634d30d83b471657a. Exact merged-source validate 42924809128, browser/mobile/offline 42924809372 and governance 42924809270 SUCCESS; SQL/security reused exact unchanged head source evidence."
+      ],
+      "ci_runs": [
+        42924465733,
+        42924465657,
+        42924465651,
+        42924465862,
+        42924465771,
+        42924809128,
+        42924809372,
+        42924809270
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1935",
+      "notes": "Root cause: browser SDK INITIAL_SESSION surfaced authenticated identity before dic_session_status read, so auth() falsely rendered pending state. Unknown status now neutral until server verifies; explicit failed-network state is retryable. Existing actual pending/rejected/revoked and admitted/offline privacy unaffected. Owner request Nov 10; #1756 remains correctly deployed. READY DEVELOPMENT ONLY; NOT DEPLOYED and NO publication authorized. Source evidence at merged SHA 5cac3799fd7b8e3a901532c92c1779f0ccc7eb5b.",
+      "pr": 1936
+    },
+    {
+      "id": "DIC-Q-33-r102-selected-current-flavor-base",
+      "issue": 33,
+      "pr": 1934,
+      "title": "Preserve source-bound intrinsic tasting base coordinated with already selected coffee notes",
+      "state": "READY",
+      "merged_source_sha": "2809506ddcb9e2820322758d44237947deace7c4",
+      "scope_paths": [
+        "src/server/coffee-selected-description-sensory.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "tests": [
+        "PR-head official 42923853462: 6/6 focused tests PASS, guarded real #533/#539 official 2/2 FETCHED; strict afterproof FAILED direct_full_three_sensory_notes_539, confirmed actual source omission.",
+        "R102 next source+adversarial regression and exact-head CI PENDING; no READY/merge/publish authorization.",
+        "Initial new helper run 42924226207: 7/9 focused synthetics PASS, 2 FAIL (overconservative integration and malformed nested-p test); guarded official SKIPPED and afterproof FAILED. Corrected and exact source CI PENDING.",
+        "PR-head 42924358142: 8/9 synthetics PASS; standalone source helper PASS but actual parser integration FAIL; source HTTP SKIPPED, afterproof FAIL. Changed helper caller to scoped original product after geography identity filtering removed paragraph. Actual source CI pending.",
+        "R102 root cause 42924781304: direct selected paragraph valid; helper's trailing culminating clause with an internal comma caused safe reject; corrected strict suffix trim and regressions, fresh source pending.",
+        "Exact PR head bf9a1dcd244a7d7c6034b7520ace52d22f6ee911: R102 guarded official HTML and strict selected 12/12 focused PASS 42925264473; independently downloaded/hashed ZIP 60a0121dd976a846bcb4dafa55553c8fbf99dc083681583ef675f8b0200ee002, raw selected 533 4bccee87f407d0b8928448f25f1a19737706adb08dfc7b026142e87681e78c11 and 539 6bc7641c721301296f33e08f5c1a1abe53da27bddb9fe70dd57dc3d101dbb7d0. Node22 3640 PASS/0 FAIL/6 SKIP+lint PASS 42925264730; cloud UX 42925264482, isolated SQL 42925264485, approval 42925264503, privacy 42925264505, Python 42925264550 and source-security 42925264475 all SUCCESS. Frozen603 global workflow SKIPPED, not independently certified. Merge/merged CI PENDING.",
+        "MERGED exact 2809506ddcb9e2820322758d44237947deace7c4 R102 official source run 42925864707 COMPLETED SUCCESS: 12/12 focused source+hostile tests, bounded live 533+539 official HTML, actual parser/Add Coffee+Source Review and strict afterproof passed=true failures=[].",
+        "Merged Node/Lint run 42925864736 ATTEMPT 1 overall CANCELLED by parallel-workflow concurrency after independently completed source-bound full-tests 3640 PASS, 0 FAIL, 6 intentionally SKIPPED; full-tests exit_code=0, lint exit_code=0 (ESLint max-warnings 0), both metrics outcome PASS. Independently downloaded metrics ZIP #13813712261 SHA256 5aa074a7f885540d4e129655598fc41b6ed008886ec918999bc581e12677fe6b; explicitly do NOT claim workflow conclusion SUCCESS. Rerun attempt 2 also cancelled; no failed product tests. Netlify build step not applicable/skipped, not PASS.",
+        "Merged cloud/mobile 42925864735, governance 42925864969, Python 42925864910, selected official 42925864707 COMPLETED SUCCESS; original frozen603 full corpus SKIPPED (not manually certified). Merger code/test blobs identical to passing PR-head 42925264730 Node+lint and 42925264473 official selected source. No signed-in GoTrue/device acceptance.",
+        "Source artifact #13813159263 independently rehashed ZIP SHA256 8bdc96e2280b7ca8c054c0c227bf0e485c96dba4af4277ac46b875a8f3694d2f; selected raw #533 SHA256 ae80f4dd835eb9bb4bb46c7cf3017ba9cf96fee032deae678d1152fa79d26236, raw #539 SHA256 2507883f5ae30a3904663db4a047a71ec9cebc2f4b290d3f93cbebb21552032d, afterproof SHA256 f9a3654c6bf77a1f6a99975767d2f7cf52ef942970e32a5b8aad4fbeb795b699, exact matched merged source SHA."
+      ],
+      "ci_runs": [
+        42923853462,
+        42924226207,
+        42924358142,
+        42924492358,
+        42924608231,
+        42924705980,
+        42924781304,
+        42925264473,
+        42925264730,
+        42925264482,
+        42925264485,
+        42925264503,
+        42925264505,
+        42925264550,
+        42925264475,
+        42925864707,
+        42925864736,
+        42925864735,
+        42925864969,
+        42925864910
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "Development-only generic selected-current intrinsic base refinement; fully preserved original603 frozen oracle/scorer/CSV and all other queues, #96/#267 separation, no Netlify/production/member/provider writes.\n2026-11-10 R102 documentation closure: READY restricted to #533/#539 selected product source semantics, after readback of PR #1934 nonforce merged exact source and independently completed CI stage exit 0 plus selected-source afterproof. The umbrella Node run was CANCELLED after both full-tests and lint stages completed with PASS metrics; never label cancelled as workflow success. Original 603 individual certification UNVERIFIED. No deployment permission."
+    },
+    {
+      "id": "DIC-Q-1937-admin-signup-order",
+      "issue": 1937,
+      "pr": 1939,
+      "title": "Move New Account Requests directly above Accounts in Admin dashboard",
+      "state": "READY",
+      "merged_source_sha": "2286aa9fdb2c442ec9701d2fdb47d4668585a92e",
+      "scope_paths": [
+        "site/admin/view.js"
+      ],
+      "tests": [
+        "PR-head exact source node/build 42925456599, cloud/browser 42925456377, SQL 42925456433, security 42925456247, approval 42925456297 SUCCESS. Frozen corpus 42925456242 SKIPPED (not applicable). Merged-source CI pending.",
+        "Original PR 1939 exact reviewed head 603e9eb: Node22 build tests run42925456599, cloud browser42925456377, isolated SQL42925456433, security42925456247, approval42925456297 all SUCCESS; original corpus skipped NOT_APPLICABLE.",
+        "Nonforce merge 2286aa9 into development, source blob site/admin/view.js 6b6ba4ba verified identical. Descendant development 56361886 retained that exact UI blob, applicable Node/build42926681033, browser42926681043, approval42926680993 SUCCESS. No Netlify publication."
+      ],
+      "ci_runs": [
+        42925456599,
+        42925456377,
+        42925456433,
+        42925456247,
+        42925456297,
+        42926681033,
+        42926681043,
+        42926680993
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1937",
+      "notes": "Low-risk UI-only record order, no behavior/data/provider/publication change. Merged source CI needed before READY.\n2026-11-10 Verified READY after merged-source byte-equal UI and exact descendant app Node/build/browser/approval CI. Owner publish command still required."
+    },
+    {
+      "id": "DIC-Q-455-cross-style-recorded-control-evidence-guard",
+      "issue": 455,
+      "pr": 1940,
+      "title": "Prevent explicitly invalid archived grinder/temperature controls from biasing weak cross-style starting references",
+      "state": "READY",
+      "merged_source_sha": "56361886c96c0230a2cc547b1437c7fcfb907066",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Six direct synthetic negative/positive regressions R172 pass at source-bound PR-head Node22 42926232370 and merged Node22 42926681033; both 3647 PASS, 0 FAIL, 6 intentional SKIP; lint and build SUCCESS.",
+        "Applicable exact PR-head Chromium/mobile/offline/UX 42926232367, isolated SQL/JWT 42926232321, source-security 42926232440 and approval 42926232376 SUCCESS; cloud wrapper SUCCESS with inner applicability distinct.",
+        "Exact merged-source Chromium/mobile/offline 42926681043, approval 42926680993, Node22 42926681033 SUCCESS. Original603 42926232359 SKIPPED, NOT PASS.",
+        "All four scoped code/test/ledger/journal Git blobs match tested PR head dd8a272209b2bdd32b2c01849f97902d3d710608 and nonforce merge 56361886c96c0230a2cc547b1437c7fcfb907066; no production signed-in session or physical espresso quality tested."
+      ],
+      "ci_runs": [
+        42926232370,
+        42926232367,
+        42926232321,
+        42926232440,
+        42926232376,
+        42926681033,
+        42926681043,
+        42926680993
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Owner Option B SAFE source guard. Original five ratings, raw shots/notes/private history, valid legacy optional controls, calibrated range, separate Turbo/Fast-Flow, single controllable advice and community privacy preserved. Development READY only; no one-use publish authority, no production deploy or live SQL/Auth/Edge/member/provider changes. Active queue changes from #1935/#33/#1937 preserved in same-source docs reconciliation."
+    },
+    {
+      "id": "DIC-Q-33-r101-current-panel-region-roast-notes",
+      "issue": 33,
+      "pr": 1929,
+      "title": "Preserve current selected coffee labeled origin region and direct roast/complete sensory list",
+      "state": "READY",
+      "merged_source_sha": "3e60b5acdc069fdc315d910a77dcf06a3590cd1d",
+      "scope_paths": [
+        "src/server/coffee-selected-current-panel.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "tests": [
+        "R101 initial synthetic FAIL [42920114784] due first H1 negative expectation; corrected same-commit journal.",
+        "R101 second exact-head [42920216817] 7/7 synthetics PASS, real 3/3 official selected HTTPS PASS; afterproof correctly FAILED on source-backed #516 region and #528 roast/malt omissions.",
+        "R101 first parser correction [42920814484] 11/12 synthetics PASS, malt still missing due terminal punctuation in shorter list, real HTTPS SKIPPED; focused correction underway.",
+        "Fresh PR-head exact selected HTTP/afterproof, Node22/lint/build/cloud/mobile/privacy/approval CI PENDING.",
+        "Failed queue intake [42921065538]: scope_paths included nondeployable scripts/tests/workflow/journal. Corrected to only two deployable runtime source paths. Scope's nondeployable test/docs tracked by same-commit journal.",
+        "R101 exact merged official current selected #513/#516/#528 [42928447910]: 15/15 focused positive/negative PASS; 3/3 guarded fresh HTTPS selected H1/direct body + actual parser/Add Coffee/Source Review strict afterproof PASS; raw ZIP SHA256 1ba374819614f6fad6a67b0a8ef88fb3e9a3d4d0fbe1ca0e851969e94e9b38fc.",
+        "Exact merged Node/lint 42928447957 SUCCESS, 3662 PASS/0 FAIL/6 intentional SKIP, lint exit0; cloud/mobile 42928447846, Python 42928447768, approval 42928447799 SUCCESS; frozen603 SKIPPED.",
+        "R54/R64 official source failures on same development SHA are previously documented inaccessible #594/#566/#567; not introduced by R101, tracked separately."
+      ],
+      "ci_runs": [
+        42920114784,
+        42920216817,
+        42920814484,
+        42927820984,
+        42927821042,
+        42927821268,
+        42928337935,
+        42928338040,
+        42928447910,
+        42928447957,
+        42928447846,
+        42928447768,
+        42928447799
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "Current selected exact H1 and quoted present coffee country/region, strong literal roast and full same-selected tasting notes, non-contradictory subset only. Original frozen 603/201/1197 untouched; no actual member/GoTrue/production-provider/Netlify writes; separate #267/#96 owners. No owner action required; source-only development until verified. R101 code safely nonforce integrated via PR1929 merged SHA 3e60b5acdc069fdc315d910a77dcf06a3590cd1d; 15 focused/3 direct live cases and applicable exact merged CI success; scoped READY development only, parent #33 open and all other items unchanged."
+    },
+    {
+      "id": "DIC-Q-1938-admin-closed-app-push",
+      "issue": 1938,
+      "pr": 1943,
+      "title": "Opt-in privacy-minimized administrator Web Push with Home Screen background delivery",
+      "state": "READY",
+      "merged_source_sha": "a124005e4e2f7ad3ca14dc37fea197c3b2844290",
+      "scope_paths": [
+        "site/admin/view.js",
+        "site/admin/main.js",
+        "site/admin/push.js",
+        "scripts/pwa/service-worker.template.txt",
+        "src/server/admin-push.mjs",
+        "netlify/functions/dic-admin-push.mjs",
+        "netlify/functions/dic-admin-push-poll.mjs",
+        "supabase/migrations/20261110235000_dic_admin_web_push.sql",
+        "build_cloud.mjs",
+        "supabase/functions/dic-admin-push-broker/core.mjs",
+        "supabase/functions/dic-admin-push-broker/index.ts",
+        "supabase/migrations/20261112013000_dic_admin_push_vault_delivery.sql"
+      ],
+      "tests": [
+        "Synthetic VAPID ECDSA JWT, strict Apple endpoint allowlist, private-body absence, role verification, subscription baseline and opt-out, sender dedupe/role removal, PWA worker click and SQL ACL tests in tests/admin-push*.test.mjs.",
+        "CI discovered site graph omitted admin/push.js: corrected explicit build_cloud.mjs allowlist; retest build/browser before READY.",
+        "2026-11-11 live verification: PR #1943 nonforce MERGED c3cdd89c009b36595f8b0d976b4497fd890e6bd3; exact PR head 5117288fb0dfcecc7d0e6c23350a68a572e033f5 approval 42928639447, source security 42928639288, isolated SQL 42928639428, Node/build 42928639682, cloud/browser 42928639412 SUCCESS. Frozen603 SKIPPED (not applicable). Exact nine push runtime source blobs unchanged on current development 143c245a7ca621abdfc4db2500cba719916d7093, where Node/build 43074806086, browser 43074806035 and approval 43074806182 SUCCESS. Merged c3cdd89 exact mobile and Node workflows 42929188814/42929188940 CANCELLED, not counted PASS. Production Supabase migration 20261110235000 absent (live 59 migrations); Netlify project/team contain only SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY, missing Functions-scope server secret and VAPID keys; current Netlify deploy still 6af2ad72c2aa765f588abc75. No actual opt-in or iPhone Apple push delivery verified.",
+        "2026-11-12 live Supabase migration 20261112010044 dic_admin_web_push APPLIED from exact source blob bd1c28897ef71662faa4327dd79e005292a96578. Created subscriptions table (0 rows) with RLS enabled; anon/authenticated denied SELECT/INSERT/UPDATE/DELETE, service_role allowed. Snapshot RPC anon/authenticated EXECUTE denied, service_role allowed; tokens/admin_ids return JSON arrays. Protected counts auth11, beta_members11, shots26, coffees8, Community12, submissions8 unchanged. This is hosted schema/ACL proof, NOT actual push delivery.",
+        "2026-11-11 merged pagination fix a932f088496ea4afb50d62cfd4f1233ea1dd1907 exact CI validate 43084114390, cloud/mobile 43084114360, approval 43084114309 PASS: 3933 Node PASS/0 FAIL/6 intentional SKIP, all four new keyset >50/failed/stale/overlap regressions PASS. Real APNs still UNVERIFIED.",
+        "Signed Netlify-to-Supabase Edge broker: Supabase auto-provisioned service key, ES256 body binding, strict routing, repeat admin/owner checks; five synthetic tests pending exact-source CI.",
+        "Supabase Vault encrypted P-256 key generation/custody, strict Admin Auth/manage, 4-minute SQL rate gate, content-free Edge VAPID sender, 125-keyset pagination; five synthetic direct-Edge cases pending CI.",
+        "2026-11-12 actual PR #2143 and nonforce merged a124005e4e2f7ad3ca14dc37fea197c3b2844290: exact merged 43134283177 Node/lint/build 4,029 PASS / 0 FAIL / 6 intentional SKIP, 5/5 Edge broker regressions PASS; 43134283268 cloud/mobile/offline PASS; 43134283486 approval PASS; 43134283065 SQL role/RLS PASS. PR source security PASS; original frozen603 SKIPPED. No signed-in production/Apple device test performed.",
+        "2026-11-12 host verified: original dic_admin_web_push migration 20261112010044 and Supabase Vault migration dic_admin_push_vault_delivery applied, service-only key/bootstrapping/claim RPCs, anon/auth denied; Edge dic-admin-push-broker v1 ACTIVE verify_jwt=false but admin Auth checked in handler; bundled hosted core/index source bytes match merged Git blobs. Netlify has only preexisting public Supabase URL+publishable key. Exactly 0 push subscriptions until owner opts in."
+      ],
+      "ci_runs": [
+        42928639447,
+        42928639288,
+        42928639428,
+        42928639682,
+        42928639412,
+        43074806086,
+        43074806035,
+        43074806182,
+        43084114390,
+        43084114360,
+        43084114309,
+        43133876054,
+        43133876064,
+        43133876070,
+        43133876073,
+        43133876074,
+        43134283486,
+        43134283268,
+        43134283177,
+        43134283065
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1938",
+      "notes": "Do not call READY until exact-source CI and runtime configuration plan are verified. No production/Netlify/Supabase changes; preserve original mobile app and all private data.\n2026-11-11 source code PASS with identical runtime blobs across merged/current development, but BLOCKED for live delivery. No deploy, production writes or secret changes.\n2026-11-11 owner explicitly approved publishing #1938 WITH all READY items. 2026-11-12 Supabase push schema migration independently applied/verified (v20261112010044) without modifying existing member/shot/coffee records. Netlify env write HTTP403 and missing server/VAPID credentials remain the external blocker. Keep BLOCKED; hold the READY46 queue instead of issuing a partial release. Newly encrypted backup GitHub artifact13905387023 verified, owner-private Drive copy not yet confirmed, so do not certify it for potentially destructive recovery. Release staging candidate READY45 r2 93d4852... passed five statuses but excludes push and one concurrent newer READY item, so it is NOT approved for this owner-required all-items-with-push combined publication.\n2026-11-12 recovery closure: GitHub run 43130883406 artifact13905387023 ZIP 23,040,726 bytes SHA256 2bd4cce694a04bf8448ae67859e9d716e188c7e89ee51c23b763cd0e8afd2af9, containing exactly one encrypted backup.age; delivered without plaintext to owner-private direct Drive folder 1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf as file1591RhOQg-UEAXL2OHIDjCNrP9CngWezr. Independently downloaded Drive ZIP matched same byte size and SHA, owner-only permissions, no duplicate title at readback. Backup snapshot began 2026-11-12T00:56:01Z. Latest observed DB-write instant must still be checked before a potentially destructive release; this proof does not authorize release.\nNov12: Supabase-only encrypted Vault + service-only Edge pathway replaces impossible Netlify Functions-only secret scopes; Netlify keeps generic scheduled trigger and Admin API; no Netlify private key. Owner explicitly prioritizes #1938 shipping with entire queue. PR #2143 exact source security/SQL/Node/browser/approval PASS (head e83c903a6129fc07ffb1b0e3303733be7be1104b; Node 4029 PASS/0 FAIL/6 SKIP); production host migration/Edge deployment still pending.\nREADY, SOURCE+PROVIDER BACKEND VERIFIED 2026-11-12 UTC: original Locked action/role/private notification behavior preserved; private P-256 key generated into Supabase Vault on first admitted Admin opt-in, no Netlify private key. This source status means ready for owner-approved ONE combined publish with all existing READY; Netlify app not yet published and actual closed-app Apple delivery UNVERIFIED/optional device acceptance."
+    },
+    {
+      "id": "DIC-Q-455-family-recorded-control-evidence-guard",
+      "issue": 455,
+      "pr": 1946,
+      "title": "Exclude explicitly invalid archived grinder or temperature controls from measured same-style successful recipe family evidence",
+      "state": "READY",
+      "merged_source_sha": "4fc82fd0ae150139653ef27c38254d9f2fc6f06c",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Six R173 direct synthetic positive/negative regression groups passed at exact PR-head Node22/lint/build run 42928912885 (3668 PASS / 0 FAIL / 6 intentional SKIP).",
+        "Exact PR-head mobile/browser/offline/a11y and cloud wrapper 42928912931, isolated SQL 42928912918, source security 42928912902, approval 42928912881 all SUCCESS; frozen603 42928912956 SKIPPED, NOT PASS.",
+        "All four tested PR-head code/test/ledger/journal Git blobs matched nonforce merged 4fc82fd0ae150139653ef27c38254d9f2fc6f06c exactly. Concurrent #1938 Admin changes preserved.",
+        "Exact MERGED-source Node22/lint/build run 42929303540 attempt2 SUCCESS (3681 PASS / 0 FAIL / 6 intentional SKIP); all six R173 regressions PASS. Merged browser/mobile/offline/cloud 42929303565 attempt2 and approval 42929303410 SUCCESS.",
+        "First merged-source Node/browser runs were CANCELLED by concurrent push and explicitly NOT counted as success; second exact-SHA attempt independently succeeded. Physical tasting and live signed-in member/browser untouched."
+      ],
+      "ci_runs": [
+        42928912885,
+        42928912931,
+        42928912918,
+        42928912902,
+        42928912881,
+        42929303540,
+        42929303565,
+        42929303410
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Owner Option B SAFE existing-entry-bound recipe-evidence correction. All five original taste inputs, raw notes/History/shot physical measurements, successful alternative families, calibration versioning, original historic espresso snapshots and missing legacy optionals preserved. No Locked new espresso numeric policies, new capture fields or independent Style/Slow Feed modification. DEVELOPMENT READY ONLY: no Netlify publication or production SQL/Auth/Edge/member/provider change. No Source #267 literal audit credit."
+    },
+    {
+      "id": "DIC-Q-455-temperature-recorded-grinder-evidence-guard",
+      "issue": 455,
+      "pr": 1952,
+      "title": "Exclude impossible explicitly recorded historical grinder controls from personal measured espresso temperature evidence",
+      "state": "READY",
+      "merged_source_sha": "7086f5990e330ebaf08ecde54404a631e722a9c6",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Six R174 positive/negative direct synthetic regression groups PASS in exact PR-head Node22/lint/build 42933197633: 3687 PASS / 0 FAIL / 6 intentional SKIP.",
+        "Exact PR-head cloud mobile/browser/offline/a11y 42933197597, isolated SQL 42933197769, source security 42933197640, approval 42933197618 all SUCCESS. Cloud wrapper's inner unrelated cloud suite SKIPPED; frozen603 42933197934 SKIPPED, NOT PASS.",
+        "All four code/test/source-ledger/same-commit-journal reviewed blob SHAs match nonforce squash merged 7086f5990e330ebaf08ecde54404a631e722a9c6; only four reviewed paths changed, preserving concurrent Issue #504 source.",
+        "Exact MERGED-source Node22/lint/build 42933828238 SUCCESS, 3687 PASS / 0 FAIL / 6 intentional SKIP; six R174 tests 3267-3272 PASS. Exact merged UX/mobile/browser/offline 42933828523 and governance 42933828333 SUCCESS.",
+        "No real member signed-in production browser testing or physical espresso validation claimed."
+      ],
+      "ci_runs": [
+        42933197633,
+        42933197597,
+        42933197769,
+        42933197640,
+        42933197618,
+        42933828238,
+        42933828523,
+        42933828333
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Owner Option B SAFE existing measured-history grinder bounds; reuses R173 historical calibration guard for recorded personal temperature. Preserve all five original taste ratings, raw history, private notes, missing legacy grinder readings, independent styles, current calibration and owner Locked numeric taste policy. DEV READY ONLY, no Netlify, main/release/production or live SQL/Auth/Edge/member/provider write, no owner product approval."
+    },
+    {
+      "id": "DIC-Q-455-edited-five-taste-feedback-cache-refresh",
+      "issue": 455,
+      "pr": 1960,
+      "title": "Refresh actionable latest-shot recommendation from corrected five sensory ratings without altering private shot history",
+      "state": "READY",
+      "merged_source_sha": "4b19def81913686c09e7ece03133bbc20e6de199",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Six R175 direct synthetic real-module positive/negative regressions 3003-3008 all PASS at exact PR-head Node22/lint/build 42941881818: 3698 PASS / 0 FAIL / 6 intentional SKIP.",
+        "Exact head cloud UX/mobile/browser/offline 42941881811, isolated SQL 42941881815, source security 42941881833 and approval 42941881781 SUCCESS. Original frozen603 42941881798 SKIPPED, NOT PASS. Do not infer inner unrelated skipped suites.",
+        "All four reviewed source engine/test/ledger/same-commit journal Git blobs match nonforce squash merge 4b19def81913686c09e7ece03133bbc20e6de199; no unrelated deletion or overwritten concurrent work.",
+        "Exact MERGED source Node22/lint/build 42942228875 SUCCESS: 3698 PASS / 0 FAIL / 6 intentional SKIP and six new groups PASS; merged cloud UX/mobile/browser/offline 42942228783 and approval governance 42942228760 SUCCESS.",
+        "No signed-in production member testing, physical espresso trial, new numeric policy or production publication claimed."
+      ],
+      "ci_runs": [
+        42941881818,
+        42941881811,
+        42941881815,
+        42941881833,
+        42941881781,
+        42942228875,
+        42942228783,
+        42942228760
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Approved Option B narrow SAFE error correction: corrected complete non-green tastes no longer suppressed by cached actionless edit placeholder. Preserves original five ratings, one variable, notes, raw History, multiple recipe families, style/feed and grinder calibration, existing bounds, and privacy. Development READY ONLY, no publish/Netlify, main/release/provider/SQL/Auth/member write or owner-Locked change."
+    },
+    {
+      "id": "DIC-Q-33-original603-542-selected-story-stale-seo-flavor-guard",
+      "issue": 33,
+      "pr": 1962,
+      "title": "Withhold uncorroborated SEO-only tasting notes when selected product has a current independent substantive growing/processing story",
+      "state": "READY",
+      "merged_source_sha": "44768f845009a47f6e088790cb19dcde8a3fdf87",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "tests": [
+        "Actual official #542 Rally Ethiopia Refisa original parser bug at run 42943902695: incorrect canonical jasmine/lime/berry candy from SEO only; direct current selected West Arsi Washed ~850 growers has no printed flavors.",
+        "Initial escape mistake failed run 42944218231 and corrected with identical source rank tests; final exact PR-head 42944339310 SUCCESS 8/8 tests, guarded actual public HTTPS, source-bound afterproof and raw hashes.",
+        "PR #1962 safely nonforce merged 44768f845009a47f6e088790cb19dcde8a3fdf87. Independent EXACT merged official 42944774521 SUCCESS 8/8, notes intentionally blank; Source Review retains meta, raw source SHA256 8ffe5d9423a96f836cd1449da48812eb62e69755d57c4a971c3d8e0cbb8e7e8b.",
+        "Independent downloaded exact merged GitHub artifact #13823040002 ZIP 42168 bytes SHA256 ed746eab87328e210933363fc6a528039d578e99d5722f927e913f839f8f6d95; source JSON and strict afterproof byte hashes verified.",
+        "Exact merged Node/lint 42944774157 SUCCESS 3706 PASS 0 FAIL 6 SKIP; cloud/mobile42944774176, approval42944774415, Python42944774426 SUCCESS. Frozen603 full workflow SKIPPED, never certified."
+      ],
+      "ci_runs": [
+        42943902695,
+        42944218231,
+        42944339310,
+        42944774521,
+        42944774157,
+        42944774176,
+        42944774415,
+        42944774426
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "Narrow development READY only; no deployment. Full original 603 review incomplete, #566/#567/#594 source failures known unchanged; #267 V2/#96 separate; CSV/oracle/scorer and production/member/SQL/Auth/Edge/provider data untouched.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-green-timestamp-evidence-veto",
+      "issue": 455,
+      "pr": 1968,
+      "title": "Do not let undated or malformed imported five-green history suppress feedback from the most recent valid rated shot",
+      "state": "READY",
+      "merged_source_sha": "ef669d3dd6203e206421e4f5858678da3eeab706",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Exact R176 head Node22/lint/build 42948148001 SUCCESS: 3,711 PASS / 0 FAIL / 6 intentional SKIP; all five new synthetic positive/negative groups 3061–3065 PASS.",
+        "Head UX/mobile/Chromium/offline/cloud 42948148190, isolated SQL 42948148069, security 42948148029 and owner/continuity governance 42948148012 SUCCESS. Frozen603 42948148154 SKIPPED, never PASS.",
+        "PR #1968 exact head b1fd7a4bb95c1d57b7cfbdf001cba57b75fe61aa safely nonforce squash merged ef669d3dd6203e206421e4f5858678da3eeab706; four tested/head and merged Git source blobs independently identical, no removed/foreign paths.",
+        "Exact merged Node22/lint/build 42948528889 SUCCESS, 3,711 PASS / 0 FAIL / 6 intentional SKIP and all five R176 groups PASS; merged UX/mobile/browser/offline 42948528837 and governance 42948528998 SUCCESS.",
+        "No production member browser evidence or observed cup-quality efficacy; no new numeric rule, historical-row mutation, or owner policy choice."
+      ],
+      "ci_runs": [
+        42948148001,
+        42948148190,
+        42948148069,
+        42948148029,
+        42948148012,
+        42948528889,
+        42948528837,
+        42948528998
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Owner Option B SAFE parity of existing valid chronological evidence eligibility for green veto vs latest measured rated shot. Five taste inputs, valid all-green status, one controllable recommendation, private shot/history/notes, separate styles/feed/grinder calibration and no new source-driven science preserved. Development READY only; no deploy, main/release move, live provider/SQL/Auth/Edge/member writes, forced Git or repo visibility change.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-33-original603-543-selected-current-this-coffee-seo-flavor-guard",
+      "issue": 33,
+      "pr": 1970,
+      "title": "Preserve current selected lot description over uncorroborated historical SEO-only flavor metadata when its own long 'This coffee/lot' source prose establishes current origin/producer",
+      "state": "READY",
+      "merged_source_sha": "508982265555ac1d2a35d923987b67e83b688491",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "tests": [
+        "First PR-head 42950199889: 8/9 focused PASS, 1 reproduced real-parser synthetic stale OpenGraph flavor defect; public HTTPS skipped due test failure; repaired generically without bypassing afterproof.",
+        "Corrected PR-head focused official 42950363977 SUCCESS 11/11 positive/negative; actual guarded selected Rally Mexico Chiapas #543 official H1 and literal four source passages, Add Coffee/Source Review, source-bound strict afterproof PASS, metadata flavor review-only.",
+        "Exact PR-head Node/lint/build 42950364436 SUCCESS 3722 PASS 0 FAIL 6 intentional SKIP; other applicable head cloud/mobile, SQL, security, Python and approval SUCCESS.",
+        "PR #1970 nonforce squash merged 508982265555ac1d2a35d923987b67e83b688491; all five source/test/workflow/journal Git blobs identical with tested head; frozen original CSV blob 3e0d3036ea727de091f304f538c6de2dfcaa10d6 unchanged.",
+        "Exact merged guarded official 42950669704 SUCCESS 11/11 and afterproof {passed:true,failures:[]}, original HTML SHA256 e6a9aaaa9b49605e85b97f00110a5919aee09711cf4b418431314dd2ef8bbb5d.",
+        "Independent exact merged artifact #13825176229 ZIP 42164 bytes SHA256 9ea3e0ca3d79390670e35d2f2b7c6e07563b16ee73daaeb5438eb98d15ea94af matching GitHub digest; source JSON 463091db22e2ff7974032b3194472cd1545c2ee78e24e8eb1232f9eda4f32316, strict afterproof JSON 958aaa0654d8d77da575b15ed2428a88842dff0c415802c5999c14bf2d2626fc.",
+        "Exact merged Node/lint/build 42950669488 SUCCESS 3722 PASS 0 FAIL 6 intentional SKIP; UX/mobile/cloud 42950669640, approval 42950669427 and Python 42950669429 SUCCESS. Frozen603 full acceptance SKIPPED, NOT PASS.",
+        "Separate pre-existing current-source failure for inaccessible #566/#567 (42950669366) and #594 (42950669572) remains unresolved, not a new R105 failure or automatic acceptance."
+      ],
+      "ci_runs": [
+        42950199889,
+        42950363977,
+        42950364436,
+        42950669704,
+        42950669488,
+        42950669640,
+        42950669427,
+        42950669429
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "Development scoped READY only, not deployment. Exact current #543 official selected primary origin Chiapas and cooperative Comon Yaj Noptic preserved. Old SEO red apple/panels/brown sugar retained for review but not canonical. General regional varieties, roast, process, numeric elevation, unprinted flavors remain blank. All 603 individual semantic certification OPEN; separate #267/#96 unaffected. No production/member/SQL/Edge/Auth/provider/Netlify operations.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-original-calibration-success-evidence",
+      "issue": 455,
+      "pr": 1984,
+      "title": "Do not let an archived five-green record with an impossible original grinder calibration establish Coffee overview success or veto newer rated-shot advice",
+      "state": "READY",
+      "merged_source_sha": "62fd66e9121dece04e244590aa7341d58fb7341b",
+      "scope_paths": [
+        "site/lib/model.js",
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Source-bound PR #1984 head f25fa51501402d25efd2c99458f9603eae43779b: Node22/lint 42961355297 SUCCESS, 3738 pass/0 fail/6 intentionally skipped; seven new R178 positive/negative cases #3175–3181 PASS. No empirical espresso or member claim.",
+        "PR-head mobile/Chromium/browser/offline 42961355008 SUCCESS (real packaged build/assets, owner-only permissions, service-worker cached reopening and accessibility; unaffected cloud-only tests skipped by applicability); isolated SQL/HMAC 42961355079, source security 42961355306, approval/continuity 42961355225 SUCCESS.",
+        "Frozen original603 run 42961355107 SKIPPED, NOT PASS; no assertion of unrelated 603-case acceptance.",
+        "Nonforce code PR #1984 squash merged exact SHA 62fd66e9121dece04e244590aa7341d58fb7341b after concurrent disjoint #509 audit, five reviewed code/test/ledger/journal Git blobs identical with original tested head; no deletion.",
+        "Exact merged-code Node22/lint 42961757243 SUCCESS 3738 pass/0 fail/6 skipped with all seven R178 cases #3175–3181 PASS; merged UX/mobile/Chromium/offline 42961757173 and governance 42961757208 SUCCESS. SQL/security on unchanged merged scope reuse passing exact head checks; NOT claimed merged rerun.",
+        "Original dose, yield, time, grind, temp, five taste scores, notes and private History retained; user-rated all-green distinguished from missing scores; no new Locked numeric or product rule."
+      ],
+      "ci_runs": [
+        42961355297,
+        42961355008,
+        42961355079,
+        42961355306,
+        42961355225,
+        42961757243,
+        42961757173,
+        42961757208
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Owner Option B safe Locked-compatible source integrity guard. Uses recorded original snapshot or original calibration for historical five-green status, with missing optional legacy fallback; engine reuses prior familyEvidenceShots check. Synthetic source-path gap only; no observed member incident or empirical cup quality. Development READY only, NOT DEPLOYED; no main/release, provider, production SQL/Auth/Edge/member data, repository-visibility or policy change.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-33-original603-550-geographic-duplicate-suffix",
+      "issue": 33,
+      "pr": 1986,
+      "title": "Remove redundant selected-source geographic place suffix only when already explicitly contained in one complete source-published locality and country",
+      "state": "READY",
+      "merged_source_sha": "b4b480ae041ed769654c240a6dc56bfba03d865c",
+      "scope_paths": [
+        "src/server/coffee-fact-compatibility.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "tests": [
+        "Initial focused run 42963456363 FAILED 5/7 (real duplicated geographic place suffix reproduced and overly flattened test fixture prevented two labeled specs); public source skipped and afterproof failed appropriately.",
+        "Corrected exact PR-head guarded official HTTPS + real current parser/Source Review 42963693331 SUCCESS: 8/8 positive/hostile focused tests, real current selected #550 H1 and six direct source assertions, actual canonical Durame Village of Kembata, Ethiopia without appended duplicate Kembata/Durame, elevation 2100m, Ethiopian Heirloom, Natural, blueberry/strawberry and Add Coffee/Source Review; no false release year.",
+        "Exact current selected official HTML SHA256 1c92d1e4a5d6ee8e1d7175be567d91a2345b07d1ffd0eac48c0bcb33486ff595; strict source afterproof passed true failures[] at PR synthetic merge source bdca1d3332d1a0771d691219c1b4fb9d3d3d40aa. Raw artifact ID 13830088100 provider digest aa291097beda5dcb443ff8f2ece8b48c36297e01f0dab8d2d55a154c25692706 not independently rehashed. Original 603 CSV invariant and oracle/scorer untouched.",
+        "First code+tests PR-head governance 42963693365 FAILED queue intake, untracked two new runtime source paths; this TESTING row explicitly fixes intake scope. After queue update exact-head and merged-source checks PENDING, no READY until independent merge verification.",
+        "Exact merged push official 42964152525 SUCCESS 8/8 focused and guarded public selected official #550, actual Add Coffee/Source Review, strict afterproof passed true, 0 failures; no canonical repeated Kembata/Durame; HTML SHA256 5a51e597ed12a7657e8d177967348284cb3d7f384b56260a56b0a89ec2f44c26; raw ZIP artifact #13830258101 independently downloaded and rehashed: 03b988a5d46f3e64511fb90be383b148ab3e67e0f95fe4c50e5bc6611c71aad0; source and afterproof JSON SHA256 in permanent receipt docs/audits/issue33-r107-550-current-selected-verified-20261111.json.",
+        "Exact merged Git source b4b480ae041ed769654c240a6dc56bfba03d865c all seven reviewed PR-head Git blobs equal; Node/lint 42964152512 SUCCESS 3746 PASS/0 FAIL/6 intentional SKIP + lint PASS; merged mobile/offline UX 42964152716, governance 42964153820 and Python 42964152759 SUCCESS; PR-head SQL/security/source checks successful and unchanged. Immutable original CSV 603/201/1197 and scorer unchanged; full frozen603 SKIPPED not certified.",
+        "Independent unrelated original source #566/#567 (42964152679) and #594 (42964152747) still FAIL current-source access; pre-existing exceptions do not convert this specific #550 success to global completion."
+      ],
+      "ci_runs": [
+        42963456363,
+        42963693331,
+        42963693365,
+        42963835672,
+        42963835520,
+        42963835477,
+        42963835409,
+        42963835403,
+        42963835571,
+        42963835449,
+        42963835406,
+        42964152525,
+        42964152512,
+        42964152716,
+        42964153820,
+        42964152759
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "Narrow selected-product #550 source-backed generic geography duplicate-reconciliation repair is READY for DEVELOPMENT only, NOT DEPLOYED. Exact merged source, test, afterproof and SHA256 artifact verified. No release or changes to production member/provider/SQL/Edge/Auth; original 603 complete semantic certification remains OPEN; separate #566/#567/#594 current source failures untouched. Full 603 frozen run SKIPPED.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-admin-delete-edge-request-status",
+      "issue": 509,
+      "pr": 1992,
+      "title": "Return bounded invalid request status codes from JWT-required administrator account-deletion Edge rather than retryable HTTP 503",
+      "state": "READY",
+      "merged_source_sha": "0bc7f0ac30434e28c5951d33bd1fe914b56c3037",
+      "scope_paths": [
+        "supabase/functions/dic-delete-member-account/index.ts"
+      ],
+      "tests": [
+        "Original frozen603 workflow 42968207941 SKIPPED, not PASS; outside modified Edge scope.",
+        "Exact PR head 32c4bff455a65f76161b0c9845e355cf5482ad64: Node22/lint/build 42968207909 SUCCESS (3753 passed, 0 failed, 6 skipped), approval 42968207920 SUCCESS, source security 42968207930 SUCCESS, isolated SQL/JWT 42968207932 SUCCESS, cloud UX/browser 42968207935 SUCCESS.",
+        "Six of six PR-head paths match merged blob SHA exactly at 0bc7f0ac30434e28c5951d33bd1fe914b56c3037; no conflicting source changes.",
+        "Exact merged source 0bc7f0ac30434e28c5951d33bd1fe914b56c3037: approval 42968529340 SUCCESS; cloud/browser 42968529302 SUCCESS; Node22/lint/build 42968529400 SUCCESS (3753 passed, 0 failed, 6 intentional skips). Isolated SQL/security PR-head checks reused against identical unchanged source blobs; no claim of new merged rerun.",
+        "Live readback remains Edge v1 JWT-required with prior bundle sha256 a2418951c7c4457723cd7b5e7e8d39f4cb1b3a02f76c6099573a9d576f32bf18; source-only READY, not deployed."
+      ],
+      "ci_runs": [
+        42968207909,
+        42968207920,
+        42968207930,
+        42968207932,
+        42968207935,
+        42968529340,
+        42968529302,
+        42968529400
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
+      "notes": "Development-only Admin-delete error classification. Preserves JWT, admitted admin, preparation/finalization, recovery, privacy and Locked decisions; no provider writes.\nRun162 exact PR-head 5/5 applicable, merged 3/3 applicable completed success, all six changed source blobs identical. Queue READY DEVELOPMENT ONLY, separate owner publish command mandatory. No live request/error reproduction or affected member claimed.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-sweetness-original-calibration-comparison",
+      "issue": 455,
+      "pr": 1991,
+      "title": "Reject physically impossible original grinder-calibration records as measured sweetness/yield comparison evidence",
+      "state": "READY",
+      "merged_source_sha": "6d386d4e41d09c12ec0487dc7e222e74f5e277de",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "PR #1991 exact head b9670659399e1f9b45e3e321f0554e7387b9f240; Node22/lint 42967621442 SUCCESS, 3751 PASS /0 FAIL /6 intentional SKIP; all five new R179 cases #3312-3316 PASS.",
+        "PR-head mobile/browser/Chromium/offline 42967621390, isolated SQL/auth/privacy 42967621515, source security 42967621795, approval/governance 42967621439 all SUCCESS; original603 42967621430 SKIPPED not PASS.",
+        "Nonforce squash PR #1991 merged 6d386d4e41d09c12ec0487dc7e222e74f5e277de; exact five changed Git blobs identical tested head vs merge, no deletions/other scopes.",
+        "Exact merged-source Node22/lint 42967962118 SUCCESS, 3751 PASS /0 FAIL /6 intentional SKIP, five R179 cases PASS; merged mobile/Chromium/offline 42967962205 and governance 42967962152 SUCCESS. Original603 not run on merge; unchanged SQL/security source reused from PR head.",
+        "Original five recorded ratings, dose/yield/time/grind/temp, notes and History are unchanged; same-coffee exploratory sweetness next-step retains owner-approved numerical increment; no real member or improved cup taste asserted."
+      ],
+      "ci_runs": [
+        42967621442,
+        42967621390,
+        42967621515,
+        42967621795,
+        42967621439,
+        42967962118,
+        42967962205,
+        42967962152
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Owner Option B safe reuse of prior snapshot/calibration integrity guard for sweetness/yield History comparison; original shots/notes/five ratings and existing one-yield-step policy preserved. Development only, not deployed. Exact merged source checked and fully app-governed READY for development only; no Netlify deployment or live production data/provider changes.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-last-rated-original-calibration",
+      "issue": 455,
+      "pr": 2001,
+      "title": "Do not let a corrupted imported newer non-green original grinder snapshot override the last valid measured rated shot recommendation",
+      "state": "READY",
+      "merged_source_sha": "cbf95b0baf00d80d0f7c90ee4045122e19785ca9",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Same-commit code PR #2001, exact head 15c599374addec1fb955eed0dbd994318fb59f6f, six real-module synthetic negative/positive R180 cases including immutable original History. Exact PR-head Node22/lint 42973918046 SUCCESS: 3767 PASS, 0 FAIL, 6 intentional SKIP; all six new cases #3133-3138 PASS.",
+        "PR-head cloud UX/mobile/Chromium/offline 42973917853, isolated SQL 42973917961, source security 42973917921, approval/continuity 42973918139 all SUCCESS; frozen603 42973918022 SKIPPED NOT PASS.",
+        "PR #2001 nonforce squash merged cbf95b0baf00d80d0f7c90ee4045122e19785ca9; all three Git blobs for engine, six regressions and same-commit journal identical to reviewed head, no unrelated changes or removals.",
+        "Exact merged-source Node22/lint 42974204108 SUCCESS, 3767 PASS/0 FAIL/6 intentional SKIP, all six R180 regressions PASS. Merged cloud UX/mobile/Chromium/offline 42974204074 and governance 42974204066 SUCCESS. Unchanged SQL/security source head evidence reused, not labeled rerun.",
+        "No actual member incident or empirical espresso cup outcome; original historical shots, notes and five taste scales untouched. Research-only 48/48 pack reference cases are not application CI."
+      ],
+      "ci_runs": [
+        42973918046,
+        42973917853,
+        42973917961,
+        42973917921,
+        42973918139,
+        42974204108,
+        42974204074,
+        42974204066
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Owner Option B safe reuse of existing historical grinder snapshot/calibration guard for latest rated feedback. Preserve five tastes, original private History, single intentional change, style/feed/grinder versions and Locked priors. Development ONLY, not deployed, no production/provider writes.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-outlier-original-calibration-quorum",
+      "issue": 455,
+      "pr": 2017,
+      "title": "Ignore impossible original grinder-calibration archived shots when forming four-success Log Shot outlier review baseline",
+      "state": "READY",
+      "merged_source_sha": "d565bd905dd536d3fed57f371597350cd5d8871c",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Exact PR-head 0e99e775f71d976ec3d778e59f054e9b71206dba Node22/lint #42989443813 SUCCESS: 3791 PASS, 0 FAIL, 6 intentional SKIP, including seven R182 synthetic positive/negative tests #3238-3244 PASS.",
+        "Exact PR-head mobile/Chromium/offline #42989443789, isolated SQL/privacy #42989443887, source security #42989443917, approval/governance #42989443884 all SUCCESS; original603 #42989443891 SKIPPED NOT PASS.",
+        "Nonforce squash PR #2017 merged d565bd905dd536d3fed57f371597350cd5d8871c; three original source/test/same-commit journal Git blobs equal reviewed head, no removed paths.",
+        "Exact merged-source Node22/lint #42989925896 SUCCESS: 3791 PASS, 0 FAIL, 6 intentional SKIP; all seven R182 cases PASS. Merged actual browser/mobile/Chromium/offline #42989925908 and governance #42989925885 SUCCESS; SQL/security head evidence reused for unchanged source, not called fresh merge checks.",
+        "No observed real member issue or empirical espresso effect; no original measured shot/notes/five ratings, equipment, historical calibration or Locked outlier threshold changed."
+      ],
+      "ci_runs": [
+        42989443813,
+        42989443789,
+        42989443887,
+        42989443917,
+        42989443884,
+        42989925896,
+        42989925908,
+        42989925885
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Owner Option B: reuse existing familyEvidenceShots original recorded calibration integrity for four-shot outlier reference eligibility. Preserve private shot history, five tastes, one-control advice, independent recipe style/feed and numeric Locked outlier thresholds. Development only; deployment separately requires owner approval.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-original-calibration-grinder-guidance",
+      "issue": 455,
+      "pr": 2028,
+      "title": "Exclude archived successful grinder settings impossible on the original grinder calibration from personal grind and paired Slow Feed advice",
+      "state": "READY",
+      "merged_source_sha": "be6ad8df744305c3cb95488f1d2ca8b79dc9dd06",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Exact PR-head 0e1f6bed900020b29b652eb6e699101599d7194f Node22/lint #42997570825 SUCCESS: 3806 PASS, zero FAIL, six intentional SKIP, all seven R183 synthetic real-module tests #3129-3135 PASS.",
+        "PR-head Chromium/mobile/offline #42997570902, isolated SQL/privacy #42997570789, security #42997570785 and approval #42997570973 all SUCCESS; frozen603 #42997570979 SKIPPED, NOT PASS.",
+        "PR #2028 nonforce squash merge be6ad8df744305c3cb95488f1d2ca8b79dc9dd06; engine/test/SAME-COMMIT journal Git blobs match reviewed PR head exactly; no removed source paths.",
+        "Exact merged-source Node22/lint #42997995912 SUCCESS 3806 PASS/0 FAIL/6 SKIP, all seven R183 PASS; merged Chromium/mobile/offline #42997995965 and approval/governance #42997996106 SUCCESS; no fresh merged SQL/security claimed.",
+        "Member original five taste ratings, measured shots, notes, calibration snapshots and private History are untouched. This is a synthetic reproducible source-level gap, not a documented affected member or empirical espresso cup-quality result."
+      ],
+      "ci_runs": [
+        42997570825,
+        42997570902,
+        42997570789,
+        42997570785,
+        42997570973,
+        42997995912,
+        42997995965,
+        42997996106
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Owner-approved Option B, Locked compatible: existing original calibrated grinder-history evidence gate now shared across personal grind and Slow Feed history. No universal correction, numeric change, new controls or data capture; development only, deployment separately authorized.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-similar-coffee-original-calibration",
+      "issue": 455,
+      "pr": 2035,
+      "title": "Exclude historical similar-coffee successful donors impossible on their original grinder calibration from unproven personal starting ratios/time",
+      "state": "READY",
+      "merged_source_sha": "d936f59cb31c7399fab8e779ac5c8517a939c2c7",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Exact PR head 36a05ee88238db7f852fa676de5a1f66cd4baae2 Node22/lint #43005758143 SUCCESS 3820 PASS/0 FAIL/6 intentional SKIP, all seven R184 real-module synthetic cases #3346–3352 PASS; head Chromium/mobile/offline #43005758145, SQL/privacy #43005758184, security #43005758077 and governance #43005758160 SUCCESS. Frozen603 #43005758173 SKIPPED NOT PASS.",
+        "Nonforce PR #2035 squash merged d936f59cb31c7399fab8e779ac5c8517a939c2c7; engine, test and same-commit journal blobs match head readback exactly, single-parent, no removed source paths.",
+        "Exact merged Node22/lint #43006219038 SUCCESS same 3820 PASS/0 FAIL/6 SKIP, all seven R184 PASS, lint PASS; merged Chromium/mobile/offline #43006219240 and governance #43006219048 SUCCESS. SQL/security head reused due identical source; no fresh merged SQL/security claimed.",
+        "Historical original five sensory ratings, measured source shots, notes, grinder snapshots and private history unchanged; synthetic source-level integrity issue, not proven real member impact or espresso result."
+      ],
+      "ci_runs": [
+        43005758143,
+        43005758145,
+        43005758184,
+        43005758077,
+        43005758160,
+        43006219038,
+        43006219240,
+        43006219048
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Owner-approved Option B; established calibration evidence eligibility across same-roast similar-coffee source donors. Keeps all Locked tastes/targets, one-control recommendations and style/feed distinctions; production publication separately authorized.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-make-current-original-calibration",
+      "issue": 455,
+      "pr": 2044,
+      "title": "Reject archived all-green Make Current recipes with impossible original grinder calibration while preserving private history and valid favorites",
+      "state": "READY",
+      "merged_source_sha": "2a2249923ffcd2cf052b4bd2769c9d46446352ba",
+      "scope_paths": [
+        "site/lib/engine.js",
+        "site/cloud/shot_card.js"
+      ],
+      "tests": [
+        "PR #2044 head 398e9bf7be688d3c0795bafd6b044b484a9b4ed0 Node22/lint #43013683394 SUCCESS: 3834 PASS/0 FAIL/6 intentional SKIP, all 7 R185 synthetic real-module cases PASS.",
+        "PR-head Chromium/mobile/offline #43013683144, isolated SQL/privacy #43013683139, security #43013683199, approval/continuity #43013683161 all SUCCESS; original frozen603 #43013683118 SKIPPED NOT PASS; cloud-tests in UX marked NOT_APPLICABLE, not exercised.",
+        "Safe nonforce PR #2044 merge 2a2249923ffcd2cf052b4bd2769c9d46446352ba; engine, History card, new tests and SAME-COMMIT journal Git blobs identical with tested head, 4 files only and no deletions.",
+        "Exact merged-source Node22/lint #43014164927 SUCCESS: 3834 PASS/0 FAIL/6 SKIP, all seven R185 regressions PASS; merged Chromium/mobile/offline #43014164921 and governance #43014164975 SUCCESS; no fresh merged SQL/security claimed, prior identical head evidence reused.",
+        "Original shots/notes/taste scales, favorite alternatives, style/feed/version/calibration/Locked ranges and private History preserved. This is a deterministic synthetic source-level gap, not an observed member incident or empirical espresso quality outcome."
+      ],
+      "ci_runs": [
+        43013683394,
+        43013683144,
+        43013683139,
+        43013683199,
+        43013683161,
+        43014164927,
+        43014164921,
+        43014164975
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Owner Option B safe original grinder calibration integrity for the existing Make Current UX and local engine; no new numerical taste rules or data capture. Development only, publication separate.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-prefill-original-calibration",
+      "issue": 455,
+      "pr": 2052,
+      "title": "Prevent archived original-calibration-invalid grinder readings from seeding Log Shot dose and temperature prefills",
+      "state": "READY",
+      "merged_source_sha": "6e355b3f1f4b2133def9d0074caa6520d543a5a2",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "PR #2052 exact head 0abc94177e95ab2ffe552be1e15f05a24179c693 Node22/lint #43023024746 SUCCESS 3848 PASS/0 FAIL/6 intentional SKIP; all seven new R186 real-module synthetic tests #3314-3320 passed.",
+        "Exact head Chromium/mobile/offline #43023024778, isolated SQL/privacy #43023025005, source security #43023024833, approval/continuity #43023024861 all SUCCESS; original frozen603 #43023024800 SKIPPED NOT PASS.",
+        "Nonforce squash merge 6e355b3f1f4b2133def9d0074caa6520d543a5a2 from current development parent 74dcfc482a10486bc01bed346692b61fce880f92; source engine/test/same-commit journal three Git blobs identical to reviewed head and no deletions.",
+        "Exact merged-source Node22/lint #43023522596 SUCCESS 3848 PASS/0 FAIL/6 intentional SKIP; all seven R186 cases PASS, merged Chromium/mobile/offline #43023522736 and approval/governance #43023523069 SUCCESS. Head SQL/security reused identical source; not represented as rerun.",
+        "No original shot/history/notes/five tastes/recipe families or science/Locked numerical policy changed. Synthetic source-control-flow integrity correction, not a documented member or measured cup outcome."
+      ],
+      "ci_runs": [
+        43023024746,
+        43023024778,
+        43023025005,
+        43023024833,
+        43023024861,
+        43023522596,
+        43023522736,
+        43023523069
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Owner Option B safe original-calibration evidence reuse for Log Shot prefill; development only. No production publishing authorization.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-prefill-valid-historical-range",
+      "issue": 455,
+      "pr": 2062,
+      "title": "Admit legitimate original-calibration historical measured shots to Log Shot dose/temperature prefill even when old grinder range differs",
+      "state": "READY",
+      "merged_source_sha": "1e2430b745c5d2f749f347aa26340fdec7fb039f",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Source PR #2062, nonforce merged 1e2430b745c5d2f749f347aa26340fdec7fb039f; original same-commit source/test/journal blobs independently read back, 7 synthetic positive/negative real-module regressions PASS.",
+        "Original source R187 Node22 head/merge 43032374382/43033641348 success 3869/0/6, initial merged browser 43033641054 DNS infra FAILED before tests; R190 actual recovered merged Chromium 43063308304 SUCCESS on unchanged source; latest 43071900992 also SUCCESS.",
+        "Exact merged source 9c335bacb2d7aa7455d63a1e153532c5fdb754fc; Node22/lint 43071900985 SUCCESS 3915 PASS/0 FAIL/6 intentional SKIP; full Chromium/390px/offline/accessibility 43071900992 and governance 43071901060 SUCCESS. Frozen603 SKIPPED, not PASS. No hosted member tests, production operations or taste efficacy trial."
+      ],
+      "ci_runs": [
+        43032374382,
+        43033641348,
+        43063308304,
+        43071900985,
+        43071900992,
+        43071901060
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Owner-approved Option B SAFE existing-original-calibration evidence guard; source-only READY, not published; release candidate must account for same-file dependencies.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-crossstyle-original-calibration",
+      "issue": 455,
+      "pr": 2079,
+      "title": "Use archived original grinder scale to validate cautious same-coffee cross-style ratio-only reference without transferring old grind",
+      "state": "READY",
+      "merged_source_sha": "9c335bacb2d7aa7455d63a1e153532c5fdb754fc",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Source PR #2079, nonforce merged 9c335bacb2d7aa7455d63a1e153532c5fdb754fc; original same-commit source/test/journal blobs independently read back, 8 synthetic positive/negative real-module regressions PASS.",
+        "Head Node22 43071075537 3915/0/6; head Chromium/SQL/security/governance 43071075255/43071075437/43071075262/43071075846 SUCCESS; exact merge Node22/Chromium/governance 43071900985/43071900992/43071901060 SUCCESS.",
+        "Exact merged source 9c335bacb2d7aa7455d63a1e153532c5fdb754fc; Node22/lint 43071900985 SUCCESS 3915 PASS/0 FAIL/6 intentional SKIP; full Chromium/390px/offline/accessibility 43071900992 and governance 43071901060 SUCCESS. Frozen603 SKIPPED, not PASS. No hosted member tests, production operations or taste efficacy trial."
+      ],
+      "ci_runs": [
+        43071075537,
+        43071075255,
+        43071075437,
+        43071075262,
+        43071075846,
+        43071900985,
+        43071900992,
+        43071901060
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Owner-approved Option B SAFE existing-original-calibration evidence guard; source-only READY, not published; release candidate must account for same-file dependencies.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-overview-original-calibration-success",
+      "issue": 455,
+      "pr": 2095,
+      "title": "Preserve Coffee overview Dialed In success for physically valid historical grinder calibration after range revision",
+      "state": "READY",
+      "merged_source_sha": "4302d0d1e86b874903d450262190ba4e2847d5cd",
+      "scope_paths": [
+        "site/lib/model.js"
+      ],
+      "tests": [
+        "SAFE source-only model predicate fix #2095: authored head b32031daea0a37231a56519b6b605972dc69a07a; all three model/test/same-commit journal Git blobs independently read back identical after nonforce squash merge 4302d0d1e86b874903d450262190ba4e2847d5cd.",
+        "Exact reconciled PR head d040c4c49fe472e29bd777c6a64e47b4b4bfef56 Node22/lint #43076911746 SUCCESS 3929 PASS/0 FAIL/6 intentional SKIP; all seven R192 synthetic positive/negative direct-model tests PASS, lint PASS; Chromium/390px/offline/accessibility #43076911717, SQL/privacy #43076911776, security #43076911737, governance #43076911662 SUCCESS.",
+        "Actual exact merged-source Node22/lint #43077479093 SUCCESS 3929 PASS/0 FAIL/6 SKIP and seven R192 tests PASS; full merged browser/mobile/offline/accessibility #43077478995 SUCCESS; approval/governance #43077479096 SUCCESS. Original frozen603 PR run #43076911785 SKIPPED NOT PASS. No hosted real member or empirical taste outcome claimed."
+      ],
+      "ci_runs": [
+        43076911746,
+        43076911717,
+        43076911776,
+        43076911737,
+        43076911662,
+        43077479093,
+        43077478995,
+        43077479096
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Owner-authorized Option B SAFE Locked-compatible historical calibration evidence consistency only. Archived grinder dial not copied into new active-calibration recommendations. Development READY; owner-only publication required. No data, history, taste or numeric science policy changed.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-33-r117-unrendered-metadata-shell",
+      "issue": 33,
+      "pr": null,
+      "title": "Reject unrendered metadata-only storefront shells instead of accepting unsupported selected coffee facts",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": "2e2a1df1bb7fa9854637cf7eb5960138ce1eafc2",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "owner_source": "Issue #33 exact selected source accuracy work, R117 merged 2026-11-11; owner 2026-11-11 Publish instruction freezes the 42 independently READY items only, explicitly excludes this newer unqueued source until independently READY",
+      "tests": [
+        "R117 2026-11-11 source commit 2e2a1df1 includes source guard, exact selected official workflow and five synthetic positive/hostile cases; excluded from READY42 because scope not yet source-certified as READY and current dev blob differs from last READY #33 R107"
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Post-READY merged app source absent from frozen 42 READY queue; must independently certify and intentionally add in future owner-publish batch, not include in READY42"
+      ],
+      "notes": "Release42 candidate must pin src/server/coffee-page-metadata.mjs to exact READY #33 R107 blob 0210df1b1381da01acb3b7a0f7ba56a2b7955f2e. Preserve current R117 work and its tests in development; exclude issue-scoped tests/coffee-issue33-r117-metadata-only.test.mjs from isolated release candidate only. No source rollback, database/provider writes, or R117 READY promotion.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-33-r123-573-trailing-flavor-unready",
+      "issue": 33,
+      "pr": null,
+      "title": "Current selected coffee #573 trailing-flavor source parser correction (R123), independently pending READY and excluded from frozen READY42",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": "64a864285bf0614cf165d2c2a0ac32f7961478e0",
+      "scope_paths": [
+        "src/server/coffee-selected-description-sensory.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "owner_source": "Issue #33 R123 exact current-source selected #573, merged after READY42 staging source; still not in owner-approved 42 READY batch.",
+      "tests": [
+        "R123 12 synthetic positive and hostile tests in tests/coffee-issue33-r123-573.test.mjs and guarded official workflow, same-commit journal. Merged source 64a864285bf0614cf165d2c2a0ac32f7961478e0, CI and original evidence separately owned."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Source not included in owner-frozen 42 READY selection; current source merges after staging and must not be shipped in READY42."
+      ],
+      "notes": "Concurrent post-candidate development drift added src/server/coffee-selected-description-sensory.mjs. One-use release controller denied request DIC-20261111-READY42-29 before claim at run 43086223913 due missing explicit IN_PROGRESS path owner. Register source accurately; retain code and tests on development. The staged candidate source is immutable and retains only previously selected READY merge blobs; no deployment/publication from this record. Prior grant remains unused after independent release and Netlify readback.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-r194-legacy-advanced-optional-guard",
+      "issue": 455,
+      "pr": 2113,
+      "title": "Legacy optional equipment switches no longer interrupt Log Shot, five ratings, next advice or explicit Setup editing",
+      "state": "READY",
+      "merged_source_sha": "a958dd8ac160a8e41d765b806e137df50f7b7821",
+      "scope_paths": [
+        "site/lib/model.js",
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Four original source/test/SAME-COMMIT journal Git blobs matched exact reviewed PR-head after nonforce merged code PR #2113 at a958dd8ac160a8e41d765b806e137df50f7b7821; six synthetic direct-module positive and negative R194 regressions PASS on head and merge.",
+        "Exact head Node22/lint 43106019915 and merged Node22/lint 43106646997 each SUCCESS: 3974 PASS /0 FAIL/6 intentional SKIP; head and merged Chromium/390px/offline 43106020076/43106647032 SUCCESS; head isolated SQL/JWT/privacy 43106020273 and source security 43106019958 SUCCESS; head/merged governance 43106019907/43106647036 SUCCESS.",
+        "Original frozen603 job 43106020008 SKIPPED NOT PASS; no real member event or empirical taste-quality claim."
+      ],
+      "ci_runs": [
+        43106019915,
+        43106020076,
+        43106020273,
+        43106019958,
+        43106019907,
+        43106646997,
+        43106647032,
+        43106647036
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Preexisting optional controls default OFF for missing legacy imported backup; modern cloud hydrate always normalizes optional fields. Private shot history/tastes/notes, independent espresso styles, optional Slow Feed and Locked numerical policy unchanged. Development-only READY, NOT PUBLISHED. Owner Publish separately required and release-source isolation mandatory.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-r195-temperature-prefill-provenance",
+      "issue": 455,
+      "pr": 2124,
+      "title": "Log Shot shows when an optional temperature prefill came from a different espresso style",
+      "state": "READY",
+      "merged_source_sha": "e6c7b538fff018301e48124d7c394dcbbbe795b9",
+      "scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "tests": [
+        "Five R195 synthetic positive/negative CloudApp form regressions PASS both exact PR head and merged source: cross-style provenance, same-style label absence, optional temperature OFF, invalid historical temperature exclusion, escaped untrusted legacy style source; original private History and all five unrated input defaults preserved.",
+        "Exact PR-head and merged-source Node22/lint each SUCCESS: 3987 PASS, 0 FAIL, 6 intentional SKIP (3993 total); exact merged Chromium/390px/browser/offline and governance SUCCESS; head isolated SQL/JWT/privacy and source security SUCCESS.",
+        "Original frozen603 PR-head run 43113680334 SKIPPED, not PASS. No empirical espresso taste-quality outcome, hosted member incident or production write claimed."
+      ],
+      "ci_runs": [
+        43113680150,
+        43113680153,
+        43113680162,
+        43113680175,
+        43113680313,
+        43114158890,
+        43114158876,
+        43114158939
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Display existing measured other-style temperature origin in an escaped helper next to the optional Log Shot field. Does not alter prefill value or algorithm, product choices, five taste inputs, records, privacy, style policy, Slow Feed, temperature controls or Locked numerical targets. Development-only READY; not published. Separate owner Publish grant and source-isolated release required.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-r196-temperature-recommendation-clears-history-origin",
+      "issue": 455,
+      "pr": 2132,
+      "title": "Clear misleading old-style measured temperature label after explicit Use Recommendation",
+      "state": "READY",
+      "merged_source_sha": "02d96594e4d8461a88c08d97be607a808626c0c2",
+      "scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "tests": [
+        "Three R196 synthetic direct CloudApp UI positive/negative assertions PASS on corrected PR and actual merged code: cross-style source removed only after explicit use-temp; same-style remains usable; grind-only selection preserves actual measured source. Original notes/shot and five taste inputs unchanged.",
+        "Initial new code Node22 FAILED 3 including older limited synthetic DOM mocks; repaired and rechecked. Corrected PR head and exact merged Node22/lint each 3998 PASS/0 FAIL/6 intentional SKIP (4004 tests), browser/mobile/offline and governance SUCCESS; head SQL/privacy and source security SUCCESS.",
+        "Frozen603 was SKIPPED, not PASS; no hosted member, provider, empirical espresso sensory or production write claimed."
+      ],
+      "ci_runs": [
+        43122995526,
+        43122995515,
+        43122995457,
+        43122995709,
+        43122995455,
+        43123467535,
+        43123467517,
+        43123467538
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Source label reset is purely UX metadata, does not change temperature recommendation, measured history or any Locked numeric, taste, style, feed or privacy behavior. Explicit owner Publish needed separately; development-only READY not deployed.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-r197-manual-temperature-provenance",
+      "issue": 455,
+      "pr": 2138,
+      "title": "Clear misleading cross-style measured temperature source when Log Shot temperature is manually edited",
+      "state": "READY",
+      "merged_source_sha": "a82ef21e94d38b851b92bd9e7df7bf7f57ec4171",
+      "scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "tests": [
+        "Six R197 synthetic direct CloudApp negative/positive regressions PASS in corrected exact PR head and actual merged source: changed temperature, unchanged notes, programmatic readDraft fallback, grind-only, same-style and absent optional temperature. Original private History, all five unrated taste inputs and source measurements unchanged.",
+        "Initial exact PR-head Node22 FAILED three tests due Fahrenheit/Celsius synthetic fixture assumptions, corrected in a test-only SAME-COMMIT journal update. Corrected exact-head and merged Node22 each 4012 PASS/zero FAIL/six intentional SKIP; exact-head and merged Chromium/390px/browser/offline and governance SUCCESS; isolated SQL/JWT/privacy and source security SUCCESS on PR head.",
+        "Frozen603 intentionally SKIPPED, NOT PASS; no empirical espresso taste improvement or real-member incident asserted."
+      ],
+      "ci_runs": [
+        43129486597,
+        43129486649,
+        43129486507,
+        43129486590,
+        43129486625,
+        43130016357,
+        43130016313,
+        43130016530
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Display-only provenance correctness for manual Log Shot optional-temperature edit, no recommendation/taste/equipment/Slow Feed, stored shot/notes, Auth, RLS or Locked numeric policy changes. Development-only READY; not deployed or published; separate owner release grant required.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-33-r131-99-selected-unnamed-full-decaf",
+      "issue": 33,
+      "pr": 2141,
+      "title": "Preserve explicit Swiss Water decaffeination from an exact selected unnamed full-decaf product introduction and its own method accordion",
+      "state": "READY",
+      "merged_source_sha": "52a88e73ae700cd674370a3d726b53185501fad9",
+      "scope_paths": [
+        "src/server/coffee-direct-product-prose.mjs"
+      ],
+      "tests": [
+        "R131 original603 #99 current exact DEKAF Guatemala Finca Santa Isabel selected H1, medium, origin, three notes and own Swiss Water accordion verified; PR-head initial strict actual source FAILED sole missing decaffeination_method, no SEO/cross-coffee inference.",
+        "R131 generic source fix for affirmative 'this decaf single origin gem' selected paragraph, strict current H1, own method accordion, mixed-caf exclusion; full original603 not certified.",
+        "PR-head after narrow mixed-caf guard exact chosen current official+actual parser run 43131626018 SUCCESS: 12 focused source/negative tests, all direct current fields including Water Process, Add Coffee+Source Review and strict SHA afterproof PASS; raw chosen HTML 746313 bytes SHA256 3e437cf166bb417c08b9886ebf0f0f9731661c60c095b219c4471a8254493872; artifact 13905098187 independent ZIP SHA256 0d936bff042929d2f6f95a44b52032b08436ff2afe2eb50ec36eb03135ebb4e8.",
+        "Other applicable exact PR-head CI and exact post-merge CI still pending; no release authority, no READY until source and governance completed.",
+        "Exact NONFORCE merged development SHA 52a88e73ae700cd674370a3d726b53185501fad9 read back, selected runtime blob 60b0d902e0ff0f2fc9a5763c5877ebcbc725a39c, original immutable CSV blob 3e0d3036ea727de091f304f538c6de2dfcaa10d6 unchanged. All 317 other/current item statuses preserved at merge; concurrent #455 R197 READY and #1938 BLOCKED retained.",
+        "Exact merged official current #99 source/Add Coffee/Source Review run43132378071 SUCCESS 12 focused positive and adversarial tests; real chosen H1/medium/Guatemala/Keller and all 3 notes + separate Water Process, zero conflicts/SEO, no guessed green processing. Strict afterproof source_sha exactly merged commit, failures [], original603 manual_certified=0.",
+        "Independently downloaded exact MERGED artifact13905314548: ZIP 113348 bytes SHA256 56697b20d2a3a76f227315658c147d5225ac23e10fd2f99edf68fd9fe1c9ebeb matching provider. Raw exact official selected HTML 746315 bytes SHA256 07738886080d035e28da0509fea717de298fb630f1d247e3119378d94963cdc6; source JSON SHA256 6e03f3e45a8055f7f10265e0039fd24234be49ca1eb41b8f3a9c1e90c5a7909f; afterproof SHA256 87806196d32cd9c38049cc42d6ca825d002fcfa038c6b38d9f7ab1cbea6307b4.",
+        "Exact MERGED Node/lint run43132377915 SUCCESS 4030 tests / 4024 PASS / 0 FAIL / 6 intentional SKIP, lint PASS. Cloud/mobile43132377988, approval43132378241, Python43132377982 SUCCESS; PR-head isolated SQL43131788998 SUCCESS and official private source43131789002 SUCCESS. Merged public roaster probe43132377952 and source acceptance43132378027 SKIPPED (not PASS); frozen603 replay likewise SKIPPED. No separate signed-in GoTrue/device claim."
+      ],
+      "ci_runs": [
+        43131324048,
+        43131556461,
+        43131626018,
+        43131626280,
+        43131789093,
+        43131789343,
+        43131788983,
+        43131789133,
+        43131788998,
+        43131789030,
+        43131789002,
+        43132378071,
+        43132378241,
+        43132377915,
+        43132377988,
+        43132377982
+      ],
+      "blockers": [],
+      "owner_source": "Issue #33 owner-authorized original603 exact selected source correction; no deployment/production/provider writes permitted.",
+      "notes": "NARROW VERIFIED READY DEVELOPMENT ONLY for newly repaired exact selected unnamed full-decaf witness; NOT part of previously frozen READY42 batch or any authorized Netlify publication. Separate future owner release approval required. Original603-wide individual semantic certification remains IN_PROGRESS and Issue #33 stays OPEN. No production/provider/SQL/Edge/Auth/member data write.",
+      "production_deployed": false
     }
   ],
   "history": [
@@ -12110,6 +13798,219 @@
         "DIC-Q-509-account-delete-coffee-fk"
       ],
       "receipt": "docs/releases/2026-11-10_READY5_DEPLOYED_VERIFIED.md"
+    },
+    {
+      "id": "DIC-20261110-READY4-28",
+      "state": "DEPLOYED",
+      "tested_source_sha": "925c957a84d3f3e83cd15f062b7f78189adfc4cb",
+      "release_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
+      "netlify_deploy_id": "6af2ad72c2aa765f588abc75",
+      "deployed_at_utc": "2026-11-10T05:37:05.508Z",
+      "item_ids": [
+        "DIC-Q-1756-admin-signup-approval-retire-invites",
+        "DIC-Q-455-new-shot-timestamp-replay-recency",
+        "DIC-Q-509-account-delete-null-actor-retry-guard",
+        "DIC-Q-509-private-delete-definer-execute-acl"
+      ],
+      "receipt": "docs/releases/2026-11-10_READY4_DEPLOYED_VERIFIED.md"
+    },
+    {
+      "date": "2026-11-10",
+      "issue": 509,
+      "item_id": "DIC-Q-509-import-credential-field-separator-guard",
+      "state": "READY",
+      "source_sha": "62a1eac89f4653545a7bffe91e4dace3a2740da4",
+      "evidence": "docs/audits/issue509-run153-exact-source-ci-closure-2026-11-10.json",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-10",
+      "issue": 455,
+      "item_id": "DIC-Q-455-cross-style-recorded-control-evidence-guard",
+      "state": "READY",
+      "source_sha": "56361886c96c0230a2cc547b1437c7fcfb907066",
+      "evidence": "docs/workstreams/ops-issue455-r172-final-verification-20261110.md",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-10",
+      "issue": 455,
+      "item_id": "DIC-Q-455-temperature-recorded-grinder-evidence-guard",
+      "state": "READY",
+      "source_sha": "7086f5990e330ebaf08ecde54404a631e722a9c6",
+      "evidence": "docs/workstreams/issue-455.md",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-11",
+      "issue": 455,
+      "item_id": "DIC-Q-455-edited-five-taste-feedback-cache-refresh",
+      "state": "READY",
+      "source_sha": "4b19def81913686c09e7ece03133bbc20e6de199",
+      "evidence": "docs/workstreams/issue-455.md",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-11",
+      "issue": 33,
+      "item_id": "DIC-Q-33-original603-542-selected-story-stale-seo-flavor-guard",
+      "state": "READY",
+      "source_sha": "44768f845009a47f6e088790cb19dcde8a3fdf87",
+      "evidence": "docs/audits/issue33-r104-542-selected-current-verified-20261111.json",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-11",
+      "issue": 455,
+      "item_id": "DIC-Q-455-green-timestamp-evidence-veto",
+      "state": "READY",
+      "source_sha": "ef669d3dd6203e206421e4f5858678da3eeab706",
+      "evidence": "docs/workstreams/issue-455.md",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-11",
+      "issue": 455,
+      "item_id": "DIC-Q-455-original-calibration-success-evidence",
+      "state": "READY",
+      "source_sha": "62fd66e9121dece04e244590aa7341d58fb7341b",
+      "evidence": "docs/workstreams/issue-455.md",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-11",
+      "issue": 33,
+      "item_id": "DIC-Q-33-original603-550-geographic-duplicate-suffix",
+      "state": "READY",
+      "source_sha": "b4b480ae041ed769654c240a6dc56bfba03d865c",
+      "evidence": "docs/audits/issue33-r107-550-current-selected-verified-20261111.json",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-11",
+      "issue": 455,
+      "item_id": "DIC-Q-455-sweetness-original-calibration-comparison",
+      "state": "READY",
+      "source_sha": "6d386d4e41d09c12ec0487dc7e222e74f5e277de",
+      "evidence": "docs/workstreams/issue-455.md",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-11",
+      "issue": 455,
+      "item_id": "DIC-Q-455-last-rated-original-calibration",
+      "state": "READY",
+      "source_sha": "cbf95b0baf00d80d0f7c90ee4045122e19785ca9",
+      "evidence": "docs/workstreams/ops-issue455-r180-last-rated-original-calibration-20261111.md",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-11",
+      "issue": 455,
+      "item_id": "DIC-Q-455-outlier-original-calibration-quorum",
+      "state": "READY",
+      "source_sha": "d565bd905dd536d3fed57f371597350cd5d8871c",
+      "evidence": "docs/workstreams/ops-issue455-r182-outlier-calibration-20261111.md",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-11",
+      "issue": 455,
+      "item_id": "DIC-Q-455-original-calibration-grinder-guidance",
+      "state": "READY",
+      "source_sha": "be6ad8df744305c3cb95488f1d2ca8b79dc9dd06",
+      "evidence": "docs/workstreams/ops-issue455-r183-final-verification-20261111.md",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-11",
+      "issue": 455,
+      "item_id": "DIC-Q-455-similar-coffee-original-calibration",
+      "state": "READY",
+      "source_sha": "d936f59cb31c7399fab8e779ac5c8517a939c2c7",
+      "evidence": "docs/workstreams/ops-issue455-r184-final-verification-20261111.md",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-11",
+      "issue": 455,
+      "item_id": "DIC-Q-455-make-current-original-calibration",
+      "state": "READY",
+      "source_sha": "2a2249923ffcd2cf052b4bd2769c9d46446352ba",
+      "evidence": "docs/workstreams/ops-issue455-r185-final-verification-20261111.md",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-11",
+      "issue": 455,
+      "item_id": "DIC-Q-455-prefill-original-calibration",
+      "state": "READY",
+      "source_sha": "6e355b3f1f4b2133def9d0074caa6520d543a5a2",
+      "evidence": "docs/workstreams/ops-issue455-r186-final-verification-20261111.md",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-11",
+      "issue": 455,
+      "item_id": "DIC-Q-455-prefill-valid-historical-range",
+      "state": "READY",
+      "source_sha": "1e2430b745c5d2f749f347aa26340fdec7fb039f",
+      "evidence": "docs/workstreams/ops-issue455-r191-final-reconciliation-20261111.md",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-11",
+      "issue": 455,
+      "item_id": "DIC-Q-455-crossstyle-original-calibration",
+      "state": "READY",
+      "source_sha": "9c335bacb2d7aa7455d63a1e153532c5fdb754fc",
+      "evidence": "docs/workstreams/ops-issue455-r191-final-reconciliation-20261111.md",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-11",
+      "issue": 455,
+      "item_id": "DIC-Q-455-overview-original-calibration-success",
+      "state": "READY",
+      "source_sha": "4302d0d1e86b874903d450262190ba4e2847d5cd",
+      "evidence": "docs/workstreams/ops-issue455-r192-final-verification-20261111.md",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-11",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r194-legacy-advanced-optional-guard",
+      "state": "READY",
+      "source_sha": "a958dd8ac160a8e41d765b806e137df50f7b7821",
+      "evidence": "docs/workstreams/ops-issue455-r194-final-verification-20261111.md",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-11",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r195-temperature-prefill-provenance",
+      "state": "READY",
+      "source_sha": "e6c7b538fff018301e48124d7c394dcbbbe795b9",
+      "evidence": "docs/workstreams/ops-issue455-r195-final-verification-20261111.md",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-11",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r196-temperature-recommendation-clears-history-origin",
+      "state": "READY",
+      "source_sha": "02d96594e4d8461a88c08d97be607a808626c0c2",
+      "evidence": "docs/workstreams/ops-issue455-r196-final-verification-20261111.md",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-12",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r197-manual-temperature-provenance",
+      "state": "READY",
+      "source_sha": "a82ef21e94d38b851b92bd9e7df7bf7f57ec4171",
+      "evidence": "docs/workstreams/ops-issue455-r197-final-verification-20261111.md",
+      "production_deployed": false
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
