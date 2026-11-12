@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "review_run": "R155",
+  "reviewed_at_utc": "2026-11-12",
+  "scope": "ONE_ORIGINAL603_EXACT_SELECTED_PRODUCT_ONLY_NOT_603_CERTIFICATION",
+  "original_case_number": 176,
+  "coffee": "Mexico Finca Santa Cruz Geisha",
+  "roaster": "Kings Peak Coffee Roasters",
+  "immutable_original": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "csv_oracle_scorer_modified": false
+  },
+  "mandatory_preflight": {
+    "first_live_development_sha": "e7b85f07e652242c6507a9566d2eddc42c0c815a",
+    "exact_prefight_file_git_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "verified_independent_blob_contents_equal": true,
+    "aftermerge_rechecked_sha": "6c3479523fe2bb7f1a28c61d4993502ad6a0e958",
+    "same_commit_journal": "docs/workstreams/ops-issue33-r155-176-20261112.md"
+  },
+  "current_selected_source": {
+    "url": "https://kingspeakcoffee.com/products/mexico-nayarit-anaerobic-process",
+    "selected_product_h1": "Mexico Finca Santa Cruz Geisha",
+    "roaster": "Kings Peak Coffee Roasters",
+    "html_size_bytes": 199929,
+    "html_sha256": "7656a1b4a9438e641e8a0adc287054ae052423dad6f7a63ac1549f6045facf6a",
+    "direct_fields": {
+      "name": "Mexico Finca Santa Cruz Geisha",
+      "origin": "Chiapas, Mexico",
+      "producer": "José Argüello",
+      "farm": "Finca Santa Cruz",
+      "variety": "Geisha",
+      "process": "Washed",
+      "tasting_notes": "Sweet berries, Honey & Fig"
+    },
+    "parsed_fields": {
+      "name": "Mexico Finca Santa Cruz Geisha",
+      "roaster": "Kings Peak Coffee Roasters",
+      "producer": "José Argüello",
+      "tasting_notes": "Sweet berries, Honey & Fig",
+      "origin": "Chiapas, Mexico",
+      "process": "Washed",
+      "variety": "Geisha"
+    },
+    "unknown_unpublished": [
+      "roast_level",
+      "elevation_m",
+      "decaffeination_method",
+      "release_label"
+    ],
+    "conflicts": [],
+    "seo_fallback_fields": [],
+    "identity_confirmed": true,
+    "add_coffee_ui_rendered": true,
+    "source_review_rendered": true,
+    "critical_exception": "The recycled Nayarit/anaerobic product URL slug is stale. Exact current selected H1/direct own product identify Chiapas Finca Santa Cruz Geisha and washed processing after in-cherry fermentation; neither stale SKU/SEO nor unrelated product supplies fields."
+  },
+  "implementation": {
+    "source_pr": 2323,
+    "reviewed_head_sha": "c3c286091e79ad8482fc636ad016e8cc5512c450",
+    "reviewed_pr_test_checkout_sha": "776fa5e31d20b90f30804b9d517e43ec39ab745f",
+    "nonforce_merged_sha": "6c3479523fe2bb7f1a28c61d4993502ad6a0e958",
+    "scope_changed_files": [
+      ".github/workflows/issue33-r155-176.yml",
+      "scripts/audit/issue33-r155-176-check.mjs",
+      "tests/coffee-issue33-r155-176.test.mjs",
+      "docs/workstreams/ops-issue33-r155-176-20261112.md"
+    ],
+    "all_four_merged_blobs_identical_to_reviewed": true,
+    "app_runtime_changed": false,
+    "normal_merge_message_skip_netlify": true
+  },
+  "exact_source_evidence": {
+    "pr_head": {
+      "official_run_id": 43285775904,
+      "focused_tests_passed": 12,
+      "focused_tests_failed": 0,
+      "strict_afterproof_passed": true,
+      "applicable_ci_success": true,
+      "frozen603": "SKIPPED_NOT_PASS"
+    },
+    "merged": {
+      "official_run_id": 43286409875,
+      "node_lint_id": 43286409964,
+      "cloud_mobile_id": 43286410053,
+      "python_id": 43286410014,
+      "approval_id": 43286409952,
+      "official_focused_tests_passed": 12,
+      "official_focused_tests_failed": 0,
+      "strict_afterproof_passed": true,
+      "afterproof_failures": [],
+      "node_tests_passed": 4359,
+      "node_tests_failed": 0,
+      "node_tests_intentionally_skipped": 6,
+      "lint_passed": true,
+      "build_passed": true,
+      "all_applicable_checks_success": true,
+      "broad_public_probe": "SKIPPED_NOT_PASS",
+      "original_frozen603": "NOT_RUN_NOT_CERTIFIED"
+    },
+    "hosted_artifact": {
+      "workflow_run_id": 43286409875,
+      "artifact_id": 13974986849,
+      "zip_sha256": "437291a8a033f1aea1744da5c2573dfb58ff6620ec3d011cb20a238145f442eb",
+      "github_digest_matches_independent_local_hash": true,
+      "raw_html_sha256": "7656a1b4a9438e641e8a0adc287054ae052423dad6f7a63ac1549f6045facf6a",
+      "focused_evidence_sha256": "81e2e7b10d45bc10bad1834400ed236437ca9816e37aad8b6ad801c29248f203",
+      "strict_afterproof_sha256": "7b1927ef052537d3b1c0a5c151b77115a98dd0b01bad52017c683fbfc2b17aed",
+      "afterproof_source_sha": "6c3479523fe2bb7f1a28c61d4993502ad6a0e958"
+    }
+  },
+  "disposition": {
+    "single_selected_original_case": "VERIFIED_SOURCE_BOUND",
+    "whole_issue": "OPEN_IN_PROGRESS",
+    "all603_manually_certified": false,
+    "queue_promotion": false,
+    "production_release": false,
+    "hosted_provider_or_member_writes": false,
+    "real_authenticated_device_acceptance": "NOT_CLAIMED"
+  },
+  "known_distinct_unverified_original_cases": [
+    115,
+    152,
+    169,
+    171
+  ],
+  "next": "Continue with next separately unresolved original603 case (consider #178, respecting prior adjudications), preserving exact selected current official facts, source hashes and zero inferred missing facts. Distinct #267 V2 and #96 ownership."
+}
