@@ -58,3 +58,48 @@ test('#163 partial flavor list must not count complete',()=>{
 test('#163 direct selected Washed processing and EA decaf remain distinct',()=>{
  const x=source(page());assert.equal(x.direct.decafEA,true);assert.equal(x.direct.processing,true);
 });
+
+
+import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
+import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../site/cloud/coffee-url-autofill.js';
+const direct163='A true coffee aficionado’s decaf. The Colombia Las Montanas EA Natural Decaf is decaffeinated using Ethyl Acetate (EA), also commonly referred to as "sugarcane process decaf." In this method, the raw beans are steamed and caffeine is removed.';
+function parsed163(desc=direct163,name=chosen163.name,extra=''){
+ const html='<main><article class="product"><h1>'+name+'</h1><div class="product__description">'+
+ '<p>'+desc+'</p><p>Department: Caldas</p><p>Country: Colombia</p>'+
+ '<p>Altitude: 1,600 meters above sea level</p><p>Variety: Typica, Castillo</p>'+
+ '<p>Process: Washed</p><p>Roast Profile: Medium</p>'+
+ '<p>Flavor Notes: Lemon, Cherry, Balanced</p></div></article></main>'+extra;
+ return extractPublicCoffeeFacts(html,{source_url:chosen163.url});
+}
+test('#163 real parser selected trailing EA Natural Decaf restores Sugar Process independently of green Washed',()=>{
+ const p=parsed163();assert.equal(p.ok,true);
+ assert.equal(p.fields.name,chosen163.name);
+ assert.equal(p.fields.decaffeination_method,'Sugar Process',JSON.stringify(p.fields));
+ assert.equal(p.fields.process,'Washed');
+ assert.ok((p.source_facts||[]).some(f=>f.field==='decaffeination_method'&&/Ethyl Acetate/.test(f.value)));
+ assert.match(coffeeUrlPreviewMarkup(p),/Sugar Process/);
+ assert.ok(coffeeSourceReviewSnapshot({...p,source_url:chosen163.url}));
+});
+test('#163 other/regular/half-caf H1 cannot inherit decaf treatment',()=>{
+ for(const name of ['Regular Colombia Las Montanas','Half-Caf Colombia Las Montanas','Decaf Colombia Los Santos'])
+  assert.equal(parsed163(direct163,name).fields.decaffeination_method,undefined,name);
+});
+test('#163 different named decaf in own description is not selected current method',()=>{
+ assert.equal(parsed163(direct163.replace('Colombia Las Montanas EA Natural Decaf','Colombia Los Santos EA Natural Decaf')).fields.decaffeination_method,undefined);
+});
+test('#163 education/marketing alone cannot infer selected decaf process',()=>{
+ assert.equal(parsed163('Many Colombian coffees are decaffeinated using Ethyl Acetate (EA) from sugarcane.').fields.decaffeination_method,undefined);
+});
+test('#163 historical prior lot EA process cannot be inherited',()=>{
+ assert.equal(parsed163(direct163.replace('The Colombia Las Montanas','Previously, the Colombia Las Montanas')).fields.decaffeination_method,undefined);
+});
+test('#163 unrelated aside cannot supply missing selected EA method',()=>{
+ assert.equal(parsed163('The selected method is not published.',chosen163.name,'<aside>'+direct163+'</aside>').fields.decaffeination_method,undefined);
+});
+test('#163 changed selected H1 is not rescued by old selected source text',()=>{
+ assert.equal(parsed163(direct163,'Decaf Colombia Las Montanas 2027 Lot').fields.decaffeination_method,undefined);
+});
+test('#163 opposing own Swiss Water decaf evidence must leave conflict blank',()=>{
+ const p=parsed163(direct163+' This coffee is decaffeinated using Swiss Water Process.');
+ assert.equal(p.fields.decaffeination_method,undefined,JSON.stringify(p.fields));
+});

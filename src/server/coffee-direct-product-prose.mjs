@@ -125,9 +125,18 @@ const SELECTED_NAME_DECAF_SENTENCE=/^([\p{L}\p{M}\d][\p{L}\p{M}\d'’ -]{2,100}?
 function currentNamedDecafMethod(name,line){
  const subject=String(name||'').split(/[,;|]/u)[0].trim();
  if(subject.length<4||subject.length>90||!decafOnlyCoffee(name))return false;
+ // A selected H1 "Decaf [coffee]" can describe that SAME product as
+ // "The [coffee] EA Natural Decaf is decaffeinated using ...". Do not
+ // admit other product identities, vague chemistry or unbound page SEO.
+ const prefixDecaf=/^decaf(?:feinated)?\s+/iu.test(subject);
+ const core=fold(subject.replace(/^decaf(?:feinated)?\s+/iu,''));
  return String(line).split(/(?<=[.!?])\s+/u).slice(0,8).some(sentence=>{
   const claim=sentence.trim().match(SELECTED_NAME_DECAF_SENTENCE);
-  return Boolean(claim&&fold(claim[1])===fold(subject));
+  if(!claim)return false;
+  if(fold(claim[1])===fold(subject))return true;
+  const reordered=fold(claim[1]).replace(/^the\s+/u,'')
+   .replace(/\s+(?:(?:ea|e a)\s+)?(?:natural\s+)?decaf(?:feinated)?$/u,'');
+  return prefixDecaf&&core.length>=8&&reordered===core;
  });
 }
 // Some Shopify product-only accordions put their current treatment title
@@ -433,6 +442,21 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
    if(decafEvidence.size<4)decafEvidence.add(namedWater[0]);
    else decafEvidenceOverflow=true;
   }
+  // Explicit directly named selected coffee methods may sit inside
+  // a longer paragraph. Inspect bounded sentences of that scoped P only;
+  // retain exact chosen identity, nonhistorical and method conflict guards.
+  if(decafOnlyCoffee(name)&&b.tag==='p'&&!b.educational&&line.length<=1200&&
+     !NONCURRENT_DECAF_METHOD.test(line)&&
+     !/^(?:faq|frequently asked questions|common questions|decaf process education)$/iu.test(String(b.section||'').trim()))
+   for(const sentence of line.split(/(?<=[.!?])\s+/u).slice(0,8)){
+    const statement=sentence.trim();
+    if(statement.length<35||statement.length>360||
+       !currentNamedDecafMethod(name,statement)||
+       !inferDecaffeinationMethod({name,selectedMethod:statement})||
+       decafEvidence.has(statement))continue;
+    if(decafEvidence.size<4)decafEvidence.add(statement);
+    else decafEvidenceOverflow=true;
+   }
   // A decaf identity plus a current selected-product sentence is required.
   // Reuse the conservative method classifier; if multiple incompatible
   // methods are printed, the caller withholds autofill and keeps both sources.
