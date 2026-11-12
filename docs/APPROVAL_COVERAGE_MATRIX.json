@@ -2,7 +2,7 @@
   "schema_version": 1,
   "authority": "docs/MASTER_SPECIFICATION.md + docs/DECISION_LEDGER.json; explicit later owner supersessions govern",
   "coverage_policy": "New current_owner_ keys require deliberate inventory classification. Source assertions are not proof of every runtime or device behavior. Preserve all historical evidence in the exact archived matrix.",
-  "reconciled_at_utc": "2026-11-10",
+  "reconciled_at_utc": "2026-11-12T01:59:44.617Z",
   "historical_snapshot": "docs/archive/2026-10-23-reconciliation/APPROVAL_COVERAGE_MATRIX.previous.json",
   "historical_snapshot_blob_sha": "a0c0aa74b70152b4a8fc42393aa7b266a3290202",
   "owner_decision_key_inventory": [
@@ -2275,13 +2275,15 @@
   },
   "current_owner_admin_web_push_20261110": {
     "decision_id": "ACCESS-ADMIN-HOMESCREEN-WEB-PUSH-20261110",
-    "state": "TESTING_VAULT_EDGE_SIGNING",
+    "state": "DEPLOYED_DEVICE_ACCEPTANCE_PENDING",
     "issue": 1938,
     "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1938",
     "scope": "Opt-in off-screen Apple Home Screen Web Push for action-required verified signup approvals, pending/conflict coffees, unfinished deletions; private payload prohibited; server role gating, dedup and opt-out required.",
     "source_branch": "feat/admin-web-push-1938",
-    "real_device_acceptance": "NOT_PERFORMED",
-    "provider_secrets": "SUPABASE_VAULT_P256_PENDING_RUNTIME; NETLIFY_NO_PRIVATE_CREDENTIALS_REQUIRED",
-    "publication": "OWNER_AUTHORIZED_ONE_BATCH_WITH_ALL_READY_NOT_YET_RELEASED"
+    "real_device_acceptance": "NOT_PERFORMED_ZERO_SUBSCRIPTIONS_UNTIL_ADMIN_OPT_IN",
+    "provider_secrets": "SUPABASE_EDGE_SERVICE_ROLE_AND_VAULT_P256_PRIVATE_ONLY; NETLIFY_HAS_ONLY_PUBLIC_SUPABASE_URL_AND_PUBLISHABLE_KEY",
+    "publication": "ONE_USE_GIT_CONNECTED_RELEASE_DIC-20261112-READY48PUSH-31_CURRENT_READY_6af51c834f09e4e2c0f203ea",
+    "verified_at_utc": "2026-11-12T01:59:44.617Z",
+    "tested_source_sha": "ad457f648bc72c2d79c24406766a64abd3acd835"
   }
 }
