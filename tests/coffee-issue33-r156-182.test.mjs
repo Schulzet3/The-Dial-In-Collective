@@ -53,6 +53,18 @@ test('#182 unrelated flavor labels are not used to fill a missing selected profi
  const variants=extractSelectedCoffeeRoastVariants({description:partial,options});
  assert.ok(!variants.length||!variants.find(v=>v.id==='medium-dark')?.fields.tasting_notes);
 });
+test('#182 unpublished selected roast flavor placeholders are rejected',()=>{
+ for(const missing of ['not published','flavor profile not published','notes not yet available',
+  'unknown','N/A','TBD','coming soon','not specified','to be determined']){
+  const input=description.replace('Medium Dark: '+original182.mediumDark,'Medium Dark: '+missing);
+  const optionsFound=extractSelectedCoffeeRoastVariants({description:input,options});
+  assert.equal(optionsFound.length,0,'false roast sensory evidence: '+missing);
+ }
+});
+test('#182 direct published alternatives survive placeholder veto unaltered',()=>{
+ const choices=extractSelectedCoffeeRoastVariants({description,options});
+ assert.deepEqual(choices.map(v=>v.fields.tasting_notes),[original182.medium,original182.mediumDark]);
+});
 test('#182 other variant options and stale metadata must not force dark or decaf',()=>{
  const p=extractPublicCoffeeFacts(page(),{source_url:original182.url});
  assert.ok(!p.ok||(!p.fields.decaffeination_method&&p.fields.roast_level!=='Dark'));

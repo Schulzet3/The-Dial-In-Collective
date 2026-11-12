@@ -72,7 +72,12 @@ function printedRoastNotes(description, offeredIds){
   const next=labels[index+1];
   const value=excerpt.slice(item.end,next?next.at:excerpt.length).trim();
   // A complete bounded notes line is a value, not a paragraph or a URL.
-  if(value.length>=3&&value.length<=240&&!/https?:\/\//i.test(value))notes.set(item.id,value);
+  // No-data placeholders are never flavor notes for any purchase roast.
+  // In particular do not transform "flavor profile not published" into a
+  // suggested tasting note or borrow a neighboring profile's words.
+  const unpublished=/^(?:(?:tasting|flavou?r)\s+(?:notes?|profile)\s*(?:(?:are|is)\s+)?)?(?:not\s+(?:yet\s+)?(?:published|available|provided|listed|specified)|(?:currently\s+)?unavailable|unknown|none|tbd|tba|to\s+be\s+determined|coming\s+soon|n\s*\/\s*a)\s*[.!]?$/i;
+  if(value.length>=3&&value.length<=240&&!/https?:\/\//i.test(value)&&!unpublished.test(value))
+   notes.set(item.id,value);
  }
  return notes;
 }
