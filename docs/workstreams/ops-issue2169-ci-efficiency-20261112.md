@@ -1,0 +1,7 @@
+# #2169 — CI efficiency and bounded automatic recovery (Nov 12, 2026) [skip netlify]
+
+- Authority: owner asks to build revised priorities FIRST, before a new owner-authorized end-to-end publication. Branch base fed52d97f0e4fe2c02b19c41e2e188553dfeadd5; no Netlify publication, owner grant, candidate staging, Auth, SQL, member data or provider mutations.
+- Existing VERIFIED baseline: risk-based source scope, one applicable app build, source-bound READY evidence reuse, one chat publish controller, distinct active automation workstreams; no new monitor or approval steps.
+- Change: route the existing three npm ci invocations in two existing CI workflows through one zero-extra-work success path. Retry only a confidently detected transient registry/network transport failure, once, with the identical locked npm ci command. Failing Node tests, authorization/security, invalid locks and unknown error classes stop immediately. No other CI job/test/build/approval is rerun and no GitHub Actions/Netlify publisher retry occurs.
+- New negative tests verify no retry for source/credential/test errors, bounded transport retry, no leaked raw install logs, and unchanged build/test counts. Source and tests are in SAME commit. [skip netlify]
+- Pending: exact PR-head CI, read back installed byte hashes, nonforce integration to development, exact merged CI, then independently inspect main release controls before the separately authorized end-to-end publish. Safe work only; #2169 remains OPEN for new release acceptance and platform protection limits.
