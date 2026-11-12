@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "run": "R143",
+  "date_utc": "2026-11-12",
+  "status": "VERIFIED_ONE_SELECTED_ORIGINAL_DEVELOPMENT_ONLY",
+  "full_603_manual_certification": false,
+  "selected_original": {
+    "number": 122,
+    "archived_name": "Kenya - Kiambu: Malaki Estate AA",
+    "current_selected_h1": "Kenya - Kiambu: Malaki Estate AA *Final Batch*",
+    "roaster": "Favor Coffee Company",
+    "original_exact_official_url": "https://favor.coffee/products/kenya-kiambu-malaki-estate",
+    "historical_decision": "QUALIFIED_CONTEXT_OR_SEMANTIC_REVIEW_REQUIRED",
+    "current_suffix": "availability label, not harvest or identity transfer"
+  },
+  "original_immutable": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "oracle_scorer_captures_modified": false
+  },
+  "source_review": {
+    "starting_branch_sha": "48ea950cd2942f03e1275ef4e5d0070f0416c0ad",
+    "source_pr": 2235,
+    "final_pr_head": "05df610d2d82c20fc235024f23270d5a962b389c",
+    "safe_nonforce_squash_merge_sha": "40342a453a47209cb19a5c7883e19fe3bc31f5f0",
+    "identical_head_merged_tree": "099f8dc01f2a2be07ee2fc7597c155a1a9103d74",
+    "changed_runtime_parser": false,
+    "changed_scoped_audit_driver": true,
+    "same_commit_scoped_journal": true
+  },
+  "official_exact_selected": {
+    "run_id": 43198937494,
+    "source_sha": "40342a453a47209cb19a5c7883e19fe3bc31f5f0",
+    "status": "FETCHED_AND_PARSER_OK_STRICT_PASS",
+    "focused_tests_pass": 15,
+    "focused_tests_fail": 0,
+    "afterproof_passed": true,
+    "afterproof_failures": [],
+    "exact_original_url": true,
+    "selected_heading_verified": true,
+    "identity_qualification": "current_selected_final_batch_same_exact_source_and_own_facts_122",
+    "raw_html_bytes": 362774,
+    "raw_html_sha256": "ccb6b105a7aff3219de141884319f9f4f1ef875239ff0d18c0670ca44693b8ae",
+    "fields": {
+      "name": "Kenya - Kiambu: Malaki Estate AA *Final Batch*",
+      "roaster": "Favor Coffee Company",
+      "producer": "Jessica & Florence Marigi of Malaki Estate",
+      "origin": "Kiambu, Kenya",
+      "tasting_notes": "Lemon Lime Soda, Ruby Grapefruit, Raspberry",
+      "variety": "SL-28, SL-34",
+      "elevation_m": "1900 masl",
+      "process": "Washed"
+    },
+    "historical_founder_not_current_producer": "Edward Marigi",
+    "missing_fields_left_blank": [
+      "roast_level",
+      "decaffeination_method",
+      "harvest"
+    ],
+    "current_conflicts": [],
+    "seo_fallback_fields": [],
+    "add_coffee_rendered": true,
+    "source_review_rendered": true
+  },
+  "artifact": {
+    "run_id": 43198937494,
+    "id": 13934591156,
+    "zip_bytes": 50481,
+    "zip_sha256": "a1b7666e8795af6d37765fbcf7c047e94762c0ce5a2cdae7774f5a29e821518f",
+    "github_digest_matches_independent_download": true,
+    "raw_html_sha256": "ccb6b105a7aff3219de141884319f9f4f1ef875239ff0d18c0670ca44693b8ae",
+    "evidence_json_sha256": "81bed424fecf2bc00945a9d53de737fc4ee6f5191c6c5c8385bfabdb38446914",
+    "strict_afterproof_json_sha256": "3d4e6011df81f291eb16b352d417306dd5c1159c686bd5338931112367d376d9"
+  },
+  "checks": {
+    "pr_head": {
+      "official": 43198332379,
+      "node_lint": 43198332413,
+      "python": 43198332304,
+      "isolated_sql": 43198332364,
+      "mobile_ux": 43198332482,
+      "approval": 43198332583,
+      "source_archive": 43198332580
+    },
+    "merged": {
+      "official": 43198937494,
+      "node_lint": 43198937147,
+      "python": 43198937396,
+      "mobile_ux": 43198937631,
+      "approval": 43198937203
+    },
+    "node_total": 4180,
+    "node_pass": 4174,
+    "node_fail": 0,
+    "node_intentional_skip": 6,
+    "lint": "PASS",
+    "global_frozen603": "SKIPPED_NOT_FULL_CERTIFICATION",
+    "broad_public_probe": "SKIPPED_NOT_FULL_CERTIFICATION",
+    "signed_in_gotrue_device_test": "NOT_PERFORMED"
+  },
+  "failure_history": [
+    {
+      "run_id": 43197022320,
+      "conclusion": "FAILED",
+      "finding": "current official H1 contains *Final Batch*; exact-original-identity guard and HTML ampersand check rejected correct selected parser",
+      "fix": "bounded same-source current suffix qualification and direct producer label entity handling"
+    },
+    {
+      "run_id": 43198206506,
+      "conclusion": "FAILED",
+      "finding": "obsolete positive fixture rejected correct selected Final Batch text; guarded public step SKIPPED",
+      "fix": "corrected fixture; reran source-bound 15/15 and public official to successful PR head and merge"
+    }
+  ],
+  "release_queue": {
+    "modified": false,
+    "new_ready_item": false,
+    "reason": "test, audit-guard, workflow and documentation changes only; no app runtime parser modification"
+  },
+  "boundaries": {
+    "issue33": "OPEN",
+    "issue267": "SEPARATE_V2_AUDIT",
+    "issue96": "SEPARATE_AUTH",
+    "draft115": "OFFICIAL_404_UNVERIFIED",
+    "no_netlify_release": true,
+    "production_provider_sql_auth_edge_member_writes": 0,
+    "forced_history": false,
+    "paid_services": false
+  },
+  "next_action": "Inspect fresh live development state and next nonoverlapping unresolved original product (e.g. #125 after confirming existing coverage); perform actual exact selected official HTTPS/parser/negative source tests, repair only reproduced source-backed generic defects; do not claim all 603 complete."
+}
