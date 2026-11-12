@@ -1,0 +1,950 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 189,
+  "project_ref": "azviqqejypsefzilgonr",
+  "source": {
+    "development": "8602400858b7e286df55aeeae22b3c80c5b473dc",
+    "main": "44372ffdbce3f2771c4c5349b66ee6b46cc56db4",
+    "release_production": "d0bc07df641af6411435daac74ee3cb16d1bdb61"
+  },
+  "provider": {
+    "status": "ACTIVE_HEALTHY",
+    "pg_version": "17.11.0.003",
+    "migrations": 66,
+    "active_edge_functions": 4
+  },
+  "method": "Complete live current enum/domain/range type definitions and 8 sequence parameters/ACL/dependencies. Individual Postgres md5 over row_to_json record and complete literal records saved. Read-only catalog only; no personal/Auth/member rows or credentials.",
+  "sql_query": "WITH ty AS (SELECT n.nspname schema,t.typname name,t.typtype kind,format_type(t.oid,NULL) full_type,pg_get_userbyid(t.typowner) owner,t.typacl::text acl,CASE WHEN t.typtype='e' THEN 'ENUM ('||(SELECT string_agg(quote_literal(enumlabel),', ' ORDER BY enumsortorder) FROM pg_enum WHERE enumtypid=t.oid)||')' ELSE format_type(t.typbasetype,t.typtypmod) END definition,(SELECT count(*) FROM pg_attribute a JOIN pg_class c ON c.oid=a.attrelid JOIN pg_namespace nn ON nn.oid=c.relnamespace WHERE a.atttypid=t.oid AND a.attnum>0 AND NOT a.attisdropped AND nn.nspname IN ('public','private')) app_columns FROM pg_type t JOIN pg_namespace n ON n.oid=t.typnamespace WHERE n.nspname IN ('auth','private','public','realtime','storage') AND t.typtype IN ('e','d','r','m')), seq AS (SELECT n.nspname schema,c.relname name,pg_get_userbyid(c.relowner) owner,c.relacl::text acl,format_type(s.seqtypid,NULL) data_type,s.seqstart,s.seqincrement,s.seqmin,s.seqmax,s.seqcache,s.seqcycle,COALESCE(d.refobjid::regclass::text,'none') owned_by_table,COALESCE(a.attname,'none') owned_by_column,d.deptype dependency_type,pg_get_expr(ad.adbin,ad.adrelid) column_default FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace JOIN pg_sequence s ON s.seqrelid=c.oid LEFT JOIN pg_depend d ON d.objid=c.oid AND d.classid='pg_class'::regclass AND d.refclassid='pg_class'::regclass AND d.deptype IN ('a','i') LEFT JOIN pg_attribute a ON a.attrelid=d.refobjid AND a.attnum=d.refobjsubid LEFT JOIN pg_attrdef ad ON ad.adrelid=d.refobjid AND ad.adnum=d.refobjsubid WHERE c.relkind='S' AND n.nspname IN ('auth','private','public','realtime','storage')), p AS (SELECT n.nspname schema,c.relname name,r.role,has_sequence_privilege(r.role,c.oid,'USAGE') AS can_use,has_sequence_privilege(r.role,c.oid,'SELECT') AS can_select,has_sequence_privilege(r.role,c.oid,'UPDATE') AS can_update FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace CROSS JOIN (SELECT unnest(ARRAY['anon','authenticated','service_role']) role)r WHERE c.relkind='S' AND n.nspname IN ('auth','private','public','realtime','storage')), tb AS (SELECT n.nspname schema,c.relname name,r.role,c.relacl::text acl,c.relrowsecurity,has_table_privilege(r.role,c.oid,'SELECT') can_select,has_table_privilege(r.role,c.oid,'INSERT') can_insert,has_table_privilege(r.role,c.oid,'UPDATE') can_update FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace CROSS JOIN (SELECT unnest(ARRAY['anon','authenticated','service_role']) role) r WHERE (n.nspname='realtime' AND c.relname='subscription') OR (n.nspname='private' AND c.relname IN ('admin_access_events','admin_content_edits','dic_admin_delete_receipts','dic_coffee_audit','dic_signup_review_events','shot_audit'))), acl AS (SELECT n.nspname schema,pg_get_userbyid(d.defaclrole) grantor,d.defaclobjtype kind,d.defaclacl::text grants FROM pg_default_acl d LEFT JOIN pg_namespace n ON n.oid=d.defaclnamespace WHERE n.nspname IN ('auth','private','public','realtime','storage') OR d.defaclnamespace=0) SELECT jsonb_build_object('types',(SELECT jsonb_agg(to_jsonb(ty)||jsonb_build_object('md5',md5(row_to_json(ty)::text)) ORDER BY schema,name) FROM ty),'sequences',(SELECT jsonb_agg(to_jsonb(seq)||jsonb_build_object('md5',md5(row_to_json(seq)::text)) ORDER BY schema,name) FROM seq),'seq_privileges',(SELECT jsonb_agg(to_jsonb(p) ORDER BY schema,name,role) FROM p),'table_privileges',(SELECT jsonb_agg(to_jsonb(tb) ORDER BY schema,name,role) FROM tb),'default_acl',(SELECT jsonb_agg(to_jsonb(acl) ORDER BY schema,grantor,kind) FROM acl)) AS audit",
+  "counts": {
+    "types": 12,
+    "sequences": 8,
+    "sequence_privileges": 24,
+    "related_table_privileges": 21,
+    "default_acl": 15
+  },
+  "source_records": {
+    "types": [
+      {
+        "acl": null,
+        "md5": "c2811741dcc1f9c599be0a5c447973a3",
+        "kind": "e",
+        "name": "aal_level",
+        "owner": "supabase_auth_admin",
+        "schema": "auth",
+        "full_type": "auth.aal_level",
+        "definition": "ENUM ('aal1', 'aal2', 'aal3')",
+        "app_columns": 0
+      },
+      {
+        "acl": null,
+        "md5": "e926238209681efc91581b0607053e07",
+        "kind": "e",
+        "name": "code_challenge_method",
+        "owner": "supabase_auth_admin",
+        "schema": "auth",
+        "full_type": "auth.code_challenge_method",
+        "definition": "ENUM ('s256', 'plain')",
+        "app_columns": 0
+      },
+      {
+        "acl": null,
+        "md5": "bedf9e17c778dd5664c6f24d02edc31d",
+        "kind": "e",
+        "name": "factor_status",
+        "owner": "supabase_auth_admin",
+        "schema": "auth",
+        "full_type": "auth.factor_status",
+        "definition": "ENUM ('unverified', 'verified')",
+        "app_columns": 0
+      },
+      {
+        "acl": null,
+        "md5": "c924b1eb6bd8b5e1bdb2a0b41b073890",
+        "kind": "e",
+        "name": "factor_type",
+        "owner": "supabase_auth_admin",
+        "schema": "auth",
+        "full_type": "auth.factor_type",
+        "definition": "ENUM ('totp', 'webauthn', 'phone', 'recovery_code')",
+        "app_columns": 0
+      },
+      {
+        "acl": null,
+        "md5": "04f0e3e67c6791fa158007cc7ef04767",
+        "kind": "e",
+        "name": "oauth_authorization_status",
+        "owner": "supabase_auth_admin",
+        "schema": "auth",
+        "full_type": "auth.oauth_authorization_status",
+        "definition": "ENUM ('pending', 'approved', 'denied', 'expired')",
+        "app_columns": 0
+      },
+      {
+        "acl": null,
+        "md5": "235a09f17a6ef8262216aab94ed6a230",
+        "kind": "e",
+        "name": "oauth_client_type",
+        "owner": "supabase_auth_admin",
+        "schema": "auth",
+        "full_type": "auth.oauth_client_type",
+        "definition": "ENUM ('public', 'confidential')",
+        "app_columns": 0
+      },
+      {
+        "acl": null,
+        "md5": "a1d0fd00fd4bdb39698a2fbec9eb4569",
+        "kind": "e",
+        "name": "oauth_registration_type",
+        "owner": "supabase_auth_admin",
+        "schema": "auth",
+        "full_type": "auth.oauth_registration_type",
+        "definition": "ENUM ('dynamic', 'manual')",
+        "app_columns": 0
+      },
+      {
+        "acl": null,
+        "md5": "5fff1b2052369b7bccfb0765c43082ca",
+        "kind": "e",
+        "name": "oauth_response_type",
+        "owner": "supabase_auth_admin",
+        "schema": "auth",
+        "full_type": "auth.oauth_response_type",
+        "definition": "ENUM ('code')",
+        "app_columns": 0
+      },
+      {
+        "acl": null,
+        "md5": "2c6d04d4648360a14409808ff9fd152c",
+        "kind": "e",
+        "name": "one_time_token_type",
+        "owner": "supabase_auth_admin",
+        "schema": "auth",
+        "full_type": "auth.one_time_token_type",
+        "definition": "ENUM ('confirmation_token', 'reauthentication_token', 'recovery_token', 'email_change_token_new', 'email_change_token_current', 'phone_change_token')",
+        "app_columns": 0
+      },
+      {
+        "acl": null,
+        "md5": "b81122650af43cc25efa193507f0f2d0",
+        "kind": "e",
+        "name": "action",
+        "owner": "supabase_realtime_admin",
+        "schema": "realtime",
+        "full_type": "realtime.action",
+        "definition": "ENUM ('INSERT', 'UPDATE', 'DELETE', 'TRUNCATE', 'ERROR')",
+        "app_columns": 0
+      },
+      {
+        "acl": null,
+        "md5": "26cf3a77d6ea74e4ba9b883d1140824d",
+        "kind": "e",
+        "name": "equality_op",
+        "owner": "supabase_realtime_admin",
+        "schema": "realtime",
+        "full_type": "realtime.equality_op",
+        "definition": "ENUM ('eq', 'neq', 'lt', 'lte', 'gt', 'gte', 'in', 'like', 'ilike', 'is', 'match', 'imatch', 'isdistinct')",
+        "app_columns": 0
+      },
+      {
+        "acl": null,
+        "md5": "2c2dd55bcd194356849ea6bdd3c287b9",
+        "kind": "e",
+        "name": "buckettype",
+        "owner": "supabase_storage_admin",
+        "schema": "storage",
+        "full_type": "storage.buckettype",
+        "definition": "ENUM ('STANDARD', 'ANALYTICS', 'VECTOR')",
+        "app_columns": 0
+      }
+    ],
+    "sequences": [
+      {
+        "acl": "{supabase_auth_admin=rwU/supabase_auth_admin,dashboard_user=rwU/supabase_auth_admin,postgres=rwU/supabase_auth_admin}",
+        "md5": "c11e30fdf97b6b6fd73584b3c87b55f2",
+        "name": "refresh_tokens_id_seq",
+        "owner": "supabase_auth_admin",
+        "schema": "auth",
+        "seqmax": 9223372036854776000,
+        "seqmin": 1,
+        "seqcache": 1,
+        "seqcycle": false,
+        "seqstart": 1,
+        "data_type": "bigint",
+        "seqincrement": 1,
+        "column_default": "nextval('auth.refresh_tokens_id_seq'::regclass)",
+        "owned_by_table": "auth.refresh_tokens",
+        "dependency_type": "a",
+        "owned_by_column": "id"
+      },
+      {
+        "acl": null,
+        "md5": "de9c4bb5a1b19d9d0f02fd1c1a3633cf",
+        "name": "admin_access_events_id_seq",
+        "owner": "postgres",
+        "schema": "private",
+        "seqmax": 9223372036854776000,
+        "seqmin": 1,
+        "seqcache": 1,
+        "seqcycle": false,
+        "seqstart": 1,
+        "data_type": "bigint",
+        "seqincrement": 1,
+        "column_default": null,
+        "owned_by_table": "private.admin_access_events",
+        "dependency_type": "i",
+        "owned_by_column": "id"
+      },
+      {
+        "acl": null,
+        "md5": "25d4f62dd74647869b5489529ae75a8f",
+        "name": "admin_content_edits_id_seq",
+        "owner": "postgres",
+        "schema": "private",
+        "seqmax": 9223372036854776000,
+        "seqmin": 1,
+        "seqcache": 1,
+        "seqcycle": false,
+        "seqstart": 1,
+        "data_type": "bigint",
+        "seqincrement": 1,
+        "column_default": null,
+        "owned_by_table": "private.admin_content_edits",
+        "dependency_type": "i",
+        "owned_by_column": "id"
+      },
+      {
+        "acl": "{postgres=rwU/postgres}",
+        "md5": "c45b2bfa9924bed3cd6f2209bf544580",
+        "name": "dic_admin_delete_receipts_id_seq",
+        "owner": "postgres",
+        "schema": "private",
+        "seqmax": 9223372036854776000,
+        "seqmin": 1,
+        "seqcache": 1,
+        "seqcycle": false,
+        "seqstart": 1,
+        "data_type": "bigint",
+        "seqincrement": 1,
+        "column_default": null,
+        "owned_by_table": "private.dic_admin_delete_receipts",
+        "dependency_type": "i",
+        "owned_by_column": "id"
+      },
+      {
+        "acl": null,
+        "md5": "4f774e76e1cdf159b0db3bae6d05873e",
+        "name": "dic_coffee_audit_id_seq",
+        "owner": "postgres",
+        "schema": "private",
+        "seqmax": 9223372036854776000,
+        "seqmin": 1,
+        "seqcache": 1,
+        "seqcycle": false,
+        "seqstart": 1,
+        "data_type": "bigint",
+        "seqincrement": 1,
+        "column_default": null,
+        "owned_by_table": "private.dic_coffee_audit",
+        "dependency_type": "i",
+        "owned_by_column": "id"
+      },
+      {
+        "acl": null,
+        "md5": "299f0fd8188089f28b68da8e8889adb2",
+        "name": "dic_signup_review_events_id_seq",
+        "owner": "postgres",
+        "schema": "private",
+        "seqmax": 9223372036854776000,
+        "seqmin": 1,
+        "seqcache": 1,
+        "seqcycle": false,
+        "seqstart": 1,
+        "data_type": "bigint",
+        "seqincrement": 1,
+        "column_default": null,
+        "owned_by_table": "private.dic_signup_review_events",
+        "dependency_type": "i",
+        "owned_by_column": "id"
+      },
+      {
+        "acl": "{postgres=rwU/postgres,service_role=rU/postgres}",
+        "md5": "733805a09c9d100c647e6f81f9fa9185",
+        "name": "shot_audit_id_seq",
+        "owner": "postgres",
+        "schema": "private",
+        "seqmax": 9223372036854776000,
+        "seqmin": 1,
+        "seqcache": 1,
+        "seqcycle": false,
+        "seqstart": 1,
+        "data_type": "bigint",
+        "seqincrement": 1,
+        "column_default": null,
+        "owned_by_table": "private.shot_audit",
+        "dependency_type": "i",
+        "owned_by_column": "id"
+      },
+      {
+        "acl": "{supabase_realtime_admin=rwU/supabase_realtime_admin,postgres=rwU/supabase_realtime_admin,dashboard_user=rwU/supabase_realtime_admin,anon=U/supabase_realtime_admin,authenticated=U/supabase_realtime_admin,service_role=U/supabase_realtime_admin}",
+        "md5": "03242642cceb1e9c512dae6dddb161ed",
+        "name": "subscription_id_seq",
+        "owner": "supabase_realtime_admin",
+        "schema": "realtime",
+        "seqmax": 9223372036854776000,
+        "seqmin": 1,
+        "seqcache": 1,
+        "seqcycle": false,
+        "seqstart": 1,
+        "data_type": "bigint",
+        "seqincrement": 1,
+        "column_default": null,
+        "owned_by_table": "realtime.subscription",
+        "dependency_type": "i",
+        "owned_by_column": "id"
+      }
+    ],
+    "default_acl": [
+      {
+        "kind": "S",
+        "grants": "{postgres=rwU/supabase_auth_admin,dashboard_user=rwU/supabase_auth_admin}",
+        "schema": "auth",
+        "grantor": "supabase_auth_admin"
+      },
+      {
+        "kind": "f",
+        "grants": "{postgres=X/supabase_auth_admin,dashboard_user=X/supabase_auth_admin}",
+        "schema": "auth",
+        "grantor": "supabase_auth_admin"
+      },
+      {
+        "kind": "r",
+        "grants": "{postgres=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "schema": "auth",
+        "grantor": "supabase_auth_admin"
+      },
+      {
+        "kind": "S",
+        "grants": "{postgres=rwU/postgres,anon=rwU/postgres,authenticated=rwU/postgres,service_role=rwU/postgres}",
+        "schema": "public",
+        "grantor": "postgres"
+      },
+      {
+        "kind": "f",
+        "grants": "{postgres=X/postgres,service_role=X/postgres}",
+        "schema": "public",
+        "grantor": "postgres"
+      },
+      {
+        "kind": "r",
+        "grants": "{postgres=arwdDxtm/postgres,anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "schema": "public",
+        "grantor": "postgres"
+      },
+      {
+        "kind": "S",
+        "grants": "{postgres=rwU/supabase_admin,anon=rwU/supabase_admin,authenticated=rwU/supabase_admin,service_role=rwU/supabase_admin}",
+        "schema": "public",
+        "grantor": "supabase_admin"
+      },
+      {
+        "kind": "f",
+        "grants": "{postgres=X/supabase_admin,anon=X/supabase_admin,authenticated=X/supabase_admin,service_role=X/supabase_admin}",
+        "schema": "public",
+        "grantor": "supabase_admin"
+      },
+      {
+        "kind": "r",
+        "grants": "{postgres=arwdDxtm/supabase_admin,anon=arwdDxtm/supabase_admin,authenticated=arwdDxtm/supabase_admin,service_role=arwdDxtm/supabase_admin}",
+        "schema": "public",
+        "grantor": "supabase_admin"
+      },
+      {
+        "kind": "S",
+        "grants": "{postgres=rwU/supabase_admin,dashboard_user=rwU/supabase_admin}",
+        "schema": "realtime",
+        "grantor": "supabase_admin"
+      },
+      {
+        "kind": "f",
+        "grants": "{postgres=X/supabase_admin,dashboard_user=X/supabase_admin}",
+        "schema": "realtime",
+        "grantor": "supabase_admin"
+      },
+      {
+        "kind": "r",
+        "grants": "{postgres=a*r*wdDxtm/supabase_admin,dashboard_user=arwdDxtm/supabase_admin}",
+        "schema": "realtime",
+        "grantor": "supabase_admin"
+      },
+      {
+        "kind": "S",
+        "grants": "{postgres=rwU/postgres,anon=rwU/postgres,authenticated=rwU/postgres,service_role=rwU/postgres}",
+        "schema": "storage",
+        "grantor": "postgres"
+      },
+      {
+        "kind": "f",
+        "grants": "{postgres=X/postgres,anon=X/postgres,authenticated=X/postgres,service_role=X/postgres}",
+        "schema": "storage",
+        "grantor": "postgres"
+      },
+      {
+        "kind": "r",
+        "grants": "{postgres=arwdDxtm/postgres,anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "schema": "storage",
+        "grantor": "postgres"
+      }
+    ],
+    "seq_privileges": [
+      {
+        "name": "refresh_tokens_id_seq",
+        "role": "anon",
+        "schema": "auth",
+        "can_use": false,
+        "can_select": false,
+        "can_update": false
+      },
+      {
+        "name": "refresh_tokens_id_seq",
+        "role": "authenticated",
+        "schema": "auth",
+        "can_use": false,
+        "can_select": false,
+        "can_update": false
+      },
+      {
+        "name": "refresh_tokens_id_seq",
+        "role": "service_role",
+        "schema": "auth",
+        "can_use": false,
+        "can_select": false,
+        "can_update": false
+      },
+      {
+        "name": "admin_access_events_id_seq",
+        "role": "anon",
+        "schema": "private",
+        "can_use": false,
+        "can_select": false,
+        "can_update": false
+      },
+      {
+        "name": "admin_access_events_id_seq",
+        "role": "authenticated",
+        "schema": "private",
+        "can_use": false,
+        "can_select": false,
+        "can_update": false
+      },
+      {
+        "name": "admin_access_events_id_seq",
+        "role": "service_role",
+        "schema": "private",
+        "can_use": false,
+        "can_select": false,
+        "can_update": false
+      },
+      {
+        "name": "admin_content_edits_id_seq",
+        "role": "anon",
+        "schema": "private",
+        "can_use": false,
+        "can_select": false,
+        "can_update": false
+      },
+      {
+        "name": "admin_content_edits_id_seq",
+        "role": "authenticated",
+        "schema": "private",
+        "can_use": false,
+        "can_select": false,
+        "can_update": false
+      },
+      {
+        "name": "admin_content_edits_id_seq",
+        "role": "service_role",
+        "schema": "private",
+        "can_use": false,
+        "can_select": false,
+        "can_update": false
+      },
+      {
+        "name": "dic_admin_delete_receipts_id_seq",
+        "role": "anon",
+        "schema": "private",
+        "can_use": false,
+        "can_select": false,
+        "can_update": false
+      },
+      {
+        "name": "dic_admin_delete_receipts_id_seq",
+        "role": "authenticated",
+        "schema": "private",
+        "can_use": false,
+        "can_select": false,
+        "can_update": false
+      },
+      {
+        "name": "dic_admin_delete_receipts_id_seq",
+        "role": "service_role",
+        "schema": "private",
+        "can_use": false,
+        "can_select": false,
+        "can_update": false
+      },
+      {
+        "name": "dic_coffee_audit_id_seq",
+        "role": "anon",
+        "schema": "private",
+        "can_use": false,
+        "can_select": false,
+        "can_update": false
+      },
+      {
+        "name": "dic_coffee_audit_id_seq",
+        "role": "authenticated",
+        "schema": "private",
+        "can_use": false,
+        "can_select": false,
+        "can_update": false
+      },
+      {
+        "name": "dic_coffee_audit_id_seq",
+        "role": "service_role",
+        "schema": "private",
+        "can_use": false,
+        "can_select": false,
+        "can_update": false
+      },
+      {
+        "name": "dic_signup_review_events_id_seq",
+        "role": "anon",
+        "schema": "private",
+        "can_use": false,
+        "can_select": false,
+        "can_update": false
+      },
+      {
+        "name": "dic_signup_review_events_id_seq",
+        "role": "authenticated",
+        "schema": "private",
+        "can_use": false,
+        "can_select": false,
+        "can_update": false
+      },
+      {
+        "name": "dic_signup_review_events_id_seq",
+        "role": "service_role",
+        "schema": "private",
+        "can_use": false,
+        "can_select": false,
+        "can_update": false
+      },
+      {
+        "name": "shot_audit_id_seq",
+        "role": "anon",
+        "schema": "private",
+        "can_use": false,
+        "can_select": false,
+        "can_update": false
+      },
+      {
+        "name": "shot_audit_id_seq",
+        "role": "authenticated",
+        "schema": "private",
+        "can_use": false,
+        "can_select": false,
+        "can_update": false
+      },
+      {
+        "name": "shot_audit_id_seq",
+        "role": "service_role",
+        "schema": "private",
+        "can_use": true,
+        "can_select": true,
+        "can_update": false
+      },
+      {
+        "name": "subscription_id_seq",
+        "role": "anon",
+        "schema": "realtime",
+        "can_use": true,
+        "can_select": false,
+        "can_update": false
+      },
+      {
+        "name": "subscription_id_seq",
+        "role": "authenticated",
+        "schema": "realtime",
+        "can_use": true,
+        "can_select": false,
+        "can_update": false
+      },
+      {
+        "name": "subscription_id_seq",
+        "role": "service_role",
+        "schema": "realtime",
+        "can_use": true,
+        "can_select": false,
+        "can_update": false
+      }
+    ],
+    "table_privileges": [
+      {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "name": "admin_access_events",
+        "role": "anon",
+        "schema": "private",
+        "can_insert": false,
+        "can_select": false,
+        "can_update": false,
+        "relrowsecurity": true
+      },
+      {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "name": "admin_access_events",
+        "role": "authenticated",
+        "schema": "private",
+        "can_insert": false,
+        "can_select": false,
+        "can_update": false,
+        "relrowsecurity": true
+      },
+      {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "name": "admin_access_events",
+        "role": "service_role",
+        "schema": "private",
+        "can_insert": true,
+        "can_select": true,
+        "can_update": true,
+        "relrowsecurity": true
+      },
+      {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "name": "admin_content_edits",
+        "role": "anon",
+        "schema": "private",
+        "can_insert": false,
+        "can_select": false,
+        "can_update": false,
+        "relrowsecurity": true
+      },
+      {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "name": "admin_content_edits",
+        "role": "authenticated",
+        "schema": "private",
+        "can_insert": false,
+        "can_select": false,
+        "can_update": false,
+        "relrowsecurity": true
+      },
+      {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "name": "admin_content_edits",
+        "role": "service_role",
+        "schema": "private",
+        "can_insert": true,
+        "can_select": true,
+        "can_update": true,
+        "relrowsecurity": true
+      },
+      {
+        "acl": "{postgres=arwdDxtm/postgres}",
+        "name": "dic_admin_delete_receipts",
+        "role": "anon",
+        "schema": "private",
+        "can_insert": false,
+        "can_select": false,
+        "can_update": false,
+        "relrowsecurity": true
+      },
+      {
+        "acl": "{postgres=arwdDxtm/postgres}",
+        "name": "dic_admin_delete_receipts",
+        "role": "authenticated",
+        "schema": "private",
+        "can_insert": false,
+        "can_select": false,
+        "can_update": false,
+        "relrowsecurity": true
+      },
+      {
+        "acl": "{postgres=arwdDxtm/postgres}",
+        "name": "dic_admin_delete_receipts",
+        "role": "service_role",
+        "schema": "private",
+        "can_insert": false,
+        "can_select": false,
+        "can_update": false,
+        "relrowsecurity": true
+      },
+      {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "name": "dic_coffee_audit",
+        "role": "anon",
+        "schema": "private",
+        "can_insert": false,
+        "can_select": false,
+        "can_update": false,
+        "relrowsecurity": true
+      },
+      {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "name": "dic_coffee_audit",
+        "role": "authenticated",
+        "schema": "private",
+        "can_insert": false,
+        "can_select": false,
+        "can_update": false,
+        "relrowsecurity": true
+      },
+      {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "name": "dic_coffee_audit",
+        "role": "service_role",
+        "schema": "private",
+        "can_insert": true,
+        "can_select": true,
+        "can_update": true,
+        "relrowsecurity": true
+      },
+      {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "name": "dic_signup_review_events",
+        "role": "anon",
+        "schema": "private",
+        "can_insert": false,
+        "can_select": false,
+        "can_update": false,
+        "relrowsecurity": true
+      },
+      {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "name": "dic_signup_review_events",
+        "role": "authenticated",
+        "schema": "private",
+        "can_insert": false,
+        "can_select": false,
+        "can_update": false,
+        "relrowsecurity": true
+      },
+      {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "name": "dic_signup_review_events",
+        "role": "service_role",
+        "schema": "private",
+        "can_insert": true,
+        "can_select": true,
+        "can_update": true,
+        "relrowsecurity": true
+      },
+      {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "name": "shot_audit",
+        "role": "anon",
+        "schema": "private",
+        "can_insert": false,
+        "can_select": false,
+        "can_update": false,
+        "relrowsecurity": true
+      },
+      {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "name": "shot_audit",
+        "role": "authenticated",
+        "schema": "private",
+        "can_insert": false,
+        "can_select": false,
+        "can_update": false,
+        "relrowsecurity": true
+      },
+      {
+        "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+        "name": "shot_audit",
+        "role": "service_role",
+        "schema": "private",
+        "can_insert": true,
+        "can_select": true,
+        "can_update": true,
+        "relrowsecurity": true
+      },
+      {
+        "acl": "{supabase_realtime_admin=arwdDxtm/supabase_realtime_admin,postgres=arwdDxtm/supabase_realtime_admin,dashboard_user=arwdDxtm/supabase_realtime_admin,anon=r/supabase_realtime_admin,authenticated=r/supabase_realtime_admin,service_role=r/supabase_realtime_admin}",
+        "name": "subscription",
+        "role": "anon",
+        "schema": "realtime",
+        "can_insert": false,
+        "can_select": true,
+        "can_update": false,
+        "relrowsecurity": false
+      },
+      {
+        "acl": "{supabase_realtime_admin=arwdDxtm/supabase_realtime_admin,postgres=arwdDxtm/supabase_realtime_admin,dashboard_user=arwdDxtm/supabase_realtime_admin,anon=r/supabase_realtime_admin,authenticated=r/supabase_realtime_admin,service_role=r/supabase_realtime_admin}",
+        "name": "subscription",
+        "role": "authenticated",
+        "schema": "realtime",
+        "can_insert": false,
+        "can_select": true,
+        "can_update": false,
+        "relrowsecurity": false
+      },
+      {
+        "acl": "{supabase_realtime_admin=arwdDxtm/supabase_realtime_admin,postgres=arwdDxtm/supabase_realtime_admin,dashboard_user=arwdDxtm/supabase_realtime_admin,anon=r/supabase_realtime_admin,authenticated=r/supabase_realtime_admin,service_role=r/supabase_realtime_admin}",
+        "name": "subscription",
+        "role": "service_role",
+        "schema": "realtime",
+        "can_insert": false,
+        "can_select": true,
+        "can_update": false,
+        "relrowsecurity": false
+      }
+    ]
+  },
+  "per_object_review": {
+    "types": [
+      {
+        "identity": "auth.aal_level",
+        "source_md5": "c2811741dcc1f9c599be0a5c447973a3",
+        "verdict": "RETAIN_PLATFORM_TYPE",
+        "reason": "Auth provider protocol"
+      },
+      {
+        "identity": "auth.code_challenge_method",
+        "source_md5": "e926238209681efc91581b0607053e07",
+        "verdict": "RETAIN_PLATFORM_TYPE",
+        "reason": "Auth provider protocol"
+      },
+      {
+        "identity": "auth.factor_status",
+        "source_md5": "bedf9e17c778dd5664c6f24d02edc31d",
+        "verdict": "RETAIN_PLATFORM_TYPE",
+        "reason": "Auth provider protocol"
+      },
+      {
+        "identity": "auth.factor_type",
+        "source_md5": "c924b1eb6bd8b5e1bdb2a0b41b073890",
+        "verdict": "RETAIN_PLATFORM_TYPE",
+        "reason": "Auth provider protocol"
+      },
+      {
+        "identity": "auth.oauth_authorization_status",
+        "source_md5": "04f0e3e67c6791fa158007cc7ef04767",
+        "verdict": "RETAIN_PLATFORM_TYPE",
+        "reason": "Auth provider protocol"
+      },
+      {
+        "identity": "auth.oauth_client_type",
+        "source_md5": "235a09f17a6ef8262216aab94ed6a230",
+        "verdict": "RETAIN_PLATFORM_TYPE",
+        "reason": "Auth provider protocol"
+      },
+      {
+        "identity": "auth.oauth_registration_type",
+        "source_md5": "a1d0fd00fd4bdb39698a2fbec9eb4569",
+        "verdict": "RETAIN_PLATFORM_TYPE",
+        "reason": "Auth provider protocol"
+      },
+      {
+        "identity": "auth.oauth_response_type",
+        "source_md5": "5fff1b2052369b7bccfb0765c43082ca",
+        "verdict": "RETAIN_PLATFORM_TYPE",
+        "reason": "Auth provider protocol"
+      },
+      {
+        "identity": "auth.one_time_token_type",
+        "source_md5": "2c6d04d4648360a14409808ff9fd152c",
+        "verdict": "RETAIN_PLATFORM_TYPE",
+        "reason": "Auth provider protocol"
+      },
+      {
+        "identity": "realtime.action",
+        "source_md5": "b81122650af43cc25efa193507f0f2d0",
+        "verdict": "RETAIN_PLATFORM_TYPE",
+        "reason": "Realtime protocol"
+      },
+      {
+        "identity": "realtime.equality_op",
+        "source_md5": "26cf3a77d6ea74e4ba9b883d1140824d",
+        "verdict": "RETAIN_PLATFORM_TYPE",
+        "reason": "Realtime protocol"
+      },
+      {
+        "identity": "storage.buckettype",
+        "source_md5": "2c2dd55bcd194356849ea6bdd3c287b9",
+        "verdict": "RETAIN_PLATFORM_TYPE",
+        "reason": "Storage bucket kind"
+      }
+    ],
+    "sequences": [
+      {
+        "identity": "auth.refresh_tokens_id_seq",
+        "source_md5": "c11e30fdf97b6b6fd73584b3c87b55f2",
+        "verdict": "RETAIN_OWNED_SEQUENCE",
+        "reason": "GoTrue refresh-token ID default"
+      },
+      {
+        "identity": "private.admin_access_events_id_seq",
+        "source_md5": "de9c4bb5a1b19d9d0f02fd1c1a3633cf",
+        "verdict": "RETAIN_OWNED_SEQUENCE",
+        "reason": "Internal application audit/identity counter, client roles denied direct sequence access"
+      },
+      {
+        "identity": "private.admin_content_edits_id_seq",
+        "source_md5": "25d4f62dd74647869b5489529ae75a8f",
+        "verdict": "RETAIN_OWNED_SEQUENCE",
+        "reason": "Internal application audit/identity counter, client roles denied direct sequence access"
+      },
+      {
+        "identity": "private.dic_admin_delete_receipts_id_seq",
+        "source_md5": "c45b2bfa9924bed3cd6f2209bf544580",
+        "verdict": "RETAIN_OWNED_SEQUENCE",
+        "reason": "Internal application audit/identity counter, client roles denied direct sequence access"
+      },
+      {
+        "identity": "private.dic_coffee_audit_id_seq",
+        "source_md5": "4f774e76e1cdf159b0db3bae6d05873e",
+        "verdict": "RETAIN_OWNED_SEQUENCE",
+        "reason": "Internal application audit/identity counter, client roles denied direct sequence access"
+      },
+      {
+        "identity": "private.dic_signup_review_events_id_seq",
+        "source_md5": "299f0fd8188089f28b68da8e8889adb2",
+        "verdict": "RETAIN_OWNED_SEQUENCE",
+        "reason": "Internal application audit/identity counter, client roles denied direct sequence access"
+      },
+      {
+        "identity": "private.shot_audit_id_seq",
+        "source_md5": "733805a09c9d100c647e6f81f9fa9185",
+        "verdict": "RETAIN_OWNED_SEQUENCE",
+        "reason": "Internal application audit/identity counter, client roles denied direct sequence access"
+      },
+      {
+        "identity": "realtime.subscription_id_seq",
+        "source_md5": "03242642cceb1e9c512dae6dddb161ed",
+        "verdict": "RETAIN_OWNED_SEQUENCE",
+        "reason": "Realtime subscription identity, no client table INSERT privilege"
+      }
+    ]
+  },
+  "interpretations": [
+    "12 provider enum types; no app custom enum/domain/range types. All enum values read, no evidence for deletion.",
+    "Six private identity/audit sequences owned by parent tables; neither anon nor authenticated can directly USE/SELECT/UPDATE a private sequence or SELECT/INSERT/UPDATE related tables.",
+    "Realtime subscription ID sequence grants client USAGE, but subscription table permits SELECT not INSERT or UPDATE; provider-managed, no direct proof of exposed API or exploit.",
+    "15 default ACL definitions read completely; permissive templates require per-table RLS and exposed-schema verification, not speculative platform modifications."
+  ],
+  "new_defects": 0,
+  "justified_deletions": 0,
+  "source_fixes": 0,
+  "provider_writes": 0,
+  "baseline_complete": false,
+  "unverified": [
+    "Hosted Auth/API configuration",
+    "Vault native implementation",
+    "Disk headroom",
+    "Real Apple device push delivery"
+  ],
+  "next_cursor": "Migration #67 if introduced; otherwise the first changed/new/unreviewed provider definition, including composite/base/array types outside this enum/domain/range slice."
+}
