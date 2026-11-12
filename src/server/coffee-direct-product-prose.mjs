@@ -139,6 +139,23 @@ function currentNamedDecafMethod(name,line){
   return prefixDecaf&&core.length>=8&&reordered===core;
  });
 }
+// On a short selected paragraph, only split a previously recognized
+// complete named method if the SAME paragraph also affirmatively identifies
+// a distinct competing treatment for "this coffee" / "it". Otherwise retain
+// the existing single short-paragraph witness once, not twice.
+function opposingCurrentNamedDecafMethods(name,line){
+ const sentences=String(line).split(/(?<=[.!?])\s+/u).slice(0,8);
+ const index=sentences.findIndex(s=>currentNamedDecafMethod(name,s));
+ if(index<0)return false;
+ const named=inferDecaffeinationMethod({name,selectedMethod:sentences[index]});
+ if(!named)return false;
+ return sentences.slice(index+1).some(sentence=>{
+  const s=sentence.trim();
+  if(!/^(?:this coffee|it)\s+(?:is|has been)\s+decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?/iu.test(s))return false;
+  const other=inferDecaffeinationMethod({name,selectedMethod:s});
+  return Boolean(other&&other!==named);
+ });
+}
 // Some Shopify product-only accordions put their current treatment title
 // inside <summary><span class="accordion__title"> rather than a <p>.
 // Require the SAME selected product info container to hold an exact current
@@ -446,7 +463,7 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
   // a longer paragraph. Inspect bounded sentences of that scoped P only;
   // retain exact chosen identity, nonhistorical and method conflict guards.
   if(decafOnlyCoffee(name)&&b.tag==='p'&&!b.educational&&
-     line.length>360&&line.length<=1200&&
+     line.length<=1200&&(line.length>360||opposingCurrentNamedDecafMethods(name,line))&&
      !NONCURRENT_DECAF_METHOD.test(line)&&
      !/^(?:faq|frequently asked questions|common questions|decaf process education)$/iu.test(String(b.section||'').trim()))
    for(const sentence of line.split(/(?<=[.!?])\s+/u).slice(0,8)){

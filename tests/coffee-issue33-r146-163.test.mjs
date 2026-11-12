@@ -130,3 +130,12 @@ test('#163 long paragraph selected method recovered without duplicating short na
  const chosen=selectedNamedCurrentDecafEvidence(html,{name,clean});
  assert.equal(chosen.length,1,JSON.stringify(chosen));
 });
+
+
+test('#163 same-method short selected named sentence keeps single direct provenance witness',()=>{
+ const name='TRANQUILO, Decaffeinated, 12 oz';
+ const text='Tranquilo is decaffeinated using the natural Sugar Cane Process in Colombia.';
+ const html='<main><h1>'+name+'</h1><p>'+text+'</p></main>';
+ const clean=x=>String(x).replace(/<[^<>]{0,2000}>/g,' ').replace(/\s+/g,' ').trim();
+ assert.equal(selectedNamedCurrentDecafEvidence(html,{name,clean}).length,1);
+});
