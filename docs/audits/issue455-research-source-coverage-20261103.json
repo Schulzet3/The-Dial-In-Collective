@@ -1877,6 +1877,22 @@
       "source_byte_caveat": "Author university record lists no deposited file. Full publisher paper, figures, statistical tables, physical apparatus, raw instrument traces and binary SHA unavailable. Multiple summaries are SAME study not independent replication.",
       "claims_verified_externally": "Published author abstract says aromatic e-nose profiles change with grind grade and extraction time in nominal 25-mL espresso; more acids/solids/caffeine emerged in first 8 s of studied percolation. Does NOT establish human taste optimum, universal shot end time, mass ratio, or five-rating calibration.",
       "locked_policy_boundary": "All five existing personal ratings, measured mass/time, recipe-specific time starting windows, one controllable change, independent styles/coffee contexts and private history stay unchanged."
+    },
+    {
+      "id": "LIT-2026-FELIZZATO-MOKA-VOLATILE-ORIGIN-AROMA",
+      "type": "peer_reviewed_ground_coffee_moka_volatile_ml_origin_and_packaged_intensity_study",
+      "title": "Explainable Artificial Intelligence for Coffee Quality Control: From Coffee Origins to Aroma Intensity",
+      "authors": "G. Felizzato; E. Bagnulo; G. Botta; G. Tapparo; C. Cordero; L. Navarini; C. Cagliero; E. Liberto; A. Caratti",
+      "published": "Foods 15(9):1543 (2026), April 29 2026",
+      "doi": "10.3390/foods15091543",
+      "url": "https://www.mdpi.com/2304-8158/15/9/1543",
+      "source_access": "DIRECT_ORIGINAL_MDPI_FULL_ARTICLE_HTML_SECTIONS_1_2_1_TO_2_5_3_1_3_2_4_1_TO_4_3_5_DATA_AVAILABILITY_AND_COI",
+      "review_status": "R455-208_SUBSTANTIVE_ORIGINAL_PRIMARY_METHODS_DATA_ORIGIN_INTENSITY_TARGET_REGRESSION_CONFOUNDS_AND_LIMITATIONS_REVIEW; FULL_PDF_FIGURE_PIXELS_SUPPLEMENT_RAW_AND_REPLICATION_NOT_VERIFIED",
+      "evidence_grade": "PEER_REVIEWED_32_GROUND_COFFEES_MOKA_SUPPLY_VOLATILE_PROOF_OF_CONCEPT; NOT_AN_ESPRESSO_EXTRACTION_OR_USER_FIVE_RATING_VALIDATION",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Publisher HTML substantively inspected, but original downloadable PDF/HTML byte SHA-256, numeric table image cells, supplementary table, raw chromatograms/model fold membership, raw company panel outcomes and independent replication were not obtained. 32 separate coffee lots, fixed aroma label by origin. One coauthor employed by supplier Illycaffe; published COI disclosed.",
+      "claims_verified_externally": "32 roast-ground coffees for moka (Brazil 5/Colombia 6/Ethiopia 7/Guatemala 7/India 7); HS-SPME/GC-MS measured volatile headspace of 500 mg unbrewed grounds, not espresso cup extraction. Intensity target was an internal commercial packaging ordinal 1-9 code assigned by origin (5/4/3/6/8). SVM three-fold coffee-origin CV 0.91 accuracy. Ridge 3-fold reported original intensity CV R2=0.88 and RMSE=0.61, falling to 0.38 only AFTER excluding one Indian outlier; abstract highlights RMSE 0.38 without explaining exclusion in same sentence. Shared origin/label may limit independent interpretation; this is a design caveat, not proof of leakage. SHAP model association is not mechanistic causality. No personal five-input espresso taste validation, next-shot intervention, external holdout or cup-quality improvement.",
+      "locked_policy_boundary": "Preserve all five original personal sensory ratings, missing versus rated-green distinction, same-coffee measured history, one controllable adjustment, setup/style/feed/calibration constraints, transparent non-statistical heuristic explanation, private member data and existing owner-Locked recommendations."
     }
   ],
   "evidence_checks": [
@@ -5832,6 +5848,34 @@
       "owner_approval": false,
       "source_sha": "9757345383ae613f7e8b8504a6cc0dedb09e0693",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-ML-208-A",
+      "source": "LIT-2026-FELIZZATO-MOKA-VOLATILE-ORIGIN-AROMA; original publisher Foods 2026 DOI 10.3390/foods15091543 §§2.1, 2.3, 3.1, 4.3 and methods",
+      "claim": "Moka-marketed roasted-and-ground commercial samples, 32 lots from five origins, were analysed as 500mg unbrewed grounds by GC-MS. Target 1–9 aroma intensity comes from company packaging/internal panel and is fixed by origin 5/4/3/6/8, not objectively measured espresso beverage taste, each person's five separate sensory inputs, or a controllable shot change.",
+      "grade": "DIRECT_PRIMARY_PUBLISHER_FULL_HTML_METHODS_AND_INTENSITY_LABELS;ORIGINAL_PDF_RAW_PANEL_AND_FOLD_DATA_UNVERIFIED",
+      "primary_sources": [
+        "https://www.mdpi.com/2304-8158/15/9/1543"
+      ],
+      "current_app": "site/lib/constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095 SCALES defines five independent user 1-5 ratings; site/lib/model.js blob 469c55c17dd3ee5c16523e59a5adace1056e9038 validates all five; site/lib/engine.js blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6 computes personal recipe evidence.",
+      "result": "PACKAGE_INTENSITY_ORIGIN_PROXY_NOT_VALIDATED_PERSONAL_ESPRESSO_RATING_OR_QUALITY",
+      "owner_approval": false,
+      "source_sha": "054614ed550b38d1d495cc6ec50cb165405916d2",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-ML-208-B",
+      "source": "LIT-2026-FELIZZATO-MOKA-VOLATILE-ORIGIN-AROMA; original publisher Foods 2026 DOI 10.3390/foods15091543 §§4.1–4.3, Conclusions, COI/data",
+      "claim": "SVM 0.91 accuracy on 3-fold within-study origin classification is not personal coffee recommendation accuracy. Ridge validation 0.88 R2 and 0.61 RMSE before outlier exclusion; lower 0.38 RMSE only AFTER one Indian case was excluded, so those metrics cannot be treated as a single unrestricted held-out quality result. Within-origin fixed labels and no unseen-origin holdout restrict independent generalization. Authors explicitly call study proof of concept; SHAP is correlational.",
+      "grade": "DIRECT_PRIMARY_FULL_HTML_RESULTS_TABLE4_NARRATIVE_AND_LIMITATIONS;OUTLIER_REMOVAL_DISCLOSED;PDF_RAW_AND_EXTERNAL_VALIDATION_UNVERIFIED",
+      "primary_sources": [
+        "https://www.mdpi.com/2304-8158/15/9/1543"
+      ],
+      "current_app": "Existing site/lib/engine.js marks weak or range-based starting heuristics distinctly from true measured personal family evidence. No 91% flavor accuracy, chemical SHAP treatment or RMSE-derived espresso recommendation confidence appears in current live engine/constants crosswalk.",
+      "result": "NO_TRANSFER_OF_CLASSIFICATION_ACCURACY_TO_FIVE_RATINGS_OR_ESPRESSO_CAUSAL_CONFIDENCE",
+      "owner_approval": false,
+      "source_sha": "054614ed550b38d1d495cc6ec50cb165405916d2",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -5980,21 +6024,23 @@
     "R455-204: Direct author full-article temporal crosswalk of ORG-04/Waszkiewicz: nonlinear pressure/flow peak measured at >=120-s shots, last-10-s late time across 60 total shots/11 pressures, not normal ~30-s pressure optimum; 5-10-s first drop one fixed 14-mm puck, not randomized universal preinfusion or validated commercial sensor. Original source hashes preserved; two claim checks and one proposal added (106/319/163). Docs-only PR exact CI pending; nonforce merge only after applicable green then verify blobs. No app, numeric, Locked, Auth/provider, queue or #267 line changes; S019 still inaccessible.",
     "R455-205: direct visual primary-figure crosswalk for Cameron et al. 2020: published Figure 5 actual 20g/40g 6bar 9bar-clogging grind/EY dataset versus Figure 6 schematic 15g/40g 'tasty point', no five-sensory or universal optima; 106/321/164 after docs PR verified. Original S019 remains inaccessible. No app, numeric, Locked, provider, queue or #267 literal changes.",
     "R455-206: author-group journal abstract/conference primary-source method and perceptual interactions crosschecked; DOI 10.1016/j.foodres.2014.11.036; no five-sensory prediction, sugar extraction fix or numerical policy. 107 sources/323 checks/165 proposals upon PR verify; full journal paper restricted, S019 unreviewed, #267 strict literal review not duplicated.",
-    "R455-207: new ACS 2015 original DOI 10.1021/jf505691u early fraction e-nose review: first 8 s solutes and 25 mL volume not a universal taste optimum, target or mass ratio; full publisher article unreviewed. Pending docs-only exact-source CI 108/325/166, S019 inaccessible and #267 separate."
+    "R455-207: new ACS 2015 original DOI 10.1021/jf505691u early fraction e-nose review: first 8 s solutes and 25 mL volume not a universal taste optimum, target or mass ratio; full publisher article unreviewed. Pending docs-only exact-source CI 108/325/166, S019 inaccessible and #267 separate.",
+    "R455-208: primary full-HTML source audit for Felizzato 2026 moka-packaged aroma XAI (32 lots, origin-fixed 1–9 target, original CV RMSE .61 vs after-outlier .38); distinguish origin lab classification from actual espresso five-taste user success. Scope only research ledger/journal, no Locked/app/queue change, original S019 unreviewed, #267 no literal credit; exact docs CI, merge/blob governance required."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-207",
-    "source_sha": "9757345383ae613f7e8b8504a6cc0dedb09e0693",
-    "phase": "SEVERINI_ELECTRONIC_NOSE_8_SECOND_FRACTION_RESEARCH_ONLY_PR_CI_PENDING",
+    "run_id": "R455-208",
+    "source_sha": "054614ed550b38d1d495cc6ec50cb165405916d2",
+    "phase": "FELIZZATO_MOKA_ORIGIN_FIXED_AROMA_INTENSITY_ML_PROXY_RESEARCH_ONLY_PR_CI_PENDING",
     "source_counts": {
-      "research_project_source_records": 108,
-      "bounded_evidence_checks": 325,
-      "proposals": 166
+      "research_project_source_records": 109,
+      "bounded_evidence_checks": 327,
+      "proposals": 167
     },
     "original_s019": "INACCESSIBLE_UNREVIEWED",
     "release_state": "NO_NEW_QUEUE_OR_READY_OR_DEPLOYMENT",
     "github267_literal_review_credit": 0,
-    "full_article": "NOT_REVIEWED"
+    "original_publisher_html": "DIRECT_SUBSTANTIVE_READ",
+    "pdf_and_raw": "NOT_RETRIEVED"
   },
   "policy_decisions_resolved": [
     {
@@ -9731,6 +9777,32 @@
         "starting_development_sha": "9757345383ae613f7e8b8504a6cc0dedb09e0693",
         "prior_ledger_blob": "fe7b75a40092ca15f4d5aec08ee029cb1fc01b8d",
         "journal_path": "docs/workstreams/ops-issue455-r207-espresso-early-fraction-enose-20261112.md"
+      }
+    },
+    {
+      "id": "R455-PROP-208-PACKAGED-INTENSITY-NOT-PERSONAL-TASTE-CONFIDENCE",
+      "severity": "P2_RESEARCH_EVIDENCE_BOUNDARY_NO_REPRODUCED_APP_DEFECT",
+      "finding": "Primary 2026 Felizzato et al. chemometric XAI uses 32 packaged moka grounds, origin-fixed 1-to-9 company aroma codes and GC-MS signatures; reported low regression error follows outlier removal. Results do not validate personal 1-to-5 espresso ratings, confidence presentation or a change to user shot parameters.",
+      "user_benefit": "Prevent marketing a packaging-origin lab model as calibrated or causally proven espresso shot recommendation confidence and avoid unjustified AI controls/data collection.",
+      "evidence": [
+        "R455-EV-ML-208-A",
+        "R455-EV-ML-208-B"
+      ],
+      "source_provenance": "Direct peer-reviewed publisher original Foods 15(9):1543, 2026-04-29, DOI 10.3390/foods15091543 §§2,3,4,5; full HTML substantive check, PDF/figure/raw bytes/independent replication unverified; supplier affiliation/COI disclosed.",
+      "current_locked": "Five sensory 1-to-5 fields and all-green/missing rules; one genuinely adjustable next-shot variable; coffee/setup/style-specific personal evidence; privacy, history, grinder calibration, Turbo/Fast-Flow and slow-feed remain as approved.",
+      "current_app": "Current development SHA 054614ed550b38d1d495cc6ec50cb165405916d2 engine.js blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6, constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095 and model.js blob 469c55c17dd3ee5c16523e59a5adace1056e9038; no reproduced runtime defect or scientific-confidence claim.",
+      "proposed_change": "SAFE document-only evidence/claim boundary; preserve app as-is. New chemical proxy confidence, user capture, taste model or numeric recommendation would need explicit owner product approval, independent real espresso outcome validation and risk review.",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "RESEARCH_ONLY_DOCS_PR_PENDING_EXACT_SOURCE_CI",
+      "test_plan": "JSON parse and 108/325/166 original identity/order preservation, 109/327/167 distinct IDs/unique DOI, two-path Git diff/no app modification, PR-head and merged governance. No original603, member-device, held-out sensory or production provider test claimed.",
+      "release_queue_status": "NO_NEW_ITEM_NO_READY_NO_DEPLOYMENT",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false,
+      "exact_source": {
+        "starting_development_sha": "054614ed550b38d1d495cc6ec50cb165405916d2",
+        "prior_ledger_blob": "cccdc3868139f66634d832fe8d8e21dd88e52d9b",
+        "journal_path": "docs/workstreams/ops-issue455-r208-moka-aroma-ai-not-personal-espresso-20261112.md"
       }
     }
   ],
