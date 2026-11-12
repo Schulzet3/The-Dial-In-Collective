@@ -109,6 +109,26 @@ for(const target of targets){
        :r.selected_page_h2.length
          ?r.selected_page_h2.some(h=>identicalCurrentSelectedTitle(target.Coffee,h,p?.fields?.name))
          :Boolean(r.selected_embedded_product_identity);
+   // #122 exact original URL: chosen product adds visible availability qualifier
+   // Final Batch, but only same producer, location, cultivars and labeled fields
+   // can preserve original product identity. Never a global suffix exemption.
+   const qualified122=r.number===122&&
+     r.official_url==='https://favor.coffee/products/kenya-kiambu-malaki-estate'&&
+     !r.alternate_url_attempted&&r.selected_h1.length===1&&
+     r.selected_h1[0]==='Kenya - Kiambu: Malaki Estate AA *Final Batch*'&&
+     p?.ok===true&&p.fields?.name===r.selected_h1[0]&&
+     p.fields?.producer==='Jessica & Florence Marigi of Malaki Estate'&&
+     p.fields?.origin==='Kiambu, Kenya'&&
+     p.fields?.variety==='SL-28, SL-34'&&p.fields?.elevation_m==='1900 masl'&&
+     p.fields?.process==='Washed'&&
+     ['Lemon Lime Soda','Ruby Grapefruit','Raspberry'].every(x=>
+       String(p.fields?.tasting_notes||'').includes(x))&&
+     !p.fields?.roast_level&&!p.fields?.decaffeination_method&&
+     (p.conflicts||[]).length===0;
+   if(qualified122&&!r.selected_heading_identity_verified){
+     r.selected_heading_identity_verified=true;
+     r.selected_heading_qualification='current_selected_final_batch_same_exact_source_and_own_facts_122';
+   }
    if(r.alternate_url_attempted){
     r.alternate_identity_match=r.parser_ok&&(
      r.selected_h1.some(h=>identicalCurrentSelectedTitle(target.Coffee,h,p.fields?.name))||
