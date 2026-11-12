@@ -15,6 +15,23 @@ export const CANDIDATE_KIND='DIC-READY-ONLY-SOURCE-1';
 // in the isolated source, without weakening READY feature/test gating.
 export const workflowChangedPaths=paths=>sorted([...new Set((Array.isArray(paths)?paths:[])
  .filter(p=>typeof p==='string'&&/^\.github\/workflows\/[A-Za-z0-9_./-]+\.ya?ml$/.test(p)))]);
+export const REVIEWED_WORKFLOW_TEST=Object.freeze({
+ path:'tests/issue455-browser-dependency-install-fallback.test.mjs',
+ sourceBlob:'eab5e9f267d7b7451a56db005a8980727c4ce1f6',
+ restoredWorkflow:'.github/workflows/cloud-regression.yml'
+});
+export function discoverReviewedWorkflowTestExclusions({publishedSourceSha,developmentSourceSha,restoredWorkflows,sourceObjectAt}={}){
+ if(typeof sourceObjectAt!=='function'||!Array.isArray(restoredWorkflows)||
+    !restoredWorkflows.includes(REVIEWED_WORKFLOW_TEST.restoredWorkflow))return [];
+ const path=REVIEWED_WORKFLOW_TEST.path;
+ // This exact reviewed two-assertion source-only browser-install test uses
+ // only node:test/assert/fs and reads only the development workflow named
+ // above; it is not an app feature test. Never match by filename alone.
+ return sourceObjectAt(publishedSourceSha,path)===null&&
+  sourceObjectAt(developmentSourceSha,path)==='100644:'+REVIEWED_WORKFLOW_TEST.sourceBlob?
+  [path]:[];
+}
+
 
 export function planReadyOnlyCandidate(queue,{publishedSourceSha,developmentSourceSha,
  selectedIds,developmentChangedPaths,pinnedReadyPaths=[],isAncestor}={}){
@@ -208,6 +225,30 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
  for(const path of frozenWorkflows)
   if(sourceObjectAt(candidateSha,path)!==sourceObjectAt(publishedSourceSha,path))
    reject('GitHub Actions workflow was not exactly restored to published bytes: '+path);
+ const workflowOnlyTests=manifest.excluded_unpublished_workflow_test_paths||[];
+ if(!Array.isArray(workflowOnlyTests)||new Set(workflowOnlyTests).size!==workflowOnlyTests.length||
+   !equal(workflowOnlyTests,discoverReviewedWorkflowTestExclusions({
+     publishedSourceSha,developmentSourceSha:manifest.development_source_sha,
+     restoredWorkflows:frozenWorkflows,sourceObjectAt
+   })))
+  reject('Only one byte-pinned, reviewed workflow-only test can be excluded when its workflow was restored');
+ for(const path of workflowOnlyTests){
+  if(path!==REVIEWED_WORKFLOW_TEST.path||sourceObjectAt(candidateSha,path)!==null||
+     sourceObjectAt(manifest.development_source_sha,path)!=='100644:'+REVIEWED_WORKFLOW_TEST.sourceBlob||
+     sourceObjectAt(publishedSourceSha,path)!==null)
+   reject('Workflow-only test exclusion source/blob/absence mismatch: '+path);
+  // Never exclude a test introduced or modified by ANY selected READY merge.
+  // Merely inheriting this earlier development workflow test is not ownership.
+  for(const item of plan.ready_items){
+   let selectedBlob,parentBlob;
+   try{
+    selectedBlob=sourceObjectAt(item.merged_source_sha,path);
+    if(selectedBlob!==null)parentBlob=sourceObjectAt(item.merged_source_sha+'^',path);
+   }catch{reject('Selected READY workflow-only test provenance unavailable: '+path);}
+   if(selectedBlob!==null&&selectedBlob!==parentBlob)
+    reject('Selected READY merge introduced or modified a workflow-only test: '+path);
+  }
+ }
  const excludedTests=manifest.excluded_unready_test_paths||[];
  if(!Array.isArray(excludedTests)||new Set(excludedTests).size!==excludedTests.length)
   reject('Invalid or duplicate excluded unfinished test paths');
@@ -253,7 +294,7 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
     reject('Cannot exclude a test introduced or modified by an approved READY merge: '+path);
   }
  }
- const allowed=[...plan.restored_paths,...plan.pinned_ready_paths,...excludedTests,...frozenWorkflows,CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH];
+ const allowed=[...plan.restored_paths,...plan.pinned_ready_paths,...excludedTests,...workflowOnlyTests,...frozenWorkflows,CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH];
  if(!equal(stagedCommitChangedPaths||[],allowed))
   reject('Candidate staging commit changes unrelated paths or lacks same-commit journal');
  for(const path of plan.restored_paths)
@@ -277,7 +318,7 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
  }
  return {ready:true,errors:[],deployable_paths:plan.included_paths,
   ready_items:plan.ready_items,other_items:plan.other_items,
-  excluded_paths:plan.restored_paths,pinned_ready_paths:plan.pinned_ready_paths,excluded_unready_test_paths:excludedTests,
+  excluded_paths:plan.restored_paths,pinned_ready_paths:plan.pinned_ready_paths,excluded_unready_test_paths:excludedTests,excluded_unpublished_workflow_test_paths:workflowOnlyTests,
   development_source_sha:manifest.development_source_sha,
   candidate_source_sha:candidateSha};
 }
