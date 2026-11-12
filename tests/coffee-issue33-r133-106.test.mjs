@@ -20,7 +20,7 @@ test('#106 nav, aside, footer cannot fill absent selected roasting or sensory cl
 });
 test('#106 adjacent Earthback Sumatra cannot contaminate current roast or notes',()=>{
  const other='<aside class="recommended">Dark Roast. Syrupy full body, dark chocolate, mild cherry.</aside>';
- const missing=own.replace('Medium-Dark Roast','roast not specified').replace('mild cherry','not published');
+ const missing=own.replace('Medium-Dark Roast','roast not specified').replace('Mild cherry','not published');
  const s=selected106Source(page(missing,chosen106.name,other,'Sumatra Mandheling'));
  assert.equal(s.direct.mediumDark,false);assert.equal(s.direct.notes,false);
 });
