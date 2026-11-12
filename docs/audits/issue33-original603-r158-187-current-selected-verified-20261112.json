@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "review": "R158",
+  "case_number": 187,
+  "original_frozen_coffee": "Bolivia",
+  "roaster": "Larry's Coffee",
+  "exact_official_url": "https://larryscoffee.com/products/bolivia-single-origin-light-roast-organic-coffee",
+  "classification": "ONE_CURRENT_SELECTED_ORIGINAL603_INDEPENDENTLY_VERIFIED_DEVELOPMENT_ONLY",
+  "preflight": {
+    "development_source_sha": "7f024fabcf9f0c7f5ae9c90134cf617833badd07",
+    "file_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d"
+  },
+  "source": {
+    "merged_development_sha": "7f024fabcf9f0c7f5ae9c90134cf617833badd07",
+    "pr": 2342,
+    "reviewed_pr_head": "be48f712079b20d1e0af9b5ceba54822592b2233",
+    "six_changed_git_blobs_read_back_identical": true,
+    "current_official_html_bytes": 658255,
+    "current_official_html_sha256": "617b624f4b668f2e130cb0bc57d19087202fca337bc24c5bf76c35faac8ca1e5",
+    "official_focused_json_sha256": "364775028e1cd05950380b0f4fec65f474eb634e36b5e3b5ad54eca0568ca582",
+    "afterproof_sha256": "ed539a83e94d57657b6eb5016140d13a02ce1fffecd8d3404d16c8ea2a5d8827",
+    "zip_artifact_id": 13988348777,
+    "zip_bytes": 101005,
+    "zip_sha256": "6183b6e991b2cfa342fc9c0a8217433f48c12940988c9a892197dd2b3ab64f68",
+    "independently_rehashed": true
+  },
+  "observed_parser": {
+    "name": "Bolivia",
+    "roaster": "Larry's Coffee",
+    "roast_level": "Light",
+    "tasting_notes": "Nougat, Milk Chocolate, Golden Raisin",
+    "origin": "Yungas Mountains, Caranavi Province, Pumiri, Bolivia",
+    "process": "Washed",
+    "producer": "AIPEP",
+    "elevation_m": "1097–1494 m",
+    "selected_h1_verified": true,
+    "source_conflicts": [],
+    "seo_fallback_fields": [],
+    "add_coffee_rendered": true,
+    "source_review_rendered": true
+  },
+  "finding": "A selected narrative light-to-medium roast is a range, not categorical Medium. The original selected product separately labels Light Roast directly. Before generic fix, missing-label adversarial source-shaped parser returned false Medium. A single guarded generic fix rejects hyphen/en/em-dash *to* roast ranges; valid Medium-Light remains supported. Strict exact official run confirms current selected Light.",
+  "checks": {
+    "pr_head_official": 43317536378,
+    "pr_head_sql": 43317536255,
+    "pr_head_security": 43317536653,
+    "merged_official": 43318265821,
+    "merged_node_lint": 43318265858,
+    "merged_cloud_mobile": 43318266061,
+    "merged_approval": 43318265856,
+    "merged_python": 43318265896,
+    "merged_focused_tests": {
+      "passed": 12,
+      "failed": 0
+    },
+    "merged_node_tests": {
+      "passed": 4393,
+      "failed": 0,
+      "intentional_skipped": 6
+    },
+    "merged_frozen603": "SKIPPED_NOT_PASS"
+  },
+  "immutable_frozen": {
+    "original603_coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "csv_git_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "original_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "corpus_modified": false,
+    "oracle_modified": false,
+    "whole_corpus_manual_certification": false
+  },
+  "state": "NARROW_READY_DEVELOPMENT_ONLY",
+  "issue33_open": true,
+  "published": false,
+  "production_operations": 0
+}
