@@ -199,3 +199,9 @@ test('scheduled notification poll works through the explicitly configured no-JWT
  assert.equal((await noJwtMember.broker(request('subscribe',{endpoint:ENDPOINT},false))).status,403,
   'disabling only the Edge gateway does not bypass the broker member Auth checks');
 });
+
+test('security-inspection PR filter covers the exact Edge gateway config without broad TOML wildcard',()=>{
+ const workflow=readFileSync(new URL('../.github/workflows/security-inspection.yml',import.meta.url),'utf8');
+ assert.match(workflow,/^\s*-\s*'supabase\/config\.toml'\s*$/m);
+ assert.doesNotMatch(workflow,/^\s*-\s*'supabase\/\*\*'\s*$/m);
+});
