@@ -26,7 +26,7 @@ if(process.env.DIC_ISSUE33_R140_VERIFY==='1'){
  ck(norm(f.origin)===norm('Antioquia, Colombia'),'actual_parser_preserves_direct_region');
  ck(norm(f.producer).includes('mina rica')&&norm(f.process)==='washed'&&norm(f.variety)==='castillo','existing_producer_process_variety');
  ck(norm(f.elevation_m).includes('1700')&&norm(f.roast_level)==='medium','existing_elevation_roast');
- ck(['Butterscotch','Brown Sugar','Dark Chocolate','Citrus','Cherry'].every(x=>norm(f.tasting_notes).includes(norm(x)),'existing_selected_notes');
+ ck(['Butterscotch','Brown Sugar','Dark Chocolate','Citrus','Cherry'].every(x=>norm(f.tasting_notes).includes(norm(x))),'existing_selected_notes');
  ck(rec.add_coffee_ui_rendered===true&&rec.source_review_rendered===true,'add_coffee_and_review');
  ck(Array.isArray(rec.conflicts)&&rec.conflicts.length===0,'no_unresolved_conflicts');
  ck(Array.isArray(rec.seo_fallback_fields)&&rec.seo_fallback_fields.length===0,'no_seo_leakage');
