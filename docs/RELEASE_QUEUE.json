@@ -13062,22 +13062,30 @@
       "issue": 2258,
       "pr": 2260,
       "title": "Server-confirmed in-app notification when a pending member's account is approved",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "9beb10f04d0db227abacb553a50832caa4ba65dc",
       "scope_paths": [
         "site/cloud/main.js",
         "site/styles.css"
       ],
       "owner_source": "Owner direct chat 2026-11-12; https://github.com/Schulzet3/The-Dial-In-Collective/issues/2258",
       "tests": [
-        "tests/cloud-auth-startup-verification.test.mjs: pending approval status poll, genuine admission, rejection, existing member, network error. Initial #2260 PR-head cloud-tests SUCCESS 43226631450; approval 43226631434 held strictly on new scoped queue item absent; corrected here."
+        "tests/cloud-auth-startup-verification.test.mjs: pending approval status poll, genuine admission, rejection, existing member, network error. Initial #2260 PR-head cloud-tests SUCCESS 43226631450; approval 43226631434 held strictly on new scoped queue item absent; corrected here.",
+        "Corrected exact PR head 8dabb809 PR runs 43227731992 Node22/lint SUCCESS; 4,242 PASS/0 FAIL/6 intentional SKIP; 43227731727 governance, 43227731718 isolated SQL/Auth, 43227731779 source security, 43227731712 cloud/mobile/browser/offline SUCCESS. Frozen603 SKIPPED/N/A.",
+        "Nonforce squash merged PR #2260 to 9beb10f04d0db227abacb553a50832caa4ba65dc; all five runtime/test/docs/queue blob SHAs byte-identical to reviewed PR head; exact merged 43228346551 full 4,242 PASS/0 FAIL/6 SKIP and lint SUCCESS, 43228346560 approval SUCCESS, 43228346616 cloud/browser/mobile/offline SUCCESS. Reuse unchanged PR-head security+SQL only where merged jobs not triggered."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Applicable exact PR-head checks on corrected queue and nonforce source integration remain pending; no READY or publication.",
-        "User closed-app push/email delivery is not implemented or verified; this item is scoped to in-app notification."
+      "ci_runs": [
+        43227731992,
+        43227731727,
+        43227731718,
+        43227731779,
+        43227731712,
+        43228346551,
+        43228346560,
+        43228346616
       ],
-      "notes": "No Auth/provider/SQL/production writes. #1938 off-screen administrator push is distinct. Boolean pending flag is per account, not admission authority. User sees an accessible dismissible approval banner after server admits them. Future publish requires new owner command.",
+      "blockers": [],
+      "notes": "No Auth/provider/SQL/production writes. #1938 off-screen administrator push is distinct. Boolean pending flag is per account, not admission authority. User sees an accessible dismissible approval banner after server admits them. Future publish requires new owner command. Source-only READY after exact test+merge evidence. This READY item covers ONLY in-app user notice; closed-app member push and transactional approval email remain unbuilt, unverified, and outside this scope. Issue #2258 remains OPEN for any explicitly required external delivery. No automatic staging/publication.",
       "production_deployed": false
     }
   ],
@@ -15014,6 +15022,15 @@
       "state": "TESTING",
       "source_sha": "654c5043369828120c47d243b172ceae4253e0c8",
       "evidence": "docs/workstreams/issue-2258.md; PR #2260; approval 43226631434 held because queue intake was missing, remediated this commit",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-12",
+      "issue": 2258,
+      "item_id": "DIC-Q-2258-user-account-approval-confirmation",
+      "state": "READY",
+      "source_sha": "9beb10f04d0db227abacb553a50832caa4ba65dc",
+      "evidence": "docs/workstreams/issue-2258.md; PR #2260 exact tested/merged source, five PR-head plus applicable merged checks success; in-app only",
       "production_deployed": false
     }
   ],
