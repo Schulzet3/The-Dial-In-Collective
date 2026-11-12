@@ -1,7 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {selected130,currentSelected130} from '../scripts/audit/issue33-r130-97-98-check.mjs';
-const [brazil,colombia]=selected130;
 const description=(e)=>'<p>Sourced from '+e.region+', '+e.country+', this single origin decaf coffee tastes like '+e.notes.join(', ')+'.</p><p>ROAST: Medium</p><p>Dekáf&#39;d by way of Swiss Water® Process</p>';
 const page=(e,body=description(e),h1=e.name,extra='')=>'<html><head><title>Other old coffee</title><script type="application/ld+json">{"name":"Other old coffee"}</script></head><body><main><article class="product"><h1>'+h1+'</h1><section class="product__description">'+body+'</section></article>'+extra+'</main></body></html>';
 for(const entry of selected130){
