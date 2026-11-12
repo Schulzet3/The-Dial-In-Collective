@@ -112,3 +112,5 @@
 - Owner requests exactly one push toggle reflecting the actual current device subscription after reload and after enable/disable; no automatic publication.
 - Replaced simultaneous enable/disable buttons with state-dependent rendering. Each full Admin refresh reads service-worker PushManager subscription and Notification permission; success refreshes state. Unknown/failed device status shows neither button rather than falsely claiming enabled/disabled. No localStorage preference, no server secret, no database or deployment changes.
 - Source: site/admin/view.js, site/admin/main.js, site/admin/push.js; synthetic regression tests tests/issue1938-admin-push-toggle.test.mjs. Exact CI and nonforce integration required before READY. Device APNs delivery remains separately unverified.
+
+- Queue intake repair: new TESTING row `DIC-Q-1938-push-toggle-device-state` covers three changed app paths; initial PR approval CI failed only due to missing queue scope. Re-run CI on queue-corrected source; do not count earlier approval failure as PASS.
