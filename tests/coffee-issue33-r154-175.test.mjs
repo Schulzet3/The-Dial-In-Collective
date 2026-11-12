@@ -13,6 +13,14 @@ test('#175 selected exact H1 and direct Sircof labeled notes',()=>{
  const d=selected175Source(page());assert.equal(d.exactSelectedTitle,true);
  assert.ok(Object.values(d.direct).every(x=>Array.isArray(x)?x.every(Boolean):x),JSON.stringify(d));
 });
+test('#175 selected labeled notes decode Shopify escaped ampersand without SEO',()=>{
+ const d=selected175Source(page(own.replace('Raspberries & Chocolate','Raspberries &amp; Chocolate')));
+ assert.equal(d.direct.labeled_notes,true,JSON.stringify(d));
+});
+test('#175 encoded label still rejects incomplete selected note set',()=>{
+ const d=selected175Source(page(own.replace('Raspberries & Chocolate Brownies','Raspberries &amp; Unknown')));
+ assert.equal(d.direct.labeled_notes,false,JSON.stringify(d));
+});
 test('#175 old SEO and related cards cannot rescue wrong selected product',()=>{
  assert.equal(selected175Source(page(own,'Costa Rica Other Farm',
   '<section class="related products"><h1>'+chosen175.name+'</h1>'+own+'</section>')).exactSelectedTitle,false);

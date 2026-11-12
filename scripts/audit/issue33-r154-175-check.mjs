@@ -8,7 +8,7 @@ import {selectedProductHeadings} from './issue33-selected-product-heading.mjs';
 import {removeElements} from '../../supabase/functions/_shared/html-scan.mjs';
 const sha=x=>createHash('sha256').update(x).digest('hex');
 const norm=x=>String(x??'').normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase()
- .replace(/&(?:nbsp|#160);/giu,' ').replace(/&amp;/giu,' and ').replace(/[^a-z0-9]+/gu,' ').trim().replace(/\s+/gu,' ');
+ .replace(/&(?:nbsp|#160);/giu,' ').replace(/&amp;|&/giu,' and ').replace(/[^a-z0-9]+/gu,' ').trim().replace(/\s+/gu,' ');
 export const chosen175=Object.freeze({number:175,name:'Costa Rica Cafe Sircof',
  url:'https://kingspeakcoffee.com/products/costa-rica-cafe-sircof',
  notes:['Cherries','Raspberries','Chocolate Brownies']});
