@@ -28,3 +28,8 @@ test('instructions over 8000 chars or missing live source fail closed',()=>{
 test('removing approval job enforcement is detected',()=>{
  assert.match(change('.github/workflows/approval-continuity.yml',s=>s.replace('run: node scripts/audit/preflight-contract.mjs','run: true')).join(' '),/workflow lacks preflight/);
 });
+
+test('removing Git-object receipt audit from continuity is rejected',()=>{
+ assert.match(change('scripts/audit/verify-commit-checkpoint.mjs',s=>s.replace('auditPreflightReceipt(','bypassReceipt(')).join(' '),/preflight Git receipt gate missing/);
+ assert.match(change('docs/ai/PREFLIGHT.md',s=>s.replace('DIC_PREFLIGHT_VERIFIED','MISSING_EVIDENCE')).join(' '),/missing mandatory contract/);
+});

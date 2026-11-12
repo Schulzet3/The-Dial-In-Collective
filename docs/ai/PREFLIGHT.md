@@ -26,6 +26,12 @@ Identify explicit owner scope and current Locked decisions (Master Spec **and** 
 
 For an authorized change: specify verifiable acceptance criteria; make safe nonforce source changes; include SAME-COMMIT scoped journal with `[skip netlify]` for code/test/CI; run focused and applicable hosted exact-source checks; repair failures and verify merged SHA/files. Reconcile the existing issue, journal, CURRENT_STATUS and queue without changing READY unless source, test evidence and approval justify it. For provider effects, read back actual provider state. Do not report success from a PR, a scheduled workflow, or a failed/pending check.
 
+**Mandatory source/test/CI preflight receipt:** Before changing application code, scripts, tests or workflows, retrieve the live development SHA and that commit's PREFLIGHT.md Git blob. Add a NEW standalone line to the SAME-COMMIT scoped journal:
+
+    DIC_PREFLIGHT_VERIFIED development_sha=<40-hex-source-SHA> preflight_blob_sha=<40-hex-Git-blob-SHA>
+
+The existing approval continuity check validates the NEW first-parent journal line against actual Git objects and ancestry. Never reuse a stale line or invent a hash; on missing evidence fail closed. Historical pre-rollout commits are exempt, not silently relabeled PASS. This checks an auditable attestation, not whether the assistant truly fetched/read the file; privileged GitHub bypass remains possible.
+
 **Mandatory evidence report for substantial tasks:** `PREFLIGHT [VERIFIED|BLOCKED] (Git branch SHA + preflight blob SHA); authority/owner scope; changes and merged SHA; exact tests/CI; provider readback or NOT_APPLICABLE; remaining blockers/next action; state VERIFIED, READY, BLOCKED or DEPLOYED.`
 
 **Enforcement limit:** CI can reject missing or weakened repository preflight documentation and verify same-commit journals; it cannot prove a ChatGPT conversation retrieved a document or prevent privileged direct GitHub writes on Free/private. Never claim universal 100% enforcement. GitHub does not automatically update ChatGPT Project Settings; only the owner can paste the current full instructions there.

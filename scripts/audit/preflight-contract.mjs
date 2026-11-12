@@ -7,7 +7,9 @@ export const CONTRACT_PATHS=Object.freeze([
  'docs/ai/PREFLIGHT.md','AGENTS.md','docs/ai/CONTEXT_ENTRYPOINT.md',
  'docs/README.md','docs/workstreams/README.md',
  'docs/CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md',
- '.github/workflows/approval-continuity.yml'
+ '.github/workflows/approval-continuity.yml',
+ 'scripts/audit/verify-commit-checkpoint.mjs',
+ 'scripts/audit/preflight-receipt.mjs'
 ]);
 const file=path=>readFileSync(new URL('../../'+path,import.meta.url),'utf8');
 export function auditPreflightContract(read=file){
@@ -21,7 +23,7 @@ export function auditPreflightContract(read=file){
   '# Mandatory starting point for EVERY DIC task',
   'This is the first **document** to retrieve for every DIC request',
   'development/backend-foundation','**Fail closed:**','PREFLIGHT_UNAVAILABLE',
-  'CONTEXT_ENTRYPOINT.md','SAME-COMMIT','Mandatory evidence report',
+  'CONTEXT_ENTRYPOINT.md','SAME-COMMIT','DIC_PREFLIGHT_VERIFIED','Mandatory evidence report',
   'GitHub does not automatically update ChatGPT Project Settings'
  ])if(!p.includes(phrase))errors.push('PREFLIGHT.md: missing mandatory contract '+phrase);
  if(!docs['AGENTS.md'].slice(0,550).includes('# START HERE — mandatory DIC preflight')||
@@ -43,6 +45,10 @@ export function auditPreflightContract(read=file){
     !instructions.includes('docs/ai/PREFLIGHT.md')||
     !instructions.includes('FAIL CLOSED: no GitHub/provider writes'))
   errors.push('Project Instructions must use live fail-closed preflight');
+ if(!docs['scripts/audit/verify-commit-checkpoint.mjs'].includes("from './preflight-receipt.mjs'")||
+    !docs['scripts/audit/verify-commit-checkpoint.mjs'].includes('auditPreflightReceipt(')||
+    !docs['scripts/audit/preflight-receipt.mjs'].includes('DIC_PREFLIGHT_VERIFIED'))
+  errors.push('same-commit preflight Git receipt gate missing from existing continuity job');
  if(!docs['.github/workflows/approval-continuity.yml'].includes('run: node scripts/audit/preflight-contract.mjs'))
   errors.push('mandatory approval workflow lacks preflight contract');
  return errors;

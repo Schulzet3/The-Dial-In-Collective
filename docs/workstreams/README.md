@@ -8,7 +8,7 @@
 
 - [Issue #1591: first-shot starting-style guidance until shot is saved](issue-1591.md) — owner-Nov-8 Locked supersession, merged tests and queue READY; not deployed
 
-After the mandatory [PREFLIGHT](../ai/PREFLIGHT.md), the central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md) remains the recovery checkpoint. For each code/test/CI commit, update either that central checkpoint or one of the named workstream journals in the same commit. Preserve tested SHA, affected paths, decision source, failures, privacy/release constraints and next action. Reconcile issue, CURRENT_STATUS, release queue and central checkpoint at READY and handoff. Never infer production publication.
+After the mandatory [PREFLIGHT](../ai/PREFLIGHT.md), the central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md) remains the recovery checkpoint. For each code/test/CI commit, update either that central checkpoint or one of the named workstream journals in the same commit. Preserve tested SHA, affected paths, decision source, failures, privacy/release constraints and next action. Reconcile issue, CURRENT_STATUS, release queue and central checkpoint at READY and handoff. Never infer production publication. New code/test/CI changes require a NEW standalone `DIC_PREFLIGHT_VERIFIED development_sha=<live-40-hex> preflight_blob_sha=<blob-40-hex>` line in their SAME-COMMIT journal, checked against actual Git objects by existing approval continuity CI.
 
 - [Espresso research-to-UX decision audit: Issue #455](issue-455.md)
 - [Owner-approved refinements: Issue #80](issue-80.md)
