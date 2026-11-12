@@ -13,6 +13,9 @@ import {validateChatReleaseRequest,validateManualReleaseRequest,assertChatPushEn
 import {classifyMigrationDiff,releaseReadinessMarkdown} from './migration-risk.mjs';
 import {assessReleaseQueue,formatQueueReport,assertApprovedReadyBatch} from './release-queue.mjs';
 import {validateReadyOnlyCandidate,CANDIDATE_RECEIPT_PATH,assertCandidateRelativeImports} from './ready-only-candidate.mjs';
+import {verifyReadyItems,githubReleaseReaders} from './ready-evidence-gate.mjs';
+import {liveControllerIndex} from './observe-chat-controller-event.mjs';
+import {validateReleaseTriggerReceipt} from './release-reliability.mjs';
 const REPO='Schulzet3/The-Dial-In-Collective';
 const SHA=/^[a-f0-9]{40}$/;
 // The protected release ref must first be seeded at the independently
@@ -182,6 +185,17 @@ export async function executeSingleUseRelease(settings=process.env){
  }
  const token=settings.GITHUB_TOKEN;
  if(!token)throw Error('GitHub Actions write token missing');
+ if(chatPush){
+  // The publisher itself must be the ONE official main-push Actions run.
+  const mainHead=git(['ls-remote','origin','refs/heads/main']).split(/\s+/)[0];
+  const actionsRuns=await liveControllerIndex({token,sha:settings.GITHUB_SHA});
+  const observed=validateReleaseTriggerReceipt({
+   requestCommitSha:settings.GITHUB_SHA,mainHeadSha:mainHead,
+   workflowRuns:actionsRuns,elapsedSeconds:120
+  });
+  if(observed.status!=='RUNNING'||observed.runId!==Number(settings.GITHUB_RUN_ID))
+   throw Error('Exact controller push event not observed: '+observed.reason);
+ }
  // Read the current remote refs. No force, no rebases, no automatic retries.
  git(['fetch','--no-tags','origin',
   '+refs/heads/development/backend-foundation:refs/remotes/origin/development/backend-foundation',
@@ -277,6 +291,14 @@ export async function executeSingleUseRelease(settings=process.env){
  const queuedSource=json(git(['show',sha+':docs/RELEASE_QUEUE.json']),'Durable release queue');
  const changedSourcePaths=git(['diff','--name-only','--no-renames',lastPublishedTestedSha,sha])
   .split(/\r?\n/).filter(Boolean);
+ const objectAt=(ref,path)=>{
+   const entries=git(['ls-tree','-z',ref,'--',path],{trim:false}).split('\0').filter(Boolean);
+   if(!entries.length)return null;
+   if(entries.length!==1)throw Error('Ambiguous candidate Git tree entry');
+   const match=/^([0-7]{6}) blob ([a-f0-9]{40})\t(.+)$/.exec(entries[0]);
+   if(!match||match[3]!==path)throw Error('Unsafe candidate Git tree entry');
+   return match[1]+':'+match[2];
+  };
  let queueGate;
  if(candidateBranch){
   const manifest=json(git(['show',sha+':'+CANDIDATE_RECEIPT_PATH]),'READY-only source manifest');
@@ -286,14 +308,7 @@ export async function executeSingleUseRelease(settings=process.env){
    .split(/\r?\n/).filter(Boolean);
   // Compare exact Git object mode and SHA, not textual equivalence, including
   // restored deletions. No unready file may survive a shared READY path.
-  const objectAt=(ref,path)=>{
-   const entries=git(['ls-tree','-z',ref,'--',path],{trim:false}).split('\0').filter(Boolean);
-   if(!entries.length)return null;
-   if(entries.length!==1)throw Error('Ambiguous candidate Git tree entry');
-   const match=/^([0-7]{6}) blob ([a-f0-9]{40})\t(.+)$/.exec(entries[0]);
-   if(!match||match[3]!==path)throw Error('Unsafe candidate Git tree entry');
-   return match[1]+':'+match[2];
-  };
+
   const originalQueue=git(['show',sourceAnchor+':docs/RELEASE_QUEUE.json'],{trim:false});
   const liveQueue=git(['show',developmentHead+':docs/RELEASE_QUEUE.json'],{trim:false});
   const candidateQueue=git(['show',sha+':docs/RELEASE_QUEUE.json'],{trim:false});
@@ -321,6 +336,23 @@ export async function executeSingleUseRelease(settings=process.env){
  if(settings.GITHUB_STEP_SUMMARY)appendFileSync(settings.GITHUB_STEP_SUMMARY,formatQueueReport(queueGate));
  if(!queueGate.ready)throw Error('Release queue HOLD: '+queueGate.errors.join('; ').slice(0,1200));
  assertApprovedReadyBatch(grant,queueGate);
+ // Live source-bound proof of EACH READY item before any one-use release claim.
+ const selectedIds=new Set(queueGate.ready_items.map(x=>x.id));
+ const readyItems=queuedSource.items.filter(x=>selectedIds.has(x.id));
+ const evidence=await verifyReadyItems({
+  queue:queuedSource,items:readyItems,...(await githubReleaseReaders(token)),
+  sourceObjectAt:objectAt,
+  mergeChangedPaths:merged=>git(['diff','--name-only','--no-renames',merged+'^',merged])
+   .split(/\r?\n/).filter(Boolean),
+  publishedSourceSha:lastPublishedTestedSha,candidateSha:sha,
+  candidateChangedPaths:changedSourcePaths,
+  allowedPinnedPaths:queueGate.pinned_ready_paths||[]
+ });
+ if(!evidence.ready)throw Error('READY live evidence HOLD before claim: '+
+  evidence.errors.join('; ').slice(0,2000));
+ if(settings.GITHUB_STEP_SUMMARY)appendFileSync(settings.GITHUB_STEP_SUMMARY,
+  'READY five exact GitHub CI checks, code/test Git objects and source scope VERIFIED for '+
+  evidence.verified.length+' items; no extra build.\n');
  // Source-bound CI, approved READY items, deployable-path coverage and ancestry
  // are verified above. Netlify performs the one authorized production build.
  const nowIso=new Date().toISOString();
