@@ -1759,6 +1759,26 @@
       "source_byte_caveat": "Git blob SHA matched exactly original PR head and merge; no independent module byte SHA-256, no new peer-reviewed espresso citation or measured sensory outcome.",
       "evidence_grade": "DIRECT_SOURCE_BEHAVIOR_SYNTHETIC_NEGATIVE_POSITIVE_AND_EXACT_HEAD_MERGED_NODE22_CHROMIUM_OFFLINE_PRIVACY_SECURITY_GOVERNANCE_CI",
       "implementation_status": "SAFE_NONFORCE_MERGED_EXACT_SOURCE_CI_VERIFIED_QUEUE_IN_PROGRESS_FROZEN_RELEASE_EXCLUDED"
+    },
+    {
+      "id": "LIT-2026-CZECH-ROAST-GAS-SENSORY-PLS",
+      "type": "primary_peer_reviewed_publication_indexed_abstract_only",
+      "title": "Coffee brew quality approved by photoionization mass spectrometry: Predicting sensory perception of coffee beverage during the roasting process in real-time",
+      "authors": "Hendryk Czech; Jan Heide; Sven Ehlert; Thomas Koziorowski; Ralf Zimmermann",
+      "journal": "Food Chemistry 532, 151824 (2026)",
+      "published_date": "2026-10-28",
+      "doi": "10.1016/j.foodchem.2026.151824",
+      "pmid": "42966135",
+      "source_url": "https://pubmed.ncbi.nlm.nih.gov/42966135/",
+      "original_pdf_sha256": null,
+      "original_html_sha256": null,
+      "access": "DIRECT_PRIMARY_PUBMED_INDEXED_ABSTRACT_AND_CONFLICT_DISCLOSURE_ONLY;PUBLISHER_FULL_METHODS_FIGURES_SUPPLEMENT_UNVERIFIED",
+      "provenance": "PubMed journal indexing and primary author abstract, corroborated by bibliographic publication index; no PDF or lab data downloaded",
+      "review_status": "BOUNDED_ABSTRACT_METHODS_CLAIM_CROSSWALK_NOT_FULL_TEXT_OR_ISSUE267_LITERAL_LINE_REVIEW",
+      "evidence_grade": "PRIMARY_INDEXED_ABSTRACT_WITH_UNVERIFIED_TRAIN_TEST_SPLIT_PANEL_N_AND_EXTERNAL_GENERALIZABILITY",
+      "app_code_crosswalk": "site/lib/engine.js blob 6b59fb8328aab425481b2090a85dc4ef79113c50; site/lib/constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095",
+      "review_parent_sha": "0222b4123027e7ae5fc9f4a82d16279ee464a7c7",
+      "implementation_status": "RESEARCH_ONLY_NO_PRODUCT_RULE_CHANGE_NO_CAPTURE"
     }
   ],
   "evidence_checks": [
@@ -5467,6 +5487,26 @@
         43136815429,
         43136815449
       ]
+    },
+    {
+      "id": "R455-EV-CIT-199-A",
+      "source": "Czech et al. Food Chemistry 2026 DOI 10.1016/j.foodchem.2026.151824; primary PubMed PMID 42966135 author abstract and disclosure; original paper full text unavailable",
+      "claim": "Industrial Arabica roast gas PI-TOFMS REMPI/SPI + PLS predicted six human-panel sensory attributes with abstract-reported RMSEP 10-17%, and six electronic-tongue attributes 1.3-7.8%; these are instrument model performance reported by authors, not observed DIC personal espresso taste accuracy or universal prediction confidence. Panel n, out-of-sample partition and actual brew conditions not verified.",
+      "grade": "PRIMARY_INDEXED_ABSTRACT_BOUNDED_NO_FULL_METHODS",
+      "source_sha": "0222b4123027e7ae5fc9f4a82d16279ee464a7c7",
+      "result": "REPORTED_AUTHOR_METRICS_ONLY_NOT_DIC_APPLICABLE_NUMERIC_POLICY",
+      "owner_approval": false,
+      "ci_runs": []
+    },
+    {
+      "id": "R455-EV-CIT-199-B",
+      "source": "Same primary abstract conflict disclosure; current engine Git blob 6b59fb8328aab425481b2090a85dc4ef79113c50, constants blob 72221331ce4dffabe416eebec1ae2fceced3a095",
+      "claim": "Two authors disclosed employment by instrument maker Photonion. Roast-gas instrumentation is not a DIC member shot field; no verified relationship to the app's original five taste ratings, independent Turbo/Fast-Flow/Slow-Feed settings, personal equipment/history or proposed one-control corrective advice. Do not add machine-learning model certainty, capture fields, numeric rules or universal roast prescriptions.",
+      "grade": "DIRECT_PRIMARY_ABSTRACT_CONFLICT_DISCLOSURE_PLUS_CURRENT_LIVE_CODE_SCOPE_LIMIT",
+      "source_sha": "0222b4123027e7ae5fc9f4a82d16279ee464a7c7",
+      "result": "NO_SAFE_RUNTIME_CHANGE_SUPPORTED;SOURCE_RISK_AND_UNCERTAINTY_RECORDED",
+      "owner_approval": false,
+      "ci_runs": []
     }
   ],
   "policy_decisions_pending": [],
@@ -5606,18 +5646,19 @@
     "R455-196: code and synthetic regressions source-verified, merged development-only. Owner Publish separately required; continue next distinct research or UX source-backed gap. S019 unreviewed; #267 literal audit separate zero credit.",
     "R455-197: six synthetic manual-temperature-origin cases verified and code nonforce merged; docs-only READY reconciliation subject to its own exact source CI/merge. Continue distinct bounded science or UX research, S019 standalone inaccessible, #267 literal review is separate and zero credit.",
     "R455-198: original-valid historical outlier fourth-green source fix exact merged 654723176d289a458f843493ccdeb4fff5cfa7cb and six new positive/negative tests + all applicable exact-source CI verified. Docs-only queue/ledger reconciliation requires own CI and merge before fully integrated, never deploy; S019 original inaccessible and #267 literal audit zero credit.",
-    "R455-198 postfreeze reconciliation: concurrent READY48 release staging added one IN_PROGRESS issue455 queue row before this docs PR; preserve that unique row and its no-publish freeze blocker, enrich exact CI only, no accidental extra READY row or queue history. Source ledger 103/307/157, release queue 318/59; subsequent separate release qualification, not today's owner decision."
+    "R455-198 postfreeze reconciliation: concurrent READY48 release staging added one IN_PROGRESS issue455 queue row before this docs PR; preserve that unique row and its no-publish freeze blocker, enrich exact CI only, no accidental extra READY row or queue history. Source ledger 103/307/157, release queue 318/59; subsequent separate release qualification, not today's owner decision.",
+    "R455-199: full Czech et al. 2026 primary Methods/panel sample/train-test and validation remain inaccessible; new source abstract-level only; if available, independently inspect before proposing sensory prediction. Research-only source 104/checks309/proposals158 conditional on PR integration, no numeric or Locked product changes, no queue update, S019 still inaccessible, zero #267 strict-line credit."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-198",
-    "source_sha": "654723176d289a458f843493ccdeb4fff5cfa7cb",
-    "phase": "SAFE_CODE_MERGED_EXACT_SOURCE_CI_VERIFIED;RELEASE_QUEUE_IN_PROGRESS_FROZEN_RELEASE_EXCLUDED;DOCS_RECONCILIATION_CI_PENDING",
+    "run_id": "R455-199",
+    "source_sha": "0222b4123027e7ae5fc9f4a82d16279ee464a7c7",
+    "phase": "RESEARCH_ONLY_SOURCE_CROSSWALK_DOCS_PR_PRECI_PENDING_NOT_MERGED",
     "source_counts": {
-      "research_project_sources": 103,
-      "bounded_evidence_checks": 307,
-      "proposals": 157
+      "research_project_sources": 104,
+      "bounded_evidence_checks": 309,
+      "proposals": 158
     },
-    "release_state": "CODE_CI_VERIFIED_RELEASE_QUEUE_IN_PROGRESS_NOT_PUBLISHED",
+    "release_state": "NO_APP_OR_QUEUE_CHANGE_R198_IN_PROGRESS_FROZEN_EXCLUDED",
     "original_s019": "INACCESSIBLE_UNREVIEWED",
     "github267_literal_review_credit": 0
   },
@@ -9113,13 +9154,40 @@
         "ux_merged": 43136815429,
         "governance_merged": 43136815449
       }
+    },
+    {
+      "id": "R455-PROP-199-ROAST-GAS-SENSORY-MODEL-TRANSFER-HOLD",
+      "finding": "Newly indexed 2026 experimental roast-gas-to-sensory PLS performance results are not an independently validated espresso five-taste or single-recipe-control predictor.",
+      "evidence": [
+        "R455-EV-CIT-199-A",
+        "R455-EV-CIT-199-B"
+      ],
+      "severity": "RESEARCH_TRANSFER_GUARD_NOT_A_VERIFIED_APP_DEFECT",
+      "user_benefit": "Prevents unsupported confidence labels or instrument-only accuracy claims from steering personal Log Shot -> Rate -> Recommendations.",
+      "source_provenance": "Czech et al. primary indexed abstract and conflict disclosures PMID 42966135; original full paper, methods, data and source-byte hash unavailable; engine/constants original Git blobs directly reviewed.",
+      "current_locked": "Owner's original five separate member tastes; no universal numerical optima; roast metadata is not measured shot taste; preserve single controllable change, privacy, personal notes, separate styles and equipment history.",
+      "current_app": "Currently computes roast/style heuristic plus member measured taste and same-coffee data; does not ingest PI-TOFMS roast gases or express six-attribute PLS prediction as member confidence.",
+      "proposed_change": "No runtime change. Keep this paper research-only. Only reconsider sensing/prediction with full study methods, independent external espresso validation and explicit owner product/data-capture authorization.",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "RESEARCH_ONLY_HOLD_NO_POLICY_OR_APP_BEHAVIOR_CHANGE",
+      "test_plan": "Direct primary-indexed abstract and provenance/disclosure audit; no executable changes. Functional Node/browser/SQL/Auth NOT_RUN_DOCS_ONLY; governance/CI pending until PR starts.",
+      "release_queue_status": "NOT_APPLICABLE_NO_RUNTIME_CHANGE_NO_READY_ITEM",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false,
+      "exact_source": {
+        "starting_development_sha": "0222b4123027e7ae5fc9f4a82d16279ee464a7c7",
+        "engine_blob": "6b59fb8328aab425481b2090a85dc4ef79113c50",
+        "constants_blob": "72221331ce4dffabe416eebec1ae2fceced3a095",
+        "journal_path": "docs/workstreams/ops-issue455-r199-roast-gas-sensory-proxy-20261112.md"
+      }
     }
   ],
   "changeScope": {
     "application_code_changed": false,
-    "tests_executed": true,
+    "tests_executed": false,
     "production_deployed": false,
-    "queue_changed": true,
-    "reason": "Documentation-only verified R198 code and evidence source checkpoint. Concurrent release-stage owner freeze preserved; one existing R198 IN_PROGRESS queue row updated with real CI, not promoted to READY."
+    "queue_changed": false,
+    "reason": "Abstract-limited primary publication intake; two source claim checks and one research-only hold proposal; documentation only, pre-PR CI not run."
   }
 }
