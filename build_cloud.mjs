@@ -12,7 +12,7 @@ if(!url||!/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(url)||!key?.startsWith('sb
 checkRepository();
 validateSiteSource(root);
 await rm(path.join(root,'dist'),{recursive:true,force:true});
-const files=['visual.css','cloud/appearance.js','cloud/appearance-bootstrap.js','admin/styles.css','admin/view.js','admin/records.js','admin/main.js','admin/push.js','styles.css','icon.svg','icon-192.png','icon-512.png','manifest.webmanifest','cloud/client.js','cloud/cache.js','cloud/outbox.js','cloud/mapping.js','cloud/shot_card.js','cloud/community.js','cloud/coffee-match-ui.js','cloud/coffee-url-autofill.js','cloud/dose-advisory.js','cloud/main.js','cloud/confirmation.js','cloud/help.js','media/first-shot.en.vtt','media/first-shot-transcript.txt','media/first-shot-poster.svg','media/first-shot-walkthrough.mp4','lib/constants.js','lib/model.js','lib/community-evidence.js','lib/engine.js','lib/ui.js'];
+const files=['visual.css','cloud/appearance.js','cloud/appearance-bootstrap.js','admin/styles.css','admin/view.js','admin/records.js','admin/main.js','admin/push.js','styles.css','icon.svg','icon-192.png','icon-512.png','manifest.webmanifest','cloud/client.js','cloud/approval-push.js','cloud/cache.js','cloud/outbox.js','cloud/mapping.js','cloud/shot_card.js','cloud/community.js','cloud/coffee-match-ui.js','cloud/coffee-url-autofill.js','cloud/dose-advisory.js','cloud/main.js','cloud/confirmation.js','cloud/help.js','media/first-shot.en.vtt','media/first-shot-transcript.txt','media/first-shot-poster.svg','media/first-shot-walkthrough.mp4','lib/constants.js','lib/model.js','lib/community-evidence.js','lib/engine.js','lib/ui.js'];
 // No release can substitute, omit or silently alter the owner-approved video.
 const walkthrough=await readFile(path.join(root,'site','media/first-shot-walkthrough.mp4'));
 if(createHash('sha256').update(walkthrough).digest('hex')!=='e8235c3c03f17541f07e0a3f0f9907f61c90c748586f069dfb93b7d49591b2aa')throw new Error('Walkthrough video missing or SHA-256 does not match approved source');
@@ -35,6 +35,10 @@ const template=await readFile(path.join(root,'scripts/pwa/service-worker.templat
 const serviceWorker=template.replaceAll('__DIC_BUILD_ID__',shellHash.digest('hex').slice(0,20))
  .replaceAll('__DIC_ASSETS__',JSON.stringify(publicShellAssets));
 await writeFile(path.join(root,'dist/sw.js'),serviceWorker);
+// A second, fixed-message worker has narrower scope and never replaces the Admin/offline worker.
+await mkdir(path.join(root,'dist/member-approval'),{recursive:true});
+await writeFile(path.join(root,'dist/member-approval/sw.js'),
+ await readFile(path.join(root,'scripts/pwa/member-approval-worker.template.txt')));
 await writeFile(path.join(root,'dist/_headers'),`/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: no-referrer\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' ${url}; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'\n  Cache-Control: no-cache\n`);
 validateDist(root);
 console.log('Owner-development assets built. No database secrets, exports, demo fixtures or source docs are included in dist. This is not the full beta.');

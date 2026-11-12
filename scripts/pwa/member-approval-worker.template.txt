@@ -1,0 +1,19 @@
+// Only approval Web Push; scoped separately so the existing Admin offline PWA worker remains intact.
+self.addEventListener('push',event=>{
+ event.waitUntil(self.registration.showNotification('The Dial In Collective',{
+  body:'Your account is approved. Open the app to get started.',
+  tag:'dic-member-account-approved',icon:'/icon-192.png',data:{path:'/'}
+ }));
+});
+self.addEventListener('notificationclick',event=>{
+ event.notification.close();
+ event.waitUntil((async()=>{
+  const windows=await self.clients.matchAll({type:'window',includeUncontrolled:true});
+  const existing=windows.find(client=>{
+   try{return new URL(client.url).origin===self.location.origin &&
+    new URL(client.url).pathname==='/';}catch{return false;}
+  });
+  if(existing)return existing.focus();
+  return self.clients.openWindow('/');
+ })());
+});
