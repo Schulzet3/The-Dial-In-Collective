@@ -1,0 +1,13 @@
+# Issue #267 A58 — source-bound strict continuation (2026-11-11 MDT / November 12 UTC)
+
+## Authority / exact sources
+Development-only owner #267 V2 strict review; no publish, production SQL/Auth/Edge/provider/member writes or forced Git. Started from verified development `15f2b07024d4d5f434a7cf2216c942b4a9bcf615`. Frozen original `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9` tree `c54ade64eca30946df8858297578a172f5cf6fa8`; pinned executable `9707553a64f88127826e8f5b2b36cd0651296e83` tree `626d241ef5888bddee71b6e94ee30ea0cb8bee1e`. Direct source Git blobs F160 `0af27163c9685e6c81bbaab6627877ccd85eed3b`, P129 `889d1d4bb8a580b12affa39f5c5351bcacc4b0b5`, postpin live `60b0d902e0ff0f2fc9a5763c5877ebcbc725a39c`.
+
+## Individually read and interpreted
+[Append-only A58 64-line receipt](../audits/issue267-v2-strict-batches/S2-DISJOINT-F160-142-161-P129-176-205-LIVE-014-20261111-A58.json): frozen F160 lines **142–161** (20), pinned P129 lines **176–205** (30), and post-pin live P129 **566, 576–577, 579–581, 583–590** (14). All 64 distinct physical source positions directly fetched/read with source literal, SHA, 1-based line, classification, individual behavior/risk/counterpart/testability/remediation/Locked-fit fields. Original P129 lines 185 and 195 changed in live source; unchanged remaining 28/30 mapped exactly. No current executable changes or duplicate review credit against A57. Earlier F001/initial R2/C2 broad segments reread but not blanket-upgraded; global all-receipt uniqueness **not verified**.
+
+## Findings / acceptance
+Historical October 18 migration, Community, offline and provider claims remain archival, not current independent Auth/RLS/Netlify evidence. Current exact-selected decaf H1/FAQ/processing-details protections have bounded false-positive/false-negative possibilities requiring #33 actual selected-coffee regression evidence before any code alteration. No reproducible active defect or proven removable code in this range; #33 and #96 scope owners intact. Node22/lint/build, Chromium/mobile/offline, SQL/Auth/Privacy, frozen603 and provider tests **NOT RUN** for docs-only evidence; CI governance must independently pass on exact PR head and merged SHA before integration claims. No code, migration, oracle, member, provider, queue or deployment changes.
+
+## Continuation
+Next original frozen **F160:162** and pinned **P129:206**; separately audit live-only source, global SHA-bound historic receipt gaps/overlaps, post-pin new/renamed paths, confirm actual CI, and assemble prioritized final owner review only on genuine full acceptance. #267 stays OPEN, #2110 unchanged/open, unknown other-account automation state not asserted. Preserve all older evidence.
