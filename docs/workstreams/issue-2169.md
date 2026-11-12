@@ -33,3 +33,9 @@
 - Required next: test PR head and exact integrated merged source, port shared gate into main guarded controller, add independent main request event watcher, reconcile issue/state; no publication without NEW owner command.
 
 - CI correction: first live PR head 43155647528 ran 4000+ Node tests and failed ONLY lint (unused testPaths binding, line 63); removed dead local binding, retained full changed runtime/test provenancePaths parity. Head approval 43155647477, cloud 43155647388 and SQL 43155647441 PASS. New exact-source CI REQUIRED before integration. [skip netlify]
+
+
+## 2026-11-12 — #2169 source-drift false negative repaired [skip netlify]
+- Following merge #2187 at f0153d475b73e0e45dea9b849ac205a9e9e6e0c1, exact merged approval CI 43156693640 failed on #455 R198: subsequent separately unfinished #455 R201 legitimately modified site/lib/engine.js after the R198 tested merged blob. The blanket current-tip byte parity check incorrectly treated feature-level READY as batch-candidate readiness, contradicting the Locked #457 queue semantics. No source was deployed; no CI result was represented as PASS.
+- Repair: continue independently verifying cited exact CI, full changed merged code/test parity, scope and blockers. Report current development source drift in explicit source_drift_paths, without failing a previously independently certified READY item. Candidate source isolation still must use the original selected READY bytes; if unready same-file code leaks, stage/preclaim gates reject. Regression tests cover this; no silent READY promotion, queue mutation, candidate staging, Netlify or provider write.
+- Next: verify head and merged CI including the mandatory approval job, ensure existing #455 R201 remains outside READY candidate; preserve two READY entries, check event observer main follow-up separately.
