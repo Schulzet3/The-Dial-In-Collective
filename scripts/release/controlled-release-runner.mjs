@@ -12,7 +12,8 @@ import {planSingleUseClaim,assertReadyForRelease,validateReleaseGrant,RELEASE_BR
 import {validateChatReleaseRequest,validateManualReleaseRequest,assertChatPushEnvelope,CHAT_REQUEST_PATH,OPS_JOURNAL_PATH} from './chat-release-request.mjs';
 import {classifyMigrationDiff,releaseReadinessMarkdown} from './migration-risk.mjs';
 import {assessReleaseQueue,formatQueueReport,assertApprovedReadyBatch} from './release-queue.mjs';
-import {validateReadyOnlyCandidate,CANDIDATE_RECEIPT_PATH,assertCandidateRelativeImports} from './ready-only-candidate.mjs';
+import {validateReadyOnlyCandidate,CANDIDATE_RECEIPT_PATH,assertCandidateRelativeImports,
+ assertCandidateStaticNamedExports} from './ready-only-candidate.mjs';
 import {verifyReadyItems,githubReleaseReaders} from './ready-evidence-gate.mjs';
 import {liveControllerIndex} from './observe-chat-controller-event.mjs';
 import {validateReleaseTriggerReceipt} from './release-reliability.mjs';
@@ -324,6 +325,10 @@ export async function executeSingleUseRelease(settings=process.env){
    sourceObjectAt:objectAt,isAncestor:(a,b)=>verifiedGitAncestry(a,b)
   });
   assertCandidateRelativeImports(queueGate.deployable_paths,{
+   readSource:path=>git(['show',sha+':'+path]),
+   hasPath:path=>objectAt(sha,path)!==null
+  });
+  assertCandidateStaticNamedExports(queueGate.deployable_paths,{
    readSource:path=>git(['show',sha+':'+path]),
    hasPath:path=>objectAt(sha,path)!==null
   });

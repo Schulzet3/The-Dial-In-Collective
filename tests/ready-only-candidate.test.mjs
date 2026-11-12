@@ -1,7 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import {planReadyOnlyCandidate,validateReadyOnlyCandidate,CANDIDATE_KIND,
- CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH,REVIEWED_WORKFLOW_TEST,discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,assertCandidateRelativeImports} from '../scripts/release/ready-only-candidate.mjs';
+ CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH,REVIEWED_WORKFLOW_TEST,discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,assertCandidateRelativeImports,
+ assertCandidateStaticNamedExports} from '../scripts/release/ready-only-candidate.mjs';
 import {classifyReleaseRisk} from '../scripts/release/release-reliability.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40),D='d'.repeat(40);
 const one={id:'DIC-Q-100',issue:100,title:'READY card',state:'READY',
@@ -395,4 +397,36 @@ test('#2169 missing or falsified risk receipt cannot bypass five-source-check cl
   manifest:{...manifest,risk_classification:{...manifest.risk_classification,builds:0}}}),/risk-tier\/one-build/);
  assert.throws(()=>validateReadyOnlyCandidate(q,{...validate,
   manifest:{...manifest,risk_classification:{...manifest.risk_classification,checks:['approval']}}}),/risk-tier\/one-build/);
+});
+
+test('#2169 source-only export preflight denies missing direct symbols before build',()=>{
+ const files={'site/main.js':"import { push, view as local } from './functions.js';\n",
+  'site/functions.js':'export const push=1;\nexport {view} from "./view.js";',
+  'site/view.js':'export const view=1;',
+  'site/screen.js':'export default function screen(){}'};
+ const args={readSource:path=>files[path],hasPath:path=>Object.hasOwn(files,path)};
+ assert.equal(assertCandidateStaticNamedExports(['site/main.js'],args),true);
+ files['site/functions.js']='export const wrong=1;';
+ assert.throws(()=>assertCandidateStaticNamedExports(['site/main.js'],args),
+  /Missing static relative module export.*push/);
+ files['site/main.js']="import screen from './screen.js';";
+ files['site/screen.js']='export const onlyNamed=1;';
+ assert.throws(()=>assertCandidateStaticNamedExports(['site/main.js'],args),
+  /Missing static relative module export.*default/);
+});
+test('#2169 unknown barrel export is deferred to mandatory build but missing file stops early',()=>{
+ const files={'site/main.js':"import {value} from './barrel.js';",
+  'site/barrel.js':"export * from './unknown.js';"};
+ const args={readSource:path=>files[path],hasPath:path=>Object.hasOwn(files,path)};
+ assert.equal(assertCandidateStaticNamedExports(['site/main.js'],args),true);
+ files['site/main.js']="import {value} from './missing.js';";
+ assert.throws(()=>assertCandidateStaticNamedExports(['site/main.js'],args),
+  /Unresolved static relative module import/);
+});
+test('#2169 source staging and guarded controller use export preflight before CI/claim',()=>{
+ const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
+ assert.match(read('scripts/release/stage-ready-only-candidate.mjs'),
+  /assertCandidateStaticNamedExports\(plan\.included_paths/);
+ assert.match(read('scripts/release/controlled-release-runner.mjs'),
+  /assertCandidateStaticNamedExports\(queueGate\.deployable_paths/);
 });
