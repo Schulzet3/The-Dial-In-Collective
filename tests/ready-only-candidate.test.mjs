@@ -273,3 +273,29 @@ test('excluded unfinished issue test inherited unchanged by later selected READY
    return testBlobAt(ref,path);
   }}),/Cannot independently verify selected READY test provenance/);
 });
+
+test('production candidate restores every development-only Actions workflow without weakening app READY scope',()=>{
+ const path='.github/workflows/issue33-extra.yml';
+ const original=validate.sourceObjectAt;
+ const blob=(ref,p)=>p===path?(ref===B?'100644:development-workflow':null):original(ref,p);
+ const withWorkflows={...validate,
+  manifest:{...manifest,restored_unpublished_workflow_paths:[path]},
+  developmentChangedPaths:[...validate.developmentChangedPaths,path],
+  candidateChangedPaths:[...validate.candidateChangedPaths],
+  stagedCommitChangedPaths:[...validate.stagedCommitChangedPaths,path],
+  sourceObjectAt:blob};
+ assert.equal(validateReadyOnlyCandidate(q,withWorkflows).ready,true);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...withWorkflows,
+  manifest:{...manifest,restored_unpublished_workflow_paths:[]}}),
+  /restore every changed GitHub Actions workflow/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...withWorkflows,
+  candidateChangedPaths:[...validate.candidateChangedPaths,path]}),
+  /must not modify\/create GitHub Actions workflows/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...withWorkflows,
+  sourceObjectAt:(ref,p)=>ref===C&&p===path?'100644:unreviewed-workflow':blob(ref,p)}),
+  /must not modify\/create GitHub Actions workflows|not exactly restored/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...withWorkflows,
+  stagedCommitChangedPaths:validate.stagedCommitChangedPaths}),
+  /staging commit changes unrelated paths/);
+});
+

@@ -9,6 +9,13 @@ const equal=(a,b)=>JSON.stringify(sorted(a))===JSON.stringify(sorted(b));
 export const CANDIDATE_RECEIPT_PATH='docs/RELEASE_CANDIDATE.json';
 export const CANDIDATE_JOURNAL_PATH='docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md';
 export const CANDIDATE_KIND='DIC-READY-ONLY-SOURCE-1';
+// Production publication must never edit/create GitHub Actions workflows.
+// The Actions GITHUB_TOKEN publisher has no workflows scope. Keep all CI
+// workflow evolution on main/development and restore exact published bytes
+// in the isolated source, without weakening READY feature/test gating.
+export const workflowChangedPaths=paths=>sorted([...new Set((Array.isArray(paths)?paths:[])
+ .filter(p=>typeof p==='string'&&/^\.github\/workflows\/[A-Za-z0-9_./-]+\.ya?ml$/.test(p)))]);
+
 export function planReadyOnlyCandidate(queue,{publishedSourceSha,developmentSourceSha,
  selectedIds,developmentChangedPaths,pinnedReadyPaths=[],isAncestor}={}){
  const errors=queueSchemaErrors(queue);
@@ -192,6 +199,15 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
  if(!Array.isArray(manifest.pinned_to_ready_paths||[])||
     !equal(manifest.pinned_to_ready_paths||[],plan.pinned_ready_paths))
   reject('Pinned READY manifest differs from actual mixed-source paths');
+ const workflowChanges=workflowChangedPaths(developmentChangedPaths||[]);
+ const frozenWorkflows=manifest.restored_unpublished_workflow_paths||[];
+ if(!Array.isArray(frozenWorkflows)||!equal(frozenWorkflows,workflowChanges))
+  reject('Production candidate must restore every changed GitHub Actions workflow to exact published source');
+ if(workflowChangedPaths(candidateChangedPaths||[]).length)
+  reject('Production candidate must not modify/create GitHub Actions workflows');
+ for(const path of frozenWorkflows)
+  if(sourceObjectAt(candidateSha,path)!==sourceObjectAt(publishedSourceSha,path))
+   reject('GitHub Actions workflow was not exactly restored to published bytes: '+path);
  const excludedTests=manifest.excluded_unready_test_paths||[];
  if(!Array.isArray(excludedTests)||new Set(excludedTests).size!==excludedTests.length)
   reject('Invalid or duplicate excluded unfinished test paths');
@@ -237,7 +253,7 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
     reject('Cannot exclude a test introduced or modified by an approved READY merge: '+path);
   }
  }
- const allowed=[...plan.restored_paths,...plan.pinned_ready_paths,...excludedTests,CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH];
+ const allowed=[...plan.restored_paths,...plan.pinned_ready_paths,...excludedTests,...frozenWorkflows,CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH];
  if(!equal(stagedCommitChangedPaths||[],allowed))
   reject('Candidate staging commit changes unrelated paths or lacks same-commit journal');
  for(const path of plan.restored_paths)
