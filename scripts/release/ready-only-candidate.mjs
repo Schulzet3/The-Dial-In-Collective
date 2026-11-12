@@ -17,15 +17,15 @@ export const workflowChangedPaths=paths=>sorted([...new Set((Array.isArray(paths
  .filter(p=>typeof p==='string'&&/^\.github\/workflows\/[A-Za-z0-9_./-]+\.ya?ml$/.test(p)))]);
 export const REVIEWED_WORKFLOW_TEST=Object.freeze({
  path:'tests/issue455-browser-dependency-install-fallback.test.mjs',
- sourceBlob:'eab5e9f267d7b7451a56db005a8980727c4ce1f6',
+ sourceBlob:'32174be8c42ba9ae73085e0f6f1f42613b2b08db',
  restoredWorkflow:'.github/workflows/cloud-regression.yml'
 });
 export function discoverReviewedWorkflowTestExclusions({publishedSourceSha,developmentSourceSha,restoredWorkflows,sourceObjectAt}={}){
  if(typeof sourceObjectAt!=='function'||!Array.isArray(restoredWorkflows)||
     !restoredWorkflows.includes(REVIEWED_WORKFLOW_TEST.restoredWorkflow))return [];
  const path=REVIEWED_WORKFLOW_TEST.path;
- // This exact reviewed two-assertion source-only browser-install test uses
- // only node:test/assert/fs and reads only the development workflow named
+ // This reviewed three-test R190 workflow check preserves strict candidate provenance;
+ // it reads the development workflow while candidate workflows are restored.
  // above; it is not an app feature test. Never match by filename alone.
  return sourceObjectAt(publishedSourceSha,path)===null&&
   sourceObjectAt(developmentSourceSha,path)==='100644:'+REVIEWED_WORKFLOW_TEST.sourceBlob?

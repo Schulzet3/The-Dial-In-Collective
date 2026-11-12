@@ -641,3 +641,11 @@ Independently verified Git release/production b386a977a7c43bf190f6315105894334d9
 
 ## 2026-11-12 main request delivery recovery DIC-20261112-READY1PUSH-32 [skip netlify]
 - First nonforce main request e742c1b1a8bfebfb49a26bf361d59fb70fbe92e0 verified present, but no commit-linked controller run and release/production still d0bc07df641af6411435daac74ee3cb16d1bdb61; consumption ledger lacks DIC-20261112-READY1PUSH-32. Recovery: GitHub PR squash merge produces one-parent main push with same fresh unconsumed one-use grant and candidate, changing ONLY release request timestamp/main lease and this append-only journal. No extra publisher, force, direct Netlify API, repeated release or modified runtime. Inspect live controller/release/deploy after merge before further action.
+
+## 2026-11-12 #2169 release controller recovery [skip netlify]
+- GitHub API independently confirms both main pushes ran: controller 43147570413 at e742c1b FAILED, controller 43147831127 at 21a4741 FAILED; acceptance runs 43147570426 and 43147831221 SUCCESS. PR-only run retrieval was wrong for push events.
+- First controller denied stale reviewed workflow-test source blob eab5e9 (actual development source 32174be8). Second denied journal appendix omitting required request.mode. Both failures occurred before one-use release claim. Production unchanged.
+- Same-commit fix refreshes the exact reviewed R190 three-test hash, adds canonical mode-bound journal appendix helper and two regression tests in existing main CI suite. No grant, workflow, production, provider, member, DB or app-runtime mutation. Never retry expired/consumed grants; no new publication authorized.
+- Required next: source-bound PR/merged CI, then reconcile the reliable run receipt via repository actions/runs?head_sha. [skip netlify]
+
+- PR-head CI 43151089003 correctly exposed one stale synthetic fixture in tests/ready-only-candidate.test.mjs. This same-commit correction rebinds fixture's expected R190 blob to current verified 32174be8, preserving every negative test; rerun all applicable existing main CI. [skip netlify]

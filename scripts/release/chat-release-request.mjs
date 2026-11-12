@@ -134,3 +134,15 @@ export function assertChatPushEnvelope({eventForced,eventAfterSha,eventHeadSha,
   !appended.includes(request.mode))deny('new journal appendix must bind request ID, source and mode');
  return true;
 }
+
+// Inert writer helper. Controller still checks the actual one-parent push.
+export function formatChatReleaseJournalAppendix(request={}){
+ const {release_id,tested_source_sha,mode}=request;
+ if(!ID.test(release_id||'')||!SHA.test(tested_source_sha||'')||
+    !['validate_only','publish'].includes(mode))
+  deny('cannot prepare journal without valid release ID, source and mode');
+ return '\n## '+release_id+' controller request [skip netlify]\n'+
+  '- Release ID: '+release_id+'\n'+
+  '- Tested source: '+tested_source_sha+'\n'+
+  '- Mode: '+mode+'\n';
+}
