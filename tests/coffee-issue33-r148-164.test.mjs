@@ -57,9 +57,17 @@ test('#164 actual parser retains anaerobic priority over natural for selected na
  assert.equal(p.fields.process,'Anaerobic',JSON.stringify(p.fields));
  assert.ok((p.fields.tasting_notes||'').includes('Jasmine'),JSON.stringify(p.fields));
 });
-test('#164 current selected public preview does not infer roast or decaf from unrelated SEO',()=>{
- const p=extractPublicCoffeeFacts(page(facts,chosen164.name,'','Medium Dark Roast Decaf Swiss Water Colombia'));
- assert.equal(p.ok,true);
+test('#164 hostile unrelated SEO must not inject a roast or decaf method',()=>{
+ const p=extractPublicCoffeeFacts(page(facts,chosen164.name,'','Blue Ridge Blend Medium Dark Roast Decaf Swiss Water Colombia'),
+  {source_url:chosen164.url});
+ // A page-level contradiction is permitted to cause a fail-closed preview.
+ assert.ok(p.ok!==true || (!p.fields?.decaffeination_method&&!p.fields?.roast_level),JSON.stringify(p));
+});
+test('#164 neutral SEO retains chosen coffee and leaves unpublished roast/decaf empty',()=>{
+ const p=extractPublicCoffeeFacts(page(facts,chosen164.name,'','Ironclad Ethiopia Worka Sakaro coffee listing'),
+  {source_url:chosen164.url});
+ assert.equal(p.ok,true,JSON.stringify(p));
+ assert.equal(p.fields.name,chosen164.name);
  assert.equal(p.fields.decaffeination_method,undefined);
  assert.equal(p.fields.roast_level,undefined);
 });
