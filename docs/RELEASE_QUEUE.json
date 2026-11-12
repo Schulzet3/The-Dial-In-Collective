@@ -12943,7 +12943,8 @@
         "R198 original-valid old calibration eligible outside current active dial, impossible/reversed original scale excluded, explicitly different calibration excluded, incomplete green ratings excluded, and saved new outlier prompts while original archived notes unchanged: 6/6 new synthetic tests PASS on PR head and merge.",
         "Exact PR-head [43136517358] and merged [43136815409] Node22/lint 4035 PASS, 0 FAIL, six intentional SKIP; PR-head and merged Chromium/mobile/offline/governance SUCCESS, isolated PR-head SQL/privacy and source security SUCCESS. Frozen603 SKIPPED, not PASS.",
         "Independent Nov 12 #2169 intake: merged R198 engine.js blob 6b59fb8328aab425481b2090a85dc4ef79113c50 equals current development exactly; published baseline blob 0e7b493494f5caac96c1a6df1f7249456de91bd8 is older. Exact merged CI Node22 43136815409 4035 PASS/0 FAIL, six regressions PASS; merged browser/offline 43136815429 and governance 43136815449 SUCCESS. Identical PR-head security 43136517248 and isolated SQL 43136517242 reused; original603 SKIPPED, not PASS. Owner #455 approved safe work only. Item READY independently, no staging, grant or publication.",
-        "R201 integrated source amendment #2188: merged a5dd027d7f20e4eb6b108cf5b8acdaf432ca006c site/lib/engine.js blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6 matches tested PR head be61be27bc0d9ff9399fa79fca70fe7f14c4eb01 and current development; new R201 test blob 400dc0b633622a1cf685784de9b65226a50d8181 likewise unchanged. PR head exact five checks and security PASS: Node22/lint 43156218900 (4076 PASS, 0 FAIL, 6 intentional SKIP), governance 43156218896, isolated SQL 43156218919, source security 43156218939, browser/offline 43156218947. All six R198 and all six R201 regression cases PASS in same source suite. Frozen603 SKIPPED, NOT PASS. No candidate/stage/grant/production."      ],
+        "R201 integrated source amendment #2188: merged a5dd027d7f20e4eb6b108cf5b8acdaf432ca006c site/lib/engine.js blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6 matches tested PR head be61be27bc0d9ff9399fa79fca70fe7f14c4eb01 and current development; new R201 test blob 400dc0b633622a1cf685784de9b65226a50d8181 likewise unchanged. PR head exact five checks and security PASS: Node22/lint 43156218900 (4076 PASS, 0 FAIL, 6 intentional SKIP), governance 43156218896, isolated SQL 43156218919, source security 43156218939, browser/offline 43156218947. All six R198 and all six R201 regression cases PASS in same source suite. Frozen603 SKIPPED, NOT PASS. No candidate/stage/grant/production."
+      ],
       "ci_runs": [
         43136517358,
         43136517253,
@@ -13054,6 +13055,29 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
       "notes": "Development-only narrow parser correction VERIFIED source READY after exact merged guarded current chosen URL and independent binary artifact rehash. Existing 320 queue entries and all historical READY/DEPLOYED records preserved; no deployment. Parent issue33 remains OPEN for other 603 cases including #115/#152. Approval decisions unchanged.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-2258-user-account-approval-confirmation",
+      "issue": 2258,
+      "pr": 2260,
+      "title": "Server-confirmed in-app notification when a pending member's account is approved",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/main.js",
+        "site/styles.css"
+      ],
+      "owner_source": "Owner direct chat 2026-11-12; https://github.com/Schulzet3/The-Dial-In-Collective/issues/2258",
+      "tests": [
+        "tests/cloud-auth-startup-verification.test.mjs: pending approval status poll, genuine admission, rejection, existing member, network error. Initial #2260 PR-head cloud-tests SUCCESS 43226631450; approval 43226631434 held strictly on new scoped queue item absent; corrected here."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Applicable exact PR-head checks on corrected queue and nonforce source integration remain pending; no READY or publication.",
+        "User closed-app push/email delivery is not implemented or verified; this item is scoped to in-app notification."
+      ],
+      "notes": "No Auth/provider/SQL/production writes. #1938 off-screen administrator push is distinct. Boolean pending flag is per account, not admission authority. User sees an accessible dismissible approval banner after server admits them. Future publish requires new owner command.",
       "production_deployed": false
     }
   ],
@@ -14982,6 +15006,15 @@
       "production_deployed": true,
       "release_id": "DIC-20261112-READY48PUSH-31",
       "netlify_deploy_id": "6af51c834f09e4e2c0f203ea"
+    },
+    {
+      "date": "2026-11-12",
+      "issue": 2258,
+      "item_id": "DIC-Q-2258-user-account-approval-confirmation",
+      "state": "TESTING",
+      "source_sha": "654c5043369828120c47d243b172ceae4253e0c8",
+      "evidence": "docs/workstreams/issue-2258.md; PR #2260; approval 43226631434 held because queue intake was missing, remediated this commit",
+      "production_deployed": false
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
