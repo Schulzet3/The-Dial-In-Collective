@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "round": "R135",
+  "status": "VERIFIED_CURRENT_EXACT_SELECTED_SOURCE_AND_ACTUAL_PARSER_WITH_FACILITY_PRODUCER_QUALIFICATION_NOT_GLOBAL_603",
+  "verified_at_utc": "2026-11-12T05:10:23Z",
+  "production_release_authorized": false,
+  "original": {
+    "number": 109,
+    "name": "Anasora Natural",
+    "roaster": "East Pole Coffee Co.",
+    "original_url": "https://eastpole.coffee/products/anasoranatural",
+    "original_decision": "QUALIFIED_CONTEXT_OR_SEMANTIC_REVIEW_REQUIRED",
+    "original603_total_coffees": 603,
+    "original603_total_roasters": 201,
+    "original603_total_captures": 1197,
+    "immutable_csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "immutable_csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "oracle_scorer_captures_modified": false,
+    "full603_individually_certified": false
+  },
+  "selected_current": {
+    "selected_h1": "Anasora Natural",
+    "official_url": "https://eastpole.coffee/products/anasoranatural",
+    "identity_verified": true,
+    "direct_selected_labeled": {
+      "producer_source_label": "Anasora Farm Site",
+      "producer_role_qualification": "FARM_SITE_NOT_NAMED_INDIVIDUAL",
+      "origin": "Guji, Ethiopia",
+      "elevation_m": "2300 masl",
+      "variety": "Heirloom",
+      "process": "Natural",
+      "tasting_notes": [
+        "Strawberry syrup",
+        "Blueberry",
+        "Blackberry juice"
+      ]
+    },
+    "intentionally_blank_unpublished": [
+      "roast_level",
+      "decaffeination_method"
+    ],
+    "actual_parser_fields": {
+      "name": "Anasora Natural",
+      "roaster": "East Pole Coffee Co.",
+      "producer": "Anasora Farm Site",
+      "origin": "Guji, Ethiopia",
+      "elevation_m": "2300 masl",
+      "variety": "Heirloom",
+      "process": "Natural",
+      "tasting_notes": "Strawberry syrup, Blueberry, Blackberry juice"
+    },
+    "source_conflicts": [],
+    "seo_fallback_fields": [],
+    "add_coffee_rendered": true,
+    "source_review_rendered": true,
+    "actual_runtime_parser_defect": false
+  },
+  "changes": {
+    "source_pr": 2198,
+    "pr_head": "f893a2034ee2a5b45a8d01dc22783594ba62ba17",
+    "pr_head_tree": "324e5ad68e4f516244b2750073b005f44e319dfd",
+    "pr_synthetic_merge_ref": "c43c6d9fc9b8802ee782a2c04d55945c7b885e57",
+    "nonforce_squash_merge": "5f02c971f619dc7ce5875f0df22485c10125d276",
+    "merged_tree": "324e5ad68e4f516244b2750073b005f44e319dfd",
+    "source_code_changed": false,
+    "added_paths": [
+      "scripts/audit/issue33-r135-109-check.mjs",
+      "tests/coffee-issue33-r135-109.test.mjs",
+      ".github/workflows/issue33-r135-109.yml",
+      "docs/workstreams/ops-issue33-r135-109-20261112.md"
+    ],
+    "initial_test_failure_run": 43158798398,
+    "initial_failure": "AUDIT_GATE_BARE_NATURAL_AMBIGUOUS_VS_LABELED_PROCESS_NATURAL",
+    "correction": "SAME_COMMIT_AUDIT_CHECKER_AND_SCOPED_JOURNAL"
+  },
+  "pr_head_verification": {
+    "official": 43158860821,
+    "node_lint": 43158860820,
+    "cloud_mobile": 43158860797,
+    "python": 43158860881,
+    "isolated_sql": 43158861006,
+    "approval": 43158860923,
+    "private_source_archive": 43158860800,
+    "frozen603": 43158860901,
+    "frozen603_conclusion": "SKIPPED"
+  },
+  "exact_merged_verification": {
+    "source_sha": "5f02c971f619dc7ce5875f0df22485c10125d276",
+    "official_current_html_and_parser": 43159273460,
+    "official_focused_tests_passed": 12,
+    "official_afterproof_passed": true,
+    "official_afterproof_failures": [],
+    "node_lint": 43159273304,
+    "node_tests_total": 4099,
+    "node_tests_passed": 4093,
+    "node_tests_failed": 0,
+    "node_tests_skipped": 6,
+    "lint": "PASS",
+    "cloud_mobile": 43159273458,
+    "python": 43159273311,
+    "approval": 43159273320,
+    "controlled_public_probe": 43159273298,
+    "controlled_public_probe_conclusion": "SKIPPED"
+  },
+  "independent_exact_merged_artifact": {
+    "artifact_id": 13916494147,
+    "zip_bytes": 46172,
+    "zip_sha256": "950ccb0792be8d854e1768614ba8d475d855dfe92d25b21b0473f60a4bc35664",
+    "official_html_bytes": 183242,
+    "official_html_sha256": "40b167a992b8acb5545338f6fce79fd2484174595c3b027686bdc45ef25d350f",
+    "evidence_json_sha256": "79b649bb4955a5687077c893b7c28c24d2a62168f77caa60a7594c36d9319243",
+    "afterproof_sha256": "c5a9ad04f6ca8b2f7d655deedffcfa8bc3cd571434a2b5ed0f0cc7c897d31219",
+    "current_official_h1_rechecked": true
+  },
+  "scope": {
+    "issue33": "OPEN",
+    "no_release": true,
+    "no_netlify_publish": true,
+    "no_production_sql_edge_auth_provider_member_writes": true,
+    "no_forced_git": true,
+    "no_new_accounts_or_paid_services": true,
+    "no_real_auth_device_acceptance_claim": true,
+    "no_queue_promotion_for_test_only_audit": true,
+    "separate_issue267_v2": true,
+    "separate_issue96_auth": true
+  },
+  "next": "Review next unresolved exact selected current source, especially qualified #115 Frinsa Wet Hulled without conflating farm-wide other methods; keep original frozen corpus and member data unchanged."
+}
