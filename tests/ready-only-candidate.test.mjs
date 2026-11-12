@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {planReadyOnlyCandidate,validateReadyOnlyCandidate,CANDIDATE_KIND,
- CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH,REVIEWED_WORKFLOW_TEST,discoverReviewedWorkflowTestExclusions} from '../scripts/release/ready-only-candidate.mjs';
+ CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH,REVIEWED_WORKFLOW_TEST,discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests} from '../scripts/release/ready-only-candidate.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40),D='d'.repeat(40);
 const one={id:'DIC-Q-100',issue:100,title:'READY card',state:'READY',
  owner_source:'https://github.com/example/repo/issues/100',merged_source_sha:D,
@@ -346,4 +346,23 @@ test('#2169 reviewed workflow-only test exclusion is pinned to actual source',()
   sourceObjectAt:(sha,path)=>sha===B&&path===t.path?'100644:'+'a'.repeat(40):null}),[]);
  assert.deepEqual(discoverReviewedWorkflowTestExclusions({...opts,
   sourceObjectAt:(sha,path)=>sha===A&&path===t.path?'100644:'+'b'.repeat(40):objectAt(sha,path)}),[]);
+});
+
+test('#2169 unready newly introduced tests are omitted only with fully restored runtime',()=>{
+ const p='tests/issue101-unready.test.mjs';
+ const obj=(ref,path)=>path===p?(ref===B?'100644:'+'f'.repeat(40):null):validate.sourceObjectAt(ref,path);
+ const opts={queue:q,selectedIds:[one.id],restoredPaths:['src/server/extractor.mjs'],
+  publishedSourceSha:A,developmentSourceSha:B,changedPaths:[p],sourceObjectAt:obj};
+ assert.deepEqual(discoverExcludedUnreadyTests(opts),[p]);
+ assert.deepEqual(discoverExcludedUnreadyTests({...opts,restoredPaths:[]}),[]);
+ const manifest2={...manifest,excluded_unready_test_paths:[p]};
+ const v={...validate,manifest:manifest2,sourceObjectAt:obj,
+  stagedCommitChangedPaths:[...validate.stagedCommitChangedPaths,p]};
+ assert.equal(validateReadyOnlyCandidate(q,v).ready,true);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...v,
+  sourceObjectAt:(ref,path)=>ref===C&&path===p?'100644:leak':obj(ref,path)}),/Excluded test must be newly introduced/);
+ assert.deepEqual(discoverExcludedUnreadyTests({...opts,
+  sourceObjectAt:(ref,path)=>ref===D&&path===p?'100644:selected':obj(ref,path)}),[]);
+ assert.deepEqual(discoverExcludedUnreadyTests({...opts,
+  sourceObjectAt:(ref,path)=>ref===A&&path===p?'100644:published':obj(ref,path)}),[]);
 });

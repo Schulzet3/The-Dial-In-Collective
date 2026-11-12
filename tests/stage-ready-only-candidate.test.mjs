@@ -142,3 +142,19 @@ test('real staging excludes newly added unready GitHub workflow while retaining 
  }finally{rmSync(f.root,{recursive:true,force:true});}
 });
 
+
+test('#2169 real disposable Git staged candidate removes only newly introduced restored-work tests',()=>{
+ const f=fixture();
+ try{
+  f.write('tests/issue101-unready-parser.test.mjs','import test from "node:test";\ntest("requires unpublished extractor",()=>{});\n');
+  f.write('tests/issue102-unrelated.test.mjs','import test from "node:test";\ntest("unrelated is never silently omitted",()=>{});\n');
+  f.git('add','-A');f.git('commit','-qm','Unready tests after READY merge [skip netlify]');
+  f.development=f.git('rev-parse','HEAD');
+  const staged=stage(f,'unready-tests-source-bound');
+  assert.deepEqual(staged.manifest.excluded_unready_test_paths,['tests/issue101-unready-parser.test.mjs']);
+  assert.throws(()=>f.git('show',staged.candidate_sha+':tests/issue101-unready-parser.test.mjs'));
+  assert.match(f.git('show',staged.candidate_sha+':tests/issue102-unrelated.test.mjs'),/unrelated/);
+  assert.match(f.git('show',f.development+':tests/issue101-unready-parser.test.mjs'),/unpublished extractor/);
+  assert.equal(f.git('rev-parse','development/backend-foundation'),f.development);
+ }finally{rmSync(f.root,{recursive:true,force:true});}
+});

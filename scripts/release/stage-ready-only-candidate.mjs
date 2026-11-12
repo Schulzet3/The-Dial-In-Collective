@@ -8,7 +8,7 @@ import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 import {CANDIDATE_KIND,CANDIDATE_JOURNAL_PATH,CANDIDATE_RECEIPT_PATH,
  planReadyOnlyCandidate,validateReadyOnlyCandidate,workflowChangedPaths,
- discoverReviewedWorkflowTestExclusions} from './ready-only-candidate.mjs';
+ discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests} from './ready-only-candidate.mjs';
 const SHA=/^[a-f0-9]{40}$/;
 const BRANCH=/^release-candidates\/[a-z0-9][a-z0-9-]{2,80}$/;
 const ZERO='0'.repeat(40);
@@ -46,6 +46,9 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
  const plan=planReadyOnlyCandidate(queue,{publishedSourceSha,developmentSourceSha,
   selectedIds,developmentChangedPaths:developmentPaths,isAncestor:ancestor});
  if(!plan.ready)throw Error('READY-only staging HOLD: '+plan.errors.join('; '));
+ const unpublishedTests=discoverExcludedUnreadyTests({queue,selectedIds:plan.selected_ids,
+  restoredPaths:plan.restored_paths,publishedSourceSha,developmentSourceSha,
+  changedPaths:developmentPaths,sourceObjectAt});
  // A later untracked same-file edit must not be smuggled under a READY scope.
  for(const path of plan.included_paths){
   const owners=plan.ready_items.filter(i=>i.scope_paths.includes(path));
@@ -65,13 +68,14 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
     git(['update-index','--add','--cacheinfo',mode,sha,path],{env});}
    else git(['update-index','--force-remove','--',path],{env});
   }
-  for(const path of workflowOnlyTests)
+  for(const path of [...workflowOnlyTests,...unpublishedTests])
    git(['update-index','--force-remove','--',path],{env});
   const manifest={schema_version:1,kind:CANDIDATE_KIND,candidate_branch:branch,
    development_source_sha:developmentSourceSha,published_source_sha:publishedSourceSha,
    selected_ready_item_ids:plan.selected_ids,restored_to_published_paths:plan.restored_paths,
    restored_unpublished_workflow_paths:unpublishedWorkflows,
    excluded_unpublished_workflow_test_paths:workflowOnlyTests,
+   excluded_unready_test_paths:unpublishedTests,
    publication_authorized:false};
   const originalJournal=git(['show',developmentSourceSha+':'+CANDIDATE_JOURNAL_PATH],{trim:false});
   const journal=originalJournal.trimEnd()+'\n\n## READY-only source candidate (not published)\n'+
@@ -81,6 +85,7 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    '- Restored unfinished paths: '+(plan.restored_paths.join(', ')||'(none)')+'\n'+
    '- Restored development-only GitHub workflows to published bytes: '+(unpublishedWorkflows.join(', ')||'(none)')+'\n'+
    '- Omitted exact reviewed workflow-only, unpublished tests: '+(workflowOnlyTests.join(', ')||'(none)')+'\n'+
+   '- Omitted source-bound unready issue tests: '+(unpublishedTests.join(', ')||'(none)')+'\n'+
    '- Exact candidate CI and separate owner publication authorization required. No production claim.\n';
   for(const [path,content] of [[CANDIDATE_RECEIPT_PATH,JSON.stringify(manifest,null,2)+'\n'],
    [CANDIDATE_JOURNAL_PATH,journal]]){
@@ -98,7 +103,7 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    developmentChangedPaths:changed(publishedSourceSha,developmentSourceSha),
    candidateChangedPaths:changed(publishedSourceSha,commit),
    stagedCommitChangedPaths:changed(developmentSourceSha,commit),
-   developmentDriftPaths:[],queueContentMatches:queueRaw===
+   developmentDriftPaths:[],liveQueue:queue,queueContentMatches:queueRaw===
     git(['show',commit+':docs/RELEASE_QUEUE.json'],{trim:false}),
    sourceObjectAt,isAncestor:ancestor});
   if(createLocalRef)

@@ -33,6 +33,36 @@ export function discoverReviewedWorkflowTestExclusions({publishedSourceSha,devel
 }
 
 
+// Only new, issue-scoped tests for entirely restored unfinished/unselected
+// runtime may be absent from a candidate. Selected READY test edits never vanish.
+export function discoverExcludedUnreadyTests({queue,selectedIds,restoredPaths,
+ publishedSourceSha,developmentSourceSha,changedPaths,sourceObjectAt}={}){
+ if(typeof sourceObjectAt!=='function'||!Array.isArray(changedPaths)||
+    !Array.isArray(restoredPaths)||!Array.isArray(selectedIds)||
+    !SHA.test(publishedSourceSha||'')||!SHA.test(developmentSourceSha||''))
+  throw Error('Unverifiable unfinished test exclusion inputs');
+ const restored=new Set(restoredPaths), selected=new Set(selectedIds), result=[];
+ const chosen=(queue?.items||[]).filter(i=>selected.has(i.id));
+ for(const path of changedPaths){
+  const m=typeof path==='string'?/^tests\/(?:coffee-)?issue([1-9][0-9]*)-[a-z0-9-]+\.test\.mjs$/.exec(path):null;
+  if(!m)continue;
+  const issue=Number(m[1]);
+  if(!(queue?.items||[]).some(i=>i.issue===issue&&!selected.has(i.id)&&
+    ['IN_PROGRESS','TESTING','BLOCKED','READY'].includes(i.state)&&
+    i.scope_paths?.length>0&&i.scope_paths.every(x=>restored.has(x))))continue;
+  if(sourceObjectAt(publishedSourceSha,path)!==null||
+     sourceObjectAt(developmentSourceSha,path)===null)continue;
+  let touched=false;
+  for(const i of chosen){
+   if(!SHA.test(i.merged_source_sha||''))throw Error('Invalid selected READY merge');
+   const blob=sourceObjectAt(i.merged_source_sha,path);
+   if(blob!==null&&blob!==sourceObjectAt(i.merged_source_sha+'^',path)){touched=true;break;}
+  }
+  if(!touched)result.push(path);
+ }
+ return sorted([...new Set(result)]);
+}
+
 export function planReadyOnlyCandidate(queue,{publishedSourceSha,developmentSourceSha,
  selectedIds,developmentChangedPaths,pinnedReadyPaths=[],isAncestor}={}){
  const errors=queueSchemaErrors(queue);
@@ -270,8 +300,11 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
    SHA.test(i.merged_source_sha||'')&&
    sourceObjectAt(i.merged_source_sha,path)!==null&&
    sourceObjectAt(i.merged_source_sha,path)===sourceObjectAt(manifest.development_source_sha,path));
-  if(!unfinishedMixed&&!frozenOtherReady)
-   reject('Excluded test does not belong to a frozen unselected READY or unfinished mixed-source item');
+  const unfinishedRestored=queue.items.some(i=>i.issue===issue&&
+   ['IN_PROGRESS','TESTING','BLOCKED'].includes(i.state)&&
+   i.scope_paths?.length>0&&i.scope_paths.every(x=>plan.restored_paths.includes(x)));
+  if(!unfinishedMixed&&!unfinishedRestored&&!frozenOtherReady)
+   reject('Excluded test does not belong to a frozen unselected READY or unfinished mixed-source item, nor wholly restored unfinished source');
   if(sourceObjectAt(publishedSourceSha,path)!==null||
      sourceObjectAt(manifest.development_source_sha,path)===null||
      sourceObjectAt(candidateSha,path)!==null)
