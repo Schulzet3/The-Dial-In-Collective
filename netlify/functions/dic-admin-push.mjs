@@ -1,6 +1,6 @@
 // Private, role-verified API for one administrator's device subscriptions.
 // The browser never receives service-role credentials or any VAPID private key.
-import {safePushEndpoint,endpointFingerprint,cleanPushTokens} from '../../src/server/admin-push.mjs';
+import {safePushEndpoint,endpointFingerprint,cleanPushTokens,signedBrokerRest} from '../../src/server/admin-push.mjs';
 
 const envDefault=name=>globalThis.Netlify?.env?.get?.(name)??process.env[name];
 const response=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:{
@@ -11,13 +11,13 @@ const uuid=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const urlAllowed=url=>/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(String(url||''));
 function readPushConfig(env){
  return {url:env('SUPABASE_URL'),publishable:env('SUPABASE_PUBLISHABLE_KEY'),
-  service:env('SUPABASE_SECRET_KEY')||env('SUPABASE_SERVICE_ROLE_KEY'),publicKey:env('DIC_ADMIN_PUSH_VAPID_PUBLIC_KEY')};
+  service:env('SUPABASE_SECRET_KEY')||env('SUPABASE_SERVICE_ROLE_KEY'),publicKey:env('DIC_ADMIN_PUSH_VAPID_PUBLIC_KEY'),privateKey:env('DIC_ADMIN_PUSH_VAPID_PRIVATE_KEY')};
 }
 export function createAdminPushHandler({fetcher=fetch,env=envDefault}={}){
  return async request=>{
   try{
    const cfg=readPushConfig(env);
-   if(!urlAllowed(cfg.url)||!cfg.publishable||!cfg.service||!cfg.publicKey)
+   if(!urlAllowed(cfg.url)||!cfg.publishable||(!cfg.service&&!cfg.privateKey)||!cfg.publicKey)
     return response({ok:false,reason:'push_not_configured'},503);
    if(!['GET','POST','DELETE'].includes(request.method))return response({ok:false},405);
    const bearer=/^Bearer ([A-Za-z0-9._~-]{24,6000})$/.exec(request.headers.get('authorization')||'');
@@ -42,9 +42,11 @@ export function createAdminPushHandler({fetcher=fetch,env=envDefault}={}){
    try{data=JSON.parse(raw);}catch{return response({ok:false,reason:'invalid_subscription'},400);}
    const endpoint=safePushEndpoint(data?.endpoint);
    if(!endpoint)return response({ok:false,reason:'invalid_subscription'},400);
-   const serviceHeaders={apikey:cfg.service,'Content-Type':'application/json',
-    ...(cfg.service.startsWith('sb_secret_')?{}:{Authorization:'Bearer '+cfg.service})};
+   const serviceHeaders=cfg.service?{apikey:cfg.service,'Content-Type':'application/json',
+    ...(cfg.service.startsWith('sb_secret_')?{}:{Authorization:'Bearer '+cfg.service})}:null;
    const rest=async(path,options={})=>{
+    if(!cfg.service)return signedBrokerRest(cfg.url,{publicKey:cfg.publicKey,privateKey:cfg.privateKey},path,
+     {...options,userJwt:bearer[1],fetcher});
     const result=await fetcher(cfg.url+'/rest/v1/'+path,{redirect:'error',cache:'no-store',
      headers:{...serviceHeaders,...(options.prefer?{Prefer:options.prefer}:{})},
      method:options.method||'GET',...(options.body===undefined?{}:{body:JSON.stringify(options.body)}),

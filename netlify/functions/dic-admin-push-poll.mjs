@@ -1,6 +1,6 @@
 // Netlify production-only scheduled delivery. Source-only until owner publishes and
 // configures service-role + VAPID secrets; this has no publicly invokable route.
-import {cleanPushTokens,addedPushTokens,sendEmptyAdminPush,endpointFingerprint,safePushEndpoint} from '../../src/server/admin-push.mjs';
+import {cleanPushTokens,addedPushTokens,sendEmptyAdminPush,endpointFingerprint,safePushEndpoint,signedBrokerRest} from '../../src/server/admin-push.mjs';
 const envDefault=name=>globalThis.Netlify?.env?.get?.(name)??process.env[name];
 const response=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:{
  'Content-Type':'application/json','Cache-Control':'no-store'}});
@@ -11,11 +11,12 @@ export function createAdminPushPoller({fetcher=fetch,env=envDefault,now=()=>Date
  return async()=>{
   const base=env('SUPABASE_URL'),service=env('SUPABASE_SECRET_KEY')||env('SUPABASE_SERVICE_ROLE_KEY');
   const credentials={publicKey:env('DIC_ADMIN_PUSH_VAPID_PUBLIC_KEY'),privateKey:env('DIC_ADMIN_PUSH_VAPID_PRIVATE_KEY')};
-  if(!/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(String(base||''))||!service||!credentials.publicKey||!credentials.privateKey)
+  if(!/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(String(base||''))||!credentials.publicKey||!credentials.privateKey)
    return response({ok:false,reason:'push_not_configured'},503);
-  const headers={apikey:service,'Content-Type':'application/json',
-   ...(service.startsWith('sb_secret_')?{}:{Authorization:'Bearer '+service})};
+  const headers=service?{apikey:service,'Content-Type':'application/json',
+   ...(service.startsWith('sb_secret_')?{}:{Authorization:'Bearer '+service})}:null;
   const rest=async(path,options={})=>{
+   if(!service)return signedBrokerRest(base,credentials,path,{...options,fetcher});
    const r=await fetcher(base+'/rest/v1/'+path,{method:options.method||'GET',
     headers:{...headers,...(options.prefer?{Prefer:options.prefer}:{})},redirect:'error',cache:'no-store',
     ...(options.body===undefined?{}:{body:JSON.stringify(options.body)}),signal:AbortSignal.timeout(6000)});

@@ -48,3 +48,29 @@ export async function sendEmptyAdminPush(endpoint,credentials,{fetcher=fetch,sig
   signal:signal||AbortSignal.timeout(6000)});
  return {ok:response.ok,gone:response.status===404||response.status===410,status:response.status};
 }
+
+
+export async function signedBrokerRest(base,credentials,path,{method='GET',body,prefer,userJwt,fetcher=fetch,now=()=>Date.now()}={}){
+ const target='https://azviqqejypsefzilgonr.supabase.co/functions/v1/dic-admin-push-broker';
+ if(base!=='https://azviqqejypsefzilgonr.supabase.co')throw Error('Untrusted broker origin');
+ const pub=Buffer.from(String(credentials?.publicKey||''),'base64url');
+ const priv=Buffer.from(String(credentials?.privateKey||''),'base64url');
+ if(pub.length!==65||pub[0]!==4||priv.length!==32)throw Error('Broker signing credentials unavailable');
+ const jwk={kty:'EC',crv:'P-256',x:pub.subarray(1,33).toString('base64url'),
+  y:pub.subarray(33,65).toString('base64url'),d:priv.toString('base64url')};
+ const key=createPrivateKey({key:jwk,format:'jwk'});
+ const raw=JSON.stringify({path,method,body:body===undefined?null:body,
+  prefer:prefer||'',userJwt:userJwt||''});
+ if(raw.length>320000)throw Error('Broker request too large');
+ const t=Math.floor(now()/1000);
+ const h=encoded({typ:'JWT',alg:'ES256'});
+ const payload=encoded({iss:'https://app.dialincollective.com',aud:target,
+  iat:t,exp:t+60,body_hash:createHash('sha256').update(raw).digest('base64url')});
+ const unsigned=h+'.'+payload;
+ const signature=sign('sha256',Buffer.from(unsigned),{key,dsaEncoding:'ieee-p1363'}).toString('base64url');
+ const res=await fetcher(target,{method:'POST',redirect:'error',cache:'no-store',
+  headers:{'Content-Type':'application/json','x-dic-push-auth':unsigned+'.'+signature},
+  body:raw,signal:AbortSignal.timeout(7000)});
+ if(!res.ok)throw Error('Private push broker unavailable');
+ return res;
+}
