@@ -54,6 +54,8 @@ test('Log Shot wires actual copied measurements and save-time readDraft reconcil
  assert.ok(main.includes("this.appliedRecommendationValues.temperature=String(temperatureInput.value)"));
  assert.ok(main.includes("this.draft.recommendationContext=reconcileRecommendationUse("));
  assert.ok(main.includes("this.draft.recommendationContext=recordRecommendationUse("));
+ const fixture=source("../tests/browser/cloud_owner_qa.py");
+ assert.ok(fixture.includes("\'recommendation-use\',\'shot_card\'"),"isolated real-code browser adapter must register every added imported JS module");
  const build=source("../build_cloud.mjs");
  assert.ok(build.includes("\'cloud/recommendation-use.js\'"),"the new public module must be in the shipped, hash-pinned offline build allowlist");
  assert.ok(main.includes("this.readDraft();const d=this.draft,validation=M.validateShot(d"));
