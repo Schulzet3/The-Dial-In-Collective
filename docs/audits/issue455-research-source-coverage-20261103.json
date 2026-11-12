@@ -1779,6 +1779,23 @@
       "app_code_crosswalk": "site/lib/engine.js blob 6b59fb8328aab425481b2090a85dc4ef79113c50; site/lib/constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095",
       "review_parent_sha": "0222b4123027e7ae5fc9f4a82d16279ee464a7c7",
       "implementation_status": "RESEARCH_ONLY_NO_PRODUCT_RULE_CHANGE_NO_CAPTURE"
+    },
+    {
+      "id": "LIVE-20261112-SIMILAR-COFFEE-CURRENT-ORIGINAL-GRINDER-GUARD-R200",
+      "type": "live_repository_recommendation_source_intent_and_regression_reconciliation",
+      "title": "Original calibration plus current grinder comparability guard for personal similar-coffee donor",
+      "path": "site/lib/engine.js; tests/issue455-similar-coffee-original-calibration.test.mjs; tests/issue455-r200-similar-coffee-original-range.test.mjs",
+      "source_commit_before": "c0ee76684d14d8a82e44464a8d25ecf37786a7d2",
+      "reviewed_runtime_blob_sha": "6b59fb8328aab425481b2090a85dc4ef79113c50",
+      "intentional_prior_test_blob_sha": "915f0e245a2ddddf8ca4a96a63b6bc5a2b98dc80",
+      "rejected_change_head": "cbe49575c46270f319fd6d524c1127d5e53e8136",
+      "rejected_change_runtime_blob_sha": "c39e9c916f167903654c5fef02c5f46945f55cd6",
+      "rejected_change_test_blob_sha": "f1ab57f0f6e096eb52ac333c038c6138dfa72996",
+      "access": "DIRECT_LIVE_GITHUB_SOURCE_R184_HISTORICAL_APPROVAL_AND_EXACT_PR_HEAD_CI;NO_PRIVATE_MEMBER_DATA",
+      "provenance": "R184 original approved source/test/issue comments and R200 source-bound proposed change with actual failing cross-generation regression in Actions 43150107491",
+      "review_status": "DISTINCT_INTENTIONAL_COMPATIBILITY_GUARD_SUBSTANTIVELY_VERIFIED;R200_CODE_PR_CLOSED_UNMERGED_NOT_A_SAFE_LOCKED_COMPATIBLE_FIX;NOT_ISSUE267_LITERAL_AUDIT",
+      "evidence_grade": "DIRECT_CODE_PLUS_HISTORICAL_INTENT_AND_ACTUAL_CONFLICTING_CI;NO_ESPRESSO_MEMBER_EMPIRICAL_OUTCOME",
+      "implementation_status": "RESEARCH_ONLY_OPTIONAL_OWNER_PRODUCT_CHOICE_HOLD;PRESERVE_R184_RUNTIME_AND_TEST"
     }
   ],
   "evidence_checks": [
@@ -5507,6 +5524,35 @@
       "result": "NO_SAFE_RUNTIME_CHANGE_SUPPORTED;SOURCE_RISK_AND_UNCERTAINTY_RECORDED",
       "owner_approval": false,
       "ci_runs": []
+    },
+    {
+      "id": "R455-EV-UX-200-A",
+      "source": "Current engine Git blob 6b59fb8328aab425481b2090a85dc4ef79113c50, deliberate R184 test Git blob 915f0e245a2ddddf8ca4a96a63b6bc5a2b98dc80, PR #2035 and Issue #455 R184 completion comment #6793918708",
+      "claim": "Personal similar-coffee donor must satisfy both original recorded grinder calibration and current comparable grinder range. R184 positive/negative regression explicitly asserts a donor valid on original [0,8] but outside current [0,5] is excluded. This is deliberate conservative cross-coffee comparability, unlike historical same-coffee outlier R198.",
+      "grade": "DIRECT_LIVE_CODE_EXISTING_TEST_AND_PREVIOUS_SCOPE_RECONCILED",
+      "source_sha": "c0ee76684d14d8a82e44464a8d25ecf37786a7d2",
+      "result": "APPROVED_CONSERVATIVE_PREEXISTING_GUARD_RETAINS_CURRENT_AND_ORIGINAL_RANGE;NO_SAFE_AUTONOMOUS_RELAXATION",
+      "owner_approval": false,
+      "ci_runs": [
+        43005758143,
+        43006219038
+      ]
+    },
+    {
+      "id": "R455-EV-UX-200-B",
+      "source": "Closed unmerged PR #2170 head cbe49575c46270f319fd6d524c1127d5e53e8136; exact Node22 CI 43150107491; existing R184 test tests/issue455-similar-coffee-original-calibration.test.mjs:54; seven new R200 synthetic tests",
+      "claim": "Proposed removal of current-range condition made all seven new R200 test groups pass but violated an existing intentional R184 test (expected null, got donor count 1). Full Node22 4060 PASS/1 FAIL/6 intentional SKIP. The test was not revised or bypassed, and PR #2170 was closed unmerged. Browser/offline, isolated SQL/privacy, source security and governance workflows succeeded on proposed head; these do not override failed application contract.",
+      "grade": "DIRECT_ACTUAL_EXACT_SOURCE_CI_FAIL_AND_POLICY_INTENT_REVIEW",
+      "source_sha": "cbe49575c46270f319fd6d524c1127d5e53e8136",
+      "result": "HOLD_PRODUCT_OPTION_NOT_SAFE_IMPLEMENTATION;ORIGINAL_DEVELOPMENT_CODE_UNCHANGED",
+      "owner_approval": true,
+      "ci_runs": [
+        43150107491,
+        43150107445,
+        43150107508,
+        43150107516,
+        43150107604
+      ]
     }
   ],
   "policy_decisions_pending": [],
@@ -5647,18 +5693,19 @@
     "R455-197: six synthetic manual-temperature-origin cases verified and code nonforce merged; docs-only READY reconciliation subject to its own exact source CI/merge. Continue distinct bounded science or UX research, S019 standalone inaccessible, #267 literal review is separate and zero credit.",
     "R455-198: original-valid historical outlier fourth-green source fix exact merged 654723176d289a458f843493ccdeb4fff5cfa7cb and six new positive/negative tests + all applicable exact-source CI verified. Docs-only queue/ledger reconciliation requires own CI and merge before fully integrated, never deploy; S019 original inaccessible and #267 literal audit zero credit.",
     "R455-198 postfreeze reconciliation: concurrent READY48 release staging added one IN_PROGRESS issue455 queue row before this docs PR; preserve that unique row and its no-publish freeze blocker, enrich exact CI only, no accidental extra READY row or queue history. Source ledger 103/307/157, release queue 318/59; subsequent separate release qualification, not today's owner decision.",
-    "R455-199: full Czech et al. 2026 primary Methods/panel sample/train-test and validation remain inaccessible; new source abstract-level only; if available, independently inspect before proposing sensory prediction. Research-only source 104/checks309/proposals158 conditional on PR integration, no numeric or Locked product changes, no queue update, S019 still inaccessible, zero #267 strict-line credit."
+    "R455-199: full Czech et al. 2026 primary Methods/panel sample/train-test and validation remain inaccessible; new source abstract-level only; if available, independently inspect before proposing sensory prediction. Research-only source 104/checks309/proposals158 conditional on PR integration, no numeric or Locked product changes, no queue update, S019 still inaccessible, zero #267 strict-line credit.",
+    "R455-200: original-valid but outside-current-range similar-coffee donor eligibility is an intentional R184 conservative guard. Seven new R200 tests passed but prior R184 test failed in exact head 43150107491 (4060 PASS/1 FAIL/6 SKIP). PR #2170 safely CLOSED UNMERGED; preserve R184 and all live code. Optional owner A retain (recommended) / B weaker cross-calibration ratio-only transfer needs explicit product approval; no urgent owner review. This source/tradeoff is distinct from R198 same-coffee outlier history. No queue/Locked/provider change, S019 unavailable, #267 zero credit."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-199",
-    "source_sha": "0222b4123027e7ae5fc9f4a82d16279ee464a7c7",
-    "phase": "RESEARCH_ONLY_SOURCE_CROSSWALK_DOCS_PR_PRECI_PENDING_NOT_MERGED",
+    "run_id": "R455-200",
+    "source_sha": "c0ee76684d14d8a82e44464a8d25ecf37786a7d2",
+    "phase": "DISTINCT_R184_COMPATIBILITY_POLICY_CONFLICT_VERIFIED;PROPOSED_APP_PR_CLOSED_UNMERGED;DOCS_ONLY_CI_PENDING",
     "source_counts": {
-      "research_project_sources": 104,
-      "bounded_evidence_checks": 309,
-      "proposals": 158
+      "research_project_sources": 105,
+      "bounded_evidence_checks": 311,
+      "proposals": 159
     },
-    "release_state": "NO_APP_OR_QUEUE_CHANGE_R198_IN_PROGRESS_FROZEN_EXCLUDED",
+    "release_state": "NO_RUNTIME_MERGE_NO_QUEUE_CHANGE_R198_IN_PROGRESS_FROZEN_EXCLUDED",
     "original_s019": "INACCESSIBLE_UNREVIEWED",
     "github267_literal_review_credit": 0
   },
@@ -9181,6 +9228,39 @@
         "constants_blob": "72221331ce4dffabe416eebec1ae2fceced3a095",
         "journal_path": "docs/workstreams/ops-issue455-r199-roast-gas-sensory-proxy-20261112.md"
       }
+    },
+    {
+      "id": "R455-PROP-200-ORIGINAL-VS-CURRENT-SIMILAR-COFFEE-DONOR-HOLD",
+      "finding": "A historically original-calibration-valid five-green other-coffee shot can be excluded solely because its grinder dial lies outside the current setup's recalibrated espresso range. This is an intentional R184 comparable-equipment conservative filter, NOT an independently authorized bug fix.",
+      "evidence": [
+        "R455-EV-UX-200-A",
+        "R455-EV-UX-200-B"
+      ],
+      "severity": "P2_OPTIONAL_RESEARCH_AND_PRODUCT_TRADEOFF;NO_CURRENT_DEFECT_CERTIFIED",
+      "user_benefit": "Make evidence eligibility transparent while avoiding unsafe cross-calibration promotion or conflicting established tests.",
+      "source_provenance": "Current engine/R184 test Git blobs, owner-authorized PR #2035 and exact R200 head Node22 run 43150107491 (4060 passed/1 failed/6 skipped); no observed espresso taste outcomes.",
+      "current_locked": "Preserve all five separately rated tastes, genuine green success vs unrated, original private shot notes/history, separate styles and Slow Feed, grinder calibration/version integrity, one controllable recommendation change, no universal numeric targets.",
+      "current_app": "Requires the original grinder source calibration AND today's comparable range before importing a five-green other-coffee donor as an unproven ratio/time-only prior; otherwise generic roast/style baseline.",
+      "proposed_change": "RECOMMEND OPTION A (NO CHANGE): keep both original and current range requirement, conservative cross-coffee comparability. OPTION B (OWNER AUTHORIZATION NEEDED): permit original-valid historical different-coffee ratio/time-only starting hints after recalibration, never transfer raw grinder dial/proven status; explicitly supersede R184 current-range test with new cross-calibration UX guard/tests. Without explicit owner selection retain A.",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "daily_digest_optional_question": "If desired, should cross-coffee starting references continue requiring BOTH original and current grinder ranges (A, recommended, no change), or permit original-range-valid ratio/time-only references after recalibration (B, greater coverage but weaker hardware comparability, new owner approval/tests required)? No urgent decision; A remains active.",
+      "implementation": "RESEARCH_ONLY_POLICY_HOLD;PR2170_CLOSED_UNMERGED;R184_EXISTING_GUARD_PRESERVED",
+      "test_plan": "R200 experimental seven tests PASS but intentional R184 regression FAILED on head. Exact Node22 4060 PASS /1 FAIL /6 intentional SKIP; applicable browser/mobile/offline, SQL/privacy, security/governance SUCCESS. No combined PASS. No new code merged or release queue item.",
+      "release_queue_status": "NOT_APPLICABLE_NO_RUNTIME_MERGE_NO_READY_OR_DEPLOYMENT",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false,
+      "exact_source": {
+        "current_development_before": "c0ee76684d14d8a82e44464a8d25ecf37786a7d2",
+        "closed_pr": 2170,
+        "proposed_head": "cbe49575c46270f319fd6d524c1127d5e53e8136",
+        "old_runtime_blob": "6b59fb8328aab425481b2090a85dc4ef79113c50",
+        "existing_r184_test_blob": "915f0e245a2ddddf8ca4a96a63b6bc5a2b98dc80",
+        "proposed_runtime_blob": "c39e9c916f167903654c5fef02c5f46945f55cd6",
+        "proposed_new_tests_blob": "f1ab57f0f6e096eb52ac333c038c6138dfa72996",
+        "failed_node_ci": 43150107491,
+        "failed_r184_test": "R184 original range alone cannot override current comparable grinder range"
+      }
     }
   ],
   "changeScope": {
@@ -9188,6 +9268,6 @@
     "tests_executed": false,
     "production_deployed": false,
     "queue_changed": false,
-    "reason": "Abstract-limited primary publication intake; two source claim checks and one research-only hold proposal; documentation only, pre-PR CI not run."
+    "reason": "Research-only compatibility/rejection record; proposed code test CI ran and failed intentional R184 regression; no application changes integrated; documentation-only."
   }
 }
