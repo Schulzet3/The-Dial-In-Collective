@@ -1,0 +1,11 @@
+# Issue #267 A77 — 115 physical original lines reviewed (Nov 12 2026) [skip netlify]
+
+Source parent `627ef19c394520eb0f41771ce8a8e4eadb8da1c3` tree `5a969c9c1407e0e98a701c5d76741c458b0be0f2`; pinned original `9707553a64f88127826e8f5b2b36cd0651296e83`, frozen `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9`. Append-only same-commit SHA/line receipt: `docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F165-131-180-P134-256-320-20261112-A77.json`.
+
+**Direct source-bound review:** frozen F165 `docs/archive/requirements/The_Dial-In_Collective_Decision_Ledger_v1.0.json` lines **131–180** (50); pinned P134 `src/server/coffee-flavor-evidence.mjs` lines **256–320** (65). Each source line was fetched/read and supplied individual source text/behavior/quality/security/privacy/perf/dead/redundancy/current counterpart/testability/improvement/Locked/disposition. 115/115 exact original current literal parity; pinned moved +55 physical lines in current code (live 311–375), not counted as 65 new live lines. A76 ends F165:130 / P134:255. Zero local gaps/overlaps, first original F001 line 1 remains separately validated with **no duplicate credit**, grouped R2/C2 not promoted.
+
+**Assessment:** Sept 8 raw-shot retention, required five sensory inputs, all-green Community qualification, anonymous Community display and durable contributions are original historical decisions, not override of subsequent explicit owner supersessions (especially Hide Shot/account deletion/privacy). Pinned product-hero source and TAKE A SIP extractor inspect merchant-written sensory cues, reject unsupported structure, origin and marketing memories. No reproduced active defect, dead function, benchmarked bottleneck or permission to edit #33-owned selected-source extractor. #96 Auth/RLS untouched.
+
+**Validation:** exact frozen/current blob SHA and per-line literal 115/115 passed. Docs-only functional Node22/lint/build/original603, browser/mobile/offline/SQL/JWT/Auth tests NOT_RUN; governance head/merge CI pending until GitHub actual readback. No application, source oracle, member, provider, SQL, Auth, Edge, release queue, Netlify or production changes; no READY, no deployment. #267 remains OPEN.
+
+**Next:** original F165:181, pinned P134:321, full current changed/new/renamed source semantic review and globally reconciled independent strict R2/C2/A/D receipts.
