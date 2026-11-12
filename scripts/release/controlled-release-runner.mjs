@@ -341,7 +341,7 @@ export async function executeSingleUseRelease(settings=process.env){
  const readyItems=queuedSource.items.filter(x=>selectedIds.has(x.id));
  const evidence=await verifyReadyItems({
   queue:queuedSource,items:readyItems,...(await githubReleaseReaders(token)),
-  sourceObjectAt:objectAt,
+  sourceObjectAt:objectAt,currentSourceSha:developmentHead,
   mergeChangedPaths:merged=>git(['diff','--name-only','--no-renames',merged+'^',merged])
    .split(/\r?\n/).filter(Boolean),
   publishedSourceSha:lastPublishedTestedSha,candidateSha:sha,
@@ -352,7 +352,9 @@ export async function executeSingleUseRelease(settings=process.env){
   evidence.errors.join('; ').slice(0,2000));
  if(settings.GITHUB_STEP_SUMMARY)appendFileSync(settings.GITHUB_STEP_SUMMARY,
   'READY five exact GitHub CI checks, code/test Git objects and source scope VERIFIED for '+
-  evidence.verified.length+' items; no extra build.\n');
+  evidence.verified.length+' items; '+
+  evidence.verified.filter(x=>x.source_drift_paths.length).length+
+  ' later same-file source drifts recorded; frozen candidate isolation still mandatory; no extra build.\n');
  // Source-bound CI, approved READY items, deployable-path coverage and ancestry
  // are verified above. Netlify performs the one authorized production build.
  const nowIso=new Date().toISOString();
