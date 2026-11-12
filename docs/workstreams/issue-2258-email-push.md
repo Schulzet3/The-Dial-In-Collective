@@ -21,3 +21,7 @@
 ## New focused regression suite
 
 - `tests/issue2258-member-approval-notices.test.mjs`: signed verified pending-only subscribe and per-owner endpoint permissions; no SSRF/nonmember/Admin registration; successful member push delivery is empty payload; Resend acceptance/idempotency; no-subscriber skip; email configuration absence preserves email retry while push still delivers; malformed endpoint retry; replay claim no send; SQL service-only ACL/trigger; static scoped worker leaves Admin PWA behavior unchanged. This initial suite is added before CI. No live recipient or provider call is performed by these mocks.
+
+## Device UI regression contract
+
+- `tests/issue2258-approval-push-device.test.mjs` asserts the browser permission request is immediate from the user action, distinct narrow worker scope, VAPID URL-safe key decoding, subscription status/opt-out, and iPhone Home Screen gating. Static tests require verified-pending UI only, explicit provider server call, Admin PWA worker unchanged. These are isolated mocks; they do not prove Apple device delivery.
