@@ -85,3 +85,34 @@ test('account switch clears stale status and verifies before showing next accoun
  await settle();
  assert.equal(f.workspaceVisits,1);
 });
+
+
+test('pending account status poll admits the user and shows dismissible confirmation',async()=>{
+ const pending={authenticated:true,admitted:false,emailVerified:true,approvalState:'pending',admin:false};
+ const approved={authenticated:true,admitted:true,emailVerified:true,approvalState:'approved',admin:false};
+ const f=fixture(()=>Promise.resolve(approved));f.app.identity=user;f.app.status=pending;
+ await f.app.pollOnce();
+ assert.equal(f.workspaceVisits,1);
+ assert.equal(f.app.status.admitted,true);
+ assert.equal(f.app.accountApprovalNotice,true);
+ await f.app.pollOnce();assert.equal(f.app.accountApprovalNotice,true);
+ assert.doesNotMatch(f.frames.at(-1),/Account Approval Pending/);
+});
+
+test('existing members and rejected users do not receive false approval confirmation',async()=>{
+ const approved={authenticated:true,admitted:true,emailVerified:true,approvalState:'approved',admin:false};
+ const a=fixture(()=>Promise.resolve(approved));a.app.identity=user;a.app.status=approved;
+ await a.app.pollOnce();assert.equal(a.app.accountApprovalNotice,false);
+ const rejected={authenticated:true,admitted:false,emailVerified:true,approvalState:'rejected',admin:false};
+ const r=fixture(()=>Promise.resolve(rejected));r.app.identity=user;r.app.status={...rejected,approvalState:'pending'};
+ await r.app.pollOnce();assert.equal(r.app.accountApprovalNotice,false);
+ assert.match(r.frames.at(-1),/Account Request Declined/);
+ assert.equal(r.workspaceVisits,0);
+});
+
+test('failed approval check never invents admission',async()=>{
+ const f=fixture(async()=>{throw Error('Network unavailable');});
+ f.app.identity=user;f.app.status={authenticated:true,admitted:false,approvalState:'pending'};
+ await f.app.pollOnce();assert.equal(f.app.accountApprovalNotice,false);
+ assert.equal(f.workspaceVisits,0);
+});
