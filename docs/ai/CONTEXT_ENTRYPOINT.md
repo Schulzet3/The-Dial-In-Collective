@@ -1,6 +1,6 @@
-# The Dial In Collective — project-context entrypoint
+# The Dial In Collective — topic map AFTER mandatory PREFLIGHT.md
 
-**Purpose:** Short GitHub entrypoint for every substantive project task, not a competing product specification. Retrieve the actual latest `development/backend-foundation` SHA before using links below. This page is navigational, not current provider/CI evidence.
+**Read [PREFLIGHT.md](PREFLIGHT.md) FIRST for every DIC task.** This file is a topic map used *only after* that live-SHA-bound preflight; it is not another entrypoint, product authority or current provider/CI evidence.
 
 ## Governing sources
 1. [Project operating guide](../../AGENTS.md), [ChatGPT Project Instructions copy](../CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md), and [scoped journals](../workstreams/README.md).
@@ -23,7 +23,7 @@
 | Handoffs / historical / new attachments | [Source Register](SOURCE_REGISTER.json), historical handoffs and exact SHA-256; never elevate historical snapshots over scoped later decisions |
 
 ## Before acting
-Read [PREFLIGHT](PREFLIGHT.md), verify relevant SHA, reconcile working journals and authoritative decisions, then read only the topic-relevant documents. For substantial write/release work, also perform the full applicable recovery, source checks, approval and testing. For brainstorming, no GitHub or provider writes are implied. If GitHub is unavailable, say so and fail closed for unsafe actions. GitHub's availability and automatic per-turn retrieval are **not** guaranteed by the presence of this file.
+After live [PREFLIGHT](PREFLIGHT.md), verify relevant SHA, reconcile working journals and authoritative decisions, then read only the topic-relevant documents. For substantial write/release work, also perform the full applicable recovery, source checks, approval and testing. For brainstorming, no GitHub or provider writes are implied. If GitHub is unavailable, say so and fail closed for unsafe actions. GitHub's availability and automatic per-turn retrieval are **not** guaranteed by the presence of this file.
 
 ## Preserve and maintain
 Link findings to [SOURCE_REGISTER](SOURCE_REGISTER.json); update actual authority files, scoped journals and source-bounded evidence rather than copying their claims here. See [MAINTENANCE](MAINTENANCE.md). The nine recovered reports, earlier implementation pack, S019 PDF and separate slow-feed PDF are distinct complementary research with explicit verification limits.

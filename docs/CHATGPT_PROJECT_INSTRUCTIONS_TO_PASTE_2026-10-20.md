@@ -4,7 +4,7 @@
 
 **Authority.** GitHub Schulzet3/The-Dial-In-Collective governs requirements, approvals, code, tests, releases and unfinished work. docs/MASTER_SPECIFICATION.md and docs/DECISION_LEDGER.json govern Locked decisions. Preserve approved app behavior, Auth, privacy, shots, notes, offline data, Community and history. Only explicit owner approval overrides Locked decisions; record scope in BOTH files. Brainstorming is not approval. Repo temporarily PUBLIC by owner Nov 4–30 (#630); only owner returns it PRIVATE on GitHub Free. No silent visibility changes or claims of full exposure clearance. 
 
-**Recover first.** Check live branch SHAs, AGENTS.md, scoped journal, docs/CURRENT_STATUS.md, Master Spec, Decision Ledger, approval coverage, docs/RELEASE_QUEUE.json, relevant issues/PRs, exact-source CI and Netlify publication. Read docs/ai/CONTEXT_ENTRYPOINT.md and PREFLIGHT.md; avoid redundant rereads. Verify concurrent/interrupted work. Branches: development/backend-foundation = app; main = operations/backups; release/production = publication.
+**Mandatory preflight (EVERY DIC task).** FIRST fetch live development SHA and `docs/ai/PREFLIGHT.md` at that SHA; sole starting point. No chats/memory substitutes. If unavailable, FAIL CLOSED: no GitHub/provider writes or current VERIFIED/READY/DEPLOYED claims. Follow its route: AGENTS, scoped journal, CURRENT_STATUS, Master Spec, Ledger, coverage, queue, issues/PRs, exact CI/Netlify. Check concurrent work; avoid duplicate tests. Branches: development=app, main=ops/backups, release/production=publication.
 
 **Development authority.** “Build/fix/update/change/improve/implement” authorizes investigation, code, repair, tests, nonforce integration and READY queue preparation—not publication. Make routine decisions, ask only essential product questions, fix/retest failures rather than stop at PR or pending CI. Before retrying uncertain writes, verify live state. Finish safe work and document actual blockers.
 
@@ -34,6 +34,6 @@
 
 **Autonomous #509.** Hourly full Supabase SQL/RLS/Auth/Edge/Storage/log/drift/performance audit and word ledger; GitHub-only fixes/tests/READY. Coordinate #96/#267/#504; no private data, production writes or deployment.
 
-**Automation alerts (Nov 6).** Preserve schedules/checkpoints; notify ONLY for required owner review/approval or NEW/material actionable errors, blockers, security/privacy/integrity issues. No success, routine progress/READY, unchanged issues or empty digests; paused tasks remain paused.
+**Automation alerts (Nov 6).** Keep schedules/checkpoints; alert ONLY for required owner action or NEW/material errors, blockers, security/privacy/integrity issues. No success, routine READY, unchanged or empty updates; paused tasks stay paused.
 
-**Project Settings.** Sync lasting changes to GitHub Project Instructions and provide FULL paste-ready text under 8,000 characters; only owner edits ChatGPT Project Settings.
+**Project Settings.** Sync GitHub instructions; provide FULL ≤8,000-character paste-ready replacement; only owner edits ChatGPT Project Settings.
