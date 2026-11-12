@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {SCALES,tasteLabel} from '../site/lib/constants.js';
-import {updateTasteSelection,focusShotValidationError,scales} from '../site/lib/ui.js';
+import {SCALES,tasteLabel,tastesComplete,isDialed} from '../site/lib/constants.js';
+import {updateTasteSelection,focusShotValidationError,scales,editableTasteScales} from '../site/lib/ui.js';
 
 function fakeScale(key){
  const scale=SCALES.find(s=>s.key===key);
@@ -112,4 +112,40 @@ test('invalid restored taste ratings show an explicit unrated label without pres
  assert.equal((html.match(/aria-pressed="true"/g)||[]).length,5);
  assert.ok(!html.includes('<output>Tap to rate</output>'));
  assert.deepEqual(valid,{extraction:3,body:3,clarity:5,sweetness:5,astringency:1});
+});
+
+
+test('restored missing tastes stay tappable, preserve originals, and still require five explicit ratings',()=>{
+ const main=readFileSync(new URL('../site/cloud/main.js',import.meta.url),'utf8');
+ assert.ok(main.includes('this.draft.tasteScales=U.editableTasteScales(this.draft.tasteScales)'),
+  'the actual Log Shot edit/create path must initialize the writable draft before rating taps');
+ assert.ok(main.includes('this.draft.tasteScales[target.dataset.key]=Number(target.dataset.value)'),
+  'individual rating taps must still update the same editable draft');
+ for(const original of [null,undefined,'3',5,[],false]){
+  const stored={id:'historical-1',notes:'Private original notes',tasteScales:original};
+  const before=structuredClone(stored),draft=structuredClone(stored);
+  draft.tasteScales=editableTasteScales(draft.tasteScales);
+  assert.deepEqual(draft.tasteScales,{});
+  assert.equal(tastesComplete(draft.tasteScales),false);
+  assert.equal(isDialed(draft.tasteScales),false);
+  for(const scale of SCALES){
+   const {ratings,output}=fakeScale(scale.key);
+   draft.tasteScales[scale.key]=scale.ideal;
+   assert.equal(updateTasteSelection(ratings,scale.key,scale.ideal),true);
+   assert.equal(output.textContent,tasteLabel(scale,scale.ideal));
+  }
+  assert.equal(tastesComplete(draft.tasteScales),true);
+  assert.equal(isDialed(draft.tasteScales),true);
+  assert.deepEqual(stored,before,'archived shot, notes and original taste data are not mutated');
+ }
+ const stored={tasteScales:{extraction:3,body:'3',clarity:5,sweetness:5,astringency:1,legacy:'retain'}};
+ const draft=editableTasteScales(stored.tasteScales);
+ assert.equal(draft.extraction,3);
+ assert.equal(draft.body,'3');
+ assert.equal(tastesComplete(draft),false,'unconfirmed string score never silently becomes a valid rating');
+ draft.body=3;
+ assert.equal(tastesComplete(draft),true);
+ assert.equal(isDialed(draft),true);
+ assert.equal(draft.legacy,'retain','unrelated archival properties remain in the editable copy');
+ assert.equal(stored.tasteScales.body,'3','stored original rating stays exactly as recorded');
 });
