@@ -13268,6 +13268,34 @@
       "blockers": [],
       "notes": "Complement to previously READY R217 display-only guard; currently a distinct IN_PROGRESS/TESTING safe repair. No new science/targets/taste fields, production data writes, provider/deployment or owner approval for safe bugfix; requires separate explicit publication.\nR455-218 source-VERIFIED DEVELOPMENT ONLY READY: exact tested PR head and six merged Git blobs, Node22 4381 PASS, valid all-five-taste selection and stored original shot/note immutability, browser/offline, governance, and isolated PR-head SQL/security. No published production change. Frozen603 skipped not PASS. Owner release instruction separately required.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-33-r158-hyphenated-range-roast-guard",
+      "issue": 33,
+      "pr": 2342,
+      "title": "Do not infer Medium from a chosen coffee's light-to-medium narrative range; preserve explicit selected Light roast",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/roast-level-evidence.mjs"
+      ],
+      "tests": [
+        "First exact PR-head R158 43316896760 FAILED 8/9 adversarial tests: removing selected Light Roast label exposed parser assigning Medium from narrative light-to-medium; live source step SKIPPED and missing-input afterproof FAILED; retained historical failure.",
+        "SAME-COMMIT general range guard corrected in src/server/roast-level-evidence.mjs, explicitly preserving selected true Medium-Light label and rejecting light-to-medium, light–to–medium, light—to—medium as a categorical singular roast.",
+        "PR-head 43317225541 SUCCESS 12/12 focused positive/hostile, 1/1 guarded HTTPS selected #187 raw 658062-byte HTML SHA256 aba3479913955f055445560fa271ff665b56aa1e0ecac2a828907e9c8f840008; current parsed Bolivia / Larry's / Light / Washed / all three notes / AIPEP / region/elevation, Add Coffee and Source Review true, conflicts [], SEO fallbacks [], strict afterproof passed:true failures:[]; synthetic GitHub PR test source SHA 6f900d7246ca6467af673bef8c5212bf54624e43."
+      ],
+      "ci_runs": [
+        43317225541,
+        43317225751,
+        43317225600
+      ],
+      "blockers": [
+        "PR-head full Node/lint/cloud/SQL/approval CI and safe nonforce merge of generic fix pending; exact merged-source official/live/parser and other applicable tests still required before READY.",
+        "Original 603/201/1,197 individual manual certification incomplete; Issue #33 remains OPEN."
+      ],
+      "owner_source": "Issue #33; original603 #187 direct current official selected Larry's Bolivia https://larryscoffee.com/products/bolivia-single-origin-light-roast-organic-coffee; owner source-first and developer-only instructions.",
+      "notes": "New app path registered as TESTING for CI intake. First PR-head approval 43317225409 genuinely FAILED because this new source path was not yet on queue; this same-commit fix addresses intake only, no false prior PASS. Real reviewed official R158 artifact #13987704523 independent ZIP SHA256 1e196b79bad3104bc70a699f0671e7848b6ea54126ea1cde65f745a285f7eb68, HTML ABA347... and focused evidence SHA256 0a2f2a8d4aeb04b7530ab7a22a79658d71c593d213cd0eff8dc81b705f728902, strict afterproof SHA256 0312cb2ad64ce01f83d69f707efa2f46526af0321ff67dbe5d5aa994a61becb7; all independently rehashed from downloaded raw source ZIP. Frozen CSV, historical captures/oracle/scorer untouched. No publication, production/provider/member writes, secrets, purchases, forced history.",
+      "production_deployed": false
     }
   ],
   "history": [
