@@ -238,3 +238,38 @@ test('a READY merge already in published candidate ancestry can still be unshipp
  assert.equal(planReadyOnlyCandidate(queue,{...input,developmentChangedPaths:[]}).ready,false);
  assert.equal(planReadyOnlyCandidate(queue,{...input,isAncestor:(a,b)=>a===b||(a===P&&b===B)}).ready,false);
 });
+
+
+test('excluded unfinished issue test inherited unchanged by later selected READY merge is not an approved READY test',()=>{
+ const other={...unfinished,id:'DIC-Q-102',issue:102,state:'TESTING',scope_paths:['site/card.js']};
+ const queue={...q,items:[one,unfinished,other]};
+ const excluded='tests/issue102-unfinished-source.test.mjs';
+ const customManifest={...manifest,pinned_to_ready_paths:['site/card.js'],
+  excluded_unready_test_paths:[excluded]};
+ const runtime=(ref,path)=>path==='site/card.js'?
+  (ref===A?'published':ref===B?'unready-mixed':'approved-ready'):
+  (ref===B?'unfinished':'published');
+ const testBlobAt=(ref,path)=>{
+  if(path===excluded)return [B,D,D+'^'].includes(ref)?'older-unready-test':null;
+  return runtime(ref,path);
+ };
+ const settings={...validate,manifest:customManifest,
+  stagedCommitChangedPaths:[...validate.stagedCommitChangedPaths,'site/card.js',excluded],
+  sourceObjectAt:testBlobAt};
+ const actual=validateReadyOnlyCandidate(queue,settings);
+ assert.deepEqual(actual.excluded_unready_test_paths,[excluded]);
+ // The selected READY commit explicitly introduces the test: never omit it.
+ assert.throws(()=>validateReadyOnlyCandidate(queue,{...settings,
+  sourceObjectAt:(ref,path)=>ref===D+'^'&&path===excluded?null:testBlobAt(ref,path)}),
+  /test introduced or modified by an approved READY merge/);
+ // The selected READY commit changes the inherited test: never omit it.
+ assert.throws(()=>validateReadyOnlyCandidate(queue,{...settings,
+  sourceObjectAt:(ref,path)=>ref===D+'^'&&path===excluded?'different-earlier-blob':testBlobAt(ref,path)}),
+  /test introduced or modified by an approved READY merge/);
+ // Parent lookup uncertainty must fail closed; do not infer prior Git bytes.
+ assert.throws(()=>validateReadyOnlyCandidate(queue,{...settings,
+  sourceObjectAt:(ref,path)=>{
+   if(ref===D+'^'&&path===excluded)throw Error('missing historical parent');
+   return testBlobAt(ref,path);
+  }}),/Cannot independently verify selected READY test provenance/);
+});

@@ -219,8 +219,23 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
      sourceObjectAt(manifest.development_source_sha,path)===null||
      sourceObjectAt(candidateSha,path)!==null)
    reject('Excluded test must be newly introduced and absent from isolated candidate');
-  for(const item of plan.ready_items)if(sourceObjectAt(item.merged_source_sha,path)!==null)
-   reject('Cannot exclude an approved READY test from candidate');
+  // Later, independently READY commits inherit older unfinished issue tests
+  // in their Git trees. Mere historical presence does not make an inherited
+  // test part of the selected READY change. Prove its exact blob was UNCHANGED
+  // relative to each READY merge's real first parent before permitting omission.
+  // A test introduced/modified by any selected READY commit is never excluded.
+  for(const item of plan.ready_items){
+   let selectedBlob,parentBlob;
+   try{
+    selectedBlob=sourceObjectAt(item.merged_source_sha,path);
+    if(selectedBlob!==null)
+     parentBlob=sourceObjectAt(item.merged_source_sha+'^',path);
+   }catch{
+    reject('Cannot independently verify selected READY test provenance: '+path);
+   }
+   if(selectedBlob!==null&&selectedBlob!==parentBlob)
+    reject('Cannot exclude a test introduced or modified by an approved READY merge: '+path);
+  }
  }
  const allowed=[...plan.restored_paths,...plan.pinned_ready_paths,...excludedTests,CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH];
  if(!equal(stagedCommitChangedPaths||[],allowed))
