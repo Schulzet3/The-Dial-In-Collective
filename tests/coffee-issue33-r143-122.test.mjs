@@ -61,7 +61,7 @@ test('#122 no published roast or decaf in selected fields; old SEO must not dona
 test('#122 real parser on selected explicit fact labels preserves current identity',()=>{
  const p=extractPublicCoffeeFacts(page(),{source_url:chosen122.url});
  assert.equal(p.ok,true);assert.equal(p.fields?.name,chosen122.name);
- assert.ok(!/final batch|old stock/i.test(String(p.fields?.name||'')+' '+String(p.fields?.tasting_notes||'')));
+ assert.ok(!/old stock/i.test(String(p.fields?.name||'')+' '+String(p.fields?.tasting_notes||'')));
 });
 test('#122 archived title without current Final Batch suffix does not pass strict live selected H1',()=>{
  assert.equal(selected122Source(page(details,chosen122.archivedName)).exactH1,false);
