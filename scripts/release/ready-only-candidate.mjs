@@ -304,7 +304,7 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
    ['IN_PROGRESS','TESTING','BLOCKED'].includes(i.state)&&
    i.scope_paths?.length>0&&i.scope_paths.every(x=>plan.restored_paths.includes(x)));
   if(!unfinishedMixed&&!unfinishedRestored&&!frozenOtherReady)
-   reject('Excluded test lacks entirely restored unfinished or frozen READY provenance');
+   reject('Excluded test does not belong to a frozen unselected READY or unfinished mixed-source item, nor wholly restored unfinished source');
   if(sourceObjectAt(publishedSourceSha,path)!==null||
      sourceObjectAt(manifest.development_source_sha,path)===null||
      sourceObjectAt(candidateSha,path)!==null)
