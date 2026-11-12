@@ -2021,6 +2021,23 @@
       "locked_policy_boundary": "Do not add ultrasound to equipment controls, propose universal shorter/longer espresso extraction duration, transfer cold-brew basket-loading or brew ratio to normal shot dose, or replace five ratings/one controllable change/standard Turbo/Fast-Flow/slow-feed with laboratory chemistry. Preserve all original shot measurements and notes, personal same-coffee learning, grinder calibration/version history, private Community/RLS.",
       "source_sha": "0610276b45ee29dee1b747081d8348cb92dfa76e",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "LIVE-20261112-RESTORED-INVALID-RATING-LABEL-R217",
+      "type": "live_repository_ux_render_direct_bounded_source_review",
+      "path": "site/lib/constants.js; site/lib/ui.js; site/cloud/main.js; site/lib/model.js; tests/cloud-shot-rating-focus.test.mjs",
+      "source_sha": "3a47f4e05c94773b41424c3b3bbf0a296fe414eb",
+      "git_blobs": {
+        "constants": "72221331ce4dffabe416eebec1ae2fceced3a095",
+        "ui": "60539853a32f63e1c1c21cc0859d0a68be4281d9",
+        "cloud_main": "ae7bd5e19a50237533bb5ac0d8ac4d84aef1a4fa",
+        "model": "469c55c17dd3ee5c16523e59a5adace1056e9038",
+        "test": "21d3bac8a37ae7c23a63ce8260a4a8c663f47531"
+      },
+      "review_status": "BOUNDED_CLOUD_LOG_SHOT_EDIT_UI_INVALID_ARCHIVED_FIVE_RATING_LABEL_REPRODUCED_BY_CODE_TRACE_NOT_EXHAUSTIVE_ISSUE267_AUDIT",
+      "access": "EXACT_IMMUTABLE_GITHUB_SOURCE",
+      "provenance": "GitHub original source and prior #455 issue/backlog; not research policy or member observation",
+      "scientific_status": "NOT_APPLICABLE_DETERMINISTIC_UI_CORRECTNESS"
     }
   ],
   "evidence_checks": [
@@ -6235,6 +6252,23 @@
       "owner_approval": false,
       "github267_literal_review_credit": 0,
       "source_sha": "0610276b45ee29dee1b747081d8348cb92dfa76e"
+    },
+    {
+      "id": "R455-EV-APP-217-A",
+      "source": "LIVE-20261112-RESTORED-INVALID-RATING-LABEL-R217",
+      "claim": "validateBackup preserves imported original shot ratings without validating every historical taste; CloudApp.showLog(editing) clones a saved shot and passes saved tasteScales directly into ui.scales. ui.scales(t={}) crashes when t=null; constants.tasteLabel returned undefined for out-of-range, noninteger and nonnumeric historical inputs, so the five-scale edit form can fail or render blank rather than a clear unselected 'Tap to rate'. Valid 1..5 ratings and all-green must stay untouched. No reported member incident; source-reproduced potential legacy import/edit path.",
+      "grade": "DIRECT_EXACT_GITHUB_MODULE_CALL_CHAIN_AND_BOUNDED_NEGATIVE_SOURCE_REPRODUCTION; NEW_NODE_AND_BROWSER_CI_PENDING",
+      "source_sha": "3a47f4e05c94773b41424c3b3bbf0a296fe414eb",
+      "git_blob_shas": [
+        "72221331ce4dffabe416eebec1ae2fceced3a095",
+        "60539853a32f63e1c1c21cc0859d0a68be4281d9",
+        "ae7bd5e19a50237533bb5ac0d8ac4d84aef1a4fa",
+        "469c55c17dd3ee5c16523e59a5adace1056e9038"
+      ],
+      "current_app": "New narrow patch makes missing/invalid restored inputs display Tap to rate while leaving each of five controls unselected, valid recorded ratings and saved original data unchanged; test source authored, execution pending.",
+      "result": "SAFE_LOCKED_COMPATIBLE_PATCH_AUTHORED_CI_PENDING_NOT_READY",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -6390,24 +6424,25 @@
     "R455-212: independently checked original Pignatone et al 2026 pregrind oven/chill 30min experiment, changed single-blend/GS3/E65S flow and chemicals but no sensory optimum or user heating/cooling recommendation; new 112 source identities/335 bounded checks/171 research proposals after PR integration. Exact docs-only PR and CI required; original S019 unresolved; #267 separate.",
     "R455-213 ACTIVE: Original Nature 2026 black drip consumer reanalysis Methods/Results/Discussion source-bounded reviewed; owner five scores and personal espresso learning unchanged. PR two-doc source/journal exact CI, merge and readback pending. Standalone S019 inaccessible; #267 V2 line credit zero.",
     "R455-215 original 2026 coffee bitterness matrix study verified via direct full primary PMC HTML and trained panel/sensory table. Research-only 115 sources/341 evidence checks/174 proposals after CI-verified integration; original S019 still unavailable, #267 literal audit remains separate, original PDF/raw participant data not verified.",
-    "R455-216: indexed original Chiu et al 2024 ultrasonic rapid cold brew original Methods 2.11/Results 3.4 + PubMed reviewed, not normal espresso; 116 sources/343 checks/175 proposals if integrated, original PDF/raw/figures and standalone S019 unverified; next exact-head CI/nonforce merge/source readback, then distinct UX issue review. #267 literal credit zero."
+    "R455-216: indexed original Chiu et al 2024 ultrasonic rapid cold brew original Methods 2.11/Results 3.4 + PubMed reviewed, not normal espresso; 116 sources/343 checks/175 proposals if integrated, original PDF/raw/figures and standalone S019 unverified; next exact-head CI/nonforce merge/source readback, then distinct UX issue review. #267 literal credit zero.",
+    "R455-217 code/test/journal/ledger/IN_PROGRESS queue single-commit candidate; inspect exact PR-head Node22 + cloud/browser/offline/governance/SQL risk routing, repair if needed; merge non-force only on completed applicable success then read merged blobs/CI, move queue READY only if justified. Original S019 unavailable and #267 literal audit separate."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-216",
-    "source_sha": "0610276b45ee29dee1b747081d8348cb92dfa76e",
-    "starting_preflight_development_sha": "0610276b45ee29dee1b747081d8348cb92dfa76e",
+    "run_id": "R455-217",
+    "source_sha": "3a47f4e05c94773b41424c3b3bbf0a296fe414eb",
+    "starting_preflight_development_sha": "3a47f4e05c94773b41424c3b3bbf0a296fe414eb",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "phase": "RESEARCH_ONLY_TWO_DOC_PR_CI_PENDING_NOT_READY",
+    "phase": "SOURCE_PATCH_AUTHORED_NOT_MERGED_CI_PENDING_NOT_READY",
     "source_counts": {
-      "research_project_source_records": 116,
-      "bounded_evidence_checks": 343,
-      "proposals": 175
+      "research_project_source_records": 117,
+      "bounded_evidence_checks": 344,
+      "proposals": 176
     },
     "original_s019": "INACCESSIBLE_UNREVIEWED_CURRENT_DRIVE_LIBRARY_SPACE_SEARCH",
-    "release_state": "NO_NEW_READY_OR_PRODUCTION_CHANGE",
+    "release_state": "IN_PROGRESS_NONPUBLISHED",
     "github267_literal_review_credit": 0,
-    "primary": "CHIU_2024_ULTRASONIC_RAPID_COLDBREW_ADAPTED_BASKET",
-    "unverified": "ORIGINAL_FULL_PDF_SUPPLEMENT_RAW_DATA_AND_FIGURES_INDEPENDENT_REPLICATION_CONVENTIONAL_ESPRESSO_INTERVENTION"
+    "focus": "LOG_SHOT_EDIT_INVALID_RESTORED_TASTE_UNRATED_EMPTY_LABEL",
+    "unverified": "Actual Node22/browser/cloud CI, real legacy member incident, empirical espresso outcomes."
   },
   "policy_decisions_resolved": [
     {
@@ -10369,14 +10404,35 @@
       "release_queue_status": "NOT_APPLICABLE_NO_NEW_APP_CODE_NO_READY_NO_DEPLOY",
       "github267_literal_review_credit": 0,
       "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-217-RESTORED-INVALID-RATING-EMPTY-LABEL",
+      "finding": "Legacy backup/import or malformed restored shot can carry tasteScales null or invalid values. Cloud Log Shot > Edit renders ui.scales(d.tasteScales); null throws while other invalid values yield blank output labels. This is synthetic/source-reproducible, not a real user event.",
+      "evidence": [
+        "R455-EV-APP-217-A",
+        "Existing Locked all-five-rated requirement in Master Spec and constants.tastesComplete/isDialed, which remain unchanged",
+        "Original live preflight development 3a47f4e05c94773b41424c3b3bbf0a296fe414eb / blob 2fb236bbfa6bac48513eeb3bd157b260853af06d"
+      ],
+      "evidence_grade": "DIRECT_CODE_TRACE_WITH_SYNTHETIC_REGRESSION_AUTHORED_CI_NOT_EXECUTED",
+      "severity": "P2_LOG_SHOT_EDIT_LEGACY_INVALID_RATING_EMPTY_STATE_AND_RENDER_FAILURE",
+      "user_benefit": "Preserve usable, clearly unrated five-field editing for legacy invalid/missing original sensory ratings without fabricating a rating, changing original shot history/notes, or allowing incomplete saves.",
+      "current_locked": "Five independent 1-5 taste scores required; true all-green success only with five recorded ideals; no silent data rewriting; preserve old shots/private notes/history and normal cloud/offline behavior.",
+      "current_app": "`ui.scales` accepts null/nonobject as an unselected empty taste set; `tasteLabel` treats every invalid input as Tap to rate; existing rating-selection `aria-pressed` and validator remain unchanged.",
+      "proposed_change": "SAFE deterministic fallback only; no new targets, thresholds, data fields, recipes, Locked decisions, provider actions or scientific claims.",
+      "approval_required_for_behavior_change": false,
+      "implementation": "SOURCE_PATCH_CREATED_PENDING_EXACT_CI_AND_NONFORCE_INTEGRATION_NOT_READY",
+      "test_plan": "New Node22 direct render regression for null, undefined, invalid string, zero, >5, fractional, NaN, ±Infinity across all five scales; five unselected groups/25 controls, original valid five ideal ratings preserved; browser/mobile/offline targeted CI after PR. NOT TESTED at writing.",
+      "release_queue": "DIC-Q-455-r217-invalid-restored-rating-empty-label",
+      "source_commit": null,
+      "implementation_pr": null
     }
   ],
   "changeScope": {
-    "application_code_changed": false,
+    "application_code_changed": true,
     "tests_executed": false,
     "production_deployed": false,
-    "queue_changed": false,
-    "reason": "R202 preserves all 106 source review entries and all old claim checks/proposals; annotates duplicate DOI aliases and adds two claim/evidence checks, one backlog traceability item; no code, scientific thresholds or release behavior."
+    "queue_changed": true,
+    "reason": "R217 deterministic five-input restoration empty-label safety; exact code/test written on isolated source branch pending exact CI."
   },
   "publication_identity_reconciliation": {
     "run_id": "R455-202",
