@@ -1,0 +1,35 @@
+{
+  "schema": "issue267_append_only_metadata_correction",
+  "issue": 267,
+  "id": "A95-P075-L007",
+  "date_utc": "2026-11-12",
+  "reason": "#504 G1-205 delegated verification of one already reviewed shell source line, zero new review numerator",
+  "original_immutable_receipt_blob_sha": "9e4ec0edc5b185562d055142718219fe83fa4143",
+  "original_immutable_receipt_path": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-P73-P75-20261106-0255.json",
+  "source": {
+    "track": "pinned",
+    "file_index_1_based": 75,
+    "path": "scripts/backups/assert-recovery-inventory.sh",
+    "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "blob_sha": "a6ecb5a57c36ebf71d71c484e673eb75924ecc23",
+    "line_1_based": 7,
+    "text": "  *) echo '::error::Unknown recovery inventory comparison' >&2; exit 2 ;;"
+  },
+  "current": {
+    "commit": "7767782f9aff230ddb3c9561153873283f35af33",
+    "blob_sha": "a6ecb5a57c36ebf71d71c484e673eb75924ecc23",
+    "line_1_based": 7,
+    "byte_exact": true
+  },
+  "field": "inspection_classification",
+  "old": "comment",
+  "corrected": "executable_shell_case_default_error_exit",
+  "behavior": "POSIX shell case default arm echoes generic failure and exits status 2 for an unsupported recovery inventory comparison mode.",
+  "quality": "Contrary to original receipt comment tag, this line executes and is safety-relevant. Original receipt behavior was already accurate; original record remains immutable.",
+  "risk": "Fail-closed comparison mode prevents accidental success for unsupported recovery checks; no private file contents printed.",
+  "duplicate_credit_increment": 0,
+  "findings_incident": "RECEIPT_METADATA_ERROR_CORRECTED_ONLY",
+  "source_code_modified": false,
+  "tests": "Literal pinned/current source reread; no functional shell test run",
+  "original_receipt_unchanged": true
+}
