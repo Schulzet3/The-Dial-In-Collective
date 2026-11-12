@@ -54,7 +54,7 @@ if(process.env.DIC_ISSUE33_R157_VERIFY==='1'){
  check(chosen185.notes.every(x=>norm(f.tasting_notes).includes(norm(x))),'labeled_selected_cupping_notes');
  check(norm(f.variety).includes('castillo')&&norm(f.variety).includes('caturra'),'direct_selected_varieties');
  check(norm(f.elevation_m).replace(/\s/g,'').includes('1500')&&norm(f.elevation_m).replace(/\s/g,'').includes('2070'),'direct_selected_elevation');
- check(!f.decaffeination_method||/sugar\s*cane|sugarcane|ethyl acetate/i.test(String(f.decaffeination_method)),'no_invented_decaﬀ_method');
+ check(norm(f.decaffeination_method)===norm('Sugar Process'),'direct_selected_sugar_process_decaﬀ_not_green_process');
  check(!f.release_label&&!f.espresso_recipe,'no_unpublished_release_or_recipe');
  check(rec.add_coffee_ui_rendered===true&&rec.source_review_rendered===true,'add_coffee_source_review');
  const result={case_number:185,source_sha:e?.source_sha||null,passed:failures.length===0,failures,

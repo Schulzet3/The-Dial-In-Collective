@@ -68,3 +68,25 @@ test('#185 other lot or variant is not the selected original identity',()=>{
  for(const wrong of ['Humble Mule Decaf Old Lot 2024','Exotic Mule, Natural Decaf','Humble Mule, Natural Process'])
   assert.equal(selected185Source(page(own,wrong)).exactSelectedTitle,false);
 });
+
+test('#185 current own cane/water DECAFFEINATION maps Sugar Process, green process still Washed',()=>{
+ const p=extractPublicCoffeeFacts(page(),{source_url:chosen185.url});
+ assert.equal(p.fields?.decaffeination_method,'Sugar Process',JSON.stringify(p));
+ assert.equal(p.fields?.process,'Washed',JSON.stringify(p));
+});
+test('#185 another coffee recommendation cannot supply the selected decaf method',()=>{
+ const no=own.replace('Our naturally decaffeinated coffee undergoes a unique decaffeination process utilizing sugar cane and water.','The current decaffeination method is not published.');
+ const p=extractPublicCoffeeFacts(page(no,chosen185.name,
+ '<section class="related-products"><h1>Other Decaf Coffee</h1><p>Our naturally decaffeinated coffee undergoes a unique decaffeination process utilizing sugar cane and water.</p></section>'),{source_url:chosen185.url});
+ assert.ok(!p.fields?.decaffeination_method,JSON.stringify(p));
+});
+test('#185 regular current product cannot inherit direct decaf treatment phrase',()=>{
+ const p=extractPublicCoffeeFacts(page(own,'Exotic Mule'),{source_url:chosen185.url});
+ assert.ok(!p.fields?.decaffeination_method,JSON.stringify(p));
+});
+test('#185 historical prior sugar process does not establish present selected decaf method',()=>{
+ const p=extractPublicCoffeeFacts(page(own.replace('Our naturally decaffeinated coffee undergoes a unique decaffeination process utilizing sugar cane and water.',
+ 'Our coffee was formerly decaffeinated via sugar cane and water; current method not published.')),
+ {source_url:chosen185.url});
+ assert.ok(!p.fields?.decaffeination_method,JSON.stringify(p));
+});
