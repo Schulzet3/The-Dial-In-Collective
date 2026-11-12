@@ -5,6 +5,7 @@
 // Roast can be suggested from an Agtron reading only with scale/sample
 // caveats. Never infer roast from brand, hue or tasting language.
 import {extractDelimitedCoffeeSpecs} from './coffee-delimited-specs.mjs';
+import {selectedIconCountryRegion} from './coffee-selected-icon-geography.mjs';
 import {productMarkup} from './coffee-product-scope.mjs';
 import {interpretAgtron} from './agtron-roast.mjs';
 import {extractProductFlavorEvidence} from './coffee-flavor-evidence.mjs';
@@ -218,6 +219,10 @@ function selectedMarkup(html){
 export function extractLayoutEvidence(html,{fields,addField,clean,hasOriginConflict=()=>false}){
  html=productMarkup(html);
  const extras={},page=selectedMarkup(html);
+ // An adjacent Country/Region icon-caption pair inside this exact selected
+ // product is direct locality evidence, unlike SEO or a generic farm story.
+ const iconCountryRegion=selectedIconCountryRegion(html,{clean});
+ if(iconCountryRegion)addField('Origin',iconCountryRegion);
  const onyxMetric=/<div\b[^<>]{0,2000}class=["'][^"']{0,2000}a-stat[^"']{0,2000}["'][^<>]{0,2000}data-name=["']roast-level["']/i.test(html);
  if(onyxMetric){
   // Onyx publishes many general education sections on the product URL.
