@@ -40,6 +40,19 @@ export function auditPreflightReceipt({sha,parent,paths,run}){
     if(!contents.startsWith('# Mandatory starting point for EVERY DIC task')){
      errors.push('preflight source lacks active mandatory contract');continue;
     }
+    // If the cited development source already belongs to this branch's
+    // parent history, it must describe the PARENT's current instructions.
+    // Otherwise a freshly added receipt could reuse an obsolete preflight
+    // SHA after that file changed. Do not reject legitimate concurrent dev
+    // sources that are newer than a PR's older feature branch parent.
+    let fromParentHistory=false;
+    try{run(['merge-base','--is-ancestor',devSha,parent]);fromParentHistory=true;}catch{}
+    if(fromParentHistory){
+     const parentBlob=run(['rev-parse','--verify',parent+':'+sourcePath]);
+     if(parentBlob!==blobSha){
+      errors.push('stale preflight evidence: source parent uses a newer preflight Git blob');continue;
+     }
+    }
    }catch(error){errors.push('preflight Git source/blob unavailable: '+String(error.message));continue;}
    // Require cited development SHA in the first-parent source history or the
    // live fetched development ref, never a fabricated/unrelated Git object.

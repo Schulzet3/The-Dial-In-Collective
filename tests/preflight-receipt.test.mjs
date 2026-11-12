@@ -56,6 +56,16 @@ test('missing journal and missing Git evidence fail closed',t=>{
  const unknown=f.commit();
  assert.match(f.audit(unknown,noJournal,['site/main.js',journal]).errors.join(' '),/unavailable/);
 });
+test('stale preflight evidence fails after instructions changed in source parent',t=>{
+ const f=fixture(t);
+ f.write('docs/ai/PREFLIGHT.md','# Mandatory starting point for EVERY DIC task\\nUPDATED instructions\\n');
+ const newParent=f.commit();
+ f.write('site/main.js','export const y=2;\\n');
+ f.write(journal,f.row+'\\n');
+ const head=f.commit();
+ assert.match(f.audit(head,newParent,['site/main.js',journal]).errors.join(' '),/stale preflight evidence/);
+});
+
 test('docs-only and historical pre-rollout commits are not retroactive',t=>{
  const f=fixture(t);f.write('docs/notes.md','doc\n');const docs=f.commit();
  assert.equal(f.audit(docs,f.base,['docs/notes.md']).status,'NOT_APPLICABLE_DOCS');
