@@ -64,28 +64,3 @@ self.addEventListener('fetch',event=>{
  event.respondWith(caches.open(CACHE_NAME).then(async cache=>
   await cache.match(url.pathname)||fetch(request)));
 });
-
-
-// iOS 16.4+ Home Screen Web Push. Server sends no user/member details and no
-// encrypted payload. Never cache identity, tokens, notifications, or records.
-self.addEventListener('push',event=>{
- event.waitUntil(self.registration.showNotification('The Dial In Collective',{
-  body:'Administrator review required.',
-  tag:'dic-admin-review',
-  icon:'/icon-192.png',
-  data:{path:'/admin.html'}
- }));
-});
-self.addEventListener('notificationclick',event=>{
- event.notification.close();
- event.waitUntil((async()=>{
-  const windows=await self.clients.matchAll({type:'window',includeUncontrolled:true});
-  const existing=windows.find(client=>{
-   try{return new URL(client.url).origin===self.location.origin &&
-    new URL(client.url).pathname==='/admin.html';}catch{return false;}
-  });
-  if(existing)return existing.focus();
-  // Do not navigate an open shot draft to Admin, which could lose local edits.
-  return self.clients.openWindow('/admin.html');
- })());
-});
