@@ -64,6 +64,7 @@ const CURRENT_SELECTED_BEAN_PRONOUN_METHOD=/(?:^|[.!?]\s+)(it|this\s+coffee)\s+i
 // A product without "Decaf" in its H1 may call itself "this decaf single
 // origin gem" rather than "this decaf coffee". Require a direct chosen-product
 // paragraph and its own named treatment; this identity alone never fills method.
+const MIXED_CAFFEINE_DIRECT_IDENTITY=/\b(?:half[ -]?caf|quarter[ -]?caf|semi[ -]?decaf|partially[ -]?decaf)\b/iu;
 const CURRENT_SELECTED_UNNAMED_DECAF_IDENTITY=/\bthis\s+(?:[\p{L}\p{M}-]+\s+){0,8}decaf(?:feinated)?\s+(?:(?:single[ -]origin|organic|specialty|freshly[ -]roasted)\s+){0,3}(?:coffee|beans?|gem)\b/iu;
 const CURRENT_SELECTED_DECAF_WAY=/^(?:[\p{L}\p{M}]{3,24}['’]d|(?:this|our)\s+coffee\s+(?:is|was)\s+decaffeinated)\s+by\s+way\s+of\s+(?:the\s+)?(?:swiss[\s-]?water|mountain[\s-]?water|sugar[\s-]?cane|ethyl[\s-]?acetate|(?:supercritical\s+)?carbon[\s-]?dioxide|co\s*[- ]?[2\u2082])\b/iu;
 // An exact selected decaf's single product paragraph can locate its current
@@ -173,6 +174,7 @@ function selectedProductAccordionDecafMethods(html,name,clean){
    const value=clean(html.slice(node.headEnd,node.contentEnd),600).trim();
    if(node.tag==='p'&&value.length<=550&&
       CURRENT_SELECTED_UNNAMED_DECAF_IDENTITY.test(value)&&
+      !MIXED_CAFFEINE_DIRECT_IDENTITY.test(value)&&
       !NONCURRENT_DECAF_METHOD.test(value))
     hasSelectedDecaf=true;
    if(node.tag==='span'&&state.summary&&
@@ -225,6 +227,7 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
  const selectedUnnamedDecafIdentity=!/\b(?:half[ -]?caf|quarter[ -]?caf|semi[ -]?decaf|partially[ -]?decaf)\b/i.test(name)&&
   body.some(b=>b.tag==='p'&&b.text.length<=550&&
    CURRENT_SELECTED_UNNAMED_DECAF_IDENTITY.test(b.text)&&
+   !MIXED_CAFFEINE_DIRECT_IDENTITY.test(b.text)&&
    !NONCURRENT_DECAF_METHOD.test(b.text));
  const organizations=new Set(),farms=new Set(),sensory=new Set(),literals=new Set(),roasts=new Set();
  const namedEstateGrowers=new Map(),namedCurrentCultivators=new Set();
