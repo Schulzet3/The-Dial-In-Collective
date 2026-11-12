@@ -649,3 +649,7 @@ Independently verified Git release/production b386a977a7c43bf190f6315105894334d9
 - Required next: source-bound PR/merged CI, then reconcile the reliable run receipt via repository actions/runs?head_sha. [skip netlify]
 
 - PR-head CI 43151089003 correctly exposed one stale synthetic fixture in tests/ready-only-candidate.test.mjs. This same-commit correction rebinds fixture's expected R190 blob to current verified 32174be8, preserving every negative test; rerun all applicable existing main CI. [skip netlify]
+
+## 2026-11-12 #2169 stage / controller test-provenance reconciliation [skip netlify]
+- Original source-bound main controller 43147570413 and 43147831127 DID run, both declined (stale pinned reviewed test hash; missing journal mode); repaired main source accepted exact CI 43151770974. No production claim.
+- Staging omitted no unfinished tests while controller supported explicit exclusions; controller also rejected fully restored unfinished issue scopes without a mixed-source pin. Same-commit fix allows exclusions only for new issue-scoped tests tied to entirely restored unready/unselected scope, never for tests edited by any selected READY merge. Manifest records exact exclusions; hosted controller re-verifies each source blob and absence. Include focused negative tests in existing main CI, no duplicate build, no grants/provider effects. Next: exact source CI and safe nonforce merge.
