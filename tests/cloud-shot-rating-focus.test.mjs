@@ -92,3 +92,24 @@ test('Log Shot keeps semantic error announcement and re-enables fields before fo
  assert.ok(main.includes('target.closest('));
  assert.ok(main.includes("group?.removeAttribute('aria-invalid')"));
 });
+
+test('invalid restored taste ratings show an explicit unrated label without preselecting or rewriting five inputs',()=>{
+ const invalid=[null,undefined,'3',0,6,2.5,Number.NaN,Infinity,-Infinity];
+ for(const s of SCALES){
+  for(const value of invalid)assert.equal(tasteLabel(s,value),'Tap to rate');
+  for(let score=1;score<=5;score++)assert.notEqual(tasteLabel(s,score),'Tap to rate');
+ }
+ for(const ratings of [null,undefined,{extraction:6,body:'3',clarity:null,sweetness:2.5,astringency:-1}]){
+  const html=scales(ratings);
+  assert.equal((html.match(/<output>Tap to rate<\/output>/g)||[]).length,5);
+  assert.equal((html.match(/data-scale="/g)||[]).length,5);
+  assert.equal((html.match(/data-action="rate"/g)||[]).length,25);
+  assert.equal((html.match(/aria-pressed="true"/g)||[]).length,0);
+  assert.ok(!html.includes('<output></output>'));
+ }
+ const valid={extraction:3,body:3,clarity:5,sweetness:5,astringency:1};
+ const html=scales(valid);
+ assert.equal((html.match(/aria-pressed="true"/g)||[]).length,5);
+ assert.ok(!html.includes('<output>Tap to rate</output>'));
+ assert.deepEqual(valid,{extraction:3,body:3,clarity:5,sweetness:5,astringency:1});
+});

@@ -82,7 +82,7 @@ export function canonicalUrl(raw) {
 }
 export function tasteSeverity(s,v) {return v==null ? null : s.ideal===3 ? Math.abs(v-3)*2 : s.ideal===5 ? 5-v : v-1;}
 export function tasteLabel(s,v) {
- if(v==null)return 'Tap to rate';
+ if(!Number.isInteger(v)||v<1||v>5)return 'Tap to rate';
  if(s.ideal===3)return ['Very '+s.low.toLowerCase(),s.low,'Balanced',s.high,'Very '+s.high.toLowerCase()][v-1];
  if(s.reverse)return ['None','Slight','Moderate','Strong','Severe'][v-1];
  return [s.low,'Low','Moderate','Good',s.high][v-1];
