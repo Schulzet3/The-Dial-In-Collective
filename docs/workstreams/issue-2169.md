@@ -8,3 +8,8 @@
 - Pre-merge test fixture correction: schema-required issue/title/owner_source fields supplied to synthetic READY item; no production queue mutation. [skip netlify]
 
 - Risk classification now includes workflow/release-controller files even when not in Netlify deployable path inventory; high-risk tests cannot be bypassed by docs-only classification. [skip netlify]
+
+## 2026-11-12 — #2169 READY-check and risk classifier correctness [skip netlify]
+- Exact main controller source d4f0ffc29235f36514e9734f21720aed9f181422 includes source-proven selected/unready test restoration; merged GitHub acceptance 43152360736 SUCCESS. Merged PR #2173 repair had 43151770974 SUCCESS.
+- Original inert dev reliability helper expected five nonexistent GitHub check names (security/cloud-browser/build-test instead of approval/validate/cloud-tests/mobile-browser-qa/sql), guaranteeing false blocks if used. Replaced with the five actual source-bound statuses, one-build maximum risk tier, explicit NOT_APPLICABLE test scope, source/test blob parity for a tested PR head, exact source/merged SHA checks, unowned/overlap/downgrade and strict push-run status classification.
+- READY #1938 preserves previously verified exact PR-head-to-merge blob parity; do not invent merged-SHA CI or require optional physical-device APNs acceptance. Six separately unready rows retain blockers until verified independently. No queue promotion, candidate refresh, grant, deployment, provider or member-data actions. Node tests must pass on PR and merged development. [skip netlify]
