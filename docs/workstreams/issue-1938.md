@@ -122,3 +122,8 @@
 - Third isolated browser fixture: `tests/browser/admin_records_qa.py` similarly concatenates main.js and lacked the imported push-state helper. Browser log explicitly showed `getAdminPushStatus is not defined`; added fixture-only disabled-state stub. All three affected browser fixtures now provide the helper. Re-test exact source.
 
 - Node22 full suite 4046 tests / 3 failures traced to two VM-concatenated Admin test harnesses (`admin-invitation-controls`, `admin-session`) missing new imported `getAdminPushStatus` fixture; all failures displayed `getAdminPushStatus is not defined`, not a production module exception. Added fixture-only stub in both tests; no app/SQL/provider change. Re-run full exact-source CI.
+
+## Nov 12 2026 — push toggle READY (development; not published)
+- PR #2161 nonforce squash merged `5d64b2803574c090d9608cb5729a8e266fc63639`; all three runtime source and synthetic regression test blobs read back byte-identical to exact tested PR head `16d2f72a843c2a71fb52fdbd7ad0df39d8290094`.
+- Exact head CI SUCCESS: approval 43145275410, security 43145275491, isolated SQL 43145275539, cloud/mobile/visual/offline 43145275420, Node22 full 43145275391. Frozen603 SKIPPED not PASS. Earlier fixture/queue failures repaired and retested, no bypass.
+- READY queue row `DIC-Q-1938-push-toggle-device-state`; no merged-SHA workflow runs observed yet, but exact merged runtime/test blobs equal the five-check tested source. No Netlify deploy, SQL, credentials, member writes, or real Apple push proof. Future publish requires a new owner command.

@@ -12965,22 +12965,27 @@
       "issue": 1938,
       "pr": 2161,
       "title": "Show one device-authoritative administrator push toggle across refreshes",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "5d64b2803574c090d9608cb5729a8e266fc63639",
       "scope_paths": [
         "site/admin/view.js",
         "site/admin/main.js",
         "site/admin/push.js"
       ],
       "tests": [
-        "tests/issue1938-admin-push-toggle.test.mjs: mutually exclusive button rendering, subscription and permission refresh"
+        "tests/issue1938-admin-push-toggle.test.mjs: mutually exclusive button rendering, subscription and permission refresh",
+        "Exact PR head 16d2f72 five applicable CI SUCCESS; merged runtime/test blobs identical to tested head; frozen603 SKIPPED as not applicable."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact-source CI and nonforce merge pending; real iPhone APNs delivery remains unverified"
+      "ci_runs": [
+        43145275420,
+        43145275391,
+        43145275410,
+        43145275491,
+        43145275539
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1938",
-      "notes": "No production publish authorized; separate from deployed original #1938."
+      "notes": "READY development only, not deployed. Source PR #2161 squash merged nonforce 5d64b280; tested head 16d2f72 five applicable CI SUCCESS and exact runtime/test blob readback identical after merge. No merged-SHA Actions run observed at this checkpoint; no device APNs acceptance claim. Future publication requires new owner Publish."
     }
   ],
   "history": [
