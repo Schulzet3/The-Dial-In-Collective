@@ -13093,7 +13093,7 @@
       "issue": 2258,
       "pr": 2273,
       "title": "Transactional approval email and opt-in member Web Push (separate from tested in-app notice)",
-      "state": "BLOCKED",
+      "state": "READY",
       "merged_source_sha": "60279ea802e7d986adb6bd2580f35645a8c621c0",
       "scope_paths": [
         "build_cloud.mjs",
@@ -13112,7 +13112,8 @@
       "tests": [
         "#2258 PR #2273 independently merged source 1680306c0323c5213963fe63dfe66560a386eaf9; high-risk Auth/SQL/cloud/mobile/browser focused test evidence exists, but source/provider and real delivery acceptance for transactional sender/member opt-in remain incomplete.",
         "Previous in-app-only PR #2260 (merged 9beb10f0) is independently source-tested and remains a distinct READY queue item; its proof does not certify the new email/member-push channels.",
-        "#2258 Edge auth/runtime-gap repair: PR #2280 exact head b3d823383349d21dd8ab4b07db52bef5cc7466b9 approval 43242224221, SQL 43242224207, cloud/mobile/browser 43242224183, full Node+lint 43242224735 SUCCESS; nonforce merged 60279ea802e7d986adb6bd2580f35645a8c621c0 with exact config/gateway/tests/journal/queue blobs matched. Merged validate 43242986605: 4,270 PASS, 0 FAIL, 6 intentional SKIP + lint; cloud/mobile/browser 43242986298, approval 43242986728 and nonpublish rehearsal 43242986638 SUCCESS. Original frozen603 SKIPPED/N/A. Missing email provider, hosted migration/Edge, and physical delivery remain BLOCKED; no production change by #2258."
+        "#2258 Edge auth/runtime-gap repair: PR #2280 exact head b3d823383349d21dd8ab4b07db52bef5cc7466b9 approval 43242224221, SQL 43242224207, cloud/mobile/browser 43242224183, full Node+lint 43242224735 SUCCESS; nonforce merged 60279ea802e7d986adb6bd2580f35645a8c621c0 with exact config/gateway/tests/journal/queue blobs matched. Merged validate 43242986605: 4,270 PASS, 0 FAIL, 6 intentional SKIP + lint; cloud/mobile/browser 43242986298, approval 43242986728 and nonpublish rehearsal 43242986638 SUCCESS. Original frozen603 SKIPPED/N/A. Missing email provider, hosted migration/Edge, and physical delivery remain BLOCKED; no production change by #2258.",
+        "READY evidence recheck, 2026-11-12: approval, validate, cloud-tests, mobile-browser-qa, SQL all SUCCESS at exact PR #2280 head b3d823383349d21dd8ab4b07db52bef5cc7466b9 (runs 43242224221/43242224735/43242224183/43242224207); code/test blob parity at nonforce merged 60279ea802e7d986adb6bd2580f35645a8c621c0. Independent exact Edge-config security trigger repair #2282 merged 7767782f9aff230ddb3c9561153873283f35af33; exact-head security inventory, Node, SQL, browser, approval SUCCESS. Source remains unchanged on live development. Supabase hosted migration and member Edge broker absent by design until fresh owner Publish; production real inbox/device acceptance NOT YET VERIFIED."
       ],
       "ci_runs": [
         43242224221,
@@ -13124,12 +13125,8 @@
         43242986728,
         43242986638
       ],
-      "blockers": [
-        "Transactional email requires a verified sender/domain and RESEND_API_KEY plus DIC_APPROVAL_FROM_EMAIL in Supabase Edge runtime. Netlify has only public Supabase coordinates by design; Edge sender secret and delivery acceptance cannot be verified with available access. No automatic test email sent to real users.",
-        "Production currently reports verified READY4 Netlify deploy 6af5d3463f9e2eab6338b0c3 (source 046418955abca382ba1bda16d345127b477dd392), which isolated only older READY app bytes; SQL migration 20261112135900 absent in hosted Supabase. A NEW owner Publish command and release source/one-use grant plus permitted provider deployment are necessary to go live.",
-        "Actual iPhone Home Screen Push permission/device delivery and email inbox receipt unverified (device acceptance optional for source readiness, not a factual delivered claim)."
-      ],
-      "notes": "Separate newer #2258 expansion; retain all source and migrations on development, no staging or deployment until actual provider credentials/sender readiness and scoped Auth/privacy/SQL tests are verified. The previously READY in-app banner uses its prior exactly approved source blobs, isolated in the frozen #2169 candidate; later overlapping dev files are intentionally excluded. Never publish this row as part of the older READY-only batch. #2280 exact source/CI and auth-gateway fix merged, no provider mutation; source verified but approval email and closed-app push NOT production READY. No auto-stage or release.",
+      "blockers": [],
+      "notes": "Separate newer #2258 expansion; retain all source and migrations on development, no staging or deployment until actual provider credentials/sender readiness and scoped Auth/privacy/SQL tests are verified. The previously READY in-app banner uses its prior exactly approved source blobs, isolated in the frozen #2169 candidate; later overlapping dev files are intentionally excluded. Never publish this row as part of the older READY-only batch. #2280 exact source/CI and auth-gateway fix merged, no provider mutation; source verified but approval email and closed-app push NOT production READY. No auto-stage or release.\n2026-11-12 configuration/release-ready classification: Owner confirmed existing Resend account sends/receives support and Auth verification email; sending key restricted to verified auth.dialincollective.com created separately, both RESEND_API_KEY and DIC_APPROVAL_FROM_EMAIL (notifications@auth.dialincollective.com) saved under Supabase Edge secrets. Original Supabase Integration key remains intact. Owner confirmation is NOT independent secret-value/runtime readback and real approval-email inbox/opted-in Web Push/APNs receipts are NOT CLAIMED. New Edge function/migration/Netlify cron are not live before owner Publish; deploy/postflight acceptance must verify exact sender scope, runtime config, consent/device, provider delivery, status and backup/recovery. Fail closed if new runtime secrets invalid; no synthetic member or unauthorized production write. READY means tested merged SOURCE ONLY, not DEPLOYED or proof of email/device delivery.",
       "production_deployed": false
     }
   ],
@@ -15111,6 +15108,15 @@
       "state": "BLOCKED",
       "source_sha": "1680306c0323c5213963fe63dfe66560a386eaf9",
       "evidence": "Owner's new email/member-push extension #2273 separately tracked under high-risk source/provider acceptance; absent verified sender/Edge setup, not READY, not published.",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-12",
+      "issue": 2258,
+      "item_id": "DIC-Q-2258-approval-email-and-member-push",
+      "state": "READY",
+      "source_sha": "60279ea802e7d986adb6bd2580f35645a8c621c0",
+      "evidence": "Owner-confirmed separate Resend restricted sending key and sender saved in Supabase Edge secrets; current Resend support/Auth service already working. All five exact PR-head checks SUCCESS, nonforce merged code/test parity, later security-path test merged, unchanged current runtime. Real email/API acceptance, member push device receipt, Supabase migration/Edge and Netlify scheduled poll are post-Publish verification; no production write, actual secret readback or delivery claimed. Pending fresh owner Publish.",
       "production_deployed": false
     }
   ],
