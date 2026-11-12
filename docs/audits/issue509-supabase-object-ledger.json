@@ -3989,6 +3989,24 @@
       "full_index_ddl_reviewed": 8,
       "provider_writes": 0,
       "baseline_complete": false
+    },
+    {
+      "date_utc": "2026-11-12",
+      "event": "RUN185_FK_ADVISOR_CURRENT_SOURCE_AND_TEMP_PRESSURE",
+      "development_parent_sha": "ca312b7143766471dd1a0be2abe866a262465169",
+      "receipt_path": "docs/audits/issue509-current-fk-temp-perf-2026-11-12-run185.json",
+      "reviewed_fk": 13,
+      "provider_writes": 0,
+      "baseline_complete": false
+    },
+    {
+      "date_utc": "2026-11-12",
+      "event": "RUN185_EXACT_SOURCE_GOVERNANCE_CLOSURE",
+      "audit_sha": "ae27e55347ed38eea232b2fced466da86d2188d6",
+      "workflow_run_id": 43157205158,
+      "receipt_path": "docs/audits/issue509-run185-exact-source-governance-closure-2026-11-12.json",
+      "provider_writes": 0,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -18135,5 +18153,39 @@
     "source_code_fixes": 0,
     "baseline_complete": false,
     "closure_commit_own_ci": "CHECK_SEPARATELY"
+  },
+  "provider_fk_temp_runtime_run185": {
+    "status": "DIRECT_CURRENT_ALL_13_FK_ADVISOR_SQL_REVIEW_WITH_NUMERIC_ROLE_TELEMETRY",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_parent_sha": "ca312b7143766471dd1a0be2abe866a262465169",
+    "receipt_path": "docs/audits/issue509-current-fk-temp-perf-2026-11-12-run185.json",
+    "reviewed_fk_constraints": 13,
+    "validated_fk": 13,
+    "indexed_leading_key": 0,
+    "heap_bytes_max": 8192,
+    "pgss_postgres_temp_written_blocks": 180041,
+    "db_temp_bytes": 149777825128,
+    "db_temp_files": 52692,
+    "lock_waiters": 0,
+    "deadlocks": 0,
+    "active_edges": 4,
+    "stored_migrations": 66,
+    "source_fixes": 0,
+    "new_confirmed_defects": 0,
+    "production_writes": 0,
+    "baseline_complete": false,
+    "next": "Migration #67 if present; else earliest changed or unreviewed provider definition; recheck advisory changes and bounded role-specific temp/slow workload without query text"
+  },
+  "provider_run185_exact_ci_closure": {
+    "audit_sha": "ae27e55347ed38eea232b2fced466da86d2188d6",
+    "ci_run_id": 43157205158,
+    "ci_head_sha": "ae27e55347ed38eea232b2fced466da86d2188d6",
+    "ci_conclusion": "COMPLETED_SUCCESS",
+    "job_id": 130979793997,
+    "steps_success": 11,
+    "receipt_path": "docs/audits/issue509-run185-exact-source-governance-closure-2026-11-12.json",
+    "provider_writes": 0,
+    "baseline_complete": false,
+    "closure_own_ci": "RECHECK_ON_NEXT_RUN"
   }
 }
