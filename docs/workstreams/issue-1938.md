@@ -120,3 +120,5 @@
 - Browser CI second fixture failure: `tests/browser/admin_invitation_qa.py` independently concatenates the real Admin JS and also lacked `getAdminPushStatus`; `New Account Requests` timed out. Supplied the same synthetic disabled-state helper only in that fixture; no runtime weakening. New exact-source CI required.
 
 - Third isolated browser fixture: `tests/browser/admin_records_qa.py` similarly concatenates main.js and lacked the imported push-state helper. Browser log explicitly showed `getAdminPushStatus is not defined`; added fixture-only disabled-state stub. All three affected browser fixtures now provide the helper. Re-test exact source.
+
+- Node22 full suite 4046 tests / 3 failures traced to two VM-concatenated Admin test harnesses (`admin-invitation-controls`, `admin-session`) missing new imported `getAdminPushStatus` fixture; all failures displayed `getAdminPushStatus is not defined`, not a production module exception. Added fixture-only stub in both tests; no app/SQL/provider change. Re-run full exact-source CI.
