@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {chosen119,selected119Source} from '../scripts/audit/issue33-r141-119-check.mjs';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
+import {extractCoffeeBlendEvidence} from '../src/server/coffee-blend-evidence.mjs';
 const composition=chosen119.components[0]+', '+chosen119.components[1]+', and '+chosen119.components[2];
 const current='<p>'+composition+'</p><p>Dark Roast: A darker roast that emits full-bodied flavors with notes of Brown Ale, Tobacco Smoke and Molasses.</p>';
 const html=(own=current,name='radiate',extra='',seo='Old Colombia Nicaragua Indonesia blend')=>
@@ -59,4 +60,37 @@ test('#119 stale hidden same-SKU text cannot become visible blend composition',(
  assert.equal(p.ok,true);
  assert.ok(!/nicaragua/i.test(String(p.fields?.origin||'')),JSON.stringify(p.fields));
  assert.ok(!['washed','natural','honey','anaerobic'].includes(String(p.fields?.process||'').toLowerCase()),JSON.stringify(p.fields));
+});
+
+test('#119 exact selected three origin components including literal island are retained',()=>{
+ const p=extractPublicCoffeeFacts(html(),{source_url:chosen119.url});
+ assert.equal(p.ok,true);
+ assert.ok(String(p.fields?.origin||'').includes('Colombia'),JSON.stringify(p.fields));
+ assert.ok(String(p.fields?.origin||'').includes('Guatemala'),JSON.stringify(p.fields));
+ assert.ok(String(p.fields?.origin||'').includes('Sumatra'),JSON.stringify(p.fields));
+ assert.ok(!/\b(?:Nicaragua|Indonesia)\b/i.test(String(p.fields?.origin||'')),JSON.stringify(p.fields));
+});
+test('generic region-start blend component preserves only explicitly named geography',()=>{
+ const blend=extractCoffeeBlendEvidence(html().replace(composition,composition.replace('Sumatra - Gayo Triple Picked','Bali - Kintamani')),{name:'radiate'});
+ assert.ok(blend, 'selected complete components must be interpreted');
+ assert.ok(blend.origin.includes('Bali'),JSON.stringify(blend));
+ assert.ok(!blend.origin.includes('Indonesia'),JSON.stringify(blend));
+ assert.equal(blend.components,3);
+ assert.equal(blend.complete_process,false);
+});
+test('a fake geographic adjective is not promoted as a named region',()=>{
+ const fake=html().replace(composition,composition.replace('Sumatra - Gayo Triple Picked','Sumatra-style Gayo'));
+ const blend=extractCoffeeBlendEvidence(fake,{name:'radiate'});
+ assert.ok(!blend?.origin?.includes('Sumatra'),JSON.stringify(blend));
+});
+test('an unpublished fictional island name cannot create a complete source-backed blend',()=>{
+ const fake=html().replace(composition,composition.replace('Sumatra - Gayo Triple Picked','Imaginary Island - Gayo'));
+ const blend=extractCoffeeBlendEvidence(fake,{name:'radiate'});
+ assert.ok(!blend?.origin?.includes('Imaginary Island'),JSON.stringify(blend));
+});
+test('selected region-only list not borrowed from unrelated carousel',()=>{
+ const incomplete=html(current.replace(chosen119.components[2],'coffee details unavailable'),'radiate',
+   '<aside class="product-recommendations">'+current+'</aside>');
+ const p=extractPublicCoffeeFacts(incomplete,{source_url:chosen119.url});
+ assert.ok(!String(p.fields?.origin||'').includes('Sumatra'),JSON.stringify(p.fields));
 });

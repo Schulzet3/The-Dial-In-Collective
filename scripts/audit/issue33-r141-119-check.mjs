@@ -57,8 +57,8 @@ if(process.env.DIC_ISSUE33_R141_VERIFY==='1'){
  ck(rec.add_coffee_ui_rendered===true&&rec.source_review_rendered===true,'add_coffee_source_review');
  ck(norm(f.name)===norm(chosen119.name),'actual_parser_selected_identity');
  ck(norm(f.origin).includes('colombia')&&norm(f.origin).includes('guatemala')&&
-   (norm(f.origin).includes('sumatra')||norm(f.origin).includes('indonesia'))&&
-   !norm(f.origin).includes('nicaragua'),'all_current_origins_no_historical_nicaragua');
+   norm(f.origin).includes('sumatra')&&
+   !norm(f.origin).includes('nicaragua')&&!norm(f.origin).includes('indonesia'),'all_current_origins_no_historical_nicaragua');
  ck(!f.process||norm(f.process)===norm('Other/Unknown'),'not_false_single_washed_process');
  ck(norm(f.roast_level)==='dark','selected_current_dark_roast');
  ck(chosen119.tastes.every(t=>norm(f.tasting_notes).includes(norm(t))),'three_direct_current_notes');
