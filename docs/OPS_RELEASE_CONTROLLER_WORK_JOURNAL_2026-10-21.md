@@ -659,3 +659,9 @@ Independently verified Git release/production b386a977a7c43bf190f6315105894334d9
 - Previous PR-head controller acceptance failed only two negative-test text expectations, while the fail-closed denial itself worked correctly. Restored the existing denial prefix, retaining precise new full-restoration explanation. Rerun same suite. [skip netlify]
 
 - Added disposable real-Git stage regression exercising new unready test removal while preserving unowned test, unchanged source, and nonpublishing branch; passed liveQueue to validator to ensure unselected READY provenance is validated consistently. Current PR-head CI requires rerun. [skip netlify]
+
+
+## 2026-11-12 #2169 actual GitHub release-run receipt recovery [skip netlify]
+- Read-only GitHub Actions /actions/runs?head_sha=e742c1b1… proves first denied controller 43147570413; /actions/runs?head_sha=21a4741f… proves second denied controller 43147831127. Commit-associated convenience function returned only pull-request runs and incorrectly suggested GitHub did not trigger. Main acceptance 43151770974, 43152360736 SUCCESS on merged source.
+- Added live repository Actions index fetch and conservative response classifier to existing chat-release-request code; includes failure, duplicate, missing, pending, success-not-deployed, consumed-not-deployed and stale-lease cases in single existing acceptance test suite. No new publisher, grant, candidate, provider actions, Netlify deployment, duplicate build, app changes or owner manual steps.
+- Future chat authoring must use actual repository run index, inspect controlled runner logs and release consumption before any new request; never equate workflow success with production READY/current. [skip netlify]

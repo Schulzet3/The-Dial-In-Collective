@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {validateChatReleaseRequest as validate,validateManualReleaseRequest as validateManual,
- CHAT_REQUEST_PATH,OPS_JOURNAL_PATH,CHAT_REQUEST_SCHEMA,assertChatPushEnvelope,formatChatReleaseJournalAppendix}
+ CHAT_REQUEST_PATH,OPS_JOURNAL_PATH,CHAT_REQUEST_SCHEMA,assertChatPushEnvelope,formatChatReleaseJournalAppendix,fetchChatControllerRuns,inspectChatControllerRuns}
  from '../scripts/release/chat-release-request.mjs';
 import {planSingleUseClaim} from '../scripts/release/one-use-claim.mjs';
 const S='1'.repeat(40),D='2'.repeat(40),R='3'.repeat(40),M='4'.repeat(40),E='5'.repeat(40);
@@ -198,4 +198,30 @@ test('#2169 journal helper binds mode; missing mode fails closed',()=>{
  for(const x of [{...req,mode:undefined},{...req,mode:'auto'},
   {...req,release_id:'invalid'},{...req,tested_source_sha:'x'}])
   assert.throws(()=>formatChatReleaseJournalAppendix(x),/cannot prepare journal/);
+});
+
+test('#2169 release trigger receipt uses actual main PUSH runs, never PR-only lookup',async()=>{
+ const sha='1'.repeat(40);
+ const run={id:43147831127,head_sha:sha,name:'DIC chat-approved single-use production request',
+  path:'.github/workflows/dic-chat-approved-release.yml',event:'push',status:'completed',conclusion:'failure'};
+ let url='';
+ const runs=await fetchChatControllerRuns({requestSha:sha,fetcher:async(u,opt)=>{
+  url=u;assert.equal(opt.method,'GET');
+  return {ok:true,json:async()=>({total_count:2,workflow_runs:[run,{...run,id:99,name:'DIC main release-controller acceptance'}]})};
+ }});
+ assert.match(url,/actions\/runs\?head_sha=1111111111111111111111111111111111111111&per_page=100/);
+ const args={requestSha:sha,mainHeadSha:sha,workflowRuns:runs,elapsedSeconds:150};
+ assert.deepEqual(inspectChatControllerRuns(args),{state:'BLOCKED',runId:43147831127,
+  reason:'controller finished failure; inspect failed job'});
+ assert.equal(inspectChatControllerRuns({...args,workflowRuns:[]}).state,'BLOCKED');
+ assert.equal(inspectChatControllerRuns({...args,workflowRuns:[],elapsedSeconds:5}).state,'WAIT');
+ assert.equal(inspectChatControllerRuns({...args,workflowRuns:null}).state,'UNKNOWN');
+ assert.equal(inspectChatControllerRuns({...args,mainHeadSha:'2'.repeat(40)}).state,'BLOCKED');
+ assert.equal(inspectChatControllerRuns({...args,grantConsumed:true}).state,'CLAIMED_NETLIFY_UNVERIFIED');
+ assert.equal(inspectChatControllerRuns({...args,workflowRuns:[{...run,status:'in_progress'}]}).state,'CONTROLLER_RUNNING');
+ assert.equal(inspectChatControllerRuns({...args,workflowRuns:[{...run,conclusion:'success'}]}).state,'CONTROLLER_COMPLETED_NETLIFY_UNVERIFIED');
+ assert.equal(inspectChatControllerRuns({...args,workflowRuns:[run,run]}).state,'BLOCKED');
+ assert.equal(inspectChatControllerRuns({...args,workflowRuns:[{...run,event:'pull_request'}]}).state,'BLOCKED');
+ await assert.rejects(fetchChatControllerRuns({requestSha:sha,fetcher:async()=>({ok:false,status:403})}),/unavailable/);
+ await assert.rejects(fetchChatControllerRuns({requestSha:sha,fetcher:async()=>({ok:true,json:async()=>({total_count:101,workflow_runs:[]})})}),/Incomplete/);
 });
