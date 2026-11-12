@@ -12932,9 +12932,9 @@
       "id": "DIC-Q-455-r198-original-range-outlier-eligibility",
       "issue": 455,
       "pr": 2150,
-      "title": "R198 preserve original calibration range for archived outlier controls",
+      "title": "R198 original-range outlier eligibility with R201 zero-width integrity guard",
       "state": "READY",
-      "merged_source_sha": "654723176d289a458f843493ccdeb4fff5cfa7cb",
+      "merged_source_sha": "a5dd027d7f20e4eb6b108cf5b8acdaf432ca006c",
       "scope_paths": [
         "site/lib/engine.js"
       ],
@@ -12942,8 +12942,8 @@
       "tests": [
         "R198 original-valid old calibration eligible outside current active dial, impossible/reversed original scale excluded, explicitly different calibration excluded, incomplete green ratings excluded, and saved new outlier prompts while original archived notes unchanged: 6/6 new synthetic tests PASS on PR head and merge.",
         "Exact PR-head [43136517358] and merged [43136815409] Node22/lint 4035 PASS, 0 FAIL, six intentional SKIP; PR-head and merged Chromium/mobile/offline/governance SUCCESS, isolated PR-head SQL/privacy and source security SUCCESS. Frozen603 SKIPPED, not PASS.",
-        "Independent Nov 12 #2169 intake: merged R198 engine.js blob 6b59fb8328aab425481b2090a85dc4ef79113c50 equals current development exactly; published baseline blob 0e7b493494f5caac96c1a6df1f7249456de91bd8 is older. Exact merged CI Node22 43136815409 4035 PASS/0 FAIL, six regressions PASS; merged browser/offline 43136815429 and governance 43136815449 SUCCESS. Identical PR-head security 43136517248 and isolated SQL 43136517242 reused; original603 SKIPPED, not PASS. Owner #455 approved safe work only. Item READY independently, no staging, grant or publication."
-      ],
+        "Independent Nov 12 #2169 intake: merged R198 engine.js blob 6b59fb8328aab425481b2090a85dc4ef79113c50 equals current development exactly; published baseline blob 0e7b493494f5caac96c1a6df1f7249456de91bd8 is older. Exact merged CI Node22 43136815409 4035 PASS/0 FAIL, six regressions PASS; merged browser/offline 43136815429 and governance 43136815449 SUCCESS. Identical PR-head security 43136517248 and isolated SQL 43136517242 reused; original603 SKIPPED, not PASS. Owner #455 approved safe work only. Item READY independently, no staging, grant or publication.",
+        "R201 integrated source amendment #2188: merged a5dd027d7f20e4eb6b108cf5b8acdaf432ca006c site/lib/engine.js blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6 matches tested PR head be61be27bc0d9ff9399fa79fca70fe7f14c4eb01 and current development; new R201 test blob 400dc0b633622a1cf685784de9b65226a50d8181 likewise unchanged. PR head exact five checks and security PASS: Node22/lint 43156218900 (4076 PASS, 0 FAIL, 6 intentional SKIP), governance 43156218896, isolated SQL 43156218919, source security 43156218939, browser/offline 43156218947. All six R198 and all six R201 regression cases PASS in same source suite. Frozen603 SKIPPED, NOT PASS. No candidate/stage/grant/production."      ],
       "ci_runs": [
         43136517358,
         43136517253,
@@ -12952,10 +12952,15 @@
         43136517293,
         43136815409,
         43136815429,
-        43136815449
+        43136815449,
+        43156218900,
+        43156218896,
+        43156218919,
+        43156218939,
+        43156218947
       ],
       "blockers": [],
-      "notes": "The r3 candidate is a direct child of frozen source c8e38d8b2d9efc281e35ebad8201f0bcf5d65a41; its `site/lib/engine.js` Git object remains the older proven READY48 version. This explicitly tracks post-staging development drift without reverting R198 or laundering it into the release. Preserve all original shot/rating/Community behavior and the newer tested R198 development code.\nR198 code and exact-source CI independently verified in PR #2150 and merged SHA 654723176d289a458f843493ccdeb4fff5cfa7cb; release queue remains IN_PROGRESS with preexisting freeze blocker. No new deployment, no automatic READY promotion, no change to owner-frozen READY48 candidate.\n2026-11-12 #2169: Source/blob, ownership, exact CI and zero-scoped blockers rechecked after published READY48. READY item only; optional taste/device performance and production delivery are not claimed.",
+      "notes": "The r3 candidate is a direct child of frozen source c8e38d8b2d9efc281e35ebad8201f0bcf5d65a41; its `site/lib/engine.js` Git object remains the older proven READY48 version. This explicitly tracks post-staging development drift without reverting R198 or laundering it into the release. Preserve all original shot/rating/Community behavior and the newer tested R198 development code.\nR198 code and exact-source CI independently verified in PR #2150 and merged SHA 654723176d289a458f843493ccdeb4fff5cfa7cb; release queue remains IN_PROGRESS with preexisting freeze blocker. No new deployment, no automatic READY promotion, no change to owner-frozen READY48 candidate.\n2026-11-12 #2169: Earlier R198 source/blob, ownership, exact CI and zero-scoped blockers independently verified after published READY48. New concurrent R201 same-file integrity fix #2188 invalidated the prior current-blob assertion; independently tested the combined R198+R201 behavior on exact R201 PR head and verified its code/test objects match R201 merged source and current development. The READY receipt now binds the combined source merge a5dd027d7f20e4eb6b108cf5b8acdaf432ca006c. No candidate, grant or production; optional taste/device acceptance not claimed.",
       "production_deployed": false
     },
     {
