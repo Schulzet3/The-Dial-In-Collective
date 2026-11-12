@@ -125,3 +125,20 @@ test('two sequential isolated releases preserve next READY source even when merg
    'staging did not mutate development');
  }finally{rmSync(f.root,{recursive:true,force:true});}
 });
+
+test('real staging excludes newly added unready GitHub workflow while retaining only selected READY app source',()=>{
+ const f=fixture();
+ try{
+  const workflow='.github/workflows/unpublished-test-only.yml';
+  f.write(workflow,'name: unpublished audit\non: push\njobs: {}\n');
+  f.git('add','-A');f.git('commit','-qm','Unpublished development-only workflow [skip netlify]');
+  f.development=f.git('rev-parse','HEAD');
+  const staged=stage(f,'workflow-restored');
+  assert.deepEqual(staged.manifest.restored_unpublished_workflow_paths,[workflow]);
+  assert.throws(()=>f.git('show',staged.candidate_sha+':'+workflow));
+  assert.match(f.git('show',f.development+':'+workflow),/unpublished audit/);
+  assert.equal(f.git('show',staged.candidate_sha+':site/card.js'),'new READY card');
+  assert.equal(f.git('rev-parse','development/backend-foundation'),f.development);
+ }finally{rmSync(f.root,{recursive:true,force:true});}
+});
+
