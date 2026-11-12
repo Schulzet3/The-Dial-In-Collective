@@ -17,3 +17,7 @@
 
 - A visible, explicit **Enable/Disable Approval Push Alerts** control appears only for a signed-in, email-verified pending account; the permission prompt runs synchronously from the tap. The device verifies installed iPhone Home Screen mode and validates server-bound subscription ownership. Separate `/member-approval/` service-worker scope avoids replacing the existing root Admin/offline worker. The worker uses a single generic approval notification and focuses/open `/`, never leaks email/user IDs or Admin data; local signout/reset clears UI flags, not opted-in background delivery until user disables or endpoint expires.
 - New `site/cloud/approval-push.js` and Netlify asset allowlist/graph generated worker are source-only; exact build/browser CI and device acceptance not yet observed. `site/cloud/client.js` forwards signed session function calls; Edge revalidates auth/email/pending state; no admission decision in the client.
+
+## New focused regression suite
+
+- `tests/issue2258-member-approval-notices.test.mjs`: signed verified pending-only subscribe and per-owner endpoint permissions; no SSRF/nonmember/Admin registration; successful member push delivery is empty payload; Resend acceptance/idempotency; no-subscriber skip; email configuration absence preserves email retry while push still delivers; malformed endpoint retry; replay claim no send; SQL service-only ACL/trigger; static scoped worker leaves Admin PWA behavior unchanged. This initial suite is added before CI. No live recipient or provider call is performed by these mocks.
