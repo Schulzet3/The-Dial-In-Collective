@@ -23,7 +23,7 @@ import {equivalentCoffeeProductNames,preferredCoffeeRoasterName,selectedCoffeeNa
 import {isolateCoffeeIdentityCohorts} from './coffee-source-identity-scope.mjs';
 import {extractCoffeeGeographyEntityRoles,cleanCoffeeGeographyEntityPrefix} from './coffee-geography-entity-roles.mjs';
 import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProductFlavorProfileEvidence,refineSelectedNamedTastingNotes,normalizeExplicitCoffeeTastingNotes,equivalentCoffeeTastingNotes,coffeeTastingNotesSubset} from './coffee-flavor-evidence.mjs';
-import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,refineSelectedCurrentTrailingFlavorNote,refineSelectedCurrentFlavorBase,selectedCoffeeSupplementalTastingProse} from './coffee-selected-description-sensory.mjs';
+import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,refineSelectedCurrentFlavorBase,selectedCoffeeSupplementalTastingProse} from './coffee-selected-description-sensory.mjs';
 import {selectedCoffeeMilkSensoryContext} from './coffee-selected-milk-sensory-context.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {parseCoffeeElevation,equivalentCoffeeElevations,compatibleCoffeeElevations,extractCoffeeElevationEvidence} from './coffee-elevation-evidence.mjs';
@@ -1324,17 +1324,6 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    if(group&&p===group)return {ok:false,reason:'ambiguous_or_missing_product'};
   }
  }
- // Some public storefront responses are only a client hydration shell:
- // the document has no rendered selected product, and no linked or uniquely
- // matching structured Product exists. Page SEO/OG descriptions may still
- // name a plausible coffee and list elaborate facts. Those are NOT current
- // selected-product proof and must not become one-click canonical autofill.
- // Preserve source URL for manual entry rather than trusting a shell's SEO.
- const body=html.match(/<body\b[^>]*>([\s\S]{0,200000}?)<\/body\s*>/i)?.[1]||'';
- const emptyApp=/\bid\s*=\s*(?:["']app["'])[^>]*>\s*<\/div\s*>/i.test(body)&&
-  !/<(?:main|article|h[1-6])\b/i.test(body);
- if(!all.length&&!explicitHeading&&emptyApp)
-  return {ok:false,reason:'ambiguous_or_missing_product'};
  if(!p){
   let likelyPath=false;
   try{likelyPath=/\/(products?|coffee|coffees|beans?|shop)\/[^/]+/i.test(new URL(source_url).pathname);}catch{}
@@ -2006,10 +1995,6 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    if(description)fields.tasting_notes=description;
    const finish=refineSelectedCurrentLiteralFinish(currentProduct,{clean,notes:fields.tasting_notes});
    if(finish)fields.tasting_notes=finish;
-   // The selected current first-person cup statement can explicitly add
-   // one final flavor note after its complete already accepted prefix.
-   const trailing=refineSelectedCurrentTrailingFlavorNote(currentProduct,{clean,notes:fields.tasting_notes});
-   if(trailing)fields.tasting_notes=trailing;
    // The chosen current paragraph's literal base and identical already
    // accepted note suffix are a higher-authority direct description, even
    // when an inferred notes caption has been indexed as a printed profile.
