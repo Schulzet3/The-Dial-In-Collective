@@ -8,6 +8,7 @@ import {basketDoseAdvisory} from './dose-advisory.js';
 import {hydrate,applyPending,shotPayload} from './mapping.js';
 import {CLOUD_CONFIG} from './config.js';
 import {emailConfirmationView} from './confirmation.js';
+import {enableApprovalPush,disableApprovalPush,approvalPushEnabled} from './approval-push.js';
 import {shotCard} from './shot_card.js';
 import {applyAppearance,readAppearance} from './appearance.js';
 import {nextCoffeeAction,proposalWithRecognizedRoaster,matchReviewMarkup} from './coffee-match-ui.js';
@@ -69,7 +70,7 @@ function clearOfflineDenial(owner){
 class CloudApp {
  constructor(client,store=new IndexedStore()){
   Object.assign(this,{client,store,identity:null,status:null,raw:null,state:M.blankState(),pending:[],expanded:new Set(),shotExpanded:new Set(),search:'',sort:'recent',searchOpen:false,tempCoffee:null,justSavedId:null,notice:'',authView:'signin',confirmationEmail:'',recovery:false,syncState:'connecting',busy:false,flushing:null,epoch:0,localOfflineOwner:null});
-  this.accountApprovalNotice=false;
+  this.accountApprovalNotice=false;this.memberApprovalPushEnabled=false;
   this.coffeeUrlPreviewInput=null;this.coffeeUrlSourceReview=null;this.coffeeUrlBasePreview=null;this.coffeeUrlActivePreview=null;this.coffeeUrlBusy=false;this.pendingCoffeeReview=null;
   this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityLoading=false;this.communityReloadRequested=false;this.communityError='';this.communityStyle='all';this.communityCoffee='all';this.communitySearch='';this.communityRevision=0;
   this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
@@ -98,7 +99,7 @@ class CloudApp {
   this.expanded.clear();this.shotExpanded.clear();this.search='';this.searchOpen=false;
   this.dismissedDoseAdvisories.clear();this.recommendationEvidence={};this.recommendationEvidenceRequests.clear();this.recommendationEvidenceAttemptedAt.clear();
   this.lastHeavySyncAt=0;this.adminAttentionCount=null;this.adminAttentionTask=null;this.adminAttentionOwner=null;this.adminAttentionEpoch=null;
-  this.tempCoffee=null;this.justSavedId=null;this.notice='';this.accountApprovalNotice=false;this.recovery=false;this.syncState='connecting';
+  this.tempCoffee=null;this.justSavedId=null;this.notice='';this.accountApprovalNotice=false;this.memberApprovalPushEnabled=false;this.recovery=false;this.syncState='connecting';
   this.draft=null;this.editing=null;this.logCoffee=null;this.addCoffeeDraft=null;
   this.addCoffeeMatches=null;this.pendingMergeSubmissionId=null;
   this.coffeeUrlSourceReview=null;this.pendingCoffeeReview=null;
@@ -247,6 +248,14 @@ class CloudApp {
   this.resetAccount();
   const deniedEpoch=this.epoch;
   this.status={...status,admitted:false,admin:false};this.syncState='access_denied';
+  if(status?.emailVerified&&status?.approvalState==='pending'){
+   approvalPushEnabled(this.client).then(enabled=>{
+    if(deniedEpoch===this.epoch&&this.identity?.id===user.id&&
+       this.status?.approvalState==='pending'&&this.memberApprovalPushEnabled!==enabled){
+     this.memberApprovalPushEnabled=enabled;this.render();
+    }
+   }).catch(()=>{/* No subscription may be inferred during a network failure. */});
+  }
   this.notice='Access could not be confirmed. Your queued changes are preserved on this device.';
   // Remove private views and close forms before waiting for storage. Cache
   // deletion never removes the owner's outbox or acknowledgement receipts.
@@ -429,7 +438,8 @@ class CloudApp {
       'Your email is verified. The administrator will review your account before access starts.';
     return `<section class="welcome cloud-auth" aria-labelledby="approval-wait-title"><h2 id="approval-wait-title">${e(title)}</h2>
      <p class="helper">${e(this.identity.email)}</p><p class="helper" role="status">${e(reason)}</p>
-     <p class="helper">Approval status refreshes automatically while this app is open.</p>
+     <p class="helper">Approval status refreshes automatically while this app is open. An email is sent after approval when delivery is configured.</p>
+     ${state==='pending'&&this.status?.emailVerified?`<p class="helper">For a phone notification while this app is closed, enable an approval alert on your device. On iPhone, use the installed Home Screen app.</p>${button(this.memberApprovalPushEnabled?'Disable Approval Push Alerts':'Enable Approval Push Alerts',this.memberApprovalPushEnabled?'disable-approval-push':'enable-approval-push','','ghost full')}`:''}
      ${button('Check Approval Status','check-approval','','primary full space-top')}
      ${button('Sign Out','signout','','text-button')}</section>`;
    }
@@ -530,6 +540,7 @@ class CloudApp {
      <p class="helper">Eligible Dialed-In shots from approved coffees contribute anonymously after validation. Community does not show private notes, account names, or personal setup details. Authorized administrators can review account-linked records and notes. Remove Access is reversible and retains your records and Community contributions.</p>
     </details>
    </section>
+   ${!this.status?.admin?`<section class="settings-section" aria-label="Account approval alerts"><h3 class="settings-heading">Notifications</h3>${button('Manage Account Approval Alerts','manage-approval-push','','settings-row')}</section>`:''}
    <section class="settings-section" aria-label="Help and getting started"><h3 class="settings-heading">Help &amp; Getting Started</h3>${button(`${icon('book',18)}<span>Read Getting Started Guide</span>${icon('chevron',16)}`,'getting-started-guide','','settings-row')}${button(`${icon('coffee',18)}<span>Watch Walkthrough</span>${icon('chevron',16)}`,'watch-walkthrough','','settings-row')}</section>
    <section class="settings-section settings-system" aria-label="Cloud Sync">
     ${button(`${icon('cloud',18)}<span>Cloud Sync Details</span>${icon('chevron',16)}`,'sync','','settings-row')}
@@ -1022,6 +1033,29 @@ class CloudApp {
     this.render();return;
    }
    if(a==='check-approval'){await this.connect();return;}
+   if(a==='manage-approval-push'){
+    const owner=this.identity?.id,epoch=this.epoch;
+    if(!owner||this.status?.admitted!==true||this.status?.admin===true)throw new Error('Member access is required.');
+    const active=await approvalPushEnabled(this.client);this.assertSession(owner,epoch);
+    this.show('Account Approval Alerts',`<p class="helper">${active?'This device is subscribed to account approval notifications.':'No active approval notification is registered for this device.'}</p>${active?button('Disable Approval Push Alerts','disable-approval-push-post-approval','','ghost full'):''}`);
+    return;
+   }
+   if(a==='disable-approval-push-post-approval'){
+    const owner=this.identity?.id,epoch=this.epoch;
+    if(!owner||this.status?.admitted!==true||this.status?.admin===true)throw new Error('Member access is required.');
+    const result=await disableApprovalPush(this.client);this.assertSession(owner,epoch);
+    sheet.close();this.notice=result;this.render();return;
+   }
+   if(a==='enable-approval-push'||a==='disable-approval-push'){
+    const owner=this.identity?.id,epoch=this.epoch;
+    if(!owner||this.status?.approvalState!=='pending'||this.status?.emailVerified!==true)
+     throw new Error('Verify your email and wait for account review before changing approval alerts.');
+    const result=a==='enable-approval-push'?await enableApprovalPush(this.client):await disableApprovalPush(this.client);
+    this.assertSession(owner,epoch);
+    this.memberApprovalPushEnabled=await approvalPushEnabled(this.client).catch(()=>false);
+    this.assertSession(owner,epoch);
+    this.notice=result;this.render();return;
+   }
    if(a==='dismiss-approval-confirmation'){this.accountApprovalNotice=false;this.render();return;}
    if(a==='sync'){const events=await this.inSession(()=>this.queue.pending());this.show('Cloud Sync Details',`<h3>${e(({synced:'Synced',offline:'Offline',syncing:'Syncing',connecting:'Connecting',conflict:'Needs Attention',pending:'Pending'})[this.syncState]||'Needs Attention')}</h3><p class=helper>${events.length} changes waiting. Conflicts are retained rather than overwritten.</p>${events.map(x=>`<div class=preview-card><strong>${e(x.action)}</strong><p class=helper>${e(x.status)} ${e(x.error?.message||'')}</p></div>`).join('')}${button('Try Syncing Now','sync-now','','primary full')}${events.length?button('Save Pending Changes','export','','ghost full'):''}${events.length?'<p class="helper space-top">This download preserves pending changes on this device; it is not a complete account backup.</p>':''}`);return;}
    if(a==='sync-now'){await this.inSession(()=>this.sync());this.notice='Sync checked. Pending conflicts require review; nothing was discarded.';this.render();return;}

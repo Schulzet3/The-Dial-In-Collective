@@ -4908,5 +4908,16 @@
       "release_commit": "d0bc07df641af6411435daac74ee3cb16d1bdb61",
       "netlify_deploy_id": "6af51c834f09e4e2c0f203ea"
     }
+  },
+  "current_owner_member_approval_email_push_20261112": {
+    "decision_id": "ACCESS-MEMBER-APPROVAL-EMAIL-AND-OPTIN-WEB-PUSH-20261112",
+    "status": "Locked",
+    "owner_approval_date": "2026-11-12",
+    "issue": 2258,
+    "owner_source": "Direct owner chat 2026-11-12: Do both, please",
+    "decision": "After an email-verified account is explicitly approved by the administrator, deliver a transactional approval email automatically and opt-in background Web Push only to devices the pending member explicitly registered. Preserve existing in-app Account Approved confirmation.",
+    "restrictions": "Never notify rejected, unverified, unadmitted, disabled or unrelated users; never trust client role, send member details in push, conflate with administrator push, hide failure, replay old approvals, silently publish or purchase. A provider-accepted response does not prove inbox/device delivery.",
+    "dependencies": "Server-side verified-sender email provider credentials, authenticated pending opt-in, service-only outbox with retries, approval-trigger event, exact-source CI, separate owner Publish for production.",
+    "deployment": "DEVELOPMENT_SOURCE_IN_PROGRESS_NOT_PUBLISHED; email/domain/device acceptance outstanding"
   }
 }

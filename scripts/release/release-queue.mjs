@@ -11,7 +11,7 @@ const SCOPE=/^[A-Za-z0-9_.\/-]+$/;
 const APP_PREFIX=['site/','src/server/','netlify/functions/','supabase/migrations/','supabase/functions/'];
 const APP_FILES=new Set(['build_cloud.mjs','netlify.toml','package.json','package-lock.json',
  'scripts/netlify/should-ignore-build.mjs','scripts/audit/approval-coverage.mjs',
- 'scripts/release/one-use-claim.mjs','scripts/pwa/service-worker.template.txt']);
+ 'scripts/release/one-use-claim.mjs','scripts/pwa/service-worker.template.txt','scripts/pwa/member-approval-worker.template.txt']);
 export function deployableChangedPaths(paths){
  if(!Array.isArray(paths))throw Error('Missing Git diff paths');
  return [...new Set(paths.filter(p=>typeof p==='string'&&
