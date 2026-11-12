@@ -691,3 +691,8 @@ Independently verified Git release/production b386a977a7c43bf190f6315105894334d9
 ## 2026-11-12 — #2169 live event workflow wiring [skip netlify]
 - Owner-approved development only. Existing main acceptance workflow now runs read-only canonical request observation on main push and on exact completed controller workflow_run. On workflow_run it skips the normal expensive acceptance suite, avoiding duplicate builds. On other main pushes the observer immediately returns NOT_APPLICABLE.
 - The same existing main CI suite now includes changed Node scripts syntax checks and targeted READY/event negative tests, not a separate app build. It adds only read-only Actions permission. Expected after merge: observe no-publish main push NOT_APPLICABLE, hosted acceptance PASS; new owner Publish when actually needed for production.
+
+
+## 2026-11-12 — #2169 least-privilege live READY readbacks [skip netlify]
+- Existing chat-only and manual fallback GitHub Actions one-use workflows now explicitly request actions: read. The main controller's new per-selected-READY gate can query recorded Actions runs as well as checks: read using its existing token, without changing source/read-only event authority or adding provider credentials. Contents: write remains scoped to the already approved single guarded release claim. No release has been requested by this workflow-only edit.
+- Verify head/main merged release-controller CI and actual event observer job; keep publication by one-use chat request only. GitHub Free/private cannot guarantee protections against privileged direct branch writes.
