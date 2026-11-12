@@ -12612,6 +12612,27 @@
       "owner_source": "Issue #33 owner-authorized original603 exact selected source correction; no deployment/production/provider writes permitted.",
       "notes": "NARROW VERIFIED READY DEVELOPMENT ONLY for newly repaired exact selected unnamed full-decaf witness; NOT part of previously frozen READY42 batch or any authorized Netlify publication. Separate future owner release approval required. Original603-wide individual semantic certification remains IN_PROGRESS and Issue #33 stays OPEN. No production/provider/SQL/Edge/Auth/member data write.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-r198-original-range-outlier-eligibility",
+      "issue": 455,
+      "pr": null,
+      "title": "R198 preserve original calibration range for archived outlier controls",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": "654723176d289a458f843493ccdeb4fff5cfa7cb",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "owner_source": "Issue #455 owner-authorized safe autonomous improvement R198, source commit 654723176d289a458f843493ccdeb4fff5cfa7cb merged after frozen 48-item release candidate. Not approved for the frozen READY48 batch.",
+      "tests": [
+        "Exact merged R198 source tests/issue455-r198-outlier-original-range.test.mjs plus approval/cloud/browser/Node, preliminary GitHub statuses SUCCESS. Separate R198 release qualification and queue governance remain outstanding."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "R198 is newer development-only app source (engine.js) added AFTER owner READY48 source freeze. Its code is excluded from the already tested 48-item + #1938 candidate. Do not promote to READY or ship it with that frozen batch without a separate owner authorization and completed independent release intake."
+      ],
+      "notes": "The r3 candidate is a direct child of frozen source c8e38d8b2d9efc281e35ebad8201f0bcf5d65a41; its `site/lib/engine.js` Git object remains the older proven READY48 version. This explicitly tracks post-staging development drift without reverting R198 or laundering it into the release. Preserve all original shot/rating/Community behavior and the newer tested R198 development code.",
+      "production_deployed": false
     }
   ],
   "history": [
