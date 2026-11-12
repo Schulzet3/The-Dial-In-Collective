@@ -717,3 +717,14 @@ Independently verified Git release/production b386a977a7c43bf190f6315105894334d9
 ## November 12 — #2169 newer member-approval worker source ownership [skip netlify]
 - Concurrent owner-approved #2258 PR #2273 merged new email/member Web Push development-only source including a new packaged worker template `scripts/pwa/member-approval-worker.template.txt`, absent from the existing main controller's narrowly enumerated deployable set. A frozen candidate staged before that merge must NOT contain the worker or other unfinished channels, while controller must still recognize later developer-only drift and BLOCK if unowned.
 - Add the exact new file to main release queue's narrow deployable inventory and source-scoped regression; no path wildcard, no new CI job/build, no grant, no Netlify/migration/production write. The new channels stay BLOCKED, prior source-tested in-app confirmation remains separately READY via development PR #2278. Required main exact source acceptance then one new no-replay owner-command recovery attempt, postflight required.
+
+## DIC-20261112-READY4E2E-34 fresh owner-command recovery request [skip netlify]
+- Release ID: DIC-20261112-READY4E2E-34
+- Tested source: 046418955abca382ba1bda16d345127b477dd392
+- Mode: publish
+- One frozen four-READY source batch, no added or dropped items; owner authorized original current-chat one-command e2e
+- Frozen candidate five CI SUCCESS: approval 43236906945; validate 43236906855; cloud/browser 43236906932; sql 43236907128
+- Main controller fixes #2275 57d7c946 and #2279 9ed4633 exact acceptance SUCCESS; #2278 queue preserves original READY and newer external-channel BLOCKED status
+- Source development grant: 86f9a6c5d354967106e3ce32c742ac8a659f17e1; main expected before SHA: 9ed4633f7919a8f49525e110ab31060d4502c0fa
+- Recovery evidence: encrypted artifact 13905387023 and owner-private Drive file 1591RhOQg-UEAXL2OHIDjCNrP9CngWezr; unchanged database risk none
+- Original -33 failed before claim; no replay. Only this new source-bound one-use request may publish once. No claim of actual release until GitHub controller and Netlify postflight.
