@@ -1893,6 +1893,24 @@
       "source_byte_caveat": "Publisher HTML substantively inspected, but original downloadable PDF/HTML byte SHA-256, numeric table image cells, supplementary table, raw chromatograms/model fold membership, raw company panel outcomes and independent replication were not obtained. 32 separate coffee lots, fixed aroma label by origin. One coauthor employed by supplier Illycaffe; published COI disclosed.",
       "claims_verified_externally": "32 roast-ground coffees for moka (Brazil 5/Colombia 6/Ethiopia 7/Guatemala 7/India 7); HS-SPME/GC-MS measured volatile headspace of 500 mg unbrewed grounds, not espresso cup extraction. Intensity target was an internal commercial packaging ordinal 1-9 code assigned by origin (5/4/3/6/8). SVM three-fold coffee-origin CV 0.91 accuracy. Ridge 3-fold reported original intensity CV R2=0.88 and RMSE=0.61, falling to 0.38 only AFTER excluding one Indian outlier; abstract highlights RMSE 0.38 without explaining exclusion in same sentence. Shared origin/label may limit independent interpretation; this is a design caveat, not proof of leakage. SHAP model association is not mechanistic causality. No personal five-input espresso taste validation, next-shot intervention, external holdout or cup-quality improvement.",
       "locked_policy_boundary": "Preserve all five original personal sensory ratings, missing versus rated-green distinction, same-coffee measured history, one controllable adjustment, setup/style/feed/calibration constraints, transparent non-statistical heuristic explanation, private member data and existing owner-Locked recommendations."
+    },
+    {
+      "id": "LIT-2016-SANCHEZ-LOPEZ-ESPRESSO-PTRTOF-TEMP-PRESSURE",
+      "type": "peer_reviewed_original_single_coffee_espresso_time_resolved_volatile_pressure_temperature_study",
+      "title": "Extraction kinetics of coffee aroma compounds using a semi-automatic machine: On-line analysis by PTR-ToF-MS",
+      "authors": "Jose A. Sanchez Lopez; Marco Wellinger; Alexia N. Gloess; Ralf Zimmermann; Chahan Yeretzian",
+      "published": "International Journal of Mass Spectrometry 401 (2016), 22-30; published 2016-04-25",
+      "doi": "10.1016/j.ijms.2016.02.015",
+      "institution_repository_doi_same_paper": "10.21256/zhaw-4221",
+      "url": "https://digitalcollection.zhaw.ch/bitstreams/c8fb6486-27f2-4d03-a2c2-2d6b9d841962/download",
+      "institution_page": "https://digitalcollection.zhaw.ch/items/1afcb0e8-def0-4146-bd62-bf7abc805dcd",
+      "source_access": "DIRECT_OPEN_ACCESS_AUTHOR_INSTITUTION_ORIGINAL_NINE_PAGE_PUBLISHED_PDF_TEXT_ALL_PAGES;ORIGINAL_PDF_SCREENSHOTS_PAGES_1_TO_7;FINAL_TWO_SCREENSHOTS_CACHE_MISS",
+      "review_status": "R455-209_DIRECT_PRIMARY_FULL_METHODS_SECTIONS_2_1_TO_2_5_RESULTS_SECTIONS_3_1_TO_3_3_2_FIGURES_1_TO_5_TITLES_AND_VISUAL_PAGES_1_TO_7_CONCLUSION_AND_REFERENCES_PAGES_8_TO_9_TEXT_READ;SUPPLEMENT_AND_RAW_NOT_REANALYZED",
+      "evidence_grade": "DIRECT_PEER_REVIEWED_SINGLE_COFFEE_INSTRUMENTAL_VOLATILE_EXTRACTION_WITH_FIVE_BREW_CONDITIONS_NOT_HUMAN_SENSORY_OR_PERSONAL_TASTE_VALIDATION",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Original 1.43 MB deposited publisher PDF is accessible via ZHAW and parsed all nine pages; attempts to retrieve binary for independent SHA256 failed. Screenshot of PDF pages 1-7 examined; page 8-9 screenshot cache miss, page 8-9 parsed text inspected. Original PTR ion traces, selected/omitted replicates and supplementary figure/data were not retrieved.",
+      "claims_verified_externally": "One yellow bourbon medium-roast Mogiana Brazil coffee, Compak K10 fixed grind position 47, Dalla Corte Mini, 18g double basket, 25-s shots. Five conditions: 9bar/92C center; 7bar/92C; 11bar/92C; 9bar/82C; 9bar/96C; 8 shots per condition prepared, 5 selected retrospectively closest to 30g final yield (31.5 +/-2g). Online PTR-ToF-MS two-second acquisition monitored 120 mass peaks, with 46 tentative molecule IDs grouped into FIVE VOLATILE-TIME-PROFILE FAMILIES, not five human sensory preferences. Under these specific conditions 11bar increased integrated volatile intensities versus 7bar, while 7vs9bar not significant for selected family exemplars; hotter water increased signals especially later and for less polar compounds. One coffee, non-full factorial, selected replicates and instrument-only endpoints cannot identify ideal pressure, temperature, app personal ratings or causal advice.",
+      "locked_policy_boundary": "Do not identify five molecular VOC families with DIC five personal sensory inputs or use higher analytical intensity to prescribe universally hotter/higher-pressure espresso. Preserve owner Locked independent five sensory ratings, one controllable variable, actual measured time/yield, same coffee/setup calibrated grinder, five styles and private history; temperature adjustability is equipment/owner-specific and no new numeric optimum derived."
     }
   ],
   "evidence_checks": [
@@ -5876,6 +5894,35 @@
       "owner_approval": false,
       "source_sha": "054614ed550b38d1d495cc6ec50cb165405916d2",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-PTR-209-A",
+      "source": "LIT-2016-SANCHEZ-LOPEZ-ESPRESSO-PTRTOF-TEMP-PRESSURE original ZHAW nine-page publisher PDF pp22-25, sections 2.1-2.5, Fig 1-3",
+      "claim": "Five separate brewing conditions, NOT full pressure x temperature factorial or five coffee origins; single 18g medium-roast yellow bourbon coffee, fixed grind; five selected yield-matched shots from eight prepared per condition; final yields 31.5 +/- 2g at 25s. 120 monitored ions/46 tentative VOC identifications grouped into five instrumental time-intensity families unrelated to DIC's five rated taste variables.",
+      "grade": "DIRECT_ORIGINAL_PUBLISHED_PDF_METHODS_AND_FIG_2_3_PAGES_VISUALLY_AND_TEXT_REVIEWED;UNSELECTED_TRACES_SUPPLEMENT_ORIGINAL_BINARY_SHA_UNVERIFIED",
+      "primary_sources": [
+        "https://digitalcollection.zhaw.ch/bitstreams/c8fb6486-27f2-4d03-a2c2-2d6b9d841962/download",
+        "https://digitalcollection.zhaw.ch/items/1afcb0e8-def0-4146-bd62-bf7abc805dcd"
+      ],
+      "current_app": "site/lib/constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095 defines five user sensory scales, not volatile families; site/lib/model.js blob 469c55c17dd3ee5c16523e59a5adace1056e9038 preserves original measured shot and setup/version fields.",
+      "result": "FIVE_ANALYTICAL_CHEMICAL_FAMILIES_ARE_NOT_FIVE_SUBJECTIVE_TASTES;CONDITIONS_YIELD_MATCHED_SELECTED_REPLICATES",
+      "owner_approval": false,
+      "source_sha": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-PTR-209-B",
+      "source": "LIT-2016-SANCHEZ-LOPEZ-ESPRESSO-PTRTOF-TEMP-PRESSURE original ZHAW nine-page published PDF pp26-29 Fig 4-5 sections 3.3.1-3.3.2 and Conclusions",
+      "claim": "At fixed 92C, the 11bar pressure condition had greater integrated signal across selected representative VOC families than 7bar, while 7bar vs9bar differences were generally not significant in those plotted tests; temperature tested 82/92/96C at fixed 9bar increased signals particularly late and for less-polar family D/E. Instrumental volatile signal, 25-s extraction and authors' earlier cited human study are NOT measured five-rating taste outcomes, preference optimization or universal recommendations for pressure/temperature/time.",
+      "grade": "DIRECT_ORIGINAL_PUBLISHER_PDF_FIGURE_4_5_VISUALLY_INSPECTED_WITH_CAPTION_AND_PRIMARY_RESULTS_TEXT;ONE_BEAN_ONE_MACHINE_NO_HUMAN_PANEL_RAW_SUPPLEMENT_UNVERIFIED",
+      "primary_sources": [
+        "https://digitalcollection.zhaw.ch/bitstreams/c8fb6486-27f2-4d03-a2c2-2d6b9d841962/download"
+      ],
+      "current_app": "site/lib/engine.js blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6 baseline/temperatureGuidance and recommendations retain personal evidence, style boundaries and one controllable change. No universal 11bar, 96C or VOC-derived five-taste rule observed.",
+      "result": "CONDITIONAL_SINGLE_COFFEE_VOC_EXTRACTION_DIFF_NOT_PERSONAL_TASTE_OR_PRESSURE_TEMPERATURE_OPTIMUM",
+      "owner_approval": false,
+      "source_sha": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -6025,22 +6072,23 @@
     "R455-205: direct visual primary-figure crosswalk for Cameron et al. 2020: published Figure 5 actual 20g/40g 6bar 9bar-clogging grind/EY dataset versus Figure 6 schematic 15g/40g 'tasty point', no five-sensory or universal optima; 106/321/164 after docs PR verified. Original S019 remains inaccessible. No app, numeric, Locked, provider, queue or #267 literal changes.",
     "R455-206: author-group journal abstract/conference primary-source method and perceptual interactions crosschecked; DOI 10.1016/j.foodres.2014.11.036; no five-sensory prediction, sugar extraction fix or numerical policy. 107 sources/323 checks/165 proposals upon PR verify; full journal paper restricted, S019 unreviewed, #267 strict literal review not duplicated.",
     "R455-207: new ACS 2015 original DOI 10.1021/jf505691u early fraction e-nose review: first 8 s solutes and 25 mL volume not a universal taste optimum, target or mass ratio; full publisher article unreviewed. Pending docs-only exact-source CI 108/325/166, S019 inaccessible and #267 separate.",
-    "R455-208: primary full-HTML source audit for Felizzato 2026 moka-packaged aroma XAI (32 lots, origin-fixed 1–9 target, original CV RMSE .61 vs after-outlier .38); distinguish origin lab classification from actual espresso five-taste user success. Scope only research ledger/journal, no Locked/app/queue change, original S019 unreviewed, #267 no literal credit; exact docs CI, merge/blob governance required."
+    "R455-208: primary full-HTML source audit for Felizzato 2026 moka-packaged aroma XAI (32 lots, origin-fixed 1–9 target, original CV RMSE .61 vs after-outlier .38); distinguish origin lab classification from actual espresso five-taste user success. Scope only research ledger/journal, no Locked/app/queue change, original S019 unreviewed, #267 no literal credit; exact docs CI, merge/blob governance required.",
+    "R455-209: original author-institution full nine-page Sanchez Lopez et al 2016 espresso PTR-ToF-MS methods and figures 1-5: one coffee, yield-selected five per condition, five chemical families not five member ratings; 11bar/96C observed volatile intensity not sensory preference optimum. 110 source identities/329 bounded checks/168 proposals if PR exact-source merged; original S019 inaccessible, no #267 semantic-line credit. Docs-only CI/merge exact SHA and readback needed; no app or Locked change."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-208",
-    "source_sha": "054614ed550b38d1d495cc6ec50cb165405916d2",
-    "phase": "FELIZZATO_MOKA_ORIGIN_FIXED_AROMA_INTENSITY_ML_PROXY_RESEARCH_ONLY_PR_CI_PENDING",
+    "run_id": "R455-209",
+    "source_sha": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+    "phase": "SANCHEZ_LOPEZ_ORIGINAL_ESPRESSO_VOC_PDF_FIVE_INSTRUMENT_FAMILIES_NOT_TASTES_DOCS_PR_CI_PENDING",
     "source_counts": {
-      "research_project_source_records": 109,
-      "bounded_evidence_checks": 327,
-      "proposals": 167
+      "research_project_source_records": 110,
+      "bounded_evidence_checks": 329,
+      "proposals": 168
     },
     "original_s019": "INACCESSIBLE_UNREVIEWED",
     "release_state": "NO_NEW_QUEUE_OR_READY_OR_DEPLOYMENT",
     "github267_literal_review_credit": 0,
-    "original_publisher_html": "DIRECT_SUBSTANTIVE_READ",
-    "pdf_and_raw": "NOT_RETRIEVED"
+    "original_primary_pdf": "ALL_NINE_PAGES_TEXT_REVIEWED_FIGURES_1_TO_5_VISUAL_PAGES_1_TO_7",
+    "pdf_and_raw": "PDF_BINARY_SHA_SCREENSHOTS_LAST_TWO_PAGES_SUPPLEMENT_AND_RAW_UNVERIFIED"
   },
   "policy_decisions_resolved": [
     {
@@ -9803,6 +9851,32 @@
         "starting_development_sha": "054614ed550b38d1d495cc6ec50cb165405916d2",
         "prior_ledger_blob": "cccdc3868139f66634d832fe8d8e21dd88e52d9b",
         "journal_path": "docs/workstreams/ops-issue455-r208-moka-aroma-ai-not-personal-espresso-20261112.md"
+      }
+    },
+    {
+      "id": "R455-PROP-209-VOC-FAMILIES-NOT-FIVE-TASTES",
+      "severity": "P2_RESEARCH_FACTUAL_BOUNDARY_NO_REPRODUCED_APP_BUG",
+      "finding": "The original 2016 nine-page study groups 46 tentatively assigned volatile signals into five chemical kinetic families. Higher measured signals at 11bar or 96C within a single yield-matched 25s Brazilian espresso protocol are not five subjective taste dimensions and do not establish better cup preference, a universal temperature/pressure optimum or an adaptive dose/grind correction.",
+      "user_benefit": "Avoid conflating an analytical instrument's five molecular clusters with the five Locked taste ratings, overstating recommendation confidence or suggesting unsupported universal hot/high-pressure dialing rules.",
+      "evidence": [
+        "R455-EV-PTR-209-A",
+        "R455-EV-PTR-209-B"
+      ],
+      "source_provenance": "ZHAW author institutional original open-access Elsevier 2016 nine-page PDF DOI 10.1016/j.ijms.2016.02.015 and repository same-paper DOI 10.21256/zhaw-4221; pages 22-30 parsed; Figures 1-5 and pages 1-7 visually inspected; pages 8-9 visuals and raw binary hash not obtained; underlying raw/supplement and external replication unverified.",
+      "current_locked": "Five independent taste ratings and all-green/unknown distinction, measured mass/time/history, controlled next-shot adjustment, actual machine temp adjustability, independent five shot styles and grinder/feed/calibration, privacy/Community remain Locked.",
+      "current_app": "At source 841eb7b619c08bf460b5da77cbf605a5a5f95207 live engine.js 3e20904291231a9c5a5a86e6d004a95a5489c6d6 and constants.js 72221331ce4dffabe416eebec1ae2fceced3a095; no instrument-derived 96C/11bar target or scientific claim reproduced; preserving app as-is.",
+      "proposed_change": "SAFE only a documented source methods/limitations and traceability record. Any product use of numeric temperature/pressure intervention, chemistry-inferred taste confidence, sixth input or new instrumentation would require separate owner decision and empirical independent user validation; held unimplemented.",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "RESEARCH_ONLY_DOCS_PR_PENDING_EXACT_SOURCE_CI",
+      "test_plan": "Verify JSON roundtrip and baseline 109/327/167 order and unique ID preservation, added 1/2/1 to 110/329/168, no DOI duplicate; inspect exact two-path diff; applicable exact PR-head GitHub Actions and merged governance, no tests falsely claimed before completion. No real espresso taste study/frozen603/member session run.",
+      "release_queue_status": "NO_NEW_ITEM_NO_READY_NO_DEPLOYMENT",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false,
+      "exact_source": {
+        "starting_development_sha": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+        "prior_ledger_blob": "cfd31d5e5f7c4a0675f6d9593f575514c9bd567c",
+        "journal_path": "docs/workstreams/ops-issue455-r209-ptrtof-espresso-kinetics-20261112.md"
       }
     }
   ],
