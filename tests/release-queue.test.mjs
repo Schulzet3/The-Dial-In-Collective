@@ -119,3 +119,12 @@ test('#2169 new member approval worker is an owned deployable path and cannot ev
  assert.equal(assessIntakeCoverage(q,[worker],{currentBlobSha:()=>B}).tracked,false,
   'new deployable worker with no queue owner must be flagged');
 });
+
+test('Edge verify_jwt configuration is an exact scoped deployable file, not a wildcard bypass',()=>{
+ const edgeConfig='supabase/config.toml';
+ const scoped={...queued,scope_paths:[edgeConfig]};
+ assert.deepEqual(queueSchemaErrors({...q,items:[scoped]}),[]);
+ assert.deepEqual(deployableChangedPaths([edgeConfig,'supabase/unreviewed.toml','docs/CURRENT_STATUS.md']),[edgeConfig]);
+ assert.equal(assess({...q,items:[scoped]},[edgeConfig]).ready,true);
+ assert.match(queueSchemaErrors({...q,items:[{...queued,scope_paths:['supabase/unreviewed.toml']}]}).join(' '),/exact deployable/);
+});
