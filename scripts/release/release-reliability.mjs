@@ -2,7 +2,7 @@
 import {deployableChangedPaths,queueSchemaErrors} from './release-queue.mjs';
 const SHA=/^[a-f0-9]{40}$/;
 export function classifyReleaseRisk(paths){
- const p=deployableChangedPaths(paths);
+ const p=[...new Set((paths||[]).filter(x=>typeof x==='string'&&(deployableChangedPaths([x]).length||x.startsWith('.github/workflows/')||x.startsWith('scripts/release/'))))].sort();
  if(!p.length)return {tier:'documentation',checks:['approval','source'],builds:0};
  if(p.some(x=>/^(supabase\/|netlify\/functions\/|\.github\/|scripts\/release\/|scripts\/netlify\/|site\/admin\/|site\/auth\/)/.test(x)||
   /(?:auth|security|permission|rls|migration|package(?:-lock)?\.json)/i.test(x))||

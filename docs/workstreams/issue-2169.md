@@ -6,3 +6,5 @@
 - Required next: verify exact PR and merged CI, connect these pure gates to existing workflow without duplicate suites, diagnose GitHub event non-delivery and complete owner-authorized release separately.
 
 - Pre-merge test fixture correction: schema-required issue/title/owner_source fields supplied to synthetic READY item; no production queue mutation. [skip netlify]
+
+- Risk classification now includes workflow/release-controller files even when not in Netlify deployable path inventory; high-risk tests cannot be bypassed by docs-only classification. [skip netlify]
