@@ -85,7 +85,7 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    '- Restored unfinished paths: '+(plan.restored_paths.join(', ')||'(none)')+'\n'+
    '- Restored development-only GitHub workflows to published bytes: '+(unpublishedWorkflows.join(', ')||'(none)')+'\n'+
    '- Omitted exact reviewed workflow-only, unpublished tests: '+(workflowOnlyTests.join(', ')||'(none)')+'\n'+
-   '- Omitted source-bound unready issue tests: '+(unpublishedTests.join(', ')||'(none)')+'\\n'+
+   '- Omitted source-bound unready issue tests: '+(unpublishedTests.join(', ')||'(none)')+'\n'+
    '- Exact candidate CI and separate owner publication authorization required. No production claim.\n';
   for(const [path,content] of [[CANDIDATE_RECEIPT_PATH,JSON.stringify(manifest,null,2)+'\n'],
    [CANDIDATE_JOURNAL_PATH,journal]]){
