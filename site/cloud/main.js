@@ -783,7 +783,15 @@ class CloudApp {
  readDraft(){const f=sheet.querySelector('#shot');if(!f)return;for(const key of ['doseG','yieldG','timeS','grindSetting'])this.draft[key]=f.elements[key].value;this.draft.notes=f.elements.notes.value;
   // The displayed unit is rounded for readability. A notes/rating edit must
   // not round-trip and change an otherwise untouched historical measurement.
-  if(f.elements.temperature&&f.elements.temperature.value!==String(C.tempDisplay(this.draft.tempC,this.logUnit)))this.draft.tempC=C.tempInput(f.elements.temperature.value,this.logUnit);
+  if(f.elements.temperature&&f.elements.temperature.value!==String(C.tempDisplay(this.draft.tempC,this.logUnit))){
+   this.draft.tempC=C.tempInput(f.elements.temperature.value,this.logUnit);
+   // A manually replaced measurement is no longer the historical prefill.
+   // This also catches changes made without an input event before Save/Rate.
+   if(this.draft.tempSource){
+    this.draft.tempSource='';
+    f.elements.temperature.closest?.('.field')?.querySelector?.('small')?.remove?.();
+   }
+  }
   if(f.elements.slowFeed)this.draft.feedMode=f.elements.slowFeed.checked?'slow':'standard';}
  async click(ev){const target=ev.target.closest('[data-action]');if(!target)return;const a=target.dataset.action,id=target.dataset.id;
   try{
@@ -1001,7 +1009,12 @@ class CloudApp {
    if(a==='signout'){const queued=await this.inSession(()=>this.queue.pending());if(queued.length&&!globalThis.confirm?.('You have '+queued.length+' unsynced change(s). They remain saved on this device for this account and will sync only after you sign in to the same account again. Sign out anyway?'))return;const epoch=this.epoch;await this.client.signOut();if(epoch===this.epoch){this.identity=null;this.resetAccount();this.render();}return;}
   }catch(err){this.error(err);}
  }
- input(ev){if(['name','is_decaf'].includes(ev.target.name)&&ev.target.closest?.('#new-coffee,#edit-coffee'))updateDecafFields(ev.target.form);if(ev.target.closest?.('#shot')){ev.target.removeAttribute('aria-invalid');if(ev.target.getAttribute('aria-describedby')==='shot-validation-feedback')ev.target.removeAttribute('aria-describedby');}if(ev.target.name==='doseG'&&ev.target.closest?.('#shot'))this.updateDoseAdvisory();if(ev.target.name==='source_url'&&ev.target.closest('#new-coffee')){if(this.coffeeUrlPreviewInput!==ev.target.value.trim()){this.coffeeUrlPreviewInput=null;this.coffeeUrlSourceReview=null;this.coffeeUrlBasePreview=null;this.coffeeUrlActivePreview=null;const panel=sheet.querySelector('#coffee-url-feedback');if(panel)panel.replaceChildren();for(const key of ['origin','roast_level','elevation_m','process','variety','producer','tasting_notes','release_label']){const el=ev.target.closest('#new-coffee')?.elements.namedItem(key);if(el?.getAttribute?.('aria-describedby')==='coffee-conflict-'+key){el.removeAttribute('aria-describedby');el.classList?.remove('coffee-needs-review');}}}}if(ev.target.id==='search'){const value=ev.target.value,position=ev.target.selectionStart;this.search=value;this.render();const input=root.querySelector('#search');input.focus();input.setSelectionRange(position,position);}}
+ input(ev){if(['name','is_decaf'].includes(ev.target.name)&&ev.target.closest?.('#new-coffee,#edit-coffee'))updateDecafFields(ev.target.form);if(ev.target.closest?.('#shot')){ev.target.removeAttribute('aria-invalid');if(ev.target.getAttribute('aria-describedby')==='shot-validation-feedback')ev.target.removeAttribute('aria-describedby');}if(ev.target.name==='temperature'&&ev.target.closest?.('#shot')&&this.draft?.tempSource&&
+     ev.target.value!==String(C.tempDisplay(this.draft.tempC,this.logUnit))){
+   // Remove the misleading cross-style origin as soon as the member edits it.
+   this.draft.tempSource='';
+   ev.target.closest?.('.field')?.querySelector?.('small')?.remove?.();
+  }if(ev.target.name==='doseG'&&ev.target.closest?.('#shot'))this.updateDoseAdvisory();if(ev.target.name==='source_url'&&ev.target.closest('#new-coffee')){if(this.coffeeUrlPreviewInput!==ev.target.value.trim()){this.coffeeUrlPreviewInput=null;this.coffeeUrlSourceReview=null;this.coffeeUrlBasePreview=null;this.coffeeUrlActivePreview=null;const panel=sheet.querySelector('#coffee-url-feedback');if(panel)panel.replaceChildren();for(const key of ['origin','roast_level','elevation_m','process','variety','producer','tasting_notes','release_label']){const el=ev.target.closest('#new-coffee')?.elements.namedItem(key);if(el?.getAttribute?.('aria-describedby')==='coffee-conflict-'+key){el.removeAttribute('aria-describedby');el.classList?.remove('coffee-needs-review');}}}}if(ev.target.id==='search'){const value=ev.target.value,position=ev.target.selectionStart;this.search=value;this.render();const input=root.querySelector('#search');input.focus();input.setSelectionRange(position,position);}}
  change(ev){if(['name','is_decaf'].includes(ev.target.name)&&ev.target.closest?.('#new-coffee,#edit-coffee'))updateDecafFields(ev.target.form);if(ev.target.id==='sort'){this.sort=ev.target.value;this.render();}if(ev.target.id==='community-style'){this.communityStyle=ev.target.value;this.communityCoffee='all';this.loadCommunity().catch(err=>this.error(err));}if(ev.target.id==='community-coffee'){this.communityCoffee=ev.target.value;this.render();}if(ev.target.name==='slowFeed'&&this.draft){this.readDraft();const v=M.activeVersion(this.state),rec=E.recommendation(this.state,this.logCoffee,{style:this.draft.style,basketId:this.draft.basketId,feedMode:this.draft.feedMode});const box=sheet.querySelector('#log-reference');if(box)box.innerHTML=recipeGrid(rec,v.advanced.temperature,v.tempUnit);}}
  async submit(ev){ev.preventDefault();if(this.busy)return;const form=ev.target,id=form.id,d=Object.fromEntries(new FormData(form));this.busy=true;form.querySelectorAll('button').forEach(b=>b.disabled=true);let shotValidation=null;
   try{
