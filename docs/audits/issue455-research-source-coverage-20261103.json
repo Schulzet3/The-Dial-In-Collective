@@ -2075,6 +2075,24 @@
       "source_byte_caveat": "Original publisher full HTML directly read on 2026-11-12; PDF binary/hash, full supplementary Tables S1/S2, figure pixels, primary numerical table cells, sample-level chromatograms and independent replication unverified; reproduced observations are narrative/Methods/Results bounded, not complete data audit.",
       "claims_verified_externally": "Eighteen retail-labelled coffee samples and four non-equivalent brew packages. Espresso 7g ground coffee/25mL WATER INPUT, 25-30s/90-96C; other methods 15g/250mL water with varying grind/time. HPLC caffeine, Folin-Ciocalteu total phenolics and ICP-OES minerals measured with three TECHNICAL replicates per sample; no tasted 1-5 DIC sensory scores. Espresso produced higher measured caffeine/TPC/K/Mg/P concentrations in §§2.1/Discussion but lowest caffeine per 25mL serving compared to much larger 250mL servings in §2.5; per-mL vs per-serving are separate denominators. Retailer roast/origin labels, PCA endpoints and assay cross-reactivity limit causality. Results §2.4 also describes Espresso as lowest analyzed minerals in a sentence conflicting with high K/Mg/P passages; do not resolve without tables/source corrections.",
       "locked_policy_boundary": "Cannot transform input water volume to beverage output grams, infer universal shot ratio/caffeine/health/pressure/time/temperature optimum, map measured chemicals into five personal taste scales, or recommend a one-variable sensory correction. Preserve recorded five tastes/all-green, separate Turbo/Fast-Flow, original shot/notes/history, private Community/RLS, grinder/version/slow-feed and equipment control."
+    },
+    {
+      "id": "LIVE-20261112-USE-RECOMMENDATION-PROVENANCE-R220",
+      "type": "live_repository_ux_recommendation_origin_integrity_bounded_direct_source_review",
+      "path": "site/cloud/main.js; site/cloud/shot_card.js; site/cloud/mapping.js; build_cloud.mjs; tests/cloud-recommendation-use-provenance.test.mjs",
+      "source_sha": "1e3d76214aa0d878a5a7568cf0ba7831f8f8c312",
+      "git_blobs": {
+        "main": "a6bd7ee3066146c4b10b066ff50c86624fe767f0",
+        "shot_card": "cbf37095a0274347281b825ed3b7caf5cb242209",
+        "mapping": "a02aee80e2e6447aa855982b500318932a1e8b40",
+        "build": "6b524ce91aa2d75694ca72e347356c857900b7e5"
+      },
+      "review_status": "DIRECT_LIVE_CODE_CALL_CHAIN_AND_LOCKED_PROVENANCE_CONTRACT_REVIEW; CANDIDATE_FIX_AND_FOCUSED_TESTS; CORRECTED_CI_NOT_YET_PASS",
+      "access": "EXACT_IMMUTABLE_GITHUB_SOURCE",
+      "provenance": "Current live application source and owner-Locked spec/decision, deterministic UI metadata gap rather than real-member incident",
+      "scientific_status": "NOT_APPLICABLE_SOURCE_CORRECTNESS",
+      "status": "SAFE_CANDIDATE_TESTING_NOT_READY_NOT_DEPLOYED",
+      "implementation_pr": 2353
     }
   ],
   "evidence_checks": [
@@ -6379,6 +6397,21 @@
       "owner_approval": false,
       "source_sha": "f474449f9021da88c0e0b51e463dfda697310a85",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-APP-220-A",
+      "source": "LIVE-20261112-USE-RECOMMENDATION-PROVENANCE-R220",
+      "claim": "Button-copied recommended grind/temperature is member-selected provenance, not a measured preference or independently verified science. Current main click use-grind/use-temp stored source_label/used_controls but omitted kind needed for private History display; manual edits could retain false copied-control attribution. Existing Shot History filters on provenance.kind. Preserve true measured values, five explicit rated tastes, original private history and notes. Narrow helper and positive/negative tests drafted; initial PR CI exposed missing asset allowlist and queue intake, both corrected pending exact-source rerun.",
+      "grade": "DIRECT_CURRENT_CODE_SOURCE_AND_LOCKED_RECONCILIATION; NO_REAL_MEMBER_OR_ESPRESSO_OUTCOME; FINAL_CI_PENDING",
+      "primary_sources": [
+        "https://github.com/Schulzet3/The-Dial-In-Collective/blob/1e3d76214aa0d878a5a7568cf0ba7831f8f8c312/site/cloud/main.js",
+        "https://github.com/Schulzet3/The-Dial-In-Collective/blob/1e3d76214aa0d878a5a7568cf0ba7831f8f8c312/site/cloud/shot_card.js",
+        "https://github.com/Schulzet3/The-Dial-In-Collective/blob/1e3d76214aa0d878a5a7568cf0ba7831f8f8c312/docs/MASTER_SPECIFICATION.md"
+      ],
+      "result": "SAFE_CODE_CANDIDATE_IN_TESTING_NOT_READY; ZERO_NUMERIC_SCIENCE_POLICY_CHANGE",
+      "owner_approval": false,
+      "source_sha": "1e3d76214aa0d878a5a7568cf0ba7831f8f8c312",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -6539,7 +6572,8 @@
     "R455-217 exact code merged 886fc5d6; Node22/Chromium/offline and CI on exact merge PASS, current continuous governance 43304230640 success; queue promoted READY only after docs-only governance and merged readback. Issue #455 remains OPEN; continue non-overlapping source claim and Log Shot UX review next run; do not publish or credit #267 V2.",
     "R455-218 source bug reproducible: after R217 display-only guard, first rate tap on imported null tasteScales still assigns into null. SAFE writable clone/empty draft proposed with direct negative/positive Node test, current source SHA 8a8e94830e363deed3e8f47145594ba05cbf7cfc, exact immutable preflight blob 2fb236bbfa6bac48513eeb3bd157b260853af06d. Source CI, nonforce merge, merged blob/status reconciliation PENDING; queue TESTING; no deploy or #267 literal-line credit.",
     "R455-218 source merged 70811c9c598d30fb65b562eb701621b90eab58a0: first null taste-rating tap now writable draft no auto-rating; head+merge Node22 4381 pass/0 fail/6 skip, browser/offline+approval and head SQL/security PASS. DIC-Q-455-r218-restored-rating-tap development READY NOT deployed; future new issue #455 run inspect other disjoint code/research while #267/#33/#96 retain ownership, S019 original inaccessible.",
-    "R455-219 primary MDPI Molecules 2025 30(20):4080 direct full HTML bounded review at pinned development f474449f9021da88c0e0b51e463dfda697310a85/preflight 2fb236bbfa6bac48513eeb3bd157b260853af06d. Chemistry concentration versus serving-size, input-water volume versus beverage yield and confounded brewing methods do not license a five-taste/health/espresso numeric rule. Research-only two-file docs PR/CI/nonforce merge pending. Original S019 still unavailable; #267 literal review credit 0."
+    "R455-219 primary MDPI Molecules 2025 30(20):4080 direct full HTML bounded review at pinned development f474449f9021da88c0e0b51e463dfda697310a85/preflight 2fb236bbfa6bac48513eeb3bd157b260853af06d. Chemistry concentration versus serving-size, input-water volume versus beverage yield and confounded brewing methods do not license a five-taste/health/espresso numeric rule. Research-only two-file docs PR/CI/nonforce merge pending. Original S019 still unavailable; #267 literal review credit 0.",
+    "R455-220 after immutable preflight 1e3d76214aa0d878a5a7568cf0ba7831f8f8c312: PR #2353 SAFE provenance-correctness candidate (current main -> shot card discriminator, changed measurements clearing); initial browser/queue CI failures source-diagnosed and candidate fixes in build allowlist+TESTING intake. Run exact-source PR CI, repair failures, nonforce merge only after PASS, verify blobs and merged CI, then READY docs reconciliation without deployment. S019 unreviewed; #267 zero literal credit."
   ],
   "latest_review_checkpoint": {
     "run_id": "R455-219",
@@ -10589,6 +10623,29 @@
         "prior_ledger_blob": "098d368c740676d39fa83208424dcea2fba43913",
         "journal_path": "docs/workstreams/ops-issue455-r219-brew-chemistry-concentration-20261112.md"
       }
+    },
+    {
+      "id": "R455-PROP-220-TRUTHFUL-RECOMMENDATION-PROVENANCE",
+      "severity": "P2_TRUTHFUL_PRIVATE_LOG_SHOT_HISTORY_ORIGIN_METADATA",
+      "finding": "Saved new shots selected through Use Recommendation lacked the correct discriminator required by expanded History to explain provenance; editing an already copied measurement could leave false attribution.",
+      "user_benefit": "Tell a member which actual starting suggestion they used without mislabeling a subsequently altered measured grind/temperature or changing an original shot.",
+      "evidence": [
+        "R455-EV-APP-220-A"
+      ],
+      "evidence_grade": "DETERMINISTIC_LIVE_SOURCE_REPRO; POSITIVE_NEGATIVE_SYNTHETIC_TESTS_CANDIDATE; NOT_QUALIFIED_CI_YET",
+      "current_locked": "Master 14.6/14.7: actual measured fields separate from recommendations; Use Recommendation explicit copy and origin; manual alternatives respected. Original five tastes, all-green criterion, styles/feed, notes and privacy unchanged.",
+      "current_app": "Current app before R220 creates origin used_controls/source_label without discriminator that History requires; proposed fixed app records kind, clears copied-source metadata if displayed measurement differs before Save/Rate.",
+      "proposed_change": "SAFE: explicit provenance only on active Use click, one-to-one actual copied values, remove stale display attribution; add helper to explicit asset allowlist and retain hashed PWA build. No science/target/control changes.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "PR2353_CANDIDATE_TESTING_REQUIRED_NOT_READY",
+      "test_plan": "Six focused source/real-module positive-negative tests plus existing Node22/build, Chromium/mobile/offline, SQL/privacy, security, governance. Initial 43331382455 browser build FAILED missing new asset and 43331382333 approval FAILED untracked new code path; both candidate repairs, exact retest pending. SKIPPED not pass.",
+      "release_queue": "DIC-Q-455-r220-recommendation-use-origin",
+      "release_queue_status": "TESTING_NOT_READY_NOT_DEPLOYED",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false,
+      "source_commit": null,
+      "implementation_pr": 2353
     }
   ],
   "changeScope": {

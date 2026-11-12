@@ -54,6 +54,8 @@ test('Log Shot wires actual copied measurements and save-time readDraft reconcil
  assert.ok(main.includes("this.appliedRecommendationValues.temperature=String(temperatureInput.value)"));
  assert.ok(main.includes("this.draft.recommendationContext=reconcileRecommendationUse("));
  assert.ok(main.includes("this.draft.recommendationContext=recordRecommendationUse("));
+ const build=source("../build_cloud.mjs");
+ assert.ok(build.includes("\'cloud/recommendation-use.js\'"),"the new public module must be in the shipped, hash-pinned offline build allowlist");
  assert.ok(main.includes("this.readDraft();const d=this.draft,validation=M.validateShot(d"));
  assert.ok(main.includes("M.validateShot(d,{allowLegacyCustom:!!this.editing&&this.editing.style==='Custom'})"));
 });
