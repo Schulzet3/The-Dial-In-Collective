@@ -46,6 +46,25 @@ test('#187 unselected metadata cannot produce selected roast without chosen evid
  const q=extractPublicCoffeeFacts(page(product.replace('<h3>Roast</h3><p>Light Roast</p>','').replace('<p>Light Roast</p>','')), {source_url:chosen187.url});
  assert.ok(q.ok!==true||q.fields.roast_level!=='Medium',JSON.stringify(q));
 });
+test('#187 hyphenated light-to-medium narrative is no categorical roast tier',()=>{
+ const b=product.replace('<h3>Roast</h3><p>Light Roast</p>','').replace('<p>Light Roast</p>','');
+ const p=extractPublicCoffeeFacts(page(b),{source_url:chosen187.url});
+ assert.ok(!p.fields?.roast_level,JSON.stringify(p));
+});
+test('#187 en/em dash light-to-medium narrative is no categorical roast tier',()=>{
+ for(const word of ['light–to–medium','light—to—medium']){
+  const b=product.replace('<h3>Roast</h3><p>Light Roast</p>','')
+   .replace('<p>Light Roast</p>','').replace('light-to-medium',word);
+  const p=extractPublicCoffeeFacts(page(b),{source_url:chosen187.url});
+  assert.ok(!p.fields?.roast_level,word+' '+JSON.stringify(p));
+ }
+});
+test('#187 genuine selected Medium-Light tier retained',()=>{
+ const b=product.replaceAll('Light Roast','Medium-Light Roast')
+  .replace('light-to-medium roast','bright flavor narrative');
+ const p=extractPublicCoffeeFacts(page(b),{source_url:chosen187.url});
+ assert.equal(p.fields?.roast_level,'Medium-Light',JSON.stringify(p));
+});
 test('#187 no selected decaf assertion from generic page mentions',()=>{
  const q=extractPublicCoffeeFacts(page(product,'<aside>Our Decaf uses Swiss Water Process</aside>'),{source_url:chosen187.url});
  assert.ok(!q.fields?.decaffeination_method,JSON.stringify(q));
