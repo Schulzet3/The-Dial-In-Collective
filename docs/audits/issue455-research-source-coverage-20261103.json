@@ -1840,6 +1840,25 @@
       "review_status": "SOURCE_REPRODUCED_AND_TESTED_WITH_PASSING_PR_HEAD;MERGED_SOURCE_CI_CANCELLED_BY_CONCURRENT_PUSH;NOT_ISSUE267_LITERAL_LINE_REVIEW",
       "evidence_grade": "DIRECT_CODE_AND_SYNTHETIC_NODE22_GITHUB_CI_NOT_REAL_MEMBER_ESPRESSO_OUTCOME",
       "implementation_status": "SAFE_MERGED_R201_SOURCE_CERTIFIED_AS_COMPOSITE_EXISTING_R198_READY_BY_2169_NOT_DEPLOYED"
+    },
+    {
+      "id": "LIT-2015-CHARLES-ESPRESSO-TDS-NOSESPACE",
+      "type": "peer_reviewed_espresso_dynamic_sensory_instrumental_study",
+      "title": "Understanding flavour perception of espresso coffee by the combination of a dynamic sensory method and in-vivo nosespace analysis",
+      "authors": "Mathilde C. Charles; Andrea Romano; Sine Yener; Massimo Barnaba; Luciano Navarini; Tilmann D. Mark; Franco Biasioli; Flavia Gasperi",
+      "published": "Food Research International 69 (2015), 9-20",
+      "doi": "10.1016/j.foodres.2014.11.036",
+      "url": "https://doi.org/10.1016/j.foodres.2014.11.036",
+      "author_institution_journal_record": "https://openpub.fmach.it/handle/10449/25273",
+      "author_university_conference_abstract": "https://iris.unitn.it/handle/11572/263941",
+      "original_related_conference_abstract": "https://iris.unitn.it/handle/11572/263954",
+      "source_access": "AUTHOR_INSTITUTE_JOURNAL_ABSTRACT_AND_AUTHOR_UNIVERSITY_CONFERENCE_ABSTRACT_DIRECTLY_READ;LICENSED_PDF_NOT_ACCESSIBLE",
+      "review_status": "BOUNDED_JOURNAL_ABSTRACT_AND_AUTHOR_ORGANIZATION_CONFERENCE_DESIGN_AND_RESULTS_REVIEWED;FULL_JOURNAL_METHODS_FIGURES_TABLES_RAW_REPLICATES_NOT_REVIEWED",
+      "evidence_grade": "PEER_REVIEWED_ESPRESSO_STUDY_ABSTRACT_PLUS_SAME_RESEARCH_GROUP_CONFERENCE_REPORT;18_TRAINED_PANELISTS_FOUR_SWEETENED_UNSWEETENED_CONDITIONS;NOT_APP_TASTE_VALIDATION",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Author institute lists the 1.28 MB journal full-text PDF as restricted to authorized users. No original complete PDF, figures, raw measurements or binary SHA256 retrieved. Conference abstracts are related presentations, not independent replications.",
+      "claims_verified_externally": "The group combined in-mouth Temporal Dominance of Sensations (TDS) with PTR-ToF-MS nosespace volatile measurement. Related author conference abstract describes two Arabica roast levels with and without sugar, 18 trained judges and nine descriptors. Sugar changed perceived dominant sensations much more than measured volatile release under those conditions; direct full-paper statistical tables were not accessible. This is not a five-slider recommendation model, recipe optimum or universal cross-coffee correction.",
+      "locked_policy_boundary": "Original DIC five taste ratings, unchanged personal shot/history/notes, independent styles, one controllable next-shot change, existing starting priors and privacy unchanged."
     }
   ],
   "evidence_checks": [
@@ -5731,6 +5750,39 @@
       "owner_approval": false,
       "source_sha": "98b44ea0f7bcd6ed6ef36c24838ce226ef587542",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-SENSORY-206-A",
+      "source": "Charles et al., Food Research International 69 (2015) 9-20, DOI 10.1016/j.foodres.2014.11.036; author institute primary journal abstract and author-university 2015/2014 conference summaries, not full journal text",
+      "claim": "The original author group coupled Temporal Dominance of Sensations and in-vivo PTR-ToF-MS nosespace analysis. A related conference protocol describes four espresso sample conditions (two Arabica roast levels each with and without sugar), eighteen trained assessors and nine dominant descriptors (sweet, sour, bitter, astringent, roasted, burnt, caramel, nutty, vegetal). The journal and conference records describe the same research program, not independent replications or validation of DIC's five self-reported ratings.",
+      "grade": "DIRECT_AUTHOR_INSTITUTION_JOURNAL_ABSTRACT_AND_SAME_AUTHORS_CONFERENCE_METHOD_ABSTRACT;FULL_REVIEW_AND_REPLICATION_NOT_VERIFIED",
+      "primary_sources": [
+        "https://doi.org/10.1016/j.foodres.2014.11.036",
+        "https://openpub.fmach.it/handle/10449/25273",
+        "https://iris.unitn.it/handle/11572/263941",
+        "https://iris.unitn.it/handle/11572/263954"
+      ],
+      "current_app": "site/lib/constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095 has five independently captured extraction/body/clarity/sweetness/astringency ratings. They are not equivalent to nine TDS transient descriptors. No instrument nose-space or sugar manipulation recorded; app code not changed.",
+      "result": "METHOD_AND_SAMPLE_BOUNDARY_CONFIRMED_RESEARCH_ONLY",
+      "owner_approval": false,
+      "source_sha": "71ea6cfdd08e3365184ce88e13001c96613bfff9",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-SENSORY-206-B",
+      "source": "Charles et al. 2015 institute-authored journal abstract; 2015 and 2014 related conference abstracts for roast/sugar effect, same author team",
+      "claim": "In those sweetened/unsweetened espresso comparisons sugar altered dominant in-mouth sensory descriptions while measured nosespace volatile release changed little (author summaries), indicating perceptual cross-modal interactions in the tested setting. This is not evidence that changing extraction, grind, ratio, pressure or shot temperature produces identical effects, nor that adding sugar fixes extraction or predicts one person's five taste ratings. No generalizable sensory correction, threshold, software confidence interval or recipe target is established.",
+      "grade": "AUTHOR_SUMMARY_OF_ESPRESSO_SENSORY_AND_VOLATILE_RESULTS;NO_FULL_TABLES_OR_RAW_DATA_NO_UNSWEETENED_PERSONAL_APP_OUTCOMES",
+      "primary_sources": [
+        "https://openpub.fmach.it/handle/10449/25273",
+        "https://iris.unitn.it/handle/11572/263941",
+        "https://iris.unitn.it/handle/11572/263954"
+      ],
+      "current_app": "site/lib/engine.js blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6 preserves single-control recommendation; constants.js five fixed scales unchanged. Avoid claiming independent scientific calibration of app taste scores.",
+      "result": "DISTINGUISH_PERCEPTUAL_INTERACTION_FROM_PHYSICAL_BREWING_CAUSAL_CHANGE",
+      "owner_approval": false,
+      "source_sha": "71ea6cfdd08e3365184ce88e13001c96613bfff9",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -5877,20 +5929,22 @@
     "R455-202: independently verify exact DOI alias annotation preservation and docs-only PR CI; non-force integrate and read back merged SHA/blob before recording VERIFIED. Current source records 106 vs 66 DOI-bearing records/61 unique DOI, five alias identities only; review records retained. No app/Locked change, queue or production write. All 40 without DOI remain unclassified for dedup. S019 standalone unavailable; #267 literal review zero credit.",
     "R455-203: source-governance crosswalk for slow-feed PDF vs Oct26 Experiment retirement and owner Locked family/feed rules. Verify exact-source documentation CI then non-force integrate and read back merged ledger/journal; no app/Locked changes, no new READY. Original S019 inaccessible. Do not confuse 2% proposed retired Experiment threshold with 3% active grindStep.",
     "R455-204: Direct author full-article temporal crosswalk of ORG-04/Waszkiewicz: nonlinear pressure/flow peak measured at >=120-s shots, last-10-s late time across 60 total shots/11 pressures, not normal ~30-s pressure optimum; 5-10-s first drop one fixed 14-mm puck, not randomized universal preinfusion or validated commercial sensor. Original source hashes preserved; two claim checks and one proposal added (106/319/163). Docs-only PR exact CI pending; nonforce merge only after applicable green then verify blobs. No app, numeric, Locked, Auth/provider, queue or #267 line changes; S019 still inaccessible.",
-    "R455-205: direct visual primary-figure crosswalk for Cameron et al. 2020: published Figure 5 actual 20g/40g 6bar 9bar-clogging grind/EY dataset versus Figure 6 schematic 15g/40g 'tasty point', no five-sensory or universal optima; 106/321/164 after docs PR verified. Original S019 remains inaccessible. No app, numeric, Locked, provider, queue or #267 literal changes."
+    "R455-205: direct visual primary-figure crosswalk for Cameron et al. 2020: published Figure 5 actual 20g/40g 6bar 9bar-clogging grind/EY dataset versus Figure 6 schematic 15g/40g 'tasty point', no five-sensory or universal optima; 106/321/164 after docs PR verified. Original S019 remains inaccessible. No app, numeric, Locked, provider, queue or #267 literal changes.",
+    "R455-206: author-group journal abstract/conference primary-source method and perceptual interactions crosschecked; DOI 10.1016/j.foodres.2014.11.036; no five-sensory prediction, sugar extraction fix or numerical policy. 107 sources/323 checks/165 proposals upon PR verify; full journal paper restricted, S019 unreviewed, #267 strict literal review not duplicated."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-205",
-    "source_sha": "98b44ea0f7bcd6ed6ef36c24838ce226ef587542",
-    "phase": "CAMERON_PRIMARY_FIGURE5_EXPERIMENT_VERSUS_FIGURE6_SCHEMATIC_BOUNDARY_DOCS_ONLY_PENDING_CI",
+    "run_id": "R455-206",
+    "source_sha": "71ea6cfdd08e3365184ce88e13001c96613bfff9",
+    "phase": "CHARLES_ESPRESSO_DYNAMIC_SENSORY_VS_NOSESPACE_AUTHOR_ABSTRACT_RESEARCH_ONLY_CI_PENDING",
     "source_counts": {
-      "research_project_source_records": 106,
-      "bounded_evidence_checks": 321,
-      "proposals": 164
+      "research_project_source_records": 107,
+      "bounded_evidence_checks": 323,
+      "proposals": 165
     },
-    "release_state": "UNTOUCHED_EXISTING_READY_COMPOSITE_AND_QUEUE_NO_NEW_READY_OR_DEPLOY",
+    "release_state": "NO_NEW_QUEUE_OR_READY_OR_DEPLOYMENT",
     "original_s019": "INACCESSIBLE_UNREVIEWED",
-    "github267_literal_review_credit": 0
+    "github267_literal_review_credit": 0,
+    "full_journal_pdf": "RESTRICTED_NOT_READ"
   },
   "policy_decisions_resolved": [
     {
@@ -9576,6 +9630,32 @@
         "prior_ledger_blob": "eaa6ffb859e571f9f88cac417d087df328b1c516",
         "journal_path": "docs/workstreams/ops-issue455-r205-cameron-primary-figures-20261112.md"
       }
+    },
+    {
+      "id": "R455-PROP-206-DYNAMIC-ESPRESSO-SENSORY-INTERACTION-BOUNDARY",
+      "severity": "P2_SENSORY_EXPLANATION_PROVENANCE_NO_REPRODUCED_ACTIVE_RUNTIME_BUG",
+      "finding": "Charles et al. controlled roast/sugar espresso conditions and recorded time-varying trained-panel perception plus instrument nose-space release. The observed sweetening-related perceptual differences cannot validate DIC's independent personal five-slider ratings or predict effects of grind/yield/time; conference and journal summaries are not separate trials. Full journal paper is restricted, so no unverified numeric transfer or claim of paper-wide audit.",
+      "user_benefit": "Prevent science-sounding but unsupported next-shot sensory confidence claims, conflation of sensory and chemical release, or involuntary changes to five inputs.",
+      "evidence": [
+        "R455-EV-SENSORY-206-A",
+        "R455-EV-SENSORY-206-B"
+      ],
+      "source_provenance": "DOI 10.1016/j.foodres.2014.11.036, Food Research International 69:9-20, author institute journal record https://openpub.fmach.it/handle/10449/25273 and author-university 2014/2015 abstracts https://iris.unitn.it/handle/11572/263941 / https://iris.unitn.it/handle/11572/263954; full journal PDF access restricted, binary SHA256 and raw tables unverified. Source dev parent 71ea6cfdd08e3365184ce88e13001c96613bfff9.",
+      "current_locked": "Owner-Locked all five original taste inputs, green versus incomplete behavior, one controllable change, independently selectable styles, notes/history/privacy, no universal numerical optima or new sensor input.",
+      "current_app": "site/lib/constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095 and site/lib/engine.js blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6; no observed claim that sugar/TDS maps to the five app sliders.",
+      "proposed_change": "SAFE literature provenance documentation only. Preserve current app behavior; should future temporal sensory explanation or sweetener preference capture be desired, require separate owner product/data-capture decision and independent unsweetened shot validation. Do not implement on this evidence.",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "RESEARCH_ONLY_SCOPED_DOCS_PR_PENDING_EXACT_SOURCE_CI",
+      "test_plan": "JSON parse and original 106/321/164 ID preservation plus one new DOI source, two bounded checks and one proposal; validate same-commit journal and docs-only diff, CI source-bound governance; no taste/Node/browser/SQL/Auth/603 outcome claimed without an executed step.",
+      "release_queue_status": "NO_NEW_ITEM_NO_READY_NO_DEPLOYMENT",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false,
+      "exact_source": {
+        "starting_development_sha": "71ea6cfdd08e3365184ce88e13001c96613bfff9",
+        "prior_ledger_blob": "a112884e20f2bbd2ed632dae3819305b77b4ae00",
+        "journal_path": "docs/workstreams/ops-issue455-r206-dynamic-espresso-sensory-20261112.md"
+      }
     }
   ],
   "changeScope": {
@@ -9628,6 +9708,15 @@
         "scope": "Fitri et al. identical original 3-origin CATA and espresso-based formulation study; multiple reviews do not multiply participant samples"
       }
     ],
-    "scope_note": "Document/review/source identity bookkeeping. Not a scientific replication or source-byte hash, not issue #267 literal-review credit, not product-policy authority, and not deletion of any research evidence."
+    "scope_note": "Document/review/source identity bookkeeping. Not a scientific replication or source-byte hash, not issue #267 literal-review credit, not product-policy authority, and not deletion of any research evidence.",
+    "post_r202_bounded_addendum": {
+      "run_id": "R455-206",
+      "source_parent_sha": "71ea6cfdd08e3365184ce88e13001c96613bfff9",
+      "doi_bearing_review_records": 67,
+      "distinct_normalized_dois": 62,
+      "exact_doi_duplicate_groups_unchanged": 5,
+      "unchanged_original_r202_metadata": true,
+      "note": "Only one new standalone exact DOI source; older R202 66/61 snapshot remains historically accurate, no duplicates counted."
+    }
   }
 }
