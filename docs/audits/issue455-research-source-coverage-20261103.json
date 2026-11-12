@@ -2041,6 +2041,22 @@
       "implementation_pr": 2333,
       "merged_source_sha": "886fc5d6fb960bf1bc9c46d657894756c9d3f7b9",
       "status": "SAFE_FIX_MERGED_DEV_READY_NOT_PUBLISHED"
+    },
+    {
+      "id": "LIVE-20261112-RESTORED-RATING-TAP-R218",
+      "type": "live_repository_ux_edit_interaction_direct_bounded_source_review",
+      "path": "site/cloud/main.js; site/lib/ui.js; tests/cloud-shot-rating-focus.test.mjs",
+      "source_sha": "8a8e94830e363deed3e8f47145594ba05cbf7cfc",
+      "git_blobs": {
+        "main": "ae7bd5e19a50237533bb5ac0d8ac4d84aef1a4fa",
+        "ui": "8f61645e241aa9ddc603417c0ff01304410e8118",
+        "test": "8cefb101a3277d9ae4ab1fd79089f142a9afa677"
+      },
+      "review_status": "DIRECT_SOURCE_CALL_CHAIN_REPRODUCED; NEGATIVE_POSITIVE_REGRESSION_AUTHORED; CI_PENDING_NOT_PASS",
+      "access": "EXACT_IMMUTABLE_GITHUB_SOURCE",
+      "provenance": "Live GitHub source R217 follow-up; not a historical user incident or empirical espresso study",
+      "scientific_status": "NOT_APPLICABLE_DETERMINISTIC_UI_CORRECTNESS",
+      "status": "SAFE_FIX_SOURCE_CANDIDATE_CI_PENDING"
     }
   ],
   "evidence_checks": [
@@ -6287,6 +6303,22 @@
       ],
       "continued_source_governance_run": 43304230640,
       "cancelled_merged_push_approval_not_pass": 43304153073
+    },
+    {
+      "id": "R455-EV-APP-218-A",
+      "source": "LIVE-20261112-RESTORED-RATING-TAP-R218",
+      "claim": "R217 makes an imported tasteScales:null render five unselected buttons in Edit Shot, but CloudApp.showLog clones null to this.draft and click('rate') then dereferences this.draft.tasteScales[key], throwing on the first tap; the user cannot repair an original missing-rating record. Existing validation still rejects incomplete ratings. A writable draft copy (not the stored original) is needed to permit five explicit selections.",
+      "grade": "DIRECT_SOURCE_CALL_CHAIN_AND_AUTHORED_NEGATIVE_POSITIVE_NODE_TEST; CI_NOT_EXECUTED; NO_REAL_MEMBER_REPRO_OR_ESPRESSO_OUTCOME",
+      "source_sha": "8a8e94830e363deed3e8f47145594ba05cbf7cfc",
+      "git_blob_shas": [
+        "ae7bd5e19a50237533bb5ac0d8ac4d84aef1a4fa",
+        "8f61645e241aa9ddc603417c0ff01304410e8118",
+        "8cefb101a3277d9ae4ab1fd79089f142a9afa677"
+      ],
+      "current_app": "R217 initial display guard renders malformed restored ratings; R218 code candidate creates a separate safe editable ratings map before tap; no auto-ratings, no save until five recorded.",
+      "result": "SAFE_BUG_FIX_AWAITING_EXACT_SOURCE_CI_AND_MERGE",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -6444,44 +6476,25 @@
     "R455-215 original 2026 coffee bitterness matrix study verified via direct full primary PMC HTML and trained panel/sensory table. Research-only 115 sources/341 evidence checks/174 proposals after CI-verified integration; original S019 still unavailable, #267 literal audit remains separate, original PDF/raw participant data not verified.",
     "R455-216: indexed original Chiu et al 2024 ultrasonic rapid cold brew original Methods 2.11/Results 3.4 + PubMed reviewed, not normal espresso; 116 sources/343 checks/175 proposals if integrated, original PDF/raw/figures and standalone S019 unverified; next exact-head CI/nonforce merge/source readback, then distinct UX issue review. #267 literal credit zero.",
     "R455-217 code/test/journal/ledger/IN_PROGRESS queue single-commit candidate; inspect exact PR-head Node22 + cloud/browser/offline/governance/SQL risk routing, repair if needed; merge non-force only on completed applicable success then read merged blobs/CI, move queue READY only if justified. Original S019 unavailable and #267 literal audit separate.",
-    "R455-217 exact code merged 886fc5d6; Node22/Chromium/offline and CI on exact merge PASS, current continuous governance 43304230640 success; queue promoted READY only after docs-only governance and merged readback. Issue #455 remains OPEN; continue non-overlapping source claim and Log Shot UX review next run; do not publish or credit #267 V2."
+    "R455-217 exact code merged 886fc5d6; Node22/Chromium/offline and CI on exact merge PASS, current continuous governance 43304230640 success; queue promoted READY only after docs-only governance and merged readback. Issue #455 remains OPEN; continue non-overlapping source claim and Log Shot UX review next run; do not publish or credit #267 V2.",
+    "R455-218 source bug reproducible: after R217 display-only guard, first rate tap on imported null tasteScales still assigns into null. SAFE writable clone/empty draft proposed with direct negative/positive Node test, current source SHA 8a8e94830e363deed3e8f47145594ba05cbf7cfc, exact immutable preflight blob 2fb236bbfa6bac48513eeb3bd157b260853af06d. Source CI, nonforce merge, merged blob/status reconciliation PENDING; queue TESTING; no deploy or #267 literal-line credit."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-217",
-    "source_sha": "886fc5d6fb960bf1bc9c46d657894756c9d3f7b9",
-    "starting_preflight_development_sha": "3a47f4e05c94773b41424c3b3bbf0a296fe414eb",
+    "run_id": "R455-218",
+    "source_sha": "8a8e94830e363deed3e8f47145594ba05cbf7cfc",
+    "starting_preflight_development_sha": "8a8e94830e363deed3e8f47145594ba05cbf7cfc",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "phase": "LOCKED_COMPATIBLE_CODE_TEST_MERGED_EXACT_PR_AND_MERGED_CI_READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
+    "phase": "SAFE_CODE_TEST_SOURCE_CANDIDATE_EXACT_SOURCE_CI_UNRUN",
     "source_counts": {
-      "research_project_source_records": 117,
-      "bounded_evidence_checks": 344,
-      "proposals": 176
+      "research_project_source_records": 118,
+      "bounded_evidence_checks": 345,
+      "proposals": 177
     },
-    "original_s019": "INACCESSIBLE_UNREVIEWED_CURRENT_DRIVE_LIBRARY_SPACE_SEARCH",
-    "release_state": "ONE_SAFE_QUEUED_READY_NO_PUBLISH",
+    "focus": "LEGACY_RESTORED_NULL_RATING_EDIT_FIRST_TAP_CRASH",
+    "original_s019": "INACCESSIBLE_UNREVIEWED_DRIVE_AND_SPACE_SEARCH",
+    "release_state": "NEW_TESTING_NOT_READY_NO_PUBLISH",
     "github267_literal_review_credit": 0,
-    "focus": "LOG_SHOT_EDIT_INVALID_RESTORED_TASTE_UNRATED_EMPTY_LABEL",
-    "unverified": "Actual Node22/browser/cloud CI, real legacy member incident, empirical espresso outcomes.",
-    "pr": 2333,
-    "merged_sha": "886fc5d6fb960bf1bc9c46d657894756c9d3f7b9",
-    "ci": {
-      "head": [
-        43303671919,
-        43303671481,
-        43303671538,
-        43303671660,
-        43303672196
-      ],
-      "merge": [
-        43304152780,
-        43304152705
-      ],
-      "followup_governance": 43304230640,
-      "cancelled_not_pass": 43304153073,
-      "node_pass": 4364,
-      "node_fail": 0,
-      "node_intentional_skip": 6
-    }
+    "unverified": "GitHub Node22/browser/offline/SQL/security/governance CI and merge not yet run, real member experience and cup quality not measured."
   },
   "policy_decisions_resolved": [
     {
@@ -10464,6 +10477,27 @@
       "release_queue": "DIC-Q-455-r217-invalid-restored-rating-empty-label",
       "source_commit": "886fc5d6fb960bf1bc9c46d657894756c9d3f7b9",
       "implementation_pr": 2333
+    },
+    {
+      "id": "R455-PROP-218-RESTORED-RATING-TAP",
+      "severity": "P2_EDIT_RESTORED_NULL_RATING_INTERACTION",
+      "finding": "Imported legacy shot with tasteScales:null can display 'Tap to rate' after R217 but first rating tap throws TypeError as the cloud click handler assigns into null.",
+      "user_benefit": "Let users repair all five malformed/missing old ratings without losing original measured shot, notes or other previously valid selections.",
+      "evidence": [
+        "R455-EV-APP-218-A"
+      ],
+      "evidence_grade": "DIRECT_CURRENT_SOURCE_REPRO_WITH_FOCUSED_NEGATIVE_POSITIVE_TEST_AUTHORED_NOT_RUN",
+      "current_locked": "Five independent 1–5 tastes must be actively rated; all-green only when all five ideals; no silent defaults; preserve saved shots, notes and private history.",
+      "current_app": "CloudApp.showLog(editing) clones archived shot and R217 ui.scales now renders missing values; click('rate') still assumes tasteScales is writable nonnull.",
+      "proposed_change": "SAFE: clone the existing object or create an EMPTY writable draft for null/nonobject; do not fabricate taste values, change the original shot or relax validator. Existing one-at-a-time rate selection continues.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "SOURCE_COMMIT_CANDIDATE_PR_AND_CI_PENDING",
+      "test_plan": "Node22 direct negative/positive tests for null/undefined/primitives/array and partial ratings; require explicit five scores and existing green ideals, preserve original archived notes and values; exact PR-head lint, mobile/Chromium/offline, isolated SQL/privacy, security and approval governance then non-force merged-source CI.",
+      "release_queue": "DIC-Q-455-r218-restored-rating-tap",
+      "release_queue_status": "TESTING_NOT_READY_NOT_DEPLOYED",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
     }
   ],
   "changeScope": {
