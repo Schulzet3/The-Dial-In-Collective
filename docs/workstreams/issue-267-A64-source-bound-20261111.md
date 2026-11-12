@@ -9,3 +9,6 @@
 - Next: F162 line16, P132 line176; independent all-ledger gap/semantic-quality reconciliation, post-pin/live drift and final owner review. #267 remains OPEN.
 
 Source reference: `docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F162-001-015-P132-131-175-20261111-A64.json`.
+
+## A64 same-branch evidence correction (nonforce, no altered source-line credit)
+- Replaced an ambiguous year typo in HISTORICAL_SUPERSEDED finding with explicit October 18–19, 2026. Original 60 SHA-bound line records, source literals, coverage, tests and paths unchanged. This follow-up commit contains both corrected receipt and this scoped journal note. Prior original audit commit remains reachable in history.
