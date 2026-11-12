@@ -37,7 +37,7 @@ export function exactRecordedChecks(checkRuns,sourceSha,recordedRunIds){
 export async function verifyReadyItems({queue,items,loadRun,loadChecks,sourceObjectAt,
  mergeChangedPaths,currentSourceSha,publishedSourceSha,candidateSha,candidateChangedPaths,
  allowedPinnedPaths=[]}={}){
- const errors=queueSchemaErrors(queue),verified=[],checksByItem={},ciSourceByItem={};
+ const errors=queueSchemaErrors(queue),verified=[],checksByItem={},ciSourceByItem={},testPathsByItem={};
  if(!Array.isArray(items)||typeof loadRun!=='function'||typeof loadChecks!=='function'||
   typeof sourceObjectAt!=='function'||typeof mergeChangedPaths!=='function')
   return {ready:false,errors:[...errors,'READY gate requires GitHub CI and exact Git object readers'],verified};
@@ -97,6 +97,7 @@ export async function verifyReadyItems({queue,items,loadRun,loadChecks,sourceObj
    }
    checksByItem[item.id]=chosen.recorded;
    ciSourceByItem[item.id]=chosen.sha;
+   testPathsByItem[item.id]=provenancePaths;
    verified.push({id:item.id,merged_sha:item.merged_source_sha,
     ci_source_sha:chosen.sha,risk_tier:chosen.risk.tier,checks:PRODUCTION_CHECKS,
     source_drift_paths:sourceDriftPaths});
@@ -105,7 +106,7 @@ export async function verifyReadyItems({queue,items,loadRun,loadChecks,sourceObj
  if(candidateChangedPaths!==undefined){
   const batch=preflightReadyBatch(queue,items,{publishedSourceSha,candidateSha,
    changedPaths:candidateChangedPaths,checksByItem,ciSourceByItem,sourceObjectAt,
-   allowedPinnedPaths});
+   testPathsByItem,allowedPinnedPaths});
   errors.push(...batch.errors);
  }
  return {ready:errors.length===0,errors,verified};

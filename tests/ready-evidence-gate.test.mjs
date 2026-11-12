@@ -52,3 +52,17 @@ test('candidate batch enforces actual published diff and exact ownership, not qu
   publishedSourceSha:B,candidateSha:C,candidateChangedPaths:['site/admin/push.js','site/admin/unfinished.js']});
  assert.equal(bad.ready,false);
 });
+
+test('#2169 frozen candidate reuses first-parent Git provenance even when READY test notes are prose',async()=>{
+ const prose={...item,tests:['R201 six source-bound regressions PASS; notes have no test filenames']};
+ const actual={...deps,queue:{...queue,items:[prose]},items:[prose],
+  mergeChangedPaths:()=>['site/admin/push.js','tests/issue1938-parity.test.mjs'],
+  currentSourceSha:undefined,publishedSourceSha:B,candidateSha:C,
+  candidateChangedPaths:['site/admin/push.js']};
+ const ok=await verifyReadyItems(actual);
+ assert.equal(ok.ready,true,ok.errors.join(' | '));
+ const invalid=await verifyReadyItems({...actual,sourceObjectAt:(sha,path)=>
+  sha===B&&path==='tests/issue1938-parity.test.mjs'?'100644:'+'0'.repeat(40):
+  '100644:'+'f'.repeat(40)});
+ assert.equal(invalid.ready,false,'tested PR-head test drift must still fail closed');
+});
