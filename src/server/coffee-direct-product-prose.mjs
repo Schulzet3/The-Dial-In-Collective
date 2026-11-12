@@ -552,8 +552,34 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
 export function selectedNamedCurrentDecafEvidence(productHtml,{name,clean}={}){
  if(!decafOnlyCoffee(name)||typeof clean!=='function')return [];
  const direct=selectedDirectProductCredits(productHtml,{name,clean,optionHtml:productHtml});
- return (direct.decaffeination_method_evidence||[])
+ const evidence=(direct.decaffeination_method_evidence||[])
   .filter(statement=>currentNamedDecafMethod(name,statement));
+ // A fully decaffeinated chosen coffee can print its exact water method in
+ // its CURRENT selected H1, with a separate direct sentence confirming that
+ // THESE beans actually undergo decaffeination. Neither H1 alone nor a
+ // generic "chemical-free" statement licenses a method. The matching sentence
+ // stays literal and reviewable, and contradictory named methods fail closed
+ // in the caller's normal method reconciliation.
+ const title=String(name||'').trim().match(/^(swiss|mountain)[ -]?water\s+decaf(?:feinated)?$/iu);
+ if(!title||typeof productHtml!=='string'||productHtml.length>2_000_000)return evidence;
+ const blocks=productCoffeeProse(productHtml,clean);
+ const selected=fold(name);
+ const headings=blocks.filter(b=>b.tag==='h1')
+  .map(b=>fold(selectedCoffeeNameWithoutPrice(b.text)));
+ if(!headings.length||headings.some(h=>h!==selected))return evidence;
+ const method=title[1];
+ const own=new RegExp('^our\\s+'+method+'[ -]?water\\s+decaf(?:feinated)?\\s+beans?\\s+undergo\\s+a\\s+100\\s*%\\s+chemical[ -]?free\\s+decaffeination\\s+process\\b','iu');
+ const selectedText=blocks.filter(b=>!b.educational&&['p','div'].includes(b.tag)&&
+  b.text.length<=950&&!/\b(?:faq|related products?|other coffees?|customer reviews?|educational|previous lots?)\b/iu.test(b.section))
+  .flatMap(b=>String(b.text).split(/(?<=[.!?])\s+/u).map(s=>s.trim()));
+ // Do not choose between incompatible treatments printed in this same
+ // selected product description even if the title itself says Water.
+ const opposite=/\b(?:sugar[ -]?cane|ethyl[ -]?acetate|carbon[ -]?dioxide|co\s*[- ]?2)\b/iu;
+ if(selectedText.some(x=>opposite.test(x)&&/\b(?:decaf(?:feinat(?:ed|ion|ing))?|process)\b/iu.test(x)))return evidence;
+ const directStatement=selectedText.find(s=>own.test(s)&&
+   !/\b(?:not|never|formerly|previously|historically|rather than|instead of|other coffee)\b/iu.test(s));
+ if(directStatement)evidence.push(directStatement);
+ return [...new Set(evidence)];
 }
 
 // Exact selected decaf product specs may independently corroborate its named
