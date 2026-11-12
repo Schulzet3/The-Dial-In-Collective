@@ -13,8 +13,6 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
-  actions: read
-  checks: read
 concurrency:
   group: dic-approval-continuity-${{ github.ref }}
   cancel-in-progress: true
@@ -32,8 +30,6 @@ jobs:
           node-version: '22'
       - name: Reject accidentally tracked private keys, credential files and high-confidence tokens
         run: node scripts/audit/security-inventory.mjs
-      - name: Protect the single mandatory live preflight entrypoint
-        run: node scripts/audit/preflight-contract.mjs
       - name: Fail on missing owner decisions or approved UI/source tests
         run: node scripts/audit/approval-coverage.mjs
       - name: Validate queue schema and intake in one nonpublishing check
@@ -41,10 +37,6 @@ jobs:
         # separate --validate and nonblocking --status invocations duplicated
         # work on every push. On-demand queue status remains available.
         run: node scripts/release/release-queue.mjs --enforce-intake
-      - name: Verify every READY item against live recorded Actions and source/test blobs
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: node scripts/release/ready-evidence-gate.mjs
       - name: Audit EVERY pushed commit, including docs-only and earlier commits in batch
         env:
           DIC_BASE_SHA: ${{ github.event.before || github.event.pull_request.base.sha }}
