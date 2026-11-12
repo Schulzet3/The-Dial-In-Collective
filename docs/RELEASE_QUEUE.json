@@ -13322,14 +13322,16 @@
       "tests": [
         "Reproduced at exact source main blob a6bd7ee3066146c4b10b066ff50c86624fe767f0: Use Recommendation omitted member_selected_starting_reference discriminator required by private shotCard; manually changed readings retained stale used_controls.",
         "First PR head 999dd85313e780fe62564efbe1a549c2f3b91bdb CI 43331382455 FAILED build because new module absent from explicit PWA asset allowlist; 43331382333 FAILED release-queue enforce-intake because new app path not declared. Both failures retained and corrected by candidate follow-up; new exact-source CI pending, not PASS.",
-        "Focused positive/negative six tests authored for source metadata, changed value clearing, same/different provenance, historic context, private shot-card rendering and build allowlist; code/test CI pending."
+        "Focused positive/negative six tests authored for source metadata, changed value clearing, same/different provenance, historic context, private shot-card rendering and build allowlist; code/test CI pending.",
+        "Second PR head eca4c62f993787bf0e8c3819ba446df12c24ac0c approval 43331774026 FAILED schema: missing nullable merged_source_sha. Queue contract requires explicit NULL before code is merged; corrected this candidate, not READY. Other CI pending."
       ],
       "ci_runs": [],
       "blockers": [
         "Exact corrected PR-head Node22/build, browser/offline, SQL/security and governance evidence not yet complete; do not mark READY or DEPLOYED."
       ],
       "notes": "Development-only bounded UX correctness. All five taste choices and original recorded shots/notes/history remain unchanged; no new numeric recommendation targets, no member/production/provider writes, no force Git/deployment. #267 V2 literal audit remains separately incomplete; standalone S019 inaccessible.",
-      "production_deployed": false
+      "production_deployed": false,
+      "merged_source_sha": null
     }
   ],
   "history": [
