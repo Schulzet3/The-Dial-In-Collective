@@ -40,6 +40,8 @@ export function createCloudClient(sdk,{redirectUrl,assertSecure=secureOrigin,pre
   async setPassword(password){assertSecure();return unwrap(await sdk.auth.updateUser({password}));},
   async signOut(){assertSecure();unwrap(await sdk.auth.signOut({scope:'local'}));cached=null;},
   async status(){assertSecure();return unwrap(await sdk.rpc('dic_session_status'));},
+  // Signed-in, verified pending member only; Edge enforces user and server state again.
+  async approvalPush(payload){assertSecure();return unwrap(await sdk.functions.invoke('dic-member-approval-broker',{body:payload}));},
   // Role-restricted read: only aggregate counts reach the main app.
   async adminAttentionCounts(){assertSecure();const data=unwrap(await sdk.rpc('dic_admin_dashboard'));return data?.counts||null;},
   async read(){assertSecure();return unwrap(await sdk.rpc('dic_read_personal_state'));},
