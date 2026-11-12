@@ -12,7 +12,7 @@ import {planSingleUseClaim,assertReadyForRelease,validateReleaseGrant,RELEASE_BR
 import {validateChatReleaseRequest,validateManualReleaseRequest,assertChatPushEnvelope,CHAT_REQUEST_PATH,OPS_JOURNAL_PATH} from './chat-release-request.mjs';
 import {classifyMigrationDiff,releaseReadinessMarkdown} from './migration-risk.mjs';
 import {assessReleaseQueue,formatQueueReport,assertApprovedReadyBatch} from './release-queue.mjs';
-import {validateReadyOnlyCandidate,CANDIDATE_RECEIPT_PATH} from './ready-only-candidate.mjs';
+import {validateReadyOnlyCandidate,CANDIDATE_RECEIPT_PATH,assertCandidateRelativeImports} from './ready-only-candidate.mjs';
 const REPO='Schulzet3/The-Dial-In-Collective';
 const SHA=/^[a-f0-9]{40}$/;
 // The protected release ref must first be seeded at the independently
@@ -307,6 +307,10 @@ export async function executeSingleUseRelease(settings=process.env){
    queueContentMatches:originalQueue===candidateQueue,
    liveQueue:json(liveQueue,'current development release queue'),
    sourceObjectAt:objectAt,isAncestor:(a,b)=>verifiedGitAncestry(a,b)
+  });
+  assertCandidateRelativeImports(queueGate.deployable_paths,{
+   readSource:path=>git(['show',sha+':'+path]),
+   hasPath:path=>objectAt(sha,path)!==null
   });
  }else{
   queueGate=assessReleaseQueue(queuedSource,{

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {planReadyOnlyCandidate,validateReadyOnlyCandidate,CANDIDATE_KIND,
- CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH,REVIEWED_WORKFLOW_TEST,discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests} from '../scripts/release/ready-only-candidate.mjs';
+ CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH,REVIEWED_WORKFLOW_TEST,discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,assertCandidateRelativeImports} from '../scripts/release/ready-only-candidate.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40),D='d'.repeat(40);
 const one={id:'DIC-Q-100',issue:100,title:'READY card',state:'READY',
  owner_source:'https://github.com/example/repo/issues/100',merged_source_sha:D,
@@ -365,4 +365,20 @@ test('#2169 unready newly introduced tests are omitted only with fully restored 
   sourceObjectAt:(ref,path)=>ref===D&&path===p?'100644:selected':obj(ref,path)}),[]);
  assert.deepEqual(discoverExcludedUnreadyTests({...opts,
   sourceObjectAt:(ref,path)=>ref===A&&path===p?'100644:published':obj(ref,path)}),[]);
+});
+
+test('#2169 candidate checks static relative module existence before expensive build',()=>{
+ const sources={'site/main.js':"import {push} from './push.js';\nexport {view} from './view.js';\n",
+  'site/push.js':'export const push=1;','site/view.js':'export const view=1;'};
+ const args={readSource:path=>sources[path],hasPath:path=>Object.hasOwn(sources,path)};
+ assert.equal(assertCandidateRelativeImports(['site/main.js'],args),true);
+ delete sources['site/view.js'];
+ assert.throws(()=>assertCandidateRelativeImports(['site/main.js'],args),/Unresolved static relative module import/);
+ assert.throws(()=>assertCandidateRelativeImports(['site/main.js'],{...args,readSource:()=>42}),/Cannot read candidate module/);
+ assert.throws(()=>assertCandidateRelativeImports(['site/main.js'],{...args,readSource:()=> "import '../escape.js';"}),/Unresolved static relative module import|Unsafe relative module path/);
+});
+test('#2169 recorded candidate risk cannot differ from its selected app diff',()=>{
+ const risk={tier:'high',checks:['approval'],builds:2,not_applicable:[]};
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...validate,
+  manifest:{...manifest,risk_classification:risk}}),/candidate risk-tier/);
 });

@@ -158,3 +158,26 @@ test('#2169 real disposable Git staged candidate removes only newly introduced r
   assert.equal(f.git('rev-parse','development/backend-foundation'),f.development);
  }finally{rmSync(f.root,{recursive:true,force:true});}
 });
+
+test('#2169 real staging denies missing static relative import before creating candidate ref',()=>{
+ const f=fixture();
+ try{
+  f.write('site/card.js',"import './missing-dependency.js';\nexport const ready=1;\n");
+  f.git('add','-A');f.git('commit','-qm','Approved source with missing import [skip netlify]');
+  f.queue.items[0].merged_source_sha=f.git('rev-parse','HEAD');
+  f.write('docs/RELEASE_QUEUE.json',JSON.stringify(f.queue,null,2)+'\n');
+  f.git('add','-A');f.git('commit','-qm','Queue cites exact READY source [skip netlify]');
+  f.development=f.git('rev-parse','HEAD');
+  assert.throws(()=>stage(f,'import-missing-denied'),/Unresolved static relative module import/);
+  assert.throws(()=>f.git('rev-parse','release-candidates/import-missing-denied'));
+ }finally{rmSync(f.root,{recursive:true,force:true});}
+});
+test('#2169 staged risk record has one build and exactly five required statuses for app',()=>{
+ const f=fixture();
+ try{
+  const staged=stage(f,'risk-real-source');
+  assert.equal(staged.manifest.risk_classification.builds,1);
+  assert.deepEqual(staged.manifest.risk_classification.checks,
+   ['approval','validate','cloud-tests','mobile-browser-qa','sql']);
+ }finally{rmSync(f.root,{recursive:true,force:true});}
+});

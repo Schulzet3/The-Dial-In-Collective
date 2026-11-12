@@ -8,7 +8,8 @@ import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 import {CANDIDATE_KIND,CANDIDATE_JOURNAL_PATH,CANDIDATE_RECEIPT_PATH,
  planReadyOnlyCandidate,validateReadyOnlyCandidate,workflowChangedPaths,
- discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests} from './ready-only-candidate.mjs';
+ discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,assertCandidateRelativeImports} from './ready-only-candidate.mjs';
+import {classifyReleaseRisk} from './release-reliability.mjs';
 const SHA=/^[a-f0-9]{40}$/;
 const BRANCH=/^release-candidates\/[a-z0-9][a-z0-9-]{2,80}$/;
 const ZERO='0'.repeat(40);
@@ -72,7 +73,8 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    git(['update-index','--force-remove','--',path],{env});
   const manifest={schema_version:1,kind:CANDIDATE_KIND,candidate_branch:branch,
    development_source_sha:developmentSourceSha,published_source_sha:publishedSourceSha,
-   selected_ready_item_ids:plan.selected_ids,restored_to_published_paths:plan.restored_paths,
+   selected_ready_item_ids:plan.selected_ids,risk_classification:classifyReleaseRisk(plan.included_paths),
+   restored_to_published_paths:plan.restored_paths,
    restored_unpublished_workflow_paths:unpublishedWorkflows,
    excluded_unpublished_workflow_test_paths:workflowOnlyTests,
    excluded_unready_test_paths:unpublishedTests,
@@ -106,6 +108,10 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    developmentDriftPaths:[],liveQueue:queue,queueContentMatches:queueRaw===
     git(['show',commit+':docs/RELEASE_QUEUE.json'],{trim:false}),
    sourceObjectAt,isAncestor:ancestor});
+  assertCandidateRelativeImports(plan.included_paths,{
+   readSource:path=>git(['show',commit+':'+path]),
+   hasPath:path=>sourceObjectAt(commit,path)!==null
+  });
   if(createLocalRef)
    git(['update-ref','refs/heads/'+branch,commit,ZERO]);
   return {candidate_sha:commit,branch,manifest,plan};
