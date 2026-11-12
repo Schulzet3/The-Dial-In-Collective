@@ -272,7 +272,8 @@ function validSensitivityMeasurement(s,version){
   s.grindSetting<version.grinderMin||s.grindSetting>version.grinderMax))return false;
  const old=s.snapshot;
  if(old&&finite(old.grinderMin)&&finite(old.grinderMax)&&
-  (old.grinderMax<old.grinderMin||
+  // An imported zero-width espresso calibration cannot establish a timing slope.
+  (old.grinderMax<=old.grinderMin||
    s.grindSetting<old.grinderMin||s.grindSetting>old.grinderMax))return false;
  return true;
 }
