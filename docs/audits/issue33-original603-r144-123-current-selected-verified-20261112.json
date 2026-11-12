@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "round": "R144",
+  "date_utc": "2026-11-12",
+  "state": "ONE_SELECTED_ORIGINAL_VERIFIED_DEVELOPMENT_ONLY",
+  "whole_603_individual_semantic_certification": false,
+  "original": {
+    "number": 123,
+    "name": "The Token Dark Blend",
+    "roaster": "Favor Coffee Company",
+    "url": "https://favor.coffee/products/the-token-dark-blend",
+    "decision": "CURRENT_EXTRACTED_SOURCE_COMPATIBLE",
+    "original_coffees": 603,
+    "original_roasters": 201,
+    "original_captures": 1197,
+    "csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "scorer_oracle_capture_changes": false
+  },
+  "source": {
+    "source_test_pr": 2239,
+    "source_merged_sha": "861bd900f3e444a8fce48053aeb4a6f410319b0b",
+    "source_head_sha": "786323146360321310ee6ebe552bd69d6e50de6c",
+    "source_tree": "860d62185021917d6f151fe57a5fc9f80586937f",
+    "merged_tree_identical_to_reviewed": true,
+    "changed_runtime_parser": false,
+    "source_h1": "The Token Dark Blend",
+    "selected_producer": "Miriam Monteiro de Aguiar: Fazenda Cachoeira",
+    "selected_origin": "Santo Antônio do Amparo, Minas Gerais, Brazil",
+    "selected_notes": [
+      "Hazelnut",
+      "Toffee",
+      "Milk Chocolate",
+      "Praline",
+      "Golden Raisin"
+    ],
+    "varieties": [
+      "Yellow Catucaí",
+      "Catiguá MG2",
+      "Paraíso",
+      "Yellow Catuaí Arara",
+      "Pacamara Topazio"
+    ],
+    "altitude": "1000 masl",
+    "process": "Natural",
+    "roast": "Medium-Dark",
+    "roast_boundary": "Product name includes Dark but selected current prose explicitly describes medium-dark roast; do not infer Dark from the name",
+    "decaffeination_method": "NOT_PUBLISHED"
+  },
+  "official_afterproof": {
+    "run_id": 43201948691,
+    "source_sha": "861bd900f3e444a8fce48053aeb4a6f410319b0b",
+    "status": "SUCCESS",
+    "focused_tests": 13,
+    "focused_failed": 0,
+    "afterproof_passed": true,
+    "afterproof_failures": [],
+    "all_seven_direct_source_facts": true,
+    "raw_html_bytes": 366047,
+    "raw_html_sha256": "5cecd473e0945297fce2a6e74375875c993467f148ef98e19178b55e80d7214b",
+    "artifact_id": 13934704371,
+    "artifact_bytes": 52172,
+    "artifact_sha256": "6dade80f81378ad8299dcd68775efd3cb47de4fb697a96b8297e6ae88082e021",
+    "github_digest_equal_independent_local_sha256": true,
+    "evidence_json_sha256": "c6a1b344065d29148c65708da2699465819cae78d7670b7a4c212776339a8d3d",
+    "strict_afterproof_sha256": "c4150f5cfa1a0e25c0c21aeddc3adce345344eaf34361a649796c52b3d902280",
+    "actual_parser": true,
+    "add_coffee_render": true,
+    "source_review_render": true,
+    "conflicts": [],
+    "seo_fallback_fields": [],
+    "production_provider_writes": 0
+  },
+  "ci": {
+    "pr_head": {
+      "official": 43201310967,
+      "node_lint": 43201311023,
+      "sql": 43201310707,
+      "cloud_mobile": 43201311100,
+      "python": 43201310864,
+      "approval": 43201311206,
+      "archive": 43201310928
+    },
+    "merged": {
+      "official": 43201948691,
+      "node_lint": 43201948699,
+      "cloud_mobile": 43201948568,
+      "python": 43201948446,
+      "approval": 43201948427
+    },
+    "node_total": 4193,
+    "node_pass": 4187,
+    "node_fail": 0,
+    "node_intentional_skip": 6,
+    "lint": "PASS",
+    "original_frozen603": "SKIPPED_NOT_CERTIFIED",
+    "broad_source_probe": "SKIPPED_NOT_CERTIFIED",
+    "genuine_signed_in_gotrue_and_devices": "NOT_PERFORMED"
+  },
+  "faults_and_corrections": [
+    {
+      "source_head": "0879b3de306e2bcdcc65a09baf1726a5fd740f49",
+      "finding": "Two unintentionally double-escaped checker regular expressions",
+      "correction": "Narrow same-commit checker regex and scoped journal change; no runtime parser change",
+      "corrected_head": "786323146360321310ee6ebe552bd69d6e50de6c"
+    }
+  ],
+  "limits": {
+    "parent_issue_open": true,
+    "other_603_coffees_not_declared_certified": true,
+    "original115_current_url_404_draft_unchanged": true,
+    "issue267_v2_unchanged": true,
+    "issue96_auth_unchanged": true,
+    "release_queue_new_ready_item": false,
+    "existing_queue_states_unchanged": true,
+    "production_deployment": false,
+    "netlify_publication": false
+  },
+  "next_action": "Choose separate unresolved original603 selected exact official product; fresh guarded live source/current parser and adversarial tests, check #115 later only on same-lot current official availability; keep Issue #33 open."
+}
