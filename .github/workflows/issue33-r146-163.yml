@@ -1,0 +1,49 @@
+name: DIC Issue33 R146 original163 selected Ironclad EA decaf
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r146-163.yml
+      - scripts/audit/issue33-r146-163-check.mjs
+      - tests/coffee-issue33-r146-163.test.mjs
+      - docs/workstreams/ops-issue33-r146-163-20261112.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r146-163.yml
+      - scripts/audit/issue33-r146-163-check.mjs
+      - tests/coffee-issue33-r146-163.test.mjs
+permissions:
+  contents: read
+jobs:
+  exact-selected:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Direct selected product and adversarial cases
+        run: node --test tests/coffee-issue33-r146-163.test.mjs
+      - name: Bounded guarded exact original source and actual extractor
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '163'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r146
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Raw source identity and real parser strict afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_R146_VERIFY: '1'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r146
+        run: node scripts/audit/issue33-r146-163-check.mjs
+      - name: Preserve raw HTML and source checks even on failure
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r146-original163
+          path: /tmp/dic33-r146/
+          retention-days: 2
+          if-no-files-found: warn
