@@ -103,3 +103,16 @@ test('#163 opposing own Swiss Water decaf evidence must leave conflict blank',()
  const p=parsed163(direct163+' This coffee is decaffeinated using Swiss Water Process.');
  assert.equal(p.fields.decaffeination_method,undefined,JSON.stringify(p.fields));
 });
+
+
+test('#163 directly named selected EA with following THIS COFFEE conflicting Swiss Water is review-only',()=>{
+ const p=parsed163(direct163+' This coffee is decaffeinated using Swiss Water Process.');
+ assert.equal(p.fields.decaffeination_method,undefined);
+ const provenance=(p.source_facts||[]).map(f=>f.value||'').join(' ');
+ assert.match(provenance,/Swiss Water/);
+ assert.match(provenance,/Ethyl Acetate/);
+});
+test('#163 generic competing phrase without exact chosen named antecedent cannot fill decaf',()=>{
+ const p=parsed163('An unrelated old lot was decaffeinated using EA. This coffee is decaffeinated using Swiss Water Process.');
+ assert.equal(p.fields.decaffeination_method,undefined);
+});

@@ -457,6 +457,24 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
     if(decafEvidence.size<4)decafEvidence.add(statement);
     else decafEvidenceOverflow=true;
    }
+  // A conflicting immediately following "This coffee/It is decaffeinated
+  // using [other method]" in the SAME selected paragraph must not vanish.
+  // Require the preceding exact named-current witness; then preserve both
+  // named methods for the existing incompatible-method fail-closed gate.
+  if(decafOnlyCoffee(name)&&b.tag==='p'&&!b.educational&&line.length<=1200&&
+     !NONCURRENT_DECAF_METHOD.test(line)){
+   const sentences=line.split(/(?<=[.!?])\s+/u).slice(0,8);
+   const namedIndex=sentences.findIndex(sentence=>currentNamedDecafMethod(name,sentence));
+   if(namedIndex>=0)for(const sentence of sentences.slice(namedIndex+1)){
+    const statement=sentence.trim();
+    if(statement.length>270||
+       !/^(?:this coffee|it)\s+(?:is|has been)\s+decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?(?:swiss[ -]?water|mountain[ -]?water|sugar(?:[ -]?cane|[ -]?process)|ethyl[ -]?acetate|(?:supercritical\s+)?carbon[ -]?dioxide|co\s*[- ]?2)\b/iu.test(statement)||
+       !inferDecaffeinationMethod({name,selectedMethod:statement})||
+       decafEvidence.has(statement))continue;
+    if(decafEvidence.size<4)decafEvidence.add(statement);
+    else decafEvidenceOverflow=true;
+   }
+  }
   // A decaf identity plus a current selected-product sentence is required.
   // Reuse the conservative method classifier; if multiple incompatible
   // methods are printed, the caller withholds autofill and keeps both sources.
