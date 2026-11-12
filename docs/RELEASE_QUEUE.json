@@ -13130,6 +13130,30 @@
       "blockers": [],
       "notes": "Separate newer #2258 expansion; retain all source and migrations on development, no staging or deployment until actual provider credentials/sender readiness and scoped Auth/privacy/SQL tests are verified. The previously READY in-app banner uses its prior exactly approved source blobs, isolated in the frozen #2169 candidate; later overlapping dev files are intentionally excluded. Never publish this row as part of the older READY-only batch. #2280 exact source/CI and auth-gateway fix merged, no provider mutation; source verified but approval email and closed-app push NOT production READY. No auto-stage or release.\n2026-11-12 configuration/release-ready classification: Owner confirmed existing Resend account sends/receives support and Auth verification email; sending key restricted to verified auth.dialincollective.com created separately, both RESEND_API_KEY and DIC_APPROVAL_FROM_EMAIL (notifications@auth.dialincollective.com) saved under Supabase Edge secrets. Original Supabase Integration key remains intact. Owner confirmation is NOT independent secret-value/runtime readback and real approval-email inbox/opted-in Web Push/APNs receipts are NOT CLAIMED. New Edge function/migration/Netlify cron are not live before owner Publish; deploy/postflight acceptance must verify exact sender scope, runtime config, consent/device, provider delivery, status and backup/recovery. Fail closed if new runtime secrets invalid; no synthetic member or unauthorized production write. READY means tested merged SOURCE ONLY, not DEPLOYED or proof of email/device delivery.\nNovember 12 owner-authorized DIC-20261112-READY1MEMBER-36 postflight: frozen source 02361218d2f354075e928396a6ba3fc0295b3b19 official exact-source approval 43274838038, Node/build 43274837904, cloud/mobile 43274837883, SQL 43274837967 SUCCESS; all 11 selected runtime/config/SQL Git blobs match production 2c02dbb267ca8fb1e56ddd0433c96c1bb4eca9d5. One-use main request 16f3067cd50b55fa36919ee853f03672a329d45d; controller push 43277216541 SUCCESS, completed-event witness 43277289874 SUCCESS (full validation NOT_APPLICABLE/skipped). Netlify 6af6015e3af2417badac2bd1 READY/current, commit_ref exact, published 2026-11-12T18:12:03.052Z, four functions including 5-minute member poll; 3,910 scanned files zero secret matches. Supabase provider migration 20261112180144 and dic-member-approval-broker ACTIVE v1. Fresh encrypted owner-private backup 13961938483 / Drive 1BsHUnM5JQwrRRJPpOJ6fuxSX30KIBeFs previously verified; real email inbox and opted-in handset Web Push delivery UNVERIFIED. No duplicate build, second release or synthetic member data.",
       "production_deployed": true
+    },
+    {
+      "id": "DIC-Q-33-r156-unpublished-roast-flavor-guard",
+      "issue": 33,
+      "pr": 2329,
+      "title": "Withhold explicit unreported per-roast flavor placeholders",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-roast-variants.mjs"
+      ],
+      "owner_source": "Locked October 27 EXTRACTOR-SELECTED-ROAST-PRINTED-NOTES-PRIORITY-20261027 and October 28 selected product description-first",
+      "tests": [
+        "R156 first original #182 selected synthetic 43297803681 FAILED 11/12: real parser helper accepted 'flavor profile not published' as taste; source URL fetch SKIPPED due failed test.",
+        "R156 first generic fix 43298135181 FAILED on bare 'notes not yet available'; test correction explicitly retained.",
+        "R156 selected current official 43298294530: 14/14 synthetics PASS, raw current page fetched 1201394 bytes SHA256 2deae61e364e0fae29a4831c7fc268f693409102c5815c06f5c61bdbbad732e8; selected H1/two printed lists + real parser name/roaster/origin; strictly FAILED only unavailable active purchase-option verification because page SOLD OUT. Separate #2328 draft remains unmerged, not a global 603 pass.",
+        "Generic standalone PR2329 four test groups / nine no-data placeholders and complete medium/medium-dark positive profiles; exact-head Node/lint/cloud/mobile/SQL/governance CI PENDING."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Do not promote READY until all applicable PR2329 exact-source CI SUCCESS, safe nonforce merge, reviewed code/test blob parity and exact merged checks; independent source #182 sold-out exception remains separately unverified in draft PR2328."
+      ],
+      "notes": "Single bounded generic runtime guard only. No currently purchasable Kona #182 lot or roast option certified, no full 603 manual certification, no owner-approved release. Original 603/201/1197 corpus/oracle/scorer untouched, no provider/member writes, preserve all existing READY/DEPLOYED items.",
+      "production_deployed": false
     }
   ],
   "history": [
