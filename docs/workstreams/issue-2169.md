@@ -95,3 +95,9 @@ DIC_PREFLIGHT_VERIFIED development_sha=e5bbaebc3a3c82ddeed2dabda9bc059bd0caa383 
 
 - Follow-up fixture fix before PR testing: corrected literal-backslash-n strings in new isolated test to real JavaScript newline escapes. No app/CI/runtime change or new test suite. Source provenance checked against live development `e5bbaebc3a3c82ddeed2dabda9bc059bd0caa383`. [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=e5bbaebc3a3c82ddeed2dabda9bc059bd0caa383 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+## 2026-11-12 — prevent bare-development preflight false blocker [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=9aa24f3bb693ba4d152663f13ea03645999bdd7f preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+- Owner scope: correct immediate READY-status preflight failure; exact app ref `development/backend-foundation` exists at 9aa24f3bb693ba4d152663f13ea03645999bdd7f; `docs/ai/PREFLIGHT.md` fetched at that SHA with blob 2fb236bbfa6bac48513eeb3bd157b260853af06d. Bare `development` is not an app branch, so the earlier 404 was an incorrect reference, not deleted app code.
+- SAME-COMMIT: replace ambiguous branch shorthand in full paste-ready Project Instructions (maintained at 7997/8,000 chars); add exact-ref contract assertions to the EXISTING approval preflight guard and its EXISTING tests. Does not add jobs/builds, modify Locked behavior, queue, release, credentials, Netlify/Supabase, or owner Project Settings.
+- Acceptance: exact branch named in both preflight entry instruction and branch map; two negative tests fail on either old shorthand; applicable existing PR-head CI SUCCESS, nonforce integration, merged file/SHA parity and scope receipt. Pending CI at authorship; do not mark verified solely from proposal.

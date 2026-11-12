@@ -20,6 +20,8 @@ test('AGENTS and the topic map cannot silently become alternate first documents'
 test('documentation index and Project Instructions fail on route drift',()=>{
  assert.match(change('docs/README.md',s=>s.replace('Mandatory FIRST document','Optional reference')).join(' '),/wrong first document/);
  assert.match(change('docs/CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md',s=>s.replace('FAIL CLOSED: no GitHub/provider writes','continue from memory')).join(' '),/Project Instructions must/);
+ assert.match(change('docs/CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md',s=>s.replace('FIRST fetch live `development/backend-foundation` SHA','FIRST fetch live development SHA')).join(' '),/Project Instructions must/);
+ assert.match(change('docs/CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md',s=>s.replace('Branches: development/backend-foundation=app','Branches: development=app')).join(' '),/Project Instructions must/);
 });
 test('instructions over 8000 chars or missing live source fail closed',()=>{
  assert.match(change('docs/CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md',s=>s+'X'.repeat(200)).join(' '),/exceed 8000/);
