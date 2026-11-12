@@ -1,0 +1,11 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {selected99Source,chosen99} from '../scripts/audit/issue33-r131-99-check.mjs';
+const desc='<p>Shade-grown Guatemala decaf with bonbon-like caramel, clementine sparkle, crisp green apple notes.</p><p>ROAST: Medium</p><p>Dekáf&#39;d by way of Swiss Water® Process</p><p>Finca Santa Isabel cultivated by Keller family.</p>';
+const page=(body=desc,title=chosen99.name,related='',seo='Stale Other Coffee')=>'<html><head><title>'+seo+'</title></head><body><main><article class="product"><h1>'+title+'</h1><section class="product__description">'+body+'</section></article>'+related+'</main></body></html>';
+test('selected #99 complete direct-source contract',()=>{const s=selected99Source(page());assert.equal(s.correctH1,true);assert.ok(Object.values(s.direct).every(Boolean),JSON.stringify(s.direct));});
+test('changed selected H1 cannot inherit original or SEO identity',()=>assert.equal(selected99Source(page(desc,'Other Seasonal Coffee','','Guatemala Finca Santa Isabel')).correctH1,false));
+test('generic Swiss Water education is not a chosen coffee method',()=>assert.equal(selected99Source(page(desc.replace('Dekáf&#39;d by way of Swiss Water® Process','Swiss Water was pioneered in Switzerland'))).direct.selectedDecaf,false));
+test('nav, aside, footer cannot repair absent chosen notes/method',()=>{const r=selected99Source(page(desc.replace('green apple','unpublished').replace('Dekáf&#39;d by way of Swiss Water® Process','not listed'),chosen99.name,'<nav>'+desc+'</nav><aside>'+desc+'</aside><footer>'+desc+'</footer>'));assert.equal(r.direct.notes,false);assert.equal(r.direct.selectedDecaf,false);});
+test('related product cannot repair missing own roast/farm',()=>{const r=selected99Source(page(desc.replace('ROAST: Medium','roast unpublished').replace('Keller family','family unknown'),chosen99.name,'<aside>'+desc+'</aside>'));assert.equal(r.direct.medium,false);assert.equal(r.direct.farm,false);});
+test('old metadata cannot replace changed current selected product',()=>assert.equal(selected99Source(page(desc,'Current Replacement Coffee','','Guatemala Finca Santa Isabel')).correctH1,false));
