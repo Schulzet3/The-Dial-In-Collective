@@ -23,7 +23,7 @@ export function selected123Source(html) {
  const selected=productMarkup(String(html||''));
  const headings=selectedProductHeadings(selected);
  const visible=norm(removeElements(selected,['script','style','noscript','template','nav','aside','footer','header','select'])
-   .replace(/<!--[\\s\\S]*?-->/gu,' ').replace(/<[^>]{0,2500}>/gu,' '));
+   .replace(/<!--[\s\S]*?-->/gu,' ').replace(/<[^>]{0,2500}>/gu,' '));
  const has=x=>visible.includes(norm(x));
  return {headings,exactH1:headings.length===1&&norm(headings[0])===norm(chosen123.name),
   direct:{
