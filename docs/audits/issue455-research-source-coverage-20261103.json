@@ -2052,11 +2052,13 @@
         "ui": "8f61645e241aa9ddc603417c0ff01304410e8118",
         "test": "8cefb101a3277d9ae4ab1fd79089f142a9afa677"
       },
-      "review_status": "DIRECT_SOURCE_CALL_CHAIN_REPRODUCED; NEGATIVE_POSITIVE_REGRESSION_AUTHORED; CI_PENDING_NOT_PASS",
+      "review_status": "DIRECT_SOURCE_CALL_CHAIN_NEGATIVE_POSITIVE_NODE22_EXACT_PR_AND_MERGE_4381_PASS_BROWSER_SQL_SECURITY_GOVERNANCE_VERIFIED; NOT_ISSUE267_LITERAL_AUDIT",
       "access": "EXACT_IMMUTABLE_GITHUB_SOURCE",
       "provenance": "Live GitHub source R217 follow-up; not a historical user incident or empirical espresso study",
       "scientific_status": "NOT_APPLICABLE_DETERMINISTIC_UI_CORRECTNESS",
-      "status": "SAFE_FIX_SOURCE_CANDIDATE_CI_PENDING"
+      "status": "SAFE_FIX_MERGED_DEV_READY_NOT_PUBLISHED",
+      "implementation_pr": 2340,
+      "merged_source_sha": "70811c9c598d30fb65b562eb701621b90eab58a0"
     }
   ],
   "evidence_checks": [
@@ -6308,17 +6310,31 @@
       "id": "R455-EV-APP-218-A",
       "source": "LIVE-20261112-RESTORED-RATING-TAP-R218",
       "claim": "R217 makes an imported tasteScales:null render five unselected buttons in Edit Shot, but CloudApp.showLog clones null to this.draft and click('rate') then dereferences this.draft.tasteScales[key], throwing on the first tap; the user cannot repair an original missing-rating record. Existing validation still rejects incomplete ratings. A writable draft copy (not the stored original) is needed to permit five explicit selections.",
-      "grade": "DIRECT_SOURCE_CALL_CHAIN_AND_AUTHORED_NEGATIVE_POSITIVE_NODE_TEST; CI_NOT_EXECUTED; NO_REAL_MEMBER_REPRO_OR_ESPRESSO_OUTCOME",
+      "grade": "DIRECT_SOURCE_CALL_CHAIN_AND_FOCUSED_NEGATIVE_POSITIVE_NODE22_EXACT_PR_AND_MERGED_4381_PASS_0_FAIL_6_SKIP_BROWSER_MOBILE_OFFLINE_SQL_SECURITY_GOVERNANCE; NOT_REAL_MEMBER_OR_CUP_QUALITY",
       "source_sha": "8a8e94830e363deed3e8f47145594ba05cbf7cfc",
       "git_blob_shas": [
         "ae7bd5e19a50237533bb5ac0d8ac4d84aef1a4fa",
         "8f61645e241aa9ddc603417c0ff01304410e8118",
         "8cefb101a3277d9ae4ab1fd79089f142a9afa677"
       ],
-      "current_app": "R217 initial display guard renders malformed restored ratings; R218 code candidate creates a separate safe editable ratings map before tap; no auto-ratings, no save until five recorded.",
-      "result": "SAFE_BUG_FIX_AWAITING_EXACT_SOURCE_CI_AND_MERGE",
+      "current_app": "Final R218 safe patch creates a separate writable taste map for imported null/nonobject and shallow copy for valid partial score record before click(rate); no automatic taste selected and original shot/notes/historical data not mutated; strict five-rating validation remains.",
+      "result": "VERIFIED_LOCKED_COMPATIBLE_SOURCE_MERGED_READY_NOT_DEPLOYED",
       "owner_approval": false,
-      "github267_literal_review_credit": 0
+      "github267_literal_review_credit": 0,
+      "implementation_pr": 2340,
+      "merged_sha": "70811c9c598d30fb65b562eb701621b90eab58a0",
+      "pr_head_ci": [
+        43312890660,
+        43312890785,
+        43312890772,
+        43312890720,
+        43312890710
+      ],
+      "merged_ci": [
+        43313609195,
+        43313609316,
+        43313609239
+      ]
     }
   ],
   "policy_decisions_pending": [],
@@ -6477,24 +6493,45 @@
     "R455-216: indexed original Chiu et al 2024 ultrasonic rapid cold brew original Methods 2.11/Results 3.4 + PubMed reviewed, not normal espresso; 116 sources/343 checks/175 proposals if integrated, original PDF/raw/figures and standalone S019 unverified; next exact-head CI/nonforce merge/source readback, then distinct UX issue review. #267 literal credit zero.",
     "R455-217 code/test/journal/ledger/IN_PROGRESS queue single-commit candidate; inspect exact PR-head Node22 + cloud/browser/offline/governance/SQL risk routing, repair if needed; merge non-force only on completed applicable success then read merged blobs/CI, move queue READY only if justified. Original S019 unavailable and #267 literal audit separate.",
     "R455-217 exact code merged 886fc5d6; Node22/Chromium/offline and CI on exact merge PASS, current continuous governance 43304230640 success; queue promoted READY only after docs-only governance and merged readback. Issue #455 remains OPEN; continue non-overlapping source claim and Log Shot UX review next run; do not publish or credit #267 V2.",
-    "R455-218 source bug reproducible: after R217 display-only guard, first rate tap on imported null tasteScales still assigns into null. SAFE writable clone/empty draft proposed with direct negative/positive Node test, current source SHA 8a8e94830e363deed3e8f47145594ba05cbf7cfc, exact immutable preflight blob 2fb236bbfa6bac48513eeb3bd157b260853af06d. Source CI, nonforce merge, merged blob/status reconciliation PENDING; queue TESTING; no deploy or #267 literal-line credit."
+    "R455-218 source bug reproducible: after R217 display-only guard, first rate tap on imported null tasteScales still assigns into null. SAFE writable clone/empty draft proposed with direct negative/positive Node test, current source SHA 8a8e94830e363deed3e8f47145594ba05cbf7cfc, exact immutable preflight blob 2fb236bbfa6bac48513eeb3bd157b260853af06d. Source CI, nonforce merge, merged blob/status reconciliation PENDING; queue TESTING; no deploy or #267 literal-line credit.",
+    "R455-218 source merged 70811c9c598d30fb65b562eb701621b90eab58a0: first null taste-rating tap now writable draft no auto-rating; head+merge Node22 4381 pass/0 fail/6 skip, browser/offline+approval and head SQL/security PASS. DIC-Q-455-r218-restored-rating-tap development READY NOT deployed; future new issue #455 run inspect other disjoint code/research while #267/#33/#96 retain ownership, S019 original inaccessible."
   ],
   "latest_review_checkpoint": {
     "run_id": "R455-218",
-    "source_sha": "8a8e94830e363deed3e8f47145594ba05cbf7cfc",
+    "source_sha": "70811c9c598d30fb65b562eb701621b90eab58a0",
     "starting_preflight_development_sha": "8a8e94830e363deed3e8f47145594ba05cbf7cfc",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "phase": "SAFE_CODE_TEST_SOURCE_CANDIDATE_EXACT_SOURCE_CI_UNRUN",
+    "phase": "SAFE_LOCKED_COMPATIBLE_CODE_TEST_MERGED_EXACT_HEAD_AND_MERGED_CI_READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
     "source_counts": {
       "research_project_source_records": 118,
       "bounded_evidence_checks": 345,
       "proposals": 177
     },
-    "focus": "LEGACY_RESTORED_NULL_RATING_EDIT_FIRST_TAP_CRASH",
-    "original_s019": "INACCESSIBLE_UNREVIEWED_DRIVE_AND_SPACE_SEARCH",
-    "release_state": "NEW_TESTING_NOT_READY_NO_PUBLISH",
+    "focus": "LOG_SHOT_EDIT_RESTORED_NULL_RATING_FIRST_TAP_SAFETY",
+    "original_s019": "INACCESSIBLE_UNREVIEWED_CURRENT_DRIVE_LIBRARY_SPACE_SEARCH",
+    "release_state": "SAFE_QUEUED_READY_NO_PUBLISH",
     "github267_literal_review_credit": 0,
-    "unverified": "GitHub Node22/browser/offline/SQL/security/governance CI and merge not yet run, real member experience and cup quality not measured."
+    "unverified": "Real member occurrence and empirical espresso quality, physical device/browser signed-in production, original standalone S019 source, exhaustive #267 literal review.",
+    "pr": 2340,
+    "merged_sha": "70811c9c598d30fb65b562eb701621b90eab58a0",
+    "ci": {
+      "head": [
+        43312890660,
+        43312890785,
+        43312890772,
+        43312890720,
+        43312890710
+      ],
+      "merge": [
+        43313609195,
+        43313609316,
+        43313609239
+      ],
+      "node_pass": 4381,
+      "node_fail": 0,
+      "node_intentional_skip": 6,
+      "frozen603": "SKIPPED_NOT_PASS"
+    }
   },
   "policy_decisions_resolved": [
     {
@@ -10486,18 +10523,20 @@
       "evidence": [
         "R455-EV-APP-218-A"
       ],
-      "evidence_grade": "DIRECT_CURRENT_SOURCE_REPRO_WITH_FOCUSED_NEGATIVE_POSITIVE_TEST_AUTHORED_NOT_RUN",
+      "evidence_grade": "DETERMINISTIC_SOURCE_REPRO_AND_NODE22_POSITIVE_NEGATIVE_CI_EXACT_HEAD_AND_MERGED; NO_REAL_MEMBER_VALIDATION",
       "current_locked": "Five independent 1–5 tastes must be actively rated; all-green only when all five ideals; no silent defaults; preserve saved shots, notes and private history.",
-      "current_app": "CloudApp.showLog(editing) clones archived shot and R217 ui.scales now renders missing values; click('rate') still assumes tasteScales is writable nonnull.",
+      "current_app": "Merged R218 showLog edit/create copies/restores writable draft taste scales, preserving source values and requiring five explicit choices; first click on historical null works.",
       "proposed_change": "SAFE: clone the existing object or create an EMPTY writable draft for null/nonobject; do not fabricate taste values, change the original shot or relax validator. Existing one-at-a-time rate selection continues.",
       "approval_required_for_behavior_change": false,
       "owner_approval_now_required": false,
-      "implementation": "SOURCE_COMMIT_CANDIDATE_PR_AND_CI_PENDING",
-      "test_plan": "Node22 direct negative/positive tests for null/undefined/primitives/array and partial ratings; require explicit five scores and existing green ideals, preserve original archived notes and values; exact PR-head lint, mobile/Chromium/offline, isolated SQL/privacy, security and approval governance then non-force merged-source CI.",
+      "implementation": "VERIFIED_SAFE_NONFORCE_MERGED_PR2340_READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
+      "test_plan": "Head 43312890660 4381 PASS/0 FAIL/6 SKIP, focused case direct original/draft immutability. Head 43312890785 browser/mobile/offline, SQL 43312890772, security 43312890720 and approval 43312890710 SUCCESS; merged Node 43313609195 4381/0/6, browser 43313609316 and approval 43313609239 SUCCESS. Original603 SKIPPED. Exact six Git blobs matched PR source in nonforce merge. No member or physical cup outcome.",
       "release_queue": "DIC-Q-455-r218-restored-rating-tap",
-      "release_queue_status": "TESTING_NOT_READY_NOT_DEPLOYED",
+      "release_queue_status": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
       "github267_literal_review_credit": 0,
-      "production_deployed": false
+      "production_deployed": false,
+      "source_commit": "70811c9c598d30fb65b562eb701621b90eab58a0",
+      "implementation_pr": 2340
     }
   ],
   "changeScope": {
