@@ -1,0 +1,5858 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 195,
+  "utc": "2026-11-12T14:44:00Z",
+  "project_ref": "azviqqejypsefzilgonr",
+  "postgres_version": "17.11.0.003",
+  "development_parent_sha": "48e95e5b2653121f8e06089f385836dfa4188764",
+  "source_kind": "LIVE_PROVIDER_PG_CATALOG_DEFINITIONS_ONLY",
+  "source_pagination": {
+    "first": 31,
+    "last": 75,
+    "total": 142,
+    "method": "pg_class order by relname,oid; pg_type reltype",
+    "next": "pg_catalog.pg_stat_all_indexes ordinal 76/142"
+  },
+  "summary": {
+    "complete_rowtypes": 45,
+    "complete_attributes": 375,
+    "complete_constraints": 38,
+    "complete_index_ddl": 43,
+    "complete_view_sources": 20,
+    "view_sql_characters": 14543,
+    "reciprocal_type_array_links": 45,
+    "internal_type_dependencies": 20,
+    "new_confirmed_defects": 0,
+    "justified_deletions": 0,
+    "app_source_fixes": 0,
+    "provider_writes": 0
+  },
+  "security_boundary_probes": {
+    "pg_has_role_pg_read_all_stats_all_three_app_roles": false,
+    "anon_pg_shadow_select": false,
+    "authenticated_pg_shadow_select": false,
+    "anon_pg_largeobject_select": false,
+    "anon_pg_replication_origin_status_select": false,
+    "foreign_tables_pg_catalog": 0,
+    "materialized_views_pg_catalog": 0,
+    "authored_provider_information_not_API_transport_exposure": true
+  },
+  "unverified": [
+    "hosted GoTrue/PostgREST exposed-schema settings",
+    "native compiled Vault internals",
+    "disk headroom",
+    "real Apple-device push delivery"
+  ],
+  "objects": [
+    {
+      "md5": "79433b53fd1e29e96c59bf98b68f6a9d",
+      "deps": 1,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": null,
+      "ordinal": 31,
+      "relkind": "v",
+      "relname": "pg_group",
+      "typarray": "12011",
+      "type_oid": "12012",
+      "view_sql": " SELECT rolname AS groname,\n    oid AS grosysid,\n    ARRAY( SELECT pg_auth_members.member\n           FROM pg_auth_members\n          WHERE pg_auth_members.roleid = pg_authid.oid) AS grolist\n   FROM pg_authid\n  WHERE NOT rolcanlogin;",
+      "attributes": [
+        {
+          "num": 1,
+          "name": "groname",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "grosysid",
+          "type": "oid",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "grolist",
+          "type": "oid[]",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": null,
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Legacy compatibility nonlogin-role group membership mapping; catalog metadata, no passwords; client SQL SELECT alone not API exposure.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": true,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "d3c8239ed9999dd96be798d6463bbc20",
+      "deps": 1,
+      "perms": {
+        "anon": false,
+        "auth": false,
+        "service": false
+      },
+      "indexes": null,
+      "ordinal": 32,
+      "relkind": "v",
+      "relname": "pg_hba_file_rules",
+      "typarray": "12115",
+      "type_oid": "12116",
+      "view_sql": " SELECT rule_number,\n    file_name,\n    line_number,\n    type,\n    database,\n    user_name,\n    address,\n    netmask,\n    auth_method,\n    options,\n    error\n   FROM pg_hba_file_rules() a(rule_number, file_name, line_number, type, database, user_name, address, netmask, auth_method, options, error);",
+      "attributes": [
+        {
+          "num": 1,
+          "name": "rule_number",
+          "type": "integer",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "file_name",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "line_number",
+          "type": "integer",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "type",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "database",
+          "type": "text[]",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 6,
+          "name": "user_name",
+          "type": "text[]",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 7,
+          "name": "address",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 8,
+          "name": "netmask",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 9,
+          "name": "auth_method",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 10,
+          "name": "options",
+          "type": "text[]",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 11,
+          "name": "error",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": null,
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Authentication-host-file diagnostics; no anon/authenticated/service SQL SELECT. Definition only; never read file/rule contents.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": true,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "1819fe7d7acc2cfb8f54c895718a46db",
+      "deps": 1,
+      "perms": {
+        "anon": false,
+        "auth": false,
+        "service": false
+      },
+      "indexes": null,
+      "ordinal": 33,
+      "relkind": "v",
+      "relname": "pg_ident_file_mappings",
+      "typarray": "12119",
+      "type_oid": "12120",
+      "view_sql": " SELECT map_number,\n    file_name,\n    line_number,\n    map_name,\n    sys_name,\n    pg_username,\n    error\n   FROM pg_ident_file_mappings() a(map_number, file_name, line_number, map_name, sys_name, pg_username, error);",
+      "attributes": [
+        {
+          "num": 1,
+          "name": "map_number",
+          "type": "integer",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "file_name",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "line_number",
+          "type": "integer",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "map_name",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "sys_name",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 6,
+          "name": "pg_username",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 7,
+          "name": "error",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": null,
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "External-to-database user-map file diagnostics; no app-role SELECT; no file rows retrieved.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": true,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "c10fb0da09b5721648e11ec217009df4",
+      "deps": 0,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": [
+        "CREATE INDEX pg_index_indrelid_index ON pg_catalog.pg_index USING btree (indrelid)",
+        "CREATE UNIQUE INDEX pg_index_indexrelid_index ON pg_catalog.pg_index USING btree (indexrelid)"
+      ],
+      "ordinal": 34,
+      "relkind": "r",
+      "relname": "pg_index",
+      "typarray": "10006",
+      "type_oid": "10007",
+      "view_sql": null,
+      "attributes": [
+        {
+          "num": 1,
+          "name": "indexrelid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "indrelid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "indnatts",
+          "type": "smallint",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "indnkeyatts",
+          "type": "smallint",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "indisunique",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 6,
+          "name": "indnullsnotdistinct",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 7,
+          "name": "indisprimary",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 8,
+          "name": "indisexclusion",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 9,
+          "name": "indimmediate",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 10,
+          "name": "indisclustered",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 11,
+          "name": "indisvalid",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 12,
+          "name": "indcheckxmin",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 13,
+          "name": "indisready",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 14,
+          "name": "indislive",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 15,
+          "name": "indisreplident",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 16,
+          "name": "indkey",
+          "type": "int2vector",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 17,
+          "name": "indcollation",
+          "type": "oidvector",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 18,
+          "name": "indclass",
+          "type": "oidvector",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 19,
+          "name": "indoption",
+          "type": "int2vector",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 20,
+          "name": "indexprs",
+          "type": "pg_node_tree",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 21,
+          "name": "indpred",
+          "type": "pg_node_tree",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": [
+        {
+          "name": "pg_index_indexrelid_index",
+          "definition": "PRIMARY KEY (indexrelid)"
+        }
+      ],
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Index-to-relation keys, validity/readiness, expressions and predicates; bootstrap catalog primary and FK navigation indexes are structural, not deletion candidates.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": false,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "f97e7a8784ccf1d68cad8997ea2d193c",
+      "deps": 1,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": null,
+      "ordinal": 35,
+      "relkind": "v",
+      "relname": "pg_indexes",
+      "typarray": "12044",
+      "type_oid": "12045",
+      "view_sql": " SELECT n.nspname AS schemaname,\n    c.relname AS tablename,\n    i.relname AS indexname,\n    t.spcname AS tablespace,\n    pg_get_indexdef(i.oid) AS indexdef\n   FROM pg_index x\n     JOIN pg_class c ON c.oid = x.indrelid\n     JOIN pg_class i ON i.oid = x.indexrelid\n     LEFT JOIN pg_namespace n ON n.oid = c.relnamespace\n     LEFT JOIN pg_tablespace t ON t.oid = i.reltablespace\n  WHERE (c.relkind = ANY (ARRAY['r'::\"char\", 'm'::\"char\", 'p'::\"char\"])) AND (i.relkind = ANY (ARRAY['i'::\"char\", 'I'::\"char\"]));",
+      "attributes": [
+        {
+          "num": 1,
+          "name": "schemaname",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "tablename",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "indexname",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "tablespace",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "indexdef",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": null,
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Convenience view renders index DDL with pg_get_indexdef; metadata only, no execution of returned SQL.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": true,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "12673b7cf3c4fe66eb1886d86e138538",
+      "deps": 0,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": [
+        "CREATE INDEX pg_inherits_parent_index ON pg_catalog.pg_inherits USING btree (inhparent)",
+        "CREATE UNIQUE INDEX pg_inherits_relid_seqno_index ON pg_catalog.pg_inherits USING btree (inhrelid, inhseqno)"
+      ],
+      "ordinal": 36,
+      "relkind": "r",
+      "relname": "pg_inherits",
+      "typarray": "10004",
+      "type_oid": "10005",
+      "view_sql": null,
+      "attributes": [
+        {
+          "num": 1,
+          "name": "inhrelid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "inhparent",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "inhseqno",
+          "type": "integer",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "inhdetachpending",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": [
+        {
+          "name": "pg_inherits_relid_seqno_index",
+          "definition": "PRIMARY KEY (inhrelid, inhseqno)"
+        }
+      ],
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Partition inheritance/detach state; indexes support parent and ordered descendant lookup.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": false,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "1ca282a9c4c0c7fe46d9895a6d97bbe1",
+      "deps": 0,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": [
+        "CREATE UNIQUE INDEX pg_init_privs_o_c_o_index ON pg_catalog.pg_init_privs USING btree (objoid, classoid, objsubid)"
+      ],
+      "ordinal": 37,
+      "relkind": "r",
+      "relname": "pg_init_privs",
+      "typarray": "10089",
+      "type_oid": "10090",
+      "view_sql": null,
+      "attributes": [
+        {
+          "num": 1,
+          "name": "objoid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "classoid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "objsubid",
+          "type": "integer",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "privtype",
+          "type": "\"char\"",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "initprivs",
+          "type": "aclitem[]",
+          "default": null,
+          "notnull": true,
+          "storage": "x",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": [
+        {
+          "name": "pg_init_privs_o_c_o_index",
+          "definition": "PRIMARY KEY (objoid, classoid, objsubid)"
+        }
+      ],
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Initial ACL snapshot for extension objects; stable object/subobject identity key; legitimate catalog metadata.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": false,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "a0ca233ce0793f8c00458354af5a1d67",
+      "deps": 0,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": [
+        "CREATE UNIQUE INDEX pg_language_name_index ON pg_catalog.pg_language USING btree (lanname)",
+        "CREATE UNIQUE INDEX pg_language_oid_index ON pg_catalog.pg_language USING btree (oid)"
+      ],
+      "ordinal": 38,
+      "relkind": "r",
+      "relname": "pg_language",
+      "typarray": "10020",
+      "type_oid": "10021",
+      "view_sql": null,
+      "attributes": [
+        {
+          "num": 1,
+          "name": "oid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "lanname",
+          "type": "name",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "lanowner",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "lanispl",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "lanpltrusted",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 6,
+          "name": "lanplcallfoid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 7,
+          "name": "laninline",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 8,
+          "name": "lanvalidator",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 9,
+          "name": "lanacl",
+          "type": "aclitem[]",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": [
+        {
+          "name": "pg_language_name_index",
+          "definition": "UNIQUE (lanname)"
+        },
+        {
+          "name": "pg_language_oid_index",
+          "definition": "PRIMARY KEY (oid)"
+        }
+      ],
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Procedural language, trustedness, handler/validator and ACL registry; built-in lookup indexes appropriate.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": false,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "b27e06e185d30274d513addf9e635ba3",
+      "deps": 0,
+      "perms": {
+        "anon": false,
+        "auth": false,
+        "service": false
+      },
+      "indexes": [
+        "CREATE UNIQUE INDEX pg_largeobject_loid_pn_index ON pg_catalog.pg_largeobject USING btree (loid, pageno)"
+      ],
+      "ordinal": 39,
+      "relkind": "r",
+      "relname": "pg_largeobject",
+      "typarray": "10024",
+      "type_oid": "10025",
+      "view_sql": null,
+      "attributes": [
+        {
+          "num": 1,
+          "name": "loid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "pageno",
+          "type": "integer",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "data",
+          "type": "bytea",
+          "default": null,
+          "notnull": true,
+          "storage": "x",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": [
+        {
+          "name": "pg_largeobject_loid_pn_index",
+          "definition": "PRIMARY KEY (loid, pageno)"
+        }
+      ],
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Large-object binary payload catalog with composite page key; all app roles denied direct SELECT; no payload read.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": false,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "2b1a618cdaa67692fd710dbb1147f3b6",
+      "deps": 0,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": [
+        "CREATE UNIQUE INDEX pg_largeobject_metadata_oid_index ON pg_catalog.pg_largeobject_metadata USING btree (oid)"
+      ],
+      "ordinal": 40,
+      "relkind": "r",
+      "relname": "pg_largeobject_metadata",
+      "typarray": "10022",
+      "type_oid": "10023",
+      "view_sql": null,
+      "attributes": [
+        {
+          "num": 1,
+          "name": "oid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "lomowner",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "lomacl",
+          "type": "aclitem[]",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": [
+        {
+          "name": "pg_largeobject_metadata_oid_index",
+          "definition": "PRIMARY KEY (oid)"
+        }
+      ],
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Object ownership/ACL registry separate from protected large-object binary pages.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": false,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "35d7177bc612626832daa45f0d981fb6",
+      "deps": 1,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": null,
+      "ordinal": 41,
+      "relkind": "v",
+      "relname": "pg_locks",
+      "typarray": "12074",
+      "type_oid": "12075",
+      "view_sql": " SELECT locktype,\n    database,\n    relation,\n    page,\n    tuple,\n    virtualxid,\n    transactionid,\n    classid,\n    objid,\n    objsubid,\n    virtualtransaction,\n    pid,\n    mode,\n    granted,\n    fastpath,\n    waitstart\n   FROM pg_lock_status() l(locktype, database, relation, page, tuple, virtualxid, transactionid, classid, objid, objsubid, virtualtransaction, pid, mode, granted, fastpath, waitstart);",
+      "attributes": [
+        {
+          "num": 1,
+          "name": "locktype",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "database",
+          "type": "oid",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "relation",
+          "type": "oid",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "page",
+          "type": "integer",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "tuple",
+          "type": "smallint",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 6,
+          "name": "virtualxid",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 7,
+          "name": "transactionid",
+          "type": "xid",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 8,
+          "name": "classid",
+          "type": "oid",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 9,
+          "name": "objid",
+          "type": "oid",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 10,
+          "name": "objsubid",
+          "type": "smallint",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 11,
+          "name": "virtualtransaction",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 12,
+          "name": "pid",
+          "type": "integer",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 13,
+          "name": "mode",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 14,
+          "name": "granted",
+          "type": "boolean",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 15,
+          "name": "fastpath",
+          "type": "boolean",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 16,
+          "name": "waitstart",
+          "type": "timestamp with time zone",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": null,
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Live lock-status view from pg_lock_status; lock metadata, no query text or member rows; public catalog SQL grant does not prove API exposure.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": true,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "0878414163413f30c87ba6cb54188b53",
+      "deps": 1,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": null,
+      "ordinal": 42,
+      "relkind": "v",
+      "relname": "pg_matviews",
+      "typarray": "12039",
+      "type_oid": "12040",
+      "view_sql": " SELECT n.nspname AS schemaname,\n    c.relname AS matviewname,\n    pg_get_userbyid(c.relowner) AS matviewowner,\n    t.spcname AS tablespace,\n    c.relhasindex AS hasindexes,\n    c.relispopulated AS ispopulated,\n    pg_get_viewdef(c.oid) AS definition\n   FROM pg_class c\n     LEFT JOIN pg_namespace n ON n.oid = c.relnamespace\n     LEFT JOIN pg_tablespace t ON t.oid = c.reltablespace\n  WHERE c.relkind = 'm'::\"char\";",
+      "attributes": [
+        {
+          "num": 1,
+          "name": "schemaname",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "matviewname",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "matviewowner",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "tablespace",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "hasindexes",
+          "type": "boolean",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 6,
+          "name": "ispopulated",
+          "type": "boolean",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 7,
+          "name": "definition",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": null,
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Materialized-view metadata/definitions via pg_get_viewdef; no pg_catalog materialized table relations found.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": true,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "727bc99b955284bde6a0b968906640df",
+      "deps": 0,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": [
+        "CREATE UNIQUE INDEX pg_namespace_nspname_index ON pg_catalog.pg_namespace USING btree (nspname)",
+        "CREATE UNIQUE INDEX pg_namespace_oid_index ON pg_catalog.pg_namespace USING btree (oid)"
+      ],
+      "ordinal": 43,
+      "relkind": "r",
+      "relname": "pg_namespace",
+      "typarray": "10046",
+      "type_oid": "10047",
+      "view_sql": null,
+      "attributes": [
+        {
+          "num": 1,
+          "name": "oid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "nspname",
+          "type": "name",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "nspowner",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "nspacl",
+          "type": "aclitem[]",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": [
+        {
+          "name": "pg_namespace_nspname_index",
+          "definition": "UNIQUE (nspname)"
+        },
+        {
+          "name": "pg_namespace_oid_index",
+          "definition": "PRIMARY KEY (oid)"
+        }
+      ],
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Schema namespaces, ownership and ACLs; unique name/OID access paths essential.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": false,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "974952c45ca8c4c1ca090710847baf54",
+      "deps": 0,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": [
+        "CREATE UNIQUE INDEX pg_opclass_am_name_nsp_index ON pg_catalog.pg_opclass USING btree (opcmethod, opcname, opcnamespace)",
+        "CREATE UNIQUE INDEX pg_opclass_oid_index ON pg_catalog.pg_opclass USING btree (oid)"
+      ],
+      "ordinal": 44,
+      "relkind": "r",
+      "relname": "pg_opclass",
+      "typarray": "10012",
+      "type_oid": "10013",
+      "view_sql": null,
+      "attributes": [
+        {
+          "num": 1,
+          "name": "oid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "opcmethod",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "opcname",
+          "type": "name",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "opcnamespace",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "opcowner",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 6,
+          "name": "opcfamily",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 7,
+          "name": "opcintype",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 8,
+          "name": "opcdefault",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 9,
+          "name": "opckeytype",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": [
+        {
+          "name": "pg_opclass_am_name_nsp_index",
+          "definition": "UNIQUE (opcmethod, opcname, opcnamespace)"
+        },
+        {
+          "name": "pg_opclass_oid_index",
+          "definition": "PRIMARY KEY (oid)"
+        }
+      ],
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Index operator-class association and default key datatype; operator namespace/method unique index mandatory.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": false,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "813b4d12dcae7639f45f0e50b767b1a8",
+      "deps": 0,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": [
+        "CREATE UNIQUE INDEX pg_operator_oid_index ON pg_catalog.pg_operator USING btree (oid)",
+        "CREATE UNIQUE INDEX pg_operator_oprname_l_r_n_index ON pg_catalog.pg_operator USING btree (oprname, oprleft, oprright, oprnamespace)"
+      ],
+      "ordinal": 45,
+      "relkind": "r",
+      "relname": "pg_operator",
+      "typarray": "10008",
+      "type_oid": "10009",
+      "view_sql": null,
+      "attributes": [
+        {
+          "num": 1,
+          "name": "oid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "oprname",
+          "type": "name",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "oprnamespace",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "oprowner",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "oprkind",
+          "type": "\"char\"",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 6,
+          "name": "oprcanmerge",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 7,
+          "name": "oprcanhash",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 8,
+          "name": "oprleft",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 9,
+          "name": "oprright",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 10,
+          "name": "oprresult",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 11,
+          "name": "oprcom",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 12,
+          "name": "oprnegate",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 13,
+          "name": "oprcode",
+          "type": "regproc",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 14,
+          "name": "oprrest",
+          "type": "regproc",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 15,
+          "name": "oprjoin",
+          "type": "regproc",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": [
+        {
+          "name": "pg_operator_oid_index",
+          "definition": "PRIMARY KEY (oid)"
+        },
+        {
+          "name": "pg_operator_oprname_l_r_n_index",
+          "definition": "UNIQUE (oprname, oprleft, oprright, oprnamespace)"
+        }
+      ],
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Typed operator implementation and planner selectivity signatures; OID/name-argument uniqueness necessary.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": false,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "bd0dd28076e41f9fe24bfb118f379e01",
+      "deps": 0,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": [
+        "CREATE UNIQUE INDEX pg_opfamily_am_name_nsp_index ON pg_catalog.pg_opfamily USING btree (opfmethod, opfname, opfnamespace)",
+        "CREATE UNIQUE INDEX pg_opfamily_oid_index ON pg_catalog.pg_opfamily USING btree (oid)"
+      ],
+      "ordinal": 46,
+      "relkind": "r",
+      "relname": "pg_opfamily",
+      "typarray": "10010",
+      "type_oid": "10011",
+      "view_sql": null,
+      "attributes": [
+        {
+          "num": 1,
+          "name": "oid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "opfmethod",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "opfname",
+          "type": "name",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "opfnamespace",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "opfowner",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": [
+        {
+          "name": "pg_opfamily_am_name_nsp_index",
+          "definition": "UNIQUE (opfmethod, opfname, opfnamespace)"
+        },
+        {
+          "name": "pg_opfamily_oid_index",
+          "definition": "PRIMARY KEY (oid)"
+        }
+      ],
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Access-method operator-family identity and owner; unique method/name/namespace and OID keys required.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": false,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "38c097123fd66b3ed5f11f81ba9c50ac",
+      "deps": 0,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": [
+        "CREATE UNIQUE INDEX pg_parameter_acl_parname_index ON pg_catalog.pg_parameter_acl USING btree (parname)",
+        "CREATE UNIQUE INDEX pg_parameter_acl_oid_index ON pg_catalog.pg_parameter_acl USING btree (oid)"
+      ],
+      "ordinal": 47,
+      "relkind": "r",
+      "relname": "pg_parameter_acl",
+      "typarray": "10096",
+      "type_oid": "10097",
+      "view_sql": null,
+      "attributes": [
+        {
+          "num": 1,
+          "name": "oid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "parname",
+          "type": "text",
+          "default": null,
+          "notnull": true,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "paracl",
+          "type": "aclitem[]",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": [
+        {
+          "name": "pg_parameter_acl_oid_index",
+          "definition": "PRIMARY KEY (oid)"
+        },
+        {
+          "name": "pg_parameter_acl_parname_index",
+          "definition": "UNIQUE (parname)"
+        }
+      ],
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Database GUC parameter-specific privilege registry; OID and name uniqueness expected.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": false,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "53023d7d9bf792d4b239a2248fd7cc5c",
+      "deps": 0,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": [
+        "CREATE UNIQUE INDEX pg_partitioned_table_partrelid_index ON pg_catalog.pg_partitioned_table USING btree (partrelid)"
+      ],
+      "ordinal": 48,
+      "relkind": "r",
+      "relname": "pg_partitioned_table",
+      "typarray": "10098",
+      "type_oid": "10099",
+      "view_sql": null,
+      "attributes": [
+        {
+          "num": 1,
+          "name": "partrelid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "partstrat",
+          "type": "\"char\"",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "partnatts",
+          "type": "smallint",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "partdefid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "partattrs",
+          "type": "int2vector",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 6,
+          "name": "partclass",
+          "type": "oidvector",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 7,
+          "name": "partcollation",
+          "type": "oidvector",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 8,
+          "name": "partexprs",
+          "type": "pg_node_tree",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": [
+        {
+          "name": "pg_partitioned_table_partrelid_index",
+          "definition": "PRIMARY KEY (partrelid)"
+        }
+      ],
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Partitioning strategy, key attributes/operator classes, expressions; PK by parent relation expected.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": false,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "9b5d95228e07d0c42afa83918587f339",
+      "deps": 1,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": null,
+      "ordinal": 49,
+      "relkind": "v",
+      "relname": "pg_policies",
+      "typarray": "12019",
+      "type_oid": "12020",
+      "view_sql": " SELECT n.nspname AS schemaname,\n    c.relname AS tablename,\n    pol.polname AS policyname,\n        CASE\n            WHEN pol.polpermissive THEN 'PERMISSIVE'::text\n            ELSE 'RESTRICTIVE'::text\n        END AS permissive,\n        CASE\n            WHEN pol.polroles = '{0}'::oid[] THEN string_to_array('public'::text, ''::text)::name[]\n            ELSE ARRAY( SELECT pg_authid.rolname\n               FROM pg_authid\n              WHERE pg_authid.oid = ANY (pol.polroles)\n              ORDER BY pg_authid.rolname)\n        END AS roles,\n        CASE pol.polcmd\n            WHEN 'r'::\"char\" THEN 'SELECT'::text\n            WHEN 'a'::\"char\" THEN 'INSERT'::text\n            WHEN 'w'::\"char\" THEN 'UPDATE'::text\n            WHEN 'd'::\"char\" THEN 'DELETE'::text\n            WHEN '*'::\"char\" THEN 'ALL'::text\n            ELSE NULL::text\n        END AS cmd,\n    pg_get_expr(pol.polqual, pol.polrelid) AS qual,\n    pg_get_expr(pol.polwithcheck, pol.polrelid) AS with_check\n   FROM pg_policy pol\n     JOIN pg_class c ON c.oid = pol.polrelid\n     LEFT JOIN pg_namespace n ON n.oid = c.relnamespace;",
+      "attributes": [
+        {
+          "num": 1,
+          "name": "schemaname",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "tablename",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "policyname",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "permissive",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "roles",
+          "type": "name[]",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 6,
+          "name": "cmd",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 7,
+          "name": "qual",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 8,
+          "name": "with_check",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": null,
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Native RLS policy inspection view expands command, roles, USING and WITH CHECK expressions; definitions only; SQL metadata visibility does not equal exposed API endpoint.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": true,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "9880644ffa622da4a4774c0800e90a6a",
+      "deps": 0,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": [
+        "CREATE UNIQUE INDEX pg_policy_oid_index ON pg_catalog.pg_policy USING btree (oid)",
+        "CREATE UNIQUE INDEX pg_policy_polrelid_polname_index ON pg_catalog.pg_policy USING btree (polrelid, polname)"
+      ],
+      "ordinal": 50,
+      "relkind": "r",
+      "relname": "pg_policy",
+      "typarray": "10083",
+      "type_oid": "10084",
+      "view_sql": null,
+      "attributes": [
+        {
+          "num": 1,
+          "name": "oid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "polname",
+          "type": "name",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "polrelid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "polcmd",
+          "type": "\"char\"",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "polpermissive",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 6,
+          "name": "polroles",
+          "type": "oid[]",
+          "default": null,
+          "notnull": true,
+          "storage": "x",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 7,
+          "name": "polqual",
+          "type": "pg_node_tree",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 8,
+          "name": "polwithcheck",
+          "type": "pg_node_tree",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": [
+        {
+          "name": "pg_policy_oid_index",
+          "definition": "PRIMARY KEY (oid)"
+        },
+        {
+          "name": "pg_policy_polrelid_polname_index",
+          "definition": "UNIQUE (polrelid, polname)"
+        }
+      ],
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Stored RLS policy AST, role list and permissive/command flags; per-relation policy-name uniqueness supports policy identity.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": false,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "17ebbea960e081a6f6649ea0c20028e1",
+      "deps": 1,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": null,
+      "ordinal": 51,
+      "relkind": "v",
+      "relname": "pg_prepared_statements",
+      "typarray": "12096",
+      "type_oid": "12097",
+      "view_sql": " SELECT name,\n    statement,\n    prepare_time,\n    parameter_types,\n    result_types,\n    from_sql,\n    generic_plans,\n    custom_plans\n   FROM pg_prepared_statement() p(name, statement, prepare_time, parameter_types, result_types, from_sql, generic_plans, custom_plans);",
+      "attributes": [
+        {
+          "num": 1,
+          "name": "name",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "statement",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "prepare_time",
+          "type": "timestamp with time zone",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "parameter_types",
+          "type": "regtype[]",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "result_types",
+          "type": "regtype[]",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 6,
+          "name": "from_sql",
+          "type": "boolean",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 7,
+          "name": "generic_plans",
+          "type": "bigint",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 8,
+          "name": "custom_plans",
+          "type": "bigint",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": null,
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Session-local prepared statement source and plan counters; view uses built-in session-bound function; no statement rows fetched.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": true,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "99b1ad9a6539aa9752e32c19aae429e6",
+      "deps": 1,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": null,
+      "ordinal": 52,
+      "relkind": "v",
+      "relname": "pg_prepared_xacts",
+      "typarray": "12091",
+      "type_oid": "12092",
+      "view_sql": " SELECT p.transaction,\n    p.gid,\n    p.prepared,\n    u.rolname AS owner,\n    d.datname AS database\n   FROM pg_prepared_xact() p(transaction, gid, prepared, ownerid, dbid)\n     LEFT JOIN pg_authid u ON p.ownerid = u.oid\n     LEFT JOIN pg_database d ON p.dbid = d.oid;",
+      "attributes": [
+        {
+          "num": 1,
+          "name": "transaction",
+          "type": "xid",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "gid",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "prepared",
+          "type": "timestamp with time zone",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "owner",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "database",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": null,
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Prepared two-phase transaction metadata view; role/database names only, no member payload.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": true,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "d7126d0570cec281839509e875e61f44",
+      "deps": 0,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": [
+        "CREATE UNIQUE INDEX pg_proc_oid_index ON pg_catalog.pg_proc USING btree (oid)",
+        "CREATE UNIQUE INDEX pg_proc_proname_args_nsp_index ON pg_catalog.pg_proc USING btree (proname, proargtypes, pronamespace)"
+      ],
+      "ordinal": 53,
+      "relkind": "r",
+      "relname": "pg_proc",
+      "typarray": "272",
+      "type_oid": "81",
+      "view_sql": null,
+      "attributes": [
+        {
+          "num": 1,
+          "name": "oid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "proname",
+          "type": "name",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "pronamespace",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "proowner",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "prolang",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 6,
+          "name": "procost",
+          "type": "real",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 7,
+          "name": "prorows",
+          "type": "real",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 8,
+          "name": "provariadic",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 9,
+          "name": "prosupport",
+          "type": "regproc",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 10,
+          "name": "prokind",
+          "type": "\"char\"",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 11,
+          "name": "prosecdef",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 12,
+          "name": "proleakproof",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 13,
+          "name": "proisstrict",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 14,
+          "name": "proretset",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 15,
+          "name": "provolatile",
+          "type": "\"char\"",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 16,
+          "name": "proparallel",
+          "type": "\"char\"",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 17,
+          "name": "pronargs",
+          "type": "smallint",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 18,
+          "name": "pronargdefaults",
+          "type": "smallint",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 19,
+          "name": "prorettype",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 20,
+          "name": "proargtypes",
+          "type": "oidvector",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 21,
+          "name": "proallargtypes",
+          "type": "oid[]",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 22,
+          "name": "proargmodes",
+          "type": "\"char\"[]",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 23,
+          "name": "proargnames",
+          "type": "text[]",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 24,
+          "name": "proargdefaults",
+          "type": "pg_node_tree",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 25,
+          "name": "protrftypes",
+          "type": "oid[]",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 26,
+          "name": "prosrc",
+          "type": "text",
+          "default": null,
+          "notnull": true,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 27,
+          "name": "probin",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 28,
+          "name": "prosqlbody",
+          "type": "pg_node_tree",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 29,
+          "name": "proconfig",
+          "type": "text[]",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 30,
+          "name": "proacl",
+          "type": "aclitem[]",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": [
+        {
+          "name": "pg_proc_oid_index",
+          "definition": "PRIMARY KEY (oid)"
+        },
+        {
+          "name": "pg_proc_proname_args_nsp_index",
+          "definition": "UNIQUE (proname, proargtypes, pronamespace)"
+        }
+      ],
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Native routine metadata includes prosrc and SECURITY DEFINER, volatility, signatures, ACL; catalog SQL grants do not prove external RPC source disclosure.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": false,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "0ce1f325443f0ec2e3a7f41729a235f3",
+      "deps": 0,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": [
+        "CREATE UNIQUE INDEX pg_publication_oid_index ON pg_catalog.pg_publication USING btree (oid)",
+        "CREATE UNIQUE INDEX pg_publication_pubname_index ON pg_catalog.pg_publication USING btree (pubname)"
+      ],
+      "ordinal": 54,
+      "relkind": "r",
+      "relname": "pg_publication",
+      "typarray": "10106",
+      "type_oid": "10107",
+      "view_sql": null,
+      "attributes": [
+        {
+          "num": 1,
+          "name": "oid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "pubname",
+          "type": "name",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "pubowner",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "puballtables",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "pubinsert",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 6,
+          "name": "pubupdate",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 7,
+          "name": "pubdelete",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 8,
+          "name": "pubtruncate",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 9,
+          "name": "pubviaroot",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": [
+        {
+          "name": "pg_publication_oid_index",
+          "definition": "PRIMARY KEY (oid)"
+        },
+        {
+          "name": "pg_publication_pubname_index",
+          "definition": "UNIQUE (pubname)"
+        }
+      ],
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Logical-replication publication flags/ownership; supported core replication catalog, no deletions.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": false,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "3bd501392778c8868296758c48547816",
+      "deps": 0,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": [
+        "CREATE UNIQUE INDEX pg_publication_namespace_oid_index ON pg_catalog.pg_publication_namespace USING btree (oid)",
+        "CREATE UNIQUE INDEX pg_publication_namespace_pnnspid_pnpubid_index ON pg_catalog.pg_publication_namespace USING btree (pnnspid, pnpubid)"
+      ],
+      "ordinal": 55,
+      "relkind": "r",
+      "relname": "pg_publication_namespace",
+      "typarray": "10108",
+      "type_oid": "10109",
+      "view_sql": null,
+      "attributes": [
+        {
+          "num": 1,
+          "name": "oid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "pnpubid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "pnnspid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": [
+        {
+          "name": "pg_publication_namespace_oid_index",
+          "definition": "PRIMARY KEY (oid)"
+        },
+        {
+          "name": "pg_publication_namespace_pnnspid_pnpubid_index",
+          "definition": "UNIQUE (pnnspid, pnpubid)"
+        }
+      ],
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Publication-to-schema mapping unique pair; part of replication membership bookkeeping.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": false,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "0e2c9c11a772946320a176433c63d79a",
+      "deps": 0,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": [
+        "CREATE UNIQUE INDEX pg_publication_rel_oid_index ON pg_catalog.pg_publication_rel USING btree (oid)",
+        "CREATE UNIQUE INDEX pg_publication_rel_prrelid_prpubid_index ON pg_catalog.pg_publication_rel USING btree (prrelid, prpubid)",
+        "CREATE INDEX pg_publication_rel_prpubid_index ON pg_catalog.pg_publication_rel USING btree (prpubid)"
+      ],
+      "ordinal": 56,
+      "relkind": "r",
+      "relname": "pg_publication_rel",
+      "typarray": "10110",
+      "type_oid": "10111",
+      "view_sql": null,
+      "attributes": [
+        {
+          "num": 1,
+          "name": "oid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "prpubid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "prrelid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "prqual",
+          "type": "pg_node_tree",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "prattrs",
+          "type": "int2vector",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": [
+        {
+          "name": "pg_publication_rel_oid_index",
+          "definition": "PRIMARY KEY (oid)"
+        },
+        {
+          "name": "pg_publication_rel_prrelid_prpubid_index",
+          "definition": "UNIQUE (prrelid, prpubid)"
+        }
+      ],
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Publication-to-table mapping with row filters/column restrictions; dedicated publication index supports lookup.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": false,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "7af9ad72314ea4975552333a9b351ac6",
+      "deps": 1,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": null,
+      "ordinal": 57,
+      "relkind": "v",
+      "relname": "pg_publication_tables",
+      "typarray": "12069",
+      "type_oid": "12070",
+      "view_sql": " SELECT p.pubname,\n    n.nspname AS schemaname,\n    c.relname AS tablename,\n    ( SELECT array_agg(a.attname ORDER BY a.attnum) AS array_agg\n           FROM pg_attribute a\n          WHERE a.attrelid = gpt.relid AND (a.attnum = ANY (gpt.attrs::smallint[]))) AS attnames,\n    pg_get_expr(gpt.qual, gpt.relid) AS rowfilter\n   FROM pg_publication p,\n    LATERAL pg_get_publication_tables(VARIADIC ARRAY[p.pubname::text]) gpt(pubid, relid, attrs, qual),\n    pg_class c\n     JOIN pg_namespace n ON n.oid = c.relnamespace\n  WHERE c.oid = gpt.relid;",
+      "attributes": [
+        {
+          "num": 1,
+          "name": "pubname",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "schemaname",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "tablename",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "attnames",
+          "type": "name[]",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "rowfilter",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": null,
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Expanded published relation and column/filter view; expected untrusted metadata; not itself evidence of a replication leak.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": true,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "0cc316a5cb2933c2ca1893fa97499446",
+      "deps": 0,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": [
+        "CREATE UNIQUE INDEX pg_range_rngmultitypid_index ON pg_catalog.pg_range USING btree (rngmultitypid)",
+        "CREATE UNIQUE INDEX pg_range_rngtypid_index ON pg_catalog.pg_range USING btree (rngtypid)"
+      ],
+      "ordinal": 58,
+      "relkind": "r",
+      "relname": "pg_range",
+      "typarray": "10100",
+      "type_oid": "10101",
+      "view_sql": null,
+      "attributes": [
+        {
+          "num": 1,
+          "name": "rngtypid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "rngsubtype",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "rngmultitypid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "rngcollation",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "rngsubopc",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 6,
+          "name": "rngcanonical",
+          "type": "regproc",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 7,
+          "name": "rngsubdiff",
+          "type": "regproc",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": [
+        {
+          "name": "pg_range_rngmultitypid_index",
+          "definition": "UNIQUE (rngmultitypid)"
+        },
+        {
+          "name": "pg_range_rngtypid_index",
+          "definition": "PRIMARY KEY (rngtypid)"
+        }
+      ],
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Range/multirange subtype and operators registry; identifiers and canonical functions expected.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": false,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "c5d9b748675d6c867e7f61d2aad25ec1",
+      "deps": 0,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": [
+        "CREATE UNIQUE INDEX pg_replication_origin_roiident_index ON pg_catalog.pg_replication_origin USING btree (roident)",
+        "CREATE UNIQUE INDEX pg_replication_origin_roname_index ON pg_catalog.pg_replication_origin USING btree (roname)"
+      ],
+      "ordinal": 59,
+      "relkind": "r",
+      "relname": "pg_replication_origin",
+      "typarray": "10085",
+      "type_oid": "10086",
+      "view_sql": null,
+      "attributes": [
+        {
+          "num": 1,
+          "name": "roident",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "roname",
+          "type": "text",
+          "default": null,
+          "notnull": true,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": [
+        {
+          "name": "pg_replication_origin_roiident_index",
+          "definition": "PRIMARY KEY (roident)"
+        },
+        {
+          "name": "pg_replication_origin_roname_index",
+          "definition": "UNIQUE (roname)"
+        }
+      ],
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Logical replication origin identities; uniqueness of origin OID and name appropriate.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": false,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "44c8c5791e8b522933ab5d514adb66f7",
+      "deps": 1,
+      "perms": {
+        "anon": false,
+        "auth": false,
+        "service": false
+      },
+      "indexes": null,
+      "ordinal": 60,
+      "relkind": "v",
+      "relname": "pg_replication_origin_status",
+      "typarray": "12340",
+      "type_oid": "12341",
+      "view_sql": " SELECT local_id,\n    external_id,\n    remote_lsn,\n    local_lsn\n   FROM pg_show_replication_origin_status() pg_show_replication_origin_status(local_id, external_id, remote_lsn, local_lsn);",
+      "attributes": [
+        {
+          "num": 1,
+          "name": "local_id",
+          "type": "oid",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "external_id",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "remote_lsn",
+          "type": "pg_lsn",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "local_lsn",
+          "type": "pg_lsn",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": null,
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Live origin WAL progress function view; all app roles denied SELECT, no origin status rows read.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": true,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "7eb64dce7c2fd4dd9c135d71f17315b7",
+      "deps": 1,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": null,
+      "ordinal": 61,
+      "relkind": "v",
+      "relname": "pg_replication_slots",
+      "typarray": "12258",
+      "type_oid": "12259",
+      "view_sql": " SELECT l.slot_name,\n    l.plugin,\n    l.slot_type,\n    l.datoid,\n    d.datname AS database,\n    l.temporary,\n    l.active,\n    l.active_pid,\n    l.xmin,\n    l.catalog_xmin,\n    l.restart_lsn,\n    l.confirmed_flush_lsn,\n    l.wal_status,\n    l.safe_wal_size,\n    l.two_phase,\n    l.inactive_since,\n    l.conflicting,\n    l.invalidation_reason,\n    l.failover,\n    l.synced\n   FROM pg_get_replication_slots() l(slot_name, plugin, slot_type, datoid, temporary, active, active_pid, xmin, catalog_xmin, restart_lsn, confirmed_flush_lsn, wal_status, safe_wal_size, two_phase, inactive_since, conflicting, invalidation_reason, failover, synced)\n     LEFT JOIN pg_database d ON l.datoid = d.oid;",
+      "attributes": [
+        {
+          "num": 1,
+          "name": "slot_name",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "plugin",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "slot_type",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "datoid",
+          "type": "oid",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "database",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 6,
+          "name": "temporary",
+          "type": "boolean",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 7,
+          "name": "active",
+          "type": "boolean",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 8,
+          "name": "active_pid",
+          "type": "integer",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 9,
+          "name": "xmin",
+          "type": "xid",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 10,
+          "name": "catalog_xmin",
+          "type": "xid",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 11,
+          "name": "restart_lsn",
+          "type": "pg_lsn",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 12,
+          "name": "confirmed_flush_lsn",
+          "type": "pg_lsn",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 13,
+          "name": "wal_status",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 14,
+          "name": "safe_wal_size",
+          "type": "bigint",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 15,
+          "name": "two_phase",
+          "type": "boolean",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 16,
+          "name": "inactive_since",
+          "type": "timestamp with time zone",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 17,
+          "name": "conflicting",
+          "type": "boolean",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 18,
+          "name": "invalidation_reason",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 19,
+          "name": "failover",
+          "type": "boolean",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 20,
+          "name": "synced",
+          "type": "boolean",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": null,
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Slot retention and WAL progress view; operational metadata; SQL grants alone do not imply exposed API transport.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": true,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "b7675ce9783ef59a430d9731939195e9",
+      "deps": 0,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": [
+        "CREATE UNIQUE INDEX pg_rewrite_oid_index ON pg_catalog.pg_rewrite USING btree (oid)",
+        "CREATE UNIQUE INDEX pg_rewrite_rel_rulename_index ON pg_catalog.pg_rewrite USING btree (ev_class, rulename)"
+      ],
+      "ordinal": 62,
+      "relkind": "r",
+      "relname": "pg_rewrite",
+      "typarray": "10034",
+      "type_oid": "10035",
+      "view_sql": null,
+      "attributes": [
+        {
+          "num": 1,
+          "name": "oid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "rulename",
+          "type": "name",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "ev_class",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "ev_type",
+          "type": "\"char\"",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "ev_enabled",
+          "type": "\"char\"",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 6,
+          "name": "is_instead",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 7,
+          "name": "ev_qual",
+          "type": "pg_node_tree",
+          "default": null,
+          "notnull": true,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 8,
+          "name": "ev_action",
+          "type": "pg_node_tree",
+          "default": null,
+          "notnull": true,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": [
+        {
+          "name": "pg_rewrite_oid_index",
+          "definition": "PRIMARY KEY (oid)"
+        },
+        {
+          "name": "pg_rewrite_rel_rulename_index",
+          "definition": "UNIQUE (ev_class, rulename)"
+        }
+      ],
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Rewrite rules AST backing views/rules; per-class rule-name uniqueness expected.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": false,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "bbdb4e4b4fd4a967fe80c551a17542de",
+      "deps": 1,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": null,
+      "ordinal": 63,
+      "relkind": "v",
+      "relname": "pg_roles",
+      "typarray": "12001",
+      "type_oid": "12002",
+      "view_sql": " SELECT pg_authid.rolname,\n    pg_authid.rolsuper,\n    pg_authid.rolinherit,\n    pg_authid.rolcreaterole,\n    pg_authid.rolcreatedb,\n    pg_authid.rolcanlogin,\n    pg_authid.rolreplication,\n    pg_authid.rolconnlimit,\n    '********'::text AS rolpassword,\n    pg_authid.rolvaliduntil,\n    pg_authid.rolbypassrls,\n    s.setconfig AS rolconfig,\n    pg_authid.oid\n   FROM pg_authid\n     LEFT JOIN pg_db_role_setting s ON pg_authid.oid = s.setrole AND s.setdatabase = 0::oid;",
+      "attributes": [
+        {
+          "num": 1,
+          "name": "rolname",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "rolsuper",
+          "type": "boolean",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "rolinherit",
+          "type": "boolean",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "rolcreaterole",
+          "type": "boolean",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "rolcreatedb",
+          "type": "boolean",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 6,
+          "name": "rolcanlogin",
+          "type": "boolean",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 7,
+          "name": "rolreplication",
+          "type": "boolean",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 8,
+          "name": "rolconnlimit",
+          "type": "integer",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 9,
+          "name": "rolpassword",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 10,
+          "name": "rolvaliduntil",
+          "type": "timestamp with time zone",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 11,
+          "name": "rolbypassrls",
+          "type": "boolean",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 12,
+          "name": "rolconfig",
+          "type": "text[]",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 13,
+          "name": "oid",
+          "type": "oid",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": null,
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Role listing intentionally substitutes literal ******** for rolpassword; not a plaintext credential leak.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": true,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "6061c81f96a99421afecd344d0aa4b9a",
+      "deps": 1,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": null,
+      "ordinal": 64,
+      "relkind": "v",
+      "relname": "pg_rules",
+      "typarray": "12024",
+      "type_oid": "12025",
+      "view_sql": " SELECT n.nspname AS schemaname,\n    c.relname AS tablename,\n    r.rulename,\n    pg_get_ruledef(r.oid) AS definition\n   FROM pg_rewrite r\n     JOIN pg_class c ON c.oid = r.ev_class\n     LEFT JOIN pg_namespace n ON n.oid = c.relnamespace\n  WHERE r.rulename <> '_RETURN'::name;",
+      "attributes": [
+        {
+          "num": 1,
+          "name": "schemaname",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "tablename",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "rulename",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "definition",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": null,
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Non-_RETURN user-rewrite rule definitions with pg_get_ruledef; no execution, catalog DDL metadata.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": true,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "d5f148d2f828fb569e8749f0e49fb6ca",
+      "deps": 0,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": [
+        "CREATE UNIQUE INDEX pg_seclabel_object_index ON pg_catalog.pg_seclabel USING btree (objoid, classoid, objsubid, provider)"
+      ],
+      "ordinal": 65,
+      "relkind": "r",
+      "relname": "pg_seclabel",
+      "typarray": "10091",
+      "type_oid": "10092",
+      "view_sql": null,
+      "attributes": [
+        {
+          "num": 1,
+          "name": "objoid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "classoid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "objsubid",
+          "type": "integer",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "provider",
+          "type": "text",
+          "default": null,
+          "notnull": true,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "label",
+          "type": "text",
+          "default": null,
+          "notnull": true,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": [
+        {
+          "name": "pg_seclabel_object_index",
+          "definition": "PRIMARY KEY (objoid, classoid, objsubid, provider)"
+        }
+      ],
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Security labels on object/column keys; provider-specific labels catalog; potential sensitivity evaluated at metadata level only.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": false,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "bb78bee834b7f72da3b8b4d84e7d0920",
+      "deps": 1,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": null,
+      "ordinal": 66,
+      "relkind": "v",
+      "relname": "pg_seclabels",
+      "typarray": "12100",
+      "type_oid": "12101",
+      "view_sql": " SELECT l.objoid,\n    l.classoid,\n    l.objsubid,\n        CASE\n            WHEN rel.relkind = ANY (ARRAY['r'::\"char\", 'p'::\"char\"]) THEN 'table'::text\n            WHEN rel.relkind = 'v'::\"char\" THEN 'view'::text\n            WHEN rel.relkind = 'm'::\"char\" THEN 'materialized view'::text\n            WHEN rel.relkind = 'S'::\"char\" THEN 'sequence'::text\n            WHEN rel.relkind = 'f'::\"char\" THEN 'foreign table'::text\n            ELSE NULL::text\n        END AS objtype,\n    rel.relnamespace AS objnamespace,\n        CASE\n            WHEN pg_table_is_visible(rel.oid) THEN quote_ident(rel.relname::text)\n            ELSE (quote_ident(nsp.nspname::text) || '.'::text) || quote_ident(rel.relname::text)\n        END AS objname,\n    l.provider,\n    l.label\n   FROM pg_seclabel l\n     JOIN pg_class rel ON l.classoid = rel.tableoid AND l.objoid = rel.oid\n     JOIN pg_namespace nsp ON rel.relnamespace = nsp.oid\n  WHERE l.objsubid = 0\nUNION ALL\n SELECT l.objoid,\n    l.classoid,\n    l.objsubid,\n    'column'::text AS objtype,\n    rel.relnamespace AS objnamespace,\n    (\n        CASE\n            WHEN pg_table_is_visible(rel.oid) THEN quote_ident(rel.relname::text)\n            ELSE (quote_ident(nsp.nspname::text) || '.'::text) || quote_ident(rel.relname::text)\n        END || '.'::text) || att.attname::text AS objname,\n    l.provider,\n    l.label\n   FROM pg_seclabel l\n     JOIN pg_class rel ON l.classoid = rel.tableoid AND l.objoid = rel.oid\n     JOIN pg_attribute att ON rel.oid = att.attrelid AND l.objsubid = att.attnum\n     JOIN pg_namespace nsp ON rel.relnamespace = nsp.oid\n  WHERE l.objsubid <> 0\nUNION ALL\n SELECT l.objoid,\n    l.classoid,\n    l.objsubid,\n        CASE pro.prokind\n            WHEN 'a'::\"char\" THEN 'aggregate'::text\n            WHEN 'f'::\"char\" THEN 'function'::text\n            WHEN 'p'::\"char\" THEN 'procedure'::text\n            WHEN 'w'::\"char\" THEN 'window'::text\n            ELSE NULL::text\n        END AS objtype,\n    pro.pronamespace AS objnamespace,\n    ((\n        CASE\n            WHEN pg_function_is_visible(pro.oid) THEN quote_ident(pro.proname::text)\n            ELSE (quote_ident(nsp.nspname::text) || '.'::text) || quote_ident(pro.proname::text)\n        END || '('::text) || pg_get_function_arguments(pro.oid)) || ')'::text AS objname,\n    l.provider,\n    l.label\n   FROM pg_seclabel l\n     JOIN pg_proc pro ON l.classoid = pro.tableoid AND l.objoid = pro.oid\n     JOIN pg_namespace nsp ON pro.pronamespace = nsp.oid\n  WHERE l.objsubid = 0\nUNION ALL\n SELECT l.objoid,\n    l.classoid,\n    l.objsubid,\n        CASE\n            WHEN typ.typtype = 'd'::\"char\" THEN 'domain'::text\n            ELSE 'type'::text\n        END AS objtype,\n    typ.typnamespace AS objnamespace,\n        CASE\n            WHEN pg_type_is_visible(typ.oid) THEN quote_ident(typ.typname::text)\n            ELSE (quote_ident(nsp.nspname::text) || '.'::text) || quote_ident(typ.typname::text)\n        END AS objname,\n    l.provider,\n    l.label\n   FROM pg_seclabel l\n     JOIN pg_type typ ON l.classoid = typ.tableoid AND l.objoid = typ.oid\n     JOIN pg_namespace nsp ON typ.typnamespace = nsp.oid\n  WHERE l.objsubid = 0\nUNION ALL\n SELECT l.objoid,\n    l.classoid,\n    l.objsubid,\n    'large object'::text AS objtype,\n    NULL::oid AS objnamespace,\n    l.objoid::text AS objname,\n    l.provider,\n    l.label\n   FROM pg_seclabel l\n     JOIN pg_largeobject_metadata lom ON l.objoid = lom.oid\n  WHERE l.classoid = 'pg_largeobject'::regclass::oid AND l.objsubid = 0\nUNION ALL\n SELECT l.objoid,\n    l.classoid,\n    l.objsubid,\n    'language'::text AS objtype,\n    NULL::oid AS objnamespace,\n    quote_ident(lan.lanname::text) AS objname,\n    l.provider,\n    l.label\n   FROM pg_seclabel l\n     JOIN pg_language lan ON l.classoid = lan.tableoid AND l.objoid = lan.oid\n  WHERE l.objsubid = 0\nUNION ALL\n SELECT l.objoid,\n    l.classoid,\n    l.objsubid,\n    'schema'::text AS objtype,\n    nsp.oid AS objnamespace,\n    quote_ident(nsp.nspname::text) AS objname,\n    l.provider,\n    l.label\n   FROM pg_seclabel l\n     JOIN pg_namespace nsp ON l.classoid = nsp.tableoid AND l.objoid = nsp.oid\n  WHERE l.objsubid = 0\nUNION ALL\n SELECT l.objoid,\n    l.classoid,\n    l.objsubid,\n    'event trigger'::text AS objtype,\n    NULL::oid AS objnamespace,\n    quote_ident(evt.evtname::text) AS objname,\n    l.provider,\n    l.label\n   FROM pg_seclabel l\n     JOIN pg_event_trigger evt ON l.classoid = evt.tableoid AND l.objoid = evt.oid\n  WHERE l.objsubid = 0\nUNION ALL\n SELECT l.objoid,\n    l.classoid,\n    l.objsubid,\n    'publication'::text AS objtype,\n    NULL::oid AS objnamespace,\n    quote_ident(p.pubname::text) AS objname,\n    l.provider,\n    l.label\n   FROM pg_seclabel l\n     JOIN pg_publication p ON l.classoid = p.tableoid AND l.objoid = p.oid\n  WHERE l.objsubid = 0\nUNION ALL\n SELECT l.objoid,\n    l.classoid,\n    0 AS objsubid,\n    'subscription'::text AS objtype,\n    NULL::oid AS objnamespace,\n    quote_ident(s.subname::text) AS objname,\n    l.provider,\n    l.label\n   FROM pg_shseclabel l\n     JOIN pg_subscription s ON l.classoid = s.tableoid AND l.objoid = s.oid\nUNION ALL\n SELECT l.objoid,\n    l.classoid,\n    0 AS objsubid,\n    'database'::text AS objtype,\n    NULL::oid AS objnamespace,\n    quote_ident(dat.datname::text) AS objname,\n    l.provider,\n    l.label\n   FROM pg_shseclabel l\n     JOIN pg_database dat ON l.classoid = dat.tableoid AND l.objoid = dat.oid\nUNION ALL\n SELECT l.objoid,\n    l.classoid,\n    0 AS objsubid,\n    'tablespace'::text AS objtype,\n    NULL::oid AS objnamespace,\n    quote_ident(spc.spcname::text) AS objname,\n    l.provider,\n    l.label\n   FROM pg_shseclabel l\n     JOIN pg_tablespace spc ON l.classoid = spc.tableoid AND l.objoid = spc.oid\nUNION ALL\n SELECT l.objoid,\n    l.classoid,\n    0 AS objsubid,\n    'role'::text AS objtype,\n    NULL::oid AS objnamespace,\n    quote_ident(rol.rolname::text) AS objname,\n    l.provider,\n    l.label\n   FROM pg_shseclabel l\n     JOIN pg_authid rol ON l.classoid = rol.tableoid AND l.objoid = rol.oid;",
+      "attributes": [
+        {
+          "num": 1,
+          "name": "objoid",
+          "type": "oid",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "classoid",
+          "type": "oid",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "objsubid",
+          "type": "integer",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "objtype",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "objnamespace",
+          "type": "oid",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 6,
+          "name": "objname",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 7,
+          "name": "provider",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 8,
+          "name": "label",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": null,
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "UNION view resolves security labels for relations, columns, functions, roles, subscriptions and others; metadata only, avoid row values.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": true,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "4fb38cbb152cb18b1c2f6182dd096e08",
+      "deps": 0,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": [
+        "CREATE UNIQUE INDEX pg_sequence_seqrelid_index ON pg_catalog.pg_sequence USING btree (seqrelid)"
+      ],
+      "ordinal": 67,
+      "relkind": "r",
+      "relname": "pg_sequence",
+      "typarray": "10104",
+      "type_oid": "10105",
+      "view_sql": null,
+      "attributes": [
+        {
+          "num": 1,
+          "name": "seqrelid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "seqtypid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "seqstart",
+          "type": "bigint",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "seqincrement",
+          "type": "bigint",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "seqmax",
+          "type": "bigint",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 6,
+          "name": "seqmin",
+          "type": "bigint",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 7,
+          "name": "seqcache",
+          "type": "bigint",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 8,
+          "name": "seqcycle",
+          "type": "boolean",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": [
+        {
+          "name": "pg_sequence_seqrelid_index",
+          "definition": "PRIMARY KEY (seqrelid)"
+        }
+      ],
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Per-sequence start/min/max/cache/step/cycle core catalog; no nextval/currval executed.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": false,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "716d24777089c7da266c4e8c6b534a8b",
+      "deps": 1,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": null,
+      "ordinal": 68,
+      "relkind": "v",
+      "relname": "pg_sequences",
+      "typarray": "12049",
+      "type_oid": "12050",
+      "view_sql": " SELECT n.nspname AS schemaname,\n    c.relname AS sequencename,\n    pg_get_userbyid(c.relowner) AS sequenceowner,\n    s.seqtypid::regtype AS data_type,\n    s.seqstart AS start_value,\n    s.seqmin AS min_value,\n    s.seqmax AS max_value,\n    s.seqincrement AS increment_by,\n    s.seqcycle AS cycle,\n    s.seqcache AS cache_size,\n        CASE\n            WHEN has_sequence_privilege(c.oid, 'SELECT,USAGE'::text) THEN pg_sequence_last_value(c.oid::regclass)\n            ELSE NULL::bigint\n        END AS last_value\n   FROM pg_sequence s\n     JOIN pg_class c ON c.oid = s.seqrelid\n     LEFT JOIN pg_namespace n ON n.oid = c.relnamespace\n  WHERE NOT pg_is_other_temp_schema(n.oid) AND c.relkind = 'S'::\"char\";",
+      "attributes": [
+        {
+          "num": 1,
+          "name": "schemaname",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "sequencename",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "sequenceowner",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "data_type",
+          "type": "regtype",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "start_value",
+          "type": "bigint",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 6,
+          "name": "min_value",
+          "type": "bigint",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 7,
+          "name": "max_value",
+          "type": "bigint",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 8,
+          "name": "increment_by",
+          "type": "bigint",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 9,
+          "name": "cycle",
+          "type": "boolean",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 10,
+          "name": "cache_size",
+          "type": "bigint",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 11,
+          "name": "last_value",
+          "type": "bigint",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": null,
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Friendly sequence view gates last_value by actual per-sequence SELECT/USAGE privilege; no sequence state retrieved.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": true,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "c99e5d4f2ff7716350dcf21e5a426dfc",
+      "deps": 1,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": null,
+      "ordinal": 69,
+      "relkind": "v",
+      "relname": "pg_settings",
+      "typarray": "12105",
+      "type_oid": "12106",
+      "view_sql": " SELECT name,\n    setting,\n    unit,\n    category,\n    short_desc,\n    extra_desc,\n    context,\n    vartype,\n    source,\n    min_val,\n    max_val,\n    enumvals,\n    boot_val,\n    reset_val,\n    sourcefile,\n    sourceline,\n    pending_restart\n   FROM pg_show_all_settings() a(name, setting, unit, category, short_desc, extra_desc, context, vartype, source, min_val, max_val, enumvals, boot_val, reset_val, sourcefile, sourceline, pending_restart);",
+      "attributes": [
+        {
+          "num": 1,
+          "name": "name",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "setting",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "unit",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "category",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "short_desc",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 6,
+          "name": "extra_desc",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 7,
+          "name": "context",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 8,
+          "name": "vartype",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 9,
+          "name": "source",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 10,
+          "name": "min_val",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 11,
+          "name": "max_val",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 12,
+          "name": "enumvals",
+          "type": "text[]",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 13,
+          "name": "boot_val",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 14,
+          "name": "reset_val",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 15,
+          "name": "sourcefile",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 16,
+          "name": "sourceline",
+          "type": "integer",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 17,
+          "name": "pending_restart",
+          "type": "boolean",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": null,
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Runtime parameter metadata from pg_show_all_settings; PostgreSQL applies setting visibility. SQL catalog grant alone not proof of sensitive provider config exposure.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": true,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "0478f2f0b47c2fe26cd0ad603ab3e6da",
+      "deps": 1,
+      "perms": {
+        "anon": false,
+        "auth": false,
+        "service": false
+      },
+      "indexes": null,
+      "ordinal": 70,
+      "relkind": "v",
+      "relname": "pg_shadow",
+      "typarray": "12006",
+      "type_oid": "12007",
+      "view_sql": " SELECT pg_authid.rolname AS usename,\n    pg_authid.oid AS usesysid,\n    pg_authid.rolcreatedb AS usecreatedb,\n    pg_authid.rolsuper AS usesuper,\n    pg_authid.rolreplication AS userepl,\n    pg_authid.rolbypassrls AS usebypassrls,\n    pg_authid.rolpassword AS passwd,\n    pg_authid.rolvaliduntil AS valuntil,\n    s.setconfig AS useconfig\n   FROM pg_authid\n     LEFT JOIN pg_db_role_setting s ON pg_authid.oid = s.setrole AND s.setdatabase = 0::oid\n  WHERE pg_authid.rolcanlogin;",
+      "attributes": [
+        {
+          "num": 1,
+          "name": "usename",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "usesysid",
+          "type": "oid",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "usecreatedb",
+          "type": "boolean",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "usesuper",
+          "type": "boolean",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "userepl",
+          "type": "boolean",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 6,
+          "name": "usebypassrls",
+          "type": "boolean",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 7,
+          "name": "passwd",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 8,
+          "name": "valuntil",
+          "type": "timestamp with time zone",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 9,
+          "name": "useconfig",
+          "type": "text[]",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": null,
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Password-bearing pg_authid compatibility view; verified anon/authenticated/service SQL SELECT denied. No actual credentials accessed.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": true,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "dbf472e99750eda8e6b9a691adf20a50",
+      "deps": 0,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": [
+        "CREATE INDEX pg_shdepend_depender_index ON pg_catalog.pg_shdepend USING btree (dbid, classid, objid, objsubid)",
+        "CREATE INDEX pg_shdepend_reference_index ON pg_catalog.pg_shdepend USING btree (refclassid, refobjid)"
+      ],
+      "ordinal": 71,
+      "relkind": "r",
+      "relname": "pg_shdepend",
+      "typarray": "10059",
+      "type_oid": "10060",
+      "view_sql": null,
+      "attributes": [
+        {
+          "num": 1,
+          "name": "dbid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "classid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "objid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "objsubid",
+          "type": "integer",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "refclassid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 6,
+          "name": "refobjid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 7,
+          "name": "deptype",
+          "type": "\"char\"",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": null,
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Shared-object references preserve database-to-global dependencies; referencing indexes intentional.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": false,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "320b513786e381aee117c9f1a7d4102f",
+      "deps": 0,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": [
+        "CREATE UNIQUE INDEX pg_shdescription_o_c_index ON pg_catalog.pg_shdescription USING btree (objoid, classoid)"
+      ],
+      "ordinal": 72,
+      "relkind": "r",
+      "relname": "pg_shdescription",
+      "typarray": "10061",
+      "type_oid": "10062",
+      "view_sql": null,
+      "attributes": [
+        {
+          "num": 1,
+          "name": "objoid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "classoid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "description",
+          "type": "text",
+          "default": null,
+          "notnull": true,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": [
+        {
+          "name": "pg_shdescription_o_c_index",
+          "definition": "PRIMARY KEY (objoid, classoid)"
+        }
+      ],
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Shared-object description metadata keyed by object OID/class; core catalog structural.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": false,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "f2ca1afb380ab92ed7168d53d6742edf",
+      "deps": 1,
+      "perms": {
+        "anon": false,
+        "auth": false,
+        "service": false
+      },
+      "indexes": null,
+      "ordinal": 73,
+      "relkind": "v",
+      "relname": "pg_shmem_allocations",
+      "typarray": "12135",
+      "type_oid": "12136",
+      "view_sql": " SELECT name,\n    off,\n    size,\n    allocated_size\n   FROM pg_get_shmem_allocations() pg_get_shmem_allocations(name, off, size, allocated_size);",
+      "attributes": [
+        {
+          "num": 1,
+          "name": "name",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "off",
+          "type": "bigint",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "size",
+          "type": "bigint",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "allocated_size",
+          "type": "bigint",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": null,
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Shared-memory offsets/sizes from built-in function; all application SQL roles denied SELECT.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": true,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "4adeb42810f8a99d2d44553f440ccd66",
+      "deps": 0,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": [
+        "CREATE UNIQUE INDEX pg_shseclabel_object_index ON pg_catalog.pg_shseclabel USING btree (objoid, classoid, provider)"
+      ],
+      "ordinal": 74,
+      "relkind": "r",
+      "relname": "pg_shseclabel",
+      "typarray": "10093",
+      "type_oid": "4066",
+      "view_sql": null,
+      "attributes": [
+        {
+          "num": 1,
+          "name": "objoid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "classoid",
+          "type": "oid",
+          "default": null,
+          "notnull": true,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "provider",
+          "type": "text",
+          "default": null,
+          "notnull": true,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "label",
+          "type": "text",
+          "default": null,
+          "notnull": true,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": [
+        {
+          "name": "pg_shseclabel_object_index",
+          "definition": "PRIMARY KEY (objoid, classoid, provider)"
+        }
+      ],
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Shared catalog security label storage; object/provider uniqueness required.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": false,
+        "source_md5_field": "md5"
+      }
+    },
+    {
+      "md5": "d60ac724be95c0b22eea93dafd059c1d",
+      "deps": 1,
+      "perms": {
+        "anon": true,
+        "auth": true,
+        "service": true
+      },
+      "indexes": null,
+      "ordinal": 75,
+      "relkind": "v",
+      "relname": "pg_stat_activity",
+      "typarray": "12223",
+      "type_oid": "12224",
+      "view_sql": " SELECT s.datid,\n    d.datname,\n    s.pid,\n    s.leader_pid,\n    s.usesysid,\n    u.rolname AS usename,\n    s.application_name,\n    s.client_addr,\n    s.client_hostname,\n    s.client_port,\n    s.backend_start,\n    s.xact_start,\n    s.query_start,\n    s.state_change,\n    s.wait_event_type,\n    s.wait_event,\n    s.state,\n    s.backend_xid,\n    s.backend_xmin,\n    s.query_id,\n    s.query,\n    s.backend_type\n   FROM pg_stat_get_activity(NULL::integer) s(datid, pid, usesysid, application_name, state, query, wait_event_type, wait_event, xact_start, query_start, backend_start, state_change, client_addr, client_hostname, client_port, backend_xid, backend_xmin, backend_type, ssl, sslversion, sslcipher, sslbits, ssl_client_dn, ssl_client_serial, ssl_issuer_dn, gss_auth, gss_princ, gss_enc, gss_delegation, leader_pid, query_id)\n     LEFT JOIN pg_database d ON s.datid = d.oid\n     LEFT JOIN pg_authid u ON s.usesysid = u.oid;",
+      "attributes": [
+        {
+          "num": 1,
+          "name": "datid",
+          "type": "oid",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 2,
+          "name": "datname",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 3,
+          "name": "pid",
+          "type": "integer",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 4,
+          "name": "leader_pid",
+          "type": "integer",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 5,
+          "name": "usesysid",
+          "type": "oid",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 6,
+          "name": "usename",
+          "type": "name",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": "\"C\"",
+          "generated": ""
+        },
+        {
+          "num": 7,
+          "name": "application_name",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 8,
+          "name": "client_addr",
+          "type": "inet",
+          "default": null,
+          "notnull": false,
+          "storage": "m",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 9,
+          "name": "client_hostname",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 10,
+          "name": "client_port",
+          "type": "integer",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 11,
+          "name": "backend_start",
+          "type": "timestamp with time zone",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 12,
+          "name": "xact_start",
+          "type": "timestamp with time zone",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 13,
+          "name": "query_start",
+          "type": "timestamp with time zone",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 14,
+          "name": "state_change",
+          "type": "timestamp with time zone",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 15,
+          "name": "wait_event_type",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 16,
+          "name": "wait_event",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 17,
+          "name": "state",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 18,
+          "name": "backend_xid",
+          "type": "xid",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 19,
+          "name": "backend_xmin",
+          "type": "xid",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 20,
+          "name": "query_id",
+          "type": "bigint",
+          "default": null,
+          "notnull": false,
+          "storage": "p",
+          "identity": "",
+          "collation": null,
+          "generated": ""
+        },
+        {
+          "num": 21,
+          "name": "query",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        },
+        {
+          "num": 22,
+          "name": "backend_type",
+          "type": "text",
+          "default": null,
+          "notnull": false,
+          "storage": "x",
+          "identity": "",
+          "collation": "\"default\"",
+          "generated": ""
+        }
+      ],
+      "type_links": 1,
+      "constraints": null,
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "semantic_review": "Activity query/source and client metadata via pg_stat_get_activity; pg_read_all_stats USAGE false for anon/authenticated/service_role, so built-in cross-role masking expected. SQL SELECT not API exposure; no query records viewed.",
+      "verdict": "NO_NEW_VERIFIED_DEFECT_PROVIDER_MANAGED_RETAIN",
+      "source_coverage": {
+        "complete_rowtype": true,
+        "complete_attribute_declarations": true,
+        "complete_related_constraints": true,
+        "complete_related_index_ddl": true,
+        "complete_view_sql": true,
+        "source_md5_field": "md5"
+      }
+    }
+  ]
+}

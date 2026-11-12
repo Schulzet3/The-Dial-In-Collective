@@ -1,3 +1,10 @@
+# Release queue procedure — live pointers and dated implementation evidence
+
+**Mandatory first:** read the live development SHA and [PREFLIGHT.md](ai/PREFLIGHT.md); apply [AGENTS.md](../AGENTS.md), the [current queue](RELEASE_QUEUE.json), [CURRENT_STATUS.md](CURRENT_STATUS.md) newest entries, [#2169](https://github.com/Schulzet3/The-Dial-In-Collective/issues/2169), exact hosted CI and actual production/provider readbacks. Historical queue counts, "READY" labels and "CURRENT" passages below are point-in-time receipts, **not a live candidate**. Use no guessed queue values.
+**Active rules:** risk-tier tests and five exact-source CI checks, no redundant build; READY-only source isolation including tests; one-use source/IDs grant and one nonforce main-push controller only after a NEW owner Publish; independently verify final Netlify READY/current. This document update authorizes no candidate, grant or publication.
+**November 12 status pointer:** consult the top of CURRENT_STATUS for the READY4E2E production reconciliation and the separate unpublished #2258 email/opt-in member push. Do not reuse pre-release "no publication" sentences as today's facts.
+
+---
 ## November 12 #2169 — ACTIVE READY + event gates, source-drift isolation (development only)
 - The mandatory development approval workflow executes the READ-ONLY source-bound READY auditor on each push/PR; it checks every READY item's cited official Actions run IDs, all five exact-source named jobs and Git blob parity for merged runtime AND changed tests. Missing/queued/skipped/failed/stale receipts HOLD; current source drift is separately disclosed rather than falsely removing independently READY feature evidence. A newer unrelated or unfinished same-file change cannot be shipped without owner-selected candidate isolation of the original fully reviewed READY bytes. Candidate approval still must refuse mixed/unready paths and duplicate builds.
 - The main single-use controller independently verifies the selected READY batch again before any one-use claim, using the same audited GitHub run/source reader. Main acceptance CI observes the real push controller via official Actions `runs?head_sha=`, then observes the actual completed controller ID and final outcome through a read-only `workflow_run` callback. On completion it SKIPS the full main test suite; no second app build. An observed RUNNING or successful controller is **not** proof of Netlify READY/current. Failed/missing/duplicate events HOLD without replay.
@@ -78,13 +85,13 @@ Failure recovery preserved: initial PR256 correctly rejected pre-concurrent ance
 
 ---
 
-## October 29, 2026 UTC — Current verified production release
+## October 29, 2026 UTC — Historical verified production release
 
 Release DIC-20261029-READY-QUEUE-10 delivered all 10 READY items; Netlify provider READY/current 6ae38ba0a56bed8fa17d20ac at Git release SHA 816949840f22b2a181670de20410786d0a8de79b from tested source fa30abd6b5c96308f0957063efcc7ffb4402c8c6. Current queue baseline updated; two independent Issue33 research-only tasks remain IN_PROGRESS. No SQL/Auth/Edge or member-data changes. Details: docs/PRODUCTION_RELEASE_2026-10-29_READY_QUEUE_VERIFIED.json. Earlier sections below remain historical.
 
 ---
 
-## October 24, 2026 UTC — Deferred combined release (CURRENT)
+## October 24, 2026 UTC — Deferred combined release (HISTORICAL snapshot)
 
 The owner paused publication after closing GitHub #5/#10/#12, asking to wait until the 603-coffee extractor #33 is READY. **No Netlify release now; a new explicit publish instruction will be needed for the future combined READY queue.** Production SQL versions 20261024052303, 20261024052411 and 20261024052419 are already applied under different versions than Git source filenames; never replay automatically. Original #5 is DEPLOYED SQL-only. Its independent source-carryover item is TESTING until exact release-gate/anti-replay evidence. Queue #12 READY for frontend; #33 TESTING. See [full verified deferred release handoff](RELEASE_HANDOFF_2026-10-24_ISSUES_5_10_12_DEFERRED_EXTRACTOR.md). Older dates/approval examples below are history, not new authorization.
 

@@ -1,0 +1,16 @@
+# Issue #267 A97-T11 — strict original-source Add Coffee and origin-claim review (2026-11-12 UTC)
+
+DIC_PREFLIGHT_VERIFIED development_sha=46e62d294b168300532ddd16119d50d329798e9f preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+Original source-read parent `e5bbaebc3a3c82ddeed2dabda9bc059bd0caa383` (preflight also verified at that commit); refreshed live source `46e62d294b168300532ddd16119d50d329798e9f`, whose frozen archive and current extractor blobs match reviewed text. This is documentation-only, development-scoped, no product change or release authorization.
+
+The append-only exact Git blob `4faa896cd863dc2b3f46af45921c7a9ef569456e` at `docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F166-293-350-P137-209-235-20261112-A97-T11.json` contains 85 actual physical-line source-bound interpretations:
+- Frozen F166 `docs/archive/requirements/The_Dial-In_Collective_Master_Specification_v1.0.md` at immutable `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9`, blob `4c4a3ee50a056c0f2b2971c9a647094db8c92601`: lines **293–350**, 58 original physical lines, identical live Git blob.
+- Pinned executable P137 `src/server/coffee-identity-evidence.mjs` at immutable `9707553a64f88127826e8f5b2b36cd0651296e83`, blob `f90535c2d36373e8ce36fd33f961f2a295370e6e`: lines **209–235**, 27 original physical lines, byte-identical to live blob `12d71abcba4f993daa2eb4841e05ea552236d455` at live +1 line offset.
+- Each includes original literal, 1-based coordinate, Git blob/commit, classification, line-specific behavior, quality, security/privacy/performance risk, dead/redundancy status, current counterpart, testability, improvement, Locked fit and disposition; 85/85 exact counterpart comparisons, zero local gaps or overlaps. A96 ends F166:292/P137:208. Legacy V1 and grouped R2/C2 do not earn new strict credit. Original first workflow line1 and S2-001's first-line evidence sampled, zero duplicate credit.
+
+**Interpretation:** archived v1 Add Coffee flow mentions screenshots, canonical/fuzzy confirmation and optional facts; later explicit #33 current-selected source supersessions govern. Pinned `directOriginClaims` conservatively filters two marketing idioms, hypothetical/historic context, country/area/source blend wording. No active false claim, safe code deletion or performance gain reproduced. Do not introduce current extractor changes while #33 owns source-specific implementation. #96 Auth/privacy separately owned. Preserve member/Community/offline/original603/SQL/history and existing receipts.
+
+**Tests:** exact Git source/literal pair comparisons PASSED 85/85; source SHA binding PASSED two originals and current counterparts. Node22 original603/lint/build, browser/mobile/visual/offline, SQL/RLS/Auth and providers NOT RUN; docs-only applicable GitHub PR-head / merged-source CI PENDING at authoring. No READY or deployment. Frozen, pinned and current live global denominators still INCOMPLETE; no claim of human independent review.
+
+**Next:** frozen F166:351, pinned P137:236; continue strict literal per-line review, reconcile all former grouped R2/C2 evidence with exact first-line discipline, live added/modified/removed/renamed code, binary asset visuals and verified findings/disposition log. Do not close Issue #267.

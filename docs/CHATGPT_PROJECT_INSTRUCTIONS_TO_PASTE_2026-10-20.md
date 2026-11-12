@@ -4,11 +4,11 @@
 
 **Authority.** GitHub Schulzet3/The-Dial-In-Collective governs requirements, approvals, code, tests, releases and unfinished work. docs/MASTER_SPECIFICATION.md and docs/DECISION_LEDGER.json govern Locked decisions. Preserve approved app behavior, Auth, privacy, shots, notes, offline data, Community and history. Only explicit owner approval overrides Locked decisions; record scope in BOTH files. Brainstorming is not approval. Repo temporarily PUBLIC by owner Nov 4–30 (#630); only owner returns it PRIVATE on GitHub Free. No silent visibility changes or claims of full exposure clearance. 
 
-**Recover first.** Check live branch SHAs, AGENTS.md, scoped journal, docs/CURRENT_STATUS.md, Master Spec, Decision Ledger, approval coverage, docs/RELEASE_QUEUE.json, relevant issues/PRs, exact-source CI and Netlify publication. Read docs/ai/CONTEXT_ENTRYPOINT.md and PREFLIGHT.md; avoid redundant rereads. Verify concurrent/interrupted work. Branches: development/backend-foundation = app; main = operations/backups; release/production = publication.
+**Mandatory preflight (EVERY DIC task).** FIRST fetch live `development/backend-foundation` SHA and `docs/ai/PREFLIGHT.md` at that SHA. No chats/memory substitutes. If unavailable, FAIL CLOSED: no GitHub/provider writes or current VERIFIED/READY/DEPLOYED claims. Follow its route: AGENTS, scoped journal, CURRENT_STATUS, Master Spec, Ledger, coverage, queue, issues/PRs, exact CI/Netlify. Check concurrent work; avoid duplicate tests. Branches: development/backend-foundation=app, main=ops/backups, release/production=publication.
 
 **Development authority.** “Build/fix/update/change/improve/implement” authorizes investigation, code, repair, tests, nonforce integration and READY queue preparation—not publication. Make routine decisions, ask only essential product questions, fix/retest failures rather than stop at PR or pending CI. Before retrying uncertain writes, verify live state. Finish safe work and document actual blockers.
 
-**Finish and document.** Set verifiable acceptance criteria; log authority, paths, SHAs, completed/pending work, tests, failures/fixes and next action in GitHub journal/issue. Code/test/CI changes need SAME-COMMIT journal and [skip netlify]. Verify merged SHA, changed files, exact CI; reconcile status, issue and queue. COMPLETE only if verified. Background continuation requires an enabled scoped automation; recover from GitHub.
+**Finish and document.** Set acceptance criteria; log authority, task preflight SHA/blob, paths, tests, failures/fixes and next action in GitHub journal/issue. Code/test/CI changes need SAME-COMMIT journal with verified `DIC_PREFLIGHT_VERIFIED` receipt and [skip netlify]. Verify merge SHA/files/CI; reconcile status, issue and queue. COMPLETE only if verified. Continue later only via enabled scoped automation; recover from GitHub.
 
 **Tests (#457).** Risk-based published-to-candidate diff: docs/queue approvals only; low visual one build/browser; medium grinder/recommendation/coffee/cloud targeted functional/offline/UX; high Auth/SQL/CI/unknown comprehensive relevant checks. Keep five status checks; NOT_APPLICABLE ≠ PASS. ONE build, no duplicate suites; reuse exact evidence, selectively retry failed jobs. Fix failures; SKIPPED/unstarted ≠ PASS. Device tests optional. Production smoke read-only: no test accounts, synthetic members, DB writes or mandatory Playwright. Preserve security/SQL/offline checks.
 
@@ -34,6 +34,6 @@
 
 **Autonomous #509.** Hourly full Supabase SQL/RLS/Auth/Edge/Storage/log/drift/performance audit and word ledger; GitHub-only fixes/tests/READY. Coordinate #96/#267/#504; no private data, production writes or deployment.
 
-**Automation alerts (Nov 6).** Preserve schedules/checkpoints; notify ONLY for required owner review/approval or NEW/material actionable errors, blockers, security/privacy/integrity issues. No success, routine progress/READY, unchanged issues or empty digests; paused tasks remain paused.
+**Automation alerts (Nov 6).** Keep schedules/checkpoints; alert ONLY for required owner action or NEW/material errors, blockers, security/privacy/integrity issues. No success, routine READY, unchanged or empty updates; paused tasks stay paused.
 
-**Project Settings.** Sync lasting changes to GitHub Project Instructions and provide FULL paste-ready text under 8,000 characters; only owner edits ChatGPT Project Settings.
+**Project Settings.** Sync GitHub instructions; provide full paste-ready replacement text (≤8,000 chars); only owner edits ChatGPT Project Settings.

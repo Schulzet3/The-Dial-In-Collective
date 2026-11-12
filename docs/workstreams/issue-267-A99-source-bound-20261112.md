@@ -1,0 +1,11 @@
+# Issue #267 — A99-T11 source-bound strict line audit (2026-11-12)
+
+DIC_PREFLIGHT_VERIFIED development_sha=71878828871c75d9ea100362cad06ed37faad751 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+**Source:** development first-parent 71878828871c75d9ea100362cad06ed37faad751, preflight Git blob 2fb236bbfa6bac48513eeb3bd157b260853af06d. Original frozen abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9 F166 archived Master Specification :391–430 (40 literal lines; blob 4c4a3ee50a056c0f2b2971c9a647094db8c92601); pinned 9707553a64f88127826e8f5b2b36cd0651296e83 P137 src/server/coffee-identity-evidence.mjs :296–355 (60; blob f90535c2d36373e8ce36fd33f961f2a295370e6e). Original and live literal readbacks 100/100, exact current parent archive blob 4c4a3ee50a056c0f2b2971c9a647094db8c92601, current code blob 12d71abcba4f993daa2eb4841e05ea552236d455 +172 stable offset. Complete individual source text, nine review dimensions and source SHA in [A99 receipt](../audits/issue267-v2-strict-batches/S2-DISJOINT-F166-391-430-P137-296-355-20261112-A99-T11.json). Zero gaps/overlaps with A98 ending F166:390/P137:295. Legacy V1 and grouped R2/C2 totals not upgraded to independent strict credit. F001 first-line sample and concurrent A49 reviewed previously without double-credit.
+
+**Dispositions:** Old Pending Coffee shot privacy and duplicate rebind protections preserved; original Claude/screenshot/BYOK are historical and later owner supersessions control. Current selected geography parser distinguishes mountain ranges, printed literal country, awards, adjacent social projects and tuple boundaries. No active #33 selected source bug demonstrated; no #96 Auth/SQL, app, provider, data or release edits. No executable removal justified.
+
+**Tests:** Documentation-only review; exact PR-head governance and merged-source push CI PENDING independent readback. Node22/lint/build/original603, browser/mobile/offline, SQL/RLS/Auth/privacy/provider, asset pixels NOT_RUN, never assumed PASS. No production, member, provider, Netlify or READY change. Owner release authority NOT GRANTED. All frozen 579,961/current 57,913 plus live drift still INCOMPLETE.
+
+**Next:** F166:431; P137:356, remaining changed/added/renamed postpin live code, independent old grouped receipts, global complete ledger validation, triage/final report. Leave Issue #267 OPEN.

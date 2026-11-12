@@ -1,14 +1,14 @@
 # The Dial In Collective — Documentation Index
-**Navigation reconciled November 1, 2026 (links and source provenance only).** This index is not a certification that every linked document was updated or reviewed. The previous 34 KB index remains [preserved as a dated snapshot](archive/DOCUMENTATION_INDEX_SNAPSHOT_BEFORE_GLOBAL_RECONCILIATION_2026-10-19.md). Dated reports describe their historical checkpoints; use [Current Status](CURRENT_STATUS.md) and actual provider readbacks for current operational facts.
+**Mandatory FIRST document for every DIC task: [PREFLIGHT.md](ai/PREFLIGHT.md) at the exact live `development/backend-foundation` SHA.** Navigation reconciled November 1, 2026 (links and source provenance only). This index is not a certification that every linked document was updated or reviewed. The previous 34 KB index remains [preserved as a dated snapshot](archive/DOCUMENTATION_INDEX_SNAPSHOT_BEFORE_GLOBAL_RECONCILIATION_2026-10-19.md). Dated reports describe their historical checkpoints; use [Current Status](CURRENT_STATUS.md) and actual provider readbacks for current operational facts.
 
 ## Permanent knowledge navigation — November 1, 2026
-- [Central project-context entrypoint](ai/CONTEXT_ENTRYPOINT.md) — first short map for **every substantive DIC task**, followed by topic-specific retrieval and existing full change/release recovery.
+- [Mandatory single starting point](ai/PREFLIGHT.md) — read FIRST for **every DIC task** using the live development SHA; [topic map](ai/CONTEXT_ENTRYPOINT.md) follows it.
 - [Complete accessible-attachment source register](ai/SOURCE_REGISTER.json) — four top-level Project files, 46 substantive direct ZIP members, 41 nested ZIP members, SHA-256 and privacy/access/duplicate caveats; no claim of full semantic review or durable attachment retrieval.
 - [Authority and supersession rules](ai/AUTHORITY_RULES.md), [preflight](ai/PREFLIGHT.md), [maintenance](ai/MAINTENANCE.md) — link to canonical documents, do not replace them.
 - [Knowledge-intake receipt](workstreams/ops-knowledge-context-20261101.md) — exact scope, verified attachment hashes, limitations and pending durable research storage.
 
 ## Read first
-1. [Active per-commit Work Journal](ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md) — read FIRST to resume interrupted sessions, current exact attempts and blockers.
+1. [Mandatory PREFLIGHT](ai/PREFLIGHT.md) — read FIRST; then [active per-commit Work Journal](ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md) to recover interrupted work.
 2. [Current Status](CURRENT_STATUS.md) — current published SHA, production counts, safety, next action.
 3. [Master Specification](MASTER_SPECIFICATION.md) — canonical requirements and Locked product decisions.
 4. [Decision Ledger](DECISION_LEDGER.json) — original 79 Locked / 20 Open items plus later scoped changes.
@@ -17,12 +17,12 @@
 7. [Live GitHub Issues](https://github.com/Schulzet3/The-Dial-In-Collective/issues) — per-feature open/completed status, real QA and priority.
 8. [AGENTS — continuity rules](../AGENTS.md) — exact repository/change-control method.
 
-## Current operating records
-- [Durable batched feature release queue](RELEASE_QUEUE.json) — statuses READY / TESTING / BLOCKED, exact issue, source SHA, paths, CI receipts and blockers; does not publish.
+## Live operating links and supporting dated records
+- [Durable batched feature release queue](RELEASE_QUEUE.json) — source of current READY/TESTING/BLOCKED/DEPLOYED statuses; reconcile with live refs, exact CI, newest [Current Status](CURRENT_STATUS.md) and actual provider state. The queue itself does not publish.
 - [Autonomous build-to-ready and queue runbook](RELEASE_QUEUE_RUNBOOK.md) — default implementation pipeline, release gate and honest blocking semantics.
 - [October 21 consolidated deployment readiness, backups and blockers](RELEASE_READINESS_2026-10-21.md) — dated preflight and receipts for the completed admin/duplicate-first and recipe-source release; use Current Status for the present development and production state.
-- [Active GitHub Free/private continuity and release safety plan](GITHUB_FREE_PRIVATE_CONTINUITY_AND_RELEASE_PLAN_2026-10-20.md) — owner refuses Pro/public; advisory CI, manual controls, remaining release risks.
-- [GitHub copy of ChatGPT Project Instructions](CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md) — updated reference text; GitHub edits do not automatically update ChatGPT Project Settings. Earlier owner-saved settings are historical evidence, not proof this version is live.
+- [Historical GitHub Free/private continuity and release safety plan](GITHUB_FREE_PRIVATE_CONTINUITY_AND_RELEASE_PLAN_2026-10-20.md) — October 20 snapshot, superseded as to visibility by the owner's temporary November 4–30 public exception (#630); owner alone returns to private. Advisory CI/privileged-write limits still apply.
+- [GitHub copy of ChatGPT Project Instructions](CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md) — current repository reference. Owner reports pasting updated instructions into ChatGPT Project Settings on November 12; this repository cannot verify settings readback or prove future per-chat retrieval.
 - [GitHub-wide word audit #504](workstreams/issue-504.md) and [verified coverage ledger](audits/issue504-coverage-ledger.json) — incremental non-code GitHub-record review, distinct from [#267's original/current code audit](https://github.com/Schulzet3/The-Dial-In-Collective/issues/267) and provider [#508 Netlify](https://github.com/Schulzet3/The-Dial-In-Collective/issues/508) / [#509 Supabase](https://github.com/Schulzet3/The-Dial-In-Collective/issues/509); no universal-completion claim.
 - [Oct20 forensic approval-gap and continuity investigation](APPROVAL_GAP_FORENSIC_AND_CONTINUITY_REVIEW_2026-10-20.md) — verified evidence, root causes, missing sources, and remaining safeguards.
 - [Approved change/source/CI/production acceptance register](APPROVAL_COVERAGE_MATRIX.json) — enforced subset, 79 historical Locked unchanged, unverified gaps explicit.
