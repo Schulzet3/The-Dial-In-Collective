@@ -2,6 +2,8 @@
 // write a repository ref, call a provider, or execute tests. Fail closed when
 // a selected READY path overlaps unfinished source (including same-file edits).
 import {deployableChangedPaths,queueSchemaErrors} from './release-queue.mjs';
+import {posix} from 'node:path';
+import {classifyReleaseRisk} from './release-reliability.mjs';
 const SHA=/^[a-f0-9]{40}$/;
 const ITEM=/^DIC-Q-[1-9][0-9]*(?:-[a-z0-9-]+)?$/;
 const sorted=items=>[...items].sort();
@@ -61,6 +63,29 @@ export function discoverExcludedUnreadyTests({queue,selectedIds,restoredPaths,
   if(!touched)result.push(path);
  }
  return sorted([...new Set(result)]);
+}
+
+// Cheap, source-bound pre-CI static import existence check. The exact app
+// build remains mandatory for exported symbol/type/dynamic import semantics.
+export function assertCandidateRelativeImports(paths,{readSource,hasPath}={}){
+ if(!Array.isArray(paths)||typeof readSource!=='function'||typeof hasPath!=='function')
+  throw Error('Candidate relative-import evidence unavailable');
+ for(const path of paths){
+  if(!/^(?:site|src\/server|netlify\/functions)\/.*\.[cm]?js$/.test(path)||!hasPath(path))continue;
+  const source=readSource(path);
+  if(typeof source!=='string')throw Error('Cannot read candidate module: '+path);
+  const imports=[...source.matchAll(/^\s*(?:import|export)\s+(?:[^;\n]*?\s+from\s+)?['"](\.{1,2}\/[^'"\n]+)['"]/gm)].map(m=>m[1]);
+  for(const spec of imports){
+   const target=posix.normalize(posix.join(posix.dirname(path),spec.split(/[?#]/)[0]));
+   if(target.startsWith('../')||target.startsWith('/')||target==='')
+    throw Error('Unsafe relative module path: '+path+' -> '+spec);
+   const choices=posix.extname(target)?[target]:
+    [target,target+'.js',target+'.mjs',target+'.cjs',target+'.json',target+'/index.js',target+'/index.mjs'];
+   if(!choices.some(x=>hasPath(x)))
+    throw Error('Unresolved static relative module import: '+path+' -> '+spec);
+  }
+ }
+ return true;
 }
 
 export function planReadyOnlyCandidate(queue,{publishedSourceSha,developmentSourceSha,
@@ -238,6 +263,9 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
   selectedIds:manifest.selected_ready_item_ids,
   pinnedReadyPaths:manifest.pinned_to_ready_paths||[],developmentChangedPaths,isAncestor});
  if(!plan.ready)reject(plan.errors.join('; '));
+ if(manifest.risk_classification!==undefined&&
+    JSON.stringify(manifest.risk_classification)!==JSON.stringify(classifyReleaseRisk(plan.included_paths)))
+  reject('candidate risk-tier/one-build receipt differs from actual selected source');
  if(!Array.isArray(manifest.restored_to_published_paths)||
     !equal(manifest.restored_to_published_paths,plan.restored_paths))
   reject('Restoration manifest differs from actual unready source inventory');
