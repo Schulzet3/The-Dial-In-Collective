@@ -220,6 +220,6 @@ test('security-inspection PR filter covers the exact Edge gateway config without
    'isolated workflow must equal exact published Git bytes');
   workflow=sourceAt(receipt.development_source_sha);
  }
- assert.match(workflow,/^\\s*-\\s*'supabase\\/config\\.toml'\\s*$/m);
+ assert.match(workflow,/^\s*-\s*'supabase\/config\.toml'\s*$/m);
  assert.doesNotMatch(workflow,/^\s*-\s*'supabase\/\*\*'\s*$/m);
 });
