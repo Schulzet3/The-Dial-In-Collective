@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "run": "R156",
+  "reviewed_on_utc": "2026-11-12",
+  "status": "GENERIC_RUNTIME_FIX_MERGED_TESTED_ORIGINAL182_LOT_UNVERIFIED",
+  "preflight": {
+    "development_sha": "80947e719f8ca8f691c0241edb8ff9e1d1aa60df",
+    "blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "independently_matched": true
+  },
+  "original603": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "unchanged": true,
+    "whole_scope_certified": false
+  },
+  "original182_selected_page": {
+    "url": "https://konaearth.com/products/100-kona-peaberry-coffee-1-lb",
+    "selected_h1": "100% Kona Peaberry Coffee, The Champagne of Kona",
+    "currently_sold_out": true,
+    "printed_roast_notes": {
+      "Medium": "Bittersweet chocolate, cream, prune, caramel",
+      "Medium_Dark": "Caramel, butter, cocoa, toffee, creamy body, sweet spice"
+    },
+    "raw_html_bytes": 1201394,
+    "raw_html_sha256": "2deae61e364e0fae29a4831c7fc268f693409102c5815c06f5c61bdbbad732e8",
+    "actual_parser_fields": {
+      "name": "100% Kona Peaberry Coffee, The Champagne of Kona",
+      "roaster": "Kona Earth Coffee",
+      "origin": "Award-winning 100% Kona, Big Island"
+    },
+    "active_purchase_roast_control_verified": false,
+    "sold_out_lot_verification": false,
+    "draft_pr": 2328,
+    "strict_official_run": 43298294530,
+    "focused_positive_negative_tests_passed": 14,
+    "strict_afterproof": "FAILED_ONLY_ACTIVE_PURCHASE_OPTIONS",
+    "no_product_or_lot_inference": true
+  },
+  "parser_fix": {
+    "pr": 2329,
+    "source_commit": "80947e719f8ca8f691c0241edb8ff9e1d1aa60df",
+    "path": "src/server/coffee-roast-variants.mjs",
+    "source_blob": "c4047b615a537ed61afb4f04ee63bbd63be341ad",
+    "defect": "A printed selected roast value literally saying flavor profile not published / notes not yet available was treated as a canonical flavor.",
+    "correction": "Reject selected-roast explicit no-data placeholders while retaining exact published sensory notes; do not borrow adjacent roast profile.",
+    "regression_path": "tests/coffee-roast-unpublished-selected-notes.test.mjs",
+    "regression_blob": "faaba8e90ded7717ebfc416bef6b41b747707237",
+    "failed_pre_fix": [
+      43297803681,
+      43298135181
+    ],
+    "pr_head_success": {
+      "source_sha": "096e8113545884fc5113389b10c052424a4bb837",
+      "validate_run": 43298779044,
+      "focused_tests_passed": 3012,
+      "lint": true,
+      "cloud_build": true,
+      "other_checks": [
+        43298779368,
+        43298778953,
+        43298778981
+      ]
+    },
+    "merged_success": {
+      "source_sha": "80947e719f8ca8f691c0241edb8ff9e1d1aa60df",
+      "validate_run": 43299353296,
+      "focused_tests_passed": 3012,
+      "focused_failed": 0,
+      "lint": true,
+      "build": true,
+      "other_checks": [
+        43299353080,
+        43299353014
+      ]
+    },
+    "reviewed_merged_blobs_equal": true
+  },
+  "release": false,
+  "production_or_member_writes": false,
+  "queue_item": "DIC-Q-33-r156-unpublished-roast-flavor-guard",
+  "queue_status": "TESTING",
+  "next": "Keep #182 strict source proof in draft until real enabled selected options or suitable direct lot evidence. Review next non-overlapping unresolved original603 case and qualify missing evidence without inventing fields. No Netlify publication."
+}

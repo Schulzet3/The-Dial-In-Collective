@@ -1,0 +1,11 @@
+# Issue #33 R156 — merged generic roast placeholder guard, exact evidence receipt (2026-11-12; development only)
+
+DIC_PREFLIGHT_VERIFIED development_sha=80947e719f8ca8f691c0241edb8ff9e1d1aa60df preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+## Verified source integration
+PR #2329 [skip netlify] nonforce squash merged to `80947e719f8ca8f691c0241edb8ff9e1d1aa60df` after new concurrent development `f4378a3e28f7b4d3917c75876b3247fdb0b1dee9` was checked: original `src/server/coffee-roast-variants.mjs` and queue Git blobs unchanged there, no overlap. Read back merged source `c4047b615a537ed61afb4f04ee63bbd63be341ad`, tests `faaba8e90ded7717ebfc416bef6b41b747707237`, journal `e7f0e9a2f10234e42e119edc271a34587dfca841`, queue `f62ccb2a454a863f7cd7bec27e8a04f3e3a9b94a`, each exactly equal to reviewed PR head blobs. Frozen CSV Git blob `3e0d3036ea727de091f304f538c6de2dfcaa10d6` identical.
+
+PR-head 096e811... exact validate 43298779044 **SUCCESS**: 3,012 coffee/source/preview tests, zero failures, lint PASS and cloud build PASS. Approval 43298779368, cloud+mobile 43298778953, SQL 43298778981, security 43298779093 and archive 43298778978 SUCCESS. Merge exact `80947e...` validate 43299353296 **SUCCESS**: 3,012 focused coffee tests, zero failure, lint PASS, build PASS. Merged approval 43299353080 and cloud+mobile 43299353014 SUCCESS. Frozen603 and broad public probes SKIPPED, not PASS; no signed-in device or production claims.
+
+## Distinct #182 current selected product limitation
+Draft PR #2328 strict actual guarded official HTTPS run 43298294530 **FAILED** specifically purchase-specific roast control proof, despite 14/14 positive/negative synthetics PASS, exact H1, two labeled current profile descriptions, actual source-bound parser name/roaster/origin, raw official HTML 1,201,394 bytes SHA256 `2deae61e364e0fae29a4831c7fc268f693409102c5815c06f5c61bdbbad732e8`. Current official product is **SOLD OUT**. It does not support independent currently purchasable selected roast/lot certification; do not auto-select roast or invent data, do not merge #2328. Generic no-data runtime protection is independently merged/tested; whole original 603 incomplete, #33 OPEN. Queue item remains **TESTING** pending real same selected current no-data scenario, NOT READY/DEPLOYED. No Netlify, SQL/Auth/Edge/provider/member writes.
