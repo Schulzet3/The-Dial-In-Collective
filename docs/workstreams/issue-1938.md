@@ -118,3 +118,5 @@
 - Visual CI regression: isolated `tests/browser/visual_review.py` concatenates Admin modules without ES imports; its synthetic browser fixture did not supply the new `getAdminPushStatus` helper, so Admin never rendered and `#admin-refresh` timed out. Added fixture-only stub reporting disabled; production module and Auth unchanged. Re-test exact source.
 
 - Browser CI second fixture failure: `tests/browser/admin_invitation_qa.py` independently concatenates the real Admin JS and also lacked `getAdminPushStatus`; `New Account Requests` timed out. Supplied the same synthetic disabled-state helper only in that fixture; no runtime weakening. New exact-source CI required.
+
+- Third isolated browser fixture: `tests/browser/admin_records_qa.py` similarly concatenates main.js and lacked the imported push-state helper. Browser log explicitly showed `getAdminPushStatus is not defined`; added fixture-only disabled-state stub. All three affected browser fixtures now provide the helper. Re-test exact source.
