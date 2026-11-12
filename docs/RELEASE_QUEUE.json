@@ -11741,7 +11741,7 @@
       "pr": 1943,
       "title": "Opt-in privacy-minimized administrator Web Push with Home Screen background delivery",
       "state": "BLOCKED",
-      "merged_source_sha": "c3cdd89c009b36595f8b0d976b4497fd890e6bd3",
+      "merged_source_sha": "a932f088496ea4afb50d62cfd4f1233ea1dd1907",
       "scope_paths": [
         "site/admin/view.js",
         "site/admin/main.js",
@@ -11756,7 +11756,9 @@
       "tests": [
         "Synthetic VAPID ECDSA JWT, strict Apple endpoint allowlist, private-body absence, role verification, subscription baseline and opt-out, sender dedupe/role removal, PWA worker click and SQL ACL tests in tests/admin-push*.test.mjs.",
         "CI discovered site graph omitted admin/push.js: corrected explicit build_cloud.mjs allowlist; retest build/browser before READY.",
-        "2026-11-11 live verification: PR #1943 nonforce MERGED c3cdd89c009b36595f8b0d976b4497fd890e6bd3; exact PR head 5117288fb0dfcecc7d0e6c23350a68a572e033f5 approval 42928639447, source security 42928639288, isolated SQL 42928639428, Node/build 42928639682, cloud/browser 42928639412 SUCCESS. Frozen603 SKIPPED (not applicable). Exact nine push runtime source blobs unchanged on current development 143c245a7ca621abdfc4db2500cba719916d7093, where Node/build 43074806086, browser 43074806035 and approval 43074806182 SUCCESS. Merged c3cdd89 exact mobile and Node workflows 42929188814/42929188940 CANCELLED, not counted PASS. Production Supabase migration 20261110235000 absent (live 59 migrations); Netlify project/team contain only SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY, missing Functions-scope server secret and VAPID keys; current Netlify deploy still 6af2ad72c2aa765f588abc75. No actual opt-in or iPhone Apple push delivery verified."
+        "2026-11-11 live verification: PR #1943 nonforce MERGED c3cdd89c009b36595f8b0d976b4497fd890e6bd3; exact PR head 5117288fb0dfcecc7d0e6c23350a68a572e033f5 approval 42928639447, source security 42928639288, isolated SQL 42928639428, Node/build 42928639682, cloud/browser 42928639412 SUCCESS. Frozen603 SKIPPED (not applicable). Exact nine push runtime source blobs unchanged on current development 143c245a7ca621abdfc4db2500cba719916d7093, where Node/build 43074806086, browser 43074806035 and approval 43074806182 SUCCESS. Merged c3cdd89 exact mobile and Node workflows 42929188814/42929188940 CANCELLED, not counted PASS. Production Supabase migration 20261110235000 absent (live 59 migrations); Netlify project/team contain only SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY, missing Functions-scope server secret and VAPID keys; current Netlify deploy still 6af2ad72c2aa765f588abc75. No actual opt-in or iPhone Apple push delivery verified.",
+        "2026-11-12 live Supabase migration 20261112010044 dic_admin_web_push APPLIED from exact source blob bd1c28897ef71662faa4327dd79e005292a96578. Created subscriptions table (0 rows) with RLS enabled; anon/authenticated denied SELECT/INSERT/UPDATE/DELETE, service_role allowed. Snapshot RPC anon/authenticated EXECUTE denied, service_role allowed; tokens/admin_ids return JSON arrays. Protected counts auth11, beta_members11, shots26, coffees8, Community12, submissions8 unchanged. This is hosted schema/ACL proof, NOT actual push delivery.",
+        "2026-11-11 merged pagination fix a932f088496ea4afb50d62cfd4f1233ea1dd1907 exact CI validate 43084114390, cloud/mobile 43084114360, approval 43084114309 PASS: 3933 Node PASS/0 FAIL/6 intentional SKIP, all four new keyset >50/failed/stale/overlap regressions PASS. Real APNs still UNVERIFIED."
       ],
       "ci_runs": [
         42928639447,
@@ -11766,15 +11768,17 @@
         42928639412,
         43074806086,
         43074806035,
-        43074806182
+        43074806182,
+        43084114390,
+        43084114360,
+        43084114309
       ],
       "blockers": [
-        "Owner Publish command and verified recovery evidence required before source-isolated production Supabase migration 20261110235000; currently not applied.",
-        "Missing Netlify production Functions-scope SUPABASE_SECRET_KEY (or approved equivalent) and DIC_ADMIN_PUSH_VAPID_PUBLIC_KEY / DIC_ADMIN_PUSH_VAPID_PRIVATE_KEY. Never store credentials in GitHub/chat.",
-        "After authorized publication, verify site deploy, production migration and real iPhone Home Screen opt-in + background Apple Web Push delivery; NOT TESTED."
+        "Netlify site 153277f2-e19e-4862-b9a6-f2e18ccde271 still has NO Functions-scoped SUPABASE_SECRET_KEY (or approved legacy service-role credential), DIC_ADMIN_PUSH_VAPID_PUBLIC_KEY or DIC_ADMIN_PUSH_VAPID_PRIVATE_KEY. Two attempted production VAPID key upserts were rejected by Netlify API HTTP 403; credentials not stored. Team env likewise absent. Need proper authorized site-level env access or owner secure-dashboard installation; never send credentials in GitHub/chat.",
+        "Live Netlify push API/scheduled sender and real iPhone Home Screen push delivery remain UNVERIFIED until protected configuration and a combined one-use release; owner requires shipping #1938 with READY queue, so do NOT publish READY-only separately."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1938",
-      "notes": "Do not call READY until exact-source CI and runtime configuration plan are verified. No production/Netlify/Supabase changes; preserve original mobile app and all private data.\n2026-11-11 source code PASS with identical runtime blobs across merged/current development, but BLOCKED for live delivery. No deploy, production writes or secret changes."
+      "notes": "Do not call READY until exact-source CI and runtime configuration plan are verified. No production/Netlify/Supabase changes; preserve original mobile app and all private data.\n2026-11-11 source code PASS with identical runtime blobs across merged/current development, but BLOCKED for live delivery. No deploy, production writes or secret changes.\n2026-11-11 owner explicitly approved publishing #1938 WITH all READY items. 2026-11-12 Supabase push schema migration independently applied/verified (v20261112010044) without modifying existing member/shot/coffee records. Netlify env write HTTP403 and missing server/VAPID credentials remain the external blocker. Keep BLOCKED; hold the READY46 queue instead of issuing a partial release. Newly encrypted backup GitHub artifact13905387023 verified, owner-private Drive copy not yet confirmed, so do not certify it for potentially destructive recovery. Release staging candidate READY45 r2 93d4852... passed five statuses but excludes push and one concurrent newer READY item, so it is NOT approved for this owner-required all-items-with-push combined publication.\n2026-11-12 recovery closure: GitHub run 43130883406 artifact13905387023 ZIP 23,040,726 bytes SHA256 2bd4cce694a04bf8448ae67859e9d716e188c7e89ee51c23b763cd0e8afd2af9, containing exactly one encrypted backup.age; delivered without plaintext to owner-private direct Drive folder 1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf as file1591RhOQg-UEAXL2OHIDjCNrP9CngWezr. Independently downloaded Drive ZIP matched same byte size and SHA, owner-only permissions, no duplicate title at readback. Backup snapshot began 2026-11-12T00:56:01Z. Latest observed DB-write instant must still be checked before a potentially destructive release; this proof does not authorize release."
     },
     {
       "id": "DIC-Q-455-family-recorded-control-evidence-guard",
