@@ -125,9 +125,35 @@ const SELECTED_NAME_DECAF_SENTENCE=/^([\p{L}\p{M}\d][\p{L}\p{M}\d'’ -]{2,100}?
 function currentNamedDecafMethod(name,line){
  const subject=String(name||'').split(/[,;|]/u)[0].trim();
  if(subject.length<4||subject.length>90||!decafOnlyCoffee(name))return false;
+ // A selected H1 "Decaf [coffee]" can describe that SAME product as
+ // "The [coffee] EA Natural Decaf is decaffeinated using ...". Do not
+ // admit other product identities, vague chemistry or unbound page SEO.
+ const prefixDecaf=/^decaf(?:feinated)?\s+/iu.test(subject);
+ const core=fold(subject.replace(/^decaf(?:feinated)?\s+/iu,''));
  return String(line).split(/(?<=[.!?])\s+/u).slice(0,8).some(sentence=>{
   const claim=sentence.trim().match(SELECTED_NAME_DECAF_SENTENCE);
-  return Boolean(claim&&fold(claim[1])===fold(subject));
+  if(!claim)return false;
+  if(fold(claim[1])===fold(subject))return true;
+  const reordered=fold(claim[1]).replace(/^the\s+/u,'')
+   .replace(/\s+(?:(?:ea|e a)\s+)?(?:natural\s+)?decaf(?:feinated)?$/u,'');
+  return prefixDecaf&&core.length>=8&&reordered===core;
+ });
+}
+// On a short selected paragraph, only split a previously recognized
+// complete named method if the SAME paragraph also affirmatively identifies
+// a distinct competing treatment for "this coffee" / "it". Otherwise retain
+// the existing single short-paragraph witness once, not twice.
+function opposingCurrentNamedDecafMethods(name,line){
+ const sentences=String(line).split(/(?<=[.!?])\s+/u).slice(0,8);
+ const index=sentences.findIndex(s=>currentNamedDecafMethod(name,s));
+ if(index<0)return false;
+ const named=inferDecaffeinationMethod({name,selectedMethod:sentences[index]});
+ if(!named)return false;
+ return sentences.slice(index+1).some(sentence=>{
+  const s=sentence.trim();
+  if(!/^(?:this coffee|it)\s+(?:is|has been)\s+decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?/iu.test(s))return false;
+  const other=inferDecaffeinationMethod({name,selectedMethod:s});
+  return Boolean(other&&other!==named);
  });
 }
 // Some Shopify product-only accordions put their current treatment title
@@ -432,6 +458,40 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
      !decafEvidence.has(namedWater[0])){
    if(decafEvidence.size<4)decafEvidence.add(namedWater[0]);
    else decafEvidenceOverflow=true;
+  }
+  // Explicit directly named selected coffee methods may sit inside
+  // a longer paragraph. Inspect bounded sentences of that scoped P only;
+  // retain exact chosen identity, nonhistorical and method conflict guards.
+  if(decafOnlyCoffee(name)&&b.tag==='p'&&!b.educational&&
+     line.length<=1200&&(line.length>360||opposingCurrentNamedDecafMethods(name,line))&&
+     !NONCURRENT_DECAF_METHOD.test(line)&&
+     !/^(?:faq|frequently asked questions|common questions|decaf process education)$/iu.test(String(b.section||'').trim()))
+   for(const sentence of line.split(/(?<=[.!?])\s+/u).slice(0,8)){
+    const statement=sentence.trim();
+    if(statement.length<35||statement.length>360||
+       !currentNamedDecafMethod(name,statement)||
+       !inferDecaffeinationMethod({name,selectedMethod:statement})||
+       decafEvidence.has(statement))continue;
+    if(decafEvidence.size<4)decafEvidence.add(statement);
+    else decafEvidenceOverflow=true;
+   }
+  // A conflicting immediately following "This coffee/It is decaffeinated
+  // using [other method]" in the SAME selected paragraph must not vanish.
+  // Require the preceding exact named-current witness; then preserve both
+  // named methods for the existing incompatible-method fail-closed gate.
+  if(decafOnlyCoffee(name)&&b.tag==='p'&&!b.educational&&line.length<=1200&&
+     !NONCURRENT_DECAF_METHOD.test(line)){
+   const sentences=line.split(/(?<=[.!?])\s+/u).slice(0,8);
+   const namedIndex=sentences.findIndex(sentence=>currentNamedDecafMethod(name,sentence));
+   if(namedIndex>=0)for(const sentence of sentences.slice(namedIndex+1)){
+    const statement=sentence.trim();
+    if(statement.length>270||
+       !/^(?:this coffee|it)\s+(?:is|has been)\s+decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?(?:swiss[ -]?water|mountain[ -]?water|sugar(?:[ -]?cane|[ -]?process)|ethyl[ -]?acetate|(?:supercritical\s+)?carbon[ -]?dioxide|co\s*[- ]?2)\b/iu.test(statement)||
+       !inferDecaffeinationMethod({name,selectedMethod:statement})||
+       decafEvidence.has(statement))continue;
+    if(decafEvidence.size<4)decafEvidence.add(statement);
+    else decafEvidenceOverflow=true;
+   }
   }
   // A decaf identity plus a current selected-product sentence is required.
   // Reuse the conservative method classifier; if multiple incompatible
