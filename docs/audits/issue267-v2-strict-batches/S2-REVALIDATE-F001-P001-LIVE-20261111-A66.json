@@ -1,0 +1,1903 @@
+{
+  "schema": "issue267_v2_first_file_strict_revalidation_and_postpin_delta",
+  "issue": 267,
+  "batch": "A66",
+  "reviewer": "ChatGPT AI direct source-line semantic interpretation, not independent human certification",
+  "development_parent_sha": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+  "original_frozen_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+  "pinned_executable_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+  "source_path": ".github/workflows/approval-continuity.yml",
+  "original_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+  "current_live_blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+  "prior_receipts": [
+    "docs/audits/issue267-v2-frozen-batches/R2-001.json",
+    "docs/audits/issue267-v2-current-batches/C2-001.json"
+  ],
+  "counts": {
+    "strictly_revalidated_original_physical_lines": 41,
+    "frozen_track_revalidated": 41,
+    "pinned_track_revalidated": 41,
+    "new_frozen_credit": 0,
+    "new_pinned_credit": 0,
+    "postpin_live_delta_lines_directly_reviewed": 9,
+    "postpin_live_delta_credit": "PROVISIONAL_PENDING_GLOBAL_DEDUP",
+    "new_original_denominator_credit": 0,
+    "original_unmatched_live_removed_or_replaced": 5
+  },
+  "line_mapping": {
+    "method": "source-line LCS coordinate alignment only; not itself a semantic review",
+    "original_to_live_exact": {
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4,
+      "5": 5,
+      "6": 6,
+      "7": 7,
+      "8": 8,
+      "9": 10,
+      "10": 11,
+      "11": 12,
+      "12": 13,
+      "13": 14,
+      "14": 15,
+      "15": 16,
+      "16": 17,
+      "17": 18,
+      "18": 19,
+      "19": 20,
+      "20": 21,
+      "21": 22,
+      "22": 23,
+      "23": 24,
+      "24": 25,
+      "25": 26,
+      "26": 27,
+      "27": 28,
+      "28": 29,
+      "29": 30,
+      "30": 33,
+      "31": 34,
+      "37": 40,
+      "38": 41,
+      "39": 42,
+      "40": 43,
+      "41": 45
+    },
+    "unmatched_original_lines": [
+      32,
+      33,
+      34,
+      35,
+      36
+    ],
+    "added_live_lines": [
+      9,
+      31,
+      32,
+      35,
+      36,
+      37,
+      38,
+      39,
+      44
+    ]
+  },
+  "findings": [
+    {
+      "status": "GOVERNANCE_POSSIBLE_RISK_UNCONFIRMED",
+      "scope": "F001/P001 lines23,27",
+      "disposition": "Official GitHub Actions tags rather than immutable SHA pins, no active compromise shown."
+    },
+    {
+      "status": "POSTPIN_WORKFLOW_ENHANCEMENT_REVIEWED",
+      "scope": "current lines9,31-32,35-39,44",
+      "disposition": "Adds release-candidate trigger, security scan and event identity; consolidates queue commands; test exact negative cases before claiming equivalent coverage or cost improvement."
+    }
+  ],
+  "tests": {
+    "original_blob": "EXACT 2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+    "pinned_blob": "EXACT 2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+    "live_blob": "EXACT 3a44b0c9dc92949bb864250ee774336031bff996",
+    "original_line_review": "41/41 direct numbered semantic records",
+    "live_delta_review": "9/9 new/modified current lines semantically interpreted",
+    "original_literal_readback": "41/41",
+    "local_line_overlap": "zero duplicate coordinates within each track",
+    "governance": "PENDING_PR_HEAD_AND_MERGED",
+    "app_node_lint_build": "NOT_RUN_DOCS_ONLY",
+    "signed_auth_provider": "NOT_RUN",
+    "original603": "NOT_RUN"
+  },
+  "next": {
+    "historical": "F162:31",
+    "pinned": "P132:221",
+    "global": "Revalidate remaining older broad R2/C2 receipts, independent all-inventory gap/dedup, all post-pin code drift/assets, findings and owner review report."
+  },
+  "per_original_line": [
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 1,
+      "source_text": "name: DIC approval, implementation and continuity contract",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 1
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 1
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 1,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "workflow_directive",
+      "behavior": "Workflow display name declares approval, implementation and continuity contract; not executable validation.",
+      "quality_risk": "No reproduced active defect in this literal YAML line, though downstream scripts decide actual behavior.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 2,
+      "source_text": "# This runs on EVERY application-branch push, INCLUDING docs-only and issue",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 2
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 2
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 2,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "comment",
+      "behavior": "Comment describes push coverage including docs-only and issue reconciliation.",
+      "quality_risk": "No reproduced active defect in this literal YAML line, though downstream scripts decide actual behavior.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 3,
+      "source_text": "# reconciliation commits that were skipped by earlier path-filtered workflows.",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 3
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 3
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 3,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "comment",
+      "behavior": "Comment identifies prior path-filter omission as historical motivation for unfiltered trigger.",
+      "quality_risk": "No reproduced active defect in this literal YAML line, though downstream scripts decide actual behavior.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 4,
+      "source_text": "# It does not publish, access credentials, modify providers or spend Netlify credits.",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 4
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 4
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 4,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "comment",
+      "behavior": "Comment states no publish/credential/provider/Netlify credit scope; intent alone does not prove runtime script safety.",
+      "quality_risk": "The comment is not proof of no provider writes; actual scripts and token privileges must align.",
+      "security_privacy_risk": "Read-only token, third-party action provenance, or SHA-bound commit checking relevant; no provider/member/private data write authorized.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 5,
+      "source_text": "on:",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 5
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 5
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 5,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "yaml_structural",
+      "behavior": "YAML event trigger mapping begins.",
+      "quality_risk": "No reproduced active defect in this literal YAML line, though downstream scripts decide actual behavior.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 6,
+      "source_text": "  push:",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 6
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 6
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 6,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "yaml_structural",
+      "behavior": "Push trigger enabled.",
+      "quality_risk": "No reproduced active defect in this literal YAML line, though downstream scripts decide actual behavior.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 7,
+      "source_text": "    branches:",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 7
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 7
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 7,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "yaml_structural",
+      "behavior": "Push branch filter key.",
+      "quality_risk": "No reproduced active defect in this literal YAML line, though downstream scripts decide actual behavior.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 8,
+      "source_text": "      - development/backend-foundation",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 8
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 8
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 8,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "workflow_directive",
+      "behavior": "Development/backend-foundation push allowed; frozen workflow did not trigger release-candidate pushes.",
+      "quality_risk": "Does not protect release-candidate branches in original; current live version adds that push trigger.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 9,
+      "source_text": "  pull_request:",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 9
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 9
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 10,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "yaml_structural",
+      "behavior": "Pull-request trigger enabled.",
+      "quality_risk": "No reproduced active defect in this literal YAML line, though downstream scripts decide actual behavior.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 10,
+      "source_text": "    branches:",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 10
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 10
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 11,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "yaml_structural",
+      "behavior": "PR target branch filter key.",
+      "quality_risk": "No reproduced active defect in this literal YAML line, though downstream scripts decide actual behavior.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 11,
+      "source_text": "      - development/backend-foundation",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 11
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 11
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 12,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "workflow_directive",
+      "behavior": "Only PRs into development branch targeted.",
+      "quality_risk": "No reproduced active defect in this literal YAML line, though downstream scripts decide actual behavior.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 12,
+      "source_text": "  workflow_dispatch:",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 12
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 12
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 13,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "workflow_directive",
+      "behavior": "Manual workflow_dispatch trigger permitted for this check only.",
+      "quality_risk": "No reproduced active defect in this literal YAML line, though downstream scripts decide actual behavior.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 13,
+      "source_text": "permissions:",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 13
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 13
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 14,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "yaml_structural",
+      "behavior": "Explicit token permissions block begins.",
+      "quality_risk": "No reproduced active defect in this literal YAML line, though downstream scripts decide actual behavior.",
+      "security_privacy_risk": "Read-only token, third-party action provenance, or SHA-bound commit checking relevant; no provider/member/private data write authorized.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 14,
+      "source_text": "  contents: read",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 14
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 14
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 15,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "workflow_directive",
+      "behavior": "Workflow token requests contents:read, not a repository write scope.",
+      "quality_risk": "No reproduced active defect in this literal YAML line, though downstream scripts decide actual behavior.",
+      "security_privacy_risk": "Read-only token, third-party action provenance, or SHA-bound commit checking relevant; no provider/member/private data write authorized.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 15,
+      "source_text": "concurrency:",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 15
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 15
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 16,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "yaml_structural",
+      "behavior": "Concurrency policy block begins.",
+      "quality_risk": "No reproduced active defect in this literal YAML line, though downstream scripts decide actual behavior.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 16,
+      "source_text": "  group: dic-approval-continuity-${{ github.ref }}",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 16
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 16
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 17,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "workflow_directive",
+      "behavior": "Concurrency groups by github.ref to serialize or supersede same-ref checks.",
+      "quality_risk": "Ref-level cancellation can cancel prior checks; cancelled != passed.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 17,
+      "source_text": "  cancel-in-progress: true",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 17
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 17
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 18,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "workflow_directive",
+      "behavior": "Cancel earlier same-group in-progress workflows, so cancelled run must not be counted PASS.",
+      "quality_risk": "Skipped/superseded check must not be accepted as PASS.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 18,
+      "source_text": "jobs:",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 18
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 18
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 19,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "yaml_structural",
+      "behavior": "Jobs mapping begins.",
+      "quality_risk": "No reproduced active defect in this literal YAML line, though downstream scripts decide actual behavior.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 19,
+      "source_text": "  approval:",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 19
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 19
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 20,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "yaml_structural",
+      "behavior": "Single approval job name.",
+      "quality_risk": "No reproduced active defect in this literal YAML line, though downstream scripts decide actual behavior.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 20,
+      "source_text": "    runs-on: ubuntu-24.04",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 20
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 20
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 21,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "workflow_directive",
+      "behavior": "Hosted Ubuntu 24.04 runner for approval checks.",
+      "quality_risk": "Ubuntu runner image supply chain and hosted behavior are external dependencies.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "Hosted tooling or repeated checks can affect CI duration, but no benchmark from this audit.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 21,
+      "source_text": "    timeout-minutes: 5",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 21
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 21
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 22,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "workflow_directive",
+      "behavior": "Five-minute job timeout guards hangs but may fail slow source histories.",
+      "quality_risk": "Timeout may fail when checkout or script workload grows.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "Hosted tooling or repeated checks can affect CI duration, but no benchmark from this audit.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 22,
+      "source_text": "    steps:",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 22
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 22
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 23,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "yaml_structural",
+      "behavior": "Step list begins.",
+      "quality_risk": "No reproduced active defect in this literal YAML line, though downstream scripts decide actual behavior.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 23,
+      "source_text": "      - uses: actions/checkout@v7",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 23
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 23
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 24,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "workflow_directive",
+      "behavior": "Official actions/checkout@v7 tag obtains source, not immutable action SHA pin.",
+      "quality_risk": "Mutable action version tag, not pinned digest, presents supply-chain provenance candidate; no compromise shown.",
+      "security_privacy_risk": "Read-only token, third-party action provenance, or SHA-bound commit checking relevant; no provider/member/private data write authorized.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "Investigate noted governance/speed tradeoff with source-specific tests; no speculative change.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 24,
+      "source_text": "        with:",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 24
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 24
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 25,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "yaml_structural",
+      "behavior": "Checkout action arguments begin.",
+      "quality_risk": "No reproduced active defect in this literal YAML line, though downstream scripts decide actual behavior.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 25,
+      "source_text": "          persist-credentials: false",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 25
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 25
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 26,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "workflow_directive",
+      "behavior": "Persist-credentials=false prevents keeping checkout token in Git config for subsequent steps.",
+      "quality_risk": "Disabling persisted credentials mitigates accidental Git token exposure; token permission still matters.",
+      "security_privacy_risk": "Read-only token, third-party action provenance, or SHA-bound commit checking relevant; no provider/member/private data write authorized.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 26,
+      "source_text": "          fetch-depth: 0",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 26
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 26
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 27,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "workflow_directive",
+      "behavior": "fetch-depth:0 provides full history needed for per-commit SHA continuity, with extra checkout cost.",
+      "quality_risk": "Full history has an efficiency cost but required for source continuity.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "Hosted tooling or repeated checks can affect CI duration, but no benchmark from this audit.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "Investigate noted governance/speed tradeoff with source-specific tests; no speculative change.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 27,
+      "source_text": "      - uses: actions/setup-node@v7.1.0",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 27
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 27
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 28,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "workflow_directive",
+      "behavior": "Official actions/setup-node@v7.1.0 tag sets toolchain, mutable action version boundary.",
+      "quality_risk": "Mutable action version tag, no confirmed exploit.",
+      "security_privacy_risk": "Read-only token, third-party action provenance, or SHA-bound commit checking relevant; no provider/member/private data write authorized.",
+      "performance_risk": "Hosted tooling or repeated checks can affect CI duration, but no benchmark from this audit.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "Investigate noted governance/speed tradeoff with source-specific tests; no speculative change.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 28,
+      "source_text": "        with:",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 28
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 28
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 29,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "yaml_structural",
+      "behavior": "Node setup options begin.",
+      "quality_risk": "No reproduced active defect in this literal YAML line, though downstream scripts decide actual behavior.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 29,
+      "source_text": "          node-version: '22'",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 29
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 29
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 30,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "workflow_directive",
+      "behavior": "Node22 requested for governance scripts.",
+      "quality_risk": "Node22 matches project test environment, but not an application test.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 30,
+      "source_text": "      - name: Fail on missing owner decisions or approved UI/source tests",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 30
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 30
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 33,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "workflow_directive",
+      "behavior": "Step label claims owner-approved UI/source tests and decision check.",
+      "quality_risk": "No reproduced active defect in this literal YAML line, though downstream scripts decide actual behavior.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 31,
+      "source_text": "        run: node scripts/audit/approval-coverage.mjs",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 31
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 31
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 34,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "workflow_directive",
+      "behavior": "Run approval-coverage.mjs, whose own logic must be audited separately.",
+      "quality_risk": "Approval logic is in called source; YAML execution line alone cannot certify owner decision completeness.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "Hosted tooling or repeated checks can affect CI duration, but no benchmark from this audit.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 32,
+      "source_text": "      - name: Validate durable queue schema and show next-batch status (never publishes)",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 32
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 32
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": null,
+        "exact_literal_match": false,
+        "status": "REMOVED_OR_REPLACED"
+      },
+      "classification": "workflow_directive",
+      "behavior": "Old step label validates queue schema and status, nonpublishing.",
+      "quality_risk": "No reproduced active defect in this literal YAML line, though downstream scripts decide actual behavior.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "HISTORICAL_WORKFLOW_LINE_REPLACED_LIVE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 33,
+      "source_text": "        run: |",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 33
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 33
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": null,
+        "exact_literal_match": false,
+        "status": "REMOVED_OR_REPLACED"
+      },
+      "classification": "yaml_structural",
+      "behavior": "Start multiline shell commands for release queue validation.",
+      "quality_risk": "No reproduced active defect in this literal YAML line, though downstream scripts decide actual behavior.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "HISTORICAL_WORKFLOW_LINE_REPLACED_LIVE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 34,
+      "source_text": "          node scripts/release/release-queue.mjs --validate",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 34
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 34
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": null,
+        "exact_literal_match": false,
+        "status": "REMOVED_OR_REPLACED"
+      },
+      "classification": "workflow_directive",
+      "behavior": "Run release queue --validate structural check.",
+      "quality_risk": "Could duplicate schema work also done by enforce-intake; current version removed it without measured benchmark.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "Hosted tooling or repeated checks can affect CI duration, but no benchmark from this audit.",
+      "obsolete_dead_status": "HISTORICAL_WORKFLOW_LINE_REPLACED_LIVE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "Investigate noted governance/speed tradeoff with source-specific tests; no speculative change.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 35,
+      "source_text": "          node scripts/release/release-queue.mjs --enforce-intake",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 35
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 35
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": null,
+        "exact_literal_match": false,
+        "status": "REMOVED_OR_REPLACED"
+      },
+      "classification": "workflow_directive",
+      "behavior": "Run release queue --enforce-intake for source/intake authority.",
+      "quality_risk": "Must fail closed on unapproved/malformed queue; current live still retains it.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "Hosted tooling or repeated checks can affect CI duration, but no benchmark from this audit.",
+      "obsolete_dead_status": "HISTORICAL_WORKFLOW_LINE_REPLACED_LIVE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "Investigate noted governance/speed tradeoff with source-specific tests; no speculative change.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 36,
+      "source_text": "          node scripts/release/release-queue.mjs --status",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 36
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 36
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": null,
+        "exact_literal_match": false,
+        "status": "REMOVED_OR_REPLACED"
+      },
+      "classification": "workflow_directive",
+      "behavior": "Run release queue --status to print queue; nonpublishing but extra CI work.",
+      "quality_risk": "Status output is nonblocking and redundant when only gating is needed; current workflow no longer executes it.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "Hosted tooling or repeated checks can affect CI duration, but no benchmark from this audit.",
+      "obsolete_dead_status": "HISTORICAL_WORKFLOW_LINE_REPLACED_LIVE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "Investigate noted governance/speed tradeoff with source-specific tests; no speculative change.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 37,
+      "source_text": "      - name: Audit EVERY pushed commit, including docs-only and earlier commits in batch",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 37
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 37
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 40,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "workflow_directive",
+      "behavior": "Step label requires every pushed commit, including docs-only, to carry checkpoint.",
+      "quality_risk": "No reproduced active defect in this literal YAML line, though downstream scripts decide actual behavior.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 38,
+      "source_text": "        env:",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 38
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 38
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 41,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "yaml_structural",
+      "behavior": "Environment mapping begins for commit checkpoint checker.",
+      "quality_risk": "No reproduced active defect in this literal YAML line, though downstream scripts decide actual behavior.",
+      "security_privacy_risk": "No credential, private member data or unsafe action found from this line alone.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "No verified safe removal; preserve approvals and nondeployment separation.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 39,
+      "source_text": "          DIC_BASE_SHA: ${{ github.event.before || github.event.pull_request.base.sha }}",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 39
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 39
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 42,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "workflow_directive",
+      "behavior": "Set DIC_BASE_SHA using event-before or PR-base SHA fallback.",
+      "quality_risk": "First-push all-zero SHA or event base derivation needs event-specific tests.",
+      "security_privacy_risk": "Read-only token, third-party action provenance, or SHA-bound commit checking relevant; no provider/member/private data write authorized.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "Investigate noted governance/speed tradeoff with source-specific tests; no speculative change.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 40,
+      "source_text": "          DIC_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 40
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 40
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 43,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "workflow_directive",
+      "behavior": "Set DIC_HEAD_SHA using PR-head SHA or github.sha fallback.",
+      "quality_risk": "PR event SHA vs checkout branch SHA must be exact-source verified; no bypass evidenced.",
+      "security_privacy_risk": "Read-only token, third-party action provenance, or SHA-bound commit checking relevant; no provider/member/private data write authorized.",
+      "performance_risk": "No independently measurable performance cost from this scalar/comment.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "Investigate noted governance/speed tradeoff with source-specific tests; no speculative change.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    },
+    {
+      "file_index_1_based": 1,
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "line_1_based": 41,
+      "source_text": "        run: node scripts/audit/verify-commit-checkpoint.mjs",
+      "original_frozen": {
+        "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 41
+      },
+      "original_pinned_executable": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+        "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "line": 41
+      },
+      "current_counterpart": {
+        "branch": "development/backend-foundation",
+        "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "current_line_1_based": 45,
+        "exact_literal_match": true,
+        "status": "SAME_LITERAL_RELOCATED_OR_UNCHANGED"
+      },
+      "classification": "workflow_directive",
+      "behavior": "Run verify-commit-checkpoint.mjs over bounded commit interval.",
+      "quality_risk": "Commit-checkpoint implementation and integration tests are required; run result alone is bounded evidence.",
+      "security_privacy_risk": "Read-only token, third-party action provenance, or SHA-bound commit checking relevant; no provider/member/private data write authorized.",
+      "performance_risk": "Hosted tooling or repeated checks can affect CI duration, but no benchmark from this audit.",
+      "obsolete_dead_status": "PRESERVED_LIVE_ACTIVE_WORKFLOW_LINE",
+      "redundancy": "Already provisionally in R2-001 and C2-001, this strict revalidation grants ZERO new denominator positions.",
+      "testability": "Exact workflow head and push validation, first-push/PR SHA semantics, read-only token and queue-negative fixtures needed for bounded assurance.",
+      "improvement_opportunity": "Investigate noted governance/speed tradeoff with source-specific tests; no speculative change.",
+      "locked_fit": "Read-only audit must not authorize production, SQL, Auth, member mutation or direct main release.",
+      "disposition": "REVALIDATED_NO_NEW_COVERAGE_CREDIT"
+    }
+  ],
+  "postpin_live_delta": [
+    {
+      "track": "postpin_live",
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+      "source_blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+      "line_1_based": 9,
+      "source_text": "      - 'release-candidates/**'",
+      "classification": "workflow_code_or_metadata",
+      "behavior": "New live workflow checks release-candidates/** push refs, extending governance verification from development branch to isolated release candidates.",
+      "quality_risk": "Globbed branch push trigger expands CI; no authority to publish those release-candidate sources.",
+      "security_privacy_risk": "Read-only workflow change; no additional provider permissions or production writes.",
+      "performance_risk": "No measured runtime or battery effect, possible CI trigger/metadata cost only.",
+      "obsolete_dead_status": "LIVE_POSTPIN_CHANGE_ACTIVE_NOT_PROVEN_DEAD",
+      "redundancy": "Distinct live addition or modification, no duplicate current code proven.",
+      "current_counterpart": {
+        "path": ".github/workflows/approval-continuity.yml",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "line_1_based": 9,
+        "exact_literal_match": true
+      },
+      "testability": "Re-run current exact GitHub development PR/push with source guard, security inventory and queue schema negative cases; no synthetic pass is claimed here.",
+      "improvement_opportunity": "Track as independent post-pin delta; do not repeat later if previously reviewed in another receipt.",
+      "locked_fit": "Preserve owner-approved release gates, security/privacy and development-only authority; no deployment.",
+      "disposition": "DIRECTLY_SEMANTICALLY_REVIEWED_LIVE_DELTA_PROVISIONAL_GLOBAL_DEDUP"
+    },
+    {
+      "track": "postpin_live",
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+      "source_blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+      "line_1_based": 31,
+      "source_text": "      - name: Reject accidentally tracked private keys, credential files and high-confidence tokens",
+      "classification": "workflow_code_or_metadata",
+      "behavior": "New live step label announces rejection of accidentally tracked private keys, credentials and high-confidence tokens; must inspect script for coverage and false positives.",
+      "quality_risk": "Threat-model includes credential files and high-confidence secrets, but no claim all sensitive artifacts detected.",
+      "security_privacy_risk": "New security source audit operation or event SHA input; script itself must be separately inspected to establish coverage.",
+      "performance_risk": "No measured runtime or battery effect, possible CI trigger/metadata cost only.",
+      "obsolete_dead_status": "LIVE_POSTPIN_CHANGE_ACTIVE_NOT_PROVEN_DEAD",
+      "redundancy": "Distinct live addition or modification, no duplicate current code proven.",
+      "current_counterpart": {
+        "path": ".github/workflows/approval-continuity.yml",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "line_1_based": 31,
+        "exact_literal_match": true
+      },
+      "testability": "Re-run current exact GitHub development PR/push with source guard, security inventory and queue schema negative cases; no synthetic pass is claimed here.",
+      "improvement_opportunity": "Track as independent post-pin delta; do not repeat later if previously reviewed in another receipt.",
+      "locked_fit": "Preserve owner-approved release gates, security/privacy and development-only authority; no deployment.",
+      "disposition": "DIRECTLY_SEMANTICALLY_REVIEWED_LIVE_DELTA_PROVISIONAL_GLOBAL_DEDUP"
+    },
+    {
+      "track": "postpin_live",
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+      "source_blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+      "line_1_based": 32,
+      "source_text": "        run: node scripts/audit/security-inventory.mjs",
+      "classification": "workflow_code_or_metadata",
+      "behavior": "New live security-inventory.mjs execution adds a fail-closed secret scan before owner approval checks; not a substitute for provider secret hygiene.",
+      "quality_risk": "New read-only security scan may have false negatives; source/test evidence needed.",
+      "security_privacy_risk": "New security source audit operation or event SHA input; script itself must be separately inspected to establish coverage.",
+      "performance_risk": "Extra security scan or consolidated queue check affects per-push CI workload; no measured benchmark in this evidence.",
+      "obsolete_dead_status": "LIVE_POSTPIN_CHANGE_ACTIVE_NOT_PROVEN_DEAD",
+      "redundancy": "Distinct live addition or modification, no duplicate current code proven.",
+      "current_counterpart": {
+        "path": ".github/workflows/approval-continuity.yml",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "line_1_based": 32,
+        "exact_literal_match": true
+      },
+      "testability": "Re-run current exact GitHub development PR/push with source guard, security inventory and queue schema negative cases; no synthetic pass is claimed here.",
+      "improvement_opportunity": "Track as independent post-pin delta; do not repeat later if previously reviewed in another receipt.",
+      "locked_fit": "Preserve owner-approved release gates, security/privacy and development-only authority; no deployment.",
+      "disposition": "DIRECTLY_SEMANTICALLY_REVIEWED_LIVE_DELTA_PROVISIONAL_GLOBAL_DEDUP"
+    },
+    {
+      "track": "postpin_live",
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+      "source_blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+      "line_1_based": 35,
+      "source_text": "      - name: Validate queue schema and intake in one nonpublishing check",
+      "classification": "workflow_code_or_metadata",
+      "behavior": "New live queue step label consolidates schema/intake into one nonpublishing check.",
+      "quality_risk": "Step label is not substantive schema test by itself.",
+      "security_privacy_risk": "Read-only workflow change; no additional provider permissions or production writes.",
+      "performance_risk": "No measured runtime or battery effect, possible CI trigger/metadata cost only.",
+      "obsolete_dead_status": "LIVE_POSTPIN_CHANGE_ACTIVE_NOT_PROVEN_DEAD",
+      "redundancy": "Distinct live addition or modification, no duplicate current code proven.",
+      "current_counterpart": {
+        "path": ".github/workflows/approval-continuity.yml",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "line_1_based": 35,
+        "exact_literal_match": true
+      },
+      "testability": "Re-run current exact GitHub development PR/push with source guard, security inventory and queue schema negative cases; no synthetic pass is claimed here.",
+      "improvement_opportunity": "Track as independent post-pin delta; do not repeat later if previously reviewed in another receipt.",
+      "locked_fit": "Preserve owner-approved release gates, security/privacy and development-only authority; no deployment.",
+      "disposition": "DIRECTLY_SEMANTICALLY_REVIEWED_LIVE_DELTA_PROVISIONAL_GLOBAL_DEDUP"
+    },
+    {
+      "track": "postpin_live",
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+      "source_blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+      "line_1_based": 36,
+      "source_text": "        # --enforce-intake checks schema before exact-source coverage; the",
+      "classification": "source_comment",
+      "behavior": "Comment explains enforce-intake runs schema before exact-source approval coverage.",
+      "quality_risk": "Only comment, cannot guarantee --enforce-intake implementation.",
+      "security_privacy_risk": "Read-only workflow change; no additional provider permissions or production writes.",
+      "performance_risk": "No measured runtime or battery effect, possible CI trigger/metadata cost only.",
+      "obsolete_dead_status": "LIVE_POSTPIN_CHANGE_ACTIVE_NOT_PROVEN_DEAD",
+      "redundancy": "Distinct live addition or modification, no duplicate current code proven.",
+      "current_counterpart": {
+        "path": ".github/workflows/approval-continuity.yml",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "line_1_based": 36,
+        "exact_literal_match": true
+      },
+      "testability": "Re-run current exact GitHub development PR/push with source guard, security inventory and queue schema negative cases; no synthetic pass is claimed here.",
+      "improvement_opportunity": "Track as independent post-pin delta; do not repeat later if previously reviewed in another receipt.",
+      "locked_fit": "Preserve owner-approved release gates, security/privacy and development-only authority; no deployment.",
+      "disposition": "DIRECTLY_SEMANTICALLY_REVIEWED_LIVE_DELTA_PROVISIONAL_GLOBAL_DEDUP"
+    },
+    {
+      "track": "postpin_live",
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+      "source_blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+      "line_1_based": 37,
+      "source_text": "        # separate --validate and nonblocking --status invocations duplicated",
+      "classification": "source_comment",
+      "behavior": "Comment documents redundant validate/status invocations that were removed, reducing repeated work, but no benchmark supplied.",
+      "quality_risk": "CI efficiency rationale not benchmarked here; removal could regress coverage if validator has distinct behavior.",
+      "security_privacy_risk": "Read-only workflow change; no additional provider permissions or production writes.",
+      "performance_risk": "No measured runtime or battery effect, possible CI trigger/metadata cost only.",
+      "obsolete_dead_status": "LIVE_POSTPIN_CHANGE_ACTIVE_NOT_PROVEN_DEAD",
+      "redundancy": "Distinct live addition or modification, no duplicate current code proven.",
+      "current_counterpart": {
+        "path": ".github/workflows/approval-continuity.yml",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "line_1_based": 37,
+        "exact_literal_match": true
+      },
+      "testability": "Re-run current exact GitHub development PR/push with source guard, security inventory and queue schema negative cases; no synthetic pass is claimed here.",
+      "improvement_opportunity": "Track as independent post-pin delta; do not repeat later if previously reviewed in another receipt.",
+      "locked_fit": "Preserve owner-approved release gates, security/privacy and development-only authority; no deployment.",
+      "disposition": "DIRECTLY_SEMANTICALLY_REVIEWED_LIVE_DELTA_PROVISIONAL_GLOBAL_DEDUP"
+    },
+    {
+      "track": "postpin_live",
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+      "source_blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+      "line_1_based": 38,
+      "source_text": "        # work on every push. On-demand queue status remains available.",
+      "classification": "source_comment",
+      "behavior": "Comment says queue status is still available on demand; removal from CI does not authorize publication.",
+      "quality_risk": "Command removal changes logging but not necessarily blocker checks.",
+      "security_privacy_risk": "Read-only workflow change; no additional provider permissions or production writes.",
+      "performance_risk": "No measured runtime or battery effect, possible CI trigger/metadata cost only.",
+      "obsolete_dead_status": "LIVE_POSTPIN_CHANGE_ACTIVE_NOT_PROVEN_DEAD",
+      "redundancy": "Distinct live addition or modification, no duplicate current code proven.",
+      "current_counterpart": {
+        "path": ".github/workflows/approval-continuity.yml",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "line_1_based": 38,
+        "exact_literal_match": true
+      },
+      "testability": "Re-run current exact GitHub development PR/push with source guard, security inventory and queue schema negative cases; no synthetic pass is claimed here.",
+      "improvement_opportunity": "Track as independent post-pin delta; do not repeat later if previously reviewed in another receipt.",
+      "locked_fit": "Preserve owner-approved release gates, security/privacy and development-only authority; no deployment.",
+      "disposition": "DIRECTLY_SEMANTICALLY_REVIEWED_LIVE_DELTA_PROVISIONAL_GLOBAL_DEDUP"
+    },
+    {
+      "track": "postpin_live",
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+      "source_blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+      "line_1_based": 39,
+      "source_text": "        run: node scripts/release/release-queue.mjs --enforce-intake",
+      "classification": "workflow_code_or_metadata",
+      "behavior": "Live workflow keeps --enforce-intake as sole queue gate, rather than earlier validate+intake+status triple; require regression tests for schema/intake completeness.",
+      "quality_risk": "Potential regression if --validate had independent checks; compare actual scripts/CI before asserting safe optimization.",
+      "security_privacy_risk": "Read-only workflow change; no additional provider permissions or production writes.",
+      "performance_risk": "Extra security scan or consolidated queue check affects per-push CI workload; no measured benchmark in this evidence.",
+      "obsolete_dead_status": "LIVE_POSTPIN_CHANGE_ACTIVE_NOT_PROVEN_DEAD",
+      "redundancy": "Consolidates three old queue invocations; correctness requires script equivalence tests.",
+      "current_counterpart": {
+        "path": ".github/workflows/approval-continuity.yml",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "line_1_based": 39,
+        "exact_literal_match": true
+      },
+      "testability": "Re-run current exact GitHub development PR/push with source guard, security inventory and queue schema negative cases; no synthetic pass is claimed here.",
+      "improvement_opportunity": "Track as independent post-pin delta; do not repeat later if previously reviewed in another receipt.",
+      "locked_fit": "Preserve owner-approved release gates, security/privacy and development-only authority; no deployment.",
+      "disposition": "DIRECTLY_SEMANTICALLY_REVIEWED_LIVE_DELTA_PROVISIONAL_GLOBAL_DEDUP"
+    },
+    {
+      "track": "postpin_live",
+      "path": ".github/workflows/approval-continuity.yml",
+      "source_commit": "9ec3d9a55f7dee49dd110caf98d4850dde02abc8",
+      "source_blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+      "line_1_based": 44,
+      "source_text": "          DIC_EVENT_NAME: ${{ github.event_name }}",
+      "classification": "workflow_code_or_metadata",
+      "behavior": "Live DIC_EVENT_NAME passes GitHub event type to source checkpoint script, enabling event-specific commit SHA interpretation; check downstream parser/guards.",
+      "quality_risk": "DIC_EVENT_NAME metadata flows to audit script; shell-value handling and event cases need tests.",
+      "security_privacy_risk": "New security source audit operation or event SHA input; script itself must be separately inspected to establish coverage.",
+      "performance_risk": "No measured runtime or battery effect, possible CI trigger/metadata cost only.",
+      "obsolete_dead_status": "LIVE_POSTPIN_CHANGE_ACTIVE_NOT_PROVEN_DEAD",
+      "redundancy": "Distinct live addition or modification, no duplicate current code proven.",
+      "current_counterpart": {
+        "path": ".github/workflows/approval-continuity.yml",
+        "blob_sha": "3a44b0c9dc92949bb864250ee774336031bff996",
+        "line_1_based": 44,
+        "exact_literal_match": true
+      },
+      "testability": "Re-run current exact GitHub development PR/push with source guard, security inventory and queue schema negative cases; no synthetic pass is claimed here.",
+      "improvement_opportunity": "Track as independent post-pin delta; do not repeat later if previously reviewed in another receipt.",
+      "locked_fit": "Preserve owner-approved release gates, security/privacy and development-only authority; no deployment.",
+      "disposition": "DIRECTLY_SEMANTICALLY_REVIEWED_LIVE_DELTA_PROVISIONAL_GLOBAL_DEDUP"
+    }
+  ]
+}
