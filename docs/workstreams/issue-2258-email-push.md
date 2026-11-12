@@ -25,3 +25,9 @@
 ## Device UI regression contract
 
 - `tests/issue2258-approval-push-device.test.mjs` asserts the browser permission request is immediate from the user action, distinct narrow worker scope, VAPID URL-safe key decoding, subscription status/opt-out, and iPhone Home Screen gating. Static tests require verified-pending UI only, explicit provider server call, Admin PWA worker unchanged. These are isolated mocks; they do not prove Apple device delivery.
+
+## Locked owner decision, queue and source-intake correction
+
+- Explicit `ACCESS-MEMBER-APPROVAL-EMAIL-AND-OPTIN-WEB-PUSH-20261112` approved Nov12; narrow scope in Master Specification + Decision Ledger and coverage inventory/contract. Do not change 79 original Locked baseline decisions.
+- Mandatory queue row `DIC-Q-2258-user-account-approval-confirmation` was independently READY only for earlier in-app PR #2260. Because new build overlaps `site/cloud/main.js`, the prior READY cannot be published independently without exact-byte isolation. We safely moved the same row to **IN_PROGRESS**, merged SHA null (historic proof retained), broadening scope to email, push, migrations, Edge and worker; no other row/status was modified. A new tested source and verified provider configuration will be required for READY.
+- New worker template recognized as deployable by `scripts/release/release-queue.mjs`; all changes retain exact commit journal and [skip netlify]. Still no live provider writes or account notifications.

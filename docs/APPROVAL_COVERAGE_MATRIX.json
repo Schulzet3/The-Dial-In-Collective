@@ -43,6 +43,7 @@
     "current_owner_grinder_range_info_20261019",
     "current_owner_hands_free_release_from_chat_20261021",
     "current_owner_meaningful_yield_20261104",
+    "current_owner_member_approval_email_push_20261112",
     "current_owner_no_netlify_credit_checks_20261022",
     "current_owner_oct22_refinements_20261022",
     "current_owner_one_visible_recipe_internal_families_20261020",
@@ -114,6 +115,60 @@
     "pending_release_field_note": "Schema compatibility name; this record is a consumed HISTORICAL release, not a pending authorization."
   },
   "contracts": [
+    {
+      "id": "member_approval_email_and_optin_push_20261112",
+      "decision_key": "current_owner_member_approval_email_push_20261112",
+      "issue": 2258,
+      "scope": "An approved new user's transactional email and opt-in closed-app Web Push; only verified pending users register; Admin service worker, Auth, offline/Community, and publication gates unchanged",
+      "implementation": "IN_PROGRESS_OUTBOX_AND_UI_SOURCE_ONLY_NOT_DEPLOYED",
+      "device_acceptance": "NOT_PERFORMED: real email inbox, verified sender/DNS, Apple Home Screen APNs delivery and production scheduler unverified; physical-device test is not a mandatory source gate",
+      "assertions": [
+        {
+          "path": "site/cloud/main.js",
+          "contains": "Enable Approval Push Alerts"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "contains": "state==='pending'&&this.status?.emailVerified"
+        },
+        {
+          "path": "site/cloud/client.js",
+          "contains": "sdk.functions.invoke('dic-member-approval-broker'"
+        },
+        {
+          "path": "site/cloud/approval-push.js",
+          "contains": "Notification.requestPermission()"
+        },
+        {
+          "path": "scripts/pwa/member-approval-worker.template.txt",
+          "contains": "Your account is approved."
+        },
+        {
+          "path": "scripts/pwa/service-worker.template.txt",
+          "contains": "Administrator review required."
+        },
+        {
+          "path": "supabase/migrations/20261112135900_dic_member_approval_notices.sql",
+          "contains": "after insert on private.dic_signup_review_events"
+        },
+        {
+          "path": "supabase/migrations/20261112135900_dic_member_approval_notices.sql",
+          "contains": "to service_role;"
+        },
+        {
+          "path": "supabase/functions/dic-member-approval-broker/core.mjs",
+          "contains": "'Idempotency-Key':'dic-member-account-approved-'"
+        },
+        {
+          "path": "tests/issue2258-member-approval-notices.test.mjs",
+          "contains": "approved event sends accepted email"
+        },
+        {
+          "path": "tests/issue2258-approval-push-device.test.mjs",
+          "contains": "directly on user gesture"
+        }
+      ]
+    },
     {
       "id": "issue455_meaningful_yield_step",
       "decision_key": "current_owner_meaningful_yield_20261104",
@@ -2285,5 +2340,16 @@
     "publication": "ONE_USE_GIT_CONNECTED_RELEASE_DIC-20261112-READY48PUSH-31_CURRENT_READY_6af51c834f09e4e2c0f203ea",
     "verified_at_utc": "2026-11-12T01:59:44.617Z",
     "tested_source_sha": "ad457f648bc72c2d79c24406766a64abd3acd835"
+  },
+  "current_owner_member_approval_email_push_20261112": {
+    "decision_id": "ACCESS-MEMBER-APPROVAL-EMAIL-AND-OPTIN-WEB-PUSH-20261112",
+    "owner_source": "Direct owner chat 2026-11-12: Do both, please",
+    "state": "APPROVED_SOURCE_IN_PROGRESS_EXTERNAL_DELIVERY_UNVERIFIED",
+    "issue": 2258,
+    "release_queue_id": "DIC-Q-2258-user-account-approval-confirmation",
+    "email_provider": "RESEND_API_KEY_AND_DIC_APPROVAL_FROM_EMAIL_IN_SUPABASE_EDGE_UNVERIFIED",
+    "push_consent": "MEMBER_SIGNED_VERIFIED_PENDING_ONLY_OPT_IN",
+    "production": "NOT_PUBLISHED",
+    "evidence": "docs/workstreams/issue-2258-email-push.md"
   }
 }
