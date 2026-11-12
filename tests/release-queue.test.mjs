@@ -106,3 +106,16 @@ test('release grant must exactly name READY items, not merely cover overlapping 
   assert.throws(()=>assertApprovedReadyBatch({approved_ready_item_ids:ids},result));
  assert.throws(()=>assertApprovedReadyBatch({approved_ready_item_ids:['DIC-Q-100']},{...result,ready:false}));
 });
+
+test('#2169 new member approval worker is an owned deployable path and cannot evade scope',()=>{
+ const worker='scripts/pwa/member-approval-worker.template.txt';
+ assert.deepEqual(deployableChangedPaths(['docs/a.md',worker]),[worker]);
+ const future={...queued,id:'DIC-Q-2258-external-notices',issue:2258,
+  state:'BLOCKED',merged_source_sha:null,scope_paths:[worker],tests:[],ci_runs:[],
+  blockers:['email sender and member push provider configuration unverified']};
+ assert.deepEqual(queueSchemaErrors({...q,items:[queued,future]}),[]);
+ assert.equal(assessIntakeCoverage({...q,items:[queued,future]},[worker],
+  {currentBlobSha:()=>B}).tracked,true,'new unready worker must have a queue owner');
+ assert.equal(assessIntakeCoverage(q,[worker],{currentBlobSha:()=>B}).tracked,false,
+  'new deployable worker with no queue owner must be flagged');
+});
