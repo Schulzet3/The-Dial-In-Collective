@@ -15,6 +15,7 @@ import {sameHandleCollectionAlternate,identicalCurrentSelectedTitle} from './iss
 import {requiredFocusedSourceFailures} from './issue33-focused-source-acceptance.mjs';
 import {selectedShopifyCurrentVisibleIdentity} from './issue33-shopify-current-visible-identity.mjs';
 import {selectedProductHeadings,selectedProductFormH2,selectedProductPurchaseRootH2} from './issue33-selected-product-heading.mjs';
+import {selectedElementorWooCommerceH2} from './issue33-elementor-woocommerce-h2.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../../site/cloud/coffee-url-autofill.js';
 const sha=value=>createHash('sha256').update(value).digest('hex');
 const clip=(v,n=350)=>String(v??'').replace(/\s+/g,' ').trim().slice(0,n);
@@ -85,6 +86,7 @@ for(const target of targets){
    r.selected_h1=selectedProductHeadings(selected);
    r.selected_form_h2=selectedProductFormH2(selected);
    r.selected_page_h2=selectedProductPurchaseRootH2(res.html);
+   r.selected_elementor_h2=selectedElementorWooCommerceH2(res.html,{source_url:r.final_url});
    r.selected_h1_present_in_scoped_html=/<h1\b/i.test(selected);
    // Diagnostic provenance only: an old SEO page title may name a DIFFERENT
    // coffee even while the current selected product H1 and body are correct.
@@ -99,7 +101,8 @@ for(const target of targets){
    // tracking ID AND an identical two-pane visible hero; SEO/slug alone do not qualify.
    // Store positive selected proof only for the current exact source, not as a parser field.
    r.selected_embedded_product_identity=(!r.selected_h1_present_in_scoped_html&&
-     !r.selected_form_h2.length&&!r.selected_page_h2.length)
+     !r.selected_form_h2.length&&!r.selected_page_h2.length&&
+     !r.selected_elementor_h2.length)
      ?selectedShopifyCurrentVisibleIdentity(res.html,{
        source_url:r.final_url,expected_name:target.Coffee,parsed_name:p?.fields?.name}):null;
    r.selected_heading_identity_verified=r.selected_h1_present_in_scoped_html
@@ -108,7 +111,9 @@ for(const target of targets){
        ?r.selected_form_h2.some(h=>identicalCurrentSelectedTitle(target.Coffee,h,p?.fields?.name))
        :r.selected_page_h2.length
          ?r.selected_page_h2.some(h=>identicalCurrentSelectedTitle(target.Coffee,h,p?.fields?.name))
-         :Boolean(r.selected_embedded_product_identity);
+         :r.selected_elementor_h2.length
+           ?r.selected_elementor_h2.some(h=>identicalCurrentSelectedTitle(target.Coffee,h,p?.fields?.name))
+           :Boolean(r.selected_embedded_product_identity);
    // #122 exact original URL: chosen product adds visible availability qualifier
    // Final Batch, but only same producer, location, cultivars and labeled fields
    // can preserve original product identity. Never a global suffix exemption.

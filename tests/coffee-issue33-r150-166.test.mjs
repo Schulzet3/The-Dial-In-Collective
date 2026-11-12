@@ -11,16 +11,16 @@ const page=(own=facts,h1=chosen166.name,elsewhere='',seo='Iwana Maragogipe Washe
  '</div></article></main>'+elsewhere+'</body></html>';
 test('#166 current exact H1 and direct selected MICRO-LOT flavor and balance',()=>{
  const x=selected166Source(page());
- assert.equal(x.exactH1,true,JSON.stringify(x));
+ assert.equal(x.exactSelectedTitle,true,JSON.stringify(x));
  assert.ok(Object.values(x.direct).every(Boolean),JSON.stringify(x.direct));
 });
 test('#166 different selected bag or new lot cannot authenticate old official item',()=>{
  for(const name of ['PINK BOURBON – Washed Process','Maragogipe – Natural Process','Maragogipe 2027']){
-  assert.equal(selected166Source(page(facts,name)).exactH1,false,name);
+  assert.equal(selected166Source(page(facts,name)).exactSelectedTitle,false,name);
  }
 });
 test('#166 an SEO page title cannot replace a different chosen H1',()=>{
- assert.equal(selected166Source(page(facts,'TABi – Natural Process','',chosen166.name)).exactH1,false);
+ assert.equal(selected166Source(page(facts,'TABi – Natural Process','',chosen166.name)).exactSelectedTitle,false);
 });
 test('#166 unrelated footer cannot supply missing selected flavors',()=>{
  const x=selected166Source(page(facts.replace('notes of wildflowers, black tea, apple, green grapes, and spices','notes not published'),
@@ -76,4 +76,34 @@ test('#166 neutral SEO retains exact source identity and direct notes',()=>{
  assert.equal(p.ok,true,JSON.stringify(p));
  assert.ok(['wildflowers','black tea','green grapes','spices'].every(x=>
   String(p.fields.tasting_notes||'').toLowerCase().includes(x)),JSON.stringify(p.fields));
+});
+
+const elementor=(title=chosen166.name,{post='2194',button='2194',action=chosen166.url,desc=true,extra=''}={})=>
+ '<html><head><title>Old unrelated SEO</title></head><body><main>'+
+ '<div data-elementor-type="product" class="elementor elementor-location-single post-'+post+' product type-product">'+
+ '<div class="elementor-widget-woocommerce-product-title" data-widget_type="woocommerce-product-title.default">'+
+ '<h2 class="product_title entry-title">'+title+'</h2></div>'+
+ (desc?'<div class="elementor-widget-woocommerce-product-content" data-widget_type="woocommerce-product-content.default">'+facts+'</div>':'')+
+ '<form class="cart" action="'+action+'"><button name="add-to-cart" value="'+button+
+ '" class="single_add_to_cart_button">Add to cart</button></form></div>'+extra+'</main></body></html>';
+test('#166 H1-free Elementor selected H2 purchase bound to exact own coffee',()=>{
+ const x=selected166Source(elementor());assert.deepEqual(x.headings,[]);
+ assert.deepEqual(x.purchaseH2,[chosen166.name]);assert.equal(x.exactSelectedTitle,true,JSON.stringify(x));
+ assert.ok(Object.values(x.direct).every(Boolean),JSON.stringify(x.direct));
+});
+test('#166 another selected H2 cannot be rescued by old SEO and related cards',()=>{
+ for(const title of ['PINK BOURBON – Washed Process','Maragogipe – Natural Process'])
+  assert.equal(selected166Source(elementor(title,{extra:'<aside><h2>'+chosen166.name+'</h2></aside>'})).exactSelectedTitle,false);
+});
+test('#166 mismatched cart ID, URL or absent selected description fails closed',()=>{
+ for(const o of [{button:'2199'},{post:'2199'},{action:'https://iwanacoffee.com/product/tabi-natural-process'},{desc:false}])
+  assert.equal(selected166Source(elementor(chosen166.name,o)).exactSelectedTitle,false,JSON.stringify(o));
+});
+test('#166 two selected product roots with independent carts are ambiguous',()=>{
+ const extra='<div data-elementor-type="product" class="elementor elementor-location-single post-9999 product">'+
+ '<div class="elementor-widget-woocommerce-product-title" data-widget_type="woocommerce-product-title.default">'+
+ '<h2 class="product_title entry-title">Other</h2></div>'+
+ '<div class="elementor-widget-woocommerce-product-content" data-widget_type="woocommerce-product-content.default"><p>Other coffee</p></div>'+
+ '<form class="cart" action="'+chosen166.url+'"><button name="add-to-cart" value="9999" class="single_add_to_cart_button">Buy</button></form></div>';
+ assert.equal(selected166Source(elementor(chosen166.name,{extra})).exactSelectedTitle,false);
 });

@@ -5,6 +5,7 @@ import {join,resolve} from 'node:path';
 import {createHash} from 'node:crypto';
 import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
 import {selectedProductHeadings} from './issue33-selected-product-heading.mjs';
+import {selectedElementorWooCommerceH2} from './issue33-elementor-woocommerce-h2.mjs';
 import {removeElements} from '../../supabase/functions/_shared/html-scan.mjs';
 const sha=x=>createHash('sha256').update(x).digest('hex');
 const norm=x=>String(x??'').normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase()
@@ -19,13 +20,15 @@ export const chosen166=Object.freeze({
 export function selected166Source(html){
  const chosen=productMarkup(String(html||''));
  const headings=selectedProductHeadings(chosen);
+ const purchaseH2=selectedElementorWooCommerceH2(String(html||''),{source_url:chosen166.url});
  const visible=norm(removeElements(chosen,
   ['script','style','noscript','template','nav','aside','footer','header','select'])
   .replace(/<!--[\s\S]*?-->/gu,' ').replace(/<[^>]{0,2500}>/gu,' '));
  const has=x=>visible.includes(norm(x));
- return {headings,exactH1:headings.length>0&&norm(headings[0])===norm(chosen166.name),
+ return {headings,purchaseH2,exactSelectedTitle:(headings.length===1&&norm(headings[0])===norm(chosen166.name))||
+  (headings.length===0&&purchaseH2.length===1&&norm(purchaseH2[0])===norm(chosen166.name)),
   direct:{
-   selected_process_title:headings.some(h=>norm(h)===norm(chosen166.name)),
+   selected_process_title:[...headings,...purchaseH2].some(h=>norm(h)===norm(chosen166.name)),
    flavor_prose:has('notes of wildflowers, black tea, apple, green grapes, and spices'),
    balance:has('Silky, balanced, and pleasantly bright'),
    release_label:has('MICRO-LOT')
@@ -46,7 +49,8 @@ if(process.env.DIC_ISSUE33_R150_VERIFY==='1'){
  check(rec.official_url===chosen166.url&&canonical(rec.final_url)===canonical(chosen166.url),'same_chosen_official_product_and_canonical_slash');
  check(rec.status==='FETCHED'&&rec.parser_ok===true,'guarded_https_real_parser');
  check(!!raw&&sha(raw)===rec.html_sha256&&raw.length===rec.html_bytes,'raw_html_hash_and_bytes');
- check(source.exactH1&&rec.selected_heading_identity_verified===true,'selected_exact_h1');
+ check(source.exactSelectedTitle&&rec.selected_heading_identity_verified===true&&
+ rec.selected_elementor_h2?.length===1,'selected_exact_purchase_bound_h2');
  check(Object.values(source.direct).every(Boolean),'direct_selected_own_facts');
  check(norm(f.name)===norm(chosen166.name),'parsed_chosen_name');
  check(norm(f.roaster).includes('iwana'),'parsed_iwana_roaster');
