@@ -4918,6 +4918,6 @@
     "decision": "After an email-verified account is explicitly approved by the administrator, deliver a transactional approval email automatically and opt-in background Web Push only to devices the pending member explicitly registered. Preserve existing in-app Account Approved confirmation.",
     "restrictions": "Never notify rejected, unverified, unadmitted, disabled or unrelated users; never trust client role, send member details in push, conflate with administrator push, hide failure, replay old approvals, silently publish or purchase. A provider-accepted response does not prove inbox/device delivery.",
     "dependencies": "Server-side verified-sender email provider credentials, authenticated pending opt-in, service-only outbox with retries, approval-trigger event, exact-source CI, separate owner Publish for production.",
-    "deployment": "DEVELOPMENT_SOURCE_IN_PROGRESS_NOT_PUBLISHED; email/domain/device acceptance outstanding"
+    "deployment": "SOURCE_VERIFIED_AND_NONFORCE_MERGED_1680306; LIVE_DELIVERY_BLOCKED_PENDING_VERIFIED_SENDER_EDGE_CONFIGURATION_AND_OWNER_PUBLISH"
   }
 }

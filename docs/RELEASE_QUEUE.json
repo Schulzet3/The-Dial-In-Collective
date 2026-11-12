@@ -13060,10 +13060,10 @@
     {
       "id": "DIC-Q-2258-user-account-approval-confirmation",
       "issue": 2258,
-      "pr": 2260,
+      "pr": 2273,
       "title": "New-account approval in-app, transactional email, and opt-in member Web Push",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "BLOCKED",
+      "merged_source_sha": "1680306c0323c5213963fe63dfe66560a386eaf9",
       "scope_paths": [
         "build_cloud.mjs",
         "netlify/functions/dic-member-approval-poll.mjs",
@@ -13081,7 +13081,9 @@
         "tests/cloud-auth-startup-verification.test.mjs: pending approval status poll, genuine admission, rejection, existing member, network error. Initial #2260 PR-head cloud-tests SUCCESS 43226631450; approval 43226631434 held strictly on new scoped queue item absent; corrected here.",
         "Corrected exact PR head 8dabb809 PR runs 43227731992 Node22/lint SUCCESS; 4,242 PASS/0 FAIL/6 intentional SKIP; 43227731727 governance, 43227731718 isolated SQL/Auth, 43227731779 source security, 43227731712 cloud/mobile/browser/offline SUCCESS. Frozen603 SKIPPED/N/A.",
         "Nonforce squash merged PR #2260 to 9beb10f04d0db227abacb553a50832caa4ba65dc; all five runtime/test/docs/queue blob SHAs byte-identical to reviewed PR head; exact merged 43228346551 full 4,242 PASS/0 FAIL/6 SKIP and lint SUCCESS, 43228346560 approval SUCCESS, 43228346616 cloud/browser/mobile/offline SUCCESS. Reuse unchanged PR-head security+SQL only where merged jobs not triggered.",
-        "Owner Nov 12 explicitly extends #2258 source scope to transactional approval email and opt-in closed-app member Web Push. New per-channel source/SQL/provider acceptance and CI tests pending; preserve prior verified in-app PR #2260 code and receipts."
+        "Owner Nov 12 explicitly extends #2258 source scope to transactional approval email and opt-in closed-app member Web Push. New per-channel source/SQL/provider acceptance and CI tests pending; preserve prior verified in-app PR #2260 code and receipts.",
+        "Clean PR #2273 exact head 6156ec54725ae99f42820f21390482e2de65d293: 5 mandatory source checks validate 43238004270 (4,268 Node PASS/0 FAIL/6 intentional SKIP; lint), approval 43238004431, isolated SQL 43238004422, source security 43238004294, cloud/browser/offline 43238004414 SUCCESS; Python audit 43238004286 SUCCESS. Original frozen603 SKIPPED/N/A.",
+        "PR #2273 nonforce squash merged to 1680306c0323c5213963fe63dfe66560a386eaf9. Exact merged validate 43238615366 4,268 PASS/0 FAIL/6 SKIP+lint; approval 43238615525; isolated SQL 43238615858; mobile/cloud/browser 43238615447; Python 43238615712; release rehearsal 43238615481 SUCCESS. All twenty source/test/docs Git blobs byte-identical to reviewed head. PR-head source-security success reused, no merged security job was triggered."
       ],
       "ci_runs": [
         43227731992,
@@ -13091,14 +13093,26 @@
         43227731712,
         43228346551,
         43228346560,
-        43228346616
+        43228346616,
+        43238004270,
+        43238004431,
+        43238004422,
+        43238004294,
+        43238004414,
+        43238004286,
+        43238615366,
+        43238615525,
+        43238615858,
+        43238615447,
+        43238615712,
+        43238615481
       ],
       "blockers": [
-        "Source high-risk Auth/RLS/SQL/node/browser CI, source integration and actual provider readbacks are outstanding.",
-        "RESEND_API_KEY and verified DIC_APPROVAL_FROM_EMAIL not found/verified in Netlify environment; Supabase Edge secret/sender DNS unverified. No live approval email can be claimed.",
-        "Member opt-in real closed-app APNs delivery unverified; no production migration/Edge/cron changes authorized before a new owner Publish."
+        "Transactional email requires a verified sender/domain and RESEND_API_KEY plus DIC_APPROVAL_FROM_EMAIL in Supabase Edge runtime. Netlify has only public Supabase coordinates by design; Edge sender secret and delivery acceptance cannot be verified with available access. No automatic test email sent to real users.",
+        "Production remains on previously published Netlify deploy 6af51c834f09e4e2c0f203ea; SQL migration 20261112135900 absent in hosted Supabase. A NEW owner Publish command and release source/one-use grant plus permitted provider deployment are necessary to go live.",
+        "Actual iPhone Home Screen Push permission/device delivery and email inbox receipt unverified (device acceptance optional for source readiness, not a factual delivered claim)."
       ],
-      "notes": "No Auth/provider/SQL/production writes. #1938 off-screen administrator push is distinct. Boolean pending flag is per account, not admission authority. User sees an accessible dismissible approval banner after server admits them. Future publish requires new owner command. Source-only READY after exact test+merge evidence. This READY item covers ONLY in-app user notice; closed-app member push and transactional approval email remain unbuilt, unverified, and outside this scope. Issue #2258 remains OPEN for any explicitly required external delivery. No automatic staging/publication. Nov12 scope extension: previous in-app-only READY receipt preserved, but same-file member notification edits make it unsafe to retain READY certification. Reclassified IN_PROGRESS until whole scoped email+push pipeline is tested and provider/config readiness resolved. No owner Publish. Superseded clean single-commit PR tracks new QA failures and remediation without altering the previous in-app proof.",
+      "notes": "No Auth/provider/SQL/production writes. #1938 off-screen administrator push is distinct. Boolean pending flag is per account, not admission authority. User sees an accessible dismissible approval banner after server admits them. Future publish requires new owner command. Source-only READY after exact test+merge evidence. This READY item covers ONLY in-app user notice; closed-app member push and transactional approval email remain unbuilt, unverified, and outside this scope. Issue #2258 remains OPEN for any explicitly required external delivery. No automatic staging/publication. Nov12 scope extension: previous in-app-only READY receipt preserved, but same-file member notification edits make it unsafe to retain READY certification. Reclassified IN_PROGRESS until whole scoped email+push pipeline is tested and provider/config readiness resolved. No owner Publish. Superseded clean single-commit PR tracks new QA failures and remediation without altering the previous in-app proof. Clean PR #2273 source/CI is now VERIFIED AND MERGED. Queue is BLOCKED solely on live delivery dependencies and a fresh owner Publish, not code tests. Superseded unmerged PR #2270 closed. Existing Admin #1938 notifications isolated; prior in-app source proof preserved; no production writes.",
       "production_deployed": false
     }
   ],
@@ -15053,6 +15067,15 @@
       "state": "IN_PROGRESS",
       "source_sha": "ef055e5501636f899ee46ff60e7e58871ca9ffbc",
       "evidence": "docs/workstreams/issue-2258.md; clean source integration and previous READY overlap forced IN_PROGRESS",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-12",
+      "issue": 2258,
+      "item_id": "DIC-Q-2258-user-account-approval-confirmation",
+      "state": "BLOCKED",
+      "source_sha": "1680306c0323c5213963fe63dfe66560a386eaf9",
+      "evidence": "docs/workstreams/issue-2258.md; PR2273 tested/merged source; provider+owner Publish blockers explicitly retained",
       "production_deployed": false
     }
   ],
