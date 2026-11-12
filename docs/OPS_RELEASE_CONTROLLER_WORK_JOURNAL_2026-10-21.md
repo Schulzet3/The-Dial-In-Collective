@@ -647,3 +647,5 @@ Independently verified Git release/production b386a977a7c43bf190f6315105894334d9
 - First controller denied stale reviewed workflow-test source blob eab5e9 (actual development source 32174be8). Second denied journal appendix omitting required request.mode. Both failures occurred before one-use release claim. Production unchanged.
 - Same-commit fix refreshes the exact reviewed R190 three-test hash, adds canonical mode-bound journal appendix helper and two regression tests in existing main CI suite. No grant, workflow, production, provider, member, DB or app-runtime mutation. Never retry expired/consumed grants; no new publication authorized.
 - Required next: source-bound PR/merged CI, then reconcile the reliable run receipt via repository actions/runs?head_sha. [skip netlify]
+
+- PR-head CI 43151089003 correctly exposed one stale synthetic fixture in tests/ready-only-candidate.test.mjs. This same-commit correction rebinds fixture's expected R190 blob to current verified 32174be8, preserving every negative test; rerun all applicable existing main CI. [skip netlify]

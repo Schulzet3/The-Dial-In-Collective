@@ -302,7 +302,7 @@ test('production candidate restores every development-only Actions workflow with
 test('byte-pinned workflow-only browser-install test is excluded solely when its workflow is restored',()=>{
  const path='tests/issue455-browser-dependency-install-fallback.test.mjs';
  const workflow='.github/workflows/cloud-regression.yml';
- const testSha='100644:eab5e9f267d7b7451a56db005a8980727c4ce1f6';
+ const testSha='100644:32174be8c42ba9ae73085e0f6f1f42613b2b08db';
  const objectAt=(ref,p)=>{
   if(p===path)return ref===A||ref===C?null:testSha;
   if(p===workflow)return ref===A||ref===C?'100644:published-workflow':'100644:new-workflow';
