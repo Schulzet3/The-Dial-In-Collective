@@ -696,3 +696,7 @@ Independently verified Git release/production b386a977a7c43bf190f6315105894334d9
 ## 2026-11-12 — #2169 least-privilege live READY readbacks [skip netlify]
 - Existing chat-only and manual fallback GitHub Actions one-use workflows now explicitly request actions: read. The main controller's new per-selected-READY gate can query recorded Actions runs as well as checks: read using its existing token, without changing source/read-only event authority or adding provider credentials. Contents: write remains scoped to the already approved single guarded release claim. No release has been requested by this workflow-only edit.
 - Verify head/main merged release-controller CI and actual event observer job; keep publication by one-use chat request only. GitHub Free/private cannot guarantee protections against privileged direct branch writes.
+
+
+## 2026-11-12 — #2169 shared READY audit lint convergence [skip netlify]
+- Application approval CI first head 43155647528 failed lint only: an unused testPaths local. Development PR #2187 corrected this in source commit 413eaea913c2e03b2209529e4898ea6cea7e8f7c; main controller now uses the exact corrected source blob b01d26a397a4e9631c6135d937ed4ffc5a092479. Changed runtime/test provenance and all safety gates unchanged. Main PR head and merged CI must be independently retested; no production activity.

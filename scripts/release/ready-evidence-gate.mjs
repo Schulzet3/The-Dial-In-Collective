@@ -60,7 +60,6 @@ export async function verifyReadyItems({queue,items,loadRun,loadChecks,sourceObj
    const changed=mergeChangedPaths(item.merged_source_sha);
    if(!Array.isArray(changed))throw Error('merged first-parent Git diff unavailable');
    const actualPaths=deployableChangedPaths(changed);
-   const testPaths=sorted(changed.filter(p=>typeof p==='string'&&p.startsWith('tests/')));
    // Every source and test changed by the merge is bound to the tested HEAD,
    // not just the filenames appearing in natural-language queue notes.
    const provenancePaths=sorted(changed.filter(p=>/^(tests\/|site\/|src\/server\/|netlify\/|supabase\/|scripts\/|\.github\/)/.test(p)||
