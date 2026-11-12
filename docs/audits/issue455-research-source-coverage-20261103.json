@@ -381,7 +381,18 @@
       "claims_verified_externally": "Original author's homogeneous-flow mathematical model predicts greater EY with finer grind, while the cafe experiment under 6 bar (lowered from 9 bar because of fine-grind clogging) observes a peaked EY-versus-grind relationship with lower EY/greater variation at very fine settings. Within tested setup, automated 98 N tamp had no appreciable observed shot time/EY variation; the authors explicitly did not quantify observed flavor changes. A 20g-to-15g dose reduction/coarser-grind cafe protocol, shorter ~14s shots and sales-based coffee-cost case illustrate operational efficiency, NOT randomized preferred espresso flavor or personal five-input DIC outcomes. EY/TDS, time, taste and economic success are different measured outcomes, and neither fine-grind 'critical point' nor a brew-time target transfers universally across grinders, burrs, coffees, feeds, pressure and baskets.",
       "current_app_crosswalk": "Current development source 2bbb4f9598668538c8d27b5bdcf6e3f7758db040; engine.js blob d262f7343ef2556effc7572b86e7ecc026449288, model.js blob 5ea712305d9ba0f948ef3aa2d576dd27aa51b31c, constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095, Community evidence blob 74c93c7ff7814337752e0ef9052412eaf55890e3. Existing nextAdviceRaw/recommendation/hasLocalSuccess/validateShot treat full five taste ratings, measured actual shot and same-coffee matching as evidence; nominal recipe timing is starting guidance, not a universal pass/fail rule. No EY meter, flow sensor, blind taste/causal confidence estimate or universally calibrated grinder setting in app.",
       "reviewed_date_utc": "2026-11-10",
-      "implementation_status": "RESEARCH_ONLY_NO_REPRODUCED_SAFE_APP_BUG_NO_LOCKED_CHANGE_OR_DEPLOYMENT"
+      "implementation_status": "RESEARCH_ONLY_NO_REPRODUCED_SAFE_APP_BUG_NO_LOCKED_CHANGE_OR_DEPLOYMENT",
+      "direct_primary_figure_review_20261112": {
+        "source": "Author-hosted Matter 2 (2020), pp. 641, 642, 644, university publication PDF",
+        "url": "https://pages.uoregon.edu/chendon/publications/2020/74.%20Matter%2C%20Espresso%20extraction.pdf",
+        "verified_page_images": [
+          "publication p641, source PDF page index 11, Brewing Espresso actual 9-to-6-bar protocol and unquantified flavor",
+          "publication p642, source PDF page index 12, Figure 5 direct graph and ±1 standard-deviation caption",
+          "publication p644, source PDF page index 14, Figure 6 explicitly a schematic, not tested personal taste preference"
+        ],
+        "access": "DIRECT_AUTHOR_UNIVERSITY_HOSTED_FINAL_PUBLISHED_PDF_PAGE_SCREENSHOTS_AND_CAPTIONS_EXAMINED_2026-11-12",
+        "limits": "Exact original PDF bytes, SHA256, supplementary information, figure underlying raw data and randomized/individual consumer five-taste preferences not obtained. Figure 6 graphical schematic is not an experimental point-by-point data series. This improves earlier indexed-publisher-text verification only, not proof of recipe quality."
+      }
     },
     {
       "id": "LIT-2023-GAGNE-GRINDER-PSD-24",
@@ -5689,6 +5700,37 @@
       "owner_approval": false,
       "source_sha": "57e0a496c826e6ae0223c8616758d9a1557ddb5d",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-FIGURE-205-A",
+      "source": "ORG-05 Git blob be455fe3c2dc8469c67c49bed7e9f539943ea463 original Markdown SHA256 30f3367fab7fb1c09fbca4f976ed1885243e2a1ab5d9fda156e094457697c5f9; Cameron et al. Matter 2020 author-hosted published PDF p641-642, Figure 5, publisher DOI 10.1016/j.matt.2019.12.019",
+      "claim": "Directly inspected Figure 5 compares actual experimental extraction yield against EK43-specific grind dial at a fixed 20g dry mass, 40g beverage mass and lowered 6bar pump pressure (the earlier 9bar setup clogged at very fine grind). The nonmonotonic Figure 5 experimental means with ±1 standard deviation overlap across distinct grind settings; equal near-22% EY at coarse and fine dials cannot establish equal flavor or recommend one universal dial, pressure, time or dose. Figure 5 is experimental; mechanism of clogging is a proposed interpretation, not direct 3D puck observation.",
+      "grade": "DIRECT_AUTHOR_HOSTED_PUBLISHED_PDF_PAGE_AND_ACTUAL_FIGURE5_VISUALLY_INSPECTED; PEER_REVIEWED_SINGLE_APPARATUS_SETUP; NO_BLINDED_INDIVIDUAL_FIVE_TASTE_TRIAL; ORIGINAL_PDF_BYTES_RAW_UNVERIFIED",
+      "primary_sources": [
+        "https://pages.uoregon.edu/chendon/publications/2020/74.%20Matter%2C%20Espresso%20extraction.pdf",
+        "https://doi.org/10.1016/j.matt.2019.12.019"
+      ],
+      "original_source_blob_sha": "be455fe3c2dc8469c67c49bed7e9f539943ea463",
+      "current_app": "Pinned development 98b44ea0f7bcd6ed6ef36c24838ce226ef587542, engine.js blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6, constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095; style-specific target times/ratios remain app heuristics and original measured five ratings control individualized advice.",
+      "result": "FIGURE5_DIRECT_EY_EXPERIMENT_VERIFIED_CONDITION_SPECIFIC_NO_SENSORY_OR_NUMERIC_TRANSFER",
+      "owner_approval": false,
+      "source_sha": "98b44ea0f7bcd6ed6ef36c24838ce226ef587542",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-FIGURE-205-B",
+      "source": "Cameron et al. published Matter 2020 p644 source PDF page index 14, Figure 6 graphic/caption and accompanying prose; original ORG-05 report thematic conclusions",
+      "claim": "Figure 6's colored 'tasty point' and 20g in/40g out versus 15g in/40g out curves are explicitly labeled a SCHEMATIC of two reproducibility strategies, not measurements demonstrating a universally favorable 15g dose, 40g yield, <15s shot or a verified member taste outcome. Accompanying paper states reduced-dose coarse-grind shots may have different flavor and that the barista must taste. Do not transcribe its stylized curves as measured DIC sensory confidence or force new dose controls.",
+      "grade": "DIRECT_PUBLISHED_FIGURE6_AND_CAPTION_VISUAL_READ; NEGATIVE_DESIGN_INFERENCE_NO_EMPIRICAL_DIC_TASTE_COMPARISON; SOURCE_PDF_SHA_UNVERIFIED",
+      "primary_sources": [
+        "https://pages.uoregon.edu/chendon/publications/2020/74.%20Matter%2C%20Espresso%20extraction.pdf"
+      ],
+      "original_source_blob_sha": "be455fe3c2dc8469c67c49bed7e9f539943ea463",
+      "current_app": "Same pinned engine.js/constants.js, five original taste ratings, independently selectable Traditional/Turbo/Fast-Flow, recipe-family/slow-feed/grinder history and one-controllable-change contract unchanged; no additional EY/TDS/pressure sensor capture.",
+      "result": "FIGURE6_SCHEMATIC_NOT_PERSONAL_TASTE_EVIDENCE_NO_APP_PRIOR_CHANGE",
+      "owner_approval": false,
+      "source_sha": "98b44ea0f7bcd6ed6ef36c24838ce226ef587542",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -5834,18 +5876,19 @@
     "R455-201: verified nonforce merged a5dd027d7f20e4eb6b108cf5b8acdaf432ca006c; six new regression groups plus six R198 tests PASS in exact head Node22 4076/0/6, five head CI workflows SUCCESS, exact merged code/test/journal blobs identical. Immediate merged Node/browser CI CANCELLED due concurrent #2169 push; independent #2169 queue amendment source-requalified EXISTING R198 READY item to combined R201 tested source, confirming newer source-parity gate governance 43157038783 SUCCESS. No duplicate R201 queue item, no staged/released source. Reuse shared R198+R201 scope in next explicit owner release qualification; original S019 remains unreviewed, #267 zero literal audit.",
     "R455-202: independently verify exact DOI alias annotation preservation and docs-only PR CI; non-force integrate and read back merged SHA/blob before recording VERIFIED. Current source records 106 vs 66 DOI-bearing records/61 unique DOI, five alias identities only; review records retained. No app/Locked change, queue or production write. All 40 without DOI remain unclassified for dedup. S019 standalone unavailable; #267 literal review zero credit.",
     "R455-203: source-governance crosswalk for slow-feed PDF vs Oct26 Experiment retirement and owner Locked family/feed rules. Verify exact-source documentation CI then non-force integrate and read back merged ledger/journal; no app/Locked changes, no new READY. Original S019 inaccessible. Do not confuse 2% proposed retired Experiment threshold with 3% active grindStep.",
-    "R455-204: Direct author full-article temporal crosswalk of ORG-04/Waszkiewicz: nonlinear pressure/flow peak measured at >=120-s shots, last-10-s late time across 60 total shots/11 pressures, not normal ~30-s pressure optimum; 5-10-s first drop one fixed 14-mm puck, not randomized universal preinfusion or validated commercial sensor. Original source hashes preserved; two claim checks and one proposal added (106/319/163). Docs-only PR exact CI pending; nonforce merge only after applicable green then verify blobs. No app, numeric, Locked, Auth/provider, queue or #267 line changes; S019 still inaccessible."
+    "R455-204: Direct author full-article temporal crosswalk of ORG-04/Waszkiewicz: nonlinear pressure/flow peak measured at >=120-s shots, last-10-s late time across 60 total shots/11 pressures, not normal ~30-s pressure optimum; 5-10-s first drop one fixed 14-mm puck, not randomized universal preinfusion or validated commercial sensor. Original source hashes preserved; two claim checks and one proposal added (106/319/163). Docs-only PR exact CI pending; nonforce merge only after applicable green then verify blobs. No app, numeric, Locked, Auth/provider, queue or #267 line changes; S019 still inaccessible.",
+    "R455-205: direct visual primary-figure crosswalk for Cameron et al. 2020: published Figure 5 actual 20g/40g 6bar 9bar-clogging grind/EY dataset versus Figure 6 schematic 15g/40g 'tasty point', no five-sensory or universal optima; 106/321/164 after docs PR verified. Original S019 remains inaccessible. No app, numeric, Locked, provider, queue or #267 literal changes."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-204",
-    "source_sha": "57e0a496c826e6ae0223c8616758d9a1557ddb5d",
-    "phase": "ORIGINAL_TO_PRIMARY_LONG_TIME_PRESSURE_AND_PREINFUSION_SCOPE_DOCS_ONLY_PR_PENDING_CI",
+    "run_id": "R455-205",
+    "source_sha": "98b44ea0f7bcd6ed6ef36c24838ce226ef587542",
+    "phase": "CAMERON_PRIMARY_FIGURE5_EXPERIMENT_VERSUS_FIGURE6_SCHEMATIC_BOUNDARY_DOCS_ONLY_PENDING_CI",
     "source_counts": {
       "research_project_source_records": 106,
-      "bounded_evidence_checks": 319,
-      "proposals": 163
+      "bounded_evidence_checks": 321,
+      "proposals": 164
     },
-    "release_state": "UNTOUCHED_EXISTING_QUEUE; NO_NEW_READY OR DEPLOY; OWNER PUBLIC EXCEPTION UNCHANGED",
+    "release_state": "UNTOUCHED_EXISTING_READY_COMPOSITE_AND_QUEUE_NO_NEW_READY_OR_DEPLOY",
     "original_s019": "INACCESSIBLE_UNREVIEWED",
     "github267_literal_review_credit": 0
   },
@@ -9506,6 +9549,32 @@
         "starting_development_sha": "57e0a496c826e6ae0223c8616758d9a1557ddb5d",
         "prior_ledger_blob": "fbf442b0369df5a920dbffd0079fb42f6090e13b",
         "journal_path": "docs/workstreams/ops-issue455-r204-pressure-flow-time-windows-20261112.md"
+      }
+    },
+    {
+      "id": "R455-PROP-205-CAMERON-FIGURE-EXPERIMENT-VERSUS-SCHEMATIC",
+      "severity": "P2_RESEARCH_FIGURE_PROVENANCE_NO_REPRODUCED_ACTIVE_RUNTIME_BUG",
+      "finding": "The original shot-profile taxonomy cites Cameron et al. for grind/extraction tradeoffs and an illustrative 15g/40g high-throughput strategy. Direct author-hosted published PDF Figure 5 displays 20g/40g 6bar experimental EY vs grinder dial, whereas Figure 6 presents a schematic 'tasty point' and reduced-dose pathway, not observed DIC personal taste results. Confusing these would falsely promote demonstration schematic into scientifically calibrated recommendation targets.",
+      "user_benefit": "Preserves trustworthy user-specific Log Shot → Rate → Recommendation explanations and avoids false precision, fabricated grind/pressure transfer or a universal recipe from a figure legend.",
+      "evidence": [
+        "R455-EV-FIGURE-205-A",
+        "R455-EV-FIGURE-205-B"
+      ],
+      "source_provenance": "Original study #05 Git blob be455fe3c2dc8469c67c49bed7e9f539943ea463, index original SHA256 30f3367fab7fb1c09fbca4f976ed1885243e2a1ab5d9fda156e094457697c5f9; primary Cameron et al. Matter 2020 DOI 10.1016/j.matt.2019.12.019, author-university PDF visually inspected pp641,642(Fig5),644(Fig6), binary SHA256 and supplement unknown.",
+      "current_locked": "Original measured five taste inputs, distinct style priors, original equipment-version espresso range, personal recipe families, at most one controllable suggestion, keep original notes/History and privacy. No universal EY/pressure/grind/dose/time optimum authorized.",
+      "current_app": "site/lib/engine.js blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6; site/lib/constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095. No current user-visible claim of measured 15g universal optimum found in reviewed module.",
+      "proposed_change": "SAFE research-only update source provenance and register precise Figure 5 experimental/Figure 6 schematic boundary. Keep existing app numeric/control/Locked behavior unchanged; any future EY-meter or dose/pressure-target feature requires separate owner approval and controlled espresso-specific user validation.",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "SOURCE_FIGURES_DIRECTLY_REVIEWED_DOCS_ONLY_PR_PENDING_CI",
+      "test_plan": "Preserve all 106 earlier source identities, 319 evidence checks, 163 proposals; one amended existing source provenance field plus 2 new evidence checks and 1 proposal. Verify exact original/source PDF page and documented Git blobs, JSON parsing, original records untouched, docs-governance source-bound CI; no runtime code changed. Node/browser/SQL/real Auth/603 suite NOT_RUN unless actual CI executes.",
+      "release_queue_status": "NO_NEW_ITEM_NO_READY_NO_DEPLOYMENT",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false,
+      "exact_source": {
+        "starting_development_sha": "98b44ea0f7bcd6ed6ef36c24838ce226ef587542",
+        "prior_ledger_blob": "eaa6ffb859e571f9f88cac417d087df328b1c516",
+        "journal_path": "docs/workstreams/ops-issue455-r205-cameron-primary-figures-20261112.md"
       }
     }
   ],
