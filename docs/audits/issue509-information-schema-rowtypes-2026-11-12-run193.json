@@ -1,0 +1,3742 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 193,
+  "utc": "2026-11-12T12:52:29.551Z",
+  "project_ref": "azviqqejypsefzilgonr",
+  "provider_pg_version": "17.11.0.003",
+  "github_source_parent_sha": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+  "main_sha": "44372ffdbce3f2771c4c5349b66ee6b46cc56db4",
+  "release_sha": "d0bc07df641af6411435daac74ee3cb16d1bdb61",
+  "inventory": {
+    "information_schema_rowtypes_total": 69,
+    "pg_catalog_rowtypes_total": 142,
+    "information_schema_complete_reviewed_this_run": 30,
+    "information_schema_unreviewed": 39,
+    "pg_catalog_unreviewed": 142,
+    "first": "_pg_foreign_data_wrappers",
+    "last": "foreign_server_options",
+    "complete_attributes": 277,
+    "full_view_source_characters": 42510,
+    "full_view_source_whitespace_words": 2851,
+    "view_source_present": 30,
+    "public_selectable_metadata_views": 25,
+    "internal_not_client_selectable": 5,
+    "foreign_wrapper_count": 0,
+    "foreign_server_count": 0,
+    "foreign_table_count": 0,
+    "foreign_mapping_count": 0
+  },
+  "safety": {
+    "only_read_only_provider_catalog_and_metadata": true,
+    "no_member_auth_identity_row_or_sensitive_log_values_read": true,
+    "no_provider_writes": true,
+    "no_production_deploy": true,
+    "tests": "DOCS_ONLY_NO_RUNTIME_TEST",
+    "new_confirmed_defects": 0,
+    "justified_removals": 0,
+    "upstream_auth_check_prior_issues_unchanged": true
+  },
+  "limits": [
+    "information_schema roles have SQL SELECT on 25 generic metadata views; actual API exposed-schema boundaries remain UNVERIFIED",
+    "Hosted Auth/JWT/PostgREST settings, Vault compiled internals, physical device push and cloud disk headroom UNVERIFIED",
+    "System views are platform-managed; no app-source repair justified",
+    "Only 30/69 information_schema relation rowtypes directly reviewed here; no baseline COMPLETE claim"
+  ],
+  "next": "information_schema.foreign_servers ordinal 31/69, otherwise migration #67 if newly applied",
+  "objects": [
+    {
+      "ordinal": 1,
+      "identity": "information_schema._pg_foreign_data_wrappers",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "_pg_foreign_data_wrappers",
+        "kind": "v",
+        "type_oid": 13566,
+        "array_oid": 13565,
+        "owner": "supabase_admin",
+        "rel_acl": null,
+        "type_acl": null,
+        "source_sql": " SELECT w.oid,\n    w.fdwowner,\n    w.fdwoptions,\n    current_database()::information_schema.sql_identifier AS foreign_data_wrapper_catalog,\n    w.fdwname::information_schema.sql_identifier AS foreign_data_wrapper_name,\n    u.rolname::information_schema.sql_identifier AS authorization_identifier,\n    'c'::character varying::information_schema.character_data AS foreign_data_wrapper_language\n   FROM pg_foreign_data_wrapper w,\n    pg_authid u\n  WHERE u.oid = w.fdwowner AND (pg_has_role(w.fdwowner, 'USAGE'::text) OR has_foreign_data_wrapper_privilege(w.oid, 'USAGE'::text));",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "oid",
+            "type": "oid",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "fdwowner",
+            "type": "oid",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "fdwoptions",
+            "type": "text[]",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 4,
+            "name": "foreign_data_wrapper_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 5,
+            "name": "foreign_data_wrapper_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 6,
+            "name": "authorization_identifier",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 7,
+            "name": "foreign_data_wrapper_language",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": false
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": false
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": false
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "6cea8154079ea795ff33ec372eaccc1d"
+      },
+      "view_source_characters": 575,
+      "view_source_whitespace_words": 32,
+      "full_attribute_count": 7,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "Internal FDW wrapper metadata joins owner-role information and requires wrapper USAGE; direct SELECT not granted to app roles."
+    },
+    {
+      "ordinal": 2,
+      "identity": "information_schema._pg_foreign_servers",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "_pg_foreign_servers",
+        "kind": "v",
+        "type_oid": 13578,
+        "array_oid": 13577,
+        "owner": "supabase_admin",
+        "rel_acl": null,
+        "type_acl": null,
+        "source_sql": " SELECT s.oid,\n    s.srvoptions,\n    current_database()::information_schema.sql_identifier AS foreign_server_catalog,\n    s.srvname::information_schema.sql_identifier AS foreign_server_name,\n    current_database()::information_schema.sql_identifier AS foreign_data_wrapper_catalog,\n    w.fdwname::information_schema.sql_identifier AS foreign_data_wrapper_name,\n    s.srvtype::information_schema.character_data AS foreign_server_type,\n    s.srvversion::information_schema.character_data AS foreign_server_version,\n    u.rolname::information_schema.sql_identifier AS authorization_identifier\n   FROM pg_foreign_server s,\n    pg_foreign_data_wrapper w,\n    pg_authid u\n  WHERE w.oid = s.srvfdw AND u.oid = s.srvowner AND (pg_has_role(s.srvowner, 'USAGE'::text) OR has_server_privilege(s.oid, 'USAGE'::text));",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "oid",
+            "type": "oid",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "srvoptions",
+            "type": "text[]",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "foreign_server_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 4,
+            "name": "foreign_server_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 5,
+            "name": "foreign_data_wrapper_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 6,
+            "name": "foreign_data_wrapper_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 7,
+            "name": "foreign_server_type",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 8,
+            "name": "foreign_server_version",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 9,
+            "name": "authorization_identifier",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": false
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": false
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": false
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "c4264ed036bf8d61f2095f84e031f9d2"
+      },
+      "view_source_characters": 805,
+      "view_source_whitespace_words": 45,
+      "full_attribute_count": 9,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "Internal foreign-server metadata joins wrappers and owner privileges; no client direct SELECT."
+    },
+    {
+      "ordinal": 3,
+      "identity": "information_schema._pg_foreign_table_columns",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "_pg_foreign_table_columns",
+        "kind": "v",
+        "type_oid": 13557,
+        "array_oid": 13556,
+        "owner": "supabase_admin",
+        "rel_acl": null,
+        "type_acl": null,
+        "source_sql": " SELECT n.nspname,\n    c.relname,\n    a.attname,\n    a.attfdwoptions\n   FROM pg_foreign_table t,\n    pg_authid u,\n    pg_namespace n,\n    pg_class c,\n    pg_attribute a\n  WHERE u.oid = c.relowner AND (pg_has_role(c.relowner, 'USAGE'::text) OR has_column_privilege(c.oid, a.attnum, 'SELECT, INSERT, UPDATE, REFERENCES'::text)) AND n.oid = c.relnamespace AND c.oid = t.ftrelid AND c.relkind = 'f'::\"char\" AND a.attrelid = c.oid AND a.attnum > 0;",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "nspname",
+            "type": "name",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "relname",
+            "type": "name",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "attname",
+            "type": "name",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 4,
+            "name": "attfdwoptions",
+            "type": "text[]",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": false
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": false
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": false
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "b25401fe194c9e8ac77f44290d0212e4"
+      },
+      "view_source_characters": 443,
+      "view_source_whitespace_words": 50,
+      "full_attribute_count": 4,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "Internal foreign-column options constrained by effective column privilege; no client direct SELECT."
+    },
+    {
+      "ordinal": 4,
+      "identity": "information_schema._pg_foreign_tables",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "_pg_foreign_tables",
+        "kind": "v",
+        "type_oid": 13590,
+        "array_oid": 13589,
+        "owner": "supabase_admin",
+        "rel_acl": null,
+        "type_acl": null,
+        "source_sql": " SELECT current_database()::information_schema.sql_identifier AS foreign_table_catalog,\n    n.nspname::information_schema.sql_identifier AS foreign_table_schema,\n    c.relname::information_schema.sql_identifier AS foreign_table_name,\n    t.ftoptions,\n    current_database()::information_schema.sql_identifier AS foreign_server_catalog,\n    s.srvname::information_schema.sql_identifier AS foreign_server_name,\n    u.rolname::information_schema.sql_identifier AS authorization_identifier\n   FROM pg_foreign_table t,\n    pg_foreign_server s,\n    pg_foreign_data_wrapper w,\n    pg_authid u,\n    pg_namespace n,\n    pg_class c\n  WHERE w.oid = s.srvfdw AND u.oid = c.relowner AND (pg_has_role(c.relowner, 'USAGE'::text) OR has_table_privilege(c.oid, 'SELECT, INSERT, UPDATE, DELETE, TRUNCATE, REFERENCES, TRIGGER'::text) OR has_any_column_privilege(c.oid, 'SELECT, INSERT, UPDATE, REFERENCES'::text)) AND n.oid = c.relnamespace AND c.oid = t.ftrelid AND c.relkind = 'f'::\"char\" AND s.oid = t.ftserver;",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "foreign_table_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "foreign_table_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "foreign_table_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 4,
+            "name": "ftoptions",
+            "type": "text[]",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 5,
+            "name": "foreign_server_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 6,
+            "name": "foreign_server_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 7,
+            "name": "authorization_identifier",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": false
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": false
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": false
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "bed9e6d9f480905d116104456f6c9971"
+      },
+      "view_source_characters": 995,
+      "view_source_whitespace_words": 75,
+      "full_attribute_count": 7,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "Internal foreign-table/server metadata permission-gated; no client direct SELECT."
+    },
+    {
+      "ordinal": 5,
+      "identity": "information_schema._pg_user_mappings",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "_pg_user_mappings",
+        "kind": "v",
+        "type_oid": 13603,
+        "array_oid": 13602,
+        "owner": "supabase_admin",
+        "rel_acl": null,
+        "type_acl": null,
+        "source_sql": " SELECT um.oid,\n    um.umoptions,\n    um.umuser,\n    COALESCE(u.rolname, 'PUBLIC'::name)::information_schema.sql_identifier AS authorization_identifier,\n    s.foreign_server_catalog,\n    s.foreign_server_name,\n    s.authorization_identifier AS srvowner\n   FROM pg_user_mapping um\n     LEFT JOIN pg_authid u ON u.oid = um.umuser,\n    information_schema._pg_foreign_servers s\n  WHERE s.oid = um.umserver;",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "oid",
+            "type": "oid",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "umoptions",
+            "type": "text[]",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "umuser",
+            "type": "oid",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 4,
+            "name": "authorization_identifier",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 5,
+            "name": "foreign_server_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 6,
+            "name": "foreign_server_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 7,
+            "name": "srvowner",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": false
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": false
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": false
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "89b95383e6a6a0d460f13f9ea96c06ff"
+      },
+      "view_source_characters": 402,
+      "view_source_whitespace_words": 30,
+      "full_attribute_count": 7,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "Internal foreign user-mapping options can contain sensitive configuration, but client direct SELECT denied and upstream foreign-server view gated."
+    },
+    {
+      "ordinal": 6,
+      "identity": "information_schema.administrable_role_authorizations",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "administrable_role_authorizations",
+        "kind": "v",
+        "type_oid": 13301,
+        "array_oid": 13300,
+        "owner": "supabase_admin",
+        "rel_acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "type_acl": null,
+        "source_sql": " SELECT grantee,\n    role_name,\n    is_grantable\n   FROM information_schema.applicable_roles\n  WHERE is_grantable::text = 'YES'::text;",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "grantee",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "role_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "is_grantable",
+            "type": "information_schema.yes_or_no",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": true
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": true
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": true
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "e0d0b913d9a65b7ff94fcb57eaeb45c4"
+      },
+      "view_source_characters": 134,
+      "view_source_whitespace_words": 10,
+      "full_attribute_count": 3,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "Publicly SELECT-able summary of grantable applicable roles; outputs filtered to current effective role memberships."
+    },
+    {
+      "ordinal": 7,
+      "identity": "information_schema.applicable_roles",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "applicable_roles",
+        "kind": "v",
+        "type_oid": 13296,
+        "array_oid": 13295,
+        "owner": "supabase_admin",
+        "rel_acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "type_acl": null,
+        "source_sql": " SELECT a.rolname::information_schema.sql_identifier AS grantee,\n    b.rolname::information_schema.sql_identifier AS role_name,\n        CASE\n            WHEN m.admin_option THEN 'YES'::text\n            ELSE 'NO'::text\n        END::information_schema.yes_or_no AS is_grantable\n   FROM ( SELECT pg_auth_members.member,\n            pg_auth_members.roleid,\n            pg_auth_members.admin_option\n           FROM pg_auth_members\n        UNION\n         SELECT pg_database.datdba,\n            pg_authid.oid,\n            false\n           FROM pg_database,\n            pg_authid\n          WHERE pg_database.datname = current_database() AND pg_authid.rolname = 'pg_database_owner'::name) m\n     JOIN pg_authid a ON m.member = a.oid\n     JOIN pg_authid b ON m.roleid = b.oid\n  WHERE pg_has_role(a.oid, 'USAGE'::text);",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "grantee",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "role_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "is_grantable",
+            "type": "information_schema.yes_or_no",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": true
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": true
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": true
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "90246dfdf60034b04bfaa48a1e19d2c3"
+      },
+      "view_source_characters": 808,
+      "view_source_whitespace_words": 59,
+      "full_attribute_count": 3,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "Current applicable role names derive pg_auth_members plus pg_database_owner and pg_has_role checks; metadata only."
+    },
+    {
+      "ordinal": 8,
+      "identity": "information_schema.attributes",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "attributes",
+        "kind": "v",
+        "type_oid": 13305,
+        "array_oid": 13304,
+        "owner": "supabase_admin",
+        "rel_acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "type_acl": null,
+        "source_sql": " SELECT current_database()::information_schema.sql_identifier AS udt_catalog,\n    nc.nspname::information_schema.sql_identifier AS udt_schema,\n    c.relname::information_schema.sql_identifier AS udt_name,\n    a.attname::information_schema.sql_identifier AS attribute_name,\n    a.attnum::information_schema.cardinal_number AS ordinal_position,\n    pg_get_expr(ad.adbin, ad.adrelid)::information_schema.character_data AS attribute_default,\n        CASE\n            WHEN a.attnotnull OR t.typtype = 'd'::\"char\" AND t.typnotnull THEN 'NO'::text\n            ELSE 'YES'::text\n        END::information_schema.yes_or_no AS is_nullable,\n        CASE\n            WHEN t.typelem <> 0::oid AND t.typlen = '-1'::integer THEN 'ARRAY'::text\n            WHEN nt.nspname = 'pg_catalog'::name THEN format_type(a.atttypid, NULL::integer)\n            ELSE 'USER-DEFINED'::text\n        END::information_schema.character_data AS data_type,\n    information_schema._pg_char_max_length(information_schema._pg_truetypid(a.*, t.*), information_schema._pg_truetypmod(a.*, t.*))::information_schema.cardinal_number AS character_maximum_length,\n    information_schema._pg_char_octet_length(information_schema._pg_truetypid(a.*, t.*), information_schema._pg_truetypmod(a.*, t.*))::information_schema.cardinal_number AS character_octet_length,\n    NULL::name::information_schema.sql_identifier AS character_set_catalog,\n    NULL::name::information_schema.sql_identifier AS character_set_schema,\n    NULL::name::information_schema.sql_identifier AS character_set_name,\n        CASE\n            WHEN nco.nspname IS NOT NULL THEN current_database()\n            ELSE NULL::name\n        END::information_schema.sql_identifier AS collation_catalog,\n    nco.nspname::information_schema.sql_identifier AS collation_schema,\n    co.collname::information_schema.sql_identifier AS collation_name,\n    information_schema._pg_numeric_precision(information_schema._pg_truetypid(a.*, t.*), information_schema._pg_truetypmod(a.*, t.*))::information_schema.cardinal_number AS numeric_precision,\n    information_schema._pg_numeric_precision_radix(information_schema._pg_truetypid(a.*, t.*), information_schema._pg_truetypmod(a.*, t.*))::information_schema.cardinal_number AS numeric_precision_radix,\n    information_schema._pg_numeric_scale(information_schema._pg_truetypid(a.*, t.*), information_schema._pg_truetypmod(a.*, t.*))::information_schema.cardinal_number AS numeric_scale,\n    information_schema._pg_datetime_precision(information_schema._pg_truetypid(a.*, t.*), information_schema._pg_truetypmod(a.*, t.*))::information_schema.cardinal_number AS datetime_precision,\n    information_schema._pg_interval_type(information_schema._pg_truetypid(a.*, t.*), information_schema._pg_truetypmod(a.*, t.*))::information_schema.character_data AS interval_type,\n    NULL::integer::information_schema.cardinal_number AS interval_precision,\n    current_database()::information_schema.sql_identifier AS attribute_udt_catalog,\n    nt.nspname::information_schema.sql_identifier AS attribute_udt_schema,\n    t.typname::information_schema.sql_identifier AS attribute_udt_name,\n    NULL::name::information_schema.sql_identifier AS scope_catalog,\n    NULL::name::information_schema.sql_identifier AS scope_schema,\n    NULL::name::information_schema.sql_identifier AS scope_name,\n    NULL::integer::information_schema.cardinal_number AS maximum_cardinality,\n    a.attnum::information_schema.sql_identifier AS dtd_identifier,\n    'NO'::character varying::information_schema.yes_or_no AS is_derived_reference_attribute\n   FROM pg_attribute a\n     LEFT JOIN pg_attrdef ad ON a.attrelid = ad.adrelid AND a.attnum = ad.adnum\n     JOIN (pg_class c\n     JOIN pg_namespace nc ON c.relnamespace = nc.oid) ON a.attrelid = c.oid\n     JOIN (pg_type t\n     JOIN pg_namespace nt ON t.typnamespace = nt.oid) ON a.atttypid = t.oid\n     LEFT JOIN (pg_collation co\n     JOIN pg_namespace nco ON co.collnamespace = nco.oid) ON a.attcollation = co.oid AND (nco.nspname <> 'pg_catalog'::name OR co.collname <> 'default'::name)\n  WHERE a.attnum > 0 AND NOT a.attisdropped AND c.relkind = 'c'::\"char\" AND (pg_has_role(c.relowner, 'USAGE'::text) OR has_type_privilege(c.reltype, 'USAGE'::text));",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "udt_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "udt_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "udt_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 4,
+            "name": "attribute_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 5,
+            "name": "ordinal_position",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 6,
+            "name": "attribute_default",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 7,
+            "name": "is_nullable",
+            "type": "information_schema.yes_or_no",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 8,
+            "name": "data_type",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 9,
+            "name": "character_maximum_length",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 10,
+            "name": "character_octet_length",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 11,
+            "name": "character_set_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 12,
+            "name": "character_set_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 13,
+            "name": "character_set_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 14,
+            "name": "collation_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 15,
+            "name": "collation_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 16,
+            "name": "collation_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 17,
+            "name": "numeric_precision",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 18,
+            "name": "numeric_precision_radix",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 19,
+            "name": "numeric_scale",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 20,
+            "name": "datetime_precision",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 21,
+            "name": "interval_type",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 22,
+            "name": "interval_precision",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 23,
+            "name": "attribute_udt_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 24,
+            "name": "attribute_udt_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 25,
+            "name": "attribute_udt_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 26,
+            "name": "scope_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 27,
+            "name": "scope_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 28,
+            "name": "scope_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 29,
+            "name": "maximum_cardinality",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 30,
+            "name": "dtd_identifier",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 31,
+            "name": "is_derived_reference_attribute",
+            "type": "information_schema.yes_or_no",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": true
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": true
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": true
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "2b6ef4001b5cada794890df373779623"
+      },
+      "view_source_characters": 4209,
+      "view_source_whitespace_words": 243,
+      "full_attribute_count": 31,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "Composite attribute metadata, defaults and type identifiers filtered by owner/type privilege, no row values."
+    },
+    {
+      "ordinal": 9,
+      "identity": "information_schema.character_sets",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "character_sets",
+        "kind": "v",
+        "type_oid": 13310,
+        "array_oid": 13309,
+        "owner": "supabase_admin",
+        "rel_acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "type_acl": null,
+        "source_sql": " SELECT NULL::name::information_schema.sql_identifier AS character_set_catalog,\n    NULL::name::information_schema.sql_identifier AS character_set_schema,\n    getdatabaseencoding()::information_schema.sql_identifier AS character_set_name,\n        CASE\n            WHEN getdatabaseencoding() = 'UTF8'::name THEN 'UCS'::name\n            ELSE getdatabaseencoding()\n        END::information_schema.sql_identifier AS character_repertoire,\n    getdatabaseencoding()::information_schema.sql_identifier AS form_of_use,\n    current_database()::information_schema.sql_identifier AS default_collate_catalog,\n    nc.nspname::information_schema.sql_identifier AS default_collate_schema,\n    c.collname::information_schema.sql_identifier AS default_collate_name\n   FROM pg_database d\n     LEFT JOIN (pg_collation c\n     JOIN pg_namespace nc ON c.collnamespace = nc.oid) ON d.datcollate = c.collcollate AND d.datctype = c.collctype\n  WHERE d.datname = current_database()\n  ORDER BY (char_length(c.collname::text)) DESC, c.collname\n LIMIT 1;",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "character_set_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "character_set_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "character_set_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 4,
+            "name": "character_repertoire",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 5,
+            "name": "form_of_use",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 6,
+            "name": "default_collate_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 7,
+            "name": "default_collate_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 8,
+            "name": "default_collate_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": true
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": true
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": true
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "2d4537e716f9de4c8dc2a97ade96abe0"
+      },
+      "view_source_characters": 1025,
+      "view_source_whitespace_words": 67,
+      "full_attribute_count": 8,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "Current database encoding/collation standard metadata with one-row limit; no private data."
+    },
+    {
+      "ordinal": 10,
+      "identity": "information_schema.check_constraint_routine_usage",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "check_constraint_routine_usage",
+        "kind": "v",
+        "type_oid": 13315,
+        "array_oid": 13314,
+        "owner": "supabase_admin",
+        "rel_acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "type_acl": null,
+        "source_sql": " SELECT DISTINCT current_database()::information_schema.sql_identifier AS constraint_catalog,\n    nc.nspname::information_schema.sql_identifier AS constraint_schema,\n    c.conname::information_schema.sql_identifier AS constraint_name,\n    current_database()::information_schema.sql_identifier AS specific_catalog,\n    np.nspname::information_schema.sql_identifier AS specific_schema,\n    nameconcatoid(p.proname, p.oid)::information_schema.sql_identifier AS specific_name\n   FROM pg_namespace nc,\n    pg_constraint c,\n    pg_depend d,\n    pg_proc p,\n    pg_namespace np\n  WHERE nc.oid = c.connamespace AND c.contype = 'c'::\"char\" AND c.oid = d.objid AND d.classid = 'pg_constraint'::regclass::oid AND d.refobjid = p.oid AND d.refclassid = 'pg_proc'::regclass::oid AND p.pronamespace = np.oid AND pg_has_role(p.proowner, 'USAGE'::text);",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "constraint_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "constraint_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "constraint_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 4,
+            "name": "specific_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 5,
+            "name": "specific_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 6,
+            "name": "specific_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": true
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": true
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": true
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "18244ddaa2c638a11f9a561067c8832f"
+      },
+      "view_source_characters": 835,
+      "view_source_whitespace_words": 63,
+      "full_attribute_count": 6,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "Check-constraint-to-routine dependency metadata filtered on routine owner role usage."
+    },
+    {
+      "ordinal": 11,
+      "identity": "information_schema.check_constraints",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "check_constraints",
+        "kind": "v",
+        "type_oid": 13320,
+        "array_oid": 13319,
+        "owner": "supabase_admin",
+        "rel_acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "type_acl": null,
+        "source_sql": " SELECT current_database()::information_schema.sql_identifier AS constraint_catalog,\n    rs.nspname::information_schema.sql_identifier AS constraint_schema,\n    con.conname::information_schema.sql_identifier AS constraint_name,\n    pg_get_expr(con.conbin, COALESCE(c.oid, 0::oid))::information_schema.character_data AS check_clause\n   FROM pg_constraint con\n     LEFT JOIN pg_namespace rs ON rs.oid = con.connamespace\n     LEFT JOIN pg_class c ON c.oid = con.conrelid\n     LEFT JOIN pg_type t ON t.oid = con.contypid\n  WHERE pg_has_role(COALESCE(c.relowner, t.typowner), 'USAGE'::text) AND con.contype = 'c'::\"char\"\nUNION\n SELECT current_database()::information_schema.sql_identifier AS constraint_catalog,\n    rs.nspname::information_schema.sql_identifier AS constraint_schema,\n    con.conname::information_schema.sql_identifier AS constraint_name,\n    format('%s IS NOT NULL'::text, COALESCE(at.attname, 'VALUE'::name))::information_schema.character_data AS check_clause\n   FROM pg_constraint con\n     LEFT JOIN pg_namespace rs ON rs.oid = con.connamespace\n     LEFT JOIN pg_class c ON c.oid = con.conrelid\n     LEFT JOIN pg_type t ON t.oid = con.contypid\n     LEFT JOIN pg_attribute at ON con.conrelid = at.attrelid AND con.conkey[1] = at.attnum\n  WHERE pg_has_role(COALESCE(c.relowner, t.typowner), 'USAGE'::text) AND con.contype = 'n'::\"char\"\nUNION\n SELECT current_database()::information_schema.sql_identifier AS constraint_catalog,\n    n.nspname::information_schema.sql_identifier AS constraint_schema,\n    (((((n.oid::text || '_'::text) || r.oid::text) || '_'::text) || a.attnum::text) || '_not_null'::text)::information_schema.sql_identifier AS constraint_name,\n    (a.attname::text || ' IS NOT NULL'::text)::information_schema.character_data AS check_clause\n   FROM pg_namespace n,\n    pg_class r,\n    pg_attribute a\n  WHERE n.oid = r.relnamespace AND r.oid = a.attrelid AND a.attnum > 0 AND NOT a.attisdropped AND a.attnotnull AND (r.relkind = ANY (ARRAY['r'::\"char\", 'p'::\"char\"])) AND pg_has_role(r.relowner, 'USAGE'::text);",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "constraint_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "constraint_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "constraint_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 4,
+            "name": "check_clause",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": true
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": true
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": true
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "1f791add66843363197c18aca5b823af"
+      },
+      "view_source_characters": 2037,
+      "view_source_whitespace_words": 178,
+      "full_attribute_count": 4,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "Check and synthesized NOT NULL definitions exposed as schema metadata only to owner-role-eligible viewer; actual API schema exposure unverified."
+    },
+    {
+      "ordinal": 12,
+      "identity": "information_schema.collation_character_set_applicability",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "collation_character_set_applicability",
+        "kind": "v",
+        "type_oid": 13330,
+        "array_oid": 13329,
+        "owner": "supabase_admin",
+        "rel_acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "type_acl": null,
+        "source_sql": " SELECT current_database()::information_schema.sql_identifier AS collation_catalog,\n    nc.nspname::information_schema.sql_identifier AS collation_schema,\n    c.collname::information_schema.sql_identifier AS collation_name,\n    NULL::name::information_schema.sql_identifier AS character_set_catalog,\n    NULL::name::information_schema.sql_identifier AS character_set_schema,\n    getdatabaseencoding()::information_schema.sql_identifier AS character_set_name\n   FROM pg_collation c,\n    pg_namespace nc\n  WHERE c.collnamespace = nc.oid AND (c.collencoding = ANY (ARRAY['-1'::integer, ( SELECT pg_database.encoding\n           FROM pg_database\n          WHERE pg_database.datname = current_database())]));",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "collation_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "collation_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "collation_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 4,
+            "name": "character_set_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 5,
+            "name": "character_set_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 6,
+            "name": "character_set_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": true
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": true
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": true
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "b378975245b5d5644ca218f0d7c1102c"
+      },
+      "view_source_characters": 702,
+      "view_source_whitespace_words": 42,
+      "full_attribute_count": 6,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "Database collation applicability filtered to current encoding."
+    },
+    {
+      "ordinal": 13,
+      "identity": "information_schema.collations",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "collations",
+        "kind": "v",
+        "type_oid": 13325,
+        "array_oid": 13324,
+        "owner": "supabase_admin",
+        "rel_acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "type_acl": null,
+        "source_sql": " SELECT current_database()::information_schema.sql_identifier AS collation_catalog,\n    nc.nspname::information_schema.sql_identifier AS collation_schema,\n    c.collname::information_schema.sql_identifier AS collation_name,\n    'NO PAD'::character varying::information_schema.character_data AS pad_attribute\n   FROM pg_collation c,\n    pg_namespace nc\n  WHERE c.collnamespace = nc.oid AND (c.collencoding = ANY (ARRAY['-1'::integer, ( SELECT pg_database.encoding\n           FROM pg_database\n          WHERE pg_database.datname = current_database())]));",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "collation_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "collation_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "collation_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 4,
+            "name": "pad_attribute",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": true
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": true
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": true
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "c0469f2c3da5516e38b70a65bedced30"
+      },
+      "view_source_characters": 552,
+      "view_source_whitespace_words": 38,
+      "full_attribute_count": 4,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "Collation schema metadata filtered to current encoding."
+    },
+    {
+      "ordinal": 14,
+      "identity": "information_schema.column_column_usage",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "column_column_usage",
+        "kind": "v",
+        "type_oid": 13335,
+        "array_oid": 13334,
+        "owner": "supabase_admin",
+        "rel_acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "type_acl": null,
+        "source_sql": " SELECT DISTINCT current_database()::information_schema.sql_identifier AS table_catalog,\n    n.nspname::information_schema.sql_identifier AS table_schema,\n    c.relname::information_schema.sql_identifier AS table_name,\n    ac.attname::information_schema.sql_identifier AS column_name,\n    ad.attname::information_schema.sql_identifier AS dependent_column\n   FROM pg_namespace n,\n    pg_class c,\n    pg_depend d,\n    pg_attribute ac,\n    pg_attribute ad,\n    pg_attrdef atd\n  WHERE n.oid = c.relnamespace AND c.oid = ac.attrelid AND c.oid = ad.attrelid AND ac.attnum <> ad.attnum AND ad.attrelid = atd.adrelid AND ad.attnum = atd.adnum AND d.classid = 'pg_attrdef'::regclass::oid AND d.refclassid = 'pg_class'::regclass::oid AND d.objid = atd.oid AND d.refobjid = ac.attrelid AND d.refobjsubid = ac.attnum AND ad.attgenerated <> ''::\"char\" AND pg_has_role(c.relowner, 'USAGE'::text);",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "table_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "table_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "table_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 4,
+            "name": "column_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 5,
+            "name": "dependent_column",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": true
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": true
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": true
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "ca0aa8a9dc0b342b273f74f32535c511"
+      },
+      "view_source_characters": 882,
+      "view_source_whitespace_words": 81,
+      "full_attribute_count": 5,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "Generated-column dependency mapping of distinct referenced/dependent attributes and owner-role gate."
+    },
+    {
+      "ordinal": 15,
+      "identity": "information_schema.column_domain_usage",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "column_domain_usage",
+        "kind": "v",
+        "type_oid": 13340,
+        "array_oid": 13339,
+        "owner": "supabase_admin",
+        "rel_acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "type_acl": null,
+        "source_sql": " SELECT current_database()::information_schema.sql_identifier AS domain_catalog,\n    nt.nspname::information_schema.sql_identifier AS domain_schema,\n    t.typname::information_schema.sql_identifier AS domain_name,\n    current_database()::information_schema.sql_identifier AS table_catalog,\n    nc.nspname::information_schema.sql_identifier AS table_schema,\n    c.relname::information_schema.sql_identifier AS table_name,\n    a.attname::information_schema.sql_identifier AS column_name\n   FROM pg_type t,\n    pg_namespace nt,\n    pg_class c,\n    pg_namespace nc,\n    pg_attribute a\n  WHERE t.typnamespace = nt.oid AND c.relnamespace = nc.oid AND a.attrelid = c.oid AND a.atttypid = t.oid AND t.typtype = 'd'::\"char\" AND (c.relkind = ANY (ARRAY['r'::\"char\", 'v'::\"char\", 'f'::\"char\", 'p'::\"char\"])) AND a.attnum > 0 AND NOT a.attisdropped AND pg_has_role(t.typowner, 'USAGE'::text);",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "domain_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "domain_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "domain_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 4,
+            "name": "table_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 5,
+            "name": "table_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 6,
+            "name": "table_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 7,
+            "name": "column_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": true
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": true
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": true
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "1e2966cc1a03e761a97b269265e8903d"
+      },
+      "view_source_characters": 880,
+      "view_source_whitespace_words": 71,
+      "full_attribute_count": 7,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "Domain-to-column usage maps only role-visible domain owners."
+    },
+    {
+      "ordinal": 16,
+      "identity": "information_schema.column_options",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "column_options",
+        "kind": "v",
+        "type_oid": 13562,
+        "array_oid": 13561,
+        "owner": "supabase_admin",
+        "rel_acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "type_acl": null,
+        "source_sql": " SELECT current_database()::information_schema.sql_identifier AS table_catalog,\n    nspname::information_schema.sql_identifier AS table_schema,\n    relname::information_schema.sql_identifier AS table_name,\n    attname::information_schema.sql_identifier AS column_name,\n    (pg_options_to_table(attfdwoptions)).option_name::information_schema.sql_identifier AS option_name,\n    (pg_options_to_table(attfdwoptions)).option_value::information_schema.character_data AS option_value\n   FROM information_schema._pg_foreign_table_columns c;",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "table_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "table_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "table_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 4,
+            "name": "column_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 5,
+            "name": "option_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 6,
+            "name": "option_value",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": true
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": true
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": true
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "45641f631f44fc6dbefeee124d3107a2"
+      },
+      "view_source_characters": 533,
+      "view_source_whitespace_words": 22,
+      "full_attribute_count": 6,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "FDW column option names/values projected from internal permission-gated view; zero foreign tables currently present."
+    },
+    {
+      "ordinal": 17,
+      "identity": "information_schema.column_privileges",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "column_privileges",
+        "kind": "v",
+        "type_oid": 13345,
+        "array_oid": 13344,
+        "owner": "supabase_admin",
+        "rel_acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "type_acl": null,
+        "source_sql": " SELECT u_grantor.rolname::information_schema.sql_identifier AS grantor,\n    grantee.rolname::information_schema.sql_identifier AS grantee,\n    current_database()::information_schema.sql_identifier AS table_catalog,\n    nc.nspname::information_schema.sql_identifier AS table_schema,\n    x.relname::information_schema.sql_identifier AS table_name,\n    x.attname::information_schema.sql_identifier AS column_name,\n    x.prtype::information_schema.character_data AS privilege_type,\n        CASE\n            WHEN pg_has_role(x.grantee, x.relowner, 'USAGE'::text) OR x.grantable THEN 'YES'::text\n            ELSE 'NO'::text\n        END::information_schema.yes_or_no AS is_grantable\n   FROM ( SELECT pr_c.grantor,\n            pr_c.grantee,\n            a.attname,\n            pr_c.relname,\n            pr_c.relnamespace,\n            pr_c.prtype,\n            pr_c.grantable,\n            pr_c.relowner\n           FROM ( SELECT pg_class.oid,\n                    pg_class.relname,\n                    pg_class.relnamespace,\n                    pg_class.relowner,\n                    (aclexplode(COALESCE(pg_class.relacl, acldefault('r'::\"char\", pg_class.relowner)))).grantor AS grantor,\n                    (aclexplode(COALESCE(pg_class.relacl, acldefault('r'::\"char\", pg_class.relowner)))).grantee AS grantee,\n                    (aclexplode(COALESCE(pg_class.relacl, acldefault('r'::\"char\", pg_class.relowner)))).privilege_type AS privilege_type,\n                    (aclexplode(COALESCE(pg_class.relacl, acldefault('r'::\"char\", pg_class.relowner)))).is_grantable AS is_grantable\n                   FROM pg_class\n                  WHERE pg_class.relkind = ANY (ARRAY['r'::\"char\", 'v'::\"char\", 'f'::\"char\", 'p'::\"char\"])) pr_c(oid, relname, relnamespace, relowner, grantor, grantee, prtype, grantable),\n            pg_attribute a\n          WHERE a.attrelid = pr_c.oid AND a.attnum > 0 AND NOT a.attisdropped\n        UNION\n         SELECT pr_a.grantor,\n            pr_a.grantee,\n            pr_a.attname,\n            c.relname,\n            c.relnamespace,\n            pr_a.prtype,\n            pr_a.grantable,\n            c.relowner\n           FROM ( SELECT a.attrelid,\n                    a.attname,\n                    (aclexplode(COALESCE(a.attacl, acldefault('c'::\"char\", cc.relowner)))).grantor AS grantor,\n                    (aclexplode(COALESCE(a.attacl, acldefault('c'::\"char\", cc.relowner)))).grantee AS grantee,\n                    (aclexplode(COALESCE(a.attacl, acldefault('c'::\"char\", cc.relowner)))).privilege_type AS privilege_type,\n                    (aclexplode(COALESCE(a.attacl, acldefault('c'::\"char\", cc.relowner)))).is_grantable AS is_grantable\n                   FROM pg_attribute a\n                     JOIN pg_class cc ON a.attrelid = cc.oid\n                  WHERE a.attnum > 0 AND NOT a.attisdropped) pr_a(attrelid, attname, grantor, grantee, prtype, grantable),\n            pg_class c\n          WHERE pr_a.attrelid = c.oid AND (c.relkind = ANY (ARRAY['r'::\"char\", 'v'::\"char\", 'f'::\"char\", 'p'::\"char\"]))) x,\n    pg_namespace nc,\n    pg_authid u_grantor,\n    ( SELECT pg_authid.oid,\n            pg_authid.rolname\n           FROM pg_authid\n        UNION ALL\n         SELECT 0::oid AS oid,\n            'PUBLIC'::name) grantee(oid, rolname)\n  WHERE x.relnamespace = nc.oid AND x.grantee = grantee.oid AND x.grantor = u_grantor.oid AND (x.prtype = ANY (ARRAY['INSERT'::text, 'SELECT'::text, 'UPDATE'::text, 'REFERENCES'::text])) AND (pg_has_role(u_grantor.oid, 'USAGE'::text) OR pg_has_role(grantee.oid, 'USAGE'::text) OR grantee.rolname = 'PUBLIC'::name);",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "grantor",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "grantee",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "table_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 4,
+            "name": "table_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 5,
+            "name": "table_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 6,
+            "name": "column_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 7,
+            "name": "privilege_type",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 8,
+            "name": "is_grantable",
+            "type": "information_schema.yes_or_no",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": true
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": true
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": true
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "16686062b975c6f28eb4025ffa0648c8"
+      },
+      "view_source_characters": 3569,
+      "view_source_whitespace_words": 227,
+      "full_attribute_count": 8,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "Column ACL explosion combines table/column grants with grantor/grantee visibility filter; metadata not data."
+    },
+    {
+      "ordinal": 18,
+      "identity": "information_schema.column_udt_usage",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "column_udt_usage",
+        "kind": "v",
+        "type_oid": 13350,
+        "array_oid": 13349,
+        "owner": "supabase_admin",
+        "rel_acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "type_acl": null,
+        "source_sql": " SELECT current_database()::information_schema.sql_identifier AS udt_catalog,\n    COALESCE(nbt.nspname, nt.nspname)::information_schema.sql_identifier AS udt_schema,\n    COALESCE(bt.typname, t.typname)::information_schema.sql_identifier AS udt_name,\n    current_database()::information_schema.sql_identifier AS table_catalog,\n    nc.nspname::information_schema.sql_identifier AS table_schema,\n    c.relname::information_schema.sql_identifier AS table_name,\n    a.attname::information_schema.sql_identifier AS column_name\n   FROM pg_attribute a,\n    pg_class c,\n    pg_namespace nc,\n    pg_type t\n     JOIN pg_namespace nt ON t.typnamespace = nt.oid\n     LEFT JOIN (pg_type bt\n     JOIN pg_namespace nbt ON bt.typnamespace = nbt.oid) ON t.typtype = 'd'::\"char\" AND t.typbasetype = bt.oid\n  WHERE a.attrelid = c.oid AND a.atttypid = t.oid AND nc.oid = c.relnamespace AND a.attnum > 0 AND NOT a.attisdropped AND (c.relkind = ANY (ARRAY['r'::\"char\", 'v'::\"char\", 'f'::\"char\", 'p'::\"char\"])) AND pg_has_role(COALESCE(bt.typowner, t.typowner), 'USAGE'::text);",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "udt_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "udt_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "udt_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 4,
+            "name": "table_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 5,
+            "name": "table_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 6,
+            "name": "table_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 7,
+            "name": "column_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": true
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": true
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": true
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "df5c1c14ac01eb8ed140d59752821719"
+      },
+      "view_source_characters": 1053,
+      "view_source_whitespace_words": 90,
+      "full_attribute_count": 7,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "UDT base-type usage maps column definitions with type-owner role gate."
+    },
+    {
+      "ordinal": 19,
+      "identity": "information_schema.columns",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "columns",
+        "kind": "v",
+        "type_oid": 13355,
+        "array_oid": 13354,
+        "owner": "supabase_admin",
+        "rel_acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "type_acl": null,
+        "source_sql": " SELECT current_database()::information_schema.sql_identifier AS table_catalog,\n    nc.nspname::information_schema.sql_identifier AS table_schema,\n    c.relname::information_schema.sql_identifier AS table_name,\n    a.attname::information_schema.sql_identifier AS column_name,\n    a.attnum::information_schema.cardinal_number AS ordinal_position,\n        CASE\n            WHEN a.attgenerated = ''::\"char\" THEN pg_get_expr(ad.adbin, ad.adrelid)\n            ELSE NULL::text\n        END::information_schema.character_data AS column_default,\n        CASE\n            WHEN a.attnotnull OR t.typtype = 'd'::\"char\" AND t.typnotnull THEN 'NO'::text\n            ELSE 'YES'::text\n        END::information_schema.yes_or_no AS is_nullable,\n        CASE\n            WHEN t.typtype = 'd'::\"char\" THEN\n            CASE\n                WHEN bt.typelem <> 0::oid AND bt.typlen = '-1'::integer THEN 'ARRAY'::text\n                WHEN nbt.nspname = 'pg_catalog'::name THEN format_type(t.typbasetype, NULL::integer)\n                ELSE 'USER-DEFINED'::text\n            END\n            ELSE\n            CASE\n                WHEN t.typelem <> 0::oid AND t.typlen = '-1'::integer THEN 'ARRAY'::text\n                WHEN nt.nspname = 'pg_catalog'::name THEN format_type(a.atttypid, NULL::integer)\n                ELSE 'USER-DEFINED'::text\n            END\n        END::information_schema.character_data AS data_type,\n    information_schema._pg_char_max_length(information_schema._pg_truetypid(a.*, t.*), information_schema._pg_truetypmod(a.*, t.*))::information_schema.cardinal_number AS character_maximum_length,\n    information_schema._pg_char_octet_length(information_schema._pg_truetypid(a.*, t.*), information_schema._pg_truetypmod(a.*, t.*))::information_schema.cardinal_number AS character_octet_length,\n    information_schema._pg_numeric_precision(information_schema._pg_truetypid(a.*, t.*), information_schema._pg_truetypmod(a.*, t.*))::information_schema.cardinal_number AS numeric_precision,\n    information_schema._pg_numeric_precision_radix(information_schema._pg_truetypid(a.*, t.*), information_schema._pg_truetypmod(a.*, t.*))::information_schema.cardinal_number AS numeric_precision_radix,\n    information_schema._pg_numeric_scale(information_schema._pg_truetypid(a.*, t.*), information_schema._pg_truetypmod(a.*, t.*))::information_schema.cardinal_number AS numeric_scale,\n    information_schema._pg_datetime_precision(information_schema._pg_truetypid(a.*, t.*), information_schema._pg_truetypmod(a.*, t.*))::information_schema.cardinal_number AS datetime_precision,\n    information_schema._pg_interval_type(information_schema._pg_truetypid(a.*, t.*), information_schema._pg_truetypmod(a.*, t.*))::information_schema.character_data AS interval_type,\n    NULL::integer::information_schema.cardinal_number AS interval_precision,\n    NULL::name::information_schema.sql_identifier AS character_set_catalog,\n    NULL::name::information_schema.sql_identifier AS character_set_schema,\n    NULL::name::information_schema.sql_identifier AS character_set_name,\n        CASE\n            WHEN nco.nspname IS NOT NULL THEN current_database()\n            ELSE NULL::name\n        END::information_schema.sql_identifier AS collation_catalog,\n    nco.nspname::information_schema.sql_identifier AS collation_schema,\n    co.collname::information_schema.sql_identifier AS collation_name,\n        CASE\n            WHEN t.typtype = 'd'::\"char\" THEN current_database()\n            ELSE NULL::name\n        END::information_schema.sql_identifier AS domain_catalog,\n        CASE\n            WHEN t.typtype = 'd'::\"char\" THEN nt.nspname\n            ELSE NULL::name\n        END::information_schema.sql_identifier AS domain_schema,\n        CASE\n            WHEN t.typtype = 'd'::\"char\" THEN t.typname\n            ELSE NULL::name\n        END::information_schema.sql_identifier AS domain_name,\n    current_database()::information_schema.sql_identifier AS udt_catalog,\n    COALESCE(nbt.nspname, nt.nspname)::information_schema.sql_identifier AS udt_schema,\n    COALESCE(bt.typname, t.typname)::information_schema.sql_identifier AS udt_name,\n    NULL::name::information_schema.sql_identifier AS scope_catalog,\n    NULL::name::information_schema.sql_identifier AS scope_schema,\n    NULL::name::information_schema.sql_identifier AS scope_name,\n    NULL::integer::information_schema.cardinal_number AS maximum_cardinality,\n    a.attnum::information_schema.sql_identifier AS dtd_identifier,\n    'NO'::character varying::information_schema.yes_or_no AS is_self_referencing,\n        CASE\n            WHEN a.attidentity = ANY (ARRAY['a'::\"char\", 'd'::\"char\"]) THEN 'YES'::text\n            ELSE 'NO'::text\n        END::information_schema.yes_or_no AS is_identity,\n        CASE a.attidentity\n            WHEN 'a'::\"char\" THEN 'ALWAYS'::text\n            WHEN 'd'::\"char\" THEN 'BY DEFAULT'::text\n            ELSE NULL::text\n        END::information_schema.character_data AS identity_generation,\n    seq.seqstart::information_schema.character_data AS identity_start,\n    seq.seqincrement::information_schema.character_data AS identity_increment,\n    seq.seqmax::information_schema.character_data AS identity_maximum,\n    seq.seqmin::information_schema.character_data AS identity_minimum,\n        CASE\n            WHEN seq.seqcycle THEN 'YES'::text\n            ELSE 'NO'::text\n        END::information_schema.yes_or_no AS identity_cycle,\n        CASE\n            WHEN a.attgenerated <> ''::\"char\" THEN 'ALWAYS'::text\n            ELSE 'NEVER'::text\n        END::information_schema.character_data AS is_generated,\n        CASE\n            WHEN a.attgenerated <> ''::\"char\" THEN pg_get_expr(ad.adbin, ad.adrelid)\n            ELSE NULL::text\n        END::information_schema.character_data AS generation_expression,\n        CASE\n            WHEN (c.relkind = ANY (ARRAY['r'::\"char\", 'p'::\"char\"])) OR (c.relkind = ANY (ARRAY['v'::\"char\", 'f'::\"char\"])) AND pg_column_is_updatable(c.oid::regclass, a.attnum, false) THEN 'YES'::text\n            ELSE 'NO'::text\n        END::information_schema.yes_or_no AS is_updatable\n   FROM pg_attribute a\n     LEFT JOIN pg_attrdef ad ON a.attrelid = ad.adrelid AND a.attnum = ad.adnum\n     JOIN (pg_class c\n     JOIN pg_namespace nc ON c.relnamespace = nc.oid) ON a.attrelid = c.oid\n     JOIN (pg_type t\n     JOIN pg_namespace nt ON t.typnamespace = nt.oid) ON a.atttypid = t.oid\n     LEFT JOIN (pg_type bt\n     JOIN pg_namespace nbt ON bt.typnamespace = nbt.oid) ON t.typtype = 'd'::\"char\" AND t.typbasetype = bt.oid\n     LEFT JOIN (pg_collation co\n     JOIN pg_namespace nco ON co.collnamespace = nco.oid) ON a.attcollation = co.oid AND (nco.nspname <> 'pg_catalog'::name OR co.collname <> 'default'::name)\n     LEFT JOIN (pg_depend dep\n     JOIN pg_sequence seq ON dep.classid = 'pg_class'::regclass::oid AND dep.objid = seq.seqrelid AND dep.deptype = 'i'::\"char\") ON dep.refclassid = 'pg_class'::regclass::oid AND dep.refobjid = c.oid AND dep.refobjsubid = a.attnum\n  WHERE NOT pg_is_other_temp_schema(nc.oid) AND a.attnum > 0 AND NOT a.attisdropped AND (c.relkind = ANY (ARRAY['r'::\"char\", 'v'::\"char\", 'f'::\"char\", 'p'::\"char\"])) AND (pg_has_role(c.relowner, 'USAGE'::text) OR has_column_privilege(c.oid, a.attnum, 'SELECT, INSERT, UPDATE, REFERENCES'::text));",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "table_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "table_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "table_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 4,
+            "name": "column_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 5,
+            "name": "ordinal_position",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 6,
+            "name": "column_default",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 7,
+            "name": "is_nullable",
+            "type": "information_schema.yes_or_no",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 8,
+            "name": "data_type",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 9,
+            "name": "character_maximum_length",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 10,
+            "name": "character_octet_length",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 11,
+            "name": "numeric_precision",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 12,
+            "name": "numeric_precision_radix",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 13,
+            "name": "numeric_scale",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 14,
+            "name": "datetime_precision",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 15,
+            "name": "interval_type",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 16,
+            "name": "interval_precision",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 17,
+            "name": "character_set_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 18,
+            "name": "character_set_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 19,
+            "name": "character_set_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 20,
+            "name": "collation_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 21,
+            "name": "collation_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 22,
+            "name": "collation_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 23,
+            "name": "domain_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 24,
+            "name": "domain_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 25,
+            "name": "domain_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 26,
+            "name": "udt_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 27,
+            "name": "udt_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 28,
+            "name": "udt_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 29,
+            "name": "scope_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 30,
+            "name": "scope_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 31,
+            "name": "scope_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 32,
+            "name": "maximum_cardinality",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 33,
+            "name": "dtd_identifier",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 34,
+            "name": "is_self_referencing",
+            "type": "information_schema.yes_or_no",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 35,
+            "name": "is_identity",
+            "type": "information_schema.yes_or_no",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 36,
+            "name": "identity_generation",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 37,
+            "name": "identity_start",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 38,
+            "name": "identity_increment",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 39,
+            "name": "identity_maximum",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 40,
+            "name": "identity_minimum",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 41,
+            "name": "identity_cycle",
+            "type": "information_schema.yes_or_no",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 42,
+            "name": "is_generated",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 43,
+            "name": "generation_expression",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 44,
+            "name": "is_updatable",
+            "type": "information_schema.yes_or_no",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": true
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": true
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": true
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "d917bf435378e1a3bb49d67108a5d9d4"
+      },
+      "view_source_characters": 7243,
+      "view_source_whitespace_words": 481,
+      "full_attribute_count": 44,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "Column metadata including domain, identity, generated expression, default and updatability is permission-gated by owner/column grants; not a row-data read."
+    },
+    {
+      "ordinal": 20,
+      "identity": "information_schema.constraint_column_usage",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "constraint_column_usage",
+        "kind": "v",
+        "type_oid": 13360,
+        "array_oid": 13359,
+        "owner": "supabase_admin",
+        "rel_acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "type_acl": null,
+        "source_sql": " SELECT current_database()::information_schema.sql_identifier AS table_catalog,\n    tblschema::information_schema.sql_identifier AS table_schema,\n    tblname::information_schema.sql_identifier AS table_name,\n    colname::information_schema.sql_identifier AS column_name,\n    current_database()::information_schema.sql_identifier AS constraint_catalog,\n    cstrschema::information_schema.sql_identifier AS constraint_schema,\n    cstrname::information_schema.sql_identifier AS constraint_name\n   FROM ( SELECT DISTINCT nr.nspname,\n            r.relname,\n            r.relowner,\n            a.attname,\n            nc.nspname,\n            c.conname\n           FROM pg_namespace nr,\n            pg_class r,\n            pg_attribute a,\n            pg_depend d,\n            pg_namespace nc,\n            pg_constraint c\n          WHERE nr.oid = r.relnamespace AND r.oid = a.attrelid AND d.refclassid = 'pg_class'::regclass::oid AND d.refobjid = r.oid AND d.refobjsubid = a.attnum AND d.classid = 'pg_constraint'::regclass::oid AND d.objid = c.oid AND c.connamespace = nc.oid AND c.contype = 'c'::\"char\" AND (r.relkind = ANY (ARRAY['r'::\"char\", 'p'::\"char\"])) AND NOT a.attisdropped\n        UNION ALL\n         SELECT nr.nspname,\n            r.relname,\n            r.relowner,\n            a.attname,\n            nc.nspname,\n            c.conname\n           FROM pg_namespace nr,\n            pg_class r,\n            pg_attribute a,\n            pg_namespace nc,\n            pg_constraint c\n          WHERE nr.oid = r.relnamespace AND r.oid = a.attrelid AND nc.oid = c.connamespace AND r.oid =\n                CASE c.contype\n                    WHEN 'f'::\"char\" THEN c.confrelid\n                    ELSE c.conrelid\n                END AND (a.attnum = ANY (\n                CASE c.contype\n                    WHEN 'f'::\"char\" THEN c.confkey\n                    ELSE c.conkey\n                END)) AND NOT a.attisdropped AND (c.contype = ANY (ARRAY['p'::\"char\", 'u'::\"char\", 'f'::\"char\"])) AND (r.relkind = ANY (ARRAY['r'::\"char\", 'p'::\"char\"]))) x(tblschema, tblname, tblowner, colname, cstrschema, cstrname)\n  WHERE pg_has_role(tblowner, 'USAGE'::text);",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "table_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "table_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "table_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 4,
+            "name": "column_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 5,
+            "name": "constraint_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 6,
+            "name": "constraint_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 7,
+            "name": "constraint_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": true
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": true
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": true
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "d9516716bed04b14345612b63e11d13d"
+      },
+      "view_source_characters": 2140,
+      "view_source_whitespace_words": 173,
+      "full_attribute_count": 7,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "Constraint column names for check/PK/unique/FK are owner-role filtered; schema metadata only."
+    },
+    {
+      "ordinal": 21,
+      "identity": "information_schema.constraint_table_usage",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "constraint_table_usage",
+        "kind": "v",
+        "type_oid": 13365,
+        "array_oid": 13364,
+        "owner": "supabase_admin",
+        "rel_acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "type_acl": null,
+        "source_sql": " SELECT current_database()::information_schema.sql_identifier AS table_catalog,\n    nr.nspname::information_schema.sql_identifier AS table_schema,\n    r.relname::information_schema.sql_identifier AS table_name,\n    current_database()::information_schema.sql_identifier AS constraint_catalog,\n    nc.nspname::information_schema.sql_identifier AS constraint_schema,\n    c.conname::information_schema.sql_identifier AS constraint_name\n   FROM pg_constraint c,\n    pg_namespace nc,\n    pg_class r,\n    pg_namespace nr\n  WHERE c.connamespace = nc.oid AND r.relnamespace = nr.oid AND (c.contype = 'f'::\"char\" AND c.confrelid = r.oid OR (c.contype = ANY (ARRAY['p'::\"char\", 'u'::\"char\"])) AND c.conrelid = r.oid) AND (r.relkind = ANY (ARRAY['r'::\"char\", 'p'::\"char\"])) AND pg_has_role(r.relowner, 'USAGE'::text);",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "table_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "table_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "table_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 4,
+            "name": "constraint_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 5,
+            "name": "constraint_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 6,
+            "name": "constraint_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": true
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": true
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": true
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "365dcd13c5c00e6e47824178f158fc27"
+      },
+      "view_source_characters": 805,
+      "view_source_whitespace_words": 63,
+      "full_attribute_count": 6,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "Constraint relation names for FK/PK/unique use table-owner role gate."
+    },
+    {
+      "ordinal": 22,
+      "identity": "information_schema.data_type_privileges",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "data_type_privileges",
+        "kind": "v",
+        "type_oid": 13547,
+        "array_oid": 13546,
+        "owner": "supabase_admin",
+        "rel_acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "type_acl": null,
+        "source_sql": " SELECT current_database()::information_schema.sql_identifier AS object_catalog,\n    objschema AS object_schema,\n    objname AS object_name,\n    objtype::information_schema.character_data AS object_type,\n    objdtdid AS dtd_identifier\n   FROM ( SELECT attributes.udt_schema,\n            attributes.udt_name,\n            'USER-DEFINED TYPE'::text AS text,\n            attributes.dtd_identifier\n           FROM information_schema.attributes\n        UNION ALL\n         SELECT columns.table_schema,\n            columns.table_name,\n            'TABLE'::text AS text,\n            columns.dtd_identifier\n           FROM information_schema.columns\n        UNION ALL\n         SELECT domains.domain_schema,\n            domains.domain_name,\n            'DOMAIN'::text AS text,\n            domains.dtd_identifier\n           FROM information_schema.domains\n        UNION ALL\n         SELECT parameters.specific_schema,\n            parameters.specific_name,\n            'ROUTINE'::text AS text,\n            parameters.dtd_identifier\n           FROM information_schema.parameters\n        UNION ALL\n         SELECT routines.specific_schema,\n            routines.specific_name,\n            'ROUTINE'::text AS text,\n            routines.dtd_identifier\n           FROM information_schema.routines) x(objschema, objname, objtype, objdtdid);",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "object_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "object_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "object_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 4,
+            "name": "object_type",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 5,
+            "name": "dtd_identifier",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": true
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": true
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": true
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "f738fc9545f16486a41adbf3c09e95b4"
+      },
+      "view_source_characters": 1320,
+      "view_source_whitespace_words": 76,
+      "full_attribute_count": 5,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "Union of attribute/table/domain/routine data-type metadata already subject to dependent view privilege limits."
+    },
+    {
+      "ordinal": 23,
+      "identity": "information_schema.domain_constraints",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "domain_constraints",
+        "kind": "v",
+        "type_oid": 13370,
+        "array_oid": 13369,
+        "owner": "supabase_admin",
+        "rel_acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "type_acl": null,
+        "source_sql": " SELECT current_database()::information_schema.sql_identifier AS constraint_catalog,\n    rs.nspname::information_schema.sql_identifier AS constraint_schema,\n    con.conname::information_schema.sql_identifier AS constraint_name,\n    current_database()::information_schema.sql_identifier AS domain_catalog,\n    n.nspname::information_schema.sql_identifier AS domain_schema,\n    t.typname::information_schema.sql_identifier AS domain_name,\n        CASE\n            WHEN con.condeferrable THEN 'YES'::text\n            ELSE 'NO'::text\n        END::information_schema.yes_or_no AS is_deferrable,\n        CASE\n            WHEN con.condeferred THEN 'YES'::text\n            ELSE 'NO'::text\n        END::information_schema.yes_or_no AS initially_deferred\n   FROM pg_namespace rs,\n    pg_namespace n,\n    pg_constraint con,\n    pg_type t\n  WHERE rs.oid = con.connamespace AND n.oid = t.typnamespace AND t.oid = con.contypid AND (pg_has_role(t.typowner, 'USAGE'::text) OR has_type_privilege(t.oid, 'USAGE'::text));",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "constraint_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "constraint_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "constraint_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 4,
+            "name": "domain_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 5,
+            "name": "domain_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 6,
+            "name": "domain_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 7,
+            "name": "is_deferrable",
+            "type": "information_schema.yes_or_no",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 8,
+            "name": "initially_deferred",
+            "type": "information_schema.yes_or_no",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": true
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": true
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": true
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "235a8f1f41a92537487c95570bc267f8"
+      },
+      "view_source_characters": 1002,
+      "view_source_whitespace_words": 66,
+      "full_attribute_count": 8,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "Domain-check name, deferral flag and domain owner permission metadata."
+    },
+    {
+      "ordinal": 24,
+      "identity": "information_schema.domain_udt_usage",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "domain_udt_usage",
+        "kind": "v",
+        "type_oid": 13375,
+        "array_oid": 13374,
+        "owner": "supabase_admin",
+        "rel_acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "type_acl": null,
+        "source_sql": " SELECT current_database()::information_schema.sql_identifier AS udt_catalog,\n    nbt.nspname::information_schema.sql_identifier AS udt_schema,\n    bt.typname::information_schema.sql_identifier AS udt_name,\n    current_database()::information_schema.sql_identifier AS domain_catalog,\n    nt.nspname::information_schema.sql_identifier AS domain_schema,\n    t.typname::information_schema.sql_identifier AS domain_name\n   FROM pg_type t,\n    pg_namespace nt,\n    pg_type bt,\n    pg_namespace nbt\n  WHERE t.typnamespace = nt.oid AND t.typbasetype = bt.oid AND bt.typnamespace = nbt.oid AND t.typtype = 'd'::\"char\" AND pg_has_role(bt.typowner, 'USAGE'::text);",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "udt_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "udt_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "udt_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 4,
+            "name": "domain_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 5,
+            "name": "domain_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 6,
+            "name": "domain_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": true
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": true
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": true
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "a4c48a9fea87df1f6aecffa778803eee"
+      },
+      "view_source_characters": 654,
+      "view_source_whitespace_words": 47,
+      "full_attribute_count": 6,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "Domain base-type schema metadata checks base-type owner role usage."
+    },
+    {
+      "ordinal": 25,
+      "identity": "information_schema.domains",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "domains",
+        "kind": "v",
+        "type_oid": 13379,
+        "array_oid": 13378,
+        "owner": "supabase_admin",
+        "rel_acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "type_acl": null,
+        "source_sql": " SELECT current_database()::information_schema.sql_identifier AS domain_catalog,\n    nt.nspname::information_schema.sql_identifier AS domain_schema,\n    t.typname::information_schema.sql_identifier AS domain_name,\n        CASE\n            WHEN t.typelem <> 0::oid AND t.typlen = '-1'::integer THEN 'ARRAY'::text\n            WHEN nbt.nspname = 'pg_catalog'::name THEN format_type(t.typbasetype, NULL::integer)\n            ELSE 'USER-DEFINED'::text\n        END::information_schema.character_data AS data_type,\n    information_schema._pg_char_max_length(t.typbasetype, t.typtypmod)::information_schema.cardinal_number AS character_maximum_length,\n    information_schema._pg_char_octet_length(t.typbasetype, t.typtypmod)::information_schema.cardinal_number AS character_octet_length,\n    NULL::name::information_schema.sql_identifier AS character_set_catalog,\n    NULL::name::information_schema.sql_identifier AS character_set_schema,\n    NULL::name::information_schema.sql_identifier AS character_set_name,\n        CASE\n            WHEN nco.nspname IS NOT NULL THEN current_database()\n            ELSE NULL::name\n        END::information_schema.sql_identifier AS collation_catalog,\n    nco.nspname::information_schema.sql_identifier AS collation_schema,\n    co.collname::information_schema.sql_identifier AS collation_name,\n    information_schema._pg_numeric_precision(t.typbasetype, t.typtypmod)::information_schema.cardinal_number AS numeric_precision,\n    information_schema._pg_numeric_precision_radix(t.typbasetype, t.typtypmod)::information_schema.cardinal_number AS numeric_precision_radix,\n    information_schema._pg_numeric_scale(t.typbasetype, t.typtypmod)::information_schema.cardinal_number AS numeric_scale,\n    information_schema._pg_datetime_precision(t.typbasetype, t.typtypmod)::information_schema.cardinal_number AS datetime_precision,\n    information_schema._pg_interval_type(t.typbasetype, t.typtypmod)::information_schema.character_data AS interval_type,\n    NULL::integer::information_schema.cardinal_number AS interval_precision,\n    t.typdefault::information_schema.character_data AS domain_default,\n    current_database()::information_schema.sql_identifier AS udt_catalog,\n    nbt.nspname::information_schema.sql_identifier AS udt_schema,\n    bt.typname::information_schema.sql_identifier AS udt_name,\n    NULL::name::information_schema.sql_identifier AS scope_catalog,\n    NULL::name::information_schema.sql_identifier AS scope_schema,\n    NULL::name::information_schema.sql_identifier AS scope_name,\n    NULL::integer::information_schema.cardinal_number AS maximum_cardinality,\n    1::information_schema.sql_identifier AS dtd_identifier\n   FROM pg_type t\n     JOIN pg_namespace nt ON t.typnamespace = nt.oid\n     JOIN (pg_type bt\n     JOIN pg_namespace nbt ON bt.typnamespace = nbt.oid) ON t.typbasetype = bt.oid AND t.typtype = 'd'::\"char\"\n     LEFT JOIN (pg_collation co\n     JOIN pg_namespace nco ON co.collnamespace = nco.oid) ON t.typcollation = co.oid AND (nco.nspname <> 'pg_catalog'::name OR co.collname <> 'default'::name)\n  WHERE pg_has_role(t.typowner, 'USAGE'::text) OR has_type_privilege(t.oid, 'USAGE'::text);",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "domain_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "domain_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "domain_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 4,
+            "name": "data_type",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 5,
+            "name": "character_maximum_length",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 6,
+            "name": "character_octet_length",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 7,
+            "name": "character_set_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 8,
+            "name": "character_set_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 9,
+            "name": "character_set_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 10,
+            "name": "collation_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 11,
+            "name": "collation_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 12,
+            "name": "collation_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 13,
+            "name": "numeric_precision",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 14,
+            "name": "numeric_precision_radix",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 15,
+            "name": "numeric_scale",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 16,
+            "name": "datetime_precision",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 17,
+            "name": "interval_type",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 18,
+            "name": "interval_precision",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 19,
+            "name": "domain_default",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 20,
+            "name": "udt_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 21,
+            "name": "udt_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 22,
+            "name": "udt_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 23,
+            "name": "scope_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 24,
+            "name": "scope_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 25,
+            "name": "scope_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 26,
+            "name": "maximum_cardinality",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 27,
+            "name": "dtd_identifier",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": true
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": true
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": true
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "a9dbdd8f0b738f8e5cf6c6128f9698a7"
+      },
+      "view_source_characters": 3147,
+      "view_source_whitespace_words": 176,
+      "full_attribute_count": 27,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "Complete domain metadata including type precision/defaults filtered by owner or type privilege."
+    },
+    {
+      "ordinal": 26,
+      "identity": "information_schema.element_types",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "element_types",
+        "kind": "v",
+        "type_oid": 13552,
+        "array_oid": 13551,
+        "owner": "supabase_admin",
+        "rel_acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "type_acl": null,
+        "source_sql": " SELECT current_database()::information_schema.sql_identifier AS object_catalog,\n    n.nspname::information_schema.sql_identifier AS object_schema,\n    x.objname AS object_name,\n    x.objtype::information_schema.character_data AS object_type,\n    x.objdtdid::information_schema.sql_identifier AS collection_type_identifier,\n        CASE\n            WHEN nbt.nspname = 'pg_catalog'::name THEN format_type(bt.oid, NULL::integer)\n            ELSE 'USER-DEFINED'::text\n        END::information_schema.character_data AS data_type,\n    NULL::integer::information_schema.cardinal_number AS character_maximum_length,\n    NULL::integer::information_schema.cardinal_number AS character_octet_length,\n    NULL::name::information_schema.sql_identifier AS character_set_catalog,\n    NULL::name::information_schema.sql_identifier AS character_set_schema,\n    NULL::name::information_schema.sql_identifier AS character_set_name,\n        CASE\n            WHEN nco.nspname IS NOT NULL THEN current_database()\n            ELSE NULL::name\n        END::information_schema.sql_identifier AS collation_catalog,\n    nco.nspname::information_schema.sql_identifier AS collation_schema,\n    co.collname::information_schema.sql_identifier AS collation_name,\n    NULL::integer::information_schema.cardinal_number AS numeric_precision,\n    NULL::integer::information_schema.cardinal_number AS numeric_precision_radix,\n    NULL::integer::information_schema.cardinal_number AS numeric_scale,\n    NULL::integer::information_schema.cardinal_number AS datetime_precision,\n    NULL::character varying::information_schema.character_data AS interval_type,\n    NULL::integer::information_schema.cardinal_number AS interval_precision,\n    current_database()::information_schema.sql_identifier AS udt_catalog,\n    nbt.nspname::information_schema.sql_identifier AS udt_schema,\n    bt.typname::information_schema.sql_identifier AS udt_name,\n    NULL::name::information_schema.sql_identifier AS scope_catalog,\n    NULL::name::information_schema.sql_identifier AS scope_schema,\n    NULL::name::information_schema.sql_identifier AS scope_name,\n    NULL::integer::information_schema.cardinal_number AS maximum_cardinality,\n    ('a'::text || x.objdtdid::text)::information_schema.sql_identifier AS dtd_identifier\n   FROM pg_namespace n,\n    pg_type at,\n    pg_namespace nbt,\n    pg_type bt,\n    ( SELECT c.relnamespace,\n            c.relname::information_schema.sql_identifier AS relname,\n                CASE\n                    WHEN c.relkind = 'c'::\"char\" THEN 'USER-DEFINED TYPE'::text\n                    ELSE 'TABLE'::text\n                END AS \"case\",\n            a.attnum,\n            a.atttypid,\n            a.attcollation\n           FROM pg_class c,\n            pg_attribute a\n          WHERE c.oid = a.attrelid AND (c.relkind = ANY (ARRAY['r'::\"char\", 'v'::\"char\", 'f'::\"char\", 'c'::\"char\", 'p'::\"char\"])) AND a.attnum > 0 AND NOT a.attisdropped\n        UNION ALL\n         SELECT t.typnamespace,\n            t.typname::information_schema.sql_identifier AS typname,\n            'DOMAIN'::text AS text,\n            1,\n            t.typbasetype,\n            t.typcollation\n           FROM pg_type t\n          WHERE t.typtype = 'd'::\"char\"\n        UNION ALL\n         SELECT ss.pronamespace,\n            nameconcatoid(ss.proname, ss.oid)::information_schema.sql_identifier AS nameconcatoid,\n            'ROUTINE'::text AS text,\n            (ss.x).n AS n,\n            (ss.x).x AS x,\n            0\n           FROM ( SELECT p.pronamespace,\n                    p.proname,\n                    p.oid,\n                    information_schema._pg_expandarray(COALESCE(p.proallargtypes, p.proargtypes::oid[])) AS x\n                   FROM pg_proc p) ss\n        UNION ALL\n         SELECT p.pronamespace,\n            nameconcatoid(p.proname, p.oid)::information_schema.sql_identifier AS nameconcatoid,\n            'ROUTINE'::text AS text,\n            0,\n            p.prorettype,\n            0\n           FROM pg_proc p) x(objschema, objname, objtype, objdtdid, objtypeid, objcollation)\n     LEFT JOIN (pg_collation co\n     JOIN pg_namespace nco ON co.collnamespace = nco.oid) ON x.objcollation = co.oid AND (nco.nspname <> 'pg_catalog'::name OR co.collname <> 'default'::name)\n  WHERE n.oid = x.objschema AND at.oid = x.objtypeid AND at.typelem <> 0::oid AND at.typlen = '-1'::integer AND at.typelem = bt.oid AND nbt.oid = bt.typnamespace AND ((n.nspname, x.objname::name, x.objtype, x.objdtdid::information_schema.sql_identifier::name) IN ( SELECT data_type_privileges.object_schema,\n            data_type_privileges.object_name,\n            data_type_privileges.object_type,\n            data_type_privileges.dtd_identifier\n           FROM information_schema.data_type_privileges));",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "object_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "object_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "object_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 4,
+            "name": "object_type",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 5,
+            "name": "collection_type_identifier",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 6,
+            "name": "data_type",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 7,
+            "name": "character_maximum_length",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 8,
+            "name": "character_octet_length",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 9,
+            "name": "character_set_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 10,
+            "name": "character_set_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 11,
+            "name": "character_set_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 12,
+            "name": "collation_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 13,
+            "name": "collation_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 14,
+            "name": "collation_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 15,
+            "name": "numeric_precision",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 16,
+            "name": "numeric_precision_radix",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 17,
+            "name": "numeric_scale",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 18,
+            "name": "datetime_precision",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 19,
+            "name": "interval_type",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 20,
+            "name": "interval_precision",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 21,
+            "name": "udt_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 22,
+            "name": "udt_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 23,
+            "name": "udt_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 24,
+            "name": "scope_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 25,
+            "name": "scope_schema",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 26,
+            "name": "scope_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 27,
+            "name": "maximum_cardinality",
+            "type": "information_schema.cardinal_number",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 28,
+            "name": "dtd_identifier",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": true
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": true
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": true
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "f7fb62168f9312113eb35cc8d0458064"
+      },
+      "view_source_characters": 4732,
+      "view_source_whitespace_words": 300,
+      "full_attribute_count": 28,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "Array element type metadata reconciled against data_type_privileges, dependent underlying views/roles."
+    },
+    {
+      "ordinal": 27,
+      "identity": "information_schema.enabled_roles",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "enabled_roles",
+        "kind": "v",
+        "type_oid": 13384,
+        "array_oid": 13383,
+        "owner": "supabase_admin",
+        "rel_acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "type_acl": null,
+        "source_sql": " SELECT rolname::information_schema.sql_identifier AS role_name\n   FROM pg_authid a\n  WHERE pg_has_role(oid, 'USAGE'::text);",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "role_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": true
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": true
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": true
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "aed820694f7fc9bc900e9e986c3778fd"
+      },
+      "view_source_characters": 124,
+      "view_source_whitespace_words": 10,
+      "full_attribute_count": 1,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "Enabled role names gated by pg_has_role, not direct credentials or role secrets."
+    },
+    {
+      "ordinal": 28,
+      "identity": "information_schema.foreign_data_wrapper_options",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "foreign_data_wrapper_options",
+        "kind": "v",
+        "type_oid": 13570,
+        "array_oid": 13569,
+        "owner": "supabase_admin",
+        "rel_acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "type_acl": null,
+        "source_sql": " SELECT foreign_data_wrapper_catalog,\n    foreign_data_wrapper_name,\n    (pg_options_to_table(fdwoptions)).option_name::information_schema.sql_identifier AS option_name,\n    (pg_options_to_table(fdwoptions)).option_value::information_schema.character_data AS option_value\n   FROM information_schema._pg_foreign_data_wrappers w;",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "foreign_data_wrapper_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "foreign_data_wrapper_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "option_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 4,
+            "name": "option_value",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": true
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": true
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": true
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "cb8465bc63011521f451752388fda853"
+      },
+      "view_source_characters": 327,
+      "view_source_whitespace_words": 12,
+      "full_attribute_count": 4,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "FDW option names/values obtained from protected helper; zero wrappers currently present."
+    },
+    {
+      "ordinal": 29,
+      "identity": "information_schema.foreign_data_wrappers",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "foreign_data_wrappers",
+        "kind": "v",
+        "type_oid": 13574,
+        "array_oid": 13573,
+        "owner": "supabase_admin",
+        "rel_acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "type_acl": null,
+        "source_sql": " SELECT foreign_data_wrapper_catalog,\n    foreign_data_wrapper_name,\n    authorization_identifier,\n    NULL::character varying::information_schema.character_data AS library_name,\n    foreign_data_wrapper_language\n   FROM information_schema._pg_foreign_data_wrappers w;",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "foreign_data_wrapper_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "foreign_data_wrapper_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "authorization_identifier",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 4,
+            "name": "library_name",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 5,
+            "name": "foreign_data_wrapper_language",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": true
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": true
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": true
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "44a5432118f9264ee20fadcc05a44ba6"
+      },
+      "view_source_characters": 268,
+      "view_source_whitespace_words": 12,
+      "full_attribute_count": 5,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "Wrapper name/owner/language metadata only via protected helper; zero wrappers."
+    },
+    {
+      "ordinal": 30,
+      "identity": "information_schema.foreign_server_options",
+      "source_sha_parent": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+      "complete_current_definition": {
+        "object_name": "foreign_server_options",
+        "kind": "v",
+        "type_oid": 13582,
+        "array_oid": 13581,
+        "owner": "supabase_admin",
+        "rel_acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "type_acl": null,
+        "source_sql": " SELECT foreign_server_catalog,\n    foreign_server_name,\n    (pg_options_to_table(srvoptions)).option_name::information_schema.sql_identifier AS option_name,\n    (pg_options_to_table(srvoptions)).option_value::information_schema.character_data AS option_value\n   FROM information_schema._pg_foreign_servers s;",
+        "complete_attributes": [
+          {
+            "ordinal": 1,
+            "name": "foreign_server_catalog",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 2,
+            "name": "foreign_server_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 3,
+            "name": "option_name",
+            "type": "information_schema.sql_identifier",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          },
+          {
+            "ordinal": 4,
+            "name": "option_value",
+            "type": "information_schema.character_data",
+            "not_null": false,
+            "default": null,
+            "generated": "",
+            "identity": ""
+          }
+        ],
+        "constraints": null,
+        "role_permissions": {
+          "anon": {
+            "schema_usage": true,
+            "select": true
+          },
+          "authenticated": {
+            "schema_usage": true,
+            "select": true
+          },
+          "service_role": {
+            "schema_usage": true,
+            "select": true
+          }
+        },
+        "rowtype_internal_dependencies": 1,
+        "definition_md5": "818b8c9dcc6d5a96bd7f36d1cc68ccf2"
+      },
+      "view_source_characters": 309,
+      "view_source_whitespace_words": 12,
+      "full_attribute_count": 4,
+      "reviewed_definition": "ALL_COLUMNS_AND_FULL_VIEW_SOURCE",
+      "semantic_verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "semantic_assessment": "Server option names/values obtained from protected helper; zero servers currently present."
+    }
+  ]
+}
