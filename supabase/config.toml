@@ -1,0 +1,12 @@
+# Edge gateway contract: both brokers independently authorize their protected operations.
+# #1938 Admin broker is already deployed with verify_jwt=false; preserve that
+# setting when functions are redeployed together.
+[functions.dic-admin-push-broker]
+verify_jwt = false
+
+# #2258: Netlify's five-minute scheduled poll does not send a member JWT.
+# The broker revalidates member Bearer tokens against Supabase Auth for user
+# requests, and its public poll accepts no caller recipient/event and can only
+# lease pre-existing, service-only, verified approval deliveries.
+[functions.dic-member-approval-broker]
+verify_jwt = false

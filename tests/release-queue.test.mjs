@@ -50,7 +50,7 @@ test('open unmerged PR stays tracked but does not enter a release batch',()=>{
 });
 test('all app source edits must be covered by Ready inventory, no unrelated SQL or package changes',()=>{
  for(const p of ['site/cloud/new-feature.js','supabase/migrations/20261022120000_new.sql','package.json',
- 'netlify/functions/sensitive.js','build_cloud.mjs',
+ 'netlify/functions/sensitive.js','build_cloud.mjs','supabase/config.toml',
  'scripts/netlify/should-ignore-build.mjs','scripts/audit/approval-coverage.mjs',
  'scripts/release/one-use-claim.mjs','scripts/pwa/service-worker.template.txt']){
   const r=assess(q,['site/cloud/shot_card.js',p]);assert.equal(r.ready,false,p);
@@ -105,4 +105,13 @@ test('release grant must exactly name READY items, not merely cover overlapping 
  for(const ids of [undefined,[],['DIC-Q-101'],['DIC-Q-100','DIC-Q-101'],['DIC-Q-100','DIC-Q-100']])
   assert.throws(()=>assertApprovedReadyBatch({approved_ready_item_ids:ids},result));
  assert.throws(()=>assertApprovedReadyBatch({approved_ready_item_ids:['DIC-Q-100']},{...result,ready:false}));
+});
+
+test('only the exact Edge auth config path participates in release queue isolation',()=>{
+ assert.deepEqual(deployableChangedPaths([
+  'supabase/local.settings.toml','supabase/config.toml','docs/config.toml',
+  'supabase/config.toml'
+ ]),['supabase/config.toml']);
+ assert.deepEqual(queueSchemaErrors({...q,items:[{...queued,state:'BLOCKED',
+  scope_paths:['supabase/config.toml'],blockers:['Sender not configured']}]}),[]);
 });
