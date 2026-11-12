@@ -40,3 +40,10 @@ test('required validation exercises Netlify ignore on Node 18 before the Node 22
  assert.ok(ignoreRuntime>=0&&ignoreRuntime<ignoreTests&&ignoreTests<appRuntime&&appRuntime<install,
   'ignore tests must run without app dependencies on the provider runtime before switching back');
 });
+
+test('operational READY audit runs inside mandatory approval, not as an unused helper',()=>{
+ const src=file('.github/workflows/approval-continuity.yml');
+ assert.match(src,/run: node scripts\/release\/ready-evidence-gate\.mjs/);
+ assert.match(src,/actions: read/);
+ assert.match(src,/checks: read/);
+});

@@ -13,6 +13,8 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  actions: read
+  checks: read
 concurrency:
   group: dic-approval-continuity-${{ github.ref }}
   cancel-in-progress: true
@@ -37,6 +39,10 @@ jobs:
         # separate --validate and nonblocking --status invocations duplicated
         # work on every push. On-demand queue status remains available.
         run: node scripts/release/release-queue.mjs --enforce-intake
+      - name: Verify every READY item against live recorded Actions and source/test blobs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/release/ready-evidence-gate.mjs
       - name: Audit EVERY pushed commit, including docs-only and earlier commits in batch
         env:
           DIC_BASE_SHA: ${{ github.event.before || github.event.pull_request.base.sha }}
