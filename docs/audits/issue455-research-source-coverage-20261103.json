@@ -1717,6 +1717,29 @@
       "source_byte_caveat": "Original and merged exact Git blob IDs verified for code/test/scoped journal; no new primary espresso publication or independent byte SHA-256.",
       "evidence_grade": "DIRECT_SOURCE_SYNTHETIC_POSITIVE_NEGATIVE_EXACT_PR_HEAD_AND_MERGED_NODE22_BROWSER_SQL_SECURITY_GOVERNANCE",
       "implementation_status": "SAFE_MERGED_VERIFIED_DEVELOPMENT_ONLY_READY"
+    },
+    {
+      "id": "LIVE-20261112-MANUAL-TEMPERATURE-PROVENANCE-R197",
+      "type": "live_repository_cloud_ui_direct_bounded_review",
+      "title": "False cross-style measured temperature source after manual Log Shot field edit",
+      "path": "site/cloud/main.js; site/lib/engine.js::prefill; tests/issue455-r197-manual-temperature-provenance.test.mjs",
+      "source_commit_before": "a85526bee99748d7cb0cc9d12ae2820cd1e31856",
+      "source_merge_sha": "a82ef21e94d38b851b92bd9e7df7bf7f57ec4171",
+      "before_blobs": {
+        "cloud_main": "17cb7ba7d8424fd2c97b3959174056067503089c",
+        "engine": "0e7b493494f5caac96c1a6df1f7249456de91bd8"
+      },
+      "after_blobs": {
+        "cloud_main": "70f32db800c0be4633bb7086a6d6234a9b1ff0ef",
+        "engine": "0e7b493494f5caac96c1a6df1f7249456de91bd8"
+      },
+      "test_blob": "03fc9d722c09703b9c4673083f970f230ac75a1d",
+      "access": "DIRECT_GITHUB_SOURCE_AND_SYNTHETIC_CLOUDAPP_TESTS_NO_MEMBER_DATA",
+      "review_status": "BOUNDED_LOG_SHOT_TEMPERATURE_MANUAL_EDIT_ORIGIN_CROSSWALK_NOT_ISSUE267_FULL_LINE_AUDIT",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Exact original, corrected and merged Git blobs compared, not a fresh independent file SHA-256. No primary espresso-science source, real-member trial or quality outcome.",
+      "evidence_grade": "DIRECT_SOURCE_SYNTHETIC_POSITIVE_NEGATIVE_EXACT_PR_HEAD_AND_MERGED_NODE22_BROWSER_SQL_SECURITY_GOVERNANCE",
+      "implementation_status": "SAFE_NONFORCE_MERGED_VERIFIED_DEVELOPMENT_ONLY_READY"
     }
   ],
   "evidence_checks": [
@@ -5367,6 +5390,35 @@
         43123467517,
         43123467538
       ]
+    },
+    {
+      "id": "R455-EV-UX-197-A",
+      "source": "Original CloudApp site/cloud/main.js Git blob 17cb7ba7d8424fd2c97b3959174056067503089c at development a85526bee99748d7cb0cc9d12ae2820cd1e31856; prior R195 and R196 temperature helper/source tests.",
+      "claim": "A valid measured Traditional temperature prefilled into a new Turbo shot retained the 'Last used on Traditional' source helper after the member manually changed the temperature field. Existing R196 only handled 'Use Recommendation'; source metadata did not describe the edited value.",
+      "grade": "DIRECT_SOURCE_UI_CONTROL_FLOW_REPRODUCIBLE_NOT_REAL_MEMBER_OBSERVATION",
+      "source_sha": "a85526bee99748d7cb0cc9d12ae2820cd1e31856",
+      "result": "VERIFIED_SOURCE_GAP_SAFE_LOCKED_COMPATIBLE",
+      "owner_approval": false,
+      "ci_runs": []
+    },
+    {
+      "id": "R455-EV-UX-197-B",
+      "source": "Exact merged cloud main blob 70f32db800c0be4633bb7086a6d6234a9b1ff0ef, corrected six-test blob 03fc9d722c09703b9c4673083f970f230ac75a1d, SAME-COMMIT journal blob b9779197f895c0e2efd669f813522acda8bd5caa, merged PR #2138 a82ef21e94d38b851b92bd9e7df7bf7f57ec4171.",
+      "claim": "Manual temperature edits clear obsolete historical source immediately or at readDraft fallback; unchanged notes/grind and optional controls preserve truthful provenance. Six new R197 synthetic regressions PASS. Initial Node head FAILED 3 due Fahrenheit/Celsius fixture assertions, corrected in same-commit journal and test-only repair. Corrected head and merged Node22 each 4012 PASS/0 FAIL/6 intentional SKIP; Chromium/mobile/offline, approval/governance, head isolated SQL/privacy and security SUCCESS. Original603 SKIPPED, not a PASS.",
+      "grade": "EXACT_SOURCE_SYNTHETIC_NEGATIVE_POSITIVE_UI_CI_NOT_REAL_MEMBER_OR_ESPRESSO_TASTE",
+      "source_sha": "a82ef21e94d38b851b92bd9e7df7bf7f57ec4171",
+      "result": "VERIFIED_SAFE_DEVELOPMENT_ONLY_READY",
+      "owner_approval": false,
+      "ci_runs": [
+        43129486597,
+        43129486649,
+        43129486507,
+        43129486590,
+        43129486625,
+        43130016357,
+        43130016313,
+        43130016530
+      ]
     }
   ],
   "policy_decisions_pending": [],
@@ -5375,7 +5427,7 @@
     "tests_executed": true,
     "production_deployed": false,
     "queue_changed": true,
-    "reason": "Documentation-only final exact-source evidence reconciliation of previously merged safe R187/R189 plus R188 research"
+    "reason": "Documentation-only verified R197 SAFE CloudApp source and development-only release queue reconciliation; underlying code already merged"
   },
   "next_actions": [
     "R455-168 FINAL: PR1901 exact reviewed head 3b65c3... nonforce merged 767e12c8e763959f0b6677f4de7ad7e69ce80cf3 all five blobs identical. Node22/lint 3600 PASS/0 FAIL/6 SKIP head 42887964674 and merge 42888613274; mobile/browser/offline, head SQL/security and approval, merged governance all SUCCESS; original603 SKIPPED. Queue READY development-only, not published. S019 unavailable, #267 separate V2 literal review uncredited.",
@@ -5503,16 +5555,17 @@
     "R455-191 R188 docs-only #2072 verified merged 2bbc431b7a938187a578146a0c024dfed085dcfe, R187 #2062 original valid historic prefill and R189 #2079 cross-style ratio-only code verified merged with exact full post-recovery Node/browser, development READY reconciliation pending docs PR CI. Source ledger 97/293/150, queue 309/54, no deployment, S019 unavailable, #267 no literal credit.",
     "R455-193: Source SHA fd7aa589f3692dbf8502a154f725ce7c8572e829: ORG-06 flow/time causal note independently crosschecked against Schmieder 2023 original publisher; no universal time target or new code; continuing original citation audit; standalone S019 inaccessible; #267 zero literal review credit.",
     "R455-195: after independently verified exact-source code/tests, retain development-only READY without publication. Continue next disjoint source-/claim-bounded UX/research review; S019 standalone unavailable; #267 exhaustive literal audit separate zero credit.",
-    "R455-196: code and synthetic regressions source-verified, merged development-only. Owner Publish separately required; continue next distinct research or UX source-backed gap. S019 unreviewed; #267 literal audit separate zero credit."
+    "R455-196: code and synthetic regressions source-verified, merged development-only. Owner Publish separately required; continue next distinct research or UX source-backed gap. S019 unreviewed; #267 literal audit separate zero credit.",
+    "R455-197: six synthetic manual-temperature-origin cases verified and code nonforce merged; docs-only READY reconciliation subject to its own exact source CI/merge. Continue distinct bounded science or UX research, S019 standalone inaccessible, #267 literal review is separate and zero credit."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-196",
-    "source_sha": "02d96594e4d8461a88c08d97be607a808626c0c2",
+    "run_id": "R455-197",
+    "source_sha": "a82ef21e94d38b851b92bd9e7df7bf7f57ec4171",
     "phase": "SAFE_CODE_MERGED_FULL_EXACT_SOURCE_CI_VERIFIED; DOCS_READY_RECONCILIATION_PR_AWAITING_OWN_CI",
     "source_counts": {
-      "research_project_sources": 101,
-      "bounded_evidence_checks": 303,
-      "proposals": 155
+      "research_project_sources": 102,
+      "bounded_evidence_checks": 305,
+      "proposals": 156
     },
     "release_state": "DEVELOPMENT_ONLY_READY_NOT_PUBLISHED",
     "original_s019": "INACCESSIBLE_UNREVIEWED",
@@ -8947,6 +9000,37 @@
         "sql_head": 43122995457,
         "security_head": 43122995709
       }
+    },
+    {
+      "id": "R455-PROP-197-MANUAL-TEMPERATURE-PROVENANCE",
+      "finding": "A manually replaced Log Shot temperature was still labeled as a measured historical temperature from another style.",
+      "evidence": [
+        "R455-EV-UX-197-A",
+        "R455-EV-UX-197-B"
+      ],
+      "severity": "P3_LOW_RISK_UX_CORRECTNESS",
+      "user_benefit": "Truthful source provenance while editing a different espresso style; no misleading implication that a manually entered temperature was personally measured before.",
+      "source_provenance": "Direct original/current Git blobs and six synthetic CloudApp positive/negative regressions; exact head and merged source CI; no hosted member or empirical taste claim.",
+      "current_locked": "Preserve five independent taste inputs, unchanged measured shot/private history/notes, distinct Turbo/Fast-Flow, optional temperature/Slow Feed, original grinder scale, one-controllable-change recommendations, all numeric targets and privacy.",
+      "current_app": "R195 displayed existing historical source and R196 cleared it on Use Recommendation, but manual input/edit and readDraft did not clear tempSource.",
+      "proposed_change": "On member-edited different temperature, clear only historical label and draft tempSource; preserve notes-only and grind-only origin, measured history, and optional absence.",
+      "approval_required_for_behavior_change": false,
+      "implementation": "SAFE_UI_TEST_SAME_COMMIT_JOURNAL_NONFORCE_MERGED_a82ef21e94d38b851b92bd9e7df7bf7f57ec4171",
+      "test_plan": "Six new synthetic tests pass; initial Fahrenheit/Celsius test error fixed in test-only journaled commit; corrected head and merge Node22 4012/0/6, head browser/mobile/offline/SQL/privacy/security/governance and merge browser/offline/governance pass; frozen603 SKIPPED.",
+      "release_queue_status": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false,
+      "exact_source": {
+        "merge": "a82ef21e94d38b851b92bd9e7df7bf7f57ec4171",
+        "node_head": 43129486597,
+        "ux_head": 43129486649,
+        "sql_head": 43129486507,
+        "security_head": 43129486590,
+        "governance_head": 43129486625,
+        "node_merged": 43130016357,
+        "ux_merged": 43130016313,
+        "governance_merged": 43130016530
+      }
     }
   ],
   "changeScope": {
@@ -8954,6 +9038,6 @@
     "tests_executed": true,
     "production_deployed": false,
     "queue_changed": true,
-    "reason": "Docs-only verified R196 SAFE CloudApp source and development-only release queue reconciliation"
+    "reason": "Documentation-only verified R197 SAFE CloudApp source and development-only release queue reconciliation; underlying code already merged"
   }
 }
