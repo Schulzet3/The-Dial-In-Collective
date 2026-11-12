@@ -1,12 +1,28 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {readFileSync,existsSync} from 'node:fs';
+import {execFileSync} from 'node:child_process';
 import {auditPreflightContract,CONTRACT_PATHS} from '../scripts/audit/preflight-contract.mjs';
-const read=path=>readFileSync(new URL('../'+path,import.meta.url),'utf8');
+const receiptPath=new URL('../docs/RELEASE_CANDIDATE.json',import.meta.url);
+const candidateReceipt=existsSync(receiptPath)?JSON.parse(readFileSync(receiptPath,'utf8')):null;
+const read=path=>{
+ const local=readFileSync(new URL('../'+path,import.meta.url),'utf8');
+ if(!candidateReceipt||path!=='.github/workflows/approval-continuity.yml')return local;
+ // The verified source under test is the candidate's immutable development
+ // parent. The publication candidate MUST preserve published workflow bytes.
+ assert.equal(candidateReceipt.kind,'DIC-READY-ONLY-SOURCE-1');
+ assert.match(candidateReceipt.development_source_sha,/^[a-f0-9]{40}$/);
+ assert.match(candidateReceipt.published_source_sha,/^[a-f0-9]{40}$/);
+ assert.ok(candidateReceipt.restored_unpublished_workflow_paths.includes(path));
+ const at=sha=>execFileSync('git',['show',sha+':'+path],{encoding:'utf8',timeout:10000});
+ assert.equal(local,at(candidateReceipt.published_source_sha),
+  'candidate approval workflow must match published Git bytes');
+ return at(candidateReceipt.development_source_sha);
+};
 const snapshot=Object.fromEntries(CONTRACT_PATHS.map(path=>[path,read(path)]));
 const change=(path,fn)=>auditPreflightContract(p=>p===path?fn(snapshot[p]):snapshot[p]);
 test('single live preflight route is intact without added build or publisher',()=>{
- assert.deepEqual(auditPreflightContract(),[]);
+ assert.deepEqual(auditPreflightContract(read),[]);
  assert.match(read('docs/ai/PREFLIGHT.md'),/No preparation, staging, grant or production write/);
 });
 test('missing or weakened fail-closed authority is rejected',()=>{
