@@ -15,7 +15,7 @@ export const chosen108=Object.freeze({number:108,name:'Sumatra Mandheling',
 export function selected108Source(html){
  const selected=productMarkup(String(html||''));
  const headings=selectedProductHeadings(selected);
- const visible=norm(removeElements(selected,['script','style','noscript','template','nav','aside','footer','header','form','select'])
+ const visible=norm(removeElements(selected,['script','style','noscript','template','nav','aside','footer','header','select'])
   .replace(/<!--[\s\S]*?-->/gu,' ').replace(/<[^>]{0,2500}>/gu,' '));
  const has=value=>visible.includes(norm(value));
  return {headings,exactH1:headings.length===1&&norm(headings[0])===norm(chosen108.name),

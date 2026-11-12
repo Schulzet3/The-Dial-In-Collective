@@ -41,3 +41,9 @@ test('#108 selected identical title and absent source flavor must remain incompl
  const s=selected108Source(page(body.replace('dark chocolate','not published')));
  assert.equal(s.exactH1,true);assert.equal(s.direct.notes,false);
 });
+
+test('#108 selected product form wrapper must not erase own roasting and tasting specs',()=>{
+ const wrapped='<form action="/cart/add" class="product-form">'+body+'</form>';
+ const s=selected108Source(page(wrapped));
+ assert.ok(Object.values(s.direct).every(Boolean),JSON.stringify(s.direct));
+});
