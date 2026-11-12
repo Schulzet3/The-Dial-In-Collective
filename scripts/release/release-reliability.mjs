@@ -87,7 +87,7 @@ export function validateReleaseTriggerReceipt({requestCommitSha,mainHeadSha,work
 }
 export function preflightReadyBatch(queue,items,{publishedSourceSha,candidateSha,
  changedPaths,checksByItem={},ciSourceByItem={},sourceObjectAt,dependenciesReadyByItem={},
- allowedPinnedPaths=[]}={}){
+ allowedPinnedPaths=[],testPathsByItem={}}={}){
  const errors=queueSchemaErrors(queue);
  if(!SHA.test(publishedSourceSha||'')||queue?.published_base?.tested_source_sha!==publishedSourceSha)
   errors.push('published source mismatch');
@@ -105,7 +105,8 @@ export function preflightReadyBatch(queue,items,{publishedSourceSha,candidateSha
   const checked=checksByItem[item.id]||[];
   const receipt=assessReadyEvidence(item,{mergedSha:item.merged_source_sha,
    ciSourceSha:ciSourceByItem[item.id],checks:checked,changedPaths:changed,
-   sourceObjectAt,dependenciesReady:dependenciesReadyByItem[item.id]!==false});
+   sourceObjectAt,testPaths:testPathsByItem[item.id],
+    dependenciesReady:dependenciesReadyByItem[item.id]!==false});
   errors.push(...receipt.failures.map(x=>item.id+': '+x));
   for(const path of changed){
    if(owned.has(path)&&!allowed.has(path))

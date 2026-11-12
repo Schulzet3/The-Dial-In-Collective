@@ -707,3 +707,9 @@ Independently verified Git release/production b386a977a7c43bf190f6315105894334d9
 - Source-bound development grant: 1c0270c4917f0cad984e35907211706f15a807ab
 - Expected main parent: 44372ffdbce3f2771c4c5349b66ee6b46cc56db4
 - Controller/Netlify confirmation still required; no claim from this request commit
+
+## 2026-11-12 — #2169 E2E controller unclaimed source-provenance failure [skip netlify]
+- Owner authorized one READY4 end-to-end release. Candidate `046418955abca382ba1bda16d345127b477dd392` has all five exact-SHA required SUCCESS. One-owner command push `92fd98c80d56be7c596744b4426b2557d0a67d8c` invoked real GitHub controller 43238282779. Job 131251460787 DENIED before any release claim: `DIC-Q-455-r198-original-range-outlier-eligibility` and `DIC-Q-33-r146-163-ironclad-selected-ea-decaf-method` lacked test-file parity on a SECOND validation pass. Main accepted READ-ONLY run 43238282756 SUCCESS; production branch/Netlify unchanged.
+- Root cause: READY auditor already checks all actual first-parent merged code/test paths, but the candidate preflight reruns `assessReadyEvidence` without those verified paths, guessing only test filenames inside natural-language queue notes. This fails valid PR-head-to-merge evidence and duplicates parsing. Preserve live five actual GitHub statuses, full Git file parity and all fail-closed checks.
+- Repair: thread per-item exact first-parent changed provenance paths through the existing candidate preflight (no added fetch, test run, new gate or provider action). Negative test asserts a changed test blob still fails. Strict blank/uncited/stale evidence continues to HOLD. SAME-COMMIT journal and [skip netlify].
+- Failed grant DIC-20261112-READY4E2E-33/request remain immutable, NOT consumed. Before a NEW grant/request inspect live refs/consumption and pass exact main controller acceptance; no blind replay and no extra Netlify build. Retain four item IDs and tested candidate source, no new release scope.
