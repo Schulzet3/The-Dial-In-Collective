@@ -12492,6 +12492,36 @@
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
       "notes": "Display existing measured other-style temperature origin in an escaped helper next to the optional Log Shot field. Does not alter prefill value or algorithm, product choices, five taste inputs, records, privacy, style policy, Slow Feed, temperature controls or Locked numerical targets. Development-only READY; not published. Separate owner Publish grant and source-isolated release required.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-r196-temperature-recommendation-clears-history-origin",
+      "issue": 455,
+      "pr": 2132,
+      "title": "Clear misleading old-style measured temperature label after explicit Use Recommendation",
+      "state": "READY",
+      "merged_source_sha": "02d96594e4d8461a88c08d97be607a808626c0c2",
+      "scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "tests": [
+        "Three R196 synthetic direct CloudApp UI positive/negative assertions PASS on corrected PR and actual merged code: cross-style source removed only after explicit use-temp; same-style remains usable; grind-only selection preserves actual measured source. Original notes/shot and five taste inputs unchanged.",
+        "Initial new code Node22 FAILED 3 including older limited synthetic DOM mocks; repaired and rechecked. Corrected PR head and exact merged Node22/lint each 3998 PASS/0 FAIL/6 intentional SKIP (4004 tests), browser/mobile/offline and governance SUCCESS; head SQL/privacy and source security SUCCESS.",
+        "Frozen603 was SKIPPED, not PASS; no hosted member, provider, empirical espresso sensory or production write claimed."
+      ],
+      "ci_runs": [
+        43122995526,
+        43122995515,
+        43122995457,
+        43122995709,
+        43122995455,
+        43123467535,
+        43123467517,
+        43123467538
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Source label reset is purely UX metadata, does not change temperature recommendation, measured history or any Locked numeric, taste, style, feed or privacy behavior. Explicit owner Publish needed separately; development-only READY not deployed.",
+      "production_deployed": false
     }
   ],
   "history": [
@@ -13872,6 +13902,15 @@
       "state": "READY",
       "source_sha": "e6c7b538fff018301e48124d7c394dcbbbe795b9",
       "evidence": "docs/workstreams/ops-issue455-r195-final-verification-20261111.md",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-11",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r196-temperature-recommendation-clears-history-origin",
+      "state": "READY",
+      "source_sha": "02d96594e4d8461a88c08d97be607a808626c0c2",
+      "evidence": "docs/workstreams/ops-issue455-r196-final-verification-20261111.md",
       "production_deployed": false
     }
   ],
