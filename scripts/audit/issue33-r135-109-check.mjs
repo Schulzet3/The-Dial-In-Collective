@@ -24,7 +24,7 @@ export function selected109Source(html){
  return {headings,exactH1:headings.length===1&&norm(headings[0])===norm(chosen109.name),
   direct:{farmSite:has('Anasora Farm Site'),producerAmountLabel:has('PRODUCER AMOUNT'),
    gujiEthiopia:has('Guji, Ethiopia'),altitude2300:has('2300 masl'),
-   heirloom:has('Heirloom'),natural:has('Natural'),
+   heirloom:has('Heirloom'),natural:has('PROCESS Natural'),
    notes:chosen109.notes.every(has)},
   selected_visible_length:visible.length,source_sha256:sha(Buffer.from(html||''))};
 }
