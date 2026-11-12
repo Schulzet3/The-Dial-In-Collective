@@ -34,11 +34,11 @@ function fixture(style='Traditional'){
 test('R197 changing another-style temperature clears its now-false source immediately',()=>{
  const f=fixture(),before=structuredClone(f.app.state);
  assert.equal(f.app.draft.tempSource,'Last used on Traditional');
- f.change('95');
+ f.change(String(tempDisplay(95,f.app.logUnit)));
  assert.equal(f.helper.removed,true);
  assert.equal(f.app.draft.tempSource,'');
  f.app.readDraft();
- assert.equal(f.app.draft.tempC,95);
+ assert.ok(Math.abs(f.app.draft.tempC-95)<0.3);
  assert.deepEqual(f.app.state,before);
  assert.deepEqual(f.app.draft.tasteScales,
   {extraction:null,body:null,clarity:null,sweetness:null,astringency:null});
@@ -54,9 +54,9 @@ test('R197 untouched temperature retains original source through input and notes
  assert.equal(f.app.draft.notes,'Private new note');
 });
 test('R197 programmatic temperature edit without input clears stale helper on Save/Rate readDraft',()=>{
- const f=fixture();f.input.value='96';
+ const f=fixture();f.input.value=String(tempDisplay(96,f.app.logUnit));
  f.app.readDraft();
- assert.equal(f.app.draft.tempC,96);
+ assert.ok(Math.abs(f.app.draft.tempC-96)<0.3);
  assert.equal(f.app.draft.tempSource,'');
  assert.equal(f.helper.removed,true);
 });
@@ -69,8 +69,8 @@ test('R197 unchanged temperature with only a grind edit keeps truthful source',(
 });
 test('R197 same-style historical temperature has no cross-style label to remove',()=>{
  const f=fixture('Turbo');assert.equal(f.app.draft.tempSource,'');
- f.change('95');f.app.readDraft();
- assert.equal(f.app.draft.tempC,95);
+ f.change(String(tempDisplay(95,f.app.logUnit)));f.app.readDraft();
+ assert.ok(Math.abs(f.app.draft.tempC-95)<0.3);
  assert.equal(f.app.draft.tempSource,'');
 });
 test('R197 optional temperature input absent is safe; no implicit temperature added',()=>{
