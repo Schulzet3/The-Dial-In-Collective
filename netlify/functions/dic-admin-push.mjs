@@ -17,7 +17,7 @@ export function createAdminPushHandler({fetcher=fetch,env=envDefault}={}){
  return async request=>{
   try{
    const cfg=readPushConfig(env);
-   if(!urlAllowed(cfg.url)||!cfg.publishable||(!cfg.service&&!cfg.privateKey)||!cfg.publicKey)
+   if(!urlAllowed(cfg.url)||!cfg.publishable)
     return response({ok:false,reason:'push_not_configured'},503);
    if(!['GET','POST','DELETE'].includes(request.method))return response({ok:false},405);
    const bearer=/^Bearer ([A-Za-z0-9._~-]{24,6000})$/.exec(request.headers.get('authorization')||'');
@@ -35,6 +35,24 @@ export function createAdminPushHandler({fetcher=fetch,env=envDefault}={}){
    if(!roleReq.ok)return response({ok:false,reason:'not_administrator'},403);
    const status=await roleReq.json();
    if(!status?.authenticated||!status?.admitted||!status?.admin)return response({ok:false,reason:'not_administrator'},403);
+   if(!cfg.service&&!cfg.privateKey){
+    let endpoint=null;
+    if(request.method!=='GET'){
+     const raw=await request.text();
+     if(raw.length>4096)return response({ok:false,reason:'invalid_subscription'},413);
+     let data;try{data=JSON.parse(raw);}catch{return response({ok:false,reason:'invalid_subscription'},400);}
+     endpoint=safePushEndpoint(data?.endpoint);
+     if(!endpoint)return response({ok:false,reason:'invalid_subscription'},400);
+    }
+    const edge=await fetcher(cfg.url+'/functions/v1/dic-admin-push-broker',{
+     method:'POST',redirect:'error',cache:'no-store',headers:{'Content-Type':'application/json'},
+     body:JSON.stringify({op:'manage',method:request.method,jwt:bearer[1],...(endpoint?{endpoint}:{})}),
+     signal:AbortSignal.timeout(9000)});
+    if(!edge.ok)return response({ok:false,reason:'push_temporarily_unavailable'},503);
+    const result=await edge.json();
+    if(result?.ok!==true)return response({ok:false,reason:'push_temporarily_unavailable'},503);
+    return response(result);
+   }
    if(request.method==='GET')return response({ok:true,publicKey:cfg.publicKey});
    const raw=await request.text();
    if(raw.length>4096)return response({ok:false,reason:'invalid_subscription'},413);

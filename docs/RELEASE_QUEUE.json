@@ -11753,7 +11753,8 @@
         "supabase/migrations/20261110235000_dic_admin_web_push.sql",
         "build_cloud.mjs",
         "supabase/functions/dic-admin-push-broker/core.mjs",
-        "supabase/functions/dic-admin-push-broker/index.ts"
+        "supabase/functions/dic-admin-push-broker/index.ts",
+        "supabase/migrations/20261112013000_dic_admin_push_vault_delivery.sql"
       ],
       "tests": [
         "Synthetic VAPID ECDSA JWT, strict Apple endpoint allowlist, private-body absence, role verification, subscription baseline and opt-out, sender dedupe/role removal, PWA worker click and SQL ACL tests in tests/admin-push*.test.mjs.",
@@ -11761,7 +11762,8 @@
         "2026-11-11 live verification: PR #1943 nonforce MERGED c3cdd89c009b36595f8b0d976b4497fd890e6bd3; exact PR head 5117288fb0dfcecc7d0e6c23350a68a572e033f5 approval 42928639447, source security 42928639288, isolated SQL 42928639428, Node/build 42928639682, cloud/browser 42928639412 SUCCESS. Frozen603 SKIPPED (not applicable). Exact nine push runtime source blobs unchanged on current development 143c245a7ca621abdfc4db2500cba719916d7093, where Node/build 43074806086, browser 43074806035 and approval 43074806182 SUCCESS. Merged c3cdd89 exact mobile and Node workflows 42929188814/42929188940 CANCELLED, not counted PASS. Production Supabase migration 20261110235000 absent (live 59 migrations); Netlify project/team contain only SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY, missing Functions-scope server secret and VAPID keys; current Netlify deploy still 6af2ad72c2aa765f588abc75. No actual opt-in or iPhone Apple push delivery verified.",
         "2026-11-12 live Supabase migration 20261112010044 dic_admin_web_push APPLIED from exact source blob bd1c28897ef71662faa4327dd79e005292a96578. Created subscriptions table (0 rows) with RLS enabled; anon/authenticated denied SELECT/INSERT/UPDATE/DELETE, service_role allowed. Snapshot RPC anon/authenticated EXECUTE denied, service_role allowed; tokens/admin_ids return JSON arrays. Protected counts auth11, beta_members11, shots26, coffees8, Community12, submissions8 unchanged. This is hosted schema/ACL proof, NOT actual push delivery.",
         "2026-11-11 merged pagination fix a932f088496ea4afb50d62cfd4f1233ea1dd1907 exact CI validate 43084114390, cloud/mobile 43084114360, approval 43084114309 PASS: 3933 Node PASS/0 FAIL/6 intentional SKIP, all four new keyset >50/failed/stale/overlap regressions PASS. Real APNs still UNVERIFIED.",
-        "Signed Netlify-to-Supabase Edge broker: Supabase auto-provisioned service key, ES256 body binding, strict routing, repeat admin/owner checks; five synthetic tests pending exact-source CI."
+        "Signed Netlify-to-Supabase Edge broker: Supabase auto-provisioned service key, ES256 body binding, strict routing, repeat admin/owner checks; five synthetic tests pending exact-source CI.",
+        "Supabase Vault encrypted P-256 key generation/custody, strict Admin Auth/manage, 4-minute SQL rate gate, content-free Edge VAPID sender, 125-keyset pagination; five synthetic direct-Edge cases pending CI."
       ],
       "ci_runs": [
         42928639447,

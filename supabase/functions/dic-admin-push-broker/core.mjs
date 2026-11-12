@@ -1,154 +1,184 @@
-// Issue #1938: signed, narrowly scoped bridge to Supabase's built-in service-role runtime.
-// Only this Edge Function can access the service-only push subscription table/aggregate.
-// The private signing key stays in the production Netlify environment, NEVER in source.
+// Issue #1938: Supabase-only VAPID custody with encrypted Vault persistence.
+// No private key is exported to Netlify, source, browser or unauthenticated callers.
 export const PROJECT_URL='https://azviqqejypsefzilgonr.supabase.co';
-export const BROKER_URL=PROJECT_URL+'/functions/v1/dic-admin-push-broker';
-export const BROKER_PUBLIC_KEY='BK6zdIPqS2XavBSwv86_oDbqdeFVUhHxdJ5Ox0iNaIvJJfNgQl37s5g2J3ypZykXRaFGW84xM5kHy_-yWEj1kCk';
-const SUB_PAGE=/^dic_admin_push_subscriptions\?select=owner_id,endpoint,endpoint_hash,seen_tokens,expires_at&order=endpoint_hash\.asc&limit=50(?:&endpoint_hash=gt\.[0-9a-f]{64})?$/;
-const SUB_HASH=/^dic_admin_push_subscriptions\?endpoint_hash=eq\.([0-9a-f]{64})$/;
-const SUB_OWNER=/^dic_admin_push_subscriptions\?endpoint_hash=eq\.([0-9a-f]{64})&owner_id=eq\.([0-9a-f-]{36})$/;
-const UUID=/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/;
-const TOKEN=/^(signup|coffee|delete):[a-f0-9]{8}-[a-f0-9-]{27,36}$/;
-const deny=(reason,status=403)=>Response.json({ok:false,reason},{status,headers:{'Cache-Control':'no-store'}});
-const validTokens=t=>Array.isArray(t)&&t.length<=4000&&t.every(x=>typeof x==='string'&&TOKEN.test(x));
-const validTime=s=>typeof s==='string'&&Number.isFinite(Date.parse(s));
-function bytes(input){
- if(typeof input!=='string'||!/^[A-Za-z0-9_-]+$/.test(input))throw Error('Invalid base64url');
- const plain=atob(input.replace(/-/g,'+').replace(/_/g,'/')+'='.repeat((4-input.length%4)%4));
- return Uint8Array.from(plain,c=>c.charCodeAt(0));
+export const SERVICE_URL=PROJECT_URL+'/functions/v1/dic-admin-push-broker';
+const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const HASH=/^[a-f0-9]{64}$/;
+const TOKEN=/^(signup|coffee|delete):[a-f0-9]{8}-[a-f0-9-]{27,36}$/i;
+const reply=(data,status=200)=>Response.json(data,{status,headers:{
+ 'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer'}});
+const denied=(status=403)=>reply({ok:false,reason:'unavailable'},status);
+function decode64(s){
+ const str=atob(s.replace(/-/g,'+').replace(/_/g,'/')+'='.repeat((4-s.length%4)%4));
+ return Uint8Array.from(str,c=>c.charCodeAt(0));
 }
-function b64(bytes){
- let s='';for(const x of bytes)s+=String.fromCharCode(x);
- return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+function encode64(bytes){
+ let str='';for(const b of bytes)str+=String.fromCharCode(b);
+ return btoa(str).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
 }
-async function hash(input){return b64(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(input))));}
-async function endpointHash(endpoint){
- const raw=new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(endpoint)));
- return [...raw].map(b=>b.toString(16).padStart(2,'0')).join('');
+async function fingerprint(endpoint){
+ const h=new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(endpoint)));
+ return [...h].map(x=>x.toString(16).padStart(2,'0')).join('');
 }
-function safeEndpoint(endpoint){
- if(typeof endpoint!=='string'||endpoint.length<20||endpoint.length>2048)return null;
+function safeEndpoint(value){
+ if(typeof value!=='string'||value.length<20||value.length>2048)return null;
  try{
-  const u=new URL(endpoint);
+  const u=new URL(value);
   if(u.protocol!=='https:'||u.username||u.password||u.port||u.hash||
-     !['web.push.apple.com','fcm.googleapis.com','updates.push.services.mozilla.com'].includes(u.hostname)||
-     !u.pathname||u.pathname==='/')return null;
+   !['web.push.apple.com','fcm.googleapis.com','updates.push.services.mozilla.com'].includes(u.hostname)||
+   !u.pathname||u.pathname==='/')return null;
   return u.href;
  }catch{return null;}
 }
-export async function validSignedBrokerRequest(jwt,raw,{now=()=>Date.now(),publicKey=BROKER_PUBLIC_KEY}={}){
- try{
-  if(typeof jwt!=='string'||jwt.length>4000)return false;
-  const parts=jwt.split('.');
-  if(parts.length!==3)return false;
-  const head=JSON.parse(new TextDecoder().decode(bytes(parts[0])));
-  const claims=JSON.parse(new TextDecoder().decode(bytes(parts[1])));
-  const moment=Math.floor(now()/1000);
-  if(head.alg!=='ES256'||head.typ!=='JWT'||claims.aud!==BROKER_URL||
-     claims.iss!=='https://app.dialincollective.com'||
-     !Number.isSafeInteger(claims.iat)||!Number.isSafeInteger(claims.exp)||
-     claims.iat>moment+20||claims.iat<moment-90||claims.exp<=moment||
-     claims.exp-claims.iat>90||claims.body_hash!==await hash(raw))return false;
-  const pub=bytes(publicKey);
-  if(pub.length!==65||pub[0]!==4)return false;
-  const jwk={kty:'EC',crv:'P-256',x:b64(pub.slice(1,33)),y:b64(pub.slice(33,65)),ext:true};
-  const key=await crypto.subtle.importKey('jwk',jwk,{name:'ECDSA',namedCurve:'P-256'},false,['verify']);
-  const signature=bytes(parts[2]);
-  return signature.length===64&&await crypto.subtle.verify(
-   {name:'ECDSA',hash:'SHA-256'},key,signature,new TextEncoder().encode(parts[0]+'.'+parts[1]));
- }catch{return false;}
+function cleanTokens(input){
+ if(!Array.isArray(input)||input.length>4000||input.some(t=>typeof t!=='string'||!TOKEN.test(t)))
+  throw Error('Invalid action token list');
+ return [...new Set(input)].sort();
 }
-export function createAdminPushBroker({env=name=>Deno.env.get(name),fetcher=fetch,now=()=>Date.now(),publicKey=BROKER_PUBLIC_KEY}={}){
+function jwtPair(key){
+ const pub=decode64(key.publicKey),priv=decode64(key.privateKey);
+ if(pub.length!==65||pub[0]!==4||priv.length!==32)throw Error('Vault key malformed');
+ return {pub,jwk:{kty:'EC',crv:'P-256',x:encode64(pub.slice(1,33)),
+  y:encode64(pub.slice(33,65)),d:encode64(priv),ext:true}};
+}
+async function signedPush(endpoint,key,fetcher,now){
+ const {jwk}=jwtPair(key);
+ const priv=await crypto.subtle.importKey('jwk',jwk,{name:'ECDSA',namedCurve:'P-256'},false,['sign']);
+ const u=new URL(endpoint);
+ const t=Math.floor(now()/1000);
+ const header=encode64(new TextEncoder().encode(JSON.stringify({typ:'JWT',alg:'ES256'})));
+ const payload=encode64(new TextEncoder().encode(JSON.stringify({
+  aud:u.origin,exp:t+3600,sub:'https://app.dialincollective.com'})));
+ const unsigned=header+'.'+payload;
+ const signature=encode64(new Uint8Array(await crypto.subtle.sign(
+  {name:'ECDSA',hash:'SHA-256'},priv,new TextEncoder().encode(unsigned))));
+ const response=await fetcher(endpoint,{method:'POST',redirect:'error',cache:'no-store',
+  headers:{Authorization:'vapid t='+unsigned+'.'+signature+', k='+key.publicKey,
+   TTL:'300',Urgency:'normal'},signal:AbortSignal.timeout(6000)});
+ return {ok:response.ok,gone:response.status===404||response.status===410};
+}
+export function createAdminPushBroker({env=name=>Deno.env.get(name),fetcher=fetch,now=()=>Date.now()}={}){
  return async request=>{
-  if(request.method!=='POST')return deny('method_not_allowed',405);
+  if(request.method!=='POST')return denied(405);
   const raw=await request.text().catch(()=>'');
-  if(!raw||raw.length>320000)return deny('invalid_request',413);
-  if(!await validSignedBrokerRequest(request.headers.get('x-dic-push-auth'),raw,{now,publicKey}))
-   return deny('unauthorized',401);
+  if(raw.length>9000||raw.length===0)return denied(413);
   let spec;
-  try{spec=JSON.parse(raw);}catch{return deny('invalid_request',400);}
-  const method=spec?.method,path=spec?.path,body=spec?.body,prefer=spec?.prefer;
-  if(typeof path!=='string'||path.length>320||
-     !['GET','POST','PATCH','DELETE'].includes(method)||!(body===null||typeof body==='object'))
-   return deny('forbidden_route');
+  try{spec=JSON.parse(raw);}catch{return denied(400);}
+  if(!spec||typeof spec!=='object'||!['manage','poll'].includes(spec.op))return denied(403);
   let service,publishable;
   try{
    service=JSON.parse(env('SUPABASE_SECRET_KEYS')||'{}').default||env('SUPABASE_SERVICE_ROLE_KEY');
    publishable=JSON.parse(env('SUPABASE_PUBLISHABLE_KEYS')||'{}').default||env('SUPABASE_ANON_KEY');
-  }catch{return deny('runtime_not_configured',503);}
-  if(env('SUPABASE_URL')!==PROJECT_URL||!service||!publishable)
-   return deny('runtime_not_configured',503);
-  const head={apikey:service,'Content-Type':'application/json',
+  }catch{return denied(503);}
+  if(env('SUPABASE_URL')!==PROJECT_URL||!service||!publishable)return denied(503);
+  const h={apikey:service,'Content-Type':'application/json',
    ...(/^sb_secret_/.test(service)?{}:{Authorization:'Bearer '+service})};
-  const rest=async(route,{method='GET',body,prefer}={})=>{
-   const res=await fetcher(PROJECT_URL+'/rest/v1/'+route,{
-    method,redirect:'error',cache:'no-store',headers:{...head,...(prefer?{Prefer:prefer}:{})},
-    ...(body===undefined?{}:{body:JSON.stringify(body)}),signal:AbortSignal.timeout(6500)});
-   if(!res.ok)throw Error('Service-only PostgREST error');
-   return res;
+  const rest=async(path,{method='GET',body,prefer}={})=>{
+   const r=await fetcher(PROJECT_URL+'/rest/v1/'+path,{method,redirect:'error',cache:'no-store',
+    headers:{...h,...(prefer?{Prefer:prefer}:{})},
+    ...(body===undefined?{}:{body:JSON.stringify(body)}),signal:AbortSignal.timeout(7000)});
+   if(!r.ok)throw Error('Protected PostgREST failure');
+   return r;
   };
-  const checkAdmin=async()=>{
-   const token=spec?.userJwt;
-   if(typeof token!=='string'||token.length<24||token.length>6000||
-      !/^[-A-Za-z0-9._~]+$/.test(token))return null;
-   const authHeader={apikey:publishable,Authorization:'Bearer '+token};
-   const userResp=await fetcher(PROJECT_URL+'/auth/v1/user',{
-    headers:authHeader,redirect:'error',cache:'no-store',signal:AbortSignal.timeout(6500)});
-   if(!userResp.ok)return null;
-   const user=await userResp.json();
+  const keys=async()=>await (await rest('rpc/dic_admin_push_runtime_keys',{method:'POST',body:{}})).json();
+  const ensureKeys=async()=>{
+   let k=await keys();
+   if(k)return k;
+   const pair=await crypto.subtle.generateKey({name:'ECDSA',namedCurve:'P-256'},true,['sign','verify']);
+   const jwk=await crypto.subtle.exportKey('jwk',pair.privateKey);
+   const publicKey=encode64(Uint8Array.from([4,...decode64(jwk.x),...decode64(jwk.y)]));
+   await rest('rpc/dic_admin_push_bootstrap_key',{method:'POST',
+    body:{p_public_key:publicKey,p_private_key:jwk.d}});
+   k=await keys();if(!k||typeof k.publicKey!=='string'||!k.privateKey)throw Error('Vault bootstrap incomplete');
+   return k;
+  };
+  const admin=async jwt=>{
+   if(typeof jwt!=='string'||jwt.length<24||jwt.length>6000||
+      !/^[A-Za-z0-9._~-]+$/.test(jwt))return null;
+   const headers={apikey:publishable,Authorization:'Bearer '+jwt};
+   const u=await fetcher(PROJECT_URL+'/auth/v1/user',{headers,redirect:'error',
+    cache:'no-store',signal:AbortSignal.timeout(6500)});
+   if(!u.ok)return null;
+   const user=await u.json();
    if(!UUID.test(String(user?.id||'')))return null;
-   const roleResp=await fetcher(PROJECT_URL+'/rest/v1/rpc/dic_session_status',{
-    method:'POST',headers:{...authHeader,'Content-Type':'application/json'},
-    body:'{}',redirect:'error',cache:'no-store',signal:AbortSignal.timeout(6500)});
-   if(!roleResp.ok)return null;
-   const role=await roleResp.json();
-   if(role?.authenticated!==true||role?.admitted!==true||role?.admin!==true)return null;
-   return user.id;
+   const r=await fetcher(PROJECT_URL+'/rest/v1/rpc/dic_session_status',{
+    method:'POST',headers:{...headers,'Content-Type':'application/json'},
+    body:'{}',cache:'no-store',redirect:'error',signal:AbortSignal.timeout(6500)});
+   if(!r.ok)return null;
+   const status=await r.json();
+   return status?.authenticated===true&&status?.admitted===true&&status?.admin===true?user.id:null;
   };
   try{
-   if(method==='POST'&&path==='rpc/dic_admin_push_snapshot'&&
-       body&&Object.keys(body).length===0){
-    const r=await rest(path,{method,body:{}});
-    return new Response(r.body,{status:r.status,headers:{'Content-Type':'application/json','Cache-Control':'no-store'}});
-   }
-   if(method==='GET'&&SUB_PAGE.test(path)&&body===null){
-    const r=await rest(path);
-    return new Response(r.body,{status:r.status,headers:{'Content-Type':'application/json','Cache-Control':'no-store'}});
-   }
-   const directHash=SUB_HASH.exec(path),ownHash=SUB_OWNER.exec(path);
-   if(method==='DELETE'&&directHash&&body===null){
-    const r=await rest(path,{method});return new Response(r.body,{status:r.status});
-   }
-   if(method==='PATCH'&&directHash&&body&&prefer==='return=minimal'&&
-      Object.keys(body).every(x=>['seen_tokens','updated_at','last_sent_at'].includes(x))&&
-      validTokens(body.seen_tokens)&&validTime(body.updated_at)&&
-      (body.last_sent_at===undefined||validTime(body.last_sent_at))){
-    const r=await rest(path,{method,body,prefer});return new Response(r.body,{status:r.status});
-   }
-   if(method==='DELETE'&&ownHash&&body===null){
-    const user=await checkAdmin();
-    if(!user||user!==ownHash[2])return deny('not_administrator');
-    const r=await rest(path,{method});return new Response(r.body,{status:r.status});
-   }
-   if(method==='POST'&&path==='dic_admin_push_subscriptions?on_conflict=endpoint_hash'&&
-      prefer==='resolution=merge-duplicates,return=minimal'&&
-      body&&typeof body==='object'){
-    const user=await checkAdmin();
-    if(!user||body.owner_id!==user)return deny('not_administrator');
-    const endpoint=safeEndpoint(body.endpoint);
-    if(!endpoint||body.endpoint_hash!==await endpointHash(endpoint)||
-       !validTokens(body.seen_tokens)||!validTime(body.expires_at)||
-       Date.parse(body.expires_at)>now()+61*86400*1000||Date.parse(body.expires_at)<=now()||
-       !validTime(body.updated_at))return deny('invalid_subscription',400);
+   if(spec.op==='manage'){
+    if(!['GET','POST','DELETE'].includes(spec.method))return denied(405);
+    const owner=await admin(spec.jwt);
+    if(!owner)return denied(403);
+    if(spec.method==='GET'){
+     const k=await ensureKeys();
+     return reply({ok:true,publicKey:k.publicKey});
+    }
+    const endpoint=safeEndpoint(spec.endpoint);
+    if(!endpoint)return denied(400);
+    const hash=await fingerprint(endpoint);
+    if(spec.method==='DELETE'){
+     await rest('dic_admin_push_subscriptions?endpoint_hash=eq.'+hash+'&owner_id=eq.'+owner,
+      {method:'DELETE'});
+     return reply({ok:true,subscribed:false});
+    }
+    const k=await ensureKeys();
+    if(!k.publicKey)return denied(503);
     const snap=await (await rest('rpc/dic_admin_push_snapshot',{method:'POST',body:{}})).json();
-    if(!Array.isArray(snap.admin_ids)||!snap.admin_ids.includes(user)||!validTokens(snap.tokens)||
-       JSON.stringify([...new Set(body.seen_tokens)].sort())!==JSON.stringify([...new Set(snap.tokens)].sort()))
-      return deny('not_administrator');
-    const record={endpoint_hash:body.endpoint_hash,owner_id:user,endpoint,
-     seen_tokens:body.seen_tokens,expires_at:body.expires_at,updated_at:body.updated_at};
-    const r=await rest(path,{method,body:record,prefer});return new Response(r.body,{status:r.status});
+    if(!Array.isArray(snap.admin_ids)||!snap.admin_ids.includes(owner))return denied(403);
+    const tokens=cleanTokens(snap.tokens);
+    const stamp=new Date(now()).toISOString();
+    await rest('dic_admin_push_subscriptions?on_conflict=endpoint_hash',{
+     method:'POST',prefer:'resolution=merge-duplicates,return=minimal',
+     body:{endpoint_hash:hash,owner_id:owner,endpoint,seen_tokens:tokens,
+      expires_at:new Date(now()+60*86400000).toISOString(),updated_at:stamp}});
+    return reply({ok:true,subscribed:true});
    }
-   return deny('forbidden_route');
-  }catch{return deny('broker_temporarily_unavailable',503);}
+   // Public scheduling trigger returns no private rows/tokens, and is rate-limited
+   // by a Postgres advisory-serialized UPDATE before any push can be sent.
+   if(spec.op!=='poll'||Object.keys(spec).length!==1)return denied(400);
+   const acquired=await (await rest('rpc/dic_admin_push_claim_poll',{method:'POST',body:{}})).json();
+   if(acquired!==true)return reply({ok:true});
+   const key=await keys();
+   if(!key)return reply({ok:true});
+   const snap=await (await rest('rpc/dic_admin_push_snapshot',{method:'POST',body:{}})).json();
+   if(!Array.isArray(snap?.admin_ids))return denied(503);
+   const active=new Set(snap.admin_ids),tokens=cleanTokens(snap.tokens);
+   const PAGE=50,route='dic_admin_push_subscriptions?select=owner_id,endpoint,endpoint_hash,seen_tokens,expires_at&order=endpoint_hash.asc&limit='+PAGE;
+   let cursor='',failed=0;
+   const process=async row=>{
+    if(!HASH.test(String(row?.endpoint_hash||'')))return;
+    const endpoint=safeEndpoint(row.endpoint),query='dic_admin_push_subscriptions?endpoint_hash=eq.'+row.endpoint_hash;
+    if(!active.has(row.owner_id)||!endpoint||await fingerprint(endpoint)!==row.endpoint_hash||
+        Date.parse(row.expires_at)<=now()){
+     await rest(query,{method:'DELETE'});return;
+    }
+    const seen=cleanTokens(row.seen_tokens),added=tokens.filter(t=>!seen.includes(t));
+    if(added.length){
+     const push=await signedPush(endpoint,key,fetcher,now);
+     if(push.gone){await rest(query,{method:'DELETE'});return;}
+     if(!push.ok){failed++;return;}
+    }
+    if(added.length||JSON.stringify(seen)!==JSON.stringify(tokens))
+     await rest(query,{method:'PATCH',prefer:'return=minimal',body:{
+      seen_tokens:tokens,updated_at:new Date(now()).toISOString(),
+      ...(added.length?{last_sent_at:new Date(now()).toISOString()}:{})}});
+   };
+   while(true){
+    const rows=await (await rest(route+(cursor?'&endpoint_hash=gt.'+cursor:''))).json();
+    if(!Array.isArray(rows)||rows.length>PAGE)return denied(503);
+    if(!rows.length)break;
+    const next=rows.at(-1)?.endpoint_hash;
+    if(!HASH.test(String(next||''))||(cursor&&next<=cursor))return denied(503);
+    const results=await Promise.allSettled(rows.map(process));
+    failed+=results.filter(x=>x.status==='rejected').length;
+    if(rows.length<PAGE)break;
+    cursor=next;
+   }
+   return reply({ok:failed===0},failed?503:200);
+  }catch{return denied(503);}
  };
 }

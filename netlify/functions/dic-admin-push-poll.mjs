@@ -11,8 +11,16 @@ export function createAdminPushPoller({fetcher=fetch,env=envDefault,now=()=>Date
  return async()=>{
   const base=env('SUPABASE_URL'),service=env('SUPABASE_SECRET_KEY')||env('SUPABASE_SERVICE_ROLE_KEY');
   const credentials={publicKey:env('DIC_ADMIN_PUSH_VAPID_PUBLIC_KEY'),privateKey:env('DIC_ADMIN_PUSH_VAPID_PRIVATE_KEY')};
-  if(!/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(String(base||''))||!credentials.publicKey||!credentials.privateKey)
+  if(!/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(String(base||'')))
    return response({ok:false,reason:'push_not_configured'},503);
+  if(!credentials.publicKey||!credentials.privateKey){
+   try{
+    const r=await fetcher(base+'/functions/v1/dic-admin-push-broker',{method:'POST',
+     redirect:'error',cache:'no-store',headers:{'Content-Type':'application/json'},
+     body:JSON.stringify({op:'poll'}),signal:AbortSignal.timeout(25000)});
+    return response({ok:r.ok},r.ok?200:503);
+   }catch{return response({ok:false,reason:'push_temporarily_unavailable'},503);}
+  }
   const headers=service?{apikey:service,'Content-Type':'application/json',
    ...(service.startsWith('sb_secret_')?{}:{Authorization:'Bearer '+service})}:null;
   const rest=async(path,options={})=>{
