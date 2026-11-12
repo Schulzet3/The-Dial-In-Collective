@@ -146,3 +146,42 @@ export function formatChatReleaseJournalAppendix(request={}){
   '- Tested source: '+tested_source_sha+'\n'+
   '- Mode: '+mode+'\n';
 }
+
+// Repo Actions runs?head_sha reports PUSH runs. Commit-associated runs
+// convenience lookups may return only PR runs and falsely imply no trigger.
+// This is GET-only; a returned run is never a Netlify publication receipt.
+export async function fetchChatControllerRuns({requestSha,token,fetcher=fetch}={}){
+ if(!SHA.test(requestSha||''))deny('missing exact request SHA for controller run lookup');
+ const url='https://api.github.com/repos/Schulzet3/The-Dial-In-Collective/actions/runs?head_sha='+requestSha+'&per_page=100';
+ const headers={Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'};
+ if(token)headers.Authorization='Bearer '+token;
+ const response=await fetcher(url,{method:'GET',headers});
+ if(!response.ok)throw Error('GitHub controller-run readback unavailable: HTTP '+response.status);
+ const data=await response.json();
+ if(!Number.isSafeInteger(data?.total_count)||data.total_count>100||
+    !Array.isArray(data.workflow_runs))throw Error('Incomplete GitHub controller-run listing');
+ return data.workflow_runs;
+}
+export function inspectChatControllerRuns({requestSha,mainHeadSha,workflowRuns,elapsedSeconds,
+ grantConsumed=false}={}){
+ if(!SHA.test(requestSha||'')||!SHA.test(mainHeadSha||''))
+  return {state:'BLOCKED',reason:'missing exact request or main SHA'};
+ if(grantConsumed)return {state:'CLAIMED_NETLIFY_UNVERIFIED',reason:'verify release ref and Netlify READY/current'};
+ if(mainHeadSha!==requestSha)return {state:'BLOCKED',reason:'main advanced; inspect refs/ledger/provider before any retry'};
+ if(!Array.isArray(workflowRuns))return {state:'UNKNOWN',reason:'Actions readback unavailable'};
+ const exact=workflowRuns.filter(w=>w?.head_sha===requestSha&&w.event==='push'&&
+  w.name==='DIC chat-approved single-use production request'&&
+  w.path==='.github/workflows/dic-chat-approved-release.yml');
+ if(exact.length>1)return {state:'BLOCKED',reason:'duplicate controller runs; inspect claim'};
+ if(!exact.length)return Number.isFinite(elapsedSeconds)&&elapsedSeconds>=90?
+  {state:'BLOCKED',reason:'NO_CONTROLLER_RUN: diagnose GitHub delivery before any new grant'}:
+  {state:'WAIT',reason:'controller event not yet observed'};
+ const run=exact[0];
+ if(!Number.isSafeInteger(run.id)||run.id<=0)return {state:'UNKNOWN',reason:'run ID missing'};
+ if(run.status==='completed')return run.conclusion==='success'?
+  {state:'CONTROLLER_COMPLETED_NETLIFY_UNVERIFIED',runId:run.id,reason:'verify claim, release ref and Netlify'}:
+  {state:'BLOCKED',runId:run.id,reason:'controller finished '+String(run.conclusion||'without conclusion')+'; inspect failed job'};
+ if(['queued','pending','in_progress','waiting','requested'].includes(run.status))
+  return {state:'CONTROLLER_RUNNING',runId:run.id,reason:'do not retry or claim deployment'};
+ return {state:'UNKNOWN',runId:run.id,reason:'unknown controller state'};
+}
