@@ -263,7 +263,7 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
   selectedIds:manifest.selected_ready_item_ids,
   pinnedReadyPaths:manifest.pinned_to_ready_paths||[],developmentChangedPaths,isAncestor});
  if(!plan.ready)reject(plan.errors.join('; '));
- if(manifest.risk_classification!==undefined&&
+ if(!manifest.risk_classification||
     JSON.stringify(manifest.risk_classification)!==JSON.stringify(classifyReleaseRisk(plan.included_paths)))
   reject('candidate risk-tier/one-build receipt differs from actual selected source');
  if(!Array.isArray(manifest.restored_to_published_paths)||
