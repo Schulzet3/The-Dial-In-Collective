@@ -2,9 +2,9 @@
   "schema_version": 1,
   "authority": "OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022",
   "published_base": {
-    "tested_source_sha": "046418955abca382ba1bda16d345127b477dd392",
-    "release_sha": "72ef825aad9fbb5252825e7ab71b4650a496b66c",
-    "netlify_deploy_id": "6af5d3463f9e2eab6338b0c3"
+    "tested_source_sha": "02361218d2f354075e928396a6ba3fc0295b3b19",
+    "release_sha": "2c02dbb267ca8fb1e56ddd0433c96c1bb4eca9d5",
+    "netlify_deploy_id": "6af6015e3af2417badac2bd1"
   },
   "items": [
     {
@@ -13094,7 +13094,7 @@
       "issue": 2258,
       "pr": 2273,
       "title": "Transactional approval email and opt-in member Web Push (separate from tested in-app notice)",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "60279ea802e7d986adb6bd2580f35645a8c621c0",
       "scope_paths": [
         "build_cloud.mjs",
@@ -13114,7 +13114,8 @@
         "#2258 PR #2273 independently merged source 1680306c0323c5213963fe63dfe66560a386eaf9; high-risk Auth/SQL/cloud/mobile/browser focused test evidence exists, but source/provider and real delivery acceptance for transactional sender/member opt-in remain incomplete.",
         "Previous in-app-only PR #2260 (merged 9beb10f0) is independently source-tested and remains a distinct READY queue item; its proof does not certify the new email/member-push channels.",
         "#2258 Edge auth/runtime-gap repair: PR #2280 exact head b3d823383349d21dd8ab4b07db52bef5cc7466b9 approval 43242224221, SQL 43242224207, cloud/mobile/browser 43242224183, full Node+lint 43242224735 SUCCESS; nonforce merged 60279ea802e7d986adb6bd2580f35645a8c621c0 with exact config/gateway/tests/journal/queue blobs matched. Merged validate 43242986605: 4,270 PASS, 0 FAIL, 6 intentional SKIP + lint; cloud/mobile/browser 43242986298, approval 43242986728 and nonpublish rehearsal 43242986638 SUCCESS. Original frozen603 SKIPPED/N/A. Missing email provider, hosted migration/Edge, and physical delivery remain BLOCKED; no production change by #2258.",
-        "READY evidence recheck, 2026-11-12: approval, validate, cloud-tests, mobile-browser-qa, SQL all SUCCESS at exact PR #2280 head b3d823383349d21dd8ab4b07db52bef5cc7466b9 (runs 43242224221/43242224735/43242224183/43242224207); code/test blob parity at nonforce merged 60279ea802e7d986adb6bd2580f35645a8c621c0. Independent exact Edge-config security trigger repair #2282 merged 7767782f9aff230ddb3c9561153873283f35af33; exact-head security inventory, Node, SQL, browser, approval SUCCESS. Source remains unchanged on live development. Supabase hosted migration and member Edge broker absent by design until fresh owner Publish; production real inbox/device acceptance NOT YET VERIFIED."
+        "READY evidence recheck, 2026-11-12: approval, validate, cloud-tests, mobile-browser-qa, SQL all SUCCESS at exact PR #2280 head b3d823383349d21dd8ab4b07db52bef5cc7466b9 (runs 43242224221/43242224735/43242224183/43242224207); code/test blob parity at nonforce merged 60279ea802e7d986adb6bd2580f35645a8c621c0. Independent exact Edge-config security trigger repair #2282 merged 7767782f9aff230ddb3c9561153873283f35af33; exact-head security inventory, Node, SQL, browser, approval SUCCESS. Source remains unchanged on live development. Supabase hosted migration and member Edge broker absent by design until fresh owner Publish; production real inbox/device acceptance NOT YET VERIFIED.",
+        "November 12 owner-authorized DIC-20261112-READY1MEMBER-36 postflight: frozen source 02361218d2f354075e928396a6ba3fc0295b3b19 official exact-source approval 43274838038, Node/build 43274837904, cloud/mobile 43274837883, SQL 43274837967 SUCCESS; all 11 selected runtime/config/SQL Git blobs match production 2c02dbb267ca8fb1e56ddd0433c96c1bb4eca9d5. One-use main request 16f3067cd50b55fa36919ee853f03672a329d45d; controller push 43277216541 SUCCESS, completed-event witness 43277289874 SUCCESS (full validation NOT_APPLICABLE/skipped). Netlify 6af6015e3af2417badac2bd1 READY/current, commit_ref exact, published 2026-11-12T18:12:03.052Z, four functions including 5-minute member poll; 3,910 scanned files zero secret matches. Supabase provider migration 20261112180144 and dic-member-approval-broker ACTIVE v1. Fresh encrypted owner-private backup 13961938483 / Drive 1BsHUnM5JQwrRRJPpOJ6fuxSX30KIBeFs previously verified; real email inbox and opted-in handset Web Push delivery UNVERIFIED. No duplicate build, second release or synthetic member data."
       ],
       "ci_runs": [
         43242224221,
@@ -13127,8 +13128,8 @@
         43242986638
       ],
       "blockers": [],
-      "notes": "Separate newer #2258 expansion; retain all source and migrations on development, no staging or deployment until actual provider credentials/sender readiness and scoped Auth/privacy/SQL tests are verified. The previously READY in-app banner uses its prior exactly approved source blobs, isolated in the frozen #2169 candidate; later overlapping dev files are intentionally excluded. Never publish this row as part of the older READY-only batch. #2280 exact source/CI and auth-gateway fix merged, no provider mutation; source verified but approval email and closed-app push NOT production READY. No auto-stage or release.\n2026-11-12 configuration/release-ready classification: Owner confirmed existing Resend account sends/receives support and Auth verification email; sending key restricted to verified auth.dialincollective.com created separately, both RESEND_API_KEY and DIC_APPROVAL_FROM_EMAIL (notifications@auth.dialincollective.com) saved under Supabase Edge secrets. Original Supabase Integration key remains intact. Owner confirmation is NOT independent secret-value/runtime readback and real approval-email inbox/opted-in Web Push/APNs receipts are NOT CLAIMED. New Edge function/migration/Netlify cron are not live before owner Publish; deploy/postflight acceptance must verify exact sender scope, runtime config, consent/device, provider delivery, status and backup/recovery. Fail closed if new runtime secrets invalid; no synthetic member or unauthorized production write. READY means tested merged SOURCE ONLY, not DEPLOYED or proof of email/device delivery.",
-      "production_deployed": false
+      "notes": "Separate newer #2258 expansion; retain all source and migrations on development, no staging or deployment until actual provider credentials/sender readiness and scoped Auth/privacy/SQL tests are verified. The previously READY in-app banner uses its prior exactly approved source blobs, isolated in the frozen #2169 candidate; later overlapping dev files are intentionally excluded. Never publish this row as part of the older READY-only batch. #2280 exact source/CI and auth-gateway fix merged, no provider mutation; source verified but approval email and closed-app push NOT production READY. No auto-stage or release.\n2026-11-12 configuration/release-ready classification: Owner confirmed existing Resend account sends/receives support and Auth verification email; sending key restricted to verified auth.dialincollective.com created separately, both RESEND_API_KEY and DIC_APPROVAL_FROM_EMAIL (notifications@auth.dialincollective.com) saved under Supabase Edge secrets. Original Supabase Integration key remains intact. Owner confirmation is NOT independent secret-value/runtime readback and real approval-email inbox/opted-in Web Push/APNs receipts are NOT CLAIMED. New Edge function/migration/Netlify cron are not live before owner Publish; deploy/postflight acceptance must verify exact sender scope, runtime config, consent/device, provider delivery, status and backup/recovery. Fail closed if new runtime secrets invalid; no synthetic member or unauthorized production write. READY means tested merged SOURCE ONLY, not DEPLOYED or proof of email/device delivery.\nNovember 12 owner-authorized DIC-20261112-READY1MEMBER-36 postflight: frozen source 02361218d2f354075e928396a6ba3fc0295b3b19 official exact-source approval 43274838038, Node/build 43274837904, cloud/mobile 43274837883, SQL 43274837967 SUCCESS; all 11 selected runtime/config/SQL Git blobs match production 2c02dbb267ca8fb1e56ddd0433c96c1bb4eca9d5. One-use main request 16f3067cd50b55fa36919ee853f03672a329d45d; controller push 43277216541 SUCCESS, completed-event witness 43277289874 SUCCESS (full validation NOT_APPLICABLE/skipped). Netlify 6af6015e3af2417badac2bd1 READY/current, commit_ref exact, published 2026-11-12T18:12:03.052Z, four functions including 5-minute member poll; 3,910 scanned files zero secret matches. Supabase provider migration 20261112180144 and dic-member-approval-broker ACTIVE v1. Fresh encrypted owner-private backup 13961938483 / Drive 1BsHUnM5JQwrRRJPpOJ6fuxSX30KIBeFs previously verified; real email inbox and opted-in handset Web Push delivery UNVERIFIED. No duplicate build, second release or synthetic member data.",
+      "production_deployed": true
     }
   ],
   "history": [
@@ -15154,6 +15155,15 @@
       "state": "DEPLOYED",
       "source_sha": "a5dd027d7f20e4eb6b108cf5b8acdaf432ca006c",
       "evidence": "Owner-approved READY4E2E-34 release: frozen candidate 046418955abca382ba1bda16d345127b477dd392 five exact-success checks, Git production 72ef825aad9fbb5252825e7ab71b4650a496b66c, Netlify READY/current 6af5d3463f9e2eab6338b0c3. All scoped code blobs identical; physical device acceptance unverified. Reconciled November 12 against actual provider readback; no new deployment.",
+      "production_deployed": true
+    },
+    {
+      "date": "2026-11-12",
+      "issue": 2258,
+      "item_id": "DIC-Q-2258-approval-email-and-member-push",
+      "state": "DEPLOYED",
+      "source_sha": "60279ea802e7d986adb6bd2580f35645a8c621c0",
+      "evidence": "November 12 owner-authorized DIC-20261112-READY1MEMBER-36 postflight: frozen source 02361218d2f354075e928396a6ba3fc0295b3b19 official exact-source approval 43274838038, Node/build 43274837904, cloud/mobile 43274837883, SQL 43274837967 SUCCESS; all 11 selected runtime/config/SQL Git blobs match production 2c02dbb267ca8fb1e56ddd0433c96c1bb4eca9d5. One-use main request 16f3067cd50b55fa36919ee853f03672a329d45d; controller push 43277216541 SUCCESS, completed-event witness 43277289874 SUCCESS (full validation NOT_APPLICABLE/skipped). Netlify 6af6015e3af2417badac2bd1 READY/current, commit_ref exact, published 2026-11-12T18:12:03.052Z, four functions including 5-minute member poll; 3,910 scanned files zero secret matches. Supabase provider migration 20261112180144 and dic-member-approval-broker ACTIVE v1. Fresh encrypted owner-private backup 13961938483 / Drive 1BsHUnM5JQwrRRJPpOJ6fuxSX30KIBeFs previously verified; real email inbox and opted-in handset Web Push delivery UNVERIFIED. No duplicate build, second release or synthetic member data.",
       "production_deployed": true
     }
   ],
