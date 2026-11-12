@@ -334,10 +334,9 @@ export function personalSimilarCoffeeReference(s,coffee,version,style,feed,baske
      !measuredRecipeShots([sh]).length||
      // Historical optional controls may be absent, but explicitly impossible
      // values cannot certify a comparable five-green other-coffee donor.
-     (sh.grindSetting!=null&&(
-      !finite(sh.grindSetting)||sh.grindSetting<0||
-      (finite(version.grinderMin)&&sh.grindSetting<version.grinderMin)||
-      (finite(version.grinderMax)&&sh.grindSetting>version.grinderMax)))||
+     // familyEvidenceShots already checks the shot's ORIGINAL dial range.
+     // Today's recalibrated limits cannot invalidate its archived reading.
+     (sh.grindSetting!=null&&(!finite(sh.grindSetting)||sh.grindSetting<0))||
      (sh.tempC!=null&&!validRecordedTemperature(sh.tempC)))continue;
   const other=byId.get(sh.coffeeId);
   const rank=roastIndex(other?.roastLevel);
