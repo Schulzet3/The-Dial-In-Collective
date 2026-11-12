@@ -50,6 +50,8 @@ test('no synthetic taste/temperature or unrelated archived context rewrites',()=
 test('Log Shot wires actual copied measurements and save-time readDraft reconciliation',()=>{
  const main=source('../site/cloud/main.js');
  assert.ok(main.includes("import {recordRecommendationUse,reconcileRecommendationUse} from './recommendation-use.js'"));
+ assert.ok(main.includes("localOfflineOwner:null,appliedRecommendationValues:{}})"));
+ assert.ok(main.includes("this.logCoffee=null;this.appliedRecommendationValues={};"));
  assert.ok(main.includes("this.appliedRecommendationValues.grind=String(r.grind.value)"));
  assert.ok(main.includes("this.appliedRecommendationValues.temperature=String(temperatureInput.value)"));
  assert.ok(main.includes("this.draft.recommendationContext=reconcileRecommendationUse("));
