@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {generateKeyPairSync,createHash} from 'node:crypto';
-import {readFileSync} from 'node:fs';
+import {readFileSync,existsSync} from 'node:fs';
+import {execFileSync} from 'node:child_process';
 import vm from 'node:vm';
 import {createMemberApprovalBroker} from '../supabase/functions/dic-member-approval-broker/core.mjs';
 import {createMemberApprovalPoll} from '../netlify/functions/dic-member-approval-poll.mjs';
@@ -201,7 +202,24 @@ test('scheduled notification poll works through the explicitly configured no-JWT
 });
 
 test('security-inspection PR filter covers the exact Edge gateway config without broad TOML wildcard',()=>{
- const workflow=readFileSync(new URL('../.github/workflows/security-inspection.yml',import.meta.url),'utf8');
- assert.match(workflow,/^\s*-\s*'supabase\/config\.toml'\s*$/m);
+ const path='.github/workflows/security-inspection.yml';
+ const current=readFileSync(new URL('../'+path,import.meta.url),'utf8');
+ let workflow=current;
+ const receiptPath=new URL('../docs/RELEASE_CANDIDATE.json',import.meta.url);
+ if(existsSync(receiptPath)){
+  // A READY-only candidate restores GitHub Actions workflows to published bytes.
+  // Check the original immutable development workflow instead; never silently
+  // waive the new Edge-gateway PR path check or mutate published workflow source.
+  const receipt=JSON.parse(readFileSync(receiptPath,'utf8'));
+  assert.equal(receipt.kind,'DIC-READY-ONLY-SOURCE-1');
+  assert.match(receipt.development_source_sha,/^[a-f0-9]{40}$/);
+  assert.match(receipt.published_source_sha,/^[a-f0-9]{40}$/);
+  assert.ok(receipt.restored_unpublished_workflow_paths.includes(path));
+  const sourceAt=sha=>execFileSync('git',['show',sha+':'+path],{encoding:'utf8',timeout:10000});
+  assert.equal(current,sourceAt(receipt.published_source_sha),
+   'isolated workflow must equal exact published Git bytes');
+  workflow=sourceAt(receipt.development_source_sha);
+ }
+ assert.match(workflow,/^\\s*-\\s*'supabase\\/config\\.toml'\\s*$/m);
  assert.doesNotMatch(workflow,/^\s*-\s*'supabase\/\*\*'\s*$/m);
 });

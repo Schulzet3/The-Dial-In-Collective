@@ -22,7 +22,10 @@ function collect(dir){
 }
 const active=roots.flatMap(p=>collect(join(root,p)));
 function assertReadFirstIndex(index){
- const start=index.indexOf('## Read first'),end=index.indexOf('## Current operating records');
+ const start=index.indexOf('## Read first');
+ const endings=['## Current operating records','## Live operating links and supporting dated records']
+  .map(label=>index.indexOf(label)).filter(n=>n>=0);
+ const end=endings.length===1?endings[0]:-1;
  assert.ok(start>=0&&end>start,'read-first headings exist and are ordered');
  const nums=[...index.slice(start,end).matchAll(/^(\d+)\. /gm)].map(x=>Number(x[1]));
  assert.ok(nums.length>0,'read-first section has numbered entries');
@@ -78,6 +81,7 @@ test('current owner decisions, index and visible help copy are synchronized',()=
 test('read-first index rejects absent headings, empty numbering and skipped positions',()=>{
  const valid='## Read first\n1. First\n2. Second\n## Current operating records';
  assert.doesNotThrow(()=>assertReadFirstIndex(valid));
+ assert.doesNotThrow(()=>assertReadFirstIndex('## Read first\\n1. First\\n2. Second\\n## Live operating links and supporting dated records'));
  assert.throws(()=>assertReadFirstIndex('no headings'),/read-first headings/);
  assert.throws(()=>assertReadFirstIndex('## Read first\n## Current operating records'),/numbered entries/);
  assert.throws(()=>assertReadFirstIndex('## Read first\n1. First\n3. Third\n## Current operating records'),/Expected values to be strictly deep-equal/);
