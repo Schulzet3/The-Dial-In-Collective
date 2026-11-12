@@ -1086,6 +1086,27 @@
         "Fresh encrypted snapshot 2026-11-12T16:25:38Z before latest observed Auth user write 2026-11-12T15:25:46Z; artifact 13961938483; encrypted age SHA256 4c4a56cb980c28f9d8e61948005f155d2d6c4cb27f996ad627cf3a0f950fdc35; ZIP SHA256 ce0a44904be97c83703820088a054d108b9f1770b63cb0cfd92f6e43d98f01cb; owner-only Drive file 1BsHUnM5JQwrRRJPpOJ6fuxSX30KIBeFs, direct parent required folder 1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf.",
         "Conservative potentially_destructive migration risk; provider applied source 20261112135900 as Supabase migration version 20261112180144, protected new table/RPC/trigger verified. Member broker Edge ACTIVE v1 verify_jwt=false, no historical member backfill."
       ]
+    },
+    {
+      "id": "DIC-20261112-READY1MEMBER-36",
+      "tested_source_sha": "02361218d2f354075e928396a6ba3fc0295b3b19",
+      "owner_approved": true,
+      "status": "APPROVED",
+      "production_branch": "release/production",
+      "max_publications": 1,
+      "approved_at_utc": "2026-11-12T18:09:59.795Z",
+      "expires_at_utc": "2026-11-12T22:09:59.795Z",
+      "approval_source": "Owner November 12, 2026 America/Chicago current chat: 'Run the mandatory DIC preflight and publish all items in the queue.' Original one-READY #2258 publication only. This is a NEW one-use recovery ID after unconsumed controller event DIC-20261112-READY1MEMBER-35 was denied on an independently fixed main exact-path allowlist; never publish a second batch or replay old ID.",
+      "scope": "Single READY member approval email and opted-in Web Push; same frozen source 02361218d2f354075e928396a6ba3fc0295b3b19 and unchanged five exact candidate SUCCESS. Main-only stale exact supabase/config.toml scope policy fixed via PR #2315, main a997474d, targeted main acceptance 43276672727 and merged 43276790074 SUCCESS. Do not retry -35 or publish more than once. All six unready rows excluded; fresh owner-private encrypted recovery verified; scoped Supabase migration and Edge applied; Netlify publication via one new main source/mode-bound event only. No secrets/purchases/member data or app changes.",
+      "approved_ready_item_ids": [
+        "DIC-Q-2258-approval-email-and-member-push"
+      ],
+      "owner_private_free_compensating_controls": true,
+      "sql_evidence": [
+        "Exact candidate approval 43274838038, validate 43274837904, cloud/mobile-browser 43274837883, SQL 43274837967 SUCCESS; no additional candidate build.",
+        "Owner-private encrypted backup 2026-11-12T16:25:38Z GitHub artifact 13961938483, ZIP SHA256 ce0a44904be97c83703820088a054d108b9f1770b63cb0cfd92f6e43d98f01cb; inner age SHA256 4c4a56cb980c28f9d8e61948005f155d2d6c4cb27f996ad627cf3a0f950fdc35, owner-only Google Drive file 1BsHUnM5JQwrRRJPpOJ6fuxSX30KIBeFs direct required parent, verified 17:59:45 UTC, latest Auth write 15:25:46Z pre-snapshot.",
+        "Conservative potentially_destructive SQL scope; additive migration applied Supabase version 20261112180144, service-role-only RLS/RPC/trigger verified, Edge broker ACTIVE v1 verify_jwt=false; real recipient email/APNs delivery not independently verified."
+      ]
     }
   ],
   "policy": "New owner publish/deploy instruction grants one selected READY release at the exact combined tested source SHA; source-bound unique grant, max 1 publication, finite expiry, matched CI, backup/security and Netlify readback. Owner exclusively monitors credits; no credit cap/balance/plan proof required. Never buy or upgrade. Prior grants and their old cost fields are preserved historical evidence."
