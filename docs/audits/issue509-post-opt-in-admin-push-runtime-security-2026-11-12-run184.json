@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 184,
+  "reviewed_at_utc": "2026-11-12T03:50:50.051Z",
+  "project_ref": "azviqqejypsefzilgonr",
+  "postgres_version": "17.11.0.003",
+  "development_parent_sha": "ccbc5b6b20df8fcd13685eaacdfa8d4daca701a2",
+  "ops_main_last_verified": "21a4741f742718c3854b93969233dd14648cb60e",
+  "release_last_verified": "d0bc07df641af6411435daac74ee3cb16d1bdb61",
+  "live_migrations": 66,
+  "latest_migration": {
+    "version": "20261112012155",
+    "name": "dic_admin_push_vault_delivery"
+  },
+  "edge_deployments": [
+    {
+      "slug": "dic-verify-coffee",
+      "version": 8,
+      "status": "ACTIVE",
+      "verify_jwt": true,
+      "ezbr_sha256": "d59e9da29335f2d626a2779238b4f1176148f5f8f3d54539bf831ff20aa6a77e"
+    },
+    {
+      "slug": "dic-preview-coffee",
+      "version": 4,
+      "status": "ACTIVE",
+      "verify_jwt": true,
+      "ezbr_sha256": "ac928ceb4898414555fbcc96afb30b0963f7c819c5d7e211abd5b3893090648c"
+    },
+    {
+      "slug": "dic-delete-member-account",
+      "version": 2,
+      "status": "ACTIVE",
+      "verify_jwt": true,
+      "ezbr_sha256": "5d4b6d84458b289c6a25bc76fec4a4b562594c0802e3ee9f7abd633fe87dcafb"
+    },
+    {
+      "slug": "dic-admin-push-broker",
+      "version": 1,
+      "status": "ACTIVE",
+      "verify_jwt": false,
+      "ezbr_sha256": "ca7ce5f9b80bf6984a7517e9f3ef1750fa856b75557136817ccc040dc5635382"
+    }
+  ],
+  "functions_complete_current_sources": [
+    {
+      "name": "public.dic_admin_push_bootstrap_key",
+      "signature": "dic_admin_push_bootstrap_key(text,text)",
+      "ddl": "CREATE OR REPLACE FUNCTION public.dic_admin_push_bootstrap_key(p_public_key text, p_private_key text)\n RETURNS text\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare existing_key text; secret_id uuid;\nbegin\n perform pg_catalog.pg_advisory_xact_lock(1938,20261112);\n select r.vapid_public into existing_key\n from private.dic_admin_push_runtime r where r.singleton=true;\n if existing_key is not null then return existing_key; end if;\n if p_public_key !~ '^[A-Za-z0-9_-]{87}$' or p_private_key !~ '^[A-Za-z0-9_-]{43}$'\n then raise exception 'Invalid VAPID key material'; end if;\n secret_id:=vault.create_secret(\n  p_private_key,'dic_admin_push_vapid_private_20261112',\n  'Only service-role Edge Functions may decrypt this VAPID signing key');\n insert into private.dic_admin_push_runtime(singleton,vapid_public,vault_secret_id)\n values(true,p_public_key,secret_id);\n return p_public_key;\nend;\n$function$\n",
+      "md5": "637217a555887f78d812deb347455e4d",
+      "anon_exec": false,
+      "authenticated_exec": false,
+      "service_exec": true,
+      "prosecdef": true,
+      "config": "search_path=\"\"",
+      "definition_chars": 931,
+      "lines": 23,
+      "words": 84,
+      "verdict": "Service-only; SECURITY DEFINER with empty search_path; client EXECUTE denied; prior full-source receipt Run182 retained"
+    },
+    {
+      "name": "public.dic_admin_push_claim_poll",
+      "signature": "dic_admin_push_claim_poll()",
+      "ddl": "CREATE OR REPLACE FUNCTION public.dic_admin_push_claim_poll()\n RETURNS boolean\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare won boolean;\nbegin\n update private.dic_admin_push_runtime set last_polled_at=now()\n where singleton=true\n   and (last_polled_at is null or last_polled_at<=now()-interval '4 minutes')\n returning true into won;\n return coalesce(won,false);\nend;\n$function$\n",
+      "md5": "e3bbf384effe7e29b5cffd89135c0666",
+      "anon_exec": false,
+      "authenticated_exec": false,
+      "service_exec": true,
+      "prosecdef": true,
+      "config": "search_path=\"\"",
+      "definition_chars": 414,
+      "lines": 16,
+      "words": 43,
+      "verdict": "Service-only; SECURITY DEFINER with empty search_path; client EXECUTE denied; prior full-source receipt Run182 retained"
+    },
+    {
+      "name": "public.dic_admin_push_runtime_keys",
+      "signature": "dic_admin_push_runtime_keys()",
+      "ddl": "CREATE OR REPLACE FUNCTION public.dic_admin_push_runtime_keys()\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare info jsonb;\nbegin\n select jsonb_build_object('publicKey',r.vapid_public,'privateKey',d.decrypted_secret)\n into info from private.dic_admin_push_runtime r\n join vault.decrypted_secrets d on d.id=r.vault_secret_id\n where r.singleton=true;\n return info;\nend;\n$function$\n",
+      "md5": "16fd1cc2a0cbf0110cd253e661c4cdef",
+      "anon_exec": false,
+      "authenticated_exec": false,
+      "service_exec": true,
+      "prosecdef": true,
+      "config": "search_path=\"\"",
+      "definition_chars": 427,
+      "lines": 16,
+      "words": 39,
+      "verdict": "Service-only; SECURITY DEFINER with empty search_path; client EXECUTE denied; prior full-source receipt Run182 retained"
+    },
+    {
+      "name": "public.dic_admin_push_snapshot",
+      "signature": "dic_admin_push_snapshot()",
+      "ddl": "CREATE OR REPLACE FUNCTION public.dic_admin_push_snapshot()\n RETURNS jsonb\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\n select jsonb_build_object(\n  'admin_ids',coalesce((\n   select jsonb_agg(a.owner_id order by a.owner_id)\n   from private.app_admins a join private.beta_members m on m.owner_id=a.owner_id\n   where m.admitted_at is not null and m.enabled\n  ),'[]'::jsonb),\n  'tokens',coalesce((\n   select jsonb_agg(t.token order by t.token)\n   from (\n    select 'signup:'||m.owner_id::text as token\n    from private.beta_members m\n    join auth.users u on u.id=m.owner_id\n    where m.admitted_at is null and m.signup_review_state='pending'\n      and u.email_confirmed_at is not null\n    union\n    select 'coffee:'||s.id::text from public.coffee_submissions s\n      where s.status in ('pending','conflict')\n    union\n    select 'delete:'||op.id::text from private.dic_admin_account_delete_operations op\n      where op.phase<>'completed'\n   ) t\n  ),'[]'::jsonb)\n );\n$function$\n",
+      "md5": "c6c2c674fa8358a3dd4946a3c0f9d8ed",
+      "anon_exec": false,
+      "authenticated_exec": false,
+      "service_exec": true,
+      "prosecdef": true,
+      "config": "search_path=\"\"",
+      "definition_chars": 1007,
+      "lines": 31,
+      "words": 96,
+      "verdict": "Service-only; SECURITY DEFINER with empty search_path; client EXECUTE denied; prior full-source receipt Run182 retained"
+    }
+  ],
+  "full_current_constraints_and_indexes": [
+    {
+      "object_name": "private.dic_admin_push_runtime",
+      "kind": "constraint",
+      "member": "dic_admin_push_runtime_pkey",
+      "definition": "PRIMARY KEY (singleton)",
+      "valid": true
+    },
+    {
+      "object_name": "private.dic_admin_push_runtime",
+      "kind": "constraint",
+      "member": "dic_admin_push_runtime_singleton_check",
+      "definition": "CHECK (singleton = true)",
+      "valid": true
+    },
+    {
+      "object_name": "private.dic_admin_push_runtime",
+      "kind": "index",
+      "member": "dic_admin_push_runtime_pkey",
+      "definition": "CREATE UNIQUE INDEX dic_admin_push_runtime_pkey ON private.dic_admin_push_runtime USING btree (singleton)",
+      "valid": true
+    },
+    {
+      "object_name": "public.dic_admin_push_subscriptions",
+      "kind": "constraint",
+      "member": "dic_admin_push_subscriptions_endpoint_check",
+      "definition": "CHECK (octet_length(endpoint) >= 20 AND octet_length(endpoint) <= 2048)",
+      "valid": true
+    },
+    {
+      "object_name": "public.dic_admin_push_subscriptions",
+      "kind": "constraint",
+      "member": "dic_admin_push_subscriptions_endpoint_hash_check",
+      "definition": "CHECK (endpoint_hash ~ '^[0-9a-f]{64}$'::text)",
+      "valid": true
+    },
+    {
+      "object_name": "public.dic_admin_push_subscriptions",
+      "kind": "constraint",
+      "member": "dic_admin_push_subscriptions_owner_id_fkey",
+      "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+      "valid": true
+    },
+    {
+      "object_name": "public.dic_admin_push_subscriptions",
+      "kind": "constraint",
+      "member": "dic_admin_push_subscriptions_pkey",
+      "definition": "PRIMARY KEY (endpoint_hash)",
+      "valid": true
+    },
+    {
+      "object_name": "public.dic_admin_push_subscriptions",
+      "kind": "constraint",
+      "member": "dic_admin_push_subscriptions_seen_tokens_check",
+      "definition": "CHECK (jsonb_typeof(seen_tokens) = 'array'::text)",
+      "valid": true
+    },
+    {
+      "object_name": "public.dic_admin_push_subscriptions",
+      "kind": "index",
+      "member": "dic_admin_push_owner_idx",
+      "definition": "CREATE INDEX dic_admin_push_owner_idx ON public.dic_admin_push_subscriptions USING btree (owner_id)",
+      "valid": true
+    },
+    {
+      "object_name": "public.dic_admin_push_subscriptions",
+      "kind": "index",
+      "member": "dic_admin_push_subscriptions_pkey",
+      "definition": "CREATE UNIQUE INDEX dic_admin_push_subscriptions_pkey ON public.dic_admin_push_subscriptions USING btree (endpoint_hash)",
+      "valid": true
+    }
+  ],
+  "safe_aggregate_only": {
+    "subscriptions": 1,
+    "inactive_admin_subscriptions": 0,
+    "expired_subscriptions": 0,
+    "ever_sent_subscriptions": 0,
+    "invalid_token_arrays": 0,
+    "max_seen_token_count": 0,
+    "runtime_rows": 1,
+    "null_critical": 0,
+    "database_deadlocks": 0,
+    "database_conflicts": 0,
+    "cumulative_temp_bytes": 149354307218,
+    "database_bytes": 17028787
+  },
+  "semantic_assessment": {
+    "authorization": "4/4 service-only EXECUTE, no anon/authenticated; subscriber SELECT denied to clients, runtime table client SELECT denied. Public broker poll JWT-disabled intentionally, SQL throttle guards work; no direct user return body",
+    "data_integrity": "Only currently admitted enabled Admin subscriptions were observed; constraints and indexes valid/ready; no null critical fields",
+    "privacy": "No Auth identities, admin IDs, endpoint strings, JWTs, keys, personal records, shot/notes data or raw logs enumerated",
+    "source_coverage": "Four complete current live SQL definitions re-read semantically due to newly active push subscription; 7 constraints and 3 indexes complete DDL; no new historical GitHub-line credit",
+    "result": "No new confirmed defect; no justified deletion; real iPhone push delivery NOT VERIFIED; pending trigger not proved by subscription existence",
+    "limitations": [
+      "Hosted GoTrue/JWT/PostgREST settings UNVERIFIED",
+      "Native compiled Vault internals UNVERIFIED",
+      "Disk free headroom UNVERIFIED",
+      "App/device end-to-end receipt UNVERIFIED"
+    ],
+    "migration_next": 67,
+    "baseline": "IN_PROGRESS",
+    "provider_writes": 0,
+    "code_fixes": 0,
+    "queue_promotions": 0,
+    "ci": "DOCUMENTATION SOURCE-BOUND GOVERNANCE PENDING THIS COMMIT"
+  }
+}

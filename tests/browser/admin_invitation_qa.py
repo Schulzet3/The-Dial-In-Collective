@@ -29,6 +29,7 @@ const CLOUD_CONFIG={enabled:true,supabaseUrl:'https://fixture.invalid',publishab
 const readAppearance=()=> 'system';
 const applyAppearance=()=>{};
 const secureOrigin=()=>{};
+const getAdminPushStatus=async()=> 'disabled';
 const e=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 window.__calls=[];
 window.__pending=[

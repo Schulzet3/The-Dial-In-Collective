@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 189,
+  "kind": "EXACT_SOURCE_CI_CLOSURE",
+  "parent_sha": "ec3126d2cae15e56e7578649fa53e490b715f3d6",
+  "checks": [
+    {
+      "audit_sha": "92f5f5ecc6f024f76ab4df6a4b9e22ad6e4425f1",
+      "run_id": 43179098735,
+      "approval_job_id": 131050419351,
+      "conclusion": "COMPLETED_SUCCESS",
+      "success_steps": 11,
+      "all_steps": 11
+    },
+    {
+      "audit_sha": "ec3126d2cae15e56e7578649fa53e490b715f3d6",
+      "run_id": 43186718655,
+      "approval_job_id": 131075595246,
+      "conclusion": "COMPLETED_SUCCESS",
+      "success_steps": 11,
+      "all_steps": 11
+    }
+  ],
+  "verification": "Read back actual GitHub Actions workflow runs and jobs: both run.status=completed and conclusion=success; exact head_sha matches each audit commit; sole approval job 11/11 steps success.",
+  "source_dependent_gates": "GOVERNANCE_APPROVAL_ONLY; source, SQL, Node, browser, account and device tests not rerun; no runtime changes in both audit commits",
+  "provider_writes": 0,
+  "deployments": 0,
+  "baseline_complete": false,
+  "closure_commit_own_ci": "CHECK_AFTER_INTEGRATION"
+}

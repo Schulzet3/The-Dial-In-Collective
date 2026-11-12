@@ -128,7 +128,7 @@ function boot(){
   document:{querySelector:x=>x==='#admin-root'?root:null},
   supabase:{createClient:()=>sdk},CLOUD_CONFIG:{enabled:true},
   secureOrigin(){},applyAppearance(){},readAppearance(){return 'system';},
-  renderAdminDashboard,renderAdminDenied,renderAdminDeleteAccountPrompt,e,isAccessDenied,
+  renderAdminDashboard,renderAdminDenied,renderAdminDeleteAccountPrompt,e,isAccessDenied,getAdminPushStatus:async()=> 'disabled',
   confirm:()=>true
  });
  vm.runInContext(source,context);
@@ -179,7 +179,7 @@ test('non-admin portal identity is denied without pulling private requests',asyn
  const calls=[];
  const sdk={auth:{onAuthStateChange(){},async getUser(){return {data:{user:{id:MEMBER}}};}},
   async rpc(name){calls.push(name);if(name!=='dic_session_status')throw Error('Unexpected Admin fetch');return {data:{authenticated:true,admitted:false,admin:false}};}};
- const context=vm.createContext({document:{querySelector:()=>root},supabase:{createClient:()=>sdk},CLOUD_CONFIG:{enabled:true},secureOrigin(){},applyAppearance(){},readAppearance(){return 'system';},renderAdminDashboard,renderAdminDenied,e,isAccessDenied});
+ const context=vm.createContext({document:{querySelector:()=>root},supabase:{createClient:()=>sdk},CLOUD_CONFIG:{enabled:true},secureOrigin(){},applyAppearance(){},readAppearance(){return 'system';},renderAdminDashboard,renderAdminDenied,e,isAccessDenied,getAdminPushStatus:async()=> 'disabled'});
  vm.runInContext(source,context);await context.started;
  assert.match(root.innerHTML,/Admin Access Unavailable/);
  assert.deepEqual(calls,['dic_session_status']);

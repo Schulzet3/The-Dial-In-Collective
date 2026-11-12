@@ -519,6 +519,10 @@ Owner-authorized release DIC-20261106-READY7-23 independently verified DEPLOYED:
 - New private Drive direct-child ciphertext ID1OZmZvheHS4lIgbWU0HvpFvOaEdxg6tTM, GitHub artifact13738153192 22785910 bytes SHA256 3706587b760beb129a5f8e728babd1040ce9aaf40b452ed3693e5b6dc34fcc14, snapshot 05:29:18Z and last observed write 05:16:19.79668Z; earlier isolated saved-archive restoration reused. No plaintext, no new key, no plan spending. Real signed-in Admin production UI/device not asserted PASS.
 - This NONFORCE development reconciliation commit retains FIRST parent's entire app/dev tree and adds exact immutable tested candidate as SECOND parent for future published-source ancestry, only docs/queue/receipt/Locked delivery metadata changed. Full immutable receipt docs/releases/2026-11-10_READY4_DEPLOYED_VERIFIED.md. Status 264 DEPLOYED/0 READY/3 IN_PROGRESS, no future publication approval.
 
-## Release controller claim — 2026-11-12T01:55:09.608Z
-- Approved release DIC-20261112-READY48PUSH-31 from tested application SHA ad457f648bc72c2d79c24406766a64abd3acd835 claimed exactly once against previous release ref a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0. Five GitHub CI checks passed and one-use authorization ledger was written.
+
+## 2026-11-12 READY1 #1938 release grant DIC-20261112-READY1PUSH-32 [skip netlify]
+- Owner explicit publish; isolated candidate 174eb33d3db63513e2ccf38dcf118f6291bd3127 selected one READY item. Five exact-source GitHub checks SUCCESS (approval 43147128136, security 43147128209, SQL 43147128009, cloud/browser 43147127999, Node build/test 43147128046). Published-to-candidate deployable diff exactly site/admin/main.js, site/admin/push.js, site/admin/view.js; no workflow diff; 4 unready app paths restored, 11 unready tests omitted, reviewed workflow-only test omitted. Current dev drift since staging docs-only. Grant fresh one-use ID DIC-20261112-READY1PUSH-32; no production publication yet.
+
+## Release controller claim — 2026-11-12T14:54:57.630Z
+- Approved release DIC-20261112-READY4E2E-34 from tested application SHA 046418955abca382ba1bda16d345127b477dd392 claimed exactly once against previous release ref d0bc07df641af6411435daac74ee3cb16d1bdb61. Five GitHub CI checks passed and one-use authorization ledger was written.
 - **Not yet a Netlify publication receipt:** independently check READY/current deployed SHA before marking Deployed.

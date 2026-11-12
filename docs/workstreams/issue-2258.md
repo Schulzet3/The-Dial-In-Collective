@@ -1,0 +1,24 @@
+# Issue #2258 — newly approved user confirmation
+
+- **Authority:** Owner Nov 12 2026 requested notifications to newly admitted users. Preserve #1756 verified email + admin approval and #1938 administrator-only push; development does NOT authorize production publication.
+- **Feature parent:** `c493935c37c6e93ae9d0bc98fdcea1f46c38bd85`; branch `work/issue2258-member-approval-notification-20261112`; same-commit source, styling, regressions and this journal. No provider, Auth, SQL, private member data, Netlify or production writes.
+- **Built:** Pending accounts periodically recheck only the server admission status while their app is visible. A proven pending-to-approved transition shows an accessible dismissible Account Approved notice above workspace, including when the same account has a pending marker from a previous signed-in session. The marker is a per-user boolean, no personal content. Reject/revoke/offline/incomplete checks cannot invent approval; no notice for already admitted users. Role/Auth gates and offline data are unchanged.
+- **Limits:** This is **in-app notification, not background delivery**. Email and closed-app **member** push are NOT built or verified. Auth magic-link mail from the admin's PKCE browser is unsuitable for transactional approval notification. Existing #1938 off-screen push targets the admitted administrator only. Off-screen member delivery requires a separately secured opt-in push subscriber or real transactional email transport; don't silently reuse admin permissions or claim delivery.
+- **Acceptance:** Targeted `tests/cloud-auth-startup-verification.test.mjs` covers pending→admitted, rejected, already admitted and network failure. Run applicable exact-source Node/build/browser/mobile/offline/approval before READY. No device signoff is a mandatory source gate. Preserve Log Shot→Rate→Recommendation, Community, history and existing users.
+- **Next:** Current source TESTING pending exact PR checks and nonforce merge; reconcile queue with source-only status and leave the member off-screen delivery gap OPEN. Publication remains owner-command-only.
+
+## CI intake repair — same-commit queue reconciliation
+
+- PR head `654c5043369828120c47d243b172ceae4253e0c8`: scoped cloud-tests SUCCESS in run `43226631450`, security-inventory SUCCESS `43226631867`; approval run `43226631434` correctly HELD solely because `site/cloud/main.js` and `site/styles.css` lacked a new in-progress queue row. Original frozen603 SKIPPED, not PASS. No source/UX claim from a failed governance check.
+- Added `DIC-Q-2258-user-account-approval-confirmation` TESTING with the exact two runtime scope paths to `docs/RELEASE_QUEUE.json`; 321 prior items and existing delivery/status history preserved. No READY certification or publication. Applicable exact new-head CI and nonforce integration still required.
+
+## Exact full-suite regression fix
+
+- PR head `e0c154652e8f025e4cad02ec02ed3114b915dfc8`: approval, SQL, security-inventory, cloud-tests and mobile browser checks SUCCESS; full Node22 validate run `43227076001` **FAILED 2/4,248** (4,240 pass, 6 intentional skip). Issue #1596 source contract expected the exact baseline `connected?this.coffees():this.auth()` expression, and one new test incorrectly expected a mocked `render()` that always calls `auth()` to show the connected workspace. Both failures were genuine test results, not hidden as PASS.
+- **Fix in this code/test/journal commit:** Keep the original authorized view ternary intact and compose the admission banner before it; assert actual `status.admitted` and notice, not a deliberately stubbed auth template. Recheck the entire applicable exact-source test suite (do not reuse failed validation), with unchanged strict approval/privacy/SQL controls.
+
+## Source READY verification (not publication)
+
+- Nonforce PR #2260 squash-merged to `9beb10f04d0db227abacb553a50832caa4ba65dc`. Reviewed exact PR head `8dabb809ddf46af05315e1138972bd6fad94107a`: governance `43227731727`, isolated SQL `43227731718`, security `43227731779`, cloud/mobile/browser `43227731712`, Node22/lint `43227731992` all SUCCESS; frozen603 SKIPPED/N/A. Four source/test and queue blobs byte-identical to merged commit.
+- Merged SHA `9beb10f04d0db227abacb553a50832caa4ba65dc`: Node/lint `43228346551` SUCCESS (4,242 PASS, 0 FAIL, 6 intentional SKIP), cloud/mobile/browser `43228346616` SUCCESS, approval `43228346560` SUCCESS. Source-equivalent unchanged SQL and security verified at PR head, no invented merged workflow.
+- Queue item `DIC-Q-2258-user-account-approval-confirmation` promoted TESTING → READY for **in-app only** after CI; 322 items preserved; published base and existing decisions untouched. **NOT DEPLOYED**. User offscreen push/email not implemented; #2258 OPEN for distinct transport/verification. Never claim that a user already receives external notifications or that administrator device delivery was physically validated.

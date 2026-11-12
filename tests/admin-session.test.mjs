@@ -15,7 +15,7 @@ function boot(dashboard){
  const sdk={auth:{onAuthStateChange(fn){auth=fn;return {data:{subscription:{unsubscribe(){}}}};},async getUser(){return {data:{user:{id:'admin'}}};}},
   from:()=>({select:()=>({eq:()=>({async maybeSingle(){return {data:{theme:'dark'}};}})})}),
   async rpc(name){if(name==='dic_session_status')return {data:{authenticated:true,admitted:true,admin:true}};const result=await dashboard(name);return result?.error?result:{data:result};}};
- const context=vm.createContext({document:{querySelector:s=>s==='#admin-root'?root:null},supabase:{createClient:()=>sdk},CLOUD_CONFIG:{enabled:true},secureOrigin(){},isAccessDenied,applyAppearance(){},readAppearance(){},renderAdminDashboard,renderAdminDenied,e});
+ const context=vm.createContext({document:{querySelector:s=>s==='#admin-root'?root:null},supabase:{createClient:()=>sdk},CLOUD_CONFIG:{enabled:true},secureOrigin(){},isAccessDenied,applyAppearance(){},readAppearance(){},renderAdminDashboard,renderAdminDenied,e,getAdminPushStatus:async()=> 'disabled'});
  vm.runInContext(source,context);
  return {root,trigger,actionNotice,done:context.started,refresh(){listeners.click({target:{closest:()=>trigger}});},signOut(){assert.equal(typeof auth,'function');auth('SIGNED_OUT',null);},switchAccount(){assert.equal(typeof auth,'function');auth('SIGNED_IN',{user:{id:'member'}});}};
 }

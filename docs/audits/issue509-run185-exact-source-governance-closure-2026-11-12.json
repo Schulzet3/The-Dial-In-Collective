@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "audit_commit_sha": "ae27e55347ed38eea232b2fced466da86d2188d6",
+  "closure_parent_sha": "ae27e55347ed38eea232b2fced466da86d2188d6",
+  "workflow_id": 43157205158,
+  "workflow_name": "DIC approval, implementation and continuity contract",
+  "head_sha": "ae27e55347ed38eea232b2fced466da86d2188d6",
+  "updated_at": "2026-11-12T04:49:03Z",
+  "workflow_status": "completed",
+  "workflow_conclusion": "success",
+  "job_id": 130979793997,
+  "job_name": "approval",
+  "job_status": "completed",
+  "job_conclusion": "success",
+  "steps_count": 11,
+  "steps": [
+    {
+      "name": "Set up job",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/checkout@v7",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/setup-node@v7.1.0",
+      "conclusion": "success"
+    },
+    {
+      "name": "Reject accidentally tracked private keys, credential files and high-confidence tokens",
+      "conclusion": "success"
+    },
+    {
+      "name": "Fail on missing owner decisions or approved UI/source tests",
+      "conclusion": "success"
+    },
+    {
+      "name": "Validate queue schema and intake in one nonpublishing check",
+      "conclusion": "success"
+    },
+    {
+      "name": "Verify every READY item against live recorded Actions and source/test blobs",
+      "conclusion": "success"
+    },
+    {
+      "name": "Audit EVERY pushed commit, including docs-only and earlier commits in batch",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Run actions/setup-node@v7.1.0",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Run actions/checkout@v7",
+      "conclusion": "success"
+    },
+    {
+      "name": "Complete job",
+      "conclusion": "success"
+    }
+  ],
+  "scope": "EXACT_SOURCE_DOCUMENTATION_AND_APPROVAL_GOVERNANCE_ONLY",
+  "not_tested": [
+    "Node22 application",
+    "isolated PostgreSQL",
+    "signed-in Auth",
+    "real Apple push"
+  ],
+  "new_source_bugfixes": 0,
+  "production_writes": 0,
+  "baseline_complete": false
+}

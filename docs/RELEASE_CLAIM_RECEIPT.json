@@ -1,467 +1,49 @@
 {
   "schema_version": 1,
-  "release_id": "DIC-20261112-READY48PUSH-31",
-  "tested_source_sha": "ad457f648bc72c2d79c24406766a64abd3acd835",
-  "previous_release_head_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
-  "claimed_at_utc": "2026-11-12T01:55:09.608Z",
+  "release_id": "DIC-20261112-READY4E2E-34",
+  "tested_source_sha": "046418955abca382ba1bda16d345127b477dd392",
+  "previous_release_head_sha": "d0bc07df641af6411435daac74ee3cb16d1bdb61",
+  "claimed_at_utc": "2026-11-12T14:54:57.630Z",
   "status": "GIT_CONNECTED_BUILD_PENDING_NETLIFY_PROVIDER_READBACK",
   "granted_single_publication": true,
   "approved_ready_queue_items": [
     {
-      "id": "DIC-Q-33-original603-26-selected-unlabeled-flavor-review-context",
-      "issue": 33,
-      "title": "Preserve additional literal current selected coffee flavor sentence as source-review context without merging into canonical labeled notes",
-      "merged_source_sha": "6aceea0de6ab61a15123e62551ea1b9f4a2c8fbd",
-      "scope_paths": [
-        "src/server/coffee-selected-description-sensory.mjs",
-        "src/server/coffee-page-metadata.mjs"
-      ]
-    },
-    {
-      "id": "DIC-Q-509-admitted-member-gate",
-      "issue": 509,
-      "title": "Require admitted_at before enabled beta member may access private RPC/RLS state",
-      "merged_source_sha": "69fa32bcc272173954db6a98e3d142dda747f461",
-      "scope_paths": [
-        "supabase/migrations/20261110065000_dic_admitted_member_gate.sql"
-      ]
-    },
-    {
-      "id": "DIC-Q-509-enabled-requires-admission-constraint",
-      "issue": 509,
-      "title": "Ensure trusted service source-verification never processes enabled-but-unadmitted accounts",
-      "merged_source_sha": "2f1427fcfc63eee0d3b682e5eafbf130cf7a1213",
-      "scope_paths": [
-        "supabase/migrations/20261110073500_dic_enabled_requires_admission_check.sql"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-local-success-grind-temp-eligibility",
+      "id": "DIC-Q-455-r198-original-range-outlier-eligibility",
       "issue": 455,
-      "title": "Exclude historical invalid grind and recorded temperature from measured all-green Coffee overview",
-      "merged_source_sha": "1df0a4dae38fcc2937bab18d8428b10a383aea42",
-      "scope_paths": [
-        "site/lib/model.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-invalid-archived-green-advice-veto",
-      "issue": 455,
-      "title": "Reject impossible archived five-green grinder/temperature as a veto of valid latest shot feedback",
-      "merged_source_sha": "befc282154c5ddc15a123fc2d5ee37e87b2112f6",
+      "title": "R198 original-range outlier eligibility with R201 zero-width integrity guard",
+      "merged_source_sha": "a5dd027d7f20e4eb6b108cf5b8acdaf432ca006c",
       "scope_paths": [
         "site/lib/engine.js"
       ]
     },
     {
-      "id": "DIC-Q-33-original603-400-selected-direct-two-broad-region-blend",
-      "issue": 33,
-      "title": "Preserve both exact selected broad blend sourcing regions on VT Artisan Dark Decaf without inventing countries",
-      "merged_source_sha": "b0d11bee27194dfc9968d89e045ecbabde2eed1f",
-      "scope_paths": [
-        "src/server/coffee-page-metadata.mjs",
-        "src/server/coffee-selected-broad-blend-regions.mjs"
-      ]
-    },
-    {
-      "id": "DIC-Q-33-original603-402-sourcing-not-sensory-review",
-      "issue": 33,
-      "title": "Keep selected Notes: Farm-Direct as sourcing evidence, not false tasting-note Source Review fact",
-      "merged_source_sha": "0b65f88305b11d3c9412e8d0057440c5b7427301",
-      "scope_paths": [
-        "src/server/coffee-source-facts.mjs"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-outlier-explicit-controls",
-      "issue": 455,
-      "title": "Exclude explicitly invalid historical grinder and optional temperature from mandatory four-success outlier reference cohort",
-      "merged_source_sha": "c26a9a9c5f44cb77dc9e3a92429da5a10d9980ce",
-      "scope_paths": [
-        "site/lib/engine.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-509-preview-preflight-null-cached-guard",
-      "issue": 509,
-      "title": "Reject explicit NULL cached flag before issuing stale two-phase URL preview tickets",
-      "merged_source_sha": "1237de47741b785a356347106aea058478e81956",
-      "scope_paths": [
-        "supabase/migrations/20261110164500_dic_preview_preflight_null_flag_guard.sql"
-      ]
-    },
-    {
-      "id": "DIC-Q-33-original603-433-435-blackcoffee-current-selected",
-      "issue": 33,
-      "title": "Correct current selected Black Coffee AM tasting list and unsupported roast SEO/customer-review contamination; verify Red Room and The Dark",
-      "merged_source_sha": "40d80267f5a21b4a67a79d334fa8ed500dfcf411",
-      "scope_paths": [
-        "src/server/coffee-product-scope.mjs",
-        "src/server/coffee-flavor-evidence.mjs",
-        "src/server/coffee-page-metadata.mjs"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-similar-coffee-explicit-control-evidence-guard",
-      "issue": 455,
-      "title": "Exclude invalid archived grinder and temperature from same-style other-coffee starting evidence",
-      "merged_source_sha": "f7f9eb97fb864f255a90bccbcacaa9d52b2e35a4",
-      "scope_paths": [
-        "site/lib/engine.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-33-original603-445-two-lot-selected-growing-regions",
-      "issue": 33,
-      "title": "Recover two literal current selected growing regions of one same-country blend without inventing single blend elevation",
-      "merged_source_sha": "7ecd26d45f5f9d9832fa939ee58ccf77edaa932a",
-      "scope_paths": [
-        "src/server/coffee-selected-two-region-blend.mjs",
-        "src/server/coffee-page-metadata.mjs"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-prefill-archived-control-integrity",
-      "issue": 455,
-      "title": "Reject impossible archived grinder or temperature as Log Shot dose/grind/temperature prefill evidence while preserving private History",
-      "merged_source_sha": "11e2735ebbbd19d9ceb0fc9afab0b8252b334dbe",
-      "scope_paths": [
-        "site/lib/engine.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-33-original603-448-selected-growing-valley-region",
-      "issue": 33,
-      "title": "Preserve literally selected present growing-valley locality where independently accepted country and exact current product H1 agree",
-      "merged_source_sha": "942da0c045f6fc534a7e514ab09c9aa6ff2437cc",
-      "scope_paths": [
-        "src/server/coffee-selected-growing-valley-origin.mjs",
-        "src/server/coffee-page-metadata.mjs"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-community-aggregate-numeric-type-integrity",
-      "issue": 455,
-      "title": "Exclude Boolean/array-coerced ratio and shot duration from unproven Community starting evidence",
-      "merged_source_sha": "767e12c8e763959f0b6677f4de7ad7e69ce80cf3",
-      "scope_paths": [
-        "site/lib/community-evidence.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-509-admin-delete-null-kind-guard",
-      "issue": 509,
-      "title": "Reject NULL Admin deletion kind before canonical coffee routing and impact-block bypass",
-      "merged_source_sha": "a823c3439f77073919718b31161d792b2fd46b87",
-      "scope_paths": [
-        "supabase/migrations/20261110194500_dic_admin_delete_null_kind_guard.sql"
-      ]
-    },
-    {
-      "id": "DIC-Q-509-import-credential-field-separator-guard",
-      "issue": 509,
-      "title": "Reject separator-spelled credential keys in native backup import before archiving private source JSON",
-      "merged_source_sha": "62a1eac89f4653545a7bffe91e4dace3a2740da4",
-      "scope_paths": [
-        "supabase/migrations/20261110205500_dic_import_credential_field_separator_guard.sql"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-make-current-explicit-control-integrity",
-      "issue": 455,
-      "title": "Keep explicitly invalid recorded grinder or optional temperature out of local Current and History Make Current",
-      "merged_source_sha": "8df0ad57565377b4e8d61035f938eda4e9f0a350",
-      "scope_paths": [
-        "site/lib/engine.js",
-        "site/cloud/shot_card.js",
-        "site/cloud/main.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-1935-verified-auth-startup-no-false-pending",
-      "issue": 1935,
-      "title": "Do not display approval pending while signed-in admission is still being checked",
-      "merged_source_sha": "5cac3799fd7b8e3a901532c92c1779f0ccc7eb5b",
-      "scope_paths": [
-        "site/cloud/main.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-33-r102-selected-current-flavor-base",
-      "issue": 33,
-      "title": "Preserve source-bound intrinsic tasting base coordinated with already selected coffee notes",
-      "merged_source_sha": "2809506ddcb9e2820322758d44237947deace7c4",
-      "scope_paths": [
-        "src/server/coffee-selected-description-sensory.mjs",
-        "src/server/coffee-page-metadata.mjs"
-      ]
-    },
-    {
-      "id": "DIC-Q-1937-admin-signup-order",
-      "issue": 1937,
-      "title": "Move New Account Requests directly above Accounts in Admin dashboard",
-      "merged_source_sha": "2286aa9fdb2c442ec9701d2fdb47d4668585a92e",
-      "scope_paths": [
-        "site/admin/view.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-cross-style-recorded-control-evidence-guard",
-      "issue": 455,
-      "title": "Prevent explicitly invalid archived grinder/temperature controls from biasing weak cross-style starting references",
-      "merged_source_sha": "56361886c96c0230a2cc547b1437c7fcfb907066",
-      "scope_paths": [
-        "site/lib/engine.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-33-r101-current-panel-region-roast-notes",
-      "issue": 33,
-      "title": "Preserve current selected coffee labeled origin region and direct roast/complete sensory list",
-      "merged_source_sha": "3e60b5acdc069fdc315d910a77dcf06a3590cd1d",
-      "scope_paths": [
-        "src/server/coffee-selected-current-panel.mjs",
-        "src/server/coffee-page-metadata.mjs"
-      ]
-    },
-    {
-      "id": "DIC-Q-1938-admin-closed-app-push",
+      "id": "DIC-Q-1938-push-toggle-device-state",
       "issue": 1938,
-      "title": "Opt-in privacy-minimized administrator Web Push with Home Screen background delivery",
-      "merged_source_sha": "a124005e4e2f7ad3ca14dc37fea197c3b2844290",
+      "title": "Show one device-authoritative administrator push toggle across refreshes",
+      "merged_source_sha": "5d64b2803574c090d9608cb5729a8e266fc63639",
       "scope_paths": [
         "site/admin/view.js",
         "site/admin/main.js",
-        "site/admin/push.js",
-        "scripts/pwa/service-worker.template.txt",
-        "src/server/admin-push.mjs",
-        "netlify/functions/dic-admin-push.mjs",
-        "netlify/functions/dic-admin-push-poll.mjs",
-        "supabase/migrations/20261110235000_dic_admin_web_push.sql",
-        "build_cloud.mjs",
-        "supabase/functions/dic-admin-push-broker/core.mjs",
-        "supabase/functions/dic-admin-push-broker/index.ts",
-        "supabase/migrations/20261112013000_dic_admin_push_vault_delivery.sql"
+        "site/admin/push.js"
       ]
     },
     {
-      "id": "DIC-Q-455-family-recorded-control-evidence-guard",
-      "issue": 455,
-      "title": "Exclude explicitly invalid archived grinder or temperature controls from measured same-style successful recipe family evidence",
-      "merged_source_sha": "4fc82fd0ae150139653ef27c38254d9f2fc6f06c",
-      "scope_paths": [
-        "site/lib/engine.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-temperature-recorded-grinder-evidence-guard",
-      "issue": 455,
-      "title": "Exclude impossible explicitly recorded historical grinder controls from personal measured espresso temperature evidence",
-      "merged_source_sha": "7086f5990e330ebaf08ecde54404a631e722a9c6",
-      "scope_paths": [
-        "site/lib/engine.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-edited-five-taste-feedback-cache-refresh",
-      "issue": 455,
-      "title": "Refresh actionable latest-shot recommendation from corrected five sensory ratings without altering private shot history",
-      "merged_source_sha": "4b19def81913686c09e7ece03133bbc20e6de199",
-      "scope_paths": [
-        "site/lib/engine.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-33-original603-542-selected-story-stale-seo-flavor-guard",
+      "id": "DIC-Q-33-r146-163-ironclad-selected-ea-decaf-method",
       "issue": 33,
-      "title": "Withhold uncorroborated SEO-only tasting notes when selected product has a current independent substantive growing/processing story",
-      "merged_source_sha": "44768f845009a47f6e088790cb19dcde8a3fdf87",
-      "scope_paths": [
-        "src/server/coffee-page-metadata.mjs"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-green-timestamp-evidence-veto",
-      "issue": 455,
-      "title": "Do not let undated or malformed imported five-green history suppress feedback from the most recent valid rated shot",
-      "merged_source_sha": "ef669d3dd6203e206421e4f5858678da3eeab706",
-      "scope_paths": [
-        "site/lib/engine.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-33-original603-543-selected-current-this-coffee-seo-flavor-guard",
-      "issue": 33,
-      "title": "Preserve current selected lot description over uncorroborated historical SEO-only flavor metadata when its own long 'This coffee/lot' source prose establishes current origin/producer",
-      "merged_source_sha": "508982265555ac1d2a35d923987b67e83b688491",
-      "scope_paths": [
-        "src/server/coffee-page-metadata.mjs"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-original-calibration-success-evidence",
-      "issue": 455,
-      "title": "Do not let an archived five-green record with an impossible original grinder calibration establish Coffee overview success or veto newer rated-shot advice",
-      "merged_source_sha": "62fd66e9121dece04e244590aa7341d58fb7341b",
-      "scope_paths": [
-        "site/lib/model.js",
-        "site/lib/engine.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-33-original603-550-geographic-duplicate-suffix",
-      "issue": 33,
-      "title": "Remove redundant selected-source geographic place suffix only when already explicitly contained in one complete source-published locality and country",
-      "merged_source_sha": "b4b480ae041ed769654c240a6dc56bfba03d865c",
-      "scope_paths": [
-        "src/server/coffee-fact-compatibility.mjs",
-        "src/server/coffee-page-metadata.mjs"
-      ]
-    },
-    {
-      "id": "DIC-Q-509-admin-delete-edge-request-status",
-      "issue": 509,
-      "title": "Return bounded invalid request status codes from JWT-required administrator account-deletion Edge rather than retryable HTTP 503",
-      "merged_source_sha": "0bc7f0ac30434e28c5951d33bd1fe914b56c3037",
-      "scope_paths": [
-        "supabase/functions/dic-delete-member-account/index.ts"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-sweetness-original-calibration-comparison",
-      "issue": 455,
-      "title": "Reject physically impossible original grinder-calibration records as measured sweetness/yield comparison evidence",
-      "merged_source_sha": "6d386d4e41d09c12ec0487dc7e222e74f5e277de",
-      "scope_paths": [
-        "site/lib/engine.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-last-rated-original-calibration",
-      "issue": 455,
-      "title": "Do not let a corrupted imported newer non-green original grinder snapshot override the last valid measured rated shot recommendation",
-      "merged_source_sha": "cbf95b0baf00d80d0f7c90ee4045122e19785ca9",
-      "scope_paths": [
-        "site/lib/engine.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-outlier-original-calibration-quorum",
-      "issue": 455,
-      "title": "Ignore impossible original grinder-calibration archived shots when forming four-success Log Shot outlier review baseline",
-      "merged_source_sha": "d565bd905dd536d3fed57f371597350cd5d8871c",
-      "scope_paths": [
-        "site/lib/engine.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-original-calibration-grinder-guidance",
-      "issue": 455,
-      "title": "Exclude archived successful grinder settings impossible on the original grinder calibration from personal grind and paired Slow Feed advice",
-      "merged_source_sha": "be6ad8df744305c3cb95488f1d2ca8b79dc9dd06",
-      "scope_paths": [
-        "site/lib/engine.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-similar-coffee-original-calibration",
-      "issue": 455,
-      "title": "Exclude historical similar-coffee successful donors impossible on their original grinder calibration from unproven personal starting ratios/time",
-      "merged_source_sha": "d936f59cb31c7399fab8e779ac5c8517a939c2c7",
-      "scope_paths": [
-        "site/lib/engine.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-make-current-original-calibration",
-      "issue": 455,
-      "title": "Reject archived all-green Make Current recipes with impossible original grinder calibration while preserving private history and valid favorites",
-      "merged_source_sha": "2a2249923ffcd2cf052b4bd2769c9d46446352ba",
-      "scope_paths": [
-        "site/lib/engine.js",
-        "site/cloud/shot_card.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-prefill-original-calibration",
-      "issue": 455,
-      "title": "Prevent archived original-calibration-invalid grinder readings from seeding Log Shot dose and temperature prefills",
-      "merged_source_sha": "6e355b3f1f4b2133def9d0074caa6520d543a5a2",
-      "scope_paths": [
-        "site/lib/engine.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-prefill-valid-historical-range",
-      "issue": 455,
-      "title": "Admit legitimate original-calibration historical measured shots to Log Shot dose/temperature prefill even when old grinder range differs",
-      "merged_source_sha": "1e2430b745c5d2f749f347aa26340fdec7fb039f",
-      "scope_paths": [
-        "site/lib/engine.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-crossstyle-original-calibration",
-      "issue": 455,
-      "title": "Use archived original grinder scale to validate cautious same-coffee cross-style ratio-only reference without transferring old grind",
-      "merged_source_sha": "9c335bacb2d7aa7455d63a1e153532c5fdb754fc",
-      "scope_paths": [
-        "site/lib/engine.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-overview-original-calibration-success",
-      "issue": 455,
-      "title": "Preserve Coffee overview Dialed In success for physically valid historical grinder calibration after range revision",
-      "merged_source_sha": "4302d0d1e86b874903d450262190ba4e2847d5cd",
-      "scope_paths": [
-        "site/lib/model.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-r194-legacy-advanced-optional-guard",
-      "issue": 455,
-      "title": "Legacy optional equipment switches no longer interrupt Log Shot, five ratings, next advice or explicit Setup editing",
-      "merged_source_sha": "a958dd8ac160a8e41d765b806e137df50f7b7821",
-      "scope_paths": [
-        "site/lib/model.js",
-        "site/lib/engine.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-r195-temperature-prefill-provenance",
-      "issue": 455,
-      "title": "Log Shot shows when an optional temperature prefill came from a different espresso style",
-      "merged_source_sha": "e6c7b538fff018301e48124d7c394dcbbbe795b9",
-      "scope_paths": [
-        "site/cloud/main.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-r196-temperature-recommendation-clears-history-origin",
-      "issue": 455,
-      "title": "Clear misleading old-style measured temperature label after explicit Use Recommendation",
-      "merged_source_sha": "02d96594e4d8461a88c08d97be607a808626c0c2",
-      "scope_paths": [
-        "site/cloud/main.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-r197-manual-temperature-provenance",
-      "issue": 455,
-      "title": "Clear misleading cross-style measured temperature source when Log Shot temperature is manually edited",
-      "merged_source_sha": "a82ef21e94d38b851b92bd9e7df7bf7f57ec4171",
-      "scope_paths": [
-        "site/cloud/main.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-33-r131-99-selected-unnamed-full-decaf",
-      "issue": 33,
-      "title": "Preserve explicit Swiss Water decaffeination from an exact selected unnamed full-decaf product introduction and its own method accordion",
-      "merged_source_sha": "52a88e73ae700cd674370a3d726b53185501fad9",
+      "title": "Preserve direct selected EA sugarcane decaffeination when product name moves Decaf from H1 prefix to current description suffix",
+      "merged_source_sha": "dac36e7589c2ca071dc047e71701480739873d66",
       "scope_paths": [
         "src/server/coffee-direct-product-prose.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-2258-user-account-approval-confirmation",
+      "issue": 2258,
+      "title": "Server-confirmed in-app notification when a pending member's account is approved",
+      "merged_source_sha": "9beb10f04d0db227abacb553a50832caa4ba65dc",
+      "scope_paths": [
+        "site/cloud/main.js",
+        "site/styles.css"
       ]
     }
   ]

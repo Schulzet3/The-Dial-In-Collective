@@ -4894,16 +4894,19 @@
     "decision": "Notify opted-in admitted administrators on iOS Home Screen when new email-verified signup approvals, pending/conflicting coffees or unfinished account deletions require action. Preserve in-app badges. Deliver generic, content-free Web Push without member identity, notes or shot data; administrator Auth revalidated for registration, live admin role rechecked for every scheduled delivery, no alerts for unverified signups. Offer device opt-out and remove stale subscriptions.",
     "scope": "Source-only Netlify scheduled sender, verified Admin subscription API, strict VAPID endpoint validation, service-only Supabase SQL table/aggregate, PWA worker/client, tests and queue; separate owner Publish and verified runtime secrets required for delivery.",
     "supersedes": "Only the previous absence of off-app delivery in #1756; preserves all signup approval, Auth, admin isolation, offline/Community, source-isolation and publication gates.",
-    "source_status": "TESTING",
-    "production_status": "NOT_DEPLOYED",
-    "provider_limit": "Netlify Free cannot protect Functions-only VAPID secrets. Owner Nov11 authorized fixing/publishing #1938 with all READY; this scope-preserving implementation keeps generic Netlify 5-minute cron plus Admin API, and places P-256 VAPID key encryption in Supabase Vault with signing inside role-rechecked service-only Supabase Edge. No VAPID/private service key in Netlify, GitHub or browser. Live Edge/migration/Apple device delivery must be verified before DEPLOYED.",
+    "source_status": "EXACT_SOURCE_CI_SUCCESS_DEPLOYED",
+    "production_status": "DEPLOYED_DEVICE_DELIVERY_UNVERIFIED",
+    "provider_limit": "Verified 2026-11-12: Netlify Free needs NO Functions-only secrets. Authenticated Admin API and scheduled push poll function deployed at READY/current site 6af51c834f09e4e2c0f203ea. Supabase service key stays solely in Supabase; VAPID P-256 private key generated at first Admin opt-in and encrypted in service-only Supabase Vault. Edge broker ACTIVE v1 with SQL rate gate. Real iPhone Home Screen closed-app APNs delivery unverified until opt-in; zero subscriptions/keys expected before opt-in.",
     "implementation_revision_20261112": {
-      "status": "OWNER_SCOPE_PRESERVING_IMPLEMENTATION",
+      "status": "OWNER_SCOPE_PRESERVING_IMPLEMENTATION_DEPLOYED",
       "owner_source": "Owner November 11, 2026, 'Publish #1938 and all queue items' and 'prioritize fixing #1938 ... published with the other items'",
       "changes": "Netlify scheduled cron triggers a content-free Supabase Edge poll; Supabase Vault holds the VAPID private key encrypted, Supabase service credentials remain server-only. Edge independently verifies admitted administrator on manage and refreshes admitted admin set before notification; public cron is protected by rate-limited atomic SQL claim.",
       "preserves": "All original ACCESS-ADMIN-HOMESCREEN-WEB-PUSH-20261110 Locked functionality and privacy, RLS, role checks, consent/opt-out, and single-use release gates.",
-      "source_status": "TESTED_PR_HEAD_NOT_DEPLOYED",
-      "device_status": "NOT_PERFORMED"
+      "source_status": "PUBLISHED_EXACT_CI_ALL_FIVE_SUCCESS",
+      "device_status": "NOT_PERFORMED",
+      "release_id": "DIC-20261112-READY48PUSH-31",
+      "release_commit": "d0bc07df641af6411435daac74ee3cb16d1bdb61",
+      "netlify_deploy_id": "6af51c834f09e4e2c0f203ea"
     }
   }
 }

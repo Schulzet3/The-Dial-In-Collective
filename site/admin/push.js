@@ -71,3 +71,11 @@ export async function disableAdminPush(sdk){
  return serverRemoved?'Push alerts disabled on this device.':
   'Device push alerts disabled. Server cleanup will occur after the expired endpoint is detected.';
 }
+
+// Device state is authoritative; do not persist a misleading local preference.
+export async function getAdminPushStatus(){
+ if(!globalThis.navigator?.serviceWorker||!globalThis.PushManager||!globalThis.Notification)return 'disabled';
+ const registration=await globalThis.navigator.serviceWorker.getRegistration('/');
+ const subscription=await registration?.pushManager?.getSubscription();
+ return subscription&&globalThis.Notification.permission==='granted'?'enabled':'disabled';
+}

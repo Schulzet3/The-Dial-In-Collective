@@ -1156,7 +1156,7 @@
     "next_object": "Full live migration SQL #1/54 direct semantic and exact-source identity review; hosted Auth/API with #96; compiled native and console-only UNVERIFIED",
     "other_objects": "99/99 application SQL function definitions, 46/46 application table catalog definitions, 9/9 accessible deployed Edge file variants complete; platform/vendor SQL, Auth/Storage/cron/Realtime, migration drift, external dependency calls, performance and limits still incomplete; platform table definitions auth27/storage8/realtime3 direct review complete; platform functions, other tables, database migration SQL bodies still unverified; additional provider catalog review supabase_migrations(1 table), vault(1 table+1 view), extensions(2 views), without secret records",
     "platform_objects": "DIRECT_PROVIDER_CATALOG_TABLES_AUTH27_STORAGE8_REALTIME3_SUPABASE_MIGRATIONS1_VAULT1=40_TABLES; DIRECT_VIEWS_VAULT1_EXTENSIONS2=3; DIRECT_PROVIDER_SQL_FUNCTION_BODIES_42_OF_42_AUTH4_GRAPHQL1_STORAGE19_REALTIME18",
-    "edge_function_sources_reviewed": 9,
+    "edge_function_sources_reviewed": 11,
     "table_definition_components_reviewed": 46,
     "total_application_tables": 46,
     "information_schema": {
@@ -1166,7 +1166,7 @@
       "domains": "5/5 DIRECT DECLARATION",
       "receipt": "docs/audits/issue509-information-schema-full-direct-review-2026-11-10-run154.json"
     },
-    "stored_migrations_sql": "59/59 COMPLETE FULL SOURCE SEMANTIC REVIEW; watch future new versions"
+    "stored_migrations_sql": "66/66 COMPLETE CURRENT STORED SQL; new 65-66 in Run182; watch migration 67"
   },
   "reviews": [
     {
@@ -3958,6 +3958,78 @@
       "receipt_path": "docs/audits/issue509-run180-nine-storage-prior-source-hash-reconciliation-2026-11-11.json",
       "source_hashes_verified_unchanged": 48,
       "source_index_omitted_existing_receipts": 9,
+      "provider_writes": 0,
+      "baseline_complete": false
+    },
+    {
+      "date_utc": "2026-11-12",
+      "event": "RUN182_FULL_NEW_PUSH_MIGRATIONS_EDGE",
+      "development_sha": "654723176d289a458f843493ccdeb4fff5cfa7cb",
+      "receipt_path": "docs/audits/issue509-new-live-push-migrations-edge-full-source-2026-11-12-run182.json",
+      "migrations_reviewed": 2,
+      "edge_files_reviewed": 2,
+      "production_writes": 0,
+      "baseline_complete": false
+    },
+    {
+      "date_utc": "2026-11-12",
+      "event": "RUN182_EXACT_SOURCE_GOVERNANCE_CI_SUCCESS",
+      "source_sha": "5a9bc933774e8449f250da7c2d06c178f7a8796e",
+      "run_id": 43137423394,
+      "receipt_path": "docs/audits/issue509-run182-exact-source-governance-closure-2026-11-12.json",
+      "provider_writes": 0,
+      "baseline_complete": false
+    },
+    {
+      "date_utc": "2026-11-12",
+      "event": "RUN183_POSTPUBLICATION_PUSH_INDEX_RUNTIME",
+      "development_parent_sha": "62c003127fe5421f245003b7f569194594182612",
+      "publication_sha": "d0bc07df641af6411435daac74ee3cb16d1bdb61",
+      "receipt_path": "docs/audits/issue509-postpublication-push-index-runtime-2026-11-12-run183.json",
+      "full_index_ddl_reviewed": 8,
+      "provider_writes": 0,
+      "baseline_complete": false
+    },
+    {
+      "date_utc": "2026-11-12",
+      "event": "RUN185_FK_ADVISOR_CURRENT_SOURCE_AND_TEMP_PRESSURE",
+      "development_parent_sha": "ca312b7143766471dd1a0be2abe866a262465169",
+      "receipt_path": "docs/audits/issue509-current-fk-temp-perf-2026-11-12-run185.json",
+      "reviewed_fk": 13,
+      "provider_writes": 0,
+      "baseline_complete": false
+    },
+    {
+      "date_utc": "2026-11-12",
+      "event": "RUN185_EXACT_SOURCE_GOVERNANCE_CLOSURE",
+      "audit_sha": "ae27e55347ed38eea232b2fced466da86d2188d6",
+      "workflow_run_id": 43157205158,
+      "receipt_path": "docs/audits/issue509-run185-exact-source-governance-closure-2026-11-12.json",
+      "provider_writes": 0,
+      "baseline_complete": false
+    },
+    {
+      "date_utc": "2026-11-12",
+      "event": "RUN187_LIVE_BROKER_SQL_AND_TLS_DIRECT_REAUDIT",
+      "development_parent_sha": "3f2b96f6d9689de4c145f2677b6ce27f91f52128",
+      "receipt_path": "docs/audits/issue509-broker-sql-tls-direct-reaudit-2026-11-12-run187.json",
+      "provider_writes": 0,
+      "baseline_complete": false
+    },
+    {
+      "date_utc": "2026-11-12",
+      "event": "RUN187_EXACT_SOURCE_GOVERNANCE_SUCCESS",
+      "audit_sha": "b25e76a6550185011ac8b296925bb7cfd3bf324e",
+      "workflow_run_id": 43171016600,
+      "receipt_path": "docs/audits/issue509-run187-exact-source-governance-closure-2026-11-12.json",
+      "provider_writes": 0,
+      "baseline_complete": false
+    },
+    {
+      "date_utc": "2026-11-12",
+      "event": "RUN188_REPLICATION_WAL_IO_AND_KEY_METADATA_DIRECT_REVIEW",
+      "development_parent_sha": "6335129b721c4c2149755a72637db9fe83d3c693",
+      "receipt_path": "docs/audits/issue509-replication-wal-config-2026-11-12-run188.json",
       "provider_writes": 0,
       "baseline_complete": false
     }
@@ -18034,5 +18106,388 @@
     "provider_writes": 0,
     "baseline_complete": false,
     "closure_own_ci": "UNVERIFIED_PENDING_INDEPENDENT_CHECK"
+  },
+  "provider_new_push_migrations_edge_run182": {
+    "receipt_path": "docs/audits/issue509-new-live-push-migrations-edge-full-source-2026-11-12-run182.json",
+    "development_sha": "654723176d289a458f843493ccdeb4fff5cfa7cb",
+    "migration_ordinal_reviewed": "65-66/66",
+    "edge_file_variants_reviewed": "2 new, 11 cumulative",
+    "new_sql_functions": 4,
+    "new_tables": 2,
+    "source_exact_matches": 4,
+    "confirmed_new_defects": 0,
+    "production_writes": 0,
+    "baseline_complete": false,
+    "next": "First new stored migration #67, else next changed/new provider definition or newly accessible hosted API/Auth control."
+  },
+  "provider_run182_ci_closure": {
+    "receipt_path": "docs/audits/issue509-run182-exact-source-governance-closure-2026-11-12.json",
+    "source_sha": "5a9bc933774e8449f250da7c2d06c178f7a8796e",
+    "workflow_run_id": 43137423394,
+    "head_sha": "5a9bc933774e8449f250da7c2d06c178f7a8796e",
+    "conclusion": "success",
+    "job_steps": "10/10",
+    "docs_only": true,
+    "provider_writes": 0,
+    "baseline_complete": false,
+    "closure_own_ci": "NOT_VERIFIED_YET"
+  },
+  "provider_postpublication_push_index_runtime_run183": {
+    "receipt_path": "docs/audits/issue509-postpublication-push-index-runtime-2026-11-12-run183.json",
+    "source_parent_sha": "62c003127fe5421f245003b7f569194594182612",
+    "publication_sha": "d0bc07df641af6411435daac74ee3cb16d1bdb61",
+    "live_migrations": 66,
+    "active_edges": 4,
+    "full_index_ddl_reviewed": 8,
+    "index_removals_authorized": 0,
+    "push_subscriptions": 1,
+    "poll_recent": true,
+    "provider_writes": 0,
+    "baseline_complete": false,
+    "next": "migration #67 or new/changed/unreviewed provider surface"
+  },
+  "provider_post_opt_in_push_security_run184": {
+    "receipt_path": "docs/audits/issue509-post-opt-in-admin-push-runtime-security-2026-11-12-run184.json",
+    "review_at_utc": "2026-11-12T03:50:50.051Z",
+    "development_parent_sha": "ccbc5b6b20df8fcd13685eaacdfa8d4daca701a2",
+    "functions_reviewed_full_current_source": 4,
+    "function_source_chars": 2779,
+    "constraints_reviewed": 7,
+    "indexes_reviewed": 3,
+    "live_migrations": 66,
+    "edge_deployments": 4,
+    "active_subscriptions": 1,
+    "inactive_admin_subscriptions": 0,
+    "expired_subscriptions": 0,
+    "ever_sent_subscriptions": 0,
+    "new_verified_defects": 0,
+    "code_fixes": 0,
+    "provider_writes": 0,
+    "baseline_complete": false,
+    "next": "Migration #67 if new else earliest changed/unreviewed provider definition or newly accessible hosted API/Settings"
+  },
+  "provider_run184_exact_governance_ci_closure": {
+    "source_commit": "34dee9e187c9aacc1f4363fa90fbafa115f48a47",
+    "workflow_run_id": 43150916973,
+    "workflow_head_sha": "34dee9e187c9aacc1f4363fa90fbafa115f48a47",
+    "conclusion": "COMPLETED_SUCCESS",
+    "job_id": 130959578699,
+    "job_steps_passed": 10,
+    "receipt_path": "docs/audits/issue509-run184-exact-source-governance-closure-2026-11-12.json",
+    "provider_writes": 0,
+    "source_code_fixes": 0,
+    "baseline_complete": false,
+    "closure_commit_own_ci": "CHECK_SEPARATELY"
+  },
+  "provider_fk_temp_runtime_run185": {
+    "status": "DIRECT_CURRENT_ALL_13_FK_ADVISOR_SQL_REVIEW_WITH_NUMERIC_ROLE_TELEMETRY",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_parent_sha": "ca312b7143766471dd1a0be2abe866a262465169",
+    "receipt_path": "docs/audits/issue509-current-fk-temp-perf-2026-11-12-run185.json",
+    "reviewed_fk_constraints": 13,
+    "validated_fk": 13,
+    "indexed_leading_key": 0,
+    "heap_bytes_max": 8192,
+    "pgss_postgres_temp_written_blocks": 180041,
+    "db_temp_bytes": 149777825128,
+    "db_temp_files": 52692,
+    "lock_waiters": 0,
+    "deadlocks": 0,
+    "active_edges": 4,
+    "stored_migrations": 66,
+    "source_fixes": 0,
+    "new_confirmed_defects": 0,
+    "production_writes": 0,
+    "baseline_complete": false,
+    "next": "Migration #67 if present; else earliest changed or unreviewed provider definition; recheck advisory changes and bounded role-specific temp/slow workload without query text"
+  },
+  "provider_run185_exact_ci_closure": {
+    "audit_sha": "ae27e55347ed38eea232b2fced466da86d2188d6",
+    "ci_run_id": 43157205158,
+    "ci_head_sha": "ae27e55347ed38eea232b2fced466da86d2188d6",
+    "ci_conclusion": "COMPLETED_SUCCESS",
+    "job_id": 130979793997,
+    "steps_success": 11,
+    "receipt_path": "docs/audits/issue509-run185-exact-source-governance-closure-2026-11-12.json",
+    "provider_writes": 0,
+    "baseline_complete": false,
+    "closure_own_ci": "RECHECK_ON_NEXT_RUN"
+  },
+  "provider_current_550_definition_temp_reconciliation_run186": {
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_parent_sha": "54e192da4ebab37e7a4e8dc2405922744ea98888",
+    "observed_utc": "2026-11-12T05:50:43.054Z",
+    "receipt_path": "docs/audits/issue509-current-550-definition-parity-temp-2026-11-12-run186.json",
+    "current_fingerprint_total": 550,
+    "previous_536_identical": 536,
+    "known_14_push_direct_source_equal": 14,
+    "unexplained_changes": 0,
+    "missing": 0,
+    "migrations": 66,
+    "edge": 4,
+    "pgss_temp_blocks": 182424,
+    "db_temp_bytes": "150226935742",
+    "advisor_counts": {
+      "security": [
+        [
+          "rls_enabled_no_policy",
+          10
+        ],
+        [
+          "authenticated_security_definer_function_executable",
+          10
+        ],
+        [
+          "auth_leaked_password_protection",
+          1
+        ]
+      ],
+      "performance": [
+        [
+          "unindexed_foreign_keys",
+          13
+        ],
+        [
+          "unused_index",
+          8
+        ]
+      ],
+      "health": []
+    },
+    "source_fixes": 0,
+    "new_verified_defects": 0,
+    "provider_writes": 0,
+    "baseline_complete": false,
+    "next": "Migration #67 or first new/changed/unreviewed provider definition; hosted settings unverified"
+  },
+  "provider_run186_exact_ci_closure": {
+    "source_sha": "dea0d462a10a5773de1e0ab36a66ebd6175206ac",
+    "workflow_run_id": 43164117674,
+    "head_sha": "dea0d462a10a5773de1e0ab36a66ebd6175206ac",
+    "conclusion": "COMPLETED_SUCCESS",
+    "approval_job_id": 131001870205,
+    "successful_steps": 11,
+    "receipt_path": "docs/audits/issue509-run186-exact-source-governance-closure-2026-11-12.json",
+    "provider_writes": 0,
+    "baseline_complete": false,
+    "closure_own_ci": "CHECK_NEXT"
+  },
+  "provider_broker_sql_tls_reaudit_run187": {
+    "receipt_path": "docs/audits/issue509-broker-sql-tls-direct-reaudit-2026-11-12-run187.json",
+    "parent_sha": "3f2b96f6d9689de4c145f2677b6ce27f91f52128",
+    "edge_files": 2,
+    "edge_characters": 9958,
+    "sql_functions": 4,
+    "sql_characters": 2779,
+    "tls_groups": 6,
+    "defects": 0,
+    "provider_writes": 0,
+    "baseline_complete": false
+  },
+  "provider_run187_exact_ci_closure": {
+    "audit_sha": "b25e76a6550185011ac8b296925bb7cfd3bf324e",
+    "run_id": 43171016600,
+    "job_id": 131024055086,
+    "status": "COMPLETED_SUCCESS",
+    "passed_steps": 11,
+    "receipt_path": "docs/audits/issue509-run187-exact-source-governance-closure-2026-11-12.json",
+    "provider_writes": 0,
+    "baseline_complete": false
+  },
+  "provider_replication_wal_key_metadata_run188": {
+    "receipt_path": "docs/audits/issue509-replication-wal-config-2026-11-12-run188.json",
+    "parent_sha": "6335129b721c4c2149755a72637db9fe83d3c693",
+    "observed_utc": "2026-11-12T07:56:04.082602Z",
+    "full_pub_tuples_direct_reviewed": 1,
+    "publication_membership": 0,
+    "replication_slots": 0,
+    "wal_io_rows": 35,
+    "publishable_key_metadata_count": 2,
+    "stored_migrations": 66,
+    "edges": 4,
+    "new_defects": 0,
+    "provider_writes": 0,
+    "baseline_complete": false,
+    "next": "Migration #67 or first new/changed/unreviewed provider definition; hosted settings/disk/device UNVERIFIED"
+  },
+  "provider_type_sequence_acl_run189": {
+    "receipt": "docs/audits/issue509-type-sequence-acl-2026-11-12-run189.json",
+    "parent_sha": "8602400858b7e286df55aeeae22b3c80c5b473dc",
+    "source_objects_directly_reviewed": 20,
+    "custom_types": 12,
+    "identity_sequences": 8,
+    "sequence_privilege_checks": 24,
+    "table_role_checks": 21,
+    "default_acl": 15,
+    "new_defects": 0,
+    "provider_writes": 0,
+    "baseline_complete": false,
+    "next": "Migration #67 if introduced; otherwise the first changed/new/unreviewed provider definition, including composite/base/array types outside this enum/domain/range slice."
+  },
+  "provider_runs188_189_governance_closure": {
+    "receipt": "docs/audits/issue509-runs188-189-exact-head-governance-closure-2026-11-12.json",
+    "source_audits": [
+      "92f5f5ecc6f024f76ab4df6a4b9e22ad6e4425f1",
+      "ec3126d2cae15e56e7578649fa53e490b715f3d6"
+    ],
+    "completed_success_runs": [
+      43179098735,
+      43186718655
+    ],
+    "successful_approval_job_steps": [
+      11,
+      11
+    ],
+    "provider_writes": 0,
+    "baseline_complete": false,
+    "closure_own_ci": "CHECK_NEXT"
+  },
+  "provider_array_composite_types_run190": {
+    "status": "CURRENT_ARRAY_106_DIRECT_DECLARATION_REVIEWS_AND_4_STANDALONE_TYPE_DIRECT_REVIEWS",
+    "project_ref": "azviqqejypsefzilgonr",
+    "array_receipt": "docs/audits/issue509-array-composite-type-semantics-2026-11-12-run190.json",
+    "standalone_receipt": "docs/audits/issue509-standalone-type-dependency-2026-11-12-run190.json",
+    "array_type_count": 106,
+    "standalone_realtime_composite": 3,
+    "extension_base": 1,
+    "array_backref_integrity": "106_OF_106_OK",
+    "array_auto_dependencies": "106_OF_106_OK",
+    "known_realtime_normal_array_dependencies": 5,
+    "known_realtime_routine_signature_refs": 3,
+    "new_defects": 0,
+    "justified_removals": 0,
+    "production_writes": 0,
+    "app_source_fixes": 0,
+    "baseline_complete": false,
+    "next": "migration #67 if present, else auth.audit_log_entries complete table rowtype signature 1/27"
+  },
+  "provider_auth_rowtypes_run191": {
+    "receipt": "docs/audits/issue509-auth-rowtypes-full-definitions-2026-11-12-run191.json",
+    "parent_sha": "9eb4f482957d3d2037d896795ef1976101796f11",
+    "project_ref": "azviqqejypsefzilgonr",
+    "observed_utc": "2026-11-12T10:55:35.977Z",
+    "reviewed_rowtypes": 27,
+    "reviewed_attributes": 271,
+    "reviewed_related_constraints": 110,
+    "per_object_md5": 27,
+    "reciprocal_array_links": 27,
+    "internal_dependencies": 27,
+    "client_auth_table_direct_select": 0,
+    "dropped_column_attnum_gaps": [
+      {
+        "name": "oauth_clients",
+        "active_columns": 13,
+        "highest_attnum": 14,
+        "verdict": "DROPPED_COLUMN_ORDINAL_GAP_EXPECTED"
+      },
+      {
+        "name": "saml_relay_states",
+        "active_columns": 8,
+        "highest_attnum": 9,
+        "verdict": "DROPPED_COLUMN_ORDINAL_GAP_EXPECTED"
+      }
+    ],
+    "new_managed_check_issues": [
+      {
+        "relation": "auth.saml_providers",
+        "constraint": "metadata_url not empty",
+        "expression": "CHECK (metadata_url = NULL::text OR char_length(metadata_url) > 0)",
+        "verdict": "INEFFECTIVE_EMPTY_STRING_EXCLUSION",
+        "fix_authority": "SUPABASE_MANAGED_AUTH_NO_APP_SOURCE_FIX"
+      },
+      {
+        "relation": "auth.sso_providers",
+        "constraint": "resource_id not empty",
+        "expression": "CHECK (resource_id = NULL::text OR char_length(resource_id) > 0)",
+        "verdict": "INEFFECTIVE_EMPTY_STRING_EXCLUSION",
+        "fix_authority": "SUPABASE_MANAGED_AUTH_NO_APP_SOURCE_FIX"
+      }
+    ],
+    "issues_status": "BLOCKED_PROVIDER_MANAGED_NO_APP_EXPOSURE_PROVEN",
+    "app_source_fixes": 0,
+    "provider_writes": 0,
+    "baseline_complete": false,
+    "next": "extensions.pg_stat_statements type 28/90, extensions.pg_stat_statements_info 29/90, private.admin_access_events 30/90, or migration #67 if introduced"
+  },
+  "provider_relation_rowtypes_run192": {
+    "receipt_path": "docs/audits/issue509-relation-rowtypes-complete-remaining-2026-11-12-run192.json",
+    "source_parent_sha": "054614ed550b38d1d495cc6ec50cb165405916d2",
+    "utc": "2026-11-12 11:52:46.776681",
+    "first_ordinal": 28,
+    "last_ordinal": 90,
+    "reviewed": 63,
+    "full_attributes": 548,
+    "full_constraints": 297,
+    "full_policies": 39,
+    "complete_view_sources": 3,
+    "cumulative_nonpg_rowtypes": 90,
+    "baseline_complete": false,
+    "new_proven_defects": 0,
+    "production_writes": 0,
+    "next": "information_schema._pg_foreign_data_wrappers 1/69 or migration 67"
+  },
+  "provider_information_schema_rowtypes_run193": {
+    "receipt": "docs/audits/issue509-information-schema-rowtypes-2026-11-12-run193.json",
+    "parent_sha": "841eb7b619c08bf460b5da77cbf605a5a5f95207",
+    "utc": "2026-11-12T12:52:29.551Z",
+    "reviewed": 30,
+    "attributes": 277,
+    "complete_view_characters": 42510,
+    "whitespace_words": 2851,
+    "information_schema_total": 69,
+    "information_schema_remaining": 39,
+    "pg_catalog_total": 142,
+    "new_confirmed_defects": 0,
+    "provider_writes": 0,
+    "baseline_complete": false,
+    "next": "information_schema.foreign_servers ordinal 31/69 or newly applied migration #67"
+  },
+  "provider_information_schema_rowtypes_run193_completion": {
+    "receipt": "docs/audits/issue509-information-schema-rowtypes-2026-11-12-run193-completion.json",
+    "parent_sha": "c979f396704ba703370152346f89c3230bc5b5a2",
+    "utc": "2026-11-12T12:54:43.789Z",
+    "first_receipt": "https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/docs/audits/issue509-information-schema-rowtypes-2026-11-12-run193.json",
+    "first_block": 30,
+    "remaining_block": 39,
+    "total_direct_reviewed": 69,
+    "attributes_total": 696,
+    "view_source_characters_total": 102636,
+    "static_sql_metadata_tables": 4,
+    "unverified_pg_catalog_rowtypes": 142,
+    "new_defects": 0,
+    "source_runtime_fixes": 0,
+    "provider_writes": 0,
+    "baseline_complete": false,
+    "next": "pg_catalog rowtype #1 (catalog alphabetical order) or new migration #67"
+  },
+  "provider_pg_catalog_rowtypes_run194": {
+    "receipt": "docs/audits/issue509-pg-catalog-rowtypes-2026-11-12-run194-ord001-030.json",
+    "parent_sha": "cca189e26f4a05767383beb25d60c1a0618c5674",
+    "utc": "2026-11-12T13:58:27.401Z",
+    "ordinals": "1-30 of 142",
+    "first": "pg_catalog.pg_aggregate",
+    "last": "pg_catalog.pg_foreign_table",
+    "objects": 30,
+    "attributes": 286,
+    "constraints": 46,
+    "indexes": 53,
+    "views": 6,
+    "view_characters": 1330,
+    "reciprocal_array_count": 30,
+    "internal_dependency_count": 6,
+    "bootstrap_catalog_without_dependency": 24,
+    "restricted_from_all_three_app_roles": [
+      "pg_authid",
+      "pg_backend_memory_contexts",
+      "pg_config",
+      "pg_file_settings"
+    ],
+    "migrations": 66,
+    "active_edge_functions": 4,
+    "confirmed_new_defects": 0,
+    "safe_deletions": 0,
+    "live_writes": 0,
+    "baseline_complete": false,
+    "next": "pg_catalog.pg_group rowtype #31/142 (or newly applied migration #67/drift)"
   }
 }

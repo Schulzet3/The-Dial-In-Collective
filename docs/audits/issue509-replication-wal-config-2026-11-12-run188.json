@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 188,
+  "project_ref": "azviqqejypsefzilgonr",
+  "observed_utc": "2026-11-12T07:56:04.082602Z",
+  "source": {
+    "development_parent_sha": "6335129b721c4c2149755a72637db9fe83d3c693",
+    "main_observed_sha": "44372ffdbce3f2771c4c5349b66ee6b46cc56db4",
+    "release_observed_sha": "d0bc07df641af6411435daac74ee3cb16d1bdb61",
+    "run187_closure_governance": {
+      "sha": "5b88e334477f01d71c02bf86756095bb726df15e",
+      "workflow_run": 43171144166,
+      "observed": "completed_success"
+    }
+  },
+  "provider": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.11.0.003",
+    "stored_migrations": 66,
+    "next_migration": "67_not_applied",
+    "active_edges": 4,
+    "edge_jwt_flags": {
+      "required": 3,
+      "disabled": 1
+    }
+  },
+  "direct_object_review": {
+    "publication": {
+      "identity": "pg_publication:supabase_realtime",
+      "full_catalog_record_md5": "14d075707a99df302219c28e63fe0366",
+      "owner": "postgres",
+      "all_tables": false,
+      "insert": true,
+      "update": true,
+      "delete": true,
+      "truncate": true,
+      "via_root": false,
+      "relation_memberships": 0,
+      "schema_memberships": 0,
+      "effective_published_tables": 0,
+      "reviewed_source_range": "one complete current pg_publication tuple plus all membership catalogs 1/1",
+      "semantic_verdict": "EXISTS_AS_EMPTY_PUBLICATION; no published application tables; do not infer broken Realtime without observed subscription requirement"
+    },
+    "logical_replication": {
+      "slots": 0,
+      "subscriptions": 0,
+      "subscription_relations": 0,
+      "subscription_runtime_rows": 0,
+      "outbound_sender_sessions": 0,
+      "prepared_transactions": 0,
+      "replication_roles": [
+        {
+          "role": "dashboard_user",
+          "can_login": false
+        },
+        {
+          "role": "postgres",
+          "can_login": true
+        },
+        {
+          "role": "supabase_admin",
+          "can_login": true
+        },
+        {
+          "role": "supabase_etl_admin",
+          "can_login": true
+        },
+        {
+          "role": "supabase_replication_admin",
+          "can_login": true
+        }
+      ],
+      "semantic_verdict": "No stale slot observed pinning WAL; roles are platform-level, not a proved client privilege exposure"
+    },
+    "wal": {
+      "wal_records": 143683,
+      "wal_full_page_images": 12018,
+      "wal_bytes": "34375049",
+      "wal_buffer_full_events": 2009589,
+      "wal_writes": 2017619,
+      "wal_syncs": 5958,
+      "reset_utc": "2026-10-02T17:59:41.592046Z",
+      "semantic_verdict": "High cumulative WAL write/buffer-full counters relative to WAL volume warrant historical workload correlation, not a reproduced application bug or actionable settings tweak"
+    },
+    "archiver": {
+      "archived_count": 1284,
+      "failed_count": 0,
+      "last_archived_at": "2026-11-12T07:52:30.632455Z",
+      "reset_utc": "2026-10-02T17:59:41.592046Z",
+      "semantic_verdict": "No reported archive failures within cumulative available period; backup/restore not inferred"
+    },
+    "checkpointer": {
+      "timed": 9728,
+      "requested": 38,
+      "buffers_written": 11991,
+      "write_time_ms": 1187657,
+      "sync_time_ms": 2539,
+      "reset_utc": "2026-10-02T17:59:41.592046Z",
+      "semantic_verdict": "No proven checkpoint-related outage; long-window counters do not demonstrate present pressure"
+    },
+    "io": {
+      "rows_direct_numeric_review": 35,
+      "temp_relation_rows": 4,
+      "temp_relation_extends": 7,
+      "temp_relation_writes": 0,
+      "client_backend_io_rows": 5,
+      "db_temp_files": 53035,
+      "db_temp_bytes": "151211289967",
+      "db_stats_reset": "2026-10-02T18:01:15.201525Z",
+      "lock_waiters": 0,
+      "idle_in_transaction": 0,
+      "deadlocks": 0,
+      "semantic_verdict": "pg_stat_io temp relation writes do not account for sort/spill temporary files; earlier postgres-only pg_stat_statements fingerprints cannot prove app origin"
+    },
+    "settings": {
+      "wal_level": "logical",
+      "max_replication_slots": "5",
+      "max_wal_senders": "5",
+      "archive_mode": "on",
+      "wal_buffers_8k_pages": "492",
+      "max_wal_size_mb": "1024",
+      "min_wal_size_mb": "128",
+      "checkpoint_timeout_s": "300",
+      "checkpoint_completion_target": "0.9",
+      "ssl": "on",
+      "fsync": "on",
+      "full_page_writes": "on",
+      "work_mem_kb": "2184",
+      "temp_file_limit_kb": "-1",
+      "track_io_timing": "off",
+      "track_wal_io_timing": "off",
+      "semantic_verdict": "Read-only nonsecret settings; no justified configuration change based solely on counters"
+    },
+    "publishable_keys_metadata": {
+      "count": 2,
+      "keys": [
+        {
+          "name": "anon",
+          "type": "legacy",
+          "disabled": false
+        },
+        {
+          "name": "default",
+          "type": "publishable",
+          "disabled": false
+        }
+      ],
+      "key_values": "NOT_RECORDED",
+      "semantic_verdict": "Existing enabled public keys are expected API identifiers, not proof of unintended authorization"
+    },
+    "provider_advisors": {
+      "security": "10 no-policy / 10 authenticated SECURITY DEFINER / 1 breached-password; previously scoped and not newly certified defects",
+      "performance": "13 unindexed FK / 8 zero-scan; prior evidence forbids deletion from stats alone",
+      "health": 0
+    },
+    "cron_schema_found": false
+  },
+  "failed_readonly_queries": [
+    {
+      "object": "pg_stat_checkpointer",
+      "error": "column num_done does not exist",
+      "recovery": "Inspected information_schema columns then reran supported full PostgreSQL 17 fields successfully"
+    }
+  ],
+  "privacy": "No private Auth users, member shots/notes, push endpoints, keys, IPs, raw SQL fingerprints, secrets or sensitive log text read",
+  "access_unverified": [
+    "Hosted GoTrue/JWT/PostgREST console configuration",
+    "Native compiled Vault source",
+    "Provider disk remaining capacity",
+    "Actual off-screen Apple push delivery",
+    "External backup recovery beyond already source-bound historical evidence"
+  ],
+  "disposition": {
+    "new_confirmed_defects": 0,
+    "development_source_fixes": 0,
+    "justified_deletions": 0,
+    "provider_writes": 0,
+    "production_deployment": false,
+    "baseline_complete": false,
+    "status": "IN_PROGRESS",
+    "next_cursor": "Migration #67 if applied; else next new/changed/unreviewed provider definition. Reconcile replication publication only if current app requires Postgres Changes; correlate WAL/temp counters with bounded workload statistics without private query text."
+  },
+  "verification": {
+    "tests": "READ_ONLY_PROVIDER_CATALOG_AND_NUMERIC_MONITORING; no runtime code changes",
+    "functional_ci": "NOT_RERUN",
+    "exact_source_governance_for_this_commit": "PENDING"
+  }
+}

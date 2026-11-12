@@ -1,0 +1,301 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 190,
+  "project_ref": "azviqqejypsefzilgonr",
+  "related_receipt": "docs/audits/issue509-array-composite-type-semantics-2026-11-12-run190.json",
+  "scope": "Full standalone PostgreSQL provider-declared Realtime composite attribute signatures and extension base type; array dependency verification; separate from array record receipt and Run189 enum/sequence.",
+  "queries": {
+    "standalone_types": "SELECT n.nspname schema,t.typname name,t.typtype type_kind,t.typcategory category,COALESCE(c.relkind::text,'-') underlying_relation,pg_get_userbyid(t.typowner) owner,t.typacl::text acl,format_type(t.oid,NULL) qualified_type,format_type(t.typbasetype,NULL) base_type,t.typinput::regproc::text input_proc,t.typoutput::regproc::text output_proc,t.typreceive::regproc::text receive_proc,t.typsend::regproc::text send_proc,t.typlen,t.typbyval,t.typalign,t.typstorage,t.typnotnull,has_type_privilege('anon',t.oid,'USAGE') anon_usage,has_schema_privilege('anon',n.oid,'USAGE') anon_schema_usage,(SELECT jsonb_agg(jsonb_build_object('n',a.attname,'type',format_type(a.atttypid,a.atttypmod),'notnull',a.attnotnull,'collation',CASE WHEN a.attcollation=0 THEN NULL ELSE a.attcollation::regcollation::text END) ORDER BY a.attnum) FROM pg_attribute a WHERE a.attrelid=c.oid AND a.attnum>0 AND NOT a.attisdropped) attrs,md5(row_to_json(t)::text) catalog_row_md5 FROM pg_type t JOIN pg_namespace n ON n.oid=t.typnamespace LEFT JOIN pg_class c ON c.oid=t.typrelid WHERE (n.nspname='realtime' AND t.typtype='c' AND c.relkind='c') OR (n.nspname='extensions' AND t.typtype='b' AND t.typcategory='U') ORDER BY 1,2",
+    "array_dependencies": "WITH a AS (SELECT t.oid, n.nspname schema,t.typname name, e.typarray=t.oid AS element_backref_ok, (SELECT count(*) FROM pg_depend d WHERE d.classid='pg_type'::regclass AND d.objid=t.oid AND d.refclassid='pg_type'::regclass AND d.refobjid=e.oid AND d.deptype IN ('i','a')) AS auto_dependency_count, (SELECT count(*) FROM pg_depend d WHERE d.refclassid='pg_type'::regclass AND d.refobjid=t.oid AND d.deptype='n') AS normal_dependents,(SELECT count(*) FROM pg_proc p WHERE p.prorettype=t.oid OR t.oid=ANY(p.proargtypes) OR t.oid=ANY(p.proallargtypes)) AS referenced_in_routine_signatures FROM pg_type t JOIN pg_namespace n ON n.oid=t.typnamespace JOIN pg_type e ON e.oid=t.typelem WHERE t.typtype='b' AND t.typcategory='A' AND n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema') SELECT jsonb_build_object('count',(SELECT count(*) FROM a),'unmatched_backrefs',(SELECT count(*) FROM a WHERE NOT element_backref_ok),'missing_automatic_deps',(SELECT count(*) FROM a WHERE auto_dependency_count=0),'normal_dependents_total',(SELECT sum(normal_dependents) FROM a),'with_routine_signatures',(SELECT count(*) FROM a WHERE referenced_in_routine_signatures>0),'uses',(SELECT jsonb_agg(jsonb_build_object('schema',schema,'name',name,'normal_dependents',normal_dependents,'routine_signatures',referenced_in_routine_signatures,'auto_deps',auto_dependency_count) ORDER BY schema,name) FROM a WHERE normal_dependents>0 OR referenced_in_routine_signatures>0 OR auto_dependency_count=0 OR NOT element_backref_ok)) AS audit",
+    "usage_signatures": "WITH arr AS (SELECT t.oid,t.typname,n.nspname FROM pg_type t JOIN pg_namespace n ON n.oid=t.typnamespace WHERE n.nspname='realtime' AND t.typname IN ('_user_defined_filter','_wal_column')), sig AS (SELECT a.nspname schema,a.typname type_name,p.oid,p.proname function_name, pn.nspname function_schema,pg_get_function_identity_arguments(p.oid) arguments,pg_get_function_result(p.oid) result_type,p.prosecdef security_definer FROM arr a JOIN pg_proc p ON (p.prorettype=a.oid OR a.oid=ANY(p.proargtypes) OR a.oid=ANY(p.proallargtypes)) JOIN pg_namespace pn ON pn.oid=p.pronamespace), cols AS (SELECT a.nspname schema,a.typname type_name,cr.relname relation,ns.nspname relation_schema,at.attname col_name,cr.relrowsecurity rls FROM arr a JOIN pg_attribute at ON at.atttypid=a.oid AND at.attnum>0 AND NOT at.attisdropped JOIN pg_class cr ON cr.oid=at.attrelid JOIN pg_namespace ns ON ns.oid=cr.relnamespace) SELECT jsonb_build_object('signatures',(SELECT jsonb_agg(to_jsonb(sig) ORDER BY type_name,function_schema,function_name) FROM sig),'columns',(SELECT jsonb_agg(to_jsonb(cols) ORDER BY type_name,relation,col_name) FROM cols),'pgtrgm',(SELECT jsonb_agg(jsonb_build_object('name',e.extname,'version',e.extversion,'schema',n.nspname)) FROM pg_extension e JOIN pg_namespace n ON n.oid=e.extnamespace WHERE e.extname='pg_trgm')) AS evidence"
+  },
+  "types": [
+    {
+      "schema": "extensions",
+      "name": "gtrgm",
+      "type_kind": "b",
+      "category": "U",
+      "underlying_relation": "-",
+      "owner": "supabase_admin",
+      "acl": null,
+      "qualified_type": "gtrgm",
+      "base_type": "-",
+      "input_proc": "gtrgm_in",
+      "output_proc": "gtrgm_out",
+      "receive_proc": "-",
+      "send_proc": "-",
+      "typlen": -1,
+      "typbyval": false,
+      "typalign": "i",
+      "typstorage": "p",
+      "typnotnull": false,
+      "anon_usage": true,
+      "anon_schema_usage": true,
+      "attrs": null,
+      "catalog_row_md5": "a34957d68da169795ac6cb2cec09b202",
+      "ordinal": 1,
+      "review": "DIRECT_COMPLETE_RECORD",
+      "verdict": "KEEP_PG_TRGM_INTERNAL_TYPE"
+    },
+    {
+      "schema": "realtime",
+      "name": "user_defined_filter",
+      "type_kind": "c",
+      "category": "C",
+      "underlying_relation": "c",
+      "owner": "supabase_realtime_admin",
+      "acl": null,
+      "qualified_type": "realtime.user_defined_filter",
+      "base_type": "-",
+      "input_proc": "record_in",
+      "output_proc": "record_out",
+      "receive_proc": "record_recv",
+      "send_proc": "record_send",
+      "typlen": -1,
+      "typbyval": false,
+      "typalign": "d",
+      "typstorage": "x",
+      "typnotnull": false,
+      "anon_usage": true,
+      "anon_schema_usage": true,
+      "attrs": [
+        {
+          "n": "column_name",
+          "type": "text",
+          "notnull": false,
+          "collation": "\"default\""
+        },
+        {
+          "n": "op",
+          "type": "realtime.equality_op",
+          "notnull": false,
+          "collation": null
+        },
+        {
+          "n": "value",
+          "type": "text",
+          "notnull": false,
+          "collation": "\"default\""
+        },
+        {
+          "n": "negate",
+          "type": "boolean",
+          "notnull": false,
+          "collation": null
+        }
+      ],
+      "catalog_row_md5": "81d8d7135f776060b1f2fe81baeec69c",
+      "ordinal": 2,
+      "review": "DIRECT_COMPLETE_RECORD",
+      "verdict": "KEEP_REALTIME_FILTER_COMPOSITE"
+    },
+    {
+      "schema": "realtime",
+      "name": "wal_column",
+      "type_kind": "c",
+      "category": "C",
+      "underlying_relation": "c",
+      "owner": "supabase_realtime_admin",
+      "acl": null,
+      "qualified_type": "realtime.wal_column",
+      "base_type": "-",
+      "input_proc": "record_in",
+      "output_proc": "record_out",
+      "receive_proc": "record_recv",
+      "send_proc": "record_send",
+      "typlen": -1,
+      "typbyval": false,
+      "typalign": "d",
+      "typstorage": "x",
+      "typnotnull": false,
+      "anon_usage": true,
+      "anon_schema_usage": true,
+      "attrs": [
+        {
+          "n": "name",
+          "type": "text",
+          "notnull": false,
+          "collation": "\"default\""
+        },
+        {
+          "n": "type_name",
+          "type": "text",
+          "notnull": false,
+          "collation": "\"default\""
+        },
+        {
+          "n": "type_oid",
+          "type": "oid",
+          "notnull": false,
+          "collation": null
+        },
+        {
+          "n": "value",
+          "type": "jsonb",
+          "notnull": false,
+          "collation": null
+        },
+        {
+          "n": "is_pkey",
+          "type": "boolean",
+          "notnull": false,
+          "collation": null
+        },
+        {
+          "n": "is_selectable",
+          "type": "boolean",
+          "notnull": false,
+          "collation": null
+        }
+      ],
+      "catalog_row_md5": "a7aa7961c263eee30db8abc20b1601aa",
+      "ordinal": 3,
+      "review": "DIRECT_COMPLETE_RECORD",
+      "verdict": "KEEP_REALTIME_WAL_COLUMN_COMPOSITE"
+    },
+    {
+      "schema": "realtime",
+      "name": "wal_rls",
+      "type_kind": "c",
+      "category": "C",
+      "underlying_relation": "c",
+      "owner": "supabase_realtime_admin",
+      "acl": null,
+      "qualified_type": "realtime.wal_rls",
+      "base_type": "-",
+      "input_proc": "record_in",
+      "output_proc": "record_out",
+      "receive_proc": "record_recv",
+      "send_proc": "record_send",
+      "typlen": -1,
+      "typbyval": false,
+      "typalign": "d",
+      "typstorage": "x",
+      "typnotnull": false,
+      "anon_usage": true,
+      "anon_schema_usage": true,
+      "attrs": [
+        {
+          "n": "wal",
+          "type": "jsonb",
+          "notnull": false,
+          "collation": null
+        },
+        {
+          "n": "is_rls_enabled",
+          "type": "boolean",
+          "notnull": false,
+          "collation": null
+        },
+        {
+          "n": "subscription_ids",
+          "type": "uuid[]",
+          "notnull": false,
+          "collation": null
+        },
+        {
+          "n": "errors",
+          "type": "text[]",
+          "notnull": false,
+          "collation": "\"default\""
+        }
+      ],
+      "catalog_row_md5": "111495ca87ef835abee5699ad4f41857",
+      "ordinal": 4,
+      "review": "DIRECT_COMPLETE_RECORD",
+      "verdict": "KEEP_REALTIME_RLS_RESULT_COMPOSITE"
+    }
+  ],
+  "array_integrity": {
+    "uses": [
+      {
+        "name": "_user_defined_filter",
+        "schema": "realtime",
+        "auto_deps": 1,
+        "normal_dependents": 3,
+        "routine_signatures": 1
+      },
+      {
+        "name": "_wal_column",
+        "schema": "realtime",
+        "auto_deps": 1,
+        "normal_dependents": 2,
+        "routine_signatures": 2
+      }
+    ],
+    "count": 106,
+    "unmatched_backrefs": 0,
+    "missing_automatic_deps": 0,
+    "normal_dependents_total": 5,
+    "with_routine_signatures": 2
+  },
+  "where_used": {
+    "pgtrgm": [
+      {
+        "name": "pg_trgm",
+        "schema": "extensions",
+        "version": "1.6"
+      }
+    ],
+    "columns": [
+      {
+        "rls": false,
+        "schema": "realtime",
+        "col_name": "filters",
+        "relation": "subscription",
+        "type_name": "_user_defined_filter",
+        "relation_schema": "realtime"
+      },
+      {
+        "rls": false,
+        "schema": "realtime",
+        "col_name": "filters",
+        "relation": "subscription_subscription_id_entity_filters_action_filter_selec",
+        "type_name": "_user_defined_filter",
+        "relation_schema": "realtime"
+      }
+    ],
+    "signatures": [
+      {
+        "oid": "17490",
+        "schema": "realtime",
+        "arguments": "columns realtime.wal_column[], filters realtime.user_defined_filter[]",
+        "type_name": "_user_defined_filter",
+        "result_type": "boolean",
+        "function_name": "is_visible_through_filters",
+        "function_schema": "realtime",
+        "security_definer": false
+      },
+      {
+        "oid": "17486",
+        "schema": "realtime",
+        "arguments": "prepared_statement_name text, entity regclass, columns realtime.wal_column[]",
+        "type_name": "_wal_column",
+        "result_type": "text",
+        "function_name": "build_prepared_statement_sql",
+        "function_schema": "realtime",
+        "security_definer": false
+      },
+      {
+        "oid": "17490",
+        "schema": "realtime",
+        "arguments": "columns realtime.wal_column[], filters realtime.user_defined_filter[]",
+        "type_name": "_wal_column",
+        "result_type": "boolean",
+        "function_name": "is_visible_through_filters",
+        "function_schema": "realtime",
+        "security_definer": false
+      }
+    ]
+  },
+  "direct_semantic_assessment": [
+    "realtime.user_defined_filter is typed filter specification: column_name text, op equality_op, value text, negate boolean; its array is stored in realtime.subscription.filters and inherited partition relation.",
+    "realtime.wal_column typed WAL row metadata: name, type_name, type_oid, JSON value, primary-key and selectability markers; its array is used in prepared statement builder and filter evaluator.",
+    "realtime.wal_rls carries WAL JSON, RLS enabled boolean, subscription UUID array and errors text array; no source-backed justification to remove.",
+    "extensions.gtrgm is the pg_trgm v1.6 index access method support base type. Input/output and plain storage differ intentionally from arrays/composites.",
+    "All 106 array type backrefs and automatic type-element dependencies intact; exactly 2 arrays have 5 normal dependents and 3 routine signatures. No direct production data used."
+  ],
+  "verdict": "NO_NEW_CONFIRMED_DEFECTS_OR_JUSTIFIED_DELETIONS; BASELINE_IN_PROGRESS",
+  "next": "auth.audit_log_entries full rowtype and ordered remaining non-PG table composite records; migration #67 if present first."
+}

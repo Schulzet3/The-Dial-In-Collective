@@ -46,6 +46,11 @@ if(typeof document.createElement==='function')document.body.append(reviewSheet);
 const uuid=()=>crypto.randomUUID();
 function exportFile(data){const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=`Dial_In_Collective_Pending_Changes_${new Date().toISOString().slice(0,10)}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);}
 const OFFLINE_DENIED_PREFIX='dic-offline-denied:';
+// Per-account boolean only. Never store mail, auth tokens or private member data.
+const APPROVAL_AWAITED_PREFIX='dic-approval-awaited:';
+function awaitingApproval(owner){try{return globalThis.localStorage?.getItem(APPROVAL_AWAITED_PREFIX+owner)==='1';}catch{return false;}}
+function rememberApprovalAwaited(owner){try{globalThis.localStorage?.setItem(APPROVAL_AWAITED_PREFIX+owner,'1');}catch{/* In-session transition still works. */}}
+function clearApprovalAwaited(owner){try{globalThis.localStorage?.removeItem(APPROVAL_AWAITED_PREFIX+owner);}catch{/* Never infer admission from client storage. */}}
 // Preserve access revocation across reload even if IndexedDB cache deletion fails.
 // Stores no private content or credentials; never clears a member's outbox.
 function previouslyDeniedOffline(owner){
@@ -64,6 +69,7 @@ function clearOfflineDenial(owner){
 class CloudApp {
  constructor(client,store=new IndexedStore()){
   Object.assign(this,{client,store,identity:null,status:null,raw:null,state:M.blankState(),pending:[],expanded:new Set(),shotExpanded:new Set(),search:'',sort:'recent',searchOpen:false,tempCoffee:null,justSavedId:null,notice:'',authView:'signin',confirmationEmail:'',recovery:false,syncState:'connecting',busy:false,flushing:null,epoch:0,localOfflineOwner:null});
+  this.accountApprovalNotice=false;
   this.coffeeUrlPreviewInput=null;this.coffeeUrlSourceReview=null;this.coffeeUrlBasePreview=null;this.coffeeUrlActivePreview=null;this.coffeeUrlBusy=false;this.pendingCoffeeReview=null;
   this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityLoading=false;this.communityReloadRequested=false;this.communityError='';this.communityStyle='all';this.communityCoffee='all';this.communitySearch='';this.communityRevision=0;
   this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
@@ -92,7 +98,7 @@ class CloudApp {
   this.expanded.clear();this.shotExpanded.clear();this.search='';this.searchOpen=false;
   this.dismissedDoseAdvisories.clear();this.recommendationEvidence={};this.recommendationEvidenceRequests.clear();this.recommendationEvidenceAttemptedAt.clear();
   this.lastHeavySyncAt=0;this.adminAttentionCount=null;this.adminAttentionTask=null;this.adminAttentionOwner=null;this.adminAttentionEpoch=null;
-  this.tempCoffee=null;this.justSavedId=null;this.notice='';this.recovery=false;this.syncState='connecting';
+  this.tempCoffee=null;this.justSavedId=null;this.notice='';this.accountApprovalNotice=false;this.recovery=false;this.syncState='connecting';
   this.draft=null;this.editing=null;this.logCoffee=null;this.addCoffeeDraft=null;
   this.addCoffeeMatches=null;this.pendingMergeSubmissionId=null;
   this.coffeeUrlSourceReview=null;this.pendingCoffeeReview=null;
@@ -170,7 +176,9 @@ class CloudApp {
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&this.identity)this.connect().catch(err=>this.error(err));});
   // Preserve the former 30-second admission/revocation check while reducing
   // unnecessary 17-dataset reads and Community review requests during idle use.
-  this.poll=setInterval(()=>{if(document.visibilityState==='visible'&&this.identity&&this.status?.admitted&&!this.busy)this.pollOnce().catch(()=>{});},30000);
+  // Pending accounts recheck admission only; no private workspace reads.
+  this.poll=setInterval(()=>{if(document.visibilityState==='visible'&&this.identity&&!this.busy&&
+   (this.status?.admitted||this.status?.approvalState==='pending'))this.pollOnce().catch(()=>{});},30000);
  }
  async pollOnce(){
   const user=this.identity,epoch=this.epoch;
@@ -232,6 +240,8 @@ class CloudApp {
  }
  async denyAccess(user,epoch,status=this.status){
   if(epoch!==this.epoch||user.id!==this.identity?.id)return;
+  if(status?.approvalState==='pending')rememberApprovalAwaited(user.id);
+  else clearApprovalAwaited(user.id);
   this.deniedOfflineOwners.add(user.id);
   rememberOfflineDenial(user.id);
   this.resetAccount();
@@ -251,6 +261,7 @@ class CloudApp {
  async connect(){
   const user=this.identity,epoch=this.epoch;if(!user)return;
   if(globalThis.navigator?.onLine===false)return this.restoreOfflineCache();
+  const wasPending=this.status?.approvalState==='pending'&&this.status?.admitted===false;
   try{const status=await this.client.status();if(epoch!==this.epoch||user.id!==this.identity?.id)return;this.status=status;this.localOfflineOwner=null;
    if(!status.admitted){
     await this.denyAccess(user,epoch,status);return;
@@ -259,6 +270,11 @@ class CloudApp {
    clearOfflineDenial(user.id);
    const cache=await this.inSession(()=>this.store.readCache(user.id));if(cache)this.raw=cache.snapshot;
    await this.sync();
+   if((wasPending||awaitingApproval(user.id))&&epoch===this.epoch&&user.id===this.identity?.id){
+    clearApprovalAwaited(user.id);
+    this.accountApprovalNotice=true;
+    this.render();
+   }
    if(this.status?.admin===true)this.refreshAdminAttention().catch(()=>{});
    else{this.adminAttentionCount=null;this.updateAdminAttentionBadges();}
   }catch(err){if(epoch===this.epoch&&user.id===this.identity?.id){if(isAccessDenied(err)){await this.denyAccess(user,epoch);return;}this.notice=err.message;this.syncState='offline';this.render();}}
@@ -377,7 +393,9 @@ class CloudApp {
   const restoreFocus=['search-toggle','expand','shot-expand','shot-toggle-all'].includes(focusAction);
   const openDetails=[...root.querySelectorAll('details[data-retain][open]')].map(x=>x.dataset.retain);
   this.theme();const connected=this.identity&&(this.status?.admitted||(this.localOfflineOwner===this.identity.id&&globalThis.navigator?.onLine===false))&&!this.recovery;
-  root.innerHTML=`<header class=app-header><div class=header-inner><div class=brand>${icon('coffee',27)}<div><h1>The Dial In Collective</h1><div class=tagline>Better espresso through shared experience.</div></div></div>${connected?button(icon('settings',20)+this.adminAttentionBadge(),'settings','aria-label="Settings'+(this.adminAttentionBadge()?', '+this.adminAttentionCount+' administrator items require attention':'')+'"','icon-button settings-attention-trigger'):''}</div></header><main class=shell>${connected?this.coffees():this.auth()}${this.notice?`<p class="helper space-top" role=status>${e(this.notice)}</p>`:''}<footer class=footer>Private Beta <span aria-hidden=true>·</span> Better espresso, one shot at a time.</footer></main>`;
+  const approvalBanner=connected&&this.accountApprovalNotice?
+   `<section class="approval-confirmed" role="status" aria-live="polite" aria-label="Account approval confirmed"><div><h2>Account Approved</h2><p>Your account has been confirmed. Welcome to The Dial In Collective!</p></div>${button('Dismiss','dismiss-approval-confirmation','','ghost compact')}</section>`:'';
+  root.innerHTML=`<header class=app-header><div class=header-inner><div class=brand>${icon('coffee',27)}<div><h1>The Dial In Collective</h1><div class=tagline>Better espresso through shared experience.</div></div></div>${connected?button(icon('settings',20)+this.adminAttentionBadge(),'settings','aria-label="Settings'+(this.adminAttentionBadge()?', '+this.adminAttentionCount+' administrator items require attention':'')+'"','icon-button settings-attention-trigger'):''}</div></header><main class=shell>${approvalBanner}${connected?this.coffees():this.auth()}${this.notice?`<p class="helper space-top" role=status>${e(this.notice)}</p>`:''}<footer class=footer>Private Beta <span aria-hidden=true>·</span> Better espresso, one shot at a time.</footer></main>`;
   const welcomeVideo=root.querySelector('[data-onboarding-player]');
   welcomeVideo?.addEventListener('error',()=>{const message=root.querySelector('[data-onboarding-error]');if(message)message.hidden=false;},{once:true});
   for(const details of root.querySelectorAll('details[data-retain]'))if(openDetails.includes(details.dataset.retain))details.open=true;
@@ -411,6 +429,7 @@ class CloudApp {
       'Your email is verified. The administrator will review your account before access starts.';
     return `<section class="welcome cloud-auth" aria-labelledby="approval-wait-title"><h2 id="approval-wait-title">${e(title)}</h2>
      <p class="helper">${e(this.identity.email)}</p><p class="helper" role="status">${e(reason)}</p>
+     <p class="helper">Approval status refreshes automatically while this app is open.</p>
      ${button('Check Approval Status','check-approval','','primary full space-top')}
      ${button('Sign Out','signout','','text-button')}</section>`;
    }
@@ -1003,6 +1022,7 @@ class CloudApp {
     this.render();return;
    }
    if(a==='check-approval'){await this.connect();return;}
+   if(a==='dismiss-approval-confirmation'){this.accountApprovalNotice=false;this.render();return;}
    if(a==='sync'){const events=await this.inSession(()=>this.queue.pending());this.show('Cloud Sync Details',`<h3>${e(({synced:'Synced',offline:'Offline',syncing:'Syncing',connecting:'Connecting',conflict:'Needs Attention',pending:'Pending'})[this.syncState]||'Needs Attention')}</h3><p class=helper>${events.length} changes waiting. Conflicts are retained rather than overwritten.</p>${events.map(x=>`<div class=preview-card><strong>${e(x.action)}</strong><p class=helper>${e(x.status)} ${e(x.error?.message||'')}</p></div>`).join('')}${button('Try Syncing Now','sync-now','','primary full')}${events.length?button('Save Pending Changes','export','','ghost full'):''}${events.length?'<p class="helper space-top">This download preserves pending changes on this device; it is not a complete account backup.</p>':''}`);return;}
    if(a==='sync-now'){await this.inSession(()=>this.sync());this.notice='Sync checked. Pending conflicts require review; nothing was discarded.';this.render();return;}
    if(a==='export'){exportFile(await this.inSession(()=>this.store.export(this.identity.id)));return;}

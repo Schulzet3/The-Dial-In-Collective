@@ -1,0 +1,265 @@
+{
+  "issue": 509,
+  "run": 183,
+  "date_utc": "2026-11-12",
+  "project": "azviqqejypsefzilgonr",
+  "live_metadata": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.11",
+    "stored_migrations": 66,
+    "edge_deployments": 4,
+    "edge_jwt_config": {
+      "dic-verify-coffee": true,
+      "dic-preview-coffee": true,
+      "dic-delete-member-account": true,
+      "dic-admin-push-broker": false
+    }
+  },
+  "github_observed": {
+    "development": "62c003127fe5421f245003b7f569194594182612",
+    "main": "24f6509257e7d1b5e755607600243465ab535169",
+    "release": "d0bc07df641af6411435daac74ee3cb16d1bdb61"
+  },
+  "source_bound_current_publication": {
+    "source_receipt": "docs/audits/issue509-new-live-push-migrations-edge-full-source-2026-11-12-run182.json",
+    "source_version": "Run182 two direct complete migration SQL and 2 Edge files, no re-credit",
+    "comparison": "BOTH CURRENT development AND release GitHub file contents exactly equal previously reviewed complete live source; current deployed 2 Edge files byte-equal, unchanged v1; 2 stored SQL MD5 equal",
+    "source_files": [
+      {
+        "path": "supabase/migrations/20261110235000_dic_admin_web_push.sql",
+        "blob_sha": "bd1c28897ef71662faa4327dd79e005292a96578",
+        "stored_version": "20261112010044",
+        "stored_md5": "243558bfb8225f743a92393c07c24a87",
+        "chars": 2539
+      },
+      {
+        "path": "supabase/migrations/20261112013000_dic_admin_push_vault_delivery.sql",
+        "blob_sha": "c37522ab84bc5cf47a1afb935bfcf4eeb95741f0",
+        "stored_version": "20261112012155",
+        "stored_md5": "a1167d3189231f919dee210ce0025e15",
+        "chars": 3028
+      },
+      {
+        "path": "supabase/functions/dic-admin-push-broker/index.ts",
+        "blob_sha": "7c7a851f510dd5c21409cd8b9f6560b059dd64fd",
+        "deployed_equal": true
+      },
+      {
+        "path": "supabase/functions/dic-admin-push-broker/core.mjs",
+        "blob_sha": "e1a467cc0bb9d94ea824953eec88aaf8d6c428dd",
+        "deployed_equal": true
+      }
+    ]
+  },
+  "review": {
+    "name": "Eight current unused-index advisor source declarations",
+    "total": 8,
+    "complete_ddl_direct_read": 8,
+    "objects": [
+      {
+        "name": "coffees_group_idx",
+        "table": "public.coffees",
+        "complete_live_definition": "CREATE INDEX coffees_group_idx ON public.coffees USING btree (group_id)",
+        "source_chars": 71,
+        "estimated_rows": -1,
+        "table_bytes": 8192,
+        "index_bytes": 16384,
+        "idx_scan": 0,
+        "idx_tup_read": 0,
+        "valid": true,
+        "ready": true,
+        "unique": false,
+        "primary": false,
+        "direct_constraint_backrefs": 0,
+        "assessment": "Retain: relational coffee grouping and potential FK helper.",
+        "safe_to_drop_proven": false
+      },
+      {
+        "name": "library_coffee_idx",
+        "table": "public.library_entries",
+        "complete_live_definition": "CREATE INDEX library_coffee_idx ON public.library_entries USING btree (coffee_id)",
+        "source_chars": 81,
+        "estimated_rows": 7,
+        "table_bytes": 8192,
+        "index_bytes": 16384,
+        "idx_scan": 0,
+        "idx_tup_read": 0,
+        "valid": true,
+        "ready": true,
+        "unique": false,
+        "primary": false,
+        "direct_constraint_backrefs": 0,
+        "assessment": "Retain: library-coffee lookup and potential referential-delete workload.",
+        "safe_to_drop_proven": false
+      },
+      {
+        "name": "personal_family_community_idx",
+        "table": "public.personal_recipe_families",
+        "complete_live_definition": "CREATE INDEX personal_family_community_idx ON public.personal_recipe_families USING btree (community_family_id)",
+        "source_chars": 111,
+        "estimated_rows": 4,
+        "table_bytes": 8192,
+        "index_bytes": 16384,
+        "idx_scan": 0,
+        "idx_tup_read": 0,
+        "valid": true,
+        "ready": true,
+        "unique": false,
+        "primary": false,
+        "direct_constraint_backrefs": 0,
+        "assessment": "Retain: Locked Community family linkage.",
+        "safe_to_drop_proven": false
+      },
+      {
+        "name": "preferences_calibration_idx",
+        "table": "public.setup_preferences",
+        "complete_live_definition": "CREATE INDEX preferences_calibration_idx ON public.setup_preferences USING btree (owner_id, setup_id, calibration_id)",
+        "source_chars": 117,
+        "estimated_rows": -1,
+        "table_bytes": 8192,
+        "index_bytes": 16384,
+        "idx_scan": 0,
+        "idx_tup_read": 0,
+        "valid": true,
+        "ready": true,
+        "unique": false,
+        "primary": false,
+        "direct_constraint_backrefs": 0,
+        "assessment": "Retain: calibrated setup/equipment history and provenance.",
+        "safe_to_drop_proven": false
+      },
+      {
+        "name": "shot_bag_idx",
+        "table": "public.shots",
+        "complete_live_definition": "CREATE INDEX shot_bag_idx ON public.shots USING btree (owner_id, library_entry_id, bag_id)",
+        "source_chars": 90,
+        "estimated_rows": 20,
+        "table_bytes": 32768,
+        "index_bytes": 16384,
+        "idx_scan": 0,
+        "idx_tup_read": 0,
+        "valid": true,
+        "ready": true,
+        "unique": false,
+        "primary": false,
+        "direct_constraint_backrefs": 0,
+        "assessment": "Retain: retirement of bag-management UI does not permit deletion of historical relationships.",
+        "safe_to_drop_proven": false
+      },
+      {
+        "name": "shot_basket_idx",
+        "table": "public.shots",
+        "complete_live_definition": "CREATE INDEX shot_basket_idx ON public.shots USING btree (owner_id, setup_id, basket_version_id)",
+        "source_chars": 96,
+        "estimated_rows": 20,
+        "table_bytes": 32768,
+        "index_bytes": 16384,
+        "idx_scan": 0,
+        "idx_tup_read": 0,
+        "valid": true,
+        "ready": true,
+        "unique": false,
+        "primary": false,
+        "direct_constraint_backrefs": 0,
+        "assessment": "Retain: historic basket-version shot relationships.",
+        "safe_to_drop_proven": false
+      },
+      {
+        "name": "shot_calibration_idx",
+        "table": "public.shots",
+        "complete_live_definition": "CREATE INDEX shot_calibration_idx ON public.shots USING btree (owner_id, setup_id, calibration_id)",
+        "source_chars": 98,
+        "estimated_rows": 20,
+        "table_bytes": 32768,
+        "index_bytes": 16384,
+        "idx_scan": 0,
+        "idx_tup_read": 0,
+        "valid": true,
+        "ready": true,
+        "unique": false,
+        "primary": false,
+        "direct_constraint_backrefs": 0,
+        "assessment": "Retain: historic shot calibration provenance.",
+        "safe_to_drop_proven": false
+      },
+      {
+        "name": "workspace_coffee_basket_idx",
+        "table": "public.workspace_coffees",
+        "complete_live_definition": "CREATE INDEX workspace_coffee_basket_idx ON public.workspace_coffees USING btree (owner_id, setup_id, basket_version_id)",
+        "source_chars": 120,
+        "estimated_rows": 4,
+        "table_bytes": 8192,
+        "index_bytes": 16384,
+        "idx_scan": 0,
+        "idx_tup_read": 0,
+        "valid": true,
+        "ready": true,
+        "unique": false,
+        "primary": false,
+        "direct_constraint_backrefs": 0,
+        "assessment": "Retain: basket/version lineage even if editing controls retired.",
+        "safe_to_drop_proven": false
+      }
+    ],
+    "verdict": "NO_VERIFIED_SAFE_DELETIONS; index telemetry alone does not prove disuse in production or future restore"
+  },
+  "postpublication_runtime": {
+    "safe_aggregate_only": {
+      "subscriptions": 1,
+      "runtime_rows": 1,
+      "ever_polled": 1,
+      "polled_last_15min": 1,
+      "ever_sent": 0,
+      "expired_subscriptions": 0,
+      "verified_pending_signups": 0,
+      "pending_coffees": 0,
+      "incomplete_deletions": 0
+    },
+    "interpretation": "Admin push enrollment and polling have been exercised. There are currently zero aggregate actionable events; no notification has been sent, and real device delivery remains unverified. This is not evidence of an app defect.",
+    "replication_slots": 0,
+    "realtime_publication_tables": 0,
+    "lock_waiters": 0,
+    "idle_in_transaction": 0,
+    "database_size": "16 MB",
+    "postgres_stats_cumulative": {
+      "postgres_role_fingerprints": 3942,
+      "postgres_temp_blocks_written": 177670,
+      "authenticated_fingerprints": 77,
+      "authenticator_fingerprints": 19,
+      "service_role_fingerprints": 12,
+      "anon_fingerprints": 5
+    },
+    "logs": "24h source-count aggregation read; status_code in these log_attributes unavailable; did not inspect raw messages/identifiers",
+    "pgrst_config": "No allowlisted exposed-schema config appeared in session or database role GUC views; hosted API config UNVERIFIED"
+  },
+  "advisor_snapshots": {
+    "security": {
+      "rls_no_policy": 10,
+      "authenticated_security_definer": 10,
+      "leaked_password_protection_disabled": 1
+    },
+    "performance": {
+      "unindexed_foreign_keys": 13,
+      "zero_scan_index_candidates": 8
+    },
+    "health": 0,
+    "interpretation": "Warnings reviewed against safeguards; no change justified without source-dependent test and authority"
+  },
+  "boundaries": {
+    "provider_writes": 0,
+    "production_changes": 0,
+    "deployments": 0,
+    "code_changes": 0,
+    "release_promotions": 0,
+    "private_identity_or_member_records_read": 0,
+    "secrets_read": 0
+  },
+  "unverified": [
+    "Hosted Auth/JWT/PostgREST exposure and settings",
+    "Cloud disk free headroom",
+    "Native compiled Vault/provider implementation",
+    "Real signed-in Admin/iPhone Home Screen push receipt; coordinate #96"
+  ],
+  "baseline": "IN_PROGRESS",
+  "next": "Stored migration #67 if added; else earliest changed/new/unreviewed provider definition, newly accessible hosted setting or runtime drift"
+}

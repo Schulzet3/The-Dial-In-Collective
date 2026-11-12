@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
+import {execFileSync} from 'node:child_process';
 const file=path=>readFileSync(new URL('../'+path,import.meta.url),'utf8');
 test('all five required CI job checks run on EVERY private branch pull request',()=>{
  const jobs={approval:'approval-continuity',validate:'cloud-beta-ci',
@@ -39,4 +40,28 @@ test('required validation exercises Netlify ignore on Node 18 before the Node 22
  const install=src.indexOf('npm ci --ignore-scripts');
  assert.ok(ignoreRuntime>=0&&ignoreRuntime<ignoreTests&&ignoreTests<appRuntime&&appRuntime<install,
   'ignore tests must run without app dependencies on the provider runtime before switching back');
+});
+
+test('operational READY audit stays mandatory on development; candidates retain exact published workflow bytes',()=>{
+ const path='.github/workflows/approval-continuity.yml';
+ const src=file(path);
+ const ref=process.env.GITHUB_REF||'';
+ if(ref.startsWith('refs/heads/release-candidates/')&&
+    /^[a-z0-9][a-z0-9-]{2,80}$/.test(ref.slice('refs/heads/release-candidates/'.length))){
+  const manifest=JSON.parse(file('docs/RELEASE_CANDIDATE.json'));
+  assert.equal(manifest.kind,'DIC-READY-ONLY-SOURCE-1');
+  assert.equal(manifest.publication_authorized,false);
+  assert.equal('refs/heads/'+manifest.candidate_branch,ref);
+  assert.match(manifest.published_source_sha,/^[a-f0-9]{40}$/);
+  assert.ok(manifest.restored_unpublished_workflow_paths?.includes(path),
+   'isolation must declare restoration of the mandatory development workflow');
+  const actualPublished=execFileSync('git',['show',manifest.published_source_sha+':'+path],
+   {encoding:'utf8',timeout:15000,maxBuffer:30000});
+  assert.equal(src,actualPublished,'candidate workflow must match exact published Git blob');
+  return;
+ }
+ assert.ok(src.includes('run: node scripts/release/ready-evidence-gate.mjs'),
+  'development READY audit must be operational');
+ assert.match(src,/actions: read/);
+ assert.match(src,/checks: read/);
 });
