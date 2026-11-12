@@ -58,10 +58,10 @@ test('missing journal and missing Git evidence fail closed',t=>{
 });
 test('stale preflight evidence fails after instructions changed in source parent',t=>{
  const f=fixture(t);
- f.write('docs/ai/PREFLIGHT.md','# Mandatory starting point for EVERY DIC task\\nUPDATED instructions\\n');
+ f.write('docs/ai/PREFLIGHT.md','# Mandatory starting point for EVERY DIC task\nUPDATED instructions\n');
  const newParent=f.commit();
- f.write('site/main.js','export const y=2;\\n');
- f.write(journal,f.row+'\\n');
+ f.write('site/main.js','export const y=2;\n');
+ f.write(journal,f.row+'\n');
  const head=f.commit();
  assert.match(f.audit(head,newParent,['site/main.js',journal]).errors.join(' '),/stale preflight evidence/);
 });
