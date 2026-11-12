@@ -13,6 +13,7 @@ import {validateChatReleaseRequest,validateManualReleaseRequest,assertChatPushEn
 import {classifyMigrationDiff,releaseReadinessMarkdown} from './migration-risk.mjs';
 import {assessReleaseQueue,formatQueueReport,assertApprovedReadyBatch} from './release-queue.mjs';
 import {validateReadyOnlyCandidate,CANDIDATE_RECEIPT_PATH,assertCandidateRelativeImports} from './ready-only-candidate.mjs';
+import {verifyReadyItems,githubReleaseReaders,localReadyGitReaders} from './ready-evidence-gate.mjs';
 const REPO='Schulzet3/The-Dial-In-Collective';
 const SHA=/^[a-f0-9]{40}$/;
 // The protected release ref must first be seeded at the independently
@@ -277,6 +278,8 @@ export async function executeSingleUseRelease(settings=process.env){
  const queuedSource=json(git(['show',sha+':docs/RELEASE_QUEUE.json']),'Durable release queue');
  const changedSourcePaths=git(['diff','--name-only','--no-renames',lastPublishedTestedSha,sha])
   .split(/\r?\n/).filter(Boolean);
+ const gitReady=localReadyGitReaders();
+ const objectAt=gitReady.sourceObjectAt;
  let queueGate;
  if(candidateBranch){
   const manifest=json(git(['show',sha+':'+CANDIDATE_RECEIPT_PATH]),'READY-only source manifest');
@@ -286,14 +289,7 @@ export async function executeSingleUseRelease(settings=process.env){
    .split(/\r?\n/).filter(Boolean);
   // Compare exact Git object mode and SHA, not textual equivalence, including
   // restored deletions. No unready file may survive a shared READY path.
-  const objectAt=(ref,path)=>{
-   const entries=git(['ls-tree','-z',ref,'--',path],{trim:false}).split('\0').filter(Boolean);
-   if(!entries.length)return null;
-   if(entries.length!==1)throw Error('Ambiguous candidate Git tree entry');
-   const match=/^([0-7]{6}) blob ([a-f0-9]{40})\t(.+)$/.exec(entries[0]);
-   if(!match||match[3]!==path)throw Error('Unsafe candidate Git tree entry');
-   return match[1]+':'+match[2];
-  };
+
   const originalQueue=git(['show',sourceAnchor+':docs/RELEASE_QUEUE.json'],{trim:false});
   const liveQueue=git(['show',developmentHead+':docs/RELEASE_QUEUE.json'],{trim:false});
   const candidateQueue=git(['show',sha+':docs/RELEASE_QUEUE.json'],{trim:false});
@@ -321,6 +317,25 @@ export async function executeSingleUseRelease(settings=process.env){
  if(settings.GITHUB_STEP_SUMMARY)appendFileSync(settings.GITHUB_STEP_SUMMARY,formatQueueReport(queueGate));
  if(!queueGate.ready)throw Error('Release queue HOLD: '+queueGate.errors.join('; ').slice(0,1200));
  assertApprovedReadyBatch(grant,queueGate);
+ // Recheck each selected READY item LIVE, using its cited GitHub Actions
+ // run IDs, five exact-source check jobs and actual merged code/test blobs.
+ // A queue label or earlier isolated test cannot authorize a one-use claim.
+ const selectedReady=queueGate.ready_items.map(x=>{
+  const i=queuedSource.items.find(y=>y.id===x.id);
+  if(!i)throw Error('Selected READY receipt missing from source: '+x.id);
+  return i;
+ });
+ const liveEvidence=await verifyReadyItems({queue:queuedSource,items:selectedReady,
+  ...await githubReleaseReaders(token),...gitReady,currentSourceSha:developmentHead,
+  publishedSourceSha:lastPublishedTestedSha,candidateSha:sha,
+  candidateChangedPaths:changedSourcePaths,
+  allowedPinnedPaths:candidateBranch?queueGate.pinned_ready_paths:[]
+ });
+ if(!liveEvidence.ready)
+  throw Error('READY live GitHub/source gate HOLD: '+liveEvidence.errors.join('; ').slice(0,1600));
+ if(settings.GITHUB_STEP_SUMMARY)
+  appendFileSync(settings.GITHUB_STEP_SUMMARY,'\n## Live selected READY receipts VERIFIED\n'+
+   liveEvidence.verified.map(x=>'- '+x.id+' tested '+x.ci_source_sha+' ('+x.risk_tier+')').join('\n')+'\n');
  // Source-bound CI, approved READY items, deployable-path coverage and ancestry
  // are verified above. Netlify performs the one authorized production build.
  const nowIso=new Date().toISOString();
