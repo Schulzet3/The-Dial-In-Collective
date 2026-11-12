@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {planReadyOnlyCandidate,validateReadyOnlyCandidate,CANDIDATE_KIND,
- CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH} from '../scripts/release/ready-only-candidate.mjs';
+ CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH,REVIEWED_WORKFLOW_TEST,discoverReviewedWorkflowTestExclusions} from '../scripts/release/ready-only-candidate.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40),D='d'.repeat(40);
 const one={id:'DIC-Q-100',issue:100,title:'READY card',state:'READY',
  owner_source:'https://github.com/example/repo/issues/100',merged_source_sha:D,
@@ -333,3 +333,17 @@ test('byte-pinned workflow-only browser-install test is excluded solely when its
   /Only one byte-pinned, reviewed workflow-only test/);
 });
 
+
+test('#2169 reviewed workflow-only test exclusion is pinned to actual source',()=>{
+ const t=REVIEWED_WORKFLOW_TEST;
+ assert.equal(t.sourceBlob,'32174be8c42ba9ae73085e0f6f1f42613b2b08db');
+ const objectAt=(sha,path)=>sha===B&&path===t.path?'100644:'+t.sourceBlob:null;
+ const opts={publishedSourceSha:A,developmentSourceSha:B,
+  restoredWorkflows:[t.restoredWorkflow],sourceObjectAt:objectAt};
+ assert.deepEqual(discoverReviewedWorkflowTestExclusions(opts),[t.path]);
+ assert.deepEqual(discoverReviewedWorkflowTestExclusions({...opts,restoredWorkflows:[]}),[]);
+ assert.deepEqual(discoverReviewedWorkflowTestExclusions({...opts,
+  sourceObjectAt:(sha,path)=>sha===B&&path===t.path?'100644:'+'a'.repeat(40):null}),[]);
+ assert.deepEqual(discoverReviewedWorkflowTestExclusions({...opts,
+  sourceObjectAt:(sha,path)=>sha===A&&path===t.path?'100644:'+'b'.repeat(40):objectAt(sha,path)}),[]);
+});

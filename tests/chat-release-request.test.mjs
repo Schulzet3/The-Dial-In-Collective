@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {validateChatReleaseRequest as validate,validateManualReleaseRequest as validateManual,
- CHAT_REQUEST_PATH,OPS_JOURNAL_PATH,CHAT_REQUEST_SCHEMA,assertChatPushEnvelope}
+ CHAT_REQUEST_PATH,OPS_JOURNAL_PATH,CHAT_REQUEST_SCHEMA,assertChatPushEnvelope,formatChatReleaseJournalAppendix}
  from '../scripts/release/chat-release-request.mjs';
 import {planSingleUseClaim} from '../scripts/release/one-use-claim.mjs';
 const S='1'.repeat(40),D='2'.repeat(40),R='3'.repeat(40),M='4'.repeat(40),E='5'.repeat(40);
@@ -184,4 +184,18 @@ test('release controller reads historical journal bytes exactly, including trail
  const source=readFileSync(new URL('../scripts/release/controlled-release-runner.mjs',import.meta.url),'utf8');
  assert.match(source,/previousJournal:git\(\['show',parents\[1\]\+':'\+OPS_JOURNAL_PATH\],\{trim:false\}\)/);
  assert.match(source,/currentJournal:git\(\['show','HEAD:'\+OPS_JOURNAL_PATH\],\{trim:false\}\)/);
+});
+
+test('#2169 journal helper binds mode; missing mode fails closed',()=>{
+ const req={...request,mode:'publish'};
+ const suffix=formatChatReleaseJournalAppendix(req);
+ assert.ok(suffix.includes(request.release_id)&&suffix.includes(S));
+ assert.match(suffix,/- Mode: publish/);
+ const env={eventForced:'false',eventAfterSha:E,eventHeadSha:E,remoteMainSha:E,
+  request:req,previousJournal:'prior\n',currentJournal:'prior\n'+suffix};
+ assert.equal(assertChatPushEnvelope(env),true);
+ assert.throws(()=>assertChatPushEnvelope({...env,currentJournal:'prior\n'+request.release_id+' '+S+'\n'}),/must bind request/);
+ for(const x of [{...req,mode:undefined},{...req,mode:'auto'},
+  {...req,release_id:'invalid'},{...req,tested_source_sha:'x'}])
+  assert.throws(()=>formatChatReleaseJournalAppendix(x),/cannot prepare journal/);
 });
