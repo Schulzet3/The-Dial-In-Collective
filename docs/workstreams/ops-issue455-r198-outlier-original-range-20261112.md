@@ -1,0 +1,15 @@
+# Issue #455 R455-198 — original-calibration outlier eligibility (2026-11-12 UTC)
+
+**Authority:** Owner Option B autonomous SAFE Locked-compatible code, tests and non-force integration. No deployment, production SQL/Auth/Edge/member/provider writes, purchases, visibility change, new accounts, or numeric/Locked policy changes.
+
+**Exact starting source:** `development/backend-foundation` `03eda98296d60b7e3047ddad0eff879212432dc4`; original `site/lib/engine.js` Git blob `0e7b493494f5caac96c1a6df1f7249456de91bd8`; main `81089313f2c5c6149d309034d2734de4f7baf8c5`, release/production `a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0`. Repo PUBLIC temporarily under owner-approved #630 exception; no visibility mutation.
+
+**Reproduced source defect:** `isExtreme` first calls `familyEvidenceShots`, which validates an archived grind against its recorded original snapshot/calibration. A second `eligibleControls` check then erroneously compared that archived dial against today's `version.grinderMin/Max`, discarding a valid fourth all-green reference when the current scale differs even though style, basket, feed and calibration IDs match. This created a false *no outlier review* for a large time/ratio deviation. Direct source reproduction, not evidence of a real member impact.
+
+**Safe implementation:** Remove only the redundant current-scale eligibility recheck; retain the existing `familyEvidenceShots` original-valid measurements/optional temperature filtering, four complete green and measured references, explicit same style/basket/feed/calibration comparisons and exact >25s or >1.25-ratio review thresholds. Keep original shot bytes/notes/history and future one-controllable-change guidance. No recommendations or taste targets changed.
+
+**Same-commit changed paths:** `site/lib/engine.js`, `tests/issue455-r198-outlier-original-range.test.mjs`, this `docs/workstreams/ops-issue455-r198-outlier-original-range-20261112.md`. Six new synthetic positive/negative assertions: active vs original range; impossible old dial; malformed snapshot; different calibration; missing fifth ideal rating; new save outlier prompt plus immutable history. Existing R182 original-calibration regression suite remains independent.
+
+**Verification at authoring:** Source diff derived from the exact old Git blob. External container cannot resolve github.com, so local Node tests NOT RUN. Pull-request exact-source Node22/browser/offline/SQL/privacy/security/governance CI is REQUIRED, not yet claimed; frozen603 not invoked and never called PASS. If a check fails, repair and retest. No CI, merge or READY status presumed by this journal.
+
+**Next action:** Check PR source head and full applicable CI; repair failures, merge non-force with unchanged concurrent paths; verify exact merged commit/blobs and CI; then reconcile #455 evidence/source/proposal ledger, `CURRENT_STATUS`, scoped journal and development-only release queue in an independently verified documentation PR. Standalone S019 still inaccessible; #267 exhaustive literal audit receives zero credit.
