@@ -13312,7 +13312,7 @@
       "issue": 455,
       "pr": 2353,
       "title": "Record and display only genuine member-selected Use Recommendation provenance; remove stale copied-source attribution after measured value changes",
-      "state": "TESTING",
+      "state": "READY",
       "scope_paths": [
         "site/cloud/main.js",
         "site/cloud/recommendation-use.js",
@@ -13325,15 +13325,25 @@
         "Focused positive/negative six tests authored for source metadata, changed value clearing, same/different provenance, historic context, private shot-card rendering and build allowlist; code/test CI pending.",
         "Second PR head eca4c62f993787bf0e8c3819ba446df12c24ac0c approval 43331774026 FAILED schema: missing nullable merged_source_sha. Queue contract requires explicit NULL before code is merged; corrected this candidate, not READY. Other CI pending.",
         "Third PR head 07deec084fc628b67f9d50f94b2059a3710575cc browser 43331901919 FAILED visual fixture bootstrap, independent packaged entry/asset graph PASS; deterministic fixture module table omission corrected in next candidate. This is NOT a passed full visual test.",
-        "Exact earlier full Node22 43331901934 FAILED 4398 pass/1 fail/6 skip; direct CloudApp constructor fixture called Use Temperature without showLog and ephemeral origin map was uninitialized. Same-source constructor and resetAccount guard added in later candidate; no source CI pass yet."
+        "Exact earlier full Node22 43331901934 FAILED 4398 pass/1 fail/6 skip; direct CloudApp constructor fixture called Use Temperature without showLog and ephemeral origin map was uninitialized. Same-source constructor and resetAccount guard added in later candidate; no source CI pass yet.",
+        "Exact FINAL head 1ddc6a43daebca902e5d48c1690b7ae976008c62: Node22/lint 43332431771 SUCCESS 4399 pass/0 fail/6 intentional skip, compiled browser/mobile/offline 43332431754, SQL 43332431830, security 43332431773, governance 43332431787 SUCCESS. Frozen603 43332431759 SKIPPED NOT PASS.",
+        "Nonforce PR #2353 squash merged 881c04f3f57f3dd9c3153e0102e728e2da0ca6f9 with [skip netlify] title/message, all eight merged Git blobs identical to tested head, parent fb6e01f8785266a06e63a92d63445b27290b2dd3. Concurrent unrelated #509 docs retained.",
+        "Exact MERGED 881c04f3f57f3dd9c3153e0102e728e2da0ca6f9: Node22/lint 43332996546 SUCCESS 4399 pass/0 fail/6 skipped; Chromium/mobile/visual 43332996571 SUCCESS, governance 43332996570 SUCCESS; reuse unchanged head SQL/security. No real member or measured taste result asserted."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact corrected PR-head Node22/build, browser/offline, SQL/security and governance evidence not yet complete; do not mark READY or DEPLOYED."
+      "ci_runs": [
+        43332431771,
+        43332431754,
+        43332431830,
+        43332431773,
+        43332431787,
+        43332996546,
+        43332996571,
+        43332996570
       ],
-      "notes": "Development-only bounded UX correctness. All five taste choices and original recorded shots/notes/history remain unchanged; no new numeric recommendation targets, no member/production/provider writes, no force Git/deployment. #267 V2 literal audit remains separately incomplete; standalone S019 inaccessible.",
+      "blockers": [],
+      "notes": "Development-only bounded UX correctness. All five taste choices and original recorded shots/notes/history remain unchanged; no new numeric recommendation targets, no member/production/provider writes, no force Git/deployment. #267 V2 literal audit remains separately incomplete; standalone S019 inaccessible.\nR455-220 verified READY DEVELOPMENT ONLY, NOT PUBLISHED. Actual member-selected provenance appears in expanded private shot only while measured grind/temperature matches copied control. Preserve original five rated tastes, measured values/notes/history/RLS/styles/Locked targets; no deployment, frozen603 skipped, #267 literal work separate, S019 inaccessible.",
       "production_deployed": false,
-      "merged_source_sha": null
+      "merged_source_sha": "881c04f3f57f3dd9c3153e0102e728e2da0ca6f9"
     }
   ],
   "history": [
