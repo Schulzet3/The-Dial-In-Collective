@@ -87,10 +87,12 @@ export function nextShotTitle(advice){
 }
 export function nextShotGuidance(advice,shot,showTemp=false,unit='F'){
  const adjustment=nextShotAdjustment(advice,shot,showTemp,unit);
- if(!adjustment)return `<p class="helper next-shot-original-advice">${e(advice?.text||'')}</p>`;
+ // Whether a numeric arrow is possible or not, never conceal a supplied
+ // source/uncertainty note. Keep the original textual guidance as fallback.
+ const note=advice?.evidenceNote?'<p class="next-shot-evidence">'+e(advice.evidenceNote)+'</p>':'';
+ if(!adjustment)return `<p class="helper next-shot-original-advice">${e(advice?.text||'')}</p>${note}`;
  const {label,before,after,unit:measure,keep}=adjustment;
  const spoken=e(`${label} from ${before} to ${after}${measure?' '+measure:''}`);
- const note=advice?.evidenceNote?'<p class="next-shot-evidence">'+e(advice.evidenceNote)+'</p>':'';
  const source=advice?.text?.includes('Sized from your own comparable adjustments.')?
   '<p class="next-shot-evidence">Adjustment sized from your comparable shots.</p>':'';
  return `<div class="next-shot-change" role="group" aria-label="${spoken}"><span class="next-shot-variable">${e(label)}</span><span class="next-shot-number">${e(before)}</span><span class="next-shot-arrow" aria-hidden="true">→</span><span class="next-shot-number">${e(after)}</span>${measure?`<span class="next-shot-unit">${e(measure)}</span>`:''}</div><p class="next-shot-keep">Keep ${e(keep)} unchanged.</p>${source}${note}`;

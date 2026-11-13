@@ -2124,6 +2124,16 @@
       "locked_policy_boundary": "No mandatory burr seasoning tracking, mass-based advice or universal Q cutoff, fixed grind correction, PSD-derived espresso flavor confidence, new inputs or taste thresholds. Preserve original and current grinder calibrations, historical actual shots/notes, all five explicit tastes, single controllable recommendation, distinct style and feed, private Community/RLS.",
       "source_sha": "4708fbdade9365462ecac790ca8b95b0f6689e63",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "LIVE-20261112-NEXT-SHOT-UNCERTAINTY-FALLBACK-R222",
+      "type": "live_repository_recommendation_ux_confidence_note_source_reproduction",
+      "path": "site/lib/ui.js",
+      "git_blob_sha": "f6f083a0df13894a2496d925968f55c07403d727",
+      "source_commit": "677c52f4a1f5f09f21bbc788c2215e51401e8c65",
+      "review_status": "R455-222_DIRECT_SOURCE_CALL_CHAIN_AND_LOCKED_UI_EXPLANATION_CONTRACT_REVIEWED; SYNTHETIC_NEGATIVE_POSITIVE_NODE22_TESTS_AUTHORED_NOT_EXECUTED",
+      "provenance": "The active UI renderer nextShotGuidance and engine nextAdvice evidenceNote; no member data, live browser or actual espresso outcome used",
+      "policy_authority": "docs/MASTER_SPECIFICATION.md Recommendation Option A arrow + textual fallback and evidence note preservation"
     }
   ],
   "evidence_checks": [
@@ -6472,6 +6482,20 @@
       "owner_approval": false,
       "source_sha": "4708fbdade9365462ecac790ca8b95b0f6689e63",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-APP-222-A",
+      "source": "LIVE-20261112-NEXT-SHOT-UNCERTAINTY-FALLBACK-R222",
+      "claim": "On current source, nextShotGuidance displays advice.evidenceNote only after a measured one-control arrow is generated. If advice includes a valid uncertainty note but no measurable one-control arrow (e.g. equal proposed and measured values or next:null), fallback returns only advice.text and silently discards the note; this can make a cautious exploratory explanation appear unsupported or more certain. The owner-Locked UI explicitly preserves textual fallback and evidence notes. The new narrow patch renders the supplied note, escaped, in both branches without inventing a control or altering measured/taste data.",
+      "grade": "DIRECT_EXACT_CURRENT_SOURCE_AND_NEGATIVE_POSITIVE_SYNTHETIC_TESTS_AUTHORED; NODE22_BROWSER_MERGED_CI_PENDING; NOT_REAL_MEMBER_OR_EMPIRICAL_ESPRESSO",
+      "source_sha": "677c52f4a1f5f09f21bbc788c2215e51401e8c65",
+      "git_blob_shas": [
+        "f6f083a0df13894a2496d925968f55c07403d727"
+      ],
+      "current_app": "Original nextShotGuidance fallback omitted note; arrow branch displayed it. NextAdvice engine source contains explicit exploratory yield evidenceNote and actual arrows can fail rendering safely.",
+      "result": "SAFE_LOCKED_COMPATIBLE_FIX_CANDIDATE_TESTING_NO_PRODUCTION",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -6635,23 +6659,24 @@
     "R455-219 primary MDPI Molecules 2025 30(20):4080 direct full HTML bounded review at pinned development f474449f9021da88c0e0b51e463dfda697310a85/preflight 2fb236bbfa6bac48513eeb3bd157b260853af06d. Chemistry concentration versus serving-size, input-water volume versus beverage yield and confounded brewing methods do not license a five-taste/health/espresso numeric rule. Research-only two-file docs PR/CI/nonforce merge pending. Original S019 still unavailable; #267 literal review credit 0.",
     "R455-220 after immutable preflight 1e3d76214aa0d878a5a7568cf0ba7831f8f8c312: PR #2353 SAFE provenance-correctness candidate (current main -> shot card discriminator, changed measurements clearing); initial browser/queue CI failures source-diagnosed and candidate fixes in build allowlist+TESTING intake. Run exact-source PR CI, repair failures, nonforce merge only after PASS, verify blobs and merged CI, then READY docs reconciliation without deployment. S019 unreviewed; #267 zero literal credit.",
     "R455-220: PR2353 exact tested head and nonforce merge 881c04f3f57f3dd9c3153e0102e728e2da0ca6f9 verified; all eight blobs identical, head+merge Node22 4399/0/6, browser and approval SUCCESS, head SQL/security SUCCESS; DIC-Q-455-r220-recommendation-use-origin READY development only, unpublished. S019 inaccessible, #267 literal audit not complete, Issue455 remains open.",
-    "R455-221 first-person 2019 Gagne EG-1 SSP seasoning study direct original reviewed against archived report 09 at 4708fbdade9365462ecac790ca8b95b0f6689e63: one-grinder PSD Q-factor and 24lb methodology do not establish any universal seasoning mass, grinder change or human espresso outcome. Research-only no app policy/release; original S019 remains inaccessible, #267 literal review separate. Verify the 2-path docs PR exact governance, merge/readback, then select next nonoverlapping high-confidence UX source bug or unverified original citation."
+    "R455-221 first-person 2019 Gagne EG-1 SSP seasoning study direct original reviewed against archived report 09 at 4708fbdade9365462ecac790ca8b95b0f6689e63: one-grinder PSD Q-factor and 24lb methodology do not establish any universal seasoning mass, grinder change or human espresso outcome. Research-only no app policy/release; original S019 remains inaccessible, #267 literal review separate. Verify the 2-path docs PR exact governance, merge/readback, then select next nonoverlapping high-confidence UX source bug or unverified original citation.",
+    "R455-222 current development 677c52f4a1f5f09f21bbc788c2215e51401e8c65: Next Shot textual fallback silently omits evidenceNote when numeric arrow unavailable. Narrow site/lib/ui.js render-only guard and four Node synthetic cases authored with same-commit journal. Exact hosted CI, nonforce merge, merged readback and READY promotion PENDING; no engine/tastes/Locked/production change. S019 standalone unavailable; #267 line audit not credited."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-221",
-    "source_sha": "4708fbdade9365462ecac790ca8b95b0f6689e63",
-    "starting_preflight_development_sha": "4708fbdade9365462ecac790ca8b95b0f6689e63",
+    "run_id": "R455-222",
+    "source_sha": "677c52f4a1f5f09f21bbc788c2215e51401e8c65",
+    "starting_preflight_development_sha": "677c52f4a1f5f09f21bbc788c2215e51401e8c65",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "phase": "AUTHOR_PRIMARY_ONE_GRINDER_SEASONING_METHOD_REVIEW_DOCUMENTS_ONLY_HEAD_CI_UNEXECUTED",
+    "phase": "SAFE_NEXT_SHOT_EVIDENCE_FALLBACK_SOURCE_TEST_AUTHORING_CI_PENDING",
     "source_counts": {
-      "research_project_source_records": 121,
-      "bounded_evidence_checks": 350,
-      "proposals": 180
+      "research_project_source_records": 122,
+      "bounded_evidence_checks": 351,
+      "proposals": 181
     },
-    "original_s019": "INACCESSIBLE_UNREVIEWED_DRIVE_LIBRARY_SPACE_20261112",
+    "original_s019": "PREVIOUSLY_INACCESSIBLE_NOT_REVIEWED_THIS_RUN",
     "github267_literal_review_credit": 0,
-    "release_state": "NO_NEW_READY_OR_DEPLOYMENT",
-    "next": "EXACT_DOCS_PR_CI_NONFORCE_MERGE_SOURCE_READBACK_ISSUE_CHECKPOINT"
+    "release_state": "TESTING_NOT_READY_NO_DEPLOYMENT",
+    "next": "Check source-bound PR CI, fix failures; nonforce merge skip-netlify title/message, readback exact merged blobs and CI; only then READY if justified."
   },
   "policy_decisions_resolved": [
     {
@@ -10729,6 +10754,28 @@
       "github267_literal_review_credit": 0,
       "production_deployed": false,
       "source_commit": "4708fbdade9365462ecac790ca8b95b0f6689e63"
+    },
+    {
+      "id": "R455-PROP-222-NEXT-SHOT-FALLBACK-EVIDENCE",
+      "severity": "P2_RECOMMENDATION_EVIDENCE_EXPLANATION_OMISSION",
+      "finding": "Existing fallback next-shot textual advice drops an explicit evidence/uncertainty note whenever one reliable measured-control arrow cannot be displayed.",
+      "user_benefit": "Keep explanatory evidence limitations visible to a member even when no numeric change is supported, without fabricated arrows or target claims.",
+      "evidence": [
+        "R455-EV-APP-222-A"
+      ],
+      "evidence_grade": "SOURCE_REPRODUCED_ONLY_TESTS_NOT_YET_RUN; NO_MEASURED_ESPRESSO_OUTCOME",
+      "current_locked": "Locked Recommendation Option A: arrow only for one actual measured controllable difference, otherwise retain specific text; preserve source/evidence notes, five original tastes, shots and private history.",
+      "current_app": "site/lib/ui.js old fallback returned only advice.text; code candidate consistently escapes/presents advice.evidenceNote on fallback and arrow paths.",
+      "proposed_change": "SAFE render-only change to share escaped evidence note across both cases; add four source-level positive/negative Node tests; no engine, taste, measurement, privacy, SQL or community change.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "SOURCE_TEST_CANDIDATE_NOT_YET_CI_VERIFIED",
+      "test_plan": "Node22 four synthetic positive/negative tests; exact-head Node22/lint/cloud build, Chromium/mobile/offline, isolated SQL and security governed as applicable; negative fallback, HTML escape, positive arrow, no-note backward compatibility. PR/merge/READY pending.",
+      "release_queue": "DIC-Q-455-r222-evidence-note-fallback",
+      "release_queue_status": "TESTING_NOT_READY_OR_DEPLOYED",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false,
+      "source_commit": "677c52f4a1f5f09f21bbc788c2215e51401e8c65"
     }
   ],
   "changeScope": {
