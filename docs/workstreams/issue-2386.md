@@ -39,3 +39,10 @@ DIC_PREFLIGHT_VERIFIED development_sha=b279e75c264a19eeefcb03404466a1ca6788a855 
 - Fresh mandatory preflight before this test-only commit:
 DIC_PREFLIGHT_VERIFIED development_sha=b279e75c264a19eeefcb03404466a1ca6788a855 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 - No application/server migration changes, no provider writes or live deployment. Await exact-PR-head SQL, Node, visual and approval success and nonforce merge before READY.
+
+## Exact SQL security-inventory fixture failure and fix
+- PR-head run 43363161081 applied proposed migration in ephemeral PostgreSQL and passed `url_preview_release.sql`, `universal_url_preview.sql` and `preview_two_phase_cache.sql`, including 12/day, 15s, admin exemption, ticket replay and denied access. Later SQL `security_surface_inventory.sql` FAILED because its broad DDL regex treats the `user_metadata` literal **in a harmless comment** as a privileged function dependency. This was a real CI failure, not a bypass.
+- Removed only the prohibited metadata term from a comment in the private shared-claim function; the definer continues to use database-authenticated administrator membership, enabled/admitted state and confirmed Auth email. SQL operations and grants unchanged. Security inventory and all isolated checks must rerun at exact new SHA.
+- SAME-COMMIT preflight:
+DIC_PREFLIGHT_VERIFIED development_sha=b279e75c264a19eeefcb03404466a1ca6788a855 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+- No production provider writes, Netlify release, or member data reads/changes.

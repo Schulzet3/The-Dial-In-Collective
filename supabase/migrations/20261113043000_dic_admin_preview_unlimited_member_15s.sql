@@ -15,7 +15,7 @@ begin
  if account_id is null or not exists(select 1 from auth.users u where u.id=account_id)
  then return jsonb_build_object('allowed',false,'reason','unknown_account');end if;
  -- Database-authoritative admin; require active admission and verified email.
- -- No untrusted client flag, mutable user_metadata, or caller-supplied admin role.
+ -- No untrusted client privilege flag or caller-supplied administrative role.
  if exists(
    select 1 from private.app_admins a
    join private.beta_members m on m.owner_id=a.owner_id
