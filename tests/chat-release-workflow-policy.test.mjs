@@ -28,3 +28,14 @@ test('chat release enforces same single-use controller and truthful Free private
  assert.match(controller,/chatPush\?chatRequest\.release_id/);
  assert.match(controller,/chatPush\?chatRequest\.tested_source_sha/);
 });
+
+test('#356 PR merge provenance has READ-only access without changing release triggers',()=>{
+ for(const path of ['.github/workflows/dic-chat-approved-release.yml',
+  '.github/workflows/dic-single-use-release.yml']){
+  const source=load(path),permissions=source.split('\npermissions:\n')[1]?.split('\nconcurrency:\n')[0];
+  assert.ok(permissions,'workflow permission block');
+  assert.match(permissions,/  pull-requests: read/);
+  assert.doesNotMatch(permissions,/  pull-requests: write/);
+  assert.match(permissions,/  contents: write/);
+ }
+});

@@ -1,3 +1,16 @@
+## November 13, 2026 — #356 legacy direct-release null merge SHA safeguard [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=5f4488195c46a9ae08f314ca1c209f72cce55266 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+**Authority:** Owner approved targeted correction of Release14's historical unready merged #33 PR352 inclusion, CONDITIONAL on not adding owner steps or making publication harder. No new Publish authorization. Preserve the current one-command chat-approved READY-only candidate/controller and single Netlify build, five exact-SHA checks, queue and one-use grant. Repo is owner-public temporarily, private Free-compatible after Nov 30.
+
+**Reproduced gap:** legacy direct source gate skipped TESTING/IN_PROGRESS items with null merged_source_sha even when merged PR352 was present in Release14's selected code and another READY item covered the same changed file. Main scripts/release/release-queue.mjs historical direct validator and controlled-release-runner.mjs had no independent missing-SHA PR check.
+
+**Targeted scope:** new read-only GitHub actual PR merge/commit verification ONLY if a direct (nonisolated) candidate passes existing gate AND an unready null-SHA queue item overlaps its changed deployable file. Reject a verified merged-after-published PR ancestor in the direct source; reject missing/unverifiable PR evidence. Genuinely open/closed-unmerged PRs, nonoverlap, and already-published/excluded merges do NOT create new blockers. Existing READY-only candidate path is unchanged and does NOT incur PR API calls; no new manual approval/staging steps, build, or CI suite. Add minimal Pull Requests READ permission to both controller variants for future GitHub-private compatibility, not write access.
+
+**Paths:** scripts/release/release-queue.mjs, scripts/release/controlled-release-runner.mjs, tests/release-queue.test.mjs, tests/release-controller-queue-policy.test.mjs, tests/chat-release-workflow-policy.test.mjs, .github/workflows/dic-chat-approved-release.yml, .github/workflows/dic-single-use-release.yml, this same-commit journal, docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md. No database/Auth/Edge/member/history/archival/backup/provider/source publication changes. Original Release14 receipt and historical unapproved source inclusion preserved (not retroactively READY).
+
+**Acceptance planned:** focused positive/negative synthetic tests including literal #352 merged PR with null queue SHA, genuine unmerged overlapping PR, no overlap, missing PR/failed lookup, already delivered/excluded merge, inconsistent ancestry, cached PR lookup, and ordering before claim. Existing main CI runs the tests once; verify exact PR-head + exact merged-source SUCCESS and main tree/ref readback before closing #356. Tests/CI PENDING at authoring; do not claim PASS until provider readback. Risk classified release safety/high but no actual publication/production mutation. Owner action: none.
+
 ## November 13, 2026 — #28 approved operations-only backup pin + URI destination guard [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=1b522f40e5501c48ae55d86a89e114c724bc9218 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 

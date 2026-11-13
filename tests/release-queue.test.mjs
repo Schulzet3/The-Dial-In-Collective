@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {deployableChangedPaths,queueSchemaErrors,assessReleaseQueue,assessIntakeCoverage,formatQueueReport,assertApprovedReadyBatch}
+import {deployableChangedPaths,queueSchemaErrors,assessReleaseQueue,assessIntakeCoverage,formatQueueReport,assertApprovedReadyBatch,auditMissingUnreadyMergeEvidence}
  from '../scripts/release/release-queue.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40);
 const queued={id:'DIC-Q-100',issue:100,pr:101,title:'Safe shot-page update',
@@ -127,4 +127,84 @@ test('Edge verify_jwt configuration is an exact scoped deployable file, not a wi
  assert.deepEqual(deployableChangedPaths([edgeConfig,'supabase/unreviewed.toml','docs/CURRENT_STATUS.md']),[edgeConfig]);
  assert.equal(assess({...q,items:[scoped]},[edgeConfig]).ready,true);
  assert.match(queueSchemaErrors({...q,items:[{...queued,scope_paths:['supabase/unreviewed.toml']}]}).join(' '),/exact deployable/);
+});
+
+test('#356 missing queue merge SHA cannot launder merged TESTING PR #352 into a direct READY batch',async()=>{
+ const prior='d'.repeat(40);
+ const unready={...queued,id:'DIC-Q-33-selected-producer-credit-locality',issue:33,pr:352,
+  state:'TESTING',merged_source_sha:null,tests:[],ci_runs:[],blockers:['CI pending']};
+ const queue={...q,items:[queued,unready]};
+ const pr={number:352,state:'closed',merged_at:'2026-11-02T02:20:47Z',
+  merge_commit_sha:prior,base:{repo:{full_name:'Schulzet3/The-Dial-In-Collective'}}};
+ const args={publishedSourceSha:A,candidateSha:C,
+  changedPaths:['site/cloud/shot_card.js'],isAncestor:(from,to)=>from===to||
+   (from===prior&&to===C)||(from===A&&to===C),
+  loadPr:async number=>{assert.equal(number,352);return pr;}};
+ assert.equal(assess(queue,['site/cloud/shot_card.js']).ready,true,
+  'fixture reproduces historical direct queue false acceptance');
+ const blocked=await auditMissingUnreadyMergeEvidence(queue,args);
+ assert.equal(blocked.safe,false);
+ assert.match(blocked.errors.join(' '),/unready PR #352 merged source is included/);
+ assert.deepEqual(blocked.checked.map(x=>x.disposition),['unready-in-candidate']);
+});
+
+test('#356 safe unmerged PR overlap keeps ordinary direct publication eligible without new owner steps',async()=>{
+ const pending={...queued,id:'DIC-Q-33-pending',pr:1001,state:'TESTING',
+  merged_source_sha:null,tests:[],ci_runs:[],blockers:['PR open']};
+ const queue={...q,items:[queued,pending]};
+ let calls=0;
+ const args={publishedSourceSha:A,candidateSha:C,
+  changedPaths:['site/cloud/shot_card.js'],isAncestor:graph,
+  loadPr:async()=>{calls++;return {number:1001,state:'open',merged_at:null,
+   base:{repo:{full_name:'Schulzet3/The-Dial-In-Collective'}}};}};
+ const ok=await auditMissingUnreadyMergeEvidence(queue,args);
+ assert.equal(ok.safe,true,ok.errors.join(' | '));assert.equal(calls,1);
+ const untouched=await auditMissingUnreadyMergeEvidence(queue,{
+  ...args,changedPaths:['site/unrelated.js'],loadPr:()=>{throw Error('should not fetch');}});
+ assert.equal(untouched.safe,true);assert.equal(untouched.checked.length,0);
+});
+
+test('#356 ambiguous missing-PR and unverifiable merge status deny only affected direct releases',async()=>{
+ const pending={...queued,id:'DIC-Q-33-pending',state:'TESTING',merged_source_sha:null,
+  tests:[],ci_runs:[],blockers:['unknown']};
+ const queue={...q,items:[queued,pending]};
+ const args={publishedSourceSha:A,candidateSha:C,
+  changedPaths:['site/cloud/shot_card.js'],isAncestor:graph,loadPr:async()=>null};
+ assert.equal((await auditMissingUnreadyMergeEvidence(queue,args)).safe,false);
+ const withPr={...queue,items:[queued,{...pending,pr:352}]};
+ assert.equal((await auditMissingUnreadyMergeEvidence(withPr,args)).safe,false);
+ assert.equal((await auditMissingUnreadyMergeEvidence(withPr,{
+  ...args,loadPr:async()=>{throw Error('GitHub unavailable');}})).safe,false);
+});
+
+test('#356 published or excluded verified merge does not create a new release blocker',async()=>{
+ const prior='d'.repeat(40),pending={...queued,id:'DIC-Q-33-pending',pr:352,state:'TESTING',
+  merged_source_sha:null,tests:[],ci_runs:[],blockers:['historic']};
+ const queue={...q,items:[queued,pending]},pr={number:352,state:'closed',
+  merged_at:'2026-11-02T02:20:47Z',merge_commit_sha:prior,
+  base:{repo:{full_name:'Schulzet3/The-Dial-In-Collective'}}};
+ const base={publishedSourceSha:A,candidateSha:C,
+  changedPaths:['site/cloud/shot_card.js'],loadPr:async()=>pr};
+ const already=await auditMissingUnreadyMergeEvidence(queue,{
+  ...base,isAncestor:(from,to)=>from===to||(from===prior&&[A,C].includes(to))});
+ assert.equal(already.safe,true);
+ const excluded=await auditMissingUnreadyMergeEvidence(queue,{
+  ...base,isAncestor:(from,to)=>from===to||(from===A&&to===C)});
+ assert.equal(excluded.safe,true);
+ const inconsistency=await auditMissingUnreadyMergeEvidence(queue,{
+  ...base,isAncestor:(from,to)=>from===prior&&to===A});
+ assert.equal(inconsistency.safe,false);
+});
+
+test('#356 duplicate unready queue rows for one PR require one conditional GitHub lookup',async()=>{
+ const a={...queued,id:'DIC-Q-101',state:'TESTING',pr:1001,
+  merged_source_sha:null,tests:[],ci_runs:[],blockers:['pending']};
+ const b={...a,id:'DIC-Q-102'};
+ let calls=0;
+ const result=await auditMissingUnreadyMergeEvidence({...q,items:[queued,a,b]},{
+  publishedSourceSha:A,candidateSha:C,changedPaths:['site/cloud/shot_card.js'],
+  isAncestor:graph,loadPr:async()=>{calls++;return {
+   number:1001,state:'open',merged_at:null,
+   base:{repo:{full_name:'Schulzet3/The-Dial-In-Collective'}}};}});
+ assert.equal(result.safe,true);assert.equal(calls,1);
 });
