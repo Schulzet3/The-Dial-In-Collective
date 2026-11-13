@@ -1,0 +1,49 @@
+name: DIC Issue33 R166 original210 selected Brazil Paubrasil
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r166-210.yml
+      - scripts/audit/issue33-r166-210-check.mjs
+      - tests/coffee-issue33-r166-210.test.mjs
+      - docs/workstreams/ops-issue33-r166-210-20261112.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r166-210.yml
+      - scripts/audit/issue33-r166-210-check.mjs
+      - tests/coffee-issue33-r166-210.test.mjs
+permissions:
+  contents: read
+jobs:
+  exact-selected:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Selected positive/hostile source and actual parser tests
+        run: node --test tests/coffee-issue33-r166-210.test.mjs
+      - name: Guarded exact original official HTTPS and actual parser
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '210'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r166
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Strict current official source and parser afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_R166_VERIFY: '1'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r166
+        run: node scripts/audit/issue33-r166-210-check.mjs
+      - name: Preserve selected official raw HTML and failures
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r166-original210
+          path: /tmp/dic33-r166/
+          retention-days: 2
+          if-no-files-found: warn
