@@ -1,7 +1,9 @@
 import test from 'node:test';
+import {EventEmitter} from 'node:events';
 import assert from 'node:assert/strict';
 import {shopifyProductRequest} from '../src/server/coffee-shopify-ajax.mjs';
-import {safeCoffeeUrl,isCoffeeProductDetailUrl} from '../src/server/coffee-url-guard.mjs';
+import {safeCoffeeUrl,isCoffeeProductDetailUrl,fetchPublicCoffeeHtml,
+ MAX_PRODUCT_HEADER_BYTES,MAX_PUBLIC_HEADER_BYTES} from '../src/server/coffee-url-guard.mjs';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 import {coffeeUrlPreviewMarkup} from '../site/cloud/coffee-url-autofill.js';
 
@@ -75,4 +77,39 @@ test('wrong Product URL cannot replace selected washed coffee with unrelated nat
   additionalProperty:unrelated.additionalProperty};
  const r=extractPublicCoffeeFacts(html(wrong,{heading:false,other:wrong}),{source_url:url});
  assert.ok(!r.ok||r.fields?.name!=='India Gundikhan Natural',JSON.stringify(r).slice(0,3000));
+});
+
+async function requestOptionsFor(link,{responseType='html'}={}){
+ let outbound=null;
+ const request=(opts)=>{
+  outbound=opts;const stream=new EventEmitter();
+  stream.destroy=()=>{};
+  stream.end=()=>queueMicrotask(()=>stream.emit('error',new Error('Synthetic request does not contact a host')));
+  return stream;
+ };
+ const response=await fetchPublicCoffeeHtml(link,{request,responseType});
+ assert.equal(response.reason,'source_fetch_failed');
+ return outbound;
+}
+test('published exact Huckleberry product gets bounded Shopify-friendly headers',async()=>{
+ const opts=await requestOptionsFor(url);
+ assert.equal(opts.maxHeaderSize,MAX_PRODUCT_HEADER_BYTES);
+ assert.equal(opts.maxHeaderSize,32_000);
+ assert.equal(opts.rejectUnauthorized,true);
+ assert.equal(opts.agent,false);
+ assert.equal(typeof opts.lookup,'function');
+ assert.equal(opts.headers.Authorization,undefined);
+});
+test('public exact-handle Shopify JSON also permits bounded product response headers',async()=>{
+ const opts=await requestOptionsFor('https://www.huckleberryroasters.com/products/india-gundikhan-washed.js',
+  {responseType:'shopify_json'});
+ assert.equal(opts.maxHeaderSize,MAX_PRODUCT_HEADER_BYTES);
+});
+test('unrelated catalog and landing pages preserve strict 12 KB header limit',async()=>{
+ for(const link of ['https://www.huckleberryroasters.com/shop',
+  'https://www.huckleberryroasters.com/collections/single-origin']){
+  const opts=await requestOptionsFor(link);
+  assert.equal(opts.maxHeaderSize,MAX_PUBLIC_HEADER_BYTES);
+  assert.equal(opts.maxHeaderSize,12_000);
+ }
 });

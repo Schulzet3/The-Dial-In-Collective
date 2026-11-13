@@ -13386,21 +13386,25 @@
       "merged_source_sha": null,
       "scope_paths": [
         "src/server/coffee-page-metadata.mjs",
-        "src/server/coffee-shopify-ajax.mjs"
+        "src/server/coffee-shopify-ajax.mjs",
+        "src/server/coffee-url-guard.mjs"
       ],
       "tests": [
         "Initial PR #2385 GitHub source-head synthetic Node22 selected/product security regression: 7/7 PASS in run 43361539325.",
-        "Initial guarded official Huckleberry current source: FAIL source_fetch_failed, exact HTML/Shopify JSON transport did not succeed; strict live product proof UNVERIFIED. Network diagnostics and focused retest in progress."
+        "Initial guarded official Huckleberry current source: FAIL source_fetch_failed, exact HTML/Shopify JSON transport did not succeed; strict live product proof UNVERIFIED. Network diagnostics and focused retest in progress.",
+        "Guarded official-source diagnostic run 43361819193: all 7 URL/selected JSON-LD tests PASS; Huckleberry HTML and exact public Shopify JSON both fail HPE_HEADER_OVERFLOW, DNS record count 1 global IP, no HTTP response reached. This proves the underlying bounded HTTP header cap 12000-byte rejection; no claims of parsed live source.",
+        "Targeted correction raises exact product-detail response header cap to 32000 bytes, preserves catalog 12000, DNS pinning, SSL, timeouts, body caps; adds 3 negative/positive options tests. Strict official Huckleberry afterproof and all-app CI PENDING."
       ],
       "ci_runs": [
-        43361539325
+        43361539325,
+        43361819193
       ],
       "blockers": [
-        "Current official Huckleberry source fetch failed on GitHub runner; cannot certify selected real product from synthetic evidence.",
-        "PR #2385 official afterproof and required exact-source checks not all PASS; not merged or READY."
+        "Initial current public Huckleberry source returned HPE_HEADER_OVERFLOW at 12KB header limit; 32KB guarded product-header correction not yet verified by live current official afterproof and exact CI.",
+        "PR #2385 not yet nonforce merged and accepted; do not call READY or deploy."
       ],
       "owner_source": "Owner direct chat November 12 2026: Huckleberry Roasters India Gundikhan Washed URL must work in the extractor; no owner Publish.",
-      "notes": "Scoped safe development-only fix to reject unrelated product/lot metadata, preserve numeric bag size as purchase variant, and retrieve exact handle same-host Shopify public JSON where available. Active route is Netlify /api/coffee-preview (legacy Supabase roaster directory irrelevant). No Auth, private data, SQL, Netlify deployment, frozen original603 or production publication. Status IN_PROGRESS pending actual guarded HTTPS source proof, CI, safe merge and queue reconciliation.",
+      "notes": "Scoped safe development-only fix to reject unrelated product/lot metadata, preserve numeric bag size as purchase variant, and retrieve exact handle same-host Shopify public JSON where available. Active route is Netlify /api/coffee-preview (legacy Supabase roaster directory irrelevant). No Auth, private data, SQL, Netlify deployment, frozen original603 or production publication. Status IN_PROGRESS pending actual guarded HTTPS source proof, CI, safe merge and queue reconciliation.\nNov12 guarded runner verified HPE_HEADER_OVERFLOW for both HTML and product JSON with DNS globally routable and no HTTP response callback. Third source path src/server/coffee-url-guard.mjs now part of scope and selective numeric product-header cap tested, but real source rerun pending; no quota/provider changes.",
       "production_deployed": false
     }
   ],

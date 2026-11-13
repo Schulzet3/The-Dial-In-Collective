@@ -8,6 +8,11 @@ import {gunzipSync,inflateSync,brotliDecompressSync} from 'node:zlib';
 
 export const MAX_HTML_BYTES=900_000;
 export const MAX_PRODUCT_RETRY_BYTES=2_000_000;
+export const MAX_PUBLIC_HEADER_BYTES=12_000;
+// Real public Shopify product responses may include more cookie/CSP headers
+// than a catalog. Expand ONLY the selected exact product-route budget, never
+// catalog roots or arbitrary site URLs; this stays bounded and DNS/TLS-pinned.
+export const MAX_PRODUCT_HEADER_BYTES=32_000;
 // Decode exactly one path segment. Encoded separators, controls and a second
 // encoding layer are never product identity. Literal international handles
 // and registered-mark characters do occur in public merchant product URLs.
@@ -134,7 +139,8 @@ export async function fetchPublicCoffeeHtml(raw,{
    req=request({
     protocol:'https:',hostname:url.hostname,servername:url.hostname,port:443,
     path:url.pathname+url.search,method:'GET',lookup,family:4,agent:false,
-    rejectUnauthorized:true,timeout:Math.min(10_000,remaining),maxHeaderSize:12_000,
+    rejectUnauthorized:true,timeout:Math.min(10_000,remaining),
+    maxHeaderSize:isCoffeeProductDetailUrl(url.toString())?MAX_PRODUCT_HEADER_BYTES:MAX_PUBLIC_HEADER_BYTES,
     headers:{Accept:responseType==='html'?'text/html,application/xhtml+xml':
      responseType==='shopify_json'?'application/json,text/javascript,application/javascript':'application/json',
      'Accept-Encoding':'gzip, br',
