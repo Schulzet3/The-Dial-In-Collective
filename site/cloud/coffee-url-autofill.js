@@ -90,8 +90,6 @@ export function elevationWithDefaultMeters(value){
 }
 const reasons={
  invalid_url:'Enter a secure HTTPS link to a public coffee product page.',
- unrecognized_official_roaster:'This source could not be recognized or accessed. Enter coffee details manually if needed.',
- unsupported_official_product_url:'That link is not a supported official coffee product page. Try the specific product page or enter details manually.',
  ambiguous_or_missing_product:'We could not identify one specific coffee from the page metadata. Enter the details manually to avoid mixing different releases.',
  source_unavailable:'The roaster page is temporarily unavailable. You can enter the details manually.',
  source_fetch_failed:'The roaster page could not be checked right now. You can enter details manually.',

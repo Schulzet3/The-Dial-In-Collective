@@ -675,7 +675,7 @@ class CloudApp {
   this.show('New Coffee',`<form id=new-coffee>
    <div class="coffee-url-first">${field('Roaster Page URL','source_url','',{type:'url',placeholder:'https://roaster.com/products/coffee'})}
     <div class="coffee-url-actions">${button('Autofill From URL','preview-coffee-url','','secondary coffee-url-autofill-button')}
-     <span class="helper">Optional · Official coffee product page</span></div>
+     <span class="helper">Any roaster · public HTTPS coffee product page</span></div>
    </div>
    <div id="coffee-url-feedback" aria-live="polite"></div>
    ${field('Coffee Name','name','',{required:true})}
@@ -685,7 +685,7 @@ class CloudApp {
    <div class="form-grid coffee-detail-grid">${field('Origin','origin')}${select('Roast Level','roast_level',['',...C.ROASTS],'')}${field('Elevation','elevation_m')}${select('Process','process',['',...C.PROCESSES],'')}${field('Variety','variety')}${field('Producer','producer')}</div>
    ${field('Tasting Notes','tasting_notes')}
    <button class="primary full space-top">Add Coffee</button>
-   <p class="helper space-top">Check all suggested information before saving. Missing details can be entered manually.</p>
+   <p class="helper space-top">Autofill uses available published facts, flags conflicts or uncertainty, and leaves missing details for you to enter before saving.</p>
   </form>`);
  }
  async finishCoffeeAdd(d,matched,chosenId=null,{confirmedDistinct=false}={}){

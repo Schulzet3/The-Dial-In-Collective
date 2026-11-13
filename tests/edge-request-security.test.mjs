@@ -21,7 +21,7 @@ function edge(name,{admitted=false,valid=true}={}){
  });
  return {call:(body,headers={})=>handler(new Request('https://edge.invalid/'+name,{method:'POST',duplex:'half',headers:{Authorization:'Bearer fake', 'Content-Type':'application/json',...headers},body})),counts:()=>({clients,fetches,rpcs})};
 }
-for(const name of ['dic-preview-coffee','dic-verify-coffee']){
+for(const name of ['dic-verify-coffee']){
  test(name+': malformed, excessive, foreign-origin and content-type inputs are denied before SDK access',async()=>{
   for(const [body,headers,status] of [['{',{},400],['x'.repeat(5000),{},413],['{}',{'Content-Type':'text/plain'},415],['{}',{Origin:'https://attacker.invalid'},403]]){
    const f=edge(name),r=await f.call(body,headers);assert.equal(r.status,status);assert.deepEqual(f.counts(),{clients:0,fetches:0,rpcs:0});
@@ -36,3 +36,17 @@ for(const name of ['dic-preview-coffee','dic-verify-coffee']){
   for(const valid of [true,false]){const f=edge(name,{valid}),r=await f.call(body);assert.equal(r.status,valid?403:401);assert.equal(f.counts().clients,1);assert.equal(f.counts().fetches,0);}
  });
 }
+
+test('retired legacy dic-preview-coffee cannot fetch, authorize, or accept any domain',async()=>{
+ for(const [body,headers] of [['{',{}],['x'.repeat(5000),{}],
+  ['{}',{'Content-Type':'text/plain'}],['{}',{Origin:'https://attacker.invalid'}],
+  [JSON.stringify({source_url:'https://any-global-roaster.example.org/products/new-coffee'}),{}]]){
+  const f=edge('dic-preview-coffee'),r=await f.call(body,headers);
+  assert.equal(r.status,410);
+  assert.equal((await r.json()).reason,'retired_endpoint');
+  assert.deepEqual(f.counts(),{clients:0,fetches:0,rpcs:0});
+ }
+ const f=edge('dic-preview-coffee'),slow=await f.call(new ReadableStream({pull(){return new Promise(()=>{});}}));
+ assert.equal(slow.status,410);
+ assert.deepEqual(f.counts(),{clients:0,fetches:0,rpcs:0});
+});
