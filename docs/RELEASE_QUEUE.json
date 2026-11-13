@@ -13737,25 +13737,34 @@
       "production_deployed": false
     },
     {
-        "id": "DIC-Q-455-r242-shot-scalar-measurement-integrity",
-        "issue": 455,
-        "pr": 2518,
-        "title": "Validate new Log Shot dose, yield, time and optional temperature as genuine scalar measurements",
-        "state": "TESTING",
-        "merged_source_sha": null,
-        "scope_paths": [
-            "site/lib/model.js"
-        ],
-        "owner_source": "Issue #455 Option B SAFE Locked-compatible data-integrity correction; immutable preflight development_sha=6a7b9c3faca7ff4053189518e5470cca22ae60a3 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
-        "ci_runs": [],
-        "tests": [
-            "New synthetic negative and positive Node22 real-module regressions in PR #2518; applicable exact-source checks currently running, NOT PASS until checked."
-        ],
-        "blockers": [
-            "PR #2518 code/head exact-source tests and nonforce integration require independent confirmation before READY"
-        ],
-        "notes": "Original model allowed numeric coercion of array or object into new shot dose/yield/time and optional temperature. Restrict only new-shot physical input to number or numeric string, preserve historical offline replays and five tastes; no source read of member records, numeric policy, privacy/Community/RLS, provider production operation, or Netlify deployment. Existing frozen603 SKIPPED != PASS.",
-        "production_deployed": false
+      "id": "DIC-Q-455-r242-shot-scalar-measurement-integrity",
+      "issue": 455,
+      "pr": 2518,
+      "title": "Validate new Log Shot dose, yield, time and optional temperature as genuine scalar measurements",
+      "state": "READY",
+      "merged_source_sha": "0095369dce8f651bbfdefe6fc3ed1c986883e44a",
+      "scope_paths": [
+        "site/lib/model.js"
+      ],
+      "owner_source": "Issue #455 Option B SAFE Locked-compatible data-integrity correction; immutable preflight development_sha=6a7b9c3faca7ff4053189518e5470cca22ae60a3 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "ci_runs": [
+        43514201918,
+        43514201769,
+        43514201801,
+        43514201724,
+        43514201811,
+        43514705343,
+        43514705350,
+        43514705506
+      ],
+      "tests": [
+        "Source PR #2518 head e574c04951ddd996f5fa8296e61fb841afc29726: Node22/lint 43514201918 SUCCESS 4631 PASS/0 FAIL/6 intentional SKIP, all four R242 positive and negative real-module tests PASS. Earlier governance attempts 43513740486/43514034458 FAILED until required queue intake and schema were corrected; failures retained in same-commit journal.",
+        "PR-head isolated SQL/privacy 43514201801, compiled cloud/mobile/Chromium/offline 43514201769, security 43514201811 and approval/queue 43514201724 all SUCCESS; frozen603 43514201767 SKIPPED NOT PASS.",
+        "Exact nonforce squash code merge 0095369dce8f651bbfdefe6fc3ed1c986883e44a readback 4 Git blobs identical to tested PR head; merged Node/lint 43514705343 SUCCESS 4631 PASS/0 FAIL/6 SKIP and all four R242 tests, merged UX/cloud/mobile 43514705350 and governance 43514705506 SUCCESS. No original603 or real espresso quality outcome claimed."
+      ],
+      "blockers": [],
+      "notes": "NARROW SAFE DEVELOPMENT READY ONLY, NOT DEPLOYED: original non-scalar array/object payload previously coerced into a measured new shot (dose/yield/time or optional temp); input must be real number or numeric string. Original archival shot/offline replay, five ratings, notes/history, style/grinder/feed, Community/RLS and current Locked numeric targets preserved. No owner publication authorization, new member data, provider writes, Netlify or production. #455 remains OPEN.",
+      "production_deployed": false
     }
   ],
   "history": [

@@ -2431,6 +2431,26 @@
       "claims_verified_externally": "Six trained descriptive panelists rated 32 attributes in Ethiopian, Kenyan and Colombian brewed coffee at 70,55,40,25 C. Author abstract reports 18 temperature- and seven variety-sensitive attributes; study-specific PCA descriptive variance 63.28% temperature vs 21.24% variety, not a general causal fraction or espresso quality effect.",
       "reviewed_date_utc": "2026-11-13",
       "implementation_status": "RESEARCH_ONLY_NO_APP_PRODUCT_NUMERIC_OR_CAPTURE_CHANGE"
+    },
+    {
+      "id": "LIVE-20261113-NEW-SHOT-SCALAR-GUARD-R242",
+      "type": "source_verified_current_new_shot_input_correctness_not_research_publication",
+      "title": "New-shot scalar physical measurement coercion and preservation of historical replay",
+      "source_path": "site/lib/model.js",
+      "source_blob_sha": "fdc65f869546cddbb6552e555dca12117f2c47fc",
+      "original_bug_source_sha": "6a7b9c3faca7ff4053189518e5470cca22ae60a3",
+      "original_bug_model_blob": "469c55c17dd3ee5c16523e59a5adace1056e9038",
+      "source_merge_sha": "0095369dce8f651bbfdefe6fc3ed1c986883e44a",
+      "test_path": "tests/issue455-shot-scalar-measurements.test.mjs",
+      "test_blob_sha": "34988088fa89f71c455ff0fdb9cfcf42cbb068b4",
+      "access": "DIRECT_IMMUTABLE_GITHUB_SOURCE_AND_TEST_CODE_READ_HEAD_AND_MERGED_BLOBS_IDENTICAL",
+      "review_status": "R455-242_REPRODUCED_COERCION_AND_VERIFIED_POSITIVE_NEGATIVE_REAL_MODULE_TESTS_ON_EXACT_SOURCE_PR_AND_MERGE",
+      "evidence_grade": "SOURCE_REPRODUCED_DETERMINISTIC_CORRECTNESS_NO_OBSERVED_MEMBER_INCIDENT_NO_EMPIRICAL_ESPRESSO_OUTCOME",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Git blob SHA verified exactly. No personal record accessed and no source claim of improved espresso taste.",
+      "claims_verified_externally": "Prior non-scalar doseG:[18], yieldG:[44], timeS:[17] and optional tempC:[91] could pass Number-based coercion. New shot requires true number/string input to validate; valid numeric strings and notes/ratings persist, replay of archived saved ID untouched.",
+      "reviewed_date_utc": "2026-11-13",
+      "implementation_status": "MERGED_DEV_READY_QUEUE_ONLY_NOT_DEPLOYED"
     }
   ],
   "evidence_checks": [
@@ -7416,6 +7436,42 @@
       "owner_approval": false,
       "github267_literal_review_credit": 0,
       "date": "2026-11-13"
+    },
+    {
+      "id": "R455-EV-APP-242-NEGATIVE",
+      "source": "LIVE-20261113-NEW-SHOT-SCALAR-GUARD-R242",
+      "section": "site/lib/model.js validateShot; tests/issue455-shot-scalar-measurements.test.mjs negative tests",
+      "claim": "Malformed one-element arrays, objects, boxed numbers and BigInts must NOT become new recorded scalar dose/yield/time or optional measured temperature, nor partially mutate personal state.",
+      "grade": "EXACT_SOURCE_NODE22_REGRESSION_NEGATIVE_4_TESTS_ALL_PASS_ON_PR_HEAD_AND_MERGE",
+      "factual_status": "REPRODUCED_PRIOR_COERCION_FIXED_AND_RETESTED_SYNTHETIC_STATE_ONLY",
+      "result": "SAFE_SOURCE_FIX_MERGED_DEV_READY_NOT_PUBLISHED",
+      "current_app": "model Git blob fdc65f869546cddbb6552e555dca12117f2c47fc; app code merge 0095369dce8f651bbfdefe6fc3ed1c986883e44a",
+      "tests": [
+        "PR-head Node/lint 43514201918",
+        "merged Node/lint 43514705343"
+      ],
+      "owner_approval": false,
+      "github267_literal_review_credit": 0,
+      "date": "2026-11-13"
+    },
+    {
+      "id": "R455-EV-APP-242-POSITIVE",
+      "source": "LIVE-20261113-NEW-SHOT-SCALAR-GUARD-R242",
+      "section": "site/cloud/mapping.js shotPayload, model.validateShot and engine.saveShot; R242 regression test",
+      "claim": "Genuine scalar numeric strings persist measured dose/yield/time/optional temperature and all five original tastes/private notes; preexisting same-coffee saved-ID offline replay retains malformed legacy original without rewrite.",
+      "grade": "EXACT_SOURCE_NODE22_POSITIVE_TESTS_AND_BLOB_PARITY;NOT_SIGNED_IN_MEMBER_TEST",
+      "factual_status": "SYNTHETIC_REAL_MODULE_CASES_PASS_WITH_ORIGINAL_VALUES_PRESERVED",
+      "result": "LOCKED_AND_PRIVACY_BEHAVIOR_PRESERVED",
+      "current_app": "same verified merged code 0095369dce8f651bbfdefe6fc3ed1c986883e44a",
+      "tests": [
+        "PR-head 43514201918 4631 pass",
+        "merged 43514705343 4631 pass",
+        "PR-head isolated SQL 43514201801 SUCCESS",
+        "PR-head browser/cloud 43514201769 SUCCESS"
+      ],
+      "owner_approval": false,
+      "github267_literal_review_credit": 0,
+      "date": "2026-11-13"
     }
   ],
   "policy_decisions_pending": [],
@@ -7596,24 +7652,25 @@
     "R455-238: 2015 Sanchez/Chambers published original abstract and separate 2014 first-party poster reviewed; different descriptive brewing methods have co-changing contact time and water temperature. 1 new bounded original publication source, 2 checks, 1 research-only proposal; no runtime bug or proven user improvement, no numeric/Locked change. Exact docs PR head CI/merge/readback pending; full 2015 methods/2014 poster binary and S019 remain unverified; #267 credit zero.",
     "R455-239: Original Andueza 2003 Wiley abstract crosschecked with unauthenticated third-party 9-page text, provisional 7.5g/40mL machine/delivery temperature offset and 20-judge 10-cm descriptive scale extracted with strict provenance qualifier. One existing source identity updated, 2 bounded checks and 1 P3 proposal; no current app bug, new numeric temperature target, five-rating map or measured improvement. Verify PR and merged CI; full publisher PDF, figures, raw data and S019 still inaccessible; #267 zero new literal-line credit.",
     "R455-240: two 2019 original indexed studies of BREWED coffee consumption temperature; 2 bounded publications + 3 claim checks +1 P3 evidence design proposal; 136/384/196 candidate at authoring. Control tasting-temperature/delay only as future separately approved optional/consented research protocol. Neither original full PDF/raw data nor espresso recommendation quality trial verified; no code/Locked/telemetry/new data/READY change; #267 zero literal credit. Exact source CI, nonforce merge/readback pending. Standalone S019 not recovered.",
-    "R455-241 authored at source fde5f21810ca8db426cf8981375bc6d33698fdd4: expanded existing Foster 2025 XCT source by direct institutional published PDF Methods/Results/Discussion, Tables I-II and Figures 2/3/11 visual verification; +0 sources/+3 bounded evidence checks/+1 P3 research-only proposal, candidate counts 136/387/197; no user tastes studied, no new preinfusion numeric target; original PDF bytes SHA256/unpublished raw data unverified, S019 inaccessible, #267 literal credit zero. Verify docs-only PR exact source CI, nonforce merge, exact merged blob parity and checkpoint #455."
+    "R455-241 authored at source fde5f21810ca8db426cf8981375bc6d33698fdd4: expanded existing Foster 2025 XCT source by direct institutional published PDF Methods/Results/Discussion, Tables I-II and Figures 2/3/11 visual verification; +0 sources/+3 bounded evidence checks/+1 P3 research-only proposal, candidate counts 136/387/197; no user tastes studied, no new preinfusion numeric target; original PDF bytes SHA256/unpublished raw data unverified, S019 inaccessible, #267 literal credit zero. Verify docs-only PR exact source CI, nonforce merge, exact merged blob parity and checkpoint #455.",
+    "R455-242 completed narrow SAFE scalar new shot code/test merge 0095369dce8f651bbfdefe6fc3ed1c986883e44a PR #2518. Both exact PR and merged Node22 4631 PASS/0 FAIL/6 SKIP; head SQL/cloud/mobile/security/approval SUCCESS, merged cloud/mobile/governance SUCCESS. New model input validity now guarded; legacy saved ID replay, five tastes/notes preserved. Queue R242 READY DEV ONLY; no Netlify/production writes or owner policy changes. No new empirical cup quality validation; original S019 unavailable. Continue distinct #455 source claims and UX checks."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-241",
-    "starting_preflight_development_sha": "7ec9f1c4ecc9e964390eb2263745a535dc72baee",
+    "run_id": "R455-242",
+    "starting_preflight_development_sha": "6a7b9c3faca7ff4053189518e5470cca22ae60a3",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "live_parent_sha_at_authoring": "fde5f21810ca8db426cf8981375bc6d33698fdd4",
-    "phase": "DOCS_ONLY_ORIGINAL_FOSTER_2025_XCT_PUBLISHED_AUTHOR_PDF_FULL_SECTIONS_SELECTED_FIGURES_CANDIDATE_CI_NOT_RUN",
+    "live_parent_sha_at_authoring": "cc9453da244955ec4f9b6073f8aaf92db8e10fd3",
+    "phase": "SAFE_NEW_SHOT_SCALAR_VALIDATION_MERGED_AND_EXACT_PR_HEAD_AND_MERGE_CI_VERIFIED",
     "source_counts": {
-      "research_project_source_records": 136,
-      "bounded_evidence_checks": 387,
-      "proposals": 197
+      "research_project_source_records": 137,
+      "bounded_evidence_checks": 389,
+      "proposals": 198
     },
-    "source_access": "PUBLISHED_AUTHOR_INSTITUTIONAL_PDF_FULL_METHODS_RESULTS_CONCLUSIONS_AND_3_SELECTED_PAGE_IMAGES; BINARY_SHA_RAW_DATA_UNVERIFIED",
-    "original_s019": "UNRETRIEVED_GOOGLE_DRIVE_AND_CHATGPT_SPACE_SEARCH_20261113",
+    "source_access": "CURRENT_LIVE_CODE_AND_TEST_BLOB_PARITY_VERIFIED_NOT_NEW_SCIENTIFIC_PRIMARY_PUBLICATION",
+    "original_s019": "UNRETRIEVED_GOOGLE_DRIVE_AND_PROJECT_LIBRARY_SEARCH_20261113",
     "github267_literal_review_credit": 0,
-    "release_state": "NO_NEW_READY_NO_PUBLICATION",
-    "next": "Review PR-head exact docs/governance checks; nonforce squash merge with actual merge title/message [skip netlify], Git blob parity and Issue #455 checkpoint."
+    "release_state": "R242_NARROW_DEVELOPMENT_READY_NOT_DEPLOYED_NO_OWNER_PUBLICATION_AUTHORIZATION",
+    "next": "Resume #455 distinct owner-authorized primary citation, recommendation workflow and privacy-safe effect-evidence gap, no duplicate #267/#33/#96 work."
   },
   "policy_decisions_resolved": [
     {
@@ -12087,6 +12144,31 @@
       "production_deployed": false,
       "github267_literal_review_credit": 0,
       "exact_source": "fde5f21810ca8db426cf8981375bc6d33698fdd4"
+    },
+    {
+      "id": "R455-PROP-242-NEW-SHOT-SCALAR-VALIDATION",
+      "severity": "P2_DETERMINISTIC_NEW_MEASUREMENT_INTEGRITY_DEFECT_NO_REAL_MEMBER_INCIDENT_CONFIRMED",
+      "source": [
+        "LIVE-20261113-NEW-SHOT-SCALAR-GUARD-R242"
+      ],
+      "evidence": [
+        "R455-EV-APP-242-NEGATIVE",
+        "R455-EV-APP-242-POSITIVE"
+      ],
+      "finding": "Non-scalar values were coerced to valid-looking physical measurements during a new shot save instead of rejected, undermining integrity of new original measured shots. Current measured scalar string inputs and historical idempotent replay are intentionally distinct.",
+      "evidence_grade": "DIRECT_SOURCE_REPRODUCTION_PLUS_FOUR_EXACT_HEAD_AND_MERGE_POSITIVE_NEGATIVE_REGRESSIONS_NOT_EMPIRICAL_CUP_QUALITY",
+      "user_benefit": "Prevent apparently measured false dose/yield/time/temperature in private history and recommendations without losing legitimate numeric string input or historical records.",
+      "current_locked": "Five separate explicit tastes, complete all-green vs missing, no more than one truly controllable next step; preserve original measurements/notes/history, independent styles Turbo/Fast-Flow, slow feed, grinder range/calibrations, temperature capabilities, other successful recipe families, same-coffee evidence, privacy/RLS/Community.",
+      "current_app": "Original preflight source 6a7b9c3faca7ff4053189518e5470cca22ae60a3 model blob 469c55c17dd3ee5c16523e59a5adace1056e9038; corrected model blob fdc65f869546cddbb6552e555dca12117f2c47fc merged 0095369dce8f651bbfdefe6fc3ed1c986883e44a",
+      "proposed_change": "IMPLEMENTED narrow new-shot validation only. No broad num coercion change, new data capture, new numeric taste targets or edits to legacy/offline shot records.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "NONFORCE_MERGED_DEV_VERIFIED_ALL_APPLICABLE_SOURCE_CI",
+      "test_plan": "R242 four synthetic tests, exact PR-head Node22 4631 PASS/0 FAIL/6 intentional SKIP, merged Node22 4631 PASS, cloud/mobile/governance head and merged, SQL/security head. Frozen603 SKIPPED, no member/device/cup quality claim.",
+      "release_queue_status": "DIC-Q-455-r242-shot-scalar-measurement-integrity_READY_DEV_ONLY_NOT_DEPLOYED",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0,
+      "exact_source": "0095369dce8f651bbfdefe6fc3ed1c986883e44a"
     }
   ],
   "changeScope": {
