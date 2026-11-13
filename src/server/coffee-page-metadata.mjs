@@ -24,7 +24,7 @@ import {equivalentCoffeeProductNames,preferredCoffeeRoasterName,selectedCoffeeNa
 import {isolateCoffeeIdentityCohorts} from './coffee-source-identity-scope.mjs';
 import {extractCoffeeGeographyEntityRoles,cleanCoffeeGeographyEntityPrefix} from './coffee-geography-entity-roles.mjs';
 import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProductFlavorProfileEvidence,refineSelectedNamedTastingNotes,normalizeExplicitCoffeeTastingNotes,equivalentCoffeeTastingNotes,coffeeTastingNotesSubset} from './coffee-flavor-evidence.mjs';
-import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,refineSelectedCurrentTrailingFlavorNote,refineSelectedCurrentFlavorBase,refineSelectedCurrentSensoryArc,selectedCoffeeSupplementalTastingProse} from './coffee-selected-description-sensory.mjs';
+import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,refineSelectedCurrentTrailingFlavorNote,refineSelectedCurrentFlavorBase,refineSelectedCurrentSensoryArc,selectedCoffeeSupplementalTastingProse,selectedCurrentProductOvertone} from './coffee-selected-description-sensory.mjs';
 import {selectedCoffeeMilkSensoryContext} from './coffee-selected-milk-sensory-context.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {parseCoffeeElevation,equivalentCoffeeElevations,compatibleCoffeeElevations,extractCoffeeElevationEvidence} from './coffee-elevation-evidence.mjs';
@@ -2027,6 +2027,22 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     const arc=refineSelectedCurrentSensoryArc(currentProduct,{clean,notes:fields.tasting_notes});
     if(arc)fields.tasting_notes=arc;
    }
+  }
+  // Strong selected current tasting facts outrank a generic roast-guide's
+  // weaker tasting suggestion. This specifically requires an own-product
+  // description and rejects structured/printed direct conflicts, conditions
+  // and nonselected product prose.
+  if(!printedNotes.length&&!structuredFlavorByFields.get(fields)&&
+     !conflicts.has('tasting_notes')&&!seoFallbackByFields.get(fields)?.has('tasting_notes')){
+    const overtone=selectedCurrentProductOvertone(currentProduct,{clean});
+    if(overtone){
+      fields.tasting_notes=overtone.value;
+      if(source_facts.length<384)source_facts.push({
+        field:'tasting_notes',label:'Selected current product literal overtones',
+        value:overtone.value,source_type:'html',source_url,
+        section:overtone.section||'Exact selected coffee description'
+      });
+    }
   }
   // A distinct current selected flavor sentence is review evidence, not a
   // license to concatenate notes or override a stronger literal Flavor label.

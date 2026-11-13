@@ -48,3 +48,27 @@ test('#235 unrelated product aside cannot supply Colombian origin',()=>{
  const r=parse(own,'<aside>Colombia Geisha, 1900m, Natural</aside>');
  assert.ok(!/colombia/i.test(String(r.fields?.origin||'')),JSON.stringify(r).slice(0,1800));
 });
+
+test('#235 unqualified own chocolate overtones cannot be replaced by a general roast-guide chocolate name',()=>{
+ const body=own.replace('noticeable chocolate overtones','noticeable hazelnut overtones');
+ const r=parse(body);
+ assert.ok(/hazelnut/i.test(String(r.fields?.tasting_notes||'')),JSON.stringify(r).slice(0,1900));
+ assert.ok(!/chocolate/i.test(String(r.fields?.tasting_notes||'')),JSON.stringify(r).slice(0,1900));
+});
+test('#235 two selected product overtone sources do not manufacture a chosen profile',()=>{
+ const body=own.replace('noticeable chocolate overtones','noticeable hazelnut overtones')+
+ '<p>Our Espresso Roast Kona Coffee is a dark roast with noticeable vanilla overtones.</p>';
+ const r=parse(body);
+ assert.ok(!/hazelnut|vanilla/i.test(String(r.fields?.tasting_notes||'')),JSON.stringify(r).slice(0,1800));
+});
+test('#235 historical or conditional overtone claims cannot become selected facts',()=>{
+ const body=own.replace('Our Espresso Roast Kona Coffee is a dark roast, which creates','Previously, our Espresso Roast Kona Coffee was a dark roast, which creates');
+ const r=parse(body);
+ assert.ok(!/chocolate/i.test(String(r.fields?.tasting_notes||'')),JSON.stringify(r).slice(0,1600));
+});
+test('#235 overtone from other product section never substitutes selected facts',()=>{
+ const body=own.replace('noticeable chocolate overtones','a smooth finish')+
+ '<h2>About our Different Product</h2><p>Our Espresso Roast Kona Coffee is a dark roast with noticeable hazelnut overtones.</p>';
+ const r=parse(body);
+ assert.ok(!/hazelnut/i.test(String(r.fields?.tasting_notes||'')),JSON.stringify(r).slice(0,1600));
+});
