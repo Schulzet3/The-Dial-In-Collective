@@ -1,5 +1,8 @@
 # Scoped GitHub Work Journals
 
+**Live status rule (November 13 update):** Entries labeled READY/NOT DEPLOYED below are dated evidence snapshots; use [CURRENT_STATUS](../CURRENT_STATUS.md) and [RELEASE_QUEUE](../RELEASE_QUEUE.json) for current operational state. Owner READY15 production verified at Git `ad836aae` / Netlify `6af76f7c` READY/current. #504 draft historical PRs are NOT integrated evidence until individually tested/merged; #267 V1 drafts must NOT count as V2 review.
+
+
 - [Issue #33 R169 original603 #233 selected intrinsic sensory arc READY development only](ops-issue33-r169-233-20261113.md) — merged-source official raw HTML, independent hashes and CI; full603 OPEN
 
 - [#2169 source-drift release gate: exact CI and nonforce reconciliation](ops-issue2169-ready-drift-integration-20261112.md) — preserve later unfinished changes without erasing independent READY evidence or bypassing candidate isolation
@@ -8,10 +11,11 @@
 
 - [Issue #33 R100 original603 Ki-Saya #501 and AMCOS #504 selected-source TESTING](ops-issue33-r100-501-504-20261110.md) — exact guarded official source and parser CI pending, parent OPEN
 
-- [Issue #1591: first-shot starting-style guidance until shot is saved](issue-1591.md) — owner-Nov-8 Locked supersession, merged tests and queue READY; not deployed
+- [Issue #1591: first-shot starting-style guidance until shot is saved](issue-1591.md) — owner-Nov-8 Locked supersession; original READY notes are historical; current release queue records this feature **DEPLOYED** (verified November 13)
 
 After the mandatory [PREFLIGHT](../ai/PREFLIGHT.md), the central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md) remains the recovery checkpoint. For each code/test/CI commit, update either that central checkpoint or one of the named workstream journals in the same commit. Preserve tested SHA, affected paths, decision source, failures, privacy/release constraints and next action. Reconcile issue, CURRENT_STATUS, release queue and central checkpoint at READY and handoff. Never infer production publication. New code/test/CI changes require a NEW standalone `DIC_PREFLIGHT_VERIFIED development_sha=<live-40-hex> preflight_blob_sha=<blob-40-hex>` line in their SAME-COMMIT journal, checked against actual Git objects by existing approval continuity CI.
 
+- [November 13 issue/PR status and live-doc navigation cleanup](ops-issue504-current-navigation-20261113.md) — exact preflight; 2 completed issues closed, 2 deployed-with-unverified-delivery issues clarified, six historical PRs marked; authoritative navigation links repaired without erasing older evidence
 - [Espresso research-to-UX decision audit: Issue #455](issue-455.md)
 - [Owner-approved refinements: Issue #80](issue-80.md)
 - [Current-workflow reconciliation: Issue #70](issue-70.md)
