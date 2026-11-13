@@ -34,9 +34,48 @@ export function exactRecordedChecks(checkRuns,sourceSha,recordedRunIds){
    recorded_run_id:receipt,recorded:sourced};
  });
 }
+
+/** Source-bound proof of ordered co-selected READY changes to one frozen file. */
+export function reviewedSelectedReadyOverlaps(items,{
+ candidateSha,candidateChangedPaths,sourceObjectAt,mergeChangedPaths,isAncestor
+}={}){
+ if(!Array.isArray(items)||!SHA.test(candidateSha||'')||!Array.isArray(candidateChangedPaths)||
+    typeof sourceObjectAt!=='function'||typeof mergeChangedPaths!=='function')
+  throw Error('Selected READY overlap source evidence unavailable');
+ const changed=new Set(deployableChangedPaths(candidateChangedPaths)),owners=new Map();
+ for(const item of items){
+  if(item?.state!=='READY'||!SHA.test(item?.merged_source_sha||''))
+   throw Error('Uncertified selected READY overlap owner');
+  for(const path of item.scope_paths||[]){
+   if(!changed.has(path))continue;
+   if(!owners.has(path))owners.set(path,[]);
+   owners.get(path).push(item);
+  }
+ }
+ const reviewed=[];
+ for(const [path,listed] of owners){
+  if(listed.length<2)continue;
+  if(typeof isAncestor!=='function')throw Error('Same-file READY ancestry unavailable: '+path);
+  for(const item of listed){
+   const files=mergeChangedPaths(item.merged_source_sha);
+   if(!Array.isArray(files)||!files.includes(path)||
+      !sourceObjectAt(item.merged_source_sha,path))
+    throw Error('Same-file READY owner lacks first-parent source proof: '+path);
+  }
+  const tips=listed.filter(tip=>listed.every(owner=>
+   owner===tip||isAncestor(owner.merged_source_sha,tip.merged_source_sha)===true));
+  if(tips.length!==1)throw Error('Same-file READY owners lack one ordered Git tip: '+path);
+  const candidate=sourceObjectAt(candidateSha,path);
+  if(!candidate||candidate!==sourceObjectAt(tips[0].merged_source_sha,path))
+   throw Error('Frozen candidate differs from last selected READY source: '+path);
+  reviewed.push(path);
+ }
+ return reviewed.sort();
+}
+
 export async function verifyReadyItems({queue,items,loadRun,loadChecks,sourceObjectAt,
  mergeChangedPaths,currentSourceSha,publishedSourceSha,candidateSha,candidateChangedPaths,
- allowedPinnedPaths=[]}={}){
+ allowedPinnedPaths=[],isAncestor}={}){
  const errors=queueSchemaErrors(queue),verified=[],checksByItem={},ciSourceByItem={},testPathsByItem={};
  if(!Array.isArray(items)||typeof loadRun!=='function'||typeof loadChecks!=='function'||
   typeof sourceObjectAt!=='function'||typeof mergeChangedPaths!=='function')
@@ -104,9 +143,16 @@ export async function verifyReadyItems({queue,items,loadRun,loadChecks,sourceObj
   }catch(e){errors.push(prefix+String(e.message||e));}
  }
  if(candidateChangedPaths!==undefined){
+  // Accept co-selected overlaps only AFTER each owner passed exact CI/byte parity.
+  let coOwned=[];
+  if(!errors.length)try{
+   coOwned=reviewedSelectedReadyOverlaps(items,{
+    candidateSha,candidateChangedPaths,sourceObjectAt,mergeChangedPaths,isAncestor
+   });
+  }catch(e){errors.push(String(e.message||e));}
   const batch=preflightReadyBatch(queue,items,{publishedSourceSha,candidateSha,
    changedPaths:candidateChangedPaths,checksByItem,ciSourceByItem,sourceObjectAt,
-   testPathsByItem,allowedPinnedPaths});
+   testPathsByItem,allowedPinnedPaths:[...new Set([...allowedPinnedPaths,...coOwned])]});
   errors.push(...batch.errors);
  }
  return {ready:errors.length===0,errors,verified};
