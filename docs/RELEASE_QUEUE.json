@@ -13699,6 +13699,29 @@
       "blockers": [],
       "notes": "NARROW DEVELOPMENT READY, NOT DEPLOYED: source-present six selected Mexico coffee #255 smallholder growing localities now retain exact review-only provenance and qualified note; never assert six named farmer identities. Canonical producer remains smallholder growers; no unsupported roast/decaf/lot inference. Whole603 individual certification remains open. No production operations.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-33-r181-257-selected-narrative-context",
+      "issue": 33,
+      "pr": 2509,
+      "title": "Preserve extra literal selected Hacienda Rio Negro toffee narrative as Source Review context only",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-selected-description-sensory.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "owner_source": "Issue33 DEV-only R181 exact current source/parser; preflight d3fbcfc3f8dc40a4b36ad130f41c39dae24e6dcd blob 2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Before-fix exact guarded current #257 parser at PR-head run 43507511615 read back: literal selected toffee appears but no canonical or sensory source fact, while stronger direct Flavor Profile remains Cantelope, Brown Sugar, Silky.",
+        "Five positive/negative current-selected/noncurrent/related/conditional regressions and fixed-source official afterproof pending new exact-head CI."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "PR-head and exact merged official/parser plus Node/lint/cloud/mobile/approval/SQL evidence pending; do not promote until independent complete."
+      ],
+      "notes": "Review-only sensory_context from direct selected narrative with two literal accepted anchors; do not change canonical taste or historic corpus; no Publish.",
+      "production_deployed": false
     }
   ],
   "history": [
