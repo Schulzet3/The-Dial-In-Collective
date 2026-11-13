@@ -7,7 +7,7 @@ import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
 import {selectedProductHeadings} from './issue33-selected-product-heading.mjs';
 import {removeElements} from '../../supabase/functions/_shared/html-scan.mjs';
 const sha=x=>createHash('sha256').update(x).digest('hex');
-const norm=x=>String(x??'').normalize('NFKD').replace(/\\p{M}/gu,'').toLowerCase().replace(/[^a-z0-9]+/gu,' ').trim().replace(/\\s+/gu,' ');
+const norm=x=>String(x??'').normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase().replace(/[^a-z0-9]+/gu,' ').trim().replace(/\s+/gu,' ');
 export const chosen251=Object.freeze({number:251,name:'Decaf Espresso Blend',url:'https://orleanscoffee.com/product/espresso-decaf-blend'});
 export function source251(html){
  const chosen=productMarkup(String(html||''));
