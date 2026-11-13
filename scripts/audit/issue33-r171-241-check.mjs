@@ -49,7 +49,7 @@ if(process.env.DIC_ISSUE33_R171_VERIFY==='1'){
  // resolving an unproven sensory winner. This is an acceptance diagnostic,
  // not an instruction to manufacture a canonical combination.
  check(conflicting&&!f.tasting_notes,'same_selected_sensory_disagreement_not_silently_autofilled');
- const alternatives=(r.source_facts||[]).filter(f=>f.field==='tasting_notes').map(f=>norm(f.value));
+ const alternatives=(r.selected_241_tasting_facts||[]).filter(f=>f.field==='tasting_notes'&&f.source_type==='html'&&/novocoffee\.com\/product\/buesaco\/?/iu.test(f.source_url||'')).map(f=>norm(f.value));
  check(alternatives.some(x=>x.includes(norm('Cherry, Tangerine, Nougat')))&&
   alternatives.some(x=>x.includes(norm('Tangerine, Maple, Hazelnut'))),
   'both_literal_selected_sensory_sources_reviewable');

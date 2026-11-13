@@ -188,6 +188,16 @@ for(const target of targets){
     r.source_facts=(p.source_facts||[]).slice(0,45).map(f=>({
       label:clip(f.label,120),field:clip(f.field,80),value:clip(f.value,360),source_url:clip(f.source_url,320),section:clip(f.section,110),
       source_type:clip(f.source_type,55),conflicting:f.conflicting===true}));
+    // The 45-entry public diagnostics intentionally trim many unrelated facts.
+    // Case #241 must still show both exact selected tasting claims from the
+    // full parser array, without autocompleting either ambiguous value.
+    if(r.number===241)r.selected_241_tasting_facts=(p.source_facts||[])
+      .filter(f=>f.field==='tasting_notes'&&
+        /^(?:Cherry,\s*Tangerine,\s*Nougat|Tangerine,\s*Maple,\s*Hazelnut)$/iu.test(String(f.value||'').trim()))
+      .slice(0,4).map(f=>({field:'tasting_notes',label:clip(f.label,100),
+        value:clip(f.value,200),source_type:clip(f.source_type,40),
+        source_url:clip(f.source_url,320),section:clip(f.section,140),
+        conflicting:f.conflicting===true}));
     r.add_coffee_ui_rendered=coffeeUrlPreviewMarkup(p).includes('coffee-url-preview');
     r.source_review_rendered=!!coffeeSourceReviewSnapshot({...p,source_url:r.final_url});
     // #154/#196 real selected-product AFTER-test. This is a bounded current
