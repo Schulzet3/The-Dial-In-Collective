@@ -14,6 +14,7 @@ import {extractCoffeeIdentityEvidence,extractCoffeeCurrentReleasePrefixes,extrac
 import {extractProductEspressoReference} from './coffee-espresso-evidence.mjs';
 import {productMarkup,coffeeHtmlAttributes,withoutDetachedFarmerProfiles} from './coffee-product-scope.mjs';
 import {productCoffeeProse} from './coffee-product-prose.mjs';
+import {selectedSmallholderGrowingCommunities} from './coffee-selected-smallholder-communities.mjs';
 import {interpretAgtron,agtronExplanation} from './agtron-roast.mjs';
 import {extractSelectedNextCoffeeProduct} from './coffee-next-selected-product.mjs';
 import {extractSelectedReactRouterCoffeeHydration} from './coffee-react-router-hydration.mjs';
@@ -1854,6 +1855,24 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   ...(matchedDescriptions.length?[collectStructuredCoffeeSourceFacts({description:matchedDescriptions.join('\n\n')},{source_url,source_type:'html'})]:[]),
   ...[p,...equivalentProducts.filter(candidate=>candidate!==p)].map(candidate=>collectStructuredCoffeeSourceFacts(candidate,{source_url}))
  );
+ // The current selected product may name growing communities of anonymous
+ // smallholders. Preserve the exact bounded locality as Source Review only;
+ // never substitute town names for a farmer, farm, or cooperative identity.
+ const smallholderLocalities=selectedSmallholderGrowingCommunities(canonicalProduct,{
+  name:fields.name,origin:fields.origin,clean
+ });
+ if(smallholderLocalities){
+  const locations=smallholderLocalities.communities.join(', ');
+  const note='Selected coffee credits smallholder growers across '+smallholderLocalities.region+
+   ' communities: '+locations+'. These are growing localities, not individually named producers.';
+  producer_review_note=[producer_review_note,note].filter(Boolean).join(' | ').slice(0,1100);
+  if(source_facts.length<384)source_facts.push({
+   field:'producer_locality_context',label:'Named smallholder growing communities (review only)',
+   value:locations,source_url,source_type:'html',
+   section:'Exact selected coffee producer story — '+smallholderLocalities.region+
+    '; community locations are not individual growers'
+  });
+ }
  // Keep literal direct selected roast provenance visible in Source Review,
  // without elevating a fallback, unsupported area, or conflicting roast.
  if(directTypedRoast&&fields.roast_level===directTypedRoast.value&&source_facts.length<384)
