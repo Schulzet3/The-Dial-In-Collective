@@ -107,6 +107,57 @@ export function assessReleaseQueue(queue,{publishedSourceSha,candidateSha,change
    errors.push(item.id+' READY item has no unpublished deployable changes (possibly already released)');
  return {ready:errors.length===0,errors,deployable_paths:diff,ready_items:ready.map(x=>({id:x.id,issue:x.issue,title:x.title,merged_source_sha:x.merged_source_sha,scope_paths:x.scope_paths})),other_items:(queue?.items||[]).filter(x=>x.state!=='READY'&&x.state!=='DEPLOYED').map(x=>({id:x.id,state:x.state,merged_source_sha:x.merged_source_sha,blockers:x.blockers}))};
 }
+// Legacy direct-source release guard for historical #356: an unfinished item
+// without a queue merge SHA may ALREADY have merged on a changed READY path.
+// Query its actual PR only for such overlap; isolated READY candidates use
+// their stronger byte-level source-isolation contract, not this fallback.
+export async function auditMissingUnreadyMergeEvidence(queue,{
+ publishedSourceSha,candidateSha,changedPaths,isAncestor,loadPr
+}={}){
+ const changed=new Set(deployableChangedPaths(changedPaths||[]));
+ const ambiguous=(queue?.items||[]).filter(item=>
+  ['IN_PROGRESS','TESTING','BLOCKED'].includes(item?.state)&&
+  !SHA.test(item.merged_source_sha||'')&&
+  Array.isArray(item.scope_paths)&&item.scope_paths.some(p=>changed.has(p)));
+ const errors=[],checked=[];
+ if(!ambiguous.length)return {safe:true,errors,checked};
+ if(!SHA.test(publishedSourceSha||'')||!SHA.test(candidateSha||'')||
+    typeof isAncestor!=='function'||typeof loadPr!=='function')
+  return {safe:false,errors:['Cannot verify unfinished PR source overlap in direct release'],checked};
+ const cache=new Map();
+ for(const item of ambiguous){
+  if(!Number.isSafeInteger(item.pr)||item.pr<=0){
+   errors.push(item.id+' unready overlapping source lacks a verifiable PR and merge SHA');
+   continue;
+  }
+  try{
+   if(!cache.has(item.pr))cache.set(item.pr,Promise.resolve().then(()=>loadPr(item.pr)));
+   const pr=await cache.get(item.pr);
+   if(pr?.number!==item.pr||pr?.base?.repo?.full_name!=='Schulzet3/The-Dial-In-Collective'||
+      !['open','closed'].includes(pr.state))
+    throw Error('PR identity unavailable');
+   if(!pr.merged_at){
+    // A genuinely open/closed-unmerged PR is not an included merge.
+    // Do not penalize a separate approved READY file change on its path.
+    checked.push({id:item.id,pr:item.pr,disposition:'unmerged'});
+    continue;
+   }
+   if(pr.state!=='closed'||!SHA.test(pr.merge_commit_sha||''))
+    throw Error('Merged PR commit unavailable');
+   const published=isAncestor(pr.merge_commit_sha,publishedSourceSha);
+   const included=isAncestor(pr.merge_commit_sha,candidateSha);
+   if(typeof published!=='boolean'||typeof included!=='boolean'||(published&&!included))
+    throw Error('Inconsistent Git merge ancestry');
+   if(included&&!published)
+    errors.push(item.id+' unready PR #'+item.pr+' merged source is included outside the owner READY batch');
+   checked.push({id:item.id,pr:item.pr,disposition:published?'already-published':included?'unready-in-candidate':'excluded'});
+  }catch{
+   errors.push(item.id+' cannot verify unfinished PR #'+item.pr+' source; use existing READY-only isolation');
+  }
+ }
+ return {safe:errors.length===0,errors,checked};
+}
+
 // SQL-only operations already verified and applied directly in Supabase still
 // appear in the Netlify-base diff because the website was not republished.
 // Count those exact source bytes as covered, without requeuing or replaying

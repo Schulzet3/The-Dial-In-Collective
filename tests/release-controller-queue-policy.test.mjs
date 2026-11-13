@@ -15,3 +15,13 @@ test('production release refuses unready or untracked deployable code before any
  assert.match(source,/approved_ready_queue_items:queueGate\.ready_items/);
  assert.match(source,/formatQueueReport\(queueGate\)/);
 });
+
+test('#356 conditional merged-PR provenance gate precedes every legacy direct release claim',()=>{
+ const direct=source.indexOf('queueGate=assessReleaseQueue');
+ const audit=source.indexOf('await auditMissingUnreadyMergeEvidence(');
+ const deny=source.indexOf("if(!queueGate.ready)throw Error('Release queue HOLD");
+ const claim=source.indexOf('const planned=planSingleUseClaim');
+ assert.ok(direct>0&&audit>direct&&deny>audit&&claim>deny);
+ assert.match(source,/loadPr:number=>verifiedQueuedPullRequest\(number,token\)/);
+ assert.match(source,/if\(queueGate.ready\)\{\s*const audit=/);
+});

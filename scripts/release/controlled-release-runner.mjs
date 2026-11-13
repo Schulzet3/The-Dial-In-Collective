@@ -11,7 +11,8 @@ import {join} from 'node:path';
 import {planSingleUseClaim,assertReadyForRelease,validateReleaseGrant,RELEASE_BRANCH} from './one-use-claim.mjs';
 import {validateChatReleaseRequest,validateManualReleaseRequest,assertChatPushEnvelope,CHAT_REQUEST_PATH,OPS_JOURNAL_PATH} from './chat-release-request.mjs';
 import {classifyMigrationDiff,releaseReadinessMarkdown} from './migration-risk.mjs';
-import {assessReleaseQueue,formatQueueReport,assertApprovedReadyBatch} from './release-queue.mjs';
+import {assessReleaseQueue,formatQueueReport,assertApprovedReadyBatch,
+ auditMissingUnreadyMergeEvidence} from './release-queue.mjs';
 import {validateReadyOnlyCandidate,CANDIDATE_RECEIPT_PATH,assertCandidateRelativeImports,
  assertCandidateStaticNamedExports} from './ready-only-candidate.mjs';
 import {verifyReadyItems,githubReleaseReaders} from './ready-evidence-gate.mjs';
@@ -124,6 +125,19 @@ async function ciForSha(sha,token){
  if(!Array.isArray(data.check_runs))throw Error('GitHub CI response lacks check runs');
  return selectLatestCiConclusions(data.check_runs,sha);
 }
+// Called only when a legacy DIRECT release has an unfinished queue item with
+// an overlapping changed file and missing merge SHA. Ordinary READY-only
+// publication never calls this API and needs no added steps or build.
+async function verifiedQueuedPullRequest(number,token){
+ if(!Number.isSafeInteger(number)||number<=0)throw Error('Invalid PR number');
+ const response=await fetch('https://api.github.com/repos/'+REPO+'/pulls/'+number,{
+  headers:{Authorization:'Bearer '+token,Accept:'application/vnd.github+json',
+   'X-GitHub-Api-Version':'2022-11-28'},signal:AbortSignal.timeout(12000)
+ });
+ if(!response.ok)throw Error('PR merge provenance unavailable: HTTP '+response.status);
+ return response.json();
+}
+
 const setBlob=(path,content,env)=>{
  const sha=git(['hash-object','-w','--stdin'],{input:content,env});
  if(!SHA.test(sha))throw Error('Unable to store release record');
@@ -337,6 +351,18 @@ export async function executeSingleUseRelease(settings=process.env){
    publishedSourceSha:lastPublishedTestedSha,candidateSha:sha,changedPaths:changedSourcePaths,
    isAncestor:(a,b)=>verifiedGitAncestry(a,b)
   });
+  // #356: stale TESTING/IN_PROGRESS queue receipts may omit an already-merged
+  // PR SHA. Resolve only actual changed-path overlaps against GitHub's PR
+  // merge record before allowing this legacy direct-source release.
+  if(queueGate.ready){
+   const audit=await auditMissingUnreadyMergeEvidence(queuedSource,{
+    publishedSourceSha:lastPublishedTestedSha,candidateSha:sha,
+    changedPaths:changedSourcePaths,
+    isAncestor:(a,b)=>verifiedGitAncestry(a,b),
+    loadPr:number=>verifiedQueuedPullRequest(number,token)
+   });
+   if(!audit.safe)queueGate={...queueGate,ready:false,errors:[...queueGate.errors,...audit.errors]};
+  }
  }
  if(settings.GITHUB_STEP_SUMMARY)appendFileSync(settings.GITHUB_STEP_SUMMARY,formatQueueReport(queueGate));
  if(!queueGate.ready)throw Error('Release queue HOLD: '+queueGate.errors.join('; ').slice(0,1200));
