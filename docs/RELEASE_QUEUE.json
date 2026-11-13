@@ -13348,20 +13348,32 @@
     {
       "id": "DIC-Q-455-r222-evidence-note-fallback",
       "issue": 455,
-      "pr": null,
+      "pr": 2366,
       "title": "Preserve uncertainty/evidence note in Next Shot text fallback when no measured one-control arrow applies",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "022c5be2bb6cd7c02a8faf7e78024bcceee294b1",
       "scope_paths": [
         "site/lib/ui.js"
       ],
       "owner_source": "Owner Issue #455 Option B SAFE implementation; immutable PREFLIGHT 677c52f4a1f5f09f21bbc788c2215e51401e8c65 blob 2fb236bbfa6bac48513eeb3bd157b260853af06d; Locked Recommendation Option A and evidence note continuity",
       "tests": [
-        "Four focused positive/negative Node22 source tests authored but NOT RUN before GitHub exact-source CI; no PASS claimed."
+        "Exact PR HEAD 2c55dea3a46e73bb25a490129f6e140849d4e81c Node22/lint run 43346979315 SUCCESS 4423 pass/0 fail/6 intentional skipped; four new R222 negative/positive focused tests individually PASS. Full suite run, separate focused stage SKIPPED not counted PASS.",
+        "PR-head compiled Chromium 390px/offline/mobile/cloud 43346979154, isolated SQL permissions 43346979338, approval/governance 43346979247, source security 43346979203 COMPLETED/SUCCESS. Frozen603 run43346979206 SKIPPED NOT PASS.",
+        "Nonforce PR2366 squash merged 022c5be2bb6cd7c02a8faf7e78024bcceee294b1 from 677c52f4a1f5f09f21bbc788c2215e51401e8c65, [skip netlify] both title/message, exact 5 files/no deletes, Git blobs equal tested head (UI 2ecde13b9d45ec329700654e1f054629d38bc95f, test 81478a1d7abb0d28362739463a326b2571bef97e, ledger 8b69aeaac0de73f94a46dfc7509a70931a4bd5f2, queue ddf755f7a0bee1e47f0ea3a7e49d1d0d13cd37b8, journal e060b335c5d5a549df0f11b94c6cd9ece6f6846c).",
+        "Exact MERGED source Node22/lint 43347474792 COMPLETED/SUCCESS 4423 pass/0 fail/6 intentional skip, browser/mobile/cloud/offline 43347474717 SUCCESS, governance 43347474716 SUCCESS. Reuse PR-head SQL/security exact unchanged blobs; no production writes or physical espresso tests."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        43346979315,
+        43346979154,
+        43346979338,
+        43346979247,
+        43346979203,
+        43347474792,
+        43347474717,
+        43347474716
+      ],
       "blockers": [],
-      "notes": "Scoped developer-only UI render fix. No new recommendation numeric target, all five taste inputs or saved measured readings/notes/history changed; no empirical validation, provider/SQL/Auth/Edge/member operations or publication. CI and nonforce integration pending. S019 source remains inaccessible.",
+      "notes": "Scoped developer-only UI render fix. No new recommendation numeric target, all five taste inputs or saved measured readings/notes/history changed; no empirical validation, provider/SQL/Auth/Edge/member operations or publication. CI and nonforce integration pending. S019 source remains inaccessible.\nR455-222 source and positive/negative test READY in development only; production_deployed=false. No numeric taste policy or engine changes; S019 standalone unavailable and #267 literal audit incomplete.",
       "production_deployed": false
     }
   ],
