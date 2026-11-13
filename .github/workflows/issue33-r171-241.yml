@@ -1,0 +1,57 @@
+name: DIC Issue33 R171 original241 Buesaco current selected disagreement
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r171-241.yml
+      - scripts/audit/issue33-r171-241-check.mjs
+      - tests/coffee-issue33-r171-241.test.mjs
+      - tests/coffee-issue33-r171-241-conflict.test.mjs
+      - src/server/coffee-selected-hero-notes-conflict.mjs
+      - src/server/coffee-page-metadata.mjs
+      - docs/RELEASE_QUEUE.json
+      - docs/workstreams/ops-issue33-r171-241-20261113.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r171-241.yml
+      - scripts/audit/issue33-r171-241-check.mjs
+      - tests/coffee-issue33-r171-241.test.mjs
+      - tests/coffee-issue33-r171-241-conflict.test.mjs
+      - src/server/coffee-selected-hero-notes-conflict.mjs
+      - src/server/coffee-page-metadata.mjs
+      - docs/RELEASE_QUEUE.json
+permissions:
+  contents: read
+jobs:
+  exact-selected:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Bounded selected product positive and adversarial tests
+        run: node --test tests/coffee-issue33-r171-241.test.mjs tests/coffee-issue33-r171-241-conflict.test.mjs
+      - name: Fresh guarded official HTTPS and actual parser for original241
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '241'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r171
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Strict identity and competing sensory descriptions afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_R171_VERIFY: '1'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r171
+        run: node scripts/audit/issue33-r171-241-check.mjs
+      - name: Preserve exact source HTML, parser facts and failures
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r171-original241
+          path: /tmp/dic33-r171/
+          retention-days: 2
+          if-no-files-found: warn
