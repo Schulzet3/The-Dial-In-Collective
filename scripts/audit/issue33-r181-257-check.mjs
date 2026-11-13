@@ -53,7 +53,7 @@ if(process.env.DIC_ISSUE33_R181_VERIFY==='1'){
  check(!(record.seo_fallback_fields||[]).some(x=>['name','origin','process','tasting_notes','producer'].includes(x)),'no_unverified_seo_fallback_for_direct_facts');
  const p=html?extractPublicCoffeeFacts(html.toString('utf8'),{source_url:chosen257.url}):null;
  const notes=norm(p?.fields?.tasting_notes);
- const toffeeFacts=(p?.source_facts||[]).filter(x=>x.field==='tasting_notes'&&norm(x.value).includes('toffee'));
+ const toffeeFacts=(p?.source_facts||[]).filter(x=>['tasting_notes','sensory_context'].includes(x.field)&&norm(x.value).includes('toffee'));
  // This qualification is intentionally diagnostic until full literal semantic
  // reconciliation: title, mill and sister-estate claims cannot be producers.
  const toffeeRecognized=notes.includes('toffee')||toffeeFacts.length>0;
@@ -62,7 +62,7 @@ if(process.env.DIC_ISSUE33_R181_VERIFY==='1'){
   toffee_direct_description_source_present:selected.narrative_toffee,
   toffee_canonical_or_tasting_source_fact:toffeeRecognized,
   toffee_source_fact_count:toffeeFacts.length,
-  qualification:toffeeRecognized?null:'Selected current description prints notes of toffee; parser tasting_notes/source_facts lacks that literal. Not individually certified.',
+  qualification:toffeeRecognized?null:'Selected current description prints notes of toffee; parser tasting notes and sensory review provenance lack that literal. Not individually certified.',
   raw_html_sha256:html?sha(html):null,raw_html_bytes:html?.length||0,
   evidence_sha256:raw?sha(raw):null,original_603_individual_certification:false,production_operations:0};
  writeFileSync(join(dir,'r181-257-afterproof.json'),JSON.stringify(report,null,2)+'\n');
