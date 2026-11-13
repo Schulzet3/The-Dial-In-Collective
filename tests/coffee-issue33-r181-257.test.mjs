@@ -46,3 +46,27 @@ test('#257 mill and sister estate must not be mistaken for observed named farmer
  const p=parse();assert.equal(p.ok,true,JSON.stringify(p).slice(0,2400));
  assert.ok(!/hacienda la minita/i.test(String(p.fields?.producer||'')),JSON.stringify(p).slice(0,2400));
 });
+
+const narrativeFacts=p=>(p.source_facts||[]).filter(f=>f.field==='sensory_context'&&
+ f.label==='Selected current narrative additional tasting note (review only)');
+test('#257 direct seller toffee is recorded as review-only, labeled flavors remain canonical',()=>{
+ const p=parse();const f=narrativeFacts(p);
+ assert.equal(f.length,1,JSON.stringify(f));assert.equal(f[0].value,'toffee');
+ assert.equal(p.fields?.tasting_notes,'Cantelope, Brown Sugar, Silky');
+});
+test('#257 a note without two same-sentence labeled anchors is not borrowed',()=>{
+ const p=parse(own.replace('cantelope and brown sugar layered','gentle sweetness layered'));
+ assert.equal(narrativeFacts(p).length,0,JSON.stringify(narrativeFacts(p)));
+});
+test('#257 previous-lot narrative is excluded from current source review',()=>{
+ const p=parse(own.replace('brown sugar layered with notes of toffee','brown sugar previously layered with notes of toffee'));
+ assert.equal(narrativeFacts(p).length,0,JSON.stringify(narrativeFacts(p)));
+});
+test('#257 with-milk conditional narrative is not an intrinsic flavor suggestion',()=>{
+ const p=parse(own.replace('brown sugar layered with notes of toffee','brown sugar layered with notes of toffee when served with milk'));
+ assert.equal(narrativeFacts(p).length,0,JSON.stringify(narrativeFacts(p)));
+});
+test('#257 related-sibling note cannot supply missing selected toffee',()=>{
+ const p=parse(own.replace('notes of toffee','notes of chocolate'),'<aside class="related-products"><p>Cantelope and Brown Sugar layered with notes of toffee.</p></aside>');
+ assert.ok(narrativeFacts(p).every(x=>x.value!=='toffee'),JSON.stringify(narrativeFacts(p)));
+});

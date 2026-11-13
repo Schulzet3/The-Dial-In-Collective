@@ -283,3 +283,37 @@ export function selectedCurrentProductOvertone(html,{clean}={}){
  // review rather than silently choosing the first or a merged profile.
  return hits.length===1?hits[0]:null;
 }
+
+
+// One unconditional, current selected paragraph can print one additional
+// intrinsic flavor after repeating two already accepted labeled notes.
+// Retain literal evidence for Source Review ONLY, never canonical autofill.
+export function selectedCurrentNarrativeAdditionalTastingNote(html,{clean,notes}={}){
+ if(typeof html!=='string'||html.length>2_000_000||typeof clean!=='function'||
+  typeof notes!=='string'||notes.length<8||notes.length>300)return '';
+ const blocks=productCoffeeProse(html,clean);
+ const heads=blocks.filter(b=>b.tag==='h1'&&!b.educational);
+ if(heads.length!==1||!heads[0].text||heads[0].text.length>180)return '';
+ const accepted=notes.split(/\s*(?:,|&|[•·;|]|\band\b)\s*/iu).map(s=>s.trim()).filter(Boolean);
+ if(accepted.length<2||accepted.length>8)return '';
+ const found=new Set();
+ for(const block of blocks){
+  if(block.tag!=='p'||block.educational||block.text.length<40||block.text.length>1050||
+   unavailable.test(block.section)||NONCURRENT_COFFEE_PROSE.test(block.section))continue;
+  for(const sentence of block.text.split(/(?<=[.!?])\s+/u).slice(0,12)){
+   if(sentence.length<35||sentence.length>520||unavailable.test(sentence)||
+    NONCURRENT_COFFEE_PROSE.test(sentence))continue;
+   const match=sentence.match(/\b(?:layered|paired|rounded(?:\s+out)?|finished|balanced)\s+with\s+notes?\s+of\s+([\p{L}\p{M}]+(?:[ -][\p{L}\p{M}]+){0,2})(?=[,;.!?]|$)/iu);
+   if(!match)continue;
+   const prefix=fold(sentence.slice(0,match.index));
+   const corroborated=accepted.filter(x=>x.length>=3&&prefix.includes(fold(x)));
+   if(new Set(corroborated.map(fold)).size<2)continue;
+   const literal=match[1].trim();
+   if(!normalizeExplicitCoffeeTastingNotes(literal)||literal.length>50||
+    /\b(?:body|mouthfeel|texture|acidity|sweetness|finish|roast|process|coffee|beans?|milk|cream|syrup|water)\b/iu.test(literal)||
+    accepted.some(x=>fold(x)===fold(literal)))continue;
+   found.add(literal);
+  }
+ }
+ return found.size===1?[...found][0]:'';
+}
