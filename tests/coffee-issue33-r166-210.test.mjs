@@ -2,8 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {chosen210,source210} from '../scripts/audit/issue33-r166-210-check.mjs';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
-const own='<p>Roast: Medium</p><h1>Brazil Paubrasil</h1><p>Cocoa, Roasted Pecan, Peanut Butter</p>'+
- '<p>Named after Brazil’s official tree. Each naturally processed bean is from the Cerrado region and comes from one of nine cooperatives or six associations affiliated with the Cerrado Coffee Growers Federation.</p>'+
+const own='<p>Roast: Medium</p><h1>Brazil Paubrasil</h1><p>Tasting Notes: Cocoa, Roasted Pecan, Peanut Butter</p>'+
+ '<p>Named after Brazil’s official tree. Each naturally processed bean is from the Cerrado region and comes from one of nine cooperatives or six associations affiliated with the Cerrado Coffee Growers Federation. In the cup we taste cocoa, roasted pecan, and peanut butter.</p>'+
  '<section>Details<p>Origin Brazil</p><p>Region Cerrado Mineiro</p><p>Variety Catuai</p><p>Process Natural</p><p>Elevation 1100 m</p></section>';
 const page=(body=own,other='')=>'<html><head><title>Old Burundi Washed</title><meta name="description" content="Peru washed bourbon blueberry"></head><body>'+
  '<nav>Old Burundi Medium</nav><main><article class="product">'+body+'</article></main>'+other+
