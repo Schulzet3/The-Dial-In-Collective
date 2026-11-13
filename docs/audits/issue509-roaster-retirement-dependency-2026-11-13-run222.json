@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 222,
+  "project_ref": "azviqqejypsefzilgonr",
+  "sampled_utc": "2026-11-13T17:51:32Z",
+  "preflight": {
+    "initial_development_sha": "d076e913b3b86e7b4bc3d60c3c2dda364c049ac2",
+    "write_parent_sha": "ee426dcfb65f469cf8018197eddaf7021fa0492e",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "blob_content_verified": true
+  },
+  "scope": "Bounded read-only CROSS-OBJECT dependency/drop/rename safety review of current deployed legacy roaster directory against READY undeployed #2389 forward SQL. Not a duplicate first-time GitHub code-line review or certification of isolated CI.",
+  "github_forward_source": {
+    "path": "supabase/migrations/20261113050000_dic_retire_roaster_directory.sql",
+    "git_blob_sha": "10775c86bf88e61160fdc66d35c65698638742d6",
+    "full_file_chars_directly_read": 25326,
+    "source_status": "DEVELOPMENT MERGED/READY in #2389 journal; this run did not independently rerun CI",
+    "production_status": "NOT_DEPLOYED"
+  },
+  "provider_observation": {
+    "project_status": "ACTIVE_HEALTHY",
+    "postgres": "17.11.0.003",
+    "stored_migrations": 67,
+    "retirement_migration_applied": 0,
+    "live_directory_rows_aggregate": 4,
+    "live_alias_rows_aggregate": 4,
+    "archive_directory_name_present": false,
+    "archive_alias_name_present": false,
+    "legacy_routine_source_references": 5,
+    "edge_preview": {
+      "slug": "dic-preview-coffee",
+      "version": 6,
+      "status": "ACTIVE",
+      "verify_jwt": true
+    },
+    "other_active_edges": 4
+  },
+  "complete_existing_function_sources_rechecked": {
+    "count": 5,
+    "total_chars": 20806,
+    "first_time_source_review_credit": 0,
+    "functions": [
+      {
+        "name": "private.dic_canonical_roaster_key(value text)",
+        "md5": "55aeb461080be1221e82d8a86a9d270d",
+        "source_chars": 573,
+        "conclusion": "Live source resolves identity from legacy directory and aliases; source-only forward migration rebinds to private.dic_roaster_name_aliases plus raw normalized key. No URL allowlist may be reintroduced."
+      },
+      {
+        "name": "private.dic_find_coffee_matches(p jsonb)",
+        "md5": "0ba424a2a66e99dc98629a89d485680b",
+        "source_chars": 6024,
+        "conclusion": "Current recognized canonical display derives from legacy directory; proposed forward source instead uses already Verified canonical coffee identity. Admission, exact release, origin, URL and Pending-vs-Verified checks remain."
+      },
+      {
+        "name": "private.dic_promote_pending_coffee(sid uuid, method text, evidence jsonb, distinct_confirmed boolean)",
+        "md5": "f9c37ac804b3b2c425cd86284020b581",
+        "source_chars": 11956,
+        "conclusion": "Legacy promotion derives official host from curated directory; forward source replaces this with independently verified page proof and private archived attestations, preserving service-role, revision, ownership, separate Verified and collision protections. Runtime effectiveness unverified until publication."
+      },
+      {
+        "name": "public.dic_roaster_preview_target(host text)",
+        "md5": "d264ace83ea27e01b12f789b2e2b4542",
+        "source_chars": 852,
+        "conclusion": "Legacy curated preview RPC remains live; forward source drops it after replacing its callers. Live pg_depend shows no direct external dependents of this RPC. Actual Supabase Edge dic-preview-coffee v6 still ACTIVE/JWT-required."
+      },
+      {
+        "name": "public.dic_source_check_target(submission_id uuid)",
+        "md5": "6af6fa312bed8eb0ed26b31dc94da3b6",
+        "source_chars": 1401,
+        "conclusion": "Existing trusted-source worker derives official host via legacy directory; forward version calls source-backed proof and preserves admitted owner/status and service JWT requirement. Effective REST access unverified (#96)."
+      }
+    ]
+  },
+  "cross_object_catalog_dependency_review": {
+    "targets": [
+      "private.dic_roaster_directory",
+      "private.dic_roaster_aliases",
+      "public.dic_roaster_preview_target(text)"
+    ],
+    "complete_pg_depend_rows_examined": 27,
+    "counts_by_dependent_catalog": {
+      "pg_constraint": 17,
+      "pg_type": 2,
+      "pg_attrdef": 4,
+      "pg_policy": 2,
+      "pg_class": 2
+    },
+    "preview_function_dependents": 0,
+    "foreign_key_between_legacy_tables": "One alias.roaster_id -> directory.id; preserved by renaming both historical tables",
+    "external_references_found": "No separate views/triggers/policy predicate/functional index referencing old relations beyond four self-named legacy constraint/index structures; five SQL function bodies DO reference names despite no catalog dependency. Catalog dependency absence alone does not establish safe DROP."
+  },
+  "forward_semantic_assessment": [
+    "CREATE two private RLS-protected derived tables from four preserved trust and alias entries; archive original directory and alias tables by RENAME, retain historical FK and original evidence without deletion",
+    "REPLACE four named app SQL functions plus add dic_verified_roaster_page_proof(text); the five old textual SQL dependencies include dropped old preview RPC",
+    "DROP only old public.dic_roaster_preview_target(text), no catalog-recorded dependents; active Supabase preview Edge remains deployed and must become a 410 tombstone only upon separate owner-authorized publication",
+    "No active product URL preview may depend on curated list; new SQL keeps global Verified proof separate from member-side universal source preview; no live mutation attempted",
+    "Existing constraint and index object names contain old table names and are HISTORICAL STRUCTURES, not a reason to rename/drop production objects now"
+  ],
+  "caveats": [
+    "PostgreSQL text-body dependencies are not fully described by pg_depend; complete five live SQL bodies and view/policy/trigger/index/constraint string matches were checked independently",
+    "Neither future SQL migration execution in production nor real JWT/HTTP/External Auth/Storage paths were tested here; #96 owns effective-session validation",
+    "Historical table rows only examined as aggregate counts, no names, URLs, member/shot records or credentials",
+    "Isolated migration and app suites previously reported in #2389 journal were not rerun or independently recertified in this run"
+  ],
+  "new_confirmed_defects": 0,
+  "justified_deletions": 0,
+  "new_first_time_source_word_credit": 0,
+  "source_code_changes": 0,
+  "provider_writes": 0,
+  "tests_executed": "Read-only SQL/catalog and immutable Git source only; isolated PG, Node22 and browser NOT_RUN",
+  "baseline_complete": false,
+  "next": "First recheck changed/new provider definitions; preserve #2389 as RETIREMENT IN PROGRESS while two tables/five SQL callers and Edge v6 are live. At separately owner-authorized publication, verify migration/archive, 0 old source refs, Edge 410 and exact API before HISTORICAL/ARCHIVED naming. For #509 unreviewed source, continue hosted setting gaps only when connector genuinely exposes them, coordinate #96; never duplicate #267/#504."
+}
