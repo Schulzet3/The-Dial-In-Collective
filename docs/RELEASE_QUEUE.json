@@ -12,8 +12,8 @@
       "issue": 2389,
       "pr": 2390,
       "title": "Retire obsolete roaster directory and preserve any-roaster URL autofill, editable gaps and evidence-based Verified",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "f61335482d355bb83cc161265557888ee67b6737",
       "scope_paths": [
         "site/cloud/main.js",
         "site/cloud/coffee-url-autofill.js",
@@ -27,7 +27,10 @@
         "Next PR-head isolated SQL 43364511658: migrations PASS, identity/automatic Verified checks PASS; later old `url_preview_release.sql` fixture FAILED calling intentionally removed `dic_roaster_preview_target`. Replaced outdated test with exact proof that RPC/directory are retired, private source attestations preserved, and quota/identity protections unchanged. Fresh hosted SQL PENDING.",
         "Latest reviewed PR-head 9ec0dc2f CI: app 43364781478, mobile/cloud 43364781483, SQL 43364781508, approval 43364781493, security 43364781539 all SUCCESS; original frozen603 SKIPPED (not applicable to changed source).",
         "Concurrent owner-approved #2386 admin unlimited / member 15s development changes overlap 3 source/test files; maintain its behavior and isolated SQL migration. Renamed ours to unique later migration 20261113050000; combined exact tests PENDING.",
-        "Merged #2386 on c06a17c7: isolated SQL 43365465788, cloud UX/mobile 43365465809, approval 43365465779, security 43365465924 SUCCESS; full Node 43365465766 FAILED exactly one newly introduced #2386 test expecting retired legacy Edge, updated test source to check current universal Netlify quota and legacy 410. New exact CI PENDING."
+        "Merged #2386 on c06a17c7: isolated SQL 43365465788, cloud UX/mobile 43365465809, approval 43365465779, security 43365465924 SUCCESS; full Node 43365465766 FAILED exactly one newly introduced #2386 test expecting retired legacy Edge, updated test source to check current universal Netlify quota and legacy 410. New exact CI PENDING.",
+        "Exact tested PR-head e1512f806c23fb6dc92da2f3c50f331a57f9bbca: five named jobs SUCCESS: app/build 43365967891, cloud/mobile 43365967836, isolated SQL 43365967829, approval/continuity 43365967895, security 43365967797. Original frozen603 intentionally SKIPPED/NOT_APPLICABLE, never claimed PASS.",
+        "Nonforce PR #2390 merge f61335482d355bb83cc161265557888ee67b6737, full Git tree c86e00a2c5fe853ec6141a1a97f5faa82a5d7651 exactly identical to five-check successful PR head, all source/test/migration blobs identical; merged push SQL 43366413758 and approval 43366413752 SUCCESS.",
+        "Merged push app/UX 43366413733/43366413836 cancelled by subsequent unrelated #33 commit 46fcfefa3d6a963b516e79486ff8f2fd7b6153e0 (cancelled != PASS). Replacement exact newer-development app/build 43366605919 SUCCESS and cloud/mobile 43366605918 SUCCESS; compare f613...46fc reports only four unrelated #33 test/workflow/journal/script files changed, no #2389 code/test/SQL bytes."
       ],
       "ci_runs": [
         43363806529,
@@ -45,15 +48,20 @@
         43365465788,
         43365465809,
         43365465779,
-        43365465924
+        43365465924,
+        43365967891,
+        43365967836,
+        43365967829,
+        43365967895,
+        43365967797,
+        43366413758,
+        43366413752,
+        43366605919,
+        43366605918
       ],
-      "blockers": [
-        "New exact PR-head full app/SQL/UX/approval/security CI after cross-issue test contract update pending.",
-        "Nonforce development merge and merged byte/CI verification pending.",
-        "Production database/Edge retirement requires NEW owner Publish and encrypted recovery verified."
-      ],
+      "blockers": [],
       "owner_source": "Owner direct Nov 12 2026; separate issue #2389, do not touch Huckleberry PR #2385.",
-      "notes": "Former four roaster trust proofs and four aliases archived, no deletions. Active New Coffee stays universal Netlify /api/coffee-preview. New verified source host is inferred conservatively from previously verified exact coffee sources; unproven brands stay Pending. No production/provider/member writes. Original source-attested brand/domain proof remains RLS-private, service-only for Verified approval bootstrap and NEVER a roaster URL allowlist. Archived original registry records and aliases untouched; no Huckleberry #2385 source modified.",
+      "notes": "Former four roaster trust proofs and four aliases archived, no deletions. Active New Coffee stays universal Netlify /api/coffee-preview. New verified source host is inferred conservatively from previously verified exact coffee sources; unproven brands stay Pending. No production/provider/member writes. Original source-attested brand/domain proof remains RLS-private, service-only for Verified approval bootstrap and NEVER a roaster URL allowlist. Archived original registry records and aliases untouched; no Huckleberry #2385 source modified. Verified READY DEVELOPMENT ONLY. New owner Publish required to apply forward-only private SQL migration and retire already-deployed legacy Edge endpoint; historical 4 original roaster proofs and 4 aliases archived, standalone source attestations are only for conservative shared Verified, never URL admission. Current Add Coffee accepts any safe public HTTPS roaster product URL, fills source-supported fields and keeps user completion/editing, preserve #2386 admin unlimited/member 15s.",
       "production_deployed": false
     },
     {
