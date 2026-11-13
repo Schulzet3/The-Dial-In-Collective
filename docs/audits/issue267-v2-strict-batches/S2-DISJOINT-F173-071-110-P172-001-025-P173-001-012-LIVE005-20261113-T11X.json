@@ -1514,7 +1514,7 @@
       "source_line": 19,
       "source_literal": "  raise exception 'Overlong Admin search was allowed';",
       "inspection_class": "sql_test",
-      "behavior": "Raises if too-long query unexpectedly returns normally.",
+      "behavior": "Plain RAISE EXCEPTION sentinel defaults PostgreSQL SQLSTATE P0001, not 22023. If overlong search unexpectedly returns normally, this raises a non-catching error and fails the fixture.",
       "quality": "Isolated synthetic PG test, not actual hosted account/SQL proof.",
       "risk": "Synthetic local JWT/SQL role does not certify signed Auth or RLS; NULL comparison/trap caveats bounded to fixture.",
       "obsolete_dead": "Original pinned test behavior, current counterpart shown or explicitly superseded.",
@@ -1539,7 +1539,7 @@
       "source_line": 20,
       "source_literal": " exception when invalid_parameter_value then null;",
       "inspection_class": "sql_test",
-      "behavior": "Catches invalid_parameter_value; SQL sentinel uses same class so assertion robustness limited.",
+      "behavior": "The handler catches invalid_parameter_value (SQLSTATE 22023) from the RPC only; it does not catch the sentinel's default raise_exception P0001, so it does not falsely pass an allowed overlong query.",
       "quality": "Isolated synthetic PG test, not actual hosted account/SQL proof.",
       "risk": "Synthetic local JWT/SQL role does not certify signed Auth or RLS; NULL comparison/trap caveats bounded to fixture.",
       "obsolete_dead": "Original pinned test behavior, current counterpart shown or explicitly superseded.",
@@ -2140,7 +2140,7 @@
     {
       "id": "T11X-P172-SEARCH-ASSERTIONS",
       "status": "UNREPRODUCED_TEST_WEAKNESS",
-      "notes": "P172 SQL <> and exception handler can overlook absent JSON keys or catch its own sentinel error; no active search defect reproduced."
+      "notes": "P172 SQL <> comparisons can yield NULL/UNKNOWN for absent JSON total/items keys, a potential fixture-coverage gap. The overlong-query test's default RAISE sentinel is P0001 and cannot be caught by invalid_parameter_value (22023): no false-pass issue there. No active search defect reproduced."
     }
   ],
   "tests": {
@@ -2153,5 +2153,16 @@
     "frozen": "F173:111",
     "pinned": "P174:1"
   },
-  "complete": false
+  "complete": false,
+  "semantic_correction_20261113": {
+    "corrected_original_lines": [
+      19,
+      20
+    ],
+    "cause": "Rechecked PostgreSQL official PL/pgSQL RAISE default SQLSTATE behavior; previous exception-catch concern incorrectly conflated P0001 with 22023.",
+    "official_source": "https://www.postgresql.org/docs/current/plpgsql-errors-and-messages.html",
+    "new_source_review_credit": 0,
+    "other_line_evidence_unchanged": true,
+    "method": "Direct reinspection of exact original source and authoritative PostgreSQL documentation."
+  }
 }
