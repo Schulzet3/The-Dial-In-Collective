@@ -75,4 +75,4 @@ After the mandatory [PREFLIGHT](../ai/PREFLIGHT.md), the central [active work ch
 - [Netlify rolling exhaustive audit and source-pinning remediation: Issue #508](issue-508.md)
 
 - [Automatic READY-batch source-bound CI journal](release-ready-batch.md) — explicitly recognized same-commit CI work journal.
-- [Issue #2389 universal URL / retired directory](issue-2389.md) — any-roaster best-effort autofill; obsolete Edge/SQL retirement; no publication.
+- [Issue #2389 universal URL / directory RETIREMENT IN PROGRESS](issue-2389.md) — development source READY but not published. Hosted legacy SQL/Edge remain LEGACY ACTIVE; old migrations and records HISTORICAL / ARCHIVED. See [#509 live dependency evidence](../audits/issue509-legacy-roaster-retirement-status-2026-11-13.json).
