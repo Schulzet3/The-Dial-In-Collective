@@ -20,3 +20,33 @@ test('#258 a related seller coffee cannot supply missing allspice',()=>{const s=
 test('#258 a related seller coffee cannot supply missing plum',()=>{const s=source258(page(own.replace('blackberry and plum','blackberry and apricot'),'<aside>Related product blackberry and plum</aside>'));assert.equal(s.narrative_plum,false)});
 test('#258 no unsupported decaf mechanism or espresso recipe',()=>{const p=parse();assert.ok(!p.fields?.decaffeination_method&&!p.fields?.espresso_recipe,JSON.stringify(p).slice(0,2200))});
 test('#258 Rwamatamu is a processing station, never the named farmer',()=>{const p=parse();assert.ok(!/rwamatamu/i.test(String(p.fields?.producer||'')),JSON.stringify(p).slice(0,2500))});
+
+const pairFacts=p=>(p.source_facts||[]).filter(f=>f.field==='sensory_context'&&
+ f.label==='Selected current multi-sentence narrative tasting context (review only)');
+test('#258 current chosen narrative keeps plum and allspice in Source Review only',()=>{
+ const p=parse();const f=pairFacts(p);
+ assert.equal(f.length,1,JSON.stringify(f));
+ assert.ok(/plum/i.test(f[0].value)&&/allspice/i.test(f[0].value),JSON.stringify(f));
+ assert.equal(p.fields?.tasting_notes,'Golden Raisin, Vanilla, Blackberry Jam');
+});
+test('#258 narrative pair needs two printed-note anchors in same selected paragraph',()=>{
+ const p=parse(own.replace('golden raisin sweetness and soft vanilla','raisin sweetness and smooth finish'));
+ assert.equal(pairFacts(p).length,0,JSON.stringify(pairFacts(p)));
+});
+test('#258 previously featured flavor pair must never count as current',()=>{
+ const p=parse(own.replace('Kibaya opens with','Kibaya previously opens with'));
+ assert.equal(pairFacts(p).length,0,JSON.stringify(pairFacts(p)));
+});
+test('#258 conditional with-milk flavors do not become intrinsic review provenance',()=>{
+ const p=parse(own.replace('Hints of allspice add warmth and structure.','Hints of allspice add warmth and structure when served with milk.'));
+ assert.equal(pairFacts(p).length,0,JSON.stringify(pairFacts(p)));
+});
+test('#258 related aside cannot donate allspice or missing current story',()=>{
+ const p=parse(own.replace('Hints of allspice add warmth and structure.','Hints of cinnamon add warmth and structure.'),
+  '<aside><p>Kibaya opens with jammy blackberry and plum, followed by golden raisin sweetness and soft vanilla. Hints of allspice add warmth.</p></aside>');
+ assert.ok(pairFacts(p).every(f=>!/allspice/i.test(f.value)),JSON.stringify(pairFacts(p)));
+});
+test('#258 no current matching H1, no selected supplementary pair',()=>{
+ const p=parse(own.replace('<h1>Kibaya</h1>','<h1>Other Coffee</h1>'));
+ assert.equal(pairFacts(p).length,0,JSON.stringify(pairFacts(p)));
+});

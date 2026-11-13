@@ -47,6 +47,7 @@ if(process.env.DIC_ISSUE33_R183_VERIFY==='1'){
  check(norm(f.variety).includes('red bourbon'),'selected_cultivar');
  check(['golden raisin','vanilla','blackberry'].every(x=>norm(f.tasting_notes).includes(x)),'canonical_selected_labeled_notes');
  check(record.add_coffee_ui_rendered===true&&record.source_review_rendered===true,'explicit_add_coffee_and_review_ui');
+ check(!!html&&source.narrative_plum&&source.narrative_allspice,'direct_narrative_source_present');
  check(!f.decaffeination_method&&!f.espresso_recipe,'unpublished_decaf_method_and_recipe_blank');
  check(!/rwamatamu/i.test(String(f.producer||'')),'washing_station_not_a_farmer');
  check(!(record.seo_fallback_fields||[]).some(x=>['name','origin','process','tasting_notes','producer'].includes(x)),'no_seo_for_direct_fields');
@@ -54,6 +55,8 @@ if(process.env.DIC_ISSUE33_R183_VERIFY==='1'){
  const facts=(actual?.source_facts||[]).filter(x=>['tasting_notes','sensory_context'].includes(x.field));
  const plum=facts.filter(x=>norm(x.value).includes('plum'));
  const allspice=facts.filter(x=>norm(x.value).includes('allspice'));
+ check(plum.length>0&&allspice.length>0,'selected_narrative_both_notes_retained_review_only');
+ check(f.tasting_notes==='Golden Raisin, Vanilla, Blackberry Jam','selected_canonical_panel_untouched');
  const report={case:258,source_sha:summary?.source_sha||null,passed:failures.length===0,failures,
    selected_source:source,fields:f,conflicts:record.conflicts||[],seo_fallback_fields:record.seo_fallback_fields||[],
    narrative_plum_recognized:plum.length>0||norm(f.tasting_notes).includes('plum'),

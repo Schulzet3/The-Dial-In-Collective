@@ -26,7 +26,7 @@ import {equivalentCoffeeProductNames,preferredCoffeeRoasterName,selectedCoffeeNa
 import {isolateCoffeeIdentityCohorts} from './coffee-source-identity-scope.mjs';
 import {extractCoffeeGeographyEntityRoles,cleanCoffeeGeographyEntityPrefix} from './coffee-geography-entity-roles.mjs';
 import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProductFlavorProfileEvidence,refineSelectedNamedTastingNotes,normalizeExplicitCoffeeTastingNotes,equivalentCoffeeTastingNotes,coffeeTastingNotesSubset} from './coffee-flavor-evidence.mjs';
-import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,refineSelectedCurrentTrailingFlavorNote,refineSelectedCurrentFlavorBase,refineSelectedCurrentSensoryArc,selectedCoffeeSupplementalTastingProse,selectedCurrentNarrativeAdditionalTastingNote,selectedCurrentProductOvertone} from './coffee-selected-description-sensory.mjs';
+import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,refineSelectedCurrentTrailingFlavorNote,refineSelectedCurrentFlavorBase,refineSelectedCurrentSensoryArc,selectedCoffeeSupplementalTastingProse,selectedCurrentNarrativeAdditionalTastingNote,selectedCurrentMultiSentenceNarrativeNotes,selectedCurrentProductOvertone} from './coffee-selected-description-sensory.mjs';
 import {selectedCoffeeMilkSensoryContext} from './coffee-selected-milk-sensory-context.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {parseCoffeeElevation,equivalentCoffeeElevations,compatibleCoffeeElevations,extractCoffeeElevationEvidence} from './coffee-elevation-evidence.mjs';
@@ -2084,6 +2084,17 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     label:'Selected current narrative additional tasting note (review only)',
     value:note,source_url,source_type:'html',
     section:'Exact selected current product paragraph; printed flavor profile preserved'});
+  }
+  // Two source-bound direct narrative descriptors are additional review context
+  // only; preserve an independently labeled selected Flavor Profile verbatim.
+  if(fields.tasting_notes&&!conflicts.has('tasting_notes')&&
+     !seoFallbackByFields.get(fields)?.has('tasting_notes')&&source_facts.length<384){
+   const pair=selectedCurrentMultiSentenceNarrativeNotes(currentProduct,{
+    clean,notes:fields.tasting_notes});
+   if(pair)source_facts.push({field:'sensory_context',
+    label:'Selected current multi-sentence narrative tasting context (review only)',
+    value:pair,source_url,source_type:'html',
+    section:'Single exact selected product direct paragraph; stronger flavor label preserved'});
   }
   // Different selected current hero and explicit Tasting Notes are both
   // directly sourced; preserve both for member review, never choose a winner.
