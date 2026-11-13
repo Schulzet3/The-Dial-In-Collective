@@ -7,6 +7,9 @@ declare me uuid:=gen_random_uuid(); admin_account uuid; admin_rows_before int; a
   canonical_id uuid; catalog jsonb; url text:='https://synthetic-roaster.example.com/products/test-unique-release';
 begin
  if current_database()<>'dic_ci' then raise exception 'Disposable dic_ci only';end if;
+ insert into auth.users(id,email,email_confirmed_at) values(me,me::text||'@example.invalid',now());
+ insert into private.beta_members(owner_id,enabled,admitted_at)
+ values(me,true,now()) on conflict(owner_id) do update set enabled=true,admitted_at=excluded.admitted_at;
  select coalesce(attempts,0) into previous from private.dic_url_preview_attempts where owner_id=me;
  previous:=coalesce(previous,0);
  -- Populate a uniquely verified exact public source without any private owner note.

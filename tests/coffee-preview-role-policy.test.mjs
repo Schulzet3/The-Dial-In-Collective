@@ -59,7 +59,7 @@ test('admin completion never writes quota while member ticket remains guarded an
  assert.doesNotMatch(client,/>=30-second cooldown/);
 });
 const env=key=>key==='SUPABASE_URL'?'https://test.supabase.co':'sb_publishable_test';
-const validUrl='https://roaster.example/products/espresso';
+const validUrl='https://roaster.com/products/espresso';
 const request=()=>new Request('https://app.example/api/coffee-preview',{
  method:'POST',headers:{Authorization:'Bearer test','Content-Type':'application/json'},
  body:JSON.stringify({source_url:validUrl})

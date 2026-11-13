@@ -32,3 +32,10 @@ DIC_PREFLIGHT_VERIFIED development_sha=b279e75c264a19eeefcb03404466a1ca6788a855 
 - SAME-COMMIT preflight confirmation prior to this code/test repair:
 DIC_PREFLIGHT_VERIFIED development_sha=b279e75c264a19eeefcb03404466a1ca6788a855 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 - Full exact-source hosted CI and safe merge still required; no provider/Netlify write.
+
+## Observed second PR-head SQL failure and targeted fixture repair
+- High-risk exact PR-head SQL 43363003934 failed at `preview_two_phase_cache.sql` AFTER `url_preview_release.sql` **PASS** and `universal_url_preview.sql` **PASS**. The disposable member UUID was randomized but its Auth+admission fixture insert was omitted because a prior source replacement did not match indentation. Real DB function correctly refused the unadmitted user with `Admitted member required`. Updated fixture to create synthetic confirmed Auth account plus enabled/admitted private.beta_members inside isolated transaction only; test still ROLLBACK.
+- The targeted Node preview test used reserved `.example` TLD, which safeCoffeeUrl explicitly and correctly rejects. Changed test input to valid `roaster.com` to exercise the intended handler rather than weakening SSRF guard. Any resulting Node run failure must be observed and corrected, not assumed resolved.
+- Fresh mandatory preflight before this test-only commit:
+DIC_PREFLIGHT_VERIFIED development_sha=b279e75c264a19eeefcb03404466a1ca6788a855 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+- No application/server migration changes, no provider writes or live deployment. Await exact-PR-head SQL, Node, visual and approval success and nonforce merge before READY.
