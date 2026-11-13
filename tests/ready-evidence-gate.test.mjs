@@ -66,3 +66,28 @@ test('#2169 frozen candidate reuses first-parent Git provenance even when READY 
   '100644:'+'f'.repeat(40)});
  assert.equal(invalid.ready,false,'tested PR-head test drift must still fail closed');
 });
+
+test('#2169 co-selected READY overlaps need first-parent, ancestry and exact candidate final bytes',async()=>{
+ const D='d'.repeat(40),path='site/admin/push.js';
+ const first={...item,id:'DIC-Q-1938-first',merged_source_sha:A,scope_paths:[path],ci_runs:[21,22,23,24,25]};
+ const second={...item,id:'DIC-Q-1938-second',merged_source_sha:D,scope_paths:[path],ci_runs:[31,32,33,34,35]};
+ const owners=[first,second];
+ const proof={queue:{...queue,items:owners},items:owners,publishedSourceSha:B,candidateSha:C,
+  candidateChangedPaths:[path],currentSourceSha:undefined,
+  loadRun:async id=>({id,head_sha:id<=25?A:D,status:'completed',conclusion:'success',event:'push'}),
+  loadChecks:async sha=>names.map((name,i)=>({id:(sha===A?500:600)+i,app:{slug:'github-actions'},
+   name,head_sha:sha,details_url:'https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/'+
+   ((sha===A?21:31)+i)+'/job/'+(700+i),status:'completed',conclusion:'success'})),
+  mergeChangedPaths:()=>[path,'tests/issue1938-toggle.test.mjs'],
+  sourceObjectAt:(sha,p)=>p!==path?'100644:identical_test':
+   '100644:'+(sha===A?'first':sha===D||sha===C?'last':'published'),
+  isAncestor:(a,b)=>a===A&&b===D};
+ const ok=await verifyReadyItems(proof);
+ assert.equal(ok.ready,true,ok.errors.join(' | '));
+ assert.equal((await verifyReadyItems({...proof,isAncestor:undefined})).ready,false);
+ assert.equal((await verifyReadyItems({...proof,isAncestor:()=>false})).ready,false);
+ assert.equal((await verifyReadyItems({...proof,sourceObjectAt:(sha,p)=>
+  p===path&&sha===C?'100644:unreviewed':proof.sourceObjectAt(sha,p)})).ready,false);
+ assert.equal((await verifyReadyItems({...proof,mergeChangedPaths:sha=>
+  sha===D?['tests/issue1938-toggle.test.mjs']:proof.mergeChangedPaths(sha)})).ready,false);
+});

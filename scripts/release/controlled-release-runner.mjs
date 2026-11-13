@@ -377,7 +377,8 @@ export async function executeSingleUseRelease(settings=process.env){
    .split(/\r?\n/).filter(Boolean),
   publishedSourceSha:lastPublishedTestedSha,candidateSha:sha,
   candidateChangedPaths:changedSourcePaths,
-  allowedPinnedPaths:queueGate.pinned_ready_paths||[]
+  allowedPinnedPaths:queueGate.pinned_ready_paths||[],
+  isAncestor:(a,b)=>verifiedGitAncestry(a,b)
  });
  if(!evidence.ready)throw Error('READY live evidence HOLD before claim: '+
   evidence.errors.join('; ').slice(0,2000));

@@ -99,3 +99,6 @@ Owner requires unattended GitHub Actions restores, not manual ChatGPT workflow d
 ## 2026-11-13 — static generator export preflight followup
 - Owner one-command READY15 publication first controller DIC-20261113-READY15-37 failed pre-claim at deterministic false-positive `export function* rawElements` source export; source and five candidate CI passed. No Netlify release. See SAME-COMMIT ops journal for exact preflight SHA/blob, recovery/provider state, test and rollout boundaries.
 - Main scoped fix: accept direct sync/async ESM generator declarations while retaining missing-symbol failures; targeted test, original source unchanged. Require exact PR/main acceptance before a new one-use event; do not replay the failed controller.
+
+## 2026-11-13 — #2169 READY co-owner source proof
+- Controller -38 failed preclaim on five co-owned READY paths; main-only exact Git first-parent/ancestry/final-blob attestation and five-check parity with negative tests, no feature/deploy change. Same-commit journal with preflight SHA/blob and remediation boundaries.
