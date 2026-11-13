@@ -713,3 +713,11 @@ test('forward-only retirement archives original evidence and preserves identity 
  assert.match(migration,/drop function if exists public\.dic_roaster_preview_target/i);
  assert.doesNotMatch(migration,/drop table|truncate table|delete from public\./i);
 });
+
+test('only verified source attestations, not URL registration, can authorize global promotion',()=>{
+ const migration=read('supabase/migrations/20261113043000_dic_retire_roaster_directory.sql');
+ assert.match(migration,/create table private\.dic_official_source_attestations/);
+ assert.match(migration,/from private\.dic_roaster_directory on conflict/);
+ assert.match(migration,/from private\.dic_official_source_attestations/);
+ assert.doesNotMatch(read('netlify/functions/coffee-url-preview.mjs'),/dic_official_source_attestations|dic_roaster_directory/);
+});

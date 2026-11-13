@@ -106,15 +106,14 @@ test('multi-origin and named-farm values populate only blanks with Other/Unknown
  assert.equal(fields.producer.value,'Finca Deborah, Hacienda La Esperanza');
  assert.equal(fields.process.value,'Other/Unknown');
 });
-test('server preview checks admitted Auth and official host before remote fetching',()=>{
- const server=read('supabase/functions/dic-preview-coffee/index.ts');
- assert.match(server,/dic_session_status/);
- assert.match(server,/dic_roaster_preview_target/);
- assert.match(server,/officialPreviewUrl\(source_url,roaster\.official_domain\)/);
- assert.match(server,/dic_url_preview_claim/);
- assert.match(server,/redirect:'manual'/);
- assert.match(server,/950000/);
- assert.match(server,/source_url:checked,match/);
+test('active preview is universal Netlify, retired legacy Edge cannot gate domains',()=>{
+ const client=read('site/cloud/client.js');
+ const legacy=read('supabase/functions/dic-preview-coffee/index.ts');
+ const current=read('netlify/functions/coffee-url-preview.mjs');
+ assert.match(client,/previewPath='\/api\/coffee-preview'/);
+ assert.match(current,/safeCoffeeUrl\(source_url\)/);
+ assert.match(legacy,/retired_endpoint/);
+ assert.doesNotMatch(legacy,/dic_roaster_directory|dic_roaster_preview_target|dic_url_preview_claim/);
 });
 test('URL-first SQL prioritizes official URL evidence but cannot use URL alone as Coffee UUID',()=>{
  const sql=read('supabase/migrations/20261016154252_dic_url_first_and_autofill_preview.sql');

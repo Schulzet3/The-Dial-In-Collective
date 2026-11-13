@@ -19,6 +19,25 @@ select a.alias_key,d.canonical_key,a.evidence_url,a.created_at
  from private.dic_roaster_aliases a join private.dic_roaster_directory d on d.id=a.roaster_id
 on conflict(alias_key) do nothing;
 
+-- Historic independently verified source attestations ONLY for the
+-- separate global canonical verification path, never URL extraction.
+create table private.dic_official_source_attestations (
+ canonical_key text primary key check(canonical_key~'^[a-z0-9]{3,}$'),
+ canonical_name text not null,
+ official_domain text not null check(official_domain~'^[a-z0-9-]+(\.[a-z0-9-]+)+$'),
+ evidence_url text not null check(evidence_url~'^https://'),
+ verified_at timestamptz not null,
+ created_at timestamptz not null
+);
+alter table private.dic_official_source_attestations enable row level security;
+revoke all on private.dic_official_source_attestations from public,anon,authenticated;
+grant all on private.dic_official_source_attestations to service_role;
+create policy no_client_access on private.dic_official_source_attestations
+ for all to anon,authenticated using(false) with check(false);
+insert into private.dic_official_source_attestations(canonical_key,canonical_name,official_domain,evidence_url,verified_at,created_at)
+select canonical_key,canonical_name,official_domain,evidence_url,verified_at,created_at
+from private.dic_roaster_directory on conflict(canonical_key) do nothing;
+
 CREATE OR REPLACE FUNCTION private.dic_canonical_roaster_key(value text)
  RETURNS text
  LANGUAGE sql
@@ -50,7 +69,20 @@ begin
  )
  select count(distinct source_host),min(source_host),min(source_roaster)
  into host_count,official_host,canonical_name from official_pages;
- if host_count<>1 or official_host is null then return null; end if;
+ -- Conflicting verified product source domains must be reviewed, not guessed.
+ if host_count>1 then return null; end if;
+ if host_count=1 and official_host is not null then
+  if exists(select 1 from private.dic_official_source_attestations a
+    where a.canonical_key=private.dic_canonical_roaster_key(roaster_name)
+      and a.official_domain<>official_host) then return null; end if;
+  return jsonb_build_object('official_domain',official_host,'canonical_name',canonical_name);
+ end if;
+ -- Preserve prior independently verified official BRAND evidence for the
+ -- original source worker bootstrap. This NEVER gates a URL preview.
+ select a.canonical_name,a.official_domain into canonical_name,official_host
+ from private.dic_official_source_attestations a
+ where a.canonical_key=private.dic_canonical_roaster_key(roaster_name);
+ if official_host is null then return null; end if;
  return jsonb_build_object('official_domain',official_host,'canonical_name',canonical_name);
 end $proof$;
 revoke all on function private.dic_verified_roaster_page_proof(text) from public,anon,authenticated;
