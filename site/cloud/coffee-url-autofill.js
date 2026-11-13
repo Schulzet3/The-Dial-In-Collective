@@ -96,7 +96,7 @@ const reasons={
  source_unavailable:'The roaster page is temporarily unavailable. You can enter the details manually.',
  source_fetch_failed:'The roaster page could not be checked right now. You can enter details manually.',
  redirect_requires_review:'The roaster redirects this URL. Paste the final official product URL or enter details manually.',
- preview_cooldown:'Please wait 30 seconds between coffee URL lookups.',
+ preview_cooldown:'Please wait 15 seconds between coffee URL lookups.',
  daily_preview_limit:'The URL preview limit has been reached for today. You can still add coffees manually.',
  preview_rate_limited:'Too many URL checks. Try again later.',
  page_too_large:'This page is too large for automatic extraction. Add details manually.',

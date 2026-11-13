@@ -12,6 +12,7 @@
     "current_owner_admin_one_click_resolution_and_dose_warning_20261021",
     "current_owner_admin_records_edit_20261021",
     "current_owner_admin_review_delete_20261023",
+    "current_owner_admin_unlimited_member_15s_preview_20261112",
     "current_owner_admin_web_push_20261110",
     "current_owner_approved_adaptive_extractor_production_release_20261020",
     "current_owner_approved_agtron_narrative",
@@ -2351,5 +2352,21 @@
     "push_consent": "MEMBER_SIGNED_VERIFIED_PENDING_ONLY_OPT_IN",
     "production": "NOT_PUBLISHED",
     "evidence": "docs/workstreams/issue-2258.md"
+  },
+  "current_owner_admin_unlimited_member_15s_preview_20261112": {
+    "decision_id": "COFFEE-URL-ADMIN-UNLIMITED-MEMBER-15S-20261112",
+    "issue": 2386,
+    "owner_authority": "Direct owner chat November 12, 2026; #2386",
+    "state": "OWNER_APPROVED_IN_PROGRESS_NOT_DEPLOYED",
+    "scope": "Per-account only: verified admitted admin unlimited URL previews/retries/cooldowns; member 12 charged fresh claims/24h and 15-second shared cooldown; security and per-IP limits retained",
+    "migration": "supabase/migrations/20261113043000_dic_admin_preview_unlimited_member_15s.sql",
+    "web_ui": "site/cloud/coffee-url-autofill.js",
+    "legacy_worker": "supabase/functions/dic-preview-coffee/index.ts",
+    "netlify_handler": "netlify/functions/coffee-url-preview.mjs",
+    "regression": "tests/coffee-preview-role-policy.test.mjs",
+    "source_git_sha": null,
+    "release_queue_id": "DIC-Q-2386-admin-unlimited-member-15s",
+    "production_deployed": false,
+    "provider_verification": "READ_ONLY_BASELINE_ONLY; new migration not applied"
   }
 }
