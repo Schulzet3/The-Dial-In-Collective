@@ -249,3 +249,37 @@ export function refineSelectedCurrentTrailingFlavorNote(html,{clean,notes}={}){
  }
  return found.size===1?[...found][0]:'';
 }
+
+
+// Direct current selected-product prose can state a literal tasting substance
+// as an "overtone", while a sitewide roast tutorial supplies lower-ranked
+// general espresso notes. Accept only ONE self-describing selected coffee
+// paragraph under the matching product's "About" section. Never borrow a
+// generic roast guide, another product, SEO, historical or conditional prose.
+export function selectedCurrentProductOvertone(html,{clean}={}){
+ if(typeof html!=='string'||html.length>2_000_000||typeof clean!=='function')return null;
+ const scoped=removeElements(html,['script','style','noscript','template','nav','aside','footer','header','select']);
+ const blocks=productCoffeeProse(scoped,clean);
+ const h1=blocks.filter(b=>b.tag==='h1'&&!b.educational);
+ if(h1.length!==1||h1[0].text.length>180)return null;
+ const selected=fold(h1[0].text).replace(/\s+\d+(?:\.\d+)?\s*(?:oz|lb|lbs|g|kg)$/u,'');
+ if(selected.length<8)return null;
+ const hits=[];
+ for(const block of blocks){
+  if(block.tag!=='p'||block.educational||block.text.length<65||block.text.length>600||
+    unavailable.test(block.text)||unavailable.test(block.section)||
+    NONCURRENT_COFFEE_PROSE.test(block.text))continue;
+  const section=fold(block.section).replace(/^about (?:our|the|this) /u,'');
+  if(!section||!(section===selected||section.startsWith(selected+' ')||selected.startsWith(section+' ')))continue;
+  for(const sentence of block.text.split(/(?<=[.!?])\s+/u).slice(0,8)){
+   if(sentence.length>420||unavailable.test(sentence)||NONCURRENT_COFFEE_PROSE.test(sentence))continue;
+   const m=sentence.match(/\b(?:our|the|this)\s+[^.!?]{3,90}?\bcoffee\s+is\s+an?\s+(?:light|medium(?:[ -]dark)?|dark)\s+roast\b[^.!?]{0,180}?\b(?:noticeable|distinct|pronounced|clear)\s+(chocolate|cocoa|caramel|toffee|vanilla|hazelnut|almond|citrus|cherry|berry)\s+overtones\b/iu);
+   if(!m)continue;
+   const value=normalizeExplicitCoffeeTastingNotes(m[1]);
+   if(value)hits.push({value,section:block.section,quote:sentence.slice(0,300)});
+  }
+ }
+ // If the selected product offers multiple such descriptions, keep them for
+ // review rather than silently choosing the first or a merged profile.
+ return hits.length===1?hits[0]:null;
+}

@@ -14,13 +14,23 @@ const matrix='<h2>Our Kona Coffees</h2><p><strong>Cupping Notes on Mountain Thun
 const roastPage=name=>'<main><h1>'+name+'</h1>'+matrix+
  '<section><h2>About our 100% Kona Espresso Roast Coffee</h2>'+
  '<p>Our Espresso Roast Kona Coffee is a dark roast, with noticeable chocolate overtones.</p></section></main>';
-test('#44 selected Espresso cupping alone populates notes, excluding unrelated roast rows',()=>{
+test('#44 own selected chocolate overtones outrank lower-ranked general roast guide, whose Espresso line remains reviewable',()=>{
  const r=extractPublicCoffeeFacts(roastPage('100% Kona Espresso Roast Coffee 16oz'),
   {source_url:'https://mountainthunder.com/products/espresso16'});
- assert.equal(r.ok,true);assert.equal(r.fields.tasting_notes,'Smokey with caramel notes');
+ assert.equal(r.ok,true);assert.equal(r.fields.tasting_notes,'chocolate');
  assert.ok(!r.conflicts?.includes('tasting_notes'));
  assert.ok(r.source_facts?.some(f=>f.field==='tasting_notes'&&f.section?.includes('Espresso roast only')));
+ assert.ok(r.source_facts?.some(f=>f.field==='tasting_notes'&&f.label==='Selected current product literal overtones'));
  assert.doesNotMatch(JSON.stringify(r.fields),/grapefruit|Vienna|French|orange notes/i);
+ assert.match(coffeeUrlPreviewMarkup(r),/chocolate/);
+});
+test('#44 selected Espresso cupping fallback is preserved when chosen product has no literal overtones',()=>{
+ const noDirect=roastPage('100% Kona Espresso Roast Coffee 16oz').replace(
+  'with noticeable chocolate overtones','with a smooth aftertaste');
+ const r=extractPublicCoffeeFacts(noDirect,{source_url:'https://mountainthunder.com/products/espresso16'});
+ assert.equal(r.ok,true);
+ assert.equal(r.fields.tasting_notes,'Smokey with caramel notes');
+ assert.ok(r.source_facts?.some(f=>f.field==='tasting_notes'&&f.section?.includes('Espresso roast only')));
  assert.match(coffeeUrlPreviewMarkup(r),/Smokey with caramel notes/);
 });
 test('#44 related Peaberry and generic Kona cannot borrow Espresso roast cupping',()=>{
