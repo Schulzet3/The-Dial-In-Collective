@@ -41,20 +41,25 @@ begin
  got:=public.dic_url_preview_claim(gen_random_uuid());
  if got->>'allowed' is distinct from 'false' then raise exception 'Nonexistent account accepted'; end if;
  got:=public.dic_url_preview_claim(actor);
- if got->>'allowed' is distinct from 'true' then raise exception 'First preview quota claim failed: %',got; end if;
+ if got->>'allowed' is distinct from 'true' or got->>'unlimited' is distinct from 'true'
+ then raise exception 'Verified administrator first claim must bypass quota: %',got; end if;
  got:=public.dic_url_preview_claim(actor);
- if got->>'reason' is distinct from 'preview_cooldown' then raise exception 'Preview cooldown failed: %',got; end if;
+ if got->>'allowed' is distinct from 'true' or got->>'unlimited' is distinct from 'true'
+ then raise exception 'Verified administrator immediate repeat must bypass cooldown: %',got; end if;
  got:=public.dic_url_preview_claim(second_user);
- if got->>'allowed' is distinct from 'true' then raise exception 'Quota leaked across accounts'; end if;
+ if got->>'allowed' is distinct from 'true' then raise exception 'First ordinary member preview claim failed: %',got; end if;
+ got:=public.dic_url_preview_claim(second_user);
+ if got->>'reason' is distinct from 'preview_cooldown'
+ then raise exception 'Ordinary member 15-second cooldown failed: %',got; end if;
  execute 'reset role';
- update private.dic_url_preview_attempts set attempts=12,last_attempt_at=now()-interval '1 minute' where owner_id=actor;
+ update private.dic_url_preview_attempts set attempts=12,last_attempt_at=now()-interval '1 minute' where owner_id=second_user;
  execute 'set local role service_role';
- got:=public.dic_url_preview_claim(actor);
+ got:=public.dic_url_preview_claim(second_user);
  if got->>'reason' is distinct from 'daily_preview_limit' then raise exception 'Daily quota failed'; end if;
  execute 'reset role';
- update private.dic_url_preview_attempts set window_started_at=now()-interval '25 hours' where owner_id=actor;
+ update private.dic_url_preview_attempts set window_started_at=now()-interval '25 hours' where owner_id=second_user;
  execute 'set local role service_role';
- got:=public.dic_url_preview_claim(actor);
+ got:=public.dic_url_preview_claim(second_user);
  if got->>'allowed' is distinct from 'true' then raise exception 'Daily quota did not reset'; end if;
  execute 'reset role';
 

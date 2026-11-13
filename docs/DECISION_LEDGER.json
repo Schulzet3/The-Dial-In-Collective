@@ -2000,6 +2000,12 @@
   ],
   "scoped_supersessions": [
     {
+      "topic": "URL preview per-account cooldown and daily quota; privileged administrator exemption",
+      "current": "COFFEE-URL-ADMIN-UNLIMITED-MEMBER-15S-20261112",
+      "supersedes": "COFFEE-URL-20261016-01 >=30-second cooldown; COFFEE-URL-DAILY-20261016-02 12-per-day for admins only",
+      "scope": "Currently admitted, email-verified admins unlimited per-account cached/fresh/trusted preview attempts, other members still 12 fresh charged/day but shared 15-second cooldown. Preserve IP/global/fetch protections and separate Publish."
+    },
+    {
       "topic": "Limited invitation-only technical pilot",
       "current": "PILOT-INVITE-ONLY-TECHNICAL-20261018-01",
       "supersedes": "None of the prior Locked requirements; adds a separate, explicitly non-complete-beta early-access milestone",
@@ -4919,6 +4925,41 @@
     "restrictions": "Never notify rejected, unverified, unadmitted, disabled or unrelated users; never trust client role, send member details in push, conflate with administrator push, hide failure, replay old approvals, silently publish or purchase. A provider-accepted response does not prove inbox/device delivery.",
     "dependencies": "Server-side verified-sender email provider credentials, authenticated pending opt-in, service-only outbox with retries, approval-trigger event, exact-source CI, separate owner Publish for production.",
     "deployment": "SOURCE_VERIFIED_AND_NONFORCE_MERGED_1680306; LIVE_DELIVERY_BLOCKED_PENDING_VERIFIED_SENDER_EDGE_CONFIGURATION_AND_OWNER_PUBLISH"
+  },
+  "current_owner_admin_unlimited_member_15s_preview_20261112": {
+    "id": "COFFEE-URL-ADMIN-UNLIMITED-MEMBER-15S-20261112",
+    "status": "Locked",
+    "date": "2026-11-12",
+    "authority": "Owner direct chat instruction; GitHub issue #2386",
+    "scope": "Only per-account roaster coffee URL preview retry frequency, daily quota and cooldown across universal cached/fresh and trusted-roaster paths",
+    "administrator": {
+      "eligibility": "Current server-authoritative Admin role, admitted enabled member, verified Auth email",
+      "daily_claims": "UNLIMITED",
+      "cooldown_seconds": 0,
+      "restrictions": "No per-account cooldown, day quota or retry-frequency limit; preserve global IP abuse and fetch safety boundaries"
+    },
+    "ordinary_member": {
+      "daily_charged_claims": 12,
+      "window_hours": 24,
+      "cooldown_seconds": 15,
+      "account_wide": true,
+      "cached_previews_consume_cooldown": true
+    },
+    "preserved": [
+      "Auth/verified email/admission/current role checks",
+      "12 requests per 60s per-IP Netlify anti-abuse protection",
+      "HTTPS/SSRF/TLS/fetch size/time and bounded product retriever",
+      "manual Add Coffee, Pending and Verified identity segregation",
+      "offline, shots, notes, Community, history, data and privacy",
+      "No production migration or deployment without new Publish"
+    ],
+    "supersedes_only": [
+      "COFFEE-URL-20261016-01 >=30s for ordinary accounts, replaced with 15s",
+      "COFFEE-URL-DAILY-20261016-02 12/day and 30s for administrators, removed; 12/day unchanged for other members"
+    ],
+    "migration": "supabase/migrations/20261113043000_dic_admin_preview_unlimited_member_15s.sql",
+    "issue": 2386,
+    "implementation_status": "OWNER_APPROVED_SOURCE_IMPLEMENTATION_IN_PROGRESS_NOT_DEPLOYED"
   },
   "OWNER-UNIVERSAL-URL-NO-ROASTER-DIRECTORY-20261112": {
       "status": "Locked",

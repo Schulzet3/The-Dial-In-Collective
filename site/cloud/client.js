@@ -50,7 +50,7 @@ export function createCloudClient(sdk,{redirectUrl,assertSecure=secureOrigin,pre
    async previewCoffeeUrl(source_url,{refreshSource=false}={}){
     assertSecure();
     // One URL lookup and one shared per-account rate claim. Do NOT invoke the
-    // legacy curated preview first: two fetches would defeat the >=30-second
+    // legacy curated preview first: two fetches would defeat the member 15-second
     // cooldown and unnecessarily consume member/provider requests.
     const {data,error}=await sdk.auth.getSession();
     const token=data?.session?.access_token;
