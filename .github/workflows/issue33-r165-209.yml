@@ -28,7 +28,8 @@ jobs:
           node-version: '22'
       - name: Selected source positive and hostile tests
         run: node --test tests/coffee-issue33-r165-209.test.mjs
-      - name: Guarded official HTTPS and actual extractor
+      - name: Guarded official HTTPS and actual extractor (bounded diagnostic after test failure)
+        if: always()
         env:
           DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '209'
           DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r165
