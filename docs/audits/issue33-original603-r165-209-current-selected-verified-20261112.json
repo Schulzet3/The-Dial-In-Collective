@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "round": 165,
+  "original_number": 209,
+  "current_date_utc": "2026-11-13",
+  "status": "NARROW_SELECTED_CURRENT_VERIFIED_READY_DEVELOPMENT_ONLY",
+  "preflight": {
+    "development_sha": "1135d75f77e844f8a5315bf17977def51735de6b",
+    "file_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "content_verified": true
+  },
+  "source": {
+    "url": "https://manuscriptcoffee.com/products/lazy-day-decaf",
+    "name": "Lazy Day Decaf",
+    "identity_verified": true,
+    "fields": {
+      "roaster": "Manuscript Coffee",
+      "origin": "Huila, Colombia",
+      "roast_level": "Medium",
+      "tasting_notes": "Cinnamon, Raisin, Cherry",
+      "decaffeination_method": "Sugar Process"
+    },
+    "unpublished": [
+      "green processing",
+      "producer",
+      "variety",
+      "elevation",
+      "espresso recipe"
+    ],
+    "seo_fallbacks": [],
+    "explicit_add_coffee_and_source_review_rendered": true
+  },
+  "failure": {
+    "runs": [
+      43362931302,
+      43363056118
+    ],
+    "defect": "Contracted selected product EA decaffeination described inside selected inline-only DIV rather than P; canonical field lost."
+  },
+  "fix": {
+    "pr": 2388,
+    "merge_sha": "659b6f3fcb62ca7198f256ef82b8a2d49452750f",
+    "reviewed_pr_head_sha": "e4731aa9752187d9b2426b2361b6a467ceba0938",
+    "generic": true,
+    "changed_runtime_path": "src/server/coffee-direct-product-prose.mjs"
+  },
+  "pr_head": {
+    "afterproof_run": 43363205055,
+    "focused_pass": 19,
+    "node_lint": 43363204932,
+    "node_pass": 4462,
+    "node_fail": 0,
+    "intentional_skips": 6,
+    "cloud_mobile": 43363205024,
+    "sql": 43363204976,
+    "security": 43363204964,
+    "approval": 43363205144
+  },
+  "merged": {
+    "afterproof_run": 43363723618,
+    "focused_pass": 19,
+    "strict_afterproof": true,
+    "node_lint": 43363723628,
+    "node_pass": 4462,
+    "node_fail": 0,
+    "intentional_skips": 6,
+    "cloud_mobile": 43363723716,
+    "approval": 43363723623,
+    "python": 43363723521
+  },
+  "artifact": {
+    "id": 14009910154,
+    "zip_sha256": "45d0d3effb29b76ef0e1ab3672d42ef0621789f916e5ca5a6a227ec128d1dfaa",
+    "html_bytes": 194850,
+    "html_sha256": "c15ca4fe62cf1a75dc676893d1d5dd4f9401dcb2f4c6de52463bd4dad7fae362",
+    "evidence_sha256": "3a53404cbaca38f082336603b0854b7c01c1b3fa86d1aa62678983e9ab80dfcb",
+    "afterproof_sha256": "961f806fea2586b64742d38a0ca68566f30850b2664a8497d90a75bf4d3770b5",
+    "independently_downloaded_rehashed": true
+  },
+  "invariants": {
+    "original603_csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "corpus_oracle_scorer_unchanged": true,
+    "full603_certified": false,
+    "full603_workflow": "SKIPPED_NOT_PASS",
+    "production_deployed": false,
+    "release_authorized": false,
+    "parent_issue_open": true,
+    "other_queue_ready_deployed_preserved": true
+  },
+  "queue_item": "DIC-Q-33-r165-209-selected-ea-decaf-pronoun-div",
+  "next": "Independently review next distinct original603 selected official product; leave source-inaccessible variants and #267/#96 separate."
+}
