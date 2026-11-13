@@ -26,7 +26,7 @@ process.exit(args[0]==='run'?37:0);
 `,{mode:0o700});
     const result=spawnSync('bash',[drill],{encoding:'utf8',env:{...process.env,
       PATH:bin+':'+process.env.PATH,RUNNER_TEMP:dir,GITHUB_RUN_ID:'123456',
-      SUPABASE_PROJECT_REF:'synthetic-project',SUPABASE_DB_URL:'synthetic-project-unused',
+      SUPABASE_PROJECT_REF:'abcdefghijklmnopqrst',SUPABASE_DB_URL:'postgresql://postgres.abcdefghijklmnopqrst:fixture-only@aws-0-us-east-2.pooler.supabase.com:5432/postgres?sslmode=require',
       DIC_TEST_DOCKER_LOG:log}});
     assert.ifError(result.error);
     assert.equal(result.status,37,'source failure must propagate');
