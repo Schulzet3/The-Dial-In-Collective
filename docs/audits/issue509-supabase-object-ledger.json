@@ -4040,6 +4040,15 @@
       "receipt_path": "docs/audits/issue509-pg-catalog-internal-declarations-2026-11-12-run202-ord401-600.json",
       "provider_writes": 0,
       "baseline_complete": false
+    },
+    {
+      "date_utc": "2026-11-13",
+      "event": "RUN207_PG_CATALOG_INTERNAL_DECLARATIONS_1601_1900_DIRECT_SEMANTIC",
+      "preflight_sha": "c368341abb6386cc39d594e0af955f08ddc7dcf4",
+      "receipt_path": "docs/audits/issue509-pg-catalog-internal-declarations-2026-11-13-run207-ord1601-1900.json",
+      "receipt_blob_sha": "05264b454e829a98bbb1563cfe2a4c6fdb2390d0",
+      "provider_writes": 0,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -18850,5 +18859,43 @@
     "provider_writes": 0,
     "baseline_complete": false,
     "next_cursor": "new provider drift first, else internal ordinary routine #1601/3008"
+  },
+  "provider_pg_catalog_internal_run207": {
+    "run": "207",
+    "utc": "2026-11-13",
+    "preflight_development_sha": "c368341abb6386cc39d594e0af955f08ddc7dcf4",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "write_parent_development_sha": "79d81d3c64020261530a8ac613fdb419940a0c02",
+    "receipt": "docs/audits/issue509-pg-catalog-internal-declarations-2026-11-13-run207-ord1601-1900.json",
+    "receipt_blob_sha": "05264b454e829a98bbb1563cfe2a4c6fdb2390d0",
+    "reviewed_ordinals": [
+      1601,
+      1900
+    ],
+    "new_complete_declarations": 300,
+    "cumulative_complete_declarations": 1900,
+    "full_declaration_characters": 56754,
+    "family_total": 3008,
+    "registered_linked_functions": 157,
+    "leakproof_count": 30,
+    "security_definer_count": 0,
+    "denied_execute_app_ordinals": [
+      1810,
+      1811,
+      1825,
+      1838,
+      1839,
+      1840,
+      1872,
+      1897
+    ],
+    "session_signal_replication_role_check": "anon/authenticated/service_role have no superuser, replication, pg_signal_backend, or pg_monitor role; service_role has BYPASSRLS",
+    "native_implementation": "UNVERIFIED_COMPILED",
+    "postgrest_route": "UNVERIFIED",
+    "provider_writes": 0,
+    "confirmed_new_defects": 0,
+    "justified_removals": 0,
+    "baseline_complete": false,
+    "next": "new migration/Edge drift first, else internal ordinary routine #1901/3008"
   }
 }
