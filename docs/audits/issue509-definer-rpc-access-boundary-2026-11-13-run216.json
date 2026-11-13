@@ -1,0 +1,335 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 216,
+  "date_utc": "2026-11-13",
+  "scope": "All 10 currently authenticated-callable public SECURITY DEFINER functions + 3 private admission/preview helpers full-source cross-layer review; 7 schema ACLs and safe PostgREST config-key metadata. Does not credit earlier first-time review again.",
+  "project_ref": "azviqqejypsefzilgonr",
+  "initial_preflight_sha": "5686d794a916fbe8d5e336583ccbc4f6158202ae",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "provider_status": "ACTIVE_HEALTHY",
+  "postgres_version": "17.11.0.003",
+  "migrations": 67,
+  "edge_functions": [
+    {
+      "slug": "dic-verify-coffee",
+      "version": 10,
+      "status": "ACTIVE",
+      "verify_jwt": true
+    },
+    {
+      "slug": "dic-preview-coffee",
+      "version": 6,
+      "status": "ACTIVE",
+      "verify_jwt": true
+    },
+    {
+      "slug": "dic-delete-member-account",
+      "version": 4,
+      "status": "ACTIVE",
+      "verify_jwt": true
+    },
+    {
+      "slug": "dic-admin-push-broker",
+      "version": 3,
+      "status": "ACTIVE",
+      "verify_jwt": false
+    },
+    {
+      "slug": "dic-member-approval-broker",
+      "version": 1,
+      "status": "ACTIVE",
+      "verify_jwt": false
+    }
+  ],
+  "functions": [
+    {
+      "schema": "private",
+      "name": "dic_shared_preview_claim",
+      "args": "account_id uuid",
+      "provider_md5": "b99b6cbd392562af334c68e056ce33d8",
+      "definition": "CREATE OR REPLACE FUNCTION private.dic_shared_preview_claim(account_id uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare\n rec private.dic_url_preview_attempts;\n clock timestamptz:=now();\nbegin\n if account_id is null or not exists(select 1 from auth.users u where u.id=account_id)\n then return jsonb_build_object('allowed',false,'reason','unknown_account');end if;\n insert into private.dic_url_preview_attempts(owner_id,window_started_at,last_attempt_at,attempts)\n values(account_id,clock,clock-interval '1 minute',0)\n on conflict(owner_id) do nothing;\n select * into strict rec from private.dic_url_preview_attempts\n where owner_id=account_id for update;\n if rec.window_started_at<clock-interval '24 hours' then\n  update private.dic_url_preview_attempts\n   set window_started_at=clock,last_attempt_at=clock,attempts=1\n   where owner_id=account_id;\n  return jsonb_build_object('allowed',true);\n end if;\n if rec.attempts>=12 then return jsonb_build_object('allowed',false,'reason','daily_preview_limit');end if;\n if rec.last_attempt_at>clock-interval '30 seconds'\n then return jsonb_build_object('allowed',false,'reason','preview_cooldown');end if;\n update private.dic_url_preview_attempts\n  set attempts=rec.attempts+1,last_attempt_at=clock\n  where owner_id=account_id;\n return jsonb_build_object('allowed',true);\nend $function$\n",
+      "fixed_config": "search_path=\"\"",
+      "anon_exec": false,
+      "authenticated_exec": false,
+      "service_exec": true,
+      "semantic_review": "Private helper takes account UUID but authenticated lacks direct EXECUTE; public issuer requires auth.uid and admission.",
+      "verdict": "RETAIN_PENDING_EFFECTIVE_API_VERIFICATION"
+    },
+    {
+      "schema": "private",
+      "name": "is_member",
+      "args": "",
+      "provider_md5": "e406adb7ba7c86dcb000cb089b2693d1",
+      "definition": "CREATE OR REPLACE FUNCTION private.is_member()\n RETURNS boolean\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\n  SELECT EXISTS(\n    SELECT 1 FROM private.beta_members m\n    WHERE m.owner_id=(SELECT auth.uid())\n      AND m.enabled\n      AND m.admitted_at IS NOT NULL\n  );\n$function$\n",
+      "fixed_config": "search_path=\"\"",
+      "anon_exec": false,
+      "authenticated_exec": true,
+      "service_exec": true,
+      "semantic_review": "Uses auth.uid against enabled beta_members admitted_at nonnull; no caller-supplied target identity.",
+      "verdict": "RETAIN_PENDING_EFFECTIVE_API_VERIFICATION"
+    },
+    {
+      "schema": "private",
+      "name": "require_member",
+      "args": "",
+      "provider_md5": "27ff3a2a7fcf231171778a2d584b1851",
+      "definition": "CREATE OR REPLACE FUNCTION private.require_member()\n RETURNS uuid\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare u uuid:=auth.uid();\nbegin\n if u is null or not private.is_member() then raise exception using errcode='42501',message='An admitted beta account is required.'; end if;\n return u;\nend $function$\n",
+      "fixed_config": "search_path=\"\"",
+      "anon_exec": false,
+      "authenticated_exec": false,
+      "service_exec": false,
+      "semantic_review": "Requires current caller UID and private.is_member; otherwise raises permission error.",
+      "verdict": "RETAIN_PENDING_EFFECTIVE_API_VERIFICATION"
+    },
+    {
+      "schema": "public",
+      "name": "dic_browse_community_shots",
+      "args": "p_limit integer, p_offset integer",
+      "provider_md5": "edcc2c6a9fb24b3455a446d964a2ed2d",
+      "definition": "CREATE OR REPLACE FUNCTION public.dic_browse_community_shots(p_limit integer DEFAULT 20, p_offset integer DEFAULT 0)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare entries jsonb; total_count integer; member_id uuid;\nbegin\n member_id:=private.require_member();\n if p_limit is null or p_limit not between 1 and 40 or\n    p_offset is null or p_offset not between 0 and 2000 then\n   raise exception using errcode='22023',\n    message='Community page size or offset is invalid.';\n end if;\n select count(*)::integer into total_count\n from public.community_shots cs\n join public.coffees coffee on coffee.id=cs.coffee_id\n where cs.quality_state='eligible' and coffee.verification_state='verified';\n\n select coalesce(jsonb_agg(jsonb_build_object(\n   'coffee_name',page.coffee_name,'roaster',page.roaster,\n   'release_key',page.release_key,'release_label',page.release_label,\n   'release_origin',page.release_origin,'release_process',page.release_process,\n   'release_producer',page.release_producer,'release_variety',page.release_variety,\n   'release_roast_level',page.release_roast_level,\n   'style',page.style,'observed_on',page.observed_on,\n   'dose_g',page.dose_g,'yield_g',page.yield_g,\n   'ratio',page.ratio,'time_s',page.time_s,\n   'extraction',page.extraction,'body',page.body,\n   'clarity',page.clarity,'sweetness',page.sweetness,\n   'astringency',page.astringency,\n   'shot_count',page.shot_count,\n   'contributor_count',page.contributor_count\n ) order by page.observed_on desc,page.sort_id desc),'[]'::jsonb)\n into entries from (\n  select cs.id as sort_id,cs.observed_on,cs.style,cs.dose_g,\n    cs.yield_g,cs.ratio,cs.time_s,cs.extraction,cs.body,\n    cs.clarity,cs.sweetness,cs.astringency,\n    coffee.name as coffee_name,coffee.roaster,\n    encode(sha256(convert_to(coffee.id::text,'UTF8')),'hex') as release_key,\n    nullif(btrim(coffee.release_label),'') as release_label,\n    nullif(btrim(coffee.origin),'') as release_origin,\n    nullif(btrim(coffee.process),'') as release_process,\n    nullif(btrim(coffee.producer),'') as release_producer,\n    nullif(btrim(coffee.variety),'') as release_variety,\n    nullif(btrim(coffee.roast_level),'') as release_roast_level,\n    (select count(*)::integer from public.community_shots sibling\n      join public.coffees canon on canon.id=sibling.coffee_id\n      where sibling.coffee_id=cs.coffee_id and sibling.style=cs.style\n        and sibling.quality_state='eligible'\n        and canon.verification_state='verified') as shot_count,\n    (select count(distinct link.contributor_id)::integer\n      from public.community_shots sibling\n      join private.contribution_links link on link.community_shot_id=sibling.id\n      where sibling.coffee_id=cs.coffee_id and sibling.style=cs.style\n        and sibling.quality_state='eligible') as contributor_count\n  from public.community_shots cs\n  join public.coffees coffee on coffee.id=cs.coffee_id\n  where cs.quality_state='eligible' and coffee.verification_state='verified'\n  order by cs.observed_on desc,cs.id desc\n  limit p_limit offset p_offset\n ) page;\n return jsonb_build_object('shots',entries,'total',total_count,\n    'offset',p_offset,'page_size',p_limit);\nend $function$\n",
+      "fixed_config": "search_path=\"\"",
+      "anon_exec": false,
+      "authenticated_exec": true,
+      "service_exec": true,
+      "semantic_review": "Requires admitted member; verified, eligible community; page bounds and aggregate-only contributor counts.",
+      "verdict": "RETAIN_PENDING_EFFECTIVE_API_VERIFICATION"
+    },
+    {
+      "schema": "public",
+      "name": "dic_claim_universal_preview",
+      "args": "",
+      "provider_md5": "8f4bc6ecd8687594ff7200cda26104b5",
+      "definition": "CREATE OR REPLACE FUNCTION public.dic_claim_universal_preview()\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare me uuid:=auth.uid();\nbegin\n if me is null\n  or auth.role() is distinct from 'authenticated'\n  or not private.is_member() then\n  return jsonb_build_object('allowed',false,'reason','admitted_member_required');\n end if;\n if not exists(select 1 from auth.users u where u.id=me\n  and u.email_confirmed_at is not null) then\n  return jsonb_build_object('allowed',false,'reason','verify_email');\n end if;\n return private.dic_shared_preview_claim(me);\nend $function$\n",
+      "fixed_config": "search_path=\"\"",
+      "anon_exec": false,
+      "authenticated_exec": true,
+      "service_exec": true,
+      "semantic_review": "Requires authenticated admitted verified-email member; private budget helper. Production legacy rate limits until #2386.",
+      "verdict": "RETAIN_PENDING_EFFECTIVE_API_VERIFICATION"
+    },
+    {
+      "schema": "public",
+      "name": "dic_community_evidence_counts",
+      "args": "p_coffee_id uuid, p_style text",
+      "provider_md5": "1bddea7e3160c0282bea1d6e74d1fbaf",
+      "definition": "CREATE OR REPLACE FUNCTION public.dic_community_evidence_counts(p_coffee_id uuid, p_style text)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare n bigint; people bigint;\nbegin\n perform private.require_member();\n select count(*),count(distinct l.contributor_id) into n,people\n from public.community_shots c\n join private.contribution_links l on l.community_shot_id=c.id\n join public.coffees verified on verified.id=c.coffee_id\n where c.coffee_id=p_coffee_id and c.style=p_style and c.quality_state='eligible'\n  and verified.verification_state='verified';\n return jsonb_build_object('shot_count',n,'contributor_count',people);\nend $function$\n",
+      "fixed_config": "search_path=\"\"",
+      "anon_exec": false,
+      "authenticated_exec": true,
+      "service_exec": true,
+      "semantic_review": "Requires member; eligible verified contributions, distinct contributor count.",
+      "verdict": "RETAIN_PENDING_EFFECTIVE_API_VERIFICATION"
+    },
+    {
+      "schema": "public",
+      "name": "dic_community_recommendation_evidence",
+      "args": "p_library_entry_id uuid, p_style text",
+      "provider_md5": "085f92a3814dce624e5b9a3759e893ef",
+      "definition": "CREATE OR REPLACE FUNCTION public.dic_community_recommendation_evidence(p_library_entry_id uuid, p_style text)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare me uuid; target public.coffees; result jsonb;\nbegin\n me:=private.require_member();\n if p_style is null or p_style not in ('Traditional','Turbo','Ristretto','Lungo','Custom','Fast-Flow')\n    then raise exception using errcode='22023',message='Unknown espresso style';end if;\n select c.* into target from public.library_entries le\n join public.coffees c on c.id=le.coffee_id\n where le.id=p_library_entry_id and le.owner_id=me and le.hidden_at is null\n   and c.verification_state='verified' and c.merged_into_id is null;\n if not found then\n  return jsonb_build_object('style',p_style,'candidates','[]'::jsonb);\n end if;\n with matching as (\n  select cs.coffee_id,cl.contributor_id,cs.ratio,cs.time_s,\n   -- Only a server-maintained, eligible repeated-success *personal* family\n   -- qualifies. Do not infer a family from shot values or trust client labels.\n   case when pf.evidence_state='personally_confirmed'\n       and s.is_dialed_in and s.personal_family_id=pf.id\n       and s.style=cs.style and s.library_entry_id=pf.library_entry_id\n       then pf.id else null end as confirmed_personal_family_id,\n   floor(cs.ratio/0.25)::integer as observed_bucket,\n   case when cs.coffee_id=target.id then 3\n        when lower(btrim(c.roaster))=lower(btrim(target.roaster))\n          and lower(btrim(c.name))=lower(btrim(target.name))\n          and nullif(btrim(c.release_label),'') is not null\n          and nullif(btrim(target.release_label),'') is not null\n          and c.release_label<>target.release_label then 4\n        when nullif(btrim(c.roast_level),'')=nullif(btrim(target.roast_level),'')\n          and (\n            (nullif(btrim(c.origin),'') is not null and lower(btrim(c.origin))=lower(btrim(target.origin)))\n            or\n            (nullif(btrim(c.process),'') is not null and lower(btrim(c.process))=lower(btrim(target.process)))\n          ) then 6\n        else 99 end as tier\n  from public.community_shots cs\n  join public.coffees c on c.id=cs.coffee_id\n  join private.contribution_links cl on cl.community_shot_id=cs.id\n  join private.contributors contributor on contributor.id=cl.contributor_id\n  left join public.shots s on s.id=cl.shot_id and s.owner_id=contributor.owner_id\n      and s.style=cs.style and s.personal_family_id is not null\n  left join public.personal_recipe_families pf on pf.id=s.personal_family_id\n      and pf.owner_id=s.owner_id and pf.library_entry_id=s.library_entry_id\n      and pf.style=s.style\n  where cs.style=p_style and cs.quality_state='eligible' and c.verification_state='verified'\n    and c.merged_into_id is null and cs.ratio between 0.5 and 8 and cs.time_s between 1 and 180\n    -- A user's own Community projection must never reinforce their personal\n    -- evidence as if it came from another independent contributor.\n    and contributor.owner_id is distinct from me\n ), member_groups as (\n  select tier,coffee_id,contributor_id,ratio,time_s,\n    confirmed_personal_family_id is not null as confirmed,\n    case when confirmed_personal_family_id is not null\n      then 'family:'||confirmed_personal_family_id::text\n      else 'observation:'||observed_bucket::text end as member_group\n  from matching where tier in (3,4,6)\n ), member_centers as (\n  -- Preserve a real person's repeatedly successful family even if its shots\n  -- straddle two arbitrary 0.25 bucket edges.\n  select tier,coffee_id,contributor_id,member_group,\n    bool_or(confirmed) as personally_confirmed,\n    count(*)::integer as shot_count,\n    percentile_cont(0.5) within group(order by ratio)::numeric as ratio_center,\n    percentile_cont(0.5) within group(order by time_s)::numeric as time_center\n  from member_groups\n  group by tier,coffee_id,contributor_id,member_group\n ), member_buckets as (\n  -- One observation per independent person per estimated Community ratio\n  -- region; multiple shots or personal families from one member cannot\n  -- multiply that person's influence.\n  select tier,coffee_id,contributor_id,\n    floor(ratio_center/0.25)::integer as ratio_group,\n    sum(shot_count)::integer as shot_count,\n    count(*) filter(where personally_confirmed)::integer as confirmed_family_count,\n    percentile_cont(0.5) within group(order by ratio_center)::numeric as ratio_center,\n    percentile_cont(0.5) within group(order by time_center)::numeric as time_center\n  from member_centers\n  group by tier,coffee_id,contributor_id,floor(ratio_center/0.25)::integer\n ), ranked as (\n  select tier,coffee_id,ratio_group,\n    count(*)::integer as contributor_count,\n    sum(shot_count)::integer as shot_count,\n    sum(confirmed_family_count)::integer as confirmed_personal_family_count,\n    count(*) filter(where confirmed_family_count>0)::integer as confirmed_family_contributors,\n    percentile_cont(0.5) within group(order by ratio_center)::numeric as ratio_center,\n    percentile_cont(0.5) within group(order by time_center)::numeric as time_center\n  from member_buckets\n  group by tier,coffee_id,ratio_group\n )\n select coalesce(jsonb_agg(jsonb_build_object(\n   'tier',case tier when 3 then 'exact' when 4 then 'related_release' else 'similar_coffee' end,\n   'style',p_style,'ratio',round(ratio_center,3),'time_s',round(time_center,2),\n   'shot_count',shot_count,'contributor_count',contributor_count,\n   'confirmed_personal_family_count',confirmed_personal_family_count,\n   'confirmed_family_contributors',confirmed_family_contributors,\n   'distinct_family_basis',case when confirmed_personal_family_count>0\n      then 'confirmed_personal_families_in_observed_ratio_group'\n      else 'ratio_bucket_observed' end,\n   'community_group_identity_verified',false,\n   'source','eligible_verified_community','calibrated_grind',false\n ) order by tier,contributor_count desc,shot_count desc,ratio_center,coffee_id)\n , '[]'::jsonb) into result\n from (select * from ranked order by tier,contributor_count desc,shot_count desc,ratio_center,coffee_id\n limit 30) x;\n return jsonb_build_object('style',p_style,'candidates',result);\nend $function$\n",
+      "fixed_config": "search_path=\"\"",
+      "anon_exec": false,
+      "authenticated_exec": true,
+      "service_exec": true,
+      "semantic_review": "Requires member and owner-bound nonhidden library entry, excludes caller as external contributor; 30-group bound.",
+      "verdict": "RETAIN_PENDING_EFFECTIVE_API_VERIFICATION"
+    },
+    {
+      "schema": "public",
+      "name": "dic_confirm_community_outlier",
+      "args": "p_shot_id uuid, p_expected_revision bigint",
+      "provider_md5": "0657114255a0375b7f3fc502f780aa54",
+      "definition": "CREATE OR REPLACE FUNCTION public.dic_confirm_community_outlier(p_shot_id uuid, p_expected_revision bigint)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare u uuid; target uuid; s public.shots; c public.community_shots;\n        reason_code text; disposition text;\nbegin\n u:=private.require_member();\n select * into s from public.shots where id=p_shot_id and owner_id=u;\n if s.id is null or s.revision<>p_expected_revision then\n  return jsonb_build_object('ok',false,'reason','not_found_or_conflict');\n end if;\n select cs.* into c from public.community_shots cs\n  join private.contribution_links l on l.community_shot_id=cs.id\n  where l.shot_id=s.id for update of cs;\n if c.id is null or c.quality_state<>'held' then\n  return jsonb_build_object('ok',false,'reason','no_outlier_confirmation_pending');\n end if;\n select reason into reason_code from private.community_quality_checks\n  where community_shot_id=c.id;\n if reason_code is distinct from 'extreme_outlier' then\n  return jsonb_build_object('ok',false,'reason','no_outlier_confirmation_pending');\n end if;\n update private.community_quality_checks\n   set confirmed_fingerprint=private.dic_community_fingerprint(c),\n       reviewed_at=clock_timestamp()\n   where community_shot_id=c.id;\n disposition:=private.dic_review_community_shot(c.id);\n return jsonb_build_object('ok',disposition='eligible','state',disposition);\nend $function$\n",
+      "fixed_config": "search_path=\"\"",
+      "anon_exec": false,
+      "authenticated_exec": true,
+      "service_exec": true,
+      "semantic_review": "Requires member, owned shot plus revision, held extreme outlier; locks target and runs controlled review.",
+      "verdict": "RETAIN_PENDING_EFFECTIVE_API_VERIFICATION"
+    },
+    {
+      "schema": "public",
+      "name": "dic_my_community_outliers",
+      "args": "",
+      "provider_md5": "312b59594de640adacb12ab0aa0d18e4",
+      "definition": "CREATE OR REPLACE FUNCTION public.dic_my_community_outliers()\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare member_id uuid; entries jsonb;\nbegin\n member_id:=private.require_member();\n select coalesce(jsonb_agg(jsonb_build_object(\n    'shot_id',recent.id,'revision',recent.revision,\n    'coffee_name',recent.coffee_name,'roaster',recent.roaster,\n    'style',recent.style,'dose_g',recent.dose_g,\n    'yield_g',recent.yield_g,'time_s',recent.time_s\n ) order by recent.pulled_at desc),'[]'::jsonb) into entries\n from (\n    select s.id,s.revision,s.pulled_at,s.style,s.dose_g,s.yield_g,\n      s.time_s,coffee.name as coffee_name,coffee.roaster\n    from public.shots s\n    join private.contribution_links link on link.shot_id=s.id\n      and link.source_revision=s.revision\n    join public.community_shots cs on cs.id=link.community_shot_id\n      and cs.quality_state='held'\n    join private.community_quality_checks qc on qc.community_shot_id=cs.id\n      and qc.reason='extreme_outlier'\n    join public.coffees coffee on coffee.id=cs.coffee_id\n      and coffee.verification_state='verified'\n    where s.owner_id=member_id and s.hidden_at is null\n      and s.is_dialed_in\n    order by s.pulled_at desc,s.id desc\n    limit 10\n ) recent;\n return entries;\nend $function$\n",
+      "fixed_config": "search_path=\"\"",
+      "anon_exec": false,
+      "authenticated_exec": true,
+      "service_exec": true,
+      "semantic_review": "Requires member; own, nonhidden revision-linked held outliers; limit 10.",
+      "verdict": "RETAIN_PENDING_EFFECTIVE_API_VERIFICATION"
+    },
+    {
+      "schema": "public",
+      "name": "dic_preview_cached_verified",
+      "args": "p_source_url text",
+      "provider_md5": "86a08b5ae97f89c13b8c727ebdd0c50f",
+      "definition": "CREATE OR REPLACE FUNCTION public.dic_preview_cached_verified(p_source_url text)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare me uuid:=auth.uid(); ids uuid[]; coffee public.coffees;\nbegin\n if me is null or auth.role() is distinct from 'authenticated' or not private.is_member() then\n  raise exception using errcode='42501',message='Admitted member required.';\n end if;\n if not exists(select 1 from auth.users u where u.id=me and u.email_confirmed_at is not null) then\n  raise exception using errcode='42501',message='Email confirmation required.';\n end if;\n if p_source_url is null or length(p_source_url)>900 or\n   p_source_url not like 'https://%' then return null; end if;\n select array_agg(distinct c.id) into ids\n from public.coffee_sources s join public.coffees c on c.id=s.coffee_id\n where s.source_url=p_source_url and s.source_kind='roaster_page'\n   and c.verification_state='verified' and c.merged_into_id is null;\n if coalesce(array_length(ids,1),0)<>1 then return null; end if;\n select * into strict coffee from public.coffees where id=ids[1];\n return jsonb_build_object(\n  'ok',true,'source','verified_catalog','cached',true,'source_url',p_source_url,\n  'fields',jsonb_strip_nulls(jsonb_build_object(\n   'name',coffee.name,'roaster',coffee.roaster,'release_label',coffee.release_label,\n   'origin',coffee.origin,'process',coffee.process,'roast_level',coffee.roast_level,\n   'variety',coffee.variety,'producer',coffee.producer,\n   'elevation_m',coffee.elevation_m,'tasting_notes',coffee.tasting_notes,\n   'summary',coffee.summary,'espresso_notes',coffee.espresso_notes)));\nend $function$\n",
+      "fixed_config": "search_path=\"\"",
+      "anon_exec": false,
+      "authenticated_exec": true,
+      "service_exec": true,
+      "semantic_review": "Requires member and email verification; HTTPS source length/unique match/verified catalog.",
+      "verdict": "RETAIN_PENDING_EFFECTIVE_API_VERIFICATION"
+    },
+    {
+      "schema": "public",
+      "name": "dic_preview_complete",
+      "args": "p_ticket uuid",
+      "provider_md5": "abc5f79b029d51593f29fe4774488d0b",
+      "definition": "CREATE OR REPLACE FUNCTION public.dic_preview_complete(p_ticket uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare me uuid:=auth.uid(); rec private.dic_url_preview_attempts;\nbegin\n if me is null or auth.role() is distinct from 'authenticated' or not private.is_member() then\n  return jsonb_build_object('charged',false,'reason','admitted_member_required');\n end if;\n if p_ticket is null then return jsonb_build_object('charged',false,'reason','invalid_ticket'); end if;\n select * into rec from private.dic_url_preview_attempts where owner_id=me for update;\n if not found or rec.preview_ticket is distinct from p_ticket or\n   rec.preview_ticket_at is null or rec.preview_ticket_at<now()-interval '25 seconds' then\n  return jsonb_build_object('charged',false,'reason','invalid_ticket');\n end if;\n if rec.attempts>=12 then return jsonb_build_object('charged',false,'reason','daily_preview_limit'); end if;\n update private.dic_url_preview_attempts\n set attempts=rec.attempts+1,preview_ticket=null,preview_ticket_at=null where owner_id=me;\n return jsonb_build_object('charged',true);\nend $function$\n",
+      "fixed_config": "search_path=\"\"",
+      "anon_exec": false,
+      "authenticated_exec": true,
+      "service_exec": true,
+      "semantic_review": "Requires member, self-owned short-lived ticket, 12/day. Email check occurs at ticket issuance, not repeated here; no bypass verified.",
+      "verdict": "RETAIN_PENDING_EFFECTIVE_API_VERIFICATION"
+    },
+    {
+      "schema": "public",
+      "name": "dic_preview_preflight",
+      "args": "p_cached boolean",
+      "provider_md5": "3fe0716484f4d97faa43f49917a921e4",
+      "definition": "CREATE OR REPLACE FUNCTION public.dic_preview_preflight(p_cached boolean DEFAULT false)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare me uuid:=auth.uid(); rec private.dic_url_preview_attempts; clock timestamptz:=now(); ticket uuid;\nbegin\n if me is null or auth.role() is distinct from 'authenticated' or not private.is_member() then\n  return jsonb_build_object('allowed',false,'reason','admitted_member_required');\n end if;\n if not exists(select 1 from auth.users u where u.id=me and u.email_confirmed_at is not null) then\n  return jsonb_build_object('allowed',false,'reason','verify_email');\n end if;\n if p_cached is null then\n  return jsonb_build_object('allowed',false,'reason','invalid_cached_flag');\n end if;\n insert into private.dic_url_preview_attempts(owner_id,window_started_at,last_attempt_at,attempts)\n values(me,clock,clock-interval '1 minute',0) on conflict(owner_id) do nothing;\n select * into strict rec from private.dic_url_preview_attempts where owner_id=me for update;\n if rec.window_started_at<clock-interval '24 hours' then\n  update private.dic_url_preview_attempts\n    set window_started_at=clock,attempts=0,preview_ticket=null,preview_ticket_at=null\n    where owner_id=me;\n  rec.attempts:=0;\n end if;\n -- A cached public result consumes cooldown but never a daily retrieval claim.\n if not p_cached and rec.attempts>=12 then\n  return jsonb_build_object('allowed',false,'reason','daily_preview_limit');\n end if;\n if rec.last_attempt_at>clock-interval '30 seconds' then\n  return jsonb_build_object('allowed',false,'reason','preview_cooldown');\n end if;\n if p_cached then\n  update private.dic_url_preview_attempts\n    set last_attempt_at=clock,preview_ticket=null,preview_ticket_at=null where owner_id=me;\n  return jsonb_build_object('allowed',true,'cached',true);\n end if;\n ticket:=gen_random_uuid();\n update private.dic_url_preview_attempts\n  set last_attempt_at=clock,preview_ticket=ticket,preview_ticket_at=clock where owner_id=me;\n return jsonb_build_object('allowed',true,'ticket',ticket);\nend $function$\n",
+      "fixed_config": "search_path=\"\"",
+      "anon_exec": false,
+      "authenticated_exec": true,
+      "service_exec": true,
+      "semantic_review": "Requires member, verified email, 12/day and 30s cooldown; production legacy until #2386 publication.",
+      "verdict": "RETAIN_PENDING_EFFECTIVE_API_VERIFICATION"
+    },
+    {
+      "schema": "public",
+      "name": "dic_search_community_shots",
+      "args": "p_query text, p_style text, p_limit integer, p_offset integer",
+      "provider_md5": "1124d2bbfec7f47d38d06ceb2e049fe4",
+      "definition": "CREATE OR REPLACE FUNCTION public.dic_search_community_shots(p_query text DEFAULT ''::text, p_style text DEFAULT 'all'::text, p_limit integer DEFAULT 20, p_offset integer DEFAULT 0)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare entries jsonb; total_count integer; member_id uuid; q text;\nbegin\n member_id:=private.require_member();\n if p_limit is null or p_limit not between 1 and 40 or\n    p_offset is null or p_offset not between 0 and 2000 then\n   raise exception using errcode='22023',\n    message='Community page size or offset is invalid.';\n end if;\n if p_query is null or length(p_query)>80 or p_style is null or length(p_style)>40 then\n  raise exception using errcode='22023',message='Community search parameters are invalid.';\n end if;\n q:=lower(btrim(p_query));\n select count(*)::integer into total_count\n from public.community_shots cs\n join public.coffees coffee on coffee.id=cs.coffee_id\n where cs.quality_state='eligible' and coffee.verification_state='verified'\n  and (p_style='all' or cs.style=p_style)\n  and (q='' or strpos(lower(concat_ws(' ',coffee.name,coffee.roaster,coffee.release_label,coffee.origin,coffee.process,coffee.producer,coffee.variety,coffee.roast_level)),q)>0);\n\n select coalesce(jsonb_agg(jsonb_build_object(\n   'coffee_name',page.coffee_name,'roaster',page.roaster,\n   'release_key',page.release_key,'release_label',page.release_label,\n   'release_origin',page.release_origin,'release_process',page.release_process,\n   'release_producer',page.release_producer,'release_variety',page.release_variety,\n   'release_roast_level',page.release_roast_level,\n   'style',page.style,'observed_on',page.observed_on,\n   'dose_g',page.dose_g,'yield_g',page.yield_g,\n   'ratio',page.ratio,'time_s',page.time_s,\n   'extraction',page.extraction,'body',page.body,\n   'clarity',page.clarity,'sweetness',page.sweetness,\n   'astringency',page.astringency,\n   'shot_count',page.shot_count,\n   'contributor_count',page.contributor_count\n ) order by page.observed_on desc,page.sort_id desc),'[]'::jsonb)\n into entries from (\n  select cs.id as sort_id,cs.observed_on,cs.style,cs.dose_g,\n    cs.yield_g,cs.ratio,cs.time_s,cs.extraction,cs.body,\n    cs.clarity,cs.sweetness,cs.astringency,\n    coffee.name as coffee_name,coffee.roaster,\n    encode(sha256(convert_to(coffee.id::text,'UTF8')),'hex') as release_key,\n    nullif(btrim(coffee.release_label),'') as release_label,\n    nullif(btrim(coffee.origin),'') as release_origin,\n    nullif(btrim(coffee.process),'') as release_process,\n    nullif(btrim(coffee.producer),'') as release_producer,\n    nullif(btrim(coffee.variety),'') as release_variety,\n    nullif(btrim(coffee.roast_level),'') as release_roast_level,\n    (select count(*)::integer from public.community_shots sibling\n      join public.coffees canon on canon.id=sibling.coffee_id\n      where sibling.coffee_id=cs.coffee_id and sibling.style=cs.style\n        and sibling.quality_state='eligible'\n        and canon.verification_state='verified') as shot_count,\n    (select count(distinct link.contributor_id)::integer\n      from public.community_shots sibling\n      join private.contribution_links link on link.community_shot_id=sibling.id\n      where sibling.coffee_id=cs.coffee_id and sibling.style=cs.style\n        and sibling.quality_state='eligible') as contributor_count\n  from public.community_shots cs\n  join public.coffees coffee on coffee.id=cs.coffee_id\n  where cs.quality_state='eligible' and coffee.verification_state='verified'\n  and (p_style='all' or cs.style=p_style)\n  and (q='' or strpos(lower(concat_ws(' ',coffee.name,coffee.roaster,coffee.release_label,coffee.origin,coffee.process,coffee.producer,coffee.variety,coffee.roast_level)),q)>0)\n  order by cs.observed_on desc,cs.id desc\n  limit p_limit offset p_offset\n ) page;\n return jsonb_build_object('shots',entries,'total',total_count,\n    'offset',p_offset,'page_size',p_limit);\nend $function$\n",
+      "fixed_config": "search_path=\"\"",
+      "anon_exec": false,
+      "authenticated_exec": true,
+      "service_exec": true,
+      "semantic_review": "Requires member; bounded query/page and verified eligible content; unindexed substring cost only theoretical.",
+      "verdict": "RETAIN_PENDING_EFFECTIVE_API_VERIFICATION"
+    }
+  ],
+  "schema_privileges": [
+    {
+      "schema": "auth",
+      "anon_usage": true,
+      "authenticated_usage": true,
+      "service_usage": true,
+      "anon_create": false,
+      "authenticated_create": false
+    },
+    {
+      "schema": "extensions",
+      "anon_usage": true,
+      "authenticated_usage": true,
+      "service_usage": true,
+      "anon_create": false,
+      "authenticated_create": false
+    },
+    {
+      "schema": "graphql_public",
+      "anon_usage": true,
+      "authenticated_usage": true,
+      "service_usage": true,
+      "anon_create": false,
+      "authenticated_create": false
+    },
+    {
+      "schema": "private",
+      "anon_usage": false,
+      "authenticated_usage": true,
+      "service_usage": true,
+      "anon_create": false,
+      "authenticated_create": false
+    },
+    {
+      "schema": "public",
+      "anon_usage": true,
+      "authenticated_usage": true,
+      "service_usage": true,
+      "anon_create": false,
+      "authenticated_create": false
+    },
+    {
+      "schema": "realtime",
+      "anon_usage": true,
+      "authenticated_usage": true,
+      "service_usage": true,
+      "anon_create": false,
+      "authenticated_create": false
+    },
+    {
+      "schema": "storage",
+      "anon_usage": true,
+      "authenticated_usage": true,
+      "service_usage": true,
+      "anon_create": false,
+      "authenticated_create": false
+    }
+  ],
+  "session_settings": [
+    {
+      "name": "log_min_duration_statement",
+      "setting": "-1",
+      "source": "default"
+    },
+    {
+      "name": "row_security",
+      "setting": "on",
+      "source": "configuration file"
+    },
+    {
+      "name": "statement_timeout",
+      "setting": "120000",
+      "source": "configuration file"
+    }
+  ],
+  "role_setting_key_counts_only": [
+    {
+      "role": "anon",
+      "custom_setting_count": 1,
+      "pgrst_setting_count": 0,
+      "has_db_schemas_key": false
+    },
+    {
+      "role": "authenticated",
+      "custom_setting_count": 1,
+      "pgrst_setting_count": 0,
+      "has_db_schemas_key": false
+    },
+    {
+      "role": "authenticator",
+      "custom_setting_count": 3,
+      "pgrst_setting_count": 0,
+      "has_db_schemas_key": false
+    },
+    {
+      "role": "postgres",
+      "custom_setting_count": 1,
+      "pgrst_setting_count": 0,
+      "has_db_schemas_key": false
+    }
+  ],
+  "findings": {
+    "public_signed_in_definers": 10,
+    "all_10_fixed_empty_search_path": 10,
+    "public_anon_execute_count": 0,
+    "private_authenticated_execute_helpers": [
+      "is_member"
+    ],
+    "private_schema_authenticated_usage": true,
+    "hosted_postgrest_exposed_schemas": "UNVERIFIED; GUC not visible in provider SQL session; role config keys not definitive",
+    "http_route_validation": "NOT_RUN; #96 owns signed-in privacy acceptance",
+    "first_time_semantic_source_credit": 0,
+    "confirmed_new_defects": 0,
+    "justified_deletions": 0,
+    "provider_writes": 0,
+    "app_code_changes": 0,
+    "baseline_complete": false
+  },
+  "next": "Check changed/new provider objects, then secure read-only hosted Auth/PostgREST exposed-schema settings if connector grants; coordinate effective HTTP role testing with #96. Historical directory remains LEGACY ACTIVE until #2389 publish."
+}

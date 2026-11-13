@@ -4057,6 +4057,14 @@
       "review_credit_delta": 0,
       "receipt": "docs/audits/issue509-pg-c-wrapper-drift-2026-11-13-run215.json",
       "summary": "89/89 original run198 C wrapper full declarations unchanged; Run214 cursor duplicate corrected; native binary and API exposure unverified"
+    },
+    {
+      "date": "2026-11-13",
+      "run": 216,
+      "category": "FULL_SOURCE_SIGNED_IN_DEFINER_AND_HOSTED_API_BOUNDARY_CROSSCHECK",
+      "review_credit_delta": 0,
+      "receipt": "docs/audits/issue509-definer-rpc-access-boundary-2026-11-13-run216.json",
+      "summary": "Ten public definer RPCs and three private helpers complete source re-reviewed; 7 ACLs, SQL-session PostgREST GUC visibility and role-config safe key counts; no new confirmed defect."
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -19235,5 +19243,21 @@
     "justified_removals": 0,
     "baseline_complete": false,
     "next": "Fresh drift or hosted provider configuration; not pg_catalog C #1/89 (already done Run198)"
+  },
+  "provider_definer_rpc_access_run216": {
+    "receipt": "docs/audits/issue509-definer-rpc-access-boundary-2026-11-13-run216.json",
+    "preflight_initial": "5686d794a916fbe8d5e336583ccbc4f6158202ae",
+    "prewrite_parent": "5686d794a916fbe8d5e336583ccbc4f6158202ae",
+    "blob": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "reviewed_full_source_functions": 13,
+    "signed_in_definers": 10,
+    "schema_privileges": 7,
+    "provider_migrations": 67,
+    "edge_functions": 5,
+    "first_time_review_credit": 0,
+    "confirmed_defects": 0,
+    "provider_writes": 0,
+    "baseline_complete": false,
+    "next": "Check changed/new provider objects, then secure read-only hosted Auth/PostgREST exposed-schema settings if connector grants; coordinate effective HTTP role testing with #96. Historical directory remains LEGACY ACTIVE until #2389 publish."
   }
 }
