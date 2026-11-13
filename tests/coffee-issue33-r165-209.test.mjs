@@ -47,3 +47,24 @@ test('#209 unpublished selected producer, variety and elevation cannot be suppli
  const r=extractPublicCoffeeFacts(page(),{source_url:chosen209.url});
  assert.ok(!r.fields?.producer&&!r.fields?.variety&&!r.fields?.elevation_m,JSON.stringify(r));
 });
+
+test('#209 straight-apostrophe It\'s direct selected decaf pronoun maps EA separately',()=>{
+ const r=extractPublicCoffeeFacts(page(own.replace('It’s decaffeinated','It\'s decaffeinated')),{source_url:chosen209.url});
+ assert.equal(r.fields?.decaffeination_method,'Sugar Process',JSON.stringify(r));
+});
+test('#209 uncontracted It is form remains supported',()=>{
+ const r=extractPublicCoffeeFacts(page(own.replace('It’s decaffeinated','It is decaffeinated')),{source_url:chosen209.url});
+ assert.equal(r.fields?.decaffeination_method,'Sugar Process',JSON.stringify(r));
+});
+test('#209 contracted It’s without selected own coffee antecedent must not inherit EA',()=>{
+ const r=extractPublicCoffeeFacts(page(own.replace('Our classic decaffeinated coffee hails from a few regions in Colombia.','Generic site tips are included.')),{source_url:chosen209.url});
+ assert.ok(!r.fields?.decaffeination_method,JSON.stringify(r));
+});
+test('#209 negated contracted decaf description cannot establish positive method',()=>{
+ const r=extractPublicCoffeeFacts(page(own.replace('It’s decaffeinated using','It’s not decaffeinated using')),{source_url:chosen209.url});
+ assert.ok(!r.fields?.decaffeination_method,JSON.stringify(r));
+});
+test('#209 historical prior-lot claim must never authorize current method',()=>{
+ const r=extractPublicCoffeeFacts(page(own.replace('It’s decaffeinated using','Last year it was decaffeinated using')),{source_url:chosen209.url});
+ assert.ok(!r.fields?.decaffeination_method,JSON.stringify(r));
+});

@@ -43,7 +43,7 @@ if(process.env.DIC_ISSUE33_R165_VERIFY==='1'){
  assert(['cinnamon','raisin','cherry'].every(x=>norm(f.tasting_notes).includes(x)),'own_selected_notes');
  // Owner-locked three-method taxonomy intentionally maps EA to Sugar Process;
  // it is DECAFFEINATION only, never proof of green-bean washed/natural/honey processing.
- assert(f.decaffeination_method==='Sugar Process','selected_EA_deaf_method');
+ assert(f.decaffeination_method==='Sugar Process','selected_EA_decaf_method');
  assert(!f.process,'unpublished_green_process_stays_blank');
  assert(!f.producer&&!f.variety&&!f.elevation_m&&!f.espresso_recipe,'unpublished_fields_blank');
  assert(r.add_coffee_ui_rendered===true&&r.source_review_rendered===true,'add_coffee_and_review');
