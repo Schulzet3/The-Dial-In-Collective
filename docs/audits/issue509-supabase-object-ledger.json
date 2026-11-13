@@ -4049,6 +4049,14 @@
       "receipt_blob_sha": "05264b454e829a98bbb1563cfe2a4c6fdb2390d0",
       "provider_writes": 0,
       "baseline_complete": false
+    },
+    {
+      "date": "2026-11-13",
+      "run": 215,
+      "category": "C wrapper source-bound drift correction",
+      "review_credit_delta": 0,
+      "receipt": "docs/audits/issue509-pg-c-wrapper-drift-2026-11-13-run215.json",
+      "summary": "89/89 original run198 C wrapper full declarations unchanged; Run214 cursor duplicate corrected; native binary and API exposure unverified"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -19205,5 +19213,27 @@
     "baseline_complete": false,
     "unverified": "Effective API/Auth claims provenance, C/native delegated implementations, other provider-owned catalog object families",
     "next_cursor": "New provider drift first; otherwise pg_catalog LANGUAGE c functions ordinal #1/89"
+  },
+  "provider_pg_catalog_c_wrapper_run215_drift": {
+    "run": 215,
+    "source_preflight_sha": "e79153b4738c6a61cc09f0335ee77b921dd25fb3",
+    "source_preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "read_head": "b31dbecb598a3efc7cad83fa8f125a314085e6b7",
+    "receipt_path": "docs/audits/issue509-pg-c-wrapper-drift-2026-11-13-run215.json",
+    "prior_run198_blob": "e78bbb4763845ae046f3b4e7f3abade38d0a1f80",
+    "full_declarations_read": 89,
+    "original_first_time_review_credit": 0,
+    "baseline_definitions_matching": 89,
+    "changed": 0,
+    "added": 0,
+    "missing": 0,
+    "complete_characters": 20541,
+    "provider_applied_migrations": 67,
+    "active_edges": 5,
+    "production_writes": 0,
+    "new_confirmed_defects": 0,
+    "justified_removals": 0,
+    "baseline_complete": false,
+    "next": "Fresh drift or hosted provider configuration; not pg_catalog C #1/89 (already done Run198)"
   }
 }
