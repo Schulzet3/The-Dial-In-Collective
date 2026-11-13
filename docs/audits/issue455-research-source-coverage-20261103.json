@@ -274,12 +274,15 @@
       "authors": "Foster, Lee, Moroney et al.",
       "published": "2025-01",
       "doi": "10.1063/5.0245167",
-      "url": "https://experts.mcmaster.ca/scholarly-works/3541040",
-      "access": "UNIVERSITY_AUTHOR_PUBLICATION_ABSTRACT_AND_AIP_OFFICIAL_SUMMARY_DIRECTLY_READ; FULL_EXPERIMENTAL_ARTICLE_NOT_READ",
-      "evidence_grade": "PEER_REVIEWED_TIME_RESOLVED_INFILTRATION_OBSERVATION_AND_ONE_DIMENSIONAL_MODEL_NOT_SENSORY_TRIAL",
-      "review_status": "BOUNDED_PUBLISHER_FIRST_PARTY_AND_UNIVERSITY_AUTHOR_INDEX_CHECK",
+      "url": "https://pure.port.ac.uk/ws/portalfiles/portal/107511955/Dynamics_of_liquid_infiltration_into_an_espresso_bed_using_time-resolved_micro-computed_tomography.pdf",
+      "access": "ORIGINAL_AUTHOR_INSTITUTIONAL_FINAL_PUBLISHED_PDF_FULL_METHODS_MODEL_RESULTS_AND_CONCLUSIONS_DIRECT_WEB_TEXT_AND_SELECTED_FIGURE_SCREENSHOTS; ORIGINAL_BINARY_NOT_DOWNLOADED",
+      "evidence_grade": "PRIMARY_PEER_REVIEWED_XRAY_TIME_RESOLVED_BED_WETTING_IN_ONE_MACHINE_TWO_GRIND_PREPARATIONS_PLUS_FITTED_1D_FINE_GRIND_MODEL; NOT_HUMAN_TASTE_INTERVENTION",
+      "review_status": "R455-241_DIRECT_ORIGINAL_PUBLISHED_PDF_SECTIONS_II_TO_V_TABLE_I_II_FIGURE_2_3_11_VISUAL_REVIEW; MISSING_RAW_REPLICATION_AND_BINARY_HASH",
       "source_bytes_sha256": null,
-      "source_byte_caveat": "McMaster author index and AIP first-party 2025 Scilights summary read 2026-11-04; full paper and raw bytes not archived."
+      "source_byte_caveat": "Original author's university-hosted published PDF text and selected page images read via web viewer, exact PDF binary SHA-256 unavailable, all pages not individually screenshot-audited; raw tomographic projections/experimental replications unavailable and no human sensory or member outcomes studied. Figures are qualitative; do not generalize fine-grind fitted timing to different equipment/roast/coffee/shot styles.",
+      "claims_verified_externally": "Foster et al. 2025 Physics of Fluids 37(1) 013383 original University of Portsmouth author publication PDF pp. 3/12 and sections II-V: modified DeLonghi Dedica EC685, Demoka Minimoka grinder, two different grinds of one Arabica, 10g dose, 12kg hand tamp, 30,000 ROXS projections in 30s reconstructed at 1-second cadence; coarse grind infiltration spatially heterogeneous and excluded from fitted 1D flat-front case; fine grind experimentally wets through roughly seven seconds, fitted model saturation 6.669s and 0.796s onset shift, fitted 0.322 porosity, 2.97e-15 m2 permeability; Table I 15-bar pressure manufacturer's rating not measured puck pressure. This is an instrument/model-specific result, NOT a preinfusion recipe optimum, human five-taste improvement, or causal one-variable next-shot evidence.",
+      "reviewed_date_utc": "2026-11-13",
+      "implementation_status": "RESEARCH_ONLY_NO_APP_NUMERIC_RULE_CAPTURE_TELEMETRY_OR_POLICY_CHANGE"
     },
     {
       "id": "LIT-2025-26-ESPRESSO-MULTISCALE",
@@ -7368,6 +7371,51 @@
       "current_app": "At immutable development 234a703256d246aa542288fe1df420e032977700, site/lib/constants.js blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2 distinguishes five 1-5 member taste fields; site/lib/engine.js blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6 guards full ratings/all-green and one controllable recommendation; site/lib/ui.js blob 2ecde13b9d45ec329700654e1f054629d38bc95f and site/cloud/main.js blob bb85007730cd58b9aaa13919d6420f548cbf30ef preserve Log/Rate measured shot, notes and ratings. Optional machine/brew temperature is NOT a measurement of cup temperature at tasting. No measured espresso cup-quality outcome or new bug demonstrated.",
       "owner_approval": false,
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CIT-241-A",
+      "source": "LIT-2025-ESPRESSO-INFILTRATION",
+      "primary_source": "https://pure.port.ac.uk/ws/portalfiles/portal/107511955/Dynamics_of_liquid_infiltration_into_an_espresso_bed_using_time-resolved_micro-computed_tomography.pdf",
+      "section": "II A-B; original PDF page 3 (article 013383-3), Figures 2 and 3",
+      "claim": "The authors directly imaged time-resolved wetting in a modified DeLonghi EC685 with two grind preparations, 10g Arabica, 12kg tamp and a ROXS system producing 30 one-second reconstructions from 30,000 projections. This is one instrument and restricted coffee preparations, not a general espresso population.",
+      "grade": "PRIMARY_PEER_REVIEWED_DIRECT_FINAL_PDF_METHOD_AND_ORIGINAL_FIGURE_INSPECTION",
+      "factual_status": "VERIFIED_PRIMARY_METHODS_SCOPE_ONLY",
+      "result": "RESEARCH_QUALIFICATION_NO_PRODUCT_CHANGE",
+      "current_app": "Live development fde5f21810ca8db426cf8981375bc6d33698fdd4 engine.js blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6, constants.js d3559dc1c9560c4d68fbcad1dc91e3a792a100a2, model.js 469c55c17dd3ee5c16523e59a5adace1056e9038, ui.js 2ecde13b9d45ec329700654e1f054629d38bc95f read; five taste ratings/all-green guards, measured time, one controllable recommendation, original private history, calibrated equipment and distinct styles retain owner Locked authority.",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0,
+      "date": "2026-11-13"
+    },
+    {
+      "id": "R455-EV-CIT-241-B",
+      "source": "LIT-2025-ESPRESSO-INFILTRATION",
+      "primary_source": "https://pure.port.ac.uk/ws/portalfiles/portal/107511955/Dynamics_of_liquid_infiltration_into_an_espresso_bed_using_time-resolved_micro-computed_tomography.pdf",
+      "section": "IV A; Tables I-II and Figure 11 (article 013383-12 to 013383-13)",
+      "claim": "The fine-grind 1D model fit reports saturation 6.669 s, t_shift 0.796s, fitted porosity 0.322 and permeability 2.97e-15 m2. Coarse-grind wetting differs spatially and was not fitted by this model; Table I's nominal maximum 15 bar pressure is manufacturer-specified, NOT a direct measurement at the puck.",
+      "grade": "PRIMARY_MODEL_FIT_PLUS_DIRECT_PDF_TABLE_AND_FIGURE_INSPECTION_NOT_UNIVERSAL_MEASUREMENT",
+      "factual_status": "VERIFIED_RESTRICTED_MODEL_NOT_ACTIONABLE_NUMERIC_POLICY",
+      "result": "RESEARCH_QUALIFICATION_NO_NEW_PREINFUSION_TIME_TARGET",
+      "current_app": "Live development fde5f21810ca8db426cf8981375bc6d33698fdd4 engine.js blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6, constants.js d3559dc1c9560c4d68fbcad1dc91e3a792a100a2, model.js 469c55c17dd3ee5c16523e59a5adace1056e9038, ui.js 2ecde13b9d45ec329700654e1f054629d38bc95f read; five taste ratings/all-green guards, measured time, one controllable recommendation, original private history, calibrated equipment and distinct styles retain owner Locked authority.",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0,
+      "date": "2026-11-13"
+    },
+    {
+      "id": "R455-EV-CIT-241-C",
+      "sources": [
+        "LIT-2025-ESPRESSO-INFILTRATION",
+        "ORG-06"
+      ],
+      "primary_source": "https://pure.port.ac.uk/ws/portalfiles/portal/107511955/Dynamics_of_liquid_infiltration_into_an_espresso_bed_using_time-resolved_micro-computed_tomography.pdf",
+      "section": "V Discussion and Conclusions, article 013383-16; DATA AVAILABILITY",
+      "claim": "Paper itself identifies dissolved-solute transport, CO2, intragranular water and temperature as future model extensions, and makes no measured personal five-taste ratings or single-variable preinfusion outcome claim. Do not infer optimal shot time, automatic flow-pressure correction or predicted improved cup quality from its fitted wetting times.",
+      "grade": "DIRECT_ORIGINAL_CONCLUSION_AND_MEASUREMENT_BOUNDARY_NO_ESPRESSO_SENSORY_EFFECTIVENESS_EVIDENCE",
+      "factual_status": "VERIFIED_ABSENCE_OF_RECOMMENDATION_EFFICACY_IN_STUDY; CLINICAL_HUMAN_TASTE_EFFECT_UNVERIFIED",
+      "result": "KEEP_CURRENT_OWNER_LOCKED_HEURISTICS_AND_EXPLICIT_UNCERTAINTY",
+      "current_app": "Live development fde5f21810ca8db426cf8981375bc6d33698fdd4 engine.js blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6, constants.js d3559dc1c9560c4d68fbcad1dc91e3a792a100a2, model.js 469c55c17dd3ee5c16523e59a5adace1056e9038, ui.js 2ecde13b9d45ec329700654e1f054629d38bc95f read; five taste ratings/all-green guards, measured time, one controllable recommendation, original private history, calibrated equipment and distinct styles retain owner Locked authority.",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0,
+      "date": "2026-11-13"
     }
   ],
   "policy_decisions_pending": [],
@@ -7547,24 +7595,25 @@
     "R455-237: Mo et al. 2023 original Scientific Reports full-text PMC paper now directly read, correcting earlier first-party indexed-only citation limit. Tables 1-3 and limitations verified as sample-specific static microCT/SPH; 0 new source identities, 2 source checks, 1 P3 documentation proposal. New totals 133/377/193. No derived universal espresso pressure/grind or taste rule, no app/provider writes, no #267 literal credit. Verify hosted CI, nonforce merge and source blob readback; S019 still inaccessible.",
     "R455-238: 2015 Sanchez/Chambers published original abstract and separate 2014 first-party poster reviewed; different descriptive brewing methods have co-changing contact time and water temperature. 1 new bounded original publication source, 2 checks, 1 research-only proposal; no runtime bug or proven user improvement, no numeric/Locked change. Exact docs PR head CI/merge/readback pending; full 2015 methods/2014 poster binary and S019 remain unverified; #267 credit zero.",
     "R455-239: Original Andueza 2003 Wiley abstract crosschecked with unauthenticated third-party 9-page text, provisional 7.5g/40mL machine/delivery temperature offset and 20-judge 10-cm descriptive scale extracted with strict provenance qualifier. One existing source identity updated, 2 bounded checks and 1 P3 proposal; no current app bug, new numeric temperature target, five-rating map or measured improvement. Verify PR and merged CI; full publisher PDF, figures, raw data and S019 still inaccessible; #267 zero new literal-line credit.",
-    "R455-240: two 2019 original indexed studies of BREWED coffee consumption temperature; 2 bounded publications + 3 claim checks +1 P3 evidence design proposal; 136/384/196 candidate at authoring. Control tasting-temperature/delay only as future separately approved optional/consented research protocol. Neither original full PDF/raw data nor espresso recommendation quality trial verified; no code/Locked/telemetry/new data/READY change; #267 zero literal credit. Exact source CI, nonforce merge/readback pending. Standalone S019 not recovered."
+    "R455-240: two 2019 original indexed studies of BREWED coffee consumption temperature; 2 bounded publications + 3 claim checks +1 P3 evidence design proposal; 136/384/196 candidate at authoring. Control tasting-temperature/delay only as future separately approved optional/consented research protocol. Neither original full PDF/raw data nor espresso recommendation quality trial verified; no code/Locked/telemetry/new data/READY change; #267 zero literal credit. Exact source CI, nonforce merge/readback pending. Standalone S019 not recovered.",
+    "R455-241 authored at source fde5f21810ca8db426cf8981375bc6d33698fdd4: expanded existing Foster 2025 XCT source by direct institutional published PDF Methods/Results/Discussion, Tables I-II and Figures 2/3/11 visual verification; +0 sources/+3 bounded evidence checks/+1 P3 research-only proposal, candidate counts 136/387/197; no user tastes studied, no new preinfusion numeric target; original PDF bytes SHA256/unpublished raw data unverified, S019 inaccessible, #267 literal credit zero. Verify docs-only PR exact source CI, nonforce merge, exact merged blob parity and checkpoint #455."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-240",
-    "starting_preflight_development_sha": "234a703256d246aa542288fe1df420e032977700",
+    "run_id": "R455-241",
+    "starting_preflight_development_sha": "7ec9f1c4ecc9e964390eb2263745a535dc72baee",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "live_parent_sha_at_authoring": "234a703256d246aa542288fe1df420e032977700",
-    "phase": "DOCS_ONLY_TWO_2019_PRIMARY_PUBMED_ABSTRACTS_SERVING_TEMPERATURE_CONFOUNDER_CANDIDATE_CI_NOT_RUN",
+    "live_parent_sha_at_authoring": "fde5f21810ca8db426cf8981375bc6d33698fdd4",
+    "phase": "DOCS_ONLY_ORIGINAL_FOSTER_2025_XCT_PUBLISHED_AUTHOR_PDF_FULL_SECTIONS_SELECTED_FIGURES_CANDIDATE_CI_NOT_RUN",
     "source_counts": {
       "research_project_source_records": 136,
-      "bounded_evidence_checks": 384,
-      "proposals": 196
+      "bounded_evidence_checks": 387,
+      "proposals": 197
     },
-    "source_access": "TWO_PUBMED_PRIMARY_AUTHOR_ABSTRACTS; FULL_ELSEVIER_PDF_METHODS_RAW_DATA_NOT_VERIFIED",
-    "original_s019": "UNRETRIEVED_CONNECTED_GOOGLE_DRIVE_AND_LIBRARY_SEARCH_20261113",
+    "source_access": "PUBLISHED_AUTHOR_INSTITUTIONAL_PDF_FULL_METHODS_RESULTS_CONCLUSIONS_AND_3_SELECTED_PAGE_IMAGES; BINARY_SHA_RAW_DATA_UNVERIFIED",
+    "original_s019": "UNRETRIEVED_GOOGLE_DRIVE_AND_CHATGPT_SPACE_SEARCH_20261113",
     "github267_literal_review_credit": 0,
     "release_state": "NO_NEW_READY_NO_PUBLICATION",
-    "next": "Verify hosted exact PR-source relevant checks and nonforce merge/readback with [skip netlify] in actual merge title+body, append Issue #455 verified checkpoint only after observed evidence."
+    "next": "Review PR-head exact docs/governance checks; nonforce squash merge with actual merge title/message [skip netlify], Git blob parity and Issue #455 checkpoint."
   },
   "policy_decisions_resolved": [
     {
@@ -12010,6 +12059,34 @@
       "production_deployed": false,
       "github267_literal_review_credit": 0,
       "exact_source": "234a703256d246aa542288fe1df420e032977700"
+    },
+    {
+      "id": "R455-PROP-241-INFILTRATION-TIMING-BOUNDARY",
+      "severity": "P3_RESEARCH_INTERPRETATION_NO_REPRODUCIBLE_RUNTIME_BUG",
+      "source": [
+        "LIT-2025-ESPRESSO-INFILTRATION",
+        "ORG-06"
+      ],
+      "evidence": [
+        "R455-EV-CIT-241-A",
+        "R455-EV-CIT-241-B",
+        "R455-EV-CIT-241-C"
+      ],
+      "finding": "Time-resolved x-ray wetting and a fitted fine-grind saturation time describe initial hydraulic mediation in this research rig, not a universal duration for preinfusion or empirically effective next-shot recommendation. Coarse wetting was spatially heterogeneous and one-dimensional fit inapplicable.",
+      "evidence_grade": "PEER_REVIEWED_ORIGINAL_PDF_METHODS_RESULTS_TABLES_AND_SELECTED_FIGURES_VERIFIED; BINARY_HASH_RAW_XCT_FULL_PAGE_SCREENSHOT_AUDIT_REPLICATION_AND_SENSORY_OUTCOMES_UNVERIFIED",
+      "source_provenance": "Foster et al., Physics of Fluids 37(1) 013383, 28 Jan 2025, DOI 10.1063/5.0245167, CC BY-NC published PDF at author University of Portsmouth repository; original 06 full Markdown archive Git blob 9128527d3208379c723d561eee6ffbe09d174f55",
+      "current_locked": "No universal new numeric coffee targets without explicit owner approval; five separate taste inputs and true all-green/missing ratings, original measured shot/private notes/history, exactly one truly controllable next-step change, independent style/families/feed/grinder/temperature, privacy/Community.",
+      "current_app": "Live development fde5f21810ca8db426cf8981375bc6d33698fdd4 engine.js blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6, constants.js d3559dc1c9560c4d68fbcad1dc91e3a792a100a2, model.js 469c55c17dd3ee5c16523e59a5adace1056e9038, ui.js 2ecde13b9d45ec329700654e1f054629d38bc95f read; five taste ratings/all-green guards, measured time, one controllable recommendation, original private history, calibrated equipment and distinct styles retain owner Locked authority.",
+      "proposed_change": "SAFE documentation-only method/claim qualification; keep live recommendation logic untouched. Only after separate specific owner authority and consented evaluation, compare same coffee, roast rest, setup, grinder/calibration, basket, style, feed, one change and all five paired tastes with timing/confounders, adverse outcomes and missingness. Do NOT introduce 6.669s threshold, UI data capture, new pump model, telemetry or intervention now.",
+      "user_benefit": "Avoid false scientific certainty around preinfusion timing and preserve accurate owner-Locked single-change advice.",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "R455-241_DOCS_ONLY_SOURCE_CLAIM_BOUNDARY_PENDING_PR_CI_AND_MERGE",
+      "test_plan": "Validate preservation of prior 136 source identities/384 checks/196 proposals, added 0/3/1 unique IDs, GitHub PR-head docs governance and source blob parity, no application tests because no runtime change.",
+      "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY_NO_NEW_READY",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0,
+      "exact_source": "fde5f21810ca8db426cf8981375bc6d33698fdd4"
     }
   ],
   "changeScope": {
