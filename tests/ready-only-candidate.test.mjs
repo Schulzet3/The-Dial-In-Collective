@@ -430,3 +430,16 @@ test('#2169 source staging and guarded controller use export preflight before CI
  assert.match(read('scripts/release/controlled-release-runner.mjs'),
   /assertCandidateStaticNamedExports\(queueGate\.deployable_paths/);
 });
+
+
+test('#2169 generator ESM exports pass frozen-source preflight, absent symbols still HOLD',()=>{
+ const files={
+  'site/main.js':"import {rawElements,streamElements,removeComments} from './html-scan.mjs';",
+  'site/html-scan.mjs':"export function* rawElements(html){yield html;}\nexport async function * streamElements(html){yield html;}\nexport function removeComments(html){return html;}"
+ };
+ const args={readSource:path=>files[path],hasPath:path=>Object.hasOwn(files,path)};
+ assert.equal(assertCandidateStaticNamedExports(['site/main.js'],args),true);
+ files['site/main.js']="import {rawElements,missingSymbol} from './html-scan.mjs';";
+ assert.throws(()=>assertCandidateStaticNamedExports(['site/main.js'],args),
+  /Missing static relative module export.*missingSymbol/);
+});

@@ -119,12 +119,12 @@ export function assertCandidateStaticNamedExports(paths,{readSource,hasPath}={})
    if(!target.endsWith('.js')&&!target.endsWith('.mjs'))continue;
    const targetCode=readSource(target);
    if(typeof targetCode!=='string')throw Error('Cannot read candidate module: '+target);
-   // Known ambiguous exports are NOT guessed; full build must verify them.
+   // Known ambiguous exports are NOT guessed; full build must verify them.\n    // Generator declarations (function* and async function*) are direct named exports.
    if(/^\s*export\s*\*/m.test(targetCode)||/\bmodule\.exports\b|\bexports\./.test(targetCode)||
       /^\s*export\s+(?:const|let|var)\s*\{/m.test(targetCode))continue;
    const exports=new Set();
    if(/^\s*export\s+default\b/m.test(targetCode))exports.add('default');
-   for(const m of targetCode.matchAll(/^\s*export\s+(?:async\s+)?(?:function|class|const|let|var)\s+([A-Za-z_$][\w$]*)/gm))
+   for(const m of targetCode.matchAll(/^\s*export\s+(?:async\s+)?(?:function\s*\*?|class|const|let|var)\s+([A-Za-z_$][\w$]*)/gm))
     exports.add(m[1]);
    for(const m of targetCode.matchAll(/^\s*export\s*\{([^}]+)\}/gm))
     for(const entry of m[1].split(',')){
