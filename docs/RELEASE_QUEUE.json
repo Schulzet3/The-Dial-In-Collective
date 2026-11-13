@@ -13376,6 +13376,33 @@
       "blockers": [],
       "notes": "Scoped developer-only UI render fix. No new recommendation numeric target, all five taste inputs or saved measured readings/notes/history changed; no empirical validation, provider/SQL/Auth/Edge/member operations or publication. CI and nonforce integration pending. S019 source remains inaccessible.\nR455-222 source and positive/negative test READY in development only; production_deployed=false. No numeric taste policy or engine changes; S019 standalone unavailable and #267 literal audit incomplete.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-2386-admin-unlimited-member-15s",
+      "issue": 2386,
+      "pr": 2387,
+      "title": "Admin unlimited per-account URL preview attempts/retries; 15-second cooldown for other members",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261113043000_dic_admin_preview_unlimited_member_15s.sql",
+        "site/cloud/coffee-url-autofill.js",
+        "site/cloud/client.js"
+      ],
+      "owner_source": "Owner instruction November 12, 2026; GitHub #2386 (Locked supersession)",
+      "tests": [
+        "First PR-head CI at 8821adf: security 43362497706 SUCCESS; approval 43362497697 FAILED missing queue intake, this commit repairs it. All other required checks were initially in progress, not assumed passed.",
+        "Targeted source/test tests/coffee-preview-role-policy.test.mjs; exact Node/lint, SQL, mobile/offline, security and approval CI pending."
+      ],
+      "ci_runs": [
+        43362497706
+      ],
+      "blockers": [
+        "Full applicable PR-head and merged-source CI/SQL isolation evidence not yet complete.",
+        "Separate owner Publish required for live Supabase migration and optional Netlify production source; published quotas remain historical 12/30 until migrated."
+      ],
+      "notes": "Server-authoritative admitted/email-verified Admin bypass for legacy service trusted, universal cached/fresh and completion RPC. Member 12 charged previews/24h unchanged, 15-second shared cooldown. Preserve Netlify 12/min per-IP global safety, Auth, SSRF/bounds, manual Add Coffee, Pending/Verified, shots and Community. SOURCE ONLY not deployed.",
+      "production_deployed": false
     }
   ],
   "history": [
