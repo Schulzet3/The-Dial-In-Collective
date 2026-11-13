@@ -250,7 +250,7 @@ test('Netlify endpoint uses rate limiting, private server-only import paths and 
 });
 
 
-test('approved 12-claim account budget keeps shared 30-second cooldown and legacy route protection',()=>{
+test('historic 12/day migration remains immutable; latest role policy is unlimited Admin and 15-second member cooldown',()=>{
  const migration=read('supabase/migrations/20261017050220_dic_preview_daily_budget_12.sql');
  assert.match(migration,/COFFEE-URL-DAILY-20261016-02/);
  assert.match(migration,/check \(attempts between 0 and 12\)/i);

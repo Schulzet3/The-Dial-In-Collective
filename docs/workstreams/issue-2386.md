@@ -46,3 +46,10 @@ DIC_PREFLIGHT_VERIFIED development_sha=b279e75c264a19eeefcb03404466a1ca6788a855 
 - SAME-COMMIT preflight:
 DIC_PREFLIGHT_VERIFIED development_sha=b279e75c264a19eeefcb03404466a1ca6788a855 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 - No production provider writes, Netlify release, or member data reads/changes.
+
+## Exact Node full-suite failure and stale historical assertion repaired
+- Exact PR-head `0d43b32cf99d45fc7f2121ae38def561e9443c19` Node/lint job 43363314265 full test step FAILED **1 of 4,453?** (CI log: `not ok 4371`, one test failure, other tests passed; final exact total must be read from logs). The failing `tests/universal-coffee-preview.test.mjs:253` asserted the old SQL fixture literal `Boundary claim did not set exactly 12`, which this branch appropriately replaced with `Member daily counter did not reach 12`. The earlier *historical migration* still correctly contains 30s by design and must never be rewritten.
+- Repair the existing unit test to separate historical October quota migration assertions from **current** November admin-exemption/15s logic and the new member fixture; do NOT weaken either Auth or SQL assertions. New branch CI must pass full tests, lint, build and relevant 5 statuses. No duplicate manual rerun.
+- Same-commit mandatory preflight confirmation:
+DIC_PREFLIGHT_VERIFIED development_sha=659b6f3fcb62ca7198f256ef82b8a2d49452750f preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+- PR-head SQL 43363314247 SUCCESS; cloud/browser 43363314202 SUCCESS; security 43363314187 and approval 43363314180 SUCCESS; original frozen603 43363314153 SKIPPED NOT PASS. They are earlier SHA evidence, not automatically claims for the new HEAD. No live provider/database changes.
