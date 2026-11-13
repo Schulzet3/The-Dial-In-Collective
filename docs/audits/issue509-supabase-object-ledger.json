@@ -4106,6 +4106,19 @@
       "receipt": "docs/audits/issue509-hosted-role-rls-boundary-2026-11-13-run220.json",
       "source_word_credit": 0,
       "next": "provider drift / hosted API access (#96) / original unreviewed catalog definitions"
+    },
+    {
+      "event": "2026-11-13_run221_storage_provider_lifecycle_new_objects_11_complete_source",
+      "source_preflight_sha": "46b04361a1da3b2423f56026752c7ed5702534d1",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt_path": "docs/audits/issue509-storage-lifecycle-complete-provider-source-2026-11-13-run221.json",
+      "reviewed_first_time": 11,
+      "unchanged_prior_five_family": 550,
+      "new_since_run186": 27,
+      "confirmed_defects": 0,
+      "production_writes": false,
+      "baseline_complete": false,
+      "next": "First changed/new provider definition; otherwise distinct accessible unreviewed hosted configuration/source. Do not duplicate Run221 first-time credits."
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -19374,5 +19387,42 @@
     "safe_removals": 0,
     "provider_writes": 0,
     "baseline_complete": false
+  },
+  "provider_storage_lifecycle_complete_run221": {
+    "run": 221,
+    "preflight_initial_sha": "46b04361a1da3b2423f56026752c7ed5702534d1",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "read_head": "72652c6bd5cc7445ddbd8b40f999fffc3aa3764d",
+    "receipt_path": "docs/audits/issue509-storage-lifecycle-complete-provider-source-2026-11-13-run221.json",
+    "receipt_blob": "2d4c602a2f992c0b135a81dd7ddbaef03d9f2504",
+    "storage_current": {
+      "tables": 10,
+      "functions": 24,
+      "noninternal_triggers": 11
+    },
+    "first_time_complete_sources": {
+      "tables": 2,
+      "functions": 5,
+      "triggers": 4,
+      "total_objects": 11,
+      "full_function_characters": 7154,
+      "full_trigger_ddl_characters": 730,
+      "full_table_catalog_component_characters": 4463
+    },
+    "unchanged_prior_baseline_five_family": 550,
+    "prior_app_added_reviewed_run199": 23,
+    "new_storage_triggers": 4,
+    "current_cross_family_count": 577,
+    "policy_exact_canonical_matches": 39,
+    "policy_pretty_false_positives": 23,
+    "provider_buckets": 0,
+    "provider_lifecycle_state_rows": 0,
+    "confirmed_new_defects": 0,
+    "justified_deletions": 0,
+    "provider_writes": 0,
+    "github_code_or_test_changes": 0,
+    "baseline_complete": false,
+    "remaining_unverified": "Hosted Storage lifecycle scheduler/worker, native implementation and HTTP/Auth/PostgREST configuration; #96 owns signed-in user acceptance; #2389 directory LEGACY ACTIVE",
+    "next": "First changed/new provider definition; otherwise distinct accessible unreviewed hosted configuration/source. Do not duplicate Run221 first-time credits."
   }
 }
