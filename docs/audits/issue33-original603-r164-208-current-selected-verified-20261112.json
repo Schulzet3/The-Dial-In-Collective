@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "scope": "R164 original frozen603 #208 exact selected CURRENT official product",
+  "date_utc": "2026-11-13",
+  "status": "SINGLE_SELECTED_SOURCE_VERIFIED; FULL_603_SEMANTIC_CERTIFICATION_INCOMPLETE",
+  "preflight": {
+    "source_development_sha": "1b522f40e5501c48ae55d86a89e114c724bc9218",
+    "immutable_preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "independent_git_blob_sha1_match": true
+  },
+  "original": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "source_csv_path": "docs/audits/issue33-original603-source-level-adjudication-20261029.csv",
+    "source_csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "modified": false,
+    "manual_certified_603": false,
+    "oracle_modified": false,
+    "scorer_modified": false
+  },
+  "selected": {
+    "number": 208,
+    "name": "Costa Rica Guanacaste",
+    "url": "https://manuscriptcoffee.com/products/costa-rica-guanacaste",
+    "roaster": "Manuscript Coffee",
+    "verified_current_fields": {
+      "name": "Costa Rica Guanacaste",
+      "roaster": "Manuscript Coffee",
+      "tasting_notes": "Almond, Orange, Toffee",
+      "origin": "Tarrazú, Costa Rica",
+      "process": "Washed",
+      "elevation_m": "1500 m",
+      "roast_level": "Medium"
+    },
+    "unpublished_fields": [
+      "producer",
+      "variety",
+      "decaffeination_method",
+      "espresso_recipe"
+    ],
+    "selected_h1_verified": true,
+    "unrelated_facts_borrowed": false,
+    "source_review_and_explicit_add_coffee_ui_rendered": true
+  },
+  "code": {
+    "source_pr": 2377,
+    "source_pr_head_sha": "ab6fc0da803a0de9fdc3284049f7833edf7f34ee",
+    "source_pr_test_merge_sha": "1188a359aa35859dbe03353f50dcc5310557330a",
+    "merged_source_sha": "3177821a3b9e80486b359fe6b6b5a349e5ab5cac",
+    "merge_method": "squash_nonforce",
+    "source_files_identical_test_head_and_merge": true,
+    "extractor_runtime_changed": false,
+    "scope_files": [
+      "scripts/audit/issue33-r164-208-check.mjs",
+      "tests/coffee-issue33-r164-208.test.mjs",
+      ".github/workflows/issue33-r164-208.yml",
+      "docs/workstreams/ops-issue33-r164-208-20261112.md"
+    ]
+  },
+  "test_head_ci": {
+    "guarded_official_source_and_actual_parser_run": 43356068342,
+    "strict_selected_assertions_passed": 10,
+    "strict_selected_assertions_failed": 0,
+    "afterproof_passed": true,
+    "afterproof_failures": [],
+    "node_lint_run": 43356068320,
+    "node_pass": 4443,
+    "node_fail": 0,
+    "node_intentional_skip": 6,
+    "lint": "PASS",
+    "cloud_mobile_browser": 43356068426,
+    "sql": 43356070237,
+    "python": 43356068391,
+    "approval": 43356068668,
+    "private_source": 43356068212,
+    "all_listed_non_corpus_runs": "SUCCESS",
+    "full_original603_workflow": "SKIPPED_NOT_PASS"
+  },
+  "source_artifact": {
+    "artifact_id": 14006705237,
+    "workflow_run_id": 43356068342,
+    "zip_bytes": 64515,
+    "zip_sha256": "08f5a46a9a1d67078d5a57ac39ccc7f6fdedf4c0a8a9522a0883f74dff9accf3",
+    "raw_selected_official_html_bytes": 195672,
+    "raw_selected_official_html_sha256": "41a01d0bb49855e47c225c81653e9c8e6d77c6761f7c62eb818857038ea69f23",
+    "focused_evidence_bytes": 7121,
+    "focused_evidence_sha256": "ed8fca99789458121c84f2602acc19d93a6c2fcbc1943be81ec8ceae1e55e6bd",
+    "strict_afterproof_bytes": 840,
+    "strict_afterproof_sha256": "e620d8f9e44338952fe32c89e31e5ce609043faeef2ea7433973f2fa49ffd54b",
+    "independently_downloaded_and_rehashed": true
+  },
+  "merged_validation": {
+    "merge_commit_readback_matches": true,
+    "all_four_changed_git_blobs_identical": true,
+    "original_csv_git_blob_unchanged": true,
+    "preflight_blob_unchanged": true,
+    "merged_push_ci": "NOT_REPORTED_BY_AVAILABLE_PR_ONLY_CI_CONNECTOR; HEAD_CI_REUSED_FOR_BYTE_IDENTICAL_MERGE; NOT_CLAIMED_PASS"
+  },
+  "integrity": {
+    "production_operations": 0,
+    "member_data_changed": false,
+    "netlify_publication": false,
+    "release_grant": false,
+    "queue_items_promoted": 0,
+    "other_ready_deployed_unchanged": true,
+    "issue_closed": false
+  },
+  "remaining": {
+    "issue33": "OPEN_IN_PROGRESS",
+    "full603_manual_semantic_certification": false,
+    "unavailable_or_conflicting_rows_still_unverified": true,
+    "next": "Choose a distinct unresolved original603 current selected official source such as #205, with new guarded current HTML and actual parser; adjudicate inaccessible/source-conflicted separate."
+  }
+}
