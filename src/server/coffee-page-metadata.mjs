@@ -24,7 +24,7 @@ import {equivalentCoffeeProductNames,preferredCoffeeRoasterName,selectedCoffeeNa
 import {isolateCoffeeIdentityCohorts} from './coffee-source-identity-scope.mjs';
 import {extractCoffeeGeographyEntityRoles,cleanCoffeeGeographyEntityPrefix} from './coffee-geography-entity-roles.mjs';
 import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProductFlavorProfileEvidence,refineSelectedNamedTastingNotes,normalizeExplicitCoffeeTastingNotes,equivalentCoffeeTastingNotes,coffeeTastingNotesSubset} from './coffee-flavor-evidence.mjs';
-import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,refineSelectedCurrentTrailingFlavorNote,refineSelectedCurrentFlavorBase,selectedCoffeeSupplementalTastingProse} from './coffee-selected-description-sensory.mjs';
+import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,refineSelectedCurrentTrailingFlavorNote,refineSelectedCurrentFlavorBase,refineSelectedCurrentSensoryArc,selectedCoffeeSupplementalTastingProse} from './coffee-selected-description-sensory.mjs';
 import {selectedCoffeeMilkSensoryContext} from './coffee-selected-milk-sensory-context.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {parseCoffeeElevation,equivalentCoffeeElevations,compatibleCoffeeElevations,extractCoffeeElevationEvidence} from './coffee-elevation-evidence.mjs';
@@ -2021,6 +2021,12 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    // when an inferred notes caption has been indexed as a printed profile.
    const flavorBase=refineSelectedCurrentFlavorBase(product,{clean,notes:fields.tasting_notes});
    if(flavorBase)fields.tasting_notes=flavorBase;
+   // A selected current unlabelled sensory arc may add literal aroma/finish
+   // only when no stronger printed or structured note list exists.
+   if(!printedNotes.length&&!structuredFlavorByFields.get(fields)){
+    const arc=refineSelectedCurrentSensoryArc(currentProduct,{clean,notes:fields.tasting_notes});
+    if(arc)fields.tasting_notes=arc;
+   }
   }
   // A distinct current selected flavor sentence is review evidence, not a
   // license to concatenate notes or override a stronger literal Flavor label.

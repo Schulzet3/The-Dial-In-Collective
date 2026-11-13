@@ -169,6 +169,45 @@ export function refineSelectedCurrentFlavorBase(html,{clean,notes}={}){
 }
 
 
+
+// A current chosen coffee can give a single literal sensory arc instead of a
+// separate Tasting Notes caption: "floral aroma ... notes of A and B ...
+// finishing with a hint of C". Only augment an existing direct two-note
+// extraction when the *same* unqualified selected-product sentence repeats
+// both accepted notes. Stronger printed lists and structured fields remain
+// controlling at the call site; this helper never reads SEO or another coffee.
+export function refineSelectedCurrentSensoryArc(html,{clean,notes}={}){
+ if(typeof html!=='string'||html.length>2_000_000||typeof clean!=='function'||
+    typeof notes!=='string'||notes.length<8||notes.length>220)return '';
+ const selectedHtml=removeElements(html,['script','style','noscript','template','nav','aside','footer','header','select']);
+ const blocks=productCoffeeProse(selectedHtml,clean);
+ const headings=blocks.filter(b=>b.tag==='h1'&&!b.educational);
+ if(headings.length!==1||!headings[0].text||headings[0].text.length>180)return '';
+ const title=fold(headings[0].text);
+ const allowed=/^(?:product info|product information|product description|description|coffee description|about the coffee|about this coffee|coffee details|details|coffee notes|tasting notes|flavor notes|flavour notes|coffee profile|overview)$/u;
+ const parts=notes.split(/\s*(?:,|&|[•·;|]|\band\b)\s*/iu).map(x=>x.trim()).filter(Boolean);
+ if(parts.length<2||parts.length>6||parts.some(x=>!normalizeExplicitCoffeeTastingNotes(x)))return '';
+ const found=new Set();
+ for(const block of blocks){
+  if(block.tag!=='p'||block.educational||block.text.length<60||block.text.length>850||
+     unavailable.test(block.section)||unavailable.test(block.text)||
+     NONCURRENT_COFFEE_PROSE.test(block.text))continue;
+  const section=fold(block.section);
+  if(section&&section!==title&&!allowed.test(section))continue;
+  for(const sentence of block.text.split(/(?<=[.!?])\s+/u).slice(0,12)){
+   if(sentence.length>500||unavailable.test(sentence)||NONCURRENT_COFFEE_PROSE.test(sentence))continue;
+   const arc=sentence.match(/\bwith\s+(?:an?\s+)?(?:(?:delicate|subtle|bright|gentle|distinct|pronounced)\s+)?(floral|jasmine|citrus|chocolate|vanilla|nutty)\s+aroma\s*,\s*(?:it|this coffee|the cup)\s+(?:reveals?|offers?|presents?|has|shows?)\s+notes?\s+of\s+([^.!?;,]{5,120}?)\s*,\s*finishing\s+with\s+(?:an?\s+)?(?:(?:soft|subtle|gentle|lingering|long)\s+)?(?:hint|note)\s+of\s+(vanilla|caramel|chocolate|cocoa|honey|toffee|jasmine|almond|hazelnut|citrus|cinnamon|orange|lemon|lime|peach|cherry|apple|berry|plum|grape|nougat|molasses|apricot)(?=[.!?]|$)/iu);
+   if(!arc||fold(arc[2])!==fold(parts.join(' and ')))continue;
+   const extras=[arc[1],arc[3]];
+   if(extras.some(x=>parts.some(p=>fold(p)===fold(x)))||fold(extras[0])===fold(extras[1]))continue;
+   const complete=normalizeExplicitCoffeeTastingNotes([extras[0],...parts,extras[1]].join(', '));
+   if(complete)found.add(complete);
+  }
+ }
+ // Multiple nonidentical selected narratives are a dispute, not an autofill.
+ return found.size===1?[...found][0]:'';
+}
+
 // A present selected product sometimes says "we are tasting A and B with a C
 // note" rather than "notes of A, B, C". The lower-ranked narrative extractor
 // conservatively stops at "with a/an", dropping a literal third descriptor.
