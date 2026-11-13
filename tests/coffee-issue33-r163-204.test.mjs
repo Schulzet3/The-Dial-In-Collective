@@ -19,7 +19,7 @@ test('#204 removed current natural cannot borrow related natural',()=>{
  assert.equal(s.direct.natural,false);
 });
 test('#204 related product cannot provide missing current flavor',()=>{
- const s=source204(page(own.replaceAll('fruit punch','unpublished').replaceAll('kiwi','unpublished'),'<aside>fruit punch, kiwi</aside>'));
+ const s=source204(page(own.replaceAll('FRUIT PUNCH','UNPUBLISHED').replaceAll('fruit punch','unpublished').replaceAll('KIWI','UNPUBLISHED').replaceAll('kiwi','unpublished'),'<aside>fruit punch, kiwi</aside>'));
  assert.equal(s.direct.fruit_punch,false);assert.equal(s.direct.kiwi,false);
 });
 test('#204 related origin cannot supply removed selected region',()=>{
