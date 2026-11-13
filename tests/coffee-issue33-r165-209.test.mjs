@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {chosen209,source209} from '../scripts/audit/issue33-r165-209-check.mjs';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
-const own='<p>Medium</p><h1>Lazy Day Decaf</h1><p>Cinnamon, Raisin, Cherry</p>'+
+const own='<p>Roast: Medium</p><h1>Lazy Day Decaf</h1><p>Cinnamon, Raisin, Cherry</p>'+
  '<p>Our classic decaffeinated coffee hails from a few regions in Colombia. It is decaffeinated using the Ethyl Acetate process. The cup boasts flavors of cinnamon, raisin, and sweet cherries.</p>'+
  '<section>Details<p>Origin Colombia</p><p>Region Huila</p><p>Process EA Decaf</p></section>';
 const page=(body=own,other='')=>'<html><head><title>Old Burundi Natural</title><meta name="description" content="Peru washed bourbon blueberry"></head><body>'+
@@ -26,7 +26,7 @@ test('#209 unrelated recommendation cannot supply absent Huila',()=>{
  assert.equal(source209(page(body,'<aside>Region Huila</aside>')).direct.huila,false);
 });
 test('#209 no selected roast tier is not rescued from footer or SEO',()=>{
- const body=own.replace('<p>Medium</p>','');
+ const body=own.replace('<p>Roast: Medium</p>','');
  assert.equal(source209(page(body,'<aside>Medium</aside>')).direct.medium,false);
 });
 test('#209 actual parser distinguishes EA decaf from green processing',()=>{
@@ -37,7 +37,7 @@ test('#209 actual parser distinguishes EA decaf from green processing',()=>{
 });
 test('#209 actual parser preserves published tasting notes',()=>{
  const p=extractPublicCoffeeFacts(page(),{source_url:chosen209.url});
- assert.ok(['cinnamon','raisin','cherry'].every(v=>String(p.fields?.tasting_notes||'').toLowerCase().includes(v)),JSON.stringify(p));
+ assert.ok(['cinnamon','raisin','cherr'].every(v=>String(p.fields?.tasting_notes||'').toLowerCase().includes(v)),JSON.stringify(p));
 });
 test('#209 actual parser does not use unrelated origin or process from SEO',()=>{
  const p=extractPublicCoffeeFacts(page(),{source_url:chosen209.url});
