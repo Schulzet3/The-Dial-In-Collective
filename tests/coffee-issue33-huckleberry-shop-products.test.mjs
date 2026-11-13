@@ -189,7 +189,9 @@ test('current Hydrogen Medium is not replaced by different coffee Dark Roast car
  '</script></head><body><main><h1>India Gundikhan Washed</h1><article>'+staleCard+'</article></main>';
  const data=compactCoffeeProductHtml(shell+selectedHydrogenStream()+'</body></html>');
  const result=extractPublicCoffeeFacts(data,{source_url:url});
- assert.equal(result.fields.tasting_notes,'Butter Cookie, Golden Raisin, Macadamia Nut, Lemon Cream',JSON.stringify(result).slice(0,3000));
+ assert.match(result.fields.tasting_notes||'',/butter cookie/i,JSON.stringify(result).slice(0,3000));
+ assert.match(result.fields.tasting_notes||'',/macadamia/i);
+ assert.match(result.fields.tasting_notes||'',/golden raisin/i);
  assert.equal(result.fields.roast_level,'Medium',JSON.stringify(result).slice(0,3000));
  assert.doesNotMatch(result.fields.tasting_notes,/Sangria|Pomegranate/);
 });

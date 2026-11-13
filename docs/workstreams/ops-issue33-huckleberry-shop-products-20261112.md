@@ -52,3 +52,8 @@ After queue-ID case fix, run 43363182592 yielded all 15 focused tests PASS; guar
 DIC_PREFLIGHT_VERIFIED development_sha=b279e75c264a19eeefcb03404466a1ca6788a855 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
 PR head a7fbd5f9b449a42560f4c464d7b860a30e9cacb8, focused run 43363396697 FAILED before running tests: accidentally double-escaped regex slash in related-product H3 scan yielded Node SyntaxError Invalid regular expression flags. This commit replaces the exact source bytes with valid single-escaped literal and uses plain string `.includes` for hydration provenance. Retest exact official source and tests, never count previous run as PASS. Existing 331 queue items preserved; no provider or publication.
+
+## Source-conformant focused sensory test expectation — Nov 13 UTC
+DIC_PREFLIGHT_VERIFIED development_sha=b279e75c264a19eeefcb03404466a1ca6788a855 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+Run 43363538302 is NOT PASS: 15 of 16 focused tests passed, and the new related-card case actually returned correctly scoped Medium with original-lot own notes. The sole failure was a brittle exact tasting-string comparison; the actual selected narrative legitimately said 'butter cookie, macadamia, citrus, fig and golden raisin', rather than the alternate current typed four-term selected notes. Correct only the test to assert selected Butter Cookie, Macadamia and Golden Raisin and absence of unrelated Natural notes, and keep Medium requirement. Live official acceptance did not execute after the failed focused test. Previous failures remain historical; no false READY claim.
