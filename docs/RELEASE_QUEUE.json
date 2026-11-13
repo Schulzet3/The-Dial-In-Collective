@@ -13382,8 +13382,8 @@
       "issue": 33,
       "pr": 2385,
       "title": "Fix selected Huckleberry /shop/products?Size=12+OZ metadata extraction with exact-handle public fallback",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "1135d75f77e844f8a5315bf17977def51735de6b",
       "scope_paths": [
         "src/server/coffee-page-metadata.mjs",
         "src/server/coffee-shopify-ajax.mjs",
@@ -13401,24 +13401,28 @@
         "PR #2385 source 4a32b5 Hydration 15 focused Node tests passed, live official product 43362768617 fetched and four own tasting notes recovered, but original generic parser chose unrelated Dark roast instead of selected structured Medium. Strict acceptance FAIL, not READY.",
         "PR #2385 source fa020e6b: 15/15 focused tests PASS, official HTTPS source 43363182592 PASS name/roaster/washed/four own notes, but roast Dark came from unrelated Bom Senso Dark Roast; diagnostics show roast_source product_explicit_text with no selected roast source facts, selected Hydrogen loader says Medium. Strict run FAILED pending source repair.",
         "PR source a7fbd5f9b449a42560f4c464d7b860a30e9cacb8 focused 43363396697 failed at import: extra-escaped JS regex caused SyntaxError Invalid regular expression flags; source not executed, not PASS. Fix escaped source syntax before retest.",
-        "PR SHA 36a81ab62ed844aef1e9340e357ff25c8db8055b focused 15/16 PASS, 1 test expectation overly rigid: own narrative tasting list 'butter cookie, macadamia, citrus, fig and golden raisin' is valid and excludes unrelated Natural, selected roast already Medium. Live source not executed because focused test failed. Test narrowed to require own direct notes + Medium without assuming a specific source preference."
+        "PR SHA 36a81ab62ed844aef1e9340e357ff25c8db8055b focused 15/16 PASS, 1 test expectation overly rigid: own narrative tasting list 'butter cookie, macadamia, citrus, fig and golden raisin' is valid and excludes unrelated Natural, selected roast already Medium. Live source not executed because focused test failed. Test narrowed to require own direct notes + Medium without assuming a specific source preference.",
+        "VERIFIED PR #2385 nonforce squash merged 1135d75f77e844f8a5315bf17977def51735de6b; all 10 source/test/workflow/queue/journal Git blobs byte-identical to tested PR head 0ec37fdc2a55261c5643f31effdca16fab8ec36a. No same-file concurrent source drift.",
+        "PR head full Node/lint 43363667109, cloud UX/mobile 43363667235, isolated SQL 43363667361, security 43363667340, approval/continuity 43363667173 and exact Huckleberry official 43363667225 all SUCCESS. Node scope included full tests, no duplicate build; skipped steps NOT_APPLICABLE, not PASS.",
+        "EXACT MERGED SHA 1135d75f77e844f8a5315bf17977def51735de6b: Node/lint 43364096778 SUCCESS 4,478 PASS/0 FAIL/6 intentional SKIP; cloud/mobile 43364097055, approval 43364096756, coffee Python 43364097206 and selected current official 43364096763 SUCCESS. Merge-source exact selected afterproof: fetched 294,477-byte HTML SHA256 c5f40531b8421ce9262df36644dd3d871fb3d6c0e5ac40176c43968eb8b102b0, 16/16 tests PASS, name India Gundikhan Washed, roaster Huckleberry, origin India, process Washed, roast Medium, notes Butter Cookie/Golden Raisin/Macadamia Nut/Lemon Cream, no conflicts/related Natural contamination, actual Add Coffee preview rendered.",
+        "Additional merged original603 source workflows R54 43364097284 and R64 43364096675 FAILED on unrelated OFFICIAL-SOURCE availability (Woodshed #594, Sidecar #566/#567), each selectively retried and failed on the same outside-host source-unavailable reasons. These runs are NOT PASS and remain separate #33 broad source blockers; scoped Huckleberry actual selected source PASS unaffected."
       ],
       "ci_runs": [
-        43361539325,
-        43361819193,
-        43362051855,
-        43362768617,
-        43362768316,
-        43363182592,
-        43363396697,
-        43363538302
+        43363667109,
+        43363667235,
+        43363667361,
+        43363667340,
+        43363667173,
+        43363667225,
+        43364096763,
+        43364096778,
+        43364097055,
+        43364096756,
+        43364097206
       ],
-      "blockers": [
-        "Strict current official Huckleberry source afterproof and all exact-source CI pending on repaired focused expectation.",
-        "PR not yet safely merged/tested and READY; no production release."
-      ],
+      "blockers": [],
       "owner_source": "Owner direct chat November 12 2026: Huckleberry Roasters India Gundikhan Washed URL must work in the extractor; no owner Publish.",
-      "notes": "Scoped safe development-only fix to reject unrelated product/lot metadata, preserve numeric bag size as purchase variant, and retrieve exact handle same-host Shopify public JSON where available. Active route is Netlify /api/coffee-preview (legacy Supabase roaster directory irrelevant). No Auth, private data, SQL, Netlify deployment, frozen original603 or production publication. Status IN_PROGRESS pending actual guarded HTTPS source proof, CI, safe merge and queue reconciliation.\nNov12 guarded runner verified HPE_HEADER_OVERFLOW for both HTML and product JSON with DNS globally routable and no HTTP response callback. Third source path src/server/coffee-url-guard.mjs now part of scope and selective numeric product-header cap tested, but real source rerun pending; no quota/provider changes.\nAfter 32KB exact selected product header cap live HTML GET200 and parser accepted name/roaster/India/Washed; source 294477 bytes, verified SHA. Public Shopify .js returns 404, so new bounded server-side React Router/Hydrogen preloaded selected-product data parser required. New module and HTML compaction explicitly included in 5-path queue scope. Do not infer roast/notes from related Natural coffee.",
+      "notes": "Scoped safe development-only fix to reject unrelated product/lot metadata, preserve numeric bag size as purchase variant, and retrieve exact handle same-host Shopify public JSON where available. Active route is Netlify /api/coffee-preview (legacy Supabase roaster directory irrelevant). No Auth, private data, SQL, Netlify deployment, frozen original603 or production publication. Status IN_PROGRESS pending actual guarded HTTPS source proof, CI, safe merge and queue reconciliation.\nNov12 guarded runner verified HPE_HEADER_OVERFLOW for both HTML and product JSON with DNS globally routable and no HTTP response callback. Third source path src/server/coffee-url-guard.mjs now part of scope and selective numeric product-header cap tested, but real source rerun pending; no quota/provider changes.\nAfter 32KB exact selected product header cap live HTML GET200 and parser accepted name/roaster/India/Washed; source 294477 bytes, verified SHA. Public Shopify .js returns 404, so new bounded server-side React Router/Hydrogen preloaded selected-product data parser required. New module and HTML compaction explicitly included in 5-path queue scope. Do not infer roast/notes from related Natural coffee.\n2026-11-13 narrow Huckleberry selected public URL fix verified and READY in development only, source SHA 1135d75f77e844f8a5315bf17977def51735de6b. All 10 blobs match passing PR; 16/16 strict current live official acceptance; 4,478/0 merged Node/lint. Two unrelated original603 external-source availability jobs remain failed, not counted as Huckleberry acceptance. No Netlify deployment (published current still 6af6015e3af2417badac2bd1), production SQL/Auth/Edge/member writes or release authorization.",
       "production_deployed": false
     }
   ],
