@@ -13544,8 +13544,8 @@
       "issue": 2386,
       "pr": 2387,
       "title": "Admin unlimited per-account URL preview attempts/retries; 15-second cooldown for other members",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "e7ba6000563e55be845835a336944314367827f6",
       "scope_paths": [
         "supabase/migrations/20261113043000_dic_admin_preview_unlimited_member_15s.sql",
         "site/cloud/coffee-url-autofill.js",
@@ -13553,17 +13553,25 @@
       ],
       "owner_source": "Owner instruction November 12, 2026; GitHub #2386 (Locked supersession)",
       "tests": [
-        "First PR-head CI at 8821adf: security 43362497706 SUCCESS; approval 43362497697 FAILED missing queue intake, this commit repairs it. All other required checks were initially in progress, not assumed passed.",
-        "Targeted source/test tests/coffee-preview-role-policy.test.mjs; exact Node/lint, SQL, mobile/offline, security and approval CI pending."
+        "Exact PR-head 4c2b75852d9f55fe941ff8049625b6994e52b53c: approval 43364450200, Node/lint/build 43364450080, cloud-tests and mobile-browser-qa 43364450078, isolated PostgreSQL/Auth/RLS 43364450493, source security 43364450072 SUCCESS; original frozen603 43364450079 SKIPPED NOT PASS.",
+        "Exact NONFORCE integration #2387 merged e7ba6000563e55be845835a336944314367827f6; checked tested PR head -> merge -> current recorded eight code/SQL/test Git blobs identical for original #2386 implementation. Original PR failed cases were retained/repaired.",
+        "Exact MERGED-SOURCE five required named GitHub jobs SUCCESS at e7ba600: approval 43365012883, validate 43365012887 (4,484 PASS / 0 FAIL / 6 intentional skipped, lint/build PASS), cloud-tests and mobile-browser-qa 43365012861, sql 43365012925. No 603 FULL PASS claim.",
+        "SQL isolated release regressions supabase/tests/url_preview_release.sql, supabase/tests/universal_url_preview.sql, supabase/tests/preview_two_phase_cache.sql PASS. tests/coffee-preview-role-policy.test.mjs and tests/universal-coffee-preview.test.mjs are bound to tested merged source; Auth role and email admission, admin cached/fresh/trusted unlimited, member 15-second cooldown/12-per-day, denied unauthenticated, rollback and Netlify IP safety retained.",
+        "Later owner-approved #2389 READY merged as f61335482d355bb83cc161265557888ee67b6737 changes overlapping site/cloud/coffee-url-autofill.js and related tests. Shared-file current source drift must be explicitly source-isolated and reconciled by the FUTURE owner-frozen Publish candidate; not falsely counted as original #2386 same-byte current code nor a downgrade of this earlier tested READY merge."
       ],
       "ci_runs": [
-        43362497706
+        43364450200,
+        43364450080,
+        43364450078,
+        43364450493,
+        43364450072,
+        43365012883,
+        43365012887,
+        43365012861,
+        43365012925
       ],
-      "blockers": [
-        "Full applicable PR-head and merged-source CI/SQL isolation evidence not yet complete.",
-        "Separate owner Publish required for live Supabase migration and optional Netlify production source; published quotas remain historical 12/30 until migrated."
-      ],
-      "notes": "Server-authoritative admitted/email-verified Admin bypass for legacy service trusted, universal cached/fresh and completion RPC. Member 12 charged previews/24h unchanged, 15-second shared cooldown. Preserve Netlify 12/min per-IP global safety, Auth, SSRF/bounds, manual Add Coffee, Pending/Verified, shots and Community. SOURCE ONLY not deployed.",
+      "blockers": [],
+      "notes": "READY DEVELOPMENT ONLY; NOT DEPLOYED. Owner-approved personal Admin per-account unlimited coffee URL preview attempts/retries/cooldown, other admitted members 15 seconds and 12 charged fresh retrievals/24h. 12/min Netlify per-IP global abuse guard and Auth, TLS/SSRF, privacy and all member data preserved. Production SQL/Edge/source unchanged until NEW explicit Publish. #2389 later READY on same site/cloud/coffee-url-autofill.js requires exact frozen-batch byte isolation/overlap review before publication; no staging performed.",
       "production_deployed": false
     }
   ],
