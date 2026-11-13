@@ -8,6 +8,31 @@
   },
   "items": [
     {
+      "id": "DIC-Q-2389-retire-roaster-directory-universal-autofill",
+      "issue": 2389,
+      "pr": null,
+      "title": "Retire obsolete roaster directory and preserve any-roaster URL autofill, editable gaps and evidence-based Verified",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/main.js",
+        "site/cloud/coffee-url-autofill.js",
+        "supabase/functions/dic-preview-coffee/index.ts",
+        "supabase/migrations/20261113043000_dic_retire_roaster_directory.sql"
+      ],
+      "tests": [
+        "Existing 42 universal URL tests; 3 new no-directory regression cases; isolated SQL, Node22/lint/build, browser/offline, security and approval checks pending."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact CI and nonforce merge not yet verified.",
+        "Production SQL/legacy Edge retirement blocked until separately authorized Publish and independently verified recovery."
+      ],
+      "owner_source": "Owner direct Nov 12 2026; separate issue #2389, do not touch Huckleberry PR #2385.",
+      "notes": "Former four roaster trust proofs and four aliases archived, no deletions. Active New Coffee stays universal Netlify /api/coffee-preview. New verified source host is inferred conservatively from previously verified exact coffee sources; unproven brands stay Pending. No production/provider/member writes.",
+      "production_deployed": false
+    },
+    {
       "id": "DIC-Q-33-original603-26-selected-unlabeled-flavor-review-context",
       "issue": 33,
       "pr": 1785,

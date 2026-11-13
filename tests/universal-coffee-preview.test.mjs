@@ -682,3 +682,34 @@ test('complete unambiguous approved catalog skips retrieval, preserves cooldown,
  assert.equal(requests.some(x=>x.url.endsWith('/rpc/dic_preview_complete')),false);
  assert.equal(requests.find(x=>x.url.endsWith('/rpc/dic_preview_preflight')).body,'{"p_cached":true}');
 });
+
+test('unknown international roaster URL yields source-backed facts and manual blanks',()=>{
+ const unknown='https://unlisted-global-coffee.example.org/products/ethiopia-2026';
+ assert.equal(safeCoffeeUrl(unknown)?.hostname,'unlisted-global-coffee.example.org');
+ const source={...product,url:unknown,brand:{'@type':'Brand',name:'Unlisted Global Coffee'},
+  additionalProperty:[{name:'Origin',value:'Sidama, Ethiopia'},{name:'Processing',value:'Washed'}]};
+ const parsed=extractPublicCoffeeFacts(wrap(source),{source_url:unknown});
+ assert.equal(parsed.ok,true);
+ assert.equal(parsed.fields.name,'Ethiopia 2026');
+ assert.equal(parsed.fields.roaster,'Unlisted Global Coffee');
+ assert.equal(parsed.fields.producer,undefined);
+ assert.match(coffeeUrlPreviewMarkup(parsed),/Not found on this product page/);
+});
+test('universal Add Coffee cannot regress to the old directory gate',()=>{
+ assert.match(read('site/cloud/client.js'),/previewPath='\/api\/coffee-preview'/);
+ for(const path of ['site/cloud/client.js','site/cloud/main.js',
+  'site/cloud/coffee-url-autofill.js','netlify/functions/coffee-url-preview.mjs',
+  'supabase/functions/dic-preview-coffee/index.ts','supabase/functions/dic-verify-coffee/index.ts']){
+  assert.doesNotMatch(read(path),/dic_roaster_directory|dic_roaster_preview_target|unrecognized_official_roaster|unsupported_official_product_url/,path);
+ }
+ assert.match(read('supabase/functions/dic-preview-coffee/index.ts'),/retired_endpoint/);
+ assert.match(read('site/cloud/main.js'),/Any roaster/);
+});
+test('forward-only retirement archives original evidence and preserves identity safety',()=>{
+ const migration=read('supabase/migrations/20261113043000_dic_retire_roaster_directory.sql');
+ assert.match(migration,/create table private\.dic_roaster_name_aliases/i);
+ assert.match(migration,/private\.dic_verified_roaster_page_proof/i);
+ assert.match(migration,/alter table private\.dic_roaster_directory rename to dic_roaster_identity_provenance_archive/i);
+ assert.match(migration,/drop function if exists public\.dic_roaster_preview_target/i);
+ assert.doesNotMatch(migration,/drop table|truncate table|delete from public\./i);
+});

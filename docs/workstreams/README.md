@@ -75,3 +75,4 @@ After the mandatory [PREFLIGHT](../ai/PREFLIGHT.md), the central [active work ch
 - [Netlify rolling exhaustive audit and source-pinning remediation: Issue #508](issue-508.md)
 
 - [Automatic READY-batch source-bound CI journal](release-ready-batch.md) — explicitly recognized same-commit CI work journal.
+- [Issue #2389 universal URL / retired directory](issue-2389.md) — accepted any-roaster best-effort autofill; old Edge and SQL retirement; no release.
