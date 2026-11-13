@@ -82,10 +82,15 @@ test('#207 corroborated exact selected HTML Origin: United States remains a legi
  const p=extractPublicCoffeeFacts(chosenMixed('<p>Origin: United States</p>'),{source_url:chosen207.url});
  assert.equal(p.fields?.origin,'United States',JSON.stringify(p));
 });
-test('#207 current structured Product flavor identical to direct Flavor is retained',()=>{
+test('#207 matching unusual structured/HTML Flavor stays reviewable with no false conflict',()=>{
  const p=extractPublicCoffeeFacts(chosenMixed('', 'United States','Nutmeg, Whole Bean Vanilla, Creamy Butter'),{source_url:chosen207.url});
  assert.ok(!p.conflicts?.includes('tasting_notes'),JSON.stringify(p));
- assert.ok(/Nutmeg|Creamy Butter/iu.test(p.fields?.tasting_notes||''),JSON.stringify(p));
+ assert.ok(p.source_facts?.some(f=>f.field==='tasting_notes'&&
+  f.value==='Nutmeg, Whole Bean Vanilla, Creamy Butter'&&f.conflicting!==true),JSON.stringify(p));
+ // Whole Bean Vanilla may fail canonical flavor sanitation without losing
+ // the literal selected-source fact; do not invent a replacement flavor.
+ assert.ok(!p.fields?.tasting_notes||
+  /Nutmeg|Creamy Butter/iu.test(p.fields.tasting_notes),JSON.stringify(p));
 });
 test('#207 unrelated selected coffee no false US country suppression when not a blend',()=>{
  const name='Single Origin Nicaragua';
