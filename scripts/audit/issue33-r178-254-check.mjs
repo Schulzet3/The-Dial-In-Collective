@@ -7,7 +7,7 @@ import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
 import {selectedProductHeadings} from './issue33-selected-product-heading.mjs';
 import {removeElements} from '../../supabase/functions/_shared/html-scan.mjs';
 const sha=value=>createHash('sha256').update(value).digest('hex');
-const norm=value=>String(value??'').normalize('NFKD').replace(/\\p{M}/gu,'').toLowerCase().replace(/[^a-z0-9]+/gu,' ').trim().replace(/\\s+/gu,' ');
+const norm=value=>String(value??'').normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase().replace(/[^a-z0-9]+/gu,' ').trim().replace(/\s+/gu,' ');
 export const chosen254=Object.freeze({number:254,name:"LIGHT WORK | LIGHT ROAST | COLOMBIA",url:"https://others.coffee/products/light-work-light-peru-copy"});
 export function source254(html){
  const selected=productMarkup(String(html||''));
