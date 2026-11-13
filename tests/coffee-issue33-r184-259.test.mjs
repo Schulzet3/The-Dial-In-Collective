@@ -37,3 +37,12 @@ test('#259 medium body sentence alone is not a roast statement',()=>{
  const p=parse('<h1>Brasil Carmo de Minas</h1><p>A pleasant medium body with low acidity and a mild sweetness.</p>');
  assert.ok(!p.fields?.roast_level,JSON.stringify(p).slice(0,1600));
 });
+
+test('#259 real merchant H1 section headings are not competing product identities',()=>{
+ const sections=product.replace('<h2>About the Producer:</h2>','<h1>About the Producer:</h1>')
+  .replace('<h2>What you will find in the cup:</h2>',"<h1>What you'll find in the cup:</h1>");
+ const s=selected259(page(sections));assert.equal(s.headings.length,3);assert.equal(s.identity,true);
+});
+test('#259 an additional different product H1 invalidates current selected identity',()=>{
+ const s=selected259(page(product+'<h1>Colombia Decaf</h1>'));assert.equal(s.identity,false);
+});

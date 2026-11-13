@@ -13,9 +13,11 @@ export const original259=Object.freeze({number:259,name:'Brasil Carmo de Minas',
 export function selected259(html){
  const scoped=productMarkup(String(html||''));
  const headings=selectedProductHeadings(scoped);
+ // The merchant uses additional H1 section headings, not additional coffee identities.
+ const productHeadings=headings.filter(x=>!/^(?:about the producer|what you(?:'|’)?ll find in the cup):?$/iu.test(String(x).trim()));
  const body=fold(removeElements(scoped,['script','style','noscript','template','nav','aside','footer','header','select'])
   .replace(/<[^>]{0,3000}>/gu,' ').replace(/&(?:nbsp|amp);/giu,' '));
- return {headings,identity:headings.length===1&&fold(headings[0])===fold(original259.name),
+ return {headings,identity:productHeadings.length===1&&fold(productHeadings[0])===fold(original259.name),
    coop:body.includes('produced by the cocarive cooperative'),
    region:body.includes('mantiqueira de minas'),
    notes:['cinnamon bread','milk chocolate','macadamia nuts'].every(x=>body.includes(x)),
