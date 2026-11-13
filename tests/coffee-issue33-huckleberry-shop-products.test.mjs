@@ -6,6 +6,8 @@ import {safeCoffeeUrl,isCoffeeProductDetailUrl,fetchPublicCoffeeHtml,
  MAX_PRODUCT_HEADER_BYTES,MAX_PUBLIC_HEADER_BYTES} from '../src/server/coffee-url-guard.mjs';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 import {coffeeUrlPreviewMarkup} from '../site/cloud/coffee-url-autofill.js';
+import {compactCoffeeProductHtml} from '../src/server/coffee-product-prep.mjs';
+import {extractSelectedReactRouterCoffeeHydration} from '../src/server/coffee-react-router-hydration.mjs';
 
 const url='https://www.huckleberryroasters.com/shop/products/india-gundikhan-washed?Size=12+OZ';
 const canonical='https://www.huckleberryroasters.com/shop/products/india-gundikhan-washed';
@@ -112,4 +114,69 @@ test('unrelated catalog and landing pages preserve strict 12 KB header limit',as
   assert.equal(opts.maxHeaderSize,MAX_PUBLIC_HEADER_BYTES);
   assert.equal(opts.maxHeaderSize,12_000);
  }
+});
+
+
+// Additional exact-product Shopify Hydrogen/react-router stream regression.
+function selectedHydrogenStream({title='India Gundikhan Washed',handle='india-gundikhan-washed',vendor='Huckleberry Roasters',
+ notes=['Butter Cookie','Golden Raisin','Macadamia Nut','Lemon Cream'],roast='Medium',related=true,route='routes/shop.products.$handle'}={}){
+ const flat=[null],value=x=>(flat.push(x),flat.length-1);
+ const object=fields=>{
+  const out={};for(const [k,v] of Object.entries(fields))out['_'+value(k)]=v;
+  return value(out);
+ };
+ const coffee=object({tastingNotes:value(notes.map(value)),roastLevel:value(roast)});
+ const selected=object({title:value(title),vendor:value(vendor),handle:value(handle),
+  id:value('gid://shopify/Product/8030692966474'),coffee});
+ const loader=object({product:selected});
+ const relatedCoffee=object({tastingNotes:value(['Sangria','Pomegranate'].map(value)),roastLevel:value('Dark')});
+ const relatedProduct=object({title:value('India Gundikhan Natural'),vendor:value('Huckleberry Roasters'),
+  handle:value('india-gundikhan-natural'),id:value('gid://shopify/Product/8030692966401'),coffee:relatedCoffee});
+ const loaders=object({[route]:loader,...(related?{'routes/shop':object({product:relatedProduct})}:{})});
+ const root=object({loaderData:loaders});flat[0]=flat[root];
+ return '<script>window.__reactRouterContext.streamController.enqueue('+JSON.stringify(JSON.stringify(flat))+');</script>';
+}
+test('selected Hydrogen route provides exact notes and Medium, never a related Natural product',()=>{
+ const shell='<html><head><title>India Gundikhan Washed | HUCK</title><meta property="og:site_name" content="Huckleberry Roasters">'+
+ '<script type="application/ld+json">'+JSON.stringify({...product,additionalProperty:[{name:'Process',value:'Washed'}],description:'Washed selected coffee in India'})+'</script></head><body><main><h1>India Gundikhan Washed</h1></main>';
+ const html=shell+selectedHydrogenStream()+'</body></html>';
+ const compact=compactCoffeeProductHtml(html);
+ assert.match(compact,/streamController\.enqueue/);
+ const result=extractPublicCoffeeFacts(compact,{source_url:url});
+ assert.equal(result.ok,true,JSON.stringify(result).slice(0,3000));
+ assert.equal(result.fields.tasting_notes,'Butter Cookie, Golden Raisin, Macadamia Nut, Lemon Cream');
+ assert.equal(result.fields.roast_level,'Medium');
+ assert.doesNotMatch(result.fields.tasting_notes,/Sangria|Pomegranate/);
+ assert.ok(result.source_facts?.some(f=>f.field==='tasting_notes'&&f.section.includes('selected product React Router')));
+});
+test('hydration reader refuses wrong handle, vendor, title and unrelated route',()=>{
+ const original=options=>extractSelectedReactRouterCoffeeHydration(selectedHydrogenStream(options),{
+  source_url:url,expected_name:'India Gundikhan Washed',expected_roaster:'Huckleberry Roasters'});
+ assert.equal(original({handle:'india-gundikhan-natural'}),null);
+ assert.equal(original({title:'India Gundikhan Natural'}),null);
+ assert.equal(original({vendor:'Different Roaster'}),null);
+ assert.equal(original({route:'routes/shop'}),null);
+});
+test('related products cannot donate notes or roast to selected product without their own values',()=>{
+ const empty=selectedHydrogenStream({notes:[],roast:'Other'});
+ assert.equal(extractSelectedReactRouterCoffeeHydration(empty,{source_url:url,
+  expected_name:'India Gundikhan Washed',expected_roaster:'Huckleberry Roasters'}),null);
+});
+test('compact HTML strips arbitrary executable scripts and retains only bounded selected-data stream',()=>{
+ const unsafe='<script>window.location.href="https://coffee.example.org/";</script>';
+ const html='<html><body>'+unsafe+selectedHydrogenStream()+'</body></html>';
+ const compact=compactCoffeeProductHtml(html);
+ assert.doesNotMatch(compact,/window\.location/);
+ assert.match(compact,/streamController\.enqueue/);
+ assert.equal(extractSelectedReactRouterCoffeeHydration(unsafe,{source_url:url,
+  expected_name:'India Gundikhan Washed',expected_roaster:'Huckleberry Roasters'}),null);
+});
+test('malformed or oversized Hydrogen data cannot become coffee facts',()=>{
+ const malformed='<script>window.__reactRouterContext.streamController.enqueue("{invalid}");</script>';
+ assert.equal(extractSelectedReactRouterCoffeeHydration(malformed,{source_url:url,
+  expected_name:'India Gundikhan Washed',expected_roaster:'Huckleberry Roasters'}),null);
+ const oversized='<script>window.__reactRouterContext.streamController.enqueue('+JSON.stringify('['+'0'.repeat(255_000)+']')+');</script>';
+ assert.equal(extractSelectedReactRouterCoffeeHydration(oversized,{source_url:url,
+  expected_name:'India Gundikhan Washed',expected_roaster:'Huckleberry Roasters'}),null);
+ assert.doesNotMatch(compactCoffeeProductHtml(oversized),/streamController\.enqueue/);
 });

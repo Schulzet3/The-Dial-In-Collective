@@ -60,6 +60,7 @@ expect(result?.ok===true,'actual_parser_product');
 expect(fields.name==='India Gundikhan Washed','selected_exact_name');
 expect(/huckleberry/i.test(fields.roaster||''),'roaster');
 expect(fields.process==='Washed','selected_process_washed');
+expect(fields.roast_level==='Medium','selected_explicit_roast_medium');
 expect(/butter cookie|macadamia|golden raisin/i.test(notes),'own_product_flavor_notes');
 expect(!/sangria|pomegranate|tropical fruit/i.test(notes),'no_natural_coffee_notes');
 expect(result?.ok&&/India Gundikhan Washed/.test(coffeeUrlPreviewMarkup(result)),'add_coffee_rendering');
@@ -72,7 +73,7 @@ const summary={
  guarded_transport:transport,
  public_shopify_json_ok:shopifyPreview?.ok===true,
  name:fields.name||null,roaster:fields.roaster||null,origin:fields.origin||null,
- process:fields.process||null,tasting_notes:fields.tasting_notes||null,
+ process:fields.process||null,roast_level:fields.roast_level||null,tasting_notes:fields.tasting_notes||null,
  failures,passed:failures.length===0,original603_unchanged:true,production_operations:0
 };
 writeFileSync(outputDir+'/afterproof.json',JSON.stringify(summary,null,2)+'\n');

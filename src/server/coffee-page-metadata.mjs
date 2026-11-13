@@ -16,6 +16,7 @@ import {productMarkup,coffeeHtmlAttributes,withoutDetachedFarmerProfiles} from '
 import {productCoffeeProse} from './coffee-product-prose.mjs';
 import {interpretAgtron,agtronExplanation} from './agtron-roast.mjs';
 import {extractSelectedNextCoffeeProduct} from './coffee-next-selected-product.mjs';
+import {extractSelectedReactRouterCoffeeHydration} from './coffee-react-router-hydration.mjs';
 import {selectedCoffeeHeroFacts,selectedCurrentOriginCaption,hasIncompatibleCurrentTastingList} from './coffee-selected-product-hero.mjs';
 import {COFFEE_FIELD_ALIASES,extractSemanticCoffeeSpecs,withoutEducationalCoffeeGeography} from './coffee-semantic-specs.mjs';
 import {equivalentCoffeeVarieties,compatibleGenericCoffeeVarieties,explicitCoffeeVarietyRefinement,coffeeOriginParts,compatibleCoffeeOrigins,isCoffeeBroadOrigin,orderExplicitCoffeeOriginTuple,withoutRepeatedCoffeeOriginSuffix} from './coffee-fact-compatibility.mjs';
@@ -2726,6 +2727,28 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     field:'tasting_notes',label:'Full literal selected lead tasting notes',
     value:lead.tasting_notes,source_url,source_type:'html',
     section:'Direct current product summary, not external review'
+   });
+  }
+ }
+
+ // Some Hydrogen/React Router stores ship the exact selected Product's
+ // current tastingNotes and roastLevel in bounded JSON hydration, rather
+ // than rendered product HTML or Product JSON-LD. Only the direct
+ // shop.products.$handle route and exact selected handle/name/vendor match
+ // may supply those fields; dozens of related coffees can share its stream.
+ // Never execute the script, borrow other-lot facts or replace direct evidence.
+ const selectedHydration=extractSelectedReactRouterCoffeeHydration(html,{
+  source_url,expected_name:fields.name,expected_roaster:fields.roaster
+ });
+ if(selectedHydration){
+  for(const [key,label] of [['tasting_notes','Exact selected tasting notes'],
+                             ['roast_level','Exact selected roast level']]){
+   const value=selectedHydration.fields[key];
+   if(!value||fields[key]||conflicts.has(key))continue;
+   fields[key]=value;
+   if(source_facts.length<384)source_facts.push({
+    field:key,label,value,source_url,source_type:'product_json',
+    section:'Current selected product React Router/Hydrogen loader data'
    });
   }
  }
