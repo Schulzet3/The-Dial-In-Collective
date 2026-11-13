@@ -9,10 +9,11 @@ if [[ -z "$SUPABASE_DB_URL" || -z "$BACKUP_AGE_RECIPIENT" || -z "$SUPABASE_PROJE
   echo "::error::Missing required backup configuration."
   exit 1
 fi
-case "$SUPABASE_DB_URL" in
-  *"$SUPABASE_PROJECT_REF"*) ;;
-  *) echo "::error::Database URL does not reference the approved Supabase project."; exit 1 ;;
-esac
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+if ! node "$SCRIPT_DIR/validate-db-target.mjs"; then
+  echo "::error::Backup database host or project identity is not approved." >&2
+  exit 1
+fi
 # Dedicated SSH Ed25519 public keys are supported by age too. MacOS can
 # generate these locally using ssh-keygen without installing extra software.
 # The corresponding SSH private key NEVER goes on the runner.

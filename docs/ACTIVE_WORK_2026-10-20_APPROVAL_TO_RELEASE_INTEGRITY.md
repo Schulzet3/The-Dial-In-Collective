@@ -1,3 +1,7 @@
+## 2026-11-13 — #28 main backup operations safety maintenance [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=1b522f40e5501c48ae55d86a89e114c724bc9218 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+Owner approved ONLY replacement of old main nightly published-source SHA with current verified Git-connected Netlify release SHA and correction of unsafe project-ref substring acceptance in main backup and isolated recovery; isolated tests only, no backup/DB/Auth/Drive mutation, archive deletion, Netlify build or app publication. Details and test outcomes: same-commit \`docs/OPS_RELEASE_CONTROLLER_WORK_JOURNAL_2026-10-21.md\`. Exact-hosted main CI and nonforce integration needed before COMPLETE. Historical backup acceptance and original operations/release authority preserved.
+
 ## November 3 UTC — #423 saved encrypted archive isolated restore VERIFIED PASS
 
 ## 2026-11-03 — first genuine encrypted Drive-equivalent archive restore VERIFIED PASS

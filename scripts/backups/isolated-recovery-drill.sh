@@ -2,15 +2,17 @@
 # Disposable recovery drill: live source is read-only, restore target is offline.
 set -Eeuo pipefail
 umask 077
-: "$SUPABASE_DB_URL"
-: "$SUPABASE_PROJECT_REF"
-if [[ -z "$SUPABASE_DB_URL" || "$SUPABASE_DB_URL" != *"$SUPABASE_PROJECT_REF"* ]]; then
-  echo "::error::Missing connection or unexpected Supabase project"; exit 1
+: "${SUPABASE_DB_URL:=}"
+: "${SUPABASE_PROJECT_REF:=}"
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+if [[ -z "$SUPABASE_DB_URL" || -z "$SUPABASE_PROJECT_REF" ]] ||
+   ! node "$SCRIPT_DIR/validate-db-target.mjs"; then
+  echo "::error::Recovery source database host or project identity is not approved." >&2
+  exit 1
 fi
 OUT="$RUNNER_TEMP/dic-restore-drill-$GITHUB_RUN_ID"
 CONTAINER="dic-restore-$GITHUB_RUN_ID"
 SOURCE_CONTAINER="dic-recovery-source-$GITHUB_RUN_ID"
-SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 mkdir -p "$OUT"
 cleanup() {
   docker rm -f "$SOURCE_CONTAINER" "$CONTAINER" >/dev/null 2>&1 || true
