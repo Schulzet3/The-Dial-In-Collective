@@ -54,3 +54,44 @@ test('#207 unrelated floral flavor cannot replace chosen selected flavor',()=>{
  const p=extractPublicCoffeeFacts(page(inline,'<aside><h2>Another Coffee</h2>Flavor: Jasmine, Bergamot</aside>'),{source_url:chosen207.url});
  assert.ok(!/jasmine|bergamot/iu.test(p.fields?.tasting_notes||''),JSON.stringify(p));
 });
+
+const selectedJson=(origin='United States',flavor='Almond, Chocolate')=>'<script type="application/ld+json">'+JSON.stringify({
+ '@context':'https://schema.org','@type':'Product',name:'Special House Blend',
+ url:chosen207.url,brand:{'@type':'Brand',name:'Lowcountry Coffee Roasters'},
+ additionalProperty:[{ '@type':'PropertyValue',name:'Origin',value:origin},
+  {'@type':'PropertyValue',name:'Flavor',value:flavor}]
+})+'</script>';
+const chosenMixed=(extra='',origin='United States',flavor='Almond, Chocolate')=>
+ page(inline+extra).replace('</head>',selectedJson(origin,flavor)+'</head>');
+test('#207 live conflicting selected HTML Flavor versus stale structured Product flavor is blank and reviewable',()=>{
+ const p=extractPublicCoffeeFacts(chosenMixed(),{source_url:chosen207.url});
+ assert.equal(p.ok,true,JSON.stringify(p));
+ assert.equal(p.fields?.tasting_notes,undefined,JSON.stringify(p));
+ assert.ok(p.conflicts?.includes('tasting_notes'),JSON.stringify(p));
+ assert.ok(p.source_facts?.some(f=>f.field==='tasting_notes'&&f.source_type==='html'&&
+  /Nutmeg, Whole Bean Vanilla, Creamy Butter/.test(f.value)&&f.conflicting===true),JSON.stringify(p));
+ assert.ok(p.source_facts?.some(f=>f.field==='tasting_notes'&&f.source_type==='product_json'&&
+  /Almond, Chocolate/.test(f.value)&&f.conflicting===true),JSON.stringify(p));
+});
+test('#207 unverified structured US country is not a growing origin for the selected house blend',()=>{
+ const p=extractPublicCoffeeFacts(chosenMixed(),{source_url:chosen207.url});
+ assert.equal(p.fields?.origin,undefined,JSON.stringify(p));
+ assert.ok(p.source_facts?.some(f=>f.field==='origin'&&f.source_type==='product_json'&&f.value==='United States'),JSON.stringify(p));
+});
+test('#207 corroborated exact selected HTML Origin: United States remains a legitimate origin',()=>{
+ const p=extractPublicCoffeeFacts(chosenMixed('<p>Origin: United States</p>'),{source_url:chosen207.url});
+ assert.equal(p.fields?.origin,'United States',JSON.stringify(p));
+});
+test('#207 current structured Product flavor identical to direct Flavor is retained',()=>{
+ const p=extractPublicCoffeeFacts(chosenMixed('', 'United States','Nutmeg, Whole Bean Vanilla, Creamy Butter'),{source_url:chosen207.url});
+ assert.ok(!p.conflicts?.includes('tasting_notes'),JSON.stringify(p));
+ assert.ok(/Nutmeg|Creamy Butter/iu.test(p.fields?.tasting_notes||''),JSON.stringify(p));
+});
+test('#207 unrelated selected coffee no false US country suppression when not a blend',()=>{
+ const name='Single Origin Nicaragua';
+ const html=chosenMixed().replaceAll('Special House Blend',name)
+   .replaceAll('https://lowcountrycoffeeroasters.com/products/special-house-blend',
+     'https://lowcountrycoffeeroasters.com/products/single-origin-nicaragua');
+ const p=extractPublicCoffeeFacts(html,{source_url:'https://lowcountrycoffeeroasters.com/products/single-origin-nicaragua'});
+ assert.equal(p.fields?.origin,'United States',JSON.stringify(p));
+});
