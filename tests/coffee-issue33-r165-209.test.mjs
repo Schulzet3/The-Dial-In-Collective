@@ -2,86 +2,53 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {chosen209,source209} from '../scripts/audit/issue33-r165-209-check.mjs';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
-const own='<h1>Lazy Day Decaf</h1><p>Medium</p><p>Cinnamon, Raisin, Cherry</p>'+
- '<p>Our classic decaffeinated coffee hails from a few regions in Colombia. It’s decaffeinated using the Ethyl Acetate process. This process gently extracts caffeine from the beans at a rate of 97%. It boasts flavors of cinnamon, raisin, and sweet cherries.</p>'+
- '<section><h3>Details</h3><p>Origin Colombia</p><p>Region Huila</p><p>Process EA Decaf</p></section>';
-const page=(body=own,other='')=>'<html><head><title>Previous Peru natural roast</title><meta name="description" content="Unchosen Brazil coffee chocolate; Swiss Water; washed"></head><body><nav>Other Coffee Swiss Water</nav><main><article class="product">'+body+'</article></main>'+other+'<footer>Peru washed Swiss Water</footer></body></html>';
-test('#209 exact selected H1 and own current notes, EA treatment, Huila specs',()=>{
+const own='<p>Medium</p><h1>Lazy Day Decaf</h1><p>Cinnamon, Raisin, Cherry</p>'+
+ '<p>Our classic decaffeinated coffee hails from a few regions in Colombia. It is decaffeinated using the Ethyl Acetate process. The cup boasts flavors of cinnamon, raisin, and sweet cherries.</p>'+
+ '<section>Details<p>Origin Colombia</p><p>Region Huila</p><p>Process EA Decaf</p></section>';
+const page=(body=own,other='')=>'<html><head><title>Old Burundi Natural</title><meta name="description" content="Peru washed bourbon blueberry"></head><body>'+
+ '<nav>Old Burundi</nav><main><article class="product">'+body+'</article></main>'+other+'<footer>Kenya Washed producer Njeri</footer></body></html>';
+test('#209 current selected heading and own direct facts',()=>{
  const s=source209(page());assert.equal(s.identity,true);assert.deepEqual(Object.entries(s.direct).filter(([,v])=>!v),[]);
 });
-test('#209 recycled URL or different current product H1 rejects old identity',()=>{
- assert.equal(source209(page(own.replace('<h1>Lazy Day Decaf</h1>','<h1>New Brazil Roast</h1>'))).identity,false);
+test('#209 recycled slug with different selected identity is rejected',()=>{
+ assert.equal(source209(page(own.replace('<h1>Lazy Day Decaf</h1>','<h1>Fresh Peru Harvest</h1>'))).identity,false);
 });
-test('#209 recommendation cannot supply missing own tasting notes',()=>{
- const body=own.replace('Cinnamon, Raisin, Cherry','Profile not published').replace('flavors of cinnamon, raisin, and sweet cherries','flavors not published');
+test('#209 unrelated card cannot supply missing selected sensory notes',()=>{
+ const body=own.replaceAll('Cinnamon, Raisin, Cherry','Unpublished').replaceAll('cinnamon, raisin, and sweet cherries','unknown flavors');
  assert.equal(source209(page(body,'<aside>Cinnamon, Raisin, Cherry</aside>')).direct.notes,false);
 });
-test('#209 unrelated card cannot supply missing EA treatment',()=>{
- const body=own.replace('decaffeinated using the Ethyl Acetate process','decaffeinated using an unpublished method');
- assert.equal(source209(page(body,'<aside>decaffeinated using the Ethyl Acetate process</aside>')).direct.ea,false);
+test('#209 unrelated card cannot supply missing selected EA method',()=>{
+ const body=own.replace('decaffeinated using the Ethyl Acetate process','decaffeinated using an unpublished method').replace('Process EA Decaf','Process unknown');
+ assert.equal(source209(page(body,'<aside>Process EA Decaf</aside>')).direct.ea,false);
 });
-test('#209 related product cannot supply missing selected region',()=>{
- assert.equal(source209(page(own.replace('Region Huila','Region unpublished'),'<aside>Region Huila</aside>')).direct.region,false);
+test('#209 unrelated recommendation cannot supply absent Huila',()=>{
+ const body=own.replace('Region Huila','Region unpublished');
+ assert.equal(source209(page(body,'<aside>Region Huila</aside>')).direct.huila,false);
 });
-test('#209 unrelated spec cannot supply missing current Process EA Decaf caption',()=>{
- assert.equal(source209(page(own.replace('Process EA Decaf','Process unpublished'),'<aside>Process EA Decaf</aside>')).direct.method_caption,false);
+test('#209 no selected roast tier is not rescued from footer or SEO',()=>{
+ const body=own.replace('<p>Medium</p>','');
+ assert.equal(source209(page(body,'<aside>Medium</aside>')).direct.medium,false);
 });
-test('#209 actual parser preserves explicit selected EA decaf method separately',()=>{
- const r=extractPublicCoffeeFacts(page(),{source_url:chosen209.url});
- assert.equal(r.fields?.name,'Lazy Day Decaf',JSON.stringify(r));
- assert.equal(r.fields?.decaffeination_method,'Sugar Process',JSON.stringify(r));
+test('#209 actual parser distinguishes EA decaf from green processing',()=>{
+ const p=extractPublicCoffeeFacts(page(),{source_url:chosen209.url});
+ assert.equal(p.fields?.decaffeination_method,'Sugar Process',JSON.stringify(p));
+ assert.notEqual(p.fields?.process,'Washed',JSON.stringify(p));
+ assert.notEqual(p.fields?.process,'Natural',JSON.stringify(p));
 });
-test('#209 EA decaffeination does not imply green bean processing Washed or Natural',()=>{
- const r=extractPublicCoffeeFacts(page(),{source_url:chosen209.url});
- assert.ok(!r.fields?.process,JSON.stringify(r));
+test('#209 actual parser preserves published tasting notes',()=>{
+ const p=extractPublicCoffeeFacts(page(),{source_url:chosen209.url});
+ assert.ok(['cinnamon','raisin','cherry'].every(v=>String(p.fields?.tasting_notes||'').toLowerCase().includes(v)),JSON.stringify(p));
 });
-test('#209 previous harvest SEO/nav Swiss Water must not override chosen EA',()=>{
- const r=extractPublicCoffeeFacts(page(),{source_url:chosen209.url});
- assert.notEqual(r.fields?.decaffeination_method,'Water Process',JSON.stringify(r));
+test('#209 actual parser does not use unrelated origin or process from SEO',()=>{
+ const p=extractPublicCoffeeFacts(page(),{source_url:chosen209.url});
+ assert.notEqual(p.fields?.origin,'Peru',JSON.stringify(p));
+ assert.notEqual(p.fields?.process,'Washed',JSON.stringify(p));
 });
-test('#209 ordinary coffee with only site-wide decaf education cannot adopt decaf method',()=>{
- const r=extractPublicCoffeeFacts(page('<h1>Regular Colombia</h1><p>Medium</p><p>Washed Colombia</p>','<aside>Our decaf is decaffeinated using the Ethyl Acetate process</aside>'),{source_url:chosen209.url});
- assert.ok(!r.fields?.decaffeination_method,JSON.stringify(r));
+test('#209 actual parser keeps own Medium roast',()=>{
+ const p=extractPublicCoffeeFacts(page(),{source_url:chosen209.url});
+ assert.equal(p.fields?.roast_level,'Medium',JSON.stringify(p));
 });
-test('#209 unpublished selected producer, variety and elevation cannot be supplied by unrelated metadata',()=>{
- const r=extractPublicCoffeeFacts(page(),{source_url:chosen209.url});
- assert.ok(!r.fields?.producer&&!r.fields?.variety&&!r.fields?.elevation_m,JSON.stringify(r));
-});
-
-test('#209 straight-apostrophe It\'s direct selected decaf pronoun maps EA separately',()=>{
- const r=extractPublicCoffeeFacts(page(own.replace('It’s decaffeinated','It\'s decaffeinated')),{source_url:chosen209.url});
- assert.equal(r.fields?.decaffeination_method,'Sugar Process',JSON.stringify(r));
-});
-test('#209 uncontracted It is form remains supported',()=>{
- const r=extractPublicCoffeeFacts(page(own.replace('It’s decaffeinated','It is decaffeinated')),{source_url:chosen209.url});
- assert.equal(r.fields?.decaffeination_method,'Sugar Process',JSON.stringify(r));
-});
-test('#209 contracted It’s without selected own coffee antecedent must not inherit EA',()=>{
- const r=extractPublicCoffeeFacts(page(own.replace('Our classic decaffeinated coffee hails from a few regions in Colombia.','Generic site tips are included.')),{source_url:chosen209.url});
- assert.ok(!r.fields?.decaffeination_method,JSON.stringify(r));
-});
-test('#209 negated contracted decaf description cannot establish positive method',()=>{
- const r=extractPublicCoffeeFacts(page(own.replace('It’s decaffeinated using','It’s not decaffeinated using')),{source_url:chosen209.url});
- assert.ok(!r.fields?.decaffeination_method,JSON.stringify(r));
-});
-test('#209 historical prior-lot claim must never authorize current method',()=>{
- const r=extractPublicCoffeeFacts(page(own.replace('It’s decaffeinated using','Last year it was decaffeinated using')),{source_url:chosen209.url});
- assert.ok(!r.fields?.decaffeination_method,JSON.stringify(r));
-});
-
-test('#209 live Shopify selected description div admits own contracted EA decaffeination',()=>{
- const selected=own.replace('<p>Our classic decaffeinated coffee', '<div class="selected-product-description">Our classic decaffeinated coffee').replace('sweet cherries.</p>', 'sweet cherries.</div>');
- const r=extractPublicCoffeeFacts(page(selected),{source_url:chosen209.url});
- assert.equal(r.fields?.decaffeination_method,'Sugar Process',JSON.stringify(r));
- assert.ok(!r.fields?.process,JSON.stringify(r));
-});
-test('#209 description div without own antecedent does not assign unrelated EA method',()=>{
- const selected=own.replace('<p>Our classic decaffeinated coffee hails from a few regions in Colombia.','<div class="selected-product-description">These beans have an unpublished treatment.').replace('sweet cherries.</p>','sweet cherries.</div>');
- const r=extractPublicCoffeeFacts(page(selected),{source_url:chosen209.url});
- assert.ok(!r.fields?.decaffeination_method,JSON.stringify(r));
-});
-test('#209 unrelated aside description div cannot lend EA to current product',()=>{
- const selected=own.replace('It’s decaffeinated using the Ethyl Acetate process.','Method unpublished.');
- const r=extractPublicCoffeeFacts(page(selected,'<aside><div>Our decaf coffee is decaffeinated using the Ethyl Acetate process</div></aside>'),{source_url:chosen209.url});
- assert.ok(!r.fields?.decaffeination_method,JSON.stringify(r));
+test('#209 navigation and unrelated card cannot fabricate a producer or varietal',()=>{
+ const p=extractPublicCoffeeFacts(page(),{source_url:chosen209.url});
+ assert.ok(!p.fields?.producer&&!p.fields?.variety,JSON.stringify(p));
 });

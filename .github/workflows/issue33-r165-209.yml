@@ -1,4 +1,4 @@
-name: DIC Issue33 R165 original209 exact selected source
+name: DIC Issue33 R165 original209 selected EA decaf
 on:
   pull_request:
     branches: [development/backend-foundation]
@@ -26,21 +26,20 @@ jobs:
       - uses: actions/setup-node@v7.1.0
         with:
           node-version: '22'
-      - name: Selected source positive and hostile tests
+      - name: Selected positive/hostile synthetic source and actual parser tests
         run: node --test tests/coffee-issue33-r165-209.test.mjs
-      - name: Guarded official HTTPS and actual extractor (bounded diagnostic after test failure)
-        if: always()
+      - name: Guarded original selected official HTTPS and actual parser
         env:
           DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '209'
           DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r165
         run: node scripts/audit/issue33-original603-focused-source-review.mjs
-      - name: Strict original209 current-source afterproof
+      - name: Strict current official source and parser afterproof
         if: always()
         env:
           DIC_ISSUE33_R165_VERIFY: '1'
           DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r165
         run: node scripts/audit/issue33-r165-209-check.mjs
-      - name: Preserve exact raw source and failure artifacts
+      - name: Preserve selected official raw HTML and strict failures
         if: always()
         uses: actions/upload-artifact@v7
         with:
