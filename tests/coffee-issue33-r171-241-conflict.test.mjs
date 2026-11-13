@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {selectedCurrentCorroboratedHeroNotesConflict as own} from '../src/server/coffee-selected-hero-notes-conflict.mjs';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
+import {productCoffeeProse} from '../src/server/coffee-product-prose.mjs';
 const selected=(flavors='Tangerine, Maple, Hazelnut',story='Buesaco starts with Tangerine, then Maple Syrup, and finishes with Hazelnut.',notes='Cherry, Tangerine, Nougat')=>
  '<html><head><title>Historic Peru coffee</title></head><body><nav>Related coffees</nav><article class="product">'+
  '<h1>Buesaco</h1><p>SMALLHOLDER FARMS</p><p>BUESACO, COLOMBIA</p><p>'+flavors+'</p>'+
@@ -10,7 +11,8 @@ const selected=(flavors='Tangerine, Maple, Hazelnut',story='Buesaco starts with 
 const clean=x=>String(x||'').replace(/<[^<>]{0,2000}>/gu,' ').replace(/\s+/gu,' ').trim();
 test('R171 selected current Buesaco story corroborates distinct three-flavor hero',()=>{
  const v=own(selected(),{name:'Buesaco',notes:'Cherry, Tangerine, Nougat',clean});
- assert.equal(v?.hero,'Tangerine, Maple, Hazelnut');assert.equal(v?.printed,'Cherry, Tangerine, Nougat');
+ assert.ok(v,JSON.stringify(productCoffeeProse(selected(),clean).map(b=>({tag:b.tag,text:b.text,section:b.section,start:b.start,end:b.end}))).slice(0,5000));
+ assert.equal(v.hero,'Tangerine, Maple, Hazelnut');assert.equal(v.printed,'Cherry, Tangerine, Nougat');
 });
 test('R171 changed chosen H1 does not carry archived sensory conflict',()=>{
  assert.equal(own(selected().replace('<h1>Buesaco</h1>','<h1>Peru Current</h1>'),{name:'Buesaco',notes:'Cherry, Tangerine, Nougat',clean}),null);
