@@ -44,11 +44,15 @@ if(process.env.DIC_ISSUE33_R171_VERIFY==='1'){
  check(norm(f.origin).includes('colombia'),'selected_origin_country');
  check(!f.espresso_recipe,'kalita_filter_recipe_not_espresso');
  check(r.add_coffee_ui_rendered===true&&r.source_review_rendered===true,'add_coffee_and_source_review');
- const conflicting=(r.conflicts||[]).some(x=>String(x.field||x.key||'').toLowerCase()==='tasting_notes');
+ const conflicting=(r.conflicts||[]).some(x=>(typeof x==='string'?x:x.field||x.key)==='tasting_notes');
  // Different directly published lists must be reviewable rather than silently
  // resolving an unproven sensory winner. This is an acceptance diagnostic,
  // not an instruction to manufacture a canonical combination.
- check(conflicting||(!f.tasting_notes&&r.source_review_rendered===true),'same_selected_sensory_disagreement_not_silently_autofilled');
+ check(conflicting&&!f.tasting_notes,'same_selected_sensory_disagreement_not_silently_autofilled');
+ const alternatives=(r.source_facts||[]).filter(f=>f.field==='tasting_notes').map(f=>norm(f.value));
+ check(alternatives.some(x=>x.includes(norm('Cherry, Tangerine, Nougat')))&&
+  alternatives.some(x=>x.includes(norm('Tangerine, Maple, Hazelnut'))),
+  'both_literal_selected_sensory_sources_reviewable');
  const out={case:241,source_sha:e?.source_sha,passed:failures.length===0,failures,current,fields:f,conflicts:r.conflicts||[],html_sha256:html?sha(html):null,evidence_sha256:raw?sha(raw):null,html_bytes:html?.length||0,all_603_manually_certified:false,production_operations:0};
  writeFileSync(join(dir,'r171-241-afterproof.json'),JSON.stringify(out,null,2)+'\n');
  console.log('[DIC33 R171 selected Buesaco acceptance] '+JSON.stringify(out));

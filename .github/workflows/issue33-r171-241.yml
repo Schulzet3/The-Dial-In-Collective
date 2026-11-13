@@ -6,6 +6,10 @@ on:
       - .github/workflows/issue33-r171-241.yml
       - scripts/audit/issue33-r171-241-check.mjs
       - tests/coffee-issue33-r171-241.test.mjs
+      - tests/coffee-issue33-r171-241-conflict.test.mjs
+      - src/server/coffee-selected-hero-notes-conflict.mjs
+      - src/server/coffee-page-metadata.mjs
+      - docs/RELEASE_QUEUE.json
       - docs/workstreams/ops-issue33-r171-241-20261113.md
   push:
     branches: [development/backend-foundation]
@@ -13,6 +17,10 @@ on:
       - .github/workflows/issue33-r171-241.yml
       - scripts/audit/issue33-r171-241-check.mjs
       - tests/coffee-issue33-r171-241.test.mjs
+      - tests/coffee-issue33-r171-241-conflict.test.mjs
+      - src/server/coffee-selected-hero-notes-conflict.mjs
+      - src/server/coffee-page-metadata.mjs
+      - docs/RELEASE_QUEUE.json
 permissions:
   contents: read
 jobs:
@@ -27,7 +35,7 @@ jobs:
         with:
           node-version: '22'
       - name: Bounded selected product positive and adversarial tests
-        run: node --test tests/coffee-issue33-r171-241.test.mjs
+        run: node --test tests/coffee-issue33-r171-241.test.mjs tests/coffee-issue33-r171-241-conflict.test.mjs
       - name: Fresh guarded official HTTPS and actual parser for original241
         env:
           DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '241'
