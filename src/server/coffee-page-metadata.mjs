@@ -258,11 +258,16 @@ function samePage(raw,target){
   const host=x=>x.toLowerCase().replace(/^www\./,'');
   const path=x=>x.replace(/\/+$/,'');
   if(host(a.hostname)!==host(b.hostname))return false;
-  // Tracking parameters do not identify a different coffee. Product IDs
-  // and arbitrary query selectors do; only Shopify purchase variants may
-  // share their release-level /products/handle identity.
-  const query=url=>[...url.searchParams].filter(([key])=>!/^utm_|^(?:srsltid|gclid|fbclid|msclkid|mc_cid|mc_eid)$/i.test(key)&&
-   !(key==='variant'&&/\/products\/[^/]+\/?$/i.test(url.pathname))).sort(([a,av],[b,bv])=>a.localeCompare(b)||av.localeCompare(bv));
+  // Tracking is not coffee identity. On an exact headless /shop/products
+  // route a numeric bag Size (12 OZ, 2 LB) only selects weight, not the lot.
+  // Keep every other arbitrary query parameter identity-sensitive.
+  const bagSize=(key,value,url)=>/^size$/i.test(key)&&
+   /^\/shop\/products\/[\p{L}\p{N}_®™.+~-]+\/?$/iu.test(url.pathname)&&
+   /^\s*\d{1,3}(?:\.\d{1,2})?\s*(?:oz|lb|lbs|g|kg)\s*$/i.test(value);
+  const query=url=>[...url.searchParams].filter(([key,value])=>
+   !/^utm_|^(?:srsltid|gclid|fbclid|msclkid|mc_cid|mc_eid)$/i.test(key)&&
+   !(key==='variant'&&/\/products\/[^/]+\/?$/i.test(url.pathname))&&
+   !bagSize(key,value,url)).sort(([a,av],[b,bv])=>a.localeCompare(b)||av.localeCompare(bv));
   if(JSON.stringify(query(a))!==JSON.stringify(query(b)))return false;
   if(path(a.pathname)===path(b.pathname))return true;
   const handle=x=>x.match(/\/(?:products)\/([^/]+)\/?$/i)?.[1]||'';

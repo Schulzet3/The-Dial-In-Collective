@@ -65,8 +65,9 @@ export function quarantineReusedShopifyProductCopy(description,{title='',handle=
 
 export function shopifyProductRequest(raw){
  const url=safeCoffeeUrl(raw);if(!url)return null;
- // Locale prefix is optional; collections can refer to the same product.
- const m=url.pathname.match(/^\/(?:([a-z]{2}(?:-[a-z]{2})?)\/)?(?:collections\/[a-z0-9][a-z0-9-]*\/)?products\/([^/]+)\/?$/i);
+ // Locale/collection aliases and headless /shop/products paths identify
+ // an exact same-host Shopify product handle, never a broader catalog.
+ const m=url.pathname.match(/^\/(?:([a-z]{2}(?:-[a-z]{2})?)\/)?(?:shop\/)?(?:collections\/[a-z0-9][a-z0-9-]*\/)?products\/([^/]+)\/?$/i);
  const handle=m&&coffeeProductHandle(m[2]);if(!handle||/[.+~]/.test(handle))return null;
  const path='/'+(m[1]?m[1]+'/':'')+'products/'+m[2]+'.js';
  const endpoint=new URL(path,url.origin).toString();

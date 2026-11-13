@@ -1,0 +1,44 @@
+name: DIC Issue33 Huckleberry exact public product
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - src/server/coffee-page-metadata.mjs
+      - src/server/coffee-shopify-ajax.mjs
+      - tests/coffee-issue33-huckleberry-shop-products.test.mjs
+      - scripts/audit/issue33-huckleberry-current-check.mjs
+      - .github/workflows/issue33-huckleberry-shop-products.yml
+      - docs/workstreams/ops-issue33-huckleberry-shop-products-20261112.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - src/server/coffee-page-metadata.mjs
+      - src/server/coffee-shopify-ajax.mjs
+      - tests/coffee-issue33-huckleberry-shop-products.test.mjs
+      - scripts/audit/issue33-huckleberry-current-check.mjs
+      - .github/workflows/issue33-huckleberry-shop-products.yml
+permissions:
+  contents: read
+jobs:
+  selected-source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Focused synthetic positive and hostile tests
+        run: node --test tests/coffee-issue33-huckleberry-shop-products.test.mjs
+      - name: Guarded public Huckleberry selected source and strict actual parser
+        run: node scripts/audit/issue33-huckleberry-current-check.mjs
+      - name: Preserve current public page and afterproof for independent review
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-huckleberry-current
+          path: /tmp/dic33-huckleberry/
+          retention-days: 2
+          if-no-files-found: warn
