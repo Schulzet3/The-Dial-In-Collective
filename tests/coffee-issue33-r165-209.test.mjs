@@ -68,3 +68,20 @@ test('#209 historical prior-lot claim must never authorize current method',()=>{
  const r=extractPublicCoffeeFacts(page(own.replace('It’s decaffeinated using','Last year it was decaffeinated using')),{source_url:chosen209.url});
  assert.ok(!r.fields?.decaffeination_method,JSON.stringify(r));
 });
+
+test('#209 live Shopify selected description div admits own contracted EA decaffeination',()=>{
+ const selected=own.replace('<p>Our classic decaffeinated coffee', '<div class="selected-product-description">Our classic decaffeinated coffee').replace('sweet cherries.</p>', 'sweet cherries.</div>');
+ const r=extractPublicCoffeeFacts(page(selected),{source_url:chosen209.url});
+ assert.equal(r.fields?.decaffeination_method,'Sugar Process',JSON.stringify(r));
+ assert.ok(!r.fields?.process,JSON.stringify(r));
+});
+test('#209 description div without own antecedent does not assign unrelated EA method',()=>{
+ const selected=own.replace('<p>Our classic decaffeinated coffee hails from a few regions in Colombia.','<div class="selected-product-description">These beans have an unpublished treatment.').replace('sweet cherries.</p>','sweet cherries.</div>');
+ const r=extractPublicCoffeeFacts(page(selected),{source_url:chosen209.url});
+ assert.ok(!r.fields?.decaffeination_method,JSON.stringify(r));
+});
+test('#209 unrelated aside description div cannot lend EA to current product',()=>{
+ const selected=own.replace('It’s decaffeinated using the Ethyl Acetate process.','Method unpublished.');
+ const r=extractPublicCoffeeFacts(page(selected,'<aside><div>Our decaf coffee is decaffeinated using the Ethyl Acetate process</div></aside>'),{source_url:chosen209.url});
+ assert.ok(!r.fields?.decaffeination_method,JSON.stringify(r));
+});

@@ -348,7 +348,7 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
   // the subsequent pronoun refer to THIS named decaf, not another offering.
   // Reject site/educational context, historical alternatives and missing H1.
   for(const pronoun of line.matchAll(CURRENT_SELECTED_BEAN_PRONOUN_METHOD)){
-   if(decafOnlyCoffee(name)&&b.tag==='p'&&line.length<=650&&
+   if(decafOnlyCoffee(name)&&['p','div'].includes(b.tag)&&!b.educational&&line.length<=650&&
      !NONCURRENT_DECAF_METHOD.test(line)&&
      /\b(?:this|our)\s+(?:[\p{L}\p{M}-]+\s+){0,4}(?:beans?|coffee)\b/iu.test(line.slice(0,pronoun.index))&&
      inferDecaffeinationMethod({name,selectedMethod:pronoun[0]})&&
