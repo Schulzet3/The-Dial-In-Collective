@@ -16,14 +16,16 @@ import {productMarkup,coffeeHtmlAttributes,withoutDetachedFarmerProfiles} from '
 import {productCoffeeProse} from './coffee-product-prose.mjs';
 import {interpretAgtron,agtronExplanation} from './agtron-roast.mjs';
 import {extractSelectedNextCoffeeProduct} from './coffee-next-selected-product.mjs';
+import {extractSelectedReactRouterCoffeeHydration} from './coffee-react-router-hydration.mjs';
 import {selectedCoffeeHeroFacts,selectedCurrentOriginCaption,hasIncompatibleCurrentTastingList} from './coffee-selected-product-hero.mjs';
+import {selectedCurrentCorroboratedHeroNotesConflict} from './coffee-selected-hero-notes-conflict.mjs';
 import {COFFEE_FIELD_ALIASES,extractSemanticCoffeeSpecs,withoutEducationalCoffeeGeography} from './coffee-semantic-specs.mjs';
 import {equivalentCoffeeVarieties,compatibleGenericCoffeeVarieties,explicitCoffeeVarietyRefinement,coffeeOriginParts,compatibleCoffeeOrigins,isCoffeeBroadOrigin,orderExplicitCoffeeOriginTuple,withoutRepeatedCoffeeOriginSuffix} from './coffee-fact-compatibility.mjs';
 import {equivalentCoffeeProductNames,preferredCoffeeRoasterName,selectedCoffeeNameWithoutPrice} from './coffee-product-identity.mjs';
 import {isolateCoffeeIdentityCohorts} from './coffee-source-identity-scope.mjs';
 import {extractCoffeeGeographyEntityRoles,cleanCoffeeGeographyEntityPrefix} from './coffee-geography-entity-roles.mjs';
 import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProductFlavorProfileEvidence,refineSelectedNamedTastingNotes,normalizeExplicitCoffeeTastingNotes,equivalentCoffeeTastingNotes,coffeeTastingNotesSubset} from './coffee-flavor-evidence.mjs';
-import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,refineSelectedCurrentFlavorBase,selectedCoffeeSupplementalTastingProse} from './coffee-selected-description-sensory.mjs';
+import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,refineSelectedCurrentTrailingFlavorNote,refineSelectedCurrentFlavorBase,refineSelectedCurrentSensoryArc,selectedCoffeeSupplementalTastingProse,selectedCurrentProductOvertone} from './coffee-selected-description-sensory.mjs';
 import {selectedCoffeeMilkSensoryContext} from './coffee-selected-milk-sensory-context.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {parseCoffeeElevation,equivalentCoffeeElevations,compatibleCoffeeElevations,extractCoffeeElevationEvidence} from './coffee-elevation-evidence.mjs';
@@ -258,11 +260,16 @@ function samePage(raw,target){
   const host=x=>x.toLowerCase().replace(/^www\./,'');
   const path=x=>x.replace(/\/+$/,'');
   if(host(a.hostname)!==host(b.hostname))return false;
-  // Tracking parameters do not identify a different coffee. Product IDs
-  // and arbitrary query selectors do; only Shopify purchase variants may
-  // share their release-level /products/handle identity.
-  const query=url=>[...url.searchParams].filter(([key])=>!/^utm_|^(?:srsltid|gclid|fbclid|msclkid|mc_cid|mc_eid)$/i.test(key)&&
-   !(key==='variant'&&/\/products\/[^/]+\/?$/i.test(url.pathname))).sort(([a,av],[b,bv])=>a.localeCompare(b)||av.localeCompare(bv));
+  // Tracking is not coffee identity. On an exact headless /shop/products
+  // route a numeric bag Size (12 OZ, 2 LB) only selects weight, not the lot.
+  // Keep every other arbitrary query parameter identity-sensitive.
+  const bagSize=(key,value,url)=>/^size$/i.test(key)&&
+   /^\/shop\/products\/[\p{L}\p{N}_®™.+~-]+\/?$/iu.test(url.pathname)&&
+   /^\s*\d{1,3}(?:\.\d{1,2})?\s*(?:oz|lb|lbs|g|kg)\s*$/i.test(value);
+  const query=url=>[...url.searchParams].filter(([key,value])=>
+   !/^utm_|^(?:srsltid|gclid|fbclid|msclkid|mc_cid|mc_eid)$/i.test(key)&&
+   !(key==='variant'&&/\/products\/[^/]+\/?$/i.test(url.pathname))&&
+   !bagSize(key,value,url)).sort(([a,av],[b,bv])=>a.localeCompare(b)||av.localeCompare(bv));
   if(JSON.stringify(query(a))!==JSON.stringify(query(b)))return false;
   if(path(a.pathname)===path(b.pathname))return true;
   const handle=x=>x.match(/\/(?:products)\/([^/]+)\/?$/i)?.[1]||'';
@@ -1324,6 +1331,17 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    if(group&&p===group)return {ok:false,reason:'ambiguous_or_missing_product'};
   }
  }
+ // Some public storefront responses are only a client hydration shell:
+ // the document has no rendered selected product, and no linked or uniquely
+ // matching structured Product exists. Page SEO/OG descriptions may still
+ // name a plausible coffee and list elaborate facts. Those are NOT current
+ // selected-product proof and must not become one-click canonical autofill.
+ // Preserve source URL for manual entry rather than trusting a shell's SEO.
+ const body=html.match(/<body\b[^>]*>([\s\S]{0,200000}?)<\/body\s*>/i)?.[1]||'';
+ const emptyApp=/\bid\s*=\s*(?:["']app["'])[^>]*>\s*<\/div\s*>/i.test(body)&&
+  !/<(?:main|article|h[1-6])\b/i.test(body);
+ if(!all.length&&!explicitHeading&&emptyApp)
+  return {ok:false,reason:'ambiguous_or_missing_product'};
  if(!p){
   let likelyPath=false;
   try{likelyPath=/\/(products?|coffee|coffees|beans?|shop)\/[^/]+/i.test(new URL(source_url).pathname);}catch{}
@@ -1995,11 +2013,37 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    if(description)fields.tasting_notes=description;
    const finish=refineSelectedCurrentLiteralFinish(currentProduct,{clean,notes:fields.tasting_notes});
    if(finish)fields.tasting_notes=finish;
+   // The selected current first-person cup statement can explicitly add
+   // one final flavor note after its complete already accepted prefix.
+   const trailing=refineSelectedCurrentTrailingFlavorNote(currentProduct,{clean,notes:fields.tasting_notes});
+   if(trailing)fields.tasting_notes=trailing;
    // The chosen current paragraph's literal base and identical already
    // accepted note suffix are a higher-authority direct description, even
    // when an inferred notes caption has been indexed as a printed profile.
    const flavorBase=refineSelectedCurrentFlavorBase(product,{clean,notes:fields.tasting_notes});
    if(flavorBase)fields.tasting_notes=flavorBase;
+   // A selected current unlabelled sensory arc may add literal aroma/finish
+   // only when no stronger printed or structured note list exists.
+   if(!printedNotes.length&&!structuredFlavorByFields.get(fields)){
+    const arc=refineSelectedCurrentSensoryArc(currentProduct,{clean,notes:fields.tasting_notes});
+    if(arc)fields.tasting_notes=arc;
+   }
+  }
+  // Strong selected current tasting facts outrank a generic roast-guide's
+  // weaker tasting suggestion. This specifically requires an own-product
+  // description and rejects structured/printed direct conflicts, conditions
+  // and nonselected product prose.
+  if(!printedNotes.length&&!structuredFlavorByFields.get(fields)&&
+     !conflicts.has('tasting_notes')&&!seoFallbackByFields.get(fields)?.has('tasting_notes')){
+    const overtone=selectedCurrentProductOvertone(currentProduct,{clean});
+    if(overtone){
+      fields.tasting_notes=overtone.value;
+      if(source_facts.length<384)source_facts.push({
+        field:'tasting_notes',label:'Selected current product literal overtones',
+        value:overtone.value,source_type:'html',source_url,
+        section:overtone.section||'Exact selected coffee description'
+      });
+    }
   }
   // A distinct current selected flavor sentence is review evidence, not a
   // license to concatenate notes or override a stronger literal Flavor label.
@@ -2010,6 +2054,24 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     source_facts.push({field:'sensory_context',
      label:'Selected current coffee additional flavor prose',value:additional,source_url,
      source_type:'html',section:'Exact selected product unlabeled tasting description'});
+  }
+  // Different selected current hero and explicit Tasting Notes are both
+  // directly sourced; preserve both for member review, never choose a winner.
+  const selectedHeroConflict=fields.tasting_notes&&printedNotes.length&&
+   !seoFallbackByFields.get(fields)?.has('tasting_notes')
+   ?selectedCurrentCorroboratedHeroNotesConflict(canonicalProduct,{
+     name:fields.name,notes:fields.tasting_notes,clean}):null;
+  if(selectedHeroConflict&&!conflicts.has('tasting_notes')){
+   rememberCoffeeReviewCandidate(fields,'tasting_notes',fields.tasting_notes,
+     'Selected current explicit Tasting Notes');
+   rememberCoffeeReviewCandidate(fields,'tasting_notes',selectedHeroConflict.hero,
+     'Selected current hero and named narrative');
+   if(source_facts.length<384)source_facts.push({
+    field:'tasting_notes',label:'Current selected hero flavor profile',
+    value:selectedHeroConflict.hero,source_url,source_type:'html',
+    section:'Exact selected H1 and corroborating named coffee narrative',conflicting:true
+   });
+   conflicts.add('tasting_notes');delete fields.tasting_notes;
   }
   // Flag only direct selected-source disagreements, not unsupported SEO.
   // A higher-priority current description may remain the canonical suggestion
@@ -2706,6 +2768,72 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     field:'tasting_notes',label:'Full literal selected lead tasting notes',
     value:lead.tasting_notes,source_url,source_type:'html',
     section:'Direct current product summary, not external review'
+   });
+  }
+ }
+
+ // Some Hydrogen/React Router stores ship the exact selected Product's
+ // current tastingNotes and roastLevel in bounded JSON hydration, rather
+ // than rendered product HTML or Product JSON-LD. Only the direct
+ // shop.products.$handle route and exact selected handle/name/vendor match
+ // may supply those fields; dozens of related coffees can share its stream.
+ // Never execute the script, borrow other-lot facts or replace direct evidence.
+ const selectedHydration=extractSelectedReactRouterCoffeeHydration(html,{
+  source_url,expected_name:fields.name,expected_roaster:fields.roaster
+ });
+ if(selectedHydration){
+  // An unrelated product card can be inside the same broad storefront <main>.
+  // Exact selected-route, handle, title and vendor evidence outranks ONLY
+  // that card's unscoped roast text, not a contradictory current-lot label.
+  const selectedRoast=selectedHydration.fields.roast_level;
+  if(selectedRoast&&fields.roast_level&&fields.roast_level!==selectedRoast&&
+     !conflicts.has('roast_level')){
+   const wrongRoast=fields.roast_level;
+   const relatedCard=[...html.matchAll(/<h[2-6]\b[^>]{0,800}>([^<]{2,180})<\/h[2-6]\s*>/giu)]
+    .map(match=>clean(match[1],180))
+    .filter(name=>name&&!equivalentCoffeeProductNames(name,fields.name)&&
+      keyOf(name).endsWith(keyOf(wrongRoast)+'roast'));
+   const contraryCurrent=source_facts.some(fact=>
+    fact.field==='roast_level'&&
+    /(?:exact selected|current selected|selected coffee|current product)/i.test(String(fact.section||''))&&
+    normalizeRoastLabel(String(fact.value||''))===wrongRoast);
+   if(roast_evidence.source==='product_explicit_text'&&
+      relatedCard.length===1&&!contraryCurrent){
+    // The card identifies a DIFFERENT product; retain its literal as review
+    // context while the exact selected hydration supplies the current roast.
+    fields.roast_level=selectedRoast;
+    roast_evidence.value=selectedRoast;
+    roast_evidence.source='exact_selected_hydrogen_loader';
+    if(source_facts.length<384)source_facts.push({
+     field:'roast_context',label:'Unrelated storefront roast card',
+     value:relatedCard[0],source_url,source_type:'html',
+     section:'Different coffee in storefront (review only)'
+    });
+   }else{
+    // Two genuinely unresolved direct claims must not silently choose one.
+    rememberCoffeeReviewCandidate(fields,'roast_level',wrongRoast,'Current page roast disagreement');
+    rememberCoffeeReviewCandidate(fields,'roast_level',selectedRoast,'Exact selected loader roast disagreement');
+    delete fields.roast_level;
+    conflicts.add('roast_level');
+    roast_evidence.value=null;
+    roast_evidence.source='';
+   }
+  }
+  for(const [key,label] of [['tasting_notes','Exact selected tasting notes'],
+                             ['roast_level','Exact selected roast level']]){
+   const value=selectedHydration.fields[key];
+   if(!value||conflicts.has(key))continue;
+   if(!fields[key])fields[key]=value;
+   if(fields[key]!==value)continue;
+   if(key==='roast_level'&&!roast_evidence.value){
+    roast_evidence.value=value;
+    roast_evidence.source='exact_selected_hydrogen_loader';
+   }
+   if(source_facts.length<384&&!source_facts.some(f=>f.field===key&&
+       f.source_type==='product_json'&&f.value===value&&
+       String(f.section||'').includes('React Router/Hydrogen loader')))source_facts.push({
+    field:key,label,value,source_url,source_type:'product_json',
+    section:'Current selected product React Router/Hydrogen loader data'
    });
   }
  }

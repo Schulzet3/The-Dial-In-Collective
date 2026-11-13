@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "owner_issue": 33,
+  "scope": "ORIGINAL603_SINGLE_SELECTED_PRODUCT_NOT_GLOBAL_CERTIFICATION",
+  "case_number": 175,
+  "coffee": "Costa Rica Cafe Sircof",
+  "roaster": "Kings Peak Coffee Roasters",
+  "source": {
+    "url": "https://kingspeakcoffee.com/products/costa-rica-cafe-sircof",
+    "selected_h1": "Costa Rica Cafe Sircof",
+    "source_sha": "57461e32b01a46ca86a20fec98d70235f2ae81bd",
+    "html_bytes": 237626,
+    "html_sha256": "aecf7ad67a82a8fd728bca122cc817614933de160c1b6ad57b294963f2d10ccc",
+    "direct": {
+      "tasting_notes": "Cherries, Raspberries & Chocolate Brownies",
+      "process": "red honey",
+      "producer": "Oviedo family and the Sircof farm",
+      "origin": "Costa Rica"
+    },
+    "parsed_fields": {
+      "name": "Costa Rica Cafe Sircof",
+      "roaster": "Kings Peak Coffee Roasters",
+      "tasting_notes": "Cherries, Raspberries & Chocolate Brownies",
+      "origin": "Costa Rica",
+      "producer": "Oviedo family and the Sircof farm",
+      "process": "Honey"
+    },
+    "unknown_unpublished": [
+      "roast_level",
+      "elevation_m",
+      "variety",
+      "decaffeination_method",
+      "release_label"
+    ],
+    "conflicts": [],
+    "seo_fallback_fields": [],
+    "current_exact_h1": true,
+    "add_coffee_ui_rendered": true,
+    "source_review_rendered": true
+  },
+  "preflight": {
+    "initial_development_sha": "b93d6acd16241d0bd5dad89eadbf8c8e11988070",
+    "repair_development_sha": "eccc8daf6323cdb5b6daccf002db4c264b644b18",
+    "receipt_development_sha": "d7f1361218f67dda152e257f9cc1fee494b60944",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d"
+  },
+  "correction": {
+    "first_pr_run": 43275810764,
+    "status": "FAILED",
+    "meaning": "Audit-only checker mis-normalized Shopify &amp; versus raw ampersand, despite correct actual parser",
+    "initial_selected_html_sha256": "ad7bf3aa38e66f22dea70730d42fd457e4f7d8decafab870f132a7d98248b779",
+    "runtime_parser_bug": false,
+    "fix": "Scoped audit checker HTML entity normalization and two new positive/negative tests"
+  },
+  "implementation": {
+    "pull_request": 2314,
+    "head_sha": "6cdef1432081e27852eb5b345d2a52d33105cc88",
+    "nonforce_merged_sha": "57461e32b01a46ca86a20fec98d70235f2ae81bd",
+    "merged_source_blobs_identical": true,
+    "app_runtime_changed": false,
+    "original_corpus_changed": false
+  },
+  "checks": {
+    "focused_pr_run": 43276210228,
+    "focused_pr_success": true,
+    "focused_test_count": 12,
+    "focused_failures": 0,
+    "pr_ci": {
+      "approval": 43276210305,
+      "sql": 43276210374,
+      "python": 43276210401,
+      "private_source_bundle": 43276210408,
+      "cloud_mobile": 43276210324,
+      "node_lint": 43276210344
+    },
+    "merged_ci": {
+      "selected_official": 43276846034,
+      "approval": 43276849600,
+      "python": 43276845993,
+      "cloud_mobile": 43276849089,
+      "node_lint": 43276846012
+    },
+    "merged_runs_all_applicable_success": true,
+    "merged_node_pass": 4347,
+    "merged_node_fail": 0,
+    "merged_node_intentional_skip": 6,
+    "lint_pass": true,
+    "broad_public_probe": "SKIPPED_NOT_PASS",
+    "frozen603": "SKIPPED_NOT_PASS"
+  },
+  "merged_artifact": {
+    "workflow_run": 43276846034,
+    "artifact_id": 13969344784,
+    "archive_sha256": "2a9ba7cf4d275e8694ef4d4f430d04a6f0fa284618369a4adf6d4e205756b365",
+    "archive_provider_digest_equal": true,
+    "raw_html_sha256": "aecf7ad67a82a8fd728bca122cc817614933de160c1b6ad57b294963f2d10ccc",
+    "evidence_json_sha256": "0d0789560ece0c528ced6e20bfa5e5e38f2eef4ccf7a6d0c1f75583c42728c4a",
+    "afterproof_sha256": "8d828772ea6a21c81f6a51d187ff4407006b162d7d3f1a87a53d54ec11f65592",
+    "afterproof_passed": true,
+    "afterproof_failures": []
+  },
+  "frozen_baseline": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "manually_certified_all": false
+  },
+  "open_exceptions": [
+    {
+      "case_number": 115,
+      "issue": "original official URL 404; draft PR #2205"
+    },
+    {
+      "case_number": 152,
+      "issue": "contradictory selected-source fields"
+    },
+    {
+      "case_numbers": [
+        169,
+        171
+      ],
+      "issue": "source_unavailable on guarded official HTTPS; draft PR #2313"
+    }
+  ],
+  "permissions": {
+    "deployment": false,
+    "production_provider_or_member_write": false,
+    "new_accounts": false,
+    "purchases": false,
+    "force_git": false,
+    "release_queue_changed": false
+  },
+  "state": "SELECTED_CASE_VERIFIED_ONLY_ISSUE33_OPEN",
+  "next": "Inspect independent unresolved exact current official product with bounded probe; separately adjudicate unavailable/contradictory source exceptions; no 603 universal certification"
+}

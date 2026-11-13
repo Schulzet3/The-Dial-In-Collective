@@ -1,5 +1,7 @@
 # Scoped GitHub Work Journals
 
+- [Issue #33 R169 original603 #233 selected intrinsic sensory arc READY development only](ops-issue33-r169-233-20261113.md) — merged-source official raw HTML, independent hashes and CI; full603 OPEN
+
 - [#2169 source-drift release gate: exact CI and nonforce reconciliation](ops-issue2169-ready-drift-integration-20261112.md) — preserve later unfinished changes without erasing independent READY evidence or bypassing candidate isolation
 
 - [Issue #33 R101 #513/#516/#528 verified exact current official source READY development only](ops-issue33-r101-513-516-528-20261110.md) — merged-source source/CI and permanent receipt; #33 full603 OPEN
@@ -75,3 +77,4 @@ After the mandatory [PREFLIGHT](../ai/PREFLIGHT.md), the central [active work ch
 - [Netlify rolling exhaustive audit and source-pinning remediation: Issue #508](issue-508.md)
 
 - [Automatic READY-batch source-bound CI journal](release-ready-batch.md) — explicitly recognized same-commit CI work journal.
+- [Issue #2389 universal URL / directory RETIREMENT IN PROGRESS](issue-2389.md) — development source READY but not published. Hosted legacy SQL/Edge remain LEGACY ACTIVE; old migrations and records HISTORICAL / ARCHIVED. See [#509 live dependency evidence](../audits/issue509-legacy-roaster-retirement-status-2026-11-13.json).

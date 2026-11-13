@@ -1,0 +1,11 @@
+# Issue #267 — A107-T11 source-specific strict line audit (2026-11-12)
+
+DIC_PREFLIGHT_VERIFIED development_sha=1277716c51411f49517ad2cd91be46d82d0a4462 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+Live recheck parent `fcb30e1ad3fe2ff531469bc86737184cefbd6d7a` with unmodified preflight blob `2fb236bbfa6bac48513eeb3bd157b260853af06d`. Frozen original F166 `docs/archive/requirements/The_Dial-In_Collective_Master_Specification_v1.0.md` commit `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9`, blob `4c4a3ee50a056c0f2b2971c9a647094db8c92601` lines 596–620; pinned P137 `src/server/coffee-identity-evidence.mjs` commit `9707553a64f88127826e8f5b2b36cd0651296e83`, blob `f90535c2d36373e8ce36fd33f961f2a295370e6e` lines 517–541. 50/50 original source literals individually directly interpreted and matched live current file Git blobs `4c4a3ee50a056c0f2b2971c9a647094db8c92601`/`12d71abcba4f993daa2eb4841e05ea552236d455` at 50/50 exact mapped physical positions. Full evidence `docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F166-596-620-P137-517-541-20261112-A107-T11.json`. No gaps/overlaps vs merged A106 ending F166:595/P137:516. Rechecked first workflow 41 physical lines against S2-001, zero duplicate credit, V1/grouped R2/C2 not promoted.
+
+Archived five-axis scores, no preselected ratings, all-five-required and pure-green mappings are historical requirements; no current UI bug proved. Active selected-coffee origin title, process/variety candidate guards and BR-heading handling read line by line; possible false origin/process hypotheses require exact #33 fixtures before any mutation. No code deletion or change justified. Preserve immutable 603 oracle and #96 Auth/privacy scope.
+
+Original source SHA/line/mapping checks passed 50/50; exact PR-head and merged governance PENDING, functional Node22/lint/build/browser/offline/SQL/Auth/providers NOT_RUN docs-only. No application, test, database, member, offline, Community, main/release, READY/queue or production change. No deploy.
+
+Next F166:621 and P137:542, independently reconcile complete 579961/57913 lines and all post-pin live code changes, nontext assets, findings, final owner review. #267 OPEN, other-account inaccessible task status UNKNOWN.

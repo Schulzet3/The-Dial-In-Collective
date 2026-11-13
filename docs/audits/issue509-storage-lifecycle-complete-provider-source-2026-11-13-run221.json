@@ -1,0 +1,433 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 221,
+  "project_ref": "azviqqejypsefzilgonr",
+  "observed_utc": "2026-11-13",
+  "preflight": {
+    "development_sha": "46b04361a1da3b2423f56026752c7ed5702534d1",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "content_verified": true,
+    "initial_run_sha": "abfa3609be24149f2d5761a16f3286dcb948d0a1"
+  },
+  "scope": "Direct full provider catalog and function source; only storage lifecycle changes get new semantic review credit, not GitHub Issue #267 code lines",
+  "storage_prior_reconciled_counts": {
+    "tables": 8,
+    "functions": 19,
+    "noninternal_triggers": 7
+  },
+  "storage_current_counts": {
+    "tables": 10,
+    "functions": 24,
+    "noninternal_triggers": 11
+  },
+  "first_time_complete_source": {
+    "tables": 2,
+    "functions": 5,
+    "triggers": 4,
+    "previously_reviewed_rechecked_functions": [
+      "storage.enforce_bucket_lifecycle_service_role"
+    ]
+  },
+  "objects": {
+    "tables": [
+      {
+        "relation": "storage.bucket_lifecycle_states",
+        "oid": "20537",
+        "kind": "r",
+        "rls_enabled": true,
+        "force_rls": false,
+        "owner": "supabase_storage_admin",
+        "explicit_acl": "{supabase_storage_admin=arwdDxtm/supabase_storage_admin,service_role=arwdDxtm/supabase_storage_admin,postgres=r/supabase_storage_admin}",
+        "columns": [
+          {
+            "name": "bucket_id",
+            "type": "text",
+            "default": null,
+            "not_null": true,
+            "position": 1
+          },
+          {
+            "name": "generation",
+            "type": "uuid",
+            "default": null,
+            "not_null": false,
+            "position": 2
+          },
+          {
+            "name": "next_run_at",
+            "type": "timestamp with time zone",
+            "default": null,
+            "not_null": false,
+            "position": 3
+          },
+          {
+            "name": "claim_id",
+            "type": "uuid",
+            "default": null,
+            "not_null": false,
+            "position": 4
+          },
+          {
+            "name": "claim_until",
+            "type": "timestamp with time zone",
+            "default": null,
+            "not_null": false,
+            "position": 5
+          },
+          {
+            "name": "continuation",
+            "type": "jsonb",
+            "default": null,
+            "not_null": false,
+            "position": 6
+          },
+          {
+            "name": "last_started_at",
+            "type": "timestamp with time zone",
+            "default": null,
+            "not_null": false,
+            "position": 7
+          },
+          {
+            "name": "last_completed_at",
+            "type": "timestamp with time zone",
+            "default": null,
+            "not_null": false,
+            "position": 8
+          },
+          {
+            "name": "last_success_at",
+            "type": "timestamp with time zone",
+            "default": null,
+            "not_null": false,
+            "position": 9
+          },
+          {
+            "name": "last_result",
+            "type": "jsonb",
+            "default": null,
+            "not_null": false,
+            "position": 10
+          },
+          {
+            "name": "failure_count",
+            "type": "integer",
+            "default": "0",
+            "not_null": true,
+            "position": 11
+          },
+          {
+            "name": "last_error",
+            "type": "jsonb",
+            "default": null,
+            "not_null": false,
+            "position": 12
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "default": "now()",
+            "not_null": true,
+            "position": 13
+          }
+        ],
+        "constraints": [
+          {
+            "ddl": "CHECK (continuation IS NULL OR jsonb_typeof(continuation) = 'object'::text)",
+            "name": "bucket_lifecycle_continuation_object_check",
+            "type": "c",
+            "validated": true
+          },
+          {
+            "ddl": "CHECK (failure_count >= 0)",
+            "name": "bucket_lifecycle_failure_count_check",
+            "type": "c",
+            "validated": true
+          },
+          {
+            "ddl": "CHECK (last_result IS NULL OR jsonb_typeof(last_result) = 'object'::text)",
+            "name": "bucket_lifecycle_last_result_object_check",
+            "type": "c",
+            "validated": true
+          },
+          {
+            "ddl": "CHECK (next_run_at IS NOT NULL OR NOT jsonb_path_exists(COALESCE(continuation, '{}'::jsonb), '$.\"batch\".\"inFlight\"'::jsonpath))",
+            "name": "bucket_lifecycle_recovery_due_check",
+            "type": "c",
+            "validated": true
+          },
+          {
+            "ddl": "FOREIGN KEY (bucket_id) REFERENCES storage.buckets(id) ON DELETE CASCADE",
+            "name": "bucket_lifecycle_states_bucket_id_fkey",
+            "type": "f",
+            "validated": true
+          },
+          {
+            "ddl": "PRIMARY KEY (bucket_id)",
+            "name": "bucket_lifecycle_states_pkey",
+            "type": "p",
+            "validated": true
+          }
+        ],
+        "indexes": [
+          {
+            "ddl": "CREATE INDEX bucket_lifecycle_states_due_idx ON storage.bucket_lifecycle_states USING btree (next_run_at, bucket_id) WHERE (next_run_at IS NOT NULL)",
+            "name": "bucket_lifecycle_states_due_idx",
+            "ready": true,
+            "valid": true
+          },
+          {
+            "ddl": "CREATE UNIQUE INDEX bucket_lifecycle_states_pkey ON storage.bucket_lifecycle_states USING btree (bucket_id)",
+            "name": "bucket_lifecycle_states_pkey",
+            "ready": true,
+            "valid": true
+          }
+        ],
+        "triggers": null,
+        "policies": null,
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_select": true,
+        "full_component_md5": "0fe4fdfd74c624b63b85f0e1d18d38aa"
+      },
+      {
+        "relation": "storage.lifecycle_abandoned_artifacts",
+        "oid": "20565",
+        "kind": "r",
+        "rls_enabled": true,
+        "force_rls": false,
+        "owner": "supabase_storage_admin",
+        "explicit_acl": "{supabase_storage_admin=arwdDxtm/supabase_storage_admin,service_role=arwdDxtm/supabase_storage_admin,postgres=r/supabase_storage_admin}",
+        "columns": [
+          {
+            "name": "bucket_id",
+            "type": "text",
+            "default": null,
+            "not_null": true,
+            "position": 1
+          },
+          {
+            "name": "key",
+            "type": "text",
+            "default": null,
+            "not_null": true,
+            "position": 2
+          },
+          {
+            "name": "name",
+            "type": "text",
+            "default": null,
+            "not_null": true,
+            "position": 3
+          },
+          {
+            "name": "version",
+            "type": "text",
+            "default": null,
+            "not_null": false,
+            "position": 4
+          },
+          {
+            "name": "attempted_at",
+            "type": "timestamp with time zone",
+            "default": "now()",
+            "not_null": true,
+            "position": 5
+          }
+        ],
+        "constraints": [
+          {
+            "ddl": "PRIMARY KEY (bucket_id, key)",
+            "name": "lifecycle_abandoned_artifacts_pkey",
+            "type": "p",
+            "validated": true
+          }
+        ],
+        "indexes": [
+          {
+            "ddl": "CREATE INDEX lifecycle_abandoned_artifacts_attempted_at_idx ON storage.lifecycle_abandoned_artifacts USING btree (attempted_at)",
+            "name": "lifecycle_abandoned_artifacts_attempted_at_idx",
+            "ready": true,
+            "valid": true
+          },
+          {
+            "ddl": "CREATE UNIQUE INDEX lifecycle_abandoned_artifacts_pkey ON storage.lifecycle_abandoned_artifacts USING btree (bucket_id, key)",
+            "name": "lifecycle_abandoned_artifacts_pkey",
+            "ready": true,
+            "valid": true
+          }
+        ],
+        "triggers": null,
+        "policies": null,
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_select": true,
+        "full_component_md5": "a2865aff687d11503d10c6fb9ec04707"
+      }
+    ],
+    "functions": [
+      {
+        "proname": "delete_lifecycle_objects",
+        "args": "object_ids uuid[]",
+        "definition_md5": "b9737ba9f65ae16796874a5ff3b82a33",
+        "chars": 2327,
+        "security_definer": false,
+        "function_settings": null,
+        "anon_execute": false,
+        "authenticated_execute": false,
+        "service_execute": true,
+        "full_definition": "CREATE OR REPLACE FUNCTION storage.delete_lifecycle_objects(object_ids uuid[])\n RETURNS TABLE(id uuid, is_delete_marker boolean, metadata jsonb)\n LANGUAGE plpgsql\nAS $function$\nDECLARE\n    object_id uuid;\n    deleted_row storage.objects%ROWTYPE;\n    deleted_ids uuid[];\n    deleted_markers boolean[];\n    deleted_metadata jsonb[];\n    bulk_deleted boolean := false;\nBEGIN\n    -- Surface pre-existing deferred violations instead of treating them as blocked rows.\n    SET CONSTRAINTS ALL IMMEDIATE;\n    PERFORM set_config('storage.allow_delete_query', 'true', true);\n\n    -- One subxact keeps the subxid cache from overflowing; rows return only once it commits.\n    BEGIN\n        WITH deleted AS (\n            DELETE FROM storage.objects AS object_row\n              WHERE object_row.id = ANY(object_ids) AND object_row.archived_at IS NOT NULL\n              RETURNING object_row.id, object_row.is_delete_marker, object_row.metadata\n        )\n        SELECT array_agg(deleted.id), array_agg(deleted.is_delete_marker), array_agg(deleted.metadata)\n          INTO deleted_ids, deleted_markers, deleted_metadata\n          FROM deleted;\n        bulk_deleted := true;\n    EXCEPTION\n        WHEN OTHERS THEN\n            -- User triggers may use insufficient_privilege to block a row.\n            IF SQLSTATE <> '42501' AND left(SQLSTATE, 2) IN ('08', '40', '42', '53', '55', '57', '58', 'XX') THEN\n                RAISE;\n            END IF;\n    END;\n    IF bulk_deleted THEN\n        RETURN QUERY SELECT * FROM unnest(deleted_ids, deleted_markers, deleted_metadata);\n        RETURN;\n    END IF;\n\n    FOREACH object_id IN ARRAY object_ids LOOP\n        BEGIN\n            DELETE FROM storage.objects AS object_row\n              WHERE object_row.id = object_id AND object_row.archived_at IS NOT NULL\n              RETURNING object_row.* INTO deleted_row;\n            IF FOUND THEN\n                id := deleted_row.id;\n                is_delete_marker := deleted_row.is_delete_marker;\n                metadata := deleted_row.metadata;\n                RETURN NEXT;\n            END IF;\n        EXCEPTION\n            WHEN OTHERS THEN\n                IF SQLSTATE <> '42501' AND left(SQLSTATE, 2) IN ('08', '40', '42', '53', '55', '57', '58', 'XX') THEN\n                    RAISE;\n                END IF;\n        END;\n    END LOOP;\nEND;\n$function$\n"
+      },
+      {
+        "proname": "enforce_bucket_lifecycle_service_role",
+        "args": "",
+        "definition_md5": "b4b21fec5ffef02e74e2477049138937",
+        "chars": 655,
+        "security_definer": false,
+        "function_settings": [
+          "search_path=pg_catalog"
+        ],
+        "anon_execute": true,
+        "authenticated_execute": true,
+        "service_execute": true,
+        "full_definition": "CREATE OR REPLACE FUNCTION storage.enforce_bucket_lifecycle_service_role()\n RETURNS trigger\n LANGUAGE plpgsql\n SET search_path TO 'pg_catalog'\nAS $function$\nBEGIN\n  IF current_user::text IS DISTINCT FROM TG_ARGV[0] THEN\n    -- Keep this check AFTER caller RLS accepts the proposed row. The API\n    -- recognizes this exact signal after rolling back its permission probe.\n    RAISE EXCEPTION 'bucket control columns may only be changed by the configured storage service role'\n      USING ERRCODE = 'PST01',\n            SCHEMA = TG_TABLE_SCHEMA,\n            TABLE = TG_TABLE_NAME,\n            CONSTRAINT = TG_NAME;\n  END IF;\n\n  RETURN NULL;\nEND;\n$function$\n"
+      },
+      {
+        "proname": "enforce_versioning_status_transition",
+        "args": "",
+        "definition_md5": "47dc86fbd138d125125250b28b31d7ff",
+        "chars": 539,
+        "security_definer": false,
+        "function_settings": null,
+        "anon_execute": true,
+        "authenticated_execute": true,
+        "service_execute": true,
+        "full_definition": "CREATE OR REPLACE FUNCTION storage.enforce_versioning_status_transition()\n RETURNS trigger\n LANGUAGE plpgsql\nAS $function$\nBEGIN\n    IF NEW.versioning_status = OLD.versioning_status THEN\n        RETURN NEW;\n    END IF;\n\n    IF NEW.versioning_status = 'DISABLED' OR\n       (OLD.versioning_status = 'DISABLED' AND NEW.versioning_status = 'SUSPENDED') THEN\n        RAISE EXCEPTION 'Cannot transition bucket versioning status from % to %',\n            OLD.versioning_status, NEW.versioning_status;\n    END IF;\n\n    RETURN NEW;\nEND;\n$function$\n"
+      },
+      {
+        "proname": "protect_active_lifecycle_states",
+        "args": "",
+        "definition_md5": "fce9d03398ec222c77feec887c25c384",
+        "chars": 1016,
+        "security_definer": true,
+        "function_settings": [
+          "search_path=pg_catalog"
+        ],
+        "anon_execute": false,
+        "authenticated_execute": false,
+        "service_execute": false,
+        "full_definition": "CREATE OR REPLACE FUNCTION storage.protect_active_lifecycle_states()\n RETURNS trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO 'pg_catalog'\nAS $function$\nBEGIN\n    IF EXISTS (\n        SELECT 1 FROM storage.bucket_lifecycle_states\n        WHERE bucket_id = OLD.id\n          AND NOT (\n              continuation IS NULL\n              OR (continuation @> '{\"continuationVersion\": 1}' AND continuation #> '{batch,inFlight}' IS NULL)\n          )\n    ) THEN\n        RAISE EXCEPTION 'update or delete on table \"buckets\" violates foreign key constraint \"bucket_lifecycle_states_bucket_id_fkey\" on table \"bucket_lifecycle_states\"'\n            USING ERRCODE = 'foreign_key_violation',\n                  DETAIL = format('Key (id)=(%s) is still referenced from table \"bucket_lifecycle_states\".', OLD.id),\n                  SCHEMA = 'storage',\n                  TABLE = 'bucket_lifecycle_states',\n                  CONSTRAINT = 'bucket_lifecycle_states_bucket_id_fkey';\n    END IF;\n    RETURN OLD;\nEND;\n$function$\n"
+      },
+      {
+        "proname": "reconcile_lifecycle_state",
+        "args": "target_bucket_id text, policy_changed boolean",
+        "definition_md5": "271a57ecfb24df02a5d9100c2a801323",
+        "chars": 2912,
+        "security_definer": true,
+        "function_settings": [
+          "search_path=pg_catalog"
+        ],
+        "anon_execute": false,
+        "authenticated_execute": false,
+        "service_execute": true,
+        "full_definition": "CREATE OR REPLACE FUNCTION storage.reconcile_lifecycle_state(target_bucket_id text, policy_changed boolean)\n RETURNS void\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO 'pg_catalog'\nAS $function$\nDECLARE\n    bucket storage.buckets%ROWTYPE;\n    active boolean;\n    idle boolean;\n    state_generation uuid;\nBEGIN\n    SELECT * INTO bucket FROM storage.buckets WHERE id = target_bucket_id FOR NO KEY UPDATE;\n    IF NOT FOUND THEN\n        RETURN;\n    END IF;\n\n    SELECT continuation IS NULL OR (\n               continuation @> '{\"continuationVersion\": 1}'\n               AND continuation #> '{batch,inFlight}' IS NULL\n           ), generation\n    INTO idle, state_generation\n    FROM storage.bucket_lifecycle_states\n    WHERE bucket_id = target_bucket_id\n    FOR UPDATE;\n\n    IF bucket.lifecycle_configuration IS NULL THEN\n        DELETE FROM storage.bucket_lifecycle_states\n        WHERE bucket_id = target_bucket_id\n          AND idle IS TRUE;\n\n        UPDATE storage.bucket_lifecycle_states\n        SET next_run_at = clock_timestamp(), updated_at = clock_timestamp()\n        WHERE bucket_id = target_bucket_id\n          AND idle IS NOT TRUE;\n        RETURN;\n    END IF;\n\n    active := bucket.versioning_status <> 'DISABLED'\n        AND bucket.lifecycle_configuration @> '{\"rules\":[{\"status\":\"Enabled\"}]}'::jsonb;\n\n    -- The state row records the generation it was reconciled with so callers need not detect\n    -- policy changes. Rows without a recorded generation keep their work.\n    policy_changed := policy_changed OR (\n        state_generation IS NOT NULL AND state_generation <> bucket.lifecycle_configuration_generation\n    );\n\n    INSERT INTO storage.bucket_lifecycle_states AS state (bucket_id, generation, next_run_at)\n    VALUES (bucket.id, bucket.lifecycle_configuration_generation, CASE WHEN active THEN clock_timestamp() END)\n    ON CONFLICT (bucket_id) DO UPDATE\n    SET next_run_at = CASE\n            WHEN policy_changed THEN\n                CASE WHEN active OR idle IS NOT TRUE THEN clock_timestamp() END\n            ELSE EXCLUDED.next_run_at\n        END,\n        generation = EXCLUDED.generation,\n        claim_id = CASE WHEN policy_changed AND idle IS TRUE\n                        THEN NULL ELSE state.claim_id END,\n        claim_until = CASE WHEN policy_changed AND idle IS TRUE\n                           THEN NULL ELSE state.claim_until END,\n        continuation = CASE WHEN policy_changed AND idle IS TRUE\n                            THEN NULL ELSE state.continuation END,\n        failure_count = CASE WHEN policy_changed AND idle IS TRUE\n                             THEN 0 ELSE state.failure_count END,\n        last_error = CASE WHEN policy_changed AND idle IS TRUE\n                          THEN NULL ELSE state.last_error END,\n        updated_at = clock_timestamp()\n    WHERE policy_changed OR (state.next_run_at IS NULL AND EXCLUDED.next_run_at IS NOT NULL);\nEND;\n$function$\n"
+      },
+      {
+        "proname": "wake_lifecycle_state",
+        "args": "",
+        "definition_md5": "326028b9d567ca2de47e9ecf67a4553b",
+        "chars": 360,
+        "security_definer": true,
+        "function_settings": [
+          "search_path=pg_catalog"
+        ],
+        "anon_execute": false,
+        "authenticated_execute": false,
+        "service_execute": false,
+        "full_definition": "CREATE OR REPLACE FUNCTION storage.wake_lifecycle_state()\n RETURNS trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO 'pg_catalog'\nAS $function$\nBEGIN\n    IF TG_OP = 'INSERT' AND NEW.lifecycle_configuration IS NULL THEN\n        RETURN NEW;\n    END IF;\n\n    PERFORM storage.reconcile_lifecycle_state(NEW.id, false);\n    RETURN NEW;\nEND;\n$function$\n"
+      }
+    ],
+    "triggers": [
+      {
+        "relation_name": "storage.buckets",
+        "tgname": "enforce_versioning_status_transition",
+        "trigger_md5": "b55e8f45d9b7b5cf3f05aa502d8f5d08",
+        "complete_trigger_ddl": "CREATE TRIGGER enforce_versioning_status_transition BEFORE UPDATE OF versioning_status ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.enforce_versioning_status_transition()",
+        "enabled_code": "O",
+        "handler_identity": "storage.enforce_versioning_status_transition()",
+        "handler_md5": "47dc86fbd138d125125250b28b31d7ff"
+      },
+      {
+        "relation_name": "storage.buckets",
+        "tgname": "protect_active_lifecycle_states",
+        "trigger_md5": "09702e30b4601803dd3bea9af03625fa",
+        "complete_trigger_ddl": "CREATE TRIGGER protect_active_lifecycle_states BEFORE DELETE ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.protect_active_lifecycle_states()",
+        "enabled_code": "O",
+        "handler_identity": "storage.protect_active_lifecycle_states()",
+        "handler_md5": "fce9d03398ec222c77feec887c25c384"
+      },
+      {
+        "relation_name": "storage.buckets",
+        "tgname": "wake_lifecycle_on_policy_write",
+        "trigger_md5": "8c3fbea0b2a980f26fd4052160e92820",
+        "complete_trigger_ddl": "CREATE TRIGGER wake_lifecycle_on_policy_write AFTER INSERT OR UPDATE OF lifecycle_configuration_generation ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.wake_lifecycle_state()",
+        "enabled_code": "O",
+        "handler_identity": "storage.wake_lifecycle_state()",
+        "handler_md5": "326028b9d567ca2de47e9ecf67a4553b"
+      },
+      {
+        "relation_name": "storage.buckets",
+        "tgname": "wake_lifecycle_on_versioning_enable",
+        "trigger_md5": "605b230af4479dcf2f00e2c36279cfa1",
+        "complete_trigger_ddl": "CREATE TRIGGER wake_lifecycle_on_versioning_enable AFTER UPDATE OF versioning_status ON storage.buckets FOR EACH ROW WHEN (new.lifecycle_configuration IS NOT NULL) EXECUTE FUNCTION storage.wake_lifecycle_state()",
+        "enabled_code": "O",
+        "handler_identity": "storage.wake_lifecycle_state()",
+        "handler_md5": "326028b9d567ca2de47e9ecf67a4553b"
+      }
+    ]
+  },
+  "five_family_hash_drift": {
+    "prior_run186": 550,
+    "current": 577,
+    "prior_unchanged": 550,
+    "new_approved_2258_objects_previously_reviewed_run199": 23,
+    "new_storage_triggers": 4,
+    "other_changed": 0,
+    "missing": 0,
+    "categories": {
+      "functions": 114,
+      "constraints": 282,
+      "indexes": 104,
+      "policies": 39,
+      "noninternal_triggers": 38
+    },
+    "policy_formatting_false_positive": "23 policies display different whitespace with pg_get_expr pretty=true, but 39/39 match prior when pretty=false"
+  },
+  "verdicts": {
+    "storage.bucket_lifecycle_states": "Complete 13 columns/6 validated constraints/2 valid indexes; bucket FK CASCADE, finite recovery-in-flight safeguards; RLS on, no policies, deny anon/authenticated SELECT, service SELECT true.",
+    "storage.lifecycle_abandoned_artifacts": "Complete 5 columns/composite PK/2 valid indexes; RLS on, no policies, deny anon/authenticated SELECT; no basis for deletion.",
+    "storage.delete_lifecycle_objects": "Invoker service-only EXECUTE; deletes only archived rows if invoked and uses guarded bulk+row fallback; never executed in audit.",
+    "storage.enforce_bucket_lifecycle_service_role": "Previously reviewed, read back as drift only; trigger-only, uses current_user guard and PST01.",
+    "storage.enforce_versioning_status_transition": "Invoker BEFORE UPDATE trigger validates transition to/from DISABLED; SQL body does not resolve unsafe unqualified objects.",
+    "storage.protect_active_lifecycle_states": "SECURITY DEFINER with fixed pg_catalog search_path, active-job deletion guard, no direct anon/authenticated execute.",
+    "storage.reconcile_lifecycle_state": "SECURITY DEFINER fixed pg_catalog search_path, service-only EXECUTE, bucket/state row locks and serialized generation reconciliation; no execution.",
+    "storage.wake_lifecycle_state": "SECURITY DEFINER fixed pg_catalog search_path; trigger dispatches reconcile, no direct anon/authenticated execute."
+  },
+  "sql_safe_aggregate": {
+    "total_storage_buckets": 0,
+    "total_lifecycle_states": 0,
+    "total_abandoned_artifacts": 0
+  },
+  "security_privacy": "Neither storage table is directly SELECT-privileged for anon or authenticated; SECURITY DEFINER lifecycle helpers fix search_path; no member/Auth or Storage object row values, secrets, raw logs read",
+  "remaining_unverified": [
+    "Hosted worker scheduling, Storage gateway exposure, native binary implementation, hosted Auth/PostgREST, external delivery and inactive/offline endpoints",
+    "No buckets is not evidence provider schema unused; do not drop"
+  ],
+  "confirmed_new_defects": 0,
+  "justified_deletions": 0,
+  "production_writes": 0,
+  "code_test_ci_changes": 0,
+  "baseline_complete": false,
+  "next": "New provider drift/accessible unreviewed objects and hosted settings with #96. Legacy roaster directory remains LEGACY ACTIVE until #2389 separate publication."
+}

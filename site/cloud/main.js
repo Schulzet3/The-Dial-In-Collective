@@ -4,6 +4,7 @@ import * as E from '../lib/engine.js';
 import * as U from '../lib/ui.js';
 import {CloudError,createCloudClient,secureOrigin,validateNewPassword,PASSWORD_HINT,isAccessDenied} from './client.js';
 import {IndexedStore,Outbox} from './outbox.js';
+import {recordRecommendationUse,reconcileRecommendationUse} from './recommendation-use.js';
 import {basketDoseAdvisory} from './dose-advisory.js';
 import {hydrate,applyPending,shotPayload} from './mapping.js';
 import {CLOUD_CONFIG} from './config.js';
@@ -69,7 +70,7 @@ function clearOfflineDenial(owner){
 
 class CloudApp {
  constructor(client,store=new IndexedStore()){
-  Object.assign(this,{client,store,identity:null,status:null,raw:null,state:M.blankState(),pending:[],expanded:new Set(),shotExpanded:new Set(),search:'',sort:'recent',searchOpen:false,tempCoffee:null,justSavedId:null,notice:'',authView:'signin',confirmationEmail:'',recovery:false,syncState:'connecting',busy:false,flushing:null,epoch:0,localOfflineOwner:null});
+  Object.assign(this,{client,store,identity:null,status:null,raw:null,state:M.blankState(),pending:[],expanded:new Set(),shotExpanded:new Set(),search:'',sort:'recent',searchOpen:false,tempCoffee:null,justSavedId:null,notice:'',authView:'signin',confirmationEmail:'',recovery:false,syncState:'connecting',busy:false,flushing:null,epoch:0,localOfflineOwner:null,appliedRecommendationValues:{}});
   this.accountApprovalNotice=false;this.memberApprovalPushEnabled=false;
   this.coffeeUrlPreviewInput=null;this.coffeeUrlSourceReview=null;this.coffeeUrlBasePreview=null;this.coffeeUrlActivePreview=null;this.coffeeUrlBusy=false;this.pendingCoffeeReview=null;
   this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityLoading=false;this.communityReloadRequested=false;this.communityError='';this.communityStyle='all';this.communityCoffee='all';this.communitySearch='';this.communityRevision=0;
@@ -100,7 +101,7 @@ class CloudApp {
   this.dismissedDoseAdvisories.clear();this.recommendationEvidence={};this.recommendationEvidenceRequests.clear();this.recommendationEvidenceAttemptedAt.clear();
   this.lastHeavySyncAt=0;this.adminAttentionCount=null;this.adminAttentionTask=null;this.adminAttentionOwner=null;this.adminAttentionEpoch=null;
   this.tempCoffee=null;this.justSavedId=null;this.notice='';this.accountApprovalNotice=false;this.memberApprovalPushEnabled=false;this.recovery=false;this.syncState='connecting';
-  this.draft=null;this.editing=null;this.logCoffee=null;this.addCoffeeDraft=null;
+  this.draft=null;this.editing=null;this.logCoffee=null;this.appliedRecommendationValues={};this.addCoffeeDraft=null;
   this.addCoffeeMatches=null;this.pendingMergeSubmissionId=null;
   this.coffeeUrlSourceReview=null;this.pendingCoffeeReview=null;
   this.coffeeUrlPreviewInput=null;this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityError='';this.communityLoading=false;this.communityReloadRequested=false;this.communityStyle='all';this.communityCoffee='all';this.communitySearch='';this.communityRevision=0;this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
@@ -674,7 +675,7 @@ class CloudApp {
   this.show('New Coffee',`<form id=new-coffee>
    <div class="coffee-url-first">${field('Roaster Page URL','source_url','',{type:'url',placeholder:'https://roaster.com/products/coffee'})}
     <div class="coffee-url-actions">${button('Autofill From URL','preview-coffee-url','','secondary coffee-url-autofill-button')}
-     <span class="helper">Optional · Official coffee product page</span></div>
+     <span class="helper">Any roaster · public HTTPS coffee product page</span></div>
    </div>
    <div id="coffee-url-feedback" aria-live="polite"></div>
    ${field('Coffee Name','name','',{required:true})}
@@ -684,7 +685,7 @@ class CloudApp {
    <div class="form-grid coffee-detail-grid">${field('Origin','origin')}${select('Roast Level','roast_level',['',...C.ROASTS],'')}${field('Elevation','elevation_m')}${select('Process','process',['',...C.PROCESSES],'')}${field('Variety','variety')}${field('Producer','producer')}</div>
    ${field('Tasting Notes','tasting_notes')}
    <button class="primary full space-top">Add Coffee</button>
-   <p class="helper space-top">Check all suggested information before saving. Missing details can be entered manually.</p>
+   <p class="helper space-top">Autofill uses available published facts, flags conflicts or uncertainty, and leaves missing details for you to enter before saving.</p>
   </form>`);
  }
  async finishCoffeeAdd(d,matched,chosenId=null,{confirmedDistinct=false}={}){
@@ -792,7 +793,7 @@ class CloudApp {
    this.show('Choose an Available Shot Style','<p class="helper">Custom is retired. Your existing shots and notes are preserved. Choose another style before logging a new shot.</p>'+button('Change Style','style',`data-id="${e(cid)}"`,'primary full'));
    return;
   }
-  this.draft=editing?C.clone(editing):E.prefill(this.state,cid,styleOverride?{style:styleOverride}:{});if(!editing)this.draft.recommendationContext=null;this.draft.id ||= uuid();this.logUnit=editing?.snapshot.tempUnit||v.tempUnit;
+  this.draft=editing?C.clone(editing):E.prefill(this.state,cid,styleOverride?{style:styleOverride}:{});if(!editing)this.draft.recommendationContext=null;this.draft.tasteScales=U.editableTasteScales(this.draft.tasteScales);this.appliedRecommendationValues={};this.draft.id ||= uuid();this.logUnit=editing?.snapshot.tempUnit||v.tempUnit;
   const d=this.draft,rec=E.recommendation(this.state,cid,styleOverride?{style:styleOverride}:{});this.show(editing?'Edit Shot':'Log A Shot',`<form id=shot novalidate><p class=recipe-label>${e(c.name)} · ${e(d.style)}</p>${!editing?`<div id=log-reference>${recipeGrid(rec,v.advanced.temperature,v.tempUnit)}</div>`:''}<div class="form-grid space-top">${field('Dose (g)','doseG',d.doseG,{required:true,type:'number',step:'.1'})}${field('Yield (g)','yieldG',d.yieldG,{required:true,type:'number',step:'.1'})}${field('Time (s)','timeS',d.timeS,{required:true,type:'number',step:'.1'})}<div>${field('Grind Setting','grindSetting',d.grindSetting,{required:true,type:'number',step:'.1'})}${!editing?button('Use Recommendation','use-grind','','use-recommendation'):''}</div>${v.advanced.temperature||editing?.tempC!=null?`<div>${field(`Temperature (°${this.logUnit}, Optional)`,'temperature',C.tempDisplay(d.tempC,this.logUnit),{type:'number',step:'1',help:!editing&&d.tempC!=null?d.tempSource:''})}${!editing?button('Use Recommendation','use-temp','','use-recommendation'):''}</div>`:''}</div>${v.advanced.slowFeed&&!editing?checkbox('slowFeed','Slow Feed',d.feedMode==='slow'):''}<div id=ratings>${scales(d.tasteScales)}</div><label class=field><span>Notes (Optional · Private)</span><textarea name=notes>${e(d.notes||'')}</textarea></label><aside id="shot-dose-advisory" class="helper" role="status" hidden><span data-dose-message></span> <button type="button" class="ghost compact" data-action="dismiss-dose-advisory">Dismiss</button></aside><p class=helper role=alert id=shot-validation-feedback></p><button class="primary full space-top" type=submit>Save Shot & Get Suggestion</button></form>`);
   this.updateDoseAdvisory();
  }
@@ -822,7 +823,16 @@ class CloudApp {
     f.elements.temperature.closest?.('.field')?.querySelector?.('small')?.remove?.();
    }
   }
-  if(f.elements.slowFeed)this.draft.feedMode=f.elements.slowFeed.checked?'slow':'standard';}
+  if(f.elements.slowFeed)this.draft.feedMode=f.elements.slowFeed.checked?'slow':'standard';
+  // Only a copied value still present in the measured form can retain its origin.
+  // Editing a historical shot is intentionally outside this new-shot provenance path.
+  if(!this.editing&&this.draft.recommendationContext){
+   this.draft.recommendationContext=reconcileRecommendationUse(
+    this.draft.recommendationContext,this.appliedRecommendationValues,{
+     grind:f.elements.grindSetting.value,temperature:f.elements.temperature?.value
+    });
+  }
+ }
  async click(ev){const target=ev.target.closest('[data-action]');if(!target)return;const a=target.dataset.action,id=target.dataset.id;
   try{
    if(a==='dismiss-dose-advisory'){if(this.draft?.id)this.dismissedDoseAdvisories.add(this.draft.id);const panel=sheet.querySelector?.('#shot-dose-advisory');if(panel)panel.hidden=true;return;}
@@ -977,25 +987,24 @@ class CloudApp {
     this.readDraft();
     const r=E.recommendation(this.state,this.logCoffee,{style:this.draft.style,basketId:this.draft.basketId,feedMode:this.draft.feedMode});
     const control=a==='use-grind'?'grind':'temperature';
-    if(control==='grind')sheet.querySelector('[name=grindSetting]').value=r.grind.value;
+    if(control==='grind'){
+     sheet.querySelector('[name=grindSetting]').value=r.grind.value;
+     this.appliedRecommendationValues.grind=String(r.grind.value);
+    }
     else{
       this.draft.tempC=r.tempC;
       const temperatureInput=sheet.querySelector('[name=temperature]');
       if(temperatureInput){
        temperatureInput.value=C.tempDisplay(r.tempC,this.logUnit);
+       this.appliedRecommendationValues.temperature=String(temperatureInput.value);
        // Explicitly using the recommended value replaces the historical
        // prefill; its cross-style provenance no longer describes this value.
        temperatureInput.closest?.('.field')?.querySelector?.('small')?.remove?.();
       }
       this.draft.tempSource='';
      }
-    this.draft.recommendationContext={
-      source_label:String(r.source||'Starting recommendation').slice(0,90),
-      used_controls:[...new Set([...(this.draft.recommendationContext?.used_controls||[]),control])],
-      ...(r.communityEvidence?{community_tier:r.communityEvidence.tier,
-       contributor_count:r.communityEvidence.contributorCount,
-       shot_count:r.communityEvidence.shotCount}: {})
-    };
+    this.draft.recommendationContext=recordRecommendationUse(
+      this.draft.recommendationContext,control,r.source,r.communityEvidence);
     this.readDraft();return;
    }
    if(a==='switch'){this.show('Your Workspaces',this.state.setups.map(x=>`<div class="switch-row"><div class="switch-info"><strong>${e(x.name)}</strong>${x.id===this.state.activeSetupId?'<small>Current Setup</small>':''}</div><div class="switch-actions">${button('Use','choose-setup',`data-id="${e(x.id)}"`,'secondary compact')}${button('Rename','rename-setup',`data-id="${e(x.id)}"`,'ghost compact')}</div></div>`).join(''));return;}

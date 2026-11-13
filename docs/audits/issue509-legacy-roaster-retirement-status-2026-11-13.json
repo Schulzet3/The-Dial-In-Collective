@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight_development_sha": "aae7b361bc8c8241a4851996d72eafef48a7d95c",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "classification": {
+    "production": "LEGACY ACTIVE",
+    "development": "RETIREMENT IN PROGRESS; #2389 SOURCE READY / NOT DEPLOYED",
+    "immutable_history": "HISTORICAL / ARCHIVED; do not delete or rename"
+  },
+  "source": {
+    "issue": 2389,
+    "migration_path": "supabase/migrations/20261113050000_dic_retire_roaster_directory.sql",
+    "migration_git_blob": "10775c86bf88e61160fdc66d35c65698638742d6",
+    "expected_published_change": "Archives old directory/evidence without destroying records, introduces protected alias and verified-source attestation tables, removes active SQL dependencies, tombstones old Edge endpoint to 410"
+  },
+  "live_provider": {
+    "applied_migration_count": 67,
+    "retirement_migration_applied": false,
+    "admin_quota_migration_applied": false,
+    "protected_old_tables": [
+      {
+        "name": "private.dic_roaster_directory",
+        "rls_enabled": true
+      },
+      {
+        "name": "private.dic_roaster_aliases",
+        "rls_enabled": true
+      }
+    ],
+    "new_attestation_tables_not_present": [
+      "private.dic_roaster_name_aliases",
+      "private.dic_official_source_attestations"
+    ],
+    "related_function_signatures_and_hashes": [
+      {
+        "schema": "private",
+        "proname": "dic_canonical_roaster_key",
+        "args": "value text",
+        "ddl_md5": "55aeb461080be1221e82d8a86a9d270d",
+        "ddl_chars": 573,
+        "reads_old_directory": true
+      },
+      {
+        "schema": "private",
+        "proname": "dic_find_coffee_matches",
+        "args": "p jsonb",
+        "ddl_md5": "0ba424a2a66e99dc98629a89d485680b",
+        "ddl_chars": 6024,
+        "reads_old_directory": true
+      },
+      {
+        "schema": "private",
+        "proname": "dic_promote_pending_coffee",
+        "args": "sid uuid, method text, evidence jsonb, distinct_confirmed boolean",
+        "ddl_md5": "f9c37ac804b3b2c425cd86284020b581",
+        "ddl_chars": 11956,
+        "reads_old_directory": true
+      },
+      {
+        "schema": "private",
+        "proname": "dic_roaster_key",
+        "args": "value text",
+        "ddl_md5": "e553ae6c1cf99c3784f5d14a4f05d355",
+        "ddl_chars": 388,
+        "reads_old_directory": false
+      },
+      {
+        "schema": "public",
+        "proname": "dic_roaster_preview_target",
+        "args": "host text",
+        "ddl_md5": "d264ace83ea27e01b12f789b2e2b4542",
+        "ddl_chars": 852,
+        "reads_old_directory": true
+      },
+      {
+        "schema": "public",
+        "proname": "dic_source_check_target",
+        "args": "submission_id uuid",
+        "ddl_md5": "6af6fa312bed8eb0ed26b31dc94da3b6",
+        "ddl_chars": 1401,
+        "reads_old_directory": true
+      }
+    ],
+    "active_edge_functions": 5,
+    "old_preview_edge": {
+      "id": "2fcc0537-ad32-488f-b398-d22f46dc7f28",
+      "slug": "dic-preview-coffee",
+      "name": "dic-preview-coffee",
+      "status": "ACTIVE",
+      "version": 6,
+      "created_at": 1792165387116,
+      "updated_at": 1792766358889,
+      "verify_jwt": true,
+      "import_map": false,
+      "entrypoint_path": "file:///tmp/user_fn_azviqqejypsefzilgonr_2fcc0537-ad32-488f-b398-d22f46dc7f28_4/source/dic-preview-coffee/index.ts",
+      "ezbr_sha256": "ac928ceb4898414555fbcc96afb30b0963f7c819c5d7e211abd5b3893090648c"
+    }
+  },
+  "risk_evaluation": "Five live SQL functions reference old directory; the legacy Edge is ACTIVE JWT-required at deployed v6, distinct from unshipped development tombstone. The source migration does not establish deployed retirement. This is not proof of unapproved arbitrary-URL blockage in current Netlify runtime; retain URL-universal behavior independently.",
+  "boundaries": "No production SQL/DML/DDL/Auth/Storage/Edge/config modifications, no current user or shot records read, no production deletion or new Publish authorization",
+  "next_safe_action": "Mark current GitHub navigation LEGACY ACTIVE versus RETIREMENT IN PROGRESS; preserve old migration evidence HISTORICAL. Continue native routine #2201 after per-item source receipts; verify deployment only after separate authorized Publish."
+}

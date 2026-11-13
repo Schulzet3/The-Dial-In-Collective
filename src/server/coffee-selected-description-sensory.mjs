@@ -1,6 +1,7 @@
 // Exact selected-product description notes supplement a shorter printed profile.
 // Never use meta/SEO, related products, alternatives, preparation or guessed notes.
 import {productCoffeeProse,NONCURRENT_COFFEE_PROSE} from './coffee-product-prose.mjs';
+import {removeElements} from '../../supabase/functions/_shared/html-scan.mjs';
 import {normalizeExplicitCoffeeTastingNotes} from './coffee-flavor-evidence.mjs';
 const fold=s=>String(s||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
  .replace(/[^a-z0-9]+/g,' ').trim();
@@ -165,4 +166,120 @@ export function refineSelectedCurrentFlavorBase(html,{clean,notes}={}){
   }
  }
  return candidates.size===1?[...candidates][0]:'';
+}
+
+
+
+// A current chosen coffee can give a single literal sensory arc instead of a
+// separate Tasting Notes caption: "floral aroma ... notes of A and B ...
+// finishing with a hint of C". Only augment an existing direct two-note
+// extraction when the *same* unqualified selected-product sentence repeats
+// both accepted notes. Stronger printed lists and structured fields remain
+// controlling at the call site; this helper never reads SEO or another coffee.
+export function refineSelectedCurrentSensoryArc(html,{clean,notes}={}){
+ if(typeof html!=='string'||html.length>2_000_000||typeof clean!=='function'||
+    typeof notes!=='string'||notes.length<8||notes.length>220)return '';
+ const selectedHtml=removeElements(html,['script','style','noscript','template','nav','aside','footer','header','select']);
+ const blocks=productCoffeeProse(selectedHtml,clean);
+ const headings=blocks.filter(b=>b.tag==='h1'&&!b.educational);
+ if(headings.length!==1||!headings[0].text||headings[0].text.length>180)return '';
+ const title=fold(headings[0].text);
+ const allowed=/^(?:product info|product information|product description|description|coffee description|about the coffee|about this coffee|coffee details|details|coffee notes|tasting notes|flavor notes|flavour notes|coffee profile|overview)$/u;
+ const parts=notes.split(/\s*(?:,|&|[•·;|]|\band\b)\s*/iu).map(x=>x.trim()).filter(Boolean);
+ if(parts.length<2||parts.length>6||parts.some(x=>!normalizeExplicitCoffeeTastingNotes(x)))return '';
+ const found=new Set();
+ for(const block of blocks){
+  if(block.tag!=='p'||block.educational||block.text.length<60||block.text.length>850||
+     unavailable.test(block.section)||unavailable.test(block.text)||
+     NONCURRENT_COFFEE_PROSE.test(block.text))continue;
+  const section=fold(block.section);
+  if(section&&section!==title&&!allowed.test(section))continue;
+  for(const sentence of block.text.split(/(?<=[.!?])\s+/u).slice(0,12)){
+   if(sentence.length>500||unavailable.test(sentence)||NONCURRENT_COFFEE_PROSE.test(sentence))continue;
+   const arc=sentence.match(/\bwith\s+(?:an?\s+)?(?:(?:delicate|subtle|bright|gentle|distinct|pronounced)\s+)?(floral|jasmine|citrus|chocolate|vanilla|nutty)\s+aroma\s*,\s*(?:it|this coffee|the cup)\s+(?:reveals?|offers?|presents?|has|shows?)\s+notes?\s+of\s+([^.!?;,]{5,120}?)\s*,\s*finishing\s+with\s+(?:an?\s+)?(?:(?:soft|subtle|gentle|lingering|long)\s+)?(?:hint|note)\s+of\s+(vanilla|caramel|chocolate|cocoa|honey|toffee|jasmine|almond|hazelnut|citrus|cinnamon|orange|lemon|lime|peach|cherry|apple|berry|plum|grape|nougat|molasses|apricot)(?=[.!?]|$)/iu);
+   if(!arc||fold(arc[2])!==fold(parts.join(' and ')))continue;
+   const extras=[arc[1],arc[3]];
+   if(extras.some(x=>parts.some(p=>fold(p)===fold(x)))||fold(extras[0])===fold(extras[1]))continue;
+   const complete=normalizeExplicitCoffeeTastingNotes([extras[0],...parts,extras[1]].join(', '));
+   if(complete)found.add(complete);
+  }
+ }
+ // Multiple nonidentical selected narratives are a dispute, not an autofill.
+ return found.size===1?[...found][0]:'';
+}
+
+// A present selected product sometimes says "we are tasting A and B with a C
+// note" rather than "notes of A, B, C". The lower-ranked narrative extractor
+// conservatively stops at "with a/an", dropping a literal third descriptor.
+// Add one exact printed descriptor only when the same unqualified selected
+// paragraph repeats ALL already accepted notes and there is one H1. No
+// roaster-specific exceptions, meta, sibling products or guessed profiles.
+export function refineSelectedCurrentTrailingFlavorNote(html,{clean,notes}={}){
+ if(typeof html!=='string'||html.length>2_000_000||typeof clean!=='function'||
+    typeof notes!=='string'||notes.length<8||notes.length>300)return '';
+ // The shared product scope can still contain sibling <aside> and recommendation
+ // furniture; remove those areas BEFORE collecting any current-note paragraph.
+ const current=removeElements(html,['script','style','noscript','template','nav','aside','footer']);
+ const blocks=productCoffeeProse(current,clean);
+ const headings=blocks.filter(b=>b.tag==='h1'&&!b.educational);
+ if(headings.length!==1||!headings[0].text||headings[0].text.length>180)return '';
+ const selected=fold(headings[0].text);
+ const allowed=/^(?:product info|product information|product description|description|coffee description|about the coffee|about this coffee|coffee details|details|coffee notes|tasting notes|flavor notes|flavour notes|coffee profile|overview)$/u;
+ const parts=notes.split(/\s*(?:,|&|[•·;|]|\band\b)\s*/iu).map(s=>s.trim()).filter(Boolean);
+ if(parts.length<2||parts.length>6||parts.some(p=>!normalizeExplicitCoffeeTastingNotes(p)))return '';
+ const found=new Set();
+ for(const block of blocks){
+  if(block.tag!=='p'||block.educational||block.text.length<32||block.text.length>650||
+     unavailable.test(block.section)||NONCURRENT_COFFEE_PROSE.test(block.text))continue;
+  const section=fold(block.section);
+  if(section&&section!==selected&&!allowed.test(section))continue;
+  for(const sentence of block.text.split(/(?<=[.!?])\s+/u).slice(0,12)){
+   if(sentence.length>450||unavailable.test(sentence)||NONCURRENT_COFFEE_PROSE.test(sentence))continue;
+   const match=sentence.match(/^(?:In this (?:coffee|cup)\s+)?we(?:['’]re| are)\s+tasting\s+(.{5,155}?)\s+with\s+(?:a|an)\s+([\p{L}\p{M}][\p{L}\p{M} -]{2,55}?)\s+(?:tasting\s+|flavou?r\s+)?note(?:\s+that\s+[^.!?]{1,110})?[.!?]?$/iu);
+   if(!match||fold(match[1])!==fold(parts.join(' and ')))continue;
+   const extra=match[2].trim();
+   if(extra.split(/\s+/u).length>3||
+      /\b(?:body|mouthfeel|acidity|finish|flavou?r|roast|process|coffee|beans?|prepared|brew|milk|cream|clean|smooth|pleasant|delicate|lingering|bright|sweet)\b/iu.test(extra)||
+      !/\b(?:bitters?|chocolate|cocoa|cacao|caramel|toffee|hazelnut|almond|vanilla|plum|cherry|orange|citrus|lemon|lime|apple|peach|pear|berry|berries|jasmine|floral|florals|grape|honey|nutmeg|clove|cinnamon|mango|melon|fruit|praline|nougat)\b/iu.test(extra)||
+      parts.some(p=>fold(p)===fold(extra))||
+      !normalizeExplicitCoffeeTastingNotes(extra))continue;
+   const augmented=normalizeExplicitCoffeeTastingNotes([...parts,extra].join(', '));
+   if(augmented)found.add(augmented);
+  }
+ }
+ return found.size===1?[...found][0]:'';
+}
+
+
+// Direct current selected-product prose can state a literal tasting substance
+// as an "overtone", while a sitewide roast tutorial supplies lower-ranked
+// general espresso notes. Accept only ONE self-describing selected coffee
+// paragraph under the matching product's "About" section. Never borrow a
+// generic roast guide, another product, SEO, historical or conditional prose.
+export function selectedCurrentProductOvertone(html,{clean}={}){
+ if(typeof html!=='string'||html.length>2_000_000||typeof clean!=='function')return null;
+ const scoped=removeElements(html,['script','style','noscript','template','nav','aside','footer','header','select']);
+ const blocks=productCoffeeProse(scoped,clean);
+ const h1=blocks.filter(b=>b.tag==='h1'&&!b.educational);
+ if(h1.length!==1||h1[0].text.length>180)return null;
+ const selected=fold(h1[0].text).replace(/\s+\d+(?:\.\d+)?\s*(?:oz|lb|lbs|g|kg)$/u,'');
+ if(selected.length<8)return null;
+ const hits=[];
+ for(const block of blocks){
+  if(block.tag!=='p'||block.educational||block.text.length<65||block.text.length>600||
+    unavailable.test(block.text)||unavailable.test(block.section)||
+    NONCURRENT_COFFEE_PROSE.test(block.text))continue;
+  const section=fold(block.section).replace(/^about (?:our|the|this) /u,'');
+  if(!section||!(section===selected||section.startsWith(selected+' ')||selected.startsWith(section+' ')))continue;
+  for(const sentence of block.text.split(/(?<=[.!?])\s+/u).slice(0,8)){
+   if(sentence.length>420||unavailable.test(sentence)||NONCURRENT_COFFEE_PROSE.test(sentence))continue;
+   const m=sentence.match(/\b(?:our|the|this)\s+[^.!?]{3,90}?\bcoffee\s+is\s+an?\s+(?:light|medium(?:[ -]dark)?|dark)\s+roast\b[^.!?]{0,180}?\b(?:noticeable|distinct|pronounced|clear)\s+(chocolate|cocoa|caramel|toffee|vanilla|hazelnut|almond|citrus|cherry|berry)\s+overtones\b/iu);
+   if(!m)continue;
+   const value=normalizeExplicitCoffeeTastingNotes(m[1]);
+   if(value)hits.push({value,section:block.section,quote:sentence.slice(0,300)});
+  }
+ }
+ // If the selected product offers multiple such descriptions, keep them for
+ // review rather than silently choosing the first or a merged profile.
+ return hits.length===1?hits[0]:null;
 }

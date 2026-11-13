@@ -217,7 +217,7 @@ function explicitProseRoasts(html){
     .replace(/\bwithout chaos\b/gi,'');
    if(/\b(?:our|the|a)\s+(?:previous|prior|former|historical)\b|\b(?:many|most|some|other)\s+roasters?\b/i.test(context)||
     NONCURRENT_COFFEE_PROSE.test(context)||
-    /\b(?:light|medium|dark)\s+to\s+(?:light|medium|dark)\b|\bmedium\s*\/\s*medium[ -]dark\b/i.test(sentence)||
+    /\b(?:light|medium|dark)\s*(?:[-–—]\s*)?to(?:\s*[-–—])?\s*(?:light|medium|dark)\b|\bmedium\s*\/\s*medium[ -]dark\b/i.test(sentence)||
     /\b(?:roast (?:levels|scale|spectrum|options|range)|range (?:of|from)|from light to|between light and|than|for (?:fans|lovers) of|if you (?:like|prefer)|each coffee|every coffee|every bean|our specialty|specialty has been|roast specialists|roast coffees|other decaf|average beans|also available as|guided brew|brewing preset|(?:ideal|suited|suitable) for|touch of|roast component)\b/i.test(sentence))continue;
    // Current selected prose that explicitly calls this the roaster's
    // "darkest ... roast yet" supports Dark. Do not read general menus,

@@ -87,10 +87,12 @@ export function nextShotTitle(advice){
 }
 export function nextShotGuidance(advice,shot,showTemp=false,unit='F'){
  const adjustment=nextShotAdjustment(advice,shot,showTemp,unit);
- if(!adjustment)return `<p class="helper next-shot-original-advice">${e(advice?.text||'')}</p>`;
+ // Whether a numeric arrow is possible or not, never conceal a supplied
+ // source/uncertainty note. Keep the original textual guidance as fallback.
+ const note=advice?.evidenceNote?'<p class="next-shot-evidence">'+e(advice.evidenceNote)+'</p>':'';
+ if(!adjustment)return `<p class="helper next-shot-original-advice">${e(advice?.text||'')}</p>${note}`;
  const {label,before,after,unit:measure,keep}=adjustment;
  const spoken=e(`${label} from ${before} to ${after}${measure?' '+measure:''}`);
- const note=advice?.evidenceNote?'<p class="next-shot-evidence">'+e(advice.evidenceNote)+'</p>':'';
  const source=advice?.text?.includes('Sized from your own comparable adjustments.')?
   '<p class="next-shot-evidence">Adjustment sized from your comparable shots.</p>':'';
  return `<div class="next-shot-change" role="group" aria-label="${spoken}"><span class="next-shot-variable">${e(label)}</span><span class="next-shot-number">${e(before)}</span><span class="next-shot-arrow" aria-hidden="true">→</span><span class="next-shot-number">${e(after)}</span>${measure?`<span class="next-shot-unit">${e(measure)}</span>`:''}</div><p class="next-shot-keep">Keep ${e(keep)} unchanged.</p>${source}${note}`;
@@ -152,7 +154,15 @@ export function radar(t){
  const outline=complete?`<polygon points="${dots.map(d=>d.p.join(',')).join(' ')}" class="radar-result ${SCALES.every(sc=>t[sc.key]===sc.ideal)?'is-ideal':''}"/>`:'';
  return `<svg class="radar" viewBox="0 0 280 250" role="img" aria-label="Taste compass: ${e(names)}"><title>Taste compass. Green near the center means ideal for your taste. Unrated tastes are not plotted.</title>${[.2,.4,.6,.8,1].map(k=>`<polygon points="${poly(r*k)}" class="radar-grid"/>`).join('')}${SCALES.map((sc,i)=>{const [x,y]=pt(i,r),[tx,ty]=pt(i,r+20);return `<path d="M${cx} ${cy}L${x} ${y}" class="radar-grid"/><text x="${tx}" y="${ty}" text-anchor="middle" dominant-baseline="middle">${e(sc.key==='astringency'?'Dryness':sc.label)}</text>`;}).join('')}${outline}${dots.map(d=>`<circle cx="${d.p[0]}" cy="${d.p[1]}" r="4.5" class="dot severity-${d.severity}"/>`).join('')}</svg>`;
 }
+// Keep the editable Log Shot draft writable even when an archived import
+// has a missing/nonobject taste record. Never mutate the original shot and
+// never synthesize a recorded score; valid partial choices survive.
+export function editableTasteScales(value) {
+ return value && typeof value==='object' && !Array.isArray(value) ? {...value} : {};
+}
+
 export function scales(t={}) {
+ t=t && typeof t==='object'?t:{};
  return `<fieldset class="sensory"><legend>How did it taste?</legend>${SCALES.map(sc=>`<div class="scale" data-scale="${sc.key}"><div class="scale-top"><span>${e(sc.label)}</span><output>${e(tasteLabel(sc,t[sc.key]))}</output></div><div class="scale-control"><small>${e(sc.low)}</small><div role="group" aria-label="${e(sc.label)}">${(sc.reverse?[5,4,3,2,1]:[1,2,3,4,5]).map(n=>`<button type="button" class="scale-button severity-${tasteSeverity(sc,n)} ${t[sc.key]===n?'chosen':''}" data-action="rate" data-key="${sc.key}" data-value="${n}" aria-label="${e(sc.label)}: ${e(tasteLabel(sc,n))}" aria-pressed="${t[sc.key]===n}"><span>${t[sc.key]===n?'\u2713':''}</span></button>`).join('')}</div><small>${e(sc.high)}</small></div><p>${e(sc.hint)}</p></div>`).join('')}</fieldset>`;
 }
 // Update a single sensory row in place. Replacing #ratings after each tap

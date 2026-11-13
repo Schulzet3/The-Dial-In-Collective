@@ -1,0 +1,612 @@
+{
+  "issue": 509,
+  "run": 218,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight_development_sha": "0a859564ebfb47e389fd2bc3d23f505f876b63b6",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "observed_at": "2026-11-13 13:53:04.337413+00",
+  "scope": "Read-only bounded numeric telemetry, no member rows, no SQL text, not full word audit",
+  "queries": {
+    "empty": "SELECT 'pg_seclabel' AS name,count(*) AS records FROM pg_seclabel UNION ALL SELECT 'pg_shseclabel',count(*) FROM pg_shseclabel UNION ALL SELECT 'pg_transform',count(*) FROM pg_transform UNION ALL SELECT 'pg_statistic_ext',count(*) FROM pg_statistic_ext UNION ALL SELECT 'pg_foreign_data_wrapper',count(*) FROM pg_foreign_data_wrapper UNION ALL SELECT 'pg_foreign_server',count(*) FROM pg_foreign_server UNION ALL SELECT 'pg_user_mapping',count(*) FROM pg_user_mapping UNION ALL SELECT 'pg_subscription',count(*) FROM pg_subscription UNION ALL SELECT 'pg_replication_origin',count(*) FROM pg_replication_origin UNION ALL SELECT 'pg_prepared_xacts',count(*) FROM pg_prepared_xacts UNION ALL SELECT 'pg_inherits',count(*) FROM pg_inherits ORDER BY name",
+    "top": "SELECT queryid::text AS id,calls,round(total_exec_time::numeric,2) AS total_ms,round(mean_exec_time::numeric,3) AS mean_ms,round(max_exec_time::numeric,3) AS max_ms,rows,shared_blks_hit,shared_blks_read,temp_blks_written FROM pg_stat_statements WHERE queryid IS NOT NULL AND calls>=10 ORDER BY total_exec_time DESC,queryid LIMIT 30",
+    "roles": "SELECT coalesce(r.rolname,'unknown_role') AS role,count(*) AS fingerprints,sum(s.calls) AS calls,round(sum(s.total_exec_time)::numeric,1) AS total_ms,sum(s.temp_blks_written) AS temp_blocks,count(*) FILTER (WHERE s.mean_exec_time>200 AND s.calls>=10) AS slow_mean FROM pg_stat_statements s LEFT JOIN pg_roles r ON r.oid=s.userid GROUP BY 1 ORDER BY sum(s.temp_blks_written) DESC,1",
+    "config": "SELECT name,setting,source,pending_restart FROM pg_settings WHERE name IN ('track_functions','track_activities','track_counts','track_io_timing','compute_query_id','log_min_duration_statement','log_lock_waits','deadlock_timeout','shared_preload_libraries','pg_stat_statements.track','pg_stat_statements.track_utility') ORDER BY name",
+    "db": "SELECT clock_timestamp() AS at,numbackends,xact_commit,xact_rollback,deadlocks,temp_files,temp_bytes,blk_read_time,blk_write_time,stats_reset FROM pg_stat_database WHERE datname=current_database()",
+    "fn": "SELECT count(*) AS function_stat_rows FROM pg_stat_user_functions",
+    "locks": "SELECT count(*) FILTER (WHERE NOT granted) AS waiting_locks,count(*) FILTER (WHERE granted) AS granted_locks FROM pg_locks"
+  },
+  "results": {
+    "empty": [
+      {
+        "name": "pg_foreign_data_wrapper",
+        "records": 0
+      },
+      {
+        "name": "pg_foreign_server",
+        "records": 0
+      },
+      {
+        "name": "pg_inherits",
+        "records": 0
+      },
+      {
+        "name": "pg_prepared_xacts",
+        "records": 0
+      },
+      {
+        "name": "pg_replication_origin",
+        "records": 0
+      },
+      {
+        "name": "pg_seclabel",
+        "records": 0
+      },
+      {
+        "name": "pg_shseclabel",
+        "records": 0
+      },
+      {
+        "name": "pg_statistic_ext",
+        "records": 0
+      },
+      {
+        "name": "pg_subscription",
+        "records": 0
+      },
+      {
+        "name": "pg_transform",
+        "records": 0
+      },
+      {
+        "name": "pg_user_mapping",
+        "records": 0
+      }
+    ],
+    "top": [
+      {
+        "id": "1725044562985116050",
+        "calls": 4753,
+        "total_ms": "71625.42",
+        "mean_ms": "15.070",
+        "max_ms": "1566.380",
+        "rows": 4753,
+        "shared_blks_hit": 8344686,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-7726440967385220442",
+        "calls": 106,
+        "total_ms": "17375.21",
+        "mean_ms": "163.917",
+        "max_ms": "307.761",
+        "rows": 63388,
+        "shared_blks_hit": 0,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "1554751528326282872",
+        "calls": 27,
+        "total_ms": "15055.79",
+        "mean_ms": "557.622",
+        "max_ms": "1240.053",
+        "rows": 1045,
+        "shared_blks_hit": 1685894,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-2647655532108368607",
+        "calls": 29,
+        "total_ms": "13588.91",
+        "mean_ms": "468.583",
+        "max_ms": "2248.512",
+        "rows": 2262,
+        "shared_blks_hit": 210,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-8294602713382524533",
+        "calls": 2585,
+        "total_ms": "11836.23",
+        "mean_ms": "4.579",
+        "max_ms": "162.997",
+        "rows": 2585,
+        "shared_blks_hit": 1785586,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-8647284770412454280",
+        "calls": 1192,
+        "total_ms": "10461.51",
+        "mean_ms": "8.776",
+        "max_ms": "758.636",
+        "rows": 1192,
+        "shared_blks_hit": 429481,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "4868794970434878014",
+        "calls": 36,
+        "total_ms": "7893.32",
+        "mean_ms": "219.259",
+        "max_ms": "1436.967",
+        "rows": 36,
+        "shared_blks_hit": 0,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-7990357377309318073",
+        "calls": 431,
+        "total_ms": "5860.33",
+        "mean_ms": "13.597",
+        "max_ms": "116.560",
+        "rows": 431,
+        "shared_blks_hit": 90427,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "3811097392025773740",
+        "calls": 14,
+        "total_ms": "5513.29",
+        "mean_ms": "393.807",
+        "max_ms": "613.187",
+        "rows": 1470,
+        "shared_blks_hit": 98008,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-8856799461280935852",
+        "calls": 106,
+        "total_ms": "5092.18",
+        "mean_ms": "48.039",
+        "max_ms": "509.271",
+        "rows": 8467,
+        "shared_blks_hit": 163503,
+        "shared_blks_read": 76,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "1795822111904855936",
+        "calls": 93,
+        "total_ms": "4976.55",
+        "mean_ms": "53.511",
+        "max_ms": "126.828",
+        "rows": 19689,
+        "shared_blks_hit": 45678,
+        "shared_blks_read": 3,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-6340671216805360367",
+        "calls": 106,
+        "total_ms": "4897.75",
+        "mean_ms": "46.205",
+        "max_ms": "330.743",
+        "rows": 2357,
+        "shared_blks_hit": 196952,
+        "shared_blks_read": 259,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "8991972272712484424",
+        "calls": 21,
+        "total_ms": "4368.88",
+        "mean_ms": "208.042",
+        "max_ms": "349.127",
+        "rows": 1638,
+        "shared_blks_hit": 60,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "8580411586163530256",
+        "calls": 104,
+        "total_ms": "4271.35",
+        "mean_ms": "41.071",
+        "max_ms": "98.237",
+        "rows": 22948,
+        "shared_blks_hit": 274522,
+        "shared_blks_read": 2,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "6210997391053278587",
+        "calls": 13,
+        "total_ms": "3812.11",
+        "mean_ms": "293.240",
+        "max_ms": "507.206",
+        "rows": 228,
+        "shared_blks_hit": 492590,
+        "shared_blks_read": 13,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "2180288267061557690",
+        "calls": 68,
+        "total_ms": "3601.59",
+        "mean_ms": "52.965",
+        "max_ms": "470.104",
+        "rows": 68,
+        "shared_blks_hit": 81636,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "5669973040834028811",
+        "calls": 670,
+        "total_ms": "3372.72",
+        "mean_ms": "5.034",
+        "max_ms": "36.539",
+        "rows": 670,
+        "shared_blks_hit": 194840,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-3856660887648347173",
+        "calls": 428,
+        "total_ms": "3095.36",
+        "mean_ms": "7.232",
+        "max_ms": "98.552",
+        "rows": 428,
+        "shared_blks_hit": 337250,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-4828288663145051522",
+        "calls": 236,
+        "total_ms": "2742.08",
+        "mean_ms": "11.619",
+        "max_ms": "95.753",
+        "rows": 236,
+        "shared_blks_hit": 43569,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-3853304512339224630",
+        "calls": 93,
+        "total_ms": "2729.73",
+        "mean_ms": "29.352",
+        "max_ms": "52.085",
+        "rows": 495687,
+        "shared_blks_hit": 4590,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "1389798904427321193",
+        "calls": 93,
+        "total_ms": "2520.12",
+        "mean_ms": "27.098",
+        "max_ms": "55.168",
+        "rows": 28346,
+        "shared_blks_hit": 15720,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-6208388078200157674",
+        "calls": 92,
+        "total_ms": "2468.68",
+        "mean_ms": "26.833",
+        "max_ms": "80.242",
+        "rows": 66866,
+        "shared_blks_hit": 43308,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "2669020654105127862",
+        "calls": 111,
+        "total_ms": "2361.35",
+        "mean_ms": "21.273",
+        "max_ms": "112.771",
+        "rows": 111,
+        "shared_blks_hit": 100126,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-5708723254081763768",
+        "calls": 25,
+        "total_ms": "2253.84",
+        "mean_ms": "90.154",
+        "max_ms": "360.318",
+        "rows": 605,
+        "shared_blks_hit": 66,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-8384119247527024938",
+        "calls": 350,
+        "total_ms": "2243.64",
+        "mean_ms": "6.410",
+        "max_ms": "103.190",
+        "rows": 350,
+        "shared_blks_hit": 219380,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-3281422650445877289",
+        "calls": 472,
+        "total_ms": "2220.99",
+        "mean_ms": "4.705",
+        "max_ms": "119.927",
+        "rows": 472,
+        "shared_blks_hit": 249270,
+        "shared_blks_read": 4,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-4904269737613224597",
+        "calls": 33,
+        "total_ms": "2049.82",
+        "mean_ms": "62.116",
+        "max_ms": "223.633",
+        "rows": 33,
+        "shared_blks_hit": 26646,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "6908682427559685386",
+        "calls": 93,
+        "total_ms": "1964.09",
+        "mean_ms": "21.119",
+        "max_ms": "30.629",
+        "rows": 22226,
+        "shared_blks_hit": 1013098,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "1798441094307054606",
+        "calls": 249,
+        "total_ms": "1948.20",
+        "mean_ms": "7.824",
+        "max_ms": "36.603",
+        "rows": 249,
+        "shared_blks_hit": 30441,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-7575955683434934462",
+        "calls": 18666,
+        "total_ms": "1674.43",
+        "mean_ms": "0.090",
+        "max_ms": "77.032",
+        "rows": 18666,
+        "shared_blks_hit": 129363,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      }
+    ],
+    "roles": [
+      {
+        "role": "postgres",
+        "fingerprints": 4078,
+        "calls": "46798",
+        "total_ms": "146789.1",
+        "temp_blocks": "186153",
+        "slow_mean": 2
+      },
+      {
+        "role": "anon",
+        "fingerprints": 4,
+        "calls": "45",
+        "total_ms": "10.7",
+        "temp_blocks": "0",
+        "slow_mean": 0
+      },
+      {
+        "role": "authenticated",
+        "fingerprints": 78,
+        "calls": "24214",
+        "total_ms": "109541.9",
+        "temp_blocks": "0",
+        "slow_mean": 0
+      },
+      {
+        "role": "authenticator",
+        "fingerprints": 19,
+        "calls": "20248",
+        "total_ms": "29802.5",
+        "temp_blocks": "0",
+        "slow_mean": 0
+      },
+      {
+        "role": "pgbouncer",
+        "fingerprints": 2,
+        "calls": "982",
+        "total_ms": "5662.7",
+        "temp_blocks": "0",
+        "slow_mean": 0
+      },
+      {
+        "role": "service_role",
+        "fingerprints": 16,
+        "calls": "6189",
+        "total_ms": "17723.7",
+        "temp_blocks": "0",
+        "slow_mean": 0
+      },
+      {
+        "role": "supabase_admin",
+        "fingerprints": 222,
+        "calls": "16713",
+        "total_ms": "16047.2",
+        "temp_blocks": "0",
+        "slow_mean": 1
+      },
+      {
+        "role": "supabase_auth_admin",
+        "fingerprints": 256,
+        "calls": "8090",
+        "total_ms": "10555.5",
+        "temp_blocks": "0",
+        "slow_mean": 0
+      },
+      {
+        "role": "supabase_read_only_user",
+        "fingerprints": 11,
+        "calls": "81",
+        "total_ms": "36160.5",
+        "temp_blocks": "0",
+        "slow_mean": 3
+      },
+      {
+        "role": "supabase_storage_admin",
+        "fingerprints": 180,
+        "calls": "491",
+        "total_ms": "605.2",
+        "temp_blocks": "0",
+        "slow_mean": 0
+      }
+    ],
+    "config": [
+      {
+        "name": "compute_query_id",
+        "setting": "auto",
+        "source": "default",
+        "pending_restart": false
+      },
+      {
+        "name": "deadlock_timeout",
+        "setting": "1000",
+        "source": "default",
+        "pending_restart": false
+      },
+      {
+        "name": "log_lock_waits",
+        "setting": "on",
+        "source": "configuration file",
+        "pending_restart": false
+      },
+      {
+        "name": "log_min_duration_statement",
+        "setting": "-1",
+        "source": "default",
+        "pending_restart": false
+      },
+      {
+        "name": "pg_stat_statements.track",
+        "setting": "top",
+        "source": "default",
+        "pending_restart": false
+      },
+      {
+        "name": "pg_stat_statements.track_utility",
+        "setting": "on",
+        "source": "default",
+        "pending_restart": false
+      },
+      {
+        "name": "shared_preload_libraries",
+        "setting": "pg_stat_statements, pgaudit, plpgsql, plpgsql_check, pg_cron, pg_net, pgsodium, auto_explain, pg_tle, plan_filter, supabase_vault",
+        "source": "configuration file",
+        "pending_restart": false
+      },
+      {
+        "name": "track_activities",
+        "setting": "on",
+        "source": "default",
+        "pending_restart": false
+      },
+      {
+        "name": "track_counts",
+        "setting": "on",
+        "source": "default",
+        "pending_restart": false
+      },
+      {
+        "name": "track_functions",
+        "setting": "none",
+        "source": "default",
+        "pending_restart": false
+      },
+      {
+        "name": "track_io_timing",
+        "setting": "off",
+        "source": "default",
+        "pending_restart": false
+      }
+    ],
+    "db": [
+      {
+        "at": "2026-11-13 13:53:04.337413+00",
+        "numbackends": 9,
+        "xact_commit": 2173136,
+        "xact_rollback": 435,
+        "deadlocks": 0,
+        "temp_files": 56135,
+        "temp_bytes": 164165585622,
+        "blk_read_time": 0,
+        "blk_write_time": 0,
+        "stats_reset": "2026-10-02 18:01:15.201525+00"
+      }
+    ],
+    "fn": [
+      {
+        "function_stat_rows": 0
+      }
+    ],
+    "locks": [
+      {
+        "waiting_locks": 0,
+        "granted_locks": 2
+      }
+    ]
+  },
+  "source_logs_24h_aggregate_counts": {
+    "edge_logs": 2194,
+    "function_logs": 1046,
+    "postgres_logs": 587,
+    "function_edge_logs": 522,
+    "pgbouncer_logs": 83,
+    "postgrest_logs": 38,
+    "supavisor_logs": 27,
+    "auth_logs": 17,
+    "auth_audit_logs": 8,
+    "realtime_logs": 6,
+    "storage_logs": 6
+  },
+  "advisors": {
+    "rls_no_policy": 13,
+    "authenticated_definer": 10,
+    "breached_password_warning": 1,
+    "unindexed_fk": 14,
+    "zero_scan_indexes": 8,
+    "health": 0
+  },
+  "access_limit": "Read-only pg_hba_file_rules probe denied PostgreSQL 42501; hosted HBA/Auth/PostgREST unverified",
+  "findings": {
+    "empty_catalog_families": 11,
+    "top_numeric_fingerprints": 30,
+    "role_groups": 10,
+    "track_functions_none": true,
+    "function_stats_rows": 0,
+    "track_io_timing_off": true,
+    "temp_bytes_delta_since_run175": "19119376067",
+    "waiting_locks": 0,
+    "deadlocks": 0,
+    "first_time_source_words": 0,
+    "confirmed_defects": 0,
+    "justified_removals": 0,
+    "provider_writes": 0,
+    "implication": "No pg_stat_user_functions evidence can prove disuse while track_functions is none. Zero I/O timing does not prove no I/O. Temp activity cannot be assigned to member app without source/caller evidence."
+  },
+  "next": "Check new/changed definitions and hosted settings with #96; legacy directory remains LEGACY ACTIVE until #2389 Publish; provider baseline IN_PROGRESS."
+}

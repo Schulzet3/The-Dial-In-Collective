@@ -1,0 +1,530 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 220,
+  "scope": "READ_ONLY_PROVIDER_SQL_CATALOG_ROLE_BOUNDARY_DRIFT_NOT_FULL_DDL_REVIEW",
+  "project_ref": "azviqqejypsefzilgonr",
+  "observed_date": "2026-11-13",
+  "preflight": {
+    "initial_development_sha": "0af089172d33d4ab68871a275e6791d4c2921d35",
+    "prewrite_parent_sha": "339182c13128df42b6450101f294de5eaf670f51",
+    "blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "content_reverified": true
+  },
+  "branch_heads": {
+    "development": "339182c13128df42b6450101f294de5eaf670f51",
+    "main": "5e80f87e33ef331ee8c0a8fedfd1bd848eabc0f1",
+    "release_production": "2c02dbb267ca8fb1e56ddd0433c96c1bb4eca9d5"
+  },
+  "sql": {
+    "rls_no_policy": "SELECT coalesce(jsonb_agg(jsonb_build_object('relation',n.nspname||'.'||c.relname,'oid',c.oid,'owner',pg_get_userbyid(c.relowner),'rls',c.relrowsecurity,'force_rls',c.relforcerowsecurity,'policies',(SELECT count(*) FROM pg_policy p WHERE p.polrelid=c.oid),'anon',jsonb_build_object('select',has_table_privilege('anon',c.oid,'SELECT'),'insert',has_table_privilege('anon',c.oid,'INSERT'),'update',has_table_privilege('anon',c.oid,'UPDATE'),'delete',has_table_privilege('anon',c.oid,'DELETE')),'authenticated',jsonb_build_object('select',has_table_privilege('authenticated',c.oid,'SELECT'),'insert',has_table_privilege('authenticated',c.oid,'INSERT'),'update',has_table_privilege('authenticated',c.oid,'UPDATE'),'delete',has_table_privilege('authenticated',c.oid,'DELETE')),'service_role',jsonb_build_object('select',has_table_privilege('service_role',c.oid,'SELECT'),'insert',has_table_privilege('service_role',c.oid,'INSERT'),'update',has_table_privilege('service_role',c.oid,'UPDATE'),'delete',has_table_privilege('service_role',c.oid,'DELETE'))) ORDER BY n.nspname,c.relname),'[]'::jsonb) AS objects FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE c.relkind IN ('r','p') AND c.relrowsecurity AND NOT EXISTS(SELECT 1 FROM pg_policy p WHERE p.polrelid=c.oid) AND n.nspname IN('private','public')",
+    "role_gateway_and_session_config": "SELECT jsonb_build_object('role_membership',(SELECT coalesce(jsonb_agg(jsonb_build_object('role',r.rolname,'member',m.rolname,'admin',am.admin_option,'inherit',am.inherit_option,'set_role',am.set_option) ORDER BY r.rolname,m.rolname),'[]'::jsonb) FROM pg_auth_members am JOIN pg_roles r ON r.oid=am.roleid JOIN pg_roles m ON m.oid=am.member WHERE r.rolname IN('anon','authenticated','service_role','authenticator') OR m.rolname='authenticator'),'pgrst_session_settings',jsonb_build_object('schemas',current_setting('pgrst.db_schemas',true),'anon_role',current_setting('pgrst.db_anon_role',true),'pre_request',current_setting('pgrst.db_pre_request',true)),'visible_pgrst_count',(SELECT count(*) FROM pg_settings WHERE name LIKE 'pgrst.%'),'pgrst_nonsecret_role_overrides',(SELECT coalesce(jsonb_agg(jsonb_build_object('role',coalesce(r.rolname,'ALL'),'database',coalesce(d.datname,'ALL'),'setting',s.val)),'[]'::jsonb) FROM pg_db_role_setting v LEFT JOIN pg_roles r ON r.oid=v.setrole LEFT JOIN pg_database d ON d.oid=v.setdatabase CROSS JOIN LATERAL unnest(v.setconfig) s(val) WHERE split_part(s.val,'=',1) IN('pgrst.db_schemas','pgrst.db_anon_role','pgrst.db_pre_request','pgrst.db_extra_search_path')),'schema_usage',(SELECT coalesce(jsonb_agg(jsonb_build_object('schema',nspname,'anon',has_schema_privilege('anon',oid,'USAGE'),'authenticated',has_schema_privilege('authenticated',oid,'USAGE'),'service_role',has_schema_privilege('service_role',oid,'USAGE')) ORDER BY nspname),'[]'::jsonb) FROM pg_namespace WHERE nspname IN('auth','private','public','realtime','storage'))) AS boundary"
+  },
+  "counts": {
+    "no_policy_relations": 13,
+    "sql_table_privilege_checks": 156,
+    "external_role_privilege_checks": 104,
+    "role_memberships": 11,
+    "schemas_acl": 5,
+    "pgrst_effective_settings_in_sql_session": 0
+  },
+  "objects": [
+    {
+      "oid": "20413",
+      "rls": true,
+      "anon": {
+        "delete": false,
+        "insert": false,
+        "select": false,
+        "update": false
+      },
+      "owner": "postgres",
+      "policies": 0,
+      "relation": "private.dic_admin_account_delete_operations",
+      "force_rls": false,
+      "service_role": {
+        "delete": true,
+        "insert": true,
+        "select": true,
+        "update": true
+      },
+      "authenticated": {
+        "delete": false,
+        "insert": false,
+        "select": false,
+        "update": false
+      },
+      "verdict": "NO_DIRECT_CLIENT_TABLE_PRIVILEGES; RLS policy absent; no effective external-route test",
+      "scope_note": "Admin account-deletion operation state; deletion behavior not retested"
+    },
+    {
+      "oid": "20249",
+      "rls": true,
+      "anon": {
+        "delete": false,
+        "insert": false,
+        "select": false,
+        "update": false
+      },
+      "owner": "postgres",
+      "policies": 0,
+      "relation": "private.dic_admin_delete_receipts",
+      "force_rls": false,
+      "service_role": {
+        "delete": false,
+        "insert": false,
+        "select": false,
+        "update": false
+      },
+      "authenticated": {
+        "delete": false,
+        "insert": false,
+        "select": false,
+        "update": false
+      },
+      "verdict": "NO_DIRECT_CLIENT_TABLE_PRIVILEGES; RLS policy absent; no effective external-route test",
+      "scope_note": "Private account-deletion audit receipts; owner/function access outside this ACL query"
+    },
+    {
+      "oid": "20519",
+      "rls": true,
+      "anon": {
+        "delete": false,
+        "insert": false,
+        "select": false,
+        "update": false
+      },
+      "owner": "postgres",
+      "policies": 0,
+      "relation": "private.dic_admin_push_runtime",
+      "force_rls": false,
+      "service_role": {
+        "delete": false,
+        "insert": false,
+        "select": false,
+        "update": false
+      },
+      "authenticated": {
+        "delete": false,
+        "insert": false,
+        "select": false,
+        "update": false
+      },
+      "verdict": "NO_DIRECT_CLIENT_TABLE_PRIVILEGES; RLS policy absent; no effective external-route test",
+      "scope_note": "Private push scheduling state; service code not re-reviewed"
+    },
+    {
+      "oid": "19777",
+      "rls": true,
+      "anon": {
+        "delete": false,
+        "insert": false,
+        "select": false,
+        "update": false
+      },
+      "owner": "postgres",
+      "policies": 0,
+      "relation": "private.dic_coffee_aliases",
+      "force_rls": false,
+      "service_role": {
+        "delete": true,
+        "insert": true,
+        "select": true,
+        "update": true
+      },
+      "authenticated": {
+        "delete": false,
+        "insert": false,
+        "select": false,
+        "update": false
+      },
+      "verdict": "NO_DIRECT_CLIENT_TABLE_PRIVILEGES; RLS policy absent; no effective external-route test",
+      "scope_note": "Canonical alias storage; historical migration preserved"
+    },
+    {
+      "oid": "19812",
+      "rls": true,
+      "anon": {
+        "delete": false,
+        "insert": false,
+        "select": false,
+        "update": false
+      },
+      "owner": "postgres",
+      "policies": 0,
+      "relation": "private.dic_coffee_audit",
+      "force_rls": false,
+      "service_role": {
+        "delete": true,
+        "insert": true,
+        "select": true,
+        "update": true
+      },
+      "authenticated": {
+        "delete": false,
+        "insert": false,
+        "select": false,
+        "update": false
+      },
+      "verdict": "NO_DIRECT_CLIENT_TABLE_PRIVILEGES; RLS policy absent; no effective external-route test",
+      "scope_note": "Coffee provenance/audit state; no row samples accessed"
+    },
+    {
+      "oid": "19793",
+      "rls": true,
+      "anon": {
+        "delete": false,
+        "insert": false,
+        "select": false,
+        "update": false
+      },
+      "owner": "postgres",
+      "policies": 0,
+      "relation": "private.dic_coffee_first_entry",
+      "force_rls": false,
+      "service_role": {
+        "delete": true,
+        "insert": true,
+        "select": true,
+        "update": true
+      },
+      "authenticated": {
+        "delete": false,
+        "insert": false,
+        "select": false,
+        "update": false
+      },
+      "verdict": "NO_DIRECT_CLIENT_TABLE_PRIVILEGES; RLS policy absent; no effective external-route test",
+      "scope_note": "First coffee entry state; no rows accessed"
+    },
+    {
+      "oid": "20196",
+      "rls": true,
+      "anon": {
+        "delete": false,
+        "insert": false,
+        "select": false,
+        "update": false
+      },
+      "owner": "postgres",
+      "policies": 0,
+      "relation": "private.dic_first_style_prompt_seen",
+      "force_rls": false,
+      "service_role": {
+        "delete": true,
+        "insert": true,
+        "select": true,
+        "update": true
+      },
+      "authenticated": {
+        "delete": false,
+        "insert": false,
+        "select": false,
+        "update": false
+      },
+      "verdict": "NO_DIRECT_CLIENT_TABLE_PRIVILEGES; RLS policy absent; no effective external-route test",
+      "scope_note": "First-style prompt state; no rows accessed"
+    },
+    {
+      "oid": "20594",
+      "rls": true,
+      "anon": {
+        "delete": false,
+        "insert": false,
+        "select": false,
+        "update": false
+      },
+      "owner": "postgres",
+      "policies": 0,
+      "relation": "private.dic_member_approval_deliveries",
+      "force_rls": false,
+      "service_role": {
+        "delete": true,
+        "insert": true,
+        "select": true,
+        "update": true
+      },
+      "authenticated": {
+        "delete": false,
+        "insert": false,
+        "select": false,
+        "update": false
+      },
+      "verdict": "NO_DIRECT_CLIENT_TABLE_PRIVILEGES; RLS policy absent; no effective external-route test",
+      "scope_note": "Member approval delivery queue; identity and delivery rows not accessed"
+    },
+    {
+      "oid": "20621",
+      "rls": true,
+      "anon": {
+        "delete": false,
+        "insert": false,
+        "select": false,
+        "update": false
+      },
+      "owner": "postgres",
+      "policies": 0,
+      "relation": "private.dic_member_approval_poll_gate",
+      "force_rls": false,
+      "service_role": {
+        "delete": false,
+        "insert": false,
+        "select": true,
+        "update": true
+      },
+      "authenticated": {
+        "delete": false,
+        "insert": false,
+        "select": false,
+        "update": false
+      },
+      "verdict": "NO_DIRECT_CLIENT_TABLE_PRIVILEGES; RLS policy absent; no effective external-route test",
+      "scope_note": "Polling throttle state; no rows accessed"
+    },
+    {
+      "oid": "20458",
+      "rls": true,
+      "anon": {
+        "delete": false,
+        "insert": false,
+        "select": false,
+        "update": false
+      },
+      "owner": "postgres",
+      "policies": 0,
+      "relation": "private.dic_signup_review_events",
+      "force_rls": false,
+      "service_role": {
+        "delete": true,
+        "insert": true,
+        "select": true,
+        "update": true
+      },
+      "authenticated": {
+        "delete": false,
+        "insert": false,
+        "select": false,
+        "update": false
+      },
+      "verdict": "NO_DIRECT_CLIENT_TABLE_PRIVILEGES; RLS policy absent; no effective external-route test",
+      "scope_note": "Signup review events; no identities or rows accessed"
+    },
+    {
+      "oid": "19908",
+      "rls": true,
+      "anon": {
+        "delete": false,
+        "insert": false,
+        "select": false,
+        "update": false
+      },
+      "owner": "postgres",
+      "policies": 0,
+      "relation": "private.dic_source_attempts",
+      "force_rls": false,
+      "service_role": {
+        "delete": true,
+        "insert": true,
+        "select": true,
+        "update": true
+      },
+      "authenticated": {
+        "delete": false,
+        "insert": false,
+        "select": false,
+        "update": false
+      },
+      "verdict": "NO_DIRECT_CLIENT_TABLE_PRIVILEGES; RLS policy absent; no effective external-route test",
+      "scope_note": "Source preview attempts; no URLs/member rows accessed"
+    },
+    {
+      "oid": "20493",
+      "rls": true,
+      "anon": {
+        "delete": false,
+        "insert": false,
+        "select": false,
+        "update": false
+      },
+      "owner": "postgres",
+      "policies": 0,
+      "relation": "public.dic_admin_push_subscriptions",
+      "force_rls": false,
+      "service_role": {
+        "delete": true,
+        "insert": true,
+        "select": true,
+        "update": true
+      },
+      "authenticated": {
+        "delete": false,
+        "insert": false,
+        "select": false,
+        "update": false
+      },
+      "verdict": "NO_DIRECT_CLIENT_TABLE_PRIVILEGES; RLS policy absent; no effective external-route test",
+      "scope_note": "Admin push subscriptions; subscription endpoints not inspected"
+    },
+    {
+      "oid": "20575",
+      "rls": true,
+      "anon": {
+        "delete": false,
+        "insert": false,
+        "select": false,
+        "update": false
+      },
+      "owner": "postgres",
+      "policies": 0,
+      "relation": "public.dic_member_approval_push_subscriptions",
+      "force_rls": false,
+      "service_role": {
+        "delete": true,
+        "insert": true,
+        "select": true,
+        "update": true
+      },
+      "authenticated": {
+        "delete": false,
+        "insert": false,
+        "select": false,
+        "update": false
+      },
+      "verdict": "NO_DIRECT_CLIENT_TABLE_PRIVILEGES; RLS policy absent; no effective external-route test",
+      "scope_note": "Member push subscriptions; subscription endpoints not inspected"
+    }
+  ],
+  "role_memberships": [
+    {
+      "role": "anon",
+      "admin": false,
+      "member": "authenticator",
+      "inherit": false,
+      "set_role": true
+    },
+    {
+      "role": "anon",
+      "admin": true,
+      "member": "postgres",
+      "inherit": true,
+      "set_role": true
+    },
+    {
+      "role": "anon",
+      "admin": false,
+      "member": "supabase_realtime_admin",
+      "inherit": false,
+      "set_role": true
+    },
+    {
+      "role": "authenticated",
+      "admin": false,
+      "member": "authenticator",
+      "inherit": false,
+      "set_role": true
+    },
+    {
+      "role": "authenticated",
+      "admin": true,
+      "member": "postgres",
+      "inherit": true,
+      "set_role": true
+    },
+    {
+      "role": "authenticated",
+      "admin": false,
+      "member": "supabase_realtime_admin",
+      "inherit": false,
+      "set_role": true
+    },
+    {
+      "role": "authenticator",
+      "admin": true,
+      "member": "postgres",
+      "inherit": true,
+      "set_role": true
+    },
+    {
+      "role": "authenticator",
+      "admin": false,
+      "member": "supabase_storage_admin",
+      "inherit": false,
+      "set_role": true
+    },
+    {
+      "role": "service_role",
+      "admin": false,
+      "member": "authenticator",
+      "inherit": false,
+      "set_role": true
+    },
+    {
+      "role": "service_role",
+      "admin": true,
+      "member": "postgres",
+      "inherit": true,
+      "set_role": true
+    },
+    {
+      "role": "service_role",
+      "admin": false,
+      "member": "supabase_realtime_admin",
+      "inherit": false,
+      "set_role": true
+    }
+  ],
+  "schema_usage": [
+    {
+      "anon": true,
+      "schema": "auth",
+      "service_role": true,
+      "authenticated": true
+    },
+    {
+      "anon": false,
+      "schema": "private",
+      "service_role": true,
+      "authenticated": true
+    },
+    {
+      "anon": true,
+      "schema": "public",
+      "service_role": true,
+      "authenticated": true
+    },
+    {
+      "anon": true,
+      "schema": "realtime",
+      "service_role": true,
+      "authenticated": true
+    },
+    {
+      "anon": true,
+      "schema": "storage",
+      "service_role": true,
+      "authenticated": true
+    }
+  ],
+  "session_pgrst_settings": {
+    "schemas": null,
+    "anon_role": null,
+    "pre_request": null
+  },
+  "db_role_pgrst_overrides": [],
+  "interpretation": {
+    "no_direct_client_table_grants": true,
+    "service_role_ordinary_acl_partial": true,
+    "sql_role_membership_not_http_jwt_validation": true,
+    "sql_session_not_postgrest_process": true,
+    "sql_pgrst_gucs_missing_not_proof_rest_schema_not_exposed": true,
+    "full_provider_api_configuration": "UNVERIFIED",
+    "effective_HTTP_privileges": "UNVERIFIED_WITH_ISSUE_96",
+    "new_confirmed_defects": 0,
+    "justified_live_removals": 0,
+    "new_first_time_source_word_credit": 0,
+    "full_provider_baseline": "IN_PROGRESS",
+    "legacy_roaster_directory": "LEGACY ACTIVE; #2389 RETIREMENT IN PROGRESS; NOT DEPLOYED",
+    "no_prod_sql_edge_auth_storage_writes": true
+  },
+  "next": "Reconcile any new migration/Edge/provider drift; seek authorized nonsecret hosted PostgREST exposed-schema config with #96; otherwise select genuinely unreviewed catalog definitions, not previously completed Run198 C or Run212 internal."
+}

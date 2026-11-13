@@ -12,10 +12,14 @@ begin
  perform set_config('request.jwt.claim.sub',actor::text,true);
  perform set_config('request.jwt.claim.role','authenticated',true);
  execute 'set local role authenticated';
- denied:=false;
- begin perform public.dic_roaster_preview_target('sweetbloomcoffee.com');
- exception when insufficient_privilege then denied:=true; end;
- if not denied then raise exception 'Member can call service-only preview target'; end if;
+ -- Legacy registered-roaster RPC is permanently retired for every role.
+ -- Any-roaster extraction is the current Netlify /api/coffee-preview.
+ if to_regprocedure('public.dic_roaster_preview_target(text)') is not null then
+  raise exception 'Obsolete roaster-directory RPC was resurrected'; end if;
+ if to_regclass('private.dic_roaster_directory') is not null then
+  raise exception 'Obsolete active roaster directory was resurrected'; end if;
+ if to_regclass('private.dic_roaster_identity_provenance_archive') is null then
+  raise exception 'Original historical source proof archive was lost'; end if;
  denied:=false;
  begin perform public.dic_url_preview_claim(actor);
  exception when insufficient_privilege then denied:=true; end;
@@ -23,27 +27,39 @@ begin
  execute 'reset role';
  perform set_config('request.jwt.claim.role','service_role',true);
  execute 'set local role service_role';
- got:=public.dic_roaster_preview_target('sweetbloomcoffee.com');
- if got->>'canonical_name' is distinct from 'Sweet Bloom' then raise exception 'Known roaster target failed: %',got; end if;
- if public.dic_roaster_preview_target('attacker.example.invalid') is not null then raise exception 'Unknown host trusted'; end if;
- if public.dic_roaster_preview_target('127.0.0.1:8000') is not null then raise exception 'Invalid host trusted'; end if;
+ -- Historical independently checked source proof remains only for
+ -- global Verified promotion, never as a member URL extraction whitelist.
+ got:=private.dic_verified_roaster_page_proof('Sweet Bloom');
+ if got->>'canonical_name' is distinct from 'Sweet Bloom' or
+    got->>'official_domain' is distinct from 'sweetbloomcoffee.com' then
+  raise exception 'Previously verified brand-source evidence lost: %',got; end if;
+ if private.dic_verified_roaster_page_proof('Unknown Unregistered Roaster') is not null
+ then raise exception 'Unproven source silently trusted for global Verified'; end if;
+ if not exists(select 1 from private.dic_official_source_attestations
+  where canonical_key='sweetbloom' and evidence_url like 'https://%')
+ then raise exception 'Preserved historical verified source evidence missing'; end if;
  got:=public.dic_url_preview_claim(gen_random_uuid());
  if got->>'allowed' is distinct from 'false' then raise exception 'Nonexistent account accepted'; end if;
  got:=public.dic_url_preview_claim(actor);
- if got->>'allowed' is distinct from 'true' then raise exception 'First preview quota claim failed: %',got; end if;
+ if got->>'allowed' is distinct from 'true' or got->>'unlimited' is distinct from 'true'
+ then raise exception 'Verified administrator first claim must bypass quota: %',got; end if;
  got:=public.dic_url_preview_claim(actor);
- if got->>'reason' is distinct from 'preview_cooldown' then raise exception 'Preview cooldown failed: %',got; end if;
+ if got->>'allowed' is distinct from 'true' or got->>'unlimited' is distinct from 'true'
+ then raise exception 'Verified administrator immediate repeat must bypass cooldown: %',got; end if;
  got:=public.dic_url_preview_claim(second_user);
- if got->>'allowed' is distinct from 'true' then raise exception 'Quota leaked across accounts'; end if;
+ if got->>'allowed' is distinct from 'true' then raise exception 'First ordinary member preview claim failed: %',got; end if;
+ got:=public.dic_url_preview_claim(second_user);
+ if got->>'reason' is distinct from 'preview_cooldown'
+ then raise exception 'Ordinary member 15-second cooldown failed: %',got; end if;
  execute 'reset role';
- update private.dic_url_preview_attempts set attempts=12,last_attempt_at=now()-interval '1 minute' where owner_id=actor;
+ update private.dic_url_preview_attempts set attempts=12,last_attempt_at=now()-interval '1 minute' where owner_id=second_user;
  execute 'set local role service_role';
- got:=public.dic_url_preview_claim(actor);
+ got:=public.dic_url_preview_claim(second_user);
  if got->>'reason' is distinct from 'daily_preview_limit' then raise exception 'Daily quota failed'; end if;
  execute 'reset role';
- update private.dic_url_preview_attempts set window_started_at=now()-interval '25 hours' where owner_id=actor;
+ update private.dic_url_preview_attempts set window_started_at=now()-interval '25 hours' where owner_id=second_user;
  execute 'set local role service_role';
- got:=public.dic_url_preview_claim(actor);
+ got:=public.dic_url_preview_claim(second_user);
  if got->>'allowed' is distinct from 'true' then raise exception 'Daily quota did not reset'; end if;
  execute 'reset role';
 
@@ -84,5 +100,5 @@ begin
  if got->>'exact_id' is not null or got->>'classification' is distinct from 'needs_confirmation' then raise exception 'Ambiguous release silently linked'; end if;
  execute 'reset role';
 end $preview_tests$;
-select 'PASS: trusted preview target, client denial, per-account quotas, release conflicts, ambiguity and source reuse with stable library identity' as result;
+select 'PASS: retired roaster directory, source attestations for global verification only, client denial, quotas, release conflicts and stable library identity' as result;
 rollback;

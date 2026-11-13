@@ -1,29 +1,162 @@
 {
   "schema_version": 1,
-  "release_id": "DIC-20261112-READY1MEMBER-36",
-  "tested_source_sha": "02361218d2f354075e928396a6ba3fc0295b3b19",
-  "previous_release_head_sha": "72ef825aad9fbb5252825e7ab71b4650a496b66c",
-  "claimed_at_utc": "2026-11-12T18:11:37.403Z",
+  "release_id": "DIC-20261113-READY15-39",
+  "tested_source_sha": "f788e7af0b6dc7254d993119600a55f4442ed3d2",
+  "previous_release_head_sha": "2c02dbb267ca8fb1e56ddd0433c96c1bb4eca9d5",
+  "claimed_at_utc": "2026-11-13T20:13:42.605Z",
   "status": "GIT_CONNECTED_BUILD_PENDING_NETLIFY_PROVIDER_READBACK",
   "granted_single_publication": true,
   "approved_ready_queue_items": [
     {
-      "id": "DIC-Q-2258-approval-email-and-member-push",
-      "issue": 2258,
-      "title": "Transactional approval email and opt-in member Web Push (separate from tested in-app notice)",
-      "merged_source_sha": "60279ea802e7d986adb6bd2580f35645a8c621c0",
+      "id": "DIC-Q-33-r170-next-json-selected-provenance",
+      "issue": 33,
+      "title": "Preserve exact selected Next JSON roast and processing fact source indices after filtering and deduplication",
+      "merged_source_sha": "3ef8b2d432d9c8d23be3d48a288278cd112ab523",
       "scope_paths": [
-        "build_cloud.mjs",
-        "netlify/functions/dic-member-approval-poll.mjs",
-        "scripts/pwa/member-approval-worker.template.txt",
-        "site/cloud/approval-push.js",
-        "site/cloud/client.js",
+        "src/server/coffee-next-selected-product.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-r169-233-current-selected-sensory-arc",
+      "issue": 33,
+      "title": "Preserve direct selected current aroma and literal flavor finish without inferring roast or borrowing other products",
+      "merged_source_sha": "7c04ef1e7e3116705365d95138cc4d76ccfb1a7a",
+      "scope_paths": [
+        "src/server/coffee-selected-description-sensory.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-2389-retire-roaster-directory-universal-autofill",
+      "issue": 2389,
+      "title": "Retire obsolete roaster directory and preserve any-roaster URL autofill, editable gaps and evidence-based Verified",
+      "merged_source_sha": "f61335482d355bb83cc161265557888ee67b6737",
+      "scope_paths": [
         "site/cloud/main.js",
-        "site/styles.css",
-        "supabase/config.toml",
-        "supabase/functions/dic-member-approval-broker/core.mjs",
-        "supabase/functions/dic-member-approval-broker/index.ts",
-        "supabase/migrations/20261112135900_dic_member_approval_notices.sql"
+        "site/cloud/coffee-url-autofill.js",
+        "supabase/functions/dic-preview-coffee/index.ts",
+        "supabase/migrations/20261113050000_dic_retire_roaster_directory.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-r123-573-trailing-flavor-unready",
+      "issue": 33,
+      "title": "Current selected coffee #573 trailing-flavor source parser correction (R123), independently pending READY and excluded from frozen READY42",
+      "merged_source_sha": "64a864285bf0614cf165d2c2a0ac32f7961478e0",
+      "scope_paths": [
+        "src/server/coffee-selected-description-sensory.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-r156-unpublished-roast-flavor-guard",
+      "issue": 33,
+      "title": "Withhold explicit unreported per-roast flavor placeholders",
+      "merged_source_sha": "80947e719f8ca8f691c0241edb8ff9e1d1aa60df",
+      "scope_paths": [
+        "src/server/coffee-roast-variants.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-r217-invalid-restored-rating-empty-label",
+      "issue": 455,
+      "title": "Keep five rating controls usable and explicitly unrated when editing legacy missing/invalid taste records",
+      "merged_source_sha": "886fc5d6fb960bf1bc9c46d657894756c9d3f7b9",
+      "scope_paths": [
+        "site/lib/constants.js",
+        "site/lib/ui.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-r157-185-current-self-sugarcane-decaf-method",
+      "issue": 33,
+      "title": "Exact selected Humble Mule Natural Decaf current own sugarcane treatment fills Sugar Process, distinct from Washed green processing",
+      "merged_source_sha": "53e3a85218fc6a3c4219328c7872d35a1913a4fe",
+      "scope_paths": [
+        "src/server/coffee-direct-product-prose.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-r218-restored-rating-tap",
+      "issue": 455,
+      "title": "Keep restored missing five-scale Shot History records genuinely editable on first rating tap",
+      "merged_source_sha": "70811c9c598d30fb65b562eb701621b90eab58a0",
+      "scope_paths": [
+        "site/cloud/main.js",
+        "site/lib/ui.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-r158-hyphenated-range-roast-guard",
+      "issue": 33,
+      "title": "Do not infer Medium from a chosen coffee's light-to-medium narrative range; preserve explicit selected Light roast",
+      "merged_source_sha": "7f024fabcf9f0c7f5ae9c90134cf617833badd07",
+      "scope_paths": [
+        "src/server/roast-level-evidence.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-r220-recommendation-use-origin",
+      "issue": 455,
+      "title": "Record and display only genuine member-selected Use Recommendation provenance; remove stale copied-source attribution after measured value changes",
+      "merged_source_sha": "881c04f3f57f3dd9c3153e0102e728e2da0ca6f9",
+      "scope_paths": [
+        "site/cloud/main.js",
+        "site/cloud/recommendation-use.js",
+        "build_cloud.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-r222-evidence-note-fallback",
+      "issue": 455,
+      "title": "Preserve uncertainty/evidence note in Next Shot text fallback when no measured one-control arrow applies",
+      "merged_source_sha": "022c5be2bb6cd7c02a8faf7e78024bcceee294b1",
+      "scope_paths": [
+        "site/lib/ui.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-huckleberry-headless-size-product-extraction",
+      "issue": 33,
+      "title": "Fix selected Huckleberry /shop/products?Size=12+OZ metadata extraction with exact-handle public fallback",
+      "merged_source_sha": "1135d75f77e844f8a5315bf17977def51735de6b",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-shopify-ajax.mjs",
+        "src/server/coffee-url-guard.mjs",
+        "src/server/coffee-product-prep.mjs",
+        "src/server/coffee-react-router-hydration.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-2386-admin-unlimited-member-15s",
+      "issue": 2386,
+      "title": "Admin unlimited per-account URL preview attempts/retries; 15-second cooldown for other members",
+      "merged_source_sha": "e7ba6000563e55be845835a336944314367827f6",
+      "scope_paths": [
+        "supabase/migrations/20261113043000_dic_admin_preview_unlimited_member_15s.sql",
+        "site/cloud/coffee-url-autofill.js",
+        "site/cloud/client.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-r171-241-current-selected-sensory-conflict",
+      "issue": 33,
+      "title": "Withhold conflicting selected Buesaco hero and direct Harvest Details notes pending member choice",
+      "merged_source_sha": "0b05df7a1cf779c85a7aa6c5deb4e76e4ca41840",
+      "scope_paths": [
+        "src/server/coffee-selected-hero-notes-conflict.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-r171-235-current-selected-chocolate-overtones",
+      "issue": 33,
+      "title": "Prefer exact selected Mountain Thunder chocolate overtones to generic roaster espresso guide",
+      "merged_source_sha": "b09a0c9a9def06cbea3bd60a6d58fbfeba489d94",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-selected-description-sensory.mjs"
       ]
     }
   ]

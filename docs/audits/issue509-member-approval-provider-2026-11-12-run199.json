@@ -1,0 +1,359 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 199,
+  "utc": "2026-11-12T18:45:00Z",
+  "audit_scope": "newly deployed #2258 SQL migration + member approval broker",
+  "preflight": {
+    "development_sha": "85291503a96cc550e1884512909c5833357b9fea",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "verified_live_content": true
+  },
+  "git": {
+    "development_sha": "85291503a96cc550e1884512909c5833357b9fea",
+    "production_sha": "2c02dbb267ca8fb1e56ddd0433c96c1bb4eca9d5",
+    "source_blobs": {
+      "migration": "ce17e3801d8d4e100e8ec1fb95fa5a723ad3a7a4",
+      "edge_core": "1bc82c0c0f7e90bb86dd7da895c18f9c4e015c5a",
+      "edge_index": "046781fa56426c761ded24679000212549999ba0",
+      "gateway_config": "ef9080b066e4e1c2498d985f5c24d4ce69b89318"
+    }
+  },
+  "provider": {
+    "project_id": "azviqqejypsefzilgonr",
+    "postgres_version": "17.11.0.003",
+    "migration_version": "20261112180144",
+    "migration_md5": "8a62207ff6d46bd858e5cb7f6c7bc931",
+    "edge_version": 1,
+    "edge_status": "ACTIVE",
+    "edge_gateway_verify_jwt": false,
+    "edge_bundle_sha256": "263f36326fa00934a4c7cfb7ecc6e3df9872e9b4f0395ef1326455d9bb2bded7"
+  },
+  "source": {
+    "migration": "-- #2258: one immutable approved signup event, two independently retried notice channels.\n-- SOURCE ONLY until a fresh owner Publish + verified recovery. No historical backfill.\ncreate table if not exists public.dic_member_approval_push_subscriptions (\n endpoint_hash text primary key check (endpoint_hash ~ '^[0-9a-f]{64}$'),\n owner_id uuid not null references auth.users(id) on delete cascade,\n endpoint text not null check (length(endpoint) between 20 and 2048),\n expires_at timestamptz not null,\n last_sent_event_id bigint not null default 0 check (last_sent_event_id >= 0),\n created_at timestamptz not null default now(),\n updated_at timestamptz not null default now()\n);\ncreate index if not exists dic_member_approval_push_owner_idx\n on public.dic_member_approval_push_subscriptions(owner_id,expires_at);\nalter table public.dic_member_approval_push_subscriptions enable row level security;\nrevoke all on public.dic_member_approval_push_subscriptions from public, anon, authenticated;\ngrant select,insert,update,delete on public.dic_member_approval_push_subscriptions to service_role;\n\ncreate table if not exists private.dic_member_approval_deliveries (\n event_id bigint not null references private.dic_signup_review_events(id) on delete cascade,\n member_id uuid not null references auth.users(id) on delete cascade,\n channel text not null check (channel in ('email','push')),\n state text not null default 'pending' check (state in ('pending','sending','sent','skipped')),\n attempt_count integer not null default 0 check (attempt_count between 0 and 100000),\n claim_token uuid,\n lease_until timestamptz,\n next_attempt_at timestamptz not null default now(),\n completed_at timestamptz,\n created_at timestamptz not null default now(),\n primary key (event_id,channel)\n);\ncreate index if not exists dic_member_approval_claim_idx\n on private.dic_member_approval_deliveries(channel,state,next_attempt_at,event_id);\nalter table private.dic_member_approval_deliveries enable row level security;\nrevoke all on private.dic_member_approval_deliveries from public, anon, authenticated;\ngrant select,insert,update,delete on private.dic_member_approval_deliveries to service_role;\n\n-- The existing verified Admin approval transaction is the only producer.\ncreate or replace function private.dic_enqueue_member_approval_notices()\nreturns trigger language plpgsql security definer set search_path='' as $function$\nbegin\n if new.action='approve' and new.member_id is not null then\n  insert into private.dic_member_approval_deliveries(event_id,member_id,channel)\n  values(new.id,new.member_id,'email'),(new.id,new.member_id,'push')\n  on conflict(event_id,channel) do nothing;\n end if;\n return new;\nend $function$;\nrevoke all on function private.dic_enqueue_member_approval_notices() from public,anon,authenticated;\ndrop trigger if exists dic_enqueue_member_approval_notices_on_review on private.dic_signup_review_events;\ncreate trigger dic_enqueue_member_approval_notices_on_review\n after insert on private.dic_signup_review_events\n for each row execute function private.dic_enqueue_member_approval_notices();\n\ncreate table if not exists private.dic_member_approval_poll_gate (\n singleton boolean primary key default true check(singleton=true),\n last_polled_at timestamptz not null default '-infinity'::timestamptz\n);\ninsert into private.dic_member_approval_poll_gate(singleton) values(true)\n on conflict(singleton) do nothing;\nalter table private.dic_member_approval_poll_gate enable row level security;\nrevoke all on private.dic_member_approval_poll_gate from public,anon,authenticated;\ngrant select,update on private.dic_member_approval_poll_gate to service_role;\n\n-- Service key only. Public RPC schema is necessary for Edge PostgREST routing;\n-- no anon/authenticated execution or private-row grants are created.\ncreate or replace function public.dic_member_approval_claim_poll()\nreturns boolean language plpgsql volatile security definer set search_path='' as $function$\nbegin\n update private.dic_member_approval_poll_gate set last_polled_at=now()\n where singleton=true and last_polled_at < now()-interval '4 minutes';\n return found;\nend $function$;\nrevoke all on function public.dic_member_approval_claim_poll() from public,anon,authenticated;\ngrant execute on function public.dic_member_approval_claim_poll() to service_role;\n\ncreate or replace function public.dic_member_approval_claim(p_channel text,p_limit integer default 20)\nreturns jsonb language plpgsql volatile security definer set search_path='' as $function$\ndeclare batches jsonb;\nbegin\n if p_channel not in ('email','push') or p_channel is null or\n    p_limit is null or p_limit not between 1 and 20 then\n  raise exception using errcode='22023',message='Invalid delivery channel/limit';\n end if;\n with chosen as (\n  select d.event_id,d.channel\n  from private.dic_member_approval_deliveries d\n  join private.beta_members m on m.owner_id=d.member_id\n  join auth.users u on u.id=d.member_id\n  where d.channel=p_channel and m.signup_review_state='approved'\n   and m.enabled and m.admitted_at is not null\n   and u.email_confirmed_at is not null\n   and ((d.state='pending' and d.next_attempt_at<=now())\n    or (d.state='sending' and d.lease_until < now()))\n  order by d.event_id limit p_limit for update of d skip locked\n ), claimed as (\n  update private.dic_member_approval_deliveries d\n  set state='sending',attempt_count=d.attempt_count+1,\n      claim_token=gen_random_uuid(),lease_until=now()+interval '2 minutes'\n  from chosen c where d.event_id=c.event_id and d.channel=c.channel\n  returning d.event_id,d.member_id,d.claim_token\n )\n select coalesce(jsonb_agg(jsonb_build_object(\n   'eventId',c.event_id,'claimToken',c.claim_token,\n   'email',case when p_channel='email' then left(u.email,254) else null end,\n   'endpoints',case when p_channel='push' then (\n    select coalesce(jsonb_agg(jsonb_build_object('hash',s.endpoint_hash,'endpoint',s.endpoint)),'[]'::jsonb)\n    from public.dic_member_approval_push_subscriptions s\n    where s.owner_id=c.member_id and s.expires_at>now()\n      and s.last_sent_event_id<c.event_id\n   ) else '[]'::jsonb end\n  ) order by c.event_id),'[]'::jsonb) into batches\n from claimed c join auth.users u on u.id=c.member_id;\n return batches;\nend $function$;\nrevoke all on function public.dic_member_approval_claim(text,integer) from public,anon,authenticated;\ngrant execute on function public.dic_member_approval_claim(text,integer) to service_role;\n\ncreate or replace function public.dic_member_approval_finish(\n p_event_id bigint,p_channel text,p_claim_token uuid,p_outcome text)\nreturns boolean language plpgsql volatile security definer set search_path='' as $function$\nbegin\n if p_channel not in ('email','push') or p_outcome not in ('sent','skipped','retry')\n   or p_claim_token is null or p_event_id is null then\n  raise exception using errcode='22023',message='Invalid delivery receipt';\n end if;\n update private.dic_member_approval_deliveries d\n set state=case when p_outcome='retry' then 'pending' else p_outcome end,\n     claim_token=null,lease_until=null,\n     completed_at=case when p_outcome='retry' then null else now() end,\n     next_attempt_at=case when p_outcome='retry' then\n       now()+least(60,power(2,least(d.attempt_count,5))::integer)*interval '1 minute'\n       else d.next_attempt_at end\n where d.event_id=p_event_id and d.channel=p_channel and\n   d.state='sending' and d.claim_token=p_claim_token;\n return found;\nend $function$;\nrevoke all on function public.dic_member_approval_finish(bigint,text,uuid,text) from public,anon,authenticated;\ngrant execute on function public.dic_member_approval_finish(bigint,text,uuid,text) to service_role;\n",
+    "edge_files": [
+      {
+        "name": "index.ts",
+        "source": "// Production service credentials are owned by Supabase Edge, never the browser.\nimport {createMemberApprovalBroker} from './core.mjs';\nDeno.serve(createMemberApprovalBroker());\n"
+      },
+      {
+        "name": "core.mjs",
+        "source": "// #2258: service-only transactional approval notices, separate from Admin push ACLs.\n// The public poll trigger never returns member identifiers, email or endpoints.\nconst PROJECT='https://azviqqejypsefzilgonr.supabase.co';\nconst UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;\nconst HASH=/^[a-f0-9]{64}$/;\nconst SUBS='dic_member_approval_push_subscriptions';\nconst reply=(data,status=200)=>Response.json(data,{status,headers:{\n 'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer'}});\nconst denied=(status=403)=>reply({ok:false,reason:'unavailable'},status);\nconst decode64=s=>{\n const str=atob(s.replace(/-/g,'+').replace(/_/g,'/')+'='.repeat((4-s.length%4)%4));\n return Uint8Array.from(str,c=>c.charCodeAt(0));\n};\nconst encode64=bytes=>{\n let str='';for(const b of bytes)str+=String.fromCharCode(b);\n return btoa(str).replace(/\\+/g,'-').replace(/\\//g,'_').replace(/=+$/,'');\n};\nconst fingerprint=async endpoint=>[...new Uint8Array(await crypto.subtle.digest(\n 'SHA-256',new TextEncoder().encode(endpoint)))].map(x=>x.toString(16).padStart(2,'0')).join('');\nfunction safeEndpoint(value){\n if(typeof value!=='string'||value.length<20||value.length>2048)return null;\n try{\n  const u=new URL(value);\n  if(u.protocol!=='https:'||u.username||u.password||u.port||u.hash||\n   !['web.push.apple.com','fcm.googleapis.com','updates.push.services.mozilla.com'].includes(u.hostname)||\n   !u.pathname||u.pathname==='/')return null;\n  return u.href;\n }catch{return null;}\n}\nconst emailSender=value=>typeof value==='string'&&\n /^[a-z0-9._+-]+@(?:[a-z0-9-]+\\.)*dialincollective\\.com$/i.test(value)?value:null;\nasync function vapidAuthorization(endpoint,key,now){\n const pub=decode64(key.publicKey),secret=decode64(key.privateKey);\n if(pub.length!==65||pub[0]!==4||secret.length!==32)throw Error('Missing VAPID');\n const jwk={kty:'EC',crv:'P-256',x:encode64(pub.slice(1,33)),\n  y:encode64(pub.slice(33,65)),d:encode64(secret),ext:true};\n const priv=await crypto.subtle.importKey('jwk',jwk,{name:'ECDSA',namedCurve:'P-256'},false,['sign']);\n const header=encode64(new TextEncoder().encode(JSON.stringify({typ:'JWT',alg:'ES256'})));\n const payload=encode64(new TextEncoder().encode(JSON.stringify({\n  aud:new URL(endpoint).origin,exp:Math.floor(now()/1000)+3600,sub:'https://app.dialincollective.com'})));\n const unsigned=header+'.'+payload;\n const signature=encode64(new Uint8Array(await crypto.subtle.sign(\n  {name:'ECDSA',hash:'SHA-256'},priv,new TextEncoder().encode(unsigned))));\n return 'vapid t='+unsigned+'.'+signature+', k='+key.publicKey;\n}\nexport function createMemberApprovalBroker({\n env=name=>Deno.env.get(name),fetcher=fetch,now=()=>Date.now()\n}={}){\n return async request=>{\n  if(request.method!=='POST')return denied(405);\n  const raw=await request.text().catch(()=>'');\n  if(!raw||raw.length>4500)return denied(413);\n  let input;\n  try{input=JSON.parse(raw);}catch{return denied(400);}\n  if(!input||typeof input!=='object'||Array.isArray(input)||\n    !['key','status','subscribe','unsubscribe','poll'].includes(input.op))return denied(400);\n  let service,publishable;\n  try{\n   service=JSON.parse(env('SUPABASE_SECRET_KEYS')||'{}').default||env('SUPABASE_SERVICE_ROLE_KEY');\n   publishable=JSON.parse(env('SUPABASE_PUBLISHABLE_KEYS')||'{}').default||env('SUPABASE_ANON_KEY');\n  }catch{return denied(503);}\n  if(env('SUPABASE_URL')!==PROJECT||!service||!publishable)return denied(503);\n  const serviceHeaders={apikey:service,'Content-Type':'application/json',\n   ...(service.startsWith('sb_secret_')?{}:{Authorization:'Bearer '+service})};\n  const rest=async(path,{method='GET',body,prefer}={})=>{\n   const result=await fetcher(PROJECT+'/rest/v1/'+path,{\n    method,redirect:'error',cache:'no-store',\n    headers:{...serviceHeaders,...(prefer?{Prefer:prefer}:{})},\n    ...(body===undefined?{}:{body:JSON.stringify(body)}),signal:AbortSignal.timeout(8000)});\n   if(!result.ok)throw Error('Protected notice storage unavailable');\n   return result;\n  };\n  const rpc=async(name,body={})=>(await rest('rpc/'+name,{method:'POST',body})).json();\n  const keys=async()=>await rpc('dic_admin_push_runtime_keys');\n  const ensureKeys=async()=>{\n   let key=await keys();if(key)return key;\n   // Reuses Vault's existing one-use P-256 recipient; never rotates or exports it.\n   const pair=await crypto.subtle.generateKey({name:'ECDSA',namedCurve:'P-256'},true,['sign','verify']);\n   const jwk=await crypto.subtle.exportKey('jwk',pair.privateKey);\n   const publicKey=encode64(Uint8Array.from([4,...decode64(jwk.x),...decode64(jwk.y)]));\n   await rpc('dic_admin_push_bootstrap_key',{p_public_key:publicKey,p_private_key:jwk.d});\n   key=await keys();\n   if(!key?.publicKey||!key.privateKey)throw Error('Vault bootstrap unavailable');\n   return key;\n  };\n  const account=async()=>{\n   const match=/^Bearer ([A-Za-z0-9._~-]{24,6000})$/.exec(request.headers.get('authorization')||'');\n   if(!match)return null;\n   const headers={apikey:publishable,Authorization:'Bearer '+match[1]};\n   const user=await fetcher(PROJECT+'/auth/v1/user',{\n    headers,redirect:'error',cache:'no-store',signal:AbortSignal.timeout(6500)});\n   if(!user.ok)return null;\n   const identity=await user.json();\n   if(!UUID.test(String(identity?.id||'')))return null;\n   const statusResponse=await fetcher(PROJECT+'/rest/v1/rpc/dic_session_status',{\n    method:'POST',redirect:'error',cache:'no-store',\n    headers:{...headers,'Content-Type':'application/json'},body:'{}',\n    signal:AbortSignal.timeout(6500)});\n   if(!statusResponse.ok)return null;\n   const status=await statusResponse.json();\n   if(status?.authenticated!==true||status?.emailVerified!==true||status?.admin===true)return null;\n   return {id:identity.id,status};\n  };\n  try{\n   if(input.op!=='poll'){\n    if(Object.keys(input).some(k=>!['op','endpoint'].includes(k)))return denied(400);\n    const member=await account();\n    if(!member)return denied(403);\n    if(input.op==='key'){\n     if(Object.keys(input).length!==1||member.status.admitted||\n      member.status.approvalState!=='pending')return denied(403);\n     const key=await ensureKeys();return reply({ok:true,publicKey:key.publicKey});\n    }\n    const endpoint=safeEndpoint(input.endpoint);\n    if(!endpoint)return denied(400);\n    const hash=await fingerprint(endpoint);\n    const route=SUBS+'?endpoint_hash=eq.'+hash;\n    if(input.op==='status'){\n     const found=await (await rest(route+'&select=owner_id&limit=1')).json();\n     return reply({ok:true,subscribed:found.length===1&&found[0].owner_id===member.id});\n    }\n    if(input.op==='unsubscribe'){\n     await rest(route+'&owner_id=eq.'+member.id,{method:'DELETE'});\n     return reply({ok:true,subscribed:false});\n    }\n    if(input.op!=='subscribe'||member.status.admitted||\n     member.status.approvalState!=='pending')return denied(403);\n    const existing=await (await rest(route+'&select=owner_id&limit=1')).json();\n    if(existing.length&&existing[0].owner_id!==member.id)return denied(409);\n    const owned=await (await rest(SUBS+'?owner_id=eq.'+member.id+\n      '&select=endpoint_hash&limit=4')).json();\n    if(!existing.length&&owned.length>=3)return denied(429);\n    const key=await ensureKeys();\n    if(!key.publicKey)return denied(503);\n    await rest(SUBS+'?on_conflict=endpoint_hash',{\n     method:'POST',prefer:'resolution=merge-duplicates,return=minimal',\n     body:{endpoint_hash:hash,owner_id:member.id,endpoint,\n      expires_at:new Date(now()+60*86400000).toISOString(),updated_at:new Date(now()).toISOString()}});\n    return reply({ok:true,subscribed:true});\n   }\n   // No requester data, no ad-hoc recipient arguments, no caller-selected event.\n   if(Object.keys(input).length!==1)return denied(400);\n   if(await rpc('dic_member_approval_claim_poll')!==true)return reply({ok:true,handled:0});\n   let handled=0,failed=0,unconfigured=false;\n   const key=await keys();\n   const sendPush=async(endpoint,keyData)=>{\n    const safe=safeEndpoint(endpoint);if(!safe)throw Error('Untrusted endpoint');\n    const auth=await vapidAuthorization(safe,keyData,now);\n    const sent=await fetcher(safe,{method:'POST',redirect:'error',cache:'no-store',\n     headers:{Authorization:auth,TTL:'300',Urgency:'normal'},\n     signal:AbortSignal.timeout(6000)});\n    return {ok:sent.ok,gone:sent.status===404||sent.status===410};\n   };\n   const apiKey=env('RESEND_API_KEY'),from=emailSender(env('DIC_APPROVAL_FROM_EMAIL'));\n   for(const channel of ['push','email']){\n    if(channel==='email'&&(!apiKey||!from)){unconfigured=true;continue;}\n    const batches=await rpc('dic_member_approval_claim',{p_channel:channel,p_limit:12});\n    if(!Array.isArray(batches)||batches.length>12)throw Error('Invalid protected claim');\n    const results=await Promise.allSettled(batches.map(async item=>{\n     const eventId=item?.eventId,token=item?.claimToken;\n     if(!Number.isSafeInteger(eventId)||eventId<1||!UUID.test(String(token||'')))\n      throw Error('Invalid protected delivery');\n     let outcome='retry';\n     try{\n      if(channel==='email'){\n       const email=String(item.email||'');\n       if(email.length>254||!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(email))\n        throw Error('Invalid verified email');\n       const sent=await fetcher('https://api.resend.com/emails',{\n        method:'POST',redirect:'error',cache:'no-store',\n        headers:{'Authorization':'Bearer '+apiKey,'Content-Type':'application/json',\n         'Idempotency-Key':'dic-member-account-approved-'+eventId},\n        body:JSON.stringify({\n         from,to:[email],subject:'Your Dial In Collective account is approved',\n         text:'Your account is approved. You can now sign in to The Dial In Collective at https://app.dialincollective.com/ .\\n\\nIf you did not request this account, please ignore this email.'\n        }),signal:AbortSignal.timeout(7000)});\n       const receipt=await sent.json().catch(()=>null);\n       if(!sent.ok||typeof receipt?.id!=='string'||receipt.id.length<8)\n        throw Error('Email provider did not accept the message');\n       outcome='sent';\n      }else{\n       const endpoints=item.endpoints;\n       if(!Array.isArray(endpoints)||endpoints.length>3)throw Error('Invalid device list');\n       if(!endpoints.length)outcome='skipped';\n       else {\n        if(!key)throw Error('Vault key unavailable');\n        const checks=await Promise.allSettled(endpoints.map(async ep=>{\n         if(!HASH.test(String(ep?.hash||''))||!safeEndpoint(ep?.endpoint)||\n           await fingerprint(ep.endpoint)!==ep.hash)throw Error('Malformed endpoint');\n         const result=await sendPush(ep.endpoint,key);\n         const route=SUBS+'?endpoint_hash=eq.'+ep.hash;\n         if(result.gone)await rest(route,{method:'DELETE'});\n         else if(result.ok)await rest(route,{method:'PATCH',prefer:'return=minimal',\n          body:{last_sent_event_id:eventId,updated_at:new Date(now()).toISOString()}});\n         else throw Error('Push provider did not accept the message');\n        }));\n        if(checks.some(c=>c.status==='rejected'))throw Error('Some devices not acknowledged');\n        outcome='sent';\n       }\n      }\n     }catch{/* Do not log member email, push endpoint, tokens, or secrets. */}\n     const finished=await rpc('dic_member_approval_finish',{\n      p_event_id:eventId,p_channel:channel,p_claim_token:token,p_outcome:outcome});\n     if(finished!==true||outcome==='retry')throw Error('Delivery not acknowledged');\n     return outcome;\n    }));\n    handled+=results.filter(x=>x.status==='fulfilled').length;\n    failed+=results.filter(x=>x.status==='rejected').length;\n   }\n   return reply({ok:failed===0&&!unconfigured,handled,\n    ...(unconfigured?{reason:'email_not_configured'}:{})},failed||unconfigured?503:200);\n  }catch{return denied(503);}\n };\n}\n"
+      }
+    ],
+    "relations": [
+      {
+        "rls": true,
+        "name": "dic_member_approval_push_subscriptions",
+        "owner": "postgres",
+        "schema": "public",
+        "columns": [
+          {
+            "type": "text",
+            "column": "endpoint_hash",
+            "default": null,
+            "not_null": true
+          },
+          {
+            "type": "uuid",
+            "column": "owner_id",
+            "default": null,
+            "not_null": true
+          },
+          {
+            "type": "text",
+            "column": "endpoint",
+            "default": null,
+            "not_null": true
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "expires_at",
+            "default": null,
+            "not_null": true
+          },
+          {
+            "type": "bigint",
+            "column": "last_sent_event_id",
+            "default": "0",
+            "not_null": true
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "created_at",
+            "default": "now()",
+            "not_null": true
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "updated_at",
+            "default": "now()",
+            "not_null": true
+          }
+        ],
+        "indexes": [
+          "CREATE INDEX dic_member_approval_push_owner_idx ON public.dic_member_approval_push_subscriptions USING btree (owner_id, expires_at)",
+          "CREATE UNIQUE INDEX dic_member_approval_push_subscriptions_pkey ON public.dic_member_approval_push_subscriptions USING btree (endpoint_hash)"
+        ],
+        "anon_select": false,
+        "constraints": [
+          {
+            "name": "dic_member_approval_push_subscriptions_endpoint_check",
+            "definition": "CHECK (length(endpoint) >= 20 AND length(endpoint) <= 2048)"
+          },
+          {
+            "name": "dic_member_approval_push_subscriptions_endpoint_hash_check",
+            "definition": "CHECK (endpoint_hash ~ '^[0-9a-f]{64}$'::text)"
+          },
+          {
+            "name": "dic_member_approval_push_subscriptions_last_sent_event_id_check",
+            "definition": "CHECK (last_sent_event_id >= 0)"
+          },
+          {
+            "name": "dic_member_approval_push_subscriptions_owner_id_fkey",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "dic_member_approval_push_subscriptions_pkey",
+            "definition": "PRIMARY KEY (endpoint_hash)"
+          }
+        ],
+        "service_select": true,
+        "authenticated_select": false
+      },
+      {
+        "rls": true,
+        "name": "dic_member_approval_deliveries",
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "type": "bigint",
+            "column": "event_id",
+            "default": null,
+            "not_null": true
+          },
+          {
+            "type": "uuid",
+            "column": "member_id",
+            "default": null,
+            "not_null": true
+          },
+          {
+            "type": "text",
+            "column": "channel",
+            "default": null,
+            "not_null": true
+          },
+          {
+            "type": "text",
+            "column": "state",
+            "default": "'pending'::text",
+            "not_null": true
+          },
+          {
+            "type": "integer",
+            "column": "attempt_count",
+            "default": "0",
+            "not_null": true
+          },
+          {
+            "type": "uuid",
+            "column": "claim_token",
+            "default": null,
+            "not_null": false
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "lease_until",
+            "default": null,
+            "not_null": false
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "next_attempt_at",
+            "default": "now()",
+            "not_null": true
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "completed_at",
+            "default": null,
+            "not_null": false
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "created_at",
+            "default": "now()",
+            "not_null": true
+          }
+        ],
+        "indexes": [
+          "CREATE INDEX dic_member_approval_claim_idx ON private.dic_member_approval_deliveries USING btree (channel, state, next_attempt_at, event_id)",
+          "CREATE UNIQUE INDEX dic_member_approval_deliveries_pkey ON private.dic_member_approval_deliveries USING btree (event_id, channel)"
+        ],
+        "anon_select": false,
+        "constraints": [
+          {
+            "name": "dic_member_approval_deliveries_attempt_count_check",
+            "definition": "CHECK (attempt_count >= 0 AND attempt_count <= 100000)"
+          },
+          {
+            "name": "dic_member_approval_deliveries_channel_check",
+            "definition": "CHECK (channel = ANY (ARRAY['email'::text, 'push'::text]))"
+          },
+          {
+            "name": "dic_member_approval_deliveries_event_id_fkey",
+            "definition": "FOREIGN KEY (event_id) REFERENCES private.dic_signup_review_events(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "dic_member_approval_deliveries_member_id_fkey",
+            "definition": "FOREIGN KEY (member_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "dic_member_approval_deliveries_pkey",
+            "definition": "PRIMARY KEY (event_id, channel)"
+          },
+          {
+            "name": "dic_member_approval_deliveries_state_check",
+            "definition": "CHECK (state = ANY (ARRAY['pending'::text, 'sending'::text, 'sent'::text, 'skipped'::text]))"
+          }
+        ],
+        "service_select": true,
+        "authenticated_select": false
+      },
+      {
+        "rls": true,
+        "name": "dic_member_approval_poll_gate",
+        "owner": "postgres",
+        "schema": "private",
+        "columns": [
+          {
+            "type": "boolean",
+            "column": "singleton",
+            "default": "true",
+            "not_null": true
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "last_polled_at",
+            "default": "'-infinity'::timestamp with time zone",
+            "not_null": true
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX dic_member_approval_poll_gate_pkey ON private.dic_member_approval_poll_gate USING btree (singleton)"
+        ],
+        "anon_select": false,
+        "constraints": [
+          {
+            "name": "dic_member_approval_poll_gate_pkey",
+            "definition": "PRIMARY KEY (singleton)"
+          },
+          {
+            "name": "dic_member_approval_poll_gate_singleton_check",
+            "definition": "CHECK (singleton = true)"
+          }
+        ],
+        "service_select": true,
+        "authenticated_select": false
+      }
+    ],
+    "functions": [
+      {
+        "md5": "36defca729c42b4ec35d4d2a4e1cfea5",
+        "args": "",
+        "name": "dic_enqueue_member_approval_notices",
+        "schema": "private",
+        "definition": "CREATE OR REPLACE FUNCTION private.dic_enqueue_member_approval_notices()\n RETURNS trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n if new.action='approve' and new.member_id is not null then\n  insert into private.dic_member_approval_deliveries(event_id,member_id,channel)\n  values(new.id,new.member_id,'email'),(new.id,new.member_id,'push')\n  on conflict(event_id,channel) do nothing;\n end if;\n return new;\nend $function$\n",
+        "anon_execute": false,
+        "service_execute": false,
+        "authenticated_execute": false
+      },
+      {
+        "md5": "b0d1e8d2622852b6b930def5c8a171d9",
+        "args": "p_channel text, p_limit integer",
+        "name": "dic_member_approval_claim",
+        "schema": "public",
+        "definition": "CREATE OR REPLACE FUNCTION public.dic_member_approval_claim(p_channel text, p_limit integer DEFAULT 20)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare batches jsonb;\nbegin\n if p_channel not in ('email','push') or p_channel is null or\n    p_limit is null or p_limit not between 1 and 20 then\n  raise exception using errcode='22023',message='Invalid delivery channel/limit';\n end if;\n with chosen as (\n  select d.event_id,d.channel\n  from private.dic_member_approval_deliveries d\n  join private.beta_members m on m.owner_id=d.member_id\n  join auth.users u on u.id=d.member_id\n  where d.channel=p_channel and m.signup_review_state='approved'\n   and m.enabled and m.admitted_at is not null\n   and u.email_confirmed_at is not null\n   and ((d.state='pending' and d.next_attempt_at<=now())\n    or (d.state='sending' and d.lease_until < now()))\n  order by d.event_id limit p_limit for update of d skip locked\n ), claimed as (\n  update private.dic_member_approval_deliveries d\n  set state='sending',attempt_count=d.attempt_count+1,\n      claim_token=gen_random_uuid(),lease_until=now()+interval '2 minutes'\n  from chosen c where d.event_id=c.event_id and d.channel=c.channel\n  returning d.event_id,d.member_id,d.claim_token\n )\n select coalesce(jsonb_agg(jsonb_build_object(\n   'eventId',c.event_id,'claimToken',c.claim_token,\n   'email',case when p_channel='email' then left(u.email,254) else null end,\n   'endpoints',case when p_channel='push' then (\n    select coalesce(jsonb_agg(jsonb_build_object('hash',s.endpoint_hash,'endpoint',s.endpoint)),'[]'::jsonb)\n    from public.dic_member_approval_push_subscriptions s\n    where s.owner_id=c.member_id and s.expires_at>now()\n      and s.last_sent_event_id<c.event_id\n   ) else '[]'::jsonb end\n  ) order by c.event_id),'[]'::jsonb) into batches\n from claimed c join auth.users u on u.id=c.member_id;\n return batches;\nend $function$\n",
+        "anon_execute": false,
+        "service_execute": true,
+        "authenticated_execute": false
+      },
+      {
+        "md5": "b94ddc2223993aa7685faf482d3871e4",
+        "args": "",
+        "name": "dic_member_approval_claim_poll",
+        "schema": "public",
+        "definition": "CREATE OR REPLACE FUNCTION public.dic_member_approval_claim_poll()\n RETURNS boolean\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n update private.dic_member_approval_poll_gate set last_polled_at=now()\n where singleton=true and last_polled_at < now()-interval '4 minutes';\n return found;\nend $function$\n",
+        "anon_execute": false,
+        "service_execute": true,
+        "authenticated_execute": false
+      },
+      {
+        "md5": "e92ba8e17ab274bcab1a564475d16f28",
+        "args": "p_event_id bigint, p_channel text, p_claim_token uuid, p_outcome text",
+        "name": "dic_member_approval_finish",
+        "schema": "public",
+        "definition": "CREATE OR REPLACE FUNCTION public.dic_member_approval_finish(p_event_id bigint, p_channel text, p_claim_token uuid, p_outcome text)\n RETURNS boolean\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n if p_channel not in ('email','push') or p_outcome not in ('sent','skipped','retry')\n   or p_claim_token is null or p_event_id is null then\n  raise exception using errcode='22023',message='Invalid delivery receipt';\n end if;\n update private.dic_member_approval_deliveries d\n set state=case when p_outcome='retry' then 'pending' else p_outcome end,\n     claim_token=null,lease_until=null,\n     completed_at=case when p_outcome='retry' then null else now() end,\n     next_attempt_at=case when p_outcome='retry' then\n       now()+least(60,power(2,least(d.attempt_count,5))::integer)*interval '1 minute'\n       else d.next_attempt_at end\n where d.event_id=p_event_id and d.channel=p_channel and\n   d.state='sending' and d.claim_token=p_claim_token;\n return found;\nend $function$\n",
+        "anon_execute": false,
+        "service_execute": true,
+        "authenticated_execute": false
+      }
+    ],
+    "trigger": [
+      {
+        "enabled": "O",
+        "definition": "CREATE TRIGGER dic_enqueue_member_approval_notices_on_review AFTER INSERT ON private.dic_signup_review_events FOR EACH ROW EXECUTE FUNCTION private.dic_enqueue_member_approval_notices()"
+      }
+    ]
+  },
+  "review_verdicts": {
+    "public.dic_member_approval_push_subscriptions": "Complete 7 columns/5 constraints/2 indexes. RLS enabled with zero policies; anon and authenticated lack all table privileges, service role only. Validated unique endpoint_hash, owner FK cascade, expiration and sent marker. Endpoint upsert check-before-write is not atomic across concurrent distinct members; exploitability and business impact NOT_REPRODUCED (no current subscription rows). Do not delete or rewrite merely from advisory.",
+    "private.dic_member_approval_deliveries": "Complete 10 columns/7 constraints/2 indexes. Service-only, RLS no policy, event/channel unique, verified member FK and lease/claim token retry. Noncovering member_id foreign key advisor; currently zero rows, no measured bottleneck, no automatic extra index.",
+    "private.dic_member_approval_poll_gate": "Complete two columns/two constraints/one index. One singleton, service-only, four-minute SQL poll throttle; last poll observed 18:40 UTC. Unauthenticated Edge request can invoke bounded poll but cannot select recipient or event. Actual delivery UNVERIFIED.",
+    "private.dic_enqueue_member_approval_notices": "Full trigger SQL body, SECURITY DEFINER empty search_path; inserts only after approved signup review, no historical backfill; no direct app role execute grant.",
+    "public.dic_member_approval_claim": "Full SQL body and service-only execute, SECURITY DEFINER empty search_path. FOR UPDATE SKIP LOCKED + two-minute leases; membership/email verification predicate; endpoint selection by owner, expiry and send marker. No private row enumeration.",
+    "public.dic_member_approval_claim_poll": "Full SQL body service-only execute; four-minute gate serializes latest poll. Do not conflate public schema with public execution.",
+    "public.dic_member_approval_finish": "Full SQL body service-only execute, claim-token match, bounded exponential retry state. Actual mail/device acknowledgments unavailable.",
+    "private.dic_enqueue_member_approval_notices_on_review": "Complete enabled AFTER INSERT trigger on signup review events; binds the private enqueue function.",
+    "edge:dic-member-approval-broker/index.ts": "Complete Deno entrypoint source exactly matches GitHub production/development source; gateway JWT off intentionally because unauthenticated scheduler, broker independently validates member JWT or service-only poll.",
+    "edge:dic-member-approval-broker/core.mjs": "Complete 11,751-character broker source; strict op/body validation, signed-in verified pending member for subscriptions, allowed HTTPS push hosts, service-only Resend and Vault, no recipient info in public poll response, bounded queue. Actual secret settings and recipient outcomes not exposed; source/provider parity is not live delivery proof.",
+    "migration:20261112180144": "Complete 7,653-character applied SQL stored byte-for-byte equal to development/production versioned source 20261112135900; additive tables/trigger/RPC and ACL. No unexplained migration source drift."
+  },
+  "aggregate_evidence": {
+    "subscriptions": 0,
+    "member_approval_deliveries": 0,
+    "poll_gate_rows": 1,
+    "latest_poll_utc": "2026-11-12T18:40:13.787174Z",
+    "no_private_rows_or_secrets_accessed": true
+  },
+  "advisors": {
+    "security_no_policy_rls": 13,
+    "security_signed_in_definer": 10,
+    "performance_unindexed_fks": 14,
+    "health": 0,
+    "new_rls_advisories_caused_by_intended_service_only_tables": 3,
+    "new_fk_advisory": "private.dic_member_approval_deliveries.member_id",
+    "disposition": "confirmed expected ACL / noncovering FK low rowcount, no safe removal or immediate index justified"
+  },
+  "counts": {
+    "live_source_migrations_reviewed": 1,
+    "complete_edge_source_files_reviewed": 2,
+    "relations_reviewed": 3,
+    "columns_reviewed": 19,
+    "constraints_reviewed": 14,
+    "indexes_reviewed": 5,
+    "full_functions_reviewed": 4,
+    "triggers_reviewed": 1
+  },
+  "remaining_unverified": [
+    "native compiled PostgreSQL/Vault implementation",
+    "hosted Auth/JWT/PostgREST dashboard-only settings and secret contents",
+    "real Resend inbox acceptance and closed-app Apple push delivery",
+    "remaining pg_catalog internal-language routine declarations #1/3008",
+    "database disk headroom"
+  ],
+  "disposition": "NO_NEW_CONFIRMED_DEFECT; SOURCE_PARITY_VERIFIED; BASELINE_IN_PROGRESS; LIVE_WRITES_ZERO",
+  "next_cursor": "If new changed migration/Edge, review next first; otherwise pg_catalog LANGUAGE internal ordinal 1/3008, native compiled bodies explicitly unverified"
+}
