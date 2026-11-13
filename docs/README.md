@@ -7,6 +7,10 @@
 - [Authority and supersession rules](ai/AUTHORITY_RULES.md), [preflight](ai/PREFLIGHT.md), [maintenance](ai/MAINTENANCE.md) — link to canonical documents, do not replace them.
 - [Knowledge-intake receipt](workstreams/ops-knowledge-context-20261101.md) — exact scope, verified attachment hashes, limitations and pending durable research storage.
 
+## Supabase roaster-directory retirement status (November 13, 2026)
+
+**LEGACY ACTIVE in hosted production:** protected `private.dic_roaster_directory` and `private.dic_roaster_aliases`, five directory-dependent SQL routines and legacy `dic-preview-coffee` Edge v6 remain live. **RETIREMENT IN PROGRESS:** [#2389](https://github.com/Schulzet3/The-Dial-In-Collective/issues/2389) has source READY in development, but its new migration is **not applied or published**; this is not a completed production retirement. **HISTORICAL / ARCHIVED:** past migration and original source/alias records are retained as immutable evidence rather than active URL allowlists. [#509 direct live provider evidence](audits/issue509-legacy-roaster-retirement-status-2026-11-13.json) controls these classifications. Only a separate owner Publish and hosted readback can change them.
+
 ## Read first
 1. [Mandatory PREFLIGHT](ai/PREFLIGHT.md) — read FIRST; then [active per-commit Work Journal](ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md) to recover interrupted work.
 2. [Current Status](CURRENT_STATUS.md) — current published SHA, production counts, safety, next action.
