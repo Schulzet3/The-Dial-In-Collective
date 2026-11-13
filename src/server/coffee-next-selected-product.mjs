@@ -60,24 +60,28 @@ export function extractSelectedNextCoffeeProduct(html,{source_url}={}){
   fields.roaster='Blue Bottle Coffee';
  if(local(selected?.flavorProfile))add('tasting_notes','Flavor Profile',
   local(selected.flavorProfile),'/props/pageProps/conversion/flavorProfile/eng');
+ // Keep original selected-page array indices alongside each supported value.
+ // Filtering blanks or deduplicating labels must never move source_facts to /0.
  const roast=(Array.isArray(selected?.roastLevel)?selected.roastLevel:[]).slice(0,8)
-  .map(row=>cleanRoast(row?.label)).filter(Boolean);
- const uniqueRoasts=[...new Set(roast)];
+  .map((row,index)=>({value:cleanRoast(row?.label),index})).filter(entry=>entry.value);
+ const uniqueRoasts=roast.filter((entry,index)=>
+  roast.findIndex(first=>first.value===entry.value)===index);
  const processing=(Array.isArray(selected?.processing)?selected.processing:[]).slice(0,8)
-  .map(row=>local(row?.description)).filter(Boolean);
- const uniqueProcesses=[...new Set(processing.map(x=>x.toLowerCase()))].map(x=>processing.find(v=>v.toLowerCase()===x));
+  .map((row,index)=>({value:local(row?.description),index})).filter(entry=>entry.value);
+ const uniqueProcesses=processing.filter((entry,index)=>
+  processing.findIndex(first=>first.value.toLowerCase()===entry.value.toLowerCase())===index);
  const conflicts=[],options={};
- if(uniqueRoasts.length===1)add('roast_level','Roast Level',uniqueRoasts[0],
-  '/props/pageProps/conversion/roastLevel/0/label/eng');
+ if(uniqueRoasts.length===1)add('roast_level','Roast Level',uniqueRoasts[0].value,
+  `/props/pageProps/conversion/roastLevel/${uniqueRoasts[0].index}/label/eng`);
  else if(uniqueRoasts.length>1){
-  conflicts.push('roast_level');options.roast_level=uniqueRoasts.map(value=>({value,label:'Current product roast'}));
+  conflicts.push('roast_level');options.roast_level=uniqueRoasts.map(({value})=>({value,label:'Current product roast'}));
  }
  const processLookup={'washed':'Washed','natural':'Natural','honey':'Honey','anaerobic':'Anaerobic'};
- if(uniqueProcesses.length===1&&processLookup[uniqueProcesses[0].toLowerCase()])
-  add('process','Processing',processLookup[uniqueProcesses[0].toLowerCase()],
-   '/props/pageProps/conversion/processing/0/description/eng');
+ if(uniqueProcesses.length===1&&processLookup[uniqueProcesses[0].value.toLowerCase()])
+  add('process','Processing',processLookup[uniqueProcesses[0].value.toLowerCase()],
+   `/props/pageProps/conversion/processing/${uniqueProcesses[0].index}/description/eng`);
  else if(uniqueProcesses.length>1){
-  conflicts.push('process');options.process=uniqueProcesses.map(value=>({value,label:'Current processing entry'}));
+  conflicts.push('process');options.process=uniqueProcesses.map(({value})=>({value,label:'Current processing entry'}));
  }
  return {ok:true,source:'unverified_public_page',fields,available:Object.keys(fields),
   source_facts:facts,...(conflicts.length?{conflicts,conflict_options:options}:{}),
