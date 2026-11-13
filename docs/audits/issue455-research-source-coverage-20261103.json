@@ -2389,6 +2389,45 @@
       "github267_literal_review_credit": 0,
       "last_reviewed_utc": "2026-11-13",
       "current_app_context": "At preflight d076e9133: engine.js blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6, model.js 469c55c17dd3ee5c16523e59a5adace1056e9038, ui.js 2ecde13b9d45ec329700654e1f054629d38bc95f; five explicit ratings, all-green versus incomplete, one controllable next step, same-coffee/setup/style/grinder/feed/time control, original private measured shot/notes/history. No reproduced source defect caused by this published research."
+    },
+    {
+      "id": "LIT-2019-ADHIKARI-COFFEE-CONSUMPTION-TEMPERATURE",
+      "type": "original_peer_reviewed_brewed_coffee_serving_temperature_descriptive_panel_not_espresso_intervention",
+      "title": "Impact of consumption temperature on sensory properties of hot brewed coffee",
+      "authors": "J. Adhikari; E. Chambers IV; K. Koppel",
+      "journal": "Food Research International 115 (2019) 95-104",
+      "doi": "10.1016/j.foodres.2018.08.014",
+      "pmid": "30599987",
+      "published": "2019-01; electronically 2018-08-03",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30599987/",
+      "access": "PRIMARY_AUTHOR_ABSTRACT_IN_PUBMED_RECORD; THIRD_PARTY_FAO_AGRIS_INDEX_CROSSCHECK; FULL_PUBLISHER_PDF_NOT_ACCESSED",
+      "review_status": "R455-240_DIRECT_PRIMARY_AUTHOR_PUBMED_ABSTRACT_BOUNDED_36_ATTRIBUTES_FOUR_COFFEES_THREE_SERVING_TEMPERATURES_AND_INTERACTIONS",
+      "evidence_grade": "PRIMARY_INDEXED_AUTHOR_ABSTRACT_ONLY_NO_FULL_METHODS_RAW_PANEL_DATA_FIGURE_PIXELS_OR_EXACT_PDF_SHA256",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Bounded abstract research only: these are hot-brewed coffee descriptive panel studies, not espresso shot intervention experiments, not the owner's five personal ratings; author original full PDFs, subject raw data, and independent validation were not examined.",
+      "claims_verified_externally": "Four brewed coffee types (two Arabica, Robusta, blend), 36 trained descriptive flavor attributes, consumed at 50,60,70 C; mixed effects ANOVA reports temperature-by-coffee interactions, with some flavor descriptors higher at 70 C. Does not test one-controlled-change espresso recommendations.",
+      "reviewed_date_utc": "2026-11-13",
+      "implementation_status": "RESEARCH_ONLY_NO_APP_PRODUCT_NUMERIC_OR_CAPTURE_CHANGE"
+    },
+    {
+      "id": "LIT-2019-CHAPKO-SEO-SERVING-TEMP-SENSORY",
+      "type": "original_peer_reviewed_brewed_coffee_serving_temperature_trained_descriptive_panel_not_espresso",
+      "title": "Characterizing product temperature-dependent sensory perception of brewed coffee beverages: Descriptive sensory analysis",
+      "authors": "Matthew J. Chapko; Han-Seok Seo",
+      "journal": "Food Research International 121 (2019) 612-621",
+      "doi": "10.1016/j.foodres.2018.12.026",
+      "pmid": "31108788",
+      "published": "2019",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31108788/",
+      "related_separate_primary_author_thesis": "https://scholarworks.uark.edu/etd/2934/",
+      "access": "PRIMARY_AUTHOR_ABSTRACT_IN_PUBMED_RECORD; UNIVERSITY_THESIS_ABSTRACT_READ_FOR_ADJACENT_MULTISTUDY_CONTEXT_NOT_CERTIFICATION_OF_FINAL_JOURNAL_METHODS",
+      "review_status": "R455-240_PRIMARY_PUBMED_ABSTRACT_6_PANELISTS_32_ATTRIBUTES_THREE_ORIGINS_FOUR_SERVING_TEMPERATURES_AND_LIMITS",
+      "evidence_grade": "PRIMARY_INDEXED_AUTHOR_ABSTRACT_ONLY_UNIVERSITY_THESIS_ADJACENT_CONTEXT_NO_PUBLISHER_FULL_TEXT_PDF_OR_RAW_RECORDS",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Bounded abstract research only: these are hot-brewed coffee descriptive panel studies, not espresso shot intervention experiments, not the owner's five personal ratings; author original full PDFs, subject raw data, and independent validation were not examined.",
+      "claims_verified_externally": "Six trained descriptive panelists rated 32 attributes in Ethiopian, Kenyan and Colombian brewed coffee at 70,55,40,25 C. Author abstract reports 18 temperature- and seven variety-sensitive attributes; study-specific PCA descriptive variance 63.28% temperature vs 21.24% variety, not a general causal fraction or espresso quality effect.",
+      "reviewed_date_utc": "2026-11-13",
+      "implementation_status": "RESEARCH_ONLY_NO_APP_PRODUCT_NUMERIC_OR_CAPTURE_CHANGE"
     }
   ],
   "evidence_checks": [
@@ -7280,6 +7319,55 @@
       "owner_approval": false,
       "github267_literal_review_credit": 0,
       "source_bytes_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-240-A",
+      "source": "LIT-2019-ADHIKARI-COFFEE-CONSUMPTION-TEMPERATURE",
+      "primary_source": "https://pubmed.ncbi.nlm.nih.gov/30599987/",
+      "doi": "10.1016/j.foodres.2018.08.014",
+      "claim": "Original indexed author abstract examined: four hot-brew coffee types, 36 descriptive attributes, serving/cup consumption temperatures 50/60/70 C, mixed-effect ANOVA with significant coffee-by-serving-temperature interaction. Do not infer espresso extraction effects from serving-temperature sensory differences.",
+      "result": "PRIMARY_INDEXED_ABSTRACT_DIRECTLY_CHECKED_CONDITIONAL_SERVING_TEMP_PERCEPTION_EFFECT_NOT_MEMBER_RECIPE_EFFICACY",
+      "grade": "PRIMARY_PUBMED_AUTHOR_ABSTRACT_PLUS_FAO_AGRIS_INDEX_NOT_PUBLISHER_FULL_METHODS",
+      "factual_status": "QUALIFIED_DESCRIPTIVE_BREWED_COFFEE_SAMPLE_ONLY",
+      "date": "2026-11-13",
+      "current_app": "At immutable development 234a703256d246aa542288fe1df420e032977700, site/lib/constants.js blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2 distinguishes five 1-5 member taste fields; site/lib/engine.js blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6 guards full ratings/all-green and one controllable recommendation; site/lib/ui.js blob 2ecde13b9d45ec329700654e1f054629d38bc95f and site/cloud/main.js blob bb85007730cd58b9aaa13919d6420f548cbf30ef preserve Log/Rate measured shot, notes and ratings. Optional machine/brew temperature is NOT a measurement of cup temperature at tasting. No measured espresso cup-quality outcome or new bug demonstrated.",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0,
+      "source_bytes_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-240-B",
+      "source": "LIT-2019-CHAPKO-SEO-SERVING-TEMP-SENSORY",
+      "primary_source": "https://pubmed.ncbi.nlm.nih.gov/31108788/",
+      "doi": "10.1016/j.foodres.2018.12.026",
+      "claim": "Indexed original author abstract: six trained panelists, 32 attributes across Ethiopian/Kenyan/Colombian hot-brewed coffee at 70/55/40/25 C; 18 temperature-affected vs seven coffee-variety-affected attributes; PCA percent variation applies only to this experiment's descriptive data, not espresso flavor quality effects.",
+      "result": "PRIMARY_INDEXED_ABSTRACT_DIRECTLY_CHECKED_STUDY_SPECIFIC_TEMPERATURE_DEPENDENCE_NO_HUMAN_FIVE_RATING_UTILITY",
+      "grade": "PRIMARY_PUBMED_ABSTRACT_UNIVERSITY_AUTHOR_THESIS_RELATED_CONTEXT_NOT_FINAL_PAPER_RAW_DATA",
+      "factual_status": "QUALIFIED_DESCRIPTIVE_PANEL_SIX_TASTERS_NOT_PERSONAL_NEXT_SHOT",
+      "date": "2026-11-13",
+      "current_app": "At immutable development 234a703256d246aa542288fe1df420e032977700, site/lib/constants.js blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2 distinguishes five 1-5 member taste fields; site/lib/engine.js blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6 guards full ratings/all-green and one controllable recommendation; site/lib/ui.js blob 2ecde13b9d45ec329700654e1f054629d38bc95f and site/cloud/main.js blob bb85007730cd58b9aaa13919d6420f548cbf30ef preserve Log/Rate measured shot, notes and ratings. Optional machine/brew temperature is NOT a measurement of cup temperature at tasting. No measured espresso cup-quality outcome or new bug demonstrated.",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0,
+      "source_bytes_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-240-C",
+      "sources": [
+        "LIT-2019-ADHIKARI-COFFEE-CONSUMPTION-TEMPERATURE",
+        "LIT-2019-CHAPKO-SEO-SERVING-TEMP-SENSORY"
+      ],
+      "primary_sources": [
+        "https://pubmed.ncbi.nlm.nih.gov/30599987/",
+        "https://pubmed.ncbi.nlm.nih.gov/31108788/"
+      ],
+      "claim": "Independent brewed-coffee sensory descriptive designs both report serving temperature matters for attributes. This motivates controlling or recognizing tasting delay/serving temperature as a confounder when planning optional same-coffee/setup/style/grinder single-change -> next-shot comparison; it does NOT establish a causal espresso recommendation effect, validate five 1-5 member taste ratings, identify a universal drinking temperature, or license product telemetry/new user fields.",
+      "result": "EVIDENCE_DESIGN_CONFOUNDER_NOT_PRODUCT_POLICY; NO_OWNER_QUESTION_NOW",
+      "grade": "CROSS_STUDY_BOUNDED_AUTHOR_ABSTRACTS_NON_ESPRESSO_NON_USER_INTERVENTION",
+      "factual_status": "RESEARCH_DESIGN_RISK_ONLY_NO_APP_BUG_OR_EFFECT_REPRODUCED",
+      "date": "2026-11-13",
+      "current_app": "At immutable development 234a703256d246aa542288fe1df420e032977700, site/lib/constants.js blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2 distinguishes five 1-5 member taste fields; site/lib/engine.js blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6 guards full ratings/all-green and one controllable recommendation; site/lib/ui.js blob 2ecde13b9d45ec329700654e1f054629d38bc95f and site/cloud/main.js blob bb85007730cd58b9aaa13919d6420f548cbf30ef preserve Log/Rate measured shot, notes and ratings. Optional machine/brew temperature is NOT a measurement of cup temperature at tasting. No measured espresso cup-quality outcome or new bug demonstrated.",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -7458,24 +7546,25 @@
     "R455-236: Original 2017 WCR PDF selected p.6,p.8,p.52 substantively checked, 0-15 trained descriptive method distinct from personal five taste/ideals and separate mouth-drying vs thickness references. Binary SHA remains unavailable. Keep no new app policy/READY, #267 line credit zero, S019 inaccessible. Verify source-bound PR-head CI and nonforce merge, then next distinct primary claim or independently reproduced safe UX defect.",
     "R455-237: Mo et al. 2023 original Scientific Reports full-text PMC paper now directly read, correcting earlier first-party indexed-only citation limit. Tables 1-3 and limitations verified as sample-specific static microCT/SPH; 0 new source identities, 2 source checks, 1 P3 documentation proposal. New totals 133/377/193. No derived universal espresso pressure/grind or taste rule, no app/provider writes, no #267 literal credit. Verify hosted CI, nonforce merge and source blob readback; S019 still inaccessible.",
     "R455-238: 2015 Sanchez/Chambers published original abstract and separate 2014 first-party poster reviewed; different descriptive brewing methods have co-changing contact time and water temperature. 1 new bounded original publication source, 2 checks, 1 research-only proposal; no runtime bug or proven user improvement, no numeric/Locked change. Exact docs PR head CI/merge/readback pending; full 2015 methods/2014 poster binary and S019 remain unverified; #267 credit zero.",
-    "R455-239: Original Andueza 2003 Wiley abstract crosschecked with unauthenticated third-party 9-page text, provisional 7.5g/40mL machine/delivery temperature offset and 20-judge 10-cm descriptive scale extracted with strict provenance qualifier. One existing source identity updated, 2 bounded checks and 1 P3 proposal; no current app bug, new numeric temperature target, five-rating map or measured improvement. Verify PR and merged CI; full publisher PDF, figures, raw data and S019 still inaccessible; #267 zero new literal-line credit."
+    "R455-239: Original Andueza 2003 Wiley abstract crosschecked with unauthenticated third-party 9-page text, provisional 7.5g/40mL machine/delivery temperature offset and 20-judge 10-cm descriptive scale extracted with strict provenance qualifier. One existing source identity updated, 2 bounded checks and 1 P3 proposal; no current app bug, new numeric temperature target, five-rating map or measured improvement. Verify PR and merged CI; full publisher PDF, figures, raw data and S019 still inaccessible; #267 zero new literal-line credit.",
+    "R455-240: two 2019 original indexed studies of BREWED coffee consumption temperature; 2 bounded publications + 3 claim checks +1 P3 evidence design proposal; 136/384/196 candidate at authoring. Control tasting-temperature/delay only as future separately approved optional/consented research protocol. Neither original full PDF/raw data nor espresso recommendation quality trial verified; no code/Locked/telemetry/new data/READY change; #267 zero literal credit. Exact source CI, nonforce merge/readback pending. Standalone S019 not recovered."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-239",
-    "starting_preflight_development_sha": "c572b245e2dfce724cd571b0f57fb933589e121c",
+    "run_id": "R455-240",
+    "starting_preflight_development_sha": "234a703256d246aa542288fe1df420e032977700",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "live_parent_sha_at_authoring": "c572b245e2dfce724cd571b0f57fb933589e121c",
-    "phase": "DOCS_ONLY_WILEY_ABSTRACT_AND_UNAUTHENTICATED_2003_REPRINT_METHODS_VERIFICATION_PR_HEAD_CI_UNRUN",
+    "live_parent_sha_at_authoring": "234a703256d246aa542288fe1df420e032977700",
+    "phase": "DOCS_ONLY_TWO_2019_PRIMARY_PUBMED_ABSTRACTS_SERVING_TEMPERATURE_CONFOUNDER_CANDIDATE_CI_NOT_RUN",
     "source_counts": {
-      "research_project_source_records": 134,
-      "bounded_evidence_checks": 381,
-      "proposals": 195
+      "research_project_source_records": 136,
+      "bounded_evidence_checks": 384,
+      "proposals": 196
     },
-    "source_access": "FIRST_PARTY_PUBLISHER_ABSTRACT_ONLY; THIRD_PARTY_9_PAGE_TEXT_UNAUTHENTICATED_WITH_OCR_COLUMN_INTERLEAVING",
+    "source_access": "TWO_PUBMED_PRIMARY_AUTHOR_ABSTRACTS; FULL_ELSEVIER_PDF_METHODS_RAW_DATA_NOT_VERIFIED",
     "original_s019": "UNRETRIEVED_CONNECTED_GOOGLE_DRIVE_AND_LIBRARY_SEARCH_20261113",
     "github267_literal_review_credit": 0,
     "release_state": "NO_NEW_READY_NO_PUBLICATION",
-    "next": "Verify exact source-bound applicable GitHub PR checks, recheck branch/concurrent ledger before nonforce merge [skip netlify] in title/body, verify exact blob readback and merged-push governance, post Issue #455 checkpoint."
+    "next": "Verify hosted exact PR-source relevant checks and nonforce merge/readback with [skip netlify] in actual merge title+body, append Issue #455 verified checkpoint only after observed evidence."
   },
   "policy_decisions_resolved": [
     {
@@ -11893,6 +11982,34 @@
       "production_deployed": false,
       "github267_literal_review_credit": 0,
       "source_commit": "c572b245e2dfce724cd571b0f57fb933589e121c"
+    },
+    {
+      "id": "R455-PROP-240-SERVING-TEMPERATURE-REPEATABILITY",
+      "severity": "P3_EVIDENCE_METHODS_CONFOUNDING_NO_REPRODUCED_RUNTIME_BUG",
+      "source": [
+        "LIT-2019-ADHIKARI-COFFEE-CONSUMPTION-TEMPERATURE",
+        "LIT-2019-CHAPKO-SEO-SERVING-TEMP-SENSORY"
+      ],
+      "evidence": [
+        "R455-EV-CIT-240-A",
+        "R455-EV-CIT-240-B",
+        "R455-EV-CIT-240-C"
+      ],
+      "finding": "Serving/tasting temperature changes brewed-coffee descriptive intensity independently of measured espresso brew-water temperature. In a future repeated next-shot taste outcome evaluation, different delays and cup-temperature exposures may confound before/after five-personal-scale comparisons; these studies do not prove a particular numeric espresso correction or human outcome.",
+      "evidence_grade": "TWO_DISTINCT_PRIMARY_AUTHOR_PUBMED_ABSTRACTS_2019; FULL_TEXT_PANEL_RAW_PDF_AND_DIRECT_ESPRESSO_REPLICATION_UNVERIFIED",
+      "user_benefit": "Prevent false before/after espresso taste-quality attribution; keep future optional research design scientifically honest and nonintrusive.",
+      "source_provenance": "Adhikari et al. Food Research International DOI 10.1016/j.foodres.2018.08.014 PMID30599987; Chapko and Seo DOI 10.1016/j.foodres.2018.12.026 PMID31108788; separate original author 2018 thesis abstract context, not duplicate independent study.",
+      "current_locked": "Five separate member taste ratings, rated all-green vs missing, one truly controllable step, original measured shot and private history/notes, distinct espresso styles including Turbo/Fast-Flow, grinder calibration versions/slow-feed, optional brew-temperature equipment, same-coffee evidence and privacy/Community/RLS; no owner authorization for telemetry/new fields.",
+      "current_app": "At immutable development 234a703256d246aa542288fe1df420e032977700, site/lib/constants.js blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2 distinguishes five 1-5 member taste fields; site/lib/engine.js blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6 guards full ratings/all-green and one controllable recommendation; site/lib/ui.js blob 2ecde13b9d45ec329700654e1f054629d38bc95f and site/cloud/main.js blob bb85007730cd58b9aaa13919d6420f548cbf30ef preserve Log/Rate measured shot, notes and ratings. Optional machine/brew temperature is NOT a measurement of cup temperature at tasting. No measured espresso cup-quality outcome or new bug demonstrated.",
+      "proposed_change": "SAFE documentation-only source qualification. For only a separately approved optional/consented FUTURE efficacy evaluation, pre-specify fixed or recorded-in-study consumption temperature/tasting delay and sensitivity analyses, along with same coffee/setup/style/grinder/basket/feed, roast rest, one change, paired all-five ratings, adverse shifts and missingness. No member-data reads, new UI fields, consent capture, telemetry, intervention, trial, numerical model or testing authorized by this docs update.",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "R455-240_DOCS_ONLY_SOURCE_AND_CONFOUNDER_RESEARCH_PENDING_PR_HEAD_GOVERNANCE",
+      "test_plan": "Unique ID and DOI validation; preserve prior 134/381/195 records exactly and in order; append 2 source + 3 evidence + 1 proposal; GitHub PR-head exact governance and nonforce merge, merged Git blob parity. No app test or runtime CI falsely claimed.",
+      "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY_NO_NEW_READY",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0,
+      "exact_source": "234a703256d246aa542288fe1df420e032977700"
     }
   ],
   "changeScope": {
