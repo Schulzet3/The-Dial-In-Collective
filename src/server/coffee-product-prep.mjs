@@ -9,7 +9,12 @@ export function compactCoffeeProductHtml(html){
  for(const block of rawElements(html)){
   chunks.push(html.slice(cursor,block.start));
   const type=block.attributes.slice(0,1800).match(/\btype\s*=\s*["']([^"']{1,100})["']/i)?.[1]?.toLowerCase();
-  chunks.push(block.closed&&(type==='application/ld+json'||type==='application/json')?html.slice(block.start,block.end):' ');
+  // A bounded public React Router/Hydrogen server payload is selected product
+  // data, not executable input. Preserve only its exact inline JSON enqueue
+  // (<=250 KB); every other script is discarded as before.
+  const currentHydration=block.closed&&block.body.length<=250_000&&
+   block.body.startsWith('window.__reactRouterContext.streamController.enqueue(');
+  chunks.push(block.closed&&(type==='application/ld+json'||type==='application/json'||currentHydration)?html.slice(block.start,block.end):' ');
   cursor=block.end;
  }
  chunks.push(html.slice(cursor));
