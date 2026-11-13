@@ -74,6 +74,12 @@ const summary={
  public_shopify_json_ok:shopifyPreview?.ok===true,
  name:fields.name||null,roaster:fields.roaster||null,origin:fields.origin||null,
  process:fields.process||null,roast_level:fields.roast_level||null,tasting_notes:fields.tasting_notes||null,
+ roast_source:result?.roast_source||null,roast_hint:String(result?.roast_hint||'').slice(0,250),
+ roast_conflicts:result?.conflicts||[],
+ roast_facts:(result?.source_facts||[]).filter(f=>f.field==='roast_level'||f.field==='roast_context')
+  .slice(0,12).map(f=>({source_type:f.source_type,label:String(f.label||'').slice(0,100),
+   value:String(f.value||'').slice(0,140),section:String(f.section||'').slice(0,150)})),
+ roast_evidence_from_html:htmlPreview?.roast_source||null,
  failures,passed:failures.length===0,original603_unchanged:true,production_operations:0
 };
 writeFileSync(outputDir+'/afterproof.json',JSON.stringify(summary,null,2)+'\n');
