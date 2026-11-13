@@ -7,7 +7,7 @@
   command = "npm run build:cloud"
   publish = "dist"
   # Ignore automatic production builds unless this is a deliberately marked,
-  # fully tested, one-use owner-approved release; the owner monitors credits.
+  # fully tested, one-use owner-approved release; no automated credit checks/gates.
   # No branch/deploy preview publication without an explicit future approval.
   # Runtime/script errors must skip too: only the exact allow token AND exit42
   # become Netlify exit1. The inline adapter also covers a missing helper file.
@@ -15,5 +15,6 @@
 [build.environment]
   NODE_VERSION = "22"
 # Build coordinates are SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY only.
-# HTTPS callbacks, SMTP and the first genuine invited member passed their recorded tests.
-# Keep confirmed email, beta admission, RLS and admin checks; see docs/CURRENT_STATUS.md.
+# ARCHIVED / COMPLETED: earlier HTTPS callback, SMTP and invited-member test receipts.
+# CURRENT: new signups require email verification and administrator approval (not invite codes).
+# Preserve Auth/RLS, approval, email/privacy and guarded publication; see docs/CURRENT_STATUS.md.
