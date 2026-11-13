@@ -53,3 +53,35 @@ test('#255 missing selected farm story cannot count as direct product evidence',
 test('#255 unprinted decaf and espresso recipes remain blank',()=>{
  const r=parse();assert.ok(!r.fields?.decaffeination_method&&!r.fields?.espresso_recipe,JSON.stringify(r).slice(0,1800));
 });
+
+test('#255 current exact smallholder localities are separately reviewable; canonical producer stays anonymous',()=>{
+ const r=parse();assert.equal(r.ok,true,JSON.stringify(r).slice(0,1800));
+ assert.equal(r.fields?.producer,'smallholder growers',JSON.stringify(r).slice(0,1800));
+ const facts=(r.source_facts||[]).filter(x=>x.field==='producer_locality_context');
+ assert.equal(facts.length,1,JSON.stringify(facts));
+ assert.deepEqual(facts[0].value.split(', '),['Chilon','Simojovel','Yalajon','Sitala','Sabanila','Ocosingo']);
+ assert.match(r.producer_review_note||'',/not individually named producers/i);
+});
+test('#255 stale SEO or another related coffee cannot donate growing communities',()=>{
+ const without=own.replace(/<p>Hey![\s\S]*?<\/p>/,'<p>No producer details published.</p>');
+ const r=parse(without,'<aside>Other coffee was produced by smallholder growers across the Chiapas communities of Wrongville and Losttown.</aside>');
+ assert.equal((r.source_facts||[]).filter(x=>x.field==='producer_locality_context').length,0);
+});
+test('#255 prose about former coffee does not qualify as current locality',()=>{
+ const r=parse(own.replace('this coffee was produced','Previously, this coffee was produced'));
+ assert.equal((r.source_facts||[]).filter(x=>x.field==='producer_locality_context').length,0);
+});
+test('#255 producer towns from mismatched region are withheld',()=>{
+ const r=parse(own.replace('the Chiapas communities','the Cajamarca communities'));
+ assert.equal((r.source_facts||[]).filter(x=>x.field==='producer_locality_context').length,0);
+});
+test('#255 contradictory current locality lists require review and no chosen list',()=>{
+ const r=parse(own+'<p>This coffee was produced by smallholder growers across the Chiapas communities of Newtown and Othertown.</p>');
+ assert.equal((r.source_facts||[]).filter(x=>x.field==='producer_locality_context').length,0);
+});
+test('#255 one community and malformed locality names do not produce structured source fact',()=>{
+ for(const phrase of ['the Chiapas communities of Chilon','the Chiapas communities of Chilon, 404town']){
+  const r=parse(own.replace('the Chiapas communities of Chilon, Simojovel, Yalajon, Sitala, Sabanila, and Ocosingo',phrase));
+  assert.equal((r.source_facts||[]).filter(x=>x.field==='producer_locality_context').length,0,phrase);
+ }
+});

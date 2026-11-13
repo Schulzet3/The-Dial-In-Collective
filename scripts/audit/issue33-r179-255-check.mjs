@@ -4,6 +4,7 @@ import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
 import {join,resolve} from 'node:path';
 import {createHash} from 'node:crypto';
 import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
+import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
 import {selectedProductHeadings} from './issue33-selected-product-heading.mjs';
 import {removeElements} from '../../supabase/functions/_shared/html-scan.mjs';
 const sha=value=>createHash('sha256').update(value).digest('hex');
@@ -47,6 +48,15 @@ if(process.env.DIC_ISSUE33_R179_VERIFY==='1'){
  check(['cocoa','caramel','brown spice'].every(x=>norm(f.tasting_notes).includes(x)),'three_direct_tasting_notes');
  check(!f.roast_level,'darker_roast_unstandardized_not_assumed_dark');
  check(!f.decaffeination_method&&!f.espresso_recipe,'unpublished_fields_blank');
+
+ const currentParser=html?extractPublicCoffeeFacts(html.toString('utf8'),{source_url:chosen255.url}):null;
+ const locality=(currentParser?.source_facts||[]).filter(fact=>fact.field==='producer_locality_context');
+ check(currentParser?.ok===true,'reparse_exact_raw_html_for_community_provenance');
+ check(locality.length===1&&['chilon','simojovel','yalajon','sitala','sabanila','ocosingo']
+  .every(x=>norm(locality[0]?.value).includes(x)),'six_selected_communities_source_review');
+ check(norm(currentParser?.fields?.producer)===norm(f.producer)&&
+  /not individually named producers/i.test(currentParser?.producer_review_note||''),
+  'producer_communities_not_fabricated_as_named_farms');
  check(record.add_coffee_ui_rendered===true&&record.source_review_rendered===true,'explicit_Add_Coffee_Source_Review');
  check(!(record.seo_fallback_fields||[]).some(x=>['name','origin','process','roast_level','tasting_notes','producer'].includes(x)),'no_recycled_cross_product_SEO');
  const report={case:255,source_sha:summary?.source_sha||null,passed:failures.length===0,failures,
