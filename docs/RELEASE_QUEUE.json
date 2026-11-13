@@ -12,30 +12,36 @@
       "issue": 33,
       "pr": 2428,
       "title": "Preserve exact selected Next JSON roast and processing fact source indices after filtering and deduplication",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "3ef8b2d432d9c8d23be3d48a288278cd112ab523",
       "scope_paths": [
         "src/server/coffee-next-selected-product.mjs"
       ],
       "tests": [
         "#267 source-bound isolated actual-module Node22 reproduction at Issue33 comment 6848218683: normalized Light/Washed correctly, but roast/process source_path pointed to invalid/empty index 0 rather than original selected index 1.",
         "R170 PR #2428 source/tests/same-commit journal from preflight development 7dac1036e57cfe4ae8bf47616e19a24a6c39b598, blob 2fb236bbfa6bac48513eeb3bd157b260853af06d. Nine synthetic positive and hostile source index/conflict/selected identity/bounded-input tests. Initial PR approval 43398236320 FAILED solely due to untracked app file in queue; this entry resolves intake; NOT reclassified PASS.",
-        "Initial exact PR head cloud UX 43398237681, security 43398236345, isolated SQL 43398236429 and private source 43398236262 SUCCESS; app Node/lint/build 43398236432 still pending at time of queue entry. Frozen603 43398236411 SKIPPED, not PASS."
+        "Initial exact PR head cloud UX 43398237681, security 43398236345, isolated SQL 43398236429 and private source 43398236262 SUCCESS; app Node/lint/build 43398236432 still pending at time of queue entry. Frozen603 43398236411 SKIPPED, not PASS.",
+        "Correction PR #2428 safely nonforce squash merged 3ef8b2d432d9c8d23be3d48a288278cd112ab523, full Git tree bb451ef8f1f488502e6fdfe415c1dbeac9494429 identical to exact PR-tested merge tree 1ec8accb76d8faddce062e361ec31c1d0516d01a; exact scoped source/test/journal/queue Git blobs byte-equal.",
+        "Corrected PR head Node/lint/build GitHub Actions 43398469944 SUCCESS: 3,159 focused/risk-selected Node tests PASS / 0 FAIL / 0 SKIP, including all 9 new pointer/identity/negative tests, lint/build PASS and 43 packed imports; approval 43398469816, cloud UX 43398470061, isolated SQL 43398469777, security 43398469917, private source 43398469804 SUCCESS.",
+        "Exact merged Git tree Node/lint/build 43399024557 SUCCESS: 3,159 focused/risk-selected tests PASS / 0 FAIL / 0 SKIP, nine R170 tests green, lint/build PASS, packaged graph 43 assets; merged approval 43399024750 and cloud UX 43399024588 SUCCESS. Merged general source 43399024436, public probe 43399024460 and original frozen603 43398469765 SKIPPED, not PASS.",
+        "Initial PR candidate approval 43398236320 FAILED solely because queue intake omitted changed src/server/coffee-next-selected-product.mjs; fixed with tracked IN_PROGRESS queue row at PR head 5bddeb649ced694b30bb68d408789bea501569c6. Initial PR Node run cancelled on new head; never counted PASS.",
+        "Scope is synthetic exact-module provenance fix only: current live merchant JSON/roaster lot or one of 603 selected products not certified, frozen 603/201/1197 original capture/oracle untouched; parent #33 remains OPEN.",
+        "Docs-only first READY approval [43399655268](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/43399655268) FAILED because READY ci_runs incorrectly included historical failed 43398236320 (and cancelled 43398236432), despite preserved narrative failure. Removed nonpassing runs from ci_runs while retaining failure in permanent tests/journal; only independently SUCCESS source-bound exact PR-head and merged runs now cited."
       ],
       "ci_runs": [
-        43398236320,
-        43398237681,
-        43398236345,
-        43398236429,
-        43398236262,
-        43398236432
+        43398469944,
+        43398469816,
+        43398470061,
+        43398469777,
+        43398469917,
+        43398469804,
+        43399024557,
+        43399024750,
+        43399024588
       ],
-      "blockers": [
-        "Recheck corrected PR-head approval, app Node22/lint/build and all applicable exact-source CI; nonforce merge and verify merged Git blobs and CI before any READY status.",
-        "Synthetic direct Next JSON provenance finding is not evidence current live roaster pages have this array shape or that any original603 individual official product has been newly certified."
-      ],
+      "blockers": [],
       "owner_source": "Issue #33 development-only scope; #267 source-bound coordinated finding https://github.com/Schulzet3/The-Dial-In-Collective/issues/33#issuecomment-6848218683; Locked selected exact-product priority.",
-      "notes": "IN_PROGRESS until tested and safely integrated. Original immutable603/captures/oracle unchanged; no publication, production/provider, SQL/Auth/Edge/member writes, release, paid service or forced Git. Scope separate from #267 audit and #96 security. Previously READY/DEPLOYED entries untouched.",
+      "notes": "NARROW VERIFIED READY DEVELOPMENT ONLY for exact selected Next JSON roast/process source_path provenance under filtered/nonzero index; no newly certified live merchant case. Original frozen603 acceptance unfinished, #33 OPEN. Previously deployed/ready queue rows preserved, no Netlify or other provider, production SQL/Auth/Edge/member or release writes.",
       "production_deployed": false
     },
     {
