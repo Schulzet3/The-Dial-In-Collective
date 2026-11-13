@@ -1,0 +1,53 @@
+name: DIC Issue33 R179 original255 Others selected Mexico
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r179-255.yml
+      - scripts/audit/issue33-r179-255-check.mjs
+      - tests/coffee-issue33-r179-255.test.mjs
+      - src/server/coffee-page-metadata.mjs
+      - src/server/roast-level-evidence.mjs
+      - docs/workstreams/ops-issue33-r179-255-20261113.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r179-255.yml
+      - scripts/audit/issue33-r179-255-check.mjs
+      - tests/coffee-issue33-r179-255.test.mjs
+      - src/server/coffee-page-metadata.mjs
+      - src/server/roast-level-evidence.mjs
+permissions:
+  contents: read
+jobs:
+  exact-selected:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Selected coffee and recycled identity regression
+        run: node --test tests/coffee-issue33-r179-255.test.mjs
+      - name: Guarded exact current official source and actual parser
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '255'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r179
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Strict selected product source and parser afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_R179_VERIFY: '1'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r179
+        run: node scripts/audit/issue33-r179-255-check.mjs
+      - name: Retain guarded source HTML and afterproof
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r179-original255
+          path: /tmp/dic33-r179/
+          retention-days: 2
+          if-no-files-found: warn
