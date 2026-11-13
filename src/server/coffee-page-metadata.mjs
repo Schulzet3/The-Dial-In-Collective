@@ -2748,7 +2748,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   if(selectedRoast&&fields.roast_level&&fields.roast_level!==selectedRoast&&
      !conflicts.has('roast_level')){
    const wrongRoast=fields.roast_level;
-   const relatedCard=[...html.matchAll(/<h[2-6]\\b[^>]{0,800}>([^<]{2,180})<\\/h[2-6]\\s*>/giu)]
+   const relatedCard=[...html.matchAll(/<h[2-6]\b[^>]{0,800}>([^<]{2,180})<\/h[2-6]\s*>/giu)]
     .map(match=>clean(match[1],180))
     .filter(name=>name&&!equivalentCoffeeProductNames(name,fields.name)&&
       keyOf(name).endsWith(keyOf(wrongRoast)+'roast'));
@@ -2790,7 +2790,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    }
    if(source_facts.length<384&&!source_facts.some(f=>f.field===key&&
        f.source_type==='product_json'&&f.value===value&&
-       /React Router\\/Hydrogen loader/.test(String(f.section||''))))source_facts.push({
+       String(f.section||'').includes('React Router/Hydrogen loader')))source_facts.push({
     field:key,label,value,source_url,source_type:'product_json',
     section:'Current selected product React Router/Hydrogen loader data'
    });
