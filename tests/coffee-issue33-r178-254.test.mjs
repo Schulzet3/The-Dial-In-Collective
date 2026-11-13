@@ -18,7 +18,7 @@ test('#254 current own product directly publishes Huila washed origin and full a
 test('#254 own selected four cultivars and four tasting notes',()=>{
  const s=source254(page());assert.equal(s.cultivars,true);assert.equal(s.four_notes,true);
 });
-test('#254 named women's cooperative is literal current selected source, not an inferred individual grower',()=>{
+test("#254 named women's cooperative is literal current selected source, not an inferred individual grower",()=>{
  assert.equal(source254(page()).women_cooperative,true);
 });
 test('#254 actual parser honors current product name over stale Peru SEO',()=>{
