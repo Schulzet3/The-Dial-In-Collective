@@ -2451,6 +2451,23 @@
       "claims_verified_externally": "Prior non-scalar doseG:[18], yieldG:[44], timeS:[17] and optional tempC:[91] could pass Number-based coercion. New shot requires true number/string input to validate; valid numeric strings and notes/ratings persist, replay of archived saved ID untouched.",
       "reviewed_date_utc": "2026-11-13",
       "implementation_status": "MERGED_DEV_READY_QUEUE_ONLY_NOT_DEPLOYED"
+    },
+    {
+      "id": "LIT-2022-HONDA-SUPERCRITICAL-CO2-DECAF-ROAST-CHEMISTRY",
+      "type": "peer_reviewed_primary_decaffeination_roast_bean_chemistry",
+      "title": "Effect of Roasting Degree on Major Coffee Compounds: A Comparative Study between Coffee Beans with and without Supercritical CO2 Decaffeination Treatment",
+      "authors": "Masaki Honda, Daishi Takezaki, Masahiro Tanaka, Masashi Fukaya, Motonobu Goto",
+      "publication": "Journal of Oleo Science 71(10):1541-1550 (2022)",
+      "doi": "10.5650/jos.ess22194",
+      "official_pdf_url": "https://www.jstage.jst.go.jp/article/jos/71/10/71_ess22194/_pdf",
+      "access": "PUBLISHER_FINAL_FULL_TEN_PAGE_PDF_TEXT_DIRECT_READ; PDF_PAGES_1545_AND_1548_VISUALLY_SCREENSHOT_INSPECTED_20261113; ARCHIVED_BINARY_SHA256_NOT_CAPTURED",
+      "archive_original_claim": "ORG-03 original SHA256 270689e9a31014592ab5b9007e0c29121d23d5f1c594025cdc8d69f2881cd106 lines 248-252; Honda earlier publisher abstract check R455-EV-003-D",
+      "review_status": "FULL_PRIMARY_METHODS_RESULTS_TABLE2_FIGURES3_AND6_AND7_CONCLUSION_FOCUSED_DIRECT_REVIEW; RAW_LAB_DATA_INDEPENDENT_BATCH_REPLICATION_AND_SUPPORTING_INFORMATION_UNVERIFIED",
+      "evidence_grade": "DIRECT_PRIMARY_CONTROLLED_ONE_DECAF_METHOD_AND_ROAST_BEAN_CHEMISTRY; NO_ESPRESSO_EXTRACTION_SENSORY_OR_CROSS_DECAF_VALIDATION",
+      "source_bytes_sha256": null,
+      "verified_claims": "30L pilot supercritical CO2 with water cosolvent; Arabica with/without treatment; 125-250 C hot-air ROASTER CHAMBER peak, holds 120-240s, ramp 60-180s; HPLC of 15-percent methanol ultrasonic bean extracts, NOT espresso. Table2 g/100g initial caffeine 0.94 to 0.08, trigonelline 0.80 to 0.69; chlorogenic 3.44 to 3.67, crypto 0.35 to 0.57, neo 0.39 to 0.65. Authors report ~3 percent dry mass loss. Figure3 n=3 SEM; decaf reached lower L* with less thermal history; Figure6 SEM more voids within beans, NOT packed puck pores. No espresso EY, flow, PSD, grinder offsets, preference ratings or recommendation efficacy.",
+      "limits": "One Arabica supplier/system and CO2+water method; temperature is roasting chamber not brewing; chemical concentration/mass basis does not equal cup EY; roast-color matching differs from fixed roast protocol; original PDF binary hash, raw chromatograms/supplements, independent replication and all page screenshots not verified. Any generality to water/ethyl-acetate decaf and member five-taste outcome unsupported.",
+      "source_status": "RESEARCH_VERIFIED_NARROW_NOT_APP_POLICY_OR_IMPLEMENTATION"
     }
   ],
   "evidence_checks": [
@@ -7472,6 +7489,32 @@
       "owner_approval": false,
       "github267_literal_review_credit": 0,
       "date": "2026-11-13"
+    },
+    {
+      "id": "R455-EV-CIT-243-A",
+      "source": "LIT-2022-HONDA-SUPERCRITICAL-CO2-DECAF-ROAST-CHEMISTRY",
+      "section": "Published PDF pp1543-1545, Methods 2.1-2.4, Results 3.1, Table 2 and Figure 3",
+      "claim": "The tested decaffeination treatment changed measured extracted bean chemical concentrations and roasting response; CO2-water was the decaf process, 15% methanol ultrasound was analytical extraction, not coffee brew. Caffeine 0.94 to 0.08 and trigonelline 0.80 to 0.69 g/100g; treatment source, denominators and measurements are essential.",
+      "grade": "PUBLISHER_FULL_PRIMARY_PDF_READ_AND_P1545_TABLE_SCREENSHOT_N3_FIGURE; RAW_MEASUREMENTS_NOT_REPLICATED",
+      "factual_status": "DIRECT_STUDY_CONDITIONED_CHEMISTRY_SUPPORTED_NO_ESPRESSO_BREW_ENDPOINT",
+      "current_app": "site/lib/engine.js baseline and same-coffee evidence; model.js shot validation; constants.js five taste ideals and independent styles; no universal method-based grinder correction authorized.",
+      "result": "DO_NOT_EQUATE_DECAF_BEAN_CHEMISTRY_TO_GRIND_OFFSET_EXTRACTION_YIELD_OR_MEMBER_TASTE",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0,
+      "date": "2026-11-13"
+    },
+    {
+      "id": "R455-EV-CIT-243-B",
+      "source": "LIT-2022-HONDA-SUPERCRITICAL-CO2-DECAF-ROAST-CHEMISTRY",
+      "section": "Published PDF pp1547-1549, Table3, SEM Figure6, L*-chemistry Figure7, Conclusions",
+      "claim": "At otherwise compared roasting histories decaf beans darkened faster in L*, and SEM shows more bean-internal voids after this decaf treatment. L* color-matched groups are not identical heat-history groups; internal bean voids are not validated packed-puck permeability. No randomized espresso grinder/feed/basket intervention nor five user tastes were measured.",
+      "grade": "PUBLISHER_FULL_PRIMARY_PDF_READ_AND_P1548_FIGURE6_7_SCREENSHOT; MECHANISTIC_INTERPRETATION_NOT_CAUSAL_ESPRESSO_EVIDENCE",
+      "factual_status": "DIRECT_STUDY_ROAST_COLOR_AND_BEAN_STRUCTURE_SUPPORTED; ESPRESSO_TRANSFER_UNTESTED",
+      "current_app": "existing allowed same-coffee/style/setup successful shot hierarchy; separate Turbo/Fast-Flow/slow-feed/grinder calibration/temperature and privacy constraints",
+      "result": "RESEARCH_ONLY_NO_NEW_DECAF_NUMERIC_TARGET_OR_CONFIDENCE_CLAIM",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0,
+      "date": "2026-11-13"
     }
   ],
   "policy_decisions_pending": [],
@@ -7483,6 +7526,7 @@
     "reason": "Documentation-only verified R197 SAFE CloudApp source and development-only release queue reconciliation; underlying code already merged"
   },
   "next_actions": [
+    "R455-243: primary Honda 2022 PDF reviewed narrowly; next inspect distinct unverified primary citation or live user-workflow reproduction. No empirical decaf cup-quality outcome, S019 still inaccessible.",
     "R455-231 authored: first-party SCA 2017 barista survey full HTML crosswalk to ORG-05 L104, self-report practice != per-user taste optimum; source/check/proposal 131/369/189 if merged, no code or Locked changes. Exact source docs-only PR CI/merge and readback pending; standalone S019 inaccessible, no #267 credit.",
     "R455-168 FINAL: PR1901 exact reviewed head 3b65c3... nonforce merged 767e12c8e763959f0b6677f4de7ad7e69ce80cf3 all five blobs identical. Node22/lint 3600 PASS/0 FAIL/6 SKIP head 42887964674 and merge 42888613274; mobile/browser/offline, head SQL/security and approval, merged governance all SUCCESS; original603 SKIPPED. Queue READY development-only, not published. S019 unavailable, #267 separate V2 literal review uncredited.",
     "R455-168 source 2cdfa50691d48e4d1dad0fc1e9b659c302a897d5: exact old Community prior Git blob 74c93c7ff7814337752e0ef9052412eaf55890e3 reproduced coercion Boolean true -> ratio 1 or time 1; 4/4 local Node22 positive/negative PASS with guarded numeric primitives. NEXT: open PR, verify head Node22/browser/offline/SQL/security/governance; nonforce merge, verify exact merged source CI and READY queue reconciliation. S019 unavailable, #267 no literal credit.",
@@ -7656,21 +7700,21 @@
     "R455-242 completed narrow SAFE scalar new shot code/test merge 0095369dce8f651bbfdefe6fc3ed1c986883e44a PR #2518. Both exact PR and merged Node22 4631 PASS/0 FAIL/6 SKIP; head SQL/cloud/mobile/security/approval SUCCESS, merged cloud/mobile/governance SUCCESS. New model input validity now guarded; legacy saved ID replay, five tastes/notes preserved. Queue R242 READY DEV ONLY; no Netlify/production writes or owner policy changes. No new empirical cup quality validation; original S019 unavailable. Continue distinct #455 source claims and UX checks."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-242",
-    "starting_preflight_development_sha": "6a7b9c3faca7ff4053189518e5470cca22ae60a3",
+    "run_id": "R455-243",
+    "starting_preflight_development_sha": "279fad66c2a582a1739aeaad6aa0ad20b662be00",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "live_parent_sha_at_authoring": "cc9453da244955ec4f9b6073f8aaf92db8e10fd3",
-    "phase": "SAFE_NEW_SHOT_SCALAR_VALIDATION_MERGED_AND_EXACT_PR_HEAD_AND_MERGE_CI_VERIFIED",
+    "live_parent_sha_at_authoring": "279fad66c2a582a1739aeaad6aa0ad20b662be00",
+    "phase": "ORIGINAL_HONDA_2022_DECAF_ROAST_PRIMARY_FULL_PDF_METHODS_TABLES_AND_FIGURES_RESEARCH_ONLY",
     "source_counts": {
-      "research_project_source_records": 137,
-      "bounded_evidence_checks": 389,
-      "proposals": 198
+      "research_project_source_records": 138,
+      "bounded_evidence_checks": 391,
+      "proposals": 199
     },
-    "source_access": "CURRENT_LIVE_CODE_AND_TEST_BLOB_PARITY_VERIFIED_NOT_NEW_SCIENTIFIC_PRIMARY_PUBLICATION",
-    "original_s019": "UNRETRIEVED_GOOGLE_DRIVE_AND_PROJECT_LIBRARY_SEARCH_20261113",
+    "source_access": "PUBLISHER_FINAL_PDF_PAGE_TEXT_WITH_VISUAL_P1545_P1548_SCREENSHOTS; PDF_BINARY_SHA256_NOT_CAPTURED",
+    "original_s019": "UNRETRIEVED_GOOGLE_DRIVE_AND_LIBRARY_SEARCH_20261113",
     "github267_literal_review_credit": 0,
-    "release_state": "R242_NARROW_DEVELOPMENT_READY_NOT_DEPLOYED_NO_OWNER_PUBLICATION_AUTHORIZATION",
-    "next": "Resume #455 distinct owner-authorized primary citation, recommendation workflow and privacy-safe effect-evidence gap, no duplicate #267/#33/#96 work."
+    "release_state": "RESEARCH_ONLY_NO_READY_ITEM_NO_DEPLOYMENT",
+    "next": "Reconcile exact docs source CI/nonforce merge and continue first nonoverlapping #455 paper/code UX gap."
   },
   "policy_decisions_resolved": [
     {
@@ -12169,6 +12213,31 @@
       "production_deployed": false,
       "github267_literal_review_credit": 0,
       "exact_source": "0095369dce8f651bbfdefe6fc3ed1c986883e44a"
+    },
+    {
+      "id": "R455-PROP-243-DECAF-ROAST-CHEMISTRY-NOT-ESPRESSO-TRANSFER",
+      "severity": "P3_RESEARCH_EVIDENCE_BOUNDARY_NO_LIVE_REPRODUCED_BUG",
+      "source": [
+        "LIT-2022-HONDA-SUPERCRITICAL-CO2-DECAF-ROAST-CHEMISTRY",
+        "ORG-03"
+      ],
+      "evidence": [
+        "R455-EV-CIT-243-A",
+        "R455-EV-CIT-243-B"
+      ],
+      "finding": "Original #03's process-specific decaf argument is supported for bean chemistry/roast color by the full publisher paper, but not for universal grinder offset, permeability, hydraulic shot time, taste or recommendation improvement. Original archived manuscript and current established heuristics remain separate.",
+      "evidence_grade": "PRIMARY_PUBLISHER_FULL_PDF_METHODS_TABLE_FIGURE_INSPECTION_NOT_REAL_WORLD_CUP_TRIAL",
+      "user_benefit": "Avoid misrepresenting measured decaf bean constituents, roasting temperatures or internal bean voids as personalized espresso recipe prescriptions.",
+      "current_locked": "Preserve all five explicitly rated sensory scales, missing-vs-complete-green, one controllable next step, original shot/notes/private history, same-coffee/equipment/style/feed/grinder calibration and alternative family evidence.",
+      "current_app": "Development 279fad66c2a582a1739aeaad6aa0ad20b662be00: site/lib/engine.js Git blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6; site/lib/constants.js d3559dc1c9560c4d68fbcad1dc91e3a792a100a2; site/lib/model.js fdc65f869546cddbb6552e555dca12117f2c47fc; no direct verified user bug or new intervention from this paper.",
+      "proposed_change": "DOCUMENT_SOURCE_AND_EXPLICIT_NEGATIVE_TRANSFER_ONLY; no runtime change. Any new decaf-specific grind, roast, brew temperature or numerical recommendation policy requires separate owner approval and prospective evidence.",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "RESEARCH_ONLY_NO_APP_TESTS_NO_PRODUCT_CHANGE",
+      "test_plan": "No app code/test/CI edits; verify docs-only PR approval governance and exact merged Git object parity; no Node22 claims, no member reads or experiment; optional future same-coffee/setup/style/grinder/feed paired one-change five-rating evaluation requires explicit consent and owner authority.",
+      "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY_NO_DEPLOYABLE_QUEUE_ITEM",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "changeScope": {
