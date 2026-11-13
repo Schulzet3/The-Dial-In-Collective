@@ -262,7 +262,14 @@ test('historic 12/day migration remains immutable; latest role policy is unlimit
  assert.match(migration,/set attempts=12 where attempts>12/);
  const memberSql=read('supabase/tests/universal_url_preview.sql');
  assert.match(memberSql,/set attempts=11,last_attempt_at/);
- assert.match(memberSql,/Boundary claim did not set exactly 12/);
+ assert.match(memberSql,/Member daily counter did not reach 12/);
+ assert.match(memberSql,/member_account/);
+ const current=read('supabase/migrations/20261113043000_dic_admin_preview_unlimited_member_15s.sql');
+ assert.match(current,/m\.enabled and m\.admitted_at is not null/);
+ assert.match(current,/u\.email_confirmed_at is not null/);
+ assert.match(current,/if private\.is_admin\(\) then/);
+ assert.match(current,/last_attempt_at>clock-interval '15 seconds'/);
+ assert.match(current,/rec\.attempts>=12/);
  const serviceSql=read('supabase/tests/url_preview_release.sql');
  assert.match(serviceSql,/set attempts=12,last_attempt_at/);
 });

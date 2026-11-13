@@ -53,3 +53,10 @@ DIC_PREFLIGHT_VERIFIED development_sha=b279e75c264a19eeefcb03404466a1ca6788a855 
 - Same-commit mandatory preflight confirmation:
 DIC_PREFLIGHT_VERIFIED development_sha=659b6f3fcb62ca7198f256ef82b8a2d49452750f preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 - PR-head SQL 43363314247 SUCCESS; cloud/browser 43363314202 SUCCESS; security 43363314187 and approval 43363314180 SUCCESS; original frozen603 43363314153 SKIPPED NOT PASS. They are earlier SHA evidence, not automatically claims for the new HEAD. No live provider/database changes.
+
+## November 13 — correct remaining exact Node assertion and reconcile concurrent dev
+- Exact PR-head `25972f5c2c03a18aaeaaf179d0fe51688422f54e` Node job 43363819678 FAILED: 4,474 tests total, 4,467 passed, 1 failed, 6 skipped. The remaining failing `tests/universal-coffee-preview.test.mjs:265` still matched a historical fixture message because the prior replacement accidentally used two leading spaces instead of the actual one. This commit replaces that exact assertion and checks the current 15-second member plus server-authoritative Admin rules; historic Oct 30-second SQL remains immutable.
+- Latest live app SHA `1135d75f77e844f8a5315bf17977def51735de6b` includes #33 Huckleberry/Safe Shopify changes. Its sole overlapping path with #2386 was the JSON release queue. Reconciled its distinct #33 item plus #2386 IN_PROGRESS, preserved all unrelated live code and documents; no force push or branch rewrite.
+- SAME-COMMIT required source receipt:
+DIC_PREFLIGHT_VERIFIED development_sha=1135d75f77e844f8a5315bf17977def51735de6b preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+- New exact-source Node/SQL/security/browser/governance CI is REQUIRED before safe nonforce integration/READY. Old failed runs retained, not recast as passing. No provider, production or publication write.
