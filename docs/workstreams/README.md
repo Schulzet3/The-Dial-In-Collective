@@ -1,5 +1,7 @@
 # Scoped GitHub Work Journals
 
+- [Issue #33 R169 original603 #233 selected intrinsic sensory arc READY development only](ops-issue33-r169-233-20261113.md) — merged-source official raw HTML, independent hashes and CI; full603 OPEN
+
 - [#2169 source-drift release gate: exact CI and nonforce reconciliation](ops-issue2169-ready-drift-integration-20261112.md) — preserve later unfinished changes without erasing independent READY evidence or bypassing candidate isolation
 
 - [Issue #33 R101 #513/#516/#528 verified exact current official source READY development only](ops-issue33-r101-513-516-528-20261110.md) — merged-source source/CI and permanent receipt; #33 full603 OPEN
