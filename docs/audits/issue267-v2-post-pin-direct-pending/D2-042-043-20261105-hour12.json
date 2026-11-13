@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "status": "DRAFT_PENDING_NOT_CANONICAL",
+  "source_dev_commit": "d34ca074742a461471d758855772c5162fa30a57",
+  "pin": "9707553a64f88127826e8f5b2b36cd0651296e83",
+  "source_sha_bound_claims": [
+    {
+      "batch": "D2-042",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-042.json",
+      "path": "tests/immutable-dist-manifest.test.py",
+      "sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+      "count": 23
+    },
+    {
+      "batch": "D2-043",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-043.json",
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "count": 36
+    }
+  ],
+  "original_physical_lines": 59,
+  "conflicting_owner_prs_untouched": [
+    835,
+    841,
+    769
+  ],
+  "next": "After PR #835 and #841 are resolved, source SHA/nonoverlap reconciliation into append-only canonical D2 ledger and same-commit central journal. Verify exact PR-head CI first.",
+  "no_production_deployment": true
+}
