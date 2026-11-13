@@ -24,3 +24,11 @@ DIC_PREFLIGHT_VERIFIED development_sha=b279e75c264a19eeefcb03404466a1ca6788a855 
 ## First PR CI intake failure and same-source repair (November 13 UTC)
 - Initial PR-head `8821adf867ae3898b99b37a8d82f8595beb0c800` approval job 43362497697 **FAILED**, exact logged cause: `release-queue.mjs --enforce-intake` saw untracked app scopes `site/cloud/client.js`, `site/cloud/coffee-url-autofill.js` and `supabase/migrations/20261113043000_dic_admin_preview_unlimited_member_15s.sql`. The high-risk work remains NOT READY.
 - Repair adds dedicated IN_PROGRESS queue record with the three exact app paths in this docs-only commit (no runtime/test edits). Preserve unchanged code/test/SQL blobs from original journaled source; rerun exact PR-head mandatory checks before merge. New live preflight rechecked `b279e75c264a19eeefcb03404466a1ca6788a855`, blob `2fb236bbfa6bac48513eeb3bd157b260853af06d`. No provider changes.
+
+## Initial isolated SQL regression failure and repair
+- Exact initial PR head `8821adf867ae3898b99b37a8d82f8595beb0c800` approval 43362497697 FAILED missing queue registration; fixed in docs commit `4df8d9ed4269a75b1d391bd06b9331079818151d`.
+- Exact initial SQL job 43362497703 FAILED after correctly applying the proposed migration to ephemeral PostgreSQL: `url_preview_release.sql` still asserted a **throttle for the Admin fixture**. This stale legacy assertion contradicts the new owner-approved exemption; it is not an actual runtime SQL parse failure. No live data changed.
+- Repair all three isolated SQL fixtures: `url_preview_release.sql`, `universal_url_preview.sql`, `preview_two_phase_cache.sql` now explicitly distinguish an admitted verified administrator from synthetic admitted ordinary members. Member 12/day and 15-second shared cooldown plus ticket replay, cached cap, JSON JWT and nonmember/anon denial remain. Admin cached/fresh/trusted/repeat/no-account-quota checks added. Each SQL test ROLLBACKs its synthetic rows.
+- SAME-COMMIT preflight confirmation prior to this code/test repair:
+DIC_PREFLIGHT_VERIFIED development_sha=b279e75c264a19eeefcb03404466a1ca6788a855 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+- Full exact-source hosted CI and safe merge still required; no provider/Netlify write.
