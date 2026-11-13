@@ -42,3 +42,26 @@ test('#233 historical SEO and unrelated aside must not override chosen identity 
  const p=parse(page(own,'<aside><h2>Other coffee</h2><p>Roast Level: Dark; Process: Honey; Tasting notes: Strawberry, Coconut</p></aside>'));
  assert.equal(p.fields?.name,chosen233.name);assert.ok(!String(p.fields?.tasting_notes||'').toLowerCase().includes('strawberry'),JSON.stringify(p).slice(0,1500));
 });
+
+test('#233 direct printed Notes list outranks longer unlabelled aroma and finish prose',()=>{
+ const p=parse(page(own+'<p>Tasting Notes: Apricot, Dark Honey</p>'));
+ assert.ok(!String(p.fields?.tasting_notes||'').toLowerCase().includes('vanilla'),JSON.stringify(p).slice(0,2400));
+ assert.ok(!String(p.fields?.tasting_notes||'').toLowerCase().includes('floral'),JSON.stringify(p).slice(0,2400));
+});
+test('#233 another product aside cannot complete missing own sensory arc',()=>{
+ const body=own.replace('delicate floral aroma','delicate aroma').replace('soft hint of vanilla','soft finish');
+ const p=parse(page(body,'<aside><p>'+description+'</p></aside>'));
+ assert.ok(!String(p.fields?.tasting_notes||'').toLowerCase().includes('floral'),JSON.stringify(p).slice(0,1400));
+ assert.ok(!String(p.fields?.tasting_notes||'').toLowerCase().includes('vanilla'),JSON.stringify(p).slice(0,1400));
+});
+test('#233 conditional aroma or finish must not augment literal notes',()=>{
+ const conditional=own.replace('with a delicate floral aroma','when brewed with milk, with a delicate floral aroma');
+ const p=parse(page(conditional));
+ assert.ok(!String(p.fields?.tasting_notes||'').toLowerCase().includes('floral'),JSON.stringify(p).slice(0,2200));
+ assert.ok(!String(p.fields?.tasting_notes||'').toLowerCase().includes('vanilla'),JSON.stringify(p).slice(0,2200));
+});
+test('#233 changed selected coffee must not promote archived original identity',()=>{
+ const replaced=own.replace('<h1>Ethiopia Yirgacheffe</h1>','<h1>Kenya Washed 2026</h1>');
+ const p=parse(page(replaced));
+ assert.notEqual(p.fields?.name,chosen233.name);
+});
