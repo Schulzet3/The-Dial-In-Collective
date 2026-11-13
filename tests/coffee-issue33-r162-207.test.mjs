@@ -2,10 +2,6 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {chosen207,selected207Source} from '../scripts/audit/issue33-r162-207-check.mjs';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
-const own='<h1>Special House Blend</h1><p>Our Special House Blend delivers rich mocha notes in every sip. '+
- 'Discover the rich taste of our hand-crafted coffee beans, roasted daily for unmatched freshness. '+
- 'We take pride in delivering the finest coffee straight to your door from the beautiful Lowcountry of South Carolina.</p>'+
- '<dl><dt>Roast:</dt><dd>Medium</dd><dt>Flavor:</dt><dd>Nutmeg, Whole Bean Vanilla, Creamy Butter</dd></dl>';
 const inline='<h1>Special House Blend</h1><p>Our Special House Blend delivers rich mocha notes in every sip. '+
  'We roast locally in the Lowcountry of South Carolina.</p>'+
  '<p>Roast: Medium</p><p>Flavor: Nutmeg, Whole Bean Vanilla, Creamy Butter</p>';
