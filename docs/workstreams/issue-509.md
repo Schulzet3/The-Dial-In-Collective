@@ -2798,3 +2798,18 @@ DIC_PREFLIGHT_VERIFIED development_sha=c368341abb6386cc39d594e0af955f08ddc7dcf4 
 **Outcome:** new confirmed defects **0**, justified removals **0**, application source/test/CI changes **0**, provider/production writes **0**, deployment/publication **0**. Three docs-only commits were intentionally separated (receipt then append-only ledger then this checkpoint); SQL, Node22, browser/device suites NOT_RUN for documentation-only source inspection; exact-source governance CI is **UNVERIFIED** pending separate job/head readback. Exhaustive baseline **IN_PROGRESS**. No authorization to modify production, backups, permissions, schedule or alert policy.
 
 **Exact next cursor:** newly applied migration/Edge/definition drift first; otherwise `pg_catalog` LANGUAGE internal ordinary function **#1901/3008**. Preserve task ownership #267/#504/#96/#33/#455 and Locked app behavior. Hosted GoTrue/JWT/PostgREST console settings, native/Vault binaries, disk headroom and real email/push delivery remain UNVERIFIED.
+
+
+## 2026-11-13T03:54:32.496Z — Issue #509 Run208 live catalog internal declarations #1901–2100/3008 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=6572d8f80e6ccb447152ffd81be70790c8fafd47 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+Mandatory FIRST: live development 6572d8f80e6ccb447152ffd81be70790c8fafd47, immutable PREFLIGHT Git blob 2fb236bbfa6bac48513eeb3bd157b260853af06d independently byte-matched before docs/provider; latest write-parent 6572d8f80e6ccb447152ffd81be70790c8fafd47 retains same blob and issue cursor. Main 5e80f87e33ef331ee8c0a8fedfd1bd848eabc0f1; release/production 2c02dbb267ca8fb1e56ddd0433c96c1bb4eca9d5. Scope #509 development-only provider semantic audit; #267/#504/#96/#33/#455 ownership preserved.
+
+Read-only provider ACTIVE_HEALTHY PostgreSQL17.11, 67 migrations, five ACTIVE Edge functions. Advisories: 13 RLS-no-policy, 10 authenticated definer RPCs, one breached-password setting, 14 FK index, eight zero-scan indexes, health 0, unchanged and not independent defect proof.
+
+Directly read 200 complete consecutive SQL LANGUAGE internal native declarations #1901 pg_get_triggerdef(oid) to #2100 pg_stat_get_db_conflict_logicalslot(oid), 41854 DDL characters; OID, exact DDL/MD5, identity/native symbol, flags, app-role privileges, operator/cast/aggregate/type/index references and individual domain-specific interpretation recorded in docs/audits/issue509-pg-catalog-internal-declarations-2026-11-13-run208-ord1901-2100.json. 34/200 registered catalog-linked, 7 leakproof, 0 SECURITY DEFINER, 40 with restricted app SQL EXECUTE. Evaluated privileged HBA/server file access (denied), replication/slot/WAL message side effects, pg_notify/pg_sleep, and session-stat metadata. No privileged routines called, no member/Auth records or raw logs accessed. SQL grants are not PostgREST HTTP exposure proof; compiled native implementations unverified.
+
+Cumulative complete accessible declarations 2100/3008, native compiled source 0 credited, baseline IN_PROGRESS. New confirmed defects 0, justified removals 0, code/test/CI changes 0, provider/production writes 0, deployment 0. Node22, SQL, browser suites NOT_RUN (documentation-only); exact-source governance CI requires actual readback.
+
+Exact next: first new migration/Edge/catalog drift, else internal ordinary function #2101/3008. Hosted GoTrue/JWT/PostgREST settings, Vault/native source, disk headroom, recipient email/push delivery UNVERIFIED. Keep hourly audit, Locked behaviors, backups, release and alert boundaries unchanged.
