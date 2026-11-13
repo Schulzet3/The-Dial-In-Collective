@@ -19118,5 +19118,40 @@
     "correction": "0 of 200 native functions restrict nominal SQL EXECUTE to anon/authenticated/service_role; original erroneous all-200 array was caused by reading nonexistent flat fields",
     "source_grants": "all 200 sql_execute.{anon,authenticated,service_role}=true",
     "review_scope_unchanged": true
+  },
+  "provider_pg_catalog_internal_run212": {
+    "run": 212,
+    "preflight_development_sha": "1f19d075248c62b32437916b44cc549107756514",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "source_branch_parent_sha": "b6c788264c583c6a2c477773265b4be564eabafa",
+    "project_ref": "azviqqejypsefzilgonr",
+    "receipt_a_path": "docs/audits/issue509-pg-catalog-internal-declarations-2026-11-13-run212-ord2601-2800.json",
+    "receipt_a_git_blob": "bbef14722ed4bbd56aa0c4312b5b4cda5b89bb73",
+    "receipt_b_path": "docs/audits/issue509-pg-catalog-internal-declarations-2026-11-13-run212-ord2801-3008.json",
+    "receipt_b_git_blob": "570d6fb0cc3bf628cd21dcd43fcf8052d6cced8d",
+    "reviewed_ordinals": [
+      2601,
+      3008
+    ],
+    "new_complete_declarations": 408,
+    "cumulative_complete_declarations": 3008,
+    "family_total": 3008,
+    "full_ddl_characters": 74592,
+    "registered_pg_depend_links": 0,
+    "leakproof_count": 62,
+    "security_definer_count": 0,
+    "nominal_sql_execute_restricted": 0,
+    "provider_status": "ACTIVE_HEALTHY PostgreSQL 17.11.0.003",
+    "provider_migrations": 67,
+    "active_edges": 5,
+    "legacy_roaster_production": "LEGACY ACTIVE; #2389 RETIREMENT IN PROGRESS, NOT DEPLOYED",
+    "native_compiled_implementation": "UNVERIFIED",
+    "hosted_postgrest_exposure": "UNVERIFIED",
+    "confirmed_new_defects": 0,
+    "justified_removals": 0,
+    "provider_writes": 0,
+    "source_changes": 0,
+    "full_provider_baseline_complete": false,
+    "next_cursor": "new provider drift; otherwise other unreviewed provider-owned SQL/aggregate/window/catalog families per #509 inventory, not native C implementation"
   }
 }
