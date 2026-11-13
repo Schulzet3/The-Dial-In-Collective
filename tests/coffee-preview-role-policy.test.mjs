@@ -16,7 +16,7 @@ const shared=sqlScope('private.dic_shared_preview_claim');
 const preflight=sqlScope('public.dic_preview_preflight');
 const complete=sqlScope('public.dic_preview_complete');
 
-test('owner quota supersession is server authoritative on trusted-roaster service path',()=>{
+test('owner quota supersession is server authoritative with no legacy roaster gate',()=>{
  assert.match(shared,/join private\.app_admins|from private\.app_admins/);
  assert.match(shared,/join private\.beta_members m on m\.owner_id=a\.owner_id/);
  assert.match(shared,/m\.enabled and m\.admitted_at is not null/);
@@ -27,9 +27,12 @@ test('owner quota supersession is server authoritative on trusted-roaster servic
  assert.doesNotMatch(shared,/interval '30 seconds'/);
  assert.match(sql,/revoke all on function private\.dic_shared_preview_claim\(uuid\) from public,anon,authenticated/);
  assert.match(sql,/grant execute on function private\.dic_shared_preview_claim\(uuid\) to service_role/);
- const worker=read('supabase/functions/dic-preview-coffee/index.ts');
- assert.match(worker,/dic_url_preview_claim/);
- assert.match(worker,/officialPreviewUrl\(source_url,roaster\.official_domain\)/);
+ // Old curated Supabase preview is permanently retired. Per-account quotas
+ // remain enforced by the server-side current universal preview RPC.
+ const legacy=read('supabase/functions/dic-preview-coffee/index.ts');
+ assert.match(legacy,/retired_endpoint/);
+ assert.doesNotMatch(legacy,/dic_url_preview_claim|dic_roaster_preview_target|officialPreviewUrl\(/);
+ assert.match(read('site/cloud/client.js'),/previewPath='\/api\/coffee-preview'/);
 });
 test('cached and fresh universal RPC skip all account quotas only AFTER admission and verified email',()=>{
  assert.match(preflight,/auth\.uid\(\)/);
