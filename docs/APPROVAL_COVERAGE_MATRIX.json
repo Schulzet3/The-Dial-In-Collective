@@ -2357,16 +2357,31 @@
     "decision_id": "COFFEE-URL-ADMIN-UNLIMITED-MEMBER-15S-20261112",
     "issue": 2386,
     "owner_authority": "Direct owner chat November 12, 2026; #2386",
-    "state": "OWNER_APPROVED_IN_PROGRESS_NOT_DEPLOYED",
+    "state": "READY_DEVELOPMENT_NOT_DEPLOYED",
     "scope": "Per-account only: verified admitted admin unlimited URL previews/retries/cooldowns; member 12 charged fresh claims/24h and 15-second shared cooldown; security and per-IP limits retained",
     "migration": "supabase/migrations/20261113043000_dic_admin_preview_unlimited_member_15s.sql",
     "web_ui": "site/cloud/coffee-url-autofill.js",
     "legacy_worker": "supabase/functions/dic-preview-coffee/index.ts",
     "netlify_handler": "netlify/functions/coffee-url-preview.mjs",
     "regression": "tests/coffee-preview-role-policy.test.mjs",
-    "source_git_sha": null,
+    "source_git_sha": "e7ba6000563e55be845835a336944314367827f6",
     "release_queue_id": "DIC-Q-2386-admin-unlimited-member-15s",
     "production_deployed": false,
-    "provider_verification": "READ_ONLY_BASELINE_ONLY; new migration not applied"
+    "provider_verification": "READ_ONLY_BASELINE_ONLY; new migration not applied",
+    "ci_runs": [
+      43365012883,
+      43365012887,
+      43365012861,
+      43365012925
+    ],
+    "verified_checks": [
+      "approval",
+      "validate",
+      "cloud-tests",
+      "mobile-browser-qa",
+      "sql"
+    ],
+    "test_result": "MERGED e7ba600: 4484 PASS, 0 FAIL, 6 intentionally SKIPPED; SQL/Auth and browser/cloud SUCCESS; exact code/SQL/test blob parity to PR head; no production/provider test",
+    "source_drift": "Later #2389 changes site/cloud/coffee-url-autofill.js and related tests; frozen batch must isolate same-file READY bytes."
   }
 }
