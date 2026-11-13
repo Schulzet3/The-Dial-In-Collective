@@ -2741,12 +2741,56 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   source_url,expected_name:fields.name,expected_roaster:fields.roaster
  });
  if(selectedHydration){
+  // An unrelated product card can be inside the same broad storefront <main>.
+  // Exact selected-route, handle, title and vendor evidence outranks ONLY
+  // that card's unscoped roast text, not a contradictory current-lot label.
+  const selectedRoast=selectedHydration.fields.roast_level;
+  if(selectedRoast&&fields.roast_level&&fields.roast_level!==selectedRoast&&
+     !conflicts.has('roast_level')){
+   const wrongRoast=fields.roast_level;
+   const relatedCard=[...html.matchAll(/<h[2-6]\\b[^>]{0,800}>([^<]{2,180})<\\/h[2-6]\\s*>/giu)]
+    .map(match=>clean(match[1],180))
+    .filter(name=>name&&!equivalentCoffeeProductNames(name,fields.name)&&
+      keyOf(name).endsWith(keyOf(wrongRoast)+'roast'));
+   const contraryCurrent=source_facts.some(fact=>
+    fact.field==='roast_level'&&
+    /(?:exact selected|current selected|selected coffee|current product)/i.test(String(fact.section||''))&&
+    normalizeRoastLabel(String(fact.value||''))===wrongRoast);
+   if(roast_evidence.source==='product_explicit_text'&&
+      relatedCard.length===1&&!contraryCurrent){
+    // The card identifies a DIFFERENT product; retain its literal as review
+    // context while the exact selected hydration supplies the current roast.
+    fields.roast_level=selectedRoast;
+    roast_evidence.value=selectedRoast;
+    roast_evidence.source='exact_selected_hydrogen_loader';
+    if(source_facts.length<384)source_facts.push({
+     field:'roast_context',label:'Unrelated storefront roast card',
+     value:relatedCard[0],source_url,source_type:'html',
+     section:'Different coffee in storefront (review only)'
+    });
+   }else{
+    // Two genuinely unresolved direct claims must not silently choose one.
+    rememberCoffeeReviewCandidate(fields,'roast_level',wrongRoast,'Current page roast disagreement');
+    rememberCoffeeReviewCandidate(fields,'roast_level',selectedRoast,'Exact selected loader roast disagreement');
+    delete fields.roast_level;
+    conflicts.add('roast_level');
+    roast_evidence.value=null;
+    roast_evidence.source='';
+   }
+  }
   for(const [key,label] of [['tasting_notes','Exact selected tasting notes'],
                              ['roast_level','Exact selected roast level']]){
    const value=selectedHydration.fields[key];
-   if(!value||fields[key]||conflicts.has(key))continue;
-   fields[key]=value;
-   if(source_facts.length<384)source_facts.push({
+   if(!value||conflicts.has(key))continue;
+   if(!fields[key])fields[key]=value;
+   if(fields[key]!==value)continue;
+   if(key==='roast_level'&&!roast_evidence.value){
+    roast_evidence.value=value;
+    roast_evidence.source='exact_selected_hydrogen_loader';
+   }
+   if(source_facts.length<384&&!source_facts.some(f=>f.field===key&&
+       f.source_type==='product_json'&&f.value===value&&
+       /React Router\\/Hydrogen loader/.test(String(f.section||''))))source_facts.push({
     field:key,label,value,source_url,source_type:'product_json',
     section:'Current selected product React Router/Hydrogen loader data'
    });

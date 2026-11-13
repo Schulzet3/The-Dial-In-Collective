@@ -180,3 +180,16 @@ test('malformed or oversized Hydrogen data cannot become coffee facts',()=>{
   expected_name:'India Gundikhan Washed',expected_roaster:'Huckleberry Roasters'}),null);
  assert.doesNotMatch(compactCoffeeProductHtml(oversized),/streamController\.enqueue/);
 });
+
+test('current Hydrogen Medium is not replaced by different coffee Dark Roast card',()=>{
+ const staleCard='<aside><h3>Bom Senso Dark Roast</h3><p>Dark Roast</p></aside>';
+ const shell='<html><head><meta property="og:site_name" content="Huckleberry Roasters">'+
+ '<script type="application/ld+json">'+JSON.stringify({...product,
+  additionalProperty:[{name:'Process',value:'Washed'}]})+
+ '</script></head><body><main><h1>India Gundikhan Washed</h1><article>'+staleCard+'</article></main>';
+ const data=compactCoffeeProductHtml(shell+selectedHydrogenStream()+'</body></html>');
+ const result=extractPublicCoffeeFacts(data,{source_url:url});
+ assert.equal(result.fields.tasting_notes,'Butter Cookie, Golden Raisin, Macadamia Nut, Lemon Cream',JSON.stringify(result).slice(0,3000));
+ assert.equal(result.fields.roast_level,'Medium',JSON.stringify(result).slice(0,3000));
+ assert.doesNotMatch(result.fields.tasting_notes,/Sangria|Pomegranate/);
+});
