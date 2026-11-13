@@ -1,0 +1,218 @@
+{
+  "run": 219,
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "review": "Direct full provider source cross-layer review, not first-time source credit",
+  "preflight_sha": "5bab75100627dab4e1e42bfb105cff5f7039e9d9",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "edge": [
+    {
+      "slug": "dic-member-approval-broker",
+      "version": 1,
+      "verify_jwt": false,
+      "ezbr_sha256": "263f36326fa00934a4c7cfb7ecc6e3df9872e9b4f0395ef1326455d9bb2bded7",
+      "status": "ACTIVE",
+      "files": [
+        {
+          "filename": "index.ts",
+          "characters": 178,
+          "complete_source": "// Production service credentials are owned by Supabase Edge, never the browser.\nimport {createMemberApprovalBroker} from './core.mjs';\nDeno.serve(createMemberApprovalBroker());\n"
+        },
+        {
+          "filename": "core.mjs",
+          "characters": 11751,
+          "complete_source": "// #2258: service-only transactional approval notices, separate from Admin push ACLs.\n// The public poll trigger never returns member identifiers, email or endpoints.\nconst PROJECT='https://azviqqejypsefzilgonr.supabase.co';\nconst UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;\nconst HASH=/^[a-f0-9]{64}$/;\nconst SUBS='dic_member_approval_push_subscriptions';\nconst reply=(data,status=200)=>Response.json(data,{status,headers:{\n 'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer'}});\nconst denied=(status=403)=>reply({ok:false,reason:'unavailable'},status);\nconst decode64=s=>{\n const str=atob(s.replace(/-/g,'+').replace(/_/g,'/')+'='.repeat((4-s.length%4)%4));\n return Uint8Array.from(str,c=>c.charCodeAt(0));\n};\nconst encode64=bytes=>{\n let str='';for(const b of bytes)str+=String.fromCharCode(b);\n return btoa(str).replace(/\\+/g,'-').replace(/\\//g,'_').replace(/=+$/,'');\n};\nconst fingerprint=async endpoint=>[...new Uint8Array(await crypto.subtle.digest(\n 'SHA-256',new TextEncoder().encode(endpoint)))].map(x=>x.toString(16).padStart(2,'0')).join('');\nfunction safeEndpoint(value){\n if(typeof value!=='string'||value.length<20||value.length>2048)return null;\n try{\n  const u=new URL(value);\n  if(u.protocol!=='https:'||u.username||u.password||u.port||u.hash||\n   !['web.push.apple.com','fcm.googleapis.com','updates.push.services.mozilla.com'].includes(u.hostname)||\n   !u.pathname||u.pathname==='/')return null;\n  return u.href;\n }catch{return null;}\n}\nconst emailSender=value=>typeof value==='string'&&\n /^[a-z0-9._+-]+@(?:[a-z0-9-]+\\.)*dialincollective\\.com$/i.test(value)?value:null;\nasync function vapidAuthorization(endpoint,key,now){\n const pub=decode64(key.publicKey),secret=decode64(key.privateKey);\n if(pub.length!==65||pub[0]!==4||secret.length!==32)throw Error('Missing VAPID');\n const jwk={kty:'EC',crv:'P-256',x:encode64(pub.slice(1,33)),\n  y:encode64(pub.slice(33,65)),d:encode64(secret),ext:true};\n const priv=await crypto.subtle.importKey('jwk',jwk,{name:'ECDSA',namedCurve:'P-256'},false,['sign']);\n const header=encode64(new TextEncoder().encode(JSON.stringify({typ:'JWT',alg:'ES256'})));\n const payload=encode64(new TextEncoder().encode(JSON.stringify({\n  aud:new URL(endpoint).origin,exp:Math.floor(now()/1000)+3600,sub:'https://app.dialincollective.com'})));\n const unsigned=header+'.'+payload;\n const signature=encode64(new Uint8Array(await crypto.subtle.sign(\n  {name:'ECDSA',hash:'SHA-256'},priv,new TextEncoder().encode(unsigned))));\n return 'vapid t='+unsigned+'.'+signature+', k='+key.publicKey;\n}\nexport function createMemberApprovalBroker({\n env=name=>Deno.env.get(name),fetcher=fetch,now=()=>Date.now()\n}={}){\n return async request=>{\n  if(request.method!=='POST')return denied(405);\n  const raw=await request.text().catch(()=>'');\n  if(!raw||raw.length>4500)return denied(413);\n  let input;\n  try{input=JSON.parse(raw);}catch{return denied(400);}\n  if(!input||typeof input!=='object'||Array.isArray(input)||\n    !['key','status','subscribe','unsubscribe','poll'].includes(input.op))return denied(400);\n  let service,publishable;\n  try{\n   service=JSON.parse(env('SUPABASE_SECRET_KEYS')||'{}').default||env('SUPABASE_SERVICE_ROLE_KEY');\n   publishable=JSON.parse(env('SUPABASE_PUBLISHABLE_KEYS')||'{}').default||env('SUPABASE_ANON_KEY');\n  }catch{return denied(503);}\n  if(env('SUPABASE_URL')!==PROJECT||!service||!publishable)return denied(503);\n  const serviceHeaders={apikey:service,'Content-Type':'application/json',\n   ...(service.startsWith('sb_secret_')?{}:{Authorization:'Bearer '+service})};\n  const rest=async(path,{method='GET',body,prefer}={})=>{\n   const result=await fetcher(PROJECT+'/rest/v1/'+path,{\n    method,redirect:'error',cache:'no-store',\n    headers:{...serviceHeaders,...(prefer?{Prefer:prefer}:{})},\n    ...(body===undefined?{}:{body:JSON.stringify(body)}),signal:AbortSignal.timeout(8000)});\n   if(!result.ok)throw Error('Protected notice storage unavailable');\n   return result;\n  };\n  const rpc=async(name,body={})=>(await rest('rpc/'+name,{method:'POST',body})).json();\n  const keys=async()=>await rpc('dic_admin_push_runtime_keys');\n  const ensureKeys=async()=>{\n   let key=await keys();if(key)return key;\n   // Reuses Vault's existing one-use P-256 recipient; never rotates or exports it.\n   const pair=await crypto.subtle.generateKey({name:'ECDSA',namedCurve:'P-256'},true,['sign','verify']);\n   const jwk=await crypto.subtle.exportKey('jwk',pair.privateKey);\n   const publicKey=encode64(Uint8Array.from([4,...decode64(jwk.x),...decode64(jwk.y)]));\n   await rpc('dic_admin_push_bootstrap_key',{p_public_key:publicKey,p_private_key:jwk.d});\n   key=await keys();\n   if(!key?.publicKey||!key.privateKey)throw Error('Vault bootstrap unavailable');\n   return key;\n  };\n  const account=async()=>{\n   const match=/^Bearer ([A-Za-z0-9._~-]{24,6000})$/.exec(request.headers.get('authorization')||'');\n   if(!match)return null;\n   const headers={apikey:publishable,Authorization:'Bearer '+match[1]};\n   const user=await fetcher(PROJECT+'/auth/v1/user',{\n    headers,redirect:'error',cache:'no-store',signal:AbortSignal.timeout(6500)});\n   if(!user.ok)return null;\n   const identity=await user.json();\n   if(!UUID.test(String(identity?.id||'')))return null;\n   const statusResponse=await fetcher(PROJECT+'/rest/v1/rpc/dic_session_status',{\n    method:'POST',redirect:'error',cache:'no-store',\n    headers:{...headers,'Content-Type':'application/json'},body:'{}',\n    signal:AbortSignal.timeout(6500)});\n   if(!statusResponse.ok)return null;\n   const status=await statusResponse.json();\n   if(status?.authenticated!==true||status?.emailVerified!==true||status?.admin===true)return null;\n   return {id:identity.id,status};\n  };\n  try{\n   if(input.op!=='poll'){\n    if(Object.keys(input).some(k=>!['op','endpoint'].includes(k)))return denied(400);\n    const member=await account();\n    if(!member)return denied(403);\n    if(input.op==='key'){\n     if(Object.keys(input).length!==1||member.status.admitted||\n      member.status.approvalState!=='pending')return denied(403);\n     const key=await ensureKeys();return reply({ok:true,publicKey:key.publicKey});\n    }\n    const endpoint=safeEndpoint(input.endpoint);\n    if(!endpoint)return denied(400);\n    const hash=await fingerprint(endpoint);\n    const route=SUBS+'?endpoint_hash=eq.'+hash;\n    if(input.op==='status'){\n     const found=await (await rest(route+'&select=owner_id&limit=1')).json();\n     return reply({ok:true,subscribed:found.length===1&&found[0].owner_id===member.id});\n    }\n    if(input.op==='unsubscribe'){\n     await rest(route+'&owner_id=eq.'+member.id,{method:'DELETE'});\n     return reply({ok:true,subscribed:false});\n    }\n    if(input.op!=='subscribe'||member.status.admitted||\n     member.status.approvalState!=='pending')return denied(403);\n    const existing=await (await rest(route+'&select=owner_id&limit=1')).json();\n    if(existing.length&&existing[0].owner_id!==member.id)return denied(409);\n    const owned=await (await rest(SUBS+'?owner_id=eq.'+member.id+\n      '&select=endpoint_hash&limit=4')).json();\n    if(!existing.length&&owned.length>=3)return denied(429);\n    const key=await ensureKeys();\n    if(!key.publicKey)return denied(503);\n    await rest(SUBS+'?on_conflict=endpoint_hash',{\n     method:'POST',prefer:'resolution=merge-duplicates,return=minimal',\n     body:{endpoint_hash:hash,owner_id:member.id,endpoint,\n      expires_at:new Date(now()+60*86400000).toISOString(),updated_at:new Date(now()).toISOString()}});\n    return reply({ok:true,subscribed:true});\n   }\n   // No requester data, no ad-hoc recipient arguments, no caller-selected event.\n   if(Object.keys(input).length!==1)return denied(400);\n   if(await rpc('dic_member_approval_claim_poll')!==true)return reply({ok:true,handled:0});\n   let handled=0,failed=0,unconfigured=false;\n   const key=await keys();\n   const sendPush=async(endpoint,keyData)=>{\n    const safe=safeEndpoint(endpoint);if(!safe)throw Error('Untrusted endpoint');\n    const auth=await vapidAuthorization(safe,keyData,now);\n    const sent=await fetcher(safe,{method:'POST',redirect:'error',cache:'no-store',\n     headers:{Authorization:auth,TTL:'300',Urgency:'normal'},\n     signal:AbortSignal.timeout(6000)});\n    return {ok:sent.ok,gone:sent.status===404||sent.status===410};\n   };\n   const apiKey=env('RESEND_API_KEY'),from=emailSender(env('DIC_APPROVAL_FROM_EMAIL'));\n   for(const channel of ['push','email']){\n    if(channel==='email'&&(!apiKey||!from)){unconfigured=true;continue;}\n    const batches=await rpc('dic_member_approval_claim',{p_channel:channel,p_limit:12});\n    if(!Array.isArray(batches)||batches.length>12)throw Error('Invalid protected claim');\n    const results=await Promise.allSettled(batches.map(async item=>{\n     const eventId=item?.eventId,token=item?.claimToken;\n     if(!Number.isSafeInteger(eventId)||eventId<1||!UUID.test(String(token||'')))\n      throw Error('Invalid protected delivery');\n     let outcome='retry';\n     try{\n      if(channel==='email'){\n       const email=String(item.email||'');\n       if(email.length>254||!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(email))\n        throw Error('Invalid verified email');\n       const sent=await fetcher('https://api.resend.com/emails',{\n        method:'POST',redirect:'error',cache:'no-store',\n        headers:{'Authorization':'Bearer '+apiKey,'Content-Type':'application/json',\n         'Idempotency-Key':'dic-member-account-approved-'+eventId},\n        body:JSON.stringify({\n         from,to:[email],subject:'Your Dial In Collective account is approved',\n         text:'Your account is approved. You can now sign in to The Dial In Collective at https://app.dialincollective.com/ .\\n\\nIf you did not request this account, please ignore this email.'\n        }),signal:AbortSignal.timeout(7000)});\n       const receipt=await sent.json().catch(()=>null);\n       if(!sent.ok||typeof receipt?.id!=='string'||receipt.id.length<8)\n        throw Error('Email provider did not accept the message');\n       outcome='sent';\n      }else{\n       const endpoints=item.endpoints;\n       if(!Array.isArray(endpoints)||endpoints.length>3)throw Error('Invalid device list');\n       if(!endpoints.length)outcome='skipped';\n       else {\n        if(!key)throw Error('Vault key unavailable');\n        const checks=await Promise.allSettled(endpoints.map(async ep=>{\n         if(!HASH.test(String(ep?.hash||''))||!safeEndpoint(ep?.endpoint)||\n           await fingerprint(ep.endpoint)!==ep.hash)throw Error('Malformed endpoint');\n         const result=await sendPush(ep.endpoint,key);\n         const route=SUBS+'?endpoint_hash=eq.'+ep.hash;\n         if(result.gone)await rest(route,{method:'DELETE'});\n         else if(result.ok)await rest(route,{method:'PATCH',prefer:'return=minimal',\n          body:{last_sent_event_id:eventId,updated_at:new Date(now()).toISOString()}});\n         else throw Error('Push provider did not accept the message');\n        }));\n        if(checks.some(c=>c.status==='rejected'))throw Error('Some devices not acknowledged');\n        outcome='sent';\n       }\n      }\n     }catch{/* Do not log member email, push endpoint, tokens, or secrets. */}\n     const finished=await rpc('dic_member_approval_finish',{\n      p_event_id:eventId,p_channel:channel,p_claim_token:token,p_outcome:outcome});\n     if(finished!==true||outcome==='retry')throw Error('Delivery not acknowledged');\n     return outcome;\n    }));\n    handled+=results.filter(x=>x.status==='fulfilled').length;\n    failed+=results.filter(x=>x.status==='rejected').length;\n   }\n   return reply({ok:failed===0&&!unconfigured,handled,\n    ...(unconfigured?{reason:'email_not_configured'}:{})},failed||unconfigured?503:200);\n  }catch{return denied(503);}\n };\n}\n"
+        }
+      ]
+    },
+    {
+      "slug": "dic-admin-push-broker",
+      "version": 3,
+      "verify_jwt": false,
+      "ezbr_sha256": "ca7ce5f9b80bf6984a7517e9f3ef1750fa856b75557136817ccc040dc5635382",
+      "status": "ACTIVE",
+      "files": [
+        {
+          "filename": "index.ts",
+          "characters": 252,
+          "complete_source": "// Issue #1938: strictly signed Netlify-to-Supabase service-only operations.\n// Supabase itself provisions the runtime service API key; no key is copied to Netlify.\nimport {createAdminPushBroker} from './core.mjs';\nDeno.serve(createAdminPushBroker());\n"
+        },
+        {
+          "filename": "core.mjs",
+          "characters": 9706,
+          "complete_source": "// Issue #1938: Supabase-only VAPID custody with encrypted Vault persistence.\n// No private key is exported to Netlify, source, browser or unauthenticated callers.\nexport const PROJECT_URL='https://azviqqejypsefzilgonr.supabase.co';\nexport const SERVICE_URL=PROJECT_URL+'/functions/v1/dic-admin-push-broker';\nconst UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;\nconst HASH=/^[a-f0-9]{64}$/;\nconst TOKEN=/^(signup|coffee|delete):[a-f0-9]{8}-[a-f0-9-]{27,36}$/i;\nconst reply=(data,status=200)=>Response.json(data,{status,headers:{\n 'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer'}});\nconst denied=(status=403)=>reply({ok:false,reason:'unavailable'},status);\nfunction decode64(s){\n const str=atob(s.replace(/-/g,'+').replace(/_/g,'/')+'='.repeat((4-s.length%4)%4));\n return Uint8Array.from(str,c=>c.charCodeAt(0));\n}\nfunction encode64(bytes){\n let str='';for(const b of bytes)str+=String.fromCharCode(b);\n return btoa(str).replace(/\\+/g,'-').replace(/\\//g,'_').replace(/=+$/,'');\n}\nasync function fingerprint(endpoint){\n const h=new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(endpoint)));\n return [...h].map(x=>x.toString(16).padStart(2,'0')).join('');\n}\nfunction safeEndpoint(value){\n if(typeof value!=='string'||value.length<20||value.length>2048)return null;\n try{\n  const u=new URL(value);\n  if(u.protocol!=='https:'||u.username||u.password||u.port||u.hash||\n   !['web.push.apple.com','fcm.googleapis.com','updates.push.services.mozilla.com'].includes(u.hostname)||\n   !u.pathname||u.pathname==='/')return null;\n  return u.href;\n }catch{return null;}\n}\nfunction cleanTokens(input){\n if(!Array.isArray(input)||input.length>4000||input.some(t=>typeof t!=='string'||!TOKEN.test(t)))\n  throw Error('Invalid action token list');\n return [...new Set(input)].sort();\n}\nfunction jwtPair(key){\n const pub=decode64(key.publicKey),priv=decode64(key.privateKey);\n if(pub.length!==65||pub[0]!==4||priv.length!==32)throw Error('Vault key malformed');\n return {pub,jwk:{kty:'EC',crv:'P-256',x:encode64(pub.slice(1,33)),\n  y:encode64(pub.slice(33,65)),d:encode64(priv),ext:true}};\n}\nasync function signedPush(endpoint,key,fetcher,now){\n const {jwk}=jwtPair(key);\n const priv=await crypto.subtle.importKey('jwk',jwk,{name:'ECDSA',namedCurve:'P-256'},false,['sign']);\n const u=new URL(endpoint);\n const t=Math.floor(now()/1000);\n const header=encode64(new TextEncoder().encode(JSON.stringify({typ:'JWT',alg:'ES256'})));\n const payload=encode64(new TextEncoder().encode(JSON.stringify({\n  aud:u.origin,exp:t+3600,sub:'https://app.dialincollective.com'})));\n const unsigned=header+'.'+payload;\n const signature=encode64(new Uint8Array(await crypto.subtle.sign(\n  {name:'ECDSA',hash:'SHA-256'},priv,new TextEncoder().encode(unsigned))));\n const response=await fetcher(endpoint,{method:'POST',redirect:'error',cache:'no-store',\n  headers:{Authorization:'vapid t='+unsigned+'.'+signature+', k='+key.publicKey,\n   TTL:'300',Urgency:'normal'},signal:AbortSignal.timeout(6000)});\n return {ok:response.ok,gone:response.status===404||response.status===410};\n}\nexport function createAdminPushBroker({env=name=>Deno.env.get(name),fetcher=fetch,now=()=>Date.now()}={}){\n return async request=>{\n  if(request.method!=='POST')return denied(405);\n  const raw=await request.text().catch(()=>'');\n  if(raw.length>9000||raw.length===0)return denied(413);\n  let spec;\n  try{spec=JSON.parse(raw);}catch{return denied(400);}\n  if(!spec||typeof spec!=='object'||!['manage','poll'].includes(spec.op))return denied(403);\n  let service,publishable;\n  try{\n   service=JSON.parse(env('SUPABASE_SECRET_KEYS')||'{}').default||env('SUPABASE_SERVICE_ROLE_KEY');\n   publishable=JSON.parse(env('SUPABASE_PUBLISHABLE_KEYS')||'{}').default||env('SUPABASE_ANON_KEY');\n  }catch{return denied(503);}\n  if(env('SUPABASE_URL')!==PROJECT_URL||!service||!publishable)return denied(503);\n  const h={apikey:service,'Content-Type':'application/json',\n   ...(/^sb_secret_/.test(service)?{}:{Authorization:'Bearer '+service})};\n  const rest=async(path,{method='GET',body,prefer}={})=>{\n   const r=await fetcher(PROJECT_URL+'/rest/v1/'+path,{method,redirect:'error',cache:'no-store',\n    headers:{...h,...(prefer?{Prefer:prefer}:{})},\n    ...(body===undefined?{}:{body:JSON.stringify(body)}),signal:AbortSignal.timeout(7000)});\n   if(!r.ok)throw Error('Protected PostgREST failure');\n   return r;\n  };\n  const keys=async()=>await (await rest('rpc/dic_admin_push_runtime_keys',{method:'POST',body:{}})).json();\n  const ensureKeys=async()=>{\n   let k=await keys();\n   if(k)return k;\n   const pair=await crypto.subtle.generateKey({name:'ECDSA',namedCurve:'P-256'},true,['sign','verify']);\n   const jwk=await crypto.subtle.exportKey('jwk',pair.privateKey);\n   const publicKey=encode64(Uint8Array.from([4,...decode64(jwk.x),...decode64(jwk.y)]));\n   await rest('rpc/dic_admin_push_bootstrap_key',{method:'POST',\n    body:{p_public_key:publicKey,p_private_key:jwk.d}});\n   k=await keys();if(!k||typeof k.publicKey!=='string'||!k.privateKey)throw Error('Vault bootstrap incomplete');\n   return k;\n  };\n  const admin=async jwt=>{\n   if(typeof jwt!=='string'||jwt.length<24||jwt.length>6000||\n      !/^[A-Za-z0-9._~-]+$/.test(jwt))return null;\n   const headers={apikey:publishable,Authorization:'Bearer '+jwt};\n   const u=await fetcher(PROJECT_URL+'/auth/v1/user',{headers,redirect:'error',\n    cache:'no-store',signal:AbortSignal.timeout(6500)});\n   if(!u.ok)return null;\n   const user=await u.json();\n   if(!UUID.test(String(user?.id||'')))return null;\n   const r=await fetcher(PROJECT_URL+'/rest/v1/rpc/dic_session_status',{\n    method:'POST',headers:{...headers,'Content-Type':'application/json'},\n    body:'{}',cache:'no-store',redirect:'error',signal:AbortSignal.timeout(6500)});\n   if(!r.ok)return null;\n   const status=await r.json();\n   return status?.authenticated===true&&status?.admitted===true&&status?.admin===true?user.id:null;\n  };\n  try{\n   if(spec.op==='manage'){\n    if(!['GET','POST','DELETE'].includes(spec.method))return denied(405);\n    const owner=await admin(spec.jwt);\n    if(!owner)return denied(403);\n    if(spec.method==='GET'){\n     const k=await ensureKeys();\n     return reply({ok:true,publicKey:k.publicKey});\n    }\n    const endpoint=safeEndpoint(spec.endpoint);\n    if(!endpoint)return denied(400);\n    const hash=await fingerprint(endpoint);\n    if(spec.method==='DELETE'){\n     await rest('dic_admin_push_subscriptions?endpoint_hash=eq.'+hash+'&owner_id=eq.'+owner,\n      {method:'DELETE'});\n     return reply({ok:true,subscribed:false});\n    }\n    const k=await ensureKeys();\n    if(!k.publicKey)return denied(503);\n    const snap=await (await rest('rpc/dic_admin_push_snapshot',{method:'POST',body:{}})).json();\n    if(!Array.isArray(snap.admin_ids)||!snap.admin_ids.includes(owner))return denied(403);\n    const tokens=cleanTokens(snap.tokens);\n    const stamp=new Date(now()).toISOString();\n    await rest('dic_admin_push_subscriptions?on_conflict=endpoint_hash',{\n     method:'POST',prefer:'resolution=merge-duplicates,return=minimal',\n     body:{endpoint_hash:hash,owner_id:owner,endpoint,seen_tokens:tokens,\n      expires_at:new Date(now()+60*86400000).toISOString(),updated_at:stamp}});\n    return reply({ok:true,subscribed:true});\n   }\n   // Public scheduling trigger returns no private rows/tokens, and is rate-limited\n   // by a Postgres advisory-serialized UPDATE before any push can be sent.\n   if(spec.op!=='poll'||Object.keys(spec).length!==1)return denied(400);\n   const acquired=await (await rest('rpc/dic_admin_push_claim_poll',{method:'POST',body:{}})).json();\n   if(acquired!==true)return reply({ok:true});\n   const key=await keys();\n   if(!key)return reply({ok:true});\n   const snap=await (await rest('rpc/dic_admin_push_snapshot',{method:'POST',body:{}})).json();\n   if(!Array.isArray(snap?.admin_ids))return denied(503);\n   const active=new Set(snap.admin_ids),tokens=cleanTokens(snap.tokens);\n   const PAGE=50,route='dic_admin_push_subscriptions?select=owner_id,endpoint,endpoint_hash,seen_tokens,expires_at&order=endpoint_hash.asc&limit='+PAGE;\n   let cursor='',failed=0;\n   const process=async row=>{\n    if(!HASH.test(String(row?.endpoint_hash||'')))return;\n    const endpoint=safeEndpoint(row.endpoint),query='dic_admin_push_subscriptions?endpoint_hash=eq.'+row.endpoint_hash;\n    if(!active.has(row.owner_id)||!endpoint||await fingerprint(endpoint)!==row.endpoint_hash||\n        Date.parse(row.expires_at)<=now()){\n     await rest(query,{method:'DELETE'});return;\n    }\n    const seen=cleanTokens(row.seen_tokens),added=tokens.filter(t=>!seen.includes(t));\n    if(added.length){\n     const push=await signedPush(endpoint,key,fetcher,now);\n     if(push.gone){await rest(query,{method:'DELETE'});return;}\n     if(!push.ok){failed++;return;}\n    }\n    if(added.length||JSON.stringify(seen)!==JSON.stringify(tokens))\n     await rest(query,{method:'PATCH',prefer:'return=minimal',body:{\n      seen_tokens:tokens,updated_at:new Date(now()).toISOString(),\n      ...(added.length?{last_sent_at:new Date(now()).toISOString()}:{})}});\n   };\n   while(true){\n    const rows=await (await rest(route+(cursor?'&endpoint_hash=gt.'+cursor:''))).json();\n    if(!Array.isArray(rows)||rows.length>PAGE)return denied(503);\n    if(!rows.length)break;\n    const next=rows.at(-1)?.endpoint_hash;\n    if(!HASH.test(String(next||''))||(cursor&&next<=cursor))return denied(503);\n    const results=await Promise.allSettled(rows.map(process));\n    failed+=results.filter(x=>x.status==='rejected').length;\n    if(rows.length<PAGE)break;\n    cursor=next;\n   }\n   return reply({ok:failed===0},failed?503:200);\n  }catch{return denied(503);}\n };\n}\n"
+        }
+      ]
+    }
+  ],
+  "seven_full_sql_definitions": [
+    {
+      "proname": "dic_admin_push_bootstrap_key",
+      "signature": "dic_admin_push_bootstrap_key(text,text)",
+      "prosecdef": true,
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "md5": "637217a555887f78d812deb347455e4d",
+      "full_ddl": "CREATE OR REPLACE FUNCTION public.dic_admin_push_bootstrap_key(p_public_key text, p_private_key text)\n RETURNS text\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare existing_key text; secret_id uuid;\nbegin\n perform pg_catalog.pg_advisory_xact_lock(1938,20261112);\n select r.vapid_public into existing_key\n from private.dic_admin_push_runtime r where r.singleton=true;\n if existing_key is not null then return existing_key; end if;\n if p_public_key !~ '^[A-Za-z0-9_-]{87}$' or p_private_key !~ '^[A-Za-z0-9_-]{43}$'\n then raise exception 'Invalid VAPID key material'; end if;\n secret_id:=vault.create_secret(\n  p_private_key,'dic_admin_push_vapid_private_20261112',\n  'Only service-role Edge Functions may decrypt this VAPID signing key');\n insert into private.dic_admin_push_runtime(singleton,vapid_public,vault_secret_id)\n values(true,p_public_key,secret_id);\n return p_public_key;\nend;\n$function$\n",
+      "anon_exec": false,
+      "auth_exec": false,
+      "service_exec": true,
+      "semantic_assessment": "Service-role-only SECURITY DEFINER, search_path restricted; retained; external effective HTTP access unverified"
+    },
+    {
+      "proname": "dic_admin_push_claim_poll",
+      "signature": "dic_admin_push_claim_poll()",
+      "prosecdef": true,
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "md5": "e3bbf384effe7e29b5cffd89135c0666",
+      "full_ddl": "CREATE OR REPLACE FUNCTION public.dic_admin_push_claim_poll()\n RETURNS boolean\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare won boolean;\nbegin\n update private.dic_admin_push_runtime set last_polled_at=now()\n where singleton=true\n   and (last_polled_at is null or last_polled_at<=now()-interval '4 minutes')\n returning true into won;\n return coalesce(won,false);\nend;\n$function$\n",
+      "anon_exec": false,
+      "auth_exec": false,
+      "service_exec": true,
+      "semantic_assessment": "Service-role-only SECURITY DEFINER, search_path restricted; retained; external effective HTTP access unverified"
+    },
+    {
+      "proname": "dic_admin_push_runtime_keys",
+      "signature": "dic_admin_push_runtime_keys()",
+      "prosecdef": true,
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "md5": "16fd1cc2a0cbf0110cd253e661c4cdef",
+      "full_ddl": "CREATE OR REPLACE FUNCTION public.dic_admin_push_runtime_keys()\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare info jsonb;\nbegin\n select jsonb_build_object('publicKey',r.vapid_public,'privateKey',d.decrypted_secret)\n into info from private.dic_admin_push_runtime r\n join vault.decrypted_secrets d on d.id=r.vault_secret_id\n where r.singleton=true;\n return info;\nend;\n$function$\n",
+      "anon_exec": false,
+      "auth_exec": false,
+      "service_exec": true,
+      "semantic_assessment": "Service-role-only SECURITY DEFINER, search_path restricted; retained; external effective HTTP access unverified"
+    },
+    {
+      "proname": "dic_admin_push_snapshot",
+      "signature": "dic_admin_push_snapshot()",
+      "prosecdef": true,
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "md5": "c6c2c674fa8358a3dd4946a3c0f9d8ed",
+      "full_ddl": "CREATE OR REPLACE FUNCTION public.dic_admin_push_snapshot()\n RETURNS jsonb\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\n select jsonb_build_object(\n  'admin_ids',coalesce((\n   select jsonb_agg(a.owner_id order by a.owner_id)\n   from private.app_admins a join private.beta_members m on m.owner_id=a.owner_id\n   where m.admitted_at is not null and m.enabled\n  ),'[]'::jsonb),\n  'tokens',coalesce((\n   select jsonb_agg(t.token order by t.token)\n   from (\n    select 'signup:'||m.owner_id::text as token\n    from private.beta_members m\n    join auth.users u on u.id=m.owner_id\n    where m.admitted_at is null and m.signup_review_state='pending'\n      and u.email_confirmed_at is not null\n    union\n    select 'coffee:'||s.id::text from public.coffee_submissions s\n      where s.status in ('pending','conflict')\n    union\n    select 'delete:'||op.id::text from private.dic_admin_account_delete_operations op\n      where op.phase<>'completed'\n   ) t\n  ),'[]'::jsonb)\n );\n$function$\n",
+      "anon_exec": false,
+      "auth_exec": false,
+      "service_exec": true,
+      "semantic_assessment": "Service-role-only SECURITY DEFINER, search_path restricted; retained; external effective HTTP access unverified"
+    },
+    {
+      "proname": "dic_member_approval_claim",
+      "signature": "dic_member_approval_claim(text,integer)",
+      "prosecdef": true,
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "md5": "b0d1e8d2622852b6b930def5c8a171d9",
+      "full_ddl": "CREATE OR REPLACE FUNCTION public.dic_member_approval_claim(p_channel text, p_limit integer DEFAULT 20)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare batches jsonb;\nbegin\n if p_channel not in ('email','push') or p_channel is null or\n    p_limit is null or p_limit not between 1 and 20 then\n  raise exception using errcode='22023',message='Invalid delivery channel/limit';\n end if;\n with chosen as (\n  select d.event_id,d.channel\n  from private.dic_member_approval_deliveries d\n  join private.beta_members m on m.owner_id=d.member_id\n  join auth.users u on u.id=d.member_id\n  where d.channel=p_channel and m.signup_review_state='approved'\n   and m.enabled and m.admitted_at is not null\n   and u.email_confirmed_at is not null\n   and ((d.state='pending' and d.next_attempt_at<=now())\n    or (d.state='sending' and d.lease_until < now()))\n  order by d.event_id limit p_limit for update of d skip locked\n ), claimed as (\n  update private.dic_member_approval_deliveries d\n  set state='sending',attempt_count=d.attempt_count+1,\n      claim_token=gen_random_uuid(),lease_until=now()+interval '2 minutes'\n  from chosen c where d.event_id=c.event_id and d.channel=c.channel\n  returning d.event_id,d.member_id,d.claim_token\n )\n select coalesce(jsonb_agg(jsonb_build_object(\n   'eventId',c.event_id,'claimToken',c.claim_token,\n   'email',case when p_channel='email' then left(u.email,254) else null end,\n   'endpoints',case when p_channel='push' then (\n    select coalesce(jsonb_agg(jsonb_build_object('hash',s.endpoint_hash,'endpoint',s.endpoint)),'[]'::jsonb)\n    from public.dic_member_approval_push_subscriptions s\n    where s.owner_id=c.member_id and s.expires_at>now()\n      and s.last_sent_event_id<c.event_id\n   ) else '[]'::jsonb end\n  ) order by c.event_id),'[]'::jsonb) into batches\n from claimed c join auth.users u on u.id=c.member_id;\n return batches;\nend $function$\n",
+      "anon_exec": false,
+      "auth_exec": false,
+      "service_exec": true,
+      "semantic_assessment": "Service-role-only SECURITY DEFINER, search_path restricted; retained; external effective HTTP access unverified"
+    },
+    {
+      "proname": "dic_member_approval_claim_poll",
+      "signature": "dic_member_approval_claim_poll()",
+      "prosecdef": true,
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "md5": "b94ddc2223993aa7685faf482d3871e4",
+      "full_ddl": "CREATE OR REPLACE FUNCTION public.dic_member_approval_claim_poll()\n RETURNS boolean\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n update private.dic_member_approval_poll_gate set last_polled_at=now()\n where singleton=true and last_polled_at < now()-interval '4 minutes';\n return found;\nend $function$\n",
+      "anon_exec": false,
+      "auth_exec": false,
+      "service_exec": true,
+      "semantic_assessment": "Service-role-only SECURITY DEFINER, search_path restricted; retained; external effective HTTP access unverified"
+    },
+    {
+      "proname": "dic_member_approval_finish",
+      "signature": "dic_member_approval_finish(bigint,text,uuid,text)",
+      "prosecdef": true,
+      "proconfig": [
+        "search_path=\"\""
+      ],
+      "md5": "e92ba8e17ab274bcab1a564475d16f28",
+      "full_ddl": "CREATE OR REPLACE FUNCTION public.dic_member_approval_finish(p_event_id bigint, p_channel text, p_claim_token uuid, p_outcome text)\n RETURNS boolean\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n if p_channel not in ('email','push') or p_outcome not in ('sent','skipped','retry')\n   or p_claim_token is null or p_event_id is null then\n  raise exception using errcode='22023',message='Invalid delivery receipt';\n end if;\n update private.dic_member_approval_deliveries d\n set state=case when p_outcome='retry' then 'pending' else p_outcome end,\n     claim_token=null,lease_until=null,\n     completed_at=case when p_outcome='retry' then null else now() end,\n     next_attempt_at=case when p_outcome='retry' then\n       now()+least(60,power(2,least(d.attempt_count,5))::integer)*interval '1 minute'\n       else d.next_attempt_at end\n where d.event_id=p_event_id and d.channel=p_channel and\n   d.state='sending' and d.claim_token=p_claim_token;\n return found;\nend $function$\n",
+      "anon_exec": false,
+      "auth_exec": false,
+      "service_exec": true,
+      "semantic_assessment": "Service-role-only SECURITY DEFINER, search_path restricted; retained; external effective HTTP access unverified"
+    }
+  ],
+  "characters": {
+    "edge": 21887,
+    "sql": 6037
+  },
+  "provider_surfaces": {
+    "saved_notebooks": 0,
+    "development_branches": 0,
+    "migrations": 67,
+    "active_edges": 5,
+    "approval_poll_gate": {
+      "singleton": 1,
+      "null_timestamp": 0,
+      "future_timestamp": 0
+    },
+    "security_advisors": {
+      "rls_no_policy": 13,
+      "signed_in_definer": 10,
+      "breached_password": 1
+    },
+    "performance_advisors": {
+      "unindexed_foreign_keys": 14,
+      "unused_indexes": 8
+    },
+    "health_advisors": 0
+  },
+  "live_legacy": {
+    "tables": [
+      "private.dic_roaster_directory",
+      "private.dic_roaster_aliases"
+    ],
+    "referencing_sql_routines": [
+      "private.dic_canonical_roaster_key",
+      "private.dic_find_coffee_matches",
+      "private.dic_promote_pending_coffee",
+      "private.dic_roaster_key",
+      "public.dic_roaster_preview_target",
+      "public.dic_source_check_target"
+    ],
+    "status": "LEGACY ACTIVE in production; #2389 RETIREMENT IN PROGRESS; development only"
+  },
+  "review_notes": [
+    "Both verify_jwt=false brokers use bounded POST input. Public polling accepts no caller-specified recipient/approval event and is backed by service-only SQL poll gates; credentialed manage/status/subscribe routes verify actual Supabase bearer session and admin/pending member role through dic_session_status.",
+    "Seven complete backing RPC SQL function declarations deny nominal anon/authenticated EXECUTE and permit service_role; fixed empty search_path; includes protected Vault key access, batch leases and completion tokens. Effective HTTP provider configuration not verified.",
+    "Service broker source restricts push endpoints to HTTPS Apple/FCM/Mozilla domains; no actual sends, Auth user/shot/note rows, Vault secrets or raw log entries read.",
+    "Both source bundles and seven SQL routines have previously been inventoried: repeat live semantic cross-layer re-audit, zero new first-time source-word coverage."
+  ],
+  "bounded_log_counts_24h": {
+    "edge_logs": 2238,
+    "function_logs": 1068,
+    "postgres_logs": 589,
+    "function_edge_logs": 533,
+    "pgbouncer_logs": 83,
+    "postgrest_logs": 38,
+    "supavisor_logs": 27,
+    "auth_logs": 17,
+    "auth_audit_logs": 8,
+    "realtime_logs": 6,
+    "storage_logs": 6
+  },
+  "log_window_utc": [
+    "2026-11-12T14:45:00Z",
+    "2026-11-13T14:45:00Z"
+  ],
+  "privacy": "no private data/secrets/raw logs",
+  "new_confirmed_defects": 0,
+  "justified_deletions": 0,
+  "provider_writes": 0,
+  "baseline_complete": false,
+  "next": "Review new/changed provider source/config after drift; host-only API/Auth configuration requires supported access and #96 coordination.",
+  "github_prewrite_parent_sha": "5bab75100627dab4e1e42bfb105cff5f7039e9d9"
+}
