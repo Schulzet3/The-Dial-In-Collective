@@ -13376,6 +13376,32 @@
       "blockers": [],
       "notes": "Scoped developer-only UI render fix. No new recommendation numeric target, all five taste inputs or saved measured readings/notes/history changed; no empirical validation, provider/SQL/Auth/Edge/member operations or publication. CI and nonforce integration pending. S019 source remains inaccessible.\nR455-222 source and positive/negative test READY in development only; production_deployed=false. No numeric taste policy or engine changes; S019 standalone unavailable and #267 literal audit incomplete.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-33-Huckleberry-headless-size-product-extraction",
+      "issue": 33,
+      "pr": 2385,
+      "title": "Fix selected Huckleberry /shop/products?Size=12+OZ metadata extraction with exact-handle public fallback",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-shopify-ajax.mjs"
+      ],
+      "tests": [
+        "Initial PR #2385 GitHub source-head synthetic Node22 selected/product security regression: 7/7 PASS in run 43361539325.",
+        "Initial guarded official Huckleberry current source: FAIL source_fetch_failed, exact HTML/Shopify JSON transport did not succeed; strict live product proof UNVERIFIED. Network diagnostics and focused retest in progress."
+      ],
+      "ci_runs": [
+        43361539325
+      ],
+      "blockers": [
+        "Current official Huckleberry source fetch failed on GitHub runner; cannot certify selected real product from synthetic evidence.",
+        "PR #2385 official afterproof and required exact-source checks not all PASS; not merged or READY."
+      ],
+      "owner_source": "Owner direct chat November 12 2026: Huckleberry Roasters India Gundikhan Washed URL must work in the extractor; no owner Publish.",
+      "notes": "Scoped safe development-only fix to reject unrelated product/lot metadata, preserve numeric bag size as purchase variant, and retrieve exact handle same-host Shopify public JSON where available. Active route is Netlify /api/coffee-preview (legacy Supabase roaster directory irrelevant). No Auth, private data, SQL, Netlify deployment, frozen original603 or production publication. Status IN_PROGRESS pending actual guarded HTTPS source proof, CI, safe merge and queue reconciliation.",
+      "production_deployed": false
     }
   ],
   "history": [
