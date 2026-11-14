@@ -45,7 +45,7 @@ for(const c of cases){
   // This is the exact selected merchant Shopify Product JSON, not the unrelated
   // light-roast collection or customer preference prose. Product id, title and
   // handle must match the chosen original before its roast tags may qualify.
-  const ownLight=/\\bsswApp\\.product\\s*=\\s*\\{"id":9008646881518,"title":"Kenya AA - Ndaroini Estate","handle":"kenya-aa-ndaroini-estate"[\\s\\S]{0,12000}?"tags":\\["Coffee_Light Roast"/u.test(html);
+  const ownLight=/\bsswApp\.product\s*=\s*\{"id":9008646881518,"title":"Kenya AA - Ndaroini Estate","handle":"kenya-aa-ndaroini-estate"[\s\S]{0,12000}?"tags":\["Coffee_Light Roast"/u.test(html);
   if(!ownLight||f.roast_level!=='Light')e.push('selected_product_id_handle_own_light_roast_tag_unverified');
  }else{
   if(!/Flavor Notes:\s*Chocolate/iu.test(visible)||!/Origin:\s*Lifesong Farms\s*\|\s*Mt. Elgon, Uganda/iu.test(visible))e.push('seller_direct_notes_or_origin_not_visible');
