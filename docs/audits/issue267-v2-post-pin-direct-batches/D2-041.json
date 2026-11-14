@@ -1,0 +1,694 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "D2-041",
+  "date_utc": "2026-11-14",
+  "preflight": {
+    "development_sha": "18be0586921fc572178df6929ecd7a98278dd710",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "blob_content_verified": true
+  },
+  "source": {
+    "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "observed_live_commit": "18be0586921fc572178df6929ecd7a98278dd710",
+    "path": "tests/immutable-dist-manifest.test.py",
+    "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+    "prior_live_blob_20261105": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+    "changed_from_prior": false,
+    "verified_absent_at_pin": true,
+    "physical_line_count": 23,
+    "terminal_delimiter_not_extra_line": true
+  },
+  "method": "Direct AI one-based physical line semantic inspection, fetched original Git blobs; individual source literal, behavior, quality, security/privacy/performance risk, dead/redundant, exact current/provenance, testability, fix and Locked fit. 8 isolated local Python tests passed with hashes independently verified.",
+  "per_line": [
+    {
+      "path": "tests/immutable-dist-manifest.test.py",
+      "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+      "line": 1,
+      "source_text": "import unittest,tempfile,pathlib,zipfile,importlib.util",
+      "classification": "import",
+      "behavior": "Import stdlib unittest, temporary files, path, ZIP and import loader.",
+      "quality": "Bounded unittest fixture/assertion for deterministic immutable ZIP artifact safety; exact expected behavior considered, not whole-app proof.",
+      "risk": "Artifact-shape/determinism test is not an authorization or signature gate.",
+      "dead_or_obsolete": "Current reusable test source; no safe deletion proven.",
+      "duplication": "Fixture repetition intentional for separate failure isolation; no unintended cross-file duplicate proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_content_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "18be0586921fc572178df6929ecd7a98278dd710",
+        "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+        "path": "tests/immutable-dist-manifest.test.py",
+        "line": 1,
+        "exact_original": true
+      },
+      "testability": "Recreated byte-identical source and its implementation using Git hash-object; four focused local Python 3.13 unittest cases PASS for this file, zero failures. GitHub hosted CI separate.",
+      "fix_opportunity": "No current application defect established; preserve current test, consider richer malformed ZIP/content/metadata tests if independently warranted.",
+      "locked_fit": "Approved one-use source-bound Git release controller not substituted by this test; preserve backup and member/offline/Community/SQL boundaries.",
+      "review_method": "Original literal 1-based source read and interpreted by AI, not independently human certified."
+    },
+    {
+      "path": "tests/immutable-dist-manifest.test.py",
+      "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+      "line": 2,
+      "source_text": "spec=importlib.util.spec_from_file_location('zipreader','scripts/release/immutable-dist-to-manifest.py')",
+      "classification": "fixture_or_control",
+      "behavior": "Resolve manifest parser from repository-root relative path.",
+      "quality": "Bounded unittest fixture/assertion for deterministic immutable ZIP artifact safety; exact expected behavior considered, not whole-app proof.",
+      "risk": "Artifact-shape/determinism test is not an authorization or signature gate.",
+      "dead_or_obsolete": "Current reusable test source; no safe deletion proven.",
+      "duplication": "Fixture repetition intentional for separate failure isolation; no unintended cross-file duplicate proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_content_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "18be0586921fc572178df6929ecd7a98278dd710",
+        "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+        "path": "tests/immutable-dist-manifest.test.py",
+        "line": 2,
+        "exact_original": true
+      },
+      "testability": "Recreated byte-identical source and its implementation using Git hash-object; four focused local Python 3.13 unittest cases PASS for this file, zero failures. GitHub hosted CI separate.",
+      "fix_opportunity": "No current application defect established; preserve current test, consider richer malformed ZIP/content/metadata tests if independently warranted.",
+      "locked_fit": "Approved one-use source-bound Git release controller not substituted by this test; preserve backup and member/offline/Community/SQL boundaries.",
+      "review_method": "Original literal 1-based source read and interpreted by AI, not independently human certified."
+    },
+    {
+      "path": "tests/immutable-dist-manifest.test.py",
+      "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+      "line": 3,
+      "source_text": "m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)",
+      "classification": "fixture_or_control",
+      "behavior": "Load actual parser module into test namespace.",
+      "quality": "Bounded unittest fixture/assertion for deterministic immutable ZIP artifact safety; exact expected behavior considered, not whole-app proof.",
+      "risk": "No demonstrated active privacy or runtime bug from this setup; synthetic local test only.",
+      "dead_or_obsolete": "Current reusable test source; no safe deletion proven.",
+      "duplication": "Fixture repetition intentional for separate failure isolation; no unintended cross-file duplicate proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_content_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "18be0586921fc572178df6929ecd7a98278dd710",
+        "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+        "path": "tests/immutable-dist-manifest.test.py",
+        "line": 3,
+        "exact_original": true
+      },
+      "testability": "Recreated byte-identical source and its implementation using Git hash-object; four focused local Python 3.13 unittest cases PASS for this file, zero failures. GitHub hosted CI separate.",
+      "fix_opportunity": "No current application defect established; preserve current test, consider richer malformed ZIP/content/metadata tests if independently warranted.",
+      "locked_fit": "Approved one-use source-bound Git release controller not substituted by this test; preserve backup and member/offline/Community/SQL boundaries.",
+      "review_method": "Original literal 1-based source read and interpreted by AI, not independently human certified."
+    },
+    {
+      "path": "tests/immutable-dist-manifest.test.py",
+      "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+      "line": 4,
+      "source_text": "class TestZipManifest(unittest.TestCase):",
+      "classification": "declaration",
+      "behavior": "Define ZIP manifest test case.",
+      "quality": "Bounded unittest fixture/assertion for deterministic immutable ZIP artifact safety; exact expected behavior considered, not whole-app proof.",
+      "risk": "Artifact-shape/determinism test is not an authorization or signature gate.",
+      "dead_or_obsolete": "Current reusable test source; no safe deletion proven.",
+      "duplication": "Fixture repetition intentional for separate failure isolation; no unintended cross-file duplicate proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_content_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "18be0586921fc572178df6929ecd7a98278dd710",
+        "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+        "path": "tests/immutable-dist-manifest.test.py",
+        "line": 4,
+        "exact_original": true
+      },
+      "testability": "Recreated byte-identical source and its implementation using Git hash-object; four focused local Python 3.13 unittest cases PASS for this file, zero failures. GitHub hosted CI separate.",
+      "fix_opportunity": "No current application defect established; preserve current test, consider richer malformed ZIP/content/metadata tests if independently warranted.",
+      "locked_fit": "Approved one-use source-bound Git release controller not substituted by this test; preserve backup and member/offline/Community/SQL boundaries.",
+      "review_method": "Original literal 1-based source read and interpreted by AI, not independently human certified."
+    },
+    {
+      "path": "tests/immutable-dist-manifest.test.py",
+      "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+      "line": 5,
+      "source_text": " def make(self,items):",
+      "classification": "declaration",
+      "behavior": "Define make(items) ZIP fixture helper.",
+      "quality": "Bounded unittest fixture/assertion for deterministic immutable ZIP artifact safety; exact expected behavior considered, not whole-app proof.",
+      "risk": "Artifact-shape/determinism test is not an authorization or signature gate.",
+      "dead_or_obsolete": "Current reusable test source; no safe deletion proven.",
+      "duplication": "Fixture repetition intentional for separate failure isolation; no unintended cross-file duplicate proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_content_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "18be0586921fc572178df6929ecd7a98278dd710",
+        "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+        "path": "tests/immutable-dist-manifest.test.py",
+        "line": 5,
+        "exact_original": true
+      },
+      "testability": "Recreated byte-identical source and its implementation using Git hash-object; four focused local Python 3.13 unittest cases PASS for this file, zero failures. GitHub hosted CI separate.",
+      "fix_opportunity": "No current application defect established; preserve current test, consider richer malformed ZIP/content/metadata tests if independently warranted.",
+      "locked_fit": "Approved one-use source-bound Git release controller not substituted by this test; preserve backup and member/offline/Community/SQL boundaries.",
+      "review_method": "Original literal 1-based source read and interpreted by AI, not independently human certified."
+    },
+    {
+      "path": "tests/immutable-dist-manifest.test.py",
+      "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+      "line": 6,
+      "source_text": "  self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup)",
+      "classification": "fixture_or_control",
+      "behavior": "Create temp root and register unittest cleanup.",
+      "quality": "Bounded unittest fixture/assertion for deterministic immutable ZIP artifact safety; exact expected behavior considered, not whole-app proof.",
+      "risk": "No demonstrated active privacy or runtime bug from this setup; synthetic local test only.",
+      "dead_or_obsolete": "Current reusable test source; no safe deletion proven.",
+      "duplication": "Fixture repetition intentional for separate failure isolation; no unintended cross-file duplicate proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_content_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "18be0586921fc572178df6929ecd7a98278dd710",
+        "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+        "path": "tests/immutable-dist-manifest.test.py",
+        "line": 6,
+        "exact_original": true
+      },
+      "testability": "Recreated byte-identical source and its implementation using Git hash-object; four focused local Python 3.13 unittest cases PASS for this file, zero failures. GitHub hosted CI separate.",
+      "fix_opportunity": "No current application defect established; preserve current test, consider richer malformed ZIP/content/metadata tests if independently warranted.",
+      "locked_fit": "Approved one-use source-bound Git release controller not substituted by this test; preserve backup and member/offline/Community/SQL boundaries.",
+      "review_method": "Original literal 1-based source read and interpreted by AI, not independently human certified."
+    },
+    {
+      "path": "tests/immutable-dist-manifest.test.py",
+      "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+      "line": 7,
+      "source_text": "  p=pathlib.Path(self.tmp.name)/'dist.zip'",
+      "classification": "fixture_or_control",
+      "behavior": "Form dist.zip fixture path.",
+      "quality": "Bounded unittest fixture/assertion for deterministic immutable ZIP artifact safety; exact expected behavior considered, not whole-app proof.",
+      "risk": "No demonstrated active privacy or runtime bug from this setup; synthetic local test only.",
+      "dead_or_obsolete": "Current reusable test source; no safe deletion proven.",
+      "duplication": "Fixture repetition intentional for separate failure isolation; no unintended cross-file duplicate proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_content_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "18be0586921fc572178df6929ecd7a98278dd710",
+        "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+        "path": "tests/immutable-dist-manifest.test.py",
+        "line": 7,
+        "exact_original": true
+      },
+      "testability": "Recreated byte-identical source and its implementation using Git hash-object; four focused local Python 3.13 unittest cases PASS for this file, zero failures. GitHub hosted CI separate.",
+      "fix_opportunity": "No current application defect established; preserve current test, consider richer malformed ZIP/content/metadata tests if independently warranted.",
+      "locked_fit": "Approved one-use source-bound Git release controller not substituted by this test; preserve backup and member/offline/Community/SQL boundaries.",
+      "review_method": "Original literal 1-based source read and interpreted by AI, not independently human certified."
+    },
+    {
+      "path": "tests/immutable-dist-manifest.test.py",
+      "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+      "line": 8,
+      "source_text": "  with zipfile.ZipFile(p,'w') as z:",
+      "classification": "fixture_or_control",
+      "behavior": "Open ZIP for fixture writing.",
+      "quality": "Bounded unittest fixture/assertion for deterministic immutable ZIP artifact safety; exact expected behavior considered, not whole-app proof.",
+      "risk": "Artifact-shape/determinism test is not an authorization or signature gate.",
+      "dead_or_obsolete": "Current reusable test source; no safe deletion proven.",
+      "duplication": "Fixture repetition intentional for separate failure isolation; no unintended cross-file duplicate proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_content_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "18be0586921fc572178df6929ecd7a98278dd710",
+        "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+        "path": "tests/immutable-dist-manifest.test.py",
+        "line": 8,
+        "exact_original": true
+      },
+      "testability": "Recreated byte-identical source and its implementation using Git hash-object; four focused local Python 3.13 unittest cases PASS for this file, zero failures. GitHub hosted CI separate.",
+      "fix_opportunity": "No current application defect established; preserve current test, consider richer malformed ZIP/content/metadata tests if independently warranted.",
+      "locked_fit": "Approved one-use source-bound Git release controller not substituted by this test; preserve backup and member/offline/Community/SQL boundaries.",
+      "review_method": "Original literal 1-based source read and interpreted by AI, not independently human certified."
+    },
+    {
+      "path": "tests/immutable-dist-manifest.test.py",
+      "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+      "line": 9,
+      "source_text": "   for name,data in items:z.writestr(name,data)",
+      "classification": "fixture_or_control",
+      "behavior": "Write provided entries, including potentially invalid names.",
+      "quality": "Bounded unittest fixture/assertion for deterministic immutable ZIP artifact safety; exact expected behavior considered, not whole-app proof.",
+      "risk": "Tests a specific security or integrity negative path locally; no live provider/SQL/Auth coverage.",
+      "dead_or_obsolete": "Current reusable test source; no safe deletion proven.",
+      "duplication": "Fixture repetition intentional for separate failure isolation; no unintended cross-file duplicate proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_content_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "18be0586921fc572178df6929ecd7a98278dd710",
+        "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+        "path": "tests/immutable-dist-manifest.test.py",
+        "line": 9,
+        "exact_original": true
+      },
+      "testability": "Recreated byte-identical source and its implementation using Git hash-object; four focused local Python 3.13 unittest cases PASS for this file, zero failures. GitHub hosted CI separate.",
+      "fix_opportunity": "No current application defect established; preserve current test, consider richer malformed ZIP/content/metadata tests if independently warranted.",
+      "locked_fit": "Approved one-use source-bound Git release controller not substituted by this test; preserve backup and member/offline/Community/SQL boundaries.",
+      "review_method": "Original literal 1-based source read and interpreted by AI, not independently human certified."
+    },
+    {
+      "path": "tests/immutable-dist-manifest.test.py",
+      "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+      "line": 10,
+      "source_text": "  return p",
+      "classification": "fixture_or_control",
+      "behavior": "Return ZIP fixture path.",
+      "quality": "Bounded unittest fixture/assertion for deterministic immutable ZIP artifact safety; exact expected behavior considered, not whole-app proof.",
+      "risk": "Artifact-shape/determinism test is not an authorization or signature gate.",
+      "dead_or_obsolete": "Current reusable test source; no safe deletion proven.",
+      "duplication": "Fixture repetition intentional for separate failure isolation; no unintended cross-file duplicate proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_content_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "18be0586921fc572178df6929ecd7a98278dd710",
+        "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+        "path": "tests/immutable-dist-manifest.test.py",
+        "line": 10,
+        "exact_original": true
+      },
+      "testability": "Recreated byte-identical source and its implementation using Git hash-object; four focused local Python 3.13 unittest cases PASS for this file, zero failures. GitHub hosted CI separate.",
+      "fix_opportunity": "No current application defect established; preserve current test, consider richer malformed ZIP/content/metadata tests if independently warranted.",
+      "locked_fit": "Approved one-use source-bound Git release controller not substituted by this test; preserve backup and member/offline/Community/SQL boundaries.",
+      "review_method": "Original literal 1-based source read and interpreted by AI, not independently human certified."
+    },
+    {
+      "path": "tests/immutable-dist-manifest.test.py",
+      "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+      "line": 11,
+      "source_text": " def test_extract(self):",
+      "classification": "declaration",
+      "behavior": "Define positive manifest extraction test.",
+      "quality": "Bounded unittest fixture/assertion for deterministic immutable ZIP artifact safety; exact expected behavior considered, not whole-app proof.",
+      "risk": "Artifact-shape/determinism test is not an authorization or signature gate.",
+      "dead_or_obsolete": "Current reusable test source; no safe deletion proven.",
+      "duplication": "Fixture repetition intentional for separate failure isolation; no unintended cross-file duplicate proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_content_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "18be0586921fc572178df6929ecd7a98278dd710",
+        "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+        "path": "tests/immutable-dist-manifest.test.py",
+        "line": 11,
+        "exact_original": true
+      },
+      "testability": "Recreated byte-identical source and its implementation using Git hash-object; four focused local Python 3.13 unittest cases PASS for this file, zero failures. GitHub hosted CI separate.",
+      "fix_opportunity": "No current application defect established; preserve current test, consider richer malformed ZIP/content/metadata tests if independently warranted.",
+      "locked_fit": "Approved one-use source-bound Git release controller not substituted by this test; preserve backup and member/offline/Community/SQL boundaries.",
+      "review_method": "Original literal 1-based source read and interpreted by AI, not independently human certified."
+    },
+    {
+      "path": "tests/immutable-dist-manifest.test.py",
+      "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+      "line": 12,
+      "source_text": "  p=self.make([('index.html','ok'),('assets/app.js','123')])",
+      "classification": "fixture_or_control",
+      "behavior": "Create ZIP with valid index.html and nested assets/app.js.",
+      "quality": "Bounded unittest fixture/assertion for deterministic immutable ZIP artifact safety; exact expected behavior considered, not whole-app proof.",
+      "risk": "Artifact-shape/determinism test is not an authorization or signature gate.",
+      "dead_or_obsolete": "Current reusable test source; no safe deletion proven.",
+      "duplication": "Fixture repetition intentional for separate failure isolation; no unintended cross-file duplicate proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_content_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "18be0586921fc572178df6929ecd7a98278dd710",
+        "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+        "path": "tests/immutable-dist-manifest.test.py",
+        "line": 12,
+        "exact_original": true
+      },
+      "testability": "Recreated byte-identical source and its implementation using Git hash-object; four focused local Python 3.13 unittest cases PASS for this file, zero failures. GitHub hosted CI separate.",
+      "fix_opportunity": "No current application defect established; preserve current test, consider richer malformed ZIP/content/metadata tests if independently warranted.",
+      "locked_fit": "Approved one-use source-bound Git release controller not substituted by this test; preserve backup and member/offline/Community/SQL boundaries.",
+      "review_method": "Original literal 1-based source read and interpreted by AI, not independently human certified."
+    },
+    {
+      "path": "tests/immutable-dist-manifest.test.py",
+      "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+      "line": 13,
+      "source_text": "  self.assertEqual(set(m.files_from_zip(p)),{'/index.html','/assets/app.js'})",
+      "classification": "assertion",
+      "behavior": "Assert extracted manifest contains slash-prefixed file keys.",
+      "quality": "Bounded unittest fixture/assertion for deterministic immutable ZIP artifact safety; exact expected behavior considered, not whole-app proof.",
+      "risk": "Artifact-shape/determinism test is not an authorization or signature gate.",
+      "dead_or_obsolete": "Current reusable test source; no safe deletion proven.",
+      "duplication": "Fixture repetition intentional for separate failure isolation; no unintended cross-file duplicate proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_content_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "18be0586921fc572178df6929ecd7a98278dd710",
+        "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+        "path": "tests/immutable-dist-manifest.test.py",
+        "line": 13,
+        "exact_original": true
+      },
+      "testability": "Recreated byte-identical source and its implementation using Git hash-object; four focused local Python 3.13 unittest cases PASS for this file, zero failures. GitHub hosted CI separate.",
+      "fix_opportunity": "No current application defect established; preserve current test, consider richer malformed ZIP/content/metadata tests if independently warranted.",
+      "locked_fit": "Approved one-use source-bound Git release controller not substituted by this test; preserve backup and member/offline/Community/SQL boundaries.",
+      "review_method": "Original literal 1-based source read and interpreted by AI, not independently human certified."
+    },
+    {
+      "path": "tests/immutable-dist-manifest.test.py",
+      "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+      "line": 14,
+      "source_text": " def test_traversal(self):",
+      "classification": "declaration",
+      "behavior": "Define traversal rejection test.",
+      "quality": "Bounded unittest fixture/assertion for deterministic immutable ZIP artifact safety; exact expected behavior considered, not whole-app proof.",
+      "risk": "Tests a specific security or integrity negative path locally; no live provider/SQL/Auth coverage.",
+      "dead_or_obsolete": "Current reusable test source; no safe deletion proven.",
+      "duplication": "Fixture repetition intentional for separate failure isolation; no unintended cross-file duplicate proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_content_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "18be0586921fc572178df6929ecd7a98278dd710",
+        "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+        "path": "tests/immutable-dist-manifest.test.py",
+        "line": 14,
+        "exact_original": true
+      },
+      "testability": "Recreated byte-identical source and its implementation using Git hash-object; four focused local Python 3.13 unittest cases PASS for this file, zero failures. GitHub hosted CI separate.",
+      "fix_opportunity": "No current application defect established; preserve current test, consider richer malformed ZIP/content/metadata tests if independently warranted.",
+      "locked_fit": "Approved one-use source-bound Git release controller not substituted by this test; preserve backup and member/offline/Community/SQL boundaries.",
+      "review_method": "Original literal 1-based source read and interpreted by AI, not independently human certified."
+    },
+    {
+      "path": "tests/immutable-dist-manifest.test.py",
+      "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+      "line": 15,
+      "source_text": "  p=self.make([('index.html','ok'),('../bad','bad')])",
+      "classification": "fixture_or_control",
+      "behavior": "Create ZIP with ../bad escape entry.",
+      "quality": "Bounded unittest fixture/assertion for deterministic immutable ZIP artifact safety; exact expected behavior considered, not whole-app proof.",
+      "risk": "Artifact-shape/determinism test is not an authorization or signature gate.",
+      "dead_or_obsolete": "Current reusable test source; no safe deletion proven.",
+      "duplication": "Fixture repetition intentional for separate failure isolation; no unintended cross-file duplicate proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_content_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "18be0586921fc572178df6929ecd7a98278dd710",
+        "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+        "path": "tests/immutable-dist-manifest.test.py",
+        "line": 15,
+        "exact_original": true
+      },
+      "testability": "Recreated byte-identical source and its implementation using Git hash-object; four focused local Python 3.13 unittest cases PASS for this file, zero failures. GitHub hosted CI separate.",
+      "fix_opportunity": "No current application defect established; preserve current test, consider richer malformed ZIP/content/metadata tests if independently warranted.",
+      "locked_fit": "Approved one-use source-bound Git release controller not substituted by this test; preserve backup and member/offline/Community/SQL boundaries.",
+      "review_method": "Original literal 1-based source read and interpreted by AI, not independently human certified."
+    },
+    {
+      "path": "tests/immutable-dist-manifest.test.py",
+      "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+      "line": 16,
+      "source_text": "  with self.assertRaises(ValueError):m.files_from_zip(p)",
+      "classification": "assertion",
+      "behavior": "Assert traversal throws ValueError.",
+      "quality": "Bounded unittest fixture/assertion for deterministic immutable ZIP artifact safety; exact expected behavior considered, not whole-app proof.",
+      "risk": "Tests a specific security or integrity negative path locally; no live provider/SQL/Auth coverage.",
+      "dead_or_obsolete": "Current reusable test source; no safe deletion proven.",
+      "duplication": "Fixture repetition intentional for separate failure isolation; no unintended cross-file duplicate proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_content_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "18be0586921fc572178df6929ecd7a98278dd710",
+        "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+        "path": "tests/immutable-dist-manifest.test.py",
+        "line": 16,
+        "exact_original": true
+      },
+      "testability": "Recreated byte-identical source and its implementation using Git hash-object; four focused local Python 3.13 unittest cases PASS for this file, zero failures. GitHub hosted CI separate.",
+      "fix_opportunity": "No current application defect established; preserve current test, consider richer malformed ZIP/content/metadata tests if independently warranted.",
+      "locked_fit": "Approved one-use source-bound Git release controller not substituted by this test; preserve backup and member/offline/Community/SQL boundaries.",
+      "review_method": "Original literal 1-based source read and interpreted by AI, not independently human certified."
+    },
+    {
+      "path": "tests/immutable-dist-manifest.test.py",
+      "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+      "line": 17,
+      "source_text": " def test_duplicate(self):",
+      "classification": "declaration",
+      "behavior": "Define duplicate entry test.",
+      "quality": "Bounded unittest fixture/assertion for deterministic immutable ZIP artifact safety; exact expected behavior considered, not whole-app proof.",
+      "risk": "Tests a specific security or integrity negative path locally; no live provider/SQL/Auth coverage.",
+      "dead_or_obsolete": "Current reusable test source; no safe deletion proven.",
+      "duplication": "Fixture repetition intentional for separate failure isolation; no unintended cross-file duplicate proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_content_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "18be0586921fc572178df6929ecd7a98278dd710",
+        "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+        "path": "tests/immutable-dist-manifest.test.py",
+        "line": 17,
+        "exact_original": true
+      },
+      "testability": "Recreated byte-identical source and its implementation using Git hash-object; four focused local Python 3.13 unittest cases PASS for this file, zero failures. GitHub hosted CI separate.",
+      "fix_opportunity": "No current application defect established; preserve current test, consider richer malformed ZIP/content/metadata tests if independently warranted.",
+      "locked_fit": "Approved one-use source-bound Git release controller not substituted by this test; preserve backup and member/offline/Community/SQL boundaries.",
+      "review_method": "Original literal 1-based source read and interpreted by AI, not independently human certified."
+    },
+    {
+      "path": "tests/immutable-dist-manifest.test.py",
+      "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+      "line": 18,
+      "source_text": "  p=self.make([('index.html','ok'),('index.html','other')])",
+      "classification": "fixture_or_control",
+      "behavior": "Write two index.html entries with conflicting data.",
+      "quality": "Bounded unittest fixture/assertion for deterministic immutable ZIP artifact safety; exact expected behavior considered, not whole-app proof.",
+      "risk": "No demonstrated active privacy or runtime bug from this setup; synthetic local test only.",
+      "dead_or_obsolete": "Current reusable test source; no safe deletion proven.",
+      "duplication": "Fixture repetition intentional for separate failure isolation; no unintended cross-file duplicate proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_content_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "18be0586921fc572178df6929ecd7a98278dd710",
+        "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+        "path": "tests/immutable-dist-manifest.test.py",
+        "line": 18,
+        "exact_original": true
+      },
+      "testability": "Recreated byte-identical source and its implementation using Git hash-object; four focused local Python 3.13 unittest cases PASS for this file, zero failures. GitHub hosted CI separate.",
+      "fix_opportunity": "No current application defect established; preserve current test, consider richer malformed ZIP/content/metadata tests if independently warranted.",
+      "locked_fit": "Approved one-use source-bound Git release controller not substituted by this test; preserve backup and member/offline/Community/SQL boundaries.",
+      "review_method": "Original literal 1-based source read and interpreted by AI, not independently human certified."
+    },
+    {
+      "path": "tests/immutable-dist-manifest.test.py",
+      "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+      "line": 19,
+      "source_text": "  with self.assertRaises(ValueError):m.files_from_zip(p)",
+      "classification": "assertion",
+      "behavior": "Assert duplicate manifests raise ValueError.",
+      "quality": "Bounded unittest fixture/assertion for deterministic immutable ZIP artifact safety; exact expected behavior considered, not whole-app proof.",
+      "risk": "Tests a specific security or integrity negative path locally; no live provider/SQL/Auth coverage.",
+      "dead_or_obsolete": "Current reusable test source; no safe deletion proven.",
+      "duplication": "Fixture repetition intentional for separate failure isolation; no unintended cross-file duplicate proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_content_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "18be0586921fc572178df6929ecd7a98278dd710",
+        "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+        "path": "tests/immutable-dist-manifest.test.py",
+        "line": 19,
+        "exact_original": true
+      },
+      "testability": "Recreated byte-identical source and its implementation using Git hash-object; four focused local Python 3.13 unittest cases PASS for this file, zero failures. GitHub hosted CI separate.",
+      "fix_opportunity": "No current application defect established; preserve current test, consider richer malformed ZIP/content/metadata tests if independently warranted.",
+      "locked_fit": "Approved one-use source-bound Git release controller not substituted by this test; preserve backup and member/offline/Community/SQL boundaries.",
+      "review_method": "Original literal 1-based source read and interpreted by AI, not independently human certified."
+    },
+    {
+      "path": "tests/immutable-dist-manifest.test.py",
+      "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+      "line": 20,
+      "source_text": " def test_missing_index(self):",
+      "classification": "declaration",
+      "behavior": "Define missing-index test.",
+      "quality": "Bounded unittest fixture/assertion for deterministic immutable ZIP artifact safety; exact expected behavior considered, not whole-app proof.",
+      "risk": "Tests a specific security or integrity negative path locally; no live provider/SQL/Auth coverage.",
+      "dead_or_obsolete": "Current reusable test source; no safe deletion proven.",
+      "duplication": "Fixture repetition intentional for separate failure isolation; no unintended cross-file duplicate proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_content_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "18be0586921fc572178df6929ecd7a98278dd710",
+        "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+        "path": "tests/immutable-dist-manifest.test.py",
+        "line": 20,
+        "exact_original": true
+      },
+      "testability": "Recreated byte-identical source and its implementation using Git hash-object; four focused local Python 3.13 unittest cases PASS for this file, zero failures. GitHub hosted CI separate.",
+      "fix_opportunity": "No current application defect established; preserve current test, consider richer malformed ZIP/content/metadata tests if independently warranted.",
+      "locked_fit": "Approved one-use source-bound Git release controller not substituted by this test; preserve backup and member/offline/Community/SQL boundaries.",
+      "review_method": "Original literal 1-based source read and interpreted by AI, not independently human certified."
+    },
+    {
+      "path": "tests/immutable-dist-manifest.test.py",
+      "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+      "line": 21,
+      "source_text": "  p=self.make([('x.txt','x')])",
+      "classification": "fixture_or_control",
+      "behavior": "Create ZIP lacking index.html.",
+      "quality": "Bounded unittest fixture/assertion for deterministic immutable ZIP artifact safety; exact expected behavior considered, not whole-app proof.",
+      "risk": "Artifact-shape/determinism test is not an authorization or signature gate.",
+      "dead_or_obsolete": "Current reusable test source; no safe deletion proven.",
+      "duplication": "Fixture repetition intentional for separate failure isolation; no unintended cross-file duplicate proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_content_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "18be0586921fc572178df6929ecd7a98278dd710",
+        "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+        "path": "tests/immutable-dist-manifest.test.py",
+        "line": 21,
+        "exact_original": true
+      },
+      "testability": "Recreated byte-identical source and its implementation using Git hash-object; four focused local Python 3.13 unittest cases PASS for this file, zero failures. GitHub hosted CI separate.",
+      "fix_opportunity": "No current application defect established; preserve current test, consider richer malformed ZIP/content/metadata tests if independently warranted.",
+      "locked_fit": "Approved one-use source-bound Git release controller not substituted by this test; preserve backup and member/offline/Community/SQL boundaries.",
+      "review_method": "Original literal 1-based source read and interpreted by AI, not independently human certified."
+    },
+    {
+      "path": "tests/immutable-dist-manifest.test.py",
+      "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+      "line": 22,
+      "source_text": "  with self.assertRaises(ValueError):m.files_from_zip(p)",
+      "classification": "assertion",
+      "behavior": "Assert missing index throws ValueError.",
+      "quality": "Bounded unittest fixture/assertion for deterministic immutable ZIP artifact safety; exact expected behavior considered, not whole-app proof.",
+      "risk": "Tests a specific security or integrity negative path locally; no live provider/SQL/Auth coverage.",
+      "dead_or_obsolete": "Current reusable test source; no safe deletion proven.",
+      "duplication": "Fixture repetition intentional for separate failure isolation; no unintended cross-file duplicate proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_content_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "18be0586921fc572178df6929ecd7a98278dd710",
+        "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+        "path": "tests/immutable-dist-manifest.test.py",
+        "line": 22,
+        "exact_original": true
+      },
+      "testability": "Recreated byte-identical source and its implementation using Git hash-object; four focused local Python 3.13 unittest cases PASS for this file, zero failures. GitHub hosted CI separate.",
+      "fix_opportunity": "No current application defect established; preserve current test, consider richer malformed ZIP/content/metadata tests if independently warranted.",
+      "locked_fit": "Approved one-use source-bound Git release controller not substituted by this test; preserve backup and member/offline/Community/SQL boundaries.",
+      "review_method": "Original literal 1-based source read and interpreted by AI, not independently human certified."
+    },
+    {
+      "path": "tests/immutable-dist-manifest.test.py",
+      "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+      "line": 23,
+      "source_text": "if __name__=='__main__':unittest.main()",
+      "classification": "fixture_or_control",
+      "behavior": "Invoke unittest runner only when executed directly.",
+      "quality": "Bounded unittest fixture/assertion for deterministic immutable ZIP artifact safety; exact expected behavior considered, not whole-app proof.",
+      "risk": "No demonstrated active privacy or runtime bug from this setup; synthetic local test only.",
+      "dead_or_obsolete": "Current reusable test source; no safe deletion proven.",
+      "duplication": "Fixture repetition intentional for separate failure isolation; no unintended cross-file duplicate proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_content_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "18be0586921fc572178df6929ecd7a98278dd710",
+        "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+        "path": "tests/immutable-dist-manifest.test.py",
+        "line": 23,
+        "exact_original": true
+      },
+      "testability": "Recreated byte-identical source and its implementation using Git hash-object; four focused local Python 3.13 unittest cases PASS for this file, zero failures. GitHub hosted CI separate.",
+      "fix_opportunity": "No current application defect established; preserve current test, consider richer malformed ZIP/content/metadata tests if independently warranted.",
+      "locked_fit": "Approved one-use source-bound Git release controller not substituted by this test; preserve backup and member/offline/Community/SQL boundaries.",
+      "review_method": "Original literal 1-based source read and interpreted by AI, not independently human certified."
+    }
+  ],
+  "trace": {
+    "implementation_path": "scripts/release/immutable-dist-to-manifest.py",
+    "implementation_blob": "08ad9b80e30efe87f77700e81fef878f99d71fe3"
+  },
+  "local_test": {
+    "python": "3.13",
+    "cases_passed": 4,
+    "failed": 0,
+    "run_location": "Isolated temporary reconstruction; not repository GitHub CI",
+    "exact_git_blob_verified": true,
+    "duplicate_zip_warning_expected": true
+  },
+  "changes": {
+    "runtime_code": false,
+    "provider": false,
+    "deployment": false,
+    "ready": false
+  },
+  "credit": {
+    "new_postpin": 23,
+    "new_frozen": 0,
+    "new_pinned": 0,
+    "overlap": 0
+  },
+  "completion": "NOT_COMPLETE_GLOBAL_AUDIT"
+}
