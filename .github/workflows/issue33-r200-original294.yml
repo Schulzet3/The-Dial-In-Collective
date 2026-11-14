@@ -1,0 +1,53 @@
+name: DIC Issue33 R200 selected current Seeds original294
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r200-original294.yml
+      - scripts/audit/issue33-r200-original294-check.mjs
+      - tests/coffee-issue33-r200-original294.test.mjs
+      - docs/workstreams/ops-issue33-r200-294-20261114.md
+      - src/server/coffee-page-metadata.mjs
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r200-original294.yml
+      - scripts/audit/issue33-r200-original294-check.mjs
+      - tests/coffee-issue33-r200-original294.test.mjs
+      - src/server/coffee-page-metadata.mjs
+permissions:
+  contents: read
+jobs:
+  selected:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Focused selected product positive and hostile identity regressions
+        run: node --test tests/coffee-issue33-r200-original294.test.mjs
+      - name: Guarded public HTTPS current exact original product and real parser
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '294'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r200
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Verify exact selected HTML H1 parser and original immutable register
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r200
+          DIC_R200_EXACT_CHECKOUT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/audit/issue33-r200-original294-check.mjs
+      - name: Retain bounded raw selected public evidence for independent review
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r200-original294-selected-source
+          path: /tmp/dic33-r200/
+          retention-days: 1
+          if-no-files-found: warn
