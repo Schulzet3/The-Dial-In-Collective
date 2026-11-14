@@ -1,0 +1,22 @@
+name: DIC Drive OAuth courier (manual proof only)
+# STAGED TEMPLATE; NOT INSTALLED ON main. No database export or real backup upload.
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  prove-google-drive:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Confirm source-only OAuth tests
+        run: node --test tests/drive-courier*.test.mjs tests/verify-drive-oauth.test.mjs
+      - name: Verify authenticated folder write in actual GitHub runner
+        env:
+          DIC_DRIVE_CLIENT_ID: ${{ secrets.DIC_DRIVE_CLIENT_ID }}
+          DIC_DRIVE_CLIENT_SECRET: ${{ secrets.DIC_DRIVE_CLIENT_SECRET }}
+          DIC_DRIVE_REFRESH_TOKEN: ${{ secrets.DIC_DRIVE_REFRESH_TOKEN }}
+        run: node scripts/backups/drive-oauth-smoke.mjs

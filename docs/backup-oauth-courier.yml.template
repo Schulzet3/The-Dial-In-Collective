@@ -1,0 +1,47 @@
+name: DIC encrypted offsite Drive delivery (OAuth)
+
+# STAGED TEMPLATE ONLY. Do not install this workflow until local OAuth Picker
+# permission proof AND GitHub-runner disposable upload smoke tests both pass.
+# Workflow-run payload is untrusted metadata; the Node courier independently
+# verifies event, source repository, branch, workflow path, artifact SHA256.
+on:
+  workflow_run:
+    workflows:
+      - DIC encrypted database backup
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: dic-encrypted-drive-courier-${{ github.event.workflow_run.id }}
+  cancel-in-progress: false
+
+jobs:
+  drive-offsite:
+    if: >-
+      ${{ github.event.workflow_run.conclusion == 'success' &&
+          github.event.workflow_run.head_branch == 'main' &&
+          github.event.workflow_run.head_repository.full_name == github.repository &&
+          (github.event.workflow_run.event == 'schedule' ||
+           github.event.workflow_run.event == 'workflow_dispatch') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Verify self-contained offsite courier unit tests
+        run: node --test tests/*.test.mjs
+      - name: Copy exact completed encrypted GitHub artifact to private Google Drive
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DIC_SOURCE_RUN_ID: ${{ github.event.workflow_run.id }}
+          DIC_DRIVE_CUTOVER_UTC: ${{ vars.DIC_DRIVE_CUTOVER_UTC }}
+          DIC_DRIVE_CLIENT_ID: ${{ secrets.DIC_DRIVE_CLIENT_ID }}
+          DIC_DRIVE_CLIENT_SECRET: ${{ secrets.DIC_DRIVE_CLIENT_SECRET }}
+          DIC_DRIVE_REFRESH_TOKEN: ${{ secrets.DIC_DRIVE_REFRESH_TOKEN }}
+          DIC_DRIVE_FOLDER_ID: 1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf
+        run: node scripts/backups/drive-courier.mjs
