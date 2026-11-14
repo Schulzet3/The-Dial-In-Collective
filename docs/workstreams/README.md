@@ -1,6 +1,6 @@
 # Scoped GitHub Work Journals
 
-**Live status rule (November 13 update):** Entries labeled READY/NOT DEPLOYED below are dated evidence snapshots; use [CURRENT_STATUS](../CURRENT_STATUS.md) and [RELEASE_QUEUE](../RELEASE_QUEUE.json) for current operational state. Owner READY15 production verified at Git `ad836aae` / Netlify `6af76f7c` READY/current. #504 draft historical PRs are NOT integrated evidence until individually tested/merged; #267 V1 drafts must NOT count as V2 review.
+**Live status rule (November 14 update):** Entries labeled READY/NOT DEPLOYED below are dated evidence snapshots; use [CURRENT_STATUS](../CURRENT_STATUS.md) and [RELEASE_QUEUE](../RELEASE_QUEUE.json) for current operational state. Owner-approved November 14 READY6 release was verified at Git `5359d78c` / Netlify `6af885b8` READY/current as of that publication; the prior November 13 READY15 release is a separate historical receipt. #504 draft historical PRs are NOT integrated evidence until individually tested/merged; #267 V1 drafts must NOT count as V2 review.
 
 
 - [Issue #33 R169 original603 #233 selected intrinsic sensory arc READY development only](ops-issue33-r169-233-20261113.md) — merged-source official raw HTML, independent hashes and CI; full603 OPEN
@@ -83,4 +83,4 @@ After the mandatory [PREFLIGHT](../ai/PREFLIGHT.md), the central [active work ch
 - [Netlify rolling exhaustive audit and source-pinning remediation: Issue #508](issue-508.md)
 
 - [Automatic READY-batch source-bound CI journal](release-ready-batch.md) — explicitly recognized same-commit CI work journal.
-- [Issue #2389 universal URL / directory RETIREMENT IN PROGRESS](issue-2389.md) — development source READY but not published. Hosted legacy SQL/Edge remain LEGACY ACTIVE; old migrations and records HISTORICAL / ARCHIVED. See [#509 live dependency evidence](../audits/issue509-legacy-roaster-retirement-status-2026-11-13.json).
+- [Issue #2389 universal URL / legacy directory DEPLOYED / COMPLETED (November 13)](issue-2389.md) — owner READY15 release verified; old directory/aliases retired with 4+4 historical records archived, legacy preview Edge tombstone HTTP 410 retained. Individual URL/source accuracy remains OPEN under #33. See [#2389 verified publication evidence](https://github.com/Schulzet3/The-Dial-In-Collective/issues/2389); do not revive the allowlist, delete history, or remove the callable tombstone.
