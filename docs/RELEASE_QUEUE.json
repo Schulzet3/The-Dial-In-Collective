@@ -14380,6 +14380,27 @@
       ],
       "notes": "Low-severity latent input validation, not a proven HTTP security exploit, affected data or permission bypass. Source-only no backfill, preserve all historical migrations, archive/member/community state, release boundary and #96/#33 ownership.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-33-r201-original299-post-ready-anonymous-grower",
+      "issue": 33,
+      "pr": 2695,
+      "title": "Selected original603 #299 anonymous-grower correction after frozen R198 READY; development-only exclusion",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": "ad7a7ffb0f94b4d706774867dcb9eb402b6bef26",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "owner_source": "Autonomous #33 directly evidenced original603 current selected official source, later development change; current owner 2026-11-14 Publish only the original four READY plus independently required R191/R192, not post-R198 R201.",
+      "tests": [
+        "Source merged ad7a7ffb0f94b4d706774867dcb9eb402b6bef26 with six positive/negative #299 selected official-source regressions; later-than-R198 exact source, IN_PROGRESS pending independent READY and source isolation; not accepted for this batch."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Newer merged original603 #299 metadata change follows the frozen independently READY R198 source; excluded from current owner one-use publication by pinning R198 exact metadata blob, #33 remains open."
+      ],
+      "notes": "Explicit unready owner for the sole later metadata edit ad7a7; avoid laundering new development source in current READY candidate. Preserve development source and tests. No publish grant or provider mutation.",
+      "production_deployed": false
     }
   ],
   "history": [
@@ -16771,6 +16792,15 @@
       "source_sha": "4854b80adcc661c84adbe48da736e744f603f66d",
       "production_deployed": false,
       "evidence": "PR head d0143628cc798742cbe4155b812861c6ffc91ba3 five GitHub exact-source checks SUCCESS: approval 43570527949, Node/lint/build 43570527804, cloud/mobile 43570527874, isolated SQL 43570527866; selected current #277-279 official source 43570527926 SUCCESS, source security 43570527922 SUCCESS. Exact merged source/test/checker four Git blobs identical at 4854b80adcc661c84adbe48da736e744f603f66d; merged Node 43570881989, cloud/mobile 43570881986, approval 43570882135, selected actual official 43570881958 SUCCESS. Original603 frozen SKIPPED, parent full review OPEN."
+    },
+    {
+      "date": "2026-11-14",
+      "issue": 33,
+      "item_id": "DIC-Q-33-r201-original299-post-ready-anonymous-grower",
+      "state": "IN_PROGRESS",
+      "source_sha": "ad7a7ffb0f94b4d706774867dcb9eb402b6bef26",
+      "production_deployed": false,
+      "evidence": "R201 metadata later than frozen R198; exact source blob deferred, pinned candidate excludes while live development retains it."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
