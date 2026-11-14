@@ -12,7 +12,7 @@ const reference={innerHTML:''};
 const sheet={querySelector(selector){
  if(selector==='#shot')return form;
  if(selector==='#log-reference')return reference;
- const match=selector.match(/^\\[name=(\\w+)\\]$/);
+ const match=selector.match(/^\[name=(\w+)\]$/);
  return match?form?.elements[match[1]]:null;
 }};
 globalThis.document={querySelector:s=>s==='#sheet'?sheet:{},
