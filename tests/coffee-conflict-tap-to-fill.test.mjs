@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {
- coffeeUrlPreviewMarkup,coffeeConflictReviewOptions,applyCoffeeConflictChoice,
+ coffeeUrlPreviewMarkup,applyCoffeeConflictChoice,
  markCoffeeConflictChoices,applyCoffeeUrlFields,applyCoffeeRoastVariant,elevationWithDefaultMeters
 } from '../site/cloud/coffee-url-autofill.js';
 
