@@ -1,0 +1,1750 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "S2-DISJOINT-P433-139-196-LIVE-20261114-R11D",
+  "reviewer": "DIRECT_AI_LITERALLY_NUMBERED_NOT_HUMAN",
+  "preflight": {
+    "development_sha": "89f27d453f7849f816bc64dfa673063506e0c38e",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d"
+  },
+  "source": {
+    "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "pinned_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+    "path": "tests/ux-refinements.test.mjs",
+    "pinned_blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+    "pinned_total_physical_lines": 196,
+    "from": 139,
+    "to": 196,
+    "count": 58,
+    "current_commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+    "current_blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1"
+  },
+  "prior_source_bound_receipts": [
+    "S2-DISJOINT-P433-001-043-LIVE-20261114-R11.json",
+    "S2-DISJOINT-P433-044-062-LIVE-20261114-R11B.json",
+    "S2-DISJOINT-P433-063-138-LIVE-20261114-R11C.json"
+  ],
+  "direct_numbered_lines": [
+    {
+      "line": 139,
+      "source_text": "test('single grind adjustment shows the actual arrow and unchanged variables',()=>{",
+      "inspection_classification": "test-declaration",
+      "behavior": "Starts single-grind adjustment arrow and constants test",
+      "quality": "Exercises one deliberate variable change",
+      "risk_security_privacy_performance": "Does not validate real shot session event",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 139,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 148,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No repair required",
+      "locked_decision_fit": "Bounded source test aligns with Single-variable Next Shot Recommendation; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 140,
+      "source_text": " const shot={doseG:18,yieldG:40,grindSetting:2.5,tempC:93};",
+      "inspection_classification": "fixture",
+      "behavior": "Defines existing shot with 18 g, 40 g yield, 2.5 grind and 93 Celsius",
+      "quality": "Four measurements support comparison",
+      "risk_security_privacy_performance": "Fixture lacks shot identifier and date, so not actual persistence proof",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 140,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 149,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Single-variable Next Shot Recommendation; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 141,
+      "source_text": " const advice={title:'Try a little finer',text:'Try grind 2.4. Keep dose and yield similar, then taste again.',next:{grindSetting:2.4,yieldCenter:40}};",
+      "inspection_classification": "fixture",
+      "behavior": "Supplies finer grind advice 2.4 while yield center stays 40",
+      "quality": "Controlled one-variable change with message",
+      "risk_security_privacy_performance": "Text and structured next suggestion could diverge in other inputs",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 141,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 150,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "Cross-check with engine source in future tests",
+      "locked_decision_fit": "Bounded source test aligns with Single-variable Next Shot Recommendation; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 142,
+      "source_text": " assert.equal(nextShotTitle(advice),'Try grinding slightly finer');",
+      "inspection_classification": "assertion",
+      "behavior": "Requires user-facing heading Try grinding slightly finer",
+      "quality": "Verifies canonical finer wording",
+      "risk_security_privacy_performance": "Does not check multilingual copy",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 142,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 151,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Single-variable Next Shot Recommendation; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 143,
+      "source_text": " assert.deepEqual(nextShotAdjustment(advice,shot,true,'C'),{label:'Grind',before:'2.5',after:'2.4',unit:'',keep:'dose, yield, and temperature'});",
+      "inspection_classification": "deep-assertion",
+      "behavior": "Checks only grind before/after, no unit and unchanged dose yield temperature",
+      "quality": "Exact equality prevents second hidden variable instruction",
+      "risk_security_privacy_performance": "Does not cover grind precision on other machines",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 143,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 152,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Single-variable Next Shot Recommendation; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 144,
+      "source_text": " const html=nextShotGuidance(advice,shot,true,'C');",
+      "inspection_classification": "function-call",
+      "behavior": "Renders next-shot guidance from advised grind and shot",
+      "quality": "Uses actual UI formatter",
+      "risk_security_privacy_performance": "Not browser rendering",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 144,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 153,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Single-variable Next Shot Recommendation; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 145,
+      "source_text": " assert.match(html,/2\\.5<\\/span>/);",
+      "inspection_classification": "assertion",
+      "behavior": "Requires former grind 2.5 followed by closing span",
+      "quality": "Checks visible prior value",
+      "risk_security_privacy_performance": "Regex does not guarantee position in arrow widget",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 145,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 154,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "Optionally assert accessible structure in browser",
+      "locked_decision_fit": "Bounded source test aligns with Single-variable Next Shot Recommendation; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 146,
+      "source_text": " assert.match(html,/2\\.4<\\/span>/);",
+      "inspection_classification": "assertion",
+      "behavior": "Requires proposed grind 2.4 followed by closing span",
+      "quality": "Checks visible new value",
+      "risk_security_privacy_performance": "Regex may match unrelated span",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 146,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 155,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Single-variable Next Shot Recommendation; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 147,
+      "source_text": " assert.match(html,/next-shot-arrow/);",
+      "inspection_classification": "assertion",
+      "behavior": "Requires next-shot-arrow token in resulting markup",
+      "quality": "Checks graphical comparison marker",
+      "risk_security_privacy_performance": "No visual arrow or accessibility relationship verified",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 147,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 156,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "Browser visual test separate",
+      "locked_decision_fit": "Bounded source test aligns with Single-variable Next Shot Recommendation; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 148,
+      "source_text": " assert.match(html,/Keep dose, yield, and temperature unchanged\\./);",
+      "inspection_classification": "assertion",
+      "behavior": "Requires Keep dose yield and temperature unchanged sentence",
+      "quality": "Makes single-variable advice explicit",
+      "risk_security_privacy_performance": "No guarantee underlying engine truly froze other fields",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 148,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 157,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Single-variable Next Shot Recommendation; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 149,
+      "source_text": " assert.match(nextShotGuidance(advice,{...shot,tempC:null},true,'C'),/Keep dose and yield unchanged\\./);",
+      "inspection_classification": "assertion",
+      "behavior": "With temperature unrecorded require keep only dose and yield unchanged",
+      "quality": "Prevents inventing unmeasured temperature",
+      "risk_security_privacy_performance": "Does not cover stale nonnull temperature values",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 149,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 158,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Single-variable Next Shot Recommendation; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 150,
+      "source_text": " assert.doesNotMatch(html,/One adjustment at a time|Time.*unchanged/);",
+      "inspection_classification": "negative-assertion",
+      "behavior": "Rejects superseded phrase and false instruction to keep time unchanged",
+      "quality": "Supports change-one-variable learning without fixing derived time",
+      "risk_security_privacy_performance": "Regex may miss paraphrases, bounded copy test only",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 150,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 159,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Single-variable Next Shot Recommendation; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 151,
+      "source_text": "});",
+      "inspection_classification": "delimiter",
+      "behavior": "Ends grind-adjustment guidance test",
+      "quality": "Syntactic close",
+      "risk_security_privacy_performance": "No data or state behavior",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 151,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 160,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "None",
+      "locked_decision_fit": "Bounded source test aligns with Single-variable Next Shot Recommendation; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 152,
+      "source_text": "test('yield and temperature arrows follow measurement units',()=>{",
+      "inspection_classification": "test-declaration",
+      "behavior": "Starts unit-aware yield and temperature arrows test",
+      "quality": "Checks both gram and Fahrenheit display paths",
+      "risk_security_privacy_performance": "No Celsius display cross-check in this test",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 152,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 161,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "Another test can cover Celsius",
+      "locked_decision_fit": "Bounded source test aligns with Single-variable Next Shot Recommendation; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 153,
+      "source_text": " const shot={doseG:18,yieldG:40,grindSetting:2.5,tempC:93};",
+      "inspection_classification": "fixture",
+      "behavior": "Defines 18g dose 40g output 2.5 grind 93C",
+      "quality": "Baseline for two branch computations",
+      "risk_security_privacy_performance": "No real machine or measurement uncertainty",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 153,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 162,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Single-variable Next Shot Recommendation; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 154,
+      "source_text": " const yieldHtml=nextShotGuidance({text:'A longer yield',next:{grindSetting:2.5,yieldCenter:42}},shot,true,'C');",
+      "inspection_classification": "function-call",
+      "behavior": "Produces yield guidance for recommended 42g and unchanged grind",
+      "quality": "Exercises yield-only branch",
+      "risk_security_privacy_performance": "No user confirmation or persistence",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 154,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 163,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Single-variable Next Shot Recommendation; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 155,
+      "source_text": " assert.match(yieldHtml,/40\\.0.*42\\.0/);",
+      "inspection_classification": "assertion",
+      "behavior": "Requires 40.0 before 42.0 in output markup",
+      "quality": "Checks one-decimal gram formatting and order",
+      "risk_security_privacy_performance": "Greedy regex allows intermediary markup",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 155,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 164,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Single-variable Next Shot Recommendation; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 156,
+      "source_text": " assert.match(yieldHtml,/next-shot-unit\">g/);",
+      "inspection_classification": "assertion",
+      "behavior": "Requires unit g in next-shot-unit element",
+      "quality": "Enforces correct yield unit",
+      "risk_security_privacy_performance": "Static match does not prove icon sizing",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 156,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 165,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Single-variable Next Shot Recommendation; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 157,
+      "source_text": " assert.match(yieldHtml,/Keep dose, grind, and temperature unchanged/);",
+      "inspection_classification": "assertion",
+      "behavior": "Requires dose grind and temperature remain unchanged for yield adjustment",
+      "quality": "Enforces single-variable recommendation copy",
+      "risk_security_privacy_performance": "Does not inspect underlying numerical values beyond output",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 157,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 166,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Single-variable Next Shot Recommendation; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 158,
+      "source_text": " const tempHtml=nextShotGuidance({text:'Cooler',next:{grindSetting:2.5,yieldCenter:40,tempC:92}},shot,true,'F');",
+      "inspection_classification": "function-call",
+      "behavior": "Produces cooler temperature guidance 92C with Fahrenheit presentation",
+      "quality": "Exercises Celsius-to-Fahrenheit conversion path",
+      "risk_security_privacy_performance": "No actual heater or temperature sensor check",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 158,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 167,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Single-variable Next Shot Recommendation; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 159,
+      "source_text": " assert.match(tempHtml,/199.*198/);",
+      "inspection_classification": "assertion",
+      "behavior": "Requires Fahrenheit rounded 199 to 198 transition",
+      "quality": "Checks expected conversion direction",
+      "risk_security_privacy_performance": "Could allow additional numbers between loose regex endpoints",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 159,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 168,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No immediate repair",
+      "locked_decision_fit": "Bounded source test aligns with Single-variable Next Shot Recommendation; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 160,
+      "source_text": " assert.match(tempHtml,/°F/);",
+      "inspection_classification": "assertion",
+      "behavior": "Requires Fahrenheit symbol in formatted guidance",
+      "quality": "Disambiguates temperature units",
+      "risk_security_privacy_performance": "Does not check accessible announcement",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 160,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 169,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Single-variable Next Shot Recommendation; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 161,
+      "source_text": " assert.match(tempHtml,/Keep dose, grind, and yield unchanged/);",
+      "inspection_classification": "assertion",
+      "behavior": "Requires dose grind and yield unchanged for temperature adjustment",
+      "quality": "Protects isolated temperature change advice",
+      "risk_security_privacy_performance": "Does not prove physical temperature control",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 161,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 170,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Single-variable Next Shot Recommendation; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 162,
+      "source_text": "});",
+      "inspection_classification": "delimiter",
+      "behavior": "Closes unit-aware arrows test",
+      "quality": "Clear test boundary",
+      "risk_security_privacy_performance": "No behavior",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 162,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 171,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "None",
+      "locked_decision_fit": "Bounded source test aligns with Single-variable Next Shot Recommendation; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 163,
+      "source_text": "test('multi-change, unknown, prep, and successful shots never invent an arrow',()=>{",
+      "inspection_classification": "test-declaration",
+      "behavior": "Begins negative test suppressing arrows for multi-change unknown and successful advice",
+      "quality": "Prevents misleading single-variable visual",
+      "risk_security_privacy_performance": "Does not inspect every recipe-profile family",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 163,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 172,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Suppress misleading guidance for multi-variable and unmeasured inputs; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 164,
+      "source_text": " const shot={doseG:18,yieldG:40,grindSetting:2.5,tempC:null};",
+      "inspection_classification": "fixture",
+      "behavior": "Shot has dose yield grind but unknown temperature null",
+      "quality": "Models unobserved baseline temperature",
+      "risk_security_privacy_performance": "No invalid negative temperature input",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 164,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 173,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Suppress misleading guidance for multi-variable and unmeasured inputs; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 165,
+      "source_text": " const mixed={text:'Try a different recipe.',next:{grindSetting:2.4,yieldCenter:42}};",
+      "inspection_classification": "fixture",
+      "behavior": "Mixed advice changes grind 2.4 and yield 42 simultaneously",
+      "quality": "Creates deliberate two-variable conflict",
+      "risk_security_privacy_performance": "No feedback uncertainty metadata",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 165,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 174,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Suppress misleading guidance for multi-variable and unmeasured inputs; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 166,
+      "source_text": " assert.equal(nextShotAdjustment(mixed,shot),null);",
+      "inspection_classification": "assertion",
+      "behavior": "Requires no single-change adjustment object for mixed advice",
+      "quality": "Strong null expectation",
+      "risk_security_privacy_performance": "No runtime UI assertion yet",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 166,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 175,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Suppress misleading guidance for multi-variable and unmeasured inputs; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 167,
+      "source_text": " assert.doesNotMatch(nextShotGuidance(mixed,shot),/next-shot-arrow/);",
+      "inspection_classification": "negative-assertion",
+      "behavior": "Requires absence of arrow on mixed guidance",
+      "quality": "Prevents false one-change illustration",
+      "risk_security_privacy_performance": "Does not inspect text explanation accuracy",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 167,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 176,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Suppress misleading guidance for multi-variable and unmeasured inputs; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 168,
+      "source_text": " assert.match(nextShotGuidance(mixed,shot),/Try a different recipe/);",
+      "inspection_classification": "assertion",
+      "behavior": "Requires original Try a different recipe text retained",
+      "quality": "Keeps explanation when arrow suppressed",
+      "risk_security_privacy_performance": "Does not prove translation",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 168,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 177,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Suppress misleading guidance for multi-variable and unmeasured inputs; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 169,
+      "source_text": " assert.equal(nextShotAdjustment({next:{tempC:92}},shot,true,'F'),null);",
+      "inspection_classification": "assertion",
+      "behavior": "Rejects temperature-only arrow when original temperature is null",
+      "quality": "Avoids invented baseline",
+      "risk_security_privacy_performance": "No case where temp is zero or invalid string",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 169,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 178,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Suppress misleading guidance for multi-variable and unmeasured inputs; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 170,
+      "source_text": " assert.equal(nextShotAdjustment({next:{grindSetting:2.4,flowMode:'slow'}},shot),null);",
+      "inspection_classification": "assertion",
+      "behavior": "Rejects arrow for simultaneous grind and flowMode change",
+      "quality": "Protects slow-flow mode as real second variable",
+      "risk_security_privacy_performance": "Does not quantify actual flow profile effects",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 170,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 179,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Suppress misleading guidance for multi-variable and unmeasured inputs; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 171,
+      "source_text": " assert.match(nextShotGuidance({text:'Focus on distribution.',next:{grindSetting:2.5,yieldCenter:40}},shot),/Focus on distribution/);",
+      "inspection_classification": "assertion",
+      "behavior": "Preserves focus-on-distribution guidance",
+      "quality": "Ensures prep-oriented advice text remains",
+      "risk_security_privacy_performance": "Does not validate actual puck preparation intervention",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 171,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 180,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Suppress misleading guidance for multi-variable and unmeasured inputs; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 172,
+      "source_text": " assert.match(nextShotGuidance({text:'Dialed in.',next:null},shot),/Dialed in/);",
+      "inspection_classification": "assertion",
+      "behavior": "Preserves Dialed in successful-shot feedback",
+      "quality": "Avoids manufactured recommendation when none",
+      "risk_security_privacy_performance": "Does not test recommendation suppression beyond text",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 172,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 181,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Suppress misleading guidance for multi-variable and unmeasured inputs; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 173,
+      "source_text": " assert.equal(nextShotTitle({title:'Try a little coarser'}),'Try grinding slightly coarser');",
+      "inspection_classification": "assertion",
+      "behavior": "Requires slightly coarser title for corresponding advice",
+      "quality": "Checks opposite grind direction wording",
+      "risk_security_privacy_performance": "Does not check current grinder direction conventions",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 173,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 182,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Suppress misleading guidance for multi-variable and unmeasured inputs; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 174,
+      "source_text": "});",
+      "inspection_classification": "delimiter",
+      "behavior": "Closes multi-change negative test",
+      "quality": "Clear block boundary",
+      "risk_security_privacy_performance": "No runtime",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 174,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 183,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "None",
+      "locked_decision_fit": "Bounded source test aligns with Suppress misleading guidance for multi-variable and unmeasured inputs; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 175,
+      "source_text": "test('evenness advice isolates distribution instead of adjusting tamp too',()=>{",
+      "inspection_classification": "test-declaration",
+      "behavior": "Starts evenness-focused advice test",
+      "quality": "Protects distribution-first instruction",
+      "risk_security_privacy_performance": "Not a controlled causal sensory study",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 175,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 184,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Evenness and single-variable sensory feedback; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 176,
+      "source_text": " const s=hydrate(rawFixture());",
+      "inspection_classification": "fixture",
+      "behavior": "Hydrates raw app state for advice calculation",
+      "quality": "Uses engine state model",
+      "risk_security_privacy_performance": "No Supabase member session",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 176,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 185,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Evenness and single-variable sensory feedback; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 177,
+      "source_text": " const shot={coffeeId:'coffee',setupVersionId:'version',basketId:'basketv',calibrationId:'cal',",
+      "inspection_classification": "fixture-start",
+      "behavior": "Defines shot coffee/setup/basket/calibration identity",
+      "quality": "Connects advice to specific equipment snapshot",
+      "risk_security_privacy_performance": "Synthetic identifiers only",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 177,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 186,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Evenness and single-variable sensory feedback; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 178,
+      "source_text": "  style:'Turbo',feedMode:'standard',doseG:18,yieldG:40,timeS:21,grindSetting:2.5,",
+      "inspection_classification": "fixture-continuation",
+      "behavior": "Records Turbo standard feed 18g 40g 21s grind 2.5",
+      "quality": "Defines extraction context and style",
+      "risk_security_privacy_performance": "Single style cannot prove all nine profile families",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 178,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 187,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "Future profile coverage elsewhere",
+      "locked_decision_fit": "Bounded source test aligns with Evenness and single-variable sensory feedback; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 179,
+      "source_text": "  tasteScales:{extraction:2,body:3,clarity:1,sweetness:3,astringency:1}};",
+      "inspection_classification": "fixture-continuation",
+      "behavior": "Defines taste scales extraction body clarity sweetness astringency",
+      "quality": "Provides quantitative sensory evidence for evenness",
+      "risk_security_privacy_performance": "Synthetic taste input not validated human perception",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 179,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 188,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Evenness and single-variable sensory feedback; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 180,
+      "source_text": " const advice=E.nextAdvice(s,shot,E.recommendation(s,'coffee'));",
+      "inspection_classification": "function-call",
+      "behavior": "Asks engine for nextAdvice using current recommendation",
+      "quality": "Exercises actual engine recommendation pipeline",
+      "risk_security_privacy_performance": "No UI click or offline persistence",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 180,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 189,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Evenness and single-variable sensory feedback; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 181,
+      "source_text": " assert.equal(advice.title,'Check evenness first');",
+      "inspection_classification": "assertion",
+      "behavior": "Requires title Check evenness first",
+      "quality": "Protects distribution-first action",
+      "risk_security_privacy_performance": "Could be caused by other state conditions, fixture-specific",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 181,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 190,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Evenness and single-variable sensory feedback; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 182,
+      "source_text": " assert.match(advice.text,/distributing the grounds more evenly/);",
+      "inspection_classification": "assertion",
+      "behavior": "Requires distribution more evenly guidance",
+      "quality": "Checks actionable puck-prep message",
+      "risk_security_privacy_performance": "No measured improvement demonstrated",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 182,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 191,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Evenness and single-variable sensory feedback; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 183,
+      "source_text": " assert.match(advice.text,/keeping tamp and recipe settings unchanged/);",
+      "inspection_classification": "assertion",
+      "behavior": "Requires tamp and recipe settings unchanged",
+      "quality": "Avoids confounding distribution change",
+      "risk_security_privacy_performance": "No assertion on actual backend changes",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 183,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 192,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Evenness and single-variable sensory feedback; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 184,
+      "source_text": "});",
+      "inspection_classification": "delimiter",
+      "behavior": "Closes evenness guidance test",
+      "quality": "Syntactic close",
+      "risk_security_privacy_performance": "No data mutation",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 184,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 193,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "None",
+      "locked_decision_fit": "Bounded source test aligns with Evenness and single-variable sensory feedback; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 185,
+      "source_text": "",
+      "inspection_classification": "blank",
+      "behavior": "Separates feedback and URL Autofill tests",
+      "quality": "No semantic executable action",
+      "risk_security_privacy_performance": "None",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 185,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 194,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "None",
+      "locked_decision_fit": "Bounded source test aligns with Evenness and single-variable sensory feedback; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 186,
+      "source_text": "test('owner-approved URL Autofill emphasis changes only the New Coffee button',async()=>{",
+      "inspection_classification": "test-declaration",
+      "behavior": "Starts New Coffee URL Autofill button presentation regression",
+      "quality": "Protects manual Add Coffee and prominent Autofill affordance",
+      "risk_security_privacy_performance": "Static test not actual SSRF and source verification",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 186,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 195,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Manual explicit Add Coffee, source-aware URL autofill and universal public HTTPS roaster admission; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 187,
+      "source_text": " const main=await readFile(new URL('../site/cloud/main.js',import.meta.url),'utf8');",
+      "inspection_classification": "source-read",
+      "behavior": "Loads source main.js for Autofill markup",
+      "quality": "Anchors test to actual application code",
+      "risk_security_privacy_performance": "No actual user interaction",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 187,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 196,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Manual explicit Add Coffee, source-aware URL autofill and universal public HTTPS roaster admission; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 188,
+      "source_text": " const css=await readFile(new URL('../site/visual.css',import.meta.url),'utf8');",
+      "inspection_classification": "source-read",
+      "behavior": "Loads visual.css for Autofill layout",
+      "quality": "Tests maintained style source",
+      "risk_security_privacy_performance": "No mobile screenshot",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 188,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 197,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Manual explicit Add Coffee, source-aware URL autofill and universal public HTTPS roaster admission; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 189,
+      "source_text": " const match=main.match(/\\$\\{button\\('Autofill From URL','preview-coffee-url','','([^']+)'\\)\\}/g)||[];",
+      "inspection_classification": "regex-search",
+      "behavior": "Collects occurrences of exact Autofill From URL button helper",
+      "quality": "Tests duplicate affordance count and class",
+      "risk_security_privacy_performance": "Regex coupled to template syntax rather than DOM",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 189,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 198,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Manual explicit Add Coffee, source-aware URL autofill and universal public HTTPS roaster admission; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 190,
+      "source_text": " assert.deepEqual(match,[\"\\$\\{button('Autofill From URL','preview-coffee-url','','secondary coffee-url-autofill-button')}\"]);",
+      "inspection_classification": "deep-assertion",
+      "behavior": "Requires single secondary coffee-url-autofill-button occurrence",
+      "quality": "Prevents duplicate or unintended primary-style Autofill",
+      "risk_security_privacy_performance": "Does not click button or inspect field fill",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "Intentionally confirms only one Autofill button, not disposable duplication",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 190,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 199,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Manual explicit Add Coffee, source-aware URL autofill and universal public HTTPS roaster admission; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 191,
+      "source_text": " assert.match(css,/\\.coffee-url-actions \\.coffee-url-autofill-button\\{width:100%;flex:1 0 100%;min-height:56px;padding:14px 18px;font-size:16px;/);",
+      "inspection_classification": "assertion",
+      "behavior": "Requires full-width 56px minimum-height 16px-font responsive button styles",
+      "quality": "Checks touch target size and emphasis at source level",
+      "risk_security_privacy_performance": "CSS cascade and actual viewport geometry not exercised",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 191,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 200,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "Mobile visual QA separate",
+      "locked_decision_fit": "Bounded source test aligns with Manual explicit Add Coffee, source-aware URL autofill and universal public HTTPS roaster admission; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 192,
+      "source_text": " assert.match(main,/<div class=\"form-grid coffee-detail-grid\">/);",
+      "inspection_classification": "assertion",
+      "behavior": "Requires coffee-detail-grid form structure",
+      "quality": "Preserves editable field layout after Autofill",
+      "risk_security_privacy_performance": "Does not test fields remain editable post-preview",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 192,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 201,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "Browser form test separate",
+      "locked_decision_fit": "Bounded source test aligns with Manual explicit Add Coffee, source-aware URL autofill and universal public HTTPS roaster admission; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 193,
+      "source_text": " assert.match(main,/<button class=\"primary full space-top\">Add Coffee<\\/button>/);",
+      "inspection_classification": "assertion",
+      "behavior": "Requires primary explicit Add Coffee submit button",
+      "quality": "Preserves owner-controlled save boundary",
+      "risk_security_privacy_performance": "Does not prove server requires explicit user action",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 193,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 202,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "App browser/Auth tests separate",
+      "locked_decision_fit": "Bounded source test aligns with Manual explicit Add Coffee, source-aware URL autofill and universal public HTTPS roaster admission; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 194,
+      "source_text": " assert.match(main,/<span class=\"helper\">Optional · Official coffee product page<\\/span>/);",
+      "inspection_classification": "assertion",
+      "behavior": "Pinned test requires Optional Official coffee product page helper",
+      "quality": "Historical copy was limited to official product page",
+      "risk_security_privacy_performance": "Live text now explicitly Any roaster public HTTPS per Nov12 Locked universal preview; old assertion is superseded and updated",
+      "dead_or_obsolete_status": "Pinned copy superseded by later explicit Nov12 owner Locked universal roaster URL helper",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 194,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 203,
+        "exact_text_match": false,
+        "status": "explicitly_superseded_helper_copy"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "Retain live updated acceptance, no restore old copy",
+      "locked_decision_fit": "Bounded source test aligns with Manual explicit Add Coffee, source-aware URL autofill and universal public HTTPS roaster admission; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 195,
+      "source_text": " assert.doesNotMatch(main,/More Coffee Details<\\/summary>/);",
+      "inspection_classification": "negative-assertion",
+      "behavior": "Rejects deprecated More Coffee Details summary accordion",
+      "quality": "Keeps form field hierarchy flat",
+      "risk_security_privacy_performance": "Does not prove accessibility of all expanded fields",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 195,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 204,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "No change",
+      "locked_decision_fit": "Bounded source test aligns with Manual explicit Add Coffee, source-aware URL autofill and universal public HTTPS roaster admission; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    },
+    {
+      "line": 196,
+      "source_text": "});",
+      "inspection_classification": "delimiter",
+      "behavior": "Closes New Coffee Autofill emphasis test",
+      "quality": "Syntactic boundary at end of eligible file",
+      "risk_security_privacy_performance": "No executable branch",
+      "dead_or_obsolete_status": "Retained pinned functional test line in live with exact literal and no demonstrated unused branch",
+      "duplicate_or_redundant_status": "No validated redundant equivalent line; separate crossfile audit outstanding",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 196,
+        "exact_text_match": true
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 205,
+        "exact_text_match": true,
+        "status": "same_literal_mapped"
+      },
+      "testability": "Node22 local tests available, not executed for this documents-only receipt; browser/mobile/SQL/Auth/provider not tested here",
+      "remediation_opportunity": "None",
+      "locked_decision_fit": "Bounded source test aligns with Manual explicit Add Coffee, source-aware URL autofill and universal public HTTPS roaster admission; not proof of real user/mobile/network behavior",
+      "review_method": "DIRECT_AI_LINE_READING_NOT_INDEPENDENT_HUMAN"
+    }
+  ],
+  "findings": [
+    {
+      "source_line": 194,
+      "kind": "SUPERSEDED_PINNED_TEST_COPY",
+      "original": "Optional · Official coffee product page",
+      "live": "Any roaster · public HTTPS coffee product page",
+      "disposition": "Live test updated, consistent with 2026-11-12 Locked universal URL, no regression/fix required."
+    },
+    {
+      "source_lines": [
+        145,
+        146,
+        147,
+        155,
+        159
+      ],
+      "kind": "STATIC_REGEX_LIMIT",
+      "disposition": "Testing observes text/order but cannot substitute rendered focus/visual/device verification."
+    },
+    {
+      "source_lines": [
+        166,
+        167,
+        169,
+        170
+      ],
+      "kind": "NEGATIVE_GUARD",
+      "disposition": "Existing tests correctly reject false single-variable arrows when multiple or unmeasured inputs; preserve."
+    }
+  ],
+  "method": "Manually interpreted all 58 fetched literal source positions with line-specific fields and crosswalk, no V1/R2/C2 blanket promotion",
+  "new_unique_pinned_lines": 58,
+  "new_unique_frozen_lines": 0,
+  "new_live_delta_lines": 0,
+  "original_p433_complete_across_four_nonoverlap_receipts": "196/196 from P433:1..43,44..62,63..138,139..196 subject to global independent revalidation",
+  "remaining": "Next P434:1, plus other frozen/current/live drift, binaries, tests and findings",
+  "functional_tests": "NOT_RUN_DOCS_ONLY",
+  "authority": "DEVELOPMENT_ONLY_NO_DEPLOYMENT",
+  "global_status": "OPEN_INCOMPLETE"
+}

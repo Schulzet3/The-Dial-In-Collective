@@ -2,11 +2,40 @@
   "schema_version": 1,
   "authority": "OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022",
   "published_base": {
-    "tested_source_sha": "f0b8a6a17148ac6817ca52184c881a369c798c6a",
-    "release_sha": "efe168127c1adc5f56eb55f6422a8e7726e6a0e2",
-    "netlify_deploy_id": "6af7ff20849b938bd9ceafbe"
+    "tested_source_sha": "7bee5534d45649179b759f88135c8457957b856a",
+    "release_sha": "69b066171b64a54f92d828ce99c51f29afb32780",
+    "netlify_deploy_id": "6af82c096b094d3dd36485b7"
   },
   "items": [
+    {
+      "id": "DIC-Q-28-owner-oauth-privacy-policy-20261114",
+      "issue": 28,
+      "pr": 2686,
+      "title": "Provide minimal public privacy policy for owner-only Google Drive OAuth consent",
+      "state": "READY",
+      "merged_source_sha": "d0b450db85f0c25b05fc65007de639852436ff66",
+      "scope_paths": [
+        "site/cloud/main.js",
+        "site/styles.css",
+        "site/privacy.html",
+        "build_cloud.mjs"
+      ],
+      "tests": [
+        "PR #2686 exact tested source e46c92bd624cac54673cd713e16537a5272c68b7: required approval 43600235102 SUCCESS, Node22 build/validate 43600235024 SUCCESS, cloud/mobile browser 43600235015 SUCCESS, and isolated SQL 43600235065 SUCCESS; all four workflow runs are completed pull_request at that exact source SHA.",
+        "Exact first-parent development merged source d0b450db85f0c25b05fc65007de639852436ff66 has all four changed deployable privacy paths: build_cloud.mjs, site/cloud/main.js, site/privacy.html, site/styles.css; each blob matches tested e46c92bd. Site-integrity audit and focused tests/privacy-policy.test.mjs blobs also match e46c92bd.",
+        "Source-verified standalone unauthed /privacy/ static output, muted/underlined keyboard-focusable 11px signed-out/in footer anchor, safe strict asset allowlist, no app Auth/SQL/member data changes. Full deployment HTTPS/browser acceptance deferred to separate owner-authorized Publish."
+      ],
+      "ci_runs": [
+        43600235102,
+        43600235024,
+        43600235015,
+        43600235065
+      ],
+      "blockers": [],
+      "owner_source": "Owner 2026-11-14: approved build of discreet public privacy policy, then explicitly asked to get it READY for a separate chat to deploy; NOT approval to Publish now.",
+      "notes": "Independent source branch and draft PR #2686. No Netlify deploy, Supabase/Drive/Google account changes, member-data edits or new integrations. Privacy link 11px muted, focusable, visible to Google/users; not background-colored or hidden. Keep all other READY/in-progress work untouched.\n2026-11-14 VERIFIED READY development-only: privacy PR #2686 integrated with exact first-parent merge d0b450db85f0c25b05fc65007de639852436ff66. Same source/test/blob identity proved against PR exact e46c92bd, all five required checks successful using four recorded workflow runs. No live Netlify publication, Google OAuth configuration, backup activation, data/SQL/Auth operations; production_deployed remains false. Use existing one-use READY-only release controller in separate owner Publish chat, isolate this READY item from #509 TESTING and other unfinished work. Intended published URL https://app.dialincollective.com/privacy/. Public owner contact is the known account email; owner may later elect an alternate contact address prior to publication.",
+      "production_deployed": false
+    },
     {
       "id": "DIC-Q-33-r170-next-json-selected-provenance",
       "issue": 33,
@@ -13947,28 +13976,38 @@
       "issue": 33,
       "pr": null,
       "title": "Preserve post-READY original603 #275-276 unnamed-grower correction in development only; exclude from owner-frozen READY7 release",
-      "state": "IN_PROGRESS",
+      "state": "READY",
       "merged_source_sha": "4c7bde4d3325bcee31ab0a25ade050d065a1735e",
       "scope_paths": [
         "src/server/coffee-page-metadata.mjs"
       ],
       "tests": [
-        "R191 correction merged 4c7bde4d3325bcee31ab0a25ade050d065a1735e on 2026-11-14T06:11:41Z after last selected #33 Proud Mary READY merge 48379dc5a6e34c1dc0b6d7e97c3392dea56b85bf. Official source and focused tests noted in merged commit; exact isolated READY7 does not claim R191 as included or separately READY."
+        "R191 correction merged 4c7bde4d3325bcee31ab0a25ade050d065a1735e on 2026-11-14T06:11:41Z after last selected #33 Proud Mary READY merge 48379dc5a6e34c1dc0b6d7e97c3392dea56b85bf. Official source and focused tests noted in merged commit; exact isolated READY7 does not claim R191 as included or separately READY.",
+        "Independent exact PR-head 49efeb9d852611661964c712ca62cd9678a398c0: approval 43564764390, Node/lint 43564764551, cloud/mobile 43564764622, SQL 43564764625 SUCCESS (five required statuses); focused direct official #275/#276 43564764502 SUCCESS. Frozen603 SKIPPED, not counted.",
+        "Exact first-parent merge 4c7bde4d3325bcee31ab0a25ade050d065a1735e: metadata blob 31de44b9a1242d129ec9ff1ff2cea6dd75b87107, eight-case test blob c851c5de8d7c278830fece4b919dea967a180e70, official checker blob a0a36dba56772df19b53e9ae8145cd459b97b12f all MATCH PR-head. Merged Node 43565132362, cloud 43565132210, approval 43565132296, exact official 43565132307 SUCCESS. Required earlier producer guard is retained in R198's independently READY pinned coffee-page-metadata blob; no R192/newer code accepted."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "The owner-authorized READY7 release efe168127c1adc5f56eb55f6422a8e7726e6a0e2 / Netlify 6af7ff20849b938bd9ceafbe was already deployed with R191 deliberately excluded. Old instruction to freeze a future READY7 candidate is historical, not pending. Independently test/certify R191 exact source before any new READY promotion."
+      "ci_runs": [
+        43564764390,
+        43564764551,
+        43564764622,
+        43564764625,
+        43564764502,
+        43565132362,
+        43565132210,
+        43565132296,
+        43565132307
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "This row tracks ONLY later R191 original603 selected unnamed-grower source edits, not older R180/R181/R187/R188/Proud Mary independently READY corrections. Retain R191 unchanged on development and in immutable history; no production SQL/Auth/Netlify writes. Owner selected 7 preexisting READY items at live preflight SHA."
+      "notes": "This row tracks ONLY later R191 original603 selected unnamed-grower source edits, not older R180/R181/R187/R188/Proud Mary independently READY corrections. Retain R191 unchanged on development and in immutable history; no production SQL/Auth/Netlify writes. Owner selected 7 preexisting READY items at live preflight SHA.\n2026-11-14: independently source/CI-verified predecessor to R198, READY SOURCE ONLY, no production, tested source/merge Git blob identity; R192 unfinished excluded."
     },
     {
       "id": "DIC-Q-33-r192-redhouse-selected-narrative-review",
       "issue": 33,
       "pr": 2617,
       "title": "Preserve exact current selected intrinsic jasmine/lemon separately from Red House printed cupping notes (review only)",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "4854b80adcc661c84adbe48da736e744f603f66d",
       "scope_paths": [
         "src/server/coffee-selected-description-sensory.mjs",
         "src/server/coffee-page-metadata.mjs"
@@ -13978,23 +14017,29 @@
         "Original PR-head 43569507691 7 focused tests, selected current #277-279 official HTML/parser and strict raw source afterproof SUCCESS; prior R192 first source without typed jasmine/lemon context not counted as fixed.",
         "Current R192 PR-head 43569859254 selected actual official #277-279 and 11 positive/adversarial tests SUCCESS: direct selected inline span jasmine/lemon retained review-only, labeled Fruity/Hibiscus canonical unchanged. Other #278/#279 Wet-Hulled remains honest Other/Unknown and its literal source fact persists.",
         "Initial current R192 PR-head approval 43569859367 FAILED because new src/server/coffee-selected-description-sensory.mjs had no queue intake; this new IN_PROGRESS entry is the repair; not counted PASS.",
-        "Other applicable exact-source hosted CI and merged-source verification pending. Original frozen603 workflow SKIPPED, never accepted as full individual certification."
+        "Other applicable exact-source hosted CI and merged-source verification pending. Original frozen603 workflow SKIPPED, never accepted as full individual certification.",
+        "PR head d0143628cc798742cbe4155b812861c6ffc91ba3 five GitHub exact-source checks SUCCESS: approval 43570527949, Node/lint/build 43570527804, cloud/mobile 43570527874, isolated SQL 43570527866; selected current #277-279 official source 43570527926 SUCCESS, source security 43570527922 SUCCESS. Exact merged source/test/checker four Git blobs identical at 4854b80adcc661c84adbe48da736e744f603f66d; merged Node 43570881989, cloud/mobile 43570881986, approval 43570882135, selected actual official 43570881958 SUCCESS. Original603 frozen SKIPPED, parent full review OPEN."
       ],
       "ci_runs": [
-        43569507691,
-        43569859254
+        43570527949,
+        43570527804,
+        43570527874,
+        43570527866,
+        43570527926,
+        43570527922,
+        43570881989,
+        43570881986,
+        43570882135,
+        43570881958
       ],
-      "blockers": [
-        "New current source and tests require full applicable passing approval/Node/lint/cloud CI, nonforce merged-source readback and independent evidence reconciliation.",
-        "Full original603 independently adjudicated exceptions and inaccessible official sources remain unfinished."
-      ],
-      "notes": "Development-only review context for direct named current Red House Geisha #277. Raw current own selected span states jasmine/lemon while own stronger Cupping Notes gives Fruity/Hibiscus; preserve both as distinct source evidence, do not invent a contradiction, merge, or overwrite canonical tasting autofill. No source/backups/database/provider/member/release publication. #267 V2 and #96 remain separate; #33 OPEN."
+      "blockers": [],
+      "notes": "Development-only review context for direct named current Red House Geisha #277. Raw current own selected span states jasmine/lemon while own stronger Cupping Notes gives Fruity/Hibiscus; preserve both as distinct source evidence, do not invent a contradiction, merge, or overwrite canonical tasting autofill. No source/backups/database/provider/member/release publication. #267 V2 and #96 remain separate; #33 OPEN.\n2026-11-14 independently certified READY for exact scoped source; R192's selectedCurrentUnlabeledFlavorPair export is required by already independently READY R198 metadata. Include R192 as verified dependency in one owner Publish, pin R198 metadata to exact tested bytes; no unreviewed dev source or unfinished SQL; no standalone full603 certification."
     },
     {
       "id": "DIC-Q-2621-add-coffee-difference-tap-preview-cleanup",
       "issue": 2621,
       "title": "Make post-add coffee differences tappable; remove redundant New Coffee source/detail sections",
-      "state": "READY",
+      "state": "DEPLOYED",
       "scope_paths": [
         "site/cloud/coffee-url-autofill.js",
         "site/cloud/main.js",
@@ -14010,7 +14055,8 @@
         "Final exact PR-head 3f3d231a2288697552a4fd9de7e91086c26b8be4 FIVE checks SUCCESS: full Node22/lint 43572004561 (4,767 tests; 4,761 PASS, 0 FAIL, 6 intentional SKIP; lint PASS); browser/cloud/mobile 43572004553 SUCCESS; isolated SQL/privacy 43572004567 SUCCESS; source security 43572004530 SUCCESS; approval/continuity/queue 43572004564 SUCCESS. The original603 separate corpus workflow was SKIPPED, never counted PASS.",
         "PR #2622 nonforce squash merged to 3875e72cf04b8c0d9038d031035c61ef7c06a83f (first parent 4854b80adcc661c84adbe48da736e744f603f66d), [skip netlify]. All 6 changed app/test blobs and MASTER_SPECIFICATION/DECISION_LEDGER and scoped journal matched final passing PR head byte-for-byte, preserving #33/#455 concurrent work.",
         "Exact merged push Node22/lint 43572276835 SUCCESS: 4,767 tests, 4,761 PASS, zero FAIL, 6 intentional SKIP; lint SUCCESS. Exact merged push mobile-browser/cloud 43572276789 SUCCESS. Merged approval 43572276793 was CANCELLED by concurrent #33 docs-only push and is NOT counted; newer development docs-only approval 43572300124 SUCCESS. PR-head SQL/security evidence remains exact candidate; no corresponding merged push SQL/security jobs claimed.",
-        "Postmerge docs-only #33/#455 commits introduced only new workstream/audit documents (no changes to #2621 runtime/test/queue/provenance blobs). Correct on-screen compact renderer explicitly used by production; detailed source diagnostics remain test-only and internal snapshot unaffected. Device signed-in hand testing NOT_APPLICABLE/not claimed."
+        "Postmerge docs-only #33/#455 commits introduced only new workstream/audit documents (no changes to #2621 runtime/test/queue/provenance blobs). Correct on-screen compact renderer explicitly used by production; detailed source diagnostics remain test-only and internal snapshot unaffected. Device signed-in hand testing NOT_APPLICABLE/not claimed.",
+        "Final frozen READY4 candidate 7bee5534d45649179b759f88135c8457957b856a exact five hosted required job checks SUCCESS; Node, lint, mobile/browser/offline, SQL privacy checks and one app build successful. GitHub controller 43581459754 SUCCESS; Netlify 6af82c096b094d3dd36485b7 READY/current 2026-11-14T09:38:33.549Z."
       ],
       "blockers": [],
       "ci_runs": [
@@ -14021,17 +14067,27 @@
         43572004564,
         43572276835,
         43572276789,
-        43572300124
+        43572300124,
+        43581091127,
+        43581091126,
+        43581091206,
+        43581091190
       ],
-      "notes": "READY development only, NOT DEPLOYED. Owner-requested New Coffee duplicate/excess Published Source Information and download UI removed from customer compact preview; exact caution sentence replaced without treating unverified page as official. Saved/Submitted differences now accessible 48px click/keyboard controls filling only matching unsaved correction form field, reversible/manual-edit safe. Underlying source provenance/export helper retained; no automatic correction/canonical identity rewrite, server writes, SQL/Auth/Community/history/offline change. PR #2622 final code byte-equal merged 3875e72, 5/5 exact PR CI and merged Node/mobile SUCCESS; historical failed candidates preserved. Requires NEW owner Publish for any production delivery; no publication grant.",
+      "notes": "DEPLOYED 2026-11-14T09:38:33.549Z under DIC-20261114-READY4-02. Prior READY-only statements below are dated historical prepublication assessment, not current status. READY development only, NOT DEPLOYED. Owner-requested New Coffee duplicate/excess Published Source Information and download UI removed from customer compact preview; exact caution sentence replaced without treating unverified page as official. Saved/Submitted differences now accessible 48px click/keyboard controls filling only matching unsaved correction form field, reversible/manual-edit safe. Underlying source provenance/export helper retained; no automatic correction/canonical identity rewrite, server writes, SQL/Auth/Community/history/offline change. PR #2622 final code byte-equal merged 3875e72, 5/5 exact PR CI and merged Node/mobile SUCCESS; historical failed candidates preserved. Requires NEW owner Publish for any production delivery; no publication grant.",
       "merged_source_sha": "3875e72cf04b8c0d9038d031035c61ef7c06a83f",
-      "pr": 2622
+      "pr": 2622,
+      "production_deployed": true,
+      "delivered_release_id": "DIC-20261114-READY4-02",
+      "delivered_source_sha": "7bee5534d45649179b759f88135c8457957b856a",
+      "delivered_release_sha": "69b066171b64a54f92d828ce99c51f29afb32780",
+      "delivered_netlify_deploy_id": "6af82c096b094d3dd36485b7",
+      "delivered_at_utc": "2026-11-14T09:38:33.549Z"
     },
     {
       "id": "DIC-Q-2633-remove-url-source-badges",
       "issue": 2633,
       "title": "Remove obsolete Unverified Page and verified-roaster badges/copy from New Coffee",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "5a295c08219b91426971227153893e8749deeaa3",
       "pr": 2634,
       "scope_paths": [
@@ -14049,7 +14105,11 @@
         43576329701,
         43576563838,
         43576563863,
-        43576563927
+        43576563927,
+        43581091127,
+        43581091126,
+        43581091206,
+        43581091190
       ],
       "tests": [
         "New specific regressions for no badge across all 3 source types, original source data preservation, conflicts/release notice, metadata-only caveats, unchanged canonical Pending decisions, no auto-save and neutral status copy. Actual exact CI pending.",
@@ -14058,16 +14118,23 @@
         "Final PR-head 930d34e205c0857c327b35c660f1e9edb48b24de all FIVE required exact-source checks SUCCESS: Node22/lint 43576329667 (4,779 total / 4,773 pass / 0 fail / 6 intentionally SKIPPED; lint pass), cloud/mobile Chromium 43576329666, isolated SQL/privacy 43576329857, source security 43576329650, approval/continuity 43576329701. Earlier 43575921548 7 historical stale-text failures retained and NOT counted.",
         "Nonforce squash PR #2634 merged 5a295c08219b91426971227153893e8749deeaa3 [skip netlify] onto parent cb1c910db3dcc93b18f25311819d7388373302d8, with all 17 app/test/spec/ledger/queue/journal Git blobs byte-identical to tested head; all user-visible badge labels absent, actual matching/source classification flags and original public source diagnostics remain.",
         "Exact MERGED push Node22/lint 43576563838 SUCCESS (4,779 total / 4,773 pass / 0 fail / 6 intentional SKIPPED; lint PASS), cloud/mobile Chromium 43576563863 SUCCESS, approval 43576563927 SUCCESS; merged push SQL/security were not triggered, PR-head source-bound SQL/security SUCCESS reused where runtime/SQL/source blobs match.",
-        "Independent Issue33 R171 focused live source probe 43576563882 FAILED because current https://novocoffee.com/product/buesaco did not yield the expected product H1 (HTTP fetched 12,092 bytes, parsed_current_fields {}, focused 16/16 local Node tests PASS). This is a separate evolving live roaster page/original603 audit issue #33, not New Coffee UI source/badge code regression. NOT counted as PASS or falsely called completed; issue #33 OPEN."
+        "Independent Issue33 R171 focused live source probe 43576563882 FAILED because current https://novocoffee.com/product/buesaco did not yield the expected product H1 (HTTP fetched 12,092 bytes, parsed_current_fields {}, focused 16/16 local Node tests PASS). This is a separate evolving live roaster page/original603 audit issue #33, not New Coffee UI source/badge code regression. NOT counted as PASS or falsely called completed; issue #33 OPEN.",
+        "Final frozen READY4 candidate 7bee5534d45649179b759f88135c8457957b856a exact five hosted required job checks SUCCESS; Node, lint, mobile/browser/offline, SQL privacy checks and one app build successful. GitHub controller 43581459754 SUCCESS; Netlify 6af82c096b094d3dd36485b7 READY/current 2026-11-14T09:38:33.549Z."
       ],
       "blockers": [],
-      "notes": "READY development ONLY, NOT DEPLOYED. Source-status badge entirely absent from New Coffee URL preview; a single neutral Autofill Results heading and clear conflict/metadata warnings remain. Source/match/correction messages no longer imply roaster registration/approval. Universal best-effort any-roaster URL intake, internal source provenance/attestations, product/release distinction, safe private Pending and shared Community gating, Auth, TLS/SSRF, quotas, shots/notes/offline history unchanged. Exact PR-head 5/5 and merged Node/mobile/approval SUCCESS; independent #33 live original241 external-source probe failed, scoped to #33 and explicitly recorded. Prior READY #2621 remains READY; overlapping changes are jointly present in merged tested code, future Publish must use isolated exact READY bytes. NEW owner Publish required."
+      "notes": "DEPLOYED 2026-11-14T09:38:33.549Z under DIC-20261114-READY4-02. Prior READY-only statements below are dated historical prepublication assessment, not current status. READY development ONLY, NOT DEPLOYED. Source-status badge entirely absent from New Coffee URL preview; a single neutral Autofill Results heading and clear conflict/metadata warnings remain. Source/match/correction messages no longer imply roaster registration/approval. Universal best-effort any-roaster URL intake, internal source provenance/attestations, product/release distinction, safe private Pending and shared Community gating, Auth, TLS/SSRF, quotas, shots/notes/offline history unchanged. Exact PR-head 5/5 and merged Node/mobile/approval SUCCESS; independent #33 live original241 external-source probe failed, scoped to #33 and explicitly recorded. Prior READY #2621 remains READY; overlapping changes are jointly present in merged tested code, future Publish must use isolated exact READY bytes. NEW owner Publish required.",
+      "production_deployed": true,
+      "delivered_release_id": "DIC-20261114-READY4-02",
+      "delivered_source_sha": "7bee5534d45649179b759f88135c8457957b856a",
+      "delivered_release_sha": "69b066171b64a54f92d828ce99c51f29afb32780",
+      "delivered_netlify_deploy_id": "6af82c096b094d3dd36485b7",
+      "delivered_at_utc": "2026-11-14T09:38:33.549Z"
     },
     {
       "id": "DIC-Q-2640-coffee-conflict-copy-one-line",
       "issue": 2640,
       "title": "Replace long source-conflict heading/paragraph with exact one-line tap-to-fill guidance",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "f2e0036884366930112c0ce0b6e99a76b4df5748",
       "pr": 2642,
       "scope_paths": [
@@ -14082,24 +14149,35 @@
         43577227262,
         43577566503,
         43577566508,
-        43577566652
+        43577566652,
+        43581091127,
+        43581091126,
+        43581091206,
+        43581091190
       ],
       "tests": [
         "Visible compact + full diagnostic display exact owner wording, no old title, retain sourced interactive options and original source links; update 77-case, source-hierarchy, physical examples and all four previously stale heading assertions.",
         "Previous PR #2636 cadcb1a: four of five required CI PASS (approval 43576814950, security 43576814962, SQL 43576814936, browser/cloud 43576814957); full Node 43576814979 FAILED 4 stale copy assertions, 4,770 PASS, 4 FAIL, 6 SKIP. Earlier badge PR #2634 had 5/5 PASS and has its own READY source; no double-credit.",
         "Final exact PR-head 87ee4f08fc988987a374b2c6facaf88b99ff2bd3 ALL FIVE SUCCESS: Node22/lint 43577227267 (4,780 total / 4,774 PASS / 0 FAIL / 6 intentional SKIP, lint PASS); mobile/browser/cloud 43577227293; isolated SQL 43577227272; source security 43577227314; approval 43577227262. Independent frozen603 separate skip is NOT PASS.",
         "Safe nonforce squash PR #2642 merge f2e0036884366930112c0ce0b6e99a76b4df5748 first-parent e8d926639b830740ef949481c348979d2283d19c [skip netlify]; all 12 changed app/test/spec/ledger/queue/journal Git blobs byte-identical to passing head. Exact merged push Node/lint 43577566503 SUCCESS (4774 PASS / 0 FAIL / 6 intentional SKIP, lint PASS); cloud/mobile 43577566508 SUCCESS; merged approval 43577566652 SUCCESS. SQL/security PR head exact checked and no merged equivalent runs triggered.",
-        "Prior #2636 stale pre-READY queue merge conflict and 4 obsolete copy assertions FAILED on 43576814979; superseded/closed, never counted PASS. #2633 earlier READY code/test source remains separate; future owner-frozen Publish must isolate exact bytes of chosen READY items if later same-file drift exists."
+        "Prior #2636 stale pre-READY queue merge conflict and 4 obsolete copy assertions FAILED on 43576814979; superseded/closed, never counted PASS. #2633 earlier READY code/test source remains separate; future owner-frozen Publish must isolate exact bytes of chosen READY items if later same-file drift exists.",
+        "Final frozen READY4 candidate 7bee5534d45649179b759f88135c8457957b856a exact five hosted required job checks SUCCESS; Node, lint, mobile/browser/offline, SQL privacy checks and one app build successful. GitHub controller 43581459754 SUCCESS; Netlify 6af82c096b094d3dd36485b7 READY/current 2026-11-14T09:38:33.549Z."
       ],
       "blockers": [],
-      "notes": "READY development only, NOT DEPLOYED. Exact owner instruction `Tap the correct option to autofill, or type a value in the field` replaces entire prior conflict heading and paragraph across New Coffee compact and detailed diagnostic preview. Touchable source alternatives, evidence links, editability, no automatic source choice/save, original603, accepted badge removal, safe worldwide URL, catalog/Pending, history/Community/Auth/privacy/offline preserved. Five candidate checks and exact merged Node/mobile/approval checks SUCCESS; previous READY #2621/#2633 remain untouched. Separate NEW owner Publish required."
+      "notes": "DEPLOYED 2026-11-14T09:38:33.549Z under DIC-20261114-READY4-02. Prior READY-only statements below are dated historical prepublication assessment, not current status. READY development only, NOT DEPLOYED. Exact owner instruction `Tap the correct option to autofill, or type a value in the field` replaces entire prior conflict heading and paragraph across New Coffee compact and detailed diagnostic preview. Touchable source alternatives, evidence links, editability, no automatic source choice/save, original603, accepted badge removal, safe worldwide URL, catalog/Pending, history/Community/Auth/privacy/offline preserved. Five candidate checks and exact merged Node/mobile/approval checks SUCCESS; previous READY #2621/#2633 remain untouched. Separate NEW owner Publish required.",
+      "production_deployed": true,
+      "delivered_release_id": "DIC-20261114-READY4-02",
+      "delivered_source_sha": "7bee5534d45649179b759f88135c8457957b856a",
+      "delivered_release_sha": "69b066171b64a54f92d828ce99c51f29afb32780",
+      "delivered_netlify_deploy_id": "6af82c096b094d3dd36485b7",
+      "delivered_at_utc": "2026-11-14T09:38:33.549Z"
     },
     {
       "id": "DIC-Q-455-r253-slow-feed-recommendation-use-attribution",
       "issue": 455,
       "pr": 2639,
       "title": "Discard stale Use Recommendation source attribution when Slow Feed mode changes",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "c5a149d1839d9f0a6a1bf04dd2149011bf175ec5",
       "scope_paths": [
         "site/cloud/main.js"
@@ -14113,7 +14191,8 @@
         "FINAL PR-head 55dab9f317c426af367c552c2f3eb44d3fa0bda2: Node/lint 43578183225 SUCCESS; cloud/browser/mobile/offline 43578183256 SUCCESS; isolated SQL/privacy 43578183235 SUCCESS; security 43578183244 SUCCESS; approval/continuity 43578183230 SUCCESS. Frozen original603 43578183211 SKIPPED, NOT PASS.",
         "PR #2639 nonforce merged c5a149d1839d9f0a6a1bf04dd2149011bf175ec5 [skip netlify]. Source main.js blob ac1803d502624e164a7e641f96b4df8227b86ba9 and R253 six-case test blob 1a639301ce1a90a9121cd6d2b3305375457c16ae are byte-identical in tested PR head and current descendant d4e8b1b927f2bae3cc941959fd78481e435568cc.",
         "Merged-push c5a149d approval43578436431 and cloud/browser/mobile43578436453 SUCCESS; c5a149d merged Node43578436420 CANCELLED by concurrent work (NOT PASS). Later exact development descendant d4e8b1b927f2bae3cc941959fd78481e435568cc, source/test blobs unchanged, independently passed Node/lint43578597225, cloud/mobile43578597279, governance43578597245. No rerun of unchanged suites.",
-        "R253 readiness applies to this one safe development-source fix only, not the entire still-open #455 research project, absent scientific real-world outcomes or S019 original access. No Netlify deployment or live provider changes."
+        "R253 readiness applies to this one safe development-source fix only, not the entire still-open #455 research project, absent scientific real-world outcomes or S019 original access. No Netlify deployment or live provider changes.",
+        "Final frozen READY4 candidate 7bee5534d45649179b759f88135c8457957b856a exact five hosted required job checks SUCCESS; Node, lint, mobile/browser/offline, SQL privacy checks and one app build successful. GitHub controller 43581459754 SUCCESS; Netlify 6af82c096b094d3dd36485b7 READY/current 2026-11-14T09:38:33.549Z."
       ],
       "ci_runs": [
         43577305675,
@@ -14130,10 +14209,197 @@
         43578436453,
         43578597225,
         43578597279,
-        43578597245
+        43578597245,
+        43581091127,
+        43581091126,
+        43581091206,
+        43581091190
       ],
       "blockers": [],
-      "notes": "Development-only safe provenance correction; no new numeric science, taste targets, data capture, provider writes, deployment or original member record mutation. #267/#33/#96 separate and S019 inaccessible.",
+      "notes": "DEPLOYED 2026-11-14T09:38:33.549Z under DIC-20261114-READY4-02. Prior READY-only statements below are dated historical prepublication assessment, not current status. Development-only safe provenance correction; no new numeric science, taste targets, data capture, provider writes, deployment or original member record mutation. #267/#33/#96 separate and S019 inaccessible.",
+      "production_deployed": true,
+      "delivered_release_id": "DIC-20261114-READY4-02",
+      "delivered_source_sha": "7bee5534d45649179b759f88135c8457957b856a",
+      "delivered_release_sha": "69b066171b64a54f92d828ce99c51f29afb32780",
+      "delivered_netlify_deploy_id": "6af82c096b094d3dd36485b7",
+      "delivered_at_utc": "2026-11-14T09:38:33.549Z"
+    },
+    {
+      "id": "DIC-Q-455-r255-offline-recommendation-provenance-preview",
+      "issue": 455,
+      "pr": 2660,
+      "title": "Preserve already-queued Use Recommendation provenance in offline Shot History preview",
+      "state": "READY",
+      "merged_source_sha": "87da54b3af6c5dc6a0fbf27bfdbaaf763819fbe5",
+      "scope_paths": [
+        "site/cloud/mapping.js"
+      ],
+      "owner_source": "Owner Issue #455 Option B safe UX/attribution fix. DIC_PREFLIGHT_VERIFIED development_sha=120bc50a8dcf6c39236f5622d5354368a41a4983 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d. Direct actual mapping.js and shot_card.js source audit.",
+      "tests": [
+        "Four new direct Node22 negative/positive synthetic offline preview, server hydration parity, missing provenance, invalid five-rating and idempotence tests authored; UNRUN/NOT PASS at commit authoring.",
+        "Required Node22/lint, cloud/browser/mobile/offline, isolated SQL/privacy/security and approval CI pending; frozen original603 is not app acceptance.",
+        "R255 exact PR-head a0e9d9a41f75007027035423d175d53fde072e92: Node22/lint/build 43586421422 SUCCESS 4796 PASS/0 FAIL/6 SKIP including four focused R255 actual-module synthetic tests; cloud/mobile/browser/offline 43586421297 SUCCESS, isolated SQL/privacy 43586421300 SUCCESS, security 43586421307 SUCCESS, approval governance 43586421341 SUCCESS. Frozen original603 43586421350 SKIPPED, not PASS.",
+        "PR #2660 nonforce squash merged 87da54b3af6c5dc6a0fbf27bfdbaaf763819fbe5 [skip netlify]; four exact changed files read back matching PR-head Git blobs mapping acbfad05f6c197f3884054f8709ea5bc2e7c9ad0, R255 test 2c76ab557209dc7fe6516b6283be9276af722218, journal b9893a92cb95eeb3a2a45e4f845de20026c81d9a, TESTING queue 6e5fe62d88e7cadef262e8f61e27bc62c80b96b1.",
+        "Exact merged-push Node22/lint/build 43586665157 SUCCESS 4796 PASS/0 FAIL/6 SKIP; cloud/browser/mobile/offline 43586665168 SUCCESS; approval/continuity 43586665177 SUCCESS. Unchanged PR-head isolated SQL/security remains SUCCESS; no new member/provider or app data testing claimed."
+      ],
+      "ci_runs": [
+        43586421422,
+        43586421297,
+        43586421300,
+        43586421307,
+        43586421341,
+        43586665157,
+        43586665168,
+        43586665177
+      ],
+      "blockers": [],
+      "notes": "READY for separate owner-approved publication only; not deployed. Narrow existing recommendation-use provenance copied from durable owner-local queued shot into pending offline preview. No data collection, recommendation targets, Locked policy, provider/production writes, release or backup change. R255 direct source proof and four synthetic tests; no claim of tasted cup improvement.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-508-catalog-refresh-cooldown-copy-15s",
+      "issue": 508,
+      "pr": 2662,
+      "title": "Correct cached coffee current-page refresh guidance to Locked member 15s and Admin exemption",
+      "state": "READY",
+      "merged_source_sha": "359c42382b53733cab15f4a90294a924497773f3",
+      "scope_paths": [
+        "site/cloud/coffee-url-autofill.js"
+      ],
+      "owner_source": "Issue #508 N508-091 audit and owner-Locked COFFEE-URL-ADMIN-UNLIMITED-MEMBER-15S-20261112 (#2386); immutable PREFLIGHT development 87da54b3af6c5dc6a0fbf27bfdbaaf763819fbe5 blob 2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Three new focused Node22 tests assert compact and diagnostic cached-coffee copy, no stale 30s text, fresh source isolation and existing 15s error; not yet run at commit creation.",
+        "Required source-bound Node22/lint/build, cloud/browser/offline, security, isolated SQL applicability and approval/queue CI remain PENDING; SKIPPED is never PASS.",
+        "First 0ad1284825509b6b26f7994ac3db4095ddbc40d3 Node22 run 43587036258 FAILED one stale test copy assertion (4798 pass, 1 fail, 6 skip): recorded failure never recast PASS. Repaired tests with same-commit scoped preflight, no weakened assertions.",
+        "Corrected source-bound PR-head 0faf16b214444635f68bc48ad6b5f1e1445a5ef2: Node22/lint/build 43587612443 SUCCESS (4805 total, 4799 PASS/0 FAIL/6 intentionally SKIP); cloud/mobile/browser 43587612485 SUCCESS; isolated SQL 43587612401 SUCCESS; approval/continuity 43587612448 SUCCESS; source security 43587612518 SUCCESS. Original603 43587612451 SKIPPED, NOT PASS.",
+        "Nonforce squash merged PR #2662 at 359c42382b53733cab15f4a90294a924497773f3 with EXACT PR-head source Git blobs UI a183d0b5156c301f46743fc075a9068f2716a414, new targeted test 4d0414c3df357c1d91a77d3a814961e4d90b392a, corrected legacy test 0810e3d8059d8e5ccc9c6fbe8d6279380bc897e9, journal d0c4d331eea110cac71fc6030a4a71e635faf520, queue b7f448b47f36f8c97aca406e9e3e4a22ca476fdc.",
+        "Exact merged push at 359c42382b53733cab15f4a90294a924497773f3: Node22/lint/build 43587854316 SUCCESS, cloud/mobile/browser 43587854295 SUCCESS, approval 43587854290 SUCCESS; SQL/security PR-head SUCCESS reused for byte-identical source; no production signed-in/write/deploy test."
+      ],
+      "ci_runs": [
+        43587612443,
+        43587612485,
+        43587612401,
+        43587612448,
+        43587612518,
+        43587854316,
+        43587854295,
+        43587854290
+      ],
+      "blockers": [],
+      "notes": "UI guidance only; no changes to runtime quota, Auth, per-IP anti-abuse, server, roaster lookup, catalog storage, Pending/Verified privacy, offline, shots or member data. Development-only; no Netlify deploy/settings or publication grant.\nN508-091: DEVELOPMENT MERGED, narrowly source-verified READY for a future explicit owner-authorized isolated release, not deployed. This is only text guidance on cached approved_catalog preview; does not alter actual per-user or IP quota, Auth/SSRF, public/private release identity, any offline/shot logic. Preserve #455 READY and unfinished #33 baseline. No Netlify/provider production changes.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-recommendation-context-null-control-guard",
+      "issue": 509,
+      "pr": null,
+      "title": "Reject JSON null recommendation control elements without changing recorded shots or private provenance",
+      "state": "TESTING",
+      "merged_source_sha": "7607c69f62f65979079fd02a0d25f4b7653a2303",
+      "scope_paths": [
+        "supabase/migrations/20261114115000_dic_recommendation_context_null_control_guard.sql"
+      ],
+      "owner_source": "Owner Issue #509 Nov 3 2026 exhaustive Supabase audit, development-only verified low-severity defect repair; preflight development 719afad75889bf040e729ab4ff9d33cfe0716491 blob 2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Read-only live PostgreSQL constant-expression reproduction: NULL and mixed NULL/valid controls incorrectly accepted by previous NOT IN; invalid string rejected. Exact current SQL body verified.",
+        "New isolated PostgreSQL17 transaction/temp-trigger fixture tests null, mixed, invalid, valid one/two control, historical grants and trigger attachment; exact source SQL CI run 43591859535 SUCCESS on 0cd5054c6684a63062daf794e33ea265daf5ce66. Post-intake governance/Node source bound CI pending.",
+        "Run241 current development source/test/runner exact Git blobs unchanged against tested 0cd5054c: dadd06e1982a84d289481b661702f9940e375b7d, 61e496319939f59eb4b7843fdb93aa6b4c1e33fa, a3f86ff03a2c23cd510cc1dcd4c988a01bbebb2e",
+        "Exact source PostgreSQL17 + signed JWT owner HTTP + backup 43591859535 SUCCESS; Node22/lint/build 43591859617 SUCCESS, both at 0cd5054c.",
+        "Queue intake/approval 43592032732 SUCCESS at 05a6af51, current-descendant approval 43596028523 SUCCESS at c5b555; prior failed intake and cancelled initial checks NOT treated as PASS.",
+        "Corrective evidence: exact GitHub commit 7607c69f62f65979079fd02a0d25f4b7653a2303 adds migration SQL and original regression; 0cd5054c6684a63062daf794e33ea265daf5ce66 changes only SQL test and journal. Approval CI 43599567921 confirmed broken READY record. Status TESTING until one source-bound five-check verified."
+      ],
+      "ci_runs": [
+        43591859535,
+        43591859617,
+        43592032732,
+        43596028523
+      ],
+      "blockers": [
+        "Exact Git verification found that former recorded READY SHA 0cd5054c6684a63062daf794e33ea265daf5ce66 changed only test/journal; the deployable SQL migration was introduced at 7607c69f62f65979079fd02a0d25f4b7653a2303. Previous READY certification is invalid until source attribution repaired.",
+        "Existing cited successful check runs are split across different SHAs; no single verified source has all five successful recorded statuses with identical migration/test blobs. Maintain TESTING pending #509-specific evidence and valid promotion."
+      ],
+      "notes": "Historical migration unchanged. No data backfill, no member/shot records read or modified. Explicit IS NULL OR NOT IN rejects invalid JSON null controls; original private SECURITY DEFINER, search_path, EXECUTE revocations, trigger, valid controls and source_verified_independently=false retained. Tests use disposable dic_ci only. User Nov6 alert-only notification policy unchanged. Full issue509 provider baseline IN_PROGRESS.\nRun241 READY DEVELOPMENT SOURCE ONLY after verified unchanged source/test/runner and applicable exact-source CI; production deployment/migration and hosted private Auth acceptance NOT CLAIMED.\n2026-11-14 safety reconciliation: source-backed review found previous READY promotion incorrectly pointed at test-only commit 0cd5054 and relied on different CI source SHAs; mandatory READY-evidence gate rejected it in independent PR #2686 runs 43597779195 and 43599567921. Corrected merged_source_sha to original migration-introduction 7607c69 and reverted premature READY to TESTING without modifying SQL/tests, deleting existing successes, or touching production. This is not an authorization to deploy or to waive independent #509 five-check acceptance.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-33-r198-original291-source-prose-conflict",
+      "issue": 33,
+      "pr": 2677,
+      "title": "Withhold conflicting corroborated current selected Tanzania Peaberry flavor; retain both literal sources for member review",
+      "state": "READY",
+      "merged_source_sha": "8cf2c2bcec7881dc590d3de8366393863a45ef9b",
+      "scope_paths": [
+        "src/server/coffee-selected-hero-notes-conflict.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "owner_source": "Owner Issue #33 exact selected official source and Locked conflict abstention; DIC_PREFLIGHT_VERIFIED development_sha=5fa7d62d274e6414ab78187eb5dac7943c8a6a19 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Before correction original #291 chosen official exact page was FETCHED, real parser silently selected Flavor label and omitted directly opposing two product prose claims; PR 2677 red-first 43593492734 3/4 focused passed, actual afterproof FAILED.",
+        "Current selected HTML layout source-verified in afterproof 43593770187: product summary DIV and selected name-bound paragraph corroborate pepper/white wine/black currant, vs separate exact Flavor label citrus/black tea/sweet berries/chocolate. Initial fix 43593659459 failed structural and historical-negative tests; narrow generic repair applied.",
+        "PR head c251ddb2ff2bea73ef487c235635e8d12c5baedb focused current official HTTPS/afterproof run 43593852915 SUCCESS, 7/7 adversarial positive/negative tests PASS, raw 496850 bytes SHA256 7577f20a728a2318fe542ac96b3206972915ff547f8bf82a31b36bbed4a98ed7, H1 Tanzania Peaberry, real parser leaves tasting_notes blank and preserves both conflicting flavor sources for member review.",
+        "Exact head source security 43593852921, isolated SQL 43593852959 and Python audit 43593853118 SUCCESS. Original frozen603 SKIPPED and is NOT current acceptance.",
+        "Approval 43593853138 FAILED solely due missing TESTING queue scope for new helper; this queue intake fixes it. Updated exact-head approval/Node/lint/cloud mobile, safe merge/readback pending; not READY.",
+        "PR #2677 safely nonforce squash merged at 8cf2c2bcec7881dc590d3de8366393863a45ef9b. Five changed source/test/proof/queue blob SHAs read back byte-identical to exact PR head.",
+        "Merged official #291 selected current HTML 496850-byte SHA256 7577f20a728a2318fe542ac96b3206972915ff547f8bf82a31b36bbed4a98ed7; exact chosen H1 and true Add Coffee/Source Review 43594338869 SUCCESS; all seven focused positive/hostile cases PASS. Conflicting product direct flavor prose and separate label withheld from canonical and preserved for review.",
+        "Merged full Node/lint 43594339055 SUCCESS, 4827 total 4821 pass 0 fail 6 skip; cloud/mobile/browser 43594339167, approval 43594339071 and Python 43594339134 SUCCESS. Unchanged PR-head SQL 43594060624 and source security 43594060743 SUCCESS. Frozen original603 workflow SKIPPED not PASS.",
+        "Historical RED-first / intermediate workflow failures 43593492734, 43593659459, 43593770187, 43593853138 are retained ONLY as failures in diagnostics and current per-case proof, not in the READY evidence gate's positive ci_runs. READY evidence gate requires successful exact-source Actions IDs; five exact merged SUCCESS workflows used here. This corrects first docs PR #2681 governance failure 43594821363."
+      ],
+      "ci_runs": [
+        43594338869,
+        43594339055,
+        43594339167,
+        43594339071,
+        43594339134,
+        43594060756,
+        43594060732,
+        43594060827,
+        43594060624
+      ],
+      "blockers": [],
+      "notes": "DEVELOPMENT ONLY; original 603/201/1197 frozen CSV/oracle/scorer untouched, no Netlify or production provider/SQL/Edge/Auth/member changes. #267 and #96 separate owners. Issue #33 OPEN. Narrow R198 READY development only at exact merged source 8cf2c2bcec7881dc590d3de8366393863a45ef9b. Parent original603 per-coffee acceptance incomplete; #288 merchant former URL source-limited. No release/deploy/provider/member writes.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-pending-coffee-null-flags",
+      "issue": 509,
+      "pr": null,
+      "title": "Fail closed on SQL NULL coffee promotion method or explicit confirmation flag",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261114135500_dic_promote_pending_coffee_null_flags.sql"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509; immutable preflight development 517fdd185d7b9463cc6a89c00e536ddd50b8838a blob 2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Read-only live full 11,996-character SQL source MD5 74ffb76151d846bfff79e7ba40fa1850; PostgreSQL pure SELECT shows NULL NOT IN and NOT NULL boolean evaluate UNKNOWN. Five actual SQL callers pass non-null fixed approved methods and literal boolean flags.",
+        "Development-only additive function replacement, disconnected synthetic dic_ci SQLSTATE and authorization regression, and SQL driver registration; CI NOT YET VERIFIED."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source PostgreSQL17, Node22, privacy/security, browser applicability and approval/governance checks not yet verified; remain TESTING, never READY without verified tests."
+      ],
+      "notes": "Low-severity latent input validation, not a proven HTTP security exploit, affected data or permission bypass. Source-only no backfill, preserve all historical migrations, archive/member/community state, release boundary and #96/#33 ownership.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-33-r201-original299-post-ready-anonymous-grower",
+      "issue": 33,
+      "pr": 2704,
+      "title": "Selected original603 #299 anonymous-grower correction after frozen R198 READY; development-only exclusion",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": "ad7a7ffb0f94b4d706774867dcb9eb402b6bef26",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "owner_source": "Autonomous #33 directly evidenced original603 current selected official source, later development change; current owner 2026-11-14 Publish only the original four READY plus independently required R191/R192, not post-R198 R201.",
+      "tests": [
+        "Source merged ad7a7ffb0f94b4d706774867dcb9eb402b6bef26 with six positive/negative #299 selected official-source regressions; later-than-R198 exact source, IN_PROGRESS pending independent READY and source isolation; not accepted for this batch."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Newer merged original603 #299 metadata change follows the frozen independently READY R198 source; excluded from current owner one-use publication by pinning R198 exact metadata blob, #33 remains open."
+      ],
+      "notes": "Explicit unready owner for the sole later metadata edit ad7a7; avoid laundering new development source in current READY candidate. Preserve development source and tests. No publish grant or provider mutation.",
       "production_deployed": false
     }
   ],
@@ -16460,6 +16726,81 @@
       "source_sha": "c5a149d1839d9f0a6a1bf04dd2149011bf175ec5",
       "production_deployed": false,
       "evidence": "PR #2639 exact head 55dab9f five CI SUCCESS (43578183225/256/235/244/230); nonforce merge c5a149d1839d9f0a6a1bf04dd2149011bf175ec5; merged approval 43578436431 and cloud/mobile 43578436453 SUCCESS; merged Node 43578436420 CANCELLED not PASS, later unchanged source/test descendant d4e8b1b927f2bae3cc941959fd78481e435568cc Node 43578597225 SUCCESS, cloud/mobile 43578597279 and approval 43578597245 SUCCESS. Six focused synthetic tests covered feed switch attribution and offline payload; no actual member experiment or deployment."
+    },
+    {
+      "date": "2026-11-14",
+      "issue": 2621,
+      "item_id": "DIC-Q-2621-add-coffee-difference-tap-preview-cleanup",
+      "state": "DEPLOYED",
+      "source_sha": "7bee5534d45649179b759f88135c8457957b856a",
+      "production_deployed": true,
+      "release_id": "DIC-20261114-READY4-02",
+      "release_sha": "69b066171b64a54f92d828ce99c51f29afb32780",
+      "netlify_deploy_id": "6af82c096b094d3dd36485b7",
+      "evidence": "Exact source 7bee5534d45649179b759f88135c8457957b856a five GitHub CI jobs SUCCESS (approval 43581091127, validate 43581091126, cloud+mobile 43581091206, SQL 43581091190), one packaged build SUCCESS; source-isolated exactly 4 app files/zero workflows and zero SQL migration changes; release controller 43581459754 SUCCESS, nonforce Git 69b066171b64a54f92d828ce99c51f29afb32780, Netlify 6af82c096b094d3dd36485b7 READY/current published 2026-11-14T09:38:33.549Z with 4 expected functions, zero scanned secret matches. Eight unfinished queue items excluded."
+    },
+    {
+      "date": "2026-11-14",
+      "issue": 2633,
+      "item_id": "DIC-Q-2633-remove-url-source-badges",
+      "state": "DEPLOYED",
+      "source_sha": "7bee5534d45649179b759f88135c8457957b856a",
+      "production_deployed": true,
+      "release_id": "DIC-20261114-READY4-02",
+      "release_sha": "69b066171b64a54f92d828ce99c51f29afb32780",
+      "netlify_deploy_id": "6af82c096b094d3dd36485b7",
+      "evidence": "Exact source 7bee5534d45649179b759f88135c8457957b856a five GitHub CI jobs SUCCESS (approval 43581091127, validate 43581091126, cloud+mobile 43581091206, SQL 43581091190), one packaged build SUCCESS; source-isolated exactly 4 app files/zero workflows and zero SQL migration changes; release controller 43581459754 SUCCESS, nonforce Git 69b066171b64a54f92d828ce99c51f29afb32780, Netlify 6af82c096b094d3dd36485b7 READY/current published 2026-11-14T09:38:33.549Z with 4 expected functions, zero scanned secret matches. Eight unfinished queue items excluded."
+    },
+    {
+      "date": "2026-11-14",
+      "issue": 2640,
+      "item_id": "DIC-Q-2640-coffee-conflict-copy-one-line",
+      "state": "DEPLOYED",
+      "source_sha": "7bee5534d45649179b759f88135c8457957b856a",
+      "production_deployed": true,
+      "release_id": "DIC-20261114-READY4-02",
+      "release_sha": "69b066171b64a54f92d828ce99c51f29afb32780",
+      "netlify_deploy_id": "6af82c096b094d3dd36485b7",
+      "evidence": "Exact source 7bee5534d45649179b759f88135c8457957b856a five GitHub CI jobs SUCCESS (approval 43581091127, validate 43581091126, cloud+mobile 43581091206, SQL 43581091190), one packaged build SUCCESS; source-isolated exactly 4 app files/zero workflows and zero SQL migration changes; release controller 43581459754 SUCCESS, nonforce Git 69b066171b64a54f92d828ce99c51f29afb32780, Netlify 6af82c096b094d3dd36485b7 READY/current published 2026-11-14T09:38:33.549Z with 4 expected functions, zero scanned secret matches. Eight unfinished queue items excluded."
+    },
+    {
+      "date": "2026-11-14",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r253-slow-feed-recommendation-use-attribution",
+      "state": "DEPLOYED",
+      "source_sha": "7bee5534d45649179b759f88135c8457957b856a",
+      "production_deployed": true,
+      "release_id": "DIC-20261114-READY4-02",
+      "release_sha": "69b066171b64a54f92d828ce99c51f29afb32780",
+      "netlify_deploy_id": "6af82c096b094d3dd36485b7",
+      "evidence": "Exact source 7bee5534d45649179b759f88135c8457957b856a five GitHub CI jobs SUCCESS (approval 43581091127, validate 43581091126, cloud+mobile 43581091206, SQL 43581091190), one packaged build SUCCESS; source-isolated exactly 4 app files/zero workflows and zero SQL migration changes; release controller 43581459754 SUCCESS, nonforce Git 69b066171b64a54f92d828ce99c51f29afb32780, Netlify 6af82c096b094d3dd36485b7 READY/current published 2026-11-14T09:38:33.549Z with 4 expected functions, zero scanned secret matches. Eight unfinished queue items excluded."
+    },
+    {
+      "date": "2026-11-14",
+      "issue": 33,
+      "item_id": "DIC-Q-33-r191-275-276-post-ready-unnamed-growers",
+      "state": "READY",
+      "source_sha": "4c7bde4d3325bcee31ab0a25ade050d065a1735e",
+      "production_deployed": false,
+      "evidence": "Independent exact PR-head 49efeb9d852611661964c712ca62cd9678a398c0: approval 43564764390, Node/lint 43564764551, cloud/mobile 43564764622, SQL 43564764625 SUCCESS (five required statuses); focused direct official #275/#276 43564764502 SUCCESS. Frozen603 SKIPPED, not counted. Exact first-parent merge 4c7bde4d3325bcee31ab0a25ade050d065a1735e: metadata blob 31de44b9a1242d129ec9ff1ff2cea6dd75b87107, eight-case test blob c851c5de8d7c278830fece4b919dea967a180e70, official checker blob a0a36dba56772df19b53e9ae8145cd459b97b12f all MATCH PR-head. Merged Node 43565132362, cloud 43565132210, approval 43565132296, exact official 43565132307 SUCCESS. Required earlier producer guard is retained in R198's independently READY pinned coffee-page-metadata blob; no R192/newer code accepted."
+    },
+    {
+      "date": "2026-11-14",
+      "issue": 33,
+      "item_id": "DIC-Q-33-r192-redhouse-selected-narrative-review",
+      "state": "READY",
+      "source_sha": "4854b80adcc661c84adbe48da736e744f603f66d",
+      "production_deployed": false,
+      "evidence": "PR head d0143628cc798742cbe4155b812861c6ffc91ba3 five GitHub exact-source checks SUCCESS: approval 43570527949, Node/lint/build 43570527804, cloud/mobile 43570527874, isolated SQL 43570527866; selected current #277-279 official source 43570527926 SUCCESS, source security 43570527922 SUCCESS. Exact merged source/test/checker four Git blobs identical at 4854b80adcc661c84adbe48da736e744f603f66d; merged Node 43570881989, cloud/mobile 43570881986, approval 43570882135, selected actual official 43570881958 SUCCESS. Original603 frozen SKIPPED, parent full review OPEN."
+    },
+    {
+      "date": "2026-11-14",
+      "issue": 33,
+      "item_id": "DIC-Q-33-r201-original299-post-ready-anonymous-grower",
+      "state": "IN_PROGRESS",
+      "source_sha": "ad7a7ffb0f94b4d706774867dcb9eb402b6bef26",
+      "production_deployed": false,
+      "evidence": "R201 metadata later than frozen R198; exact source blob deferred, pinned candidate excludes while live development retains it."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"

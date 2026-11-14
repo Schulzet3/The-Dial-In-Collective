@@ -1,0 +1,202 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "round": "R195",
+  "date_utc": "2026-11-14",
+  "outcome": "NARROW_SELECTED_PRODUCT_SOURCE_AND_ACTUAL_PARSER_VERIFIED_282_284_PARENT_INCOMPLETE",
+  "preflight": {
+    "first_run_branch_sha": "4cc154a8891f5974ea827a9941e3284df12c9d33",
+    "documentation_preflight_sha": "8166e68ea8b1963237efc44c71a5cdde4872cdc0",
+    "file_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "immutable_file_content_verified": true
+  },
+  "source": {
+    "pull_request": 2654,
+    "reviewed_head_sha": "f81752cf203a4c58c96641f628b9e9febe4072e9",
+    "safely_merged_sha": "c3de22a33347b6c15060aa921e7a6801c55fcc15",
+    "merge_method": "squash",
+    "changed_files": [
+      {
+        "path": ".github/workflows/issue33-r195-original282-284.yml",
+        "blob_sha": "899a395a811ff3d80911c393bf3b4e1f9fc6e0d7"
+      },
+      {
+        "path": "scripts/audit/issue33-r195-original282-284-check.mjs",
+        "blob_sha": "04fbdac73381e2ae79e2c02e9af07085cb08054a"
+      },
+      {
+        "path": "tests/coffee-issue33-r195-original282-284.test.mjs",
+        "blob_sha": "e0e888ec1e65106b15008e25a3420df4f649cb87"
+      },
+      {
+        "path": "docs/workstreams/ops-issue33-r195-282-284-20261114.md",
+        "blob_sha": "62560de25eb6cb48952d27f97ee4643798802f88"
+      }
+    ],
+    "reviewed_head_merged_blob_parity": true,
+    "runtime_parser_modified": false,
+    "original_parser_blob_sha": "0d3db187bee890b59cffa6d65709394f843349e1"
+  },
+  "immutable_original": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "changed": false,
+    "full_individual_semantic_certification": false
+  },
+  "cases": [
+    {
+      "number": 282,
+      "roaster": "Ridley Roasthouse",
+      "coffee": "Bold Betty",
+      "official_url": "https://ridleyroasthouse.com/products/ridley-roasthouse-founders-roast-coffee",
+      "selected_h1": "Bold Betty",
+      "raw_html_bytes": 160621,
+      "raw_html_sha256": "fe1a67e1eb010c96fb0eade68699f6d6b22ab385fd6d88f503f6c378b542ea34",
+      "parser": {
+        "name": "Bold Betty",
+        "roaster": "Ridley Roasthouse",
+        "origin": "Columbia",
+        "process": "Washed",
+        "roast_level": "Dark",
+        "tasting_notes": "Great aroma, very clean, notes of apricot, honey and pear with full body and sweet finish."
+      },
+      "conflicts": [],
+      "qualification": "Columbia is the seller's literal spelling, not independently established as a normalized national name; no named farm producer published. Earlier imagined Guatemala/caramel hypothesis DISPROVED by exact real selected official HTML. Historical slug Founders Roast is not selected H1.",
+      "current_identity_verified": true,
+      "current_source_parser_passed": true
+    },
+    {
+      "number": 284,
+      "roaster": "Rise Up Coffee Roasters",
+      "coffee": "Single Origin: Nicaragua | Honey Arabica | Organic Coffee",
+      "official_url": "https://riseupcoffee.com/products/single-origin-nicaragua-honey-arabica-coffee",
+      "selected_h1": "Single Origin: Nicaragua | Honey Arabica | Organic Coffee",
+      "raw_html_bytes": 741380,
+      "raw_html_sha256": "f78e1885d40b32f3adf8834fa82eca7c574b18f5c6b396b09bd1737922830204",
+      "parser": {
+        "name": "Single Origin: Nicaragua | Honey Arabica | Organic Coffee",
+        "roaster": "Rise Up Coffee Roasters",
+        "origin": "Aranjuez, Nicaragua",
+        "producer": "Byron Corrales",
+        "process": "Honey",
+        "tasting_notes": "subtle fruit"
+      },
+      "conflicts": [],
+      "qualification": "Selected farm prose additionally says Mataglapa (literal seller spelling) next to Aranjuez; retain selected narrative as review evidence rather than silently filling a geo claim. Printed Light+ roast has no unambiguous supported canonical mapped level. No decaf/recipe guessed.",
+      "current_identity_verified": true,
+      "current_source_parser_passed": true
+    }
+  ],
+  "independent_hosted_artifact": {
+    "merged_run_id": 43584252159,
+    "artifact_id": 14109463549,
+    "zip_sha256": "73db53f130e837770783343b5973ab0b387a18b72c1ce96feda5b8c31e5d1f44",
+    "zip_bytes": 149330,
+    "raw_html_sha256s": {
+      "282": "fe1a67e1eb010c96fb0eade68699f6d6b22ab385fd6d88f503f6c378b542ea34",
+      "284": "f78e1885d40b32f3adf8834fa82eca7c574b18f5c6b396b09bd1737922830204"
+    },
+    "summary_json_sha256": "51ea8079e3d2eb0f69648cca9163a630da53adafa0ad46c1d58cae93824bbefa",
+    "afterproof_json_sha256": "c9ce3a3c8537ed46a1419514d718e030a43a9959d20efe6d6df074e7893ea1b4",
+    "independently_downloaded_and_unzipped": true,
+    "strict_afterproof_passed": true,
+    "strict_afterproof_errors": []
+  },
+  "ci": {
+    "pr_head_selected": {
+      "id": 43583941576,
+      "conclusion": "success",
+      "focused_tests_pass": 6,
+      "focused_tests_fail": 0
+    },
+    "pr_head_node_lint": {
+      "id": 43583941564,
+      "conclusion": "success",
+      "node_pass": 4792,
+      "node_fail": 0,
+      "node_skip": 6,
+      "lint": "pass"
+    },
+    "pr_head_cloud_mobile": {
+      "id": 43583941529,
+      "conclusion": "success"
+    },
+    "pr_head_sql": {
+      "id": 43583941504,
+      "conclusion": "success"
+    },
+    "pr_head_python": {
+      "id": 43583941610,
+      "conclusion": "success"
+    },
+    "pr_head_source": {
+      "id": 43583941527,
+      "conclusion": "success"
+    },
+    "pr_head_approval": {
+      "id": 43583941545,
+      "conclusion": "success"
+    },
+    "merged_selected": {
+      "id": 43584252159,
+      "conclusion": "success",
+      "focused_pass": 6
+    },
+    "merged_node_lint": {
+      "id": 43584252313,
+      "conclusion": "success",
+      "node_pass": 4792,
+      "node_fail": 0,
+      "node_skip": 6
+    },
+    "merged_cloud_mobile": {
+      "id": 43584252197,
+      "conclusion": "success"
+    },
+    "merged_python": {
+      "id": 43584252142,
+      "conclusion": "success"
+    },
+    "merged_approval": {
+      "id": 43584252167,
+      "conclusion": "success"
+    },
+    "general_roaster_probe": "SKIPPED_NOT_PASS",
+    "whole_original603": "SKIPPED_NOT_CERTIFICATION"
+  },
+  "failures_corrected": [
+    {
+      "run": 43583461570,
+      "kind": "unsubstantiated synthetic old-JSON-LD identity assertion; guarded source SKIPPED"
+    },
+    {
+      "run": 43583752529,
+      "kind": "fabricated selected Guatemala/caramel assertions contradicted by fresh official page; test failed"
+    },
+    {
+      "run": 43583882893,
+      "kind": "JavaScript test title apostrophe syntax; guarded official afterproof independently passed"
+    }
+  ],
+  "scope": {
+    "issue33": "OPEN",
+    "global603": "INCOMPLETE",
+    "unresolved_official_access": [
+      566,
+      567,
+      594
+    ],
+    "other_owner_issues": [
+      267,
+      96
+    ],
+    "queue_change": false,
+    "deploy": false,
+    "production_sql_edge_auth_provider_member_writes": 0,
+    "backups_cost_schedule_alert_changes": false
+  },
+  "next": "Continue source cases beyond #284 and higher-risk unresolved original603 cases; preserve literal Mataglapa and Columbia as review qualifiers, do not imply global source certification."
+}

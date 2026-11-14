@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "status": "DEPLOYED",
+  "release_id": "DIC-20261114-READY4-02",
+  "authority": "Owner 2026-11-14 explicit Publish all READY",
+  "source_branch": "release-candidates/20261114-ready4-01",
+  "tested_source_sha": "7bee5534d45649179b759f88135c8457957b856a",
+  "controller_request_main_sha": "34c5bda912263365aeb06aad93042b61585eecbd",
+  "controller_run_id": 43581459754,
+  "controller_conclusion": "success",
+  "release_sha": "69b066171b64a54f92d828ce99c51f29afb32780",
+  "previous_release_sha": "efe168127c1adc5f56eb55f6422a8e7726e6a0e2",
+  "netlify_site_id": "153277f2-e19e-4862-b9a6-f2e18ccde271",
+  "netlify_deploy_id": "6af82c096b094d3dd36485b7",
+  "netlify_state": "ready",
+  "netlify_current": true,
+  "netlify_commit_sha": "69b066171b64a54f92d828ce99c51f29afb32780",
+  "published_at_utc": "2026-11-14T09:38:33.549Z",
+  "netlify_functions": [
+    "coffee-url-preview",
+    "dic-admin-push",
+    "dic-admin-push-poll",
+    "dic-member-approval-poll"
+  ],
+  "netlify_secret_matches": 0,
+  "candidate_required_ci_runs": {
+    "approval": 43581091127,
+    "validate": 43581091126,
+    "cloud_tests": 43581091206,
+    "mobile_browser_qa": 43581091206,
+    "sql": 43581091190
+  },
+  "five_checks_success": true,
+  "one_packaged_build_success": true,
+  "source_isolation": {
+    "published_base": "f0b8a6a17148ac6817ca52184c881a369c798c6a",
+    "selected_ready_ids": [
+      "DIC-Q-2621-add-coffee-difference-tap-preview-cleanup",
+      "DIC-Q-2633-remove-url-source-badges",
+      "DIC-Q-2640-coffee-conflict-copy-one-line",
+      "DIC-Q-455-r253-slow-feed-recommendation-use-attribution"
+    ],
+    "approved_deployable_paths": [
+      "site/cloud/coffee-match-ui.js",
+      "site/cloud/coffee-url-autofill.js",
+      "site/cloud/main.js",
+      "site/visual.css"
+    ],
+    "unfinished_app_paths_restored": 5,
+    "unpublished_github_workflows_restored": 105,
+    "unready_or_workflow_only_tests_excluded": 16,
+    "sql_migration_changes": 0
+  },
+  "database_change_risk": "none",
+  "recovery_evidence": {
+    "github_backup_run_id": 43496304957,
+    "artifact_id": 14072635105,
+    "encrypted_archive_sha256": "1555492507aceadd9a9bad2e32139896ba85d3d68050f0954043d3dc35cb9b46",
+    "private_offsite_file_id": "1v6b01ydDfR1RwWW2jRpVysyXzMUCCAbH",
+    "verified_at_utc": "2026-11-13T20:12:40.882Z"
+  },
+  "queue_counts_after": {
+    "DEPLOYED": 343,
+    "IN_PROGRESS": 8
+  },
+  "limitations": [
+    "Real signed-in member/device experience not exercised",
+    "No production SQL/member write; no additional backup needed for non-destructive release"
+  ]
+}

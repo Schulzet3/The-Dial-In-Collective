@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "T21-ERRATUM-T20-L2275",
+  "date_utc": "2026-11-14",
+  "new_line_credit": 0,
+  "original_source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+  "source_path": "docs/audits/2026-10-21-requirement-traceability.json",
+  "source_blob_sha": "a94447e07cb31623c68c834f800889f9c2f79bfd",
+  "original_line": 2275,
+  "verified_literal": "    {",
+  "prior_receipt_path": "docs/audits/issue267-v2-strict-batches/S2-T20-F194-2271-2330-20261114.json",
+  "prior_receipt_blob": "2c8e5c0832843c6123e4d8f9984481313df2b473",
+  "prior_classification": "json-array-separator",
+  "correct_classification": "json-object-start",
+  "prior_behavior": "Separates the budget wrapper from the next roast taxonomy decision entry.",
+  "correct_behavior": "Opens the next distinct current_owner_approved_roast_taxonomy object in current_owner_decisions. The preceding line 2274 provides the close/comma separator.",
+  "quality": "Strict previous per-line evidence was too imprecise for a structural JSON line; source exact Git literal shows opening brace and no separator on this line.",
+  "risk": "Evidence-integrity correction only; no live software defect, runtime behavior, privacy leak or provider data change demonstrated.",
+  "locked_fit": "Canonical seven-tier taxonomy and later scoped decisions still govern. No change to historical source.",
+  "remediation": "Append-only erratum; preserve original receipt and its 60 reviewed original positions, do not double-credit, do not silently overwrite prior semantics."
+}

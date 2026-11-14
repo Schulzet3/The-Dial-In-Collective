@@ -179,7 +179,9 @@ test('client makes exactly one authenticated public-preview request per click wi
 test('catalog preview provides an explicit current-page check while ordinary previews need no extra lookup',()=>{
  const saved=coffeeUrlPreviewMarkup({ok:true,source:'approved_catalog',fields:{name:'Coffee',roaster:'Roaster'}});
  assert.match(saved,/data-action="preview-coffee-url-refresh"/);assert.match(saved,/Check Current Roaster Page/);
- assert.match(saved,/usual URL lookup limit/);
+ assert.match(saved,/15-second account cooldown and 12 lookups per 24 hours/);
+ assert.match(saved,/Admitted, email-verified Admins: no account cooldown or daily limit/);
+ assert.doesNotMatch(saved,/usual URL lookup limit|Wait 30 seconds between checks/);
  const fresh=coffeeUrlPreviewMarkup({ok:true,source:'unverified_public_page',fields:{name:'Coffee',roaster:'Roaster'}});
  assert.doesNotMatch(fresh,/data-action="preview-coffee-url-refresh"/);
 });

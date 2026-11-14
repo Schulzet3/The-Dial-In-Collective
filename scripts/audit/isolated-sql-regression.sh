@@ -37,4 +37,19 @@ for regression in coffee_identity_matching coffee_automated_approval admin_read_
   echo "Running $regression"
   run_sql "supabase/tests/$regression.sql"
 done
+# These #509 regressions require their exact source migration. Release-candidates
+# omit unfinished SQL migrations; those specific tests are NOT_APPLICABLE there.
+# The normal development branch still runs both and fails closed on bad SQL.
+if [[ -f supabase/migrations/20261114115000_dic_recommendation_context_null_control_guard.sql ]]; then
+  echo "Running recommendation_context_null_controls"
+  run_sql supabase/tests/recommendation_context_null_controls.sql
+else
+  echo "NOT_APPLICABLE: #509 recommendation_context_null_controls; migration excluded from tested source"
+fi
+if [[ -f supabase/migrations/20261114135500_dic_promote_pending_coffee_null_flags.sql ]]; then
+  echo "Running pending_coffee_null_guards"
+  run_sql supabase/tests/pending_coffee_null_guards.sql
+else
+  echo "NOT_APPLICABLE: #509 pending_coffee_null_guards; migration excluded from tested source"
+fi
 echo 'PASS: all checked-in migrations and SQL suites, including staged import/setup, cross-account and source-worker authorization and first-style owner isolation regressions; no hosted connection.'

@@ -1,51 +1,69 @@
 {
   "schema_version": 1,
-  "release_id": "DIC-20261114-READY4-02",
-  "tested_source_sha": "7bee5534d45649179b759f88135c8457957b856a",
-  "previous_release_head_sha": "efe168127c1adc5f56eb55f6422a8e7726e6a0e2",
-  "claimed_at_utc": "2026-11-14T09:38:10.610Z",
+  "release_id": "DIC-20261114-READY6-03",
+  "tested_source_sha": "ed82fc7aed52b8c8bfac8a348133011b554f1c0b",
+  "previous_release_head_sha": "69b066171b64a54f92d828ce99c51f29afb32780",
+  "claimed_at_utc": "2026-11-14T16:00:47.295Z",
   "status": "GIT_CONNECTED_BUILD_PENDING_NETLIFY_PROVIDER_READBACK",
   "granted_single_publication": true,
   "approved_ready_queue_items": [
     {
-      "id": "DIC-Q-2621-add-coffee-difference-tap-preview-cleanup",
-      "issue": 2621,
-      "title": "Make post-add coffee differences tappable; remove redundant New Coffee source/detail sections",
-      "merged_source_sha": "3875e72cf04b8c0d9038d031035c61ef7c06a83f",
+      "id": "DIC-Q-28-owner-oauth-privacy-policy-20261114",
+      "issue": 28,
+      "title": "Provide minimal public privacy policy for owner-only Google Drive OAuth consent",
+      "merged_source_sha": "d0b450db85f0c25b05fc65007de639852436ff66",
       "scope_paths": [
-        "site/cloud/coffee-url-autofill.js",
         "site/cloud/main.js",
-        "site/visual.css"
+        "site/styles.css",
+        "site/privacy.html",
+        "build_cloud.mjs"
       ]
     },
     {
-      "id": "DIC-Q-2633-remove-url-source-badges",
-      "issue": 2633,
-      "title": "Remove obsolete Unverified Page and verified-roaster badges/copy from New Coffee",
-      "merged_source_sha": "5a295c08219b91426971227153893e8749deeaa3",
+      "id": "DIC-Q-33-r191-275-276-post-ready-unnamed-growers",
+      "issue": 33,
+      "title": "Preserve post-READY original603 #275-276 unnamed-grower correction in development only; exclude from owner-frozen READY7 release",
+      "merged_source_sha": "4c7bde4d3325bcee31ab0a25ade050d065a1735e",
       "scope_paths": [
-        "site/cloud/coffee-url-autofill.js",
-        "site/cloud/coffee-match-ui.js",
-        "site/cloud/main.js",
-        "site/visual.css"
+        "src/server/coffee-page-metadata.mjs"
       ]
     },
     {
-      "id": "DIC-Q-2640-coffee-conflict-copy-one-line",
-      "issue": 2640,
-      "title": "Replace long source-conflict heading/paragraph with exact one-line tap-to-fill guidance",
-      "merged_source_sha": "f2e0036884366930112c0ce0b6e99a76b4df5748",
+      "id": "DIC-Q-33-r192-redhouse-selected-narrative-review",
+      "issue": 33,
+      "title": "Preserve exact current selected intrinsic jasmine/lemon separately from Red House printed cupping notes (review only)",
+      "merged_source_sha": "4854b80adcc661c84adbe48da736e744f603f66d",
+      "scope_paths": [
+        "src/server/coffee-selected-description-sensory.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-r255-offline-recommendation-provenance-preview",
+      "issue": 455,
+      "title": "Preserve already-queued Use Recommendation provenance in offline Shot History preview",
+      "merged_source_sha": "87da54b3af6c5dc6a0fbf27bfdbaaf763819fbe5",
+      "scope_paths": [
+        "site/cloud/mapping.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-508-catalog-refresh-cooldown-copy-15s",
+      "issue": 508,
+      "title": "Correct cached coffee current-page refresh guidance to Locked member 15s and Admin exemption",
+      "merged_source_sha": "359c42382b53733cab15f4a90294a924497773f3",
       "scope_paths": [
         "site/cloud/coffee-url-autofill.js"
       ]
     },
     {
-      "id": "DIC-Q-455-r253-slow-feed-recommendation-use-attribution",
-      "issue": 455,
-      "title": "Discard stale Use Recommendation source attribution when Slow Feed mode changes",
-      "merged_source_sha": "c5a149d1839d9f0a6a1bf04dd2149011bf175ec5",
+      "id": "DIC-Q-33-r198-original291-source-prose-conflict",
+      "issue": 33,
+      "title": "Withhold conflicting corroborated current selected Tanzania Peaberry flavor; retain both literal sources for member review",
+      "merged_source_sha": "8cf2c2bcec7881dc590d3de8366393863a45ef9b",
       "scope_paths": [
-        "site/cloud/main.js"
+        "src/server/coffee-selected-hero-notes-conflict.mjs",
+        "src/server/coffee-page-metadata.mjs"
       ]
     }
   ]
