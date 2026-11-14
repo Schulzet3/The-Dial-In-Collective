@@ -13838,6 +13838,32 @@
       "production_deployed": false
     },
     {
+      "id": "DIC-Q-33-proudmary-structured-title-20261113",
+      "issue": 33,
+      "pr": 2588,
+      "title": "Split verified country | coffee | variety | process product titles without losing the exact selected source identity",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-identity-evidence.mjs",
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-shopify-ajax.mjs"
+      ],
+      "owner_source": "Owner November 13 2026 Proud Mary Las Lajas - Finca San Isidro direct correction; PREFLIGHT development_sha=f1dc5fd4be99bdbd5a9d4b6a2123ba8e8c0bbe4c preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "PR #2588 head e2839a103072fb3b1a1fe477ea8e562c4198f2f8: governance run 43562350446 FAILED solely because new identity and Shopify source paths lacked an IN_PROGRESS queue item. This entry remedies intake; fresh exact-head checks required.",
+        "Focused real-module tests tests/coffee-issue33-proudmary-structured-title.test.mjs must pass; no test or CI PASS claimed before actual hosted completion."
+      ],
+      "ci_runs": [
+        43562350446
+      ],
+      "blockers": [
+        "Exact PR-head Node, cloud and approval CI must succeed after this intake update; nonforce merge and exact merged source CI/readback required before READY."
+      ],
+      "notes": "Development only, no publication. Selected four-segment product title yields Las Lajas - Finca San Isidro; preserve country Costa Rica, variety Caturra & Catuai, process Natural, full title source provenance and strict Shopify handle. Ambiguous names unchanged; original603 immutable. Issue #33 remains OPEN.",
+      "production_deployed": false
+    },
+    {
       "id": "DIC-Q-2592-coffee-conflict-tap-to-fill",
       "issue": 2592,
       "title": "Tap sourced conflicting coffee alternatives to fill only the selected Add Coffee field",
