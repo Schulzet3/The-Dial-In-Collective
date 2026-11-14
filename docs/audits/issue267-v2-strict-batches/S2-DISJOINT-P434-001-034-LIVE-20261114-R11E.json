@@ -1,0 +1,1444 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "S2-DISJOINT-P434-001-034-LIVE-20261114-R11E",
+  "reviewer": "AI_DIRECT_SOURCE_LINE_READING_NOT_HUMAN",
+  "preflight": {
+    "development_sha": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d"
+  },
+  "pinned": {
+    "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+    "path": "tests/visual-refinement.test.mjs",
+    "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+    "line_count": 34,
+    "from": 1,
+    "to": 34
+  },
+  "live": {
+    "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+    "path": "tests/visual-refinement.test.mjs",
+    "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+    "physical_lines": 51
+  },
+  "first_frozen_F001_revalidation": {
+    "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+    "path": ".github/workflows/approval-continuity.yml",
+    "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+    "verified_existing_S2_001_rows": 41,
+    "new_credit": 0
+  },
+  "method": "Every literal original P434 1-34 and each newly introduced current line 8-14 and 29-39 directly fetched/read, interpreted and individually accounted for; no grouped V1/R2/C2 credit. Delta code lines are tracked separately from pinned original.",
+  "direct_original_numbered_lines": [
+    {
+      "line": 1,
+      "source_text": "import test from 'node:test';",
+      "inspection_classification": "import",
+      "behavior": "Imports Node test registration",
+      "quality": "No modification of runtime",
+      "risk_security_privacy_performance": "No source risk",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 1
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 1,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner-controlled nonpublish, appearance settings, and UI affordance boundaries",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 2,
+      "source_text": "import assert from 'node:assert/strict';",
+      "inspection_classification": "import",
+      "behavior": "Imports strict assertion helpers",
+      "quality": "Keeps failure conditions explicit",
+      "risk_security_privacy_performance": "Testing code, no auth guard",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 2
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 2,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner-controlled nonpublish, appearance settings, and UI affordance boundaries",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 3,
+      "source_text": "import {readFileSync} from 'node:fs';",
+      "inspection_classification": "import",
+      "behavior": "Imports synchronous local file read",
+      "quality": "Reads static source during tests",
+      "risk_security_privacy_performance": "Synchronous I/O only in Node test suite",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 3
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 3,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner-controlled nonpublish, appearance settings, and UI affordance boundaries",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 4,
+      "source_text": "import {normalizeAppearance,resolveAppearance,readAppearance} from '../site/cloud/appearance.js';",
+      "inspection_classification": "import",
+      "behavior": "Imports appearance normalization, resolution, reading",
+      "quality": "Exercises dark/light/system and unavailable storage behavior",
+      "risk_security_privacy_performance": "Does not test live browser storage",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 4
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 4,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner-controlled nonpublish, appearance settings, and UI affordance boundaries",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 5,
+      "source_text": "import {decide} from '../scripts/netlify/should-ignore-build.mjs';",
+      "inspection_classification": "import",
+      "behavior": "Imports Netlify build-ignore decision function",
+      "quality": "Tests owner no-unapproved-preview/deployment logic",
+      "risk_security_privacy_performance": "Static simulated contexts not actual Netlify provider",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 5
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 5,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner-controlled nonpublish, appearance settings, and UI affordance boundaries",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 6,
+      "source_text": "const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');",
+      "inspection_classification": "helper",
+      "behavior": "Resolves project-relative source paths to UTF8 for tests",
+      "quality": "Shared helper avoids duplicate read boilerplate",
+      "risk_security_privacy_performance": "No network or credential access",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 6
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 6,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner-controlled nonpublish, appearance settings, and UI affordance boundaries",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 7,
+      "source_text": "const css=read('site/visual.css');",
+      "inspection_classification": "fixture",
+      "behavior": "Reads current visual.css into test constant",
+      "quality": "Binds contrast tests to real CSS source",
+      "risk_security_privacy_performance": "CSS parsing approximation can omit media overrides",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 7
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 7,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner-controlled nonpublish, appearance settings, and UI affordance boundaries",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 8,
+      "source_text": "const scopes=[...css.matchAll(/:root(?:\\[data-theme=dark\\])?\\s*\\{([^}]+)\\}/g)].map(m=>Object.fromEntries([...m[1].matchAll(/--([a-z0-9-]+):\\s*(#[a-f0-9]{6})/gi)].map(x=>[x[1],x[2]])));",
+      "inspection_classification": "parser",
+      "behavior": "Finds light/dark root blocks and six-hex custom CSS color variables",
+      "quality": "Computes palette from current stylesheet instead of arbitrary hardcoded colors",
+      "risk_security_privacy_performance": "Narrow regexp excludes 3/8-digit colors and variables defined outside matched blocks",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 8
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 15,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "consider broader selector coverage only if required",
+      "locked_decision_fit": "Owner-approved palette, accessibility and dark/light appearance",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 9,
+      "source_text": "const luminance=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)/255).map(x=>x<=.04045?x/12.92:((x+.055)/1.055)**2.4).reduce((a,x,i)=>a+x*[.2126,.7152,.0722][i],0);",
+      "inspection_classification": "math-function",
+      "behavior": "Computes WCAG relative luminance via sRGB transfer function and channel weights",
+      "quality": "Uses sRGB linearization and standard coefficients",
+      "risk_security_privacy_performance": "Invalid input/alpha not validated, tests depend on matched six-hex CSS",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 9
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 16,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner-approved palette, accessibility and dark/light appearance",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 10,
+      "source_text": "const contrast=(a,b)=>{const x=luminance(a),y=luminance(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);};",
+      "inspection_classification": "math-function",
+      "behavior": "Calculates contrast ratio from two luminances plus 0.05",
+      "quality": "Matches WCAG style contrast calculation",
+      "risk_security_privacy_performance": "Only evaluated for selected pairs, not all visual states",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 10
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 17,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner-approved palette, accessibility and dark/light appearance",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 11,
+      "source_text": "for(const [i,mode] of ['light','dark'].entries()){",
+      "inspection_classification": "loop",
+      "behavior": "Iterates light and dark appearance modes for palette checks",
+      "quality": "Tests both themes with same suite",
+      "risk_security_privacy_performance": "No high-contrast OS theme or browser rendering",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 11
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 18,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner-approved palette, accessibility and dark/light appearance",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 12,
+      "source_text": " const v={...scopes[0],...scopes[i]};",
+      "inspection_classification": "fixture",
+      "behavior": "Combines default root and mode-specific palette variables",
+      "quality": "Fills inherited tokens for contrast assertions",
+      "risk_security_privacy_performance": "scopes[i] index assumes first two matches light then dark, may be brittle if order changes",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 12
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 19,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "check selector order if new theme introduced",
+      "locked_decision_fit": "Owner-approved palette, accessibility and dark/light appearance",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 13,
+      "source_text": " // Exact original dark-JSX badge fills and plain black text; darker blue pairs warrant contrast review.",
+      "inspection_classification": "comment",
+      "behavior": "Documents original dark JSX badge fills and less-certain blue contrast",
+      "quality": "Historical palette rationale, not executable",
+      "risk_security_privacy_performance": "Comments alone not an approval or automated check",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 13
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 20,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner-approved palette, accessibility and dark/light appearance",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 14,
+      "source_text": " for(const badge of ['green','turbo','trad','ristretto','lungo','custom','pending'])test(`${mode} ${badge} uses approved original JSX lettering`,()=>assert.equal(v[`badge-${badge}-ink`].toLowerCase(),['trad','ristretto'].includes(badge)?'#ffffff':'#000000'));",
+      "inspection_classification": "assertion-loop",
+      "behavior": "Creates seven per-theme badge ink-color tests with white for trad/ristretto and black otherwise",
+      "quality": "Preserves badge palette readability/copy conventions",
+      "risk_security_privacy_performance": "Hard-coded expected colors do not itself test contrast on every badge fill",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 14
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 21,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "extend badge pairs after approved palette change",
+      "locked_decision_fit": "Owner-approved palette, accessibility and dark/light appearance",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 15,
+      "source_text": " test(`${mode} primary action text exceeds 4.5:1 contrast`,()=>assert.ok(contrast(v['action-ink'],v.action)>=4.5));",
+      "inspection_classification": "assertion",
+      "behavior": "Requires primary action text-to-background contrast >=4.5",
+      "quality": "Checks minimum normal text contrast for both modes",
+      "risk_security_privacy_performance": "No dynamic hover/focus/disabled state or browser computation",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 15
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 22,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner-approved palette, accessibility and dark/light appearance",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 16,
+      "source_text": " test(`${mode} body, muted and link text are legible on surfaces`,()=>{for(const key of ['ink','muted','accent-text'])assert.ok(contrast(v[key],v.surface)>=4.5);});",
+      "inspection_classification": "assertion-loop",
+      "behavior": "Requires body ink muted accent-text contrast >=4.5 against surface",
+      "quality": "Covers three high-use text tokens",
+      "risk_security_privacy_performance": "Text against other variable backgrounds still untested",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 16
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 23,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner-approved palette, accessibility and dark/light appearance",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 17,
+      "source_text": "}",
+      "inspection_classification": "delimiter",
+      "behavior": "Ends per-theme palette loop",
+      "quality": "No branch logic beyond loop termination",
+      "risk_security_privacy_performance": "none",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 17
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 24,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner-approved palette, accessibility and dark/light appearance",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 18,
+      "source_text": "test('appearance supports light/dark/system and safely normalizes untrusted values',()=>{assert.equal(normalizeAppearance('<script>'),'system');assert.equal(resolveAppearance('system',true),'dark');assert.equal(resolveAppearance('system',false),'light');assert.equal(resolveAppearance('light',true),'light');assert.equal(resolveAppearance('dark',false),'dark');});",
+      "inspection_classification": "test-declaration",
+      "behavior": "Tests appearance sanitization and resolveAppearance for system/light/dark",
+      "quality": "Untrusted input <script> must normalize to system; both media query booleans tested",
+      "risk_security_privacy_performance": "Does not execute early bootstrapped browser behavior",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 18
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 25,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner-controlled nonpublish, appearance settings, and UI affordance boundaries",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 19,
+      "source_text": "test('unavailable local storage falls back without blocking app or Admin',()=>assert.equal(readAppearance({getItem(){throw Error('denied');}}),'system'));",
+      "inspection_classification": "test-declaration",
+      "behavior": "Requires fallback system when localStorage getItem throws",
+      "quality": "Guards denied-storage resilience without app crash",
+      "risk_security_privacy_performance": "Does not run real Safari private browsing",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 19
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 26,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner-controlled nonpublish, appearance settings, and UI affordance boundaries",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 20,
+      "source_text": "test('Netlify cannot deploy this review branch in any context',()=>{for(const context of ['production','deploy-preview','branch-deploy'])assert.equal(decide({context,branch:'work/visual-refresh-20261015'}).ignore,true);});",
+      "inspection_classification": "assertion-loop",
+      "behavior": "Requires Netlify build-ignore decision for old work/visual-refresh branch in three contexts",
+      "quality": "Documents no deployment from old branch",
+      "risk_security_privacy_performance": "Other branches could have different rules; no current publish claim",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 20
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 27,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner-controlled nonpublish, appearance settings, and UI affordance boundaries",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 21,
+      "source_text": "test('shared appearance is allowlisted and early theme bootstrap is used by both pages',()=>{for(const page of ['site/cloud.html','site/admin.html'])assert.match(read(page),/appearance-bootstrap\\.js/);assert.match(read('build_cloud.mjs'),/cloud\\/appearance\\.js/);});",
+      "inspection_classification": "assertion",
+      "behavior": "Requires both cloud/admin pages load appearance-bootstrap and build imports appearance module",
+      "quality": "Protects prepaint theme bootstrap and shared allowlist",
+      "risk_security_privacy_performance": "Source inclusion not proof of no flashing theme in browser",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 21
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 28,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner-controlled nonpublish, appearance settings, and UI affordance boundaries",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 22,
+      "source_text": "test('Admin reads only current-account theme after authorization',()=>{const main=read('site/admin/main.js');assert.ok(main.indexOf('!status?.admin')<main.indexOf(\"from('account_preferences')\"));assert.match(main,/select\\('theme'\\)\\.eq\\('owner_id',identity.user.id\\)/);});",
+      "inspection_classification": "test-declaration-and-assertions",
+      "behavior": "Tests Admin preference read after authorization marker and owner-scoped select query",
+      "quality": "Intended to guard privacy of per-member appearance preferences",
+      "risk_security_privacy_performance": "Pinned indexOf -1 < positive can false-pass if guard missing; live corrected by helper/negative regression",
+      "dead_or_obsolete_status": "Historical weak test rewritten in live; historical source preserved",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 22
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_lines": [
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39
+        ],
+        "status": "REPLACED_WEAK_PINNED_ASSERTION_WITH_GUARD_AND_NEGATIVE_TEST",
+        "exact_original_literal": false
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "already corrected live; do not alter #96 owner code",
+      "locked_decision_fit": "Explicit owner privacy/Admin read protection: source-order regression improved; #96 owns signed-in/Auth review",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 23,
+      "source_text": "test('search toggle and icon-labelled Sign Out preserve action semantics',()=>{const main=read('site/cloud/main.js');assert.match(main,/Search & Sort/);assert.match(main,/aria-controls=\"coffee-search-tools\"/);assert.match(main,/icon\\('signout',18\\)/);});",
+      "inspection_classification": "assertion",
+      "behavior": "Checks Search & Sort, aria-controls and signout icon source",
+      "quality": "Retains labels and affordances",
+      "risk_security_privacy_performance": "Does not click button/keyboard navigation",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 23
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 40,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner-controlled nonpublish, appearance settings, and UI affordance boundaries",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 24,
+      "source_text": "test('style retains clean display ligatures and visible focus states',()=>{assert.match(css,/font-variant-ligatures:none/);assert.match(css,/:focus-visible/);assert.match(css,/prefers-reduced-motion/);});",
+      "inspection_classification": "assertion",
+      "behavior": "Checks no ligatures, focus-visible and reduced-motion CSS selectors",
+      "quality": "Signals appearance accessibility scaffolding",
+      "risk_security_privacy_performance": "Selector existence cannot prove contrast or motion compliance in browser",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 24
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 41,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner-controlled nonpublish, appearance settings, and UI affordance boundaries",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 25,
+      "source_text": "",
+      "inspection_classification": "blank",
+      "behavior": "Separates appearance tests and New Coffee layout section",
+      "quality": "No execution",
+      "risk_security_privacy_performance": "none",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 25
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 42,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner-controlled nonpublish, appearance settings, and UI affordance boundaries",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 26,
+      "source_text": "test('New Coffee has one continuous section and preserves side-by-side optional details',()=>{",
+      "inspection_classification": "test-declaration",
+      "behavior": "Starts continuous New Coffee layout regression",
+      "quality": "Protects original desired no-accordion form",
+      "risk_security_privacy_performance": "No real mobile layout pixel acceptance",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 26
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 43,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner Locked explicit editable Add Coffee with no routine accordion",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 27,
+      "source_text": " const source=read('site/cloud/main.js'),start=source.indexOf('showAdd(){'),end=source.indexOf('async finishCoffeeAdd',start);",
+      "inspection_classification": "source-slice",
+      "behavior": "Finds showAdd and async finishCoffeeAdd markers in cloud source",
+      "quality": "Scopes assertions to New Coffee flow",
+      "risk_security_privacy_performance": "Indices checked later at line29 before use of form",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 27
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 44,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner Locked explicit editable Add Coffee with no routine accordion",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 28,
+      "source_text": " const form=source.slice(start,end);",
+      "inspection_classification": "function-call",
+      "behavior": "Extracts candidate form source slice from selected markers",
+      "quality": "Isolates form markup",
+      "risk_security_privacy_performance": "slice occurs before guard, but subsequent guard must fail on missing markers",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 28
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 45,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner Locked explicit editable Add Coffee with no routine accordion",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 29,
+      "source_text": " assert.ok(start>=0 && end>start);",
+      "inspection_classification": "assertion",
+      "behavior": "Requires start and end markers found in increasing order",
+      "quality": "Fail-closed source anchor prerequisite",
+      "risk_security_privacy_performance": "No bound on nested function scopes",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 29
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 46,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner Locked explicit editable Add Coffee with no routine accordion",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 30,
+      "source_text": " assert.doesNotMatch(form,/Optional Coffee Details|<details|<summary>/);",
+      "inspection_classification": "negative-assertion",
+      "behavior": "Rejects retired Optional Coffee Details accordion markup",
+      "quality": "Keeps one continuous editable section",
+      "risk_security_privacy_performance": "Could miss other conditional accordions outside selected slice",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 30
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 47,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner Locked explicit editable Add Coffee with no routine accordion",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 31,
+      "source_text": " assert.match(form,/class=\"form-grid coffee-detail-grid\"/);",
+      "inspection_classification": "assertion",
+      "behavior": "Requires coffee-detail-grid on form layout",
+      "quality": "Supports side-by-side optional fields",
+      "risk_security_privacy_performance": "Does not verify computed breakpoint widths",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 31
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 48,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner Locked explicit editable Add Coffee with no routine accordion",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 32,
+      "source_text": " for(const label of ['Origin','Roast Level','Elevation','Process','Variety','Producer','Tasting Notes'])assert.ok(form.includes(\"'\"+label+\"'\"));",
+      "inspection_classification": "assertion-loop",
+      "behavior": "Requires Origin, Roast Level, Elevation, Process, Variety, Producer, Tasting Notes labels",
+      "quality": "Seven approved editable coffee fact fields remain represented",
+      "risk_security_privacy_performance": "Static source text does not prove parser fills or explicit save boundary",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 32
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 49,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner Locked explicit editable Add Coffee with no routine accordion",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 33,
+      "source_text": " assert.match(css,/#new-coffee \\.coffee-detail-grid\\{margin-top:16px;margin-bottom:16px\\}/);",
+      "inspection_classification": "assertion",
+      "behavior": "Requires 16px margin around #new-coffee detail grid",
+      "quality": "Protects visual spacing contract",
+      "risk_security_privacy_performance": "CSS source regex can fail on semantically equivalent formatting",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 33
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 50,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner Locked explicit editable Add Coffee with no routine accordion",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    },
+    {
+      "line": 34,
+      "source_text": "});",
+      "inspection_classification": "delimiter",
+      "behavior": "Closes New Coffee test and source file",
+      "quality": "No additional behavior",
+      "risk_security_privacy_performance": "none",
+      "dead_or_obsolete_status": "Retained current counterpart, no proven dead source",
+      "duplicate_or_redundant_status": "No demonstrated redundant removable current implementation; broader crossfile analysis incomplete",
+      "pinned_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "02365c6841e4e7f904e38833f2b0e036366f35ab",
+        "line": 34
+      },
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "live_line": 51,
+        "status": "MAPPED_EXACT",
+        "exact_original_literal": true
+      },
+      "testability": "Node 22 tests possible but NOT_RUN for this docs-only audit; static source checks not real browser/member/privacy/provider acceptance",
+      "remediation_opportunity": "none",
+      "locked_decision_fit": "Owner Locked explicit editable Add Coffee with no routine accordion",
+      "review_method": "AI direct single original numbered source line, not human inspection"
+    }
+  ],
+  "live_added_individual_line_reviews": [
+    {
+      "line": 8,
+      "source_text": "const adminThemeGateBeforeRead=main=>{",
+      "inspection_classification": "helper-declaration",
+      "behavior": "Defines Admin theme authorization ordering predicate; test-only, not app Auth enforcement",
+      "quality": "Test helper and regression hardening; no shipped app runtime change",
+      "risk_security_privacy_performance": "Separates security gate order check for positive and negative tests",
+      "dead_or_obsolete_status": "New post-pin live test code absent from pinned snapshot; no speculative deletion",
+      "duplicate_or_redundant_status": "Distinct positive/missing-guard negative test purpose; no established dead duplication",
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "line": 8
+      },
+      "testability": "Original current test source directly inspected but Node22/hosted Auth NOT_RUN_THIS_BATCH",
+      "remediation_opportunity": "No additional source edit; existing test hardening retained",
+      "locked_decision_fit": "Explicit Admin authorization before preference access; controlled test source is not real Auth proof",
+      "review_method": "Direct AI visual line reading of post-pin literal, not machine screen"
+    },
+    {
+      "line": 9,
+      "source_text": " const guard=main.indexOf('if(!status?.authenticated||!status?.admitted||!status?.admin){');",
+      "inspection_classification": "source-scan",
+      "behavior": "Finds full authenticated, admitted and admin conjunction guard",
+      "quality": "Test helper and regression hardening; no shipped app runtime change",
+      "risk_security_privacy_performance": "A missing guard returns -1 and is rejected later",
+      "dead_or_obsolete_status": "New post-pin live test code absent from pinned snapshot; no speculative deletion",
+      "duplicate_or_redundant_status": "Distinct positive/missing-guard negative test purpose; no established dead duplication",
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "line": 9
+      },
+      "testability": "Original current test source directly inspected but Node22/hosted Auth NOT_RUN_THIS_BATCH",
+      "remediation_opportunity": "No additional source edit; existing test hardening retained",
+      "locked_decision_fit": "Explicit Admin authorization before preference access; controlled test source is not real Auth proof",
+      "review_method": "Direct AI visual line reading of post-pin literal, not machine screen"
+    },
+    {
+      "line": 10,
+      "source_text": " const denial=main.indexOf('root.innerHTML=renderAdminDenied();return;',guard);",
+      "inspection_classification": "source-scan",
+      "behavior": "Finds fail-closed denial branch after Admin guard",
+      "quality": "Test helper and regression hardening; no shipped app runtime change",
+      "risk_security_privacy_performance": "Ensures denial markup and early return appear after guard marker",
+      "dead_or_obsolete_status": "New post-pin live test code absent from pinned snapshot; no speculative deletion",
+      "duplicate_or_redundant_status": "Distinct positive/missing-guard negative test purpose; no established dead duplication",
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "line": 10
+      },
+      "testability": "Original current test source directly inspected but Node22/hosted Auth NOT_RUN_THIS_BATCH",
+      "remediation_opportunity": "No additional source edit; existing test hardening retained",
+      "locked_decision_fit": "Explicit Admin authorization before preference access; controlled test source is not real Auth proof",
+      "review_method": "Direct AI visual line reading of post-pin literal, not machine screen"
+    },
+    {
+      "line": 11,
+      "source_text": " const preference=main.indexOf(\"from('account_preferences')\");",
+      "inspection_classification": "source-scan",
+      "behavior": "Finds account_preferences read",
+      "quality": "Test helper and regression hardening; no shipped app runtime change",
+      "risk_security_privacy_performance": "Tracks sensitive preferences read to compare with denial",
+      "dead_or_obsolete_status": "New post-pin live test code absent from pinned snapshot; no speculative deletion",
+      "duplicate_or_redundant_status": "Distinct positive/missing-guard negative test purpose; no established dead duplication",
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "line": 11
+      },
+      "testability": "Original current test source directly inspected but Node22/hosted Auth NOT_RUN_THIS_BATCH",
+      "remediation_opportunity": "No additional source edit; existing test hardening retained",
+      "locked_decision_fit": "Explicit Admin authorization before preference access; controlled test source is not real Auth proof",
+      "review_method": "Direct AI visual line reading of post-pin literal, not machine screen"
+    },
+    {
+      "line": 12,
+      "source_text": " return guard>=0&&denial>guard&&preference>denial;",
+      "inspection_classification": "return-predicate",
+      "behavior": "Requires guard index >=0, denial follows guard and preference read after denial",
+      "quality": "Test helper and regression hardening; no shipped app runtime change",
+      "risk_security_privacy_performance": "Closes pinned -1 positional false-pass weakness",
+      "dead_or_obsolete_status": "New post-pin live test code absent from pinned snapshot; no speculative deletion",
+      "duplicate_or_redundant_status": "Distinct positive/missing-guard negative test purpose; no established dead duplication",
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "line": 12
+      },
+      "testability": "Original current test source directly inspected but Node22/hosted Auth NOT_RUN_THIS_BATCH",
+      "remediation_opportunity": "No additional source edit; existing test hardening retained",
+      "locked_decision_fit": "Explicit Admin authorization before preference access; controlled test source is not real Auth proof",
+      "review_method": "Direct AI visual line reading of post-pin literal, not machine screen"
+    },
+    {
+      "line": 13,
+      "source_text": "};",
+      "inspection_classification": "delimiter",
+      "behavior": "Closes helper function",
+      "quality": "Test helper and regression hardening; no shipped app runtime change",
+      "risk_security_privacy_performance": "No independent policy",
+      "dead_or_obsolete_status": "New post-pin live test code absent from pinned snapshot; no speculative deletion",
+      "duplicate_or_redundant_status": "Distinct positive/missing-guard negative test purpose; no established dead duplication",
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "line": 13
+      },
+      "testability": "Original current test source directly inspected but Node22/hosted Auth NOT_RUN_THIS_BATCH",
+      "remediation_opportunity": "No additional source edit; existing test hardening retained",
+      "locked_decision_fit": "Explicit Admin authorization before preference access; controlled test source is not real Auth proof",
+      "review_method": "Direct AI visual line reading of post-pin literal, not machine screen"
+    },
+    {
+      "line": 14,
+      "source_text": "",
+      "inspection_classification": "blank",
+      "behavior": "Visual separator after test helper",
+      "quality": "Test helper and regression hardening; no shipped app runtime change",
+      "risk_security_privacy_performance": "No execution",
+      "dead_or_obsolete_status": "New post-pin live test code absent from pinned snapshot; no speculative deletion",
+      "duplicate_or_redundant_status": "Distinct positive/missing-guard negative test purpose; no established dead duplication",
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "line": 14
+      },
+      "testability": "Original current test source directly inspected but Node22/hosted Auth NOT_RUN_THIS_BATCH",
+      "remediation_opportunity": "No additional source edit; existing test hardening retained",
+      "locked_decision_fit": "Explicit Admin authorization before preference access; controlled test source is not real Auth proof",
+      "review_method": "Direct AI visual line reading of post-pin literal, not machine screen"
+    },
+    {
+      "line": 29,
+      "source_text": "test('Admin reads only current-account theme after authorization',()=>{",
+      "inspection_classification": "test-declaration",
+      "behavior": "Begins rewritten Admin appearance source check",
+      "quality": "Test helper and regression hardening; no shipped app runtime change",
+      "risk_security_privacy_performance": "Preserves exact owner-scoped read guard",
+      "dead_or_obsolete_status": "New post-pin live test code absent from pinned snapshot; no speculative deletion",
+      "duplicate_or_redundant_status": "Distinct positive/missing-guard negative test purpose; no established dead duplication",
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "line": 29
+      },
+      "testability": "Original current test source directly inspected but Node22/hosted Auth NOT_RUN_THIS_BATCH",
+      "remediation_opportunity": "No additional source edit; existing test hardening retained",
+      "locked_decision_fit": "Explicit Admin authorization before preference access; controlled test source is not real Auth proof",
+      "review_method": "Direct AI visual line reading of post-pin literal, not machine screen"
+    },
+    {
+      "line": 30,
+      "source_text": " const main=read('site/admin/main.js');",
+      "inspection_classification": "source-read",
+      "behavior": "Loads Admin main source for check",
+      "quality": "Test helper and regression hardening; no shipped app runtime change",
+      "risk_security_privacy_performance": "Uses current app source",
+      "dead_or_obsolete_status": "New post-pin live test code absent from pinned snapshot; no speculative deletion",
+      "duplicate_or_redundant_status": "Distinct positive/missing-guard negative test purpose; no established dead duplication",
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "line": 30
+      },
+      "testability": "Original current test source directly inspected but Node22/hosted Auth NOT_RUN_THIS_BATCH",
+      "remediation_opportunity": "No additional source edit; existing test hardening retained",
+      "locked_decision_fit": "Explicit Admin authorization before preference access; controlled test source is not real Auth proof",
+      "review_method": "Direct AI visual line reading of post-pin literal, not machine screen"
+    },
+    {
+      "line": 31,
+      "source_text": " assert.ok(adminThemeGateBeforeRead(main),'active Admin gate and fail-closed denial must precede account preference read');",
+      "inspection_classification": "assertion",
+      "behavior": "Calls guarded helper; denies missing authorization marker or denial branch",
+      "quality": "Test helper and regression hardening; no shipped app runtime change",
+      "risk_security_privacy_performance": "Stronger source test, still not live signed-in RLS proof",
+      "dead_or_obsolete_status": "New post-pin live test code absent from pinned snapshot; no speculative deletion",
+      "duplicate_or_redundant_status": "Distinct positive/missing-guard negative test purpose; no established dead duplication",
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "line": 31
+      },
+      "testability": "Original current test source directly inspected but Node22/hosted Auth NOT_RUN_THIS_BATCH",
+      "remediation_opportunity": "No additional source edit; existing test hardening retained",
+      "locked_decision_fit": "Explicit Admin authorization before preference access; controlled test source is not real Auth proof",
+      "review_method": "Direct AI visual line reading of post-pin literal, not machine screen"
+    },
+    {
+      "line": 32,
+      "source_text": " assert.match(main,/select\\('theme'\\)\\.eq\\('owner_id',identity.user.id\\)/);",
+      "inspection_classification": "assertion",
+      "behavior": "Preserves owner_id filter in preferences SQL query text",
+      "quality": "Test helper and regression hardening; no shipped app runtime change",
+      "risk_security_privacy_performance": "Static only, no Supabase Auth",
+      "dead_or_obsolete_status": "New post-pin live test code absent from pinned snapshot; no speculative deletion",
+      "duplicate_or_redundant_status": "Distinct positive/missing-guard negative test purpose; no established dead duplication",
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "line": 32
+      },
+      "testability": "Original current test source directly inspected but Node22/hosted Auth NOT_RUN_THIS_BATCH",
+      "remediation_opportunity": "No additional source edit; existing test hardening retained",
+      "locked_decision_fit": "Explicit Admin authorization before preference access; controlled test source is not real Auth proof",
+      "review_method": "Direct AI visual line reading of post-pin literal, not machine screen"
+    },
+    {
+      "line": 33,
+      "source_text": "});",
+      "inspection_classification": "delimiter",
+      "behavior": "Ends rewritten positive test",
+      "quality": "Test helper and regression hardening; no shipped app runtime change",
+      "risk_security_privacy_performance": "No app change",
+      "dead_or_obsolete_status": "New post-pin live test code absent from pinned snapshot; no speculative deletion",
+      "duplicate_or_redundant_status": "Distinct positive/missing-guard negative test purpose; no established dead duplication",
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "line": 33
+      },
+      "testability": "Original current test source directly inspected but Node22/hosted Auth NOT_RUN_THIS_BATCH",
+      "remediation_opportunity": "No additional source edit; existing test hardening retained",
+      "locked_decision_fit": "Explicit Admin authorization before preference access; controlled test source is not real Auth proof",
+      "review_method": "Direct AI visual line reading of post-pin literal, not machine screen"
+    },
+    {
+      "line": 34,
+      "source_text": "test('Admin appearance source check rejects missing session gate',()=>{",
+      "inspection_classification": "test-declaration",
+      "behavior": "Begins explicit negative missing-session-gate regression",
+      "quality": "Test helper and regression hardening; no shipped app runtime change",
+      "risk_security_privacy_performance": "Prevents future regression to weak indexOf comparison",
+      "dead_or_obsolete_status": "New post-pin live test code absent from pinned snapshot; no speculative deletion",
+      "duplicate_or_redundant_status": "Distinct positive/missing-guard negative test purpose; no established dead duplication",
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "line": 34
+      },
+      "testability": "Original current test source directly inspected but Node22/hosted Auth NOT_RUN_THIS_BATCH",
+      "remediation_opportunity": "No additional source edit; existing test hardening retained",
+      "locked_decision_fit": "Explicit Admin authorization before preference access; controlled test source is not real Auth proof",
+      "review_method": "Direct AI visual line reading of post-pin literal, not machine screen"
+    },
+    {
+      "line": 35,
+      "source_text": " const main=read('site/admin/main.js');",
+      "inspection_classification": "source-read",
+      "behavior": "Loads Admin main source for mutation fixture",
+      "quality": "Test helper and regression hardening; no shipped app runtime change",
+      "risk_security_privacy_performance": "Uses actual current source",
+      "dead_or_obsolete_status": "New post-pin live test code absent from pinned snapshot; no speculative deletion",
+      "duplicate_or_redundant_status": "Distinct positive/missing-guard negative test purpose; no established dead duplication",
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "line": 35
+      },
+      "testability": "Original current test source directly inspected but Node22/hosted Auth NOT_RUN_THIS_BATCH",
+      "remediation_opportunity": "No additional source edit; existing test hardening retained",
+      "locked_decision_fit": "Explicit Admin authorization before preference access; controlled test source is not real Auth proof",
+      "review_method": "Direct AI visual line reading of post-pin literal, not machine screen"
+    },
+    {
+      "line": 36,
+      "source_text": " const degraded=main.replace('if(!status?.authenticated||!status?.admitted||!status?.admin){','if(false){');",
+      "inspection_classification": "fixture-mutation",
+      "behavior": "Replaces required Admin guard with if(false) in source copy",
+      "quality": "Test helper and regression hardening; no shipped app runtime change",
+      "risk_security_privacy_performance": "Simulates guard removal without altering shipped code",
+      "dead_or_obsolete_status": "New post-pin live test code absent from pinned snapshot; no speculative deletion",
+      "duplicate_or_redundant_status": "Distinct positive/missing-guard negative test purpose; no established dead duplication",
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "line": 36
+      },
+      "testability": "Original current test source directly inspected but Node22/hosted Auth NOT_RUN_THIS_BATCH",
+      "remediation_opportunity": "No additional source edit; existing test hardening retained",
+      "locked_decision_fit": "Explicit Admin authorization before preference access; controlled test source is not real Auth proof",
+      "review_method": "Direct AI visual line reading of post-pin literal, not machine screen"
+    },
+    {
+      "line": 37,
+      "source_text": " assert.notEqual(degraded,main,'fixture must remove the real session guard');",
+      "inspection_classification": "assertion",
+      "behavior": "Requires guard-replacement mutation to actually change fixture",
+      "quality": "Test helper and regression hardening; no shipped app runtime change",
+      "risk_security_privacy_performance": "Avoids invalid negative test accidentally passing unchanged",
+      "dead_or_obsolete_status": "New post-pin live test code absent from pinned snapshot; no speculative deletion",
+      "duplicate_or_redundant_status": "Distinct positive/missing-guard negative test purpose; no established dead duplication",
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "line": 37
+      },
+      "testability": "Original current test source directly inspected but Node22/hosted Auth NOT_RUN_THIS_BATCH",
+      "remediation_opportunity": "No additional source edit; existing test hardening retained",
+      "locked_decision_fit": "Explicit Admin authorization before preference access; controlled test source is not real Auth proof",
+      "review_method": "Direct AI visual line reading of post-pin literal, not machine screen"
+    },
+    {
+      "line": 38,
+      "source_text": " assert.equal(adminThemeGateBeforeRead(degraded),false);",
+      "inspection_classification": "negative-assertion",
+      "behavior": "Requires helper reject fixture missing original guard",
+      "quality": "Test helper and regression hardening; no shipped app runtime change",
+      "risk_security_privacy_performance": "Proves test catches guard removal",
+      "dead_or_obsolete_status": "New post-pin live test code absent from pinned snapshot; no speculative deletion",
+      "duplicate_or_redundant_status": "Distinct positive/missing-guard negative test purpose; no established dead duplication",
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "line": 38
+      },
+      "testability": "Original current test source directly inspected but Node22/hosted Auth NOT_RUN_THIS_BATCH",
+      "remediation_opportunity": "No additional source edit; existing test hardening retained",
+      "locked_decision_fit": "Explicit Admin authorization before preference access; controlled test source is not real Auth proof",
+      "review_method": "Direct AI visual line reading of post-pin literal, not machine screen"
+    },
+    {
+      "line": 39,
+      "source_text": "});",
+      "inspection_classification": "delimiter",
+      "behavior": "Closes negative test",
+      "quality": "Test helper and regression hardening; no shipped app runtime change",
+      "risk_security_privacy_performance": "No source data mutation",
+      "dead_or_obsolete_status": "New post-pin live test code absent from pinned snapshot; no speculative deletion",
+      "duplicate_or_redundant_status": "Distinct positive/missing-guard negative test purpose; no established dead duplication",
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "live_counterpart": {
+        "path": "tests/visual-refinement.test.mjs",
+        "commit": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "blob_sha": "21a7e6cc102f0bba590b52fb4f5066a772aba293",
+        "line": 39
+      },
+      "testability": "Original current test source directly inspected but Node22/hosted Auth NOT_RUN_THIS_BATCH",
+      "remediation_opportunity": "No additional source edit; existing test hardening retained",
+      "locked_decision_fit": "Explicit Admin authorization before preference access; controlled test source is not real Auth proof",
+      "review_method": "Direct AI visual line reading of post-pin literal, not machine screen"
+    }
+  ],
+  "deleted_or_rewritten_original": [
+    {
+      "pinned_line": 22,
+      "original_text": "test('Admin reads only current-account theme after authorization',()=>{const main=read('site/admin/main.js');assert.ok(main.indexOf('!status?.admin')<main.indexOf(\"from('account_preferences')\"));assert.match(main,/select\\('theme'\\)\\.eq\\('owner_id',identity.user.id\\)/);});",
+      "current_replacement_lines": [
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39
+      ],
+      "status": "KNOWN_REPAIRED_TEST_ASSERTION_WEAKNESS_NO_NEW_FIX"
+    }
+  ],
+  "findings": [
+    {
+      "id": "P434-THEME-AUTH-STATIC-PINNED",
+      "severity": "LOW_TEST_COVERAGE",
+      "original_line": 22,
+      "observation": "Old positional indexOf missing Admin guard -> -1 can false-pass, even if preference read remains. Live helper now rejects missing guard and negative fixture tests that rejection.",
+      "disposition": "ALREADY_CORRECTED_LIVE_NO_DUPLICATE_CHANGE",
+      "boundary": "#96 owns actual hosted session/RLS assurance; static test is not evidence of production privacy violation"
+    },
+    {
+      "id": "P434-CSS-PARSER-BOUNDED",
+      "severity": "LOW_TEST_COVERAGE",
+      "original_lines": [
+        8,
+        12,
+        14,
+        15,
+        16
+      ],
+      "observation": "CSS regex and palette tests check limited six-hex variables and selected pairs, not every rendered theme/hover/focus state.",
+      "disposition": "TRIAGE_TEST_SCOPE_NO_PROVEN_APP_DEFECT"
+    },
+    {
+      "id": "P434-NEW-COFFEE-STATIC",
+      "severity": "LOW_TEST_COVERAGE",
+      "original_lines": [
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33
+      ],
+      "observation": "Static layout copy and CSS checks protect form, not actual mobile browser editing or submitted Add Coffee.",
+      "disposition": "TRIAGE_BROWSER_ACCEPTANCE_SEPARATE"
+    }
+  ],
+  "new_original_pinned_lines": 34,
+  "new_separately_reviewed_postpin_added_lines": 18,
+  "other_removed_pinned_lines": 1,
+  "global_status": "OPEN_NOT_COMPLETE",
+  "functional_tests": "NOT_RUN_DOCS_ONLY",
+  "release_scope": "NO_PUBLISH_NO_PROVIDER_MUTATIONS",
+  "next": "P435:1 after checking concurrent claims; remaining frozen and other post-pin drift."
+}
