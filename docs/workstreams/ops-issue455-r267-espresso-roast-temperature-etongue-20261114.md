@@ -1,0 +1,21 @@
+# Issue #455 R455-267 — bounded espresso roast/temperature electronic-tongue source audit (2026-11-14) [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=4f3f15559d8e502d9cba89cc4a29092801bef06e preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+## Authority / provenance
+
+Development preflight immutable Git SHA above; `docs/ai/PREFLIGHT.md` independently fetched by Git blob and byte-matched. Existing owner Option B authorizes safe research documentation, not new Locked taste targets, member telemetry or deployment. Source original ledger Git blob `c7f69fd570ff04ed9c834b9489baed0e0c39ffce`; engine `3e20904291231a9c5a5a86e6d004a95a5489c6d6`, constants `d3559dc1c9560c4d68fbcad1dc91e3a792a100a2`. Checked current AGENTS, context, status, Master Spec, Decision Ledger, approval matrix, release queue, source register, Issue #455 and #335/#267/#33/#96. Main/release production not modified. Owner temporary PUBLIC November 4-30 exception preserved; do not change visibility. #267 direct-line-credit ZERO.
+
+## Nonduplicate primary source and claim verification
+
+Original [Gulshan et al., *Food Chemistry* 507 (2026) 147716](https://pubmed.ncbi.nlm.nih.gov/41633167/), DOI [10.1016/j.foodchem.2025.147716](https://doi.org/10.1016/j.foodchem.2025.147716), online 2025-12-27, original author's PubMed indexed abstract directly read. Not found in initial 150 canonical distinct source identities. First-party abstract contrasts 'temperature-controlled espresso (C)' and hot espresso across Arabica roast degrees; **no supported definition for C or brewing parameters** in available abstract. Claims 26.27% sugar, 2.66% minerals, 5.38% protein, 8.54% fiber and 80% phenolics/flavonoids are **conditional lab recovery statements** with underlying denominator/treatment table unknown. Electronic-tongue bitterness, umami, richness and astringency are sensor responses, **not the app's five human-rated taste sliders** or controlled same-coffee single-control next-shot outcomes. Avoid numeric targets and positive cup-quality claims. Original publisher full PDF/methods, specific temperature and recipe, sample sizes/denominators, raw data, figures and independent replication **NOT verified**. Original article abstract reports no known conflicts. Authored source is research, not approved app product policy.
+
+Three granular checks `R455-EV-CIT-267-A/B/C` and research-only proposal `R455-PROP-267-ESPRESSO-TEMP-ETONGUE-NOT-TASTE-OPTIMUM` trace exact claim limits and live code. Current `baseline()` roast temperature is existing approved starting heuristic and `temperatureGuidance()` conditions personal data by setup/style. No reproducible new code defect from this paper. Preserve five tastes, Slow Feed, separate Turbo/Fast-Flow, equipment controls, original measured shot, notes/private history, Community, RLS and one intentional change. No new scientific inference, member data, schema, telemetry or production trials approved.
+
+## Scoped work / verification at commit authoring
+
+Only `docs/audits/issue455-research-source-coverage-20261103.json` and this same-commit journal changed. Canonical previous 150 sources/431 bounded checks/213 proposals retained in order, +1/+3/+1 gives 151/434/214 with IDs unique; original JSON indentation and terminal LF retained. This is **not** #267 source-line-review credit. No application code, tests, CI definitions, approval matrix, release queue, CURRENT_STATUS, source register, main, release/production or Netlify/provider touched. Risk-proportionate docs-only governance required; Node, browser, SQL and empirical espresso quality tests **NOT RUN**, not PASS. At authorship PR-head and merge CI **PENDING**; no READY/DEPLOYED promotion.
+
+## Next
+
+Check exact PR-head governance, diagnose and repair if failed; nonforce integrate only with applicable evidence, inspect exact merged SHA and two file blobs, check merged governance, comment #455. Resume disjoint live UX defect review and primary claim audit. Separate S019 PDF remains not accessible despite scoped Drive/Project/Library search; slow-feed PDF accessible but previously reviewed, not duplicated. No owner approval needed now. Never deploy or write production providers/member/SQL/Auth/Edge, change visibility, force Git or purchase.
