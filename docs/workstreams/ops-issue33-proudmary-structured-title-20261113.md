@@ -34,3 +34,9 @@ and Process Natural. Owner explicitly approved the clean `name=Las Lajas - Finca
 DIC_PREFLIGHT_VERIFIED development_sha=fe96f983c1c4f697fdecfa39d2f077a3b6ca77a6 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
 The first PR head contained a mechanical JavaScript replacement artifact: a literal replacement token duplicated the remainder of the identity module. Before merge or any passing-test claim, the exact original identity module was restored and only the intended structured-title helper inserted safely. No unrelated source, tests, release state, or provider data changed. Verify the repaired PR head with hosted exact-source checks; the original head is not evidence of passing tests.
+
+## Required release-queue TESTING intake — November 13, 2026
+
+DIC_PREFLIGHT_VERIFIED development_sha=f1dc5fd4be99bdbd5a9d4b6a2123ba8e8c0bbe4c preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+GitHub PR-head approval gate 43562350446 correctly blocked untracked deployable files. Added unique `DIC-Q-33-proudmary-structured-title-20261113` TESTING item with all three exact source paths; no READY/deploy claim. PR #2588 current targeted Node/lint and approval must pass before nonforce merge. Separate source/merge/queue checks remain required.

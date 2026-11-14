@@ -13836,6 +13836,27 @@
       "blockers": [],
       "notes": "NARROW DEVELOPMENT READY NOT DEPLOYED: #272 selected Quills labels Reforest Project 'Producer' but its selected text says this is a reforestation initiative planting trees on OTHER growers' farms. Withhold erroneous canonical producer, preserve literal source/context and manual confirm note; genuine growing projects/farms protected. Current lot sold-out/source may change; fresh exact selected URL, H1, raw HTML and actual parser independently verified. No other 603 cases certified from this run; Issue #33 remains OPEN. Owner notification not required for this safe fix, and production publication remains unauthorized.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-33-proudmary-structured-title-20261113",
+      "issue": 33,
+      "pr": 2588,
+      "title": "Parse Proud Mary and other exact selected structured four-field product titles into the real coffee name",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-identity-evidence.mjs",
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-shopify-ajax.mjs"
+      ],
+      "owner_source": "User-approved November 13, 2026 Issue #33 Proud Mary URL: country, coffee name, cultivar, process are distinct fields; see docs/workstreams/ops-issue33-proudmary-structured-title-20261113.md",
+      "tests": [],
+      "ci_runs": [],
+      "blockers": [
+        "Await repaired PR #2588 exact-head Node/lint and governance success; then nonforce merge, source-test-queue-journal parity, merged exact-source CI and separate READY reconciliation. No production publication is authorized."
+      ],
+      "notes": "Development-only conservative country | coffee | variety | process segmentation. Keep ambiguous titles unchanged and full original title in source facts; original frozen603 unchanged. No live Auth, SQL, member, Netlify, provider or publication actions.",
+      "production_deployed": false
     }
   ],
   "history": [
