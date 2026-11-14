@@ -33,8 +33,23 @@ done
 # Formal CLI-generated release migration is applied ONCE by the loop above.
 # No second draft application: privacy and identity regressions use final schema.
 run_sql tests/sql/owner-fixture.sql
-for regression in coffee_identity_matching coffee_automated_approval admin_read_only_dashboard admin_coffee_review admin_content_review admin_shot_coffee_group_identity coffee_duplicate_first_auto_approval admin_invitation_controls url_preview_release universal_url_preview seven_roast_levels community_quality_integrity pre_release_cross_account source_worker_auth_and_admission first_style_prompt fast_flow_hybrid_style admin_server_search community_server_search preview_two_phase_cache ready_queue_release admin_safe_delete admin_member_deletion recipe_family_lifecycle security_surface_inventory retired_experiments retired_bag_history decaffeination_method import_credential_key_separators recommendation_context_null_controls pending_coffee_null_guards; do
+for regression in coffee_identity_matching coffee_automated_approval admin_read_only_dashboard admin_coffee_review admin_content_review admin_shot_coffee_group_identity coffee_duplicate_first_auto_approval admin_invitation_controls url_preview_release universal_url_preview seven_roast_levels community_quality_integrity pre_release_cross_account source_worker_auth_and_admission first_style_prompt fast_flow_hybrid_style admin_server_search community_server_search preview_two_phase_cache ready_queue_release admin_safe_delete admin_member_deletion recipe_family_lifecycle security_surface_inventory retired_experiments retired_bag_history decaffeination_method import_credential_key_separators; do
   echo "Running $regression"
   run_sql "supabase/tests/$regression.sql"
 done
+# These #509 regressions require their exact source migration. Release-candidates
+# omit unfinished SQL migrations; those specific tests are NOT_APPLICABLE there.
+# The normal development branch still runs both and fails closed on bad SQL.
+if [[ -f supabase/migrations/20261114115000_dic_recommendation_context_null_control_guard.sql ]]; then
+  echo "Running recommendation_context_null_controls"
+  run_sql supabase/tests/recommendation_context_null_controls.sql
+else
+  echo "NOT_APPLICABLE: #509 recommendation_context_null_controls; migration excluded from tested source"
+fi
+if [[ -f supabase/migrations/20261114135500_dic_promote_pending_coffee_null_flags.sql ]]; then
+  echo "Running pending_coffee_null_guards"
+  run_sql supabase/tests/pending_coffee_null_guards.sql
+else
+  echo "NOT_APPLICABLE: #509 pending_coffee_null_guards; migration excluded from tested source"
+fi
 echo 'PASS: all checked-in migrations and SQL suites, including staged import/setup, cross-account and source-worker authorization and first-style owner isolation regressions; no hosted connection.'
