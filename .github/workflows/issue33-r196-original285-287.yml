@@ -1,0 +1,51 @@
+name: DIC Issue33 R196 original285-287 current selected
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r196-original285-287.yml
+      - scripts/audit/issue33-r196-original285-287-check.mjs
+      - tests/coffee-issue33-r196-original285-287.test.mjs
+      - docs/workstreams/ops-issue33-r196-285-287-20261114.md
+      - src/server/coffee-page-metadata.mjs
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r196-original285-287.yml
+      - scripts/audit/issue33-r196-original285-287-check.mjs
+      - tests/coffee-issue33-r196-original285-287.test.mjs
+      - src/server/coffee-page-metadata.mjs
+permissions:
+  contents: read
+jobs:
+  selected:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Exact chosen-coffee positive and hostile source roles
+        run: node --test tests/coffee-issue33-r196-original285-287.test.mjs
+      - name: Guarded current official product fetch and actual parser
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '285,286,287'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r196
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Verify actual selected HTML, identity and producer roles
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r196
+        run: node scripts/audit/issue33-r196-original285-287-check.mjs
+      - name: Save bounded one-day public product evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r196-original285-287-current-source
+          path: /tmp/dic33-r196/
+          retention-days: 1
+          if-no-files-found: warn

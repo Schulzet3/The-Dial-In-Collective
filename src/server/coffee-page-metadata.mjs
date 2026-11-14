@@ -630,6 +630,15 @@ function addField(fields,rawKey,value,{literalAnonymousProducer=false}={}){
  // supported canonical key just because its display synonym is absent.
  const key=Object.hasOwn(FIELD_ALIASES,rawKey)?rawKey:LOOKUP.get(keyOf(rawKey));
  if(!key)return;
+ // A product's **Farm** caption with only a head-count has no named
+ // farm to assign. But explicitly printed Producer: 850 smallholder farmers
+ // and qualified narrative collective credits remain valid locked behavior.
+ // Keep the Farm literal in the source evidence for owner review.
+ if(key==='producer'&&/^(?:farm|farms|finca)$/i.test(String(rawKey).trim())&&
+    /^\d{1,3}(?:,?\d{3})?\s+(?:(?:small[ -]?holder|small|family|local|independent|regional)\s+){0,3}(?:farms?|farmers?|growers?|families|producers?|cooperatives?)$/iu.test(String(value||'').trim())){
+  rememberCoffeeReviewCandidate(fields,key,String(value).trim(),'Unnamed counted farm suppliers');
+  return;
+ }
  if(key==='origin'){
   const place=labeledFarmLocation(rawKey,value);
   if(place){
@@ -688,6 +697,14 @@ function addField(fields,rawKey,value,{literalAnonymousProducer=false}={}){
   const beforeProse=prose(fields[key]),afterProse=prose(s);
   if(beforeProse&&!afterProse){fields[key]=s;return;}
   if(afterProse&&!beforeProse)return;
+  if(structuredFlavorByFields.get(fields)===fields[key]&&
+   /^(?:flavor|flavour|flavornotes|flavournotes|tastingnotes|notes)$/.test(keyOf(rawKey))&&
+   coffeeTastingNotesSubset(fields[key],s)){
+   // Exact selected visible Flavor lists all notes from a shorter structured
+   // Product teaser plus additional literal notes. Preserve the complete
+   // direct label; unrelated products and actual contrary notes still conflict.
+   fields[key]=s;structuredFlavorByFields.delete(fields);return;
+  }
   if(structuredFlavorByFields.get(fields)===fields[key]&&
    /^(?:flavor|flavour|flavornotes|flavournotes|tastingnotes|notes)$/.test(keyOf(rawKey))&&
    coffeeTastingNotesSubset(s,fields[key])){
@@ -1547,6 +1564,17 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   if(directSelected.farm&&!roaster_details.farm)roaster_details.farm=directSelected.farm;
  for(const [key,value] of Object.entries(narrative.fields)){
   if(fields[key])continue;
+  // A receiving washing station named in "coffee from X Washing Station"
+  // identifies a processor, not its anonymous contributing growers.
+  // Keep the station's source role reviewable; do not silently promote it
+  // to a canonical named farmer unless independently labelled as producer.
+  const countedFarm=productCoffeeProse(canonicalProduct,clean).some(block=>
+   /^(?:farm|farms|finca)\s*[:：]\s*\d{1,3}(?:,?\d{3})?\s+(?:(?:small[ -]?holder|small|family|local|independent|regional)\s+){0,3}(?:farms?|farmers?|growers?|families|producers?|cooperatives?)\b/iu.test(block.text));
+  if(key==='producer'&&countedFarm&&
+     /\b(?:washing|processing|drying)\s+(?:station|mill)\b/iu.test(String(value))){
+   rememberCoffeeReviewCandidate(fields,'producer',value,'Facility receives from separately counted anonymous farms (review only)');
+   continue;
+  }
   addField(fields,key,value,{literalAnonymousProducer:key==='producer'&&narrative.literal_anonymous_producer===value});markNarrativeIdentity(fields,key);
   if(key==='producer'&&fields.producer)narrativeProducerByFields.add(fields);
  }
@@ -1876,6 +1904,27 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   ...(matchedDescriptions.length?[collectStructuredCoffeeSourceFacts({description:matchedDescriptions.join('\n\n')},{source_url,source_type:'html'})]:[]),
   ...[p,...equivalentProducts.filter(candidate=>candidate!==p)].map(candidate=>collectStructuredCoffeeSourceFacts(candidate,{source_url}))
  );
+ // One selected Product can publish a short, same-coffee structured teaser
+ // and a richer, directly printed Flavor list. The latter is the primary
+ // selected source. Resolve ONLY the exact two mutually corroborating
+ // records, without a third contrary direct label or truncated evidence.
+ // Unrelated product facts are quarantined before this point.
+ if(conflicts.has('tasting_notes')&&!fields.tasting_notes&&
+    !source_facts.truncated&&!scopeTruncated&&!identityScopeTruncatedByFields.has(fields)){
+  const notes=source_facts.filter(f=>f.field==='tasting_notes'&&
+   (f.source_type==='html'||f.source_type==='product_json')&&
+   f.section!=='Different coffee in the source');
+  const visible=notes.filter(f=>f.source_type==='html');
+  const structured=notes.filter(f=>f.source_type==='product_json');
+  if(notes.length===2&&visible.length===1&&structured.length===1&&
+     coffeeTastingNotesSubset(String(structured[0].value||''),String(visible[0].value||''))){
+   const primary=normalizeExplicitCoffeeTastingNotes(String(visible[0].value||''));
+   if(primary){
+    fields.tasting_notes=primary;
+    conflicts.delete('tasting_notes');
+   }
+  }
+ }
  // Selected coffee description directly contradicts a marketing Producer
  // label when the named organization itself is only a tree-planting initiative.
  // Do not autofill an unverified grower; retain the exact seller text for review.
@@ -1980,7 +2029,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  const printedNotes=[];
  for(const fact of source_facts){
   if(fact.field!=='tasting_notes'||fact.conflicting&&fact.section==='Different coffee in the source'||
-   !/^(?:(?:tasting|cupping|flavou?r|flavor|cup)\s+(?:notes?|profile)|notes?|we\s+taste|what\s+you(?:'|’)?ll\s+taste)$/i.test(String(fact.label||'').trim())||
+   !/^(?:(?:tasting|cupping|flavou?r|flavor|cup)\s+(?:notes?|profile)|flavou?r|notes?|we\s+taste|what\s+you(?:'|’)?ll\s+taste)$/i.test(String(fact.label||'').trim())||
    /(?:brewing\s+recommendations|different\s+coffee|education|general\s+guidance)/i.test(String(fact.section||''))||
    !['html','product_json'].includes(fact.source_type))continue;
   const label=String(fact.label||'').trim();
@@ -2957,6 +3006,28 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   fields.name=coffeeName;
  }
 
+ // A supplier head-count in the selected *Farm* caption is not an estate
+ // or named producer. Some secondary source paths may reintroduce the exact
+ // count after primary Farm normalization. Respect the published label at
+ // FINAL field reconciliation, without suppressing independently labelled
+ // Producer collectives or qualified anonymous-growing-group prose.
+ const countedSupplier=/^\d{1,3}(?:,?\d{3})?\s+(?:(?:small[ -]?holder|small|family|local|independent|regional)\s+){0,3}(?:farms?|farmers?|growers?|families|producers?|cooperatives?)$/iu;
+ if(fields.producer&&countedSupplier.test(fields.producer)){
+  const same=value=>keyOf(String(value||''))===keyOf(fields.producer);
+  const printedFarm=source_facts.some(f=>
+    f.section!=='Different coffee in the source'&&
+    /^(?:farm|farms|finca)$/i.test(String(f.label||'').trim())&&same(f.value))||
+    productCoffeeProse(canonicalProduct,clean).some(b=>
+     /^farm\s*[:：]/i.test(b.text)&&same(b.text.replace(/^farm\s*[:：]\s*/i,'')));
+  const printedProducer=source_facts.some(f=>
+    f.section!=='Different coffee in the source'&&
+    /^(?:producers?|growers?)$/i.test(String(f.label||'').trim())&&same(f.value));
+  if(printedFarm&&!printedProducer){
+   rememberCoffeeReviewCandidate(fields,'producer',fields.producer,
+    'Count-only selected Farm caption; named supplier not published');
+   delete fields.producer;
+  }
+ }
  // An extracted value is a suggestion, never proof of an official source.
  // Keep unexpected/absent facts blank instead of guessing.
  return {ok:true,source:'unverified_public_page',fields,available:Object.keys(fields),
