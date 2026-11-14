@@ -13,7 +13,7 @@ import {enableApprovalPush,disableApprovalPush,approvalPushEnabled} from './appr
 import {shotCard} from './shot_card.js';
 import {applyAppearance,readAppearance} from './appearance.js';
 import {nextCoffeeAction,proposalWithRecognizedRoaster,matchReviewMarkup} from './coffee-match-ui.js';
-import {coffeeUrlPreviewMarkup,applyCoffeeUrlFields,coffeeSourceReviewSnapshot,downloadCoffeeSourceReview,coffeeSourceDifferences,coffeeConflictReviewOptions,applyCoffeeConflictChoice,markCoffeeConflictChoices,applyCoffeeSubmittedDifference,markCoffeeSubmittedDifferences,autofillFields,coffeeRoastVariantPreview,applyCoffeeRoastVariant,coffeeUrlRequestIsCurrent} from './coffee-url-autofill.js';
+import {coffeeUrlCompactPreviewMarkup,applyCoffeeUrlFields,coffeeSourceReviewSnapshot,downloadCoffeeSourceReview,coffeeSourceDifferences,coffeeConflictReviewOptions,applyCoffeeConflictChoice,markCoffeeConflictChoices,applyCoffeeSubmittedDifference,markCoffeeSubmittedDifferences,autofillFields,coffeeRoastVariantPreview,applyCoffeeRoastVariant,coffeeUrlRequestIsCurrent} from './coffee-url-autofill.js';
 import {communityReviewBanner,communityPage} from './community.js';
 import {walkthroughMarkup,gettingStartedMarkup,firstSetupWelcomeMarkup} from './help.js';
 const {e,button,icon,field,select,checkbox,recipeGrid,styleBadge,chips,radar,scales,nextShotGuidance,nextShotTitle}=U;
@@ -913,7 +913,7 @@ class CloudApp {
      applyCoffeeRoastVariant(form,this.coffeeUrlActivePreview||this.coffeeUrlBasePreview,next);
      this.coffeeUrlActivePreview=next;
      this.coffeeUrlSourceReview=coffeeSourceReviewSnapshot(next);
-     panel.innerHTML=coffeeUrlPreviewMarkup(next);
+     panel.innerHTML=coffeeUrlCompactPreviewMarkup(next);
      markCoffeeConflictChoices(panel,form,next);
      return;
     }
@@ -927,7 +927,7 @@ class CloudApp {
      const form=sheet.querySelector('#new-coffee'),panel=form?.querySelector('#coffee-url-feedback');
      if(!form||!panel||this.coffeeUrlBusy)return;
      const raw=String(form.elements.source_url.value||'').trim();
-     if(!raw){panel.innerHTML=coffeeUrlPreviewMarkup({ok:false,reason:'invalid_url'});return;}
+     if(!raw){panel.innerHTML=coffeeUrlCompactPreviewMarkup({ok:false,reason:'invalid_url'});return;}
      this.coffeeUrlBusy=true;this.coffeeUrlPreviewInput=null;this.coffeeUrlSourceReview=null;this.coffeeUrlBasePreview=null;this.coffeeUrlActivePreview=null;
      const original=target.textContent;target.disabled=true;target.textContent='Checking URL...';
      try{
@@ -944,7 +944,7 @@ class CloudApp {
        if(found.fields?.decaffeination_method)form.elements.namedItem('is_decaf').checked=true;
        updateDecafFields(form);
       }
-      panel.innerHTML=coffeeUrlPreviewMarkup(found);
+      panel.innerHTML=coffeeUrlCompactPreviewMarkup(found);
       markCoffeeConflictChoices(panel,form,found);
       // Announce review alternatives next to the associated editable field.
       for(const group of coffeeConflictReviewOptions(found)){
@@ -955,7 +955,7 @@ class CloudApp {
        }
       }
      }catch{
-      if(coffeeUrlRequestIsCurrent(sheet,form,raw))panel.innerHTML=coffeeUrlPreviewMarkup({ok:false,reason:'preview_unavailable'});
+      if(coffeeUrlRequestIsCurrent(sheet,form,raw))panel.innerHTML=coffeeUrlCompactPreviewMarkup({ok:false,reason:'preview_unavailable'});
      }finally{this.coffeeUrlBusy=false;target.disabled=false;target.textContent=original;}
      return;
     }

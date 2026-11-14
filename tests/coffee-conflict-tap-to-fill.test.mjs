@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {
- coffeeUrlPreviewMarkup,applyCoffeeConflictChoice,applyCoffeeSubmittedDifference,
+ coffeeUrlPreviewMarkup,coffeeUrlCompactPreviewMarkup,applyCoffeeConflictChoice,applyCoffeeSubmittedDifference,
  markCoffeeConflictChoices,markCoffeeSubmittedDifferences,coffeeSourceReviewSnapshot,applyCoffeeUrlFields,applyCoffeeRoastVariant,elevationWithDefaultMeters
 } from '../site/cloud/coffee-url-autofill.js';
 
@@ -160,7 +160,7 @@ test('preview eliminates repeated details and source-download UI while retaining
   fields:{name:'Lot X',roaster:'Roaster X',origin:'Ethiopia',process:'Natural'},
   source_facts:[{label:'Published process',value:'Natural',field:'process',source_url:url,source_type:'html'}],
   roaster_recipe:{ratio:2.5},match:{classification:'needs_confirmation'}};
- const html=coffeeUrlPreviewMarkup(result);
+ const html=coffeeUrlCompactPreviewMarkup(result);
  assert.match(html,/Review conflicting details|Tap a value to fill its field/);
  assert.match(html,/Roaster's published espresso reference/);
  assert.match(html,/A similar verified coffee exists/);
@@ -177,6 +177,8 @@ test('post-add comparison buttons are delegated and never auto-submit',()=>{
  assert.ok(start>=0&&end>start);
  const handler=main.slice(start,end);
  assert.match(main,/data-action="choose-coffee-difference"/);
+ assert.match(main,/coffeeUrlCompactPreviewMarkup\(/);
+ assert.doesNotMatch(main,/coffeeUrlPreviewMarkup\(/);
  assert.match(main,/data-difference-field=/);
  assert.match(main,/aria-pressed="false"/);
  assert.match(handler,/panel\.contains\(target\)/);
