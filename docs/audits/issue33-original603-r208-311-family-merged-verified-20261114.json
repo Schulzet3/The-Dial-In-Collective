@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "date_utc": "2026-11-14",
+  "scope": "R208_ORIGINAL603_SELECTED_311_NAMED_FAMILY_PRODUCER_GENERIC_REPAIR",
+  "release_state": "READY_SOURCE_ONLY_NOT_DEPLOYED",
+  "owner_publication_authorized": false,
+  "authority": {
+    "first_preflight_branch_sha": "1d58b89e78d8ad8eda3a225875599d15a7217d7b",
+    "repair_preflight_branch_sha": "b6989b0c6309e9138601be17a1679e813be3ce5e",
+    "final_docs_preflight_branch_sha": "ed3df9221614d9d2d3ab5c254a67215d7956951e",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d"
+  },
+  "provenance": {
+    "source_pr": 2757,
+    "first_red_first_commit": "845805940a616e778d1267a30055f65b3bb1c321",
+    "source_correction_commit": "6fa2bc27b46977e5d7bb40d4c00c6b094f7f3d50",
+    "governance_correction_commit": "169c9f63b63e65418db2ea931f302f73a682b1a9",
+    "exact_merged_source_sha": "ed3df9221614d9d2d3ab5c254a67215d7956951e",
+    "red_first_failure_job": 43636965615,
+    "governance_failed_job": 43637100163,
+    "original_csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "original_csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "immutable_original": {
+      "coffees": 603,
+      "roasters": 201,
+      "captures": 1197,
+      "oracle_modified": false,
+      "scorer_modified": false,
+      "csv_modified": false
+    }
+  },
+  "path_blobs": {
+    "src/server/coffee-selected-context-roles.mjs": "6d867407c3ebb192d7f1b8fcdac716415786e28a",
+    "tests/coffee-issue33-r208-original311-producer.test.mjs": "d563ae7f25c3503c4997de4901089be543a567c1",
+    "scripts/audit/issue33-r208-original311-producer-check.mjs": "def0345056516550dd276a9d94c11accb56c9a7c",
+    ".github/workflows/issue33-r208-original311-producer.yml": "ef94ad453041432ea496067bc8713d4e18c3357a",
+    "docs/workstreams/ops-issue33-r208-311-producer-20261114.md": "852f23137f72850be138b72aa5e842201c9d9132"
+  },
+  "current_selected_official": {
+    "case_number": 311,
+    "name": "Volcán Atitlán Guatemala",
+    "official_url": "https://shop.iconikcoffee.com/products/washed-guatemala-finca-san-jeronimo",
+    "identity_h1": "Volcán Atitlán Guatemala",
+    "selected_producer_direct": "Bressani Family, San Jerónimo Guatemala",
+    "corroborating_selected_story": "Giorgio third-generation coffee producer on his family farm",
+    "source_bound_html_bytes": 810868,
+    "source_bound_sha256": "31629b3964e62cc99830f2ea87a569f2808ec542fdb7fe0b14e7cefe15e7977d",
+    "exact_selected_parser_fields": {
+      "name": "Volcán Atitlán Guatemala",
+      "roaster": "ICONIK",
+      "tasting_notes": "Black cherry, walnut, nougat",
+      "origin": "Guatemala",
+      "producer": "Bressani Family",
+      "process": "Washed",
+      "variety": "Catuaí",
+      "elevation_m": "1300m"
+    },
+    "conflicts": [],
+    "no_unsourced_roast_decaf_recipe": true,
+    "add_coffee_ui_rendered": true,
+    "source_review_rendered": true
+  },
+  "verification": {
+    "red_first": {
+      "run": 43636965615,
+      "positive_failed": 2,
+      "hostile_passed": 3,
+      "actual_source_afterproof": "FAILED producer BLANK"
+    },
+    "corrected_pr": {
+      "focused_merchant": 43637231953,
+      "seven_focused_test_pass": 7,
+      "afterproof": "PASS",
+      "node": 43637232038,
+      "node_pass": 4881,
+      "node_fail": 0,
+      "node_skipped": 6,
+      "lint": "PASS",
+      "cloud_mobile": 43637231956,
+      "sql": 43637231987,
+      "security": 43637231949,
+      "python": 43637231942,
+      "approval": 43637231925,
+      "exact_selected": [
+        43637231968,
+        43637231947
+      ],
+      "exact_archive": 43637232021
+    },
+    "merged": {
+      "sha": "ed3df9221614d9d2d3ab5c254a67215d7956951e",
+      "focused_merchant": 43637639468,
+      "seven_tests_pass": 7,
+      "afterproof": "PASS",
+      "node": 43637639507,
+      "node_pass": 4881,
+      "node_fail": 0,
+      "node_skipped": 6,
+      "cloud_mobile": 43637639539,
+      "approval": 43637639443,
+      "python": 43637639455,
+      "exact_selected": 43637639597,
+      "applicable_status": "SUCCESS"
+    },
+    "whole_frozen603": "SKIPPED_NOT_PASS",
+    "full_manual_semantic_certification": false,
+    "real_signed_in_GoTrue_device": false,
+    "production_provider_member_writes": 0,
+    "netlify_deployment": false
+  },
+  "scope_boundary": "Generic direct same-selected H1 family producer + locality with independently same-section producer/family farm story and denial of historic/other; no merchant rules, no unrelated product/SEO facts",
+  "next": "Continue next unresolved #313 ink! 6610 roasting-facility elevation vs growing elevation; #314 Espresso 89 Trade Secret roast; adjudicate current exact selected official sources with new bounded source evidence. Parent #33 OPEN."
+}
