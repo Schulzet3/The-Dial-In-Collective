@@ -1,0 +1,53 @@
+name: DIC Issue33 R199 selected current Seeds original292-293
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r199-original292-293.yml
+      - scripts/audit/issue33-r199-original292-293-check.mjs
+      - tests/coffee-issue33-r199-original292-293.test.mjs
+      - docs/workstreams/ops-issue33-r199-292-293-20261114.md
+      - src/server/coffee-page-metadata.mjs
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r199-original292-293.yml
+      - scripts/audit/issue33-r199-original292-293-check.mjs
+      - tests/coffee-issue33-r199-original292-293.test.mjs
+      - src/server/coffee-page-metadata.mjs
+permissions:
+  contents: read
+jobs:
+  selected:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Focused own-product and recycled-slug positive and negative tests
+        run: node --test tests/coffee-issue33-r199-original292-293.test.mjs
+      - name: Fetch exactly two original selected official HTTPS product pages
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '292,293'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r199
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Check raw official source hashes current H1 and actual parser
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r199
+          DIC_R199_EXACT_CHECKOUT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/audit/issue33-r199-original292-293-check.mjs
+      - name: Keep one-day raw selected public source evidence for independent review
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r199-original292-293-current-source
+          path: /tmp/dic33-r199/
+          retention-days: 1
+          if-no-files-found: warn
