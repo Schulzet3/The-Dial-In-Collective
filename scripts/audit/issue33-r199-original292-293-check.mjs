@@ -2,6 +2,7 @@
 import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
 import {join,resolve} from 'node:path';
 import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
 import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
 import {selectedProductHeadings} from './issue33-selected-product-heading.mjs';
@@ -12,6 +13,8 @@ const cases=[
  {n:293,url:'https://seedscoffee.com/products/ethiopia-guji-getachew-copy',name:'Ethiopia Yirgacheffe Habtamu',taste:['Cherry','Papaya','Lime Candy'],exclude:'Getachew Zekele'}
 ];
 const hash=x=>createHash('sha256').update(x).digest('hex'),errors=[],evidence=[];
+const exactCheckoutSha=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
+if(!/^[0-9a-f]{40}$/.test(process.env.DIC_R199_EXACT_CHECKOUT_SHA||'') || exactCheckoutSha!==process.env.DIC_R199_EXACT_CHECKOUT_SHA)errors.push('not_exact_PR_head_checkout');
 let summary={};
 try{summary=JSON.parse(readFileSync(join(dir,'focused-current-evidence.json'),'utf8'));}
 catch(e){errors.push('missing_current_source_summary:'+e.message);}
@@ -37,7 +40,7 @@ for(const c of cases){
  if(String(f.producer||'').includes(c.exclude))errors.push(c.n+':cross_product_producer');
  if(f.process||f.roast_level)errors.push(c.n+':unpublished_roast_or_process');
 }
-const output={source_sha:summary.source_sha,scope:'original603 292-293, NOT universal 603 certification',passed:errors.length===0,errors,evidence,manual_certified:false,provider_writes:0};
+const output={source_sha:summary.source_sha,exact_checkout_sha:exactCheckoutSha,workflow_event_sha:process.env.GITHUB_SHA,scope:'original603 292-293, NOT universal 603 certification',passed:errors.length===0,errors,evidence,manual_certified:false,provider_writes:0};
 writeFileSync(join(dir,'r199-292-293-afterproof.json'),JSON.stringify(output,null,2)+'\n');
 console.log('[DIC33 R199 EXACT SELECTED CURRENT SOURCE AFTERPROOF] '+JSON.stringify(output).slice(0,12000));
 if(errors.length)throw Error('r199_exact_current_selected_fail:'+errors.join(','));

@@ -24,6 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7.0.1
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
       - uses: actions/setup-node@v7.1.0
         with:
@@ -40,6 +41,7 @@ jobs:
         if: always()
         env:
           DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r199
+          DIC_R199_EXACT_CHECKOUT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: node scripts/audit/issue33-r199-original292-293-check.mjs
       - name: Keep one-day raw selected public source evidence for independent review
         if: always()
