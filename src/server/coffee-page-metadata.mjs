@@ -1559,6 +1559,14 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   if(directSelected.farm&&!roaster_details.farm)roaster_details.farm=directSelected.farm;
  for(const [key,value] of Object.entries(narrative.fields)){
   if(fields[key])continue;
+  // A receiving washing station named in "coffee from X Washing Station"
+  // identifies a processor, not its anonymous contributing growers.
+  // Keep the station's source role reviewable; do not silently promote it
+  // to a canonical named farmer unless independently labelled as producer.
+  if(key==='producer'&&/\b(?:washing|processing|drying)\s+(?:station|mill)\b/iu.test(String(value))){
+   rememberCoffeeReviewCandidate(fields,'producer',value,'Named processing facility, grower not published');
+   continue;
+  }
   addField(fields,key,value,{literalAnonymousProducer:key==='producer'&&narrative.literal_anonymous_producer===value});markNarrativeIdentity(fields,key);
   if(key==='producer'&&fields.producer)narrativeProducerByFields.add(fields);
  }
@@ -1888,6 +1896,27 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   ...(matchedDescriptions.length?[collectStructuredCoffeeSourceFacts({description:matchedDescriptions.join('\n\n')},{source_url,source_type:'html'})]:[]),
   ...[p,...equivalentProducts.filter(candidate=>candidate!==p)].map(candidate=>collectStructuredCoffeeSourceFacts(candidate,{source_url}))
  );
+ // One selected Product can publish a short, same-coffee structured teaser
+ // and a richer, directly printed Flavor list. The latter is the primary
+ // selected source. Resolve ONLY the exact two mutually corroborating
+ // records, without a third contrary direct label or truncated evidence.
+ // Unrelated product facts are quarantined before this point.
+ if(conflicts.has('tasting_notes')&&!fields.tasting_notes&&
+    !source_facts.truncated&&!scopeTruncated&&!identityScopeTruncatedByFields.has(fields)){
+  const notes=source_facts.filter(f=>f.field==='tasting_notes'&&
+   (f.source_type==='html'||f.source_type==='product_json')&&
+   f.section!=='Different coffee in the source');
+  const visible=notes.filter(f=>f.source_type==='html');
+  const structured=notes.filter(f=>f.source_type==='product_json');
+  if(notes.length===2&&visible.length===1&&structured.length===1&&
+     coffeeTastingNotesSubset(String(structured[0].value||''),String(visible[0].value||''))){
+   const primary=normalizeExplicitCoffeeTastingNotes(String(visible[0].value||''));
+   if(primary){
+    fields.tasting_notes=primary;
+    conflicts.delete('tasting_notes');
+   }
+  }
+ }
  // Selected coffee description directly contradicts a marketing Producer
  // label when the named organization itself is only a tree-planting initiative.
  // Do not autofill an unverified grower; retain the exact seller text for review.

@@ -91,3 +91,16 @@ test('#286 named cooperative is not excluded by count-shaped anonymous farm guar
  assert.equal(p.ok,true);
  assert.match(String(p.fields?.producer||''),/Worka Sakaro Producers Cooperative/i);
 });
+
+test('#286 station in narrative is a processing facility, not unnamed grower',()=>{
+ const p=selected(286,worka);
+ assert.equal(p.ok,true);
+ assert.ok(!p.fields?.producer,'this coffee from Worka Sakaro Washing Station is not a named farmer');
+});
+test('#287 two contrary directly printed Flavor labels cannot be rescued by a subset teaser',()=>{
+ const contradictory=mexico+'<p>Flavor: Coconut, Peach, Bergamot</p>';
+ const p=selected(287,contradictory,'','<p>Flavor: Dark Chocolate, Cola, Blackberry</p>');
+ assert.equal(p.ok,true);
+ assert.ok(!p.fields?.tasting_notes,'two incompatible labels cannot become a single canonical list');
+ assert.ok(p.conflicts?.includes('tasting_notes'),'source must surface unresolved flavor contradiction');
+});
