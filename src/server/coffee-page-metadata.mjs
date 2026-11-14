@@ -2232,6 +2232,42 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   // while the contrary exact selected product Flavor caption is reviewable.
   if(fields.tasting_notes&&!seoFallbackByFields.get(fields)?.has('tasting_notes'))
    markSelectedTastingSourceDisagreements(source_facts,fields.tasting_notes);
+  // The selected visible Flavor list is not secondary to a contradictory
+  // structured Product flavor tag. Merchant HTML can move to a newer coffee
+  // while the identical Product JSON-LD continues to publish older notes.
+  // A real selected-source disagreement is reviewable; neither reading is
+  // silently promoted to canonical tasting notes.
+  const selectedVisibleFlavors=source_facts.filter(fact=>
+   fact.field==='tasting_notes'&&fact.source_type==='html'&&
+   /^(?:flavou?r|tasting\s+notes?)\s*:?$/iu.test(String(fact.label||'').trim())&&
+   !/(?:different coffee|general guidance|education|recommendation|related products?)/iu.test(String(fact.section||''))&&
+   typeof fact.value==='string'&&fact.value.length<=240&&
+   (normalizeExplicitCoffeeTastingNotes(fact.value)||/[,;|]/u.test(fact.value)));
+  const structuredCurrentFlavors=fields.tasting_notes?source_facts.filter(fact=>
+   fact.field==='tasting_notes'&&fact.source_type==='product_json'&&
+   equivalentCoffeeTastingNotes(fact.value,fields.tasting_notes)):[];
+  if(fields.tasting_notes&&structuredCurrentFlavors.length&&
+   selectedVisibleFlavors.some(fact=>
+    !equivalentCoffeeTastingNotes(fact.value,fields.tasting_notes)&&
+    !coffeeTastingNotesSubset(fact.value,fields.tasting_notes)&&
+    !coffeeTastingNotesSubset(fields.tasting_notes,fact.value))){
+   conflicts.add('tasting_notes');delete fields.tasting_notes;
+   for(const fact of [...selectedVisibleFlavors,...structuredCurrentFlavors])
+    fact.conflicting=true;
+  }
+  // A Shopify Product's broad US country taxonomy cannot turn the roaster's
+  // local South Carolina presence into green-bean origin for a house blend.
+  // Retain the literal JSON field for Source Review; absent a separate
+  // current visible bean-origin label, prefer a blank rather than guessing.
+  const usCountry=value=>/^(?:United States(?: of America)?|USA|US)$/iu.test(String(value||'').trim());
+  if(/\bblend\b/iu.test(String(fields.name||''))&&usCountry(fields.origin)&&
+   source_facts.some(fact=>fact.field==='origin'&&fact.source_type==='product_json'&&usCountry(fact.value))&&
+   !source_facts.some(fact=>fact.field==='origin'&&fact.source_type==='html'&&
+    /^(?:origin|country(?: of origin)?|growing (?:region|origin))\s*:?$/iu.test(String(fact.label||'').trim())&&
+    !/(?:different coffee|general guidance|education|related products?)/iu.test(String(fact.section||''))&&
+    usCountry(fact.value))){
+   delete fields.origin;
+  }
   for(const fact of source_facts){
   if(fact.field==='release_label'&&isRecurringCoffeeHarvestWindow(fact.value))fact.field='harvest_season';
   else if(fact.field==='release_label'&&isGenericCoffeeLotLabel(fact.value))fact.field='lot_type';
