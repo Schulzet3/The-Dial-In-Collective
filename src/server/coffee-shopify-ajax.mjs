@@ -10,6 +10,7 @@ import {reconcileCoffeeProcessingClaims,mergeCoffeeProcessingClaims} from './cof
 // A response must identify the exact handle on the supplied product URL.
 import {safeCoffeeUrl,fetchPublicCoffeeJson,MAX_HTML_BYTES,coffeeProductHandle} from './coffee-url-guard.mjs';
 import {extractPublicCoffeeFacts} from './coffee-page-metadata.mjs';
+import {selectedCoffeeNameFromCountryVarietyProcessTitle} from './coffee-identity-evidence.mjs';
 import {explicitlyRotatingCoffeeOrigin} from './coffee-selected-source-evidence.mjs';
 import {extractSelectedCoffeeRoastVariants} from './coffee-roast-variants.mjs';
 
@@ -146,7 +147,7 @@ export function extractShopifyAjaxData(data,request,{extract=extractPublicCoffee
   '</h1>'+story+'</main></body></html>';
  if(Buffer.byteLength(html)>MAX_HTML_BYTES)return null;
  const result=extract(html,{source_url:request.sourceUrl});
- if(!result?.ok||norm(result.fields?.name)!==norm(data.title))return null;
+ if(!result?.ok||norm(result.fields?.name)!==norm(selectedCoffeeNameFromCountryVarietyProcessTitle(data.title)))return null;
  const originalFacts=result.source_facts;
  const endpointFacts=(originalFacts||[]).map(fact=>({...fact,source_type:'product_json',source_url:request.url}));
  // A source can legitimately carry a full description larger than the HTML
