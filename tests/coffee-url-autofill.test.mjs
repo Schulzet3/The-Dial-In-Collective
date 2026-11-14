@@ -155,7 +155,7 @@ test('published New Coffee preview click immediately populates blanks before Add
  assert.ok(at>0&&end>at);
  const handler=main.slice(at,end);
  assert.match(handler,/applyCoffeeUrlFields\(form,found\)/);
- assert.match(handler,/coffeeUrlPreviewMarkup\(found\)/);
+ assert.match(handler,/coffeeUrlCompactPreviewMarkup\(found\)/);
   assert.doesNotMatch(main,/if\(a==='apply-coffee-url'\)/);
  const preview=coffeeUrlPreviewMarkup({ok:true,source:'unverified_public_page',
   fields:{name:'Wuri',roaster:'Sweet Bloom'}});
