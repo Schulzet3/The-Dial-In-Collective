@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "round": "R192",
+  "date_utc": "2026-11-14",
+  "status": "THREE_SELECTED_CURRENT_OFFICIAL_SOURCE_PARSER_MERGED_VERIFIED_ONLY_ORIGINAL603_INCOMPLETE",
+  "preflight": {
+    "development_sha": "4854b80adcc661c84adbe48da736e744f603f66d",
+    "preflight_git_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "content_equal_to_exact_git_blob": true
+  },
+  "source_commit": "4854b80adcc661c84adbe48da736e744f603f66d",
+  "source_pr": 2617,
+  "reviewed_pr_head_sha": "d0143628cc798742cbe4155b812861c6ffc91ba3",
+  "source_changed_blobs_equal_to_reviewed_head": 7,
+  "corpus": {
+    "original_coffees": 603,
+    "original_roasters": 201,
+    "original_captures": 1197,
+    "selected_case_numbers": [
+      277,
+      278,
+      279
+    ],
+    "frozen_csv_git_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "frozen_csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "modified": false,
+    "full_individual_semantic_certification": false,
+    "original603_workflow": "SKIPPED_NOT_PASS"
+  },
+  "source_artifact": {
+    "workflow_run": 43570881958,
+    "artifact_id": 14103948893,
+    "artifact_zip_sha256": "71a846f4854cc25105ae80966ded351548ae7599372b0f4a2a46d9751e79c2b9",
+    "source_evidence_sha256": "051f25a1e990d6d122d6a24bdf67010059555b9217e4bec7ce34baa216cc34d8",
+    "afterproof_sha256": "437d418aa385585f2ad4478a4c5a66e1511fe950fc6f7b37d5f2bc2c2a23c8b8",
+    "independently_downloaded_opened_rehashed": true,
+    "afterproof_pass": true,
+    "afterproof_errors": []
+  },
+  "current_selected": [
+    {
+      "number": 277,
+      "official_url": "https://redhouseroasters.com/products/gesha-el-paraiso-narino",
+      "selected_h1": "Geisha El Paraiso Nariño 8 oz",
+      "html_bytes": 198357,
+      "html_sha256": "55b1ef98b392272353cce5a54e8c50c17fb362e5ddda20a5eed7a7c9aaec1dde",
+      "canonical_notes": "Fruity notes, hibiscus, medium acidity, clean finish.",
+      "review_only_context": "jasmine, lemon",
+      "named_producer": "Jose Gomez Lopez",
+      "semantic": "Source-picked span sensory context is preserved separately from stronger cupping label, not promoted or borrowed from related product."
+    },
+    {
+      "number": 278,
+      "official_url": "https://redhouseroasters.com/products/mexican-oaxaca",
+      "selected_h1": "Mexican Oaxaca",
+      "html_bytes": 210630,
+      "html_sha256": "4af4863908dc0ce8863d570043dfa7923ea3a5b89aed2438cbfd0a39fbdb421c",
+      "canonical_process": "Other/Unknown",
+      "raw_selected_process": "Wet-Hulled",
+      "semantic": "Raw exact method retained in process source fact. No unsupported Washed normalization, invented roast/grower, or sidebar field."
+    },
+    {
+      "number": 279,
+      "official_url": "https://redhouseroasters.com/products/sumatra",
+      "selected_h1": "Sumatra",
+      "html_bytes": 210601,
+      "html_sha256": "183ca5b11d613281616df264370b11e40c154409aea1e2ac6d09deaa04575bcf",
+      "roast": "Medium-Dark",
+      "selected_roast_literal": "Full City",
+      "canonical_process": "Other/Unknown",
+      "raw_selected_process": "Wet-Hulled",
+      "semantic": "Direct Full City correctly maps owner-locked Medium-Dark; exact Wet-Hulled provenance remains in Source Review, not mislabeled Washed."
+    }
+  ],
+  "accepted_ci": {
+    "exact_merged_official_run": 43570881958,
+    "focused_tests_pass": 11,
+    "focused_tests_fail": 0,
+    "exact_merged_node_lint_run": 43570881989,
+    "node_total": 4762,
+    "node_pass": 4756,
+    "node_fail": 0,
+    "node_skipped": 6,
+    "lint_pass": true,
+    "exact_merged_cloud_ux_run": 43570881986,
+    "exact_merged_approval_run": 43570882135,
+    "exact_merged_python_run": 43570881995,
+    "required_applicable_pass": true,
+    "original603_all_cases_skipped": true
+  },
+  "known_unrelated_source_failures": {
+    "cases": [
+      566,
+      567,
+      594
+    ],
+    "new": false,
+    "not_counted_pass": true
+  },
+  "disposition": {
+    "issue_state": "OPEN",
+    "queue_item": "DIC-Q-33-r192-redhouse-selected-narrative-review",
+    "queue_status": "IN_PROGRESS_NO_UNSUPPORTED_PROMOTION",
+    "ready_count_claimed": 0,
+    "deployed_claimed": false,
+    "development_only": true,
+    "production_provider_sql_auth_member_data_writes": 0,
+    "publication_authorized": false
+  },
+  "next": "Choose next unresolved original603 selected official coffee #280 or a higher-risk unreviewed case; verify current HEAD before writes, source-bound raw HTTPS/parser and negative controls, preserve original frozen corpus. Existing source access failures need separate adjudication."
+}
