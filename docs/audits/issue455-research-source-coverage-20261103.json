@@ -2632,6 +2632,23 @@
       "source_bytes_sha256": null,
       "source_byte_caveat": "Full first-party HTML read; original publisher PDF bytes and SHA-256, sensory supplemental figure values, raw LC-MS annotation IDs and independent replication were not audited. Instrument electronic-tongue samples were brewed at a different ratio/temperature/duration than 10 Q-graders' steeped cupping; no espresso shots or owner outcomes observed.",
       "original_crosswalk": "ORG-03 original Markdown blob 9a66449c6adfe27bc7e64dae086d3dfcfc647de6 (research synthesis, not an independently verified primary study); source DOI absent from 147 preexisting source identities at write check."
+    },
+    {
+      "id": "LIT-2025-RESENDE-COFFEE-BLEND-FILTER-RATIO",
+      "type": "peer_reviewed_primary_filtered_coffee_blend_sensory_mixture_model_non_espresso",
+      "title": "Impact of mass-to-volume ratios on beverage quality in coffee blends",
+      "authors": "Mariana Resende; Marcelo Angelo Cirillo; Flavio Meira Borem",
+      "published": "2025-11-04",
+      "journal": "Coffee Science 20:e202383",
+      "doi": "10.25186/.v20i.2383",
+      "url": "https://coffeescience.ufla.br/index.php/Coffeescience/article/view/2383",
+      "original_pdf": "https://coffeescience.ufla.br/index.php/Coffeescience/article/download/2383/2540",
+      "access": "ORIGINAL_PUBLISHER_OPEN_ACCESS_FULL_PDF_TEXT_INDEXED_READ_METHODS_TABLES_DISCUSSION_CONCLUSION; VISUAL_SCREENSHOTS_TIMED_OUT",
+      "review_status": "R455-265_DIRECT_PUBLISHER_PRIMARY_PDF_TEXT_METHODS_2_RESULTS_3_TABLE_2_DISCUSSION_4_CONCLUSIONS_5; PDF_PAGE_PIXELS_RAW_DATA_AND_BINARY_SHA_UNVERIFIED",
+      "evidence_grade": "PEER_REVIEWED_FIVE_QUALIFIED_TASTERS_FILTRATION_NOT_ESPRESSO; INTERNAL_REPORTING_DISCORDANCE_NOT_RESOLVED",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Original PDF was text-accessible through publisher; screenshot attempts timed out, so figures/visual layout and original binary SHA/underlying sensory data were not verified. No independent replication, app user observation or espresso intervention.",
+      "factual_status": "STUDY_SPECIFIC_FILTRATION_MIXTURE_CONCENTRATION_NOT_PERSONAL_ESPRESSO_RATIO; PUBLISHED_ABSTRACT_AND_TABLE_2_FIT_CLAIMS_APPEAR_INCONSISTENT"
     }
   ],
   "evidence_checks": [
@@ -8130,6 +8147,45 @@
       "grade": "FIRST_PARTY_DIRECT_METHODS_AND_CONCLUSIONS; RAW_MASS_SPECTRA_SUPPLEMENT_AND_REPLICATION_UNREVIEWED",
       "factual_status": "ASSOCIATIVE_OMICS_NOT_CAUSAL_PERSONALIZED_RECIPE",
       "result": "NO_METABOLITE_OR_PROCESS_BASED_MEMBER_TASTE_CONFIDENCE"
+    },
+    {
+      "id": "R455-EV-CIT-265-A",
+      "source": "LIT-2025-RESENDE-COFFEE-BLEND-FILTER-RATIO",
+      "date": "2026-11-14",
+      "page_section": "Original publisher Methods section 2, Table 1; PDF-indexed text lines 57-98",
+      "claim": "Two mixture experiments (dry vs peeled-cherry Yellow Bourbon specialty Arabica plus commercial Arabica and Robusta) used nine designed blend points per processing arm, two ground-coffee-to-input-water concentrations 7% (70 g/L) and 10% (100 g/L), four-minute FILTRATION at 93 C; five qualified tasters, four repetitions, randomized blind sample orders and 20mL servings around 65 C. Not pressure espresso, beverage espresso yield ratio, or DIC's five individual taste ratings.",
+      "grade": "DIRECT_PUBLISHER_ORIGINAL_METHODS_TEXT; PRIMARY_NOT_INDEPENDENT_REPLICATION; FIGURE_PIXELS_UNVERIFIED",
+      "factual_status": "VALID_FOR_FILTERED_BLEND_CONDITIONS_ONLY",
+      "current_app": "Current development 67781a9aba587b6894e4fc77c4139113dce9ee88; site/lib/engine.js Git blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6, site/lib/constants.js Git blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2; no blend filtration dose/water model in the approved personal five-taste engine",
+      "result": "NO_ESPRESSO_RATIO_OR_STYLE_PRIOR_TRANSFER",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CIT-265-B",
+      "source": "LIT-2025-RESENDE-COFFEE-BLEND-FILTER-RATIO",
+      "date": "2026-11-14",
+      "page_section": "Original publisher Table 2, PDF-indexed lines 120-165; abstract and Conclusions section 5",
+      "claim": "Published abstract/conclusion claim adding concentration improves model fit roughly 70-75% to above 90%; published Table 2 instead reports adjusted-R2 dry flavor 0.9637 without vs 0.8986 with, dry score 0.9633 vs 0.8707, wet flavor 0.9626 vs 0.8783, wet score 0.9844 vs 0.9260. Bitterness fits increase slightly. Published model-fit summary and displayed table appear discordant; no resolution without underlying analysis/full verified page visuals.",
+      "grade": "DIRECT_PUBLISHER_ORIGINAL_TABLE_TEXT_VS_ABSTRACT_CONCLUSION_CROSSCHECK; SCREENSHOT_TIMEOUT; MODEL_RAW_RESULTS_NOT_AUDITED",
+      "factual_status": "UNRESOLVED_INTERNAL_REPORTING_DISCORDANCE; NO_GENERALIZED_PREDICTIVE_GAIN_ASSERTION",
+      "current_app": "Current development 67781a9aba587b6894e4fc77c4139113dce9ee88; site/lib/engine.js Git blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6, site/lib/constants.js Git blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2; no blend filtration dose/water model in the approved personal five-taste engine",
+      "result": "DO_NOT_PROMOTE_NUMERIC_MODEL_CONFIDENCE_OR_BREW_CORRECTION",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CIT-265-C",
+      "source": "LIT-2025-RESENDE-COFFEE-BLEND-FILTER-RATIO",
+      "date": "2026-11-14",
+      "page_section": "Original publisher Methods 2, Results 3, Discussion 4 and Conclusions 5",
+      "claim": "Mixture simplex regressions characterize flavor, bitterness and overall-score associations at two input-water concentrations for specific filtered blend formulations. Both blend composition and coffee concentration vary and expert-scale attributes differ from owner's individual espresso ratings, making causal one-control next-shot espresso benefit untested.",
+      "grade": "FULL_INDEXED_PRIMARY_PDF_TEXT_METHOD_AND_RESULT_CONTEXT; NO_PERSONAL_ESPRESSO_REPEAT_SHOTS_OR_INDEPENDENT_REPLICATION",
+      "factual_status": "CONDITIONAL_FILTER_BREW_SENSORY_FIT_NOT_PERSONALIZED_ESPRESSO_OUTCOME",
+      "current_app": "Current development 67781a9aba587b6894e4fc77c4139113dce9ee88; site/lib/engine.js Git blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6, site/lib/constants.js Git blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2; no blend filtration dose/water model in the approved personal five-taste engine",
+      "result": "NO_SILENT_LOCKED_TASTE_OR_RATIO_TARGET_CHANGE",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -8323,22 +8379,23 @@
     "R455-258 source author abstract directly checked: four body tactile subattributes, 3-CQA/4-CQA subtle mouthcoating and study-specific inverse concentration effect do NOT validate DIC five tastes or next-shot improvement. One new source/three bounded checks/one P3 research-only proposal; current app unchanged. Exact docs-only CI/merge/readback required, S019 standalone inaccessible, #267 literal review credited zero.",
     "R455-260: full canonical Git blob independently parsed and reconciled R259 proposed poroelastic source/three claims/one proposal to existing LIT-2026-ESPRESSO-POROELASTIC, methods R455-EV-METHOD-204-A/B and previous proposal R455-PROP-204; 145/416/208 unchanged. No #267 literal review or empirical DIC taste validation; standalone S019 inaccessible.",
     "R455-262: first-party 2023 Angeloni et al espresso percolation original HTML Sections 2/3/4 directly reviewed; 1 unique source/3 chemical-versus-taste evidence checks/1 research-only proposal. No app/Locked/telemetry/member/provider or production change, zero #267 V2 line credit. Full publisher PDF binary, raw lab/model software and member taste outcomes not verified. PR-head/merge/CI verification still required. Standalone S019 unreviewed.",
-    "R455-264: directly reviewed one-origin Robusta postharvest original publisher full HTML §2/3/4; 1 novel DOI/3 bounded checks/1 P3 research-only proposal, 148/425/211; no member espresso efficacy, no code/Locked targets/deployment, zero #267 literal-line credit, standalone S019 not accessible. Source-bound docs CI/merge receipt pending."
+    "R455-264: directly reviewed one-origin Robusta postharvest original publisher full HTML §2/3/4; 1 novel DOI/3 bounded checks/1 P3 research-only proposal, 148/425/211; no member espresso efficacy, no code/Locked targets/deployment, zero #267 literal-line credit, standalone S019 not accessible. Source-bound docs CI/merge receipt pending.",
+    "R455-265: original Resende et al 2025 filtered blend PDF indexed text and Table 2: 1 distinct source/3 claim checks/1 research-only proposal. 149/428/212. Research only, page screenshots timeout, table-fit conflict unresolved, no espresso five-rating outcome; standalone S019 inaccessible; zero #267 line credit; next: exact-source docs governance and separate safe Log Shot path."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-264",
+    "run_id": "R455-265",
     "date": "2026-11-14",
-    "development_preflight_sha": "9f23b49b5e601b36610f512c6274762bf8733542",
-    "refreshed_branch_sha": "1bf9fa82686e19642a2158fd8105df6755dc7bed",
+    "development_preflight_sha": "67781a9aba587b6894e4fc77c4139113dce9ee88",
+    "refreshed_branch_sha": "67781a9aba587b6894e4fc77c4139113dce9ee88",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
     "source_counts": {
-      "sources": 148,
-      "evidence_checks": 425,
-      "proposals": 211
+      "sources": 149,
+      "evidence_checks": 428,
+      "proposals": 212
     },
-    "scope": "New primary 2026 one-origin Robusta processing full published HTML sensor/cupping/omics evidence; not espresso efficacy",
+    "scope": "Distinct 2025 filtered Arabica/Robusta blend mixture original PDF indexed methods/Table2 results with contradiction caveat; no espresso efficacy.",
     "github267_line_credit": 0,
-    "next": "Check exact-source docs CI and nonforce integration, readback hashes, then reproduce a distinct SAFE Log Shot/Rate/Recommendation gap or verify nonduplicate primary source. Standalone S019 unavailable."
+    "next": "Check PR exact-source docs governance and nonforce merge/readback, then inspect a distinct SAFE Log Shot/Rate/Recommendation gap. Original S019 inaccessible."
   },
   "policy_decisions_resolved": [
     {
@@ -13197,6 +13254,33 @@
       "production_deployed": false,
       "github267_literal_review_credit": 0,
       "exact_source": "1bf9fa82686e19642a2158fd8105df6755dc7bed"
+    },
+    {
+      "id": "R455-PROP-265-FILTER-BLEND-CONCENTRATION-NOT-ESPRESSO-RATIO",
+      "severity": "P3_RESEARCH_ONLY_UNRESOLVED_INTERNAL_FIT_DISCORDANCE",
+      "source": [
+        "LIT-2025-RESENDE-COFFEE-BLEND-FILTER-RATIO"
+      ],
+      "evidence": [
+        "R455-EV-CIT-265-A",
+        "R455-EV-CIT-265-B",
+        "R455-EV-CIT-265-C"
+      ],
+      "finding": "A five-taster filtered Arabica/Robusta blend mixture study cannot justify DIC's espresso dose-to-yield recipe targets or confidence claims, and the paper's abstract/model-fit improvement claim is discordant with published Table 2 values.",
+      "evidence_grade": "DIRECT_ORIGINAL_PUBLISHER_PDF_TEXT_AND_TABLES; SCREENSHOTS_TIMED_OUT; RAW_DATA_NOT_VERIFIED; NO_ESPRESSO_USER_CAUSAL_BENEFIT",
+      "source_provenance": "Resende, Cirillo and Borem (2025), Coffee Science 20:e202383, DOI 10.25186/.v20i.2383; primary publisher Methods §2, Results Table 2, Discussion and Conclusions",
+      "user_benefit": "Avoid transferring filtered coffee concentration/brew-water associations into unsupported espresso extraction ratio or claimed prediction accuracy.",
+      "current_locked": "Keep all five active tastes, missing ratings distinct from rated all-green, at most one controllable next-shot change, measured dose/yield/time and notes, independent styles Turbo/Fast-Flow, grinder original/current scale and Slow Feed, same-coffee evidence, private history.",
+      "current_app": "Current development 67781a9aba587b6894e4fc77c4139113dce9ee88; site/lib/engine.js Git blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6, site/lib/constants.js Git blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2; no blend filtration dose/water model in the approved personal five-taste engine",
+      "proposed_change": "SAFE research-only source and reporting caveat. Do not change runtime espresso numeric ratio/temperature/taste rules, telemetry or confidence. Optional consented same-coffee/setup/style/feed/grinder single-change to next-shot all-five taste evaluation would require new owner authority and actual outcomes.",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "R455-265_EVIDENCE_ONLY_NO_APP_BEHAVIOR_CHANGE",
+      "test_plan": "Unique DOI + 148 source identities and original 425 checks/211 proposals remain intact; append 1/3/1, JSON parse/readback, docs-only source-bound governance. Not an app CI or espresso quality test.",
+      "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0,
+      "exact_source": "67781a9aba587b6894e4fc77c4139113dce9ee88"
     }
   ],
   "changeScope": {
