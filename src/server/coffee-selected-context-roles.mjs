@@ -18,16 +18,25 @@ export function selectedCoffeeContextRoles(html,{name='',clean}={}){
  for(const b of blocks){
   const text=b.text;
   const section=fold(b.section);
-  // These simple producer-plus-locality list items belong under the exact
-  // selected product's OWN heading. Names alone in generic cards do not count.
-  if(b.tag==='li'&&section===selected){
+  // Only a chosen coffee's own section may provide a named grower plus
+  // location. Current selected heroes often render the same literal as a
+  // paragraph/span rather than a list item; require independent same-section
+  // GROWING-family prose for the new non-list shape, never SEO/related cards.
+  if((b.tag==='li'||b.tag==='p'||b.tag==='span')&&section===selected){
    const location=text.match(/^([\p{L}\p{M}'’\s.-]{4,90}?),\s*([\p{L}\p{M}'’\s.-]{3,90}?)\s+(Guatemala|Colombia|Ethiopia|Honduras|Peru|Kenya|Brazil)$/iu);
    if(location){
     const candidate=location[1].trim(),withinName=fold(name).includes(fold(candidate));
     const token=candidate.split(/\s+/)[0].replace(/[^\p{L}]/gu,'');
     const evidence=token.length>=3&&blocks.some(x=>x.tag==='p'&&x.section===b.section&&new RegExp('\\b'+token+'\\b','iu').test(x.text)&&
      /\b(?:coffee producer|family farm|family farms|farmer|farmers|grower|grows|growing)\b/i.test(x.text));
-    if(evidence&&(withinName||/^[\p{Lu}][\p{L}\p{M}'’-]{2,30}\s+[\p{Lu}][\p{L}\p{M}'’-]{2,35}$/u.test(candidate)))possibleProducers.add(candidate);
+    const currentFamily= /^[\p{Lu}][\p{L}\p{M}'’-]{2,30}\s+Family$/u.test(candidate)&&
+     !/^(?:Other|Former|Previous|Historical|Different|Unknown|Local|Generic|Various|New)\s+Family$/iu.test(candidate)&&
+     blocks.some(x=>x.tag==='p'&&x.section===b.section&&x.text.length<=900&&
+      /\b(?:coffee\s+producer|farmer|grower|cultivator)\b/iu.test(x.text)&&
+      /\bfamily\s+farm\b/iu.test(x.text)&&
+      !/\b(?:formerly|previously|historically|used\s+to|no\s+longer|not\s+(?:our|the)\s+producer|another\s+(?:coffee|farm|family|lot)|other\s+(?:coffee|farm|family|lot)|previous\s+(?:harvest|year|lot))\b/iu.test(x.text));
+    if((b.tag==='li'&&evidence||currentFamily)&&
+       (withinName||/^[\p{Lu}][\p{L}\p{M}'’-]{2,30}\s+[\p{Lu}][\p{L}\p{M}'’-]{2,35}$/u.test(candidate)))possibleProducers.add(candidate);
    }
   }
   if(b.tag==='p'){

@@ -39,3 +39,12 @@ test('related product’s farmer, origin and tasting cannot leak into same selec
  assert.doesNotMatch(String(p.fields?.tasting_notes||''),/blueberry|kiwi/i);
  assert.ok(!p.fields?.decaffeination_method && !p.fields?.espresso_recipe);
 });
+
+test('two incompatible directly selected families cannot be silently chosen',()=>{
+ const p=extractPublicCoffeeFacts(coffee(family+' </p><p>Torres Family, Huila Colombia',ownStory),{source_url:url});
+ assert.ok(!p.fields?.producer,'Two direct named family identities conflict; leave producer reviewable');
+});
+test('generic family-sounding words in unrelated current-page sections cannot claim selected producer',()=>{
+ const p=extractPublicCoffeeFacts(coffee('San Jerónimo, Guatemala',ownStory,'<section class="related-products"><h2>Family Growers</h2><p>Garcia Family, Huila Colombia</p><p>Family coffee producer on his family farm.</p></section>'),{source_url:url});
+ assert.ok(!p.fields?.producer);
+});
