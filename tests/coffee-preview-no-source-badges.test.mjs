@@ -71,3 +71,15 @@ test('visible New Coffee and correction notices no longer claim roaster source v
  assert.doesNotMatch(preview,/Unverified Page|Official Source Preview|Approved Catalog|Details Found On Official Roaster Page/);
  assert.doesNotMatch(css,/\.coffee-source-label\s*\{/);
 });
+
+test('every sourced conflict displays the exact owner instruction without old heading or paragraph',()=>{
+ const result={...makeResult('unverified_public_page','new'),conflicts:['origin'],
+  conflict_options:{origin:[{value:'Costa Rica',label:'Current product',source_url:url},{value:'Kenya',label:'Additional source',source_url:url}]}};
+ for(const html of [coffeeUrlCompactPreviewMarkup(result),coffeeUrlPreviewMarkup(result)]){
+  assert.match(html,/Tap the correct option to autofill, or type a value in the field/);
+  assert.doesNotMatch(html,/Review conflicting details|These published readings disagree|Nothing was selected automatically|Compare them with the roaster|Nothing is saved until Add Coffee/);
+  assert.match(html,/data-action="choose-coffee-conflict"/);
+  assert.match(html,/View Original Source/);
+  assert.doesNotMatch(html,sourceLabel);
+ }
+});
