@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "date_utc": "2026-11-14",
+  "scope": "R209_SELECTED_EXACT_CURRENT_INK_ORIGINAL313_314_SOURCE_AND_ACTUAL_PARSER",
+  "result": "TWO_NARROW_ORIGINAL_CASES_CURRENT_SOURCE_PARSER_VERIFIED_PARENT_OPEN",
+  "preflight": {
+    "original_development_sha": "67781a9aba587b6894e4fc77c4139113dce9ee88",
+    "docs_reconciliation_live_sha": "6a16707f3f431a9d17d11f27223b88d60bbd4239",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "original603_csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "original603_csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "frozen_coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "original_modified": false,
+    "oracle_modified": false,
+    "scorer_modified": false
+  },
+  "code": {
+    "pr": 2761,
+    "original_pr_head": "be0b92f4f7c2cbb62dbf468c67afc6a8d43aec5d",
+    "corrected_tested_pr_head": "f19ee0a38f0e7d37a5e16a2670157bd44e7736d1",
+    "safe_nonforce_merged_sha": "db45e07cc5ddc58a2f816958373e08f46a090b00",
+    "runtime_parser_changed": false,
+    "merged_identical_blobs": {
+      "tests/coffee-issue33-r209-original313-314.test.mjs": "4385507be65cb04fcf4153809088e0a144a7aff4",
+      "scripts/audit/issue33-r209-original313-314-check.mjs": "4825787b2380b978f94696311e63b6a96e82f425",
+      ".github/workflows/issue33-r209-original313-314.yml": "daf4d724eda4bb288bba8857ceb2ed61faade68c",
+      "docs/workstreams/ops-issue33-r209-313-314-20261114.md": "2c8a5df19588fb9e6d54bee629a104d69ebf9d8a"
+    }
+  },
+  "cases": [
+    {
+      "number": 313,
+      "coffee": "6610",
+      "exact_url": "https://shop.inkcoffee.com/products/6610",
+      "selected_h1": "6610",
+      "raw_current_bytes": 119209,
+      "raw_current_sha256": "d8051583aef42331405adfd01c4d60fc9af8ba4edcb2a9f1eba4264612bcd73b",
+      "observed_fields": {
+        "name": "6610",
+        "roaster": "ink! Coffee Company",
+        "origin": "Central & South America",
+        "roast_level": "Dark",
+        "tasting_notes": "rich taste, slightly smoky undertones and bittersweet, dark chocolate"
+      },
+      "source_role": "6610 ft explicitly roaster's roasting-site altitude, NOT the green-coffee growing elevation; no elevation populated",
+      "unsupported_fields_kept_blank": [
+        "elevation_m",
+        "producer",
+        "process",
+        "espresso_recipe",
+        "decaffeination_method"
+      ],
+      "selected_conflicts": [],
+      "exact_merged_afterproof": "PASS"
+    },
+    {
+      "number": 314,
+      "coffee": "Espresso 89",
+      "exact_url": "https://shop.inkcoffee.com/products/espresso-89",
+      "selected_h1": "Espresso 89",
+      "raw_current_bytes": 120307,
+      "raw_current_sha256": "bae9add8a1dbfbd3a2f9f52949e2d3a552696438d052e6adcaca86887eb91b89",
+      "observed_fields": {
+        "name": "Espresso 89",
+        "roaster": "ink! Coffee Company",
+        "origin": "Africa/Asia/Americas",
+        "tasting_notes": "chocolate taste, licorice sweetness"
+      },
+      "source_role": "Selected Roast - Trade Secret does not publish a categorical roast level; Northern Italian espresso style cannot prove Italian farm geography or elevation",
+      "unsupported_fields_kept_blank": [
+        "roast_level",
+        "elevation_m",
+        "producer",
+        "process",
+        "espresso_recipe",
+        "decaffeination_method"
+      ],
+      "selected_conflicts": [],
+      "exact_merged_afterproof": "PASS"
+    }
+  ],
+  "ci": {
+    "first_pr_head": {
+      "node": 43638518619,
+      "node_tests": "4886_PASS_0_FAIL_6_SKIP",
+      "lint": "FAILED_UNUSED_CATCH_BINDING_X",
+      "failed_class": "SYNTHETIC_SOURCE_CHECKER_LINT_ONLY_NOT_PARSER",
+      "selected_run": 43638518716,
+      "selected_result": "SUCCESS_5_OF_5_AND_CURRENT_AFTERPROOF"
+    },
+    "repaired_pr_head": {
+      "selected": 43638856250,
+      "selected_result": "SUCCESS_5_OF_5_AND_CURRENT_AFTERPROOF",
+      "node": 43638856249,
+      "node_tests": "4886_PASS_0_FAIL_6_SKIP",
+      "lint": "PASS",
+      "cloud_mobile": 43638856299,
+      "isolated_sql": 43638856258,
+      "approval": 43638856242,
+      "python": 43638856237,
+      "source_archive": 43638856280,
+      "all_applicable": "SUCCESS",
+      "frozen603": 43638856291,
+      "frozen603_result": "SKIPPED_NOT_PASS"
+    },
+    "merged": {
+      "selected": 43639470727,
+      "selected_result": "SUCCESS_5_OF_5_AND_CURRENT_AFTERPROOF",
+      "node": 43639470726,
+      "node_tests": "4886_PASS_0_FAIL_6_SKIP",
+      "lint": "PASS",
+      "cloud_mobile": 43639470844,
+      "approval": 43639470679,
+      "python": 43639470766,
+      "all_applicable": "SUCCESS",
+      "broad_frozen603": "NOT_RUN_NOT_CERTIFIED",
+      "read_only_general_roaster_probe": 43639470760,
+      "read_only_general_roaster_probe_result": "SKIPPED_NOT_PASS"
+    }
+  },
+  "boundaries": {
+    "parent_issue_open": true,
+    "source_only_reviews_not_complete_603": true,
+    "no_ready_queue_change": true,
+    "no_real_gotrue_or_physical_device_claim": true,
+    "no_netlify_publish": true,
+    "no_provider_production_sql_edge_auth_or_member_writes": true,
+    "no_backup_change": true,
+    "next": "Independently selected current original #315 Vienna and #316 Colombia Honey; #316 page SEO title may reference different product; trust exact H1 and selected description"
+  }
+}
