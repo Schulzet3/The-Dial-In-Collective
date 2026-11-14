@@ -14249,8 +14249,8 @@
       "issue": 509,
       "pr": null,
       "title": "Reject JSON null recommendation control elements without changing recorded shots or private provenance",
-      "state": "READY",
-      "merged_source_sha": "0cd5054c6684a63062daf794e33ea265daf5ce66",
+      "state": "TESTING",
+      "merged_source_sha": "7607c69f62f65979079fd02a0d25f4b7653a2303",
       "scope_paths": [
         "supabase/migrations/20261114115000_dic_recommendation_context_null_control_guard.sql"
       ],
@@ -14260,7 +14260,8 @@
         "New isolated PostgreSQL17 transaction/temp-trigger fixture tests null, mixed, invalid, valid one/two control, historical grants and trigger attachment; exact source SQL CI run 43591859535 SUCCESS on 0cd5054c6684a63062daf794e33ea265daf5ce66. Post-intake governance/Node source bound CI pending.",
         "Run241 current development source/test/runner exact Git blobs unchanged against tested 0cd5054c: dadd06e1982a84d289481b661702f9940e375b7d, 61e496319939f59eb4b7843fdb93aa6b4c1e33fa, a3f86ff03a2c23cd510cc1dcd4c988a01bbebb2e",
         "Exact source PostgreSQL17 + signed JWT owner HTTP + backup 43591859535 SUCCESS; Node22/lint/build 43591859617 SUCCESS, both at 0cd5054c.",
-        "Queue intake/approval 43592032732 SUCCESS at 05a6af51, current-descendant approval 43596028523 SUCCESS at c5b555; prior failed intake and cancelled initial checks NOT treated as PASS."
+        "Queue intake/approval 43592032732 SUCCESS at 05a6af51, current-descendant approval 43596028523 SUCCESS at c5b555; prior failed intake and cancelled initial checks NOT treated as PASS.",
+        "Corrective evidence: exact GitHub commit 7607c69f62f65979079fd02a0d25f4b7653a2303 adds migration SQL and original regression; 0cd5054c6684a63062daf794e33ea265daf5ce66 changes only SQL test and journal. Approval CI 43599567921 confirmed broken READY record. Status TESTING until one source-bound five-check verified."
       ],
       "ci_runs": [
         43591859535,
@@ -14268,8 +14269,11 @@
         43592032732,
         43596028523
       ],
-      "blockers": [],
-      "notes": "Historical migration unchanged. No data backfill, no member/shot records read or modified. Explicit IS NULL OR NOT IN rejects invalid JSON null controls; original private SECURITY DEFINER, search_path, EXECUTE revocations, trigger, valid controls and source_verified_independently=false retained. Tests use disposable dic_ci only. User Nov6 alert-only notification policy unchanged. Full issue509 provider baseline IN_PROGRESS.\nRun241 READY DEVELOPMENT SOURCE ONLY after verified unchanged source/test/runner and applicable exact-source CI; production deployment/migration and hosted private Auth acceptance NOT CLAIMED.",
+      "blockers": [
+        "Exact Git verification found that former recorded READY SHA 0cd5054c6684a63062daf794e33ea265daf5ce66 changed only test/journal; the deployable SQL migration was introduced at 7607c69f62f65979079fd02a0d25f4b7653a2303. Previous READY certification is invalid until source attribution repaired.",
+        "Existing cited successful check runs are split across different SHAs; no single verified source has all five successful recorded statuses with identical migration/test blobs. Maintain TESTING pending #509-specific evidence and valid promotion."
+      ],
+      "notes": "Historical migration unchanged. No data backfill, no member/shot records read or modified. Explicit IS NULL OR NOT IN rejects invalid JSON null controls; original private SECURITY DEFINER, search_path, EXECUTE revocations, trigger, valid controls and source_verified_independently=false retained. Tests use disposable dic_ci only. User Nov6 alert-only notification policy unchanged. Full issue509 provider baseline IN_PROGRESS.\nRun241 READY DEVELOPMENT SOURCE ONLY after verified unchanged source/test/runner and applicable exact-source CI; production deployment/migration and hosted private Auth acceptance NOT CLAIMED.\n2026-11-14 safety reconciliation: source-backed review found previous READY promotion incorrectly pointed at test-only commit 0cd5054 and relied on different CI source SHAs; mandatory READY-evidence gate rejected it in independent PR #2686 runs 43597779195 and 43599567921. Corrected merged_source_sha to original migration-introduction 7607c69 and reverted premature READY to TESTING without modifying SQL/tests, deleting existing successes, or touching production. This is not an authorization to deploy or to waive independent #509 five-check acceptance.",
       "production_deployed": false
     },
     {
