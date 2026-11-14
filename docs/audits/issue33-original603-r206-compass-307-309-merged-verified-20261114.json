@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "date_utc": "2026-11-14",
+  "scope": "ORIGINAL603_SELECTED_CURRENT_OFFICIAL_SOURCE_AND_REAL_PARSER",
+  "disposition": "THREE_NARROW_CASES_VERIFIED_PARENT_OPEN_DEVELOPMENT_ONLY",
+  "authority": {
+    "initial_preflight_source_sha": "f7fc7b16a95054aae2b77c46c882b4e81df6b0b5",
+    "documentation_preflight_source_sha": "d0b82418f98285a0d0ae18309547676e073cfea5",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "merged_sha": "d0b82418f98285a0d0ae18309547676e073cfea5",
+    "source_pr": 2744,
+    "tested_pr_head": "4b397e895d2425a4d04fc601678b0cecd3687ef4",
+    "journal": "docs/workstreams/ops-issue33-r206-307-309-20261114.md",
+    "original_csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "original_csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "frozen_coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "baseline_modified": false,
+    "oracle_or_scorer_modified": false
+  },
+  "scope_paths": [
+    "tests/coffee-issue33-r206-original307-309.test.mjs",
+    "scripts/audit/issue33-r206-original307-309-check.mjs",
+    ".github/workflows/issue33-r206-original307-309.yml",
+    "docs/workstreams/ops-issue33-r206-307-309-20261114.md"
+  ],
+  "merged_blobs_match_reviewed": {
+    "tests": "af0ca05092e7e2b7d385f70bdaed012e76370ed5",
+    "checker": "5fd7fe4ded16130a5e17b415a4903e6b6a64376d",
+    "workflow": "9f4b21474a4312fcf8018bdc30dff7ed4483d770",
+    "journal": "359847c69e50ccdb6e24ebf76c45f810d4fac468"
+  },
+  "cases": [
+    {
+      "number": 307,
+      "name": "Embassy Blend",
+      "url": "https://shop.compasscoffee.com/products/embassy-blend",
+      "selected_h1": "Embassy Blend",
+      "bytes": 236891,
+      "html_sha256": "dc5c596b7d49db732e569a564c429861ebbfcc10c4cf40f00c8fe25ff4b30f7c",
+      "fields": {
+        "name": "Embassy Blend",
+        "roaster": "Compass Coffee",
+        "roast_level": "Medium",
+        "tasting_notes": "Bold, crisp, and savory with earthy, fragrant notes."
+      },
+      "roast_provenance": "Exact selected Shopify inline Product roast tag",
+      "unsupported_original_origin": "East Asia",
+      "conflicts": []
+    },
+    {
+      "number": 308,
+      "name": "Emblem Espresso",
+      "url": "https://shop.compasscoffee.com/products/emblem-espresso-1",
+      "selected_h1": "Emblem Espresso",
+      "bytes": 262096,
+      "html_sha256": "08573b0436c6fd7fc3bb3e2d3ab3a4e04c56fcc85a366c66c7981ee51619096f",
+      "fields": {
+        "name": "Emblem Espresso",
+        "roaster": "Compass Coffee",
+        "tasting_notes": "Rich, Caramel, Classic"
+      },
+      "flavor_provenance": "Exact selected HTML labeled Flavor Notes; direct selected rich/caramel narrative",
+      "unsupported_original_origin": "Brazil; Guatemala; Sumatra",
+      "roast_unpublished": true,
+      "conflicts": []
+    },
+    {
+      "number": 309,
+      "name": "Horizon Blend",
+      "url": "https://shop.compasscoffee.com/products/horizon-blend",
+      "selected_h1": "Horizon Blend",
+      "bytes": 235623,
+      "html_sha256": "d900b49876e3218b4a3f3f232da9786b944f91ec0e18a97e67c71c3a5c6f6a2e",
+      "fields": {
+        "name": "Horizon Blend",
+        "roaster": "Compass Coffee",
+        "roast_level": "Light",
+        "tasting_notes": "Bright and sweet with vibrant berry-like notes."
+      },
+      "roast_provenance": "Exact selected Shopify inline Product roast tag",
+      "unsupported_original_origin": "Africa",
+      "conflicts": []
+    }
+  ],
+  "pr_head_ci": {
+    "initial_failed_selected_run": 43630846074,
+    "failure": "Synthetic Emblem fixture lacked current selected explicit Flavor Notes caption; corrected fixture only, no runtime change",
+    "selected_run": 43630947291,
+    "tests_passed": 7,
+    "tests_failed": 0,
+    "exact_live_selected_afterproof": "PASS_3_OF_3",
+    "node_run": 43630947228,
+    "node_pass": 4867,
+    "node_fail": 0,
+    "node_skip": 6,
+    "cloud_mobile_run": 43630947241,
+    "isolated_sql_run": 43630947249,
+    "approval_run": 43630947259,
+    "python_run": 43630947240,
+    "source_archive_run": 43630947251,
+    "all_applicable": "SUCCESS",
+    "original_frozen603": "SKIPPED_NOT_PASS"
+  },
+  "merged_ci": {
+    "selected_run": 43631392041,
+    "source_afterproof": "PASS_3_OF_3",
+    "parser_tests": "7_PASS_0_FAIL",
+    "node_run": 43631392032,
+    "node_pass": 4867,
+    "node_fail": 0,
+    "node_skip": 6,
+    "lint": "PASS",
+    "app_build": "SKIPPED_NOT_PASS",
+    "cloud_mobile_run": 43631392119,
+    "python_run": 43631392042,
+    "approval_run": 43631392100,
+    "all_applicable": "SUCCESS",
+    "broader_original_corpus": "SKIPPED_NOT_PASS",
+    "artifact_id": 14127408251,
+    "artifact_digest": "sha256:2a840de5f5827af630d8c1ffde2addf86186ad29e122ca790be5561950c81e81",
+    "independent_artifact_rehash": false
+  },
+  "limits": {
+    "full_603_manual_semantic_certification": false,
+    "issue_open": true,
+    "source_testing_only": true,
+    "real_auth_and_device": false,
+    "provider_writes": 0,
+    "member_writes": 0,
+    "netlify_publication": false,
+    "release_queue_ready_promotion": false,
+    "next": "Independently source-review next nonoverlapping unresolved current selected exact original official cases #310 onward, preserve new source identity conflicts and blank unsupported values"
+  }
+}
