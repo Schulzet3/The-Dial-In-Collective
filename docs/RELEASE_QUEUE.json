@@ -13906,6 +13906,26 @@
         43563659278
       ],
       "pr": 2595
+    },
+    {
+      "id": "DIC-Q-33-r191-275-276-post-ready-unnamed-growers",
+      "issue": 33,
+      "pr": null,
+      "title": "Preserve post-READY original603 #275-276 unnamed-grower correction in development only; exclude from owner-frozen READY7 release",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": "4c7bde4d3325bcee31ab0a25ade050d065a1735e",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "tests": [
+        "R191 correction merged 4c7bde4d3325bcee31ab0a25ade050d065a1735e on 2026-11-14T06:11:41Z after last selected #33 Proud Mary READY merge 48379dc5a6e34c1dc0b6d7e97c3392dea56b85bf. Official source and focused tests noted in merged commit; exact isolated READY7 does not claim R191 as included or separately READY."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Post-READY same-file change is outside the seven-item owner-frozen publication. Freeze src/server/coffee-page-metadata.mjs to last selected READY merge blob; omit only its unique newly added tests/coffee-issue33-r191-275-276.test.mjs from the candidate. Later R191 promotion requires separate exact-source test/CI and READY audit."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "This row tracks ONLY later R191 original603 selected unnamed-grower source edits, not older R180/R181/R187/R188/Proud Mary independently READY corrections. Retain R191 unchanged on development and in immutable history; no production SQL/Auth/Netlify writes. Owner selected 7 preexisting READY items at live preflight SHA."
     }
   ],
   "history": [
