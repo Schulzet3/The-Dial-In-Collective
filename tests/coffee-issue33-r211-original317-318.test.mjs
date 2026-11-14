@@ -81,3 +81,17 @@ test('#318 related light-roast collection, other coffee and previous SEO cannot 
  assert.doesNotMatch(String(p.fields?.tasting_notes||''),/strawberry|orange/iu);
  assert.doesNotMatch(String(p.fields?.producer||''),/Gamboa/iu);
 });
+
+test('#317 only audience preference and no own merchant product tag must NOT infer Light',()=>{
+ const p=selected(kenya);assert.equal(p.ok,true);
+ assert.ok(!p.fields?.roast_level,'If you enjoy light-roast African coffees is only an audience preference');
+});
+test('#317 exact selected direct labeled Roast: Light still determines Light',()=>{
+ const p=selected(kenya,{blocks:[...kenya.description,'Roast: Light']});
+ assert.equal(p.ok,true);assert.equal(p.fields?.roast_level,'Light');
+});
+test('#317 conditional Medium-roast audience alone cannot autofill Medium',()=>{
+ const blocks=[...kenya.description.filter(x=>!x.startsWith('You will love')),'You will love this coffee if you enjoy Medium-roast African coffees.'];
+ const p=selected(kenya,{blocks});assert.equal(p.ok,true);
+ assert.ok(!p.fields?.roast_level,'Buyer preference is not selected roast assertion');
+});
