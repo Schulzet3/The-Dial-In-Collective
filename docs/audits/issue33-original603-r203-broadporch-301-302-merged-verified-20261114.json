@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "scope": "ORIGINAL603_CURRENT_SELECTED_PRODUCT_SOURCE_AND_REAL_PARSER_ONLY",
+  "disposition": "NARROW_SOURCE_BOUND_VERIFIED_PARENT_OPEN",
+  "date_utc": "2026-11-14",
+  "authority": {
+    "development_preflight_source_sha": "4098579ab19f61659f8ce1dc3e53c32eb00220c6",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "merged_sha": "4098579ab19f61659f8ce1dc3e53c32eb00220c6",
+    "pr": 2729,
+    "tested_pr_head": "03dc11803892b119c8fdc727280c11f862edbfd5",
+    "same_commit_scoped_journal": "docs/workstreams/ops-issue33-r203-301-302-20261114.md",
+    "frozen_source_csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "frozen_source_csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "frozen_coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "immutable_original_modified": false,
+    "oracle_scorer_modified": false
+  },
+  "scope_paths": [
+    ".github/workflows/issue33-r203-original301-302.yml",
+    "scripts/audit/issue33-r203-original301-302-check.mjs",
+    "tests/coffee-issue33-r203-original301-302.test.mjs",
+    "docs/workstreams/ops-issue33-r203-301-302-20261114.md"
+  ],
+  "all_four_tested_pr_head_blobs_match_merged": true,
+  "cases": [
+    {
+      "number": 301,
+      "name": "Brazil - Cerrado",
+      "official_url": "https://shop.broadporchcoffee.com/products/brazil-medium-roast",
+      "selected_identity": "Brazil - Cerrado",
+      "selected_current_html_bytes": 310293,
+      "selected_current_html_sha256": "85d4dd4599672a519fc695d15c9ce884d92f63f3a74fb3ba2162595df49d4cc2",
+      "direct_selected_facts": {
+        "origin": "Cerrado, Brazil",
+        "process": "Natural",
+        "roast_level": "Medium",
+        "tasting_notes": "Chocolate, Toasted Nuts, Smooth"
+      },
+      "extracted_current_fields": {
+        "name": "Brazil - Cerrado",
+        "roaster": "Broad Porch Coffee",
+        "tasting_notes": "Chocolate, Toasted Nuts, Smooth",
+        "roast_level": "Medium",
+        "origin": "Cerrado, Brazil",
+        "process": "Natural"
+      },
+      "conflicts": [],
+      "exceptions": "No separately named grower, decaf method, elevation or numeric espresso recipe supported by this selected product."
+    },
+    {
+      "number": 302,
+      "name": "Decaf - Colombian Water Process",
+      "official_url": "https://shop.broadporchcoffee.com/products/decaf",
+      "selected_identity": "Decaf - Colombian Water Process",
+      "selected_current_html_bytes": 310676,
+      "selected_current_html_sha256": "3279558702e71d10701a8fc2000e1b674bcf2597acccf15f125ccca85987b5c7",
+      "direct_selected_facts": {
+        "origin": "Colombia",
+        "tasting_notes": "Dark Chocolate, Hazelnut",
+        "decaf_treatment_literal": "Mountain Water Process"
+      },
+      "extracted_current_fields": {
+        "name": "Decaf - Colombian Water Process",
+        "roaster": "Broad Porch Coffee",
+        "tasting_notes": "Dark Chocolate, Hazelnut",
+        "origin": "Colombia",
+        "roast_level": "Dark",
+        "decaffeination_method": "Water Process"
+      },
+      "conflicts": [],
+      "exceptions": "Dark roast extraction is supported by chosen current seller HTML but not separately printed in literal selected spec text; no named producer, growing green process/elevation, exact Swiss Water (different trademark), or numeric recipe inferred."
+    }
+  ],
+  "verified_at_merged_source": {
+    "run": 43619909967,
+    "result": "SUCCESS",
+    "synthetic_positive_negative_tests": "5 PASS 0 FAIL",
+    "strict_raw_source_afterproof": "passed:true errors:[]",
+    "exact_selected_h1": true,
+    "add_coffee_ui": true,
+    "source_review": true,
+    "github_artifact_id": 14123277354,
+    "github_artifact_digest": "sha256:d240a8fa32223d0f25c3a01478c3ebccc7ec186ab780466ca975c68465697d44",
+    "artifact_independent_zip_rehash": false
+  },
+  "pr_head_ci": {
+    "official_run": 43619458126,
+    "node_lint_run": 43619458158,
+    "cloud_ux_run": 43619458243,
+    "isolated_sql_run": 43619458132,
+    "approval_run": 43619458075,
+    "python_run": 43619458071,
+    "source_bundle_run": 43619458223,
+    "all_applicable": "SUCCESS",
+    "frozen603_run": 43619458104,
+    "frozen603_status": "SKIPPED_NOT_PASS"
+  },
+  "merged_ci": {
+    "official_run": 43619909967,
+    "node_lint_run": 43619909981,
+    "node_test_pass": 4851,
+    "node_test_fail": 0,
+    "node_test_skipped": 6,
+    "lint": "PASS",
+    "build": "SKIPPED_NOT_PASS",
+    "cloud_ux_run": 43619910034,
+    "approval_run": 43619909997,
+    "python_run": 43619910005,
+    "all_applicable": "SUCCESS",
+    "broad_public_probe_run": 43619910041,
+    "broad_public_status": "SKIPPED_NOT_PASS"
+  },
+  "red_first": {
+    "failed_run": 43619257114,
+    "reason": "Synthetic fixture collapsed a current explicit decaf method spec into an unscoped long narrative; guarded real original official #302 already returned correct Water Process. Fixture corrected; no parser runtime code touched."
+  },
+  "limits": {
+    "manual_certified_full_original603": false,
+    "semantic_adjudication_unresolved": true,
+    "real_auth": false,
+    "production_provider_writes": 0,
+    "member_data_writes": 0,
+    "netlify_publication": false,
+    "ready_promotion": false,
+    "issue_open": true,
+    "next": "Next distinct unresolved current selected original603 source case, preserving qualification/conflict and source identity."
+  }
+}
