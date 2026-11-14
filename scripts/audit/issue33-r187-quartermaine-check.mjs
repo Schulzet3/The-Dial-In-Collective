@@ -56,6 +56,12 @@ if(process.env.DIC_ISSUE33_R187_VERIFY==='1'){
   check(fold(f.origin).includes(expected.origin),'origin_supported_'+number);
   for(const note of expected.notes)check(fold(f.tasting_notes).includes(fold(note)),'selected_note_'+number+'_'+note);
   if(expected.variety)check(fold(f.variety).includes(expected.variety),'selected_typica_'+number);
+  if(number===263){
+   const own=(parsed.source_facts||[]).filter(x=>x.field==='sensory_context'&&
+    x.label==='Selected current product intrinsic aroma (review only)'&&x.source_url===expected.url);
+   check(own.length===1&&own[0].value==='floral aroma','selected_floral_aroma_source_review');
+   check(!fold(f.tasting_notes).includes('floral'),'canonical_notes_not_overwritten');
+  }
   check(!f.process&&!f.producer&&!f.decaffeination_method,'no_unpublished_process_producer_decaf_'+number);
   check(!f.roast_level,'body_or_signature_is_not_labeled_roast_tier_'+number);
   check(!r.seo_fallback_fields?.some(x=>['name','origin','tasting_notes','process','roast_level','producer','variety'].includes(x)),

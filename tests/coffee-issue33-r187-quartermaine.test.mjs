@@ -53,3 +53,29 @@ test('#262 direct selected process label is valid while sun-dried growing narrat
  const p=parse(262,product(262)+'<p>Process: Washed</p>');
  assert.equal(p.fields?.process,'Washed',JSON.stringify(p).slice(0,2400));
 });
+
+test('#263 direct floral aroma is review-only while canonical notes stay literal',()=>{
+ const p=parse(263),rows=(p.source_facts||[]).filter(x=>x.field==='sensory_context'&&
+  x.label==='Selected current product intrinsic aroma (review only)');
+ assert.equal(rows.length,1,JSON.stringify(p).slice(0,3600));
+ assert.equal(rows[0].value,'floral aroma');
+ assert.ok(!String(p.fields?.tasting_notes||'').toLowerCase().includes('floral'));
+});
+test('#263 unrelated sibling, nav and SEO aroma never supply selected context',()=>{
+ const p=parse(263,'<h1>Costa Rica</h1><p>Our signature roast has baking chocolate and hints of citrus rind.</p>',
+  '<aside><p>This coffee opens with a floral aroma. baking chocolate, and hints of citrus rind</p></aside>');
+ assert.ok(!(p.source_facts||[]).some(x=>x.label==='Selected current product intrinsic aroma (review only)'),JSON.stringify(p).slice(0,2500));
+});
+test('#263 conditional, former and other coffee aroma do not establish intrinsic notes',()=>{
+ for(const s of ['This coffee opens with a floral aroma when served with milk.',
+  'Previously this coffee opened with a floral aroma.',
+  'Other coffee opens with a floral aroma.']){
+  const p=parse(263,'<h1>Costa Rica</h1><p>'+s+
+   ' Our signature roast has baking chocolate, and hints of citrus rind.</p>');
+  assert.ok(!(p.source_facts||[]).some(x=>x.label==='Selected current product intrinsic aroma (review only)'),JSON.stringify({s,p}).slice(0,2500));
+ }
+});
+test('#263 competing selected coffee H1 blocks aroma source review',()=>{
+ const p=parse(263,product(263)+'<h1>Another Coffee</h1>');
+ assert.ok(!(p.source_facts||[]).some(x=>x.label==='Selected current product intrinsic aroma (review only)'),JSON.stringify(p).slice(0,2500));
+});
