@@ -14521,6 +14521,27 @@
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
       "notes": "Development-only source, no publish, production SQL/Edge/Auth/Storage/member change or observed customer impact."
+    },
+    {
+      "id": "DIC-Q-508-netlify-comments-current-release-20261114",
+      "issue": 508,
+      "pr": null,
+      "title": "Correct obsolete production branch, test preflight and first-invitation comments in netlify.toml",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "netlify.toml"
+      ],
+      "tests": [
+        "Source-diff semantic check: every noncomment nonblank TOML line is byte-identical, including the one-use build ignore adapter and Node22 build variables; comment-only source remediation.",
+        "Applicable exact PR-head and final merged-source GitHub Node22/lint/build, browser/cloud/offline, approval, source-security and isolated SQL (where applicable) pending; SKIPPED and PENDING are never PASS."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "New deployable-file documentation-only scope not yet integrated or verified by exact-source CI; must remain TESTING until source-readback and all applicable checks pass."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/508",
+      "notes": "N508-090; change comments only, not deployment rules. Restore clarity about dev vs release, exact-source CI vs preflight, historic invited-member tests. No automatic staging/publish, provider writes or credit checks. [skip netlify]"
     }
   ],
   "history": [
