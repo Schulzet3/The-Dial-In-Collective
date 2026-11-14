@@ -19,7 +19,7 @@ import {interpretAgtron,agtronExplanation} from './agtron-roast.mjs';
 import {extractSelectedNextCoffeeProduct} from './coffee-next-selected-product.mjs';
 import {extractSelectedReactRouterCoffeeHydration} from './coffee-react-router-hydration.mjs';
 import {selectedCoffeeHeroFacts,selectedCurrentOriginCaption,hasIncompatibleCurrentTastingList} from './coffee-selected-product-hero.mjs';
-import {selectedCurrentCorroboratedHeroNotesConflict} from './coffee-selected-hero-notes-conflict.mjs';
+import {selectedCurrentCorroboratedHeroNotesConflict,selectedCurrentRepeatedProseNotesConflict} from './coffee-selected-hero-notes-conflict.mjs';
 import {COFFEE_FIELD_ALIASES,extractSemanticCoffeeSpecs,withoutEducationalCoffeeGeography} from './coffee-semantic-specs.mjs';
 import {equivalentCoffeeVarieties,compatibleGenericCoffeeVarieties,explicitCoffeeVarietyRefinement,coffeeOriginParts,compatibleCoffeeOrigins,isCoffeeBroadOrigin,orderExplicitCoffeeOriginTuple,withoutRepeatedCoffeeOriginSuffix} from './coffee-fact-compatibility.mjs';
 import {equivalentCoffeeProductNames,preferredCoffeeRoasterName,selectedCoffeeNameWithoutPrice} from './coffee-product-identity.mjs';
@@ -2213,17 +2213,19 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   // directly sourced; preserve both for member review, never choose a winner.
   const selectedHeroConflict=fields.tasting_notes&&printedNotes.length&&
    !seoFallbackByFields.get(fields)?.has('tasting_notes')
-   ?selectedCurrentCorroboratedHeroNotesConflict(canonicalProduct,{
-     name:fields.name,notes:fields.tasting_notes,clean}):null;
+   ?(selectedCurrentCorroboratedHeroNotesConflict(canonicalProduct,{
+     name:fields.name,notes:fields.tasting_notes,clean})||
+     selectedCurrentRepeatedProseNotesConflict(canonicalProduct,{
+      name:fields.name,notes:fields.tasting_notes,clean})):null;
   if(selectedHeroConflict&&!conflicts.has('tasting_notes')){
    rememberCoffeeReviewCandidate(fields,'tasting_notes',fields.tasting_notes,
      'Selected current explicit Tasting Notes');
    rememberCoffeeReviewCandidate(fields,'tasting_notes',selectedHeroConflict.hero,
      'Selected current hero and named narrative');
    if(source_facts.length<384)source_facts.push({
-    field:'tasting_notes',label:'Current selected hero flavor profile',
+    field:'tasting_notes',label:'Current selected directly corroborated prose flavor conflict',
     value:selectedHeroConflict.hero,source_url,source_type:'html',
-    section:'Exact selected H1 and corroborating named coffee narrative',conflicting:true
+    section:'Exact current selected H1 and two corroborating own-product paragraphs',conflicting:true
    });
    conflicts.add('tasting_notes');delete fields.tasting_notes;
   }

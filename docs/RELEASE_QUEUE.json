@@ -14267,6 +14267,42 @@
         "This is unshipped development migration; no publication/production SQL authorization."
       ],
       "notes": "Historical migration unchanged. No data backfill, no member/shot records read or modified. Explicit IS NULL OR NOT IN rejects invalid JSON null controls; original private SECURITY DEFINER, search_path, EXECUTE revocations, trigger, valid controls and source_verified_independently=false retained. Tests use disposable dic_ci only. User Nov6 alert-only notification policy unchanged. Full issue509 provider baseline IN_PROGRESS."
+    },
+    {
+      "id": "DIC-Q-33-r198-original291-source-prose-conflict",
+      "issue": 33,
+      "pr": 2677,
+      "title": "Withhold conflicting corroborated current selected Tanzania Peaberry flavor; retain both literal sources for member review",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-selected-hero-notes-conflict.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "owner_source": "Owner Issue #33 exact selected official source and Locked conflict abstention; DIC_PREFLIGHT_VERIFIED development_sha=5fa7d62d274e6414ab78187eb5dac7943c8a6a19 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Before correction original #291 chosen official exact page was FETCHED, real parser silently selected Flavor label and omitted directly opposing two product prose claims; PR 2677 red-first 43593492734 3/4 focused passed, actual afterproof FAILED.",
+        "Current selected HTML layout source-verified in afterproof 43593770187: product summary DIV and selected name-bound paragraph corroborate pepper/white wine/black currant, vs separate exact Flavor label citrus/black tea/sweet berries/chocolate. Initial fix 43593659459 failed structural and historical-negative tests; narrow generic repair applied.",
+        "PR head c251ddb2ff2bea73ef487c235635e8d12c5baedb focused current official HTTPS/afterproof run 43593852915 SUCCESS, 7/7 adversarial positive/negative tests PASS, raw 496850 bytes SHA256 7577f20a728a2318fe542ac96b3206972915ff547f8bf82a31b36bbed4a98ed7, H1 Tanzania Peaberry, real parser leaves tasting_notes blank and preserves both conflicting flavor sources for member review.",
+        "Exact head source security 43593852921, isolated SQL 43593852959 and Python audit 43593853118 SUCCESS. Original frozen603 SKIPPED and is NOT current acceptance.",
+        "Approval 43593853138 FAILED solely due missing TESTING queue scope for new helper; this queue intake fixes it. Updated exact-head approval/Node/lint/cloud mobile, safe merge/readback pending; not READY."
+      ],
+      "ci_runs": [
+        43593492734,
+        43593659459,
+        43593770187,
+        43593852915,
+        43593852921,
+        43593852959,
+        43593853118,
+        43593853138
+      ],
+      "blockers": [
+        "#33 original 603-coffee per-product semantic review still unfinished; #288 exact old official URL now redirects to a catalog.",
+        "Narrow scope remains TESTING until updated exact-head approval/Node/cloud, nonforce merge/readback. No owner release approval."
+      ],
+      "notes": "DEVELOPMENT ONLY; original 603/201/1197 frozen CSV/oracle/scorer untouched, no Netlify or production provider/SQL/Edge/Auth/member changes. #267 and #96 separate owners. Issue #33 OPEN.",
+      "production_deployed": false
     }
   ],
   "history": [
