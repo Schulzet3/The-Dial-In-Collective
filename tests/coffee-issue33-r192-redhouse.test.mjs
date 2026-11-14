@@ -40,6 +40,13 @@ test('#277 own secondary jasmine/lemon pair is retained for Source Review, not c
  assert.equal(review[0].source_url,coffees[277].url);
  assert.match(notes(p),/hibiscus/i);assert.doesNotMatch(notes(p),/jasmine|lemon/i);
 });
+test('#277 selected seller span rather than p preserves own current tasting pair',()=>{
+ const p=parse(277,'',coffees[277].desc.replace('With notes of jasmine, lemon, and a good balance, it is a true coffee masterpiece.',
+   '<span>With notes of jasmine, lemon, and a good balance, it is a true coffee masterpiece.</span>'));
+ assert.equal(p.ok,true);
+ assert.ok((p.source_facts||[]).some(x=>x.label==='Selected current unlabeled tasting pair (review only)' &&
+   /jasmine/i.test(x.value||'') && /lemon/i.test(x.value||'')),JSON.stringify((p.source_facts||[]).slice(0,30)));
+});
 test('#277 related-coffee flavor pair cannot add selected context',()=>{
  const chosen=coffees[277].desc.replace('With notes of jasmine, lemon, and a good balance, it is a true coffee masterpiece.','');
  const p=parse(277,'<aside><h2>Other Coffee</h2><p>With notes of caramel, cinnamon, and a good balance, this coffee is excellent.</p></aside>',chosen);

@@ -413,7 +413,7 @@ export function selectedCurrentUnlabeledFlavorPair(html,{clean,notes}={}){
  const canonical=notes.split(/\s*(?:,|&|[•·;|]|\band\b)\s*/iu).map(fold).filter(Boolean);
  const found=new Set();
  for(const block of blocks){
-  if(block.tag!=='p'||block.educational||block.text.length<55||block.text.length>800||
+  if(!['p','div','span'].includes(block.tag)||block.educational||block.text.length<55||block.text.length>800||
      unavailable.test(block.section)||NONCURRENT_COFFEE_PROSE.test(block.section))continue;
   const section=fold(block.section);
   if(section&&section!==title&&!safeSections.test(section))continue;

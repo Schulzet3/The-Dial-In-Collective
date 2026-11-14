@@ -39,6 +39,12 @@ for(const c of cases){
   check(/\b1900\s*Meters\b/i.test(norm),'current_literal_elevation_277');
   check(/notes of jasmine, lemon/i.test(norm),'same_current_description_jasmine_lemon_277');
   check(/hibiscus/i.test(norm),'contrasting_selected_cupping_hibiscus_277');
+  const ownContext=(actual.source_facts||[]).filter(x=>
+   x.field==='sensory_context'&&x.label==='Selected current unlabeled tasting pair (review only)');
+  check(ownContext.length===1&&/jasmine/i.test(ownContext[0]?.value||'')&&
+   /lemon/i.test(ownContext[0]?.value||'')&&ownContext[0]?.source_url===c.url,
+   'exact_selected_review_only_jasmine_lemon_277');
+  check(!/jasmine|lemon/i.test(notes),'printed_cupping_notes_not_replaced_277');
   check(!f.process,'unpublished_process_blank_277');
  }else{
   check(/\bPROCESSING:\s*Wet-Hulled\b/i.test(norm),'selected_wet_hulled_literal_'+c.n);
