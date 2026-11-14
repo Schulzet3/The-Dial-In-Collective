@@ -1,0 +1,931 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 252,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight_development_sha": "30a7cf59d2d8c75ef9add1d3754526b6d2dc823e",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "prewrite_development_sha": "2c0b18073a1a7e9200d1dd3040e176895fb3c01d",
+  "main_sha": "26ce6aa17aca5908ff52b0621e42178a144bb69c",
+  "release_sha": "5359d78c303f15231225282536cb6d1efa11beca",
+  "observed_at": "2026-11-14 23:44:19.132488+00",
+  "provider": {
+    "observed_at": "2026-11-14 23:44:19.132488+00",
+    "app_tables": 52,
+    "app_functions": 114,
+    "app_policies": 41,
+    "pgss_fingerprints": 4939,
+    "pgss_reset": "2026-10-09 11:11:31.487298+00",
+    "migrations": 69,
+    "edge_functions": [
+      {
+        "slug": "dic-verify-coffee",
+        "status": "ACTIVE",
+        "version": 10,
+        "verify_jwt": true,
+        "ezbr_sha256": "d59e9da29335f2d626a2779238b4f1176148f5f8f3d54539bf831ff20aa6a77e"
+      },
+      {
+        "slug": "dic-preview-coffee",
+        "status": "ACTIVE",
+        "version": 7,
+        "verify_jwt": true,
+        "ezbr_sha256": "5c1aa148443d83261fa35a375fa58b12ada6421a5131c93028a7dd26e3bfa1fb"
+      },
+      {
+        "slug": "dic-delete-member-account",
+        "status": "ACTIVE",
+        "version": 4,
+        "verify_jwt": true,
+        "ezbr_sha256": "5d4b6d84458b289c6a25bc76fec4a4b562594c0802e3ee9f7abd633fe87dcafb"
+      },
+      {
+        "slug": "dic-admin-push-broker",
+        "status": "ACTIVE",
+        "version": 3,
+        "verify_jwt": false,
+        "ezbr_sha256": "ca7ce5f9b80bf6984a7517e9f3ef1750fa856b75557136817ccc040dc5635382"
+      },
+      {
+        "slug": "dic-member-approval-broker",
+        "status": "ACTIVE",
+        "version": 1,
+        "verify_jwt": false,
+        "ezbr_sha256": "263f36326fa00934a4c7cfb7ecc6e3df9872e9b4f0395ef1326455d9bb2bded7"
+      }
+    ]
+  },
+  "security_advisors": [
+    {
+      "name": "rls_enabled_no_policy",
+      "level": "INFO",
+      "count": 13,
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy"
+    },
+    {
+      "name": "authenticated_security_definer_function_executable",
+      "level": "WARN",
+      "count": 10,
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable"
+    },
+    {
+      "name": "auth_leaked_password_protection",
+      "level": "WARN",
+      "count": 1,
+      "remediation": "https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection"
+    }
+  ],
+  "performance_advisors": [
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "count": 14,
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unused_index",
+      "level": "INFO",
+      "count": 8,
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+    }
+  ],
+  "direct_current_sql_source_review": [
+    {
+      "signature": "private.dic_confirm_coffee_existing(mid uuid, p jsonb)",
+      "md5": "0fcc44bb8a05f46e87694d3474eb7c23",
+      "chars": 3239,
+      "source_range": [
+        1,
+        3239
+      ],
+      "security_definer": true,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "authenticated_execute": true,
+      "service_execute": false,
+      "verdict": "Admitted-member and owner-scoped submission confirmation; idempotency receipt and owner advisory lock; verified canonical target, matching roaster/name/release/origin gates before link. Hostile payload/session acceptance not independently exercised.",
+      "full_source": "CREATE OR REPLACE FUNCTION private.dic_confirm_coffee_existing(mid uuid, p jsonb)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare\n u uuid:=private.require_member(); prior private.mutation_receipts; s public.coffee_submissions;\n target public.coffees; sid uuid; cid uuid; match_result jsonb; accepted boolean;\n req_hash text; response jsonb; a_name text; b_name text;\nbegin\n if mid is null or jsonb_typeof(p) is distinct from 'object' or octet_length(p::text)>5000 then\n  raise exception using errcode='22023',message='Invalid coffee confirmation.';\n end if;\n sid:=(p->>'submission_id')::uuid;cid:=(p->>'coffee_id')::uuid;\n perform pg_advisory_xact_lock(hashtextextended(u::text,9311));\n req_hash:=encode(sha256(convert_to(jsonb_build_object('action','confirm_coffee_existing','payload',p)::text,'UTF8')),'hex');\n select * into prior from private.mutation_receipts where owner_id=u and mutation_id=mid;\n if found then\n  if prior.request_hash<>req_hash then raise exception using errcode='22023',message='Mutation ID reused for other confirmation.';end if;\n  return prior.response;\n end if;\n select * into s from public.coffee_submissions where id=sid and owner_id=u for update;\n select * into target from public.coffees where id=cid and verification_state='verified' and merged_into_id is null;\n if s.id is null or target.id is null then raise exception using errcode='42501',message='Coffee is not accessible.';end if;\n if private.dic_canonical_roaster_key(s.proposed_data->>'roaster') is distinct from\n   private.dic_canonical_roaster_key(target.roaster) then\n   raise exception using errcode='23514',message='Different roasters cannot be merged based on a fuzzy name.';\n end if;\n a_name:=private.dic_coffee_key(s.proposed_data->>'name');\n b_name:=private.dic_coffee_key(target.name);\n if (a_name<>b_name and extensions.similarity(a_name,b_name)<0.60) then\n  raise exception using errcode='23514',message='The names are too different for self-confirmed merging.';\n end if;\n if nullif(btrim(s.proposed_data->>'release_label'),'') is not null\n    and nullif(btrim(target.release_label),'') is not null\n    and private.dic_coffee_key(s.proposed_data->>'release_label')<>private.dic_coffee_key(target.release_label) then\n  raise exception using errcode='23514',message='Different releases require administrator review.';\n end if;\n if nullif(btrim(s.proposed_data->>'origin'),'') is not null\n    and nullif(btrim(target.origin),'') is not null\n    and private.dic_coffee_key(s.proposed_data->>'origin')<>private.dic_coffee_key(target.origin)\n    and position(private.dic_coffee_key(s.proposed_data->>'origin') in private.dic_coffee_key(target.origin))=0\n    and position(private.dic_coffee_key(target.origin) in private.dic_coffee_key(s.proposed_data->>'origin'))=0 then\n  raise exception using errcode='23514',message='Conflicting origins require administrator review.';\n end if;\n response:=private.dic_link_pending_coffee(sid,cid,'user_confirmed',\n  jsonb_build_object('requested_name',s.proposed_data->>'name','canonical_name',target.name));\n insert into private.mutation_receipts(owner_id,mutation_id,request_hash,response)\n values(u,mid,req_hash,response);\n return response;\nend $function$\n"
+    },
+    {
+      "signature": "private.dic_link_pending_coffee(sid uuid, canonical uuid, event_name text, evidence jsonb)",
+      "md5": "140c211a4bfef175b041c037561a1e37",
+      "chars": 3954,
+      "source_range": [
+        1,
+        3954
+      ],
+      "security_definer": true,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "service_execute": false,
+      "verdict": "Pending/conflict submission linkage transaction; verified target, library entry continuity, duplicate owned-coffee guard, first-seen name and alias audit. These historical alias tables are LEGACY ACTIVE, not the retired directory.",
+      "full_source": "CREATE OR REPLACE FUNCTION private.dic_link_pending_coffee(sid uuid, canonical uuid, event_name text, evidence jsonb)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare s public.coffee_submissions; target public.coffees; l public.library_entries; existing uuid;\nbegin\n select * into s from public.coffee_submissions where id=sid for update;\n if not found then raise exception using errcode='22023',message='Submission unavailable.';end if;\n select * into target from public.coffees where id=canonical and verification_state='verified' and merged_into_id is null;\n if not found then raise exception using errcode='22023',message='Verified canonical coffee unavailable.';end if;\n if s.status in ('merged','approved') and s.canonical_coffee_id=canonical then\n  return jsonb_build_object('ok',true,'coffee_id',canonical,'status','verified','already_linked',true);\n end if;\n if s.status not in ('pending','conflict') then\n  raise exception using errcode='23514',message='Submission is already resolved.';\n end if;\n -- The global display name belongs to whichever *original submission* was first.\n -- An older Pending submission may have been verified later than this canonical.\n if s.created_at < coalesce((select first_seen_at from private.dic_coffee_first_entry\n                            where coffee_id=canonical),target.created_at) then\n  if private.dic_coffee_key(s.proposed_data->>'name') is distinct from private.dic_coffee_key(target.name) then\n   insert into private.dic_coffee_aliases(coffee_id,alias_key,original_name,origin_kind)\n    values(canonical,private.dic_coffee_key(target.name),target.name,'user_confirmed')\n    on conflict(coffee_id,alias_key) do nothing;\n  end if;\n  update public.coffees set name=left(s.proposed_data->>'name',200) where id=canonical;\n  insert into private.dic_coffee_first_entry(coffee_id,first_seen_at,first_submission_id,primary_name)\n   values(canonical,s.created_at,s.id,left(s.proposed_data->>'name',200))\n   on conflict(coffee_id) do update set first_seen_at=excluded.first_seen_at,\n     first_submission_id=excluded.first_submission_id,primary_name=excluded.primary_name;\n end if;\n select * into l from public.library_entries where owner_id=s.owner_id and submission_id=s.id for update;\n if not found then raise exception using errcode='23514',message='Original library entry is missing.';end if;\n select id into existing from public.library_entries\n  where owner_id=s.owner_id and coffee_id=canonical and id<>l.id and hidden_at is null limit 1;\n if existing is not null then\n  -- Do NOT orphan existing shots, recipes or pinned workspaces.\n  raise exception using errcode='23514',message='This account already has this coffee. Reconcile the two personal entries with their history before merging.';\n end if;\n update public.coffee_submissions set canonical_coffee_id=canonical,\n   status=case when event_name='admin_approved' or event_name='official_verified' then 'approved' else 'merged' end\n where id=s.id;\n update public.library_entries set coffee_id=canonical,submission_id=null where id=l.id;\n if private.dic_coffee_key(s.proposed_data->>'name') is distinct from private.dic_coffee_key(target.name)\n   and private.dic_coffee_key(s.proposed_data->>'name') is not null then\n   insert into private.dic_coffee_aliases(coffee_id,alias_key,original_name,origin_kind)\n   values(target.id,private.dic_coffee_key(s.proposed_data->>'name'),left(s.proposed_data->>'name',200),\n    case when event_name='official_verified' then 'source_confirmed' else 'user_confirmed' end)\n   on conflict(coffee_id,alias_key) do nothing;\n end if;\n insert into private.dic_coffee_audit(coffee_id,submission_id,actor_id,event_kind,evidence)\n values(target.id,s.id,auth.uid(),event_name,coalesce(evidence,'{}'::jsonb));\n return jsonb_build_object('ok',true,'coffee_id',target.id,'status','verified',\n    'library_entry_id',l.id,'canonical_name',target.name,'reused',true);\nend $function$\n"
+    },
+    {
+      "signature": "public.dic_source_check_target(submission_id uuid)",
+      "md5": "496ad9d2e74fa2d07592a442438d8ca9",
+      "chars": 1397,
+      "source_range": [
+        1,
+        1397
+      ],
+      "security_definer": true,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "service_execute": true,
+      "verdict": "Service-role restricted pending submission and beta membership gate with verified official-domain lookup; worker-source URL validation remains independent external boundary.",
+      "full_source": "CREATE OR REPLACE FUNCTION public.dic_source_check_target(submission_id uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare s public.coffee_submissions; host text; cname text;\nbegin\n if coalesce(nullif(current_setting('request.jwt.claims',true),'')::jsonb->>'role',\n             nullif(current_setting('request.jwt.claim.role',true),'')) is distinct from 'service_role' then\n  raise exception using errcode='42501',message='Trusted source worker required.';\n end if;\n select * into s from public.coffee_submissions\n where id=submission_id and status in ('pending','conflict');\n if not found then return null; end if;\n if not exists(select 1 from private.beta_members where owner_id=s.owner_id and enabled) then\n  return null;\n end if;\n select proof->>'official_domain',proof->>'canonical_name'\n into host,cname\n from (select private.dic_verified_roaster_page_proof(s.proposed_data->>'roaster') as proof) p;\n if host is null or s.source_url is null then return null; end if;\n return jsonb_build_object('submission_id',s.id,'submission_revision',s.revision,'source_url',s.source_url,\n  'official_host',host,'roaster',cname,'name',s.proposed_data->>'name',\n  'release_label',s.proposed_data->>'release_label',\n  'origin',s.proposed_data->>'origin','process',s.proposed_data->>'process','producer',s.proposed_data->>'producer');\nend $function$\n"
+    },
+    {
+      "signature": "public.dic_source_claim(submission_id uuid)",
+      "md5": "68bc86486e485565d4273daf3655e0d3",
+      "chars": 2348,
+      "source_range": [
+        1,
+        2348
+      ],
+      "security_definer": true,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "service_execute": true,
+      "verdict": "Service-only owner-serialized source attempt budget, 30 per 24 hours and six per submission with 15-minute retry window; no claim of actual current request throughput.",
+      "full_source": "CREATE OR REPLACE FUNCTION public.dic_source_claim(submission_id uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare actor uuid; existing private.dic_source_attempts; total_24h integer;\nbegin\n if coalesce(nullif(current_setting('request.jwt.claims',true),'')::jsonb->>'role',\n             nullif(current_setting('request.jwt.claim.role',true),'')) is distinct from 'service_role' then\n  raise exception using errcode='42501',message='Trusted worker required.';\n end if;\n select owner_id into actor from public.coffee_submissions\n where id=submission_id and status in ('pending','conflict');\n if actor is null then return jsonb_build_object('allowed',false,'reason','not_pending');end if;\n -- Share lock keeps admission stable for this atomic budget claim.\n perform 1 from private.beta_members where owner_id=actor and enabled for share;\n if not found then return jsonb_build_object('allowed',false,'reason','not_admitted');end if;\n perform pg_advisory_xact_lock(hashtextextended(actor::text,9470));\n select attempts.* into existing from private.dic_source_attempts as attempts\n where attempts.submission_id=dic_source_claim.submission_id for update;\n select coalesce(sum(attempts),0) into total_24h from private.dic_source_attempts\n where owner_id=actor and window_started_at>now()-interval '24 hours';\n if total_24h>=30 then return jsonb_build_object('allowed',false,'reason','account_budget');end if;\n if existing.submission_id is not null\n  and existing.window_started_at>now()-interval '24 hours'\n  and (existing.attempts>=6 or existing.started_at>now()-interval '15 minutes') then\n  return jsonb_build_object('allowed',false,'reason','retry_later');\n end if;\n insert into private.dic_source_attempts(submission_id,owner_id,started_at,window_started_at,attempts)\n values(dic_source_claim.submission_id,actor,now(),now(),1)\n on conflict on constraint dic_source_attempts_pkey do update set\n  started_at=now(),\n  window_started_at=case when private.dic_source_attempts.window_started_at<=now()-interval '24 hours'\n   then now() else private.dic_source_attempts.window_started_at end,\n  attempts=case when private.dic_source_attempts.window_started_at<=now()-interval '24 hours'\n   then 1 else private.dic_source_attempts.attempts+1 end;\n return jsonb_build_object('allowed',true);\nend $function$\n"
+    },
+    {
+      "signature": "public.dic_trusted_source_verify(submission_id uuid, evidence jsonb)",
+      "md5": "59dfb6ecc6a2b8324fa9ba8512fdaaa3",
+      "chars": 557,
+      "source_range": [
+        1,
+        557
+      ],
+      "security_definer": false,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "service_execute": true,
+      "verdict": "Service-only invoker wrapper delegates to private promote; no client EXECUTE, but full signed-worker/HTTP and downstream authorization acceptance is UNVERIFIED.",
+      "full_source": "CREATE OR REPLACE FUNCTION public.dic_trusted_source_verify(submission_id uuid, evidence jsonb)\n RETURNS jsonb\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\nbegin\n if coalesce(nullif(current_setting('request.jwt.claims',true),'')::jsonb->>'role',\n             nullif(current_setting('request.jwt.claim.role',true),'')) is distinct from 'service_role' then\n  raise exception using errcode='42501',message='Trusted verifier only.';\n end if;\n return private.dic_promote_pending_coffee(submission_id,'official_verified',evidence,false);\nend $function$\n"
+    }
+  ],
+  "complete_source_characters": 11495,
+  "pgss_rank_range": [
+    2161,
+    2240
+  ],
+  "pgss_numeric_fingerprints": [
+    {
+      "rank": 2161,
+      "queryid": "-8062413167566560520",
+      "calls": 1,
+      "total_ms": "3.433",
+      "mean_ms": "3.433",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2162,
+      "queryid": "-6883023751393440299",
+      "calls": 96,
+      "total_ms": "3.432",
+      "mean_ms": "0.036",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2163,
+      "queryid": "6436045283397734932",
+      "calls": 1,
+      "total_ms": "3.425",
+      "mean_ms": "3.425",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2164,
+      "queryid": "-2140414036092349764",
+      "calls": 1,
+      "total_ms": "3.419",
+      "mean_ms": "3.419",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2165,
+      "queryid": "7752508312536866368",
+      "calls": 1,
+      "total_ms": "3.406",
+      "mean_ms": "3.406",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2166,
+      "queryid": "1238430355493400415",
+      "calls": 30,
+      "total_ms": "3.403",
+      "mean_ms": "0.113",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2167,
+      "queryid": "-6021485403016364696",
+      "calls": 1,
+      "total_ms": "3.402",
+      "mean_ms": "3.402",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2168,
+      "queryid": "3469270296087482460",
+      "calls": 1,
+      "total_ms": "3.401",
+      "mean_ms": "3.401",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2169,
+      "queryid": "-7351699226535962609",
+      "calls": 1,
+      "total_ms": "3.400",
+      "mean_ms": "3.400",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2170,
+      "queryid": "5924310400756838445",
+      "calls": 2,
+      "total_ms": "3.391",
+      "mean_ms": "1.695",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2171,
+      "queryid": "5856969703761732610",
+      "calls": 1,
+      "total_ms": "3.385",
+      "mean_ms": "3.385",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2172,
+      "queryid": "7207760766994466240",
+      "calls": 1,
+      "total_ms": "3.383",
+      "mean_ms": "3.383",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2173,
+      "queryid": "-6031287522422185556",
+      "calls": 1,
+      "total_ms": "3.382",
+      "mean_ms": "3.382",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2174,
+      "queryid": "-6147706348573119404",
+      "calls": 1,
+      "total_ms": "3.376",
+      "mean_ms": "3.376",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2175,
+      "queryid": "-4049588168222346810",
+      "calls": 1,
+      "total_ms": "3.374",
+      "mean_ms": "3.374",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2176,
+      "queryid": "6302690807789615988",
+      "calls": 1,
+      "total_ms": "3.369",
+      "mean_ms": "3.369",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2177,
+      "queryid": "3758377671674978419",
+      "calls": 3,
+      "total_ms": "3.369",
+      "mean_ms": "1.123",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2178,
+      "queryid": "-106321281063722640",
+      "calls": 2,
+      "total_ms": "3.367",
+      "mean_ms": "1.683",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2179,
+      "queryid": "6659944611743112465",
+      "calls": 1,
+      "total_ms": "3.365",
+      "mean_ms": "3.365",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2180,
+      "queryid": "675369065729408170",
+      "calls": 2,
+      "total_ms": "3.365",
+      "mean_ms": "1.682",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2181,
+      "queryid": "-5223528272685296516",
+      "calls": 1,
+      "total_ms": "3.361",
+      "mean_ms": "3.361",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2182,
+      "queryid": "-4557946755281988841",
+      "calls": 1,
+      "total_ms": "3.360",
+      "mean_ms": "3.360",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2183,
+      "queryid": "-7288598687552962879",
+      "calls": 5,
+      "total_ms": "3.358",
+      "mean_ms": "0.672",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2184,
+      "queryid": "-3576460378099951914",
+      "calls": 1,
+      "total_ms": "3.339",
+      "mean_ms": "3.339",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2185,
+      "queryid": "-5006156845230093939",
+      "calls": 1,
+      "total_ms": "3.335",
+      "mean_ms": "3.335",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2186,
+      "queryid": "-2629064898908967940",
+      "calls": 10,
+      "total_ms": "3.333",
+      "mean_ms": "0.333",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2187,
+      "queryid": "-7545250255683180149",
+      "calls": 1,
+      "total_ms": "3.333",
+      "mean_ms": "3.333",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2188,
+      "queryid": "-8678393136245128980",
+      "calls": 1684,
+      "total_ms": "3.331",
+      "mean_ms": "0.002",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2189,
+      "queryid": "4183360690475966339",
+      "calls": 1,
+      "total_ms": "3.325",
+      "mean_ms": "3.325",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2190,
+      "queryid": "6057248144228301888",
+      "calls": 2,
+      "total_ms": "3.323",
+      "mean_ms": "1.661",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2191,
+      "queryid": "-7068390403446533690",
+      "calls": 3,
+      "total_ms": "3.323",
+      "mean_ms": "1.108",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2192,
+      "queryid": "-1677336381417077468",
+      "calls": 2,
+      "total_ms": "3.319",
+      "mean_ms": "1.659",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2193,
+      "queryid": "6974443780638971839",
+      "calls": 1,
+      "total_ms": "3.316",
+      "mean_ms": "3.316",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2194,
+      "queryid": "2787822085737234505",
+      "calls": 147,
+      "total_ms": "3.313",
+      "mean_ms": "0.023",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2195,
+      "queryid": "-1455961815899324356",
+      "calls": 1,
+      "total_ms": "3.301",
+      "mean_ms": "3.301",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2196,
+      "queryid": "4988473487301267760",
+      "calls": 1,
+      "total_ms": "3.299",
+      "mean_ms": "3.299",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2197,
+      "queryid": "-6133651801552948234",
+      "calls": 1,
+      "total_ms": "3.298",
+      "mean_ms": "3.298",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2198,
+      "queryid": "6466286846638727420",
+      "calls": 2,
+      "total_ms": "3.297",
+      "mean_ms": "1.648",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2199,
+      "queryid": "6103740756983247381",
+      "calls": 1,
+      "total_ms": "3.293",
+      "mean_ms": "3.293",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2200,
+      "queryid": "-3516791109043261869",
+      "calls": 1,
+      "total_ms": "3.288",
+      "mean_ms": "3.288",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2201,
+      "queryid": "2808834624323498797",
+      "calls": 1,
+      "total_ms": "3.288",
+      "mean_ms": "3.288",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2202,
+      "queryid": "-2241317155506696544",
+      "calls": 1,
+      "total_ms": "3.281",
+      "mean_ms": "3.281",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2203,
+      "queryid": "7373839965636869243",
+      "calls": 1,
+      "total_ms": "3.275",
+      "mean_ms": "3.275",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2204,
+      "queryid": "-6285917931439937436",
+      "calls": 1,
+      "total_ms": "3.268",
+      "mean_ms": "3.268",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2205,
+      "queryid": "4829734817476323390",
+      "calls": 1,
+      "total_ms": "3.265",
+      "mean_ms": "3.265",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2206,
+      "queryid": "4059815848813603635",
+      "calls": 1,
+      "total_ms": "3.263",
+      "mean_ms": "3.263",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2207,
+      "queryid": "-8553578214163041884",
+      "calls": 1,
+      "total_ms": "3.262",
+      "mean_ms": "3.262",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2208,
+      "queryid": "149425836073124475",
+      "calls": 1,
+      "total_ms": "3.248",
+      "mean_ms": "3.248",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2209,
+      "queryid": "7813123111736521761",
+      "calls": 2,
+      "total_ms": "3.246",
+      "mean_ms": "1.623",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2210,
+      "queryid": "2384855925354376921",
+      "calls": 1,
+      "total_ms": "3.244",
+      "mean_ms": "3.244",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2211,
+      "queryid": "2129250940993471455",
+      "calls": 4,
+      "total_ms": "3.242",
+      "mean_ms": "0.810",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2212,
+      "queryid": "-650193706605289214",
+      "calls": 1,
+      "total_ms": "3.235",
+      "mean_ms": "3.235",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2213,
+      "queryid": "2174141945864486430",
+      "calls": 2,
+      "total_ms": "3.225",
+      "mean_ms": "1.613",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2214,
+      "queryid": "5632463402837625999",
+      "calls": 1,
+      "total_ms": "3.217",
+      "mean_ms": "3.217",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2215,
+      "queryid": "-6695541600147296352",
+      "calls": 3,
+      "total_ms": "3.217",
+      "mean_ms": "1.072",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2216,
+      "queryid": "-3040491977864040520",
+      "calls": 2,
+      "total_ms": "3.214",
+      "mean_ms": "1.607",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2217,
+      "queryid": "-5578874206695935917",
+      "calls": 1,
+      "total_ms": "3.199",
+      "mean_ms": "3.199",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2218,
+      "queryid": "2889766016369345047",
+      "calls": 1,
+      "total_ms": "3.194",
+      "mean_ms": "3.194",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2219,
+      "queryid": "6824369321267103251",
+      "calls": 30,
+      "total_ms": "3.192",
+      "mean_ms": "0.106",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2220,
+      "queryid": "6543980129777147663",
+      "calls": 1,
+      "total_ms": "3.189",
+      "mean_ms": "3.189",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2221,
+      "queryid": "-2009959810096535441",
+      "calls": 1,
+      "total_ms": "3.186",
+      "mean_ms": "3.186",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2222,
+      "queryid": "863798655671863660",
+      "calls": 1,
+      "total_ms": "3.182",
+      "mean_ms": "3.182",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2223,
+      "queryid": "4043171056696294958",
+      "calls": 1,
+      "total_ms": "3.179",
+      "mean_ms": "3.179",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2224,
+      "queryid": "5246044323550090617",
+      "calls": 1,
+      "total_ms": "3.176",
+      "mean_ms": "3.176",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2225,
+      "queryid": "487985993947763561",
+      "calls": 1,
+      "total_ms": "3.174",
+      "mean_ms": "3.174",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2226,
+      "queryid": "-8480194168225061247",
+      "calls": 3,
+      "total_ms": "3.164",
+      "mean_ms": "1.055",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2227,
+      "queryid": "7830267875650047838",
+      "calls": 1,
+      "total_ms": "3.140",
+      "mean_ms": "3.140",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2228,
+      "queryid": "-4599700234600876612",
+      "calls": 21,
+      "total_ms": "3.133",
+      "mean_ms": "0.149",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2229,
+      "queryid": "-7006058523637540840",
+      "calls": 1,
+      "total_ms": "3.131",
+      "mean_ms": "3.131",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2230,
+      "queryid": "5436775344062164716",
+      "calls": 1,
+      "total_ms": "3.131",
+      "mean_ms": "3.131",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2231,
+      "queryid": "-8142695827320605709",
+      "calls": 1,
+      "total_ms": "3.129",
+      "mean_ms": "3.129",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2232,
+      "queryid": "-1973787454461121826",
+      "calls": 1,
+      "total_ms": "3.112",
+      "mean_ms": "3.112",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2233,
+      "queryid": "5011818150446254221",
+      "calls": 1,
+      "total_ms": "3.111",
+      "mean_ms": "3.111",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2234,
+      "queryid": "-252994821676364287",
+      "calls": 1,
+      "total_ms": "3.110",
+      "mean_ms": "3.110",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2235,
+      "queryid": "-803669021344718684",
+      "calls": 110,
+      "total_ms": "3.109",
+      "mean_ms": "0.028",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2236,
+      "queryid": "-3463056290097606674",
+      "calls": 1,
+      "total_ms": "3.104",
+      "mean_ms": "3.104",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2237,
+      "queryid": "-2763544459039218247",
+      "calls": 2,
+      "total_ms": "3.103",
+      "mean_ms": "1.551",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2238,
+      "queryid": "-105643435733735683",
+      "calls": 2,
+      "total_ms": "3.098",
+      "mean_ms": "1.549",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2239,
+      "queryid": "-1462454922693424441",
+      "calls": 1,
+      "total_ms": "3.094",
+      "mean_ms": "3.094",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2240,
+      "queryid": "3595229123727091484",
+      "calls": 1,
+      "total_ms": "3.088",
+      "mean_ms": "3.088",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    }
+  ],
+  "prior_distinct": 2095,
+  "new_distinct": 76,
+  "overlap": 4,
+  "cumulative_distinct": 2171,
+  "full_pgss_query_text_reviewed": 0,
+  "source_word_credit_separate_from_issue267": true,
+  "new_confirmed_defects": 0,
+  "justified_deletions": 0,
+  "production_provider_writes": 0,
+  "source_code_changes": 0,
+  "legacy_directory": "GitHub #2389 verified CLOSED/DEPLOYED; old directory retired, retained canonical/alias/history/source-validation functions remain LEGACY ACTIVE",
+  "unverified": [
+    "Exact current GitHub migration source parity for these five functions",
+    "Hosted signed-in Auth/JWT/HTTP assurance (#96)",
+    "External worker URL fetch safety and session tests",
+    "Provider-console settings and compiled service internals",
+    "Remaining full provider definition/source word audit"
+  ],
+  "baseline_complete": false,
+  "next_cursor": "fresh provider drift, numeric ranks 2241-2320, remaining full live definitions/source parity"
+}

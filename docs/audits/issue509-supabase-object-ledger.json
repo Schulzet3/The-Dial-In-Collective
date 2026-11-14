@@ -4198,6 +4198,19 @@
       "new_defects": 0,
       "production_writes": 0,
       "next": "numeric ranks 2161-2240 and remaining provider definitions"
+    },
+    {
+      "run": 252,
+      "prewrite_source_sha": "2c0b18073a1a7e9200d1dd3040e176895fb3c01d",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt_path": "docs/audits/issue509-source-rpc-pgss-2026-11-14-run252-rank2161-2240.json",
+      "receipt_git_blob": "1bb69969f7e73c4c52351198c202af8bd60ba31d",
+      "numeric_distinct": 2171,
+      "current_sql_definition_bodies": 5,
+      "source_chars": 11495,
+      "new_defects": 0,
+      "production_writes": 0,
+      "next": "numeric ranks 2241-2320 and remaining provider definitions"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -20554,5 +20567,61 @@
     "new_defects": 0,
     "production_writes": 0,
     "next": "provider drift; numeric 2161-2240; remaining direct provider definitions and source comparisons"
+  },
+  "provider_pgss_source_rpc_run252": {
+    "status": "IN_PROGRESS",
+    "project_ref": "azviqqejypsefzilgonr",
+    "preflight_development_sha": "30a7cf59d2d8c75ef9add1d3754526b6d2dc823e",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_source_sha": "2c0b18073a1a7e9200d1dd3040e176895fb3c01d",
+    "provider_observed_at": "2026-11-14 23:44:19.132488+00",
+    "receipt_path": "docs/audits/issue509-source-rpc-pgss-2026-11-14-run252-rank2161-2240.json",
+    "receipt_git_blob": "1bb69969f7e73c4c52351198c202af8bd60ba31d",
+    "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-14-run252.json",
+    "index_git_blob": "05cd36781dd37527f003ef3570f072046a09dac0",
+    "source_definitions": [
+      {
+        "signature": "private.dic_confirm_coffee_existing(mid uuid, p jsonb)",
+        "md5": "0fcc44bb8a05f46e87694d3474eb7c23",
+        "chars": 3239,
+        "verdict": "Admitted-member and owner-scoped submission confirmation; idempotency receipt and owner advisory lock; verified canonical target, matching roaster/name/release/origin gates before link. Hostile payload/session acceptance not independently exercised."
+      },
+      {
+        "signature": "private.dic_link_pending_coffee(sid uuid, canonical uuid, event_name text, evidence jsonb)",
+        "md5": "140c211a4bfef175b041c037561a1e37",
+        "chars": 3954,
+        "verdict": "Pending/conflict submission linkage transaction; verified target, library entry continuity, duplicate owned-coffee guard, first-seen name and alias audit. These historical alias tables are LEGACY ACTIVE, not the retired directory."
+      },
+      {
+        "signature": "public.dic_source_check_target(submission_id uuid)",
+        "md5": "496ad9d2e74fa2d07592a442438d8ca9",
+        "chars": 1397,
+        "verdict": "Service-role restricted pending submission and beta membership gate with verified official-domain lookup; worker-source URL validation remains independent external boundary."
+      },
+      {
+        "signature": "public.dic_source_claim(submission_id uuid)",
+        "md5": "68bc86486e485565d4273daf3655e0d3",
+        "chars": 2348,
+        "verdict": "Service-only owner-serialized source attempt budget, 30 per 24 hours and six per submission with 15-minute retry window; no claim of actual current request throughput."
+      },
+      {
+        "signature": "public.dic_trusted_source_verify(submission_id uuid, evidence jsonb)",
+        "md5": "59dfb6ecc6a2b8324fa9ba8512fdaaa3",
+        "chars": 557,
+        "verdict": "Service-only invoker wrapper delegates to private promote; no client EXECUTE, but full signed-worker/HTTP and downstream authorization acceptance is UNVERIFIED."
+      }
+    ],
+    "complete_source_chars": 11495,
+    "pgss_ranks": [
+      2161,
+      2240
+    ],
+    "numeric_rows": 80,
+    "new_distinct": 76,
+    "overlap": 4,
+    "cumulative_distinct": 2171,
+    "new_defects": 0,
+    "production_writes": 0,
+    "next": "numeric ranks 2241-2320 and remaining complete provider definitions"
   }
 }
