@@ -1,0 +1,55 @@
+name: DIC Issue33 R201 selected current Sextant original299
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r201-original299.yml
+      - scripts/audit/issue33-r201-original299-check.mjs
+      - tests/coffee-issue33-r201-original299.test.mjs
+      - docs/workstreams/ops-issue33-r201-299-20261114.md
+      - src/server/coffee-page-metadata.mjs
+      - src/server/coffee-narrative-evidence.mjs
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r201-original299.yml
+      - scripts/audit/issue33-r201-original299-check.mjs
+      - tests/coffee-issue33-r201-original299.test.mjs
+      - src/server/coffee-page-metadata.mjs
+      - src/server/coffee-narrative-evidence.mjs
+permissions:
+  contents: read
+jobs:
+  selected:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Positive and hostile current selected-product parser regressions
+        run: node --test tests/coffee-issue33-r201-original299.test.mjs
+      - name: Bounded public HTTPS exact original case and actual Add Coffee parser
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '299'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r201
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Independent actual selected product HTML and parser afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r201
+          DIC_R201_EXACT_CHECKOUT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/audit/issue33-r201-original299-check.mjs
+      - name: Retain source-bound original selected HTML and afterproof for independent review
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r201-original299-selected-source
+          path: /tmp/dic33-r201/
+          retention-days: 1
+          if-no-files-found: warn
