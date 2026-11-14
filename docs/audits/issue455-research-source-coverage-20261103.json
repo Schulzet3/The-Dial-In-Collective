@@ -2585,6 +2585,21 @@
       "source_bytes_sha256": null,
       "source_byte_caveat": "Only NLM-indexed original author abstract, DOI, journal, authors and study descriptions were readable. No full Elsevier article, precise participant count, complete concentrations, statistical tables, tested espresso recipe, raw sensory results, replication or PDF byte/hash reviewed.",
       "claims_verified_externally": "Original author abstract separates the coffee tactile attribute of body into mouthcoating, astringency, chalkiness and thickness; describes sensory-guided fractionation and signal-detection tests in water and coffee; reports subtle perceptible mouthcoating for 3-CQA and 4-CQA and an inverse concentration/perception relationship under those conditions. Receptor-binding and saliva lubrication are offered only as possible explanations, not verified causal mechanisms. No user-specific five-taste next-shot intervention is reported."
+    },
+    {
+      "id": "LIT-2026-LEE-CHANG-FILTER-RECIPE-CONSTRAINED",
+      "type": "external_primary_study",
+      "title": "Coffee brewing trajectories from recipe-level records: a conservation-constrained framework for filter coffee",
+      "authors": "Hyun Seok Lee; Byoung-Yong Chang",
+      "published": "2026-08-15; accepted 2026-08-11; early accepted manuscript subject to editing",
+      "doi": "10.1038/s41538-026-01074-1",
+      "url": "https://www.nature.com/articles/s41538-026-01074-1",
+      "access": "20261114_FIRST_PARTY_SPRINGER_NATURE_INDEXED_PUBLISHER_ORIGINAL_FULL_ABSTRACT_AND_BIBLIOGRAPHY_VERIFIED; third-party Paperity preview original accepted-manuscript first page; direct full HTML requires inaccessible identity authorization; ORIGINAL_FULL_METHODS_TABLES_FIGURES_PDF_SHA_SUPPLEMENT_NOT_VERIFIED",
+      "evidence_grade": "PEER_REVIEWED_ACCEPTED_PRIMARY_FILTER_COFFEE_REDUCED_ORDER_CONSERVATION_MODEL; LIMITED_HELD_OUT_PHYSICAL_ENDPOINT_VALIDATION; NOT_ESPRESSO_OR_SENSORY_OR_PERSONALIZED_NEXT_SHOT_VALIDATION",
+      "review_status": "R455-261_BOUNDED_ORIGINAL_PUBLISHER_ABSTRACT_AND_MANUSCRIPT_FIRST_PAGE_PREVIEW_READ; FULL_BODY_UNREVIEWED",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Published accepted manuscript is preliminary; original publisher full HTML redirected through inaccessible authorization. PDF binary/hash, detailed methods, calibration/holdout raw values, 53-recipe source records, supplemental calculations, visual figures and independent replication NOT checked. No fresh espresso application policy warranted.",
+      "claims_verified_externally": "Publisher abstract reports controlled filter-coffee coarse/medium/fine calibration and medium-coarse/medium-fine held-out condition means: 6.7 s drawdown, 0.58 g beverage mass and 0.020 percentage points TDS mean absolute errors (six endpoints within one experimental SD). 53 public filter-coffee recipe records are used with actual finish time as the only outcome directly compared; modeled extraction yield derived, water retention and solute inventories conditional and unobserved. Authors explicitly do not demonstrate internal state verification or model generalization to other brewing systems."
     }
   ],
   "evidence_checks": [
@@ -7957,6 +7972,45 @@
       "owner_approval": false,
       "github267_literal_review_credit": 0,
       "date": "2026-11-14"
+    },
+    {
+      "id": "R455-EV-CIT-261-A",
+      "source": "LIT-2026-LEE-CHANG-FILTER-RECIPE-CONSTRAINED",
+      "page_section": "Original npj Science of Food accepted-author article abstract: controlled filter-brew calibration/held-out means",
+      "claim": "Effective model parameters were estimated using coarse, medium and fine particle size distributions before holding out medium-coarse and medium-fine filter conditions; the article reports mean absolute errors 6.7 s drawdown, 0.58 g beverage mass and 0.020 percentage points TDS, with six compared held-out endpoint means within one experimental SD. These are model interpolation results, not error bounds for a new espresso machine or member.",
+      "grade": "ORIGINAL_FIRST_PARTY_PUBLISHER_AUTHOR_ABSTRACT_AND_BIBLIOGRAPHY; FULL_METHODS_AND_RAW_DATA_UNAVAILABLE",
+      "factual_status": "PUBLISHER_REPORTED_FILTER_HOLDOUT_ENDPOINTS_VERIFIED_FROM_ABSTRACT; EXTERNAL_VALIDATION_IN_ESPRESSO_NOT_TESTED",
+      "result": "RESEARCH_ONLY_NO_ESPRESSO_TIME_OR_TDS_NUMERIC_RULE",
+      "current_app": "Current verified development 7ace1ad4be9af7e3c3fbf59eff101dd684f3f3df; site/lib/engine.js Git blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6, constants.js d3559dc1c9560c4d68fbcad1dc91e3a792a100a2, model.js fdc65f869546cddbb6552e555dca12117f2c47fc. All five independent taste ratings, original measured shot/history, per-coffee context, one truly controllable next-shot change and style/feed/grinder calibration remain approved; no filter-bed sensors, TDS measurement or validated physical-process trajectory inference in the app.",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0,
+      "date": "2026-11-14"
+    },
+    {
+      "id": "R455-EV-CIT-261-B",
+      "source": "LIT-2026-LEE-CHANG-FILTER-RECIPE-CONSTRAINED",
+      "page_section": "Original publisher abstract: 53 published filter coffee recipe records",
+      "claim": "Application to 53 public filter recipes directly compared only reported finish time with model-calculated drawdown; actual beverage mass, chemical composition and internal process states for those 53 recipes were not independently observed or validated in the reported comparison. Accordingly, number of recipes is not number of observed next-shot sensory outcomes.",
+      "grade": "PRIMARY_AUTHOR_ABSTRACT_VALIDATION_BOUNDARY; FULL_RECORDS_UNAVAILABLE",
+      "factual_status": "ONE_DIRECTLY_COMPARABLE_RECIPE_ENDPOINT_REPORTED; PERSONALIZED_CUP_EFFECT_NOT_MEASURED",
+      "result": "NO_LEARNING_CONFIDENCE_OR_CONSENTED_MEMBER_INTERVENTION_POLICY_CHANGE",
+      "current_app": "Current verified development 7ace1ad4be9af7e3c3fbf59eff101dd684f3f3df; site/lib/engine.js Git blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6, constants.js d3559dc1c9560c4d68fbcad1dc91e3a792a100a2, model.js fdc65f869546cddbb6552e555dca12117f2c47fc. All five independent taste ratings, original measured shot/history, per-coffee context, one truly controllable next-shot change and style/feed/grinder calibration remain approved; no filter-bed sensors, TDS measurement or validated physical-process trajectory inference in the app.",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0,
+      "date": "2026-11-14"
+    },
+    {
+      "id": "R455-EV-CIT-261-C",
+      "source": "LIT-2026-LEE-CHANG-FILTER-RECIPE-CONSTRAINED",
+      "page_section": "Original publisher abstract and accepted-manuscript first-page preview: mass balance/derived vs latent states",
+      "claim": "Extraction yield is derived from mass, TDS and coffee dose; water retained in grounds, solute partition and within-bed trajectories are model-implied rather than directly measured by ordinary recipe logs. This distinguishes physical inference confidence from repeatably tasted personal espresso preference, and the authors explicitly say generalization across brew systems is unestablished.",
+      "grade": "ORIGINAL_PUBLISHER_ABSTRACT_PLUS_THIRD_PARTY_ACCEPTED_FIRST_PAGE_PREVIEW; COMPLETE_MODEL_ASSUMPTIONS_UNREVIEWED",
+      "factual_status": "OBSERVED_VERSUS_INFERRED_BOUNDARY_VERIFIED; NO_PROOF_OF_ESPRESSO_FIVE_TASTE_EFFICACY",
+      "result": "KEEP_APP_EXPLANATIONS_CONSERVATIVE_AND_POLICY_LOCKED",
+      "current_app": "Current verified development 7ace1ad4be9af7e3c3fbf59eff101dd684f3f3df; site/lib/engine.js Git blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6, constants.js d3559dc1c9560c4d68fbcad1dc91e3a792a100a2, model.js fdc65f869546cddbb6552e555dca12117f2c47fc. All five independent taste ratings, original measured shot/history, per-coffee context, one truly controllable next-shot change and style/feed/grinder calibration remain approved; no filter-bed sensors, TDS measurement or validated physical-process trajectory inference in the app.",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0,
+      "date": "2026-11-14"
     }
   ],
   "policy_decisions_pending": [],
@@ -8151,20 +8205,18 @@
     "R455-260: full canonical Git blob independently parsed and reconciled R259 proposed poroelastic source/three claims/one proposal to existing LIT-2026-ESPRESSO-POROELASTIC, methods R455-EV-METHOD-204-A/B and previous proposal R455-PROP-204; 145/416/208 unchanged. No #267 literal review or empirical DIC taste validation; standalone S019 inaccessible."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-260",
-    "starting_preflight_development_sha": "6c961bfbd6796baf83062040c3cda23b383bcce1",
-    "reverified_pre_write_development_sha": "4f894b6814897527e6cba4f1fc3b5d4708ce5942",
+    "run_id": "R455-261",
+    "date": "2026-11-14",
+    "development_preflight_sha": "7ace1ad4be9af7e3c3fbf59eff101dd684f3f3df",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "phase": "CANONICAL_ORIGINAL_FULL_TEXT_SOURCE_ID_AND_SIDE_CAR_CLAIMS_RECONCILED_NO_DUPLICATE_CREDIT",
     "source_counts": {
-      "research_project_source_records": 145,
-      "bounded_evidence_checks": 416,
-      "proposals": 208
+      "sources": 146,
+      "evidence_checks": 419,
+      "proposals": 209
     },
-    "github267_literal_review_credit": 0,
-    "source_access": "FULL_CURRENT_GIT_BLOB_AND_ALL_145_SOURCE_RECORDS_416_EVIDENCE_CHECKS_208_PROPOSALS_PARSED; ORIGINAL_AUTHOR_HTML_REVIEW_REUSED; EXTERNAL_PDF_AND_DATASETS_UNVERIFIED",
-    "release_state": "DOCS_ONLY_NOT_APP_CHANGE_OR_DEPLOY",
-    "next": "Continue truly distinct primary evidence or reproducible safe UX issue; standalone S019 unreviewed"
+    "scope": "First-party early abstract of filter-coffee model; no espresso or taste efficacy; no app/rule/member/provider changes",
+    "github267_line_credit": 0,
+    "next": "Continue source-by-source original espresso and UX audit; seek full original filter article and S019 without claiming access; verify future espresso-specific same-context outcomes only with separate owner authority and consent."
   },
   "policy_decisions_resolved": [
     {
@@ -12942,6 +12994,33 @@
       "production_deployed": false,
       "github267_literal_review_credit": 0,
       "exact_source": "f5fef01063852179abf82adee4f57398796e85d3"
+    },
+    {
+      "id": "R455-PROP-261-CONDITIONAL-RECIPE-TRAJECTORY-NOT-ESPRESSO-EFFICACY",
+      "severity": "P3_RESEARCH_INFERENCE_GUARDRAIL_NO_REPRODUCED_RUNTIME_DEFECT",
+      "source": [
+        "LIT-2026-LEE-CHANG-FILTER-RECIPE-CONSTRAINED",
+        "ORG-01",
+        "ORG-06"
+      ],
+      "evidence": [
+        "R455-EV-CIT-261-A",
+        "R455-EV-CIT-261-B",
+        "R455-EV-CIT-261-C"
+      ],
+      "finding": "An interpolation model predicting filter-coffee physical endpoints cannot certify latent extraction trajectories, espresso transferability or personal next-shot taste gains. Number of recipe records is not number of independent validated member outcomes.",
+      "evidence_grade": "DIRECT_PRIMARY_EARLY_PUBLISHER_ABSTRACT_ONLY; FULL_ARTICLE_NOT_ACCESSED; FILTER_NOT_ESPRESSO",
+      "source_provenance": "Lee & Chang, npj Science of Food (published 2026-08-15, accepted 2026-08-11), DOI 10.1038/s41538-026-01074-1. First-party publisher indexed abstract; accepted-first-page Paperity preview https://paperity.org/p/379659449/coffee-brewing-trajectories-from-recipe-level-records-a-conservation-constrained; original full text/PDF unavailable.",
+      "user_benefit": "Prevent unearned scientific certainty in DIC explanations, avoid equating plausible physical reconstruction with independently verified member espresso taste improvement.",
+      "current_locked": "Preserve five actively rated independent tastes, true complete all-green vs missing ratings, only one controllable recommendation change, original measured shots and notes, alternate families, independent styles including Turbo and Fast-Flow, Slow Feed, grinder ranges/versions, privacy and owner consent.",
+      "current_app": "Current verified development 7ace1ad4be9af7e3c3fbf59eff101dd684f3f3df; site/lib/engine.js Git blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6, constants.js d3559dc1c9560c4d68fbcad1dc91e3a792a100a2, model.js fdc65f869546cddbb6552e555dca12117f2c47fc. All five independent taste ratings, original measured shot/history, per-coffee context, one truly controllable next-shot change and style/feed/grinder calibration remain approved; no filter-bed sensors, TDS measurement or validated physical-process trajectory inference in the app.",
+      "proposed_change": "SAFE RESEARCH-ONLY; retain existing engine and display exactly as approved. In any future owner-approved voluntary assessment use strictly consented same-coffee/setup/style/grinder/feed one-control -> next-shot all-five tastes, track confounders, missingness and adverse outcomes; do not collect new member data now.",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "R455-261_RESEARCH_ONLY_LEDGER_NO_RUNTIME_CHANGE",
+      "test_plan": "Full canonical JSON parse and stable roundtrip, exact 145/416/208 preserved ordered entries, unique all IDs and DOI exactly once, append exactly 1 source/3 bounded evidence checks/1 proposal, exact head and merged Git blob parity, docs-only CI governance. No Node/build/UX/SQL/member tests claimed for untouched source.",
+      "release_queue_status": "RESEARCH_ONLY_NOT_READY_NO_PUBLICATION",
+      "github267_literal_review_credit": 0
     }
   ],
   "changeScope": {
