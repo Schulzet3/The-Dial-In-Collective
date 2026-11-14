@@ -40,3 +40,9 @@ The first PR head contained a mechanical JavaScript replacement artifact: a lite
 DIC_PREFLIGHT_VERIFIED development_sha=f1dc5fd4be99bdbd5a9d4b6a2123ba8e8c0bbe4c preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
 GitHub PR-head approval gate 43562350446 correctly blocked untracked deployable files. Added unique `DIC-Q-33-proudmary-structured-title-20261113` TESTING item with all three exact source paths; no READY/deploy claim. PR #2588 current targeted Node/lint and approval must pass before nonforce merge. Separate source/merge/queue checks remain required.
+
+## CI intake repair — November 14, 2026 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=f1dc5fd4be99bdbd5a9d4b6a2123ba8e8c0bbe4c preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+Exact PR head e2839a103072fb3b1a1fe477ea8e562c4198f2f8 approval run 43562350446 failed queue intake: missing IN_PROGRESS ownership for src/server/coffee-identity-evidence.mjs and src/server/coffee-shopify-ajax.mjs. Added only the scoped IN_PROGRESS queue item (not READY); retained the original failure. Recheck new exact head CI, focused tests and nonforce merge before any READY claim. No publication or provider changes.
