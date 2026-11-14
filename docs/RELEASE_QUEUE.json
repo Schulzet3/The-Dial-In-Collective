@@ -14182,23 +14182,33 @@
     {
       "id": "DIC-Q-455-r255-offline-recommendation-provenance-preview",
       "issue": 455,
-      "pr": null,
+      "pr": 2660,
       "title": "Preserve already-queued Use Recommendation provenance in offline Shot History preview",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "87da54b3af6c5dc6a0fbf27bfdbaaf763819fbe5",
       "scope_paths": [
         "site/cloud/mapping.js"
       ],
       "owner_source": "Owner Issue #455 Option B safe UX/attribution fix. DIC_PREFLIGHT_VERIFIED development_sha=120bc50a8dcf6c39236f5622d5354368a41a4983 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d. Direct actual mapping.js and shot_card.js source audit.",
       "tests": [
         "Four new direct Node22 negative/positive synthetic offline preview, server hydration parity, missing provenance, invalid five-rating and idempotence tests authored; UNRUN/NOT PASS at commit authoring.",
-        "Required Node22/lint, cloud/browser/mobile/offline, isolated SQL/privacy/security and approval CI pending; frozen original603 is not app acceptance."
+        "Required Node22/lint, cloud/browser/mobile/offline, isolated SQL/privacy/security and approval CI pending; frozen original603 is not app acceptance.",
+        "R255 exact PR-head a0e9d9a41f75007027035423d175d53fde072e92: Node22/lint/build 43586421422 SUCCESS 4796 PASS/0 FAIL/6 SKIP including four focused R255 actual-module synthetic tests; cloud/mobile/browser/offline 43586421297 SUCCESS, isolated SQL/privacy 43586421300 SUCCESS, security 43586421307 SUCCESS, approval governance 43586421341 SUCCESS. Frozen original603 43586421350 SKIPPED, not PASS.",
+        "PR #2660 nonforce squash merged 87da54b3af6c5dc6a0fbf27bfdbaaf763819fbe5 [skip netlify]; four exact changed files read back matching PR-head Git blobs mapping acbfad05f6c197f3884054f8709ea5bc2e7c9ad0, R255 test 2c76ab557209dc7fe6516b6283be9276af722218, journal b9893a92cb95eeb3a2a45e4f845de20026c81d9a, TESTING queue 6e5fe62d88e7cadef262e8f61e27bc62c80b96b1.",
+        "Exact merged-push Node22/lint/build 43586665157 SUCCESS 4796 PASS/0 FAIL/6 SKIP; cloud/browser/mobile/offline 43586665168 SUCCESS; approval/continuity 43586665177 SUCCESS. Unchanged PR-head isolated SQL/security remains SUCCESS; no new member/provider or app data testing claimed."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact-source PR-head CI and nonforce merge/merged-source verification pending"
+      "ci_runs": [
+        43586421422,
+        43586421297,
+        43586421300,
+        43586421307,
+        43586421341,
+        43586665157,
+        43586665168,
+        43586665177
       ],
-      "notes": "Development-only same-source offline preview correction; no new schema, metadata, numeric model, external telemetry, member data access, Locked change, production deploy or science outcome claim.",
+      "blockers": [],
+      "notes": "READY for separate owner-approved publication only; not deployed. Narrow existing recommendation-use provenance copied from durable owner-local queued shot into pending offline preview. No data collection, recommendation targets, Locked policy, provider/production writes, release or backup change. R255 direct source proof and four synthetic tests; no claim of tasted cup improvement.",
       "production_deployed": false
     }
   ],
