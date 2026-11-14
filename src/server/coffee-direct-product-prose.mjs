@@ -34,6 +34,11 @@ const CURRENT_SELECTED_SOURCED_WATER_DECAF=/^(?:an?|this|our)\s+[^.!?]{0,140}?\b
 // grammatical subject to the selected H1 name/prefix; generic decaf FAQs,
 // previous lots and another named coffee cannot authorize this method.
 const CURRENT_SELECTED_NAMED_WATER_DECAF=/\b([\p{Lu}][\p{L}\p{M}'’.-]{2,45}(?:\s+[\p{Lu}][\p{L}\p{M}'’.-]{2,45}){0,3})\s+is\s+(?:a|an)\s+(?:(?:single[ -]origin|organic|fully|current)\s+){0,3}(?:swiss|mountain)[ -]?water\s+decaf(?:feinated)?\b/iu;
+// A fully decaffeinated selected coffee can open its OWN product description
+// with "Decaffeinated using the Swiss Water Process, ...". The treatment is
+// directly asserted by that selected paragraph, not by a sitewide guide,
+// unrelated product, old lot, generic washing, or the title alone.
+const CURRENT_SELECTED_DIRECT_DECAFFEINATED_WATER=/^decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?(?:swiss|mountain)[ -]?water\s+process\b/iu;
 const CURRENT_SELECTED_BEANS_WATER_DECAF=/^(?:these|our|this)\s+(?:(?:[\p{L}\p{M}-]+|&)\s+){0,12}beans\s+(?:are|were)\s+(?:naturally\s+)?decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?['"‘’]?(?:swiss|mountain)[\s-]?water['"‘’]?(?:\s+process)?\b/iu;
 const CURRENT_SELECTED_OUR_WATER_DECAF=/(?:^|[.!?]\s+)using\s+the\s+(?:swiss|mountain)[\s-]?water\s+process,\s+our\s+decaf\s+uses\b(?:[^.!?]|\d\.\d){0,240}\bcaffeine[\s-]?free\b/iu;
 const NONCURRENT_DECAF_METHOD=/\b(?:previous(?:ly)?|formerly|historically|typically|generally|other coffees?|another coffee|last year|prior (?:lot|harvest))\b/iu;
@@ -509,6 +514,21 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
     if(decafEvidence.size<4)decafEvidence.add(statement);
     else decafEvidenceOverflow=true;
    }
+  }
+  // Exact current selected H1 + directly selected description: an introductory
+  // passive "Decaffeinated using the Swiss Water Process" is affirmative
+  // selected-coffee provenance, even without an explicit "this coffee" subject.
+  // Keep negation, historical, education, related product and contradiction
+  // guards; inferDecaffeinationMethod preserves the single-method requirement.
+  const passiveWater=line.match(CURRENT_SELECTED_DIRECT_DECAFFEINATED_WATER)?.[0]||'';
+  if(decafOnlyCoffee(name)&&b.tag==='p'&&!b.educational&&line.length<=550&&
+     passiveWater&&!NONCURRENT_DECAF_METHOD.test(line)&&
+     !/^(?:faq|frequently asked questions|common questions|decaf process education)$/iu.test(String(b.section||'').trim())&&
+     !/\b(?:not|never|without|instead of|rather than|unlike|hypothetical)\b/iu.test(line)&&
+     inferDecaffeinationMethod({name,selectedMethod:line})==='Water Process'&&
+     !decafEvidence.has(line)){
+   if(decafEvidence.size<4)decafEvidence.add(line);
+   else decafEvidenceOverflow=true;
   }
   // A decaf identity plus a current selected-product sentence is required.
   // Reuse the conservative method classifier; if multiple incompatible
