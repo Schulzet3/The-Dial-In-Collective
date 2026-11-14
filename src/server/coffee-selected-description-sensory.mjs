@@ -360,3 +360,39 @@ export function selectedCurrentMultiSentenceNarrativeNotes(html,{clean,notes}={}
  }
  return matches.length===1?matches[0]:'';
 }
+
+ 
+// Exact selected own paragraph, corroborated by the already accepted literal notes.
+// Source Review ONLY: never add intrinsic aroma to canonical tasting autofill.
+export function selectedCurrentIntrinsicAromaContext(html,{clean,notes}={}){
+ if(typeof html!=='string'||html.length>2_000_000||typeof clean!=='function'||
+  typeof notes!=='string'||notes.length<8||notes.length>300)return '';
+ const current=removeElements(html,['script','style','noscript','template','nav','aside','footer','header','select']);
+ const blocks=productCoffeeProse(current,clean);
+ const h1=blocks.filter(b=>b.tag==='h1'&&!b.educational);
+ if(h1.length!==1||!h1[0].text||h1[0].text.length>180)return '';
+ const title=fold(h1[0].text);
+ const allowed=/^(?:product info|product information|product description|description|coffee description|about the coffee|about this coffee|coffee details|details|coffee notes|tasting notes|flavor notes|flavour notes|coffee profile|overview)$/u;
+ const parts=notes.split(/\s*(?:,|&|[•·;|]|\band\b)\s*/iu).map(x=>x.trim()).filter(Boolean);
+ if(parts.length<2||parts.length>6)return '';
+ const matches=new Set();
+ for(const block of blocks){
+  // Current product descriptions may be inline <span>s inside one own <div>,
+  // not just paragraph tags. Structural selected scope still governs all three.
+  if(!['p','div','span'].includes(block.tag)||block.educational||block.text.length<65||block.text.length>950||
+   unavailable.test(block.section)||unavailable.test(block.text)||NONCURRENT_COFFEE_PROSE.test(block.text))continue;
+  const section=fold(block.section);
+  if(section&&section!==title&&!allowed.test(section))continue;
+  const story=fold(block.text);
+  if(!parts.every(x=>story.includes(fold(x))))continue;
+  for(const sentence of block.text.split(/(?<=[.!?])\s+/u).slice(0,10)){
+   if(sentence.length>380||unavailable.test(sentence)||NONCURRENT_COFFEE_PROSE.test(sentence))continue;
+   const m=sentence.match(/\b(?:this|our|the)\s+coffee\s+opens?\s+with\s+(?:an?\s+)?(floral|jasmine|citrus|chocolate|vanilla|nutty|fruity)\s+aroma\b/iu);
+   if(!m)continue;
+   const literal=m[1].toLowerCase()+' aroma';
+   if(parts.some(part=>fold(part).includes(fold(m[1]))))continue;
+   matches.add(literal);
+  }
+ }
+ return matches.size===1?[...matches][0]:'';
+}
