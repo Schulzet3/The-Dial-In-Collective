@@ -45,6 +45,7 @@ test('stale offline shots cannot roll back the newer default',()=>{
 test('shot history is compact and equipment context only appears at bottom when expanded',()=>{
  const raw=rawFixture();raw.shots=[rawShot({feed_mode:'slow'})];
  const sh=hydrate(raw).shots[0],html=shotCard(sh,{expanded:true,activeVersionId:'version'});
+ assert.match(html,/class="radar"/);
  assert.ok(html.indexOf('Test Home')>html.indexOf('class="radar"'));
  assert.match(html,/class="shot-topline"/);
  assert.match(html,/class="shot-date">\d{1,2}\/\d{1,2}\/\d{4}<\/span>/);
