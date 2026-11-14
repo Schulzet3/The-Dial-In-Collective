@@ -50,3 +50,26 @@ test('original #305/#306 product descriptions cannot inherit unrelated numeric e
   assert.doesNotMatch(String(p.fields?.producer||''),/Kenyan farmer/i);
  }
 });
+
+test('selected full-decaf passive water treatment works for Mountain Water too, without a roaster-specific exception',()=>{
+ const p=parse({url:swiss,name:'Swiss Water Decaf Drip',description:'Decaffeinated using the Mountain Water Process, the chosen decaf retains sweetness.',specs:'<p>Medium-Dark Roast</p>'});
+ assert.equal(p.ok,true);
+ assert.equal(p.fields?.decaffeination_method,'Water Process');
+ assert.ok(!p.fields?.process && !p.fields?.origin);
+});
+test('passive decaf text on a non-decaf selected coffee cannot populate a method',()=>{
+ const p=parse({url:organico,name:'Organico',description:'Decaffeinated using the Swiss Water Process, this unrelated description was copied here.'});
+ assert.equal(p.ok,true);assert.ok(!p.fields?.decaffeination_method);
+});
+test('historical or negated Swiss Water comparisons cannot populate current decaffeination',()=>{
+ for(const description of [
+  'Previously decaffeinated using the Swiss Water Process, but the current process is unpublished.',
+  'Not decaffeinated using the Swiss Water Process; the actual treatment is unpublished.',
+  'Decaffeinated using the Swiss Water Process historically; new lots have undisclosed treatment.',
+  'Decaffeinated using the Swiss Water Process rather than Mountain Water is only an educational comparison.'
+ ]){
+  const p=parse({url:swiss,name:'Swiss Water Decaf Drip',description});
+  assert.equal(p.ok,true,JSON.stringify(p).slice(0,260));
+  assert.ok(!p.fields?.decaffeination_method,description);
+ }
+});
