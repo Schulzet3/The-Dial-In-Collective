@@ -6,7 +6,7 @@ const guatemala='https://shop.broadporchcoffee.com/products/guatemala';
 const meaning='https://shop.caffedarte.com/products/meaning-of-life-drip-coffee';
 function parse({url=guatemala,name='Guatemala - Huehuetenango',description='A silky and balanced medium roast from Huehuetenango, Guatemala. Sweet toffee and roasted almond notes come together in a smooth, easy-drinking cup with plenty of body. Tasting Notes: Almond, Toffee, Silky. Roast Level: Medium Roast. Origin: Huehuetenango, Guatemala. Process: Washed.',aside='',seo='OLD OTHER PRODUCT'}={}){
  const ld={'@context':'https://schema.org','@type':'Product',name,url,brand:{'@type':'Brand',name:url===guatemala?'Broad Porch Coffee':"Caffé D'arte Coffee Roasters"}};
- const html='<html><head><title>'+seo+'</title><script type="application/ld+json">'+JSON.stringify(ld)+'</script></head><body><main><article class="product"><h1>'+name+'</h1><div class="product-description"><p>'+description+'</p></div></article></main>'+aside+'</body></html>';
+ const html='<html><head><title>'+seo+'</title><script type="application/ld+json">'+JSON.stringify(ld)+'</script></head><body><main><article class="product"><h1>'+name+'</h1><div class="product-description"><p>'+description+'</p>'+(url===guatemala?'<p>Tasting Notes: Almond · Toffee · Silky</p><p>Roast Level: Medium Roast</p><p>Origin: Huehuetenango, Guatemala</p><p>Process: Washed</p>':'')+'</div></article></main>'+aside+'</body></html>';
  return extractPublicCoffeeFacts(html,{source_url:url});
 }
 test('original #303 direct selected Guatemala name origin washed medium and almond/toffee',()=>{
