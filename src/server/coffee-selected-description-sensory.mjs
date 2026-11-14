@@ -377,7 +377,9 @@ export function selectedCurrentIntrinsicAromaContext(html,{clean,notes}={}){
  if(parts.length<2||parts.length>6)return '';
  const matches=new Set();
  for(const block of blocks){
-  if(block.tag!=='p'||block.educational||block.text.length<65||block.text.length>950||
+  // Current product descriptions may be inline <span>s inside one own <div>,
+  // not just paragraph tags. Structural selected scope still governs all three.
+  if(!['p','div','span'].includes(block.tag)||block.educational||block.text.length<65||block.text.length>950||
    unavailable.test(block.section)||unavailable.test(block.text)||NONCURRENT_COFFEE_PROSE.test(block.text))continue;
   const section=fold(block.section);
   if(section&&section!==title&&!allowed.test(section))continue;

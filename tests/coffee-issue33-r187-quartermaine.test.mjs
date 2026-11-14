@@ -79,3 +79,18 @@ test('#263 competing selected coffee H1 blocks aroma source review',()=>{
  const p=parse(263,product(263)+'<h1>Another Coffee</h1>');
  assert.ok(!(p.source_facts||[]).some(x=>x.label==='Selected current product intrinsic aroma (review only)'),JSON.stringify(p).slice(0,2500));
 });
+
+test('#263 real merchant inline span div selected description has provenance',()=>{
+ const p=parse(263,'<h1>Costa Rica</h1><div class="product-single__description rte">'+
+  '<span>From the Tarrazu region of </span><span>Costa Rica</span>'+
+  '<span>, this coffee opens with a floral aroma. Our signature roast marries its medium body with bright acidity, notes of baking chocolate, and hints of citrus rind on the finish.</span></div>');
+ const context=(p.source_facts||[]).filter(x=>x.label==='Selected current product intrinsic aroma (review only)');
+ assert.equal(context.length,1,JSON.stringify(p).slice(0,4500));
+ assert.equal(context[0].value,'floral aroma');
+});
+test('#263 unrelated inline div in aside cannot supply selected floral source fact',()=>{
+ const own='<h1>Costa Rica</h1><p>Notes of baking chocolate and hints of citrus rind.</p>';
+ const unrelated='<aside><div><span>From the Tarrazu region of Costa Rica, this coffee opens with a floral aroma. Our signature roast marries its medium body with bright acidity, notes of baking chocolate, and hints of citrus rind.</span></div></aside>';
+ const p=parse(263,own,unrelated);
+ assert.ok(!(p.source_facts||[]).some(x=>x.label==='Selected current product intrinsic aroma (review only)'),JSON.stringify(p).slice(0,2800));
+});
