@@ -14099,8 +14099,8 @@
       "issue": 455,
       "pr": 2639,
       "title": "Discard stale Use Recommendation source attribution when Slow Feed mode changes",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "c5a149d1839d9f0a6a1bf04dd2149011bf175ec5",
       "scope_paths": [
         "site/cloud/main.js"
       ],
@@ -14109,18 +14109,30 @@
         "Six direct CloudApp/mapping/offline Outbox synthetic positive and negative regressions PASS on first head; initial Node PASS 4779/0/6, overall failed only lint unused test import and corrected.",
         "Corrected exact PR head 3bbaeb2351464ad8dfcace8147c7a370d154c9c8: Node/lint 43577305675 SUCCESS 4779 PASS/0 FAIL/6 SKIP; compiled cloud/mobile/offline 43577305657, isolated SQL 43577305693, security 43577305614, approval 43577305636 SUCCESS; original603 43577305679 SKIPPED not PASS.",
         "Nonforce conflict-reconciled PR-head and merged-source CI PENDING. No READY claim.",
-        "Standalone docs-only current source TESTING intake. App PR #2639 code/merge and READY verification still PENDING; DO NOT DEPLOY."
+        "Standalone docs-only current source TESTING intake. App PR #2639 code/merge and READY verification still PENDING; DO NOT DEPLOY.",
+        "FINAL PR-head 55dab9f317c426af367c552c2f3eb44d3fa0bda2: Node/lint 43578183225 SUCCESS; cloud/browser/mobile/offline 43578183256 SUCCESS; isolated SQL/privacy 43578183235 SUCCESS; security 43578183244 SUCCESS; approval/continuity 43578183230 SUCCESS. Frozen original603 43578183211 SKIPPED, NOT PASS.",
+        "PR #2639 nonforce merged c5a149d1839d9f0a6a1bf04dd2149011bf175ec5 [skip netlify]. Source main.js blob ac1803d502624e164a7e641f96b4df8227b86ba9 and R253 six-case test blob 1a639301ce1a90a9121cd6d2b3305375457c16ae are byte-identical in tested PR head and current descendant d4e8b1b927f2bae3cc941959fd78481e435568cc.",
+        "Merged-push c5a149d approval43578436431 and cloud/browser/mobile43578436453 SUCCESS; c5a149d merged Node43578436420 CANCELLED by concurrent work (NOT PASS). Later exact development descendant d4e8b1b927f2bae3cc941959fd78481e435568cc, source/test blobs unchanged, independently passed Node/lint43578597225, cloud/mobile43578597279, governance43578597245. No rerun of unchanged suites.",
+        "R253 readiness applies to this one safe development-source fix only, not the entire still-open #455 research project, absent scientific real-world outcomes or S019 original access. No Netlify deployment or live provider changes."
       ],
       "ci_runs": [
         43577305675,
         43577305657,
         43577305693,
         43577305614,
-        43577305636
+        43577305636,
+        43578183225,
+        43578183256,
+        43578183235,
+        43578183244,
+        43578183230,
+        43578436431,
+        43578436453,
+        43578597225,
+        43578597279,
+        43578597245
       ],
-      "blockers": [
-        "Await exact new merge-source CI, nonforce integration and merged-push verification before READY."
-      ],
+      "blockers": [],
       "notes": "Development-only safe provenance correction; no new numeric science, taste targets, data capture, provider writes, deployment or original member record mutation. #267/#33/#96 separate and S019 inaccessible.",
       "production_deployed": false
     }
@@ -16439,6 +16451,15 @@
       "release_sha": "efe168127c1adc5f56eb55f6422a8e7726e6a0e2",
       "netlify_deploy_id": "6af7ff20849b938bd9ceafbe",
       "evidence": "Owner explicit Publish; exact f0b8a6a five CI checks SUCCESS, GitHub chat controller 43566307881 SUCCESS; 9/9 approved app Git blobs only; protected workflows 0 drift, SQL migration 0 drift, Netlify 6af7ff20849b938bd9ceafbe READY/current for Git efe168127c1adc5f56eb55f6422a8e7726e6a0e2 at 2026-11-14T06:27:01Z. Unready source preserved on development; candidate pinned metadata to last READY Proud Mary blob."
+    },
+    {
+      "date": "2026-11-14",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r253-slow-feed-recommendation-use-attribution",
+      "state": "READY",
+      "source_sha": "c5a149d1839d9f0a6a1bf04dd2149011bf175ec5",
+      "production_deployed": false,
+      "evidence": "PR #2639 exact head 55dab9f five CI SUCCESS (43578183225/256/235/244/230); nonforce merge c5a149d1839d9f0a6a1bf04dd2149011bf175ec5; merged approval 43578436431 and cloud/mobile 43578436453 SUCCESS; merged Node 43578436420 CANCELLED not PASS, later unchanged source/test descendant d4e8b1b927f2bae3cc941959fd78481e435568cc Node 43578597225 SUCCESS, cloud/mobile 43578597279 and approval 43578597245 SUCCESS. Six focused synthetic tests covered feed switch attribution and offline payload; no actual member experiment or deployment."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
