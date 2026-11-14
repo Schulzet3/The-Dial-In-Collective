@@ -1,3 +1,12 @@
+## November 14, 2026 — #28 personal-Drive OAuth courier preparation (DRAFT ONLY) [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=c5b555be6a2fab5943038cdcb2b9e2e641a98fbe preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+**Owner scope:** Investigate and prepare a durable replacement for the Apps Script memory-limited offsite courier using the prior October 12 Google Cloud project and current owned domain. Existing archives and scheduled backup process stay unchanged until independently proven end-to-end.
+
+**Prepared only:** narrow-scope Desktop Google Picker OAuth enrollment, local exact-folder disposable upload verification, token handoff via GitHub encrypted Actions secrets, guarded ciphertext GitHub-to-Drive resumable courier, mock tests, manual-only hosted OAuth smoke, and INACTIVE future courier template. No OAuth credentials or keys are stored in GitHub source. Staging PR is not a rollout. Source listing and exact destinations documented in docs/backup-oauth-authorization-and-cutover.md.
+
+**Local source tests:** Node 22, 7/7 passing, 0 failures, including a simulated streamed encrypted ZIP transfer >5 MiB across multiple Google Drive chunks, SHA-256, MD5, exact private parent. Live Google Cloud OAuth publishing status, client/API config, actual Picker folder selection, personal-account disposable upload, and GitHub runner OAuth smoke are **UNVERIFIED**, therefore **DO NOT ENABLE** a scheduled courier or stop Apps Script. Historical Apps Script-created archive retention visibility through drive.file remains a separate unresolved item. No Netlify build/deployment, production DB/Auth/member write, GitHub backup dispatch, Drive mutation or archive deletion was authorized by this preparation.
+
 ## November 13, 2026 — #356 legacy direct-release null merge SHA safeguard [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=5f4488195c46a9ae08f314ca1c209f72cce55266 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
