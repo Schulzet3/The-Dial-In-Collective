@@ -382,3 +382,9 @@ Owner's one new Publish-all-READY authorization plus independently required #33 
 DIC_PREFLIGHT_VERIFIED development_sha=6d75aaddae2de5d4e1ea7f50481872f896b408a9 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
 After separately certifying source-required R191 and R192, only later unready coffee-page-metadata edit is merged first-parent source ad7a7ffb0f94b4d706774867dcb9eb402b6bef26, selected original603 #299 anonymous grower (five new metadata source lines). It postdates frozen READY R198 merge 8cf2c2b and was not in the owner's original four READY. Preserve R201 code and source tests in development, register exact IN_PROGRESS scope in queue, NOT publish or mark READY in this one-use batch. Candidate MUST pin metadata to exact R198 verified blob 2d851cdd53619e0dd25f0fe4e82e4acf3cdbc808, stage only independently approved six READY IDs, restore five other unfinished app paths including two #509 TESTING SQL migrations, all unpublished workflows and allowed unready tests. This is governance only; no production, Netlify or DB writes.
+
+## November 14 — correct R201 first-parent PR provenance [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=91443708bd672282d6587b27694009ee46ee6fb2 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+Live GitHub commit-to-pull readback of ad7a7ffb0f94b4d706774867dcb9eb402b6bef26 verifies actual merged PR #2704 (not initial inferred #2695). Correct only unready R201 queue provenance; preserve all code/test/source and honest IN_PROGRESS status, same owner-frozen READY batch.
