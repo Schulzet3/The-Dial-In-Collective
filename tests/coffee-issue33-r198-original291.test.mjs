@@ -20,3 +20,14 @@ test('unrelated sibling copy cannot create selected product conflict',()=>{
 test('compatible own copy must not manufacture conflict',()=>{
  const p=parse('<p>Tanzania Peaberry offers notes of citrus, black tea, sweet berries, and hints of chocolate.</p>'+labeled);assert.equal(p.ok,true);assert.match(String(p.fields?.tasting_notes||''),/citrus/i);assert.ok(!p.conflicts?.includes('tasting_notes'));
 });
+
+test('only one unlike selected narrative is insufficient to erase directly labeled Flavor',()=>{
+ const p=parse('<p>Tanzania Peaberry offers notes of pepper, white wine, and black currant.</p>'+labeled);
+ assert.equal(p.ok,true);assert.match(String(p.fields?.tasting_notes||''),/citrus/i);
+ assert.ok(!p.conflicts?.includes('tasting_notes'));
+});
+test('a former harvested crop and a current caption are not two current corroborating notes',()=>{
+ const p=parse("<p>Historically Tanzania Peaberry had notes of pepper, white wine, and black currant.</p><p>Tanzania Peaberry offers notes of pepper, white wine, and black currant.</p>"+labeled);
+ assert.equal(p.ok,true);assert.match(String(p.fields?.tasting_notes||''),/citrus/i);
+ assert.ok(!p.conflicts?.includes('tasting_notes'));
+});
