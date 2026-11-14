@@ -14214,23 +14214,34 @@
     {
       "id": "DIC-Q-508-catalog-refresh-cooldown-copy-15s",
       "issue": 508,
-      "pr": null,
+      "pr": 2662,
       "title": "Correct cached coffee current-page refresh guidance to Locked member 15s and Admin exemption",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "359c42382b53733cab15f4a90294a924497773f3",
       "scope_paths": [
         "site/cloud/coffee-url-autofill.js"
       ],
       "owner_source": "Issue #508 N508-091 audit and owner-Locked COFFEE-URL-ADMIN-UNLIMITED-MEMBER-15S-20261112 (#2386); immutable PREFLIGHT development 87da54b3af6c5dc6a0fbf27bfdbaaf763819fbe5 blob 2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "tests": [
         "Three new focused Node22 tests assert compact and diagnostic cached-coffee copy, no stale 30s text, fresh source isolation and existing 15s error; not yet run at commit creation.",
-        "Required source-bound Node22/lint/build, cloud/browser/offline, security, isolated SQL applicability and approval/queue CI remain PENDING; SKIPPED is never PASS."
+        "Required source-bound Node22/lint/build, cloud/browser/offline, security, isolated SQL applicability and approval/queue CI remain PENDING; SKIPPED is never PASS.",
+        "First 0ad1284825509b6b26f7994ac3db4095ddbc40d3 Node22 run 43587036258 FAILED one stale test copy assertion (4798 pass, 1 fail, 6 skip): recorded failure never recast PASS. Repaired tests with same-commit scoped preflight, no weakened assertions.",
+        "Corrected source-bound PR-head 0faf16b214444635f68bc48ad6b5f1e1445a5ef2: Node22/lint/build 43587612443 SUCCESS (4805 total, 4799 PASS/0 FAIL/6 intentionally SKIP); cloud/mobile/browser 43587612485 SUCCESS; isolated SQL 43587612401 SUCCESS; approval/continuity 43587612448 SUCCESS; source security 43587612518 SUCCESS. Original603 43587612451 SKIPPED, NOT PASS.",
+        "Nonforce squash merged PR #2662 at 359c42382b53733cab15f4a90294a924497773f3 with EXACT PR-head source Git blobs UI a183d0b5156c301f46743fc075a9068f2716a414, new targeted test 4d0414c3df357c1d91a77d3a814961e4d90b392a, corrected legacy test 0810e3d8059d8e5ccc9c6fbe8d6279380bc897e9, journal d0c4d331eea110cac71fc6030a4a71e635faf520, queue b7f448b47f36f8c97aca406e9e3e4a22ca476fdc.",
+        "Exact merged push at 359c42382b53733cab15f4a90294a924497773f3: Node22/lint/build 43587854316 SUCCESS, cloud/mobile/browser 43587854295 SUCCESS, approval 43587854290 SUCCESS; SQL/security PR-head SUCCESS reused for byte-identical source; no production signed-in/write/deploy test."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact-source PR-head CI, independent test result inspection, nonforce merge, matching merged-source readback, and separate READY certification still pending"
+      "ci_runs": [
+        43587612443,
+        43587612485,
+        43587612401,
+        43587612448,
+        43587612518,
+        43587854316,
+        43587854295,
+        43587854290
       ],
-      "notes": "UI guidance only; no changes to runtime quota, Auth, per-IP anti-abuse, server, roaster lookup, catalog storage, Pending/Verified privacy, offline, shots or member data. Development-only; no Netlify deploy/settings or publication grant.",
+      "blockers": [],
+      "notes": "UI guidance only; no changes to runtime quota, Auth, per-IP anti-abuse, server, roaster lookup, catalog storage, Pending/Verified privacy, offline, shots or member data. Development-only; no Netlify deploy/settings or publication grant.\nN508-091: DEVELOPMENT MERGED, narrowly source-verified READY for a future explicit owner-authorized isolated release, not deployed. This is only text guidance on cached approved_catalog preview; does not alter actual per-user or IP quota, Auth/SSRF, public/private release identity, any offline/shot logic. Preserve #455 READY and unfinished #33 baseline. No Netlify/provider production changes.",
       "production_deployed": false
     }
   ],
