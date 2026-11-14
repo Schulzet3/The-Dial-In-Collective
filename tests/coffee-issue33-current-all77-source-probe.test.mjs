@@ -80,7 +80,7 @@ test('all 77 saved real current official source parses render in actual Add Coff
   assert.match(html,/coffee-url-preview/);
   assert.match(html,/Autofill Results/);
   assert.doesNotMatch(html,/Unverified Page|Official Source Preview|Approved Catalog/);
-  if(r.conflicts?.length){assert.match(html,/Review conflicting details/);flagged++;}
+  if(r.conflicts?.length){assert.match(html,/Tap the correct option to autofill, or type a value in the field/);flagged++;}
  }
  assert.equal(flagged,15);
 });

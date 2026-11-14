@@ -19,7 +19,7 @@ test('two genuinely contradictory labeled notes lists remain withheld and show b
  assert.ok(coffee.conflicts?.includes('tasting_notes'),JSON.stringify(coffee));
  const group=coffeeConflictReviewOptions(coffee).find(g=>g.field==='tasting_notes');
  assert.deepEqual(new Set(group.options.map(x=>x.value)),new Set(['Plum, Lime','Orange, Chocolate']));
- assert.match(coffeeUrlPreviewMarkup(coffee),/Review conflicting details/);
+ assert.match(coffeeUrlPreviewMarkup(coffee),/Tap the correct option to autofill, or type a value in the field/);
 });
 test('unitless selected coffee elevation is numerically meters, and app labels assumed unit rather than inventing ft',()=>{
  const p=parseCoffeeElevation('Elevation: 1.300-1.600');
@@ -50,7 +50,7 @@ test('selected Shopify conflicting roast category tags are withheld and both dis
  const group=coffeeConflictReviewOptions(coffee).find(x=>x.field==='roast_level');
  assert.ok(group.options.some(x=>/light/i.test(x.value)));
  assert.ok(group.options.some(x=>/medium/i.test(x.value)));
- assert.match(coffeeUrlPreviewMarkup(coffee),/Nothing was selected automatically/);
+ assert.match(coffeeUrlPreviewMarkup(coffee),/Tap the correct option to autofill, or type a value in the field/);
 });
 test('untrusted options are escaped, bounded and never silently applied to user fields',()=>{
  const evil='<img src=x onerror=alert(1)>';
