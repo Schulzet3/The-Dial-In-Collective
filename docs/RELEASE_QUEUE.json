@@ -14525,23 +14525,30 @@
     {
       "id": "DIC-Q-508-netlify-comments-current-release-20261114",
       "issue": 508,
-      "pr": null,
+      "pr": 2752,
       "title": "Correct obsolete production branch, test preflight and first-invitation comments in netlify.toml",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "9ecd9e2e0a2d14c215a9f5e30d8a1a59431eb199",
       "scope_paths": [
         "netlify.toml"
       ],
       "tests": [
-        "Source-diff semantic check: every noncomment nonblank TOML line is byte-identical, including the one-use build ignore adapter and Node22 build variables; comment-only source remediation.",
-        "Applicable exact PR-head and final merged-source GitHub Node22/lint/build, browser/cloud/offline, approval, source-security and isolated SQL (where applicable) pending; SKIPPED and PENDING are never PASS."
+        "N508-090 source-level immutable diff netlify.toml old a8bb6cd41d2e2c939da8d369ee510eb9f2b4cc56 -> merged new 6e89e08f2aee9e06918b6ec7cf7cbe3c20e9ca8a: only comment lines; every active TOML directive byte-identical incl one-use Netlify adapter, build:cloud, publish dist, Node22.",
+        "Exact PR-head 8d5d349cc4d3357273c9da515f43193260c54f7b five required status checks SUCCESS: approval 43634415427; validate Node22/lint 43634415386; cloud-tests and mobile-browser-qa 43634415452; sql 43634415380. App build step SKIPPED/NOT_APPLICABLE for non-UI comment-only edit, not PASS. No production test.",
+        "Nonforce one-parent merged source 9ecd9e2e0a2d14c215a9f5e30d8a1a59431eb199 [skip netlify] has exactly three scoped source/doc files; audited netlify.toml Git blob identical to PR-head. Referenced tests/site-integrity.test.mjs source Git blob daa0930810bf29bbc4c22307f00bb090b5a3e7b2 identical on PR-head and merge. Exact merged push approval 43634731419 SUCCESS and Node22 validate/lint 43634731428 SUCCESS; two R171 checks unrelated but successful.",
+        "All prior 361 queue entries, published-base and history preserved by exact JSON equality; scoped READY has no active behavior change or known file overlap, publication still requires fresh owner Publish and frozen candidate isolation."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "New deployable-file documentation-only scope not yet integrated or verified by exact-source CI; must remain TESTING until source-readback and all applicable checks pass."
+      "ci_runs": [
+        43634415427,
+        43634415386,
+        43634415452,
+        43634415380,
+        43634731419,
+        43634731428
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/508",
-      "notes": "N508-090; change comments only, not deployment rules. Restore clarity about dev vs release, exact-source CI vs preflight, historic invited-member tests. No automatic staging/publish, provider writes or credit checks. [skip netlify]"
+      "notes": "N508-090 source/documentation comment correction integrated without changing runtime. Exact PR head five-job SUCCESS, merged source blob parity and merged push tests SUCCESS; READY only, not deployed. No Netlify build/deploy, secret/env/settings change, member/SQL or costs. Owner Publish exclusively controls future production."
     }
   ],
   "history": [
