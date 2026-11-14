@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "round": "R191",
+  "date_utc": "2026-11-14",
+  "status": "SELECTED_275_276_VERIFIED_ONLY_NOT_ALL603",
+  "preflight": {
+    "source_development_sha": "1d226220a79111b93d009398f453f1c8df2d3945",
+    "docs_development_sha": "4c7bde4d3325bcee31ab0a25ade050d065a1735e",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "content_identical_to_git_blob": true
+  },
+  "original603": {
+    "selected_numbers": [
+      275,
+      276
+    ],
+    "original_csv_git_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "original_csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "original_603_coffees": 603,
+    "original_roasters": 201,
+    "original_captures": 1197,
+    "immutable_corpus_modified": false,
+    "all603_individually_semantically_certified": false
+  },
+  "source_artifact": {
+    "workflow_run": 43565132307,
+    "artifact_id": 14102390299,
+    "artifact_zip_sha256": "687caf8376e3c8632b7b364c58e90d8c65895e0b60b7ce1df97f0d20cd073317",
+    "focused_source_evidence_sha256": "0cb543c573d30903fbaff507f4ee0dc9bc55532fbf02d49f144f0eda472ee458",
+    "independent_afterproof_sha256": "8bc572bbbe7e347d7e1787978165e028aa52963dc025125b44e00fa4f11a40ab",
+    "downloaded_and_independently_verified": true
+  },
+  "selected": [
+    {
+      "number": 275,
+      "name": "Guatemala Antigua Los Volcanes",
+      "official_url": "https://readysetcoffee.com/products/guatemala-antigua-los-volcanes-copy",
+      "selected_h1": "Guatemala Antigua Los Volcanes",
+      "raw_html_bytes": 331053,
+      "raw_html_sha256": "92f7c3ee821b2265192e81bf14dd945e66e631bd8339b4b20eab4d414e5833f1",
+      "fields": {
+        "roaster": "Ready Set!",
+        "origin": "Ciudad Vieja, Guatemala",
+        "process": "Washed",
+        "roast_level": "Medium",
+        "elevation_m": "1524 m",
+        "variety": "Bourbon | Typica",
+        "tasting_notes": "Black Currant, Toffee, Toasted Almond",
+        "producer": null
+      },
+      "semantic_adjudication": "Selected seller mentions only unspecified farms/small producers from Ciudad Vieja; not a named verified grower. The exact seller prose survives as Product text 4 in Source Review. Site promo Volcanes is not a producer."
+    },
+    {
+      "number": 276,
+      "name": "Honduras Manos de Mujer, Organic, Fair Trade",
+      "official_url": "https://readysetcoffee.com/products/honduras-manos-de-mujer-organic-fair-trade",
+      "selected_h1": "Honduras Manos de Mujer, Organic, Fair Trade",
+      "raw_html_bytes": 333947,
+      "raw_html_sha256": "0aa68d16f585ee91d52e08d7f19ac4389595bbe945e802533f39607e12c5127a",
+      "fields": {
+        "roaster": "Ready Set!",
+        "origin": "Marcala, Honduras",
+        "process": "Honey",
+        "roast_level": "Medium",
+        "elevation_m": "1219 m",
+        "variety": "Bourbon | Catuai | Caturra | Typica",
+        "tasting_notes": "Hazelnut, Orange Blossom, Agave",
+        "producer": "Manos de Mujer"
+      },
+      "semantic_adjudication": "Current selected seller credits Manos de Mujer women growers within COMSA; COMSA's 2000/62 farmer founding context is not another lot producer. Honey methodology is educational, not extra selected processing identity."
+    }
+  ],
+  "regression": {
+    "source_pr": 2597,
+    "pr_tested_head_sha": "49efeb9d852611661964c712ca62cd9678a398c0",
+    "nonforce_merged_sha": "4c7bde4d3325bcee31ab0a25ade050d065a1735e",
+    "readback_changed_blobs": 5,
+    "focused_tests_pass": 8,
+    "focused_tests_fail": 0,
+    "pr_node_tests_total": 4751,
+    "pr_node_pass": 4745,
+    "pr_node_skipped": 6,
+    "pr_node_failed": 0,
+    "merged_node_tests_total": 4751,
+    "merged_node_pass": 4745,
+    "merged_node_skipped": 6,
+    "merged_node_failed": 0,
+    "lint_pass": true
+  },
+  "pr_head_ci": {
+    "official": 43564764502,
+    "node_lint": 43564764551,
+    "cloud_mobile": 43564764622,
+    "sql": 43564764625,
+    "approval": 43564764390,
+    "python": 43564764433,
+    "all_required_completed_success": true
+  },
+  "merged_ci": {
+    "official": 43565132307,
+    "node_lint": 43565132362,
+    "cloud_mobile": 43565132210,
+    "approval": 43565132296,
+    "python": 43565132358,
+    "all_relevant_completed_success": true
+  },
+  "other_current_scope": {
+    "original_frozen_603_workflow": "SKIPPED_NOT_PASS",
+    "original603_full_manual_semantic_acceptance": "UNVERIFIED",
+    "preexisting_source_errors": [
+      {
+        "workflow": 43565132262,
+        "cases": [
+          566,
+          567
+        ],
+        "reason": "unchanged official selected source unavailable/invalid"
+      },
+      {
+        "workflow": 43565132267,
+        "cases": [
+          594
+        ],
+        "reason": "unchanged official selected source unavailable/redirect"
+      }
+    ],
+    "issue_state": "OPEN",
+    "queue_promotion": false,
+    "netlify_publication": false,
+    "production_sql_edge_auth_provider_member_writes": 0
+  },
+  "next": "Advance next unresolved original603 exact selected official product (#277 unless a higher-severity case takes precedence); adjudicate inaccessible sources separately, preserve frozen CSV/oracle/scorer and concurrent #267/#96 ownership."
+}
