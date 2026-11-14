@@ -13,6 +13,8 @@
 
 - [Issue #1591: first-shot starting-style guidance until shot is saved](issue-1591.md) — owner-Nov-8 Locked supersession; original READY notes are historical; current release queue records this feature **DEPLOYED** (verified November 13)
 
+- [Issue #33 R188 original603 #272 Quills producer initiative role READY development only](ops-issue33-r188-272-20261113.md) — exact merged current source and parser verified; full603 OPEN
+
 After the mandatory [PREFLIGHT](../ai/PREFLIGHT.md), the central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md) remains the recovery checkpoint. For each code/test/CI commit, update either that central checkpoint or one of the named workstream journals in the same commit. Preserve tested SHA, affected paths, decision source, failures, privacy/release constraints and next action. Reconcile issue, CURRENT_STATUS, release queue and central checkpoint at READY and handoff. Never infer production publication. New code/test/CI changes require a NEW standalone `DIC_PREFLIGHT_VERIFIED development_sha=<live-40-hex> preflight_blob_sha=<blob-40-hex>` line in their SAME-COMMIT journal, checked against actual Git objects by existing approval continuity CI.
 
 - [November 13 issue/PR status and live-doc navigation cleanup](ops-issue504-current-navigation-20261113.md) — exact preflight; 2 completed issues closed, 2 deployed-with-unverified-delivery issues clarified, six historical PRs marked; authoritative navigation links repaired without erasing older evidence
