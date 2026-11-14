@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "record_type": "APPEND_ONLY_CORRECTIVE_ERRATUM_NO_COVERAGE_CREDIT",
+  "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+  "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+  "source_path": "scripts/backups/assert-recovery-inventory.sh",
+  "source_blob_sha": "a6ecb5a57c36ebf71d71c484e673eb75924ecc23",
+  "source_line_1_based": 7,
+  "exact_literal": "  *) echo '::error::Unknown recovery inventory comparison' >&2; exit 2 ;;",
+  "original_receipt_path": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-P73-P75-20261106-0255.json",
+  "original_receipt_blob_sha": "9e4ec0edc5b185562d055142718219fe83fa4143",
+  "original_entry_before": {
+    "inspection_classification": "comment",
+    "quality": "Non-executable documentation intent, no passing-test inference",
+    "behavior": "Rejects unknown recovery mode to stderr with exit2."
+  },
+  "corrected_fields": {
+    "inspection_classification": "executable_posix_shell_case_default_arm",
+    "behavior": "Matches every unsupported third-argument comparison mode; emits GitHub Actions error on stderr and exits with status 2 before any diff/cmp, a fail-closed guard.",
+    "quality": "Executable and meaningful input-dispatch validation. An invalid mode cannot silently compare an unintended snapshot. The old comment/non-executable classification was semantically false.",
+    "bug_security_privacy_performance_risk": "Correctly rejects unsupported modes without exposing private inventory content; stderr message contains only fixed text. If caller supplies wrong mode, job fails rather than returning a false backup integrity pass.",
+    "obsolete_or_dead_status": "Live counterpart is byte-identical at checked development commit; no proof of dead code or license to delete.",
+    "duplicate_or_redundant_logic": "Distinct case default branch, not redundant with row-counts or row-fingerprints choices.",
+    "exact_current_counterpart": {
+      "development_sha": "efd899d4f1ae0954f2af69a87a95f90c56bdb277",
+      "path": "scripts/backups/assert-recovery-inventory.sh",
+      "blob_sha": "a6ecb5a57c36ebf71d71c484e673eb75924ecc23",
+      "line_1_based": 7,
+      "byte_exact": true
+    },
+    "testability": "For disposable empty temp files, invoke script with unrecognized third argument and assert exit code 2 + fixed error text; compare recognized mode equality/difference cases. NOT RUN in this documentation-only correction.",
+    "fix_removal_improvement": "Correct source review evidence only; no application/script change is needed or authorized from this classification mistake.",
+    "locked_fit": "Preserve encrypted recovery integrity, private inventory confidentiality and backup fail-closed protections.",
+    "reviewer": "Direct AI numbered literal reinspection, cross-checked against original receipt; not independent human audit"
+  },
+  "coverage_credit_new_lines": 0,
+  "prior_credited_lines_preserved": 1,
+  "independent_trigger": "Issue #504 comment 6874591149, G1-247 receipt; confirmed same source literal but contradictory classification",
+  "tests": {
+    "source_and_live_sha": "EXACT_MATCH",
+    "original_receipt_field_mismatch": "REPRODUCED_FROM_GIT_OBJECTS",
+    "shell_dynamic_execution": "NOT_RUN",
+    "app_node_browser_sql_auth_provider": "NOT_RUN_DOCS_ONLY"
+  },
+  "no_production_write": true
+}
