@@ -1,0 +1,1064 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "D2-043",
+  "date_utc": "2026-11-14",
+  "scope": "post-pin test source direct AI semantic review",
+  "preflight": {
+    "development_sha": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+    "blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "Git_blob_verified": true
+  },
+  "source": {
+    "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "source_commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+    "path": "tests/netlify-digest-deploy.test.mjs",
+    "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+    "prior_Nov5_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+    "physical_line_count": 36,
+    "verified_absent_at_pin": true,
+    "unchanged_since_Nov5": true
+  },
+  "method": "Exact Git blob fetch and direct physical line-by-line AI semantic interpretation with 9 owner dimensions. No human signoff, no regex/AST-only certification.",
+  "per_line": [
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 1,
+      "source_text": "import test from 'node:test';",
+      "classification": "import",
+      "behavior": "Imports Node test runner to execute isolated Promise-capable tests.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "Mock-only tests may PASS without provider authorization.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 1,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 2,
+      "source_text": "import assert from 'node:assert/strict';",
+      "classification": "import",
+      "behavior": "Imports strict assertion helpers.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "Assertions check synthetic responses, not live provider state.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 2,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 3,
+      "source_text": "import {buildDigestManifest,deployImmutableDigest} from '../scripts/release/netlify-digest-deploy.mjs';",
+      "classification": "import",
+      "behavior": "Imports exact manifest builder and digest deploy adapter from release helper.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "Latest Locked #417 Git-connected sole publisher supersedes direct API deployment route; test import alone is not reachability.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 3,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 4,
+      "source_text": "const files={'/index.html':Buffer.from('<html></html>'),'/css/main.css':Buffer.from('body{}')};",
+      "classification": "fixture",
+      "behavior": "Defines static Buffer bytes for index.html and CSS file.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "Minimal fixtures cannot guarantee production bundle correctness.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 4,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 5,
+      "source_text": "const functionZip=Buffer.concat([Buffer.from('PK'),Buffer.alloc(120)]);",
+      "classification": "fixture",
+      "behavior": "Constructs dummy ZIP-like PK prefix plus padding, not a valid ZIP.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "Acceptable synthetic bytes for adapter shape test but NOT packaging/ZIP verification.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 5,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 6,
+      "source_text": "test('manifest has SHA1 static files and SHA256 named function',()=>{",
+      "classification": "test",
+      "behavior": "Starts manifest SHA-1 and function SHA-256 naming/length case.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "Checks hash schema, not digest equality to independent artifact signature.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 6,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 7,
+      "source_text": " const {manifest,functionHash}=buildDigestManifest({files,functionZip});",
+      "classification": "call",
+      "behavior": "Invokes buildDigestManifest on fixture bytes.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "Pure local hashing no network.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 7,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 8,
+      "source_text": " assert.equal(manifest.files['/index.html'].length,40);",
+      "classification": "assertion",
+      "behavior": "Requires index.html SHA-1 hex length 40.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "Length alone insufficient to verify expected hash content.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 8,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 9,
+      "source_text": " assert.equal(manifest.functions['coffee-url-preview'],functionHash);",
+      "classification": "assertion",
+      "behavior": "Requires manifest coffee-url-preview function entry equal computed functionHash.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "Checks correct mapping, not authenticated function identity.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 9,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 10,
+      "source_text": " assert.equal(functionHash.length,64);",
+      "classification": "assertion",
+      "behavior": "Requires functionHash 64-character SHA-256 hex length.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "Length does not prove real ZIP or source attestation.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 10,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 11,
+      "source_text": " assert.throws(()=>buildDigestManifest({files:{'/../bad':Buffer.from('a'),...files},functionZip}));",
+      "classification": "assertion",
+      "behavior": "Rejects unsafe /../bad path injected ahead of valid static entries.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "Tests one traversal path; broader parser guards exist in implementation.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 11,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 12,
+      "source_text": "});",
+      "classification": "closure",
+      "behavior": "Ends first isolated manifest test.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "No provider or data changes.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 12,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 13,
+      "source_text": "test('provider digest upload preserves function and static bytes without rebuilding',async()=>{",
+      "classification": "test",
+      "behavior": "Starts mocked provider digest upload test.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "Test intentionally supplies all grant flags; no real owner consent conferred.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 13,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 14,
+      "source_text": " const {manifest,functionHash}=buildDigestManifest({files,functionZip});",
+      "classification": "call",
+      "behavior": "Computes fixture manifest and function hash for expected mock receipt.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "Synthetic SHA values tied to in-memory bytes only.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 14,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 15,
+      "source_text": " const calls=[];const receipt=await deployImmutableDigest({token:'fake',files,functionZip,",
+      "classification": "setup",
+      "behavior": "Defines call recorder and awaits deployImmutableDigest with fake token.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "No real provider mutation because custom fetcher fully injected below.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 15,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 16,
+      "source_text": "  ownerGrantVerified:true,oneUseClaimConsumed:true,allowProductionPublication:true,",
+      "classification": "setup",
+      "behavior": "Supplies booleans ownerGrantVerified, oneUseClaimConsumed and allowProductionPublication = true.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "In tests these are synthetic bypass flags; Locked production release requires actual external one-use Git controller.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 16,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 17,
+      "source_text": "  fetcher:async(url,options)=>{calls.push({url,options});return {ok:true,json:async()=>({",
+      "classification": "mock",
+      "behavior": "Injects async fetcher collecting URLs/options and returning synthetic ok/json response.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "Mock controls entire provider, does not prove Netlify API schema, network or authorization.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 17,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 18,
+      "source_text": "   id:'deploy-test',site_id:'153277f2-e19e-4862-b9a6-f2e18ccde271',",
+      "classification": "fixture",
+      "behavior": "Returns synthetic deployment and static site IDs.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "No live site ID readback, test is not deployment.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 18,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 19,
+      "source_text": "   required:[manifest.files['/index.html']],required_functions:[functionHash]})};}});",
+      "classification": "fixture",
+      "behavior": "Returns required static/function hashes matching in-memory manifest.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "Covers expected provider-requested hashes; not unexpected extras (tested separately).",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 19,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 20,
+      "source_text": " assert.equal(receipt.status,'PROVIDER_DEPLOY_REQUESTED_NOT_VERIFIED');",
+      "classification": "assertion",
+      "behavior": "Requires explicit status PROVIDER_DEPLOY_REQUESTED_NOT_VERIFIED.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "Correctly avoids claiming deployed or READY from POST/PUT requests.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 20,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 21,
+      "source_text": " assert.equal(calls.length,3);",
+      "classification": "assertion",
+      "behavior": "Requires three mocked fetch calls (create + static + function).",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "Current fixture returns only one static required digest; not a full build.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 21,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 22,
+      "source_text": " assert.equal(calls[0].options.method,'POST');",
+      "classification": "assertion",
+      "behavior": "Requires first mocked request POST.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "Confirms method, not endpoint authenticity.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 22,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 23,
+      "source_text": " assert.equal(calls[1].options.body,files['/index.html']);",
+      "classification": "assertion",
+      "behavior": "Checks second request body is exact index.html Buffer.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "Byte identity for static upload under mock.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 23,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 24,
+      "source_text": " assert.equal(calls[2].options.body,functionZip);",
+      "classification": "assertion",
+      "behavior": "Checks third request body is same functionZip Buffer.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "Byte identity for function ZIP upload; dummy ZIP invalid and not parsed.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 24,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 25,
+      "source_text": " assert.match(calls[2].url,/functions\\/coffee-url-preview\\?runtime=js$/);",
+      "classification": "assertion",
+      "behavior": "Checks last URL ends functions/coffee-url-preview?runtime=js.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "Matches adapter upload naming, not actual provider runtime acceptance.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 25,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 26,
+      "source_text": "});",
+      "classification": "closure",
+      "behavior": "Ends mocked authorized-upload test.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "No network or production side effect.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 26,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 27,
+      "source_text": "test('no authorization causes zero network calls',async()=>{",
+      "classification": "test",
+      "behavior": "Starts authorization denial with zero outgoing network calls.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "Safety guard for absent grant/consumption flags.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 27,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 28,
+      "source_text": " let calls=0;await assert.rejects(deployImmutableDigest({token:'fake',files,functionZip,",
+      "classification": "assertion",
+      "behavior": "Asserts deploy rejects with fake token and static files but no grant flags.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "Reject may be generic; verifies no unauthorized request below.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 28,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 29,
+      "source_text": "  fetcher:async()=>{calls++;throw Error('network');}}));",
+      "classification": "mock",
+      "behavior": "Injected fetcher increments call counter and throws if reached.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "A sentinel ensures no attempted request when permissions absent.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 29,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 30,
+      "source_text": " assert.equal(calls,0);",
+      "classification": "assertion",
+      "behavior": "Requires count 0 for unauthorized path.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "Strong local guard test; does not prove server rejects stolen credentials.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 30,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 31,
+      "source_text": "});",
+      "classification": "closure",
+      "behavior": "Ends unauthorized-network test.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "No provider read/write.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 31,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 32,
+      "source_text": "test('provider unexpected function request fails closed',async()=>{",
+      "classification": "test",
+      "behavior": "Starts unexpected function hash rejection case.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "Tests fail-closed provider response validation.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 32,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 33,
+      "source_text": " await assert.rejects(deployImmutableDigest({token:'fake',files,functionZip,",
+      "classification": "assertion",
+      "behavior": "Asserts deploy rejects bad provider required_functions entry.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "Rejection alone does not test rollback of earlier provider-created deploy.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 33,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 34,
+      "source_text": "  ownerGrantVerified:true,oneUseClaimConsumed:true,allowProductionPublication:true,",
+      "classification": "setup",
+      "behavior": "Supplies synthetic all-true grant flags in negative response test.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "No real owner approval; only local boolean path.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 34,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 35,
+      "source_text": "  fetcher:async()=>({ok:true,json:async()=>({id:'x',site_id:'153277f2-e19e-4862-b9a6-f2e18ccde271',required:[],required_functions:['bad']})})}));",
+      "classification": "mock",
+      "behavior": "Injected provider returns allowed site and unexpected 'bad' function hash.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "Requires adapter to reject before function upload; no real provider interaction.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 35,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    },
+    {
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "original_blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "line": 36,
+      "source_text": "});",
+      "classification": "closure",
+      "behavior": "Ends negative required-function hash test.",
+      "quality": "Exact synthetic Node test line; appropriate risk-specific assertion/fixture at local adapter boundary.",
+      "risk": "No current Netlify state checked.",
+      "dead_or_obsolete": "Test remains in current source, but direct Netlify API publisher is superseded as authorized production path; no safe source deletion justified without caller graph.",
+      "duplication": "Source test cases cover distinct positive hash, mocked upload, denial and unexpected response; no redundant active logic proven.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_source_counterpart": {
+        "path": "tests/netlify-digest-deploy.test.mjs",
+        "commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+        "line": 36,
+        "text_exact": true
+      },
+      "testability": "node --test tests/netlify-digest-deploy.test.mjs scoped local mock test is runnable; NOT_RUN_THIS_DOCS_ONLY_AUDIT. PR-head/merged governance separate.",
+      "fix_opportunity": "Retain bounded guard without changing the owner-approved Git publisher; no reproduced live defect or safe deletion.",
+      "locked_fit": "Explicit later Locked #417/#457 Git-based sole one-use publisher; direct API upload is not owner-authorized and mock cannot replace release/backup/Netlify source proof.",
+      "review_method": "Direct AI original numbered source line reading, not human review."
+    }
+  ],
+  "trace": {
+    "impl_path": "scripts/release/netlify-digest-deploy.mjs",
+    "impl_blob": "3d00ba39bd9c9db8e671367274b57bf57916be90",
+    "known_original_semantic_receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-008.json",
+    "caller_coverage": "NOT_EXHAUSTIVE"
+  },
+  "findings": [
+    {
+      "severity": "TEST_SCOPE_LIMITATION",
+      "status": "TRIAGED",
+      "detail": "Fake function ZIP PK+padding not valid ZIP; injected fetcher proves only adapter's in-memory request behavior, not signed/current Netlify release."
+    },
+    {
+      "severity": "LOCKED_POLICY_OVERLAP",
+      "status": "NO_CURRENT_ACTIVE_DEFECT_REPRODUCED",
+      "detail": "Direct Netlify API publisher adapter present for historical tests but later #417 Git-based sole-release authority controls; no code change or provider call authorized."
+    }
+  ],
+  "tests": {
+    "node22": "NOT_RUN_DOCS_ONLY",
+    "browser_mobile_sql_auth_provider": "NOT_RUN",
+    "governance_PR_head": "PENDING",
+    "governance_merged": "NOT_RUN"
+  },
+  "credit": {
+    "unique_new_postpin_lines": 36,
+    "new_frozen": 0,
+    "new_pinned": 0,
+    "duplicate": 0
+  },
+  "global_completion": false
+}
