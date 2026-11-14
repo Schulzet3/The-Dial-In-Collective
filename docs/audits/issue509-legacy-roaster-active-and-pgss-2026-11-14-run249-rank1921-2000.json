@@ -1,0 +1,896 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 249,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight_development_sha": "67781a9aba587b6894e4fc77c4139113dce9ee88",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "prewrite_development_sha": "db45e07cc5ddc58a2f816958373e08f46a090b00",
+  "observed_at": "2026-11-14 20:49:36.185679+00",
+  "provider_catalog": {
+    "observed_at": "2026-11-14 20:49:36.185679+00",
+    "app_tables": 52,
+    "app_functions": 114,
+    "app_policies": 41,
+    "migrations": 69,
+    "pgss_count": 4923,
+    "stats_reset": "2026-10-09 11:11:31.487298+00",
+    "old_directory_live": 0
+  },
+  "issue2389": "CLOSED_DEPLOYED_2026-11-13",
+  "five_full_live_sql_function_semantic_reviews": [
+    {
+      "signature": "private.dic_canonical_roaster_key(value text)",
+      "definition": "CREATE OR REPLACE FUNCTION private.dic_canonical_roaster_key(value text)\n RETURNS text\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\n with input as (select private.dic_roaster_key(value) as key)\n select coalesce(\n   (select a.canonical_key from private.dic_roaster_name_aliases a\n      join input i on i.key=a.alias_key limit 1),\n   (select key from input)\n );\n$function$\n",
+      "md5": "646cff7cceed7011b1fc3a1b69c4d3f0",
+      "security_definer": true,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "service_execute": false,
+      "complete_chars": 402,
+      "verdict": "LEGACY ACTIVE: canonical alias normalizer used by eight SQL routines; not the retired directory admission gate."
+    },
+    {
+      "signature": "private.dic_coffee_key(value text)",
+      "definition": "CREATE OR REPLACE FUNCTION private.dic_coffee_key(value text)\n RETURNS text\n LANGUAGE sql\n STABLE\n SET search_path TO ''\nAS $function$\n select nullif(regexp_replace(lower(extensions.unaccent(coalesce(value,''))), '[^a-z0-9]', '', 'g'),'');\n$function$\n",
+      "md5": "8f6840ddd7e530e311c096591c01ce15",
+      "security_definer": false,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "service_execute": false,
+      "complete_chars": 251,
+      "verdict": "LEGACY ACTIVE: coffee identity normalizer used by eight SQL routines; ambiguous normalization requires review."
+    },
+    {
+      "signature": "private.dic_roaster_key(value text)",
+      "definition": "CREATE OR REPLACE FUNCTION private.dic_roaster_key(value text)\n RETURNS text\n LANGUAGE sql\n STABLE\n SET search_path TO ''\nAS $function$\n select nullif(regexp_replace(\n  regexp_replace(lower(extensions.unaccent(coalesce(value,''))), '[^a-z0-9]', '', 'g'),\n  '(coffeeroasters|coffeeroaster|coffeeroastery|coffeecompany|coffeeco|roasters|roaster|roastery|coffee)$',\n  ''\n ), '');\n$function$\n",
+      "md5": "e553ae6c1cf99c3784f5d14a4f05d355",
+      "security_definer": false,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "service_execute": false,
+      "complete_chars": 388,
+      "verdict": "LEGACY ACTIVE: suffix-aware roaster matching called by canonical helper; not removable merely by name."
+    },
+    {
+      "signature": "private.dic_source_key(value text)",
+      "definition": "CREATE OR REPLACE FUNCTION private.dic_source_key(value text)\n RETURNS text\n LANGUAGE plpgsql\n STABLE\n SET search_path TO ''\nAS $function$\ndeclare raw text; path text; params text; kept text:=''; part text;\nbegin\n raw:=btrim(coalesce(value,''));\n if raw !~* '^https?://[^/?#[:space:]]+' or length(raw)>4000 then return null;end if;\n raw:=split_part(raw,'#',1);\n raw:=regexp_replace(raw,'^https?://(www\\.)?','','i');\n path:=split_part(raw,'?',1);\n if path='' then return null;end if;\n params:=case when strpos(raw,'?')>0 then substring(raw from strpos(raw,'?')+1) else '' end;\n if params<>'' then\n  foreach part in array string_to_array(params,'&') loop\n   if split_part(lower(part),'=',1)!~'^utm_' and\n     lower(split_part(part,'=',1)) not in ('gclid','fbclid','msclkid','srsltid')\n       and part<>'' then\n    kept:=concat_ws('&',nullif(kept,''),part);\n   end if;\n  end loop;\n end if;\n return lower(rtrim(path,'/'))||case when kept<>'' then '?'||kept else '' end;\nend $function$\n",
+      "md5": "07e0ef286246fdae29b9151018296f79",
+      "security_definer": false,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "service_execute": false,
+      "complete_chars": 981,
+      "verdict": "LEGACY ACTIVE: source URL evidence normalization used by two matching/promotion routines; not a transport SSRF sanitizer."
+    },
+    {
+      "signature": "private.dic_verified_roaster_page_proof(roaster_name text)",
+      "definition": "CREATE OR REPLACE FUNCTION private.dic_verified_roaster_page_proof(roaster_name text)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare host_count integer; official_host text; canonical_name text;\nbegin\n with official_pages as (\n  select distinct c.roaster as source_roaster,\n   lower(regexp_replace(split_part(s.source_url,'/',3),'^www\\.','','i')) as source_host\n  from public.coffees c join public.coffee_sources s on s.coffee_id=c.id\n  where c.verification_state='verified' and c.merged_into_id is null\n   and s.source_kind='roaster_page' and s.checked_at>=now()-interval '120 days'\n   and s.source_url ~* '^https://(www\\.)?[a-z0-9-]+(\\.[a-z0-9-]+)+(/|$)'\n   and private.dic_canonical_roaster_key(c.roaster)=private.dic_canonical_roaster_key(roaster_name)\n )\n select count(distinct source_host),min(source_host),min(source_roaster)\n into host_count,official_host,canonical_name from official_pages;\n -- Conflicting verified product source domains must be reviewed, not guessed.\n if host_count>1 then return null; end if;\n if host_count=1 and official_host is not null then\n  if exists(select 1 from private.dic_official_source_attestations a\n    where a.canonical_key=private.dic_canonical_roaster_key(roaster_name)\n      and a.official_domain<>official_host) then return null; end if;\n  return jsonb_build_object('official_domain',official_host,'canonical_name',canonical_name);\n end if;\n -- Preserve prior independently verified official BRAND evidence for the\n -- original source worker bootstrap. This NEVER gates a URL preview.\n select a.canonical_name,a.official_domain into canonical_name,official_host\n from private.dic_official_source_attestations a\n where a.canonical_key=private.dic_canonical_roaster_key(roaster_name);\n if official_host is null then return null; end if;\n return jsonb_build_object('official_domain',official_host,'canonical_name',canonical_name);\nend $function$\n",
+      "md5": "7ce32408a61728294ad667a9c985f5da",
+      "security_definer": true,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "service_execute": true,
+      "complete_chars": 1947,
+      "verdict": "LEGACY ACTIVE: independent official-source attestation in promotion/source checks; not universal preview admission. SECURITY DEFINER empty search_path, service_role EXECUTE only."
+    }
+  ],
+  "complete_sql_source_chars": 3969,
+  "current_sql_callers": [
+    {
+      "target": "dic_canonical_roaster_key",
+      "textual_routine_callers": [
+        "private.dic_admin_coffee_candidates",
+        "private.dic_admin_edit_record",
+        "private.dic_admin_review_candidates",
+        "private.dic_admin_review_coffee",
+        "private.dic_confirm_coffee_existing",
+        "private.dic_find_coffee_matches",
+        "private.dic_promote_pending_coffee",
+        "private.dic_verified_roaster_page_proof"
+      ],
+      "caller_count": 8
+    },
+    {
+      "target": "dic_coffee_key",
+      "textual_routine_callers": [
+        "private.dic_admin_coffee_candidates",
+        "private.dic_admin_edit_record",
+        "private.dic_admin_review_candidates",
+        "private.dic_admin_review_coffee",
+        "private.dic_confirm_coffee_existing",
+        "private.dic_find_coffee_matches",
+        "private.dic_link_pending_coffee",
+        "private.dic_promote_pending_coffee"
+      ],
+      "caller_count": 8
+    },
+    {
+      "target": "dic_roaster_key",
+      "textual_routine_callers": [
+        "private.dic_canonical_roaster_key"
+      ],
+      "caller_count": 1
+    },
+    {
+      "target": "dic_source_key",
+      "textual_routine_callers": [
+        "private.dic_find_coffee_matches",
+        "private.dic_promote_pending_coffee"
+      ],
+      "caller_count": 2
+    },
+    {
+      "target": "dic_verified_roaster_page_proof",
+      "textual_routine_callers": [
+        "private.dic_promote_pending_coffee",
+        "public.dic_source_check_target"
+      ],
+      "caller_count": 2
+    }
+  ],
+  "classifications": "LEGACY ACTIVE; old curated directory tables absent; no evidence these five helpers can safely be retired",
+  "numeric_fingerprints_only": true,
+  "numeric_rank_range": [
+    1921,
+    2000
+  ],
+  "numeric_rows": [
+    {
+      "rank": 1921,
+      "queryid": "-8726187087271324192",
+      "calls": 1,
+      "total_ms": "4.693",
+      "mean_ms": "4.693",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1922,
+      "queryid": "-5800741036025814698",
+      "calls": 1,
+      "total_ms": "4.690",
+      "mean_ms": "4.690",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1923,
+      "queryid": "8388356851214736482",
+      "calls": 1,
+      "total_ms": "4.684",
+      "mean_ms": "4.684",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1924,
+      "queryid": "7273068407522128262",
+      "calls": 1,
+      "total_ms": "4.672",
+      "mean_ms": "4.672",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1925,
+      "queryid": "229329344249380288",
+      "calls": 2,
+      "total_ms": "4.670",
+      "mean_ms": "2.335",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1926,
+      "queryid": "2511847854314224358",
+      "calls": 2,
+      "total_ms": "4.664",
+      "mean_ms": "2.332",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1927,
+      "queryid": "7928737592879968538",
+      "calls": 1,
+      "total_ms": "4.663",
+      "mean_ms": "4.663",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1928,
+      "queryid": "-8129806222850018416",
+      "calls": 2,
+      "total_ms": "4.652",
+      "mean_ms": "2.326",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1929,
+      "queryid": "-6284151382400289441",
+      "calls": 1,
+      "total_ms": "4.630",
+      "mean_ms": "4.630",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1930,
+      "queryid": "180997034305817415",
+      "calls": 1,
+      "total_ms": "4.627",
+      "mean_ms": "4.627",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1931,
+      "queryid": "-1150375573324482981",
+      "calls": 2,
+      "total_ms": "4.624",
+      "mean_ms": "2.312",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1932,
+      "queryid": "6397736210709781322",
+      "calls": 1,
+      "total_ms": "4.623",
+      "mean_ms": "4.623",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1933,
+      "queryid": "-1932653805087949861",
+      "calls": 3,
+      "total_ms": "4.620",
+      "mean_ms": "1.540",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1934,
+      "queryid": "2484316566296529017",
+      "calls": 1,
+      "total_ms": "4.617",
+      "mean_ms": "4.617",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1935,
+      "queryid": "-4235171359650618709",
+      "calls": 1,
+      "total_ms": "4.597",
+      "mean_ms": "4.597",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1936,
+      "queryid": "7081449925876075934",
+      "calls": 1,
+      "total_ms": "4.590",
+      "mean_ms": "4.590",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1937,
+      "queryid": "1127804939961609971",
+      "calls": 3,
+      "total_ms": "4.584",
+      "mean_ms": "1.528",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1938,
+      "queryid": "-7862413198739157810",
+      "calls": 1,
+      "total_ms": "4.576",
+      "mean_ms": "4.576",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1939,
+      "queryid": "5169512999822757475",
+      "calls": 1,
+      "total_ms": "4.569",
+      "mean_ms": "4.569",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1940,
+      "queryid": "8514206364246513661",
+      "calls": 2,
+      "total_ms": "4.567",
+      "mean_ms": "2.284",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1941,
+      "queryid": "-6417957325683296328",
+      "calls": 1,
+      "total_ms": "4.566",
+      "mean_ms": "4.566",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1942,
+      "queryid": "6206779896822053534",
+      "calls": 1,
+      "total_ms": "4.556",
+      "mean_ms": "4.556",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1943,
+      "queryid": "-4452305253959603082",
+      "calls": 3,
+      "total_ms": "4.546",
+      "mean_ms": "1.515",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1944,
+      "queryid": "-2687118267232499837",
+      "calls": 1,
+      "total_ms": "4.544",
+      "mean_ms": "4.544",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1945,
+      "queryid": "-1591233073549298449",
+      "calls": 1,
+      "total_ms": "4.543",
+      "mean_ms": "4.543",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1946,
+      "queryid": "-2486721644678344346",
+      "calls": 1,
+      "total_ms": "4.539",
+      "mean_ms": "4.539",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1947,
+      "queryid": "2090702289554338045",
+      "calls": 3,
+      "total_ms": "4.537",
+      "mean_ms": "1.512",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1948,
+      "queryid": "6739131088948532855",
+      "calls": 1,
+      "total_ms": "4.532",
+      "mean_ms": "4.532",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1949,
+      "queryid": "8551336116375246558",
+      "calls": 1,
+      "total_ms": "4.529",
+      "mean_ms": "4.529",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1950,
+      "queryid": "-2473857306517744527",
+      "calls": 1,
+      "total_ms": "4.527",
+      "mean_ms": "4.527",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1951,
+      "queryid": "2959623090233174991",
+      "calls": 1,
+      "total_ms": "4.523",
+      "mean_ms": "4.523",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1952,
+      "queryid": "-1852611352101305772",
+      "calls": 2,
+      "total_ms": "4.521",
+      "mean_ms": "2.260",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1953,
+      "queryid": "8722029302617638280",
+      "calls": 1,
+      "total_ms": "4.516",
+      "mean_ms": "4.516",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1954,
+      "queryid": "6420136886339592656",
+      "calls": 1,
+      "total_ms": "4.508",
+      "mean_ms": "4.508",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1955,
+      "queryid": "-7171653060607239531",
+      "calls": 1,
+      "total_ms": "4.497",
+      "mean_ms": "4.497",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1956,
+      "queryid": "-3077515186062057991",
+      "calls": 1,
+      "total_ms": "4.491",
+      "mean_ms": "4.491",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1957,
+      "queryid": "-4786830009532904531",
+      "calls": 1,
+      "total_ms": "4.487",
+      "mean_ms": "4.487",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1958,
+      "queryid": "8787304917695192470",
+      "calls": 1,
+      "total_ms": "4.478",
+      "mean_ms": "4.478",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1959,
+      "queryid": "1022121236981832072",
+      "calls": 1,
+      "total_ms": "4.474",
+      "mean_ms": "4.474",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1960,
+      "queryid": "-1306223122272071385",
+      "calls": 1,
+      "total_ms": "4.463",
+      "mean_ms": "4.463",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1961,
+      "queryid": "7014524169461975755",
+      "calls": 1,
+      "total_ms": "4.462",
+      "mean_ms": "4.462",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1962,
+      "queryid": "1188677018850009785",
+      "calls": 1,
+      "total_ms": "4.448",
+      "mean_ms": "4.448",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1963,
+      "queryid": "5443692322157678837",
+      "calls": 1,
+      "total_ms": "4.442",
+      "mean_ms": "4.442",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1964,
+      "queryid": "6986412128595907172",
+      "calls": 1,
+      "total_ms": "4.437",
+      "mean_ms": "4.437",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1965,
+      "queryid": "-4514796800258874136",
+      "calls": 30,
+      "total_ms": "4.432",
+      "mean_ms": "0.148",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1966,
+      "queryid": "-8642563771448613190",
+      "calls": 1,
+      "total_ms": "4.422",
+      "mean_ms": "4.422",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1967,
+      "queryid": "-3822835074505137667",
+      "calls": 1,
+      "total_ms": "4.418",
+      "mean_ms": "4.418",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1968,
+      "queryid": "-7556087035521483724",
+      "calls": 1,
+      "total_ms": "4.415",
+      "mean_ms": "4.415",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1969,
+      "queryid": "-5268272512184818099",
+      "calls": 1,
+      "total_ms": "4.415",
+      "mean_ms": "4.415",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1970,
+      "queryid": "-2226809886803159170",
+      "calls": 1,
+      "total_ms": "4.411",
+      "mean_ms": "4.411",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1971,
+      "queryid": "-3990622467924082874",
+      "calls": 6,
+      "total_ms": "4.399",
+      "mean_ms": "0.733",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1972,
+      "queryid": "8502656238264044862",
+      "calls": 2,
+      "total_ms": "4.396",
+      "mean_ms": "2.198",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1973,
+      "queryid": "-8089532232861957448",
+      "calls": 1,
+      "total_ms": "4.391",
+      "mean_ms": "4.391",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1974,
+      "queryid": "2418165684608893599",
+      "calls": 1,
+      "total_ms": "4.390",
+      "mean_ms": "4.390",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1975,
+      "queryid": "5677662516447645312",
+      "calls": 2,
+      "total_ms": "4.384",
+      "mean_ms": "2.192",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1976,
+      "queryid": "-289153034430282677",
+      "calls": 1,
+      "total_ms": "4.383",
+      "mean_ms": "4.383",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1977,
+      "queryid": "-7762510475799230705",
+      "calls": 1,
+      "total_ms": "4.381",
+      "mean_ms": "4.381",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1978,
+      "queryid": "7830953185503225758",
+      "calls": 67,
+      "total_ms": "4.377",
+      "mean_ms": "0.065",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1979,
+      "queryid": "-3833919579608068113",
+      "calls": 1,
+      "total_ms": "4.373",
+      "mean_ms": "4.373",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1980,
+      "queryid": "-2984397481679311823",
+      "calls": 1,
+      "total_ms": "4.362",
+      "mean_ms": "4.362",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1981,
+      "queryid": "8965654178527639464",
+      "calls": 1,
+      "total_ms": "4.358",
+      "mean_ms": "4.358",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1982,
+      "queryid": "3238460963783891833",
+      "calls": 1,
+      "total_ms": "4.353",
+      "mean_ms": "4.353",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1983,
+      "queryid": "1839965509477478683",
+      "calls": 1,
+      "total_ms": "4.337",
+      "mean_ms": "4.337",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1984,
+      "queryid": "-7262695950267054833",
+      "calls": 1,
+      "total_ms": "4.324",
+      "mean_ms": "4.324",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1985,
+      "queryid": "-3648662040320615944",
+      "calls": 1,
+      "total_ms": "4.291",
+      "mean_ms": "4.291",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1986,
+      "queryid": "-3125922739603478735",
+      "calls": 2,
+      "total_ms": "4.287",
+      "mean_ms": "2.144",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1987,
+      "queryid": "6633493230404678232",
+      "calls": 1,
+      "total_ms": "4.274",
+      "mean_ms": "4.274",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1988,
+      "queryid": "-200874659976756715",
+      "calls": 1,
+      "total_ms": "4.269",
+      "mean_ms": "4.269",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1989,
+      "queryid": "2476101765573374944",
+      "calls": 2,
+      "total_ms": "4.269",
+      "mean_ms": "2.134",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1990,
+      "queryid": "8103302441170509501",
+      "calls": 1,
+      "total_ms": "4.256",
+      "mean_ms": "4.256",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1991,
+      "queryid": "2836506301238517839",
+      "calls": 1,
+      "total_ms": "4.256",
+      "mean_ms": "4.256",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1992,
+      "queryid": "-4046035864698904149",
+      "calls": 1,
+      "total_ms": "4.254",
+      "mean_ms": "4.254",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1993,
+      "queryid": "-5943245372751204201",
+      "calls": 1,
+      "total_ms": "4.247",
+      "mean_ms": "4.247",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1994,
+      "queryid": "513278645611505495",
+      "calls": 1,
+      "total_ms": "4.236",
+      "mean_ms": "4.236",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1995,
+      "queryid": "-8791754558772782234",
+      "calls": 1,
+      "total_ms": "4.219",
+      "mean_ms": "4.219",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1996,
+      "queryid": "-7723410886447022577",
+      "calls": 1,
+      "total_ms": "4.214",
+      "mean_ms": "4.214",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1997,
+      "queryid": "-7219070340291323634",
+      "calls": 1,
+      "total_ms": "4.201",
+      "mean_ms": "4.201",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1998,
+      "queryid": "146773861170345229",
+      "calls": 1,
+      "total_ms": "4.200",
+      "mean_ms": "4.200",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 1999,
+      "queryid": "-814793509795328245",
+      "calls": 1,
+      "total_ms": "4.198",
+      "mean_ms": "4.198",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2000,
+      "queryid": "-1902589199013867724",
+      "calls": 21,
+      "total_ms": "4.191",
+      "mean_ms": "0.200",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    }
+  ],
+  "previous_distinct": 1869,
+  "new_distinct": 74,
+  "overlap": 6,
+  "cumulative_distinct": 1943,
+  "no_full_query_text_credit": true,
+  "new_reproducible_app_defects": 0,
+  "justified_deletions": 0,
+  "production_provider_writes": 0,
+  "source_test_ci_writes": 0,
+  "exact_run248_source_ci": {
+    "sha": "1bf9fa82686e19642a2158fd8105df6755dc7bed",
+    "sql": 43633899372,
+    "node": 43633899365,
+    "cloud_browser": 43633899352,
+    "approval": 43633899410,
+    "all_listed": "SUCCESS"
+  },
+  "release_gate": "FULL_FIVE_CHECK_SOURCE_ISOLATION_UNVERIFIED_FIXES_STILL_TESTING",
+  "hosted_auth_jwt": "UNVERIFIED_ISSUE96",
+  "baseline_complete": false,
+  "next_cursor": "Provider drift; numeric 2001-2080; remaining unreviewed complete provider definitions"
+}

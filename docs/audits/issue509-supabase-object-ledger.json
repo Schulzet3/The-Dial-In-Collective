@@ -20344,8 +20344,7 @@
     "code_test_ci_writes": 0,
     "queue_status": "TWO_ISSUE509_FIXES_TESTING_NOT_READY",
     "next_cursor": "Fresh provider drift; pg_stat_statements ranks 1841-1920, then other not-yet-fully-reviewed provider definitions; Auth 27/27 current table definitions individually revisited"
-  }
-,
+  },
   "provider_pgss_member_approval_null_guard_run248": {
     "run": 248,
     "preflight_development_sha": "9f23b49b5e601b36610f512c6274762bf8733542",
@@ -20370,5 +20369,68 @@
     "provider_writes": 0,
     "baseline_complete": false,
     "next": "drift, ranks1921-2000, exact-source CI; Auth transport #96 UNVERIFIED"
+  },
+  "provider_pgss_legacy_roaster_run249": {
+    "run": 249,
+    "preflight_development_sha": "67781a9aba587b6894e4fc77c4139113dce9ee88",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_development_sha": "db45e07cc5ddc58a2f816958373e08f46a090b00",
+    "project_ref": "azviqqejypsefzilgonr",
+    "receipt_path": "docs/audits/issue509-legacy-roaster-active-and-pgss-2026-11-14-run249-rank1921-2000.json",
+    "receipt_blob_sha": "2bbb18ada549b447c32dc0729806448ee1d97e70",
+    "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-14-run249.json",
+    "index_blob_sha": "fda12dc90401411d0a29368a1a34df91e3333889",
+    "provider_observed_at": "2026-11-14 20:49:36.185679+00",
+    "sql_functions": [
+      {
+        "signature": "private.dic_canonical_roaster_key(value text)",
+        "md5": "646cff7cceed7011b1fc3a1b69c4d3f0",
+        "source_chars": 402,
+        "verdict": "LEGACY ACTIVE: canonical alias normalizer used by eight SQL routines; not the retired directory admission gate."
+      },
+      {
+        "signature": "private.dic_coffee_key(value text)",
+        "md5": "8f6840ddd7e530e311c096591c01ce15",
+        "source_chars": 251,
+        "verdict": "LEGACY ACTIVE: coffee identity normalizer used by eight SQL routines; ambiguous normalization requires review."
+      },
+      {
+        "signature": "private.dic_roaster_key(value text)",
+        "md5": "e553ae6c1cf99c3784f5d14a4f05d355",
+        "source_chars": 388,
+        "verdict": "LEGACY ACTIVE: suffix-aware roaster matching called by canonical helper; not removable merely by name."
+      },
+      {
+        "signature": "private.dic_source_key(value text)",
+        "md5": "07e0ef286246fdae29b9151018296f79",
+        "source_chars": 981,
+        "verdict": "LEGACY ACTIVE: source URL evidence normalization used by two matching/promotion routines; not a transport SSRF sanitizer."
+      },
+      {
+        "signature": "private.dic_verified_roaster_page_proof(roaster_name text)",
+        "md5": "7ce32408a61728294ad667a9c985f5da",
+        "source_chars": 1947,
+        "verdict": "LEGACY ACTIVE: independent official-source attestation in promotion/source checks; not universal preview admission. SECURITY DEFINER empty search_path, service_role EXECUTE only."
+      }
+    ],
+    "complete_source_chars": 3969,
+    "app_tables": 52,
+    "app_functions": 114,
+    "app_policies": 41,
+    "migrations": 69,
+    "retired_directory_live": 0,
+    "numeric_range": [
+      1921,
+      2000
+    ],
+    "numeric_rows": 80,
+    "new_distinct": 74,
+    "overlap": 6,
+    "cumulative_distinct": 1943,
+    "new_defects": 0,
+    "provider_writes": 0,
+    "source_writes": 0,
+    "baseline_complete": false,
+    "next_cursor": "drift; numeric 2001-2080; remaining provider full-source review"
   }
 }
