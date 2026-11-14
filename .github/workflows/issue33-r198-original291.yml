@@ -1,0 +1,53 @@
+name: DIC Issue33 R198 original291 selected current conflicting sensory
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r198-original291.yml
+      - scripts/audit/issue33-r198-original291-check.mjs
+      - tests/coffee-issue33-r198-original291.test.mjs
+      - docs/workstreams/ops-issue33-r198-291-20261114.md
+      - src/server/coffee-page-metadata.mjs
+      - src/server/coffee-selected-description-sensory.mjs
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r198-original291.yml
+      - scripts/audit/issue33-r198-original291-check.mjs
+      - tests/coffee-issue33-r198-original291.test.mjs
+      - src/server/coffee-page-metadata.mjs
+      - src/server/coffee-selected-description-sensory.mjs
+permissions:
+  contents: read
+jobs:
+  selected:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Focused selected sensory positive and hostile tests
+        run: node --test tests/coffee-issue33-r198-original291.test.mjs
+      - name: Bounded selected official HTTPS real extractor
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '291'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r198
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Verify actual merchant selected HTML and parser
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r198
+        run: node scripts/audit/issue33-r198-original291-check.mjs
+      - name: Save bounded one-day public source evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r198-original291-current-source
+          path: /tmp/dic33-r198/
+          retention-days: 1
+          if-no-files-found: warn
