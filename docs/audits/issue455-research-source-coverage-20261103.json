@@ -2570,6 +2570,21 @@
       "source_bytes_sha256": null,
       "source_byte_caveat": "The full publisher PDF and raw tables were not retrieved or hashed. Abstract describes three categories of grind and ten trained QDA assessors; exact grinder/machine parameters, coffee identity, preparation control, panel-blinding, per-cup repetitions and individual scores not checked.",
       "claims_verified_externally": "KCI publisher-indexed abstract describes three grinding categories, ten trained QDA assessors, statistically different measured extraction/viscosity and sensory intensity; finest category ranked favorably for that particular study. OpenAlex verifies DOI and article identity."
+    },
+    {
+      "id": "LIT-2023-LINNE-CQA-MOUTHCOATING-BODY",
+      "type": "external_peer_reviewed_primary_published_study_abstract",
+      "title": "Characterization of the impact of chlorogenic acids on tactile perception in coffee through an inverse effect on mouthcoating sensation",
+      "authors": "Brianne M. Linne; Edisson Tello; Christopher T. Simons; Devin G. Peterson",
+      "published": "First online 2023-06-19; Food Research International 172 (2023-10), article 113167",
+      "doi": "10.1016/j.foodres.2023.113167",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37689920/",
+      "access": "PUBMED_NLM_ORIGINAL_AUTHOR_ABSTRACT_AND_PUBLICATION_METADATA_DIRECTLY_READ_2026-11-14; DOI_LINK_PUBLISHER_FULL_ARTICLE_DENIED; FULL_METHODS_TABLES_FIGURES_RAW_SENSORY_DATA_AND_BINARY_NOT_ACCESSED",
+      "evidence_grade": "PEER_REVIEWED_ORIGINAL_AUTHOR_ABSTRACT_MEDIUM_FOR_REPORTED_DESIGN_AND_QUALITATIVE_CONCLUSION_LOW_FOR_ESPRESSO_PERSONALIZATION_TRANSFER",
+      "review_status": "R455-258_PRIMARY_AUTHOR_ABSTRACT_SUBSTANTIVE_THREE_CLAIM_VERIFICATION; FULL_PAPER_SAMPLE_N_AND_REPLICATION_UNVERIFIED",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Only NLM-indexed original author abstract, DOI, journal, authors and study descriptions were readable. No full Elsevier article, precise participant count, complete concentrations, statistical tables, tested espresso recipe, raw sensory results, replication or PDF byte/hash reviewed.",
+      "claims_verified_externally": "Original author abstract separates the coffee tactile attribute of body into mouthcoating, astringency, chalkiness and thickness; describes sensory-guided fractionation and signal-detection tests in water and coffee; reports subtle perceptible mouthcoating for 3-CQA and 4-CQA and an inverse concentration/perception relationship under those conditions. Receptor-binding and saliva lubrication are offered only as possible explanations, not verified causal mechanisms. No user-specific five-taste next-shot intervention is reported."
     }
   ],
   "evidence_checks": [
@@ -7903,6 +7918,45 @@
       "owner_approval": false,
       "github267_literal_review_credit": 0,
       "date": "2026-11-14"
+    },
+    {
+      "id": "R455-EV-CIT-258-A",
+      "source": "LIT-2023-LINNE-CQA-MOUTHCOATING-BODY",
+      "page_section": "PubMed original author abstract, first two sentences: definition and four subattributes",
+      "claim": "The published abstract identifies mouthcoating, astringency, chalkiness and thickness as separate tactile dimensions under overall coffee body, not an assertion that the app's five sliders must be collapsed or changed.",
+      "grade": "ORIGINAL_AUTHOR_ABSTRACT_DIRECT; COMPLETE_PROTOCOL_UNAVAILABLE",
+      "factual_status": "FOUR_TACTILE_DESCRIPTORS_VERIFIED_WITHIN_REPORTED_METHOD; DIC_MEASUREMENT_EQUIVALENCE_NOT_VERIFIED",
+      "result": "RETAIN_INDEPENDENT_LOCKED_BODY_AND_ASTRINGENCY_RATINGS",
+      "current_app": "Pinned development f5fef01063852179abf82adee4f57398796e85d3; site/lib/constants.js Git blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2, engine.js 3e20904291231a9c5a5a86e6d004a95a5489c6d6, model.js fdc65f869546cddbb6552e555dca12117f2c47fc. Actual DIC has five independently recorded taste inputs, Body and Astringency/Dryness distinct, five complete versus absent, one controllable next-shot recommendation and existing Locked style/feed/grinder/calibration bounds; no chlorogenic-acid or mouthcoating sensor and no molecule-to-taste prediction.",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0,
+      "date": "2026-11-14"
+    },
+    {
+      "id": "R455-EV-CIT-258-B",
+      "source": "LIT-2023-LINNE-CQA-MOUTHCOATING-BODY",
+      "page_section": "PubMed original author abstract: sensory-guided chromatography and signal-detection",
+      "claim": "The study used sensory-guided fractionation plus tests in water and coffee matrices and reported detectable yet subtle mouthcoating for 3-O-caffeoylquinic acid and 4-O-caffeoylquinic acid. It did not test the DIC app, five tastes, or an end-to-end controllable espresso next-shot change.",
+      "grade": "FIRST_PARTY_PUBLISHED_ABSTRACT_DESIGN_RESULTS; SAMPLE_SIZE_AND_RAW_DATA_UNAVAILABLE",
+      "factual_status": "BOTH_COMPOUNDS_AND_MATRIX_TESTS_ABSTRACT_VERIFIED; APP_EFFICACY_NOT_STUDIED",
+      "result": "DO_NOT_DERIVE_PERSONAL_TASTE_TARGET_OR_GRIND_TEMPERATURE_CORRECTION",
+      "current_app": "Pinned development f5fef01063852179abf82adee4f57398796e85d3; site/lib/constants.js Git blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2, engine.js 3e20904291231a9c5a5a86e6d004a95a5489c6d6, model.js fdc65f869546cddbb6552e555dca12117f2c47fc. Actual DIC has five independently recorded taste inputs, Body and Astringency/Dryness distinct, five complete versus absent, one controllable next-shot recommendation and existing Locked style/feed/grinder/calibration bounds; no chlorogenic-acid or mouthcoating sensor and no molecule-to-taste prediction.",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0,
+      "date": "2026-11-14"
+    },
+    {
+      "id": "R455-EV-CIT-258-C",
+      "source": "LIT-2023-LINNE-CQA-MOUTHCOATING-BODY",
+      "page_section": "PubMed original author abstract: inverse relationship and speculative mechanisms",
+      "claim": "The abstract reports an inverse concentration/perceived-mouthcoating relationship in tested conditions and discusses receptor-ligand and salivary lubrication as possible mechanisms. This neither proves a universal chemical/tactile slope nor experimentally validates either proposed mechanism, individual dry finish, or a safe numerical shot correction.",
+      "grade": "ORIGINAL_AUTHOR_ABSTRACT_REPORTED_RESULTS_WITH_HYPOTHESIS_CAVEAT; NO_FULL_TABLES",
+      "factual_status": "REPORTED_DIRECTION_STUDY_BOUND; BIOLOGICAL_MECHANISM_GENERALIZATION_AND_ESPRESSO_CAUSAL_EFFECT_UNVERIFIED",
+      "result": "NO_UNIVERSAL_NUMERIC_OPTIMA_OR_SCIENTIFIC_CONFIDENCE_CLAIM",
+      "current_app": "Pinned development f5fef01063852179abf82adee4f57398796e85d3; site/lib/constants.js Git blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2, engine.js 3e20904291231a9c5a5a86e6d004a95a5489c6d6, model.js fdc65f869546cddbb6552e555dca12117f2c47fc. Actual DIC has five independently recorded taste inputs, Body and Astringency/Dryness distinct, five complete versus absent, one controllable next-shot recommendation and existing Locked style/feed/grinder/calibration bounds; no chlorogenic-acid or mouthcoating sensor and no molecule-to-taste prediction.",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0,
+      "date": "2026-11-14"
     }
   ],
   "policy_decisions_pending": [],
@@ -8092,23 +8146,24 @@
     "R455-247: peer-reviewed Severini et al. 2016 original Wiley abstract directly checked: espresso shot chemistry varied at nominal constant grinder grade; 140 sources, 401 bounded checks, 203 proposals. Full paper/raw chemistry and S019 unavailable. No five-taste or intervention efficacy demonstrated. Optional single-change next-shot design must address shot-to-shot confounders/repeats and separate owner consent/data approval. Docs-only CI/merge needs exact readback; no #267 literal line credit, no app/production writes.",
     "R455-248: original Choi et al. Electronics 2024 direct first-party crema computer-vision study; one new source, +3 bounded primary claim checks, +1 P3 science-proxy proposal, 141/404/204. Reported 97% is segmented crema color area, not human taste accuracy or causal recommendation benefit. Original PDF binary/raw images/independent validation and S019 inaccessible; no app/taste/telemetry policy change. Verify docs-only CI, nonforce merge and exact readback. No #267 literal review credit.",
     "R455-250: reconciled merged R249 sidecar against existing R455-023/R455-139 original full publisher methods and R455-PROP-102/139; four proposed check IDs map to already recorded atomic evidence; no duplicate papers, evidence checks, proposals or validated cup improvements counted (141/404/204 preserved). Rehashed Library slow-feed PDF variant v1 134777B SHA256 a068e5...; distinct archive member still unverified. S019 inaccessible; continue reproducible UX/citation gaps. Docs-only PR/CI/merge pending at authoring, no READY/deploy.",
-    "R455-254 canonical integration: source Ormaza-Zapata 2019 DYNA primary original, three bounded method/sensory/chemistry checks and one P3 no-app-change proposal, intended 142/407/205. Full original paper HTML reviewed, raw plots/taster data/PDF SHA not obtained. S019 standalone unreviewed, no #267 literal credit, no member taste-effect evaluation. Merge/docs governance requires independent readback."
+    "R455-254 canonical integration: source Ormaza-Zapata 2019 DYNA primary original, three bounded method/sensory/chemistry checks and one P3 no-app-change proposal, intended 142/407/205. Full original paper HTML reviewed, raw plots/taster data/PDF SHA not obtained. S019 standalone unreviewed, no #267 literal credit, no member taste-effect evaluation. Merge/docs governance requires independent readback.",
+    "R455-258 source author abstract directly checked: four body tactile subattributes, 3-CQA/4-CQA subtle mouthcoating and study-specific inverse concentration effect do NOT validate DIC five tastes or next-shot improvement. One new source/three bounded checks/one P3 research-only proposal; current app unchanged. Exact docs-only CI/merge/readback required, S019 standalone inaccessible, #267 literal review credited zero."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-257",
-    "starting_preflight_development_sha": "8cf2c2bcec7881dc590d3de8366393863a45ef9b",
-    "reverified_pre_write_development_sha": "a5327aa8c52a976feee9733c3b69fa19e307f238",
+    "run_id": "R455-258",
+    "starting_preflight_development_sha": "d0b450db85f0c25b05fc65007de639852436ff66",
+    "reverified_pre_write_development_sha": "f5fef01063852179abf82adee4f57398796e85d3",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "phase": "PRIMARY_KCI_2011_THREE_GRIND_LEVEL_QDA_NOT_UNIVERSAL_PERSONAL_TASTE",
+    "phase": "PRIMARY_LINNE_2023_CQA_BODY_MOUTHCOATING_SEPARATE_FROM_PERSONALIZED_TASTE",
     "source_counts": {
-      "research_project_source_records": 144,
-      "bounded_evidence_checks": 413,
-      "proposals": 207
+      "research_project_source_records": 145,
+      "bounded_evidence_checks": 416,
+      "proposals": 208
     },
-    "source_access": "KCI official journal indexed abstract and publication metadata read; OpenAlex DOI corroboration; complete 15-page PDF and individual sensory data not read",
+    "source_access": "NLM PubMed directly read original author abstract, DOI and journal metadata; Elsevier complete article/methods, original binary PDF and raw results not accessed",
     "github267_literal_review_credit": 0,
     "release_state": "RESEARCH_ONLY_NO_APP_TEST_OR_PRODUCTION_CHANGE",
-    "next": "Verify exact PR-head and merged approval governance and two file blobs, then next distinct source or reproducible safe Log Shot UX gap. Standalone S019 still inaccessible; no real next-shot efficacy claims."
+    "next": "Verify two Git blobs, docs-only exact-source governance and nonforce merge before counting as integrated; then continue distinct primary claim or independently demonstrated safe Log Shot -> Rate UX defect. Standalone S019 unreviewed."
   },
   "policy_decisions_resolved": [
     {
@@ -12858,6 +12913,34 @@
       "production_deployed": false,
       "github267_literal_review_credit": 0,
       "exact_source": "a5327aa8c52a976feee9733c3b69fa19e307f238"
+    },
+    {
+      "id": "R455-PROP-258-MOUTHCOATING-NOT-TASTE-POLICY",
+      "severity": "P3_RESEARCH_ONLY_NO_REPRODUCED_APP_DEFECT",
+      "source": [
+        "LIT-2023-LINNE-CQA-MOUTHCOATING-BODY",
+        "ORG-07"
+      ],
+      "evidence": [
+        "R455-EV-CIT-258-A",
+        "R455-EV-CIT-258-B",
+        "R455-EV-CIT-258-C"
+      ],
+      "finding": "A coffee body chemical/sensory study distinguishes multiple tactile attributes and reports study-specific inverse concentration/mouthcoating. It cannot identify a universal Body-versus-Dryness rule or infer that a single new espresso-grind/yield/temperature adjustment improves a DIC member's next shot.",
+      "evidence_grade": "PEER_REVIEWED_ORIGINAL_AUTHOR_ABSTRACT_DIRECTLY_READ; FULL_PAPER_UNAVAILABLE; NO_USER_FOLLOWUP_VALIDATION",
+      "source_provenance": "Linne, Tello, Simons & Peterson (2023), Food Research International 172:113167, DOI 10.1016/j.foodres.2023.113167, PMID 37689920; https://pubmed.ncbi.nlm.nih.gov/37689920/ ; companion archived ORG-07 exact original markdown original SHA-256 a7a1889a884aa25573a24c5b731449b61333ff14a67294bbe1559fe8462c92dc; this paper is independent later literature, not a verified citation embedded in ORG-07.",
+      "user_benefit": "Prevent false body/dryness conflation, molecular taste claims or universal shot corrections, preserving individual feedback and explanations of uncertainty.",
+      "current_locked": "All five individually active taste ratings, genuine complete-green versus missing ratings, at most one actually controllable recommendation change, immutable original measurements/notes/private history, distinct styles including Turbo and Fast-Flow, feed and calibration/version boundaries, no new member-data collection or universal numeric science.",
+      "current_app": "Pinned development f5fef01063852179abf82adee4f57398796e85d3; site/lib/constants.js Git blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2, engine.js 3e20904291231a9c5a5a86e6d004a95a5489c6d6, model.js fdc65f869546cddbb6552e555dca12117f2c47fc. Actual DIC has five independently recorded taste inputs, Body and Astringency/Dryness distinct, five complete versus absent, one controllable next-shot recommendation and existing Locked style/feed/grinder/calibration bounds; no chlorogenic-acid or mouthcoating sensor and no molecule-to-taste prediction.",
+      "proposed_change": "No application behavior or policy change. Preserve five separate ratings and any existing descriptive hints; research-only guardrail. Any chemical-based new rating, numeric target, new capture, future intervention or quality-improvement claim requires separate owner authority and optional consented same-coffee/setup/style/grinder/feed single-control follow-up with all five ratings, confounders and adverse outcomes.",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "R455-258_RESEARCH_ONLY_SOURCE_AND_CLAIM_TRACE_NO_APP_CHANGE",
+      "test_plan": "Verify unique new DOI and source/check/proposal IDs, preserve all 144/413/207 prior records exactly, append 1/3/1, parse canonical JSON, verify two exact changed Git blobs, docs-only approval/continuity CI before nonforce merge. No app tests or cup-quality trial performed.",
+      "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY_NO_DEPLOYABLE_CHANGE",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0,
+      "exact_source": "f5fef01063852179abf82adee4f57398796e85d3"
     }
   ],
   "changeScope": {
