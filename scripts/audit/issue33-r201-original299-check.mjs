@@ -35,7 +35,7 @@ for(const note of ['cherry','milk chocolate']){
 if(fields.producer)errors.push('unnamed_family_misrepresented_as_identified_producer');
 // Product-owned, exact handle/title/vendor Shopify tags are lower-priority
 // published evidence; the water-friendly prose alone would NOT prove Washed.
-const tags=html.match(/"title":"The Windsor - Brazil Coffee","handle":"the-windsor-sextant-coffee"[\\s\\S]{0,2000}?"vendor":"Sextant Coffee Roasters"[\\s\\S]{0,500}?"tags":\\[([^\\]]{1,500})\\]/u);
+const tags=html.match(/"title":"The Windsor - Brazil Coffee","handle":"the-windsor-sextant-coffee"[\s\S]{0,2000}?"vendor":"Sextant Coffee Roasters"[\s\S]{0,500}?"tags":\[([^\]]{1,500})\]/u);
 const selectedTags=tags?JSON.parse('['+tags[1]+']'):[];
 if(!selectedTags.includes('medium roast coffee')||!selectedTags.includes('Washed Coffee'))errors.push('exact_selected_shopify_product_tags_missing_or_changed');
 if(fields.roast_level!=='Medium'||fields.process!=='Washed')errors.push('current_selected_explicit_product_taxonomy_not_preserved');
