@@ -3006,6 +3006,28 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   fields.name=coffeeName;
  }
 
+ // A supplier head-count in the selected *Farm* caption is not an estate
+ // or named producer. Some secondary source paths may reintroduce the exact
+ // count after primary Farm normalization. Respect the published label at
+ // FINAL field reconciliation, without suppressing independently labelled
+ // Producer collectives or qualified anonymous-growing-group prose.
+ const countedSupplier=/^\d{1,3}(?:,?\d{3})?\s+(?:(?:small[ -]?holder|small|family|local|independent|regional)\s+){0,3}(?:farms?|farmers?|growers?|families|producers?|cooperatives?)$/iu;
+ if(fields.producer&&countedSupplier.test(fields.producer)){
+  const same=value=>keyOf(String(value||''))===keyOf(fields.producer);
+  const printedFarm=source_facts.some(f=>
+    f.section!=='Different coffee in the source'&&
+    /^(?:farm|farms|finca)$/i.test(String(f.label||'').trim())&&same(f.value))||
+    productCoffeeProse(canonicalProduct,clean).some(b=>
+     /^farm\s*[:：]/i.test(b.text)&&same(b.text.replace(/^farm\s*[:：]\s*/i,'')));
+  const printedProducer=source_facts.some(f=>
+    f.section!=='Different coffee in the source'&&
+    /^(?:producers?|growers?)$/i.test(String(f.label||'').trim())&&same(f.value));
+  if(printedFarm&&!printedProducer){
+   rememberCoffeeReviewCandidate(fields,'producer',fields.producer,
+    'Count-only selected Farm caption; named supplier not published');
+   delete fields.producer;
+  }
+ }
  // An extracted value is a suggestion, never proof of an official source.
  // Keep unexpected/absent facts blank instead of guessing.
  return {ok:true,source:'unverified_public_page',fields,available:Object.keys(fields),

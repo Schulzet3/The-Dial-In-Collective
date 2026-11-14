@@ -117,3 +117,10 @@ test('a station-only own-product narrative without a contradictory counted Farm 
  assert.equal(p.ok,true);
  assert.match(String(p.fields?.producer||''),/Worka Sakaro Washing Station/i);
 });
+
+test('#286 exact Farm count and separate named washing station cannot reinstate the anonymous Farm count',()=>{
+ const detail=worka+'<p>This coffee from the Worka Sakaro Washing Station is a great example.</p>';
+ const p=selected(286,detail,'','<p>Farm: 400 smallholder farms</p>');
+ assert.equal(p.ok,true);
+ assert.ok(!p.fields?.producer,'a second same-product structured Farm count may not bypass the selected Farm role');
+});
