@@ -1,0 +1,2027 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "S2-DISJOINT-P436-001-059-LIVE-20261114-R11G",
+  "reviewer": "DIRECT_AI_LINE_READING_NOT_HUMAN",
+  "preflight": {
+    "development_sha": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d"
+  },
+  "pinned": {
+    "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+    "path": "tests/workflow-reconciliation.test.mjs",
+    "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+    "from": 1,
+    "to": 59,
+    "physical_lines": 59
+  },
+  "live": {
+    "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+    "path": "tests/workflow-reconciliation.test.mjs",
+    "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+    "physical_lines": 73
+  },
+  "method": "Directly read and interpreted each pinned line1–59 and each fourteen live-only postpin added lines; original replacements individually mapped, no grouped receipt or V1 credit",
+  "direct_original_numbered_lines": [
+    {
+      "line": 1,
+      "source_text": "import test from 'node:test';",
+      "inspection_classification": "import",
+      "behavior": "Registers Node test functions",
+      "quality": "Tests only, no app runtime operation",
+      "risk_security_privacy_performance": "No hosted acceptance",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 1
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 1,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 2,
+      "source_text": "import assert from 'node:assert/strict';",
+      "inspection_classification": "import",
+      "behavior": "Strict assertions for source continuity",
+      "quality": "Failures explicit",
+      "risk_security_privacy_performance": "Only local test scope",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 2
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 2,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 3,
+      "source_text": "import {readFileSync} from 'node:fs';",
+      "inspection_classification": "import",
+      "behavior": "Reads source and archive files",
+      "quality": "Operates checkout fixtures",
+      "risk_security_privacy_performance": "No remote backup readback",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 3
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 3,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 4,
+      "source_text": "import {createHash} from 'node:crypto';",
+      "inspection_classification": "import",
+      "behavior": "Uses SHA-1 hashing for Git blob identity",
+      "quality": "Provenance verification",
+      "risk_security_privacy_performance": "SHA-1 collision resistance not modern integrity guarantee, but Git object identity contract",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 4
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 4,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 5,
+      "source_text": "const text=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');",
+      "inspection_classification": "helper",
+      "behavior": "Defines URL-relative UTF-8 text load",
+      "quality": "Reusable source access",
+      "risk_security_privacy_performance": "No network",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 5
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 5,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 6,
+      "source_text": "const json=p=>JSON.parse(text(p));",
+      "inspection_classification": "helper",
+      "behavior": "Parses JSON source files through text loader",
+      "quality": "Matches contract structure",
+      "risk_security_privacy_performance": "Malformed JSON fails the suite",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 6
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 6,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 7,
+      "source_text": "const matrix=json('docs/APPROVAL_COVERAGE_MATRIX.json');",
+      "inspection_classification": "fixture",
+      "behavior": "Loads canonical approval coverage matrix",
+      "quality": "Current owner decision reference",
+      "risk_security_privacy_performance": "Cannot alone establish real app compliance",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 7
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 7,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 8,
+      "source_text": "const manifest=json('docs/audits/2026-10-23-archive-manifest.json');",
+      "inspection_classification": "fixture",
+      "behavior": "Loads October23 original archive blob manifest",
+      "quality": "Historic immutable reference",
+      "risk_security_privacy_performance": "Does not inspect files beyond manifest loop",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 8
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 8,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 9,
+      "source_text": "const old=json(matrix.historical_snapshot);",
+      "inspection_classification": "fixture",
+      "behavior": "Loads historically archived approval matrix snapshot",
+      "quality": "Source of old locked/contract baselines",
+      "risk_security_privacy_performance": "Historical record, not current owner decisions",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 9
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 9,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 10,
+      "source_text": "const projection=m=>m.contracts.map(({id,decision_key,assertions})=>({id,decision_key,assertions}));",
+      "inspection_classification": "helper",
+      "behavior": "Projects contract IDs, decision keys and assertions for equality",
+      "quality": "Excludes mutable operational metadata",
+      "risk_security_privacy_performance": "Other contract fields not checked here",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 10
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 10,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 11,
+      "source_text": "test('workflow cleanup preserves exact historical blobs, not paraphrased evidence',()=>{",
+      "inspection_classification": "test-start",
+      "behavior": "Starts immutable historical Git blob verification",
+      "quality": "Protects archive identity",
+      "risk_security_privacy_performance": "Does not verify SHA256 or all backups",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 11
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 12,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 12,
+      "source_text": " for(const [name,sha] of Object.entries(manifest.blobs)){",
+      "inspection_classification": "loop",
+      "behavior": "Iterates manifest blob name and Git SHA",
+      "quality": "Covers manifest entries",
+      "risk_security_privacy_performance": "Manifest completeness separate",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 12
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 13,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 13,
+      "source_text": "  const bytes=readFileSync(new URL('../'+manifest.directory+'/'+name,import.meta.url));",
+      "inspection_classification": "read",
+      "behavior": "Fetches historical archived file raw bytes",
+      "quality": "Avoids reserialization changes",
+      "risk_security_privacy_performance": "No offsite independent source",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 13
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 14,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 14,
+      "source_text": "  const actual=createHash('sha1').update(Buffer.concat([Buffer.from('blob '+bytes.length),Buffer.from([0])])).update(bytes).digest('hex');",
+      "inspection_classification": "hash",
+      "behavior": "Recomputes Git blob SHA1 with blob byte length and NUL header",
+      "quality": "Correct Git-object framing",
+      "risk_security_privacy_performance": "No claim of cryptographic adversarial resistance",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 14
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 15,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 15,
+      "source_text": "  assert.equal(actual,sha,name+' must retain original Git blob');",
+      "inspection_classification": "assertion",
+      "behavior": "Requires recomputed Git SHA matches manifest",
+      "quality": "Detects accidental historical file change",
+      "risk_security_privacy_performance": "No remote object authentication",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 15
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 16,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 16,
+      "source_text": " }",
+      "inspection_classification": "delimiter",
+      "behavior": "Ends archive hash loop",
+      "quality": "No separate execution",
+      "risk_security_privacy_performance": "None",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 16
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 17,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 17,
+      "source_text": "});",
+      "inspection_classification": "delimiter",
+      "behavior": "Ends immutable archive test",
+      "quality": "No separate execution",
+      "risk_security_privacy_performance": "None",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 17
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 18,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 18,
+      "source_text": "test('reconciliation retains every classified owner key and source assertion',()=>{",
+      "inspection_classification": "test-start",
+      "behavior": "Starts owner coverage preservation regression",
+      "quality": "Guards decision continuity",
+      "risk_security_privacy_performance": "Not runtime feature acceptance",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 18
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 19,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 19,
+      "source_text": " for(const key of old.owner_decision_key_inventory)assert.ok(matrix.owner_decision_key_inventory.includes(key),'missing historical owner decision '+key);",
+      "inspection_classification": "loop-assertion",
+      "behavior": "Requires every archived owner decision key in current inventory",
+      "quality": "Protects historical decision visibility",
+      "risk_security_privacy_performance": "Did not reject duplicate current keys until later live addition",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 19
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 20,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 20,
+      "source_text": " assert.deepEqual(matrix.owner_decision_key_inventory,[...matrix.owner_decision_key_inventory].sort(),'current inventory remains sorted');",
+      "inspection_classification": "assertion",
+      "behavior": "Requires current owner key inventory sorted",
+      "quality": "Stable deterministic order",
+      "risk_security_privacy_performance": "Sorted list can still duplicate a key",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 20
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 21,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 21,
+      "source_text": " // Historical contracts remain exact. Later approved implementations may",
+      "inspection_classification": "comment",
+      "behavior": "Explains exact preservation of historical contracts",
+      "quality": "Historical doc intent",
+      "risk_security_privacy_performance": "Later explicitly retired one-time style supersedes narrow part",
+      "dead_or_obsolete_status": "Pinned contract/version superseded narrowly by newer explicit owner decision, with original history retained",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 21
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 23,
+        "exact_original_text_match": false,
+        "status": "SUPERSEDED_OR_REWRITTEN"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "Already reconciled current by Nov8 supersession; no duplicate patch",
+      "locked_decision_fit": "Latest explicit Nov8 Locked first-style-until-first-shot and preserved historical evidence control",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 22,
+      "source_text": " // add coverage; approval-coverage separately validates every current item.",
+      "inspection_classification": "comment",
+      "behavior": "Allows approved implementation additions while separate current approval-coverage validates",
+      "quality": "Prevents treating static assertion as whole app proof",
+      "risk_security_privacy_performance": "Superseded contract must be exempted narrowly",
+      "dead_or_obsolete_status": "Pinned contract/version superseded narrowly by newer explicit owner decision, with original history retained",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 22
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 24,
+        "exact_original_text_match": false,
+        "status": "SUPERSEDED_OR_REWRITTEN"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "Already reconciled current by Nov8 supersession; no duplicate patch",
+      "locked_decision_fit": "Latest explicit Nov8 Locked first-style-until-first-shot and preserved historical evidence control",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 23,
+      "source_text": " const originalIds=new Set(old.contracts.map(item=>item.id));",
+      "inspection_classification": "fixture",
+      "behavior": "Builds original contract IDs from old contracts including one-time first expansion",
+      "quality": "Historical baseline test",
+      "risk_security_privacy_performance": "Later owner supersession retires once-only UX contract, so live excludes it",
+      "dead_or_obsolete_status": "Pinned contract/version superseded narrowly by newer explicit owner decision, with original history retained",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 23
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 26,
+        "exact_original_text_match": false,
+        "status": "SUPERSEDED_OR_REWRITTEN"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "Already reconciled current by Nov8 supersession; no duplicate patch",
+      "locked_decision_fit": "Latest explicit Nov8 Locked first-style-until-first-shot and preserved historical evidence control",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 24,
+      "source_text": " const historical={contracts:matrix.contracts.filter(item=>originalIds.has(item.id))};",
+      "inspection_classification": "fixture",
+      "behavior": "Filters current contracts to historical ID set",
+      "quality": "Preserves baseline comparison",
+      "risk_security_privacy_performance": "Archived one-time contract requires narrow exclusion",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 24
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 27,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 25,
+      "source_text": " const original=projection(old).map(row=>row.id==='fast_flow_sixth_style_hybrid'?{",
+      "inspection_classification": "projection",
+      "behavior": "Maps historic contracts with narrow fast flow style supersession",
+      "quality": "Avoids rewriting archival values",
+      "risk_security_privacy_performance": "Also needs later explicit one-time expansion supersession",
+      "dead_or_obsolete_status": "Pinned contract/version superseded narrowly by newer explicit owner decision, with original history retained",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 25
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 28,
+        "exact_original_text_match": false,
+        "status": "SUPERSEDED_OR_REWRITTEN"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "Already reconciled current by Nov8 supersession; no duplicate patch",
+      "locked_decision_fit": "Latest explicit Nov8 Locked first-style-until-first-shot and preserved historical evidence control",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 26,
+      "source_text": "  ...row,assertions:row.assertions.map(a=>a.path==='site/cloud/main.js'&&a.contains===\"C.STYLES.filter(style=>style!=='Custom')\"?",
+      "inspection_classification": "conditional-transform",
+      "behavior": "When old fast-flow assertion uses Custom style filter adjust expected expression",
+      "quality": "Narrow historical accepted change",
+      "risk_security_privacy_performance": "Only one approved expression variant mapped",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 26
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 29,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 27,
+      "source_text": "   {...a,contains:'C.STYLES,suggestion.style'}:a)",
+      "inspection_classification": "conditional-transform",
+      "behavior": "Sets superseded assertion text C.STYLES,suggestion.style",
+      "quality": "Preserves locked newer style handling",
+      "risk_security_privacy_performance": "Not functional UI testing",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 27
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 30,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 28,
+      "source_text": " }:row);",
+      "inspection_classification": "delimiter",
+      "behavior": "Closes mapping of historical projection",
+      "quality": "No runtime member operation",
+      "risk_security_privacy_performance": "None",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 28
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 31,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 29,
+      "source_text": " assert.deepEqual(projection(historical),original);",
+      "inspection_classification": "assertion",
+      "behavior": "Requires current filtered contracts match preserved original except allowed narrow change",
+      "quality": "Protects scope of supersessions",
+      "risk_security_privacy_performance": "Original code pre-Nov8 allowed retired contract incorrectly",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 29
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 32,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 30,
+      "source_text": " for(const key of ['locked_count','open_count','fnv1a32'])assert.equal(matrix.original_baseline[key],old.original_baseline[key]);",
+      "inspection_classification": "assertion-loop",
+      "behavior": "Keeps locked/open/fnv1a32 baseline fingerprint equal archive",
+      "quality": "Protects original decision catalog",
+      "risk_security_privacy_performance": "Does not verify later owner supersessions itself",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 30
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 33,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 31,
+      "source_text": " assert.equal(historical.contracts.length,15);",
+      "inspection_classification": "assertion",
+      "behavior": "Historically expected 15 preserved contracts",
+      "quality": "Pinned snapshot count",
+      "risk_security_privacy_performance": "Live changed to 14 after explicit retired one-time style contract",
+      "dead_or_obsolete_status": "Pinned contract/version superseded narrowly by newer explicit owner decision, with original history retained",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 31
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 34,
+        "exact_original_text_match": false,
+        "status": "SUPERSEDED_OR_REWRITTEN"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "Already reconciled current by Nov8 supersession; no duplicate patch",
+      "locked_decision_fit": "Latest explicit Nov8 Locked first-style-until-first-shot and preserved historical evidence control",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 32,
+      "source_text": " assert.equal(historical.contracts.reduce((sum,item)=>sum+item.assertions.length,0),66);",
+      "inspection_classification": "assertion",
+      "behavior": "Historically expected 66 assertion literals",
+      "quality": "Pinned count",
+      "risk_security_privacy_performance": "Live 59 excludes superseded one-time style assertions",
+      "dead_or_obsolete_status": "Pinned contract/version superseded narrowly by newer explicit owner decision, with original history retained",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 32
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 35,
+        "exact_original_text_match": false,
+        "status": "SUPERSEDED_OR_REWRITTEN"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "Already reconciled current by Nov8 supersession; no duplicate patch",
+      "locked_decision_fit": "Latest explicit Nov8 Locked first-style-until-first-shot and preserved historical evidence control",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 33,
+      "source_text": "});",
+      "inspection_classification": "delimiter",
+      "behavior": "Closes contract continuity test",
+      "quality": "No independent behavior",
+      "risk_security_privacy_performance": "None",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 33
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 42,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 34,
+      "source_text": "test('production evidence survives compact current view without a new release grant',()=>{",
+      "inspection_classification": "test-start",
+      "behavior": "Starts historic production grant evidence persistence test",
+      "quality": "Preserves audit metadata",
+      "risk_security_privacy_performance": "Not fresh deployment/provider state",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 34
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 47,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 35,
+      "source_text": " for(const key of ['exact_source_sha','tested_application_source_sha','netlify_deploy_id'])assert.equal(matrix.production[key],old.production[key]);",
+      "inspection_classification": "loop-assertion",
+      "behavior": "Requires historic source/testing/Netlify IDs equal archived values",
+      "quality": "Prevents historical release evidence rewrite",
+      "risk_security_privacy_performance": "Historical state not today's deployment",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 35
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 48,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 36,
+      "source_text": " for(const key of ['id','tested_source_sha','actual_production_git_sha','netlify_deploy_id','claim_consumed_once'])assert.equal(matrix.production.pending_release[key],old.production.pending_release[key]);",
+      "inspection_classification": "loop-assertion",
+      "behavior": "Requires consumed pending release IDs/SHAs equal archive",
+      "quality": "Protects one-use grant receipt",
+      "risk_security_privacy_performance": "No new publish permission",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 36
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 49,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 37,
+      "source_text": " assert.equal(matrix.production.pending_release.claim_consumed_once,true);",
+      "inspection_classification": "assertion",
+      "behavior": "Historic grant marked consumed once",
+      "quality": "Prevents treating old grant as usable",
+      "risk_security_privacy_performance": "No current provider check",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 37
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 50,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 38,
+      "source_text": " assert.equal(matrix.deployment_approval_policy.new_release_status,'NO_NEW_RELEASE_AUTHORIZED');",
+      "inspection_classification": "assertion",
+      "behavior": "Requires NO_NEW_RELEASE_AUTHORIZED metadata",
+      "quality": "Maintains explicit owner Publish gate",
+      "risk_security_privacy_performance": "Static matrix value not sufficient release controller enforcement",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 38
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 51,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 39,
+      "source_text": " assert.equal(matrix.contracts.find(x=>x.id==='fast_flow_sixth_style_hybrid').production_migration_version,'20261022163126');",
+      "inspection_classification": "assertion",
+      "behavior": "Requires historic fast-flow migration version 20261022163126",
+      "quality": "Preserves migration provenance",
+      "risk_security_privacy_performance": "No SQL production readback",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 39
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 52,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 40,
+      "source_text": " assert.equal(matrix.contracts.find(x=>x.id==='first_coffee_expansion_one_time_style').hosted_sql_applied,true);",
+      "inspection_classification": "assertion",
+      "behavior": "Pinned test expected first_coffee_expansion_one_time_style hosted_sql_applied true",
+      "quality": "Previously active contract",
+      "risk_security_privacy_performance": "Live explicitly replaces with until_first_shot contract after owner Nov8 supersession",
+      "dead_or_obsolete_status": "Pinned contract/version superseded narrowly by newer explicit owner decision, with original history retained",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 40
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 53,
+        "exact_original_text_match": false,
+        "status": "SUPERSEDED_OR_REWRITTEN"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "Already reconciled current by Nov8 supersession; no duplicate patch",
+      "locked_decision_fit": "Latest explicit Nov8 Locked first-style-until-first-shot and preserved historical evidence control",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 41,
+      "source_text": "});",
+      "inspection_classification": "delimiter",
+      "behavior": "Closes historic production evidence test",
+      "quality": "No runtime mutation",
+      "risk_security_privacy_performance": "None",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 41
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 55,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 42,
+      "source_text": "test('current metadata cannot revive retired credit, device, dose or notification-evidence gates',()=>{",
+      "inspection_classification": "test-start",
+      "behavior": "Starts anti-regression for retired credit/device/dose/alert gates",
+      "quality": "Protects owner operational choices",
+      "risk_security_privacy_performance": "Static metadata checks",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 42
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 56,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 43,
+      "source_text": " assert.equal(matrix.netlify_credit_owner_only.assistant_balance_check_required,false);",
+      "inspection_classification": "assertion",
+      "behavior": "No assistant Netlify balance check required",
+      "quality": "Avoids retired credit gate",
+      "risk_security_privacy_performance": "No provider credits inspection",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 43
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 57,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 44,
+      "source_text": " assert.equal(matrix.netlify_credit_owner_only.minimum_balance_gate,false);",
+      "inspection_classification": "assertion",
+      "behavior": "No minimum Netlify balance gate",
+      "quality": "Prevents reintroduction of paid-plan dependency",
+      "risk_security_privacy_performance": "No spend authorized",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 44
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 58,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 45,
+      "source_text": " assert.equal(matrix.netlify_credit_owner_only.request_credit_evidence,false);",
+      "inspection_classification": "assertion",
+      "behavior": "No request for credit evidence from owner",
+      "quality": "Maintains no-babysit policy",
+      "risk_security_privacy_performance": "No balance proof",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 45
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 59,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 46,
+      "source_text": " assert.equal(matrix.netlify_credit_owner_only.netlify_build_credit_gate,false);",
+      "inspection_classification": "assertion",
+      "behavior": "Netlify build credit gate disabled",
+      "quality": "Preserves explicit owner release-only process",
+      "risk_security_privacy_performance": "Does not authorize build or deploy",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 46
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 60,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 47,
+      "source_text": " assert.equal(matrix.single_instruction_approval_policy.readiness_report_is_not_second_approval,true);",
+      "inspection_classification": "assertion",
+      "behavior": "Readiness report not second approval request",
+      "quality": "Streamlines owner-authorized publishing",
+      "risk_security_privacy_performance": "Does not grant current Publish",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 47
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 61,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 48,
+      "source_text": " assert.equal(matrix.single_instruction_approval_policy.owner_device_testing,'NOT_REQUIRED');",
+      "inspection_classification": "assertion",
+      "behavior": "Owner device testing optional not required",
+      "quality": "Preserves completed source test scope",
+      "risk_security_privacy_performance": "Not actual device PASS",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 48
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 62,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 49,
+      "source_text": " assert.match(matrix.sitewide_direct_save_policy.current_dose_policy,/New shot only.*more than 2 g.*no repeat on historical edit/);",
+      "inspection_classification": "assertion",
+      "behavior": "New-shot dose policy permits >2g only for new shot and not historical edit",
+      "quality": "Protects accuracy and previous history",
+      "risk_security_privacy_performance": "String regex not actual UI control",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 49
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 63,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 50,
+      "source_text": " assert.ok(matrix.contracts.every(x=>x.device_acceptance.startsWith('RETIRED_NOT_REQUIRED')));",
+      "inspection_classification": "assertion",
+      "behavior": "All contracts retire physical-device acceptance as completion gate",
+      "quality": "Avoids false blocking",
+      "risk_security_privacy_performance": "Could be overly broad if future owner revises one contract",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 50
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 64,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 51,
+      "source_text": " assert.ok(matrix.active_gap_flags.some(x=>x.id==='multi_worker_release_guard'&&x.issue===27));",
+      "inspection_classification": "assertion",
+      "behavior": "Multi-worker release guard gap flag issue27 present",
+      "quality": "Preserves unresolved concurrency risk evidence",
+      "risk_security_privacy_performance": "No guarantee guard fully enforced",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 51
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 65,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 52,
+      "source_text": " const delivery=matrix.active_gap_flags.find(x=>x.id==='backup_watchdog_delivery_channels');",
+      "inspection_classification": "fixture",
+      "behavior": "Finds backup watchdog delivery gap flag",
+      "quality": "Preserves alert channel discrepancy record",
+      "risk_security_privacy_performance": "No offsite Gmail/Drive provider query",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 52
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 66,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 53,
+      "source_text": " assert.equal(delivery.issue,28);",
+      "inspection_classification": "assertion",
+      "behavior": "Backup alert issue reference remains 28",
+      "quality": "Keeps ownership",
+      "risk_security_privacy_performance": "No scheduled backup test",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 53
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 67,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 54,
+      "source_text": " assert.equal(delivery.status,'METADATA_DISCREPANCY_NATURAL_ALERT_DELIVERY_UNVERIFIED');",
+      "inspection_classification": "assertion",
+      "behavior": "Delivery status remains metadata discrepancy and natural alert unverified",
+      "quality": "Prevents false positive alert claim",
+      "risk_security_privacy_performance": "Dated status may be superseded later",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 54
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 68,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 55,
+      "source_text": " assert.equal(delivery.owner_global_notifications_enabled,'ACCEPTED_PREVIOUS_PROOF');",
+      "inspection_classification": "assertion",
+      "behavior": "Owner global notification proof accepted",
+      "quality": "Avoids demanding repeat proof",
+      "risk_security_privacy_performance": "Does not verify newly sent alert",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 55
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 69,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 56,
+      "source_text": " assert.equal(delivery.disabled_delivery_proven,false);",
+      "inspection_classification": "assertion",
+      "behavior": "Disabled delivery remains unproven false",
+      "quality": "Preserves uncertainty",
+      "risk_security_privacy_performance": "Not proof delivery active",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 56
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 70,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 57,
+      "source_text": " assert.equal(delivery.request_owner_reconfirmation,false);",
+      "inspection_classification": "assertion",
+      "behavior": "Owner reconfirmation not requested",
+      "quality": "Avoids routine repeated confirmation",
+      "risk_security_privacy_performance": "No auto-reminder change",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 57
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 71,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 58,
+      "source_text": " assert.equal(matrix.private_hide_shot_retirement_deferral.candidate_migration_applied,false);",
+      "inspection_classification": "assertion",
+      "behavior": "Deferred private hide-shot migration remains unapplied",
+      "quality": "Protects member data/history",
+      "risk_security_privacy_performance": "No live SQL check",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 58
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 72,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 59,
+      "source_text": "});",
+      "inspection_classification": "delimiter",
+      "behavior": "Closes legacy gate source test",
+      "quality": "No independent code execution",
+      "risk_security_privacy_performance": "None",
+      "dead_or_obsolete_status": "Pinned archived/test source and corresponding live test retained, no dead code proven",
+      "duplicate_or_redundant_status": "No independently verified removable current duplicate; historical contract comparison intentional",
+      "pinned_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 59
+      },
+      "live_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 73,
+        "exact_original_text_match": true,
+        "status": "LITERAL_MATCH"
+      },
+      "testability": "Node22 source test possible but NOT_RUN_THIS_DOCS_BATCH; actual GitHub controller/Netlify/SQL/member backup provider not tested",
+      "remediation_opportunity": "No reproduced current defect requiring change",
+      "locked_decision_fit": "Owner Locked release, backup, Auth and original decision continuity; no new Publish authority",
+      "review_method": "DIRECT_AI_NUMBERED_ORIGINAL_SOURCE_REVIEW_NOT_HUMAN"
+    }
+  ],
+  "live_added_individual_line_reviews": [
+    {
+      "line": 11,
+      "source_text": "const uniqueOwnerKeys=keys=>new Set(keys).size===keys.length;",
+      "inspection_classification": "helper",
+      "behavior": "Adds uniqueness predicate for owner decision key inventory",
+      "quality": "Current test preserves strict historical snapshot and newer scoped owner contract",
+      "risk_security_privacy_performance": "Guards duplicate current keys missing from pinned checks",
+      "dead_or_obsolete_status": "New live-only test source absent pinned snapshot",
+      "duplicate_or_redundant_status": "No proven safe removal; negative duplicate-key test separate",
+      "live_source": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 11
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Static Node22 check source, actual live state tests not run for this receipt",
+      "remediation_opportunity": "No new runtime change",
+      "locked_decision_fit": "Supports explicit newest owner Locked first-coffee style until shot and original archived baseline preservation",
+      "review_method": "DIRECT_AI_NUMBERED_LIVE_POSTPIN_LINE_REVIEW"
+    },
+    {
+      "line": 22,
+      "source_text": " assert.ok(uniqueOwnerKeys(matrix.owner_decision_key_inventory),'current inventory must not duplicate owner decision keys');",
+      "inspection_classification": "assertion",
+      "behavior": "Asserts current owner inventory has no duplicate keys",
+      "quality": "Current test preserves strict historical snapshot and newer scoped owner contract",
+      "risk_security_privacy_performance": "Preserves all decisions without duplicates",
+      "dead_or_obsolete_status": "New live-only test source absent pinned snapshot",
+      "duplicate_or_redundant_status": "No proven safe removal; negative duplicate-key test separate",
+      "live_source": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 22
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Static Node22 check source, actual live state tests not run for this receipt",
+      "remediation_opportunity": "No new runtime change",
+      "locked_decision_fit": "Supports explicit newest owner Locked first-coffee style until shot and original archived baseline preservation",
+      "review_method": "DIRECT_AI_NUMBERED_LIVE_POSTPIN_LINE_REVIEW"
+    },
+    {
+      "line": 25,
+      "source_text": " const retiredId='first_coffee_expansion_one_time_style';",
+      "inspection_classification": "fixture",
+      "behavior": "Defines retired one-time first-expansion contract ID",
+      "quality": "Current test preserves strict historical snapshot and newer scoped owner contract",
+      "risk_security_privacy_performance": "Later owner supersession is narrowly scoped",
+      "dead_or_obsolete_status": "New live-only test source absent pinned snapshot",
+      "duplicate_or_redundant_status": "No proven safe removal; negative duplicate-key test separate",
+      "live_source": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 25
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Static Node22 check source, actual live state tests not run for this receipt",
+      "remediation_opportunity": "No new runtime change",
+      "locked_decision_fit": "Supports explicit newest owner Locked first-coffee style until shot and original archived baseline preservation",
+      "review_method": "DIRECT_AI_NUMBERED_LIVE_POSTPIN_LINE_REVIEW"
+    },
+    {
+      "line": 36,
+      "source_text": " const next=matrix.contracts.find(item=>item.id==='first_coffee_expansion_until_first_shot');",
+      "inspection_classification": "fixture",
+      "behavior": "Finds newer first-coffee-expansion-until-first-shot contract",
+      "quality": "Current test preserves strict historical snapshot and newer scoped owner contract",
+      "risk_security_privacy_performance": "Supports explicit Nov8 Locked owner revision",
+      "dead_or_obsolete_status": "New live-only test source absent pinned snapshot",
+      "duplicate_or_redundant_status": "No proven safe removal; negative duplicate-key test separate",
+      "live_source": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 36
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Static Node22 check source, actual live state tests not run for this receipt",
+      "remediation_opportunity": "No new runtime change",
+      "locked_decision_fit": "Supports explicit newest owner Locked first-coffee style until shot and original archived baseline preservation",
+      "review_method": "DIRECT_AI_NUMBERED_LIVE_POSTPIN_LINE_REVIEW"
+    },
+    {
+      "line": 37,
+      "source_text": " assert.equal(next.decision_key,'current_owner_first_shot_style_until_logged_20261108');",
+      "inspection_classification": "assertion",
+      "behavior": "Requires Nov8 until-logged decision key",
+      "quality": "Current test preserves strict historical snapshot and newer scoped owner contract",
+      "risk_security_privacy_performance": "Protects supersession provenance",
+      "dead_or_obsolete_status": "New live-only test source absent pinned snapshot",
+      "duplicate_or_redundant_status": "No proven safe removal; negative duplicate-key test separate",
+      "live_source": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 37
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Static Node22 check source, actual live state tests not run for this receipt",
+      "remediation_opportunity": "No new runtime change",
+      "locked_decision_fit": "Supports explicit newest owner Locked first-coffee style until shot and original archived baseline preservation",
+      "review_method": "DIRECT_AI_NUMBERED_LIVE_POSTPIN_LINE_REVIEW"
+    },
+    {
+      "line": 38,
+      "source_text": " assert.ok(next.assertions.some(a=>a.path==='site/cloud/main.js'&&a.contains?.includes('const firstStyle=!s.shots.some(')));",
+      "inspection_classification": "assertion",
+      "behavior": "Requires current site firstStyle guard expression",
+      "quality": "Current test preserves strict historical snapshot and newer scoped owner contract",
+      "risk_security_privacy_performance": "Static check of updated app logic",
+      "dead_or_obsolete_status": "New live-only test source absent pinned snapshot",
+      "duplicate_or_redundant_status": "No proven safe removal; negative duplicate-key test separate",
+      "live_source": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 38
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Static Node22 check source, actual live state tests not run for this receipt",
+      "remediation_opportunity": "No new runtime change",
+      "locked_decision_fit": "Supports explicit newest owner Locked first-coffee style until shot and original archived baseline preservation",
+      "review_method": "DIRECT_AI_NUMBERED_LIVE_POSTPIN_LINE_REVIEW"
+    },
+    {
+      "line": 39,
+      "source_text": " assert.equal(old.contracts.find(item=>item.id===retiredId).hosted_sql_applied,false,",
+      "inspection_classification": "assertion-continued",
+      "behavior": "Requires immutable archive old one-time contract hosted_sql_applied false",
+      "quality": "Current test preserves strict historical snapshot and newer scoped owner contract",
+      "risk_security_privacy_performance": "Retains historical instead of rewriting proof",
+      "dead_or_obsolete_status": "New live-only test source absent pinned snapshot",
+      "duplicate_or_redundant_status": "No proven safe removal; negative duplicate-key test separate",
+      "live_source": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 39
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Static Node22 check source, actual live state tests not run for this receipt",
+      "remediation_opportunity": "No new runtime change",
+      "locked_decision_fit": "Supports explicit newest owner Locked first-coffee style until shot and original archived baseline preservation",
+      "review_method": "DIRECT_AI_NUMBERED_LIVE_POSTPIN_LINE_REVIEW"
+    },
+    {
+      "line": 40,
+      "source_text": "  'immutable archive records then-unapplied SQL without rewriting historical status');",
+      "inspection_classification": "assertion-message",
+      "behavior": "Documents archived SQL then-unapplied historical meaning",
+      "quality": "Current test preserves strict historical snapshot and newer scoped owner contract",
+      "risk_security_privacy_performance": "Nonbehavior string",
+      "dead_or_obsolete_status": "New live-only test source absent pinned snapshot",
+      "duplicate_or_redundant_status": "No proven safe removal; negative duplicate-key test separate",
+      "live_source": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 40
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Static Node22 check source, actual live state tests not run for this receipt",
+      "remediation_opportunity": "No new runtime change",
+      "locked_decision_fit": "Supports explicit newest owner Locked first-coffee style until shot and original archived baseline preservation",
+      "review_method": "DIRECT_AI_NUMBERED_LIVE_POSTPIN_LINE_REVIEW"
+    },
+    {
+      "line": 41,
+      "source_text": " assert.equal(next.hosted_sql_applied,true,'active contract preserves later hosted SQL state');",
+      "inspection_classification": "assertion",
+      "behavior": "Requires newer active contract hosted SQL applied true",
+      "quality": "Current test preserves strict historical snapshot and newer scoped owner contract",
+      "risk_security_privacy_performance": "Keeps current metadata distinct from archive",
+      "dead_or_obsolete_status": "New live-only test source absent pinned snapshot",
+      "duplicate_or_redundant_status": "No proven safe removal; negative duplicate-key test separate",
+      "live_source": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 41
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Static Node22 check source, actual live state tests not run for this receipt",
+      "remediation_opportunity": "No new runtime change",
+      "locked_decision_fit": "Supports explicit newest owner Locked first-coffee style until shot and original archived baseline preservation",
+      "review_method": "DIRECT_AI_NUMBERED_LIVE_POSTPIN_LINE_REVIEW"
+    },
+    {
+      "line": 43,
+      "source_text": "test('owner decision key duplicate negative control',()=>{",
+      "inspection_classification": "test-start",
+      "behavior": "Starts duplicate-key negative control",
+      "quality": "Current test preserves strict historical snapshot and newer scoped owner contract",
+      "risk_security_privacy_performance": "Adversarial coverage test",
+      "dead_or_obsolete_status": "New live-only test source absent pinned snapshot",
+      "duplicate_or_redundant_status": "No proven safe removal; negative duplicate-key test separate",
+      "live_source": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 43
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Static Node22 check source, actual live state tests not run for this receipt",
+      "remediation_opportunity": "No new runtime change",
+      "locked_decision_fit": "Supports explicit newest owner Locked first-coffee style until shot and original archived baseline preservation",
+      "review_method": "DIRECT_AI_NUMBERED_LIVE_POSTPIN_LINE_REVIEW"
+    },
+    {
+      "line": 44,
+      "source_text": " const keys=matrix.owner_decision_key_inventory;",
+      "inspection_classification": "fixture",
+      "behavior": "Uses current owner decision key array",
+      "quality": "Current test preserves strict historical snapshot and newer scoped owner contract",
+      "risk_security_privacy_performance": "Negative control source",
+      "dead_or_obsolete_status": "New live-only test source absent pinned snapshot",
+      "duplicate_or_redundant_status": "No proven safe removal; negative duplicate-key test separate",
+      "live_source": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 44
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Static Node22 check source, actual live state tests not run for this receipt",
+      "remediation_opportunity": "No new runtime change",
+      "locked_decision_fit": "Supports explicit newest owner Locked first-coffee style until shot and original archived baseline preservation",
+      "review_method": "DIRECT_AI_NUMBERED_LIVE_POSTPIN_LINE_REVIEW"
+    },
+    {
+      "line": 45,
+      "source_text": " assert.equal(uniqueOwnerKeys([...keys,keys.at(-1)]),false);",
+      "inspection_classification": "negative-assertion",
+      "behavior": "Appending last key must violate uniqueness",
+      "quality": "Current test preserves strict historical snapshot and newer scoped owner contract",
+      "risk_security_privacy_performance": "Proves duplicate detector fires",
+      "dead_or_obsolete_status": "New live-only test source absent pinned snapshot",
+      "duplicate_or_redundant_status": "No proven safe removal; negative duplicate-key test separate",
+      "live_source": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 45
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Static Node22 check source, actual live state tests not run for this receipt",
+      "remediation_opportunity": "No new runtime change",
+      "locked_decision_fit": "Supports explicit newest owner Locked first-coffee style until shot and original archived baseline preservation",
+      "review_method": "DIRECT_AI_NUMBERED_LIVE_POSTPIN_LINE_REVIEW"
+    },
+    {
+      "line": 46,
+      "source_text": "});",
+      "inspection_classification": "delimiter",
+      "behavior": "Ends negative control test",
+      "quality": "Current test preserves strict historical snapshot and newer scoped owner contract",
+      "risk_security_privacy_performance": "No behavior",
+      "dead_or_obsolete_status": "New live-only test source absent pinned snapshot",
+      "duplicate_or_redundant_status": "No proven safe removal; negative duplicate-key test separate",
+      "live_source": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 46
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Static Node22 check source, actual live state tests not run for this receipt",
+      "remediation_opportunity": "No new runtime change",
+      "locked_decision_fit": "Supports explicit newest owner Locked first-coffee style until shot and original archived baseline preservation",
+      "review_method": "DIRECT_AI_NUMBERED_LIVE_POSTPIN_LINE_REVIEW"
+    },
+    {
+      "line": 54,
+      "source_text": " assert.equal(matrix.contracts.find(x=>x.id==='first_coffee_expansion_until_first_shot').site_published,false);",
+      "inspection_classification": "assertion",
+      "behavior": "Requires newer until-first-shot contract site_published false",
+      "quality": "Current test preserves strict historical snapshot and newer scoped owner contract",
+      "risk_security_privacy_performance": "Preserves deferred publication boundary",
+      "dead_or_obsolete_status": "New live-only test source absent pinned snapshot",
+      "duplicate_or_redundant_status": "No proven safe removal; negative duplicate-key test separate",
+      "live_source": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "commit": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 54
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Static Node22 check source, actual live state tests not run for this receipt",
+      "remediation_opportunity": "No new runtime change",
+      "locked_decision_fit": "Supports explicit newest owner Locked first-coffee style until shot and original archived baseline preservation",
+      "review_method": "DIRECT_AI_NUMBERED_LIVE_POSTPIN_LINE_REVIEW"
+    }
+  ],
+  "findings": [
+    {
+      "category": "HISTORICAL_CONTRACT_SCOPED_SUPERSESSION",
+      "original_lines": [
+        21,
+        22,
+        23,
+        25,
+        31,
+        32,
+        40
+      ],
+      "disposition": "Already corrected current test: old once-only first expansion contract excluded; Nov8 until-first-shot active contract validated; original archive intact. No current runtime defect claimed."
+    },
+    {
+      "category": "DUPLICATE_DECISION_KEY_TEST_HARDENING",
+      "new_live_lines": [
+        11,
+        22,
+        43,
+        44,
+        45,
+        46
+      ],
+      "disposition": "Current live checks uniqueness and negative test. No new change."
+    },
+    {
+      "category": "PROVIDER_AND_BACKUP_EVIDENCE_LIMIT",
+      "original_lines": [
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57
+      ],
+      "disposition": "Static archived matrix checks; no new Publish/real Netlify/SQL/backup/alert claim."
+    }
+  ],
+  "new_pinned_original_lines": 59,
+  "new_separate_live_added_lines": 14,
+  "global_state": "OPEN_INCOMPLETE",
+  "functional_tests": "NOT_RUN_DOCS_ONLY",
+  "release_authority": "DEVELOPMENT_ONLY",
+  "next": "Pinned 436-file last index P436 fully bounded, global strict receipts and postpin drift still unverified, original frozen audit ongoing"
+}
