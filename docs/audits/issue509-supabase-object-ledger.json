@@ -19856,5 +19856,41 @@
     "governance_ci": "UNVERIFIED_POSTCOMMIT",
     "baseline_complete": false,
     "next_cursor": "Provider drift; numeric ranks 1121-1200 deduplicated against 1110 ids; hosted Auth/JWT still UNVERIFIED"
+  },
+  "provider_realtime_drift_run239": {
+    "run": 239,
+    "preflight_development_sha": "fa83b40da0f088a87149bac38ef6533e4c3472fd",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt_path": "docs/audits/issue509-pgss-realtime-raw-filter-drift-2026-11-14-run239-rank1121-1200.json",
+    "cumulative_index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-14-run239.json",
+    "provider_observed_at": "2026-11-14T10:53:30.588965+00:00",
+    "numeric_rank_range": [
+      1121,
+      1200
+    ],
+    "numeric_rows": 80,
+    "prior_distinct": 1110,
+    "new_distinct": 78,
+    "overlap": [
+      "2677202980892661741",
+      "-56080389644157046"
+    ],
+    "cumulative_distinct": 1188,
+    "changed_realtime_apply_rls_complete_ddl_chars": 16972,
+    "new_realtime_filters_hash_complete_ddl_chars": 321,
+    "prior_realtime_function_count": 18,
+    "current_realtime_function_count": 19,
+    "provider_app_function_md5": "4bfc78411475d7b7c9699c6c8a8f757d",
+    "app_tables": 52,
+    "app_functions": 114,
+    "app_policies": 41,
+    "applied_migrations": 69,
+    "verified_new_defects": 0,
+    "justified_removals": 0,
+    "live_provider_writes": 0,
+    "source_changes": 0,
+    "baseline_complete": false,
+    "hosted_api": "UNVERIFIED_ISSUE96",
+    "next_cursor": "Provider drift then numeric ranks 1201-1280; dedupe against 1188 IDs"
   }
 }
