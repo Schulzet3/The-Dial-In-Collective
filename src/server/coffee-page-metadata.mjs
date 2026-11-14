@@ -10,7 +10,7 @@ import {extractRoastVisualEvidence,normalizeRoastLabel,roastLabelHint} from './r
 import {extractLayoutEvidence,coffeeLayoutDetailConflicts} from './coffee-product-layouts.mjs';
 import {extractNarrativeCoffeeEvidence} from './coffee-narrative-evidence.mjs';
 import {extractCoffeeBlendEvidence,extractSelectedBlendCommunityCredit,extractSelectedRegionalBlendElevation,selectedPartialBlendProcess,withoutCoffeeBlendComponentSpecs} from './coffee-blend-evidence.mjs';
-import {extractCoffeeIdentityEvidence,extractCoffeeCurrentReleasePrefixes,extractCoffeeTitleOrigin,extractCoffeeGeographyTuples,coffeeDescriptionCountryMismatch,coffeeDescriptionNamedCoffeeMismatch,explicitCoffeeVarietyList,literalCoffeeSourcePlaces} from './coffee-identity-evidence.mjs';
+import {extractCoffeeIdentityEvidence,extractCoffeeCurrentReleasePrefixes,extractCoffeeTitleOrigin,selectedCoffeeNameFromCountryVarietyProcessTitle,extractCoffeeGeographyTuples,coffeeDescriptionCountryMismatch,coffeeDescriptionNamedCoffeeMismatch,explicitCoffeeVarietyList,literalCoffeeSourcePlaces} from './coffee-identity-evidence.mjs';
 import {extractProductEspressoReference} from './coffee-espresso-evidence.mjs';
 import {productMarkup,coffeeHtmlAttributes,withoutDetachedFarmerProfiles} from './coffee-product-scope.mjs';
 import {productCoffeeProse} from './coffee-product-prose.mjs';
@@ -2923,6 +2923,20 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     section:'Current selected product React Router/Hydrogen loader data'
    });
   }
+ }
+
+ // All identity/scope/field evidence above used the unmodified selected
+ // Product name. Shorten only the user-facing name after those checks and
+ // retain the original printed title for traceability and later review.
+ const publishedFullTitle=fields.name;
+ const coffeeName=selectedCoffeeNameFromCountryVarietyProcessTitle(publishedFullTitle);
+ if(coffeeName!==publishedFullTitle){
+  if(source_facts.length<384)source_facts.push({
+   field:'name',label:'Selected Product full published title',value:publishedFullTitle,
+   source_url,source_type:'html',
+   section:'Exact selected Product title; country, cultivar and process separated for display'
+  });
+  fields.name=coffeeName;
  }
 
  // An extracted value is a suggestion, never proof of an official source.
