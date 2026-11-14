@@ -14003,14 +14003,16 @@
       "owner_source": "Owner screenshot November 14, 2026 and direct fix/cleanup instruction; UX-COFFEE-SCREEN-DIFFERENCES-PREVIEW-20261114; preflight source 4854b80adcc661c84adbe48da736e744f603f66d blob 2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "tests": [
         "Five new focused tap-to-fill/revert/manual correction, invalid dropdown, source-preservation and UI regressions in tests/coffee-conflict-tap-to-fill.test.mjs; exact PR-head checks pending.",
-        "Existing conflict selection, Add Coffee, cloud/mobile visual, offline, approval, security and isolated SQL CI to be checked without duplicated suites; unrun != PASS."
+        "Existing conflict selection, Add Coffee, cloud/mobile visual, offline, approval, security and isolated SQL CI to be checked without duplicated suites; unrun != PASS.",
+        "Initial PR-head #2622 approval 43571046587 FAILED solely because IN_PROGRESS queue merged_source_sha was omitted; schema requires null or a valid Git SHA; set null pending merge. Previously passing source tests remain separately scoped and not credited to corrected head."
       ],
       "blockers": [
         "Five required exact-source CI checks and hosted Node22/lint/build/browser pending.",
         "Safe nonforce development integration and exact merged-source readback pending."
       ],
       "ci_runs": [],
-      "notes": "Owner authorized development only. Do not publish. Internal public source evidence and exports remain intact; visual source/download controls removed. No Auth, SQL, private members, offline, Community, shots or history changes."
+      "notes": "Owner authorized development only. Do not publish. Internal public source evidence and exports remain intact; visual source/download controls removed. No Auth, SQL, private members, offline, Community, shots or history changes.",
+      "merged_source_sha": null
     }
   ],
   "history": [

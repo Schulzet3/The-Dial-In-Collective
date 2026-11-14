@@ -9,3 +9,10 @@ DIC_PREFLIGHT_VERIFIED development_sha=4854b80adcc661c84adbe48da736e744f603f66d 
 - **Tests:** five new focused/hostile tests and prior regressions; required hosted CI, one build and browser visual validation PENDING. No PASS/READY claim until exact-source readback.
 - **Provider:** NOT_APPLICABLE. No Netlify production, Supabase SQL/Edge/Auth, member-record write, spending, backup or publication.
 - **Next:** inspect exact PR-head checks, fix selectively, nonforce merge explicit [skip netlify], read back merged SHA and tests; reconcile queue/status/issue only if evidence passes. Separate NEW owner Publish required.
+
+## PR-head queue intake schema repair [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=4854b80adcc661c84adbe48da736e744f603f66d preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- Exact #2622 PR-head approval 43571046587 failed with `DIC-Q-2621... invalid merged source SHA` because the IN_PROGRESS row omitted this required property. Repo validator explicitly accepts `null` for work not yet merged; repaired to `merged_source_sha: null` without fabricating a merge or changing application/runtime code. Hosted source security 43571046600 and isolated SQL 43571046601 SUCCESS on prior head; Node/build and browser source-bound outcomes must be rechecked for the final PR head. Retained failed checks, no bypass.
+- After this repair: inspect final exact-source CI; nonforce development integration with [skip netlify]; source-bound READY queue reconciliation only after tests. No publication.
