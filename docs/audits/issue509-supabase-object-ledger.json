@@ -20432,5 +20432,58 @@
     "source_writes": 0,
     "baseline_complete": false,
     "next_cursor": "drift; numeric 2001-2080; remaining provider full-source review"
+  },
+  "provider_pgss_preview_edge_run250": {
+    "preflight_development_sha": "63b185d8033b5bbecfe50eb4db4985dda5c93dd3",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_development_sha": "63b185d8033b5bbecfe50eb4db4985dda5c93dd3",
+    "receipt_path": "docs/audits/issue509-preview-edge-provider-pgss-2026-11-14-run250-rank2001-2080.json",
+    "complete_sql_source_chars": 7951,
+    "sql_definitions": [
+      {
+        "signature": "private.dic_shared_preview_claim(uuid)",
+        "md5": "8d8c9c371ecdb320dd03cbae2ab4c2dd",
+        "chars": 1876,
+        "verdict": "Service-only private helper: requires real account, admitted verified administrator exempt from caps; other accounts have 12/day and 15s cooldown, serialized row locking. Does not expose direct client EXECUTE."
+      },
+      {
+        "signature": "dic_claim_universal_preview()",
+        "md5": "8f4bc6ecd8687594ff7200cda26104b5",
+        "chars": 618,
+        "verdict": "Authenticated/admitted member with confirmed email required; service-only helper applies admin exemption/member quota; anon EXECUTE denied."
+      },
+      {
+        "signature": "dic_preview_cached_verified(text)",
+        "md5": "86a08b5ae97f89c13b8c727ebdd0c50f",
+        "chars": 1658,
+        "verdict": "Read-only exact HTTPS URL verified catalog match, requires unique unmerged verified coffee, admitted and email confirmed; no URL network request or private member source rows."
+      },
+      {
+        "signature": "dic_preview_complete(uuid)",
+        "md5": "95324ba674010588a74507024c12ef91",
+        "chars": 1339,
+        "verdict": "Member ticket is matched by caller owner, expires after 25s, increments quota serially; admitted verified admins exempt; no real HTTP acceptance established."
+      },
+      {
+        "signature": "dic_preview_preflight(boolean)",
+        "md5": "395d4a717122f9feb5ae04ac3c5a1d6a",
+        "chars": 2460,
+        "verdict": "Rejects NULL cached flag, enforces 15s cooldown and 12/day uncached quota for members; cached previews don't count daily fetch. Admin verified unlimited path; no defect reproduced."
+      }
+    ],
+    "edge_slug": "dic-member-approval-broker",
+    "edge_version": 1,
+    "edge_source_chars": 11929,
+    "edge_source_byte_equal": true,
+    "pgss_rank_range": [
+      2001,
+      2080
+    ],
+    "new_distinct": 77,
+    "overlap": 3,
+    "cumulative_distinct": 2020,
+    "baseline_complete": false,
+    "provider_writes": 0,
+    "next_cursor": "2081-2160; other provider definition text"
   }
 }

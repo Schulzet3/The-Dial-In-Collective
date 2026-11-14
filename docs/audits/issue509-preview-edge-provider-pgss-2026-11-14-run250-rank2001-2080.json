@@ -1,0 +1,884 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 250,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight_development_sha": "63b185d8033b5bbecfe50eb4db4985dda5c93dd3",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "prewrite_development_sha": "63b185d8033b5bbecfe50eb4db4985dda5c93dd3",
+  "observed_at": "2026-11-14T21:46:33.308381Z",
+  "provider_catalog": {
+    "app_tables": 52,
+    "app_functions": 114,
+    "policies": 41,
+    "applied_migrations": 69,
+    "pgss_count": 4924,
+    "pgss_reset": "2026-10-09 11:11:31.487298+00",
+    "retired_approved_roaster_directory_relations": 0
+  },
+  "five_full_current_sql_definitions": [
+    {
+      "signature": "private.dic_shared_preview_claim(uuid)",
+      "definition": "CREATE OR REPLACE FUNCTION private.dic_shared_preview_claim(account_id uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare\n rec private.dic_url_preview_attempts;\n clock timestamptz:=now();\nbegin\n if account_id is null or not exists(select 1 from auth.users u where u.id=account_id)\n then return jsonb_build_object('allowed',false,'reason','unknown_account');end if;\n -- Database-authoritative admin; require active admission and verified email.\n -- No untrusted client privilege flag or caller-supplied administrative role.\n if exists(\n   select 1 from private.app_admins a\n   join private.beta_members m on m.owner_id=a.owner_id\n   join auth.users u on u.id=a.owner_id\n   where a.owner_id=account_id and m.enabled and m.admitted_at is not null\n     and u.email_confirmed_at is not null\n ) then return jsonb_build_object('allowed',true,'unlimited',true);end if;\n insert into private.dic_url_preview_attempts(owner_id,window_started_at,last_attempt_at,attempts)\n values(account_id,clock,clock-interval '1 minute',0)\n on conflict(owner_id) do nothing;\n select * into strict rec from private.dic_url_preview_attempts\n where owner_id=account_id for update;\n if rec.window_started_at<clock-interval '24 hours' then\n  update private.dic_url_preview_attempts\n   set window_started_at=clock,last_attempt_at=clock,attempts=1\n   where owner_id=account_id;\n  return jsonb_build_object('allowed',true);\n end if;\n if rec.attempts>=12 then return jsonb_build_object('allowed',false,'reason','daily_preview_limit');end if;\n if rec.last_attempt_at>clock-interval '15 seconds'\n then return jsonb_build_object('allowed',false,'reason','preview_cooldown');end if;\n update private.dic_url_preview_attempts\n  set attempts=rec.attempts+1,last_attempt_at=clock\n  where owner_id=account_id;\n return jsonb_build_object('allowed',true);\nend $function$\n",
+      "md5": "8d8c9c371ecdb320dd03cbae2ab4c2dd",
+      "security_definer": true,
+      "config": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "service_execute": true,
+      "source_chars": 1876,
+      "verdict": "Service-only private helper: requires real account, admitted verified administrator exempt from caps; other accounts have 12/day and 15s cooldown, serialized row locking. Does not expose direct client EXECUTE."
+    },
+    {
+      "signature": "dic_claim_universal_preview()",
+      "definition": "CREATE OR REPLACE FUNCTION public.dic_claim_universal_preview()\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare me uuid:=auth.uid();\nbegin\n if me is null\n  or auth.role() is distinct from 'authenticated'\n  or not private.is_member() then\n  return jsonb_build_object('allowed',false,'reason','admitted_member_required');\n end if;\n if not exists(select 1 from auth.users u where u.id=me\n  and u.email_confirmed_at is not null) then\n  return jsonb_build_object('allowed',false,'reason','verify_email');\n end if;\n return private.dic_shared_preview_claim(me);\nend $function$\n",
+      "md5": "8f4bc6ecd8687594ff7200cda26104b5",
+      "security_definer": true,
+      "config": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "authenticated_execute": true,
+      "service_execute": true,
+      "source_chars": 618,
+      "verdict": "Authenticated/admitted member with confirmed email required; service-only helper applies admin exemption/member quota; anon EXECUTE denied."
+    },
+    {
+      "signature": "dic_preview_cached_verified(text)",
+      "definition": "CREATE OR REPLACE FUNCTION public.dic_preview_cached_verified(p_source_url text)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare me uuid:=auth.uid(); ids uuid[]; coffee public.coffees;\nbegin\n if me is null or auth.role() is distinct from 'authenticated' or not private.is_member() then\n  raise exception using errcode='42501',message='Admitted member required.';\n end if;\n if not exists(select 1 from auth.users u where u.id=me and u.email_confirmed_at is not null) then\n  raise exception using errcode='42501',message='Email confirmation required.';\n end if;\n if p_source_url is null or length(p_source_url)>900 or\n   p_source_url not like 'https://%' then return null; end if;\n select array_agg(distinct c.id) into ids\n from public.coffee_sources s join public.coffees c on c.id=s.coffee_id\n where s.source_url=p_source_url and s.source_kind='roaster_page'\n   and c.verification_state='verified' and c.merged_into_id is null;\n if coalesce(array_length(ids,1),0)<>1 then return null; end if;\n select * into strict coffee from public.coffees where id=ids[1];\n return jsonb_build_object(\n  'ok',true,'source','verified_catalog','cached',true,'source_url',p_source_url,\n  'fields',jsonb_strip_nulls(jsonb_build_object(\n   'name',coffee.name,'roaster',coffee.roaster,'release_label',coffee.release_label,\n   'origin',coffee.origin,'process',coffee.process,'roast_level',coffee.roast_level,\n   'variety',coffee.variety,'producer',coffee.producer,\n   'elevation_m',coffee.elevation_m,'tasting_notes',coffee.tasting_notes,\n   'summary',coffee.summary,'espresso_notes',coffee.espresso_notes)));\nend $function$\n",
+      "md5": "86a08b5ae97f89c13b8c727ebdd0c50f",
+      "security_definer": true,
+      "config": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "authenticated_execute": true,
+      "service_execute": true,
+      "source_chars": 1658,
+      "verdict": "Read-only exact HTTPS URL verified catalog match, requires unique unmerged verified coffee, admitted and email confirmed; no URL network request or private member source rows."
+    },
+    {
+      "signature": "dic_preview_complete(uuid)",
+      "definition": "CREATE OR REPLACE FUNCTION public.dic_preview_complete(p_ticket uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare\n me uuid:=auth.uid();\n rec private.dic_url_preview_attempts;\nbegin\n if me is null or auth.role() is distinct from 'authenticated' or not private.is_member() then\n  return jsonb_build_object('charged',false,'reason','admitted_member_required');\n end if;\n if p_ticket is null then return jsonb_build_object('charged',false,'reason','invalid_ticket'); end if;\n if private.is_admin()\n   and exists(select 1 from auth.users u where u.id=me and u.email_confirmed_at is not null) then\n  return jsonb_build_object('charged',true,'unlimited',true);\n end if;\n select * into rec from private.dic_url_preview_attempts where owner_id=me for update;\n if not found or rec.preview_ticket is distinct from p_ticket or\n   rec.preview_ticket_at is null or rec.preview_ticket_at<now()-interval '25 seconds' then\n  return jsonb_build_object('charged',false,'reason','invalid_ticket');\n end if;\n if rec.attempts>=12 then return jsonb_build_object('charged',false,'reason','daily_preview_limit'); end if;\n update private.dic_url_preview_attempts\n set attempts=rec.attempts+1,preview_ticket=null,preview_ticket_at=null where owner_id=me;\n return jsonb_build_object('charged',true);\nend $function$\n",
+      "md5": "95324ba674010588a74507024c12ef91",
+      "security_definer": true,
+      "config": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "authenticated_execute": true,
+      "service_execute": true,
+      "source_chars": 1339,
+      "verdict": "Member ticket is matched by caller owner, expires after 25s, increments quota serially; admitted verified admins exempt; no real HTTP acceptance established."
+    },
+    {
+      "signature": "dic_preview_preflight(boolean)",
+      "definition": "CREATE OR REPLACE FUNCTION public.dic_preview_preflight(p_cached boolean DEFAULT false)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare\n me uuid:=auth.uid();\n rec private.dic_url_preview_attempts;\n clock timestamptz:=now();\n ticket uuid;\nbegin\n if me is null or auth.role() is distinct from 'authenticated' or not private.is_member() then\n  return jsonb_build_object('allowed',false,'reason','admitted_member_required');\n end if;\n if not exists(select 1 from auth.users u where u.id=me and u.email_confirmed_at is not null) then\n  return jsonb_build_object('allowed',false,'reason','verify_email');\n end if;\n if p_cached is null then\n  return jsonb_build_object('allowed',false,'reason','invalid_cached_flag');\n end if;\n -- Admin ticket only acknowledges a read-only preview. No account cap,\n -- waiting, counter row mutation, or serialized ticket lock for admins.\n if private.is_admin() then\n  if p_cached then\n   return jsonb_build_object('allowed',true,'cached',true,'unlimited',true);\n  end if;\n  return jsonb_build_object('allowed',true,'ticket',gen_random_uuid(),'unlimited',true);\n end if;\n insert into private.dic_url_preview_attempts(owner_id,window_started_at,last_attempt_at,attempts)\n values(me,clock,clock-interval '1 minute',0) on conflict(owner_id) do nothing;\n select * into strict rec from private.dic_url_preview_attempts where owner_id=me for update;\n if rec.window_started_at<clock-interval '24 hours' then\n  update private.dic_url_preview_attempts\n    set window_started_at=clock,attempts=0,preview_ticket=null,preview_ticket_at=null\n    where owner_id=me;\n  rec.attempts:=0;\n end if;\n -- A cached public result consumes cooldown but never a daily retrieval claim.\n if not p_cached and rec.attempts>=12 then\n  return jsonb_build_object('allowed',false,'reason','daily_preview_limit');\n end if;\n if rec.last_attempt_at>clock-interval '15 seconds' then\n  return jsonb_build_object('allowed',false,'reason','preview_cooldown');\n end if;\n if p_cached then\n  update private.dic_url_preview_attempts\n    set last_attempt_at=clock,preview_ticket=null,preview_ticket_at=null where owner_id=me;\n  return jsonb_build_object('allowed',true,'cached',true);\n end if;\n ticket:=gen_random_uuid();\n update private.dic_url_preview_attempts\n  set last_attempt_at=clock,preview_ticket=ticket,preview_ticket_at=clock where owner_id=me;\n return jsonb_build_object('allowed',true,'ticket',ticket);\nend $function$\n",
+      "md5": "395d4a717122f9feb5ae04ac3c5a1d6a",
+      "security_definer": true,
+      "config": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "authenticated_execute": true,
+      "service_execute": true,
+      "source_chars": 2460,
+      "verdict": "Rejects NULL cached flag, enforces 15s cooldown and 12/day uncached quota for members; cached previews don't count daily fetch. Admin verified unlimited path; no defect reproduced."
+    }
+  ],
+  "complete_sql_chars": 7951,
+  "credit": "Direct semantic current SQL re-review; not original source-code line count",
+  "edge": {
+    "slug": "dic-member-approval-broker",
+    "version": 1,
+    "status": "ACTIVE",
+    "verify_jwt": false,
+    "ezbr_sha256": "263f36326fa00934a4c7cfb7ecc6e3df9872e9b4f0395ef1326455d9bb2bded7",
+    "files": [
+      {
+        "name": "core.mjs",
+        "provider_characters": 11751,
+        "git_blob_sha": "1bc82c0c0f7e90bb86dd7da895c18f9c4e015c5a",
+        "byte_equal_current_development": true
+      },
+      {
+        "name": "index.ts",
+        "provider_characters": 178,
+        "git_blob_sha": "046781fa56426c761ded24679000212549999ba0",
+        "byte_equal_current_development": true
+      }
+    ],
+    "verdict": "Complete two-file deployed Edge source reviewed. Poll-only no-JWT endpoint uses protected service RPC/rate gate; member operations independently validate Auth user plus session approval status. No HTTP/signed-in delivery was performed; those remain UNVERIFIED under #96."
+  },
+  "advisory": {
+    "rls_enabled_no_policy_info": 13,
+    "signed_in_definer_warn": 10,
+    "unindexed_fk_info": 14,
+    "unused_index_info": 8,
+    "health": 0,
+    "verdict": "Existing notices only; no independently reproduced new vulnerability or performance defect"
+  },
+  "log_source_count_24h": {
+    "edge_logs": 2521,
+    "function_logs": 1152,
+    "postgres_logs": 580,
+    "function_edge_logs": 575,
+    "pgbouncer_logs": 69,
+    "auth_logs": 26,
+    "auth_audit_logs": 12,
+    "supavisor_logs": 12
+  },
+  "raw_sensitive_logs_examined": false,
+  "legacy": {
+    "issue2389_closed_at": "2026-11-13T20:36:52Z",
+    "retired_directory_absent": true,
+    "retained_roaster_helpers_active": true
+  },
+  "numeric_fingerprints": [
+    {
+      "rank": 2001,
+      "queryid": "146773861170345229",
+      "calls": 1,
+      "total_ms": "4.200",
+      "mean_ms": "4.200",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2002,
+      "queryid": "-814793509795328245",
+      "calls": 1,
+      "total_ms": "4.198",
+      "mean_ms": "4.198",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2003,
+      "queryid": "-1902589199013867724",
+      "calls": 21,
+      "total_ms": "4.191",
+      "mean_ms": "0.200",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2004,
+      "queryid": "6959082393043883457",
+      "calls": 1,
+      "total_ms": "4.172",
+      "mean_ms": "4.172",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2005,
+      "queryid": "7361896558850012064",
+      "calls": 3,
+      "total_ms": "4.170",
+      "mean_ms": "1.390",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2006,
+      "queryid": "-6180968021461006193",
+      "calls": 1,
+      "total_ms": "4.168",
+      "mean_ms": "4.168",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2007,
+      "queryid": "4662526313735207787",
+      "calls": 1,
+      "total_ms": "4.165",
+      "mean_ms": "4.165",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2008,
+      "queryid": "-8589685774871842643",
+      "calls": 1,
+      "total_ms": "4.161",
+      "mean_ms": "4.161",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2009,
+      "queryid": "-7898710481194047003",
+      "calls": 1,
+      "total_ms": "4.145",
+      "mean_ms": "4.145",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2010,
+      "queryid": "4589764740639128270",
+      "calls": 1,
+      "total_ms": "4.141",
+      "mean_ms": "4.141",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2011,
+      "queryid": "-3578676675958389477",
+      "calls": 1,
+      "total_ms": "4.139",
+      "mean_ms": "4.139",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2012,
+      "queryid": "-5017212451124761380",
+      "calls": 1,
+      "total_ms": "4.135",
+      "mean_ms": "4.135",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2013,
+      "queryid": "6081430903449213656",
+      "calls": 1,
+      "total_ms": "4.122",
+      "mean_ms": "4.122",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2014,
+      "queryid": "-7573149478336344386",
+      "calls": 1,
+      "total_ms": "4.121",
+      "mean_ms": "4.121",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2015,
+      "queryid": "6974099072469503652",
+      "calls": 1,
+      "total_ms": "4.115",
+      "mean_ms": "4.115",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2016,
+      "queryid": "-2270225438777835208",
+      "calls": 1,
+      "total_ms": "4.108",
+      "mean_ms": "4.108",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2017,
+      "queryid": "-8922314253804044074",
+      "calls": 1,
+      "total_ms": "4.103",
+      "mean_ms": "4.103",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2018,
+      "queryid": "7458698109151623025",
+      "calls": 1,
+      "total_ms": "4.102",
+      "mean_ms": "4.102",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2019,
+      "queryid": "-2571696917388248550",
+      "calls": 9,
+      "total_ms": "4.097",
+      "mean_ms": "0.455",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2020,
+      "queryid": "-7655506434271514865",
+      "calls": 1,
+      "total_ms": "4.085",
+      "mean_ms": "4.085",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2021,
+      "queryid": "3723732136101949950",
+      "calls": 1,
+      "total_ms": "4.073",
+      "mean_ms": "4.073",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2022,
+      "queryid": "-1535802179936996854",
+      "calls": 1,
+      "total_ms": "4.073",
+      "mean_ms": "4.073",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2023,
+      "queryid": "8357959115313919903",
+      "calls": 1,
+      "total_ms": "4.069",
+      "mean_ms": "4.069",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2024,
+      "queryid": "-7435163168409048363",
+      "calls": 3,
+      "total_ms": "4.069",
+      "mean_ms": "1.356",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2025,
+      "queryid": "1105832606452030612",
+      "calls": 1,
+      "total_ms": "4.052",
+      "mean_ms": "4.052",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2026,
+      "queryid": "4418990899625259653",
+      "calls": 1,
+      "total_ms": "4.051",
+      "mean_ms": "4.051",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2027,
+      "queryid": "686981951862410398",
+      "calls": 1,
+      "total_ms": "4.050",
+      "mean_ms": "4.050",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2028,
+      "queryid": "8135385743816631753",
+      "calls": 2,
+      "total_ms": "4.047",
+      "mean_ms": "2.023",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2029,
+      "queryid": "222611395665000495",
+      "calls": 1,
+      "total_ms": "4.044",
+      "mean_ms": "4.044",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2030,
+      "queryid": "-7336369883074992245",
+      "calls": 1,
+      "total_ms": "4.040",
+      "mean_ms": "4.040",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2031,
+      "queryid": "-101448145930026800",
+      "calls": 1,
+      "total_ms": "4.035",
+      "mean_ms": "4.035",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2032,
+      "queryid": "-8369184692781556372",
+      "calls": 1,
+      "total_ms": "4.033",
+      "mean_ms": "4.033",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2033,
+      "queryid": "8624971123130131436",
+      "calls": 2,
+      "total_ms": "4.030",
+      "mean_ms": "2.015",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2034,
+      "queryid": "-2074513314851636755",
+      "calls": 1,
+      "total_ms": "4.029",
+      "mean_ms": "4.029",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2035,
+      "queryid": "1871383185804517844",
+      "calls": 1,
+      "total_ms": "4.027",
+      "mean_ms": "4.027",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2036,
+      "queryid": "7952154928594358274",
+      "calls": 3,
+      "total_ms": "4.012",
+      "mean_ms": "1.337",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2037,
+      "queryid": "6489260569745308435",
+      "calls": 1,
+      "total_ms": "4.010",
+      "mean_ms": "4.010",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2038,
+      "queryid": "8972805090881796560",
+      "calls": 1,
+      "total_ms": "4.009",
+      "mean_ms": "4.009",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2039,
+      "queryid": "-5794909916545098168",
+      "calls": 1,
+      "total_ms": "4.006",
+      "mean_ms": "4.006",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2040,
+      "queryid": "-5570823802503050732",
+      "calls": 1,
+      "total_ms": "4.006",
+      "mean_ms": "4.006",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2041,
+      "queryid": "2572606282387857864",
+      "calls": 1,
+      "total_ms": "3.997",
+      "mean_ms": "3.997",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2042,
+      "queryid": "-6870717408624190666",
+      "calls": 4,
+      "total_ms": "3.996",
+      "mean_ms": "0.999",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2043,
+      "queryid": "3095840288184355754",
+      "calls": 1,
+      "total_ms": "3.983",
+      "mean_ms": "3.983",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2044,
+      "queryid": "-2316884388897238710",
+      "calls": 1,
+      "total_ms": "3.981",
+      "mean_ms": "3.981",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2045,
+      "queryid": "8605012326091923080",
+      "calls": 2,
+      "total_ms": "3.981",
+      "mean_ms": "1.990",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2046,
+      "queryid": "1890657617587016503",
+      "calls": 1,
+      "total_ms": "3.980",
+      "mean_ms": "3.980",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2047,
+      "queryid": "5012678819838329449",
+      "calls": 1,
+      "total_ms": "3.976",
+      "mean_ms": "3.976",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2048,
+      "queryid": "-3999573731466649330",
+      "calls": 10,
+      "total_ms": "3.974",
+      "mean_ms": "0.397",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2049,
+      "queryid": "-3587453040703375596",
+      "calls": 1,
+      "total_ms": "3.972",
+      "mean_ms": "3.972",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2050,
+      "queryid": "4352183252015120975",
+      "calls": 1,
+      "total_ms": "3.971",
+      "mean_ms": "3.971",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2051,
+      "queryid": "-7827974459075952968",
+      "calls": 1,
+      "total_ms": "3.967",
+      "mean_ms": "3.967",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2052,
+      "queryid": "7180917976193065825",
+      "calls": 1,
+      "total_ms": "3.961",
+      "mean_ms": "3.961",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2053,
+      "queryid": "1750275597406401590",
+      "calls": 1,
+      "total_ms": "3.958",
+      "mean_ms": "3.958",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2054,
+      "queryid": "6468377258419460139",
+      "calls": 8,
+      "total_ms": "3.952",
+      "mean_ms": "0.494",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2055,
+      "queryid": "-7651456673599812060",
+      "calls": 1,
+      "total_ms": "3.950",
+      "mean_ms": "3.950",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2056,
+      "queryid": "-6381485715417191765",
+      "calls": 1,
+      "total_ms": "3.946",
+      "mean_ms": "3.946",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2057,
+      "queryid": "6556133621479768210",
+      "calls": 1,
+      "total_ms": "3.940",
+      "mean_ms": "3.940",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2058,
+      "queryid": "-1451308178053720309",
+      "calls": 8,
+      "total_ms": "3.939",
+      "mean_ms": "0.492",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2059,
+      "queryid": "7176577242037519732",
+      "calls": 1,
+      "total_ms": "3.934",
+      "mean_ms": "3.934",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2060,
+      "queryid": "-783517071121599995",
+      "calls": 1,
+      "total_ms": "3.933",
+      "mean_ms": "3.933",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2061,
+      "queryid": "-8765129570890812892",
+      "calls": 1,
+      "total_ms": "3.931",
+      "mean_ms": "3.931",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2062,
+      "queryid": "1707242614451952813",
+      "calls": 1,
+      "total_ms": "3.919",
+      "mean_ms": "3.919",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2063,
+      "queryid": "8918812562871459879",
+      "calls": 9,
+      "total_ms": "3.918",
+      "mean_ms": "0.435",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2064,
+      "queryid": "1973980995248885939",
+      "calls": 1,
+      "total_ms": "3.897",
+      "mean_ms": "3.897",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2065,
+      "queryid": "2159990246235713765",
+      "calls": 2,
+      "total_ms": "3.896",
+      "mean_ms": "1.948",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2066,
+      "queryid": "6527427468294871603",
+      "calls": 1,
+      "total_ms": "3.893",
+      "mean_ms": "3.893",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2067,
+      "queryid": "-2027275017001240477",
+      "calls": 2,
+      "total_ms": "3.882",
+      "mean_ms": "1.941",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2068,
+      "queryid": "6853403740504118910",
+      "calls": 1,
+      "total_ms": "3.880",
+      "mean_ms": "3.880",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2069,
+      "queryid": "-9197987333358366843",
+      "calls": 1,
+      "total_ms": "3.869",
+      "mean_ms": "3.869",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2070,
+      "queryid": "238188075884497677",
+      "calls": 3,
+      "total_ms": "3.868",
+      "mean_ms": "1.289",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2071,
+      "queryid": "2830967461196509181",
+      "calls": 2,
+      "total_ms": "3.867",
+      "mean_ms": "1.933",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2072,
+      "queryid": "8482053081020301314",
+      "calls": 352,
+      "total_ms": "3.864",
+      "mean_ms": "0.011",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2073,
+      "queryid": "-5811478544229883366",
+      "calls": 1,
+      "total_ms": "3.861",
+      "mean_ms": "3.861",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2074,
+      "queryid": "2533349700704782035",
+      "calls": 1,
+      "total_ms": "3.843",
+      "mean_ms": "3.843",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2075,
+      "queryid": "5291837190865224005",
+      "calls": 1,
+      "total_ms": "3.826",
+      "mean_ms": "3.826",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2076,
+      "queryid": "-2414163979146926955",
+      "calls": 1,
+      "total_ms": "3.820",
+      "mean_ms": "3.820",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2077,
+      "queryid": "-8568199532422018174",
+      "calls": 1,
+      "total_ms": "3.812",
+      "mean_ms": "3.812",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2078,
+      "queryid": "5443193706430406163",
+      "calls": 1,
+      "total_ms": "3.811",
+      "mean_ms": "3.811",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2079,
+      "queryid": "4897123243055004211",
+      "calls": 1,
+      "total_ms": "3.809",
+      "mean_ms": "3.809",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rank": 2080,
+      "queryid": "-447955945871019111",
+      "calls": 1,
+      "total_ms": "3.808",
+      "mean_ms": "3.808",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    }
+  ],
+  "numeric_range": [
+    2001,
+    2080
+  ],
+  "previous_distinct": 1943,
+  "new_distinct": 77,
+  "overlap": 3,
+  "cumulative_distinct": 2020,
+  "sql_query_bodies_reviewed_in_fingerprints": 0,
+  "new_verified_defects": 0,
+  "justified_deletions": 0,
+  "provider_writes": 0,
+  "app_source_test_writes": 0,
+  "ci_run_this_iteration": false,
+  "three_pending_issue509_fixes": "TESTING; exact five-check source-isolation gate UNVERIFIED; no promotion",
+  "baseline_complete": false,
+  "unverified": [
+    "Hosted JWT/HTTP/GoTrue effective configuration and real account acceptance",
+    "Full remaining accessible provider definitions",
+    "Provider-console-only settings",
+    "Five-check release isolation for three pending fixes"
+  ],
+  "next_cursor": "Read-only drift and pgss ranks 2081-2160 plus additional full provider definitions"
+}
