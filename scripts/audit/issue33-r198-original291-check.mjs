@@ -5,6 +5,7 @@ import {createHash} from 'node:crypto';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
 import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
 import {selectedProductHeadings} from './issue33-selected-product-heading.mjs';
+import {productCoffeeProse} from '../../src/server/coffee-product-prose.mjs';
 const sha=b=>createHash('sha256').update(b).digest('hex'),dir=resolve(process.env.DIC_ISSUE33_FOCUSED_PUBLIC_DIR||'.');mkdirSync(dir,{recursive:true});
 const errors=[],must=(v,id)=>{if(!v)errors.push(id);};
 let summary={};try{summary=JSON.parse(readFileSync(join(dir,'focused-current-evidence.json'),'utf8'));}catch(e){errors.push('summary_missing:'+e.message);}
@@ -25,6 +26,8 @@ must(p.ok===true&&f.name==='Tanzania Peaberry'&&f.process==='Washed','real_parse
 must(!f.tasting_notes&&(p.conflicts||[]).includes('tasting_notes'),'withhold_contradictory_flavor');
 must(!f.roast_level,'body_not_roast');
 must(r.add_coffee_ui_rendered===true&&r.source_review_rendered===true,'explicit_Add_Coffee_review');
+const blocks=productCoffeeProse(selected,x=>String(x||'').replace(/<[^<>]{0,1500}>/g,' ').replace(/\s+/g,' ').trim().slice(0,6001)).filter(x=>/\b(?:notes?\s+of|pepper|black currant|hints of chocolate)\b/iu.test(x.text)).slice(0,24).map(x=>({tag:x.tag,start:x.start,end:x.end,section:String(x.section||'').slice(0,100),text:String(x.text||'').slice(0,430)}));
+console.log('[DIC33 R198 SELECTED PROSE BLOCK DIAGNOSTIC] '+JSON.stringify({selected_h1:h1,selected_html_length:selected.length,blocks}));
 const report={source_sha:summary.source_sha,number:291,url,h1,html_bytes:b.length,html_sha256:b.length?sha(b):null,fields:f,conflicts:p.conflicts||[],tasting_source_facts:(p.source_facts||[]).filter(x=>x.field==='tasting_notes').slice(0,10),errors,passed:errors.length===0,manual_certified:false};
 writeFileSync(join(dir,'r198-291-afterproof.json'),JSON.stringify(report,null,2)+'\n');
 console.log('[DIC33 R198 CURRENT SELECTED #291 AFTERPROOF] '+JSON.stringify(report).slice(0,10000));
