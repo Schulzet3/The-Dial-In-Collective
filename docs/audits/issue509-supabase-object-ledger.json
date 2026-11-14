@@ -20220,5 +20220,129 @@
     "queue_status": "TWO_ISSUE509_FIXES_TESTING_NOT_READY",
     "baseline_complete": false,
     "next_cursor": "Drift, numeric 1761-1840, managed Auth tables 21-25; hosted settings unverified"
+  },
+  "provider_pgss_auth_final_run247": {
+    "run": 247,
+    "project_ref": "azviqqejypsefzilgonr",
+    "preflight_development_sha": "697e75cb9f4b559fa7466e9526f9cfe4253584fe",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_development_sha": "697e75cb9f4b559fa7466e9526f9cfe4253584fe",
+    "receipt_path": "docs/audits/issue509-auth-final-catalog-pgss-2026-11-14-run247-rank1761-1840.json",
+    "receipt_blob_sha": null,
+    "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-14-run247.json",
+    "index_blob_sha": null,
+    "observed_at": "2026-11-14 18:47:37.990753+00",
+    "auth_ordinals": [
+      21,
+      27
+    ],
+    "full_auth_table_catalog_reviews": 7,
+    "related_application_trigger_review": "private.handle_new_auth_user()",
+    "table_signatures": [
+      {
+        "relation": "auth.scim_users",
+        "signature": "6fce886b229e32154e609be25fa3a78c",
+        "columns": 10,
+        "constraints": 3,
+        "indexes": 10,
+        "triggers": 0,
+        "policies": 0,
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_select": false,
+        "rls": false
+      },
+      {
+        "relation": "auth.sessions",
+        "signature": "98883a157ce52cb97e3b7bd4ba112fcd",
+        "columns": 15,
+        "constraints": 4,
+        "indexes": 5,
+        "triggers": 0,
+        "policies": 0,
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_select": false,
+        "rls": true
+      },
+      {
+        "relation": "auth.sso_domains",
+        "signature": "1ce7f60e7a07aa0aa0d3fd173008151d",
+        "columns": 5,
+        "constraints": 3,
+        "indexes": 3,
+        "triggers": 0,
+        "policies": 0,
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_select": false,
+        "rls": true
+      },
+      {
+        "relation": "auth.sso_providers",
+        "signature": "8ccf7a3da900f029b3ab7c4e45b4483e",
+        "columns": 5,
+        "constraints": 2,
+        "indexes": 3,
+        "triggers": 0,
+        "policies": 0,
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_select": false,
+        "rls": true
+      },
+      {
+        "relation": "auth.users",
+        "signature": "85c01f64386556b2df370896c35d71a1",
+        "columns": 35,
+        "constraints": 3,
+        "indexes": 15,
+        "triggers": 1,
+        "policies": 0,
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_select": false,
+        "rls": true
+      },
+      {
+        "relation": "auth.webauthn_challenges",
+        "signature": "be0973ca5de791663cd02333a393fed0",
+        "columns": 6,
+        "constraints": 3,
+        "indexes": 3,
+        "triggers": 0,
+        "policies": 0,
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_select": false,
+        "rls": false
+      },
+      {
+        "relation": "auth.webauthn_credentials",
+        "signature": "fb85f9454b02b28cd150fbf441023ffc",
+        "columns": 14,
+        "constraints": 2,
+        "indexes": 3,
+        "triggers": 0,
+        "policies": 0,
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_select": false,
+        "rls": false
+      }
+    ],
+    "numeric_rank_range": [
+      1761,
+      1840
+    ],
+    "numeric_rows": 80,
+    "new_distinct": 75,
+    "overlap": 5,
+    "cumulative_distinct": 1797,
+    "baseline_complete": false,
+    "provider_writes": 0,
+    "code_test_ci_writes": 0,
+    "queue_status": "TWO_ISSUE509_FIXES_TESTING_NOT_READY",
+    "next_cursor": "Fresh provider drift; pg_stat_statements ranks 1841-1920, then other not-yet-fully-reviewed provider definitions; Auth 27/27 current table definitions individually revisited"
   }
 }
