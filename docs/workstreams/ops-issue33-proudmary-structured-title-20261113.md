@@ -46,3 +46,9 @@ GitHub PR-head approval gate 43562350446 correctly blocked untracked deployable 
 DIC_PREFLIGHT_VERIFIED development_sha=f1dc5fd4be99bdbd5a9d4b6a2123ba8e8c0bbe4c preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
 Exact PR head e2839a103072fb3b1a1fe477ea8e562c4198f2f8 approval run 43562350446 failed queue intake: missing IN_PROGRESS ownership for src/server/coffee-identity-evidence.mjs and src/server/coffee-shopify-ajax.mjs. Added only the scoped IN_PROGRESS queue item (not READY); retained the original failure. Recheck new exact head CI, focused tests and nonforce merge before any READY claim. No publication or provider changes.
+
+## Exact merged-source CI and READY certification — November 14, 2026 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=c134eafe6ea5a3eeae9bde75dff4dc13826e2b3f preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+PR #2588 merged nonforce 48379dc5a6e34c1dc0b6d7e97c3392dea56b85bf. Tested PR head c29e657e78c76790d456096e43d73d49cd4e1779 had five applicable exact-head SUCCESS checks: approval 43562474269, cloud app/focused regression/lint 43562473846, UX 43562473750, SQL 43562473745, security 43562473912. Six changed Git blobs matched the merged commit; three runtime blobs remain unchanged on current development c134eafe6ea5a3eeae9bde75dff4dc13826e2b3f. Exact merged approval 43562658690, cloud app/focused regression 43562659036, and UX 43562658921 all SUCCESS. Scoped queue entry now READY with zero blockers, not DEPLOYED; issue #33 remains OPEN. Independent R60 Wrecking Ball source job 43562473909 FAILED and is not credited as PASS or conflated with this fix. No new builds or production writes.

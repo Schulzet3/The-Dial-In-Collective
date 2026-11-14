@@ -13842,8 +13842,8 @@
       "issue": 33,
       "pr": 2588,
       "title": "Split verified country | coffee | variety | process product titles without losing the exact selected source identity",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "48379dc5a6e34c1dc0b6d7e97c3392dea56b85bf",
       "scope_paths": [
         "src/server/coffee-identity-evidence.mjs",
         "src/server/coffee-page-metadata.mjs",
@@ -13851,16 +13851,23 @@
       ],
       "owner_source": "Owner November 13 2026 Proud Mary Las Lajas - Finca San Isidro direct correction; PREFLIGHT development_sha=f1dc5fd4be99bdbd5a9d4b6a2123ba8e8c0bbe4c preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "tests": [
-        "PR #2588 head e2839a103072fb3b1a1fe477ea8e562c4198f2f8: governance run 43562350446 FAILED solely because new identity and Shopify source paths lacked an IN_PROGRESS queue item. This entry remedies intake; fresh exact-head checks required.",
-        "Focused real-module tests tests/coffee-issue33-proudmary-structured-title.test.mjs must pass; no test or CI PASS claimed before actual hosted completion."
+        "Exact PR-head c29e657e78c76790d456096e43d73d49cd4e1779: approval 43562474269 SUCCESS, cloud app build/focused coffee source/identity regression and lint 43562473846 SUCCESS, cloud UX 43562473750 SUCCESS, isolated SQL 43562473745 SUCCESS, source security 43562473912 SUCCESS.",
+        "Nonforce PR #2588 squash merged into development 48379dc5a6e34c1dc0b6d7e97c3392dea56b85bf. All six source/test/journal/queue blobs byte-identical to tested PR head; all three runtime source blobs remain identical at preflight development c134eafe6ea5a3eeae9bde75dff4dc13826e2b3f.",
+        "Exact merged SHA: approval 43562658690 SUCCESS, cloud app build and coffee regression 43562659036 SUCCESS, cloud UX 43562658921 SUCCESS. PR-head SQL and security checks passed; no duplicate build requested. Separate Wrecking Ball R60 workflow 43562473909 FAILED; not evidence for this selected Proud Mary correction.",
+        "Selected four-part title parser and Shopify exact-handle negative/positive tests included in hosted suite. No production provider readback applicable, no publication authorized."
       ],
       "ci_runs": [
-        43562350446
+        43562474269,
+        43562473846,
+        43562473750,
+        43562473745,
+        43562473912,
+        43562658690,
+        43562659036,
+        43562658921
       ],
-      "blockers": [
-        "Exact PR-head Node, cloud and approval CI must succeed after this intake update; nonforce merge and exact merged source CI/readback required before READY."
-      ],
-      "notes": "Development only, no publication. Selected four-segment product title yields Las Lajas - Finca San Isidro; preserve country Costa Rica, variety Caturra & Catuai, process Natural, full title source provenance and strict Shopify handle. Ambiguous names unchanged; original603 immutable. Issue #33 remains OPEN.",
+      "blockers": [],
+      "notes": "Development only, no publication. Selected four-segment product title yields Las Lajas - Finca San Isidro; preserve country Costa Rica, variety Caturra & Catuai, process Natural, full title source provenance and strict Shopify handle. Ambiguous names unchanged; original603 immutable. Issue #33 remains OPEN. READY certified from exact tested merge and unchanged current three source blobs; no production publication. Unrelated R60 source failure is separately tracked, not counted PASS.",
       "production_deployed": false
     }
   ],
