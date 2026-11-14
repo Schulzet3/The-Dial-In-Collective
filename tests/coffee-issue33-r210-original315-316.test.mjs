@@ -57,3 +57,32 @@ test('#316 no geography or tasting from other coffee, recycled SEO or reviews',(
  assert.doesNotMatch(String(p.fields?.tasting_notes||''),/mango|black tea/i);
  assert.ok(!p.fields?.elevation_m&&!p.fields?.decaffeination_method);
 });
+
+import {selectedCurrentNamedFarmCountryRegion} from '../src/server/coffee-selected-named-farm-country-region.mjs';
+const farmStory='Grown on the Las Mercedes farm in northern Colombia, the Gamboa family has been cultivating coffee for sixty years, carrying on a family tradition that dates back to 1920.';
+function region(other,{name='Colombia- Honey Process',origin='Colombia',producer='Gamboa family',process='Honey'}={}){
+ const blocks=[{tag:'h1',text:name,section:'',educational:false},...other.map(x=>
+  typeof x==='string'?{tag:'p',text:x,section:'',educational:false}:x)];
+ return selectedCurrentNamedFarmCountryRegion({name,origin,producer,process,blocks});
+}
+test('#316 direct current named family farm qualifier and literal locality',()=>{
+ assert.equal(region([farmStory])?.value,'Northern Colombia');
+ assert.equal(region([farmStory])?.farm,'Las Mercedes');
+});
+test('#316 no promotion without current named grower',()=>{
+ assert.equal(region(['Grown on the Las Mercedes farm in northern Colombia, we have been cultivating coffee for sixty years.']),null);
+ assert.equal(region([farmStory],{producer:'Other Cultivators'}),null);
+});
+test('#316 wrong country, historical and related context withheld',()=>{
+ assert.equal(region(['Grown on the Las Mercedes farm in northern Kenya, the Gamboa family has been cultivating coffee for sixty years.']),null);
+ assert.equal(region(['Previously grown on the Las Mercedes farm in northern Colombia, the Gamboa family has been cultivating coffee for sixty years.']),null);
+ assert.equal(region([{tag:'p',text:farmStory,section:'Related products',educational:false}]),null);
+});
+test('#316 incompatible current localities are contradictory not inferred',()=>{
+ assert.equal(region([farmStory,'Grown on the Las Mercedes farm in southern Colombia, the Gamboa family has been cultivating coffee for sixty years.']),null);
+});
+test('#316 mismatched chosen identity, blend or missing process never borrow region',()=>{
+ assert.equal(region([farmStory],{name:'Colombia Blend'}),null);
+ assert.equal(region([farmStory],{origin:'Guatemala',name:'Guatemala- Honey Process'}),null);
+ assert.equal(region([farmStory],{process:''}),null);
+});
