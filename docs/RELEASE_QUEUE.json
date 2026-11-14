@@ -13836,6 +13836,28 @@
       "blockers": [],
       "notes": "NARROW DEVELOPMENT READY NOT DEPLOYED: #272 selected Quills labels Reforest Project 'Producer' but its selected text says this is a reforestation initiative planting trees on OTHER growers' farms. Withhold erroneous canonical producer, preserve literal source/context and manual confirm note; genuine growing projects/farms protected. Current lot sold-out/source may change; fresh exact selected URL, H1, raw HTML and actual parser independently verified. No other 603 cases certified from this run; Issue #33 remains OPEN. Owner notification not required for this safe fix, and production publication remains unauthorized.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-2592-coffee-conflict-tap-to-fill",
+      "issue": 2592,
+      "title": "Tap sourced conflicting coffee alternatives to fill only the selected Add Coffee field",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/coffee-url-autofill.js",
+        "site/cloud/main.js",
+        "site/visual.css"
+      ],
+      "owner_source": "Owner November 13, 2026 explicit Build instruction; UX-COFFEE-CONFLICT-TAP-CHOICE-20261113; preflight development 4b09788c9bf18c344085da088b44567bf987f275 blob 2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Initial focused Node source/UI/escape/keyboard/select/provenance/URL isolation tests introduced in tests/coffee-conflict-tap-to-fill.test.mjs. Hosted exact-source outcomes PENDING; do not call PASS.",
+        "Existing coffee URL conflicts, source review, roast-variant and UI/browser/cloud acceptance to be reused or exercised in risk-based CI."
+      ],
+      "blockers": [
+        "Development code/test/Locked-scope PR has not yet been merged and applicable exact-source CI has not completed."
+      ],
+      "notes": "Development only. No auto conflicting selection, no save, no source hierarchy or provider changes. READY requires nonforce merged exact code/test evidence, all applicable checks and no blocker.",
+      "production_deployed": false
     }
   ],
   "history": [

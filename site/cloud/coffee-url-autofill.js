@@ -81,6 +81,57 @@ export function coffeeConflictReviewOptions(result){
   return {field,label:REVIEW_FIELDS.get(field),options};
  });
 }
+
+// Explicit member selection of a published alternative affects ONE editable
+// field. It never changes the preview's provenance, verified catalog or save.
+function conflictChoiceFieldValue(control,field,source){
+ if(!control||typeof source!=='string'||!source.trim())return null;
+ const value=field==='elevation_m'?elevationWithDefaultMeters(source):source;
+ if(control.tagName!=='SELECT')return value;
+ // Select fields have a locked canonical vocabulary. Match only exact,
+ // unambiguous published aliases, never invent an "Other" classification.
+ const normalize=s=>String(s).normalize('NFKC').trim().toLowerCase()
+  .replace(/[_-]+/g,' ').replace(/\s+/g,' ').replace(/\s+roast$/,'');
+ let key=normalize(value);
+ if(field==='roast_level'){
+  key=key.replace(/^coffee\s+/,'');
+  if(key==='light medium')key='medium light';
+  if(key==='full city')key='medium dark';
+ }
+ const matches=[...control.options].filter(option=>normalize(option.value)===key);
+ return matches.length===1?matches[0].value:null;
+}
+export function applyCoffeeConflictChoice(form,result,field,index){
+ if(typeof field!=='string'||!Number.isSafeInteger(index)||index<0)return {applied:false,reason:'invalid_choice'};
+ const group=coffeeConflictReviewOptions(result).find(item=>item.field===field);
+ const choice=group?.options?.[index];
+ const control=form?.elements?.namedItem?.(field);
+ if(!choice||!control||typeof control.value!=='string'||control.readOnly)
+  return {applied:false,reason:'invalid_choice'};
+ const next=conflictChoiceFieldValue(control,field,choice.value);
+ if(next===null)return {applied:false,reason:'unsupported_option'};
+ const changed=control.value!==next;
+ control.value=next;
+ if(control.dataset){
+  delete control.dataset.coffeeAutofillValue;
+  control.dataset.coffeeConflictChoiceValue=next;
+ }
+ if(changed)control.dispatchEvent(new Event('change',{bubbles:true}));
+ return {applied:true,field,value:next};
+}
+export function markCoffeeConflictChoices(panel,form,result){
+ const groups=coffeeConflictReviewOptions(result);
+ for(const button of panel?.querySelectorAll?.('[data-action="choose-coffee-conflict"]')||[]){
+  const group=groups.find(item=>item.field===button.dataset.conflictField);
+  const index=Number(button.dataset.conflictIndex);
+  const control=group&&form?.elements?.namedItem?.(group.field);
+  const mapped=group&&Number.isSafeInteger(index)&&index>=0?
+   conflictChoiceFieldValue(control,group.field,group.options?.[index]?.value):null;
+  const active=mapped!==null&&control?.dataset?.coffeeConflictChoiceValue===mapped&&control.value===mapped;
+  button.setAttribute('aria-pressed',active?'true':'false');
+ }
+}
+
 export function elevationWithDefaultMeters(value){
  // An elevation field is already source-bound. Only a complete number or
  // range without a unit gets the owner-approved default meters label.
@@ -224,7 +275,7 @@ export function coffeeUrlPreviewMarkup(result){
   ${catalog?'<button type="button" class="secondary compact" data-action="preview-coffee-url-refresh">Check Current Roaster Page</button><p class="helper">Check for newer published details. Wait 30 seconds between checks; the usual URL lookup limit applies.</p>':''}
   ${result.origin_confirmation_required===true?`<div class="coffee-rotation-review" role="group" aria-label="Rotating origin confirmation"><p class="helper">This product explicitly says its origin rotates. Confirm the origin shown on your current bag or offering.</p><label class="checkline"><input id="coffee-rotating-origin-confirmed" type="checkbox"><span>I checked this coffee's current origin.</span></label></div>`:''}
   ${roastVariantMarkup(result)}
-  ${conflictGroups.length?`<section class="coffee-source-conflicts" role="region" aria-label="Conflicting coffee information"><h3>Review conflicting details</h3><p class="helper">These published readings disagree. Nothing was selected automatically. Compare them with the roaster's label and type your choice in the matching field below.</p>${conflictGroups.map(group=>`<div id="coffee-conflict-${e(group.field)}" class="coffee-conflict-group"><strong>${e(group.label)}</strong>${group.options.length?`<ul>${group.options.map(option=>`<li><span class="coffee-conflict-value">${e(option.value)}</span><small>${e(option.label)}${option.source_url?' · <a href="'+e(option.source_url)+'" target="_blank" rel="noopener noreferrer">View Original Source</a>':''}</small></li>`).join('')}</ul>`:'<p class="helper">Exact alternatives could not be isolated. See the complete published source details below or check the product page.</p>'}</div>`).join('')}</section>`:''}
+  ${conflictGroups.length?`<section class="coffee-source-conflicts" role="region" aria-label="Conflicting coffee information"><h3>Review conflicting details</h3><p class="helper">These published readings disagree. Nothing was selected automatically. Compare them with the roaster's label. Tap a value to fill its field; tap another to replace it. Nothing is saved until Add Coffee.</p><p class="helper coffee-conflict-feedback" role="status"></p>${conflictGroups.map(group=>`<div id="coffee-conflict-${e(group.field)}" class="coffee-conflict-group"><strong>${e(group.label)}</strong>${group.options.length?`<ul>${group.options.map((option,index)=>`<li><button type="button" class="coffee-conflict-choice" data-action="choose-coffee-conflict" data-conflict-field="${e(group.field)}" data-conflict-index="${index}" aria-pressed="false" aria-label="Use ${e(option.value)} for ${e(group.label)}"><span class="coffee-conflict-value">${e(option.value)}</span></button><small>${e(option.label)}${option.source_url?' · <a href="'+e(option.source_url)+'" target="_blank" rel="noopener noreferrer">View Original Source</a>':''}</small></li>`).join('')}</ul>`:'<p class="helper">Exact alternatives could not be isolated. See the complete published source details below or check the product page.</p>'}</div>`).join('')}</section>`:''}
   ${seoFallbackFields.length?`<p class="helper" role="note"><strong>Verify metadata-only suggestions:</strong> ${seoFallbackFields.map(([,label])=>e(label)).join(', ')}. These values were not confirmed in the selected coffee's current product description or page details. They are last-resort SEO/metadata suggestions, not verified facts.</p>`:''}
   ${missingFields.length?`<p class="helper" role="note"><strong>Not found on this product page:</strong> ${missingFields.map(([,label])=>e(label)).join(', ')}. Leave these blank unless you can confirm them from the roaster or your bag.</p>`:''}
   <dl class="coffee-url-fields">${fields.map(([key,label])=>`<div><dt>${e(label)}</dt><dd>${e(key==='elevation_m'?elevationWithDefaultMeters(result.fields[key]):result.fields[key])}</dd></div>`).join('')}</dl>

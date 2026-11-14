@@ -1,0 +1,10 @@
+# Issue #2592 — tap-to-fill source conflict alternatives
+
+DIC_PREFLIGHT_VERIFIED development_sha=4b09788c9bf18c344085da088b44567bf987f275 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- **Authority:** November 13 owner explicitly directed tapping one of multiple extractor alternatives to autofill the associated field and said Build it. Exact preflight source 4b09788c9bf18c344085da088b44567bf987f275, blob 2fb236bbfa6bac48513eeb3bd157b260853af06d; AGENTS/CURRENT_STATUS/Master Spec/Decision Ledger/coverage/queue and #33/#2389 reviewed. Narrow supersession of manual TYPING only; human choice remains mandatory.
+- **Acceptance:** accessible mobile target and human-initiated one-field fill; competing option retap replaces previous choice; valid dropdown vocabulary only; unsupported evidence visible without a guess; unchanged source provenance; no stale URL/source selection; no automatic save, catalog validation, or other coffee field change.
+- **Changed paths:** site/cloud/coffee-url-autofill.js, site/cloud/main.js, site/visual.css, tests/coffee-conflict-tap-to-fill.test.mjs, docs/MASTER_SPECIFICATION.md, docs/DECISION_LEDGER.json, docs/RELEASE_QUEUE.json, this scoped journal.
+- **Test design:** focused Node22 positive and hostile rendered controls, XSS escaping/source links, state replacement, manual edit, canonical dropdown, elevation, stale URL guard and no request/save. Existing URL conflict and Add Coffee regressions plus one packaged build and cloud/browser checks by applicable PR CI; tests unexecuted at authoring, do not label PASS.
+- **Source/release:** nonforce isolated PR against development/backend-foundation; queue remains IN_PROGRESS with CI blockers. No production/Netlify/Supabase/member/SQL/Auth/Community/backups writes. Source review JSON remains original unmodified evidence.
+- **Next action:** inspect exact PR-head checks, repair failures, nonforce integrate, independently verify merged files/CI; then reconcile queue/issue/status to READY only if appropriate. No owner Publish granted.
