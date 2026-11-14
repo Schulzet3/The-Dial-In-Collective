@@ -29,7 +29,7 @@ check(summary.manual_certified===0&&summary.production_operations===0&&summary.o
 check(r.status==='FETCHED'&&r.parser_ok===true&&r.official_url===official&&r.final_url===official,'guarded_original_selected_url');
 check(html.length>1000&&r.html_sha256===sha(html)&&r.html_bytes===html.length,'raw_html_sha_and_size');
 check(heads.length===1&&heads[0]===name&&r.selected_heading_identity_verified===true,'exact_selected_h1');
-check(/Reforest Project,\s+an initiative\b/i.test(prose)&&/plant(?:ing|ed|s)?\s+(?:[\d,]+\s+)?(?:native\s+)?trees?/i.test(prose),'own_story_environmental_project');
+check(/Reforest Project\s*,\s+an initiative\b/i.test(prose)&&/plant(?:ing|ed|s)?\s+(?:[\d,]+\s+)?(?:native\s+)?trees?/i.test(prose),'own_story_environmental_project');
 check(/Producer\s*:\s*Reforest Project/i.test(prose),'literal_current_seller_label');
 check(parsed.ok===true&&f.name===name,'actual_parser_exact_name');
 check(!f.producer,'non_growing_project_not_canonical_producer');
