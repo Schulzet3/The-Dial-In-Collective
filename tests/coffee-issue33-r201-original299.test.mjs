@@ -42,3 +42,14 @@ test('original299 customer review tasting and roaster marketing are not selected
  assert.match(String(p.fields?.tasting_notes||''),/cherry/i);
  assert.doesNotMatch(String(p.fields?.tasting_notes||''),/melon fruit/i);
 });
+
+test('original299 printed generic anonymous family in a Producer caption is not a named supplier',()=>{
+ const p=parse({details:'<p>Producer: highly knowledgeable multi-generational Brazilian family</p>'});
+ assert.equal(p.ok,true);
+ assert.ok(!p.fields?.producer,'generic family label must not be promoted to a named supplier');
+});
+test('original299 a genuinely named selected family stays a producer',()=>{
+ const p=parse({story:'This coffee is grown by the Rodriguez family in Minas Gerais, Brazil, with direct notes of cherry and milk chocolate.',details:'<p>Producer: Rodriguez Family</p>'});
+ assert.equal(p.ok,true);
+ assert.match(String(p.fields?.producer||''),/Rodriguez Family/i);
+});

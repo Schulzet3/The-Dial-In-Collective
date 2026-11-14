@@ -443,6 +443,11 @@ function normalized(field,value,{allowFlavorProse=false,allowAnonymousProducer=f
  // "Family business with three generations of experience" is not a
  // named supplier. Do not infer the producer from a roaster biography.
  if(field==='producer'&&/^(?:a\s+)?family\s+business\s+with\s+(?:\d+|one|two|three|four|five)\s+generations?\s+of\b/iu.test(s))return '';
+ // An unnamed multi-generational family (even with expertise or nationality)
+ // describes anonymous growers, not an identified supplier. Do not erase a
+ // genuinely NAMED family (e.g. Rodriguez Family), direct Producer co-op or farm.
+ if(field==='producer'&&
+  /^(?:an?\s+)?(?:(?:(?:very|highly|extremely)\s+)?(?:experienced|knowledgeable|dedicated|skilled|respected|multi[ -]?generational)\s+){1,5}(?:[\p{Lu}][\p{L}\p{M}'-]{2,35}\s+)?famil(?:y|ies)$/iu.test(s))return '';
  // Indefinite quantities ("some of the top farms and small producers") do not
  // identify a real grower, co-op or named supplier. Keep the merchant claim
  // in source evidence for review without canonical producer promotion.

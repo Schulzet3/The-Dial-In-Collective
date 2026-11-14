@@ -33,8 +33,12 @@ for(const note of ['cherry','milk chocolate']){
  if(!String(fields.tasting_notes||'').toLowerCase().includes(note)&&!(p.conflicts||[]).includes('tasting_notes'))errors.push('selected_notes_missing:'+note);
 }
 if(fields.producer)errors.push('unnamed_family_misrepresented_as_identified_producer');
-if(fields.roast_level)errors.push('roast_not_explicitly_qualified');
-if(fields.process==='Washed')errors.push('water_friendly_description_not_washed_process_proof');
+// Product-owned, exact handle/title/vendor Shopify tags are lower-priority
+// published evidence; the water-friendly prose alone would NOT prove Washed.
+const tags=html.match(/"title":"The Windsor - Brazil Coffee","handle":"the-windsor-sextant-coffee"[\\s\\S]{0,2000}?"vendor":"Sextant Coffee Roasters"[\\s\\S]{0,500}?"tags":\\[([^\\]]{1,500})\\]/u);
+const selectedTags=tags?JSON.parse('['+tags[1]+']'):[];
+if(!selectedTags.includes('medium roast coffee')||!selectedTags.includes('Washed Coffee'))errors.push('exact_selected_shopify_product_tags_missing_or_changed');
+if(fields.roast_level!=='Medium'||fields.process!=='Washed')errors.push('current_selected_explicit_product_taxonomy_not_preserved');
 if((p.conflicts||[]).some(key=>['name','roaster'].includes(key)))errors.push('identity_conflict');
 const report={passed:errors.length===0,errors,source_sha:summary.source_sha,checkout_sha:checkout,action_event_sha:process.env.GITHUB_SHA,original603_case:299,official_url:url,html_bytes:bytes.length,html_sha256:bytes.length?sha(bytes):null,selected_headings:headings,selected_literal_excerpt:text.slice(0,1800),actual_parser_fields:fields,source_review:(p.source_facts||[]).filter(f=>['producer','origin','process','tasting_notes'].includes(f.field)).slice(0,20).map(f=>({field:f.field,label:f.label,value:f.value,source_type:f.source_type})),conflicts:p.conflicts||[],manual_certified:false,provider_writes:0};
 writeFileSync(join(dest,'r201-299-afterproof.json'),JSON.stringify(report,null,2)+'\n');
