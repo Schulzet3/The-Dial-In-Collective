@@ -20,6 +20,7 @@ begin
  exception when check_violation then rejected:=true;
  end;
  if not rejected then raise exception 'Obsolete canonical label accepted';end if;
+ rejected:=false;
  begin
   insert into public.coffees(name,roaster,roast_level,verification_state)
   values('Invalid value','CI Test Roaster','Ultra-Medium','verified');
