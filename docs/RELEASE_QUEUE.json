@@ -14249,7 +14249,7 @@
       "issue": 509,
       "pr": null,
       "title": "Reject JSON null recommendation control elements without changing recorded shots or private provenance",
-      "state": "TESTING",
+      "state": "READY",
       "merged_source_sha": "0cd5054c6684a63062daf794e33ea265daf5ce66",
       "scope_paths": [
         "supabase/migrations/20261114115000_dic_recommendation_context_null_control_guard.sql"
@@ -14257,16 +14257,20 @@
       "owner_source": "Owner Issue #509 Nov 3 2026 exhaustive Supabase audit, development-only verified low-severity defect repair; preflight development 719afad75889bf040e729ab4ff9d33cfe0716491 blob 2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "tests": [
         "Read-only live PostgreSQL constant-expression reproduction: NULL and mixed NULL/valid controls incorrectly accepted by previous NOT IN; invalid string rejected. Exact current SQL body verified.",
-        "New isolated PostgreSQL17 transaction/temp-trigger fixture tests null, mixed, invalid, valid one/two control, historical grants and trigger attachment; exact source SQL CI run 43591859535 SUCCESS on 0cd5054c6684a63062daf794e33ea265daf5ce66. Post-intake governance/Node source bound CI pending."
+        "New isolated PostgreSQL17 transaction/temp-trigger fixture tests null, mixed, invalid, valid one/two control, historical grants and trigger attachment; exact source SQL CI run 43591859535 SUCCESS on 0cd5054c6684a63062daf794e33ea265daf5ce66. Post-intake governance/Node source bound CI pending.",
+        "Run241 current development source/test/runner exact Git blobs unchanged against tested 0cd5054c: dadd06e1982a84d289481b661702f9940e375b7d, 61e496319939f59eb4b7843fdb93aa6b4c1e33fa, a3f86ff03a2c23cd510cc1dcd4c988a01bbebb2e",
+        "Exact source PostgreSQL17 + signed JWT owner HTTP + backup 43591859535 SUCCESS; Node22/lint/build 43591859617 SUCCESS, both at 0cd5054c.",
+        "Queue intake/approval 43592032732 SUCCESS at 05a6af51, current-descendant approval 43596028523 SUCCESS at c5b555; prior failed intake and cancelled initial checks NOT treated as PASS."
       ],
       "ci_runs": [
-        43591859535
+        43591859535,
+        43591859617,
+        43592032732,
+        43596028523
       ],
-      "blockers": [
-        "Exact-source approval/intake, Node22 and any required source security CI on new HEAD must PASS before READY; prior approval 43591882138 failed only due to missing this new queue intake entry.",
-        "This is unshipped development migration; no publication/production SQL authorization."
-      ],
-      "notes": "Historical migration unchanged. No data backfill, no member/shot records read or modified. Explicit IS NULL OR NOT IN rejects invalid JSON null controls; original private SECURITY DEFINER, search_path, EXECUTE revocations, trigger, valid controls and source_verified_independently=false retained. Tests use disposable dic_ci only. User Nov6 alert-only notification policy unchanged. Full issue509 provider baseline IN_PROGRESS."
+      "blockers": [],
+      "notes": "Historical migration unchanged. No data backfill, no member/shot records read or modified. Explicit IS NULL OR NOT IN rejects invalid JSON null controls; original private SECURITY DEFINER, search_path, EXECUTE revocations, trigger, valid controls and source_verified_independently=false retained. Tests use disposable dic_ci only. User Nov6 alert-only notification policy unchanged. Full issue509 provider baseline IN_PROGRESS.\nRun241 READY DEVELOPMENT SOURCE ONLY after verified unchanged source/test/runner and applicable exact-source CI; production deployment/migration and hosted private Auth acceptance NOT CLAIMED.",
+      "production_deployed": false
     },
     {
       "id": "DIC-Q-33-r198-original291-source-prose-conflict",

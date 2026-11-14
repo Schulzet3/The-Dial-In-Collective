@@ -1166,7 +1166,7 @@
       "domains": "5/5 DIRECT DECLARATION",
       "receipt": "docs/audits/issue509-information-schema-full-direct-review-2026-11-10-run154.json"
     },
-    "stored_migrations_sql": "66/66 COMPLETE CURRENT STORED SQL; new 65-66 in Run182; watch migration 67"
+    "stored_migrations_sql": "69/69 current provider-stored SQL migration statements directly semantically reviewed, source-identical to mapped immutable Git migration files. Last new 3=40734 chars Run241. New development-only migration #509 not applied."
   },
   "reviews": [
     {
@@ -4172,6 +4172,19 @@
       "new_defects": 0,
       "production_writes": 0,
       "next": "Provider drift, numeric ranks 1121-1200"
+    },
+    {
+      "run": 241,
+      "prewrite_source_sha": "c5b555be6a2fab5943038cdcb2b9e2e641a98fbe",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt_path": "docs/audits/issue509-stored-migrations-and-pgss-2026-11-14-run241-rank1281-1360.json",
+      "receipt_git_blob": "d2e481c1d6be1940c67117fa4d1ed5e79495eca1",
+      "complete_provider_migrations": "69/69",
+      "new_sql_chars": 40734,
+      "numeric_distinct": 1348,
+      "source_fix_ready": true,
+      "provider_writes": 0,
+      "next": "provider drift and ranks 1361-1440"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -19945,5 +19958,33 @@
     "isolated_sql_ci": "PENDING_EXACT_SHA",
     "source_test_ci_changes": 2,
     "publication_authorized": false
+  },
+  "provider_run241_stored_migration_and_pgss_review": {
+    "run": 241,
+    "initial_and_prewrite_source_sha": "c5b555be6a2fab5943038cdcb2b9e2e641a98fbe",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt_path": "docs/audits/issue509-stored-migrations-and-pgss-2026-11-14-run241-rank1281-1360.json",
+    "receipt_blob_sha": "d2e481c1d6be1940c67117fa4d1ed5e79495eca1",
+    "full_sql_newly_reviewed": 3,
+    "full_sql_chars": 40734,
+    "migration_rows_current": 69,
+    "numeric_rank_range": [
+      1281,
+      1360
+    ],
+    "numeric_new": 80,
+    "numeric_total": 1348,
+    "application_md5": "4bfc78411475d7b7c9699c6c8a8f757d",
+    "source_fix_ready": true,
+    "source_fix_sha": "0cd5054c6684a63062daf794e33ea265daf5ce66",
+    "CI": [
+      43591859535,
+      43591859617,
+      43592032732,
+      43596028523
+    ],
+    "provider_writes": 0,
+    "baseline_complete": false,
+    "next": "Provider drift, numeric 1361-1440; hosted Auth/JWT/API unavailable"
   }
 }
