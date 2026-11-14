@@ -8,6 +8,32 @@
   },
   "items": [
     {
+      "id": "DIC-Q-28-owner-oauth-privacy-policy-20261114",
+      "issue": 28,
+      "pr": 2686,
+      "title": "Provide minimal public privacy policy for owner-only Google Drive OAuth consent",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/main.js",
+        "site/styles.css",
+        "site/privacy.html",
+        "build_cloud.mjs"
+      ],
+      "tests": [
+        "Owner-approved build PR #2686 privacy-page static-source tests; exact GitHub CI currently pending after initial queue intake hold; no LIVE app deploy.",
+        "Source package generator records privacy/index.html under strict allowlist. Public Google OAuth accessibility and compliance require a subsequent independently checked release."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Do not treat the page as live until separate owner Publish approval, exact-source release process and direct HTTPS readback.",
+        "Owner review of public support address and accuracy of provider/retention disclosures before publication."
+      ],
+      "owner_source": "Owner ChatGPT 2026-11-14: explicit permission to build discreet privacy page and minimal visible footer; no Publish authorization",
+      "notes": "Independent source branch and draft PR #2686. No Netlify deploy, Supabase/Drive/Google account changes, member-data edits or new integrations. Privacy link 11px muted, focusable, visible to Google/users; not background-colored or hidden. Keep all other READY/in-progress work untouched.",
+      "production_deployed": false
+    },
+    {
       "id": "DIC-Q-33-r170-next-json-selected-provenance",
       "issue": 33,
       "pr": 2428,

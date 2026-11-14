@@ -20,6 +20,8 @@ for(const file of files){const dst=path.join(root,'dist',file);await mkdir(path.
 await mkdir(path.join(root,'dist/vendor'),{recursive:true});
 await copyFile(path.join(root,'node_modules/@supabase/supabase-js/dist/umd/supabase.js'),path.join(root,'dist/vendor/supabase.js'));
 await copyFile(path.join(root,'site/cloud.html'),path.join(root,'dist/index.html'));
+await mkdir(path.join(root,'dist/privacy'),{recursive:true});
+await copyFile(path.join(root,'site/privacy.html'),path.join(root,'dist/privacy/index.html'));
 await copyFile(path.join(root,'site/admin.html'),path.join(root,'dist/admin.html'));
 await writeFile(path.join(root,'dist/cloud/config.js'),`// Public project coordinates only.\nexport const CLOUD_CONFIG=${JSON.stringify({enabled:true,supabaseUrl:url,publishableKey:key})};\n`);
 // Cache only a revisioned public app shell; never cache Auth, API or user data.
