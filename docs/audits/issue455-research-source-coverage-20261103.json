@@ -2600,6 +2600,22 @@
       "source_bytes_sha256": null,
       "source_byte_caveat": "Published accepted manuscript is preliminary; original publisher full HTML redirected through inaccessible authorization. PDF binary/hash, detailed methods, calibration/holdout raw values, 53-recipe source records, supplemental calculations, visual figures and independent replication NOT checked. No fresh espresso application policy warranted.",
       "claims_verified_externally": "Publisher abstract reports controlled filter-coffee coarse/medium/fine calibration and medium-coarse/medium-fine held-out condition means: 6.7 s drawdown, 0.58 g beverage mass and 0.020 percentage points TDS mean absolute errors (six endpoints within one experimental SD). 53 public filter-coffee recipe records are used with actual finish time as the only outcome directly compared; modeled extraction yield derived, water retention and solute inventories conditional and unobserved. Authors explicitly do not demonstrate internal state verification or model generalization to other brewing systems."
+    },
+    {
+      "id": "LIT-2023-ANGELONI-GIACOMINI-ESPRESSO-PERCOLATION",
+      "type": "external_primary_study_with_models_and_lab_analysis",
+      "title": "Computer Percolation Models for Espresso Coffee: State of the Art, Results and Future Perspectives",
+      "authors": "Simone Angeloni; Josephin Giacomini; Pierluigi Maponi; Alessia Perticarini; Sauro Vittori; Luca Cognigni; Lauro Fioretti",
+      "published": "2023-02-19",
+      "journal": "Applied Sciences 2023 13(4) 2688",
+      "doi": "10.3390/app13042688",
+      "url": "https://www.mdpi.com/2076-3417/13/4/2688",
+      "review_status": "R455-262_DIRECT_ORIGINAL_PUBLISHER_HTML_METHODS_RESULTS_VALIDATION_CONCLUSIONS_READ; FULL_REFERENCE_LIST_AND_FIGURE_PIXELS_AND_PDF_NOT_INDEPENDENTLY_AUDITED",
+      "access": "20261114 MDPI original full-text HTML accessible; inspected Introduction, Sections 2.1/2.2, 3.1/3.2 and 4 in text representation. Published HTML version not byte-archived.",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "PDF/HTML binary SHA256, plotted curve pixel values, raw lab samples and software source, independent replication and human ratings not examined. Current publisher page can change.",
+      "evidence_grade": "PEER_REVIEWED_PRIMARY_ESPRESSO_CHEMICAL_MEASUREMENT_AND_IN_SILICO_MODEL_WITH_CONDITIONAL_LAB_VALIDATION; NO_SENSORY_EXPERIMENT_OR_PERSONALIZED_NEXT_SHOT_EFFICACY",
+      "claims_verified_externally": "Controlled 20 +/- 0.1 g dose, 40 +/- 2 g output, fixed 20 kgF tamp; 3 grind categories x 3 water temperatures x 3 pressures, plus 6 other combinations per Arabica/Robusta blend = 33 per blend, duplicate extractions. Section 2.1 homogeneous/isotropic model assumes 5-second imbibition then saturation; Section 3.1 chemical TDS/lipid/HPLC analysis shows within-study finer grind often increases solids while temperature/pressure are not monotonic; Section 3.2 and 4 validate model-predicted chemical masses at selected held-out conditions, with weaker predictions of citric/acetic acids/lipids and acknowledged equipment, environment, coffee, fines limitations. No panel, individual five-taste ratings, same-coffee paired intervention or causal consumer preference improvement measured."
     }
   ],
   "evidence_checks": [
@@ -8011,6 +8027,45 @@
       "owner_approval": false,
       "github267_literal_review_credit": 0,
       "date": "2026-11-14"
+    },
+    {
+      "id": "R455-EV-METHOD-262-A",
+      "page_section": "Publisher original HTML Sections 2.1 and 2.2, 2023 paper",
+      "claim": "A homogeneous/isotropic, saturated-after-five-seconds physics model was tested against two commercial Arabica/Robusta blends with fixed 20+/-0.1g dose, 40+/-2g output, 20kgF tamp, 3 grinding conditions, 3 temperatures (88/93.4/98C), 3 pressures (6/9/12 bar), plus six scattered cases per type. 33 conditions per blend and duplicate extractions are chemical/physical trials, NOT independent trained-consumer preference or next-shot outcomes.",
+      "grade": "FIRST_PARTY_FULL_METHODS_READ; MODEL_ASSUMPTIONS_AND_MEASURED_CHEMISTRY_VERIFIED_IN_TEXT; RAW_RECORDS/PDF_NOT_AUDITED",
+      "factual_status": "LAB_DESIGN_VERIFIED; HUMAN_TASTE_OUTCOMES_ABSENT",
+      "result": "NO_NUMERIC_APP_RULE_OR_GENERAL_TASTE_EFFICACY",
+      "source": "LIT-2023-ANGELONI-GIACOMINI-ESPRESSO-PERCOLATION",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0,
+      "date": "2026-11-14",
+      "current_app": "GitHub development ec80501ce4f4ce582a14f260e61e487a1960e4af; site/lib/engine.js Git blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6, site/lib/constants.js d3559dc1c9560c4d68fbcad1dc91e3a792a100a2, site/lib/model.js fdc65f869546cddbb6552e555dca12117f2c47fc. Five owner-Locked tastes, explicit missing vs all-green, one truly controllable next shot, style/grinder/feed/history and no inferred unmeasured chemical composition."
+    },
+    {
+      "id": "R455-EV-METHOD-262-B",
+      "page_section": "Publisher original HTML Sections 3.1.1, 3.1.2 and 3.2",
+      "claim": "Within these fixed-dose/yield apparatus-specific tests finer grinding increased measured total-solids and many compounds; pressure and temperature exhibited non-monotonic interactions. In-silico outputs are compared to withheld measured chemical masses, not to sensory preference; a predictive chemical fit cannot be a personal taste-confidence estimate.",
+      "grade": "FIRST_PARTY_FULL_RESULTS_TEXT_DIRECT; SELECTED_PUBLISHED_TABLE_TEXT_NOT_INDEPENDENT_RAW_VERIFICATION",
+      "factual_status": "LAB_CONDITIONAL_ASSOCIATION; NO_GENERAL_GRIND_OR_TEMPERATURE_OPTIMUM",
+      "result": "PRESERVE_OWNER_LOCKED_PERSONAL_TASTE_FEEDBACK_AND_NO_UNIVERSAL_CORRECTION",
+      "source": "LIT-2023-ANGELONI-GIACOMINI-ESPRESSO-PERCOLATION",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0,
+      "date": "2026-11-14",
+      "current_app": "GitHub development ec80501ce4f4ce582a14f260e61e487a1960e4af; site/lib/engine.js Git blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6, site/lib/constants.js d3559dc1c9560c4d68fbcad1dc91e3a792a100a2, site/lib/model.js fdc65f869546cddbb6552e555dca12117f2c47fc. Five owner-Locked tastes, explicit missing vs all-green, one truly controllable next shot, style/grinder/feed/history and no inferred unmeasured chemical composition."
+    },
+    {
+      "id": "R455-EV-CIT-262-C",
+      "page_section": "Publisher original HTML Tables 9-11 discussion and Section 4",
+      "claim": "Authors report errors about 10 percent for most chemical species on limited withheld conditions, with worse citric/acetic acid/lipid performance and explicitly fixed tamp, narrow lab environment, professional machinery/baristas, untested other equipment/water, unmodeled fines and assumed blend interpolation. None proves DIC individualized next-shot all-five ratings improve.",
+      "grade": "FIRST_PARTY_FULL_DISCUSSION_AND_LIMITATIONS_READ; PLOT_PIXELS_AND_INDEPENDENT_REPLICATION_NOT_VERIFIED",
+      "factual_status": "CONDITIONAL_CHEMICAL_VALIDATION_NOT_RECOMMENDATION_EFFECTIVENESS",
+      "result": "RESEARCH_ONLY_TRACE_NO_APP_CHANGE",
+      "source": "LIT-2023-ANGELONI-GIACOMINI-ESPRESSO-PERCOLATION",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0,
+      "date": "2026-11-14",
+      "current_app": "GitHub development ec80501ce4f4ce582a14f260e61e487a1960e4af; site/lib/engine.js Git blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6, site/lib/constants.js d3559dc1c9560c4d68fbcad1dc91e3a792a100a2, site/lib/model.js fdc65f869546cddbb6552e555dca12117f2c47fc. Five owner-Locked tastes, explicit missing vs all-green, one truly controllable next shot, style/grinder/feed/history and no inferred unmeasured chemical composition."
     }
   ],
   "policy_decisions_pending": [],
@@ -8202,21 +8257,22 @@
     "R455-250: reconciled merged R249 sidecar against existing R455-023/R455-139 original full publisher methods and R455-PROP-102/139; four proposed check IDs map to already recorded atomic evidence; no duplicate papers, evidence checks, proposals or validated cup improvements counted (141/404/204 preserved). Rehashed Library slow-feed PDF variant v1 134777B SHA256 a068e5...; distinct archive member still unverified. S019 inaccessible; continue reproducible UX/citation gaps. Docs-only PR/CI/merge pending at authoring, no READY/deploy.",
     "R455-254 canonical integration: source Ormaza-Zapata 2019 DYNA primary original, three bounded method/sensory/chemistry checks and one P3 no-app-change proposal, intended 142/407/205. Full original paper HTML reviewed, raw plots/taster data/PDF SHA not obtained. S019 standalone unreviewed, no #267 literal credit, no member taste-effect evaluation. Merge/docs governance requires independent readback.",
     "R455-258 source author abstract directly checked: four body tactile subattributes, 3-CQA/4-CQA subtle mouthcoating and study-specific inverse concentration effect do NOT validate DIC five tastes or next-shot improvement. One new source/three bounded checks/one P3 research-only proposal; current app unchanged. Exact docs-only CI/merge/readback required, S019 standalone inaccessible, #267 literal review credited zero.",
-    "R455-260: full canonical Git blob independently parsed and reconciled R259 proposed poroelastic source/three claims/one proposal to existing LIT-2026-ESPRESSO-POROELASTIC, methods R455-EV-METHOD-204-A/B and previous proposal R455-PROP-204; 145/416/208 unchanged. No #267 literal review or empirical DIC taste validation; standalone S019 inaccessible."
+    "R455-260: full canonical Git blob independently parsed and reconciled R259 proposed poroelastic source/three claims/one proposal to existing LIT-2026-ESPRESSO-POROELASTIC, methods R455-EV-METHOD-204-A/B and previous proposal R455-PROP-204; 145/416/208 unchanged. No #267 literal review or empirical DIC taste validation; standalone S019 inaccessible.",
+    "R455-262: first-party 2023 Angeloni et al espresso percolation original HTML Sections 2/3/4 directly reviewed; 1 unique source/3 chemical-versus-taste evidence checks/1 research-only proposal. No app/Locked/telemetry/member/provider or production change, zero #267 V2 line credit. Full publisher PDF binary, raw lab/model software and member taste outcomes not verified. PR-head/merge/CI verification still required. Standalone S019 unreviewed."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-261",
+    "run_id": "R455-262",
     "date": "2026-11-14",
-    "development_preflight_sha": "7ace1ad4be9af7e3c3fbf59eff101dd684f3f3df",
+    "development_preflight_sha": "ec80501ce4f4ce582a14f260e61e487a1960e4af",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
     "source_counts": {
-      "sources": 146,
-      "evidence_checks": 419,
-      "proposals": 209
+      "sources": 147,
+      "evidence_checks": 422,
+      "proposals": 210
     },
-    "scope": "First-party early abstract of filter-coffee model; no espresso or taste efficacy; no app/rule/member/provider changes",
+    "scope": "2023 original full publisher HTML espresso percolation laboratory chemistry/model limitations; no personal taste validation",
     "github267_line_credit": 0,
-    "next": "Continue source-by-source original espresso and UX audit; seek full original filter article and S019 without claiming access; verify future espresso-specific same-context outcomes only with separate owner authority and consent."
+    "next": "Verify PR-head docs continuity, nonforce merge, exact merged Git blobs/CI; then inspect independent Log Shot/Rate workflow UX defect or another nonduplicate primary source. Keep S019 unreviewed."
   },
   "policy_decisions_resolved": [
     {
@@ -13019,6 +13075,32 @@
       "owner_approval_now_required": false,
       "implementation": "R455-261_RESEARCH_ONLY_LEDGER_NO_RUNTIME_CHANGE",
       "test_plan": "Full canonical JSON parse and stable roundtrip, exact 145/416/208 preserved ordered entries, unique all IDs and DOI exactly once, append exactly 1 source/3 bounded evidence checks/1 proposal, exact head and merged Git blob parity, docs-only CI governance. No Node/build/UX/SQL/member tests claimed for untouched source.",
+      "release_queue_status": "RESEARCH_ONLY_NOT_READY_NO_PUBLICATION",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-PROP-262-CHEMICAL-PERCOLATION-IS-NOT-PERSONAL-TASTE",
+      "source": [
+        "LIT-2023-ANGELONI-GIACOMINI-ESPRESSO-PERCOLATION",
+        "ORG-02",
+        "ORG-06"
+      ],
+      "evidence": [
+        "R455-EV-METHOD-262-A",
+        "R455-EV-METHOD-262-B",
+        "R455-EV-CIT-262-C"
+      ],
+      "severity": "P3_RESEARCH_SCOPE_GUARDRAIL_NO_REPRODUCED_APPLICATION_DEFECT",
+      "finding": "Measured chemical outputs and conditional physical-model validation are not a validated personalized recipe optimizer or five-taste next-shot outcome. Equipment/tamping/roast, sensory preference and non-monotonic interactions prevent universal corrections.",
+      "evidence_grade": "FIRST_PARTY_PUBLISHED_FULL_TEXT_METHODS_RESULTS_CONCLUSIONS_REVIEWED; NO_RAW_DATA_REPRODUCTION_OR_HUMAN_RATING_EFFECTIVENESS",
+      "current_locked": "Five independent taste scales, all-green only when complete, one truly controllable adjustment, measured shot and private notes/history, distinct styles including Turbo/Fast-Flow, feed, calibration and equipment limits; no new universal numeric targets or consent.",
+      "current_app": "GitHub development ec80501ce4f4ce582a14f260e61e487a1960e4af; site/lib/engine.js Git blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6, site/lib/constants.js d3559dc1c9560c4d68fbcad1dc91e3a792a100a2, site/lib/model.js fdc65f869546cddbb6552e555dca12117f2c47fc. Five owner-Locked tastes, explicit missing vs all-green, one truly controllable next shot, style/grinder/feed/history and no inferred unmeasured chemical composition.",
+      "user_benefit": "Avoid false physics-based precision/strength claims in recommendations and preserve member-specific taste learning.",
+      "proposed_change": "SAFE RESEARCH-ONLY: no engine, taste, target or UI change. Keep science and app heuristic separate. Future owner-authorized privacy-safe evaluation may compare consented same-coffee/setup/style/grinder/feed single-control advice to next-shot complete five ratings with missingness/confounders and negative outcomes; not authorized to collect now.",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "R455-262_PRIMARY_SOURCE_LEDGER_NO_RUNTIME_CHANGE",
+      "test_plan": "JSON full parsed/roundtrip, no earlier entries changed or IDs duplicated, exact source/blob and DOI check, docs PR-head governance plus merge/readback; no functional app test for untouched code.",
       "release_queue_status": "RESEARCH_ONLY_NOT_READY_NO_PUBLICATION",
       "github267_literal_review_credit": 0
     }
