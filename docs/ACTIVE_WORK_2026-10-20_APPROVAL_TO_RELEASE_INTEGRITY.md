@@ -545,3 +545,13 @@ DIC_PREFLIGHT_VERIFIED development_sha=8da4a1fa94b53fea08a226270d64a23926f7b62a 
 - Acceptance: COMPLETE for four eligible READY features and this publication. Next: continue separate unfinished work; new owner Publish required for future READY.
 
 DIC_PREFLIGHT_VERIFIED development_sha=9c22f1957a00f303d909616c8f07b7bfb6f89a0d preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+## Supersede failed READY6-isolated-01 with fixed test/source v2 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=4d5abde40a3c0ef4a5277dfdfaf9b22ac14c6475 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- First source 74fc225a088ebddb14994fdeb1aca4d4bc87e32d is permanently FAIL (one inaccurate SQL dispatch meta-test; all 4 other exact CI jobs succeeded). DO NOT reuse it for any grant or release.
+- Corrected development code/test commit 4d5abde40a3c0ef4a5277dfdfaf9b22ac14c6475 adapts SQL suite integrity to exact included migrations and explicit NOT_APPLICABLE for source-excluded unfinished SQL. The full SQL job itself was SUCCESS at first candidate.
+- New single frozen v2 candidate release-candidates/20261114-ready6-isolated-02, parent 4d5abde40a3c0ef4a5277dfdfaf9b22ac14c6475, exact six selected READY IDs unchanged: DIC-Q-28-owner-oauth-privacy-policy-20261114, DIC-Q-33-r191-275-276-post-ready-unnamed-growers, DIC-Q-33-r192-redhouse-selected-narrative-review, DIC-Q-33-r198-original291-source-prose-conflict, DIC-Q-455-r255-offline-recommendation-provenance-preview, DIC-Q-508-catalog-refresh-cooldown-copy-15s.
+- Actual deployed-source diff still exactly nine included selected app paths, restored five unfinished app paths (including 2 TESTING migrations), one metadata R198 exact blob pin; unpublished workflow restores 111, 18 unready #33 tests and one reviewed workflow-only test excluded. No new app code included.
+- A fresh exact-SHA CI suite and one application build are necessary because previous candidate SHA cannot be edited/test-retried with different source bytes. No production, no main request, no grant/Netlify/SQL/member/provider writes so far. Must secure five exact new-SHA CI successes, then one new owner-bound grant and only one Git-connected release controller.
