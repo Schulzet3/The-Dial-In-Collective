@@ -1,0 +1,1640 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 245,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "ef1e635c06ab6301e72896378bfdeb270b1cfcaf",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "readback_head_sha": "6afbe5777fdfe7986255dc01602b1a859c08f128"
+  },
+  "provider_scope": "Current managed Auth MFA five table full catalog component definitions and 80 cumulative numeric-only pg_stat_statements fingerprints; read-only",
+  "tables": {
+    "ordinal_start": 6,
+    "ordinal_end": 10,
+    "all_definition_components": true,
+    "rows": [
+      {
+        "relname": "mfa_amr_claims",
+        "owner": "supabase_auth_admin",
+        "rls": true,
+        "force_rls": false,
+        "acl": "{postgres=ar*wdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_role_select": false,
+        "columns": [
+          {
+            "type": "uuid",
+            "column": "session_id",
+            "default": null,
+            "nullable": false
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "created_at",
+            "default": null,
+            "nullable": false
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "updated_at",
+            "default": null,
+            "nullable": false
+          },
+          {
+            "type": "text",
+            "column": "authentication_method",
+            "default": null,
+            "nullable": false
+          },
+          {
+            "type": "uuid",
+            "column": "id",
+            "default": null,
+            "nullable": false
+          }
+        ],
+        "constraints": [
+          {
+            "name": "amr_id_pk",
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "mfa_amr_claims_session_id_authentication_method_pkey",
+            "definition": "UNIQUE (session_id, authentication_method)"
+          },
+          {
+            "name": "mfa_amr_claims_session_id_fkey",
+            "definition": "FOREIGN KEY (session_id) REFERENCES auth.sessions(id) ON DELETE CASCADE"
+          }
+        ],
+        "indexes": [
+          {
+            "name": "auth.amr_id_pk",
+            "valid": true,
+            "definition": "CREATE UNIQUE INDEX amr_id_pk ON auth.mfa_amr_claims USING btree (id)"
+          },
+          {
+            "name": "auth.mfa_amr_claims_session_id_authentication_method_pkey",
+            "valid": true,
+            "definition": "CREATE UNIQUE INDEX mfa_amr_claims_session_id_authentication_method_pkey ON auth.mfa_amr_claims USING btree (session_id, authentication_method)"
+          }
+        ],
+        "policies": [],
+        "triggers": [],
+        "definition_md5": "34d3fd9b269bcafbd7b65338be3bf851"
+      },
+      {
+        "relname": "mfa_challenges",
+        "owner": "supabase_auth_admin",
+        "rls": true,
+        "force_rls": false,
+        "acl": "{postgres=ar*wdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_role_select": false,
+        "columns": [
+          {
+            "type": "uuid",
+            "column": "id",
+            "default": null,
+            "nullable": false
+          },
+          {
+            "type": "uuid",
+            "column": "factor_id",
+            "default": null,
+            "nullable": false
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "created_at",
+            "default": null,
+            "nullable": false
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "verified_at",
+            "default": null,
+            "nullable": true
+          },
+          {
+            "type": "inet",
+            "column": "ip_address",
+            "default": null,
+            "nullable": false
+          },
+          {
+            "type": "text",
+            "column": "otp_code",
+            "default": null,
+            "nullable": true
+          },
+          {
+            "type": "jsonb",
+            "column": "web_authn_session_data",
+            "default": null,
+            "nullable": true
+          }
+        ],
+        "constraints": [
+          {
+            "name": "mfa_challenges_auth_factor_id_fkey",
+            "definition": "FOREIGN KEY (factor_id) REFERENCES auth.mfa_factors(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "mfa_challenges_pkey",
+            "definition": "PRIMARY KEY (id)"
+          }
+        ],
+        "indexes": [
+          {
+            "name": "auth.mfa_challenge_created_at_idx",
+            "valid": true,
+            "definition": "CREATE INDEX mfa_challenge_created_at_idx ON auth.mfa_challenges USING btree (created_at DESC)"
+          },
+          {
+            "name": "auth.mfa_challenges_pkey",
+            "valid": true,
+            "definition": "CREATE UNIQUE INDEX mfa_challenges_pkey ON auth.mfa_challenges USING btree (id)"
+          }
+        ],
+        "policies": [],
+        "triggers": [],
+        "definition_md5": "466040c5661f89b11f45221aedb5dfe1"
+      },
+      {
+        "relname": "mfa_factors",
+        "owner": "supabase_auth_admin",
+        "rls": true,
+        "force_rls": false,
+        "acl": "{postgres=ar*wdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_role_select": false,
+        "columns": [
+          {
+            "type": "uuid",
+            "column": "id",
+            "default": null,
+            "nullable": false
+          },
+          {
+            "type": "uuid",
+            "column": "user_id",
+            "default": null,
+            "nullable": false
+          },
+          {
+            "type": "text",
+            "column": "friendly_name",
+            "default": null,
+            "nullable": true
+          },
+          {
+            "type": "auth.factor_type",
+            "column": "factor_type",
+            "default": null,
+            "nullable": false
+          },
+          {
+            "type": "auth.factor_status",
+            "column": "status",
+            "default": null,
+            "nullable": false
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "created_at",
+            "default": null,
+            "nullable": false
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "updated_at",
+            "default": null,
+            "nullable": false
+          },
+          {
+            "type": "text",
+            "column": "secret",
+            "default": null,
+            "nullable": true
+          },
+          {
+            "type": "text",
+            "column": "phone",
+            "default": null,
+            "nullable": true
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "last_challenged_at",
+            "default": null,
+            "nullable": true
+          },
+          {
+            "type": "jsonb",
+            "column": "web_authn_credential",
+            "default": null,
+            "nullable": true
+          },
+          {
+            "type": "uuid",
+            "column": "web_authn_aaguid",
+            "default": null,
+            "nullable": true
+          },
+          {
+            "type": "jsonb",
+            "column": "last_webauthn_challenge_data",
+            "default": null,
+            "nullable": true
+          }
+        ],
+        "constraints": [
+          {
+            "name": "mfa_factors_last_challenged_at_key",
+            "definition": "UNIQUE (last_challenged_at)"
+          },
+          {
+            "name": "mfa_factors_pkey",
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "mfa_factors_user_id_fkey",
+            "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          }
+        ],
+        "indexes": [
+          {
+            "name": "auth.factor_id_created_at_idx",
+            "valid": true,
+            "definition": "CREATE INDEX factor_id_created_at_idx ON auth.mfa_factors USING btree (user_id, created_at)"
+          },
+          {
+            "name": "auth.mfa_factors_last_challenged_at_key",
+            "valid": true,
+            "definition": "CREATE UNIQUE INDEX mfa_factors_last_challenged_at_key ON auth.mfa_factors USING btree (last_challenged_at)"
+          },
+          {
+            "name": "auth.mfa_factors_pkey",
+            "valid": true,
+            "definition": "CREATE UNIQUE INDEX mfa_factors_pkey ON auth.mfa_factors USING btree (id)"
+          },
+          {
+            "name": "auth.mfa_factors_user_friendly_name_unique",
+            "valid": true,
+            "definition": "CREATE UNIQUE INDEX mfa_factors_user_friendly_name_unique ON auth.mfa_factors USING btree (friendly_name, user_id) WHERE (TRIM(BOTH FROM friendly_name) <> ''::text)"
+          },
+          {
+            "name": "auth.mfa_factors_user_id_idx",
+            "valid": true,
+            "definition": "CREATE INDEX mfa_factors_user_id_idx ON auth.mfa_factors USING btree (user_id)"
+          },
+          {
+            "name": "auth.unique_phone_factor_per_user",
+            "valid": true,
+            "definition": "CREATE UNIQUE INDEX unique_phone_factor_per_user ON auth.mfa_factors USING btree (user_id, phone)"
+          }
+        ],
+        "policies": [],
+        "triggers": [],
+        "definition_md5": "1bc947c8b835e8366514afd26c5b7017"
+      },
+      {
+        "relname": "mfa_recovery_code_sets",
+        "owner": "supabase_auth_admin",
+        "rls": false,
+        "force_rls": false,
+        "acl": "{postgres=arwdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_role_select": false,
+        "columns": [
+          {
+            "type": "uuid",
+            "column": "id",
+            "default": null,
+            "nullable": false
+          },
+          {
+            "type": "uuid",
+            "column": "user_id",
+            "default": null,
+            "nullable": false
+          },
+          {
+            "type": "uuid",
+            "column": "mfa_factor_id",
+            "default": null,
+            "nullable": false
+          },
+          {
+            "type": "integer",
+            "column": "failed_verification_count",
+            "default": "0",
+            "nullable": false
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "verification_locked_until",
+            "default": null,
+            "nullable": true
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "created_at",
+            "default": "now()",
+            "nullable": false
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "updated_at",
+            "default": "now()",
+            "nullable": false
+          }
+        ],
+        "constraints": [
+          {
+            "name": "mfa_recovery_code_sets_failed_verification_count_check",
+            "definition": "CHECK (failed_verification_count >= 0)"
+          },
+          {
+            "name": "mfa_recovery_code_sets_mfa_factor_id_fkey",
+            "definition": "FOREIGN KEY (mfa_factor_id) REFERENCES auth.mfa_factors(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "mfa_recovery_code_sets_mfa_factor_id_key",
+            "definition": "UNIQUE (mfa_factor_id)"
+          },
+          {
+            "name": "mfa_recovery_code_sets_pkey",
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "mfa_recovery_code_sets_user_id_fkey",
+            "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "mfa_recovery_code_sets_user_id_key",
+            "definition": "UNIQUE (user_id)"
+          }
+        ],
+        "indexes": [
+          {
+            "name": "auth.mfa_recovery_code_sets_mfa_factor_id_key",
+            "valid": true,
+            "definition": "CREATE UNIQUE INDEX mfa_recovery_code_sets_mfa_factor_id_key ON auth.mfa_recovery_code_sets USING btree (mfa_factor_id)"
+          },
+          {
+            "name": "auth.mfa_recovery_code_sets_pkey",
+            "valid": true,
+            "definition": "CREATE UNIQUE INDEX mfa_recovery_code_sets_pkey ON auth.mfa_recovery_code_sets USING btree (id)"
+          },
+          {
+            "name": "auth.mfa_recovery_code_sets_user_id_key",
+            "valid": true,
+            "definition": "CREATE UNIQUE INDEX mfa_recovery_code_sets_user_id_key ON auth.mfa_recovery_code_sets USING btree (user_id)"
+          }
+        ],
+        "policies": [],
+        "triggers": [],
+        "definition_md5": "8fcf0af883c8c64b86a70a4d4933ab2d"
+      },
+      {
+        "relname": "mfa_recovery_codes",
+        "owner": "supabase_auth_admin",
+        "rls": false,
+        "force_rls": false,
+        "acl": "{postgres=arwdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_role_select": false,
+        "columns": [
+          {
+            "type": "uuid",
+            "column": "id",
+            "default": null,
+            "nullable": false
+          },
+          {
+            "type": "uuid",
+            "column": "mfa_recovery_code_set_id",
+            "default": null,
+            "nullable": false
+          },
+          {
+            "type": "text",
+            "column": "code_hash",
+            "default": null,
+            "nullable": false
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "consumed_at",
+            "default": null,
+            "nullable": true
+          },
+          {
+            "type": "timestamp with time zone",
+            "column": "created_at",
+            "default": "now()",
+            "nullable": false
+          }
+        ],
+        "constraints": [
+          {
+            "name": "mfa_recovery_codes_mfa_recovery_code_set_id_fkey",
+            "definition": "FOREIGN KEY (mfa_recovery_code_set_id) REFERENCES auth.mfa_recovery_code_sets(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "mfa_recovery_codes_pkey",
+            "definition": "PRIMARY KEY (id)"
+          }
+        ],
+        "indexes": [
+          {
+            "name": "auth.mfa_recovery_codes_pkey",
+            "valid": true,
+            "definition": "CREATE UNIQUE INDEX mfa_recovery_codes_pkey ON auth.mfa_recovery_codes USING btree (id)"
+          },
+          {
+            "name": "auth.mfa_recovery_codes_set_id_idx",
+            "valid": true,
+            "definition": "CREATE INDEX mfa_recovery_codes_set_id_idx ON auth.mfa_recovery_codes USING btree (mfa_recovery_code_set_id)"
+          }
+        ],
+        "policies": [],
+        "triggers": [],
+        "definition_md5": "42c3c81f0e62b483d66d962c69f6fbed"
+      }
+    ],
+    "semantic_verdicts": {
+      "mfa_amr_claims": "Session+method uniqueness and FK cascade; private SQL ACL, RLS; no direct member SELECT",
+      "mfa_challenges": "Factor FK cascade, OTP/WebAuthn column definitions and created_at index; private SQL ACL and RLS",
+      "mfa_factors": "Factor ownership FK, types/status, stored secret metadata, six indexes and no direct member SQL SELECT; vendor-managed no deletion",
+      "mfa_recovery_code_sets": "Per-member/factor uniqueness, bounded nonnegative failure counter and lock-until metadata; RLS off but no anon/authenticated/service_role SQL SELECT; access control depends on private owner and hosted Auth",
+      "mfa_recovery_codes": "Code hash column and cascading set relation, index on set id; RLS off but no anon/authenticated/service_role SQL SELECT; no code values accessed"
+    }
+  },
+  "sql_reference_scan": {
+    "scope": "pg_proc.prosrc text references in public/private/auth/storage/realtime; NOT full external code caller proof",
+    "matching_functions": []
+  },
+  "performance": {
+    "observed_at": "2026-11-14 16:50:46.374643+00",
+    "stats_reset": "2026-10-09 11:11:31.487298+00",
+    "provider_numeric_count": 4886,
+    "rank_range": [
+      1601,
+      1680
+    ],
+    "rows": [
+      {
+        "ord": 1601,
+        "qid": "3186388564765884538",
+        "rows": 73,
+        "calls": 73,
+        "max_ms": 1.056,
+        "mean_ms": 0.098,
+        "rolname": "supabase_admin",
+        "total_ms": 7.119,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 0,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1602,
+        "qid": "6694751538111299107",
+        "rows": 1,
+        "calls": 1,
+        "max_ms": 7.113,
+        "mean_ms": 7.113,
+        "rolname": "postgres",
+        "total_ms": 7.113,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 12,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1603,
+        "qid": "-76705083872796854",
+        "rows": 10,
+        "calls": 5,
+        "max_ms": 3.685,
+        "mean_ms": 1.421,
+        "rolname": "postgres",
+        "total_ms": 7.106,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 152,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1604,
+        "qid": "4664843678836456677",
+        "rows": 92,
+        "calls": 1,
+        "max_ms": 7.103,
+        "mean_ms": 7.103,
+        "rolname": "postgres",
+        "total_ms": 7.103,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 440,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1605,
+        "qid": "-8094094280345907723",
+        "rows": 1,
+        "calls": 1,
+        "max_ms": 7.082,
+        "mean_ms": 7.082,
+        "rolname": "postgres",
+        "total_ms": 7.082,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 29,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1606,
+        "qid": "-4924474758160494799",
+        "rows": 0,
+        "calls": 96,
+        "max_ms": 0.166,
+        "mean_ms": 0.074,
+        "rolname": "postgres",
+        "total_ms": 7.078,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 0,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1607,
+        "qid": "-6461344897992589524",
+        "rows": 0,
+        "calls": 96,
+        "max_ms": 0.167,
+        "mean_ms": 0.074,
+        "rolname": "postgres",
+        "total_ms": 7.063,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 0,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1608,
+        "qid": "1240452213039185327",
+        "rows": 0,
+        "calls": 1,
+        "max_ms": 7.059,
+        "mean_ms": 7.059,
+        "rolname": "supabase_auth_admin",
+        "total_ms": 7.059,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 25,
+        "shared_blks_read": 8,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1609,
+        "qid": "1352237890372844520",
+        "rows": 106,
+        "calls": 1,
+        "max_ms": 7.056,
+        "mean_ms": 7.056,
+        "rolname": "postgres",
+        "total_ms": 7.056,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 586,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1610,
+        "qid": "5914584382233167594",
+        "rows": 16,
+        "calls": 2,
+        "max_ms": 4.928,
+        "mean_ms": 3.527,
+        "rolname": "postgres",
+        "total_ms": 7.054,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 564,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1611,
+        "qid": "9175757915465961657",
+        "rows": 1,
+        "calls": 1,
+        "max_ms": 7.038,
+        "mean_ms": 7.038,
+        "rolname": "postgres",
+        "total_ms": 7.038,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 11,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1612,
+        "qid": "-6883023751393440299",
+        "rows": 37,
+        "calls": 37,
+        "max_ms": 3.371,
+        "mean_ms": 0.189,
+        "rolname": "supabase_admin",
+        "total_ms": 6.998,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 0,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1613,
+        "qid": "2711665252533934001",
+        "rows": 0,
+        "calls": 1,
+        "max_ms": 6.973,
+        "mean_ms": 6.973,
+        "rolname": "postgres",
+        "total_ms": 6.973,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 351,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1614,
+        "qid": "5897775295646344073",
+        "rows": 37,
+        "calls": 1,
+        "max_ms": 6.968,
+        "mean_ms": 6.968,
+        "rolname": "postgres",
+        "total_ms": 6.968,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 402,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1615,
+        "qid": "-1707568347364952187",
+        "rows": 5,
+        "calls": 1,
+        "max_ms": 6.939,
+        "mean_ms": 6.939,
+        "rolname": "postgres",
+        "total_ms": 6.939,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 59,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1616,
+        "qid": "-6571622135641559042",
+        "rows": 0,
+        "calls": 96,
+        "max_ms": 0.164,
+        "mean_ms": 0.072,
+        "rolname": "postgres",
+        "total_ms": 6.934,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 0,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1617,
+        "qid": "8744789555850649052",
+        "rows": 66,
+        "calls": 2,
+        "max_ms": 4.874,
+        "mean_ms": 3.463,
+        "rolname": "postgres",
+        "total_ms": 6.925,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 1300,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1618,
+        "qid": "-5863587116771751968",
+        "rows": 2,
+        "calls": 1,
+        "max_ms": 6.92,
+        "mean_ms": 6.92,
+        "rolname": "postgres",
+        "total_ms": 6.92,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 17,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1619,
+        "qid": "7707538345120060658",
+        "rows": 0,
+        "calls": 1,
+        "max_ms": 6.916,
+        "mean_ms": 6.916,
+        "rolname": "supabase_storage_admin",
+        "total_ms": 6.916,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 739,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1620,
+        "qid": "-2019571217927448503",
+        "rows": 9,
+        "calls": 3,
+        "max_ms": 2.764,
+        "mean_ms": 2.304,
+        "rolname": "postgres",
+        "total_ms": 6.912,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 269,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1621,
+        "qid": "-240627913431884143",
+        "rows": 0,
+        "calls": 2,
+        "max_ms": 5.895,
+        "mean_ms": 3.455,
+        "rolname": "postgres",
+        "total_ms": 6.911,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 476,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1622,
+        "qid": "-5489859045222137025",
+        "rows": 0,
+        "calls": 2,
+        "max_ms": 6.32,
+        "mean_ms": 3.454,
+        "rolname": "postgres",
+        "total_ms": 6.908,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 258,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1623,
+        "qid": "7198558310860383273",
+        "rows": 0,
+        "calls": 1,
+        "max_ms": 6.904,
+        "mean_ms": 6.904,
+        "rolname": "postgres",
+        "total_ms": 6.904,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 175,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1624,
+        "qid": "-3687835822792778030",
+        "rows": 158,
+        "calls": 2,
+        "max_ms": 3.901,
+        "mean_ms": 3.445,
+        "rolname": "postgres",
+        "total_ms": 6.89,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 1223,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1625,
+        "qid": "5943724196557259489",
+        "rows": 2,
+        "calls": 2,
+        "max_ms": 3.952,
+        "mean_ms": 3.434,
+        "rolname": "postgres",
+        "total_ms": 6.868,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 726,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1626,
+        "qid": "-2897247098482262499",
+        "rows": 0,
+        "calls": 96,
+        "max_ms": 0.158,
+        "mean_ms": 0.071,
+        "rolname": "postgres",
+        "total_ms": 6.838,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 0,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1627,
+        "qid": "-9062371201007904984",
+        "rows": 12,
+        "calls": 2,
+        "max_ms": 6.328,
+        "mean_ms": 3.418,
+        "rolname": "postgres",
+        "total_ms": 6.835,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 356,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1628,
+        "qid": "-1099467262021898554",
+        "rows": 0,
+        "calls": 1,
+        "max_ms": 6.833,
+        "mean_ms": 6.833,
+        "rolname": "postgres",
+        "total_ms": 6.833,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 47,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1629,
+        "qid": "-9173580101934371835",
+        "rows": 2,
+        "calls": 2,
+        "max_ms": 3.723,
+        "mean_ms": 3.411,
+        "rolname": "postgres",
+        "total_ms": 6.821,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 96,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1630,
+        "qid": "-8547817203628393664",
+        "rows": 6,
+        "calls": 6,
+        "max_ms": 1.963,
+        "mean_ms": 1.135,
+        "rolname": "postgres",
+        "total_ms": 6.808,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 1070,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1631,
+        "qid": "8556911793689321881",
+        "rows": 2,
+        "calls": 1,
+        "max_ms": 6.802,
+        "mean_ms": 6.802,
+        "rolname": "postgres",
+        "total_ms": 6.802,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 183,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1632,
+        "qid": "-6894914773900702672",
+        "rows": 0,
+        "calls": 96,
+        "max_ms": 0.142,
+        "mean_ms": 0.071,
+        "rolname": "postgres",
+        "total_ms": 6.795,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 0,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1633,
+        "qid": "6867571420931683375",
+        "rows": 1,
+        "calls": 1,
+        "max_ms": 6.77,
+        "mean_ms": 6.77,
+        "rolname": "postgres",
+        "total_ms": 6.77,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 607,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1634,
+        "qid": "-184337079164305932",
+        "rows": 9,
+        "calls": 10,
+        "max_ms": 3.87,
+        "mean_ms": 0.676,
+        "rolname": "postgres",
+        "total_ms": 6.759,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 220,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1635,
+        "qid": "995612801486310710",
+        "rows": 527,
+        "calls": 1,
+        "max_ms": 6.757,
+        "mean_ms": 6.757,
+        "rolname": "postgres",
+        "total_ms": 6.757,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 929,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1636,
+        "qid": "8461679252791863479",
+        "rows": 0,
+        "calls": 96,
+        "max_ms": 0.248,
+        "mean_ms": 0.07,
+        "rolname": "postgres",
+        "total_ms": 6.738,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 0,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1637,
+        "qid": "472958089930601866",
+        "rows": 32,
+        "calls": 1,
+        "max_ms": 6.735,
+        "mean_ms": 6.735,
+        "rolname": "postgres",
+        "total_ms": 6.735,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 995,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1638,
+        "qid": "-3653221516824404487",
+        "rows": 1,
+        "calls": 1,
+        "max_ms": 6.725,
+        "mean_ms": 6.725,
+        "rolname": "postgres",
+        "total_ms": 6.725,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 21,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1639,
+        "qid": "-5685068501671442473",
+        "rows": 0,
+        "calls": 96,
+        "max_ms": 0.115,
+        "mean_ms": 0.07,
+        "rolname": "postgres",
+        "total_ms": 6.705,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 0,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1640,
+        "qid": "-6209052425043468031",
+        "rows": 0,
+        "calls": 96,
+        "max_ms": 0.134,
+        "mean_ms": 0.07,
+        "rolname": "postgres",
+        "total_ms": 6.696,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 0,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1641,
+        "qid": "5225165461322541384",
+        "rows": 36,
+        "calls": 9,
+        "max_ms": 1.326,
+        "mean_ms": 0.743,
+        "rolname": "postgres",
+        "total_ms": 6.69,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 582,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1642,
+        "qid": "8259113979960760971",
+        "rows": 4,
+        "calls": 1,
+        "max_ms": 6.684,
+        "mean_ms": 6.684,
+        "rolname": "postgres",
+        "total_ms": 6.684,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 74,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1643,
+        "qid": "5360251647081715348",
+        "rows": 39,
+        "calls": 39,
+        "max_ms": 2.903,
+        "mean_ms": 0.171,
+        "rolname": "anon",
+        "total_ms": 6.679,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 84,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1644,
+        "qid": "6204020309878081391",
+        "rows": 0,
+        "calls": 96,
+        "max_ms": 0.124,
+        "mean_ms": 0.07,
+        "rolname": "postgres",
+        "total_ms": 6.674,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 0,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1645,
+        "qid": "-2258710240529946623",
+        "rows": 0,
+        "calls": 1,
+        "max_ms": 6.667,
+        "mean_ms": 6.667,
+        "rolname": "supabase_admin",
+        "total_ms": 6.667,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 154,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1646,
+        "qid": "-10956293846516792",
+        "rows": 0,
+        "calls": 1,
+        "max_ms": 6.658,
+        "mean_ms": 6.658,
+        "rolname": "postgres",
+        "total_ms": 6.658,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 636,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1647,
+        "qid": "-2691184090452997895",
+        "rows": 0,
+        "calls": 1,
+        "max_ms": 6.637,
+        "mean_ms": 6.637,
+        "rolname": "postgres",
+        "total_ms": 6.637,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 531,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1648,
+        "qid": "-9002503109276793062",
+        "rows": 0,
+        "calls": 96,
+        "max_ms": 0.125,
+        "mean_ms": 0.069,
+        "rolname": "postgres",
+        "total_ms": 6.637,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 0,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1649,
+        "qid": "-3959128637398369588",
+        "rows": 0,
+        "calls": 1,
+        "max_ms": 6.637,
+        "mean_ms": 6.637,
+        "rolname": "authenticated",
+        "total_ms": 6.637,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 239,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1650,
+        "qid": "-289558783266979410",
+        "rows": 19,
+        "calls": 1,
+        "max_ms": 6.633,
+        "mean_ms": 6.633,
+        "rolname": "postgres",
+        "total_ms": 6.633,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 183,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1651,
+        "qid": "-4122281612899748345",
+        "rows": 10,
+        "calls": 10,
+        "max_ms": 1.43,
+        "mean_ms": 0.661,
+        "rolname": "postgres",
+        "total_ms": 6.61,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 40,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1652,
+        "qid": "-234468380105479909",
+        "rows": 5,
+        "calls": 1,
+        "max_ms": 6.608,
+        "mean_ms": 6.608,
+        "rolname": "postgres",
+        "total_ms": 6.608,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 99,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1653,
+        "qid": "5827333824181661107",
+        "rows": 22,
+        "calls": 22,
+        "max_ms": 0.931,
+        "mean_ms": 0.3,
+        "rolname": "postgres",
+        "total_ms": 6.604,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 242,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1654,
+        "qid": "-5233935798360213203",
+        "rows": 0,
+        "calls": 2,
+        "max_ms": 5.669,
+        "mean_ms": 3.297,
+        "rolname": "postgres",
+        "total_ms": 6.593,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 430,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1655,
+        "qid": "5096223368389972401",
+        "rows": 0,
+        "calls": 96,
+        "max_ms": 0.145,
+        "mean_ms": 0.069,
+        "rolname": "postgres",
+        "total_ms": 6.592,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 0,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1656,
+        "qid": "7416712330164248355",
+        "rows": 0,
+        "calls": 96,
+        "max_ms": 0.114,
+        "mean_ms": 0.069,
+        "rolname": "postgres",
+        "total_ms": 6.585,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 0,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1657,
+        "qid": "-5530520382783276236",
+        "rows": 110,
+        "calls": 1,
+        "max_ms": 6.582,
+        "mean_ms": 6.582,
+        "rolname": "postgres",
+        "total_ms": 6.582,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 2125,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1658,
+        "qid": "4658032560734795273",
+        "rows": 0,
+        "calls": 96,
+        "max_ms": 0.153,
+        "mean_ms": 0.068,
+        "rolname": "postgres",
+        "total_ms": 6.559,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 0,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1659,
+        "qid": "8029640941309762755",
+        "rows": 10,
+        "calls": 1,
+        "max_ms": 6.551,
+        "mean_ms": 6.551,
+        "rolname": "postgres",
+        "total_ms": 6.551,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 163,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1660,
+        "qid": "-5332486081200769853",
+        "rows": 87,
+        "calls": 1,
+        "max_ms": 6.533,
+        "mean_ms": 6.533,
+        "rolname": "postgres",
+        "total_ms": 6.533,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 999,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1661,
+        "qid": "-7345173687141373016",
+        "rows": 0,
+        "calls": 96,
+        "max_ms": 0.162,
+        "mean_ms": 0.068,
+        "rolname": "postgres",
+        "total_ms": 6.532,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 0,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1662,
+        "qid": "-4527223983070822355",
+        "rows": 5,
+        "calls": 1,
+        "max_ms": 6.532,
+        "mean_ms": 6.532,
+        "rolname": "postgres",
+        "total_ms": 6.532,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 25,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1663,
+        "qid": "-5677024375204803040",
+        "rows": 14,
+        "calls": 2,
+        "max_ms": 5.295,
+        "mean_ms": 3.262,
+        "rolname": "postgres",
+        "total_ms": 6.523,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 590,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1664,
+        "qid": "-777382899220571097",
+        "rows": 0,
+        "calls": 96,
+        "max_ms": 0.138,
+        "mean_ms": 0.068,
+        "rolname": "postgres",
+        "total_ms": 6.505,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 0,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1665,
+        "qid": "247677094828131537",
+        "rows": 4,
+        "calls": 1,
+        "max_ms": 6.5,
+        "mean_ms": 6.5,
+        "rolname": "postgres",
+        "total_ms": 6.5,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 195,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1666,
+        "qid": "8681610920077670019",
+        "rows": 50,
+        "calls": 1,
+        "max_ms": 6.497,
+        "mean_ms": 6.497,
+        "rolname": "postgres",
+        "total_ms": 6.497,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 4283,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1667,
+        "qid": "-100266089005242613",
+        "rows": 5,
+        "calls": 1,
+        "max_ms": 6.465,
+        "mean_ms": 6.465,
+        "rolname": "postgres",
+        "total_ms": 6.465,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 1197,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1668,
+        "qid": "2343603735480541882",
+        "rows": 0,
+        "calls": 96,
+        "max_ms": 0.165,
+        "mean_ms": 0.067,
+        "rolname": "postgres",
+        "total_ms": 6.458,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 0,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1669,
+        "qid": "-4270964276631980411",
+        "rows": 5,
+        "calls": 1,
+        "max_ms": 6.447,
+        "mean_ms": 6.447,
+        "rolname": "postgres",
+        "total_ms": 6.447,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 71,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1670,
+        "qid": "6104839499929558304",
+        "rows": 0,
+        "calls": 1,
+        "max_ms": 6.428,
+        "mean_ms": 6.428,
+        "rolname": "postgres",
+        "total_ms": 6.428,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 116,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1671,
+        "qid": "7326355492523157666",
+        "rows": 1,
+        "calls": 1,
+        "max_ms": 6.423,
+        "mean_ms": 6.423,
+        "rolname": "postgres",
+        "total_ms": 6.423,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 157,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1672,
+        "qid": "8616933770655690055",
+        "rows": 1,
+        "calls": 1,
+        "max_ms": 6.396,
+        "mean_ms": 6.396,
+        "rolname": "postgres",
+        "total_ms": 6.396,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 8,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1673,
+        "qid": "-1286494234103270962",
+        "rows": 2,
+        "calls": 2,
+        "max_ms": 5.226,
+        "mean_ms": 3.196,
+        "rolname": "postgres",
+        "total_ms": 6.392,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 36,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1674,
+        "qid": "1541701084618767160",
+        "rows": 5,
+        "calls": 1,
+        "max_ms": 6.391,
+        "mean_ms": 6.391,
+        "rolname": "postgres",
+        "total_ms": 6.391,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 446,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1675,
+        "qid": "-1876653902134460740",
+        "rows": 0,
+        "calls": 2,
+        "max_ms": 6.308,
+        "mean_ms": 3.192,
+        "rolname": "postgres",
+        "total_ms": 6.385,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 48,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1676,
+        "qid": "7768711060404314484",
+        "rows": 0,
+        "calls": 96,
+        "max_ms": 0.187,
+        "mean_ms": 0.066,
+        "rolname": "postgres",
+        "total_ms": 6.36,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 0,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1677,
+        "qid": "6238585614460687153",
+        "rows": 3,
+        "calls": 3,
+        "max_ms": 2.203,
+        "mean_ms": 2.12,
+        "rolname": "postgres",
+        "total_ms": 6.36,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 54,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1678,
+        "qid": "1513682143026133070",
+        "rows": 10,
+        "calls": 1,
+        "max_ms": 6.359,
+        "mean_ms": 6.359,
+        "rolname": "postgres",
+        "total_ms": 6.359,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 56,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1679,
+        "qid": "1793997522940167297",
+        "rows": 0,
+        "calls": 96,
+        "max_ms": 0.119,
+        "mean_ms": 0.066,
+        "rolname": "postgres",
+        "total_ms": 6.348,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 0,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "ord": 1680,
+        "qid": "956129481681336066",
+        "rows": 131,
+        "calls": 3,
+        "max_ms": 2.186,
+        "mean_ms": 2.115,
+        "rolname": "postgres",
+        "total_ms": 6.346,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 1478,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      }
+    ],
+    "previous_distinct": 1576,
+    "new_distinct": 74,
+    "overlap": 6,
+    "overlap_ids": [
+      "3186388564765884538",
+      "6694751538111299107",
+      "-76705083872796854",
+      "4664843678836456677",
+      "-8094094280345907723",
+      "5360251647081715348"
+    ],
+    "cumulative_distinct": 1650,
+    "raw_sql_text_read": false,
+    "per_hour_latency_inference": false
+  },
+  "source_test_ci": "NO_NEW_CODE_TEST_CI_CHANGES; existing two issue509 NULL-guard fixes remain TESTING pending five-check same-source proof",
+  "security_advisory": "Previous security/performance advisory categories unchanged on independent fresh provider check, not proof of defect",
+  "provider_sql_writes": 0,
+  "provider_auth_storage_edge_writes": 0,
+  "github_code_test_ci_writes": 0,
+  "confirmed_new_defects": 0,
+  "justified_deletions": 0,
+  "provider_baseline_complete": false,
+  "next_cursor": "Fresh provider drift, numeric rank 1681-1760 and managed Auth table ordinals 11-15 (oauth_authorizations onward), hosted HTTP/Auth/JWT remains UNVERIFIED"
+}
