@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 229,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "affba44fe0b20b9cb4d705300e92214082ce0512",
+    "blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "verified": true
+  },
+  "scope": "Complete current provider source text and ACL of 6 SQL routines related to SQL fingerprint evidence, plus drift/migrations/Edge metadata; read-only",
+  "source_sql": "SELECT jsonb_agg(jsonb_build_object('schema',n.nspname,'name',p.proname,'identity_args',pg_get_function_identity_arguments(p.oid),'definition',pg_get_functiondef(p.oid),'md5',md5(pg_get_functiondef(p.oid)),'chars',length(pg_get_functiondef(p.oid)),'security_definer',p.prosecdef,'anon_execute',has_function_privilege('anon',p.oid,'EXECUTE'),'authenticated_execute',has_function_privilege('authenticated',p.oid,'EXECUTE'),'service_execute',has_function_privilege('service_role',p.oid,'EXECUTE')) ORDER BY n.nspname,p.proname,p.oid) AS source FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname IN ('public','private') AND p.proname IN ('dic_preview_cached_verified','dic_preview_preflight','dic_session_status','dic_canonical_roaster_key','session_status','dic_roaster_key')",
+  "source_definitions": [
+    {
+      "md5": "646cff7cceed7011b1fc3a1b69c4d3f0",
+      "name": "dic_canonical_roaster_key",
+      "chars": 402,
+      "schema": "private",
+      "definition": "CREATE OR REPLACE FUNCTION private.dic_canonical_roaster_key(value text)\n RETURNS text\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\n with input as (select private.dic_roaster_key(value) as key)\n select coalesce(\n   (select a.canonical_key from private.dic_roaster_name_aliases a\n      join input i on i.key=a.alias_key limit 1),\n   (select key from input)\n );\n$function$\n",
+      "anon_execute": false,
+      "identity_args": "value text",
+      "service_execute": false,
+      "security_definer": true,
+      "authenticated_execute": false
+    },
+    {
+      "md5": "e553ae6c1cf99c3784f5d14a4f05d355",
+      "name": "dic_roaster_key",
+      "chars": 388,
+      "schema": "private",
+      "definition": "CREATE OR REPLACE FUNCTION private.dic_roaster_key(value text)\n RETURNS text\n LANGUAGE sql\n STABLE\n SET search_path TO ''\nAS $function$\n select nullif(regexp_replace(\n  regexp_replace(lower(extensions.unaccent(coalesce(value,''))), '[^a-z0-9]', '', 'g'),\n  '(coffeeroasters|coffeeroaster|coffeeroastery|coffeecompany|coffeeco|roasters|roaster|roastery|coffee)$',\n  ''\n ), '');\n$function$\n",
+      "anon_execute": false,
+      "identity_args": "value text",
+      "service_execute": false,
+      "security_definer": false,
+      "authenticated_execute": false
+    },
+    {
+      "md5": "0aa8e57bb4846aac7dd8e3b6c0cf690c",
+      "name": "session_status",
+      "chars": 729,
+      "schema": "private",
+      "definition": "CREATE OR REPLACE FUNCTION private.session_status()\n RETURNS jsonb\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nselect jsonb_build_object(\n 'authenticated',auth.uid() is not null,\n 'admitted',private.is_member(),\n 'admin',private.is_admin(),\n 'emailVerified',exists(select 1 from auth.users u where u.id=auth.uid() and u.email_confirmed_at is not null),\n 'approvalState',coalesce((\n   select case when m.admitted_at is not null and m.enabled then 'approved'\n     when m.admitted_at is not null then 'revoked'\n     else m.signup_review_state end\n   from private.beta_members m where m.owner_id=auth.uid()),'pending'),\n 'backupConfigured',false,'communityLive',false,'mode','owner-test');\n$function$\n",
+      "anon_execute": false,
+      "identity_args": "",
+      "service_execute": false,
+      "security_definer": true,
+      "authenticated_execute": true
+    },
+    {
+      "md5": "86a08b5ae97f89c13b8c727ebdd0c50f",
+      "name": "dic_preview_cached_verified",
+      "chars": 1658,
+      "schema": "public",
+      "definition": "CREATE OR REPLACE FUNCTION public.dic_preview_cached_verified(p_source_url text)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare me uuid:=auth.uid(); ids uuid[]; coffee public.coffees;\nbegin\n if me is null or auth.role() is distinct from 'authenticated' or not private.is_member() then\n  raise exception using errcode='42501',message='Admitted member required.';\n end if;\n if not exists(select 1 from auth.users u where u.id=me and u.email_confirmed_at is not null) then\n  raise exception using errcode='42501',message='Email confirmation required.';\n end if;\n if p_source_url is null or length(p_source_url)>900 or\n   p_source_url not like 'https://%' then return null; end if;\n select array_agg(distinct c.id) into ids\n from public.coffee_sources s join public.coffees c on c.id=s.coffee_id\n where s.source_url=p_source_url and s.source_kind='roaster_page'\n   and c.verification_state='verified' and c.merged_into_id is null;\n if coalesce(array_length(ids,1),0)<>1 then return null; end if;\n select * into strict coffee from public.coffees where id=ids[1];\n return jsonb_build_object(\n  'ok',true,'source','verified_catalog','cached',true,'source_url',p_source_url,\n  'fields',jsonb_strip_nulls(jsonb_build_object(\n   'name',coffee.name,'roaster',coffee.roaster,'release_label',coffee.release_label,\n   'origin',coffee.origin,'process',coffee.process,'roast_level',coffee.roast_level,\n   'variety',coffee.variety,'producer',coffee.producer,\n   'elevation_m',coffee.elevation_m,'tasting_notes',coffee.tasting_notes,\n   'summary',coffee.summary,'espresso_notes',coffee.espresso_notes)));\nend $function$\n",
+      "anon_execute": false,
+      "identity_args": "p_source_url text",
+      "service_execute": true,
+      "security_definer": true,
+      "authenticated_execute": true
+    },
+    {
+      "md5": "395d4a717122f9feb5ae04ac3c5a1d6a",
+      "name": "dic_preview_preflight",
+      "chars": 2460,
+      "schema": "public",
+      "definition": "CREATE OR REPLACE FUNCTION public.dic_preview_preflight(p_cached boolean DEFAULT false)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare\n me uuid:=auth.uid();\n rec private.dic_url_preview_attempts;\n clock timestamptz:=now();\n ticket uuid;\nbegin\n if me is null or auth.role() is distinct from 'authenticated' or not private.is_member() then\n  return jsonb_build_object('allowed',false,'reason','admitted_member_required');\n end if;\n if not exists(select 1 from auth.users u where u.id=me and u.email_confirmed_at is not null) then\n  return jsonb_build_object('allowed',false,'reason','verify_email');\n end if;\n if p_cached is null then\n  return jsonb_build_object('allowed',false,'reason','invalid_cached_flag');\n end if;\n -- Admin ticket only acknowledges a read-only preview. No account cap,\n -- waiting, counter row mutation, or serialized ticket lock for admins.\n if private.is_admin() then\n  if p_cached then\n   return jsonb_build_object('allowed',true,'cached',true,'unlimited',true);\n  end if;\n  return jsonb_build_object('allowed',true,'ticket',gen_random_uuid(),'unlimited',true);\n end if;\n insert into private.dic_url_preview_attempts(owner_id,window_started_at,last_attempt_at,attempts)\n values(me,clock,clock-interval '1 minute',0) on conflict(owner_id) do nothing;\n select * into strict rec from private.dic_url_preview_attempts where owner_id=me for update;\n if rec.window_started_at<clock-interval '24 hours' then\n  update private.dic_url_preview_attempts\n    set window_started_at=clock,attempts=0,preview_ticket=null,preview_ticket_at=null\n    where owner_id=me;\n  rec.attempts:=0;\n end if;\n -- A cached public result consumes cooldown but never a daily retrieval claim.\n if not p_cached and rec.attempts>=12 then\n  return jsonb_build_object('allowed',false,'reason','daily_preview_limit');\n end if;\n if rec.last_attempt_at>clock-interval '15 seconds' then\n  return jsonb_build_object('allowed',false,'reason','preview_cooldown');\n end if;\n if p_cached then\n  update private.dic_url_preview_attempts\n    set last_attempt_at=clock,preview_ticket=null,preview_ticket_at=null where owner_id=me;\n  return jsonb_build_object('allowed',true,'cached',true);\n end if;\n ticket:=gen_random_uuid();\n update private.dic_url_preview_attempts\n  set last_attempt_at=clock,preview_ticket=ticket,preview_ticket_at=clock where owner_id=me;\n return jsonb_build_object('allowed',true,'ticket',ticket);\nend $function$\n",
+      "anon_execute": false,
+      "identity_args": "p_cached boolean",
+      "service_execute": true,
+      "security_definer": true,
+      "authenticated_execute": true
+    },
+    {
+      "md5": "742e5bd0fc8544807886b514d95d6688",
+      "name": "dic_session_status",
+      "chars": 165,
+      "schema": "public",
+      "definition": "CREATE OR REPLACE FUNCTION public.dic_session_status()\n RETURNS jsonb\n LANGUAGE sql\n SET search_path TO ''\nAS $function$ select private.session_status(); $function$\n",
+      "anon_execute": false,
+      "identity_args": "",
+      "service_execute": true,
+      "security_definer": false,
+      "authenticated_execute": true
+    }
+  ],
+  "source_characters": 5802,
+  "full_definition_reviewed": 6,
+  "first_time_source_word_credit": 0,
+  "semantic": [
+    {
+      "name": "private.dic_canonical_roaster_key",
+      "verdict": "ACTIVE protected alias lookup without deprecated active directory; direct client EXECUTE denied"
+    },
+    {
+      "name": "private.dic_roaster_key",
+      "verdict": "ACTIVE normalization helper; direct client EXECUTE denied"
+    },
+    {
+      "name": "public.dic_preview_cached_verified",
+      "verdict": "ACTIVE exact source cached-verified lookup; admitted + confirmed-email guard, anon EXECUTE denied"
+    },
+    {
+      "name": "public.dic_preview_preflight",
+      "verdict": "ACTIVE admitted + confirmed-email guard; admin uncapped; member cooldown/ticket; Edge enforcement separately UNVERIFIED"
+    },
+    {
+      "name": "public.dic_session_status",
+      "verdict": "ACTIVE authenticated invoker wrapper"
+    },
+    {
+      "name": "private.session_status",
+      "verdict": "ACTIVE auth.uid-scoped private SECURITY DEFINER status; no list of identities, effective HTTP unverified"
+    }
+  ],
+  "drift_query": "WITH app AS (SELECT n.nspname,p.oid,p.proname,pg_get_functiondef(p.oid) AS def FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname IN ('public','private')) SELECT jsonb_build_object('observed_at',now(),'function_count',(SELECT count(*) FROM app),'function_ordered_md5',(SELECT md5(string_agg(nspname||'.'||proname||'='||md5(def),';' ORDER BY nspname,proname,oid)) FROM app),'views',(SELECT count(*) FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname IN ('public','private') AND c.relkind IN ('v','m')),'tables',(SELECT count(*) FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname IN ('public','private') AND c.relkind IN ('r','p')),'policies',(SELECT count(*) FROM pg_policies WHERE schemaname IN ('public','private')),'migrations',(SELECT count(*) FROM supabase_migrations.schema_migrations),'legacy_directory',(SELECT to_regclass('private.dic_roaster_directory')::text),'legacy_aliases',(SELECT to_regclass('private.dic_roaster_aliases')::text)) AS evidence",
+  "drift": {
+    "views": 0,
+    "tables": 52,
+    "policies": 41,
+    "migrations": 69,
+    "observed_at": "2026-11-14T00:50:50.447166+00:00",
+    "function_count": 114,
+    "legacy_aliases": null,
+    "legacy_directory": null,
+    "function_ordered_md5": "4bfc78411475d7b7c9699c6c8a8f757d"
+  },
+  "prior_run228_ordered_md5": "4bfc78411475d7b7c9699c6c8a8f757d",
+  "unchanged": true,
+  "project": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.11.0.003"
+  },
+  "edge_metadata": [
+    {
+      "slug": "dic-verify-coffee",
+      "version": 10,
+      "status": "ACTIVE",
+      "verify_jwt": true,
+      "bundle_sha256": "d59e9da29335f2d626a2779238b4f1176148f5f8f3d54539bf831ff20aa6a77e"
+    },
+    {
+      "slug": "dic-preview-coffee",
+      "version": 7,
+      "status": "ACTIVE",
+      "verify_jwt": true,
+      "bundle_sha256": "5c1aa148443d83261fa35a375fa58b12ada6421a5131c93028a7dd26e3bfa1fb"
+    },
+    {
+      "slug": "dic-delete-member-account",
+      "version": 4,
+      "status": "ACTIVE",
+      "verify_jwt": true,
+      "bundle_sha256": "5d4b6d84458b289c6a25bc76fec4a4b562594c0802e3ee9f7abd633fe87dcafb"
+    },
+    {
+      "slug": "dic-admin-push-broker",
+      "version": 3,
+      "status": "ACTIVE",
+      "verify_jwt": false,
+      "bundle_sha256": "ca7ce5f9b80bf6984a7517e9f3ef1750fa856b75557136817ccc040dc5635382"
+    },
+    {
+      "slug": "dic-member-approval-broker",
+      "version": 1,
+      "status": "ACTIVE",
+      "verify_jwt": false,
+      "bundle_sha256": "263f36326fa00934a4c7cfb7ecc6e3df9872e9b4f0395ef1326455d9bb2bded7"
+    }
+  ],
+  "legacy_classification": "RETIRED active old directory absent; archival tables HISTORICAL, newer name alias/official-source attestations ACTIVE",
+  "advisory_boundary": "No deletion based on cumulative missing scans, unindexed foreign key advisory, no-policy info, or named historical query fingerprint; real HTTP/JWT/Auth configuration UNVERIFIED under #96",
+  "finding": {
+    "new_proved_defects": 0,
+    "safe_deletions": 0,
+    "live_provider_changes": 0,
+    "source_test_ci_changes": 0,
+    "baseline_complete": false
+  },
+  "next_cursor": "provider drift, numeric 401-480, hosted configuration"
+}
