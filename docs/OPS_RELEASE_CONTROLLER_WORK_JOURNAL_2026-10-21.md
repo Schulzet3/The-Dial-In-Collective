@@ -854,3 +854,12 @@ DIC_PREFLIGHT_VERIFIED development_sha=b7e1c87d1813d22c447a1199ef5afb1221d50e7f 
 - Selected four READY, eight IN_PROGRESS excluded; 4 approved app paths only, 5 unfinished restorations, 105 workflows restored, 16 tests excluded
 - Preflight development source 9c22f1957a00f303d909616c8f07b7bfb6f89a0d, blob 2fb236bbfa6bac48513eeb3bd157b260853af06d; backup archived, verified and reused; non-destructive, no SQL migration
 - Owner authorized one Git-connected release; controller, Git release and Netlify READY/current receipt pending. No replay, no provider direct push.
+
+## DIC-20261114-READY6-03 controller request [skip netlify]
+- Release ID: DIC-20261114-READY6-03
+- Tested source: ed82fc7aed52b8c8bfac8a348133011b554f1c0b
+- Mode: publish
+- DIC_PREFLIGHT_VERIFIED development_sha=ec73cfc8c25f562aedbcc949172083325d136ec7 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+- Owner November 14 current Publish-all-READY request continued after timed-out test. Six independently source-certified READY items, full exact-source five GitHub SUCCESS (approval 43612791659; Node/lint/build 43612791677; cloud/browser 43612791625; SQL 43612791627); first candidate 74fc225a failed and was NOT published. New frozen candidate ed82fc7aed52b8c8bfac8a348133011b554f1c0b has nine approved app paths, exact R198 parser metadata, no new SQL migrations; five unfinished paths/111 workflows and 18 unready tests excluded.
+- New one-use grant DIC-20261114-READY6-03 recorded on development ec73cfc8c25f562aedbcc949172083325d136ec7, expires 2026-11-14T18:59:32.356Z; main lease 34c5bda912263365aeb06aad93042b61585eecbd; release lease 69b066171b64a54f92d828ce99c51f29afb32780. Owner-private encrypted backup reused: GitHub artifact 14072635105, Drive ID 1v6b01ydDfR1RwWW2jRpVysyXzMUCCAbH, SHA256 1555492507aceadd9a9bad2e32139896ba85d3d68050f0954043d3dc35cb9b46, verified 2026-11-13T20:12:40.882Z; direct Drive metadata confirmed authorized parent and owner-only 27,431,558 bytes. No production Supabase/DB/Auth/member writes, no duplicate build, no direct Netlify deployment.
+- Only one-parent nonforce main request changes docs/RELEASE_REQUEST.json and this append-only ops journal; GitHub guarded controller alone claims release/production once. Publisher run ID, success, release ref and Netlify READY/current with functions must be independently read back before DEPLOYED. No replay/force/future publication.
