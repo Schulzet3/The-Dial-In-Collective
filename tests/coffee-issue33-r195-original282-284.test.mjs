@@ -19,7 +19,7 @@ test('#282 selected Bold Betty current literal Columbia and process/roast',()=>{
  assert.equal(p.fields?.process,'Washed');
  assert.equal(p.fields?.roast_level,'Dark');
 });
-test('#282 current selected coffee's published flavor stays complete',()=>{
+test('#282 current selected published flavor stays complete',()=>{
  const p=parse(bold,'Bold Betty',boldDetails);
  for(const x of ['apricot','honey','pear'])assert.match(String(p.fields?.tasting_notes||'').toLowerCase(),new RegExp(x));
  assert.ok(!p.fields?.producer,'unnamed family farm is not a named grower');
