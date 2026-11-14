@@ -2,9 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 import {selected260,original260} from '../scripts/audit/issue33-r185-260-check.mjs';
-const chosen='<h1>Colombia Decaf</h1><h1>We love a good decaf!</h1>'+
+const chosen='<h1>Colombia Decaf</h1><h2>We love a good decaf!</h2>'+
  '<p>Did you know that decaf can be as delicious as a fully caffeinated coffee? We found that to be true with this crop.</p>'+
- "<h1>What you'll find in the cup:</h1>"+
+ "<h2>What you'll find in the cup:</h2>"+
  "<p>This is a full bodied coffee with sweet flavors of maple glaze and raspberry preserves. We also get some nice cinnamon-like spice with hints of ginger that's reminiscent of root beer.</p>";
 const page=(product=chosen,related='')=>'<html><head><title>Previous Ethiopia coffee</title></head>'+
  '<body><nav>Swiss Water decaf Natural dark roast</nav><main><article class="product">'+product+'</article></main>'+
@@ -40,7 +40,9 @@ test('#260 changed selected H1 must fail original frozen identity',()=>{
  assert.equal(selected260(page(chosen.replace('<h1>Colombia Decaf</h1>','<h1>Peru Decaf</h1>'))).identity,false);
 });
 test('#260 seller editorial H1s cannot be mistaken for competing coffees',()=>{
- const s=selected260(page());assert.equal(s.headings.length,3);assert.equal(s.identity,true);
+ const sections=chosen.replace('<h2>We love a good decaf!</h2>','<h1>We love a good decaf!</h1>')
+   .replace("<h2>What you'll find in the cup:</h2>","<h1>What you'll find in the cup:</h1>");
+ const s=selected260(page(sections));assert.equal(s.headings.length,3);assert.equal(s.identity,true);
 });
 test('#260 a second real product H1 disqualifies selected evidence',()=>{
  assert.equal(selected260(page(chosen+'<h1>Ethiopia Guji Kercha</h1>')).identity,false);
