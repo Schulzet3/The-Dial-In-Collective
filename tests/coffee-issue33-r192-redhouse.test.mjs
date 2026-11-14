@@ -15,7 +15,7 @@ function parse(n,other='',override=null){
  const html='<!doctype html><html><head><meta property="og:type" content="product"><meta property="og:title" content="'+c.name+'"><script type="application/ld+json">'+JSON.stringify(p)+'</script></head><body><header><a href="/products/other">More coffee</a></header><main><article class="product"><h1>'+c.name+'</h1><div class="product-description">'+(override??c.desc)+'</div><select><option>Whole Bean</option><option>Fine for Espresso</option></select></article></main>'+other+'</body></html>';
  return extractPublicCoffeeFacts(html,{source_url:c.url});
 }
-const f=n=>parse(n).fields||{},notes=p=>String(p.fields?.tasting_notes||'').toLowerCase();
+const notes=p=>String(p.fields?.tasting_notes||'').toLowerCase();
 test('#277 current chosen Geisha maintains H1, named grower and selected cupping notes',()=>{
  const p=parse(277);assert.equal(p.ok,true,JSON.stringify(p).slice(0,900));
  assert.match(String(p.fields?.name||''),/Geisha El Paraiso Nariño 8 oz/);
