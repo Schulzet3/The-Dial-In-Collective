@@ -2021,7 +2021,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  const printedNotes=[];
  for(const fact of source_facts){
   if(fact.field!=='tasting_notes'||fact.conflicting&&fact.section==='Different coffee in the source'||
-   !/^(?:(?:tasting|cupping|flavou?r|flavor|cup)\s+(?:notes?|profile)|notes?|we\s+taste|what\s+you(?:'|’)?ll\s+taste)$/i.test(String(fact.label||'').trim())||
+   !/^(?:(?:tasting|cupping|flavou?r|flavor|cup)\s+(?:notes?|profile)|flavou?r|notes?|we\s+taste|what\s+you(?:'|’)?ll\s+taste)$/i.test(String(fact.label||'').trim())||
    /(?:brewing\s+recommendations|different\s+coffee|education|general\s+guidance)/i.test(String(fact.section||''))||
    !['html','product_json'].includes(fact.source_type))continue;
   const label=String(fact.label||'').trim();

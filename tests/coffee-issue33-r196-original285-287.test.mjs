@@ -48,7 +48,7 @@ test('#286 unrelated cooperative must not leak into selected Worka',()=>{
  const p=selected(286,worka,'<aside><h2>Mexico Angel Albino Corzo</h2><p>Farm: FFESICH Cooperative</p><p>Flavor: Cola, Blackberry</p></aside>');
  assert.equal(p.ok,true);
  assert.ok(!p.fields?.producer,'unrelated FFESICH must not be assigned to Worka: '+JSON.stringify(p.fields));
- assert.doesNotMatch(String(p.fields?.tasting_notes||''),/cola|blackberry/i);
+ assert.doesNotMatch(String(p.fields?.tasting_notes||''),/\b(?:cola|blackberry)\b/i);
 });
 test('#287 directly named FFESICH cooperative qualifies; locality does not become producer',()=>{
  const p=selected(287,mexico);

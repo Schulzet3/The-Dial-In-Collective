@@ -46,7 +46,7 @@ for(const [key,t] of Object.entries(targets)){
   expect(/Anaerobic Natural/i.test(raw),'286_current_selected_processing_literal');
   expect(!fields.producer,'286_count_is_not_producer');
   expect(fields.roast_level==='Light','286_own_light_roast');
-  expect(/strawberry/i.test(String(fields.tasting_notes||'')),'286_own_selected_flavor');
+  expect(/macerated strawberry/i.test(String(fields.tasting_notes||''))&&/yogurt/i.test(String(fields.tasting_notes||''))&&/dark chocolate/i.test(String(fields.tasting_notes||'')),'286_full_direct_selected_four_note_flavor');
  }else{
   expect(/Farm:\s*FFESICH Cooperative/i.test(raw),'287_named_cooperative');
   expect(/Angel Albino Corzo is the region/i.test(raw),'287_selected_region_not_producer');
@@ -54,7 +54,7 @@ for(const [key,t] of Object.entries(targets)){
   expect(/FFESICH/i.test(String(fields.producer||'')),'287_named_grower_collective');
   expect(!/Angel Albino Corzo/i.test(String(fields.producer||'')),'287_region_not_grower');
   expect(fields.process==='Washed','287_own_washed');
-  expect(/chocolate/i.test(String(fields.tasting_notes||'')),'287_own_flavor');
+  expect(/dark chocolate/i.test(String(fields.tasting_notes||''))&&/hazelnut/i.test(String(fields.tasting_notes||'')),'287_full_direct_selected_four_note_flavor');
  }
  report.cases.push({number:n,official_url:t.url,final_url:rec.final_url,h1,html_bytes:buf.length,sha256:buf.length?hash(buf):null,fields,conflicts:actual.conflicts||[],selected_preview:raw.slice(0,1300)});
 }
