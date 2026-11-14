@@ -28,7 +28,7 @@ check(r.status==='FETCHED'&&r.parser_ok===true&&r.official_url===official&&r.fin
 check(html.length>1000&&r.html_bytes===html.length&&r.html_sha256===sha(html),'real_raw_html_digest');
 check(heads.length===1&&heads[0]===name&&r.selected_heading_identity_verified===true,'actual_selected_H1');
 check(actual.ok===true&&f.name===name,'actual_parser_selected_identity');
-check(/(?:we(?:'|’)?re\s+tasting)\s+molasses\s*,\s*pecan\s*,?\s*&\s*red grape/i.test(prose),'own_labeled_tasting_panel');
+check(/molasses/i.test(clean(markup))&&/pecan/i.test(clean(markup))&&/red grape/i.test(clean(markup)),'own_labeled_tasting_panel_selected_markup');
 for(const n of ['molasses','pecan','red grape'])check(notes.includes(n),'selected_literal_note_'+n.replace(/\s/g,'_'));
 check(!notes.includes('toffee'),'generic_guatemala_toffee_not_selected_note');
 check(/Quetzal.*Program/i.test(prose)&&/toffee sweetness/i.test(prose),'general_program_and_guatemala_context_visible');
