@@ -26,7 +26,7 @@ import {equivalentCoffeeProductNames,preferredCoffeeRoasterName,selectedCoffeeNa
 import {isolateCoffeeIdentityCohorts} from './coffee-source-identity-scope.mjs';
 import {extractCoffeeGeographyEntityRoles,cleanCoffeeGeographyEntityPrefix} from './coffee-geography-entity-roles.mjs';
 import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProductFlavorProfileEvidence,refineSelectedNamedTastingNotes,normalizeExplicitCoffeeTastingNotes,equivalentCoffeeTastingNotes,coffeeTastingNotesSubset} from './coffee-flavor-evidence.mjs';
-import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,refineSelectedCurrentTrailingFlavorNote,refineSelectedCurrentFlavorBase,refineSelectedCurrentSensoryArc,selectedCoffeeSupplementalTastingProse,selectedCurrentNarrativeAdditionalTastingNote,selectedCurrentMultiSentenceNarrativeNotes,selectedCurrentProductOvertone,selectedCurrentIntrinsicAromaContext,selectedCurrentUnlabeledFlavorPair} from './coffee-selected-description-sensory.mjs';
+import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,refineSelectedCurrentCoordinatedFinish,refineSelectedCurrentTrailingFlavorNote,refineSelectedCurrentFlavorBase,refineSelectedCurrentSensoryArc,selectedCoffeeSupplementalTastingProse,selectedCurrentNarrativeAdditionalTastingNote,selectedCurrentMultiSentenceNarrativeNotes,selectedCurrentProductOvertone,selectedCurrentIntrinsicAromaContext,selectedCurrentUnlabeledFlavorPair} from './coffee-selected-description-sensory.mjs';
 import {selectedCoffeeMilkSensoryContext} from './coffee-selected-milk-sensory-context.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {parseCoffeeElevation,equivalentCoffeeElevations,compatibleCoffeeElevations,extractCoffeeElevationEvidence} from './coffee-elevation-evidence.mjs';
@@ -2129,6 +2129,18 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    if(finish)fields.tasting_notes=finish;
    // The selected current first-person cup statement can explicitly add
    // one final flavor note after its complete already accepted prefix.
+   // Only lower-ranked narrative and only the selected exact same sentence,
+   // never in place of a stronger direct labeled or structured flavor list.
+   const coordinated=(!printedNotes.length&&!structuredFlavorByFields.get(fields))?
+     refineSelectedCurrentCoordinatedFinish(currentProduct,{clean,notes:fields.tasting_notes}):'';
+   if(coordinated){
+    fields.tasting_notes=coordinated;
+    if(source_facts.length<384)source_facts.push({
+     field:'tasting_notes',label:'Current selected description coordinated finish',
+     value:coordinated,source_url,source_type:'html',
+     section:'Exact selected current coffee description'
+    });
+   }
    const trailing=refineSelectedCurrentTrailingFlavorNote(currentProduct,{clean,notes:fields.tasting_notes});
    if(trailing)fields.tasting_notes=trailing;
    // The chosen current paragraph's literal base and identical already

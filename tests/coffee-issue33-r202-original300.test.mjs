@@ -39,3 +39,16 @@ test('original300 general region education does not name an individual farmer or
  assert.ok(!p.fields?.producer);
  assert.ok(!p.fields?.decaffeination_method);
 });
+
+
+test('original300 conditional milk-service finish does not become intrinsic notes',()=>{
+ const p=parse({description:'This coffee has Sweet and slightly Floral notes when brewed with milk, creating a malty and Blueberry finish.'});
+ assert.equal(p.ok,true);
+ assert.doesNotMatch(String(p.fields?.tasting_notes||''),/blueberry/i);
+});
+test('original300 sibling and customer review cannot complete omitted selected flavor',()=>{
+ const aside='<section id="reviews"><p>Creating a malty and Blueberry finish when served.</p></section><aside><h2>Other Coffee</h2><p>Sweet and slightly Floral notes creating a malty and Blueberry finish.</p></aside>';
+ const p=parse({description:'This Black Lion coffee has Sweet and slightly Floral notes, with a pleasant finish.',aside});
+ assert.equal(p.ok,true);
+ assert.doesNotMatch(String(p.fields?.tasting_notes||''),/blueberry|malty/i);
+});
