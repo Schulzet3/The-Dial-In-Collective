@@ -2649,6 +2649,24 @@
       "source_bytes_sha256": null,
       "source_byte_caveat": "Original PDF was text-accessible through publisher; screenshot attempts timed out, so figures/visual layout and original binary SHA/underlying sensory data were not verified. No independent replication, app user observation or espresso intervention.",
       "factual_status": "STUDY_SPECIFIC_FILTRATION_MIXTURE_CONCENTRATION_NOT_PERSONAL_ESPRESSO_RATIO; PUBLISHED_ABSTRACT_AND_TABLE_2_FIT_CLAIMS_APPEAR_INCONSISTENT"
+    },
+    {
+      "id": "LIT-2023-RUNE-FRENCHPRESS-ACID-THRESHOLDS",
+      "type": "peer_reviewed_primary_french_press_acid_chemistry_and_sensory_detection_non_espresso",
+      "title": "Acids in brewed coffees: Chemical composition and sensory threshold",
+      "authors": "Christina J. Birke Rune; Davide Giacalone; Ida Steen; Lars Duelund; Morten Munchow; Mathias Porsmose Clausen",
+      "published": "2023-03-22",
+      "journal": "Current Research in Food Science 6:100485",
+      "doi": "10.1016/j.crfs.2023.100485",
+      "url": "https://doi.org/10.1016/j.crfs.2023.100485",
+      "pmc": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10074501/",
+      "access": "PUBLISHER_OPEN_ACCESS_FULL_ARTICLE_INDEXED_TEXT_DIRECTLY_INSPECTED_SELECTED_METHODS_2_5_2_7_RESULTS_3_ACID_CONCENTRATIONS_THRESHOLDS_AND_DISCUSSION; PMC_DIRECT_OPEN_RECAPTCHA; PUBLISHER_DIRECT_OPEN_HTTP403",
+      "review_status": "R455-266_SUBSTANTIVE_PRIMARY_INDEXED_TEXT_METHODS_SENSORY_DETECTION_IDENTIFICATION_CHEMICAL_RESULTS_LIMITATIONS; NOT_VERIFIED_AS_CONTIGUOUS_BROWSER_FULL_PDF_OR_RAW_DATA",
+      "evidence_grade": "PEER_REVIEWED_FIVE_FRENCH_PRESS_COFFEES_40_UNTRAINED_FORCED_CHOICE_AND_13_TRAINED_EXPERTS; NO_ESPRESSO_NEXT_SHOT_PERSONAL_RATING_TRIAL",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Published DOI source available by indexed article excerpts; direct publisher open HTTP403, direct PMC recaptcha; original PDF bytes, graphs, entire table cells, individual panel raw data and independent replication NOT verified.",
+      "factual_status": "BOUNDED_FRENCH_PRESS_ACID_DETECTABILITY_AND_RECOGNITION_ONLY; NOT_UNIVERSAL_ESPRESSO_SOUR_CAUSE_OR_CORRECTION",
+      "github267_literal_review_credit": 0
     }
   ],
   "evidence_checks": [
@@ -8186,6 +8204,45 @@
       "result": "NO_SILENT_LOCKED_TASTE_OR_RATIO_TARGET_CHANGE",
       "owner_approval": false,
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CIT-266-A",
+      "source": "LIT-2023-RUNE-FRENCHPRESS-ACID-THRESHOLDS",
+      "date": "2026-11-14",
+      "page_section": "Original indexed publisher Methods sections 2.5 to 2.7; Introduction",
+      "claim": "Five geographic-origin Arabica specialty coffees spanning three light-roast degrees were prepared as French-press brews; 40 untrained assessors completed an incomplete-block 2-AFC acid-detection experiment (each acid evaluated 24 times), and a distinct group of 13 trained coffee professionals attempted acid identification after short training.",
+      "grade": "DIRECT_PUBLISHED_METHODS_TEXT_INDEXED; 40_AND_13_ARE_DIFFERENT_PANELS; ORIGINAL_PDF_BINARY_UNVERIFIED",
+      "factual_status": "METHOD_SUPPORTED_FOR_TESTED_FRENCH_PRESS_PROTOCOL_ONLY",
+      "current_app": "dev=6f910997feba7fa84a79c734ba05084a84a8f73e; engine.js blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6; constants.js blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2",
+      "result": "NO_PERSONAL_ESPRESSO_ALL_FIVE_TASTE_OR_NEXT_SHOT_INTERVENTION_VALIDATION",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CIT-266-B",
+      "source": "LIT-2023-RUNE-FRENCHPRESS-ACID-THRESHOLDS",
+      "date": "2026-11-14",
+      "page_section": "Original publisher abstract, Results 3.1 and sensory discussion",
+      "claim": "Measured citric acid in tested brews (0.23-0.60 g/L) was above this study's approximate detection limit (below 0.16 g/L), yet the 13 trained coffee experts did not correctly identify any of five individual acids spiked into coffee at the measured average concentration. Measured total organic-acid aggregate showed no significant roast-degree trend even though individual acid species shifted.",
+      "grade": "DIRECT_INDEXED_PRIMARY_ABSTRACT_RESULTS_METHODS; FIGURE_PIXELS_AND_INDIVIDUAL_RESPONSE_TABLE_NOT_REANALYZED",
+      "factual_status": "COMPLEXITY_OF_PERCEIVED_ACIDITY_SUPPORTED_IN_TESTED_MATRIX; NO_UNIVERSAL_CONCENTRATION_OR_ORIGIN_RULE",
+      "current_app": "dev=6f910997feba7fa84a79c734ba05084a84a8f73e; engine.js blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6; constants.js blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2",
+      "result": "NO_CHEMICAL_IDENTITY_OR_SINGLE_ACID_TO_SOUR_ESPRESSO_MAPPING",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CIT-266-C",
+      "source": "LIT-2023-RUNE-FRENCHPRESS-ACID-THRESHOLDS",
+      "date": "2026-11-14",
+      "page_section": "Live development site/lib/constants.js SCALES and engine.js recipe/feedback behavior; original paper limitations",
+      "claim": "Current Locked Extraction rating uses Sour on its low end and Bitter on its high end within five distinct recorded tastes, not biochemical acid assay inputs. Individual acid detectability in French press is not grounds to infer a particular espresso sour note, a member-specific cause or a safe grind/yield/temperature correction; the paper's incomplete-block sensory design cannot resolve all individual heterogeneity.",
+      "grade": "DIRECT_CURRENT_REPO_CODE_AND_PUBLISHED_LIMITATIONS_CROSSWALK; NO_REPRODUCED_APP_BUG_OR_EMPIRICAL_CUP_GAIN",
+      "factual_status": "RESEARCH_ONLY_NO_VERIFIED_ESPRESSO_INTERVENTION",
+      "current_app": "dev=6f910997feba7fa84a79c734ba05084a84a8f73e; engine.js blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6; constants.js blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2",
+      "result": "PRESERVE_EXISTING_LOCKED_ONE_CONTROLLABLE_CHANGE_FIVE_TASTES_AND_CONFIDENCE_LIMITS",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -8380,22 +8437,23 @@
     "R455-260: full canonical Git blob independently parsed and reconciled R259 proposed poroelastic source/three claims/one proposal to existing LIT-2026-ESPRESSO-POROELASTIC, methods R455-EV-METHOD-204-A/B and previous proposal R455-PROP-204; 145/416/208 unchanged. No #267 literal review or empirical DIC taste validation; standalone S019 inaccessible.",
     "R455-262: first-party 2023 Angeloni et al espresso percolation original HTML Sections 2/3/4 directly reviewed; 1 unique source/3 chemical-versus-taste evidence checks/1 research-only proposal. No app/Locked/telemetry/member/provider or production change, zero #267 V2 line credit. Full publisher PDF binary, raw lab/model software and member taste outcomes not verified. PR-head/merge/CI verification still required. Standalone S019 unreviewed.",
     "R455-264: directly reviewed one-origin Robusta postharvest original publisher full HTML §2/3/4; 1 novel DOI/3 bounded checks/1 P3 research-only proposal, 148/425/211; no member espresso efficacy, no code/Locked targets/deployment, zero #267 literal-line credit, standalone S019 not accessible. Source-bound docs CI/merge receipt pending.",
-    "R455-265: original Resende et al 2025 filtered blend PDF indexed text and Table 2: 1 distinct source/3 claim checks/1 research-only proposal. 149/428/212. Research only, page screenshots timeout, table-fit conflict unresolved, no espresso five-rating outcome; standalone S019 inaccessible; zero #267 line credit; next: exact-source docs governance and separate safe Log Shot path."
+    "R455-265: original Resende et al 2025 filtered blend PDF indexed text and Table 2: 1 distinct source/3 claim checks/1 research-only proposal. 149/428/212. Research only, page screenshots timeout, table-fit conflict unresolved, no espresso five-rating outcome; standalone S019 inaccessible; zero #267 line credit; next: exact-source docs governance and separate safe Log Shot path.",
+    "R455-266: original Rune et al. (2023) French-press coffee organic acid detection/recognition; 1 distinct source/3 bounded checks/1 P3 research-only proposal, no numeric or personal espresso correction. Preserve #267 zero credit and standalone S019 inaccessible. Continue UX source-level defect review."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-265",
+    "run_id": "R455-266",
     "date": "2026-11-14",
-    "development_preflight_sha": "67781a9aba587b6894e4fc77c4139113dce9ee88",
-    "refreshed_branch_sha": "67781a9aba587b6894e4fc77c4139113dce9ee88",
+    "development_preflight_sha": "6f910997feba7fa84a79c734ba05084a84a8f73e",
+    "initial_preflight_sha": "6f910997feba7fa84a79c734ba05084a84a8f73e",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
     "source_counts": {
-      "sources": 149,
-      "evidence_checks": 428,
-      "proposals": 212
+      "sources": 150,
+      "evidence_checks": 431,
+      "proposals": 213
     },
-    "scope": "Distinct 2025 filtered Arabica/Robusta blend mixture original PDF indexed methods/Table2 results with contradiction caveat; no espresso efficacy.",
+    "scope": "Distinct original peer-reviewed French-press acid detection/recognition study: 1 new DOI/3 bounded checks/1 research-only guardrail, no espresso efficacy or current app bug",
     "github267_line_credit": 0,
-    "next": "Check PR exact-source docs governance and nonforce merge/readback, then inspect a distinct SAFE Log Shot/Rate/Recommendation gap. Original S019 inaccessible."
+    "next": "Verify docs-only exact-source PR governance and merge; review next distinct reproducible Log Shot->Rate->Recommendation/offline defect. Standalone S019 PDF inaccessible."
   },
   "policy_decisions_resolved": [
     {
@@ -13281,6 +13339,33 @@
       "production_deployed": false,
       "github267_literal_review_credit": 0,
       "exact_source": "67781a9aba587b6894e4fc77c4139113dce9ee88"
+    },
+    {
+      "id": "R455-PROP-266-SOUR_NOTE-NOT-INDIVIDUAL-ACID-PREDICTION",
+      "severity": "P3_RESEARCH_ONLY_DO_NOT_INFER_CHEMICAL_CAUSE",
+      "source": [
+        "LIT-2023-RUNE-FRENCHPRESS-ACID-THRESHOLDS"
+      ],
+      "evidence": [
+        "R455-EV-CIT-266-A",
+        "R455-EV-CIT-266-B",
+        "R455-EV-CIT-266-C"
+      ],
+      "finding": "A small French-press chemistry/sensory study found analyte concentrations and human acid recognition are not one-to-one; this cannot certify an espresso next-shot correction or identify a single acid from a member's Sour slider.",
+      "evidence_grade": "PUBLISHED_FULL_ARTICLE_INDEXED_SELECTED_METHODS_RESULTS; DIRECT_FULL_OPEN_403_CAPTCHA_AND_RAW_FIGURES_NOT_VERIFIED",
+      "source_provenance": "Rune et al. (2023), Current Research in Food Science 6:100485, DOI 10.1016/j.crfs.2023.100485, primary indexed sections 2.5-2.7/3, PubMed bibliographic confirmation",
+      "user_benefit": "Avoid misleadingly confident science explanations or spurious chemical interpretations of an individual sour extraction rating.",
+      "current_locked": "All five independent taste ratings including Extraction/Sour/Bitter; all-green vs missing; one controllable next shot; same-coffee evidence, original measurements/notes/history, Turbo vs Fast-Flow and Slow Feed independent, grinder/calibration and privacy/RLS.",
+      "current_app": "dev=6f910997feba7fa84a79c734ba05084a84a8f73e; engine.js blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6; constants.js blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2; Extraction 1-5 low=Sour high=Bitter; no user acid laboratory measurements",
+      "proposed_change": "Document evidence limits only. Do not alter numeric taste/roast/style guidance or claim a chemical diagnosis. Separate optional consent-based single-change next-shot evaluation is design-only and requires new authority for data capture or experiments.",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "R455-266_RESEARCH_LEDGER_ONLY_NO_RUNTIME_CHANGE",
+      "test_plan": "Source DOI absent from original 149 sources; append 1 source/3 specific checks/1 HOLD proposal; verify JSON parse, preserved original ordering, Git blob readback and docs governance.",
+      "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0,
+      "exact_source": "6f910997feba7fa84a79c734ba05084a84a8f73e"
     }
   ],
   "changeScope": {
