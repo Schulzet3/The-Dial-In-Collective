@@ -4185,6 +4185,19 @@
       "source_fix_ready": true,
       "provider_writes": 0,
       "next": "provider drift and ranks 1361-1440"
+    },
+    {
+      "run": 251,
+      "prewrite_source_sha": "6169351314e14c254a11900a56d392764f46ce45",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt_path": "docs/audits/issue509-community-rpc-pgss-2026-11-14-run251-rank2081-2160.json",
+      "receipt_git_blob": "6a390c69bd067f119b87e09b0e23db81ee250335",
+      "numeric_distinct": 2095,
+      "current_sql_definition_bodies": 5,
+      "source_chars": 15354,
+      "new_defects": 0,
+      "production_writes": 0,
+      "next": "numeric ranks 2161-2240 and remaining provider definitions"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -20485,5 +20498,61 @@
     "baseline_complete": false,
     "provider_writes": 0,
     "next_cursor": "2081-2160; other provider definition text"
+  },
+  "provider_pgss_community_rpc_run251": {
+    "status": "CURRENT_PROVIDER_DIRECT_COMPLETE_SOURCE_REVIEW",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_sha": "6169351314e14c254a11900a56d392764f46ce45",
+    "preflight_development_sha": "6169351314e14c254a11900a56d392764f46ce45",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt_path": "docs/audits/issue509-community-rpc-pgss-2026-11-14-run251-rank2081-2160.json",
+    "receipt_git_blob": "6a390c69bd067f119b87e09b0e23db81ee250335",
+    "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-14-run251.json",
+    "index_git_blob": "da7759890431e12a3505b4a9ec92dd037ed65e50",
+    "provider_observed_at": "2026-11-14 22:49:48.022618+00",
+    "source_functions": [
+      {
+        "signature": "public.dic_browse_community_shots(p_limit integer, p_offset integer)",
+        "md5": "edcc2c6a9fb24b3455a446d964a2ed2d",
+        "chars": 3222,
+        "verdict": "Authenticated admitted member gate via private.require_member; bounded page/offset; eligible verified coffee only; public aggregate release metrics exclude owner/contributor identifiers, although stable hashed coffee ID is intentionally exposed. Correlated sibling/contributor counts may be a performance candidate, not proven slow."
+      },
+      {
+        "signature": "public.dic_community_evidence_counts(p_coffee_id uuid, p_style text)",
+        "md5": "1bddea7e3160c0282bea1d6e74d1fbaf",
+        "chars": 694,
+        "verdict": "Admitted member gate; eligible verified coffee and style filter; aggregates distinct contributors without identity disclosure; no anonymous execute."
+      },
+      {
+        "signature": "public.dic_community_recommendation_evidence(p_library_entry_id uuid, p_style text)",
+        "md5": "085f92a3814dce624e5b9a3759e893ef",
+        "chars": 6171,
+        "verdict": "Requires admitted member and owned visible library entry; validates style, verified unmerged target; removes requester's own contributions; groups by independent contributor and ratio, with median centers. Personal source member IDs remain internal; no anonymous EXECUTE or identity list returned."
+      },
+      {
+        "signature": "public.dic_my_community_outliers()",
+        "md5": "312b59594de640adacb12ab0aa0d18e4",
+        "chars": 1318,
+        "verdict": "Requires admitted member, restricts shots by authenticated owner_id, current revision and held extreme-outlier reason, limits to ten personal results; no cross-user record disclosure evident from definition."
+      },
+      {
+        "signature": "public.dic_search_community_shots(p_query text, p_style text, p_limit integer, p_offset integer)",
+        "md5": "1124d2bbfec7f47d38d06ceb2e049fe4",
+        "chars": 3949,
+        "verdict": "Requires admitted member; caps search and pagination inputs; filters eligible verified coffee with optional style; returns only projection metrics and released coffee fields, no contributor IDs; substring-search efficiency is workload-dependent, not a proven bottleneck."
+      }
+    ],
+    "complete_source_chars": 15354,
+    "pgss_ranks": [
+      2081,
+      2160
+    ],
+    "numeric_rows": 80,
+    "new_distinct": 75,
+    "cumulative_distinct": 2095,
+    "source_word_credit_not_duplicate_267": true,
+    "new_defects": 0,
+    "production_writes": 0,
+    "next": "provider drift; numeric 2161-2240; remaining direct provider definitions and source comparisons"
   }
 }
