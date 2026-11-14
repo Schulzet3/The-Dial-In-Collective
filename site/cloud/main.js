@@ -616,8 +616,8 @@ class CloudApp {
     ${field('Producer','producer',data.producer||'')}
    </div>
    ${field('Tasting Notes','tasting_notes',data.tasting_notes||'')}
-   ${field('Official Source URL (Optional)','source_url',sourceUrl,{type:'url',placeholder:'https://roaster.com/products/coffee'})}
-   <p class="helper space-top">${canonical?'Verified coffee corrections are submitted for review, not immediately applied to shared facts. Your historical shots remain intact.':'Your Pending coffee details update immediately for your account without changing saved shots.'}</p>
+   ${field('Coffee Product URL (Optional)','source_url',sourceUrl,{type:'url',placeholder:'https://roaster.com/products/coffee'})}
+   <p class="helper space-top">${canonical?'Changes to shared coffee details are submitted for review, not applied immediately. Your historical shots remain intact.':'Your Pending coffee details update immediately for your account without changing saved shots.'}</p>
    <button class="primary full space-top" type="submit">${canonical?'Submit Correction For Review':'Save Coffee Details'}</button>
   </form>`);
   markCoffeeSubmittedDifferences(sheet.querySelector('.coffee-source-differences'),sheet.querySelector('#edit-coffee'),differences);
@@ -702,7 +702,7 @@ class CloudApp {
    }
    this.tempCoffee=library?.id||null;
    // New coffee is ready to expand intentionally, not auto-expanded.
-   sheet.close();this.notice='Added the existing verified coffee. No duplicate was created.';this.render();
+   sheet.close();this.notice='Added the existing coffee. No duplicate was created.';this.render();
    this.reviewAddedCoffeeDetails(library,d);return;
   }
   const lid=uuid(),{source_url,proposed_data}=proposalWithRecognizedRoaster(d,matched);
@@ -719,7 +719,7 @@ class CloudApp {
   this.tempCoffee=savedId;sheet.close();
   const proposal=this.raw?.submissions?.find(x=>x.id===entry?.submission_id);
   if(entry?.coffee_id){
-   this.notice=added?.reused?'Added the existing verified coffee. No duplicate was created.':'Coffee automatically approved and added to the shared catalog.';
+   this.notice=added?.reused?'Added the existing coffee. No duplicate was created.':'Coffee automatically approved and added to the shared catalog.';
   }else{
    this.notice='Saved privately because a possible duplicate needs review. You can log shots now.';
    if(proposal?.id&&proposal?.source_url&&this.client.verifyCoffeeSource){
@@ -728,7 +728,7 @@ class CloudApp {
      this.assertSession(owner,epoch);
      if(checked?.ok===true&&checked?.status==='verified'){
       await this.inSession(()=>this.sync());this.assertSession(owner,epoch);this.notice=checked.source_verified===true
-       ?'Official source verified. Your coffee is now in the shared catalog.'
+       ?'Coffee is now in the shared catalog.'
        :'Coffee is already approved in the shared catalog.';
      }else if(checked?.reason==='needs_confirmation'){
       this.notice='Coffee saved. A possible duplicate needs confirmation; nothing was merged.';
@@ -977,7 +977,7 @@ class CloudApp {
     }
     if(a==='retry-pending-source'){
      if(this.pending.length||this.syncState==='offline'||globalThis.navigator?.onLine===false)
-      throw new Error('Reconnect and sync pending changes before checking official source evidence.');
+      throw new Error('Reconnect and sync pending changes before reviewing the coffee source.');
      const entry=this.raw?.library?.find(x=>x.id===id);
      const submission=this.raw?.submissions?.find(x=>x.id===entry?.submission_id);
      if(!submission||submission.status!=='pending'||!submission.source_url)
@@ -987,7 +987,7 @@ class CloudApp {
      if(result?.ok===true&&result?.status==='verified'){
       await this.inSession(()=>this.sync());
       this.notice=result.source_verified===true
-       ?'Official roaster evidence verified. Your coffee is now in the shared catalog.'
+       ?'Coffee is now in the shared catalog.'
        :'Coffee is already approved in the shared catalog.';
      }else if(result?.reason==='needs_confirmation'||result?.code==='needs_confirmation'){
       this.notice='A possible duplicate needs confirmation. Your coffee and shot history remain saved.';
@@ -1010,13 +1010,13 @@ class CloudApp {
       if(a==='add-distinct-coffee'){this.pendingMergeSubmissionId=null;sheet.close();return;}
       if(!this.addCoffeeMatches?.candidates?.some(c=>c.id===id))throw new Error('That verified match was not offered.');
       await this.mutate('confirm_coffee_existing',{submission_id:this.pendingMergeSubmissionId,coffee_id:id},{onlineOnly:true});
-      this.pendingMergeSubmissionId=null;sheet.close();this.notice='Matched to the original verified coffee. Your original shots are preserved.';this.render();return;
+      this.pendingMergeSubmissionId=null;sheet.close();this.notice='Matched to the original coffee. Your original shots are preserved.';this.render();return;
      }
      if(this.addingCoffee)return;
      if(!this.addCoffeeDraft)throw new Error('Add Coffee Details were lost. Please enter them again.');
      const idToUse=a==='choose-coffee-match'?id:null;
      if(idToUse && !this.addCoffeeMatches?.candidates?.some(c=>c.id===idToUse))
-      throw new Error('That verified coffee is not in the current match list.');
+      throw new Error('That coffee is not in the current match list.');
      this.addingCoffee=true;
      try{await this.finishCoffeeAdd(this.addCoffeeDraft,this.addCoffeeMatches,idToUse,{confirmedDistinct:a==='add-distinct-coffee'});}
      finally{this.addingCoffee=false;}

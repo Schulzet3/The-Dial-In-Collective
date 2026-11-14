@@ -178,7 +178,7 @@ const reasons={
  ambiguous_or_missing_product:'We could not identify one specific coffee from the page metadata. Enter the details manually to avoid mixing different releases.',
  source_unavailable:'The roaster page is temporarily unavailable. You can enter the details manually.',
  source_fetch_failed:'The roaster page could not be checked right now. You can enter details manually.',
- redirect_requires_review:'The roaster redirects this URL. Paste the final official product URL or enter details manually.',
+ redirect_requires_review:'The roaster redirected this URL. Use its final coffee product URL or enter details manually.',
  preview_cooldown:'Please wait 15 seconds between coffee URL lookups.',
  daily_preview_limit:'The URL preview limit has been reached for today. You can still add coffees manually.',
  preview_rate_limited:'Too many URL checks. Try again later.',
@@ -246,14 +246,13 @@ export function coffeeUrlPreviewMarkup(result,{compact=false}={}){
  const seoFallbackFields=autofillFields.filter(([key])=>
   Array.isArray(result.seo_fallback_fields)&&result.seo_fallback_fields.includes(key)&&
   String(result.fields?.[key]||'').trim());
- const existing=result.match?.classification==='exact_verified'?'This page also matches an existing verified coffee. Choosing Add Coffee will reuse its canonical record after the identity check.':
-  result.match?.classification==='needs_confirmation'?'A similar verified coffee exists. You will be asked to confirm the right release before linking any records.':'';
- const official=result.source==='official_roaster_product_metadata';
+ const existing=result.match?.classification==='exact_verified'?'This matches a coffee already in the catalog. The app will check the release before reusing its record.':
+  result.match?.classification==='needs_confirmation'?'A similar coffee already exists. Confirm the right release before linking any records.':'';
  const catalog=result.source==='approved_catalog';
- const heading=catalog?'Previously Approved Coffee Details':official?'Details Found On Official Roaster Page':'Suggested Details From Webpage';
- const sourceLabel=catalog?'Approved Catalog':official?'Official Source Preview':'Unverified Page';
- const caution=catalog?(result.refresh_reason?'The current roaster page could not be rechecked. Available catalog details are shown below; confirm the intended release.':'These details come from the approved coffee catalog. Confirm that this is the release you want.'):
-  official?'Review these suggestions; a page preview alone does not verify the exact release.':'Review these suggestions against the roaster page or your bag; unconfirmed details can be edited below.';
+ const heading='Autofill Results';
+ const caution=catalog?
+  (result.refresh_reason?'The current roaster page could not be rechecked. Compare these saved details with the product page or your bag.':'Review these saved coffee details and confirm they match your release.'):
+  'Review the suggested details against the roaster page or your bag; anything uncertain can be edited below.';
  // Noncanonical supplementary facts remain visible in a compact disclosure,
  // not silently saved as a roast classification or verified source metadata.
  const detailsLabels={
@@ -307,13 +306,13 @@ export function coffeeUrlPreviewMarkup(result,{compact=false}={}){
   (fullRecipe?'':' (total shot time not published)'):
   Number.isFinite(recipe.ratio)?'Espresso ratio 1:'+e(recipe.ratio)+' (dose and time not supplied)':'';
  return `<section class="coffee-url-preview">
-  <div class="coffee-url-preview-title"><strong>${e(heading)}</strong><span class="coffee-source-label">${e(sourceLabel)}</span></div>
+  <div class="coffee-url-preview-title"><strong>${e(heading)}</strong></div>
   <p class="helper">${e(caution)} Fields you already entered will not be overwritten.</p>
   ${catalog?'<button type="button" class="secondary compact" data-action="preview-coffee-url-refresh">Check Current Roaster Page</button><p class="helper">Check for newer published details. Wait 30 seconds between checks; the usual URL lookup limit applies.</p>':''}
   ${result.origin_confirmation_required===true?`<div class="coffee-rotation-review" role="group" aria-label="Rotating origin confirmation"><p class="helper">This product explicitly says its origin rotates. Confirm the origin shown on your current bag or offering.</p><label class="checkline"><input id="coffee-rotating-origin-confirmed" type="checkbox"><span>I checked this coffee's current origin.</span></label></div>`:''}
   ${roastVariantMarkup(result)}
   ${conflictGroups.length?`<section class="coffee-source-conflicts" role="region" aria-label="Conflicting coffee information"><h3>Review conflicting details</h3><p class="helper">These published readings disagree. Nothing was selected automatically. Compare them with the roaster's label. Tap a value to fill its field; tap another to replace it. Nothing is saved until Add Coffee.</p><p class="helper coffee-conflict-feedback" role="status"></p>${conflictGroups.map(group=>`<div id="coffee-conflict-${e(group.field)}" class="coffee-conflict-group"><strong>${e(group.label)}</strong>${group.options.length?`<ul>${group.options.map((option,index)=>`<li><button type="button" class="coffee-conflict-choice" data-action="choose-coffee-conflict" data-conflict-field="${e(group.field)}" data-conflict-index="${index}" aria-pressed="false" aria-label="Use ${e(option.value)} for ${e(group.label)}"><span class="coffee-conflict-value">${e(option.value)}</span></button><small>${e(option.label)}${option.source_url?' · <a href="'+e(option.source_url)+'" target="_blank" rel="noopener noreferrer">View Original Source</a>':''}</small></li>`).join('')}</ul>`:'<p class="helper">Exact alternatives could not be isolated. Check the original product page or enter the correct value manually.</p>'}</div>`).join('')}</section>`:''}
-  ${seoFallbackFields.length?`<p class="helper" role="note"><strong>Verify metadata-only suggestions:</strong> ${seoFallbackFields.map(([,label])=>e(label)).join(', ')}. These values were not confirmed in the selected coffee's current product description or page details. They are last-resort SEO/metadata suggestions, not verified facts.</p>`:''}
+  ${seoFallbackFields.length?`<p class="helper" role="note"><strong>Check metadata-only suggestions:</strong> ${seoFallbackFields.map(([,label])=>e(label)).join(', ')}. These values were not confirmed in the selected coffee's current product description or page details. They are last-resort SEO/metadata suggestions, not confirmed product facts.</p>`:''}
   ${missingFields.length?`<p class="helper" role="note"><strong>Not found on this product page:</strong> ${missingFields.map(([,label])=>e(label)).join(', ')}. Leave these blank unless you can confirm them from the roaster or your bag.</p>`:''}
   ${compact?'':`<dl class="coffee-url-fields">${fields.map(([key,label])=>`<div><dt>${e(label)}</dt><dd>${e(key==='elevation_m'?elevationWithDefaultMeters(result.fields[key]):result.fields[key])}</dd></div>`).join('')}</dl>`}
   ${result.fields?.process==='Other/Unknown'&&result.roaster_details?.blend_components?'<p class="helper" role="note">This blend has multiple documented processing methods. Other/Unknown preserves that distinction; review the component details on the product page.</p>':''}

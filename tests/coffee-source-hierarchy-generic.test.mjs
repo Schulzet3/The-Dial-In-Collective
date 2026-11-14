@@ -43,7 +43,7 @@ test('last resort metadata is visibly labeled and retained in source review',()=
  assert.equal(result.fields.process,'Natural');
  assert.ok(result.seo_fallback_fields?.includes('process'));
  const preview={...result,source_url:url};
- assert.match(coffeeUrlPreviewMarkup(preview),/Verify metadata-only suggestions/);
+ assert.match(coffeeUrlPreviewMarkup(preview),/Check metadata-only suggestions/);
  assert.match(coffeeUrlPreviewMarkup(preview),/Not found on this product page/);
  const saved=coffeeSourceReviewSnapshot(preview,{checkedAt:'2026-10-28T00:00:00Z'});
  assert.ok(saved?.seo_fallback_fields?.includes('process'));

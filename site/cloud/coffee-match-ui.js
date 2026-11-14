@@ -16,12 +16,12 @@ export function proposalWithRecognizedRoaster(d,result){
 }
 export function matchReviewMarkup(result,{pending=false}={}){
  const choices=Array.isArray(result?.candidates)?result.candidates.slice(0,6):[];
- return `<p class="helper">This may be an existing verified coffee. Different harvests or releases can be distinct, even when the roaster and name match.</p>
+ return `<p class="helper">This coffee may already be in the catalog. Different harvests or releases can be distinct, even when the roaster and name match.</p>
   <div class="coffee-matches">${choices.map(c=>`<div class="coffee-match">
    <div class="coffee-match-text"><strong>${e(c.name||'Coffee')}</strong><span>${e(c.roaster||'')}${c.release_label?` · ${e(c.release_label)}`:''}</span>
    ${c.origin?`<small>${e(c.origin)}</small>`:''}</div>
    ${button('Use Existing','choose-coffee-match',`data-id="${e(c.id)}"`,'secondary compact')}
   </div>`).join('')}</div>
-  <p class="helper">If this is a different release, you can still add it and log shots immediately. It stays private while its identity is verified.</p>
+  <p class="helper">If this is a different release, you can still add it and log shots immediately. It stays private while its identity is reviewed.</p>
   ${button(pending?'Keep This Coffee Separate':'This Is A Different Coffee','add-distinct-coffee','','ghost full')}`;
 }

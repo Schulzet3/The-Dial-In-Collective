@@ -18,22 +18,22 @@ function fixture(sourceVerified){
  };
  return app;
 }
-test('source retry distinguishes concurrent catalog approval from official evidence',async()=>{
+test('source retry preserves checked-versus-previously-approved catalog outcomes with neutral copy',async()=>{
  for(const flag of [undefined,false,true]){
   const app=fixture(flag);
   await app.click({target:{closest:()=>({dataset:{action:'retry-pending-source',id:'coffee'}})}});
   assert.equal(app.synced,true);
-  if(flag===true)assert.match(app.notice,/Official roaster evidence verified/);
+  if(flag===true)assert.equal(app.notice,'Coffee is now in the shared catalog.');
   else assert.equal(app.notice,'Coffee is already approved in the shared catalog.');
  }
 });
-test('new-coffee source check also requires explicit evidence before claiming official verification',async()=>{
+test('new-coffee source check keeps genuine evidence flag separate from catalog approval without status badge',async()=>{
  for(const flag of [undefined,false,true]){
   const app=fixture(flag);
   await app.finishCoffeeAdd({name:'Test Coffee',roaster:'Fictional Roaster',
    source_url:'https://example.invalid/products/coffee'},{classification:'new'});
   assert.equal(app.synced,true);
-  if(flag===true)assert.match(app.notice,/Official source verified/);
+  if(flag===true)assert.equal(app.notice,'Coffee is now in the shared catalog.');
   else assert.equal(app.notice,'Coffee is already approved in the shared catalog.');
  }
 });
