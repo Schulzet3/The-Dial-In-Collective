@@ -507,10 +507,38 @@
       "verified_absent_at_pin": true,
       "reviewed_live_commit": "ef1e635c06ab6301e72896378bfdeb270b1cfcaf",
       "terminal_newline_not_physical_line": true
+    },
+    {
+      "batch_id": "D2-040",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-040.json",
+      "path": "tests/immutable-dist.test.py",
+      "blob_sha": "3c7e7c14db41df7aac68a63407f8df29390ead98",
+      "range": [
+        1,
+        44
+      ],
+      "line_count": 44,
+      "reviewed_live_commit": "18be0586921fc572178df6929ecd7a98278dd710",
+      "verified_absent_at_pin": true,
+      "local_python_tests_passed": 4
+    },
+    {
+      "batch_id": "D2-041",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-041.json",
+      "path": "tests/immutable-dist-manifest.test.py",
+      "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+      "range": [
+        1,
+        23
+      ],
+      "line_count": 23,
+      "reviewed_live_commit": "18be0586921fc572178df6929ecd7a98278dd710",
+      "verified_absent_at_pin": true,
+      "local_python_tests_passed": 4
     }
   ],
-  "unique_source_lines_direct_reviewed": 1461,
-  "fully_reviewed_new_source_files": 39,
+  "unique_source_lines_direct_reviewed": 1528,
+  "fully_reviewed_new_source_files": 41,
   "nonoverlap": true,
   "changed_existing_pinned_paths": "46 modified pinned eligible files, structural-only inventory docs/audits/issue267-v2-post-pin-tree-drift-20261105-post-D2-035.json",
   "new_sql_migrations": "1 new migration structural-only; coordinate #96",
@@ -533,9 +561,9 @@
       "subtract_phantom_records": 4
     }
   ],
-  "last_review_batch": "D2-039",
-  "last_review_source_commit": "ef1e635c06ab6301e72896378bfdeb270b1cfcaf",
-  "last_review_note": "D2-039: 15 actual source lines of tests/immutable-function.test.py; source SHA verified at immutable live parent, pinned source absent; direct AI semantic review, nonhuman; no proven current failure, no runtime changes or functional tests; other current drift unresolved. F001 source re-read without new credit.",
+  "last_review_batch": "D2-041",
+  "last_review_source_commit": "18be0586921fc572178df6929ecd7a98278dd710",
+  "last_review_note": "D2-040/041: 67 new physical source lines in two post-pin immutable ZIP Python tests directly AI reviewed, 8/8 isolated tests PASSED from four hash-matched source blobs; original pinned absent; global drift/100% inventories remain incomplete.",
   "live_source_blob_revalidations": [
     {
       "path": "scripts/release/request-encrypted-backup.mjs",
