@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "review": "R200",
+  "review_date_utc": "2026-11-14",
+  "scope": "selected original frozen603 case 294; not 603-case semantic certification",
+  "authority": "Owner development-only #33; Locked current selected official evidence first; explicit editable Add Coffee; privacy and member data unchanged",
+  "preflight_source": {
+    "development_sha": "19b06f1a890ac26c9f8b9f13ce6c3a4634c85615",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d"
+  },
+  "postmerge_documentation_preflight": {
+    "development_sha": "99a380b3d6b6e65b8f66aa95742ef150cd64d47a",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d"
+  },
+  "frozen_register": {
+    "path": "docs/audits/issue33-original603-source-level-adjudication-20261029.csv",
+    "git_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "coffee_count": 603,
+    "roaster_count": 201,
+    "capture_count": 1197,
+    "changed": false,
+    "oracle_scorer_changed": false
+  },
+  "selected_current": {
+    "number": 294,
+    "coffee": "Top Shelf Series: Colombia Alejandro Ruiz",
+    "roaster": "Seeds Coffee Co",
+    "url": "https://seedscoffee.com/products/top-shelf-series-colombia-alejandro-ruiz",
+    "h1": "Top Shelf Series: Colombia Alejandro Ruiz",
+    "direct_fields": {
+      "name": "Top Shelf Series: Colombia Alejandro Ruiz",
+      "roaster": "Seeds Coffee Co",
+      "release_label": "Top Shelf Series",
+      "tasting_notes": "Star Fruit and Guava",
+      "origin": "Huila, Colombia",
+      "producer": "Alejandro Ruiz",
+      "process": "Natural",
+      "variety": "Caturra"
+    },
+    "unpublished_fields_remain_blank": [
+      "roast_level",
+      "decaffeination_method",
+      "elevation_m"
+    ],
+    "conflicts": [],
+    "qualification": "Description refers to two farms (El Rocío, Esperenza); no single farm assigned to selected lot. Product appeared sold out at source check; no claim about saleable current lot or fresh roast version."
+  },
+  "source_pr": {
+    "number": 2692,
+    "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2692",
+    "reviewed_head_sha": "16f2ba68838e8f648de27c3eef0edb6243aac97e",
+    "nonforce_merged_sha": "99a380b3d6b6e65b8f66aa95742ef150cd64d47a",
+    "merged": true,
+    "code_parser_changed": false,
+    "files": {
+      ".github/workflows/issue33-r200-original294.yml": "25bbf2d49f25fd7df9ee9bd77b5f84441b6387af",
+      "docs/workstreams/ops-issue33-r200-294-20261114.md": "38bfaf03fe845b19e16edea8059617bc836edaf2",
+      "scripts/audit/issue33-r200-original294-check.mjs": "897a24cc91d4efbd31273228f2e1766e08d3d059",
+      "tests/coffee-issue33-r200-original294.test.mjs": "24b9fccbaf9bd837747787a8316bcc91590db26e"
+    }
+  },
+  "source_capture": {
+    "merged_workflow_run": 43602803477,
+    "merged_artifact_id": 14117112329,
+    "zip_sha256": "3c5c1370c7ac69b7a1c7bfc9f3316df4d66ff8b34809b050c475ae9d617dc607",
+    "raw_html_bytes": 201612,
+    "raw_html_sha256": "ca5bdf8f5b74409cda8b562230fa21172cf943dc82db192ce48337de22c38231",
+    "focused_evidence_sha256": "597d28ab480c5d28cabeb26edcfa6eae21e45f3b673c939cd216883bbc69fc10",
+    "afterproof_sha256": "cfc49c7fc33aa9293977176fb9a07b7c7141b5ad1c4e8e203ecbc5b835f42ad2",
+    "afterproof": {
+      "passed": true,
+      "errors": [],
+      "checked_out_exact_merge": true,
+      "heading_identity_verified": true,
+      "actual_parser_fields_direct": true,
+      "add_coffee_ui_rendered": true,
+      "source_review_rendered": true,
+      "manual_certified": false,
+      "provider_writes": 0
+    },
+    "pr_head_capture": {
+      "run_id": 43602460290,
+      "raw_html_bytes": 201612,
+      "raw_html_sha256": "6b3989b07660931b7fbc3e0227912ed193e741e88b5253a5b8a6065804fefe75",
+      "artifact_id": 14116498200,
+      "zip_sha256": "99c237e56cdb474234444e2c04abd92c3d58f1c835b8ca4a561431749445c236"
+    }
+  },
+  "exact_pr_head_ci": {
+    "official": 43602460290,
+    "node_lint": 43602460186,
+    "cloud_mobile": 43602460267,
+    "approval": 43602460226,
+    "isolated_sql": 43602460215,
+    "python": 43602460211,
+    "source_bundle": 43602460214,
+    "all_listed": "COMPLETED_SUCCESS",
+    "node_pass": 4831,
+    "node_fail": 0,
+    "intentional_skips": 6,
+    "build": "SKIPPED_NOT_APPLICABLE"
+  },
+  "exact_merged_ci": {
+    "official": 43602803477,
+    "node_lint": 43602803574,
+    "cloud_mobile": 43602803463,
+    "approval": 43602803501,
+    "python": 43602803515,
+    "all_listed": "COMPLETED_SUCCESS",
+    "node_pass": 4831,
+    "node_fail": 0,
+    "intentional_skips": 6,
+    "lint": "PASS",
+    "build": "SKIPPED_NOT_APPLICABLE",
+    "broad_public_probe": "SKIPPED_NOT_PASS"
+  },
+  "scope_result": "NARROW_CURRENT_SELECTED_SOURCE_AND_REAL_PARSER_VERIFIED_IN_DEVELOPMENT",
+  "all_603_individually_certified": false,
+  "full_frozen603_workflow": "SKIPPED_NOT_PASS",
+  "new_ready_queue_items": 0,
+  "release": false,
+  "production_or_member_provider_writes": 0,
+  "next": "continue independent source-first unresolved original603 cases and documented inaccessible/recycled/changed lot exceptions; parent #33 OPEN, #267 V2 and #96 distinct"
+}
