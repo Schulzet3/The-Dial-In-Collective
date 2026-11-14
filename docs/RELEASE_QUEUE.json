@@ -14342,6 +14342,28 @@
       "blockers": [],
       "notes": "DEVELOPMENT ONLY; original 603/201/1197 frozen CSV/oracle/scorer untouched, no Netlify or production provider/SQL/Edge/Auth/member changes. #267 and #96 separate owners. Issue #33 OPEN. Narrow R198 READY development only at exact merged source 8cf2c2bcec7881dc590d3de8366393863a45ef9b. Parent original603 per-coffee acceptance incomplete; #288 merchant former URL source-limited. No release/deploy/provider/member writes.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-pending-coffee-null-flags",
+      "issue": 509,
+      "pr": null,
+      "title": "Fail closed on SQL NULL coffee promotion method or explicit confirmation flag",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261114135500_dic_promote_pending_coffee_null_flags.sql"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509; immutable preflight development 517fdd185d7b9463cc6a89c00e536ddd50b8838a blob 2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Read-only live full 11,996-character SQL source MD5 74ffb76151d846bfff79e7ba40fa1850; PostgreSQL pure SELECT shows NULL NOT IN and NOT NULL boolean evaluate UNKNOWN. Five actual SQL callers pass non-null fixed approved methods and literal boolean flags.",
+        "Development-only additive function replacement, disconnected synthetic dic_ci SQLSTATE and authorization regression, and SQL driver registration; CI NOT YET VERIFIED."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source PostgreSQL17, Node22, privacy/security, browser applicability and approval/governance checks not yet verified; remain TESTING, never READY without verified tests."
+      ],
+      "notes": "Low-severity latent input validation, not a proven HTTP security exploit, affected data or permission bypass. Source-only no backfill, preserve all historical migrations, archive/member/community state, release boundary and #96/#33 ownership.",
+      "production_deployed": false
     }
   ],
   "history": [
