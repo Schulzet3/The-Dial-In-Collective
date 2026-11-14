@@ -12,8 +12,8 @@
       "issue": 28,
       "pr": 2686,
       "title": "Provide minimal public privacy policy for owner-only Google Drive OAuth consent",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "d0b450db85f0c25b05fc65007de639852436ff66",
       "scope_paths": [
         "site/cloud/main.js",
         "site/styles.css",
@@ -21,16 +21,19 @@
         "build_cloud.mjs"
       ],
       "tests": [
-        "Owner-approved build PR #2686 privacy-page static-source tests; exact GitHub CI currently pending after initial queue intake hold; no LIVE app deploy.",
-        "Source package generator records privacy/index.html under strict allowlist. Public Google OAuth accessibility and compliance require a subsequent independently checked release."
+        "PR #2686 exact tested source e46c92bd624cac54673cd713e16537a5272c68b7: required approval 43600235102 SUCCESS, Node22 build/validate 43600235024 SUCCESS, cloud/mobile browser 43600235015 SUCCESS, and isolated SQL 43600235065 SUCCESS; all four workflow runs are completed pull_request at that exact source SHA.",
+        "Exact first-parent development merged source d0b450db85f0c25b05fc65007de639852436ff66 has all four changed deployable privacy paths: build_cloud.mjs, site/cloud/main.js, site/privacy.html, site/styles.css; each blob matches tested e46c92bd. Site-integrity audit and focused tests/privacy-policy.test.mjs blobs also match e46c92bd.",
+        "Source-verified standalone unauthed /privacy/ static output, muted/underlined keyboard-focusable 11px signed-out/in footer anchor, safe strict asset allowlist, no app Auth/SQL/member data changes. Full deployment HTTPS/browser acceptance deferred to separate owner-authorized Publish."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Do not treat the page as live until separate owner Publish approval, exact-source release process and direct HTTPS readback.",
-        "Owner review of public support address and accuracy of provider/retention disclosures before publication."
+      "ci_runs": [
+        43600235102,
+        43600235024,
+        43600235015,
+        43600235065
       ],
-      "owner_source": "Owner ChatGPT 2026-11-14: explicit permission to build discreet privacy page and minimal visible footer; no Publish authorization",
-      "notes": "Independent source branch and draft PR #2686. No Netlify deploy, Supabase/Drive/Google account changes, member-data edits or new integrations. Privacy link 11px muted, focusable, visible to Google/users; not background-colored or hidden. Keep all other READY/in-progress work untouched.",
+      "blockers": [],
+      "owner_source": "Owner 2026-11-14: approved build of discreet public privacy policy, then explicitly asked to get it READY for a separate chat to deploy; NOT approval to Publish now.",
+      "notes": "Independent source branch and draft PR #2686. No Netlify deploy, Supabase/Drive/Google account changes, member-data edits or new integrations. Privacy link 11px muted, focusable, visible to Google/users; not background-colored or hidden. Keep all other READY/in-progress work untouched.\n2026-11-14 VERIFIED READY development-only: privacy PR #2686 integrated with exact first-parent merge d0b450db85f0c25b05fc65007de639852436ff66. Same source/test/blob identity proved against PR exact e46c92bd, all five required checks successful using four recorded workflow runs. No live Netlify publication, Google OAuth configuration, backup activation, data/SQL/Auth operations; production_deployed remains false. Use existing one-use READY-only release controller in separate owner Publish chat, isolate this READY item from #509 TESTING and other unfinished work. Intended published URL https://app.dialincollective.com/privacy/. Public owner contact is the known account email; owner may later elect an alternate contact address prior to publication.",
       "production_deployed": false
     },
     {
