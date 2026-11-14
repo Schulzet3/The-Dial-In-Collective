@@ -14630,8 +14630,8 @@
       "issue": 33,
       "pr": 2778,
       "title": "Original603 #317 conditional roast buyer-preference guard with exact own Shopify selected Light Roast tags preserved; #318 labeled Medium control",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "de447bf68deedf478272688ebd7e03fd2d31f1cb",
       "scope_paths": [
         "src/server/roast-level-evidence.mjs"
       ],
@@ -14639,17 +14639,38 @@
       "tests": [
         "Exact red-first 43651332246 6/7 actual-parser tests and current seller afterproof FAILED before guard: conditional light-roast preference had been incorrectly treated as roast in synthetic fragment; actual current seller own Product JSON independently contains tagged Light, so unconditional blank assertion was wrong.",
         "First guard trial 43651463735 9/9 synthetic PASS and actual selected #317 parsed Light correctly due direct chosen-product own tag, but strict afterproof incorrectly demanded Light blank; that test error has been corrected to require exact selected id/title/handle own Light Roast tags.",
-        "Corrected no-runtime-rewrite diagnostic selected #317/#318 exact seller afterproof run 43651666029 SUCCESS, six prior positive/hostile tests PASS; renewed source guard and 9/9 tests pending exact final PR-head CI."
+        "Corrected no-runtime-rewrite diagnostic selected #317/#318 exact seller afterproof run 43651666029 SUCCESS, six prior positive/hostile tests PASS; renewed source guard and 9/9 tests pending exact final PR-head CI.",
+        "Final source PR #2778 exact head 977160327925659eadc2e9cc1e2d642a22c14530: official #317/#318 43651805825 SUCCESS, 9/9 positive/adversarial tests and both selected fresh current public H1/parser/Add Coffee/Source Review, no conflicts. #317 own Shopify Product id 9008646881518 title/handle and Coffee_Light Roast tag preserved as Light, while tagless conditional 'if you enjoy' never infers roast; #318 own Medium, Washed, Mt. Elgon Uganda, Lifesong Farms and Bourbon/Typica remain.",
+        "Exact PR-head Node/lint/build 43651805698 SUCCESS 4919 Node (4913 pass/0 fail/6 intentional skip), cloud/mobile 43651805831, approval 43651805838, SQL 43651805711, security 43651805671, Python 43651805719, source archive 43651805684, related original #241 43651805670/#251 43651805701/#255 43651805705 all SUCCESS. Frozen603 workflow 43651805685 SKIPPED; original 603 semantic review unverified.",
+        "Nonforce PR #2778 squash merge at de447bf68deedf478272688ebd7e03fd2d31f1cb [skip netlify]. All 6 code/test/workflow/checker/queue/journal blobs verified byte-identical to reviewed PR head; unchanged PREFLIGHT blob 2fb236bbfa6bac48513eeb3bd157b260853af06d and original source CSV blob 3e0d3036ea727de091f304f538c6de2dfcaa10d6.",
+        "Exact merged current official #317/#318 43652105711 SUCCESS: 9/9 focused; #317 538312 raw bytes SHA256 ca872c1347dd837147095c8d67a74b7cc64df6c407b2d5862bd2ce449448d156, H1 selected Kenya, roast Light from own Shopify tag, Nyeri/Ndaroini Factory, Washed, 1700m, notes peach/honey/grapefruit; #318 602203 bytes SHA256 c3b2c2dc4c0f73e6c6f2ffa116048e41c6272d790dc76e49511011694e4cf12b, current selected Medium, Washed, Mt. Elgon Uganda, 1280m, Lifesong Farms, Bourbon/Typica, exact notes. No conflicts, Add Coffee/Source Review render.",
+        "Exact merged Node/lint/build 43652105662 SUCCESS: 4919 tests (4913 pass/0 fail/6 skipped), lint exit 0; cloud/mobile 43652105657, approval 43652105660, Python 43652105647, original #241 43652105700/#255 43652105667 and official selected 43652105711 SUCCESS. SQL/security unchanged path: reuse successful PR-head 43651805711/43651805671. Push original full source acceptance 43652105725 SKIPPED, not PASS."
       ],
       "ci_runs": [
         43651332246,
         43651463735,
-        43651666029
+        43651666029,
+        43651805825,
+        43651805698,
+        43651805831,
+        43651805838,
+        43651805711,
+        43651805671,
+        43651805719,
+        43651805684,
+        43651805670,
+        43651805701,
+        43651805705,
+        43652105711,
+        43652105662,
+        43652105657,
+        43652105660,
+        43652105647,
+        43652105700,
+        43652105667
       ],
-      "blockers": [
-        "Pending current final source guard exact selected live afterproof, full 9/9 and appropriate PR-head/merged CI; no READY until safe merge"
-      ],
-      "notes": "No other original 603 CSV/oracle/scorer changes, no inference from related/SEO/menu or conditional audience. #317 Light from current exact selected merchant Product id/handle tags; #318 Medium from direct At a Glance. Development only, source not deployed.",
+      "blockers": [],
+      "notes": "No other original 603 CSV/oracle/scorer changes, no inference from related/SEO/menu or conditional audience. #317 Light from current exact selected merchant Product id/handle tags; #318 Medium from direct At a Glance. Development only, source not deployed.\nR211 narrowly READY source only at exact merged de447bf68deedf478272688ebd7e03fd2d31f1cb: conditional 'if you enjoy' no longer infers unsupported roast when not backed by direct literal/own tags, while current selected #317 tagged Light and #318 explicit Medium retained. Original603 frozen/201/1197 unmodified, manual complete = false, #33 remains OPEN. No deployment/provider/member/production changes or new cost.",
       "production_deployed": false
     }
   ],
@@ -17167,6 +17188,15 @@
       "source_sha": "0974f988a077198cd37c4287f24823042b37fe06",
       "production_deployed": false,
       "evidence": "Current exact seller #317 tagged Light Roast matched selected product; synthetic without tag erroneously inferred conditional Light before guard. Narrow source guard and 9 focused positive/hostile checks pending exact PR and merged CI; #318 direct Medium remains control."
+    },
+    {
+      "date": "2026-11-14",
+      "issue": 33,
+      "item_id": "DIC-Q-33-r211-original317-preference-and-selected-tag",
+      "state": "READY",
+      "source_sha": "de447bf68deedf478272688ebd7e03fd2d31f1cb",
+      "production_deployed": false,
+      "evidence": "PR #2778 merged de447bf68deedf478272688ebd7e03fd2d31f1cb exact selected official 43652105711 and 9/9 scoped, full merged Node/lint 43652105662 4913 PASS/0 FAIL/6 SKIPPED, cloud/mobile 43652105657, approval 43652105660, Python 43652105647 SUCCESS; six reviewed blobs match; frozen603 SKIPPED, parent #33 OPEN, no Publish."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
