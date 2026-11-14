@@ -14500,6 +14500,27 @@
       "owner_source": "Issue #455 Option B SAFE UX correctness; approved original-measured-history and recommendation-source integrity, R455-PROP-220; DIC_PREFLIGHT_VERIFIED development_sha=697e75cb9f4b559fa7466e9526f9cfe4253584fe preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "notes": "Revision>1 denotes an edited shot. Keep its original member-selected source context and measurements unchanged; qualify History attribution as originally used rather than implying its current edited grind/temperature matches the starting value. No schema, new capture, engine, five-taste, RLS, production or provider changes.\nREADY DEVELOPMENT ONLY at source f13355675b72d99f6f1b2bf29977effbdf6c0796. No owner publication authorization, production_deployed remains false. Historical member-selected context remains preserved; only edited-record wording qualified.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-member-approval-null-receipt-guard",
+      "issue": 509,
+      "pr": null,
+      "title": "Reject NULL receipt channel/outcome for service-only approval delivery",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261114195000_dic_member_approval_finish_null_receipts.sql"
+      ],
+      "tests": [
+        "Read-only provider SQL expression reproduces missing null input guard. No live DML/identity/member data.",
+        "Disposable dic_ci regression added for SQLSTATE 22023, valid no-match and client EXECUTE denial; exact-source CI unverified."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Source-bound isolated PostgreSQL, Node22, privacy/security and approval checks pending; do not promote READY."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
+      "notes": "Development-only source, no publish, production SQL/Edge/Auth/Storage/member change or observed customer impact."
     }
   ],
   "history": [

@@ -20345,4 +20345,30 @@
     "queue_status": "TWO_ISSUE509_FIXES_TESTING_NOT_READY",
     "next_cursor": "Fresh provider drift; pg_stat_statements ranks 1841-1920, then other not-yet-fully-reviewed provider definitions; Auth 27/27 current table definitions individually revisited"
   }
+,
+  "provider_pgss_member_approval_null_guard_run248": {
+    "run": 248,
+    "preflight_development_sha": "9f23b49b5e601b36610f512c6274762bf8733542",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt_path": "docs/audits/issue509-member-approval-receipts-pgss-2026-11-14-run248-rank1841-1920.json",
+    "receipt_blob_sha": "f806005b06239f638eff3b5fac347acf75e794ae",
+    "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-14-run248.json",
+    "numeric_rank_range": [
+      1841,
+      1920
+    ],
+    "numeric_rows": 80,
+    "numeric_new": 72,
+    "numeric_overlap": 8,
+    "cumulative_distinct": 1869,
+    "live_function_definitions_complete": 5,
+    "sql_characters": 6364,
+    "verified_low_severity_service_null_guard": 1,
+    "source_migration": "supabase/migrations/20261114195000_dic_member_approval_finish_null_receipts.sql",
+    "synthetic_sql_test": "supabase/tests/member_approval_finish_null_receipts.sql",
+    "state": "TESTING_NOT_READY",
+    "provider_writes": 0,
+    "baseline_complete": false,
+    "next": "drift, ranks1921-2000, exact-source CI; Auth transport #96 UNVERIFIED"
+  }
 }

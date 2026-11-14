@@ -52,4 +52,10 @@ if [[ -f supabase/migrations/20261114135500_dic_promote_pending_coffee_null_flag
 else
   echo "NOT_APPLICABLE: #509 pending_coffee_null_guards; migration excluded from tested source"
 fi
+if [[ -f supabase/migrations/20261114195000_dic_member_approval_finish_null_receipts.sql ]]; then
+  echo "Running member_approval_finish_null_receipts"
+  run_sql supabase/tests/member_approval_finish_null_receipts.sql
+else
+  echo "NOT_APPLICABLE: #509 member_approval_finish_null_receipts; migration excluded from tested source"
+fi
 echo 'PASS: all checked-in migrations and SQL suites, including staged import/setup, cross-account and source-worker authorization and first-style owner isolation regressions; no hosted connection.'
