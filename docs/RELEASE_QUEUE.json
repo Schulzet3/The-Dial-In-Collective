@@ -14031,9 +14031,9 @@
       "id": "DIC-Q-2633-remove-url-source-badges",
       "issue": 2633,
       "title": "Remove obsolete Unverified Page and verified-roaster badges/copy from New Coffee",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
-      "pr": null,
+      "state": "READY",
+      "merged_source_sha": "5a295c08219b91426971227153893e8749deeaa3",
+      "pr": 2634,
       "scope_paths": [
         "site/cloud/coffee-url-autofill.js",
         "site/cloud/coffee-match-ui.js",
@@ -14041,17 +14041,27 @@
         "site/visual.css"
       ],
       "owner_source": "Owner Nov14 direct request; UX-COFFEE-REMOVE-ROASTER-SOURCE-BADGES-20261114; preflight development cdcef6863537bcf8db7d37a81f2cacdca7cfc000 blob 2fb236bbfa6bac48513eeb3bd157b260853af06d",
-      "ci_runs": [],
+      "ci_runs": [
+        43576329667,
+        43576329666,
+        43576329857,
+        43576329650,
+        43576329701,
+        43576563838,
+        43576563863,
+        43576563927
+      ],
       "tests": [
         "New specific regressions for no badge across all 3 source types, original source data preservation, conflicts/release notice, metadata-only caveats, unchanged canonical Pending decisions, no auto-save and neutral status copy. Actual exact CI pending.",
         "Previously READY #2621 overlaps three site files. Source-isolate tested #2621 bytes if needed for separate frozen publication until this new item itself is verified READY.",
-        "First exact PR head 252e7d66ff8a2360dfea20942b15dcad7535be94 full Node22 run 43575921548: 4,779 total, 4,766 PASS, 7 FAIL, 6 intentional SKIP. The 7 failures are pre-existing source-preview/UI assertions for removed badges/old wording (catalog fallback heading, owner77 heading, two metadata warning labels, source retry true-branch text twice, Wuri badge). None of those asserted removed information affects actual underlying source parsing, release matching or verification flag. Updated assertions to require neutral UI and preserve source/review behavior. Failed run retained, NOT PASS."
+        "First exact PR head 252e7d66ff8a2360dfea20942b15dcad7535be94 full Node22 run 43575921548: 4,779 total, 4,766 PASS, 7 FAIL, 6 intentional SKIP. The 7 failures are pre-existing source-preview/UI assertions for removed badges/old wording (catalog fallback heading, owner77 heading, two metadata warning labels, source retry true-branch text twice, Wuri badge). None of those asserted removed information affects actual underlying source parsing, release matching or verification flag. Updated assertions to require neutral UI and preserve source/review behavior. Failed run retained, NOT PASS.",
+        "Final PR-head 930d34e205c0857c327b35c660f1e9edb48b24de all FIVE required exact-source checks SUCCESS: Node22/lint 43576329667 (4,779 total / 4,773 pass / 0 fail / 6 intentionally SKIPPED; lint pass), cloud/mobile Chromium 43576329666, isolated SQL/privacy 43576329857, source security 43576329650, approval/continuity 43576329701. Earlier 43575921548 7 historical stale-text failures retained and NOT counted.",
+        "Nonforce squash PR #2634 merged 5a295c08219b91426971227153893e8749deeaa3 [skip netlify] onto parent cb1c910db3dcc93b18f25311819d7388373302d8, with all 17 app/test/spec/ledger/queue/journal Git blobs byte-identical to tested head; all user-visible badge labels absent, actual matching/source classification flags and original public source diagnostics remain.",
+        "Exact MERGED push Node22/lint 43576563838 SUCCESS (4,779 total / 4,773 pass / 0 fail / 6 intentional SKIPPED; lint PASS), cloud/mobile Chromium 43576563863 SUCCESS, approval 43576563927 SUCCESS; merged push SQL/security were not triggered, PR-head source-bound SQL/security SUCCESS reused where runtime/SQL/source blobs match.",
+        "Independent Issue33 R171 focused live source probe 43576563882 FAILED because current https://novocoffee.com/product/buesaco did not yield the expected product H1 (HTTP fetched 12,092 bytes, parsed_current_fields {}, focused 16/16 local Node tests PASS). This is a separate evolving live roaster page/original603 audit issue #33, not New Coffee UI source/badge code regression. NOT counted as PASS or falsely called completed; issue #33 OPEN."
       ],
-      "blockers": [
-        "Revised PR-head five exact-source CI jobs PENDING; previous failing Node/lint 43575921548 is not usable for READY.",
-        "Safe nonforce development integration, final merged blob and push CI readback pending."
-      ],
-      "notes": "User-visible source-verification badges/copy only; public URLs from any roaster; existing verification/provenance and shared/private coffee status preserved. No production, SQL/Auth/member write, publish, Netlify or DB changes. #2621 prior READY retained."
+      "blockers": [],
+      "notes": "READY development ONLY, NOT DEPLOYED. Source-status badge entirely absent from New Coffee URL preview; a single neutral Autofill Results heading and clear conflict/metadata warnings remain. Source/match/correction messages no longer imply roaster registration/approval. Universal best-effort any-roaster URL intake, internal source provenance/attestations, product/release distinction, safe private Pending and shared Community gating, Auth, TLS/SSRF, quotas, shots/notes/offline history unchanged. Exact PR-head 5/5 and merged Node/mobile/approval SUCCESS; independent #33 live original241 external-source probe failed, scoped to #33 and explicitly recorded. Prior READY #2621 remains READY; overlapping changes are jointly present in merged tested code, future Publish must use isolated exact READY bytes. NEW owner Publish required."
     }
   ],
   "history": [
