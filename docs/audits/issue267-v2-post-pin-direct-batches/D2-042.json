@@ -1,0 +1,837 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "D2-042",
+  "date_utc": "2026-11-14",
+  "authority": "development-only exhaustive #267 source audit",
+  "preflight": {
+    "development_sha": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "Git_blob_content_match": true
+  },
+  "source": {
+    "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "live_commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+    "path": "tests/helpers/release-published-restoration.mjs",
+    "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+    "physical_line_count": 28,
+    "verified_absent_at_pin": true,
+    "prior_Nov5_source_blob": "d3e0044f5ad863daabcbbbc9e8dda92bdb4ac219",
+    "prior_physical_lines": 23,
+    "current_changed_since_Nov5": true,
+    "terminal_newline_not_physical_line": true
+  },
+  "method": "Direct AI per-source-line review of Git blob and prior source history, compare live/pin; all nine owner dimensions per original physical line; not proof of independent human certification.",
+  "per_line": [
+    {
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "original_git_blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "line": 1,
+      "source_text": "// READY-only candidate regression helper: verify the exact CURRENT published",
+      "classification": "comment",
+      "behavior": "Explains this is a READY-only candidate regression helper checking exact CURRENT published Git content.",
+      "quality": "Explicit source-bound pure-read candidate provenance test helper; purposeful check/guard for exact released blob identity.",
+      "risk": "No authority asserted by comment; must validate runtime state.",
+      "dead_or_obsolete": "Current post-pin helper; no unreferenced/delete evidence from exhaustive caller graph yet.",
+      "redundancy": "Previous fixed-hash version superseded; each current guard distinct; no safe redundant deletion proven.",
+      "pinned_current_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "verified_GitHub_contents_404": true
+      },
+      "current_live_counterpart": {
+        "commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "path": "tests/helpers/release-published-restoration.mjs",
+        "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+        "line": 1,
+        "text_exact": true
+      },
+      "testability": "Focused local fixture can test candidate-not-present false and source mismatch failure; NOT_RUN_THIS_DOCS_ONLY_REVIEW, no real Git publication/provider checks.",
+      "fix_opportunity": "No confirmed active source bug; retain fail-closed comparison; consider targeted fixture tests only if justified.",
+      "locked_fit": "READY-only source checks do not grant Publish, release controller, provider or production writes; #33 source and #96 Auth/privacy ownership unchanged.",
+      "review_method": "Direct individual numbered physical source line read and reasoned by AI; not independent human signoff."
+    },
+    {
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "original_git_blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "line": 2,
+      "source_text": "// narrative Git object, not a stale hard-coded list of older release SHAs.",
+      "classification": "comment",
+      "behavior": "Rejects stale hard-coded historical release SHA allowlist as source of truth.",
+      "quality": "Explicit source-bound pure-read candidate provenance test helper; purposeful check/guard for exact released blob identity.",
+      "risk": "Prior Nov5 version used two hardcoded publication SHAs and one blob; dynamic provenance is safer for future publications.",
+      "dead_or_obsolete": "Current post-pin helper; no unreferenced/delete evidence from exhaustive caller graph yet.",
+      "redundancy": "Previous fixed-hash version superseded; each current guard distinct; no safe redundant deletion proven.",
+      "pinned_current_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "verified_GitHub_contents_404": true
+      },
+      "current_live_counterpart": {
+        "commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "path": "tests/helpers/release-published-restoration.mjs",
+        "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+        "line": 2,
+        "text_exact": true
+      },
+      "testability": "Focused local fixture can test candidate-not-present false and source mismatch failure; NOT_RUN_THIS_DOCS_ONLY_REVIEW, no real Git publication/provider checks.",
+      "fix_opportunity": "No confirmed active source bug; retain fail-closed comparison; consider targeted fixture tests only if justified.",
+      "locked_fit": "READY-only source checks do not grant Publish, release controller, provider or production writes; #33 source and #96 Auth/privacy ownership unchanged.",
+      "review_method": "Direct individual numbered physical source line read and reasoned by AI; not independent human signoff."
+    },
+    {
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "original_git_blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "line": 3,
+      "source_text": "// Unisolated development retains stricter Issue #33 grower assertions.",
+      "classification": "comment",
+      "behavior": "Notes unisolated development still enforces #33 grower-specific assertions.",
+      "quality": "Explicit source-bound pure-read candidate provenance test helper; purposeful check/guard for exact released blob identity.",
+      "risk": "Avoid loosening normal original603/roaster review by candidate-only exemption.",
+      "dead_or_obsolete": "Current post-pin helper; no unreferenced/delete evidence from exhaustive caller graph yet.",
+      "redundancy": "Previous fixed-hash version superseded; each current guard distinct; no safe redundant deletion proven.",
+      "pinned_current_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "verified_GitHub_contents_404": true
+      },
+      "current_live_counterpart": {
+        "commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "path": "tests/helpers/release-published-restoration.mjs",
+        "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+        "line": 3,
+        "text_exact": true
+      },
+      "testability": "Focused local fixture can test candidate-not-present false and source mismatch failure; NOT_RUN_THIS_DOCS_ONLY_REVIEW, no real Git publication/provider checks.",
+      "fix_opportunity": "No confirmed active source bug; retain fail-closed comparison; consider targeted fixture tests only if justified.",
+      "locked_fit": "READY-only source checks do not grant Publish, release controller, provider or production writes; #33 source and #96 Auth/privacy ownership unchanged.",
+      "review_method": "Direct individual numbered physical source line read and reasoned by AI; not independent human signoff."
+    },
+    {
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "original_git_blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "line": 4,
+      "source_text": "import {readFileSync} from 'node:fs';",
+      "classification": "import",
+      "behavior": "Imports synchronous filesystem reader for local manifest, queue and source.",
+      "quality": "Explicit source-bound pure-read candidate provenance test helper; purposeful check/guard for exact released blob identity.",
+      "risk": "Reads from repository, not live Netlify; synchronous file IO acceptable in isolated tests.",
+      "dead_or_obsolete": "Current post-pin helper; no unreferenced/delete evidence from exhaustive caller graph yet.",
+      "redundancy": "Previous fixed-hash version superseded; each current guard distinct; no safe redundant deletion proven.",
+      "pinned_current_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "verified_GitHub_contents_404": true
+      },
+      "current_live_counterpart": {
+        "commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "path": "tests/helpers/release-published-restoration.mjs",
+        "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+        "line": 4,
+        "text_exact": true
+      },
+      "testability": "Focused local fixture can test candidate-not-present false and source mismatch failure; NOT_RUN_THIS_DOCS_ONLY_REVIEW, no real Git publication/provider checks.",
+      "fix_opportunity": "No confirmed active source bug; retain fail-closed comparison; consider targeted fixture tests only if justified.",
+      "locked_fit": "READY-only source checks do not grant Publish, release controller, provider or production writes; #33 source and #96 Auth/privacy ownership unchanged.",
+      "review_method": "Direct individual numbered physical source line read and reasoned by AI; not independent human signoff."
+    },
+    {
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "original_git_blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "line": 5,
+      "source_text": "import {execFileSync} from 'node:child_process';",
+      "classification": "import",
+      "behavior": "Imports execFileSync to resolve exact Git source path object.",
+      "quality": "Explicit source-bound pure-read candidate provenance test helper; purposeful check/guard for exact released blob identity.",
+      "risk": "Trusted CLI availability and working Git repo required; possible synchronous latency or errors, bounded 15-second timeout.",
+      "dead_or_obsolete": "Current post-pin helper; no unreferenced/delete evidence from exhaustive caller graph yet.",
+      "redundancy": "Previous fixed-hash version superseded; each current guard distinct; no safe redundant deletion proven.",
+      "pinned_current_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "verified_GitHub_contents_404": true
+      },
+      "current_live_counterpart": {
+        "commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "path": "tests/helpers/release-published-restoration.mjs",
+        "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+        "line": 5,
+        "text_exact": true
+      },
+      "testability": "Focused local fixture can test candidate-not-present false and source mismatch failure; NOT_RUN_THIS_DOCS_ONLY_REVIEW, no real Git publication/provider checks.",
+      "fix_opportunity": "No confirmed active source bug; retain fail-closed comparison; consider targeted fixture tests only if justified.",
+      "locked_fit": "READY-only source checks do not grant Publish, release controller, provider or production writes; #33 source and #96 Auth/privacy ownership unchanged.",
+      "review_method": "Direct individual numbered physical source line read and reasoned by AI; not independent human signoff."
+    },
+    {
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "original_git_blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "line": 6,
+      "source_text": "import {createHash} from 'node:crypto';",
+      "classification": "import",
+      "behavior": "Imports createHash to calculate canonical Git blob object ID from bytes.",
+      "quality": "Explicit source-bound pure-read candidate provenance test helper; purposeful check/guard for exact released blob identity.",
+      "risk": "SHA-1 object ID is Git provenance parity check, not cryptographic signing or deployment authorization.",
+      "dead_or_obsolete": "Current post-pin helper; no unreferenced/delete evidence from exhaustive caller graph yet.",
+      "redundancy": "Previous fixed-hash version superseded; each current guard distinct; no safe redundant deletion proven.",
+      "pinned_current_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "verified_GitHub_contents_404": true
+      },
+      "current_live_counterpart": {
+        "commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "path": "tests/helpers/release-published-restoration.mjs",
+        "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+        "line": 6,
+        "text_exact": true
+      },
+      "testability": "Focused local fixture can test candidate-not-present false and source mismatch failure; NOT_RUN_THIS_DOCS_ONLY_REVIEW, no real Git publication/provider checks.",
+      "fix_opportunity": "No confirmed active source bug; retain fail-closed comparison; consider targeted fixture tests only if justified.",
+      "locked_fit": "READY-only source checks do not grant Publish, release controller, provider or production writes; #33 source and #96 Auth/privacy ownership unchanged.",
+      "review_method": "Direct individual numbered physical source line read and reasoned by AI; not independent human signoff."
+    },
+    {
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "original_git_blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "line": 7,
+      "source_text": "import assert from 'node:assert/strict';",
+      "classification": "import",
+      "behavior": "Imports strict assertions to fail on mismatched source or malformed independent Git object.",
+      "quality": "Explicit source-bound pure-read candidate provenance test helper; purposeful check/guard for exact released blob identity.",
+      "risk": "Failures in test context are intended; no member/provider writes.",
+      "dead_or_obsolete": "Current post-pin helper; no unreferenced/delete evidence from exhaustive caller graph yet.",
+      "redundancy": "Previous fixed-hash version superseded; each current guard distinct; no safe redundant deletion proven.",
+      "pinned_current_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "verified_GitHub_contents_404": true
+      },
+      "current_live_counterpart": {
+        "commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "path": "tests/helpers/release-published-restoration.mjs",
+        "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+        "line": 7,
+        "text_exact": true
+      },
+      "testability": "Focused local fixture can test candidate-not-present false and source mismatch failure; NOT_RUN_THIS_DOCS_ONLY_REVIEW, no real Git publication/provider checks.",
+      "fix_opportunity": "No confirmed active source bug; retain fail-closed comparison; consider targeted fixture tests only if justified.",
+      "locked_fit": "READY-only source checks do not grant Publish, release controller, provider or production writes; #33 source and #96 Auth/privacy ownership unchanged.",
+      "review_method": "Direct individual numbered physical source line read and reasoned by AI; not independent human signoff."
+    },
+    {
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "original_git_blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "line": 8,
+      "source_text": "const SHA=/^[a-f0-9]{40}$/;",
+      "classification": "declaration",
+      "behavior": "Anchors 40-digit lowercase hex regex for refs and blob IDs.",
+      "quality": "Explicit source-bound pure-read candidate provenance test helper; purposeful check/guard for exact released blob identity.",
+      "risk": "Prevents arbitrary Git expressions or shell injection from manifest source SHA; Git args passed without shell.",
+      "dead_or_obsolete": "Current post-pin helper; no unreferenced/delete evidence from exhaustive caller graph yet.",
+      "redundancy": "Previous fixed-hash version superseded; each current guard distinct; no safe redundant deletion proven.",
+      "pinned_current_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "verified_GitHub_contents_404": true
+      },
+      "current_live_counterpart": {
+        "commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "path": "tests/helpers/release-published-restoration.mjs",
+        "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+        "line": 8,
+        "text_exact": true
+      },
+      "testability": "Focused local fixture can test candidate-not-present false and source mismatch failure; NOT_RUN_THIS_DOCS_ONLY_REVIEW, no real Git publication/provider checks.",
+      "fix_opportunity": "No confirmed active source bug; retain fail-closed comparison; consider targeted fixture tests only if justified.",
+      "locked_fit": "READY-only source checks do not grant Publish, release controller, provider or production writes; #33 source and #96 Auth/privacy ownership unchanged.",
+      "review_method": "Direct individual numbered physical source line read and reasoned by AI; not independent human signoff."
+    },
+    {
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "original_git_blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "line": 9,
+      "source_text": "const PATH='src/server/coffee-narrative-evidence.mjs';",
+      "classification": "constant",
+      "behavior": "Pins narrative file path within repo; no manifest-controlled path traversal.",
+      "quality": "Explicit source-bound pure-read candidate provenance test helper; purposeful check/guard for exact released blob identity.",
+      "risk": "Exact module avoids accidental broader restoration; path could move in later approved code.",
+      "dead_or_obsolete": "Current post-pin helper; no unreferenced/delete evidence from exhaustive caller graph yet.",
+      "redundancy": "Previous fixed-hash version superseded; each current guard distinct; no safe redundant deletion proven.",
+      "pinned_current_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "verified_GitHub_contents_404": true
+      },
+      "current_live_counterpart": {
+        "commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "path": "tests/helpers/release-published-restoration.mjs",
+        "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+        "line": 9,
+        "text_exact": true
+      },
+      "testability": "Focused local fixture can test candidate-not-present false and source mismatch failure; NOT_RUN_THIS_DOCS_ONLY_REVIEW, no real Git publication/provider checks.",
+      "fix_opportunity": "No confirmed active source bug; retain fail-closed comparison; consider targeted fixture tests only if justified.",
+      "locked_fit": "READY-only source checks do not grant Publish, release controller, provider or production writes; #33 source and #96 Auth/privacy ownership unchanged.",
+      "review_method": "Direct individual numbered physical source line read and reasoned by AI; not independent human signoff."
+    },
+    {
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "original_git_blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "line": 10,
+      "source_text": "export function isPublishedNarrativeRestored(){",
+      "classification": "definition",
+      "behavior": "Exports isPublishedNarrativeRestored predicate for candidate-only tests.",
+      "quality": "Explicit source-bound pure-read candidate provenance test helper; purposeful check/guard for exact released blob identity.",
+      "risk": "Standalone pure-read helper, not runtime publishing endpoint.",
+      "dead_or_obsolete": "Current post-pin helper; no unreferenced/delete evidence from exhaustive caller graph yet.",
+      "redundancy": "Previous fixed-hash version superseded; each current guard distinct; no safe redundant deletion proven.",
+      "pinned_current_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "verified_GitHub_contents_404": true
+      },
+      "current_live_counterpart": {
+        "commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "path": "tests/helpers/release-published-restoration.mjs",
+        "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+        "line": 10,
+        "text_exact": true
+      },
+      "testability": "Focused local fixture can test candidate-not-present false and source mismatch failure; NOT_RUN_THIS_DOCS_ONLY_REVIEW, no real Git publication/provider checks.",
+      "fix_opportunity": "No confirmed active source bug; retain fail-closed comparison; consider targeted fixture tests only if justified.",
+      "locked_fit": "READY-only source checks do not grant Publish, release controller, provider or production writes; #33 source and #96 Auth/privacy ownership unchanged.",
+      "review_method": "Direct individual numbered physical source line read and reasoned by AI; not independent human signoff."
+    },
+    {
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "original_git_blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "line": 11,
+      "source_text": " let manifest;",
+      "classification": "setup",
+      "behavior": "Declares manifest binding for parsed candidate metadata.",
+      "quality": "Explicit source-bound pure-read candidate provenance test helper; purposeful check/guard for exact released blob identity.",
+      "risk": "Missing candidate is explicitly false below.",
+      "dead_or_obsolete": "Current post-pin helper; no unreferenced/delete evidence from exhaustive caller graph yet.",
+      "redundancy": "Previous fixed-hash version superseded; each current guard distinct; no safe redundant deletion proven.",
+      "pinned_current_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "verified_GitHub_contents_404": true
+      },
+      "current_live_counterpart": {
+        "commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "path": "tests/helpers/release-published-restoration.mjs",
+        "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+        "line": 11,
+        "text_exact": true
+      },
+      "testability": "Focused local fixture can test candidate-not-present false and source mismatch failure; NOT_RUN_THIS_DOCS_ONLY_REVIEW, no real Git publication/provider checks.",
+      "fix_opportunity": "No confirmed active source bug; retain fail-closed comparison; consider targeted fixture tests only if justified.",
+      "locked_fit": "READY-only source checks do not grant Publish, release controller, provider or production writes; #33 source and #96 Auth/privacy ownership unchanged.",
+      "review_method": "Direct individual numbered physical source line read and reasoned by AI; not independent human signoff."
+    },
+    {
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "original_git_blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "line": 12,
+      "source_text": " try{manifest=JSON.parse(readFileSync(new URL('../../docs/RELEASE_CANDIDATE.json',import.meta.url),'utf8'));}",
+      "classification": "read",
+      "behavior": "Reads and JSON-parses release candidate at module-relative docs path.",
+      "quality": "Explicit source-bound pure-read candidate provenance test helper; purposeful check/guard for exact released blob identity.",
+      "risk": "Malformed JSON throws rather than silently grants exemption; reads only local file.",
+      "dead_or_obsolete": "Current post-pin helper; no unreferenced/delete evidence from exhaustive caller graph yet.",
+      "redundancy": "Previous fixed-hash version superseded; each current guard distinct; no safe redundant deletion proven.",
+      "pinned_current_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "verified_GitHub_contents_404": true
+      },
+      "current_live_counterpart": {
+        "commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "path": "tests/helpers/release-published-restoration.mjs",
+        "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+        "line": 12,
+        "text_exact": true
+      },
+      "testability": "Focused local fixture can test candidate-not-present false and source mismatch failure; NOT_RUN_THIS_DOCS_ONLY_REVIEW, no real Git publication/provider checks.",
+      "fix_opportunity": "No confirmed active source bug; retain fail-closed comparison; consider targeted fixture tests only if justified.",
+      "locked_fit": "READY-only source checks do not grant Publish, release controller, provider or production writes; #33 source and #96 Auth/privacy ownership unchanged.",
+      "review_method": "Direct individual numbered physical source line read and reasoned by AI; not independent human signoff."
+    },
+    {
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "original_git_blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "line": 13,
+      "source_text": " catch(e){if(e?.code==='ENOENT')return false;throw e;}",
+      "classification": "guard",
+      "behavior": "Returns false when candidate manifest missing; propagates other exceptions.",
+      "quality": "Explicit source-bound pure-read candidate provenance test helper; purposeful check/guard for exact released blob identity.",
+      "risk": "ENOENT is expected for ordinary development; other errors fail closed.",
+      "dead_or_obsolete": "Current post-pin helper; no unreferenced/delete evidence from exhaustive caller graph yet.",
+      "redundancy": "Previous fixed-hash version superseded; each current guard distinct; no safe redundant deletion proven.",
+      "pinned_current_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "verified_GitHub_contents_404": true
+      },
+      "current_live_counterpart": {
+        "commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "path": "tests/helpers/release-published-restoration.mjs",
+        "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+        "line": 13,
+        "text_exact": true
+      },
+      "testability": "Focused local fixture can test candidate-not-present false and source mismatch failure; NOT_RUN_THIS_DOCS_ONLY_REVIEW, no real Git publication/provider checks.",
+      "fix_opportunity": "No confirmed active source bug; retain fail-closed comparison; consider targeted fixture tests only if justified.",
+      "locked_fit": "READY-only source checks do not grant Publish, release controller, provider or production writes; #33 source and #96 Auth/privacy ownership unchanged.",
+      "review_method": "Direct individual numbered physical source line read and reasoned by AI; not independent human signoff."
+    },
+    {
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "original_git_blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "line": 14,
+      "source_text": " if(manifest?.kind!=='DIC-READY-ONLY-SOURCE-1'||",
+      "classification": "guard",
+      "behavior": "Checks candidate kind equals strict READY-only source mode.",
+      "quality": "Explicit source-bound pure-read candidate provenance test helper; purposeful check/guard for exact released blob identity.",
+      "risk": "Rejects unrelated release/manifests before any exemption.",
+      "dead_or_obsolete": "Current post-pin helper; no unreferenced/delete evidence from exhaustive caller graph yet.",
+      "redundancy": "Previous fixed-hash version superseded; each current guard distinct; no safe redundant deletion proven.",
+      "pinned_current_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "verified_GitHub_contents_404": true
+      },
+      "current_live_counterpart": {
+        "commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "path": "tests/helpers/release-published-restoration.mjs",
+        "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+        "line": 14,
+        "text_exact": true
+      },
+      "testability": "Focused local fixture can test candidate-not-present false and source mismatch failure; NOT_RUN_THIS_DOCS_ONLY_REVIEW, no real Git publication/provider checks.",
+      "fix_opportunity": "No confirmed active source bug; retain fail-closed comparison; consider targeted fixture tests only if justified.",
+      "locked_fit": "READY-only source checks do not grant Publish, release controller, provider or production writes; #33 source and #96 Auth/privacy ownership unchanged.",
+      "review_method": "Direct individual numbered physical source line read and reasoned by AI; not independent human signoff."
+    },
+    {
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "original_git_blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "line": 15,
+      "source_text": "    !SHA.test(manifest.published_source_sha||'')||",
+      "classification": "guard",
+      "behavior": "Requires published source SHA to match lowercase 40-hex Git commit ID.",
+      "quality": "Explicit source-bound pure-read candidate provenance test helper; purposeful check/guard for exact released blob identity.",
+      "risk": "Syntax check does not alone prove SHA currently published; later Git object and queue parity enforce source-bound evidence.",
+      "dead_or_obsolete": "Current post-pin helper; no unreferenced/delete evidence from exhaustive caller graph yet.",
+      "redundancy": "Previous fixed-hash version superseded; each current guard distinct; no safe redundant deletion proven.",
+      "pinned_current_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "verified_GitHub_contents_404": true
+      },
+      "current_live_counterpart": {
+        "commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "path": "tests/helpers/release-published-restoration.mjs",
+        "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+        "line": 15,
+        "text_exact": true
+      },
+      "testability": "Focused local fixture can test candidate-not-present false and source mismatch failure; NOT_RUN_THIS_DOCS_ONLY_REVIEW, no real Git publication/provider checks.",
+      "fix_opportunity": "No confirmed active source bug; retain fail-closed comparison; consider targeted fixture tests only if justified.",
+      "locked_fit": "READY-only source checks do not grant Publish, release controller, provider or production writes; #33 source and #96 Auth/privacy ownership unchanged.",
+      "review_method": "Direct individual numbered physical source line read and reasoned by AI; not independent human signoff."
+    },
+    {
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "original_git_blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "line": 16,
+      "source_text": "    manifest.publication_authorized!==false||",
+      "classification": "guard",
+      "behavior": "Requires publication_authorized to be explicitly false.",
+      "quality": "Explicit source-bound pure-read candidate provenance test helper; purposeful check/guard for exact released blob identity.",
+      "risk": "Preserves no-publish boundary even for READY-only candidate assertions.",
+      "dead_or_obsolete": "Current post-pin helper; no unreferenced/delete evidence from exhaustive caller graph yet.",
+      "redundancy": "Previous fixed-hash version superseded; each current guard distinct; no safe redundant deletion proven.",
+      "pinned_current_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "verified_GitHub_contents_404": true
+      },
+      "current_live_counterpart": {
+        "commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "path": "tests/helpers/release-published-restoration.mjs",
+        "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+        "line": 16,
+        "text_exact": true
+      },
+      "testability": "Focused local fixture can test candidate-not-present false and source mismatch failure; NOT_RUN_THIS_DOCS_ONLY_REVIEW, no real Git publication/provider checks.",
+      "fix_opportunity": "No confirmed active source bug; retain fail-closed comparison; consider targeted fixture tests only if justified.",
+      "locked_fit": "READY-only source checks do not grant Publish, release controller, provider or production writes; #33 source and #96 Auth/privacy ownership unchanged.",
+      "review_method": "Direct individual numbered physical source line read and reasoned by AI; not independent human signoff."
+    },
+    {
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "original_git_blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "line": 17,
+      "source_text": "    !manifest.restored_to_published_paths?.includes(PATH))return false;",
+      "classification": "guard",
+      "behavior": "Requires restored_to_published_paths list includes protected narrative module.",
+      "quality": "Explicit source-bound pure-read candidate provenance test helper; purposeful check/guard for exact released blob identity.",
+      "risk": "Property optional-chaining protects absent list, but malformed truthy non-array could throw: fail-closed.",
+      "dead_or_obsolete": "Current post-pin helper; no unreferenced/delete evidence from exhaustive caller graph yet.",
+      "redundancy": "Previous fixed-hash version superseded; each current guard distinct; no safe redundant deletion proven.",
+      "pinned_current_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "verified_GitHub_contents_404": true
+      },
+      "current_live_counterpart": {
+        "commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "path": "tests/helpers/release-published-restoration.mjs",
+        "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+        "line": 17,
+        "text_exact": true
+      },
+      "testability": "Focused local fixture can test candidate-not-present false and source mismatch failure; NOT_RUN_THIS_DOCS_ONLY_REVIEW, no real Git publication/provider checks.",
+      "fix_opportunity": "No confirmed active source bug; retain fail-closed comparison; consider targeted fixture tests only if justified.",
+      "locked_fit": "READY-only source checks do not grant Publish, release controller, provider or production writes; #33 source and #96 Auth/privacy ownership unchanged.",
+      "review_method": "Direct individual numbered physical source line read and reasoned by AI; not independent human signoff."
+    },
+    {
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "original_git_blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "line": 18,
+      "source_text": " const queue=JSON.parse(readFileSync(new URL('../../docs/RELEASE_QUEUE.json',import.meta.url),'utf8'));",
+      "classification": "read",
+      "behavior": "Parses release queue from module-relative docs path.",
+      "quality": "Explicit source-bound pure-read candidate provenance test helper; purposeful check/guard for exact released blob identity.",
+      "risk": "Queue JSON is local metadata not provider readback; invalid JSON causes test failure, not deployment.",
+      "dead_or_obsolete": "Current post-pin helper; no unreferenced/delete evidence from exhaustive caller graph yet.",
+      "redundancy": "Previous fixed-hash version superseded; each current guard distinct; no safe redundant deletion proven.",
+      "pinned_current_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "verified_GitHub_contents_404": true
+      },
+      "current_live_counterpart": {
+        "commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "path": "tests/helpers/release-published-restoration.mjs",
+        "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+        "line": 18,
+        "text_exact": true
+      },
+      "testability": "Focused local fixture can test candidate-not-present false and source mismatch failure; NOT_RUN_THIS_DOCS_ONLY_REVIEW, no real Git publication/provider checks.",
+      "fix_opportunity": "No confirmed active source bug; retain fail-closed comparison; consider targeted fixture tests only if justified.",
+      "locked_fit": "READY-only source checks do not grant Publish, release controller, provider or production writes; #33 source and #96 Auth/privacy ownership unchanged.",
+      "review_method": "Direct individual numbered physical source line read and reasoned by AI; not independent human signoff."
+    },
+    {
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "original_git_blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "line": 19,
+      "source_text": " assert.equal(queue?.published_base?.tested_source_sha,manifest.published_source_sha,",
+      "classification": "assertion",
+      "behavior": "Requires release queue published_base tested source SHA equals candidate source SHA.",
+      "quality": "Explicit source-bound pure-read candidate provenance test helper; purposeful check/guard for exact released blob identity.",
+      "risk": "Cross-checks candidate against exact queued source not historical hardcoded list.",
+      "dead_or_obsolete": "Current post-pin helper; no unreferenced/delete evidence from exhaustive caller graph yet.",
+      "redundancy": "Previous fixed-hash version superseded; each current guard distinct; no safe redundant deletion proven.",
+      "pinned_current_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "verified_GitHub_contents_404": true
+      },
+      "current_live_counterpart": {
+        "commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "path": "tests/helpers/release-published-restoration.mjs",
+        "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+        "line": 19,
+        "text_exact": true
+      },
+      "testability": "Focused local fixture can test candidate-not-present false and source mismatch failure; NOT_RUN_THIS_DOCS_ONLY_REVIEW, no real Git publication/provider checks.",
+      "fix_opportunity": "No confirmed active source bug; retain fail-closed comparison; consider targeted fixture tests only if justified.",
+      "locked_fit": "READY-only source checks do not grant Publish, release controller, provider or production writes; #33 source and #96 Auth/privacy ownership unchanged.",
+      "review_method": "Direct individual numbered physical source line read and reasoned by AI; not independent human signoff."
+    },
+    {
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "original_git_blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "line": 20,
+      "source_text": "  'candidate narrative restoration must match the exact queued published baseline');",
+      "classification": "diagnostic",
+      "behavior": "Provides explicit failure context on stale or mismatched published baseline.",
+      "quality": "Explicit source-bound pure-read candidate provenance test helper; purposeful check/guard for exact released blob identity.",
+      "risk": "Diagnostic assertion text only, no independent authorization.",
+      "dead_or_obsolete": "Current post-pin helper; no unreferenced/delete evidence from exhaustive caller graph yet.",
+      "redundancy": "Previous fixed-hash version superseded; each current guard distinct; no safe redundant deletion proven.",
+      "pinned_current_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "verified_GitHub_contents_404": true
+      },
+      "current_live_counterpart": {
+        "commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "path": "tests/helpers/release-published-restoration.mjs",
+        "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+        "line": 20,
+        "text_exact": true
+      },
+      "testability": "Focused local fixture can test candidate-not-present false and source mismatch failure; NOT_RUN_THIS_DOCS_ONLY_REVIEW, no real Git publication/provider checks.",
+      "fix_opportunity": "No confirmed active source bug; retain fail-closed comparison; consider targeted fixture tests only if justified.",
+      "locked_fit": "READY-only source checks do not grant Publish, release controller, provider or production writes; #33 source and #96 Auth/privacy ownership unchanged.",
+      "review_method": "Direct individual numbered physical source line read and reasoned by AI; not independent human signoff."
+    },
+    {
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "original_git_blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "line": 21,
+      "source_text": " const bytes=readFileSync(new URL('../../'+PATH,import.meta.url));",
+      "classification": "read",
+      "behavior": "Loads exact local narrative module bytes.",
+      "quality": "Explicit source-bound pure-read candidate provenance test helper; purposeful check/guard for exact released blob identity.",
+      "risk": "Trust must compare bytes against Git published object; no user data read beyond source file.",
+      "dead_or_obsolete": "Current post-pin helper; no unreferenced/delete evidence from exhaustive caller graph yet.",
+      "redundancy": "Previous fixed-hash version superseded; each current guard distinct; no safe redundant deletion proven.",
+      "pinned_current_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "verified_GitHub_contents_404": true
+      },
+      "current_live_counterpart": {
+        "commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "path": "tests/helpers/release-published-restoration.mjs",
+        "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+        "line": 21,
+        "text_exact": true
+      },
+      "testability": "Focused local fixture can test candidate-not-present false and source mismatch failure; NOT_RUN_THIS_DOCS_ONLY_REVIEW, no real Git publication/provider checks.",
+      "fix_opportunity": "No confirmed active source bug; retain fail-closed comparison; consider targeted fixture tests only if justified.",
+      "locked_fit": "READY-only source checks do not grant Publish, release controller, provider or production writes; #33 source and #96 Auth/privacy ownership unchanged.",
+      "review_method": "Direct individual numbered physical source line read and reasoned by AI; not independent human signoff."
+    },
+    {
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "original_git_blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "line": 22,
+      "source_text": " const observed=createHash('sha1').update('blob '+bytes.length+'\\0').update(bytes).digest('hex');",
+      "classification": "hash",
+      "behavior": "Builds Git canonical 'blob <length>\\0' SHA-1 from source bytes.",
+      "quality": "Explicit source-bound pure-read candidate provenance test helper; purposeful check/guard for exact released blob identity.",
+      "risk": "Git object hashing is byte-equivalence; SHA-1 not collision-proof signature or commit provenance by itself.",
+      "dead_or_obsolete": "Current post-pin helper; no unreferenced/delete evidence from exhaustive caller graph yet.",
+      "redundancy": "Previous fixed-hash version superseded; each current guard distinct; no safe redundant deletion proven.",
+      "pinned_current_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "verified_GitHub_contents_404": true
+      },
+      "current_live_counterpart": {
+        "commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "path": "tests/helpers/release-published-restoration.mjs",
+        "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+        "line": 22,
+        "text_exact": true
+      },
+      "testability": "Focused local fixture can test candidate-not-present false and source mismatch failure; NOT_RUN_THIS_DOCS_ONLY_REVIEW, no real Git publication/provider checks.",
+      "fix_opportunity": "No confirmed active source bug; retain fail-closed comparison; consider targeted fixture tests only if justified.",
+      "locked_fit": "READY-only source checks do not grant Publish, release controller, provider or production writes; #33 source and #96 Auth/privacy ownership unchanged.",
+      "review_method": "Direct individual numbered physical source line read and reasoned by AI; not independent human signoff."
+    },
+    {
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "original_git_blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "line": 23,
+      "source_text": " const expected=execFileSync('git',['rev-parse',manifest.published_source_sha+':'+PATH],",
+      "classification": "git-read",
+      "behavior": "Asks Git rev-parse for blob object at validated published commit SHA and constant narrative path.",
+      "quality": "Explicit source-bound pure-read candidate provenance test helper; purposeful check/guard for exact released blob identity.",
+      "risk": "Uses git arguments, not interpolated shell; repo object must exist locally; no network fetch.",
+      "dead_or_obsolete": "Current post-pin helper; no unreferenced/delete evidence from exhaustive caller graph yet.",
+      "redundancy": "Previous fixed-hash version superseded; each current guard distinct; no safe redundant deletion proven.",
+      "pinned_current_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "verified_GitHub_contents_404": true
+      },
+      "current_live_counterpart": {
+        "commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "path": "tests/helpers/release-published-restoration.mjs",
+        "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+        "line": 23,
+        "text_exact": true
+      },
+      "testability": "Focused local fixture can test candidate-not-present false and source mismatch failure; NOT_RUN_THIS_DOCS_ONLY_REVIEW, no real Git publication/provider checks.",
+      "fix_opportunity": "No confirmed active source bug; retain fail-closed comparison; consider targeted fixture tests only if justified.",
+      "locked_fit": "READY-only source checks do not grant Publish, release controller, provider or production writes; #33 source and #96 Auth/privacy ownership unchanged.",
+      "review_method": "Direct individual numbered physical source line read and reasoned by AI; not independent human signoff."
+    },
+    {
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "original_git_blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "line": 24,
+      "source_text": "  {encoding:'utf8',timeout:15000}).trim();",
+      "classification": "git-options",
+      "behavior": "Requests UTF-8 output with 15,000 ms timeout then trims output.",
+      "quality": "Explicit source-bound pure-read candidate provenance test helper; purposeful check/guard for exact released blob identity.",
+      "risk": "Synchronous Git subprocess bounded; output must still be validated below.",
+      "dead_or_obsolete": "Current post-pin helper; no unreferenced/delete evidence from exhaustive caller graph yet.",
+      "redundancy": "Previous fixed-hash version superseded; each current guard distinct; no safe redundant deletion proven.",
+      "pinned_current_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "verified_GitHub_contents_404": true
+      },
+      "current_live_counterpart": {
+        "commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "path": "tests/helpers/release-published-restoration.mjs",
+        "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+        "line": 24,
+        "text_exact": true
+      },
+      "testability": "Focused local fixture can test candidate-not-present false and source mismatch failure; NOT_RUN_THIS_DOCS_ONLY_REVIEW, no real Git publication/provider checks.",
+      "fix_opportunity": "No confirmed active source bug; retain fail-closed comparison; consider targeted fixture tests only if justified.",
+      "locked_fit": "READY-only source checks do not grant Publish, release controller, provider or production writes; #33 source and #96 Auth/privacy ownership unchanged.",
+      "review_method": "Direct individual numbered physical source line read and reasoned by AI; not independent human signoff."
+    },
+    {
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "original_git_blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "line": 25,
+      "source_text": " assert.match(expected,SHA,'independent published Git object must exist');",
+      "classification": "assertion",
+      "behavior": "Checks returned independent blob ID is exactly 40 lower-hex characters.",
+      "quality": "Explicit source-bound pure-read candidate provenance test helper; purposeful check/guard for exact released blob identity.",
+      "risk": "Does not by itself attest current provider/Netlify publication, only local Git object existence.",
+      "dead_or_obsolete": "Current post-pin helper; no unreferenced/delete evidence from exhaustive caller graph yet.",
+      "redundancy": "Previous fixed-hash version superseded; each current guard distinct; no safe redundant deletion proven.",
+      "pinned_current_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "verified_GitHub_contents_404": true
+      },
+      "current_live_counterpart": {
+        "commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "path": "tests/helpers/release-published-restoration.mjs",
+        "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+        "line": 25,
+        "text_exact": true
+      },
+      "testability": "Focused local fixture can test candidate-not-present false and source mismatch failure; NOT_RUN_THIS_DOCS_ONLY_REVIEW, no real Git publication/provider checks.",
+      "fix_opportunity": "No confirmed active source bug; retain fail-closed comparison; consider targeted fixture tests only if justified.",
+      "locked_fit": "READY-only source checks do not grant Publish, release controller, provider or production writes; #33 source and #96 Auth/privacy ownership unchanged.",
+      "review_method": "Direct individual numbered physical source line read and reasoned by AI; not independent human signoff."
+    },
+    {
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "original_git_blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "line": 26,
+      "source_text": " assert.equal(observed,expected,'isolated narrative must exactly match current published Git blob');",
+      "classification": "assertion",
+      "behavior": "Compares SHA-1 of exact local bytes to Git tree object's published blob SHA.",
+      "quality": "Explicit source-bound pure-read candidate provenance test helper; purposeful check/guard for exact released blob identity.",
+      "risk": "Core identity guard prevents falsely passing tests with alternate development narrative.",
+      "dead_or_obsolete": "Current post-pin helper; no unreferenced/delete evidence from exhaustive caller graph yet.",
+      "redundancy": "Previous fixed-hash version superseded; each current guard distinct; no safe redundant deletion proven.",
+      "pinned_current_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "verified_GitHub_contents_404": true
+      },
+      "current_live_counterpart": {
+        "commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "path": "tests/helpers/release-published-restoration.mjs",
+        "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+        "line": 26,
+        "text_exact": true
+      },
+      "testability": "Focused local fixture can test candidate-not-present false and source mismatch failure; NOT_RUN_THIS_DOCS_ONLY_REVIEW, no real Git publication/provider checks.",
+      "fix_opportunity": "No confirmed active source bug; retain fail-closed comparison; consider targeted fixture tests only if justified.",
+      "locked_fit": "READY-only source checks do not grant Publish, release controller, provider or production writes; #33 source and #96 Auth/privacy ownership unchanged.",
+      "review_method": "Direct individual numbered physical source line read and reasoned by AI; not independent human signoff."
+    },
+    {
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "original_git_blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "line": 27,
+      "source_text": " return true;",
+      "classification": "return",
+      "behavior": "Returns true only after all conditional provenance and byte checks passed.",
+      "quality": "Explicit source-bound pure-read candidate provenance test helper; purposeful check/guard for exact released blob identity.",
+      "risk": "Positive result means local READY-only candidate source restoration, not automatic release authorization.",
+      "dead_or_obsolete": "Current post-pin helper; no unreferenced/delete evidence from exhaustive caller graph yet.",
+      "redundancy": "Previous fixed-hash version superseded; each current guard distinct; no safe redundant deletion proven.",
+      "pinned_current_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "verified_GitHub_contents_404": true
+      },
+      "current_live_counterpart": {
+        "commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "path": "tests/helpers/release-published-restoration.mjs",
+        "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+        "line": 27,
+        "text_exact": true
+      },
+      "testability": "Focused local fixture can test candidate-not-present false and source mismatch failure; NOT_RUN_THIS_DOCS_ONLY_REVIEW, no real Git publication/provider checks.",
+      "fix_opportunity": "No confirmed active source bug; retain fail-closed comparison; consider targeted fixture tests only if justified.",
+      "locked_fit": "READY-only source checks do not grant Publish, release controller, provider or production writes; #33 source and #96 Auth/privacy ownership unchanged.",
+      "review_method": "Direct individual numbered physical source line read and reasoned by AI; not independent human signoff."
+    },
+    {
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "original_git_blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "line": 28,
+      "source_text": "}",
+      "classification": "closure",
+      "behavior": "Closes pure-read helper function without mutating app or provider.",
+      "quality": "Explicit source-bound pure-read candidate provenance test helper; purposeful check/guard for exact released blob identity.",
+      "risk": "No pending side effects or background process initiated.",
+      "dead_or_obsolete": "Current post-pin helper; no unreferenced/delete evidence from exhaustive caller graph yet.",
+      "redundancy": "Previous fixed-hash version superseded; each current guard distinct; no safe redundant deletion proven.",
+      "pinned_current_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "verified_GitHub_contents_404": true
+      },
+      "current_live_counterpart": {
+        "commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "path": "tests/helpers/release-published-restoration.mjs",
+        "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+        "line": 28,
+        "text_exact": true
+      },
+      "testability": "Focused local fixture can test candidate-not-present false and source mismatch failure; NOT_RUN_THIS_DOCS_ONLY_REVIEW, no real Git publication/provider checks.",
+      "fix_opportunity": "No confirmed active source bug; retain fail-closed comparison; consider targeted fixture tests only if justified.",
+      "locked_fit": "READY-only source checks do not grant Publish, release controller, provider or production writes; #33 source and #96 Auth/privacy ownership unchanged.",
+      "review_method": "Direct individual numbered physical source line read and reasoned by AI; not independent human signoff."
+    }
+  ],
+  "findings": [
+    {
+      "severity": "CONTEXT_ONLY",
+      "status": "SAFE_CURRENT_SOURCE_NO_DEFECT_REPRODUCED",
+      "detail": "Current source replaces stale hard-coded publication snapshot IDs from Nov5 with SHA-validated candidate queue and exact independent Git blob identity; no active provider/auth defect shown."
+    },
+    {
+      "severity": "LOW_TESTABILITY_HYPOTHESIS",
+      "status": "NOT_REPRODUCED",
+      "line": 23,
+      "detail": "Local Git availability and cwd required, but release candidate tests run in repository; timeout bounded, failure is not silent PASS."
+    }
+  ],
+  "tests": {
+    "node22": "NOT_RUN_DOCS_ONLY",
+    "browser_sql_auth_provider": "NOT_RUN",
+    "CI_pr_head": "PENDING",
+    "CI_merged": "NOT_RUN"
+  },
+  "credit": {
+    "new_physical_postpin": 28,
+    "new_frozen": 0,
+    "new_pinned": 0,
+    "duplicate": 0
+  },
+  "complete": false
+}

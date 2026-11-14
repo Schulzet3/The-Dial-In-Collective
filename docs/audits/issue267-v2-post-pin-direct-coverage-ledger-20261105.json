@@ -535,10 +535,24 @@
       "reviewed_live_commit": "18be0586921fc572178df6929ecd7a98278dd710",
       "verified_absent_at_pin": true,
       "local_python_tests_passed": 4
+    },
+    {
+      "batch_id": "D2-042",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-042.json",
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "range": [
+        1,
+        28
+      ],
+      "line_count": 28,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+      "changed_since_2026_11_05": true
     }
   ],
-  "unique_source_lines_direct_reviewed": 1528,
-  "fully_reviewed_new_source_files": 41,
+  "unique_source_lines_direct_reviewed": 1556,
+  "fully_reviewed_new_source_files": 42,
   "nonoverlap": true,
   "changed_existing_pinned_paths": "46 modified pinned eligible files, structural-only inventory docs/audits/issue267-v2-post-pin-tree-drift-20261105-post-D2-035.json",
   "new_sql_migrations": "1 new migration structural-only; coordinate #96",
@@ -561,9 +575,9 @@
       "subtract_phantom_records": 4
     }
   ],
-  "last_review_batch": "D2-041",
-  "last_review_source_commit": "18be0586921fc572178df6929ecd7a98278dd710",
-  "last_review_note": "D2-040/041: 67 new physical source lines in two post-pin immutable ZIP Python tests directly AI reviewed, 8/8 isolated tests PASSED from four hash-matched source blobs; original pinned absent; global drift/100% inventories remain incomplete.",
+  "last_review_batch": "D2-042",
+  "last_review_source_commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+  "last_review_note": "D2-042 28 individually read current source lines: tests/helpers/release-published-restoration.mjs, prior Nov5 23-line version separately compared, dynamic Git+queue provenance discussed; no proven active defect or runtime changes. Remaining post-pin drift and both frozen/current 100% incomplete.",
   "live_source_blob_revalidations": [
     {
       "path": "scripts/release/request-encrypted-backup.mjs",
