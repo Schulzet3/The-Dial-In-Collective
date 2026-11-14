@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Issue #33 R191: two EXACT selected original603 official coffees, not full-corpus certification.
-import {readFileSync,writeFileSync} from 'node:fs';
+import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
 import {resolve,join} from 'node:path';
 import {createHash} from 'node:crypto';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
@@ -13,6 +13,7 @@ const dir=resolve(process.env.DIC_ISSUE33_FOCUSED_PUBLIC_DIR||'.'), errors=[],ca
  {n:276,url:'https://readysetcoffee.com/products/honduras-manos-de-mujer-organic-fair-trade',h1:'Honduras Manos de Mujer, Organic, Fair Trade',
  notes:['hazelnut','orange blossom','agave'],country:'Honduras',process:'Honey',roast:'Medium',feet:'4,000',metres:'1219',variety:['Bourbon','Catuai','Caturra','Typica']}
 ];
+mkdirSync(dir,{recursive:true});
 const check=(yes,reason)=>{if(!yes)errors.push(reason);};
 let summary={};try{summary=JSON.parse(readFileSync(join(dir,'focused-current-evidence.json'),'utf8'))}catch(e){errors.push('missing_evidence:'+e.message)}
 check(JSON.stringify(summary.case_numbers)==='[275,276]'&&summary.records?.length===2,'two_selected_cases_only');
@@ -31,12 +32,12 @@ for(const c of cases){
  check(rec.status==='FETCHED'&&rec.parser_ok===true&&rec.official_url===c.url&&rec.final_url===c.url,'official_fetch_selected_'+c.n);
  check(html.length>1000&&rec.html_bytes===html.length&&rec.html_sha256===sha(html),'raw_html_hash_'+c.n);
  check(headings.includes(c.h1)&&rec.selected_heading_identity_verified===true,'current_selected_h1_'+c.n);
- check(actual.ok===true&&String(f.name||'').includes('Manos de Mujer'=== (c.n===276)?'Manos de Mujer':'Guatemala Antigua Los Volcanes'),'real_parser_name_'+c.n);
+ check(actual.ok===true&&String(f.name||'').includes(c.n===276?'Manos de Mujer':'Guatemala Antigua Los Volcanes'),'real_parser_name_'+c.n);
  for(const x of c.notes)check(note.includes(x),'selected_tasting_'+c.n+'_'+x);
  check(f.roast_level===c.roast,'selected_roast_'+c.n);
  check(new RegExp(c.process,'i').test(String(f.process||'')),'selected_process_'+c.n);
  check(new RegExp(c.country,'i').test(String(f.origin||'')),'selected_origin_'+c.n);
- check(clean.includes(c.feet+' Feet')||new RegExp(c.feet.replace(',','')+'\s*Feet','i').test(clean.replace(/,/g,'')),'selected_feet_literal_'+c.n);
+ check(new RegExp(c.feet.replace(',','[,]?')+String.raw`\s*Feet`,'i').test(clean),'selected_feet_literal_'+c.n);
  check(String(f.elevation_m||'').includes(c.metres),'converted_feet_not_metres_'+c.n);
  for(const v of c.variety)check(String(f.variety||'').includes(v),'selected_variety_'+c.n+'_'+v);
  check(rec.add_coffee_ui_rendered===true&&rec.source_review_rendered===true,'explicit_Add_Coffee_Source_Review_'+c.n);
