@@ -13976,20 +13976,30 @@
       "issue": 33,
       "pr": null,
       "title": "Preserve post-READY original603 #275-276 unnamed-grower correction in development only; exclude from owner-frozen READY7 release",
-      "state": "IN_PROGRESS",
+      "state": "READY",
       "merged_source_sha": "4c7bde4d3325bcee31ab0a25ade050d065a1735e",
       "scope_paths": [
         "src/server/coffee-page-metadata.mjs"
       ],
       "tests": [
-        "R191 correction merged 4c7bde4d3325bcee31ab0a25ade050d065a1735e on 2026-11-14T06:11:41Z after last selected #33 Proud Mary READY merge 48379dc5a6e34c1dc0b6d7e97c3392dea56b85bf. Official source and focused tests noted in merged commit; exact isolated READY7 does not claim R191 as included or separately READY."
+        "R191 correction merged 4c7bde4d3325bcee31ab0a25ade050d065a1735e on 2026-11-14T06:11:41Z after last selected #33 Proud Mary READY merge 48379dc5a6e34c1dc0b6d7e97c3392dea56b85bf. Official source and focused tests noted in merged commit; exact isolated READY7 does not claim R191 as included or separately READY.",
+        "Independent exact PR-head 49efeb9d852611661964c712ca62cd9678a398c0: approval 43564764390, Node/lint 43564764551, cloud/mobile 43564764622, SQL 43564764625 SUCCESS (five required statuses); focused direct official #275/#276 43564764502 SUCCESS. Frozen603 SKIPPED, not counted.",
+        "Exact first-parent merge 4c7bde4d3325bcee31ab0a25ade050d065a1735e: metadata blob 31de44b9a1242d129ec9ff1ff2cea6dd75b87107, eight-case test blob c851c5de8d7c278830fece4b919dea967a180e70, official checker blob a0a36dba56772df19b53e9ae8145cd459b97b12f all MATCH PR-head. Merged Node 43565132362, cloud 43565132210, approval 43565132296, exact official 43565132307 SUCCESS. Required earlier producer guard is retained in R198's independently READY pinned coffee-page-metadata blob; no R192/newer code accepted."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "The owner-authorized READY7 release efe168127c1adc5f56eb55f6422a8e7726e6a0e2 / Netlify 6af7ff20849b938bd9ceafbe was already deployed with R191 deliberately excluded. Old instruction to freeze a future READY7 candidate is historical, not pending. Independently test/certify R191 exact source before any new READY promotion."
+      "ci_runs": [
+        43564764390,
+        43564764551,
+        43564764622,
+        43564764625,
+        43564764502,
+        43565132362,
+        43565132210,
+        43565132296,
+        43565132307
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "This row tracks ONLY later R191 original603 selected unnamed-grower source edits, not older R180/R181/R187/R188/Proud Mary independently READY corrections. Retain R191 unchanged on development and in immutable history; no production SQL/Auth/Netlify writes. Owner selected 7 preexisting READY items at live preflight SHA."
+      "notes": "This row tracks ONLY later R191 original603 selected unnamed-grower source edits, not older R180/R181/R187/R188/Proud Mary independently READY corrections. Retain R191 unchanged on development and in immutable history; no production SQL/Auth/Netlify writes. Owner selected 7 preexisting READY items at live preflight SHA.\n2026-11-14: independently source/CI-verified predecessor to R198, READY SOURCE ONLY, no production, tested source/merge Git blob identity; R192 unfinished excluded."
     },
     {
       "id": "DIC-Q-33-r192-redhouse-selected-narrative-review",
@@ -16737,6 +16747,15 @@
       "release_sha": "69b066171b64a54f92d828ce99c51f29afb32780",
       "netlify_deploy_id": "6af82c096b094d3dd36485b7",
       "evidence": "Exact source 7bee5534d45649179b759f88135c8457957b856a five GitHub CI jobs SUCCESS (approval 43581091127, validate 43581091126, cloud+mobile 43581091206, SQL 43581091190), one packaged build SUCCESS; source-isolated exactly 4 app files/zero workflows and zero SQL migration changes; release controller 43581459754 SUCCESS, nonforce Git 69b066171b64a54f92d828ce99c51f29afb32780, Netlify 6af82c096b094d3dd36485b7 READY/current published 2026-11-14T09:38:33.549Z with 4 expected functions, zero scanned secret matches. Eight unfinished queue items excluded."
+    },
+    {
+      "date": "2026-11-14",
+      "issue": 33,
+      "item_id": "DIC-Q-33-r191-275-276-post-ready-unnamed-growers",
+      "state": "READY",
+      "source_sha": "4c7bde4d3325bcee31ab0a25ade050d065a1735e",
+      "production_deployed": false,
+      "evidence": "Independent exact PR-head 49efeb9d852611661964c712ca62cd9678a398c0: approval 43564764390, Node/lint 43564764551, cloud/mobile 43564764622, SQL 43564764625 SUCCESS (five required statuses); focused direct official #275/#276 43564764502 SUCCESS. Frozen603 SKIPPED, not counted. Exact first-parent merge 4c7bde4d3325bcee31ab0a25ade050d065a1735e: metadata blob 31de44b9a1242d129ec9ff1ff2cea6dd75b87107, eight-case test blob c851c5de8d7c278830fece4b919dea967a180e70, official checker blob a0a36dba56772df19b53e9ae8145cd459b97b12f all MATCH PR-head. Merged Node 43565132362, cloud 43565132210, approval 43565132296, exact official 43565132307 SUCCESS. Required earlier producer guard is retained in R198's independently READY pinned coffee-page-metadata blob; no R192/newer code accepted."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
