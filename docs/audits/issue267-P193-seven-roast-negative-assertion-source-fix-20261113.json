@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "workstream": "T17D",
+  "change_type": "P193_SQL_REGRESSION_TEST_SAFETY_FIX_DEVELOPMENT_ONLY",
+  "source": {
+    "repository": "Schulzet3/The-Dial-In-Collective",
+    "parent_development_sha": "5c85c894273e9e7c8690fb43407e886aab5e0c7e",
+    "preflight_git_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "preflight_immutable_content_verified": true,
+    "file": "supabase/tests/seven_roast_levels.sql",
+    "original_pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "source_before_git_blob": "071e3471634c7a8d45e546bcdf30e97115c17221",
+    "source_after_git_blob": "181b48da95d7bf9b46495118c92a4674381472b2",
+    "source_before_lines": 39,
+    "source_after_lines": 40,
+    "original_review_receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F182-600-719-P193-001-039-P194-001-070-LIVE017-20261113-T17B.json"
+  },
+  "reproduction": {
+    "kind": "NODE22_DETERMINISTIC_CONTROL_FLOW_MICROCASE_NO_DATABASE_ACCESS",
+    "description": "After first CHECK violation rejected=true. If second check unexpectedly accepts invalid Ultra-Medium, no new exception runs; rejected stays true; original IF NOT rejected fails to raise. Reset before second attempt changes that path to raise.",
+    "node_version": "22.16.0",
+    "baseline_second_rejects_false": "FALSE_PASS",
+    "fixed_second_rejects_false": "second invalid unexpectedly accepted",
+    "baseline_second_rejects_true": "FALSE_PASS (no false rejection but cannot distinguish)",
+    "fixed_second_rejects_true": "PASS",
+    "actual_sql_in_postgres": "NOT_YET_RUN"
+  },
+  "change": {
+    "new_line_1_based": 23,
+    "new_literal": " rejected:=false;",
+    "classification": "SQL_TEST_SENTINEL_RESET",
+    "semantics": "Clear rejection witness before independent second unsupported roast label test; guarantees later check observes second attempt rather than previous failure",
+    "quality": "One-line minimal isolated correction",
+    "risk": "No production SQL or user data changed; only test source will execute against isolated disposable database in GitHub CI",
+    "duplicate_status": "Second reset intentionally distinct from first reset at line16",
+    "obsolete_status": "Active negative assertion; not dead",
+    "testability": "CI isolated SQL check plus exact PR-head governance and merged-source checks; cannot infer from code alone",
+    "fix_opportunity": "Implemented one-line test-strength fix, no constraint/migration/application modifications",
+    "locked_fit": "Preserves owner-Locked seven canonical roast levels and rejects obsolete Light-Medium and unsupported Ultra-Medium"
+  },
+  "scope": {
+    "issue509_coordination_comment": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509#issuecomment-6873076713",
+    "no_owner_review_required_for_development_only_test_change": true,
+    "no_production_or_provider_writes": true,
+    "no_test_accounts_created": true,
+    "no_deployment": true
+  },
+  "evidence_status": {
+    "source_diff": "ONE_INSERTION_ONLY_BLOB_CONFIRMED",
+    "node22_logic": "PASS",
+    "hosted_sql": "PENDING",
+    "pr_head": "PENDING",
+    "merged_source": "PENDING"
+  },
+  "issue267_state": "OPEN_INCOMPLETE",
+  "next_audit_source": "F183:1/P195:1",
+  "live_postpin_delta_line_count_this_fix": 1
+}

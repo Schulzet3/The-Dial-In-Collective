@@ -30,8 +30,8 @@ test('farm and explicitly named grower remain separate source facts',()=>{
 });
 test('catalog fallback disclosure never claims that saved fields were just fetched from a webpage',()=>{
  const html=coffeeUrlPreviewMarkup({ok:true,source:'approved_catalog',fields:{name:'Coffee'},refresh_reason:'source_unavailable'});
- assert.match(html,/Previously Approved Coffee Details/);assert.match(html,/current roaster page could not be rechecked/);
- assert.doesNotMatch(html,/Suggested Details From Webpage|Official Source Preview/);
+ assert.match(html,/Autofill Results/);assert.match(html,/current roaster page could not be rechecked/);
+ assert.doesNotMatch(html,/Unverified Page|Official Source Preview|Approved Catalog|Suggested Details From Webpage/);
 });
 test('explicit recommendation components cannot donate facts even without a heading',()=>{
  const r=parse('<p>Origin: Ethiopia</p><product-recommendations><p>Variety: Pacamara</p></product-recommendations><section><h2>About this coffee</h2><p>Producer: Rosa Martinez</p></section>');

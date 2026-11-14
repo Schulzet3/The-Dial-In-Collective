@@ -1,80 +1,51 @@
 {
   "schema_version": 1,
-  "release_id": "DIC-20261114-READY7-01",
-  "tested_source_sha": "f0b8a6a17148ac6817ca52184c881a369c798c6a",
-  "previous_release_head_sha": "ad836aae4d3f3e2c1af83e7d5363887281273275",
-  "claimed_at_utc": "2026-11-14T06:26:35.895Z",
+  "release_id": "DIC-20261114-READY4-02",
+  "tested_source_sha": "7bee5534d45649179b759f88135c8457957b856a",
+  "previous_release_head_sha": "efe168127c1adc5f56eb55f6422a8e7726e6a0e2",
+  "claimed_at_utc": "2026-11-14T09:38:10.610Z",
   "status": "GIT_CONNECTED_BUILD_PENDING_NETLIFY_PROVIDER_READBACK",
   "granted_single_publication": true,
   "approved_ready_queue_items": [
     {
-      "id": "DIC-Q-33-r180-255-smallholder-locality-review-only",
-      "issue": 33,
-      "title": "Preserve current Others #255 exact selected smallholder growing communities as review-only provenance",
-      "merged_source_sha": "1e1d20bf2f95da0ab0d1c34e75c6b4adaedad401",
-      "scope_paths": [
-        "src/server/coffee-page-metadata.mjs",
-        "src/server/coffee-selected-smallholder-communities.mjs"
-      ]
-    },
-    {
-      "id": "DIC-Q-33-r181-257-selected-narrative-context",
-      "issue": 33,
-      "title": "Preserve extra literal selected Hacienda Rio Negro toffee narrative as Source Review context only",
-      "merged_source_sha": "89fb24b2a24a13c4cb6f32e25a15bf43cde974bc",
-      "scope_paths": [
-        "src/server/coffee-selected-description-sensory.mjs",
-        "src/server/coffee-page-metadata.mjs"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-r242-shot-scalar-measurement-integrity",
-      "issue": 455,
-      "title": "Validate new Log Shot dose, yield, time and optional temperature as genuine scalar measurements",
-      "merged_source_sha": "0095369dce8f651bbfdefe6fc3ed1c986883e44a",
-      "scope_paths": [
-        "site/lib/model.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-33-r187-263-selected-floral-aroma-source-review",
-      "issue": 33,
-      "title": "Preserve exact current Quartermaine Costa Rica #263 floral aroma as source-bound Source Review context without changing canonical tasting notes",
-      "merged_source_sha": "b4421be66cf970b839981c9f400574d683813e85",
-      "scope_paths": [
-        "src/server/coffee-selected-description-sensory.mjs",
-        "src/server/coffee-page-metadata.mjs"
-      ]
-    },
-    {
-      "id": "DIC-Q-33-r188-272-selected-nongrowing-initiative-producer",
-      "issue": 33,
-      "title": "Keep Quills Natural Guamo #272 Reforest Project conservation initiative as review-only, not a coffee producer",
-      "merged_source_sha": "d3d53f9805889ed316a98783d6c42c81ab98430b",
-      "scope_paths": [
-        "src/server/coffee-page-metadata.mjs"
-      ]
-    },
-    {
-      "id": "DIC-Q-33-proudmary-structured-title-20261113",
-      "issue": 33,
-      "title": "Split verified country | coffee | variety | process product titles without losing the exact selected source identity",
-      "merged_source_sha": "48379dc5a6e34c1dc0b6d7e97c3392dea56b85bf",
-      "scope_paths": [
-        "src/server/coffee-identity-evidence.mjs",
-        "src/server/coffee-page-metadata.mjs",
-        "src/server/coffee-shopify-ajax.mjs"
-      ]
-    },
-    {
-      "id": "DIC-Q-2592-coffee-conflict-tap-to-fill",
-      "issue": 2592,
-      "title": "Tap sourced conflicting coffee alternatives to fill only the selected Add Coffee field",
-      "merged_source_sha": "2c6eb1913c0a8e609d4d048d6130e53d8bd7b64f",
+      "id": "DIC-Q-2621-add-coffee-difference-tap-preview-cleanup",
+      "issue": 2621,
+      "title": "Make post-add coffee differences tappable; remove redundant New Coffee source/detail sections",
+      "merged_source_sha": "3875e72cf04b8c0d9038d031035c61ef7c06a83f",
       "scope_paths": [
         "site/cloud/coffee-url-autofill.js",
         "site/cloud/main.js",
         "site/visual.css"
+      ]
+    },
+    {
+      "id": "DIC-Q-2633-remove-url-source-badges",
+      "issue": 2633,
+      "title": "Remove obsolete Unverified Page and verified-roaster badges/copy from New Coffee",
+      "merged_source_sha": "5a295c08219b91426971227153893e8749deeaa3",
+      "scope_paths": [
+        "site/cloud/coffee-url-autofill.js",
+        "site/cloud/coffee-match-ui.js",
+        "site/cloud/main.js",
+        "site/visual.css"
+      ]
+    },
+    {
+      "id": "DIC-Q-2640-coffee-conflict-copy-one-line",
+      "issue": 2640,
+      "title": "Replace long source-conflict heading/paragraph with exact one-line tap-to-fill guidance",
+      "merged_source_sha": "f2e0036884366930112c0ce0b6e99a76b4df5748",
+      "scope_paths": [
+        "site/cloud/coffee-url-autofill.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-r253-slow-feed-recommendation-use-attribution",
+      "issue": 455,
+      "title": "Discard stale Use Recommendation source attribution when Slow Feed mode changes",
+      "merged_source_sha": "c5a149d1839d9f0a6a1bf04dd2149011bf175ec5",
+      "scope_paths": [
+        "site/cloud/main.js"
       ]
     }
   ]

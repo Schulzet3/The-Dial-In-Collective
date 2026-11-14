@@ -78,8 +78,9 @@ test('all 77 saved real current official source parses render in actual Add Coff
   const html=coffeeUrlPreviewMarkup({ok:true,source:'official_roaster_product_metadata',
    source_url:r.original_url,fields:r.parsed_current_fields,conflicts:r.conflicts});
   assert.match(html,/coffee-url-preview/);
-  assert.match(html,/Details Found On Official Roaster Page/);
-  if(r.conflicts?.length){assert.match(html,/Review conflicting details/);flagged++;}
+  assert.match(html,/Autofill Results/);
+  assert.doesNotMatch(html,/Unverified Page|Official Source Preview|Approved Catalog/);
+  if(r.conflicts?.length){assert.match(html,/Tap the correct option to autofill, or type a value in the field/);flagged++;}
  }
  assert.equal(flagged,15);
 });

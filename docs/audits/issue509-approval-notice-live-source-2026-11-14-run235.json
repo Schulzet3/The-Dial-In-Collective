@@ -1,0 +1,611 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 235,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "initial_development_sha": "61e6ed07867508d8b5344b3b8042a09258a4649f",
+    "verified_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d"
+  },
+  "scope": "Direct re-review of 8 complete live SQL source bodies, EXECUTE grants, source migration, 4 tables and notice trigger, application provider drift, active Edge hashes and current advisors. Numeric ranks 801-880 are in separate paired receipt.",
+  "source_migration_path": "supabase/migrations/20261112135900_dic_member_approval_notices.sql",
+  "source_migration_blob_sha": "ce17e3801d8d4e100e8ec1fb95fa5a723ad3a7a4",
+  "source_migration_complete_lines": 139,
+  "source_migration_semantic_parity": "Eight live routine bodies and four table/trigger core definitions retain source-migration admission/retry/privacy constraints; byte-for-byte pg_get_functiondef rendering is not asserted equivalent to SQL text.",
+  "sql_functions": "SELECT n.nspname AS schema,p.proname AS name,pg_get_function_identity_arguments(p.oid) AS args,pg_get_functiondef(p.oid) AS full_ddl,md5(pg_get_functiondef(p.oid)) AS md5,p.prosecdef AS security_definer,p.proconfig AS configuration,p.proowner::regrole::text AS owner,has_function_privilege('anon',p.oid,'EXECUTE') AS anon_execute,has_function_privilege('authenticated',p.oid,'EXECUTE') AS member_execute,has_function_privilege('service_role',p.oid,'EXECUTE') AS service_execute,has_schema_privilege('anon',n.oid,'USAGE') AS anon_schema_usage,has_schema_privilege('authenticated',n.oid,'USAGE') AS member_schema_usage FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE (n.nspname='public' AND p.proname IN ('dic_member_approval_claim','dic_member_approval_claim_poll','dic_member_approval_finish','dic_admin_push_bootstrap_key','dic_admin_push_claim_poll','dic_admin_push_runtime_keys','dic_admin_push_snapshot')) OR (n.nspname='private' AND p.proname IN ('dic_enqueue_member_approval_notices')) ORDER BY n.nspname,p.proname,p.oid",
+  "complete_current_sql_functions": [
+    {
+      "schema": "private",
+      "name": "dic_enqueue_member_approval_notices",
+      "args": "",
+      "full_ddl": "CREATE OR REPLACE FUNCTION private.dic_enqueue_member_approval_notices()\n RETURNS trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n if new.action='approve' and new.member_id is not null then\n  insert into private.dic_member_approval_deliveries(event_id,member_id,channel)\n  values(new.id,new.member_id,'email'),(new.id,new.member_id,'push')\n  on conflict(event_id,channel) do nothing;\n end if;\n return new;\nend $function$\n",
+      "md5": "36defca729c42b4ec35d4d2a4e1cfea5",
+      "security_definer": true,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "owner": "postgres",
+      "anon_execute": false,
+      "member_execute": false,
+      "service_execute": false,
+      "anon_schema_usage": false,
+      "member_schema_usage": true
+    },
+    {
+      "schema": "public",
+      "name": "dic_admin_push_bootstrap_key",
+      "args": "p_public_key text, p_private_key text",
+      "full_ddl": "CREATE OR REPLACE FUNCTION public.dic_admin_push_bootstrap_key(p_public_key text, p_private_key text)\n RETURNS text\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare existing_key text; secret_id uuid;\nbegin\n perform pg_catalog.pg_advisory_xact_lock(1938,20261112);\n select r.vapid_public into existing_key\n from private.dic_admin_push_runtime r where r.singleton=true;\n if existing_key is not null then return existing_key; end if;\n if p_public_key !~ '^[A-Za-z0-9_-]{87}$' or p_private_key !~ '^[A-Za-z0-9_-]{43}$'\n then raise exception 'Invalid VAPID key material'; end if;\n secret_id:=vault.create_secret(\n  p_private_key,'dic_admin_push_vapid_private_20261112',\n  'Only service-role Edge Functions may decrypt this VAPID signing key');\n insert into private.dic_admin_push_runtime(singleton,vapid_public,vault_secret_id)\n values(true,p_public_key,secret_id);\n return p_public_key;\nend;\n$function$\n",
+      "md5": "637217a555887f78d812deb347455e4d",
+      "security_definer": true,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "owner": "postgres",
+      "anon_execute": false,
+      "member_execute": false,
+      "service_execute": true,
+      "anon_schema_usage": true,
+      "member_schema_usage": true
+    },
+    {
+      "schema": "public",
+      "name": "dic_admin_push_claim_poll",
+      "args": "",
+      "full_ddl": "CREATE OR REPLACE FUNCTION public.dic_admin_push_claim_poll()\n RETURNS boolean\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare won boolean;\nbegin\n update private.dic_admin_push_runtime set last_polled_at=now()\n where singleton=true\n   and (last_polled_at is null or last_polled_at<=now()-interval '4 minutes')\n returning true into won;\n return coalesce(won,false);\nend;\n$function$\n",
+      "md5": "e3bbf384effe7e29b5cffd89135c0666",
+      "security_definer": true,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "owner": "postgres",
+      "anon_execute": false,
+      "member_execute": false,
+      "service_execute": true,
+      "anon_schema_usage": true,
+      "member_schema_usage": true
+    },
+    {
+      "schema": "public",
+      "name": "dic_admin_push_runtime_keys",
+      "args": "",
+      "full_ddl": "CREATE OR REPLACE FUNCTION public.dic_admin_push_runtime_keys()\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare info jsonb;\nbegin\n select jsonb_build_object('publicKey',r.vapid_public,'privateKey',d.decrypted_secret)\n into info from private.dic_admin_push_runtime r\n join vault.decrypted_secrets d on d.id=r.vault_secret_id\n where r.singleton=true;\n return info;\nend;\n$function$\n",
+      "md5": "16fd1cc2a0cbf0110cd253e661c4cdef",
+      "security_definer": true,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "owner": "postgres",
+      "anon_execute": false,
+      "member_execute": false,
+      "service_execute": true,
+      "anon_schema_usage": true,
+      "member_schema_usage": true
+    },
+    {
+      "schema": "public",
+      "name": "dic_admin_push_snapshot",
+      "args": "",
+      "full_ddl": "CREATE OR REPLACE FUNCTION public.dic_admin_push_snapshot()\n RETURNS jsonb\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\n select jsonb_build_object(\n  'admin_ids',coalesce((\n   select jsonb_agg(a.owner_id order by a.owner_id)\n   from private.app_admins a join private.beta_members m on m.owner_id=a.owner_id\n   where m.admitted_at is not null and m.enabled\n  ),'[]'::jsonb),\n  'tokens',coalesce((\n   select jsonb_agg(t.token order by t.token)\n   from (\n    select 'signup:'||m.owner_id::text as token\n    from private.beta_members m\n    join auth.users u on u.id=m.owner_id\n    where m.admitted_at is null and m.signup_review_state='pending'\n      and u.email_confirmed_at is not null\n    union\n    select 'coffee:'||s.id::text from public.coffee_submissions s\n      where s.status in ('pending','conflict')\n    union\n    select 'delete:'||op.id::text from private.dic_admin_account_delete_operations op\n      where op.phase<>'completed'\n   ) t\n  ),'[]'::jsonb)\n );\n$function$\n",
+      "md5": "c6c2c674fa8358a3dd4946a3c0f9d8ed",
+      "security_definer": true,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "owner": "postgres",
+      "anon_execute": false,
+      "member_execute": false,
+      "service_execute": true,
+      "anon_schema_usage": true,
+      "member_schema_usage": true
+    },
+    {
+      "schema": "public",
+      "name": "dic_member_approval_claim",
+      "args": "p_channel text, p_limit integer",
+      "full_ddl": "CREATE OR REPLACE FUNCTION public.dic_member_approval_claim(p_channel text, p_limit integer DEFAULT 20)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare batches jsonb;\nbegin\n if p_channel not in ('email','push') or p_channel is null or\n    p_limit is null or p_limit not between 1 and 20 then\n  raise exception using errcode='22023',message='Invalid delivery channel/limit';\n end if;\n with chosen as (\n  select d.event_id,d.channel\n  from private.dic_member_approval_deliveries d\n  join private.beta_members m on m.owner_id=d.member_id\n  join auth.users u on u.id=d.member_id\n  where d.channel=p_channel and m.signup_review_state='approved'\n   and m.enabled and m.admitted_at is not null\n   and u.email_confirmed_at is not null\n   and ((d.state='pending' and d.next_attempt_at<=now())\n    or (d.state='sending' and d.lease_until < now()))\n  order by d.event_id limit p_limit for update of d skip locked\n ), claimed as (\n  update private.dic_member_approval_deliveries d\n  set state='sending',attempt_count=d.attempt_count+1,\n      claim_token=gen_random_uuid(),lease_until=now()+interval '2 minutes'\n  from chosen c where d.event_id=c.event_id and d.channel=c.channel\n  returning d.event_id,d.member_id,d.claim_token\n )\n select coalesce(jsonb_agg(jsonb_build_object(\n   'eventId',c.event_id,'claimToken',c.claim_token,\n   'email',case when p_channel='email' then left(u.email,254) else null end,\n   'endpoints',case when p_channel='push' then (\n    select coalesce(jsonb_agg(jsonb_build_object('hash',s.endpoint_hash,'endpoint',s.endpoint)),'[]'::jsonb)\n    from public.dic_member_approval_push_subscriptions s\n    where s.owner_id=c.member_id and s.expires_at>now()\n      and s.last_sent_event_id<c.event_id\n   ) else '[]'::jsonb end\n  ) order by c.event_id),'[]'::jsonb) into batches\n from claimed c join auth.users u on u.id=c.member_id;\n return batches;\nend $function$\n",
+      "md5": "b0d1e8d2622852b6b930def5c8a171d9",
+      "security_definer": true,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "owner": "postgres",
+      "anon_execute": false,
+      "member_execute": false,
+      "service_execute": true,
+      "anon_schema_usage": true,
+      "member_schema_usage": true
+    },
+    {
+      "schema": "public",
+      "name": "dic_member_approval_claim_poll",
+      "args": "",
+      "full_ddl": "CREATE OR REPLACE FUNCTION public.dic_member_approval_claim_poll()\n RETURNS boolean\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n update private.dic_member_approval_poll_gate set last_polled_at=now()\n where singleton=true and last_polled_at < now()-interval '4 minutes';\n return found;\nend $function$\n",
+      "md5": "b94ddc2223993aa7685faf482d3871e4",
+      "security_definer": true,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "owner": "postgres",
+      "anon_execute": false,
+      "member_execute": false,
+      "service_execute": true,
+      "anon_schema_usage": true,
+      "member_schema_usage": true
+    },
+    {
+      "schema": "public",
+      "name": "dic_member_approval_finish",
+      "args": "p_event_id bigint, p_channel text, p_claim_token uuid, p_outcome text",
+      "full_ddl": "CREATE OR REPLACE FUNCTION public.dic_member_approval_finish(p_event_id bigint, p_channel text, p_claim_token uuid, p_outcome text)\n RETURNS boolean\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n if p_channel not in ('email','push') or p_outcome not in ('sent','skipped','retry')\n   or p_claim_token is null or p_event_id is null then\n  raise exception using errcode='22023',message='Invalid delivery receipt';\n end if;\n update private.dic_member_approval_deliveries d\n set state=case when p_outcome='retry' then 'pending' else p_outcome end,\n     claim_token=null,lease_until=null,\n     completed_at=case when p_outcome='retry' then null else now() end,\n     next_attempt_at=case when p_outcome='retry' then\n       now()+least(60,power(2,least(d.attempt_count,5))::integer)*interval '1 minute'\n       else d.next_attempt_at end\n where d.event_id=p_event_id and d.channel=p_channel and\n   d.state='sending' and d.claim_token=p_claim_token;\n return found;\nend $function$\n",
+      "md5": "e92ba8e17ab274bcab1a564475d16f28",
+      "security_definer": true,
+      "configuration": [
+        "search_path=\"\""
+      ],
+      "owner": "postgres",
+      "anon_execute": false,
+      "member_execute": false,
+      "service_execute": true,
+      "anon_schema_usage": true,
+      "member_schema_usage": true
+    }
+  ],
+  "individual_semantic_verdicts": [
+    {
+      "id": "private.dic_enqueue_member_approval_notices()",
+      "source_md5": "36defca729c42b4ec35d4d2a4e1cfea5",
+      "source_chars": 460,
+      "disposition": "REVIEWED_CURRENT_COMPLETE_SOURCE_NO_NEW_DEFECT",
+      "first_time_word_credit": 0,
+      "review": "AFTER INSERT event trigger inserts independent email/push pending deliveries only for approved signup review, unique event/channel conflict handling. No app EXECUTE."
+    },
+    {
+      "id": "public.dic_admin_push_bootstrap_key(p_public_key text, p_private_key text)",
+      "source_md5": "637217a555887f78d812deb347455e4d",
+      "source_chars": 931,
+      "disposition": "REVIEWED_CURRENT_COMPLETE_SOURCE_NO_NEW_DEFECT",
+      "first_time_word_credit": 0,
+      "review": "Service-only immutable singleton; validates VAPID shape, stores private key encrypted by Vault; no private values accessed."
+    },
+    {
+      "id": "public.dic_admin_push_claim_poll()",
+      "source_md5": "e3bbf384effe7e29b5cffd89135c0666",
+      "source_chars": 414,
+      "disposition": "REVIEWED_CURRENT_COMPLETE_SOURCE_NO_NEW_DEFECT",
+      "first_time_word_credit": 0,
+      "review": "Service-only atomic 4-minute poll throttle; source has no member-recipient payload."
+    },
+    {
+      "id": "public.dic_admin_push_runtime_keys()",
+      "source_md5": "16fd1cc2a0cbf0110cd253e661c4cdef",
+      "source_chars": 427,
+      "disposition": "REVIEWED_CURRENT_COMPLETE_SOURCE_NO_NEW_DEFECT",
+      "first_time_word_credit": 0,
+      "review": "Service-only decryptor accesses Vault decrypted_secrets; actual secrets never retrieved; signed-in HTTP behavior NOT tested."
+    },
+    {
+      "id": "public.dic_admin_push_snapshot()",
+      "source_md5": "c6c2c674fa8358a3dd4946a3c0f9d8ed",
+      "source_chars": 1007,
+      "disposition": "REVIEWED_CURRENT_COMPLETE_SOURCE_NO_NEW_DEFECT",
+      "first_time_word_credit": 0,
+      "review": "Service-only snapshot builds server-side admitted admin IDs and actionable approval/coffee/delete tokens, no private rows queried in this audit."
+    },
+    {
+      "id": "public.dic_member_approval_claim(p_channel text, p_limit integer)",
+      "source_md5": "b0d1e8d2622852b6b930def5c8a171d9",
+      "source_chars": 1920,
+      "disposition": "REVIEWED_CURRENT_COMPLETE_SOURCE_NO_NEW_DEFECT",
+      "first_time_word_credit": 0,
+      "review": "Service-only, enforces approved/enabled/admitted and verified Auth email, 1–20 bounded claim, SKIP LOCKED lease and claim token, no member row export during this audit."
+    },
+    {
+      "id": "public.dic_member_approval_claim_poll()",
+      "source_md5": "b94ddc2223993aa7685faf482d3871e4",
+      "source_chars": 335,
+      "disposition": "REVIEWED_CURRENT_COMPLETE_SOURCE_NO_NEW_DEFECT",
+      "first_time_word_credit": 0,
+      "review": "Atomic service-only singleton DB poll gate rate-limited at four minutes; behavior source-confirmed, external delivery unverified."
+    },
+    {
+      "id": "public.dic_member_approval_finish(p_event_id bigint, p_channel text, p_claim_token uuid, p_outcome text)",
+      "source_md5": "e92ba8e17ab274bcab1a564475d16f28",
+      "source_chars": 1003,
+      "disposition": "REVIEWED_CURRENT_COMPLETE_SOURCE_NO_NEW_DEFECT",
+      "first_time_word_credit": 0,
+      "review": "Service-only, matches lease token/channel/event; distinct sent/skipped/retry, backoff bounded by 60 minutes."
+    }
+  ],
+  "complete_functions": 8,
+  "source_characters": 6497,
+  "table_sql": "SELECT jsonb_build_object('observed_at',now(),'tables',(SELECT jsonb_agg(jsonb_build_object('schema',n.nspname,'table',c.relname,'rls',c.relrowsecurity,'columns',(SELECT jsonb_agg(a.attname ORDER BY a.attnum) FROM pg_attribute a WHERE a.attrelid=c.oid AND a.attnum>0 AND NOT a.attisdropped),'constraints',(SELECT jsonb_agg(jsonb_build_object('name',co.conname,'type',co.contype,'definition',pg_get_constraintdef(co.oid)) ORDER BY co.conname) FROM pg_constraint co WHERE co.conrelid=c.oid),'indexes',(SELECT jsonb_agg(jsonb_build_object('name',ic.relname,'definition',pg_get_indexdef(ic.oid)) ORDER BY ic.relname) FROM pg_index i JOIN pg_class ic ON ic.oid=i.indexrelid WHERE i.indrelid=c.oid),'grants',(SELECT jsonb_agg(jsonb_build_object('role',g.grantee,'privilege',g.privilege_type) ORDER BY g.grantee,g.privilege_type) FROM information_schema.role_table_grants g WHERE g.table_schema=n.nspname AND g.table_name=c.relname AND g.grantee IN ('anon','authenticated','service_role')) ) ORDER BY n.nspname,c.relname) FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE (n.nspname,c.relname) IN (('public','dic_member_approval_push_subscriptions'),('private','dic_member_approval_deliveries'),('private','dic_member_approval_poll_gate'),('private','dic_signup_review_events'))),'trigger',(SELECT jsonb_agg(jsonb_build_object('name',t.tgname,'definition',pg_get_triggerdef(t.oid),'enabled',t.tgenabled,'source_md5',md5(pg_get_functiondef(t.tgfoid))) ORDER BY t.tgname) FROM pg_trigger t WHERE t.tgrelid='private.dic_signup_review_events'::regclass AND NOT t.tgisinternal)) AS evidence",
+  "tables_and_trigger": {
+    "tables": [
+      {
+        "rls": true,
+        "table": "dic_member_approval_deliveries",
+        "grants": [
+          {
+            "role": "service_role",
+            "privilege": "DELETE"
+          },
+          {
+            "role": "service_role",
+            "privilege": "INSERT"
+          },
+          {
+            "role": "service_role",
+            "privilege": "SELECT"
+          },
+          {
+            "role": "service_role",
+            "privilege": "UPDATE"
+          }
+        ],
+        "schema": "private",
+        "columns": [
+          "event_id",
+          "member_id",
+          "channel",
+          "state",
+          "attempt_count",
+          "claim_token",
+          "lease_until",
+          "next_attempt_at",
+          "completed_at",
+          "created_at"
+        ],
+        "indexes": [
+          {
+            "name": "dic_member_approval_claim_idx",
+            "definition": "CREATE INDEX dic_member_approval_claim_idx ON private.dic_member_approval_deliveries USING btree (channel, state, next_attempt_at, event_id)"
+          },
+          {
+            "name": "dic_member_approval_deliveries_pkey",
+            "definition": "CREATE UNIQUE INDEX dic_member_approval_deliveries_pkey ON private.dic_member_approval_deliveries USING btree (event_id, channel)"
+          }
+        ],
+        "constraints": [
+          {
+            "name": "dic_member_approval_deliveries_attempt_count_check",
+            "type": "c",
+            "definition": "CHECK (((attempt_count >= 0) AND (attempt_count <= 100000)))"
+          },
+          {
+            "name": "dic_member_approval_deliveries_channel_check",
+            "type": "c",
+            "definition": "CHECK ((channel = ANY (ARRAY['email'::text, 'push'::text])))"
+          },
+          {
+            "name": "dic_member_approval_deliveries_event_id_fkey",
+            "type": "f",
+            "definition": "FOREIGN KEY (event_id) REFERENCES private.dic_signup_review_events(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "dic_member_approval_deliveries_member_id_fkey",
+            "type": "f",
+            "definition": "FOREIGN KEY (member_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "dic_member_approval_deliveries_pkey",
+            "type": "p",
+            "definition": "PRIMARY KEY (event_id, channel)"
+          },
+          {
+            "name": "dic_member_approval_deliveries_state_check",
+            "type": "c",
+            "definition": "CHECK ((state = ANY (ARRAY['pending'::text, 'sending'::text, 'sent'::text, 'skipped'::text])))"
+          }
+        ]
+      },
+      {
+        "rls": true,
+        "table": "dic_member_approval_poll_gate",
+        "grants": [
+          {
+            "role": "service_role",
+            "privilege": "SELECT"
+          },
+          {
+            "role": "service_role",
+            "privilege": "UPDATE"
+          }
+        ],
+        "schema": "private",
+        "columns": [
+          "singleton",
+          "last_polled_at"
+        ],
+        "indexes": [
+          {
+            "name": "dic_member_approval_poll_gate_pkey",
+            "definition": "CREATE UNIQUE INDEX dic_member_approval_poll_gate_pkey ON private.dic_member_approval_poll_gate USING btree (singleton)"
+          }
+        ],
+        "constraints": [
+          {
+            "name": "dic_member_approval_poll_gate_pkey",
+            "type": "p",
+            "definition": "PRIMARY KEY (singleton)"
+          },
+          {
+            "name": "dic_member_approval_poll_gate_singleton_check",
+            "type": "c",
+            "definition": "CHECK ((singleton = true))"
+          }
+        ]
+      },
+      {
+        "rls": true,
+        "table": "dic_signup_review_events",
+        "grants": [
+          {
+            "role": "service_role",
+            "privilege": "DELETE"
+          },
+          {
+            "role": "service_role",
+            "privilege": "INSERT"
+          },
+          {
+            "role": "service_role",
+            "privilege": "REFERENCES"
+          },
+          {
+            "role": "service_role",
+            "privilege": "SELECT"
+          },
+          {
+            "role": "service_role",
+            "privilege": "TRIGGER"
+          },
+          {
+            "role": "service_role",
+            "privilege": "TRUNCATE"
+          },
+          {
+            "role": "service_role",
+            "privilege": "UPDATE"
+          }
+        ],
+        "schema": "private",
+        "columns": [
+          "id",
+          "member_id",
+          "actor_id",
+          "action",
+          "previous_state",
+          "reviewed_at"
+        ],
+        "indexes": [
+          {
+            "name": "dic_signup_review_events_pkey",
+            "definition": "CREATE UNIQUE INDEX dic_signup_review_events_pkey ON private.dic_signup_review_events USING btree (id)"
+          }
+        ],
+        "constraints": [
+          {
+            "name": "dic_signup_review_events_action_check",
+            "type": "c",
+            "definition": "CHECK ((action = ANY (ARRAY['approve'::text, 'reject'::text])))"
+          },
+          {
+            "name": "dic_signup_review_events_actor_id_fkey",
+            "type": "f",
+            "definition": "FOREIGN KEY (actor_id) REFERENCES auth.users(id) ON DELETE SET NULL"
+          },
+          {
+            "name": "dic_signup_review_events_member_id_fkey",
+            "type": "f",
+            "definition": "FOREIGN KEY (member_id) REFERENCES auth.users(id) ON DELETE SET NULL"
+          },
+          {
+            "name": "dic_signup_review_events_pkey",
+            "type": "p",
+            "definition": "PRIMARY KEY (id)"
+          }
+        ]
+      },
+      {
+        "rls": true,
+        "table": "dic_member_approval_push_subscriptions",
+        "grants": [
+          {
+            "role": "service_role",
+            "privilege": "DELETE"
+          },
+          {
+            "role": "service_role",
+            "privilege": "INSERT"
+          },
+          {
+            "role": "service_role",
+            "privilege": "REFERENCES"
+          },
+          {
+            "role": "service_role",
+            "privilege": "SELECT"
+          },
+          {
+            "role": "service_role",
+            "privilege": "TRIGGER"
+          },
+          {
+            "role": "service_role",
+            "privilege": "TRUNCATE"
+          },
+          {
+            "role": "service_role",
+            "privilege": "UPDATE"
+          }
+        ],
+        "schema": "public",
+        "columns": [
+          "endpoint_hash",
+          "owner_id",
+          "endpoint",
+          "expires_at",
+          "last_sent_event_id",
+          "created_at",
+          "updated_at"
+        ],
+        "indexes": [
+          {
+            "name": "dic_member_approval_push_owner_idx",
+            "definition": "CREATE INDEX dic_member_approval_push_owner_idx ON public.dic_member_approval_push_subscriptions USING btree (owner_id, expires_at)"
+          },
+          {
+            "name": "dic_member_approval_push_subscriptions_pkey",
+            "definition": "CREATE UNIQUE INDEX dic_member_approval_push_subscriptions_pkey ON public.dic_member_approval_push_subscriptions USING btree (endpoint_hash)"
+          }
+        ],
+        "constraints": [
+          {
+            "name": "dic_member_approval_push_subscriptions_endpoint_check",
+            "type": "c",
+            "definition": "CHECK (((length(endpoint) >= 20) AND (length(endpoint) <= 2048)))"
+          },
+          {
+            "name": "dic_member_approval_push_subscriptions_endpoint_hash_check",
+            "type": "c",
+            "definition": "CHECK ((endpoint_hash ~ '^[0-9a-f]{64}$'::text))"
+          },
+          {
+            "name": "dic_member_approval_push_subscriptions_last_sent_event_id_check",
+            "type": "c",
+            "definition": "CHECK ((last_sent_event_id >= 0))"
+          },
+          {
+            "name": "dic_member_approval_push_subscriptions_owner_id_fkey",
+            "type": "f",
+            "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "dic_member_approval_push_subscriptions_pkey",
+            "type": "p",
+            "definition": "PRIMARY KEY (endpoint_hash)"
+          }
+        ]
+      }
+    ],
+    "trigger": [
+      {
+        "name": "dic_enqueue_member_approval_notices_on_review",
+        "enabled": "O",
+        "definition": "CREATE TRIGGER dic_enqueue_member_approval_notices_on_review AFTER INSERT ON private.dic_signup_review_events FOR EACH ROW EXECUTE FUNCTION private.dic_enqueue_member_approval_notices()",
+        "source_md5": "36defca729c42b4ec35d4d2a4e1cfea5"
+      }
+    ],
+    "observed_at": "2026-11-14T06:54:11.353305+00:00"
+  },
+  "drift_sql": "WITH app AS (SELECT n.nspname,p.oid,p.proname,pg_get_functiondef(p.oid) AS def FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname IN ('public','private')) SELECT jsonb_build_object('observed_at',now(),'function_count',(SELECT count(*) FROM app),'function_ordered_md5',(SELECT md5(string_agg(nspname||'.'||proname||'='||md5(def),';' ORDER BY nspname,proname,oid)) FROM app),'views',(SELECT count(*) FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname IN ('public','private') AND c.relkind IN ('v','m')),'tables',(SELECT count(*) FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname IN ('public','private') AND c.relkind IN ('r','p')),'policies',(SELECT count(*) FROM pg_policies WHERE schemaname IN ('public','private')),'migrations',(SELECT count(*) FROM supabase_migrations.schema_migrations),'legacy_directory',(SELECT to_regclass('private.dic_roaster_directory')::text),'legacy_aliases',(SELECT to_regclass('private.dic_roaster_aliases')::text),'archive_directory',(SELECT to_regclass('private.dic_roaster_identity_provenance_archive')::text),'archive_alias',(SELECT to_regclass('private.dic_roaster_alias_provenance_archive')::text)) AS evidence",
+  "drift": {
+    "views": 0,
+    "tables": 52,
+    "policies": 41,
+    "migrations": 69,
+    "observed_at": "2026-11-14T06:54:08.274458+00:00",
+    "archive_alias": "private.dic_roaster_alias_provenance_archive",
+    "function_count": 114,
+    "legacy_aliases": null,
+    "legacy_directory": null,
+    "archive_directory": "private.dic_roaster_identity_provenance_archive",
+    "function_ordered_md5": "4bfc78411475d7b7c9699c6c8a8f757d"
+  },
+  "provider": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.11.0.003",
+    "region": "us-east-2"
+  },
+  "edge": [
+    {
+      "slug": "dic-verify-coffee",
+      "status": "ACTIVE",
+      "version": 10,
+      "verify_jwt": true,
+      "ezbr_sha256": "d59e9da29335f2d626a2779238b4f1176148f5f8f3d54539bf831ff20aa6a77e"
+    },
+    {
+      "slug": "dic-preview-coffee",
+      "status": "ACTIVE",
+      "version": 7,
+      "verify_jwt": true,
+      "ezbr_sha256": "5c1aa148443d83261fa35a375fa58b12ada6421a5131c93028a7dd26e3bfa1fb"
+    },
+    {
+      "slug": "dic-delete-member-account",
+      "status": "ACTIVE",
+      "version": 4,
+      "verify_jwt": true,
+      "ezbr_sha256": "5d4b6d84458b289c6a25bc76fec4a4b562594c0802e3ee9f7abd633fe87dcafb"
+    },
+    {
+      "slug": "dic-admin-push-broker",
+      "status": "ACTIVE",
+      "version": 3,
+      "verify_jwt": false,
+      "ezbr_sha256": "ca7ce5f9b80bf6984a7517e9f3ef1750fa856b75557136817ccc040dc5635382"
+    },
+    {
+      "slug": "dic-member-approval-broker",
+      "status": "ACTIVE",
+      "version": 1,
+      "verify_jwt": false,
+      "ezbr_sha256": "263f36326fa00934a4c7cfb7ecc6e3df9872e9b4f0395ef1326455d9bb2bded7"
+    }
+  ],
+  "advisors": {
+    "security": [
+      {
+        "name": "rls_enabled_no_policy",
+        "level": "INFO",
+        "count": 13,
+        "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy"
+      },
+      {
+        "name": "authenticated_security_definer_function_executable",
+        "level": "WARN",
+        "count": 10,
+        "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable"
+      },
+      {
+        "name": "auth_leaked_password_protection",
+        "level": "WARN",
+        "count": 1,
+        "remediation": "https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection"
+      }
+    ],
+    "performance": [
+      {
+        "name": "unindexed_foreign_keys",
+        "level": "INFO",
+        "count": 14,
+        "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+      },
+      {
+        "name": "unused_index",
+        "level": "INFO",
+        "count": 8,
+        "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+      }
+    ],
+    "health": []
+  },
+  "legacy": {
+    "directory": "RETIRED",
+    "aliases": "RETIRED",
+    "archives": "PRESERVED",
+    "issue2389": "CLOSED"
+  },
+  "confirmed_new_defects": 0,
+  "justified_deletions": 0,
+  "source_code_test_ci_writes": 0,
+  "production_writes": 0,
+  "functional_tests": "NOT_RUN_DOCS_ONLY",
+  "governance_ci": "UNVERIFIED_POSTCOMMIT",
+  "hosted_http_auth_jwt": "UNVERIFIED_ISSUE96",
+  "first_time_source_word_credit": 0,
+  "full_provider_word_baseline": "IN_PROGRESS",
+  "next_cursor": "Fresh provider drift, then numeric ranks 881-960; genuinely unreviewed hosted config only when accessible without secrets."
+}

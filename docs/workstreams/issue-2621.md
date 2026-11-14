@@ -1,0 +1,44 @@
+# Issue #2621 — New Coffee cleaner preview and tap-to-fill post-add differences
+
+DIC_PREFLIGHT_VERIFIED development_sha=4854b80adcc661c84adbe48da736e744f603f66d preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- **Owner scope:** November 14 screenshot and instructions to make tap-to-fill on Add Coffee differences work; remove duplicated extracted field list, Published source information/download UI, and exact unverified-page warning sentence; propose, but do not implement, broader redesign.
+- **Source:** current development 4854b80adcc661c84adbe48da736e744f603f66d, PREFLIGHT Git blob 2fb236bbfa6bac48513eeb3bd157b260853af06d; AGENTS, #2592 (previously deployed pre-save choices), #33/#2389 universal intake, CURRENT_STATUS, Master Spec, Decision Ledger, coverage, queue. #2592 covered pre-save source conflicts; a separate post-add Saved versus Submitted differences panel still used inert text. New code adds post-add explicit selection without claiming a verified physical handset reproduction.
+- **Acceptance:** 48px keyboard/mobile buttons choose saved/submitted per field; switch back or manually correct; supported taxonomy only; no automatic save/canonical changes. Initial URL preview removes duplicated field list, Published source disclosure, structured records explanation and source download UI; maintains source conflict buttons/links, warnings, published espresso reference and original bounded source snapshots. Existing Auth/privacy/offline/Community/shot history unchanged.
+- **Paths:** site/cloud/coffee-url-autofill.js, site/cloud/main.js, site/visual.css, tests/coffee-conflict-tap-to-fill.test.mjs, docs/MASTER_SPECIFICATION.md, docs/DECISION_LEDGER.json, docs/RELEASE_QUEUE.json and this journal.
+- **Tests:** five new focused/hostile tests and prior regressions; required hosted CI, one build and browser visual validation PENDING. No PASS/READY claim until exact-source readback.
+- **Provider:** NOT_APPLICABLE. No Netlify production, Supabase SQL/Edge/Auth, member-record write, spending, backup or publication.
+- **Next:** inspect exact PR-head checks, fix selectively, nonforce merge explicit [skip netlify], read back merged SHA and tests; reconcile queue/status/issue only if evidence passes. Separate NEW owner Publish required.
+
+## PR-head queue intake schema repair [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=4854b80adcc661c84adbe48da736e744f603f66d preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- Exact #2622 PR-head approval 43571046587 failed with `DIC-Q-2621... invalid merged source SHA` because the IN_PROGRESS row omitted this required property. Repo validator explicitly accepts `null` for work not yet merged; repaired to `merged_source_sha: null` without fabricating a merge or changing application/runtime code. Hosted source security 43571046600 and isolated SQL 43571046601 SUCCESS on prior head; Node/build and browser source-bound outcomes must be rechecked for the final PR head. Retained failed checks, no bypass.
+- After this repair: inspect final exact-source CI; nonforce development integration with [skip netlify]; source-bound READY queue reconciliation only after tests. No publication.
+
+## Compatibility repair after exact Node full-suite failure [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=4854b80adcc661c84adbe48da736e744f603f66d preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- PR head 669fe32 Node22/lint/build 43571188410 FAILED: 4,767 total, 4,648 pass, 113 fail, 6 skipped. Failures overwhelmingly originate in older #33/source test fixtures whose original605/603 and source-review assertions inspect the **detailed** `coffeeUrlPreviewMarkup` return content removed by owner-requested screen cleanup. This is a test-facing formatting contract, not evidence of 113 new extraction failures. Before the change, these tests validated full source evidence. Retain the detailed function as a standalone diagnostic/test renderer (never used by member screen). Add a **separate explicitly named compact view** `coffeeUrlCompactPreviewMarkup`, switch all four production main.js UI invocations to compact, keep the source snapshot and untrusted-text escaping, and test the compact on-screen path. Unlike hidden DOM, the member preview has no duplicated fields or source download controls. The deprecated warning sentence is eliminated in both modes.
+- Fix two genuine post-add static UI tests to inspect accessible Saved/Submitted buttons instead of previous inert text. Preserve source oracle; do not weaken or skip the original full suite. Changed paths: site/cloud/coffee-url-autofill.js, site/cloud/main.js, tests/coffee-conflict-tap-to-fill.test.mjs, tests/coffee-edit-revision.test.mjs, queue and this same-commit journal.
+- Prior exact 669fe32 SQL 43571188412, security 43571188433, cloud UX 43571188484, approval 43571188432 succeeded. Their outcomes cannot be credited as current candidate checks if source SHA changes. All five corrected exact PR-head checks must be run and analyzed; no tests skipped for convenience and no production deployment.
+
+## One remaining obsolete renderer-name test [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=4854b80adcc661c84adbe48da736e744f603f66d preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- Final candidate da5c6e0 exact Node CI 43571685838: 4,767 tests, 4,760 PASS, **one FAIL**, six SKIPPED; this is a stale textual contract in `tests/coffee-url-autofill.test.mjs` asserting `coffeeUrlPreviewMarkup(found)` rather than the correctly required `coffeeUrlCompactPreviewMarkup(found)` in production. No extractor function or production change is needed. Replace this exact static assertion, preserving all other tests, source retention and compact-screen checks.
+- CI on da5c6e0: approval 43571685847 SUCCESS; cloud UX 43571685865 SUCCESS; SQL 43571685890 SUCCESS; security 43571685898 SUCCESS. These are prior SHA receipts only, must rerun on final PR head. Do not mark READY until exact current checks pass and merged source is verified.
+
+## Final tested merge and READY reconciliation — November 14, 2026 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=aa233ab37129550416aa7a3cbde188399cb4993e preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- **Authority:** owner Nov14 iPhone screenshot and explicit Build/Fix instruction; issue #2621; Locked UX-COFFEE-SCREEN-DIFFERENCES-PREVIEW-20261114, unchanged Auth/offline/history/Community and publication boundaries. No Publish grant.
+- **Acceptance:** explicit touch/keyboard Saved versus Submitted selection; one unsaved editable field per tap, manual override/revert, dropdown vocabulary safeguards, separate server correction submission; duplicate New Coffee extracted fields and visible Published source review/download section and exact caution sentence removed, accurate unverified status/provenance preserved in source snapshot/diagnostic renderer. Tests include hostile values, negative state, source escape, no auto-save, prior source oracle.
+- **Exact final PR head:** `3f3d231a2288697552a4fd9de7e91086c26b8be4` PR #2622. Five SUCCESS: Node/lint `43572004561` 4,767 total / 4,761 PASS / 0 FAIL / 6 intentionally SKIPPED; mobile/cloud UX `43572004553`; isolated SQL `43572004567`; source security `43572004530`; approval `43572004564`. Separate original603 whole-corpus job SKIPPED, NOT PASS. Prior failed heads 12a2/669fe/da5c remain historical, not counted.
+- **Nonforce integration:** squash merge `3875e72cf04b8c0d9038d031035c61ef7c06a83f` first parent `4854b80adcc661c84adbe48da736e744f603f66d`, [skip netlify]. Exact tested and merged app/test blobs match for site/cloud/coffee-url-autofill.js, site/cloud/main.js, site/visual.css, tests/coffee-conflict-tap-to-fill.test.mjs, tests/coffee-edit-revision.test.mjs, tests/coffee-url-autofill.test.mjs; both Locked docs/ledger and scoped journal match. Exact merged push Node/lint `43572276835` SUCCESS 4761 pass / 0 fail / 6 skipped, browser/cloud `43572276789` SUCCESS; merged push approval `43572276793` CANCELLED due concurrent unrelated documentation advance, NOT counted, later docs-only HEAD approval `43572300124` SUCCESS. PR SQL/security exact head SUCCESS only; merged equivalent runs were not triggered.
+- **Concurrent drift:** `20592a77935e94124760b25d4afbb8ecb69ffc6d` #33 and `aa233ab37129550416aa7a3cbde188399cb4993e` #455 are extra documentation-only first-parent descendants; verified no #2621 runtime/test/queue bytes changed. Queue now 339 DEPLOYED / 1 READY / 8 IN_PROGRESS, zero #2621 blockers, merged source `3875e72...`. [skip netlify] docs-only reconciliation; no deployment or provider mutation.
+- **Next:** NEW owner Publish needed to authorize a frozen READY batch, with exact later candidate five CI checks and verified Netlify delivery. Device-signed-in real handset acceptance NOT claimed; no additional required owner setup.
