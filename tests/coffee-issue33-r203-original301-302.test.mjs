@@ -7,10 +7,10 @@ const decaf='https://shop.broadporchcoffee.com/products/decaf';
 const brazilName='Brazil - Cerrado';
 const decafName='Decaf - Colombian Water Process';
 const brazilCopy="A smooth, easy-drinking coffee from Brazil's Cerrado region with classic notes of chocolate and toasted nuts. The natural process brings plenty of sweetness and body to the cup, while a medium roast keeps it balanced and approachable. Tasting Notes: Chocolate · Toasted Nuts · Smooth. Roast Level: Medium Roast. Origin: Cerrado, Brazil. Process: Natural.";
-const decafCopy="A smooth and satisfying Colombian decaf with rich notes of dark chocolate and hazelnut. Decaffeinated using the Mountain Water Process, this coffee keeps plenty of sweetness, body and flavor in the cup. Tasting Notes: Dark Chocolate · Hazelnut. Origin: Colombia. Decaf Process: Mountain Water Process.";
+const decafCopy="A smooth and satisfying Colombian decaf with rich notes of dark chocolate and hazelnut. Decaffeinated using the Mountain Water Process, this coffee keeps plenty of sweetness, body and flavor in the cup. Tasting Notes: Dark Chocolate · Hazelnut. Origin: Colombia.";
 function parse({url=brazil,name=brazilName,description=brazilCopy,seo='Stale Unrelated SEO',aside=''}={}){
  const schema={'@context':'https://schema.org','@type':'Product',name,url,brand:{'@type':'Brand',name:'Broad Porch Coffee'}};
- const html='<html><head><title>'+seo+'</title><script type="application/ld+json">'+JSON.stringify(schema)+'</script></head><body><main><article class="product"><h1>'+name+'</h1><div class="product-description"><p>'+description+'</p></div></article></main>'+aside+'</body></html>';
+ const html='<html><head><title>'+seo+'</title><script type="application/ld+json">'+JSON.stringify(schema)+'</script></head><body><main><article class="product"><h1>'+name+'</h1><div class="product-description"><p>'+description+'</p>'+(url===decaf?'<p>Decaf Process: Mountain Water Process</p>':'')+'</div></article></main>'+aside+'</body></html>';
  return extractPublicCoffeeFacts(html,{source_url:url});
 }
 test('original #301 selected Brazilian product explicitly supports natural Cerrado medium and chocolate/toasted nuts',()=>{
