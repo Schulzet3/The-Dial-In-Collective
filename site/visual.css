@@ -232,7 +232,6 @@ textarea{line-height:1.5}.form-grid{gap:18px 14px}
 .coffee-url-fields dt{font-size:11px;color:var(--muted);font-weight:500}
 .coffee-url-fields dd{margin:1px 0 0;font-size:13px;line-height:1.5;font-weight:500}
 .coffee-url-preview .coffee-match-alert{padding-top:10px;border-top:1px solid var(--line);font-weight:500}
-.coffee-url-preview [data-action=apply-coffee-url]{min-height:36px}
 /* Selected roaster-source contradictions are visible on the import screen,
    without choosing a winner or blocking normal manual editing. */
 .coffee-source-conflicts{margin:12px 0 16px;padding:12px;border:1px solid var(--line-strong);border-radius:10px;background:var(--well)}
@@ -248,6 +247,21 @@ textarea{line-height:1.5}.form-grid{gap:18px 14px}
 .coffee-conflict-choice[aria-pressed="true"]{border:2px solid var(--action-line);background:var(--well);box-shadow:inset 0 0 0 1px var(--action-line)}
 .coffee-conflict-group small{padding:0 10px 6px}
 .coffee-conflict-feedback:empty{display:none}
+
+/* Post-add sourced differences: explicit one-field correction choice. */
+.coffee-source-differences{margin:0 0 17px;padding:12px;border:1px solid var(--line-strong);border-radius:10px;background:var(--well)}
+.coffee-source-differences h3{margin:0 0 7px;font:650 15px/1.4 var(--sans)}
+.coffee-source-differences .helper{font-size:12px;margin:0 0 10px}
+.coffee-difference-feedback:empty{display:none}
+.coffee-difference-row{padding:11px 0;border-top:1px solid var(--line)}
+.coffee-difference-row>strong{display:block;font-size:13px;margin-bottom:7px}
+.coffee-difference-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.coffee-difference-choice{min-width:0;min-height:48px;padding:9px 10px;border:1.5px solid var(--line-strong);border-radius:9px;background:var(--surface);color:var(--ink);font:500 13px/1.45 var(--sans);text-align:left;overflow-wrap:anywhere;cursor:pointer}
+.coffee-difference-choice>span{display:block;font-size:11px;color:var(--muted);margin-bottom:2px}
+.coffee-difference-choice:hover,.coffee-difference-choice:focus-visible{border-color:var(--accent);background:var(--well)}
+.coffee-difference-choice[aria-pressed="true"]{border:2px solid var(--action-line);background:var(--well)}
+@media(max-width:360px){.coffee-difference-options{grid-template-columns:1fr}}
+
 #new-coffee .coffee-needs-review{outline:1px solid var(--line-strong);outline-offset:1px}
 
 @media(max-width:410px){.coffee-url-fields{grid-template-columns:1fr}.coffee-url-actions .helper{font-size:12px}}
