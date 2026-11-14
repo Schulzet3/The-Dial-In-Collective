@@ -1,3 +1,9 @@
+## November 14, 2026 UTC — Issue #33 R195 current selected #282/#284 verified; parent OPEN [skip netlify]
+
+- Mandatory live preflight development 8166e68ea8b1963237efc44c71a5cdde4872cdc0, immutable PREFLIGHT Git blob 2fb236bbfa6bac48513eeb3bd157b260853af06d; prior reviewed PR [#2654](https://github.com/Schulzet3/The-Dial-In-Collective/pull/2654) safely merged c3de22a33347b6c15060aa921e7a6801c55fcc15, **runtime/parser unchanged**, original603 CSV/oracle untouched.
+- Exact current selected #282 Ridley **Bold Betty** matches direct merchant Columbia (literal seller spelling), Washed, Dark, apricot/honey/pear; earlier speculative Guatemala claim disproved. #284 Rise Up Nicaragua named Byron Corrales, Honey, subtle fruit, canonical Aranjuez/Nicaragua; selected narrative separately mentions Mataglapa, and unsupported Light+ roast remains reviewable, not guessed. Source HTML and artifact independently rehashed.
+- Exact merged selected public/parser 43584252159 **SUCCESS 6/6**; Node/lint/build 43584252313 **SUCCESS 4792 PASS/0 FAIL/6 SKIP**; cloud/mobile, approval, Python SUCCESS. Frozen 603 workflow SKIPPED not semantic certification. Narrow [permanent R195 audit](audits/issue33-original603-r195-ridley-riseup-282-284-verified-20261114.json). Queue **343 DEPLOYED / 8 IN_PROGRESS / 0 READY**, unchanged. #33 OPEN, known #566/#567/#594 official URL failures unchanged. No production deployment/member/provider writes, backup or owner-approval changes.
+
 ## November 14, 2026 UTC — DIC-20261114-READY4-02 four READY features DEPLOYED [skip netlify]
 
 - Owner current chat explicitly approved Publish; latest live preflight fetched at development 9c22f1957a00f303d909616c8f07b7bfb6f89a0d, blob `2fb236bbfa6bac48513eeb3bd157b260853af06d`; source isolation frozen to `7bee5534d45649179b759f88135c8457957b856a` on `release-candidates/20261114-ready4-01`.
