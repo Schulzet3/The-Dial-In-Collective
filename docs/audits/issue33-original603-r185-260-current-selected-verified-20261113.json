@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-13",
+  "issue": 33,
+  "round": "R185",
+  "scope": "DEVELOPMENT_ONLY_EXACT_CURRENT_SELECTED_260_NOT_FULL603",
+  "status": "SCOPED_SELECTED_SOURCE_AND_TRUE_PARSER_VERIFIED",
+  "original_coffee_number": 260,
+  "product": {
+    "name": "Colombia Decaf",
+    "roaster": "Prelude Coffee Roasters",
+    "exact_selected_url": "https://preludecoffeeroasters.com/products/colombia-decaf",
+    "final_url": "https://preludecoffeeroasters.com/products/colombia-decaf",
+    "selected_h1": [
+      "Colombia Decaf",
+      "We love a good decaf!",
+      "What you'll find in the cup:"
+    ],
+    "origin": "Colombia",
+    "tasting_notes": "This is a full bodied coffee with sweet flavors of maple glaze and raspberry preserves. We also get some nice cinnamon-like spice with hints of ginger that's reminiscent of root beer.",
+    "unpublished_or_not_confirmed": [
+      "decaffeination_method",
+      "roast_level",
+      "process",
+      "producer",
+      "espresso_recipe"
+    ],
+    "identity_preserved": true,
+    "conflicts": [],
+    "seo_fallback_fields": [],
+    "manual_add_coffee_and_source_review_synthetic_dom": true,
+    "actual_signed_in_acceptance": false
+  },
+  "preflight": {
+    "initial_development_sha": "97b45262cc385302df38c82a02db5953e24256c9",
+    "docs_preflight_development_sha": "367494bf0d29efcc5e5835d6c16b9d1e14439ff2",
+    "preflight_git_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d"
+  },
+  "original_corpus": {
+    "coffee_count": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "original_csv_git_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "untouched": true,
+    "oracle_untouched": true,
+    "whole603_individually_certified": false
+  },
+  "failed_initial_test": {
+    "run": 43531808412,
+    "synthetic_pass": 10,
+    "synthetic_fail": 2,
+    "reason": "two extra editorial H1 section headings in simplified parser fixture caused missing/ambiguous synthetic product; raw official/parser step skipped",
+    "runtime_parser_failure": false,
+    "repair": "use H2 editorial headings in standalone parser fixture, still test merchant H1 identity and disqualify another true product H1"
+  },
+  "integration": {
+    "source_pr": 2539,
+    "first_commit": "e13eba26ecb200230e75f27dd1abdfef30ebb4e9",
+    "corrected_head": "53ccdd5ea9c70b7be5b951f1a4ca3fd8efedac9f",
+    "merged_sha": "367494bf0d29efcc5e5835d6c16b9d1e14439ff2",
+    "merge_method": "nonforce_squash",
+    "merge_commit_skip_netlify": true,
+    "source_test_workflow_journal_blobs_equal": true,
+    "source_runtime_modified": false,
+    "queue_promotion": "NONE"
+  },
+  "exact_pr_ci": {
+    "selected_guarded_official": 43531904189,
+    "focused_tests": {
+      "pass": 12,
+      "fail": 0
+    },
+    "node_and_lint": 43531903957,
+    "node_pass": 4671,
+    "node_fail": 0,
+    "node_skip": 6,
+    "cloud_browser_mobile": 43531904002,
+    "approval": 43531903984,
+    "sql": 43531904063,
+    "python": 43531903960,
+    "private_source": 43531903954,
+    "all_applicable": "SUCCESS",
+    "frozen603": "SKIPPED_NOT_PASS"
+  },
+  "exact_merged_push_ci": {
+    "selected_guarded_official": 43532377976,
+    "node_and_lint": 43532377932,
+    "node_pass": 4671,
+    "node_fail": 0,
+    "node_skip": 6,
+    "cloud_browser_mobile": 43532378026,
+    "approval": 43532377921,
+    "python": 43532377943,
+    "all_applicable": "SUCCESS",
+    "controlled_public_probe": "SKIPPED_NOT_PASS"
+  },
+  "merged_raw_source": {
+    "html_bytes": 172607,
+    "html_sha256": "80df449f244a53ca0bd8bef5162d110433c518d8c54977150bff3a596e9572ea",
+    "evidence_json_sha256": "c0fc7f11e1f738940d4823394e8581273d45a3cfff90f02cc9dd873b4425ee26",
+    "afterproof_json_sha256": "578cef2adccce410ed26f3af4fdf1d315723448a37f88f9164c000956573e675",
+    "afterproof_passed": true,
+    "afterproof_errors": [],
+    "artifact_id": 14087468777,
+    "artifact_zip_bytes": 46321,
+    "artifact_zip_sha256": "be984e21de5709451a7d00d2cbad1958b2b8969ef48d8d226331f828fb034063",
+    "independent_artifact_hash_and_content_inspection": true
+  },
+  "additional_prior_gap_resolution": {
+    "round": "R184",
+    "original_case": 259,
+    "merged_sha": "7e573820799f5800dd622e8778cc85d62436bfae",
+    "independently_recovered_successful_merged_push_runs": [
+      43524411168,
+      43524411161,
+      43524411173,
+      43524411229,
+      43524411148
+    ],
+    "prior_unverified_exact_merge_ci_now_resolved": true
+  },
+  "remaining": [
+    "Original603 individual selected-product semantic certification not complete",
+    "Original #261 guarded HTML/actual parser outstanding",
+    "#566/#567/#594 external host access failures separately adjudicated",
+    "Full frozen603 workflow skipped; no 603 manual certification credit"
+  ],
+  "release_authorization": false,
+  "production_or_provider_writes": 0,
+  "parent_issue_open": true
+}

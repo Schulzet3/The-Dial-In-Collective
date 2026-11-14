@@ -523,6 +523,6 @@ Owner-authorized release DIC-20261106-READY7-23 independently verified DEPLOYED:
 ## 2026-11-12 READY1 #1938 release grant DIC-20261112-READY1PUSH-32 [skip netlify]
 - Owner explicit publish; isolated candidate 174eb33d3db63513e2ccf38dcf118f6291bd3127 selected one READY item. Five exact-source GitHub checks SUCCESS (approval 43147128136, security 43147128209, SQL 43147128009, cloud/browser 43147127999, Node build/test 43147128046). Published-to-candidate deployable diff exactly site/admin/main.js, site/admin/push.js, site/admin/view.js; no workflow diff; 4 unready app paths restored, 11 unready tests omitted, reviewed workflow-only test omitted. Current dev drift since staging docs-only. Grant fresh one-use ID DIC-20261112-READY1PUSH-32; no production publication yet.
 
-## Release controller claim — 2026-11-13T20:13:42.605Z
-- Approved release DIC-20261113-READY15-39 from tested application SHA f788e7af0b6dc7254d993119600a55f4442ed3d2 claimed exactly once against previous release ref 2c02dbb267ca8fb1e56ddd0433c96c1bb4eca9d5. Five GitHub CI checks passed and one-use authorization ledger was written.
+## Release controller claim — 2026-11-14T06:26:35.895Z
+- Approved release DIC-20261114-READY7-01 from tested application SHA f0b8a6a17148ac6817ca52184c881a369c798c6a claimed exactly once against previous release ref ad836aae4d3f3e2c1af83e7d5363887281273275. Five GitHub CI checks passed and one-use authorization ledger was written.
 - **Not yet a Netlify publication receipt:** independently check READY/current deployed SHA before marking Deployed.

@@ -10,10 +10,11 @@ import {extractRoastVisualEvidence,normalizeRoastLabel,roastLabelHint} from './r
 import {extractLayoutEvidence,coffeeLayoutDetailConflicts} from './coffee-product-layouts.mjs';
 import {extractNarrativeCoffeeEvidence} from './coffee-narrative-evidence.mjs';
 import {extractCoffeeBlendEvidence,extractSelectedBlendCommunityCredit,extractSelectedRegionalBlendElevation,selectedPartialBlendProcess,withoutCoffeeBlendComponentSpecs} from './coffee-blend-evidence.mjs';
-import {extractCoffeeIdentityEvidence,extractCoffeeCurrentReleasePrefixes,extractCoffeeTitleOrigin,extractCoffeeGeographyTuples,coffeeDescriptionCountryMismatch,coffeeDescriptionNamedCoffeeMismatch,explicitCoffeeVarietyList,literalCoffeeSourcePlaces} from './coffee-identity-evidence.mjs';
+import {extractCoffeeIdentityEvidence,extractCoffeeCurrentReleasePrefixes,extractCoffeeTitleOrigin,selectedCoffeeNameFromCountryVarietyProcessTitle,extractCoffeeGeographyTuples,coffeeDescriptionCountryMismatch,coffeeDescriptionNamedCoffeeMismatch,explicitCoffeeVarietyList,literalCoffeeSourcePlaces} from './coffee-identity-evidence.mjs';
 import {extractProductEspressoReference} from './coffee-espresso-evidence.mjs';
 import {productMarkup,coffeeHtmlAttributes,withoutDetachedFarmerProfiles} from './coffee-product-scope.mjs';
 import {productCoffeeProse} from './coffee-product-prose.mjs';
+import {selectedSmallholderGrowingCommunities} from './coffee-selected-smallholder-communities.mjs';
 import {interpretAgtron,agtronExplanation} from './agtron-roast.mjs';
 import {extractSelectedNextCoffeeProduct} from './coffee-next-selected-product.mjs';
 import {extractSelectedReactRouterCoffeeHydration} from './coffee-react-router-hydration.mjs';
@@ -25,7 +26,7 @@ import {equivalentCoffeeProductNames,preferredCoffeeRoasterName,selectedCoffeeNa
 import {isolateCoffeeIdentityCohorts} from './coffee-source-identity-scope.mjs';
 import {extractCoffeeGeographyEntityRoles,cleanCoffeeGeographyEntityPrefix} from './coffee-geography-entity-roles.mjs';
 import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProductFlavorProfileEvidence,refineSelectedNamedTastingNotes,normalizeExplicitCoffeeTastingNotes,equivalentCoffeeTastingNotes,coffeeTastingNotesSubset} from './coffee-flavor-evidence.mjs';
-import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,refineSelectedCurrentTrailingFlavorNote,refineSelectedCurrentFlavorBase,refineSelectedCurrentSensoryArc,selectedCoffeeSupplementalTastingProse,selectedCurrentProductOvertone} from './coffee-selected-description-sensory.mjs';
+import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,refineSelectedCurrentTrailingFlavorNote,refineSelectedCurrentFlavorBase,refineSelectedCurrentSensoryArc,selectedCoffeeSupplementalTastingProse,selectedCurrentNarrativeAdditionalTastingNote,selectedCurrentMultiSentenceNarrativeNotes,selectedCurrentProductOvertone,selectedCurrentIntrinsicAromaContext} from './coffee-selected-description-sensory.mjs';
 import {selectedCoffeeMilkSensoryContext} from './coffee-selected-milk-sensory-context.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {parseCoffeeElevation,equivalentCoffeeElevations,compatibleCoffeeElevations,extractCoffeeElevationEvidence} from './coffee-elevation-evidence.mjs';
@@ -1296,6 +1297,21 @@ export function selectedProducingCommunity(productHtml){
  return hasLocation&&hasProcess&&names.size===1?[...names.values()][0]:null;
 }
 
+// A marketing "Producer" may instead be a tree-planting initiative. Only
+// exact current selected description, never sibling/SEO, can disqualify it.
+function selectedNonGrowingInitiativeRole(selectedHtml,{producer,decode}={}){
+ const name=String(producer||'').trim();
+ if(!/\b(?:project|foundation|initiative|program(?:me)?)\b/iu.test(name)||name.length>100)return false;
+ const own=removeElements(selectedHtml,['aside','nav','footer','header','script','style','noscript','template']);
+ const lines=productCoffeeProse(own,decode).filter(x=>!x.educational&&x.tag==='p').map(x=>x.text);
+ const quoted=name.replace(/[.*+?^$()|[\]{}\\]/g,'\\export function extractPublicCoffeeFacts(html,{source_url}={}){');
+ const defined=new RegExp(quoted+'\\s*,\\s+an?\\s+(?:(?:environmental|conservation|reforestation|climate|community)\\s+){0,3}initiative\\b','iu');
+ const growing=new RegExp(quoted+'[^.!?]{0,140}\\b(?:grows?|cultivates?|harvests?|farms?|produces?|supplies?)\\s+(?:(?:the|our|its|own|selected|this)\\s+){0,4}(?:coffee|cherries|beans)\\b','iu');
+ return lines.some(s=>defined.test(s))&&
+  lines.some(s=>/\b(?:plant(?:s|ed|ing)?\s+(?:[0-9,]+\s+)?(?:native\s+)?trees?|reforestation|restore\s+(?:native\s+)?forests?)\b/iu.test(s))&&
+  !lines.some(s=>growing.test(s));
+}
+
 export function extractPublicCoffeeFacts(html,{source_url}={}){
  if(typeof html!=='string'||html.length>2_000_000||!source_url)return {ok:false,reason:'invalid_source'};
  // A selected, exact-route Next.js Product is not an HTML heading: read only
@@ -1854,6 +1870,44 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   ...(matchedDescriptions.length?[collectStructuredCoffeeSourceFacts({description:matchedDescriptions.join('\n\n')},{source_url,source_type:'html'})]:[]),
   ...[p,...equivalentProducts.filter(candidate=>candidate!==p)].map(candidate=>collectStructuredCoffeeSourceFacts(candidate,{source_url}))
  );
+ // Selected coffee description directly contradicts a marketing Producer
+ // label when the named organization itself is only a tree-planting initiative.
+ // Do not autofill an unverified grower; retain the exact seller text for review.
+ if(fields.producer&&!conflicts.has('producer')&&
+    selectedNonGrowingInitiativeRole(canonicalProduct,{producer:fields.producer,decode:clean})){
+  const initiative=fields.producer;
+  delete fields.producer;
+  if(keyOf(roaster_details.named_producer||'')===keyOf(initiative))delete roaster_details.named_producer;
+  const note='Selected product labels '+initiative+' as Producer, but directly identifies it as a tree-planting initiative on other growers farms, not a verified lot farmer. Confirm producer manually.';
+  producer_review_note=[producer_review_note,note].filter(Boolean).join(' | ').slice(0,1100);
+  for(const fact of source_facts)if(fact.field==='producer'&&keyOf(fact.value)===keyOf(initiative)){
+   fact.field='producer_context';fact.conflicting=true;
+   fact.section='Selected label contradicts direct non-growing initiative description';
+  }
+  if(source_facts.length<384)source_facts.push({
+   field:'producer_context',label:'Non-growing initiative on selected product (review only)',
+   value:initiative,source_url,source_type:'html',
+   section:'Exact selected coffee description: reforestation initiative, not a grower'
+  });
+ }
+ // The current selected product may name growing communities of anonymous
+ // smallholders. Preserve the exact bounded locality as Source Review only;
+ // never substitute town names for a farmer, farm, or cooperative identity.
+ const smallholderLocalities=selectedSmallholderGrowingCommunities(canonicalProduct,{
+  name:fields.name,origin:fields.origin,clean
+ });
+ if(smallholderLocalities){
+  const locations=smallholderLocalities.communities.join(', ');
+  const note='Selected coffee credits smallholder growers across '+smallholderLocalities.region+
+   ' communities: '+locations+'. These are growing localities, not individually named producers.';
+  producer_review_note=[producer_review_note,note].filter(Boolean).join(' | ').slice(0,1100);
+  if(source_facts.length<384)source_facts.push({
+   field:'producer_locality_context',label:'Named smallholder growing communities (review only)',
+   value:locations,source_url,source_type:'html',
+   section:'Exact selected coffee producer story — '+smallholderLocalities.region+
+    '; community locations are not individual growers'
+  });
+ }
  // Keep literal direct selected roast provenance visible in Source Review,
  // without elevating a fallback, unsupported area, or conflicting roast.
  if(directTypedRoast&&fields.roast_level===directTypedRoast.value&&source_facts.length<384)
@@ -2054,6 +2108,39 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     source_facts.push({field:'sensory_context',
      label:'Selected current coffee additional flavor prose',value:additional,source_url,
      source_type:'html',section:'Exact selected product unlabeled tasting description'});
+  }
+  // A seller's selected additional narrative flavor is review context,
+  // not grounds to override the stronger current printed flavor profile.
+  if(fields.tasting_notes&&!conflicts.has('tasting_notes')&&
+     !seoFallbackByFields.get(fields)?.has('tasting_notes')&&source_facts.length<384){
+   const note=selectedCurrentNarrativeAdditionalTastingNote(currentProduct,{
+    clean,notes:fields.tasting_notes});
+   if(note)source_facts.push({field:'sensory_context',
+    label:'Selected current narrative additional tasting note (review only)',
+    value:note,source_url,source_type:'html',
+    section:'Exact selected current product paragraph; printed flavor profile preserved'});
+  }
+  // Only one unconditional own coffee aroma, corroborated by all selected notes;
+  // retain review provenance without rewriting the higher-priority notes.
+  if(fields.tasting_notes&&!conflicts.has('tasting_notes')&&
+     !seoFallbackByFields.get(fields)?.has('tasting_notes')&&source_facts.length<384){
+   const intrinsicAroma=selectedCurrentIntrinsicAromaContext(currentProduct,{
+    clean,notes:fields.tasting_notes});
+   if(intrinsicAroma)source_facts.push({field:'sensory_context',
+    label:'Selected current product intrinsic aroma (review only)',value:intrinsicAroma,
+    source_url,source_type:'html',
+    section:'Exact selected current product literal aroma with corroborating own notes'});
+  }
+  // Two source-bound direct narrative descriptors are additional review context
+  // only; preserve an independently labeled selected Flavor Profile verbatim.
+  if(fields.tasting_notes&&!conflicts.has('tasting_notes')&&
+     !seoFallbackByFields.get(fields)?.has('tasting_notes')&&source_facts.length<384){
+   const pair=selectedCurrentMultiSentenceNarrativeNotes(currentProduct,{
+    clean,notes:fields.tasting_notes});
+   if(pair)source_facts.push({field:'sensory_context',
+    label:'Selected current multi-sentence narrative tasting context (review only)',
+    value:pair,source_url,source_type:'html',
+    section:'Single exact selected product direct paragraph; stronger flavor label preserved'});
   }
   // Different selected current hero and explicit Tasting Notes are both
   // directly sourced; preserve both for member review, never choose a winner.
@@ -2836,6 +2923,20 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     section:'Current selected product React Router/Hydrogen loader data'
    });
   }
+ }
+
+ // All identity/scope/field evidence above used the unmodified selected
+ // Product name. Shorten only the user-facing name after those checks and
+ // retain the original printed title for traceability and later review.
+ const publishedFullTitle=fields.name;
+ const coffeeName=selectedCoffeeNameFromCountryVarietyProcessTitle(publishedFullTitle);
+ if(coffeeName!==publishedFullTitle){
+  if(source_facts.length<384)source_facts.push({
+   field:'name',label:'Selected Product full published title',value:publishedFullTitle,
+   source_url,source_type:'html',
+   section:'Exact selected Product title; country, cultivar and process separated for display'
+  });
+  fields.name=coffeeName;
  }
 
  // An extracted value is a suggestion, never proof of an official source.

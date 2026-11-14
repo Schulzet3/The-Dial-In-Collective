@@ -1,0 +1,26 @@
+# Issue #455 R455-240 — serving/tasting temperature as a five-rating efficacy confounder [skip netlify]
+
+**Mandatory immutable preflight verified BEFORE scope:**
+
+DIC_PREFLIGHT_VERIFIED development_sha=234a703256d246aa542288fe1df420e032977700 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+GitHub immutable PREFLIGHT.md file matched its independent Git blob (5,532 chars). At authoring the live development ref was rechecked at `234a703256d246aa542288fe1df420e032977700` and canonical ledger was exactly Git blob `9edb5d5879d1a116a3dd9ab24d85c7fdcc4344ae`; main `5e80f87e33ef331ee8c0a8fedfd1bd848eabc0f1`, release/production `2c02dbb267ca8fb1e56ddd0433c96c1bb4eca9d5` read-only. Owner Issue #455 Option B SAFE research-only without publication, intervention or Locked behavioral changes. #335 transferred research scope respected; do not duplicate #267 #33 #96.
+
+## Direct author-indexed evidence and limits
+
+1. **Adhikari, Chambers IV, Koppel (2019)** [PubMed PMID 30599987](https://pubmed.ncbi.nlm.nih.gov/30599987/), *Food Research International* 115:95–104, DOI `10.1016/j.foodres.2018.08.014`. Original indexed author abstract directly reviewed: four brewed-coffee categories (two Arabica, one Robusta, blend), **36 trained descriptive flavor attributes**, consumed at **50, 60, 70 °C**. Mixed-effects ANOVA reports coffee-by-consumption-temperature interactions. This is cup **serving** temperature, **not** brew-water temperature or a universal extraction target.
+2. **Chapko and Seo (2019)** [PubMed PMID 31108788](https://pubmed.ncbi.nlm.nih.gov/31108788/), *Food Research International* 121:612–621, DOI `10.1016/j.foodres.2018.12.026`. Original indexed author abstract directly reviewed: **six trained descriptive panelists**, **32 sensory attributes**, Ethiopian/Kenyan/Colombian brewed coffee at **70, 55, 40, 25 °C**. Eighteen attributes reported temperature-associated differences and seven coffee-variety-associated differences. PCA 63.28% vs 21.24% is data variation in THIS particular panel, **not** a generic share of causal taste or predictive model quality. [Author's distinct 2018 thesis abstract](https://scholarworks.uark.edu/etd/2934/) is contextual, not a second independent journal experiment.
+
+**Evidence grade:** original author abstracts indexed by NLM/PubMed, independently crosschecked with FAO AGRIS for metadata; **full Elsevier publisher papers/PDF SHA-256, methods/tables, figure pixels, raw assessor data and replication NOT REVIEWED**. Neither paper tests a single change to a member's espresso, owner-Locked five 1–5 taste ratings, same-coffee recommendation effectiveness, or a universal preferred serving/brewing temperature. Never translate descriptive intensities to personal liking or assert improved espresso cups.
+
+## Actual code/Locked crosswalk and action
+
+At immutable development `234a703256d246aa542288fe1df420e032977700`, inspected `site/lib/constants.js` Git blob `d3559dc1c9560c4d68fbcad1dc91e3a792a100a2` (all five independent tastes, complete vs all-green), `site/lib/engine.js` blob `3e20904291231a9c5a5a86e6d004a95a5489c6d6` (one controllable change, guarded missing ratings), `site/lib/ui.js` blob `2ecde13b9d45ec329700654e1f054629d38bc95f` and `site/cloud/main.js` blob `bb85007730cd58b9aaa13919d6420f548cbf30ef` (Log Shot → Rate with measured dose/yield/time/grind/temp, notes, private history). Existing **machine brew temperature** neither records nor controls drink temperature at first taste. **No reproducible bug, new code, user field, telemetry or scientifically justified numeric product policy follows from these papers.** Preserve original ratings/notes, privacy/RLS/Community, grinder calibration/version/feed/style families including independent Turbo vs Fast-Flow.
+
+**Research-only next action:** Under new independent authorization only, design optional/consented matched same-coffee, same equipment/style/grinder/basket/feed, single-control changed next shot and all-five paired outcomes, recording or controlling tasting delay/serving temperature in the research protocol (not current app). Track missingness, rest/learning and worse outcomes; no live member-data reads or actual experiment authorized now.
+
+## Durable incremental acceptance and release boundary
+
+Appended **two** distinct original publication identities, **three** source-bound claim checks and **one** P3 methods proposal to canonical `docs/audits/issue455-research-source-coverage-20261103.json`. Previous **134 sources /381 checks/195 proposals** retained in order; candidate **136/384/196**; GitHub #267 line-review credit **zero**. S019 standalone still unavailable after Google Drive / Project Library search, not reviewed. No previously accepted #335 tests rerun. No app/tests/CI/SQL/Auth/Edge/member/provider/Netlify/main/release changes, no READY or deployment; original frozen603 and 48-case reference set not retested or mislabeled PASS.
+
+**At authoring:** no PR-head or merged CI has run. Next is exact head CI, recheck branch + ledger concurrency, nonforce squash merge with **[skip netlify] in merge title and body**, independently read back merged blobs, inspect merged-source governance and checkpoint Issue #455. Do not call unrun tests PASS or draft research evidence actual taste improvement.

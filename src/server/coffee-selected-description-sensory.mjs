@@ -283,3 +283,116 @@ export function selectedCurrentProductOvertone(html,{clean}={}){
  // review rather than silently choosing the first or a merged profile.
  return hits.length===1?hits[0]:null;
 }
+
+
+// One unconditional, current selected paragraph can print one additional
+// intrinsic flavor after repeating two already accepted labeled notes.
+// Retain literal evidence for Source Review ONLY, never canonical autofill.
+export function selectedCurrentNarrativeAdditionalTastingNote(html,{clean,notes}={}){
+ if(typeof html!=='string'||html.length>2_000_000||typeof clean!=='function'||
+  typeof notes!=='string'||notes.length<8||notes.length>300)return '';
+ const blocks=productCoffeeProse(html,clean);
+ const heads=blocks.filter(b=>b.tag==='h1'&&!b.educational);
+ if(heads.length!==1||!heads[0].text||heads[0].text.length>180)return '';
+ const accepted=notes.split(/\s*(?:,|&|[•·;|]|\band\b)\s*/iu).map(s=>s.trim()).filter(Boolean);
+ if(accepted.length<2||accepted.length>8)return '';
+ const found=new Set();
+ for(const block of blocks){
+  if(block.tag!=='p'||block.educational||block.text.length<40||block.text.length>1050||
+   unavailable.test(block.section)||NONCURRENT_COFFEE_PROSE.test(block.section))continue;
+  for(const sentence of block.text.split(/(?<=[.!?])\s+/u).slice(0,12)){
+   if(sentence.length<35||sentence.length>520||unavailable.test(sentence)||
+    NONCURRENT_COFFEE_PROSE.test(sentence))continue;
+   const match=sentence.match(/\b(?:layered|paired|rounded(?:\s+out)?|finished|balanced)\s+with\s+notes?\s+of\s+([\p{L}\p{M}]+(?:[ -][\p{L}\p{M}]+){0,2})(?=[,;.!?]|$)/iu);
+   if(!match)continue;
+   const prefix=fold(sentence.slice(0,match.index));
+   const corroborated=accepted.filter(x=>x.length>=3&&prefix.includes(fold(x)));
+   if(new Set(corroborated.map(fold)).size<2)continue;
+   const literal=match[1].trim();
+   if(!normalizeExplicitCoffeeTastingNotes(literal)||literal.length>50||
+    /\b(?:body|mouthfeel|texture|acidity|sweetness|finish|roast|process|coffee|beans?|milk|cream|syrup|water)\b/iu.test(literal)||
+    accepted.some(x=>fold(x)===fold(literal)))continue;
+   found.add(literal);
+  }
+ }
+ return found.size===1?[...found][0]:'';
+}
+
+
+// One exact chosen product can print a coordinated pair of flavor substances
+// across two consecutive sentences of its OWN current paragraph. Require the
+// chosen H1/name, two already accepted labeled-note anchors IN that paragraph
+// and unqualified direct "opens with ... and X, followed by ..." plus "hints
+// of Y add ..." text. Only preserve X/Y for member Source Review; never rewrite
+// the stronger printed Flavor Profile or borrow related/milk/history/SEO copy.
+export function selectedCurrentMultiSentenceNarrativeNotes(html,{clean,notes}={}){
+ if(typeof html!=='string'||html.length>2_000_000||typeof clean!=='function'||
+   typeof notes!=='string'||notes.length<8||notes.length>300)return '';
+ const selected=removeElements(html,['script','style','noscript','template','nav','aside','footer','header','select']);
+ const blocks=productCoffeeProse(selected,clean);
+ const heads=blocks.filter(b=>b.tag==='h1'&&!b.educational);
+ if(heads.length!==1||!heads[0].text||heads[0].text.length>180)return '';
+ const name=fold(heads[0].text);
+ const accepted=notes.split(/\s*(?:,|&|[•·;|]|\band\b)\s*/iu).map(x=>x.trim()).filter(Boolean);
+ if(accepted.length<3||accepted.length>8||accepted.some(x=>!normalizeExplicitCoffeeTastingNotes(x)))return '';
+ const matches=[];
+ for(const block of blocks){
+  if(block.tag!=='p'||block.educational||block.text.length<80||block.text.length>800||
+    unavailable.test(block.text)||unavailable.test(block.section)||
+    NONCURRENT_COFFEE_PROSE.test(block.text)||NONCURRENT_COFFEE_PROSE.test(block.section))continue;
+  const sentences=block.text.split(/(?<=[.!?])\s+/u).slice(0,8);
+  for(let i=0;i<sentences.length-1;i++){
+   const opening=sentences[i],following=sentences[i+1];
+   if(opening.length>390||following.length>250||unavailable.test(opening)||unavailable.test(following))continue;
+   const first=opening.match(/\b(?:opens|begins|starts)\s+with\b[^.!?]{3,145}?\band\s+([\p{L}]{3,20}(?:[ -][\p{L}]{3,20})?)\s*,?\s*followed\s+by\b/iu);
+   const second=following.match(/\bhints?\s+of\s+([\p{L}]{3,20}(?:[ -][\p{L}]{3,20})?)\s+(?:add|adds|offer|offers|bring|brings)\b/iu);
+   if(!first||!second||!fold(opening).startsWith(name+' opens with')&&
+    !/^(?:this coffee|the coffee|our coffee)\s+(?:opens|begins|starts)\s+with\b/iu.test(opening))continue;
+   const corroborated=accepted.filter(x=>fold(opening).includes(fold(x)));
+   if(new Set(corroborated.map(fold)).size<2)continue;
+   const extra=[first[1].trim(),second[1].trim()];
+   if(new Set(extra.map(fold)).size!==2||extra.some(x=>
+    x.length>45||/\b(?:body|mouthfeel|texture|acidity|sweetness|finish|roast|process|coffee|beans?|milk|cream|syrup|water)\b/iu.test(x)||
+    accepted.some(part=>fold(part)===fold(x))||!normalizeExplicitCoffeeTastingNotes(x)))continue;
+   const value=normalizeExplicitCoffeeTastingNotes(extra.join(', '));
+   if(value)matches.push(value);
+  }
+ }
+ return matches.length===1?matches[0]:'';
+}
+
+ 
+// Exact selected own paragraph, corroborated by the already accepted literal notes.
+// Source Review ONLY: never add intrinsic aroma to canonical tasting autofill.
+export function selectedCurrentIntrinsicAromaContext(html,{clean,notes}={}){
+ if(typeof html!=='string'||html.length>2_000_000||typeof clean!=='function'||
+  typeof notes!=='string'||notes.length<8||notes.length>300)return '';
+ const current=removeElements(html,['script','style','noscript','template','nav','aside','footer','header','select']);
+ const blocks=productCoffeeProse(current,clean);
+ const h1=blocks.filter(b=>b.tag==='h1'&&!b.educational);
+ if(h1.length!==1||!h1[0].text||h1[0].text.length>180)return '';
+ const title=fold(h1[0].text);
+ const allowed=/^(?:product info|product information|product description|description|coffee description|about the coffee|about this coffee|coffee details|details|coffee notes|tasting notes|flavor notes|flavour notes|coffee profile|overview)$/u;
+ const parts=notes.split(/\s*(?:,|&|[•·;|]|\band\b)\s*/iu).map(x=>x.trim()).filter(Boolean);
+ if(parts.length<2||parts.length>6)return '';
+ const matches=new Set();
+ for(const block of blocks){
+  // Current product descriptions may be inline <span>s inside one own <div>,
+  // not just paragraph tags. Structural selected scope still governs all three.
+  if(!['p','div','span'].includes(block.tag)||block.educational||block.text.length<65||block.text.length>950||
+   unavailable.test(block.section)||unavailable.test(block.text)||NONCURRENT_COFFEE_PROSE.test(block.text))continue;
+  const section=fold(block.section);
+  if(section&&section!==title&&!allowed.test(section))continue;
+  const story=fold(block.text);
+  if(!parts.every(x=>story.includes(fold(x))))continue;
+  for(const sentence of block.text.split(/(?<=[.!?])\s+/u).slice(0,10)){
+   if(sentence.length>380||unavailable.test(sentence)||NONCURRENT_COFFEE_PROSE.test(sentence))continue;
+   const m=sentence.match(/\b(?:this|our|the)\s+coffee\s+opens?\s+with\s+(?:an?\s+)?(floral|jasmine|citrus|chocolate|vanilla|nutty|fruity)\s+aroma\b/iu);
+   if(!m)continue;
+   const literal=m[1].toLowerCase()+' aroma';
+   if(parts.some(part=>fold(part).includes(fold(m[1]))))continue;
+   matches.add(literal);
+  }
+ }
+ return matches.size===1?[...matches][0]:'';
+}

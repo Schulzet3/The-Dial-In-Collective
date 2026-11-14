@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-13",
+  "issue": 33,
+  "round": "R184",
+  "original_coffee_number": 259,
+  "coffee": "Brasil Carmo de Minas",
+  "roaster": "Prelude Coffee Roasters",
+  "source_url": "https://preludecoffeeroasters.com/products/brasil",
+  "preflight": {
+    "initial_development_sha": "329df8c4bf28b376604e9bebaf935e4b6fb57ab9",
+    "docs_development_sha": "7e573820799f5800dd622e8778cc85d62436bfae",
+    "preflight_git_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d"
+  },
+  "diagnostics": {
+    "initial_pr_run": 43523684016,
+    "synthetic_pass_before": 9,
+    "guarded_parser_before_pass": true,
+    "afterproof_before_pass": false,
+    "cause": "test harness incorrectly treated seller's two informational H1 section labels as competing product H1s",
+    "correction": "only ignore exact About the Producer and What you'll find in the cup section labels; reject another competing coffee H1; parser unchanged",
+    "corrected_focused_tests": 11
+  },
+  "official_source": {
+    "raw_html_bytes": 177208,
+    "raw_html_sha256": "56fecbf4d71317fb65a511fd65b71957c0c233156ea73c2fc409a723f61c960a",
+    "selected_h1": "Brasil Carmo de Minas",
+    "source_type": "guarded public HTTPS current selected official product",
+    "selected_identity_verified": true,
+    "fields": {
+      "name": "Brasil Carmo de Minas",
+      "roaster": "Prelude Coffee Roasters",
+      "origin": "Mantiqueira de Minas, Brasil",
+      "producer": "Cocarive Cooperative",
+      "tasting_notes": "This coffee reminds us of cinnamon bread, milk chocolate, and macadamia nuts. It has a pleasant medium body with low acidity and a mild sweetness."
+    },
+    "blank_fields": [
+      "roast_level",
+      "process",
+      "decaffeination_method",
+      "espresso_recipe"
+    ],
+    "notes": [
+      "medium body is mouthfeel, not Medium roast",
+      "regional awards and drying conditions not selected-product certification/process",
+      "no sourced selected-lot growing city beyond current printed region",
+      "no SEO fallback or current source conflicts"
+    ],
+    "explicit_add_coffee_dom": true,
+    "source_review_dom": true,
+    "real_signed_in_acceptance": false
+  },
+  "raw_evidence": {
+    "workflow_run": 43523834391,
+    "afterproof_pass": true,
+    "afterproof_errors": [],
+    "github_artifact_id": 14083114010,
+    "zip_sha256": "db92cfc208e1808e1ccc80ea20eae61d2756823ac79b8055df94b8c66f984c24",
+    "evidence_json_sha256": "46fc34a362a9ca50e25e14e29db1d62a358b7028d0054ae116d3801bf946fd91",
+    "afterproof_json_sha256": "db65e73a7693ace1dd4eca3e6b0bc12f90b82e4447eca367d5d1e24a1cfd7131",
+    "artifact_independently_hashed_and_inspected": true,
+    "pull_request_checkout_synthetic_merge_sha": "1a996cdc3956b6ecf51932e29ddcbbab061b635f"
+  },
+  "integration": {
+    "pr": 2532,
+    "pr_head": "da5d453d9905a7d7e797c15b74756a2ba18c4e26",
+    "merged_sha": "7e573820799f5800dd622e8778cc85d62436bfae",
+    "merged_nonforce": true,
+    "merge_commit_skip_netlify": true,
+    "changed_four_blobs_match_reviewed_pr": true,
+    "applicable_pr_head_ci_success": [
+      43523834391,
+      43523834331,
+      43523834484,
+      43523834588,
+      43523834718,
+      43523834302,
+      43523834327
+    ],
+    "node_pass": 4659,
+    "node_fail": 0,
+    "node_skip": 6,
+    "frozen603_workflow": "SKIPPED_NOT_PASS",
+    "exact_merged_push_ci": "NOT_INDEPENDENTLY_READ",
+    "queue_promotion": "NONE"
+  },
+  "frozen": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "original_csv_git_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "oracle_edited": false,
+    "all_individually_certified": false
+  },
+  "scope": {
+    "issue33_open": true,
+    "provider_production_writes": 0,
+    "netlify_publication_authorized": false,
+    "release_queue_unchanged": true
+  }
+}

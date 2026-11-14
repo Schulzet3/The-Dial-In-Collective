@@ -66,6 +66,22 @@ function completeVarietyPhrase(value,{explicit=false}={}){
  return String(value).trim();
 }
 export {completeVarietyPhrase as explicitCoffeeVarietyList};
+
+// Some roasters publish "COUNTRY | Coffee name | Cultivar(s) | Process" as
+// one Product title. The middle segment is the coffee name, but only when
+// all three surrounding segments are unambiguously typed. Never derive
+// identity from a URL slug, merchant domain, SEO text or adjacent products.
+const TITLE_PROCESS_ONLY=new RegExp('^(?:'+PROCESS+'|(?:black|red|yellow|white|golden)\\s+honey)$','i');
+export function selectedCoffeeNameFromCountryVarietyProcessTitle(value){
+ if(typeof value!=='string'||value.length>200)return value;
+ const segments=value.split(/\s*\|\s*/u).map(part=>part.trim());
+ if(segments.length!==4)return value;
+ const [country,name,variety,process]=segments;
+ if(!COUNTRY_ONLY.test(country)||name.length<3||name.length>120||
+    !completeVarietyPhrase(variety)||!TITLE_PROCESS_ONLY.test(process))return value;
+ return name;
+}
+
 function processValue(value){
  if(/\bpulped[ -]+natural\b/i.test(value))return 'Honey';
  if(/\b(?:wet[ -]+hulled|semi[ -]+washed)\b/i.test(value))return 'Other/Unknown';

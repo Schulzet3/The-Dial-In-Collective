@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 231,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "5fe4b6b325b6da33c67c7cfad8cb7f67941d52fa",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "git_blob_verified": true
+  },
+  "scope": "Read-only six complete live SQL source definitions, execute privileges and numeric identifiers' current object-registration status; provider catalog drift",
+  "source_query": "SELECT n.nspname AS schema,p.proname AS name,pg_get_function_identity_arguments(p.oid) AS identity_args,length(pg_get_functiondef(p.oid)) AS chars,md5(pg_get_functiondef(p.oid)) AS md5,pg_get_functiondef(p.oid) AS definition,p.prosecdef AS security_definer,has_function_privilege('anon',p.oid,'EXECUTE') AS anon_execute,has_function_privilege('authenticated',p.oid,'EXECUTE') AS authenticated_execute,has_function_privilege('service_role',p.oid,'EXECUTE') AS service_execute FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE (n.nspname='public' AND p.proname IN ('dic_member_approval_claim','dic_member_approval_claim_poll','dic_member_approval_finish','dic_admin_edit_shot')) OR (n.nspname='private' AND p.proname IN ('dic_enqueue_member_approval_notices','dic_member_retry_pending_approval')) ORDER BY n.nspname,p.proname,p.oid",
+  "complete_provider_function_definitions": [
+    {
+      "schema": "private",
+      "name": "dic_enqueue_member_approval_notices",
+      "identity_args": "",
+      "chars": 460,
+      "md5": "36defca729c42b4ec35d4d2a4e1cfea5",
+      "definition": "CREATE OR REPLACE FUNCTION private.dic_enqueue_member_approval_notices()\n RETURNS trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n if new.action='approve' and new.member_id is not null then\n  insert into private.dic_member_approval_deliveries(event_id,member_id,channel)\n  values(new.id,new.member_id,'email'),(new.id,new.member_id,'push')\n  on conflict(event_id,channel) do nothing;\n end if;\n return new;\nend $function$\n",
+      "security_definer": true,
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "service_execute": false,
+      "semantic_verdict": "Definer trigger inserts approved-action delivery records idempotently per channel, no direct public EXECUTE."
+    },
+    {
+      "schema": "private",
+      "name": "dic_member_retry_pending_approval",
+      "identity_args": "p_submission_id uuid, p_expected_revision bigint",
+      "chars": 2166,
+      "md5": "5ebb55ad50529a080b3c2332a29d3309",
+      "definition": "CREATE OR REPLACE FUNCTION private.dic_member_retry_pending_approval(p_submission_id uuid, p_expected_revision bigint)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare actor uuid; s public.coffee_submissions; candidates jsonb;\nbegin\n actor:=private.require_member();\n if actor is null or p_submission_id is null or p_expected_revision is null then\n  raise exception using errcode='42501',message='Signed-in member and exact Pending record required.';\n end if;\n select * into s from public.coffee_submissions where id=p_submission_id for update;\n if not found or s.owner_id is distinct from actor then\n  raise exception using errcode='42501',message='Only the submission owner may retry approval.';\n end if;\n if s.revision is distinct from p_expected_revision then\n  return jsonb_build_object('ok',false,'code','conflict','status',s.status,\n   'message','Submission changed; refresh before retry.');\n end if;\n if s.status in ('approved','merged') and s.canonical_coffee_id is not null then\n  return jsonb_build_object('ok',true,'status','verified','coffee_id',s.canonical_coffee_id,'already_verified',true);\n end if;\n if s.status not in ('pending','conflict') or s.canonical_coffee_id is not null then\n  raise exception using errcode='23514',message='Only an unresolved new coffee may be retried.';\n end if;\n candidates:=private.dic_find_coffee_matches(s.proposed_data||jsonb_build_object('source_url',s.source_url));\n if candidates->>'classification'='needs_confirmation' then\n  return jsonb_build_object('ok',false,'code','needs_confirmation','status','pending',\n    'candidates',coalesce(candidates->'candidates','[]'::jsonb));\n end if;\n if candidates->>'classification'='exact_verified' then\n  return private.dic_link_pending_coffee(s.id,(candidates->>'exact_id')::uuid,'canonical_reused',\n   jsonb_build_object('method','member_auto_approved','source_assurance','member_supplied_unverified'));\n end if;\n return private.dic_promote_pending_coffee(s.id,'member_auto_approved',\n   jsonb_build_object('approval_basis','member_retry_distinct',\n    'source_assurance','member_supplied_unverified'),false);\nend $function$\n",
+      "security_definer": true,
+      "anon_execute": false,
+      "authenticated_execute": true,
+      "service_execute": false,
+      "semantic_verdict": "Requires admitted actor and owner, row lock and exact revision; restricts retry to unresolved new coffee and distinguishes verified-match reuse from distinct promotion."
+    },
+    {
+      "schema": "public",
+      "name": "dic_admin_edit_shot",
+      "identity_args": "p_record_id uuid, p_expected_revision bigint, p_details jsonb, p_reason text, p_kind text",
+      "chars": 548,
+      "md5": "b4e2f07488e5ebc93d1569ca46ad0fbd",
+      "definition": "CREATE OR REPLACE FUNCTION public.dic_admin_edit_shot(p_record_id uuid, p_expected_revision bigint, p_details jsonb, p_reason text, p_kind text)\n RETURNS jsonb\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\nBEGIN\n RETURN private.dic_admin_edit_record(p_record_id,p_expected_revision,p_details,p_reason,p_kind);\nEXCEPTION WHEN serialization_failure THEN\n IF SQLERRM IN ('Shot changed; refresh before editing.','Coffee changed; refresh before editing.') THEN\n  RAISE SQLSTATE 'PT409' USING MESSAGE = SQLERRM;\n END IF;\n RAISE;\nEND;\n$function$\n",
+      "security_definer": false,
+      "anon_execute": false,
+      "authenticated_execute": true,
+      "service_execute": true,
+      "semantic_verdict": "Invoker wrapper delegates revision and details to private editor, known conflict mapping to PT409; private editor not newly re-reviewed."
+    },
+    {
+      "schema": "public",
+      "name": "dic_member_approval_claim",
+      "identity_args": "p_channel text, p_limit integer",
+      "chars": 1920,
+      "md5": "b0d1e8d2622852b6b930def5c8a171d9",
+      "definition": "CREATE OR REPLACE FUNCTION public.dic_member_approval_claim(p_channel text, p_limit integer DEFAULT 20)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare batches jsonb;\nbegin\n if p_channel not in ('email','push') or p_channel is null or\n    p_limit is null or p_limit not between 1 and 20 then\n  raise exception using errcode='22023',message='Invalid delivery channel/limit';\n end if;\n with chosen as (\n  select d.event_id,d.channel\n  from private.dic_member_approval_deliveries d\n  join private.beta_members m on m.owner_id=d.member_id\n  join auth.users u on u.id=d.member_id\n  where d.channel=p_channel and m.signup_review_state='approved'\n   and m.enabled and m.admitted_at is not null\n   and u.email_confirmed_at is not null\n   and ((d.state='pending' and d.next_attempt_at<=now())\n    or (d.state='sending' and d.lease_until < now()))\n  order by d.event_id limit p_limit for update of d skip locked\n ), claimed as (\n  update private.dic_member_approval_deliveries d\n  set state='sending',attempt_count=d.attempt_count+1,\n      claim_token=gen_random_uuid(),lease_until=now()+interval '2 minutes'\n  from chosen c where d.event_id=c.event_id and d.channel=c.channel\n  returning d.event_id,d.member_id,d.claim_token\n )\n select coalesce(jsonb_agg(jsonb_build_object(\n   'eventId',c.event_id,'claimToken',c.claim_token,\n   'email',case when p_channel='email' then left(u.email,254) else null end,\n   'endpoints',case when p_channel='push' then (\n    select coalesce(jsonb_agg(jsonb_build_object('hash',s.endpoint_hash,'endpoint',s.endpoint)),'[]'::jsonb)\n    from public.dic_member_approval_push_subscriptions s\n    where s.owner_id=c.member_id and s.expires_at>now()\n      and s.last_sent_event_id<c.event_id\n   ) else '[]'::jsonb end\n  ) order by c.event_id),'[]'::jsonb) into batches\n from claimed c join auth.users u on u.id=c.member_id;\n return batches;\nend $function$\n",
+      "security_definer": true,
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "service_execute": true,
+      "semantic_verdict": "Service-only leased claim with SKIP LOCKED, member status/admission and email confirmation; destinations returned to service caller only; broker network enforcement unverified."
+    },
+    {
+      "schema": "public",
+      "name": "dic_member_approval_claim_poll",
+      "identity_args": "",
+      "chars": 335,
+      "md5": "b94ddc2223993aa7685faf482d3871e4",
+      "definition": "CREATE OR REPLACE FUNCTION public.dic_member_approval_claim_poll()\n RETURNS boolean\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n update private.dic_member_approval_poll_gate set last_polled_at=now()\n where singleton=true and last_polled_at < now()-interval '4 minutes';\n return found;\nend $function$\n",
+      "security_definer": true,
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "service_execute": true,
+      "semantic_verdict": "Service-only singleton update throttles polls to four-minute intervals; no direct member RPC."
+    },
+    {
+      "schema": "public",
+      "name": "dic_member_approval_finish",
+      "identity_args": "p_event_id bigint, p_channel text, p_claim_token uuid, p_outcome text",
+      "chars": 1003,
+      "md5": "e92ba8e17ab274bcab1a564475d16f28",
+      "definition": "CREATE OR REPLACE FUNCTION public.dic_member_approval_finish(p_event_id bigint, p_channel text, p_claim_token uuid, p_outcome text)\n RETURNS boolean\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n if p_channel not in ('email','push') or p_outcome not in ('sent','skipped','retry')\n   or p_claim_token is null or p_event_id is null then\n  raise exception using errcode='22023',message='Invalid delivery receipt';\n end if;\n update private.dic_member_approval_deliveries d\n set state=case when p_outcome='retry' then 'pending' else p_outcome end,\n     claim_token=null,lease_until=null,\n     completed_at=case when p_outcome='retry' then null else now() end,\n     next_attempt_at=case when p_outcome='retry' then\n       now()+least(60,power(2,least(d.attempt_count,5))::integer)*interval '1 minute'\n       else d.next_attempt_at end\n where d.event_id=p_event_id and d.channel=p_channel and\n   d.state='sending' and d.claim_token=p_claim_token;\n return found;\nend $function$\n",
+      "security_definer": true,
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "service_execute": true,
+      "semantic_verdict": "Service-only claim-token and sending-state guard; limited retry backoff; no confirmed bug from current source."
+    }
+  ],
+  "definition_characters": 6432,
+  "first_time_source_word_credit": 0,
+  "named_identifier_registration_query": "SELECT n.nspname AS schema,c.relname AS name,'RELATION' AS kind FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname IN ('public','private') AND c.relkind IN ('r','p','v','m') UNION ALL SELECT n.nspname,p.proname,'FUNCTION' FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname IN ('public','private')",
+  "named_identifier_live_registration": [
+    {
+      "name": "dic_admin_records",
+      "registrations": [
+        {
+          "schema": "public",
+          "name": "dic_admin_records",
+          "kind": "FUNCTION"
+        },
+        {
+          "schema": "private",
+          "name": "dic_admin_records",
+          "kind": "FUNCTION"
+        }
+      ]
+    },
+    {
+      "name": "dic_member_approval_poll_gate",
+      "registrations": [
+        {
+          "schema": "private",
+          "name": "dic_member_approval_poll_gate",
+          "kind": "RELATION"
+        }
+      ]
+    },
+    {
+      "name": "dic_roaster_identity_provenance_archive",
+      "registrations": [
+        {
+          "schema": "private",
+          "name": "dic_roaster_identity_provenance_archive",
+          "kind": "RELATION"
+        }
+      ]
+    },
+    {
+      "name": "dic_roaster_aliases",
+      "registrations": []
+    },
+    {
+      "name": "dic_coffee_first_entry",
+      "registrations": [
+        {
+          "schema": "private",
+          "name": "dic_coffee_first_entry",
+          "kind": "RELATION"
+        }
+      ]
+    },
+    {
+      "name": "dic_live_import_privacy_result",
+      "registrations": []
+    },
+    {
+      "name": "dic_coffee_aliases",
+      "registrations": [
+        {
+          "schema": "private",
+          "name": "dic_coffee_aliases",
+          "kind": "RELATION"
+        }
+      ]
+    },
+    {
+      "name": "dic_roaster_directory",
+      "registrations": []
+    },
+    {
+      "name": "dic_admin_edit_shot",
+      "registrations": [
+        {
+          "schema": "public",
+          "name": "dic_admin_edit_shot",
+          "kind": "FUNCTION"
+        }
+      ]
+    },
+    {
+      "name": "dic_mutate",
+      "registrations": [
+        {
+          "schema": "public",
+          "name": "dic_mutate",
+          "kind": "FUNCTION"
+        }
+      ]
+    }
+  ],
+  "drift_query": "WITH app AS (SELECT n.nspname,p.oid,p.proname,pg_get_functiondef(p.oid) AS def FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname IN ('public','private')) SELECT jsonb_build_object('observed_at',now(),'function_count',(SELECT count(*) FROM app),'function_ordered_md5',(SELECT md5(string_agg(nspname||'.'||proname||'='||md5(def),';' ORDER BY nspname,proname,oid)) FROM app),'views',(SELECT count(*) FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname IN ('public','private') AND c.relkind IN ('v','m')),'tables',(SELECT count(*) FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname IN ('public','private') AND c.relkind IN ('r','p')),'policies',(SELECT count(*) FROM pg_policies WHERE schemaname IN ('public','private')),'migrations',(SELECT count(*) FROM supabase_migrations.schema_migrations),'legacy_directory',(SELECT to_regclass('private.dic_roaster_directory')::text),'legacy_aliases',(SELECT to_regclass('private.dic_roaster_aliases')::text)) AS evidence",
+  "drift": {
+    "views": 0,
+    "tables": 52,
+    "policies": 41,
+    "migrations": 69,
+    "observed_at": "2026-11-14T02:49:57.164065+00:00",
+    "function_count": 114,
+    "legacy_aliases": null,
+    "legacy_directory": null,
+    "function_ordered_md5": "4bfc78411475d7b7c9699c6c8a8f757d"
+  },
+  "baseline_app_hash_unchanged": true,
+  "read_only_edge_metadata": "Five ACTIVE version/JWT/bundle registrations confirmed this run; full Edge source not re-reviewed",
+  "new_confirmed_defects": 0,
+  "justified_deletions": 0,
+  "production_writes": 0,
+  "tests": "NOT_RUN_DOCS_ONLY",
+  "effective_hosted_HTTP_Auth_JWT": "UNVERIFIED_COORDINATE_ISSUE_96",
+  "semantic_conclusion": "Service role is the only SQL EXECUTE grantee for delivery RPCs; this does not verify broker HTTP enforcement. Historical named query traces are not deployed relation/function proofs. No new reproduced bug or safe removal.",
+  "baseline_complete": false,
+  "next_cursor": "Provider drift and numeric ranks561-640 against 556 prior IDs; review unverified hosted config"
+}

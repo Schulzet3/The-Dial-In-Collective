@@ -2,7 +2,7 @@
 
 **Mandatory first:** read the live development SHA and [PREFLIGHT.md](ai/PREFLIGHT.md); apply [AGENTS.md](../AGENTS.md), the [current queue](RELEASE_QUEUE.json), [CURRENT_STATUS.md](CURRENT_STATUS.md) newest entries, [#2169](https://github.com/Schulzet3/The-Dial-In-Collective/issues/2169), exact hosted CI and actual production/provider readbacks. Historical queue counts, "READY" labels and "CURRENT" passages below are point-in-time receipts, **not a live candidate**. Use no guessed queue values.
 **Active rules:** risk-tier tests and five exact-source CI checks, no redundant build; READY-only source isolation including tests; one-use source/IDs grant and one nonforce main-push controller only after a NEW owner Publish; independently verify final Netlify READY/current. This document update authorizes no candidate, grant or publication.
-**November 12 status pointer:** consult the top of CURRENT_STATUS for the READY4E2E production reconciliation and the separate unpublished #2258 email/opt-in member push. Do not reuse pre-release "no publication" sentences as today's facts.
+**Current status pointer (November 13):** consult the newest CURRENT_STATUS entry and live refs/providers. READY1MEMBER-36 already deployed the #2258 approval email/member push code, migration, Edge broker and Netlify poll on November 12; actual external inbox and opted-in handset delivery remain UNVERIFIED. The isolated READY15 candidate passed five exact-source jobs but is NOT published, staged, granted or eligible for automatic release; a NEW owner `Publish` is required. Older dated "unpublished" references below are historical receipts.
 
 ---
 ## November 12 #2169 — ACTIVE READY + event gates, source-drift isolation (development only)

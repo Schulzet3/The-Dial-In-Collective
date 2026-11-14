@@ -1,0 +1,28 @@
+# Issue #455 R455-242 — reject non-scalar NEW-shot physical measurements (November 13, 2026) [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=6a7b9c3faca7ff4053189518e5470cca22ae60a3 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+## Scope, authority and reproducible finding
+Owner-authorized Option B: safe Locked-compatible Log Shot integrity correction without publication. Immutable parent development `6a7b9c3faca7ff4053189518e5470cca22ae60a3`; PREFLIGHT Git blob `2fb236bbfa6bac48513eeb3bd157b260853af06d` independently fetched and identical before other project content; parent model Git blob `469c55c17dd3ee5c16523e59a5adace1056e9038`. The `validateShot` path accepted a one-element array such as `doseG:[18]` because `num([18])` is 18; `timeS:[17]`, `yieldG:[44]` and `tempC:[91]` similarly masqueraded as original scalar measurements when in bounds. Model `saveShot` calls `validateShot` before audit or preference mutations, but previously stored the coerced readings rather than rejecting malformed new inputs. This is deterministic code behavior, **not** evidence of a real member incident.
+
+## Minimal SAFE change and test coverage
+- `site/lib/model.js`: require an actual number or numeric string for each new-shot dose, yield, time and nonblank optional brew temperature; retain their existing bounds and labels and the separate existing grinder validation. Do not modify global `num`, archived records, dose warnings or any numeric recommendation target.
+- `tests/issue455-shot-scalar-measurements.test.mjs`: synthetic negative array/object/wrapped number/BigInt for mandatory measurements, analogous optional temperature rejection, unaffected member state, positive numeric string cloud payload and saved shot with all five taste scales/original notes, plus unchanged same-coffee legacy offline replay. No synthetic production users or external requests.
+- This new journal includes the exact current-preflight-source + blob pair in the **same commit** as source/tests.
+
+## Boundary and verification status at authoring
+Preserve five explicit tastes, rated all-green versus incomplete, one truly controllable step, original measured shots/private notes/History, distinct Turbo/Fast-Flow/style/families, grinder versions/slow-feed, temperature capability, coffee-specific evidence and Community/RLS. No science/numeric-policy/Locked change, new data field, telemetry, SQL/Auth/Edge/provider/member write, force Git, backup/schedule/visibility change or deploy. No #267 exhaustive line-review credit. The existing nine originals/Implementation Pack are not numeric authority; S019 access remains unresolved.
+
+**At authoring:** focused Node22, positive/negative tests, PR-head CI, browser/cloud/offline/SQL/approval checks and merged-push checks **NOT YET EXECUTED; not PASS or READY**. Changed three paths only. Next: inspect PR-head exact SHA and all applicable CI (reuse unchanged coverage), fix failures, nonforce integrate with `[skip netlify]` in actual merge title AND message, verify merged file blobs and merged governance. Then add one traceable R242 source correctness finding to the canonical #455 ledger, reconcile CURRENT_STATUS and existing queue (new scoped item IN_PROGRESS until certified READY) and issue. Never publish.
+
+## Exact-source governance recovery — CI failure diagnosed and corrected [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=6a7b9c3faca7ff4053189518e5470cca22ae60a3 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+PR #2518 head `d2246b6bf9a7f6bc157bc64b33f06563e05398fa`: source-security workflow 43513740494 SUCCESS; original603 workflow 43513740485 SKIPPED (NOT PASS). PR-head approval workflow 43513740486 FAILED, specifically the live release-queue enforce-intake guard: `Untracked app change; add an IN_PROGRESS/TESTING/READY queue item: site/lib/model.js`. This was a valid guard, not a product failure. Correct by adding exactly one scoped TESTING item `DIC-Q-455-r242-shot-scalar-measurement-integrity` to `docs/RELEASE_QUEUE.json`; preserve previous queue items/history verbatim, no READY/DEPLOYED promotion. Rechecked source branch `6a7b9c3faca7ff4053189518e5470cca22ae60a3` and PR head before this journal/queue commit; no new code/tests/CI bytes, same-commit original R242 code/test receipt preserved. Recheck all newly triggered PR-head checks, diagnose actual Node/UX/SQL failures and rerun only failed relevant checks after correction. No deployment authorized.
+
+## R242 approval-contract schema repair (same scoped journal, docs-only) [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=df14d85667f54f66f71a22793a3abb01a41a8245 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+PR head `922cb48ab49ef776324d41b268dd8d28c9d9438f` approval workflow [43514034458](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/43514034458) failed the SAFE schema validator before checking intake. Exact source check `scripts/release/release-queue.mjs` lines 39-44 requires `merged_source_sha:null` before merge, deployment-only `scope_paths` (not test files), plus `tests`, `ci_runs` and `blockers` all arrays. Fixed the single R242 queue entry using those required fields; all prior 340 items/139 history preserved byte-for-byte. This correction changes no application source/test/CI, numeric policy or provider. Previous failure remains documented, not PASS; check new exact PR-head approval workflow and Node/cloud/SQL independently before integration.

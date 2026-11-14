@@ -1,0 +1,1230 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 223,
+  "project_ref": "azviqqejypsefzilgonr",
+  "initial_preflight_development_sha": "c572b245e2dfce724cd571b0f57fb933589e121c",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "observed_at": "2026-11-13T18:49:03.36792+00:00",
+  "source_sql": {
+    "pgss_top_40": "WITH t AS (SELECT s.queryid::text id, r.rolname role_name,s.calls,round(s.mean_exec_time::numeric,3) mean_ms,round(s.total_exec_time::numeric,1) total_ms,round(s.max_exec_time::numeric,1) max_ms,s.shared_blks_hit,s.shared_blks_read,s.temp_blks_written,s.temp_blks_read,s.rows, CASE WHEN ltrim(s.query) ILIKE 'WITH%' THEN 'WITH' WHEN ltrim(s.query) ILIKE 'SELECT%' THEN 'SELECT' WHEN ltrim(s.query) ILIKE 'INSERT%' THEN 'INSERT' WHEN ltrim(s.query) ILIKE 'UPDATE%' THEN 'UPDATE' WHEN ltrim(s.query) ILIKE 'DELETE%' THEN 'DELETE' ELSE 'OTHER' END kind,lower((regexp_match(s.query,'dic_[a-z0-9_]+','i'))[1]) dic_identifier FROM pg_stat_statements s LEFT JOIN pg_roles r ON r.oid=s.userid WHERE s.calls>0 ORDER BY s.total_exec_time DESC LIMIT 40) SELECT jsonb_build_object('observed_at',now(),'pgss_reset',(SELECT stats_reset FROM pg_stat_statements_info),'database_reset',(SELECT stats_reset FROM pg_stat_database WHERE datname=current_database()),'total_fingerprints',(SELECT count(*) FROM pg_stat_statements),'track_functions',current_setting('track_functions',true),'track_io_timing',current_setting('track_io_timing',true),'top_40',(SELECT jsonb_agg(to_jsonb(t)) FROM t)) evidence;",
+    "table_index_definitions": "WITH names(tbl) AS (VALUES ('account_preferences'),('setups'),('setup_versions'),('setup_preferences'),('grinder_calibrations'),('baskets'),('basket_versions'),('library_entries'),('coffee_submissions'),('coffees'),('workspace_state'),('workspace_coffees'),('shots'),('shot_notes'),('personal_recipe_families'),('recipe_preferences')) SELECT n.tbl,c.oid::regclass::text relation,c.reltuples::bigint estimated_rows,pg_total_relation_size(c.oid) total_bytes,coalesce(st.seq_scan,0) seq_scan,coalesce(st.idx_scan,0) idx_scan,coalesce(st.n_dead_tup,0) estimated_dead_rows,(SELECT jsonb_agg(jsonb_build_object('name',i.relname,'ddl',pg_get_indexdef(i.oid),'source_md5',md5(pg_get_indexdef(i.oid)),'idx_scan',coalesce(si.idx_scan,0),'size_bytes',pg_relation_size(i.oid)) ORDER BY i.relname) FROM pg_index px JOIN pg_class i ON i.oid=px.indexrelid LEFT JOIN pg_stat_user_indexes si ON si.indexrelid=i.oid WHERE px.indrelid=c.oid) indexes FROM names n LEFT JOIN pg_class c ON c.relname=n.tbl AND c.relnamespace='public'::regnamespace LEFT JOIN pg_stat_user_tables st ON st.relid=c.oid ORDER BY n.tbl;",
+    "routine_definitions": "SELECT n.nspname schema,p.proname name,pg_get_function_identity_arguments(p.oid) args,md5(pg_get_functiondef(p.oid)) source_md5,length(pg_get_functiondef(p.oid)) source_chars,pg_get_functiondef(p.oid) complete_ddl FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE (n.nspname='private' AND p.proname IN ('read_personal_state','session_status','require_member')) OR (n.nspname='public' AND p.proname IN ('dic_read_personal_state','dic_session_status','dic_my_community_outliers')) ORDER BY n.nspname,p.proname;"
+  },
+  "pg_stat_statements_numeric_only": {
+    "top_40": [
+      {
+        "id": "1725044562985116050",
+        "kind": "WITH",
+        "rows": 4753,
+        "calls": 4753,
+        "max_ms": 1566.4,
+        "mean_ms": 15.07,
+        "total_ms": 71625.4,
+        "role_name": "authenticated",
+        "dic_identifier": "dic_read_personal_state",
+        "temp_blks_read": 0,
+        "shared_blks_hit": 8344686,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-7726440967385220442",
+        "kind": "SELECT",
+        "rows": 63388,
+        "calls": 106,
+        "max_ms": 307.8,
+        "mean_ms": 163.917,
+        "total_ms": 17375.2,
+        "role_name": "authenticator",
+        "dic_identifier": null,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 0,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "1554751528326282872",
+        "kind": "WITH",
+        "rows": 1045,
+        "calls": 27,
+        "max_ms": 1240.1,
+        "mean_ms": 557.622,
+        "total_ms": 15055.8,
+        "role_name": "supabase_read_only_user",
+        "dic_identifier": null,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 1685894,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-2647655532108368607",
+        "kind": "SELECT",
+        "rows": 2262,
+        "calls": 29,
+        "max_ms": 2248.5,
+        "mean_ms": 468.583,
+        "total_ms": 13588.9,
+        "role_name": "postgres",
+        "dic_identifier": null,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 210,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-8294602713382524533",
+        "kind": "WITH",
+        "rows": 2585,
+        "calls": 2585,
+        "max_ms": 163,
+        "mean_ms": 4.579,
+        "total_ms": 11836.2,
+        "role_name": "authenticated",
+        "dic_identifier": "dic_my_community_outliers",
+        "temp_blks_read": 0,
+        "shared_blks_hit": 1785586,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-8647284770412454280",
+        "kind": "WITH",
+        "rows": 1192,
+        "calls": 1192,
+        "max_ms": 758.6,
+        "mean_ms": 8.776,
+        "total_ms": 10461.5,
+        "role_name": "authenticated",
+        "dic_identifier": "dic_session_status",
+        "temp_blks_read": 0,
+        "shared_blks_hit": 429481,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "4868794970434878014",
+        "kind": "SELECT",
+        "rows": 36,
+        "calls": 36,
+        "max_ms": 1437,
+        "mean_ms": 219.259,
+        "total_ms": 7893.3,
+        "role_name": "supabase_admin",
+        "dic_identifier": null,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 0,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-7990357377309318073",
+        "kind": "WITH",
+        "rows": 490,
+        "calls": 490,
+        "max_ms": 116.6,
+        "mean_ms": 13.508,
+        "total_ms": 6618.8,
+        "role_name": "service_role",
+        "dic_identifier": "dic_admin_push_claim_poll",
+        "temp_blks_read": 0,
+        "shared_blks_hit": 102399,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "3811097392025773740",
+        "kind": "WITH",
+        "rows": 1470,
+        "calls": 14,
+        "max_ms": 613.2,
+        "mean_ms": 393.807,
+        "total_ms": 5513.3,
+        "role_name": "postgres",
+        "dic_identifier": null,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 98008,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-8856799461280935852",
+        "kind": "WITH",
+        "rows": 8467,
+        "calls": 106,
+        "max_ms": 509.3,
+        "mean_ms": 48.039,
+        "total_ms": 5092.2,
+        "role_name": "authenticator",
+        "dic_identifier": null,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 163503,
+        "shared_blks_read": 76,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "1795822111904855936",
+        "kind": "SELECT",
+        "rows": 19959,
+        "calls": 94,
+        "max_ms": 126.8,
+        "mean_ms": 54.162,
+        "total_ms": 5091.2,
+        "role_name": "postgres",
+        "dic_identifier": null,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 46810,
+        "shared_blks_read": 3,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-6340671216805360367",
+        "kind": "WITH",
+        "rows": 2357,
+        "calls": 106,
+        "max_ms": 330.7,
+        "mean_ms": 46.205,
+        "total_ms": 4897.7,
+        "role_name": "authenticator",
+        "dic_identifier": null,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 196952,
+        "shared_blks_read": 259,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-3624220933928424355",
+        "kind": "WITH",
+        "rows": 306,
+        "calls": 7,
+        "max_ms": 768.2,
+        "mean_ms": 662.151,
+        "total_ms": 4635.1,
+        "role_name": "supabase_read_only_user",
+        "dic_identifier": null,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 492205,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "8991972272712484424",
+        "kind": "SELECT",
+        "rows": 1716,
+        "calls": 22,
+        "max_ms": 349.1,
+        "mean_ms": 198.704,
+        "total_ms": 4371.5,
+        "role_name": "supabase_read_only_user",
+        "dic_identifier": null,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 62,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "8580411586163530256",
+        "kind": "SELECT",
+        "rows": 23390,
+        "calls": 106,
+        "max_ms": 98.2,
+        "mean_ms": 41.084,
+        "total_ms": 4354.9,
+        "role_name": "pgbouncer",
+        "dic_identifier": null,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 279808,
+        "shared_blks_read": 2,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "5669973040834028811",
+        "kind": "WITH",
+        "rows": 788,
+        "calls": 788,
+        "max_ms": 36.5,
+        "mean_ms": 4.911,
+        "total_ms": 3870,
+        "role_name": "service_role",
+        "dic_identifier": "dic_admin_push_runtime_keys",
+        "temp_blks_read": 0,
+        "shared_blks_hit": 226293,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "6210997391053278587",
+        "kind": "WITH",
+        "rows": 228,
+        "calls": 13,
+        "max_ms": 507.2,
+        "mean_ms": 293.24,
+        "total_ms": 3812.1,
+        "role_name": "supabase_read_only_user",
+        "dic_identifier": null,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 492590,
+        "shared_blks_read": 13,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "2180288267061557690",
+        "kind": "WITH",
+        "rows": 68,
+        "calls": 68,
+        "max_ms": 470.1,
+        "mean_ms": 52.965,
+        "total_ms": 3601.6,
+        "role_name": "authenticated",
+        "dic_identifier": "dic_apply_client_change",
+        "temp_blks_read": 0,
+        "shared_blks_hit": 81636,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-3856660887648347173",
+        "kind": "WITH",
+        "rows": 487,
+        "calls": 487,
+        "max_ms": 98.6,
+        "mean_ms": 7.095,
+        "total_ms": 3455.2,
+        "role_name": "service_role",
+        "dic_identifier": "dic_admin_push_snapshot",
+        "temp_blks_read": 0,
+        "shared_blks_hit": 381587,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-4828288663145051522",
+        "kind": "WITH",
+        "rows": 295,
+        "calls": 295,
+        "max_ms": 95.8,
+        "mean_ms": 11.664,
+        "total_ms": 3440.8,
+        "role_name": "service_role",
+        "dic_identifier": "dic_member_approval_claim_poll",
+        "temp_blks_read": 0,
+        "shared_blks_hit": 55246,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-3853304512339224630",
+        "kind": "SELECT",
+        "rows": 501026,
+        "calls": 94,
+        "max_ms": 52.1,
+        "mean_ms": 29.546,
+        "total_ms": 2777.3,
+        "role_name": "postgres",
+        "dic_identifier": null,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 4640,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-3281422650445877289",
+        "kind": "WITH",
+        "rows": 590,
+        "calls": 590,
+        "max_ms": 119.9,
+        "mean_ms": 4.556,
+        "total_ms": 2687.8,
+        "role_name": "service_role",
+        "dic_identifier": "dic_member_approval_claim",
+        "temp_blks_read": 0,
+        "shared_blks_hit": 310537,
+        "shared_blks_read": 4,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "1389798904427321193",
+        "kind": "SELECT",
+        "rows": 28663,
+        "calls": 94,
+        "max_ms": 55.2,
+        "mean_ms": 27.334,
+        "total_ms": 2569.4,
+        "role_name": "postgres",
+        "dic_identifier": null,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 15901,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-6208388078200157674",
+        "kind": "SELECT",
+        "rows": 66866,
+        "calls": 92,
+        "max_ms": 80.2,
+        "mean_ms": 26.833,
+        "total_ms": 2468.7,
+        "role_name": "postgres",
+        "dic_identifier": null,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 43308,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "2669020654105127862",
+        "kind": "WITH",
+        "rows": 111,
+        "calls": 111,
+        "max_ms": 112.8,
+        "mean_ms": 21.273,
+        "total_ms": 2361.3,
+        "role_name": "authenticated",
+        "dic_identifier": "dic_community_recommendation_evidence",
+        "temp_blks_read": 0,
+        "shared_blks_hit": 100126,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "6077630922003849905",
+        "kind": "SELECT",
+        "rows": 12,
+        "calls": 1,
+        "max_ms": 2282.4,
+        "mean_ms": 2282.361,
+        "total_ms": 2282.4,
+        "role_name": "postgres",
+        "dic_identifier": null,
+        "temp_blks_read": 21367,
+        "shared_blks_hit": 205,
+        "shared_blks_read": 0,
+        "temp_blks_written": 21425
+      },
+      {
+        "id": "-3809464596996367937",
+        "kind": "SELECT",
+        "rows": 13,
+        "calls": 1,
+        "max_ms": 2275.7,
+        "mean_ms": 2275.732,
+        "total_ms": 2275.7,
+        "role_name": "postgres",
+        "dic_identifier": null,
+        "temp_blks_read": 21383,
+        "shared_blks_hit": 205,
+        "shared_blks_read": 0,
+        "temp_blks_written": 21441
+      },
+      {
+        "id": "-5708723254081763768",
+        "kind": "SELECT",
+        "rows": 605,
+        "calls": 25,
+        "max_ms": 360.3,
+        "mean_ms": 90.154,
+        "total_ms": 2253.8,
+        "role_name": "postgres",
+        "dic_identifier": null,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 66,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-8384119247527024938",
+        "kind": "WITH",
+        "rows": 350,
+        "calls": 350,
+        "max_ms": 103.2,
+        "mean_ms": 6.41,
+        "total_ms": 2243.6,
+        "role_name": "authenticated",
+        "dic_identifier": "dic_admin_dashboard",
+        "temp_blks_read": 0,
+        "shared_blks_hit": 219380,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "3749267876309250131",
+        "kind": "WITH",
+        "rows": 123,
+        "calls": 6,
+        "max_ms": 542.9,
+        "mean_ms": 373.552,
+        "total_ms": 2241.3,
+        "role_name": "supabase_read_only_user",
+        "dic_identifier": null,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 269514,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-5388317814335643998",
+        "kind": "WITH",
+        "rows": 145,
+        "calls": 2,
+        "max_ms": 1232,
+        "mean_ms": 1041.117,
+        "total_ms": 2082.2,
+        "role_name": "supabase_read_only_user",
+        "dic_identifier": null,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 202709,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-4904269737613224597",
+        "kind": "WITH",
+        "rows": 33,
+        "calls": 33,
+        "max_ms": 223.6,
+        "mean_ms": 62.116,
+        "total_ms": 2049.8,
+        "role_name": "authenticated",
+        "dic_identifier": "dic_find_coffee_matches",
+        "temp_blks_read": 0,
+        "shared_blks_hit": 26646,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "6908682427559685386",
+        "kind": "SELECT",
+        "rows": 22477,
+        "calls": 94,
+        "max_ms": 30.6,
+        "mean_ms": 21.182,
+        "total_ms": 1991.1,
+        "role_name": "postgres",
+        "dic_identifier": null,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 1024397,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "1798441094307054606",
+        "kind": "UPDATE",
+        "rows": 249,
+        "calls": 249,
+        "max_ms": 36.6,
+        "mean_ms": 7.824,
+        "total_ms": 1948.2,
+        "role_name": "supabase_auth_admin",
+        "dic_identifier": null,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 30441,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-1971369500854142423",
+        "kind": "WITH",
+        "rows": 60,
+        "calls": 2,
+        "max_ms": 861.7,
+        "mean_ms": 860.07,
+        "total_ms": 1720.1,
+        "role_name": "postgres",
+        "dic_identifier": null,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 50686,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-7575955683434934462",
+        "kind": "OTHER",
+        "rows": 18925,
+        "calls": 18925,
+        "max_ms": 77,
+        "mean_ms": 0.09,
+        "total_ms": 1701.3,
+        "role_name": "postgres",
+        "dic_identifier": null,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 131153,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "6831302621400150014",
+        "kind": "INSERT",
+        "rows": 249,
+        "calls": 249,
+        "max_ms": 27.9,
+        "mean_ms": 6.332,
+        "total_ms": 1576.7,
+        "role_name": "supabase_auth_admin",
+        "dic_identifier": null,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 10530,
+        "shared_blks_read": 8,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-7805424286211396226",
+        "kind": "UPDATE",
+        "rows": 205,
+        "calls": 205,
+        "max_ms": 29.4,
+        "mean_ms": 7.627,
+        "total_ms": 1563.5,
+        "role_name": "supabase_auth_admin",
+        "dic_identifier": null,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 3646,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "-7636120669495855217",
+        "kind": "SELECT",
+        "rows": 36,
+        "calls": 36,
+        "max_ms": 78.3,
+        "mean_ms": 43.14,
+        "total_ms": 1553,
+        "role_name": "supabase_admin",
+        "dic_identifier": null,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 0,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "id": "2198408845594085208",
+        "kind": "SELECT",
+        "rows": 21311,
+        "calls": 94,
+        "max_ms": 48.7,
+        "mean_ms": 16.427,
+        "total_ms": 1544.1,
+        "role_name": "postgres",
+        "dic_identifier": null,
+        "temp_blks_read": 0,
+        "shared_blks_hit": 122636,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      }
+    ],
+    "pgss_reset": "2026-10-09T11:11:31.487298+00:00",
+    "observed_at": "2026-11-13T18:49:03.36792+00:00",
+    "database_reset": "2026-10-02T18:01:15.201525+00:00",
+    "track_functions": "none",
+    "track_io_timing": "off",
+    "total_fingerprints": 4911
+  },
+  "per_table_complete_index_ddl_and_stats": [
+    {
+      "tbl": "account_preferences",
+      "relation": "account_preferences",
+      "estimated_rows": 5,
+      "total_bytes": 81920,
+      "seq_scan": 4890,
+      "idx_scan": 316,
+      "estimated_dead_rows": 1,
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX account_active_setup_idx ON public.account_preferences USING btree (owner_id, active_setup_id)",
+          "name": "account_active_setup_idx",
+          "idx_scan": 316,
+          "size_bytes": 16384,
+          "source_md5": "7dc1ed03428bff7ca9f061d7919abfe6"
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX account_preferences_pkey ON public.account_preferences USING btree (owner_id)",
+          "name": "account_preferences_pkey",
+          "idx_scan": 0,
+          "size_bytes": 16384,
+          "source_md5": "e72ff7d524d65731a98ab37794299fc2"
+        }
+      ]
+    },
+    {
+      "tbl": "basket_versions",
+      "relation": "basket_versions",
+      "estimated_rows": -1,
+      "total_bytes": 65536,
+      "seq_scan": 137,
+      "idx_scan": 5222,
+      "estimated_dead_rows": 34,
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX basket_version_basket_idx ON public.basket_versions USING btree (owner_id, setup_id, basket_id)",
+          "name": "basket_version_basket_idx",
+          "idx_scan": 5196,
+          "size_bytes": 16384,
+          "source_md5": "215ee0f2e2ec7d633698753d7fe6e3f8"
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX basket_versions_owner_id_setup_id_id_key ON public.basket_versions USING btree (owner_id, setup_id, id)",
+          "name": "basket_versions_owner_id_setup_id_id_key",
+          "idx_scan": 0,
+          "size_bytes": 16384,
+          "source_md5": "c03e0b0d4fe491bb37d498d91d7bfe13"
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX basket_versions_pkey ON public.basket_versions USING btree (id)",
+          "name": "basket_versions_pkey",
+          "idx_scan": 26,
+          "size_bytes": 16384,
+          "source_md5": "853b6afd83e98c06d08e5f10ad5b4a96"
+        }
+      ]
+    },
+    {
+      "tbl": "baskets",
+      "relation": "baskets",
+      "estimated_rows": -1,
+      "total_bytes": 49152,
+      "seq_scan": 139,
+      "idx_scan": 4848,
+      "estimated_dead_rows": 33,
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX baskets_owner_id_setup_id_id_key ON public.baskets USING btree (owner_id, setup_id, id)",
+          "name": "baskets_owner_id_setup_id_id_key",
+          "idx_scan": 4848,
+          "size_bytes": 16384,
+          "source_md5": "d4fa2d0d4c1a3dbb353a4594939ad1c2"
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX baskets_pkey ON public.baskets USING btree (id)",
+          "name": "baskets_pkey",
+          "idx_scan": 0,
+          "size_bytes": 16384,
+          "source_md5": "f3467d40a4fdcd51ddc2b894ad33381e"
+        }
+      ]
+    },
+    {
+      "tbl": "coffee_submissions",
+      "relation": "coffee_submissions",
+      "estimated_rows": 5,
+      "total_bytes": 98304,
+      "seq_scan": 7189,
+      "idx_scan": 504,
+      "estimated_dead_rows": 5,
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX coffee_submissions_owner_id_id_key ON public.coffee_submissions USING btree (owner_id, id)",
+          "name": "coffee_submissions_owner_id_id_key",
+          "idx_scan": 340,
+          "size_bytes": 16384,
+          "source_md5": "a7ce9c4f2cf642772b87ec42fb041835"
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX coffee_submissions_pkey ON public.coffee_submissions USING btree (id)",
+          "name": "coffee_submissions_pkey",
+          "idx_scan": 163,
+          "size_bytes": 16384,
+          "source_md5": "1bcfa28881afd741b880a27dc2030616"
+        },
+        {
+          "ddl": "CREATE INDEX submissions_coffee_idx ON public.coffee_submissions USING btree (canonical_coffee_id)",
+          "name": "submissions_coffee_idx",
+          "idx_scan": 1,
+          "size_bytes": 16384,
+          "source_md5": "209e1a60f18674d80d33ffefaf7496f8"
+        }
+      ]
+    },
+    {
+      "tbl": "coffees",
+      "relation": "coffees",
+      "estimated_rows": -1,
+      "total_bytes": 65536,
+      "seq_scan": 1389,
+      "idx_scan": 12815,
+      "estimated_dead_rows": 37,
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX coffees_group_idx ON public.coffees USING btree (group_id)",
+          "name": "coffees_group_idx",
+          "idx_scan": 0,
+          "size_bytes": 16384,
+          "source_md5": "916f831dc9945cfa2b4741ad5afcb92f"
+        },
+        {
+          "ddl": "CREATE INDEX coffees_merge_idx ON public.coffees USING btree (merged_into_id)",
+          "name": "coffees_merge_idx",
+          "idx_scan": 382,
+          "size_bytes": 16384,
+          "source_md5": "c14a33640553e7d1cba75e259786b068"
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX coffees_pkey ON public.coffees USING btree (id)",
+          "name": "coffees_pkey",
+          "idx_scan": 12433,
+          "size_bytes": 16384,
+          "source_md5": "cf760199bf9a2f771b9efd77ac56adf1"
+        }
+      ]
+    },
+    {
+      "tbl": "grinder_calibrations",
+      "relation": "grinder_calibrations",
+      "estimated_rows": -1,
+      "total_bytes": 65536,
+      "seq_scan": 137,
+      "idx_scan": 5196,
+      "estimated_dead_rows": 34,
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX calibration_previous_idx ON public.grinder_calibrations USING btree (owner_id, setup_id, previous_calibration_id)",
+          "name": "calibration_previous_idx",
+          "idx_scan": 5195,
+          "size_bytes": 16384,
+          "source_md5": "5205ca8d9d04a65c518ae33875854989"
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX grinder_calibrations_owner_id_setup_id_id_key ON public.grinder_calibrations USING btree (owner_id, setup_id, id)",
+          "name": "grinder_calibrations_owner_id_setup_id_id_key",
+          "idx_scan": 0,
+          "size_bytes": 16384,
+          "source_md5": "6cf8de8427d307eef5376fba027ca65e"
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX grinder_calibrations_pkey ON public.grinder_calibrations USING btree (id)",
+          "name": "grinder_calibrations_pkey",
+          "idx_scan": 1,
+          "size_bytes": 16384,
+          "source_md5": "a085ba54ad3923287b9d5d79d3b9ffc8"
+        }
+      ]
+    },
+    {
+      "tbl": "library_entries",
+      "relation": "library_entries",
+      "estimated_rows": 7,
+      "total_bytes": 122880,
+      "seq_scan": 10012,
+      "idx_scan": 1092,
+      "estimated_dead_rows": 5,
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX library_coffee_idx ON public.library_entries USING btree (coffee_id)",
+          "name": "library_coffee_idx",
+          "idx_scan": 0,
+          "size_bytes": 16384,
+          "source_md5": "2554ad2f0370868ea974650805379527"
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX library_coffee_once_idx ON public.library_entries USING btree (owner_id, coffee_id) WHERE (coffee_id IS NOT NULL)",
+          "name": "library_coffee_once_idx",
+          "idx_scan": 308,
+          "size_bytes": 16384,
+          "source_md5": "fd2d89496fe0ca4745af8f7f0e675078"
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX library_entries_owner_id_id_key ON public.library_entries USING btree (owner_id, id)",
+          "name": "library_entries_owner_id_id_key",
+          "idx_scan": 780,
+          "size_bytes": 16384,
+          "source_md5": "627005f96c140ce14e9823f8cb508683"
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX library_entries_pkey ON public.library_entries USING btree (id)",
+          "name": "library_entries_pkey",
+          "idx_scan": 3,
+          "size_bytes": 16384,
+          "source_md5": "a008b99efd7b82a31ba0321428a01207"
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX library_submission_once_idx ON public.library_entries USING btree (owner_id, submission_id) WHERE (submission_id IS NOT NULL)",
+          "name": "library_submission_once_idx",
+          "idx_scan": 1,
+          "size_bytes": 16384,
+          "source_md5": "2580cf27147fe53bfe763b876edf109c"
+        }
+      ]
+    },
+    {
+      "tbl": "personal_recipe_families",
+      "relation": "personal_recipe_families",
+      "estimated_rows": 4,
+      "total_bytes": 98304,
+      "seq_scan": 1340,
+      "idx_scan": 3858,
+      "estimated_dead_rows": 6,
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX personal_family_community_idx ON public.personal_recipe_families USING btree (community_family_id)",
+          "name": "personal_family_community_idx",
+          "idx_scan": 0,
+          "size_bytes": 16384,
+          "source_md5": "910aa33f83e53574f2a82391872388c5"
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX personal_recipe_families_owner_id_library_entry_id_style_id_key ON public.personal_recipe_families USING btree (owner_id, library_entry_id, style, id)",
+          "name": "personal_recipe_families_owner_id_library_entry_id_style_id_key",
+          "idx_scan": 3806,
+          "size_bytes": 16384,
+          "source_md5": "3d8eac9285a3a249fc09e4f50ef5dd1f"
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX personal_recipe_families_pkey ON public.personal_recipe_families USING btree (id)",
+          "name": "personal_recipe_families_pkey",
+          "idx_scan": 52,
+          "size_bytes": 16384,
+          "source_md5": "71c88cc5b37185a9c3f24e04f87f3893"
+        }
+      ]
+    },
+    {
+      "tbl": "recipe_preferences",
+      "relation": "recipe_preferences",
+      "estimated_rows": -1,
+      "total_bytes": 81920,
+      "seq_scan": 157,
+      "idx_scan": 4891,
+      "estimated_dead_rows": 45,
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX preference_current_family_idx ON public.recipe_preferences USING btree (owner_id, library_entry_id, style, current_family_id)",
+          "name": "preference_current_family_idx",
+          "idx_scan": 29,
+          "size_bytes": 16384,
+          "source_md5": "61400647d269ea90c4298caea9b2a912"
+        },
+        {
+          "ddl": "CREATE INDEX preference_reference_family_idx ON public.recipe_preferences USING btree (owner_id, library_entry_id, style, reference_family_id)",
+          "name": "preference_reference_family_idx",
+          "idx_scan": 16,
+          "size_bytes": 16384,
+          "source_md5": "86123d05800e002791f30a48e2fe8fc0"
+        },
+        {
+          "ddl": "CREATE INDEX preferred_example_idx ON public.recipe_preferences USING btree (owner_id, setup_id, setup_version_id, library_entry_id, style, favorite_shot_id)",
+          "name": "preferred_example_idx",
+          "idx_scan": 4825,
+          "size_bytes": 16384,
+          "source_md5": "2a29e901b93ef1405297d1ddbbb4e22b"
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX recipe_preferences_pkey ON public.recipe_preferences USING btree (owner_id, setup_id, setup_version_id, library_entry_id, style)",
+          "name": "recipe_preferences_pkey",
+          "idx_scan": 21,
+          "size_bytes": 16384,
+          "source_md5": "93c5714f32863ecd7320867c6011560b"
+        }
+      ]
+    },
+    {
+      "tbl": "setup_preferences",
+      "relation": "setup_preferences",
+      "estimated_rows": -1,
+      "total_bytes": 65536,
+      "seq_scan": 144,
+      "idx_scan": 4863,
+      "estimated_dead_rows": 31,
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX preferences_basket_idx ON public.setup_preferences USING btree (owner_id, setup_id, default_basket_version_id)",
+          "name": "preferences_basket_idx",
+          "idx_scan": 4861,
+          "size_bytes": 16384,
+          "source_md5": "ea257d5ac534c9a876a6000c6ebb3ad8"
+        },
+        {
+          "ddl": "CREATE INDEX preferences_calibration_idx ON public.setup_preferences USING btree (owner_id, setup_id, calibration_id)",
+          "name": "preferences_calibration_idx",
+          "idx_scan": 0,
+          "size_bytes": 16384,
+          "source_md5": "e3b9dc26e0d0bc73c82d65e1be0fd1bf"
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX setup_preferences_pkey ON public.setup_preferences USING btree (owner_id, setup_id, setup_version_id)",
+          "name": "setup_preferences_pkey",
+          "idx_scan": 2,
+          "size_bytes": 16384,
+          "source_md5": "86aab20660414ae9e014bfc42c4ffb2f"
+        }
+      ]
+    },
+    {
+      "tbl": "setup_versions",
+      "relation": "setup_versions",
+      "estimated_rows": -1,
+      "total_bytes": 49152,
+      "seq_scan": 137,
+      "idx_scan": 5324,
+      "estimated_dead_rows": 33,
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX setup_versions_owner_id_setup_id_id_key ON public.setup_versions USING btree (owner_id, setup_id, id)",
+          "name": "setup_versions_owner_id_setup_id_id_key",
+          "idx_scan": 5323,
+          "size_bytes": 16384,
+          "source_md5": "1bc41090d543d3593660ac7f639c32a0"
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX setup_versions_pkey ON public.setup_versions USING btree (id)",
+          "name": "setup_versions_pkey",
+          "idx_scan": 1,
+          "size_bytes": 16384,
+          "source_md5": "dd167da7bb7754925fd3527eb12cb89e"
+        }
+      ]
+    },
+    {
+      "tbl": "setups",
+      "relation": "setups",
+      "estimated_rows": 0,
+      "total_bytes": 81920,
+      "seq_scan": 4819,
+      "idx_scan": 451,
+      "estimated_dead_rows": 18,
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX setup_active_version_idx ON public.setups USING btree (owner_id, id, active_version_id)",
+          "name": "setup_active_version_idx",
+          "idx_scan": 428,
+          "size_bytes": 16384,
+          "source_md5": "47ad3cdc52ee50265faf8b299e0d7d4a"
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX setups_owner_id_id_key ON public.setups USING btree (owner_id, id)",
+          "name": "setups_owner_id_id_key",
+          "idx_scan": 1,
+          "size_bytes": 16384,
+          "source_md5": "43caee64e94e009d3ffcb3f05e9b2e92"
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX setups_pkey ON public.setups USING btree (id)",
+          "name": "setups_pkey",
+          "idx_scan": 22,
+          "size_bytes": 16384,
+          "source_md5": "9e7a96f6e75d8335df71c50fd0ef65b4"
+        }
+      ]
+    },
+    {
+      "tbl": "shot_notes",
+      "relation": "shot_notes",
+      "estimated_rows": 14,
+      "total_bytes": 65536,
+      "seq_scan": 5102,
+      "idx_scan": 207,
+      "estimated_dead_rows": 11,
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX shot_notes_pkey ON public.shot_notes USING btree (owner_id, shot_id)",
+          "name": "shot_notes_pkey",
+          "idx_scan": 207,
+          "size_bytes": 16384,
+          "source_md5": "e7a8134053c07a2240acb36d84accd20"
+        }
+      ]
+    },
+    {
+      "tbl": "shots",
+      "relation": "shots",
+      "estimated_rows": 20,
+      "total_bytes": 212992,
+      "seq_scan": 2633,
+      "idx_scan": 6127,
+      "estimated_dead_rows": 52,
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX shot_bag_idx ON public.shots USING btree (owner_id, library_entry_id, bag_id)",
+          "name": "shot_bag_idx",
+          "idx_scan": 0,
+          "size_bytes": 16384,
+          "source_md5": "602d753532f41f6fbac274f16585f0c4"
+        },
+        {
+          "ddl": "CREATE INDEX shot_basket_idx ON public.shots USING btree (owner_id, setup_id, basket_version_id)",
+          "name": "shot_basket_idx",
+          "idx_scan": 0,
+          "size_bytes": 16384,
+          "source_md5": "32e2d561e2c0cd74a2eeeb5b44517d5c"
+        },
+        {
+          "ddl": "CREATE INDEX shot_calibration_idx ON public.shots USING btree (owner_id, setup_id, calibration_id)",
+          "name": "shot_calibration_idx",
+          "idx_scan": 0,
+          "size_bytes": 16384,
+          "source_md5": "03e03e07edc047cd77b2cd30c537aa80"
+        },
+        {
+          "ddl": "CREATE INDEX shot_family_idx ON public.shots USING btree (owner_id, library_entry_id, style, personal_family_id)",
+          "name": "shot_family_idx",
+          "idx_scan": 4218,
+          "size_bytes": 16384,
+          "source_md5": "b9b597f88bc5c829f2ab726a967b674e"
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX shot_legacy_once_idx ON public.shots USING btree (owner_id, legacy_id) WHERE (legacy_id IS NOT NULL)",
+          "name": "shot_legacy_once_idx",
+          "idx_scan": 4,
+          "size_bytes": 16384,
+          "source_md5": "eb774d6400c67504ee19ea55133fc502"
+        },
+        {
+          "ddl": "CREATE INDEX shot_library_time_idx ON public.shots USING btree (owner_id, library_entry_id, pulled_at DESC)",
+          "name": "shot_library_time_idx",
+          "idx_scan": 51,
+          "size_bytes": 16384,
+          "source_md5": "90b66f180ed9a647561614bfdd511b44"
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX shots_owner_id_id_key ON public.shots USING btree (owner_id, id)",
+          "name": "shots_owner_id_id_key",
+          "idx_scan": 1697,
+          "size_bytes": 16384,
+          "source_md5": "49fb847b777b3676c5c851a4a6607a72"
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX shots_owner_id_setup_id_setup_version_id_library_entry_id_s_key ON public.shots USING btree (owner_id, setup_id, setup_version_id, library_entry_id, style, id)",
+          "name": "shots_owner_id_setup_id_setup_version_id_library_entry_id_s_key",
+          "idx_scan": 1,
+          "size_bytes": 16384,
+          "source_md5": "7170e6844d2c2d62bdf6a340d16173b6"
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX shots_pkey ON public.shots USING btree (id)",
+          "name": "shots_pkey",
+          "idx_scan": 156,
+          "size_bytes": 16384,
+          "source_md5": "336c64a930eab4ef632feb0210680a83"
+        }
+      ]
+    },
+    {
+      "tbl": "workspace_coffees",
+      "relation": "workspace_coffees",
+      "estimated_rows": 4,
+      "total_bytes": 114688,
+      "seq_scan": 4693,
+      "idx_scan": 317,
+      "estimated_dead_rows": 19,
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX workspace_coffee_basket_idx ON public.workspace_coffees USING btree (owner_id, setup_id, basket_version_id)",
+          "name": "workspace_coffee_basket_idx",
+          "idx_scan": 0,
+          "size_bytes": 16384,
+          "source_md5": "bdef29d39b0cba04853e9e4fefd398e1"
+        },
+        {
+          "ddl": "CREATE INDEX workspace_coffee_library_idx ON public.workspace_coffees USING btree (owner_id, library_entry_id)",
+          "name": "workspace_coffee_library_idx",
+          "idx_scan": 1,
+          "size_bytes": 16384,
+          "source_md5": "900a305b3907b3bfae0776166915059d"
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX workspace_coffees_pkey ON public.workspace_coffees USING btree (owner_id, setup_id, setup_version_id, library_entry_id)",
+          "name": "workspace_coffees_pkey",
+          "idx_scan": 23,
+          "size_bytes": 16384,
+          "source_md5": "2828daaae679ea225f3255a8da743e50"
+        },
+        {
+          "ddl": "CREATE INDEX workspace_recent_idx ON public.workspace_coffees USING btree (owner_id, setup_id, setup_version_id, last_logged_at DESC)",
+          "name": "workspace_recent_idx",
+          "idx_scan": 293,
+          "size_bytes": 16384,
+          "source_md5": "d1e37a88742277cf745ac28ce785c890"
+        }
+      ]
+    },
+    {
+      "tbl": "workspace_state",
+      "relation": "workspace_state",
+      "estimated_rows": -1,
+      "total_bytes": 49152,
+      "seq_scan": 155,
+      "idx_scan": 4846,
+      "estimated_dead_rows": 47,
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX workspace_current_idx ON public.workspace_state USING btree (owner_id, current_library_entry_id)",
+          "name": "workspace_current_idx",
+          "idx_scan": 4823,
+          "size_bytes": 16384,
+          "source_md5": "b94de13f58b930ccce8db410a6f98ed9"
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX workspace_state_pkey ON public.workspace_state USING btree (owner_id, setup_id, setup_version_id)",
+          "name": "workspace_state_pkey",
+          "idx_scan": 23,
+          "size_bytes": 16384,
+          "source_md5": "7e195381fdb46d958449accc43b8c772"
+        }
+      ]
+    }
+  ],
+  "complete_function_ddl": [
+    {
+      "schema": "private",
+      "name": "read_personal_state",
+      "args": "",
+      "source_md5": "037d248b67cc3e8490c1689d3200990f",
+      "source_chars": 2339,
+      "complete_ddl": "CREATE OR REPLACE FUNCTION private.read_personal_state()\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare u uuid:=private.require_member(); result jsonb;\nbegin\n -- All arrays are materialized in the same SQL statement/MVCC snapshot.\n select jsonb_build_object(\n  'preferences',(select to_jsonb(x) from public.account_preferences x where owner_id=u),\n  'setups',coalesce((select jsonb_agg(to_jsonb(x) order by created_at) from public.setups x where owner_id=u),'[]'::jsonb),\n  'versions',coalesce((select jsonb_agg(to_jsonb(x) order by created_at) from public.setup_versions x where owner_id=u),'[]'::jsonb),\n  'setupPreferences',coalesce((select jsonb_agg(to_jsonb(x)) from public.setup_preferences x where owner_id=u),'[]'::jsonb),\n  'calibrations',coalesce((select jsonb_agg(to_jsonb(x)) from public.grinder_calibrations x where owner_id=u),'[]'::jsonb),\n  'baskets',coalesce((select jsonb_agg(to_jsonb(x)) from public.baskets x where owner_id=u),'[]'::jsonb),\n  'basketVersions',coalesce((select jsonb_agg(to_jsonb(x)) from public.basket_versions x where owner_id=u),'[]'::jsonb),\n  'library',coalesce((select jsonb_agg(to_jsonb(x)) from public.library_entries x where owner_id=u),'[]'::jsonb),\n  'submissions',coalesce((select jsonb_agg(to_jsonb(x)) from public.coffee_submissions x where owner_id=u),'[]'::jsonb),\n  'coffees',coalesce((select jsonb_agg(to_jsonb(x)) from public.coffees x where verification_state='verified' and id in (select coffee_id from public.library_entries where owner_id=u)),'[]'::jsonb),\n  'workspaces',coalesce((select jsonb_agg(to_jsonb(x)) from public.workspace_state x where owner_id=u),'[]'::jsonb),\n  'workspaceCoffees',coalesce((select jsonb_agg(to_jsonb(x)) from public.workspace_coffees x where owner_id=u),'[]'::jsonb),\n  'shots',coalesce((select jsonb_agg(to_jsonb(x) order by pulled_at) from public.shots x where owner_id=u),'[]'::jsonb),\n  'notes',coalesce((select jsonb_agg(to_jsonb(x)) from public.shot_notes x where owner_id=u),'[]'::jsonb),\n  'families',coalesce((select jsonb_agg(to_jsonb(x)) from public.personal_recipe_families x where owner_id=u),'[]'::jsonb),\n  'recipePreferences',coalesce((select jsonb_agg(to_jsonb(x)) from public.recipe_preferences x where owner_id=u),'[]'::jsonb)\n ) into result;\n return result;\nend $function$\n"
+    },
+    {
+      "schema": "private",
+      "name": "require_member",
+      "args": "",
+      "source_md5": "27ff3a2a7fcf231171778a2d584b1851",
+      "source_chars": 347,
+      "complete_ddl": "CREATE OR REPLACE FUNCTION private.require_member()\n RETURNS uuid\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare u uuid:=auth.uid();\nbegin\n if u is null or not private.is_member() then raise exception using errcode='42501',message='An admitted beta account is required.'; end if;\n return u;\nend $function$\n"
+    },
+    {
+      "schema": "private",
+      "name": "session_status",
+      "args": "",
+      "source_md5": "0aa8e57bb4846aac7dd8e3b6c0cf690c",
+      "source_chars": 729,
+      "complete_ddl": "CREATE OR REPLACE FUNCTION private.session_status()\n RETURNS jsonb\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nselect jsonb_build_object(\n 'authenticated',auth.uid() is not null,\n 'admitted',private.is_member(),\n 'admin',private.is_admin(),\n 'emailVerified',exists(select 1 from auth.users u where u.id=auth.uid() and u.email_confirmed_at is not null),\n 'approvalState',coalesce((\n   select case when m.admitted_at is not null and m.enabled then 'approved'\n     when m.admitted_at is not null then 'revoked'\n     else m.signup_review_state end\n   from private.beta_members m where m.owner_id=auth.uid()),'pending'),\n 'backupConfigured',false,'communityLive',false,'mode','owner-test');\n$function$\n"
+    },
+    {
+      "schema": "public",
+      "name": "dic_my_community_outliers",
+      "args": "",
+      "source_md5": "312b59594de640adacb12ab0aa0d18e4",
+      "source_chars": 1318,
+      "complete_ddl": "CREATE OR REPLACE FUNCTION public.dic_my_community_outliers()\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare member_id uuid; entries jsonb;\nbegin\n member_id:=private.require_member();\n select coalesce(jsonb_agg(jsonb_build_object(\n    'shot_id',recent.id,'revision',recent.revision,\n    'coffee_name',recent.coffee_name,'roaster',recent.roaster,\n    'style',recent.style,'dose_g',recent.dose_g,\n    'yield_g',recent.yield_g,'time_s',recent.time_s\n ) order by recent.pulled_at desc),'[]'::jsonb) into entries\n from (\n    select s.id,s.revision,s.pulled_at,s.style,s.dose_g,s.yield_g,\n      s.time_s,coffee.name as coffee_name,coffee.roaster\n    from public.shots s\n    join private.contribution_links link on link.shot_id=s.id\n      and link.source_revision=s.revision\n    join public.community_shots cs on cs.id=link.community_shot_id\n      and cs.quality_state='held'\n    join private.community_quality_checks qc on qc.community_shot_id=cs.id\n      and qc.reason='extreme_outlier'\n    join public.coffees coffee on coffee.id=cs.coffee_id\n      and coffee.verification_state='verified'\n    where s.owner_id=member_id and s.hidden_at is null\n      and s.is_dialed_in\n    order by s.pulled_at desc,s.id desc\n    limit 10\n ) recent;\n return entries;\nend $function$\n"
+    },
+    {
+      "schema": "public",
+      "name": "dic_read_personal_state",
+      "args": "",
+      "source_md5": "811aee397f3505117fcc38715e09af94",
+      "source_chars": 175,
+      "complete_ddl": "CREATE OR REPLACE FUNCTION public.dic_read_personal_state()\n RETURNS jsonb\n LANGUAGE sql\n SET search_path TO ''\nAS $function$ select private.read_personal_state(); $function$\n"
+    },
+    {
+      "schema": "public",
+      "name": "dic_session_status",
+      "args": "",
+      "source_md5": "742e5bd0fc8544807886b514d95d6688",
+      "source_chars": 165,
+      "complete_ddl": "CREATE OR REPLACE FUNCTION public.dic_session_status()\n RETURNS jsonb\n LANGUAGE sql\n SET search_path TO ''\nAS $function$ select private.session_status(); $function$\n"
+    }
+  ],
+  "semantics": {
+    "personal_state": "public.dic_read_personal_state is an invoker SQL wrapper delegating to SECURITY DEFINER private.read_personal_state with fixed empty search_path; private.require_member authorizes current admitted identity. 16 owner-scoped materializations are returned from one MVCC snapshot. Public coffees only include verified canonical IDs referenced by the owner's library. No private row contents read.",
+    "performance": "Authenticated cumulative queryid 1725044562985116050: 4753 calls, 71625.4 ms total DB time, mean 15.07 ms, max 1566.4 ms, 8344686 shared-buffer hits. Counter scope begins 2026-10-09T11:11:31.487298+00:00 and is NOT hourly latency, nor app RTT. All 16 related public relation index definitions and numeric scans reviewed; owner-leading indexes exist for owner-filtered tables. Tiny table sequential scans are not proof of missing indexes. No EXPLAIN ANALYZE or executing application function.",
+    "other_sources": "Current full DDL reviewed for public.dic_my_community_outliers and dic_session_status and private helper source, consistent admission/owner safety. Some SQL function activity cannot be attributed when track_functions=none.",
+    "privacy": "Only aggregate pgss fingerprints, DB roles, approved dic_ SQL identifiers, command family and numeric metrics returned. No raw SQL text, user IDs, secrets, Auth users, member shots/notes or unredacted logs.",
+    "limitations": "PostgREST hosted exposed schemas, real signed-in HTTP access and effective JWT/IDOR remain UNVERIFIED for #96; no source-dependent optimizer diagnosis from timing statistics alone. No index deletions justified. #2389 retirement remains unpublished in production."
+  },
+  "first_time_source_word_credit": 0,
+  "confirmed_new_defects": 0,
+  "justified_deletions": 0,
+  "code_test_ci_changes": 0,
+  "production_provider_writes": 0,
+  "baseline_complete": false,
+  "next": "New/changed provider source and hosted Auth/API settings if accessible; only source-isolated query optimization with measured reproduction."
+}

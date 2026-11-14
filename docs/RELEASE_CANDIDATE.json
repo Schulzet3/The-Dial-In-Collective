@@ -1,28 +1,20 @@
 {
   "schema_version": 1,
   "kind": "DIC-READY-ONLY-SOURCE-1",
-  "candidate_branch": "release-candidates/ready15-20261113-sourceisolated-r1",
-  "development_source_sha": "e726a44db1aefb823e450f8593b7203dfa95d347",
-  "published_source_sha": "02361218d2f354075e928396a6ba3fc0295b3b19",
+  "candidate_branch": "release-candidates/ready7-20261114-r1",
+  "development_source_sha": "9af4b43463348e4c55e77e43f5147a19643f300c",
+  "published_source_sha": "f788e7af0b6dc7254d993119600a55f4442ed3d2",
   "selected_ready_item_ids": [
-    "DIC-Q-2386-admin-unlimited-member-15s",
-    "DIC-Q-2389-retire-roaster-directory-universal-autofill",
-    "DIC-Q-33-huckleberry-headless-size-product-extraction",
-    "DIC-Q-33-r123-573-trailing-flavor-unready",
-    "DIC-Q-33-r156-unpublished-roast-flavor-guard",
-    "DIC-Q-33-r157-185-current-self-sugarcane-decaf-method",
-    "DIC-Q-33-r158-hyphenated-range-roast-guard",
-    "DIC-Q-33-r169-233-current-selected-sensory-arc",
-    "DIC-Q-33-r170-next-json-selected-provenance",
-    "DIC-Q-33-r171-235-current-selected-chocolate-overtones",
-    "DIC-Q-33-r171-241-current-selected-sensory-conflict",
-    "DIC-Q-455-r217-invalid-restored-rating-empty-label",
-    "DIC-Q-455-r218-restored-rating-tap",
-    "DIC-Q-455-r220-recommendation-use-origin",
-    "DIC-Q-455-r222-evidence-note-fallback"
+    "DIC-Q-2592-coffee-conflict-tap-to-fill",
+    "DIC-Q-33-proudmary-structured-title-20261113",
+    "DIC-Q-33-r180-255-smallholder-locality-review-only",
+    "DIC-Q-33-r181-257-selected-narrative-context",
+    "DIC-Q-33-r187-263-selected-floral-aroma-source-review",
+    "DIC-Q-33-r188-272-selected-nongrowing-initiative-producer",
+    "DIC-Q-455-r242-shot-scalar-measurement-integrity"
   ],
   "risk_classification": {
-    "tier": "high",
+    "tier": "medium",
     "checks": [
       "approval",
       "validate",
@@ -31,11 +23,14 @@
       "sql"
     ],
     "builds": 1,
-    "not_applicable": []
+    "not_applicable": [
+      "sql"
+    ]
   },
   "restored_to_published_paths": [
     "scripts/netlify/should-ignore-build.mjs",
-    "src/server/coffee-blend-evidence.mjs"
+    "src/server/coffee-blend-evidence.mjs",
+    "src/server/coffee-direct-product-prose.mjs"
   ],
   "restored_unpublished_workflow_paths": [
     ".github/workflows/approval-continuity.yml",
@@ -106,6 +101,19 @@
     ".github/workflows/issue33-r171-241.yml",
     ".github/workflows/issue33-r172-251.yml",
     ".github/workflows/issue33-r176-252.yml",
+    ".github/workflows/issue33-r177-253.yml",
+    ".github/workflows/issue33-r178-254.yml",
+    ".github/workflows/issue33-r179-255.yml",
+    ".github/workflows/issue33-r181-257.yml",
+    ".github/workflows/issue33-r183-258.yml",
+    ".github/workflows/issue33-r184-259.yml",
+    ".github/workflows/issue33-r185-260.yml",
+    ".github/workflows/issue33-r186-261.yml",
+    ".github/workflows/issue33-r187-quartermaine.yml",
+    ".github/workflows/issue33-r188-quills.yml",
+    ".github/workflows/issue33-r189-quills.yml",
+    ".github/workflows/issue33-r190-readyset.yml",
+    ".github/workflows/issue33-r191-readyset.yml",
     ".github/workflows/issue33-r78-26-bleu.yml",
     ".github/workflows/issue33-r79-72-78.yml",
     ".github/workflows/issue33-r80-118-127.yml",
@@ -133,10 +141,20 @@
   ],
   "excluded_unready_test_paths": [
     "tests/coffee-issue33-r141-119.test.mjs",
-    "tests/coffee-issue33-r165-209.test.mjs"
+    "tests/coffee-issue33-r165-209.test.mjs",
+    "tests/coffee-issue33-r177-253.test.mjs",
+    "tests/coffee-issue33-r178-254.test.mjs",
+    "tests/coffee-issue33-r180-255-community-roles.test.mjs",
+    "tests/coffee-issue33-r183-258.test.mjs",
+    "tests/coffee-issue33-r184-259.test.mjs",
+    "tests/coffee-issue33-r185-260.test.mjs",
+    "tests/coffee-issue33-r186-261.test.mjs",
+    "tests/coffee-issue33-r189-273.test.mjs",
+    "tests/coffee-issue33-r190-274.test.mjs",
+    "tests/coffee-issue33-r191-275-276.test.mjs"
   ],
   "pinned_to_ready_paths": [
-    "src/server/coffee-direct-product-prose.mjs"
+    "src/server/coffee-page-metadata.mjs"
   ],
   "publication_authorized": false
 }
