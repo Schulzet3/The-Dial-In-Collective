@@ -1,0 +1,1192 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "S2-DISJOINT-P435-001-029-LIVE-20261114-R11F",
+  "preflight": {
+    "development_sha": "bb6a10ac93076da75e6f95d83a3ea18f5e0b895e",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d"
+  },
+  "source": {
+    "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+    "path": "tests/weekly-source-snapshot.test.mjs",
+    "pinned_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+    "physical_line_count": 29,
+    "first_line": 1,
+    "last_line": 29,
+    "current_commit": "bb6a10ac93076da75e6f95d83a3ea18f5e0b895e",
+    "current_blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+    "live_physical_lines": 46
+  },
+  "method": "Each original physical line 1-29 direct AI semantic source reading and 18 distinct live post-pin added lines independently read; inventories/regex alone never credited",
+  "direct_original_numbered_lines": [
+    {
+      "line": 1,
+      "source_text": "import test from 'node:test';",
+      "inspection_classification": "import",
+      "behavior": "Node test registration",
+      "quality": "No runtime mutation",
+      "risk_security_privacy_performance": "Only synthetic suite",
+      "dead_or_obsolete_status": "Retained live test, not established dead code",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 1
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "LITERAL_MATCH",
+        "line": 1
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "No independently reproduced app issue to fix",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 2,
+      "source_text": "import assert from 'node:assert/strict';",
+      "inspection_classification": "import",
+      "behavior": "Strict assertion facility",
+      "quality": "Correctly fails checks",
+      "risk_security_privacy_performance": "Not hosted acceptance",
+      "dead_or_obsolete_status": "Retained live test, not established dead code",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 2
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "LITERAL_MATCH",
+        "line": 2
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "No independently reproduced app issue to fix",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 3,
+      "source_text": "import {readFileSync} from 'node:fs';",
+      "inspection_classification": "import",
+      "behavior": "Local workflow file reader",
+      "quality": "Tests actual checked-out source",
+      "risk_security_privacy_performance": "Not scheduled execution",
+      "dead_or_obsolete_status": "Retained live test, not established dead code",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 3
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "LITERAL_MATCH",
+        "line": 3
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "No independently reproduced app issue to fix",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 4,
+      "source_text": "const workflow=readFileSync(new URL('../.github/workflows/weekly-full-regression.yml',import.meta.url),'utf8');",
+      "inspection_classification": "read",
+      "behavior": "Loads weekly-full-regression.yml from checkout",
+      "quality": "Direct workflow provenance",
+      "risk_security_privacy_performance": "No actual cron proof",
+      "dead_or_obsolete_status": "Retained live test, not established dead code",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 4
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "LITERAL_MATCH",
+        "line": 4
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "No independently reproduced app issue to fix",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 5,
+      "source_text": "function check(source){",
+      "inspection_classification": "declaration",
+      "behavior": "Defines shared check(source) contract",
+      "quality": "Reuse across positive and negative cases",
+      "risk_security_privacy_performance": "Static parser only",
+      "dead_or_obsolete_status": "Retained live test, not established dead code",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 5
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "LITERAL_MATCH",
+        "line": 5
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "No independently reproduced app issue to fix",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 6,
+      "source_text": " const jobs=Object.fromEntries([...source.matchAll(/^  ([a-z][a-z-]+):\\n([\\s\\S]*?)(?=^  [a-z][a-z-]+:|$(?![\\s\\S]))/gm)].map(m=>[m[1],m[2]]));",
+      "inspection_classification": "regex-parser",
+      "behavior": "Parses YAML job headers and bodies to object",
+      "quality": "Has an intended job map",
+      "risk_security_privacy_performance": "Regex cannot parse all YAML structures",
+      "dead_or_obsolete_status": "Retained live test, not established dead code",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 6
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "LITERAL_MATCH",
+        "line": 6
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "No independently reproduced app issue to fix",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 7,
+      "source_text": " assert.ok(jobs['resolve-source'],'source resolution job missing');",
+      "inspection_classification": "assertion",
+      "behavior": "Resolve-source job must exist",
+      "quality": "Protects immutable source setup",
+      "risk_security_privacy_performance": "No remote ref proof",
+      "dead_or_obsolete_status": "Retained live test, not established dead code",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 7
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "LITERAL_MATCH",
+        "line": 7
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "No independently reproduced app issue to fix",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 8,
+      "source_text": " assert.match(jobs['resolve-source'],/sha: \\$\\{\\{ steps\\.source\\.outputs\\.sha \\}\\}/);",
+      "inspection_classification": "assertion",
+      "behavior": "Resolver SHA output must bind steps.source.outputs.sha",
+      "quality": "Exact source handoff",
+      "risk_security_privacy_performance": "Could match commented text",
+      "dead_or_obsolete_status": "Retained live test, not established dead code",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 8
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "LITERAL_MATCH",
+        "line": 8
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "No independently reproduced app issue to fix",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 9,
+      "source_text": " assert.match(jobs['resolve-source'],/id: source/);",
+      "inspection_classification": "assertion",
+      "behavior": "Resolver step id must be source",
+      "quality": "Connects output name",
+      "risk_security_privacy_performance": "Does not run job",
+      "dead_or_obsolete_status": "Retained live test, not established dead code",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 9
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "LITERAL_MATCH",
+        "line": 9
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "No independently reproduced app issue to fix",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 10,
+      "source_text": " assert.match(jobs['resolve-source'],/git rev-parse HEAD/);",
+      "inspection_classification": "assertion",
+      "behavior": "Resolver must invoke git rev-parse HEAD",
+      "quality": "Avoids moving branch in downstream jobs",
+      "risk_security_privacy_performance": "Static test",
+      "dead_or_obsolete_status": "Retained live test, not established dead code",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 10
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "LITERAL_MATCH",
+        "line": 10
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "No independently reproduced app issue to fix",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 11,
+      "source_text": " assert.match(jobs['resolve-source'],/GITHUB_OUTPUT/);",
+      "inspection_classification": "assertion",
+      "behavior": "Resolver must use GITHUB_OUTPUT",
+      "quality": "Propagates SHA",
+      "risk_security_privacy_performance": "No execution readback",
+      "dead_or_obsolete_status": "Retained live test, not established dead code",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 11
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "LITERAL_MATCH",
+        "line": 11
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "No independently reproduced app issue to fix",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 12,
+      "source_text": " assert.equal((source.match(/ref: development\\/backend-foundation/g)||[]).length,1,'moving branch must be resolved only once');",
+      "inspection_classification": "assertion",
+      "behavior": "Moving development ref must occur exactly once",
+      "quality": "Avoids per-job drift",
+      "risk_security_privacy_performance": "Comment matches may false count",
+      "dead_or_obsolete_status": "Retained live test, not established dead code",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 12
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "LITERAL_MATCH",
+        "line": 12
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "No independently reproduced app issue to fix",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 13,
+      "source_text": " for(const name of ['node-build','database','mobile-offline']){",
+      "inspection_classification": "loop",
+      "behavior": "Checks node-build/database/mobile-offline jobs",
+      "quality": "Covers three QA categories",
+      "risk_security_privacy_performance": "Other jobs unchecked",
+      "dead_or_obsolete_status": "Retained live test, not established dead code",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 13
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "LITERAL_MATCH",
+        "line": 13
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "No independently reproduced app issue to fix",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 14,
+      "source_text": "  assert.ok(jobs[name],name+' job missing');",
+      "inspection_classification": "assertion",
+      "behavior": "Each named job must exist",
+      "quality": "Prevents omitted suite",
+      "risk_security_privacy_performance": "Not proof of execution",
+      "dead_or_obsolete_status": "Retained live test, not established dead code",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 14
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "LITERAL_MATCH",
+        "line": 14
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "No independently reproduced app issue to fix",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 15,
+      "source_text": "  assert.match(jobs[name],/^    needs: resolve-source$/m,name+' dependency missing');",
+      "inspection_classification": "assertion",
+      "behavior": "Each job must need resolve-source",
+      "quality": "Checks dependency order",
+      "risk_security_privacy_performance": "YAML style limited",
+      "dead_or_obsolete_status": "Retained live test, not established dead code",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 15
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "LITERAL_MATCH",
+        "line": 15
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "No independently reproduced app issue to fix",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 16,
+      "source_text": "  assert.match(jobs[name],/ref: \\$\\{\\{ needs\\.resolve-source\\.outputs\\.sha \\}\\}/,name+' not pinned');",
+      "inspection_classification": "assertion",
+      "behavior": "Each checkout pins resolved immutable SHA",
+      "quality": "Guards source parity",
+      "risk_security_privacy_performance": "Textual check",
+      "dead_or_obsolete_status": "Retained live test, not established dead code",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 16
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "LITERAL_MATCH",
+        "line": 16
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "No independently reproduced app issue to fix",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 17,
+      "source_text": " }",
+      "inspection_classification": "delimiter",
+      "behavior": "Ends per-job loop",
+      "quality": "No separate behavior",
+      "risk_security_privacy_performance": "None",
+      "dead_or_obsolete_status": "Retained live test, not established dead code",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 17
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "LITERAL_MATCH",
+        "line": 17
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "No independently reproduced app issue to fix",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 18,
+      "source_text": " assert.equal((source.match(/persist-credentials: false/g)||[]).length,4);",
+      "inspection_classification": "assertion",
+      "behavior": "Four checkouts disable persisted Git credentials",
+      "quality": "Reduces credential exposure",
+      "risk_security_privacy_performance": "Does not validate token permissions externally",
+      "dead_or_obsolete_status": "Retained live test, not established dead code",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 18
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "LITERAL_MATCH",
+        "line": 18
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "No independently reproduced app issue to fix",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 19,
+      "source_text": " assert.match(source,/cron: '0 8 \\* \\* 0'/);",
+      "inspection_classification": "assertion",
+      "behavior": "Weekly cron literal Sunday 08:00 UTC",
+      "quality": "Preserves cadence",
+      "risk_security_privacy_performance": "Does not certify scheduled fire",
+      "dead_or_obsolete_status": "Retained live test, not established dead code",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 19
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "LITERAL_MATCH",
+        "line": 19
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "No independently reproduced app issue to fix",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 20,
+      "source_text": " assert.match(source,/permissions:\\n  contents: read\\n/);",
+      "inspection_classification": "assertion",
+      "behavior": "Read-only contents permission required",
+      "quality": "Limits workflow authority",
+      "risk_security_privacy_performance": "Cannot inspect effective remote permissions",
+      "dead_or_obsolete_status": "Retained live test, not established dead code",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 20
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "LITERAL_MATCH",
+        "line": 20
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "No independently reproduced app issue to fix",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 21,
+      "source_text": " assert.doesNotMatch(source,/\\bwrite\\b|secrets\\.|^  push:|^  pull_request:/m);",
+      "inspection_classification": "negative-assertion",
+      "behavior": "Rejects write/secrets/push/PR triggers",
+      "quality": "Preserves weekly read-only intent",
+      "risk_security_privacy_performance": "Regex may match comments or miss exotic YAML",
+      "dead_or_obsolete_status": "Retained live test, not established dead code",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 21
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "LITERAL_MATCH",
+        "line": 21
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "No independently reproduced app issue to fix",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 22,
+      "source_text": " for(const command of ['npm test','npm run lint','npm run build:cloud','isolated-sql-regression.sh','isolated-signed-http-regression.sh','isolated-backup-snapshot-regression.sh','cloud_owner_qa.py','admin_invitation_qa.py','pwa_offline_qa.py'])assert.ok(source.includes(command),'lost regression '+command);",
+      "inspection_classification": "assertion-loop",
+      "behavior": "Requires listed regression command substrings",
+      "quality": "Protects intended QA coverage",
+      "risk_security_privacy_performance": "False positive from commented steps: fixed live",
+      "dead_or_obsolete_status": "Historical weak command check rewritten in live to active-step verification",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 22
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "REWRITTEN",
+        "live_ranges": [
+          [
+            22,
+            34
+          ],
+          [
+            42,
+            46
+          ]
+        ]
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "Already strengthened in current live, do not duplicate patch",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 23,
+      "source_text": "}",
+      "inspection_classification": "delimiter",
+      "behavior": "Ends check function",
+      "quality": "No runtime change",
+      "risk_security_privacy_performance": "None",
+      "dead_or_obsolete_status": "Retained live test, not established dead code",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 23
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "LITERAL_MATCH",
+        "line": 35
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "No independently reproduced app issue to fix",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 24,
+      "source_text": "test('weekly suites share one immutable source and retain schedule/read-only boundaries',()=>check(workflow));",
+      "inspection_classification": "positive-test",
+      "behavior": "Runs check against workflow fixture",
+      "quality": "Verifies static source contract",
+      "risk_security_privacy_performance": "Not actual Sunday CI",
+      "dead_or_obsolete_status": "Retained live test, not established dead code",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 24
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "LITERAL_MATCH",
+        "line": 36
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "No independently reproduced app issue to fix",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 25,
+      "source_text": "test('one independently resolved moving branch fails',()=>assert.throws(()=>check(workflow.replace('ref: ${{ needs.resolve-source.outputs.sha }}','ref: development/backend-foundation')),/moving branch/));",
+      "inspection_classification": "negative-test",
+      "behavior": "Moving downstream branch ref must throw",
+      "quality": "Guards SHA-pinning drift",
+      "risk_security_privacy_performance": "Limited one substitution",
+      "dead_or_obsolete_status": "Retained live test, not established dead code",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 25
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "LITERAL_MATCH",
+        "line": 37
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "No independently reproduced app issue to fix",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 26,
+      "source_text": "test('missing source dependency fails',()=>assert.throws(()=>check(workflow.replace('    needs: resolve-source\\n','')),/dependency missing/));",
+      "inspection_classification": "negative-test",
+      "behavior": "Missing source dependency must throw",
+      "quality": "Protects job ordering",
+      "risk_security_privacy_performance": "Only first fixture substitution",
+      "dead_or_obsolete_status": "Retained live test, not established dead code",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 26
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "LITERAL_MATCH",
+        "line": 38
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "No independently reproduced app issue to fix",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 27,
+      "source_text": "test('broken source output binding fails',()=>assert.throws(()=>check(workflow.replace('steps.source.outputs.sha','steps.wrong.outputs.sha'))));",
+      "inspection_classification": "negative-test",
+      "behavior": "Wrong step output binding must throw",
+      "quality": "Checks source output consistency",
+      "risk_security_privacy_performance": "No real runner",
+      "dead_or_obsolete_status": "Retained live test, not established dead code",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 27
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "LITERAL_MATCH",
+        "line": 39
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "No independently reproduced app issue to fix",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 28,
+      "source_text": "test('permission escalation fails',()=>assert.throws(()=>check(workflow.replace('contents: read','contents: write'))));",
+      "inspection_classification": "negative-test",
+      "behavior": "Write permission substitution must throw",
+      "quality": "Detects easy privilege escalation",
+      "risk_security_privacy_performance": "Static only",
+      "dead_or_obsolete_status": "Retained live test, not established dead code",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 28
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "LITERAL_MATCH",
+        "line": 40
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "No independently reproduced app issue to fix",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    },
+    {
+      "line": 29,
+      "source_text": "test('lost offline coverage fails',()=>assert.throws(()=>check(workflow.replace('pwa_offline_qa.py','removed.py')),/lost regression/));",
+      "inspection_classification": "negative-test",
+      "behavior": "Missing offline QA command must throw",
+      "quality": "Guards PWA offline test",
+      "risk_security_privacy_performance": "Original substring vulnerability now covered by live negative test",
+      "dead_or_obsolete_status": "Retained live test, not established dead code",
+      "duplicate_or_redundant_status": "No safe removable equivalent independently established",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "line": 29
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "status": "LITERAL_MATCH",
+        "line": 41
+      },
+      "testability": "Node22 source test, not executed during docs-only batch; no real weekly action/backup/provider proof",
+      "remediation_opportunity": "No independently reproduced app issue to fix",
+      "locked_decision_fit": "Preserves owner required weekly Sunday 08:00 UTC regression, source pinning, privacy and read-only workflow with no schedule change",
+      "review_method": "DIRECT_NUMBERED_AI_SEMANTIC_REVIEW_NOT_HUMAN"
+    }
+  ],
+  "separate_live_added_line_reviews": [
+    {
+      "line": 22,
+      "source_text": " const requiredCommands=[",
+      "inspection_classification": "command-array",
+      "behavior": "Starts explicit required active steps",
+      "quality": "Strengthens existing weekly QA test",
+      "risk_security_privacy_performance": "Static test only; no new privilege, source or provider write",
+      "dead_or_obsolete_status": "New live postpin test, not in frozen pinned",
+      "duplicate_or_redundant_status": "No equivalently redundant test proven",
+      "live_source": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "commit": "bb6a10ac93076da75e6f95d83a3ea18f5e0b895e",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 22
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Node22 source test available but not run in this docs-only audit",
+      "remediation_opportunity": "No new runtime edit; existing source improvement retained",
+      "locked_decision_fit": "Read-only weekly test, source immutability and offline/backup QA schedule preserved",
+      "review_method": "DIRECT_AI_NUMBERED_POSTPIN_SOURCE_REVIEW"
+    },
+    {
+      "line": 23,
+      "source_text": "  'npm test',",
+      "inspection_classification": "command",
+      "behavior": "Node tests",
+      "quality": "Strengthens existing weekly QA test",
+      "risk_security_privacy_performance": "Static test only; no new privilege, source or provider write",
+      "dead_or_obsolete_status": "New live postpin test, not in frozen pinned",
+      "duplicate_or_redundant_status": "No equivalently redundant test proven",
+      "live_source": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "commit": "bb6a10ac93076da75e6f95d83a3ea18f5e0b895e",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 23
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Node22 source test available but not run in this docs-only audit",
+      "remediation_opportunity": "No new runtime edit; existing source improvement retained",
+      "locked_decision_fit": "Read-only weekly test, source immutability and offline/backup QA schedule preserved",
+      "review_method": "DIRECT_AI_NUMBERED_POSTPIN_SOURCE_REVIEW"
+    },
+    {
+      "line": 24,
+      "source_text": "  'npm run lint',",
+      "inspection_classification": "command",
+      "behavior": "Lint",
+      "quality": "Strengthens existing weekly QA test",
+      "risk_security_privacy_performance": "Static test only; no new privilege, source or provider write",
+      "dead_or_obsolete_status": "New live postpin test, not in frozen pinned",
+      "duplicate_or_redundant_status": "No equivalently redundant test proven",
+      "live_source": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "commit": "bb6a10ac93076da75e6f95d83a3ea18f5e0b895e",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 24
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Node22 source test available but not run in this docs-only audit",
+      "remediation_opportunity": "No new runtime edit; existing source improvement retained",
+      "locked_decision_fit": "Read-only weekly test, source immutability and offline/backup QA schedule preserved",
+      "review_method": "DIRECT_AI_NUMBERED_POSTPIN_SOURCE_REVIEW"
+    },
+    {
+      "line": 25,
+      "source_text": "  'npm run build:cloud',",
+      "inspection_classification": "command",
+      "behavior": "Cloud build",
+      "quality": "Strengthens existing weekly QA test",
+      "risk_security_privacy_performance": "Static test only; no new privilege, source or provider write",
+      "dead_or_obsolete_status": "New live postpin test, not in frozen pinned",
+      "duplicate_or_redundant_status": "No equivalently redundant test proven",
+      "live_source": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "commit": "bb6a10ac93076da75e6f95d83a3ea18f5e0b895e",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 25
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Node22 source test available but not run in this docs-only audit",
+      "remediation_opportunity": "No new runtime edit; existing source improvement retained",
+      "locked_decision_fit": "Read-only weekly test, source immutability and offline/backup QA schedule preserved",
+      "review_method": "DIRECT_AI_NUMBERED_POSTPIN_SOURCE_REVIEW"
+    },
+    {
+      "line": 26,
+      "source_text": "  'bash scripts/audit/isolated-sql-regression.sh',",
+      "inspection_classification": "command",
+      "behavior": "SQL regression",
+      "quality": "Strengthens existing weekly QA test",
+      "risk_security_privacy_performance": "Static test only; no new privilege, source or provider write",
+      "dead_or_obsolete_status": "New live postpin test, not in frozen pinned",
+      "duplicate_or_redundant_status": "No equivalently redundant test proven",
+      "live_source": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "commit": "bb6a10ac93076da75e6f95d83a3ea18f5e0b895e",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 26
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Node22 source test available but not run in this docs-only audit",
+      "remediation_opportunity": "No new runtime edit; existing source improvement retained",
+      "locked_decision_fit": "Read-only weekly test, source immutability and offline/backup QA schedule preserved",
+      "review_method": "DIRECT_AI_NUMBERED_POSTPIN_SOURCE_REVIEW"
+    },
+    {
+      "line": 27,
+      "source_text": "  'bash scripts/audit/isolated-signed-http-regression.sh',",
+      "inspection_classification": "command",
+      "behavior": "Signed HTTP regression",
+      "quality": "Strengthens existing weekly QA test",
+      "risk_security_privacy_performance": "Static test only; no new privilege, source or provider write",
+      "dead_or_obsolete_status": "New live postpin test, not in frozen pinned",
+      "duplicate_or_redundant_status": "No equivalently redundant test proven",
+      "live_source": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "commit": "bb6a10ac93076da75e6f95d83a3ea18f5e0b895e",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 27
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Node22 source test available but not run in this docs-only audit",
+      "remediation_opportunity": "No new runtime edit; existing source improvement retained",
+      "locked_decision_fit": "Read-only weekly test, source immutability and offline/backup QA schedule preserved",
+      "review_method": "DIRECT_AI_NUMBERED_POSTPIN_SOURCE_REVIEW"
+    },
+    {
+      "line": 28,
+      "source_text": "  'bash scripts/audit/isolated-backup-snapshot-regression.sh',",
+      "inspection_classification": "command",
+      "behavior": "Backup snapshot regression",
+      "quality": "Strengthens existing weekly QA test",
+      "risk_security_privacy_performance": "Static test only; no new privilege, source or provider write",
+      "dead_or_obsolete_status": "New live postpin test, not in frozen pinned",
+      "duplicate_or_redundant_status": "No equivalently redundant test proven",
+      "live_source": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "commit": "bb6a10ac93076da75e6f95d83a3ea18f5e0b895e",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 28
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Node22 source test available but not run in this docs-only audit",
+      "remediation_opportunity": "No new runtime edit; existing source improvement retained",
+      "locked_decision_fit": "Read-only weekly test, source immutability and offline/backup QA schedule preserved",
+      "review_method": "DIRECT_AI_NUMBERED_POSTPIN_SOURCE_REVIEW"
+    },
+    {
+      "line": 29,
+      "source_text": "  'python tests/browser/cloud_owner_qa.py',",
+      "inspection_classification": "command",
+      "behavior": "Browser owner QA",
+      "quality": "Strengthens existing weekly QA test",
+      "risk_security_privacy_performance": "Static test only; no new privilege, source or provider write",
+      "dead_or_obsolete_status": "New live postpin test, not in frozen pinned",
+      "duplicate_or_redundant_status": "No equivalently redundant test proven",
+      "live_source": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "commit": "bb6a10ac93076da75e6f95d83a3ea18f5e0b895e",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 29
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Node22 source test available but not run in this docs-only audit",
+      "remediation_opportunity": "No new runtime edit; existing source improvement retained",
+      "locked_decision_fit": "Read-only weekly test, source immutability and offline/backup QA schedule preserved",
+      "review_method": "DIRECT_AI_NUMBERED_POSTPIN_SOURCE_REVIEW"
+    },
+    {
+      "line": 30,
+      "source_text": "  'python tests/browser/admin_invitation_qa.py',",
+      "inspection_classification": "command",
+      "behavior": "Admin invitation QA",
+      "quality": "Strengthens existing weekly QA test",
+      "risk_security_privacy_performance": "Static test only; no new privilege, source or provider write",
+      "dead_or_obsolete_status": "New live postpin test, not in frozen pinned",
+      "duplicate_or_redundant_status": "No equivalently redundant test proven",
+      "live_source": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "commit": "bb6a10ac93076da75e6f95d83a3ea18f5e0b895e",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 30
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Node22 source test available but not run in this docs-only audit",
+      "remediation_opportunity": "No new runtime edit; existing source improvement retained",
+      "locked_decision_fit": "Read-only weekly test, source immutability and offline/backup QA schedule preserved",
+      "review_method": "DIRECT_AI_NUMBERED_POSTPIN_SOURCE_REVIEW"
+    },
+    {
+      "line": 31,
+      "source_text": "  'python tests/browser/pwa_offline_qa.py'",
+      "inspection_classification": "command",
+      "behavior": "Offline PWA QA",
+      "quality": "Strengthens existing weekly QA test",
+      "risk_security_privacy_performance": "Static test only; no new privilege, source or provider write",
+      "dead_or_obsolete_status": "New live postpin test, not in frozen pinned",
+      "duplicate_or_redundant_status": "No equivalently redundant test proven",
+      "live_source": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "commit": "bb6a10ac93076da75e6f95d83a3ea18f5e0b895e",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 31
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Node22 source test available but not run in this docs-only audit",
+      "remediation_opportunity": "No new runtime edit; existing source improvement retained",
+      "locked_decision_fit": "Read-only weekly test, source immutability and offline/backup QA schedule preserved",
+      "review_method": "DIRECT_AI_NUMBERED_POSTPIN_SOURCE_REVIEW"
+    },
+    {
+      "line": 32,
+      "source_text": " ];",
+      "inspection_classification": "delimiter",
+      "behavior": "Closes exact active step array",
+      "quality": "Strengthens existing weekly QA test",
+      "risk_security_privacy_performance": "Static test only; no new privilege, source or provider write",
+      "dead_or_obsolete_status": "New live postpin test, not in frozen pinned",
+      "duplicate_or_redundant_status": "No equivalently redundant test proven",
+      "live_source": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "commit": "bb6a10ac93076da75e6f95d83a3ea18f5e0b895e",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 32
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Node22 source test available but not run in this docs-only audit",
+      "remediation_opportunity": "No new runtime edit; existing source improvement retained",
+      "locked_decision_fit": "Read-only weekly test, source immutability and offline/backup QA schedule preserved",
+      "review_method": "DIRECT_AI_NUMBERED_POSTPIN_SOURCE_REVIEW"
+    },
+    {
+      "line": 33,
+      "source_text": " const activeRuns=source.split('\\n').map(line=>line.trim()).filter(line=>line.startsWith('- run: '));",
+      "inspection_classification": "parser",
+      "behavior": "Extracts trimmed YAML lines starting executable '- run: '",
+      "quality": "Strengthens existing weekly QA test",
+      "risk_security_privacy_performance": "Static test only; no new privilege, source or provider write",
+      "dead_or_obsolete_status": "New live postpin test, not in frozen pinned",
+      "duplicate_or_redundant_status": "No equivalently redundant test proven",
+      "live_source": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "commit": "bb6a10ac93076da75e6f95d83a3ea18f5e0b895e",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 33
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Node22 source test available but not run in this docs-only audit",
+      "remediation_opportunity": "No new runtime edit; existing source improvement retained",
+      "locked_decision_fit": "Read-only weekly test, source immutability and offline/backup QA schedule preserved",
+      "review_method": "DIRECT_AI_NUMBERED_POSTPIN_SOURCE_REVIEW"
+    },
+    {
+      "line": 34,
+      "source_text": " for(const command of requiredCommands)assert.ok(activeRuns.includes('- run: '+command),'lost regression '+command);",
+      "inspection_classification": "assertion-loop",
+      "behavior": "Requires each command in active runs, not comments",
+      "quality": "Strengthens existing weekly QA test",
+      "risk_security_privacy_performance": "Static test only; no new privilege, source or provider write",
+      "dead_or_obsolete_status": "New live postpin test, not in frozen pinned",
+      "duplicate_or_redundant_status": "No equivalently redundant test proven",
+      "live_source": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "commit": "bb6a10ac93076da75e6f95d83a3ea18f5e0b895e",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 34
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Node22 source test available but not run in this docs-only audit",
+      "remediation_opportunity": "No new runtime edit; existing source improvement retained",
+      "locked_decision_fit": "Read-only weekly test, source immutability and offline/backup QA schedule preserved",
+      "review_method": "DIRECT_AI_NUMBERED_POSTPIN_SOURCE_REVIEW"
+    },
+    {
+      "line": 42,
+      "source_text": "test('comment-only weekly regression command is rejected',()=>{",
+      "inspection_classification": "negative-test-declaration",
+      "behavior": "Tests that comment-only command is rejected",
+      "quality": "Strengthens existing weekly QA test",
+      "risk_security_privacy_performance": "Static test only; no new privilege, source or provider write",
+      "dead_or_obsolete_status": "New live postpin test, not in frozen pinned",
+      "duplicate_or_redundant_status": "No equivalently redundant test proven",
+      "live_source": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "commit": "bb6a10ac93076da75e6f95d83a3ea18f5e0b895e",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 42
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Node22 source test available but not run in this docs-only audit",
+      "remediation_opportunity": "No new runtime edit; existing source improvement retained",
+      "locked_decision_fit": "Read-only weekly test, source immutability and offline/backup QA schedule preserved",
+      "review_method": "DIRECT_AI_NUMBERED_POSTPIN_SOURCE_REVIEW"
+    },
+    {
+      "line": 43,
+      "source_text": " const changed=workflow.replace('      - run: npm run lint','      # - run: npm run lint');",
+      "inspection_classification": "fixture",
+      "behavior": "Comments real lint run step in source copy",
+      "quality": "Strengthens existing weekly QA test",
+      "risk_security_privacy_performance": "Static test only; no new privilege, source or provider write",
+      "dead_or_obsolete_status": "New live postpin test, not in frozen pinned",
+      "duplicate_or_redundant_status": "No equivalently redundant test proven",
+      "live_source": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "commit": "bb6a10ac93076da75e6f95d83a3ea18f5e0b895e",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 43
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Node22 source test available but not run in this docs-only audit",
+      "remediation_opportunity": "No new runtime edit; existing source improvement retained",
+      "locked_decision_fit": "Read-only weekly test, source immutability and offline/backup QA schedule preserved",
+      "review_method": "DIRECT_AI_NUMBERED_POSTPIN_SOURCE_REVIEW"
+    },
+    {
+      "line": 44,
+      "source_text": " assert.notEqual(changed,workflow);",
+      "inspection_classification": "assertion",
+      "behavior": "Requires fixture mutation actually changed workflow",
+      "quality": "Strengthens existing weekly QA test",
+      "risk_security_privacy_performance": "Static test only; no new privilege, source or provider write",
+      "dead_or_obsolete_status": "New live postpin test, not in frozen pinned",
+      "duplicate_or_redundant_status": "No equivalently redundant test proven",
+      "live_source": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "commit": "bb6a10ac93076da75e6f95d83a3ea18f5e0b895e",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 44
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Node22 source test available but not run in this docs-only audit",
+      "remediation_opportunity": "No new runtime edit; existing source improvement retained",
+      "locked_decision_fit": "Read-only weekly test, source immutability and offline/backup QA schedule preserved",
+      "review_method": "DIRECT_AI_NUMBERED_POSTPIN_SOURCE_REVIEW"
+    },
+    {
+      "line": 45,
+      "source_text": " assert.throws(()=>check(changed),/lost regression npm run lint/);",
+      "inspection_classification": "negative-assertion",
+      "behavior": "Requires missing lint active step to fail",
+      "quality": "Strengthens existing weekly QA test",
+      "risk_security_privacy_performance": "Static test only; no new privilege, source or provider write",
+      "dead_or_obsolete_status": "New live postpin test, not in frozen pinned",
+      "duplicate_or_redundant_status": "No equivalently redundant test proven",
+      "live_source": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "commit": "bb6a10ac93076da75e6f95d83a3ea18f5e0b895e",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 45
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Node22 source test available but not run in this docs-only audit",
+      "remediation_opportunity": "No new runtime edit; existing source improvement retained",
+      "locked_decision_fit": "Read-only weekly test, source immutability and offline/backup QA schedule preserved",
+      "review_method": "DIRECT_AI_NUMBERED_POSTPIN_SOURCE_REVIEW"
+    },
+    {
+      "line": 46,
+      "source_text": "});",
+      "inspection_classification": "delimiter",
+      "behavior": "Ends negative test",
+      "quality": "Strengthens existing weekly QA test",
+      "risk_security_privacy_performance": "Static test only; no new privilege, source or provider write",
+      "dead_or_obsolete_status": "New live postpin test, not in frozen pinned",
+      "duplicate_or_redundant_status": "No equivalently redundant test proven",
+      "live_source": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "commit": "bb6a10ac93076da75e6f95d83a3ea18f5e0b895e",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 46
+      },
+      "pinned_counterpart": "ABSENT_ADDED_AFTER_PIN",
+      "testability": "Node22 source test available but not run in this docs-only audit",
+      "remediation_opportunity": "No new runtime edit; existing source improvement retained",
+      "locked_decision_fit": "Read-only weekly test, source immutability and offline/backup QA schedule preserved",
+      "review_method": "DIRECT_AI_NUMBERED_POSTPIN_SOURCE_REVIEW"
+    }
+  ],
+  "findings": [
+    {
+      "pinned_line": 22,
+      "classification": "TEST_FALSE_POSITIVE_ALREADY_CORRECTED_CURRENT",
+      "observed": "Pinned check uses source.includes(command) which could falsely pass if only a commented YAML line names the command.",
+      "live_correction": "Current checks active '- run:' entries and adds a negative comment-only lint test.",
+      "disposition": "NO_NEW_CODE_EDIT; NO_CLAIM_BROKEN_SUNDAY_RUN"
+    },
+    {
+      "pinned_lines": [
+        19,
+        20,
+        21
+      ],
+      "classification": "STATIC_SCHEDULE_PERMISSION_PROOF_ONLY",
+      "disposition": "Actual Sunday workflow, backups, offsite and signed Auth NOT_CHECKED; no runtime or provider claims"
+    }
+  ],
+  "new_pinned_original_lines": 29,
+  "new_separate_postpin_live_lines": 18,
+  "replaced_pinned_lines": 1,
+  "global_status": "OPEN_INCOMPLETE",
+  "functional_tests": "NOT_RUN_DOCS_ONLY",
+  "next": "P436:1 plus all other unfinished frozen/current/live ranges",
+  "release_authority": "NONE_DEVELOPMENT_ONLY"
+}
