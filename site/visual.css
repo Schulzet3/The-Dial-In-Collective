@@ -243,6 +243,11 @@ textarea{line-height:1.5}.form-grid{gap:18px 14px}
 .coffee-conflict-group li{padding:8px 10px;border:1px solid var(--line);border-radius:8px;overflow-wrap:anywhere;background:var(--surface)}
 .coffee-conflict-value{display:block;font-size:13px;font-weight:600}
 .coffee-conflict-group small{display:block;color:var(--muted);margin-top:2px;font-size:11px}
+.coffee-conflict-choice{display:block;width:100%;min-height:44px;text-align:left;padding:9px 10px;border:1px solid transparent;border-radius:7px;background:transparent;color:var(--ink);font:inherit;cursor:pointer;white-space:normal;overflow-wrap:anywhere}
+.coffee-conflict-choice:hover,.coffee-conflict-choice:focus-visible{border-color:var(--action-line);background:var(--well)}
+.coffee-conflict-choice[aria-pressed="true"]{border:2px solid var(--action-line);background:var(--well);box-shadow:inset 0 0 0 1px var(--action-line)}
+.coffee-conflict-group small{padding:0 10px 6px}
+.coffee-conflict-feedback:empty{display:none}
 #new-coffee .coffee-needs-review{outline:1px solid var(--line-strong);outline-offset:1px}
 
 @media(max-width:410px){.coffee-url-fields{grid-template-columns:1fr}.coffee-url-actions .helper{font-size:12px}}

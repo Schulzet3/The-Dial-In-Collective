@@ -13869,6 +13869,32 @@
       "blockers": [],
       "notes": "Development only, no publication. Selected four-segment product title yields Las Lajas - Finca San Isidro; preserve country Costa Rica, variety Caturra & Catuai, process Natural, full title source provenance and strict Shopify handle. Ambiguous names unchanged; original603 immutable. Issue #33 remains OPEN. READY certified from exact tested merge and unchanged current three source blobs; no production publication. Unrelated R60 source failure is separately tracked, not counted PASS.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-2592-coffee-conflict-tap-to-fill",
+      "issue": 2592,
+      "title": "Tap sourced conflicting coffee alternatives to fill only the selected Add Coffee field",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/coffee-url-autofill.js",
+        "site/cloud/main.js",
+        "site/visual.css"
+      ],
+      "owner_source": "Owner November 13, 2026 explicit Build instruction; UX-COFFEE-CONFLICT-TAP-CHOICE-20261113; preflight development 4b09788c9bf18c344085da088b44567bf987f275 blob 2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Initial focused Node source/UI/escape/keyboard/select/provenance/URL isolation tests introduced in tests/coffee-conflict-tap-to-fill.test.mjs. Hosted exact-source outcomes PENDING; do not call PASS.",
+        "Existing coffee URL conflicts, source review, roast-variant and UI/browser/cloud acceptance to be reused or exercised in risk-based CI.",
+        "Initial exact PR-head approval 43562855009 FAILED because the new IN_PROGRESS queue item omitted required ci_runs array; corrected to [] in this patch. Do not treat failure as PASS.",
+        "Browser/mobile 43562855052, isolated SQL 43562855032 and security 43562855077 initial PR head SUCCESS; Node 43562855008 in-progress on superseded candidate, not reused as final evidence.",
+        "PR head 4d53ba86 Node 43563094055 4737 PASS/0 FAIL/6 SKIP, full workflow FAILED ESLint unused test import, no build; removed import in final repair. Earlier failed initial Node 43562855008 ETIMEDOUT, not PASS."
+      ],
+      "blockers": [
+        "Corrected PR-head code/test/queue exact-source CI pending and integration not yet verified."
+      ],
+      "notes": "Development only. No auto conflicting selection, no save, no source hierarchy or provider changes. READY requires nonforce merged exact code/test evidence, all applicable checks and no blocker.",
+      "production_deployed": false,
+      "ci_runs": []
     }
   ],
   "history": [

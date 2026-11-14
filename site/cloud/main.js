@@ -13,7 +13,7 @@ import {enableApprovalPush,disableApprovalPush,approvalPushEnabled} from './appr
 import {shotCard} from './shot_card.js';
 import {applyAppearance,readAppearance} from './appearance.js';
 import {nextCoffeeAction,proposalWithRecognizedRoaster,matchReviewMarkup} from './coffee-match-ui.js';
-import {coffeeUrlPreviewMarkup,applyCoffeeUrlFields,coffeeSourceReviewSnapshot,downloadCoffeeSourceReview,coffeeSourceDifferences,coffeeConflictReviewOptions,autofillFields,coffeeRoastVariantPreview,applyCoffeeRoastVariant,coffeeUrlRequestIsCurrent} from './coffee-url-autofill.js';
+import {coffeeUrlPreviewMarkup,applyCoffeeUrlFields,coffeeSourceReviewSnapshot,downloadCoffeeSourceReview,coffeeSourceDifferences,coffeeConflictReviewOptions,applyCoffeeConflictChoice,markCoffeeConflictChoices,autofillFields,coffeeRoastVariantPreview,applyCoffeeRoastVariant,coffeeUrlRequestIsCurrent} from './coffee-url-autofill.js';
 import {communityReviewBanner,communityPage} from './community.js';
 import {walkthroughMarkup,gettingStartedMarkup,firstSetupWelcomeMarkup} from './help.js';
 const {e,button,icon,field,select,checkbox,recipeGrid,styleBadge,chips,radar,scales,nextShotGuidance,nextShotTitle}=U;
@@ -858,6 +858,33 @@ class CloudApp {
    if(a==='rename-setup'){this.showRenameSetup(id);return;}
    if(a==='add'){this.showAdd();return;}
    if(a==='refresh-saved-coffee'){if(this.busy)return;this.busy=true;try{await this.refreshAddedCoffeeReview();}finally{this.busy=false;}return;}
+    if(a==='choose-coffee-conflict'){
+     const form=sheet.querySelector('#new-coffee'),panel=form?.querySelector('#coffee-url-feedback');
+     if(!form||!panel||!panel.contains(target)||!this.coffeeUrlActivePreview?.ok||
+        this.coffeeUrlPreviewInput!==String(form.elements.source_url.value||'').trim())return;
+     const feedback=panel.querySelector('.coffee-conflict-feedback');
+     const field=target.dataset.conflictField;
+     // Decaf-specific guidance must never silently convert a half-caf coffee.
+     if(field==='decaffeination_method'&&C.isHalfCaffName(form.elements.namedItem('name')?.value||'')){
+      if(feedback)feedback.textContent='Half-caf coffees cannot use a fully decaffeinated method. Review the name and Decaf checkbox.';
+      return;
+     }
+     const chosen=applyCoffeeConflictChoice(form,this.coffeeUrlActivePreview,field,Number(target.dataset.conflictIndex));
+     if(!chosen.applied){
+      if(feedback)feedback.textContent=chosen.reason==='unsupported_option'?
+       'This published wording does not match an available field option. Choose an appropriate value below.':
+       'This suggestion is no longer available. Run Autofill From URL again.';
+      return;
+     }
+     if(chosen.field==='decaffeination_method'){
+      const toggle=form.elements.namedItem('is_decaf');
+      if(toggle&&!toggle.checked){toggle.checked=true;toggle.dispatchEvent(new Event('change',{bubbles:true}));}
+      updateDecafFields(form);
+     }
+     markCoffeeConflictChoices(panel,form,this.coffeeUrlActivePreview);
+     if(feedback)feedback.textContent='Filled '+(chosen.field==='elevation_m'?'Elevation':chosen.field.replace(/_/g,' '))+'. Review or edit before Add Coffee.';
+     return;
+    }
     if(a==='choose-coffee-roast-variant'){
      const form=sheet.querySelector('#new-coffee'),panel=form?.querySelector('#coffee-url-feedback');
      if(!form||!panel||!this.coffeeUrlBasePreview?.roast_variants?.length||
@@ -868,6 +895,7 @@ class CloudApp {
      this.coffeeUrlActivePreview=next;
      this.coffeeUrlSourceReview=coffeeSourceReviewSnapshot(next);
      panel.innerHTML=coffeeUrlPreviewMarkup(next);
+     markCoffeeConflictChoices(panel,form,next);
      return;
     }
     if(a==='download-coffee-source-review'){
@@ -898,6 +926,7 @@ class CloudApp {
        updateDecafFields(form);
       }
       panel.innerHTML=coffeeUrlPreviewMarkup(found);
+      markCoffeeConflictChoices(panel,form,found);
       // Announce review alternatives next to the associated editable field.
       for(const group of coffeeConflictReviewOptions(found)){
        const input=form.elements.namedItem(group.field);
@@ -1072,13 +1101,13 @@ class CloudApp {
    if(a==='signout'){const queued=await this.inSession(()=>this.queue.pending());if(queued.length&&!globalThis.confirm?.('You have '+queued.length+' unsynced change(s). They remain saved on this device for this account and will sync only after you sign in to the same account again. Sign out anyway?'))return;const epoch=this.epoch;await this.client.signOut();if(epoch===this.epoch){this.identity=null;this.resetAccount();this.render();}return;}
   }catch(err){this.error(err);}
  }
- input(ev){if(['name','is_decaf'].includes(ev.target.name)&&ev.target.closest?.('#new-coffee,#edit-coffee'))updateDecafFields(ev.target.form);if(ev.target.closest?.('#shot')){ev.target.removeAttribute('aria-invalid');if(ev.target.getAttribute('aria-describedby')==='shot-validation-feedback')ev.target.removeAttribute('aria-describedby');}if(ev.target.name==='temperature'&&ev.target.closest?.('#shot')&&this.draft?.tempSource&&
+ input(ev){if(ev.target.closest?.('#new-coffee')&&ev.target.dataset?.coffeeConflictChoiceValue&&ev.target.value!==ev.target.dataset.coffeeConflictChoiceValue){delete ev.target.dataset.coffeeConflictChoiceValue;markCoffeeConflictChoices(ev.target.form?.querySelector('#coffee-url-feedback'),ev.target.form,this.coffeeUrlActivePreview);}if(['name','is_decaf'].includes(ev.target.name)&&ev.target.closest?.('#new-coffee,#edit-coffee'))updateDecafFields(ev.target.form);if(ev.target.closest?.('#shot')){ev.target.removeAttribute('aria-invalid');if(ev.target.getAttribute('aria-describedby')==='shot-validation-feedback')ev.target.removeAttribute('aria-describedby');}if(ev.target.name==='temperature'&&ev.target.closest?.('#shot')&&this.draft?.tempSource&&
      ev.target.value!==String(C.tempDisplay(this.draft.tempC,this.logUnit))){
    // Remove the misleading cross-style origin as soon as the member edits it.
    this.draft.tempSource='';
    ev.target.closest?.('.field')?.querySelector?.('small')?.remove?.();
-  }if(ev.target.name==='doseG'&&ev.target.closest?.('#shot'))this.updateDoseAdvisory();if(ev.target.name==='source_url'&&ev.target.closest('#new-coffee')){if(this.coffeeUrlPreviewInput!==ev.target.value.trim()){this.coffeeUrlPreviewInput=null;this.coffeeUrlSourceReview=null;this.coffeeUrlBasePreview=null;this.coffeeUrlActivePreview=null;const panel=sheet.querySelector('#coffee-url-feedback');if(panel)panel.replaceChildren();for(const key of ['origin','roast_level','elevation_m','process','variety','producer','tasting_notes','release_label']){const el=ev.target.closest('#new-coffee')?.elements.namedItem(key);if(el?.getAttribute?.('aria-describedby')==='coffee-conflict-'+key){el.removeAttribute('aria-describedby');el.classList?.remove('coffee-needs-review');}}}}if(ev.target.id==='search'){const value=ev.target.value,position=ev.target.selectionStart;this.search=value;this.render();const input=root.querySelector('#search');input.focus();input.setSelectionRange(position,position);}}
- change(ev){if(['name','is_decaf'].includes(ev.target.name)&&ev.target.closest?.('#new-coffee,#edit-coffee'))updateDecafFields(ev.target.form);if(ev.target.id==='sort'){this.sort=ev.target.value;this.render();}if(ev.target.id==='community-style'){this.communityStyle=ev.target.value;this.communityCoffee='all';this.loadCommunity().catch(err=>this.error(err));}if(ev.target.id==='community-coffee'){this.communityCoffee=ev.target.value;this.render();}if(ev.target.name==='slowFeed'&&this.draft){this.readDraft();const v=M.activeVersion(this.state),rec=E.recommendation(this.state,this.logCoffee,{style:this.draft.style,basketId:this.draft.basketId,feedMode:this.draft.feedMode});const box=sheet.querySelector('#log-reference');if(box)box.innerHTML=recipeGrid(rec,v.advanced.temperature,v.tempUnit);}}
+  }if(ev.target.name==='doseG'&&ev.target.closest?.('#shot'))this.updateDoseAdvisory();if(ev.target.name==='source_url'&&ev.target.closest('#new-coffee')){if(this.coffeeUrlPreviewInput!==ev.target.value.trim()){this.coffeeUrlPreviewInput=null;this.coffeeUrlSourceReview=null;this.coffeeUrlBasePreview=null;this.coffeeUrlActivePreview=null;const panel=sheet.querySelector('#coffee-url-feedback');if(panel)panel.replaceChildren();for(const [key] of autofillFields){const el=ev.target.closest('#new-coffee')?.elements.namedItem(key);if(el?.dataset)delete el.dataset.coffeeConflictChoiceValue;if(el?.getAttribute?.('aria-describedby')==='coffee-conflict-'+key){el.removeAttribute('aria-describedby');el.classList?.remove('coffee-needs-review');}}}}if(ev.target.id==='search'){const value=ev.target.value,position=ev.target.selectionStart;this.search=value;this.render();const input=root.querySelector('#search');input.focus();input.setSelectionRange(position,position);}}
+ change(ev){if(ev.target.closest?.('#new-coffee')&&ev.target.dataset?.coffeeConflictChoiceValue&&ev.target.value!==ev.target.dataset.coffeeConflictChoiceValue){delete ev.target.dataset.coffeeConflictChoiceValue;markCoffeeConflictChoices(ev.target.form?.querySelector('#coffee-url-feedback'),ev.target.form,this.coffeeUrlActivePreview);}if(['name','is_decaf'].includes(ev.target.name)&&ev.target.closest?.('#new-coffee,#edit-coffee'))updateDecafFields(ev.target.form);if(ev.target.id==='sort'){this.sort=ev.target.value;this.render();}if(ev.target.id==='community-style'){this.communityStyle=ev.target.value;this.communityCoffee='all';this.loadCommunity().catch(err=>this.error(err));}if(ev.target.id==='community-coffee'){this.communityCoffee=ev.target.value;this.render();}if(ev.target.name==='slowFeed'&&this.draft){this.readDraft();const v=M.activeVersion(this.state),rec=E.recommendation(this.state,this.logCoffee,{style:this.draft.style,basketId:this.draft.basketId,feedMode:this.draft.feedMode});const box=sheet.querySelector('#log-reference');if(box)box.innerHTML=recipeGrid(rec,v.advanced.temperature,v.tempUnit);}}
  async submit(ev){ev.preventDefault();if(this.busy)return;const form=ev.target,id=form.id,d=Object.fromEntries(new FormData(form));this.busy=true;form.querySelectorAll('button').forEach(b=>b.disabled=true);let shotValidation=null;
   try{
    if(id==='auth-signup'||id==='auth-password'){const issue=validateNewPassword(d.password);if(issue)throw new Error(issue);}
