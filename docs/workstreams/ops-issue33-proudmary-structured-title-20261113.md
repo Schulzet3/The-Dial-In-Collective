@@ -28,3 +28,9 @@ and Process Natural. Owner explicitly approved the clean `name=Las Lajas - Finca
   collection-filter product page was directly verified. This test fixture is modeled on its
   published fields. A live hosted authenticated preview is NOT asserted here.
 - CI and exact merged-SHA verification remain required before READY; Issue #33 stays OPEN.
+
+## Nonforce source-correction receipt — November 13, 2026
+
+DIC_PREFLIGHT_VERIFIED development_sha=fe96f983c1c4f697fdecfa39d2f077a3b6ca77a6 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+The first PR head contained a mechanical JavaScript replacement artifact: a literal replacement token duplicated the remainder of the identity module. Before merge or any passing-test claim, the exact original identity module was restored and only the intended structured-title helper inserted safely. No unrelated source, tests, release state, or provider data changed. Verify the repaired PR head with hosted exact-source checks; the original head is not evidence of passing tests.
