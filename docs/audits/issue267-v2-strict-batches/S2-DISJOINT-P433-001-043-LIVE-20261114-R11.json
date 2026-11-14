@@ -1,0 +1,1326 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "S2-DISJOINT-P433-001-043-LIVE-20261114-R11",
+  "reviewer": "AI_DIRECT_NUMBERED_SOURCE_REVIEW_NOT_HUMAN",
+  "preflight": {
+    "development_sha": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d"
+  },
+  "authority": {
+    "scope": "Docs-only V2 pinned-current disjoint direct semantic review; owner #267; no production/deployment",
+    "frozen_manifest_first_line_validation": {
+      "path": ".github/workflows/approval-continuity.yml",
+      "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+      "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "lines": 41,
+      "exact_S2_001_match": true,
+      "new_coverage_credit": 0
+    }
+  },
+  "source": {
+    "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "pinned_path": "tests/ux-refinements.test.mjs",
+    "pinned_blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+    "pinned_total_physical_lines": 196,
+    "first": 1,
+    "last": 43,
+    "live_development_commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+    "live_blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+    "live_total_physical_lines": 204,
+    "live_mapping": "pinned 1-9 => live 1-9; pinned 10-43 => live 11-44; live 10 is new helper"
+  },
+  "direct_numbered_lines": [
+    {
+      "line": 1,
+      "source_text": "import test from 'node:test';",
+      "inspection_classification": "import",
+      "behavior": "Imports Node's builtin test runner",
+      "quality": "Standard Node 22 test mechanism",
+      "risk_security_privacy_performance": "No runtime app effect",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 1,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 1,
+        "identical_text": true
+      },
+      "testability": "Execute this isolated test file",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Per-setup optional Slow Feed preference; no per-shot global contamination",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 2,
+      "source_text": "import assert from 'node:assert/strict';",
+      "inspection_classification": "import",
+      "behavior": "Imports strict assertion methods",
+      "quality": "Strict comparators avoid coercion",
+      "risk_security_privacy_performance": "Fixture expectations can still be incomplete",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 2,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 2,
+        "identical_text": true
+      },
+      "testability": "Check assertion failures for intentionally wrong fixtures",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Per-setup optional Slow Feed preference; no per-shot global contamination",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 3,
+      "source_text": "import {readFile} from 'node:fs/promises';",
+      "inspection_classification": "import",
+      "behavior": "Imports asynchronous file reading",
+      "quality": "Used to examine static UI source later",
+      "risk_security_privacy_performance": "String tests are not browser accessibility proof",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 3,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 3,
+        "identical_text": true
+      },
+      "testability": "Node filesystem read for local source",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Per-setup optional Slow Feed preference; no per-shot global contamination",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 4,
+      "source_text": "import {hydrate} from '../site/cloud/mapping.js';",
+      "inspection_classification": "import",
+      "behavior": "Imports cloud hydration mapper",
+      "quality": "Exercises actual mapped client state",
+      "risk_security_privacy_performance": "Mock state may differ from hosted rows",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 4,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 4,
+        "identical_text": true
+      },
+      "testability": "Hydrate provided cloud fixture",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Per-setup optional Slow Feed preference; no per-shot global contamination",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 5,
+      "source_text": "import {patchAcknowledgement} from '../site/cloud/cache.js';",
+      "inspection_classification": "import",
+      "behavior": "Imports cloud acknowledgement cache patcher",
+      "quality": "Tests post-save local state before fresh sync",
+      "risk_security_privacy_performance": "Cache is not authorization/validation boundary",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 5,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 5,
+        "identical_text": true
+      },
+      "testability": "Call real pure cache patcher",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Per-setup optional Slow Feed preference; no per-shot global contamination",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 6,
+      "source_text": "import {shotCard,feedLabel} from '../site/cloud/shot_card.js';",
+      "inspection_classification": "import",
+      "behavior": "Imports shot history HTML and feed label renderers",
+      "quality": "Used by later presentation tests",
+      "risk_security_privacy_performance": "HTML string matching does not guarantee DOM interaction",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 6,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 6,
+        "identical_text": true
+      },
+      "testability": "Render fixture shot card",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Per-setup optional Slow Feed preference; no per-shot global contamination",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 7,
+      "source_text": "import {shotSummary,recipeGrid,nextShotAdjustment,nextShotGuidance,nextShotTitle} from '../site/lib/ui.js';",
+      "inspection_classification": "import",
+      "behavior": "Imports recommendation UI helpers",
+      "quality": "Covers next shot arrow and grid later",
+      "risk_security_privacy_performance": "Structural regex does not prove screen-reader behavior",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 7,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 7,
+        "identical_text": true
+      },
+      "testability": "Invoke exported pure UI helpers",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Per-setup optional Slow Feed preference; no per-shot global contamination",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 8,
+      "source_text": "import * as E from '../site/lib/engine.js';",
+      "inspection_classification": "import",
+      "behavior": "Imports recommendation engine module",
+      "quality": "Uses production prefill implementation",
+      "risk_security_privacy_performance": "Engine tests do not verify database security",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 8,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 8,
+        "identical_text": true
+      },
+      "testability": "Invoke production engine with hydrated state",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Per-setup optional Slow Feed preference; no per-shot global contamination",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 9,
+      "source_text": "import {rawFixture,rawShot,OWNER,TIME} from './cloud-fixtures/raw.js';",
+      "inspection_classification": "import",
+      "behavior": "Imports owner-scoped synthetic fixtures and timestamp",
+      "quality": "Keeps tests deterministic",
+      "risk_security_privacy_performance": "Synthetic owner is not authenticated member acceptance",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 9,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 9,
+        "identical_text": true
+      },
+      "testability": "Use factory fixtures under Node 22",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Per-setup optional Slow Feed preference; no per-shot global contamination",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 10,
+      "source_text": "",
+      "inspection_classification": "blank",
+      "behavior": "Separates imports from first test",
+      "quality": "No executable effect",
+      "risk_security_privacy_performance": "No safety effect",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Blank separator intentionally retained; no executable duplication",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 10,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 11,
+        "identical_text": true
+      },
+      "testability": "Source literal/line accounting",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Per-setup optional Slow Feed preference; no per-shot global contamination",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 11,
+      "source_text": "test('Slow Feed defaults remain independent between home and office',()=>{",
+      "inspection_classification": "test-open",
+      "behavior": "Begins independent per-setup Slow Feed default test",
+      "quality": "Tests switching instead of a global preference",
+      "risk_security_privacy_performance": "Fixtures must preserve real setup-version relationships",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 11,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 12,
+        "identical_text": true
+      },
+      "testability": "Run named Slow Feed setup test",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Per-setup optional Slow Feed preference; no per-shot global contamination",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 12,
+      "source_text": " const raw=rawFixture();",
+      "inspection_classification": "fixture",
+      "behavior": "Creates fresh synthetic raw cloud snapshot",
+      "quality": "Independent mutable starting point",
+      "risk_security_privacy_performance": "Coverage limited to fixture schema",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 12,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 13,
+        "identical_text": true
+      },
+      "testability": "Inspect rawFixture initialization",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Per-setup optional Slow Feed preference; no per-shot global contamination",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 13,
+      "source_text": " raw.setups.push({...raw.setups[0],id:'office',name:'Office',active_version_id:'office-version'});",
+      "inspection_classification": "fixture",
+      "behavior": "Copies original setup into a distinct Office ID/name/version",
+      "quality": "Models two setups without touching member data",
+      "risk_security_privacy_performance": "Fixture may inherit same owner intentionally",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 13,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 14,
+        "identical_text": true
+      },
+      "testability": "Hydrate two setup IDs and switch",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Per-setup optional Slow Feed preference; no per-shot global contamination",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 14,
+      "source_text": " raw.versions.push({...raw.versions[0],id:'office-version',setup_id:'office'});",
+      "inspection_classification": "fixture",
+      "behavior": "Copies first setup-version row and reassigns to Office",
+      "quality": "Ensures version ownership for Office",
+      "risk_security_privacy_performance": "Equipment data otherwise shared as test simplification",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 14,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 15,
+        "identical_text": true
+      },
+      "testability": "Resolve active Office version",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Per-setup optional Slow Feed preference; no per-shot global contamination",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 15,
+      "source_text": " raw.calibrations.push({...raw.calibrations[0],id:'office-cal',setup_id:'office'});",
+      "inspection_classification": "fixture",
+      "behavior": "Copies calibration with Office setup association",
+      "quality": "Preserves calibration setup reference",
+      "risk_security_privacy_performance": "Copied grind bounds could mask real calibration differences",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 15,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 16,
+        "identical_text": true
+      },
+      "testability": "Check mapper calibration resolution",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Per-setup optional Slow Feed preference; no per-shot global contamination",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 16,
+      "source_text": " raw.baskets.push({...raw.baskets[0],id:'office-basket',setup_id:'office'});",
+      "inspection_classification": "fixture",
+      "behavior": "Copies basket with Office setup association",
+      "quality": "Separates basic basket association",
+      "risk_security_privacy_performance": "Not full basket configuration coverage",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 16,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 17,
+        "identical_text": true
+      },
+      "testability": "Check hydration finds Office basket",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Per-setup optional Slow Feed preference; no per-shot global contamination",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 17,
+      "source_text": " raw.basketVersions.push({...raw.basketVersions[0],id:'office-basketv',setup_id:'office',basket_id:'office-basket'});",
+      "inspection_classification": "fixture",
+      "behavior": "Copies basket-version with Office IDs and basket relationship",
+      "quality": "Allows selected basket to resolve to Office",
+      "risk_security_privacy_performance": "No historical basket migration covered",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 17,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 18,
+        "identical_text": true
+      },
+      "testability": "Verify active basket lookup in hydrate",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Per-setup optional Slow Feed preference; no per-shot global contamination",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 18,
+      "source_text": " raw.setupPreferences[0].track_slow_feed=true;raw.setupPreferences[0].slow_feed=true;",
+      "inspection_classification": "fixture",
+      "behavior": "Enables tracking and slow default on home preference",
+      "quality": "Creates positive slow-feed baseline",
+      "risk_security_privacy_performance": "Relies on explicit track flag",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 18,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 19,
+        "identical_text": true
+      },
+      "testability": "Check home prefill after hydration",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Per-setup optional Slow Feed preference; no per-shot global contamination",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 19,
+      "source_text": " raw.setupPreferences.push({...raw.setupPreferences[0],setup_id:'office',setup_version_id:'office-version',calibration_id:'office-cal',default_basket_version_id:'office-basketv',slow_feed:false});",
+      "inspection_classification": "fixture",
+      "behavior": "Adds Office preference with slow_feed=false and Office references",
+      "quality": "Creates negative per-setup baseline",
+      "risk_security_privacy_performance": "Copied track flag remains true deliberately",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 19,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 20,
+        "identical_text": true
+      },
+      "testability": "Verify Office feed default differs",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Per-setup optional Slow Feed preference; no per-shot global contamination",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 20,
+      "source_text": " const state=hydrate(raw);",
+      "inspection_classification": "runtime",
+      "behavior": "Hydrates raw cloud rows into app state",
+      "quality": "Exercises production mapping for two setups",
+      "risk_security_privacy_performance": "Hydration validity is synthetic, not hosted data proof",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 20,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 21,
+        "identical_text": true
+      },
+      "testability": "Inspect returned active setup and preferences",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Per-setup optional Slow Feed preference; no per-shot global contamination",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 21,
+      "source_text": " assert.equal(E.prefill(state,'coffee').feedMode,'slow');",
+      "inspection_classification": "assertion",
+      "behavior": "Asserts Home prefill uses slow feed",
+      "quality": "Guards desired remembered condition",
+      "risk_security_privacy_performance": "Cannot prove UI selection persisted to server",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 21,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 22,
+        "identical_text": true
+      },
+      "testability": "Assert prefill.feedMode slow",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Per-setup optional Slow Feed preference; no per-shot global contamination",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 22,
+      "source_text": " state.activeSetupId='office';assert.equal(E.prefill(state,'coffee').feedMode,'standard');",
+      "inspection_classification": "assertion",
+      "behavior": "Switches to Office and expects standard feed",
+      "quality": "Detects cross-setup preference leakage",
+      "risk_security_privacy_performance": "Direct state mutation skips setup-switch UI",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 22,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 23,
+        "identical_text": true
+      },
+      "testability": "Assert Office default standard",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Per-setup optional Slow Feed preference; no per-shot global contamination",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 23,
+      "source_text": " state.activeSetupId='setup';assert.equal(E.prefill(state,'coffee').feedMode,'slow');",
+      "inspection_classification": "assertion",
+      "behavior": "Switches Home again and expects slow feed",
+      "quality": "Verifies independent restoration",
+      "risk_security_privacy_performance": "Does not test app restart/offline rehydration",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 23,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 24,
+        "identical_text": true
+      },
+      "testability": "Assert Home default slow after switching",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Per-setup optional Slow Feed preference; no per-shot global contamination",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 24,
+      "source_text": "});",
+      "inspection_classification": "test-close",
+      "behavior": "Closes multi-setup test",
+      "quality": "No executable behavior beyond test boundary",
+      "risk_security_privacy_performance": "No safety effect",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 24,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 25,
+        "identical_text": true
+      },
+      "testability": "Node parser validates closure",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Per-setup optional Slow Feed preference; no per-shot global contamination",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 25,
+      "source_text": "",
+      "inspection_classification": "blank",
+      "behavior": "Separates two test cases",
+      "quality": "No runtime behavior",
+      "risk_security_privacy_performance": "No safety effect",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Blank separator intentionally retained; no executable duplication",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 25,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 26,
+        "identical_text": true
+      },
+      "testability": "Literal line read",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Per-setup optional Slow Feed preference; no per-shot global contamination",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 26,
+      "source_text": "test('cloud-acknowledged new shot updates cached feed; editing an old shot does not',()=>{",
+      "inspection_classification": "test-open",
+      "behavior": "Begins cloud acknowledgement and edit nonrollback test",
+      "quality": "Covers new shot versus edited history",
+      "risk_security_privacy_performance": "No direct server authorization exercised",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 26,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 27,
+        "identical_text": true
+      },
+      "testability": "Run named ack editing test",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Cloud acknowledgement durability and edit-preserves-history preference",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 27,
+      "source_text": " const raw=rawFixture();raw.setupPreferences[0].track_slow_feed=true;",
+      "inspection_classification": "fixture",
+      "behavior": "Creates snapshot and enables feed tracking",
+      "quality": "Guards optional tracking branch",
+      "risk_security_privacy_performance": "Other preferences remain fixture defaults",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 27,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 28,
+        "identical_text": true
+      },
+      "testability": "Inspect setupPreferences[0]",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Cloud acknowledgement durability and edit-preserves-history preference",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 28,
+      "source_text": " const sh=rawShot({feed_mode:'slow',pulled_at:'2026-10-14T18:00:00Z'});",
+      "inspection_classification": "fixture",
+      "behavior": "Creates synthetic successful Slow Feed shot with fixed UTC time",
+      "quality": "Makes chronological update deterministic",
+      "risk_security_privacy_performance": "Clock-order test not real network latency",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 28,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 29,
+        "identical_text": true
+      },
+      "testability": "Check rawShot payload fields",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Cloud acknowledgement durability and edit-preserves-history preference",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 29,
+      "source_text": " const next=patchAcknowledgement(raw,{owner:OWNER,action:'save_shot',payload:{},createdAt:sh.pulled_at},{record:sh});",
+      "inspection_classification": "runtime",
+      "behavior": "Applies server-shaped save_shot acknowledgement with owner",
+      "quality": "Exercises cached optimistic durability",
+      "risk_security_privacy_performance": "Assumes acknowledged record already server validated",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 29,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 30,
+        "identical_text": true
+      },
+      "testability": "Call patchAcknowledgement and compare source",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Cloud acknowledgement durability and edit-preserves-history preference",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 30,
+      "source_text": " assert.equal(next.setupPreferences[0].slow_feed,true);",
+      "inspection_classification": "assertion",
+      "behavior": "Asserts new shot sets cached slow_feed true",
+      "quality": "Checks default update from new saved shot",
+      "risk_security_privacy_performance": "Only cache transition, not persistent backend",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 30,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 31,
+        "identical_text": true
+      },
+      "testability": "Inspect next.setupPreferences slow_feed",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Cloud acknowledgement durability and edit-preserves-history preference",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 31,
+      "source_text": " assert.equal(next.setupPreferences[0].last_feed_shot_at,sh.pulled_at);",
+      "inspection_classification": "assertion",
+      "behavior": "Asserts saved UTC timestamp retained as last_feed_shot_at",
+      "quality": "Records monotonic comparison anchor",
+      "risk_security_privacy_performance": "No malformed timestamp scenario in this test",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 31,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 32,
+        "identical_text": true
+      },
+      "testability": "Assert exact timestamp equality",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Cloud acknowledgement durability and edit-preserves-history preference",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 32,
+      "source_text": " assert.equal(E.prefill(hydrate(next),'coffee').feedMode,'slow');",
+      "inspection_classification": "assertion",
+      "behavior": "Hydrates patched cache and checks resulting prefill",
+      "quality": "Connects patch to future Log Shot default",
+      "risk_security_privacy_performance": "Does not prove offline sync conflict resolution",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 32,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 33,
+        "identical_text": true
+      },
+      "testability": "Assert prefill.feedMode slow",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Cloud acknowledgement durability and edit-preserves-history preference",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 33,
+      "source_text": " const edited=patchAcknowledgement(next,{owner:OWNER,action:'save_shot',payload:{expected_revision:2}},{record:{...sh,feed_mode:'standard'}});",
+      "inspection_classification": "runtime",
+      "behavior": "Applies editing acknowledgement with expected_revision=2 and changed standard feed",
+      "quality": "Represents edit of old shot, not a new default-setting action",
+      "risk_security_privacy_performance": "A revision on payload is trusted by cache but server validates actual permission",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 33,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 34,
+        "identical_text": true
+      },
+      "testability": "Verify cache edit gate event.payload.expected_revision",
+      "remediation_opportunity": "Revision-gate negative coverage may be worthwhile, no proven bug",
+      "locked_decision_fit": "Cloud acknowledgement durability and edit-preserves-history preference",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 34,
+      "source_text": " assert.equal(edited.setupPreferences[0].slow_feed,true);",
+      "inspection_classification": "assertion",
+      "behavior": "Checks edit cannot change latest remembered Slow Feed",
+      "quality": "Guards historical-edit rollback",
+      "risk_security_privacy_performance": "No test of an edit with absent revision flag",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 34,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 35,
+        "identical_text": true
+      },
+      "testability": "Assert edited.setupPreferences slow_feed true",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Cloud acknowledgement durability and edit-preserves-history preference",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 35,
+      "source_text": " assert.equal(raw.setupPreferences[0].slow_feed,false);",
+      "inspection_classification": "assertion",
+      "behavior": "Checks original fixture remains unchanged after patch",
+      "quality": "Guards accidental shared mutation",
+      "risk_security_privacy_performance": "Only one property checked for immutability",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 35,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 36,
+        "identical_text": true
+      },
+      "testability": "Compare original slow_feed false",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Cloud acknowledgement durability and edit-preserves-history preference",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 36,
+      "source_text": "});",
+      "inspection_classification": "test-close",
+      "behavior": "Closes acknowledgement regression test",
+      "quality": "No independent executable behavior",
+      "risk_security_privacy_performance": "No safety effect",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 36,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 37,
+        "identical_text": true
+      },
+      "testability": "Node parser validates closure",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Cloud acknowledgement durability and edit-preserves-history preference",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 37,
+      "source_text": "test('stale offline shots cannot roll back the newer default',()=>{",
+      "inspection_classification": "test-open",
+      "behavior": "Begins stale offline shot timestamp-order regression",
+      "quality": "Covers out-of-order sync of older shot",
+      "risk_security_privacy_performance": "Does not exercise actual network sync queue",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 37,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 38,
+        "identical_text": true
+      },
+      "testability": "Run named stale offline test",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Offline integrity: stale timestamp cannot undo newer setup preference",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 38,
+      "source_text": " const raw=rawFixture();raw.setupPreferences[0].track_slow_feed=true;",
+      "inspection_classification": "fixture",
+      "behavior": "Creates raw fixture and enables feed tracking",
+      "quality": "Activates same cache branch as actual users",
+      "risk_security_privacy_performance": "Fixture does not simulate authentication",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 38,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 39,
+        "identical_text": true
+      },
+      "testability": "Inspect tracking flag",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Offline integrity: stale timestamp cannot undo newer setup preference",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 39,
+      "source_text": " raw.setupPreferences[0].slow_feed=false;raw.setupPreferences[0].last_feed_shot_at='2026-10-14T18:00:00Z';",
+      "inspection_classification": "fixture",
+      "behavior": "Sets newer known standard default and 18:00 UTC anchor",
+      "quality": "Establishes antirollback source of truth",
+      "risk_security_privacy_performance": "Requires valid parseable UTC timestamp",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 39,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 40,
+        "identical_text": true
+      },
+      "testability": "Check Date.parse ordering in cache",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Offline integrity: stale timestamp cannot undo newer setup preference",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 40,
+      "source_text": " const stale=rawShot({feed_mode:'slow',pulled_at:'2026-10-14T17:00:00Z'});",
+      "inspection_classification": "fixture",
+      "behavior": "Creates a Slow Feed shot one hour older than cached anchor",
+      "quality": "Models delayed offline replay",
+      "risk_security_privacy_performance": "Not testing equal-time collision or invalid timestamp",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 40,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 41,
+        "identical_text": true
+      },
+      "testability": "Compare shot 17:00 UTC to anchor 18:00",
+      "remediation_opportunity": "Add equal-timestamp and malformed-time regressions only after identifying required server behavior",
+      "locked_decision_fit": "Offline integrity: stale timestamp cannot undo newer setup preference",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 41,
+      "source_text": " const next=patchAcknowledgement(raw,{owner:OWNER,action:'save_shot',payload:{}},{record:stale});",
+      "inspection_classification": "runtime",
+      "behavior": "Applies late save_shot acknowledgement for older record",
+      "quality": "Tests local cache monotonically retains later condition",
+      "risk_security_privacy_performance": "Acknowledgement is modeled, not hosted sync",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 41,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 42,
+        "identical_text": true
+      },
+      "testability": "Inspect patchAcknowledgement date guard",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Offline integrity: stale timestamp cannot undo newer setup preference",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 42,
+      "source_text": " assert.equal(next.setupPreferences[0].slow_feed,false);",
+      "inspection_classification": "assertion",
+      "behavior": "Asserts stale shot did not overwrite standard default",
+      "quality": "Critical offline consistency regression",
+      "risk_security_privacy_performance": "No persisted SQL/RLS confirmation",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 42,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 43,
+        "identical_text": true
+      },
+      "testability": "Assert next.setupPreferences slow_feed false",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Offline integrity: stale timestamp cannot undo newer setup preference",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    },
+    {
+      "line": 43,
+      "source_text": "});",
+      "inspection_classification": "test-close",
+      "behavior": "Closes offline antirollback test",
+      "quality": "No new behavior",
+      "risk_security_privacy_performance": "No safety effect",
+      "dead_or_obsolete_status": "Still retained in pinned test and exact live mapped counterpart; no proven dead executable line",
+      "duplicate_or_redundant_status": "Repeated test structure/fixture setup is intentional; no safe duplicate removal demonstrated",
+      "pinned_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 43,
+        "identical_text": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+        "line": 44,
+        "identical_text": true
+      },
+      "testability": "Node parser validates closure",
+      "remediation_opportunity": "No active source defect reproduced; preserve behavior until a focused failing test",
+      "locked_decision_fit": "Offline integrity: stale timestamp cannot undo newer setup preference",
+      "disposition": "TEST_SOURCE_REVIEW_ONLY_NO_RUNTIME_FIX",
+      "review_method": "AI independently read exact numbered original line; not human certification"
+    }
+  ],
+  "direct_live_only_added_line": {
+    "line": 10,
+    "source_text": "const settingsLabelsOrdered=(source,before,after)=>{const a=source.indexOf(before),b=source.indexOf(after);return a>=0&&b>a;};",
+    "blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+    "commit": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+    "path": "tests/ux-refinements.test.mjs",
+    "inspection_classification": "post_pin_added_test_helper",
+    "behavior": "Introduces a pure assertion helper: validates both labels exist and the second follows the first; used by later Settings ordering tests at live lines 88 and 92-94",
+    "quality": "Explicit absent-label guard fixes a possible false positive in earlier naive indexOf comparison",
+    "risk_security_privacy_performance": "No runtime app mutation or private data; string-order check is not visual browser or accessibility proof",
+    "dead_or_obsolete_status": "Used by live Settings test; not dead",
+    "duplicate_or_redundant_status": "One helper replaces repeated naive ordering assertions; no proven redundancy",
+    "pinned_current_counterpart": null,
+    "testability": "Run tests/ux-refinements.test.mjs with Node 22 and test missing/ordered labels",
+    "remediation_opportunity": "No fix justified from static inspection",
+    "locked_decision_fit": "Keeps approved Settings sequence evidence; does not alter app",
+    "review_method": "Direct source-bound AI inspection; not human"
+  },
+  "distinct_new_pinned_lines_reviewed": 43,
+  "distinct_new_post_pin_live_lines_reviewed": 1,
+  "overlap_assertion": "P433 is disjoint from published S2-001..143, P432/A23 work and open P195 #2606; no old R2/C2 bulk credit",
+  "finding": {
+    "kind": "bounded_test_coverage_gap_not_reproduced_app_defect",
+    "details": "Stale offline cache test does not exercise equal timestamps or malformed date strings; no evidence yet that current server allows such invalid records. Cached update uses Date.parse on r.pulled_at and last_feed_shot_at; hold off on code change until reproducible active condition.",
+    "source_counterpart": {
+      "path": "site/cloud/cache.js",
+      "live_blob_sha": "01cc663f96cdaca41d6e2983d557c95736b8bc6e",
+      "lines": [
+        10,
+        14,
+        15,
+        16
+      ]
+    }
+  },
+  "tests": {
+    "Node22": "NOT_RUN_DOCS_ONLY",
+    "app_build": "NOT_RUN_DOCS_ONLY",
+    "browser_mobile_offline": "NOT_RUN_DOCS_ONLY",
+    "hosted_SQL_Auth": "NOT_RUN_DOCS_ONLY",
+    "governance": "PENDING_NEW_PR_HEAD_AND_MERGED_SOURCE"
+  },
+  "completion": "INCOMPLETE_NO_READY_NO_DEPLOY",
+  "next": "P433 pinned line44; preserve frozen F194 work belonging to another active auditor, reconcile current delta and central ledgers after CI"
+}
