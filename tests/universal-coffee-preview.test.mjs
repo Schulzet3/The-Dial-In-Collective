@@ -157,7 +157,8 @@ test('Sweet Bloom Wuri-style page extracts H1, labeled info and exact espresso r
  assert.equal(r.fields.release_label,'2026');
  assert.deepEqual(r.roaster_recipe,{dose_g:18.5,yield_g:36,time_s_min:20,time_s_max:22});
  const markup=coffeeUrlPreviewMarkup(r);
- assert.match(markup,/Unverified Page/);
+ assert.match(markup,/Autofill Results/);
+ assert.doesNotMatch(markup,/Unverified Page|Official Source Preview|Approved Catalog/);
  assert.match(markup,/Roaster's published espresso recipe/);
  assert.match(markup,/Reference only/);
 });

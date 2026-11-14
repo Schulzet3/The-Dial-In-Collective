@@ -8,19 +8,19 @@ const base={ok:true,source:'unverified_public_page',
  source_facts:[],conflicts:[]};
 test('R44: only flagged identity-matched metadata fallback is explicitly marked for member review',()=>{
  const html=coffeeUrlPreviewMarkup({...base,seo_fallback_fields:['tasting_notes']});
- assert.match(html,/Verify metadata-only suggestions:/);
+ assert.match(html,/Check metadata-only suggestions:/);
  assert.match(html,/Tasting Notes/);
- assert.match(html,/last-resort SEO\/metadata suggestions, not verified facts/i);
+ assert.match(html,/last-resort SEO\/metadata suggestions, not confirmed product facts/i);
  assert.match(html,/Fields you already entered will not be overwritten/i);
  assert.match(html,/Add Coffee/);
 });
 test('R44: direct selected tasting without SEO provenance is never mislabeled as fallback',()=>{
  const html=coffeeUrlPreviewMarkup(base);
- assert.doesNotMatch(html,/Verify metadata-only suggestions:/);
+ assert.doesNotMatch(html,/Check metadata-only suggestions:/);
  assert.match(html,/red apple, panels, brown sugar/);
 });
 test('R44: noncanonical flagged field absent from preview cannot manufacture an SEO warning',()=>{
  const html=coffeeUrlPreviewMarkup({...base,seo_fallback_fields:['process']});
- assert.doesNotMatch(html,/Verify metadata-only suggestions:/);
+ assert.doesNotMatch(html,/Check metadata-only suggestions:/);
  assert.match(html,/Not found on this product page:/);
 });
