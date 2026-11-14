@@ -11,7 +11,7 @@ const root=fileURLToPath(new URL('../',import.meta.url));
 const files=dir=>readdirSync(join(root,dir)).filter(name=>name.endsWith('.sql')).sort().map(name=>dir+'/'+name);
 const digest=path=>createHash('sha256').update(readFileSync(join(root,path))).digest('hex');
 
-test('actual SQL runner dispatches every checked-in suite once at its required schema boundary',()=>{
+test('actual SQL runner dispatches every applicable suite once at its required schema boundary',()=>{
  const temp=mkdtempSync(join(tmpdir(),'dic-sql-dispatch-'));
  try{
   const bin=join(temp,'bin'),trace=join(temp,'trace');
@@ -34,12 +34,29 @@ esac
 exit 99
 `);
   chmodSync(join(bin,'docker'),0o700);
-  execFileSync('bash',['scripts/audit/isolated-sql-regression.sh'],{
+  const output=execFileSync('bash',['scripts/audit/isolated-sql-regression.sh'],{
    cwd:root,encoding:'utf8',timeout:20_000,
    env:{PATH:bin+delimiter+(process.env.PATH||''),
     GITHUB_RUN_ID:'dispatch-test',GITHUB_RUN_ATTEMPT:'1',DIC_SQL_DISPATCH_TRACE:trace}
   });
-  const migrations=files('supabase/migrations'),suites=files('supabase/tests');
+  const migrations=files('supabase/migrations'),allSuites=files('supabase/tests');
+  // Two independently unfinished #509 regressions are meaningful ONLY with
+  // their corresponding migration. Never certify absent schema as tested.
+  const migrationBoundSuites={
+   'supabase/tests/recommendation_context_null_controls.sql':
+     'supabase/migrations/20261114115000_dic_recommendation_context_null_control_guard.sql',
+   'supabase/tests/pending_coffee_null_guards.sql':
+     'supabase/migrations/20261114135500_dic_promote_pending_coffee_null_flags.sql'
+  };
+  const suites=allSuites.filter(path=>
+    !migrationBoundSuites[path]||migrations.includes(migrationBoundSuites[path]));
+  for(const [suite,migration] of Object.entries(migrationBoundSuites)){
+   const suiteName=suite.split('/').at(-1).slice(0,-4);
+   assert.equal(
+    output.includes('NOT_APPLICABLE: #509 '+suiteName+'; migration excluded'),
+    !migrations.includes(migration),
+    'source-bound SQL test must report NOT_APPLICABLE iff its migration is absent');
+  }
   const expected=['tests/sql/bootstrap.sql',...migrations,'tests/sql/owner-fixture.sql',...suites];
   const byHash=new Map(expected.map(path=>[digest(path),path]));
   assert.equal(byHash.size,expected.length,'SQL fixtures must have distinct traceable content');
