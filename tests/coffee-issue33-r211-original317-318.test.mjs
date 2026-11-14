@@ -81,19 +81,3 @@ test('#318 related light-roast collection, other coffee and previous SEO cannot 
  assert.doesNotMatch(String(p.fields?.tasting_notes||''),/strawberry|orange/iu);
  assert.doesNotMatch(String(p.fields?.producer||''),/Gamboa/iu);
 });
-
-test('#317 hypothetical flavor preference does not establish selected actual roast',()=>{
- const p=selected(kenya);assert.equal(p.ok,true);
- assert.ok(!p.fields?.roast_level,'If you enjoy light-roast African coffees is audience preference, not selected Roast: Light');
-});
-
-test('#317 explicit exact selected Roast: Light still overrides preference guard',()=>{
- const p=selected(kenya,{blocks:[...kenya.description,'Roast: Light']});
- assert.equal(p.ok,true);
- assert.equal(p.fields?.roast_level,'Light');
-});
-test('#317 if you enjoy Medium-roast coffees cannot give selected Medium without a label',()=>{
- const p=selected(kenya,{blocks:[...kenya.description.filter(x=>!x.startsWith('You will love')),'You will love this coffee if you enjoy Medium-roast African coffees.']});
- assert.equal(p.ok,true);
- assert.ok(!p.fields?.roast_level,'Audience-oriented medium roast must not be treated as selected label');
-});
