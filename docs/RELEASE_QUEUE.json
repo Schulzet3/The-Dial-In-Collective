@@ -14309,6 +14309,31 @@
       "blockers": [],
       "notes": "DEVELOPMENT ONLY; original 603/201/1197 frozen CSV/oracle/scorer untouched, no Netlify or production provider/SQL/Edge/Auth/member changes. #267 and #96 separate owners. Issue #33 OPEN. Narrow R198 READY development only at exact merged source 8cf2c2bcec7881dc590d3de8366393863a45ef9b. Parent original603 per-coffee acceptance incomplete; #288 merchant former URL source-limited. No release/deploy/provider/member writes.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-33-r199-seeds-292-293-selected-current-identity",
+      "issue": 33,
+      "pr": null,
+      "title": "Adjudicate exact Seeds selected #292/#293; reject reused historical slug and cross-coffee source fields",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        ".github/workflows/issue33-r199-original292-293.yml",
+        "tests/coffee-issue33-r199-original292-293.test.mjs",
+        "scripts/audit/issue33-r199-original292-293-check.mjs"
+      ],
+      "owner_source": "Owner Issue #33 selected original603; DIC_PREFLIGHT_VERIFIED development_sha=0e56e6ff501f7b3bc4078d6c98441e399f9c95db preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "RED-first: current exact official #292/#293 H1 and Tastes Like independently inspected; raw guarded HTTPS and actual parser pending PR CI.",
+        "Four positive/negative synthetic actual-parser cases target recycled SKU identity, one-coffee flavor/source, sibling source exclusion, unreported process/roast.",
+        "Current selected source/identity proof must be bound to hashed raw HTML, matching Git commit, Add Coffee and Source Review; no universal 603 certification."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Await PR-head focused synthetic and guarded official current source CI; diagnose or correct any real failure"
+      ],
+      "notes": "Development only. #33 OPEN. CSV/oracle/scorer and all 603/201/1197 frozen identities unchanged. #267/#96 separately owned; no Netlify release or production/provider/member writes.",
+      "production_deployed": false
     }
   ],
   "history": [
