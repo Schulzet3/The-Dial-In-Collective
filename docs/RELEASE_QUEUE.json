@@ -14178,6 +14178,28 @@
       "delivered_release_sha": "69b066171b64a54f92d828ce99c51f29afb32780",
       "delivered_netlify_deploy_id": "6af82c096b094d3dd36485b7",
       "delivered_at_utc": "2026-11-14T09:38:33.549Z"
+    },
+    {
+      "id": "DIC-Q-455-r255-offline-recommendation-provenance-preview",
+      "issue": 455,
+      "pr": null,
+      "title": "Preserve already-queued Use Recommendation provenance in offline Shot History preview",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/mapping.js"
+      ],
+      "owner_source": "Owner Issue #455 Option B safe UX/attribution fix. DIC_PREFLIGHT_VERIFIED development_sha=120bc50a8dcf6c39236f5622d5354368a41a4983 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d. Direct actual mapping.js and shot_card.js source audit.",
+      "tests": [
+        "Four new direct Node22 negative/positive synthetic offline preview, server hydration parity, missing provenance, invalid five-rating and idempotence tests authored; UNRUN/NOT PASS at commit authoring.",
+        "Required Node22/lint, cloud/browser/mobile/offline, isolated SQL/privacy/security and approval CI pending; frozen original603 is not app acceptance."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source PR-head CI and nonforce merge/merged-source verification pending"
+      ],
+      "notes": "Development-only same-source offline preview correction; no new schema, metadata, numeric model, external telemetry, member data access, Locked change, production deploy or science outcome claim.",
+      "production_deployed": false
     }
   ],
   "history": [
