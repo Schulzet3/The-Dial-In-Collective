@@ -31,7 +31,7 @@ BEGIN
  PERFORM set_config('dic.recommendation_context',
    '{"used_controls":["grind"],"source_label":"valid-one"}',true);
  INSERT INTO dic_ci_context_controls DEFAULT VALUES RETURNING recommendation_context INTO got;
- IF got->>'kind'<>'member_selected_starting_reference'
+ IF got IS NULL OR got->>'kind'<>'member_selected_starting_reference'
     OR got->>'source_label'<>'valid-one'
     OR got->'used_controls'<>'["grind"]'::jsonb
     OR got->>'source_verified_independently'<>'false'
@@ -39,7 +39,7 @@ BEGIN
  PERFORM set_config('dic.recommendation_context',
    '{"used_controls":["grind","temperature"],"source_label":"valid-two"}',true);
  INSERT INTO dic_ci_context_controls DEFAULT VALUES RETURNING recommendation_context INTO got;
- IF got->'used_controls'<>'["grind","temperature"]'::jsonb
+ IF got IS NULL OR got->'used_controls'<>'["grind","temperature"]'::jsonb
     OR got->>'source_label'<>'valid-two'
  THEN RAISE EXCEPTION 'Valid two-control context changed: %',got; END IF;
  PERFORM set_config('dic.recommendation_context',
