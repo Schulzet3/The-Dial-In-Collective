@@ -37,9 +37,12 @@ test('required validation exercises Netlify ignore on Node 18 before the Node 22
  const ignoreRuntime=src.indexOf("node-version: '18.20.8'");
  const ignoreTests=src.indexOf('node --test tests/netlify-credit-guard.test.mjs tests/one-use-claim.test.mjs');
  const appRuntime=src.indexOf("node-version: '22'");
- const install=src.indexOf('npm ci --ignore-scripts');
+ const install=src.indexOf('run: node scripts/audit/ci-install-recovery.mjs');
  assert.ok(ignoreRuntime>=0&&ignoreRuntime<ignoreTests&&ignoreTests<appRuntime&&appRuntime<install,
   'ignore tests must run without app dependencies on the provider runtime before switching back');
+ const helper=file('scripts/audit/ci-install-recovery.mjs');
+ assert.match(helper,/LOCKED_INSTALL_ARGS=Object.freeze\(\['ci','--ignore-scripts','--no-audit','--no-fund'\]\)/,
+  'install wrapper must preserve the same locked dependency command');
 });
 
 test('operational READY audit stays mandatory on development; candidates retain exact published workflow bytes',()=>{
