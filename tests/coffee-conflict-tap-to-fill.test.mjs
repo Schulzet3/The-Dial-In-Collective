@@ -163,7 +163,8 @@ test('preview eliminates repeated details and source-download UI while retaining
  const html=coffeeUrlCompactPreviewMarkup(result);
  assert.match(html,/Review conflicting details|Tap a value to fill its field/);
  assert.match(html,/Roaster's published espresso reference/);
- assert.match(html,/A similar verified coffee exists/);
+ assert.match(html,/A similar coffee already exists/);
+ assert.doesNotMatch(html,/Unverified Page|Official Source Preview|Approved Catalog|coffee-source-label/);
  assert.doesNotMatch(html,/Published source information|Download Source Review|The webpage is not yet a verified official source/);
  assert.doesNotMatch(html,/<dl class="coffee-url-fields">/);
  const snapshot=coffeeSourceReviewSnapshot(result,{checkedAt:'2026-11-14T00:00:00Z'});

@@ -71,7 +71,7 @@ test('autofill preview escapes external fields and never submits a coffee',()=>{
  assert.ok(!html.includes('<script>'));
  assert.match(html,/Review or correct them, then click Add Coffee/);
   assert.doesNotMatch(html,/Apply Suggested Details|apply-coffee-url/);
- assert.match(html,/similar verified coffee/);
+ assert.match(html,/A similar coffee already exists/);
 });
 test('applying structured fields fills blanks only, preserving typed details and select values',()=>{
  const fields={
@@ -159,7 +159,8 @@ test('published New Coffee preview click immediately populates blanks before Add
   assert.doesNotMatch(main,/if\(a==='apply-coffee-url'\)/);
  const preview=coffeeUrlPreviewMarkup({ok:true,source:'unverified_public_page',
   fields:{name:'Wuri',roaster:'Sweet Bloom'}});
- assert.match(preview,/Unverified Page/);
+ assert.match(preview,/Autofill Results/);
+ assert.doesNotMatch(preview,/Unverified Page|Official Source Preview|Approved Catalog|coffee-source-label/);
  assert.match(preview,/Review or correct them, then click Add Coffee/);
  assert.doesNotMatch(preview,/data-action="apply-coffee-url"/);
 });
