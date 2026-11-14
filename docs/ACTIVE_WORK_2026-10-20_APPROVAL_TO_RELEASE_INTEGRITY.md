@@ -545,3 +545,19 @@ DIC_PREFLIGHT_VERIFIED development_sha=8da4a1fa94b53fea08a226270d64a23926f7b62a 
 - Acceptance: COMPLETE for four eligible READY features and this publication. Next: continue separate unfinished work; new owner Publish required for future READY.
 
 DIC_PREFLIGHT_VERIFIED development_sha=9c22f1957a00f303d909616c8f07b7bfb6f89a0d preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+## READY-only source candidate (not published)
+
+DIC_PREFLIGHT_VERIFIED development_sha=14243387a0bff86184d7fc376a4f1202d8cbb91d preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- User owner request: November 14 2026 Publish all READY plus independently source-certified R191 and R192 required dependencies (6 IDs).
+- Development parent: 14243387a0bff86184d7fc376a4f1202d8cbb91d
+- Actual published baseline: 7bee5534d45649179b759f88135c8457957b856a; verified ancestry and Netlify previously READY/current; no further release claim yet.
+- Source candidate branch: release-candidates/20261114-ready6-isolated-01. Exact six selected READY IDs: DIC-Q-28-owner-oauth-privacy-policy-20261114, DIC-Q-33-r191-275-276-post-ready-unnamed-growers, DIC-Q-33-r192-redhouse-selected-narrative-review, DIC-Q-33-r198-original291-source-prose-conflict, DIC-Q-455-r255-offline-recommendation-provenance-preview, DIC-Q-508-catalog-refresh-cooldown-copy-15s.
+- Included selected deployable paths (9): build_cloud.mjs, site/cloud/coffee-url-autofill.js, site/cloud/main.js, site/cloud/mapping.js, site/privacy.html, site/styles.css, src/server/coffee-page-metadata.mjs, src/server/coffee-selected-description-sensory.mjs, src/server/coffee-selected-hero-notes-conflict.mjs.
+- Exact frozen R198 metadata pinned at Git blob 2d851cdd53619e0dd25f0fe4e82e4acf3cdbc808; later unready R201 metadata explicitly excluded.
+- Restored unready paths (5): scripts/netlify/should-ignore-build.mjs, src/server/coffee-blend-evidence.mjs, src/server/coffee-direct-product-prose.mjs, supabase/migrations/20261114115000_dic_recommendation_context_null_control_guard.sql, supabase/migrations/20261114135500_dic_promote_pending_coffee_null_flags.sql; includes both #509 TESTING SQL migrations absent in published source.
+- Restored unpublished GitHub workflows: 111; source-safe excluded workflow test: tests/issue455-browser-dependency-install-fallback.test.mjs.
+- Omitted source-bound unready #33 tests: tests/coffee-issue33-r141-119.test.mjs, tests/coffee-issue33-r165-209.test.mjs, tests/coffee-issue33-r177-253.test.mjs, tests/coffee-issue33-r178-254.test.mjs, tests/coffee-issue33-r180-255-community-roles.test.mjs, tests/coffee-issue33-r183-258.test.mjs, tests/coffee-issue33-r184-259.test.mjs, tests/coffee-issue33-r185-260.test.mjs, tests/coffee-issue33-r186-261.test.mjs, tests/coffee-issue33-r189-273.test.mjs, tests/coffee-issue33-r190-274.test.mjs, tests/coffee-issue33-r193-ridley.test.mjs, tests/coffee-issue33-r194-easy-rider.test.mjs, tests/coffee-issue33-r195-original282-284.test.mjs, tests/coffee-issue33-r196-original285-287.test.mjs, tests/coffee-issue33-r199-original292-293.test.mjs, tests/coffee-issue33-r200-original294.test.mjs, tests/coffee-issue33-r201-original299.test.mjs. R191/R192/R198 selected tests retained.
+- Development SQL runner fixed to report NOT_APPLICABLE for absent unready #509 migrations but always run all included migrations and baseline SQL tests; awaiting exact candidate CI.
+- No production, Supabase, Auth, member, Netlify or backup write; no skipped candidate CI accepted as PASS. Single frozen source candidate, five exact CI SUCCESS and a NEW one-use owner grant/controller required before deployment.

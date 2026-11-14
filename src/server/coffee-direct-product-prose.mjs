@@ -61,11 +61,11 @@ const CURRENT_SELECTED_GREEN_AND_DECAF_CAPTION=/^(?:(?:extended[- ]fermentation\
 
 // Accept short current treatment only with the directly selected self-decaf
 // paragraph and exact H1; never infer from roaster identity or site SEO.
-// A present selected decaf bean can be referred to as "it" / "it's" / "it’s" after the same
+// A present selected decaf bean can be referred to as "it" after the same
 // paragraph explicitly introduced "this [adjective] bean/coffee". Require
 // an antecedent before the method sentence; the H1, product prose and all
 // other-coffee/history/contradiction guards remain in force.
-const CURRENT_SELECTED_BEAN_PRONOUN_METHOD=/(?:^|[.!?]\s+)(?:(?:it|this\s+coffee)\s+is|it['’]s)\s+decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?(?:swiss[ -]?water(?:\s+process)?|mountain[ -]?water(?:\s+process)?|sugar(?:[ -]?cane|[ -]?process)|ethyl[ -]?acetate|(?:supercritical\s+)?carbon[ -]?dioxide|co\s*[- ]?[2\u2082])\b/giu;
+const CURRENT_SELECTED_BEAN_PRONOUN_METHOD=/(?:^|[.!?]\s+)(it|this\s+coffee)\s+is\s+decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?(?:swiss[ -]?water(?:\s+process)?|mountain[ -]?water(?:\s+process)?|sugar(?:[ -]?cane|[ -]?process)|ethyl[ -]?acetate|(?:supercritical\s+)?carbon[ -]?dioxide|co\s*[- ]?[2\u2082])\b/giu;
 // A product without "Decaf" in its H1 may call itself "this decaf single
 // origin gem" rather than "this decaf coffee". Require a direct chosen-product
 // paragraph and its own named treatment; this identity alone never fills method.
@@ -348,7 +348,7 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
   // the subsequent pronoun refer to THIS named decaf, not another offering.
   // Reject site/educational context, historical alternatives and missing H1.
   for(const pronoun of line.matchAll(CURRENT_SELECTED_BEAN_PRONOUN_METHOD)){
-   if(decafOnlyCoffee(name)&&['p','div'].includes(b.tag)&&!b.educational&&line.length<=650&&
+   if(decafOnlyCoffee(name)&&b.tag==='p'&&line.length<=650&&
      !NONCURRENT_DECAF_METHOD.test(line)&&
      /\b(?:this|our)\s+(?:[\p{L}\p{M}-]+\s+){0,4}(?:beans?|coffee)\b/iu.test(line.slice(0,pronoun.index))&&
      inferDecaffeinationMethod({name,selectedMethod:pronoun[0]})&&
