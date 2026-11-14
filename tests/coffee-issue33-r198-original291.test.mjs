@@ -31,3 +31,9 @@ test('a former harvested crop and a current caption are not two current corrobor
  assert.equal(p.ok,true);assert.match(String(p.fields?.tasting_notes||''),/citrus/i);
  assert.ok(!p.conflicts?.includes('tasting_notes'));
 });
+
+test('short current product summary div plus named selected flavor paragraph must both count',()=>{
+ const summary='<div>From the slopes of Mount Kilimanjaro, rare peaberry beans deliver notes of pepper, white wine, and black currant.</div>';
+ const named='<p>Flavor Profile: Tanzania Peaberry delivers a bright, lively acidity with a medium body, offering notes of notes of pepper, white wine, and black currant, with a clean finish.</p>';
+ const p=parse(summary+named+labeled);assert.equal(p.ok,true);assert.ok(!p.fields?.tasting_notes,JSON.stringify(p.fields));assert.ok(p.conflicts?.includes('tasting_notes'));
+});

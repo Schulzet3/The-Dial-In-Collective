@@ -65,9 +65,9 @@ export function selectedCurrentRepeatedProseNotesConflict(html,{name='',notes=''
  if(printed.length<3||printed.length>8||printed.some(x=>x.length<3||x.length>48))return null;
  const blocks=productCoffeeProse(html,clean),titles=blocks.filter(b=>b.tag==='h1'&&!b.educational);
  if(titles.length!==1||compact(titles[0].text)!==compact(name))return null;
- const own=blocks.filter(b=>b.tag==='p'&&!b.educational&&b.text.length>=48&&b.text.length<=680&&
+ const own=blocks.filter(b=>(b.tag==='p'||b.tag==='div')&&!b.educational&&b.text.length>=48&&b.text.length<=680&&
    b.start>titles[0].end&&b.start<titles[0].end+24000&&!excluded.test(b.section||'')&&
-   !excluded.test(b.text)&&!NONCURRENT_COFFEE_PROSE.test(b.text));
+   !excluded.test(b.text)&&!/\b(?:historically|earlier harvest|prior crop|prior offering)\b/iu.test(b.text)&&!NONCURRENT_COFFEE_PROSE.test(b.text));
  const claims=[];
  for(const b of own){
   const m=b.text.match(/\bnotes?\s+of\s+(?:notes?\s+of\s+)?([^.!?;]{8,150}?)(?:,\s+with\b|[.!?]|$)/iu);
