@@ -1,0 +1,591 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "S2-DISJOINT-P433-044-062-LIVE-20261114-R11B",
+  "reviewer": "AI_DIRECT_NUMBERED_SOURCE_REVIEW_NOT_HUMAN",
+  "preflight": {
+    "development_sha": "991478a525ed9e49f125d7c1d52f64880cf517d0",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d"
+  },
+  "source": {
+    "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "path": "tests/ux-refinements.test.mjs",
+    "pinned_blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+    "pinned_file_total_physical_lines": 196,
+    "from": 44,
+    "to": 62,
+    "current_before_commit": "991478a525ed9e49f125d7c1d52f64880cf517d0",
+    "current_before_blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+    "new_live_test_blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+    "live_original_to_new_line_map": [
+      45,
+      46,
+      47,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      57,
+      58,
+      59,
+      60,
+      61,
+      null,
+      62,
+      63,
+      64
+    ]
+  },
+  "direct_numbered_lines": [
+    {
+      "line": 44,
+      "source_text": "test('shot history is compact and equipment context only appears at bottom when expanded',()=>{",
+      "inspection_classification": "test-declaration",
+      "behavior": "History test checks expanded and collapsed presentation",
+      "quality": "Test-only setup/import/boundary with deterministic fixture",
+      "risk_security_privacy_performance": "Does not prove actual mobile rendering",
+      "dead_or_obsolete_status": "Pinned and live retained as mapped; no proven dead present code",
+      "duplicate_or_redundant_status": "No unnecessary duplicate current behavior established",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 44
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 45,
+        "source_text_matches": true
+      },
+      "testability": "Run Node22 node --test tests/ux-refinements.test.mjs and relevant exact-source hosted PR test; no browser proof",
+      "remediation_opportunity": "No additional code change justified",
+      "locked_decision_fit": "Compact shot history and equipment-version-scoped actions; preserve explicit Slow Feed and existing shot history",
+      "review_method": "AI direct numbered source reading; not independent human certification"
+    },
+    {
+      "line": 45,
+      "source_text": " const raw=rawFixture();raw.shots=[rawShot({feed_mode:'slow'})];",
+      "inspection_classification": "fixture",
+      "behavior": "Creates one synthetic Slow Feed shot in otherwise clean state",
+      "quality": "Test-only setup/import/boundary with deterministic fixture",
+      "risk_security_privacy_performance": "No server-side Auth coverage",
+      "dead_or_obsolete_status": "Pinned and live retained as mapped; no proven dead present code",
+      "duplicate_or_redundant_status": "No unnecessary duplicate current behavior established",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 45
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 46,
+        "source_text_matches": true
+      },
+      "testability": "Run Node22 node --test tests/ux-refinements.test.mjs and relevant exact-source hosted PR test; no browser proof",
+      "remediation_opportunity": "No additional code change justified",
+      "locked_decision_fit": "Compact shot history and equipment-version-scoped actions; preserve explicit Slow Feed and existing shot history",
+      "review_method": "AI direct numbered source reading; not independent human certification"
+    },
+    {
+      "line": 46,
+      "source_text": " const sh=hydrate(raw).shots[0],html=shotCard(sh,{expanded:true,activeVersionId:'version'});",
+      "inspection_classification": "render",
+      "behavior": "Hydrates shot and renders expanded history card for active equipment version",
+      "quality": "Test-only setup/import/boundary with deterministic fixture",
+      "risk_security_privacy_performance": "HTML string is not a live browser interaction",
+      "dead_or_obsolete_status": "Pinned and live retained as mapped; no proven dead present code",
+      "duplicate_or_redundant_status": "No unnecessary duplicate current behavior established",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 46
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 47,
+        "source_text_matches": true
+      },
+      "testability": "Run Node22 node --test tests/ux-refinements.test.mjs and relevant exact-source hosted PR test; no browser proof",
+      "remediation_opportunity": "No additional code change justified",
+      "locked_decision_fit": "Compact shot history and equipment-version-scoped actions; preserve explicit Slow Feed and existing shot history",
+      "review_method": "AI direct numbered source reading; not independent human certification"
+    },
+    {
+      "line": 47,
+      "source_text": " assert.ok(html.indexOf('Test Home')>html.indexOf('class=\"radar\"'));",
+      "inspection_classification": "ordering-assertion",
+      "behavior": "Requires setup name to appear after radar markup",
+      "quality": "Explicit test assertion, but bounded to rendered string",
+      "risk_security_privacy_performance": "FALSE POSITIVE when radar token absent: indexOf missing => -1",
+      "dead_or_obsolete_status": "Pinned and live retained as mapped; no proven dead present code",
+      "duplicate_or_redundant_status": "No unnecessary duplicate current behavior established",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 47
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 49,
+        "source_text_matches": true
+      },
+      "testability": "Run Node22 node --test tests/ux-refinements.test.mjs and relevant exact-source hosted PR test; no browser proof",
+      "remediation_opportunity": "Add a required radar-presence assertion before comparisons, eliminating missing-radar false positive",
+      "locked_decision_fit": "Compact shot history and equipment-version-scoped actions; preserve explicit Slow Feed and existing shot history",
+      "review_method": "AI direct numbered source reading; not independent human certification"
+    },
+    {
+      "line": 48,
+      "source_text": " assert.match(html,/class=\"shot-topline\"/);",
+      "inspection_classification": "presence-assertion",
+      "behavior": "Checks visible shot-topline class exists",
+      "quality": "Explicit test assertion, but bounded to rendered string",
+      "risk_security_privacy_performance": "CSS computed style not verified",
+      "dead_or_obsolete_status": "Pinned and live retained as mapped; no proven dead present code",
+      "duplicate_or_redundant_status": "No unnecessary duplicate current behavior established",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 48
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 50,
+        "source_text_matches": true
+      },
+      "testability": "Run Node22 node --test tests/ux-refinements.test.mjs and relevant exact-source hosted PR test; no browser proof",
+      "remediation_opportunity": "No additional code change justified",
+      "locked_decision_fit": "Compact shot history and equipment-version-scoped actions; preserve explicit Slow Feed and existing shot history",
+      "review_method": "AI direct numbered source reading; not independent human certification"
+    },
+    {
+      "line": 49,
+      "source_text": " assert.match(html,/class=\"shot-date\">\\d{1,2}\\/\\d{1,2}\\/\\d{4}<\\/span>/);",
+      "inspection_classification": "date-assertion",
+      "behavior": "Checks human-readable m/d/yyyy date span",
+      "quality": "Explicit test assertion, but bounded to rendered string",
+      "risk_security_privacy_performance": "Locale/time-zone variations not exercised",
+      "dead_or_obsolete_status": "Pinned and live retained as mapped; no proven dead present code",
+      "duplicate_or_redundant_status": "No unnecessary duplicate current behavior established",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 49
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 51,
+        "source_text_matches": true
+      },
+      "testability": "Run Node22 node --test tests/ux-refinements.test.mjs and relevant exact-source hosted PR test; no browser proof",
+      "remediation_opportunity": "No additional code change justified",
+      "locked_decision_fit": "Compact shot history and equipment-version-scoped actions; preserve explicit Slow Feed and existing shot history",
+      "review_method": "AI direct numbered source reading; not independent human certification"
+    },
+    {
+      "line": 50,
+      "source_text": " assert.ok(html.indexOf('18 g')>html.indexOf('class=\"radar\"'));",
+      "inspection_classification": "ordering-assertion",
+      "behavior": "Requires dose string to occur after radar",
+      "quality": "Explicit test assertion, but bounded to rendered string",
+      "risk_security_privacy_performance": "Missing radar may make this order check falsely pass",
+      "dead_or_obsolete_status": "Pinned and live retained as mapped; no proven dead present code",
+      "duplicate_or_redundant_status": "No unnecessary duplicate current behavior established",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 50
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 52,
+        "source_text_matches": true
+      },
+      "testability": "Run Node22 node --test tests/ux-refinements.test.mjs and relevant exact-source hosted PR test; no browser proof",
+      "remediation_opportunity": "Add a required radar-presence assertion before comparisons, eliminating missing-radar false positive",
+      "locked_decision_fit": "Compact shot history and equipment-version-scoped actions; preserve explicit Slow Feed and existing shot history",
+      "review_method": "AI direct numbered source reading; not independent human certification"
+    },
+    {
+      "line": 51,
+      "source_text": " assert.doesNotMatch(shotCard(sh,{expanded:false,activeVersionId:'version'}),/Test Home|Basket Dose/);",
+      "inspection_classification": "negative-assertion",
+      "behavior": "Excludes setup name and basket dose in collapsed card",
+      "quality": "Explicit test assertion, but bounded to rendered string",
+      "risk_security_privacy_performance": "Other equipment fields could still leak if untested",
+      "dead_or_obsolete_status": "Pinned and live retained as mapped; no proven dead present code",
+      "duplicate_or_redundant_status": "No unnecessary duplicate current behavior established",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 51
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 53,
+        "source_text_matches": true
+      },
+      "testability": "Run Node22 node --test tests/ux-refinements.test.mjs and relevant exact-source hosted PR test; no browser proof",
+      "remediation_opportunity": "No additional code change justified",
+      "locked_decision_fit": "Compact shot history and equipment-version-scoped actions; preserve explicit Slow Feed and existing shot history",
+      "review_method": "AI direct numbered source reading; not independent human certification"
+    },
+    {
+      "line": 52,
+      "source_text": " assert.ok(html.indexOf('Slow Feed')>html.indexOf('class=\"radar\"'));",
+      "inspection_classification": "ordering-assertion",
+      "behavior": "Requires Slow Feed label after radar",
+      "quality": "Explicit test assertion, but bounded to rendered string",
+      "risk_security_privacy_performance": "Missing radar could give false ordering pass",
+      "dead_or_obsolete_status": "Pinned and live retained as mapped; no proven dead present code",
+      "duplicate_or_redundant_status": "No unnecessary duplicate current behavior established",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 52
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 54,
+        "source_text_matches": true
+      },
+      "testability": "Run Node22 node --test tests/ux-refinements.test.mjs and relevant exact-source hosted PR test; no browser proof",
+      "remediation_opportunity": "Add a required radar-presence assertion before comparisons, eliminating missing-radar false positive",
+      "locked_decision_fit": "Compact shot history and equipment-version-scoped actions; preserve explicit Slow Feed and existing shot history",
+      "review_method": "AI direct numbered source reading; not independent human certification"
+    },
+    {
+      "line": 53,
+      "source_text": " assert.ok(html.indexOf('data-action=\"edit\"')<html.indexOf('data-action=\"make-current\"'));",
+      "inspection_classification": "ordering-assertion",
+      "behavior": "Checks Edit appears before Make Current",
+      "quality": "Explicit test assertion, but bounded to rendered string",
+      "risk_security_privacy_performance": "Both action existence proven later, not functional clicking",
+      "dead_or_obsolete_status": "Pinned and live retained as mapped; no proven dead present code",
+      "duplicate_or_redundant_status": "No unnecessary duplicate current behavior established",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 53
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 55,
+        "source_text_matches": true
+      },
+      "testability": "Run Node22 node --test tests/ux-refinements.test.mjs and relevant exact-source hosted PR test; no browser proof",
+      "remediation_opportunity": "No additional code change justified",
+      "locked_decision_fit": "Compact shot history and equipment-version-scoped actions; preserve explicit Slow Feed and existing shot history",
+      "review_method": "AI direct numbered source reading; not independent human certification"
+    },
+    {
+      "line": 54,
+      "source_text": " assert.ok(html.indexOf('data-action=\"edit\"')>html.indexOf('class=\"shot-record-context\"'));",
+      "inspection_classification": "ordering-assertion",
+      "behavior": "Requires Edit after record-context section",
+      "quality": "Explicit test assertion, but bounded to rendered string",
+      "risk_security_privacy_performance": "Existing live now separately checks record-context presence",
+      "dead_or_obsolete_status": "Pinned and live retained as mapped; no proven dead present code",
+      "duplicate_or_redundant_status": "No unnecessary duplicate current behavior established",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 54
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 57,
+        "source_text_matches": true
+      },
+      "testability": "Run Node22 node --test tests/ux-refinements.test.mjs and relevant exact-source hosted PR test; no browser proof",
+      "remediation_opportunity": "No additional code change justified",
+      "locked_decision_fit": "Compact shot history and equipment-version-scoped actions; preserve explicit Slow Feed and existing shot history",
+      "review_method": "AI direct numbered source reading; not independent human certification"
+    },
+    {
+      "line": 55,
+      "source_text": " assert.doesNotMatch(shotCard(sh,{expanded:false,activeVersionId:'version'}),/data-action=\"edit\"/);",
+      "inspection_classification": "negative-assertion",
+      "behavior": "Hides Edit action in collapsed view",
+      "quality": "Explicit test assertion, but bounded to rendered string",
+      "risk_security_privacy_performance": "No actual keyboard navigation simulated",
+      "dead_or_obsolete_status": "Pinned and live retained as mapped; no proven dead present code",
+      "duplicate_or_redundant_status": "No unnecessary duplicate current behavior established",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 55
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 58,
+        "source_text_matches": true
+      },
+      "testability": "Run Node22 node --test tests/ux-refinements.test.mjs and relevant exact-source hosted PR test; no browser proof",
+      "remediation_opportunity": "No additional code change justified",
+      "locked_decision_fit": "Compact shot history and equipment-version-scoped actions; preserve explicit Slow Feed and existing shot history",
+      "review_method": "AI direct numbered source reading; not independent human certification"
+    },
+    {
+      "line": 56,
+      "source_text": " assert.match(html,/class=\"shot-actions\"/);",
+      "inspection_classification": "presence-assertion",
+      "behavior": "Requires shot-actions container",
+      "quality": "Explicit test assertion, but bounded to rendered string",
+      "risk_security_privacy_performance": "No click functionality established",
+      "dead_or_obsolete_status": "Pinned and live retained as mapped; no proven dead present code",
+      "duplicate_or_redundant_status": "No unnecessary duplicate current behavior established",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 56
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 59,
+        "source_text_matches": true
+      },
+      "testability": "Run Node22 node --test tests/ux-refinements.test.mjs and relevant exact-source hosted PR test; no browser proof",
+      "remediation_opportunity": "No additional code change justified",
+      "locked_decision_fit": "Compact shot history and equipment-version-scoped actions; preserve explicit Slow Feed and existing shot history",
+      "review_method": "AI direct numbered source reading; not independent human certification"
+    },
+    {
+      "line": 57,
+      "source_text": " assert.match(html,/class=\"primary compact history-edit\" data-action=\"edit\"/);",
+      "inspection_classification": "presence-assertion",
+      "behavior": "Requires Edit primary button and data-action",
+      "quality": "Explicit test assertion, but bounded to rendered string",
+      "risk_security_privacy_performance": "Only source markup, not click handler",
+      "dead_or_obsolete_status": "Pinned and live retained as mapped; no proven dead present code",
+      "duplicate_or_redundant_status": "No unnecessary duplicate current behavior established",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 57
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 60,
+        "source_text_matches": true
+      },
+      "testability": "Run Node22 node --test tests/ux-refinements.test.mjs and relevant exact-source hosted PR test; no browser proof",
+      "remediation_opportunity": "No additional code change justified",
+      "locked_decision_fit": "Compact shot history and equipment-version-scoped actions; preserve explicit Slow Feed and existing shot history",
+      "review_method": "AI direct numbered source reading; not independent human certification"
+    },
+    {
+      "line": 58,
+      "source_text": " assert.match(html,/class=\"ghost compact history-make-current\" data-action=\"make-current\"/);",
+      "inspection_classification": "presence-assertion",
+      "behavior": "Requires Make Current secondary button and data-action",
+      "quality": "Explicit test assertion, but bounded to rendered string",
+      "risk_security_privacy_performance": "Only source markup, not permission check",
+      "dead_or_obsolete_status": "Pinned and live retained as mapped; no proven dead present code",
+      "duplicate_or_redundant_status": "No unnecessary duplicate current behavior established",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 58
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 61,
+        "source_text_matches": true
+      },
+      "testability": "Run Node22 node --test tests/ux-refinements.test.mjs and relevant exact-source hosted PR test; no browser proof",
+      "remediation_opportunity": "No additional code change justified",
+      "locked_decision_fit": "Compact shot history and equipment-version-scoped actions; preserve explicit Slow Feed and existing shot history",
+      "review_method": "AI direct numbered source reading; not independent human certification"
+    },
+    {
+      "line": 59,
+      "source_text": " assert.match(html,/class=\"shot-actions\"/);",
+      "inspection_classification": "duplicate-assertion",
+      "behavior": "Historical duplicate identical shot-actions assertion",
+      "quality": "Exact duplicate removed in live code; retained as immutable pin history",
+      "risk_security_privacy_performance": "Correctly removed in current live test; zero current runtime action",
+      "dead_or_obsolete_status": "Redundant in pinned source, absent in current code; no additional deletion needed",
+      "duplicate_or_redundant_status": "Duplicate of pinned line56, already removed by prior live change",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 59
+      },
+      "live_counterpart": null,
+      "testability": "Run Node22 node --test tests/ux-refinements.test.mjs and relevant exact-source hosted PR test; no browser proof",
+      "remediation_opportunity": "Already removed from live; no second removal",
+      "locked_decision_fit": "Compact shot history and equipment-version-scoped actions; preserve explicit Slow Feed and existing shot history",
+      "review_method": "AI direct numbered source reading; not independent human certification"
+    },
+    {
+      "line": 60,
+      "source_text": " assert.doesNotMatch(shotCard(sh,{expanded:true,activeVersionId:'other'}),/data-action=\"make-current\"/);",
+      "inspection_classification": "negative-assertion",
+      "behavior": "Omits Make Current when shot belongs to other equipment version",
+      "quality": "Explicit test assertion, but bounded to rendered string",
+      "risk_security_privacy_performance": "Synthetic equipment identity only",
+      "dead_or_obsolete_status": "Pinned and live retained as mapped; no proven dead present code",
+      "duplicate_or_redundant_status": "No unnecessary duplicate current behavior established",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 60
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 62,
+        "source_text_matches": true
+      },
+      "testability": "Run Node22 node --test tests/ux-refinements.test.mjs and relevant exact-source hosted PR test; no browser proof",
+      "remediation_opportunity": "No additional code change justified",
+      "locked_decision_fit": "Compact shot history and equipment-version-scoped actions; preserve explicit Slow Feed and existing shot history",
+      "review_method": "AI direct numbered source reading; not independent human certification"
+    },
+    {
+      "line": 61,
+      "source_text": " assert.equal(feedLabel(null),'Feed Not Recorded');",
+      "inspection_classification": "assertion",
+      "behavior": "Null feed label must say Feed Not Recorded",
+      "quality": "Explicit test assertion, but bounded to rendered string",
+      "risk_security_privacy_performance": "Does not reinterpret unknown historical feed as standard",
+      "dead_or_obsolete_status": "Pinned and live retained as mapped; no proven dead present code",
+      "duplicate_or_redundant_status": "No unnecessary duplicate current behavior established",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 61
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 63,
+        "source_text_matches": true
+      },
+      "testability": "Run Node22 node --test tests/ux-refinements.test.mjs and relevant exact-source hosted PR test; no browser proof",
+      "remediation_opportunity": "No additional code change justified",
+      "locked_decision_fit": "Compact shot history and equipment-version-scoped actions; preserve explicit Slow Feed and existing shot history",
+      "review_method": "AI direct numbered source reading; not independent human certification"
+    },
+    {
+      "line": 62,
+      "source_text": "});",
+      "inspection_classification": "test-close",
+      "behavior": "Closes compact history presentation test",
+      "quality": "Test-only setup/import/boundary with deterministic fixture",
+      "risk_security_privacy_performance": "Syntax only",
+      "dead_or_obsolete_status": "Pinned and live retained as mapped; no proven dead present code",
+      "duplicate_or_redundant_status": "No unnecessary duplicate current behavior established",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line": 62
+      },
+      "live_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "0a7253cbad9dc17332a153028a1b4d4fd75d12d1",
+        "line": 64,
+        "source_text_matches": true
+      },
+      "testability": "Run Node22 node --test tests/ux-refinements.test.mjs and relevant exact-source hosted PR test; no browser proof",
+      "remediation_opportunity": "No additional code change justified",
+      "locked_decision_fit": "Compact shot history and equipment-version-scoped actions; preserve explicit Slow Feed and existing shot history",
+      "review_method": "AI direct numbered source reading; not independent human certification"
+    }
+  ],
+  "distinct_new_pinned_lines_reviewed": 19,
+  "new_live_modified_line": {
+    "path": "tests/ux-refinements.test.mjs",
+    "prechange_blob_sha": "ad3ed946b22b8924657e6bda5b550e47ff7a1898",
+    "expected_new_line": 48,
+    "source_text": " assert.match(html,/class=\"radar\"/);",
+    "behavior": "Checks that the taste compass radar container actually exists before later order assertions; closes demonstrated false-positive case when .indexOf returns -1",
+    "quality": "Stronger source-visible test contract",
+    "risk": "No production behavior changes, fixture only; no browser/device validation",
+    "obsolete_status": "New active assertion",
+    "duplicate_status": "Not already present in this test",
+    "testability": "Node22 targeted test + hosted exact PR-head checks",
+    "remediation": "Test-only one-line fix",
+    "locked_fit": "Preserve owner-approved expanded shot history sensory compass",
+    "proven_false_positive": {
+      "expression": "'Test Home'.indexOf('Test Home') > 'Test Home'.indexOf('class=\"radar\"')",
+      "actual": true
+    }
+  },
+  "preexisting_post_pin_drift": {
+    "new_current_line_56": {
+      "source_text": "  assert.match(html,/class=\"shot-record-context\"/);",
+      "behavior": "Already asserts record-context presence",
+      "already_present_before_this_commit": true
+    },
+    "deleted_pinned_line_59": {
+      "source_text": " assert.match(html,/class=\"shot-actions\"/);",
+      "behavior": "Prior duplicate shot-actions assertion removed before this commit",
+      "credited_as_new_change": false
+    }
+  },
+  "first_line_recheck": {
+    "frozen_F001_exact_S2_001_41_lines": "ALREADY_RECHECKED_IN_R11A_ZERO_NEW_CREDIT"
+  },
+  "findings": [
+    {
+      "kind": "PROVEN_UNIT_TEST_FALSE_POSITIVE_NOT_APP_BUG",
+      "path": "tests/ux-refinements.test.mjs",
+      "pinned_lines": [
+        47,
+        50,
+        52
+      ],
+      "explanation": "All three relative-position conditions compare to indexOf(radar); absent radar yields -1 and can pass when other substrings exist. The added dedicated assertion fails if radar is missing. Existing current source actually renders radar via shotCard -> ui.radar, so do not claim missing production UI."
+    },
+    {
+      "kind": "PREEXISTING_REDUNDANCY_ALREADY_REMOVED",
+      "pinned_line": 59,
+      "explanation": "Live source already removed duplicate pinned shot-actions assertion; no additional deletion."
+    }
+  ],
+  "test_scope": {
+    "local_node22": "NOT_RUN_REPO_NOT_AVAILABLE_IN_CONTAINER",
+    "hosted_pr_ci": "PENDING",
+    "browser_sql_auth_provider": "NOT_APPLICABLE_TEST_ONLY"
+  },
+  "state": "TEST_FIX_PROPOSED_NOT_READY_NOT_DEPLOYED",
+  "next": "Verify PR-head Node22 targeted and approval, merged source CI; continue P433:63 and reconcile central ledger without conflicting frozen work"
+}
