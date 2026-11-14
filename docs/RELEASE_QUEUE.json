@@ -13994,7 +13994,7 @@
       "id": "DIC-Q-2621-add-coffee-difference-tap-preview-cleanup",
       "issue": 2621,
       "title": "Make post-add coffee differences tappable; remove redundant New Coffee source/detail sections",
-      "state": "IN_PROGRESS",
+      "state": "READY",
       "scope_paths": [
         "site/cloud/coffee-url-autofill.js",
         "site/cloud/main.js",
@@ -14006,15 +14006,26 @@
         "Existing conflict selection, Add Coffee, cloud/mobile visual, offline, approval, security and isolated SQL CI to be checked without duplicated suites; unrun != PASS.",
         "Initial PR-head #2622 approval 43571046587 FAILED solely because IN_PROGRESS queue merged_source_sha was omitted; schema requires null or a valid Git SHA; set null pending merge. Previously passing source tests remain separately scoped and not credited to corrected head.",
         "Exact PR-head 669fe32 Node22 full 4,767 tests: 4,648 PASS, 113 FAIL, 6 intentionally SKIPPED; legacy diagnostics/UI assertions expected the former preview markup that owner removed. No PASS claimed. Rather than discarding the 603 source oracle or hiding legacy content in the member DOM, retain original detail renderer only as diagnostic contract; all production UI calls now explicitly use compact mode. Two affected post-add correction tests updated to assert tappable choices. Recheck exact next PR-head all five jobs.",
-        "Exact second PR-head da5c6e0 full Node suite 4,767 total: 4,760 PASS, one FAIL at tests/coffee-url-autofill.test.mjs:156 stale regex expecting old renderer name even though production now correctly calls compact; six existing SKIPPED. Repair only that assertion to new explicit compact renderer. Three other available CI checks PASS and cloud UX PASS on da5c6e0, none credited to latest candidate until exact SHA reruns."
+        "Exact second PR-head da5c6e0 full Node suite 4,767 total: 4,760 PASS, one FAIL at tests/coffee-url-autofill.test.mjs:156 stale regex expecting old renderer name even though production now correctly calls compact; six existing SKIPPED. Repair only that assertion to new explicit compact renderer. Three other available CI checks PASS and cloud UX PASS on da5c6e0, none credited to latest candidate until exact SHA reruns.",
+        "Final exact PR-head 3f3d231a2288697552a4fd9de7e91086c26b8be4 FIVE checks SUCCESS: full Node22/lint 43572004561 (4,767 tests; 4,761 PASS, 0 FAIL, 6 intentional SKIP; lint PASS); browser/cloud/mobile 43572004553 SUCCESS; isolated SQL/privacy 43572004567 SUCCESS; source security 43572004530 SUCCESS; approval/continuity/queue 43572004564 SUCCESS. The original603 separate corpus workflow was SKIPPED, never counted PASS.",
+        "PR #2622 nonforce squash merged to 3875e72cf04b8c0d9038d031035c61ef7c06a83f (first parent 4854b80adcc661c84adbe48da736e744f603f66d), [skip netlify]. All 6 changed app/test blobs and MASTER_SPECIFICATION/DECISION_LEDGER and scoped journal matched final passing PR head byte-for-byte, preserving #33/#455 concurrent work.",
+        "Exact merged push Node22/lint 43572276835 SUCCESS: 4,767 tests, 4,761 PASS, zero FAIL, 6 intentional SKIP; lint SUCCESS. Exact merged push mobile-browser/cloud 43572276789 SUCCESS. Merged approval 43572276793 was CANCELLED by concurrent #33 docs-only push and is NOT counted; newer development docs-only approval 43572300124 SUCCESS. PR-head SQL/security evidence remains exact candidate; no corresponding merged push SQL/security jobs claimed.",
+        "Postmerge docs-only #33/#455 commits introduced only new workstream/audit documents (no changes to #2621 runtime/test/queue/provenance blobs). Correct on-screen compact renderer explicitly used by production; detailed source diagnostics remain test-only and internal snapshot unaffected. Device signed-in hand testing NOT_APPLICABLE/not claimed."
       ],
-      "blockers": [
-        "Corrected exact-source hosted five CI and Node/lint/build/browser are pending; prior 113 compatibility failures remain historical, not credited as PASS.",
-        "Safe nonforce development merge, merged source CI and queue READY reconciliation pending."
+      "blockers": [],
+      "ci_runs": [
+        43572004561,
+        43572004553,
+        43572004567,
+        43572004530,
+        43572004564,
+        43572276835,
+        43572276789,
+        43572300124
       ],
-      "ci_runs": [],
-      "notes": "Owner authorized development only. Do not publish. Internal public source evidence and exports remain intact; visual source/download controls removed. No Auth, SQL, private members, offline, Community, shots or history changes.",
-      "merged_source_sha": null
+      "notes": "READY development only, NOT DEPLOYED. Owner-requested New Coffee duplicate/excess Published Source Information and download UI removed from customer compact preview; exact caution sentence replaced without treating unverified page as official. Saved/Submitted differences now accessible 48px click/keyboard controls filling only matching unsaved correction form field, reversible/manual-edit safe. Underlying source provenance/export helper retained; no automatic correction/canonical identity rewrite, server writes, SQL/Auth/Community/history/offline change. PR #2622 final code byte-equal merged 3875e72, 5/5 exact PR CI and merged Node/mobile SUCCESS; historical failed candidates preserved. Requires NEW owner Publish for any production delivery; no publication grant.",
+      "merged_source_sha": "3875e72cf04b8c0d9038d031035c61ef7c06a83f",
+      "pr": 2622
     }
   ],
   "history": [
