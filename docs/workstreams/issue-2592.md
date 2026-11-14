@@ -14,3 +14,12 @@ DIC_PREFLIGHT_VERIFIED development_sha=4b09788c9bf18c344085da088b44567bf987f275 
 DIC_PREFLIGHT_VERIFIED development_sha=c134eafe6ea5a3eeae9bde75dff4dc13826e2b3f preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
 - Preserved latest independent #33/Proud Mary changes and revised queue. No new tests claimed yet; source UI/test blobs from original reviewed commit unchanged. Nonforce merge ancestry parents issue-2592 head and current development. Continue exact CI before READY. No production/provider action.
+
+## Focused failure repair and explicit-choice variant preservation [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=c134eafe6ea5a3eeae9bde75dff4dc13826e2b3f preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- Initial PR-head approval run 43562855009 FAILED because IN_PROGRESS queue row omitted required ci_runs array; fix item metadata with empty [] and retain failed receipt. Initial 43562855052 cloud/mobile browser, 43562855032 isolated SQL, 43562855077 security SUCCESS; 43562855008 Node test/build still running at time of source correction, not counted as PASS for this corrected commit.
+- Real UI defect found during review: an explicitly tapped roast conflict matching current base roast would be overwritten by a later roast-variant choice. Guard explicit member selection against automatic variant replacement and add a focused negative regression in the same test file. A member can still explicitly tap a different conflict choice.
+- Unchanged application source outside selected UI helper; no server, auth, product source, production, SQL, Netlify or member writes.
+- Next: rerun only applicable exact-source PR CI after corrected code+queue commit; repair any actual failures, verify safe nonforce merge and READY queue criteria.

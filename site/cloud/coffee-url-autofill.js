@@ -174,6 +174,9 @@ export function applyCoffeeRoastVariant(form,previous,next){
   // Original lookup can pre-fill generic tasting notes before a user chooses
   // a roast. Treat only our unchanged autofill as replaceable, not user edits.
   const autoValue=control.dataset?.coffeeAutofillValue;
+  // A member-tapped conflicting alternative is an intentional form edit.
+  // Never silently replace it merely because it matched the base roast.
+  if(control.dataset?.coffeeConflictChoiceValue===control.value)continue;
   if(String(control.value||'').trim()&&control.value!==oldValue&&control.value!==autoValue)continue;
   if(control.tagName==='SELECT'&&nextValue&&![...control.options].some(x=>x.value===nextValue))continue;
   if(control.value===nextValue)continue;

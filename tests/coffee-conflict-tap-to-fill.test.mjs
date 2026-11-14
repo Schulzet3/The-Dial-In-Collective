@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {
  coffeeUrlPreviewMarkup,coffeeConflictReviewOptions,applyCoffeeConflictChoice,
- markCoffeeConflictChoices,applyCoffeeUrlFields,elevationWithDefaultMeters
+ markCoffeeConflictChoices,applyCoffeeUrlFields,applyCoffeeRoastVariant,elevationWithDefaultMeters
 } from '../site/cloud/coffee-url-autofill.js';
 
 const url='https://roaster.example.org/products/single-lot';
@@ -106,4 +106,13 @@ test('delegated action rejects old URL and form, and never issues another previe
  const css=readFileSync(new URL('../site/visual.css',import.meta.url),'utf8');
  assert.match(css,/\.coffee-conflict-choice\{[^}]*min-height:44px/);
  assert.match(css,/\.coffee-conflict-choice\[aria-pressed="true"\]/);
+});
+
+test('explicitly tapped conflict survives a subsequent roast-variant panel selection',()=>{
+ const roast=mk('', 'SELECT',['','Light','Medium-Dark']);
+ const form=makeForm({roast_level:roast});
+ assert.equal(applyCoffeeConflictChoice(form,choice('roast_level',['Light','Medium-Dark']),'roast_level',0).value,'Light');
+ assert.equal(applyCoffeeRoastVariant(form,{fields:{roast_level:'Light'}},{fields:{roast_level:'Medium-Dark'}}),0);
+ assert.equal(roast.value,'Light');
+ assert.equal(roast.dataset.coffeeConflictChoiceValue,'Light');
 });
