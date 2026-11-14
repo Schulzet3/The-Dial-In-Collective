@@ -333,12 +333,10 @@ export function personalSimilarCoffeeReference(s,coffee,version,style,feed,baske
      // Reuse current Log Shot physical bounds for historical *evidence* only.
      // Imported originals remain untouched in private shot History.
      !measuredRecipeShots([sh]).length||
-     // Historical optional controls may be absent, but explicitly impossible
-     // values cannot certify a comparable five-green other-coffee donor.
-     (sh.grindSetting!=null&&(
-      !finite(sh.grindSetting)||sh.grindSetting<0||
-      (finite(version.grinderMin)&&sh.grindSetting<version.grinderMin)||
-      (finite(version.grinderMax)&&sh.grindSetting>version.grinderMax)))||
+     // Original-calibration validation above already excludes impossible archived
+     // dials. Do not reject a valid older dial against today's revised range:
+     // this other-coffee fallback borrows only measured ratio/time, not grind.
+     (sh.grindSetting!=null&&(!finite(sh.grindSetting)||sh.grindSetting<0))||
      (sh.tempC!=null&&!validRecordedTemperature(sh.tempC)))continue;
   const other=byId.get(sh.coffeeId);
   const rank=roastIndex(other?.roastLevel);
