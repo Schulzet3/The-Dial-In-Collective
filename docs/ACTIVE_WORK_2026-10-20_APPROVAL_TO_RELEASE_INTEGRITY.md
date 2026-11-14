@@ -522,3 +522,15 @@ Owner-authorized release DIC-20261106-READY7-23 independently verified DEPLOYED:
 
 ## 2026-11-12 READY1 #1938 release grant DIC-20261112-READY1PUSH-32 [skip netlify]
 - Owner explicit publish; isolated candidate 174eb33d3db63513e2ccf38dcf118f6291bd3127 selected one READY item. Five exact-source GitHub checks SUCCESS (approval 43147128136, security 43147128209, SQL 43147128009, cloud/browser 43147127999, Node build/test 43147128046). Published-to-candidate deployable diff exactly site/admin/main.js, site/admin/push.js, site/admin/view.js; no workflow diff; 4 unready app paths restored, 11 unready tests omitted, reviewed workflow-only test omitted. Current dev drift since staging docs-only. Grant fresh one-use ID DIC-20261112-READY1PUSH-32; no production publication yet.
+
+
+## DIC-20261114-READY4-02 single-use owner publish grant [skip netlify]
+- Authority: Owner November 14, 2026 America/Chicago current chat: 'Run the mandatory DIC preflight and publish all items in the queue.' Exactly four READY items (#2621, #2633, #2640, #455), frozen candidate 7bee5534d45649179b759f88135c8457957b856a. Eight IN_PROGRESS excluded; ONE nonforce Git-connected Netlify publication only, no future approval.
+- Development SHA: 8da4a1fa94b53fea08a226270d64a23926f7b62a
+- Candidate SHA: 7bee5534d45649179b759f88135c8457957b856a
+- Selected: DIC-Q-2621-add-coffee-difference-tap-preview-cleanup, DIC-Q-2633-remove-url-source-badges, DIC-Q-2640-coffee-conflict-copy-one-line, DIC-Q-455-r253-slow-feed-recommendation-use-attribution
+- Five exact candidate CI jobs SUCCESS: approval 43581091127, validate 43581091126, cloud+mobile 43581091206, isolated SQL 43581091190. Node tests, lint and ONE packaged app build SUCCESS.
+- Source isolation: 4 READY app paths only, restore 5 unready app paths/105 workflows/16 tests; no SQL migrations, no Auth/private member edits.
+- Backup: prior verified encrypted snapshot/Drive archive run 43496304957, ciphertext SHA-256 1555492507aceadd9a9bad2e32139896ba85d3d68050f0954043d3dc35cb9b46; safe non-destructive reuse.
+- Fresh one-use grant DIC-20261114-READY4-02 expires 2026-11-14T12:37:23.354Z; no request/deployment yet. Next: exact two-file nonforce main request, controller, release and Netlify postflight.
+DIC_PREFLIGHT_VERIFIED development_sha=8da4a1fa94b53fea08a226270d64a23926f7b62a preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
