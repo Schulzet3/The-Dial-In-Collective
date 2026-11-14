@@ -396,3 +396,40 @@ export function selectedCurrentIntrinsicAromaContext(html,{clean,notes}={}){
  }
  return matches.size===1?[...matches][0]:'';
 }
+
+// One current selected product may publish a separate pair of intrinsic notes
+// in its OWN direct paragraph, while the printed Cupping Notes list remains
+// authoritative for autofill. Preserve this independently sourced pair for
+// Source Review only; never combine, override or choose a canonical flavor.
+export function selectedCurrentUnlabeledFlavorPair(html,{clean,notes}={}){
+ if(typeof html!=='string'||html.length>2_000_000||typeof clean!=='function'||
+    typeof notes!=='string'||notes.length<6||notes.length>300)return '';
+ const selected=removeElements(html,['script','style','noscript','template','nav','aside','footer','header','select']);
+ const blocks=productCoffeeProse(selected,clean);
+ const headings=blocks.filter(b=>b.tag==='h1'&&!b.educational);
+ if(headings.length!==1||!headings[0].text||headings[0].text.length>180)return '';
+ const title=fold(headings[0].text);
+ const safeSections=/^(?:product info|product information|product description|description|about this coffee|about the coffee|about coffee|coffee details|details|tasting notes|coffee notes|flavor profile|flavour profile|coffee profile|overview)$/u;
+ const canonical=notes.split(/\s*(?:,|&|[•·;|]|\band\b)\s*/iu).map(fold).filter(Boolean);
+ const found=new Set();
+ for(const block of blocks){
+  if(block.tag!=='p'||block.educational||block.text.length<55||block.text.length>800||
+     unavailable.test(block.section)||NONCURRENT_COFFEE_PROSE.test(block.section))continue;
+  const section=fold(block.section);
+  if(section&&section!==title&&!safeSections.test(section))continue;
+  for(const sentence of block.text.split(/(?<=[.!?])\s+/u).slice(0,10)){
+   if(sentence.length<45||sentence.length>350||unavailable.test(sentence)||
+      NONCURRENT_COFFEE_PROSE.test(sentence))continue;
+   const m=sentence.match(/\bwith\s+notes?\s+of\s+([\p{L}\p{M}]+(?:[ -][\p{L}\p{M}]+){0,2})\s*,\s*([\p{L}\p{M}]+(?:[ -][\p{L}\p{M}]+){0,2})\s*,?\s+and\s+(?:a\s+)?(?:good|pleasing|lovely|balanced)\s+balance\b/iu);
+   if(!m)continue;
+   const pair=[m[1].trim(),m[2].trim()];
+   if(pair.some(x=>x.length>45||/\b(?:body|acidity|finish|balance|texture|coffee|roast|process|milk|water|syrup|cream)\b/iu.test(x)||
+      !normalizeExplicitCoffeeTastingNotes(x)))continue;
+   if(fold(pair[0])===fold(pair[1])||pair.every(x=>canonical.includes(fold(x))))continue;
+   const value=normalizeExplicitCoffeeTastingNotes(pair.join(', '));
+   if(value)found.add(value);
+  }
+ }
+ // Competing descriptions cannot establish one unambiguous current pair.
+ return found.size===1?[...found][0]:'';
+}

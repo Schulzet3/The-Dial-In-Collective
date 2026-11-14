@@ -26,7 +26,7 @@ import {equivalentCoffeeProductNames,preferredCoffeeRoasterName,selectedCoffeeNa
 import {isolateCoffeeIdentityCohorts} from './coffee-source-identity-scope.mjs';
 import {extractCoffeeGeographyEntityRoles,cleanCoffeeGeographyEntityPrefix} from './coffee-geography-entity-roles.mjs';
 import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProductFlavorProfileEvidence,refineSelectedNamedTastingNotes,normalizeExplicitCoffeeTastingNotes,equivalentCoffeeTastingNotes,coffeeTastingNotesSubset} from './coffee-flavor-evidence.mjs';
-import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,refineSelectedCurrentTrailingFlavorNote,refineSelectedCurrentFlavorBase,refineSelectedCurrentSensoryArc,selectedCoffeeSupplementalTastingProse,selectedCurrentNarrativeAdditionalTastingNote,selectedCurrentMultiSentenceNarrativeNotes,selectedCurrentProductOvertone,selectedCurrentIntrinsicAromaContext} from './coffee-selected-description-sensory.mjs';
+import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,refineSelectedCurrentTrailingFlavorNote,refineSelectedCurrentFlavorBase,refineSelectedCurrentSensoryArc,selectedCoffeeSupplementalTastingProse,selectedCurrentNarrativeAdditionalTastingNote,selectedCurrentMultiSentenceNarrativeNotes,selectedCurrentProductOvertone,selectedCurrentIntrinsicAromaContext,selectedCurrentUnlabeledFlavorPair} from './coffee-selected-description-sensory.mjs';
 import {selectedCoffeeMilkSensoryContext} from './coffee-selected-milk-sensory-context.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {parseCoffeeElevation,equivalentCoffeeElevations,compatibleCoffeeElevations,extractCoffeeElevationEvidence} from './coffee-elevation-evidence.mjs';
@@ -2114,6 +2114,18 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     source_facts.push({field:'sensory_context',
      label:'Selected current coffee additional flavor prose',value:additional,source_url,
      source_type:'html',section:'Exact selected product unlabeled tasting description'});
+  }
+  // When the chosen product itself prints two additional intrinsic notes
+  // alongside a stronger labeled Cupping Notes list, retain BOTH sources
+  // independently. This evidence is review-only; never rewrite autofill.
+  if(fields.tasting_notes&&!conflicts.has('tasting_notes')&&
+     !seoFallbackByFields.get(fields)?.has('tasting_notes')&&source_facts.length<384){
+   const pair=selectedCurrentUnlabeledFlavorPair(currentProduct,{
+    clean,notes:fields.tasting_notes});
+   if(pair)source_facts.push({
+    field:'sensory_context',label:'Selected current unlabeled tasting pair (review only)',
+    value:pair,source_url,source_type:'html',
+    section:'Exact selected coffee paragraph; printed Cupping Notes preserved'});
   }
   // A seller's selected additional narrative flavor is review context,
   // not grounds to override the stronger current printed flavor profile.

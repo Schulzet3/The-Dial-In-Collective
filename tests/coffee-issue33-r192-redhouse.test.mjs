@@ -31,6 +31,27 @@ test('#277 narrative jasmine and lemon are distinct selected evidence, not gener
  assert.match(c.desc,/CUPPING NOTES: Fruity notes, hibiscus/);
  assert.ok(facts.some(x=>x.field==='tasting_notes'&&/hibiscus/i.test(String(x.value||''))),JSON.stringify(facts).slice(0,1600));
 });
+test('#277 own secondary jasmine/lemon pair is retained for Source Review, not canonical autofill',()=>{
+ const p=parse(277);assert.equal(p.ok,true);
+ const review=(p.source_facts||[]).filter(x=>x.field==='sensory_context'&&
+  x.label==='Selected current unlabeled tasting pair (review only)');
+ assert.equal(review.length,1,JSON.stringify((p.source_facts||[]).slice(0,32)));
+ assert.match(review[0].value,/jasmine/i);assert.match(review[0].value,/lemon/i);
+ assert.equal(review[0].source_url,coffees[277].url);
+ assert.match(notes(p),/hibiscus/i);assert.doesNotMatch(notes(p),/jasmine|lemon/i);
+});
+test('#277 related-coffee flavor pair cannot add selected context',()=>{
+ const chosen=coffees[277].desc.replace('With notes of jasmine, lemon, and a good balance, it is a true coffee masterpiece.','');
+ const p=parse(277,'<aside><h2>Other Coffee</h2><p>With notes of caramel, cinnamon, and a good balance, this coffee is excellent.</p></aside>',chosen);
+ assert.equal(p.ok,true);
+ assert.ok(!(p.source_facts||[]).some(x=>x.label==='Selected current unlabeled tasting pair (review only)'),JSON.stringify((p.source_facts||[]).slice(0,30)));
+});
+test('#277 conditional milk tasting pair cannot become intrinsic selected context',()=>{
+ const chosen=coffees[277].desc.replace('With notes of jasmine, lemon, and a good balance, it is a true coffee masterpiece.',
+  'If brewed with milk, with notes of cinnamon, vanilla, and a good balance, this drink is lovely.');
+ const p=parse(277,'',chosen);assert.equal(p.ok,true);
+ assert.ok(!(p.source_facts||[]).some(x=>x.label==='Selected current unlabeled tasting pair (review only)'),JSON.stringify((p.source_facts||[]).slice(0,25)));
+});
 test('#278 exact Oaxaca distinguishes Wet-Hulled from Washed and preserves selected notes',()=>{
  const p=parse(278);assert.equal(p.ok,true,JSON.stringify(p).slice(0,1200));
  for(const x of ['cocoa','honey','caramel'])assert.ok(notes(p).includes(x),JSON.stringify(p.fields));
