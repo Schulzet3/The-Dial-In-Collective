@@ -35,13 +35,13 @@ for(const [k,t] of Object.entries(targets)){
  expect(actual.ok===true&&fields.name===t.name,'exact_selected_parser_name_'+n);
  expect(rec.add_coffee_ui_rendered===true&&rec.source_review_rendered===true,'add_coffee_source_review_'+n);
  if(n===282){
-  expect(/origin:\s*guatemala/i.test(raw),'282_current_direct_guatemala_source');
-  expect(/process:\s*washed/i.test(raw)&&/roast:\s*dark/i.test(raw),'282_direct_process_roast');
-  expect(/caramel/i.test(raw)&&/cocoa/i.test(raw)&&/lemon tart/i.test(raw),'282_current_tasting_direct');
-  expect(/guatemala/i.test(fields.origin||'')&&!/colombia|columbia/i.test(fields.origin||''),'282_not_frozen_colombia');
+  expect(/origin:\s*columbia/i.test(raw),'282_current_literal_columbia');
+  expect(/process:\s*washed/i.test(raw)&&/roast:\s*dark/i.test(raw),'282_current_process_roast');
+  expect(/apricot/i.test(raw)&&/honey/i.test(raw)&&/pear/i.test(raw),'282_current_direct_flavor');
+  expect(/^columbia$/i.test(fields.origin||''),'282_preserve_literal_country_spelling');
   expect(fields.process==='Washed'&&fields.roast_level==='Dark','282_current_washed_dark');
-  expect(['caramel','cocoa','lemon tart'].every(x=>String(fields.tasting_notes||'').toLowerCase().includes(x)),'282_direct_tasting');
-  expect(!/apricot|pear/i.test(fields.tasting_notes||''),'282_no_recycled_old_flavor');
+  expect(['apricot','honey','pear'].every(v=>String(fields.tasting_notes||'').toLowerCase().includes(v)),'282_current_selected_tasting');
+  expect(!fields.producer,'282_unnamed_family_not_individual_grower');
  }else{
   expect(/Byron Corrales/i.test(raw)&&/Finca Los Pinos/i.test(raw),'284_exact_direct_named_farmer');
   expect(/Aranjuez/i.test(raw)&&/Mataglapa/i.test(raw),'284_direct_farm_geography');
