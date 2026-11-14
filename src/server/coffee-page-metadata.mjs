@@ -26,7 +26,7 @@ import {equivalentCoffeeProductNames,preferredCoffeeRoasterName,selectedCoffeeNa
 import {isolateCoffeeIdentityCohorts} from './coffee-source-identity-scope.mjs';
 import {extractCoffeeGeographyEntityRoles,cleanCoffeeGeographyEntityPrefix} from './coffee-geography-entity-roles.mjs';
 import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProductFlavorProfileEvidence,refineSelectedNamedTastingNotes,normalizeExplicitCoffeeTastingNotes,equivalentCoffeeTastingNotes,coffeeTastingNotesSubset} from './coffee-flavor-evidence.mjs';
-import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,refineSelectedCurrentTrailingFlavorNote,refineSelectedCurrentFlavorBase,refineSelectedCurrentSensoryArc,selectedCoffeeSupplementalTastingProse,selectedCurrentNarrativeAdditionalTastingNote,selectedCurrentMultiSentenceNarrativeNotes,selectedCurrentProductOvertone,selectedCurrentIntrinsicAromaContext,selectedCurrentUnlabeledFlavorPair} from './coffee-selected-description-sensory.mjs';
+import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,refineSelectedCurrentTrailingFlavorNote,refineSelectedCurrentFlavorBase,refineSelectedCurrentSensoryArc,selectedCoffeeSupplementalTastingProse,selectedCurrentNarrativeAdditionalTastingNote,selectedCurrentMultiSentenceNarrativeNotes,selectedCurrentProductOvertone,selectedCurrentIntrinsicAromaContext} from './coffee-selected-description-sensory.mjs';
 import {selectedCoffeeMilkSensoryContext} from './coffee-selected-milk-sensory-context.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {parseCoffeeElevation,equivalentCoffeeElevations,compatibleCoffeeElevations,extractCoffeeElevationEvidence} from './coffee-elevation-evidence.mjs';
@@ -443,12 +443,6 @@ function normalized(field,value,{allowFlavorProse=false,allowAnonymousProducer=f
  // "Family business with three generations of experience" is not a
  // named supplier. Do not infer the producer from a roaster biography.
  if(field==='producer'&&/^(?:a\s+)?family\s+business\s+with\s+(?:\d+|one|two|three|four|five)\s+generations?\s+of\b/iu.test(s))return '';
- // Indefinite quantities ("some of the top farms and small producers") do not
- // identify a real grower, co-op or named supplier. Keep the merchant claim
- // in source evidence for review without canonical producer promotion.
- // Direct named estates, individual growers and collectives remain eligible.
- if(field==='producer'&&
-  /^(?:some(?:\s+of\s+the)?|several|various|many)\s+(?:(?:top|best|small|local|regional|independent|family[- ]owned)\s+){0,4}(?:farms?|farmers?|growers?|producers?)(?:\s+and\s+(?:(?:top|best|small|local|regional|independent|family[- ]owned)\s+){0,4}(?:farms?|farmers?|growers?|producers?))*$/iu.test(s))return '';
  if(field==='variety'){
   // Selected-product labels "Varietal-- Chiroso" and "Varietals: Bourbon,..."
   // sometimes retain a leading HTML separator in the extracted cultivar.
@@ -2114,18 +2108,6 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     source_facts.push({field:'sensory_context',
      label:'Selected current coffee additional flavor prose',value:additional,source_url,
      source_type:'html',section:'Exact selected product unlabeled tasting description'});
-  }
-  // When the chosen product itself prints two additional intrinsic notes
-  // alongside a stronger labeled Cupping Notes list, retain BOTH sources
-  // independently. This evidence is review-only; never rewrite autofill.
-  if(fields.tasting_notes&&!conflicts.has('tasting_notes')&&
-     !seoFallbackByFields.get(fields)?.has('tasting_notes')&&source_facts.length<384){
-   const pair=selectedCurrentUnlabeledFlavorPair(currentProduct,{
-    clean,notes:fields.tasting_notes});
-   if(pair)source_facts.push({
-    field:'sensory_context',label:'Selected current unlabeled tasting pair (review only)',
-    value:pair,source_url,source_type:'html',
-    section:'Exact selected coffee paragraph; printed Cupping Notes preserved'});
   }
   // A seller's selected additional narrative flavor is review context,
   // not grounds to override the stronger current printed flavor profile.
