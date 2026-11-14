@@ -71,3 +71,15 @@ test('visible New Coffee and correction notices no longer claim roaster source v
  assert.doesNotMatch(preview,/Unverified Page|Official Source Preview|Approved Catalog|Details Found On Official Roaster Page/);
  assert.doesNotMatch(css,/\.coffee-source-label\s*\{/);
 });
+
+test('conflict instructions are exact and do not reinstate badge/old heading',()=>{
+ const result=makeResult('unverified_public_page');
+ result.field_conflicts=[{field:'origin',values:['Costa Rica','Colombia']}];
+ const text=readFileSync(new URL('../site/cloud/coffee-url-autofill.js',import.meta.url),'utf8');
+ assert.match(text,/Tap the correct option to autofill, or type  a value in the field/);
+ assert.doesNotMatch(text,/Review conflicting details|These published readings disagree/);
+ for(const source of ['unverified_public_page','official_roaster_product_metadata','approved_catalog']){
+  const html=coffeeUrlCompactPreviewMarkup(makeResult(source));
+  assert.doesNotMatch(html,/Unverified Page|Official Source Preview|Approved Catalog|coffee-source-label/);
+ }
+});
