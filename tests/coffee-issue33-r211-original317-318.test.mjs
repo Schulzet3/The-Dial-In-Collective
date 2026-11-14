@@ -81,3 +81,8 @@ test('#318 related light-roast collection, other coffee and previous SEO cannot 
  assert.doesNotMatch(String(p.fields?.tasting_notes||''),/strawberry|orange/iu);
  assert.doesNotMatch(String(p.fields?.producer||''),/Gamboa/iu);
 });
+
+test('#317 hypothetical flavor preference does not establish selected actual roast',()=>{
+ const p=selected(kenya);assert.equal(p.ok,true);
+ assert.ok(!p.fields?.roast_level,'If you enjoy light-roast African coffees is audience preference, not selected Roast: Light');
+});

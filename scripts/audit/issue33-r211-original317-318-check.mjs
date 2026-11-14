@@ -42,6 +42,7 @@ for(const c of cases){
   if(!/Nyeri.*Kenya/iu.test(String(f.origin||'')))e.push('selected_nyeri_origin_missing');
   if(f.process!=='Washed'||!/1,?700/u.test(String(f.elevation_m||'')))e.push('selected_washed_or_height_missing');
   if(!['peach','honey','grapefruit'].every(x=>notes.toLowerCase().includes(x)))e.push('selected_exact_flavor_notes_incomplete');
+  if(!/\bRoast\s*[:\-]\s*Light\b/iu.test(visible)&&f.roast_level)e.push('light_roast_audience_preference_promoted_without_selected_spec');
  }else{
   if(!/Flavor Notes:\s*Chocolate/iu.test(visible)||!/Origin:\s*Lifesong Farms\s*\|\s*Mt. Elgon, Uganda/iu.test(visible))e.push('seller_direct_notes_or_origin_not_visible');
   if(!/Roast:\s*Medium/iu.test(visible)||!/Elevation:\s*1,280 meters/iu.test(visible)||!/Varietals:\s*Bourbon/iu.test(visible))e.push('seller_direct_roast_altitude_variety_not_visible');
