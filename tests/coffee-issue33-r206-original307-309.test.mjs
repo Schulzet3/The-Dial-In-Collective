@@ -4,13 +4,13 @@ import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 const root='https://shop.compasscoffee.com/products/';
 const selected=[
  {name:'Embassy Blend',handle:'embassy-blend',body:'Embassy Blend - Crisp, Savory, & Full-Bodied. Bold, crisp, and savory with earthy, fragrant notes.',terms:/crisp|savory/i},
- {name:'Emblem Espresso',handle:'emblem-espresso-1',body:'Emblem Espresso - Rich, Caramel, & Classic. A rich, caramel, classic espresso.',terms:/caramel/i},
+ {name:'Emblem Espresso',handle:'emblem-espresso-1',body:'Emblem Espresso - Rich, Caramel, & Classic. A rich, caramel, classic espresso.',details:'<p>Flavor Notes: Rich, Caramel, Classic</p>',terms:/caramel/i},
  {name:'Horizon Blend',handle:'horizon-blend',body:'Horizon Blend - Bright, Berry-Like, & Sweet. Bright and sweet with vibrant berry-like notes.',terms:/berry/i}
 ];
 function parse(c,extras={}){
  const url=root+c.handle;
  const ld={'@context':'https://schema.org','@type':'Product',name:c.name,url,brand:{'@type':'Brand',name:'Compass Coffee'}};
- const html='<html><head><title>'+(extras.seo||'UNRELATED MENU COFFEE')+'</title><script type="application/ld+json">'+JSON.stringify(ld)+'</script></head><body><main><article class="product"><h1>'+c.name+'</h1><div class="product-description"><p>'+(extras.description||c.body)+'</p></div></article></main>'+(extras.aside||'')+'</body></html>';
+ const html='<html><head><title>'+(extras.seo||'UNRELATED MENU COFFEE')+'</title><script type="application/ld+json">'+JSON.stringify(ld)+'</script></head><body><main><article class="product"><h1>'+c.name+'</h1><div class="product-description"><p>'+(extras.description||c.body)+'</p>'+(c.details||'')+'</div></article></main>'+(extras.aside||'')+'</body></html>';
  return extractPublicCoffeeFacts(html,{source_url:url});
 }
 for(const [i,c] of selected.entries()){
