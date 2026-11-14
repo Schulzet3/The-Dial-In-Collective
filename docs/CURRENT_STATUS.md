@@ -1,3 +1,11 @@
+## November 14, 2026 UTC — #33 R208 original #311 current selected named producer repair READY (DEVELOPMENT ONLY; parent OPEN) [skip netlify]
+
+- Mandatory immutable PREFLIGHT first at `ed3df9221614d9d2d3ab5c254a67215d7956951e`, independently byte-verified Git blob `2fb236bbfa6bac48513eeb3bd157b260853af06d`. Reviewed PR #2757 safely nonforce merged `ed3df9221614d9d2d3ab5c254a67215d7956951e`; five reviewed PR-head code/test/workflow/journal blobs identical to merged.
+- Exact merged [selected source 43637639468](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/43637639468) SUCCESS: selected current official #311 H1 `Volcán Atitlán Guatemala`, producer `Bressani Family` from exact same-selected family farm story, 810868 raw bytes SHA256 `31629b3964e62cc99830f2ea87a569f2808ec542fdb7fe0b14e7cefe15e7977d`, seven positive/hostile role checks, actual parser and Add Coffee/Source Review. Original frozen603/201/1197 untouched.
+- Merged [Node/lint 43637639507](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/43637639507) SUCCESS 4,881 PASS/0 FAIL/6 SKIP, merged cloud/browser/mobile/build 43637639539, approval 43637639443, Python 43637639455 SUCCESS; matching PR-head isolated SQL/security SUCCESS. Whole frozen603 SKIPPED, signed-in/device NOT PERFORMED. Narrow queue `DIC-Q-33-r208-original311-current-family-producer` now READY source only, other states preserved. [Scoped journal](workstreams/ops-issue33-r208-311-producer-20261114.md). #33 OPEN; next #313/314, no Publish/provider/member writes.
+
+---
+
 ## November 14, 2026 UTC — #33 R207 original603 ICONIK #310-312 selected source/parser checked; #311 producer omission remains OPEN [skip netlify]
 
 - Mandatory immutable first PREFLIGHT dev `0a0a4625fc6ea4f2f06d42f941a5494404435685` Git blob `2fb236bbfa6bac48513eeb3bd157b260853af06d`, byte-verified; final docs source `c238ca99ad90c680ef90d535d8df2a1e64dc6461` and same blob reverified. Reviewed PR [#2753](https://github.com/Schulzet3/The-Dial-In-Collective/pull/2753) nonforce safely merged at `c238ca99ad90c680ef90d535d8df2a1e64dc6461`; all 4/4 tested code/checker/workflow/journal Git blobs and frozen original603 CSV unchanged. Original 603/201/1197, oracle/scorer preserved.
