@@ -1,0 +1,53 @@
+name: DIC Issue33 R185 original260 Prelude selected decaf
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r185-260.yml
+      - scripts/audit/issue33-r185-260-check.mjs
+      - tests/coffee-issue33-r185-260.test.mjs
+      - src/server/coffee-page-metadata.mjs
+      - src/server/coffee-product-scope.mjs
+      - docs/workstreams/ops-issue33-r185-260-20261113.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r185-260.yml
+      - scripts/audit/issue33-r185-260-check.mjs
+      - tests/coffee-issue33-r185-260.test.mjs
+      - src/server/coffee-page-metadata.mjs
+      - src/server/coffee-product-scope.mjs
+permissions:
+  contents: read
+jobs:
+  selected:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Focused original260 decaf positive and negative regressions
+        run: node --test tests/coffee-issue33-r185-260.test.mjs
+      - name: Current guarded exact original260 official HTTPS and actual parser
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '260'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r185
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Independently inspect selected raw official/parser evidence
+        if: always()
+        env:
+          DIC_ISSUE33_R185_VERIFY: '1'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r185
+        run: node scripts/audit/issue33-r185-260-check.mjs
+      - name: Retain raw official HTML and proof for independent review
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r185-original260
+          path: /tmp/dic33-r185/
+          retention-days: 2
+          if-no-files-found: warn
