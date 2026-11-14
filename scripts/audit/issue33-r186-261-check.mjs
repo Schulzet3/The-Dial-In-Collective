@@ -15,9 +15,13 @@ export function selected261(html){
  const headings=selectedProductHeadings(scoped);
  // These merchant H1s introduce editorial sections, not three distinct coffees.
  const products=headings.filter(h=>!/^(?:about the producer|about the process|what you(?:'|’)?ll find in the cup):?$/iu.test(String(h).trim()));
+ // The shared audit heading reader deliberately caps at four. A fifth H1 on the
+ // selected product is unreviewed identity evidence, never safe to silently ignore.
+ const rawH1Count=[...scoped.matchAll(/<h1\b/giu)].length;
+ const headingOverflow=rawH1Count>headings.length;
  const body=fold(removeElements(scoped,['script','style','noscript','template','nav','aside','footer','header','select'])
    .replace(/<[^>]{0,3000}>/gu,' ').replace(/&(?:nbsp|amp);/giu,' '));
- return {headings,identity:products.length===1&&fold(products[0])===fold(original261.name),
+ return {headings,rawH1Count,headingOverflow,identity:!headingOverflow&&products.length===1&&fold(products[0])===fold(original261.name),
   cup:['strawberries','agave nectar','granny smith apples'].every(x=>body.includes(x)),
   generic_region:body.includes('guji region')&&body.includes('oromo'),
   generic_climate:body.includes('volcanic soil')&&body.includes('cherries'),
