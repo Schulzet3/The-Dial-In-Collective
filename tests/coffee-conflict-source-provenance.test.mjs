@@ -12,7 +12,7 @@ test('both conflicting options retain safe public-source provenance in preview a
  assert.deepEqual(groups[0].options.map(o=>o.value),['Brazil','Mexico']);
  assert.ok(groups[0].options.every(o=>o.source_url===url));
  const html=coffeeUrlPreviewMarkup(conflict);
- assert.match(html,/Review conflicting details/);
+ assert.match(html,/Tap the correct option to autofill, or type  a value in the field/);
  assert.equal((html.match(/View Original Source/g)||[]).length,2);
  assert.equal((html.match(/rel="noopener noreferrer"/g)||[]).length,2);
  assert.ok(html.includes('href="'+url+'"'));

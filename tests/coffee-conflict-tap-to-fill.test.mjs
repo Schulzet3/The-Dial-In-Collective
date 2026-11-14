@@ -22,8 +22,8 @@ test('conflicting sources render accessible touch choices and separate cited sou
  assert.match(html,/type="button"/);
  assert.match(html,/aria-label="Use Colombia for Origin"/);
  assert.match(html,/View Original Source/);
- assert.match(html,/Nothing was selected automatically/);
- assert.match(html,/Nothing is saved until Add Coffee/);
+ assert.match(html,/Tap the correct option to autofill, or type  a value in the field/);
+ assert.doesNotMatch(html,/Nothing is saved until Add Coffee/);
  assert.ok(html.includes('&lt;img'));
  assert.doesNotMatch(html,/<img\b|onerror="/);
  assert.doesNotMatch(html,/data-conflict-value=|data-action="apply-coffee-url"/);

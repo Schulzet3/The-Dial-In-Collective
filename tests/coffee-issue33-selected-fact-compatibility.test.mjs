@@ -46,7 +46,7 @@ test('actual different selected tasting lists still require manual review',()=>{
  const r=parse('Ethiopia','<p>Tasting Notes: Raspberry, Cane Sugar, Lemon Zest</p>'+
   '<p>Tasting Notes: Ripe Berries, Florals, Sugarcane</p>');
  assert.equal(r.fields.tasting_notes,undefined);assert.ok(r.conflicts?.includes('tasting_notes'));
- assert.match(coffeeUrlPreviewMarkup(r),/Review conflicting details/);
+ assert.match(coffeeUrlPreviewMarkup(r),/Tap the correct option to autofill, or type  a value in the field/);
 });
 test('Favor selected medium-dark roast outranks the branded Token Dark Roast name',()=>{
  const r=parse('The Token Dark Blend',
