@@ -3344,3 +3344,10 @@ Directly inspected complete current column types/defaults/generated expressions,
 Numeric-only pg_stat_statements ranks 1761–1840: 80 rows, 75 new and 5 overlap; **1797 cumulative distinct** query IDs. No query SQL text, passwords, tokens, raw sensitive logs, or per-hour latency claims. Deduped [Run247 index](../audits/issue509-pgss-cumulative-index-2026-11-14-run247.json); 80 rows represent cumulative stats rather than removable-index proof.
 
 Two prior issue509 NULL guard fixes remain TESTING; required exact-source five-check and migration provenance unverified, no READY or DEPLOYED promotion. No source/test/CI, release, production SQL/data/Auth/Storage/Edge/config, backup or publication writes. Next exact cursor: provider drift, numeric pgss ranks 1841–1920 and remaining source-definition review, hosted Auth/JWT/HTTP remains unverified with #96. Maintain hour schedule and owner-alert-only notice policy.
+
+
+### Run247 immutable pointer correction and verification [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=697e75cb9f4b559fa7466e9526f9cfe4253584fe preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+After the source-bound Run247 audit commit 8792b7696577369523f6ddb633f106cdf565a7ff, repaired the cumulative index's stale previous-run receipt-blob pointer and completed the newest receipt's missing SHA. The seven-full-Auth-table/80-pgss-row receipt is exact immutable blob 209bac9dab7ccdb0e36154375bc61df29119f320; corrected cumulative index is blob a7d1dbaa05e8f2ffcb74fcbbfe2776366c5f6b90. Ledger pointers and journal reconciled without modifying any reviewed evidence, audit findings, app source, code, CI, release, backup, provider or production.
