@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "subject": "DIC_ISSUE33_R210_ORIGINAL603_SELECTED_SOURCE_MERGED",
+  "date_utc": "2026-11-14",
+  "authority": "Issue #33 autonomous DEVELOPMENT-only original selected coffee source accuracy; immutable preflight verified",
+  "preflight": {
+    "development_sha": "434c3017271b056a61c7397fa7f6bb9ebc4788df",
+    "file_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "content_blob_equal": true
+  },
+  "selected_source_commit": "434c3017271b056a61c7397fa7f6bb9ebc4788df",
+  "original_benchmark": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "source_csv_git_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "source_csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "modified": false,
+    "full_manual_certification": false,
+    "workflow_status": "SKIPPED"
+  },
+  "cases": [
+    {
+      "number": 315,
+      "name": "Vienna Roast",
+      "official_url": "https://shop.inkcoffee.com/products/vienna",
+      "current_h1_verified": true,
+      "selected_raw_bytes": 119925,
+      "selected_raw_sha256": "e0a7128de95ebd51f4e33e0eb57c62511fff2269caeb7978ea4bdbd24bda19bb",
+      "current_fields": {
+        "name": "Vienna Roast",
+        "roaster": "ink! Coffee Company",
+        "origin": "Americas",
+        "roast_level": "Dark",
+        "tasting_notes": "caramel sweetness"
+      },
+      "semantic_decision": "Current selected direct Roast - Dark, Origin - Americas and caramel notes; comparative High Altitude and French Roast do not establish this coffee's origin/elevation",
+      "add_coffee": true,
+      "source_review": true,
+      "current_source_verified": true,
+      "conflicts": [],
+      "scope_certified": true
+    },
+    {
+      "number": 316,
+      "name": "Colombia- Honey Process",
+      "official_url": "https://shop.justlovecoffee.com/products/colombia-honey-process",
+      "current_h1_verified": true,
+      "selected_raw_bytes": 515926,
+      "selected_raw_sha256": "7887f51564ce2836cad07b0a7ed539c6caa9870cb17d02042199704a15e250c2",
+      "current_fields": {
+        "name": "Colombia- Honey Process",
+        "roaster": "Just Love Coffee Roasters",
+        "origin": "Northern Colombia",
+        "process": "Honey",
+        "roast_level": "Light",
+        "producer": "Gamboa family",
+        "tasting_notes": "strawberry and orange, delicate floral undertones"
+      },
+      "semantic_decision": "Current selected story names Las Mercedes farm and Gamboa family cultivating in northern Colombia; direct own Honey/Light/notes. Quarantine unrelated Uganda SEO metadata. Before correction actual parser omitted Northern qualifier.",
+      "add_coffee": true,
+      "source_review": true,
+      "current_source_verified": true,
+      "conflicts": [],
+      "scope_certified": true
+    }
+  ],
+  "red_first": {
+    "commit": "558df7927c738617f5b74ea77f8da912a4aa9305",
+    "run": 43646262958,
+    "conclusion": "FAILURE_AS_EXPECTED",
+    "reason": "#316 selected current farm growing locality 'northern Colombia' omitted by parser"
+  },
+  "corrected_head": {
+    "commit": "ab92a273a536a71c0aee398cb5a841df407449b4",
+    "selected_source_run": 43646558007,
+    "node_lint_run": 43646558149,
+    "approval": 43646558106,
+    "cloud_mobile": 43646558135,
+    "isolated_sql": 43646557803,
+    "security": 43646558083,
+    "python": 43646558075,
+    "focused_tests": 10
+  },
+  "merged": {
+    "commit": "434c3017271b056a61c7397fa7f6bb9ebc4788df",
+    "selected_source_run": 43646992464,
+    "node_lint_run": 43646992378,
+    "approval": 43646992566,
+    "cloud_mobile": 43646992587,
+    "python": 43646992155,
+    "node_total": 4910,
+    "node_pass": 4904,
+    "node_fail": 0,
+    "node_skip": 6,
+    "seven_code_and_proof_blobs_byte_identical": true
+  },
+  "historical_unrelated_source_failures": [
+    {
+      "scope": "R54 #594 old Woodshed exact official source unavailable",
+      "prior_run": 43613859763,
+      "current_run": 43646992648,
+      "parent_review_unresolved": true,
+      "attributed_to_r210": false
+    },
+    {
+      "scope": "R64 #566/#567 old Sidecar exact official source unavailable",
+      "prior_run": 43613859926,
+      "current_run": 43646992572,
+      "parent_review_unresolved": true,
+      "attributed_to_r210": false
+    }
+  ],
+  "queue": {
+    "id": "DIC-Q-33-r210-original315-316-family-farm-region",
+    "state": "READY",
+    "only_narrow_cases": [
+      315,
+      316
+    ]
+  },
+  "issue33": {
+    "state": "OPEN",
+    "manual_603_complete": false,
+    "remaining_review": true
+  },
+  "prohibited_operations": {
+    "production_deploy": false,
+    "production_sql": false,
+    "provider_writes": false,
+    "member_writes": false,
+    "secrets": false,
+    "force_push": false,
+    "purchases": false
+  }
+}
