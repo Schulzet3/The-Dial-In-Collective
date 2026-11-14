@@ -30,11 +30,11 @@ BEGIN
  END;
  BEGIN
   PERFORM private.dic_promote_pending_coffee(NULL::uuid,'admin_reviewed','{}'::jsonb,false);
-  RAISE EXCEPTION 'Existing admin guard bypassed';
- EXCEPTION WHEN SQLSTATE '42501' THEN
+  RAISE EXCEPTION 'Existing valid-method state validation bypassed';
+ EXCEPTION WHEN SQLSTATE '22023' THEN
   GET STACKED DIAGNOSTICS msg=MESSAGE_TEXT;
-  IF msg <> 'Only an administrator may review a member coffee.' THEN RAISE EXCEPTION 'Wrong admin guard: %',msg; END IF;
+  IF msg <> 'Coffee submission unavailable.' THEN RAISE EXCEPTION 'Wrong missing-submission guard: %',msg; END IF;
  END;
- RAISE NOTICE 'PASS: null method/confirmation rejected; nonnull method authorization retained';
+ RAISE NOTICE 'PASS: null method/confirmation rejected; nonnull method missing-submission state guard retained';
 END $validate$;
 ROLLBACK;
