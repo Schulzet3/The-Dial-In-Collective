@@ -1,3 +1,14 @@
+## November 14, 2026 UTC — #28 discreet OAuth privacy page READY for separate owner Publish (NOT DEPLOYED) [skip netlify]
+
+- DIC_PREFLIGHT_VERIFIED development_sha=d0b450db85f0c25b05fc65007de639852436ff66 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+- Owner approved **BUILD and READY, not Publish**. Discreet 11px muted, focusable footer Privacy link and standalone unauthenticated static privacy page are merged via [PR #2686](https://github.com/Schulzet3/The-Dial-In-Collective/pull/2686) at development `d0b450db85f0c25b05fc65007de639852436ff66`.
+- Exact first-parent merge changes four deployable privacy source paths, all byte-identical to tested PR SHA `e46c92bd624cac54673cd713e16537a5272c68b7`. Same code/test blob parity includes `scripts/audit/site-integrity.mjs` and `tests/privacy-policy.test.mjs`.
+- Required five source-bound CI check statuses ALL SUCCESS: approval 43600235102, Node22 validate 43600235024, cloud-tests and mobile-browser-qa 43600235015, isolated sql 43600235065. Each cited workflow completed successfully on exact PR SHA `e46c92bd`.
+- `DIC-Q-28-owner-oauth-privacy-policy-20261114` advances IN_PROGRESS -> READY **development/source only** with real merged source and full checks. `#509` earlier falsely READY was corrected source-backed to TESTING by [PR #2688](https://github.com/Schulzet3/The-Dial-In-Collective/pull/2688); no SQL changes and it must be **excluded** from any privacy-only release.
+- **No Netlify deploy/public URL proof yet**. Future public route `https://app.dialincollective.com/privacy/` is subject to the separate owner Publish authorization and one-use READY-only release controller. Preserve unfinished features, original app, Drive backup schedules and ciphertext. Deployment requires independent live HTTPS 200/homepage-link/Policy check and then Google OAuth Branding publishing. Owner email currently visible on policy; review if replacement contact is desired.
+- [Dedicated READY-to-Publish handoff](handoffs/DIC_PRIVACY_POLICY_READY_FOR_SEPARATE_PUBLISH_20261114.md) and [full work journal](workstreams/ops-privacy-oauth-20261114.md). No provider/production/member/backup writes.
+
+---
 ## November 14, 2026 UTC — #455 R255 offline saved-suggestion source restored (development READY only) [skip netlify]
 
 - `development/backend-foundation` merged [PR #2660](https://github.com/Schulzet3/The-Dial-In-Collective/pull/2660) at `87da54b3af6c5dc6a0fbf27bfdbaaf763819fbe5`: pending offline Shot History now displays the **already-recorded Use Recommendation source** from an owner's queued payload, matching the authenticated post-sync History display. No changed measurements, notes, five taste ratings, styles, grind, recipe logic, privacy rules, schema or telemetry.
