@@ -59,3 +59,23 @@ test('#284 related house roast does not leak chocolate, dark roast or names',()=
  assert.doesNotMatch(String(p.fields?.producer||''),/susan smith/i);
  assert.notEqual(p.fields?.roast_level,'Dark');
 });
+
+test('#282 stale same-URL structured origin/flavor cannot override selected facts',()=>{
+ const oldProduct={'@context':'https://schema.org','@type':'Product',
+  name:'Founders Roast',url:bold,brand:{'@type':'Brand',name:'Ridley Roasthouse'},
+  additionalProperty:[{name:'Origin',value:'Colombia'},{name:'Tasting Notes',value:'Apricot, honey, pear'},{name:'Roast',value:'Light'}]};
+ const html='<!doctype html><html><head><script type="application/ld+json">'+
+ JSON.stringify(oldProduct)+'</script></head><body><main><article class="product"><h1>Bold Betty</h1><div class="product-description">'+
+ boldDetails+'</div></article></main></body></html>';
+ const p=extractPublicCoffeeFacts(html,{source_url:bold});
+ assert.equal(p.ok,true,JSON.stringify(p).slice(0,1200));
+ assert.equal(p.fields?.name,'Bold Betty');
+ assert.match(String(p.fields?.origin||''),/guatemala/i);
+ assert.equal(p.fields?.roast_level,'Dark');
+ assert.doesNotMatch(String(p.fields?.tasting_notes||''),/apricot|pear/i);
+});
+test('#282 unrelated H1 without current product facts cannot supersede JSON-LD',()=>{
+ const p=parse(bold,'Bold Betty','<p>Shop online now</p>','','Founders Roast');
+ assert.equal(p.ok,true,JSON.stringify(p).slice(0,600));
+ assert.equal(p.fields?.name,'Founders Roast');
+});

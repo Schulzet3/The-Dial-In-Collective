@@ -1390,8 +1390,22 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   }
  }
  if(!p||!textOf(p.name))return {ok:false,reason:'ambiguous_or_missing_product'};
- const visibleProductName=explicitHeading&&productIdentityUrl(p)&&samePage(productIdentityUrl(p),source_url)&&
-  meta['og:url']&&samePage(meta['og:url'],source_url)&&keyOf(textOf(p.name))===keyOf(meta['og:title'])?explicitHeading:'';
+ // Same-URL Product JSON-LD can be recycled from a prior coffee. A unique
+ // current selected H1 with directly printed coffee facts takes precedence.
+ // Do not reidentify from stray headings or unrelated metadata.
+ const uniqueSelectedH1=(product.match(/<h1\b/gi)||[]).length===1&&heading&&
+  !genericStorefrontHeading(heading)?heading:'';
+ const currentVisibleH1=uniqueSelectedH1&&productIdentityUrl(p)&&
+  samePage(productIdentityUrl(p),source_url)&&
+  /\b(?:origin|process|roast(?: level)?|flavor|tasting notes)\s*[:：]/i.test(clean(product,32000))
+  ?uniqueSelectedH1:'';
+ // Quarantine the entire stale structured coffee, not just its title.
+ const staleSameRouteProduct=currentVisibleH1&&keyOf(textOf(p.name))!==keyOf(currentVisibleH1)?p:null;
+ if(staleSameRouteProduct)p={'@type':'Product',name:currentVisibleH1,
+  url:source_url,brand:p.brand??p.manufacturer};
+ const visibleProductName=currentVisibleH1||
+  (explicitHeading&&productIdentityUrl(p)&&samePage(productIdentityUrl(p),source_url)&&
+  meta['og:url']&&samePage(meta['og:url'],source_url)&&keyOf(textOf(p.name))===keyOf(meta['og:title'])?explicitHeading:'');
  const fields={name:selectedCoffeeNameWithoutPrice(visibleProductName||textOf(p.name,200))},conflicts=new Set();
  const descriptionIdentity=meta['og:url']||meta[META_CANONICAL]||'';
  const matchedDescriptions=descriptionIdentity&&samePage(descriptionIdentity,source_url)?
@@ -1867,7 +1881,12 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   if(facts.truncated)identityScopeTruncatedByFields.add(fields);
   return facts.map(fact=>({...fact,source_type:item.source_type,section:'Different coffee in the source',conflicting:true}));
  });
+ const staleProductSourceFacts=staleSameRouteProduct?
+  collectStructuredCoffeeSourceFacts(staleSameRouteProduct,{source_url,source_type:'metadata'})
+   .map(fact=>({...fact,conflicting:true,
+    section:'Same-URL structured Product identity differs from current selected H1; review only'})):[];
  const source_facts=mergeCoffeeSourceFacts(
+  staleProductSourceFacts,
   quarantined,
   supplementary.facts,
   collectCoffeePageMetaSourceFacts(meta,{source_url}),

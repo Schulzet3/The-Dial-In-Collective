@@ -31,6 +31,7 @@ jobs:
       - name: Current selected positive and hostile parser regressions
         run: node --test tests/coffee-issue33-r195-original282-284.test.mjs
       - name: Guarded public selected original URLs and actual parser
+        if: always()
         env:
           DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '282,284'
           DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r195
