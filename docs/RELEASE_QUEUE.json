@@ -2,9 +2,9 @@
   "schema_version": 1,
   "authority": "OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022",
   "published_base": {
-    "tested_source_sha": "7bee5534d45649179b759f88135c8457957b856a",
-    "release_sha": "69b066171b64a54f92d828ce99c51f29afb32780",
-    "netlify_deploy_id": "6af82c096b094d3dd36485b7"
+    "tested_source_sha": "ed82fc7aed52b8c8bfac8a348133011b554f1c0b",
+    "release_sha": "5359d78c303f15231225282536cb6d1efa11beca",
+    "netlify_deploy_id": "6af885b8493af594f3ae403d"
   },
   "items": [
     {
@@ -12,7 +12,7 @@
       "issue": 28,
       "pr": 2686,
       "title": "Provide minimal public privacy policy for owner-only Google Drive OAuth consent",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "d0b450db85f0c25b05fc65007de639852436ff66",
       "scope_paths": [
         "site/cloud/main.js",
@@ -33,8 +33,13 @@
       ],
       "blockers": [],
       "owner_source": "Owner 2026-11-14: approved build of discreet public privacy policy, then explicitly asked to get it READY for a separate chat to deploy; NOT approval to Publish now.",
-      "notes": "Independent source branch and draft PR #2686. No Netlify deploy, Supabase/Drive/Google account changes, member-data edits or new integrations. Privacy link 11px muted, focusable, visible to Google/users; not background-colored or hidden. Keep all other READY/in-progress work untouched.\n2026-11-14 VERIFIED READY development-only: privacy PR #2686 integrated with exact first-parent merge d0b450db85f0c25b05fc65007de639852436ff66. Same source/test/blob identity proved against PR exact e46c92bd, all five required checks successful using four recorded workflow runs. No live Netlify publication, Google OAuth configuration, backup activation, data/SQL/Auth operations; production_deployed remains false. Use existing one-use READY-only release controller in separate owner Publish chat, isolate this READY item from #509 TESTING and other unfinished work. Intended published URL https://app.dialincollective.com/privacy/. Public owner contact is the known account email; owner may later elect an alternate contact address prior to publication.",
-      "production_deployed": false
+      "notes": "Independent source branch and draft PR #2686. No Netlify deploy, Supabase/Drive/Google account changes, member-data edits or new integrations. Privacy link 11px muted, focusable, visible to Google/users; not background-colored or hidden. Keep all other READY/in-progress work untouched.\n2026-11-14 VERIFIED READY development-only: privacy PR #2686 integrated with exact first-parent merge d0b450db85f0c25b05fc65007de639852436ff66. Same source/test/blob identity proved against PR exact e46c92bd, all five required checks successful using four recorded workflow runs. No live Netlify publication, Google OAuth configuration, backup activation, data/SQL/Auth operations; production_deployed remains false. Use existing one-use READY-only release controller in separate owner Publish chat, isolate this READY item from #509 TESTING and other unfinished work. Intended published URL https://app.dialincollective.com/privacy/. Public owner contact is the known account email; owner may later elect an alternate contact address prior to publication.\n\n2026-11-14 production delivered: DIC-20261114-READY6-03 single GitHub main request 26ce6aa17aca5908ff52b0621e42178a144bb69c, controller 43613190684 SUCCESS, release/production nonforce 5359d78c303f15231225282536cb6d1efa11beca, exact frozen tested source ed82fc7aed52b8c8bfac8a348133011b554f1c0b all five GitHub checks SUCCESS (approval 43612791659, validate 43612791677, cloud/mobile+one build 43612791625, SQL 43612791627); Netlify 6af885b8493af594f3ae403d ready/current Git SHA 5359d78c303f15231225282536cb6d1efa11beca, published 2026-11-14T16:01:18.662Z, 4 expected functions and zero secret findings. Nine approved app files only, zero production SQL migrations; all unready changes excluded. Earlier isolated 74fc225a FAILED Node and was NOT used.",
+      "production_deployed": true,
+      "delivered_release_id": "DIC-20261114-READY6-03",
+      "delivered_source_sha": "ed82fc7aed52b8c8bfac8a348133011b554f1c0b",
+      "delivered_release_sha": "5359d78c303f15231225282536cb6d1efa11beca",
+      "delivered_netlify_deploy_id": "6af885b8493af594f3ae403d",
+      "delivered_at_utc": "2026-11-14T16:01:18.662Z"
     },
     {
       "id": "DIC-Q-33-r170-next-json-selected-provenance",
@@ -13976,7 +13981,7 @@
       "issue": 33,
       "pr": null,
       "title": "Preserve post-READY original603 #275-276 unnamed-grower correction in development only; exclude from owner-frozen READY7 release",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "4c7bde4d3325bcee31ab0a25ade050d065a1735e",
       "scope_paths": [
         "src/server/coffee-page-metadata.mjs"
@@ -13999,14 +14004,20 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "This row tracks ONLY later R191 original603 selected unnamed-grower source edits, not older R180/R181/R187/R188/Proud Mary independently READY corrections. Retain R191 unchanged on development and in immutable history; no production SQL/Auth/Netlify writes. Owner selected 7 preexisting READY items at live preflight SHA.\n2026-11-14: independently source/CI-verified predecessor to R198, READY SOURCE ONLY, no production, tested source/merge Git blob identity; R192 unfinished excluded."
+      "notes": "This row tracks ONLY later R191 original603 selected unnamed-grower source edits, not older R180/R181/R187/R188/Proud Mary independently READY corrections. Retain R191 unchanged on development and in immutable history; no production SQL/Auth/Netlify writes. Owner selected 7 preexisting READY items at live preflight SHA.\n2026-11-14: independently source/CI-verified predecessor to R198, READY SOURCE ONLY, no production, tested source/merge Git blob identity; R192 unfinished excluded.\n\n2026-11-14 production delivered: DIC-20261114-READY6-03 single GitHub main request 26ce6aa17aca5908ff52b0621e42178a144bb69c, controller 43613190684 SUCCESS, release/production nonforce 5359d78c303f15231225282536cb6d1efa11beca, exact frozen tested source ed82fc7aed52b8c8bfac8a348133011b554f1c0b all five GitHub checks SUCCESS (approval 43612791659, validate 43612791677, cloud/mobile+one build 43612791625, SQL 43612791627); Netlify 6af885b8493af594f3ae403d ready/current Git SHA 5359d78c303f15231225282536cb6d1efa11beca, published 2026-11-14T16:01:18.662Z, 4 expected functions and zero secret findings. Nine approved app files only, zero production SQL migrations; all unready changes excluded. Earlier isolated 74fc225a FAILED Node and was NOT used.",
+      "production_deployed": true,
+      "delivered_release_id": "DIC-20261114-READY6-03",
+      "delivered_source_sha": "ed82fc7aed52b8c8bfac8a348133011b554f1c0b",
+      "delivered_release_sha": "5359d78c303f15231225282536cb6d1efa11beca",
+      "delivered_netlify_deploy_id": "6af885b8493af594f3ae403d",
+      "delivered_at_utc": "2026-11-14T16:01:18.662Z"
     },
     {
       "id": "DIC-Q-33-r192-redhouse-selected-narrative-review",
       "issue": 33,
       "pr": 2617,
       "title": "Preserve exact current selected intrinsic jasmine/lemon separately from Red House printed cupping notes (review only)",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "4854b80adcc661c84adbe48da736e744f603f66d",
       "scope_paths": [
         "src/server/coffee-selected-description-sensory.mjs",
@@ -14033,7 +14044,13 @@
         43570881958
       ],
       "blockers": [],
-      "notes": "Development-only review context for direct named current Red House Geisha #277. Raw current own selected span states jasmine/lemon while own stronger Cupping Notes gives Fruity/Hibiscus; preserve both as distinct source evidence, do not invent a contradiction, merge, or overwrite canonical tasting autofill. No source/backups/database/provider/member/release publication. #267 V2 and #96 remain separate; #33 OPEN.\n2026-11-14 independently certified READY for exact scoped source; R192's selectedCurrentUnlabeledFlavorPair export is required by already independently READY R198 metadata. Include R192 as verified dependency in one owner Publish, pin R198 metadata to exact tested bytes; no unreviewed dev source or unfinished SQL; no standalone full603 certification."
+      "notes": "Development-only review context for direct named current Red House Geisha #277. Raw current own selected span states jasmine/lemon while own stronger Cupping Notes gives Fruity/Hibiscus; preserve both as distinct source evidence, do not invent a contradiction, merge, or overwrite canonical tasting autofill. No source/backups/database/provider/member/release publication. #267 V2 and #96 remain separate; #33 OPEN.\n2026-11-14 independently certified READY for exact scoped source; R192's selectedCurrentUnlabeledFlavorPair export is required by already independently READY R198 metadata. Include R192 as verified dependency in one owner Publish, pin R198 metadata to exact tested bytes; no unreviewed dev source or unfinished SQL; no standalone full603 certification.\n\n2026-11-14 production delivered: DIC-20261114-READY6-03 single GitHub main request 26ce6aa17aca5908ff52b0621e42178a144bb69c, controller 43613190684 SUCCESS, release/production nonforce 5359d78c303f15231225282536cb6d1efa11beca, exact frozen tested source ed82fc7aed52b8c8bfac8a348133011b554f1c0b all five GitHub checks SUCCESS (approval 43612791659, validate 43612791677, cloud/mobile+one build 43612791625, SQL 43612791627); Netlify 6af885b8493af594f3ae403d ready/current Git SHA 5359d78c303f15231225282536cb6d1efa11beca, published 2026-11-14T16:01:18.662Z, 4 expected functions and zero secret findings. Nine approved app files only, zero production SQL migrations; all unready changes excluded. Earlier isolated 74fc225a FAILED Node and was NOT used.",
+      "production_deployed": true,
+      "delivered_release_id": "DIC-20261114-READY6-03",
+      "delivered_source_sha": "ed82fc7aed52b8c8bfac8a348133011b554f1c0b",
+      "delivered_release_sha": "5359d78c303f15231225282536cb6d1efa11beca",
+      "delivered_netlify_deploy_id": "6af885b8493af594f3ae403d",
+      "delivered_at_utc": "2026-11-14T16:01:18.662Z"
     },
     {
       "id": "DIC-Q-2621-add-coffee-difference-tap-preview-cleanup",
@@ -14229,7 +14246,7 @@
       "issue": 455,
       "pr": 2660,
       "title": "Preserve already-queued Use Recommendation provenance in offline Shot History preview",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "87da54b3af6c5dc6a0fbf27bfdbaaf763819fbe5",
       "scope_paths": [
         "site/cloud/mapping.js"
@@ -14253,15 +14270,20 @@
         43586665177
       ],
       "blockers": [],
-      "notes": "READY for separate owner-approved publication only; not deployed. Narrow existing recommendation-use provenance copied from durable owner-local queued shot into pending offline preview. No data collection, recommendation targets, Locked policy, provider/production writes, release or backup change. R255 direct source proof and four synthetic tests; no claim of tasted cup improvement.",
-      "production_deployed": false
+      "notes": "READY for separate owner-approved publication only; not deployed. Narrow existing recommendation-use provenance copied from durable owner-local queued shot into pending offline preview. No data collection, recommendation targets, Locked policy, provider/production writes, release or backup change. R255 direct source proof and four synthetic tests; no claim of tasted cup improvement.\n\n2026-11-14 production delivered: DIC-20261114-READY6-03 single GitHub main request 26ce6aa17aca5908ff52b0621e42178a144bb69c, controller 43613190684 SUCCESS, release/production nonforce 5359d78c303f15231225282536cb6d1efa11beca, exact frozen tested source ed82fc7aed52b8c8bfac8a348133011b554f1c0b all five GitHub checks SUCCESS (approval 43612791659, validate 43612791677, cloud/mobile+one build 43612791625, SQL 43612791627); Netlify 6af885b8493af594f3ae403d ready/current Git SHA 5359d78c303f15231225282536cb6d1efa11beca, published 2026-11-14T16:01:18.662Z, 4 expected functions and zero secret findings. Nine approved app files only, zero production SQL migrations; all unready changes excluded. Earlier isolated 74fc225a FAILED Node and was NOT used.",
+      "production_deployed": true,
+      "delivered_release_id": "DIC-20261114-READY6-03",
+      "delivered_source_sha": "ed82fc7aed52b8c8bfac8a348133011b554f1c0b",
+      "delivered_release_sha": "5359d78c303f15231225282536cb6d1efa11beca",
+      "delivered_netlify_deploy_id": "6af885b8493af594f3ae403d",
+      "delivered_at_utc": "2026-11-14T16:01:18.662Z"
     },
     {
       "id": "DIC-Q-508-catalog-refresh-cooldown-copy-15s",
       "issue": 508,
       "pr": 2662,
       "title": "Correct cached coffee current-page refresh guidance to Locked member 15s and Admin exemption",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "359c42382b53733cab15f4a90294a924497773f3",
       "scope_paths": [
         "site/cloud/coffee-url-autofill.js"
@@ -14286,8 +14308,13 @@
         43587854290
       ],
       "blockers": [],
-      "notes": "UI guidance only; no changes to runtime quota, Auth, per-IP anti-abuse, server, roaster lookup, catalog storage, Pending/Verified privacy, offline, shots or member data. Development-only; no Netlify deploy/settings or publication grant.\nN508-091: DEVELOPMENT MERGED, narrowly source-verified READY for a future explicit owner-authorized isolated release, not deployed. This is only text guidance on cached approved_catalog preview; does not alter actual per-user or IP quota, Auth/SSRF, public/private release identity, any offline/shot logic. Preserve #455 READY and unfinished #33 baseline. No Netlify/provider production changes.",
-      "production_deployed": false
+      "notes": "UI guidance only; no changes to runtime quota, Auth, per-IP anti-abuse, server, roaster lookup, catalog storage, Pending/Verified privacy, offline, shots or member data. Development-only; no Netlify deploy/settings or publication grant.\nN508-091: DEVELOPMENT MERGED, narrowly source-verified READY for a future explicit owner-authorized isolated release, not deployed. This is only text guidance on cached approved_catalog preview; does not alter actual per-user or IP quota, Auth/SSRF, public/private release identity, any offline/shot logic. Preserve #455 READY and unfinished #33 baseline. No Netlify/provider production changes.\n\n2026-11-14 production delivered: DIC-20261114-READY6-03 single GitHub main request 26ce6aa17aca5908ff52b0621e42178a144bb69c, controller 43613190684 SUCCESS, release/production nonforce 5359d78c303f15231225282536cb6d1efa11beca, exact frozen tested source ed82fc7aed52b8c8bfac8a348133011b554f1c0b all five GitHub checks SUCCESS (approval 43612791659, validate 43612791677, cloud/mobile+one build 43612791625, SQL 43612791627); Netlify 6af885b8493af594f3ae403d ready/current Git SHA 5359d78c303f15231225282536cb6d1efa11beca, published 2026-11-14T16:01:18.662Z, 4 expected functions and zero secret findings. Nine approved app files only, zero production SQL migrations; all unready changes excluded. Earlier isolated 74fc225a FAILED Node and was NOT used.",
+      "production_deployed": true,
+      "delivered_release_id": "DIC-20261114-READY6-03",
+      "delivered_source_sha": "ed82fc7aed52b8c8bfac8a348133011b554f1c0b",
+      "delivered_release_sha": "5359d78c303f15231225282536cb6d1efa11beca",
+      "delivered_netlify_deploy_id": "6af885b8493af594f3ae403d",
+      "delivered_at_utc": "2026-11-14T16:01:18.662Z"
     },
     {
       "id": "DIC-Q-509-recommendation-context-null-control-guard",
@@ -14326,7 +14353,7 @@
       "issue": 33,
       "pr": 2677,
       "title": "Withhold conflicting corroborated current selected Tanzania Peaberry flavor; retain both literal sources for member review",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "8cf2c2bcec7881dc590d3de8366393863a45ef9b",
       "scope_paths": [
         "src/server/coffee-selected-hero-notes-conflict.mjs",
@@ -14356,8 +14383,13 @@
         43594060624
       ],
       "blockers": [],
-      "notes": "DEVELOPMENT ONLY; original 603/201/1197 frozen CSV/oracle/scorer untouched, no Netlify or production provider/SQL/Edge/Auth/member changes. #267 and #96 separate owners. Issue #33 OPEN. Narrow R198 READY development only at exact merged source 8cf2c2bcec7881dc590d3de8366393863a45ef9b. Parent original603 per-coffee acceptance incomplete; #288 merchant former URL source-limited. No release/deploy/provider/member writes.",
-      "production_deployed": false
+      "notes": "DEVELOPMENT ONLY; original 603/201/1197 frozen CSV/oracle/scorer untouched, no Netlify or production provider/SQL/Edge/Auth/member changes. #267 and #96 separate owners. Issue #33 OPEN. Narrow R198 READY development only at exact merged source 8cf2c2bcec7881dc590d3de8366393863a45ef9b. Parent original603 per-coffee acceptance incomplete; #288 merchant former URL source-limited. No release/deploy/provider/member writes.\n\n2026-11-14 production delivered: DIC-20261114-READY6-03 single GitHub main request 26ce6aa17aca5908ff52b0621e42178a144bb69c, controller 43613190684 SUCCESS, release/production nonforce 5359d78c303f15231225282536cb6d1efa11beca, exact frozen tested source ed82fc7aed52b8c8bfac8a348133011b554f1c0b all five GitHub checks SUCCESS (approval 43612791659, validate 43612791677, cloud/mobile+one build 43612791625, SQL 43612791627); Netlify 6af885b8493af594f3ae403d ready/current Git SHA 5359d78c303f15231225282536cb6d1efa11beca, published 2026-11-14T16:01:18.662Z, 4 expected functions and zero secret findings. Nine approved app files only, zero production SQL migrations; all unready changes excluded. Earlier isolated 74fc225a FAILED Node and was NOT used.",
+      "production_deployed": true,
+      "delivered_release_id": "DIC-20261114-READY6-03",
+      "delivered_source_sha": "ed82fc7aed52b8c8bfac8a348133011b554f1c0b",
+      "delivered_release_sha": "5359d78c303f15231225282536cb6d1efa11beca",
+      "delivered_netlify_deploy_id": "6af885b8493af594f3ae403d",
+      "delivered_at_utc": "2026-11-14T16:01:18.662Z"
     },
     {
       "id": "DIC-Q-509-pending-coffee-null-flags",
@@ -16801,6 +16833,78 @@
       "source_sha": "ad7a7ffb0f94b4d706774867dcb9eb402b6bef26",
       "production_deployed": false,
       "evidence": "R201 metadata later than frozen R198; exact source blob deferred, pinned candidate excludes while live development retains it."
+    },
+    {
+      "date": "2026-11-14",
+      "issue": 28,
+      "item_id": "DIC-Q-28-owner-oauth-privacy-policy-20261114",
+      "state": "DEPLOYED",
+      "source_sha": "ed82fc7aed52b8c8bfac8a348133011b554f1c0b",
+      "production_deployed": true,
+      "release_id": "DIC-20261114-READY6-03",
+      "release_sha": "5359d78c303f15231225282536cb6d1efa11beca",
+      "netlify_deploy_id": "6af885b8493af594f3ae403d",
+      "evidence": "Owner one-use source ed82fc7aed52b8c8bfac8a348133011b554f1c0b; 5 exact CI SUCCESS, controller run 43613190684 SUCCESS on main 26ce6aa17aca5908ff52b0621e42178a144bb69c; Git 5359d78c303f15231225282536cb6d1efa11beca nonforce; Netlify 6af885b8493af594f3ae403d ready/current matching SHA with 4 functions, zero secrets; no SQL migration. Original source/test provenance and unfinished other items preserved."
+    },
+    {
+      "date": "2026-11-14",
+      "issue": 33,
+      "item_id": "DIC-Q-33-r191-275-276-post-ready-unnamed-growers",
+      "state": "DEPLOYED",
+      "source_sha": "ed82fc7aed52b8c8bfac8a348133011b554f1c0b",
+      "production_deployed": true,
+      "release_id": "DIC-20261114-READY6-03",
+      "release_sha": "5359d78c303f15231225282536cb6d1efa11beca",
+      "netlify_deploy_id": "6af885b8493af594f3ae403d",
+      "evidence": "Owner one-use source ed82fc7aed52b8c8bfac8a348133011b554f1c0b; 5 exact CI SUCCESS, controller run 43613190684 SUCCESS on main 26ce6aa17aca5908ff52b0621e42178a144bb69c; Git 5359d78c303f15231225282536cb6d1efa11beca nonforce; Netlify 6af885b8493af594f3ae403d ready/current matching SHA with 4 functions, zero secrets; no SQL migration. Original source/test provenance and unfinished other items preserved."
+    },
+    {
+      "date": "2026-11-14",
+      "issue": 33,
+      "item_id": "DIC-Q-33-r192-redhouse-selected-narrative-review",
+      "state": "DEPLOYED",
+      "source_sha": "ed82fc7aed52b8c8bfac8a348133011b554f1c0b",
+      "production_deployed": true,
+      "release_id": "DIC-20261114-READY6-03",
+      "release_sha": "5359d78c303f15231225282536cb6d1efa11beca",
+      "netlify_deploy_id": "6af885b8493af594f3ae403d",
+      "evidence": "Owner one-use source ed82fc7aed52b8c8bfac8a348133011b554f1c0b; 5 exact CI SUCCESS, controller run 43613190684 SUCCESS on main 26ce6aa17aca5908ff52b0621e42178a144bb69c; Git 5359d78c303f15231225282536cb6d1efa11beca nonforce; Netlify 6af885b8493af594f3ae403d ready/current matching SHA with 4 functions, zero secrets; no SQL migration. Original source/test provenance and unfinished other items preserved."
+    },
+    {
+      "date": "2026-11-14",
+      "issue": 33,
+      "item_id": "DIC-Q-33-r198-original291-source-prose-conflict",
+      "state": "DEPLOYED",
+      "source_sha": "ed82fc7aed52b8c8bfac8a348133011b554f1c0b",
+      "production_deployed": true,
+      "release_id": "DIC-20261114-READY6-03",
+      "release_sha": "5359d78c303f15231225282536cb6d1efa11beca",
+      "netlify_deploy_id": "6af885b8493af594f3ae403d",
+      "evidence": "Owner one-use source ed82fc7aed52b8c8bfac8a348133011b554f1c0b; 5 exact CI SUCCESS, controller run 43613190684 SUCCESS on main 26ce6aa17aca5908ff52b0621e42178a144bb69c; Git 5359d78c303f15231225282536cb6d1efa11beca nonforce; Netlify 6af885b8493af594f3ae403d ready/current matching SHA with 4 functions, zero secrets; no SQL migration. Original source/test provenance and unfinished other items preserved."
+    },
+    {
+      "date": "2026-11-14",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r255-offline-recommendation-provenance-preview",
+      "state": "DEPLOYED",
+      "source_sha": "ed82fc7aed52b8c8bfac8a348133011b554f1c0b",
+      "production_deployed": true,
+      "release_id": "DIC-20261114-READY6-03",
+      "release_sha": "5359d78c303f15231225282536cb6d1efa11beca",
+      "netlify_deploy_id": "6af885b8493af594f3ae403d",
+      "evidence": "Owner one-use source ed82fc7aed52b8c8bfac8a348133011b554f1c0b; 5 exact CI SUCCESS, controller run 43613190684 SUCCESS on main 26ce6aa17aca5908ff52b0621e42178a144bb69c; Git 5359d78c303f15231225282536cb6d1efa11beca nonforce; Netlify 6af885b8493af594f3ae403d ready/current matching SHA with 4 functions, zero secrets; no SQL migration. Original source/test provenance and unfinished other items preserved."
+    },
+    {
+      "date": "2026-11-14",
+      "issue": 508,
+      "item_id": "DIC-Q-508-catalog-refresh-cooldown-copy-15s",
+      "state": "DEPLOYED",
+      "source_sha": "ed82fc7aed52b8c8bfac8a348133011b554f1c0b",
+      "production_deployed": true,
+      "release_id": "DIC-20261114-READY6-03",
+      "release_sha": "5359d78c303f15231225282536cb6d1efa11beca",
+      "netlify_deploy_id": "6af885b8493af594f3ae403d",
+      "evidence": "Owner one-use source ed82fc7aed52b8c8bfac8a348133011b554f1c0b; 5 exact CI SUCCESS, controller run 43613190684 SUCCESS on main 26ce6aa17aca5908ff52b0621e42178a144bb69c; Git 5359d78c303f15231225282536cb6d1efa11beca nonforce; Netlify 6af885b8493af594f3ae403d ready/current matching SHA with 4 functions, zero secrets; no SQL migration. Original source/test provenance and unfinished other items preserved."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
