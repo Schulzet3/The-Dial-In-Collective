@@ -10,3 +10,8 @@ Scope site/cloud/main.js, site/styles.css, site/privacy.html, build_cloud.mjs, t
 DIC_PREFLIGHT_VERIFIED development_sha=0e56e6ff501f7b3bc4078d6c98441e399f9c95db preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
 Include the deliberately generated privacy/index.html as a legitimate static output in scripts/audit/site-integrity.mjs so the production packaging allowlist verifies the new policy page rather than flagging it as unexpected. Do not weaken general extra-file or missing-file detection. No publication.
+
+## Release-queue intake repair after exact PR CI [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=0e56e6ff501f7b3bc4078d6c98441e399f9c95db preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+Initial PR #2686 approval CI run 43597666305 correctly held new untracked application paths; as required by the existing release safety policy, register all four changed deployable application paths under new DIC-Q-28-owner-oauth-privacy-policy-20261114, IN_PROGRESS, separate from all READY items. Do not mark READY, merge, or deploy without exact tests and explicit independent publication approval. This is a repair of queue intake, not weakening the gate.
