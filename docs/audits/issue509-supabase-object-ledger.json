@@ -19935,6 +19935,15 @@
     "tests": "NOT_RUN_DOCS_ONLY",
     "governance_ci": "UNVERIFIED_POSTCOMMIT",
     "full_provider_baseline_complete": false,
-    "next_cursor": "Read-only drift then cumulative numeric ranks 1281-1360; add development-only SQL null guard and isolated SQL regressions subject to #455/#96 coordination; separately prove current caller reachability before reclassifying legacy first-style claim routine."
+    "next_cursor": "Read-only drift then cumulative numeric ranks 1281-1360; add development-only SQL null guard and isolated SQL regressions subject to #455/#96 coordination; separately prove current caller reachability before reclassifying legacy first-style claim routine.",
+    "source_correction_commit": "7607c69f62f65979079fd02a0d25f4b7653a2303",
+    "test_assertion_repair_commit": "0cd5054c6684a63062daf794e33ea265daf5ce66",
+    "source_migration_path": "supabase/migrations/20261114115000_dic_recommendation_context_null_control_guard.sql",
+    "test_path": "supabase/tests/recommendation_context_null_controls.sql",
+    "test_harness_path": "scripts/audit/isolated-sql-regression.sh",
+    "source_fix_status": "INTEGRATED_IN_DEVELOPMENT_TESTING_NOT_READY",
+    "isolated_sql_ci": "PENDING_EXACT_SHA",
+    "source_test_ci_changes": 2,
+    "publication_authorized": false
   }
 }
