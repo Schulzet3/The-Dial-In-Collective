@@ -36,7 +36,7 @@ test('genuinely conflicting direct selected descriptions require user review',()
  assert.equal(result.fields.process,undefined);
  assert.ok(result.conflicts?.includes('process'));
  assert.deepEqual(new Set(result.conflict_options?.process?.map(x=>x.value)),new Set(['Washed','Natural']));
- assert.match(coffeeUrlPreviewMarkup({...result,source_url:url}),/Review conflicting details/);
+ assert.match(coffeeUrlPreviewMarkup({...result,source_url:url}),/Tap the correct option to autofill, or type a value in the field/);
 });
 test('last resort metadata is visibly labeled and retained in source review',()=>{
  const result=parse({metaFields:{process:'Natural'}});
