@@ -443,6 +443,10 @@ function normalized(field,value,{allowFlavorProse=false,allowAnonymousProducer=f
  // "Family business with three generations of experience" is not a
  // named supplier. Do not infer the producer from a roaster biography.
  if(field==='producer'&&/^(?:a\s+)?family\s+business\s+with\s+(?:\d+|one|two|three|four|five)\s+generations?\s+of\b/iu.test(s))return '';
+ // "Farm: 400 smallholder farms" counts anonymous contributors and is not a
+ // named estate/cooperative. Keep raw literal in selected Source Review.
+ // Do not reject actual named groups like "FFESICH Cooperative".
+ if(field==='producer'&&/^\d{1,3}(?:,?\d{3})?\s+(?:(?:small[ -]?holder|small|family|local|independent|regional)\s+){0,3}(?:farms?|farmers?|growers?|families|producers?|cooperatives?)$/iu.test(s))return '';
  // Indefinite quantities ("some of the top farms and small producers") do not
  // identify a real grower, co-op or named supplier. Keep the merchant claim
  // in source evidence for review without canonical producer promotion.
@@ -688,6 +692,14 @@ function addField(fields,rawKey,value,{literalAnonymousProducer=false}={}){
   const beforeProse=prose(fields[key]),afterProse=prose(s);
   if(beforeProse&&!afterProse){fields[key]=s;return;}
   if(afterProse&&!beforeProse)return;
+  if(structuredFlavorByFields.get(fields)===fields[key]&&
+   /^(?:flavor|flavour|flavornotes|flavournotes|tastingnotes|notes)$/.test(keyOf(rawKey))&&
+   coffeeTastingNotesSubset(fields[key],s)){
+   // Exact selected visible Flavor lists all notes from a shorter structured
+   // Product teaser plus additional literal notes. Preserve the complete
+   // direct label; unrelated products and actual contrary notes still conflict.
+   fields[key]=s;structuredFlavorByFields.delete(fields);return;
+  }
   if(structuredFlavorByFields.get(fields)===fields[key]&&
    /^(?:flavor|flavour|flavornotes|flavournotes|tastingnotes|notes)$/.test(keyOf(rawKey))&&
    coffeeTastingNotesSubset(s,fields[key])){

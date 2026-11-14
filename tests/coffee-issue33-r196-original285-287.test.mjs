@@ -12,9 +12,9 @@ const names={
  286:'Ethiopia Worka Sakaro',
  287:'Mexico Angel Albino Corzo'
 };
-function selected(n,details,aside=''){
+function selected(n,details,aside='',structuredDetails=''){
  const url=urls[n],name=names[n];
- const ld={'@context':'https://schema.org','@type':'Product',name,url,brand:{'@type':'Brand',name:n===285?'Rise Up Coffee Roasters':'Roadmap CoffeeWorks'}};
+ const ld={'@context':'https://schema.org','@type':'Product',name,url,description:structuredDetails,brand:{'@type':'Brand',name:n===285?'Rise Up Coffee Roasters':'Roadmap CoffeeWorks'}};
  const html='<!doctype html><html><head><script type="application/ld+json">'+JSON.stringify(ld)+'</script></head><body><header>Shop Coffee</header><main><article class="product"><h1>'+name+'</h1><div class="product-description">'+details+'</div></article></main>'+aside+'</body></html>';
  return extractPublicCoffeeFacts(html,{source_url:url});
 }
@@ -63,4 +63,31 @@ test('#287 indefinite additional farming families cannot replace named selected 
  assert.equal(p.ok,true);
  assert.match(String(p.fields?.producer||''),/FFESICH/i);
  assert.doesNotMatch(String(p.fields?.producer||''),/2000 farming families/i);
+});
+
+test('#286 current full visible Flavor outranks same-product shorter Product description',()=>{
+ const p=selected(286,worka,'','<p>Flavor: Strawberry, Pineapple, Dark chocolate</p>');
+ assert.equal(p.ok,true,JSON.stringify(p).slice(0,1000));
+ assert.equal(p.fields?.tasting_notes,'Macerated Strawberry, Pineapple, Yogurt, Dark Chocolate');
+ assert.ok(!p.conflicts?.includes('tasting_notes'),'shorter structured selected teaser is not contradictory');
+ assert.ok(!p.fields?.producer,'literal count is not producer');
+});
+test('#287 exact selected full Flavor outranks same-coffee shorter teaser; named coop preserved',()=>{
+ const p=selected(287,mexico,'','<p>Flavor: Dark chocolate, Cola, Blackberry</p>');
+ assert.equal(p.ok,true,JSON.stringify(p).slice(0,1000));
+ assert.equal(p.fields?.tasting_notes,'Dark Chocolate, Cola, Blackberry, Hazelnut');
+ assert.ok(!p.conflicts?.includes('tasting_notes'));
+ assert.match(String(p.fields?.producer||''),/FFESICH/i);
+});
+test('#287 true contradictory same-product Flavor item stays blank and reviewable',()=>{
+ const p=selected(287,mexico,'','<p>Flavor: Tart Cherry, Cola, Blackberry</p>');
+ assert.equal(p.ok,true);
+ assert.ok(!p.fields?.tasting_notes,'contradictory flavor must not be silently combined');
+ assert.ok(p.conflicts?.includes('tasting_notes'),'true conflict explicitly recorded');
+});
+test('#286 named cooperative is not excluded by count-shaped anonymous farm guard',()=>{
+ const named=worka.replace('Farm: 400 smallholder farms','Farm: Worka Sakaro Producers Cooperative');
+ const p=selected(286,named);
+ assert.equal(p.ok,true);
+ assert.match(String(p.fields?.producer||''),/Worka Sakaro Producers Cooperative/i);
 });
