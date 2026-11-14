@@ -1,0 +1,487 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "D2-039",
+  "date_utc": "2026-11-14",
+  "kind": "POST_PIN_NEW_CODE_DIRECT_SEMANTIC_REVIEW",
+  "preflight": {
+    "development_sha": "ef1e635c06ab6301e72896378bfdeb270b1cfcaf",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "blob_content_verified": true
+  },
+  "source": {
+    "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "observed_live_commit": "ef1e635c06ab6301e72896378bfdeb270b1cfcaf",
+    "path": "tests/immutable-function.test.py",
+    "blob_sha": "349aa931012604117037bec091957034e130cf43",
+    "physical_line_count": 15,
+    "verified_absent_at_pin": true,
+    "terminal_newline_not_physical_line": true,
+    "unchanged_since_2026_11_05_tree_snapshot": true
+  },
+  "method": "Every physical line read by AI and independently source-blob matched; per-line behavior, quality, risk, obsolete/duplicate, provenance, testability, fix and Locked fit. First frozen workflow F001 line1 onward was fetched and prior strict S2-001 sampled earlier this run with zero new credit.",
+  "per_line": [
+    {
+      "path": "tests/immutable-function.test.py",
+      "blob_sha": "349aa931012604117037bec091957034e130cf43",
+      "line": 1,
+      "source_text": "import unittest,tempfile,pathlib,zipfile,importlib.util",
+      "classification": "import",
+      "behavior": "Uses unittest, temporary files, Path, zip reader and dynamic module loader.",
+      "quality": "All dependencies are Python stdlib; compact but multiple imports on one line.",
+      "risk": "Runtime Python and package path availability, not a credential/SQL risk.",
+      "dead_or_obsolete": "Required by tests, no dead import identified.",
+      "duplication": "No duplicate external framework introduced.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "ef1e635c06ab6301e72896378bfdeb270b1cfcaf",
+        "path": "tests/immutable-function.test.py",
+        "blob_sha": "349aa931012604117037bec091957034e130cf43",
+        "line": 1,
+        "exact_original": true
+      },
+      "testability": "Python -m unittest and import sanity; NOT_RUN.",
+      "fix_opportunity": "No change required; readable import layout optional.",
+      "locked_fit": "Documentation-only historical/post-pin test audit; no production publishing/backup/provider action. Preserve owner one-use Git-based release approval and #33/#96 boundaries.",
+      "review_method": "Direct AI reading of fetched original numbered physical source; not independent human certification."
+    },
+    {
+      "path": "tests/immutable-function.test.py",
+      "blob_sha": "349aa931012604117037bec091957034e130cf43",
+      "line": 2,
+      "source_text": "spec=importlib.util.spec_from_file_location('pkg','scripts/release/package-immutable-function.py')",
+      "classification": "setup",
+      "behavior": "Resolves package-immutable-function.py by relative path as a dynamic Python module.",
+      "quality": "Explicit utility selection but depends on repository-root working directory.",
+      "risk": "Test may fail when run from a different cwd; no active hosted CI failure proven.",
+      "dead_or_obsolete": "Required to call packager.",
+      "duplication": "Not redundant with import of Python standard module.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "ef1e635c06ab6301e72896378bfdeb270b1cfcaf",
+        "path": "tests/immutable-function.test.py",
+        "blob_sha": "349aa931012604117037bec091957034e130cf43",
+        "line": 2,
+        "exact_original": true
+      },
+      "testability": "Run from root and nonroot cwd to validate portability; NOT_RUN.",
+      "fix_opportunity": "Consider pathlib file-relative resolution only if portability failure reproduced.",
+      "locked_fit": "Documentation-only historical/post-pin test audit; no production publishing/backup/provider action. Preserve owner one-use Git-based release approval and #33/#96 boundaries.",
+      "review_method": "Direct AI reading of fetched original numbered physical source; not independent human certification."
+    },
+    {
+      "path": "tests/immutable-function.test.py",
+      "blob_sha": "349aa931012604117037bec091957034e130cf43",
+      "line": 3,
+      "source_text": "mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(mod)",
+      "classification": "setup",
+      "behavior": "Creates module from import spec and executes its top-level definitions.",
+      "quality": "Allows test to directly call package() without publishing.",
+      "risk": "Executing trusted repo script at import time is intended; not a network/provider invocation in reviewed script.",
+      "dead_or_obsolete": "Required; direct test helper.",
+      "duplication": "No duplicate import in this file.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "ef1e635c06ab6301e72896378bfdeb270b1cfcaf",
+        "path": "tests/immutable-function.test.py",
+        "blob_sha": "349aa931012604117037bec091957034e130cf43",
+        "line": 3,
+        "exact_original": true
+      },
+      "testability": "Run local isolated module load; NOT_RUN.",
+      "fix_opportunity": "Keep while source remains the standalone CLI helper.",
+      "locked_fit": "Documentation-only historical/post-pin test audit; no production publishing/backup/provider action. Preserve owner one-use Git-based release approval and #33/#96 boundaries.",
+      "review_method": "Direct AI reading of fetched original numbered physical source; not independent human certification."
+    },
+    {
+      "path": "tests/immutable-function.test.py",
+      "blob_sha": "349aa931012604117037bec091957034e130cf43",
+      "line": 4,
+      "source_text": "class TestImmutableFunction(unittest.TestCase):",
+      "classification": "definition",
+      "behavior": "Declares unittest test case for deterministic function packaging.",
+      "quality": "Conventional testing structure.",
+      "risk": "No direct user/secret or service access.",
+      "dead_or_obsolete": "Active source assertion container.",
+      "duplication": "Single case class, no duplicate class.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "ef1e635c06ab6301e72896378bfdeb270b1cfcaf",
+        "path": "tests/immutable-function.test.py",
+        "blob_sha": "349aa931012604117037bec091957034e130cf43",
+        "line": 4,
+        "exact_original": true
+      },
+      "testability": "Standard unittest discovery; NOT_RUN.",
+      "fix_opportunity": "Keep.",
+      "locked_fit": "Documentation-only historical/post-pin test audit; no production publishing/backup/provider action. Preserve owner one-use Git-based release approval and #33/#96 boundaries.",
+      "review_method": "Direct AI reading of fetched original numbered physical source; not independent human certification."
+    },
+    {
+      "path": "tests/immutable-function.test.py",
+      "blob_sha": "349aa931012604117037bec091957034e130cf43",
+      "line": 5,
+      "source_text": " def test_reproducible(self):",
+      "classification": "definition",
+      "behavior": "Begins reproducible archive test.",
+      "quality": "Names acceptance criterion explicitly.",
+      "risk": "Does not alone cover artifact authorization or origin integrity.",
+      "dead_or_obsolete": "Distinct positive case.",
+      "duplication": "Not duplicate of missing-path test.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "ef1e635c06ab6301e72896378bfdeb270b1cfcaf",
+        "path": "tests/immutable-function.test.py",
+        "blob_sha": "349aa931012604117037bec091957034e130cf43",
+        "line": 5,
+        "exact_original": true
+      },
+      "testability": "Run deterministic two-pack regression; NOT_RUN.",
+      "fix_opportunity": "Keep.",
+      "locked_fit": "Documentation-only historical/post-pin test audit; no production publishing/backup/provider action. Preserve owner one-use Git-based release approval and #33/#96 boundaries.",
+      "review_method": "Direct AI reading of fetched original numbered physical source; not independent human certification."
+    },
+    {
+      "path": "tests/immutable-function.test.py",
+      "blob_sha": "349aa931012604117037bec091957034e130cf43",
+      "line": 6,
+      "source_text": "  with tempfile.TemporaryDirectory() as d:",
+      "classification": "setup",
+      "behavior": "Creates ephemeral filesystem sandbox; removes it on exit.",
+      "quality": "No persistent output or provider effect.",
+      "risk": "Cleans only its own temporary directory.",
+      "dead_or_obsolete": "Needed setup.",
+      "duplication": "Not redundant with subsequent file setup.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "ef1e635c06ab6301e72896378bfdeb270b1cfcaf",
+        "path": "tests/immutable-function.test.py",
+        "blob_sha": "349aa931012604117037bec091957034e130cf43",
+        "line": 6,
+        "exact_original": true
+      },
+      "testability": "Check cleanup on success and failure; NOT_RUN.",
+      "fix_opportunity": "Keep.",
+      "locked_fit": "Documentation-only historical/post-pin test audit; no production publishing/backup/provider action. Preserve owner one-use Git-based release approval and #33/#96 boundaries.",
+      "review_method": "Direct AI reading of fetched original numbered physical source; not independent human certification."
+    },
+    {
+      "path": "tests/immutable-function.test.py",
+      "blob_sha": "349aa931012604117037bec091957034e130cf43",
+      "line": 7,
+      "source_text": "   p=pathlib.Path(d);src=p/'bundle.mjs';src.write_text('export default function coffee_url_preview(){}')",
+      "classification": "fixture",
+      "behavior": "Writes a minimal JS bundle containing 'coffee_url_preview' sentinel.",
+      "quality": "Matches packager's preview-string admission condition; deterministic bytes.",
+      "risk": "Synthetic string is not a real deployable function and does not prove origin authorization.",
+      "dead_or_obsolete": "Needed fixture.",
+      "duplication": "Not a duplicate official-source coffee fixture.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "ef1e635c06ab6301e72896378bfdeb270b1cfcaf",
+        "path": "tests/immutable-function.test.py",
+        "blob_sha": "349aa931012604117037bec091957034e130cf43",
+        "line": 7,
+        "exact_original": true
+      },
+      "testability": "Try missing/empty/invalid bundle separately; NOT_RUN.",
+      "fix_opportunity": "Potential additional negative fixture for the sentinel guard, no active defect established.",
+      "locked_fit": "Documentation-only historical/post-pin test audit; no production publishing/backup/provider action. Preserve owner one-use Git-based release approval and #33/#96 boundaries.",
+      "review_method": "Direct AI reading of fetched original numbered physical source; not independent human certification."
+    },
+    {
+      "path": "tests/immutable-function.test.py",
+      "blob_sha": "349aa931012604117037bec091957034e130cf43",
+      "line": 8,
+      "source_text": "   a=p/'a.zip';b=p/'b.zip'",
+      "classification": "fixture",
+      "behavior": "Creates two different target ZIP paths in the same temp directory.",
+      "quality": "Separates output artifacts for reproducibility.",
+      "risk": "No path-traversal or overwrite claims tested.",
+      "dead_or_obsolete": "Needed for comparing outputs.",
+      "duplication": "Distinct outputs are necessary.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "ef1e635c06ab6301e72896378bfdeb270b1cfcaf",
+        "path": "tests/immutable-function.test.py",
+        "blob_sha": "349aa931012604117037bec091957034e130cf43",
+        "line": 8,
+        "exact_original": true
+      },
+      "testability": "Check deterministic archive bytes; NOT_RUN.",
+      "fix_opportunity": "Keep.",
+      "locked_fit": "Documentation-only historical/post-pin test audit; no production publishing/backup/provider action. Preserve owner one-use Git-based release approval and #33/#96 boundaries.",
+      "review_method": "Direct AI reading of fetched original numbered physical source; not independent human certification."
+    },
+    {
+      "path": "tests/immutable-function.test.py",
+      "blob_sha": "349aa931012604117037bec091957034e130cf43",
+      "line": 9,
+      "source_text": "   self.assertEqual(mod.package(src,a),mod.package(src,b))",
+      "classification": "assertion",
+      "behavior": "Calls package twice and asserts returned archive SHA-256 hex strings are equal.",
+      "quality": "Verifies the two package runs return identical digests.",
+      "risk": "Identical digests alone cannot establish authorized source, only consistency.",
+      "dead_or_obsolete": "Functional positive assertion.",
+      "duplication": "Complements direct byte equality below, not proved dead.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "ef1e635c06ab6301e72896378bfdeb270b1cfcaf",
+        "path": "tests/immutable-function.test.py",
+        "blob_sha": "349aa931012604117037bec091957034e130cf43",
+        "line": 9,
+        "exact_original": true
+      },
+      "testability": "Tamper one archive to falsify digest equality; NOT_RUN.",
+      "fix_opportunity": "Keep.",
+      "locked_fit": "Documentation-only historical/post-pin test audit; no production publishing/backup/provider action. Preserve owner one-use Git-based release approval and #33/#96 boundaries.",
+      "review_method": "Direct AI reading of fetched original numbered physical source; not independent human certification."
+    },
+    {
+      "path": "tests/immutable-function.test.py",
+      "blob_sha": "349aa931012604117037bec091957034e130cf43",
+      "line": 10,
+      "source_text": "   self.assertEqual(a.read_bytes(),b.read_bytes())",
+      "classification": "assertion",
+      "behavior": "Reads both output archives and checks exact byte equality.",
+      "quality": "Strong direct deterministic output comparison independent of returned hash string.",
+      "risk": "Does not test source ZIP metadata and content semantics beyond byte equality.",
+      "dead_or_obsolete": "Functional positive assertion.",
+      "duplication": "Intentionally overlaps digest criterion to detect inconsistent digest reporting.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "ef1e635c06ab6301e72896378bfdeb270b1cfcaf",
+        "path": "tests/immutable-function.test.py",
+        "blob_sha": "349aa931012604117037bec091957034e130cf43",
+        "line": 10,
+        "exact_original": true
+      },
+      "testability": "Mutate one archive independently; NOT_RUN.",
+      "fix_opportunity": "Keep.",
+      "locked_fit": "Documentation-only historical/post-pin test audit; no production publishing/backup/provider action. Preserve owner one-use Git-based release approval and #33/#96 boundaries.",
+      "review_method": "Direct AI reading of fetched original numbered physical source; not independent human certification."
+    },
+    {
+      "path": "tests/immutable-function.test.py",
+      "blob_sha": "349aa931012604117037bec091957034e130cf43",
+      "line": 11,
+      "source_text": "   with zipfile.ZipFile(a) as z:self.assertEqual(z.namelist(),['coffee-url-preview.mjs'])",
+      "classification": "assertion",
+      "behavior": "Opens first ZIP and expects sole member coffee-url-preview.mjs.",
+      "quality": "Checks output entry naming and no additional members.",
+      "risk": "Does not assert ZIP payload bytes, timestamp, permissions or symlink policy; bounded test-coverage gap only.",
+      "dead_or_obsolete": "Functional ZIP structure check.",
+      "duplication": "Only ZIP structure assertion in file.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "ef1e635c06ab6301e72896378bfdeb270b1cfcaf",
+        "path": "tests/immutable-function.test.py",
+        "blob_sha": "349aa931012604117037bec091957034e130cf43",
+        "line": 11,
+        "exact_original": true
+      },
+      "testability": "Add payload/metadata guard regression if failure discovered; NOT_RUN.",
+      "fix_opportunity": "Keep; no destructive release refactor.",
+      "locked_fit": "Documentation-only historical/post-pin test audit; no production publishing/backup/provider action. Preserve owner one-use Git-based release approval and #33/#96 boundaries.",
+      "review_method": "Direct AI reading of fetched original numbered physical source; not independent human certification."
+    },
+    {
+      "path": "tests/immutable-function.test.py",
+      "blob_sha": "349aa931012604117037bec091957034e130cf43",
+      "line": 12,
+      "source_text": " def test_rejects_missing(self):",
+      "classification": "definition",
+      "behavior": "Declares negative case for missing input file.",
+      "quality": "Explicit failure-case protection.",
+      "risk": "No symlink, empty bundle, wrong-token, directory or target-error cases tested here.",
+      "dead_or_obsolete": "Distinct negative case.",
+      "duplication": "Not duplicate reproducibility case.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "ef1e635c06ab6301e72896378bfdeb270b1cfcaf",
+        "path": "tests/immutable-function.test.py",
+        "blob_sha": "349aa931012604117037bec091957034e130cf43",
+        "line": 12,
+        "exact_original": true
+      },
+      "testability": "Invoke with missing input; NOT_RUN.",
+      "fix_opportunity": "Broaden negative tests under authorized release track if justified.",
+      "locked_fit": "Documentation-only historical/post-pin test audit; no production publishing/backup/provider action. Preserve owner one-use Git-based release approval and #33/#96 boundaries.",
+      "review_method": "Direct AI reading of fetched original numbered physical source; not independent human certification."
+    },
+    {
+      "path": "tests/immutable-function.test.py",
+      "blob_sha": "349aa931012604117037bec091957034e130cf43",
+      "line": 13,
+      "source_text": "  with tempfile.TemporaryDirectory() as d:",
+      "classification": "setup",
+      "behavior": "Creates ephemeral test directory for missing source scenario.",
+      "quality": "Isolates negative case and avoids persistent writes.",
+      "risk": "No production/storage or credentials involved.",
+      "dead_or_obsolete": "Required negative fixture.",
+      "duplication": "Repeated pattern is intentionally local and cheap.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "ef1e635c06ab6301e72896378bfdeb270b1cfcaf",
+        "path": "tests/immutable-function.test.py",
+        "blob_sha": "349aa931012604117037bec091957034e130cf43",
+        "line": 13,
+        "exact_original": true
+      },
+      "testability": "Cleanup behavior; NOT_RUN.",
+      "fix_opportunity": "Keep.",
+      "locked_fit": "Documentation-only historical/post-pin test audit; no production publishing/backup/provider action. Preserve owner one-use Git-based release approval and #33/#96 boundaries.",
+      "review_method": "Direct AI reading of fetched original numbered physical source; not independent human certification."
+    },
+    {
+      "path": "tests/immutable-function.test.py",
+      "blob_sha": "349aa931012604117037bec091957034e130cf43",
+      "line": 14,
+      "source_text": "   with self.assertRaises(ValueError):mod.package(pathlib.Path(d)/'missing',pathlib.Path(d)/'x.zip')",
+      "classification": "assertion",
+      "behavior": "Confirms package rejects absent source path with ValueError.",
+      "quality": "Matches actual packager guard not source-file/symlink.",
+      "risk": "Success would not prove RLS/privacy/production upload safety; isolated path check only.",
+      "dead_or_obsolete": "Functional negative assertion.",
+      "duplication": "Separate from positive repeatability check.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "ef1e635c06ab6301e72896378bfdeb270b1cfcaf",
+        "path": "tests/immutable-function.test.py",
+        "blob_sha": "349aa931012604117037bec091957034e130cf43",
+        "line": 14,
+        "exact_original": true
+      },
+      "testability": "Run test and a separate symlink negative if warranted; NOT_RUN.",
+      "fix_opportunity": "Keep; no active bug proven.",
+      "locked_fit": "Documentation-only historical/post-pin test audit; no production publishing/backup/provider action. Preserve owner one-use Git-based release approval and #33/#96 boundaries.",
+      "review_method": "Direct AI reading of fetched original numbered physical source; not independent human certification."
+    },
+    {
+      "path": "tests/immutable-function.test.py",
+      "blob_sha": "349aa931012604117037bec091957034e130cf43",
+      "line": 15,
+      "source_text": "if __name__=='__main__':unittest.main()",
+      "classification": "entrypoint",
+      "behavior": "Runs unittest.main only when script is executed directly.",
+      "quality": "Supports explicit invocation while allowing test class import.",
+      "risk": "Test discovery semantics depend on runner; no runtime app behavior.",
+      "dead_or_obsolete": "Expected script guard.",
+      "duplication": "Not an alternate publisher or duplicated workflow.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_GitHub_contents_404": true
+      },
+      "live_current_counterpart": {
+        "commit": "ef1e635c06ab6301e72896378bfdeb270b1cfcaf",
+        "path": "tests/immutable-function.test.py",
+        "blob_sha": "349aa931012604117037bec091957034e130cf43",
+        "line": 15,
+        "exact_original": true
+      },
+      "testability": "Execute python3 tests/immutable-function.test.py from repo root; NOT_RUN.",
+      "fix_opportunity": "Keep.",
+      "locked_fit": "Documentation-only historical/post-pin test audit; no production publishing/backup/provider action. Preserve owner one-use Git-based release approval and #33/#96 boundaries.",
+      "review_method": "Direct AI reading of fetched original numbered physical source; not independent human certification."
+    }
+  ],
+  "trace": {
+    "imports": [
+      "unittest",
+      "tempfile",
+      "pathlib",
+      "zipfile",
+      "importlib.util"
+    ],
+    "implementation": "scripts/release/package-immutable-function.py",
+    "implementation_blob": "33c82c72907d732c11e08017efc01dd562315799",
+    "positive": "sha256, ZIP byte determinism, exact ZIP entry name",
+    "negative": "missing source ValueError",
+    "coverage_limits": "Synthetic source and mocked filesystem do not test ZIP payload, unsafe symbolic link, real release artifact signatures, Git-source authorization, CI publisher, real Netlify/provider or member data."
+  },
+  "findings": [
+    {
+      "severity": "LOW_TEST_COVERAGE_ONLY",
+      "status": "TRIAGED_NO_ACTIVE_BUG_REPRODUCED",
+      "line": 11,
+      "detail": "Archive entry name is checked, not its uncompressed bytes/metadata; actual source packager writes inspected raw source bytes; no demonstrated runtime failure."
+    },
+    {
+      "severity": "LOW_PORTABILITY_HYPOTHESIS",
+      "status": "UNREPRODUCED",
+      "line": 2,
+      "detail": "Import spec path is cwd-relative; CI runner may start in repo root; nonroot invocation not tested."
+    }
+  ],
+  "tests": {
+    "python_unittest": "NOT_RUN_DOCS_ONLY",
+    "node_lint_build": "NOT_RUN_DOCS_ONLY",
+    "browser_mobile_sql_auth_provider": "NOT_RUN_DOCS_ONLY",
+    "exact_pr_head_governance": "PENDING",
+    "exact_merged_source_governance": "NOT_RUN"
+  },
+  "credit": {
+    "new_postpin_physical_lines": 15,
+    "new_frozen": 0,
+    "new_pinned_original": 0,
+    "duplicate_positions": 0
+  },
+  "complete": false
+}
