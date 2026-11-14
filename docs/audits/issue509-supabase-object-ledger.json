@@ -4144,6 +4144,21 @@
       "new_defects": 0,
       "production_writes": 0,
       "next": "Provider drift, numeric ranks881-960"
+    },
+    {
+      "run": 236,
+      "prewrite_development_sha": "df270180a4396c3a79435f579a0513c55296a608",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-pgss-numeric-drift-2026-11-14-run236-rank881-960.json",
+      "prior_distinct": 873,
+      "numeric_rows": 80,
+      "new_distinct": 79,
+      "overlap": 1,
+      "cumulative_distinct": 952,
+      "first_time_source_word_credit": 0,
+      "production_writes": 0,
+      "confirmed_new_defects": 0,
+      "next": "Provider drift; numeric ranks 961-1040; hosted HTTP/Auth UNVERIFIED"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -19757,5 +19772,38 @@
     "governance_ci": "UNVERIFIED_POSTCOMMIT",
     "baseline_complete": false,
     "next_cursor": "Drift then numeric pg_stat_statements ranks881-960; hosted HTTP/JWT/PostgREST/Auth UNVERIFIED under #96."
+  },
+  "provider_pgss_continuation_run236": {
+    "run": 236,
+    "preflight_initial_sha": "aa233ab37129550416aa7a3cbde188399cb4993e",
+    "prewrite_development_sha": "df270180a4396c3a79435f579a0513c55296a608",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt": "docs/audits/issue509-pgss-numeric-drift-2026-11-14-run236-rank881-960.json",
+    "receipt_blob_sha": "7ec11be77c6e914803cb9a82f2b0dc2460a81f39",
+    "numeric_rank_range": [
+      881,
+      960
+    ],
+    "numeric_rows": 80,
+    "prior_distinct": 873,
+    "new_distinct": 79,
+    "overlap": 1,
+    "cumulative_distinct": 952,
+    "app_function_ordered_md5": "4bfc78411475d7b7c9699c6c8a8f757d",
+    "app_tables": 52,
+    "app_functions": 114,
+    "app_policies": 41,
+    "applied_migrations": 69,
+    "active_edge_functions": 5,
+    "legacy_directory": "RETIRED_WITH_ARCHIVES",
+    "confirmed_new_defects": 0,
+    "justified_deletions": 0,
+    "first_time_source_word_credit": 0,
+    "provider_writes": 0,
+    "app_code_test_ci_writes": 0,
+    "functional_tests": "NOT_RUN_DOCS_ONLY",
+    "governance_ci": "UNVERIFIED_POSTCOMMIT",
+    "baseline_complete": false,
+    "next_cursor": "Provider drift; numeric ranks 961-1040; hosted Auth/JWT console-only UNVERIFIED"
   }
 }
