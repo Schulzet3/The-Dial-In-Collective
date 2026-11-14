@@ -3228,3 +3228,10 @@ Risk classification: validation integrity / LOW; no established member data leak
 DIC_PREFLIGHT_VERIFIED development_sha=7607c69f62f65979079fd02a0d25f4b7653a2303 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
 Corrected both valid one- and two-control fixture checks to explicitly FAIL on SQL NULL result. A NULL `got` value otherwise makes three-valued JSON comparisons UNKNOWN and a PL/pgSQL `IF` can silently skip the expected failure. Source migration unchanged; new test is now sensitive to accidentally missing recommendation context, not only rejected malformed controls. Synthetic temp-table transaction remains isolated to disposable `dic_ci`, with no production/provider writes. Exact-source SQL, security, Node22 and approval CI MUST be checked on this new commit; earlier `7607c69f62f65979079fd02a0d25f4b7653a2303` pipeline is superseded, not accepted as evidence. Source remains TESTING pending pass.
+
+
+### Run240 queue intake repair after exact CI HOLD — code remains TESTING [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=719afad75889bf040e729ab4ff9d33cfe0716491 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+Actual exact prior branch `719afad75889bf040e729ab4ff9d33cfe0716491` approval job `43591882138` FAILED intake gate: `Untracked app change; add an IN_PROGRESS/TESTING/READY queue item: supabase/migrations/20261114115000_dic_recommendation_context_null_control_guard.sql`. This is a legitimate omitted queue-record defect, not proof the SQL fix is incorrect. Repaired with a single scoped `TESTING` row `DIC-Q-509-recommendation-context-null-control-guard` covering the unchanged additive migration; existing 353 queue entries/states and all release history preserved. Exact source isolated SQL regression run `43591859535` SUCCESS includes migration-baseline, isolated PostgreSQL17, signed JWT/owner HTTP and backup snapshot steps; other exact-source checks pending. Recheck fresh push approval, Node22 and privacy/security before READY. No production/provider/deploy/backup writes, no new Publish authority.
