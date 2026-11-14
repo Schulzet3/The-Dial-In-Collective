@@ -443,10 +443,6 @@ function normalized(field,value,{allowFlavorProse=false,allowAnonymousProducer=f
  // "Family business with three generations of experience" is not a
  // named supplier. Do not infer the producer from a roaster biography.
  if(field==='producer'&&/^(?:a\s+)?family\s+business\s+with\s+(?:\d+|one|two|three|four|five)\s+generations?\s+of\b/iu.test(s))return '';
- // "Farm: 400 smallholder farms" counts anonymous contributors and is not a
- // named estate/cooperative. Keep raw literal in selected Source Review.
- // Do not reject actual named groups like "FFESICH Cooperative".
- if(field==='producer'&&/^\d{1,3}(?:,?\d{3})?\s+(?:(?:small[ -]?holder|small|family|local|independent|regional)\s+){0,3}(?:farms?|farmers?|growers?|families|producers?|cooperatives?)$/iu.test(s))return '';
  // Indefinite quantities ("some of the top farms and small producers") do not
  // identify a real grower, co-op or named supplier. Keep the merchant claim
  // in source evidence for review without canonical producer promotion.
@@ -634,6 +630,15 @@ function addField(fields,rawKey,value,{literalAnonymousProducer=false}={}){
  // supported canonical key just because its display synonym is absent.
  const key=Object.hasOwn(FIELD_ALIASES,rawKey)?rawKey:LOOKUP.get(keyOf(rawKey));
  if(!key)return;
+ // A product's **Farm** caption with only a head-count has no named
+ // farm to assign. But explicitly printed Producer: 850 smallholder farmers
+ // and qualified narrative collective credits remain valid locked behavior.
+ // Keep the Farm literal in the source evidence for owner review.
+ if(key==='producer'&&/^(?:farm|farms|finca)$/i.test(String(rawKey).trim())&&
+    /^\d{1,3}(?:,?\d{3})?\s+(?:(?:small[ -]?holder|small|family|local|independent|regional)\s+){0,3}(?:farms?|farmers?|growers?|families|producers?|cooperatives?)$/iu.test(String(value||'').trim())){
+  rememberCoffeeReviewCandidate(fields,key,String(value).trim(),'Unnamed counted farm suppliers');
+  return;
+ }
  if(key==='origin'){
   const place=labeledFarmLocation(rawKey,value);
   if(place){
@@ -1563,8 +1568,11 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   // identifies a processor, not its anonymous contributing growers.
   // Keep the station's source role reviewable; do not silently promote it
   // to a canonical named farmer unless independently labelled as producer.
-  if(key==='producer'&&/\b(?:washing|processing|drying)\s+(?:station|mill)\b/iu.test(String(value))){
-   rememberCoffeeReviewCandidate(fields,'producer',value,'Named processing facility, grower not published');
+  const countedFarm=productCoffeeProse(canonicalProduct,clean).some(block=>
+   /^(?:farm|farms|finca)\s*[:：]\s*\d{1,3}(?:,?\d{3})?\s+(?:(?:small[ -]?holder|small|family|local|independent|regional)\s+){0,3}(?:farms?|farmers?|growers?|families|producers?|cooperatives?)\b/iu.test(block.text));
+  if(key==='producer'&&countedFarm&&
+     /\b(?:washing|processing|drying)\s+(?:station|mill)\b/iu.test(String(value))){
+   rememberCoffeeReviewCandidate(fields,'producer',value,'Facility receives from separately counted anonymous farms (review only)');
    continue;
   }
   addField(fields,key,value,{literalAnonymousProducer:key==='producer'&&narrative.literal_anonymous_producer===value});markNarrativeIdentity(fields,key);

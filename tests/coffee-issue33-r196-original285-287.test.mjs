@@ -104,3 +104,16 @@ test('#287 two contrary directly printed Flavor labels cannot be rescued by a su
  assert.ok(!p.fields?.tasting_notes,'two incompatible labels cannot become a single canonical list');
  assert.ok(p.conflicts?.includes('tasting_notes'),'source must surface unresolved flavor contradiction');
 });
+
+test('existing explicit Producer count remains an allowed literal collective',()=>{
+ const detail=worka.replace('Farm: 400 smallholder farms','Producer: 850 smallholder farmers');
+ const p=selected(286,detail);
+ assert.equal(p.ok,true);
+ assert.equal(p.fields?.producer,'850 smallholder farmers');
+});
+test('a station-only own-product narrative without a contradictory counted Farm keeps its sourced station credit',()=>{
+ const detail=worka.replace('Farm: 400 smallholder farms','Altitude: 2000-2200 masl');
+ const p=selected(286,detail);
+ assert.equal(p.ok,true);
+ assert.match(String(p.fields?.producer||''),/Worka Sakaro Washing Station/i);
+});
