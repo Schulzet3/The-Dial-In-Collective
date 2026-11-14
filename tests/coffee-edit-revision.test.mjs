@@ -50,7 +50,8 @@ test('reusing a verified coffee retains a newly imported variety in an explicit 
  assert.equal(value(f.app.shown.html,'variety'),'Bourbon Ají');
  assert.equal(value(f.app.shown.html,'name'),'Corrected Coffee Name');
  assert.equal(value(f.app.shown.html,'source_url'),'https://example.invalid/products/current');
- assert.match(f.app.shown.html,/Your coffee was added/);
+ assert.match(f.app.shown.html,/Review differences/);
+ assert.match(f.app.shown.html,/data-action="choose-coffee-difference"/);
  assert.match(f.app.shown.html,/Submit Correction For Review/);
  assert.equal(f.raw.coffees[0].variety,undefined);
 });
@@ -61,7 +62,8 @@ test('imported differences preserve nonempty approved facts and pending member c
  assert.equal(value(f.app.shown.html,'origin'),'Member origin');
  assert.equal(value(f.app.shown.html,'variety'),'Member cultivar');
  assert.equal(value(f.app.shown.html,'producer'),'New grower');
- assert.match(f.app.shown.html,/Submitted: Other cultivar/);
+ assert.match(f.app.shown.html,/data-difference-source="submitted"/);
+ assert.match(f.app.shown.html,/>Other cultivar<\/button>/);
  assert.equal(f.app.editCoffeeRevision,12);
 });
 test('unchanged descriptive facts do not open a correction or propose identity changes',()=>{

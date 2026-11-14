@@ -2,8 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {
- coffeeUrlPreviewMarkup,applyCoffeeConflictChoice,
- markCoffeeConflictChoices,applyCoffeeUrlFields,applyCoffeeRoastVariant,elevationWithDefaultMeters
+ coffeeUrlPreviewMarkup,coffeeUrlCompactPreviewMarkup,applyCoffeeConflictChoice,applyCoffeeSubmittedDifference,
+ markCoffeeConflictChoices,markCoffeeSubmittedDifferences,coffeeSourceReviewSnapshot,applyCoffeeUrlFields,applyCoffeeRoastVariant,elevationWithDefaultMeters
 } from '../site/cloud/coffee-url-autofill.js';
 
 const url='https://roaster.example.org/products/single-lot';
@@ -115,4 +115,76 @@ test('explicitly tapped conflict survives a subsequent roast-variant panel selec
  assert.equal(applyCoffeeRoastVariant(form,{fields:{roast_level:'Light'}},{fields:{roast_level:'Medium-Dark'}}),0);
  assert.equal(roast.value,'Light');
  assert.equal(roast.dataset.coffeeConflictChoiceValue,'Light');
+});
+
+test('post-add saved and submitted differences require a tap and change only the selected edit field',()=>{
+ const fields={origin:mk('Kenya'),process:mk('Natural','SELECT',['','Washed','Natural'])};
+ const form=makeForm(fields);
+ const differences=[{key:'origin',label:'Origin',current:'Kenya',submitted:'Costa Rica'},
+  {key:'process',label:'Process',current:'Natural',submitted:'Washed'}];
+ assert.deepEqual(applyCoffeeSubmittedDifference(form,differences,'origin','submitted'),
+  {applied:true,field:'origin',value:'Costa Rica',source:'submitted'});
+ assert.equal(fields.process.value,'Natural');
+ assert.deepEqual(applyCoffeeSubmittedDifference(form,differences,'process','submitted'),
+  {applied:true,field:'process',value:'Washed',source:'submitted'});
+ assert.equal(applyCoffeeSubmittedDifference(form,differences,'origin','saved').value,'Kenya');
+ assert.deepEqual(fields.origin.events,['change','change']);
+});
+test('post-add taps reject fabricated fields and unsupported dropdown choices; empty saved values can be restored',()=>{
+ const fields={origin:mk('Original'),roast_level:mk('Medium','SELECT',['','Light','Medium'])},form=makeForm(fields);
+ const diffs=[{key:'origin',current:'',submitted:'Costa Rica'},{key:'roast_level',current:'Medium',submitted:'Custom Dark'}];
+ assert.equal(applyCoffeeSubmittedDifference(form,diffs,'name','submitted').applied,false);
+ assert.equal(applyCoffeeSubmittedDifference(form,diffs,'origin','not-a-source').applied,false);
+ assert.equal(applyCoffeeSubmittedDifference(form,diffs,'roast_level','submitted').reason,'unsupported_option');
+ assert.equal(fields.roast_level.value,'Medium');
+ assert.equal(applyCoffeeSubmittedDifference(form,diffs,'origin','saved').value,'');
+ assert.equal(fields.origin.value,'');
+});
+test('post-add selected state follows explicit choice, not later manual edits',()=>{
+ const fields={origin:mk('Kenya')},form=makeForm(fields);
+ const differences=[{key:'origin',current:'Kenya',submitted:'Ethiopia'}];
+ const buttons=['saved','submitted'].map(source=>({dataset:{differenceField:'origin',differenceSource:source},
+  attrs:[],setAttribute(name,value){this.attrs.push({name,value});}}));
+ const panel={querySelectorAll:()=>buttons};
+ markCoffeeSubmittedDifferences(panel,form,differences);
+ assert.equal(buttons[1].attrs.at(-1).value,'false');
+ applyCoffeeSubmittedDifference(form,differences,'origin','submitted');
+ markCoffeeSubmittedDifferences(panel,form,differences);
+ assert.equal(buttons[1].attrs.at(-1).value,'true');
+ fields.origin.value='Member edit';
+ markCoffeeSubmittedDifferences(panel,form,differences);
+ assert.equal(buttons[1].attrs.at(-1).value,'false');
+});
+test('preview eliminates repeated details and source-download UI while retaining original evidence',()=>{
+ const result={...choice('origin',['Ethiopia','Kenya']),
+  fields:{name:'Lot X',roaster:'Roaster X',origin:'Ethiopia',process:'Natural'},
+  source_facts:[{label:'Published process',value:'Natural',field:'process',source_url:url,source_type:'html'}],
+  roaster_recipe:{ratio:2.5},match:{classification:'needs_confirmation'}};
+ const html=coffeeUrlCompactPreviewMarkup(result);
+ assert.match(html,/Review conflicting details|Tap a value to fill its field/);
+ assert.match(html,/Roaster's published espresso reference/);
+ assert.match(html,/A similar verified coffee exists/);
+ assert.doesNotMatch(html,/Published source information|Download Source Review|The webpage is not yet a verified official source/);
+ assert.doesNotMatch(html,/<dl class="coffee-url-fields">/);
+ const snapshot=coffeeSourceReviewSnapshot(result,{checkedAt:'2026-11-14T00:00:00Z'});
+ assert.equal(snapshot.published_source_information[0].value,'Natural');
+ assert.equal(snapshot.roaster_espresso_reference.ratio,2.5);
+});
+test('post-add comparison buttons are delegated and never auto-submit',()=>{
+ const main=readFileSync(new URL('../site/cloud/main.js',import.meta.url),'utf8');
+ const start=main.indexOf("if(a==='choose-coffee-difference')");
+ const end=main.indexOf("if(a==='choose-coffee-conflict')",start);
+ assert.ok(start>=0&&end>start);
+ const handler=main.slice(start,end);
+ assert.match(main,/data-action="choose-coffee-difference"/);
+ assert.match(main,/coffeeUrlCompactPreviewMarkup\(/);
+ assert.doesNotMatch(main,/coffeeUrlPreviewMarkup\(/);
+ assert.match(main,/data-difference-field=/);
+ assert.match(main,/aria-pressed="false"/);
+ assert.match(handler,/panel\.contains\(target\)/);
+ assert.match(handler,/applyCoffeeSubmittedDifference\(/);
+ assert.doesNotMatch(handler,/mutate\(|submit\(|finishCoffeeAdd\(/);
+ const css=readFileSync(new URL('../site/visual.css',import.meta.url),'utf8');
+ assert.match(css,/\.coffee-difference-choice\{[^}]*min-height:48px/);
+ assert.match(css,/\.coffee-difference-choice\[aria-pressed="true"\]/);
 });
