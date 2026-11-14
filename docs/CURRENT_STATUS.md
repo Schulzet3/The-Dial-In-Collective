@@ -1,3 +1,11 @@
+## November 14, 2026 UTC — Issue #33 R209 original #313/#314 current ink! source-bound narrow verification (DEVELOPMENT ONLY) [skip netlify]
+
+- Immutable mandatory PREFLIGHT rechecked at live `6a16707f3f431a9d17d11f27223b88d60bbd4239` Git blob `2fb236bbfa6bac48513eeb3bd157b260853af06d` before new docs write. Original 603 coffee/201 roasters/1,197 captures/oracle/scorer unchanged.
+- [PR #2761](https://github.com/Schulzet3/The-Dial-In-Collective/pull/2761) source/test/scope safely nonforce merged `db45e07cc5ddc58a2f816958373e08f46a090b00`; current exact official #313 **6610** is roaster **facility altitude**, not farm elevation, `Special Dark` maps Dark; current #314 **Espresso 89** exact `Trade Secret` roast cannot be filled; no Italian origin from espresso style or sibling/SEO leakage. Five focused parser/hostile tests and source raw-H1/parser/Add Coffee/Source Review [merged 43639470727](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/43639470727) SUCCESS. [Merged Node/lint 43639470726](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/43639470726) SUCCESS **4,886 PASS, 0 FAIL, 6 SKIP**; cloud/mobile, approval, Python SUCCESS. Initial checker unused catch variable lint failure repaired without runtime parser edits; broad frozen603 **SKIPPED / NOT certified**, no signed-in GoTrue/device claims.
+- Two current original selected cases **narrowly verified** only; no queue/approval promotions, #33 OPEN, #267/#96 separate. Audit `docs/audits/issue33-original603-r209-ink-313-314-merged-verified-20261114.json`; next source #315/#316. No Netlify publish, provider/member data operations or backups.
+
+---
+
 ## November 14, 2026 UTC — #33 R208 original #311 current selected named producer repair READY (DEVELOPMENT ONLY; parent OPEN) [skip netlify]
 
 - Mandatory immutable PREFLIGHT first at `ed3df9221614d9d2d3ab5c254a67215d7956951e`, independently byte-verified Git blob `2fb236bbfa6bac48513eeb3bd157b260853af06d`. Reviewed PR #2757 safely nonforce merged `ed3df9221614d9d2d3ab5c254a67215d7956951e`; five reviewed PR-head code/test/workflow/journal blobs identical to merged.
