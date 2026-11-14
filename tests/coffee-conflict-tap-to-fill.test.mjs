@@ -22,8 +22,8 @@ test('conflicting sources render accessible touch choices and separate cited sou
  assert.match(html,/type="button"/);
  assert.match(html,/aria-label="Use Colombia for Origin"/);
  assert.match(html,/View Original Source/);
- assert.match(html,/Nothing was selected automatically/);
- assert.match(html,/Nothing is saved until Add Coffee/);
+ assert.match(html,/Tap the correct option to autofill, or type a value in the field/);
+ assert.doesNotMatch(html,/Review conflicting details|These published readings disagree|Nothing was selected automatically|Nothing is saved until Add Coffee/);
  assert.ok(html.includes('&lt;img'));
  assert.doesNotMatch(html,/<img\b|onerror="/);
  assert.doesNotMatch(html,/data-conflict-value=|data-action="apply-coffee-url"/);
@@ -161,7 +161,7 @@ test('preview eliminates repeated details and source-download UI while retaining
   source_facts:[{label:'Published process',value:'Natural',field:'process',source_url:url,source_type:'html'}],
   roaster_recipe:{ratio:2.5},match:{classification:'needs_confirmation'}};
  const html=coffeeUrlCompactPreviewMarkup(result);
- assert.match(html,/Review conflicting details|Tap a value to fill its field/);
+ assert.match(html,/Tap the correct option to autofill, or type a value in the field/);
  assert.match(html,/Roaster's published espresso reference/);
  assert.match(html,/A similar coffee already exists/);
  assert.doesNotMatch(html,/Unverified Page|Official Source Preview|Approved Catalog|coffee-source-label/);

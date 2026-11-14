@@ -14064,25 +14064,53 @@
       "notes": "READY development ONLY, NOT DEPLOYED. Source-status badge entirely absent from New Coffee URL preview; a single neutral Autofill Results heading and clear conflict/metadata warnings remain. Source/match/correction messages no longer imply roaster registration/approval. Universal best-effort any-roaster URL intake, internal source provenance/attestations, product/release distinction, safe private Pending and shared Community gating, Auth, TLS/SSRF, quotas, shots/notes/offline history unchanged. Exact PR-head 5/5 and merged Node/mobile/approval SUCCESS; independent #33 live original241 external-source probe failed, scoped to #33 and explicitly recorded. Prior READY #2621 remains READY; overlapping changes are jointly present in merged tested code, future Publish must use isolated exact READY bytes. NEW owner Publish required."
     },
     {
+      "id": "DIC-Q-2640-coffee-conflict-copy-one-line",
+      "issue": 2640,
+      "title": "Replace long source-conflict heading/paragraph with exact one-line tap-to-fill guidance",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": null,
+      "pr": null,
+      "scope_paths": [
+        "site/cloud/coffee-url-autofill.js"
+      ],
+      "owner_source": "Owner Nov14 exact one-line UI instruction; Locked UX-COFFEE-CONFLICT-COPY-ONE-LINE-20261114; live preflight e8d926639b830740ef949481c348979d2283d19c / 2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "ci_runs": [],
+      "tests": [
+        "Visible compact + full diagnostic display exact owner wording, no old title, retain sourced interactive options and original source links; update 77-case, source-hierarchy, physical examples and all four previously stale heading assertions.",
+        "Previous PR #2636 cadcb1a: four of five required CI PASS (approval 43576814950, security 43576814962, SQL 43576814936, browser/cloud 43576814957); full Node 43576814979 FAILED 4 stale copy assertions, 4,770 PASS, 4 FAIL, 6 SKIP. Earlier badge PR #2634 had 5/5 PASS and has its own READY source; no double-credit."
+      ],
+      "blockers": [
+        "Exact new candidate five CI and nonforce merge/merged-source verification pending."
+      ],
+      "notes": "New later UI copy only. Independently READY #2633 unchanged. Exact original sentence replaces prior heading+paragraph, no automatic conflict choice/save. Maintain safety and source provenance, shared/private semantics, Auth/privacy/offline/history/Community. No Publish/production provider writes."
+    },
+    {
       "id": "DIC-Q-455-r253-slow-feed-recommendation-use-attribution",
       "issue": 455,
-      "pr": null,
+      "pr": 2639,
       "title": "Discard stale Use Recommendation source attribution when Slow Feed mode changes",
       "state": "TESTING",
       "merged_source_sha": null,
       "scope_paths": [
         "site/cloud/main.js"
       ],
-      "owner_source": "Owner Issue #455 Option B SAFE recommendation provenance correction. Immutable preflight development_sha=e8d926639b830740ef949481c348979d2283d19c preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d; R252 evidence issuecomment 6874046695; no Locked changes.",
+      "owner_source": "Owner Issue #455 Option B SAFE provenance fix; live preflight 47b2ef9d1f06a4f776017ce4e10108085f20fb83, blob 2fb236bbfa6bac48513eeb3bd157b260853af06d; R252 source reproduction and R253 same-commit receipts.",
       "tests": [
-        "Six synthetic CloudApp + mapped shot + offline outbox regressions authored; UNRUN until exact PR-head CI.",
-        "Applicable Node22, CloudApp/Chromium/mobile/offline, isolated SQL/privacy/security, governance exact-source CI all PENDING; NOT PASS. Frozen603 untouched and NOT_APPLICABLE."
+        "Six direct CloudApp/mapping/offline Outbox synthetic positive and negative regressions PASS on first head; initial Node PASS 4779/0/6, overall failed only lint unused test import and corrected.",
+        "Corrected exact PR head 3bbaeb2351464ad8dfcace8147c7a370d154c9c8: Node/lint 43577305675 SUCCESS 4779 PASS/0 FAIL/6 SKIP; compiled cloud/mobile/offline 43577305657, isolated SQL 43577305693, security 43577305614, approval 43577305636 SUCCESS; original603 43577305679 SKIPPED not PASS.",
+        "Nonforce conflict-reconciled PR-head and merged-source CI PENDING. No READY claim."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        43577305675,
+        43577305657,
+        43577305693,
+        43577305614,
+        43577305636
+      ],
       "blockers": [
-        "Await exact source-bound applicable CI and non-force merged readback before READY."
+        "Await exact new merge-source CI, nonforce integration and merged-push verification before READY."
       ],
-      "notes": "No production deployment or published member-data claim; no recommendation numeric/food science alteration, five original taste inputs and measured/private history preserved. #267/#33/#96 separate; standalone S019 inaccessible.",
+      "notes": "Development-only safe provenance correction; no new numeric science, taste targets, data capture, provider writes, deployment or original member record mutation. #267/#33/#96 separate and S019 inaccessible.",
       "production_deployed": false
     }
   ],
