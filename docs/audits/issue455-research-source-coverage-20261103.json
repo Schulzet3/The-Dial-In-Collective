@@ -2525,6 +2525,21 @@
       "source_bytes_sha256": null,
       "source_byte_caveat": "Direct published original HTML read 2026-11-14 but HTML/PDF binary SHA256 not obtained; Table 2 cells, all figure pixels, repeated shots/holdout validation, source data and participant-level taste studies NOT independently reanalyzed. Do not promote computer vision segmentation proportion to validated consumer sensory inference.",
       "claims_verified_externally": "Author experimental setup 60 mL nominal espresso medium roast Agtron 55, 10 days after roast, iPhone 6 at 1150 +/-10% lux and 500x500 pixel preprocessing. GrabCut+filtering+transparency+K-means of crema RGB; round glass cup gave 97% brown crema-area proportion, other cups 71–97%, reported lighting/camera constraints. These are image area/processing results, not blinded sensory validation or five personal rating predictions. Paper compares crema RGB to roast Agtron tiles and offers under/normal/over categories and illustrative machine/time standards without a validated independent multi-coffee sensory reference dataset. Jetson Nano/laptop times are processing/visualization, not real-world taste accuracy. Full first-party article https://www.mdpi.com/2079-9292/13/4/800 §§3–5; declarations: no ethics/consent study, data contained within article."
+    },
+    {
+      "id": "LIT-2019-ORMAZA-DYNA-PRESSURE-BREWER-CUP",
+      "type": "external_primary_study",
+      "title": "The effect of pressure filtration coffee preparation methods (Coffea arabica L. var. Castillo) on antioxidant content and activity, and beverage acceptance",
+      "authors": "Angela María Ormaza-Zapata; Félix Octavio Díaz-Arango; Benjamín Alberto Rojano",
+      "published": "DYNA 86(209), pp. 261–270, 2019; original accepted May 6, 2019",
+      "doi": "10.15446/dyna.v86n209.75839",
+      "url": "https://revistas.unal.edu.co/index.php/dyna/article/download/75839/87969/631594?inline=1",
+      "access": "20261114_DIRECT_FULL_ORIGINAL_PUBLISHER_HTML_SECTIONS_1_TO_4_METHODS_RESULTS_AND_CONCLUSIONS; RAW_PDF_SHA_FIGURE_PIXELS_AND_INDIVIDUAL_EXPERT_SCORES_NOT_ACQUIRED",
+      "evidence_grade": "PRIMARY_BOUNDED_CHEMICAL_AND_3_EXPERT_TASTER_DESCRIPTIVE_RESEARCH_SINGLE_CASTILLO_COFFEE_FIVE_DIFFERENT_BREW_METHODS; NO_PERSONAL_ESPRESSO_NEXT_SHOT_VALIDATION",
+      "review_status": "R455-254_DIRECT_FULL_PRIMARY_HTML_METHODS_2_1_TO_2_12_RESULTS_3_1_TO_3_7_AND_REFERENCES_READ; ORAC_ABTS_DIFFERENCES_AND_N3_TASTE_PANEL_CHECKED",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Raw publisher PDF/HTML binary SHA256 not acquired. Original image figures, raw antioxidant data, individual panel ratings and independently replicated efficacy unreviewed. Do not infer verification or clinical benefit.",
+      "claims_verified_externally": "14g/75mL water INPUT (not espresso beverage yield), 90C nominal espresso, 400 microns; other brewers used different water/grind/time/equipment. Three expert tasters gave one descriptive rating each (n=3). ORAC vs ABTS chemical ranks not identical, no DIC five-rating next-shot intervention, no consumer efficacy."
     }
   ],
   "evidence_checks": [
@@ -7741,6 +7756,45 @@
       "owner_approval": false,
       "github267_literal_review_credit": 0,
       "date": "2026-11-14"
+    },
+    {
+      "id": "R455-EV-CIT-254-A",
+      "source": "LIT-2019-ORMAZA-DYNA-PRESSURE-BREWER-CUP",
+      "page_section": "Methods §2.4, Results §3.7 and Fig.7 caption",
+      "claim": "Three expert tasters each gave one rating of each brewer; aroma, acidity, bitterness, body, aftertaste, fragrance and overall impression. Staresso had top group mean overall impression in this one-coffee experiment. These three expert ratings are NOT validated personal preference predictions or a controlled next-shot intervention.",
+      "grade": "FIRST_PARTY_METHODS_N3_DESCRIPTIVE_SENSORY_DIRECT",
+      "factual_status": "LOW_EXTERNAL_VALIDITY_FOR_PERSONALIZED_FIVE_TASTE_AND_NEXT_SHOT_OUTCOME",
+      "current_app": "Current DIC engine/model/cloud retain independently rated five tastes, original shot measurements, style and feed-specific controls and calibration; pinned main.js ac1803d502624e164a7e641f96b4df8227b86ba9, engine.js 3e20904291231a9c5a5a86e6d004a95a5489c6d6, model.js fdc65f869546cddbb6552e555dca12117f2c47fc.",
+      "result": "NO_UNIVERSAL_PREFERENCE_OR_DIC_FIVE_INPUT_REPLACEMENT",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0,
+      "date": "2026-11-14"
+    },
+    {
+      "id": "R455-EV-CIT-254-B",
+      "source": "LIT-2019-ORMAZA-DYNA-PRESSURE-BREWER-CUP",
+      "page_section": "Methods §§2.1–2.3",
+      "claim": "Same Colombian Castillo medium-roast source prepared by five brewers using different equipment, input water volumes, particle sizes and contact times. Espresso is 14 g grounds, 75 mL INPUT hot water (~90C), fine nominal 400 micron. 75 mL is NOT measured beverage yield and cannot define an espresso ratio; stated 5-18 bar is equipment range, not a recorded shot-pressure experiment.",
+      "grade": "FIRST_PARTY_METHODS_CAUSALLY_CONFOUNDED_CROSS_BREWER",
+      "factual_status": "NOT_SINGLE_VARIABLE_ESPRESSO_STYLE_INTERVENTION",
+      "current_app": "Current DIC engine/model/cloud retain independently rated five tastes, original shot measurements, style and feed-specific controls and calibration; pinned main.js ac1803d502624e164a7e641f96b4df8227b86ba9, engine.js 3e20904291231a9c5a5a86e6d004a95a5489c6d6, model.js fdc65f869546cddbb6552e555dca12117f2c47fc.",
+      "result": "NO_ESPRESSO_RATIO_OR_PRESSURE_TARGET_INFERENCE",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0,
+      "date": "2026-11-14"
+    },
+    {
+      "id": "R455-EV-CIT-254-C",
+      "source": "LIT-2019-ORMAZA-DYNA-PRESSURE-BREWER-CUP",
+      "page_section": "Results §§3.2–3.7, Fig.6–7 and Conclusion",
+      "claim": "Reported ORAC and ABTS antioxidant rankings are not identical (ABTS Presso above Staresso, ORAC Staresso above Presso); separate 3-taster impressions are sensory rather than identical chemical outcomes. Lab phenolics or antioxidant activity cannot by themselves establish cup quality, health effects or app recommendation effectiveness.",
+      "grade": "ORIGINAL_LAB_AND_TINY_SENSORY_PANEL_WITHOUT_RAW_REANALYSIS",
+      "factual_status": "CHEMICAL_ASSAY_NOT_PERSONAL_CUP_QUALITY_OR_HEALTH_OUTCOME",
+      "current_app": "Current DIC engine/model/cloud retain independently rated five tastes, original shot measurements, style and feed-specific controls and calibration; pinned main.js ac1803d502624e164a7e641f96b4df8227b86ba9, engine.js 3e20904291231a9c5a5a86e6d004a95a5489c6d6, model.js fdc65f869546cddbb6552e555dca12117f2c47fc.",
+      "result": "NO_BETTER_TASTE_OR_NUTRITIONAL_CLAIM_FROM_ASSAYS",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0,
+      "date": "2026-11-14"
     }
   ],
   "policy_decisions_pending": [],
@@ -7929,24 +7983,24 @@
     "R455-242 completed narrow SAFE scalar new shot code/test merge 0095369dce8f651bbfdefe6fc3ed1c986883e44a PR #2518. Both exact PR and merged Node22 4631 PASS/0 FAIL/6 SKIP; head SQL/cloud/mobile/security/approval SUCCESS, merged cloud/mobile/governance SUCCESS. New model input validity now guarded; legacy saved ID replay, five tastes/notes preserved. Queue R242 READY DEV ONLY; no Netlify/production writes or owner policy changes. No new empirical cup quality validation; original S019 unavailable. Continue distinct #455 source claims and UX checks.",
     "R455-247: peer-reviewed Severini et al. 2016 original Wiley abstract directly checked: espresso shot chemistry varied at nominal constant grinder grade; 140 sources, 401 bounded checks, 203 proposals. Full paper/raw chemistry and S019 unavailable. No five-taste or intervention efficacy demonstrated. Optional single-change next-shot design must address shot-to-shot confounders/repeats and separate owner consent/data approval. Docs-only CI/merge needs exact readback; no #267 literal line credit, no app/production writes.",
     "R455-248: original Choi et al. Electronics 2024 direct first-party crema computer-vision study; one new source, +3 bounded primary claim checks, +1 P3 science-proxy proposal, 141/404/204. Reported 97% is segmented crema color area, not human taste accuracy or causal recommendation benefit. Original PDF binary/raw images/independent validation and S019 inaccessible; no app/taste/telemetry policy change. Verify docs-only CI, nonforce merge and exact readback. No #267 literal review credit.",
-    "R455-250: reconciled merged R249 sidecar against existing R455-023/R455-139 original full publisher methods and R455-PROP-102/139; four proposed check IDs map to already recorded atomic evidence; no duplicate papers, evidence checks, proposals or validated cup improvements counted (141/404/204 preserved). Rehashed Library slow-feed PDF variant v1 134777B SHA256 a068e5...; distinct archive member still unverified. S019 inaccessible; continue reproducible UX/citation gaps. Docs-only PR/CI/merge pending at authoring, no READY/deploy."
+    "R455-250: reconciled merged R249 sidecar against existing R455-023/R455-139 original full publisher methods and R455-PROP-102/139; four proposed check IDs map to already recorded atomic evidence; no duplicate papers, evidence checks, proposals or validated cup improvements counted (141/404/204 preserved). Rehashed Library slow-feed PDF variant v1 134777B SHA256 a068e5...; distinct archive member still unverified. S019 inaccessible; continue reproducible UX/citation gaps. Docs-only PR/CI/merge pending at authoring, no READY/deploy.",
+    "R455-254 canonical integration: source Ormaza-Zapata 2019 DYNA primary original, three bounded method/sensory/chemistry checks and one P3 no-app-change proposal, intended 142/407/205. Full original paper HTML reviewed, raw plots/taster data/PDF SHA not obtained. S019 standalone unreviewed, no #267 literal credit, no member taste-effect evaluation. Merge/docs governance requires independent readback."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-250",
-    "starting_preflight_development_sha": "48379dc5a6e34c1dc0b6d7e97c3392dea56b85bf",
-    "reverified_pre_write_development_sha": "c134eafe6ea5a3eeae9bde75dff4dc13826e2b3f",
+    "run_id": "R455-254",
+    "starting_preflight_development_sha": "9c22f1957a00f303d909616c8f07b7bfb6f89a0d",
+    "reverified_pre_write_development_sha": "bf9eb95e12da9a9e4d11e19f15ce55b941fd7424",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "phase": "R249_TEP_SIDECAR_DE_DUPLICATED_CANONICAL_CROSSWALK_AND_SLOWFEED_LIBRARY_BYTES_RECHECK",
+    "phase": "FIRST_PARTY_2019_PRESSURE_BREWER_CHEMISTRY_AND_THREE_EXPERT_PANEL_CITATION_CHECK",
     "source_counts": {
-      "research_project_source_records": 141,
-      "bounded_evidence_checks": 404,
-      "proposals": 204
+      "research_project_source_records": 142,
+      "bounded_evidence_checks": 407,
+      "proposals": 205
     },
-    "source_access": "R249 original publisher full article already substantively reviewed in R455-139; Library slow feed PDF version1 same separately hashed bytes; standalone S019 inaccessible",
-    "original_s019": "INACCESSIBLE_CURRENT_GOOGLE_DRIVE_AND_LIBRARY_SEARCH_20261114",
+    "source_access": "Full original publisher HTML read; PDF/raw results and standalone S019 not acquired",
     "github267_literal_review_credit": 0,
-    "release_state": "RESEARCH_ONLY_NO_READY_NO_APP_CHANGE_NO_DEPLOYMENT",
-    "next": "Review distinct primary-source claim gaps or source-reproducible UI/mobile/accessibility issue; no duplicate TEP check credit"
+    "release_state": "RESEARCH_ONLY_NO_APP_POLICY_OR_PRODUCTION_CHANGE",
+    "next": "Exact docs-only CI/merge then continue reproducible Log Shot UX and unreviewed claims."
   },
   "policy_decisions_resolved": [
     {
@@ -12611,6 +12665,34 @@
       "production_deployed": false,
       "github267_literal_review_credit": 0,
       "exact_source": "8540727dbd2a14c8bf857e7127358cca248b164c"
+    },
+    {
+      "id": "R455-PROP-254-PRESSURE-BREW-CUP-COMPARISON-SCOPE",
+      "severity": "P3_SCIENCE_EXTRAPOLATION_NO_REPRODUCED_RUNTIME_BUG",
+      "source": [
+        "LIT-2019-ORMAZA-DYNA-PRESSURE-BREWER-CUP",
+        "ORG-08"
+      ],
+      "evidence": [
+        "R455-EV-CIT-254-A",
+        "R455-EV-CIT-254-B",
+        "R455-EV-CIT-254-C"
+      ],
+      "finding": "Original primary single-variety five-brewer lab/3-expert sensory comparison does not isolate within-espresso recommendation effectiveness; multiple brewing conditions differ and antioxidant assays are not personal taste.",
+      "evidence_grade": "DIRECT_ORIGINAL_PUBLISHER_FULL_HTML; RAW_PDF/FIGURES_EXPERT_SCORES_UNVERIFIED",
+      "source_provenance": "Ormaza-Zapata et al. DYNA 2019, DOI 10.15446/dyna.v86n209.75839, publisher https://revistas.unal.edu.co/index.php/dyna/article/download/75839/87969/631594?inline=1, separate R254 journal",
+      "user_benefit": "Avoid false scientific confidence and treating 75mL water input as measured shot yield or antioxidant results as improved espresso taste.",
+      "current_locked": "Five independent taste ratings, missing versus all-green, one controllable next change, original measured history/private notes, same-coffee evidence and Turbo/Fast-Flow/Slow-Feed/grinder boundaries unchanged.",
+      "current_app": "Current DIC engine/model/cloud retain independently rated five tastes, original shot measurements, style and feed-specific controls and calibration; pinned main.js ac1803d502624e164a7e641f96b4df8227b86ba9, engine.js 3e20904291231a9c5a5a86e6d004a95a5489c6d6, model.js fdc65f869546cddbb6552e555dca12117f2c47fc.",
+      "proposed_change": "SAFE research record only; prohibit extrapolation to numeric target, universal brewer preference or user data capture. New behavior/experiment would need separate explicit owner approval.",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "R455-254_PRIMARY_STUDY_CANONICAL_RESEARCH_ONLY_NO_APP_CHANGE",
+      "test_plan": "Full JSON parse, 141/404/204 original ordered records preserved, appended 1 source/3 checks/1 proposal with unique IDs, PR source-bound approval and merged blob readback. App Node22, browser/offline, SQL/Auth, original603 and member quality tests NOT RUN.",
+      "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY_NO_READY",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0,
+      "exact_source": "bf9eb95e12da9a9e4d11e19f15ce55b941fd7424"
     }
   ],
   "changeScope": {
