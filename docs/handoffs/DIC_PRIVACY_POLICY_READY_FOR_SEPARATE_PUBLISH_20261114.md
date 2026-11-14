@@ -1,3 +1,5 @@
+**DEPLOYED update — DIC-20261114-READY6-03 (November 14, 2026):** This document is a historical source-READY handoff, not an outstanding Publish request. Owner subsequently authorized release of all READY; tested source `ed82fc7aed52b8c8bfac8a348133011b554f1c0b`, GitHub controller `43613190684` SUCCESS, one-use release `5359d78c303f15231225282536cb6d1efa11beca`, Netlify deploy `6af885b8493af594f3ae403d` READY/current 2026-11-14T16:01:18.662Z. The packaged privacy file `privacy/index.html` is recorded in the deploy, but independent live HTTPS 200 and Google OAuth console approval were **not checked**. All old READY/NOT DEPLOYED text below is historical.
+
 # The Dial In Collective — privacy policy READY for separate owner Publish
 
 **Date:** November 14, 2026. **Repository:** `Schulzet3/The-Dial-In-Collective`. **Owner authorization:** Build and READY only; publication is NOT authorized in this chat.
