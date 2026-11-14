@@ -2510,6 +2510,21 @@
       "current_app_crosswalk": "Development f4ee3acc26183d32134f893d3af74e06f8f0f442: engine.js 3e20904291231a9c5a5a86e6d004a95a5489c6d6, constants.js d3559dc1c9560c4d68fbcad1dc91e3a792a100a2, model.js fdc65f869546cddbb6552e555dca12117f2c47fc, community-evidence.js 2f4c8e2d473d767445369af5af810aa473722aec. DIC uses five self-reported taste scales and same-coffee personal context; no chemical/PSD sensor or experimentally proven quality outcome.",
       "reviewed_date_utc": "2026-11-14",
       "implementation_status": "RESEARCH_ONLY_NO_NEW_APP_POLICY_NUMERIC_HEURISTIC_OR_MEMBER_DATA_CHANGE"
+    },
+    {
+      "id": "LIT-2024-CHOI-LEE-KANG-SUH-CREMA-CV",
+      "type": "external_primary_study",
+      "title": "Lightweight Machine Learning Method for Real-Time Espresso Analysis",
+      "authors": "Jintak Choi, Seungeun Lee, Kyungtae Kang, Hyojoong Suh",
+      "published": "2024-02-19",
+      "doi": "10.3390/electronics13040800",
+      "url": "https://www.mdpi.com/2079-9292/13/4/800",
+      "access": "20261114_DIRECT_ORIGINAL_PUBLISHER_FULL_HTML_SECTIONS_1_TO_5_APP_A_C_AND_DATA_AVAILABILITY_READ; original PDF bytes SHA256, Supplementary Video S1, source code, raw photo set and external validation NOT obtained",
+      "evidence_grade": "PEER_REVIEWED_PRIMARY_ENGINEERING_PROOF_OF_CONCEPT_CV_CREMA_SEGMENTATION_SINGLE_NOMINAL_MEDIUM_ROAST_CAPTURE_PROTOCOL; NOT_VALIDATED_HUMAN_ESPRESSO_TASTE_OR_RECOMMENDATION_EFFECTIVENESS",
+      "review_status": "R455-248_SUBSTANTIVE_DIRECT_PRIMARY_PUBLISHER_METHODS_4_1_TO_4_4_RESULTS_CONCLUSIONS_FUNDING_READ; TABLE_CAPTIONS_AND_TEXT_RESULTS_CHECKED; FIGURE_PIXELS_RAW_IMAGE_SET_AND_VIDEO_UNREVIEWED",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Direct published original HTML read 2026-11-14 but HTML/PDF binary SHA256 not obtained; Table 2 cells, all figure pixels, repeated shots/holdout validation, source data and participant-level taste studies NOT independently reanalyzed. Do not promote computer vision segmentation proportion to validated consumer sensory inference.",
+      "claims_verified_externally": "Author experimental setup 60 mL nominal espresso medium roast Agtron 55, 10 days after roast, iPhone 6 at 1150 +/-10% lux and 500x500 pixel preprocessing. GrabCut+filtering+transparency+K-means of crema RGB; round glass cup gave 97% brown crema-area proportion, other cups 71–97%, reported lighting/camera constraints. These are image area/processing results, not blinded sensory validation or five personal rating predictions. Paper compares crema RGB to roast Agtron tiles and offers under/normal/over categories and illustrative machine/time standards without a validated independent multi-coffee sensory reference dataset. Jetson Nano/laptop times are processing/visualization, not real-world taste accuracy. Full first-party article https://www.mdpi.com/2079-9292/13/4/800 §§3–5; declarations: no ethics/consent study, data contained within article."
     }
   ],
   "evidence_checks": [
@@ -7687,6 +7702,45 @@
       "owner_approval": false,
       "github267_literal_review_credit": 0,
       "date": "2026-11-14"
+    },
+    {
+      "id": "R455-EV-CIT-248-A",
+      "source": "LIT-2024-CHOI-LEE-KANG-SUH-CREMA-CV",
+      "page_section": "Original publisher full HTML §§3.1–3.2, 4.1–4.2, Appendix B; apparatus and sample descriptions",
+      "claim": "Experimental system segments smartphone crema images via GrabCut, transparency/filtering and K-means RGB after resizing; selected 60 mL round glass cup, one nominal medium Agtron-55 roast rested 10 days and 1150 ±10% lux lighting. Authors explicitly note camera angle/reflections/background problems; limited apparatus and photo domain do not prove applicability to arbitrary coffees/cups/users.",
+      "grade": "FIRST_PARTY_PUBLISHED_FULL_METHODS_TEXT; RAW_IMAGE_BYTES_REPLICATES_AND_FIGURE_PIXELS_UNVERIFIED",
+      "factual_status": "VERIFIED_STUDY_SPECIFIC_CV_PREPROCESSING_AND_LIMITED_CAPTURE_SETUP",
+      "current_app": "No crema photo or RGB input is an approved/current dependency of Log Shot → Rate → Recommendation; keep five entered ratings and actual measurements",
+      "result": "RESEARCH_ONLY_NO_AUTOMATIC_CREMA_SENSOR_OR_NEW_USER_PHOTO_CAPTURE",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0,
+      "date": "2026-11-14"
+    },
+    {
+      "id": "R455-EV-CIT-248-B",
+      "source": "LIT-2024-CHOI-LEE-KANG-SUH-CREMA-CV",
+      "page_section": "Original publisher HTML §§4.2.1–4.4.2 and Figures 7–8 captions",
+      "claim": "Reported 71–97% crema-area coverage (97% in round glass) is the fraction of segmented region classified as brown crema, NOT 97% accurate identification of well-extracted espresso or blinded human taste; reported 96.7%/97.5% valid color areas under two lighting setups are similarly coverage metrics, without independent taste labels.",
+      "grade": "DIRECT_AUTHOR_RESULTS_AND_METRIC_DEFINITION_WITH_CAPTIONS; RAW_IMAGES_CONFUSION_MATRIX_AND_INDEPENDENT_PANEL_NOT_AVAILABLE",
+      "factual_status": "SEGMENTATION_METRIC_NOT_SENSORY_CLASSIFICATION_ACCURACY",
+      "current_app": "Current user-centric five-scale taste entry and missing vs completed distinction are not replaced with confidence from external crema segmentation results",
+      "result": "DO_NOT_USE_COVERAGE_PERCENT_AS_APP_CONFIDENCE_OR_OPTIMAL_ESPRESSO_EFFICACY",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0,
+      "date": "2026-11-14"
+    },
+    {
+      "id": "R455-EV-CIT-248-C",
+      "source": "LIT-2024-CHOI-LEE-KANG-SUH-CREMA-CV",
+      "page_section": "Original publisher HTML §§4.3, 4.4.2–4.4.4, 5 Conclusion, Funding/IRB/Data Availability",
+      "claim": "Authors use roast-bean Agtron color tiles as a reference for crema RGB and suggest universal extraction settings/color categories; experiment does not directly validate personal five-taste preference, extraction chemical yield, controlled single-variable next-shot improvement or a randomized independent coffee/roast/camera holdout. No human sensory-panel evaluation described; no new pressure/time policy follows.",
+      "grade": "FIRST_PARTY_EXPERIMENTAL_ENDPOINT_AND_CONCLUSION_BOUNDED; INFERENCE_OF_NONVALIDATION_FROM_REPORTED_DESIGN_NOT_EXTERNAL_DISPROOF",
+      "factual_status": "VISUAL_COLOR_HEURISTIC_NOT_PERSONAL_SENSORY_OR_CAUSAL_VALIDATION",
+      "current_app": "Approved existing per-coffee history, five independent ratings, one controllable change, separate Turbo/Fast-Flow and feed modes, calibrated grinder and Community/privacy unchanged",
+      "result": "NO_UNIVERSAL_CREMA_RGB_GRIND_TIME_TEMP_RULE_OR_CONFIDENT_CUP_IMPROVEMENT_CLAIM",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0,
+      "date": "2026-11-14"
     }
   ],
   "policy_decisions_pending": [],
@@ -7873,24 +7927,25 @@
     "R455-240: two 2019 original indexed studies of BREWED coffee consumption temperature; 2 bounded publications + 3 claim checks +1 P3 evidence design proposal; 136/384/196 candidate at authoring. Control tasting-temperature/delay only as future separately approved optional/consented research protocol. Neither original full PDF/raw data nor espresso recommendation quality trial verified; no code/Locked/telemetry/new data/READY change; #267 zero literal credit. Exact source CI, nonforce merge/readback pending. Standalone S019 not recovered.",
     "R455-241 authored at source fde5f21810ca8db426cf8981375bc6d33698fdd4: expanded existing Foster 2025 XCT source by direct institutional published PDF Methods/Results/Discussion, Tables I-II and Figures 2/3/11 visual verification; +0 sources/+3 bounded evidence checks/+1 P3 research-only proposal, candidate counts 136/387/197; no user tastes studied, no new preinfusion numeric target; original PDF bytes SHA256/unpublished raw data unverified, S019 inaccessible, #267 literal credit zero. Verify docs-only PR exact source CI, nonforce merge, exact merged blob parity and checkpoint #455.",
     "R455-242 completed narrow SAFE scalar new shot code/test merge 0095369dce8f651bbfdefe6fc3ed1c986883e44a PR #2518. Both exact PR and merged Node22 4631 PASS/0 FAIL/6 SKIP; head SQL/cloud/mobile/security/approval SUCCESS, merged cloud/mobile/governance SUCCESS. New model input validity now guarded; legacy saved ID replay, five tastes/notes preserved. Queue R242 READY DEV ONLY; no Netlify/production writes or owner policy changes. No new empirical cup quality validation; original S019 unavailable. Continue distinct #455 source claims and UX checks.",
-    "R455-247: peer-reviewed Severini et al. 2016 original Wiley abstract directly checked: espresso shot chemistry varied at nominal constant grinder grade; 140 sources, 401 bounded checks, 203 proposals. Full paper/raw chemistry and S019 unavailable. No five-taste or intervention efficacy demonstrated. Optional single-change next-shot design must address shot-to-shot confounders/repeats and separate owner consent/data approval. Docs-only CI/merge needs exact readback; no #267 literal line credit, no app/production writes."
+    "R455-247: peer-reviewed Severini et al. 2016 original Wiley abstract directly checked: espresso shot chemistry varied at nominal constant grinder grade; 140 sources, 401 bounded checks, 203 proposals. Full paper/raw chemistry and S019 unavailable. No five-taste or intervention efficacy demonstrated. Optional single-change next-shot design must address shot-to-shot confounders/repeats and separate owner consent/data approval. Docs-only CI/merge needs exact readback; no #267 literal line credit, no app/production writes.",
+    "R455-248: original Choi et al. Electronics 2024 direct first-party crema computer-vision study; one new source, +3 bounded primary claim checks, +1 P3 science-proxy proposal, 141/404/204. Reported 97% is segmented crema color area, not human taste accuracy or causal recommendation benefit. Original PDF binary/raw images/independent validation and S019 inaccessible; no app/taste/telemetry policy change. Verify docs-only CI, nonforce merge and exact readback. No #267 literal review credit."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-247",
-    "starting_preflight_development_sha": "f4ee3acc26183d32134f893d3af74e06f8f0f442",
+    "run_id": "R455-248",
+    "starting_preflight_development_sha": "8540727dbd2a14c8bf857e7127358cca248b164c",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "live_parent_sha_at_authoring": "f4ee3acc26183d32134f893d3af74e06f8f0f442",
-    "phase": "ORIGINAL_PEER_REVIEWED_ESPRESSO_SHOT_CHEMISTRY_VARIANCE_MODEL_ABSTRACT_AND_CAUSAL_EVALUATION_CONFOUNDER",
+    "live_parent_sha_at_authoring": "8540727dbd2a14c8bf857e7127358cca248b164c",
+    "phase": "ORIGINAL_CREMA_IMAGE_CV_PHOTO_AREA_VERSUS_TASTE_VALIDATION_ENDPOINT",
     "source_counts": {
-      "research_project_source_records": 140,
-      "bounded_evidence_checks": 401,
-      "proposals": 203
+      "research_project_source_records": 141,
+      "bounded_evidence_checks": 404,
+      "proposals": 204
     },
-    "source_access": "DIRECT_FIRST_PARTY_WILEY_ORIGINAL_AUTHOR_ABSTRACT_ONLY_FULL_TEXT_REDIRECTS_TO_ABSTRACT; ORIGINAL_PDF_RAW_REPLICATES_UNVERIFIED",
+    "source_access": "DIRECT_ORIGINAL_MDPI_FULL_HTML_METHODS_RESULTS_CONCLUSIONS_NOT_ORIGINAL_BINARY_OR_UNAVAILABLE_RAW_IMAGES",
     "original_s019": "INACCESSIBLE_CURRENT_GOOGLE_DRIVE_AND_LIBRARY_SEARCH_20261114",
     "github267_literal_review_credit": 0,
     "release_state": "RESEARCH_ONLY_NO_READY_ITEM_NO_DEPLOYMENT",
-    "next": "Verify docs-only PR head/merge/source-bound CI and blobs; inspect separate independent verified source or narrow reproducible SAFE Log Shot defect. Do not infer single-shot efficacy."
+    "next": "Verify documentation-only PR diff and exact CI nonforce merge; prioritize independently reproducible Log Shot → Rate → Recommendations SAFE UX flaw or new primary source; no camera/photo or taste policy without owner approval."
   },
   "policy_decisions_resolved": [
     {
@@ -12526,6 +12581,35 @@
       "production_deployed": false,
       "github267_literal_review_credit": 0,
       "exact_source": "f4ee3acc26183d32134f893d3af74e06f8f0f442"
+    },
+    {
+      "id": "R455-PROP-248-CREMA-IMAGE-CV-NOT-TASTE-OR-CONTROLLED-OUTCOME",
+      "severity": "P3_SCIENCE_EXTRAPOLATION_RISK_NO_RUNTIME_BUG_REPRODUCED",
+      "source": [
+        "LIT-2024-CHOI-LEE-KANG-SUH-CREMA-CV",
+        "ORG-01",
+        "ORG-07"
+      ],
+      "evidence": [
+        "R455-EV-CIT-248-A",
+        "R455-EV-CIT-248-B",
+        "R455-EV-CIT-248-C"
+      ],
+      "finding": "A peer-reviewed small-apparatus espresso crema segmentation study reports high image-color area coverage, but does not establish multi-coffee personal taste accuracy, universal extraction targets, or causal app recommendation benefit. In particular 97% segmented crema area is not 97% correct sensory classification.",
+      "evidence_grade": "DIRECT_ORIGINAL_PUBLISHER_FULL_HTML_AND_EXPERIMENT_DESIGN; RAW_IMAGES_TABLE2_CELLS_PDF_SHA_AND_INDEPENDENT_HUMAN_VALIDATION_UNVERIFIED",
+      "source_provenance": "Choi et al. Electronics 13(4):800 (2024), DOI 10.3390/electronics13040800, original https://www.mdpi.com/2079-9292/13/4/800 §§3–5, Appendices A–C and data statement; archived causal reports ORG-01/ORG-07 are context only, not independent validation.",
+      "user_benefit": "Prevents misleading scientific confidence/optimal-extraction badges and unnecessary camera permissions in the fast shot-log flow.",
+      "current_locked": "All five direct taste ratings, completed all-green vs missing, one truly controllable next step, original measured shots/notes/privacy/history, multiple successful families, style-specific Turbo vs Fast-Flow/slow-feed/grinder version and Community safety.",
+      "current_app": "Pinned development 8540727dbd2a14c8bf857e7127358cca248b164c; engine.js blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6, constants.js d3559dc1c9560c4d68fbcad1dc91e3a792a100a2, model.js fdc65f869546cddbb6552e555dca12117f2c47fc, community-evidence.js 2f4c8e2d473d767445369af5af810aa473722aec; no current crema image model or reproduced source defect.",
+      "proposed_change": "SAFE source review and evidence-status ledger only. Preserve optional separate consent/data review if a future camera-based feature or intervention is actually proposed; no image uploads, photo capture, telemetry, numeric policies, recipe recommendations or changes to five ratings now.",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "R455-248_RESEARCH_ONLY_DOCUMENTARY_EVIDENCE_NO_NEW_APP_BEHAVIOR",
+      "test_plan": "Validate parsed JSON and all 140/401/203 prior IDs and objects unchanged; 1 distinct original paper, 3 checks, 1 P3 proposal; exact PR diff and source-bound applicable CI. App builds/SQL/Auth/browser and empirical shot quality tests NOT_RUN, never claim PASS.",
+      "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY_NO_READY",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0,
+      "exact_source": "8540727dbd2a14c8bf857e7127358cca248b164c"
     }
   ],
   "changeScope": {
