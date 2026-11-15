@@ -4211,6 +4211,19 @@
       "new_defects": 0,
       "production_writes": 0,
       "next": "numeric ranks 2241-2320 and remaining provider definitions"
+    },
+    {
+      "run": 253,
+      "prewrite_source_sha": "88506e47e8e1197911aeec4db713c8f7757db9ad",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt_path": "docs/audits/issue509-coffee-submission-community-pgss-2026-11-15-run253-rank2241-2320.json",
+      "receipt_git_blob": "bcb47b299a9dd266959baacd728387c7e766f8dc",
+      "numeric_distinct": 2246,
+      "current_sql_definition_bodies": 5,
+      "source_chars": 15497,
+      "new_defects": 0,
+      "production_writes": 0,
+      "next": "pgss 2321-2400; full provider definitions/source parity"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -20623,5 +20636,55 @@
     "new_defects": 0,
     "production_writes": 0,
     "next": "numeric ranks 2241-2320 and remaining complete provider definitions"
+  },
+  "provider_pgss_coffee_submission_community_run253": {
+    "receipt": "docs/audits/issue509-coffee-submission-community-pgss-2026-11-15-run253-rank2241-2320.json",
+    "blob_sha": "bcb47b299a9dd266959baacd728387c7e766f8dc",
+    "observed_at": "2026-11-15 00:46:50.329479+00",
+    "definition_reviews": [
+      {
+        "signature": "private.dic_backfill_library_contributions(p_owner uuid, p_entry uuid, p_canonical uuid)",
+        "md5": "424a5c87c53165a918f7094bf67d25bb",
+        "chars": 2360,
+        "verdict": "Internal revoked-EXECUTE definer: reprocesses only owned entries' shots for verified canonical coffee, preserves withdrawn Community status and contribution links, quality-review callback. Possible stale unrelated shot-edit path requires separate trigger proof; not established as defect."
+      },
+      {
+        "signature": "private.dic_find_coffee_matches(p jsonb)",
+        "md5": "b4b845d29ccb65ac7922109dc89816b6",
+        "chars": 6135,
+        "verdict": "Admitted signed-in member required, bounded input, canonical verified coffee catalog not obsolete directory, exact release/origin/process/source gates, fuzzy candidate presentation rather than silent merge. Full-catalog similarity cost remains EXPLAIN-unverified."
+      },
+      {
+        "signature": "private.dic_member_retry_pending_approval(p_submission_id uuid, p_expected_revision bigint)",
+        "md5": "5ebb55ad50529a080b3c2332a29d3309",
+        "chars": 2166,
+        "verdict": "Owner and exact revision checked; resolved cases idempotently return verified, ambiguous candidates require confirmation, exact match links and new candidate delegates promotion. Real-session downstream assurance unverified."
+      },
+      {
+        "signature": "private.dic_on_community_coffee_verification()",
+        "md5": "cefee7b991e40185eadbacde89def3aa",
+        "chars": 1065,
+        "verdict": "Verification/merge-change trigger preserves withdrawn contributions; holds or requalifies Community, backfills linked library entries and quality-reviews pending shots."
+      },
+      {
+        "signature": "private.dic_submit_coffee_auto(mid uuid, p jsonb)",
+        "md5": "e2b11c83a686a5a9949699cd23b52e13",
+        "chars": 3771,
+        "verdict": "Admitted member, owner lock and idempotent mutation, exact verified reuse or pending library entry, canonical roaster based on coffees not retired directory. Accepts user source URL as stored text, not direct network fetch here."
+      }
+    ],
+    "complete_source_chars": 15497,
+    "pgss_ranks": [
+      2241,
+      2320
+    ],
+    "numeric_rows": 80,
+    "new_distinct": 75,
+    "overlap": 5,
+    "cumulative_distinct": 2246,
+    "rank_window_limitation": "Cumulative execution-time order moves over time; rank windows are not a stable gap-free total inventory.",
+    "new_defects": 0,
+    "production_writes": 0,
+    "next": "pgss 2321-2400; full current provider definitions and parity"
   }
 }
