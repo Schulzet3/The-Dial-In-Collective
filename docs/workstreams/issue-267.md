@@ -1,3 +1,10 @@
+## November 15, 2026 — #267 V11BK frozen F215:2704–2773 direct strict semantic review [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=2faac330db44008d59ad31151b494bb9ef59cac6 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- Original abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9, tree c54ade64eca30946df8858297578a172f5cf6fa8, F215 exact archived blob c3a92e1e2d7045c9a53a903f82f0183fa79dc7cf. Pinned 9707553a64f88127826e8f5b2b36cd0651296e83 and current development 2faac330db44008d59ad31151b494bb9ef59cac6 identical non-executable source; **70** directly interpreted numbered original lines in [V11BK receipt](../audits/issue267-v2-strict-batches/S2-DISJOINT-F215-2704-2773-20261115-V11BK.json). Preceding V11BJ ended F215:2703; first frozen F001 41/41 original literals independently verified against S2-001 again with zero extra credit; no R2/C2 grouped credit.
+- Cherry River Brazil Minas Gerais selected-product vendor differs from same-site OG and structured Organization business identity. 1951 Guatemala ASOPCE vendor omits Company suffix while site OG/page quote include it; structured Organizations empty, following elevation is a distinct field-specific record. Original strict review_required preserved in both cases. Source capture hash flags NOT independently rehashed against raw HTML. No current parser defect or safe removal demonstrated.
+- 70 exact physical literal matches, nonoverlap PASS; head/merged CI PENDING, Node22/lint/build/browser/mobile/offline/SQL/Auth/provider NOT_RUN_DOCS_ONLY. AI, not independent human signoff. No runtime, member, 603 oracle, SQL/Auth, provider, READY, backup, publication or deployment changes. #267 OPEN; next F215:2774 plus remaining pinned and live drift.
+
 ## November 15, 2026 — #267 V11BJ frozen F215:2634–2703 direct strict semantic review [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=e45e07bfa6bd728fe9110e0bad8603fb5685178e preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
