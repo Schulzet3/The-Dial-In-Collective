@@ -8,6 +8,33 @@
   },
   "items": [
     {
+      "id": "DIC-Q-509-source-path-case-guard-20261115",
+      "issue": 509,
+      "pr": null,
+      "title": "Preserve HTTP source URL path case in coffee identity and verified-source matching",
+      "state": "TESTING",
+      "merged_source_sha": "9a7ffa65955d8c2b81e41153653e19fc512f3a31",
+      "scope_paths": [
+        "supabase/migrations/20261115124500_dic_source_key_path_case_guard.sql"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509; development-only correction following read-only reproduced canonical URL case collision; immutable preflight SHA 5b46ad137c06e7c06dcf10b2f0621a1f3f82011b blob 2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Read-only live SQL full source MD5 07e0ef286246fdae29b9151018296f79; two distinct case-sensitive HTTPS paths canonicalize to identical key in old production function.",
+        "Isolated PostgreSQL 17.11 exact development source 9a7ffa65955d8c2b81e41153653e19fc512f3a31 passed run 43715405755 on 2026-11-15 including new rollback source URL identity assertions; actual member/coffee records not examined.",
+        "Governance run 43715405733 failed only for missing queue intake on new migration; this entry repairs intake; exact-source successor governance must succeed before READY."
+      ],
+      "ci_runs": [
+        43715405755,
+        43715405733
+      ],
+      "blockers": [
+        "Governance/queue intake initially failed at source commit; verify successor completed SUCCESS and new queue receipt before READY.",
+        "Node22/cloud/mobile applicability and source-isolated release certification not yet fully verified; #33 extractor source identity compatibility and #96 JWT coverage remain UNVERIFIED."
+      ],
+      "notes": "Source-only additive migration and rollback tests; no live production SQL/data/Auth/Edge/Storage modifications, no forced release/deployment, no confirmed affected member records. Only HTTP authority hostname is lowercased; product path/query case retained. Prior original migration preserved. After verified exact-source gates, require independent release isolation and separate owner publish.",
+      "production_deployed": false
+    },
+    {
       "id": "DIC-Q-509-community-withdrawn-recheck-guard",
       "issue": 509,
       "pr": null,
