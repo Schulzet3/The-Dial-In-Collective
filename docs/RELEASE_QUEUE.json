@@ -14710,30 +14710,33 @@
     {
       "id": "DIC-Q-28-owner-drive-browser-oauth-20261115",
       "issue": 28,
-      "pr": 2818,
+      "pr": 2827,
       "title": "Browser-only one-time owner Google Drive OAuth setup (no Mac/terminal)",
       "state": "IN_PROGRESS",
-      "merged_source_sha": "11371c014d3c9d120c4b79b727829442e63467e6",
+      "merged_source_sha": "5f9d614bb8b7a2366e7882823505bff196321c7d",
       "scope_paths": [
         "netlify/functions/dic-owner-drive-connect.mjs"
       ],
       "owner_source": "Owner explicit 2026-11-14/15 approval to build browser-only OAuth and eventual fully automated GitHub encrypted offsite Drive courier; development only, owner Publish separately.",
       "tests": [
-        "Exact-source hosted tests pending for official browser Google Picker replacing desktop One Pick, with AES-256-GCM HttpOnly pending OAuth cookie, owner state/CSRF, folder ID, disposable MD5/size/parent/trash and refusal on wrong scope, folder or cleanup."
+        "Exact corrected PR head f11f18550f5d58b0db9906546f532882882c5ca5: Node22 full suite 4942 PASS, 0 FAIL, 6 intentional SKIP; lint PASS; build/tests workflow 43669375755 SUCCESS.",
+        "Approval/continuity run 43669375743 SUCCESS; browser/cloud UX run 43669375735 SUCCESS; isolated SQL run 43669375733 SUCCESS; security 43669375779 SUCCESS. Frozen603 SKIPPED, not PASS.",
+        "Browser-specific 7 tests cover default-off, missing Picker config, owner origin/password, PKCE drive.file, state expiry, actual Google Picker metadata selection, AES-GCM sealed token, same-origin CSRF, exact existing folder, disposable upload MD5/size/parent/trash, failed broad scope/folder/checksum/cleanup. No live provider consent claimed.",
+        "Nonforce [skip netlify] PR #2827 merged 5f9d614bb8b7a2366e7882823505bff196321c7d: merged function Git blob 0f88668b8dfd0f334aab344ef1e169f92e8a0be9 and tests blob 5078c3afec7157b88e1d8f1af4e1bcb0f0e961cf identical to tested head. Original PR #2818 documented as superseded desktop Picker assumption; actual Web Picker correction now integrated."
       ],
       "ci_runs": [
-        43666194529,
-        43666194627,
-        43666194505,
-        43666194679,
-        43666194620
+        43669375755,
+        43669375743,
+        43669375735,
+        43669375733,
+        43669375779
       ],
       "blockers": [
-        "Owner reports Web OAuth client SAVED, but must enable Google Picker API, create restricted web API key, obtain numeric project ID, and later privately configure Netlify runtime keys; external provider readback not available.",
-        "Web Picker corrected source tests/CI and nonforce dev merge required; no READY or DEPLOYED assertion.",
-        "Separate owner Publish and actual provider Google folder consent/Drive test, GitHub encrypted Actions credentials, runner smoke and real scheduled encrypted ZIP needed before replacing Apps Script."
+        "Owner reports new Web OAuth client SAVED, but Google Picker API enablement and restricted Website API key + numeric project number must be confirmed by owner; provider Cloud Console not independently readable.",
+        "Owner-only web setup function is disabled and NOT PUBLISHED; new explicit owner Publish required for release controller, and six private Netlify runtime variables must be entered before the authorized build (Netlify env changes require redeployment). No production auth or owner Google consent yet.",
+        "Owner must select exact private Drive folder via real Google Web Picker, prove disposable MD5/size/parent/trash, directly install encrypted GitHub Actions OAuth secrets; then independently verify GitHub runner smoke, one actual scheduled ciphertext ZIP SHA-256/MD5/parent/dedupe before disabling existing Apps Script."
       ],
-      "notes": "Previous #2818 source tested a desktop-only One Pick parameter on a Web client, now corrected using official browser Picker; keep IN_PROGRESS until exact evidence and owner external setup. Existing backups continue.",
+      "notes": "Web Picker source correction and exact five-check CI source MERGED VERIFIED, but stays IN_PROGRESS / NOT READY / NOT DEPLOYED because Google owner and provider acceptance remain blocked. No provider, app deploy, real Drive, Auth, member, database or existing backup changes. Prior #2818 had wrong desktop One Pick assumption, now superseded by #2827. Draft ops #2684 still inactive.",
       "production_deployed": false
     }
   ],

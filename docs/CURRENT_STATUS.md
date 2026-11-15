@@ -1,3 +1,11 @@
+## November 15, 2026 UTC — #28 corrected real Web Picker OAuth source MERGED, provider consent BLOCKED [skip netlify]
+
+- Mandatory preflight at 5f9d614bb8b7a2366e7882823505bff196321c7d, blob 2fb236bbfa6bac48513eeb3bd157b260853af06d; [PR #2827](https://github.com/Schulzet3/The-Dial-In-Collective/pull/2827) merged nonforce `5f9d614bb8b7a2366e7882823505bff196321c7d` with [skip netlify] and exact tested browser Web Picker function/test blobs unchanged. Corrects prior desktop-only One Pick assumption. Browser owner-only function remains disabled and NOT DEPLOYED.
+- Exact PR head `f11f1855`: full Node/lint [43669375755](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/43669375755) SUCCESS **4,942 PASS / 0 FAIL / 6 intentional SKIP**, approval 43669375743, cloud UX 43669375735, SQL 43669375733, security 43669375779 SUCCESS. Initial source a14badf1 Node passed but lint failed on two unused old helpers; corrected and retested. Full frozen603 SKIPPED, not certified.
+- Owner reports new Web Google OAuth client SAVED. Next owner task: confirm Google Picker API enabled, create *restricted* website Google Picker API key for app + docs.google.com, note project number, then after NEW Publish authorization privately configure six Netlify Functions env vars prior to the controlled production build. Later owner browser drive.file permission and exact folder selection needed; no real provider test has occurred. Queue `DIC-Q-28-owner-drive-browser-oauth-20261115` stays **IN_PROGRESS, NOT READY/DEPLOYED**. Main #28 ops courier PR #2684 remains DRAFT/inactive. Existing encrypted backups, Apps Script Drive courier, old archives and watchdog unaffected.
+
+---
+
 ## November 15, 2026 UTC — #28 browser-only Google Drive OAuth source MERGED, provider authorization pending [skip netlify]
 
 - Live preflight 04d5fc80c01b17220a1031206e9cbe31662c3ba7, blob 2fb236bbfa6bac48513eeb3bd157b260853af06d. Owner-approved browser-only owner setup PR [#2818](https://github.com/Schulzet3/The-Dial-In-Collective/pull/2818) merged nonforce `11371c014d3c9d120c4b79b727829442e63467e6` (function/test blobs identical to PR head; disabled by default).
