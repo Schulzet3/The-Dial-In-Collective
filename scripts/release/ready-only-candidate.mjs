@@ -117,6 +117,46 @@ function reviewedUnreadySupport(path,{queue,restoredPaths,pinnedReadyPaths=[],
  return spec;
 }
 
+
+const REVIEWED_PUBLISHED_HEADING_HELPER=Object.freeze({
+ path:'scripts/audit/issue33-selected-product-heading.mjs',
+ publishedBlob:'7ce2de1fbf70261b006475ae43f1952c140228b6',
+ unreadyItemId:'DIC-Q-33-r215-original325-327-current-offer-h2-water-decaf',
+ dependentRuntime:'src/server/coffee-selected-offer-h2.mjs'
+});
+// Restore the old, already-PUBLISHED nondeployable helper rather than delete
+// it with newer unready R215 changes: pre-existing tests import this module.
+export function discoverRestoredPublishedTestHelpers({queue,restoredPaths,
+ pinnedReadyPaths=[],publishedSourceSha,developmentSourceSha,sourceObjectAt,
+ selectedReadyItems=[]}={}){
+ if(!Array.isArray(restoredPaths)||!Array.isArray(pinnedReadyPaths)||
+    !Array.isArray(selectedReadyItems)||typeof sourceObjectAt!=='function')
+  throw Error('Published-test-helper provenance unavailable');
+ const spec=REVIEWED_PUBLISHED_HEADING_HELPER,path=spec.path;
+ const owner=queue?.items?.find(i=>i.id===spec.unreadyItemId);
+ const published=sourceObjectAt(publishedSourceSha,path);
+ const current=sourceObjectAt(developmentSourceSha,path);
+ if(published!=='100644:'+spec.publishedBlob||!current||current===published)return [];
+ if(owner?.issue!==33||!['IN_PROGRESS','TESTING','BLOCKED'].includes(owner.state)||
+    !owner.scope_paths?.includes(spec.dependentRuntime)||
+    !restoredPaths.includes(spec.dependentRuntime)||
+    !owner.scope_paths.every(p=>restoredPaths.includes(p)||pinnedReadyPaths.includes(p))||
+    sourceObjectAt(publishedSourceSha,spec.dependentRuntime)!==null||
+    sourceObjectAt(developmentSourceSha,spec.dependentRuntime)===null)
+  return [];
+ // A source-tested selected READY merge must never introduce a helper change
+ // that this source isolation silently strips. Fail closed instead.
+ for(const item of selectedReadyItems){
+  if(!SHA.test(item?.merged_source_sha||''))
+   throw Error('Cannot verify selected READY helper provenance');
+  const merged=sourceObjectAt(item.merged_source_sha,path);
+  const parent=sourceObjectAt(item.merged_source_sha+'^',path);
+  if(merged!==parent)
+   throw Error('Selected READY merge changed published heading helper: '+item.id);
+ }
+ return [path];
+}
+
 // Cheap, source-bound pre-CI static import existence check. The exact app
 // build remains mandatory for exported symbol/type/dynamic import semantics.
 export function assertCandidateRelativeImports(paths,{readSource,hasPath}={}){
@@ -377,6 +417,17 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
  if(!Array.isArray(manifest.pinned_to_ready_paths||[])||
     !equal(manifest.pinned_to_ready_paths||[],plan.pinned_ready_paths))
   reject('Pinned READY manifest differs from actual mixed-source paths');
+ const restoredHelpers=discoverRestoredPublishedTestHelpers({
+  queue,restoredPaths:plan.restored_paths,pinnedReadyPaths:plan.pinned_ready_paths,
+  publishedSourceSha,developmentSourceSha:manifest.development_source_sha,
+  sourceObjectAt,selectedReadyItems:plan.ready_items
+ });
+ if(!Array.isArray(manifest.restored_published_test_helper_paths||[])||
+    !equal(manifest.restored_published_test_helper_paths||[],restoredHelpers))
+  reject('Only exact previously published, separately unready helper may be restored');
+ for(const path of restoredHelpers)
+  if(sourceObjectAt(candidateSha,path)!==sourceObjectAt(publishedSourceSha,path))
+   reject('Published test helper was not exactly restored: '+path);
  const workflowChanges=workflowChangedPaths(developmentChangedPaths||[]);
  const frozenWorkflows=manifest.restored_unpublished_workflow_paths||[];
  if(!Array.isArray(frozenWorkflows)||!equal(frozenWorkflows,workflowChanges))
@@ -467,7 +518,7 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
     reject('Cannot exclude a test introduced or modified by an approved READY merge: '+path);
   }
  }
- const allowed=[...plan.restored_paths,...plan.pinned_ready_paths,...excludedTests,...workflowOnlyTests,...frozenWorkflows,CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH];
+ const allowed=[...plan.restored_paths,...plan.pinned_ready_paths,...restoredHelpers,...excludedTests,...workflowOnlyTests,...frozenWorkflows,CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH];
  if(!equal(stagedCommitChangedPaths||[],allowed))
   reject('Candidate staging commit changes unrelated paths or lacks same-commit journal');
  for(const path of plan.restored_paths)

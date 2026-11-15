@@ -9,6 +9,7 @@ import {resolve} from 'node:path';
 import {CANDIDATE_KIND,CANDIDATE_JOURNAL_PATH,CANDIDATE_RECEIPT_PATH,
  planReadyOnlyCandidate,validateReadyOnlyCandidate,workflowChangedPaths,
  discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,
+ discoverRestoredPublishedTestHelpers,
  assertCandidateRelativeImports,assertCandidateStaticNamedExports} from './ready-only-candidate.mjs';
 import {classifyReleaseRisk} from './release-reliability.mjs';
 const SHA=/^[a-f0-9]{40}$/;
@@ -59,6 +60,11 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
  const plan=planReadyOnlyCandidate(queue,{publishedSourceSha,developmentSourceSha,
   selectedIds,pinnedReadyPaths,developmentChangedPaths:developmentPaths,isAncestor:ancestor});
  if(!plan.ready)throw Error('READY-only staging HOLD: '+plan.errors.join('; '));
+ const restoredHelpers=discoverRestoredPublishedTestHelpers({queue,
+  restoredPaths:plan.restored_paths,pinnedReadyPaths:plan.pinned_ready_paths,
+  publishedSourceSha,developmentSourceSha,sourceObjectAt,
+  selectedReadyItems:plan.ready_items
+ });
  const unpublishedTests=discoverExcludedUnreadyTests({queue,selectedIds:plan.selected_ids,
   restoredPaths:plan.restored_paths,pinnedReadyPaths:plan.pinned_ready_paths,
   publishedSourceSha,developmentSourceSha,changedPaths:developmentPaths,sourceObjectAt});
@@ -78,7 +84,7 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    GIT_AUTHOR_NAME:'DIC READY candidate staging',GIT_AUTHOR_EMAIL:'ready-candidate@users.noreply.github.com',
    GIT_COMMITTER_NAME:'DIC READY candidate staging',GIT_COMMITTER_EMAIL:'ready-candidate@users.noreply.github.com'};
   git(['read-tree',developmentSourceSha],{env});
-  for(const path of [...plan.restored_paths,...unpublishedWorkflows]){
+  for(const path of [...plan.restored_paths,...unpublishedWorkflows,...restoredHelpers]){
 
    const object=sourceObjectAt(publishedSourceSha,path);
    if(object){const [mode,sha]=object.split(':');
@@ -98,6 +104,7 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    selected_ready_item_ids:plan.selected_ids,risk_classification:classifyReleaseRisk(plan.included_paths),
    restored_to_published_paths:plan.restored_paths,
    pinned_to_ready_paths:plan.pinned_ready_paths,
+   restored_published_test_helper_paths:restoredHelpers,
    restored_unpublished_workflow_paths:unpublishedWorkflows,
    excluded_unpublished_workflow_test_paths:workflowOnlyTests,
    excluded_unready_test_paths:unpublishedTests,
@@ -109,6 +116,7 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    '- Selected READY IDs: '+plan.selected_ids.join(', ')+'\n'+
    '- Restored unfinished paths: '+(plan.restored_paths.join(', ')||'(none)')+'\n'+
    '- Pinned READY mixed-source paths: '+(plan.pinned_ready_paths.join(', ')||'(none)')+'\n'+
+   '- Restored exact published test helpers: '+(restoredHelpers.join(', ')||'(none)')+'\n'+
    '- Restored development-only GitHub workflows to published bytes: '+(unpublishedWorkflows.join(', ')||'(none)')+'\n'+
    '- Omitted exact reviewed workflow-only, unpublished tests: '+(workflowOnlyTests.join(', ')||'(none)')+'\n'+
    '- Omitted source-bound unready issue tests: '+(unpublishedTests.join(', ')||'(none)')+'\n'+

@@ -5,6 +5,7 @@ import {mkdirSync,mkdtempSync,readFileSync,rmSync,writeFileSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {stageReadyOnlyCandidate} from '../scripts/release/stage-ready-only-candidate.mjs';
+import {discoverRestoredPublishedTestHelpers} from '../scripts/release/ready-only-candidate.mjs';
 const qBase={schema_version:1,authority:'OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022',
  published_base:{tested_source_sha:'a'.repeat(40),release_sha:'b'.repeat(40),netlify_deploy_id:'fixture'},
  items:[],history:[]};
@@ -317,4 +318,32 @@ test('#2837 reviewed support exclusion respects a pinned READY/unready shared-fi
   assert.throws(()=>f.git('show',staged.candidate_sha+':src/server/coffee-selected-offer-h2.mjs'));
   assert.equal(f.git('show',staged.candidate_sha+':site/card.js'),'new READY card');
  }finally{rmSync(f.root,{recursive:true,force:true});}
+});
+
+test('#2837 preserve exact prior published helper when later unfinished module changes it',()=>{
+ const pub='a'.repeat(40),dev='b'.repeat(40),readyMerge='c'.repeat(40);
+ const helper='scripts/audit/issue33-selected-product-heading.mjs';
+ const runtime='src/server/coffee-selected-offer-h2.mjs';
+ const old='100644:7ce2de1fbf70261b006475ae43f1952c140228b6';
+ const now='100644:96b1e529d0c7fb66339b34f78a25923c76556813';
+ const sourceObjectAt=(ref,path)=>{
+  if(path===helper)return ref===pub||ref===readyMerge||ref===readyMerge+'^'?old:now;
+  if(path===runtime)return ref===pub?null:'100644:'+('e'.repeat(40));
+  return null;
+ };
+ const owner={id:'DIC-Q-33-r215-original325-327-current-offer-h2-water-decaf',
+  issue:33,state:'TESTING',scope_paths:[runtime,'src/server/coffee-page-metadata.mjs',
+   'src/server/coffee-direct-product-prose.mjs']};
+ const args={queue:{items:[owner]},restoredPaths:[runtime,'src/server/coffee-direct-product-prose.mjs'],
+  pinnedReadyPaths:['src/server/coffee-page-metadata.mjs'],
+  publishedSourceSha:pub,developmentSourceSha:dev,sourceObjectAt,
+  selectedReadyItems:[{id:'DIC-Q-33-r210',merged_source_sha:readyMerge}]};
+ assert.deepEqual(discoverRestoredPublishedTestHelpers(args),[helper]);
+ assert.deepEqual(discoverRestoredPublishedTestHelpers({...args,queue:{items:[{...owner,state:'READY'}]}}),[]);
+ assert.deepEqual(discoverRestoredPublishedTestHelpers({...args,restoredPaths:[]}),[]);
+ assert.deepEqual(discoverRestoredPublishedTestHelpers({...args,sourceObjectAt:
+  (ref,path)=>ref===pub&&path===helper?null:sourceObjectAt(ref,path)}),[]);
+ assert.throws(()=>discoverRestoredPublishedTestHelpers({...args,sourceObjectAt:
+  (ref,path)=>ref===readyMerge&&path===helper?'100644:'+('d'.repeat(40)):sourceObjectAt(ref,path)}),
+  /Selected READY merge changed published heading helper/);
 });
