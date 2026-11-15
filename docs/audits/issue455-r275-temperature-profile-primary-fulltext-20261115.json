@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "workstream": 455,
+  "run": "R455-275",
+  "reviewed_at_utc": "2026-11-15",
+  "base_development_sha": "98f79f3fb60fcd99aabb543da1855027e4f95341",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "audit_type": "NONOVERLAPPING_RESEARCH_SUPPLEMENT_NOT_CANONICAL_LEDGER_INTEGRATION",
+  "existing_canonical_ledger": {
+    "path": "docs/audits/issue455-research-source-coverage-20261103.json",
+    "git_blob_sha": "e1fd9a70aaa2a87192bf7372af490a0932b2270a",
+    "previous_verified_totals": {
+      "sources": 154,
+      "evidence_checks": 451,
+      "proposals": 218
+    },
+    "note": "Canonical ledger Git blob verified at base but connector yielded empty content due size; cannot safely perform whole-file update. This source addendum records delta without claiming canonical totals changed."
+  },
+  "source": {
+    "source_id": "R455-SRC-275-SALAMANCA-ESPRESSO-TEMPERATURE-GRADIENT-2017",
+    "title": "Extraction of espresso coffee by using gradient of temperature. Effect on physicochemical and sensorial characteristics of espresso",
+    "authors": [
+      "C. Alejandra Salamanca",
+      "Nuria Fiol",
+      "Carlos Gonzalez",
+      "Marc Saez",
+      "Isabel Villaescusa"
+    ],
+    "journal": "Food Chemistry",
+    "volume": "214",
+    "pages": "622-630",
+    "publication_date": "2017-01-01",
+    "first_online_date": "2016-07-21",
+    "doi": "10.1016/j.foodchem.2016.07.120",
+    "pmid": "27507518",
+    "original_full_text_access": "Original nine-page article transcription on coauthor-linked Academia.edu listing, inspected Methods section 2, Tables 2-4, Sensory 2.6, Results 3.1-3.4, Conclusions 4; journal title/DOI verified independently on University of Girona and PubMed.",
+    "original_full_text_url": "https://www.academia.edu/113639806/Extraction_of_espresso_coffee_by_using_gradient_of_temperature_Effect_on_physicochemical_and_sensorial_characteristics_of_espresso",
+    "institutional_url": "https://recerca.udg.edu/en/publications/extraction-of-espresso-coffee-by-using-gradient-of-temperature-ef/",
+    "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/27507518/",
+    "access_status": "ORIGINAL_FULL_TEXT_TRANSCRIPTION_REVIEWED; UNDERLYING_PDF_BYTES_NOT_HASH_VERIFIED",
+    "pdf_sha256": null,
+    "content_hash": null,
+    "confidence": "Study identity and designs independently corroborated; typed HTML may have extraction or table-column artifacts; paper raw data and replicates not reanalyzed."
+  },
+  "evidence_checks": [
+    {
+      "id": "R455-EV-275-A",
+      "page": "622-624; Methods 2.1-2.4",
+      "claim": "Experimental conditions compare 88 to 93 C ramp-up, 90 C flat, 93 to 88 C ramp-down across Robusta, natural Arabica and washed Arabica using an XCelsius Rancilio espresso system near 9 atm; two espressos were prepared per extraction with 15 +/- 0.5 g coffee and approximately 25 +/- 2.5 mL beverage over 25 +/- 5 s.",
+      "status": "SOURCE_SUPPORTED_BOUNDED",
+      "strength": "controlled experimental conditions in original primary text; not general espresso design",
+      "uncertainty": "grind varies and sample counting needs original raw data"
+    },
+    {
+      "id": "R455-EV-275-B",
+      "page": "623-624 Methods 2.1, 2.6 and 3.1; 625-626 Tables 2-4",
+      "claim": "Researchers adjusted grind for each coffee and temperature to attain output volume/time, so gradients were not an isolated single-control intervention. Tables report coffee-dependent physicochemical differences (foam, caffeine, pH, solids, polyphenols) and no universal monotonic response.",
+      "status": "SOURCE_SUPPORTED_BOUNDED",
+      "strength": "direct full-text methods plus three numeric tables; observational comparisons within controlled setup",
+      "uncertainty": "unable to independently hash/read PDF plots; treatment-varying grind confounds attribution"
+    },
+    {
+      "id": "R455-EV-275-C",
+      "page": "624 Methods 2.6-2.7; 628-629 Results 3.3-3.4; Figure 2",
+      "claim": "Trained eleven-person panel rated ten traditional espresso attributes on 0-10 scores, not DIC's personal five-taste outcome and not a within-person next-shot response. The study favored ramp-up in its own evaluated coffee set, but also notes chemistry-to-perceived taste relationship is complex and not one-to-one.",
+      "status": "SOURCE_SUPPORTED_BOUNDED",
+      "strength": "original human panel descriptive evidence, limited external validity",
+      "uncertainty": "no randomized same-user next-shot DIC experiment, no consumer five-rating validation"
+    },
+    {
+      "id": "R455-EV-275-D",
+      "page": "624 Methods 2.7; 625-629 Tables 2-4 and Results",
+      "claim": "The Methods section uses p<0.05 for initial ANOVA, followed by Tukey HSD multiple comparisons at significance level 10% (p<0.1). Statistical letter annotations in Tables 2-4 should not be advertised as uniform 5% confirmatory evidence.",
+      "status": "SOURCE_SUPPORTED_WITH_CAUTION",
+      "strength": "primary study explicit statistical methods",
+      "uncertainty": "no reanalysis of sample distributions or multiplicity, extraction formatting uncertain"
+    }
+  ],
+  "live_source_crosswalk": {
+    "code": [
+      "site/lib/engine.js (prefill and nextAdviceRaw)",
+      "site/lib/model.js",
+      "site/lib/constants.js",
+      "site/lib/community-evidence.js"
+    ],
+    "code_source_sha": "98f79f3fb60fcd99aabb543da1855027e4f95341",
+    "engine_git_blob": "f384ae67c1a9148990cab4716dc8ad22d1ca81f3",
+    "behavior": "Current configurable optional measured temperature is a scalar in shot and recommendation, with an existing condition-limited 1 C cooler suggestion for astringency and no programmable per-shot temperature ramp. The paper compares actual dynamic temperature trajectories; it cannot validate a scalar-temperature correction or establish advice efficacy.",
+    "locked_boundary": "Keep existing five tastes, original temperature and other measurements, machine capability controls, one-change advice, private history, and current Locked numeric targets. Do not infer authorization to collect new profile data or add presets.",
+    "reproduced_safe_bug": "NONE_FROM_THIS_SOURCE",
+    "tests": "NOT_RUN (documentation-only primary-source assessment)",
+    "app_changes": "NONE",
+    "provider_readback": "NOT_APPLICABLE"
+  },
+  "proposal": {
+    "id": "R455-PROP-275-TEMPERATURE-RAMP-RESEARCH-ONLY",
+    "priority": "P3",
+    "status": "RESEARCH_ONLY_OWNER_DECISION_IF_EVER_PURSUED",
+    "owner_approval_required": true,
+    "gap": "No current evidence that adding ramp programming to DIC is a useful, controllable or consented recommendation feature across members; physical equipment support varies.",
+    "options": [
+      "A: preserve existing optional single-temperature feature and avoid claiming paper-based effectiveness (preferred now).",
+      "B: separately seek owner-scoped equipment-capability and research-evaluation proposal with exact logging/consent/privacy safeguards; no coding absent approval."
+    ],
+    "evidence_ids": [
+      "R455-EV-275-A",
+      "R455-EV-275-B",
+      "R455-EV-275-C",
+      "R455-EV-275-D"
+    ],
+    "impact": "No numerical or taste/quality claims; no release item or app changes."
+  },
+  "next_action": "Safely merge docs-only addendum after exact-source governance. At a future opportunity integrate this distinct source/check/proposal delta into canonical ledger by an access method that actually retrieves the whole JSON; no duplicate count, and continue original/claim outcome assessment."
+}
