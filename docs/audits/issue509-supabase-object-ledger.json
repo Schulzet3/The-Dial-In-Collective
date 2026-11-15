@@ -21112,5 +21112,120 @@
     "functional_ci": "NOT_RUN_DOCS_ONLY",
     "baseline_complete": false,
     "next": "fresh provider drift and numeric ranks 2721–2800; continue full provider definition/source parity"
+  },
+  "provider_pgss_community_projection_run260": {
+    "preflight_development_sha": "318f3388ecfab67e0b592ab54955242d8bdff036",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "provider_snapshot": {
+      "observed_at": "2026-11-15 07:53:57.493649+00",
+      "app_tables": 52,
+      "rls_disabled": 0,
+      "app_functions": 114,
+      "app_policies": 41,
+      "migrations": 69,
+      "pgss_rows": 4752,
+      "stats_reset": "2026-10-09 11:11:31.487298+00"
+    },
+    "receipt_path": "docs/audits/issue509-community-projection-pgss-2026-11-15-run260-rank2801-2880.json",
+    "complete_source_characters": 17295,
+    "complete_definitions": [
+      {
+        "signature": "private.dic_backfill_library_contributions(p_owner uuid, p_entry uuid, p_canonical uuid)",
+        "md5": "424a5c87c53165a918f7094bf67d25bb",
+        "chars": 2360,
+        "reviewed_range": [
+          1,
+          2360
+        ],
+        "verdict": "Verified-canonical source backfill skips withdrawn; creates missing Community projections only for green linked owner shots; no direct client permission."
+      },
+      {
+        "signature": "private.dic_on_community_coffee_verification()",
+        "md5": "cefee7b991e40185eadbacde89def3aa",
+        "chars": 1065,
+        "reviewed_range": [
+          1,
+          1065
+        ],
+        "verdict": "Coffee verification changes skip withdrawn rows and review pending only; no revival."
+      },
+      {
+        "signature": "private.project_shot()",
+        "md5": "79e6fd0668fa4502c8785b3e92a14a61",
+        "chars": 3045,
+        "reviewed_range": [
+          1,
+          3045
+        ],
+        "verdict": "Shot audit and project trigger withdraw non-green, reenter pending on material corrected green; generated is_dialed_in derives solely from measured fields included in change comparison."
+      },
+      {
+        "signature": "public.dic_browse_community_shots(p_limit integer, p_offset integer)",
+        "md5": "edcc2c6a9fb24b3455a446d964a2ed2d",
+        "chars": 3222,
+        "reviewed_range": [
+          1,
+          3222
+        ],
+        "verdict": "Admitted-member boundary and bounded sanitized verified-eligible Community list; no identities in result; cohort count performance not measured."
+      },
+      {
+        "signature": "public.dic_community_recommendation_evidence(p_library_entry_id uuid, p_style text)",
+        "md5": "085f92a3814dce624e5b9a3759e893ef",
+        "chars": 6171,
+        "reviewed_range": [
+          1,
+          6171
+        ],
+        "verdict": "Owner library entry, verified/unmerged coffee and known style required; own contribution excluded; contributor-group weighting avoids repeated-person inflation."
+      },
+      {
+        "signature": "public.dic_confirm_community_outlier(p_shot_id uuid, p_expected_revision bigint)",
+        "md5": "0657114255a0375b7f3fc502f780aa54",
+        "chars": 1432,
+        "reviewed_range": [
+          1,
+          1432
+        ],
+        "verdict": "Outlier confirmation requires owner shot current revision plus held extreme_outlier reason; source review rerun under lock."
+      }
+    ],
+    "complete_shot_trigger_definitions": 6,
+    "is_dialed_in_generated_verified": true,
+    "prior_fix_exact_ci": [
+      {
+        "name": "approval",
+        "run_id": 43687160492,
+        "status": "SUCCESS",
+        "source_sha": "fa7d0ff7e0302ddd35c9dd1b0b02f2d34996a2ee"
+      },
+      {
+        "name": "isolated SQL",
+        "run_id": 43687160505,
+        "status": "SUCCESS",
+        "source_sha": "fa7d0ff7e0302ddd35c9dd1b0b02f2d34996a2ee"
+      },
+      {
+        "name": "Node22",
+        "run_id": 43687160491,
+        "status": "SUCCESS",
+        "source_sha": "fa7d0ff7e0302ddd35c9dd1b0b02f2d34996a2ee"
+      },
+      {
+        "name": "cloud/mobile",
+        "run_id": 43687160456,
+        "status": "SUCCESS",
+        "source_sha": "fa7d0ff7e0302ddd35c9dd1b0b02f2d34996a2ee"
+      }
+    ],
+    "numeric_pgss_range": [
+      2801,
+      2880
+    ],
+    "new_distinct": 80,
+    "overlap": 0,
+    "cumulative_distinct": 2766,
+    "baseline_complete": false,
+    "next": "2881–2960"
   }
 }
