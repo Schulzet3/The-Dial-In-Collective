@@ -1,3 +1,10 @@
+## November 15, 2026 — #28 scheduled encrypted backup pin CURRENT VERIFIED; hourly offsite recovery active [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=aee468ffba766e8870be30d16461116c7efd063b preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- Owner-authorized, scoped #28 workflow pin correction PR #2865: one-line main encrypted-backup checkout pinned to VERIFIED current release `0f3641b4fff07e2a88d7747e621304ec2cf0ead5`, from prior `2c02dbb2`. Full backup scripts directory has identical Git blobs between old/new release. Exact PR main acceptance 43687084920 SUCCESS; nonforce merge main `0b92b5da379213c7d92b7721e0ae35ab0dd8ee27`, exact main push acceptance 43687140618 SUCCESS (both applicable jobs); Netlify `6af9551c6515ddfa3786f76e` still READY/current. No second app build or production DB/Drive/provider/secret writes.
+- Existing scheduled GitHub backup, age encryption and original recipient preserved. Nov13/14 missed preexisting encrypted archives delivered to exact private direct-parent Drive folder and GitHub-versus-Drive SHA256 verified; no plaintext. Existing one hourly DIC Backup Watchdog `6ad2807d3f408191a1aa9d5affe092a3` enabled, first scheduled check finished 06:40:50Z, no duplicate uploads. Prior verified Sunday fresh and Tuesday saved-age disconnected logical restores remain historical PASS; future naturally scheduled restores not yet verified.
+- Google OAuth Chrome CSP code DEPLOYED from source `0c320602bc1c979877259a6f34de0aaa61428fe3`, release `0f3641b4fff07e2a88d7747e621304ec2cf0ead5`; real user Google consent/Picker and native Github-to-Drive courier activation not yet verified, first unattended missing-ciphertext remediation not yet exercised. Keep #28 open. Historical older status entries below superseded where contradictory.
+
 ## November 15, 2026 — #28 owner Drive OAuth navigation DEPLOYED; encrypted backup hourly self-heal active [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=98f79f3fb60fcd99aabb543da1855027e4f95341 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
