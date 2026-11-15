@@ -72,11 +72,15 @@ test('a future farm production goal cannot become this coffee harvest label',()=
   assert.equal(parse('<p>'+sentence+'</p>').fields.release_label,sentence.includes('2025')?'2025–2026':'2026');
 });
 
-test('a dated current offering or explicitly dated harvest period is preserved as release evidence',()=>{
+test('annual selections are contextual but selected dated lots and harvests retain release evidence',()=>{
+ // Selected original603 #371/#372 sellers print first/last offering of a year
+ // and relationship Since 2026; neither is a unique release nor a harvest.
+ for(const sentence of [
+  'Our last washed selection from Ethiopia for 2026 comes from the Wuri washing station.',
+  'Our first natural offering from Ethiopia of 2026 is this lovely gem.',
+  'We offer this coffee as our last rotating single origin of 2026.'
+ ])assert.equal(parse('<p>'+sentence+'</p>').fields.release_label,undefined,sentence);
  for(const [sentence,value] of [
-  ['Our last washed selection from Ethiopia for 2026 comes from the Wuri washing station.','2026'],
-  ['Our first natural offering from Ethiopia of 2026 is this lovely gem.','2026'],
-  ['We offer this coffee as our last rotating single origin of 2026.','2026'],
   ['We are excited to bring you the 2026 lot.','2026'],
   ['Here is what you can expect from this coffee in 2023/24.','2023/24'],
   ['Yukro will be a cornerstone of our 2026 summer coffee program.','Summer 2026']
