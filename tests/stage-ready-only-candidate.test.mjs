@@ -181,3 +181,44 @@ test('#2169 staged risk record has one build and exactly five required statuses 
    ['approval','validate','cloud-tests','mobile-browser-qa','sql']);
  }finally{rmSync(f.root,{recursive:true,force:true});}
 });
+
+test('#2837 exact READY mixed-source pin keeps tested blob and excludes later unready edit',()=>{
+ const f=fixture();
+ try{
+  f.queue.items.push({...f.queue.items[1],id:'DIC-Q-102',issue:102,
+   scope_paths:['site/card.js'],title:'Unfinished edit to READY path'});
+  f.write('site/card.js','later UNREADY edit');
+  f.write('docs/RELEASE_QUEUE.json',JSON.stringify(f.queue,null,2)+String.fromCharCode(10));
+  f.git('add','-A');f.git('commit','-qm','Track later unready same-file edit [skip netlify]');
+  f.development=f.git('rev-parse','HEAD');
+  const staged=stageReadyOnlyCandidate({repoDir:f.root,developmentSourceSha:f.development,
+   selectedIds:['DIC-Q-100'],branch:'release-candidates/issue2837-pin',
+   pinnedReadyPaths:['site/card.js']});
+  assert.deepEqual(staged.manifest.pinned_to_ready_paths,['site/card.js']);
+  assert.equal(f.git('show',staged.candidate_sha+':site/card.js'),'new READY card');
+  assert.equal(f.git('show',f.development+':site/card.js'),'later UNREADY edit');
+  assert.throws(()=>stageReadyOnlyCandidate({repoDir:f.root,developmentSourceSha:f.development,
+   selectedIds:['DIC-Q-100'],branch:'release-candidates/issue2837-unpinned'}),
+   /READY\/unready or unselected overlap/);
+ }finally{rmSync(f.root,{recursive:true,force:true});}
+});
+test('#2837 owner Drive test can be excluded only with its exact restored unpublished function',()=>{
+ const f=fixture();
+ try{
+  f.queue.items.push({...f.queue.items[1],
+   id:'DIC-Q-28-owner-drive-browser-oauth-20261115',issue:28,
+   scope_paths:['netlify/functions/dic-owner-drive-connect.mjs'],title:'Unpublished owner Drive setup'});
+  f.write('netlify/functions/dic-owner-drive-connect.mjs','export const testOnly=true;');
+  f.write('tests/dic-owner-drive-connect.test.mjs','import test from "node:test";');
+  f.write('tests/unrelated-owner-mismatch.test.mjs','import test from "node:test";');
+  f.write('docs/RELEASE_QUEUE.json',JSON.stringify(f.queue,null,2)+String.fromCharCode(10));
+  f.git('add','-A');f.git('commit','-qm','Track unpublished Drive function and tests [skip netlify]');
+  f.development=f.git('rev-parse','HEAD');
+  const staged=stage(f,'issue2837-owner-drive-test');
+  assert.deepEqual(staged.manifest.excluded_unready_test_paths,
+   ['tests/dic-owner-drive-connect.test.mjs']);
+  assert.throws(()=>f.git('show',staged.candidate_sha+':tests/dic-owner-drive-connect.test.mjs'));
+  assert.throws(()=>f.git('show',staged.candidate_sha+':netlify/functions/dic-owner-drive-connect.mjs'));
+  assert.match(f.git('show',staged.candidate_sha+':tests/unrelated-owner-mismatch.test.mjs'),/test/);
+ }finally{rmSync(f.root,{recursive:true,force:true});}
+});

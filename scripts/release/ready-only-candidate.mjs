@@ -35,6 +35,23 @@ export function discoverReviewedWorkflowTestExclusions({publishedSourceSha,devel
 }
 
 
+
+const REVIEWED_OWNER_DRIVE_TEST=Object.freeze({
+ path:'tests/dic-owner-drive-connect.test.mjs',
+ runtime:'netlify/functions/dic-owner-drive-connect.mjs',
+ itemId:'DIC-Q-28-owner-drive-browser-oauth-20261115'
+});
+function eligibleOwnerDriveTestExclusion({queue,restoredPaths,publishedSourceSha,
+ developmentSourceSha,sourceObjectAt}){
+ const i=queue?.items?.find(row=>row.id===REVIEWED_OWNER_DRIVE_TEST.itemId);
+ return i?.issue===28&&['IN_PROGRESS','TESTING','BLOCKED'].includes(i.state)&&
+  i.scope_paths?.length===1&&i.scope_paths[0]===REVIEWED_OWNER_DRIVE_TEST.runtime&&
+  restoredPaths?.includes(REVIEWED_OWNER_DRIVE_TEST.runtime)&&
+  sourceObjectAt(publishedSourceSha,REVIEWED_OWNER_DRIVE_TEST.runtime)===null&&
+  sourceObjectAt(developmentSourceSha,REVIEWED_OWNER_DRIVE_TEST.runtime)!==null&&
+  sourceObjectAt(publishedSourceSha,REVIEWED_OWNER_DRIVE_TEST.path)===null&&
+  sourceObjectAt(developmentSourceSha,REVIEWED_OWNER_DRIVE_TEST.path)!==null;
+}
 // Only new, issue-scoped tests for entirely restored unfinished/unselected
 // runtime may be absent from a candidate. Selected READY test edits never vanish.
 export function discoverExcludedUnreadyTests({queue,selectedIds,restoredPaths,
@@ -47,8 +64,11 @@ export function discoverExcludedUnreadyTests({queue,selectedIds,restoredPaths,
  const chosen=(queue?.items||[]).filter(i=>selected.has(i.id));
  for(const path of changedPaths){
   const m=typeof path==='string'?/^tests\/(?:coffee-)?issue([1-9][0-9]*)-[a-z0-9-]+\.test\.mjs$/.exec(path):null;
-  if(!m)continue;
-  const issue=Number(m[1]);
+  const ownerDrive=path===REVIEWED_OWNER_DRIVE_TEST.path&&
+   eligibleOwnerDriveTestExclusion({queue,restoredPaths,publishedSourceSha,
+    developmentSourceSha,sourceObjectAt});
+  if(!m&&!ownerDrive)continue;
+  const issue=ownerDrive?28:Number(m[1]);
   if(!(queue?.items||[]).some(i=>i.issue===issue&&!selected.has(i.id)&&
     ['IN_PROGRESS','TESTING','BLOCKED','READY'].includes(i.state)&&
     i.scope_paths?.length>0&&i.scope_paths.every(x=>restored.has(x))))continue;
@@ -363,8 +383,12 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
   reject('Invalid or duplicate excluded unfinished test paths');
  for(const path of excludedTests){
   const m=typeof path==='string'?/^tests\/(?:coffee-)?issue([1-9][0-9]*)-[a-z0-9-]+\.test\.mjs$/.exec(path):null;
-  if(!m)reject('Only issue-scoped unpublished test files can be excluded');
-  const issue=Number(m[1]);
+  const ownerDrive=path===REVIEWED_OWNER_DRIVE_TEST.path&&
+   eligibleOwnerDriveTestExclusion({queue,restoredPaths:plan.restored_paths,
+    publishedSourceSha,developmentSourceSha:manifest.development_source_sha,sourceObjectAt})&&
+   sourceObjectAt(candidateSha,REVIEWED_OWNER_DRIVE_TEST.runtime)===null;
+  if(!m&&!ownerDrive)reject('Only proven issue-scoped or exact owner Drive setup tests can be excluded');
+  const issue=ownerDrive?28:Number(m[1]);
   const unfinishedMixed=queue.items.some(i=>i.issue===issue&&
    ['IN_PROGRESS','TESTING','BLOCKED'].includes(i.state)&&
    i.scope_paths?.some(p=>plan.pinned_ready_paths.includes(p)));
