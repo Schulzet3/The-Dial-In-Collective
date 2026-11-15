@@ -1,3 +1,10 @@
+## 2026-11-15 — #28 owner browser passphrase 403 root cause and development fix [skip netlify]
+
+- PREFLIGHT development `b3e48350030d9a10ea3b59318b2a7f338eb17658`, preflight blob `2fb236bbfa6bac48513eeb3bd157b260853af06d` verified. Netlify production GET200/POST403 observed for owner setup; exact `Origin` request header not available in provider logs. Source has global `Referrer-Policy:no-referrer` GET header, which can cause native navigate-form POST `Origin:null`; strict handler rejects any value other than site origin before checking the passphrase. Prior unit test set synthetic valid Origin and missed this interplay. Referrer-Policy standards independently verified against MDN.
+- Source fix scoped to owner form GET only `Referrer-Policy:same-origin`; OAuth redirects and callbacks retain `no-referrer`, strict Origin/passphrase/CSRF controls not removed. Test adds page/header, safe rejected null/missing origins and OAuth redirect privacy. Queue item `DIC-Q-28-owner-drive-form-referrer-20261115` IN_PROGRESS until PR merged and exact CI checked. **Not published**, no grant, no backup, DB/member or other app changes. Netlify owner passphrase edited after last production deploy, so fresh authorized deployment also required to apply it; owner said original matched before edit, not treated as causal explanation for original 403.
+
+---
+
 ## November 15, 2026 — #28 owner Google Picker one-time setup DEPLOYED and Netlify VERIFIED [skip netlify]
 
 - Mandatory PREFLIGHT live development `d7b1a12b374b3badfb0576cf10c86b176ea7af43`, Git blob `2fb236bbfa6bac48513eeb3bd157b260853af06d`, verified. Owner explicit publication of only the browser-based setup endpoint, not automated courier migration. EXACT selected READY ID `DIC-Q-28-owner-drive-browser-oauth-20261115` and immutable candidate `c9a68360abd192335e91a9f56bb7b4b022c5746e`.

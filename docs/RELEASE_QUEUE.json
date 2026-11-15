@@ -14813,6 +14813,28 @@
       "delivered_release_sha": "8628da42883536549539492817748e8f19b0864f",
       "delivered_netlify_deploy_id": "6af93efe3e9d15f2b41e92de",
       "delivered_at_utc": "2026-11-15T05:11:42.437Z"
+    },
+    {
+      "id": "DIC-Q-28-owner-drive-form-referrer-20261115",
+      "issue": 28,
+      "pr": null,
+      "title": "Fix owner Google Drive setup native form 403 caused by no-referrer Origin:null",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "netlify/functions/dic-owner-drive-connect.mjs"
+      ],
+      "tests": [
+        "Previous owner setup exact CI 5/5 SUCCESS but tests assumed a synthetic Origin header; did not cover browser Referrer-Policy impact.",
+        "Added regression of form response policy, form valid-Origin POST, rejected null/missing origins, and no-referrer OAuth redirect; actual hosted CI pending."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "New scoped source/test change requires same-commit GitHub journal, tested PR, nonforce merge, exact CI and subsequent owner Publish. Live browser acceptance not yet verified.",
+        "Changed Netlify production passphrase after last published function requires new owner-authorized release to capture up-to-date runtime value."
+      ],
+      "owner_source": "Owner November 15, 2026: 'No that's not the case. They matched before I made that change. It's almost certainly something else. Find it. don't be lazy.' Preceding owner instruction 'Get this fixed' authorizes development, not publication.",
+      "notes": "MDN: Referrer-Policy:no-referrer causes Origin:null for navigate-mode HTML POST; source exact Origin guard returns 403 before passphrase compare. Preserve strict Origin check: only GET form gets same-origin referrer policy. No new Google/DB/member/backup writes, courier remains Apps Script; release requires new explicit Publish."
     }
   ],
   "history": [

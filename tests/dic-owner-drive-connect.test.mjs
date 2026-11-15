@@ -91,8 +91,18 @@ test('owner password, origin and content-type guard; Google URL requests only of
  assert.equal((await h(post(vars.DIC_DRIVE_SETUP_PASSPHRASE,'https://untrusted.example'))).status,403);
  const entry=await h(new Request(CALLBACK));assert.equal(entry.status,200);
  assert.match(await entry.text(),/Owner setup passphrase/);
+ assert.equal(entry.headers.get('referrer-policy'),'same-origin',
+  'native HTML form POST must retain the expected same-origin Origin header');
+ const nativeNull=post(vars.DIC_DRIVE_SETUP_PASSPHRASE,'null');
+ assert.equal((await h(nativeNull)).status,403,'null Origin still rejected');
+ const missingOrigin=new Request(CALLBACK,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
+  body:new URLSearchParams({setup_key:vars.DIC_DRIVE_SETUP_PASSPHRASE})});
+ assert.equal((await h(missingOrigin)).status,403,'missing Origin remains rejected');
+
  const {auth,cookie}=await begin(h);
  assert.equal(auth.origin,'https://accounts.google.com');
+ assert.equal((await h(post())).headers.get('referrer-policy'),'no-referrer',
+  'OAuth redirection must not disclose owner setup referrers');
  assert.equal(auth.searchParams.get('redirect_uri'),CALLBACK);
  assert.equal(auth.searchParams.get('scope'),SCOPE);
  assert.equal(auth.searchParams.get('access_type'),'offline');

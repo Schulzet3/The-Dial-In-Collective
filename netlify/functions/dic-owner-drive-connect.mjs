@@ -211,7 +211,9 @@ export function createOwnerDriveConnect({env=defaultEnv,fetcher=fetch,now=()=>Da
     if(!c||!['GET','POST'].includes(request.method)||url.origin!=='https://app.dialincollective.com'||
        url.pathname!=='/api/owner-drive-connect')return html('<h1>Not found</h1>',404);
     if(request.method==='GET'&&!url.searchParams.has('state')&&!url.searchParams.has('code')&&!url.searchParams.has('error'))
-      return html('<h1>Connect encrypted backup storage</h1><p>One-time, owner-only Google Drive permission. No member accounts are connected.</p><form method="post" action="/api/owner-drive-connect"><label>Owner setup passphrase<input name="setup_key" type="password" required autocomplete="off"></label><button type="submit">Authorize Google Drive</button></form><p>Only the <code>drive.file</code> scope is requested. You will select the existing DIC Automated Encrypted Backups folder using Google Picker.</p>');
+      // HTML navigate-mode form POSTs may send Origin:null under Referrer-Policy:no-referrer.
+      // Limit same-origin referrer policy to this passphrase form; all OAuth callbacks remain no-referrer.
+      return html('<h1>Connect encrypted backup storage</h1><p>One-time, owner-only Google Drive permission. No member accounts are connected.</p><form method="post" action="/api/owner-drive-connect"><label>Owner setup passphrase<input name="setup_key" type="password" required autocomplete="off"></label><button type="submit">Authorize Google Drive</button></form><p>Only the <code>drive.file</code> scope is requested. You will select the existing DIC Automated Encrypted Backups folder using Google Picker.</p>',200,{'Referrer-Policy':'same-origin'});
     if(request.method==='POST'){
       if(request.headers.get('origin')!=='https://app.dialincollective.com')
         return html('<h1>Not authorized</h1>',403);
