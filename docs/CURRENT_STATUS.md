@@ -1,3 +1,10 @@
+## November 15, 2026 — Issue #267 QA14 Community shot/count copy verified READY, exhaustive audit still OPEN [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=a45f1f300fc14b2c7a2381ad5a76bb4a7b2a1ead preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- **Narrow confirmed bug fixed:** [PR #2956](https://github.com/Schulzet3/The-Dial-In-Collective/pull/2956) nonforce squash merged exact application SHA `a45f1f300fc14b2c7a2381ad5a76bb4a7b2a1ead`; only `site/cloud/community.js` and `tests/community-ui.test.mjs` modified (plus queue and same-commit scope journal). UI correctly renders 0/1/multiple qualifying shots and contributors, including mixed counts. Existing UI grouping, escaping, Community disclosure, data flow and confidence logic preserved. Older failed PR #2955 was closed unmerged, no force history.
+- **Exact source + CI:** head `b3f27feb24c996412bd8c970a8be1a8f140236ef` approval 43763076102, Node22 validation 43763076127, cloud plus built mobile browser 43763076060, isolated SQL 43763076108, security 43763076048 all SUCCESS; frozen603 SKIPPED (not PASS). Merged-source approval 43763236915, Node22 validation 43763236940, cloud/browser 43763236904, exact-selected 43763236912 all SUCCESS. Four changed Git blobs on merged SHA match exact PR head. No real hosted Auth/RLS/member behavior was tested by this UI patch.
+- **Queue:** `DIC-Q-267-community-count-copy-20261115` promoted narrowly to **READY** with source `a45f1f300fc14b2c7a2381ad5a76bb4a7b2a1ead`, exact CI receipts, scoped deployable path and zero code blockers; **not DEPLOYED**. No release grant/Publish, Netlify provider/production, SQL/Auth/member data, original 603 corpus, backups or schedules changed. Source history, V2 source audits and full live-drift review remain incomplete; Issue #267 **OPEN** and no independent human signoff.
+
 ## November 15, 2026 — #28 real GitHub OAuth consent and native ciphertext courier installed; first real scheduled ZIP pending [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=e6d68ed26485d389d8d5b101691f04d2ca1febef preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
