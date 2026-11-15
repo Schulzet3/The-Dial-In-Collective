@@ -819,7 +819,15 @@
       "claims_verified_externally": "Experimental 59mm cylindrical chamber: ~90C water, 60g ground coffee, ~1L brew, constant 250mL/min; authors explicitly note that quantities/time are closer to drip filter than ordinary espresso. Two different commercial grinds/coffees rather than controlled same-bean grinder comparison. Cylinder pressure drops ~2.3 bar (fine) and 0.65 bar (coarse) matched that fixture; conical spatial extraction gradients are CFD predictions assuming fixed packing, fully wetted bed and no initial dissolved water solubles, not direct live espresso puck images. Article's 18-22% extraction preference history traces to filter-coffee control chart; no new blinded espresso taste/5-rating outcomes.",
       "same_publication_as": "LIT-2019-COFFEE-CFD-UNIFORMITY",
       "same_publication_doi": "10.1371/journal.pone.0219906",
-      "identity_note": "SAME DOI and article title; preserve this independent review pass/provenance/evidence refs but do NOT count as an additional independent primary publication or replicate."
+      "identity_note": "SAME DOI and article title; preserve this independent review pass/provenance/evidence refs but do NOT count as an additional independent primary publication or replicate.",
+      "nonoverlap_review_r281": {
+        "date": "2026-11-15",
+        "source": "original publisher HTML sections Fig10 discussion and model initial-condition caveat",
+        "access": "PLOS_FULL_PUBLISHER_HTML_TEXT_AND_FIGURE_10_CAPTION_DIRECT; IMAGE_ORIGINAL_BROWSER_FETCH_FAILED; NO_ORIGINAL_BINARY_HASH",
+        "result": "Model Figure10 fine-ground local extraction around 5 percentage-point spread is conditional simulated heterogeneity in 60g/1L coffee-bed rig, not sensory/five-score finding. Authors explicitly identify unphysical initial outlet-zero artifact due to fully wet/zero-soluble-start assumption. No unobserved flavors or early-shot correction inferred.",
+        "original_figure_pixel_access": "UNVERIFIED",
+        "same_doi_as": "LIT-2019-COFFEE-CFD-UNIFORMITY"
+      }
     },
     {
       "id": "LIT-2020-KLOTZ-ESPRESSO-TEMP-TRIANGLE",
@@ -9055,6 +9063,36 @@
       "owner_approval": false,
       "implementation_status": "RESEARCH_ONLY_NO_BEHAVIOR_CHANGE",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-281-A",
+      "source": "LIT-2019-MORONEY-CFD-BED-UNIFORMITY",
+      "source_doi": "10.1371/journal.pone.0219906",
+      "original_fulltext_url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0219906",
+      "page_section": "Original first-party publisher HTML Results, Extraction uniformity and the coffee brewing control chart, Fig.10 caption and discussion (paragraphs corresponding web lines 425-452)",
+      "app_source_sha": "525bb67e046588bdb67e351caab9f83c924ac66c",
+      "claim": "The approximately FIVE percentage-point spread of local extraction yield for the fine grind in the paper's target chart region is a model-based spatial variability estimate, not a measured five-point member taste-scale effect. The paper's 60g/approximately 1L, 250mL/min cylindrical coffee test uses drip-filter-like brew quantities; Figure10 model error bars represent within-bed simulated extraction variability, not empirical flavor uncertainty or confidence for a DIC next-shot recommendation.",
+      "grade": "DIRECT_PEER_REVIEWED_FIRST_PARTY_PUBLISHER_FIGURE_CAPTION_AND_RESULTS_TEXT_CONDITIONAL_CFD_NOT_HUMAN_TASTE",
+      "factual_status": "PRIMARY_MODEL_REPORTED_VALUE_VERIFIED_FROM_TEXT_NO_DIC_PREFERENCE_CAUSAL_VALIDATION",
+      "uncertainty": "Figure 10 native PNG image server returned an inaccessible redirect; individual pixel coordinates and raw experimental/model data were not checked. Same publication already tracked under separate DOI alias, no independent-replication credit.",
+      "owner_approval": false,
+      "implementation_status": "RESEARCH_ONLY_NO_APP_OR_NUMERIC_CHANGE",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-281-B",
+      "source": "LIT-2019-MORONEY-CFD-BED-UNIFORMITY",
+      "source_doi": "10.1371/journal.pone.0219906",
+      "original_fulltext_url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0219906",
+      "page_section": "Original original publisher HTML Coffee extraction model assumptions and Figure10 results/discussion (web lines 284-294 and 448-449)",
+      "app_source_sha": "525bb67e046588bdb67e351caab9f83c924ac66c",
+      "claim": "The model assumes coffee grains fully wet at the initial condition and zero solubles in intergranular water, making modeled outlet concentration begin at zero. Authors explicitly say real early outlet concentration should instead be high and decrease as extraction proceeds; infiltration/wetting and bed compaction, particle movement and early multiphase dynamics are not resolved. The early modeled time course cannot establish how a single-change espresso recommendation would affect taste, bloom, feed or pressure across recipe families.",
+      "grade": "DIRECT_FIRST_PARTY_PRIMARY_METHODS_PLUS_AUTHOR_MODEL_LIMITATION_NOT_EMPIRICAL_ESPRESSO_SENSORY",
+      "factual_status": "INITIAL_CONDITION_ARTIFACT_EXPLICITLY_DOCUMENTED_NO_ONE_CHANGE_EFFICACY",
+      "uncertainty": "Model assumption, not a randomized experiment in current member shots; no figure pixel/raw-data or independent replication check.",
+      "owner_approval": false,
+      "implementation_status": "RESEARCH_ONLY_NO_POLICY_CHANGE",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -9260,23 +9298,24 @@
     "R455-276: reconciled existing R275 Salamanca 2017 full-text source +4 bounded checks +1 P3 RESEARCH_ONLY proposal from immutable merged addendum into canonical ledger, preserving every existing 154/451/218 record unchanged; planned totals 155/455/219 if CI/merge succeeds. No app/Locked/production changes, no #267 line credit; continue distinct user-visible Log Shot UX gap, S019 inaccessible.",
     "R455-277: Ch5 original Khamitova 2020 thesis (distinct from already-reviewed Ch3/4), 3 bounded methods/table/model claim checks. Keep prior 155 source identities, 219 proposals; source-specific 458 checks. No owner approval for numeric pressure/tamp/temperature recommendation, no code/queue changes. Resume another nonoverlapping source or reproducible Log Shot UX, S019 standalone PDF still inaccessible.",
     "R455-278: primary Uman 2016 nature.com first-party Methods and Figure4 numeric caption directly checked; internal origin conflict (Guatemala Methods vs El Salvador Figure4) and nonmonotonic 99%-number cutoff across temperatures; one grinder, no warmed-burr experiment nor five-taste next-shot outcome. +3 bounded checks on existing source, no new source or proposal, no app/Locked/telemetry changes. Original PDF/supplement/figure pixels/raw unresolved, standalone S019 unavailable; next disjoint live UX defect or original source.",
-    "R455-280: previously unverified original Khamitova 2020 Ch4 Figure4.4 all eight panels visually inspected at first-party PDF printed pp84-85 (indices100-101), sensory Results pp82-83 crosschecked: +2 bounded evidence checks on existing thesis source => 156 sources/467 checks/220 proposals; not whole PDF or taster raws, no five-criterion or next-shot efficacy and no app/Locked change. Direct page images verified, original PDF SHA unverified; standalone S019 still inaccessible. Next independent real UX defect or nonoverlapping primary source/claim; no #267 line credit."
+    "R455-280: previously unverified original Khamitova 2020 Ch4 Figure4.4 all eight panels visually inspected at first-party PDF printed pp84-85 (indices100-101), sensory Results pp82-83 crosschecked: +2 bounded evidence checks on existing thesis source => 156 sources/467 checks/220 proposals; not whole PDF or taster raws, no five-criterion or next-shot efficacy and no app/Locked change. Direct page images verified, original PDF SHA unverified; standalone S019 still inaccessible. Next independent real UX defect or nonoverlapping primary source/claim; no #267 line credit.",
+    "R455-281: Original PLOS Moroney et al. Figure10 text/caption and model early-stage initialization checked; 2 new bounded source checks on existing DOI = 156 sources/469 checks/220 proposals, NO original image pixels, no espresso five-rating effect or application bug proven. Continue distinct source or source-reproducible Log Shot UX gap; standalone S019 remains unavailable; #267 literal credit zero."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-280_KHAMITOVA_CH4_EIGHT_EXPERT_SENSORY_FIGURE_PANELS",
+    "run_id": "R455-281_MORONEY_FIG10_AND_INITIAL_CONDITION_TEXT",
     "date": "2026-11-15",
-    "development_preflight_sha": "7f5e685e28086562147319ed4e09a02d53b6cc6a",
+    "development_preflight_sha": "525bb67e046588bdb67e351caab9f83c924ac66c",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "prewrite_source_sha": "7f5e685e28086562147319ed4e09a02d53b6cc6a",
-    "original_ledger_blob_sha": "82a21fbe2b991e5802ee01990cc7a488f04f17fb",
+    "prewrite_source_sha": "525bb67e046588bdb67e351caab9f83c924ac66c",
+    "original_ledger_blob_sha": "42606aa5eafb41f969a7fd542ebf3b1d947678af",
     "source_counts": {
       "sources": 156,
-      "evidence_checks": 467,
+      "evidence_checks": 469,
       "proposals": 220
     },
-    "scope": "New primary PDF raster verification of all eight original Chapter4 expert sensory Figure4.4 panels on pp84-85, crosschecked pp82-83, without duplicating previously checked Ch3/5/Ch4 methods; two new claim-level evidence checks, no new policy or empirical DIC next-shot outcome.",
+    "scope": "Original full publisher text Figure10 numerical 5pp local model variability and early zero-outflow concentration artifact, no figure PNG/raw data; two check additions to existing DOI, not independent evidence or improved espresso claim.",
     "github267_line_credit": 0,
-    "next": "Complete PR-head CI and nonforce merge, verify blob parity and document in #455. Continue source-specific gaps or reproducible Log Shot UX issue. S019 original unavailable."
+    "next": "Nonforce PR CI/merge/readback if source unchanged; then new distinct reproducible Log Shot UX or research claim. S019 standalone inaccessible."
   },
   "policy_decisions_resolved": [
     {
