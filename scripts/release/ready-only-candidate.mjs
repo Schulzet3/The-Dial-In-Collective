@@ -134,6 +134,11 @@ export function discoverCompatibleAuditSupport({queue,restoredPaths,pinnedReadyP
  publishedSourceSha,developmentSourceSha,sourceObjectAt}={}){
  const spec=REVIEWED_COMPATIBLE_AUDIT_SUPPORT;
  if(typeof sourceObjectAt!=='function')return [];
+ // If the known unready helper is present, an unexpected published helper
+ // blob is a hard HOLD, not permission to silently delete coverage.
+ if(sourceObjectAt(developmentSourceSha,spec.path)==='100644:'+spec.unfinishedBlobSha&&
+    sourceObjectAt(publishedSourceSha,spec.path)!=='100644:'+spec.historicalBlobSha)
+   throw Error('Published historical audit helper bytes do not match reviewed source');
  if(!reviewedUnreadySupport(spec.path,{queue,restoredPaths,pinnedReadyPaths,
    publishedSourceSha,developmentSourceSha,sourceObjectAt}))return [];
  if(sourceObjectAt(developmentSourceSha,spec.path)!=='100644:'+spec.unfinishedBlobSha)
