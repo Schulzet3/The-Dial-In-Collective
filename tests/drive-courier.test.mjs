@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {verifyTrustedRun, verifyAuthorizedPushRequest, selectArtifact, assertArchiveIdentity, REPO, FOLDER_ID} from '../scripts/backups/drive-courier.mjs';
+import {verifyTrustedRun, verifyAuthorizedPushRequest, selectArtifact, selectExistingCopy, assertArchiveIdentity, REPO, FOLDER_ID} from '../scripts/backups/drive-courier.mjs';
 
 const run={id:123,status:'completed',conclusion:'success',head_branch:'main',
   repository:{full_name:REPO},event:'schedule',path:'.github/workflows/nightly-backup.yml'};
@@ -52,4 +52,25 @@ test('only one-file authorized backup request main push can opt into courier',()
   ]) assert.throws(()=>verifyAuthorizedPushRequest(push,bad));
   assert.throws(()=>verifyAuthorizedPushRequest({...push,head_sha:'bad'},commit));
   assert.throws(()=>verifyAuthorizedPushRequest({...push,event:'schedule'},commit));
+});
+
+test('native and legacy Apps Script copies deduplicate by exact Drive MD5 and private folder',()=>{
+  const local={md5:'b'.repeat(32)};
+  const legacy={id:'existing-legacy',name:'dic-nightly-456.zip',size:'100',
+    md5Checksum:local.md5,parents:[FOLDER_ID],shared:false,trashed:false};
+  assert.equal(selectExistingCopy({files:[]},artifact,local),null);
+  assert.equal(selectExistingCopy({files:[legacy]},artifact,local),legacy);
+  const native={...legacy,appProperties:{dicArtifactId:'456',dicSha256:artifact.digest}};
+  assert.equal(selectExistingCopy({files:[native]},artifact,local),native);
+  for(const invalid of [
+    {...legacy,md5Checksum:'c'.repeat(32)},
+    {...legacy,size:'101'},
+    {...legacy,shared:true},
+    {...legacy,name:'unexpected.zip'},
+    {...legacy,parents:['somewhere-else']},
+    {...native,appProperties:{dicArtifactId:'456',dicSha256:'sha256:bad'}}
+  ])assert.throws(()=>selectExistingCopy({files:[invalid]},artifact,local));
+  assert.throws(()=>selectExistingCopy({files:[legacy,legacy]},artifact,local));
+  assert.throws(()=>selectExistingCopy({files:[legacy],nextPageToken:'more'},artifact,local));
+  assert.throws(()=>selectExistingCopy({},artifact,local));
 });
