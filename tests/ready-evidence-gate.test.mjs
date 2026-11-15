@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {checkRunReceiptId,exactRecordedChecks,verifyReadyItems} from '../scripts/release/ready-evidence-gate.mjs';
+import {checkRunReceiptId,exactRecordedChecks,verifyReadyItems,githubReleaseReaders} from '../scripts/release/ready-evidence-gate.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40);
 const item={id:'DIC-Q-1938-test',issue:1938,title:'Toggle',owner_source:'Owner',state:'READY',
  merged_source_sha:A,scope_paths:['site/admin/push.js'],
@@ -51,4 +51,44 @@ test('candidate batch enforces actual published diff and exact ownership, not qu
  const bad=await verifyReadyItems({...deps,currentSourceSha:undefined,
   publishedSourceSha:B,candidateSha:C,candidateChangedPaths:['site/admin/push.js','site/admin/unfinished.js']});
  assert.equal(bad.ready,false);
+});
+
+test('live GitHub check-run reader obtains every page before five-check source certification',async()=>{
+ const sha='f'.repeat(40),requested=[];
+ const all=Array.from({length:235},(_,i)=>({id:1000+i,head_sha:sha,app:{slug:'github-actions'},name:'check-'+i,
+  details_url:'https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/999/job/'+(1000+i),status:'completed',conclusion:'success'}));
+ const request=async url=>{
+  const u=new URL(url),page=Number(u.searchParams.get('page'));
+  requested.push(page);
+  return {ok:true,json:async()=>({total_count:235,check_runs:all.slice((page-1)*100,page*100)})};
+ };
+ const readers=await githubReleaseReaders('read-only-token',{request});
+ const actual=await readers.loadChecks(sha);
+ assert.deepEqual(requested,[1,2,3]);
+ assert.equal(actual.length,235);
+ assert.deepEqual(actual.map(x=>x.id),all.map(x=>x.id));
+});
+test('GitHub check-run pagination denies truncated, duplicated and concurrent-drifted results',async()=>{
+ const sha='e'.repeat(40),ids=Array.from({length:100},(_,i)=>({id:5000+i}));
+ const bad=[
+  (page)=>({total_count:101,check_runs:page===1?ids:[]}), // no 101st receipt
+  (page)=>({total_count:101,check_runs:page===1?ids:[ids[0]]}), // duplicated receipt
+  (page)=>({total_count:page===1?101:102,check_runs:page===1?ids:[{id:9000}]}), // changing count
+  (page)=>({total_count:1001,check_runs:page===1?ids:[]}), // bounded fail-closed
+  (page)=>({total_count:101,check_runs:page===1?ids.slice(0,99):[{id:9001}]}) // missing page 1
+ ];
+ for(const data of bad){
+  const request=async url=>({ok:true,json:async()=>data(Number(new URL(url).searchParams.get('page')))});
+  const readers=await githubReleaseReaders('read-only-token',{request});
+  await assert.rejects(readers.loadChecks(sha),/readback|bounded/);
+ }
+});
+test('GitHub check-run reader preserves one-page completeness and empty fail-closed evidence',async()=>{
+ for(const n of [0,1,100]){
+  let pages=0;
+  const request=async url=>{pages++;return {ok:true,json:async()=>({total_count:n,check_runs:Array.from({length:n},(_,i)=>({id:i+1}))})};};
+  const x=await githubReleaseReaders('read-only-token',{request});
+  assert.equal((await x.loadChecks('c'.repeat(40))).length,n);
+  assert.equal(pages,1);
+ }
 });

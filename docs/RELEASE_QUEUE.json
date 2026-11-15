@@ -14771,6 +14771,28 @@
       ],
       "notes": "Official Google Web Picker correction merged with 5 exact PR-head CI SUCCESS; app remains IN_PROGRESS, not READY/DEPLOYED due private Google account/provider consent and separate publish gates. No production Netlify, Google Drive, archive, Supabase/member, backup workflow, credential changes or cutoff. Existing Apps Script backups unaffected.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-33-r216-ready-gate-complete-github-check-pagination",
+      "issue": 33,
+      "pr": 2829,
+      "title": "Strict GitHub READY source-check pagination on large original603 source merges",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "scripts/release/ready-evidence-gate.mjs"
+      ],
+      "owner_source": "Owner Issue #33 development-only source QA; preflight dev 8bfa1f824e1a98f3090a8559136bc6ecac2137e9 blob 2fb236bbfa6bac48513eeb3bd157b260853af06d; original 603-semantic review active, no publication authorization.",
+      "tests": [
+        "Real strict approval 43671862546 failed due >100 GitHub checks on R215 merged source 8bc115e0; previous gate read only first page then refused source certification.",
+        "New mocked stable 235-check multi-page positive and truncated/duplicate/changing-count/overcap negative Node regressions; exact PR-head CI and safe nonforce merge PENDING. All five existing checked-source production release gates unchanged."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact CI, nonforce code merge, exact-source Git blob parity and independently completed strict pagination readback PENDING."
+      ],
+      "notes": "Fail closed, do not waive READY review or weaken source/check provenance. This owner task never authorizes Netlify publication, production SQL/Auth/member writes, backup or schedule change.",
+      "production_deployed": false
     }
   ],
   "history": [
