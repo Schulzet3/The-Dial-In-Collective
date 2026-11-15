@@ -40,6 +40,17 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
   if(!m||m[3]!==path)throw Error('Unexpected source object or unsafe mode: '+path);
   return m[1]+':'+m[2];
  };
+ const lastReviewedReadyObject=(owners,path)=>{
+  if(!owners.length)throw Error('No selected READY owner for '+path);
+  // A co-selected same-file dependency is valid ONLY with one exact
+  // chronologically latest reviewed merge. Never use queue entry order.
+  const tips=owners.filter(tip=>owners.every(owner=>
+   owner===tip||ancestor(owner.merged_source_sha,tip.merged_source_sha)===true));
+  if(tips.length!==1)throw Error('Selected READY same-file merge ancestry is ambiguous: '+path);
+  const object=sourceObjectAt(tips[0].merged_source_sha,path);
+  if(!object)throw Error('Last selected READY merge lacks file: '+path);
+  return object;
+ };
  const developmentPaths=changed(publishedSourceSha,developmentSourceSha);
  const unpublishedWorkflows=workflowChangedPaths(developmentPaths);
  const workflowOnlyTests=discoverReviewedWorkflowTestExclusions({
@@ -49,16 +60,16 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
   selectedIds,pinnedReadyPaths,developmentChangedPaths:developmentPaths,isAncestor:ancestor});
  if(!plan.ready)throw Error('READY-only staging HOLD: '+plan.errors.join('; '));
  const unpublishedTests=discoverExcludedUnreadyTests({queue,selectedIds:plan.selected_ids,
-  restoredPaths:plan.restored_paths,publishedSourceSha,developmentSourceSha,
-  changedPaths:developmentPaths,sourceObjectAt});
+  restoredPaths:plan.restored_paths,pinnedReadyPaths:plan.pinned_ready_paths,
+  publishedSourceSha,developmentSourceSha,changedPaths:developmentPaths,sourceObjectAt});
  // A later untracked same-file edit must not be smuggled under a READY scope.
  for(const path of plan.included_paths){
   const owners=plan.ready_items.filter(i=>i.scope_paths.includes(path));
-  const readyBlobs=[...new Set(owners.map(i=>sourceObjectAt(i.merged_source_sha,path)))];
+  const selectedObject=lastReviewedReadyObject(owners,path);
   if(plan.pinned_ready_paths.includes(path)){
-   if(readyBlobs.length!==1||!readyBlobs[0]||readyBlobs[0]===sourceObjectAt(developmentSourceSha,path))
-    throw Error('READY-only staging HOLD: cannot pin exactly one different approved READY blob: '+path);
-  }else if(!readyBlobs.includes(sourceObjectAt(developmentSourceSha,path)))
+   if(selectedObject===sourceObjectAt(developmentSourceSha,path))
+    throw Error('READY-only staging HOLD: cannot pin a different approved READY blob: '+path);
+  }else if(selectedObject!==sourceObjectAt(developmentSourceSha,path))
    throw Error('READY-only staging HOLD: unapproved same-file content after READY merge: '+path);
  }
  const temp=mkdtempSync(join(tmpdir(),'dic-ready-stage-'));
@@ -75,9 +86,8 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    else git(['update-index','--force-remove','--',path],{env});
   }
   for(const path of plan.pinned_ready_paths){
-   const owner=plan.ready_items.find(i=>i.scope_paths.includes(path));
-   const object=owner&&sourceObjectAt(owner.merged_source_sha,path);
-   if(!object)throw Error('Cannot recover exact READY blob for pinned path: '+path);
+   const owners=plan.ready_items.filter(i=>i.scope_paths.includes(path));
+   const object=lastReviewedReadyObject(owners,path);
    const [mode,sha]=object.split(':');
    git(['update-index','--add','--cacheinfo',mode,sha,path],{env});
   }
