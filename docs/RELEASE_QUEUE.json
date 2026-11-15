@@ -14676,8 +14676,8 @@
       "issue": 455,
       "pr": 2815,
       "title": "Show truthful prior-shot basket and feeding-mode context beside optional Log Shot temperature prefill",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "8ece5359d7c50d92e52b6652f1ee1ae3ca5be700",
       "scope_paths": [
         "site/lib/engine.js"
       ],
@@ -14685,14 +14685,26 @@
       "tests": [
         "R270 initial code/test/journal head 09f38e95b09852eaa476f47c5430f8de325e552d: six synthetic tests target matching original, different basket, Slow Feed, combined context, missing archival field and optional-temp disabled; exact Node22 result initially PENDING.",
         "PR #2815 initial head 09f38e95b09852eaa476f47c5430f8de325e552d approval/continuity 43664390648 FAILED solely untracked site/lib/engine.js queue intake, not a source test result; add this IN_PROGRESS item on corrected source branch, do not recast failure PASS.",
-        "Initial head cloud-tests and security-inventory SUCCESS; validate, sql and mobile-browser-qa pending at reconciliation. New PR head CI and merged-source checks must be independently read before READY; frozen603 SKIPPED not PASS."
+        "Initial head cloud-tests and security-inventory SUCCESS; validate, sql and mobile-browser-qa pending at reconciliation. New PR head CI and merged-source checks must be independently read before READY; frozen603 SKIPPED not PASS.",
+        "Corrected PR head 4dd5ea6155b7b5bee0404af5900a5734205aed41: exact Node22/lint 43664525385 SUCCESS, 4933 PASS / 0 FAIL / 6 intentional SKIP, including all six R270 positive/negative tests 4364–4369; browser/cloud 43664525397 SUCCESS, isolated SQL 43664525376 SUCCESS, security 43664525392 SUCCESS, exact-selected 43664525391/43664525390 SUCCESS, approval/continuity 43664525375 SUCCESS.",
+        "Nonforce squash [skip netlify] PR #2815 merged at 8ece5359d7c50d92e52b6652f1ee1ae3ca5be700 from concurrent upstream ebde4401b7c8caecb6df577587b87a3db7815f48; all five exact source/test/journal/queue/ledger Git blobs identical to reviewed PR head, no deletions.",
+        "Merged exact-source Node22/lint 43664842421 SUCCESS, 4933 PASS / 0 FAIL / 6 intentional SKIP with six R270 tests; merged cloud/browser/mobile/offline 43664842531 SUCCESS, merged exact-selected 43664842501 SUCCESS, merged governance/approval 43664842416 SUCCESS; PR-head SQL/security successful and byte-identical source reused. Original603 SKIPPED, never PASS; no Auth/member espresso quality or production tests performed."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "New exact-source PR head tests and approval/continuity incomplete; corrected CI required.",
-        "Nonforce merge/readback and merged governance incomplete; do not mark READY or publish."
+      "ci_runs": [
+        43664525385,
+        43664525397,
+        43664525376,
+        43664525392,
+        43664525391,
+        43664525390,
+        43664525375,
+        43664842421,
+        43664842531,
+        43664842501,
+        43664842416
       ],
-      "notes": "Same-context style, basket, feed remains unlabeled; different basket/feed or cross-style prefill displays provenance. Measured temp, all five unfilled taste ratings, original private notes and shots, original grinder/feed/style and one-control logic unchanged. NO new member capture, numeric espresso targets, Locked policy, DB/Auth/Edge, provider or production effects. Development only, owner Publish required separately. Exact PR-head and merged CI must be verified before READY. Source evidence stored in scoped journal; no #267 line-credit.",
+      "blockers": [],
+      "notes": "Same-context style, basket, feed remains unlabeled; different basket/feed or cross-style prefill displays provenance. Measured temp, all five unfilled taste ratings, original private notes and shots, original grinder/feed/style and one-control logic unchanged. NO new member capture, numeric espresso targets, Locked policy, DB/Auth/Edge, provider or production effects. Development only, owner Publish required separately. Exact PR-head and merged CI must be verified before READY. Source evidence stored in scoped journal; no #267 line-credit.\nR270 final exact PR-head + merged source PASS. Development-only READY at 8ece5359d7c50d92e52b6652f1ee1ae3ca5be700; original preflight branch 36d1ceacab15875dc21766e1a6407f132232e80c; source/test/journal blob identity checked. No owner publication grant; no real-person efficacy or original603 certification.",
       "production_deployed": false
     }
   ],
