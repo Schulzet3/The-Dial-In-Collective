@@ -120,3 +120,5 @@ export function selectedProductPurchaseRootH2(html){
  const h=titles[0],name=decode(html.slice(h.headEnd,h.contentEnd).replace(/<[^>]{0,1200}>/gu,' ')).replace(/\s+/gu,' ').trim();
  return name&&name.length<=220?[name]:[];
 }
+
+export {selectedSchemaProductOfferH2} from '../../src/server/coffee-selected-offer-h2.mjs';

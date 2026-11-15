@@ -1544,7 +1544,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  // farm/grower attributions as reviewable, noncanonical details.
  const ownedContext=selectedCoffeeContextRoles(canonicalProduct,{name:fields.name,clean});
  const narrative=extractNarrativeCoffeeEvidence(canonicalProduct,{name:fields.name,fields,originConflict:conflicts.has('origin')});
-  const directSelected=selectedDirectProductCredits(canonicalProduct,{name:fields.name,clean,optionHtml:html});
+  const directSelected=selectedDirectProductCredits(canonicalProduct,{name:fields.name,clean,optionHtml:html,source_url});
   const selectedPriceBadge=selectedCurrentCoffeeReleaseBadge(canonicalProduct,{name:fields.name});
   if(selectedPriceBadge&&!fields.release_label&&!conflicts.has('release_label'))
    addField(fields,'release_label',selectedPriceBadge);
