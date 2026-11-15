@@ -1,3 +1,11 @@
+## November 15, 2026 — #28 narrow owner Google Picker setup READY preparation ONLY [skip netlify]
+
+- Owner explicitly authorized one Google Drive integration publication, then delegated all executable preparation. Mandatory preflight development `34b7f9a106142c07fe2d75d293917f7770cd0b67`, `docs/ai/PREFLIGHT.md` blob `2fb236bbfa6bac48513eeb3bd157b260853af06d` verified. Exact function blob `0f88668b8dfd0f334aab344ef1e169f92e8a0be9` and test blob `5078c3afec7157b88e1d8f1af4e1bcb0f0e961cf` unchanged from reviewed PR #2827; five PR-head exact CI jobs SUCCESS (43669375755, 43669375743, 43669375735, 43669375733, 43669375779).
+- Netlify owner project has six private runtime setup keys read back; client ID and restricted Picker API key format, numeric project number and enabled flag valid; secret/passphrase are secret-flagged and production-only (values not exposed). **Narrow queue setup-function scope** `DIC-Q-28-owner-drive-browser-oauth-20261115` documented as READY development only; full Google Cloud authorization, one-time folder picker proof, GitHub Actions token, sealed runner smoke and scheduled ciphertext delivery remain NOT VERIFIED and separately tracked in open #28, unmerged main draft PR #2684. No new production deploy, Google/Supabase/member/write or old Apps Script backup change.
+- NEXT: obtain passing GitHub approval on docs-only narrow queue change, then source-isolate ONE owner-function candidate against exact published baseline and run all five candidate CI; only then one-use main controller and Netlify current/readback. Pending/failed checks are HOLD; do not claim DEPLOYED from this preparation.
+
+---
+
 ## November 15, 2026 — READY7 one-use production publication VERIFIED [skip netlify]
 
 - PREFLIGHT dev `79478ceb1b8c455412e4fdb221156be1ec0725f6`, blob `2fb236bbfa6bac48513eeb3bd157b260853af06d`, verified. Owner approved one READY publication; separately READY R202 dependency included. Seven selected READY IDs now DEPLOYED in queue; 8 IN_PROGRESS / 4 TESTING remain excluded.
