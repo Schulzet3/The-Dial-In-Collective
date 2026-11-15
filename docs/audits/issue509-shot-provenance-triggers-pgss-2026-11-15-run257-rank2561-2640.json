@@ -1,0 +1,888 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 257,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight_development_sha": "9b7dfabfafad68b1af344d2af6764c9142ea3664",
+  "prewrite_development_sha": "9b7dfabfafad68b1af344d2af6764c9142ea3664",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "observed_at": "2026-11-15 04:44:13.241538+00",
+  "provider_snapshot": {
+    "observed_at": "2026-11-15 04:44:13.241538+00",
+    "pgss_rows": 4970,
+    "app_functions": 114,
+    "app_tables": 52,
+    "policies": 41,
+    "migrations": 69,
+    "rls_disabled": 0
+  },
+  "complete_sql_definitions": [
+    {
+      "signature": "private.bump_revision()",
+      "full_source": "CREATE OR REPLACE FUNCTION private.bump_revision()\n RETURNS trigger\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\nbegin\n  new.revision:=old.revision+1;\n  new.updated_at:=clock_timestamp();\n  new.created_at:=old.created_at;\n  return new;\nend $function$\n",
+      "md5": "651239ce95a684d072c16fdb895ead7d",
+      "chars": 261,
+      "security_definer": false,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "auth_execute": false,
+      "service_execute": false,
+      "range": {
+        "start_character": 1,
+        "end_character": 261,
+        "complete": true
+      },
+      "verdict": "Twelve enabled BEFORE UPDATE attachments. Increments revision, resets updated_at, preserves original created_at; revision overflow and concurrent behaviour need isolation tests, no reproduced defect."
+    },
+    {
+      "signature": "private.capture_equipment_snapshot()",
+      "full_source": "CREATE OR REPLACE FUNCTION private.capture_equipment_snapshot()\n RETURNS trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare v public.setup_versions; b public.basket_versions; g public.grinder_calibrations;\nbegin\n select * into strict v from public.setup_versions where id=new.setup_version_id and owner_id=new.owner_id and setup_id=new.setup_id;\n select * into strict b from public.basket_versions where id=new.basket_version_id and owner_id=new.owner_id and setup_id=new.setup_id;\n select * into strict g from public.grinder_calibrations where id=new.calibration_id and owner_id=new.owner_id and setup_id=new.setup_id;\n if v.grinder_model is distinct from g.grinder_model or v.burr_set is distinct from g.burr_set then\n  raise exception using errcode='23514',message='Calibration does not match the recorded grinder and burrs.';\n end if;\n new.equipment_snapshot:=jsonb_build_object('machine_model',v.machine_model,'grinder_model',v.grinder_model,'burr_set',v.burr_set,\n 'basket_model',b.model,'basket_dose_g',b.basket_dose_g,'finest_setting',g.finest_setting,'coarsest_setting',g.coarsest_setting);\n return new;\nend $function$\n",
+      "md5": "90c66b59638b48d360e9fd949db63707",
+      "chars": 1166,
+      "security_definer": true,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "auth_execute": false,
+      "service_execute": false,
+      "range": {
+        "start_character": 1,
+        "end_character": 1166,
+        "complete": true
+      },
+      "verdict": "Enabled BEFORE INSERT on shots; strictly resolves setup, basket and calibration to the same owner/setup, rejects grinder/burr mismatch and writes historical equipment snapshot. No row content accessed; mutation/trigger integration not retested."
+    },
+    {
+      "signature": "private.classify_personal_shot(shotid uuid)",
+      "full_source": "CREATE OR REPLACE FUNCTION private.classify_personal_shot(shotid uuid)\n RETURNS void\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare s public.shots; fid uuid; previous uuid;\nbegin\n select * into strict s from public.shots where id=shotid;\n previous:=s.personal_family_id;\n -- Only an eligible green, visible shot can remain an explicit saved favorite.\n -- The stored shot ID is never redirected to another shot.\n if s.hidden_at is not null or not s.is_dialed_in then\n  update public.recipe_preferences p set favorite_shot_id=null\n   where p.owner_id=s.owner_id and p.favorite_shot_id=s.id;\n end if;\n if s.hidden_at is not null then\n  if previous is not null then perform private.refresh_personal_family(previous); end if;\n else\n  if s.is_dialed_in then\n   select f.id into fid from public.personal_recipe_families f\n    where f.owner_id=s.owner_id and f.library_entry_id=s.library_entry_id\n     and f.style=s.style and f.evidence_state<>'retired'\n     and abs(coalesce((f.statistics->'ratio'->>'center')::numeric,s.ratio)-s.ratio)<=.25\n    order by abs(coalesce((f.statistics->'ratio'->>'center')::numeric,s.ratio)-s.ratio),f.created_at,f.id\n    limit 1;\n   if fid is null then\n    insert into public.personal_recipe_families(owner_id,library_entry_id,style,statistics,estimator_version)\n     values(s.owner_id,s.library_entry_id,s.style,\n       jsonb_build_object('count',0,'ratio',jsonb_build_object('center',s.ratio)),\n       'ratio_cluster_v1') returning id into fid;\n   end if;\n  end if;\n  if s.personal_family_id is distinct from fid then\n   update public.shots set personal_family_id=fid where id=shotid;\n  end if;\n  if previous is not null then perform private.refresh_personal_family(previous); end if;\n  if fid is not null then\n   perform private.refresh_personal_family(fid);\n   insert into public.recipe_preferences(owner_id,setup_id,setup_version_id,library_entry_id,style,current_family_id)\n    values(s.owner_id,s.setup_id,s.setup_version_id,s.library_entry_id,s.style,fid)\n    on conflict(owner_id,setup_id,setup_version_id,library_entry_id,style)\n    do update set current_family_id=coalesce(public.recipe_preferences.current_family_id,excluded.current_family_id);\n   -- A manually selected example that is corrected into another eligible\n   -- family remains the same deliberately selected example, not an auto choice.\n   update public.recipe_preferences p set current_family_id=fid\n    where p.owner_id=s.owner_id and p.favorite_shot_id=s.id\n     and p.setup_version_id=s.setup_version_id\n     and p.library_entry_id=s.library_entry_id and p.style=s.style\n     and p.current_family_id is distinct from fid;\n  end if;\n end if;\n -- Retire unsupported Current only after family refresh.\n update public.recipe_preferences p set current_family_id=null\n  where p.owner_id=s.owner_id and p.library_entry_id=s.library_entry_id\n   and p.current_family_id is not null and not exists(\n    select 1 from public.shots x\n     where x.owner_id=p.owner_id and x.setup_version_id=p.setup_version_id\n      and x.library_entry_id=p.library_entry_id and x.style=p.style\n      and x.personal_family_id=p.current_family_id and x.is_dialed_in\n      and x.hidden_at is null);\nend $function$\n",
+      "md5": "5183deb46474c10468638cef08d2bd05",
+      "chars": 3219,
+      "security_definer": true,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "auth_execute": false,
+      "service_execute": false,
+      "range": {
+        "start_character": 1,
+        "end_character": 3219,
+        "complete": true
+      },
+      "verdict": "Not a trigger: called from current private.mutate and private.dic_admin_edit_record; hidden or non-dialed shots lose favorite eligibility; ratio-cluster selection refreshes current/previous family and retires unsupported current family. Cascaded updates and recommendation integrity not isolated-tested this run."
+    },
+    {
+      "signature": "private.dic_capture_first_decaf_method()",
+      "full_source": "CREATE OR REPLACE FUNCTION private.dic_capture_first_decaf_method()\n RETURNS trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare decaf boolean; method text; title text;\nbegin\n if new.status<>'approved' or new.canonical_coffee_id is null\n  or old.status='approved' then return new; end if;\n if not exists (select 1 from private.dic_coffee_first_entry first\n  where first.coffee_id=new.canonical_coffee_id and first.first_submission_id=new.id)\n then return new; end if;\n select c.name into title from public.coffees c where c.id=new.canonical_coffee_id;\n decaf := (coalesce(new.proposed_data->>'is_decaf','false')='true'\n   or title ~* '(^|[^[:alnum:]])decaf(feinated)?([^[:alnum:]]|$)')\n   and title !~* '(^|[^[:alnum:]])(half[ -]?caf|semi[ -]?decaf|partially[ -]?decaf)';\n method := nullif(btrim(coalesce(new.proposed_data->>'decaffeination_method','')),'');\n if method not in ('Water Process','Sugar Process','Carbon Dioxide (CO2)') then method:=null; end if;\n update public.coffees c set is_decaf=decaf,\n  decaffeination_method=case when decaf then method else null end\n where c.id=new.canonical_coffee_id and c.decaffeination_method is null;\n return new;\nend;\n$function$\n",
+      "md5": "9a47ec8959cf43d08f1d326e4b0bce4f",
+      "chars": 1211,
+      "security_definer": true,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "auth_execute": false,
+      "service_execute": false,
+      "range": {
+        "start_character": 1,
+        "end_character": 1211,
+        "complete": true
+      },
+      "verdict": "Enabled AFTER UPDATE on coffee_submissions; only first approved canonical submission applies recognized decaf flag/method when existing method NULL. Title regex and missing-method behavior are heuristic/Locked-source questions, not independently reproduced bugs."
+    },
+    {
+      "signature": "private.dic_capture_recommendation_context()",
+      "full_source": "CREATE OR REPLACE FUNCTION private.dic_capture_recommendation_context()\n RETURNS trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare raw text; p jsonb; controls jsonb; tier text; label text;\n contributors integer; shots integer;\nbegin\n raw:=current_setting('dic.recommendation_context',true);\n if raw is null or length(raw)>800 then return new;end if;\n begin p:=raw::jsonb;exception when others then return new;end;\n if jsonb_typeof(p) is distinct from 'object' then return new;end if;\n controls:=p->'used_controls';\n if jsonb_typeof(controls) is distinct from 'array' or\n    jsonb_array_length(controls) not between 1 and 2 then return new;end if;\n if exists(select 1 from jsonb_array_elements_text(controls) as x(control)\n    where x.control not in ('grind','temperature')) then return new;end if;\n label:=left(coalesce(nullif(btrim(p->>'source_label'),''),'Starting recommendation'),90);\n tier:=case when p->>'community_tier' in ('exact','related_release','similar_coffee')\n     then p->>'community_tier' else null end;\n contributors:=case when (p->>'contributor_count') ~ '^[0-9]{1,6}$'\n     then least(100000,(p->>'contributor_count')::integer) else null end;\n shots:=case when (p->>'shot_count') ~ '^[0-9]{1,6}$'\n     then least(100000,(p->>'shot_count')::integer) else null end;\n if contributors is null or shots is null or contributors<1 or shots<contributors then\n  tier:=null;contributors:=null;shots:=null;\n end if;\n new.recommendation_context:=jsonb_build_object(\n   'kind','member_selected_starting_reference',\n   'source_label',label,'used_controls',controls,\n   'community_tier',tier,'contributor_count',contributors,'shot_count',shots,\n   'source_verified_independently',false);\n return new;\nend $function$\n",
+      "md5": "962e12faeac2a7b5a671bd837c6c5c41",
+      "chars": 1760,
+      "security_definer": true,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "auth_execute": false,
+      "service_execute": false,
+      "range": {
+        "start_character": 1,
+        "end_character": 1760,
+        "complete": true
+      },
+      "verdict": "Enabled BEFORE INSERT on shots; bounded 800-character JSON context GUC, only grind/temperature controls, sane contributor/shot counts, explicit source_verified_independently=false. No basis to treat this as externally verified community evidence."
+    },
+    {
+      "signature": "private.protect_shot_provenance()",
+      "full_source": "CREATE OR REPLACE FUNCTION private.protect_shot_provenance()\n RETURNS trigger\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\nbegin\n if row(new.id,new.owner_id,new.library_entry_id,new.setup_id,new.setup_version_id,new.basket_version_id,new.calibration_id,new.equipment_snapshot,new.legacy_import,new.legacy_id)\n is distinct from row(old.id,old.owner_id,old.library_entry_id,old.setup_id,old.setup_version_id,old.basket_version_id,old.calibration_id,old.equipment_snapshot,old.legacy_import,old.legacy_id) then\n  raise exception using errcode='23514',message='Historical shot provenance is immutable; use an audited correction workflow.';\n end if;\n return new;\nend $function$\n",
+      "md5": "9700d82ba097c7eba83b76135acbdac1",
+      "chars": 683,
+      "security_definer": false,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "auth_execute": false,
+      "service_execute": false,
+      "range": {
+        "start_character": 1,
+        "end_character": 683,
+        "complete": true
+      },
+      "verdict": "Enabled BEFORE UPDATE on shots; forbids changes to historical equipment/owner/library/import provenance columns with 23514; compatible with member data-preservation intent. No live update executed."
+    }
+  ],
+  "complete_trigger_definitions": [
+    {
+      "table_name": "public.account_preferences",
+      "trigger_name": "bump_revision",
+      "complete_trigger_definition": "CREATE TRIGGER bump_revision BEFORE UPDATE ON account_preferences FOR EACH ROW EXECUTE FUNCTION private.bump_revision()",
+      "enabled": "O",
+      "internal": false,
+      "function_name": "bump_revision"
+    },
+    {
+      "table_name": "public.bags",
+      "trigger_name": "bump_revision",
+      "complete_trigger_definition": "CREATE TRIGGER bump_revision BEFORE UPDATE ON bags FOR EACH ROW EXECUTE FUNCTION private.bump_revision()",
+      "enabled": "O",
+      "internal": false,
+      "function_name": "bump_revision"
+    },
+    {
+      "table_name": "public.baskets",
+      "trigger_name": "bump_revision",
+      "complete_trigger_definition": "CREATE TRIGGER bump_revision BEFORE UPDATE ON baskets FOR EACH ROW EXECUTE FUNCTION private.bump_revision()",
+      "enabled": "O",
+      "internal": false,
+      "function_name": "bump_revision"
+    },
+    {
+      "table_name": "public.coffee_submissions",
+      "trigger_name": "bump_revision",
+      "complete_trigger_definition": "CREATE TRIGGER bump_revision BEFORE UPDATE ON coffee_submissions FOR EACH ROW EXECUTE FUNCTION private.bump_revision()",
+      "enabled": "O",
+      "internal": false,
+      "function_name": "bump_revision"
+    },
+    {
+      "table_name": "public.coffee_submissions",
+      "trigger_name": "dic_capture_first_decaf_method",
+      "complete_trigger_definition": "CREATE TRIGGER dic_capture_first_decaf_method AFTER UPDATE OF status, canonical_coffee_id ON coffee_submissions FOR EACH ROW WHEN (new.status = 'approved'::text AND new.canonical_coffee_id IS NOT NULL) EXECUTE FUNCTION private.dic_capture_first_decaf_method()",
+      "enabled": "O",
+      "internal": false,
+      "function_name": "dic_capture_first_decaf_method"
+    },
+    {
+      "table_name": "public.coffees",
+      "trigger_name": "bump_revision",
+      "complete_trigger_definition": "CREATE TRIGGER bump_revision BEFORE UPDATE ON coffees FOR EACH ROW EXECUTE FUNCTION private.bump_revision()",
+      "enabled": "O",
+      "internal": false,
+      "function_name": "bump_revision"
+    },
+    {
+      "table_name": "public.library_entries",
+      "trigger_name": "bump_revision",
+      "complete_trigger_definition": "CREATE TRIGGER bump_revision BEFORE UPDATE ON library_entries FOR EACH ROW EXECUTE FUNCTION private.bump_revision()",
+      "enabled": "O",
+      "internal": false,
+      "function_name": "bump_revision"
+    },
+    {
+      "table_name": "public.recipe_preferences",
+      "trigger_name": "bump_revision",
+      "complete_trigger_definition": "CREATE TRIGGER bump_revision BEFORE UPDATE ON recipe_preferences FOR EACH ROW EXECUTE FUNCTION private.bump_revision()",
+      "enabled": "O",
+      "internal": false,
+      "function_name": "bump_revision"
+    },
+    {
+      "table_name": "public.setup_preferences",
+      "trigger_name": "bump_revision",
+      "complete_trigger_definition": "CREATE TRIGGER bump_revision BEFORE UPDATE ON setup_preferences FOR EACH ROW EXECUTE FUNCTION private.bump_revision()",
+      "enabled": "O",
+      "internal": false,
+      "function_name": "bump_revision"
+    },
+    {
+      "table_name": "public.setups",
+      "trigger_name": "bump_revision",
+      "complete_trigger_definition": "CREATE TRIGGER bump_revision BEFORE UPDATE ON setups FOR EACH ROW EXECUTE FUNCTION private.bump_revision()",
+      "enabled": "O",
+      "internal": false,
+      "function_name": "bump_revision"
+    },
+    {
+      "table_name": "public.shots",
+      "trigger_name": "bump_revision",
+      "complete_trigger_definition": "CREATE TRIGGER bump_revision BEFORE UPDATE ON shots FOR EACH ROW EXECUTE FUNCTION private.bump_revision()",
+      "enabled": "O",
+      "internal": false,
+      "function_name": "bump_revision"
+    },
+    {
+      "table_name": "public.shots",
+      "trigger_name": "capture_equipment_snapshot",
+      "complete_trigger_definition": "CREATE TRIGGER capture_equipment_snapshot BEFORE INSERT ON shots FOR EACH ROW EXECUTE FUNCTION private.capture_equipment_snapshot()",
+      "enabled": "O",
+      "internal": false,
+      "function_name": "capture_equipment_snapshot"
+    },
+    {
+      "table_name": "public.shots",
+      "trigger_name": "dic_capture_recommendation_context",
+      "complete_trigger_definition": "CREATE TRIGGER dic_capture_recommendation_context BEFORE INSERT ON shots FOR EACH ROW EXECUTE FUNCTION private.dic_capture_recommendation_context()",
+      "enabled": "O",
+      "internal": false,
+      "function_name": "dic_capture_recommendation_context"
+    },
+    {
+      "table_name": "public.shots",
+      "trigger_name": "protect_shot_provenance",
+      "complete_trigger_definition": "CREATE TRIGGER protect_shot_provenance BEFORE UPDATE ON shots FOR EACH ROW EXECUTE FUNCTION private.protect_shot_provenance()",
+      "enabled": "O",
+      "internal": false,
+      "function_name": "protect_shot_provenance"
+    },
+    {
+      "table_name": "public.workspace_coffees",
+      "trigger_name": "bump_revision",
+      "complete_trigger_definition": "CREATE TRIGGER bump_revision BEFORE UPDATE ON workspace_coffees FOR EACH ROW EXECUTE FUNCTION private.bump_revision()",
+      "enabled": "O",
+      "internal": false,
+      "function_name": "bump_revision"
+    },
+    {
+      "table_name": "public.workspace_state",
+      "trigger_name": "bump_revision",
+      "complete_trigger_definition": "CREATE TRIGGER bump_revision BEFORE UPDATE ON workspace_state FOR EACH ROW EXECUTE FUNCTION private.bump_revision()",
+      "enabled": "O",
+      "internal": false,
+      "function_name": "bump_revision"
+    }
+  ],
+  "full_function_source_characters": 8300,
+  "semantic_cross_callers": [
+    {
+      "caller": "private.capture_equipment_snapshot()",
+      "chars": 1166,
+      "md5": "90c66b59638b48d360e9fd949db63707"
+    },
+    {
+      "caller": "private.classify_personal_shot(shotid uuid)",
+      "chars": 3219,
+      "md5": "5183deb46474c10468638cef08d2bd05"
+    },
+    {
+      "caller": "private.dic_admin_edit_record(p_record_id uuid, p_expected_revision bigint, p_details jsonb, p_reason text, p_kind text)",
+      "chars": 13186,
+      "md5": "290b98b6bb6f99a1afb73b13ff315b12"
+    },
+    {
+      "caller": "private.dic_capture_recommendation_context()",
+      "chars": 1760,
+      "md5": "962e12faeac2a7b5a671bd837c6c5c41"
+    },
+    {
+      "caller": "private.mutate(mid uuid, action text, p jsonb)",
+      "chars": 10881,
+      "md5": "d1050c2ee3b2896c6fbd8b90bdba9052"
+    }
+  ],
+  "numeric_only_pgss_range": [
+    2561,
+    2640
+  ],
+  "pgss_numeric_fingerprints": [
+    {
+      "rn": 2561,
+      "queryid": "-7904868141858701816",
+      "calls": 2,
+      "total_ms": "2.090",
+      "mean_ms": "1.045"
+    },
+    {
+      "rn": 2562,
+      "queryid": "8771972391025528385",
+      "calls": 1,
+      "total_ms": "2.089",
+      "mean_ms": "2.089"
+    },
+    {
+      "rn": 2563,
+      "queryid": "-7724358217784083415",
+      "calls": 1,
+      "total_ms": "2.088",
+      "mean_ms": "2.088"
+    },
+    {
+      "rn": 2564,
+      "queryid": "282786180983493581",
+      "calls": 1,
+      "total_ms": "2.088",
+      "mean_ms": "2.088"
+    },
+    {
+      "rn": 2565,
+      "queryid": "6193120769255722246",
+      "calls": 2,
+      "total_ms": "2.088",
+      "mean_ms": "1.044"
+    },
+    {
+      "rn": 2566,
+      "queryid": "8802142546161657411",
+      "calls": 3,
+      "total_ms": "2.085",
+      "mean_ms": "0.695"
+    },
+    {
+      "rn": 2567,
+      "queryid": "-5617848540312104376",
+      "calls": 1,
+      "total_ms": "2.077",
+      "mean_ms": "2.077"
+    },
+    {
+      "rn": 2568,
+      "queryid": "3029020226293327944",
+      "calls": 1,
+      "total_ms": "2.075",
+      "mean_ms": "2.075"
+    },
+    {
+      "rn": 2569,
+      "queryid": "6685261244820984192",
+      "calls": 1,
+      "total_ms": "2.074",
+      "mean_ms": "2.074"
+    },
+    {
+      "rn": 2570,
+      "queryid": "7442716631625702500",
+      "calls": 2,
+      "total_ms": "2.073",
+      "mean_ms": "1.037"
+    },
+    {
+      "rn": 2571,
+      "queryid": "3451702844264018080",
+      "calls": 1,
+      "total_ms": "2.073",
+      "mean_ms": "2.073"
+    },
+    {
+      "rn": 2572,
+      "queryid": "4345706337228564648",
+      "calls": 1,
+      "total_ms": "2.070",
+      "mean_ms": "2.070"
+    },
+    {
+      "rn": 2573,
+      "queryid": "-7814999624067899802",
+      "calls": 1,
+      "total_ms": "2.070",
+      "mean_ms": "2.070"
+    },
+    {
+      "rn": 2574,
+      "queryid": "1180291027562081971",
+      "calls": 1,
+      "total_ms": "2.054",
+      "mean_ms": "2.054"
+    },
+    {
+      "rn": 2575,
+      "queryid": "7490424479222366088",
+      "calls": 1,
+      "total_ms": "2.051",
+      "mean_ms": "2.051"
+    },
+    {
+      "rn": 2576,
+      "queryid": "-8609160904478274058",
+      "calls": 1,
+      "total_ms": "2.049",
+      "mean_ms": "2.049"
+    },
+    {
+      "rn": 2577,
+      "queryid": "4113578115896897974",
+      "calls": 1,
+      "total_ms": "2.044",
+      "mean_ms": "2.044"
+    },
+    {
+      "rn": 2578,
+      "queryid": "-2450378865011480405",
+      "calls": 1,
+      "total_ms": "2.043",
+      "mean_ms": "2.043"
+    },
+    {
+      "rn": 2579,
+      "queryid": "-7274366582504061018",
+      "calls": 1,
+      "total_ms": "2.034",
+      "mean_ms": "2.034"
+    },
+    {
+      "rn": 2580,
+      "queryid": "2402163545116568141",
+      "calls": 96,
+      "total_ms": "2.031",
+      "mean_ms": "0.021"
+    },
+    {
+      "rn": 2581,
+      "queryid": "9070415357773296202",
+      "calls": 1,
+      "total_ms": "2.031",
+      "mean_ms": "2.031"
+    },
+    {
+      "rn": 2582,
+      "queryid": "384103371195062295",
+      "calls": 2,
+      "total_ms": "2.030",
+      "mean_ms": "1.015"
+    },
+    {
+      "rn": 2583,
+      "queryid": "248473073544226462",
+      "calls": 1,
+      "total_ms": "2.029",
+      "mean_ms": "2.029"
+    },
+    {
+      "rn": 2584,
+      "queryid": "3234276653170595772",
+      "calls": 1,
+      "total_ms": "2.027",
+      "mean_ms": "2.027"
+    },
+    {
+      "rn": 2585,
+      "queryid": "4037608751452178219",
+      "calls": 2,
+      "total_ms": "2.024",
+      "mean_ms": "1.012"
+    },
+    {
+      "rn": 2586,
+      "queryid": "-4367753242839541093",
+      "calls": 1,
+      "total_ms": "2.023",
+      "mean_ms": "2.023"
+    },
+    {
+      "rn": 2587,
+      "queryid": "-9122618717300663475",
+      "calls": 4,
+      "total_ms": "2.022",
+      "mean_ms": "0.505"
+    },
+    {
+      "rn": 2588,
+      "queryid": "2172391874756871045",
+      "calls": 1,
+      "total_ms": "2.018",
+      "mean_ms": "2.018"
+    },
+    {
+      "rn": 2589,
+      "queryid": "1535744144496850897",
+      "calls": 1,
+      "total_ms": "2.017",
+      "mean_ms": "2.017"
+    },
+    {
+      "rn": 2590,
+      "queryid": "6922753318977639591",
+      "calls": 2,
+      "total_ms": "2.012",
+      "mean_ms": "1.006"
+    },
+    {
+      "rn": 2591,
+      "queryid": "4829648644656273157",
+      "calls": 1,
+      "total_ms": "2.008",
+      "mean_ms": "2.008"
+    },
+    {
+      "rn": 2592,
+      "queryid": "-2418333602650654252",
+      "calls": 2,
+      "total_ms": "2.002",
+      "mean_ms": "1.001"
+    },
+    {
+      "rn": 2593,
+      "queryid": "3710525483934597518",
+      "calls": 1,
+      "total_ms": "2.000",
+      "mean_ms": "2.000"
+    },
+    {
+      "rn": 2594,
+      "queryid": "8538054251058366932",
+      "calls": 1,
+      "total_ms": "2.000",
+      "mean_ms": "2.000"
+    },
+    {
+      "rn": 2595,
+      "queryid": "1962589260102970592",
+      "calls": 1,
+      "total_ms": "1.999",
+      "mean_ms": "1.999"
+    },
+    {
+      "rn": 2596,
+      "queryid": "-5108452424340279649",
+      "calls": 1,
+      "total_ms": "1.988",
+      "mean_ms": "1.988"
+    },
+    {
+      "rn": 2597,
+      "queryid": "-1209017107122667819",
+      "calls": 1,
+      "total_ms": "1.987",
+      "mean_ms": "1.987"
+    },
+    {
+      "rn": 2598,
+      "queryid": "-5524479397987540371",
+      "calls": 1,
+      "total_ms": "1.986",
+      "mean_ms": "1.986"
+    },
+    {
+      "rn": 2599,
+      "queryid": "5370825964450994625",
+      "calls": 2,
+      "total_ms": "1.984",
+      "mean_ms": "0.992"
+    },
+    {
+      "rn": 2600,
+      "queryid": "-6545211322328424495",
+      "calls": 1,
+      "total_ms": "1.978",
+      "mean_ms": "1.978"
+    },
+    {
+      "rn": 2601,
+      "queryid": "1627307789281405323",
+      "calls": 1,
+      "total_ms": "1.973",
+      "mean_ms": "1.973"
+    },
+    {
+      "rn": 2602,
+      "queryid": "-80615955775268136",
+      "calls": 1,
+      "total_ms": "1.973",
+      "mean_ms": "1.973"
+    },
+    {
+      "rn": 2603,
+      "queryid": "8100258407943524968",
+      "calls": 1,
+      "total_ms": "1.972",
+      "mean_ms": "1.972"
+    },
+    {
+      "rn": 2604,
+      "queryid": "4243178338748987565",
+      "calls": 1,
+      "total_ms": "1.972",
+      "mean_ms": "1.972"
+    },
+    {
+      "rn": 2605,
+      "queryid": "-5862695669713928043",
+      "calls": 1,
+      "total_ms": "1.971",
+      "mean_ms": "1.971"
+    },
+    {
+      "rn": 2606,
+      "queryid": "-5580996998913631305",
+      "calls": 1,
+      "total_ms": "1.971",
+      "mean_ms": "1.971"
+    },
+    {
+      "rn": 2607,
+      "queryid": "-5786515547433774617",
+      "calls": 1,
+      "total_ms": "1.970",
+      "mean_ms": "1.970"
+    },
+    {
+      "rn": 2608,
+      "queryid": "2857673616775297872",
+      "calls": 1,
+      "total_ms": "1.960",
+      "mean_ms": "1.960"
+    },
+    {
+      "rn": 2609,
+      "queryid": "2164106096559909317",
+      "calls": 1,
+      "total_ms": "1.958",
+      "mean_ms": "1.958"
+    },
+    {
+      "rn": 2610,
+      "queryid": "-1487518967127776368",
+      "calls": 1,
+      "total_ms": "1.957",
+      "mean_ms": "1.957"
+    },
+    {
+      "rn": 2611,
+      "queryid": "1642722493702122128",
+      "calls": 1,
+      "total_ms": "1.956",
+      "mean_ms": "1.956"
+    },
+    {
+      "rn": 2612,
+      "queryid": "7078989180002604894",
+      "calls": 1,
+      "total_ms": "1.955",
+      "mean_ms": "1.955"
+    },
+    {
+      "rn": 2613,
+      "queryid": "507729363691324350",
+      "calls": 2,
+      "total_ms": "1.955",
+      "mean_ms": "0.978"
+    },
+    {
+      "rn": 2614,
+      "queryid": "-7174676415027353065",
+      "calls": 1,
+      "total_ms": "1.951",
+      "mean_ms": "1.951"
+    },
+    {
+      "rn": 2615,
+      "queryid": "41972063143631718",
+      "calls": 1,
+      "total_ms": "1.948",
+      "mean_ms": "1.948"
+    },
+    {
+      "rn": 2616,
+      "queryid": "-3949837753371338178",
+      "calls": 1,
+      "total_ms": "1.948",
+      "mean_ms": "1.948"
+    },
+    {
+      "rn": 2617,
+      "queryid": "7539460944080846887",
+      "calls": 1,
+      "total_ms": "1.943",
+      "mean_ms": "1.943"
+    },
+    {
+      "rn": 2618,
+      "queryid": "-6561253555076795627",
+      "calls": 1,
+      "total_ms": "1.939",
+      "mean_ms": "1.939"
+    },
+    {
+      "rn": 2619,
+      "queryid": "-505713843410354376",
+      "calls": 1,
+      "total_ms": "1.936",
+      "mean_ms": "1.936"
+    },
+    {
+      "rn": 2620,
+      "queryid": "5345933119681082106",
+      "calls": 1,
+      "total_ms": "1.931",
+      "mean_ms": "1.931"
+    },
+    {
+      "rn": 2621,
+      "queryid": "-1515965897737196673",
+      "calls": 10,
+      "total_ms": "1.930",
+      "mean_ms": "0.193"
+    },
+    {
+      "rn": 2622,
+      "queryid": "5789590294658053527",
+      "calls": 1,
+      "total_ms": "1.929",
+      "mean_ms": "1.929"
+    },
+    {
+      "rn": 2623,
+      "queryid": "6373866181140661166",
+      "calls": 1,
+      "total_ms": "1.928",
+      "mean_ms": "1.928"
+    },
+    {
+      "rn": 2624,
+      "queryid": "7389151568589631799",
+      "calls": 1,
+      "total_ms": "1.923",
+      "mean_ms": "1.923"
+    },
+    {
+      "rn": 2625,
+      "queryid": "5327615488074432666",
+      "calls": 1,
+      "total_ms": "1.922",
+      "mean_ms": "1.922"
+    },
+    {
+      "rn": 2626,
+      "queryid": "152073583511433422",
+      "calls": 1,
+      "total_ms": "1.922",
+      "mean_ms": "1.922"
+    },
+    {
+      "rn": 2627,
+      "queryid": "-1803778679285016427",
+      "calls": 1,
+      "total_ms": "1.919",
+      "mean_ms": "1.919"
+    },
+    {
+      "rn": 2628,
+      "queryid": "7754641851302826820",
+      "calls": 1,
+      "total_ms": "1.919",
+      "mean_ms": "1.919"
+    },
+    {
+      "rn": 2629,
+      "queryid": "-1198662214794823972",
+      "calls": 1,
+      "total_ms": "1.918",
+      "mean_ms": "1.918"
+    },
+    {
+      "rn": 2630,
+      "queryid": "5659684495721136908",
+      "calls": 1,
+      "total_ms": "1.915",
+      "mean_ms": "1.915"
+    },
+    {
+      "rn": 2631,
+      "queryid": "1367103163502961221",
+      "calls": 1,
+      "total_ms": "1.915",
+      "mean_ms": "1.915"
+    },
+    {
+      "rn": 2632,
+      "queryid": "1200224970339221612",
+      "calls": 1,
+      "total_ms": "1.913",
+      "mean_ms": "1.913"
+    },
+    {
+      "rn": 2633,
+      "queryid": "-3240507718994510650",
+      "calls": 1,
+      "total_ms": "1.909",
+      "mean_ms": "1.909"
+    },
+    {
+      "rn": 2634,
+      "queryid": "4010638437802542304",
+      "calls": 1,
+      "total_ms": "1.903",
+      "mean_ms": "1.903"
+    },
+    {
+      "rn": 2635,
+      "queryid": "-8648751105609708790",
+      "calls": 1,
+      "total_ms": "1.902",
+      "mean_ms": "1.902"
+    },
+    {
+      "rn": 2636,
+      "queryid": "7990710427972995678",
+      "calls": 1,
+      "total_ms": "1.901",
+      "mean_ms": "1.901"
+    },
+    {
+      "rn": 2637,
+      "queryid": "-1783063323904251179",
+      "calls": 1,
+      "total_ms": "1.897",
+      "mean_ms": "1.897"
+    },
+    {
+      "rn": 2638,
+      "queryid": "-7710415879754796245",
+      "calls": 1,
+      "total_ms": "1.893",
+      "mean_ms": "1.893"
+    },
+    {
+      "rn": 2639,
+      "queryid": "-688579630637501107",
+      "calls": 1,
+      "total_ms": "1.890",
+      "mean_ms": "1.890"
+    },
+    {
+      "rn": 2640,
+      "queryid": "-5454495677076629870",
+      "calls": 2,
+      "total_ms": "1.889",
+      "mean_ms": "0.944"
+    }
+  ],
+  "prior_distinct": 2471,
+  "new_distinct": 70,
+  "overlap": 10,
+  "cumulative_distinct": 2541,
+  "semantic_findings": {
+    "severity": "NO_NEW_CONFIRMED_DEFECT",
+    "new_confirmed_defects": 0,
+    "justified_deletions": 0,
+    "legacy_bags": "LEGACY ACTIVE; no table/function deletion",
+    "directory2389": "Historical retired directory; no crossover attribution",
+    "source_bound_isolated_integration_tests": "NOT_RUN_DOCS_ONLY",
+    "migration_exact_byte_parity": "UNVERIFIED",
+    "signed_in_auth_http": "#96 UNVERIFIED",
+    "source_code_full_reaudit": "#267 ONLY"
+  },
+  "read_only_guards": {
+    "actual_member_records_read": 0,
+    "production_writes": 0,
+    "app_code_test_ci_writes": 0,
+    "raw_pg_stat_statements_query_text_saved": false
+  },
+  "baseline_complete": false,
+  "remaining": [
+    "Unreviewed provider definitions and full SQL/API/Edge source parity",
+    "Hosted Auth/JWT true-session acceptance owned #96",
+    "Source-bound isolated PostgreSQL replay for three existing TESTING fixes",
+    "Provider-console-only settings, secrets and unavailable internals"
+  ],
+  "next": "Check current drift; pgss ranks 2641-2720; continue unreviewed full provider definitions, migration parity and dependent callers"
+}
