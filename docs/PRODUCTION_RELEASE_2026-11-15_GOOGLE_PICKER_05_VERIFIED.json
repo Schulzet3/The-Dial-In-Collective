@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "status": "DEPLOYED_VERIFIED_FUNCTION_ONLY",
+  "release_id": "DIC-20261115-GOOGLEPICKER-05",
+  "owner_authorization": "Owner Nov 14 2026 explicit Publish and subsequent 'Do what you need ... published', reaffirmed in this chat; only owner browser setup function, not courier switchover",
+  "preflight": {
+    "development_sha": "d7b1a12b374b3badfb0576cf10c86b176ea7af43",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d"
+  },
+  "ready_ids": [
+    "DIC-Q-28-owner-drive-browser-oauth-20261115"
+  ],
+  "candidate_source_sha": "c9a68360abd192335e91a9f56bb7b4b022c5746e",
+  "source_function": "netlify/functions/dic-owner-drive-connect.mjs",
+  "source_function_blob_sha": "0f88668b8dfd0f334aab344ef1e169f92e8a0be9",
+  "source_test_blob_sha": "5078c3afec7157b88e1d8f1af4e1bcb0f0e961cf",
+  "candidate_exact_checks": {
+    "approval": {
+      "run_id": 43679648628,
+      "job_id": 132707277875
+    },
+    "validate": {
+      "run_id": 43679648636,
+      "job_id": 132707277860
+    },
+    "cloud_tests": {
+      "run_id": 43679648635,
+      "job_id": 132707278215
+    },
+    "mobile_browser_qa": {
+      "run_id": 43679648635,
+      "job_id": 132707278002
+    },
+    "sql": {
+      "run_id": 43679648656,
+      "job_id": 132707277859
+    }
+  },
+  "first_failed_candidate": {
+    "sha": "a8a825eceea150d4e445e644ac9e02d741cf3080",
+    "approval_run_id": 43679535775,
+    "cause": "Missing new same-commit preflight receipt; repaired on r2, never published"
+  },
+  "source_isolation": {
+    "selected_deployable_paths": [
+      "netlify/functions/dic-owner-drive-connect.mjs"
+    ],
+    "restored_unready_deployable_paths": 8,
+    "restored_workflow_paths": 125,
+    "excluded_unready_tests_and_support": 32,
+    "sql_migrations_published": 0
+  },
+  "main_request_sha": "3635a861d6fc33a3bc90d4655f4b397532763a29",
+  "controller_run_id": 43679953107,
+  "controller_conclusion": "success",
+  "main_controller_acceptance_run_id": 43679953144,
+  "main_controller_acceptance_conclusion": "success",
+  "release_sha": "8628da42883536549539492817748e8f19b0864f",
+  "release_parent_sha": "3a82a8e33800feab71cb24140b96bbbfea7c967f",
+  "netlify": {
+    "deploy_id": "6af93efe3e9d15f2b41e92de",
+    "state": "ready",
+    "current": true,
+    "commit_ref": "8628da42883536549539492817748e8f19b0864f",
+    "context": "production",
+    "published_at_utc": "2026-11-15T05:11:42.437Z",
+    "functions": [
+      "coffee-url-preview",
+      "dic-admin-push",
+      "dic-admin-push-poll",
+      "dic-member-approval-poll",
+      "dic-owner-drive-connect"
+    ],
+    "secret_scan_matches": 0,
+    "enhanced_secret_scan_matches": 0,
+    "manual_deploy": false
+  },
+  "existing_backup_courier_preserved": true,
+  "db_member_auth_changes": false,
+  "post_deploy_unverified": [
+    "Real Google OAuth owner consent and Google Picker APIs/credentials",
+    "Selected existing private Drive folder disposable upload/readback/trash",
+    "GitHub Actions refresh-token/client secrets and runner smoke",
+    "Real scheduled encrypted offsite ZIP delivery and safe Apps Script handoff",
+    "Direct HTTPS GET acceptance unavailable through current read-only web tool"
+  ],
+  "verified_at_utc": "2026-11-15T05:12:42.556Z"
+}

@@ -2,9 +2,9 @@
   "schema_version": 1,
   "authority": "OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022",
   "published_base": {
-    "tested_source_sha": "e2d6e0a0dc4bf5aae37611a7bde5dfd99df84901",
-    "release_sha": "3a82a8e33800feab71cb24140b96bbbfea7c967f",
-    "netlify_deploy_id": "6af93575920bb64e3282a5ef"
+    "tested_source_sha": "c9a68360abd192335e91a9f56bb7b4b022c5746e",
+    "release_sha": "8628da42883536549539492817748e8f19b0864f",
+    "netlify_deploy_id": "6af93efe3e9d15f2b41e92de"
   },
   "items": [
     {
@@ -14785,7 +14785,7 @@
       "issue": 28,
       "pr": 2827,
       "title": "Owner-only Google Web Picker authorization setup endpoint (courier cutover excluded)",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "5f9d614bb8b7a2366e7882823505bff196321c7d",
       "scope_paths": [
         "netlify/functions/dic-owner-drive-connect.mjs"
@@ -14806,8 +14806,40 @@
         43669375779
       ],
       "blockers": [],
-      "notes": "Official Google Web Picker correction merged with 5 exact PR-head CI SUCCESS; app remains IN_PROGRESS, not READY/DEPLOYED due private Google account/provider consent and separate publish gates. No production Netlify, Google Drive, archive, Supabase/member, backup workflow, credential changes or cutoff. Existing Apps Script backups unaffected.\n2026-11-15 scope split (owner direct Publish Google Drive): this READY ID covers **ONLY** the already merged owner-only Netlify browser authorization endpoint; source function blob 0f88668b8dfd0f334aab344ef1e169f92e8a0be9 and focused test blob 5078c3afec7157b88e1d8f1af4e1bcb0f0e961cf match five SUCCESS exact-PR-head checks. No changes to code, Netlify function, tests, backup workflow, archives or member data. Provider configuration (6 Netlify env vars) was read back; sensitive values remain redacted. This READY scope **DOES NOT** certify Google's live OAuth consent/Picker, refresh token in GitHub, disposable runner, scheduled ciphertext delivery or replacement of Apps Script: track those sequential steps in OPEN #28 and inactive main draft PR #2684; preserve existing courier. Owner's 2026-11-15 request authorizes one publication only after a new exact-source candidate, all five CI and one-use controller. Any failure remains BLOCKED and no unready work may be published.",
-      "production_deployed": false
+      "notes": "Official Google Web Picker correction merged with 5 exact PR-head CI SUCCESS; app remains IN_PROGRESS, not READY/DEPLOYED due private Google account/provider consent and separate publish gates. No production Netlify, Google Drive, archive, Supabase/member, backup workflow, credential changes or cutoff. Existing Apps Script backups unaffected.\n2026-11-15 scope split (owner direct Publish Google Drive): this READY ID covers **ONLY** the already merged owner-only Netlify browser authorization endpoint; source function blob 0f88668b8dfd0f334aab344ef1e169f92e8a0be9 and focused test blob 5078c3afec7157b88e1d8f1af4e1bcb0f0e961cf match five SUCCESS exact-PR-head checks. No changes to code, Netlify function, tests, backup workflow, archives or member data. Provider configuration (6 Netlify env vars) was read back; sensitive values remain redacted. This READY scope **DOES NOT** certify Google's live OAuth consent/Picker, refresh token in GitHub, disposable runner, scheduled ciphertext delivery or replacement of Apps Script: track those sequential steps in OPEN #28 and inactive main draft PR #2684; preserve existing courier. Owner's 2026-11-15 request authorizes one publication only after a new exact-source candidate, all five CI and one-use controller. Any failure remains BLOCKED and no unready work may be published.\n2026-11-15 VERIFIED NARROW PRODUCTION RELEASE: Owner explicitly authorized browser-only Drive setup endpoint. Exactly DIC-Q-28-owner-drive-browser-oauth-20261115 delivered by one-use DIC-20261115-GOOGLEPICKER-05, source c9a68360abd192335e91a9f56bb7b4b022c5746e, main two-file push 3635a861d6fc33a3bc90d4655f4b397532763a29, controller 43679953107 SUCCESS, main acceptance 43679953144 SUCCESS, nonforce release 8628da42883536549539492817748e8f19b0864f, Netlify 6af93efe3e9d15f2b41e92de ready/CURRENT at 2026-11-15T05:11:42.437Z, exact function blob 0f88668b8dfd0f334aab344ef1e169f92e8a0be9, 5 expected functions and 0 secret scan findings. Five exact-source CI jobs approved 43679648628, validate 43679648636, cloud/mobile 43679648635, SQL 43679648656 PASS. Previous r1 approval 43679535775 failed and was corrected, NEVER published. Only owner OAuth browser setup ROUTE deployed. Live Google account consent/Picker, exact private Drive folder disposable test and token, GitHub Actions secrets, GitHub runner and actual scheduled encrypted ZIP transfer UNVERIFIED, tracked in open #28 and inactive draft ops PR #2684. Existing Apps Script courier, original encrypted archives, restore schedules, Supabase/Auth/member data unchanged. HTTPS page fetch not independently accessible to this session; Netlify provider verified route/function.",
+      "production_deployed": true,
+      "delivered_release_id": "DIC-20261115-GOOGLEPICKER-05",
+      "delivered_source_sha": "c9a68360abd192335e91a9f56bb7b4b022c5746e",
+      "delivered_release_sha": "8628da42883536549539492817748e8f19b0864f",
+      "delivered_netlify_deploy_id": "6af93efe3e9d15f2b41e92de",
+      "delivered_at_utc": "2026-11-15T05:11:42.437Z"
+    },
+    {
+      "id": "DIC-Q-28-owner-drive-form-referrer-20261115",
+      "issue": 28,
+      "pr": 2855,
+      "title": "Fix owner Google Drive setup native form 403 caused by no-referrer Origin:null",
+      "state": "READY",
+      "merged_source_sha": "6ce672e6b8dfbb6cda8bda616d1411ad9447aaa6",
+      "scope_paths": [
+        "netlify/functions/dic-owner-drive-connect.mjs"
+      ],
+      "tests": [
+        "Previous owner setup exact CI 5/5 SUCCESS but tests assumed a synthetic Origin header; did not cover browser Referrer-Policy impact.",
+        "Added regression of form response policy, form valid-Origin POST, rejected null/missing origins, and no-referrer OAuth redirect; actual hosted CI pending.",
+        "Exact PR-head 810b8144a18fde2fc33e6bf4f165ad6966ea8acc GitHub SUCCESS: approval 43680988283, validate Node/lint/one build 43680988281, cloud-tests and mobile-browser-qa 43680988323, SQL 43680988310, separate security-inventory 43680988301 SUCCESS; original frozen603 43680988256 SKIPPED, not a PASS and not in scope.",
+        "Nonforce PR #2855 squash merged 6ce672e6b8dfbb6cda8bda616d1411ad9447aaa6; exact merged function blob 28c78dc078a49263e2f58d1e901579f86698a92a and test blob 44b2ec0ad58ad3c49f82b8eb89978c99316a8b58 MATCH passing PR head. Merged approval 43681251442, validate 43681251357 and cloud/browser 43681251393 SUCCESS; no SQL source change, PR exact SQL PASS."
+      ],
+      "ci_runs": [
+        43680988283,
+        43680988281,
+        43680988323,
+        43680988310,
+        43680988301
+      ],
+      "blockers": [],
+      "owner_source": "Owner November 15, 2026: 'No that's not the case. They matched before I made that change. It's almost certainly something else. Find it. don't be lazy.' Preceding owner instruction 'Get this fixed' authorizes development, not publication.",
+      "notes": "MDN: Referrer-Policy:no-referrer causes Origin:null for navigate-mode HTML POST; source exact Origin guard returns 403 before passphrase compare. Preserve strict Origin check: only GET form gets same-origin referrer policy. No new Google/DB/member/backup writes, courier remains Apps Script; release requires new explicit Publish.\n2026-11-15 READINESS VERIFIED for one narrow browser-only form header fix, not a published release. Real root cause: previous GET `Referrer-Policy:no-referrer` causes navigate-mode HTML form POST `Origin:null`; unchanged strict server Origin guard returns 403 before password verification. GET form now `Referrer-Policy:same-origin`; OAuth redirects/callbacks remain no-referrer; strict password/Origin and owner-only Drive access preserved. Tested source Git blob 28c78dc078a49263e2f58d1e901579f86698a92a, test blob 44b2ec0ad58ad3c49f82b8eb89978c99316a8b58; five PR-source CI checks SUCCESS plus merged approval, validate, browser SUCCESS, zero remaining source blockers. No provider write, publication, SQL, member or archive changes. NETLIFY CURRENT REMAINS prior release 8628da42 / 6af93efe, thus user may STILL SEE 403 until fresh owner Publish. Current Netlify Production passphrase was edited after that old deploy and is picked up only on fresh Git-connected deploy. Owner's previous Publish grant consumed, new explicit owner Publish required for future release controller. Direct live header value not recorded in observability; causal mechanics source/standards verified."
     }
   ],
   "history": [
