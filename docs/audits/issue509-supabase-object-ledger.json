@@ -4224,6 +4224,19 @@
       "new_defects": 0,
       "production_writes": 0,
       "next": "pgss 2321-2400; full provider definitions/source parity"
+    },
+    {
+      "run": 254,
+      "prewrite_source_sha": "36d1ceacab15875dc21766e1a6407f132232e80c",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt_path": "docs/audits/issue509-admin-import-definitions-pgss-2026-11-15-run254-rank2321-2400.json",
+      "receipt_git_blob": "eebe8ab40933b53073a7c1234702076a4b168c83",
+      "numeric_distinct": 2320,
+      "current_sql_definition_bodies": 5,
+      "source_chars": 25856,
+      "new_defects": 0,
+      "production_writes": 0,
+      "next": "pgss 2401-2480; remaining full provider definitions/source parity"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -20686,5 +20699,86 @@
     "new_defects": 0,
     "production_writes": 0,
     "next": "pgss 2321-2400; full current provider definitions and parity"
+  },
+  "provider_pgss_admin_import_run254": {
+    "status": "IN_PROGRESS",
+    "project_ref": "azviqqejypsefzilgonr",
+    "preflight_development_sha": "36d1ceacab15875dc21766e1a6407f132232e80c",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_source_sha": "36d1ceacab15875dc21766e1a6407f132232e80c",
+    "receipt_path": "docs/audits/issue509-admin-import-definitions-pgss-2026-11-15-run254-rank2321-2400.json",
+    "receipt_blob_sha": "eebe8ab40933b53073a7c1234702076a4b168c83",
+    "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-15-run254.json",
+    "index_blob_sha": "7d32298a4c207076fef5c2efca713c2c4570ee9c",
+    "provider_observed_at": "2026-11-15 01:43:20.739667+00",
+    "full_sql_definitions": [
+      {
+        "signature": "private.apply_prototype_import(u uuid, doc jsonb)",
+        "md5": "2af6a48d0fe80841fcc27c1f1d5532e3",
+        "chars": 16445,
+        "verdict": "LEGACY ACTIVE import/archive compatibility; targeted credential separator guard, fail-closed records; no deletion",
+        "source_in_receipt": true
+      },
+      {
+        "signature": "private.dic_admin_access_overview()",
+        "md5": "e377ac910af0115040ad8f881cb01bfc",
+        "chars": 1432,
+        "verdict": "Admin and admitted-member gated bounded overview; session assurance #96 unverified",
+        "source_in_receipt": true
+      },
+      {
+        "signature": "private.dic_admin_account_delete_finish(p_operation_id uuid, p_actor_id uuid)",
+        "md5": "51cd64deed985a9ddf622926b8784a84",
+        "chars": 2492,
+        "verdict": "Service-only prepared operation, Auth deletion confirmation, scoped Community cleanup",
+        "source_in_receipt": true
+      },
+      {
+        "signature": "private.dic_admin_account_delete_impact(p_member_id uuid)",
+        "md5": "a20e399d6c87c60be0661c80a17728d4",
+        "chars": 1588,
+        "verdict": "Postgres-only internal aggregate impact receipt",
+        "source_in_receipt": true
+      },
+      {
+        "signature": "private.dic_admin_account_delete_prepare(p_operation_id uuid, p_actor_id uuid)",
+        "md5": "6e7e0589cbda1bc5023771724ce8b77f",
+        "chars": 3899,
+        "verdict": "Service-only exact impact, admin/Storage/audit guards and retryable state",
+        "source_in_receipt": true
+      }
+    ],
+    "direct_source_chars": 25856,
+    "pgss_ranks": [
+      2321,
+      2400
+    ],
+    "numeric_rows": 80,
+    "new_distinct": 74,
+    "overlap": 6,
+    "cumulative_distinct": 2320,
+    "application_tables": 52,
+    "application_functions": 114,
+    "policies": 41,
+    "migrations": 69,
+    "security_advisors": {
+      "rls_no_policy": 13,
+      "authenticated_security_definer": 10,
+      "leaked_password_warning": 1
+    },
+    "performance_advisors": {
+      "unindexed_fks": 14,
+      "unused_indexes": 8
+    },
+    "new_confirmed_defects": 0,
+    "code_changes": 0,
+    "production_provider_writes": 0,
+    "legacy_directory": "RETIRED issue2389 CLOSED; importer/bag history LEGACY ACTIVE",
+    "unverified": [
+      "Real signed-in Auth/provider-console settings #96",
+      "Full GitHub migration replay/CI for all five definitions",
+      "Native vendor internals and stable gap-free SQL fingerprints"
+    ],
+    "next": "Provider drift, numeric pgss ranks 2401-2480, direct remaining definitions"
   }
 }
