@@ -4315,6 +4315,20 @@
       "cumulative_distinct": 3060,
       "provider_writes": 0,
       "next": "pgss 3201-3280; isolated URL-key correction tests and migration, remaining direct definitions and exact source parity"
+    },
+    {
+      "run": 271,
+      "preflight_development_sha": "360a581b96ffe0db1b040927942ceb2e0135ac86",
+      "prewrite_sha": "072fb9aac1cd9a54b5b8c5c3f2e781a8b12ce72f",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt_path": "docs/audits/issue509-r271-source-preview-legacy-pgss-20261115.json",
+      "full_live_definitions": 13,
+      "full_source_chars": 16247,
+      "edge_tombstone_source_parity": true,
+      "pgss_new_distinct": 69,
+      "pgss_total_distinct": 3555,
+      "production_writes": 0,
+      "next": "3761-3840 provider SQL/source parity"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -21538,5 +21552,24 @@
     "cumulative_numeric_distinct": 3420,
     "status": "IN_PROGRESS_NO_PRODUCTION_WRITES",
     "next": "numeric ranks 3601-3680; provider full definitions, migration/source parity, #96 authentic session controls"
+  },
+  "provider_preview_source_review_run271": {
+    "preflight_development_sha": "360a581b96ffe0db1b040927942ceb2e0135ac86",
+    "prewrite_development_sha": "072fb9aac1cd9a54b5b8c5c3f2e781a8b12ce72f",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt_path": "docs/audits/issue509-r271-source-preview-legacy-pgss-20261115.json",
+    "reviewed_full_function_count": 13,
+    "source_chars": 16247,
+    "edge_tombstone_byte_parity": true,
+    "pgss_rank_range": [
+      3681,
+      3760
+    ],
+    "new_distinct": 69,
+    "cumulative_distinct": 3555,
+    "source_case_fix": "TESTING_NOT_PRODUCTION",
+    "legacy_archive_indexes": "HISTORICAL_NAMES_ON_ARCHIVE_RELATIONS",
+    "status": "IN_PROGRESS",
+    "next": "pgss 3761-3840; remaining provider definition/source parity and #96 real JWT"
   }
 }
