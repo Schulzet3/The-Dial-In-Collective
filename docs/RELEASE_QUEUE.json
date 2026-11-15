@@ -8,6 +8,28 @@
   },
   "items": [
     {
+      "id": "DIC-Q-509-community-withdrawn-recheck-guard",
+      "issue": 509,
+      "pr": null,
+      "title": "Preserve withdrawn Community state during unverified-coffee link recheck",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261115065000_dic_community_withdrawn_recheck_guard.sql"
+      ],
+      "tests": [
+        "Live read-only full reviewer at 2026-11-15 06:48:46.196155+00 MD5 c5aea4d32aa8027a39d80341feade406 confirms incorrect withdrawn condition ordering.",
+        "Existing disconnected rollback-only community_quality_integrity.sql regression extended to exercise real source_revision trigger path; exact-source CI UNVERIFIED."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Disconnected PostgreSQL17.11, Node22/privacy and governance/approval exact-source checks not yet verified.",
+        "Source isolation and #96 genuine Auth acceptance not verified; not READY."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
+      "notes": "Development-only. No live Supabase production SQL/Auth/Storage/Edge or deployment. Preflight 357df799b1232fb4aefba0d0b46a14689e341aae blob 2fb236bbfa6bac48513eeb3bd157b260853af06d. Owner Publish required."
+    },
+    {
       "id": "DIC-Q-33-r215-original325-327-current-offer-h2-water-decaf",
       "issue": 33,
       "pr": 2820,

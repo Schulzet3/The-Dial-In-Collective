@@ -530,6 +530,27 @@ begin
   raise exception 'Own confirmed family incorrectly recycled as an independent Community recommendation';
  end if;
 
+ -- #509: Rechecking a withdrawn observation while its coffee is unverified
+ -- must not reclassify it as held, even through the real link UPDATE trigger.
+ select community_shot_id into strict target
+   from private.contribution_links where shot_id=c2_shot;
+ update public.shots set clarity=4 where id=c2_shot;
+ if (select quality_state from public.community_shots where id=target)<>'withdrawn' then
+  raise exception '#509 fixture did not withdraw the non-green observation';end if;
+ update public.coffees set verification_state='pending' where id=c2;
+ if (select quality_state from public.community_shots where id=target)<>'withdrawn' then
+  raise exception '#509 coffee update revived withdrawn evidence';end if;
+ update private.contribution_links set source_revision=source_revision
+   where community_shot_id=target;
+ if (select quality_state from public.community_shots where id=target)<>'withdrawn' then
+  raise exception '#509 link reconciliation revived withdrawn evidence';end if;
+ update public.coffees set verification_state='verified' where id=c2;
+ if (select quality_state from public.community_shots where id=target)<>'withdrawn' then
+  raise exception '#509 verification revived withdrawn evidence';end if;
+ update public.shots set clarity=5 where id=c2_shot;
+ if (select quality_state from public.community_shots where id=target)<>'eligible' then
+  raise exception '#509 explicit corrected green shot failed to requalify';end if;
+
  -- Revoke admission immediately suppresses both community reads and stats.
  perform set_config('request.jwt.claim.sub',us[1]::text,true);
  perform set_config('request.jwt.claims',

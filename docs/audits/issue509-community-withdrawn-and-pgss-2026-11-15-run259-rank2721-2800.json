@@ -1,0 +1,723 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 259,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight_development_sha": "357df799b1232fb4aefba0d0b46a14689e341aae",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "observed_at": "2026-11-15 06:48:46.196155+00",
+  "provider_snapshot": {
+    "observed_at": "2026-11-15 06:48:46.196155+00",
+    "app_tables": 52,
+    "rls_disabled": 0,
+    "app_functions": 114,
+    "app_policies": 41,
+    "migrations": 69,
+    "pgss_rows": 4988,
+    "stats_reset": "2026-10-09 11:11:31.487298+00"
+  },
+  "complete_sql_definitions": [
+    {
+      "signature": "private.dic_admin_account_delete_impact(p_member_id uuid)",
+      "full_sql": "CREATE OR REPLACE FUNCTION private.dic_admin_account_delete_impact(p_member_id uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare member_email text;\nbegin\n select u.email into member_email from auth.users u\n join private.beta_members m on m.owner_id=u.id and m.admitted_at is not null\n where u.id=p_member_id;\n if not found then raise exception using errcode='22023',message='Admitted account unavailable.'; end if;\n return jsonb_build_object(\n  'member_id',p_member_id,'email',member_email,\n  'enabled',(select enabled from private.beta_members where owner_id=p_member_id),\n  'shots',(select count(*) from public.shots where owner_id=p_member_id),\n  'notes',(select count(*) from public.shot_notes where owner_id=p_member_id),\n  'library_entries',(select count(*) from public.library_entries where owner_id=p_member_id),\n  'submissions',(select count(*) from public.coffee_submissions where owner_id=p_member_id),\n  'setups',(select count(*) from public.setups where owner_id=p_member_id),\n  'community_shots',(select count(*) from private.contribution_links cl\n    join private.contributors c on c.id=cl.contributor_id where c.owner_id=p_member_id),\n  'eligible_community_shots',(select count(*) from private.contribution_links cl\n    join private.contributors c on c.id=cl.contributor_id\n    join public.community_shots cs on cs.id=cl.community_shot_id\n    where c.owner_id=p_member_id and cs.quality_state='eligible'),\n  'contributors',(select count(*) from private.contributors where owner_id=p_member_id)\n );\nend $function$\n",
+      "md5": "a20e399d6c87c60be0661c80a17728d4",
+      "chars": 1588,
+      "security_definer": true,
+      "configurations": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "service_execute": false,
+      "review_range_chars": [
+        1,
+        1588
+      ],
+      "semantic_verdict": "FULL_LIVE_SQL_SEMANTIC_REVIEW_NO_NEW_DEFECT",
+      "semantic_assessment": "No client or service EXECUTE. Called by guarded admin preview and service prepare; includes email field only for guarded confirmation, no record values read."
+    },
+    {
+      "signature": "private.dic_on_library_coffee_change()",
+      "full_sql": "CREATE OR REPLACE FUNCTION private.dic_on_library_coffee_change()\n RETURNS trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n if old.coffee_id is distinct from new.coffee_id then\n  perform private.dic_backfill_library_contributions(\n    new.owner_id,new.id,new.coffee_id);\n end if;\n return new;\nend $function$\n",
+      "md5": "b6cbc45072b0e9f8ebb511b2eca3895f",
+      "chars": 347,
+      "security_definer": true,
+      "configurations": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "service_execute": false,
+      "review_range_chars": [
+        1,
+        347
+      ],
+      "semantic_verdict": "FULL_LIVE_SQL_SEMANTIC_REVIEW_NO_NEW_DEFECT",
+      "semantic_assessment": "Internal AFTER UPDATE OF coffee_id trigger; backfills linked Community projections; no direct client EXECUTE."
+    },
+    {
+      "signature": "private.dic_recheck_after_link()",
+      "full_sql": "CREATE OR REPLACE FUNCTION private.dic_recheck_after_link()\n RETURNS trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n perform private.dic_review_community_shot(new.community_shot_id);\n return new;\nend $function$\n",
+      "md5": "9fc3b44ef631cb87bc0b40e689c123b8",
+      "chars": 251,
+      "security_definer": true,
+      "configurations": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "service_execute": false,
+      "review_range_chars": [
+        1,
+        251
+      ],
+      "semantic_verdict": "FULL_LIVE_SQL_SEMANTIC_REVIEW_NO_NEW_DEFECT",
+      "semantic_assessment": "Internal AFTER INSERT/UPDATE OF shot_id/source_revision trigger on contribution_links; invokes reviewer even for withdrawn rows."
+    },
+    {
+      "signature": "private.dic_review_community_shot(p_id uuid)",
+      "full_sql": "CREATE OR REPLACE FUNCTION private.dic_review_community_shot(p_id uuid)\n RETURNS text\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare\n c public.community_shots;\n l private.contribution_links;\n s public.shots;\n q private.community_quality_checks;\n owner_of_contribution uuid;\n mapped_coffee uuid;\n verification text;\n new_state text;\n reason_code text;\n fp text;\n peer_count integer:=0;\n own_count integer:=0;\n median_ratio numeric;\n median_time numeric;\n own_ratio numeric;\n own_time numeric;\n time_mad numeric;\n ratio_mad numeric;\nbegin\n select * into c from public.community_shots where id=p_id for update;\n if c.id is null then return 'missing'; end if;\n select * into l from private.contribution_links where community_shot_id=p_id;\n select * into q from private.community_quality_checks where community_shot_id=p_id;\n select verification_state into verification from public.coffees where id=c.coffee_id;\n\n if verification is distinct from 'verified' then\n  new_state:='held'; reason_code:='unverified_coffee';\n elsif c.quality_state='withdrawn' then\n  -- A corrected green observation explicitly re-enters pending via project_shot;\n  -- background reconciliation must never revive a withdrawn projection.\n  return 'withdrawn';\n elsif l.community_shot_id is null or l.shot_id is null then\n  -- Previously validated detached contributions survive personal/account\n  -- deletion; unvalidated orphan projections must NEVER be auto-approved.\n  if c.quality_state='eligible' then return 'eligible'; end if;\n  new_state:='held'; reason_code:='source_detached';\n else\n  select * into s from public.shots where id=l.shot_id;\n  select owner_id into owner_of_contribution from private.contributors where id=l.contributor_id;\n  if s.id is not null then\n   select coffee_id into mapped_coffee from public.library_entries\n    where id=s.library_entry_id and owner_id=s.owner_id;\n  end if;\n  if s.id is not null and not s.is_dialed_in then\n   new_state:='withdrawn'; reason_code:='not_dialed_in';\n  elsif s.id is null or owner_of_contribution is distinct from s.owner_id\n    or mapped_coffee is distinct from c.coffee_id or s.revision<>l.source_revision\n    or c.style is distinct from s.style\n    or c.dose_g is distinct from s.dose_g or c.yield_g is distinct from s.yield_g\n    or c.time_s is distinct from s.time_s\n    or c.temperature_c is distinct from s.temperature_c\n    or c.extraction is distinct from s.extraction or c.body is distinct from s.body\n    or c.clarity is distinct from s.clarity or c.sweetness is distinct from s.sweetness\n    or c.astringency is distinct from s.astringency\n    or c.grind_setting is distinct from s.grind_setting\n    or c.feed_mode is distinct from s.feed_mode\n    or c.observed_on is distinct from (s.pulled_at at time zone 'UTC')::date\n    or c.machine_model is distinct from (s.equipment_snapshot->>'machine_model')\n    or c.grinder_model is distinct from (s.equipment_snapshot->>'grinder_model')\n    or c.burr_set is distinct from (s.equipment_snapshot->>'burr_set')\n    or c.basket_model is distinct from (s.equipment_snapshot->>'basket_model')\n    or c.basket_dose_g is distinct from (s.equipment_snapshot->>'basket_dose_g')::numeric\n   then\n    new_state:='held';reason_code:='source_mismatch';\n  else\n   fp:=private.dic_community_fingerprint(c);\n   -- A statistically unusual espresso is NEVER rejected by time or ratio\n   -- alone. NIST's |modified Z| >3.5 is an exploratory potential-outlier\n   -- flag, NOT a correctness standard and not a shot-style window.\n   -- Use sufficiently sized, same-context cohorts. Absolute/relative floors\n   -- and zero-MAD scale fallback are product heuristics against nagging\n   -- members about tiny differences or identical peer measurements.\n   with personal_samples as (\n    select x.ratio::double precision as r,x.time_s::double precision as t\n    from public.shots x\n    where x.owner_id=s.owner_id and x.library_entry_id=s.library_entry_id\n      and x.setup_version_id=s.setup_version_id and x.style=s.style\n      and x.is_dialed_in and x.hidden_at is null and x.id<>s.id\n      and (x.pulled_at,x.id)<(s.pulled_at,s.id)\n   ), personal_center as (\n     select count(*) as n,\n      percentile_cont(0.5) within group(order by t) as mid_t,\n      percentile_cont(0.5) within group(order by r) as mid_r\n     from personal_samples\n   )\n   select center.n,center.mid_t,center.mid_r,\n     (select percentile_cont(0.5) within group(order by abs(p.t-center.mid_t)) from personal_samples p),\n     (select percentile_cont(0.5) within group(order by abs(p.r-center.mid_r)) from personal_samples p)\n    into own_count,own_time,own_ratio,time_mad,ratio_mad\n    from personal_center center;\n\n   if own_count>=5 then\n     peer_count:=own_count;median_time:=own_time;median_ratio:=own_ratio;\n   else\n     -- Independent contributors prevent prolific users from manufacturing a\n     -- majority. Never borrow times from different shot styles/releases.\n     with peer as (\n       select distinct on(link.contributor_id)\n         other.ratio::double precision as r,\n         other.time_s::double precision as t\n       from public.community_shots other\n       join private.contribution_links link on link.community_shot_id=other.id\n       join public.coffees verified on verified.id=other.coffee_id\n       where other.id<>c.id and other.quality_state='eligible'\n         and verified.verification_state='verified'\n         and other.coffee_id=c.coffee_id and other.style=c.style\n         and link.contributor_id<>l.contributor_id\n       order by link.contributor_id,other.updated_at desc,other.id\n     ), peer_center as (\n       select count(*) as n,\n         percentile_cont(0.5) within group(order by t) as mid_t,\n         percentile_cont(0.5) within group(order by r) as mid_r\n       from peer\n     )\n     select center.n,center.mid_t,center.mid_r,\n       (select percentile_cont(0.5) within group(order by abs(p.t-center.mid_t)) from peer p),\n       (select percentile_cont(0.5) within group(order by abs(p.r-center.mid_r)) from peer p)\n       into peer_count,median_time,median_ratio,time_mad,ratio_mad\n       from peer_center center;\n   end if;\n\n   -- Conservative practical floors apply IN ADDITION TO the modified Z\n   -- threshold, not instead of it. All flags only invite correction or\n   -- explicit owner confirmation, with no hard \"62 second\" veto.\n   if peer_count>=5 and (\n       (\n        abs(c.time_s-median_time)>greatest(10.0,0.4*median_time)\n        and abs(c.time_s-median_time)/greatest(coalesce(time_mad,0)*1.4826,5.0)>3.5\n       ) or (\n        abs(c.ratio-median_ratio)>greatest(0.5,0.35*median_ratio)\n        and abs(c.ratio-median_ratio)/greatest(coalesce(ratio_mad,0)*1.4826,0.25)>3.5\n       )\n     ) and q.confirmed_fingerprint is distinct from fp then\n     new_state:='held';reason_code:='extreme_outlier';\n   else\n     new_state:='eligible';reason_code:='valid';\n   end if;\n  end if;\n end if;\n\n if c.quality_state is distinct from new_state then\n  update public.community_shots\n     set quality_state=new_state,updated_at=clock_timestamp() where id=c.id;\n end if;\n insert into private.community_quality_checks(\n  community_shot_id,source_revision,outcome,reason,reviewed_at\n ) values(c.id,l.source_revision,new_state,reason_code,clock_timestamp())\n on conflict(community_shot_id) do update\n  set source_revision=excluded.source_revision,outcome=excluded.outcome,\n      reason=excluded.reason,reviewed_at=excluded.reviewed_at\n  where (private.community_quality_checks.source_revision,\n         private.community_quality_checks.outcome,\n         private.community_quality_checks.reason)\n        is distinct from\n        (excluded.source_revision,excluded.outcome,excluded.reason);\n return new_state;\nend $function$\n",
+      "md5": "c5aea4d32aa8027a39d80341feade406",
+      "chars": 7734,
+      "security_definer": true,
+      "configurations": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "service_execute": false,
+      "review_range_chars": [
+        1,
+        7734
+      ],
+      "semantic_verdict": "SOURCE_LEVEL_WITHDRAWN_STATE_INTEGRITY_BUG",
+      "semantic_assessment": "Source-level bug: unverified coffee precedes withdrawn guard; internal trigger recheck can change withdrawn to held. Fixed in development source only, SQL regression staged."
+    },
+    {
+      "signature": "private.dic_review_pending_community(p_limit integer)",
+      "full_sql": "CREATE OR REPLACE FUNCTION private.dic_review_pending_community(p_limit integer DEFAULT 100)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare target uuid; reviewed integer:=0; eligible_count integer:=0;\n        held_count integer:=0; result text;\nbegin\n if p_limit is null or p_limit not between 1 and 500 then\n  raise exception using errcode='22023',message='Community review limit must be 1–500.';\n end if;\n for target in select id from public.community_shots\n                where quality_state='pending_quality'\n                order by updated_at,id limit p_limit\n loop\n  result:=private.dic_review_community_shot(target);\n  reviewed:=reviewed+1;\n  if result='eligible' then eligible_count:=eligible_count+1;end if;\n  if result='held' then held_count:=held_count+1;end if;\n end loop;\n return jsonb_build_object('reviewed',reviewed,'eligible',eligible_count,'held',held_count);\nend $function$\n",
+      "md5": "ff876442da558f60f7eccb36bd6dbe62",
+      "chars": 944,
+      "security_definer": true,
+      "configurations": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "service_execute": true,
+      "review_range_chars": [
+        1,
+        944
+      ],
+      "semantic_verdict": "FULL_LIVE_SQL_SEMANTIC_REVIEW_NO_NEW_DEFECT",
+      "semantic_assessment": "Only service-role EXECUTE, 1..500 bounded pending_quality background reviews; no direct client permission."
+    }
+  ],
+  "direct_source_characters": 10864,
+  "trigger_proof": [
+    "CREATE TRIGGER dic_recheck_after_link AFTER INSERT OR UPDATE OF shot_id, source_revision ON private.contribution_links FOR EACH ROW EXECUTE FUNCTION private.dic_recheck_after_link()",
+    "CREATE TRIGGER dic_on_library_coffee_change AFTER UPDATE OF coffee_id ON library_entries FOR EACH ROW EXECUTE FUNCTION private.dic_on_library_coffee_change()"
+  ],
+  "callers": [
+    "dic_backfill_library_contributions",
+    "dic_confirm_community_outlier",
+    "dic_on_community_coffee_verification",
+    "dic_recheck_after_link",
+    "dic_review_pending_community"
+  ],
+  "new_finding": {
+    "id": "DIC-Q-509-community-withdrawn-recheck-guard",
+    "status": "TESTING_DEVELOPMENT_ONLY",
+    "severity": "potential Community privacy and integrity",
+    "live_original_md5": "c5aea4d32aa8027a39d80341feade406",
+    "root_cause": "Unverified coffee state branch precedes withdrawn guard in complete live reviewer; link UPDATE trigger invokes reviewer independent of coffee verification trigger.",
+    "safe_aggregate": "12 eligible verified; no currently withdrawn in provider aggregate, historical incidence not measured.",
+    "fix_migration": "supabase/migrations/20261115065000_dic_community_withdrawn_recheck_guard.sql",
+    "test_file": "supabase/tests/community_quality_integrity.sql"
+  },
+  "numeric_pgss_range": [
+    2721,
+    2800
+  ],
+  "numeric_fingerprints": [
+    {
+      "rn": 2721,
+      "queryid": "-3042628949408088695",
+      "calls": 1,
+      "total_ms": "1.741",
+      "mean_ms": "1.741"
+    },
+    {
+      "rn": 2722,
+      "queryid": "6293618349495895660",
+      "calls": 1,
+      "total_ms": "1.739",
+      "mean_ms": "1.739"
+    },
+    {
+      "rn": 2723,
+      "queryid": "5757147218001948726",
+      "calls": 1,
+      "total_ms": "1.738",
+      "mean_ms": "1.738"
+    },
+    {
+      "rn": 2724,
+      "queryid": "-1941844165525793515",
+      "calls": 1,
+      "total_ms": "1.734",
+      "mean_ms": "1.734"
+    },
+    {
+      "rn": 2725,
+      "queryid": "-4779675820416657171",
+      "calls": 1,
+      "total_ms": "1.732",
+      "mean_ms": "1.732"
+    },
+    {
+      "rn": 2726,
+      "queryid": "5479862769883616186",
+      "calls": 2,
+      "total_ms": "1.729",
+      "mean_ms": "0.864"
+    },
+    {
+      "rn": 2727,
+      "queryid": "-7072097095118253375",
+      "calls": 2,
+      "total_ms": "1.723",
+      "mean_ms": "0.862"
+    },
+    {
+      "rn": 2728,
+      "queryid": "725222585372945448",
+      "calls": 10,
+      "total_ms": "1.722",
+      "mean_ms": "0.172"
+    },
+    {
+      "rn": 2729,
+      "queryid": "3144864823484728631",
+      "calls": 2,
+      "total_ms": "1.722",
+      "mean_ms": "0.861"
+    },
+    {
+      "rn": 2730,
+      "queryid": "6244438338784589945",
+      "calls": 1,
+      "total_ms": "1.720",
+      "mean_ms": "1.720"
+    },
+    {
+      "rn": 2731,
+      "queryid": "-1044393655620106181",
+      "calls": 4,
+      "total_ms": "1.710",
+      "mean_ms": "0.428"
+    },
+    {
+      "rn": 2732,
+      "queryid": "-3462805826446296540",
+      "calls": 1,
+      "total_ms": "1.708",
+      "mean_ms": "1.708"
+    },
+    {
+      "rn": 2733,
+      "queryid": "-194082665783441406",
+      "calls": 96,
+      "total_ms": "1.708",
+      "mean_ms": "0.018"
+    },
+    {
+      "rn": 2734,
+      "queryid": "-330880776786722365",
+      "calls": 1,
+      "total_ms": "1.708",
+      "mean_ms": "1.708"
+    },
+    {
+      "rn": 2735,
+      "queryid": "-17876814408064776",
+      "calls": 1,
+      "total_ms": "1.706",
+      "mean_ms": "1.706"
+    },
+    {
+      "rn": 2736,
+      "queryid": "865220370392191058",
+      "calls": 1,
+      "total_ms": "1.705",
+      "mean_ms": "1.705"
+    },
+    {
+      "rn": 2737,
+      "queryid": "-1638303013465107892",
+      "calls": 1,
+      "total_ms": "1.703",
+      "mean_ms": "1.703"
+    },
+    {
+      "rn": 2738,
+      "queryid": "-8808594018966896574",
+      "calls": 1,
+      "total_ms": "1.703",
+      "mean_ms": "1.703"
+    },
+    {
+      "rn": 2739,
+      "queryid": "1184376279158115712",
+      "calls": 1,
+      "total_ms": "1.702",
+      "mean_ms": "1.702"
+    },
+    {
+      "rn": 2740,
+      "queryid": "-3925302319822073506",
+      "calls": 1,
+      "total_ms": "1.701",
+      "mean_ms": "1.701"
+    },
+    {
+      "rn": 2741,
+      "queryid": "5397723513931468561",
+      "calls": 1,
+      "total_ms": "1.700",
+      "mean_ms": "1.700"
+    },
+    {
+      "rn": 2742,
+      "queryid": "-634715553840589323",
+      "calls": 1,
+      "total_ms": "1.695",
+      "mean_ms": "1.695"
+    },
+    {
+      "rn": 2743,
+      "queryid": "-4135479522621389005",
+      "calls": 1,
+      "total_ms": "1.693",
+      "mean_ms": "1.693"
+    },
+    {
+      "rn": 2744,
+      "queryid": "-460372654006451929",
+      "calls": 1,
+      "total_ms": "1.691",
+      "mean_ms": "1.691"
+    },
+    {
+      "rn": 2745,
+      "queryid": "4752256669305034736",
+      "calls": 10,
+      "total_ms": "1.687",
+      "mean_ms": "0.169"
+    },
+    {
+      "rn": 2746,
+      "queryid": "-1237601077774625459",
+      "calls": 1,
+      "total_ms": "1.685",
+      "mean_ms": "1.685"
+    },
+    {
+      "rn": 2747,
+      "queryid": "-6143345020887062838",
+      "calls": 3,
+      "total_ms": "1.684",
+      "mean_ms": "0.561"
+    },
+    {
+      "rn": 2748,
+      "queryid": "-8018788530007813531",
+      "calls": 1,
+      "total_ms": "1.684",
+      "mean_ms": "1.684"
+    },
+    {
+      "rn": 2749,
+      "queryid": "-2966175678552054071",
+      "calls": 1,
+      "total_ms": "1.680",
+      "mean_ms": "1.680"
+    },
+    {
+      "rn": 2750,
+      "queryid": "-8731219760206444066",
+      "calls": 4,
+      "total_ms": "1.672",
+      "mean_ms": "0.418"
+    },
+    {
+      "rn": 2751,
+      "queryid": "4886895087990159470",
+      "calls": 1,
+      "total_ms": "1.671",
+      "mean_ms": "1.671"
+    },
+    {
+      "rn": 2752,
+      "queryid": "6137731745528930692",
+      "calls": 1,
+      "total_ms": "1.669",
+      "mean_ms": "1.669"
+    },
+    {
+      "rn": 2753,
+      "queryid": "7374330261407896169",
+      "calls": 74,
+      "total_ms": "1.658",
+      "mean_ms": "0.022"
+    },
+    {
+      "rn": 2754,
+      "queryid": "2900260401774947627",
+      "calls": 1,
+      "total_ms": "1.652",
+      "mean_ms": "1.652"
+    },
+    {
+      "rn": 2755,
+      "queryid": "8262649970960323107",
+      "calls": 1,
+      "total_ms": "1.652",
+      "mean_ms": "1.652"
+    },
+    {
+      "rn": 2756,
+      "queryid": "-6690332128285132781",
+      "calls": 1,
+      "total_ms": "1.652",
+      "mean_ms": "1.652"
+    },
+    {
+      "rn": 2757,
+      "queryid": "-4925396451700510188",
+      "calls": 1,
+      "total_ms": "1.650",
+      "mean_ms": "1.650"
+    },
+    {
+      "rn": 2758,
+      "queryid": "4360109543440925575",
+      "calls": 1,
+      "total_ms": "1.649",
+      "mean_ms": "1.649"
+    },
+    {
+      "rn": 2759,
+      "queryid": "483549327721317816",
+      "calls": 1,
+      "total_ms": "1.645",
+      "mean_ms": "1.645"
+    },
+    {
+      "rn": 2760,
+      "queryid": "-3324823538408149471",
+      "calls": 1,
+      "total_ms": "1.645",
+      "mean_ms": "1.645"
+    },
+    {
+      "rn": 2761,
+      "queryid": "-5564482763131767729",
+      "calls": 2,
+      "total_ms": "1.642",
+      "mean_ms": "0.821"
+    },
+    {
+      "rn": 2762,
+      "queryid": "8845103389477066301",
+      "calls": 1,
+      "total_ms": "1.641",
+      "mean_ms": "1.641"
+    },
+    {
+      "rn": 2763,
+      "queryid": "-1322887179856259287",
+      "calls": 1,
+      "total_ms": "1.639",
+      "mean_ms": "1.639"
+    },
+    {
+      "rn": 2764,
+      "queryid": "6002293539785501374",
+      "calls": 1,
+      "total_ms": "1.632",
+      "mean_ms": "1.632"
+    },
+    {
+      "rn": 2765,
+      "queryid": "2793573608859481840",
+      "calls": 1,
+      "total_ms": "1.632",
+      "mean_ms": "1.632"
+    },
+    {
+      "rn": 2766,
+      "queryid": "4437386826787413750",
+      "calls": 38,
+      "total_ms": "1.631",
+      "mean_ms": "0.043"
+    },
+    {
+      "rn": 2767,
+      "queryid": "5996446635253522488",
+      "calls": 1,
+      "total_ms": "1.630",
+      "mean_ms": "1.630"
+    },
+    {
+      "rn": 2768,
+      "queryid": "3824083166374667652",
+      "calls": 1,
+      "total_ms": "1.623",
+      "mean_ms": "1.623"
+    },
+    {
+      "rn": 2769,
+      "queryid": "3990292009967976964",
+      "calls": 1,
+      "total_ms": "1.620",
+      "mean_ms": "1.620"
+    },
+    {
+      "rn": 2770,
+      "queryid": "8000430746973227994",
+      "calls": 1,
+      "total_ms": "1.620",
+      "mean_ms": "1.620"
+    },
+    {
+      "rn": 2771,
+      "queryid": "8112439329084892676",
+      "calls": 2,
+      "total_ms": "1.619",
+      "mean_ms": "0.810"
+    },
+    {
+      "rn": 2772,
+      "queryid": "7286600377324813320",
+      "calls": 1,
+      "total_ms": "1.617",
+      "mean_ms": "1.617"
+    },
+    {
+      "rn": 2773,
+      "queryid": "1917904851494330541",
+      "calls": 1,
+      "total_ms": "1.617",
+      "mean_ms": "1.617"
+    },
+    {
+      "rn": 2774,
+      "queryid": "3265164515638761723",
+      "calls": 1,
+      "total_ms": "1.615",
+      "mean_ms": "1.615"
+    },
+    {
+      "rn": 2775,
+      "queryid": "5161458950888891026",
+      "calls": 1,
+      "total_ms": "1.614",
+      "mean_ms": "1.614"
+    },
+    {
+      "rn": 2776,
+      "queryid": "7196592325875904679",
+      "calls": 2,
+      "total_ms": "1.612",
+      "mean_ms": "0.806"
+    },
+    {
+      "rn": 2777,
+      "queryid": "-9149920763905063687",
+      "calls": 1,
+      "total_ms": "1.609",
+      "mean_ms": "1.609"
+    },
+    {
+      "rn": 2778,
+      "queryid": "-4368640217311975469",
+      "calls": 1,
+      "total_ms": "1.604",
+      "mean_ms": "1.604"
+    },
+    {
+      "rn": 2779,
+      "queryid": "1102260189167921174",
+      "calls": 1,
+      "total_ms": "1.599",
+      "mean_ms": "1.599"
+    },
+    {
+      "rn": 2780,
+      "queryid": "3969420692803247293",
+      "calls": 2,
+      "total_ms": "1.596",
+      "mean_ms": "0.798"
+    },
+    {
+      "rn": 2781,
+      "queryid": "-8938937896909670107",
+      "calls": 4,
+      "total_ms": "1.589",
+      "mean_ms": "0.397"
+    },
+    {
+      "rn": 2782,
+      "queryid": "-2694927019830719653",
+      "calls": 1,
+      "total_ms": "1.588",
+      "mean_ms": "1.588"
+    },
+    {
+      "rn": 2783,
+      "queryid": "6442548444475761510",
+      "calls": 1,
+      "total_ms": "1.588",
+      "mean_ms": "1.588"
+    },
+    {
+      "rn": 2784,
+      "queryid": "8006707412066577007",
+      "calls": 1,
+      "total_ms": "1.585",
+      "mean_ms": "1.585"
+    },
+    {
+      "rn": 2785,
+      "queryid": "2646567917274795072",
+      "calls": 3,
+      "total_ms": "1.584",
+      "mean_ms": "0.528"
+    },
+    {
+      "rn": 2786,
+      "queryid": "3050813761801073337",
+      "calls": 1,
+      "total_ms": "1.581",
+      "mean_ms": "1.581"
+    },
+    {
+      "rn": 2787,
+      "queryid": "5420893330940660272",
+      "calls": 4,
+      "total_ms": "1.579",
+      "mean_ms": "0.395"
+    },
+    {
+      "rn": 2788,
+      "queryid": "-8188792987586157416",
+      "calls": 1,
+      "total_ms": "1.569",
+      "mean_ms": "1.569"
+    },
+    {
+      "rn": 2789,
+      "queryid": "-4534037694732989429",
+      "calls": 1,
+      "total_ms": "1.567",
+      "mean_ms": "1.567"
+    },
+    {
+      "rn": 2790,
+      "queryid": "8649647839328242135",
+      "calls": 1,
+      "total_ms": "1.566",
+      "mean_ms": "1.566"
+    },
+    {
+      "rn": 2791,
+      "queryid": "1474928914223330299",
+      "calls": 1,
+      "total_ms": "1.561",
+      "mean_ms": "1.561"
+    },
+    {
+      "rn": 2792,
+      "queryid": "-2837041823817493340",
+      "calls": 1,
+      "total_ms": "1.555",
+      "mean_ms": "1.555"
+    },
+    {
+      "rn": 2793,
+      "queryid": "-4298316406579873360",
+      "calls": 1,
+      "total_ms": "1.550",
+      "mean_ms": "1.550"
+    },
+    {
+      "rn": 2794,
+      "queryid": "1922560827711772916",
+      "calls": 4,
+      "total_ms": "1.548",
+      "mean_ms": "0.387"
+    },
+    {
+      "rn": 2795,
+      "queryid": "-7158260249256046068",
+      "calls": 1,
+      "total_ms": "1.547",
+      "mean_ms": "1.547"
+    },
+    {
+      "rn": 2796,
+      "queryid": "4584452618851069588",
+      "calls": 1,
+      "total_ms": "1.547",
+      "mean_ms": "1.547"
+    },
+    {
+      "rn": 2797,
+      "queryid": "2679427508183238449",
+      "calls": 1,
+      "total_ms": "1.547",
+      "mean_ms": "1.547"
+    },
+    {
+      "rn": 2798,
+      "queryid": "11701968915743190",
+      "calls": 298,
+      "total_ms": "1.545",
+      "mean_ms": "0.005"
+    },
+    {
+      "rn": 2799,
+      "queryid": "-5319252028718148006",
+      "calls": 1,
+      "total_ms": "1.545",
+      "mean_ms": "1.545"
+    },
+    {
+      "rn": 2800,
+      "queryid": "5500443719731234693",
+      "calls": 1,
+      "total_ms": "1.544",
+      "mean_ms": "1.544"
+    }
+  ],
+  "previous_distinct": 2616,
+  "new_distinct": 70,
+  "overlap": 10,
+  "cumulative_distinct": 2686,
+  "baseline_complete": false,
+  "unverified": [
+    "Isolated SQL17 CI/Node22/approval on exact new source pending",
+    "Original migration-source full byte parity beyond targeted function pending",
+    "Full provider-wide definition review and private console-only settings pending",
+    "No genuine signed-in Auth test under #96 ownership"
+  ],
+  "next": {
+    "numeric_ranks": [
+      2801,
+      2880
+    ],
+    "action": "Confirm exact-source isolated SQL regression and privacy checks; continue remaining definition/source parity"
+  },
+  "privacy": "Read-only catalog and numerical aggregate only; no private records, credentials, query text, log bodies or provider mutation"
+}
