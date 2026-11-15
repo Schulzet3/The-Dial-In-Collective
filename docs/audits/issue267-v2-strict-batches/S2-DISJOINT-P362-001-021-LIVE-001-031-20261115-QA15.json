@@ -1,0 +1,1183 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch_id": "QA15-P362",
+  "date_utc": "2026-11-15",
+  "scope": "Development-only original/pinned file P362 direct semantic line inspection and separately direct live 31 lines; no runtime modification or publication",
+  "preflight": {
+    "development_sha": "63cd27e21aaf76da63bf34ccb11256f75d8035a7",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "verified_via_independent_git_blob_read": true
+  },
+  "sources": {
+    "pinned": {
+      "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "path": "tests/exclusive-release-workflow.test.mjs",
+      "blob_sha": "ca7474570befc10a18a7809fb5d40f3efed80f6b",
+      "from_line": 1,
+      "to_line": 21,
+      "lines": 21
+    },
+    "actual_live": {
+      "commit": "63cd27e21aaf76da63bf34ccb11256f75d8035a7",
+      "path": "tests/exclusive-release-workflow.test.mjs",
+      "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+      "from_line": 1,
+      "to_line": 31,
+      "lines": 31
+    }
+  },
+  "strict_prior_validation": {
+    "source_frozen_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+    "first_frozen_path": ".github/workflows/approval-continuity.yml",
+    "first_frozen_blob": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+    "first_frozen_lines_checked": 41,
+    "matching_S2_001_literals": 41,
+    "new_frozen_credit": 0,
+    "legacy_R2_C2_grouped_credit_promoted": 0
+  },
+  "pinned_line_review": [
+    {
+      "line": 1,
+      "source_text": "import test from 'node:test';",
+      "classification": "import",
+      "behavior": "Loads native test harness; no production call",
+      "quality": "Correct built-in import",
+      "security_privacy_performance_risk": "No direct privacy/performance hazard",
+      "obsolescence_and_duplication": "Retained identical in current; no duplicate/dead proof",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 1,
+        "exact_text_match": true,
+        "relationship": "literal-identical"
+      },
+      "testability": "Module load or Node 22 test execution",
+      "safe_fix_or_removal_opportunity": "Keep test harness",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 2,
+      "source_text": "import assert from 'node:assert/strict';",
+      "classification": "import",
+      "behavior": "Loads strict assertion API; no secrets",
+      "quality": "Strict comparisons are suitable",
+      "security_privacy_performance_risk": "No direct privacy exposure",
+      "obsolescence_and_duplication": "Retained identical in current; no duplicate/dead proof",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 2,
+        "exact_text_match": true,
+        "relationship": "literal-identical"
+      },
+      "testability": "Node test compilation",
+      "safe_fix_or_removal_opportunity": "Keep",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 3,
+      "source_text": "import {readFileSync} from 'node:fs';",
+      "classification": "import",
+      "behavior": "Imports synchronous fixture reader",
+      "quality": "Small static file; cost negligible",
+      "security_privacy_performance_risk": "No untrusted user path here",
+      "obsolescence_and_duplication": "Retained identical in current; no duplicate/dead proof",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 3,
+        "exact_text_match": true,
+        "relationship": "literal-identical"
+      },
+      "testability": "Fixture-read test",
+      "safe_fix_or_removal_opportunity": "Keep",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 4,
+      "source_text": "const yml=readFileSync(new URL('../.github/workflows/dic-single-use-release.yml',import.meta.url),'utf8');",
+      "classification": "read",
+      "behavior": "Reads versioned workflow relative to module once, UTF-8",
+      "quality": "Static text inspection, not YAML execution",
+      "security_privacy_performance_risk": "Relative path fixed; no credential access; cannot prove hosted permissions",
+      "obsolescence_and_duplication": "Retained identical in current; no duplicate/dead proof",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 4,
+        "exact_text_match": true,
+        "relationship": "literal-identical"
+      },
+      "testability": "Fixture must match exact workflow path",
+      "safe_fix_or_removal_opportunity": "Keep; no unused code established",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 5,
+      "source_text": "test('atomic production controller cannot execute from push or schedule',()=>{",
+      "classification": "test",
+      "behavior": "Registers first production-trigger-policy test",
+      "quality": "Intent agrees manual-only historical workflow",
+      "security_privacy_performance_risk": "Test title cannot itself prove trigger security",
+      "obsolescence_and_duplication": "Restructured or strengthened in current; original test remains immutable at pinned SHA; no proven dead current code",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 25,
+        "exact_text_match": false,
+        "relationship": "semantically updated/restructured"
+      },
+      "testability": "Execute with Node test runner",
+      "safe_fix_or_removal_opportunity": "Keep as static guard",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 6,
+      "source_text": " assert.match(yml,/workflow_dispatch:/);",
+      "classification": "assert",
+      "behavior": "Looks for workflow_dispatch anywhere in raw YAML",
+      "quality": "Weak positive, comment or nested text can spoof presence",
+      "security_privacy_performance_risk": "False PASS was possible in original; current code anchors active stripped line",
+      "obsolescence_and_duplication": "Restructured or strengthened in current; original test remains immutable at pinned SHA; no proven dead current code",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 9,
+        "exact_text_match": false,
+        "relationship": "semantically updated/restructured"
+      },
+      "testability": "Negative comment-only fixture",
+      "safe_fix_or_removal_opportunity": "Already improved in current test",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 7,
+      "source_text": " assert.doesNotMatch(yml,/\\n\\s{2}(?:push|pull_request|schedule):/);",
+      "classification": "assert",
+      "behavior": "Rejects push/pull_request/schedule using newline and exactly two spaces",
+      "quality": "Approximates event-level YAML keys but not parsed YAML",
+      "security_privacy_performance_risk": "Partial static match could miss unusual indentation or quoted YAML",
+      "obsolescence_and_duplication": "Restructured or strengthened in current; original test remains immutable at pinned SHA; no proven dead current code",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 10,
+        "exact_text_match": false,
+        "relationship": "semantically updated/restructured"
+      },
+      "testability": "Injected active events",
+      "safe_fix_or_removal_opportunity": "Current test uses line anchoring; do not call it complete YAML validation",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 8,
+      "source_text": " assert.match(yml,/cancel-in-progress: false/);",
+      "classification": "assert",
+      "behavior": "Checks serialized controller disables cancellation via substring",
+      "quality": "Historical unanchored literal could be spoofed by comment",
+      "security_privacy_performance_risk": "Concurrent publish safety depends on actual workflow, not this text alone",
+      "obsolescence_and_duplication": "Restructured or strengthened in current; original test remains immutable at pinned SHA; no proven dead current code",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 11,
+        "exact_text_match": false,
+        "relationship": "semantically updated/restructured"
+      },
+      "testability": "Concurrency YAML fixture",
+      "safe_fix_or_removal_opportunity": "Current test anchors active line",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 9,
+      "source_text": " assert.match(yml,/dic-exclusive-one-use-production-publish/);",
+      "classification": "assert",
+      "behavior": "Checks expected one-use concurrency group as raw substring",
+      "quality": "No semantic YAML parse; could be satisfied by comment",
+      "security_privacy_performance_risk": "Group identifier is sensitive to exclusive release execution",
+      "obsolescence_and_duplication": "Restructured or strengthened in current; original test remains immutable at pinned SHA; no proven dead current code",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 12,
+        "exact_text_match": false,
+        "relationship": "semantically updated/restructured"
+      },
+      "testability": "Renamed group negative",
+      "safe_fix_or_removal_opportunity": "Current test anchors active line",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 10,
+      "source_text": "});",
+      "classification": "closure",
+      "behavior": "Closes original first test callback",
+      "quality": "Syntactically valid",
+      "security_privacy_performance_risk": "No standalone runtime risk",
+      "obsolescence_and_duplication": "Restructured or strengthened in current; original test remains immutable at pinned SHA; no proven dead current code",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 25,
+        "exact_text_match": false,
+        "relationship": "semantically updated/restructured"
+      },
+      "testability": "Run Node parser",
+      "safe_fix_or_removal_opportunity": "Current version inlines test registration",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 11,
+      "source_text": "test('production workflow uses exact owner ID and source SHA, not raw Netlify build hook',()=>{",
+      "classification": "test",
+      "behavior": "Starts input-binding static test",
+      "quality": "Focused on explicit owner authorization",
+      "security_privacy_performance_risk": "Title does not independently validate owner consent",
+      "obsolescence_and_duplication": "Restructured or strengthened in current; original test remains immutable at pinned SHA; no proven dead current code",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 26,
+        "exact_text_match": false,
+        "relationship": "semantically updated/restructured"
+      },
+      "testability": "Node unit runner",
+      "safe_fix_or_removal_opportunity": "Current version retains test",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 12,
+      "source_text": " assert.match(yml,/INPUT_RELEASE_ID:.*inputs\\.release_id/);",
+      "classification": "assert",
+      "behavior": "Looks for INPUT_RELEASE_ID mapping from approved input",
+      "quality": "Text-only match; comment could spoof",
+      "security_privacy_performance_risk": "Missing real ID binding would weaken release grant if not separately enforced",
+      "obsolescence_and_duplication": "Restructured or strengthened in current; original test remains immutable at pinned SHA; no proven dead current code",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 15,
+        "exact_text_match": false,
+        "relationship": "semantically updated/restructured"
+      },
+      "testability": "Alter env mapping fixture",
+      "safe_fix_or_removal_opportunity": "Current activeYaml strips comments, still not runtime proof",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 13,
+      "source_text": " assert.match(yml,/INPUT_TESTED_SOURCE_SHA:.*inputs\\.tested_source_sha/);",
+      "classification": "assert",
+      "behavior": "Looks for source SHA input mapping",
+      "quality": "Static regex only",
+      "security_privacy_performance_risk": "Wrong source hash could undermine exact-source gate",
+      "obsolescence_and_duplication": "Restructured or strengthened in current; original test remains immutable at pinned SHA; no proven dead current code",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 16,
+        "exact_text_match": false,
+        "relationship": "semantically updated/restructured"
+      },
+      "testability": "Tamper tested_source_sha",
+      "safe_fix_or_removal_opportunity": "Current test remains text based",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 14,
+      "source_text": " assert.match(yml,/INPUT_RELEASE_EVIDENCE_JSON:.*inputs\\.release_evidence_json/);",
+      "classification": "assert",
+      "behavior": "Looks for evidence JSON input mapping",
+      "quality": "Static regex only",
+      "security_privacy_performance_risk": "Evidence binding is necessary but not sufficient for grant validation",
+      "obsolescence_and_duplication": "Restructured or strengthened in current; original test remains immutable at pinned SHA; no proven dead current code",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 17,
+        "exact_text_match": false,
+        "relationship": "semantically updated/restructured"
+      },
+      "testability": "Tamper evidence JSON env",
+      "safe_fix_or_removal_opportunity": "Current test remains text based",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 15,
+      "source_text": " assert.match(yml,/release_evidence_json:[\\s\\S]*?required: true/);",
+      "classification": "assert",
+      "behavior": "Checks required=true in a later text span",
+      "quality": "Cross-span required may match another input, so false-pass risk",
+      "security_privacy_performance_risk": "Scope/evidence requirement cannot be certified by this match alone",
+      "obsolescence_and_duplication": "Restructured or strengthened in current; original test remains immutable at pinned SHA; no proven dead current code",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 18,
+        "exact_text_match": false,
+        "relationship": "semantically updated/restructured"
+      },
+      "testability": "Move required flag to unrelated field and run focused test",
+      "safe_fix_or_removal_opportunity": "Residual bounded static-test weakness, no reproduced active defect",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 16,
+      "source_text": " assert.match(yml,/DIC_PRIVATE_BRANCH_PROTECTION_VERIFIED/);",
+      "classification": "assert",
+      "behavior": "Looks for private branch protection variable name",
+      "quality": "Name existence not live value",
+      "security_privacy_performance_risk": "Cannot establish actual GitHub branch rules",
+      "obsolescence_and_duplication": "Restructured or strengthened in current; original test remains immutable at pinned SHA; no proven dead current code",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 19,
+        "exact_text_match": false,
+        "relationship": "semantically updated/restructured"
+      },
+      "testability": "Remove variable from test fixture",
+      "safe_fix_or_removal_opportunity": "Retain; no deletion basis",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 17,
+      "source_text": " assert.match(yml,/DIC_NETLIFY_PRODUCTION_BRANCH_VERIFIED/);",
+      "classification": "assert",
+      "behavior": "Looks for Netlify production branch variable",
+      "quality": "Name existence not provider readback",
+      "security_privacy_performance_risk": "Cannot prove Netlify production branch configuration",
+      "obsolescence_and_duplication": "Restructured or strengthened in current; original test remains immutable at pinned SHA; no proven dead current code",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 20,
+        "exact_text_match": false,
+        "relationship": "semantically updated/restructured"
+      },
+      "testability": "Remove expected variable",
+      "safe_fix_or_removal_opportunity": "Retain; no deployment action",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 18,
+      "source_text": " assert.match(yml,/DIC_RELEASE_CONTROLLER_VERIFIED/);",
+      "classification": "assert",
+      "behavior": "Looks for controller verified env variable",
+      "quality": "Text-only assertion",
+      "security_privacy_performance_risk": "Cannot verify controller's runtime authorization checks",
+      "obsolescence_and_duplication": "Restructured or strengthened in current; original test remains immutable at pinned SHA; no proven dead current code",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 21,
+        "exact_text_match": false,
+        "relationship": "semantically updated/restructured"
+      },
+      "testability": "Remove variable",
+      "safe_fix_or_removal_opportunity": "Retain; no production mutation",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 19,
+      "source_text": " assert.match(yml,/controlled-release-runner\\.mjs/);",
+      "classification": "assert",
+      "behavior": "Looks for controlled release runner script",
+      "quality": "Only basename assertion",
+      "security_privacy_performance_risk": "Cannot prove invocation success or grant checks",
+      "obsolescence_and_duplication": "Restructured or strengthened in current; original test remains immutable at pinned SHA; no proven dead current code",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 22,
+        "exact_text_match": false,
+        "relationship": "semantically updated/restructured"
+      },
+      "testability": "Remove script invocation",
+      "safe_fix_or_removal_opportunity": "Retain static link; runtime separately tested",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 20,
+      "source_text": " assert.doesNotMatch(yml,/netlify deploy|NETLIFY_AUTH_TOKEN|curl.*build_hooks/);",
+      "classification": "assert",
+      "behavior": "Rejects known direct Netlify hook patterns",
+      "quality": "Blacklist misses unlisted dangerous paths",
+      "security_privacy_performance_risk": "Not an exhaustive no-deploy guarantee",
+      "obsolescence_and_duplication": "Restructured or strengthened in current; original test remains immutable at pinned SHA; no proven dead current code",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 23,
+        "exact_text_match": false,
+        "relationship": "semantically updated/restructured"
+      },
+      "testability": "Add direct hook string negative",
+      "safe_fix_or_removal_opportunity": "Retain bounded regression guard; current context adds comment filtering",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 21,
+      "source_text": "});",
+      "classification": "closure",
+      "behavior": "Closes second original test callback",
+      "quality": "Syntactically required",
+      "security_privacy_performance_risk": "No external effect",
+      "obsolescence_and_duplication": "Restructured or strengthened in current; original test remains immutable at pinned SHA; no proven dead current code",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 26,
+        "exact_text_match": false,
+        "relationship": "semantically updated/restructured"
+      },
+      "testability": "Node test runner",
+      "safe_fix_or_removal_opportunity": "Current version inlines test registration",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    }
+  ],
+  "direct_live_line_review": [
+    {
+      "line": 1,
+      "source_text": "import test from 'node:test';",
+      "classification": "import",
+      "behavior": "Imports native Node test suite",
+      "quality": "Valid static-test dependency",
+      "security_privacy_performance_risk": "No app/provider side effect",
+      "obsolescence_and_duplication": "Unchanged pinned import/read line; no redundant logic proven",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 1,
+        "source_text_exact": true,
+        "pinned_source_counterpart": 1
+      },
+      "testability": "Node import/test",
+      "safe_fix_or_removal_opportunity": "Preserve",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 2,
+      "source_text": "import assert from 'node:assert/strict';",
+      "classification": "import",
+      "behavior": "Uses strict assert",
+      "quality": "Appropriate assertion form",
+      "security_privacy_performance_risk": "No user-data access",
+      "obsolescence_and_duplication": "Unchanged pinned import/read line; no redundant logic proven",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 2,
+        "source_text_exact": true,
+        "pinned_source_counterpart": 2
+      },
+      "testability": "Unit-run",
+      "safe_fix_or_removal_opportunity": "Preserve",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 3,
+      "source_text": "import {readFileSync} from 'node:fs';",
+      "classification": "import",
+      "behavior": "Loads readFileSync",
+      "quality": "Only local workflow fixture",
+      "security_privacy_performance_risk": "No untrusted external path",
+      "obsolescence_and_duplication": "Unchanged pinned import/read line; no redundant logic proven",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 3,
+        "source_text_exact": true,
+        "pinned_source_counterpart": 3
+      },
+      "testability": "Unit-run",
+      "safe_fix_or_removal_opportunity": "Preserve",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 4,
+      "source_text": "const yml=readFileSync(new URL('../.github/workflows/dic-single-use-release.yml',import.meta.url),'utf8');",
+      "classification": "read",
+      "behavior": "Reads checked-in single-use workflow via module-relative URL",
+      "quality": "Fixed file path, UTF-8; static source only",
+      "security_privacy_performance_risk": "Does not inspect Actions execution logs",
+      "obsolescence_and_duplication": "Unchanged pinned import/read line; no redundant logic proven",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 4,
+        "source_text_exact": true,
+        "pinned_source_counterpart": 4
+      },
+      "testability": "Node fixture read",
+      "safe_fix_or_removal_opportunity": "Preserve",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 5,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Whitespace separator",
+      "quality": "Mechanical formatting",
+      "security_privacy_performance_risk": "No risk",
+      "obsolescence_and_duplication": "Current source directly read; no confirmed removable code or cross-repo duplication",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 5,
+        "source_text_exact": true,
+        "pinned_source_counterpart": null
+      },
+      "testability": "N/A",
+      "safe_fix_or_removal_opportunity": "No fix",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 6,
+      "source_text": "// A commented-out YAML control must never satisfy an executable release-policy assertion.",
+      "classification": "comment",
+      "behavior": "Explains why commented policy strings must not satisfy tests",
+      "quality": "Useful purpose comment",
+      "security_privacy_performance_risk": "Comment itself does not enforce security",
+      "obsolescence_and_duplication": "Current source directly read; no confirmed removable code or cross-repo duplication",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 6,
+        "source_text_exact": true,
+        "pinned_source_counterpart": null
+      },
+      "testability": "Related negative test",
+      "safe_fix_or_removal_opportunity": "Preserve",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 7,
+      "source_text": "const activeYaml=(source)=>source.split(/\\r?\\n/).map(line=>/^\\s*#/.test(line)?'':line.replace(/\\s+#.*$/,'')).join('\\n');",
+      "classification": "helper",
+      "behavior": "Transforms source by stripping full-line and inline comments",
+      "quality": "Improves spoof resistance without full YAML parser",
+      "security_privacy_performance_risk": "Inline quoted # or YAML block scalar could be misclassified; not reproduced in present workflow",
+      "obsolescence_and_duplication": "Current source directly read; no confirmed removable code or cross-repo duplication",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 7,
+        "source_text_exact": true,
+        "pinned_source_counterpart": null
+      },
+      "testability": "Quoted-hash/inline-comment test",
+      "safe_fix_or_removal_opportunity": "Consider actual YAML parser only on demonstrated false pass; avoid speculative dependency",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 8,
+      "source_text": "function assertExclusiveTrigger(content){",
+      "classification": "function",
+      "behavior": "Defines exclusive trigger assertion helper",
+      "quality": "Reusable rather than duplicate test assertions",
+      "security_privacy_performance_risk": "No provider effect",
+      "obsolescence_and_duplication": "Current source directly read; no confirmed removable code or cross-repo duplication",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 8,
+        "source_text_exact": true,
+        "pinned_source_counterpart": null
+      },
+      "testability": "Focused helper test",
+      "safe_fix_or_removal_opportunity": "Keep",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 9,
+      "source_text": " assert.match(content,/^\\s{2}workflow_dispatch:\\s*$/m);",
+      "classification": "assert",
+      "behavior": "Anchored check for active workflow_dispatch with 2-space indent",
+      "quality": "Strong against comment-only fake trigger",
+      "security_privacy_performance_risk": "Static indentation assumption, no YAML parse",
+      "obsolescence_and_duplication": "Current source directly read; no confirmed removable code or cross-repo duplication",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 9,
+        "source_text_exact": true,
+        "pinned_source_counterpart": null
+      },
+      "testability": "Comment-only negative test",
+      "safe_fix_or_removal_opportunity": "Keep bounded guard",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 10,
+      "source_text": " assert.doesNotMatch(content,/^\\s{2}(?:push|pull_request|schedule):/m);",
+      "classification": "assert",
+      "behavior": "Rejects 2-space active push/pull/schedule triggers",
+      "quality": "Matches expected workflow root event layout",
+      "security_privacy_performance_risk": "Unusual YAML constructions not covered; live workflow confirmed no such active trigger",
+      "obsolescence_and_duplication": "Current source directly read; no confirmed removable code or cross-repo duplication",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 10,
+        "source_text_exact": true,
+        "pinned_source_counterpart": null
+      },
+      "testability": "Add event fixture",
+      "safe_fix_or_removal_opportunity": "Keep",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 11,
+      "source_text": " assert.match(content,/^\\s{2}cancel-in-progress: false\\s*$/m);",
+      "classification": "assert",
+      "behavior": "Anchored cancellation flag false",
+      "quality": "Tests non-canceling serialized controller",
+      "security_privacy_performance_risk": "Static fixture cannot prove Actions concurrency behavior",
+      "obsolescence_and_duplication": "Current source directly read; no confirmed removable code or cross-repo duplication",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 11,
+        "source_text_exact": true,
+        "pinned_source_counterpart": null
+      },
+      "testability": "Mutated concurrent flag",
+      "safe_fix_or_removal_opportunity": "Keep",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 12,
+      "source_text": " assert.match(content,/^\\s{2}group: dic-exclusive-one-use-production-publish\\s*$/m);",
+      "classification": "assert",
+      "behavior": "Anchored exclusive group key",
+      "quality": "Guards one-use serialization group",
+      "security_privacy_performance_risk": "Static group presence not runtime exclusivity",
+      "obsolescence_and_duplication": "Current source directly read; no confirmed removable code or cross-repo duplication",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 12,
+        "source_text_exact": true,
+        "pinned_source_counterpart": null
+      },
+      "testability": "Mutated group",
+      "safe_fix_or_removal_opportunity": "Keep",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 13,
+      "source_text": "}",
+      "classification": "closure",
+      "behavior": "Closes exclusive trigger helper",
+      "quality": "Required syntax",
+      "security_privacy_performance_risk": "No direct risk",
+      "obsolescence_and_duplication": "Current source directly read; no confirmed removable code or cross-repo duplication",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 13,
+        "source_text_exact": true,
+        "pinned_source_counterpart": null
+      },
+      "testability": "Node parse",
+      "safe_fix_or_removal_opportunity": "Keep",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 14,
+      "source_text": "function assertBoundRelease(content){",
+      "classification": "function",
+      "behavior": "Defines release-binding assertions",
+      "quality": "Factors repeated static checks",
+      "security_privacy_performance_risk": "No provider write",
+      "obsolescence_and_duplication": "Current source directly read; no confirmed removable code or cross-repo duplication",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 14,
+        "source_text_exact": true,
+        "pinned_source_counterpart": null
+      },
+      "testability": "Focused helper tests",
+      "safe_fix_or_removal_opportunity": "Keep",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 15,
+      "source_text": " assert.match(content,/INPUT_RELEASE_ID:.*inputs\\.release_id/);",
+      "classification": "assert",
+      "behavior": "Matches owner ID environment interpolation",
+      "quality": "Reads comment-filtered YAML, no live grant lookup",
+      "security_privacy_performance_risk": "Regex not a parse of expression value",
+      "obsolescence_and_duplication": "Current source directly read; no confirmed removable code or cross-repo duplication",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 15,
+        "source_text_exact": true,
+        "pinned_source_counterpart": null
+      },
+      "testability": "Tamper release_id binding",
+      "safe_fix_or_removal_opportunity": "Keep static coverage",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 16,
+      "source_text": " assert.match(content,/INPUT_TESTED_SOURCE_SHA:.*inputs\\.tested_source_sha/);",
+      "classification": "assert",
+      "behavior": "Matches tested SHA binding",
+      "quality": "Specific env naming",
+      "security_privacy_performance_risk": "Does not prove SHA is approved or checked at runtime",
+      "obsolescence_and_duplication": "Current source directly read; no confirmed removable code or cross-repo duplication",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 16,
+        "source_text_exact": true,
+        "pinned_source_counterpart": null
+      },
+      "testability": "Tamper tested SHA",
+      "safe_fix_or_removal_opportunity": "Keep",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 17,
+      "source_text": " assert.match(content,/INPUT_RELEASE_EVIDENCE_JSON:.*inputs\\.release_evidence_json/);",
+      "classification": "assert",
+      "behavior": "Matches release evidence JSON binding",
+      "quality": "Source-bound input named",
+      "security_privacy_performance_risk": "Does not validate schema or one-use consent",
+      "obsolescence_and_duplication": "Current source directly read; no confirmed removable code or cross-repo duplication",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 17,
+        "source_text_exact": true,
+        "pinned_source_counterpart": null
+      },
+      "testability": "Tamper evidence input",
+      "safe_fix_or_removal_opportunity": "Keep",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 18,
+      "source_text": " assert.match(content,/release_evidence_json:[\\s\\S]*?required: true/);",
+      "classification": "assert",
+      "behavior": "Checks evidence input required flag across multiline text",
+      "quality": "May reach unrelated required: true, a residual static false-pass limitation",
+      "security_privacy_performance_risk": "No active exploit reproduced; avoid declaring release unauthorized",
+      "obsolescence_and_duplication": "Current source directly read; no confirmed removable code or cross-repo duplication",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 18,
+        "source_text_exact": true,
+        "pinned_source_counterpart": null
+      },
+      "testability": "Targeted negative for unrelated required flag",
+      "safe_fix_or_removal_opportunity": "Triage low test-strength only",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 19,
+      "source_text": " assert.match(content,/DIC_PRIVATE_BRANCH_PROTECTION_VERIFIED/);",
+      "classification": "assert",
+      "behavior": "Confirms branch-protection variable presence",
+      "quality": "Comment filtering reduces spoofing",
+      "security_privacy_performance_risk": "Variable may be unset; GitHub Free protection is advisory",
+      "obsolescence_and_duplication": "Current source directly read; no confirmed removable code or cross-repo duplication",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 19,
+        "source_text_exact": true,
+        "pinned_source_counterpart": null
+      },
+      "testability": "Remove var fixture",
+      "safe_fix_or_removal_opportunity": "Preserve",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 20,
+      "source_text": " assert.match(content,/DIC_NETLIFY_PRODUCTION_BRANCH_VERIFIED/);",
+      "classification": "assert",
+      "behavior": "Confirms Netlify production branch verification variable",
+      "quality": "Static marker",
+      "security_privacy_performance_risk": "Provider setting requires independent readback",
+      "obsolescence_and_duplication": "Current source directly read; no confirmed removable code or cross-repo duplication",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 20,
+        "source_text_exact": true,
+        "pinned_source_counterpart": null
+      },
+      "testability": "Remove var fixture",
+      "safe_fix_or_removal_opportunity": "Preserve",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 21,
+      "source_text": " assert.match(content,/DIC_RELEASE_CONTROLLER_VERIFIED/);",
+      "classification": "assert",
+      "behavior": "Confirms controller verified variable",
+      "quality": "Static marker",
+      "security_privacy_performance_risk": "Does not demonstrate executed controller",
+      "obsolescence_and_duplication": "Current source directly read; no confirmed removable code or cross-repo duplication",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 21,
+        "source_text_exact": true,
+        "pinned_source_counterpart": null
+      },
+      "testability": "Remove var fixture",
+      "safe_fix_or_removal_opportunity": "Preserve",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 22,
+      "source_text": " assert.match(content,/controlled-release-runner\\.mjs/);",
+      "classification": "assert",
+      "behavior": "Confirms controlled release runner entrypoint",
+      "quality": "Links YAML to inspected runner",
+      "security_privacy_performance_risk": "Execution still depends on owner grant",
+      "obsolescence_and_duplication": "Current source directly read; no confirmed removable code or cross-repo duplication",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 22,
+        "source_text_exact": true,
+        "pinned_source_counterpart": null
+      },
+      "testability": "Remove entrypoint fixture",
+      "safe_fix_or_removal_opportunity": "Preserve",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 23,
+      "source_text": " assert.doesNotMatch(content,/netlify deploy|NETLIFY_AUTH_TOKEN|curl.*build_hooks/);",
+      "classification": "assert",
+      "behavior": "Rejects raw deploy commands/tokens/build hooks",
+      "quality": "Blocks obvious unsafe direct deploy syntax",
+      "security_privacy_performance_risk": "Blacklist is not a comprehensive publication guard",
+      "obsolescence_and_duplication": "Current source directly read; no confirmed removable code or cross-repo duplication",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 23,
+        "source_text_exact": true,
+        "pinned_source_counterpart": null
+      },
+      "testability": "Injected hook fixture",
+      "safe_fix_or_removal_opportunity": "Keep bounded test",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 24,
+      "source_text": "}",
+      "classification": "closure",
+      "behavior": "Closes helper",
+      "quality": "Valid syntax",
+      "security_privacy_performance_risk": "No effect beyond test helper",
+      "obsolescence_and_duplication": "Current source directly read; no confirmed removable code or cross-repo duplication",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 24,
+        "source_text_exact": true,
+        "pinned_source_counterpart": null
+      },
+      "testability": "Node parse",
+      "safe_fix_or_removal_opportunity": "Keep",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 25,
+      "source_text": "test('atomic production controller cannot execute from push or schedule',()=>assertExclusiveTrigger(activeYaml(yml)));",
+      "classification": "test",
+      "behavior": "Runs exclusive-trigger test on comment-filtered YAML",
+      "quality": "Calls helper through real fixture",
+      "security_privacy_performance_risk": "Only static file assertion, not live production run",
+      "obsolescence_and_duplication": "Current source directly read; no confirmed removable code or cross-repo duplication",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 25,
+        "source_text_exact": true,
+        "pinned_source_counterpart": null
+      },
+      "testability": "Node 22 test",
+      "safe_fix_or_removal_opportunity": "Preserve",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 26,
+      "source_text": "test('production workflow uses exact owner ID and source SHA, not raw Netlify build hook',()=>assertBoundRelease(activeYaml(yml)));",
+      "classification": "test",
+      "behavior": "Runs release binding test on comment-filtered YAML",
+      "quality": "Avoids repeating fixture reads",
+      "security_privacy_performance_risk": "No live credentials or provider verification",
+      "obsolescence_and_duplication": "Current source directly read; no confirmed removable code or cross-repo duplication",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 26,
+        "source_text_exact": true,
+        "pinned_source_counterpart": null
+      },
+      "testability": "Node 22 test",
+      "safe_fix_or_removal_opportunity": "Preserve",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 27,
+      "source_text": "test('comment-only policy strings cannot spoof release acceptance',()=>{",
+      "classification": "test",
+      "behavior": "Registers adversarial comment-only regression",
+      "quality": "Positive improvement versus pinned original",
+      "security_privacy_performance_risk": "Synthetic fixture cannot prove all YAML edge cases",
+      "obsolescence_and_duplication": "Current source directly read; no confirmed removable code or cross-repo duplication",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 27,
+        "source_text_exact": true,
+        "pinned_source_counterpart": null
+      },
+      "testability": "Node test",
+      "safe_fix_or_removal_opportunity": "Preserve",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 28,
+      "source_text": " const comments=yml.split(/\\r?\\n/).map(line=>'# '+line).join('\\n');",
+      "classification": "helper",
+      "behavior": "Converts every workflow line to commented representation",
+      "quality": "Simulates documented spoof class",
+      "security_privacy_performance_risk": "Synthetic transformation, not production YAML parser",
+      "obsolescence_and_duplication": "Current source directly read; no confirmed removable code or cross-repo duplication",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 28,
+        "source_text_exact": true,
+        "pinned_source_counterpart": null
+      },
+      "testability": "Comment-spoof fixture",
+      "safe_fix_or_removal_opportunity": "Preserve",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 29,
+      "source_text": " assert.throws(()=>assertExclusiveTrigger(activeYaml(comments)),/workflow_dispatch/);",
+      "classification": "assert",
+      "behavior": "Requires missing active dispatch to throw",
+      "quality": "Validates stripping full-line comments",
+      "security_privacy_performance_risk": "Only one negative class",
+      "obsolescence_and_duplication": "Current source directly read; no confirmed removable code or cross-repo duplication",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 29,
+        "source_text_exact": true,
+        "pinned_source_counterpart": null
+      },
+      "testability": "Node test",
+      "safe_fix_or_removal_opportunity": "Preserve",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 30,
+      "source_text": " assert.throws(()=>assertBoundRelease(activeYaml(comments)),/INPUT_RELEASE_ID/);",
+      "classification": "assert",
+      "behavior": "Requires missing active owner ID binding to throw",
+      "quality": "Validates cleaned-content helper",
+      "security_privacy_performance_risk": "Does not test wrong-but-active input binding",
+      "obsolescence_and_duplication": "Current source directly read; no confirmed removable code or cross-repo duplication",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 30,
+        "source_text_exact": true,
+        "pinned_source_counterpart": null
+      },
+      "testability": "Node test",
+      "safe_fix_or_removal_opportunity": "Preserve",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    },
+    {
+      "line": 31,
+      "source_text": "});",
+      "classification": "closure",
+      "behavior": "Closes negative test block",
+      "quality": "Syntax closure",
+      "security_privacy_performance_risk": "No provider access",
+      "obsolescence_and_duplication": "Current source directly read; no confirmed removable code or cross-repo duplication",
+      "current_counterpart": {
+        "path": "tests/exclusive-release-workflow.test.mjs",
+        "blob_sha": "ffbd323a1b1edf39620eeaacae7b45b55e533145",
+        "line": 31,
+        "source_text_exact": true,
+        "pinned_source_counterpart": null
+      },
+      "testability": "Node parse",
+      "safe_fix_or_removal_opportunity": "Preserve",
+      "locked_decision_fit": "Consistent with owner Locked explicit release grant, single-use and no automatic publishing; static test, not new release authorization",
+      "human_review_claim": false,
+      "inspection": "direct numbered assistant semantic interpretation"
+    }
+  ],
+  "source_boundary": {
+    "pinned_unique_new_lines": 21,
+    "actual_live_file_positions_directly_read": 31,
+    "original_unchanged_first_four_lines": true,
+    "rest_current_review_restructured_not_counted_as_separate_pinned_originals": true,
+    "full_post_pin_drift_reconciled": false
+  },
+  "findings": [
+    {
+      "id": "QA15-STATIC-GUARD-ASSURANCE",
+      "severity": "LOW",
+      "state": "TRIAGED_NO_ACTIVE_DEFECT_PROVEN",
+      "original": "Pinned string matching could be spoofed by YAML comments",
+      "current": "Current file independently contains activeYaml filtering and comment-only negative tests; static matching still is not YAML parsing or a real release run",
+      "disposition": "No speculative code change or publication; preserve existing owner grant/controller/provider gates",
+      "verification": "Direct original/current source and target YAML read; functional Node suite NOT_RUN"
+    },
+    {
+      "id": "QA15-REQUIRED-FLAG-SPAN",
+      "severity": "LOW",
+      "state": "UNREPRODUCED_TEST_STRENGTH_HYPOTHESIS",
+      "original": "Cross-span required:true regex may match unrelated input",
+      "current": "Live line18 retains cross-span pattern",
+      "disposition": "Can add isolated negative fixture under separate approved development; do not conflate with proof of released security defect",
+      "verification": "Static semantics only, negative edge case NOT_RUN"
+    }
+  ],
+  "authority": {
+    "owner": "Issue #267 exhaustive audit",
+    "other_owners": "Issue #33 owns coffee-specific extractor, #96 owns real Auth/privacy",
+    "release_permission": false,
+    "provider_writes": false,
+    "member_writes": false
+  },
+  "acceptance": {
+    "source_literals": "21 pinned and 31 live direct read",
+    "source_sha_bound": true,
+    "nonoverlap_with_scoped_current": true,
+    "first_frozen_first_line_revalidated": true,
+    "node22": "NOT_RUN_DOCS_ONLY",
+    "lint_build": "NOT_RUN_DOCS_ONLY",
+    "browser_mobile_sql_auth": "NOT_RUN_DOCS_ONLY",
+    "hosted_exact_pr_ci": "PENDING_UNTIL_PR",
+    "merged_source_ci": "PENDING_UNTIL_MERGE",
+    "full_audit": "INCOMPLETE"
+  },
+  "next": "Proceed with disjoint source range and independently reconcile full frozen/pinned/live inventories; keep #267 open. No READY or deployment."
+}
