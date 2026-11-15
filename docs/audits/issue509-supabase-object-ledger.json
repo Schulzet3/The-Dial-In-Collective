@@ -4238,7 +4238,36 @@
       "production_writes": 0,
       "next": "pgss 2401-2480; remaining full provider definitions/source parity"
     },
-    {"run":255,"prewrite_source_sha":"7928f6c71204f97385e1a941faded00a9f53e0ea","preflight_blob_sha":"2fb236bbfa6bac48513eeb3bd157b260853af06d","receipt_path":"docs/audits/issue509-admin-session-rpc-pgss-2026-11-15-run255-rank2401-2480.json","receipt_git_blob":"12a5c5f45ab271a347505a1791378a3beecf6439","index_path":"docs/audits/issue509-pgss-cumulative-index-2026-11-15-run255.json","index_blob_sha":"3a6d1e390936199491943f8268b59cf027bd1398","numeric_distinct":2394,"current_sql_definition_bodies":6,"source_chars":7842,"new_defects":0,"production_writes":0,"next":"Provider drift and pgss numeric ranks 2481-2560; verify session status consumers and remaining source parity"}
+    {
+      "run": 255,
+      "prewrite_source_sha": "7928f6c71204f97385e1a941faded00a9f53e0ea",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt_path": "docs/audits/issue509-admin-session-rpc-pgss-2026-11-15-run255-rank2401-2480.json",
+      "receipt_git_blob": "12a5c5f45ab271a347505a1791378a3beecf6439",
+      "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-15-run255.json",
+      "index_blob_sha": "3a6d1e390936199491943f8268b59cf027bd1398",
+      "numeric_distinct": 2394,
+      "current_sql_definition_bodies": 6,
+      "source_chars": 7842,
+      "new_defects": 0,
+      "production_writes": 0,
+      "next": "Provider drift and pgss numeric ranks 2481-2560; verify session status consumers and remaining source parity"
+    },
+    {
+      "run": 256,
+      "prewrite_source_sha": "1580f675e4d51f307ee949ea3c65d15756ae539d",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt_path": "docs/audits/issue509-admin-candidates-session-consumers-pgss-2026-11-15-run256-rank2481-2560.json",
+      "receipt_git_blob": "5aea786cfe16f508ccf5913df2f1071afc4235ae",
+      "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-15-run256.json",
+      "index_blob_sha": "5eba87f0309af5e9eef3f251432fd13d5b7dc3dc",
+      "numeric_distinct": 2471,
+      "current_sql_definition_bodies": 5,
+      "source_chars": 14207,
+      "new_defects": 0,
+      "production_writes": 0,
+      "next": "pgss 2561-2640; source parity and helper callers"
+    }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
   "application_table_review": {
@@ -20781,8 +20810,7 @@
       "Native vendor internals and stable gap-free SQL fingerprints"
     ],
     "next": "Provider drift, numeric pgss ranks 2401-2480, direct remaining definitions"
-  }
-,
+  },
   "provider_pgss_admin_session_run255": {
     "status": "IN_PROGRESS",
     "project_ref": "azviqqejypsefzilgonr",
@@ -20847,5 +20875,66 @@
       "provider-console-only and compiled native"
     ],
     "next": "Provider drift and pgss numeric ranks 2481-2560; verify session status consumers and remaining source parity"
+  },
+  "provider_pgss_admin_candidates_run256": {
+    "status": "IN_PROGRESS",
+    "project_ref": "azviqqejypsefzilgonr",
+    "preflight_development_sha": "1580f675e4d51f307ee949ea3c65d15756ae539d",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_source_sha": "1580f675e4d51f307ee949ea3c65d15756ae539d",
+    "receipt_path": "docs/audits/issue509-admin-candidates-session-consumers-pgss-2026-11-15-run256-rank2481-2560.json",
+    "receipt_blob_sha": "5aea786cfe16f508ccf5913df2f1071afc4235ae",
+    "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-15-run256.json",
+    "index_blob_sha": "5eba87f0309af5e9eef3f251432fd13d5b7dc3dc",
+    "observed_at": "2026-11-15 03:50:28.986932+00",
+    "complete_sql_definitions": [
+      {
+        "signature": "private.dic_admin_coffee_candidates(uuid)",
+        "chars": 2032,
+        "md5": "cb3cc3677b37f577643d248db1060a43"
+      },
+      {
+        "signature": "private.dic_admin_records(text,integer,integer)",
+        "chars": 5386,
+        "md5": "6976e717b7c5cbb34d8e3c41bc2aeba2"
+      },
+      {
+        "signature": "private.dic_admin_review_candidates(uuid)",
+        "chars": 2362,
+        "md5": "952b9cd2a21463f1073494a4d05b468f"
+      },
+      {
+        "signature": "private.dic_admin_review_signup(uuid,text,text)",
+        "chars": 2073,
+        "md5": "7e0d3bf10542694b60177fcfa9c6f7be"
+      },
+      {
+        "signature": "private.dic_admin_set_member_access(uuid,boolean)",
+        "chars": 2354,
+        "md5": "d7a339f277e9da0d8393d5efcdbc0e89"
+      }
+    ],
+    "direct_source_chars": 14207,
+    "pgss_ranks": [
+      2481,
+      2560
+    ],
+    "numeric_rows": 80,
+    "new_distinct": 77,
+    "overlap": 3,
+    "cumulative_distinct": 2471,
+    "app_tables": 52,
+    "app_functions": 114,
+    "policies": 41,
+    "migrations": 69,
+    "pgss_rows": 4960,
+    "all_app_tables_rls_enabled": true,
+    "session_consumer": "verified current cloud client/main and admin main use admitted/approvalState/emailVerified/authenticated/admin; literal communityLive/backupConfigured/mode are not used by checked app entrypoints. Other consumers NOT exhaustively reviewed; keep RPC and flags LEGACY ACTIVE pending evidence.",
+    "candidate_helpers": "Distinct filtered/limit behavior; not safe to deduplicate without caller parity",
+    "new_confirmed_defects": 0,
+    "code_changes": 0,
+    "production_writes": 0,
+    "source_tests": "NOT_RUN_DOCS_ONLY",
+    "next": "Fresh provider drift; pgss ranks 2561-2640; remaining complete provider definitions/migration parity and candidate helper caller confirmation"
   }
 }
