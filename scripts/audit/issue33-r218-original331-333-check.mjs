@@ -25,7 +25,8 @@ for(const c of cases){
  const r=summary.records?.find(x=>x.number===c.n)||{},e=[];
  let raw=Buffer.alloc(0);try{raw=readFileSync(join(dir,'case-'+c.n+'.html'));}catch{e.push('missing_raw_html');}
  const html=raw.toString('utf8'),selected=productMarkup(html),heads=selectedProductHeadings(selected);
- const visible=selected.replace(/<[^<>]{0,2000}>/gu,' ').replace(/\s+/gu,' ');
+ // Decode only HTML nonbreaking-space entities in selected literal labels; do NOT relax source/H1/parser identity or raw hash checks.
+const visible=selected.replace(/<[^<>]{0,2000}>/gu,' ').replace(/&(?:nbsp|#0*160|#x0*a0);/giu,' ').replace(/\s+/gu,' ');
  const p=raw.length?extractPublicCoffeeFacts(html,{source_url:r.final_url||c.url}):{},f=p.fields||{},notes=String(f.tasting_notes||'');
  if(r.status!=='FETCHED'||r.official_url!==c.url||r.final_url!==c.url||r.parser_ok!==true)e.push('selected_fetch_or_parser_failed');
  if(raw.length<1000||raw.length!==r.html_bytes||sha(raw)!==r.html_sha256)e.push('raw_sha256_mismatch');
