@@ -4185,6 +4185,88 @@
       "source_fix_ready": true,
       "provider_writes": 0,
       "next": "provider drift and ranks 1361-1440"
+    },
+    {
+      "run": 251,
+      "prewrite_source_sha": "6169351314e14c254a11900a56d392764f46ce45",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt_path": "docs/audits/issue509-community-rpc-pgss-2026-11-14-run251-rank2081-2160.json",
+      "receipt_git_blob": "6a390c69bd067f119b87e09b0e23db81ee250335",
+      "numeric_distinct": 2095,
+      "current_sql_definition_bodies": 5,
+      "source_chars": 15354,
+      "new_defects": 0,
+      "production_writes": 0,
+      "next": "numeric ranks 2161-2240 and remaining provider definitions"
+    },
+    {
+      "run": 252,
+      "prewrite_source_sha": "2c0b18073a1a7e9200d1dd3040e176895fb3c01d",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt_path": "docs/audits/issue509-source-rpc-pgss-2026-11-14-run252-rank2161-2240.json",
+      "receipt_git_blob": "1bb69969f7e73c4c52351198c202af8bd60ba31d",
+      "numeric_distinct": 2171,
+      "current_sql_definition_bodies": 5,
+      "source_chars": 11495,
+      "new_defects": 0,
+      "production_writes": 0,
+      "next": "numeric ranks 2241-2320 and remaining provider definitions"
+    },
+    {
+      "run": 253,
+      "prewrite_source_sha": "88506e47e8e1197911aeec4db713c8f7757db9ad",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt_path": "docs/audits/issue509-coffee-submission-community-pgss-2026-11-15-run253-rank2241-2320.json",
+      "receipt_git_blob": "bcb47b299a9dd266959baacd728387c7e766f8dc",
+      "numeric_distinct": 2246,
+      "current_sql_definition_bodies": 5,
+      "source_chars": 15497,
+      "new_defects": 0,
+      "production_writes": 0,
+      "next": "pgss 2321-2400; full provider definitions/source parity"
+    },
+    {
+      "run": 254,
+      "prewrite_source_sha": "36d1ceacab15875dc21766e1a6407f132232e80c",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt_path": "docs/audits/issue509-admin-import-definitions-pgss-2026-11-15-run254-rank2321-2400.json",
+      "receipt_git_blob": "eebe8ab40933b53073a7c1234702076a4b168c83",
+      "numeric_distinct": 2320,
+      "current_sql_definition_bodies": 5,
+      "source_chars": 25856,
+      "new_defects": 0,
+      "production_writes": 0,
+      "next": "pgss 2401-2480; remaining full provider definitions/source parity"
+    },
+    {
+      "run": 255,
+      "prewrite_source_sha": "7928f6c71204f97385e1a941faded00a9f53e0ea",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt_path": "docs/audits/issue509-admin-session-rpc-pgss-2026-11-15-run255-rank2401-2480.json",
+      "receipt_git_blob": "12a5c5f45ab271a347505a1791378a3beecf6439",
+      "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-15-run255.json",
+      "index_blob_sha": "3a6d1e390936199491943f8268b59cf027bd1398",
+      "numeric_distinct": 2394,
+      "current_sql_definition_bodies": 6,
+      "source_chars": 7842,
+      "new_defects": 0,
+      "production_writes": 0,
+      "next": "Provider drift and pgss numeric ranks 2481-2560; verify session status consumers and remaining source parity"
+    },
+    {
+      "run": 256,
+      "prewrite_source_sha": "1580f675e4d51f307ee949ea3c65d15756ae539d",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt_path": "docs/audits/issue509-admin-candidates-session-consumers-pgss-2026-11-15-run256-rank2481-2560.json",
+      "receipt_git_blob": "5aea786cfe16f508ccf5913df2f1071afc4235ae",
+      "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-15-run256.json",
+      "index_blob_sha": "5eba87f0309af5e9eef3f251432fd13d5b7dc3dc",
+      "numeric_distinct": 2471,
+      "current_sql_definition_bodies": 5,
+      "source_chars": 14207,
+      "new_defects": 0,
+      "production_writes": 0,
+      "next": "pgss 2561-2640; source parity and helper callers"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -20118,5 +20200,741 @@
     "full_exact_source_five_checks": "UNVERIFIED_TWO_FIXES_REMAIN_TESTING",
     "baseline_complete": false,
     "next_cursor": "Fresh drift, numeric ranks 1601–1680; hosted JWT/Auth/HTTP/console settings UNVERIFIED under #96."
+  },
+  "provider_pgss_auth_mfa_run245": {
+    "run": 245,
+    "project_ref": "azviqqejypsefzilgonr",
+    "preflight_development_sha": "ef1e635c06ab6301e72896378bfdeb270b1cfcaf",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "source_before_writes": "6afbe5777fdfe7986255dc01602b1a859c08f128",
+    "receipt_path": "docs/audits/issue509-auth-mfa-catalog-pgss-2026-11-14-run245-rank1601-1680.json",
+    "receipt_blob_sha": "a6726433f939c91fb5da6434791786165d60d3d7",
+    "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-14-run245.json",
+    "table_ordinals": [
+      6,
+      10
+    ],
+    "managed_auth_tables": [
+      "mfa_amr_claims",
+      "mfa_challenges",
+      "mfa_factors",
+      "mfa_recovery_code_sets",
+      "mfa_recovery_codes"
+    ],
+    "full_catalog_component_reviews": 5,
+    "per_object_definitions_md5": [
+      {
+        "table": "auth.mfa_amr_claims",
+        "md5": "34d3fd9b269bcafbd7b65338be3bf851"
+      },
+      {
+        "table": "auth.mfa_challenges",
+        "md5": "466040c5661f89b11f45221aedb5dfe1"
+      },
+      {
+        "table": "auth.mfa_factors",
+        "md5": "1bc947c8b835e8366514afd26c5b7017"
+      },
+      {
+        "table": "auth.mfa_recovery_code_sets",
+        "md5": "8fcf0af883c8c64b86a70a4d4933ab2d"
+      },
+      {
+        "table": "auth.mfa_recovery_codes",
+        "md5": "42c3c81f0e62b483d66d962c69f6fbed"
+      }
+    ],
+    "numeric_rank_range": [
+      1601,
+      1680
+    ],
+    "numeric_rows": 80,
+    "new_distinct": 74,
+    "overlap": 6,
+    "cumulative_distinct": 1650,
+    "provider_numeric_count": 4886,
+    "stats_reset": "2026-10-09 11:11:31.487298+00",
+    "sql_source_word_credit": 0,
+    "provider_write_count": 0,
+    "source_test_ci_write_count": 0,
+    "new_confirmed_defects": 0,
+    "baseline_complete": false,
+    "queue_status": "TWO_ISSUE509_FIXES_TESTING_NOT_READY",
+    "next_cursor": "Drift, 1681–1760 numeric, Auth ordinal 11–15, hosted JWT/HTTP Auth unverified",
+    "index_blob_sha": "01c301c8ad49001fe420e960484ed71aa68d2cfd",
+    "cumulative_index_verified": true
+  },
+  "provider_pgss_auth_extended_run246": {
+    "run": 246,
+    "project_ref": "azviqqejypsefzilgonr",
+    "preflight_development_sha": "5854822f2e945903f20d93af751682d367d1fae0",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_development_sha": "5854822f2e945903f20d93af751682d367d1fae0",
+    "receipt_path": "docs/audits/issue509-auth-oauth-saml-catalog-pgss-2026-11-14-run246-rank1681-1760.json",
+    "receipt_blob_sha": "966cbb105b933d3f76df0b31d1b97dfc461ba729",
+    "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-14-run246.json",
+    "index_blob_sha": "756dd0974f0a60015810e12e0559e575ffdae752",
+    "observed_at": "2026-11-14 17:51:23.826932+00",
+    "complete_managed_auth_table_ordinals": [
+      11,
+      20
+    ],
+    "reviewed_auth_tables": 10,
+    "full_auth_table_baseline_previously_reviewed": true,
+    "first_time_word_credit": 0,
+    "metadata_columns": 83,
+    "sql_constraints": 48,
+    "index_definitions": 37,
+    "trigger_definitions": 26,
+    "known_vendor_check_issue": true,
+    "new_confirmed_app_defects": 0,
+    "provider_numeric_total": 4896,
+    "numeric_rank_range": [
+      1681,
+      1760
+    ],
+    "numeric_rows": 80,
+    "new_distinct": 72,
+    "overlap": 8,
+    "cumulative_distinct": 1722,
+    "provider_writes": 0,
+    "source_test_ci_writes": 0,
+    "queue_status": "TWO_ISSUE509_FIXES_TESTING_NOT_READY",
+    "baseline_complete": false,
+    "next_cursor": "Drift, numeric 1761-1840, managed Auth tables 21-25; hosted settings unverified"
+  },
+  "provider_pgss_auth_final_run247": {
+    "run": 247,
+    "project_ref": "azviqqejypsefzilgonr",
+    "preflight_development_sha": "697e75cb9f4b559fa7466e9526f9cfe4253584fe",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_development_sha": "697e75cb9f4b559fa7466e9526f9cfe4253584fe",
+    "receipt_path": "docs/audits/issue509-auth-final-catalog-pgss-2026-11-14-run247-rank1761-1840.json",
+    "receipt_blob_sha": "209bac9dab7ccdb0e36154375bc61df29119f320",
+    "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-14-run247.json",
+    "index_blob_sha": "a7d1dbaa05e8f2ffcb74fcbbfe2776366c5f6b90",
+    "observed_at": "2026-11-14 18:47:37.990753+00",
+    "auth_ordinals": [
+      21,
+      27
+    ],
+    "full_auth_table_catalog_reviews": 7,
+    "related_application_trigger_review": "private.handle_new_auth_user()",
+    "table_signatures": [
+      {
+        "relation": "auth.scim_users",
+        "signature": "6fce886b229e32154e609be25fa3a78c",
+        "columns": 10,
+        "constraints": 3,
+        "indexes": 10,
+        "triggers": 0,
+        "policies": 0,
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_select": false,
+        "rls": false
+      },
+      {
+        "relation": "auth.sessions",
+        "signature": "98883a157ce52cb97e3b7bd4ba112fcd",
+        "columns": 15,
+        "constraints": 4,
+        "indexes": 5,
+        "triggers": 0,
+        "policies": 0,
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_select": false,
+        "rls": true
+      },
+      {
+        "relation": "auth.sso_domains",
+        "signature": "1ce7f60e7a07aa0aa0d3fd173008151d",
+        "columns": 5,
+        "constraints": 3,
+        "indexes": 3,
+        "triggers": 0,
+        "policies": 0,
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_select": false,
+        "rls": true
+      },
+      {
+        "relation": "auth.sso_providers",
+        "signature": "8ccf7a3da900f029b3ab7c4e45b4483e",
+        "columns": 5,
+        "constraints": 2,
+        "indexes": 3,
+        "triggers": 0,
+        "policies": 0,
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_select": false,
+        "rls": true
+      },
+      {
+        "relation": "auth.users",
+        "signature": "85c01f64386556b2df370896c35d71a1",
+        "columns": 35,
+        "constraints": 3,
+        "indexes": 15,
+        "triggers": 1,
+        "policies": 0,
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_select": false,
+        "rls": true
+      },
+      {
+        "relation": "auth.webauthn_challenges",
+        "signature": "be0973ca5de791663cd02333a393fed0",
+        "columns": 6,
+        "constraints": 3,
+        "indexes": 3,
+        "triggers": 0,
+        "policies": 0,
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_select": false,
+        "rls": false
+      },
+      {
+        "relation": "auth.webauthn_credentials",
+        "signature": "fb85f9454b02b28cd150fbf441023ffc",
+        "columns": 14,
+        "constraints": 2,
+        "indexes": 3,
+        "triggers": 0,
+        "policies": 0,
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_select": false,
+        "rls": false
+      }
+    ],
+    "numeric_rank_range": [
+      1761,
+      1840
+    ],
+    "numeric_rows": 80,
+    "new_distinct": 75,
+    "overlap": 5,
+    "cumulative_distinct": 1797,
+    "baseline_complete": false,
+    "provider_writes": 0,
+    "code_test_ci_writes": 0,
+    "queue_status": "TWO_ISSUE509_FIXES_TESTING_NOT_READY",
+    "next_cursor": "Fresh provider drift; pg_stat_statements ranks 1841-1920, then other not-yet-fully-reviewed provider definitions; Auth 27/27 current table definitions individually revisited"
+  },
+  "provider_pgss_member_approval_null_guard_run248": {
+    "run": 248,
+    "preflight_development_sha": "9f23b49b5e601b36610f512c6274762bf8733542",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt_path": "docs/audits/issue509-member-approval-receipts-pgss-2026-11-14-run248-rank1841-1920.json",
+    "receipt_blob_sha": "f806005b06239f638eff3b5fac347acf75e794ae",
+    "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-14-run248.json",
+    "numeric_rank_range": [
+      1841,
+      1920
+    ],
+    "numeric_rows": 80,
+    "numeric_new": 72,
+    "numeric_overlap": 8,
+    "cumulative_distinct": 1869,
+    "live_function_definitions_complete": 5,
+    "sql_characters": 6364,
+    "verified_low_severity_service_null_guard": 1,
+    "source_migration": "supabase/migrations/20261114195000_dic_member_approval_finish_null_receipts.sql",
+    "synthetic_sql_test": "supabase/tests/member_approval_finish_null_receipts.sql",
+    "state": "TESTING_NOT_READY",
+    "provider_writes": 0,
+    "baseline_complete": false,
+    "next": "drift, ranks1921-2000, exact-source CI; Auth transport #96 UNVERIFIED"
+  },
+  "provider_pgss_legacy_roaster_run249": {
+    "run": 249,
+    "preflight_development_sha": "67781a9aba587b6894e4fc77c4139113dce9ee88",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_development_sha": "db45e07cc5ddc58a2f816958373e08f46a090b00",
+    "project_ref": "azviqqejypsefzilgonr",
+    "receipt_path": "docs/audits/issue509-legacy-roaster-active-and-pgss-2026-11-14-run249-rank1921-2000.json",
+    "receipt_blob_sha": "2bbb18ada549b447c32dc0729806448ee1d97e70",
+    "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-14-run249.json",
+    "index_blob_sha": "fda12dc90401411d0a29368a1a34df91e3333889",
+    "provider_observed_at": "2026-11-14 20:49:36.185679+00",
+    "sql_functions": [
+      {
+        "signature": "private.dic_canonical_roaster_key(value text)",
+        "md5": "646cff7cceed7011b1fc3a1b69c4d3f0",
+        "source_chars": 402,
+        "verdict": "LEGACY ACTIVE: canonical alias normalizer used by eight SQL routines; not the retired directory admission gate."
+      },
+      {
+        "signature": "private.dic_coffee_key(value text)",
+        "md5": "8f6840ddd7e530e311c096591c01ce15",
+        "source_chars": 251,
+        "verdict": "LEGACY ACTIVE: coffee identity normalizer used by eight SQL routines; ambiguous normalization requires review."
+      },
+      {
+        "signature": "private.dic_roaster_key(value text)",
+        "md5": "e553ae6c1cf99c3784f5d14a4f05d355",
+        "source_chars": 388,
+        "verdict": "LEGACY ACTIVE: suffix-aware roaster matching called by canonical helper; not removable merely by name."
+      },
+      {
+        "signature": "private.dic_source_key(value text)",
+        "md5": "07e0ef286246fdae29b9151018296f79",
+        "source_chars": 981,
+        "verdict": "LEGACY ACTIVE: source URL evidence normalization used by two matching/promotion routines; not a transport SSRF sanitizer."
+      },
+      {
+        "signature": "private.dic_verified_roaster_page_proof(roaster_name text)",
+        "md5": "7ce32408a61728294ad667a9c985f5da",
+        "source_chars": 1947,
+        "verdict": "LEGACY ACTIVE: independent official-source attestation in promotion/source checks; not universal preview admission. SECURITY DEFINER empty search_path, service_role EXECUTE only."
+      }
+    ],
+    "complete_source_chars": 3969,
+    "app_tables": 52,
+    "app_functions": 114,
+    "app_policies": 41,
+    "migrations": 69,
+    "retired_directory_live": 0,
+    "numeric_range": [
+      1921,
+      2000
+    ],
+    "numeric_rows": 80,
+    "new_distinct": 74,
+    "overlap": 6,
+    "cumulative_distinct": 1943,
+    "new_defects": 0,
+    "provider_writes": 0,
+    "source_writes": 0,
+    "baseline_complete": false,
+    "next_cursor": "drift; numeric 2001-2080; remaining provider full-source review"
+  },
+  "provider_pgss_preview_edge_run250": {
+    "preflight_development_sha": "63b185d8033b5bbecfe50eb4db4985dda5c93dd3",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_development_sha": "63b185d8033b5bbecfe50eb4db4985dda5c93dd3",
+    "receipt_path": "docs/audits/issue509-preview-edge-provider-pgss-2026-11-14-run250-rank2001-2080.json",
+    "complete_sql_source_chars": 7951,
+    "sql_definitions": [
+      {
+        "signature": "private.dic_shared_preview_claim(uuid)",
+        "md5": "8d8c9c371ecdb320dd03cbae2ab4c2dd",
+        "chars": 1876,
+        "verdict": "Service-only private helper: requires real account, admitted verified administrator exempt from caps; other accounts have 12/day and 15s cooldown, serialized row locking. Does not expose direct client EXECUTE."
+      },
+      {
+        "signature": "dic_claim_universal_preview()",
+        "md5": "8f4bc6ecd8687594ff7200cda26104b5",
+        "chars": 618,
+        "verdict": "Authenticated/admitted member with confirmed email required; service-only helper applies admin exemption/member quota; anon EXECUTE denied."
+      },
+      {
+        "signature": "dic_preview_cached_verified(text)",
+        "md5": "86a08b5ae97f89c13b8c727ebdd0c50f",
+        "chars": 1658,
+        "verdict": "Read-only exact HTTPS URL verified catalog match, requires unique unmerged verified coffee, admitted and email confirmed; no URL network request or private member source rows."
+      },
+      {
+        "signature": "dic_preview_complete(uuid)",
+        "md5": "95324ba674010588a74507024c12ef91",
+        "chars": 1339,
+        "verdict": "Member ticket is matched by caller owner, expires after 25s, increments quota serially; admitted verified admins exempt; no real HTTP acceptance established."
+      },
+      {
+        "signature": "dic_preview_preflight(boolean)",
+        "md5": "395d4a717122f9feb5ae04ac3c5a1d6a",
+        "chars": 2460,
+        "verdict": "Rejects NULL cached flag, enforces 15s cooldown and 12/day uncached quota for members; cached previews don't count daily fetch. Admin verified unlimited path; no defect reproduced."
+      }
+    ],
+    "edge_slug": "dic-member-approval-broker",
+    "edge_version": 1,
+    "edge_source_chars": 11929,
+    "edge_source_byte_equal": true,
+    "pgss_rank_range": [
+      2001,
+      2080
+    ],
+    "new_distinct": 77,
+    "overlap": 3,
+    "cumulative_distinct": 2020,
+    "baseline_complete": false,
+    "provider_writes": 0,
+    "next_cursor": "2081-2160; other provider definition text"
+  },
+  "provider_pgss_community_rpc_run251": {
+    "status": "CURRENT_PROVIDER_DIRECT_COMPLETE_SOURCE_REVIEW",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_sha": "6169351314e14c254a11900a56d392764f46ce45",
+    "preflight_development_sha": "6169351314e14c254a11900a56d392764f46ce45",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt_path": "docs/audits/issue509-community-rpc-pgss-2026-11-14-run251-rank2081-2160.json",
+    "receipt_git_blob": "6a390c69bd067f119b87e09b0e23db81ee250335",
+    "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-14-run251.json",
+    "index_git_blob": "da7759890431e12a3505b4a9ec92dd037ed65e50",
+    "provider_observed_at": "2026-11-14 22:49:48.022618+00",
+    "source_functions": [
+      {
+        "signature": "public.dic_browse_community_shots(p_limit integer, p_offset integer)",
+        "md5": "edcc2c6a9fb24b3455a446d964a2ed2d",
+        "chars": 3222,
+        "verdict": "Authenticated admitted member gate via private.require_member; bounded page/offset; eligible verified coffee only; public aggregate release metrics exclude owner/contributor identifiers, although stable hashed coffee ID is intentionally exposed. Correlated sibling/contributor counts may be a performance candidate, not proven slow."
+      },
+      {
+        "signature": "public.dic_community_evidence_counts(p_coffee_id uuid, p_style text)",
+        "md5": "1bddea7e3160c0282bea1d6e74d1fbaf",
+        "chars": 694,
+        "verdict": "Admitted member gate; eligible verified coffee and style filter; aggregates distinct contributors without identity disclosure; no anonymous execute."
+      },
+      {
+        "signature": "public.dic_community_recommendation_evidence(p_library_entry_id uuid, p_style text)",
+        "md5": "085f92a3814dce624e5b9a3759e893ef",
+        "chars": 6171,
+        "verdict": "Requires admitted member and owned visible library entry; validates style, verified unmerged target; removes requester's own contributions; groups by independent contributor and ratio, with median centers. Personal source member IDs remain internal; no anonymous EXECUTE or identity list returned."
+      },
+      {
+        "signature": "public.dic_my_community_outliers()",
+        "md5": "312b59594de640adacb12ab0aa0d18e4",
+        "chars": 1318,
+        "verdict": "Requires admitted member, restricts shots by authenticated owner_id, current revision and held extreme-outlier reason, limits to ten personal results; no cross-user record disclosure evident from definition."
+      },
+      {
+        "signature": "public.dic_search_community_shots(p_query text, p_style text, p_limit integer, p_offset integer)",
+        "md5": "1124d2bbfec7f47d38d06ceb2e049fe4",
+        "chars": 3949,
+        "verdict": "Requires admitted member; caps search and pagination inputs; filters eligible verified coffee with optional style; returns only projection metrics and released coffee fields, no contributor IDs; substring-search efficiency is workload-dependent, not a proven bottleneck."
+      }
+    ],
+    "complete_source_chars": 15354,
+    "pgss_ranks": [
+      2081,
+      2160
+    ],
+    "numeric_rows": 80,
+    "new_distinct": 75,
+    "cumulative_distinct": 2095,
+    "source_word_credit_not_duplicate_267": true,
+    "new_defects": 0,
+    "production_writes": 0,
+    "next": "provider drift; numeric 2161-2240; remaining direct provider definitions and source comparisons"
+  },
+  "provider_pgss_source_rpc_run252": {
+    "status": "IN_PROGRESS",
+    "project_ref": "azviqqejypsefzilgonr",
+    "preflight_development_sha": "30a7cf59d2d8c75ef9add1d3754526b6d2dc823e",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_source_sha": "2c0b18073a1a7e9200d1dd3040e176895fb3c01d",
+    "provider_observed_at": "2026-11-14 23:44:19.132488+00",
+    "receipt_path": "docs/audits/issue509-source-rpc-pgss-2026-11-14-run252-rank2161-2240.json",
+    "receipt_git_blob": "1bb69969f7e73c4c52351198c202af8bd60ba31d",
+    "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-14-run252.json",
+    "index_git_blob": "05cd36781dd37527f003ef3570f072046a09dac0",
+    "source_definitions": [
+      {
+        "signature": "private.dic_confirm_coffee_existing(mid uuid, p jsonb)",
+        "md5": "0fcc44bb8a05f46e87694d3474eb7c23",
+        "chars": 3239,
+        "verdict": "Admitted-member and owner-scoped submission confirmation; idempotency receipt and owner advisory lock; verified canonical target, matching roaster/name/release/origin gates before link. Hostile payload/session acceptance not independently exercised."
+      },
+      {
+        "signature": "private.dic_link_pending_coffee(sid uuid, canonical uuid, event_name text, evidence jsonb)",
+        "md5": "140c211a4bfef175b041c037561a1e37",
+        "chars": 3954,
+        "verdict": "Pending/conflict submission linkage transaction; verified target, library entry continuity, duplicate owned-coffee guard, first-seen name and alias audit. These historical alias tables are LEGACY ACTIVE, not the retired directory."
+      },
+      {
+        "signature": "public.dic_source_check_target(submission_id uuid)",
+        "md5": "496ad9d2e74fa2d07592a442438d8ca9",
+        "chars": 1397,
+        "verdict": "Service-role restricted pending submission and beta membership gate with verified official-domain lookup; worker-source URL validation remains independent external boundary."
+      },
+      {
+        "signature": "public.dic_source_claim(submission_id uuid)",
+        "md5": "68bc86486e485565d4273daf3655e0d3",
+        "chars": 2348,
+        "verdict": "Service-only owner-serialized source attempt budget, 30 per 24 hours and six per submission with 15-minute retry window; no claim of actual current request throughput."
+      },
+      {
+        "signature": "public.dic_trusted_source_verify(submission_id uuid, evidence jsonb)",
+        "md5": "59dfb6ecc6a2b8324fa9ba8512fdaaa3",
+        "chars": 557,
+        "verdict": "Service-only invoker wrapper delegates to private promote; no client EXECUTE, but full signed-worker/HTTP and downstream authorization acceptance is UNVERIFIED."
+      }
+    ],
+    "complete_source_chars": 11495,
+    "pgss_ranks": [
+      2161,
+      2240
+    ],
+    "numeric_rows": 80,
+    "new_distinct": 76,
+    "overlap": 4,
+    "cumulative_distinct": 2171,
+    "new_defects": 0,
+    "production_writes": 0,
+    "next": "numeric ranks 2241-2320 and remaining complete provider definitions"
+  },
+  "provider_pgss_coffee_submission_community_run253": {
+    "receipt": "docs/audits/issue509-coffee-submission-community-pgss-2026-11-15-run253-rank2241-2320.json",
+    "blob_sha": "bcb47b299a9dd266959baacd728387c7e766f8dc",
+    "observed_at": "2026-11-15 00:46:50.329479+00",
+    "definition_reviews": [
+      {
+        "signature": "private.dic_backfill_library_contributions(p_owner uuid, p_entry uuid, p_canonical uuid)",
+        "md5": "424a5c87c53165a918f7094bf67d25bb",
+        "chars": 2360,
+        "verdict": "Internal revoked-EXECUTE definer: reprocesses only owned entries' shots for verified canonical coffee, preserves withdrawn Community status and contribution links, quality-review callback. Possible stale unrelated shot-edit path requires separate trigger proof; not established as defect."
+      },
+      {
+        "signature": "private.dic_find_coffee_matches(p jsonb)",
+        "md5": "b4b845d29ccb65ac7922109dc89816b6",
+        "chars": 6135,
+        "verdict": "Admitted signed-in member required, bounded input, canonical verified coffee catalog not obsolete directory, exact release/origin/process/source gates, fuzzy candidate presentation rather than silent merge. Full-catalog similarity cost remains EXPLAIN-unverified."
+      },
+      {
+        "signature": "private.dic_member_retry_pending_approval(p_submission_id uuid, p_expected_revision bigint)",
+        "md5": "5ebb55ad50529a080b3c2332a29d3309",
+        "chars": 2166,
+        "verdict": "Owner and exact revision checked; resolved cases idempotently return verified, ambiguous candidates require confirmation, exact match links and new candidate delegates promotion. Real-session downstream assurance unverified."
+      },
+      {
+        "signature": "private.dic_on_community_coffee_verification()",
+        "md5": "cefee7b991e40185eadbacde89def3aa",
+        "chars": 1065,
+        "verdict": "Verification/merge-change trigger preserves withdrawn contributions; holds or requalifies Community, backfills linked library entries and quality-reviews pending shots."
+      },
+      {
+        "signature": "private.dic_submit_coffee_auto(mid uuid, p jsonb)",
+        "md5": "e2b11c83a686a5a9949699cd23b52e13",
+        "chars": 3771,
+        "verdict": "Admitted member, owner lock and idempotent mutation, exact verified reuse or pending library entry, canonical roaster based on coffees not retired directory. Accepts user source URL as stored text, not direct network fetch here."
+      }
+    ],
+    "complete_source_chars": 15497,
+    "pgss_ranks": [
+      2241,
+      2320
+    ],
+    "numeric_rows": 80,
+    "new_distinct": 75,
+    "overlap": 5,
+    "cumulative_distinct": 2246,
+    "rank_window_limitation": "Cumulative execution-time order moves over time; rank windows are not a stable gap-free total inventory.",
+    "new_defects": 0,
+    "production_writes": 0,
+    "next": "pgss 2321-2400; full current provider definitions and parity"
+  },
+  "provider_pgss_admin_import_run254": {
+    "status": "IN_PROGRESS",
+    "project_ref": "azviqqejypsefzilgonr",
+    "preflight_development_sha": "36d1ceacab15875dc21766e1a6407f132232e80c",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_source_sha": "36d1ceacab15875dc21766e1a6407f132232e80c",
+    "receipt_path": "docs/audits/issue509-admin-import-definitions-pgss-2026-11-15-run254-rank2321-2400.json",
+    "receipt_blob_sha": "eebe8ab40933b53073a7c1234702076a4b168c83",
+    "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-15-run254.json",
+    "index_blob_sha": "7d32298a4c207076fef5c2efca713c2c4570ee9c",
+    "provider_observed_at": "2026-11-15 01:43:20.739667+00",
+    "full_sql_definitions": [
+      {
+        "signature": "private.apply_prototype_import(u uuid, doc jsonb)",
+        "md5": "2af6a48d0fe80841fcc27c1f1d5532e3",
+        "chars": 16445,
+        "verdict": "LEGACY ACTIVE import/archive compatibility; targeted credential separator guard, fail-closed records; no deletion",
+        "source_in_receipt": true
+      },
+      {
+        "signature": "private.dic_admin_access_overview()",
+        "md5": "e377ac910af0115040ad8f881cb01bfc",
+        "chars": 1432,
+        "verdict": "Admin and admitted-member gated bounded overview; session assurance #96 unverified",
+        "source_in_receipt": true
+      },
+      {
+        "signature": "private.dic_admin_account_delete_finish(p_operation_id uuid, p_actor_id uuid)",
+        "md5": "51cd64deed985a9ddf622926b8784a84",
+        "chars": 2492,
+        "verdict": "Service-only prepared operation, Auth deletion confirmation, scoped Community cleanup",
+        "source_in_receipt": true
+      },
+      {
+        "signature": "private.dic_admin_account_delete_impact(p_member_id uuid)",
+        "md5": "a20e399d6c87c60be0661c80a17728d4",
+        "chars": 1588,
+        "verdict": "Postgres-only internal aggregate impact receipt",
+        "source_in_receipt": true
+      },
+      {
+        "signature": "private.dic_admin_account_delete_prepare(p_operation_id uuid, p_actor_id uuid)",
+        "md5": "6e7e0589cbda1bc5023771724ce8b77f",
+        "chars": 3899,
+        "verdict": "Service-only exact impact, admin/Storage/audit guards and retryable state",
+        "source_in_receipt": true
+      }
+    ],
+    "direct_source_chars": 25856,
+    "pgss_ranks": [
+      2321,
+      2400
+    ],
+    "numeric_rows": 80,
+    "new_distinct": 74,
+    "overlap": 6,
+    "cumulative_distinct": 2320,
+    "application_tables": 52,
+    "application_functions": 114,
+    "policies": 41,
+    "migrations": 69,
+    "security_advisors": {
+      "rls_no_policy": 13,
+      "authenticated_security_definer": 10,
+      "leaked_password_warning": 1
+    },
+    "performance_advisors": {
+      "unindexed_fks": 14,
+      "unused_indexes": 8
+    },
+    "new_confirmed_defects": 0,
+    "code_changes": 0,
+    "production_provider_writes": 0,
+    "legacy_directory": "RETIRED issue2389 CLOSED; importer/bag history LEGACY ACTIVE",
+    "unverified": [
+      "Real signed-in Auth/provider-console settings #96",
+      "Full GitHub migration replay/CI for all five definitions",
+      "Native vendor internals and stable gap-free SQL fingerprints"
+    ],
+    "next": "Provider drift, numeric pgss ranks 2401-2480, direct remaining definitions"
+  },
+  "provider_pgss_admin_session_run255": {
+    "status": "IN_PROGRESS",
+    "project_ref": "azviqqejypsefzilgonr",
+    "preflight_development_sha": "7928f6c71204f97385e1a941faded00a9f53e0ea",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_source_sha": "7928f6c71204f97385e1a941faded00a9f53e0ea",
+    "receipt_path": "docs/audits/issue509-admin-session-rpc-pgss-2026-11-15-run255-rank2401-2480.json",
+    "receipt_blob_sha": "12a5c5f45ab271a347505a1791378a3beecf6439",
+    "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-15-run255.json",
+    "index_blob_sha": "3a6d1e390936199491943f8268b59cf027bd1398",
+    "provider_observed_at": "2026-11-15 02:44 UTC",
+    "full_sql_definitions": [
+      {
+        "signature": "private.dic_admin_account_delete_preview(uuid)",
+        "chars": 687
+      },
+      {
+        "signature": "private.dic_admin_account_delete_request(uuid,text,jsonb)",
+        "chars": 1949
+      },
+      {
+        "signature": "private.dic_admin_dashboard_read()",
+        "chars": 2901
+      },
+      {
+        "signature": "private.dic_admin_signup_requests(integer,integer)",
+        "chars": 1411
+      },
+      {
+        "signature": "private.session_status()",
+        "chars": 729
+      },
+      {
+        "signature": "public.dic_session_status()",
+        "chars": 165
+      }
+    ],
+    "direct_source_chars": 7842,
+    "pgss_ranks": [
+      2401,
+      2480
+    ],
+    "numeric_rows": 80,
+    "new_distinct": 74,
+    "overlap": 6,
+    "cumulative_distinct": 2394,
+    "app_tables": 52,
+    "app_functions": 114,
+    "policies": 41,
+    "migrations": 69,
+    "pgss_cumulative_ids": 4954,
+    "all_app_tables_rls_enabled": true,
+    "legacy_status": "Retired directory absent; member/import/other active historical compatibility retained; no production deletes",
+    "unconfirmed_candidate": "private.session_status() literal communityLive=false, backupConfigured=false, mode=owner-test; current consumers and intended compatibility unverified",
+    "new_confirmed_defects": 0,
+    "code_changes": 0,
+    "production_writes": 0,
+    "tests": "NOT_RUN_DOCS_ONLY; provider semantic definitions and read-only numeric telemetry only",
+    "unverified": [
+      "Auth HTTP/current consumers (#96)",
+      "exact GitHub full migration/source parity for these 6",
+      "provider-console-only and compiled native"
+    ],
+    "next": "Provider drift and pgss numeric ranks 2481-2560; verify session status consumers and remaining source parity"
+  },
+  "provider_pgss_admin_candidates_run256": {
+    "status": "IN_PROGRESS",
+    "project_ref": "azviqqejypsefzilgonr",
+    "preflight_development_sha": "1580f675e4d51f307ee949ea3c65d15756ae539d",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_source_sha": "1580f675e4d51f307ee949ea3c65d15756ae539d",
+    "receipt_path": "docs/audits/issue509-admin-candidates-session-consumers-pgss-2026-11-15-run256-rank2481-2560.json",
+    "receipt_blob_sha": "5aea786cfe16f508ccf5913df2f1071afc4235ae",
+    "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-15-run256.json",
+    "index_blob_sha": "5eba87f0309af5e9eef3f251432fd13d5b7dc3dc",
+    "observed_at": "2026-11-15 03:50:28.986932+00",
+    "complete_sql_definitions": [
+      {
+        "signature": "private.dic_admin_coffee_candidates(uuid)",
+        "chars": 2032,
+        "md5": "cb3cc3677b37f577643d248db1060a43"
+      },
+      {
+        "signature": "private.dic_admin_records(text,integer,integer)",
+        "chars": 5386,
+        "md5": "6976e717b7c5cbb34d8e3c41bc2aeba2"
+      },
+      {
+        "signature": "private.dic_admin_review_candidates(uuid)",
+        "chars": 2362,
+        "md5": "952b9cd2a21463f1073494a4d05b468f"
+      },
+      {
+        "signature": "private.dic_admin_review_signup(uuid,text,text)",
+        "chars": 2073,
+        "md5": "7e0d3bf10542694b60177fcfa9c6f7be"
+      },
+      {
+        "signature": "private.dic_admin_set_member_access(uuid,boolean)",
+        "chars": 2354,
+        "md5": "d7a339f277e9da0d8393d5efcdbc0e89"
+      }
+    ],
+    "direct_source_chars": 14207,
+    "pgss_ranks": [
+      2481,
+      2560
+    ],
+    "numeric_rows": 80,
+    "new_distinct": 77,
+    "overlap": 3,
+    "cumulative_distinct": 2471,
+    "app_tables": 52,
+    "app_functions": 114,
+    "policies": 41,
+    "migrations": 69,
+    "pgss_rows": 4960,
+    "all_app_tables_rls_enabled": true,
+    "session_consumer": "verified current cloud client/main and admin main use admitted/approvalState/emailVerified/authenticated/admin; literal communityLive/backupConfigured/mode are not used by checked app entrypoints. Other consumers NOT exhaustively reviewed; keep RPC and flags LEGACY ACTIVE pending evidence.",
+    "candidate_helpers": "Distinct filtered/limit behavior; not safe to deduplicate without caller parity",
+    "new_confirmed_defects": 0,
+    "code_changes": 0,
+    "production_writes": 0,
+    "source_tests": "NOT_RUN_DOCS_ONLY",
+    "next": "Fresh provider drift; pgss ranks 2561-2640; remaining complete provider definitions/migration parity and candidate helper caller confirmation"
   }
 }

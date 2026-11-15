@@ -1,0 +1,3098 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch": "V11Y_F214_STRICT_20261114",
+  "created_at_utc": "2026-11-15T01:23:21.622Z",
+  "source": {
+    "frozen_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+    "frozen_tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+    "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+    "original_blob": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+    "original_total_physical_lines": 112,
+    "first": 1,
+    "last": 112,
+    "pinned_current_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "pinned_blob": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+    "observed_live_sha": "140ddb01979a1878dda8418428273cf2be712021",
+    "observed_live_blob": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c"
+  },
+  "preflight": {
+    "development_sha": "140ddb01979a1878dda8418428273cf2be712021",
+    "file_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d"
+  },
+  "review_classification": "DIRECT_AI_LINE_BY_LINE_NOT_HUMAN",
+  "line_reviews": [
+    {
+      "line": 1,
+      "source_text": "# Current-workflow and cross-system reconciliation",
+      "classification": "historical_heading",
+      "behavior": "Title announces old cross-system workflow/issue reconciliation, not active executable CI.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 1,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 1,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 2,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank Markdown separator.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 2,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 2,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 3,
+      "source_text": "**Audit date:** October 23, 2026 UTC / October 22 MDT. **Authority:** the owner's request to audit all open issues and accessible GitHub, Supabase and Netlify state, then consolidate and repair safe confirmed problems. **Tracker:** Issue #70, intake comment 6356712384.",
+      "classification": "historical_audit_prose",
+      "behavior": "Historical October 23 date, owner audit authority, #70 tracker and intake comment; does not supersede live source.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 3,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 3,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 4,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank between authority and scope.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 4,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 4,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 5,
+      "source_text": "This audit does not authorize website publication, production SQL/Edge/Auth/member-data changes, destructive cleanup, purchases or unapproved product decisions. The Master Specification and Decision Ledger were preserved. The repository Project Instructions copy already agrees with the current supplied instructions, so no new settings paste is needed.",
+      "classification": "historical_audit_prose",
+      "behavior": "Explicit prohibition on production/auth/member edits, deletion, purchases and unapproved decisions; only that audit's scope.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 5,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 5,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 6,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank section boundary.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 6,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 6,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 7,
+      "source_text": "## Result",
+      "classification": "historical_heading",
+      "behavior": "Result heading.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 7,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 7,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 8,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank after heading.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 8,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 8,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 9,
+      "source_text": "The original **32 open issues were not 32 missing features**. They mixed unfinished product work, deployed features awaiting optional observations, overlapping verification lists, umbrella trackers, deferred proposals and measurements.",
+      "classification": "historical_audit_prose",
+      "behavior": "Original 32 issues included mixed types, so count was not equivalent to 32 missing app features.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 9,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 9,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 10,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank separating classification and consolidation count.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 10,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 10,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 11,
+      "source_text": "Ten duplicate trackers were consolidated, one deployed repair was closed as completed, and one unnecessary cleanup was closed as not planned. Closing this completed audit leaves **19 distinct work items**. Every transferred requirement has a named surviving issue; consolidation does not turn an unperformed test into a pass.",
+      "classification": "historical_audit_prose",
+      "behavior": "Old ten tracker consolidations and 19 surviving items; asserts no unperformed test upgraded to pass.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 11,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 11,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 12,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank preceding PR provenance.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 12,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 12,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 13,
+      "source_text": "PR94 is independently confirmed **merged at exact tested source `24f75f1eae7a17de9af388c064940cdeed9cf772`** by non-force fast-forward. PR95's operations repair merged at `314ccf362dacba660e3b5a5236bb1bde2878d6e3`; the documentation receipt/correction is on main at `1678391d18d96d72f207a42b5edf6da506e8b7b1` with successful CI. No publication occurred. **#93 remains the sole READY, NOT DEPLOYED queue item.**",
+      "classification": "historical_audit_prose",
+      "behavior": "Old PR94 app source and PR95 ops merge plus old #93 READY_NOT_DEPLOYED; current release must be independently checked.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 13,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 13,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 14,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank preceding issue-disposition table.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 14,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 14,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 15,
+      "source_text": "## All 32 issue dispositions",
+      "classification": "historical_heading",
+      "behavior": "Section heading for historic issue dispositions.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 15,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 15,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 16,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank before table header.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 16,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 16,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 17,
+      "source_text": "| Issue | Disposition | Necessary remaining scope or destination |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Markdown table column names: issue, disposition, remaining scope.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 17,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 17,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 18,
+      "source_text": "| --- | --- | --- |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Markdown table separator, no behavior.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 18,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 18,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 19,
+      "source_text": "| #5 | Keep: source assurance | Exact release identity, trustworthy source evidence, lookalike/reused URLs and safe member Pending retry. Catalog approval is not official-source proof. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #5 prior source assurance, reused product URLs and Pending safeguards; currently #33 product identity owner overlaps.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 19,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 19,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 20,
+      "source_text": "| #9 | Consolidated into #27 | Wrong-member confirmation/correction denial and stale-revision non-overwrite. Preserve completed #34/#41 evidence; distinct unperformed live negatives remain unverified. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #9 transferred privacy/concurrency checks to #27; old #34/#41 testing not full live negatives.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 20,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 20,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 21,
+      "source_text": "| #10 | Keep: feature | Complete candidate/confirmed/retired internal recipe-family lifecycle while showing one recommendation. Existing family selection is partial completion. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #10 originally incomplete internal recipe families with one shown recommendation.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 21,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 21,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 22,
+      "source_text": "| #12 | Keep: feature | Complete personal/Community evidence hierarchy and provenance transport. Existing helpers do not implement every required tier. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #12 personal/Community evidence hierarchy incomplete at that checkpoint.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 22,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 22,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 23,
+      "source_text": "| #13 | Keep: feature/decision | Post-rating Experiment confirmation, decline, baseline, threshold and durable lifecycle. Preserve unresolved canonical choices instead of guessing. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #13 experiment confirmation lifecycle unresolved then; later Locked retirement can supersede.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Conflicts with later Locked retirement/UX rules if read as present requirement",
+      "obsolescence": "Explicitly superseded by later owner-Locked decisions noted in behavior; retain archival literal",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 23,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 23,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Latest owner-Locked supersession controls; do not reintroduce retired feature",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 24,
+      "source_text": "| #14 | Keep: feature | Durable hosted Custom targets and workflow. Current chooser still filters Custom; constants/schema alone do not establish completion. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #14 historical Custom feature backlog; latest Locked retirement means do not resurrect it.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Conflicts with later Locked retirement/UX rules if read as present requirement",
+      "obsolescence": "Explicitly superseded by later owner-Locked decisions noted in behavior; retain archival literal",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 24,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 24,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Latest owner-Locked supersession controls; do not reintroduce retired feature",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 25,
+      "source_text": "| #15 | Keep: feature | Bag dates, Frozen and new-bag lifecycle. Cloud mapping currently restores empty bags and a null active bag. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #15 historical Bag feature backlog; October 26 owner Locked bag retirement supersedes this plan.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Conflicts with later Locked retirement/UX rules if read as present requirement",
+      "obsolescence": "Explicitly superseded by later owner-Locked decisions noted in behavior; retain archival literal",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 25,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 25,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Latest owner-Locked supersession controls; do not reintroduce retired feature",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 26,
+      "source_text": "| #16 | Keep: feature | Version-safe basket/equipment lifecycle with historical snapshots. The current dose advisory is more than 2 g, new shots only; old edit-confirmation wording is superseded. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #16 historical basket/equipment version request; later Locked retirement supersedes this plan; old >2g nuance also dated.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Conflicts with later Locked retirement/UX rules if read as present requirement",
+      "obsolescence": "Explicitly superseded by later owner-Locked decisions noted in behavior; retain archival literal",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 26,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 26,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Latest owner-Locked supersession controls; do not reintroduce retired feature",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 27,
+      "source_text": "| #17 | Keep: essential decision | Grinder direction, stepped scales, multirevolution/wrap and calibration semantics. Current continuous/lower-finer math is not generalized support. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #17 grinder direction and stepped/wrap semantics were not generic; preserve later explicit slow-feeding Locked constraints.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 27,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 27,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 28,
+      "source_text": "| #18 | Keep: deferred | Optional screenshot extraction and Claude BYOK. Not a dependency of the current deterministic extractor; no AI spending implied. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #18 historical screenshot/Claude BYOK proposal; later owner retirement supersedes it.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Conflicts with later Locked retirement/UX rules if read as present requirement",
+      "obsolescence": "Explicitly superseded by later owner-Locked decisions noted in behavior; retain archival literal",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 28,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 28,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Latest owner-Locked supersession controls; do not reintroduce retired feature",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 29,
+      "source_text": "| #21 | Consolidated into #22 | Normal real iPhone offline/reconnect replay was already accepted. Retain exception cases, not a repeated normal-path gate. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #21 folded basic offline regression into #22; don't repeat already accepted normal case without new defect.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 29,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 29,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 30,
+      "source_text": "| #22 | Keep: regression coverage | Concurrent devices, stale edits, pending outbox account switches, expired sessions, storage eviction and PWA updates. Distinguish automated checks from optional physical observations. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #22 exceptional offline replay, account-switch and storage eviction scenarios warrant focused coverage.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 30,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 30,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 31,
+      "source_text": "| #24 | Consolidated into #27 | Confirmed-email, single-use/nonexpiring invitations, replay/concurrency denial, revoke/Remove Access and preserved history. Do not restore hard deletion or obsolete invitation rules. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #24 old invitation/privacy negatives transferred to #27; no hard-delete restoration.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 31,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 31,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 32,
+      "source_text": "| #25 | Consolidated into #33 | Exact-product roast graphics, ambiguity, unsupported-source fallback and honest source/quota behavior. Seven tiers and the base quota are already decided. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #25 extractor graphic and conflict decisions transferred to #33; current universal URL rule supersedes old allowed-site intent.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 32,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 32,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 33,
+      "source_text": "| #26 | Keep: regression coverage | Accessibility and responsive behavior, plus distinct #39/#40/#78 checks. Unperformed VoiceOver or physical-device tests are not marked passed. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #26 accessibility/responsive coverage and optional physical VoiceOver boundaries distinguished.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 33,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 33,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 34,
+      "source_text": "| #27 | Keep: security/operations | Provider/access controls, specific Community/invitation negatives and release safeguards. Absorbs #9/#24/#38; private-Free privileged bypass remains an acknowledged limitation. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #27 historical Auth/invite/security scope; current #96 owns live privacy assurance.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 34,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 34,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 35,
+      "source_text": "| #28 | Keep: operations evidence | Scheduled courier delivery, retention and natural alert receipt. Enabled global notification proof remains accepted; false task metadata is not proof of a failure. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #28 natural scheduled courier/alert receipts separate from task flags and #267 audit.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 35,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 35,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 36,
+      "source_text": "| #30 | Keep: nonblocking archive gap | Missing original research, workshop and transcript bodies. Do not invent unavailable sources or claim complete chat recovery. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #30 archived research gaps cannot be fabricated or treated as complete.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 36,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 36,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 37,
+      "source_text": "| #33 | Keep: extraction coverage | Deterministic extraction, graphics and release correctness. Preserve the previous 25-of-31 real-source probe without claiming universal coverage or a new probe. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #33 source-specific extractor ownership remains; old 25/31 probe is no universal pass.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 37,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 37,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 38,
+      "source_text": "| #36 | Consolidated umbrella | Distinct pilot follow-ups now belong to #22/#26/#27/#28/#47. Unfinished product work remains independently open. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #36 umbrella pilot followups distributed across named issues.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 38,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 38,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 39,
+      "source_text": "| #37 | Keep: deferred documentation | Beginner guide after product stabilization. Do not document missing features as live. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #37 historical beginner guide deferred; later owner approved in-app walkthrough and first-setup updates alter scope.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Conflicts with later Locked retirement/UX rules if read as present requirement",
+      "obsolescence": "Explicitly superseded by later owner-Locked decisions noted in behavior; retain archival literal",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 39,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 39,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Latest owner-Locked supersession controls; do not reintroduce retired feature",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 40,
+      "source_text": "| #38 | Consolidated into #27 | Preserve one-use grants, exact-source checks, serialized non-force claims and provider readback. Advisory private-Free checks are not enforced branch protection. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #38 release guard moved to security operations; never infer branch protections from advisory CI.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 40,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 40,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 41,
+      "source_text": "| #39 | Consolidated into #26 | Approved New Setup grinder help and next-shot arrow/info. Reproduce route-specific missing-icon reports before expanding scope to an unapproved settings editor. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #39 grinder UX/icon claims require reproduction and latest Locked specification.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 41,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 41,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 42,
+      "source_text": "| #40 | Consolidated into #26 | Published larger Autofill button and distinct keyboard/focus/visual checks. Rejected broader mockups remain rejected. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #40 historical Autofill button and keyboard tests; latest Add Coffee conflict UI Locked supersedes older narrow instructions.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Conflicts with later Locked retirement/UX rules if read as present requirement",
+      "obsolescence": "Explicitly superseded by later owner-Locked decisions noted in behavior; retain archival literal",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 42,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 42,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Latest owner-Locked supersession controls; do not reintroduce retired feature",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 43,
+      "source_text": "| #42 | Closed: not planned | Two empty unlinked anonymous contributor identifiers have no demonstrated defect. Preserve them; no deletion was justified or performed. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #42 no defect in two unlinked IDs; avoid speculative data deletion.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 43,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 43,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 44,
+      "source_text": "| #43 | Consolidated into #47 | Every continuing #23/#43 review/conflict/privacy criterion, including identity/history preservation, audit/revision/role negatives and truthful source labels. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #43 Admin review/privacy tests transferred to #47; preserve identity/history and truthful labels.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 44,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 44,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 45,
+      "source_text": "| #47 | Keep: Admin regression coverage | Combined review, records, editing, paging and privacy. Foundations/direct-save/search are deployed; #93 is separately READY. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #47 Admin records paging and privacy acceptance incomplete then; read current issue for status.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 45,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 45,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 46,
+      "source_text": "| #50 | Keep: nonblocking metrics | Comparable end-to-end release timing and specific receipt-automation gaps. A 10x improvement is unproven; no benchmark-only publication or credit/device gate. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #50 benchmark gap: no evidence of 10x performance improvement then.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 46,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 46,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 47,
+      "source_text": "| #57 | Consolidated umbrella | Focused issues and release queue replace the program list. This does not declare unfinished features complete. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #57 high-level program tracker consolidated; this did not mean all functions complete.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 47,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 47,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 48,
+      "source_text": "| #70 | Completed audit | Source repairs integrated, evidence reconciled and residual work assigned. Final issue closure/readback is recorded in the issue thread. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #70 historical completed audit with issue-thread closure; no current #267 certification.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 48,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 48,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 49,
+      "source_text": "| #78 | Closed: completed/deployed | Responsive shot-history repair is already deployed. Optional new reproducible clipping reports belong to #26. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #78 then-deployed shot-history responsive fix; not a new present browser pass.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 49,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 49,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 50,
+      "source_text": "| #93 | Keep: READY, not deployed | Tested/integrated Admin collapsed-counter correction. This audit supplies no publication approval. |",
+      "classification": "historical_issue_table_row",
+      "behavior": "Issue #93 historic READY Admin counter, not permission or proof of today's deployment.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 50,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 50,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 51,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank after disposition table.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 51,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 51,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 52,
+      "source_text": "The 19 retained work items are **#5, #10, #12, #13, #14, #15, #16, #17, #18, #22, #26, #27, #28, #30, #33, #37, #47, #50 and #93**.",
+      "classification": "historical_audit_prose",
+      "behavior": "The 19 historical items are explicitly enumerated; current issue inventory has since changed.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 52,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 52,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 53,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank before transfer receipt heading.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 53,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 53,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 54,
+      "source_text": "### Transfer receipts",
+      "classification": "historical_heading",
+      "behavior": "Subheading locates cross-issue requirement transfers.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 54,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 54,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 55,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 55,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 55,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 56,
+      "source_text": "Requirements were transferred before duplicate closure: #27 comment 6356855518; #22 comment 6356857356; #26 comment 6356859208; #33 comment 6356861376; #47 comment 6356865056. Individual umbrella/no-action/completion receipts are #36 comment 6356900551, #57 comment 6356909535, #42 comment 6356905445 and #78 comment 6356911921. Current scope corrections are #16 comment 6356915283, #50 comment 6356918119, #28 comment 6356956742 and #5 comment 6357143599.",
+      "classification": "historical_audit_prose",
+      "behavior": "Old comment IDs document transfers and umbrella closure; review actual destination issues if relying on exact requirements.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 56,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 56,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 57,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 57,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 57,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 58,
+      "source_text": "Original issue bodies and comments remain available. Old priority labels, unpublished checkpoints, credit requirements and mandatory-device language are historical where explicitly superseded; they do not override the current disposition.",
+      "classification": "historical_audit_prose",
+      "behavior": "Old dispositions may have been superseded; must check current Locked and queue, not old priority.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 58,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 58,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 59,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank before repaired-problems section.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 59,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 59,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 60,
+      "source_text": "## Confirmed problems repaired",
+      "classification": "historical_heading",
+      "behavior": "Historical repair heading.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 60,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 60,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 61,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 61,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 61,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 62,
+      "source_text": "**Conflicting current instructions.** AGENTS mixed obsolete credit checks and repeated approval requirements with later supersessions. The current-only guide now follows the approved workflow. Exact old bytes remain archived.",
+      "classification": "historical_audit_prose",
+      "behavior": "Old AGENTS contradictory credit/approval statements corrected; current live AGENTS still governs.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 62,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 62,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 63,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 63,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 63,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 64,
+      "source_text": "**Misleading current requirements and recovery records.** The requirements index included retired rules and empty entries. The central journal described a verified deployed batch as unpublished. Current views now point to actual receipts and focused journals rather than repeating historical checkpoints as current instructions.",
+      "classification": "historical_audit_prose",
+      "behavior": "Old requirements and central journal were cleaned of false deployed/unpublished state; no present status guarantee.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 64,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 64,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 65,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 65,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 65,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 66,
+      "source_text": "**Stale approval metadata.** Fast-Flow's publication status conflicted with its old migration flag; the first-style prompt retained false SQL/publication flags; older metadata still required more-than-1-g log/edit confirmations, credit evidence and device signoff. These derived records now reflect the actual approved more-than-2-g new-shot-only advisory, published migrations, optional device checks and owner-managed credits.",
+      "classification": "historical_audit_prose",
+      "behavior": "Historical approval flags were reconciled, including >2g new-shot advisory; later decisions may differ.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 66,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 66,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 67,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 67,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 67,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 68,
+      "source_text": "**Weekly mixed-source race.** Three weekly jobs independently selected a moving development branch. Concurrent changes could therefore mix source versions within one reported run. One read-only resolver now supplies a single immutable SHA to all three suites; the database job explicitly uses Node22. Sunday 08:00 UTC, all existing test commands and read-only/no-persisted-credential boundaries remain. No historical mixed-source incident or future Sunday execution is claimed.",
+      "classification": "historical_audit_prose",
+      "behavior": "Old weekly moving-development source race remedied by read-only immutable SHA resolver; no actual historical mixed-source incident proven.",
+      "quality": "Historical design rationale for source-consistent weekly CI; no contemporary run attestation",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 68,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 68,
+        "exact_literal_match": true
+      },
+      "testability": "Inspect modern workflow YAML, exact Git SHAs and real scheduled Actions job; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 69,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 69,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 69,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 70,
+      "source_text": "**Stale operations guidance.** Main README and journals still referred to obsolete publication, pending PR76/pin approval and schema-v2 guidance. They now use the actual published source, matching backup pin and credit-free schema v4. Nightly backup and release/backup request files were not changed.",
+      "classification": "historical_audit_prose",
+      "behavior": "Main ops guidance repaired without touching backups/releases; current main remains separate authority.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 70,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 70,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 71,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 71,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 71,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 72,
+      "source_text": "**Notification interpretation.** The initial audit overinterpreted false task-level flags. Those flags already conflicted with accepted owner proof of enabled global Tasks Push/Email. Current records explicitly correct that inference, retain prior proof and forbid another settings request. Natural alert delivery remains unverified, not proven disabled. No task/provider setting changed.",
+      "classification": "historical_audit_prose",
+      "behavior": "Task-level disabled flags were recognized as nonproof; preserve prior owner proof, do not request repeat screenshot or alter notifications.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 72,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 72,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 73,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank before preservation.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 73,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 73,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 74,
+      "source_text": "## Preservation and tests",
+      "classification": "historical_heading",
+      "behavior": "Historical preservation/tests section heading.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 74,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 74,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 75,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 75,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 75,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 76,
+      "source_text": "Five complete original application records were archived as their exact Git blobs, with an archive manifest. The earlier operations README, journals and weekly workflow were also preserved. New tests verify archive identity and exact preservation of **51 owner-decision classifications, 15 source contracts and 66 assertions**. The original 79-Locked/20-Open baseline fingerprint and consumed release receipt remain unchanged; those baseline counts are not current open-issue counts.",
+      "classification": "historical_audit_prose",
+      "behavior": "Old five preserved app records and 51 classifications/15 contracts/66 assertions were claimed; old baseline 79/20 not current Locked count.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 76,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 76,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 77,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 77,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 77,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 78,
+      "source_text": "On final integrated application source `24f75f1eae7a17de9af388c064940cdeed9cf772`, Node/lint/build **39899213310**, approval/preservation **39899213411** and isolated SQL **39899213242** passed. The earlier exact application tree at `d3614520433f756e2855520ce73c81ee717f7152` passed cloud/mobile **39898321635** and visual **39898321650**. Independent comparison proves subsequent changes did not touch application runtime, browser tests, assets, build scripts or SQL. That valid unchanged browser evidence is reused; pending duplicate reruns are not falsely marked passed.",
+      "classification": "historical_audit_prose",
+      "behavior": "October 23 exact app Node/lint/build, approval, SQL runs and older unchanged-browser evidence; no modern CI conclusion.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 78,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 78,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 79,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 79,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 79,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 80,
+      "source_text": "Main PR95 candidate **39898590290** and post-merge **39898695303** passed. Its documentation receipt commit `1678391d18d96d72f207a42b5edf6da506e8b7b1` passed **39899278184**. Six new weekly policy/negative tests preserve immutable source selection, dependency/output binding, read-only permissions and offline coverage. Local YAML/dependency checks also passed. Configuration tests are not proof that a future natural schedule already executed.",
+      "classification": "historical_audit_prose",
+      "behavior": "Main PR95 CI and local six weekly negative tests are historical; cannot imply later scheduled run ever executed.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 80,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 80,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 81,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 81,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 81,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 82,
+      "source_text": "## Actual provider and release state",
+      "classification": "historical_heading",
+      "behavior": "Historic provider/release state heading.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Historical provider/backup/notification counts; false-current-status/privacy risk",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 82,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 82,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 83,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 83,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 83,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 84,
+      "source_text": "Netlify remains READY/current at **6adabcecd4a2a68e94cdc09a**, serving **f97b8f30c25f6d4ef30c5d79d12daf4fb0670e2f**, with tested published app **7156f0d3f1b960775c9256e7fcf92e0b89be8cc6**. Grant DIC-20261022-READY-QUEUE-04 is consumed. Production extra SSO remains off and nonproduction protection remains on. No publication, credit inquiry, purchase or plan change occurred.",
+      "classification": "historical_audit_prose",
+      "behavior": "Old Netlify deploy/release and consumed grant snapshot; current production and publication require provider readback.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Historical provider/backup/notification counts; false-current-status/privacy risk",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 84,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 84,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 85,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 85,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 85,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 86,
+      "source_text": "Queue blob **936b337c63c5f36ad3ad07681bbd29256beffd07** remains unchanged. #93 is its sole active READY item, tested implementation **6af607ada105b0c406829e8577e8ad7c543ab52d**, with prior successful runs 39892795031, 39892795034 and 39892795082. Source READY is not production delivery.",
+      "classification": "historical_audit_prose",
+      "behavior": "Old queue SHA and #93 sole READY; now obsolete for current READY membership.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Historical provider/backup/notification counts; false-current-status/privacy risk",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 86,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 86,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 87,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 87,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 87,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 88,
+      "source_text": "Supabase readback at **2026-10-23 04:15:39 UTC** remains **43 migrations, 46 RLS-enabled application tables, 5 accounts, 22 shots, 22 notes, 7 coffees, 7 submissions, 2 Community rows and 48 mutation receipts**. Earlier privilege review found no anonymous/authenticated direct table writes and no anonymous execution of public dic_* RPCs. Intended guarded private helpers remain; this is not a claim every private helper denies member execution or every runtime path was freshly tested.",
+      "classification": "historical_audit_prose",
+      "behavior": "Old Supabase counts and bounded permission review were historical; zero anonymous writes doesn't prove every private helper.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Historical provider/backup/notification counts; false-current-status/privacy risk",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 88,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 88,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 89,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 89,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 89,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 90,
+      "source_text": "Verifier Edge v5 and preview v3 remain ACTIVE with JWT verification. The dormant private Hide Shot branch remains explicitly deferred in PR72, with direct anonymous/member execution denied. No migration, permission, Auth, Edge, account or member-data change occurred.",
+      "classification": "historical_audit_prose",
+      "behavior": "Old active Edge functions, deferred Hide Shot and absence of production edits; latest retirement decisions/actual provider differ.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Historical provider/backup/notification counts; false-current-status/privacy risk",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 90,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 90,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 91,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 91,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 91,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 92,
+      "source_text": "Security advisor findings were five private RLS/no-policy INFO items, nine intentional callable SECURITY DEFINER warnings and the previously accepted private-beta breached-password warning. Performance findings were twelve missing-FK-index and eleven unused-index INFO items. No measured slow-query failure was established, and no speculative index deletion/addition or permission revocation was performed.",
+      "classification": "historical_audit_prose",
+      "behavior": "Old advisor INFO index/RLS counts were not measured query failures; avoid speculative index surgery.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Historical provider/backup/notification counts; false-current-status/privacy risk",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 92,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 92,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 93,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 93,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 93,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 94,
+      "source_text": "Private GitHub Free checks remain advisory against privileged direct writers/provider administrators. Role-separated development, operations and production branches intentionally diverge; they were not force-reset or merged together merely to improve ahead/behind counts.",
+      "classification": "historical_audit_prose",
+      "behavior": "Free/private privileged-writer bypass explicitly remains; maintain nonforce role-separated Git sources.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 94,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 94,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 95,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 95,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 95,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 96,
+      "source_text": "## Backups, courier and alerts",
+      "classification": "historical_heading",
+      "behavior": "Backup/courier/alerts heading.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Historical provider/backup/notification counts; false-current-status/privacy risk",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 96,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 96,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 97,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 97,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 97,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 98,
+      "source_text": "Actual main schedules are daily encrypted backup at **08:00 UTC** and comprehensive regression each **Sunday at 08:00 UTC**. The backup application pin matches the published release. The first newly timed natural executions were not observed during this audit.",
+      "classification": "historical_audit_prose",
+      "behavior": "Main daily and Sunday schedule described October 23; recheck actual ops schedule before any new claims.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Historical provider/backup/notification counts; false-current-status/privacy risk",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 98,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 98,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 99,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 99,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 99,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 100,
+      "source_text": "The latest observed scheduled backup **39796762687** began October 22 at **14:33:59 UTC** under the preceding schedule. Artifact **12434555176** is **1,416,482 bytes**, expires November 21, and independently matches the owner-only Drive ciphertext SHA256 **bd575a9716ea0b76225827f0b33a036df10a49b62b86ecee5faa556ada5fdb0d**. ZIP integrity passed; its sole member is `backup.age`. No private key, plaintext extraction, decryption or fresh restore was involved.",
+      "classification": "historical_audit_prose",
+      "behavior": "Old encrypted age backup artifact SHA256 and Drive courier receipt; artifact validation is not fresh restore success.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Historical provider/backup/notification counts; false-current-status/privacy risk",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 100,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 100,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 101,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 101,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 101,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 102,
+      "source_text": "Later push-only backup **39886382969** is not a scheduled courier receipt; such push smoke runs are intentionally ignored by the courier. An absent matching Drive filename for that push run does not establish a failed scheduled backup.",
+      "classification": "historical_audit_prose",
+      "behavior": "Push-only backup smoke is not scheduled courier and missing Drive filename is not proof of outage.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Historical provider/backup/notification counts; false-current-status/privacy risk",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 102,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 102,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 103,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 103,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 103,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 104,
+      "source_text": "The enabled watchdog again reports false task-level notification flags. This is the same previously documented discrepancy against accepted owner proof of enabled global Push/Email. It does not prove disabled settings, user error or a new delivery failure. Preserve prior Apps Script alert/trigger evidence. Do not request another screenshot, settings check or reconfirmation, create a duplicate monitor or manufacture an outage. Only actual natural condition-alert receipt remains unverified in #28.",
+      "classification": "historical_audit_prose",
+      "behavior": "False task-level alert metadata did not prove disabled settings; natural alert delivery still unverified, avoid duplicate monitor.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Historical provider/backup/notification counts; false-current-status/privacy risk",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 104,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 104,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 105,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 105,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 105,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 106,
+      "source_text": "## Honest limits",
+      "classification": "historical_heading",
+      "behavior": "Explicit limits section.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 106,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 106,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 107,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 107,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 107,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 108,
+      "source_text": "This completes the accessible-system and issue/workflow reconciliation, not every unfinished feature or a guarantee of zero defects. No new physical iPhone/VoiceOver or real signed-in member acceptance, complete penetration test, every-line repository inspection, fresh restoration of this ciphertext, universal extraction coverage or 10x speedup is claimed.",
+      "classification": "historical_audit_prose",
+      "behavior": "Original audit did not certify every-line code, physical iPhone, signed-in Auth, penetration, full extractor or 10x speed.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 108,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 108,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 109,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 109,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 109,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 110,
+      "source_text": "Some original research/chat bodies and account-level Auth/secret/DNS/Cloudflare/Resend/Apps Script settings were not accessible. A successful Drive receipt proves a courier cycle, not every trigger or retention branch. Container GitHub network access failed; connected reads and allowed writes were used. A temporary inventory-workflow attempt was blocked without creating a commit/ref and was not retried through an equivalent route. Existing valid test/restore evidence is reused within its scope rather than renamed as newly performed work.",
+      "classification": "historical_audit_prose",
+      "behavior": "Original research/account provider restrictions and GitHub container network fail were recorded; do not infer absent now.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 110,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 110,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 111,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank.",
+      "quality": "Non-executable presentation separator",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 111,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 111,
+        "exact_literal_match": true
+      },
+      "testability": "No runtime test applicable to blank",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    },
+    {
+      "line": 112,
+      "source_text": "See `docs/audits/2026-10-23-reconciliation-receipt.json` and the Issue70 closing comment for the integrated source, evidence and final readback. No website publication was authorized or performed.",
+      "classification": "historical_audit_prose",
+      "behavior": "Links old receipt and issue70 closing comment; no publication authorization from this file.",
+      "quality": "Dated issue, workflow or evidence description; not live source-of-truth",
+      "risk": "Stale governance, CI or issue-state risk if treated as current",
+      "obsolescence": "Historical October 2026; not currently authoritative",
+      "duplication": "No active duplicated executable logic in this Markdown line; whole-source duplication review not certified",
+      "pinned_current_counterpart": {
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 112,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "140ddb01979a1878dda8418428273cf2be712021",
+        "path": "docs/audits/2026-10-23-workflow-reconciliation.md",
+        "blob_sha": "a589b7c7445f3428d7b7f7ce6faf1a68e145b96c",
+        "line": 112,
+        "exact_literal_match": true
+      },
+      "testability": "Read corresponding current issue/Locked decision and cited historical Git/CI/provider receipt as applicable; NOT_RUN",
+      "safe_change": "Preserve original historical evidence, do not edit or remove archival snapshot; no active defect reproduced from this old line",
+      "locked_fit": "Respect latest Locked changes, #33/#96/#28 ownership, original history and no deployment authorization",
+      "reviewer_method": "Direct numbered source literal AI semantic review, not independent human"
+    }
+  ],
+  "verified_literal_counts": {
+    "original": 112,
+    "unique": 112,
+    "gaps": 0,
+    "duplicates": 0,
+    "pinned_blob_match": true,
+    "live_blob_match": true,
+    "original_executable_current_credit": 0,
+    "live_postpin_credit": 0
+  },
+  "findings": [
+    {
+      "type": "stale_historical_speech",
+      "priority": "informational",
+      "lines": [
+        24,
+        25,
+        26,
+        28,
+        39,
+        42,
+        50,
+        84,
+        86
+      ],
+      "disposition": "Old feature/release claims are superseded or dated; preserve archive and use latest Locked decisions/current queue. No active defect or new owner decision found."
+    },
+    {
+      "type": "weekly_source_drift_historical",
+      "priority": "informational",
+      "lines": [
+        68,
+        78,
+        80
+      ],
+      "disposition": "Old source pin work documented; no modern Actions run or current bug proved; no duplicated workflow repair."
+    }
+  ],
+  "tests": {
+    "original_source_blob": "PASS",
+    "per_line_source_text": "PASS 112/112",
+    "pinned_and_live_blob": "PASS",
+    "functional": "NOT_RUN",
+    "PR_CI": "PENDING",
+    "merged_CI": "NOT_RUN",
+    "provider": "NOT_APPLICABLE"
+  },
+  "next": "Frozen F215 line 1 7,568-line historical extractor adjudication JSON, bounded direct inspection with no mass certification. #267 remains OPEN."
+}

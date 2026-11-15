@@ -1,0 +1,2380 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 247,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "697e75cb9f4b559fa7466e9526f9cfe4253584fe",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_development_sha": "697e75cb9f4b559fa7466e9526f9cfe4253584fe"
+  },
+  "scope": "Direct complete catalog-component review of Auth table ordinals 21-27; related full app Auth signup trigger SQL; numeric-only cumulative pg_stat_statements ranks 1761-1840",
+  "observed_at": "2026-11-14 18:47:37.990753+00",
+  "provider_drift": {
+    "observed_at": "2026-11-14 18:47:37.990753+00",
+    "version": "17.11",
+    "app_tables": 52,
+    "app_functions": 114,
+    "app_policies": 41,
+    "migrations": 69,
+    "pgss_fingerprints": 4904,
+    "stats_reset": "2026-10-09 11:11:31.487298+00",
+    "auth_tables": 27
+  },
+  "auth_tables": {
+    "ordinals": [
+      21,
+      27
+    ],
+    "reviewed": 7,
+    "existing_platform_baseline": 27,
+    "first_time_original_github_code_line_credit": 0,
+    "rows": [
+      {
+        "ordinal": 21,
+        "relation": "auth.scim_users",
+        "owner": "supabase_auth_admin",
+        "rls": false,
+        "forced_rls": false,
+        "acl": "{postgres=arwdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "columns": [
+          {
+            "acl": null,
+            "type": "uuid",
+            "column": "id",
+            "default": null,
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "uuid",
+            "column": "sso_provider_id",
+            "default": null,
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "uuid",
+            "column": "user_id",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "jsonb",
+            "column": "resource",
+            "default": null,
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "text",
+            "column": "user_name",
+            "default": "lower((resource ->> 'userName'::text))",
+            "identity": "",
+            "nullable": false,
+            "generated": "s"
+          },
+          {
+            "acl": null,
+            "type": "text",
+            "column": "external_id",
+            "default": "(resource ->> 'externalId'::text)",
+            "identity": "",
+            "nullable": true,
+            "generated": "s"
+          },
+          {
+            "acl": null,
+            "type": "boolean",
+            "column": "active",
+            "default": "COALESCE(((resource ->> 'active'::text))::boolean, true)",
+            "identity": "",
+            "nullable": false,
+            "generated": "s"
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "created_at",
+            "default": "now()",
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "updated_at",
+            "default": "now()",
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "deleted_at",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          }
+        ],
+        "constraints": [
+          {
+            "name": "scim_users_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "scim_users_sso_provider_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (sso_provider_id) REFERENCES auth.sso_providers(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "scim_users_user_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE SET NULL"
+          }
+        ],
+        "indexes": [
+          {
+            "name": "scim_users_created_at_idx",
+            "valid": true,
+            "unique": false,
+            "definition": "CREATE INDEX scim_users_created_at_idx ON auth.scim_users USING btree (sso_provider_id, created_at, id) WHERE (deleted_at IS NULL)"
+          },
+          {
+            "name": "scim_users_deleted_at_idx",
+            "valid": true,
+            "unique": false,
+            "definition": "CREATE INDEX scim_users_deleted_at_idx ON auth.scim_users USING btree (deleted_at)"
+          },
+          {
+            "name": "scim_users_external_id_key",
+            "valid": true,
+            "unique": true,
+            "definition": "CREATE UNIQUE INDEX scim_users_external_id_key ON auth.scim_users USING btree (sso_provider_id, external_id) WHERE ((external_id IS NOT NULL) AND (deleted_at IS NULL))"
+          },
+          {
+            "name": "scim_users_id_idx",
+            "valid": true,
+            "unique": false,
+            "definition": "CREATE INDEX scim_users_id_idx ON auth.scim_users USING btree (sso_provider_id, id) WHERE (deleted_at IS NULL)"
+          },
+          {
+            "name": "scim_users_pkey",
+            "valid": true,
+            "unique": true,
+            "definition": "CREATE UNIQUE INDEX scim_users_pkey ON auth.scim_users USING btree (id)"
+          },
+          {
+            "name": "scim_users_sso_provider_id_idx",
+            "valid": true,
+            "unique": false,
+            "definition": "CREATE INDEX scim_users_sso_provider_id_idx ON auth.scim_users USING btree (sso_provider_id)"
+          },
+          {
+            "name": "scim_users_updated_at_idx",
+            "valid": true,
+            "unique": false,
+            "definition": "CREATE INDEX scim_users_updated_at_idx ON auth.scim_users USING btree (sso_provider_id, updated_at, id) WHERE (deleted_at IS NULL)"
+          },
+          {
+            "name": "scim_users_user_id_idx",
+            "valid": true,
+            "unique": false,
+            "definition": "CREATE INDEX scim_users_user_id_idx ON auth.scim_users USING btree (user_id)"
+          },
+          {
+            "name": "scim_users_user_name_idx",
+            "valid": true,
+            "unique": false,
+            "definition": "CREATE INDEX scim_users_user_name_idx ON auth.scim_users USING btree (sso_provider_id, user_name COLLATE \"C\", id) WHERE (deleted_at IS NULL)"
+          },
+          {
+            "name": "scim_users_user_name_key",
+            "valid": true,
+            "unique": true,
+            "definition": "CREATE UNIQUE INDEX scim_users_user_name_key ON auth.scim_users USING btree (sso_provider_id, user_name) WHERE (deleted_at IS NULL)"
+          }
+        ],
+        "triggers": [],
+        "policies": [],
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_select": false,
+        "signature": "6fce886b229e32154e609be25fa3a78c",
+        "verdict": "MANAGED_AUTH_DEFINITION_REVIEWED_NO_NEW_REPRODUCED_DIC_DEFECT",
+        "semantic_assessment": "Vendor SCIM identity mapping; generated normalized user_name/external_id/active, soft-delete-aware unique indexes, provider/user FKs. RLS disabled but all three client roles lack direct SELECT. Do not delete indexes without managed API/dependency proof."
+      },
+      {
+        "ordinal": 22,
+        "relation": "auth.sessions",
+        "owner": "supabase_auth_admin",
+        "rls": true,
+        "forced_rls": false,
+        "acl": "{postgres=ar*wdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "columns": [
+          {
+            "acl": null,
+            "type": "uuid",
+            "column": "id",
+            "default": null,
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "uuid",
+            "column": "user_id",
+            "default": null,
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "created_at",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "updated_at",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "uuid",
+            "column": "factor_id",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "auth.aal_level",
+            "column": "aal",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "not_after",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp without time zone",
+            "column": "refreshed_at",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "text",
+            "column": "user_agent",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "inet",
+            "column": "ip",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "text",
+            "column": "tag",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "uuid",
+            "column": "oauth_client_id",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "text",
+            "column": "refresh_token_hmac_key",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "bigint",
+            "column": "refresh_token_counter",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "text",
+            "column": "scopes",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          }
+        ],
+        "constraints": [
+          {
+            "name": "sessions_oauth_client_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (oauth_client_id) REFERENCES auth.oauth_clients(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "sessions_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "sessions_scopes_length",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (char_length(scopes) <= 4096)"
+          },
+          {
+            "name": "sessions_user_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          }
+        ],
+        "indexes": [
+          {
+            "name": "sessions_not_after_idx",
+            "valid": true,
+            "unique": false,
+            "definition": "CREATE INDEX sessions_not_after_idx ON auth.sessions USING btree (not_after DESC)"
+          },
+          {
+            "name": "sessions_oauth_client_id_idx",
+            "valid": true,
+            "unique": false,
+            "definition": "CREATE INDEX sessions_oauth_client_id_idx ON auth.sessions USING btree (oauth_client_id)"
+          },
+          {
+            "name": "sessions_pkey",
+            "valid": true,
+            "unique": true,
+            "definition": "CREATE UNIQUE INDEX sessions_pkey ON auth.sessions USING btree (id)"
+          },
+          {
+            "name": "sessions_user_id_idx",
+            "valid": true,
+            "unique": false,
+            "definition": "CREATE INDEX sessions_user_id_idx ON auth.sessions USING btree (user_id)"
+          },
+          {
+            "name": "user_id_created_at_idx",
+            "valid": true,
+            "unique": false,
+            "definition": "CREATE INDEX user_id_created_at_idx ON auth.sessions USING btree (user_id, created_at)"
+          }
+        ],
+        "triggers": [],
+        "policies": [],
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_select": false,
+        "signature": "98883a157ce52cb97e3b7bd4ba112fcd",
+        "verdict": "MANAGED_AUTH_DEFINITION_REVIEWED_NO_NEW_REPRODUCED_DIC_DEFECT",
+        "semantic_assessment": "Vendor-owned session/AAL/refresh-token metadata; RLS enabled with no policies, client roles lack direct SELECT; session/user FK cascades and time indexes present. Effective hosted token validation not proven by catalog."
+      },
+      {
+        "ordinal": 23,
+        "relation": "auth.sso_domains",
+        "owner": "supabase_auth_admin",
+        "rls": true,
+        "forced_rls": false,
+        "acl": "{postgres=ar*wdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "columns": [
+          {
+            "acl": null,
+            "type": "uuid",
+            "column": "id",
+            "default": null,
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "uuid",
+            "column": "sso_provider_id",
+            "default": null,
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "text",
+            "column": "domain",
+            "default": null,
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "created_at",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "updated_at",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          }
+        ],
+        "constraints": [
+          {
+            "name": "domain not empty",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (char_length(domain) > 0)"
+          },
+          {
+            "name": "sso_domains_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "sso_domains_sso_provider_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (sso_provider_id) REFERENCES auth.sso_providers(id) ON DELETE CASCADE"
+          }
+        ],
+        "indexes": [
+          {
+            "name": "sso_domains_domain_idx",
+            "valid": true,
+            "unique": true,
+            "definition": "CREATE UNIQUE INDEX sso_domains_domain_idx ON auth.sso_domains USING btree (lower(domain))"
+          },
+          {
+            "name": "sso_domains_pkey",
+            "valid": true,
+            "unique": true,
+            "definition": "CREATE UNIQUE INDEX sso_domains_pkey ON auth.sso_domains USING btree (id)"
+          },
+          {
+            "name": "sso_domains_sso_provider_id_idx",
+            "valid": true,
+            "unique": false,
+            "definition": "CREATE INDEX sso_domains_sso_provider_id_idx ON auth.sso_domains USING btree (sso_provider_id)"
+          }
+        ],
+        "triggers": [],
+        "policies": [],
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_select": false,
+        "signature": "1ce7f60e7a07aa0aa0d3fd173008151d",
+        "verdict": "MANAGED_AUTH_DEFINITION_REVIEWED_NO_NEW_REPRODUCED_DIC_DEFECT",
+        "semantic_assessment": "Vendor SSO case-normalized unique domain index; RLS enabled; no client SELECT. Referential cascade to SSO provider."
+      },
+      {
+        "ordinal": 24,
+        "relation": "auth.sso_providers",
+        "owner": "supabase_auth_admin",
+        "rls": true,
+        "forced_rls": false,
+        "acl": "{postgres=ar*wdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "columns": [
+          {
+            "acl": null,
+            "type": "uuid",
+            "column": "id",
+            "default": null,
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "text",
+            "column": "resource_id",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "created_at",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "updated_at",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "boolean",
+            "column": "disabled",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          }
+        ],
+        "constraints": [
+          {
+            "name": "resource_id not empty",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (resource_id = NULL::text OR char_length(resource_id) > 0)"
+          },
+          {
+            "name": "sso_providers_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          }
+        ],
+        "indexes": [
+          {
+            "name": "sso_providers_pkey",
+            "valid": true,
+            "unique": true,
+            "definition": "CREATE UNIQUE INDEX sso_providers_pkey ON auth.sso_providers USING btree (id)"
+          },
+          {
+            "name": "sso_providers_resource_id_idx",
+            "valid": true,
+            "unique": true,
+            "definition": "CREATE UNIQUE INDEX sso_providers_resource_id_idx ON auth.sso_providers USING btree (lower(resource_id))"
+          },
+          {
+            "name": "sso_providers_resource_id_pattern_idx",
+            "valid": true,
+            "unique": false,
+            "definition": "CREATE INDEX sso_providers_resource_id_pattern_idx ON auth.sso_providers USING btree (resource_id text_pattern_ops)"
+          }
+        ],
+        "triggers": [],
+        "policies": [],
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_select": false,
+        "signature": "8ccf7a3da900f029b3ab7c4e45b4483e",
+        "verdict": "MANAGED_AUTH_DEFINITION_REVIEWED_NO_NEW_REPRODUCED_DIC_DEFECT",
+        "semantic_assessment": "Known provider-managed ineffective SQL CHECK resource_id = NULL OR char_length(resource_id)>0; existing Nov 4 issue, not a new DIC exposure; no production patch. RLS enabled/no client SELECT."
+      },
+      {
+        "ordinal": 25,
+        "relation": "auth.users",
+        "owner": "supabase_auth_admin",
+        "rls": true,
+        "forced_rls": false,
+        "acl": "{supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin,postgres=ar*wdDxtm/supabase_auth_admin}",
+        "columns": [
+          {
+            "acl": null,
+            "type": "uuid",
+            "column": "instance_id",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "uuid",
+            "column": "id",
+            "default": null,
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "character varying(255)",
+            "column": "aud",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "character varying(255)",
+            "column": "role",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "character varying(255)",
+            "column": "email",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "character varying(255)",
+            "column": "encrypted_password",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "email_confirmed_at",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "invited_at",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "character varying(255)",
+            "column": "confirmation_token",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "confirmation_sent_at",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "character varying(255)",
+            "column": "recovery_token",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "recovery_sent_at",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "character varying(255)",
+            "column": "email_change_token_new",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "character varying(255)",
+            "column": "email_change",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "email_change_sent_at",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "last_sign_in_at",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "jsonb",
+            "column": "raw_app_meta_data",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "jsonb",
+            "column": "raw_user_meta_data",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "boolean",
+            "column": "is_super_admin",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "created_at",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "updated_at",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "text",
+            "column": "phone",
+            "default": "NULL::character varying",
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "phone_confirmed_at",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "text",
+            "column": "phone_change",
+            "default": "''::character varying",
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "character varying(255)",
+            "column": "phone_change_token",
+            "default": "''::character varying",
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "phone_change_sent_at",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "confirmed_at",
+            "default": "LEAST(email_confirmed_at, phone_confirmed_at)",
+            "identity": "",
+            "nullable": true,
+            "generated": "s"
+          },
+          {
+            "acl": null,
+            "type": "character varying(255)",
+            "column": "email_change_token_current",
+            "default": "''::character varying",
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "smallint",
+            "column": "email_change_confirm_status",
+            "default": "0",
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "banned_until",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "character varying(255)",
+            "column": "reauthentication_token",
+            "default": "''::character varying",
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "reauthentication_sent_at",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "boolean",
+            "column": "is_sso_user",
+            "default": "false",
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "deleted_at",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "boolean",
+            "column": "is_anonymous",
+            "default": "false",
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          }
+        ],
+        "constraints": [
+          {
+            "name": "users_email_change_confirm_status_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (email_change_confirm_status >= 0 AND email_change_confirm_status <= 2)"
+          },
+          {
+            "name": "users_phone_key",
+            "type": "u",
+            "validated": true,
+            "definition": "UNIQUE (phone)"
+          },
+          {
+            "name": "users_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          }
+        ],
+        "indexes": [
+          {
+            "name": "confirmation_token_idx",
+            "valid": true,
+            "unique": true,
+            "definition": "CREATE UNIQUE INDEX confirmation_token_idx ON auth.users USING btree (confirmation_token) WHERE ((confirmation_token)::text !~ '^[0-9 ]*$'::text)"
+          },
+          {
+            "name": "email_change_token_current_idx",
+            "valid": true,
+            "unique": true,
+            "definition": "CREATE UNIQUE INDEX email_change_token_current_idx ON auth.users USING btree (email_change_token_current) WHERE ((email_change_token_current)::text !~ '^[0-9 ]*$'::text)"
+          },
+          {
+            "name": "email_change_token_new_idx",
+            "valid": true,
+            "unique": true,
+            "definition": "CREATE UNIQUE INDEX email_change_token_new_idx ON auth.users USING btree (email_change_token_new) WHERE ((email_change_token_new)::text !~ '^[0-9 ]*$'::text)"
+          },
+          {
+            "name": "idx_users_created_at_desc",
+            "valid": true,
+            "unique": false,
+            "definition": "CREATE INDEX idx_users_created_at_desc ON auth.users USING btree (created_at DESC)"
+          },
+          {
+            "name": "idx_users_email",
+            "valid": true,
+            "unique": false,
+            "definition": "CREATE INDEX idx_users_email ON auth.users USING btree (email)"
+          },
+          {
+            "name": "idx_users_last_sign_in_at_desc",
+            "valid": true,
+            "unique": false,
+            "definition": "CREATE INDEX idx_users_last_sign_in_at_desc ON auth.users USING btree (last_sign_in_at DESC)"
+          },
+          {
+            "name": "idx_users_name",
+            "valid": true,
+            "unique": false,
+            "definition": "CREATE INDEX idx_users_name ON auth.users USING btree (((raw_user_meta_data ->> 'name'::text))) WHERE ((raw_user_meta_data ->> 'name'::text) IS NOT NULL)"
+          },
+          {
+            "name": "reauthentication_token_idx",
+            "valid": true,
+            "unique": true,
+            "definition": "CREATE UNIQUE INDEX reauthentication_token_idx ON auth.users USING btree (reauthentication_token) WHERE ((reauthentication_token)::text !~ '^[0-9 ]*$'::text)"
+          },
+          {
+            "name": "recovery_token_idx",
+            "valid": true,
+            "unique": true,
+            "definition": "CREATE UNIQUE INDEX recovery_token_idx ON auth.users USING btree (recovery_token) WHERE ((recovery_token)::text !~ '^[0-9 ]*$'::text)"
+          },
+          {
+            "name": "users_email_partial_key",
+            "valid": true,
+            "unique": true,
+            "definition": "CREATE UNIQUE INDEX users_email_partial_key ON auth.users USING btree (email) WHERE (is_sso_user = false)"
+          },
+          {
+            "name": "users_instance_id_email_idx",
+            "valid": true,
+            "unique": false,
+            "definition": "CREATE INDEX users_instance_id_email_idx ON auth.users USING btree (instance_id, lower((email)::text))"
+          },
+          {
+            "name": "users_instance_id_idx",
+            "valid": true,
+            "unique": false,
+            "definition": "CREATE INDEX users_instance_id_idx ON auth.users USING btree (instance_id)"
+          },
+          {
+            "name": "users_is_anonymous_idx",
+            "valid": true,
+            "unique": false,
+            "definition": "CREATE INDEX users_is_anonymous_idx ON auth.users USING btree (is_anonymous)"
+          },
+          {
+            "name": "users_phone_key",
+            "valid": true,
+            "unique": true,
+            "definition": "CREATE UNIQUE INDEX users_phone_key ON auth.users USING btree (phone)"
+          },
+          {
+            "name": "users_pkey",
+            "valid": true,
+            "unique": true,
+            "definition": "CREATE UNIQUE INDEX users_pkey ON auth.users USING btree (id)"
+          }
+        ],
+        "triggers": [
+          {
+            "name": "dic_auth_user_created",
+            "enabled": "O",
+            "definition": "CREATE TRIGGER dic_auth_user_created AFTER INSERT ON auth.users FOR EACH ROW EXECUTE FUNCTION private.handle_new_auth_user()"
+          }
+        ],
+        "policies": [],
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_select": false,
+        "signature": "85c01f64386556b2df370896c35d71a1",
+        "verdict": "MANAGED_AUTH_DEFINITION_REVIEWED_NO_NEW_REPRODUCED_DIC_DEFECT",
+        "semantic_assessment": "Vendor account identity and confidential credential/token columns; RLS on/no client SELECT; AFTER INSERT application trigger invokes private.handle_new_auth_user with fixed search_path and restricted EXECUTE, inserts membership/preferences/contributor skeletons. No Auth user records read."
+      },
+      {
+        "ordinal": 26,
+        "relation": "auth.webauthn_challenges",
+        "owner": "supabase_auth_admin",
+        "rls": false,
+        "forced_rls": false,
+        "acl": "{postgres=arwdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "columns": [
+          {
+            "acl": null,
+            "type": "uuid",
+            "column": "id",
+            "default": "gen_random_uuid()",
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "uuid",
+            "column": "user_id",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "text",
+            "column": "challenge_type",
+            "default": null,
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "jsonb",
+            "column": "session_data",
+            "default": null,
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "created_at",
+            "default": "now()",
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "expires_at",
+            "default": null,
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          }
+        ],
+        "constraints": [
+          {
+            "name": "webauthn_challenges_challenge_type_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (challenge_type = ANY (ARRAY['signup'::text, 'registration'::text, 'authentication'::text]))"
+          },
+          {
+            "name": "webauthn_challenges_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "webauthn_challenges_user_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          }
+        ],
+        "indexes": [
+          {
+            "name": "webauthn_challenges_expires_at_idx",
+            "valid": true,
+            "unique": false,
+            "definition": "CREATE INDEX webauthn_challenges_expires_at_idx ON auth.webauthn_challenges USING btree (expires_at)"
+          },
+          {
+            "name": "webauthn_challenges_pkey",
+            "valid": true,
+            "unique": true,
+            "definition": "CREATE UNIQUE INDEX webauthn_challenges_pkey ON auth.webauthn_challenges USING btree (id)"
+          },
+          {
+            "name": "webauthn_challenges_user_id_idx",
+            "valid": true,
+            "unique": false,
+            "definition": "CREATE INDEX webauthn_challenges_user_id_idx ON auth.webauthn_challenges USING btree (user_id)"
+          }
+        ],
+        "triggers": [],
+        "policies": [],
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_select": false,
+        "signature": "be0973ca5de791663cd02333a393fed0",
+        "verdict": "MANAGED_AUTH_DEFINITION_REVIEWED_NO_NEW_REPRODUCED_DIC_DEFECT",
+        "semantic_assessment": "Vendor WebAuthn short-lived challenge storage, type check, expiry index, cascading user FK; RLS off but no client SELECT. Hosted challenge enforcement not verified."
+      },
+      {
+        "ordinal": 27,
+        "relation": "auth.webauthn_credentials",
+        "owner": "supabase_auth_admin",
+        "rls": false,
+        "forced_rls": false,
+        "acl": "{postgres=arwdDxtm/supabase_auth_admin,supabase_auth_admin=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+        "columns": [
+          {
+            "acl": null,
+            "type": "uuid",
+            "column": "id",
+            "default": "gen_random_uuid()",
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "uuid",
+            "column": "user_id",
+            "default": null,
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "bytea",
+            "column": "credential_id",
+            "default": null,
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "bytea",
+            "column": "public_key",
+            "default": null,
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "text",
+            "column": "attestation_type",
+            "default": "''::text",
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "uuid",
+            "column": "aaguid",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "bigint",
+            "column": "sign_count",
+            "default": "0",
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "jsonb",
+            "column": "transports",
+            "default": "'[]'::jsonb",
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "boolean",
+            "column": "backup_eligible",
+            "default": "false",
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "boolean",
+            "column": "backed_up",
+            "default": "false",
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "text",
+            "column": "friendly_name",
+            "default": "''::text",
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "created_at",
+            "default": "now()",
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "updated_at",
+            "default": "now()",
+            "identity": "",
+            "nullable": false,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "type": "timestamp with time zone",
+            "column": "last_used_at",
+            "default": null,
+            "identity": "",
+            "nullable": true,
+            "generated": ""
+          }
+        ],
+        "constraints": [
+          {
+            "name": "webauthn_credentials_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "webauthn_credentials_user_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+          }
+        ],
+        "indexes": [
+          {
+            "name": "webauthn_credentials_credential_id_key",
+            "valid": true,
+            "unique": true,
+            "definition": "CREATE UNIQUE INDEX webauthn_credentials_credential_id_key ON auth.webauthn_credentials USING btree (credential_id)"
+          },
+          {
+            "name": "webauthn_credentials_pkey",
+            "valid": true,
+            "unique": true,
+            "definition": "CREATE UNIQUE INDEX webauthn_credentials_pkey ON auth.webauthn_credentials USING btree (id)"
+          },
+          {
+            "name": "webauthn_credentials_user_id_idx",
+            "valid": true,
+            "unique": false,
+            "definition": "CREATE INDEX webauthn_credentials_user_id_idx ON auth.webauthn_credentials USING btree (user_id)"
+          }
+        ],
+        "triggers": [],
+        "policies": [],
+        "anon_select": false,
+        "authenticated_select": false,
+        "service_select": false,
+        "signature": "fb85f9454b02b28cd150fbf441023ffc",
+        "verdict": "MANAGED_AUTH_DEFINITION_REVIEWED_NO_NEW_REPRODUCED_DIC_DEFECT",
+        "semantic_assessment": "Vendor WebAuthn credential public-key fields, unique credential ID, user FK/cascade, sign_count/backup metadata; RLS off but no client SELECT. No credential values accessed."
+      }
+    ]
+  },
+  "related_application_trigger": {
+    "signature": "private.handle_new_auth_user()",
+    "definition": "CREATE OR REPLACE FUNCTION private.handle_new_auth_user()\n RETURNS trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n  insert into public.account_preferences(owner_id) values(new.id);\n  insert into private.beta_members(owner_id) values(new.id);\n  insert into private.contributors(owner_id) values(new.id);\n  return new;\nend $function$\n",
+    "owner": "postgres",
+    "definer": true,
+    "config": [
+      "search_path=\"\""
+    ],
+    "acl": "{postgres=X/postgres}"
+  },
+  "performance": {
+    "numeric_rank_range": [
+      1761,
+      1840
+    ],
+    "rows": [
+      {
+        "rank": 1761,
+        "query_id": "1480897739732465968",
+        "calls": 1,
+        "total_ms": "5.764",
+        "mean_ms": "5.764",
+        "rows": 7,
+        "shared_blks_hit": 4,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1762,
+        "query_id": "3819908102672187373",
+        "calls": 1,
+        "total_ms": "5.763",
+        "mean_ms": "5.763",
+        "rows": 15,
+        "shared_blks_hit": 2175,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1763,
+        "query_id": "-5701675561689252360",
+        "calls": 1,
+        "total_ms": "5.757",
+        "mean_ms": "5.757",
+        "rows": 7,
+        "shared_blks_hit": 49,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1764,
+        "query_id": "-863185516116757489",
+        "calls": 2,
+        "total_ms": "5.751",
+        "mean_ms": "2.875",
+        "rows": 2,
+        "shared_blks_hit": 58,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1765,
+        "query_id": "-1730090163623809309",
+        "calls": 1,
+        "total_ms": "5.744",
+        "mean_ms": "5.744",
+        "rows": 73,
+        "shared_blks_hit": 187,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1766,
+        "query_id": "1913625793100540045",
+        "calls": 1,
+        "total_ms": "5.744",
+        "mean_ms": "5.744",
+        "rows": 6,
+        "shared_blks_hit": 11,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1767,
+        "query_id": "-8713092230177206053",
+        "calls": 1,
+        "total_ms": "5.708",
+        "mean_ms": "5.708",
+        "rows": 1,
+        "shared_blks_hit": 17,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1768,
+        "query_id": "91955186455649467",
+        "calls": 1,
+        "total_ms": "5.702",
+        "mean_ms": "5.702",
+        "rows": 0,
+        "shared_blks_hit": 895,
+        "shared_blks_read": 1,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1769,
+        "query_id": "3728090791548659600",
+        "calls": 1,
+        "total_ms": "5.683",
+        "mean_ms": "5.683",
+        "rows": 1,
+        "shared_blks_hit": 11,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1770,
+        "query_id": "7427003947003639162",
+        "calls": 1,
+        "total_ms": "5.662",
+        "mean_ms": "5.662",
+        "rows": 1,
+        "shared_blks_hit": 17,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1771,
+        "query_id": "-7641840454075401387",
+        "calls": 1,
+        "total_ms": "5.638",
+        "mean_ms": "5.638",
+        "rows": 1,
+        "shared_blks_hit": 7,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1772,
+        "query_id": "3400407980746882434",
+        "calls": 2,
+        "total_ms": "5.637",
+        "mean_ms": "2.819",
+        "rows": 64,
+        "shared_blks_hit": 1552,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1773,
+        "query_id": "1508196664028963041",
+        "calls": 1,
+        "total_ms": "5.625",
+        "mean_ms": "5.625",
+        "rows": 1,
+        "shared_blks_hit": 118,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1774,
+        "query_id": "-6679831042566725660",
+        "calls": 1,
+        "total_ms": "5.614",
+        "mean_ms": "5.614",
+        "rows": 35,
+        "shared_blks_hit": 185,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1775,
+        "query_id": "-8520111820636776729",
+        "calls": 1,
+        "total_ms": "5.610",
+        "mean_ms": "5.610",
+        "rows": 18,
+        "shared_blks_hit": 345,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1776,
+        "query_id": "2509064085598504032",
+        "calls": 1,
+        "total_ms": "5.606",
+        "mean_ms": "5.606",
+        "rows": 1,
+        "shared_blks_hit": 69,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1777,
+        "query_id": "1009124039696392220",
+        "calls": 1,
+        "total_ms": "5.605",
+        "mean_ms": "5.605",
+        "rows": 0,
+        "shared_blks_hit": 1388,
+        "shared_blks_read": 1,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1778,
+        "query_id": "5881961739715027877",
+        "calls": 1,
+        "total_ms": "5.604",
+        "mean_ms": "5.604",
+        "rows": 1,
+        "shared_blks_hit": 32,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1779,
+        "query_id": "-514415369129209059",
+        "calls": 2,
+        "total_ms": "5.601",
+        "mean_ms": "2.800",
+        "rows": 2,
+        "shared_blks_hit": 194,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1780,
+        "query_id": "4877598690833940679",
+        "calls": 2,
+        "total_ms": "5.593",
+        "mean_ms": "2.797",
+        "rows": 14,
+        "shared_blks_hit": 336,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1781,
+        "query_id": "-1430507404792102211",
+        "calls": 1,
+        "total_ms": "5.593",
+        "mean_ms": "5.593",
+        "rows": 19,
+        "shared_blks_hit": 345,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1782,
+        "query_id": "2850331885636399421",
+        "calls": 1,
+        "total_ms": "5.590",
+        "mean_ms": "5.590",
+        "rows": 1,
+        "shared_blks_hit": 46,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1783,
+        "query_id": "-858514752826591464",
+        "calls": 1,
+        "total_ms": "5.588",
+        "mean_ms": "5.588",
+        "rows": 42,
+        "shared_blks_hit": 175,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1784,
+        "query_id": "-8504341217918429382",
+        "calls": 1,
+        "total_ms": "5.583",
+        "mean_ms": "5.583",
+        "rows": 72,
+        "shared_blks_hit": 1541,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1785,
+        "query_id": "-1026562189741799101",
+        "calls": 1,
+        "total_ms": "5.576",
+        "mean_ms": "5.576",
+        "rows": 0,
+        "shared_blks_hit": 239,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1786,
+        "query_id": "-6221647624844202538",
+        "calls": 1,
+        "total_ms": "5.558",
+        "mean_ms": "5.558",
+        "rows": 1,
+        "shared_blks_hit": 676,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1787,
+        "query_id": "1525566783741507106",
+        "calls": 1,
+        "total_ms": "5.521",
+        "mean_ms": "5.521",
+        "rows": 0,
+        "shared_blks_hit": 1122,
+        "shared_blks_read": 1,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1788,
+        "query_id": "3895844822089802663",
+        "calls": 1,
+        "total_ms": "5.521",
+        "mean_ms": "5.521",
+        "rows": 14,
+        "shared_blks_hit": 680,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1789,
+        "query_id": "-4351566209930530262",
+        "calls": 2,
+        "total_ms": "5.517",
+        "mean_ms": "2.759",
+        "rows": 192,
+        "shared_blks_hit": 726,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1790,
+        "query_id": "-419270212034379267",
+        "calls": 1,
+        "total_ms": "5.512",
+        "mean_ms": "5.512",
+        "rows": 19,
+        "shared_blks_hit": 110,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1791,
+        "query_id": "-4247743738663644036",
+        "calls": 1,
+        "total_ms": "5.512",
+        "mean_ms": "5.512",
+        "rows": 1,
+        "shared_blks_hit": 1149,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1792,
+        "query_id": "2729868401105792836",
+        "calls": 1,
+        "total_ms": "5.503",
+        "mean_ms": "5.503",
+        "rows": 1,
+        "shared_blks_hit": 3911,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1793,
+        "query_id": "-2562224021677949434",
+        "calls": 1,
+        "total_ms": "5.490",
+        "mean_ms": "5.490",
+        "rows": 19,
+        "shared_blks_hit": 699,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1794,
+        "query_id": "4779854846004180449",
+        "calls": 1,
+        "total_ms": "5.488",
+        "mean_ms": "5.488",
+        "rows": 0,
+        "shared_blks_hit": 939,
+        "shared_blks_read": 1,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1795,
+        "query_id": "-1271599558589821697",
+        "calls": 1,
+        "total_ms": "5.473",
+        "mean_ms": "5.473",
+        "rows": 11,
+        "shared_blks_hit": 10,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1796,
+        "query_id": "3743270115698538656",
+        "calls": 2,
+        "total_ms": "5.470",
+        "mean_ms": "2.735",
+        "rows": 4,
+        "shared_blks_hit": 50,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1797,
+        "query_id": "8290792934757043085",
+        "calls": 1,
+        "total_ms": "5.462",
+        "mean_ms": "5.462",
+        "rows": 3,
+        "shared_blks_hit": 263,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1798,
+        "query_id": "713115611182220011",
+        "calls": 1,
+        "total_ms": "5.461",
+        "mean_ms": "5.461",
+        "rows": 1,
+        "shared_blks_hit": 162,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1799,
+        "query_id": "3998784581218727900",
+        "calls": 3,
+        "total_ms": "5.452",
+        "mean_ms": "1.817",
+        "rows": 16,
+        "shared_blks_hit": 53,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1800,
+        "query_id": "-1258340301044727409",
+        "calls": 1,
+        "total_ms": "5.447",
+        "mean_ms": "5.447",
+        "rows": 5,
+        "shared_blks_hit": 79,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1801,
+        "query_id": "361686997968926754",
+        "calls": 1,
+        "total_ms": "5.445",
+        "mean_ms": "5.445",
+        "rows": 106,
+        "shared_blks_hit": 573,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1802,
+        "query_id": "2934234976892531695",
+        "calls": 1,
+        "total_ms": "5.442",
+        "mean_ms": "5.442",
+        "rows": 0,
+        "shared_blks_hit": 147,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1803,
+        "query_id": "-7587275500887307359",
+        "calls": 1,
+        "total_ms": "5.428",
+        "mean_ms": "5.428",
+        "rows": 1,
+        "shared_blks_hit": 553,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1804,
+        "query_id": "7086868767436720920",
+        "calls": 1,
+        "total_ms": "5.411",
+        "mean_ms": "5.411",
+        "rows": 2,
+        "shared_blks_hit": 19,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1805,
+        "query_id": "6402904015604637517",
+        "calls": 1,
+        "total_ms": "5.400",
+        "mean_ms": "5.400",
+        "rows": 190,
+        "shared_blks_hit": 22,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1806,
+        "query_id": "2808894460866860829",
+        "calls": 1,
+        "total_ms": "5.396",
+        "mean_ms": "5.396",
+        "rows": 1,
+        "shared_blks_hit": 11,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1807,
+        "query_id": "2830428983072684063",
+        "calls": 2,
+        "total_ms": "5.391",
+        "mean_ms": "2.696",
+        "rows": 2,
+        "shared_blks_hit": 18,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1808,
+        "query_id": "2797059324824148597",
+        "calls": 1,
+        "total_ms": "5.375",
+        "mean_ms": "5.375",
+        "rows": 46,
+        "shared_blks_hit": 205,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1809,
+        "query_id": "-1403596769918230464",
+        "calls": 1,
+        "total_ms": "5.353",
+        "mean_ms": "5.353",
+        "rows": 1,
+        "shared_blks_hit": 216,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1810,
+        "query_id": "8038933949201315003",
+        "calls": 1,
+        "total_ms": "5.337",
+        "mean_ms": "5.337",
+        "rows": 39,
+        "shared_blks_hit": 1127,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1811,
+        "query_id": "844692848276310410",
+        "calls": 12,
+        "total_ms": "5.337",
+        "mean_ms": "0.445",
+        "rows": 0,
+        "shared_blks_hit": 126,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1812,
+        "query_id": "-6745073989106932093",
+        "calls": 3,
+        "total_ms": "5.325",
+        "mean_ms": "1.775",
+        "rows": 0,
+        "shared_blks_hit": 187,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1813,
+        "query_id": "-5170945520055076989",
+        "calls": 1,
+        "total_ms": "5.319",
+        "mean_ms": "5.319",
+        "rows": 2,
+        "shared_blks_hit": 45,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1814,
+        "query_id": "-8443917860544730282",
+        "calls": 1,
+        "total_ms": "5.319",
+        "mean_ms": "5.319",
+        "rows": 1,
+        "shared_blks_hit": 40,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1815,
+        "query_id": "-9173845774207930156",
+        "calls": 1,
+        "total_ms": "5.316",
+        "mean_ms": "5.316",
+        "rows": 0,
+        "shared_blks_hit": 129,
+        "shared_blks_read": 4,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1816,
+        "query_id": "82806782555155166",
+        "calls": 1,
+        "total_ms": "5.307",
+        "mean_ms": "5.307",
+        "rows": 148,
+        "shared_blks_hit": 1092,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1817,
+        "query_id": "-842715048770155009",
+        "calls": 2,
+        "total_ms": "5.298",
+        "mean_ms": "2.649",
+        "rows": 2,
+        "shared_blks_hit": 588,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1818,
+        "query_id": "-5333880670881291984",
+        "calls": 2,
+        "total_ms": "5.284",
+        "mean_ms": "2.642",
+        "rows": 2,
+        "shared_blks_hit": 16,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1819,
+        "query_id": "3535769594667850523",
+        "calls": 1,
+        "total_ms": "5.283",
+        "mean_ms": "5.283",
+        "rows": 12,
+        "shared_blks_hit": 227,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1820,
+        "query_id": "8121866797893155922",
+        "calls": 1,
+        "total_ms": "5.261",
+        "mean_ms": "5.261",
+        "rows": 4,
+        "shared_blks_hit": 216,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1821,
+        "query_id": "-4988918961096010532",
+        "calls": 1,
+        "total_ms": "5.239",
+        "mean_ms": "5.239",
+        "rows": 5,
+        "shared_blks_hit": 85,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1822,
+        "query_id": "-9136795699544442164",
+        "calls": 1,
+        "total_ms": "5.237",
+        "mean_ms": "5.237",
+        "rows": 4,
+        "shared_blks_hit": 218,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1823,
+        "query_id": "-9024740624467908492",
+        "calls": 2,
+        "total_ms": "5.233",
+        "mean_ms": "2.617",
+        "rows": 7,
+        "shared_blks_hit": 235,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1824,
+        "query_id": "-117957112695451582",
+        "calls": 3,
+        "total_ms": "5.231",
+        "mean_ms": "1.744",
+        "rows": 24,
+        "shared_blks_hit": 240,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1825,
+        "query_id": "-8394079969798470249",
+        "calls": 1,
+        "total_ms": "5.230",
+        "mean_ms": "5.230",
+        "rows": 30,
+        "shared_blks_hit": 2192,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1826,
+        "query_id": "-7414058833922055116",
+        "calls": 3,
+        "total_ms": "5.227",
+        "mean_ms": "1.742",
+        "rows": 3,
+        "shared_blks_hit": 84,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1827,
+        "query_id": "-7163355426142229678",
+        "calls": 1,
+        "total_ms": "5.220",
+        "mean_ms": "5.220",
+        "rows": 2,
+        "shared_blks_hit": 36,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1828,
+        "query_id": "5070159525517563844",
+        "calls": 2,
+        "total_ms": "5.197",
+        "mean_ms": "2.599",
+        "rows": 0,
+        "shared_blks_hit": 292,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1829,
+        "query_id": "-2248956261512923289",
+        "calls": 1,
+        "total_ms": "5.194",
+        "mean_ms": "5.194",
+        "rows": 1,
+        "shared_blks_hit": 505,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1830,
+        "query_id": "-2608573232778951093",
+        "calls": 1,
+        "total_ms": "5.187",
+        "mean_ms": "5.187",
+        "rows": 0,
+        "shared_blks_hit": 1497,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1831,
+        "query_id": "8383687873075857053",
+        "calls": 1,
+        "total_ms": "5.182",
+        "mean_ms": "5.182",
+        "rows": 0,
+        "shared_blks_hit": 680,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1832,
+        "query_id": "1970160570191469924",
+        "calls": 3,
+        "total_ms": "5.179",
+        "mean_ms": "1.726",
+        "rows": 33,
+        "shared_blks_hit": 63,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1833,
+        "query_id": "3960633799455037335",
+        "calls": 1,
+        "total_ms": "5.179",
+        "mean_ms": "5.179",
+        "rows": 32,
+        "shared_blks_hit": 326,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1834,
+        "query_id": "551733922256173025",
+        "calls": 1,
+        "total_ms": "5.150",
+        "mean_ms": "5.150",
+        "rows": 1,
+        "shared_blks_hit": 15,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1835,
+        "query_id": "420781312679042096",
+        "calls": 1,
+        "total_ms": "5.147",
+        "mean_ms": "5.147",
+        "rows": 3,
+        "shared_blks_hit": 79,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1836,
+        "query_id": "8139633472448968951",
+        "calls": 2,
+        "total_ms": "5.113",
+        "mean_ms": "2.556",
+        "rows": 0,
+        "shared_blks_hit": 57,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1837,
+        "query_id": "247810856709971321",
+        "calls": 1,
+        "total_ms": "5.109",
+        "mean_ms": "5.109",
+        "rows": 0,
+        "shared_blks_hit": 46,
+        "shared_blks_read": 1,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1838,
+        "query_id": "-4646945988939010203",
+        "calls": 1,
+        "total_ms": "5.095",
+        "mean_ms": "5.095",
+        "rows": 0,
+        "shared_blks_hit": 1273,
+        "shared_blks_read": 1,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1839,
+        "query_id": "427335709072931812",
+        "calls": 1,
+        "total_ms": "5.095",
+        "mean_ms": "5.095",
+        "rows": 39,
+        "shared_blks_hit": 1168,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      {
+        "rank": 1840,
+        "query_id": "-3495117754631675070",
+        "calls": 4,
+        "total_ms": "5.086",
+        "mean_ms": "1.272",
+        "rows": 0,
+        "shared_blks_hit": 206,
+        "shared_blks_read": 0,
+        "temp_blks_read": 0,
+        "temp_blks_written": 0
+      }
+    ],
+    "previous_distinct": 1722,
+    "new_distinct": 75,
+    "overlap": 5,
+    "overlap_ids": [
+      "1480897739732465968",
+      "3819908102672187373",
+      "-5701675561689252360",
+      "-863185516116757489",
+      "-1730090163623809309"
+    ],
+    "cumulative_distinct": 1797,
+    "sql_text_read": false,
+    "not_current_hour_latency": true
+  },
+  "provider_writes": 0,
+  "github_source_test_ci_writes": 0,
+  "new_confirmed_app_defects": 0,
+  "justified_deletions": 0,
+  "baseline_complete": false,
+  "release_queue": "PRIOR_TWO_ISSUE509_NULL_GUARDS_STILL_TESTING_FIVE_SOURCE_CHECKS_UNVERIFIED",
+  "unverified": [
+    "effective hosted GoTrue/Auth/JWT/HTTP safeguards under #96",
+    "remaining provider-wide source-definition semantic word coverage",
+    "single-source five-check release eligibility for existing two development-only fixes"
+  ],
+  "next_cursor": "Fresh provider drift; pg_stat_statements ranks 1841-1920, then other not-yet-fully-reviewed provider definitions; Auth 27/27 current table definitions individually revisited"
+}

@@ -493,14 +493,96 @@
       "verified_absent_at_pin": true,
       "reviewed_live_commit": "da0680300a3e0b662f9670953c46bf407eaded46",
       "locked_policy_supersession": "2026-11-02 #417 Git-connected-only publisher"
+    },
+    {
+      "batch_id": "D2-039",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-039.json",
+      "path": "tests/immutable-function.test.py",
+      "blob_sha": "349aa931012604117037bec091957034e130cf43",
+      "range": [
+        1,
+        15
+      ],
+      "line_count": 15,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "ef1e635c06ab6301e72896378bfdeb270b1cfcaf",
+      "terminal_newline_not_physical_line": true
+    },
+    {
+      "batch_id": "D2-040",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-040.json",
+      "path": "tests/immutable-dist.test.py",
+      "blob_sha": "3c7e7c14db41df7aac68a63407f8df29390ead98",
+      "range": [
+        1,
+        44
+      ],
+      "line_count": 44,
+      "reviewed_live_commit": "18be0586921fc572178df6929ecd7a98278dd710",
+      "verified_absent_at_pin": true,
+      "local_python_tests_passed": 4
+    },
+    {
+      "batch_id": "D2-041",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-041.json",
+      "path": "tests/immutable-dist-manifest.test.py",
+      "blob_sha": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+      "range": [
+        1,
+        23
+      ],
+      "line_count": 23,
+      "reviewed_live_commit": "18be0586921fc572178df6929ecd7a98278dd710",
+      "verified_absent_at_pin": true,
+      "local_python_tests_passed": 4
+    },
+    {
+      "batch_id": "D2-042",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-042.json",
+      "path": "tests/helpers/release-published-restoration.mjs",
+      "blob_sha": "f0622af83742adb9b838f334fb10e01512375b56",
+      "range": [
+        1,
+        28
+      ],
+      "line_count": 28,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+      "changed_since_2026_11_05": true
+    },
+    {
+      "batch_id": "D2-043",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-043.json",
+      "path": "tests/netlify-digest-deploy.test.mjs",
+      "blob_sha": "e5c81e505c94e8b6001e9f4a48ea696b7d147a6e",
+      "range": [
+        1,
+        36
+      ],
+      "line_count": 36,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "7eb031071baa4360282b7e900abff4bcbfdbf5ba"
+    },
+    {
+      "batch_id": "D2-045",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-045.json",
+      "path": "tests/netlify-draft-transaction.test.mjs",
+      "blob_sha": "cc9885b0f694a926a8402e46c00385f82cd29658",
+      "range": [
+        1,
+        96
+      ],
+      "line_count": 96,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "4098579ab19f61659f8ce1dc3e53c32eb00220c6"
     }
   ],
-  "unique_source_lines_direct_reviewed": 1446,
-  "fully_reviewed_new_source_files": 38,
+  "unique_source_lines_direct_reviewed": 1688,
+  "fully_reviewed_new_source_files": 44,
   "nonoverlap": true,
   "changed_existing_pinned_paths": "46 modified pinned eligible files, structural-only inventory docs/audits/issue267-v2-post-pin-tree-drift-20261105-post-D2-035.json",
   "new_sql_migrations": "1 new migration structural-only; coordinate #96",
-  "remaining_added_code": "86 of 124 source candidates in original exact post-pin tree inventory lack full D2 receipts (newer live commit drift still requires reconciliation)",
+  "remaining_added_code": "UNRECONCILED original 2026-11-05 candidate snapshot; newer live tree and newly audited post-pin files require new structural inventory. Do not present old 86/124 estimate as a current count.",
   "runtime_app_acceptance": "FOCUSED_LOCAL_NODE22_3_PASS_FULL_APP_AND_PRODUCTION_NOT_RUN",
   "complete": false,
   "physical_line_accounting_rule": "Count actual 1-based non-virtual lines; terminal newline alone is line delimiter, never an extra blank physical line. Preserve source-authenticated original receipt even when superseded by an append-only correction.",
@@ -519,9 +601,9 @@
       "subtract_phantom_records": 4
     }
   ],
-  "last_review_batch": "D2-038",
-  "last_review_source_commit": "da0680300a3e0b662f9670953c46bf407eaded46",
-  "last_review_note": "D2-038 complete 133 physical source lines of dormant/superseded direct Netlify API publisher; policy #417 Git-connected-only scope conflict risk not active caller proven. Cumulative 1446 original new post-pin lines/38 full files, no runtime edit or new tests.",
+  "last_review_batch": "D2-045",
+  "last_review_source_commit": "4098579ab19f61659f8ce1dc3e53c32eb00220c6",
+  "last_review_note": "D2-045: 96 original post-pin tests/netlify-draft-transaction.test.mjs physical lines read with individual AI semantics, unchanged live blob, pinned ABSENT, no active defect proven or runtime/provider action. Full source/drift application audit remains OPEN.",
   "live_source_blob_revalidations": [
     {
       "path": "scripts/release/request-encrypted-backup.mjs",

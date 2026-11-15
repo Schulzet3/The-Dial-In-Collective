@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "subject": "DIC_ISSUE33_R211_ORIGINAL603_SELECTED_SOURCE_MERGED",
+  "date_utc": "2026-11-14",
+  "authority": "Issue #33 autonomous development-only original603 exact selected source semantic review",
+  "preflight": {
+    "development_sha": "de447bf68deedf478272688ebd7e03fd2d31f1cb",
+    "file_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "content_blob_equal": true
+  },
+  "original_benchmark": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "csv_git_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "modified": false,
+    "full_manual_certification": false,
+    "workflow_status": "SKIPPED"
+  },
+  "cases": [
+    {
+      "number": 317,
+      "name": "Kenya AA - Ndaroini Estate",
+      "official_url": "https://shop.justlovecoffee.com/products/kenya-aa-ndaroini-estate",
+      "selected_h1_verified": true,
+      "raw_bytes": 538312,
+      "raw_sha256": "ca872c1347dd837147095c8d67a74b7cc64df6c407b2d5862bd2ce449448d156",
+      "selected_shopify_product": {
+        "id": "9008646881518",
+        "handle": "kenya-aa-ndaroini-estate",
+        "tags": [
+          "Coffee_Light Roast",
+          "Light Roast"
+        ]
+      },
+      "current_fields": {
+        "name": "Kenya AA - Ndaroini Estate",
+        "roaster": "Just Love Coffee Roasters",
+        "tasting_notes": "Bright Peach, Golden Honey, Zesty Grapefruit",
+        "origin": "Ndaroini Factory, Nyeri, Kenya",
+        "elevation_m": "1,700 meters",
+        "process": "Washed",
+        "roast_level": "Light",
+        "producer": "dedicated farmers of the Ndaroini Factory"
+      },
+      "semantic_decision": "Exact selected inline Shopify own product id/title/handle and Light Roast tags directly support Light, not merely buyer preference or general menu; explicit origin/washed/elevation/notes direct. Unpublished variety not guessed.",
+      "add_coffee": true,
+      "source_review": true,
+      "conflicts": [],
+      "scope_certified": true
+    },
+    {
+      "number": 318,
+      "name": "Uganda AA - Lifesong",
+      "official_url": "https://shop.justlovecoffee.com/products/uganda-aa-lifesong",
+      "selected_h1_verified": true,
+      "raw_bytes": 602203,
+      "raw_sha256": "c3b2c2dc4c0f73e6c6f2ffa116048e41c6272d790dc76e49511011694e4cf12b",
+      "current_fields": {
+        "name": "Uganda AA - Lifesong",
+        "roaster": "Just Love Coffee Roasters",
+        "tasting_notes": "Chocolate, Brown Sugar, Dried Fruit",
+        "producer": "Lifesong Farms",
+        "origin": "Mt. Elgon, Uganda",
+        "roast_level": "Medium",
+        "elevation_m": "1,280 meters",
+        "process": "Washed",
+        "variety": "Bourbon & Typica"
+      },
+      "semantic_decision": "Direct selected At a Glance Medium overrides broad light-roast collection; Bududa describes community, not automatically farm; Manna Origins trade intermediary not selected producer. No borrowed unrelated SEO.",
+      "add_coffee": true,
+      "source_review": true,
+      "conflicts": [],
+      "scope_certified": true
+    }
+  ],
+  "red_first": {
+    "commit": "cf9a7e4df7f8aae25629806f84f35310bd17ea76",
+    "run": 43651332246,
+    "conclusion": "EXPECTED_SYNTHETIC_FAILURE_WITH_FALSE_LIVE_BLANK_ASSUMPTION",
+    "finding": "Conditional buyer preference incorrectly yielded Light in tagless synthetic product fragment; current full selected seller own Product JSON separately explicitly contains Light tag, so current merchant Light was correct. Corrected the live assertion to preserve own tagged Light."
+  },
+  "corrected_head": {
+    "commit": "977160327925659eadc2e9cc1e2d642a22c14530",
+    "selected_source_run": 43651805825,
+    "node_lint_run": 43651805698,
+    "approval": 43651805838,
+    "cloud_mobile": 43651805831,
+    "isolated_sql": 43651805711,
+    "security": 43651805671,
+    "python": 43651805719,
+    "official_other_roast_checks": [
+      43651805670,
+      43651805701,
+      43651805705
+    ],
+    "focused_tests": 9,
+    "node_pass": 4913,
+    "node_fail": 0,
+    "node_skip": 6
+  },
+  "merged": {
+    "commit": "de447bf68deedf478272688ebd7e03fd2d31f1cb",
+    "selected_source_run": 43652105711,
+    "node_lint_run": 43652105662,
+    "approval": 43652105660,
+    "cloud_mobile": 43652105657,
+    "python": 43652105647,
+    "other_official_runs": [
+      43652105700,
+      43652105667
+    ],
+    "node_total": 4919,
+    "node_pass": 4913,
+    "node_fail": 0,
+    "node_skip": 6,
+    "reviewed_source_and_proof_blobs_equal": true
+  },
+  "queue": {
+    "id": "DIC-Q-33-r211-original317-preference-and-selected-tag",
+    "state": "READY",
+    "production_deployed": false
+  },
+  "issue33": {
+    "state": "OPEN",
+    "original603_semantic_review_complete": false
+  },
+  "full_frozen603": {
+    "conclusion": "SKIPPED",
+    "not_claimed_pass": true
+  },
+  "prohibited_operations": {
+    "publish": false,
+    "production_sql": false,
+    "provider_writes": false,
+    "member_writes": false,
+    "secret_access": false,
+    "force_push": false,
+    "purchases": false
+  },
+  "authenticated_gotrue_device_tests": false
+}

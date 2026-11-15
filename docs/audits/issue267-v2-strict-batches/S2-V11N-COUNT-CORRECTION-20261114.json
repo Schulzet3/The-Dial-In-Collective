@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "date_utc": "2026-11-14",
+  "type": "APPEND_ONLY_FINDING_CORRECTION",
+  "supersedes_finding": "F201-BRANCH-COUNT-DELTA-UNEXPLAINED",
+  "prior_receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F201-281-340-20261114-V11N.json",
+  "prior_lines": [
+    285,
+    286,
+    287
+  ],
+  "prior_interpretation": "Earlier batch noted 37 - 15 = 22 versus after=23 and flagged one-branch unexplained possibility.",
+  "newly_retrieved_context": {
+    "original_blob": "0d4de9956466714548678030254d2060fb37c5fa",
+    "source_lines": [
+      484,
+      485,
+      486,
+      487,
+      488,
+      489
+    ],
+    "concurrent_new_branches_preserved": [
+      {
+        "name": "work/fast-flow-hybrid-20261022",
+        "sha": "259772b50ca98011a65b3efa9b07a03cda858339"
+      }
+    ],
+    "baseline_removed_count": 13,
+    "new_merged_work_refs_removed": 2,
+    "retained_refs_count": 23
+  },
+  "correct_reconciliation": "37 before - 15 removed + 1 concurrently created and preserved = 23 after; archived record explicitly names the one concurrent branch work/fast-flow-hybrid-20261022. Original count discrepancy is explained.",
+  "disposition": "RESOLVED_AS_NO_DEFECT; preserve prior immutable receipt plus this explicit correction rather than silently rewriting.",
+  "source_line_credit": "ZERO: original F201:484–489 consulted only for cross-context explanation; these positions are NOT marked strict independently reviewed here and await contiguous F201 audit.",
+  "effect": "No code, Git ref, backup, provider, member-data, production, READY or publication change."
+}

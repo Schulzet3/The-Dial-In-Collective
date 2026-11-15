@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "status": "DEPLOYED",
+  "release_id": "DIC-20261114-READY6-03",
+  "authority": "Owner November 14, 2026 explicit Publish all READY; six verified source-frozen items incl R191/R192 exact dependencies",
+  "source_branch": "release-candidates/20261114-ready6-isolated-02",
+  "tested_source_sha": "ed82fc7aed52b8c8bfac8a348133011b554f1c0b",
+  "controller_request_main_sha": "26ce6aa17aca5908ff52b0621e42178a144bb69c",
+  "controller_run_id": 43613190684,
+  "controller_conclusion": "success",
+  "release_sha": "5359d78c303f15231225282536cb6d1efa11beca",
+  "previous_release_sha": "69b066171b64a54f92d828ce99c51f29afb32780",
+  "netlify_site_id": "153277f2-e19e-4862-b9a6-f2e18ccde271",
+  "netlify_deploy_id": "6af885b8493af594f3ae403d",
+  "netlify_state": "ready",
+  "netlify_current": true,
+  "netlify_commit_sha": "5359d78c303f15231225282536cb6d1efa11beca",
+  "published_at_utc": "2026-11-14T16:01:18.662Z",
+  "netlify_functions": [
+    "coffee-url-preview",
+    "dic-admin-push",
+    "dic-admin-push-poll",
+    "dic-member-approval-poll"
+  ],
+  "netlify_secret_matches": 0,
+  "netlify_secret_scanned_files": 4509,
+  "candidate_required_ci_runs": {
+    "approval": 43612791659,
+    "validate": 43612791677,
+    "cloud_tests": 43612791625,
+    "mobile_browser_qa": 43612791625,
+    "sql": 43612791627
+  },
+  "five_checks_success": true,
+  "one_packaged_build_success": true,
+  "source_isolation": {
+    "published_base": "7bee5534d45649179b759f88135c8457957b856a",
+    "selected_ready_ids": [
+      "DIC-Q-28-owner-oauth-privacy-policy-20261114",
+      "DIC-Q-33-r191-275-276-post-ready-unnamed-growers",
+      "DIC-Q-33-r192-redhouse-selected-narrative-review",
+      "DIC-Q-33-r198-original291-source-prose-conflict",
+      "DIC-Q-455-r255-offline-recommendation-provenance-preview",
+      "DIC-Q-508-catalog-refresh-cooldown-copy-15s"
+    ],
+    "approved_deployable_paths": [
+      "build_cloud.mjs",
+      "site/cloud/coffee-url-autofill.js",
+      "site/cloud/main.js",
+      "site/cloud/mapping.js",
+      "site/privacy.html",
+      "site/styles.css",
+      "src/server/coffee-page-metadata.mjs",
+      "src/server/coffee-selected-description-sensory.mjs",
+      "src/server/coffee-selected-hero-notes-conflict.mjs"
+    ],
+    "unfinished_app_paths_restored": 5,
+    "unpublished_github_workflows_restored": 111,
+    "unready_tests_excluded": 18,
+    "workflow_only_test_excluded": 1,
+    "sql_migration_changes": 0,
+    "pinned_metadata_blob": "2d851cdd53619e0dd25f0fe4e82e4acf3cdbc808"
+  },
+  "database_change_risk": "none",
+  "recovery_evidence": {
+    "github_backup_run_id": 43496304957,
+    "artifact_id": 14072635105,
+    "encrypted_archive_sha256": "1555492507aceadd9a9bad2e32139896ba85d3d68050f0954043d3dc35cb9b46",
+    "private_offsite_file_id": "1v6b01ydDfR1RwWW2jRpVysyXzMUCCAbH",
+    "verified_at_utc": "2026-11-13T20:12:40.882Z"
+  },
+  "queue_counts_after": {
+    "DEPLOYED": 349,
+    "IN_PROGRESS": 7,
+    "TESTING": 2
+  },
+  "limitations": [
+    "Live HTTPS page request not verifiable via current web fetch; Netlify provider directly confirms production READY/current, expected privacy/index.html file, matching release Git SHA and function graph.",
+    "Signed-in real member/device acceptance not performed; CI browser suite passed.",
+    "Cloud-tests job SUCCESS with targeted cloud subset explicitly NOT_APPLICABLE; this is not misreported as test PASS.",
+    "Prior candidate 74fc225a had real Node failure; corrected candidate is ed82fc7 and all its required checks SUCCESS."
+  ]
+}

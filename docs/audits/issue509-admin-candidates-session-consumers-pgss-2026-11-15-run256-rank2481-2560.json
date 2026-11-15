@@ -1,0 +1,866 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 256,
+  "project_ref": "azviqqejypsefzilgonr",
+  "initial_verified_development_sha": "1580f675e4d51f307ee949ea3c65d15756ae539d",
+  "prewrite_development_sha": "1580f675e4d51f307ee949ea3c65d15756ae539d",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "observed_at": "2026-11-15 03:50:28.986932+00",
+  "provider_snapshot": {
+    "observed_at": "2026-11-15 03:50:28.986932+00",
+    "app_tables": 52,
+    "app_rls_disabled": 0,
+    "app_functions": 114,
+    "policies": 41,
+    "migrations": 69,
+    "pgss_rows": 4960
+  },
+  "complete_sql_definitions": [
+    {
+      "signature": "private.dic_admin_coffee_candidates(uuid)",
+      "md5": "cb3cc3677b37f577643d248db1060a43",
+      "chars": 2032,
+      "security_definer": true,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "auth_execute": true,
+      "service_execute": false,
+      "full_source": "CREATE OR REPLACE FUNCTION private.dic_admin_coffee_candidates(p_submission_id uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare s public.coffee_submissions;\nbegin\n perform private.require_member();\n if (select auth.uid()) is null or not private.is_admin() then\n   raise exception using errcode='42501',message='Administrator required.';\n end if;\n select * into s from public.coffee_submissions where id=p_submission_id and status in ('pending','conflict');\n if not found then raise exception using errcode='22023',message='Pending submission unavailable.'; end if;\n return jsonb_build_object('candidates',coalesce((\n   select jsonb_agg(row_data order by cname, cid)\n   from (\n     select c.id as cid,c.name as cname,\n       jsonb_build_object('id',c.id,'name',c.name,'roaster',c.roaster,\n         'release_label',c.release_label,'origin',c.origin,'process',c.process) as row_data\n     from public.coffees c\n     where c.verification_state='verified' and c.merged_into_id is null\n       and private.dic_canonical_roaster_key(c.roaster)=private.dic_canonical_roaster_key(s.proposed_data->>'roaster')\n       and (private.dic_coffee_key(c.name)=private.dic_coffee_key(s.proposed_data->>'name')\n          or extensions.similarity(private.dic_coffee_key(c.name),\n                 private.dic_coffee_key(s.proposed_data->>'name'))>=0.63)\n       and (c.release_label is null or nullif(s.proposed_data->>'release_label','') is null\n         or private.dic_coffee_key(c.release_label)=private.dic_coffee_key(s.proposed_data->>'release_label'))\n       and (c.origin is null or nullif(s.proposed_data->>'origin','') is null\n         or private.dic_coffee_key(c.origin)=private.dic_coffee_key(s.proposed_data->>'origin'))\n       and (c.process is null or nullif(s.proposed_data->>'process','') is null\n         or private.dic_coffee_key(c.process)=private.dic_coffee_key(s.proposed_data->>'process'))\n     order by c.name,c.id limit 25\n   ) candidates\n ),'[]'::jsonb));\nend $function$\n",
+      "range": [
+        1,
+        2032
+      ],
+      "verdict": "Direct 1–end full SQL: requires admitted member and admin; only pending/conflict submissions, verified unmerged coffees of canonical same roaster, release/origin/process comparators and 25-item cap. Narrower candidate filters differ from review_candidates; no proven duplicate removal. Real planner and admin JWT untested."
+    },
+    {
+      "signature": "private.dic_admin_records(text,integer,integer)",
+      "md5": "6976e717b7c5cbb34d8e3c41bc2aeba2",
+      "chars": 5386,
+      "security_definer": true,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "auth_execute": true,
+      "service_execute": false,
+      "full_source": "CREATE OR REPLACE FUNCTION private.dic_admin_records(p_kind text, p_offset integer DEFAULT 0, p_limit integer DEFAULT 50)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare n bigint; listing jsonb:='[]'::jsonb;\nbegin\n perform private.require_member();\n if auth.uid() is null or not private.is_admin() then\n  raise exception using errcode='42501',message='Administrator required.';\n end if;\n if p_kind is null or p_kind not in ('pending','conflicts','approved','shots','accounts')\n   or p_offset is null or p_offset<0 or p_offset>1000000\n   or p_limit is null or p_limit<1 or p_limit>50 then\n  raise exception using errcode='22023',message='Invalid listing parameters.';\n end if;\n if p_kind in ('pending','conflicts') then\n  select count(*) into n from public.coffee_submissions s\n   where s.status=case when p_kind='pending' then 'pending' else 'conflict' end;\n  select coalesce(jsonb_agg(v.row_data order by v.created_at,v.id),'[]'::jsonb) into listing\n  from (select s.id,s.created_at,jsonb_build_object(\n   'id',s.id,'revision',s.revision,'status',s.status,'created_at',s.created_at,\n   'creator_id',s.owner_id,'creator_email',u.email,'name',s.proposed_data->>'name',\n   'roaster',s.proposed_data->>'roaster','release_label',s.proposed_data->>'release_label',\n   'origin',s.proposed_data->>'origin','process',s.proposed_data->>'process',\n   'roast_level',s.proposed_data->>'roast_level','variety',s.proposed_data->>'variety',\n   'producer',s.proposed_data->>'producer','elevation_m',s.proposed_data->>'elevation_m',\n   'tasting_notes',s.proposed_data->>'tasting_notes','summary',s.proposed_data->>'summary',\n   'espressoNotes',s.proposed_data->>'espressoNotes','source_url',s.source_url\n  ) row_data from public.coffee_submissions s\n  left join auth.users u on u.id=s.owner_id\n  where s.status=case when p_kind='pending' then 'pending' else 'conflict' end\n  order by s.created_at,s.id limit p_limit offset p_offset) v;\n elsif p_kind='approved' then\n  select count(*) into n from public.coffees where verification_state='verified' and merged_into_id is null;\n  select coalesce(jsonb_agg(v.row_data order by v.created_at,v.id),'[]'::jsonb) into listing\n  from (select c.id,c.created_at,jsonb_build_object(\n   'id',c.id,'revision',c.revision,'created_at',c.created_at,\n   'creator_id',s.owner_id,'creator_email',u.email,\n   'name',c.name,'roaster',c.roaster,'release_label',c.release_label,\n   'origin',c.origin,'process',c.process,'roast_level',c.roast_level,\n   'variety',c.variety,'producer',c.producer,'elevation_m',c.elevation_m,\n   'tasting_notes',c.tasting_notes,'summary',c.summary,'espressoNotes',c.espresso_notes,\n   'source_url',(select x.source_url from public.coffee_sources x\n    where x.coffee_id=c.id order by x.checked_at desc,x.id desc limit 1)\n  ) row_data from public.coffees c\n  left join private.dic_coffee_first_entry f on f.coffee_id=c.id\n  left join public.coffee_submissions s on s.id=f.first_submission_id\n  left join auth.users u on u.id=s.owner_id\n  where c.verification_state='verified' and c.merged_into_id is null\n  order by c.created_at,c.id limit p_limit offset p_offset) v;\n elsif p_kind='shots' then\n  select count(*) into n from public.shots;\n  select coalesce(jsonb_agg(v.row_data order by v.pulled_at desc,v.id desc),'[]'::jsonb) into listing\n  from (select s.id,s.pulled_at,jsonb_build_object(\n   'id',s.id,'revision',s.revision,'created_at',s.created_at,'pulled_at',s.pulled_at,\n   'creator_id',s.owner_id,'creator_email',u.email,'hidden',s.hidden_at is not null,\n   'coffee_name',coalesce(c.name,p.proposed_data->>'name','Coffee unavailable'),\n   'library_entry_id',l.id,'coffee_id',l.coffee_id,'submission_id',l.submission_id,\n   'coffee_roaster',coalesce(c.roaster,p.proposed_data->>'roaster',''),\n   'style',s.style,'dose_g',s.dose_g,'yield_g',s.yield_g,'time_s',s.time_s,\n   'grind_setting',s.grind_setting,'temperature_c',s.temperature_c,\n   'extraction',s.extraction,'body',s.body,'clarity',s.clarity,\n   'sweetness',s.sweetness,'astringency',s.astringency,'notes',notes.notes,\n   'is_dialed_in',s.is_dialed_in\n  ) row_data from public.shots s\n  left join public.library_entries l on l.id=s.library_entry_id and l.owner_id=s.owner_id\n  left join public.coffees c on c.id=l.coffee_id\n  left join public.coffee_submissions p on p.id=l.submission_id\n  left join public.shot_notes notes on notes.owner_id=s.owner_id and notes.shot_id=s.id\n  left join auth.users u on u.id=s.owner_id\n  order by s.pulled_at desc,s.id desc limit p_limit offset p_offset) v;\n else\n  select count(*) into n from private.beta_members where admitted_at is not null;\n  select coalesce(jsonb_agg(v.row_data order by v.admitted_at desc,v.id),'[]'::jsonb) into listing\n  from (select m.owner_id id,m.admitted_at,jsonb_build_object(\n   'id',m.owner_id,'email',u.email,'created_at',m.created_at,'admitted_at',m.admitted_at,\n   'creator_id',m.owner_id,'creator_email',u.email,'enabled',m.enabled,\n   'admin',a.owner_id is not null\n  ) row_data from private.beta_members m\n  left join auth.users u on u.id=m.owner_id\n  left join private.app_admins a on a.owner_id=m.owner_id\n  where m.admitted_at is not null\n  order by m.admitted_at desc,m.owner_id limit p_limit offset p_offset) v;\n end if;\n return jsonb_build_object('kind',p_kind,'total',n,'offset',p_offset,\n   'items',coalesce(listing,'[]'::jsonb));\nend $function$\n",
+      "range": [
+        1,
+        5386
+      ],
+      "verdict": "Direct 1–end full SQL: admits admin only, valid kind and bounded offset <=1,000,000/limit <=50, returns pending/conflict, verified, shots (including notes), or accounts with email; privileged admin-only disclosure is intended but real Auth principal/session enforcement unverified. Large-offset query cost not measured; no safe deletion."
+    },
+    {
+      "signature": "private.dic_admin_review_candidates(uuid)",
+      "md5": "952b9cd2a21463f1073494a4d05b468f",
+      "chars": 2362,
+      "security_definer": true,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "auth_execute": true,
+      "service_execute": false,
+      "full_source": "CREATE OR REPLACE FUNCTION private.dic_admin_review_candidates(p_submission_id uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nDECLARE s public.coffee_submissions;\nBEGIN\n PERFORM private.require_member();\n IF auth.uid() IS NULL OR NOT private.is_admin() THEN\n  RAISE EXCEPTION USING errcode='42501',message='Administrator required.';\n END IF;\n SELECT * INTO s FROM public.coffee_submissions\n  WHERE id=p_submission_id AND status IN ('pending','conflict');\n IF NOT FOUND THEN\n  RAISE EXCEPTION USING errcode='22023',message='Pending submission unavailable.';\n END IF;\n RETURN jsonb_build_object('candidates',coalesce((\n  SELECT jsonb_agg(candidate ORDER BY similarity_score DESC,coffee_name,coffee_id)\n  FROM (\n   SELECT c.id AS coffee_id,c.name AS coffee_name,\n    CASE WHEN private.dic_coffee_key(c.name)=private.dic_coffee_key(s.proposed_data->>'name')\n         THEN 1::numeric ELSE extensions.similarity(private.dic_coffee_key(c.name),\n             private.dic_coffee_key(s.proposed_data->>'name'))::numeric END AS similarity_score,\n    jsonb_build_object(\n      'id',c.id,'name',c.name,'roaster',c.roaster,'origin',c.origin,\n      'process',c.process,'release_label',c.release_label,'producer',c.producer,\n      'variety',c.variety,'roast_level',c.roast_level,'elevation_m',c.elevation_m,\n      'tasting_notes',c.tasting_notes,'summary',c.summary,\n      'espressoNotes',c.espresso_notes,'source_url',\n         (SELECT source_url FROM public.coffee_sources cs\n          WHERE cs.coffee_id=c.id AND cs.source_url IS NOT NULL ORDER BY cs.checked_at DESC LIMIT 1),\n      'match_reason',CASE WHEN private.dic_coffee_key(c.name)=private.dic_coffee_key(s.proposed_data->>'name')\n         THEN 'Same roaster and coffee name' ELSE 'Same roaster and similar coffee name' END\n    ) AS candidate\n   FROM public.coffees c\n   WHERE c.verification_state='verified' AND c.merged_into_id IS NULL\n    AND private.dic_canonical_roaster_key(c.roaster)=private.dic_canonical_roaster_key(s.proposed_data->>'roaster')\n    AND (private.dic_coffee_key(c.name)=private.dic_coffee_key(s.proposed_data->>'name')\n     OR extensions.similarity(private.dic_coffee_key(c.name),private.dic_coffee_key(s.proposed_data->>'name'))>=0.63)\n   ORDER BY similarity_score DESC,c.name,c.id LIMIT 10\n  ) candidates\n ),'[]'::jsonb));\nEND $function$\n",
+      "range": [
+        1,
+        2362
+      ],
+      "verdict": "Direct 1–end full SQL: admitted admin only; verified unmerged coffees filtered by canonical roaster/name similarity, top 10 candidates with match reason; less restrictive than candidates helper (release/origin/process not required). Both appear intentionally distinct; UI callers not exhaustively resolved."
+    },
+    {
+      "signature": "private.dic_admin_review_signup(uuid,text,text)",
+      "md5": "7e0d3bf10542694b60177fcfa9c6f7be",
+      "chars": 2073,
+      "security_definer": true,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "auth_execute": true,
+      "service_execute": false,
+      "full_source": "CREATE OR REPLACE FUNCTION private.dic_admin_review_signup(p_member_id uuid, p_action text, p_expected_state text DEFAULT 'pending'::text)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare actor uuid:=auth.uid(); member private.beta_members; verified boolean;\nbegin\n perform private.require_member();\n if actor is null or not private.is_admin() then\n  raise exception using errcode='42501',message='Administrator required.';\n end if;\n if p_member_id is null or p_member_id=actor or p_action is null or p_action not in ('approve','reject')\n  or p_expected_state is distinct from 'pending' then\n  raise exception using errcode='22023',message='Invalid signup review.';\n end if;\n if exists(select 1 from private.app_admins where owner_id=p_member_id) then\n  raise exception using errcode='42501',message='Administrator protected.';\n end if;\n select * into member from private.beta_members where owner_id=p_member_id for update;\n if not found then\n  raise exception using errcode='22023',message='Account unavailable.';\n end if;\n -- A repeat click or concurrent reviewer must be safely rejected as stale.\n if member.signup_review_state <> p_expected_state or\n    member.admitted_at is not null or member.enabled then\n  return jsonb_build_object('ok',false,'code','stale_review');\n end if;\n select u.email_confirmed_at is not null into verified\n from auth.users u where u.id=p_member_id;\n if p_action='approve' and verified is distinct from true then\n  return jsonb_build_object('ok',false,'code','verify_email_first');\n end if;\n update private.beta_members set\n   signup_review_state=case when p_action='approve' then 'approved' else 'rejected' end,\n   enabled=(p_action='approve'),\n   admitted_at=case when p_action='approve' then now() else null end\n where owner_id=p_member_id;\n insert into private.dic_signup_review_events(member_id,actor_id,action,previous_state)\n values(p_member_id,actor,p_action,member.signup_review_state);\n return jsonb_build_object('ok',true,'decision',p_action,'member_id',p_member_id);\nend $function$\n",
+      "range": [
+        1,
+        2073
+      ],
+      "verdict": "Direct 1–end full SQL: admitted admin, prevents self/other-admin review, validates action and pending state, locks member row, stale guard, verified-email requirement for approval, audit event insert. No live member mutation/test performed."
+    },
+    {
+      "signature": "private.dic_admin_set_member_access(uuid,boolean)",
+      "md5": "d7a339f277e9da0d8393d5efcdbc0e89",
+      "chars": 2354,
+      "security_definer": true,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "auth_execute": true,
+      "service_execute": false,
+      "full_source": "CREATE OR REPLACE FUNCTION private.dic_admin_set_member_access(p_member_id uuid, p_enabled boolean)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare actor uuid:=auth.uid();m private.beta_members;found_member uuid;\nbegin\n if actor is null or not private.is_admin() then\n  raise exception using errcode='42501',message='Administrator access required.';\n end if;\n if p_member_id is null or p_enabled is null then\n  raise exception using errcode='22023',message='Member and desired access are required.';\n end if;\n -- Never allow an administrator to revoke themself OR ANY administrator.\n -- The underlying permanent admin role has no expiration.\n if p_member_id=actor or exists(select 1 from private.app_admins where owner_id=p_member_id) then\n  raise exception using errcode='42501',message='Administrator accounts cannot be removed here.';\n end if;\n -- Permanently deleting a member supersedes reversible Restore/Remove.\n if exists(select 1 from private.dic_admin_account_delete_operations\n   where target_id=p_member_id and phase<>'completed') then\n  raise exception using errcode='23514',message='Permanent deletion is underway; finish it before changing access.';\n end if;\n select * into m from private.beta_members where owner_id=p_member_id for update;\n if not found or m.admitted_at is null then\n  raise exception using errcode='22023',message='Only previously admitted members can be changed.';\n end if;\n if p_enabled and not exists(select 1 from auth.users where id=p_member_id and email_confirmed_at is not null) then\n  raise exception using errcode='42501',message='Verified email required.';\n end if;\n if m.enabled=p_enabled then\n  return jsonb_build_object('ok',true,'enabled',p_enabled,'unchanged',true);\n end if;\n update private.beta_members set enabled=p_enabled\n where owner_id=p_member_id returning owner_id into found_member;\n insert into private.admin_access_events(actor_id,action,member_id)\n values(actor,case when p_enabled then 'restore_access' else 'remove_access' end,found_member);\n -- No auth.users deletion, note deletion, contribution identity reidentification,\n -- historical mutation, or implicit sign-out of already issued Supabase tokens.\n -- All member RPCs and RLS must recheck private.is_member().\n return jsonb_build_object('ok',true,'enabled',p_enabled);\nend $function$\n",
+      "range": [
+        1,
+        2354
+      ],
+      "verdict": "Direct 1–end full SQL: admin-only, protects all admins, prevents change mid-permanent-delete, locks member row, restores admitted/verified only, audits changes. Explicitly does not revoke existing issued JWT; admission guard must be rechecked by downstream RPC/RLS, genuine HTTP not independently retested."
+    }
+  ],
+  "source_characters": 14207,
+  "numeric_only_pgss_range": [
+    2481,
+    2560
+  ],
+  "pgss_numeric_fingerprints": [
+    {
+      "rn": 2481,
+      "queryid": "-352218909528035445",
+      "calls": 1,
+      "total_ms": "2.307",
+      "mean_ms": "2.307",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2482,
+      "queryid": "-3700739317490812159",
+      "calls": 1,
+      "total_ms": "2.307",
+      "mean_ms": "2.307",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2483,
+      "queryid": "-1829998842606590477",
+      "calls": 1,
+      "total_ms": "2.305",
+      "mean_ms": "2.305",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2484,
+      "queryid": "2776800614622174050",
+      "calls": 1,
+      "total_ms": "2.301",
+      "mean_ms": "2.301",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2485,
+      "queryid": "6854286591207531826",
+      "calls": 1,
+      "total_ms": "2.301",
+      "mean_ms": "2.301",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2486,
+      "queryid": "1381974013430218211",
+      "calls": 1,
+      "total_ms": "2.298",
+      "mean_ms": "2.298",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2487,
+      "queryid": "-6318167770568037995",
+      "calls": 1,
+      "total_ms": "2.298",
+      "mean_ms": "2.298",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2488,
+      "queryid": "-6308311577056793863",
+      "calls": 1,
+      "total_ms": "2.297",
+      "mean_ms": "2.297",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2489,
+      "queryid": "2845566845589918991",
+      "calls": 1,
+      "total_ms": "2.290",
+      "mean_ms": "2.290",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2490,
+      "queryid": "4940451811331276710",
+      "calls": 1,
+      "total_ms": "2.288",
+      "mean_ms": "2.288",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2491,
+      "queryid": "6272888085488431577",
+      "calls": 2,
+      "total_ms": "2.288",
+      "mean_ms": "1.144",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2492,
+      "queryid": "-3744286915168757803",
+      "calls": 1,
+      "total_ms": "2.284",
+      "mean_ms": "2.284",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2493,
+      "queryid": "7345406459623434055",
+      "calls": 1,
+      "total_ms": "2.277",
+      "mean_ms": "2.277",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2494,
+      "queryid": "2791896387256581271",
+      "calls": 1,
+      "total_ms": "2.268",
+      "mean_ms": "2.268",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2495,
+      "queryid": "-8337901393576378341",
+      "calls": 1,
+      "total_ms": "2.268",
+      "mean_ms": "2.268",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2496,
+      "queryid": "8310712986913338692",
+      "calls": 150,
+      "total_ms": "2.267",
+      "mean_ms": "0.015",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2497,
+      "queryid": "8805141362983719260",
+      "calls": 1,
+      "total_ms": "2.258",
+      "mean_ms": "2.258",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2498,
+      "queryid": "-2226531987316565057",
+      "calls": 195,
+      "total_ms": "2.258",
+      "mean_ms": "0.012",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2499,
+      "queryid": "1820266033819742754",
+      "calls": 5,
+      "total_ms": "2.254",
+      "mean_ms": "0.451",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2500,
+      "queryid": "-5154137925250106754",
+      "calls": 1,
+      "total_ms": "2.250",
+      "mean_ms": "2.250",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2501,
+      "queryid": "-9177585197718182728",
+      "calls": 1,
+      "total_ms": "2.250",
+      "mean_ms": "2.250",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2502,
+      "queryid": "5590814422313121406",
+      "calls": 1,
+      "total_ms": "2.248",
+      "mean_ms": "2.248",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2503,
+      "queryid": "-8696278227109664334",
+      "calls": 1,
+      "total_ms": "2.244",
+      "mean_ms": "2.244",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2504,
+      "queryid": "-4240727900444426664",
+      "calls": 1,
+      "total_ms": "2.244",
+      "mean_ms": "2.244",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2505,
+      "queryid": "8966242228967577840",
+      "calls": 1,
+      "total_ms": "2.243",
+      "mean_ms": "2.243",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2506,
+      "queryid": "5047627376995366584",
+      "calls": 1,
+      "total_ms": "2.243",
+      "mean_ms": "2.243",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2507,
+      "queryid": "2428117962793700133",
+      "calls": 2,
+      "total_ms": "2.242",
+      "mean_ms": "1.121",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2508,
+      "queryid": "1857277010383215267",
+      "calls": 951,
+      "total_ms": "2.233",
+      "mean_ms": "0.002",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2509,
+      "queryid": "-4736726082167132006",
+      "calls": 1,
+      "total_ms": "2.225",
+      "mean_ms": "2.225",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2510,
+      "queryid": "-8180388808945343524",
+      "calls": 1,
+      "total_ms": "2.225",
+      "mean_ms": "2.225",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2511,
+      "queryid": "3742486637920121137",
+      "calls": 1,
+      "total_ms": "2.224",
+      "mean_ms": "2.224",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2512,
+      "queryid": "2731790318554997664",
+      "calls": 1,
+      "total_ms": "2.219",
+      "mean_ms": "2.219",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2513,
+      "queryid": "335635313198837858",
+      "calls": 1,
+      "total_ms": "2.216",
+      "mean_ms": "2.216",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2514,
+      "queryid": "-1223040056117158125",
+      "calls": 1,
+      "total_ms": "2.215",
+      "mean_ms": "2.215",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2515,
+      "queryid": "-6265843021180110243",
+      "calls": 1,
+      "total_ms": "2.211",
+      "mean_ms": "2.211",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2516,
+      "queryid": "7566848899920948816",
+      "calls": 1,
+      "total_ms": "2.207",
+      "mean_ms": "2.207",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2517,
+      "queryid": "35254486559168480",
+      "calls": 1,
+      "total_ms": "2.204",
+      "mean_ms": "2.204",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2518,
+      "queryid": "6138814499014642352",
+      "calls": 1,
+      "total_ms": "2.191",
+      "mean_ms": "2.191",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2519,
+      "queryid": "-4145591863691010905",
+      "calls": 1,
+      "total_ms": "2.183",
+      "mean_ms": "2.183",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2520,
+      "queryid": "-7715799070106145182",
+      "calls": 2,
+      "total_ms": "2.179",
+      "mean_ms": "1.089",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2521,
+      "queryid": "8900104557094327584",
+      "calls": 1,
+      "total_ms": "2.174",
+      "mean_ms": "2.174",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2522,
+      "queryid": "-2504835835574673758",
+      "calls": 1,
+      "total_ms": "2.174",
+      "mean_ms": "2.174",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2523,
+      "queryid": "3103004454445026753",
+      "calls": 1,
+      "total_ms": "2.171",
+      "mean_ms": "2.171",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2524,
+      "queryid": "-8741580442125390621",
+      "calls": 1,
+      "total_ms": "2.171",
+      "mean_ms": "2.171",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2525,
+      "queryid": "5919125809053153798",
+      "calls": 1,
+      "total_ms": "2.169",
+      "mean_ms": "2.169",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2526,
+      "queryid": "4925145173994498169",
+      "calls": 1,
+      "total_ms": "2.168",
+      "mean_ms": "2.168",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2527,
+      "queryid": "1550411816563030668",
+      "calls": 1,
+      "total_ms": "2.167",
+      "mean_ms": "2.167",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2528,
+      "queryid": "2229860533646467976",
+      "calls": 1,
+      "total_ms": "2.166",
+      "mean_ms": "2.166",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2529,
+      "queryid": "1650348951734901832",
+      "calls": 1,
+      "total_ms": "2.159",
+      "mean_ms": "2.159",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2530,
+      "queryid": "-2096287974431822716",
+      "calls": 1,
+      "total_ms": "2.155",
+      "mean_ms": "2.155",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2531,
+      "queryid": "-4114784872456284622",
+      "calls": 1,
+      "total_ms": "2.153",
+      "mean_ms": "2.153",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2532,
+      "queryid": "-3211611084791689612",
+      "calls": 1,
+      "total_ms": "2.152",
+      "mean_ms": "2.152",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2533,
+      "queryid": "-925550865052857636",
+      "calls": 1,
+      "total_ms": "2.145",
+      "mean_ms": "2.145",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2534,
+      "queryid": "5581911395308617896",
+      "calls": 2,
+      "total_ms": "2.144",
+      "mean_ms": "1.072",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2535,
+      "queryid": "3684570842476205288",
+      "calls": 3,
+      "total_ms": "2.140",
+      "mean_ms": "0.713",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2536,
+      "queryid": "-2334973631827599175",
+      "calls": 1,
+      "total_ms": "2.139",
+      "mean_ms": "2.139",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2537,
+      "queryid": "2621181860091426408",
+      "calls": 2,
+      "total_ms": "2.135",
+      "mean_ms": "1.068",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2538,
+      "queryid": "2344828420224338776",
+      "calls": 1,
+      "total_ms": "2.132",
+      "mean_ms": "2.132",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2539,
+      "queryid": "5230831537474604635",
+      "calls": 1,
+      "total_ms": "2.128",
+      "mean_ms": "2.128",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2540,
+      "queryid": "-4240907922250296655",
+      "calls": 2,
+      "total_ms": "2.122",
+      "mean_ms": "1.061",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2541,
+      "queryid": "2481030653314685193",
+      "calls": 3,
+      "total_ms": "2.119",
+      "mean_ms": "0.706",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2542,
+      "queryid": "-3363229838654430462",
+      "calls": 1,
+      "total_ms": "2.118",
+      "mean_ms": "2.118",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2543,
+      "queryid": "1021617269061216704",
+      "calls": 2,
+      "total_ms": "2.117",
+      "mean_ms": "1.059",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2544,
+      "queryid": "-6455043028707957380",
+      "calls": 1,
+      "total_ms": "2.106",
+      "mean_ms": "2.106",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2545,
+      "queryid": "-1409624684984489212",
+      "calls": 1,
+      "total_ms": "2.105",
+      "mean_ms": "2.105",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2546,
+      "queryid": "6693490071385055618",
+      "calls": 2,
+      "total_ms": "2.105",
+      "mean_ms": "1.052",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2547,
+      "queryid": "-3115377723798791318",
+      "calls": 1,
+      "total_ms": "2.100",
+      "mean_ms": "2.100",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2548,
+      "queryid": "8009279243159778320",
+      "calls": 1,
+      "total_ms": "2.097",
+      "mean_ms": "2.097",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2549,
+      "queryid": "-7983312632198597493",
+      "calls": 75,
+      "total_ms": "2.097",
+      "mean_ms": "0.028",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2550,
+      "queryid": "-24742130381959864",
+      "calls": 3,
+      "total_ms": "2.096",
+      "mean_ms": "0.699",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2551,
+      "queryid": "-7904868141858701816",
+      "calls": 2,
+      "total_ms": "2.090",
+      "mean_ms": "1.045",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2552,
+      "queryid": "8771972391025528385",
+      "calls": 1,
+      "total_ms": "2.089",
+      "mean_ms": "2.089",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2553,
+      "queryid": "-7724358217784083415",
+      "calls": 1,
+      "total_ms": "2.088",
+      "mean_ms": "2.088",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2554,
+      "queryid": "282786180983493581",
+      "calls": 1,
+      "total_ms": "2.088",
+      "mean_ms": "2.088",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2555,
+      "queryid": "6193120769255722246",
+      "calls": 2,
+      "total_ms": "2.088",
+      "mean_ms": "1.044",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2556,
+      "queryid": "8802142546161657411",
+      "calls": 3,
+      "total_ms": "2.085",
+      "mean_ms": "0.695",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2557,
+      "queryid": "-5617848540312104376",
+      "calls": 1,
+      "total_ms": "2.077",
+      "mean_ms": "2.077",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2558,
+      "queryid": "3029020226293327944",
+      "calls": 1,
+      "total_ms": "2.075",
+      "mean_ms": "2.075",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2559,
+      "queryid": "6685261244820984192",
+      "calls": 1,
+      "total_ms": "2.074",
+      "mean_ms": "2.074",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2560,
+      "queryid": "7442716631625702500",
+      "calls": 2,
+      "total_ms": "2.073",
+      "mean_ms": "1.037",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    }
+  ],
+  "prior_distinct": 2394,
+  "new_distinct": 77,
+  "overlap": 3,
+  "cumulative_distinct": 2471,
+  "client_consumer_source_verified_at_development_sha": "1580f675e4d51f307ee949ea3c65d15756ae539d",
+  "consumer_source_blobs": {
+    "site/cloud/client.js": "08e1ac1f2610dca9fad162272c8e3c7ea56566a5",
+    "site/cloud/main.js": "28c6f6026d0ff1e6fd6575d3813b76c06a29bb47",
+    "site/admin/main.js": "f0c158ae7b57277ab99551ce7bca94438bce6919"
+  },
+  "session_status_findings": "Current cloud client line 42 and admin main line 51 call public dic_session_status; current cloud main lines 192/275/311 checks admitted, approvalState, emailVerified, admin; admin main line 54 checks authenticated/admitted/admin. Literal communityLive=false, backupConfigured=false, mode=owner-test found in private.session_status but not consumed by these checked application entrypoints. Historical compatibility/other callers NOT exhaustively resolved, no speculative rename or deletion.",
+  "session_status_class": "LEGACY ACTIVE (RPC), status literals POTENTIAL HISTORICAL ONLY; unverified external consumers",
+  "advisory_class": "Existing notices are not standalone defect or deletion proof; unchanged known categories from this run's prior provider review.",
+  "query_rank_limit": "pg_stat_statements lifetime numeric IDs only; dynamic ordering and overlap prevent a gap-free full SQL text audit, no raw SQL text or member data inspected.",
+  "new_confirmed_defects": 0,
+  "justified_deletions": 0,
+  "app_code_test_ci_writes": 0,
+  "production_provider_writes": 0,
+  "source_bound_functional_tests": "NOT_RUN_DOCS_ONLY",
+  "baseline_complete": false,
+  "unverified": [
+    "#96 signed-in real HTTP/JWT and hosted console-only settings",
+    "full current GitHub migration byte parity for selected 5 SQL bodies",
+    "all frontend/external clients beyond inspected paths",
+    "system/vendor native internals",
+    "source-bound release isolation for 3 existing TESTING fixes"
+  ],
+  "next": "Fresh drift; pgss ranks 2561-2640; remaining provider full definitions/source parity and current SQL callers for dual admin candidate helpers"
+}

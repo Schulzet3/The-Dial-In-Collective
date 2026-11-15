@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "subject": "Issue #33 R212 selected official original603 #319-321 independently verified merged-source",
+  "date_utc": "2026-11-15",
+  "authority": "DEVELOPMENT ONLY Issue #33 multi-roaster selected source accuracy; not a release",
+  "preflight": {
+    "development_sha": "50c1299a05b699565ffb3c9f5df12121599a9656",
+    "file_git_blob": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "bytes_matched": true
+  },
+  "original_benchmark": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "csv_git_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "modified": false,
+    "original_oracle_scorer_modified": false
+  },
+  "source_pr": {
+    "number": 2787,
+    "head_sha": "46dc52a4f9d1e4e9d10c59584ec383051ddd35d2",
+    "merged_sha": "50c1299a05b699565ffb3c9f5df12121599a9656",
+    "reviewed_changed_blobs_equal": 4,
+    "merge_method": "nonforce squash",
+    "deploy": false
+  },
+  "cases": [
+    {
+      "number": 319,
+      "name": "Brazil Oberon",
+      "official_url": "https://shop.ohenryscoffee.com/products/brazil-oberon",
+      "chosen_h1": true,
+      "merged_html_bytes": 292670,
+      "merged_html_sha256": "edfd9eb7dca2052288f58c7137fa161e4cdbe50e68e8da3472ea22fb806e7678",
+      "parsed": {
+        "name": "Brazil Oberon",
+        "roaster": "O.Henrys Coffee",
+        "origin": "Cerrado, Brazil",
+        "tasting_notes": "sweet chocolate and citrus"
+      },
+      "review": "Exact selected description says grown in Cerrado; current parser already recovered finer region (historical snapshot had country only). Unpublished old roast Light/Medium not autofilled; unrelated products excluded.",
+      "conflicts": [],
+      "verified_current_selected": true
+    },
+    {
+      "number": 320,
+      "name": "Costa Rica Sonora Honey",
+      "official_url": "https://shop.ohenryscoffee.com/products/costa-rica-sonora-honey",
+      "chosen_h1": true,
+      "merged_html_bytes": 291183,
+      "merged_html_sha256": "2800555501c40ea5cfc723a443d2416d72e463fa5c54020a1c0394cf9e55cbcd",
+      "parsed": {
+        "name": "Costa Rica Sonora Honey",
+        "roaster": "O.Henrys Coffee",
+        "origin": "Central Valley, Costa Rica",
+        "process": "Other/Unknown",
+        "tasting_notes": "cherry, chocolate, hazelnut, and baking spice"
+      },
+      "review": "Current selected source describes blend of honey and natural processed coffees. Existing Other/Unknown coarse canonical process conservatively avoids false single Honey lot; no unsupported roast. Exact notes and region preserved.",
+      "conflicts": [],
+      "verified_current_selected": true
+    },
+    {
+      "number": 321,
+      "name": "Ethiopia Yirgacheffe",
+      "official_url": "https://shop.ohenryscoffee.com/products/ethiopia-yirgacheffe",
+      "chosen_h1": true,
+      "merged_html_bytes": 294681,
+      "merged_html_sha256": "079a44f11a72914e7cc50d95962f83e2e7c9eef7d8a36722cb46ccc2a3117037",
+      "parsed": {
+        "name": "Ethiopia Yirgacheffe",
+        "roaster": "O.Henrys Coffee",
+        "origin": "Yirgacheffe, Ethiopia",
+        "roast_level": "Light",
+        "tasting_notes": "sweet floral and citrus"
+      },
+      "review": "Chosen description explicitly says roasted light and notes floral/citrus. Mamo Kacha not promoted to unsupported producer role.",
+      "conflicts": [],
+      "verified_current_selected": true
+    }
+  ],
+  "ci": {
+    "head_sha": "46dc52a4f9d1e4e9d10c59584ec383051ddd35d2",
+    "head_selected": 43656224599,
+    "head_node_lint": 43656224521,
+    "head_cloud_browser": 43656224497,
+    "head_approval": 43656224540,
+    "head_isolated_sql": 43656224531,
+    "head_python": 43656224509,
+    "head_private_source": 43656224597,
+    "merged_sha": "50c1299a05b699565ffb3c9f5df12121599a9656",
+    "merged_selected": 43656612788,
+    "merged_node_lint": 43656612784,
+    "merged_cloud_browser": 43656612782,
+    "merged_approval": 43656612820,
+    "merged_python": 43656612787,
+    "focused_parser_tests": {
+      "pass": 7,
+      "fail": 0
+    },
+    "merged_node": {
+      "total": 4926,
+      "pass": 4920,
+      "fail": 0,
+      "skipped": 6
+    },
+    "merged_selected_sources": {
+      "attempted": 3,
+      "fetched": 3,
+      "parser_ok": 3,
+      "strict_afterproof_passed": true
+    },
+    "original_frozen603": "SKIPPED_NOT_FULL_SEMANTIC_CERTIFICATION",
+    "app_node_build": "SKIPPED_NOT_A_BUILD_PASS",
+    "browser_packaged_build": "PASS_PR_HEAD"
+  },
+  "state": {
+    "narrow_original_cases": "VERIFIED_CURRENT_SELECTED",
+    "queue_changed": false,
+    "parent_issue": "OPEN_INCOMPLETE",
+    "full603_manual_certification": false,
+    "provider_readback": "NOT_APPLICABLE_NO_PROVIDER_WRITES",
+    "next": "Original selected #322 onward; review changed/contradictory/inaccessible cases separately, no #267 V2 or #96 duplication"
+  }
+}

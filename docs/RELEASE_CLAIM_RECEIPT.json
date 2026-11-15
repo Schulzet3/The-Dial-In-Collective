@@ -1,69 +1,75 @@
 {
   "schema_version": 1,
-  "release_id": "DIC-20261114-READY6-03",
-  "tested_source_sha": "ed82fc7aed52b8c8bfac8a348133011b554f1c0b",
-  "previous_release_head_sha": "69b066171b64a54f92d828ce99c51f29afb32780",
-  "claimed_at_utc": "2026-11-14T16:00:47.295Z",
+  "release_id": "DIC-20261114-READY7-04",
+  "tested_source_sha": "e2d6e0a0dc4bf5aae37611a7bde5dfd99df84901",
+  "previous_release_head_sha": "5359d78c303f15231225282536cb6d1efa11beca",
+  "claimed_at_utc": "2026-11-15T04:30:39.682Z",
   "status": "GIT_CONNECTED_BUILD_PENDING_NETLIFY_PROVIDER_READBACK",
   "granted_single_publication": true,
   "approved_ready_queue_items": [
     {
-      "id": "DIC-Q-28-owner-oauth-privacy-policy-20261114",
-      "issue": 28,
-      "title": "Provide minimal public privacy policy for owner-only Google Drive OAuth consent",
-      "merged_source_sha": "d0b450db85f0c25b05fc65007de639852436ff66",
-      "scope_paths": [
-        "site/cloud/main.js",
-        "site/styles.css",
-        "site/privacy.html",
-        "build_cloud.mjs"
-      ]
-    },
-    {
-      "id": "DIC-Q-33-r191-275-276-post-ready-unnamed-growers",
+      "id": "DIC-Q-33-r202-300-current-selected-coordinated-finish",
       "issue": 33,
-      "title": "Preserve post-READY original603 #275-276 unnamed-grower correction in development only; exclude from owner-frozen READY7 release",
-      "merged_source_sha": "4c7bde4d3325bcee31ab0a25ade050d065a1735e",
-      "scope_paths": [
-        "src/server/coffee-page-metadata.mjs"
-      ]
-    },
-    {
-      "id": "DIC-Q-33-r192-redhouse-selected-narrative-review",
-      "issue": 33,
-      "title": "Preserve exact current selected intrinsic jasmine/lemon separately from Red House printed cupping notes (review only)",
-      "merged_source_sha": "4854b80adcc661c84adbe48da736e744f603f66d",
+      "title": "Preserve exact selected original603 #300 Black Lion unqualified floral, malty and blueberry notes without stronger-list or sibling override",
+      "merged_source_sha": "ddd4c209837c6f3d6f218327f75115b397e24bef",
       "scope_paths": [
         "src/server/coffee-selected-description-sensory.mjs",
         "src/server/coffee-page-metadata.mjs"
       ]
     },
     {
-      "id": "DIC-Q-455-r255-offline-recommendation-provenance-preview",
+      "id": "DIC-Q-455-r263-edited-provenance-wording",
       "issue": 455,
-      "title": "Preserve already-queued Use Recommendation provenance in offline Shot History preview",
-      "merged_source_sha": "87da54b3af6c5dc6a0fbf27bfdbaaf763819fbe5",
+      "title": "Qualify saved recommendation source after a shot's measurements are edited",
+      "merged_source_sha": "f13355675b72d99f6f1b2bf29977effbdf6c0796",
       "scope_paths": [
-        "site/cloud/mapping.js"
+        "site/cloud/shot_card.js"
       ]
     },
     {
-      "id": "DIC-Q-508-catalog-refresh-cooldown-copy-15s",
+      "id": "DIC-Q-508-netlify-comments-current-release-20261114",
       "issue": 508,
-      "title": "Correct cached coffee current-page refresh guidance to Locked member 15s and Admin exemption",
-      "merged_source_sha": "359c42382b53733cab15f4a90294a924497773f3",
+      "title": "Correct obsolete production branch, test preflight and first-invitation comments in netlify.toml",
+      "merged_source_sha": "9ecd9e2e0a2d14c215a9f5e30d8a1a59431eb199",
       "scope_paths": [
-        "site/cloud/coffee-url-autofill.js"
+        "netlify.toml"
       ]
     },
     {
-      "id": "DIC-Q-33-r198-original291-source-prose-conflict",
+      "id": "DIC-Q-33-r208-original311-current-family-producer",
       "issue": 33,
-      "title": "Withhold conflicting corroborated current selected Tanzania Peaberry flavor; retain both literal sources for member review",
-      "merged_source_sha": "8cf2c2bcec7881dc590d3de8366393863a45ef9b",
+      "title": "Recover corroborated current named family producer from exact selected same-H1 paragraph/span hero without sibling leakage",
+      "merged_source_sha": "ed3df9221614d9d2d3ab5c254a67215d7956951e",
       "scope_paths": [
-        "src/server/coffee-selected-hero-notes-conflict.mjs",
-        "src/server/coffee-page-metadata.mjs"
+        "src/server/coffee-selected-context-roles.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-r210-original315-316-family-farm-region",
+      "issue": 33,
+      "title": "Original603 #316 selected named Gamboa family farm growing region Northern Colombia versus dropped generic country",
+      "merged_source_sha": "434c3017271b056a61c7397fa7f6bb9ebc4788df",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-selected-named-farm-country-region.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-r211-original317-preference-and-selected-tag",
+      "issue": 33,
+      "title": "Original603 #317 conditional roast buyer-preference guard with exact own Shopify selected Light Roast tags preserved; #318 labeled Medium control",
+      "merged_source_sha": "de447bf68deedf478272688ebd7e03fd2d31f1cb",
+      "scope_paths": [
+        "src/server/roast-level-evidence.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-r270-temperature-context-provenance",
+      "issue": 455,
+      "title": "Show truthful prior-shot basket and feeding-mode context beside optional Log Shot temperature prefill",
+      "merged_source_sha": "8ece5359d7c50d92e52b6652f1ee1ae3ca5be700",
+      "scope_paths": [
+        "site/lib/engine.js"
       ]
     }
   ]

@@ -1,0 +1,880 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 254,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight_development_sha": "36d1ceacab15875dc21766e1a6407f132232e80c",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "provider_observed_at": "2026-11-15 01:43:20.739667+00",
+  "live_snapshot": {
+    "app_tables": 52,
+    "app_functions": 114,
+    "policies": 41,
+    "stored_migrations": 69,
+    "pgss_ids": 4948,
+    "all_app_tables_rls_enabled": true,
+    "edge_functions_active": 5
+  },
+  "github_credential_guard_source_blob": "c5878798feae9a37e29ce0da4d073507a266b50f",
+  "targeted_live_credential_guard_source_equal": true,
+  "full_importer_migration_replay_unverified": true,
+  "direct_current_sql_source_review": [
+    {
+      "signature": "private.apply_prototype_import(u uuid, doc jsonb)",
+      "md5": "2af6a48d0fe80841fcc27c1f1d5532e3",
+      "definition": "CREATE OR REPLACE FUNCTION private.apply_prototype_import(u uuid, doc jsonb)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare\n d jsonb:=doc->'data'; st jsonb; v jsonb; w jsonb; c jsonb; b jsonb; g jsonb; f jsonb; sh jsonb; p jsonb; t jsonb; x jsonb;\n sid uuid; vid uuid; lid uuid; bid uuid; bvid uuid; gid uuid; fid uuid; shotid uuid; subid uuid; bagid uuid; currentid uuid;\n source_key text; k text; target_style text; rc integer; missing_grind integer:=0; unknown_feed integer:=0; green_count integer:=0;\n result jsonb; snapshot jsonb;\nbegin\n if jsonb_typeof(doc) is distinct from 'object' or doc->>'format' is distinct from 'the-dial-in-collective-prototype-backup'\n    or jsonb_typeof(d) is distinct from 'object' or d->>'schemaVersion' is distinct from '1' or d->>'mode' is distinct from 'personal'\n    or octet_length(doc::text)>2097152 then\n  raise exception using errcode='22023',message='Choose a personal prototype backup (schema 1), at most 2 MB.';\n end if;\n -- Do not archive credentials accidentally embedded in a file.\n if exists(with recursive nodes(k,val) as (\n  select ''::text,doc union all\n  select z.key,z.value from nodes n cross join lateral (\n   select key,value from jsonb_each(case when jsonb_typeof(n.val)='object' then n.val else '{}' end)\n   union all\n   select '',value from jsonb_array_elements(case when jsonb_typeof(n.val)='array' then n.val else '[]' end)\n  ) z\n ) select 1 from nodes where lower(regexp_replace(nodes.k,'[^[:alnum:]]','','g')) in ('apikey','password','accesstoken','refreshtoken','servicerolekey','secretkey') and nodes.val not in ('null'::jsonb,'\"\"'::jsonb)) then\n  raise exception using errcode='22023',message='This backup contains a credential field. Export a credentials-free backup first.';\n end if;\n foreach k in array array['setups','coffees','shots','families'] loop\n  if jsonb_typeof(d->k) is distinct from 'array' then raise exception using errcode='22023',message='The backup is missing a required record list.'; end if;\n end loop;\n if jsonb_array_length(d->'setups')<>1 or jsonb_array_length(d->'coffees') not between 1 and 100\n    or jsonb_array_length(d->'shots')>2000 or jsonb_array_length(d->'families')>500 then\n  raise exception using errcode='22023',message='This first importer supports one setup, up to 100 coffees and 2000 shots. Nothing was imported.';\n end if;\n if d ? 'experiments' then\n  if jsonb_typeof(d->'experiments') is distinct from 'array' then\n   raise exception using errcode='22023',message='Retired Experiment archive is malformed. Keep the original backup; nothing was imported.';\n  end if;\n  if jsonb_array_length(d->'experiments')<>0 then\n   raise exception using errcode='22023',message='Retired Experiment records cannot be imported without loss. Keep the original backup; nothing was imported.';\n  end if;\n end if;\n if exists (\n  select 1 from jsonb_array_elements(d->'shots') as shot_data(value)\n  where (shot_data.value ? 'experimentId' and shot_data.value->'experimentId' <> 'null'::jsonb)\n     or (shot_data.value ? 'experiment_id' and shot_data.value->'experiment_id' <> 'null'::jsonb)\n ) then\n  raise exception using errcode='22023',message='Retired Experiment shot links require archival recovery. Keep the original backup; nothing was imported.';\n end if;\n st:=d->'setups'->0;\n if jsonb_typeof(st->'versions') is distinct from 'array' or jsonb_array_length(st->'versions')<>1 then\n  raise exception using errcode='22023',message='Backups with multiple hardware versions need the next migration adapter. Nothing was imported.';\n end if;\n v:=st->'versions'->0; w:=st->'workspaces'->(v->>'id');\n if st->>'activeVersionId' is distinct from v->>'id' or d->>'activeSetupId' is distinct from st->>'id' or jsonb_typeof(w) is distinct from 'object' then\n  raise exception using errcode='22023',message='The active workspace references are incomplete.';\n end if;\n if jsonb_typeof(v->'baskets') is distinct from 'array' or jsonb_array_length(v->'baskets') not between 1 and 30\n    or jsonb_typeof(v->'calibrations') is distinct from 'array' or jsonb_array_length(v->'calibrations') not between 1 and 50 then\n  raise exception using errcode='22023',message='Basket and grinder calibration history is required.';\n end if;\n if exists(select 1 from public.setups where owner_id=u) or exists(select 1 from public.library_entries where owner_id=u)\n    or exists(select 1 from public.shots where owner_id=u) then\n  raise exception using errcode='22023',message='This first import requires an empty cloud workspace. Existing data will not be replaced or merged automatically.';\n end if;\n foreach k in array array['coffees','shots','families'] loop\n  if exists(select 1 from jsonb_array_elements(d->k) a group by a->>'id' having count(*)>1)\n     or exists(select 1 from jsonb_array_elements(d->k) a where jsonb_typeof(a) is distinct from 'object' or coalesce(length(a->>'id'),0) not between 1 and 200) then\n   raise exception using errcode='22023',message='Duplicate or missing record IDs in the backup. Nothing was imported.';\n  end if;\n end loop;\n sid:=private.import_id(u,'setup',st->>'id'); vid:=private.import_id(u,'version',v->>'id');\n insert into public.setups(id,owner_id,name,created_at) values(sid,u,st->>'name',coalesce((st->>'createdAt')::timestamptz,(v->>'createdAt')::timestamptz,now()));\n insert into public.setup_versions(id,owner_id,setup_id,label,machine_model,grinder_model,burr_set,created_at)\n values(vid,u,sid,coalesce(v->>'label','Imported equipment'),nullif(v->>'machine',''),nullif(v->>'grinder',''),nullif(v->>'burrs',''),(v->>'createdAt')::timestamptz);\n for g in select value from jsonb_array_elements(v->'calibrations') loop\n  gid:=private.import_id(u,'calibration',g->>'id');\n  insert into public.grinder_calibrations(id,owner_id,setup_id,grinder_model,burr_set,finest_setting,coarsest_setting,created_at)\n  values(gid,u,sid,nullif(v->>'grinder',''),nullif(v->>'burrs',''),(g->>'min')::numeric,(g->>'max')::numeric,coalesce((g->>'at')::timestamptz,(v->>'createdAt')::timestamptz));\n end loop;\n for b in select value from jsonb_array_elements(v->'baskets') loop\n  bid:=private.import_id(u,'basket',b->>'id');bvid:=private.import_id(u,'basket_version',b->>'id');\n  insert into public.baskets(id,owner_id,setup_id,name,archived_at) values(bid,u,sid,b->>'name',case when (b->>'archived')::boolean then now() end);\n  insert into public.basket_versions(id,owner_id,setup_id,basket_id,basket_dose_g,model,created_at)\n  values(bvid,u,sid,bid,(b->>'doseG')::numeric,nullif(b->>'model',''),coalesce((b->>'createdAt')::timestamptz,(v->>'createdAt')::timestamptz));\n end loop;\n update public.setups set active_version_id=vid where id=sid;\n insert into public.setup_preferences(owner_id,setup_id,setup_version_id,calibration_id,default_basket_version_id,track_temperature,track_slow_feed,multiple_baskets,slow_feed,temperature_unit)\n values(u,sid,vid,private.import_id(u,'calibration',v->>'calibrationId'),private.import_id(u,'basket_version',v->>'defaultBasketId'),\n coalesce((v->'advanced'->>'temperature')::boolean,false),coalesce((v->'advanced'->>'slowFeed')::boolean,false),coalesce((v->'advanced'->>'baskets')::boolean,false),\n coalesce((v->>'slowFeed')::boolean,false),coalesce(v->>'tempUnit','F'));\n for c in select value from jsonb_array_elements(d->'coffees') loop\n  lid:=private.import_id(u,'coffee',c->>'id');subid:=private.import_id(u,'submission',c->>'id');\n  -- Only coffee facts, not bags or personal history, are sent for catalog review.\n  insert into public.coffee_submissions(id,owner_id,proposed_data,source_url,created_at)\n  values(subid,u,jsonb_build_object('name',c->>'name','roaster',c->>'roaster','origin',c->>'origin','elevation_m',c->>'elevationM',\n   'roast_level',nullif(c->>'roastLevel',''),'roastLevelSource',c->>'roastLevelSource','roastLevelBasis',c->>'roastLevelBasis',\n   'process',c->>'process','variety',c->>'variety','producer',c->>'producer','tasting_notes',c->>'tastingNotes',\n   'summary',c->>'summary','espressoNotes',c->>'espressoNotes','roaster_recipe',c->'roasterRecipe','release_label',c->>'release'),nullif(c->>'roasterUrl',''),(c->>'createdAt')::timestamptz);\n  if coalesce(length(btrim(c->>'name')),0) not between 1 and 200 or coalesce(length(btrim(c->>'roaster')),0) not between 1 and 200 then\n   raise exception using errcode='22023',message='Each coffee needs a name and roaster.';\n  end if;\n  insert into public.library_entries(id,owner_id,submission_id,hidden_at,created_at)\n  values(lid,u,subid,case when (c->>'hidden')::boolean then now() end,(c->>'createdAt')::timestamptz);\n  if jsonb_typeof(c->'bags') is distinct from 'array' or jsonb_array_length(c->'bags')>100 then raise exception using errcode='22023',message='Invalid bag list.'; end if;\n  for b in select value from jsonb_array_elements(c->'bags') loop\n   bagid:=private.import_id(u,'bag',(c->>'id')||':'||(b->>'id'));\n   insert into public.bags(id,owner_id,library_entry_id,roast_date,frozen,archived_at)\n   values(bagid,u,lid,nullif(b->>'roastDate','')::date,coalesce((b->>'frozen')::boolean,false),case when (b->>'archived')::boolean then now() end);\n  end loop;\n end loop;\n for f in select value from jsonb_array_elements(d->'families') loop\n  insert into public.personal_recipe_families(id,owner_id,library_entry_id,style,statistics,estimator_version,created_at)\n  values(private.import_id(u,'family',f->>'id'),u,private.import_id(u,'coffee',f->>'coffeeId'),f->>'style','{}','prototype_import_v1',(f->>'createdAt')::timestamptz);\n end loop;\n for sh in select value from jsonb_array_elements(d->'shots') order by value->>'timestamp',value->>'id' loop\n  if sh->>'setupId' is distinct from st->>'id' or sh->>'setupVersionId' is distinct from v->>'id' or sh->>'experimentId' is not null then\n   raise exception using errcode='22023',message='A shot has an unsupported equipment or experiment reference.';\n  end if;\n  foreach k in array array['doseG','yieldG','timeS'] loop\n   if jsonb_typeof(sh->k) is distinct from 'number' then raise exception using errcode='22023',message='Dose, yield and time must be recorded numbers.'; end if;\n  end loop;\n  foreach k in array array['grindSetting','tempC'] loop\n   if sh->>k is not null and jsonb_typeof(sh->k) is distinct from 'number' then raise exception using errcode='22023',message='Optional measurements must be numbers or null, not text.'; end if;\n  end loop;\n  t:=sh->'tasteScales';\n  foreach k in array array['extraction','body','clarity','sweetness','astringency'] loop\n   if jsonb_typeof(t->k) is distinct from 'number' or (t->>k)::numeric<>trunc((t->>k)::numeric) or (t->>k)::numeric not between 1 and 5 then\n    raise exception using errcode='22023',message='Historical shots need five recorded integer taste ratings. No ratings were invented.';\n   end if;\n  end loop;\n  snapshot:=sh->'snapshot';\n  select value into b from jsonb_array_elements(v->'baskets') where value->>'id'=sh->>'basketId';\n  select value into g from jsonb_array_elements(v->'calibrations') where value->>'id'=sh->>'calibrationId';\n  if b is null or g is null or jsonb_typeof(snapshot) is distinct from 'object'\n   or (snapshot->>'basketDoseG')::numeric is distinct from (b->>'doseG')::numeric\n   or (snapshot->>'grinderMin')::numeric is distinct from (g->>'min')::numeric\n   or (snapshot->>'grinderMax')::numeric is distinct from (g->>'max')::numeric\n   or nullif(snapshot->>'machine','') is distinct from nullif(v->>'machine','')\n   or nullif(snapshot->>'grinder','') is distinct from nullif(v->>'grinder','')\n   or nullif(snapshot->>'burrs','') is distinct from nullif(v->>'burrs','') then\n   raise exception using errcode='22023',message='A historical equipment snapshot differs from its version. Nothing was imported; this file needs a version-aware review.';\n  end if;\n  lid:=private.import_id(u,'coffee',sh->>'coffeeId');shotid:=private.import_id(u,'shot',coalesce(sh->>'legacyId',sh->>'id'));\n  fid:=case when sh->>'familyId' is not null then private.import_id(u,'family',sh->>'familyId') end;\n  if not ((t->>'extraction')::int=3 and (t->>'body')::int=3 and (t->>'clarity')::int=5 and (t->>'sweetness')::int=5 and (t->>'astringency')::int=1) then fid:=null; end if;\n  insert into public.shots(id,owner_id,library_entry_id,setup_id,setup_version_id,basket_version_id,calibration_id,bag_id,personal_family_id,style,pulled_at,\n   dose_g,yield_g,time_s,grind_setting,temperature_c,feed_mode,extraction,body,clarity,sweetness,astringency,equipment_snapshot,legacy_import,legacy_id,hidden_at)\n  values(shotid,u,lid,sid,vid,private.import_id(u,'basket_version',sh->>'basketId'),private.import_id(u,'calibration',sh->>'calibrationId'),\n   case when sh->>'bagId' is not null then private.import_id(u,'bag',(sh->>'coffeeId')||':'||(sh->>'bagId')) end,fid,sh->>'style',(sh->>'timestamp')::timestamptz,\n   (sh->>'doseG')::numeric,(sh->>'yieldG')::numeric,(sh->>'timeS')::numeric,(sh->>'grindSetting')::numeric,(sh->>'tempC')::numeric,coalesce(sh->>'feedMode','unknown'),\n   (t->>'extraction')::smallint,(t->>'body')::smallint,(t->>'clarity')::smallint,(t->>'sweetness')::smallint,(t->>'astringency')::smallint,'{}',true,coalesce(sh->>'legacyId',sh->>'id'),\n   case when (sh->>'hidden')::boolean then now() end);\n  insert into public.shot_notes(owner_id,shot_id,notes) values(u,shotid,coalesce(sh->>'notes',''));\n  if sh->>'grindSetting' is null then missing_grind:=missing_grind+1; end if;\n  if sh->>'feedMode' is null or sh->>'feedMode'='unknown' then unknown_feed:=unknown_feed+1; end if;\n end loop;\n for f in select value from jsonb_array_elements(d->'families') loop\n  perform private.refresh_personal_family(private.import_id(u,'family',f->>'id'));\n end loop;\n -- No style/time reclassification. Families with missing membership are not fabricated.\n if exists(select 1 from public.shots where owner_id=u and is_dialed_in and personal_family_id is null) then\n  raise exception using errcode='22023',message='A successful shot is missing its recipe family. This file needs a family mapping review.';\n end if;\n for c in select value from jsonb_array_elements(d->'coffees') loop\n  lid:=private.import_id(u,'coffee',c->>'id');p:=w->'coffees'->(c->>'id');\n  if jsonb_typeof(p) is distinct from 'object' then raise exception using errcode='22023',message='A coffee is missing its workspace preferences.'; end if;\n  insert into public.workspace_coffees(owner_id,setup_id,setup_version_id,library_entry_id,selected_style,basket_version_id,last_logged_at)\n  values(u,sid,vid,lid,p->>'style',case when p->>'basketId' is not null then private.import_id(u,'basket_version',p->>'basketId') end,\n   (select max(pulled_at) from public.shots where owner_id=u and library_entry_id=lid));\n  for target_style,source_key in select key,value from jsonb_each_text(coalesce(p->'currentFamilies','{}')) loop\n   fid:=private.import_id(u,'family',source_key);\n   if not exists(select 1 from public.shots where owner_id=u and library_entry_id=lid and setup_version_id=vid and shots.style=target_style and is_dialed_in and hidden_at is null and personal_family_id=fid) then\n    raise exception using errcode='22023',message='A Current Recipe is not supported by a successful shot on this setup.';\n   end if;\n   insert into public.recipe_preferences(owner_id,setup_id,setup_version_id,library_entry_id,style,current_family_id)\n   values(u,sid,vid,lid,target_style,fid);\n  end loop;\n end loop;\n currentid:=case when w->>'currentCoffeeId' is not null then private.import_id(u,'coffee',w->>'currentCoffeeId') end;\n if currentid is not null and not exists(select 1 from public.shots where owner_id=u and library_entry_id=currentid) then\n  raise exception using errcode='22023',message='An unlogged coffee cannot become Current during import.';\n end if;\n insert into public.workspace_state(owner_id,setup_id,setup_version_id,current_library_entry_id) values(u,sid,vid,currentid);\n update public.account_preferences set theme=d->>'theme',tasting_preferences=coalesce(d->>'preferences',''),active_setup_id=sid where owner_id=u;\n select count(*) into green_count from public.shots where owner_id=u and is_dialed_in;\n result:=jsonb_build_object('coffees',jsonb_array_length(d->'coffees'),'shots',jsonb_array_length(d->'shots'),'families',jsonb_array_length(d->'families'),\n  'setups',1,'dialedInShots',green_count,'missingGrind',missing_grind,'unknownFeed',unknown_feed,'currentCoffee',w->>'currentCoffeeId',\n  'sharedRecordsPublished',0,'archivePreserved',true);\n return result;\nend $function$\n",
+      "security_definer": true,
+      "settings": "{\"search_path=\\\"\\\"\"}",
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "service_execute": false,
+      "explicit_acl": "postgres=X/postgres",
+      "complete_source_characters": 16445,
+      "complete_range": [
+        1,
+        16445
+      ],
+      "source_lines": 193,
+      "review_status": "DIRECT_COMPLETE_CURRENT_PROVIDER_SQL_SOURCE",
+      "verdict": "Directly reviewed 2 MB limited personal prototype backup import, recursive credential-key validation, retired Experiment fail-closed records, empty workspace, archived bags, shots, notes and family provenance. Current separator credential guard is targeted source-equivalent to GitHub migration c5878798; full migration replay not done. Bag history remains LEGACY ACTIVE; no deletion."
+    },
+    {
+      "signature": "private.dic_admin_access_overview()",
+      "md5": "e377ac910af0115040ad8f881cb01bfc",
+      "definition": "CREATE OR REPLACE FUNCTION private.dic_admin_access_overview()\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n perform private.require_member();\n if auth.uid() is null or not private.is_admin() then\n  raise exception using errcode='42501',message='Administrator access required.';\n end if;\n return jsonb_build_object(\n  'members_total',(select count(*) from private.beta_members where admitted_at is not null),\n  'members',coalesce((\n   select jsonb_agg(jsonb_build_object(\n    'id',m.owner_id,'email',u.email,'enabled',m.enabled,\n    'admin',a.owner_id is not null,'admitted_at',m.admitted_at\n   ) order by (a.owner_id is not null) desc,m.admitted_at desc,m.owner_id)\n   from (select owner_id,enabled,admitted_at from private.beta_members\n     where admitted_at is not null order by admitted_at desc,owner_id limit 50) m\n   join auth.users u on u.id=m.owner_id\n   left join private.app_admins a on a.owner_id=m.owner_id\n  ),'[]'::jsonb),\n  'pending_deletions',coalesce((\n   select jsonb_agg(jsonb_build_object(\n    'id',op.id,'target_id',op.target_id,\n    'email',op.expected_impact->>'email',\n    'community_mode',op.community_mode,'phase',op.phase,'requested_at',op.requested_at\n   ) order by op.requested_at desc,op.id desc)\n   from private.dic_admin_account_delete_operations op\n   where op.actor_id=auth.uid() and op.phase<>'completed'\n  ),'[]'::jsonb)\n );\nend $function$\n",
+      "security_definer": true,
+      "settings": "{\"search_path=\\\"\\\"\"}",
+      "anon_execute": false,
+      "authenticated_execute": true,
+      "service_execute": false,
+      "explicit_acl": "postgres=X/postgres,authenticated=X/postgres",
+      "complete_source_characters": 1432,
+      "complete_range": [
+        1,
+        1432
+      ],
+      "source_lines": 35,
+      "review_status": "DIRECT_COMPLETE_CURRENT_PROVIDER_SQL_SOURCE",
+      "verdict": "Requires admitted admin, returns bounded 50 member records and actor-scoped pending deletions; member private data is not disclosed in this audit. Actual signed session acceptance remains #96 UNVERIFIED."
+    },
+    {
+      "signature": "private.dic_admin_account_delete_finish(p_operation_id uuid, p_actor_id uuid)",
+      "md5": "51cd64deed985a9ddf622926b8784a84",
+      "definition": "CREATE OR REPLACE FUNCTION private.dic_admin_account_delete_finish(p_operation_id uuid, p_actor_id uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare op private.dic_admin_account_delete_operations; removed integer:=0; community_ids uuid[]:='{}'::uuid[];\nbegin\n select * into op from private.dic_admin_account_delete_operations where id=p_operation_id for update;\n if not found or op.actor_id is distinct from p_actor_id then\n  raise exception using errcode='42501',message='Deletion operation unavailable.';\n end if;\n if op.phase='completed' then\n  return jsonb_build_object('ok',true,'completed',true,'community_removed',op.community_removed,'retry',true);\n end if;\n if op.phase<>'prepared' then raise exception using errcode='23514',message='Deletion was not prepared.'; end if;\n -- Never trust an edge-reported success alone. The DB verifies Auth is gone.\n if exists(select 1 from auth.users where id=op.target_id) then\n  raise exception using errcode='23514',message='Auth account still exists.';\n end if;\n if op.community_mode='remove' then\n  -- Capture IDs BEFORE removing their private association; only this member's\n  -- immutable contributor IDs may be selected, including detached old shots.\n  select coalesce(array_agg(cl.community_shot_id order by cl.community_shot_id),'{}'::uuid[])\n    into community_ids from private.contribution_links cl\n    where cl.contributor_id=any(op.contributor_ids);\n  -- Keep private review audit records but remove public references to purged shots.\n  update public.admin_reviews set community_shot_id=null\n    where community_shot_id=any(community_ids);\n  delete from private.contribution_links where community_shot_id=any(community_ids)\n    and contributor_id=any(op.contributor_ids);\n  delete from public.community_shots where id=any(community_ids);\n  get diagnostics removed=row_count;\n  -- Contributor tokens for removed data have no future weighting role.\n  delete from private.contributors c where c.id=any(op.contributor_ids)\n    and c.owner_id is null and not exists(\n      select 1 from private.contribution_links cl where cl.contributor_id=c.id);\n end if;\n update private.dic_admin_account_delete_operations\n  set phase='completed',community_removed=removed,completed_at=now(),\n      expected_impact=expected_impact-'email'-'member_id',\n      contributor_ids='{}'::uuid[] where id=op.id;\n return jsonb_build_object('ok',true,'completed',true,'community_removed',removed);\nend $function$\n",
+      "security_definer": true,
+      "settings": "{\"search_path=\\\"\\\"\"}",
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "service_execute": true,
+      "explicit_acl": "postgres=X/postgres,service_role=X/postgres",
+      "complete_source_characters": 2492,
+      "complete_range": [
+        1,
+        2492
+      ],
+      "source_lines": 45,
+      "review_status": "DIRECT_COMPLETE_CURRENT_PROVIDER_SQL_SOURCE",
+      "verdict": "Service-role-only finish checks operation actor and prepared status, confirms Auth account already gone, applies scoped optional Community cleanup, scrubs operation metadata. Production execution not attempted."
+    },
+    {
+      "signature": "private.dic_admin_account_delete_impact(p_member_id uuid)",
+      "md5": "a20e399d6c87c60be0661c80a17728d4",
+      "definition": "CREATE OR REPLACE FUNCTION private.dic_admin_account_delete_impact(p_member_id uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare member_email text;\nbegin\n select u.email into member_email from auth.users u\n join private.beta_members m on m.owner_id=u.id and m.admitted_at is not null\n where u.id=p_member_id;\n if not found then raise exception using errcode='22023',message='Admitted account unavailable.'; end if;\n return jsonb_build_object(\n  'member_id',p_member_id,'email',member_email,\n  'enabled',(select enabled from private.beta_members where owner_id=p_member_id),\n  'shots',(select count(*) from public.shots where owner_id=p_member_id),\n  'notes',(select count(*) from public.shot_notes where owner_id=p_member_id),\n  'library_entries',(select count(*) from public.library_entries where owner_id=p_member_id),\n  'submissions',(select count(*) from public.coffee_submissions where owner_id=p_member_id),\n  'setups',(select count(*) from public.setups where owner_id=p_member_id),\n  'community_shots',(select count(*) from private.contribution_links cl\n    join private.contributors c on c.id=cl.contributor_id where c.owner_id=p_member_id),\n  'eligible_community_shots',(select count(*) from private.contribution_links cl\n    join private.contributors c on c.id=cl.contributor_id\n    join public.community_shots cs on cs.id=cl.community_shot_id\n    where c.owner_id=p_member_id and cs.quality_state='eligible'),\n  'contributors',(select count(*) from private.contributors where owner_id=p_member_id)\n );\nend $function$\n",
+      "security_definer": true,
+      "settings": "{\"search_path=\\\"\\\"\"}",
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "service_execute": false,
+      "explicit_acl": "postgres=X/postgres",
+      "complete_source_characters": 1588,
+      "complete_range": [
+        1,
+        1588
+      ],
+      "source_lines": 30,
+      "review_status": "DIRECT_COMPLETE_CURRENT_PROVIDER_SQL_SOURCE",
+      "verdict": "Postgres-only internal impact function provides count aggregates for approved admin preview; no anonymous/member EXECUTE grants. Real authenticated HTTP testing remains #96."
+    },
+    {
+      "signature": "private.dic_admin_account_delete_prepare(p_operation_id uuid, p_actor_id uuid)",
+      "md5": "6e7e0589cbda1bc5023771724ce8b77f",
+      "definition": "CREATE OR REPLACE FUNCTION private.dic_admin_account_delete_prepare(p_operation_id uuid, p_actor_id uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare op private.dic_admin_account_delete_operations; ids uuid[]; actual jsonb; storage_blocked boolean:=false;\nbegin\n select * into op from private.dic_admin_account_delete_operations\n where id=p_operation_id for update;\n if not found or op.actor_id is distinct from p_actor_id then\n  raise exception using errcode='42501',message='Deletion operation unavailable.';\n end if;\n if op.phase='completed' then return jsonb_build_object('ok',true,'completed',true); end if;\n if not exists(select 1 from private.app_admins where owner_id=p_actor_id)\n    or not exists(select 1 from private.beta_members\n       where owner_id=p_actor_id and enabled and admitted_at is not null) then\n  raise exception using errcode='42501',message='Administrator no longer admitted.';\n end if;\n if exists(select 1 from private.app_admins where owner_id=op.target_id)\n    or op.target_id=p_actor_id then\n  raise exception using errcode='42501',message='Administrator accounts are protected.';\n end if;\n if op.phase='requested' then\n  if not exists(select 1 from auth.users where id=op.target_id) then\n   raise exception using errcode='23514',message='Target account is missing before preparation.';\n  end if;\n  -- Recheck the same preview under the service-side record lock.\n  -- No JWT actor impersonation or unsafe service-role bypass of an admin check.\n  actual:=private.dic_admin_account_delete_impact(op.target_id);\n  if actual is distinct from op.expected_impact then\n   raise exception using errcode='PT409',message='Account changed after confirmation.';\n  end if;\n  select coalesce(array_agg(c.id order by c.id),'{}'::uuid[]) into ids\n  from private.contributors c where c.owner_id=op.target_id;\n  -- Supabase Auth deletion refuses users who own Storage objects. Fail before\n  -- changing admission when the live provider exposes that table.\n  if to_regclass('storage.objects') is not null then\n   execute 'select exists(select 1 from storage.objects where owner=$1 or owner_id=$1::text)'\n     into storage_blocked using op.target_id;\n   if storage_blocked then\n    raise exception using errcode='23514',message='Member has Storage-owned objects; review before deletion.';\n   end if;\n  end if;\n  -- Prevent deletion of prior actor audit evidence if a formerly privileged user\n  -- was subsequently demoted. Do not silently erase immutable admin audits.\n  if exists(select 1 from private.admin_content_edits where actor_id=op.target_id) then\n   raise exception using errcode='23514',message='Historical administrative actor audit requires separate review.';\n  end if;\n  update private.beta_members set enabled=false where owner_id=op.target_id;\n  -- Eliminate restrictive user references; retain minimum action/timestamp audit.\n  update private.admin_content_edits\n     set subject_owner_id=null,before_values='{}'::jsonb,after_values='{}'::jsonb\n     where subject_owner_id=op.target_id;\n  delete from private.dic_source_attempts where owner_id=op.target_id;\n  update private.import_control\n     set owner_only_exception_owner_id=null,owner_only_exception_approved_at=null,\n         owner_only_exception_expires_at=null\n     where owner_only_exception_owner_id=op.target_id;\n  update private.dic_admin_account_delete_operations\n     set phase='prepared',contributor_ids=ids,prepared_at=now()\n     where id=op.id;\n  op.phase:='prepared';op.contributor_ids:=ids;\n end if;\n if op.phase='prepared' and exists(\n  select 1 from private.beta_members where owner_id=op.target_id and enabled\n ) then\n  raise exception using errcode='23514',message='Admission unexpectedly restored while deleting.';\n end if;\n return jsonb_build_object('ok',true,'target_id',op.target_id,'mode',op.community_mode,'phase',op.phase);\nend $function$\n",
+      "security_definer": true,
+      "settings": "{\"search_path=\\\"\\\"\"}",
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "service_execute": true,
+      "explicit_acl": "postgres=X/postgres,service_role=X/postgres",
+      "complete_source_characters": 3899,
+      "complete_range": [
+        1,
+        3899
+      ],
+      "source_lines": 72,
+      "review_status": "DIRECT_COMPLETE_CURRENT_PROVIDER_SQL_SOURCE",
+      "verdict": "Service-only preparation verifies admitted admin, target nonadmin, exact impact, Storage ownership and past admin audits; safely disables admission, captures contributor ids and makes retry possible. Production execution not attempted."
+    }
+  ],
+  "complete_source_characters": 25856,
+  "pgss_rank_range": [
+    2321,
+    2400
+  ],
+  "pgss_numeric_fingerprints": [
+    {
+      "rn": 2321,
+      "queryid": "1004128905842305094",
+      "calls": 1,
+      "total_ms": "2.745",
+      "mean_ms": "2.745",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2322,
+      "queryid": "133658444329827340",
+      "calls": 1,
+      "total_ms": "2.742",
+      "mean_ms": "2.742",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2323,
+      "queryid": "-7466967032018334553",
+      "calls": 1,
+      "total_ms": "2.739",
+      "mean_ms": "2.739",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2324,
+      "queryid": "-4292899643913491433",
+      "calls": 1,
+      "total_ms": "2.735",
+      "mean_ms": "2.735",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2325,
+      "queryid": "-6530092151934993548",
+      "calls": 1,
+      "total_ms": "2.733",
+      "mean_ms": "2.733",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2326,
+      "queryid": "-6102283072425530251",
+      "calls": 1,
+      "total_ms": "2.732",
+      "mean_ms": "2.732",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2327,
+      "queryid": "-7560322276431431768",
+      "calls": 9,
+      "total_ms": "2.729",
+      "mean_ms": "0.303",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2328,
+      "queryid": "6912081841854799915",
+      "calls": 1,
+      "total_ms": "2.727",
+      "mean_ms": "2.727",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2329,
+      "queryid": "8579691624614168370",
+      "calls": 1,
+      "total_ms": "2.724",
+      "mean_ms": "2.724",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2330,
+      "queryid": "-7631195609470736747",
+      "calls": 1,
+      "total_ms": "2.721",
+      "mean_ms": "2.721",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2331,
+      "queryid": "-8705165626873291309",
+      "calls": 2,
+      "total_ms": "2.721",
+      "mean_ms": "1.360",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2332,
+      "queryid": "-292476569214386662",
+      "calls": 1,
+      "total_ms": "2.719",
+      "mean_ms": "2.719",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2333,
+      "queryid": "-5266610002333145362",
+      "calls": 8,
+      "total_ms": "2.719",
+      "mean_ms": "0.340",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2334,
+      "queryid": "-7170532485155198663",
+      "calls": 1,
+      "total_ms": "2.715",
+      "mean_ms": "2.715",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2335,
+      "queryid": "-4499075410917139151",
+      "calls": 1,
+      "total_ms": "2.710",
+      "mean_ms": "2.710",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2336,
+      "queryid": "1214368106506215734",
+      "calls": 1,
+      "total_ms": "2.703",
+      "mean_ms": "2.703",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2337,
+      "queryid": "1170374989892716119",
+      "calls": 1,
+      "total_ms": "2.696",
+      "mean_ms": "2.696",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2338,
+      "queryid": "-4038860990663815979",
+      "calls": 1,
+      "total_ms": "2.695",
+      "mean_ms": "2.695",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2339,
+      "queryid": "4557660643817239140",
+      "calls": 1,
+      "total_ms": "2.681",
+      "mean_ms": "2.681",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2340,
+      "queryid": "-763128280526158178",
+      "calls": 1,
+      "total_ms": "2.676",
+      "mean_ms": "2.676",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2341,
+      "queryid": "833403759201206336",
+      "calls": 1,
+      "total_ms": "2.676",
+      "mean_ms": "2.676",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2342,
+      "queryid": "5719855278747077870",
+      "calls": 1,
+      "total_ms": "2.675",
+      "mean_ms": "2.675",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2343,
+      "queryid": "8369004708413045173",
+      "calls": 37,
+      "total_ms": "2.675",
+      "mean_ms": "0.072",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2344,
+      "queryid": "3978312930213198553",
+      "calls": 1,
+      "total_ms": "2.671",
+      "mean_ms": "2.671",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2345,
+      "queryid": "5988908734015787749",
+      "calls": 1,
+      "total_ms": "2.667",
+      "mean_ms": "2.667",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2346,
+      "queryid": "8824342556913097603",
+      "calls": 1,
+      "total_ms": "2.665",
+      "mean_ms": "2.665",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2347,
+      "queryid": "3990037298703329280",
+      "calls": 1,
+      "total_ms": "2.664",
+      "mean_ms": "2.664",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2348,
+      "queryid": "-9085778576333399400",
+      "calls": 1,
+      "total_ms": "2.660",
+      "mean_ms": "2.660",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2349,
+      "queryid": "-6186955774035542217",
+      "calls": 1,
+      "total_ms": "2.655",
+      "mean_ms": "2.655",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2350,
+      "queryid": "3040842925991214931",
+      "calls": 2,
+      "total_ms": "2.653",
+      "mean_ms": "1.327",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2351,
+      "queryid": "-5781253141569509895",
+      "calls": 1,
+      "total_ms": "2.653",
+      "mean_ms": "2.653",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2352,
+      "queryid": "-358369532390129784",
+      "calls": 3,
+      "total_ms": "2.652",
+      "mean_ms": "0.884",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2353,
+      "queryid": "-77785137484145729",
+      "calls": 1,
+      "total_ms": "2.649",
+      "mean_ms": "2.649",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2354,
+      "queryid": "-3366619158357605826",
+      "calls": 1,
+      "total_ms": "2.644",
+      "mean_ms": "2.644",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2355,
+      "queryid": "1450007994365522901",
+      "calls": 10,
+      "total_ms": "2.642",
+      "mean_ms": "0.264",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2356,
+      "queryid": "-1344138333981770915",
+      "calls": 7,
+      "total_ms": "2.640",
+      "mean_ms": "0.377",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2357,
+      "queryid": "4482747790925586761",
+      "calls": 1,
+      "total_ms": "2.634",
+      "mean_ms": "2.634",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2358,
+      "queryid": "-6225097345854842704",
+      "calls": 1,
+      "total_ms": "2.633",
+      "mean_ms": "2.633",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2359,
+      "queryid": "3022565386996650727",
+      "calls": 1,
+      "total_ms": "2.632",
+      "mean_ms": "2.632",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2360,
+      "queryid": "5173301812218954107",
+      "calls": 1,
+      "total_ms": "2.626",
+      "mean_ms": "2.626",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2361,
+      "queryid": "6384272946482952304",
+      "calls": 2,
+      "total_ms": "2.625",
+      "mean_ms": "1.313",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2362,
+      "queryid": "8779140324616800894",
+      "calls": 1,
+      "total_ms": "2.625",
+      "mean_ms": "2.625",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2363,
+      "queryid": "3395952858050540515",
+      "calls": 21,
+      "total_ms": "2.616",
+      "mean_ms": "0.125",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2364,
+      "queryid": "-163663077001743647",
+      "calls": 3,
+      "total_ms": "2.614",
+      "mean_ms": "0.871",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2365,
+      "queryid": "1074759105830296470",
+      "calls": 1,
+      "total_ms": "2.611",
+      "mean_ms": "2.611",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2366,
+      "queryid": "-8657363826271098810",
+      "calls": 1,
+      "total_ms": "2.611",
+      "mean_ms": "2.611",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2367,
+      "queryid": "8796223548684470331",
+      "calls": 1,
+      "total_ms": "2.610",
+      "mean_ms": "2.610",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2368,
+      "queryid": "6203436118283731680",
+      "calls": 1,
+      "total_ms": "2.606",
+      "mean_ms": "2.606",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2369,
+      "queryid": "1557536749837064229",
+      "calls": 1,
+      "total_ms": "2.594",
+      "mean_ms": "2.594",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2370,
+      "queryid": "780959927664373661",
+      "calls": 1,
+      "total_ms": "2.593",
+      "mean_ms": "2.593",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2371,
+      "queryid": "-6477992233380838568",
+      "calls": 1,
+      "total_ms": "2.589",
+      "mean_ms": "2.589",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2372,
+      "queryid": "-6195206209477644489",
+      "calls": 1,
+      "total_ms": "2.582",
+      "mean_ms": "2.582",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2373,
+      "queryid": "3483258578243981870",
+      "calls": 1,
+      "total_ms": "2.582",
+      "mean_ms": "2.582",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2374,
+      "queryid": "-8058235878288610722",
+      "calls": 1,
+      "total_ms": "2.581",
+      "mean_ms": "2.581",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2375,
+      "queryid": "-2414835967515601812",
+      "calls": 1,
+      "total_ms": "2.578",
+      "mean_ms": "2.578",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2376,
+      "queryid": "-5268355918141285194",
+      "calls": 1,
+      "total_ms": "2.573",
+      "mean_ms": "2.573",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2377,
+      "queryid": "7642552229014288828",
+      "calls": 1,
+      "total_ms": "2.572",
+      "mean_ms": "2.572",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2378,
+      "queryid": "-179474792929099706",
+      "calls": 1,
+      "total_ms": "2.572",
+      "mean_ms": "2.572",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2379,
+      "queryid": "7777133832852827033",
+      "calls": 1,
+      "total_ms": "2.568",
+      "mean_ms": "2.568",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2380,
+      "queryid": "6554569912433640346",
+      "calls": 1,
+      "total_ms": "2.555",
+      "mean_ms": "2.555",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2381,
+      "queryid": "-8863579438583042668",
+      "calls": 2,
+      "total_ms": "2.555",
+      "mean_ms": "1.278",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2382,
+      "queryid": "8318186609297658912",
+      "calls": 1,
+      "total_ms": "2.553",
+      "mean_ms": "2.553",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2383,
+      "queryid": "3890395114783204195",
+      "calls": 1,
+      "total_ms": "2.546",
+      "mean_ms": "2.546",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2384,
+      "queryid": "-1234920904756986507",
+      "calls": 8,
+      "total_ms": "2.543",
+      "mean_ms": "0.318",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2385,
+      "queryid": "5414334918816697247",
+      "calls": 2,
+      "total_ms": "2.535",
+      "mean_ms": "1.267",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2386,
+      "queryid": "-391413943224762005",
+      "calls": 1,
+      "total_ms": "2.533",
+      "mean_ms": "2.533",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2387,
+      "queryid": "-8463346310268812927",
+      "calls": 1,
+      "total_ms": "2.533",
+      "mean_ms": "2.533",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2388,
+      "queryid": "-212080471184523577",
+      "calls": 1,
+      "total_ms": "2.531",
+      "mean_ms": "2.531",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2389,
+      "queryid": "986916608682075659",
+      "calls": 2,
+      "total_ms": "2.530",
+      "mean_ms": "1.265",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2390,
+      "queryid": "-7348763113619350894",
+      "calls": 1,
+      "total_ms": "2.524",
+      "mean_ms": "2.524",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2391,
+      "queryid": "-4826881568887617851",
+      "calls": 1,
+      "total_ms": "2.524",
+      "mean_ms": "2.524",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2392,
+      "queryid": "-4705999419932176565",
+      "calls": 1,
+      "total_ms": "2.516",
+      "mean_ms": "2.516",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2393,
+      "queryid": "5083731204802487816",
+      "calls": 8,
+      "total_ms": "2.513",
+      "mean_ms": "0.314",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2394,
+      "queryid": "5830528892576308234",
+      "calls": 1,
+      "total_ms": "2.511",
+      "mean_ms": "2.511",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2395,
+      "queryid": "2200201816653568298",
+      "calls": 1,
+      "total_ms": "2.506",
+      "mean_ms": "2.506",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2396,
+      "queryid": "1709175232009955436",
+      "calls": 1,
+      "total_ms": "2.506",
+      "mean_ms": "2.506",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2397,
+      "queryid": "6201239374616693602",
+      "calls": 2,
+      "total_ms": "2.496",
+      "mean_ms": "1.248",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2398,
+      "queryid": "4409297995502301521",
+      "calls": 1,
+      "total_ms": "2.495",
+      "mean_ms": "2.495",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2399,
+      "queryid": "-1120166299297414382",
+      "calls": 2,
+      "total_ms": "2.492",
+      "mean_ms": "1.246",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2400,
+      "queryid": "-7064154445474821605",
+      "calls": 1,
+      "total_ms": "2.492",
+      "mean_ms": "2.492",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    }
+  ],
+  "prior_distinct": 2246,
+  "new_distinct": 74,
+  "overlap": 6,
+  "cumulative_distinct": 2320,
+  "rank_window_limitation": "Cumulative total execution-time order moves between observations; rank windows overlap and are NOT gap-free source coverage.",
+  "security_advisors": [
+    {
+      "name": "rls_enabled_no_policy",
+      "count": 13
+    },
+    {
+      "name": "authenticated_security_definer_function_executable",
+      "count": 10
+    },
+    {
+      "name": "auth_leaked_password_protection",
+      "count": 1
+    }
+  ],
+  "performance_advisors": [
+    {
+      "name": "unindexed_foreign_keys",
+      "count": 14
+    },
+    {
+      "name": "unused_index",
+      "count": 8
+    }
+  ],
+  "new_confirmed_defects": 0,
+  "justified_deletions": 0,
+  "production_writes": 0,
+  "code_changes": 0,
+  "baseline_complete": false,
+  "next": "Fresh provider drift; pgss 2401-2480; continue complete definition parity and #96 hosted assurance"
+}

@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "date_utc": "2026-11-14",
+  "scope": "ORIGINAL603_SELECTED_CURRENT_ICONIK_SOURCE_AND_ACTUAL_PARSER_R207",
+  "disposition": "TWO_NARROW_CASES_SOURCE_SUPPORTED_ONE_SELECTED_PRODUCER_OMISSION_PENDING_PARENT_OPEN",
+  "source": {
+    "initial_preflight_dev_sha": "0a0a4625fc6ea4f2f06d42f941a5494404435685",
+    "docs_preflight_dev_sha": "c238ca99ad90c680ef90d535d8df2a1e64dc6461",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "original_csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "original_csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "frozen_cases": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "source_pr": 2753,
+    "tested_pr_head": "4bdaee01dfeb02d35aa8b7f857853e826c39c0c0",
+    "merged_sha": "c238ca99ad90c680ef90d535d8df2a1e64dc6461",
+    "original_modified": false,
+    "oracle_modified": false,
+    "scorer_modified": false,
+    "matched_source_blobs": {
+      "tests/coffee-issue33-r207-original310-312.test.mjs": "72dc85116a10a9fa9d36b525b17ed2c64dc57c95",
+      "scripts/audit/issue33-r207-original310-312-check.mjs": "d371246ac5d9c9415e4e202a5f0c8e8fb95dc38c",
+      ".github/workflows/issue33-r207-original310-312.yml": "1e9048e371915be7ad817177af06faccd080bab9",
+      "docs/workstreams/ops-issue33-r207-310-312-20261114.md": "5a0353ad9122f180f57f75544eb7c9e90c282aed"
+    }
+  },
+  "cases": [
+    {
+      "number": 310,
+      "name": "Finca Costa Rica",
+      "url": "https://shop.iconikcoffee.com/products/finca-costa-rica",
+      "selected_h1": "Finca Costa Rica",
+      "raw_bytes": 754177,
+      "raw_sha256": "a68150ee24c8d45e2823fb2863443c3976f804d2d857efdf4f4874d49f80450c",
+      "parsed": {
+        "name": "Finca Costa Rica",
+        "roaster": "ICONIK",
+        "origin": "Santa María, Huila, Colombia",
+        "tasting_notes": "Cherry, prickly pear, buttery",
+        "variety": "Regional Varieties",
+        "producer": "Faver Ninco",
+        "process": "Washed",
+        "elevation_m": "2005m"
+      },
+      "source_detail": "Explicit Yeast Inoculated Washed, geographic source Colombia despite farm name Costa Rica",
+      "conflicts": [],
+      "disposition": "CURRENT_EXACT_SELECTED_SOURCE_AND_PARSER_VERIFIED"
+    },
+    {
+      "number": 311,
+      "name": "Volcán Atitlán Guatemala",
+      "url": "https://shop.iconikcoffee.com/products/washed-guatemala-finca-san-jeronimo",
+      "selected_h1": "Volcán Atitlán Guatemala",
+      "raw_bytes": 810868,
+      "raw_sha256": "c19c8a4bf2e363e2285e0e2654e532d4e0c14275e214982c74254f54bfa5b9d9",
+      "parsed": {
+        "name": "Volcán Atitlán Guatemala",
+        "roaster": "ICONIK",
+        "origin": "Guatemala",
+        "tasting_notes": "Black cherry, walnut, nougat",
+        "process": "Washed",
+        "variety": "Catuaí",
+        "elevation_m": "1300m"
+      },
+      "source_detail": "Same selected printed hero names Bressani Family, San Jerónimo Guatemala; selected story references Giorgio as third-generation producer on family farm, but canonical producer remains empty. Generic source-role correction needs independent red-first and hostile verification; do NOT invent literal as canonical or declare whole coffee field-complete.",
+      "conflicts": [],
+      "disposition": "CURRENT_SELECTED_IDENTITY_AND_OTHER_FIELDS_VERIFIED_PRODUCER_OMISSION_UNRESOLVED"
+    },
+    {
+      "number": 312,
+      "name": "Bressani Family Washed Sidra",
+      "url": "https://shop.iconikcoffee.com/products/washed-sidra-giorgio-bressani",
+      "selected_h1": "Bressani Family Washed Sidra",
+      "raw_bytes": 754902,
+      "raw_sha256": "acb056741aecae90dfaf302ff345b12556e584c59e691033f0d4e8d9e5caee54",
+      "parsed": {
+        "name": "Bressani Family Washed Sidra",
+        "roaster": "ICONIK",
+        "origin": "San Jerónimo, Guatemala",
+        "tasting_notes": "Chamomile, pear, juicy",
+        "release_label": "Exceptional Series",
+        "producer": "Bressani Family",
+        "process": "Washed",
+        "variety": "Sidra",
+        "elevation_m": "1550m"
+      },
+      "source_detail": "Ecuadorian describes variety origin, not present farm geography. Current coffee Guatemala; no inherited other cultivars or roast.",
+      "conflicts": [],
+      "disposition": "CURRENT_EXACT_SELECTED_SOURCE_AND_PARSER_VERIFIED"
+    }
+  ],
+  "ci": {
+    "pr_head": {
+      "selected": 43635701233,
+      "focused_tests": "7_PASS_0_FAIL",
+      "real_source": "3_OF_3_AFTERPROOF_SUCCESS",
+      "node": 43635701209,
+      "node_pass": 4874,
+      "node_fail": 0,
+      "node_skipped": 6,
+      "cloud_mobile": 43635701251,
+      "sql": 43635701172,
+      "python": 43635701226,
+      "approval": 43635701159,
+      "source_archive": 43635701138,
+      "all_applicable": "SUCCESS",
+      "full_frozen603": "SKIPPED_NOT_PASS"
+    },
+    "merged": {
+      "selected": 43636008713,
+      "focused_tests": "7_PASS_0_FAIL",
+      "real_source": "3_OF_3_AFTERPROOF_SUCCESS",
+      "node": 43636008701,
+      "node_pass": 4874,
+      "node_fail": 0,
+      "node_skipped": 6,
+      "lint": "PASS",
+      "build": "SKIPPED_NOT_PASS",
+      "cloud_mobile": 43636008711,
+      "python": 43636008697,
+      "approval": 43636008708,
+      "all_applicable": "SUCCESS",
+      "whole_original603": "SKIPPED_NOT_PASS"
+    },
+    "pr_artifact": {
+      "id": 14129369793,
+      "digest": "sha256:ce60f12762dacd9bcc2a26c0b34eb85d806f694bd374029dfae32ec2bcd81e89",
+      "independent_zip_rehash": false
+    }
+  },
+  "boundaries": {
+    "no_runtime_parser_change": true,
+    "no_readiness_promotion": true,
+    "issue33_open": true,
+    "full_semantic_603_done": false,
+    "source_only_ui_auth_is_synthetic": true,
+    "no_real_device_auth": true,
+    "production_provider_or_member_writes": 0,
+    "netlify_publish": false,
+    "backup_change": false,
+    "next": "Reproduce and resolve #311 source-present Bressani Family producer omission with generic positively/negatively bounded roles tests; then continue #313/#314 current selected source including coffee-roasting-site altitude versus green-growing elevation and Trade Secret roast"
+  }
+}

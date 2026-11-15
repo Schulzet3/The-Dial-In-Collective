@@ -14,7 +14,7 @@ import {extractCoffeeBlendEvidence} from '../../src/server/coffee-blend-evidence
 import {sameHandleCollectionAlternate,identicalCurrentSelectedTitle} from './issue33-selected-public-alternate.mjs';
 import {requiredFocusedSourceFailures} from './issue33-focused-source-acceptance.mjs';
 import {selectedShopifyCurrentVisibleIdentity} from './issue33-shopify-current-visible-identity.mjs';
-import {selectedProductHeadings,selectedProductFormH2,selectedProductPurchaseRootH2} from './issue33-selected-product-heading.mjs';
+import {selectedProductHeadings,selectedProductFormH2,selectedProductPurchaseRootH2,selectedSchemaProductOfferH2} from './issue33-selected-product-heading.mjs';
 import {selectedElementorWooCommerceH2} from './issue33-elementor-woocommerce-h2.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../../site/cloud/coffee-url-autofill.js';
 const sha=value=>createHash('sha256').update(value).digest('hex');
@@ -85,6 +85,7 @@ for(const target of targets){
    const selected=productMarkup(res.html);
    r.selected_h1=selectedProductHeadings(selected);
    r.selected_form_h2=selectedProductFormH2(selected);
+   r.selected_schema_offer_h2=selectedSchemaProductOfferH2(res.html,{source_url:r.final_url});
    r.selected_page_h2=selectedProductPurchaseRootH2(res.html);
    r.selected_elementor_h2=selectedElementorWooCommerceH2(res.html,{source_url:r.final_url});
    r.selected_h1_present_in_scoped_html=/<h1\b/i.test(selected);
@@ -113,6 +114,8 @@ for(const target of targets){
          ?r.selected_page_h2.some(h=>identicalCurrentSelectedTitle(target.Coffee,h,p?.fields?.name))
          :r.selected_elementor_h2.length
            ?r.selected_elementor_h2.some(h=>identicalCurrentSelectedTitle(target.Coffee,h,p?.fields?.name))
+           :r.selected_schema_offer_h2.length
+           ?r.selected_schema_offer_h2.some(h=>identicalCurrentSelectedTitle(target.Coffee,h,p?.fields?.name))
            :Boolean(r.selected_embedded_product_identity);
    // #122 exact original URL: chosen product adds visible availability qualifier
    // Final Batch, but only same producer, location, cultivars and labeled fields

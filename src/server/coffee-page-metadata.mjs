@@ -26,7 +26,7 @@ import {equivalentCoffeeProductNames,preferredCoffeeRoasterName,selectedCoffeeNa
 import {isolateCoffeeIdentityCohorts} from './coffee-source-identity-scope.mjs';
 import {extractCoffeeGeographyEntityRoles,cleanCoffeeGeographyEntityPrefix} from './coffee-geography-entity-roles.mjs';
 import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProductFlavorProfileEvidence,refineSelectedNamedTastingNotes,normalizeExplicitCoffeeTastingNotes,equivalentCoffeeTastingNotes,coffeeTastingNotesSubset} from './coffee-flavor-evidence.mjs';
-import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,refineSelectedCurrentTrailingFlavorNote,refineSelectedCurrentFlavorBase,refineSelectedCurrentSensoryArc,selectedCoffeeSupplementalTastingProse,selectedCurrentNarrativeAdditionalTastingNote,selectedCurrentMultiSentenceNarrativeNotes,selectedCurrentProductOvertone,selectedCurrentIntrinsicAromaContext,selectedCurrentUnlabeledFlavorPair} from './coffee-selected-description-sensory.mjs';
+import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,refineSelectedCurrentCoordinatedFinish,refineSelectedCurrentTrailingFlavorNote,refineSelectedCurrentFlavorBase,refineSelectedCurrentSensoryArc,selectedCoffeeSupplementalTastingProse,selectedCurrentNarrativeAdditionalTastingNote,selectedCurrentMultiSentenceNarrativeNotes,selectedCurrentProductOvertone,selectedCurrentIntrinsicAromaContext,selectedCurrentUnlabeledFlavorPair} from './coffee-selected-description-sensory.mjs';
 import {selectedCoffeeMilkSensoryContext} from './coffee-selected-milk-sensory-context.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {parseCoffeeElevation,equivalentCoffeeElevations,compatibleCoffeeElevations,extractCoffeeElevationEvidence} from './coffee-elevation-evidence.mjs';
@@ -41,6 +41,7 @@ import {countrywideEducationalOriginCorrection} from './coffee-countrywide-conte
 import {selectedFarmStoryRegionMismatch} from './coffee-title-region-evidence.mjs';
 import {selectedCurrentFarmGrowingLocality} from './coffee-selected-farm-growing-locality.mjs';
 import {selectedCurrentFarmCountryLocality} from './coffee-selected-farm-country-locality.mjs';
+import {selectedCurrentNamedFarmCountryRegion} from './coffee-selected-named-farm-country-region.mjs';
 import {selectedCurrentFarmVolcanoRegion} from './coffee-selected-farm-volcano-region.mjs';
 import {selectedCurrentNamedEstateCountyOrigin} from './coffee-selected-current-estate-county.mjs';
 import {selectedCountryFirstCurrentRegion} from './coffee-country-first-current-region.mjs';
@@ -443,6 +444,11 @@ function normalized(field,value,{allowFlavorProse=false,allowAnonymousProducer=f
  // "Family business with three generations of experience" is not a
  // named supplier. Do not infer the producer from a roaster biography.
  if(field==='producer'&&/^(?:a\s+)?family\s+business\s+with\s+(?:\d+|one|two|three|four|five)\s+generations?\s+of\b/iu.test(s))return '';
+ // An unnamed multi-generational family (even with expertise or nationality)
+ // describes anonymous growers, not an identified supplier. Do not erase a
+ // genuinely NAMED family (e.g. Rodriguez Family), direct Producer co-op or farm.
+ if(field==='producer'&&
+  /^(?:an?\s+)?(?:(?:(?:very|highly|extremely)\s+)?(?:experienced|knowledgeable|dedicated|skilled|respected|multi[ -]?generational)\s+){1,5}(?:[\p{Lu}][\p{L}\p{M}'-]{2,35}\s+)?famil(?:y|ies)$/iu.test(s))return '';
  // Indefinite quantities ("some of the top farms and small producers") do not
  // identify a real grower, co-op or named supplier. Keep the merchant claim
  // in source evidence for review without canonical producer promotion.
@@ -2124,6 +2130,18 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    if(finish)fields.tasting_notes=finish;
    // The selected current first-person cup statement can explicitly add
    // one final flavor note after its complete already accepted prefix.
+   // Only lower-ranked narrative and only the selected exact same sentence,
+   // never in place of a stronger direct labeled or structured flavor list.
+   const coordinated=(!printedNotes.length&&!structuredFlavorByFields.get(fields))?
+     refineSelectedCurrentCoordinatedFinish(currentProduct,{clean,notes:fields.tasting_notes}):'';
+   if(coordinated){
+    fields.tasting_notes=coordinated;
+    if(source_facts.length<384)source_facts.push({
+     field:'tasting_notes',label:'Current selected description coordinated finish',
+     value:coordinated,source_url,source_type:'html',
+     section:'Exact selected current coffee description'
+    });
+   }
    const trailing=refineSelectedCurrentTrailingFlavorNote(currentProduct,{clean,notes:fields.tasting_notes});
    if(trailing)fields.tasting_notes=trailing;
    // The chosen current paragraph's literal base and identical already
@@ -2742,6 +2760,24 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     field:'origin',label:'Exact selected producing farm town',
     value:locality.quote.slice(0,400),source_url,source_type:'html',
     section:'Exact selected current producing farm prose'
+   });
+  }
+ }
+
+ // Exact chosen H1, named cultivating family, current farm, published
+ // country and process all must agree before refining the broad Country.
+ if(fields.origin&&!conflicts.has('origin')){
+  const farmRegion=selectedCurrentNamedFarmCountryRegion({
+   name:fields.name,origin:fields.origin,producer:fields.producer,
+   process:fields.process,blocks:productCoffeeProse(canonicalProduct,clean)
+  });
+  if(farmRegion){
+   rememberCoffeeReviewCandidate(fields,'origin',fields.origin,'Broader selected country');
+   fields.origin=farmRegion.value;
+   if(source_facts.length<384)source_facts.push({
+    field:'origin',label:'Exact selected named farm growing region',
+    value:farmRegion.quote,source_url,source_type:'html',
+    section:'Current selected farm and named cultivating family'
    });
   }
  }

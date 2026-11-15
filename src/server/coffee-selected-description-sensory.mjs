@@ -91,6 +91,41 @@ export function refineSelectedCurrentLiteralFinish(html,{clean,notes}={}){
 }
 
 
+
+// Preserve a literal coordinated finish only when the selected coffee's
+// current paragraph repeats accepted tasting notes in the very same sentence.
+// Never use SEO, review, siblings, prior releases or conditional milk serving.
+export function refineSelectedCurrentCoordinatedFinish(html,{clean,notes}={}){
+ if(typeof html!=='string'||html.length>2_000_000||typeof clean!=='function'||
+    typeof notes!=='string'||notes.length<6||notes.length>180)return '';
+ const current=removeElements(html,['script','style','noscript','template','nav','aside','footer','header']);
+ const blocks=productCoffeeProse(current,clean);
+ const headings=blocks.filter(b=>b.tag==='h1'&&!b.educational);
+ if(headings.length!==1||!headings[0].text||headings[0].text.length>180)return '';
+ const title=fold(headings[0].text);
+ const sections=/^(?:description|product description|coffee description|about this coffee|about the coffee|about coffee|the coffee|coffee details|overview)$/u;
+ const forbidden=/\b(?:another|other|previous(?:ly)?|former(?:ly)?|historical(?:ly)?|hypothetical|might|could|would|if|unless|depending|alternative|instead|milk|creamer|syrup|prepared|brewed|served|added|mixed|cooled|heated|with cream)\b/iu;
+ const found=new Set();
+ for(const block of blocks){
+  if(block.tag!=='p'||block.educational||block.text.length<45||
+     block.text.length>1000||NONCURRENT_COFFEE_PROSE.test(block.text))continue;
+  const section=fold(block.section);
+  if(section&&section!==title&&!sections.test(section))continue;
+  for(const sentence of block.text.split(/(?<=[.!?])\s+/u).slice(0,12)){
+   if(sentence.length<45||sentence.length>550||forbidden.test(sentence)||
+      !fold(sentence).includes(fold(notes)))continue;
+   const match=sentence.match(/\bnotes?\b[^.!?]{0,200}?\b(?:creating|leaving|resulting\s+in)\s+(?:an?\s+)?(malty|nutty|chocolatey|chocolaty|fruity|floral|citrusy)\s+and\s+([\p{L}\p{M}]{3,32})\s+finish\b/iu);
+   if(!match)continue;
+   const end=match[2];
+   if(!/(?:berry|chocolate|cocoa|caramel|vanilla|citrus|cherry|apple|peach|pear|plum|orange|lemon|lime|honey|toffee|hazelnut|almond|grape|mango|guava|papaya|nougat|molasses|jasmine|tea|cinnamon|clove|pineapple|melon)$/iu.test(end))continue;
+   if(!normalizeExplicitCoffeeTastingNotes(match[1])||!normalizeExplicitCoffeeTastingNotes(end))continue;
+   const value=normalizeExplicitCoffeeTastingNotes([notes,match[1],end].join(', '));
+   if(value)found.add(value);
+  }
+ }
+ return found.size===1?[...found][0]:'';
+}
+
 // Exact selected-product additional literal prose: review context, NOT a
 // replacement for an independent, stronger printed Flavor/Notes label.
 export function selectedCoffeeSupplementalTastingProse(html,{clean,notes}={}){
