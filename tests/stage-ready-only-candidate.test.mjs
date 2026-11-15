@@ -291,3 +291,30 @@ test('#2837 co-selected chronological READY tip pins exact latest reviewed blob,
   assert.deepEqual(result.manifest.pinned_to_ready_paths,['site/card.js']);
  }finally{rmSync(f.root,{recursive:true,force:true});}
 });
+
+
+test('#2837 reviewed support exclusion respects a pinned READY/unready shared-file owner',()=>{
+ const f=fixture();
+ try{
+  f.queue.items.push({...f.queue.items[1],
+   id:'DIC-Q-33-r215-original325-327-current-offer-h2-water-decaf',
+   issue:33,state:'IN_PROGRESS',title:'Unfinished selected offer plus shared metadata',
+   scope_paths:['src/server/coffee-selected-offer-h2.mjs','site/card.js']});
+  f.write('src/server/coffee-selected-offer-h2.mjs','export const unpublished=true;');
+  f.write('scripts/audit/issue33-selected-product-heading.mjs',
+   "import {unpublished} from '../../src/server/coffee-selected-offer-h2.mjs';");
+  f.write('site/card.js','later UNREADY shared edit');
+  f.write('docs/RELEASE_QUEUE.json',JSON.stringify(f.queue,null,2)+'\n');
+  f.git('add','-A');f.git('commit','-qm','Track mixed unfinished support owner [skip netlify]');
+  f.development=f.git('rev-parse','HEAD');
+  const staged=stageReadyOnlyCandidate({repoDir:f.root,developmentSourceSha:f.development,
+   selectedIds:['DIC-Q-100'],branch:'release-candidates/issue2837-support-pinned',
+   pinnedReadyPaths:['site/card.js']});
+  assert.deepEqual(staged.manifest.pinned_to_ready_paths,['site/card.js']);
+  assert.ok(staged.manifest.excluded_unready_test_paths.includes(
+   'scripts/audit/issue33-selected-product-heading.mjs'));
+  assert.throws(()=>f.git('show',staged.candidate_sha+':scripts/audit/issue33-selected-product-heading.mjs'));
+  assert.throws(()=>f.git('show',staged.candidate_sha+':src/server/coffee-selected-offer-h2.mjs'));
+  assert.equal(f.git('show',staged.candidate_sha+':site/card.js'),'new READY card');
+ }finally{rmSync(f.root,{recursive:true,force:true});}
+});

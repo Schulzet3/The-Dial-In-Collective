@@ -71,7 +71,10 @@ export function discoverExcludedUnreadyTests({queue,selectedIds,restoredPaths,pi
    publishedSourceSha,developmentSourceSha,sourceObjectAt});
   if(!m&&!ownerDrive&&!support)continue;
   const issue=ownerDrive?28:support?.issue??Number(m[1]);
-  if(!(queue?.items||[]).some(i=>i.issue===issue&&!selected.has(i.id)&&
+  // A named support helper may have an unfinished owner spanning exact published
+  // restoration and a separately pinned READY file. reviewedUnreadySupport
+  // already proves every owning path and the absent required runtime.
+  if(!support&&!(queue?.items||[]).some(i=>i.issue===issue&&!selected.has(i.id)&&
     ['IN_PROGRESS','TESTING','BLOCKED','READY'].includes(i.state)&&
     i.scope_paths?.length>0&&i.scope_paths.every(x=>restored.has(x))))continue;
   if(sourceObjectAt(publishedSourceSha,path)!==null||
