@@ -6,7 +6,7 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
 import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
-import {selectedProductHeadings} from './issue33-selected-product-heading.mjs';
+import {selectedProductHeadings,selectedSchemaProductOfferH2} from './issue33-selected-product-heading.mjs';
 const cases=[
  {n:325,name:'Simpatico Organic Low Acid Half-Caff Coffee',url:'https://simpaticocoffee.com/products/organic-low-acid-half-caff-coffee'},
  {n:326,name:'Simpatico Organic Low Acid: Medium Smooth Roast',url:'https://simpaticocoffee.com/products/simpatico-low-acid-coffee-medium-smooth-roast'},
@@ -24,11 +24,12 @@ for(const c of cases){
  const r=summary.records?.find(x=>x.number===c.n)||{},e=[];
  let raw=Buffer.alloc(0);try{raw=readFileSync(join(dir,'case-'+c.n+'.html'));}catch{e.push('raw_missing');}
  const html=raw.toString('utf8'),chosen=productMarkup(html),heads=selectedProductHeadings(chosen);
+ const offered=selectedSchemaProductOfferH2(html,{source_url:c.url});
  const visible=chosen.replace(/<[^<>]{0,2000}>/gu,' ').replace(/\s+/gu,' ');
  const p=raw.length?extractPublicCoffeeFacts(html,{source_url:r.final_url||c.url}):{},f=p.fields||{},notes=String(f.tasting_notes||'');
  if(r.status!=='FETCHED'||r.official_url!==c.url||r.final_url!==c.url||r.parser_ok!==true)e.push('selected_fetch_or_parser_not_pass');
  if(raw.length<1000||raw.length!==r.html_bytes||sha(raw)!==r.html_sha256)e.push('raw_sha_unverified');
- if(!r.selected_heading_identity_verified||!heads.includes(c.name)||f.name!==c.name)e.push('chosen_product_identity_mismatch');
+ if(!r.selected_heading_identity_verified||!(heads.includes(c.name)||offered.includes(c.name))||f.name!==c.name)e.push('chosen_product_identity_mismatch');
  if(!r.add_coffee_ui_rendered||!r.source_review_rendered)e.push('preview_or_review_missing');
  if((p.conflicts||[]).includes('name')||f.espresso_recipe)e.push('identity_or_recipe_error');
  if(c.n===325){
@@ -45,7 +46,7 @@ for(const c of cases){
   if(f.process==='Washed')e.push('decaf_misclassified_as_green_washed');
  }
  errors.push(...e.map(x=>'#'+c.n+':'+x));
- products.push({number:c.n,official_url:c.url,raw_bytes:raw.length,raw_sha256:raw.length?sha(raw):null,selected_headings:heads,fields:f,conflicts:p.conflicts||[],passed:!e.length,errors:e,selected_excerpt:visible.slice(0,650)});
+ products.push({number:c.n,official_url:c.url,raw_bytes:raw.length,raw_sha256:raw.length?sha(raw):null,selected_headings:heads,selected_offer_h2:offered,fields:f,conflicts:p.conflicts||[],passed:!e.length,errors:e,selected_excerpt:visible.slice(0,650)});
 }
 const report={passed:errors.length===0,errors,checkout_sha:checkout,full603_semantic_certification:false,production_operations:0,products};
 writeFileSync(join(dir,'r215-original325-327-afterproof.json'),JSON.stringify(report,null,2)+'\n');

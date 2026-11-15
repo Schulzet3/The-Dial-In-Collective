@@ -38,6 +38,21 @@ const CURRENT_SELECTED_NAMED_WATER_DECAF=/\b([\p{Lu}][\p{L}\p{M}'’.-]{2,45}(?:
 // with "Decaffeinated using the Swiss Water Process, ...". The treatment is
 // directly asserted by that selected paragraph, not by a sitewide guide,
 // unrelated product, old lot, generic washing, or the title alone.
+// An exact selected full-decaf product may say "<named coffee> is mountain
+// water processed" rather than "is decaffeinated using Mountain Water".
+// The grammatical subject must be an exact distinctive prefix of the chosen
+// coffee's name. Never borrow a sibling, FAQ, SEO or historical method.
+const CURRENT_SELECTED_NAMED_WATER_PROCESSED=/^([\p{L}][\p{L}\p{M}'’ -]{8,110}?)\s+is\s+(?:swiss|mountain)[ -]?water\s+processed\b/iu;
+function selectedNamedWaterProcessed(name,line){
+ if(!decafOnlyCoffee(name))return '';
+ const hit=String(line).match(CURRENT_SELECTED_NAMED_WATER_PROCESSED);
+ if(!hit||NONCURRENT_DECAF_METHOD.test(line))return '';
+ const subject=fold(hit[1]).replace(/\s+coffee$/u,'').split(/\s+/u);
+ const title=fold(name).split(/\s+/u);
+ if(subject.length<3||subject.length>8||subject.some((w,i)=>title[i]!==w))return '';
+ return hit[0];
+}
+
 const CURRENT_SELECTED_DIRECT_DECAFFEINATED_WATER=/^decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?(?:swiss|mountain)[ -]?water\s+process\b/iu;
 const CURRENT_SELECTED_BEANS_WATER_DECAF=/^(?:these|our|this)\s+(?:(?:[\p{L}\p{M}-]+|&)\s+){0,12}beans\s+(?:are|were)\s+(?:naturally\s+)?decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?['"‘’]?(?:swiss|mountain)[\s-]?water['"‘’]?(?:\s+process)?\b/iu;
 const CURRENT_SELECTED_OUR_WATER_DECAF=/(?:^|[.!?]\s+)using\s+the\s+(?:swiss|mountain)[\s-]?water\s+process,\s+our\s+decaf\s+uses\b(?:[^.!?]|\d\.\d){0,240}\bcaffeine[\s-]?free\b/iu;
@@ -515,6 +530,18 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
     else decafEvidenceOverflow=true;
    }
   }
+  // Direct current selected decaf introduction: "<specific coffee name> is
+  // Mountain Water processed". No unrelated family, regular coffee or SEO.
+  const selectedWaterProcessed=selectedNamedWaterProcessed(name,line);
+  if(decafOnlyCoffee(name)&&b.tag==='p'&&!b.educational&&line.length<=650&&
+     selectedWaterProcessed&&
+     !/^(?:faq|frequently asked questions|common questions|decaf process education)$/iu.test(String(b.section||'').trim())&&
+     inferDecaffeinationMethod({name,selectedMethod:selectedWaterProcessed})==='Water Process'&&
+     !decafEvidence.has(selectedWaterProcessed)){
+   if(decafEvidence.size<4)decafEvidence.add(selectedWaterProcessed);
+   else decafEvidenceOverflow=true;
+  }
+
   // Exact current selected H1 + directly selected description: an introductory
   // passive "Decaffeinated using the Swiss Water Process" is affirmative
   // selected-coffee provenance, even without an explicit "this coffee" subject.

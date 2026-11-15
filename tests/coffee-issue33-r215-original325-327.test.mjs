@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
+import {selectedSchemaProductOfferH2} from '../scripts/audit/issue33-selected-product-heading.mjs';
 const selected=[
  {name:'Simpatico Organic Low Acid Half-Caff Coffee',url:'https://simpaticocoffee.com/products/organic-low-acid-half-caff-coffee',description:"Does regular coffee have too much caffeine, but decaffeinated coffee just doesn't excite you? Try Simpatico Organic Low Acid Half-Caff Coffee. It is a full-bodied low acid coffee with a clean, nutty/cocoa flavor. (Prefer 99.5% decaf? Try Simpatico Low Acid Decaf Medium Smooth Roast.)"},
  {name:'Simpatico Organic Low Acid: Medium Smooth Roast',url:'https://simpaticocoffee.com/products/simpatico-low-acid-coffee-medium-smooth-roast',description:"Simpatico Organic Low Acid Medium Smooth Roast Coffee is a bright-bodied low acid coffee with a clean, nutty flavor. (Prefer decaf? Try Simpatico Low Acid Decaf Medium Smooth Roast.)"},
@@ -46,4 +47,26 @@ test('#327 unrelated negative/alternative page materials cannot imply another tr
  const p=parse(selected[2],'<aside class="related-products">Try the other sugarcane decaf, honey process, blueberry.</aside>');
  assert.notEqual(p.fields.decaffeination_method,'Sugar Process');
  assert.doesNotMatch(String(p.fields.tasting_notes||''),/blueberry/i);
+});
+
+test('rooted selected H2 itemprop name + exact URL and add-cart is chosen identity',()=>{
+ const url=selected[2].url;
+ const html='<main><div itemscope itemtype="http://schema.org/Product" class="product">'+
+ '<meta itemprop="url" content="'+url+'"><div itemprop="offers" itemtype="http://schema.org/Offer">'+
+ '<header class="product-title"><h2 itemprop="name">'+selected[2].name+'</h2></header>'+
+ '<form action="/cart/add"><input name="id"></form></div></div></main>';
+ assert.deepEqual(selectedSchemaProductOfferH2(html,{source_url:url}),[selected[2].name]);
+ assert.deepEqual(selectedSchemaProductOfferH2(html,{source_url:selected[1].url}),[],'wrong chosen URL');
+ assert.deepEqual(selectedSchemaProductOfferH2(html.replace('<form action="/cart/add">','<form action="/contact">'),{source_url:url}),[],'not purchasable');
+ assert.deepEqual(selectedSchemaProductOfferH2(html+'<main><div itemscope itemtype="http://schema.org/Product" class="product"></div></main>',{source_url:url}),[],'multiple product roots');
+});
+test('direct selected water process cannot borrow unrelated seller or a former/negated method',()=>{
+ for(const own of [
+ 'Another Decaf Coffee is mountain water processed with no chemicals.',
+ 'Simpatico Low Acid Decaf Coffee was formerly mountain water processed.',
+ 'Simpatico Low Acid Decaf Coffee is not mountain water processed.'
+ ]){
+  const p=parse({...selected[2],description:own+' Dark fruit flavors remain.'});
+  assert.notEqual(p.fields.decaffeination_method,'Water Process',own);
+ }
 });

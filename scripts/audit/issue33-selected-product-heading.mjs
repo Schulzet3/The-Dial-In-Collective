@@ -120,3 +120,46 @@ export function selectedProductPurchaseRootH2(html){
  const h=titles[0],name=decode(html.slice(h.headEnd,h.contentEnd).replace(/<[^>]{0,1200}>/gu,' ')).replace(/\s+/gu,' ').trim();
  return name&&name.length<=220?[name]:[];
 }
+
+
+// Source-review only: a current product can have its chosen purchasable
+// schema.org Product in MAIN with a unique actual offer, H2[itemprop=name]
+// and a same-product /cart/add form, but no H1. Require exact meta URL,
+// unique rooted Product and name; refuse recommendations and SEO-only titles.
+export function selectedSchemaProductOfferH2(html,{source_url}={}){
+ if(typeof html!=='string'||!source_url||html.length>2_000_000||/<h1\b/iu.test(html))return [];
+ const {nodes,truncated}=coffeeHtmlElements(html);
+ if(truncated)return [];
+ const attrs=node=>coffeeHtmlAttributes(node.attributes);
+ const contains=(outer,inner)=>inner.start>=outer.headEnd&&inner.end<=outer.contentEnd;
+ const ancestors=(node,predicate)=>{
+  let at=node.parent;
+  for(let depth=0;at!==null&&depth<128;depth++){
+   const parent=nodes[at];if(!parent)return false;
+   if(predicate(parent))return true;
+   at=parent.parent;
+  }
+  return false;
+ };
+ const unsafe=node=>ancestors(node,parent=>{
+  const a=attrs(parent),label=[a.class,a.id,a.role,a['aria-label']].join(' ');
+  return ['aside','nav','header','footer'].includes(parent.tag)||
+   /\b(?:related[-_ ]?products?|recommendations?|upsell|cross[-_ ]?sell|carousel|recently[-_ ]?viewed|sidebar|faq)\b/iu.test(label);
+ });
+ const roots=nodes.filter(n=>n.tag==='div'&&
+  /^https?:\/\/schema\.org\/Product$/iu.test(String(attrs(n).itemtype||''))&&
+  /\bproduct\b/iu.test(String(attrs(n).class||''))&&
+  ancestors(n,x=>x.tag==='main')&&!unsafe(n));
+ if(roots.length!==1)return [];
+ const root=roots[0],sub=nodes.filter(n=>contains(root,n));
+ const urlMeta=sub.filter(n=>n.tag==='meta'&&attrs(n).itemprop==='url'&&attrs(n).content===source_url);
+ const carts=sub.filter(n=>n.tag==='form'&&/^\/cart\/add(?:[?#]|$)/iu.test(String(attrs(n).action||''))&&!unsafe(n));
+ const titleHeaders=sub.filter(n=>n.tag==='header'&&
+  String(attrs(n).class||'').split(/\s+/u).includes('product-title')&&!unsafe(n));
+ if(urlMeta.length!==1||carts.length!==1||titleHeaders.length!==1)return [];
+ const heads=sub.filter(n=>n.tag==='h2'&&attrs(n).itemprop==='name'&&
+  contains(titleHeaders[0],n)&&!unsafe(n));
+ if(heads.length!==1)return [];
+ const title=decode(html.slice(heads[0].headEnd,heads[0].contentEnd).replace(/<[^>]{0,1200}>/gu,' ')).replace(/\s+/gu,' ').trim();
+ return title&&title.length<=220?[title]:[];
+}
