@@ -924,3 +924,11 @@ PR #2846 first exact main acceptance 43676721135 FAILED one of 211 tests: a pres
 - Preflight: development d7b1a12b374b3badfb0576cf10c86b176ea7af43; PREFLIGHT blob 2fb236bbfa6bac48513eeb3bd157b260853af06d
 - Five required exact candidate GitHub checks: approval 43679648628, validate 43679648636, cloud/mobile 43679648635, SQL 43679648656. All success.
 - Scope: ONLY owner-only browser Google Picker setup; existing encrypted Apps Script backups untouched, zero SQL/member changes. One grant, one main push controller, one Git-connected Netlify build. Provider readback required before DEPLOYED.
+
+## DIC-20261115-DRIVEFORM-06 controller request [skip netlify]
+- Release ID: DIC-20261115-DRIVEFORM-06
+- Tested source: e93c7de6d63d21df628353e76099020ef6a4c870
+- Mode: publish
+- Owner source: Owner November 14, 2026 America/Denver, this conversation: 'Publish if you need to. Just get this done.' Exactly the single READY DIC-Q-28-owner-drive-form-referrer-20261115 Google Drive native owner form 403 fix, not unrelated READY/unready work, backup courier migration, Auth/SQL/member writes, spending or future releases.
+- Development SHA: b1f537809cd2cd310ab2eef4f3f22a8153aa205c / PREFLIGHT blob 2fb236bbfa6bac48513eeb3bd157b260853af06d
+- Exactly one READY item DIC-Q-28-owner-drive-form-referrer-20261115 and one function. Five candidate check jobs SUCCESS approval 43682041379; validate 43682041499; cloud/mobile-browser 43682041389; SQL 43682041381. No production SQL, Auth, member or existing backup courier writes. Original private encrypted archive evidence reused; exact released Git and Netlify readiness required before DEPLOYED.
