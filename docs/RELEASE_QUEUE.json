@@ -2,9 +2,9 @@
   "schema_version": 1,
   "authority": "OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022",
   "published_base": {
-    "tested_source_sha": "835f88ea422564f712e50a5ffa842234aa15e1bd",
-    "release_sha": "b9fd0e50b3f8257dac9622b654f02f883690961d",
-    "netlify_deploy_id": "6af9491cb6badad08eecf22c"
+    "tested_source_sha": "0c320602bc1c979877259a6f34de0aaa61428fe3",
+    "release_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5",
+    "netlify_deploy_id": "6af9551c6515ddfa3786f76e"
   },
   "items": [
     {
@@ -14852,7 +14852,7 @@
       "issue": 28,
       "pr": 2859,
       "title": "Prevent browser-blocked Google OAuth navigation after private Drive owner setup passphrase POST",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "59259207f257e3d35657b3db968eabe20a1e8a71",
       "scope_paths": [
         "netlify/functions/dic-owner-drive-connect.mjs"
@@ -14863,7 +14863,9 @@
         "PR #2859 initial exact head 25eb709ea6435fa8ae297c3f41de109477ff57a1 has focused handoff/CSP/no-secret regression; first approval 43684971280 FAILED solely because queue intake missing; this IN_PROGRESS item repairs it. Full Node/cloud/mobile/SQL/security checks must be independently verified at corrected source SHA.",
         "Corrected exact PR #2859 head 3cf590925a8758f6dd3321bbce7a017843fa8779: required approval 43685204643 SUCCESS; Node22 full tests/lint 43685204659 SUCCESS (4,986 PASS / 0 FAIL / 6 unrelated SKIPPED); cloud-tests + mobile-browser-qa 43685204629 both SUCCESS; isolated SQL 43685204635 SUCCESS; source security-inventory 43685204628 SUCCESS. Focused CSP-safe handoff test PASS; first approval 43684971280 failed untracked queue intake and was corrected, not recast as PASS.",
         "Nonforce two-parent PR merge 59259207f257e3d35657b3db968eabe20a1e8a71 (first parent c832cd2e92db4408939edd1906e59503b882aa16, second 3cf590925a8758f6dd3321bbce7a017843fa8779) preserved exact reviewed owner function blob 2b9fbf151127c09db4eb9275d2e548b2e6afa9c6 and focused test blob e6266c1bb7d78d43539722918a8391a10c76fb6b.",
-        "Exact merged-source approval 43685451097, Node22/lint full 43685451073 (4,986 PASS / 0 FAIL / 6 intentional SKIPPED), cloud-tests and mobile-browser-qa 43685451098 all SUCCESS; same exact source/test blobs allow reusing PR-head isolated SQL 43685204635. Real owner browser/account Picker and folder test remain separate UNVERIFIED gates."
+        "Exact merged-source approval 43685451097, Node22/lint full 43685451073 (4,986 PASS / 0 FAIL / 6 intentional SKIPPED), cloud-tests and mobile-browser-qa 43685451098 all SUCCESS; same exact source/test blobs allow reusing PR-head isolated SQL 43685204635. Real owner browser/account Picker and folder test remain separate UNVERIFIED gates.",
+        "Owner one-use DIC-20261115-DRIVECSP-08 source-frozen candidate 0c320602bc1c979877259a6f34de0aaa61428fe3 exact five checked jobs SUCCESS approval 43686570584, Node22/lint/one build 43686570572, cloud/mobile 43686570580, isolated SQL 43686570603; only owner function changed, tested reviewed function/test Git blobs, zero unready runtime/workflow/SQL or member data.",
+        "Main request 5730a71723cadba08347f4dbb1eb8b1c44d0771c exact two-file one-parent nonforce; controller 43686882333 and acceptance 43686882360 SUCCESS. Nonforce release 0f3641b4fff07e2a88d7747e621304ec2cf0ead5; Netlify 6af9551c6515ddfa3786f76e READY/current published 2026-11-15T06:46:06.231Z with all five functions. Real Google OAuth Picker consent and actual folder upload acceptance still UNVERIFIED."
       ],
       "ci_runs": [
         43685204643,
@@ -14873,11 +14875,15 @@
         43685204628,
         43685451097,
         43685451073,
-        43685451098
+        43685451098,
+        43686570584,
+        43686570572,
+        43686570580,
+        43686570603
       ],
       "blockers": [],
-      "notes": "Scope exactly one owner-only Netlify function and one focused unit test. Native successful POST cross-origin 303 is replaced by no-store same-origin HTML with nonce-bound top-level `location.replace` to Google and visible secure fallback link, preserving 10-minute signed HttpOnly cookie, server-only passphrase, strict Origin check, PKCE, drive.file permission, exact private folder, no-referrer, existing Apps Script backups and all member/DB/Auth data. No publication, backup modification, provider credential or external OAuth code in chat. Later owner Publish requires isolated exact READY bytes.\nNovember 15 development READY verified: Browser POST no longer relies on cross-origin 303 under CSP form-action self; nonce inline top-level OAuth navigation + visible safe fallback. PR and merged checks above SUCCESS. READY scope ONLY the browser handoff function, NOT Google Picker cookies, owner consent, Google folder disposable test or autonomous GitHub courier activation. Production remains release b9fd0e50 / Netlify 6af9491c and user-visible bug persists until NEW separately authorized owner Publish. No passphrase/code provided or stored in chat.",
-      "production_deployed": false
+      "notes": "Scope exactly one owner-only Netlify function and one focused unit test. Native successful POST cross-origin 303 is replaced by no-store same-origin HTML with nonce-bound top-level `location.replace` to Google and visible secure fallback link, preserving 10-minute signed HttpOnly cookie, server-only passphrase, strict Origin check, PKCE, drive.file permission, exact private folder, no-referrer, existing Apps Script backups and all member/DB/Auth data. No publication, backup modification, provider credential or external OAuth code in chat. Later owner Publish requires isolated exact READY bytes.\nNovember 15 development READY verified: Browser POST no longer relies on cross-origin 303 under CSP form-action self; nonce inline top-level OAuth navigation + visible safe fallback. PR and merged checks above SUCCESS. READY scope ONLY the browser handoff function, NOT Google Picker cookies, owner consent, Google folder disposable test or autonomous GitHub courier activation. Production remains release b9fd0e50 / Netlify 6af9491c and user-visible bug persists until NEW separately authorized owner Publish. No passphrase/code provided or stored in chat.\nNovember 15, 2026 CURRENT POSTFLIGHT: Owner explicitly authorized only this issue's publication. DEPLOYED exact source 0c320602bc1c979877259a6f34de0aaa61428fe3 via release 0f3641b4fff07e2a88d7747e621304ec2cf0ead5 and Netlify 6af9551c6515ddfa3786f76e READY/current; all five source-bound checks and guarded controller SUCCESS, no other unfinished code, SQL/Auth/member change, backup export or secrets. Earlier 'NOT DEPLOYED' above is the historical prepublication checkpoint, superseded. Real owner-browser Google consent/Drive Picker one-off private folder test remains pending; existing Apps Script plus owner-authorized hourly ChatGPT encrypted delivery fallback continue.",
+      "production_deployed": true
     }
   ],
   "history": [
@@ -17493,6 +17499,15 @@
       "source_sha": "59259207f257e3d35657b3db968eabe20a1e8a71",
       "production_deployed": false,
       "evidence": "PR #2859 head 3cf590925a8758f6dd3321bbce7a017843fa8779 approval 43685204643, Node22/lint 43685204659 (4986 PASS/0 FAIL), cloud/mobile 43685204629, SQL 43685204635, security 43685204628 SUCCESS. Nonforce merge 59259207f257e3d35657b3db968eabe20a1e8a71 function blob 2b9fbf15/test blob e6266c1b identical; merged approval 43685451097, Node22/lint 43685451073, cloud/mobile 43685451098 SUCCESS. Scope only browser OAuth form handoff, Google live Picker and backup courier excluded. No Publish."
+    },
+    {
+      "date": "2026-11-15",
+      "issue": 28,
+      "item_id": "DIC-Q-28-owner-drive-csp-navigation-20261115",
+      "state": "DEPLOYED",
+      "source_sha": "0c320602bc1c979877259a6f34de0aaa61428fe3",
+      "production_deployed": true,
+      "evidence": "One issue-only owner authorized publication DIC-20261115-DRIVECSP-08; frozen candidate 0c320602bc1c979877259a6f34de0aaa61428fe3 all five exact-SHA checks SUCCESS: approval 43686570584, validate 43686570572, cloud/mobile 43686570580, SQL 43686570603. Single-parent exact two-file main request 5730a717; controller 43686882333 and independent main acceptance 43686882360 SUCCESS; release 0f3641b4fff07e2a88d7747e621304ec2cf0ead5 nonforce, Netlify 6af9551c6515ddfa3786f76e READY/current 2026-11-15T06:46:06.231Z, five functions. Only CSP-safe owner OAuth function; 8 unready deployables and 127 workflows restored, 33 unready + 1 workflow test excluded. No SQL/Auth/member/backup export/private key writes. Google actual browser/account consent and native GH courier handoff NOT VERIFIED; issue remains OPEN."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
