@@ -1,0 +1,20 @@
+# Issue #455 R292 — source-bound SAFE next-shot coaching fidelity [skip netlify]
+Date: 2026-11-15 UTC
+
+DIC_PREFLIGHT_VERIFIED development_sha=d413819de5ef5fcb336001184dd198932d7e8321 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+## Authority, current source, safety
+- Owner Option B (#455) allows independently checked SAFE Locked-compatible UX fidelity repairs, focused tests and nonforce development-only integration. R290 source-reproduced omitted `advice.text` in the numeric-arrow branch; existing engine advice and Locked numeric rules are unchanged.
+- Exact immutable source development `d413819de5ef5fcb336001184dd198932d7e8321`, PREFLIGHT blob `2fb236bbfa6bac48513eeb3bd157b260853af06d` independently matched by fetch_file and fetch_blob BEFORE AGENTS/issues/provider queries. Ref rechecked identical immediately before Git object writes. Root Git tree `e1279d7fda7b983f01bb472f87aa2feeb25e0b4c` independently read from exact Git commit. Original UI Git blob `2ecde13b9d45ec329700654e1f054629d38bc95f`; engine `f384ae67c1a9148990cab4716dc8ad22d1ca81f3`.
+- Scope: `site/lib/ui.js` adds escaped, original existing engine `advice.text` under the single-measured-control arrow; leaves original no-arrow fallback, present numeric arrow, generic unchanged-controls caption, evidenceNote, own-comparables source note intact. Empty source copy creates no blank paragraph. No heuristic stripping, no new advice or numeric algorithm.
+- Tests: `tests/issue455-r292-next-shot-coaching.test.mjs` seven source-module synthetic positive/negative checks (real yield, body, grind copy; HTML escaping/uncertainty; complete-green and missing ratings no-op; multiple actual controls; historical measurement missing, optional unsupported temp; empty copy). No new member records, browser production experiment or invented taste improvement.
+- Queue `docs/RELEASE_QUEUE.json`: uniquely add `DIC-Q-455-r292-next-shot-coaching-visible` TESTING with zero CI receipts and explicit pending blockers. All previous queue items, histories and published base preserved byte-for-byte. Research source ledger and #267 line review remain unchanged; R290 already recorded original source-reproduced backlog candidate.
+- No changes to `site/lib/engine.js`, model, taste scales, saved shots/notes/history, coffee/setup/style, Turbo/Fast-Flow, slow feed, temperature/grinder constraints, Auth/RLS/Community, providers, SQL, main/release/production, backups or schedules.
+
+## Source-level negative/positive acceptance and observed test evidence
+- Before: original numeric-arrow branch did NOT interpolate `advice.text` while no-arrow branch did. After: numeric branch renders the original HTML-escaped text in `next-shot-coaching` exactly once, absent text stays absent, fallback unchanged. Verified by inspecting exact source transformation; does not mean hosted Node/browser CI passed.
+- Newly authored test cases are NOT_RUN at this Git object authoring step. Node 22 focused, applicable hosted validation/Chromium-mobile/offline, SQL/security and governance are PENDING. Frozen original603 not necessary for this display-only code change and SKIPPED is NOT PASS.
+- Next: create single atomic code/test/queue/journal commit with [skip netlify], independently read back all Git blobs and single-parent commit tree; open PR, observe exact-source negative/positive CI and fix any failures with SAME-COMMIT journal on each code/test/CI write. Recheck development concurrent head before nonforce merge; verify actual merged code/tests/queue/journal blobs and exact merged CI, then reconcile queue to READY only on independently verified complete gates. No deployment or owner policy change.
+
+## Research and coverage limits
+- Original standalone S019 remains NOT REVIEWED: explicit new Google Drive `espresso research`, `S019`, `slow feeding` searches returned no accessible results. Project Library semantic search returned distinct Slow_Feeding_Research_and_Implementation.pdf, not the S019 original. Nine originals and other sources retain their prior authoritative ledger/check status without new claim/line credit. No live member or actual sensory outcome data consulted.
