@@ -418,11 +418,11 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
    sourceObjectAt(candidateSha,REVIEWED_OWNER_DRIVE_TEST.runtime)===null;
   const support=reviewedUnreadySupport(path,{queue,restoredPaths:plan.restored_paths,
    pinnedReadyPaths:plan.pinned_ready_paths,publishedSourceSha,
-   developmentSourceSha:manifest.development_source_sha,sourceObjectAt})&&
-   sourceObjectAt(candidateSha,path)===null;
-  if(!m&&!ownerDrive&&!support)
+   developmentSourceSha:manifest.development_source_sha,sourceObjectAt});
+  const eligibleSupport=Boolean(support)&&sourceObjectAt(candidateSha,path)===null;
+  if(!m&&!ownerDrive&&!eligibleSupport)
    reject('Only proven issue-scoped, owner Drive, or exact unready support tests can be excluded');
-  const issue=ownerDrive?28:support?.issue??Number(m[1]);
+  const issue=ownerDrive?28:eligibleSupport?support.issue:Number(m[1]);
   const unfinishedMixed=queue.items.some(i=>i.issue===issue&&
    ['IN_PROGRESS','TESTING','BLOCKED'].includes(i.state)&&
    i.scope_paths?.some(p=>plan.pinned_ready_paths.includes(p)));
