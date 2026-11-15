@@ -2962,6 +2962,29 @@
       "implementation_status": "RESEARCH_ONLY_NO_PRODUCT_OR_POLICY_CHANGE",
       "github267_literal_review_credit": 0,
       "reviewed_date_utc": "2026-11-15"
+    },
+    {
+      "id": "LIT-2025-CARDOSO-LAREIMS-BRAZIL-CUPPING-CLASS",
+      "type": "primary_peer_reviewed_mass_spectrometry_coffee_cupping_quality_classification_not_espresso_intervention",
+      "title": "Sensory Classification of Brazilian Coffea arabica by Laser-Assisted Rapid Evaporative Ionization Mass Spectrometry and Machine Learning Algorithms",
+      "authors": "Victor Gustavo Kelis Cardoso; Julia Balog; Guilherme Post Sabin; Leandro Wang Hantao",
+      "journal": "ACS Omega 10(18), 18775-18783 (2025)",
+      "published": "2025-04-29",
+      "doi": "10.1021/acsomega.5c00404",
+      "primary_original_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12079199/",
+      "pmid": "40385162",
+      "pmcid": "PMC12079199",
+      "source_sha256": null,
+      "access": "OPEN_ACCESS_AUTHOR_ORIGINAL_PUBLISHED_FULL_HTML_VIA_PUBMED_CENTRAL_DIRECTLY_READ; PDF_BINARY_SUPPLEMENT_FIGURE_PIXELS_RAW_SPECTRA_NOT_VERIFIED",
+      "review_status": "R455-283_ORIGINAL_METHODS_2_1_TO_2_6_RESULTS_3_1_TO_3_3_TABLES1_2_CONCLUSION_AND_CONFLICTS_DIRECT_FULL_TEXT_READ; NO_FULL_SUPPLEMENT_OR_EXTERNAL_REPLICATION",
+      "direct_review_provenance": "Original ACS Omega author manuscript/version-of-record full article served via NIH PubMed Central at PMC12079199. Directly reviewed Methods lines 123-165, Results lines 167-270, Tables 1-2, conclusion 271-273 and conflicts line 328, 2026-11-15. DOI and PMID in original article header. Full source text visible, downloaded PDF byte hash/raw spectra and supplemental confusion charts not verified.",
+      "evidence_grade": "PRIMARY_PEER_REVIEWED_INTERNAL_124_COFFEE_VALIDATION_OF_SIX_CUPPING_LABELS; NOT_PERSONAL_ESPRESSO_TASTE_OR_ONE_VARIABLE_SHOT_EFFECT",
+      "claims_verified_externally": "824 independent Brazilian Arabica 2020 crop samples, each one classified by two trained professional cuppers using five portions; 4,944 laser technical spectra (six per coffee) averaged to 824 per-sample fingerprints; 700 train and 124 internal validation. At six classes validation accuracies PLS-DA 61%, SVM 67%, ANN 70%. Up to 100% only when restricted to the three most distinct classes barely soft, rio and fermented. Hypothesized compounds class IV/V tentative IDs. Waters employee author conflict disclosed.",
+      "uncertainty": "Cupping class reference scored by two professional panelists, not member five individual taste scales. One harvest-country/season internal random split, no external held-out origin/roast/site/device replication, no paired espresso Log Shot/Rate/Recommendation experiment. Potential panel label variability, outlier exclusion (PLS-DA approx 20% fermented samples), technical replicates not independent coffees. Figure image pixels/supplemental confusion matrix/complete model metrics/raw data/PDF byte SHA not checked. No individual member tasting-quality effect.",
+      "current_app_crosswalk": "At immutable development 6a8e47216bd9206825161c377641b9778f3e449e, direct code inspection site/lib/engine.js f384ae67c1a9148990cab4716dc8ad22d1ca81f3, site/lib/constants.js d3559dc1c9560c4d68fbcad1dc91e3a792a100a2, site/lib/model.js fdc65f869546cddbb6552e555dca12117f2c47fc, site/lib/ui.js 2ecde13b9d45ec329700654e1f054629d38bc95f, cloud main.js 28c6f6026d0ff1e6fd6575d3813b76c06a29bb47. Approved five taste inputs, all-green != missing, original shot/notes, per-coffee/version/setup/style/feed, single controllable suggestion and privacy controls remain distinct from lab six-class instrument predictor.",
+      "implementation_status": "RESEARCH_ONLY_NO_RUNTIME_OR_NUMERIC_POLICY_CHANGE",
+      "reviewed_date_utc": "2026-11-15",
+      "github267_literal_review_credit": 0
     }
   ],
   "evidence_checks": [
@@ -9108,6 +9131,54 @@
       "owner_approval": false,
       "implementation_status": "RESEARCH_ONLY_NO_APP_TEST_NUMERIC_RULE_TELEMETRY_OR_DEPLOYMENT",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-283-A",
+      "source": "LIT-2025-CARDOSO-LAREIMS-BRAZIL-CUPPING-CLASS",
+      "source_doi": "10.1021/acsomega.5c00404",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12079199/",
+      "source_provenance": "Open full ACS Omega original article via NIH PubMed Central, independently read 2026-11-15; PDF bytes and supplemental SI unverified",
+      "grade": "FIRST_PARTY_PUBLISHED_ORIGINAL_FULL_TEXT_INTERNAL_DATA_NO_RAW_REPLICATION",
+      "owner_approval": false,
+      "implementation_status": "RESEARCH_ONLY_NO_APP_RULE_TELEMETRY_OR_DEPLOYMENT",
+      "github267_literal_review_credit": 0,
+      "page_section": "Original Methods 2.1-2.3/Table 1, PMC lines 123-155",
+      "claim": "824 distinct Brazilian C. arabica 2020-crop coffee samples assessed as six Brazilian cupping classes by two professional cuppers/five portions per sample; sample-count class breakdown 129/139/140/139/138/139. Six LA-REIMS technical replicate scans each gave 4,944 spectra but were averaged into 824 independent coffee fingerprints, NOT 4,944 coffee samples or member taste ratings. Internal random training 700/validation 124 samples, one crop/geographic domain. Study uses lab coffee material and professional cupping references, not a paired espresso shot outcome.",
+      "factual_status": "SAMPLE_AND_VALIDATION_UNIT_CONFIRMED_NOT_DIC_RATING_OR_NEXT_SHOT",
+      "uncertainty": "Professional panel label reliability across sites/years and independent test domain not measured; raw labels/scans and supplemental methods not reanalyzed.",
+      "exact_development_sha": "6a8e47216bd9206825161c377641b9778f3e449e"
+    },
+    {
+      "id": "R455-EV-283-B",
+      "source": "LIT-2025-CARDOSO-LAREIMS-BRAZIL-CUPPING-CLASS",
+      "source_doi": "10.1021/acsomega.5c00404",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12079199/",
+      "source_provenance": "Open full ACS Omega original article via NIH PubMed Central, independently read 2026-11-15; PDF bytes and supplemental SI unverified",
+      "grade": "FIRST_PARTY_PUBLISHED_ORIGINAL_FULL_TEXT_INTERNAL_DATA_NO_RAW_REPLICATION",
+      "owner_approval": false,
+      "implementation_status": "RESEARCH_ONLY_NO_APP_RULE_TELEMETRY_OR_DEPLOYMENT",
+      "github267_literal_review_credit": 0,
+      "page_section": "Original Results 3.2/Figure 4 caption, PMC lines 180-203",
+      "claim": "Six-class validation accuracies PLS-DA 61%, SVM 67%, ANN 70%; paper's headline 'up to 100%' ONLY restricted three-class barely-soft/rio/fermented subset, after excluding ambiguous hard+/-/hard labels. No 100% across all six classes and no personalized DIC espresso five-rating prediction. The intermediate-class performance was weaker, and PLS-DA excluded about 20% fermented samples as outliers. This paper does not justify displayed recommendation-confidence percent or cup-quality guarantee.",
+      "factual_status": "INTERNAL_6_CLASS_ACCURACY_DISTINCT_FROM_RESTRICTED_3_CLASS_CLAIM",
+      "uncertainty": "Confusion matrices and per-class precision/recall in supplemental PDF not independently read, no raw held-out predictions or independent reproducibility; exact 3-class denominator uncertain.",
+      "exact_development_sha": "6a8e47216bd9206825161c377641b9778f3e449e"
+    },
+    {
+      "id": "R455-EV-283-C",
+      "source": "LIT-2025-CARDOSO-LAREIMS-BRAZIL-CUPPING-CLASS",
+      "source_doi": "10.1021/acsomega.5c00404",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12079199/",
+      "source_provenance": "Open full ACS Omega original article via NIH PubMed Central, independently read 2026-11-15; PDF bytes and supplemental SI unverified",
+      "grade": "FIRST_PARTY_PUBLISHED_ORIGINAL_FULL_TEXT_INTERNAL_DATA_NO_RAW_REPLICATION",
+      "owner_approval": false,
+      "implementation_status": "RESEARCH_ONLY_NO_APP_RULE_TELEMETRY_OR_DEPLOYMENT",
+      "github267_literal_review_credit": 0,
+      "page_section": "Original Results 3.3/Table 2 and limitations, PMC lines 214-270; competing interest line 328",
+      "claim": "Proposed chlorogenic/fatty acid/phospholipid marker assignments only tentative ID levels IV/V; authors explicitly request MS fragmentation and isomer-resolution confirmation, and note chemical contradictions (5-CQA high in both good/bad contexts). Waters Corporation staff affiliation of author Julia Balog disclosed. No direct causal intervention linking any identified feature to personal espresso sensory scores, no scientifically grounded single-adjustment numeric policy.",
+      "factual_status": "TENTATIVE_MS_ASSIGNMENT_AND_DECLARED_INSTRUMENT_AFFILIATION_NOT_CAUSAL_TASTE_POLICY",
+      "uncertainty": "No independently verified chemical standards, full SI, full producer metadata, figure pixel values or replication, and no real DIC member outcome.",
+      "exact_development_sha": "6a8e47216bd9206825161c377641b9778f3e449e"
     }
   ],
   "policy_decisions_pending": [],
@@ -9315,23 +9386,24 @@
     "R455-278: primary Uman 2016 nature.com first-party Methods and Figure4 numeric caption directly checked; internal origin conflict (Guatemala Methods vs El Salvador Figure4) and nonmonotonic 99%-number cutoff across temperatures; one grinder, no warmed-burr experiment nor five-taste next-shot outcome. +3 bounded checks on existing source, no new source or proposal, no app/Locked/telemetry changes. Original PDF/supplement/figure pixels/raw unresolved, standalone S019 unavailable; next disjoint live UX defect or original source.",
     "R455-280: previously unverified original Khamitova 2020 Ch4 Figure4.4 all eight panels visually inspected at first-party PDF printed pp84-85 (indices100-101), sensory Results pp82-83 crosschecked: +2 bounded evidence checks on existing thesis source => 156 sources/467 checks/220 proposals; not whole PDF or taster raws, no five-criterion or next-shot efficacy and no app/Locked change. Direct page images verified, original PDF SHA unverified; standalone S019 still inaccessible. Next independent real UX defect or nonoverlapping primary source/claim; no #267 line credit.",
     "R455-281: Original PLOS Moroney et al. Figure10 text/caption and model early-stage initialization checked; 2 new bounded source checks on existing DOI = 156 sources/469 checks/220 proposals, NO original image pixels, no espresso five-rating effect or application bug proven. Continue distinct source or source-reproducible Log Shot UX gap; standalone S019 remains unavailable; #267 literal credit zero.",
-    "R455-282: Read original Rune et al 2026 Wiley Results 3.4 Table 7 and limitations 3.6, distinct from prior Tables 3-6 review: three extra origins/roasts received pH-only five-water measurements; no extra sensory, espresso, personal next-shot or quality replication. One bounded evidence check; 156 sources/470 checks/220 proposals unchanged source and proposal counts, no app code or numeric-policy change. Source original PDF/raw measurements unverified; standalone S019 inaccessible. Next inspect distinct primary source claim or reproducible UX defect, never duplicate #267 literal line credit."
+    "R455-282: Read original Rune et al 2026 Wiley Results 3.4 Table 7 and limitations 3.6, distinct from prior Tables 3-6 review: three extra origins/roasts received pH-only five-water measurements; no extra sensory, espresso, personal next-shot or quality replication. One bounded evidence check; 156 sources/470 checks/220 proposals unchanged source and proposal counts, no app code or numeric-policy change. Source original PDF/raw measurements unverified; standalone S019 inaccessible. Next inspect distinct primary source claim or reproducible UX defect, never duplicate #267 literal line credit.",
+    "R455-283: distinct 2025 Cardoso et al ACS Omega LA-REIMS 824-coffee Brazilian cupping class original full HTML Methods/Results/Table1/Table2 reviewed; 700/124 internal split, all-six ANN 70% vs restricted-three up to 100%, marker IDs only tentative; +1 source/3 evidence checks/1 P3 research-only proposal, no new numeric tasting policy or app change. Original binary/SI/raw and S019 inaccessible, no #267 line credit. Next distinct original source or independently reproduced UX defect."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-282_RUNE_TABLE7_CROSS_COFFEE_PH_ONLY",
+    "run_id": "R455-283_CARDOSO_2025_LAREIMS_SIX_CUPPING_CLASSES",
     "date": "2026-11-15",
-    "development_preflight_sha": "27ebf1b4cc8a8c4c0917798662511d8458132362",
+    "development_preflight_sha": "6a8e47216bd9206825161c377641b9778f3e449e",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "prewrite_source_sha": "27ebf1b4cc8a8c4c0917798662511d8458132362",
-    "original_ledger_blob_sha": "3873c502e7ea4b31f2a988e43e1b45ff68959ce5",
+    "prewrite_source_sha": "6a8e47216bd9206825161c377641b9778f3e449e",
+    "original_ledger_blob_sha": "a65e7655a2f3c80fe049583a8f4f397a61cdfcf8",
     "source_counts": {
-      "sources": 156,
-      "evidence_checks": 470,
-      "proposals": 220
+      "sources": 157,
+      "evidence_checks": 473,
+      "proposals": 221
     },
-    "scope": "Single additional primary Table7 pH-only cross-coffee source claim on already indexed Rune 2026 DOI; not sensory replication or product permission",
+    "scope": "Original ACS Omega full article lab-coffee cupping six-class vs three-class metrics and tentative chemical markers; research-only no DIC five-rating efficacy",
     "github267_line_credit": 0,
-    "next": "Continue independent unpublished primary claim or reproducible Log Shot/Rate UX issue; S019 separate document inaccessible."
+    "next": "Post-PR exact CI and readback; continue nonoverlapping current Log Shot UX/science and standalone S019 recovery."
   },
   "policy_decisions_resolved": [
     {
@@ -14430,6 +14502,31 @@
       "production_deployed": false,
       "github267_literal_review_credit": 0,
       "exact_source": "64e31b5f4e30d108c61eb8353ecc27449164ad39"
+    },
+    {
+      "id": "R455-PROP-283-LAB-CUPPING-CLASSIFICATION-NOT-PERSONAL-ESPRESSO-CONFIDENCE",
+      "source": [
+        "LIT-2025-CARDOSO-LAREIMS-BRAZIL-CUPPING-CLASS"
+      ],
+      "evidence": [
+        "R455-EV-283-A",
+        "R455-EV-283-B",
+        "R455-EV-283-C"
+      ],
+      "severity": "P3_RESEARCH_ONLY_NO_REPRODUCED_SAFE_APP_DEFECT",
+      "finding": "A large 824-coffee LA-REIMS study's 70% six-class internal validation and 100% selected three-class claim should not be used as percentage confidence for DIC's member-specific five tastes or an effective next-shot intervention.",
+      "evidence_grade": "ORIGINAL_FULL_ARTICLE_INTERNAL_SIX_CLASS_EVALUATION_WITH_CLEAR_SINGLE_HARVEST_GENERALIZATION_AND_CUPPING_LABEL_LIMITS",
+      "current_locked": "Five independent original taste ratings, success only after all five green vs missing/unrated, one truly controllable next-shot adjustment, original measured shots/notes/private history, successful alternative recipe families, grinder version/calibration and Turbo/Fast-Flow/Slow Feed and temperature setup capabilities, private RLS/Community boundaries.",
+      "current_app": "Direct live code reviewed at 6a8e47216bd9206825161c377641b9778f3e449e with source blobs and original measurement/ratings safeguards; no reproduced unsafe behavior tied to this paper and no externally grounded numeric change.",
+      "proposed_change": "Document full original study and caveats. Keep all current approved recommendations and scientific uncertainty intact. Never display paper's 100% restricted-class figure as universal confidence or map Brazilian coffee cupping class to DIC personal ratings. Future effectiveness remains separately owner-authorized optional consented, same-coffee/setup/style/grinder single-adjustment -> next-shot full-five ratings evaluation with confounders and adverse outcomes; not authorized here.",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "RESEARCH_ONLY_NO_APPLICATION_CHANGE",
+      "test_plan": "Verify exact original complete ledger, distinct DOI/IDs and unchanged former 156/470/220 records; docs-only scoped SAME-COMMIT preflight; two-path nonforce PR with actual exact-source CI; no claim app outcomes from CI or reference-only examples.",
+      "release_queue_status": "NO_ITEM_RESEARCH_ONLY",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0,
+      "exact_source": "6a8e47216bd9206825161c377641b9778f3e449e"
     }
   ],
   "changeScope": {
