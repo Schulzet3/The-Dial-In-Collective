@@ -24,15 +24,29 @@ const GH_API=`https://api.github.com/repos/${REPO}`;
 const DRIVE='https://www.googleapis.com/drive/v3';
 const CHUNK=4*1024*1024;
 
-export function verifyTrustedRun(run, repo=REPO) {
+export function verifyTrustedRun(run, repo=REPO, allowRequestPush=false) {
   if(!run || !/^[1-9]\d*$/.test(String(run.id)) ||
      run.status!=='completed'||run.conclusion!=='success'||
      run.head_branch!=='main'||run.repository?.full_name!==repo||
-     !['schedule','workflow_dispatch'].includes(run.event)||
+     !(['schedule','workflow_dispatch'].includes(run.event) ||
+       (allowRequestPush && run.event==='push' && /^[a-f0-9]{40}$/.test(run.head_sha)))||
      !['.github/workflows/nightly-backup.yml',
        '.github/workflows/nightly-backup.yml@main',
        '.github/workflows/nightly-backup.yml@refs/heads/main'].includes(run.path))
     throw new Error('Source run is not a completed, trusted main scheduled/manual backup.');
+  return true;
+}
+// Only an intentionally requested, one-file, single-parent BACKUP_REQUEST push
+// may transfer ciphertext. All other push smoke runs remain ineligible.
+export function verifyAuthorizedPushRequest(run,commit) {
+  if(run?.event!=='push' || !/^[a-f0-9]{40}$/.test(run.head_sha) ||
+     commit?.sha!==run.head_sha || !Array.isArray(commit.parents) ||
+     commit.parents.length!==1 || !Array.isArray(commit.files) ||
+     commit.files.length!==1 ||
+     commit.files[0]?.filename!=='docs/BACKUP_REQUEST.json' ||
+     commit.files[0]?.status!=='modified') {
+    throw new Error('Push backup is not a single-file authorized BACKUP_REQUEST commit.');
+  }
   return true;
 }
 export function selectArtifact(response, runId) {
@@ -196,7 +210,15 @@ async function uploadDrive(token, filepath, artifact, local) {
 export async function main(env=process.env) {
   requireConfig(env);
   const run=await github(`/actions/runs/${env.DIC_SOURCE_RUN_ID}`,env.GH_TOKEN);
-  verifyTrustedRun(run);
+  let allowRequestPush=false;
+  if(run.event==='push') {
+    if(!/^[a-f0-9]{40}$/.test(run.head_sha))
+      throw new Error('Push backup run has an invalid source commit.');
+    const sourceCommit=await github(`/commits/${run.head_sha}`,env.GH_TOKEN);
+    verifyAuthorizedPushRequest(run,sourceCommit);
+    allowRequestPush=true;
+  }
+  verifyTrustedRun(run,REPO,allowRequestPush);
   if(Date.parse(run.created_at)<Date.parse(env.DIC_DRIVE_CUTOVER_UTC))
     throw new Error('This run predates the OAuth courier cutover; skip to avoid legacy duplicates.');
   const listing=await github(`/actions/runs/${run.id}/artifacts?per_page=100`,env.GH_TOKEN);
