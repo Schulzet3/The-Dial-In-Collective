@@ -15,7 +15,7 @@ const SHA=/^[a-f0-9]{40}$/;
 const BRANCH=/^release-candidates\/[a-z0-9][a-z0-9-]{2,80}$/;
 const ZERO='0'.repeat(40);
 export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSourceSha,
- selectedIds,branch,createLocalRef=true}={}){
+ selectedIds,branch,pinnedReadyPaths=[],createLocalRef=true}={}){
  if(!SHA.test(developmentSourceSha||'')||!BRANCH.test(branch||''))
   throw Error('Candidate staging requires an exact development commit and safe release-candidates/<slug> branch');
  const git=(args,{env=process.env,input,trim=true}={})=>{
@@ -46,7 +46,7 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
   publishedSourceSha,developmentSourceSha,restoredWorkflows:unpublishedWorkflows,sourceObjectAt
  });
  const plan=planReadyOnlyCandidate(queue,{publishedSourceSha,developmentSourceSha,
-  selectedIds,developmentChangedPaths:developmentPaths,isAncestor:ancestor});
+  selectedIds,pinnedReadyPaths,developmentChangedPaths:developmentPaths,isAncestor:ancestor});
  if(!plan.ready)throw Error('READY-only staging HOLD: '+plan.errors.join('; '));
  const unpublishedTests=discoverExcludedUnreadyTests({queue,selectedIds:plan.selected_ids,
   restoredPaths:plan.restored_paths,publishedSourceSha,developmentSourceSha,
@@ -54,7 +54,11 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
  // A later untracked same-file edit must not be smuggled under a READY scope.
  for(const path of plan.included_paths){
   const owners=plan.ready_items.filter(i=>i.scope_paths.includes(path));
-  if(!owners.some(i=>sourceObjectAt(i.merged_source_sha,path)===sourceObjectAt(developmentSourceSha,path)))
+  const readyBlobs=[...new Set(owners.map(i=>sourceObjectAt(i.merged_source_sha,path)))];
+  if(plan.pinned_ready_paths.includes(path)){
+   if(readyBlobs.length!==1||!readyBlobs[0]||readyBlobs[0]===sourceObjectAt(developmentSourceSha,path))
+    throw Error('READY-only staging HOLD: cannot pin exactly one different approved READY blob: '+path);
+  }else if(!readyBlobs.includes(sourceObjectAt(developmentSourceSha,path)))
    throw Error('READY-only staging HOLD: unapproved same-file content after READY merge: '+path);
  }
  const temp=mkdtempSync(join(tmpdir(),'dic-ready-stage-'));
@@ -70,12 +74,20 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
     git(['update-index','--add','--cacheinfo',mode,sha,path],{env});}
    else git(['update-index','--force-remove','--',path],{env});
   }
+  for(const path of plan.pinned_ready_paths){
+   const owner=plan.ready_items.find(i=>i.scope_paths.includes(path));
+   const object=owner&&sourceObjectAt(owner.merged_source_sha,path);
+   if(!object)throw Error('Cannot recover exact READY blob for pinned path: '+path);
+   const [mode,sha]=object.split(':');
+   git(['update-index','--add','--cacheinfo',mode,sha,path],{env});
+  }
   for(const path of [...workflowOnlyTests,...unpublishedTests])
    git(['update-index','--force-remove','--',path],{env});
   const manifest={schema_version:1,kind:CANDIDATE_KIND,candidate_branch:branch,
    development_source_sha:developmentSourceSha,published_source_sha:publishedSourceSha,
    selected_ready_item_ids:plan.selected_ids,risk_classification:classifyReleaseRisk(plan.included_paths),
    restored_to_published_paths:plan.restored_paths,
+   pinned_to_ready_paths:plan.pinned_ready_paths,
    restored_unpublished_workflow_paths:unpublishedWorkflows,
    excluded_unpublished_workflow_test_paths:workflowOnlyTests,
    excluded_unready_test_paths:unpublishedTests,
@@ -86,6 +98,7 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    '- Published baseline: '+publishedSourceSha+'\n'+
    '- Selected READY IDs: '+plan.selected_ids.join(', ')+'\n'+
    '- Restored unfinished paths: '+(plan.restored_paths.join(', ')||'(none)')+'\n'+
+   '- Pinned READY mixed-source paths: '+(plan.pinned_ready_paths.join(', ')||'(none)')+'\n'+
    '- Restored development-only GitHub workflows to published bytes: '+(unpublishedWorkflows.join(', ')||'(none)')+'\n'+
    '- Omitted exact reviewed workflow-only, unpublished tests: '+(workflowOnlyTests.join(', ')||'(none)')+'\n'+
    '- Omitted source-bound unready issue tests: '+(unpublishedTests.join(', ')||'(none)')+'\n'+
@@ -124,17 +137,23 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
 }
 if(process.argv[1]&&fileURLToPath(import.meta.url)===resolve(process.argv[1])){
  try{
-  const [developmentSourceSha,branch,ids,flag]=process.argv.slice(2);
-  if(!ids||!['',undefined,'--push'].includes(flag))throw Error('Usage: node stage-ready-only-candidate.mjs <dev SHA> <release-candidates/name> <READY ID[,ID]> [--push]');
-  const result=stageReadyOnlyCandidate({developmentSourceSha,branch,selectedIds:ids.split(',')});
-  if(flag==='--push'){
+  const [developmentSourceSha,branch,ids,...flags]=process.argv.slice(2);
+  const push=flags.includes('--push');
+  const pins=flags.filter(x=>x.startsWith('--pin=')).map(x=>x.slice(6));
+  if(!ids||flags.some(x=>x!=='--push'&&!x.startsWith('--pin='))||
+     flags.filter(x=>x==='--push').length>1||
+     pins.some(x=>!x||x.includes(',')||!x.includes('/')))
+   throw Error('Usage: node stage-ready-only-candidate.mjs <dev SHA> <release-candidates/name> <READY ID[,ID]> [--pin=path] [--push]');
+  const result=stageReadyOnlyCandidate({developmentSourceSha,branch,
+    selectedIds:ids.split(','),pinnedReadyPaths:pins});
+  if(push){
    execFileSync('git',['push','--porcelain','origin',result.candidate_sha+':refs/heads/'+branch],
     {encoding:'utf8',timeout:30000,stdio:['ignore','pipe','pipe']});
    const remote=execFileSync('git',['ls-remote','origin','refs/heads/'+branch],
     {encoding:'utf8',timeout:15000}).trim().split(/\s+/)[0];
    if(remote!==result.candidate_sha)throw Error('Candidate remote ref does not match exact staged SHA');
   }
-  console.log('[DIC candidate source] '+JSON.stringify({status:flag==='--push'?'CI_PENDING':'STAGED_LOCAL_ONLY',
+  console.log('[DIC candidate source] '+JSON.stringify({status:push?'CI_PENDING':'STAGED_LOCAL_ONLY',
    candidate_sha:result.candidate_sha,branch:result.branch,
    selected_ready_ids:result.manifest.selected_ready_item_ids,excluded_paths:result.plan.restored_paths}));
  }catch(e){console.error('[DIC candidate HOLD] '+e.message);process.exitCode=2;}
