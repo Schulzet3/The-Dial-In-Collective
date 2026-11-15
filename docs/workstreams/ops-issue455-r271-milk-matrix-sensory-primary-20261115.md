@@ -1,0 +1,21 @@
+# Issue #455 — R455-271 primary coffee-matrix sensory evidence [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=7928f6c71204f97385e1a941faded00a9f53e0ea preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+## Authority and provenance
+- Owner-authorized Option B source verification, **research-only**, not permission to add an espresso taste rule, capture member additives, or deploy. Baseline canonical ledger Git blob: `f48dd9e4a71229bc9f930030d93379dd239bd2a0`; engine Git blob `f384ae67c1a9148990cab4716dc8ad22d1ca81f3`.
+- Source: Cleve, Gonzalez-Estanol et al. (2025), "Effects of Roasting Level and Milk Addition on In Vivo Aroma Release and Perception of Coffee", *J Agric Food Chem* 73(22), 13792–13808, DOI https://doi.org/10.1021/acs.jafc.4c12852; PMC https://pmc.ncbi.nlm.nih.gov/articles/PMC12147775/; PMID 40392949. Publisher metadata and NCBI-hosted author-original indexed Methods 2.1–2.7, Results 3.1–3.2, Discussion 4.1–4.2 substantively inspected. **Direct PMC reopen encountered CAPTCHA**; no claim of contiguous first-party binary/page or full PDF review. Original PDF, supplementary files, raw panelist readings, raw PTR-MS or independent replication unverified. Original bytes SHA-256: **unavailable**.
+- Connected Drive explicitly searched for S019 and espresso research with no accessible results; Library search surfaced separately indexed slow-feeding PDF, **not standalone S019**. Prior nine archived originals and October 29 pack not re-audited.
+
+## Three new checks (without duplicating pre-existing DOI/source)
+1. `R455-EV-CIT-271-A` — Paper-filtered *drip* preparation used 21.00 g grounds / 350.0 g water, divided into 100 g aliquots, each with 42.86 g cow milk, oat milk or water (30% of total). Two roasts × three matrices. Not a pressurised espresso extraction experiment.
+2. `R455-EV-CIT-271-B` — Thirteen panelists across three 45-min sessions, each six samples, triplicate temporal dominance of sensations and simultaneous nose-space PTR-ToF-MS measurements. This is **not** consumer enjoyment, DIC five taste sliders or before/after same-espresso-recipe single-variable quality.
+3. `R455-EV-CIT-271-C` — Cow/oat milk changed temporal bitterness/roast/burnt dominance, while authors did not observe a systematic decrease in in-vivo coffee volatile release. Roast affected 47 tracked mass peaks; milk 22 with small effects. Many tentative compound identities and no espresso extraction response. Do not project 30% milk, brew recipe or a sensory-to-volatiles correction into DIC.
+
+## Current source and decision
+At immutable development `7928f6c71204f97385e1a941faded00a9f53e0ea`, `site/lib/engine.js` blob `f384ae67c1a9148990cab4716dc8ad22d1ca81f3` retains five independent taste sliders, source-bound measured recipes, privacy and single controllable advice. No reproducible code defect derived from this *drip* matrix study. One new P3 proposal `R455-PROP-271-MILK-MATRIX-NOT-ESPRESSO-TASTE-RECIPE` is a **research-only HOLD**, not an actionable owner approval or new data collection. Any optional consented efficacy evaluation separately requires explicit owner authority and control of milk/additives, serving conditions, setup and other confounders.
+
+## Verification and scope
+- Before-write immutable development `7928f6c71204f97385e1a941faded00a9f53e0ea`, verified preflight blob `2fb236bbfa6bac48513eeb3bd157b260853af06d`; old canonical ledger `f48dd9e4a71229bc9f930030d93379dd239bd2a0`. Validate JSON parse, exact prefix equality of all 152 previous source records, 441 prior evidence checks, 215 prior proposals; unique IDs; new counts **153 sources, 444 checks, 216 proposals** if this branch merges. Do not credit #267 literal source lines.
+- Docs-only research: **Node22, browser/mobile/offline, SQL/Auth/privacy, publisher primary raw analysis NOT_RUN**, not PASS. Applicable exact-source PR governance **PENDING** until GitHub reports success; merge **NOT CLAIMED** here. No member/provider writes, code or tests, Locked/numeric policy, release queue READY, Netlify, main, production or deployment changes.
+- Next: verify PR-head checks and actual non-force merge SHA/blobs; reconcile issue checkpoint; continue a distinct source or independently reproducible Log Shot → Rate → Recommendation gap. S019 separate PDF still inaccessible.
