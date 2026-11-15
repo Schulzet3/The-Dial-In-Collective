@@ -86,7 +86,7 @@ test('GitHub check-run pagination denies truncated, duplicated and concurrent-dr
 test('GitHub check-run reader preserves one-page completeness and empty fail-closed evidence',async()=>{
  for(const n of [0,1,100]){
   let pages=0;
-  const request=async url=>{pages++;return {ok:true,json:async()=>({total_count:n,check_runs:Array.from({length:n},(_,i)=>({id:i+1}))})};};
+  const request=async _url=>{pages++;return {ok:true,json:async()=>({total_count:n,check_runs:Array.from({length:n},(_,i)=>({id:i+1}))})};};
   const x=await githubReleaseReaders('read-only-token',{request});
   assert.equal((await x.loadChecks('c'.repeat(40))).length,n);
   assert.equal(pages,1);
