@@ -24,6 +24,7 @@ const sumato=[
  'Drip Coffee: 1:16; Pour Over: 1:15; French Press: 1:12'
 ];
 const arbey=[
+ 'Tasting Notes: mango, bing cherry, pineapple',
  'bourbon ají variety; Huila, Colombia; mango, bing cherry, pineapple; washed process',
  'We are thrilled to share another beautiful lot of bourbon ají from producer Arbey Cordoba!',
  'Archived: 07.02.26',
