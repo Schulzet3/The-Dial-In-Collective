@@ -332,6 +332,7 @@ test('#2837 original R215 audit helper restores ONLY exact reviewed pre-R215 blo
  const map=new Map([
   [spec.historicalSourceSha+':'+spec.path,'100644:'+spec.historicalBlobSha],
   [candidate.publishedSourceSha+':'+spec.path,'100644:'+spec.historicalBlobSha],
+  [candidate.publishedSourceSha+':'+spec.path,'100644:'+spec.historicalBlobSha],
   [candidate.developmentSourceSha+':'+spec.path,'100644:'+spec.unfinishedBlobSha],
   [candidate.developmentSourceSha+':src/server/coffee-selected-offer-h2.mjs','100644:'+'c'.repeat(40)]
  ]);
@@ -347,4 +348,33 @@ test('#2837 original R215 audit helper restores ONLY exact reviewed pre-R215 blo
  assert.throws(()=>discoverCompatibleAuditSupport({...candidate,sourceObjectAt:(ref,path)=>
   ref===candidate.publishedSourceSha&&path===spec.path?'100644:'+'f'.repeat(40):resolver(ref,path)}),
   /Published historical audit helper bytes/);
+});
+
+test('#2837 restore published heading helper only when selected READY provenance stays unchanged',()=>{
+ const spec=REVIEWED_COMPATIBLE_AUDIT_SUPPORT, pub='a'.repeat(40),
+   dev='b'.repeat(40), merge='c'.repeat(40);
+ const path=spec.path, runtime='src/server/coffee-selected-offer-h2.mjs';
+ const owner={id:'DIC-Q-33-r215-original325-327-current-offer-h2-water-decaf',
+  issue:33,state:'TESTING',scope_paths:[runtime,'src/server/coffee-page-metadata.mjs']};
+ const objects=new Map([
+  [pub+':'+path,'100644:'+spec.historicalBlobSha],
+  [dev+':'+path,'100644:'+spec.unfinishedBlobSha],
+  [spec.historicalSourceSha+':'+path,'100644:'+spec.historicalBlobSha],
+  [dev+':'+runtime,'100644:'+('d'.repeat(40))],
+  [merge+':'+path,'100644:'+spec.historicalBlobSha],
+  [merge+'^:'+path,'100644:'+spec.historicalBlobSha]
+ ]);
+ const read=(ref,p)=>objects.get(ref+':'+p)??null;
+ const args={queue:{items:[owner]},restoredPaths:[runtime],
+  pinnedReadyPaths:['src/server/coffee-page-metadata.mjs'],
+  publishedSourceSha:pub,developmentSourceSha:dev,sourceObjectAt:read,
+  selectedReadyItems:[{id:'DIC-Q-33-r210',merged_source_sha:merge}]};
+ assert.deepEqual(discoverCompatibleAuditSupport(args),[path]);
+ assert.deepEqual(discoverCompatibleAuditSupport({...args,
+   queue:{items:[{...owner,state:'READY'}]}}),[]);
+ assert.deepEqual(discoverCompatibleAuditSupport({...args,
+   sourceObjectAt:(ref,p)=>ref===pub&&p===path?null:read(ref,p)}),[]);
+ assert.throws(()=>discoverCompatibleAuditSupport({...args,
+   sourceObjectAt:(ref,p)=>ref===merge&&p===path?'100644:'+('e'.repeat(40)):read(ref,p)}),
+   /Selected READY merge changed published heading helper/);
 });
