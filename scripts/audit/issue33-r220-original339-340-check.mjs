@@ -12,7 +12,7 @@ import {selectedProductHeadings} from './issue33-selected-product-heading.mjs';
 const rows=[
  {n:339,url:'https://snowyelk.com/products/the-summit',name:'The Summit',
   roast:'Dark',notes:['Chocolate brownie','pomegranate','dried cherry'],
-  raw:[/Tasting Notes:/i,/Roast Level:\s*Dark/i,/Colombia\s*(?:&|and)\s*Brazil/i,/Washed\s*(?:&|and)\s*Semi-Washed/i]},
+  raw:[/Chocolate Brownie/i,/Pomegranate/i,/Dried Cherry/i,/Colombia\s*(?:&|and)\s*Brazil/i,/Washed\s*(?:&|and)\s*Natural/i]},
  {n:340,url:'https://sodality.coffee/products/las-brisas-nicaragua',name:'Las Brisas',
   roast:null,notes:['Lemon Lime Soda','Greek Yogurt','Dried Fruit','Graham','Rooibos Tea'],
   raw:[/Las Brisas Microfarm/i,/Centroamericano/i,/1300\s*-\s*1500\s*masl/i,/Washed/i]}
@@ -56,6 +56,15 @@ for(const row of rows){
    e.push('selected_blend_origin_missing');
   // Two different green processes in one blend are not a single Washed assertion.
   if(f.process==='Washed'||f.process==='Natural')e.push('mixed_green_process_collapsed');
+  // Direct selected-product source facts are stricter than a cached third-party
+  // rendering. Live source now says Blend, Washed & Natural (not old Semi-Washed).
+  const direct=p.source_facts||[];
+  if(!direct.some(x=>x.field==='process'&&x.source_type==='html'&&
+     /Blend,\s*Washed\s*(?:&|and)\s*Natural/i.test(String(x.value||''))))
+   e.push('selected_current_mixed_process_html_fact_missing');
+  if(!direct.some(x=>x.field==='roast_level'&&x.source_type==='html'&&
+     /Dark/i.test(String(x.value||''))))
+   e.push('selected_current_dark_roast_html_fact_missing');
   if(/Greek Yogurt|Rooibos|Swiss Water/i.test(String(f.tasting_notes||'')))
    e.push('borrowed_adjacent_product_or_decaf_sensory');
  }else{

@@ -7,7 +7,7 @@ const summit={
  name:'The Summit',url:'https://snowyelk.com/products/the-summit',
  specs:['Tasting Notes: Chocolate brownie, pomegranate, and dried cherry',
   'Roast Level: Dark','Origin: Blend, Colombia & Brazil',
-  'Process: Washed & Semi-Washed','Recommended Brewing Methods: Cold Brew, Drip Machine']};
+  'Process: Blend, Washed & Natural','Recommended Brewing Methods: Cold Brew, Drip Machine']};
 const brisas={
  name:'Las Brisas',url:'https://sodality.coffee/products/las-brisas-nicaragua',
  specs:['Notes: Lemon Lime Soda, Greek Yogurt, Dried Fruit, Graham, Rooibos Tea',
