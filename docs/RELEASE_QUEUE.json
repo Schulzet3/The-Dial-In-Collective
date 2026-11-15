@@ -8,6 +8,32 @@
   },
   "items": [
     {
+      "id": "DIC-Q-33-r232-selected-annual-release-role",
+      "issue": 33,
+      "pr": 2940,
+      "title": "Exclude annual selection/offering marketing from selected coffee unique release labels (original603 Uraga/Wuri #371-372)",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-identity-evidence.mjs"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33; development-only; mandatory live preflight development_sha=64b623eef143f2ce8415ae17c4c2b7a35bf4b2a9 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d; seller selected official pages https://sweetbloomcoffee.com/products/uraga and https://sweetbloomcoffee.com/products/wuri",
+      "tests": [
+        "First exact R232 official current parser job 43749770884 FAILED: wrongly produced release_label 2026 on two selected products based on nonunique first/last annual offerings; two independent selected raw HTTPS identities, direct processing/origin/notes and Add Coffee/Source Review were correct.",
+        "Red-first originally mislabeled p.fields.espresso_recipe missing; corrected current afterproof to use optional top-level roaster_recipe, not an unrelated filter recipe.",
+        "Corrected exact PR SHA 0067f092e0f8a0cd10701c627a2bc8426e097d70 selected official workflow 43749983697 SUCCESS: 11 positive/adversarial parser tests, 2/2 real guarded current official HTML selected H1, raw SHA256, current parser, Add Coffee/Source Review. Both no longer assign release_label 2026. Both preserve current own selected Natural/Washed green process, notes, grower group, locality and roaster_recipe 18.5g to 36g in 20–22s. Full frozen603 workflow SKIPPED not certified."
+      ],
+      "ci_runs": [
+        43749983697
+      ],
+      "blockers": [
+        "Applicable exact-source Node22/lint, cloud/mobile, SQL, approval/governance and official live selected-source PR CI must finish SUCCESS; initial corrected-head governance 43749983754 FAILED solely on missing new app source queue intake, this entry repairs.",
+        "Nonforce merged-source readback and exact merged CI remain UNVERIFIED. READY must not be promoted until all narrow gates complete; original603 individual review remains OPEN."
+      ],
+      "notes": "Development source-only narrow annual offering vs unique release identification. Preserve direct clearly labeled Release/harvest/lot, chosen product, unresolved conflicts and human Add Coffee. Immutable 603-row CSV, capture/oracle/scorer, all existing unrelated queue items unchanged. No owner Publish, Netlify, production SQL/Edge/Auth, provider/member/backup writes, secret, or payment.",
+      "production_deployed": false
+    },
+    {
       "id": "DIC-Q-509-source-path-case-guard-20261115",
       "issue": 509,
       "pr": null,
