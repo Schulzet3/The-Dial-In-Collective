@@ -545,3 +545,12 @@ DIC_PREFLIGHT_VERIFIED development_sha=8da4a1fa94b53fea08a226270d64a23926f7b62a 
 - Acceptance: COMPLETE for four eligible READY features and this publication. Next: continue separate unfinished work; new owner Publish required for future READY.
 
 DIC_PREFLIGHT_VERIFIED development_sha=9c22f1957a00f303d909616c8f07b7bfb6f89a0d preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+## DIC-20261115-DRIVEFORM-06 — one-use owner Drive form release grant [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=4922aa906800412d1f5dc448be90378b2679767d preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+- New owner Publish source: Owner November 14, 2026 America/Denver, this conversation: 'Publish if you need to. Just get this done.' Exactly the single READY DIC-Q-28-owner-drive-form-referrer-20261115 Google Drive native owner form 403 fix, not unrelated READY/unready work, backup courier migration, Auth/SQL/member writes, spending or future releases.
+- Frozen READY item: DIC-Q-28-owner-drive-form-referrer-20261115
+- Tested candidate SHA: e93c7de6d63d21df628353e76099020ef6a4c870
+- Five exact candidate statuses SUCCESS: approval 43682041379; Node/lint 43682041499; cloud and mobile-browser 43682041389; SQL 43682041381 (all five jobs PASS).
+- Published source baseline: c9a68360abd192335e91a9f56bb7b4b022c5746e. Only netlify/functions/dic-owner-drive-connect.mjs changed in deployables; 8 unfinished application/SQL paths, 126 workflows, 32 unready tests and one workflow test isolated, accepted encrypted backup retained.
+- One-use grant DIC-20261115-DRIVEFORM-06 expires 2026-11-15T08:44:01.009Z; only single nonforce main controller may publish; not DEPLOYED until exact release ref/Netlify READY/current.
