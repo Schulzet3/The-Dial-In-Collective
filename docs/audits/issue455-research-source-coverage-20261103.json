@@ -2700,6 +2700,23 @@
       "current_app_crosswalk": "development 4f3f15559d8e502d9cba89cc4a29092801bef06e: site/lib/engine.js blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6 uses approved roast-based temperature starting heuristic and equipment-controllable actual-temperature evidence; site/lib/constants.js blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2 preserves five user taste inputs; no electronic-tongue sensor or chemical recovery capture.",
       "factual_status": "CONDITIONAL_LAB_CHEMISTRY_AND_E_TONGUE_ONLY_NOT_AUTHORITATIVE_ESPRESSO_TASTE_TARGET_OR_PERSONAL_RECOMMENDATION_EFFICACY",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "LIVE-20261115-TEMPERATURE-PREFILL-CONTEXT-R270",
+      "type": "live_app_deterministic_ux_provenance_gap_not_external_science",
+      "title": "Previously measured temperature prefill lacks original basket/feed context if shot style matches",
+      "source_path": "site/lib/engine.js",
+      "source_line_range": "674-675 prior to R270",
+      "source_commit_sha": "36d1ceacab15875dc21766e1a6407f132232e80c",
+      "source_git_blob_sha": "3e20904291231a9c5a5a86e6d004a95a5489c6d6",
+      "source_access": "DIRECT_IMMUTABLE_GITHUB_SOURCE_AND_EXISTING_UI_TESTS_NOT_MEMBER_DATA",
+      "review_status": "DIRECT_SOURCE_REPRO_AND_SIX_POSITIVE_NEGATIVE_SYNTHETIC_TESTS_PROPOSED;HOSTED_EXACT_SOURCE_CI_PENDING",
+      "evidence_grade": "DETERMINISTIC_SOURCE_INSPECTION_SYNTHETIC_FIX_NO_REAL_MEMBER_INCIDENT_OR_ESPRESSO_QUALITY_OUTCOME",
+      "current_app_crosswalk": "Current Log Shot engine prefill retained valid cross-basket or slow/standard-feed measured temperature while showing empty tempSource if style identical; CloudApp displays escaped tempSource and correctly removes it on manual adjustment. Proposed development-only fix preserves value/priority but labels original different basket/feed, no automatic tastes.",
+      "factual_status": "SOURCE_REPRODUCED_SAFE_DISPLAY_ONLY_FIX_NOT_SCIENCE_POLICY",
+      "implementation_pr": 2815,
+      "implementation_head_sha": "09f38e95b09852eaa476f47c5430f8de325e552d",
+      "github267_literal_review_credit": 0
     }
   ],
   "evidence_checks": [
@@ -8384,6 +8401,28 @@
       "original_source_sha": "5bf06a17ba3bd909c5348f237e495858b21b8474",
       "github267_literal_review_credit": 0,
       "date": "2026-11-14"
+    },
+    {
+      "id": "R455-EV-APP-270-A",
+      "source": "LIVE-20261115-TEMPERATURE-PREFILL-CONTEXT-R270",
+      "claim": "Original exact engine prefill did not surface historical basket or feed mismatch if style matched, even though cross-style prefill already showed provenance; optional temperature disabled could retain hidden source label. The display was potentially misleading about the context of a measured prior shot.",
+      "grade": "LIVE_IMMUTABLE_SOURCE_DIRECT_REVIEW_NO_USER_DATA",
+      "result": "REPRODUCED_PRE_FIX_DETERMINISTIC_SOURCE_GAP",
+      "current_app": "Engine 36d1ceacab15875dc21766e1a6407f132232e80c blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6 lines 674-675; Cloud UI source main.js 28c6f6026d0ff1e6fd6575d3813b76c06a29bb47",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0,
+      "date": "2026-11-15"
+    },
+    {
+      "id": "R455-EV-APP-270-B",
+      "source": "LIVE-20261115-TEMPERATURE-PREFILL-CONTEXT-R270",
+      "claim": "New safe source keeps prior original measured temperature unchanged, labels only recorded differing basket/feed context and retains cross-style label. Six local synthetic tests cover positive/negative behaviors and original shot immutability, including legacy unknown feed and disabled temperature, without modifying taste ratings or private notes.",
+      "grade": "DIRECT_CODE_TEST_SOURCE_INSPECTED_HOSTED_PR_AND_MERGED_TESTS_PENDING_NOT_PASS",
+      "result": "DEVELOPMENT_PR_HEAD_PENDING_EXACT_CI_NO_READY_OR_REAL_TASTE_EVIDENCE",
+      "current_app": "Proposed PR #2815 code Git blob f384ae67c1a9148990cab4716dc8ad22d1ca81f3 and test blob 3136ac52cc7d250ea86a8ca67c2c7696cbd5f8d7",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0,
+      "date": "2026-11-15"
     }
   ],
   "policy_decisions_pending": [],
@@ -8584,18 +8623,18 @@
     "R455-268: Re-inspected ORIGINAL 2023 Guinard et al BCC full article via university-hosted marked PDF and PubMed; new dataset measurement-count and aroma-'sweet' distinctions added as 2 source-level checks to existing source, no new source/proposal because R112 already covers drip consumer transfer. 151/436/214; S019 unavailable; no #267 credit; follow disjoint next source/live UX gap."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-269",
-    "date": "2026-11-14",
-    "development_preflight_sha": "5bf06a17ba3bd909c5348f237e495858b21b8474",
+    "run_id": "R455-270",
+    "date": "2026-11-15",
+    "development_preflight_sha": "36d1ceacab15875dc21766e1a6407f132232e80c",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
     "source_counts": {
-      "sources": 151,
-      "evidence_checks": 439,
-      "proposals": 214
+      "sources": 152,
+      "evidence_checks": 441,
+      "proposals": 215
     },
-    "scope": "Re-review same original 2023 Vaca Guerra espresso PSD/compression study at author-uploaded 2022 full preprint methods/results, upgrade from institutional abstract only; +3 bounded claim checks, no extra DOI or policy backlog",
+    "scope": "Deterministic Log Shot measured prior temperature prefill missing original basket/feed context: SAFE display-only source/test PR #2815 with six local cases and focused queue intake",
     "github267_line_credit": 0,
-    "next": "Check exact PR-head and merge governance, preserve final-publisher methods parity gap; then reproduce SAFE UI bug or audit next distinct unverified primary claim. Standalone S019 remains inaccessible."
+    "next": "Verify corrected PR-head CI and repair actual failures; nonforce merge with [skip netlify], exact merged blobs and governance; reconcile dev READY only after complete evidence, no deployment."
   },
   "policy_decisions_resolved": [
     {
@@ -13535,6 +13574,31 @@
       "production_deployed": false,
       "github267_literal_review_credit": 0,
       "exact_source": "4f3f15559d8e502d9cba89cc4a29092801bef06e"
+    },
+    {
+      "id": "R455-PROP-270-TEMPERATURE-CONTEXT-PROVENANCE",
+      "severity": "P2_SOURCE_REPRODUCED_DISPLAY_CONTEXT_CORRECTNESS_NOT_SCIENCE",
+      "source": [
+        "LIVE-20261115-TEMPERATURE-PREFILL-CONTEXT-R270"
+      ],
+      "evidence": [
+        "R455-EV-APP-270-A",
+        "R455-EV-APP-270-B"
+      ],
+      "finding": "Matching historical shot style alone does not show whether a copied actual measured temperature came from another basket or feed mode; historical origin label was omitted despite mismatch.",
+      "evidence_grade": "DETERMINISTIC_CURRENT_CODE_REVIEW_SIX_SYNTHETIC_CASES_PENDING_EXACT_CI",
+      "user_benefit": "Truthful low-friction optional-temperature provenance in Log Shot; avoid inferring the previous measurement came from identical basket/feed context.",
+      "current_locked": "Five independent unfilled ratings until user action, all-green vs incomplete, one truly controllable recommendation, original measured shots/notes/private history, separate styles Turbo/Fast-Flow and Slow Feed, grinder calibrations/versions and temperature equipment capabilities, privacy/RLS/Community.",
+      "current_app": "Original prefill engine.js Git blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6; proposed code blob f384ae67c1a9148990cab4716dc8ad22d1ca81f3, UI main.js escapes and clears source as existing R195/R197.",
+      "proposed_change": "Implement SAFE source display change to label recorded differing basket/feed without changing prefilled temperature, recommendation, tastes, numerical policy, data capture, selected style, grinder, historical notes or data. Suppress stale label when optional temperature tracking is disabled.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "PR_2815_SAFE_SOURCE_TESTS_SUBMITTED_HEAD_APPROVAL_FIRST_FAILED_MISSING_QUEUE_NOW_IN_PROGRESS_QUEUE_ADDED;HOSTED_CI_PENDING",
+      "test_plan": "Six synthetic Node22 direct engine tests and unchanged prior UI provenance tests, applicable GitHub Node22/lint/build, browser/mobile/offline, SQL/security, approval and merged governance; frozen603 skipped/not pass. Nonforce merge/readback only if exact-source CI passes.",
+      "release_queue_status": "DIC-Q-455-r270-temperature-context-provenance_IN_PROGRESS_NOT_READY",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0,
+      "exact_source": "36d1ceacab15875dc21766e1a6407f132232e80c"
     }
   ],
   "changeScope": {
