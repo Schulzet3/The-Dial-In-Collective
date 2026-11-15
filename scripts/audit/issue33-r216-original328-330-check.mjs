@@ -33,7 +33,8 @@ for(const c of cases){
  if(!r.add_coffee_ui_rendered||!r.source_review_rendered)e.push('preview_or_review_missing');
  if((p.conflicts||[]).includes('name')||f.decaffeination_method||f.espresso_recipe)e.push('incorrect_name_or_decaf_or_recipe');
  if(c.n===328){
-  if(!/Region:\s*Yirgacheffe/i.test(visible)||!/Process:\s*Washed/i.test(visible))e.push('source_selected_fields_changed');
+  const direct=(p.source_facts||[]).filter(x=>x.source_type==='html'&&String(x.section||'').includes(c.name));
+  if(!direct.some(x=>x.field==='origin'&&/Yirgacheffe/i.test(String(x.value||'')))||!direct.some(x=>x.field==='process'&&/^Washed\b/i.test(String(x.value||''))))e.push('direct_selected_region_or_process_source_changed');
   if(f.process!=='Washed'||!/Ethiopia|Yirgacheffe/i.test(String(f.origin||'')))e.push('selected_process_or_region_missing');
   if(/Guatemala|mango/i.test(notes))e.push('sibling_or_SEO_leak');
  }else if(c.n===329){
