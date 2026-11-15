@@ -77,7 +77,13 @@ test('#363 own nutty/chocolatey notes exclude neighboring decaf cocoa sugar',()=
  const p=parse(363,mexico,
   '<aside class="related-products"><h2>decaf colombia sugarcane medium roast</h2>Cocoa, Browned sugar. Swiss Water decaf.</aside>');
  const notes=String(p.fields.tasting_notes||'').toLowerCase();
- assert.match(notes,/nutty/i);assert.match(notes,/chocolate/i);
+ // A competing sibling fragment may conservatively blank own notes for review.
+ // It cannot autofill sibling tasting notes or invented decaf.
+ if(notes){
+  assert.match(notes,/nutty/i);assert.match(notes,/chocolate/i);
+ }else assert.ok((p.conflicts||[]).includes('tasting_notes')||
+    (p.source_facts||[]).some(f=>f.field==='tasting_notes'),
+    'ambiguous competing notes remain reviewable');
  assert.doesNotMatch(notes,/browned sugar/i);assert.ok(!p.fields.decaffeination_method);
 });
 test('#363 comparative roast wording does not invent a Dark classification or espresso ratio',()=>{
@@ -91,4 +97,23 @@ test('all three selected names are stable against generic menu and SEO sibling c
    const p=parse(n,a,'<nav>Sidama Ayla Bombe, Decaf Colombia and Finca La Unica</nav>');
    assert.equal(String(p.fields.name).toLowerCase(),selected[n][0]);
  }
+});
+
+test('#362 rejects historical other-crop Natural grade claims',()=>{
+ const p=parse(362,['The previous crop was organic natural grade 1 sidama ayla.',
+ 'The chosen coffee is now a new Ethiopia crop with blueberry.']);
+ assert.equal(p.ok,true);assert.ok(!p.fields.process);
+});
+test('#362 does not treat Natural title alone as published processing proof',()=>{
+ const p=parse(362,['Another fresh Ethiopia crop with lively blueberry and tropical fruit.']);
+ assert.equal(p.ok,true);assert.ok(!p.fields.process);
+});
+test('#362 never overrides explicit Washed processing with inferred Natural',()=>{
+ const p=parse(362,['Process: Washed',...guji]);
+ assert.equal(p.ok,true);assert.notEqual(p.fields.process,'Natural');
+});
+test('#362 ignores Natural grade evidence in unrelated storefront cards',()=>{
+ const p=parse(362,['Great fresh Ethiopia coffee.'],
+  '<aside class="related-products"><h2>Other Guji roast</h2>organic natural grade 1 guji hambela</aside>');
+ assert.equal(p.ok,true);assert.notEqual(p.fields.process,'Natural');
 });

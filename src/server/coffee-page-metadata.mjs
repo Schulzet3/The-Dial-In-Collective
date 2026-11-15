@@ -3030,6 +3030,34 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   }
  }
 
+ // The selected Product can describe Natural processing by a graded
+ // *named current lot* instead of the literal "Process:" field.
+ // Requiring an exact H1, matching name, and direct own-product sentence
+ // prevents menu, SEO, old harvest or adjacent coffee contamination.
+ if(!fields.process&&!conflicts.has('process')&&
+    /\bnatural\s+(?:light|medium|dark)(?:\s*[-–]\s*(?:light|medium|dark))?\s+roast\b/iu.test(String(fields.name||''))){
+   const blocks=productCoffeeProse(canonicalProduct,clean);
+   const headings=blocks.filter(b=>b.tag==='h1'&&!b.educational);
+   if(headings.length===1&&keyOf(headings[0].text)===keyOf(fields.name)){
+     const direct=blocks.find(b=>{
+       if(b.tag!=='p'||b.educational||b.text.length>500||
+          /\b(?:last|previous|former|historical|was formerly|unlike|rather than|not|never|without|other coffees?|for example|such as)\b/iu.test(b.text))return false;
+       const match=b.text.match(/\b(?:organic\s+)?natural\s+grade\s*[1-3]\s+([\p{L}\p{M}][\p{L}\p{M}'’-]*(?:\s+[\p{L}\p{M}][\p{L}\p{M}'’-]*){1,3})/iu);
+       if(!match)return false;
+       const words=match[1].trim().split(/\s+/u);
+       return words.length>=2&&keyOf(fields.name).includes(keyOf(words.slice(0,2).join(' ')));
+     });
+     if(direct){
+       addField(fields,'process','Natural');
+       if(fields.process==='Natural'&&source_facts.length<384)source_facts.push({
+         field:'process',label:'Current selected named natural-grade coffee',
+         value:direct.text.slice(0,300),source_url,source_type:'html',
+         section:'Exact current chosen H1 and own fresh-lot grade paragraph'
+       });
+     }
+   }
+ }
+
  // All identity/scope/field evidence above used the unmodified selected
  // Product name. Shorten only the user-facing name after those checks and
  // retain the original printed title for traceability and later review.
