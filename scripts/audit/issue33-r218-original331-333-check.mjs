@@ -33,7 +33,13 @@ const visible=selected.replace(/<[^<>]{0,2000}>/gu,' ').replace(/&(?:nbsp|#0*160
  if(!r.selected_heading_identity_verified||!heads.includes(c.name)||f.name!==c.name)e.push('selected_H1_identity_mismatch');
  if(!r.add_coffee_ui_rendered||!r.source_review_rendered)e.push('preview_or_review_missing');
  if((p.conflicts||[]).includes('name')||f.decaffeination_method||f.espresso_recipe)e.push('incorrect_name_or_decaf_or_recipe');
- if(!/Reminds us of:/i.test(visible)||!/Process:\s*Washed/i.test(visible))e.push('selected_source_labels_changed');
+ // The current seller uses nested text/attributes for display labels; flattening HTML
+ // can lose label boundaries. Require exact primary URL/H1, raw SHA, chosen parser,
+ // and its own direct HTML source facts for BOTH green process and tasting notes.
+ const ownFacts=(p.source_facts||[]).filter(x=>x.source_type==='html'&&x.source_url===c.url&&x.conflicting!==true);
+ const ownProcess=ownFacts.some(x=>x.field==='process'&&/^Washed$/i.test(String(x.value||'').trim()));
+ const ownNotes=ownFacts.some(x=>x.field==='tasting_notes'&&c.notes.every(n=>String(x.value||'').toLowerCase().includes(n.toLowerCase())));
+ if(!ownProcess||!ownNotes)e.push('direct_selected_html_process_or_tasting_facts_missing');
  for(const note of c.notes){
   if(!visible.toLowerCase().includes(note.toLowerCase()))e.push('selected_literally_published_note_missing:'+note);
   if(!notes.toLowerCase().includes(note.toLowerCase()))e.push('parser_tasting_note_missing:'+note);
