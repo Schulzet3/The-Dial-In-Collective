@@ -58,9 +58,13 @@ for(const {n,name,url,process,origin,notes} of cases){
   bad.push('facility_or_relationship_improperly_made_grower');
  // Roaster prints Light/Medium scale endpoints, not a chosen single roast.
  if(f.roast_level)bad.push('ambiguous_visual_roast_autofilled');
- if(f.espresso_recipe&&/305\s*g|2:30|origami/i.test(String(f.espresso_recipe)))
-  bad.push('filter_recipe_improperly_made_espresso');
- if(!f.espresso_recipe)bad.push('published_selected_espresso_recipe_missing');
+ // This parser exposes the optional published recommendation as TOP-LEVEL
+ // roaster_recipe, not as a canonical coffee field. Missing recipe remains
+ // visible for separate investigation rather than a fabricated runtime error.
+ const recipe=p.roaster_recipe||null;
+ if(recipe&&(/305\\s*g|2:30|origami/i.test(JSON.stringify(recipe))||
+   Number(recipe.dose_g)!==18.5||Number(recipe.yield_g)!==36))
+  bad.push('filter_recipe_or_wrong_espresso_measurement');
  if((p.conflicts||[]).length)bad.push('current_selected_conflict_requires_review');
  if(n===371&&(has(f.tasting_notes,'citra hops')||has(f.tasting_notes,'mandarin')))
   bad.push('borrowed_wuri_sensory');
@@ -68,7 +72,7 @@ for(const {n,name,url,process,origin,notes} of cases){
   bad.push('borrowed_uraga_sensory');
  errs.push(...bad.map(x=>n+':'+x));
  records.push({number:n,official_url:url,raw_bytes:bytes.length,raw_sha256:hash,
-   selected_h1:h1,current_fields:f,conflicts:p.conflicts||[],
+   selected_h1:h1,current_fields:f,roaster_recipe:p.roaster_recipe||null,conflicts:p.conflicts||[],
    source_facts:facts.filter(x=>['release_label','producer','roast_level','espresso_recipe'].includes(x.field)).slice(0,15),
    failures:bad});
 }

@@ -78,3 +78,19 @@ test('an independently labeled Lot 12 preserves real release evidence',()=>{
  const p=parse(372,['Process: Washed','Lot: Lot 12','Tasting Notes: Mandarin']);
  assert.notEqual(p.fields.release_label,'2026');
 });
+
+test('#371 selected current annual first offering does not make a unique release',()=>{
+ const p=parse(371,[...uraga,'Our first natural offering from Ethiopia of 2026 is this lovely gem from the Uraga Washing Station.']);
+ assert.equal(p.ok,true);
+ assert.notEqual(p.fields.release_label,'2026');
+});
+test('#372 last washed seasonal selection is not a unique lot release',()=>{
+ const p=parse(372,[...wuri,'Our last washed selection from Ethiopia for 2026 comes from the Wuri washing station in Gedeb.']);
+ assert.equal(p.ok,true);
+ assert.notEqual(p.fields.release_label,'2026');
+});
+test('an explicit selected Release: 2026 remains a valid direct source claim',()=>{
+ const p=parse(371,['Release: 2026','Process: Natural','Tasting Notes: Guava']);
+ assert.equal(p.ok,true);
+ assert.equal(p.fields.release_label,'2026');
+});
