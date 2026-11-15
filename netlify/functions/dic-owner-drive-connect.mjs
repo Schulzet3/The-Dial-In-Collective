@@ -8,7 +8,6 @@ const COOKIE='dic_drive_setup',PENDING='dic_drive_pending',TTL=600000;
 const DRIVE='https://www.googleapis.com/drive/v3/files/';
 const UPLOAD='https://www.googleapis.com/upload/drive/v3/files';
 const defaultEnv=name=>globalThis.Netlify?.env?.get?.(name)??process.env[name];
-const escapeHtml=s=>String(s).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 const securityHeaders={'Cache-Control':'no-store, max-age=0','Pragma':'no-cache','Referrer-Policy':'no-referrer',
   'X-Content-Type-Options':'nosniff','X-Robots-Tag':'noindex, nofollow',
   'Permissions-Policy':'camera=(), microphone=(), geolocation=()'};
@@ -37,10 +36,6 @@ function sign(data,password){
   const packed=Buffer.from(JSON.stringify(data)).toString('base64url');
   const mac=createHmac('sha256',password).update('dic-drive-owner-v1:'+packed).digest('base64url');
   return packed+'.'+mac;
-}
-function extractCookie(value){
-  const c=String(value||'').split(';').map(x=>x.trim()).find(x=>x.startsWith(COOKIE+'='));
-  return c?.slice(COOKIE.length+1)||'';
 }
 function verifySession(raw,password,now){
   if(!raw||raw.length>1000)return null;
