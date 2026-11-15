@@ -35,7 +35,7 @@ test('end-to-end synthetic 5 MiB encrypted-ZIP transfer: GitHub SHA, resumable c
       if(url==='https://oauth2.googleapis.com/token')return json({access_token:'synthetic',scope:SCOPE});
       if(url.startsWith('https://www.googleapis.com/drive/v3/files/'+FOLDER_ID))return json({id:FOLDER_ID,name:'DIC Automated Encrypted Backups',mimeType:'application/vnd.google-apps.folder',capabilities:{canAddChildren:true}});
       if(url.startsWith('https://www.googleapis.com/drive/v3/files?')){
-        assert.ok(decodeURIComponent(url).includes("name = 'dic-nightly-456.zip'"),'legacy name must be checked');
+        assert.ok(new URL(url).searchParams.get('q')?.includes("name = 'dic-nightly-456.zip'"),'legacy name must be checked');
         return json({files:present?[{...stored,appProperties:undefined}]:[]});
       }
       if(url.includes('/actions/artifacts/456/zip'))return new Response(null,{status:302,headers:{location:'https://synthetic.invalid/archive'}});

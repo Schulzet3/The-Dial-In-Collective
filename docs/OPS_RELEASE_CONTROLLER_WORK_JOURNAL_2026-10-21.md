@@ -1,3 +1,7 @@
+## 2026-11-15 — #28 targeted synthetic fixture URLSearchParams correction (TESTING) [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=c5298ab3a58907ca0a021747e00b6789a48693b4 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+- First PR #2953 hosted main CI 43759828046 FAILED on one new fixture assertion: test manually decoded the complete encoded URL, leaving URLSearchParams '+' spaces; it falsely rejected an unchanged correct q query. Existing production courier source, scope and security unchanged. Correct ONLY the synthetic query assertion to inspect new URL(url).searchParams.get('q'), then rerun exact-source CI and safe nonforce integration. Failure is NOT PASS and cannot be reused. No provider writes, backup export, new test workflow or safety bypass.
+
 ## 2026-11-15 — #28 pre-cutover legacy/native ZIP duplicate guard (TESTING) [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=411ece34cd606714fb59a3043216f9a365f3b6ad preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 - Scope: owner requested further tests/debug/fixes before next naturally scheduled encrypted backup; fix only verified offsite courier duplication risk, preserve existing manual PASS, hourly monitor, restore schedules and legacy copy until scheduled proof.
