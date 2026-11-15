@@ -1,0 +1,1758 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "QA11D",
+  "review_date_utc": "2026-11-15",
+  "authority": "Owner strict literal line-one V2 source review",
+  "preflight": {
+    "development_sha": "051ebefd5e870aae6b4478c91961f99c69003756",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d"
+  },
+  "scope": {
+    "source_file_index": "P404",
+    "path": "tests/read-only-account-acceptance.test.mjs",
+    "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "pinned_tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+    "pinned_blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+    "eligible_file_total_lines": 93,
+    "first_line": 1,
+    "last_line": 61,
+    "direct_lines": 61,
+    "live_commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+    "live_blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+    "live_positions_reviewed": 61,
+    "live_drift_in_this_range": 0,
+    "frozen_historical_lines_credited": 0
+  },
+  "first_frozen_source_revalidation": {
+    "path": ".github/workflows/approval-continuity.yml",
+    "frozen_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+    "frozen_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+    "strict_existing_receipt": "docs/audits/issue267-v2-strict-batches/S2-001.json",
+    "source_literals_and_fields_verified": 41,
+    "extra_credit": 0
+  },
+  "boundary": "P404 line 62–93 separately pending; no claim of complete P404, 436 files or live source universe",
+  "findings": [
+    {
+      "category": "EVIDENCE_LIMIT",
+      "severity": "informational",
+      "evidence": "These tests use vm synthetic fetch and role fixture only; real signed-in Admin/member or provider-side privacy, RLS, latency and offline acceptance remain outside this source-reading proof",
+      "disposition": "Keep #96 ownership and existing explicit UNVERIFIED external cases; no application/code mutation justified"
+    }
+  ],
+  "runtime_testing": "NOT_RUN_DOCS_ONLY",
+  "hosted_testing": "PENDING",
+  "provider": "NOT_APPLICABLE_NO_PROVIDER_WRITE",
+  "production_change": false,
+  "per_line": [
+    {
+      "line": 1,
+      "source_text": "import test from 'node:test';",
+      "inspection_classification": "import",
+      "behavior": "Node built-in test runner provides the tests' registration function",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "No side effect beyond test import",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 1,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 1,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 2,
+      "source_text": "import assert from 'node:assert/strict';",
+      "inspection_classification": "import",
+      "behavior": "Strict assertions prevent coercive matches in privacy acceptance",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Avoid loose equality for IDs or state",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 2,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 2,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 3,
+      "source_text": "import {readFile} from 'node:fs/promises';",
+      "inspection_classification": "import",
+      "behavior": "Read test helper as text from local project without HTTP",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Path resolution should remain relative to test module",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 3,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 3,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 4,
+      "source_text": "import vm from 'node:vm';",
+      "inspection_classification": "import",
+      "behavior": "Node VM isolates helper evaluation for synthetic tests",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "This is test execution, not running browser or hosted Auth",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 4,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 4,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 5,
+      "source_text": "",
+      "inspection_classification": "blank",
+      "behavior": "Section separator between imports and fixture construction",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "No executable effect",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 5,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 5,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 6,
+      "source_text": "const source=await readFile(new URL('../scripts/qa/read-only-account-acceptance.mjs',import.meta.url),'utf8');",
+      "inspection_classification": "setup",
+      "behavior": "Load the read-only account acceptance script's exact UTF-8 source",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Review helper source alongside tests; not live provider verification",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 6,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 6,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 7,
+      "source_text": "const run=vm.runInNewContext(source.split('// BROWSER ENTRY:')[0]+'\\nrunReadOnlyAccountAcceptance;',{URL,URLSearchParams,AbortSignal});",
+      "inspection_classification": "setup",
+      "behavior": "Evaluate pre-browser helper in a fresh VM and retrieve its function",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "String marker split is intentionally brittle if helper structure changes; test loading would fail",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 7,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 7,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 8,
+      "source_text": "const uid='11111111-1111-4111-8111-111111111111';",
+      "inspection_classification": "fixture",
+      "behavior": "Declare deterministic synthetic signed-in owner UUID",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Dummy identity only; never infer a genuine account was used",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 8,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 8,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 9,
+      "source_text": "const other='22222222-2222-4222-8222-222222222222';",
+      "inspection_classification": "fixture",
+      "behavior": "Declare distinct UUID for cross-owner isolation probes",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Must differ from owner for tests to detect leaks",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 9,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 9,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 10,
+      "source_text": "const token='secret-test-session-value';",
+      "inspection_classification": "fixture",
+      "behavior": "Use intentionally fake bearer token for redaction assertions",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Token string must not appear in report output",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 10,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 10,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 11,
+      "source_text": "const email='private-test@example.invalid';",
+      "inspection_classification": "fixture",
+      "behavior": "Use reserved .invalid example email for privacy payload checks",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Never a real recipient",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 11,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 11,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 12,
+      "source_text": "const arrays=['setups','versions','setupPreferences','calibrations','baskets','basketVersions','library','submissions','workspaces','workspaceCoffees','shots','notes','families','recipePreferences','experiments'];",
+      "inspection_classification": "fixture",
+      "behavior": "Enumerate all expected personal-state arrays in the synthetic payload",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Schema checks need updating if private state contract changes",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 12,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 12,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 13,
+      "source_text": "const fields=['coffee_name','roaster','release_key','release_label','release_origin','release_process','release_producer','release_variety','release_roast_level','style','observed_on','dose_g','yield_g','ratio','time_s','extraction','body','clarity','sweetness','astringency','shot_count','contributor_count'];",
+      "inspection_classification": "fixture",
+      "behavior": "Enumerate the intended sanitized Community DTO keys",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Keep aligned with actual approved DTO contract",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 13,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 13,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 14,
+      "source_text": "function fixture({role='admin',serverRole=role,leak='',expired=false,transport=false,denyStatus=403,denyCode='42501'}={}){",
+      "inspection_classification": "fixture",
+      "behavior": "Define synthetic Admin/member role, leak mode, token expiry and denial controls",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Default Admin is fixture-only and not authorization proof",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 14,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 14,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 15,
+      "source_text": " const requests=[];",
+      "inspection_classification": "fixture",
+      "behavior": "Collect every outbound simulated request for later assertions",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Collection is local test memory, not network logging",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 15,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 15,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 16,
+      "source_text": " const privateState=Object.fromEntries(arrays.map(k=>[k,[{id:uid,owner_id:uid,private_value:'private note text'}]]));",
+      "inspection_classification": "fixture",
+      "behavior": "Populate each private-state array with one current-owner synthetic object",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Enables explicit owner checks but not real RLS proof",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 16,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 16,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 17,
+      "source_text": " privateState.preferences={owner_id:uid};",
+      "inspection_classification": "fixture",
+      "behavior": "Populate preferences with the same owner ID",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Preferences use object rather than array schema",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 17,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 17,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 18,
+      "source_text": " const row=Object.fromEntries(fields.map(k=>[k,null]));row.release_key='a'.repeat(64);row.coffee_name='Public coffee';",
+      "inspection_classification": "fixture",
+      "behavior": "Build sanitized Community row, 64-hex release key and public coffee label",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "DTO values are synthetic; no actual community payload",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 18,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 18,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 19,
+      "source_text": " if(leak==='community')row.owner_id=other;",
+      "inspection_classification": "fixture",
+      "behavior": "Inject foreign owner field in Community DTO when requested",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Detect unexpected raw identity field disclosure",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 19,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 19,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 20,
+      "source_text": " if(leak==='email')row.coffee_name=email;",
+      "inspection_classification": "fixture",
+      "behavior": "Inject email into public coffee name when requested",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Tests email-like disclosure redaction",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 20,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 20,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 21,
+      "source_text": " if(leak==='personal')privateState.notes[0].owner_id=other;",
+      "inspection_classification": "fixture",
+      "behavior": "Inject foreign owner into private note for ownership negative case",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Cross-owner leak is deliberately simulated",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 21,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 21,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 22,
+      "source_text": " let identityCalls=0;",
+      "inspection_classification": "fixture",
+      "behavior": "Track identity-check count for midrun account-switch negative case",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Can detect second identity mismatch",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 22,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 22,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 23,
+      "source_text": " const env={location:{origin:'https://app.dialincollective.com'},prompt:()=>role,AbortSignal,",
+      "inspection_classification": "fixture",
+      "behavior": "Provide exact expected app origin, role prompt and AbortSignal",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Simulated environment; browser origin checks still needed",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 23,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 23,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 24,
+      "source_text": "  localStorage:{getItem:()=>JSON.stringify({access_token:token,expires_at:expired?0:Date.now()/1000+3600,user:{id:uid,email}})},",
+      "inspection_classification": "fixture",
+      "behavior": "Provide fake saved session with expiry switch and dummy identity/email",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Stale-session branch should reject before HTTP",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 24,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 24,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 25,
+      "source_text": "  async fetch(url,options){",
+      "inspection_classification": "fixture",
+      "behavior": "Supply an instrumented fake fetch implementation",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "No real network, Auth or database call occurs",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 25,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 25,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 26,
+      "source_text": "   requests.push({url,options});if(transport)throw new Error('sensitive transport detail '+token);",
+      "inspection_classification": "fixture",
+      "behavior": "Record request then optionally raise sensitive-looking transport failure",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Failure report must omit token and error detail",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 26,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 26,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 27,
+      "source_text": "   const u=new URL(url),name=u.pathname.split('/').at(-1);",
+      "inspection_classification": "fixture",
+      "behavior": "Parse URL and trailing path segment to route fake endpoints",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Simplified dispatch can diverge from real PostgREST routing",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 27,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 27,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 28,
+      "source_text": "   const denied=()=>({status:denyStatus,ok:false,data:{code:denyCode,message:email,details:token}});",
+      "inspection_classification": "fixture",
+      "behavior": "Construct synthetic denial with status/SQLSTATE and sensitive message/detail",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Requires denied test to classify 42501; redact error body",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 28,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 28,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 29,
+      "source_text": "   let r;",
+      "inspection_classification": "fixture",
+      "behavior": "Initialize response variable for synthetic endpoint dispatch",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Control-only declaration",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 29,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 29,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 30,
+      "source_text": "   if(options.headers.Authorization==='Bearer dic-invalid-nonsecret-test')r={status:401,ok:false,data:{message:'Invalid JWT'}};",
+      "inspection_classification": "fixture",
+      "behavior": "Return invalid-JWT 401 for known fake bearer token",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Tests invalid session route without using a real JWT",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 30,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 30,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 31,
+      "source_text": "   else if(!options.headers.Authorization)r=denied();",
+      "inspection_classification": "fixture",
+      "behavior": "Reject missing Authorization with configurable denial",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Model anonymity, never assume true RLS",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 31,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 31,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 32,
+      "source_text": "   else if(u.pathname==='/auth/v1/user'){identityCalls++;r={status:200,ok:true,data:{id:leak==='identity'&&identityCalls===2?other:uid,email}};}",
+      "inspection_classification": "fixture",
+      "behavior": "Return mock /auth/v1/user; second identity check can return foreign UUID",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Protect against account swaps while probe runs",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 32,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 32,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 33,
+      "source_text": "   else if(name==='dic_session_status')r={status:200,ok:true,data:{authenticated:true,admitted:true,emailVerified:true,admin:serverRole==='admin'}};",
+      "inspection_classification": "fixture",
+      "behavior": "Return server-role/admission response keyed to serverRole",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Role is independent of client-selected role for mismatch negative",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 33,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 33,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 34,
+      "source_text": "   else if(name==='dic_read_personal_state')r={status:200,ok:true,data:privateState};",
+      "inspection_classification": "fixture",
+      "behavior": "Return synthesized personal-state response",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Fixture does not execute actual private read RPC",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 34,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 34,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 35,
+      "source_text": "   else if(name==='dic_browse_community_shots')r={status:200,ok:true,data:{shots:[row],total:1,offset:0,page_size:40}};",
+      "inspection_classification": "fixture",
+      "behavior": "Return one sanitized Community DTO with page metadata",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Bounded list and exact DTO validation targeted",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 35,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 35,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 36,
+      "source_text": "   else if(name==='dic_my_community_outliers')r={status:200,ok:true,data:leak==='held'?[{shot_id:other}]:[]};",
+      "inspection_classification": "fixture",
+      "behavior": "Return optional foreign held-shot ID for negative authorization case",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Test data intentionally contains cross-owner reference",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 36,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 36,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 37,
+      "source_text": "   else if(name==='dic_admin_dashboard')r=role==='admin'?{status:200,ok:true,data:{review_only:true,counts:{},private_test:email}}:denied();",
+      "inspection_classification": "fixture",
+      "behavior": "Permit mocked Admin dashboard by selected role, else deny",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Synthetic branch is not real Admin RLS confirmation",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 37,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 37,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 38,
+      "source_text": "   else if(name==='dic_admin_access_overview')r=role==='admin'?{status:200,ok:true,data:{members:[{id:other,email}],invites:[]}}:denied();",
+      "inspection_classification": "fixture",
+      "behavior": "Permit mocked Admin access overview by selected role, else deny",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Exposes dummy foreign member/email for redaction check",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 38,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 38,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 39,
+      "source_text": "   else if(name==='community_shots')r=denied();",
+      "inspection_classification": "fixture",
+      "behavior": "Deny direct raw community_shots table access",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Real production RLS still independently unverified here",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 39,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 39,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 40,
+      "source_text": "   else if(name==='coffee_submissions')r={status:200,ok:true,data:role==='admin'||leak==='submission'?[{owner_id:other}]:[]};",
+      "inspection_classification": "fixture",
+      "behavior": "Permit foreign submissions to Admin or injected member-leak case",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Submission Admin review is intentional exception",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 40,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 40,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 41,
+      "source_text": "   else r={status:200,ok:true,data:leak==='foreign'&&name==='shots'?[{owner_id:other}]:[]};",
+      "inspection_classification": "fixture",
+      "behavior": "Return foreign shots for injected leak, otherwise empty data",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Default unknown GET endpoints receive empty rows; script allowlist is essential",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 41,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 41,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 42,
+      "source_text": "   return {status:r.status,ok:r.ok,json:async()=>r.data};",
+      "inspection_classification": "fixture",
+      "behavior": "Wrap selected synthetic status and payload in fetch-like response",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "JSON payload not printed by the helper",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 42,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 42,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 43,
+      "source_text": "  }};",
+      "inspection_classification": "fixture",
+      "behavior": "Close mock fetch and its containing environment object",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "No external effect",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 43,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 43,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 44,
+      "source_text": " return {env,requests,loadConfig:async()=>({CLOUD_CONFIG:{supabaseUrl:'https://azviqqejypsefzilgonr.supabase.co',publishableKey:'public-test-key'}})};",
+      "inspection_classification": "fixture",
+      "behavior": "Return fake Supabase URL and public test key with environment",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Not a secret or hosted readback",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 44,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 44,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 45,
+      "source_text": "}",
+      "inspection_classification": "closure",
+      "behavior": "Complete fixture function",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "No action beyond constructing mocks",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 45,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 45,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 46,
+      "source_text": "test('both roles: bounded read requests, reviewed POSTs only, and no secret/record output',async()=>{",
+      "inspection_classification": "test",
+      "behavior": "Start two-role read-only and redaction acceptance test",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Synthetic acceptance only, not a real signed-in account test",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 46,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 46,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 47,
+      "source_text": " for(const role of ['admin','member']){",
+      "inspection_classification": "test",
+      "behavior": "Run once as synthetic Admin and once as member",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Covers both roles with separate fixture instances",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 47,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 47,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 48,
+      "source_text": "  const f=fixture({role});const report=await run(f.env,f.loadConfig);",
+      "inspection_classification": "test",
+      "behavior": "Invoke QA helper under mock environment/configuration",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "May exercise helper control flow, not provider policies",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 48,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 48,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 49,
+      "source_text": "  assert.equal(report.summary.failed,0);assert.ok(report.summary.passed>25);",
+      "inspection_classification": "assertion",
+      "behavior": "Require zero reported failures and more than 25 positive checks",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "If helper returns early, missing summary should fail",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 49,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 49,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "Retain current specific negative/positive coverage; add only proven missing acceptance cases under #96 owner",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 50,
+      "source_text": "  assert.equal(report.summary.not_applicable,role==='admin'?1:0);",
+      "inspection_classification": "assertion",
+      "behavior": "Require exactly one Admin NOT_APPLICABLE check, none for member",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Admin submission exception must not count as isolation PASS",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 50,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 50,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "Retain current specific negative/positive coverage; add only proven missing acceptance cases under #96 owner",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 51,
+      "source_text": "  const output=JSON.stringify(report);for(const secret of [uid,other,token,email,'private note text'])assert.ok(!output.includes(secret));",
+      "inspection_classification": "assertion",
+      "behavior": "Reject exposure of either UUID, fake token, email or private note text",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "String redaction check complements schema control; no raw report should escape",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 51,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 51,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "Retain current specific negative/positive coverage; add only proven missing acceptance cases under #96 owner",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 52,
+      "source_text": "  assert.ok(f.requests.length<45);",
+      "inspection_classification": "assertion",
+      "behavior": "Cap total simulated requests below 45",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Bounds request volume but does not prove real latency or quota",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 52,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 52,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "Retain current specific negative/positive coverage; add only proven missing acceptance cases under #96 owner",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 53,
+      "source_text": "  for(const {url,options}of f.requests){",
+      "inspection_classification": "test",
+      "behavior": "Loop through every captured synthetic request",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Helps prevent unnoticed unsafe fixture route additions",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 53,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 53,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 54,
+      "source_text": "   assert.equal(new URL(url).origin,'https://azviqqejypsefzilgonr.supabase.co');",
+      "inspection_classification": "assertion",
+      "behavior": "Require every outgoing request to the configured Supabase origin",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Origin-only assertion; path allowlist tested elsewhere",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 54,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 54,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "Retain current specific negative/positive coverage; add only proven missing acceptance cases under #96 owner",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 55,
+      "source_text": "   assert.equal(options.credentials,'omit');assert.equal(options.redirect,'error');",
+      "inspection_classification": "assertion",
+      "behavior": "Require credentials omitted and redirects rejected",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "CSRF/leak hardening of helper request defaults",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 55,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 55,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "Retain current specific negative/positive coverage; add only proven missing acceptance cases under #96 owner",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 56,
+      "source_text": "   assert.ok(['GET','POST'].includes(options.method));",
+      "inspection_classification": "assertion",
+      "behavior": "Require GET or POST only, excluding write verbs",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "GET and POST alone do not establish read-only safety",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 56,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 56,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "Retain current specific negative/positive coverage; add only proven missing acceptance cases under #96 owner",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 57,
+      "source_text": "   if(options.method==='POST')assert.ok(['/rest/v1/rpc/dic_session_status','/rest/v1/rpc/dic_read_personal_state'].includes(new URL(url).pathname));",
+      "inspection_classification": "assertion",
+      "behavior": "Restrict POST only to approved read-style wrapper RPC paths",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Strongest test-level guard against POST mutation; actual DB function volatility must be checked separately",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 57,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 57,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "Retain current specific negative/positive coverage; add only proven missing acceptance cases under #96 owner",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 58,
+      "source_text": "   assert.ok(!/issue_invite|revoke_invite|set_member_access|apply_client_change|confirm_community|commit_import|redeem_invite/.test(url));",
+      "inspection_classification": "assertion",
+      "behavior": "Reject named mutation endpoints anywhere in request URL",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Supplementary defensive blacklist, not substitute for RPC allowlist",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 58,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 58,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "Retain current specific negative/positive coverage; add only proven missing acceptance cases under #96 owner",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 59,
+      "source_text": "  }",
+      "inspection_classification": "closure",
+      "behavior": "Close captured-request inspection",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "No user data mutation",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 59,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 59,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 60,
+      "source_text": " }",
+      "inspection_classification": "closure",
+      "behavior": "Close Admin/member iteration",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "No provider call",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 60,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 60,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    },
+    {
+      "line": 61,
+      "source_text": "});",
+      "inspection_classification": "closure",
+      "behavior": "Close first synthetic read-only acceptance test",
+      "quality": "Directly checked this line in context with the adjoining fixture or assertion; contract-only synthetic Node test, not actual production acceptance",
+      "risk_security_privacy_performance": "Remaining test cases beyond this segment are separately pending review",
+      "dead_obsolete": "No dead active functionality proved; test-fixture historical role remains relevant until replaced by separately proven live acceptance",
+      "redundant_duplicate": "No removability established; tests mirror distinct membership, sanitized DTO and ownership safety contracts",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 61,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "051ebefd5e870aae6b4478c91961f99c69003756",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 61,
+        "exact_text_match": true
+      },
+      "testability": "Run Node 22 node --test tests/read-only-account-acceptance.test.mjs and separate genuine authorized Admin/member / #96 acceptance; NOT_RUN in docs-only review",
+      "improvement_opportunity": "No current edit justified without reproducing a current defect",
+      "locked_fit": "Preserves read-only authorization, admitted role, personal-state privacy, sanitized Community, offline data non-mutation and no production writes",
+      "disposition": "RETAIN_INCOMPLETE_EXTERNAL_ACCEPTANCE",
+      "review_method": "Direct numbered AI semantic inspection of the original literal; not independent human or actual provider certification"
+    }
+  ]
+}
