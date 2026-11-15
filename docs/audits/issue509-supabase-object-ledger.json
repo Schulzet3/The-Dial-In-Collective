@@ -4329,6 +4329,22 @@
       "pgss_total_distinct": 3555,
       "production_writes": 0,
       "next": "3761-3840 provider SQL/source parity"
+    },
+    {
+      "run": "R275 Nov15 2026 22:48Z",
+      "source_sha": "8ea4efb32cc9fa448ba176ac03efbc3c7eff6293",
+      "preflight_blob": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r275-source-gates-legacy-pgss-20261115.json",
+      "functions": 10,
+      "full_definition_characters": 28463,
+      "complete_policies": 17,
+      "complete_triggers": 12,
+      "pgss_4001_4080_new_distinct": 71,
+      "pgss_cumulative_distinct": 3836,
+      "provider_writes": 0,
+      "code_changes": 0,
+      "verified_new_defects": 0,
+      "next": "pgss 4081-4160; new/changed provider definitions; isolated canonical-name test; #96 Auth"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -21639,5 +21655,32 @@
     "stale_canonical_response_candidate": "UNVERIFIED_ISOLATED_POSTGRES_REGRESSION",
     "status": "IN_PROGRESS_NO_PRODUCTION_WRITES",
     "next": "pgss numeric ranks 4001-4080; remaining provider/Edge/migration direct source parity; isolated canonical name fixture and #96 authorization"
+  },
+  "provider_source_gates_legacy_pgss_run275": {
+    "run": 275,
+    "initial_preflight_sha": "8ea4efb32cc9fa448ba176ac03efbc3c7eff6293",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "source_write_commit": "f2357e1a5aa1484cd7a863357f958e33084d7bba",
+    "source_receipt": "docs/audits/issue509-r275-source-gates-legacy-pgss-20261115.json",
+    "source_receipt_blob_sha": "a2b29e8e209cee34fa285e4342bb165f5dbf1490",
+    "provider_observed_at": "2026-11-15 22:48:27.275415+00",
+    "complete_sql_definitions": 10,
+    "complete_sql_characters": 28463,
+    "policy_expressions": 17,
+    "trigger_bindings": 12,
+    "pgss_rank_range": [
+      4001,
+      4080
+    ],
+    "new_distinct": 71,
+    "overlap": 9,
+    "cumulative_distinct": 3836,
+    "rls_no_policy_private_tables_effective_client_grants": "11 PRIVATE TABLES DENY ANON/AUTH SELECT/INSERT; LIVE_AUTH_UNVERIFIED",
+    "new_confirmed_defects": 0,
+    "justified_deletions": 0,
+    "github_code_test_ci_changes": 0,
+    "production_writes": 0,
+    "state": "IN_PROGRESS_NO_PRODUCTION_WRITES",
+    "next": "Numeric ranks 4081–4160, remaining full provider definitions/source parity, isolated canonical-name PostgreSQL regression #33, signed-in #96 Auth"
   }
 }
