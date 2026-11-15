@@ -61,7 +61,8 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
  if(!plan.ready)throw Error('READY-only staging HOLD: '+plan.errors.join('; '));
  const compatibleAuditSupport=discoverCompatibleAuditSupport({queue,
   restoredPaths:plan.restored_paths,pinnedReadyPaths:plan.pinned_ready_paths,
-  publishedSourceSha,developmentSourceSha,sourceObjectAt});
+  publishedSourceSha,developmentSourceSha,sourceObjectAt,
+  selectedReadyItems:plan.ready_items});
  const unpublishedTests=discoverExcludedUnreadyTests({queue,selectedIds:plan.selected_ids,
   restoredPaths:plan.restored_paths,pinnedReadyPaths:plan.pinned_ready_paths,
   publishedSourceSha,developmentSourceSha,changedPaths:developmentPaths,sourceObjectAt,
