@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {verifyTrustedRun, selectArtifact, assertArchiveIdentity, REPO, FOLDER_ID} from '../scripts/backups/drive-courier.mjs';
+import {verifyTrustedRun, verifyAuthorizedPushRequest, selectArtifact, assertArchiveIdentity, REPO, FOLDER_ID} from '../scripts/backups/drive-courier.mjs';
 
 const run={id:123,status:'completed',conclusion:'success',head_branch:'main',
   repository:{full_name:REPO},event:'schedule',path:'.github/workflows/nightly-backup.yml'};
@@ -32,4 +32,24 @@ test('Drive file identity needs exact parent, size, appProperties and digest',()
     {appProperties:{dicArtifactId:'456',dicSha256:'sha256:bad'}},{appProperties:null},{md5Checksum:undefined}]){
     assert.throws(()=>assertArchiveIdentity({...file,...patch},artifact));
   }
+});
+
+test('only one-file authorized backup request main push can opt into courier',()=>{
+  const sha='a'.repeat(40);
+  const push={...run,event:'push',head_sha:sha};
+  const commit={sha,parents:[{sha:'b'.repeat(40)}],files:[{filename:'docs/BACKUP_REQUEST.json',status:'modified'}]};
+  assert.throws(()=>verifyTrustedRun(push));
+  assert.equal(verifyAuthorizedPushRequest(push,commit),true);
+  assert.equal(verifyTrustedRun(push,REPO,true),true);
+  for(const bad of [
+    {...commit,sha:'c'.repeat(40)},
+    {...commit,parents:[]},
+    {...commit,parents:[{},{}]},
+    {...commit,files:[]},
+    {...commit,files:[...commit.files,{filename:'AGENTS.md',status:'modified'}]},
+    {...commit,files:[{filename:'docs/RELEASE_REQUEST.json',status:'modified'}]},
+    {...commit,files:[{filename:'docs/BACKUP_REQUEST.json',status:'added'}]}
+  ]) assert.throws(()=>verifyAuthorizedPushRequest(push,bad));
+  assert.throws(()=>verifyAuthorizedPushRequest({...push,head_sha:'bad'},commit));
+  assert.throws(()=>verifyAuthorizedPushRequest({...push,event:'schedule'},commit));
 });

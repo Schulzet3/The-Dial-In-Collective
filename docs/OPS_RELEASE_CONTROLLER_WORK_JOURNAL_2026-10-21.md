@@ -1,3 +1,10 @@
+## 2026-11-15 — #28 narrowly scoped owner-requested immediate encrypted backup test (IN PROGRESS) [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=411ece34cd606714fb59a3043216f9a365f3b6ad preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+- Authority: owner requested a manual encrypted backup now and to retire the Apps Script courier ONLY after the new native GitHub-to-private-Drive path has genuinely passed. This is backup-operations scope, no app release, member/SQL modification, key handling or archive deletion.
+- Existing nightly backup intentionally supports a request-only main push at docs/BACKUP_REQUEST.json; the newly merged native courier currently excludes push, including these manually requested backups. Preserve all schedule/manual workflow_dispatch behavior and existing source cutoff 2026-11-15T20:23:00Z.
+- This change admits ONLY completed successful main nightly-backup push events whose source commit GitHub REST readback establishes a single-parent commit changing EXACTLY docs/BACKUP_REQUEST.json and nothing else. All ordinary push smoke, mixed-file commits and pre-cutover runs still reject; no extra schedule, credential, workflow write permission, DB export script, folder or decrypt changes.
+- Modified native workflow, its courier source, focused trust/policy regression tests and this same-commit journal/checkpoint. CI and one actual owner-requested backup request remain PENDING. Acceptance: exact hosted main CI, successful ciphertext artifact, new native courier successful job, Drive direct private-folder ZIP matching GitHub SHA256/size/MD5 without duplicates; then inspect ability to safely disable Apps Script only after real readback. Existing monitoring/restores and archives remain until then.
+
 ## November 13, 2026 — #356 legacy direct-release null merge SHA safeguard [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=5f4488195c46a9ae08f314ca1c209f72cce55266 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
