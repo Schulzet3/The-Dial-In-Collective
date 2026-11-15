@@ -61,9 +61,12 @@ for(const c of cases){
   if(f.process)bad.push('unstated_green_process_inferred');
   if(!has(scope,'ESpresso')||!has(scope,'18g dose')||!has(scope,'40g yield')||
      !has(scope,'26 seconds'))bad.push('current_selected_espresso_recipe_source_missing');
+  if(p.roaster_recipe?.dose_g!==18||p.roaster_recipe?.yield_g!==40||
+     p.roaster_recipe?.time_s_min!==26||p.roaster_recipe?.time_s_max!==26)
+    bad.push('current_selected_espresso_recipe_not_preserved');
  }
  if(c.n===377){
-  if(!has(scope,'Lot: San Lorenzo X')&&!has(scope,'Lot</'))bad.push('selected_unique_lot_source_missing');
+  if(!facts.some(x=>x.field==='release_label'&&/^lot$/iu.test(x.label||'')&&has(x.value,'San Lorenzo X')))bad.push('selected_unique_lot_source_missing');
   if(f.process!=='Washed')bad.push('direct_selected_Washed_missing');
   if(!has(f.producer,'Valdés'))bad.push('actual_selected_producer_not_preserved');
   if(!has(f.release_label,'San Lorenzo X'))bad.push('explicit_selected_named_lot_missing');
