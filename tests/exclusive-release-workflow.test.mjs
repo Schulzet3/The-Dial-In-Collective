@@ -15,7 +15,8 @@ function assertBoundRelease(content){
  assert.match(content,/INPUT_RELEASE_ID:.*inputs\.release_id/);
  assert.match(content,/INPUT_TESTED_SOURCE_SHA:.*inputs\.tested_source_sha/);
  assert.match(content,/INPUT_RELEASE_EVIDENCE_JSON:.*inputs\.release_evidence_json/);
- assert.match(content,/release_evidence_json:[\s\S]*?required: true/);
+ const evidenceInput=content.match(/^ {6}release_evidence_json:[ \t]*\r?\n((?:^ {8}[^\r\n]*\r?\n)*)/m)?.[1]||'';
+ assert.match(evidenceInput,/^ {8}required: true[ \t]*$/m);
  assert.match(content,/DIC_PRIVATE_BRANCH_PROTECTION_VERIFIED/);
  assert.match(content,/DIC_NETLIFY_PRODUCTION_BRANCH_VERIFIED/);
  assert.match(content,/DIC_RELEASE_CONTROLLER_VERIFIED/);
@@ -28,4 +29,11 @@ test('comment-only policy strings cannot spoof release acceptance',()=>{
  const comments=yml.split(/\r?\n/).map(line=>'# '+line).join('\n');
  assert.throws(()=>assertExclusiveTrigger(activeYaml(comments)),/workflow_dispatch/);
  assert.throws(()=>assertBoundRelease(activeYaml(comments)),/INPUT_RELEASE_ID/);
+});
+test('evidence JSON required flag cannot borrow a later input requirement',()=>{
+ const weakened=yml.replace(/(^ {6}release_evidence_json:[ \t]*\r?\n {8}description:[^\r\n]*\r?\n) {8}required: true/m,'$1        required: false')
+  .replace(/^permissions:/m,'      unrelated_decoy:\n        required: true\npermissions:');
+ assert.match(weakened,/release_evidence_json:[\s\S]*?required: false/);
+ assert.match(weakened,/unrelated_decoy:[\s\S]*?required: true/);
+ assert.throws(()=>assertBoundRelease(activeYaml(weakened)),/required: true/);
 });
