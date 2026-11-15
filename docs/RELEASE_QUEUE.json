@@ -14719,10 +14719,10 @@
       ],
       "owner_source": "Owner explicit 2026-11-14/15 approval to build browser-only OAuth and eventual fully automated GitHub encrypted offsite Drive courier; development only, owner Publish separately.",
       "tests": [
-        "Exact corrected PR head f11f18550f5d58b0db9906546f532882882c5ca5: Node22 full suite 4942 PASS, 0 FAIL, 6 intentional SKIP; lint PASS; build/tests workflow 43669375755 SUCCESS.",
-        "Approval/continuity run 43669375743 SUCCESS; browser/cloud UX run 43669375735 SUCCESS; isolated SQL run 43669375733 SUCCESS; security 43669375779 SUCCESS. Frozen603 SKIPPED, not PASS.",
-        "Browser-specific 7 tests cover default-off, missing Picker config, owner origin/password, PKCE drive.file, state expiry, actual Google Picker metadata selection, AES-GCM sealed token, same-origin CSRF, exact existing folder, disposable upload MD5/size/parent/trash, failed broad scope/folder/checksum/cleanup. No live provider consent claimed.",
-        "Nonforce [skip netlify] PR #2827 merged 5f9d614bb8b7a2366e7882823505bff196321c7d: merged function Git blob 0f88668b8dfd0f334aab344ef1e169f92e8a0be9 and tests blob 5078c3afec7157b88e1d8f1af4e1bcb0f0e961cf identical to tested head. Original PR #2818 documented as superseded desktop Picker assumption; actual Web Picker correction now integrated."
+        "Web Picker correction PR #2827 exact head f11f18550f5d58b0db9906546f532882882c5ca5 Node/lint 43669375755 SUCCESS, approval 43669375743 SUCCESS, cloud/browser 43669375735 SUCCESS, SQL 43669375733 SUCCESS, security 43669375779 SUCCESS.",
+        "First Web Picker PR head a14badf165454ef1c1b5e5e9642609ff65634013 full Node 4,942 PASS / 0 FAIL / 6 intentional SKIP but lint FAILED (two obsolete helpers); removed helper names only, second exact head above full Node/lint SUCCESS. No skipped/failed CI counted as PASS.",
+        "Nonforce merged PR #2827 5f9d614bb8b7a2366e7882823505bff196321c7d, exact function Git blob 0f88668b8dfd0f334aab344ef1e169f92e8a0be9 and test blob 5078c3afec7157b88e1d8f1af4e1bcb0f0e961cf match tested PR head. Original 603 workflow SKIPPED not certified.",
+        "Focused browser OAuth cases include Web Picker builder configuration, ten-minute sealed temporary refresh cookie, state/PKCE, owner origin, CSRF, exact selected folder ID, disposable upload MD5/size/parent/trash, and fail-closed negative cases; live Google account/provider authorization NOT tested."
       ],
       "ci_runs": [
         43669375755,
@@ -14732,11 +14732,11 @@
         43669375779
       ],
       "blockers": [
-        "Owner reports new Web OAuth client SAVED, but Google Picker API enablement and restricted Website API key + numeric project number must be confirmed by owner; provider Cloud Console not independently readable.",
-        "Owner-only web setup function is disabled and NOT PUBLISHED; new explicit owner Publish required for release controller, and six private Netlify runtime variables must be entered before the authorized build (Netlify env changes require redeployment). No production auth or owner Google consent yet.",
-        "Owner must select exact private Drive folder via real Google Web Picker, prove disposable MD5/size/parent/trash, directly install encrypted GitHub Actions OAuth secrets; then independently verify GitHub runner smoke, one actual scheduled ciphertext ZIP SHA-256/MD5/parent/dedupe before disabling existing Apps Script."
+        "Owner reports Web OAuth client created/saved; must independently enable Google Picker and Drive APIs, create restricted website API key (https://app.dialincollective.com/* and https://docs.google.com/*) and identify numeric Google Cloud project number for Picker app ID. No account-level readback available.",
+        "Web setup endpoint source MERGED, but NOT published and disabled by default. Need separate owner Publish authorization and private Netlify runtime vars, then one-time real browser Google drive.file grant and exact private folder test; do not share secrets in chat.",
+        "Draft operations PR #2684 remains inactive. Need GitHub encrypted Actions OAuth secrets, actual GitHub runner disposable-file smoke and genuine scheduled encrypted ZIP SHA-256/MD5/size/parent/dedupe proof before disabling existing Apps Script courier."
       ],
-      "notes": "Web Picker source correction and exact five-check CI source MERGED VERIFIED, but stays IN_PROGRESS / NOT READY / NOT DEPLOYED because Google owner and provider acceptance remain blocked. No provider, app deploy, real Drive, Auth, member, database or existing backup changes. Prior #2818 had wrong desktop One Pick assumption, now superseded by #2827. Draft ops #2684 still inactive.",
+      "notes": "Official Google Web Picker correction merged with 5 exact PR-head CI SUCCESS; app remains IN_PROGRESS, not READY/DEPLOYED due private Google account/provider consent and separate publish gates. No production Netlify, Google Drive, archive, Supabase/member, backup workflow, credential changes or cutoff. Existing Apps Script backups unaffected.",
       "production_deployed": false
     }
   ],
