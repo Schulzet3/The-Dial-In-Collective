@@ -2985,6 +2985,27 @@
       "implementation_status": "RESEARCH_ONLY_NO_RUNTIME_OR_NUMERIC_POLICY_CHANGE",
       "reviewed_date_utc": "2026-11-15",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "LIT-2026-PERKMANN-MOKA-FACTORIAL-REFRACTOMETRY",
+      "type": "primary_peer_reviewed_factorial_one_cup_moka_extraction_not_espresso_or_human_sensory_trial",
+      "title": "Portable Refractometry for Measurement-Enabled Moka Coffee Brewing: A Factorial Study of Roast Level, Grind Size and Initial Water Temperature",
+      "authors": "Urban Perkmann; Thomas Aichner; Gianluca Tripodi",
+      "published": "2026-10-22",
+      "journal": "Applied Sciences 16(21):10474 (2026)",
+      "doi": "10.3390/app162110474",
+      "primary_original_url": "https://www.mdpi.com/2076-3417/16/21/10474",
+      "source_sha256": null,
+      "access": "DIRECT_ORIGINAL_PUBLISHER_COMPLETE_OPEN_HTML_READ; ORIGINAL_PDF_BYTES_SUPPLEMENT_R_SCRIPT_DATA_FIGURE_PIXELS_NOT_INDEPENDENTLY_CHECKED",
+      "review_status": "R455-284_ORIGINAL_FULL_METHODS_3_1_TO_3_4_RESULTS_4_1_TO_4_5_DISCUSSION_5_LIMITATIONS_6_CONCLUSIONS_7_DIRECT_HTML_REVIEW",
+      "provenance": "Original October 22 2026 publisher text, sections and tables, directly inspected November 15 2026; original PDF and supplementary data/R script only linked, not downloaded or recalculated",
+      "evidence_grade": "CONTROLLED_N90_FACTORIAL_MOKA_EY_NOT_ESPRESSO_TASTE_OR_NEXT_SHOT_EFFECT",
+      "claims_verified_externally": "3 roasts x 3 nominal DF64 Gen2 grinder settings x 2 starting water temperatures, five independent moka brews per cell across 9 days: n=90; each brew TDS read three times (technical readings not n=270 independent brews). Single Guatemalan washed coffee, 7g grounds and 60g water, one-cup Bialetti Moka Express, one water and one refractometer. Average EY 17.32% across runs; model estimated fine 21.7%, middle 17.0%, coarse 13.5% and initial 20/70C water difference -0.06 percentage points 95%CI -0.65 to 0.54, p=0.854. Preheating changed time/thermal response, not measured EY in this moka setup; no human sensory trial.",
+      "uncertainty": "Only one bean origin, moka vessel, grinder, roaster, water and instrument; grinder particle-size distributions unmeasured; no laboratory reference verification of refractometer accuracy, samples neither filtered nor centrifuged, equipment-dependent nominal grind dial, visual/acoustic stopping rule. Original binary/SI data/R script/figures and independent statistical reanalysis missing. EY is not sensory quality and moka ≠ pressurized espresso.",
+      "current_app_crosswalk": "At development preflight a591bb946799d4927a39adeeb3dc8435b60aed33, code directly reviewed: engine f384ae67c1a9148990cab4716dc8ad22d1ca81f3; model fdc65f869546cddbb6552e555dca12117f2c47fc; UI 2ecde13b9d45ec329700654e1f054629d38bc95f; cloud/main 28c6f6026d0ff1e6fd6575d3813b76c06a29bb47. DIC tracks five independent taste ratings, actual espresso measurements, style/feed/setup/grinder contexts, one-change next-shot advice and original private shot; no new source-supported app defect or authorized moka-inspired numeric rule.",
+      "implementation_status": "RESEARCH_ONLY_NO_APP_NUMERIC_POLICY_OR_DATA_CHANGE",
+      "reviewed_date_utc": "2026-11-15",
+      "github267_literal_review_credit": 0
     }
   ],
   "evidence_checks": [
@@ -9179,6 +9200,54 @@
       "factual_status": "TENTATIVE_MS_ASSIGNMENT_AND_DECLARED_INSTRUMENT_AFFILIATION_NOT_CAUSAL_TASTE_POLICY",
       "uncertainty": "No independently verified chemical standards, full SI, full producer metadata, figure pixel values or replication, and no real DIC member outcome.",
       "exact_development_sha": "6a8e47216bd9206825161c377641b9778f3e449e"
+    },
+    {
+      "id": "R455-EV-284-A",
+      "source": "LIT-2026-PERKMANN-MOKA-FACTORIAL-REFRACTOMETRY",
+      "source_doi": "10.3390/app162110474",
+      "source_url": "https://www.mdpi.com/2076-3417/16/21/10474",
+      "page_section": "Original Methods 3.1-3.4, Table 1, pp methods",
+      "claim": "The 3x3x2 full factorial had 18 conditions and five independent one-cup moka extractions each, n=90 brews; three TDS refractometer readings per brew are technical replicates, not 270 independent extraction/espresso/taste outcomes. Only one washed Guatemalan coffee and one DF64 Gen2 nominal-grind setup were tested.",
+      "factual_status": "PRIMARY_METHODS_VERIFIED_NOT_ESPRESSO_GENERALIZABLE",
+      "grade": "PRIMARY_ORIGINAL_FACTORIAL_MOKA_EY_ONLY; NO_ESPRESSO_TASTE_EFFICACY",
+      "source_provenance": "Original MDPI open-access article full HTML directly checked November 15 2026; PDF binary/SI raw/R script unverified",
+      "uncertainty": "Original raw data/supplement, calibration reference and particle size distributions not independently verified.",
+      "owner_approval": false,
+      "implementation_status": "RESEARCH_ONLY_NO_POLICY_OR_APP_CHANGE",
+      "exact_development_sha": "a591bb946799d4927a39adeeb3dc8435b60aed33",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-284-B",
+      "source": "LIT-2026-PERKMANN-MOKA-FACTORIAL-REFRACTOMETRY",
+      "source_doi": "10.3390/app162110474",
+      "source_url": "https://www.mdpi.com/2076-3417/16/21/10474",
+      "page_section": "Original Results 4.1-4.5, Tables 2-4 and Figure 2 caption",
+      "claim": "Moka mean EY 17.32%; adjusted fine/mid/coarse grind EY 21.7/17.0/13.5%. Initial water 20 versus 70C showed -0.06 EY percentage-point difference (95% CI -0.65 to 0.54, p=0.854), though preheat reduced heating time 182 to 121s. Roast-by-grind interaction lost significance after beverage-mass adjustment (p=0.179). None of these values is an espresso shot-time, EY target, proven taste correction or measured DIC outcome.",
+      "factual_status": "CONDITIONAL_MOKA_MODEL_RESULTS_AND_NONTRANSFERABILITY",
+      "grade": "PRIMARY_ORIGINAL_FACTORIAL_MOKA_EY_ONLY; NO_ESPRESSO_TASTE_EFFICACY",
+      "source_provenance": "Original MDPI open-access article full HTML directly checked November 15 2026; PDF binary/SI raw/R script unverified",
+      "uncertainty": "Original supplementary raw data, model R script, pixel-level figures and independent reanalysis unverified; null test does not prove no temperature effect across all equipment.",
+      "owner_approval": false,
+      "implementation_status": "RESEARCH_ONLY_NO_POLICY_OR_APP_CHANGE",
+      "exact_development_sha": "a591bb946799d4927a39adeeb3dc8435b60aed33",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-284-C",
+      "source": "LIT-2026-PERKMANN-MOKA-FACTORIAL-REFRACTOMETRY",
+      "source_doi": "10.3390/app162110474",
+      "source_url": "https://www.mdpi.com/2076-3417/16/21/10474",
+      "page_section": "Original Discussion 5.2-5.4, Limitations 6, Conclusions 7",
+      "claim": "Authors explicitly condition their grind/roast control hierarchy on one-cup moka and tested settings. They did not measure particle-size distributions, compare refractometer to a gravimetric/lab reference, filter fines, or perform human sensory tests; EY alone is not cup quality. Their 18–22% Brewing Control Chart reference is not a strict moka optimum and cannot authorize an espresso-specific numeric recommendation or claims of better cups.",
+      "factual_status": "ORIGINAL_AUTHORS_STATED_LIMITATIONS_NOT_PRODUCT_POLICY",
+      "grade": "PRIMARY_ORIGINAL_FACTORIAL_MOKA_EY_ONLY; NO_ESPRESSO_TASTE_EFFICACY",
+      "source_provenance": "Original MDPI open-access article full HTML directly checked November 15 2026; PDF binary/SI raw/R script unverified",
+      "uncertainty": "No independent device validation or sensory/next-shot replication, no verified espresso crossover.",
+      "owner_approval": false,
+      "implementation_status": "RESEARCH_ONLY_NO_POLICY_OR_APP_CHANGE",
+      "exact_development_sha": "a591bb946799d4927a39adeeb3dc8435b60aed33",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -9387,23 +9456,24 @@
     "R455-280: previously unverified original Khamitova 2020 Ch4 Figure4.4 all eight panels visually inspected at first-party PDF printed pp84-85 (indices100-101), sensory Results pp82-83 crosschecked: +2 bounded evidence checks on existing thesis source => 156 sources/467 checks/220 proposals; not whole PDF or taster raws, no five-criterion or next-shot efficacy and no app/Locked change. Direct page images verified, original PDF SHA unverified; standalone S019 still inaccessible. Next independent real UX defect or nonoverlapping primary source/claim; no #267 line credit.",
     "R455-281: Original PLOS Moroney et al. Figure10 text/caption and model early-stage initialization checked; 2 new bounded source checks on existing DOI = 156 sources/469 checks/220 proposals, NO original image pixels, no espresso five-rating effect or application bug proven. Continue distinct source or source-reproducible Log Shot UX gap; standalone S019 remains unavailable; #267 literal credit zero.",
     "R455-282: Read original Rune et al 2026 Wiley Results 3.4 Table 7 and limitations 3.6, distinct from prior Tables 3-6 review: three extra origins/roasts received pH-only five-water measurements; no extra sensory, espresso, personal next-shot or quality replication. One bounded evidence check; 156 sources/470 checks/220 proposals unchanged source and proposal counts, no app code or numeric-policy change. Source original PDF/raw measurements unverified; standalone S019 inaccessible. Next inspect distinct primary source claim or reproducible UX defect, never duplicate #267 literal line credit.",
-    "R455-283: distinct 2025 Cardoso et al ACS Omega LA-REIMS 824-coffee Brazilian cupping class original full HTML Methods/Results/Table1/Table2 reviewed; 700/124 internal split, all-six ANN 70% vs restricted-three up to 100%, marker IDs only tentative; +1 source/3 evidence checks/1 P3 research-only proposal, no new numeric tasting policy or app change. Original binary/SI/raw and S019 inaccessible, no #267 line credit. Next distinct original source or independently reproduced UX defect."
+    "R455-283: distinct 2025 Cardoso et al ACS Omega LA-REIMS 824-coffee Brazilian cupping class original full HTML Methods/Results/Table1/Table2 reviewed; 700/124 internal split, all-six ANN 70% vs restricted-three up to 100%, marker IDs only tentative; +1 source/3 evidence checks/1 P3 research-only proposal, no new numeric tasting policy or app change. Original binary/SI/raw and S019 inaccessible, no #267 line credit. Next distinct original source or independently reproduced UX defect.",
+    "R455-284: Independently read October 22 2026 Perkmann et al original complete one-cup moka factorial study DOI 10.3390/app162110474. Added one source/three checks/one research-only proposal; 158/476/222 intended. Moka extraction-yield data cannot transfer to espresso five taste ratings or quality; no app/Locked/telemetry/data change, no #267 line credit. Source PDF binary/SI/R script/raw data unverified and standalone S019 absent. Next verify PR exact CI and merge; continue actual espresso UX or source issue."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-283_CARDOSO_2025_LAREIMS_SIX_CUPPING_CLASSES",
+    "run_id": "R455-284_PERKMANN_2026_MOKA_FACTORIAL_ORIGINAL_NOT_ESPRESSO",
     "date": "2026-11-15",
-    "development_preflight_sha": "6a8e47216bd9206825161c377641b9778f3e449e",
+    "development_preflight_sha": "a591bb946799d4927a39adeeb3dc8435b60aed33",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "prewrite_source_sha": "6a8e47216bd9206825161c377641b9778f3e449e",
-    "original_ledger_blob_sha": "a65e7655a2f3c80fe049583a8f4f397a61cdfcf8",
+    "prewrite_source_sha": "a591bb946799d4927a39adeeb3dc8435b60aed33",
+    "original_ledger_blob_sha": "b1099ced41d9c134a3250d754a153aa7641792c2",
     "source_counts": {
-      "sources": 157,
-      "evidence_checks": 473,
-      "proposals": 221
+      "sources": 158,
+      "evidence_checks": 476,
+      "proposals": 222
     },
-    "scope": "Original ACS Omega full article lab-coffee cupping six-class vs three-class metrics and tentative chemical markers; research-only no DIC five-rating efficacy",
+    "scope": "Nonduplicate original 2026 moka factorial n90 extraction-yield study; negative transfer boundary and measurement/replicate confounding, not DIC espresso efficacy",
     "github267_line_credit": 0,
-    "next": "Post-PR exact CI and readback; continue nonoverlapping current Log Shot UX/science and standalone S019 recovery."
+    "next": "Verify PR exact-source CI and nonforce merge, then independently reproduce next genuine Log Shot UX defect or check distinct original espresso citation; standalone S019 unavailable."
   },
   "policy_decisions_resolved": [
     {
@@ -14527,6 +14597,31 @@
       "production_deployed": false,
       "github267_literal_review_credit": 0,
       "exact_source": "6a8e47216bd9206825161c377641b9778f3e449e"
+    },
+    {
+      "id": "R455-PROP-284-MOKA-FACTORIAL-NOT-ESPRESSO-USER-QUALITY",
+      "source": [
+        "LIT-2026-PERKMANN-MOKA-FACTORIAL-REFRACTOMETRY"
+      ],
+      "evidence": [
+        "R455-EV-284-A",
+        "R455-EV-284-B",
+        "R455-EV-284-C"
+      ],
+      "severity": "P3_RESEARCH_ONLY_NO_REPRODUCED_SAFE_APP_DEFECT",
+      "finding": "Controlled moka refractometry supplies a reproducibility-methodology example but no human espresso taste ratings, personalized next-shot intervention or transferable grind/temperature optimum. Do not promote high-EY moka values or a portable refractometer's technical repeatability to DIC recommendation confidence or espresso quality.",
+      "evidence_grade": "PRIMARY_ORIGINAL_FACTORIAL_MOKA_EY_ONLY; NO_ESPRESSO_TASTE_EFFICACY",
+      "current_locked": "Keep all five independent ratings, all-green versus incomplete, at most one controllable next-shot change, original shot/notes/history, grinder range/calibration/versions, style Turbo versus Fast-Flow, Slow Feed context, temperature capability and strict RLS/Community privacy.",
+      "current_app": "Direct current engine/model/UI/cloud review at a591bb946799d4927a39adeeb3dc8435b60aed33 found no scientific or reproducible bug requiring changing approved numeric advice from this different-brewing-method paper.",
+      "proposed_change": "Document original experimental design and limits only; preserve current Locked rules. Future optional/consented same-coffee/setup/style/grinder one-change→next-shot all-five taste outcome evaluation with confounders/adverse results requires separate owner approval and observed evidence; no new telemetry or data access.",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "RESEARCH_ONLY_NO_RUNTIME_CHANGE",
+      "test_plan": "Full original ledger JSON parse; preserve all previous 157 sources/473 claims/221 proposals in order; unique added IDs; same-commit scoped preflight; applicable exact-source PR governance/CI before nonforce merge; no claim that CI measured cup quality.",
+      "release_queue_status": "NO_ITEM_RESEARCH_ONLY",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0,
+      "exact_source": "a591bb946799d4927a39adeeb3dc8435b60aed33"
     }
   ],
   "changeScope": {
