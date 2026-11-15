@@ -1,0 +1,9 @@
+# Issue #267 V12K — independent 740-line F205/F206 reconciliation (2026-11-15) [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=d330b60143fc0226bcf3912a432a088a8174987b preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+Frozen original abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9 / tree c54ade64eca30946df8858297578a172f5cf6fa8. Original F205 434 lines, blob 9cd6a08386772eab31b1622f69d5307fdb766263; F206 306 lines, blob 2046ad52d7f26daafb699a4073d65ec23c728373. Independently fetched immutable source and every merged V12A–V12J per-line receipt and verified **740 unique literal path/blob/numbered positions, 0 gaps/overlaps/mismatches**, original source-bound semantic fields and same-commit scoped journals. This is AI review, NOT independent human certification, and covers **ONLY** F205/F206, not the entire 757-file historical or pinned-current inventory. Consolidated `docs/audits/issue267-v2-strict-reconciliation-F205-F206-20261115-V12K.json`.
+
+PRs #2789–#2798 safe nonforce squash merged with `[skip netlify]`. Exact PR-head approval checks **10/10 SUCCESS**; exact merged-source push governance checks **10/10 SUCCESS** with run IDs in report. Node22 full app, browser/mobile/offline, SQL/Auth/real privacy, original603, live drift, provider, production and final source truth NOT_TESTED here. Dated 600-case oracle was incomplete; dated Node24 tests were NOT all-pass. Targeted static current client.js preview fetch lacks inline AbortController; no real hung request reproduced, route to UI/#33 focused test without speculative patch.
+
+No app/tests/workflow/provider/SQL/Edge/member/shot/history/backup/queue/main/release/production/deployment mutations. No pinned executable or post-pin live source credit added. Owner decisions, schedules, notification and Publish gate unchanged. #267 OPEN; next frozen F207:1 and remainder of exhaustive audit unfinished.
