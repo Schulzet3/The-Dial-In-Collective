@@ -4297,6 +4297,24 @@
       "new_defects": 0,
       "production_writes": 0,
       "next": "3121-3200 and case-sensitive URL source normalization isolated check"
+    },
+    {
+      "run": "2026-11-15 UTC R264",
+      "source_sha": "dfc00b2e5b74b43e098e1947917af93dba3da367",
+      "prewrite_sha": "dfc00b2e5b74b43e098e1947917af93dba3da367",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "reviewed_sql_functions": 6,
+      "reviewed_chars": 9410,
+      "new_integrity_risk": "Source path case normalization collision reproduced read-only",
+      "affected_member_data": "UNVERIFIED",
+      "pgss_rank_range": [
+        3121,
+        3200
+      ],
+      "new_distinct": 71,
+      "cumulative_distinct": 3060,
+      "provider_writes": 0,
+      "next": "pgss 3201-3280; isolated URL-key correction tests and migration, remaining direct definitions and exact source parity"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -21462,5 +21480,25 @@
     ],
     "status": "BASELINE_IN_PROGRESS",
     "next": "3121-3200, source isolation/URL collision, full provider parity"
+  },
+  "provider_preview_source_case_collision_pgss_run264": {
+    "receipt_path": "docs/audits/issue509-preview-and-path-collision-pgss-2026-11-15-run264-rank3121-3200.json",
+    "receipt_blob_sha": "5a173b179e77f73b42e00213098768f00f0d05a0",
+    "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-15-run264.json",
+    "index_blob_sha": "d72670af7079bcf1e4aa7f50d47e10cd392cce58",
+    "preflight_development_sha": "dfc00b2e5b74b43e098e1947917af93dba3da367",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "live_sql_bodies": 6,
+    "live_sql_chars": 9410,
+    "source_collision": "LITERAL_SQL_REPRODUCED_NO_PRIVATE_ROWS",
+    "impacted_records": "UNVERIFIED",
+    "pgss_rank_range": [
+      3121,
+      3200
+    ],
+    "new_distinct": 71,
+    "cumulative_distinct": 3060,
+    "fix_status": "IN_PROGRESS_ISOLATED_TEST_NEEDED",
+    "next": "pgss 3201-3280; isolated URL-key correction tests and migration, remaining direct definitions and exact source parity"
   }
 }
