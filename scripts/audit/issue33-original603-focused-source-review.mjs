@@ -84,7 +84,7 @@ for(const target of targets){
    r.html_sha256=sha(res.html);r.html_bytes=Buffer.byteLength(res.html,'utf8');
    const selected=productMarkup(res.html);
    r.selected_h1=selectedProductHeadings(selected);
-   r.selected_form_h2=selectedProductFormH2(selected);
+   r.selected_form_h2=selectedProductFormH2(selected,{source_url:r.final_url});
    r.selected_schema_offer_h2=selectedSchemaProductOfferH2(res.html,{source_url:r.final_url});
    r.selected_page_h2=selectedProductPurchaseRootH2(res.html);
    r.selected_elementor_h2=selectedElementorWooCommerceH2(res.html,{source_url:r.final_url});
