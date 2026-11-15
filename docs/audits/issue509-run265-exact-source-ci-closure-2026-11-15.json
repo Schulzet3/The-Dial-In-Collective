@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 265,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight_development_sha": "837cd7439dc1c1f6abfa53d5dc5436c7e69b122a",
+  "preflight_git_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "source_commit": "9a7ffa65955d8c2b81e41153653e19fc512f3a31",
+  "queue_correction_commit": "837cd7439dc1c1f6abfa53d5dc5436c7e69b122a",
+  "scope": {
+    "migration": "supabase/migrations/20261115124500_dic_source_key_path_case_guard.sql",
+    "test": "supabase/tests/coffee_identity_matching.sql",
+    "queue_item": "DIC-Q-509-source-path-case-guard-20261115"
+  },
+  "observed_workflow_results": [
+    {
+      "run": 43715405733,
+      "sha": "9a7ffa65955d8c2b81e41153653e19fc512f3a31",
+      "conclusion": "FAILURE",
+      "cause": "missing TESTING queue item for new migration; repaired in queue correction commit"
+    },
+    {
+      "run": 43715405755,
+      "sha": "9a7ffa65955d8c2b81e41153653e19fc512f3a31",
+      "conclusion": "SUCCESS",
+      "coverage": "isolated PostgreSQL migrations and SQL regressions, synthetic signed JWT and backup snapshot tests"
+    },
+    {
+      "run": 43715405744,
+      "sha": "9a7ffa65955d8c2b81e41153653e19fc512f3a31",
+      "conclusion": "SUCCESS",
+      "coverage": "Node22 and lint; focused coffee JS tests SKIPPED as not applicable"
+    },
+    {
+      "run": 43715405880,
+      "sha": "9a7ffa65955d8c2b81e41153653e19fc512f3a31",
+      "conclusion": "SUCCESS",
+      "coverage": "mobile compiled Chromium/browser/visual/offline; cloud JS tests NOT_APPLICABLE"
+    },
+    {
+      "run": 43715588216,
+      "sha": "837cd7439dc1c1f6abfa53d5dc5436c7e69b122a",
+      "conclusion": "SUCCESS",
+      "coverage": "queue intake and approved continuity / all pushed commits; only docs+queue changed after functional tests"
+    }
+  ],
+  "provider_readback": {
+    "source_key_md5": "07e0ef286246fdae29b9151018296f79",
+    "stored_migrations": 69,
+    "live_source_changed": false,
+    "verified_at_utc": "2026-11-15T12:47:09.978066Z"
+  },
+  "state": "TESTING",
+  "readiness_blockers": [
+    "Cross-READY/release-candidate source isolation not verified",
+    "Real member HTTP/auth acceptance #96-owned unverified",
+    "Actual affected rows not inspected"
+  ],
+  "next": "Continue #509 provider full definitions from next unreviewed source and numeric pgss ranks 3281–3360; cooperate #33; no production mutation"
+}

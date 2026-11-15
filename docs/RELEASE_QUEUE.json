@@ -21,17 +21,22 @@
       "tests": [
         "Read-only live SQL full source MD5 07e0ef286246fdae29b9151018296f79; two distinct case-sensitive HTTPS paths canonicalize to identical key in old production function.",
         "Isolated PostgreSQL 17.11 exact development source 9a7ffa65955d8c2b81e41153653e19fc512f3a31 passed run 43715405755 on 2026-11-15 including new rollback source URL identity assertions; actual member/coffee records not examined.",
-        "Governance run 43715405733 failed only for missing queue intake on new migration; this entry repairs intake; exact-source successor governance must succeed before READY."
+        "Governance run 43715405733 failed only for missing queue intake on new migration; this entry repairs intake; exact-source successor governance must succeed before READY.",
+        "Exact-source migration Git 9a7ffa65955d8c2b81e41153653e19fc512f3a31: disconnected PostgreSQL 17.11 migrations/privacy/synthetic signed JWT/backup 43715405755 SUCCESS, Node22/lint 43715405744 SUCCESS, cloud/mobile UX 43715405880 SUCCESS (cloud-only tests NOT_APPLICABLE, mobile compiled browser passes).",
+        "Queue-intake correction Git 837cd7439dc1c1f6abfa53d5dc5436c7e69b122a: governance/approval continuity 43715588216 SUCCESS; verified current source migration and regression blobs preserved."
       ],
       "ci_runs": [
         43715405755,
-        43715405733
+        43715405733,
+        43715405744,
+        43715405880,
+        43715588216
       ],
       "blockers": [
-        "Governance/queue intake initially failed at source commit; verify successor completed SUCCESS and new queue receipt before READY.",
-        "Node22/cloud/mobile applicability and source-isolated release certification not yet fully verified; #33 extractor source identity compatibility and #96 JWT coverage remain UNVERIFIED."
+        "Independent exact candidate source isolation and #33 source identity compatibility remain UNVERIFIED; TESTING, no READY or production authorization.",
+        "Actual existing coffee/member impact and #96 live Auth/member HTTP acceptance UNVERIFIED; synthetic JWT assertions are not real member login."
       ],
-      "notes": "Source-only additive migration and rollback tests; no live production SQL/data/Auth/Edge/Storage modifications, no forced release/deployment, no confirmed affected member records. Only HTTP authority hostname is lowercased; product path/query case retained. Prior original migration preserved. After verified exact-source gates, require independent release isolation and separate owner publish.",
+      "notes": "Source-only additive migration and rollback tests; no live production SQL/data/Auth/Edge/Storage modifications, no forced release/deployment, no confirmed affected member records. Only HTTP authority hostname is lowercased; product path/query case retained. Prior original migration preserved. After verified exact-source gates, require independent release isolation and separate owner publish. R265 CI closure: original governance 43715405733 FAILURE missing queue intake, corrected 837cd743 governance 43715588216 SUCCESS. SQL/Node/cloud+mobile exact source PASS. Not source-isolated READY.",
       "production_deployed": false
     },
     {
