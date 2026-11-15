@@ -35,10 +35,27 @@ export function discoverReviewedWorkflowTestExclusions({publishedSourceSha,devel
 }
 
 
+
+const REVIEWED_OWNER_DRIVE_TEST=Object.freeze({
+ path:'tests/dic-owner-drive-connect.test.mjs',
+ runtime:'netlify/functions/dic-owner-drive-connect.mjs',
+ itemId:'DIC-Q-28-owner-drive-browser-oauth-20261115'
+});
+function eligibleOwnerDriveTestExclusion({queue,restoredPaths,publishedSourceSha,
+ developmentSourceSha,sourceObjectAt}){
+ const i=queue?.items?.find(row=>row.id===REVIEWED_OWNER_DRIVE_TEST.itemId);
+ return i?.issue===28&&['IN_PROGRESS','TESTING','BLOCKED'].includes(i.state)&&
+  i.scope_paths?.length===1&&i.scope_paths[0]===REVIEWED_OWNER_DRIVE_TEST.runtime&&
+  restoredPaths?.includes(REVIEWED_OWNER_DRIVE_TEST.runtime)&&
+  sourceObjectAt(publishedSourceSha,REVIEWED_OWNER_DRIVE_TEST.runtime)===null&&
+  sourceObjectAt(developmentSourceSha,REVIEWED_OWNER_DRIVE_TEST.runtime)!==null&&
+  sourceObjectAt(publishedSourceSha,REVIEWED_OWNER_DRIVE_TEST.path)===null&&
+  sourceObjectAt(developmentSourceSha,REVIEWED_OWNER_DRIVE_TEST.path)!==null;
+}
 // Only new, issue-scoped tests for entirely restored unfinished/unselected
 // runtime may be absent from a candidate. Selected READY test edits never vanish.
-export function discoverExcludedUnreadyTests({queue,selectedIds,restoredPaths,
- publishedSourceSha,developmentSourceSha,changedPaths,sourceObjectAt}={}){
+export function discoverExcludedUnreadyTests({queue,selectedIds,restoredPaths,pinnedReadyPaths=[],
+ publishedSourceSha,developmentSourceSha,changedPaths,sourceObjectAt,compatibleAuditSupportPaths=[]}={}){
  if(typeof sourceObjectAt!=='function'||!Array.isArray(changedPaths)||
     !Array.isArray(restoredPaths)||!Array.isArray(selectedIds)||
     !SHA.test(publishedSourceSha||'')||!SHA.test(developmentSourceSha||''))
@@ -46,10 +63,19 @@ export function discoverExcludedUnreadyTests({queue,selectedIds,restoredPaths,
  const restored=new Set(restoredPaths), selected=new Set(selectedIds), result=[];
  const chosen=(queue?.items||[]).filter(i=>selected.has(i.id));
  for(const path of changedPaths){
+  if(compatibleAuditSupportPaths.includes(path))continue;
   const m=typeof path==='string'?/^tests\/(?:coffee-)?issue([1-9][0-9]*)-[a-z0-9-]+\.test\.mjs$/.exec(path):null;
-  if(!m)continue;
-  const issue=Number(m[1]);
-  if(!(queue?.items||[]).some(i=>i.issue===issue&&!selected.has(i.id)&&
+  const ownerDrive=path===REVIEWED_OWNER_DRIVE_TEST.path&&
+   eligibleOwnerDriveTestExclusion({queue,restoredPaths,publishedSourceSha,
+    developmentSourceSha,sourceObjectAt});
+  const support=reviewedUnreadySupport(path,{queue,restoredPaths,pinnedReadyPaths,
+   publishedSourceSha,developmentSourceSha,sourceObjectAt});
+  if(!m&&!ownerDrive&&!support)continue;
+  const issue=ownerDrive?28:support?.issue??Number(m[1]);
+  // A named support helper may have an unfinished owner spanning exact published
+  // restoration and a separately pinned READY file. reviewedUnreadySupport
+  // already proves every owning path and the absent required runtime.
+  if(!support&&!(queue?.items||[]).some(i=>i.issue===issue&&!selected.has(i.id)&&
     ['IN_PROGRESS','TESTING','BLOCKED','READY'].includes(i.state)&&
     i.scope_paths?.length>0&&i.scope_paths.every(x=>restored.has(x))))continue;
   if(sourceObjectAt(publishedSourceSha,path)!==null||
@@ -65,6 +91,77 @@ export function discoverExcludedUnreadyTests({queue,selectedIds,restoredPaths,
  return sorted([...new Set(result)]);
 }
 
+
+const REVIEWED_UNREADY_SUPPORT=Object.freeze({
+ 'scripts/audit/issue33-selected-product-heading.mjs':{
+   itemId:'DIC-Q-33-r215-original325-327-current-offer-h2-water-decaf',
+   issue:33, requiredRuntime:'src/server/coffee-selected-offer-h2.mjs'
+ },
+ 'supabase/tests/member_approval_finish_null_receipts.sql':{
+   itemId:'DIC-Q-509-member-approval-null-receipt-guard',
+   issue:509, requiredRuntime:'supabase/migrations/20261114195000_dic_member_approval_finish_null_receipts.sql'
+ }
+});
+function reviewedUnreadySupport(path,{queue,restoredPaths,pinnedReadyPaths=[],
+ publishedSourceSha,developmentSourceSha,sourceObjectAt}={}){
+ const spec=REVIEWED_UNREADY_SUPPORT[path];
+ if(!spec||!Array.isArray(restoredPaths)||!Array.isArray(pinnedReadyPaths))return null;
+ const owner=queue?.items?.find(i=>i.id===spec.itemId);
+ if(owner?.issue!==spec.issue||!['IN_PROGRESS','TESTING','BLOCKED'].includes(owner.state)||
+    !owner.scope_paths?.includes(spec.requiredRuntime)||
+    !restoredPaths.includes(spec.requiredRuntime)||
+    !owner.scope_paths.every(p=>restoredPaths.includes(p)||pinnedReadyPaths.includes(p))||
+    (sourceObjectAt(publishedSourceSha,path)!==null&&
+     !(path===REVIEWED_COMPATIBLE_AUDIT_SUPPORT.path&&
+       sourceObjectAt(publishedSourceSha,path)==='100644:'+REVIEWED_COMPATIBLE_AUDIT_SUPPORT.historicalBlobSha))||
+    sourceObjectAt(developmentSourceSha,path)===null||
+    sourceObjectAt(publishedSourceSha,spec.requiredRuntime)!==null||
+    sourceObjectAt(developmentSourceSha,spec.requiredRuntime)===null)return null;
+ return spec;
+}
+
+
+export const REVIEWED_COMPATIBLE_AUDIT_SUPPORT=Object.freeze({
+ path:'scripts/audit/issue33-selected-product-heading.mjs',
+ historicalSourceSha:'3a361f2c187f7a77b317a321f82282c465dde6b2',
+ historicalBlobSha:'7ce2de1fbf70261b006475ae43f1952c140228b6',
+ unfinishedBlobSha:'96b1e529d0c7fb66339b34f78a25923c76556813'
+});
+// Replace ONLY the unready R215 audit helper with its previously reviewed,
+// working immutable Git blob, rather than deleting 89 historical test imports.
+// No runtime, SQL, READY test or GitHub workflow is replaced by this exception.
+export function discoverCompatibleAuditSupport({queue,restoredPaths,pinnedReadyPaths=[],
+ publishedSourceSha,developmentSourceSha,sourceObjectAt,selectedReadyItems=[]}={}){
+ const spec=REVIEWED_COMPATIBLE_AUDIT_SUPPORT;
+ if(typeof sourceObjectAt!=='function'||!Array.isArray(restoredPaths)||
+    !Array.isArray(pinnedReadyPaths)||!Array.isArray(selectedReadyItems))return [];
+ // The previous production commit already contains the helper. A newer
+ // unfinished R215 mutation cannot replace it or erase its 88 existing tests.
+ const published=sourceObjectAt(publishedSourceSha,spec.path);
+ const current=sourceObjectAt(developmentSourceSha,spec.path);
+ if(current==='100644:'+spec.unfinishedBlobSha&&
+    published!=='100644:'+spec.historicalBlobSha)
+   throw Error('Published historical audit helper bytes do not match reviewed source');
+ if(published!=='100644:'+spec.historicalBlobSha||
+    current!=='100644:'+spec.unfinishedBlobSha)return [];
+ const owner=queue?.items?.find(i=>i.id==='DIC-Q-33-r215-original325-327-current-offer-h2-water-decaf');
+ const runtime='src/server/coffee-selected-offer-h2.mjs';
+ if(owner?.issue!==33||!['IN_PROGRESS','TESTING','BLOCKED'].includes(owner.state)||
+    !owner.scope_paths?.includes(runtime)||!restoredPaths.includes(runtime)||
+    !owner.scope_paths.every(p=>restoredPaths.includes(p)||pinnedReadyPaths.includes(p))||
+    sourceObjectAt(publishedSourceSha,runtime)!==null||
+    sourceObjectAt(developmentSourceSha,runtime)===null)return [];
+ if(sourceObjectAt(spec.historicalSourceSha,spec.path)!=='100644:'+spec.historicalBlobSha)
+   throw Error('Reviewed pre-R215 audit helper blob provenance unavailable');
+ for(const item of selectedReadyItems){
+   if(!SHA.test(item?.merged_source_sha||''))
+     throw Error('Selected READY helper provenance unavailable');
+   if(sourceObjectAt(item.merged_source_sha,spec.path)!==
+      sourceObjectAt(item.merged_source_sha+'^',spec.path))
+     throw Error('Selected READY merge changed published heading helper: '+item.id);
+ }
+ return [spec.path];
+}
 // Cheap, source-bound pre-CI static import existence check. The exact app
 // build remains mandatory for exported symbol/type/dynamic import semantics.
 export function assertCandidateRelativeImports(paths,{readSource,hasPath}={}){
@@ -358,13 +455,35 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
     reject('Selected READY merge introduced or modified a workflow-only test: '+path);
   }
  }
+ const compatibleAuditSupport=manifest.restored_compatible_audit_support_paths||[];
+ const expectedCompatibleAuditSupport=discoverCompatibleAuditSupport({
+   queue,restoredPaths:plan.restored_paths,pinnedReadyPaths:plan.pinned_ready_paths,
+   publishedSourceSha,developmentSourceSha:manifest.development_source_sha,sourceObjectAt,
+   selectedReadyItems:plan.ready_items});
+ if(!Array.isArray(compatibleAuditSupport)||!equal(compatibleAuditSupport,expectedCompatibleAuditSupport))
+   reject('Audited historical coffee support helper manifest differs from exact reviewed provenance');
+ for(const path of compatibleAuditSupport)
+   if(path!==REVIEWED_COMPATIBLE_AUDIT_SUPPORT.path||
+      sourceObjectAt(candidateSha,path)!=='100644:'+REVIEWED_COMPATIBLE_AUDIT_SUPPORT.historicalBlobSha)
+     reject('Historical audit helper was not restored to exact independent reviewed bytes');
  const excludedTests=manifest.excluded_unready_test_paths||[];
+ if(excludedTests.some(path=>compatibleAuditSupport.includes(path)))
+   reject('A reviewed compatible helper cannot be simultaneously excluded');
  if(!Array.isArray(excludedTests)||new Set(excludedTests).size!==excludedTests.length)
   reject('Invalid or duplicate excluded unfinished test paths');
  for(const path of excludedTests){
   const m=typeof path==='string'?/^tests\/(?:coffee-)?issue([1-9][0-9]*)-[a-z0-9-]+\.test\.mjs$/.exec(path):null;
-  if(!m)reject('Only issue-scoped unpublished test files can be excluded');
-  const issue=Number(m[1]);
+  const ownerDrive=path===REVIEWED_OWNER_DRIVE_TEST.path&&
+   eligibleOwnerDriveTestExclusion({queue,restoredPaths:plan.restored_paths,
+    publishedSourceSha,developmentSourceSha:manifest.development_source_sha,sourceObjectAt})&&
+   sourceObjectAt(candidateSha,REVIEWED_OWNER_DRIVE_TEST.runtime)===null;
+  const support=reviewedUnreadySupport(path,{queue,restoredPaths:plan.restored_paths,
+   pinnedReadyPaths:plan.pinned_ready_paths,publishedSourceSha,
+   developmentSourceSha:manifest.development_source_sha,sourceObjectAt});
+  const eligibleSupport=Boolean(support)&&sourceObjectAt(candidateSha,path)===null;
+  if(!m&&!ownerDrive&&!eligibleSupport)
+   reject('Only proven issue-scoped, owner Drive, or exact unready support tests can be excluded');
+  const issue=ownerDrive?28:eligibleSupport?support.issue:Number(m[1]);
   const unfinishedMixed=queue.items.some(i=>i.issue===issue&&
    ['IN_PROGRESS','TESTING','BLOCKED'].includes(i.state)&&
    i.scope_paths?.some(p=>plan.pinned_ready_paths.includes(p)));
@@ -406,7 +525,7 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
     reject('Cannot exclude a test introduced or modified by an approved READY merge: '+path);
   }
  }
- const allowed=[...plan.restored_paths,...plan.pinned_ready_paths,...excludedTests,...workflowOnlyTests,...frozenWorkflows,CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH];
+ const allowed=[...plan.restored_paths,...plan.pinned_ready_paths,...compatibleAuditSupport,...excludedTests,...workflowOnlyTests,...frozenWorkflows,CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH];
  if(!equal(stagedCommitChangedPaths||[],allowed))
   reject('Candidate staging commit changes unrelated paths or lacks same-commit journal');
  for(const path of plan.restored_paths)
@@ -430,7 +549,7 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
  }
  return {ready:true,errors:[],deployable_paths:plan.included_paths,
   ready_items:plan.ready_items,other_items:plan.other_items,
-  excluded_paths:plan.restored_paths,pinned_ready_paths:plan.pinned_ready_paths,excluded_unready_test_paths:excludedTests,excluded_unpublished_workflow_test_paths:workflowOnlyTests,
+  excluded_paths:plan.restored_paths,pinned_ready_paths:plan.pinned_ready_paths,restored_compatible_audit_support_paths:compatibleAuditSupport,excluded_unready_test_paths:excludedTests,excluded_unpublished_workflow_test_paths:workflowOnlyTests,
   development_source_sha:manifest.development_source_sha,
   candidate_source_sha:candidateSha};
 }
