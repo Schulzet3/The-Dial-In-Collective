@@ -546,6 +546,6 @@ DIC_PREFLIGHT_VERIFIED development_sha=8da4a1fa94b53fea08a226270d64a23926f7b62a 
 
 DIC_PREFLIGHT_VERIFIED development_sha=9c22f1957a00f303d909616c8f07b7bfb6f89a0d preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
-## Release controller claim — 2026-11-15T04:30:39.682Z
-- Approved release DIC-20261114-READY7-04 from tested application SHA e2d6e0a0dc4bf5aae37611a7bde5dfd99df84901 claimed exactly once against previous release ref 5359d78c303f15231225282536cb6d1efa11beca. Five GitHub CI checks passed and one-use authorization ledger was written.
+## Release controller claim — 2026-11-15T05:11:16.727Z
+- Approved release DIC-20261115-GOOGLEPICKER-05 from tested application SHA c9a68360abd192335e91a9f56bb7b4b022c5746e claimed exactly once against previous release ref 3a82a8e33800feab71cb24140b96bbbfea7c967f. Five GitHub CI checks passed and one-use authorization ledger was written.
 - **Not yet a Netlify publication receipt:** independently check READY/current deployed SHA before marking Deployed.

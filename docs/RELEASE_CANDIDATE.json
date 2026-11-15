@@ -1,20 +1,14 @@
 {
   "schema_version": 1,
   "kind": "DIC-READY-ONLY-SOURCE-1",
-  "candidate_branch": "release-candidates/ready7-20261114-2837-r3",
-  "development_source_sha": "319679ed390a6d7f79e184da21056bb4a3550f0c",
-  "published_source_sha": "ed82fc7aed52b8c8bfac8a348133011b554f1c0b",
+  "candidate_branch": "release-candidates/owner-drive-picker-20261115-r2",
+  "development_source_sha": "d02cd2635c5a53943dbd33354fb6b6b54f33ae9a",
+  "published_source_sha": "e2d6e0a0dc4bf5aae37611a7bde5dfd99df84901",
   "selected_ready_item_ids": [
-    "DIC-Q-33-r202-300-current-selected-coordinated-finish",
-    "DIC-Q-33-r208-original311-current-family-producer",
-    "DIC-Q-33-r210-original315-316-family-farm-region",
-    "DIC-Q-33-r211-original317-preference-and-selected-tag",
-    "DIC-Q-455-r263-edited-provenance-wording",
-    "DIC-Q-455-r270-temperature-context-provenance",
-    "DIC-Q-508-netlify-comments-current-release-20261114"
+    "DIC-Q-28-owner-drive-browser-oauth-20261115"
   ],
   "risk_classification": {
-    "tier": "medium",
+    "tier": "high",
     "checks": [
       "approval",
       "validate",
@@ -23,23 +17,19 @@
       "sql"
     ],
     "builds": 1,
-    "not_applicable": [
-      "sql"
-    ]
+    "not_applicable": []
   },
   "restored_to_published_paths": [
-    "netlify/functions/dic-owner-drive-connect.mjs",
     "scripts/netlify/should-ignore-build.mjs",
     "src/server/coffee-blend-evidence.mjs",
     "src/server/coffee-direct-product-prose.mjs",
+    "src/server/coffee-page-metadata.mjs",
     "src/server/coffee-selected-offer-h2.mjs",
     "supabase/migrations/20261114115000_dic_recommendation_context_null_control_guard.sql",
     "supabase/migrations/20261114135500_dic_promote_pending_coffee_null_flags.sql",
     "supabase/migrations/20261114195000_dic_member_approval_finish_null_receipts.sql"
   ],
-  "pinned_to_ready_paths": [
-    "src/server/coffee-page-metadata.mjs"
-  ],
+  "pinned_to_ready_paths": [],
   "restored_compatible_audit_support_paths": [
     "scripts/audit/issue33-selected-product-heading.mjs"
   ],
@@ -204,8 +194,7 @@
     "tests/coffee-issue33-r213-workflow-dependencies.test.mjs",
     "tests/coffee-issue33-r215-original325-327.test.mjs",
     "tests/coffee-issue33-r216-original328-330.test.mjs",
-    "tests/coffee-issue33-r217-workflow-dependencies.test.mjs",
-    "tests/dic-owner-drive-connect.test.mjs"
+    "tests/coffee-issue33-r217-workflow-dependencies.test.mjs"
   ],
   "publication_authorized": false
 }

@@ -4267,6 +4267,21 @@
       "new_defects": 0,
       "production_writes": 0,
       "next": "pgss 2561-2640; source parity and helper callers"
+    },
+    {
+      "run": 257,
+      "prewrite_source_sha": "9b7dfabfafad68b1af344d2af6764c9142ea3664",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt_path": "docs/audits/issue509-shot-provenance-triggers-pgss-2026-11-15-run257-rank2561-2640.json",
+      "receipt_git_blob": "877792120f93d72432bae56f0f2e67633e5af2a1",
+      "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-15-run257.json",
+      "index_blob_sha": "4fe12c5a5d757fb4d8d7afbf1361aabcf764da2d",
+      "numeric_distinct": 2541,
+      "current_sql_definition_bodies": 6,
+      "source_chars": 8300,
+      "new_defects": 0,
+      "production_writes": 0,
+      "next": "pgss 2641-2720; provider definition and source-parity continuation"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -20936,5 +20951,70 @@
     "production_writes": 0,
     "source_tests": "NOT_RUN_DOCS_ONLY",
     "next": "Fresh provider drift; pgss ranks 2561-2640; remaining complete provider definitions/migration parity and candidate helper caller confirmation"
+  },
+  "provider_pgss_shot_provenance_run257": {
+    "status": "IN_PROGRESS",
+    "project_ref": "azviqqejypsefzilgonr",
+    "preflight_development_sha": "9b7dfabfafad68b1af344d2af6764c9142ea3664",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_source_sha": "9b7dfabfafad68b1af344d2af6764c9142ea3664",
+    "receipt_path": "docs/audits/issue509-shot-provenance-triggers-pgss-2026-11-15-run257-rank2561-2640.json",
+    "receipt_blob_sha": "877792120f93d72432bae56f0f2e67633e5af2a1",
+    "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-15-run257.json",
+    "index_blob_sha": "4fe12c5a5d757fb4d8d7afbf1361aabcf764da2d",
+    "observed_at": "2026-11-15 04:44:13.241538+00",
+    "complete_sql_definitions": [
+      {
+        "signature": "private.bump_revision()",
+        "chars": 261,
+        "md5": "651239ce95a684d072c16fdb895ead7d"
+      },
+      {
+        "signature": "private.capture_equipment_snapshot()",
+        "chars": 1166,
+        "md5": "90c66b59638b48d360e9fd949db63707"
+      },
+      {
+        "signature": "private.classify_personal_shot(shotid uuid)",
+        "chars": 3219,
+        "md5": "5183deb46474c10468638cef08d2bd05"
+      },
+      {
+        "signature": "private.dic_capture_first_decaf_method()",
+        "chars": 1211,
+        "md5": "9a47ec8959cf43d08f1d326e4b0bce4f"
+      },
+      {
+        "signature": "private.dic_capture_recommendation_context()",
+        "chars": 1760,
+        "md5": "962e12faeac2a7b5a671bd837c6c5c41"
+      },
+      {
+        "signature": "private.protect_shot_provenance()",
+        "chars": 683,
+        "md5": "9700d82ba097c7eba83b76135acbdac1"
+      }
+    ],
+    "complete_trigger_definitions": 16,
+    "direct_source_chars": 8300,
+    "pgss_ranks": [
+      2561,
+      2640
+    ],
+    "numeric_rows": 80,
+    "new_distinct": 70,
+    "overlap": 10,
+    "cumulative_distinct": 2541,
+    "app_tables": 52,
+    "app_functions": 114,
+    "policies": 41,
+    "migrations": 69,
+    "pgss_rows": 4970,
+    "all_app_tables_rls_enabled": true,
+    "new_confirmed_defects": 0,
+    "code_changes": 0,
+    "production_writes": 0,
+    "source_tests": "NOT_RUN_DOCS_ONLY",
+    "next": "Fresh provider drift; pgss 2641-2720; unreviewed provider definition/source parity"
   }
 }
