@@ -129,20 +129,35 @@ export const REVIEWED_COMPATIBLE_AUDIT_SUPPORT=Object.freeze({
 // working immutable Git blob, rather than deleting 89 historical test imports.
 // No runtime, SQL, READY test or GitHub workflow is replaced by this exception.
 export function discoverCompatibleAuditSupport({queue,restoredPaths,pinnedReadyPaths=[],
- publishedSourceSha,developmentSourceSha,sourceObjectAt}={}){
+ publishedSourceSha,developmentSourceSha,sourceObjectAt,selectedReadyItems=[]}={}){
  const spec=REVIEWED_COMPATIBLE_AUDIT_SUPPORT;
- if(typeof sourceObjectAt!=='function')return [];
- if(!reviewedUnreadySupport(spec.path,{queue,restoredPaths,pinnedReadyPaths,
-   publishedSourceSha,developmentSourceSha,sourceObjectAt}))return [];
- if(sourceObjectAt(developmentSourceSha,spec.path)!=='100644:'+spec.unfinishedBlobSha)
-   return []; // other source versions must continue through strict existing review
+ if(typeof sourceObjectAt!=='function'||!Array.isArray(restoredPaths)||
+   !Array.isArray(pinnedReadyPaths)||!Array.isArray(selectedReadyItems))return [];
+ const owner=queue?.items?.find(i=>i.id==='DIC-Q-33-r215-original325-327-current-offer-h2-water-decaf');
+ const published=sourceObjectAt(publishedSourceSha,spec.path);
+ const current=sourceObjectAt(developmentSourceSha,spec.path);
+ // IMPORTANT: The prior reviewed helper is actually part of the last
+ // published production source. Preserve its exact Git object and all
+ // previously published tests instead of silently omitting 88 imports.
+ if(published!=='100644:'+spec.historicalBlobSha||
+   current!=='100644:'+spec.unfinishedBlobSha)return [];
+ if(owner?.issue!==33||!['IN_PROGRESS','TESTING','BLOCKED'].includes(owner.state)||
+   !owner.scope_paths?.includes('src/server/coffee-selected-offer-h2.mjs')||
+   !restoredPaths.includes('src/server/coffee-selected-offer-h2.mjs')||
+   !owner.scope_paths.every(path=>restoredPaths.includes(path)||pinnedReadyPaths.includes(path))||
+   sourceObjectAt(publishedSourceSha,'src/server/coffee-selected-offer-h2.mjs')!==null||
+   sourceObjectAt(developmentSourceSha,'src/server/coffee-selected-offer-h2.mjs')===null)return [];
  if(sourceObjectAt(spec.historicalSourceSha,spec.path)!=='100644:'+spec.historicalBlobSha)
    throw Error('Reviewed pre-R215 audit helper blob provenance unavailable');
- if(sourceObjectAt(publishedSourceSha,spec.path)!==null)
-   throw Error('Historical helper unexpectedly already published');
+ for(const item of selectedReadyItems){
+   if(!SHA.test(item?.merged_source_sha||''))
+     throw Error('Selected READY helper provenance unavailable');
+   if(sourceObjectAt(item.merged_source_sha,spec.path)!==
+      sourceObjectAt(item.merged_source_sha+'^',spec.path))
+     throw Error('Selected READY merge changed published heading helper: '+item.id);
+ }
  return [spec.path];
 }
-
 // Cheap, source-bound pre-CI static import existence check. The exact app
 // build remains mandatory for exported symbol/type/dynamic import semantics.
 export function assertCandidateRelativeImports(paths,{readSource,hasPath}={}){
@@ -439,7 +454,8 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
  const compatibleAuditSupport=manifest.restored_compatible_audit_support_paths||[];
  const expectedCompatibleAuditSupport=discoverCompatibleAuditSupport({
    queue,restoredPaths:plan.restored_paths,pinnedReadyPaths:plan.pinned_ready_paths,
-   publishedSourceSha,developmentSourceSha:manifest.development_source_sha,sourceObjectAt});
+   publishedSourceSha,developmentSourceSha:manifest.development_source_sha,sourceObjectAt,
+   selectedReadyItems:plan.ready_items});
  if(!Array.isArray(compatibleAuditSupport)||!equal(compatibleAuditSupport,expectedCompatibleAuditSupport))
    reject('Audited historical coffee support helper manifest differs from exact reviewed provenance');
  for(const path of compatibleAuditSupport)
