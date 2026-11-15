@@ -594,7 +594,9 @@
       "source_bytes_sha256": null,
       "source_byte_caveat": "NIH PMC original full HTML read 2026-11-04, raw PDF bytes not downloaded, hash not verified; image/graph data not independently remeasured.",
       "alignment_claim_scope_review_20261107": "Direct full NIH PMC Methods at https://pmc.ncbi.nlm.nih.gov/articles/PMC4834475/: EK43 burr misalignment susceptibility and ONE supplemental Figure S1 PSD example explicitly described. Experiment ran selected EK43 Turkish burrs at 1480 rpm; supplementary numeric data and a controlled alignment intervention were not inspected. Does not prove a general alignment effect size, retention mechanism or espresso taste advantage.",
-      "alignment_supplement_s1": "NOT_DIRECTLY_INSPECTED_OR_QUANTIFIED"
+      "alignment_supplement_s1": "NOT_DIRECTLY_INSPECTED_OR_QUANTIFIED",
+      "figure4_method_origin_conflict_review_20261115": "DIRECT_ORIGINAL_PUBLISHER_METHOD_GUATEMALAN_VS_FIGURE4_EL_SALVADORIAN_UNRESOLVED; source-specific temperature sample origin not externally settled",
+      "figure4_numeric_review_20261115": "Original 2016 Figure4 cutoff -196C 61+/-3um, -79C 63+/-3um, -19C 73+/-3um, +20C 70+/-3um; cutoff not monotonic, 31% number-mode endpoint separate; burr heating and espresso sensory not tested"
     },
     {
       "id": "LIT-2018-GRIFFITHS-BURR-WEAR",
@@ -8817,6 +8819,66 @@
       "owner_approval": false,
       "exact_development_sha": "e32cd3c1bf54abff3f8e993aa932dcd55182979a",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-278-A",
+      "source": "LIT-2016-UMAN-BEAN-TEMP-PSD",
+      "source_doi": "10.1038/srep24483",
+      "primary_source_url": "https://www.nature.com/articles/srep24483",
+      "reviewed_date_utc": "2026-11-15",
+      "original_research_report_path": "docs/research/originals/09_The_Causal_Foundation_of_Espresso_Extraction_Grinder_and_Burr_Interactions.md",
+      "original_research_report_blob_sha": "1e1b8bbef0ecb05ed0b20195191bcad26663cf0d",
+      "app_source_sha": "9852697659f2470f09a627457c9fdfbd18f4cce7",
+      "app_engine_blob_sha": "f384ae67c1a9148990cab4716dc8ad22d1ca81f3",
+      "github267_literal_review_credit": 0,
+      "owner_approval": false,
+      "implementation_status": "RESEARCH_ONLY_NO_CODE_OR_NEW_NUMERIC_POLICY",
+      "page_section": "Nature Scientific Reports 2016 first-party HTML Methods Coffee temperature (publisher lines 124-129); Figure 4 caption/result (publisher lines 151-164)",
+      "claim": "The Methods identifies the Guatemalan coffee as the bean-temperature experiment input, while the original Figure 4 caption labels its temperature comparison El Salvadorian. This internal sample-identity contradiction is unresolved in the inspected publisher HTML; do not assign a verified origin or generalize a one-coffee temperature effect to other coffees.",
+      "grade": "ORIGINAL_PUBLISHER_FULL_TEXT_DIRECT_METHODS_VERSUS_CAPTION_CONTRADICTION; NO_INDEPENDENT_CORRECTION",
+      "review_status": "SOURCE_CONFLICT_FOUND_NOT_RESOLVED",
+      "uncertainty": "May be a caption error or Methods error; original data, author clarification and supplementary files not inspected.",
+      "factual_status": "ORIGIN_FOR_TEMPERATURE_SERIES_UNCERTAIN_NO_RECOMMENDATION_CHANGE"
+    },
+    {
+      "id": "R455-EV-278-B",
+      "source": "LIT-2016-UMAN-BEAN-TEMP-PSD",
+      "source_doi": "10.1038/srep24483",
+      "primary_source_url": "https://www.nature.com/articles/srep24483",
+      "reviewed_date_utc": "2026-11-15",
+      "original_research_report_path": "docs/research/originals/09_The_Causal_Foundation_of_Espresso_Extraction_Grinder_and_Burr_Interactions.md",
+      "original_research_report_blob_sha": "1e1b8bbef0ecb05ed0b20195191bcad26663cf0d",
+      "app_source_sha": "9852697659f2470f09a627457c9fdfbd18f4cce7",
+      "app_engine_blob_sha": "f384ae67c1a9148990cab4716dc8ad22d1ca81f3",
+      "github267_literal_review_credit": 0,
+      "owner_approval": false,
+      "implementation_status": "RESEARCH_ONLY_NO_CODE_OR_NEW_NUMERIC_POLICY",
+      "page_section": "Figure 4 published caption and result, publisher lines 156-167; Methods 124-129",
+      "claim": "The authors report particle-number fine cutoffs (99% of particle number below diameter n) of 61±3 μm at -196 C, 63±3 at -79 C, 73±3 at -19 C and 70±3 at +20 C. That reported cutoff itself is not monotonic across all four temperatures; the paper's 31% decline concerns its separate number-distribution MODE from room to roughly -200 C. These measurements are not mass/volume fines percentages, a grinder-setting correction, or a DIC five-taste espresso outcome.",
+      "grade": "ORIGINAL_PUBLISHER_NUMERIC_FIGURE4_CAPTION_AND_METHODS_DIRECT; NO_FIGURE_PIXEL_OR_RAW_REANALYSIS",
+      "review_status": "NUMERIC_CAPTION_SOURCE_SUPPORTED_BOUNDED",
+      "uncertainty": "Figure pixels, underlying raw bin data, uncertainty definitions, and pairwise statistics were not independently reanalyzed.",
+      "factual_status": "CONDITIONAL_LASER_PSD_NOT_MONOTONIC_RULE_OR_PERSONAL_TASTE_EFFECT"
+    },
+    {
+      "id": "R455-EV-278-C",
+      "source": "LIT-2016-UMAN-BEAN-TEMP-PSD",
+      "source_doi": "10.1038/srep24483",
+      "primary_source_url": "https://www.nature.com/articles/srep24483",
+      "reviewed_date_utc": "2026-11-15",
+      "original_research_report_path": "docs/research/originals/09_The_Causal_Foundation_of_Espresso_Extraction_Grinder_and_Burr_Interactions.md",
+      "original_research_report_blob_sha": "1e1b8bbef0ecb05ed0b20195191bcad26663cf0d",
+      "app_source_sha": "9852697659f2470f09a627457c9fdfbd18f4cce7",
+      "app_engine_blob_sha": "f384ae67c1a9148990cab4716dc8ad22d1ca81f3",
+      "github267_literal_review_credit": 0,
+      "owner_approval": false,
+      "implementation_status": "RESEARCH_ONLY_NO_CODE_OR_NEW_NUMERIC_POLICY",
+      "page_section": "Methods Grinding/Temperature 111-129 and Applications/Concluding Remarks 168-178",
+      "claim": "Only whole-bean temperatures were deliberately varied on one selected EK43 Turkish-burr grinder at 1480 rpm; burr temperature was not independently manipulated. Author explanations of warming burrs driving daily grind drift, extraction efficiency, aroma and flavor are hypotheses or proposed applications, explicitly not measured human espresso preference or taste outcomes. No automatic cooled-bean compensation, burr-heat sensor, universal size or flavor gain is justified.",
+      "grade": "PRIMARY_CONTROLLED_LASER_PSD_METHODS_VERSUS_AUTHOR_EXTRAPOLATION_BOUNDARY",
+      "review_status": "SOURCE_SUPPORTED_AS_LIMITATION_NOT_VALIDATED_APP_EFFECT",
+      "uncertainty": "No same-coffee next-shot taste ratings, multi-grinder/burr randomized intervention or published operational burr temperature effect assessed.",
+      "factual_status": "RESEARCH_ONLY_NO_COLD_BEAN_BURR_OR_FLAVOR_HEURISTIC"
     }
   ],
   "policy_decisions_pending": [],
@@ -9020,23 +9082,24 @@
     "R455-273: original already tracked Rune 2026 water-sensory French-press study, publisher Methods 2.x/Tables3-6 inspected without double-count source. Added 3 distinct table/measurement claims plus one P3 research-only confounder; 153 sources/449 checks/217 proposals. No app, taste, telemetry or experimental changes; standalone S019 remains unreviewed. Next independent source or reproducible live UX gap.",
     "R455-274: author original indexed abstract + Ferrara coauthor research record on four Robusta wet/dry coffees x three roast speeds at fixed medium roast; +1 source/+2 checks/+1 P3 research-only proposal -> 154/451/218. Full paper/energy/participant data not accessible, S019 still unavailable, no product data or numeric changes, #267 zero line credit. Continue nonoverlap live UX or original claim review.",
     "R455-276: reconciled existing R275 Salamanca 2017 full-text source +4 bounded checks +1 P3 RESEARCH_ONLY proposal from immutable merged addendum into canonical ledger, preserving every existing 154/451/218 record unchanged; planned totals 155/455/219 if CI/merge succeeds. No app/Locked/production changes, no #267 line credit; continue distinct user-visible Log Shot UX gap, S019 inaccessible.",
-    "R455-277: Ch5 original Khamitova 2020 thesis (distinct from already-reviewed Ch3/4), 3 bounded methods/table/model claim checks. Keep prior 155 source identities, 219 proposals; source-specific 458 checks. No owner approval for numeric pressure/tamp/temperature recommendation, no code/queue changes. Resume another nonoverlapping source or reproducible Log Shot UX, S019 standalone PDF still inaccessible."
+    "R455-277: Ch5 original Khamitova 2020 thesis (distinct from already-reviewed Ch3/4), 3 bounded methods/table/model claim checks. Keep prior 155 source identities, 219 proposals; source-specific 458 checks. No owner approval for numeric pressure/tamp/temperature recommendation, no code/queue changes. Resume another nonoverlapping source or reproducible Log Shot UX, S019 standalone PDF still inaccessible.",
+    "R455-278: primary Uman 2016 nature.com first-party Methods and Figure4 numeric caption directly checked; internal origin conflict (Guatemala Methods vs El Salvador Figure4) and nonmonotonic 99%-number cutoff across temperatures; one grinder, no warmed-burr experiment nor five-taste next-shot outcome. +3 bounded checks on existing source, no new source or proposal, no app/Locked/telemetry changes. Original PDF/supplement/figure pixels/raw unresolved, standalone S019 unavailable; next disjoint live UX defect or original source."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-277_KHAMITOVA_UNICAM_CH5",
+    "run_id": "R455-278_UMAN_TEMPERATURE_FIGURE_SOURCE_CONFLICT",
     "date": "2026-11-15",
-    "development_preflight_sha": "e32cd3c1bf54abff3f8e993aa932dcd55182979a",
+    "development_preflight_sha": "9852697659f2470f09a627457c9fdfbd18f4cce7",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "prewrite_source_sha": "e32cd3c1bf54abff3f8e993aa932dcd55182979a",
-    "original_ledger_blob_sha": "16d16a9411c77846d24d280e18156262ef06256a",
+    "prewrite_source_sha": "9852697659f2470f09a627457c9fdfbd18f4cce7",
+    "original_ledger_blob_sha": "5784dc718ea15072a4486777eaa0c442d1f4e08a",
     "source_counts": {
       "sources": 155,
-      "evidence_checks": 458,
+      "evidence_checks": 461,
       "proposals": 219
     },
-    "scope": "Three original Chapter 5 chemistry and mathematical fitting checks on one existing university dissertation without double-counting previously reviewed Chapter3/4",
+    "scope": "Three new bounded primary publisher source-claim checks: origin Methods/Figure4 conflict, nonmonotonic number-count cutoff, untested burr warming/espresso taste extrapolations; existing Uman source reused",
     "github267_line_credit": 0,
-    "next": "Exact PR-head governance and nonforce merge verification; resume disjoint research/UX, S019 original pending."
+    "next": "Verify docs-only exact PR-head governance, merge nonforce, read back all Git blobs and reconcile Issue #455. Standalone S019 original and raw Uman supplement remain pending."
   },
   "policy_decisions_resolved": [
     {
