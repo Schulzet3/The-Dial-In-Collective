@@ -1,0 +1,912 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 255,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight_development_sha": "7928f6c71204f97385e1a941faded00a9f53e0ea",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "prewrite_development_sha": "7928f6c71204f97385e1a941faded00a9f53e0ea",
+  "provider_observed_at": "2026-11-15 02:45:48.047533+00",
+  "live_snapshot": {
+    "observed_at": "2026-11-15 02:45:48.047533+00",
+    "app_tables": 52,
+    "app_functions": 114,
+    "policies": 41,
+    "stored_migrations": 69,
+    "pgss_ids": 4957,
+    "pgss_stats_reset": "2026-10-09 11:11:31.487298+00",
+    "app_tables_rls_disabled": 0
+  },
+  "complete_sql_definitions": [
+    {
+      "signature": "private.dic_admin_account_delete_preview(p_member_id uuid)",
+      "md5": "55ad6325a6a3b8eb97d830bd4a5acc26",
+      "chars": 687,
+      "range": [
+        1,
+        687
+      ],
+      "security_definer": true,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "execute": {
+        "anon": false,
+        "authenticated": true,
+        "service_role": false
+      },
+      "full_source": "CREATE OR REPLACE FUNCTION private.dic_admin_account_delete_preview(p_member_id uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare actor uuid:=auth.uid();\nbegin\n perform private.require_member();\n if actor is null or not private.is_admin() then\n  raise exception using errcode='42501',message='Administrator required.';\n end if;\n if p_member_id is null or p_member_id=actor or\n    exists(select 1 from private.app_admins where owner_id=p_member_id) then\n  raise exception using errcode='42501',message='Administrator accounts are protected.';\n end if;\n return private.dic_admin_account_delete_impact(p_member_id);\nend $function$\n",
+      "verdict": "Checks admitted member and admin via auth.uid()/private.is_admin; rejects self, null, other admins before returning private impact summary. No unauthorized retrieval observed from definition; real JWT/session behavior not tested."
+    },
+    {
+      "signature": "private.dic_admin_account_delete_request(p_member_id uuid, p_community_mode text, p_expected_impact jsonb)",
+      "md5": "b91e425cd94b4c749b28adf8fd0b96a1",
+      "chars": 1949,
+      "range": [
+        1,
+        1949
+      ],
+      "security_definer": true,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "execute": {
+        "anon": false,
+        "authenticated": true,
+        "service_role": false
+      },
+      "full_source": "CREATE OR REPLACE FUNCTION private.dic_admin_account_delete_request(p_member_id uuid, p_community_mode text, p_expected_impact jsonb)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare actor uuid:=auth.uid(); actual jsonb; prior private.dic_admin_account_delete_operations; opid uuid;\nbegin\n perform private.require_member();\n if actor is null or not private.is_admin() then\n  raise exception using errcode='42501',message='Administrator required.';\n end if;\n if p_community_mode not in ('keep','remove') or p_community_mode is null\n    or p_expected_impact is null or p_member_id is null then\n  raise exception using errcode='22023',message='Invalid account deletion confirmation.';\n end if;\n if p_member_id=actor or exists(select 1 from private.app_admins where owner_id=p_member_id) then\n  raise exception using errcode='42501',message='Administrator accounts are protected.';\n end if;\n select * into prior from private.dic_admin_account_delete_operations\n where target_id=p_member_id and phase<>'completed' for update;\n if found then\n  if prior.actor_id is distinct from actor or prior.community_mode<>p_community_mode then\n   raise exception using errcode='23514',message='Another deletion is already in progress.';\n  end if;\n  return jsonb_build_object('ok',true,'operation_id',prior.id,'phase',prior.phase,'retry',true);\n end if;\n perform 1 from auth.users where id=p_member_id for update;\n actual:=private.dic_admin_account_delete_preview(p_member_id);\n if actual is distinct from p_expected_impact then\n  raise exception using errcode='PT409',message='Account records changed. Review deletion impact again.';\n end if;\n insert into private.dic_admin_account_delete_operations(actor_id,target_id,community_mode,expected_impact)\n values(actor,p_member_id,p_community_mode,actual) returning id into opid;\n return jsonb_build_object('ok',true,'operation_id',opid,'phase','requested');\nend $function$\n",
+      "verdict": "Requires admitted admin, explicit keep/remove and impact JSON; locks outstanding operation and Auth target row, rechecks impact and preserves idempotent retry. No live execution performed. Auth existence/FK semantics and genuine authenticated HTTP not retested."
+    },
+    {
+      "signature": "private.dic_admin_dashboard_read()",
+      "md5": "5fa33bbe05e8408c1c2fe1b82d73a8ee",
+      "chars": 2901,
+      "range": [
+        1,
+        2901
+      ],
+      "security_definer": true,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "execute": {
+        "anon": false,
+        "authenticated": true,
+        "service_role": false
+      },
+      "full_source": "CREATE OR REPLACE FUNCTION private.dic_admin_dashboard_read()\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n  if (select auth.uid()) is null or not private.is_admin() then\n    raise exception using errcode='42501', message='Administrator access required.';\n  end if;\n  return jsonb_build_object(\n    'review_only', true,\n    'generated_at', now(),\n    'counts', jsonb_build_object(\n      'pending_coffees', (select count(*) from public.coffee_submissions where status='pending'),\n      'conflicts', (select count(*) from public.coffee_submissions where status='conflict'),\n      'pending_canonical', (select count(*) from public.coffees where verification_state='pending'),\n      'verified_coffees', (select count(*) from public.coffees where verification_state='verified'),\n      'active_accounts', (select count(*) from private.beta_members where enabled),\n      'pending_accounts', (select count(*) from private.beta_members m where m.admitted_at is null and m.signup_review_state='pending'),\n      'pending_verified_accounts', (select count(*) from private.beta_members m join auth.users u on u.id=m.owner_id where m.admitted_at is null and m.signup_review_state='pending' and u.email_confirmed_at is not null),\n      'unfinished_account_deletions', (select count(*) from private.dic_admin_account_delete_operations where phase<>'completed'),\n      'shot_records', (select count(*) from public.shots where hidden_at is null)\n    ),\n    'queue_total', (select count(*) from public.coffee_submissions where status in ('pending','conflict')),\n    'queue', coalesce((\n      select jsonb_agg(item.data order by item.created_at, item.id)\n      from (\n        select id, created_at,\n          jsonb_build_object(\n            'id', id,\n            'created_at', created_at,\n            'status', status,\n            'revision', revision,\n            'canonical_coffee_id', canonical_coffee_id,\n            'base_coffee_revision', base_coffee_revision,\n            'source_url', source_url,\n            'name', left(coalesce(proposed_data->>'name',''),200),\n            'roaster', left(coalesce(proposed_data->>'roaster',''),200),\n            'release_label', left(coalesce(proposed_data->>'release_label',''),200),\n            'origin', left(coalesce(proposed_data->>'origin',''),300),\n            'process', left(coalesce(proposed_data->>'process',''),300),\n            'roast_level', left(coalesce(proposed_data->>'roast_level',''),100)\n          ) as data\n        from public.coffee_submissions\n        where status in ('pending','conflict')\n        order by created_at, id\n        limit 50\n      ) item\n    ),'[]'::jsonb),\n    'backups', jsonb_build_object(\n      'status', 'external_not_connected',\n      'explanation', 'Backup results are verified in GitHub/Drive; this SQL endpoint does not assert backup freshness.'\n    )\n  );\nend $function$\n",
+      "verdict": "Admin-only aggregated counts and at most 50 pending/conflict submissions; backup status explicitly external/unverified. Contains aggregate Auth/table reads only behind is_admin gate; depends on private.is_admin semantics, no real-session proof."
+    },
+    {
+      "signature": "private.dic_admin_signup_requests(p_offset integer, p_limit integer)",
+      "md5": "663c13571f70bb29b6a4351e8e6a45eb",
+      "chars": 1411,
+      "range": [
+        1,
+        1411
+      ],
+      "security_definer": true,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "execute": {
+        "anon": false,
+        "authenticated": true,
+        "service_role": false
+      },
+      "full_source": "CREATE OR REPLACE FUNCTION private.dic_admin_signup_requests(p_offset integer DEFAULT 0, p_limit integer DEFAULT 50)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare total bigint; listing jsonb;\nbegin\n perform private.require_member();\n if auth.uid() is null or not private.is_admin() then\n  raise exception using errcode='42501', message='Administrator required.';\n end if;\n if p_offset is null or p_offset<0 or p_offset>1000000\n    or p_limit is null or p_limit<1 or p_limit>50 then\n  raise exception using errcode='22023',message='Invalid paging.';\n end if;\n select count(*) into total from private.beta_members m\n where m.admitted_at is null and m.signup_review_state='pending';\n select coalesce(jsonb_agg(v.record order by v.created_at,v.id),'[]'::jsonb) into listing\n from (select m.owner_id as id,u.created_at,\n   jsonb_build_object(\n    'id',m.owner_id,'email',left(coalesce(u.email,''),254),\n    'created_at',u.created_at,'email_verified',u.email_confirmed_at is not null,\n    'review_state',m.signup_review_state\n   ) as record\n   from private.beta_members m join auth.users u on u.id=m.owner_id\n   where m.admitted_at is null and m.signup_review_state='pending'\n   order by u.created_at,m.owner_id limit p_limit offset p_offset) v;\n return jsonb_build_object('total',total,'offset',p_offset,'items',coalesce(listing,'[]'::jsonb));\nend $function$\n",
+      "verdict": "Requires member/admin; validates offset 0..1,000,000 and limit 1..50; internally formats pending signup email only for admin response. No actual email data read. Real account/transport acceptance #96 unverified."
+    },
+    {
+      "signature": "private.session_status()",
+      "md5": "0aa8e57bb4846aac7dd8e3b6c0cf690c",
+      "chars": 729,
+      "range": [
+        1,
+        729
+      ],
+      "security_definer": true,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "execute": {
+        "anon": false,
+        "authenticated": true,
+        "service_role": false
+      },
+      "full_source": "CREATE OR REPLACE FUNCTION private.session_status()\n RETURNS jsonb\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nselect jsonb_build_object(\n 'authenticated',auth.uid() is not null,\n 'admitted',private.is_member(),\n 'admin',private.is_admin(),\n 'emailVerified',exists(select 1 from auth.users u where u.id=auth.uid() and u.email_confirmed_at is not null),\n 'approvalState',coalesce((\n   select case when m.admitted_at is not null and m.enabled then 'approved'\n     when m.admitted_at is not null then 'revoked'\n     else m.signup_review_state end\n   from private.beta_members m where m.owner_id=auth.uid()),'pending'),\n 'backupConfigured',false,'communityLive',false,'mode','owner-test');\n$function$\n",
+      "verdict": "SECURITY DEFINER checks request auth.uid and owned beta_members / auth.users for admission, email and role state. Flags 'communityLive':false, 'backupConfigured':false and mode 'owner-test' are literal; client dependencies and whether intentional legacy compatibility are UNVERIFIED; no speculative edit."
+    },
+    {
+      "signature": "public.dic_session_status()",
+      "md5": "742e5bd0fc8544807886b514d95d6688",
+      "chars": 165,
+      "range": [
+        1,
+        165
+      ],
+      "security_definer": false,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "execute": {
+        "anon": false,
+        "authenticated": true,
+        "service_role": true
+      },
+      "full_source": "CREATE OR REPLACE FUNCTION public.dic_session_status()\n RETURNS jsonb\n LANGUAGE sql\n SET search_path TO ''\nAS $function$ select private.session_status(); $function$\n",
+      "verdict": "SECURITY INVOKER wrapper exposed only to authenticated/service_role by execute ACL, delegates to private.session_status. Does not directly read member records; downstream profile semantics in private function included separately."
+    }
+  ],
+  "direct_source_characters": 7842,
+  "pgss_rank_range": [
+    2401,
+    2480
+  ],
+  "pgss_numeric_fingerprints": [
+    {
+      "rn": 2401,
+      "queryid": "6201239374616693602",
+      "calls": 2,
+      "total_ms": "2.496",
+      "mean_ms": "1.248",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2402,
+      "queryid": "4409297995502301521",
+      "calls": 1,
+      "total_ms": "2.495",
+      "mean_ms": "2.495",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2403,
+      "queryid": "-1120166299297414382",
+      "calls": 2,
+      "total_ms": "2.492",
+      "mean_ms": "1.246",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2404,
+      "queryid": "-7064154445474821605",
+      "calls": 1,
+      "total_ms": "2.492",
+      "mean_ms": "2.492",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2405,
+      "queryid": "-968729324016403974",
+      "calls": 1,
+      "total_ms": "2.491",
+      "mean_ms": "2.491",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2406,
+      "queryid": "4179563491067576963",
+      "calls": 96,
+      "total_ms": "2.491",
+      "mean_ms": "0.026",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2407,
+      "queryid": "2976230276884679612",
+      "calls": 2,
+      "total_ms": "2.486",
+      "mean_ms": "1.243",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2408,
+      "queryid": "20480436307344519",
+      "calls": 2,
+      "total_ms": "2.484",
+      "mean_ms": "1.242",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2409,
+      "queryid": "6814340550136537702",
+      "calls": 1,
+      "total_ms": "2.476",
+      "mean_ms": "2.476",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2410,
+      "queryid": "6230508428656234312",
+      "calls": 1,
+      "total_ms": "2.476",
+      "mean_ms": "2.476",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2411,
+      "queryid": "-6774997465974413128",
+      "calls": 6,
+      "total_ms": "2.476",
+      "mean_ms": "0.413",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2412,
+      "queryid": "8276764203108186555",
+      "calls": 1,
+      "total_ms": "2.471",
+      "mean_ms": "2.471",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2413,
+      "queryid": "-3859489381869155956",
+      "calls": 1,
+      "total_ms": "2.471",
+      "mean_ms": "2.471",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2414,
+      "queryid": "4946105274936438224",
+      "calls": 1,
+      "total_ms": "2.469",
+      "mean_ms": "2.469",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2415,
+      "queryid": "-486365601910924321",
+      "calls": 2,
+      "total_ms": "2.467",
+      "mean_ms": "1.234",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2416,
+      "queryid": "5832495150181298880",
+      "calls": 1,
+      "total_ms": "2.465",
+      "mean_ms": "2.465",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2417,
+      "queryid": "-2631782271885077778",
+      "calls": 2,
+      "total_ms": "2.464",
+      "mean_ms": "1.232",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2418,
+      "queryid": "2402208441597970758",
+      "calls": 1,
+      "total_ms": "2.463",
+      "mean_ms": "2.463",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2419,
+      "queryid": "2042451164670995225",
+      "calls": 1,
+      "total_ms": "2.460",
+      "mean_ms": "2.460",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2420,
+      "queryid": "-929121560566933671",
+      "calls": 165,
+      "total_ms": "2.456",
+      "mean_ms": "0.015",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2421,
+      "queryid": "3976571108661318708",
+      "calls": 1,
+      "total_ms": "2.455",
+      "mean_ms": "2.455",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2422,
+      "queryid": "-4387401820208908788",
+      "calls": 2,
+      "total_ms": "2.451",
+      "mean_ms": "1.226",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2423,
+      "queryid": "-4370534966692538977",
+      "calls": 1,
+      "total_ms": "2.448",
+      "mean_ms": "2.448",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2424,
+      "queryid": "-9184506673895229006",
+      "calls": 1,
+      "total_ms": "2.448",
+      "mean_ms": "2.448",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2425,
+      "queryid": "8378935122761696807",
+      "calls": 1,
+      "total_ms": "2.441",
+      "mean_ms": "2.441",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2426,
+      "queryid": "-6996838178676359569",
+      "calls": 1,
+      "total_ms": "2.432",
+      "mean_ms": "2.432",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2427,
+      "queryid": "-6070345253475573015",
+      "calls": 1,
+      "total_ms": "2.428",
+      "mean_ms": "2.428",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2428,
+      "queryid": "5139576442741128022",
+      "calls": 4,
+      "total_ms": "2.426",
+      "mean_ms": "0.606",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2429,
+      "queryid": "4666905199259260841",
+      "calls": 1,
+      "total_ms": "2.425",
+      "mean_ms": "2.425",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2430,
+      "queryid": "-7801025557671490543",
+      "calls": 3,
+      "total_ms": "2.424",
+      "mean_ms": "0.808",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2431,
+      "queryid": "8650138104861024765",
+      "calls": 1,
+      "total_ms": "2.421",
+      "mean_ms": "2.421",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2432,
+      "queryid": "-1453988632972047473",
+      "calls": 1,
+      "total_ms": "2.421",
+      "mean_ms": "2.421",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2433,
+      "queryid": "-49989684680250323",
+      "calls": 1,
+      "total_ms": "2.421",
+      "mean_ms": "2.421",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2434,
+      "queryid": "-6562023780536553875",
+      "calls": 9,
+      "total_ms": "2.416",
+      "mean_ms": "0.268",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2435,
+      "queryid": "-2062840235291129131",
+      "calls": 1,
+      "total_ms": "2.415",
+      "mean_ms": "2.415",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2436,
+      "queryid": "-8700684109250764860",
+      "calls": 1,
+      "total_ms": "2.415",
+      "mean_ms": "2.415",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2437,
+      "queryid": "8558787350494755526",
+      "calls": 2,
+      "total_ms": "2.408",
+      "mean_ms": "1.204",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2438,
+      "queryid": "-1277187239310553072",
+      "calls": 1,
+      "total_ms": "2.408",
+      "mean_ms": "2.408",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2439,
+      "queryid": "-2624161638453020300",
+      "calls": 1,
+      "total_ms": "2.406",
+      "mean_ms": "2.406",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2440,
+      "queryid": "6034956132058309576",
+      "calls": 1,
+      "total_ms": "2.406",
+      "mean_ms": "2.406",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2441,
+      "queryid": "-4923639340595492245",
+      "calls": 2,
+      "total_ms": "2.401",
+      "mean_ms": "1.201",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2442,
+      "queryid": "-2045693174830726287",
+      "calls": 5,
+      "total_ms": "2.397",
+      "mean_ms": "0.479",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2443,
+      "queryid": "1806888655723651298",
+      "calls": 1,
+      "total_ms": "2.396",
+      "mean_ms": "2.396",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2444,
+      "queryid": "-5946575188569186878",
+      "calls": 96,
+      "total_ms": "2.391",
+      "mean_ms": "0.025",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2445,
+      "queryid": "2664882450991145060",
+      "calls": 1,
+      "total_ms": "2.389",
+      "mean_ms": "2.389",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2446,
+      "queryid": "4139720343260224090",
+      "calls": 1,
+      "total_ms": "2.389",
+      "mean_ms": "2.389",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2447,
+      "queryid": "-703987632703348981",
+      "calls": 2,
+      "total_ms": "2.386",
+      "mean_ms": "1.193",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2448,
+      "queryid": "5405804019463046745",
+      "calls": 2,
+      "total_ms": "2.384",
+      "mean_ms": "1.192",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2449,
+      "queryid": "-5193819913993373284",
+      "calls": 1,
+      "total_ms": "2.383",
+      "mean_ms": "2.383",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2450,
+      "queryid": "8575182579592381890",
+      "calls": 1,
+      "total_ms": "2.380",
+      "mean_ms": "2.380",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2451,
+      "queryid": "8552907151658325119",
+      "calls": 3,
+      "total_ms": "2.375",
+      "mean_ms": "0.792",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2452,
+      "queryid": "-6481686635306008196",
+      "calls": 2,
+      "total_ms": "2.375",
+      "mean_ms": "1.187",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2453,
+      "queryid": "1418512917961831596",
+      "calls": 8,
+      "total_ms": "2.375",
+      "mean_ms": "0.297",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2454,
+      "queryid": "-1408851041051674857",
+      "calls": 1,
+      "total_ms": "2.371",
+      "mean_ms": "2.371",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2455,
+      "queryid": "3042049189421451626",
+      "calls": 1,
+      "total_ms": "2.363",
+      "mean_ms": "2.363",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2456,
+      "queryid": "-7279032537427176540",
+      "calls": 1,
+      "total_ms": "2.362",
+      "mean_ms": "2.362",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2457,
+      "queryid": "3209556720059589149",
+      "calls": 96,
+      "total_ms": "2.361",
+      "mean_ms": "0.025",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2458,
+      "queryid": "6465884160481185966",
+      "calls": 1,
+      "total_ms": "2.351",
+      "mean_ms": "2.351",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2459,
+      "queryid": "2277930097573265834",
+      "calls": 1,
+      "total_ms": "2.351",
+      "mean_ms": "2.351",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2460,
+      "queryid": "2575461868384121719",
+      "calls": 1,
+      "total_ms": "2.350",
+      "mean_ms": "2.350",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2461,
+      "queryid": "583007111655281924",
+      "calls": 2,
+      "total_ms": "2.349",
+      "mean_ms": "1.175",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2462,
+      "queryid": "2421169523419764494",
+      "calls": 1,
+      "total_ms": "2.346",
+      "mean_ms": "2.346",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2463,
+      "queryid": "-2669204726605204581",
+      "calls": 21,
+      "total_ms": "2.346",
+      "mean_ms": "0.112",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2464,
+      "queryid": "879923604333411075",
+      "calls": 1,
+      "total_ms": "2.336",
+      "mean_ms": "2.336",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2465,
+      "queryid": "-8292672475411308785",
+      "calls": 1,
+      "total_ms": "2.335",
+      "mean_ms": "2.335",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2466,
+      "queryid": "3450675451129963675",
+      "calls": 1,
+      "total_ms": "2.333",
+      "mean_ms": "2.333",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2467,
+      "queryid": "-1384516005525568713",
+      "calls": 1,
+      "total_ms": "2.328",
+      "mean_ms": "2.328",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2468,
+      "queryid": "5997740056836192423",
+      "calls": 1,
+      "total_ms": "2.323",
+      "mean_ms": "2.323",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2469,
+      "queryid": "2109927885411887295",
+      "calls": 1,
+      "total_ms": "2.322",
+      "mean_ms": "2.322",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2470,
+      "queryid": "5419930145073873606",
+      "calls": 2,
+      "total_ms": "2.321",
+      "mean_ms": "1.160",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2471,
+      "queryid": "7639297505264432706",
+      "calls": 1,
+      "total_ms": "2.318",
+      "mean_ms": "2.318",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2472,
+      "queryid": "-1312789120828613748",
+      "calls": 2,
+      "total_ms": "2.317",
+      "mean_ms": "1.159",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2473,
+      "queryid": "-6215124038987280610",
+      "calls": 1,
+      "total_ms": "2.317",
+      "mean_ms": "2.317",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2474,
+      "queryid": "-8836474577558103635",
+      "calls": 1,
+      "total_ms": "2.315",
+      "mean_ms": "2.315",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2475,
+      "queryid": "-766569346937628709",
+      "calls": 1,
+      "total_ms": "2.315",
+      "mean_ms": "2.315",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2476,
+      "queryid": "-8360947801003084997",
+      "calls": 1,
+      "total_ms": "2.312",
+      "mean_ms": "2.312",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2477,
+      "queryid": "-3145884182750282124",
+      "calls": 1,
+      "total_ms": "2.308",
+      "mean_ms": "2.308",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2478,
+      "queryid": "-352218909528035445",
+      "calls": 1,
+      "total_ms": "2.307",
+      "mean_ms": "2.307",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2479,
+      "queryid": "-3700739317490812159",
+      "calls": 1,
+      "total_ms": "2.307",
+      "mean_ms": "2.307",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    },
+    {
+      "rn": 2480,
+      "queryid": "-1829998842606590477",
+      "calls": 1,
+      "total_ms": "2.305",
+      "mean_ms": "2.305",
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    }
+  ],
+  "prior_distinct": 2320,
+  "new_distinct": 74,
+  "overlap": 6,
+  "cumulative_distinct": 2394,
+  "source_review_scope": "6 complete current SQL definitions directly interpreted in this run; re-review of selected related RPCs does not imply all functions newly covered",
+  "candidate": "private.session_status hardcodes communityLive=false, backupConfigured=false, mode=owner-test; current consumer semantics and owner intent not source-verified, not a confirmed bug or deletion",
+  "security_advisors": [
+    {
+      "name": "rls_enabled_no_policy",
+      "count": 13
+    },
+    {
+      "name": "authenticated_security_definer_function_executable",
+      "count": 10
+    },
+    {
+      "name": "auth_leaked_password_protection",
+      "count": 1
+    }
+  ],
+  "performance_advisors": [
+    {
+      "name": "unindexed_foreign_keys",
+      "count": 14
+    },
+    {
+      "name": "unused_index",
+      "count": 8
+    }
+  ],
+  "rank_limitation": "pg_stat_statements total-execution-time rank is dynamic; numeric queryid only, no raw query text, no gap-free coverage or current-hour latency conclusion",
+  "unverified": [
+    "Real signed-in Auth/session acceptance #96",
+    "Exact GitHub migration parity and synthetic runtime for these six functions",
+    "Whether literal status flags are intentionally backward-compatible",
+    "Provider-console only Auth settings; native compiled internals"
+  ],
+  "new_confirmed_defects": 0,
+  "justified_deletions": 0,
+  "code_changes": 0,
+  "production_provider_writes": 0,
+  "baseline_complete": false,
+  "next": "Fresh provider drift; numeric pgss ranks 2481-2560; review exact consumer of session status flags, other unreviewed hosted provider definitions"
+}
