@@ -915,3 +915,12 @@ PR #2846 first exact main acceptance 43676721135 FAILED one of 211 tests: a pres
 - Source isolation: eight READY app paths, R210 pinned blob; eight unready app/SQL paths, 125 workflows excluded, newer unready tests/support isolated; no schema SQL/member/Auth or private #28 owner Drive publication.
 - Backup historical encrypted Drive proof reused: GitHub 14072635105, SHA256 1555492507aceadd9a9bad2e32139896ba85d3d68050f0954043d3dc35cb9b46, Drive 1v6b01ydDfR1RwWW2jRpVysyXzMUCCAbH. Non-destructive; no provider data write from request.
 - Current release parent 5359d78c303f15231225282536cb6d1efa11beca; current main parent db8a23c7565a6cf68ff3564a3eda3a52d75c4f38. ONE guarded main push controller, ONE Git-connected Netlify build; not DEPLOYED unless controller, claim, provider READY/current verified.
+
+## DIC-20261115-GOOGLEPICKER-05 controller request [skip netlify]
+- Release ID: DIC-20261115-GOOGLEPICKER-05
+- Tested source: c9a68360abd192335e91a9f56bb7b4b022c5746e
+- Mode: publish
+- Owner approval: Owner November 14, 2026 America/Denver, this conversation: 'Run the mandatory DIC preflight and Publish the Google Drive integration'; followed by 'Do what you need to do to get that prepared and published. That's 100% on you'; reiterated 'I'm not going to enter work mode ... get it done immediately.' Authorization limited to ONE source-frozen owner-only Google browser Picker setup endpoint; not the unfinished encrypted courier/Apps Script switchover or future releases.
+- Preflight: development d7b1a12b374b3badfb0576cf10c86b176ea7af43; PREFLIGHT blob 2fb236bbfa6bac48513eeb3bd157b260853af06d
+- Five required exact candidate GitHub checks: approval 43679648628, validate 43679648636, cloud/mobile 43679648635, SQL 43679648656. All success.
+- Scope: ONLY owner-only browser Google Picker setup; existing encrypted Apps Script backups untouched, zero SQL/member changes. One grant, one main push controller, one Git-connected Netlify build. Provider readback required before DEPLOYED.
