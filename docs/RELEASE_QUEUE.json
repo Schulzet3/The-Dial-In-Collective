@@ -14846,6 +14846,29 @@
       "delivered_release_sha": "b9fd0e50b3f8257dac9622b654f02f883690961d",
       "delivered_netlify_deploy_id": "6af9491cb6badad08eecf22c",
       "delivered_at_utc": "2026-11-15T05:54:53.502Z"
+    },
+    {
+      "id": "DIC-Q-28-owner-drive-csp-navigation-20261115",
+      "issue": 28,
+      "pr": 2859,
+      "title": "Prevent browser-blocked Google OAuth navigation after private Drive owner setup passphrase POST",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "netlify/functions/dic-owner-drive-connect.mjs"
+      ],
+      "owner_source": "Owner November 14, 2026: repeated 'Authorize Google Drive' inert on Chrome/Incognito and sometimes Safari; 'get this fixed immediately' authorizes development and tests, not another production Publish.",
+      "tests": [
+        "Owner actual Chrome behavior: repeat native form POST returned Netlify HTTP 303 without Google login window; source form `Content-Security-Policy: form-action 'self'` disallows 303 cross-origin `accounts.google.com` in Chromium (MDN).",
+        "PR #2859 initial exact head 25eb709ea6435fa8ae297c3f41de109477ff57a1 has focused handoff/CSP/no-secret regression; first approval 43684971280 FAILED solely because queue intake missing; this IN_PROGRESS item repairs it. Full Node/cloud/mobile/SQL/security checks must be independently verified at corrected source SHA."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "PR #2859 corrected exact-source five CI checks and nonforce merge not yet VERIFIED; preserve this item IN_PROGRESS until tested source and merged blobs pass.",
+        "Real owner Google Picker private-folder selection and disposable file readback/trash still UNVERIFIED, separate from browser redirect fix."
+      ],
+      "notes": "Scope exactly one owner-only Netlify function and one focused unit test. Native successful POST cross-origin 303 is replaced by no-store same-origin HTML with nonce-bound top-level `location.replace` to Google and visible secure fallback link, preserving 10-minute signed HttpOnly cookie, server-only passphrase, strict Origin check, PKCE, drive.file permission, exact private folder, no-referrer, existing Apps Script backups and all member/DB/Auth data. No publication, backup modification, provider credential or external OAuth code in chat. Later owner Publish requires isolated exact READY bytes.",
+      "production_deployed": false
     }
   ],
   "history": [
