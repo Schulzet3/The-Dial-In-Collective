@@ -14968,23 +14968,34 @@
     {
       "id": "DIC-Q-267-community-count-copy-20261115",
       "issue": 267,
-      "pr": null,
+      "pr": 2956,
       "title": "Community shot/contributor counts use correct singular/plural text",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "a45f1f300fc14b2c7a2381ad5a76bb4a7b2a1ead",
       "scope_paths": [
         "site/cloud/community.js"
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/267",
       "tests": [
-        "SOURCE_REPRO: unchanged Community shot_count=1 and contributor_count=1 interpolate fixed plurals, and existing UI unit tests assert the erroneous text.",
-        "Focused Node 22 UI regression: zero, singular, plural and mixed counts, existing Community grouping/privacy regression; exact head and merged checks pending, skipped != PASS."
+        "Original source/old tests demonstrated malformed 1/1 copy; fixed source blob b6fda93ba08cd5477dcb7da20048ed0ed5af6bba and focused Community regression blob a8c1929cc6e20def0ed01ebaa487986f63c163ff assert 0/0, 1/1, 2/1, 1/2 and 2/3, old grouping/privacy tests preserved.",
+        "PR #2956 head b3f27feb24c996412bd8c970a8be1a8f140236ef: approval 43763076102, Node22/validate 43763076127, cloud/focused UI and single actual browser build 43763076060, SQL 43763076108, security 43763076048, exact-selected 43763076114 and 43763076137 all SUCCESS. Frozen603 43763076106 intentionally SKIPPED, not PASS.",
+        "Exact merged SHA a45f1f300fc14b2c7a2381ad5a76bb4a7b2a1ead: approval 43763236915, Node22 validate 43763236940, focused cloud tests and browser built assets 43763236904, exact-selected 43763236912 all COMPLETED SUCCESS. All four source/test/queue/journal Git blobs match reviewed PR head. No provider/application deployment claimed."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Await corrected PR head tests and exact merged-source CI, no READY or publication authority."
+      "ci_runs": [
+        43763076102,
+        43763076127,
+        43763076060,
+        43763076108,
+        43763076048,
+        43763076114,
+        43763076137,
+        43763236915,
+        43763236940,
+        43763236904,
+        43763236912
       ],
-      "notes": "Narrow #267 UI copy bug fix, does not edit server DTO, SQL, Auth, member/private/Community data or production. No deployment.",
+      "blockers": [],
+      "notes": "Narrow verified development-only READY source. The overall Issue #267 V2 frozen/pinned/live-drift review stays OPEN. Release source isolation and independent owner Publish remain required; no production action. Prior failed unmerged PR #2955 preserved and superseded by accepted #2956.",
       "production_deployed": false
     }
   ],
