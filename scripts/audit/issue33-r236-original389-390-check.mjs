@@ -6,7 +6,6 @@ import {join} from 'node:path';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
-import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
 const dir=process.env.DIC_ISSUE33_FOCUSED_PUBLIC_DIR;
 if(!dir)throw Error('missing_bounded_current_source_dir');
 const head=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
@@ -32,7 +31,6 @@ for(const c of targets){
  let raw=Buffer.alloc(0);
  try{raw=readFileSync(join(dir,'case-'+c.n+'.html'));}catch{errors.push('raw_html_missing');}
  const sha256=createHash('sha256').update(raw).digest('hex');
- const selected=productMarkup(raw.toString('utf8'));
  const p=raw.length?extractPublicCoffeeFacts(raw.toString('utf8'),{source_url:row.final_url||c.url}):{};
  const f=p.fields||{},conflicts=p.conflicts||[];
  if(row.status!=='FETCHED'||row.official_url!==c.url||row.parser_ok!==true)
