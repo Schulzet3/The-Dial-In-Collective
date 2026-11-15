@@ -1,0 +1,45 @@
+name: DIC encrypted GitHub-to-Drive offsite courier
+# Owner-approved issue #28: only existing successful post-cutover ciphertext
+# artifacts. No pg_dump, plaintext, new archive export or Apps Script deletion.
+on:
+  workflow_run:
+    workflows: ['DIC encrypted database backup']
+    types: [completed]
+    branches: [main]
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: dic-drive-native-${{ github.event.workflow_run.id }}
+  cancel-in-progress: false
+jobs:
+  encrypted-offsite:
+    if: >-
+      ${{ github.event.workflow_run.conclusion == 'success' &&
+          github.event.workflow_run.status == 'completed' &&
+          github.event.workflow_run.head_branch == 'main' &&
+          github.event.workflow_run.head_repository.full_name == github.repository &&
+          (github.event.workflow_run.event == 'schedule' ||
+           github.event.workflow_run.event == 'workflow_dispatch') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Verify reviewed encrypted ZIP courier and owner OAuth invariants
+        run: node --test tests/drive-courier*.test.mjs tests/verify-drive-oauth.test.mjs
+      - name: Upload existing GitHub ciphertext ZIP directly to private Drive
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          DIC_SOURCE_RUN_ID: ${{ github.event.workflow_run.id }}
+          DIC_DRIVE_CUTOVER_UTC: '2026-11-15T20:23:00Z'
+          DIC_DRIVE_FOLDER_ID: '1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf'
+          DIC_DRIVE_CLIENT_ID: ${{ secrets.DIC_DRIVE_CLIENT_ID }}
+          DIC_DRIVE_CLIENT_SECRET: ${{ secrets.DIC_DRIVE_CLIENT_SECRET }}
+          DIC_DRIVE_REFRESH_TOKEN: ${{ secrets.DIC_DRIVE_REFRESH_TOKEN }}
+        run: node scripts/backups/drive-courier.mjs
