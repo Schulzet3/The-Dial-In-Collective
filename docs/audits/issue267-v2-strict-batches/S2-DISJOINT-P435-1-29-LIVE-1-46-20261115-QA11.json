@@ -1,0 +1,1508 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch": "QA11-P435-WEEKLY-20261115",
+  "source": {
+    "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "pinned_tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+    "pinned_inventory_index": 435,
+    "path": "tests/weekly-source-snapshot.test.mjs",
+    "pinned_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+    "pinned_lines": 29,
+    "live_preflight_development_commit": "64829f48fd09fec6ba32c7464f2a810cc30aeb79",
+    "live_blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+    "live_lines": 46,
+    "live_concurrent_tree_sha": "589e9439a6b9b8f0444d190f7917b8dd0a068f66",
+    "original_frozen_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+    "frozen_same_blob_as_pinned": true,
+    "frozen_credit_this_batch": 0,
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d"
+  },
+  "scope": "DISJOINT P435 strict pinned 1-29 and separate actual live 1-46. No duplicate frozen credit; prior P1-48 and active P048 F215 agents unaffected. New/altered live 18 physical lines and 28 literal-exact reused counterparts; superseded old pinned line22. No new post-pin-only lines credited to separate D2 ledger until independently reconciled.",
+  "methodology": "Actual complete pinned and live Git source text read line by line. Each original substantive line has individually authored semantic reasoning, class, quality, bug/security/privacy/performance risk, dead/obsolete, duplication, exact counterpart, testability, improvement, Locked fit. For 28 live lines byte-identical to pinned, independently read current literals then reuse matching semantic reasoning with explicit old-to-new mapping; 18 changed/new current lines individually newly interpreted. Mechanical checks used solely for source integrity, not automated semantic coverage.",
+  "first_line_revalidation": {
+    "source": ".github/workflows/approval-continuity.yml",
+    "frozen_blob": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+    "checked_lines": 41,
+    "strict_receipt": "docs/audits/issue267-v2-strict-batches/S2-001.json",
+    "literal_match_all": true,
+    "semantic_fields_present_all": true,
+    "new_coverage_credit": 0,
+    "legacy_R2_C2_grouped_receipts_not_automatically_promoted": true
+  },
+  "pinned_original_per_line": [
+    {
+      "line": 1,
+      "source_text": "import test from 'node:test';",
+      "classification": "import",
+      "behavior": "Imports Node's test runner for isolated source-policy tests",
+      "quality": "native built-in harness",
+      "bug_security_privacy_performance_risk": "No runtime app or credential exposure",
+      "dead_or_obsolete": "Active pinned test",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 1,
+        "exact_text_match": true
+      },
+      "testability": "Run this file with Node 22",
+      "fix_or_improvement_opportunity": "Keep; do not replace with mocked runner",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 2,
+      "source_text": "import assert from 'node:assert/strict';",
+      "classification": "import",
+      "behavior": "Loads strict assertions",
+      "quality": "Uses failure-producing native predicates",
+      "bug_security_privacy_performance_risk": "None directly",
+      "dead_or_obsolete": "Active pinned test",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 2,
+        "exact_text_match": true
+      },
+      "testability": "Observe deliberate negative assertion failures",
+      "fix_or_improvement_opportunity": "Retain strict assertions",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 3,
+      "source_text": "import {readFileSync} from 'node:fs';",
+      "classification": "import",
+      "behavior": "Loads synchronous filesystem reader",
+      "quality": "Static checked-in workflow only; no user path",
+      "bug_security_privacy_performance_risk": "Filesystem access limited to test runner",
+      "dead_or_obsolete": "Active pinned test",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 3,
+        "exact_text_match": true
+      },
+      "testability": "Exercise checked-in workflow path",
+      "fix_or_improvement_opportunity": "Keep local immutable fixture read",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 4,
+      "source_text": "const workflow=readFileSync(new URL('../.github/workflows/weekly-full-regression.yml',import.meta.url),'utf8');",
+      "classification": "setup",
+      "behavior": "Resolves weekly workflow by module-relative URL",
+      "quality": "Avoids process working directory ambiguity",
+      "bug_security_privacy_performance_risk": "Source is live checked-out file, not GitHub runtime attestation",
+      "dead_or_obsolete": "Active pinned setup",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 4,
+        "exact_text_match": true
+      },
+      "testability": "Test source swap and source pin",
+      "fix_or_improvement_opportunity": "Maintain source-relative resolution",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 5,
+      "source_text": "function check(source){",
+      "classification": "function",
+      "behavior": "Defines reusable validation function for workflow text",
+      "quality": "Centralizes several checks",
+      "bug_security_privacy_performance_risk": "Regex parsing not complete GitHub YAML semantics",
+      "dead_or_obsolete": "Active helper",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 5,
+        "exact_text_match": true
+      },
+      "testability": "Positive and mutant inputs",
+      "fix_or_improvement_opportunity": "Retain limited scope; avoid claiming YAML equivalence",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 6,
+      "source_text": " const jobs=Object.fromEntries([...source.matchAll(/^  ([a-z][a-z-]+):\\n([\\s\\S]*?)(?=^  [a-z][a-z-]+:|$(?![\\s\\S]))/gm)].map(m=>[m[1],m[2]]));",
+      "classification": "parser",
+      "behavior": "Extracts top-level job bodies via anchored regex",
+      "quality": "Works on known indentation but brittle to multiline/YAML variants",
+      "bug_security_privacy_performance_risk": "Could miss future YAML syntax; not a full parser",
+      "dead_or_obsolete": "Active parser",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 6,
+        "exact_text_match": true
+      },
+      "testability": "Mutate indentation, job declaration, multiline blocks",
+      "fix_or_improvement_opportunity": "Consider structural parser only if failures reproduced",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 7,
+      "source_text": " assert.ok(jobs['resolve-source'],'source resolution job missing');",
+      "classification": "assertion",
+      "behavior": "Requires resolve-source job presence",
+      "quality": "Prevents removing immutable SHA resolution job",
+      "bug_security_privacy_performance_risk": "Presence alone does not prove source provenance",
+      "dead_or_obsolete": "Active guard",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 7,
+        "exact_text_match": true
+      },
+      "testability": "Remove source job in mutation test",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 8,
+      "source_text": " assert.match(jobs['resolve-source'],/sha: \\$\\{\\{ steps\\.source\\.outputs\\.sha \\}\\}/);",
+      "classification": "assertion",
+      "behavior": "Checks source-output binding to step source",
+      "quality": "Connects producer output to pipeline",
+      "bug_security_privacy_performance_risk": "Regex could match a comment, not necessarily active YAML",
+      "dead_or_obsolete": "Active guard",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 8,
+        "exact_text_match": true
+      },
+      "testability": "Change producer expression; run mutant",
+      "fix_or_improvement_opportunity": "Extend scope only with demonstrated bypass",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 9,
+      "source_text": " assert.match(jobs['resolve-source'],/id: source/);",
+      "classification": "assertion",
+      "behavior": "Checks a step ID named source",
+      "quality": "Required for downstream expression",
+      "bug_security_privacy_performance_risk": "Generic regex may match unrelated job text",
+      "dead_or_obsolete": "Active guard",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 9,
+        "exact_text_match": true
+      },
+      "testability": "Rename source step",
+      "fix_or_improvement_opportunity": "Keep narrow assertion with caution",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 10,
+      "source_text": " assert.match(jobs['resolve-source'],/git rev-parse HEAD/);",
+      "classification": "assertion",
+      "behavior": "Checks git rev-parse HEAD is included",
+      "quality": "Reads immutable checked-out revision",
+      "bug_security_privacy_performance_risk": "Text match alone not execution proof",
+      "dead_or_obsolete": "Active guard",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 10,
+        "exact_text_match": true
+      },
+      "testability": "Remove or alter sha command",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 11,
+      "source_text": " assert.match(jobs['resolve-source'],/GITHUB_OUTPUT/);",
+      "classification": "assertion",
+      "behavior": "Checks GITHUB_OUTPUT marker",
+      "quality": "Requires step output handoff",
+      "bug_security_privacy_performance_risk": "Does not independently prove shell result correct",
+      "dead_or_obsolete": "Active guard",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 11,
+        "exact_text_match": true
+      },
+      "testability": "Remove output write",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 12,
+      "source_text": " assert.equal((source.match(/ref: development\\/backend-foundation/g)||[]).length,1,'moving branch must be resolved only once');",
+      "classification": "assertion",
+      "behavior": "Exactly one textual moving development reference",
+      "quality": "Aims to prevent moving ref in downstream jobs",
+      "bug_security_privacy_performance_risk": "Regex may count commented occurrences or miss aliasing",
+      "dead_or_obsolete": "Active pinned policy",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 12,
+        "exact_text_match": true
+      },
+      "testability": "Replace pin with moving branch",
+      "fix_or_improvement_opportunity": "Retain fail-closed expected single resolver",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 13,
+      "source_text": " for(const name of ['node-build','database','mobile-offline']){",
+      "classification": "loop",
+      "behavior": "Enumerates node-build, database and mobile-offline",
+      "quality": "Covers three required downstream jobs",
+      "bug_security_privacy_performance_risk": "Future renamed or new jobs need deliberate addition",
+      "dead_or_obsolete": "Active loop",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 13,
+        "exact_text_match": true
+      },
+      "testability": "Remove one required job",
+      "fix_or_improvement_opportunity": "Keep explicit suite list",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 14,
+      "source_text": "  assert.ok(jobs[name],name+' job missing');",
+      "classification": "assertion",
+      "behavior": "Checks each downstream job exists",
+      "quality": "Detects missing regression lane",
+      "bug_security_privacy_performance_risk": "Job-name text alone not successful completion",
+      "dead_or_obsolete": "Active guard",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 14,
+        "exact_text_match": true
+      },
+      "testability": "Remove job from sample",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 15,
+      "source_text": "  assert.match(jobs[name],/^    needs: resolve-source$/m,name+' dependency missing');",
+      "classification": "assertion",
+      "behavior": "Checks each job depends exactly on resolve-source",
+      "quality": "Enforces immutable source resolution first",
+      "bug_security_privacy_performance_risk": "Exact formatting could false-fail harmless YAML",
+      "dead_or_obsolete": "Active guard",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 15,
+        "exact_text_match": true
+      },
+      "testability": "Remove needs dependency",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 16,
+      "source_text": "  assert.match(jobs[name],/ref: \\$\\{\\{ needs\\.resolve-source\\.outputs\\.sha \\}\\}/,name+' not pinned');",
+      "classification": "assertion",
+      "behavior": "Checks each downstream checkout targets resolved SHA",
+      "quality": "Prevents drifting mid-run source",
+      "bug_security_privacy_performance_risk": "Still depends on action resolving SHA correctly",
+      "dead_or_obsolete": "Active guard",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 16,
+        "exact_text_match": true
+      },
+      "testability": "Mutate ref and expect failure",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 17,
+      "source_text": " }",
+      "classification": "structure",
+      "behavior": "Closes required-jobs loop",
+      "quality": "Keeps scope confined to three jobs",
+      "bug_security_privacy_performance_risk": "No independent runtime risk",
+      "dead_or_obsolete": "Active syntax",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 17,
+        "exact_text_match": true
+      },
+      "testability": "Parser executes under Node test",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 18,
+      "source_text": " assert.equal((source.match(/persist-credentials: false/g)||[]).length,4);",
+      "classification": "assertion",
+      "behavior": "Requires four checkout credential-persistence opt-outs",
+      "quality": "Limits token persistence across four checkouts",
+      "bug_security_privacy_performance_risk": "Count-only match can include comments; not universal credential denial",
+      "dead_or_obsolete": "Active guard",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 18,
+        "exact_text_match": true
+      },
+      "testability": "Add/remove checkout inputs",
+      "fix_or_improvement_opportunity": "Retain with bounded assurance",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 19,
+      "source_text": " assert.match(source,/cron: '0 8 \\* \\* 0'/);",
+      "classification": "assertion",
+      "behavior": "Requires Sunday 08:00 UTC cron text",
+      "quality": "Matches owner-approved UTC schedule",
+      "bug_security_privacy_performance_risk": "Text assertion not proof scheduled trigger ran",
+      "dead_or_obsolete": "Active policy",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 19,
+        "exact_text_match": true
+      },
+      "testability": "Mutate cron and run regression",
+      "fix_or_improvement_opportunity": "Retain UTC value",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 20,
+      "source_text": " assert.match(source,/permissions:\\n  contents: read\\n/);",
+      "classification": "assertion",
+      "behavior": "Requires global contents: read permission",
+      "quality": "Constrains workflow token permission",
+      "bug_security_privacy_performance_risk": "Cannot prove referenced actions never use other tokens",
+      "dead_or_obsolete": "Active guard",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 20,
+        "exact_text_match": true
+      },
+      "testability": "Escalate permissions mutation",
+      "fix_or_improvement_opportunity": "Retain least privilege",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 21,
+      "source_text": " assert.doesNotMatch(source,/\\bwrite\\b|secrets\\.|^  push:|^  pull_request:/m);",
+      "classification": "assertion",
+      "behavior": "Rejects textual write, secrets, push and PR trigger strings",
+      "quality": "Conservative workflow read-only filter",
+      "bug_security_privacy_performance_risk": "Regex is both over/underinclusive vs parsed YAML",
+      "dead_or_obsolete": "Active guard",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 21,
+        "exact_text_match": true
+      },
+      "testability": "Mutate permissions and triggers",
+      "fix_or_improvement_opportunity": "Treat as static smoke only",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 22,
+      "source_text": " for(const command of ['npm test','npm run lint','npm run build:cloud','isolated-sql-regression.sh','isolated-signed-http-regression.sh','isolated-backup-snapshot-regression.sh','cloud_owner_qa.py','admin_invitation_qa.py','pwa_offline_qa.py'])assert.ok(source.includes(command),'lost regression '+command);",
+      "classification": "assertion",
+      "behavior": "Old substring command loop verified required names somewhere",
+      "quality": "Previously vulnerable to comment-only false positives",
+      "bug_security_privacy_performance_risk": "SUPERSEDED by live exact active-run checks; not an independently proved production vulnerability",
+      "dead_or_obsolete": "Superseded pinned-only line",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "status": "NO_EXACT_SAME_LINE_AFTER_REWRITE"
+      },
+      "testability": "Mutate active run into commented line",
+      "fix_or_improvement_opportunity": "Live fix already present; no retroactive new edit",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 23,
+      "source_text": "}",
+      "classification": "structure",
+      "behavior": "Closes check() for old substring-based commands",
+      "quality": "Scope ends at validation helper",
+      "bug_security_privacy_performance_risk": "No runtime risk on closing delimiter",
+      "dead_or_obsolete": "Superseded structural location",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 35,
+        "exact_text_match": true
+      },
+      "testability": "Node syntax test",
+      "fix_or_improvement_opportunity": "Live close moved to line 35",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 24,
+      "source_text": "test('weekly suites share one immutable source and retain schedule/read-only boundaries',()=>check(workflow));",
+      "classification": "test",
+      "behavior": "Positive test validates currently checked-in weekly workflow",
+      "quality": "Checks intended configuration at checkout",
+      "bug_security_privacy_performance_risk": "Does not execute scheduled workflow or browser suite",
+      "dead_or_obsolete": "Active test",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 36,
+        "exact_text_match": true
+      },
+      "testability": "Run Node test on exact source",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 25,
+      "source_text": "test('one independently resolved moving branch fails',()=>assert.throws(()=>check(workflow.replace('ref: ${{ needs.resolve-source.outputs.sha }}','ref: development/backend-foundation')),/moving branch/));",
+      "classification": "negative-test",
+      "behavior": "Mutates resolved ref to moving branch",
+      "quality": "Tests anti-drift failure",
+      "bug_security_privacy_performance_risk": "Uses a single string replacement",
+      "dead_or_obsolete": "Active test",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 37,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 fails mutant",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 26,
+      "source_text": "test('missing source dependency fails',()=>assert.throws(()=>check(workflow.replace('    needs: resolve-source\\n','')),/dependency missing/));",
+      "classification": "negative-test",
+      "behavior": "Removes source job dependency",
+      "quality": "Tests dependency enforcement",
+      "bug_security_privacy_performance_risk": "Mutation assumes exact whitespace",
+      "dead_or_obsolete": "Active test",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 38,
+        "exact_text_match": true
+      },
+      "testability": "Node test mutation",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 27,
+      "source_text": "test('broken source output binding fails',()=>assert.throws(()=>check(workflow.replace('steps.source.outputs.sha','steps.wrong.outputs.sha'))));",
+      "classification": "negative-test",
+      "behavior": "Breaks step output binding",
+      "quality": "Tests SHA output producer binding",
+      "bug_security_privacy_performance_risk": "Does not prove GitHub output truly resolves",
+      "dead_or_obsolete": "Active test",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 39,
+        "exact_text_match": true
+      },
+      "testability": "Node mutation throws",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 28,
+      "source_text": "test('permission escalation fails',()=>assert.throws(()=>check(workflow.replace('contents: read','contents: write'))));",
+      "classification": "negative-test",
+      "behavior": "Escalates contents read to write",
+      "quality": "Tests permission guard",
+      "bug_security_privacy_performance_risk": "String replace may affect only first match",
+      "dead_or_obsolete": "Active test",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 40,
+        "exact_text_match": true
+      },
+      "testability": "Node mutation throws",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 29,
+      "source_text": "test('lost offline coverage fails',()=>assert.throws(()=>check(workflow.replace('pwa_offline_qa.py','removed.py')),/lost regression/));",
+      "classification": "negative-test",
+      "behavior": "Removes offline QA command marker",
+      "quality": "Tests offline suite retention",
+      "bug_security_privacy_performance_risk": "Old substring condition could be satisfied by comment",
+      "dead_or_obsolete": "Active test",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "8229fd1ab229d69df3446b7867a50dd26c1ca658",
+        "line": 41,
+        "exact_text_match": true
+      },
+      "testability": "Node mutation throws",
+      "fix_or_improvement_opportunity": "Live active-run filtering repairs this specific blind spot",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    }
+  ],
+  "live_current_per_line": [
+    {
+      "line": 1,
+      "source_text": "import test from 'node:test';",
+      "classification": "import",
+      "behavior": "Imports Node's test runner for isolated source-policy tests",
+      "quality": "native built-in harness",
+      "bug_security_privacy_performance_risk": "No runtime app or credential exposure",
+      "dead_or_obsolete": "Active pinned test",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 1,
+        "exact_text_match": true
+      },
+      "testability": "Run this file with Node 22",
+      "fix_or_improvement_opportunity": "Keep; do not replace with mocked runner",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 2,
+      "source_text": "import assert from 'node:assert/strict';",
+      "classification": "import",
+      "behavior": "Loads strict assertions",
+      "quality": "Uses failure-producing native predicates",
+      "bug_security_privacy_performance_risk": "None directly",
+      "dead_or_obsolete": "Active pinned test",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 2,
+        "exact_text_match": true
+      },
+      "testability": "Observe deliberate negative assertion failures",
+      "fix_or_improvement_opportunity": "Retain strict assertions",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 3,
+      "source_text": "import {readFileSync} from 'node:fs';",
+      "classification": "import",
+      "behavior": "Loads synchronous filesystem reader",
+      "quality": "Static checked-in workflow only; no user path",
+      "bug_security_privacy_performance_risk": "Filesystem access limited to test runner",
+      "dead_or_obsolete": "Active pinned test",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 3,
+        "exact_text_match": true
+      },
+      "testability": "Exercise checked-in workflow path",
+      "fix_or_improvement_opportunity": "Keep local immutable fixture read",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 4,
+      "source_text": "const workflow=readFileSync(new URL('../.github/workflows/weekly-full-regression.yml',import.meta.url),'utf8');",
+      "classification": "setup",
+      "behavior": "Resolves weekly workflow by module-relative URL",
+      "quality": "Avoids process working directory ambiguity",
+      "bug_security_privacy_performance_risk": "Source is live checked-out file, not GitHub runtime attestation",
+      "dead_or_obsolete": "Active pinned setup",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 4,
+        "exact_text_match": true
+      },
+      "testability": "Test source swap and source pin",
+      "fix_or_improvement_opportunity": "Maintain source-relative resolution",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 5,
+      "source_text": "function check(source){",
+      "classification": "function",
+      "behavior": "Defines reusable validation function for workflow text",
+      "quality": "Centralizes several checks",
+      "bug_security_privacy_performance_risk": "Regex parsing not complete GitHub YAML semantics",
+      "dead_or_obsolete": "Active helper",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 5,
+        "exact_text_match": true
+      },
+      "testability": "Positive and mutant inputs",
+      "fix_or_improvement_opportunity": "Retain limited scope; avoid claiming YAML equivalence",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 6,
+      "source_text": " const jobs=Object.fromEntries([...source.matchAll(/^  ([a-z][a-z-]+):\\n([\\s\\S]*?)(?=^  [a-z][a-z-]+:|$(?![\\s\\S]))/gm)].map(m=>[m[1],m[2]]));",
+      "classification": "parser",
+      "behavior": "Extracts top-level job bodies via anchored regex",
+      "quality": "Works on known indentation but brittle to multiline/YAML variants",
+      "bug_security_privacy_performance_risk": "Could miss future YAML syntax; not a full parser",
+      "dead_or_obsolete": "Active parser",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 6,
+        "exact_text_match": true
+      },
+      "testability": "Mutate indentation, job declaration, multiline blocks",
+      "fix_or_improvement_opportunity": "Consider structural parser only if failures reproduced",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 7,
+      "source_text": " assert.ok(jobs['resolve-source'],'source resolution job missing');",
+      "classification": "assertion",
+      "behavior": "Requires resolve-source job presence",
+      "quality": "Prevents removing immutable SHA resolution job",
+      "bug_security_privacy_performance_risk": "Presence alone does not prove source provenance",
+      "dead_or_obsolete": "Active guard",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 7,
+        "exact_text_match": true
+      },
+      "testability": "Remove source job in mutation test",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 8,
+      "source_text": " assert.match(jobs['resolve-source'],/sha: \\$\\{\\{ steps\\.source\\.outputs\\.sha \\}\\}/);",
+      "classification": "assertion",
+      "behavior": "Checks source-output binding to step source",
+      "quality": "Connects producer output to pipeline",
+      "bug_security_privacy_performance_risk": "Regex could match a comment, not necessarily active YAML",
+      "dead_or_obsolete": "Active guard",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 8,
+        "exact_text_match": true
+      },
+      "testability": "Change producer expression; run mutant",
+      "fix_or_improvement_opportunity": "Extend scope only with demonstrated bypass",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 9,
+      "source_text": " assert.match(jobs['resolve-source'],/id: source/);",
+      "classification": "assertion",
+      "behavior": "Checks a step ID named source",
+      "quality": "Required for downstream expression",
+      "bug_security_privacy_performance_risk": "Generic regex may match unrelated job text",
+      "dead_or_obsolete": "Active guard",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 9,
+        "exact_text_match": true
+      },
+      "testability": "Rename source step",
+      "fix_or_improvement_opportunity": "Keep narrow assertion with caution",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 10,
+      "source_text": " assert.match(jobs['resolve-source'],/git rev-parse HEAD/);",
+      "classification": "assertion",
+      "behavior": "Checks git rev-parse HEAD is included",
+      "quality": "Reads immutable checked-out revision",
+      "bug_security_privacy_performance_risk": "Text match alone not execution proof",
+      "dead_or_obsolete": "Active guard",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 10,
+        "exact_text_match": true
+      },
+      "testability": "Remove or alter sha command",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 11,
+      "source_text": " assert.match(jobs['resolve-source'],/GITHUB_OUTPUT/);",
+      "classification": "assertion",
+      "behavior": "Checks GITHUB_OUTPUT marker",
+      "quality": "Requires step output handoff",
+      "bug_security_privacy_performance_risk": "Does not independently prove shell result correct",
+      "dead_or_obsolete": "Active guard",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 11,
+        "exact_text_match": true
+      },
+      "testability": "Remove output write",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 12,
+      "source_text": " assert.equal((source.match(/ref: development\\/backend-foundation/g)||[]).length,1,'moving branch must be resolved only once');",
+      "classification": "assertion",
+      "behavior": "Exactly one textual moving development reference",
+      "quality": "Aims to prevent moving ref in downstream jobs",
+      "bug_security_privacy_performance_risk": "Regex may count commented occurrences or miss aliasing",
+      "dead_or_obsolete": "Active pinned policy",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 12,
+        "exact_text_match": true
+      },
+      "testability": "Replace pin with moving branch",
+      "fix_or_improvement_opportunity": "Retain fail-closed expected single resolver",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 13,
+      "source_text": " for(const name of ['node-build','database','mobile-offline']){",
+      "classification": "loop",
+      "behavior": "Enumerates node-build, database and mobile-offline",
+      "quality": "Covers three required downstream jobs",
+      "bug_security_privacy_performance_risk": "Future renamed or new jobs need deliberate addition",
+      "dead_or_obsolete": "Active loop",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 13,
+        "exact_text_match": true
+      },
+      "testability": "Remove one required job",
+      "fix_or_improvement_opportunity": "Keep explicit suite list",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 14,
+      "source_text": "  assert.ok(jobs[name],name+' job missing');",
+      "classification": "assertion",
+      "behavior": "Checks each downstream job exists",
+      "quality": "Detects missing regression lane",
+      "bug_security_privacy_performance_risk": "Job-name text alone not successful completion",
+      "dead_or_obsolete": "Active guard",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 14,
+        "exact_text_match": true
+      },
+      "testability": "Remove job from sample",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 15,
+      "source_text": "  assert.match(jobs[name],/^    needs: resolve-source$/m,name+' dependency missing');",
+      "classification": "assertion",
+      "behavior": "Checks each job depends exactly on resolve-source",
+      "quality": "Enforces immutable source resolution first",
+      "bug_security_privacy_performance_risk": "Exact formatting could false-fail harmless YAML",
+      "dead_or_obsolete": "Active guard",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 15,
+        "exact_text_match": true
+      },
+      "testability": "Remove needs dependency",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 16,
+      "source_text": "  assert.match(jobs[name],/ref: \\$\\{\\{ needs\\.resolve-source\\.outputs\\.sha \\}\\}/,name+' not pinned');",
+      "classification": "assertion",
+      "behavior": "Checks each downstream checkout targets resolved SHA",
+      "quality": "Prevents drifting mid-run source",
+      "bug_security_privacy_performance_risk": "Still depends on action resolving SHA correctly",
+      "dead_or_obsolete": "Active guard",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 16,
+        "exact_text_match": true
+      },
+      "testability": "Mutate ref and expect failure",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 17,
+      "source_text": " }",
+      "classification": "structure",
+      "behavior": "Closes required-jobs loop",
+      "quality": "Keeps scope confined to three jobs",
+      "bug_security_privacy_performance_risk": "No independent runtime risk",
+      "dead_or_obsolete": "Active syntax",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 17,
+        "exact_text_match": true
+      },
+      "testability": "Parser executes under Node test",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 18,
+      "source_text": " assert.equal((source.match(/persist-credentials: false/g)||[]).length,4);",
+      "classification": "assertion",
+      "behavior": "Requires four checkout credential-persistence opt-outs",
+      "quality": "Limits token persistence across four checkouts",
+      "bug_security_privacy_performance_risk": "Count-only match can include comments; not universal credential denial",
+      "dead_or_obsolete": "Active guard",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 18,
+        "exact_text_match": true
+      },
+      "testability": "Add/remove checkout inputs",
+      "fix_or_improvement_opportunity": "Retain with bounded assurance",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 19,
+      "source_text": " assert.match(source,/cron: '0 8 \\* \\* 0'/);",
+      "classification": "assertion",
+      "behavior": "Requires Sunday 08:00 UTC cron text",
+      "quality": "Matches owner-approved UTC schedule",
+      "bug_security_privacy_performance_risk": "Text assertion not proof scheduled trigger ran",
+      "dead_or_obsolete": "Active policy",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 19,
+        "exact_text_match": true
+      },
+      "testability": "Mutate cron and run regression",
+      "fix_or_improvement_opportunity": "Retain UTC value",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 20,
+      "source_text": " assert.match(source,/permissions:\\n  contents: read\\n/);",
+      "classification": "assertion",
+      "behavior": "Requires global contents: read permission",
+      "quality": "Constrains workflow token permission",
+      "bug_security_privacy_performance_risk": "Cannot prove referenced actions never use other tokens",
+      "dead_or_obsolete": "Active guard",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 20,
+        "exact_text_match": true
+      },
+      "testability": "Escalate permissions mutation",
+      "fix_or_improvement_opportunity": "Retain least privilege",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 21,
+      "source_text": " assert.doesNotMatch(source,/\\bwrite\\b|secrets\\.|^  push:|^  pull_request:/m);",
+      "classification": "assertion",
+      "behavior": "Rejects textual write, secrets, push and PR trigger strings",
+      "quality": "Conservative workflow read-only filter",
+      "bug_security_privacy_performance_risk": "Regex is both over/underinclusive vs parsed YAML",
+      "dead_or_obsolete": "Active guard",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 21,
+        "exact_text_match": true
+      },
+      "testability": "Mutate permissions and triggers",
+      "fix_or_improvement_opportunity": "Treat as static smoke only",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 22,
+      "source_text": " const requiredCommands=[",
+      "classification": "setup",
+      "behavior": "Starts explicit list of required active shell commands",
+      "quality": "Improves old weak substring test",
+      "bug_security_privacy_performance_risk": "List alone not execution proof",
+      "dead_or_obsolete": "Active added code",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "status": "NO_EXACT_SAME_LINE_AFTER_REWRITE"
+      },
+      "testability": "Remove a command and assert failure",
+      "fix_or_improvement_opportunity": "Keep explicit commands",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 23,
+      "source_text": "  'npm test',",
+      "classification": "constant",
+      "behavior": "Requires npm test as active - run command",
+      "quality": "Exact command protects unit suite",
+      "bug_security_privacy_performance_risk": "Alternative shell form intentionally not accepted",
+      "dead_or_obsolete": "Active added code",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "status": "NO_EXACT_SAME_LINE_AFTER_REWRITE"
+      },
+      "testability": "Comment out npm test; test must fail",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 24,
+      "source_text": "  'npm run lint',",
+      "classification": "constant",
+      "behavior": "Requires npm run lint command",
+      "quality": "Preserves static lint gate",
+      "bug_security_privacy_performance_risk": "Text presence not success proof",
+      "dead_or_obsolete": "Active added code",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "status": "NO_EXACT_SAME_LINE_AFTER_REWRITE"
+      },
+      "testability": "Replace lint command; assert failure",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 25,
+      "source_text": "  'npm run build:cloud',",
+      "classification": "constant",
+      "behavior": "Requires npm run build:cloud command",
+      "quality": "Preserves cloud build check",
+      "bug_security_privacy_performance_risk": "Actual credentials/env must be tested elsewhere",
+      "dead_or_obsolete": "Active added code",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "status": "NO_EXACT_SAME_LINE_AFTER_REWRITE"
+      },
+      "testability": "Remove build command; assert failure",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 26,
+      "source_text": "  'bash scripts/audit/isolated-sql-regression.sh',",
+      "classification": "constant",
+      "behavior": "Requires explicit SQL isolated regression script",
+      "quality": "Rejects bare filename in comment",
+      "bug_security_privacy_performance_risk": "No production SQL test proof from this static check",
+      "dead_or_obsolete": "Active added code",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "status": "NO_EXACT_SAME_LINE_AFTER_REWRITE"
+      },
+      "testability": "Comment out SQL run; assert failure",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 27,
+      "source_text": "  'bash scripts/audit/isolated-signed-http-regression.sh',",
+      "classification": "constant",
+      "behavior": "Requires signed HTTP isolated regression script",
+      "quality": "Pins exact safe test invocation",
+      "bug_security_privacy_performance_risk": "Not real account/Auth provider acceptance",
+      "dead_or_obsolete": "Active added code",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "status": "NO_EXACT_SAME_LINE_AFTER_REWRITE"
+      },
+      "testability": "Comment out signed HTTP; assert failure",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 28,
+      "source_text": "  'bash scripts/audit/isolated-backup-snapshot-regression.sh',",
+      "classification": "constant",
+      "behavior": "Requires isolated backup snapshot regression script",
+      "quality": "Protects backup regression scope",
+      "bug_security_privacy_performance_risk": "Not proof of scheduled encrypted offsite delivery",
+      "dead_or_obsolete": "Active added code",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "status": "NO_EXACT_SAME_LINE_AFTER_REWRITE"
+      },
+      "testability": "Comment out backup test; assert failure",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 29,
+      "source_text": "  'python tests/browser/cloud_owner_qa.py',",
+      "classification": "constant",
+      "behavior": "Requires cloud_owner_qa.py browser command",
+      "quality": "Retains browser-owner flow under CI",
+      "bug_security_privacy_performance_risk": "Playwright not a physical device guarantee",
+      "dead_or_obsolete": "Active added code",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "status": "NO_EXACT_SAME_LINE_AFTER_REWRITE"
+      },
+      "testability": "Delete browser run; assert failure",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 30,
+      "source_text": "  'python tests/browser/admin_invitation_qa.py',",
+      "classification": "constant",
+      "behavior": "Requires admin_invitation_qa.py command",
+      "quality": "Retains admin invitation browser coverage",
+      "bug_security_privacy_performance_risk": "Synthetic checks distinct from production Auth",
+      "dead_or_obsolete": "Active added code",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "status": "NO_EXACT_SAME_LINE_AFTER_REWRITE"
+      },
+      "testability": "Delete admin QA run; assert failure",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 31,
+      "source_text": "  'python tests/browser/pwa_offline_qa.py'",
+      "classification": "constant",
+      "behavior": "Requires pwa_offline_qa.py command",
+      "quality": "Retains mobile/offline browser lane",
+      "bug_security_privacy_performance_risk": "Does not validate handset or offline outbox in production",
+      "dead_or_obsolete": "Active added code",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "status": "NO_EXACT_SAME_LINE_AFTER_REWRITE"
+      },
+      "testability": "Remove offline QA run; assert failure",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 32,
+      "source_text": " ];",
+      "classification": "structure",
+      "behavior": "Closes explicit command list",
+      "quality": "Defines finite approved suite set",
+      "bug_security_privacy_performance_risk": "No separate bug risk",
+      "dead_or_obsolete": "Active syntax",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "status": "NO_EXACT_SAME_LINE_AFTER_REWRITE"
+      },
+      "testability": "Node parse/test",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 33,
+      "source_text": " const activeRuns=source.split('\\n').map(line=>line.trim()).filter(line=>line.startsWith('- run: '));",
+      "classification": "parser",
+      "behavior": "Collects lines trimmed and starting with active '- run: '",
+      "quality": "Rejects commented-out commands unlike old substring check",
+      "bug_security_privacy_performance_risk": "Multiline shell and YAML aliases may evade literal parser",
+      "dead_or_obsolete": "Active added code",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "status": "NO_EXACT_SAME_LINE_AFTER_REWRITE"
+      },
+      "testability": "Mutate line to comment and invoke validator",
+      "fix_or_improvement_opportunity": "Retain bounded parser; stronger YAML parse only if needed",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 34,
+      "source_text": " for(const command of requiredCommands)assert.ok(activeRuns.includes('- run: '+command),'lost regression '+command);",
+      "classification": "assertion",
+      "behavior": "Every required command must match an active run line exactly",
+      "quality": "Directly fixes comment-only false positive",
+      "bug_security_privacy_performance_risk": "Text-only match not proof of actual GitHub execution",
+      "dead_or_obsolete": "Active added code",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "status": "NO_EXACT_SAME_LINE_AFTER_REWRITE"
+      },
+      "testability": "Comment-out and rename mutation tests",
+      "fix_or_improvement_opportunity": "Retain, do not claim hosted pass",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 35,
+      "source_text": "}",
+      "classification": "structure",
+      "behavior": "Closes check() for old substring-based commands",
+      "quality": "Scope ends at validation helper",
+      "bug_security_privacy_performance_risk": "No runtime risk on closing delimiter",
+      "dead_or_obsolete": "Superseded structural location",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 23,
+        "exact_text_match": true
+      },
+      "testability": "Node syntax test",
+      "fix_or_improvement_opportunity": "Live close moved to line 35",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 36,
+      "source_text": "test('weekly suites share one immutable source and retain schedule/read-only boundaries',()=>check(workflow));",
+      "classification": "test",
+      "behavior": "Positive test validates currently checked-in weekly workflow",
+      "quality": "Checks intended configuration at checkout",
+      "bug_security_privacy_performance_risk": "Does not execute scheduled workflow or browser suite",
+      "dead_or_obsolete": "Active test",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 24,
+        "exact_text_match": true
+      },
+      "testability": "Run Node test on exact source",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 37,
+      "source_text": "test('one independently resolved moving branch fails',()=>assert.throws(()=>check(workflow.replace('ref: ${{ needs.resolve-source.outputs.sha }}','ref: development/backend-foundation')),/moving branch/));",
+      "classification": "negative-test",
+      "behavior": "Mutates resolved ref to moving branch",
+      "quality": "Tests anti-drift failure",
+      "bug_security_privacy_performance_risk": "Uses a single string replacement",
+      "dead_or_obsolete": "Active test",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 25,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 fails mutant",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 38,
+      "source_text": "test('missing source dependency fails',()=>assert.throws(()=>check(workflow.replace('    needs: resolve-source\\n','')),/dependency missing/));",
+      "classification": "negative-test",
+      "behavior": "Removes source job dependency",
+      "quality": "Tests dependency enforcement",
+      "bug_security_privacy_performance_risk": "Mutation assumes exact whitespace",
+      "dead_or_obsolete": "Active test",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 26,
+        "exact_text_match": true
+      },
+      "testability": "Node test mutation",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 39,
+      "source_text": "test('broken source output binding fails',()=>assert.throws(()=>check(workflow.replace('steps.source.outputs.sha','steps.wrong.outputs.sha'))));",
+      "classification": "negative-test",
+      "behavior": "Breaks step output binding",
+      "quality": "Tests SHA output producer binding",
+      "bug_security_privacy_performance_risk": "Does not prove GitHub output truly resolves",
+      "dead_or_obsolete": "Active test",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 27,
+        "exact_text_match": true
+      },
+      "testability": "Node mutation throws",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 40,
+      "source_text": "test('permission escalation fails',()=>assert.throws(()=>check(workflow.replace('contents: read','contents: write'))));",
+      "classification": "negative-test",
+      "behavior": "Escalates contents read to write",
+      "quality": "Tests permission guard",
+      "bug_security_privacy_performance_risk": "String replace may affect only first match",
+      "dead_or_obsolete": "Active test",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 28,
+        "exact_text_match": true
+      },
+      "testability": "Node mutation throws",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 41,
+      "source_text": "test('lost offline coverage fails',()=>assert.throws(()=>check(workflow.replace('pwa_offline_qa.py','removed.py')),/lost regression/));",
+      "classification": "negative-test",
+      "behavior": "Removes offline QA command marker",
+      "quality": "Tests offline suite retention",
+      "bug_security_privacy_performance_risk": "Old substring condition could be satisfied by comment",
+      "dead_or_obsolete": "Active test",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 29,
+        "exact_text_match": true
+      },
+      "testability": "Node mutation throws",
+      "fix_or_improvement_opportunity": "Live active-run filtering repairs this specific blind spot",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 42,
+      "source_text": "test('comment-only weekly regression command is rejected',()=>{",
+      "classification": "test",
+      "behavior": "Adds regression for comment-only false positive",
+      "quality": "Proves active-only parsing intent",
+      "bug_security_privacy_performance_risk": "Only one commented example tested",
+      "dead_or_obsolete": "Active added code",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "status": "NO_EXACT_SAME_LINE_AFTER_REWRITE"
+      },
+      "testability": "Run Node direct focused test",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 43,
+      "source_text": " const changed=workflow.replace('      - run: npm run lint','      # - run: npm run lint');",
+      "classification": "mutation",
+      "behavior": "Comments the active npm lint run line",
+      "quality": "Targeted regression for old acceptance bypass",
+      "bug_security_privacy_performance_risk": "Assumes exact whitespace source line",
+      "dead_or_obsolete": "Active added code",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "status": "NO_EXACT_SAME_LINE_AFTER_REWRITE"
+      },
+      "testability": "Assert mutation changes fixture",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 44,
+      "source_text": " assert.notEqual(changed,workflow);",
+      "classification": "assertion",
+      "behavior": "Verifies attempted mutation was non-noop",
+      "quality": "Avoids false negative from missing fixture",
+      "bug_security_privacy_performance_risk": "Does not validate all YAML variants",
+      "dead_or_obsolete": "Active added code",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "status": "NO_EXACT_SAME_LINE_AFTER_REWRITE"
+      },
+      "testability": "Change line fixture; expect test failure",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 45,
+      "source_text": " assert.throws(()=>check(changed),/lost regression npm run lint/);",
+      "classification": "negative-test",
+      "behavior": "Asserts commented npm lint now fails validator",
+      "quality": "Fixes prior substring false pass",
+      "bug_security_privacy_performance_risk": "Only tests one command shape",
+      "dead_or_obsolete": "Active added code",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "status": "NO_EXACT_SAME_LINE_AFTER_REWRITE"
+      },
+      "testability": "Run focused suite",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    },
+    {
+      "line": 46,
+      "source_text": "});",
+      "classification": "structure",
+      "behavior": "Closes new negative regression test",
+      "quality": "Completes added test block",
+      "bug_security_privacy_performance_risk": "No independent runtime risk",
+      "dead_or_obsolete": "Active syntax",
+      "duplicate_logic": "No proven independent duplicate; reused literal mappings identified without double source credit",
+      "exact_counterpart": {
+        "status": "NO_EXACT_SAME_LINE_AFTER_REWRITE"
+      },
+      "testability": "Node syntax test",
+      "fix_or_improvement_opportunity": "Retain",
+      "locked_decision_fit": "Preserves owner Locked Sunday 08:00 UTC, Node22, isolation, one immutable source, no production/publish",
+      "review_method": "Direct AI semantic reading of this physical original line; not independent human review"
+    }
+  ],
+  "findings": [
+    {
+      "id": "ISSUE267-P435-001",
+      "status": "HISTORICAL_TEST_WEAKNESS_ALREADY_FIXED_IN_LIVE",
+      "pinned_line": 22,
+      "live_lines": "22-34,42-46",
+      "description": "Old substring guard could accept a commented-out regression command. Live source has exact active '- run: ' checks plus a comment-only negative test. Do not claim this is a live defect; no app change needed."
+    },
+    {
+      "id": "ISSUE267-P435-002",
+      "status": "UNVERIFIED_TEST_BOUNDARY",
+      "lines": "live 6,9-11,18-21,33-34",
+      "description": "Static regex/text contract is not complete YAML/workflow execution assurance. No demonstrated live bypass; test and hosted source job still required. No speculative parser rewrite."
+    }
+  ],
+  "source_only_checks": {
+    "pinned_29_exact": true,
+    "live_46_exact": true,
+    "all_live_and_pinned_lines_accounted": true,
+    "live_28_literal_matches": true,
+    "live_18_separately_interpreted": true,
+    "source_sha_and_blob_exact": true,
+    "full_node22_ci": "NOT_RUN_IN_THIS_DOC_ONLY_AUDIT",
+    "functional_browser_offline_auth_sql": "NOT_RUN",
+    "production_provider": "NOT_APPLICABLE"
+  },
+  "owner_approval": "Existing #267 development-only source audit, no deploy, production DB/Auth/Edge/provider/member or backup writes.",
+  "finish": "OPEN_INCOMPLETE; continue disjoint P435 neighboring files only after checking other #267 task ownership; frozen F215 and pinned P048 ongoing agent ranges untouched"
+}
