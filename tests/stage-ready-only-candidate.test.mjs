@@ -267,3 +267,27 @@ test('#2837 unknown source paths never gain broad exclusion',()=>{
   assert.deepEqual(result.manifest.excluded_unready_test_paths,[]);
  }finally{rmSync(f.root,{recursive:true,force:true});}
 });
+
+test('#2837 co-selected chronological READY tip pins exact latest reviewed blob, not queue order',()=>{
+ const f=fixture();
+ try{
+  f.write('site/card.js','later reviewed READY card');
+  f.git('add','-A');f.git('commit','-qm','Second selected READY source [skip netlify]');
+  const lastMerge=f.git('rev-parse','HEAD');
+  f.queue.items.push({...f.queue.items[0],id:'DIC-Q-102',issue:102,
+   merged_source_sha:lastMerge,title:'Later independent READY card'});
+  f.queue.items.push({...f.queue.items[1],id:'DIC-Q-103',issue:103,
+   scope_paths:['site/card.js'],title:'Unready same-file changes'});
+  f.write('site/card.js','later UNREADY card');
+  f.write('docs/RELEASE_QUEUE.json',JSON.stringify(f.queue,null,2)+String.fromCharCode(10));
+  f.git('add','-A');f.git('commit','-qm','Track later unfinished same-file source [skip netlify]');
+  f.development=f.git('rev-parse','HEAD');
+  const result=stageReadyOnlyCandidate({repoDir:f.root,developmentSourceSha:f.development,
+   branch:'release-candidates/issue2837-ready-tip',
+   selectedIds:['DIC-Q-100','DIC-Q-102'],pinnedReadyPaths:['site/card.js']});
+  assert.deepEqual(result.manifest.selected_ready_item_ids,['DIC-Q-100','DIC-Q-102']);
+  assert.equal(f.git('show',result.candidate_sha+':site/card.js'),'later reviewed READY card');
+  assert.equal(f.git('show',f.development+':site/card.js'),'later UNREADY card');
+  assert.deepEqual(result.manifest.pinned_to_ready_paths,['site/card.js']);
+ }finally{rmSync(f.root,{recursive:true,force:true});}
+});
