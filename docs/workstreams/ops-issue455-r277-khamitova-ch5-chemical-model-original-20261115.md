@@ -1,0 +1,24 @@
+# Issue #455 R277 — University of Camerino original Chapter 5 chemical extraction and fitted-model claim check [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=e32cd3c1bf54abff3f8e993aa932dcd55182979a preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+**Authority:** Owner #455 Option B, research-only documented source/claim check; NOT new numeric advice, telemetry, member analysis, Locked rule or deployment. Current at prewrite: development e32cd3c1bf54abff3f8e993aa932dcd55182979a; immutable preflight blob 2fb236bbfa6bac48513eeb3bd157b260853af06d; prior canonical ledger 16d16a9411c77846d24d280e18156262ef06256a; prior research totals **155 identities, 455 checks, 219 proposals**. Scope exclusively source ledger plus this SAME-COMMIT scoped journal; no app/scripts/tests/CI/queue/provider changes. Existing #267 V2 literal review gets **0** lines and #335 technical fixes unchanged.
+
+## Nonoverlapping primary source and provenance
+
+**Gulzhan Khamitova, 2020, University of Camerino PhD**, *Advanced experimental and analytical study for the optimization of the Espresso Coffee extraction*, exact institutional original PDF URL:
+https://pubblicazioni.unicam.it/bitstream/11581/480144/1/Khamitova%20Gulzhan%2025.06.2020pdf.pdf
+
+**Direct original indexed chapter-text intervals:** Chapter 5 §5.3.1–5.3.3 printed pp95–99 (indexed lines 5621–5677; Tables 5.2/5.3 starting 5696 and 5838); §§5.4.3–5.4.4 printed pp108–114 (indexed lines 6523–6576, 6604–6625, 6651–6682). Distinct from already-review-credited original thesis Ch3 Table 3.6/3.7 and Ch4 sensory in R152/R245. Exact University PDF **binary SHA not retrieved**, page screenshot **cache-miss**, plots and raw individual 72 replicate readings **not visually/independently checked**, whole dissertation **not** reviewed. Text extraction table alignment remains a limitation. Industry equipment/fellowship support by Simonelli acknowledged in thesis, no independent replication implied.
+
+## Three directly reviewed bounded claims
+
+1. **R455-EV-277-A, Methods:** one Dominican washed Cibao Altura Arabica, VA388 Black Eagle with Mythos2, 20g VST basket, 20g input/40g±2g output/25±1s, factorial 7/9/11 bar × 88/93/98°C × tamp 10/15/20/30 kgF, 36 configurations each duplicated (72 samples). Machine/grind manually tuned for fixed yield/time. The source's simultaneous ratio 1:2±0.02 and ±2g output are not numerically consistent; no fabricated precision or universal pressure/tamp recommendation.
+2. **R455-EV-277-B, original Table 5.2/5.3:** HPLC chemical endpoints, chlorogenic acids as mg/40ml, caffeine separately. Illustrative reported CQA 93°C/9bar/10kgF 150.24mg/40ml versus 93°C/11bar/10kgF 136.31mg/40ml in the paper's extracted text; this is not five independent user ratings, hedonic preference, or proof next-shot advice improves cup quality. Original table image pixels unverified.
+3. **R455-EV-277-C, fitted model caveat:** Ch5 §5.4 states trial-and-error parameter calibration on similar but not reported data and gives average ~6% caffeine/~3.6% CQA errors for compared conditions; those are NOT blinded, held-out predictive accuracy. Transport model's moving fines accumulate numerically but particle size/resolved filter/pathway clogging omitted. Original plotted curves/coefficients not independently replicated.
+
+**Current app crosswalk:** source development e32cd3c1bf54abff3f8e993aa932dcd55182979a; site/lib/engine.js f384ae67c1a9148990cab4716dc8ad22d1ca81f3, constants.js d3559dc1c9560c4d68fbcad1dc91e3a792a100a2, model.js fdc65f869546cddbb6552e555dca12117f2c47fc. One controllable change, five independent ratings, measured shots, distinct styles/feed, grinder version/calibration and history remain. No reproducible safe defect follows directly from this conditioned chemistry/model. DO NOT implement numerical pressure, tamp, temperature or grinder target from it. No new owner decision needed **now**.
+
+**Canonical update intent:** same existing thesis source id `LIT-2020-KHAMITOVA-UNICAM-DISSERTATION-DISC-DOSE` with precise Ch5 addendum; checks A/B/C unique. Planned totals **155 sources / 458 checks / 219 proposals** after verified merge, no proposal or queue addition. Before merging verify exact PR-head source-bound governance and immutable merged file blobs. Docs-only suites not applicable unless policy invokes them; SKIPPED ≠ PASS. No measured member next-shot quality and no production/provider readback applicable.
+
+**Original scan/QA:** Prior JSON parsed and all source/evidence/proposal counts checked, all prior records preserved except source review-status extension/addendum; source addendum explicitly labeled partial. Exact relevant source original indexed text and live code directly inspected, no new execution assertions. Next bounded work: review another nonoverlapping evidence gap or reproducible Log Shot → Rate → Recommendation UX defect, standalone S019 PDF still inaccessible. No #267 line credit.
