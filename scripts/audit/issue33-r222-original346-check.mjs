@@ -38,15 +38,24 @@ if(!/Heirloom/i.test(String(f.variety||''))||!/1850/.test(String(f.elevation_m||
  errors.push('chosen_source_spec_missing');
 if(f.decaffeination_method||f.roast_level||f.espresso_recipe)
  errors.push('unsupported_decaf_roast_espresso');
-if(/floral|chocolatey|sparkling acidity/i.test(String(f.tasting_notes||'')))
- errors.push('regional_background_falsely_selected_as_tasting_notes');
+// The current exact chosen product has a *named* primary seller metadata
+// sentence: "unique floral and chocolatey notes of Below Zero Ethiopia Natural
+// Coffee". This is qualified identity-matched seller fallback, NOT the generic
+// Yirgacheffe/Harrar botanical narrative or an independently labeled cup list.
+// Reject the same notes when product-specific corroboration is missing.
+const namedCurrentMeta=(parsed.source_facts||[]).some(e=>e.source_type==='html'&&
+ e.section==='Published page metadata'&&
+ /unique floral and chocolatey notes of Below Zero Ethiopia Natural Coffee\b/i.test(String(e.value||'')));
+const implicitNotes=/floral|chocolatey|sparkling acidity/i.test(String(f.tasting_notes||''));
+if(implicitNotes&&!namedCurrentMeta)
+ errors.push('generic_region_notes_without_exact_named_current_product_source');
 if(/Harrar|Yirgacheffe forests/i.test(String(f.producer||'')))
  errors.push('regional_background_falsely_selected_as_producer');
 if(!/Washing Station\s*(?:\|\s*)?Idido/i.test(source)||!/Process\s*(?:\|\s*)?Natural/i.test(source))
  errors.push('current_direct_selected_labeled_source_changed');
 if((parsed.conflicts||[]).includes('name')||(parsed.conflicts||[]).includes('process'))
  errors.push('false_identity_or_process_conflict');
-const report={passed:!errors.length,source_sha:checkout,raw_sha256:digest,raw_bytes:raw.length,official_url:url,selected_h1:heads,fields:f,conflicts:parsed.conflicts||[],errors,original603_manually_certified:false,production_operations:0};
+const report={passed:!errors.length,source_sha:checkout,raw_sha256:digest,raw_bytes:raw.length,official_url:url,selected_h1:heads,fields:f,conflicts:parsed.conflicts||[],notes_source_boundary:implicitNotes?(namedCurrentMeta?'EXACT_NAMED_PRIMARY_SELLER_METADATA_QUALIFIED_FALLBACK':'REGIONAL_PROSE_UNSUPPORTED'):'NO_AUTO_NOTES',errors,original603_manually_certified:false,production_operations:0};
 writeFileSync(join(dir,'r222-original346-afterproof.json'),JSON.stringify(report,null,2)+'\n');
 console.log('[DIC33 R222 original346 current afterproof] '+JSON.stringify(report).slice(0,17000));
 if(errors.length)throw Error('r222_current_selected_source_unverified:'+errors.join(','));
