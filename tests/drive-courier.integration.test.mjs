@@ -27,14 +27,17 @@ test('end-to-end synthetic 5 MiB encrypted-ZIP transfer: GitHub SHA, resumable c
     const appProperties={dicArtifactId:'456',dicSource:'github-actions-age',dicSha256:sha};
     const stored={id:'synthetic-id',name:'dic-nightly-456.zip',size:String(bytes.length),
       md5Checksum:md5,parents:[FOLDER_ID],appProperties,shared:false,trashed:false};
-    const requests=[];let sessionPut=0;let totalSent=0;
+    const requests=[];let sessionPut=0;let totalSent=0;let present=false;
     globalThis.fetch=async(input,options={})=>{
       const url=String(input);requests.push(url);
       if(url.endsWith('/actions/runs/123'))return json(run);
       if(url.includes('/actions/runs/123/artifacts?'))return json({total_count:1,artifacts:[artifact]});
       if(url==='https://oauth2.googleapis.com/token')return json({access_token:'synthetic',scope:SCOPE});
       if(url.startsWith('https://www.googleapis.com/drive/v3/files/'+FOLDER_ID))return json({id:FOLDER_ID,name:'DIC Automated Encrypted Backups',mimeType:'application/vnd.google-apps.folder',capabilities:{canAddChildren:true}});
-      if(url.startsWith('https://www.googleapis.com/drive/v3/files?'))return json({files:[]});
+      if(url.startsWith('https://www.googleapis.com/drive/v3/files?')){
+        assert.ok(decodeURIComponent(url).includes("name = 'dic-nightly-456.zip'"),'legacy name must be checked');
+        return json({files:present?[{...stored,appProperties:undefined}]:[]});
+      }
       if(url.includes('/actions/artifacts/456/zip'))return new Response(null,{status:302,headers:{location:'https://synthetic.invalid/archive'}});
       if(url==='https://synthetic.invalid/archive')return new Response(bytes,{status:200});
       if(url.startsWith('https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable&fields=')) {
@@ -56,6 +59,7 @@ test('end-to-end synthetic 5 MiB encrypted-ZIP transfer: GitHub SHA, resumable c
         assert.deepEqual(b,bytes.subarray(totalSent,totalSent+b.length));
         totalSent+=b.length;sessionPut++;
         if(totalSent<bytes.length)return new Response(null,{status:308,headers:{range:`bytes=0-${totalSent-1}`}});
+        present=true;
         return json({id:stored.id},201);
       }
       if(url.startsWith('https://www.googleapis.com/drive/v3/files/synthetic-id?'))return json(stored);
@@ -67,5 +71,12 @@ test('end-to-end synthetic 5 MiB encrypted-ZIP transfer: GitHub SHA, resumable c
     assert.ok(sessionPut>=2,'5 MiB archive requires two chunked requests');
     assert.equal(totalSent,bytes.length);
     assert.ok(requests.some(u=>u.includes('/actions/runs/123/artifacts')));
+    // A legacy courier already saved the exact same bytes without native appProperties.
+    // Reprocessing MUST verify its MD5/size/private folder and never upload twice.
+    const uploads=sessionPut;
+    await main({GH_TOKEN:'synthetic',DIC_SOURCE_RUN_ID:'123',GITHUB_REPOSITORY:REPO,
+      DIC_DRIVE_CLIENT_ID:'synthetic',DIC_DRIVE_CLIENT_SECRET:'synthetic',
+      DIC_DRIVE_REFRESH_TOKEN:'synthetic',DIC_DRIVE_CUTOVER_UTC:'2026-11-30T00:00:00Z'});
+    assert.equal(sessionPut,uploads,'legacy identical ciphertext must not be re-uploaded');
   }finally{globalThis.fetch=orig;await rm(dir,{recursive:true,force:true});}
 });

@@ -111,15 +111,34 @@ async function verifyFolder(token) {
      f.mimeType!=='application/vnd.google-apps.folder' ||f.trashed ||
      f.capabilities?.canAddChildren===false)throw new Error('Selected Drive folder cannot be written.');
 }
-async function findSaved(token, artifact) {
-  const q=`'${FOLDER_ID}' in parents and trashed = false and `+
-    `appProperties has { key='dicArtifactId' and value='${artifact.id}' }`;
-  const params=new URLSearchParams({q,pageSize:'10',fields:'nextPageToken,files(id,size,md5Checksum,parents,appProperties)'});
-  const found=await driveGet(`/files?${params}`,token);
-  if(found.nextPageToken)throw new Error('Duplicate lookup exceeded 10 results; inspect folder.');
-  if(found.files?.length>1)throw new Error('Multiple files claim this artifact identity.');
-  if(found.files?.length===1){assertArchiveIdentity(found.files[0],artifact);return found.files[0];}
-  return null;
+// Reconcile BOTH native appProperties and legacy Apps Script name-only copies.
+// Verify the expected GitHub ZIP bytes first, so an old courier's file is
+// accepted only when the private Drive MD5 and size truly match.
+export function selectExistingCopy(response, artifact, local) {
+  if(!Array.isArray(response?.files) || response.nextPageToken)
+    throw new Error('Incomplete existing-copy inventory; refuse a duplicate upload.');
+  if(response.files.length>1)
+    throw new Error('Multiple direct-folder files claim this artifact; refuse a duplicate upload.');
+  const file=response.files[0];
+  if(!file)return null;
+  const expectedName=`dic-nightly-${artifact.id}.zip`;
+  if(file.name!==expectedName || file.shared!==false || file.trashed===true ||
+     !Array.isArray(file.parents) || file.parents.length!==1 || file.parents[0]!==FOLDER_ID ||
+     Number(file.size)!==Number(artifact.size_in_bytes) ||
+     !/^[a-f0-9]{32}$/.test(file.md5Checksum||'') ||
+     file.md5Checksum!==local?.md5)
+    throw new Error('Existing private Drive ZIP does not match GitHub artifact bytes/identity.');
+  if(file.appProperties?.dicArtifactId!==undefined || file.appProperties?.dicSha256!==undefined)
+    assertArchiveIdentity(file,artifact);
+  return file;
+}
+async function findSaved(token,artifact,local) {
+  const name=`dic-nightly-${artifact.id}.zip`;
+  const q=`'${FOLDER_ID}' in parents and trashed = false and (`+
+    `name = '${name}' or appProperties has { key='dicArtifactId' and value='${artifact.id}' })`;
+  const params=new URLSearchParams({q,pageSize:'10',
+    fields:'nextPageToken,files(id,name,size,md5Checksum,parents,appProperties,trashed,shared)'});
+  return selectExistingCopy(await driveGet(`/files?${params}`,token),artifact,local);
 }
 async function downloadGitHubZip(token, artifact, filepath) {
   const url=`${GH_API}/actions/artifacts/${artifact.id}/zip`;
@@ -231,12 +250,15 @@ export async function main(env=process.env) {
   }
   const token=await accessToken(env);
   await verifyFolder(token);
-  const existing=await findSaved(token,artifact);
-  if(existing){console.log(`ALREADY VERIFIED: GitHub artifact ${artifact.id} is in the correct Drive folder.`);return;}
   const dir=await mkdtemp(join(tmpdir(),'dic-ciphertext-'));
   try{
     const filepath=join(dir,'encrypted-artifact.zip');
     const local=await downloadGitHubZip(env.GH_TOKEN,artifact,filepath);
+    const existing=await findSaved(token,artifact,local);
+    if(existing){
+      console.log(`ALREADY VERIFIED: exact GitHub artifact ${artifact.id} exists in the private Drive folder; no duplicate uploaded.`);
+      return;
+    }
     const saved=await uploadDrive(token,filepath,artifact,local);
     console.log(`PASS: exact encrypted GitHub artifact ${artifact.id} uploaded with verified SHA-256, Drive MD5, size and parent; Drive file ID ${saved}.`);
   }finally{await rm(dir,{recursive:true,force:true});}
