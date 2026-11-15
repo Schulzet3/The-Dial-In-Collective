@@ -14710,24 +14710,33 @@
     {
       "id": "DIC-Q-28-owner-drive-browser-oauth-20261115",
       "issue": 28,
-      "pr": null,
+      "pr": 2818,
       "title": "Browser-only one-time owner Google Drive OAuth setup (no Mac/terminal)",
       "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "merged_source_sha": "11371c014d3c9d120c4b79b727829442e63467e6",
       "scope_paths": [
         "netlify/functions/dic-owner-drive-connect.mjs"
       ],
       "owner_source": "Owner explicit 2026-11-14/15 approval to build browser-only OAuth and eventual fully automated GitHub encrypted offsite Drive courier; development only, owner Publish separately.",
       "tests": [
-        "Focused OAuth browser CSRF, PKCE, exact-origin, passphrase, drive.file/refresh, exact folder picker, disposable upload MD5/size/parent/trash, negative scope and cleanup Node tests; hosted CI pending."
+        "Exact PR-head b4ff58cdcd5d8a387dd435f81e56595bc10bbf0f: full Node22 suite 4,940 PASS/0 FAIL/6 intentional SKIP, lint PASS, validate 43666194529 SUCCESS.",
+        "Approval 43666194627, cloud/mobile 43666194679, isolated SQL 43666194505, source security 43666194620 SUCCESS on exact PR SHA; original frozen603 SKIPPED not PASS.",
+        "Seven new browser OAuth tests cover exact owner gate, CSRF, PKCE, drive.file/refresh, exact folder, disposable upload MD5/size/parent/trash, negative scope, expiry and cleanup. No live Google consent or provider file test yet.",
+        "PR #2818 nonforce merged 11371c014d3c9d120c4b79b727829442e63467e6, exact function blob e543b9ef25b4b73879617919c96889e80f98cf02 and test blob 7431b0a76279585d795b5f6210c435de9bbf3757 equal tested head. Historical #2817 source failure corrected, not skipped."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        43666194529,
+        43666194627,
+        43666194505,
+        43666194679,
+        43666194620
+      ],
       "blockers": [
-        "User must create a new Web OAuth client in existing Google Cloud project and configure private Netlify environment credentials; existing Desktop client and In production status stay unchanged.",
-        "Owner browser consent, real Google One Pick folder selection, direct GitHub Actions secrets, live Google Drive permission proof and actual GitHub runner verification pending.",
-        "Setup endpoint still disabled/not deployed; draft ops main PR #2684 not active; preserve existing Apps Script backup until actual ciphertext offsite and checksum proof."
+        "Owner must create a distinct Web OAuth client in existing Google Cloud project and configure private Netlify setup environment after separately approved Publish, preserving Desktop client and drive.file only.",
+        "Hidden setup route is NOT PUBLISHED and disabled by default. Real browser consent/One Pick exact Drive folder, disposable upload/trash and secure GitHub Actions secret installation remain unverified.",
+        "Draft main ops PR #2684 remains unmerged; actual GitHub runner disposable smoke and true scheduled encrypted ZIP direct-folder SHA-256/MD5/parent/dedupe proof must pass before Apps Script cutover."
       ],
-      "notes": "Isolated owner-only Netlify function source and tests; no member UI/Auth, database, backup workflows, production, provider or archive write. PR #2817 historical superceded for an incorrect journal filename; recognized same-commit workstream journal used here. No source READY/DEPLOYED claims.",
+      "notes": "Source MERGED with exact five-check PR-head CI SUCCESS, but queue remains IN_PROGRESS and NOT READY / NOT DEPLOYED due owner Web OAuth/provider setup and live acceptance gaps. No provider, Netlify, member, backup, archive or GitHub secret writes. Main draft PR #2684 main acceptance 43666002095 SUCCESS but remains DRAFT.",
       "production_deployed": false
     }
   ],
