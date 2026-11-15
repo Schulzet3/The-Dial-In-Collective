@@ -10,7 +10,7 @@ test('R292 extraction yield arrow retains the engine coaching and one real measu
  const html=nextShotGuidance(advice,measured,true,'C');
  assert.equal(nextShotAdjustment(advice,measured,true,'C').label,'Yield');
  assert.match(html,/class="next-shot-change"/);
- assert.match(html,/class="next-shot-coaching"/);
+ assert.match(html,/class="helper next-shot-coaching"/);
  assert.match(html,/Compare the balance\./);
  assert.match(html,/Keep dose, grind, and temperature unchanged\./);
  assert.equal((html.match(/class="next-shot-change"/g)||[]).length,1);
