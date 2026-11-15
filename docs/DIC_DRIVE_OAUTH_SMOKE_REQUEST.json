@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "request_id": "DIC-ISSUE28-DRIVE-OAUTH-SMOKE-20261115-01",
+  "mode": "disposable_oauth_folder_proof_only",
+  "requested_at_utc": "2026-11-15T20:22:39.444Z",
+  "owner_authority": "Owner confirmed all three GitHub encrypted Actions OAuth secrets saved directly: DIC_DRIVE_REFRESH_TOKEN, DIC_DRIVE_CLIENT_ID, DIC_DRIVE_CLIENT_SECRET. Owner authorized fully automated backup integration for DIC issue #28.",
+  "expected_main_parent_sha": "2f230c85baf3a565a36f4776ac2685386cfe77ae",
+  "preflight_development_sha": "52fadff5f7bfc76f3881b3bea1b91f813a949c1d",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "required_secret_names": [
+    "DIC_DRIVE_CLIENT_ID",
+    "DIC_DRIVE_CLIENT_SECRET",
+    "DIC_DRIVE_REFRESH_TOKEN"
+  ],
+  "target_existing_owner_private_folder_id": "1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf",
+  "allowed_operations": [
+    "Google OAuth token refresh in GitHub Actions runner",
+    "Verify exact existing owner-private Google Drive folder",
+    "Create exactly one disposable random 53-byte test file in that folder",
+    "Read back exact size, MD5 and parent",
+    "Trash test file created by this request, verify trash"
+  ],
+  "prohibited_operations": [
+    "PostgreSQL export or new database backup",
+    "Real backup archive upload, deletion or relocation",
+    "Supabase/Auth/member writes",
+    "Disabling existing Apps Script encrypted courier",
+    "Netlify deploy/release",
+    "Expose any tokens, keys or secret values"
+  ],
+  "requires_runner_success_before_scheduled_courier": true
+}
