@@ -13,7 +13,7 @@ const securityHeaders={'Cache-Control':'no-store, max-age=0','Pragma':'no-cache'
   'Permissions-Policy':'camera=(), microphone=(), geolocation=()'};
 function html(body,status=200,headers={}){
   const nonce=randomBytes(16).toString('base64');
-  const script="<script nonce='"+nonce+"'>if(location.search)history.replaceState(null,'',location.pathname);var b=document.getElementById('copy-token');if(b)b.addEventListener('click',function(){navigator.clipboard.writeText(document.getElementById('refresh-token').value).then(function(){b.textContent='Copied'});});</script>";
+  const script="<script nonce='"+nonce+"'>if(location.search)history.replaceState(null,'',location.pathname);var b=document.getElementById('copy-token');if(b)b.addEventListener('click',function(){navigator.clipboard.writeText(document.getElementById('refresh-token').value).then(function(){b.textContent='Copied'});});var next=document.getElementById('google-continue');if(next)location.replace(next.href);</script>";
   const page='<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DIC owner Drive setup</title><style>body{background:#f3ece0;color:#2b1b14;font:16px/1.6 system-ui,sans-serif;margin:0}main{max-width:640px;margin:auto;padding:30px}input,button,textarea{font:inherit;width:100%;max-width:100%;padding:12px;margin:10px 0;box-sizing:border-box}textarea{height:125px}code{overflow-wrap:anywhere}</style></head><body><main>'+body+'</main>'+script+'</body></html>';
   return new Response(page,{status,headers:{...securityHeaders,'Content-Type':'text/html; charset=utf-8',
     'Content-Security-Policy':"default-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'; style-src 'unsafe-inline'; script-src 'nonce-"+nonce+"'",...headers}});
@@ -244,8 +244,12 @@ export function createOwnerDriveConnect({env=defaultEnv,fetcher=fetch,now=()=>Da
         access_type:'offline',prompt:'consent',state,code_challenge:challenge,
         code_challenge_method:'S256'}).forEach(([k,v])=>auth.searchParams.set(k,v));
       const token=sign({state,verifier,iat:now()},c.password);
-      return new Response(null,{status:303,headers:{...securityHeaders,Location:auth.href,
-        'Set-Cookie':COOKIE+'='+token+'; Max-Age=600; Path=/api/owner-drive-connect; HttpOnly; Secure; SameSite=Lax'}});
+      // A form-action 'self' CSP can block the cross-origin redirect of a native form POST.
+      // Return a same-origin handoff with nonce-bound navigation and a clickable fallback.
+      // The OAuth URL contains public PKCE challenge/state only, never the passphrase or tokens.
+      const safeHref=auth.href.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;');
+      return html('<h1>Continue to Google</h1><p>Opening Google authorization. If it does not open automatically, <a id="google-continue" href="'+safeHref+'" rel="noreferrer">continue to Google</a>.</p>',200,
+        {'Set-Cookie':COOKIE+'='+token+'; Max-Age=600; Path=/api/owner-drive-connect; HttpOnly; Secure; SameSite=Lax'});
     }
     if(url.searchParams.has('error'))return html('<h1>Authorization cancelled</h1>',400);
     const session=verifySession(extractCookieFor(request,COOKIE),c.password,now());
