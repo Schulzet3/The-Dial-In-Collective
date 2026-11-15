@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "status": "DEPLOYED_VERIFIED_FUNCTION_ONLY",
+  "release_id": "DIC-20261115-DRIVEFORM-07",
+  "owner_authorization": "Owner November 14, 2026 America/Denver: 'Publish if you need to. Just get this done.' Exactly single READY owner Google Drive native form 403 correction; no backups, SQL, member changes or wider courier migration.",
+  "preflight": {
+    "development_sha": "fc45eed37a7e9ec19bebd5cd21ac8be39dbdad1e",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d"
+  },
+  "ready_ids": [
+    "DIC-Q-28-owner-drive-form-referrer-20261115"
+  ],
+  "previous_source_sha": "c9a68360abd192335e91a9f56bb7b4b022c5746e",
+  "candidate_source_sha": "835f88ea422564f712e50a5ffa842234aa15e1bd",
+  "source_function": "netlify/functions/dic-owner-drive-connect.mjs",
+  "source_function_blob_sha": "28c78dc078a49263e2f58d1e901579f86698a92a",
+  "source_test_blob_sha": "44b2ec0ad58ad3c49f82b8eb89978c99316a8b58",
+  "candidate_exact_checks": {
+    "approval": {
+      "run_id": 43682595461,
+      "conclusion": "success"
+    },
+    "validate": {
+      "run_id": 43682595437,
+      "conclusion": "success",
+      "test_count": 4730,
+      "pass": 4724,
+      "fail": 0,
+      "skipped": 6
+    },
+    "cloud_tests": {
+      "run_id": 43682595450,
+      "conclusion": "success"
+    },
+    "mobile_browser_qa": {
+      "run_id": 43682595450,
+      "conclusion": "success"
+    },
+    "sql": {
+      "run_id": 43682595479,
+      "conclusion": "success"
+    }
+  },
+  "first_failed_controller": {
+    "main_request_sha": "1c49f09b641f67149e17ba6fc644b9637336c606",
+    "run_id": 43682419694,
+    "conclusion": "failure",
+    "failed_before_publication": true,
+    "cause": "Published source c9a68360 not yet linked into development ancestry; corrected before a fresh candidate, grant and request."
+  },
+  "ancestry_repair": {
+    "development_nonforce_merge_sha": "67c748f34ed50a7c7b2382d3734684a99debd26b",
+    "parents": [
+      "b1f537809cd2cd310ab2eef4f3f22a8153aa205c",
+      "c9a68360abd192335e91a9f56bb7b4b022c5746e"
+    ],
+    "approval_run_id": 43682511326,
+    "application_bytes_unchanged": true
+  },
+  "source_isolation": {
+    "selected_deployable_paths": [
+      "netlify/functions/dic-owner-drive-connect.mjs"
+    ],
+    "restored_unready_deployable_paths": 8,
+    "restored_workflow_paths": 126,
+    "excluded_unready_tests_and_support": 33,
+    "sql_migrations_published": 0
+  },
+  "main_request_sha": "513f315ae6a4b84c275b68da70712b55ac39d2eb",
+  "controller_run_id": 43683052745,
+  "controller_conclusion": "success",
+  "main_controller_acceptance_run_id": 43683052720,
+  "main_controller_acceptance_conclusion": "success",
+  "release_sha": "b9fd0e50b3f8257dac9622b654f02f883690961d",
+  "release_parent_sha": "8628da42883536549539492817748e8f19b0864f",
+  "netlify": {
+    "deploy_id": "6af9491cb6badad08eecf22c",
+    "state": "ready",
+    "current": true,
+    "commit_ref": "b9fd0e50b3f8257dac9622b654f02f883690961d",
+    "context": "production",
+    "published_at_utc": "2026-11-15T05:54:53.502Z",
+    "functions": [
+      "coffee-url-preview",
+      "dic-admin-push",
+      "dic-admin-push-poll",
+      "dic-member-approval-poll",
+      "dic-owner-drive-connect"
+    ],
+    "secret_scan_matches": 0,
+    "manual_deploy": false
+  },
+  "existing_backup_courier_preserved": true,
+  "db_member_auth_changes": false,
+  "passphrase_handling": "Previously configured Netlify Production passphrase picked up by new Git-connected build; raw secret NOT read or shared; authenticated owner POST not observed.",
+  "post_deploy_unverified": [
+    "Real owner browser passphrase POST and Google OAuth consent/Picker response",
+    "Selected existing private Drive folder proof via disposable upload/readback/trash",
+    "GitHub Actions token/runner and scheduled encrypted courier switchover, separately unfinished"
+  ],
+  "verified_at_utc": "2026-11-15T05:56:36.962Z"
+}

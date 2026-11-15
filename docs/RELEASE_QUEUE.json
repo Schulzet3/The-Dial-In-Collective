@@ -2,9 +2,9 @@
   "schema_version": 1,
   "authority": "OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022",
   "published_base": {
-    "tested_source_sha": "c9a68360abd192335e91a9f56bb7b4b022c5746e",
-    "release_sha": "8628da42883536549539492817748e8f19b0864f",
-    "netlify_deploy_id": "6af93efe3e9d15f2b41e92de"
+    "tested_source_sha": "835f88ea422564f712e50a5ffa842234aa15e1bd",
+    "release_sha": "b9fd0e50b3f8257dac9622b654f02f883690961d",
+    "netlify_deploy_id": "6af9491cb6badad08eecf22c"
   },
   "items": [
     {
@@ -14819,14 +14819,14 @@
       "issue": 28,
       "pr": 2855,
       "title": "Fix owner Google Drive setup native form 403 caused by no-referrer Origin:null",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "6ce672e6b8dfbb6cda8bda616d1411ad9447aaa6",
       "scope_paths": [
         "netlify/functions/dic-owner-drive-connect.mjs"
       ],
       "tests": [
         "Previous owner setup exact CI 5/5 SUCCESS but tests assumed a synthetic Origin header; did not cover browser Referrer-Policy impact.",
-        "Added regression of form response policy, form valid-Origin POST, rejected null/missing origins, and no-referrer OAuth redirect; actual hosted CI pending.",
+        "Regression added for native form response policy, valid-Origin POST, rejected null/missing Origin, and no-referrer OAuth redirect; historical initial-CI-pending note superseded by five PR-head and five exact final candidate PASS.",
         "Exact PR-head 810b8144a18fde2fc33e6bf4f165ad6966ea8acc GitHub SUCCESS: approval 43680988283, validate Node/lint/one build 43680988281, cloud-tests and mobile-browser-qa 43680988323, SQL 43680988310, separate security-inventory 43680988301 SUCCESS; original frozen603 43680988256 SKIPPED, not a PASS and not in scope.",
         "Nonforce PR #2855 squash merged 6ce672e6b8dfbb6cda8bda616d1411ad9447aaa6; exact merged function blob 28c78dc078a49263e2f58d1e901579f86698a92a and test blob 44b2ec0ad58ad3c49f82b8eb89978c99316a8b58 MATCH passing PR head. Merged approval 43681251442, validate 43681251357 and cloud/browser 43681251393 SUCCESS; no SQL source change, PR exact SQL PASS."
       ],
@@ -14839,7 +14839,13 @@
       ],
       "blockers": [],
       "owner_source": "Owner November 15, 2026: 'No that's not the case. They matched before I made that change. It's almost certainly something else. Find it. don't be lazy.' Preceding owner instruction 'Get this fixed' authorizes development, not publication.",
-      "notes": "MDN: Referrer-Policy:no-referrer causes Origin:null for navigate-mode HTML POST; source exact Origin guard returns 403 before passphrase compare. Preserve strict Origin check: only GET form gets same-origin referrer policy. No new Google/DB/member/backup writes, courier remains Apps Script; release requires new explicit Publish.\n2026-11-15 READINESS VERIFIED for one narrow browser-only form header fix, not a published release. Real root cause: previous GET `Referrer-Policy:no-referrer` causes navigate-mode HTML form POST `Origin:null`; unchanged strict server Origin guard returns 403 before password verification. GET form now `Referrer-Policy:same-origin`; OAuth redirects/callbacks remain no-referrer; strict password/Origin and owner-only Drive access preserved. Tested source Git blob 28c78dc078a49263e2f58d1e901579f86698a92a, test blob 44b2ec0ad58ad3c49f82b8eb89978c99316a8b58; five PR-source CI checks SUCCESS plus merged approval, validate, browser SUCCESS, zero remaining source blockers. No provider write, publication, SQL, member or archive changes. NETLIFY CURRENT REMAINS prior release 8628da42 / 6af93efe, thus user may STILL SEE 403 until fresh owner Publish. Current Netlify Production passphrase was edited after that old deploy and is picked up only on fresh Git-connected deploy. Owner's previous Publish grant consumed, new explicit owner Publish required for future release controller. Direct live header value not recorded in observability; causal mechanics source/standards verified."
+      "notes": "MDN: Referrer-Policy:no-referrer causes Origin:null for navigate-mode HTML POST; source exact Origin guard returns 403 before passphrase compare. Preserve strict Origin check: only GET form gets same-origin referrer policy. No new Google/DB/member/backup writes, courier remains Apps Script; release requires new explicit Publish.\n2026-11-15 READINESS VERIFIED for one narrow browser-only form header fix, not a published release. Real root cause: previous GET `Referrer-Policy:no-referrer` causes navigate-mode HTML form POST `Origin:null`; unchanged strict server Origin guard returns 403 before password verification. GET form now `Referrer-Policy:same-origin`; OAuth redirects/callbacks remain no-referrer; strict password/Origin and owner-only Drive access preserved. Tested source Git blob 28c78dc078a49263e2f58d1e901579f86698a92a, test blob 44b2ec0ad58ad3c49f82b8eb89978c99316a8b58; five PR-source CI checks SUCCESS plus merged approval, validate, browser SUCCESS, zero remaining source blockers. No provider write, publication, SQL, member or archive changes. NETLIFY CURRENT REMAINS prior release 8628da42 / 6af93efe, thus user may STILL SEE 403 until fresh owner Publish. Current Netlify Production passphrase was edited after that old deploy and is picked up only on fresh Git-connected deploy. Owner's previous Publish grant consumed, new explicit owner Publish required for future release controller. Direct live header value not recorded in observability; causal mechanics source/standards verified.\n2026-11-15 SUPERSEDED RELEASE STATUS: DEPLOYED VERIFIED. Owner explicitly authorized Publish; corrected candidate 835f88ea422564f712e50a5ffa842234aa15e1bd approval 43682595461, Node/lint/one build 43682595437, cloud/mobile-browser 43682595450, SQL 43682595479 all five required jobs SUCCESS. Missing earlier published ancestry repaired by two-parent dev 67c748f34; historical first controller 43682419694 DENIED before claim (not replayed), fresh one-use grant DIC-20261115-DRIVEFORM-07 triggered main commit 513f315ae6a4b84c275b68da70712b55ac39d2eb, controller 43683052745 SUCCESS and independent main acceptance 43683052720 SUCCESS; nonforce production release b9fd0e50b3f8257dac9622b654f02f883690961d, Netlify 6af9491cb6badad08eecf22c READY/current at 2026-11-15T05:54:53.502Z, five expected functions, zero secret matches. Exactly one selected owner function, no SQL migrations, 8 unready deployables and 126 workflows excluded, backups and all member data preserved. Referrer/Origin policy tested, but real owner Google consent and private-folder acceptance NOT YET VERIFIED.",
+      "production_deployed": true,
+      "delivered_release_id": "DIC-20261115-DRIVEFORM-07",
+      "delivered_source_sha": "835f88ea422564f712e50a5ffa842234aa15e1bd",
+      "delivered_release_sha": "b9fd0e50b3f8257dac9622b654f02f883690961d",
+      "delivered_netlify_deploy_id": "6af9491cb6badad08eecf22c",
+      "delivered_at_utc": "2026-11-15T05:54:53.502Z"
     }
   ],
   "history": [
@@ -17437,6 +17443,15 @@
       "source_sha": "e2d6e0a0dc4bf5aae37611a7bde5dfd99df84901",
       "production_deployed": true,
       "evidence": "Release DIC-20261114-READY7-04, owner-authorized exact source e2d6e0a0dc4bf5aae37611a7bde5dfd99df84901, five required GitHub checks SUCCESS (approval 43676557767; Node/lint validate 43676557797; cloud/mobile/browser + ONE app build 43676557759; SQL 43676557748); guarded main request a2af2ae4c377c22c71efbb75b521480892345b80, controller 43677034075 SUCCESS, nonforce release Git 3a82a8e33800feab71cb24140b96bbbfea7c967f, Git-connected Netlify 6af93575920bb64e3282a5ef READY/current at 2026-11-15T04:31:04.172Z; eight approved source paths (R210 mixed-source parser pinned), unfinished code/SQL workflows/test paths excluded; no production database or member data writes."
+    },
+    {
+      "date": "2026-11-15",
+      "issue": 28,
+      "item_id": "DIC-Q-28-owner-drive-form-referrer-20261115",
+      "state": "DEPLOYED",
+      "source_sha": "835f88ea422564f712e50a5ffa842234aa15e1bd",
+      "production_deployed": true,
+      "evidence": "Release DIC-20261115-DRIVEFORM-07 Owner explicitly authorized Publish; corrected candidate 835f88ea422564f712e50a5ffa842234aa15e1bd approval 43682595461, Node/lint/one build 43682595437, cloud/mobile-browser 43682595450, SQL 43682595479 all five required jobs SUCCESS. Missing earlier published ancestry repaired by two-parent dev 67c748f34; historical first controller 43682419694 DENIED before claim (not replayed), fresh one-use grant DIC-20261115-DRIVEFORM-07 triggered main commit 513f315ae6a4b84c275b68da70712b55ac39d2eb, controller 43683052745 SUCCESS and independent main acceptance 43683052720 SUCCESS; nonforce production release b9fd0e50b3f8257dac9622b654f02f883690961d, Netlify 6af9491cb6badad08eecf22c READY/current at 2026-11-15T05:54:53.502Z, five expected functions, zero secret matches. Exactly one selected owner function, no SQL migrations, 8 unready deployables and 126 workflows excluded, backups and all member data preserved. Referrer/Origin policy tested, but real owner Google consent and private-folder acceptance NOT YET VERIFIED."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
