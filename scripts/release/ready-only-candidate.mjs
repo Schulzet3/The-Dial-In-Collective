@@ -54,7 +54,7 @@ function eligibleOwnerDriveTestExclusion({queue,restoredPaths,publishedSourceSha
 }
 // Only new, issue-scoped tests for entirely restored unfinished/unselected
 // runtime may be absent from a candidate. Selected READY test edits never vanish.
-export function discoverExcludedUnreadyTests({queue,selectedIds,restoredPaths,
+export function discoverExcludedUnreadyTests({queue,selectedIds,restoredPaths,pinnedReadyPaths=[],
  publishedSourceSha,developmentSourceSha,changedPaths,sourceObjectAt}={}){
  if(typeof sourceObjectAt!=='function'||!Array.isArray(changedPaths)||
     !Array.isArray(restoredPaths)||!Array.isArray(selectedIds)||
@@ -67,8 +67,10 @@ export function discoverExcludedUnreadyTests({queue,selectedIds,restoredPaths,
   const ownerDrive=path===REVIEWED_OWNER_DRIVE_TEST.path&&
    eligibleOwnerDriveTestExclusion({queue,restoredPaths,publishedSourceSha,
     developmentSourceSha,sourceObjectAt});
-  if(!m&&!ownerDrive)continue;
-  const issue=ownerDrive?28:Number(m[1]);
+  const support=reviewedUnreadySupport(path,{queue,restoredPaths,pinnedReadyPaths,
+   publishedSourceSha,developmentSourceSha,sourceObjectAt});
+  if(!m&&!ownerDrive&&!support)continue;
+  const issue=ownerDrive?28:support?.issue??Number(m[1]);
   if(!(queue?.items||[]).some(i=>i.issue===issue&&!selected.has(i.id)&&
     ['IN_PROGRESS','TESTING','BLOCKED','READY'].includes(i.state)&&
     i.scope_paths?.length>0&&i.scope_paths.every(x=>restored.has(x))))continue;
@@ -83,6 +85,33 @@ export function discoverExcludedUnreadyTests({queue,selectedIds,restoredPaths,
   if(!touched)result.push(path);
  }
  return sorted([...new Set(result)]);
+}
+
+
+const REVIEWED_UNREADY_SUPPORT=Object.freeze({
+ 'scripts/audit/issue33-selected-product-heading.mjs':{
+   itemId:'DIC-Q-33-r215-original325-327-current-offer-h2-water-decaf',
+   issue:33, requiredRuntime:'src/server/coffee-selected-offer-h2.mjs'
+ },
+ 'supabase/tests/member_approval_finish_null_receipts.sql':{
+   itemId:'DIC-Q-509-member-approval-null-receipt-guard',
+   issue:509, requiredRuntime:'supabase/migrations/20261114195000_dic_member_approval_finish_null_receipts.sql'
+ }
+});
+function reviewedUnreadySupport(path,{queue,restoredPaths,pinnedReadyPaths=[],
+ publishedSourceSha,developmentSourceSha,sourceObjectAt}={}){
+ const spec=REVIEWED_UNREADY_SUPPORT[path];
+ if(!spec||!Array.isArray(restoredPaths)||!Array.isArray(pinnedReadyPaths))return null;
+ const owner=queue?.items?.find(i=>i.id===spec.itemId);
+ if(owner?.issue!==spec.issue||!['IN_PROGRESS','TESTING','BLOCKED'].includes(owner.state)||
+    !owner.scope_paths?.includes(spec.requiredRuntime)||
+    !restoredPaths.includes(spec.requiredRuntime)||
+    !owner.scope_paths.every(p=>restoredPaths.includes(p)||pinnedReadyPaths.includes(p))||
+    sourceObjectAt(publishedSourceSha,path)!==null||
+    sourceObjectAt(developmentSourceSha,path)===null||
+    sourceObjectAt(publishedSourceSha,spec.requiredRuntime)!==null||
+    sourceObjectAt(developmentSourceSha,spec.requiredRuntime)===null)return null;
+ return spec;
 }
 
 // Cheap, source-bound pre-CI static import existence check. The exact app
@@ -387,8 +416,13 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
    eligibleOwnerDriveTestExclusion({queue,restoredPaths:plan.restored_paths,
     publishedSourceSha,developmentSourceSha:manifest.development_source_sha,sourceObjectAt})&&
    sourceObjectAt(candidateSha,REVIEWED_OWNER_DRIVE_TEST.runtime)===null;
-  if(!m&&!ownerDrive)reject('Only proven issue-scoped or exact owner Drive setup tests can be excluded');
-  const issue=ownerDrive?28:Number(m[1]);
+  const support=reviewedUnreadySupport(path,{queue,restoredPaths:plan.restored_paths,
+   pinnedReadyPaths:plan.pinned_ready_paths,publishedSourceSha,
+   developmentSourceSha:manifest.development_source_sha,sourceObjectAt})&&
+   sourceObjectAt(candidateSha,path)===null;
+  if(!m&&!ownerDrive&&!support)
+   reject('Only proven issue-scoped, owner Drive, or exact unready support tests can be excluded');
+  const issue=ownerDrive?28:support?.issue??Number(m[1]);
   const unfinishedMixed=queue.items.some(i=>i.issue===issue&&
    ['IN_PROGRESS','TESTING','BLOCKED'].includes(i.state)&&
    i.scope_paths?.some(p=>plan.pinned_ready_paths.includes(p)));

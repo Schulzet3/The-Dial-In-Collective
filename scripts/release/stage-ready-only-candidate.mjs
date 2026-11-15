@@ -49,8 +49,8 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
   selectedIds,pinnedReadyPaths,developmentChangedPaths:developmentPaths,isAncestor:ancestor});
  if(!plan.ready)throw Error('READY-only staging HOLD: '+plan.errors.join('; '));
  const unpublishedTests=discoverExcludedUnreadyTests({queue,selectedIds:plan.selected_ids,
-  restoredPaths:plan.restored_paths,publishedSourceSha,developmentSourceSha,
-  changedPaths:developmentPaths,sourceObjectAt});
+  restoredPaths:plan.restored_paths,pinnedReadyPaths:plan.pinned_ready_paths,
+  publishedSourceSha,developmentSourceSha,changedPaths:developmentPaths,sourceObjectAt});
  // A later untracked same-file edit must not be smuggled under a READY scope.
  for(const path of plan.included_paths){
   const owners=plan.ready_items.filter(i=>i.scope_paths.includes(path));
