@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 import {inferDecaffeinationMethod} from '../src/server/coffee-decaffeination-method.mjs';
 import {requiredFocusedSourceFailures} from '../scripts/audit/issue33-focused-source-acceptance.mjs';
+import {selectedProductFormH2} from '../scripts/audit/issue33-selected-product-heading.mjs';
 
 // Source-bound contract fixtures, not a substitute for current official HTML.
 const originals={
@@ -85,4 +86,38 @@ test('unavailable original #388 cannot be certified using another Topeca SKU',()
  const failures=requiredFocusedSourceFailures([388],
   [{number:388,status:'UNAVAILABLE',parser_ok:false}]);
  assert.ok(failures.some(x=>x.reason==='required_official_source_not_fetched'));
+});
+
+function currentProductH2Fixture({name='El Salvador El Manzano Natural',
+ handle='el-salvador-manzano-natural',action='/cart/add',description=true,
+ surrounding='' }={}){
+ return '<main><div class="main-product--root" data-handle="'+handle+'">'+
+  '<form class="product-form" action="'+action+'">'+
+  '<div class="product-form--block" data-block-type="heading">'+
+  '<h2 class="product-form--block--heading">'+name+'</h2></div>'+
+  (description?'<div class="product-form--block" data-block-type="description">'+
+   '<div class="product-form--block--description"><p>Year after year our coffee farm produces a current selected harvest. '+
+   'This exact selected bean has light roasting and natural processing and its own distinct fruity and sweet flavors. '+
+   'All coffee details here belong to the selected purchase form.</p></div></div>':'')+
+  '<button>Add to cart</button></form></div>'+surrounding+'</main>';
+}
+test('current exact selected H2 in buy form with substantial own prose establishes identity, no H3 required',()=>{
+ const html=currentProductH2Fixture();
+ assert.deepEqual(selectedProductFormH2(html,{source_url:originals[389].url}),[originals[389].name]);
+});
+test('wrong source URL handle cannot certify a selected purchase form H2',()=>{
+ const html=currentProductH2Fixture();
+ assert.deepEqual(selectedProductFormH2(html,{source_url:originals[390].url}),[]);
+});
+test('form H2 without own product description is not identity proof',()=>{
+ const html=currentProductH2Fixture({description:false});
+ assert.deepEqual(selectedProductFormH2(html,{source_url:originals[389].url}),[]);
+});
+test('recommendation product purchase form is not selected product identity',()=>{
+ const nested='<aside class="related-products">'+currentProductH2Fixture()+'</aside>';
+ assert.deepEqual(selectedProductFormH2(nested,{source_url:originals[389].url}),[]);
+});
+test('generic wrong cart endpoint cannot certify a selected H2',()=>{
+ const html=currentProductH2Fixture({action:'/collections/all'});
+ assert.deepEqual(selectedProductFormH2(html,{source_url:originals[389].url}),[]);
 });
