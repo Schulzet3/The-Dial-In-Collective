@@ -26,6 +26,18 @@ begin
     private.dic_source_key('https://sweetbloomcoffee.com/products/wuri-2025') then
     raise exception 'Tracking parameters caused a different URL match';
  end if;
+ if private.dic_source_key('https://WWW.SWEETBLOOMCOFFEE.com/products/Wuri-2025/?utm_source=mail') <>
+    private.dic_source_key('https://sweetbloomcoffee.com/products/Wuri-2025') then
+  raise exception 'Host case or tracking changed the same source';
+ end if;
+ if private.dic_source_key('https://sweetbloomcoffee.com/products/Wuri-2025') =
+    private.dic_source_key('https://sweetbloomcoffee.com/products/wuri-2025') then
+  raise exception 'Case-distinct product paths collapsed';
+ end if;
+ if private.dic_source_key('https://sweetbloomcoffee.com/products/Wuri?variant=A') =
+    private.dic_source_key('https://sweetbloomcoffee.com/products/Wuri?variant=a') then
+  raise exception 'Case-distinct variant values collapsed';
+ end if;
  if private.dic_source_key('https://sweetbloomcoffee.com/products/wuri?variant=2026') =
     private.dic_source_key('https://sweetbloomcoffee.com/products/wuri?variant=2025') then
     raise exception 'Meaningful product variants were erroneously merged';
@@ -61,6 +73,10 @@ begin
  if found->>'classification'='exact_verified' then raise exception 'Conflicting origin auto-linked';end if;
  found:=public.dic_find_coffee_matches('{"name":"Wuri","roaster":"Sweet Bloom","release_label":"2025 harvest","source_url":"https://www.sweetbloomcoffee.com/products/wuri-2025/?utm_source=mail"}'::jsonb);
  if found->>'exact_id'<>c2025::text then raise exception 'Curated product URL with tracking not matched: %',found;end if;
+ found:=public.dic_find_coffee_matches('{"name":"Wuri","roaster":"Sweet Bloom","release_label":"2025 harvest","source_url":"https://sweetbloomcoffee.com/products/WURI-2025"}'::jsonb);
+ if found->>'classification'='exact_verified' or found->>'exact_id' is not null then
+  raise exception 'Case-distinct official product path auto-verified: %',found;
+ end if;
  found:=public.dic_find_coffee_matches('{"name":"Wuri","roaster":"Sweet Bloom","source_url":"https://sweetbloomcoffee.com/products/wuri-2026"}'::jsonb);
  if found->>'classification'='exact_verified' then raise exception 'Missing harvest auto-linked despite canonical release label';end if;
  found:=public.dic_find_coffee_matches('{"name":"Wuri","roaster":"Unknown Coffee Roasters","release_label":"2026 harvest"}'::jsonb);
