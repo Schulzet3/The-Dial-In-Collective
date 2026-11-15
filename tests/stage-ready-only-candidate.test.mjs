@@ -5,6 +5,7 @@ import {mkdirSync,mkdtempSync,readFileSync,rmSync,writeFileSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {stageReadyOnlyCandidate} from '../scripts/release/stage-ready-only-candidate.mjs';
+import {discoverCompatibleAuditSupport,REVIEWED_COMPATIBLE_AUDIT_SUPPORT} from '../scripts/release/ready-only-candidate.mjs';
 const qBase={schema_version:1,authority:'OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022',
  published_base:{tested_source_sha:'a'.repeat(40),release_sha:'b'.repeat(40),netlify_deploy_id:'fixture'},
  items:[],history:[]};
@@ -317,4 +318,29 @@ test('#2837 reviewed support exclusion respects a pinned READY/unready shared-fi
   assert.throws(()=>f.git('show',staged.candidate_sha+':src/server/coffee-selected-offer-h2.mjs'));
   assert.equal(f.git('show',staged.candidate_sha+':site/card.js'),'new READY card');
  }finally{rmSync(f.root,{recursive:true,force:true});}
+});
+
+test('#2837 original R215 audit helper restores ONLY exact reviewed pre-R215 blob',()=>{
+ const spec=REVIEWED_COMPATIBLE_AUDIT_SUPPORT;
+ const candidate={
+  queue:{items:[{id:'DIC-Q-33-r215-original325-327-current-offer-h2-water-decaf',
+   issue:33,state:'TESTING',scope_paths:['src/server/coffee-selected-offer-h2.mjs','src/server/coffee-page-metadata.mjs']}]},
+  restoredPaths:['src/server/coffee-selected-offer-h2.mjs'],
+  pinnedReadyPaths:['src/server/coffee-page-metadata.mjs'],
+  publishedSourceSha:'a'.repeat(40),developmentSourceSha:'b'.repeat(40)
+ };
+ const map=new Map([
+  [spec.historicalSourceSha+':'+spec.path,'100644:'+spec.historicalBlobSha],
+  [candidate.developmentSourceSha+':'+spec.path,'100644:'+spec.unfinishedBlobSha],
+  [candidate.developmentSourceSha+':src/server/coffee-selected-offer-h2.mjs','100644:'+'c'.repeat(40)]
+ ]);
+ const resolver=(ref,path)=>map.get(ref+':'+path)??null;
+ assert.deepEqual(discoverCompatibleAuditSupport({...candidate,sourceObjectAt:resolver}),[spec.path]);
+ const changed=(ref,path)=>ref===spec.historicalSourceSha&&path===spec.path?'100644:'+'d'.repeat(40):resolver(ref,path);
+ assert.throws(()=>discoverCompatibleAuditSupport({...candidate,sourceObjectAt:changed}),
+  /blob provenance unavailable/);
+ assert.deepEqual(discoverCompatibleAuditSupport({...candidate,sourceObjectAt:(ref,path)=>
+  ref===candidate.developmentSourceSha&&path===spec.path?'100644:'+'e'.repeat(40):resolver(ref,path)}),[]);
+ assert.deepEqual(discoverCompatibleAuditSupport({...candidate,
+  restoredPaths:[],sourceObjectAt:resolver}),[]);
 });

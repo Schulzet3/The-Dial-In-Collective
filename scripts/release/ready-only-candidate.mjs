@@ -55,7 +55,7 @@ function eligibleOwnerDriveTestExclusion({queue,restoredPaths,publishedSourceSha
 // Only new, issue-scoped tests for entirely restored unfinished/unselected
 // runtime may be absent from a candidate. Selected READY test edits never vanish.
 export function discoverExcludedUnreadyTests({queue,selectedIds,restoredPaths,pinnedReadyPaths=[],
- publishedSourceSha,developmentSourceSha,changedPaths,sourceObjectAt}={}){
+ publishedSourceSha,developmentSourceSha,changedPaths,sourceObjectAt,compatibleAuditSupportPaths=[]}={}){
  if(typeof sourceObjectAt!=='function'||!Array.isArray(changedPaths)||
     !Array.isArray(restoredPaths)||!Array.isArray(selectedIds)||
     !SHA.test(publishedSourceSha||'')||!SHA.test(developmentSourceSha||''))
@@ -63,6 +63,7 @@ export function discoverExcludedUnreadyTests({queue,selectedIds,restoredPaths,pi
  const restored=new Set(restoredPaths), selected=new Set(selectedIds), result=[];
  const chosen=(queue?.items||[]).filter(i=>selected.has(i.id));
  for(const path of changedPaths){
+  if(compatibleAuditSupportPaths.includes(path))continue;
   const m=typeof path==='string'?/^tests\/(?:coffee-)?issue([1-9][0-9]*)-[a-z0-9-]+\.test\.mjs$/.exec(path):null;
   const ownerDrive=path===REVIEWED_OWNER_DRIVE_TEST.path&&
    eligibleOwnerDriveTestExclusion({queue,restoredPaths,publishedSourceSha,
@@ -115,6 +116,31 @@ function reviewedUnreadySupport(path,{queue,restoredPaths,pinnedReadyPaths=[],
     sourceObjectAt(publishedSourceSha,spec.requiredRuntime)!==null||
     sourceObjectAt(developmentSourceSha,spec.requiredRuntime)===null)return null;
  return spec;
+}
+
+
+export const REVIEWED_COMPATIBLE_AUDIT_SUPPORT=Object.freeze({
+ path:'scripts/audit/issue33-selected-product-heading.mjs',
+ historicalSourceSha:'3a361f2c187f7a77b317a321f82282c465dde6b2',
+ historicalBlobSha:'7ce2de1fbf70261b006475ae43f1952c140228b6',
+ unfinishedBlobSha:'96b1e529d0c7fb66339b34f78a25923c76556813'
+});
+// Replace ONLY the unready R215 audit helper with its previously reviewed,
+// working immutable Git blob, rather than deleting 89 historical test imports.
+// No runtime, SQL, READY test or GitHub workflow is replaced by this exception.
+export function discoverCompatibleAuditSupport({queue,restoredPaths,pinnedReadyPaths=[],
+ publishedSourceSha,developmentSourceSha,sourceObjectAt}={}){
+ const spec=REVIEWED_COMPATIBLE_AUDIT_SUPPORT;
+ if(typeof sourceObjectAt!=='function')return [];
+ if(!reviewedUnreadySupport(spec.path,{queue,restoredPaths,pinnedReadyPaths,
+   publishedSourceSha,developmentSourceSha,sourceObjectAt}))return [];
+ if(sourceObjectAt(developmentSourceSha,spec.path)!=='100644:'+spec.unfinishedBlobSha)
+   return []; // other source versions must continue through strict existing review
+ if(sourceObjectAt(spec.historicalSourceSha,spec.path)!=='100644:'+spec.historicalBlobSha)
+   throw Error('Reviewed pre-R215 audit helper blob provenance unavailable');
+ if(sourceObjectAt(publishedSourceSha,spec.path)!==null)
+   throw Error('Historical helper unexpectedly already published');
+ return [spec.path];
 }
 
 // Cheap, source-bound pre-CI static import existence check. The exact app
@@ -410,7 +436,19 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
     reject('Selected READY merge introduced or modified a workflow-only test: '+path);
   }
  }
+ const compatibleAuditSupport=manifest.restored_compatible_audit_support_paths||[];
+ const expectedCompatibleAuditSupport=discoverCompatibleAuditSupport({
+   queue,restoredPaths:plan.restored_paths,pinnedReadyPaths:plan.pinned_ready_paths,
+   publishedSourceSha,developmentSourceSha:manifest.development_source_sha,sourceObjectAt});
+ if(!Array.isArray(compatibleAuditSupport)||!equal(compatibleAuditSupport,expectedCompatibleAuditSupport))
+   reject('Audited historical coffee support helper manifest differs from exact reviewed provenance');
+ for(const path of compatibleAuditSupport)
+   if(path!==REVIEWED_COMPATIBLE_AUDIT_SUPPORT.path||
+      sourceObjectAt(candidateSha,path)!=='100644:'+REVIEWED_COMPATIBLE_AUDIT_SUPPORT.historicalBlobSha)
+     reject('Historical audit helper was not restored to exact independent reviewed bytes');
  const excludedTests=manifest.excluded_unready_test_paths||[];
+ if(excludedTests.some(path=>compatibleAuditSupport.includes(path)))
+   reject('A reviewed compatible helper cannot be simultaneously excluded');
  if(!Array.isArray(excludedTests)||new Set(excludedTests).size!==excludedTests.length)
   reject('Invalid or duplicate excluded unfinished test paths');
  for(const path of excludedTests){
@@ -467,7 +505,7 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
     reject('Cannot exclude a test introduced or modified by an approved READY merge: '+path);
   }
  }
- const allowed=[...plan.restored_paths,...plan.pinned_ready_paths,...excludedTests,...workflowOnlyTests,...frozenWorkflows,CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH];
+ const allowed=[...plan.restored_paths,...plan.pinned_ready_paths,...compatibleAuditSupport,...excludedTests,...workflowOnlyTests,...frozenWorkflows,CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH];
  if(!equal(stagedCommitChangedPaths||[],allowed))
   reject('Candidate staging commit changes unrelated paths or lacks same-commit journal');
  for(const path of plan.restored_paths)
@@ -491,7 +529,7 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
  }
  return {ready:true,errors:[],deployable_paths:plan.included_paths,
   ready_items:plan.ready_items,other_items:plan.other_items,
-  excluded_paths:plan.restored_paths,pinned_ready_paths:plan.pinned_ready_paths,excluded_unready_test_paths:excludedTests,excluded_unpublished_workflow_test_paths:workflowOnlyTests,
+  excluded_paths:plan.restored_paths,pinned_ready_paths:plan.pinned_ready_paths,restored_compatible_audit_support_paths:compatibleAuditSupport,excluded_unready_test_paths:excludedTests,excluded_unpublished_workflow_test_paths:workflowOnlyTests,
   development_source_sha:manifest.development_source_sha,
   candidate_source_sha:candidateSha};
 }

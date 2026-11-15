@@ -8,7 +8,7 @@ import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 import {CANDIDATE_KIND,CANDIDATE_JOURNAL_PATH,CANDIDATE_RECEIPT_PATH,
  planReadyOnlyCandidate,validateReadyOnlyCandidate,workflowChangedPaths,
- discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,
+ discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,discoverCompatibleAuditSupport,REVIEWED_COMPATIBLE_AUDIT_SUPPORT,
  assertCandidateRelativeImports,assertCandidateStaticNamedExports} from './ready-only-candidate.mjs';
 import {classifyReleaseRisk} from './release-reliability.mjs';
 const SHA=/^[a-f0-9]{40}$/;
@@ -59,9 +59,13 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
  const plan=planReadyOnlyCandidate(queue,{publishedSourceSha,developmentSourceSha,
   selectedIds,pinnedReadyPaths,developmentChangedPaths:developmentPaths,isAncestor:ancestor});
  if(!plan.ready)throw Error('READY-only staging HOLD: '+plan.errors.join('; '));
+ const compatibleAuditSupport=discoverCompatibleAuditSupport({queue,
+  restoredPaths:plan.restored_paths,pinnedReadyPaths:plan.pinned_ready_paths,
+  publishedSourceSha,developmentSourceSha,sourceObjectAt});
  const unpublishedTests=discoverExcludedUnreadyTests({queue,selectedIds:plan.selected_ids,
   restoredPaths:plan.restored_paths,pinnedReadyPaths:plan.pinned_ready_paths,
-  publishedSourceSha,developmentSourceSha,changedPaths:developmentPaths,sourceObjectAt});
+  publishedSourceSha,developmentSourceSha,changedPaths:developmentPaths,sourceObjectAt,
+  compatibleAuditSupportPaths:compatibleAuditSupport});
  // A later untracked same-file edit must not be smuggled under a READY scope.
  for(const path of plan.included_paths){
   const owners=plan.ready_items.filter(i=>i.scope_paths.includes(path));
@@ -93,11 +97,15 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
   }
   for(const path of [...workflowOnlyTests,...unpublishedTests])
    git(['update-index','--force-remove','--',path],{env});
+  for(const path of compatibleAuditSupport)
+   git(['update-index','--add','--cacheinfo','100644',
+     REVIEWED_COMPATIBLE_AUDIT_SUPPORT.historicalBlobSha,path],{env});
   const manifest={schema_version:1,kind:CANDIDATE_KIND,candidate_branch:branch,
    development_source_sha:developmentSourceSha,published_source_sha:publishedSourceSha,
    selected_ready_item_ids:plan.selected_ids,risk_classification:classifyReleaseRisk(plan.included_paths),
    restored_to_published_paths:plan.restored_paths,
    pinned_to_ready_paths:plan.pinned_ready_paths,
+   restored_compatible_audit_support_paths:compatibleAuditSupport,
    restored_unpublished_workflow_paths:unpublishedWorkflows,
    excluded_unpublished_workflow_test_paths:workflowOnlyTests,
    excluded_unready_test_paths:unpublishedTests,
@@ -109,6 +117,7 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    '- Selected READY IDs: '+plan.selected_ids.join(', ')+'\n'+
    '- Restored unfinished paths: '+(plan.restored_paths.join(', ')||'(none)')+'\n'+
    '- Pinned READY mixed-source paths: '+(plan.pinned_ready_paths.join(', ')||'(none)')+'\n'+
+   '- Restored previously reviewed compatible audit helper: '+(compatibleAuditSupport.join(', ')||'(none)')+'\n'+
    '- Restored development-only GitHub workflows to published bytes: '+(unpublishedWorkflows.join(', ')||'(none)')+'\n'+
    '- Omitted exact reviewed workflow-only, unpublished tests: '+(workflowOnlyTests.join(', ')||'(none)')+'\n'+
    '- Omitted source-bound unready issue tests: '+(unpublishedTests.join(', ')||'(none)')+'\n'+
