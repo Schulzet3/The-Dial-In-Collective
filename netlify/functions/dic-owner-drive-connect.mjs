@@ -23,7 +23,7 @@ function hashMatch(a,b){
   const x=createHash('sha256').update(a).digest(),y=createHash('sha256').update(b).digest();
   return timingSafeEqual(x,y);
 }
-function config(env){
+function readSetupConfig(env){
   const c={id:env('DIC_DRIVE_WEB_CLIENT_ID'),secret:env('DIC_DRIVE_WEB_CLIENT_SECRET'),
     password:env('DIC_DRIVE_SETUP_PASSPHRASE'),enabled:env('DIC_DRIVE_SETUP_ENABLED')};
   if(c.enabled!=='true'||!String(c.id||'').endsWith('.apps.googleusercontent.com')||
@@ -95,7 +95,7 @@ async function verifyDisposableUpload(fetcher,accessToken){
 }
 export function createOwnerDriveConnect({env=defaultEnv,fetcher=fetch,now=()=>Date.now()}={}){
  return async request=>{
-  const c=config(env),url=new URL(request.url);
+  const c=readSetupConfig(env),url=new URL(request.url);
   if(!c||!['GET','POST'].includes(request.method)||url.origin!=='https://app.dialincollective.com'||
      url.pathname!=='/api/owner-drive-connect')return html('<h1>Not found</h1>',404);
   if(request.method==='GET'&&!url.searchParams.has('state')&&!url.searchParams.has('code')&&!url.searchParams.has('error'))
