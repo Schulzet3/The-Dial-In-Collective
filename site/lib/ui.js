@@ -95,7 +95,9 @@ export function nextShotGuidance(advice,shot,showTemp=false,unit='F'){
  const spoken=e(`${label} from ${before} to ${after}${measure?' '+measure:''}`);
  const source=advice?.text?.includes('Sized from your own comparable adjustments.')?
   '<p class="next-shot-evidence">Adjustment sized from your comparable shots.</p>':'';
- return `<div class="next-shot-change" role="group" aria-label="${spoken}"><span class="next-shot-variable">${e(label)}</span><span class="next-shot-number">${e(before)}</span><span class="next-shot-arrow" aria-hidden="true">→</span><span class="next-shot-number">${e(after)}</span>${measure?`<span class="next-shot-unit">${e(measure)}</span>`:''}</div><p class="next-shot-keep">Keep ${e(keep)} unchanged.</p>${source}${note}`;
+ // The numeric arrow supplements the engine's coaching; it must not replace it.
+ const coaching=advice?.text?'<p class="helper next-shot-coaching">'+e(advice.text)+'</p>':'';
+ return `<div class="next-shot-change" role="group" aria-label="${spoken}"><span class="next-shot-variable">${e(label)}</span><span class="next-shot-number">${e(before)}</span><span class="next-shot-arrow" aria-hidden="true">→</span><span class="next-shot-number">${e(after)}</span>${measure?`<span class="next-shot-unit">${e(measure)}</span>`:''}</div><p class="next-shot-keep">Keep ${e(keep)} unchanged.</p>${coaching}${source}${note}`;
 }
 
 
