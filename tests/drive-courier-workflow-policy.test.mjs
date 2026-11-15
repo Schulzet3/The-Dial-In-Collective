@@ -13,7 +13,8 @@ test('only trusted successful main encrypted scheduled/manual runs trigger owner
 });
 test('no database export, plaintext write, second backup schedule, manual run trigger or extra permissions',()=>{
   assert.doesNotMatch(y,/^  (push|schedule|workflow_dispatch|pull_request):/m);
-  assert.doesNotMatch(y,/SUPABASE_DB_URL|create-nightly-encrypted-dump|pg_dump|backup\.age.*decrypt|DIC_ARCHIVE_AGE_IDENTITY|github\.event\.workflow_run\.event == 'push'/);
+  const executable=y.split('\n').filter(line=>!line.trimStart().startsWith('#')).join('\n');
+  assert.doesNotMatch(executable,/SUPABASE_DB_URL|create-nightly-encrypted-dump|pg_dump|backup\.age.*decrypt|DIC_ARCHIVE_AGE_IDENTITY|github\.event\.workflow_run\.event == 'push'/);
   assert.ok(y.includes('permissions:\n  contents: read\n  actions: read'));
   assert.doesNotMatch(y,/write:|actions: write|contents: write/);
   for(const key of ['DIC_DRIVE_CLIENT_ID','DIC_DRIVE_CLIENT_SECRET','DIC_DRIVE_REFRESH_TOKEN'])assert.ok(y.includes('secrets.'+key));

@@ -984,3 +984,7 @@ DIC_PREFLIGHT_VERIFIED development_sha=52fadff5f7bfc76f3881b3bea1b91f813a949c1d 
 ## 2026-11-15 — #28 fix authored policy test fixture before hosted CI [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=bc30979c36bb74a3537d061516e225b37766dc23 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 - Initial source branch d499ba5de66de86035614060aaa5bd65764131b6 contained double-escaped regex characters in a newly authored policy test. Replaced those assertions with exact text checks before any hosted CI, without changing courier application/workflow bytes or credentials. The corrected branch requires real PR exact-head CI; an unstarted test is not PASS.
+
+## 2026-11-15 #28 PR #2949 first hosted CI test-fixture false positive corrected [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=e6d68ed26485d389d8d5b101691f04d2ca1febef preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+- Exact PR-head a6136a38f624d7ac14eed7737cbea6a7855a4147 hosted main acceptance run 43757971157 FAILED in focused source policy test because the static negative assertion matched the workflow COMMENT "No pg_dump", not a YAML step or executed command. This is a test-only false positive; no real backup, Drive/provider or app code change happened. Corrected assertion inspects executable YAML text excluding comments, with all original forbidden operations still checked and unchanged. Retest at exact new branch head; do not call first CI PASS or retry identical suite.
