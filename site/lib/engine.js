@@ -672,7 +672,20 @@ export function prefill(s,coffeeId,options={}) {
   // with impossible dose/yield/time is not a reliable prior actual shot.
   // Reuse existing Log Shot bounds; do not invent temperature thresholds.
   const temps=measured.filter(x=>validRecordedTemperature(x.tempC)),same=temps.find(x=>x.style===style),temp=same||temps[0];
- return {doseG:doses[0]?.doseG??basket.doseG,yieldG:'',timeS:'',grindSetting:grinds[0]?.grindSetting??'',tempC:v.advanced?.temperature?(temp?.tempC??null):null,tempSource:temp&&temp.style!==style?`Last used on ${temp.style}`:'',style,basketId:basket.id,feedMode:feed,tasteScales:{extraction:null,body:null,clarity:null,sweetness:null,astringency:null},notes:''};
+ // A matching style may still have a different basket/feed context. Do not
+ // change the historical measured value or priority; disclose its provenance.
+ // Unknown archival context must not be guessed.
+ let tempSource='';
+ if(temp&&v.advanced?.temperature){
+  const differences=[];
+  if(temp.basketId!=null&&temp.basketId!==basket.id)differences.push('a different basket');
+  if(temp.feedMode!=null&&temp.feedMode!==feed)
+   differences.push(temp.feedMode==='slow'?'Slow Feed':temp.feedMode==='standard'?'Standard Feed':'a different feed mode');
+  if(temp.style!==style)
+   tempSource=`Last used on ${temp.style}${differences.length?` (${differences.join(', ')})`:''}`;
+  else if(differences.length)tempSource=`Last used with ${differences.join(' and ')}`;
+ }
+ return {doseG:doses[0]?.doseG??basket.doseG,yieldG:'',timeS:'',grindSetting:grinds[0]?.grindSetting??'',tempC:v.advanced?.temperature?(temp?.tempC??null):null,tempSource,style,basketId:basket.id,feedMode:feed,tasteScales:{extraction:null,body:null,clarity:null,sweetness:null,astringency:null},notes:''};
 }
 
  // Owner-approved measured-yield exploration (2026-11-04, #455).
