@@ -1,3 +1,4 @@
+import {selectedSchemaProductOfferH2} from './coffee-selected-offer-h2.mjs';
 // Direct exact-selected-product prose credits. No network access, no roaster-specific rules.
 // Exact official 77-page selected-source replay gate: never equate a parsed HTML page with a certified owner field.
 import {productCoffeeProse} from './coffee-product-prose.mjs';
@@ -255,7 +256,7 @@ function selectedCurrentContinuingCultivator(name,line){
  return credited&&continued&&cultivated?named[1]+' '+named[2]:'';
 }
 
-export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html}={}){
+export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html,source_url=''}={}){
  if(typeof html!=='string'||html.length>2_000_000||!name||typeof clean!=='function')return {};
  const blocks=productCoffeeProse(html,clean);
  const headings=blocks.filter(x=>x.tag==='h1').map(x=>fold(selectedCoffeeNameWithoutPrice(x.text)));
@@ -269,7 +270,9 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
  // one-option roast selector. Fail closed rather than attribute the tile's
  // roast to a nonexistent selected product.
  if(/^(?:(?:our|the)\s+)?(?:catalog(?:ue)?|collections?|all\s+(?:coffees?|products?)|shop\s+(?:all|coffees?)|coffees?|products?|store|home)$/u.test(selected))return {};
- if(!headings.length||headings.some(heading=>heading!==selected))return {};
+ const verifiedOfferH2=!headings.length?selectedSchemaProductOfferH2(optionHtml,{source_url}):[];
+ if((!headings.length&&!(verifiedOfferH2.length===1&&fold(verifiedOfferH2[0])===selected))||
+    headings.some(heading=>heading!==selected))return {};
  const body=blocks.filter(x=>!x.educational&&x.text.length<=1200&&
   ['p','div','h4','h5','li'].includes(x.tag)&&
   !/\b(?:related products?|you may also like|recommended|more coffees?|other coffees?)\b/i.test(x.section));

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
-import {selectedSchemaProductOfferH2} from '../scripts/audit/issue33-selected-product-heading.mjs';
+import {selectedSchemaProductOfferH2} from '../src/server/coffee-selected-offer-h2.mjs';
 const selected=[
  {name:'Simpatico Organic Low Acid Half-Caff Coffee',url:'https://simpaticocoffee.com/products/organic-low-acid-half-caff-coffee',description:"Does regular coffee have too much caffeine, but decaffeinated coffee just doesn't excite you? Try Simpatico Organic Low Acid Half-Caff Coffee. It is a full-bodied low acid coffee with a clean, nutty/cocoa flavor. (Prefer 99.5% decaf? Try Simpatico Low Acid Decaf Medium Smooth Roast.)"},
  {name:'Simpatico Organic Low Acid: Medium Smooth Roast',url:'https://simpaticocoffee.com/products/simpatico-low-acid-coffee-medium-smooth-roast',description:"Simpatico Organic Low Acid Medium Smooth Roast Coffee is a bright-bodied low acid coffee with a clean, nutty flavor. (Prefer decaf? Try Simpatico Low Acid Decaf Medium Smooth Roast.)"},
@@ -69,4 +69,18 @@ test('direct selected water process cannot borrow unrelated seller or a former/n
   const p=parse({...selected[2],description:own+' Dark fruit flavors remain.'});
   assert.notEqual(p.fields.decaffeination_method,'Water Process',own);
  }
+});
+
+test('selected offer proof rejects sibling, related, site nav and ambiguous roots',()=>{
+ const url=selected[2].url,chosen='<main><div itemscope itemtype="http://schema.org/Product" class="product">'+
+ '<meta itemprop="url" content="'+url+'"><div itemprop="offers"><header class="product-title">'+
+ '<h2 itemprop="name">'+selected[2].name+'</h2></header><form action="/cart/add"></form></div></div></main>';
+ assert.deepEqual(selectedSchemaProductOfferH2(chosen,{source_url:url}),[selected[2].name]);
+ for(const hostile of [
+  chosen.replace('class="product"','class="related-product"'),
+  chosen.replace('content="'+url+'"','content="'+selected[1].url+'"'),
+  chosen.replace('action="/cart/add"','action="/cart"'),
+  chosen+'<main><div itemscope itemtype="http://schema.org/Product" class="product"></div></main>',
+  '<nav>'+chosen+'</nav>',
+ ])assert.deepEqual(selectedSchemaProductOfferH2(hostile,{source_url:url}),[], 'bad H2 source admission');
 });
