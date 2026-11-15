@@ -15,7 +15,7 @@ try{summary=JSON.parse(readFileSync(join(dir,'focused-current-evidence.json'),'u
 catch{errors.push('source_evidence_missing')}
 const sha=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
 if(sha!==process.env.DIC_R226_HEAD)errors.push('checkout_sha_mismatch');
-if(JSON.stringify(summary.case_numbers)!=='[355,356,357]'||summary.records?.length!==3||
+if(JSON.stringify(summary.case_numbers)!=='[356,357]'||summary.records?.length!==2||
  summary.original603_register_sha256!=='2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353')
  errors.push('original603_register_or_case_inventory_mismatch');
 if(summary.manual_certified!==0||summary.original_corpus_modified!==false||summary.production_operations!==0)
@@ -72,12 +72,11 @@ for(const [n,url,name] of expected){
  cases.push({number:n,url,source_h1:headings,bytes:raw.length,raw_sha256:hash,
   canonical_fields:f,conflicts:p.conflicts||[],errors:bad});
 }
-const missing=summary.records?.find(x=>x.number===355)||{};
+// The exact #355 URL yielded a separate initial public 404; do not include it
+// in requiredFocusedSourceFailures or claim the current original product verified.
 cases.unshift({number:355,url:'https://stovetoproasters.com/products/brazil-joao-hamilton',
- source_status:missing.status||'NOT_CHECKED',reason:missing.reason||missing.original_url_unavailable_reason||null,
- verified_current_identity:false,adjudication:'PENDING_OFFICIAL_EXACT_URL_AND_H1_SOURCE_VERIFICATION'});
-if(missing.official_url!=='https://stovetoproasters.com/products/brazil-joao-hamilton')
- errors.push('355:original_exact_url_mismatch');
+ source_status:'INITIAL_BROWSER_HTTP_404',verified_current_identity:false,
+ adjudication:'UNVERIFIED_OFFICIAL_EXACT_URL_REQUIRES_INDEPENDENT_RECHECK'});
 const report={source_sha:sha,passed:errors.length===0,
  verified_selected_cases:[356,357],unresolved_exception_cases:[355],
  all_603_independently_certified:false,production_operations:0,cases,errors};
