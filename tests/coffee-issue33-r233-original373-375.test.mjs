@@ -58,3 +58,34 @@ test('unavailable original does not pass merely because zero fetched records wer
  const f=requiredFocusedSourceFailures([373],[{number:373,status:'UNAVAILABLE',parser_ok:false}]);
  assert.ok(f.some(x=>x.reason==='required_official_source_not_fetched'));
 });
+
+test('direct exact-selected water Method remains distinct from conflicting green fermentation detail',()=>{
+ const p=parse(373,[
+  '<span>PROCESSING DETAILS</span>',
+  'Method: Swiss Water Process (chemical-free)',
+  'Milling: Natural, carbonic maceration (5–10 day fermentation)',
+  'Processing Detail: Carbonic maceration, 5–10 day fermentation',
+  'Process: Natural','Tasting Notes: Cherry, apple, red wine, grilled pineapple'
+ ]);
+ assert.equal(p.ok,true);
+ assert.equal(p.fields.name,selected[373].name);
+ assert.notEqual(p.fields.process,'Water Process');
+});
+test('opposing explicit selected decaf methods cannot be auto-chosen',()=>{
+ const p=parse(373,[
+  '<span>PROCESSING DETAILS</span>',
+  'Method: Swiss Water Process (chemical-free)',
+  'Decaffeination: Sugarcane Ethyl Acetate',
+  'Milling: Natural, carbonic maceration','Process: Natural'
+ ]);
+ assert.equal(p.ok,true);
+ assert.notEqual(p.fields.decaffeination_method,'Water Process');
+ assert.notEqual(p.fields.decaffeination_method,'Sugar Process');
+});
+test('generic FAQ water decaf cannot override regular selected coffee',()=>{
+ assert.equal(inferDecaffeinationMethod({
+  name:'Nicaragua Jinotega Regular',
+  selectedMethod:'Method: Swiss Water Process',
+  processingDetail:'Natural carbonic maceration'
+ }), '');
+});

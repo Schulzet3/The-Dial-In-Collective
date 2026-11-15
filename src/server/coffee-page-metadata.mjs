@@ -2361,8 +2361,19 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    new Set(decafSpec.candidates.map(spec=>spec.method)).size>1||
    Boolean(exactNamedDecafMethod&&
     decafSpec.candidates.some(spec=>spec.method!==exactNamedDecafMethod)));
+ // Complete, selected-H1 decaffeination Method is independent from a
+ // disagreement about GREEN processing details (e.g., carbonic maceration).
+ // Keep all green detail conflicts; only the separately and exactly scoped
+ // unambiguous caffeine-removal method is eligible for field autofill.
+ // Mixed caffeine, opposing selected methods and contradictory processing
+ // witness still fail closed in inferDecaffeinationMethod below.
+ const exactSelectedSpecMethod=decafSpec.complete&&
+  decafSpec.candidates.length>0&&
+  decafSpec.candidates.every(spec=>Boolean(spec.method)&&
+   spec.method===decafSpec.candidates[0].method);
  const decafSourceConflict=decafSpecConflict||
-  (detailConflicts.has('processing_detail')&&!exactNamedAndSpecAgreement);
+  (detailConflicts.has('processing_detail')&&
+   !exactNamedAndSpecAgreement&&!exactSelectedSpecMethod);
  // A generic page layout may contain labeled decaf PROCESS prose inside a
  // FAQ, related item, or contradictory second product heading. Only the
  // independently verified current selected-product decaf sentence or a
