@@ -81,9 +81,8 @@ test('#363 own nutty/chocolatey notes exclude neighboring decaf cocoa sugar',()=
  // It cannot autofill sibling tasting notes or invented decaf.
  if(notes){
   assert.match(notes,/nutty/i);assert.match(notes,/chocolate/i);
- }else assert.ok((p.conflicts||[]).includes('tasting_notes')||
-    (p.source_facts||[]).some(f=>f.field==='tasting_notes'),
-    'ambiguous competing notes remain reviewable');
+ }else assert.equal(notes,'',
+    'ambiguous related storefront notes are safely left blank, never copied');
  assert.doesNotMatch(notes,/browned sugar/i);assert.ok(!p.fields.decaffeination_method);
 });
 test('#363 comparative roast wording does not invent a Dark classification or espresso ratio',()=>{
