@@ -331,6 +331,7 @@ test('#2837 original R215 audit helper restores ONLY exact reviewed pre-R215 blo
  };
  const map=new Map([
   [spec.historicalSourceSha+':'+spec.path,'100644:'+spec.historicalBlobSha],
+  [candidate.publishedSourceSha+':'+spec.path,'100644:'+spec.historicalBlobSha],
   [candidate.developmentSourceSha+':'+spec.path,'100644:'+spec.unfinishedBlobSha],
   [candidate.developmentSourceSha+':src/server/coffee-selected-offer-h2.mjs','100644:'+'c'.repeat(40)]
  ]);
@@ -343,4 +344,7 @@ test('#2837 original R215 audit helper restores ONLY exact reviewed pre-R215 blo
   ref===candidate.developmentSourceSha&&path===spec.path?'100644:'+'e'.repeat(40):resolver(ref,path)}),[]);
  assert.deepEqual(discoverCompatibleAuditSupport({...candidate,
   restoredPaths:[],sourceObjectAt:resolver}),[]);
+ assert.throws(()=>discoverCompatibleAuditSupport({...candidate,sourceObjectAt:(ref,path)=>
+  ref===candidate.publishedSourceSha&&path===spec.path?'100644:'+'f'.repeat(40):resolver(ref,path)}),
+  /Published historical audit helper bytes/);
 });

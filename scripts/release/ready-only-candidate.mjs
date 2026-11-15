@@ -111,7 +111,9 @@ function reviewedUnreadySupport(path,{queue,restoredPaths,pinnedReadyPaths=[],
     !owner.scope_paths?.includes(spec.requiredRuntime)||
     !restoredPaths.includes(spec.requiredRuntime)||
     !owner.scope_paths.every(p=>restoredPaths.includes(p)||pinnedReadyPaths.includes(p))||
-    sourceObjectAt(publishedSourceSha,path)!==null||
+    (sourceObjectAt(publishedSourceSha,path)!==null&&
+     !(path===REVIEWED_COMPATIBLE_AUDIT_SUPPORT.path&&
+       sourceObjectAt(publishedSourceSha,path)==='100644:'+REVIEWED_COMPATIBLE_AUDIT_SUPPORT.historicalBlobSha))||
     sourceObjectAt(developmentSourceSha,path)===null||
     sourceObjectAt(publishedSourceSha,spec.requiredRuntime)!==null||
     sourceObjectAt(developmentSourceSha,spec.requiredRuntime)===null)return null;
@@ -138,8 +140,8 @@ export function discoverCompatibleAuditSupport({queue,restoredPaths,pinnedReadyP
    return []; // other source versions must continue through strict existing review
  if(sourceObjectAt(spec.historicalSourceSha,spec.path)!=='100644:'+spec.historicalBlobSha)
    throw Error('Reviewed pre-R215 audit helper blob provenance unavailable');
- if(sourceObjectAt(publishedSourceSha,spec.path)!==null)
-   throw Error('Historical helper unexpectedly already published');
+ if(sourceObjectAt(publishedSourceSha,spec.path)!=='100644:'+spec.historicalBlobSha)
+   throw Error('Published historical audit helper bytes do not match reviewed source');
  return [spec.path];
 }
 
