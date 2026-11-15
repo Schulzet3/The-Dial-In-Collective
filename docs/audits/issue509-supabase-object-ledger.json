@@ -21227,5 +21227,111 @@
     "cumulative_distinct": 2766,
     "baseline_complete": false,
     "next": "2881–2960"
+  },
+  "provider_pgss_approval_delivery_run261": {
+    "preflight_development_sha": "e32cd3c1bf54abff3f8e993aa932dcd55182979a",
+    "prewrite_development_sha": "e32cd3c1bf54abff3f8e993aa932dcd55182979a",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "provider_snapshot": {
+      "snapshot": "2026-11-15 08:43:37.390906+00",
+      "app_functions": 114,
+      "app_tables": 52,
+      "app_tables_without_rls": 0,
+      "policies": 41,
+      "migration_records": 69,
+      "pgss_ids": 4758,
+      "pgss_reset": "2026-10-09 11:11:31.487298+00"
+    },
+    "receipt_path": "docs/audits/issue509-approval-delivery-pgss-2026-11-15-run261-rank2881-2960.json",
+    "receipt_blob_sha": "01f407fb55a0c5d58ed038adf7389d795db80b11",
+    "reviewed_complete_definitions": [
+      {
+        "signature": "private.dic_admin_review_signup(p_member_id uuid, p_action text, p_expected_state text)",
+        "md5": "7e0d3bf10542694b60177fcfa9c6f7be",
+        "chars": 2073,
+        "range": [
+          1,
+          2073
+        ]
+      },
+      {
+        "signature": "private.dic_admin_signup_requests(p_offset integer, p_limit integer)",
+        "md5": "663c13571f70bb29b6a4351e8e6a45eb",
+        "chars": 1411,
+        "range": [
+          1,
+          1411
+        ]
+      },
+      {
+        "signature": "public.dic_admin_push_claim_poll()",
+        "md5": "e3bbf384effe7e29b5cffd89135c0666",
+        "chars": 414,
+        "range": [
+          1,
+          414
+        ]
+      },
+      {
+        "signature": "public.dic_admin_push_runtime_keys()",
+        "md5": "16fd1cc2a0cbf0110cd253e661c4cdef",
+        "chars": 427,
+        "range": [
+          1,
+          427
+        ]
+      },
+      {
+        "signature": "public.dic_admin_push_snapshot()",
+        "md5": "c6c2c674fa8358a3dd4946a3c0f9d8ed",
+        "chars": 1007,
+        "range": [
+          1,
+          1007
+        ]
+      },
+      {
+        "signature": "public.dic_member_approval_claim(p_channel text, p_limit integer)",
+        "md5": "b0d1e8d2622852b6b930def5c8a171d9",
+        "chars": 1920,
+        "range": [
+          1,
+          1920
+        ]
+      },
+      {
+        "signature": "public.dic_member_approval_claim_poll()",
+        "md5": "b94ddc2223993aa7685faf482d3871e4",
+        "chars": 335,
+        "range": [
+          1,
+          335
+        ]
+      },
+      {
+        "signature": "public.dic_member_approval_finish(p_event_id bigint, p_channel text, p_claim_token uuid, p_outcome text)",
+        "md5": "e92ba8e17ab274bcab1a564475d16f28",
+        "chars": 1003,
+        "range": [
+          1,
+          1003
+        ]
+      }
+    ],
+    "complete_source_characters": 8590,
+    "security_boundary": "Five service-only public SQL methods, two authenticated Admin-only private SQL methods, one additional service-only method; all eight security-definer with empty search_path; no secret content read",
+    "pgss_range": [
+      2881,
+      2960
+    ],
+    "new_distinct": 75,
+    "overlap": 5,
+    "cumulative_distinct": 2841,
+    "baseline_complete": false,
+    "next_pgss_range": [
+      2961,
+      3040
+    ],
+    "status": "IN_PROGRESS_NO_PRODUCTION_WRITES"
   }
 }
