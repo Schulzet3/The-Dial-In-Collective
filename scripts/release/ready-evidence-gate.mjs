@@ -122,10 +122,33 @@ export async function githubReleaseReaders(token,{request=globalThis.fetch}={}){
  return {
   loadRun:async id=>get('/actions/runs/'+id),
   loadChecks:async sha=>{
-   const j=await get('/commits/'+sha+'/check-runs?per_page=100');
-   if(!Array.isArray(j.check_runs)||j.total_count>100)
-    throw Error('GitHub check readback incomplete or unpaginated');
-   return j.check_runs;
+   // GitHub limits one check-runs response to 100 jobs. A large historical
+   // source merge can have 100+ independent checks; read ALL pages rather
+   // than silently verifying a truncated subset or permanently blocking READY.
+   // Bound API usage and fail closed on a changing, incomplete or malformed set.
+   const PAGE_SIZE=100,MAX_PAGES=10;
+   const collected=[],seen=new Set();
+   let expected=null;
+   for(let page=1;page<=MAX_PAGES;page++){
+    const j=await get('/commits/'+sha+'/check-runs?per_page='+PAGE_SIZE+'&page='+page);
+    if(!Number.isSafeInteger(j?.total_count)||j.total_count<0||
+       j.total_count>PAGE_SIZE*MAX_PAGES||!Array.isArray(j.check_runs)||
+       j.check_runs.length>PAGE_SIZE)
+     throw Error('GitHub check readback malformed or over bounded limit');
+    if(expected===null)expected=j.total_count;
+    if(expected!==j.total_count)
+     throw Error('GitHub check readback changed while paginating');
+    for(const check of j.check_runs){
+     if(!Number.isSafeInteger(check?.id)||check.id<=0||seen.has(check.id))
+      throw Error('GitHub check readback duplicated or malformed job');
+     seen.add(check.id);
+     collected.push(check);
+    }
+    if(collected.length===expected)return collected;
+    if(collected.length>expected||j.check_runs.length!==PAGE_SIZE)
+     throw Error('GitHub check readback incomplete or unpaginated');
+   }
+   throw Error('GitHub check readback exceeded bounded pagination');
   }
  };
 }
