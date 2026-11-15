@@ -1,0 +1,783 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 258,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight_development_sha": "b1f537809cd2cd310ab2eef4f3f22a8153aa205c",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "prewrite_development_sha": "67c748f34ed50a7c7b2382d3734684a99debd26b",
+  "observed_at": "2026-11-15 05:48:02.466902+00",
+  "provider_snapshot": {
+    "observed_at": "2026-11-15 05:48:02.466902+00",
+    "app_tables": 52,
+    "rls_disabled": 0,
+    "app_functions": 114,
+    "app_policies": 41,
+    "migrations": 69,
+    "pgss_rows": 4977,
+    "stats_reset": "2026-10-09 11:11:31.487298+00"
+  },
+  "complete_sql_definitions": [
+    {
+      "signature": "private.dic_admin_delete_preview(p_kind text, p_record_id uuid)",
+      "full_sql": "CREATE OR REPLACE FUNCTION private.dic_admin_delete_preview(p_kind text, p_record_id uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nDECLARE rev bigint; lib_count bigint:=0; shot_count bigint:=0;\n notes_count bigint:=0; community_count bigint:=0; submissions_count bigint:=0;\n source_count bigint:=0; linked_count bigint:=0; merged_count bigint:=0;\nBEGIN\n PERFORM private.require_member();\n IF auth.uid() IS NULL OR NOT private.is_admin() THEN\n  RAISE EXCEPTION USING errcode='42501',message='Administrator required.';\n END IF;\n IF p_record_id IS NULL OR p_kind IS NULL OR p_kind NOT IN ('shot','submission','approved') THEN\n  RAISE EXCEPTION USING errcode='22023',message='Unsupported delete target.';\n END IF;\n IF p_kind='shot' THEN\n  SELECT revision INTO rev FROM public.shots WHERE id=p_record_id;\n  IF NOT FOUND THEN RAISE EXCEPTION USING errcode='22023',message='Shot unavailable.'; END IF;\n  shot_count:=1;\n  SELECT count(*) INTO notes_count FROM public.shot_notes WHERE shot_id=p_record_id;\n  SELECT count(*) INTO linked_count FROM private.contribution_links WHERE shot_id=p_record_id;\n ELSIF p_kind='submission' THEN\n  SELECT revision INTO rev FROM public.coffee_submissions WHERE id=p_record_id AND status IN ('pending','conflict');\n  IF NOT FOUND THEN RAISE EXCEPTION USING errcode='22023',message='Pending submission unavailable.'; END IF;\n  submissions_count:=1;\n  SELECT count(*) INTO lib_count FROM public.library_entries WHERE submission_id=p_record_id;\n  SELECT count(*) INTO shot_count FROM public.shots s JOIN public.library_entries l ON l.id=s.library_entry_id\n    WHERE l.submission_id=p_record_id;\n  SELECT count(*) INTO notes_count FROM public.shot_notes n JOIN public.shots s ON s.id=n.shot_id\n   JOIN public.library_entries l ON l.id=s.library_entry_id WHERE l.submission_id=p_record_id;\n  SELECT count(*) INTO linked_count FROM private.dic_coffee_first_entry WHERE first_submission_id=p_record_id;\n ELSE\n  SELECT revision INTO rev FROM public.coffees WHERE id=p_record_id AND merged_into_id IS NULL;\n  IF NOT FOUND THEN RAISE EXCEPTION USING errcode='22023',message='Canonical coffee unavailable.'; END IF;\n  SELECT count(*) INTO submissions_count FROM public.coffee_submissions WHERE canonical_coffee_id=p_record_id;\n  SELECT count(*) INTO lib_count FROM public.library_entries l\n   WHERE l.coffee_id=p_record_id OR l.submission_id IN\n    (SELECT id FROM public.coffee_submissions WHERE canonical_coffee_id=p_record_id);\n  SELECT count(*) INTO shot_count FROM public.shots s JOIN public.library_entries l ON s.library_entry_id=l.id\n   WHERE l.coffee_id=p_record_id OR l.submission_id IN\n    (SELECT id FROM public.coffee_submissions WHERE canonical_coffee_id=p_record_id);\n  SELECT count(*) INTO notes_count FROM public.shot_notes n JOIN public.shots s ON s.id=n.shot_id\n   JOIN public.library_entries l ON s.library_entry_id=l.id\n   WHERE l.coffee_id=p_record_id OR l.submission_id IN\n    (SELECT id FROM public.coffee_submissions WHERE canonical_coffee_id=p_record_id);\n  SELECT count(*) INTO community_count FROM public.community_shots WHERE coffee_id=p_record_id;\n  SELECT count(*) INTO source_count FROM public.coffee_sources WHERE coffee_id=p_record_id;\n  SELECT count(*) INTO merged_count FROM public.coffees WHERE merged_into_id=p_record_id;\n  SELECT count(*) INTO linked_count FROM private.dic_coffee_first_entry f WHERE f.coffee_id<>p_record_id\n   AND f.first_submission_id IN (SELECT id FROM public.coffee_submissions WHERE canonical_coffee_id=p_record_id);\n END IF;\n RETURN jsonb_build_object('kind',p_kind,'record_id',p_record_id,'revision',rev,\n  'library_entries',lib_count,'shots',shot_count,'shot_notes',notes_count,\n  'community_shots',community_count,'linked_submissions',submissions_count,\n  'source_records',source_count,'other_references',linked_count,'merged_coffees',merged_count,\n  'blocked',CASE WHEN p_kind='approved' THEN community_count>0 OR merged_count>0 OR linked_count>0\n                 WHEN p_kind='submission' THEN linked_count>0 ELSE false END);\nEND $function$\n",
+      "md5": "83f516f852832cdf06f44b34339bbc0d",
+      "chars": 4078,
+      "security_definer": true,
+      "configurations": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "authenticated_execute": true,
+      "service_execute": true,
+      "review_range_chars": [
+        1,
+        4078
+      ],
+      "semantic_verdict": "DIRECT_FULL_PROVIDER_SQL_REVIEW_NO_NEW_REPRODUCED_DEFECT",
+      "semantic_assessment": "Admitted/Admin-gated, typed target and revision existence; counts linked personal/Community/canonical dependencies and rejects deletion of approved canonical with Community, merged or first-entry references and pending submission with first-entry reference. No record values read."
+    },
+    {
+      "signature": "private.dic_admin_delete_record(p_kind text, p_record_id uuid, p_expected_revision bigint, p_expected_impact jsonb)",
+      "full_sql": "CREATE OR REPLACE FUNCTION private.dic_admin_delete_record(p_kind text, p_record_id uuid, p_expected_revision bigint, p_expected_impact jsonb)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nDECLARE actor uuid; actual jsonb; current_revision bigint;\nBEGIN\n actor:=private.require_member();\n IF actor IS NULL OR NOT private.is_admin() THEN\n  RAISE EXCEPTION USING errcode='42501',message='Administrator required.';\n END IF;\n IF p_record_id IS NULL OR p_expected_revision IS NULL OR\n    p_kind IS NULL OR p_kind NOT IN ('shot','submission','approved') OR p_expected_impact IS NULL THEN\n  RAISE EXCEPTION USING errcode='22023',message='Invalid delete confirmation.';\n END IF;\n IF p_kind='shot' THEN\n  SELECT revision INTO current_revision FROM public.shots WHERE id=p_record_id FOR UPDATE;\n ELSIF p_kind='submission' THEN\n  SELECT revision INTO current_revision FROM public.coffee_submissions\n   WHERE id=p_record_id AND status IN ('pending','conflict') FOR UPDATE;\n ELSE\n  SELECT revision INTO current_revision FROM public.coffees\n   WHERE id=p_record_id AND merged_into_id IS NULL FOR UPDATE;\n END IF;\n IF NOT FOUND THEN RAISE EXCEPTION USING errcode='40001',message='Record changed or unavailable. Refresh.'; END IF;\n IF current_revision<>p_expected_revision THEN\n  RAISE EXCEPTION USING errcode='40001',message='Record revision changed. Refresh before deleting.';\n END IF;\n actual:=private.dic_admin_delete_preview(p_kind,p_record_id);\n IF actual IS DISTINCT FROM p_expected_impact THEN\n  RAISE EXCEPTION USING errcode='40001',message='Associated records changed. Review impact again.';\n END IF;\n IF (actual->>'blocked')::boolean THEN\n  RAISE EXCEPTION USING errcode='23514',message='Deletion blocked to preserve Community contributions or other canonical references.';\n END IF;\n IF p_kind='shot' THEN\n  UPDATE public.recipe_preferences SET favorite_shot_id=NULL,revision=revision+1,updated_at=now()\n   WHERE favorite_shot_id=p_record_id;\n  DELETE FROM public.shots WHERE id=p_record_id;\n ELSIF p_kind='submission' THEN\n  UPDATE public.workspace_state SET current_library_entry_id=NULL,revision=revision+1,updated_at=now()\n   WHERE current_library_entry_id IN (SELECT id FROM public.library_entries WHERE submission_id=p_record_id);\n  DELETE FROM public.library_entries WHERE submission_id=p_record_id;\n  UPDATE private.dic_coffee_audit SET submission_id=NULL WHERE submission_id=p_record_id;\n  DELETE FROM private.dic_source_attempts WHERE submission_id=p_record_id;\n  DELETE FROM public.coffee_submissions WHERE id=p_record_id AND status IN ('pending','conflict');\n ELSE\n  UPDATE public.workspace_state SET current_library_entry_id=NULL,revision=revision+1,updated_at=now()\n   WHERE current_library_entry_id IN (SELECT id FROM public.library_entries l\n    WHERE l.coffee_id=p_record_id OR l.submission_id IN\n     (SELECT id FROM public.coffee_submissions WHERE canonical_coffee_id=p_record_id));\n  DELETE FROM public.library_entries l WHERE l.coffee_id=p_record_id OR l.submission_id IN\n   (SELECT id FROM public.coffee_submissions WHERE canonical_coffee_id=p_record_id);\n  UPDATE private.dic_coffee_audit SET coffee_id=NULL,submission_id=NULL\n   WHERE coffee_id=p_record_id OR submission_id IN\n    (SELECT id FROM public.coffee_submissions WHERE canonical_coffee_id=p_record_id);\n  DELETE FROM private.dic_source_attempts WHERE submission_id IN\n   (SELECT id FROM public.coffee_submissions WHERE canonical_coffee_id=p_record_id);\n  DELETE FROM private.dic_coffee_first_entry WHERE coffee_id=p_record_id;\n  DELETE FROM public.coffee_submissions WHERE canonical_coffee_id=p_record_id;\n  DELETE FROM public.coffee_sources WHERE coffee_id=p_record_id;\n  DELETE FROM private.dic_coffee_aliases WHERE coffee_id=p_record_id;\n  DELETE FROM public.recipe_families WHERE coffee_id=p_record_id;\n  DELETE FROM public.coffees WHERE id=p_record_id;\n END IF;\n INSERT INTO private.dic_admin_delete_receipts(actor_id,record_kind,record_id,impact)\n  VALUES(actor,p_kind,p_record_id,actual);\n RETURN jsonb_build_object('ok',true,'deleted_kind',p_kind,'impact',actual);\nEND $function$\n",
+      "md5": "39b6e1a4fc51c2ce8121ef34d2067b51",
+      "chars": 4109,
+      "security_definer": true,
+      "configurations": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "authenticated_execute": true,
+      "service_execute": true,
+      "review_range_chars": [
+        1,
+        4109
+      ],
+      "semantic_verdict": "DIRECT_FULL_PROVIDER_SQL_REVIEW_NO_NEW_REPRODUCED_DEFECT",
+      "semantic_assessment": "Admitted/Admin-gated, target row lock plus expected revision and exact preview-impact equality before destructive SQL; receipt stores actor and impact. Shot notes cascade; contribution_links.shot_id uses SET NULL rather than deleting public Community evidence. This is approved Admin deletion logic, NOT authorization for this audit to invoke it. Other concurrent relationship races and real Auth acceptance not proven."
+    },
+    {
+      "signature": "private.dic_admin_review_coffee(p_submission_id uuid, p_expected_revision bigint, p_action text, p_reason text, p_canonical_id uuid)",
+      "full_sql": "CREATE OR REPLACE FUNCTION private.dic_admin_review_coffee(p_submission_id uuid, p_expected_revision bigint, p_action text, p_reason text, p_canonical_id uuid DEFAULT NULL::uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare s public.coffee_submissions; target public.coffees; result jsonb; actor uuid; reason_text text;\nbegin\n actor:=private.require_member();\n if actor is null or not private.is_admin() then\n   raise exception using errcode='42501',message='Administrator required.';\n end if;\n reason_text:=nullif(btrim(coalesce(p_reason,'')),'');\n -- The administrator's explicit review action is sufficient. Record truthful,\n -- neutral machine-authored audit provenance without fabricating a human reason.\n if reason_text is null and p_action='approve' then\n   reason_text:='Administrator approved distinct coffee';\n elsif reason_text is null and p_action='merge' then\n   reason_text:='Administrator resolved duplicate coffee';\n elsif reason_text is null and p_action='hold' then\n   reason_text:='Administrator held coffee for review';\n end if;\n if reason_text is null or length(reason_text)<8 or length(reason_text)>1000 then\n   raise exception using errcode='22023',message='A specific review reason (8–1000 characters) is required.';\n end if;\n if p_action not in ('approve','merge','hold') then\n   raise exception using errcode='22023',message='Unsupported review action.';\n end if;\n select * into s from public.coffee_submissions where id=p_submission_id for update;\n if not found or s.status not in ('pending','conflict') then\n   raise exception using errcode='23514',message='Submission is no longer pending.';\n end if;\n if s.revision is distinct from p_expected_revision then\n   raise exception using errcode='40001',message='Submission changed. Refresh before reviewing.';\n end if;\n if p_action='approve' then\n   if p_canonical_id is not null then raise exception using errcode='22023',message='Approve cannot take a merge target.';end if;\n   result:=private.dic_promote_pending_coffee(s.id,'admin_reviewed',\n     jsonb_build_object('reason',reason_text,'verification_method','manual_administrator'),true);\n   if coalesce((result->>'ok')::boolean,false) is not true then\n     return result; -- unresolved near-match stays Pending, no false approval audit\n   end if;\n elsif p_action='merge' then\n   if p_canonical_id is null then raise exception using errcode='22023',message='Choose a verified canonical coffee.';end if;\n   select * into target from public.coffees where id=p_canonical_id\n     and verification_state='verified' and merged_into_id is null;\n   if not found or private.dic_canonical_roaster_key(target.roaster)\n     is distinct from private.dic_canonical_roaster_key(s.proposed_data->>'roaster')\n     or not (private.dic_coffee_key(target.name)=private.dic_coffee_key(s.proposed_data->>'name')\n       or extensions.similarity(private.dic_coffee_key(target.name),\n                 private.dic_coffee_key(s.proposed_data->>'name'))>=0.63)\n     or (target.release_label is not null and nullif(s.proposed_data->>'release_label','') is not null\n       and private.dic_coffee_key(target.release_label) is distinct from private.dic_coffee_key(s.proposed_data->>'release_label'))\n     or (target.origin is not null and nullif(s.proposed_data->>'origin','') is not null\n       and private.dic_coffee_key(target.origin) is distinct from private.dic_coffee_key(s.proposed_data->>'origin'))\n     or (target.process is not null and nullif(s.proposed_data->>'process','') is not null\n       and private.dic_coffee_key(target.process) is distinct from private.dic_coffee_key(s.proposed_data->>'process')) then\n     raise exception using errcode='23514',message='That canonical coffee is not a safe duplicate match.';\n   end if;\n   result:=private.dic_link_pending_coffee(s.id,target.id,'admin_reviewed_merge',\n      jsonb_build_object('reason',reason_text,'verification_method','manual_administrator'));\n else\n   if p_canonical_id is not null then raise exception using errcode='22023',message='Hold cannot take a merge target.';end if;\n   update public.coffee_submissions set status='conflict' where id=s.id;\n   result:=jsonb_build_object('ok',true,'status','conflict');\n end if;\n insert into public.admin_reviews(submission_id,reviewer_id,action,reason,evidence)\n values(s.id,actor,p_action,reason_text,jsonb_build_object('method','manual_administrator',\n   'expected_revision',p_expected_revision,'canonical_id',p_canonical_id));\n return result;\nend $function$\n",
+      "md5": "cb5c264aceb9699a498177f3f6861783",
+      "chars": 4526,
+      "security_definer": true,
+      "configurations": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "authenticated_execute": true,
+      "service_execute": false,
+      "review_range_chars": [
+        1,
+        4526
+      ],
+      "semantic_verdict": "DIRECT_FULL_PROVIDER_SQL_REVIEW_NO_NEW_REPRODUCED_DEFECT",
+      "semantic_assessment": "Admitted/Admin guard, row revision lock and approve/merge/hold paths; verified unmerged canonical and roaster/name/release/origin/process checks on merge; neutral machine-authored default reasons and Admin audit row. Actual participant/JWT and downstream promotion not independently exercised."
+    },
+    {
+      "signature": "private.dic_claim_first_style_prompt_impl(p_library_entry_id uuid)",
+      "full_sql": "CREATE OR REPLACE FUNCTION private.dic_claim_first_style_prompt_impl(p_library_entry_id uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare u uuid:=private.require_member();claimed uuid;\nbegin\n if p_library_entry_id is null or not exists(\n  select 1 from public.library_entries l where l.owner_id=u and l.id=p_library_entry_id and l.hidden_at is null\n ) then raise exception using errcode='42501',message='Coffee is not accessible.'; end if;\n if exists(select 1 from public.shots s where s.owner_id=u and s.library_entry_id=p_library_entry_id) then\n  return jsonb_build_object('ok',true,'show',false);\n end if;\n insert into private.dic_first_style_prompt_seen(owner_id,library_entry_id)\n values(u,p_library_entry_id) on conflict(owner_id,library_entry_id) do nothing\n returning library_entry_id into claimed;\n return jsonb_build_object('ok',true,'show',claimed is not null);\nend $function$\n",
+      "md5": "31f06eec62a745bf998b749af71816db",
+      "chars": 940,
+      "security_definer": true,
+      "configurations": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "authenticated_execute": true,
+      "service_execute": false,
+      "review_range_chars": [
+        1,
+        940
+      ],
+      "semantic_verdict": "DIRECT_FULL_PROVIDER_SQL_REVIEW_NO_NEW_REPRODUCED_DEFECT",
+      "semantic_assessment": "Member identity and owned nonhidden library entry checked; prior shot suppresses first-style prompt, ON CONFLICT owner+entry enforces idempotent once-only claim. No private row inspection or client UX test."
+    },
+    {
+      "signature": "private.dic_enqueue_member_approval_notices()",
+      "full_sql": "CREATE OR REPLACE FUNCTION private.dic_enqueue_member_approval_notices()\n RETURNS trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n if new.action='approve' and new.member_id is not null then\n  insert into private.dic_member_approval_deliveries(event_id,member_id,channel)\n  values(new.id,new.member_id,'email'),(new.id,new.member_id,'push')\n  on conflict(event_id,channel) do nothing;\n end if;\n return new;\nend $function$\n",
+      "md5": "36defca729c42b4ec35d4d2a4e1cfea5",
+      "chars": 460,
+      "security_definer": true,
+      "configurations": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "service_execute": false,
+      "review_range_chars": [
+        1,
+        460
+      ],
+      "semantic_verdict": "DIRECT_FULL_PROVIDER_SQL_REVIEW_NO_NEW_REPRODUCED_DEFECT",
+      "semantic_assessment": "Trigger-only definer (no direct anon/authenticated/service EXECUTE); AFTER INSERT on private.dic_signup_review_events enqueues email and push with event/channel idempotency. No live recipient or delivery test."
+    }
+  ],
+  "direct_source_characters": 14113,
+  "complete_trigger_definitions": [
+    {
+      "table_name": "private.dic_signup_review_events",
+      "tgname": "dic_enqueue_member_approval_notices_on_review",
+      "full_definition": "CREATE TRIGGER dic_enqueue_member_approval_notices_on_review AFTER INSERT ON private.dic_signup_review_events FOR EACH ROW EXECUTE FUNCTION private.dic_enqueue_member_approval_notices()"
+    }
+  ],
+  "cross_object_fk_evidence": [
+    {
+      "child_table": "private.contribution_links",
+      "definition": "FOREIGN KEY (shot_id) REFERENCES shots(id) ON DELETE SET NULL",
+      "delete_action": "n"
+    }
+  ],
+  "numeric_only_pgss_range": [
+    2641,
+    2720
+  ],
+  "pgss_numeric_fingerprints": [
+    {
+      "rn": 2641,
+      "queryid": "7990710427972995678",
+      "calls": 1,
+      "total_ms": "1.901",
+      "mean_ms": "1.901"
+    },
+    {
+      "rn": 2642,
+      "queryid": "-1783063323904251179",
+      "calls": 1,
+      "total_ms": "1.897",
+      "mean_ms": "1.897"
+    },
+    {
+      "rn": 2643,
+      "queryid": "-7710415879754796245",
+      "calls": 1,
+      "total_ms": "1.893",
+      "mean_ms": "1.893"
+    },
+    {
+      "rn": 2644,
+      "queryid": "-688579630637501107",
+      "calls": 1,
+      "total_ms": "1.890",
+      "mean_ms": "1.890"
+    },
+    {
+      "rn": 2645,
+      "queryid": "-5454495677076629870",
+      "calls": 2,
+      "total_ms": "1.889",
+      "mean_ms": "0.944"
+    },
+    {
+      "rn": 2646,
+      "queryid": "6550458129699040582",
+      "calls": 1,
+      "total_ms": "1.885",
+      "mean_ms": "1.885"
+    },
+    {
+      "rn": 2647,
+      "queryid": "3635770660981282953",
+      "calls": 1,
+      "total_ms": "1.881",
+      "mean_ms": "1.881"
+    },
+    {
+      "rn": 2648,
+      "queryid": "9066002213141689079",
+      "calls": 1,
+      "total_ms": "1.879",
+      "mean_ms": "1.879"
+    },
+    {
+      "rn": 2649,
+      "queryid": "1032627982662148636",
+      "calls": 1,
+      "total_ms": "1.879",
+      "mean_ms": "1.879"
+    },
+    {
+      "rn": 2650,
+      "queryid": "-4036129031716182659",
+      "calls": 1,
+      "total_ms": "1.877",
+      "mean_ms": "1.877"
+    },
+    {
+      "rn": 2651,
+      "queryid": "-5197110640591828332",
+      "calls": 1,
+      "total_ms": "1.873",
+      "mean_ms": "1.873"
+    },
+    {
+      "rn": 2652,
+      "queryid": "-164097292116747402",
+      "calls": 1,
+      "total_ms": "1.866",
+      "mean_ms": "1.866"
+    },
+    {
+      "rn": 2653,
+      "queryid": "3470418709959754609",
+      "calls": 1,
+      "total_ms": "1.865",
+      "mean_ms": "1.865"
+    },
+    {
+      "rn": 2654,
+      "queryid": "-7986395313027042476",
+      "calls": 1,
+      "total_ms": "1.859",
+      "mean_ms": "1.859"
+    },
+    {
+      "rn": 2655,
+      "queryid": "-3880970949323453107",
+      "calls": 2,
+      "total_ms": "1.856",
+      "mean_ms": "0.928"
+    },
+    {
+      "rn": 2656,
+      "queryid": "6035165328351991351",
+      "calls": 1,
+      "total_ms": "1.849",
+      "mean_ms": "1.849"
+    },
+    {
+      "rn": 2657,
+      "queryid": "8967652554828275177",
+      "calls": 1,
+      "total_ms": "1.848",
+      "mean_ms": "1.848"
+    },
+    {
+      "rn": 2658,
+      "queryid": "8903324889993933607",
+      "calls": 1,
+      "total_ms": "1.843",
+      "mean_ms": "1.843"
+    },
+    {
+      "rn": 2659,
+      "queryid": "-6953296419576129931",
+      "calls": 2,
+      "total_ms": "1.840",
+      "mean_ms": "0.920"
+    },
+    {
+      "rn": 2660,
+      "queryid": "2648030518362316400",
+      "calls": 1,
+      "total_ms": "1.839",
+      "mean_ms": "1.839"
+    },
+    {
+      "rn": 2661,
+      "queryid": "-5856106175352174747",
+      "calls": 1,
+      "total_ms": "1.838",
+      "mean_ms": "1.838"
+    },
+    {
+      "rn": 2662,
+      "queryid": "-8838810755864134725",
+      "calls": 1,
+      "total_ms": "1.832",
+      "mean_ms": "1.832"
+    },
+    {
+      "rn": 2663,
+      "queryid": "-9134153076180699050",
+      "calls": 1,
+      "total_ms": "1.830",
+      "mean_ms": "1.830"
+    },
+    {
+      "rn": 2664,
+      "queryid": "1924972020638546805",
+      "calls": 1,
+      "total_ms": "1.830",
+      "mean_ms": "1.830"
+    },
+    {
+      "rn": 2665,
+      "queryid": "-6071469286047690449",
+      "calls": 1,
+      "total_ms": "1.828",
+      "mean_ms": "1.828"
+    },
+    {
+      "rn": 2666,
+      "queryid": "5769239776839371283",
+      "calls": 1,
+      "total_ms": "1.827",
+      "mean_ms": "1.827"
+    },
+    {
+      "rn": 2667,
+      "queryid": "-1523524982805972090",
+      "calls": 1,
+      "total_ms": "1.825",
+      "mean_ms": "1.825"
+    },
+    {
+      "rn": 2668,
+      "queryid": "-4806136101335923110",
+      "calls": 1,
+      "total_ms": "1.817",
+      "mean_ms": "1.817"
+    },
+    {
+      "rn": 2669,
+      "queryid": "564269741489913181",
+      "calls": 2,
+      "total_ms": "1.816",
+      "mean_ms": "0.908"
+    },
+    {
+      "rn": 2670,
+      "queryid": "7892473544555193279",
+      "calls": 1,
+      "total_ms": "1.810",
+      "mean_ms": "1.810"
+    },
+    {
+      "rn": 2671,
+      "queryid": "5301439581211955373",
+      "calls": 1,
+      "total_ms": "1.809",
+      "mean_ms": "1.809"
+    },
+    {
+      "rn": 2672,
+      "queryid": "4308587315357997261",
+      "calls": 3,
+      "total_ms": "1.805",
+      "mean_ms": "0.602"
+    },
+    {
+      "rn": 2673,
+      "queryid": "-5064244801202532865",
+      "calls": 4,
+      "total_ms": "1.804",
+      "mean_ms": "0.451"
+    },
+    {
+      "rn": 2674,
+      "queryid": "-3577449682294620766",
+      "calls": 1,
+      "total_ms": "1.800",
+      "mean_ms": "1.800"
+    },
+    {
+      "rn": 2675,
+      "queryid": "-6765682324387444482",
+      "calls": 1,
+      "total_ms": "1.797",
+      "mean_ms": "1.797"
+    },
+    {
+      "rn": 2676,
+      "queryid": "8319457726368627305",
+      "calls": 1,
+      "total_ms": "1.797",
+      "mean_ms": "1.797"
+    },
+    {
+      "rn": 2677,
+      "queryid": "-2882252252810667468",
+      "calls": 1,
+      "total_ms": "1.794",
+      "mean_ms": "1.794"
+    },
+    {
+      "rn": 2678,
+      "queryid": "5101163137591154385",
+      "calls": 8,
+      "total_ms": "1.793",
+      "mean_ms": "0.224"
+    },
+    {
+      "rn": 2679,
+      "queryid": "2764949312821400435",
+      "calls": 2,
+      "total_ms": "1.790",
+      "mean_ms": "0.895"
+    },
+    {
+      "rn": 2680,
+      "queryid": "-87740819432199394",
+      "calls": 1,
+      "total_ms": "1.790",
+      "mean_ms": "1.790"
+    },
+    {
+      "rn": 2681,
+      "queryid": "3245644654583914639",
+      "calls": 1,
+      "total_ms": "1.788",
+      "mean_ms": "1.788"
+    },
+    {
+      "rn": 2682,
+      "queryid": "-2145189066902468956",
+      "calls": 1,
+      "total_ms": "1.787",
+      "mean_ms": "1.787"
+    },
+    {
+      "rn": 2683,
+      "queryid": "5302249065226545378",
+      "calls": 1,
+      "total_ms": "1.783",
+      "mean_ms": "1.783"
+    },
+    {
+      "rn": 2684,
+      "queryid": "-8422824584538445190",
+      "calls": 1,
+      "total_ms": "1.779",
+      "mean_ms": "1.779"
+    },
+    {
+      "rn": 2685,
+      "queryid": "-7595626281983526748",
+      "calls": 1,
+      "total_ms": "1.778",
+      "mean_ms": "1.778"
+    },
+    {
+      "rn": 2686,
+      "queryid": "-8732080828610077439",
+      "calls": 1,
+      "total_ms": "1.776",
+      "mean_ms": "1.776"
+    },
+    {
+      "rn": 2687,
+      "queryid": "8544109729780438854",
+      "calls": 1,
+      "total_ms": "1.775",
+      "mean_ms": "1.775"
+    },
+    {
+      "rn": 2688,
+      "queryid": "8964028884158162771",
+      "calls": 1,
+      "total_ms": "1.773",
+      "mean_ms": "1.773"
+    },
+    {
+      "rn": 2689,
+      "queryid": "-3804956543697486333",
+      "calls": 1,
+      "total_ms": "1.771",
+      "mean_ms": "1.771"
+    },
+    {
+      "rn": 2690,
+      "queryid": "5000461361655229280",
+      "calls": 1,
+      "total_ms": "1.771",
+      "mean_ms": "1.771"
+    },
+    {
+      "rn": 2691,
+      "queryid": "5855747437035199629",
+      "calls": 1,
+      "total_ms": "1.768",
+      "mean_ms": "1.768"
+    },
+    {
+      "rn": 2692,
+      "queryid": "-4251839065449515792",
+      "calls": 3,
+      "total_ms": "1.766",
+      "mean_ms": "0.589"
+    },
+    {
+      "rn": 2693,
+      "queryid": "4863883449997248460",
+      "calls": 1,
+      "total_ms": "1.766",
+      "mean_ms": "1.766"
+    },
+    {
+      "rn": 2694,
+      "queryid": "1874203167587911982",
+      "calls": 1,
+      "total_ms": "1.765",
+      "mean_ms": "1.765"
+    },
+    {
+      "rn": 2695,
+      "queryid": "553539421993843551",
+      "calls": 1,
+      "total_ms": "1.761",
+      "mean_ms": "1.761"
+    },
+    {
+      "rn": 2696,
+      "queryid": "2762732895280331343",
+      "calls": 1,
+      "total_ms": "1.755",
+      "mean_ms": "1.755"
+    },
+    {
+      "rn": 2697,
+      "queryid": "1138971409331699368",
+      "calls": 1,
+      "total_ms": "1.754",
+      "mean_ms": "1.754"
+    },
+    {
+      "rn": 2698,
+      "queryid": "-4601702949135983103",
+      "calls": 1,
+      "total_ms": "1.753",
+      "mean_ms": "1.753"
+    },
+    {
+      "rn": 2699,
+      "queryid": "-440988583627306288",
+      "calls": 1,
+      "total_ms": "1.752",
+      "mean_ms": "1.752"
+    },
+    {
+      "rn": 2700,
+      "queryid": "2125733578132943299",
+      "calls": 1,
+      "total_ms": "1.751",
+      "mean_ms": "1.751"
+    },
+    {
+      "rn": 2701,
+      "queryid": "-3025344230808720325",
+      "calls": 1,
+      "total_ms": "1.750",
+      "mean_ms": "1.750"
+    },
+    {
+      "rn": 2702,
+      "queryid": "-4875155998893016513",
+      "calls": 3,
+      "total_ms": "1.749",
+      "mean_ms": "0.583"
+    },
+    {
+      "rn": 2703,
+      "queryid": "-6796346586487238084",
+      "calls": 11,
+      "total_ms": "1.748",
+      "mean_ms": "0.159"
+    },
+    {
+      "rn": 2704,
+      "queryid": "-7932025932649124557",
+      "calls": 1,
+      "total_ms": "1.747",
+      "mean_ms": "1.747"
+    },
+    {
+      "rn": 2705,
+      "queryid": "-1285514000024993780",
+      "calls": 1,
+      "total_ms": "1.745",
+      "mean_ms": "1.745"
+    },
+    {
+      "rn": 2706,
+      "queryid": "2826272427768475841",
+      "calls": 2,
+      "total_ms": "1.744",
+      "mean_ms": "0.872"
+    },
+    {
+      "rn": 2707,
+      "queryid": "-683128100852142072",
+      "calls": 3,
+      "total_ms": "1.744",
+      "mean_ms": "0.581"
+    },
+    {
+      "rn": 2708,
+      "queryid": "4991053315554756988",
+      "calls": 1,
+      "total_ms": "1.744",
+      "mean_ms": "1.744"
+    },
+    {
+      "rn": 2709,
+      "queryid": "7646310227414934214",
+      "calls": 1,
+      "total_ms": "1.741",
+      "mean_ms": "1.741"
+    },
+    {
+      "rn": 2710,
+      "queryid": "-6470624225537305611",
+      "calls": 1,
+      "total_ms": "1.741",
+      "mean_ms": "1.741"
+    },
+    {
+      "rn": 2711,
+      "queryid": "-3042628949408088695",
+      "calls": 1,
+      "total_ms": "1.741",
+      "mean_ms": "1.741"
+    },
+    {
+      "rn": 2712,
+      "queryid": "6293618349495895660",
+      "calls": 1,
+      "total_ms": "1.739",
+      "mean_ms": "1.739"
+    },
+    {
+      "rn": 2713,
+      "queryid": "5757147218001948726",
+      "calls": 1,
+      "total_ms": "1.738",
+      "mean_ms": "1.738"
+    },
+    {
+      "rn": 2714,
+      "queryid": "-1941844165525793515",
+      "calls": 1,
+      "total_ms": "1.734",
+      "mean_ms": "1.734"
+    },
+    {
+      "rn": 2715,
+      "queryid": "-4779675820416657171",
+      "calls": 1,
+      "total_ms": "1.732",
+      "mean_ms": "1.732"
+    },
+    {
+      "rn": 2716,
+      "queryid": "5479862769883616186",
+      "calls": 2,
+      "total_ms": "1.729",
+      "mean_ms": "0.864"
+    },
+    {
+      "rn": 2717,
+      "queryid": "-7072097095118253375",
+      "calls": 2,
+      "total_ms": "1.723",
+      "mean_ms": "0.862"
+    },
+    {
+      "rn": 2718,
+      "queryid": "725222585372945448",
+      "calls": 10,
+      "total_ms": "1.722",
+      "mean_ms": "0.172"
+    },
+    {
+      "rn": 2719,
+      "queryid": "3144864823484728631",
+      "calls": 2,
+      "total_ms": "1.722",
+      "mean_ms": "0.861"
+    },
+    {
+      "rn": 2720,
+      "queryid": "6244438338784589945",
+      "calls": 1,
+      "total_ms": "1.720",
+      "mean_ms": "1.720"
+    }
+  ],
+  "prior_distinct": 2541,
+  "new_distinct": 75,
+  "overlap": 5,
+  "cumulative_distinct": 2616,
+  "advisors_observed": {
+    "security": [
+      {
+        "name": "rls_enabled_no_policy",
+        "count": 13
+      },
+      {
+        "name": "authenticated_security_definer_function_executable",
+        "count": 10
+      },
+      {
+        "name": "auth_leaked_password_protection",
+        "count": 1
+      }
+    ],
+    "performance": [
+      {
+        "name": "unindexed_foreign_keys",
+        "count": 14
+      },
+      {
+        "name": "unused_index",
+        "count": 8
+      }
+    ],
+    "classification": "OBSERVATION_ONLY_NOT_PROVEN_DEFECT_OR_SAFE_INDEX_DELETE"
+  },
+  "bounded_log_source_counts_last24h": {
+    "edge_logs": 2450,
+    "function_logs": 1152,
+    "postgres_logs": 583,
+    "function_edge_logs": 575,
+    "pgbouncer_logs": 69,
+    "auth_logs": 20,
+    "supavisor_logs": 12,
+    "auth_audit_logs": 10
+  },
+  "edge_metadata_observed": [
+    {
+      "slug": "dic-verify-coffee",
+      "version": 10,
+      "verify_jwt": true
+    },
+    {
+      "slug": "dic-preview-coffee",
+      "version": 7,
+      "verify_jwt": true
+    },
+    {
+      "slug": "dic-delete-member-account",
+      "version": 4,
+      "verify_jwt": true
+    },
+    {
+      "slug": "dic-admin-push-broker",
+      "version": 3,
+      "verify_jwt": false
+    },
+    {
+      "slug": "dic-member-approval-broker",
+      "version": 1,
+      "verify_jwt": false
+    }
+  ],
+  "findings": [
+    "No newly reproduced defect or safe obsolete/dead object deletion established by these full sources.",
+    "Canonical/Community related tables and historical aliases remain LEGACY ACTIVE dependencies; retired #2389 directory classification does not justify table/migration deletion.",
+    "Current Community contribution FK ON DELETE SET NULL explains intentional survival of contribution link when a private shot is Admin-deleted; no destructive SQL executed.",
+    "Run 258 is full-source review for these five specific functions only, not all SQL/provider words.",
+    "pg_stat_statements query identifiers are lifetime numeric fingerprints; dynamic total-time ranks may overlap and do not certify query-source-word review."
+  ],
+  "unverified": [
+    "Complete currently deployed SQL migration body parity to exact GitHub migration source",
+    "Auth real-session/Admin HTTP acceptance #96",
+    "Unexposed managed provider settings/secrets/compiled runtime",
+    "Real recipient email/push delivery",
+    "All provider objects not yet semantically reviewed"
+  ],
+  "privacy": "READ_ONLY_METADATA_AND_DEFINITIONS; no private member/Auth/shots/notes/credential rows or raw SQL query/log text retrieved",
+  "baseline_complete": false,
+  "next": "provider drift; pgss ranks 2721–2800; remaining direct complete SQL/provider definitions, migration parity and caller/dependency review"
+}

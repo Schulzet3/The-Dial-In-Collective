@@ -17,8 +17,13 @@ function post(pass=vars.DIC_DRIVE_SETUP_PASSPHRASE,originHeader=origin){
   body:new URLSearchParams({setup_key:pass})});
 }
 async function begin(handle){
- const r=await handle(post());assert.equal(r.status,303);
- return {auth:new URL(r.headers.get('location')),cookie:r.headers.get('set-cookie').split(';')[0]};
+ const r=await handle(post());assert.equal(r.status,200);
+ const body=await r.text();
+ const match=/<a id="google-continue" href="([^"]+)" rel="noreferrer">/.exec(body);
+ assert.ok(match,'Explicit OAuth link must remain available when auto-navigation is blocked');
+ assert.match(body,/location\.replace\(next\.href\)/);
+ assert.equal(r.headers.get('location'),null,'No cross-origin HTTP redirect of a form POST');
+ return {auth:new URL(match[1].replaceAll('&amp;','&')),cookie:r.headers.get('set-cookie').split(';')[0]};
 }
 function callback(auth,cookie,overrides={}){
  const u=new URL(CALLBACK);
@@ -177,4 +182,22 @@ test('Google broad-scope, wrong folder metadata, corrupt checksum and failed cle
   assert.equal(verified.status,503);
   assert.deepEqual(await verified.json(),{ok:false});
  }
+});
+
+test('browser OAuth handoff is a same-origin CSP-safe page with a visible Google link',async()=>{
+ const h=createOwnerDriveConnect({env});
+ const entry=await h(new Request(CALLBACK));
+ assert.match(entry.headers.get('content-security-policy'),/form-action 'self';/);
+ const r=await h(post());
+ assert.equal(r.status,200);
+ assert.equal(r.headers.get('referrer-policy'),'no-referrer');
+ assert.match(r.headers.get('content-security-policy'),/script-src 'nonce-/);
+ assert.match(r.headers.get('content-security-policy'),/form-action 'self';/);
+ assert.ok(r.headers.get('set-cookie')?.includes('HttpOnly; Secure; SameSite=Lax'));
+ const page=await r.text();
+ assert.match(page,/id="google-continue" href="https:\/\/accounts\.google\.com\/o\/oauth2\/v2\/auth\?/);
+ assert.match(page,/if\(next\)location\.replace\(next\.href\)/);
+ assert.match(page,/rel="noreferrer"/);
+ assert.doesNotMatch(page,/test-owner-passphrase|test-web-client-secret|synthetic-refresh-token/);
+ assert.equal(r.headers.get('location'),null);
 });

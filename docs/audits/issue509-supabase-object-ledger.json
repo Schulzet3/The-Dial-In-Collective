@@ -21016,5 +21016,101 @@
     "production_writes": 0,
     "source_tests": "NOT_RUN_DOCS_ONLY",
     "next": "Fresh provider drift; pgss 2641-2720; unreviewed provider definition/source parity"
+  },
+  "provider_pgss_admin_delete_run258": {
+    "status": "IN_PROGRESS",
+    "project_ref": "azviqqejypsefzilgonr",
+    "preflight_development_sha": "b1f537809cd2cd310ab2eef4f3f22a8153aa205c",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_development_sha": "67c748f34ed50a7c7b2382d3734684a99debd26b",
+    "provider_observed_at": "2026-11-15 05:48:02.466902+00",
+    "receipt_path": "docs/audits/issue509-admin-delete-review-pgss-2026-11-15-run258-rank2641-2720.json",
+    "receipt_blob_sha": "fb45194a1edab0b0b6d574675a417014620973a9",
+    "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-15-run258.json",
+    "index_blob_sha": "cb07c19718c7f966cbc3a63ce3eee1bb7f060def",
+    "complete_sql_definitions": [
+      {
+        "signature": "private.dic_admin_delete_preview(p_kind text, p_record_id uuid)",
+        "md5": "83f516f852832cdf06f44b34339bbc0d",
+        "chars": 4078,
+        "range": [
+          1,
+          4078
+        ],
+        "verdict": "Admitted/Admin-gated, typed target and revision existence; counts linked personal/Community/canonical dependencies and rejects deletion of approved canonical with Community, merged or first-entry references and pending submission with first-entry reference. No record values read."
+      },
+      {
+        "signature": "private.dic_admin_delete_record(p_kind text, p_record_id uuid, p_expected_revision bigint, p_expected_impact jsonb)",
+        "md5": "39b6e1a4fc51c2ce8121ef34d2067b51",
+        "chars": 4109,
+        "range": [
+          1,
+          4109
+        ],
+        "verdict": "Admitted/Admin-gated, target row lock plus expected revision and exact preview-impact equality before destructive SQL; receipt stores actor and impact. Shot notes cascade; contribution_links.shot_id uses SET NULL rather than deleting public Community evidence. This is approved Admin deletion logic, NOT authorization for this audit to invoke it. Other concurrent relationship races and real Auth acceptance not proven."
+      },
+      {
+        "signature": "private.dic_admin_review_coffee(p_submission_id uuid, p_expected_revision bigint, p_action text, p_reason text, p_canonical_id uuid)",
+        "md5": "cb5c264aceb9699a498177f3f6861783",
+        "chars": 4526,
+        "range": [
+          1,
+          4526
+        ],
+        "verdict": "Admitted/Admin guard, row revision lock and approve/merge/hold paths; verified unmerged canonical and roaster/name/release/origin/process checks on merge; neutral machine-authored default reasons and Admin audit row. Actual participant/JWT and downstream promotion not independently exercised."
+      },
+      {
+        "signature": "private.dic_claim_first_style_prompt_impl(p_library_entry_id uuid)",
+        "md5": "31f06eec62a745bf998b749af71816db",
+        "chars": 940,
+        "range": [
+          1,
+          940
+        ],
+        "verdict": "Member identity and owned nonhidden library entry checked; prior shot suppresses first-style prompt, ON CONFLICT owner+entry enforces idempotent once-only claim. No private row inspection or client UX test."
+      },
+      {
+        "signature": "private.dic_enqueue_member_approval_notices()",
+        "md5": "36defca729c42b4ec35d4d2a4e1cfea5",
+        "chars": 460,
+        "range": [
+          1,
+          460
+        ],
+        "verdict": "Trigger-only definer (no direct anon/authenticated/service EXECUTE); AFTER INSERT on private.dic_signup_review_events enqueues email and push with event/channel idempotency. No live recipient or delivery test."
+      }
+    ],
+    "direct_source_characters": 14113,
+    "complete_trigger_definitions": 1,
+    "community_shot_fk_set_null_proof": [
+      {
+        "child_table": "private.contribution_links",
+        "definition": "FOREIGN KEY (shot_id) REFERENCES shots(id) ON DELETE SET NULL",
+        "delete_action": "n"
+      }
+    ],
+    "numeric_pgss_rank_range": [
+      2641,
+      2720
+    ],
+    "numeric_fingerprint_rows": 80,
+    "new_distinct": 75,
+    "overlap": 5,
+    "cumulative_distinct": 2616,
+    "provider_counts": {
+      "observed_at": "2026-11-15 05:48:02.466902+00",
+      "app_tables": 52,
+      "rls_disabled": 0,
+      "app_functions": 114,
+      "app_policies": 41,
+      "migrations": 69,
+      "pgss_rows": 4977,
+      "stats_reset": "2026-10-09 11:11:31.487298+00"
+    },
+    "legacy_status": "LEGACY ACTIVE compatibility data must not be removed on #2389 directory retirement alone",
+    "source_migration_parity": "UNVERIFIED",
+    "functional_ci": "NOT_RUN_DOCS_ONLY",
+    "baseline_complete": false,
+    "next": "fresh provider drift and numeric ranks 2721–2800; continue full provider definition/source parity"
   }
 }
