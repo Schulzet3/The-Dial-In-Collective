@@ -15,6 +15,9 @@ on:
       - src/server/coffee-decaffeination-method.mjs
       - site/cloud/coffee-url-autofill.js
       - src/server/coffee-selected-offer-h2.mjs
+      - src/server/coffee-html-structure.mjs
+      - src/server/coffee-url-guard.mjs
+      - tests/coffee-issue33-r217-workflow-dependencies.test.mjs
   push:
     branches: [development/backend-foundation]
     paths:
@@ -30,6 +33,9 @@ on:
       - src/server/coffee-decaffeination-method.mjs
       - site/cloud/coffee-url-autofill.js
       - src/server/coffee-selected-offer-h2.mjs
+      - src/server/coffee-html-structure.mjs
+      - src/server/coffee-url-guard.mjs
+      - tests/coffee-issue33-r217-workflow-dependencies.test.mjs
 permissions:
   contents: read
 jobs:
@@ -46,6 +52,8 @@ jobs:
           node-version: '22'
       - name: Seven selected positive and hostile actual-parser tests
         run: node --test tests/coffee-issue33-r215-original325-327.test.mjs
+      - name: Validate selected-source dependency event filters
+        run: node --test tests/coffee-issue33-r217-workflow-dependencies.test.mjs
       - name: Bounded chosen public HTTPS and Add Coffee Source Review
         if: always()
         env:

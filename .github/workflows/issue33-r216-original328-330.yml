@@ -13,6 +13,11 @@ on:
       - scripts/audit/issue33-original603-focused-source-review.mjs
       - scripts/audit/issue33-selected-product-heading.mjs
       - src/server/coffee-product-scope.mjs
+      - src/server/coffee-selected-offer-h2.mjs
+      - src/server/coffee-html-structure.mjs
+      - src/server/coffee-url-guard.mjs
+      - site/cloud/coffee-url-autofill.js
+      - tests/coffee-issue33-r217-workflow-dependencies.test.mjs
   push:
     branches: [development/backend-foundation]
     paths:
@@ -25,6 +30,11 @@ on:
       - scripts/audit/issue33-original603-focused-source-review.mjs
       - scripts/audit/issue33-selected-product-heading.mjs
       - src/server/coffee-product-scope.mjs
+      - src/server/coffee-selected-offer-h2.mjs
+      - src/server/coffee-html-structure.mjs
+      - src/server/coffee-url-guard.mjs
+      - site/cloud/coffee-url-autofill.js
+      - tests/coffee-issue33-r217-workflow-dependencies.test.mjs
       - docs/workstreams/ops-issue33-r216-328-330-20261115.md
 permissions:
   contents: read
@@ -42,6 +52,8 @@ jobs:
           node-version: '22'
       - name: Seven selected positive and hostile parser contracts
         run: node --test tests/coffee-issue33-r216-original328-330.test.mjs
+      - name: Validate selected-source dependency event filters
+        run: node --test tests/coffee-issue33-r217-workflow-dependencies.test.mjs
       - name: Bounded chosen public HTTPS and Add Coffee Source Review
         if: always()
         env:
