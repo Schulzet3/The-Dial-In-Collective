@@ -89,17 +89,17 @@ export function selectedProductFormH2(markup,{source_url=''}={}){
   for(let depth=0;rootAt!==null&&depth<128;depth++){
    const root=nodes[rootAt];if(!root)break;
    const ra=coffeeHtmlAttributes(root.attributes);
-   if(root.tag==='div'&&String(ra.class||'').split(/\\s+/u).includes('main-product--root')){
+   if(root.tag==='div'&&String(ra.class||'').split(/\s+/u).includes('main-product--root')){
     sameSelectedRoot=Boolean(sourceHandle)&&ra['data-handle']===sourceHandle;
     break;
    }
    rootAt=root.parent;
   }
-  const directCart=/^\\/cart\\/add(?:[?#]|$)/iu.test(String(a.action||''));
+  const directCart=/^\/cart\/add(?:[?#]|$)/iu.test(String(a.action||''));
   const ownNarrative=directCart&&sameSelectedRoot&&parts.some(n=>{
    if(n.tag!=='div')return false;
    const attrs=coffeeHtmlAttributes(n.attributes);
-   if(!String(attrs.class||'').split(/\\s+/u).includes('product-form--block--description'))return false;
+   if(!String(attrs.class||'').split(/\s+/u).includes('product-form--block--description'))return false;
    let at=n.parent,identified=false;
    for(let depth=0;at!==null&&depth<16;depth++){
     const ancestor=nodes[at];
