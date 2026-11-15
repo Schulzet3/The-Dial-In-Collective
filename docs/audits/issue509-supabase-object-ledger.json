@@ -4282,6 +4282,21 @@
       "new_defects": 0,
       "production_writes": 0,
       "next": "pgss 2641-2720; provider definition and source-parity continuation"
+    },
+    {
+      "run": 263,
+      "prewrite_source_sha": "64e31b5f4e30d108c61eb8353ecc27449164ad39",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt_path": "docs/audits/issue509-coffee-source-admin-edge-parity-pgss-2026-11-15-run263-rank3041-3120.json",
+      "receipt_git_blob": "e767b80b3c74b754dea9379ba6a1ee98acfb88ba",
+      "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-15-run263.json",
+      "index_git_blob": "c4e9d8e93bf05f7d1cb1f1ac096a39e092cfba38",
+      "numeric_distinct": 2989,
+      "current_sql_definition_bodies": 7,
+      "source_chars": 16499,
+      "new_defects": 0,
+      "production_writes": 0,
+      "next": "3121-3200 and case-sensitive URL source normalization isolated check"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -21333,5 +21348,119 @@
       3040
     ],
     "status": "IN_PROGRESS_NO_PRODUCTION_WRITES"
+  },
+  "provider_source_identity_edge_pgss_run263": {
+    "receipt_path": "docs/audits/issue509-coffee-source-admin-edge-parity-pgss-2026-11-15-run263-rank3041-3120.json",
+    "receipt_blob_sha": "e767b80b3c74b754dea9379ba6a1ee98acfb88ba",
+    "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-15-run263.json",
+    "index_blob_sha": "c4e9d8e93bf05f7d1cb1f1ac096a39e092cfba38",
+    "provider": {
+      "observed_at": "2026-11-15 10:45:29.481824+00",
+      "app_tables": 52,
+      "rls_off": 0,
+      "app_functions": 114,
+      "policies": 41,
+      "migrations": 69,
+      "pgss_count": 4772,
+      "stats_reset": "2026-10-09 11:11:31.487298+00"
+    },
+    "sql_definitions": [
+      {
+        "signature": "private.dic_admin_set_member_access(p_member_id uuid, p_enabled boolean)",
+        "md5": "d7a339f277e9da0d8393d5efcdbc0e89",
+        "line_range": [
+          1,
+          44
+        ],
+        "verdict": "SECDEF admin-only; protects admins/self and in-flight deletion, admission and verified-email restoration, logs access events; real signed-in test #96-owned."
+      },
+      {
+        "signature": "private.dic_find_coffee_matches(p jsonb)",
+        "md5": "b4b845d29ccb65ac7922109dc89816b6",
+        "line_range": [
+          1,
+          118
+        ],
+        "verdict": "Admitted member; bounded request; evaluated verified active coffee and checked official sources, release labels, unique exact match; fuzzy alternatives await confirmation. Full-table similarity scan may scale; plan UNVERIFIED."
+      },
+      {
+        "signature": "private.dic_source_key(value text)",
+        "md5": "07e0ef286246fdae29b9151018296f79",
+        "line_range": [
+          1,
+          27
+        ],
+        "verdict": "Removes URL tracking params, lowercases host/path and retained query; potentially collapses case-sensitive source path identities. Needs isolated collision proof and approved #33 source usage before changes."
+      },
+      {
+        "signature": "private.dic_submit_coffee_auto(mid uuid, p jsonb)",
+        "md5": "e2b11c83a686a5a9949699cd23b52e13",
+        "line_range": [
+          1,
+          66
+        ],
+        "verdict": "Owner-scoped idempotent mutation; exact verified match reuse; ambiguous fuzzy candidate stays Pending; true new candidates auto-promoted under existing approval; provenance stored."
+      },
+      {
+        "signature": "private.dic_verified_roaster_page_proof(roaster_name text)",
+        "md5": "7ce32408a61728294ad667a9c985f5da",
+        "line_range": [
+          1,
+          36
+        ],
+        "verdict": "Checks recent verified roaster pages and active official-source attestations, returns null on domain conflict, does not gate universal URL preview; source attestation LEGACY ACTIVE."
+      },
+      {
+        "signature": "public.dic_admin_approve_own_coffee(submission_id uuid)",
+        "md5": "dad5489e9916e30aef63110f7b666954",
+        "line_range": [
+          1,
+          10
+        ],
+        "verdict": "Requires Admin via private.is_admin() before delegated canonical promotion; no anonymous EXECUTE."
+      },
+      {
+        "signature": "public.dic_admin_push_bootstrap_key(p_public_key text, p_private_key text)",
+        "md5": "637217a555887f78d812deb347455e4d",
+        "line_range": [
+          1,
+          23
+        ],
+        "verdict": "SECDEF service-role only, advisory lock and Vault persistence of VAPID secret, no secret return, no actual key retrieved."
+      }
+    ],
+    "edge_source_parity": [
+      {
+        "path": "supabase/functions/dic-admin-push-broker/index.ts",
+        "git_blob": "7c7a851f510dd5c21409cd8b9f6560b059dd64fd",
+        "live_source_byte_equal": true
+      },
+      {
+        "path": "supabase/functions/dic-admin-push-broker/core.mjs",
+        "git_blob": "e1a467cc0bb9d94ea824953eec88aaf8d6c428dd",
+        "live_source_byte_equal": true
+      },
+      {
+        "path": "supabase/functions/dic-member-approval-broker/index.ts",
+        "git_blob": "046781fa56426c761ded24679000212549999ba0",
+        "live_source_byte_equal": true
+      },
+      {
+        "path": "supabase/functions/dic-member-approval-broker/core.mjs",
+        "git_blob": "1bc82c0c0f7e90bb86dd7da895c18f9c4e015c5a",
+        "live_source_byte_equal": true
+      }
+    ],
+    "pgss_rank_range": [
+      3041,
+      3120
+    ],
+    "new_fingerprints": 71,
+    "cumulative_distinct": 2989,
+    "possible_issues": [
+      "URL path case collision, UNVERIFIED"
+    ],
+    "status": "BASELINE_IN_PROGRESS",
+    "next": "3121-3200, source isolation/URL collision, full provider parity"
   }
 }
