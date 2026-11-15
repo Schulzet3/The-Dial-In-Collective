@@ -137,9 +137,13 @@ export function discoverCompatibleAuditSupport({queue,restoredPaths,pinnedReadyP
     !Array.isArray(pinnedReadyPaths)||!Array.isArray(selectedReadyItems))return [];
  // The previous production commit already contains the helper. A newer
  // unfinished R215 mutation cannot replace it or erase its 88 existing tests.
- if(sourceObjectAt(publishedSourceSha,spec.path)!=='100644:'+spec.historicalBlobSha||
-   sourceObjectAt(developmentSourceSha,spec.path)!=='100644:'+spec.unfinishedBlobSha)
-   return [];
+ const published=sourceObjectAt(publishedSourceSha,spec.path);
+ const current=sourceObjectAt(developmentSourceSha,spec.path);
+ if(current==='100644:'+spec.unfinishedBlobSha&&
+    published!=='100644:'+spec.historicalBlobSha)
+   throw Error('Published historical audit helper bytes do not match reviewed source');
+ if(published!=='100644:'+spec.historicalBlobSha||
+    current!=='100644:'+spec.unfinishedBlobSha)return [];
  const owner=queue?.items?.find(i=>i.id==='DIC-Q-33-r215-original325-327-current-offer-h2-water-decaf');
  const runtime='src/server/coffee-selected-offer-h2.mjs';
  if(owner?.issue!==33||!['IN_PROGRESS','TESTING','BLOCKED'].includes(owner.state)||

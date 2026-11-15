@@ -332,7 +332,6 @@ test('#2837 original R215 audit helper restores ONLY exact reviewed pre-R215 blo
  const map=new Map([
   [spec.historicalSourceSha+':'+spec.path,'100644:'+spec.historicalBlobSha],
   [candidate.publishedSourceSha+':'+spec.path,'100644:'+spec.historicalBlobSha],
-  [candidate.publishedSourceSha+':'+spec.path,'100644:'+spec.historicalBlobSha],
   [candidate.developmentSourceSha+':'+spec.path,'100644:'+spec.unfinishedBlobSha],
   [candidate.developmentSourceSha+':src/server/coffee-selected-offer-h2.mjs','100644:'+'c'.repeat(40)]
  ]);
@@ -371,8 +370,9 @@ test('#2837 published audit helper survives unfinished R215 while READY tests st
   selectedReadyItems:[{id:'DIC-Q-33-r210',merged_source_sha:selected}]};
  assert.deepEqual(discoverCompatibleAuditSupport(args),[spec.path]);
  assert.deepEqual(discoverCompatibleAuditSupport({...args,queue:{items:[{...owner,state:'READY'}]}}),[]);
- assert.deepEqual(discoverCompatibleAuditSupport({...args,
-  sourceObjectAt:(ref,path)=>ref===pub&&path===spec.path?null:read(ref,path)}),[]);
+ assert.throws(()=>discoverCompatibleAuditSupport({...args,
+  sourceObjectAt:(ref,path)=>ref===pub&&path===spec.path?null:read(ref,path)}),
+  /Published historical audit helper bytes/);
  assert.throws(()=>discoverCompatibleAuditSupport({...args,
   sourceObjectAt:(ref,path)=>ref===selected&&path===spec.path?
     '100644:'+('e'.repeat(40)):read(ref,path)}),
