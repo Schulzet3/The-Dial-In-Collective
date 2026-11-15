@@ -14817,24 +14817,29 @@
     {
       "id": "DIC-Q-28-owner-drive-form-referrer-20261115",
       "issue": 28,
-      "pr": null,
+      "pr": 2855,
       "title": "Fix owner Google Drive setup native form 403 caused by no-referrer Origin:null",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "6ce672e6b8dfbb6cda8bda616d1411ad9447aaa6",
       "scope_paths": [
         "netlify/functions/dic-owner-drive-connect.mjs"
       ],
       "tests": [
         "Previous owner setup exact CI 5/5 SUCCESS but tests assumed a synthetic Origin header; did not cover browser Referrer-Policy impact.",
-        "Added regression of form response policy, form valid-Origin POST, rejected null/missing origins, and no-referrer OAuth redirect; actual hosted CI pending."
+        "Added regression of form response policy, form valid-Origin POST, rejected null/missing origins, and no-referrer OAuth redirect; actual hosted CI pending.",
+        "Exact PR-head 810b8144a18fde2fc33e6bf4f165ad6966ea8acc GitHub SUCCESS: approval 43680988283, validate Node/lint/one build 43680988281, cloud-tests and mobile-browser-qa 43680988323, SQL 43680988310, separate security-inventory 43680988301 SUCCESS; original frozen603 43680988256 SKIPPED, not a PASS and not in scope.",
+        "Nonforce PR #2855 squash merged 6ce672e6b8dfbb6cda8bda616d1411ad9447aaa6; exact merged function blob 28c78dc078a49263e2f58d1e901579f86698a92a and test blob 44b2ec0ad58ad3c49f82b8eb89978c99316a8b58 MATCH passing PR head. Merged approval 43681251442, validate 43681251357 and cloud/browser 43681251393 SUCCESS; no SQL source change, PR exact SQL PASS."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "New scoped source/test change requires same-commit GitHub journal, tested PR, nonforce merge, exact CI and subsequent owner Publish. Live browser acceptance not yet verified.",
-        "Changed Netlify production passphrase after last published function requires new owner-authorized release to capture up-to-date runtime value."
+      "ci_runs": [
+        43680988283,
+        43680988281,
+        43680988323,
+        43680988310,
+        43680988301
       ],
+      "blockers": [],
       "owner_source": "Owner November 15, 2026: 'No that's not the case. They matched before I made that change. It's almost certainly something else. Find it. don't be lazy.' Preceding owner instruction 'Get this fixed' authorizes development, not publication.",
-      "notes": "MDN: Referrer-Policy:no-referrer causes Origin:null for navigate-mode HTML POST; source exact Origin guard returns 403 before passphrase compare. Preserve strict Origin check: only GET form gets same-origin referrer policy. No new Google/DB/member/backup writes, courier remains Apps Script; release requires new explicit Publish."
+      "notes": "MDN: Referrer-Policy:no-referrer causes Origin:null for navigate-mode HTML POST; source exact Origin guard returns 403 before passphrase compare. Preserve strict Origin check: only GET form gets same-origin referrer policy. No new Google/DB/member/backup writes, courier remains Apps Script; release requires new explicit Publish.\n2026-11-15 READINESS VERIFIED for one narrow browser-only form header fix, not a published release. Real root cause: previous GET `Referrer-Policy:no-referrer` causes navigate-mode HTML form POST `Origin:null`; unchanged strict server Origin guard returns 403 before password verification. GET form now `Referrer-Policy:same-origin`; OAuth redirects/callbacks remain no-referrer; strict password/Origin and owner-only Drive access preserved. Tested source Git blob 28c78dc078a49263e2f58d1e901579f86698a92a, test blob 44b2ec0ad58ad3c49f82b8eb89978c99316a8b58; five PR-source CI checks SUCCESS plus merged approval, validate, browser SUCCESS, zero remaining source blockers. No provider write, publication, SQL, member or archive changes. NETLIFY CURRENT REMAINS prior release 8628da42 / 6af93efe, thus user may STILL SEE 403 until fresh owner Publish. Current Netlify Production passphrase was edited after that old deploy and is picked up only on fresh Git-connected deploy. Owner's previous Publish grant consumed, new explicit owner Publish required for future release controller. Direct live header value not recorded in observability; causal mechanics source/standards verified."
     }
   ],
   "history": [
