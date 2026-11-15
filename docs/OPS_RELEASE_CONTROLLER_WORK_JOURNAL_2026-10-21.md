@@ -1,3 +1,9 @@
+## November 15 2026 — #28 browser-only Google owner consent and safe push-triggered smoke (DRAFT) [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=1dfa938956de51c9d5cd04d1df7254403ef5ec8c preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+- Owner expressly approved no-Mac browser OAuth and automatic GitHub-managed backup handoff. Browser setup endpoint is a separate development PR #2818, disabled by default; not yet published or provider-tested. This ops draft changes only the *inert* proof workflow trigger from manual workflow_dispatch to a later ChatGPT-created main docs/DIC_DRIVE_OAUTH_SMOKE_REQUEST.json push. This file does NOT exist in the new commit, so no smoke or archive job runs. The narrow workflow exercises only a disposable Drive file, never production DB dump or real archive. No manual owner GitHub trigger, no live Apps Script disruption.
+- Preserve original main backup schedule, age encryption, exact published source pin, archives, Drive folder and watchdog. Owner must first create existing-project Web OAuth client, provide private Netlify+GitHub secrets via respective UIs after separate owner Publish, and grant drive.file exact folder. After successful live browser consent and an independently verified GitHub Actions runner smoke, a separately reviewed future ops activation of guarded scheduled courier and proof of one real ciphertext ZIP may permit disabling Apps Script. No provider changes, grant, release, production SQL/member write, key sharing or automatic cutover.
+- New workflow SHA a32a08b130d4c8c8dbad1eebdaeebda7038ba068, focused test SHA 2621f4d74654336515dc6012328e2b7b35092718; exact PR CI pending. This is development/ops DRAFT, not READY or DEPLOYED.
+
 ## November 14, 2026 — #28 personal-Drive OAuth courier preparation (DRAFT ONLY) [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=c5b555be6a2fab5943038cdcb2b9e2e641a98fbe preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
