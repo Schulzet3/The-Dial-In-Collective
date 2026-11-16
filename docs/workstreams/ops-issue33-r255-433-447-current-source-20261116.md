@@ -21,3 +21,9 @@ DIC_PREFLIGHT_VERIFIED development_sha=064b9e0522c4df497cf9824977ce0b120181ee0d 
 DIC_PREFLIGHT_VERIFIED development_sha=064b9e0522c4df497cf9824977ce0b120181ee0d preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
 - Read back first source patch Git blob and caught double-escaped whitespace tokens in the newly authored narrow metaphor regex before treating it as passing evidence; restored real JS regex `\\s` whitespace metacharacters (not literal backslash-s). The prior PR head is historical evidence only; current head must independently run all source-bound tests and afterproof. No policy, source fact, original data, member or production change.
+
+## November 16, 2026 UTC — R255 queue intake for actual parser source change [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=064b9e0522c4df497cf9824977ce0b120181ee0d preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- First PR-head approval 43946827777 FAILED at required `release-queue.mjs --enforce-intake`: `src/server/coffee-flavor-evidence.mjs` not listed in an IN_PROGRESS/TESTING/READY queue item. This new independent `DIC-Q-33-r255-selected-sensory-sky-scene-guard` is deliberately TESTING and records that failure and exact red-first evidence. It makes NO unrelated READY/DEPLOYED change; original 603 scope stays OPEN. Corrected-head CI and safe merge/readback still unverified.
