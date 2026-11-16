@@ -4431,6 +4431,19 @@
       "production_writes": 0,
       "source_status": "TESTING",
       "next": "Isolated PostgreSQL17 exact-source test, nonforce development merge, readback CI; no production publication"
+    },
+    {
+      "run": "R294b Nov16 2026",
+      "source_sha": "0395c1bf45a9be5e0944fbbb6e9bf23917bf6976",
+      "preflight_blob": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r294b-credential-guard-merge-exact-ci-20261116.json",
+      "pr_merged": 3073,
+      "synthetic_pg17_verified": true,
+      "pr_head_checks_passed": 8,
+      "push_node_cancelled": true,
+      "baseline": "IN_PROGRESS",
+      "provider_writes": 0,
+      "next": "Descendant exact CI readback / #96 hosted Auth / first new provider definition"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -22204,5 +22217,19 @@
     "production_writes": 0,
     "source_status": "TESTING",
     "next": "Source-bound isolated SQL test and exact PR CI before development merge; hosted privacy risk remains unproven actual exposure"
+  },
+  "provider_import_additional_credential_key_guard_merged_run294b": {
+    "receipt_path": "docs/audits/issue509-r294b-credential-guard-merge-exact-ci-20261116.json",
+    "preflight_development_sha": "0395c1bf45a9be5e0944fbbb6e9bf23917bf6976",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "merged_source_sha": "8f11d1b8c93cf6255dfa43de095a48ace95f5dcb",
+    "pr": 3073,
+    "pr_applicable_ci_passed": 8,
+    "merge_push_completed_success": 5,
+    "merge_push_node": "CANCELLED_NOT_PASS",
+    "source_blobs_unchanged": true,
+    "provider_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "queue": "TESTING"
   }
 }

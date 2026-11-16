@@ -15326,19 +15326,35 @@
       "pr": 3073,
       "title": "Reject additional credential-bearing key spellings in import backups before private source archive",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "8f11d1b8c93cf6255dfa43de095a48ace95f5dcb",
       "scope_paths": [
         "supabase/migrations/20261116210000_dic_import_additional_credential_keys.sql"
       ],
       "tests": [
         "Read-only live SQL function and stored archive-path inspection; synthetic normalized-key expression probe reproduced missed client_secret, private_key and bearer_token, without private data.",
         "Disposable PostgreSQL17 and source-bound CI NOT YET RUN; do not promote READY.",
-        "Initial PR-head approval run 43954716386 FAILED because queue scope_paths wrongly included SQL tests and CI runner, which are nondeployable. Corrected schema; awaiting exact retry. Frozen603 SKIPPED and unrelated #33 R171 live selected-source check failed (do not call PASS)."
+        "Initial PR-head approval run 43954716386 FAILED because queue scope_paths wrongly included SQL tests and CI runner, which are nondeployable. Corrected schema; awaiting exact retry. Frozen603 SKIPPED and unrelated #33 R171 live selected-source check failed (do not call PASS).",
+        "Exact PR #3073 head df79ef899f0879c655d2d8f16aacb76bafec5743: 8/8 applicable CI checks completed SUCCESS (isolated SQL 43954934106, Node22 43954934119, browser 43954934089, approval 43954934340, Python 43954934182, two selected 43954934209/43954934074). Frozen corpus 43954934135 SKIPPED, not certified.",
+        "Exact merged development SHA 8f11d1b8c93cf6255dfa43de095a48ace95f5dcb: isolated PG17/JWT/backup SQL 43955665426, approval 43955665760, Python 43955665495, browser/UX 43955665758 and #33 R171 43955665808 SUCCESS. Node22 43955665456 was CANCELLED by concurrent #33/#455 development commits; not a failure or PASS. Source migration/test/runner blobs unchanged at current descendant development 0395c1bf45a9be5e0944fbbb6e9bf23917bf6976."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        43954934106,
+        43954934119,
+        43954934089,
+        43954934340,
+        43954934182,
+        43954934209,
+        43954934074,
+        43955665426,
+        43955665760,
+        43955665495,
+        43955665758,
+        43955665808
+      ],
       "blockers": [
-        "Exact-source isolated PostgreSQL17 regression, applicable security/governance/Node22 checks, and safe integration remain pending.",
-        "No actual credential exposure confirmed; #96 privacy acceptance and separate publication remain unverified."
+        "Genuine hosted Auth/private import behavior and provider-console configuration remain UNVERIFIED under #96; isolated synthetic SQL source only.",
+        "Current descendant development Node22 exact-head result unconfirmed; merged-source Node22 run cancelled due concurrency. Reuse unchanged PR-head PASS, no false merged-source PASS.",
+        "Separate owner one-command publication approval required; production live import definition remains prior MD5 2af6a48d0fe80841fcc27c1f1d5532e3."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
       "notes": "Additive development-only function body guard; no production/provider writes, no member data changes, no migration/backups altered; owner Publish separately required."
