@@ -3359,6 +3359,24 @@
         43954030348,
         43954030185
       ]
+    },
+    {
+      "id": "LIVE-20261116-R311-OVERVIEW-UNRATED-CONTEXT",
+      "type": "live_source_code_reproducible_rating_feedback_context_mismatch",
+      "title": "Coffee overview latest shot feedback selector accepts partial archived ratings while engine recommendation rejects those ratings",
+      "source_branch": "development/backend-foundation",
+      "source_commit_sha": "c98e27203197038e9203c064419b0d6e5d90a0ff",
+      "source_git_blobs": {
+        "site/lib/ui.js": "a55ceecb3f202028121e0aff1130259ef30d9939",
+        "site/lib/constants.js": "d3559dc1c9560c4d68fbcad1dc91e3a792a100a2",
+        "site/lib/engine.js": "8e5e93f42f02444533aee9256569baefc6028325",
+        "site/cloud/main.js": "0a5274ec660ad435b499d58c9b5985ae400f37ea"
+      },
+      "access": "IMMUTABLE_GITHUB_CURRENT_UI_ENGINE_MAIN_AND_R306_TEST_READ",
+      "review_status": "R455-311_SAFE_SOURCE_AND_TEST_CANDIDATE_EXACT_HOSTED_CI_PENDING",
+      "evidence_grade": "DIRECT_STATIC_CODE_PATH_AND_THREE_SYNTHETIC_REGRESSION_CASES_AUTHORED_NOT_YET_EXECUTED",
+      "claims_verified_externally": "No empirical espresso quality or production member observations; direct source shows overview selection did not require all five ratings unlike engine R306 advice eligibility. The latest measured but partial imported shot could displace earlier genuinely five-rated overview feedback and display a Finish ratings panel rather than the older rated instruction.",
+      "github267_literal_review_credit": 0
     }
   ],
   "evidence_checks": [
@@ -10316,6 +10334,24 @@
       "grade": "EXACT_SOURCE_NODE22_THREE_FOCUSED_SYNTHETIC_CASES_SUCCESS_PR_AND_MERGED_5266_PASS_0_FAIL_6_INTENTIONAL_SKIP",
       "result": "PASS_R310_3_OF_3_SOURCE_AND_MERGE_NODE22_43953340601_43954030164; CLOUD_MOBILE_43953341131_43954030348_SUCCESS; SQL_43953340577_SECURITY_43953340656_GOVERNANCE_43953340658_43954030185_SUCCESS",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CODE-311-A",
+      "source": "LIVE-20261116-R311-OVERVIEW-UNRATED-CONTEXT",
+      "claim": "site/cloud/main.js opens coffee overview with last=lastRecipeContextShot(shots,c.id,rec,v); advice=last?nextAdvice(s,last,rec):null. Before R311 the UI selector checked matching physical context but not tastesComplete, while nextAdviceRaw only returns Finish your taste ratings for a partial row and R306 engine selects an older complete row for its starting reference.",
+      "source_locator": "site/cloud/main.js coffee-card loop; site/lib/ui.js lastRecipeContextShot; site/lib/engine.js nextAdviceRaw and R306 eligible latest candidate",
+      "grade": "DIRECT_GITHUB_SOURCE_INSPECTION_NO_RUNTIME_OR_MEMBER_OBSERVATION",
+      "result": "REPRODUCED_STATIC_DIFFERENCE_FIX_CANDIDATE_NODE_CI_PENDING",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CODE-311-B",
+      "source": "LIVE-20261116-R311-OVERVIEW-UNRATED-CONTEXT",
+      "claim": "A narrow tastesComplete filter skips incomplete imported feedback only in the overview selection; valid five-rated newer shots, same-setup/style/basket/feed/calibration and physical bounds remain selected; historical partial ratings, measurements and private notes remain unchanged.",
+      "source_locator": "site/lib/ui.js lastRecipeContextShot; tests/issue455-r311-overview-unrated-advice.test.mjs",
+      "grade": "SYNTHETIC_TESTS_AUTHORED_NOT_YET_HOSTED_PASS",
+      "result": "PENDING_EXACT_HEAD_NODE22_AND_CLOUD_MOBILE_GOVERNANCE",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -10547,24 +10583,24 @@
     "R455-306 FINAL: PR #3055 source/test/journal and queue/ledger nonforce merged f3f17d3a386211388023a4a38f7a9ab32abe8cbb; all six files match PR head; final Node 5236 PASS/0 FAIL/6 intentional SKIP on both PR head 43912006010 and merge 43912750124; head cloud 43912006318, SQL 43912006372, security 43912006276, approval 43912006152, merged cloud 43912750206 and governance 43912750041 SUCCESS. Original approval and first Node failures corrected, retained. Development READY only pending this documentation reconciliation CI; no deploy, member, science or #267 literal credit.",
     "R455-307: verify and integrate publisher-first secondary brewing REVIEW (2025 DOI 10.3390/beverages11050125), three bounded evidence checks and one no-change policy hold; direct MDPI HTML sections checked; do not infer universal 25-30s/6.5g/9bar targets, confuse cup serving temperature with brew temperature, certify original PDF/primary studies or claim measured recommendation efficacy. Original Oct29 ZIP and S019 remain inaccessible/unhashed. Code/Locked policy unchanged. After docs-only CI and nonforce merge, crosslink issue #455; #267 zero semantic line credit.",
     "R455-309: verify original Zenodo DOI software and tag-linked source provenance for Waszkiewicz model; author preprocessing 100s/31-point smoothing and unweighted static/TDS fits are research-method boundaries only, no universal pressure/taste claim; full archive binary/run reproduction remains unverified. Exact docs-only source-bound CI/nonforce [skip netlify] merge and merged governance required; original Oct29 pack/S019 unresolved; no #267 literal credit.",
-    "R455-310: source-only conditional markup integrity fix merged 510bc9d7d6b53d3d1fc0de3d92e7de7f20b276a2, three synthetic cases and merged CI PASS. Development READY only, production_deployed=false. Continue next independent #455 source/UX source-hash-bound increment, no direct deployment or new member capture; original S019/Oct29 ZIP not independently verified."
+    "R455-310: source-only conditional markup integrity fix merged 510bc9d7d6b53d3d1fc0de3d92e7de7f20b276a2, three synthetic cases and merged CI PASS. Development READY only, production_deployed=false. Continue next independent #455 source/UX source-hash-bound increment, no direct deployment or new member capture; original S019/Oct29 ZIP not independently verified.",
+    "R455-311: verify exact-source CI for SAFE overview feedback selector requiring five complete ratings, fix/retest failures, nonforce [skip netlify] merge and readback tested Git blobs, exact merged CI and reconcile sole development queue item. Do not alter original incomplete imports or deploy."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-309_AUTHOR_SOFTWARE_PROVENANCE_DOCS_CANDIDATE",
+    "run_id": "R455-311_OVERVIEW_COMPLETE_RATINGS_SOURCE_TEST_CANDIDATE",
     "date": "2026-11-16",
-    "development_preflight_sha": "a28c9bc38f20cfaf8e7194a816d7994a72f3962f",
+    "development_preflight_sha": "c98e27203197038e9203c064419b0d6e5d90a0ff",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
     "source_counts": {
-      "sources": 172,
-      "evidence_checks": 526,
-      "proposals": 237
+      "sources": 174,
+      "evidence_checks": 530,
+      "proposals": 239
     },
-    "source_tag_commit": "fbc33d3380a9c8cff2467bae70fec7137a6ed46f",
     "production_deployed": false,
     "github267_literal_review_credit": 0,
     "owner_approval_now_required": false,
-    "ci": "NOT_RUN_AT_AUTHORING",
-    "next": "Verify four applicable exact PR-head checks, then nonforce [skip netlify] merge, readback merged 2 blobs and push-event governance; no deploy. Full author ZIP/CPU reproduction, Oct29 pack and S019 original remain unverified."
+    "ci": "NOT_RUN_LOCAL_OR_HOSTED_YET",
+    "next": "Verify exact PR-head CI; repair if necessary, nonforce merge only after success, reconcile docs queue READY when justified. No deploy."
   },
   "policy_decisions_resolved": [
     {
@@ -16140,6 +16176,34 @@
       "github267_literal_review_credit": 0,
       "release_queue_status": "READY_DEVELOPMENT_ONLY",
       "evidence_qualification": "Current published prefs SQL enforces F/C. R310 sanitizes archived in-memory values nevertheless; no demonstrated cross-user XSS or production incident."
+    },
+    {
+      "id": "R455-PROP-311-OVERVIEW-RATED-CONTEXT",
+      "severity": "P2_OVERVIEW_FEEDBACK_CONSISTENCY",
+      "source": [
+        "LIVE-20261116-R311-OVERVIEW-UNRATED-CONTEXT"
+      ],
+      "evidence": [
+        "R455-EV-CODE-311-A",
+        "R455-EV-CODE-311-B"
+      ],
+      "evidence_grade": "DIRECT_STATIC_APP_CODE_PLUS_SYNTHETIC_TESTS_PENDING_CI",
+      "finding": "Coffee overview can display most recent incomplete legacy rating instead of older genuinely rated context even though engine R306 explicitly excludes incomplete taste evidence.",
+      "user_benefit": "Show actionable shot feedback from the latest fully rated context without falsifying incomplete taste ratings or changing saved history.",
+      "current_locked": "All five explicit 1-5 ratings required for personal taste advice; missing is not all-green. Preserve original measured shot, private notes/history, one controlled recommendation change, espresso style/feed/grinder versions and offline data.",
+      "current_app": "site/lib/ui.js lastRecipeContextShot omitted tastesComplete check while site/cloud/main.js used it for advice and chips; engine R306 already rejects incomplete ratings.",
+      "proposed_change": "SAFE: require tastesComplete in overview feedback shot selector only; preserve all existing Context/physical filters and original archive.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "SAFE_SOURCE_TEST_CANDIDATE_NOT_MERGED_NOT_READY",
+      "files": [
+        "site/lib/ui.js",
+        "tests/issue455-r311-overview-unrated-advice.test.mjs"
+      ],
+      "test_plan": "Three positive/negative Node22 synthetic groups; exact PR-head Node22/lint/build, cloud/mobile/browser/offline, SQL/privacy, security and governance as applicable; exact merge Node22/UX/governance. NOT RUN locally; no real member or cup-quality claims.",
+      "release_queue": "DIC-Q-455-r311-overview-unrated-advice",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "changeScope": {

@@ -1,4 +1,4 @@
-import {SCALES,tasteSeverity,tasteLabel,tempDisplay,CONFIG,finite} from './constants.js';
+import {SCALES,tasteSeverity,tasteLabel,tempDisplay,CONFIG,finite,tastesComplete} from './constants.js';
 export const e = x => String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const paths={
  signout:'M9 4H4v16h5m5-12 4 4-4 4m-6-4h10',
@@ -112,6 +112,9 @@ export function lastRecipeContextShot(shots,coffeeId,recipe,version){
   if(!sh||sh.hidden||sh.coffeeId!==coffeeId||sh.setupVersionId!==version.id||
    sh.calibrationId!==version.calibrationId||sh.style!==recipe.style||
    sh.basketId!==recipe.basketId||sh.feedMode!==recipe.feedMode||
+   // An incomplete imported rating stays in History but must not displace
+   // the newest genuinely five-rated shot used for actionable feedback.
+   !tastesComplete(sh.tasteScales)||
    typeof sh.timestamp!=='string'||!sh.timestamp.trim())continue;
   // Different ISO offsets must be compared as actual instants. Preserve
   // legacy undated/malformed shots without making them current feedback.
