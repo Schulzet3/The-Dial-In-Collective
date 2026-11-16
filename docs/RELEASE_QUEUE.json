@@ -15221,8 +15221,8 @@
       "issue": 455,
       "pr": 3055,
       "title": "Exclude incomplete archived taste ratings from next-shot recommendation evidence",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "f3f17d3a386211388023a4a38f7a9ab32abe8cbb",
       "scope_paths": [
         "site/lib/engine.js"
       ],
@@ -15230,20 +15230,23 @@
       "tests": [
         "Source-bound R306: current recommendation() selects physically valid newest shot without requiring all five recorded taste ratings; an incomplete legacy cached next step can displace earlier fully rated advice. Three synthetic regression cases authored, but no hosted PASS asserted yet.",
         "Original PR-head approval 43910679133 FAILED: untracked site/lib/engine.js. This IN_PROGRESS intake corrects that governance error; subsequent exact-source workflow checks, Node22, cloud/browser/mobile/offline, SQL/security and postmerge governance remain pending.",
-        "Original frozen603 workflow 43910679285 SKIPPED (not PASS); unrelated #33 and #267 tests are not applicable certification."
+        "Original frozen603 workflow 43910679285 SKIPPED (not PASS); unrelated #33 and #267 tests are not applicable certification.",
+        "Original exact head 74e1887 Node22 43911288068 FAILED (5,235 PASS / 1 FAIL / 6 SKIP) solely stale existing R083 expected initial 95 C; all three new R306 tests (#4670–4672) PASS. Corrected one R083 synthetic regression with a fresh SAME-COMMIT preflight receipt preserving actual earlier rated 92 C in one-control advice and never certifying temperature as successful personal evidence.",
+        "Final exact amended PR head 96f0fb251bee046cf4d53d26a7674d20fa114c7e: Node22/lint/build 43912006010 SUCCESS (5,236 PASS/0 FAIL/6 intentional SKIP; R306 3/3 and corrected R083 PASS), approval/governance 43912006152 SUCCESS, cloud/mobile/browser/offline 43912006318 SUCCESS, isolated SQL/privacy 43912006372 SUCCESS, security inventory 43912006276 SUCCESS.",
+        "PR #3055 nonforce two-parent [skip netlify] merged f3f17d3a386211388023a4a38f7a9ab32abe8cbb; all six source/test/journal/queue/ledger Git blobs exactly equal tested PR head, no deletions. Exact merged Node22/lint/build 43912750124 SUCCESS 5,236 PASS/0 FAIL/6 SKIP including all four targeted regressions; merged cloud/browser/mobile/offline 43912750206 and approval/governance 43912750041 SUCCESS. Source-identical head SQL/security PASS reused; original603 SKIPPED NOT PASS."
       ],
       "ci_runs": [
-        43910679133,
-        43910679148,
-        43910679131,
-        43910679101,
-        43910679063
+        43912006010,
+        43912006152,
+        43912006318,
+        43912006372,
+        43912006276,
+        43912750124,
+        43912750206,
+        43912750041
       ],
-      "blockers": [
-        "New corrected head exact-source five applicable GitHub workflow checks must complete SUCCESS before nonforce merge.",
-        "Merged SHA/Git blobs and applicable governance must be read back before any READY certification."
-      ],
-      "notes": "Preserves all original private shot measurements, five ratings (including missing), notes, family history, prior grind calibration, espresso styles, offline records and current Locked numeric rules. No real member incident observed, no efficacy or production claim. Development TESTING/IN_PROGRESS only; no deploy, no new telemetry, no owner Publish.",
+      "blockers": [],
+      "notes": "Preserves all original private shot measurements, five ratings (including missing), notes, family history, prior grind calibration, espresso styles, offline records and current Locked numeric rules. No real member incident observed, no efficacy or production claim. Development TESTING/IN_PROGRESS only; no deploy, no new telemetry, no owner Publish.\n2026-11-16 final source-verified development-only READY at merge f3f17d3a386211388023a4a38f7a9ab32abe8cbb; six exact Git blobs checked, head five applicable checks and merged Node/cloud/governance SUCCESS. Initial source-head approval HOLD and first amended Node R083 synthetic expectation FAIL were repaired, preserved as failures. All 5 taste inputs, measured shot/notes/history, one-control recipe, calibration and offline/Community privacy preserved; no user outcomes inferred. Owner Publish not authorized; production_deployed=false.",
       "production_deployed": false
     }
   ],
@@ -17887,6 +17890,15 @@
       "source_sha": "92a1a80be5c01cae138404c27c8e5f2ccb2941d7",
       "production_deployed": false,
       "evidence": "PR #3046 exact head 7e0d425c72687902215f4f18f58ac6378225dcfa and nonforce two-parent [skip netlify] merged 92a1a80be5c01cae138404c27c8e5f2ccb2941d7; Node head 43890576519 and merged 43891508442 each 5225 PASS/0 FAIL/6 intentional SKIP including R304 tests; five head CI and merged browser/governance SUCCESS. Five source/test/journal/queue/ledger Git blobs identical. No deployment."
+    },
+    {
+      "date": "2026-11-16",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r306-unrated-archived-advice",
+      "state": "READY",
+      "source_sha": "f3f17d3a386211388023a4a38f7a9ab32abe8cbb",
+      "production_deployed": false,
+      "evidence": "PR #3055 exact amended head 96f0fb2 and nonforce [skip netlify] merge f3f17d3a386211388023a4a38f7a9ab32abe8cbb, six exact blobs matched, five PR-head workflows SUCCESS (Node 43912006010 5236 PASS/0 FAIL/6 SKIP, cloud 43912006318, SQL 43912006372, security 43912006276, approval 43912006152), merged Node 43912750124 5236 PASS/0 FAIL/6 SKIP and cloud 43912750206 / governance 43912750041 SUCCESS. R306 3 and refined R083 PASS; earlier CI failures documented. Development only, no deployment."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
