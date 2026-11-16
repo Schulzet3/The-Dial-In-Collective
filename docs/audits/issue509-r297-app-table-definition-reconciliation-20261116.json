@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R297",
+  "date_utc": "2026-11-16",
+  "authority": "Owner #509 development-only, production provider strictly read-only, code-quality first",
+  "preflight": {
+    "development_sha": "c557fd4e42c1dbc010a49323aa9a0f7fb8f569b9",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "git_blob_content_verified": true
+  },
+  "ref_context": {
+    "main_sha": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+  },
+  "provider": {
+    "ref": "azviqqejypsefzilgonr",
+    "project_status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.11.0.003",
+    "current_application_tables": 52,
+    "current_application_sql_functions": 114,
+    "pg_stat_statements_count": 4859,
+    "unavailable_pgss_numeric_rank_start": 4961
+  },
+  "definition_hash_method": "PostgreSQL MD5 of concat_ws('\\n===\\n', direct numbered column declaration fields (attnum,name,type,notnull,generated,default) joined by newline, named complete constraint DDL, complete named index DDL, complete named policy expressions, complete named trigger DDL, relacl::text and relrowsecurity::text); reads are scoped to individual live application tables. Hashes do not cover opaque provider runtime or secret values.",
+  "objects": [
+    {
+      "name": "private.dic_admin_account_delete_operations",
+      "visible_catalog_definition_md5": "b837b2679955bf40c2d7079a1a9e5352",
+      "definition_string_chars": 1207,
+      "columns_full_read": 11,
+      "constraints_full_read": 4,
+      "indexes_full_read": 2,
+      "policies_full_read": 0,
+      "triggers_full_read": 0,
+      "semantic_review": "DIRECT_COMPLETE_VISIBLE_TABLE_DEFINITION_COMPONENTS",
+      "verdict": "ACTIVE ADMIN deletion workflow transaction receipts; partial unique target_id for phase not completed, preserve. Live target FK absent intentionally allows post-delete receipt."
+    },
+    {
+      "name": "private.dic_admin_push_runtime",
+      "visible_catalog_definition_md5": "4b293ba980eea692414a99930ca12ea2",
+      "definition_string_chars": 409,
+      "columns_full_read": 4,
+      "constraints_full_read": 2,
+      "indexes_full_read": 1,
+      "policies_full_read": 0,
+      "triggers_full_read": 0,
+      "semantic_review": "DIRECT_COMPLETE_VISIBLE_TABLE_DEFINITION_COMPONENTS",
+      "verdict": "ACTIVE Admin push/VAPID broker singleton; Vault secret referenced by ID only, no secret values inspected."
+    },
+    {
+      "name": "private.dic_member_approval_deliveries",
+      "visible_catalog_definition_md5": "60da661fbf3def8fd56c4b0bdf4bae6c",
+      "definition_string_chars": 1375,
+      "columns_full_read": 10,
+      "constraints_full_read": 6,
+      "indexes_full_read": 2,
+      "policies_full_read": 0,
+      "triggers_full_read": 0,
+      "semantic_review": "DIRECT_COMPLETE_VISIBLE_TABLE_DEFINITION_COMPONENTS",
+      "verdict": "ACTIVE two-channel approval delivery queue; bounded attempts, event/member FKs, poll ordering index."
+    },
+    {
+      "name": "private.dic_member_approval_poll_gate",
+      "visible_catalog_definition_md5": "2410b6f4ca4a8b02cbeac5d03affbf95",
+      "definition_string_chars": 441,
+      "columns_full_read": 2,
+      "constraints_full_read": 2,
+      "indexes_full_read": 1,
+      "policies_full_read": 0,
+      "triggers_full_read": 0,
+      "semantic_review": "DIRECT_COMPLETE_VISIBLE_TABLE_DEFINITION_COMPONENTS",
+      "verdict": "ACTIVE service-only approval-poll throttle; singleton and -infinity starting gate."
+    },
+    {
+      "name": "private.dic_official_source_attestations",
+      "visible_catalog_definition_md5": "32ac38b0d7c7269820117c8df7e6ccfb",
+      "definition_string_chars": 824,
+      "columns_full_read": 6,
+      "constraints_full_read": 4,
+      "indexes_full_read": 1,
+      "policies_full_read": 1,
+      "triggers_full_read": 0,
+      "semantic_review": "DIRECT_COMPLETE_VISIBLE_TABLE_DEFINITION_COMPONENTS",
+      "verdict": "LEGACY ACTIVE verified roaster source provenance, not retired public directory; preserve source attestation."
+    },
+    {
+      "name": "private.dic_signup_review_events",
+      "visible_catalog_definition_md5": "782a1c11c8d2801a72e79114219be0e7",
+      "definition_string_chars": 905,
+      "columns_full_read": 6,
+      "constraints_full_read": 4,
+      "indexes_full_read": 1,
+      "policies_full_read": 0,
+      "triggers_full_read": 1,
+      "semantic_review": "DIRECT_COMPLETE_VISIBLE_TABLE_DEFINITION_COMPONENTS",
+      "verdict": "ACTIVE signup moderation event ledger; AFTER INSERT notification enqueue trigger, actor/member ON DELETE SET NULL."
+    },
+    {
+      "name": "public.dic_admin_push_subscriptions",
+      "visible_catalog_definition_md5": "418016890e4ba3ba12223008b3715c8d",
+      "definition_string_chars": 1087,
+      "columns_full_read": 8,
+      "constraints_full_read": 5,
+      "indexes_full_read": 2,
+      "policies_full_read": 0,
+      "triggers_full_read": 0,
+      "semantic_review": "DIRECT_COMPLETE_VISIBLE_TABLE_DEFINITION_COMPONENTS",
+      "verdict": "ACTIVE Admin web push subscriptions; service-only access and owner foreign key."
+    },
+    {
+      "name": "public.dic_member_approval_push_subscriptions",
+      "visible_catalog_definition_md5": "48aba40e21915be30220b6210ea6901f",
+      "definition_string_chars": 1116,
+      "columns_full_read": 7,
+      "constraints_full_read": 5,
+      "indexes_full_read": 2,
+      "policies_full_read": 0,
+      "triggers_full_read": 0,
+      "semantic_review": "DIRECT_COMPLETE_VISIBLE_TABLE_DEFINITION_COMPONENTS",
+      "verdict": "ACTIVE member approval push subscriptions; per-endpoint event cursor and owner/expiry index."
+    }
+  ],
+  "totals": {
+    "current_tables": 52,
+    "old_receipt_tables": 46,
+    "old_receipt_tables_retired_or_absent": 5,
+    "new_to_old_manifest": 11,
+    "prior_R290_new_tables_direct_semantically_reviewed": 3,
+    "first_time_direct_table_definitions_this_run": 8,
+    "current_tables_with_direct_full_visible_catalog_review_from_existing_receipts_and_this_run": 52,
+    "columns_direct": 54,
+    "constraints_direct": 32,
+    "indexes_direct": 12,
+    "policies_direct": 1,
+    "triggers_direct": 1,
+    "catalog_characters_this_run": 7364
+  },
+  "semantic_crosschecks": {
+    "project_shot_trigger_full_body_read": true,
+    "review_community_shot_full_body_read": true,
+    "community_browse_recommendation_evidence_full_body_read": true,
+    "admin_search_full_body_read": true,
+    "admin_edit_record_full_body_read": true,
+    "dialed_in_false_positive_eliminated": "public.shots.is_dialed_in is a STORED GENERATED column derived from extraction/body/clarity/sweetness/astringency, all of which private.project_shot compares; cannot toggle independently",
+    "duplicate_index_full_descriptor_pairs": 0,
+    "actual_app_code_fixes_justified": 0
+  },
+  "historical_tables": {
+    "old_absent_now": [
+      "private.beta_invites",
+      "private.dic_roaster_aliases",
+      "private.dic_roaster_directory",
+      "private.invite_attempts",
+      "private.invite_redemptions"
+    ],
+    "legacy_active": "private.dic_official_source_attestations",
+    "historical_preserved": [
+      "private.dic_roaster_alias_provenance_archive",
+      "private.dic_roaster_identity_provenance_archive"
+    ],
+    "no_live_drop_authorized": true
+  },
+  "limitations": [
+    "Existing receipts for 41 still-current older tables + R290 3 new provenance/alias tables reused, not re-credited. Last R290 archive source direct read verified.",
+    "All current 52 app table visible definition-component coverage does not imply full word-level provider baseline; compiled functions, hosted API/Auth console and other objects remain UNVERIFIED.",
+    "Full current 114 SQL function direct word-level coverage is not newly claimed: 22 post-initial function signatures have their own earlier direct review receipts.",
+    "Existing R296 Community search source fix was already merged development in PR #3086. PR-head Node22 and five other applicable workflows SUCCESS; exact merged-source push CI not independently confirmed by commit-status endpoint.",
+    "No private user/shot/note/auth records, credentials or raw logs read. No provider writes or tests run."
+  ],
+  "state": "IN_PROGRESS",
+  "next": "Reconcile R296 merged-source push Node22 and remaining CI with exact-source evidence, leave TESTING unless all #457 approval gates; next directly review unverified Supabase platform/hosted definitions, new/changed runtime source and proven functional/performance bugs, without repeat scans. Numeric pgss 4961-5040 only when count actually reaches that range."
+}
