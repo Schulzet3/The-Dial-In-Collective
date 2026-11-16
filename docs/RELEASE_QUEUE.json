@@ -15450,24 +15450,32 @@
     {
       "id": "DIC-Q-455-r313-recipe-grid-temp-unit",
       "issue": 455,
-      "pr": null,
+      "pr": 3090,
       "title": "Normalize active and imported temperature units before recommendation RecipeGrid HTML",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "da74f54d41ac24253f31918f11f05589a5b25915",
       "scope_paths": [
         "site/lib/ui.js"
       ],
       "owner_source": "Issue #455 Option B safe defensive integrity; DIC_PREFLIGHT_VERIFIED development_sha=c557fd4e42c1dbc010a49323aa9a0f7fb8f569b9 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "tests": [
-        "Three focused synthetic R313 positive/negative Node22 tests authored; not yet executed.",
-        "Exact PR-head Node22, UX/mobile/browser, isolated SQL, security and approval governance PENDING; merged-source checks PENDING."
+        "Exact source PR-head c32e516a074b252743d6c289889d8d9770cb4b38 five SUCCESS: Node22 43981866370 (5288 PASS/0 FAIL/6 intentional SKIP, R313 focused 3/3 PASS), UX/cloud/browser 43981866456, isolated SQL 43981866376, source security 43981866483, approval 43981866379.",
+        "One-parent nonforce [skip netlify] PR #3090 source merge da74f54d41ac24253f31918f11f05589a5b25915 with all five tested code/test/ledger/queue/journal blob SHAs identical to head.",
+        "Exact merged Node22 43982389866 5288 PASS/0 FAIL/6 SKIP, merged browser/cloud 43982389961 SUCCESS; pushed governance 43982389862 attempt 2 SUCCESS after failed first attempt caused only by unrelated historical READY CI GitHub API read HTTP 502 (underlying run 43947028700 returned SUCCESS independently). Selective retry, no governance bypass.",
+        "Original603 SKIPPED, not PASS; no member/provider data, actual espresso improvement or deployment."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact-source hosted tests and nonforce merge not yet verified.",
-        "No publication authorized; original ZIP/S019 unaffected."
+      "ci_runs": [
+        43981866379,
+        43981866456,
+        43981866370,
+        43981866483,
+        43981866376,
+        43982389862,
+        43982389961,
+        43982389866
       ],
-      "notes": "Development-only narrow F/C render unit boundary. Preserve actual Celsius, all five tastes, original private notes/history, offline, recipe family and recommendations. No provider writes; production_deployed=false.",
+      "blockers": [],
+      "notes": "READY DEVELOPMENT ONLY; not deployed. RecipeGrid uses strict F/C label and same physical conversion, malformed unknown unit safely displays Fahrenheit; original measured Celsius, five tastes, notes/history, one-control advice, calibration, offline/Community intact. No observed exploit or real taste outcomes.",
       "production_deployed": false
     }
   ],
@@ -18138,6 +18146,15 @@
       "source_sha": "5898fc8dbf23ca72f2cdd8ce6a7b8b7f427934a2",
       "production_deployed": false,
       "evidence": "PR #3084 source head 00cb8d8 five CI successes; four R312 focused tests 4711-4714 PASS, Node22 5278 PASS/0 FAIL/6 SKIP on PR head 43972058918 and source merge 43972699836. PR head UX/mobile 43972058992, SQL 43972066037, security 43972058943, approval 43972058957 SUCCESS; merged UX 43972699859 and pushed governance 43972699818 SUCCESS. Nonforce one-parent [skip netlify] merge 5898fc8, five Git blobs equal exact PR head. Frozen603 SKIPPED not PASS. No deployment/member data."
+    },
+    {
+      "date": "2026-11-16",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r313-recipe-grid-temp-unit",
+      "state": "READY",
+      "source_sha": "da74f54d41ac24253f31918f11f05589a5b25915",
+      "production_deployed": false,
+      "evidence": "PR #3090 tested head c32e516a074b252743d6c289889d8d9770cb4b38, nonforce merge da74f54d41ac24253f31918f11f05589a5b25915, 5 Git blobs match, five head CI SUCCESS, head+merged Node22 5288 PASS/0 FAIL/6 SKIP, 3 R313 focused PASS, merged browser 43982389961 and governance 43982389862 attempt2 SUCCESS after transient unrelated historical API HTTP502. No publish."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
