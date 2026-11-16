@@ -1,3 +1,10 @@
+## November 15, 2026 — #267 V11CX F215:3902–3984 Ironclad three field-specific cases [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=ba09a1026399d064e1eacb3ae2cedcdd99db7906 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- **Direct audit:** 83 distinct original frozen physical lines F215:3902–3984, original `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9` tree `c54ade64eca30946df8858297578a172f5cf6fa8`, blob `c3a92e1e2d7045c9a53a903f82f0183fa79dc7cf`. [Individual-line source-bound receipt](../audits/issue267-v2-strict-batches/S2-DISJOINT-F215-3902-3984-20261115-V11CX.json) records each exact literal and semantic/quality/risk/security/privacy/performance/dead/duplicate/current counterpart/test/remediation/Locked fit. Previous V11CW ended 3901, no gap/overlap. Already revalidated original workflow 41/41 V11CW with no extra credit; V1/R2/C2 not promoted.
+- **Findings:** Honduras identity original short Ironclad Coffee vs full page Ironclad Coffee Roasters and exact endpoint vendor, bounded name-suffix reconciliation only; Honduras altitude initial missing vs scoped approximate-1600 MASL recovery; Las Montanas decaf strict review_required but numeric 1600 equals 1,600 meters, parser false. Archived raw capture hashes not independently recomputed. No current parser defect proven, #33 owns original603/source identity. Immutable archive and private data unchanged.
+- **Tests/state:** exact source literal 83/83, original/pinned/live Git blob parity, adjacency. Exact PR-head and merged-source governance PENDING; Node/browser/SQL/Auth/603 NOT_RUN_DOCS_ONLY; provider NOT_APPLICABLE. #267 OPEN; next F215:3985, current code and drift unreconciled. No app/production/provider/deploy/backup/schedule/alert changes.
+
 ## November 15, 2026 — #267 V11CW frozen F215:3849–3901 direct source review [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=2655de1b7a8f4ae0f89ccebc09b5ccab12f97db3 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
