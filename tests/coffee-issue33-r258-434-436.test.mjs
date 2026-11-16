@@ -11,9 +11,12 @@ const red=blackCoffee.find(x=>x.number===434);
 const house=blackHills.find(x=>x.number===436);
 const redStory='Silky smooth with a layered depth. Clove, tamarind, starfruit, and a touch of noir cinema. Roast Level: Dark.';
 const houseStory='A blend of Central & South American Coffees, balanced with City Roast & Full City Roast beans. Medium body and high acidity makes this a perfect all day, every day coffee.';
-const html=(name,story,other='')=>'<html><body><main><article class="product"><h1>'+name+'</h1>'+
- '<div class="woocommerce-product-details__short-description"><p>'+(name===red.name?story.replace(/\s*Roast Level: Dark[.]?$/,'')+'</p><p><strong>Roast Level: Dark</strong>':story)+'</p></div>'+
- '</article></main>'+other+'</body></html>';
+const html=(name,story,other='',selectedRedSpecs=true)=>'<html><body><main><article class="product"><h1>'+name+'</h1>'+
+ '<div class="woocommerce-product-details__short-description"><p>'+
+ (name===red.name?story.replace(/\s*Roast Level: Dark[.]?$/,''):story)+'</p>'+
+ (name===red.name&&selectedRedSpecs?
+  '<p><strong>Roast Level: Dark</strong></p><p>Tastes Like: Clove, tamarind, starfruit</p>':'')+
+ '</div></article></main>'+other+'</body></html>';
 const parse=(entry,story,other='')=>extractPublicCoffeeFacts(html(entry.name,story,other),{
  source_url:entry.number===434?'https://www.blackcoffeeroastingco.com'+entry.path:
  'https://www.blackhillscoffee.com'+entry.path});
@@ -24,7 +27,7 @@ test('red room exact selected merchant identity and direct current claims, not n
  assert.deepEqual(proof.directWitnesses,[true,true]);
  const wrong=productMarkup(html('AM',redStory));
  assert.equal(directCurrent(wrong,selectedProductHeadings(wrong),red).exactUniqueSelected,false);
- const sidebar=productMarkup(html(red.name,'Selected facts not published.','<aside>'+red.witnesses.join(' ')+'</aside>'));
+ const sidebar=productMarkup(html(red.name,'Selected facts not published.','<aside>'+red.witnesses.join(' ')+'</aside>',false));
  assert.deepEqual(directCurrent(sidebar,selectedProductHeadings(sidebar),red).directWitnesses,[false,false]);
 });
 test('red room: retain literal named cup notes and Dark; exclude cinematic setting from canonical flavor',()=>{
