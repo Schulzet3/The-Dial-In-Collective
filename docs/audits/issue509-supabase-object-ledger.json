@@ -4375,6 +4375,19 @@
       "provider_writes": 0,
       "new_confirmed_defects": 0,
       "next": "numeric 4641-4720; canonical name regression"
+    },
+    {
+      "run": "R283 Nov16 2026",
+      "source_sha": "09a387f9db79466e112f1e6e98d959381e66c7de",
+      "preflight_blob": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r283-push-subscription-acl-pgss-20261116.json",
+      "complete_public_tables": 2,
+      "complete_service_broker_source_chars": 1920,
+      "numeric_new": 70,
+      "numeric_cumulative": 4403,
+      "provider_writes": 0,
+      "confirmed_new_defects": 0,
+      "next": "numeric 4721-4800; remaining provider source; isolated canonical name"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -21924,5 +21937,29 @@
     "source_tests": "NOT_RUN",
     "baseline": "IN_PROGRESS",
     "next": "numeric pgss 4641–4720; canonical-name isolated PostgreSQL; #96 genuine Auth"
+  },
+  "provider_public_push_acl_pgss_run283": {
+    "run": 283,
+    "preflight_development_sha": "09a387f9db79466e112f1e6e98d959381e66c7de",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_development_sha": "09a387f9db79466e112f1e6e98d959381e66c7de",
+    "receipt_path": "docs/audits/issue509-r283-push-subscription-acl-pgss-20261116.json",
+    "complete_public_tables": 2,
+    "complete_columns": 15,
+    "complete_constraints": 10,
+    "complete_indexes": 4,
+    "complete_service_broker_source_chars": 1920,
+    "pgss_range": [
+      4641,
+      4720
+    ],
+    "new_distinct": 70,
+    "overlap": 10,
+    "cumulative_distinct": 4403,
+    "confirmed_defects": 0,
+    "provider_writes": 0,
+    "source_code_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "pgss 4721-4800"
   }
 }
