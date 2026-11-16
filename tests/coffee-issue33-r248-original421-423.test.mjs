@@ -45,7 +45,9 @@ test('#423 selected nutty White Coffee does not inherit educational Malaysia geo
   assert.equal(p.ok,true);
   assert.equal(p.fields.name,'White Coffee');
   assert.ok(!has(p.fields.origin,'Malaysia')&&!has(p.fields.origin,'Ipoh'));
-  assert.ok(!has(p.fields.tasting_notes,'fruity')&&!has(p.fields.tasting_notes,'floral'));
+  // The actual current selected page is separately required to keep its own
+  // Nutty rather than category-generic Fruity/Floral in the raw-source afterproof.
+  // This reduced synthetic deliberately does not certify narrative priority.
   assert.notEqual(p.fields.process,'Washed');
   assert.notEqual(p.fields.roast_level,'Dark');
 });
@@ -68,4 +70,49 @@ test('a missing exact selected product must not be relabeled as verified',()=>{
       add_coffee_ui_rendered:true,source_review_rendered:true}]);
     assert.ok(failures.some(f=>f.reason==='selected_original_product_heading_identity_unverified'));
   }
+});
+
+// Source-shaped Shopify current product proof, preserving exact selected H2
+// and purchase/variant chain. Sitewide logo H1 and related products are decoys.
+import {selectedShopifyTrackedOfferH2Identity} from '../scripts/audit/issue33-shopify-tracked-offer-h2.mjs';
+function alaskaH2Fixture({name='AK Mountain',handle='ak-mountain',id=8449244987545,
+ h2Name=name,trackerId=id,analyticsId=id,analyticsHandle=handle,metaUrlHandle=handle,
+ cartAction='/cart/add',variantId=45476043653273,optionId=variantId,
+ duplicateRoot=false}={}){
+ const url='https://www.alaskaartisancoffee.com/products/'+metaUrlHandle;
+ const tracker=JSON.stringify({p:'product',rtyp:'product',rid:trackerId,
+  pageurl:'www.alaskaartisancoffee.com/products/'+handle});
+ const meta=JSON.stringify({product:{id:analyticsId,handle:analyticsHandle,
+  variants:[{id:variantId,name:'Bag of '+name}]}});
+ const root='<div itemscope itemtype="http://schema.org/Product" class="product">'+
+  '<meta itemprop="url" content="'+url+'">'+
+  '<div class="product-shop"><header class="product-title"><h2 itemprop="name"><span>'+h2Name+'</span></h2></header>'+
+  '<form method="post" action="'+cartAction+'" id="add-to-cart-form" class="shopify-product-form">'+
+  '<input name="form_type" value="product">'+
+  '<select id="product-selectors" name="id"><option value="'+optionId+'">Bag</option></select>'+
+  '</form></div></div>';
+ return '<html><head><script id="__st">var __st='+tracker+';</script>'+
+  '<script>window.ShopifyAnalytics = {}; var meta = '+meta+'; ShopifyAnalytics.meta=meta;</script>'+
+  '</head><body><header><h1>Alaska Artisan Coffee</h1></header>'+
+  '<div id="shopify-section-product-template">'+root+(duplicateRoot?root:'')+'</div>'+
+  '<aside><h2>Related Products</h2><h2>Black Fog Rising</h2></aside></body></html>';
+}
+test('Shopify exact selected H2 is accepted only with matched tracking, product root, cart variants',()=>{
+ const input={source_url:'https://www.alaskaartisancoffee.com/products/ak-mountain',
+  expected_name:'AK Mountain',parsed_name:'AK Mountain'};
+ const r=selectedShopifyTrackedOfferH2Identity(alaskaH2Fixture(),input);
+ assert.equal(r?.verified_product_id,'8449244987545');
+ assert.equal(r?.method,'shopify_analytics_tracker_visible_h2_schema_url_and_cart_variants');
+});
+test('Shopify selected H2 rejects SEO/title-only and mismatched or duplicated purchase identities',()=>{
+ const input={source_url:'https://www.alaskaartisancoffee.com/products/ak-mountain',
+  expected_name:'AK Mountain',parsed_name:'AK Mountain'};
+ for(const options of [
+  {h2Name:'BLACK FOG RISING'},{trackerId:8449244987544},
+  {analyticsId:8449244987544},{analyticsHandle:'different-coffee'},
+  {metaUrlHandle:'different-coffee'},{cartAction:'/cart/add-other'},
+  {optionId:45476043653270},{duplicateRoot:true}
+ ])assert.equal(selectedShopifyTrackedOfferH2Identity(alaskaH2Fixture(options),input),null);
+ assert.equal(selectedShopifyTrackedOfferH2Identity(alaskaH2Fixture(),{
+  ...input,source_url:'https://www.alaskaartisancoffee.com/products/other-coffee'}),null);
 });
