@@ -3341,12 +3341,24 @@
         "site/cloud/shot_card.js recordUnit derived from shot.snapshot.tempUnit",
         "site/lib/ui.js shotSummary interpolation of unit into HTML"
       ],
-      "access": "DIRECT_IMMUTABLE_GITHUB_CODE_STATIC_READ_AND_SYNTHETIC_REGRESSION_AUTHORED_NO_LOCAL_NODE_EXECUTION",
-      "review_status": "R455-310_CONFIRMED_UNVALIDATED_HTML_INTERPOLATION_STATIC_CODE; HOSTED_TESTS_PENDING",
-      "evidence_grade": "DIRECT_CODE_STATIC_REPRODUCTION_WITH_SCRIPTLESS_MARKUP_PAYLOAD_NO_BROWSER_EXECUTION",
-      "claims_verified_externally": "Legacy temperature preference can be arbitrarily formatted in synthetic archived shot; previous Card render passed it directly to shotSummary and the summary interpolated arbitrary string into HTML while tempDisplay selected Celsius for every non-F value. This is an unsafe HTML output construction and a wrong physical-unit label risk; no observed production exploit or member incident.",
+      "access": "IMMUTABLE_GITHUB_SOURCE_READ + EXACT_PR_HEAD_SYNTHETIC_NODE22_AND_MERGED_NODE22_BROWSER + PUBLICATION_GIT_NETLIFY_METADATA_READ_ONLY",
+      "review_status": "R455_310_SAFE_FIX_MERGED_EXACT_SOURCE_HEAD_AND_MERGED_NODE_BROWSER_GOVERNANCE_SUCCESS; ORIGINAL_USER_INCIDENT_NOT_VERIFIED",
+      "evidence_grade": "DIRECT_CODE_DEFENSE_IN_DEPTH_HTML_OUTPUT_CANONICALIZATION; NO_DEMONSTRATED_PRODUCTION_INJECTION_PATH_OR_MEMBER_INCIDENT",
+      "claims_verified_externally": "Legacy temperature preference can be arbitrarily formatted in synthetic archived shot; previous Card render passed it directly to shotSummary and the summary interpolated arbitrary string into HTML while tempDisplay selected Celsius for every non-F value. This is an unsafe HTML output construction and a wrong physical-unit label risk; no observed production exploit or member incident. Source reachability caveat: the published SQL private setup_preferences.temperature_unit has explicit CHECK IN ('F','C') and cloud hydration ordinarily reads this validated preference, so malicious archived tempUnit reachability in the normal production flow was NOT demonstrated. R310 ensures untrusted/malformed local or legacy strings cannot become markup in the generic summary; source-only risk not confirmed production exploit.",
       "factual_status": "SAFE_LOCKED_COMPATIBLE_ESCAPING_AND_F_C_ALLOWLIST_NO_CHANGE_TO_SAVED_MEASUREMENTS_OR_TASTE",
-      "github267_literal_review_credit": 0
+      "github267_literal_review_credit": 0,
+      "implementation_status": "SAFE_CODE_AND_THREE_NODE_REGRESSIONS_EXACT_SOURCE_MERGED_DEVELOPMENT_READY_NOT_DEPLOYED",
+      "merge_sha": "510bc9d7d6b53d3d1fc0de3d92e7de7f20b276a2",
+      "ci_runs": [
+        43953340601,
+        43953341131,
+        43953340577,
+        43953340656,
+        43953340658,
+        43954030164,
+        43954030348,
+        43954030185
+      ]
     }
   ],
   "evidence_checks": [
@@ -10292,8 +10304,8 @@
       "source": "LIVE-20261116-SHOT-HISTORY-TEMP-UNIT-MARKUP-R310",
       "claim": "Current Shot History uses shot.snapshot?.tempUnit||unit and direct HTML interpolation of unit in shotSummary, with tempDisplay treating all non-F values as Celsius. A malformed archived unit such as <img ...> can reach HTML string output; the previous Edit Shot and new Setup F/C guards do not cover this direct history rendering path.",
       "source_locator": "site/cloud/shot_card.js recordUnit; site/lib/ui.js shotSummary; site/lib/constants.js tempDisplay",
-      "grade": "DIRECT_GITHUB_IMMUTABLE_STATIC_SOURCE_REVIEW; SYNTHETIC_TESTS_PENDING",
-      "result": "SAFE_TARGETED_FIX_CANONICALIZE_F_C_AT_CARD_AND_SUMMARY_BEFORE_HTML; PRESERVE_ARCHIVE",
+      "grade": "DIRECT_MERGED_GITHUB_SOURCE_AND_PUBLISHED_SQL_F_C_CHECK; NORMAL_PRODUCTION_EXPLOITABILITY_NOT_PROVEN",
+      "result": "R310_ALLOWLIST_FIX_HEAD_AND_MERGED_SOURCE_BLOBS_IDENTICAL_TESTED_MERGED_NODE_BROWSER_GOVERNANCE_SUCCESS_NO_OBSERVED_MEMBER_EXPLOIT",
       "github267_literal_review_credit": 0
     },
     {
@@ -10301,8 +10313,8 @@
       "source": "LIVE-20261116-SHOT-HISTORY-TEMP-UNIT-MARKUP-R310",
       "claim": "Synthetic negative/positive regression authored: invalid raw HTML-like/Kelvin/empty history units must render safely in supported active C or Fahrenheit fallback; genuine historic Celsius and Fahrenheit must survive preference changes; five green ratings and original notes/history must remain unmodified. Local Node/browser execution unavailable due container/Python ClientError; GitHub exact-head CI required.",
       "source_locator": "tests/issue455-r310-history-temp-unit-markup.test.mjs",
-      "grade": "STATIC_TEST_AUTHORED_NOT_EXECUTED",
-      "result": "PENDING_EXACT_SOURCE_HOSTED_NODE22_BROWSER_SECURITY_APPROVAL",
+      "grade": "EXACT_SOURCE_NODE22_THREE_FOCUSED_SYNTHETIC_CASES_SUCCESS_PR_AND_MERGED_5266_PASS_0_FAIL_6_INTENTIONAL_SKIP",
+      "result": "PASS_R310_3_OF_3_SOURCE_AND_MERGE_NODE22_43953340601_43954030164; CLOUD_MOBILE_43953341131_43954030348_SUCCESS; SQL_43953340577_SECURITY_43953340656_GOVERNANCE_43953340658_43954030185_SUCCESS",
       "github267_literal_review_credit": 0
     }
   ],
@@ -10535,7 +10547,7 @@
     "R455-306 FINAL: PR #3055 source/test/journal and queue/ledger nonforce merged f3f17d3a386211388023a4a38f7a9ab32abe8cbb; all six files match PR head; final Node 5236 PASS/0 FAIL/6 intentional SKIP on both PR head 43912006010 and merge 43912750124; head cloud 43912006318, SQL 43912006372, security 43912006276, approval 43912006152, merged cloud 43912750206 and governance 43912750041 SUCCESS. Original approval and first Node failures corrected, retained. Development READY only pending this documentation reconciliation CI; no deploy, member, science or #267 literal credit.",
     "R455-307: verify and integrate publisher-first secondary brewing REVIEW (2025 DOI 10.3390/beverages11050125), three bounded evidence checks and one no-change policy hold; direct MDPI HTML sections checked; do not infer universal 25-30s/6.5g/9bar targets, confuse cup serving temperature with brew temperature, certify original PDF/primary studies or claim measured recommendation efficacy. Original Oct29 ZIP and S019 remain inaccessible/unhashed. Code/Locked policy unchanged. After docs-only CI and nonforce merge, crosslink issue #455; #267 zero semantic line credit.",
     "R455-309: verify original Zenodo DOI software and tag-linked source provenance for Waszkiewicz model; author preprocessing 100s/31-point smoothing and unweighted static/TDS fits are research-method boundaries only, no universal pressure/taste claim; full archive binary/run reproduction remains unverified. Exact docs-only source-bound CI/nonforce [skip netlify] merge and merged governance required; original Oct29 pack/S019 unresolved; no #267 literal credit.",
-    "R455-310: original unsafe historical temperature-unit HTML interpolation bounded source diff authored. Host exact PR-head Node22 3 synthetic cases and full appropriate CI, repair failures, recheck concurrency and nonforce [skip netlify] merge only on all required success, then readback exact merged blobs/governance and reconcile READY. No production/provider writes."
+    "R455-310: source-only conditional markup integrity fix merged 510bc9d7d6b53d3d1fc0de3d92e7de7f20b276a2, three synthetic cases and merged CI PASS. Development READY only, production_deployed=false. Continue next independent #455 source/UX source-hash-bound increment, no direct deployment or new member capture; original S019/Oct29 ZIP not independently verified."
   ],
   "latest_review_checkpoint": {
     "run_id": "R455-309_AUTHOR_SOFTWARE_PROVENANCE_DOCS_CANDIDATE",
@@ -16100,7 +16112,7 @@
     },
     {
       "id": "R455-PROP-310-HISTORY-UNIT-MARKUP-ALLOWLIST",
-      "severity": "HIGH_HISTORICAL_RENDER_HTML_INJECTION_POTENTIAL_NO_OBSERVED_MEMBER_EXPLOIT",
+      "severity": "DEFENSE_IN_DEPTH_HTML_OUTPUT_MALFORMED_LEGACY_VALUE_REACHABILITY_UNVERIFIED_NO_MEMBER_INCIDENT",
       "source": [
         "LIVE-20261116-SHOT-HISTORY-TEMP-UNIT-MARKUP-R310"
       ],
@@ -16114,7 +16126,7 @@
       "proposed_change": "SAFE code fix: accept only historical F or C, fall back to supported active unit or F; also enforce safe unit inside generic shotSummary; no saved record mutation. Add explicit malicious-shaped string, valid history and immutability regressions.",
       "approval_required_for_behavior_change": false,
       "owner_approval_now_required": false,
-      "implementation": "CODE_TEST_QUEUE_JOURNAL_CANDIDATE_NOT_RUN_NOT_READY",
+      "implementation": "SAFE_MERGED_AND_TESTED_DEVELOPMENT_READY_NO_PRODUCTION_PUBLISH",
       "files": [
         "site/lib/ui.js",
         "site/cloud/shot_card.js",
@@ -16125,7 +16137,9 @@
       "test_plan": "Node22 focused negative/positive + applicable exact-head Node/build cloud/mobile/offline SQL/security governance; one build, reuse unchanged; no production smoke writes.",
       "release_queue": "DIC-Q-455-r310-history-temperature-unit-render",
       "production_deployed": false,
-      "github267_literal_review_credit": 0
+      "github267_literal_review_credit": 0,
+      "release_queue_status": "READY_DEVELOPMENT_ONLY",
+      "evidence_qualification": "Current published prefs SQL enforces F/C. R310 sanitizes archived in-memory values nevertheless; no demonstrated cross-user XSS or production incident."
     }
   ],
   "changeScope": {

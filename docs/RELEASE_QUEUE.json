@@ -15289,25 +15289,35 @@
     {
       "id": "DIC-Q-455-r310-history-temperature-unit-render",
       "issue": 455,
-      "pr": null,
+      "pr": 3072,
       "title": "Reject malformed archived temperature-unit markup in Shot History",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "510bc9d7d6b53d3d1fc0de3d92e7de7f20b276a2",
       "scope_paths": [
         "site/lib/ui.js",
         "site/cloud/shot_card.js"
       ],
       "owner_source": "Issue #455 owner-approved Option B SAFE historical form/display integrity; DIC_PREFLIGHT_VERIFIED development_sha=ba5988e206ec0bddc57d0d463f02988bc830d841 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "tests": [
-        "Static direct-source unsafe markup interpolation reproduced from immutable code; no real member record or exploit claimed.",
-        "Three negative/positive synthetic Node22 regression groups authored; local runtime ClientError, NOT RUN, NOT PASS.",
-        "Exact source Node22/build, browser/mobile/offline, security, isolated SQL/privacy and approval governance PENDING; frozen603 NOT_APPLICABLE to this display fix (not PASS)."
+        "Exact PR-head Node22/lint/build 43953340601 SUCCESS 5266 PASS /0 FAIL /6 intentional SKIP; R310 three focused negative and positive cases 4700-4702 PASS; no duplicate manual suites.",
+        "Exact PR-head cloud/browser/mobile/offline 43953341131 completed SUCCESS; cloud-tests targeted suite classified NOT_APPLICABLE (job completed success, not a functional PASS claim), mobile-browser-qa SUCCESS with bundled browser coverage.",
+        "Exact PR-head isolated SQL/privacy 43953340577, source security 43953340656, approval/governance 43953340658 SUCCESS. Frozen603 43953340631 SKIPPED, NOT PASS; #33 exact-selected unrelated.",
+        "PR #3072 nonforce one-parent [skip netlify] merged 510bc9d7d6b53d3d1fc0de3d92e7de7f20b276a2; all six exact source/test/ledger/queue/journal Git blobs byte-identical to PR head, no deletion.",
+        "Exact merged-push Node22/lint 43954030164 SUCCESS 5266 PASS/0 FAIL/6 intentional SKIP including R310 3/3; merged cloud/mobile/browser/offline 43954030348 SUCCESS and merged approval/governance 43954030185 SUCCESS.",
+        "Read-only published Netlify deploy 6af9551c6515ddfa3786f76e READY/current tied to release/production 0f3641b4fff07e2a88d7747e621304ec2cf0ead5; old HTML interpolator still source-visible, but published SQL setup_preferences F/C check protects ordinary preference value. No demonstrated production exploit, no deployment authorized."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Original PR-head five applicable CI jobs and final merged-source evidence pending; no READY or publication."
+      "ci_runs": [
+        43953340601,
+        43953341131,
+        43953340577,
+        43953340656,
+        43953340658,
+        43954030164,
+        43954030348,
+        43954030185
       ],
-      "notes": "High-integrity narrow existing UI fallthrough fix, archived data remains unmodified. No Locked targets, extractor, Auth/SQL/Edge/provider, telemetry, production, visibility, new member data reads or deploy. Potential HTML injection shape established by immutable code, no in-browser exploit execution or observed incident.",
+      "blockers": [],
+      "notes": "DEVELOPMENT ONLY READY 2026-11-16: historic display units canonicalized to valid F/C in card and summary with synthetic negative/positive tests. Archived measured temp, all five tastes, original notes/history, styles and one-control recommendation untouched. Conditional HTML interpolation potential, not a proven production security incident; normal setup preference SQL constrained F/C. No DB/member reads/writes, production Netlify, release or main change; owner Publish separate and not authorized.",
       "production_deployed": false
     },
     {
