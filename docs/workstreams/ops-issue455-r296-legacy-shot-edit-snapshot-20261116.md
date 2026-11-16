@@ -19,3 +19,9 @@ Node22 focused test, lint, browser/mobile/offline applicable CI, SQL/privacy/sec
 
 ## Guardrails and next executable action
 No production provider/SQL/Auth/Edge/member writes, no new synthetic production users, no experimental telemetry, no research numeric policy, no change main/release, backup, Netlify, visibility or publication. Next: create nonforce PR, execute applicable exact-source hosted checks, correct any failures with fresh SAME-COMMIT journal receipt for new source/test commits, read back merge SHA and blobs, then reconcile CURRENT_STATUS/queue and issue checkpoint. Original S019 remains inaccessible; do not substitute other PDF or certify espresso improvement.
+
+## Pre-CI test-only correction (same-commit continuation) [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=fc6496d07b3126d24e12462808a5b2c7071773ed preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+Reviewed the staged test text before CI: regex slash escaping accidentally matched literal backslashes instead of parentheses in Fahrenheit/Celsius labels. Corrected ONLY those two assertions to match actual parentheses; no application code, test scenarios, release status or evidence changed. This is an authored test adjustment, **NOT a test run**. Hosted Node22, browser and approval checks still pending. Original R296 source/preflight SHA and issue scope unchanged.

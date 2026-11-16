@@ -37,7 +37,7 @@ test('#455 R296: legacy editable shot without snapshot opens without discarding 
   assert.equal(title,'Edit Shot');
   assert.equal(app.logUnit,'C','missing historical unit falls back to active equipment display unit');
   assert.match(html,/Original private &lt;notes&gt;/);
-  assert.match(html,/Temperature \\(°C, Optional\\)/);
+  assert.match(html,/Temperature \(°C, Optional\)/);
   assert.equal((html.match(/data-scale="/g)||[]).length,5);
   assert.equal((html.match(/aria-pressed="true"/g)||[]).length,5);
   assert.deepEqual(original,before,'original recorded shot remains unchanged');
@@ -48,7 +48,7 @@ test('#455 R296: recorded historical F display unit remains authoritative over c
  const before=structuredClone(original);
  const {app,html}=open(original,'C');
  assert.equal(app.logUnit,'F');
- assert.match(html,/Temperature \\(°F, Optional\\)/);
+ assert.match(html,/Temperature \(°F, Optional\)/);
  assert.match(html,/name="temperature" type="number" value="199"/);
  assert.deepEqual(original,before);
 });
