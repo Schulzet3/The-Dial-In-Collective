@@ -1,3 +1,14 @@
+## November 16, 2026 UTC — Issue #455 R303 historic Edit Shot temperature-unit integrity SAFE development READY [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=5935239398d08ed5c3aceb173a442570389cd186 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+[PR #3031](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3031) nonforce merged `5935239398d08ed5c3aceb173a442570389cd186` with five unchanged tested Git blobs and both title/message `[skip netlify]`. Malformed historical snapshot temperature unit could display an unsupported °unit while physically treating it as °C; now only F/C is accepted, with safe active setup C / fallback F for malformed archives. Three synthetic R303 tests PASS; original Celsius measurement, five independent ratings, archived private notes/history, one-control engine and Locked values untouched. No observed member incident or espresso cup-quality evidence.
+
+Exact PR head Node22 [43863881030](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/43863881030) and merged Node22 [43864545682](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/43864545682) each **5204 PASS /0 FAIL /6 intentional SKIP**, all three R303 tests PASS. PR-head cloud/browser/mobile/offline 43863881287, SQL/privacy 43863881058, security 43863881199 and governance 43863881028 SUCCESS; exact merge cloud/mobile 43864545714, governance 43864545736 SUCCESS. Frozen603 43863881104 SKIPPED not PASS; other unrelated #33 source workflows do not certify #455. Same-commit original and test-correction preflight journaling retained; no policy, member/provider data, SQL/Auth/Edge, production, Netlify, backup, release/main or visibility changes.
+
+Canonical ledger **167 source records /513 checks /232 proposals**; one unique #455 R303 READY development-only queue item, 379 queue rows/180 histories after reconciliation, `production_deployed=false`. Original S019/Oct29 pack inaccessible, #267 literal audit zero credit, #455 OPEN. This docs reconciliation itself requires its own exact-source CI and nonforce readback before being described as integrated.
+
+---
 ## November 16, 2026 UTC — Issue #455 R296 historical shot edit optional snapshot SAFE development READY [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=53847034a3542c17c5f964e189758e972a75fb5e preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
