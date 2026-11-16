@@ -33,7 +33,7 @@ test('#455 R303 malformed historical temperature units use active valid display 
   const {app,title,html}=open(shot,'C');
   assert.equal(title,'Edit Shot');
   assert.equal(app.logUnit,'C');
-  assert.match(html,/Temperature \\(°C, Optional\\)/);
+  assert.ok(html.includes('Temperature (°C, Optional)'));
   assert.match(html,/name="temperature" type="number" value="93"/);
   assert.doesNotMatch(html,/°K|°unknown|bad-unit/);
   assert.match(html,/Original private &lt;notes&gt;/);
@@ -55,7 +55,7 @@ test('#455 R303 malformed current unit also fails closed to Fahrenheit without c
  const shot=archived('Kelvin'),original=structuredClone(shot);
  const {app,html}=open(shot,'Kelvin');
  assert.equal(app.logUnit,'F');
- assert.match(html,/Temperature \\(°F, Optional\\)/);
+ assert.ok(html.includes('Temperature (°F, Optional)'));
  assert.match(html,/name="temperature" type="number" value="199"/);
  assert.deepEqual(shot,original);
  const newer=open(null,'Kelvin');
