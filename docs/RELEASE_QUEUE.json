@@ -15422,6 +15422,30 @@
       "blockers": [],
       "notes": "READY DEVELOPMENT ONLY. Preserve original full five-rated shot evidence: reject explicitly out-of-archived-range or inverted original grinder bounds before Coffee overview latest-shot feedback, without rewriting private History, dose, yield, grind, notes or taste ratings. Original optional legacy limits may be absent. NO owner Publish; production_deployed=false.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-community-producer-search-parity",
+      "issue": 509,
+      "pr": null,
+      "title": "Correct Community producer-only search count/page mismatch",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261116224000_dic_community_search_producer_parity.sql"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
+      "tests": [
+        "Read full live search SQL, stored migration SQL and original GitHub immutable source: current paged filter omits producer.",
+        "Read-only deterministic synthetic SQL verified producer-only count=true vs page=false.",
+        "Isolated PostgreSQL17 authenticated seven-shot/one-shot fixture added; exact-source CI PENDING."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "SQL functional/Node22/governance exact-source CI PENDING. No READY before all required checks.",
+        "No production publication authorized; live function stays unchanged."
+      ],
+      "notes": "Forward-only additive original-function reassertion, no member data/ACL/history changes.",
+      "production_deployed": false
     }
   ],
   "history": [
