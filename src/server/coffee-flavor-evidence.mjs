@@ -48,7 +48,7 @@ function shortFlavorList(raw,clean,{allowSingle=false}={}){
  // independently identifiable cup descriptor. Preserve the source prose
  // separately; only the canonical sensory candidate excludes that scene.
  const original=clean(raw,401).trim();
- const text=original.replace(/(?:,\\s*|\\s+and\\s+)(?:the\\s+)?(?:sunrise|sunset)\\s*[.!?]?$/iu,'').trim(),
+ const text=original.replace(/(?:,\s*|\s+and\s+)(?:the\s+)?(?:sunrise|sunset)\s*[.!?]?$/iu,'').trim(),
   body=text.replace(/[.]$/,'');
  if(/^(?:sunrise|sunset)$/iu.test(text))return '';
  if(text.length<2||text.length>350||/\b(?:masl|variet(?:y|ies|al)|farm(?:ers?)?|producers?|co-?op|elevation|process|processing|fermented|fermentation|washed|anaerobic|carbonic|maceration|relationship|espresso|coffee in|brew time|roast level|subscribe|shipping|sourcing|quantity|order|purchase|grind|brewing|recipe|certified|certifications?|fair trade|harvest competition)\b/i.test(text))return '';
