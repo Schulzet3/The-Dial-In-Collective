@@ -3051,6 +3051,25 @@
       "reviewed_date_utc": "2026-11-15",
       "implementation_status": "RESEARCH_ONLY_NO_APP_LOCKED_MEMBER_DATA_PROVIDER_OR_DEPLOYMENT_CHANGE",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "LIVE-20261116-CLOUD-SHOT-VALIDATION-FEEDBACK-R295",
+      "type": "source_bound_current_app_ui_accessibility_finding",
+      "title": "Log Shot edited invalid input leaves stale Save validation alert",
+      "source_paths": [
+        "site/cloud/main.js",
+        "site/lib/ui.js",
+        "tests/cloud-shot-rating-focus.test.mjs"
+      ],
+      "source_sha": "2cb0d03b90fc3bcc207b58064044f7bb07f4e356",
+      "source_git_blobs": {
+        "cloud": "28c6f6026d0ff1e6fd6575d3813b76c06a29bb47",
+        "ui": "bdaf4e9292229aeac4b03fc3f9da51c5497d76e5"
+      },
+      "access": "DIRECT_IMMUTABLE_GITHUB_SOURCE_AND_ACTUAL_HANDLER_CALL_CHAIN",
+      "review_status": "R455-295_SOURCE_REPRODUCED_CURRENT_INPUT_AND_RATING_HANDLER_DIFFERENCE; NEW_SYNTHETIC_REGRESSIONS_NOT_RUN_YET",
+      "evidence_grade": "CURRENT_SOURCE_DIRECT_REPRO_FOR_STALE_LOCAL_FEEDBACK_NOT_PRODUCTION_MEMBER_INCIDENT",
+      "github267_literal_review_credit": 0
     }
   ],
   "evidence_checks": [
@@ -9548,6 +9567,26 @@
       "app_engine_blob": "f384ae67c1a9148990cab4716dc8ad22d1ca81f3",
       "owner_approval": false,
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-APP-295-A",
+      "source": "LIVE-20261116-CLOUD-SHOT-VALIDATION-FEEDBACK-R295",
+      "source_sha": "2cb0d03b90fc3bcc207b58064044f7bb07f4e356",
+      "page_section": "site/cloud/main.js lines 799, 1033, 1123, 1183-1189; site/lib/ui.js focusShotValidationError",
+      "claim": "After invalid Save, CloudApp.error writes a visible shot-validation-feedback alert and focusShotValidationError marks invalid input. CloudApp.input removed aria-invalid and the associated describedby on editing a numeric field but never cleared the old alert; individual rating tap already cleared its alert. A revised numeric entry can leave an obsolete visible/screen-reader error until another Save.",
+      "grade": "EXACT_SOURCE_CONTROL_FLOW_REPRO; USER_DEVICE_NOT_TESTED",
+      "result": "P3_SAFE_UX_CLARITY_DEFECT_NO_TASTE_OR_DATA_BEHAVIOR_CHANGE",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-APP-295-B",
+      "source": "LIVE-20261116-CLOUD-SHOT-VALIDATION-FEEDBACK-R295",
+      "source_sha": "2cb0d03b90fc3bcc207b58064044f7bb07f4e356",
+      "page_section": "site/lib/ui.js acknowledgeShotInput; site/cloud/main.js input handler; tests/issue455-r295-shot-validation-feedback.test.mjs",
+      "claim": "Proposed correction acknowledges only a locally marked invalid Log Shot input: removes that input's stale invalid/validation-describedby, clears stale validation text; valid ordinary input leaves unrelated cloud errors visible. Separate numeric input and rating paths preserve original five taste scales, save validation and all private measurements.",
+      "grade": "FOCUSED_SOURCE_CHANGE_AND_FIVE_NEW_NODE_REGRESSIONS_NOT_RUN_AT_AUTHORING",
+      "result": "SAFE_IMPLEMENTATION_PENDING_EXACT_CI",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -9762,22 +9801,23 @@
     "R455-287: Naliyadhara 2026 original Results 3.3 caffeine/CGA and 3.4 Table 2 physical/colour measurements independently checked without duplicating R134. Source 158 / evidence checks 481 / proposals 223; full PDF, raw assays and figure pixels unverified; no member espresso outcomes, new numeric policy or code change. Resume distinct primary evidence or reproducible Log Shot UX defect. S019 still inaccessible and #267 line credit zero.",
     "R455-291: New DOI-verified original Caprioli 2012 accepted-manuscript espresso machine odorant/panel review (+1 distinct study, +3 bounded evidence checks, +1 research-only proposal): 159 sources / 486 checks / 224 proposals. Final typeset PDF figures/raw judge data not checked; no universal 92C/9bar optimum, taste effectiveness or DIC app/Locked change. R290 numerical-arrow advice text pending atomic safe implementation. Standalone S019 inaccessible; #267 literal credit zero.",
     "R455-293: Direct original Wiley Vezzulli 2021 Tables 3/4 all-eight-origin crosswalk: 6/8 three-level time/end-temperature source names permuted, plus Table3 Brazil SW 6:27 first crack later than 05:54 roast end. Two bounded original-source checks, 159/488/224. Underlying PDF/Appendix S1/Cropster logs, correction and standalone S019 original not verified; no app policy or #267 literal audit credit. Continue separate live UX/primary source review.",
-    "R455-294: Direct MDPI original Sek et al 2026 single-Brazilian-Arabica four-method chemistry/HPLC-onlineTEAC: +1 source +3 bounded checks +1 research-only proposal; preserve full previous counts 159/488/224. Doses and final dilution cause non-comparable numeric rankings; NO five-taste preference/espresso efficacy, no numeric/health/data change. Supplementary Table S1 and raw series unverified; standalone S019 inaccessible. Continue high-value live UX gap and outstanding claim verification; #267 literal credit zero."
+    "R455-294: Direct MDPI original Sek et al 2026 single-Brazilian-Arabica four-method chemistry/HPLC-onlineTEAC: +1 source +3 bounded checks +1 research-only proposal; preserve full previous counts 159/488/224. Doses and final dilution cause non-comparable numeric rankings; NO five-taste preference/espresso efficacy, no numeric/health/data change. Supplementary Table S1 and raw series unverified; standalone S019 inaccessible. Continue high-value live UX gap and outstanding claim verification; #267 literal credit zero.",
+    "R455-295: Source-reproduced narrow Log Shot stale validation feedback on numeric corrections; proposed safe helper and five new test cases; 161 sources/493 checks/226 proposals at source authoring. Exact hosted CI and nonforce merge pending; no production/member reads or scientific taste claim. Standalone S019 original still unavailable; #267 literal audit zero."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-294_SEK_2026_ASSAY_DENOMINATOR_AND_TASTE_SCOPE",
-    "date": "2026-11-15",
-    "development_preflight_sha": "910f29a8d0fcc48a70af5126bdfc2739eb523732",
+    "run_id": "R455-295_SAFE_LOG_SHOT_INVALID_FEEDBACK_ACK",
+    "date": "2026-11-16",
+    "development_preflight_sha": "2cb0d03b90fc3bcc207b58064044f7bb07f4e356",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "original_ledger_blob_sha": "5746579ab54a268e3951457759ef31bfa0eba595",
+    "original_ledger_blob_sha": "84079ef73659b6f4d8fb934031384d430a9a9101",
     "source_counts": {
-      "sources": 160,
-      "evidence_checks": 491,
-      "proposals": 225
+      "sources": 161,
+      "evidence_checks": 493,
+      "proposals": 226
     },
-    "scope": "Direct primary publisher Methods 3.1-3.7 Results 2.1-2.3, lab in-vitro antioxidant and brew/dose confounders; no espresso quality claims",
+    "scope": "Live Cloud Log Shot invalid-input alert mismatch; five source-module synthetic positive/negative tests; do not assert hosted pass or user taste outcomes.",
     "github267_line_credit": 0,
-    "next": "Verify exact-source PR governance before non-force merge; original assay/source bytes and S019 standalone still pending; continue safely reproducible UX or distinct primary science."
+    "next": "Observe exact-source PR-head CI; fix failures with new preflight same-commit journal, merge only with successful required checks, recheck concurrent development before write; READY/docs reconciliation separately."
   },
   "policy_decisions_resolved": [
     {
@@ -15001,6 +15041,29 @@
       "production_deployed": false,
       "github267_literal_review_credit": 0,
       "exact_source": "910f29a8d0fcc48a70af5126bdfc2739eb523732"
+    },
+    {
+      "id": "R455-PROP-295-LOG-SHOT-STALE-VALIDATION-FEEDBACK",
+      "severity": "P3_REPRODUCIBLE_SAVE_EDIT_ACCESSIBILITY_FEEDBACK_STALE",
+      "source": [
+        "LIVE-20261116-CLOUD-SHOT-VALIDATION-FEEDBACK-R295"
+      ],
+      "evidence": [
+        "R455-EV-APP-295-A",
+        "R455-EV-APP-295-B"
+      ],
+      "finding": "Editing a previously marked invalid numeric measurement removed aria-invalid but left the previous Save error visible, unlike tapping a rating; stale error may be read aloud and distract from correction.",
+      "evidence_grade": "DIRECT_IMMUTABLE_SOURCE_CALL_CHAIN; SYNTHETIC_TESTS_PENDING_CI",
+      "current_locked": "Five individually rated taste inputs; incomplete vs all-green, original shot/history/notes, one measurable recommendation change, exact grinder/style/feed, optional temperature and privacy/Community preserved.",
+      "current_app": "Source correction scoped to invalid-form UI feedback, no engine/model/data change.",
+      "proposed_change": "SAFE local-feedback acknowledgment only for an edited input actually marked invalid, retaining cloud/server messages for noninvalid inputs and other fields' validation flags.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "CODE_TEST_QUEUE_SAME_COMMIT_PR_PENDING",
+      "test_plan": "Five new Node22 synthetic positive/negative tests, existing cloud-shot-rating-focus tests, hosted risk-matched browser/mobile/offline/accessibility, isolated SQL/security/governance, nonforce merge and exact-source CI. No original603 run required; SKIPPED not PASS.",
+      "release_queue_status": "DIC-Q-455-r295-shot-edit-stale-validation-alert_TESTING_NOT_DEPLOYED",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "changeScope": {
