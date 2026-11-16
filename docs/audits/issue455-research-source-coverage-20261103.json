@@ -3215,6 +3215,26 @@
       "evidence_grade": "DETERMINISTIC_SYNTHETIC_FOCUSED_THREE_R303_TESTS_PASS_BOTH_EXACT_SOURCE_CI_NO_MEMBER_OR_CUP_OUTCOME",
       "github267_literal_review_credit": 0,
       "verified_implementation_commit": "5935239398d08ed5c3aceb173a442570389cd186"
+    },
+    {
+      "id": "LIVE-20261116-MODEL-SETUP-TEMP-UNIT-R304",
+      "type": "live_app_setup_temperature_unit_snapshot_integrity",
+      "title": "New/edited setup tempUnit must be strictly F/C before entering shot snapshots",
+      "source_paths": [
+        "site/lib/model.js",
+        "site/lib/constants.js",
+        "tests/issue455-r304-setup-temp-unit-integrity.test.mjs"
+      ],
+      "source_sha": "bea552e25f39593b2feea6ed0969a3ee4e396308",
+      "source_git_blobs": {
+        "model": "fdc65f869546cddbb6552e555dca12117f2c47fc",
+        "constants": "d3559dc1c9560c4d68fbcad1dc91e3a792a100a2"
+      },
+      "access": "IMMUTABLE_GITHUB_DIRECT_SOURCE_SETUP_CREATE_REVISE_SNAPSHOT_AND_R303_UI_TEST",
+      "review_status": "SOURCE_REPRODUCED_SAFE_FIX_AUTHORED_HOSTED_TESTS_PENDING_NOT_READY",
+      "evidence_grade": "DETERMINISTIC_STATIC_POSITIVE_NEGATIVE_REGRESSIONS_AUTHORED_NOT_YET_RUN_NO_MEMBER_OR_CUP_OUTCOME",
+      "github267_literal_review_credit": 0,
+      "verified_implementation_commit": null
     }
   ],
   "evidence_checks": [
@@ -9993,6 +10013,35 @@
       "result": "SAFE_SOURCE_FIX_VERIFIED_DEV_READY_NO_TASTE_OUTCOME",
       "owner_approval_now_required": false,
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-APP-304-A",
+      "source": "LIVE-20261116-MODEL-SETUP-TEMP-UNIT-R304",
+      "source_git_commit": "bea552e25f39593b2feea6ed0969a3ee4e396308",
+      "source_paths": [
+        "site/lib/model.js:28",
+        "site/lib/model.js:50",
+        "site/lib/model.js:156-159"
+      ],
+      "claim": "createSetup/reviseSetup previously persisted any truthy tempUnit including unsupported 'Kelvin' into the active version and downstream shot snapshot. Existing R303 UI guard normalizes display but does not ensure future persisted setup provenance uses only supported F/C.",
+      "grade": "IMMUTABLE_GITHUB_SOURCE_DIRECTLY_INSPECTED_NEGATIVE_REGRESSION_AUTHORED_NOT_EXECUTED",
+      "result": "SAFE_FIX_HOSTED_TESTS_AND_PR_PENDING",
+      "owner_approval_now_required": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-APP-304-B",
+      "source": "LIVE-20261116-MODEL-SETUP-TEMP-UNIT-R304",
+      "source_git_commit": "bea552e25f39593b2feea6ed0969a3ee4e396308",
+      "source_paths": [
+        "site/lib/model.js:21-63",
+        "tests/issue455-r304-setup-temp-unit-integrity.test.mjs"
+      ],
+      "claim": "Canonicalizing only new or explicitly edited setup units to C when exactly C and otherwise F preserves valid F/C preferences; archived private shots, physical measured tempC, notes and five independent ratings remain unchanged.",
+      "grade": "DETERMINISTIC_SYNTHETIC_FOCUSED_REGRESSIONS_AUTHORED_NOT_EXECUTED",
+      "result": "PENDING_NODE22_AND_EXACT_PR_CI",
+      "owner_approval_now_required": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -10221,22 +10270,19 @@
     "R455-303 FINAL: PR #3031 nonforce merge 5935239398d08ed5c3aceb173a442570389cd186; 5 Git blobs identical to tested head, head and merged Node22 5204 PASS/0 FAIL/6 SKIP, 3 R303 tests PASS, applicable hosted security/SQL/mobile/cloud/governance successful. Unique development-only READY queue and one history entry reconciled, not published. Standalone S019/Pack inaccessible; zero #267 literal audit credit; #455 remains open for substantive source/effectiveness work."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-303_FINAL_SOURCE_CI_VERIFIED",
+    "run_id": "R455-304_INITIAL_SOURCE_AUTHORED_PENDING_CI",
     "date": "2026-11-16",
-    "development_preflight_sha": "005104342dff98305096a6cf4e8e3c01a77bc55e",
-    "docs_reconciliation_source_sha": "5935239398d08ed5c3aceb173a442570389cd186",
+    "development_preflight_sha": "bea552e25f39593b2feea6ed0969a3ee4e396308",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "source_merged_sha": "5935239398d08ed5c3aceb173a442570389cd186",
-    "pr": 3031,
     "source_counts": {
-      "sources": 167,
-      "evidence_checks": 513,
-      "proposals": 232
+      "sources": 168,
+      "evidence_checks": 515,
+      "proposals": 233
     },
-    "release_queue_id": "DIC-Q-455-r303-historic-temp-unit-integrity",
+    "release_queue_id": "DIC-Q-455-r304-setup-temp-unit-integrity",
     "production_deployed": false,
     "github267_literal_review_credit": 0,
-    "next": "Docs-only governance and nonforce merge require independent CI; then advance to next distinct evidence gap or reproducible SAFE UX issue."
+    "next": "Confirm exact PR-head CI, correct failures, nonforce merge with [skip netlify], verify merged blobs and governance, then reconcile READY only with five required exact-source CI statuses and zero blockers."
   },
   "policy_decisions_resolved": [
     {
@@ -15637,6 +15683,34 @@
       ],
       "test_plan": "Focused synthetic Node22 positive/negative, applicable PR-head Node/lint/UX/mobile/offline/SQL/privacy/security/governance and merged-source readback. No production or actual member experimentation.",
       "release_queue": "DIC-Q-455-r303-historic-temp-unit-integrity_READY_DEV_ONLY",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-304-SETUP-TEMP-UNIT-SAFE",
+      "severity": "P2_FUTURE_SHOT_SNAPSHOT_UNIT_PROVENANCE",
+      "source": [
+        "LIVE-20261116-MODEL-SETUP-TEMP-UNIT-R304"
+      ],
+      "evidence": [
+        "R455-EV-APP-304-A",
+        "R455-EV-APP-304-B"
+      ],
+      "evidence_grade": "SOURCE_REPRODUCED_INVALID_INPUT_PATH_ONLY_NO_MEMBER_INCIDENT",
+      "finding": "Malformed setup unit can propagate to new shot snapshots even though Edit Shot now guards the label; the source model accepted arbitrary truthy units.",
+      "user_benefit": "Consistent supported Celsius/Fahrenheit setup and future-shot snapshots with original archived shot, five tastes and private notes intact.",
+      "current_locked": "Preserve original temperature measurements, private shot/history notes, five taste inputs, custom retired settings and single-change recommendation; no new targets or measurements.",
+      "current_app": "createSetup/reviseSetup accepted truthy arbitrary tempUnit and snapshot copied it literally.",
+      "proposed_change": "SAFE: strict F/C canonicalization only at new or explicit setup-edit boundaries, with a focused synthetic create/revise/snapshot and archive-preservation test.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "SAFE_CODE_AND_TEST_AUTHORING_HOSTED_TESTS_AND_MERGE_PENDING_NOT_READY",
+      "files": [
+        "site/lib/model.js",
+        "tests/issue455-r304-setup-temp-unit-integrity.test.mjs"
+      ],
+      "test_plan": "Node22 focused tests and one applicable hosted build/CI, mobile/offline/cloud and governance reusing unchanged evidence where exact-source suitable; no production/real-user tests.",
+      "release_queue": "DIC-Q-455-r304-setup-temp-unit-integrity_IN_PROGRESS",
       "github267_literal_review_credit": 0,
       "production_deployed": false
     }
