@@ -64,4 +64,10 @@ if [[ -f supabase/migrations/20261116151600_dic_pending_canonical_name_response.
 else
   echo "NOT_APPLICABLE: #509 pending_canonical_name_response; migration excluded from source"
 fi
+if [[ -f supabase/migrations/20261116210000_dic_import_additional_credential_keys.sql ]]; then
+  echo "Running import_additional_credential_keys"
+  run_sql supabase/tests/import_additional_credential_keys.sql
+else
+  echo "NOT_APPLICABLE: #509 import_additional_credential_keys; migration excluded from source"
+fi
 echo 'PASS: all checked-in migrations and SQL suites, including staged import/setup, cross-account and source-worker authorization and first-style owner isolation regressions; no hosted connection.'
