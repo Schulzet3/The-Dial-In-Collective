@@ -15446,6 +15446,29 @@
       ],
       "notes": "Forward-only additive original-function reassertion, no member data/ACL/history changes.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-r313-recipe-grid-temp-unit",
+      "issue": 455,
+      "pr": null,
+      "title": "Normalize active and imported temperature units before recommendation RecipeGrid HTML",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/ui.js"
+      ],
+      "owner_source": "Issue #455 Option B safe defensive integrity; DIC_PREFLIGHT_VERIFIED development_sha=c557fd4e42c1dbc010a49323aa9a0f7fb8f569b9 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Three focused synthetic R313 positive/negative Node22 tests authored; not yet executed.",
+        "Exact PR-head Node22, UX/mobile/browser, isolated SQL, security and approval governance PENDING; merged-source checks PENDING."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source hosted tests and nonforce merge not yet verified.",
+        "No publication authorized; original ZIP/S019 unaffected."
+      ],
+      "notes": "Development-only narrow F/C render unit boundary. Preserve actual Celsius, all five tastes, original private notes/history, offline, recipe family and recommendations. No provider writes; production_deployed=false.",
+      "production_deployed": false
     }
   ],
   "history": [

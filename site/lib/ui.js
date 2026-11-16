@@ -53,8 +53,10 @@ export const fmt=(v,places=1)=>numericMeasurement(v)?Number(v).toFixed(places):'
 export const range=(v,unit='')=>`${fmt(v.low)}<span class="range-dash">\u2013</span>${fmt(v.high)}${unit?` <span class="unit">${unit}</span>`:''}`;
 export function recipeGrid(rec,showTemp=false,unit='F') {
  if(!rec)return '';
+ // Imported/legacy setup units are untrusted. Match the approved F/C physical display boundary.
+ const safeUnit=unit==='C'?'C':'F';
  const stat=(label,value,sub,ico)=>`<div class="metric"><div class="metric-label">${icon(ico,15)} ${label}</div><div class="metric-value">${value}</div>${sub?`<div class="metric-sub">${sub}</div>`:''}</div>`;
- return `<div class="recipe-grid">${stat('Dose',`${fmt(rec.doseG)} <span class="unit">g</span>`,'Basket-based','scale')}${stat('Yield',range(rec.yield,'g'),`Center ${fmt(rec.yield.center)} g \u00b7 1:${fmt(rec.ratio.center,2)}`,'drop')}${stat('Time',range(rec.time,'s'),`Center ${fmt(rec.time.center)} s`,'clock')}${stat('Grind',rec.grind.range?range(rec.grind.range):fmt(rec.grind.value),`${rec.grind.range?`Try ${fmt(rec.grind.value)} · `:''}${e(rec.grind.source)}`,'settings')}${showTemp?stat('Temperature',`${tempDisplay(rec.tempC,unit)}<span class="unit">\u00b0${unit}</span>`,'','thermometer'):''}</div>`;
+ return `<div class="recipe-grid">${stat('Dose',`${fmt(rec.doseG)} <span class="unit">g</span>`,'Basket-based','scale')}${stat('Yield',range(rec.yield,'g'),`Center ${fmt(rec.yield.center)} g \u00b7 1:${fmt(rec.ratio.center,2)}`,'drop')}${stat('Time',range(rec.time,'s'),`Center ${fmt(rec.time.center)} s`,'clock')}${stat('Grind',rec.grind.range?range(rec.grind.range):fmt(rec.grind.value),`${rec.grind.range?`Try ${fmt(rec.grind.value)} · `:''}${e(rec.grind.source)}`,'settings')}${showTemp?stat('Temperature',`${tempDisplay(rec.tempC,safeUnit)}<span class="unit">\u00b0${safeUnit}</span>`,'','thermometer'):''}</div>`;
 }
 
 // Show before → after only for one measured, controllable adjustment.
