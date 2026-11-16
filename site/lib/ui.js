@@ -187,6 +187,19 @@ export function updateTasteSelection(ratings,key,value) {
  return true;
 }
 
+// An edited field invalidates its old local Save validation summary. Ordinary
+// inputs must not dismiss unrelated cloud/sync errors, and other fields' status
+// is left intact until the member corrects or submits those fields.
+export function acknowledgeShotInput(target,feedback){
+ if(!target)return false;
+ const invalid=target.getAttribute?.('aria-invalid')==='true';
+ target.removeAttribute?.('aria-invalid');
+ if(target.getAttribute?.('aria-describedby')==='shot-validation-feedback')
+  target.removeAttribute?.('aria-describedby');
+ if(invalid&&feedback)feedback.textContent='';
+ return invalid;
+}
+
 // Model validation remains authoritative. Move focus to the first invalid
 // measurement or missing sensory choice only after submit buttons are reenabled.
 export function focusShotValidationError(form,errors,tastes={}) {
