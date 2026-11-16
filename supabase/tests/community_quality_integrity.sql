@@ -293,6 +293,19 @@ begin
         'basket_model','setup_name','group_id','release_date'])
   or result::text like '%@fixture.invalid%' or result::text like '%PRIVATE:%' then
   raise exception 'Release grouping projection disclosed private identifiers or invented dates';end if;
+ -- Producer-only search must match both the total and actual paged rows.
+ -- The original live function omitted producer from the page selector.
+ result:=public.dic_search_community_shots('fArM OnE','Turbo',40,0);
+ if (result->>'total')::integer<>7 or jsonb_array_length(result->'shots')<>7
+   or exists(select 1 from jsonb_array_elements(result->'shots') as j(v)
+        where j.v->>'release_producer' is distinct from 'Farm One') then
+  raise exception 'Community producer-only search lost first release rows: %',result;
+ end if;
+ result:=public.dic_search_community_shots('Farm Two','Turbo',40,0);
+ if (result->>'total')::integer<>1 or jsonb_array_length(result->'shots')<>1
+   or result->'shots'->0->>'release_producer'<>'Farm Two' then
+  raise exception 'Community producer-only search lost second release: %',result;
+ end if;
  execute 'reset role';
  -- Paged responses still agree on count, and ID stays stable across pages.
  perform set_config('request.jwt.claim.sub',us[5]::text,true);
