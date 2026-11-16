@@ -21756,5 +21756,40 @@
     "production_writes": 0,
     "baseline": "IN_PROGRESS",
     "next": "numeric 4241-4320, vendor attribution and source parity; isolated PostgreSQL canonical response regression and #96 Auth"
+  },
+  "provider_canonical_name_acl_numeric_logs_run278": {
+    "run": 278,
+    "preflight_development_sha": "910f29a8d0fcc48a70af5126bdfc2739eb523732",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_head": "f346f85c26288b1114702ac828256386eacc21da",
+    "observed_at": "2026-11-16 01:48:39.354496+00",
+    "receipt_path": "docs/audits/issue509-r278-canonical-source-rls-pgss-logs-20261116.json",
+    "receipt_blob_sha": "538499d649aaa0f2f3f2581649acea184aeebd6a",
+    "complete_live_function_definitions": [
+      {
+        "signature": "private.dic_link_pending_coffee(uuid,uuid,text,jsonb)",
+        "md5": "140c211a4bfef175b041c037561a1e37",
+        "source_chars": 3954
+      },
+      {
+        "signature": "private.dic_source_key(text)",
+        "md5": "07e0ef286246fdae29b9151018296f79",
+        "source_chars": 981
+      }
+    ],
+    "complete_rls_policy_expressions": 4,
+    "effective_acl_relations": 6,
+    "pgss_rank_range": [
+      4241,
+      4320
+    ],
+    "new_numeric_distinct": 67,
+    "overlap": 13,
+    "cumulative_distinct": 4038,
+    "aggregated_log_services": 8,
+    "canonical_response": "ISOLATED_POSTGRES_REGRESSION_UNVERIFIED",
+    "source_key_fix": "TESTING_UNDEPLOYED",
+    "baseline": "IN_PROGRESS",
+    "next": "numeric 4321-4400; isolated canonical-name test, remaining provider-source parity and #96 Auth"
   }
 }
