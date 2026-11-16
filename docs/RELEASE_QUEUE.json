@@ -15394,24 +15394,33 @@
     {
       "id": "DIC-Q-455-r312-overview-archived-range",
       "issue": 455,
-      "pr": null,
+      "pr": 3084,
       "title": "Reject invalid original grinder snapshots from Coffee overview latest-rated feedback selection",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "5898fc8dbf23ca72f2cdd8ce6a7b8b7f427934a2",
       "scope_paths": [
         "site/lib/ui.js"
       ],
       "owner_source": "Issue #455 Option B safe correctness; DIC_PREFLIGHT_VERIFIED development_sha=afd711b47a2f39254c14885b9bb822bf0a847b3f preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "tests": [
-        "Four focused synthetic positive/negative cases in tests/issue455-r312-overview-archived-range.test.mjs authored; local container unavailable, NOT RUN.",
-        "PR-head Node22/lint/build, cloud/mobile/browser/offline, SQL/privacy/security, approval continuity and exact merged governance PENDING; frozen603 not presumed PASS."
+        "Exact PR #3084 head 00cb8d800925fb65b15575b6d4861c874b8af932: Node22/lint/build 43972058918 SUCCESS 5278 PASS/0 FAIL/6 intentional SKIP; R312 four focused cases 4711–4714 PASS.",
+        "Exact PR-head UX/mobile/browser 43972058992 SUCCESS (cloud and mobile-browser jobs); isolated SQL 43972066037, source security 43972058943 and approval governance 43972058957 SUCCESS.",
+        "PR #3084 one-parent nonforce squash [skip netlify] merge 5898fc8dbf23ca72f2cdd8ce6a7b8b7f427934a2. All five source/test/evidence/queue/scoped-journal Git blobs exactly match passed PR head.",
+        "Exact merged-source Node22 43972699836 SUCCESS 5278 PASS/0 FAIL/6 intentional SKIP including all four R312 cases, browser/cloud/mobile 43972699859 and push governance 43972699818 SUCCESS.",
+        "Frozen603 run 43972059072 SKIPPED, not PASS; unrelated #33 selected-source workflows not credited to #455. No live provider/member quality experiment."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact source PR CI, nonforce [skip netlify] merge, merged code/test blob parity and governance not verified; TESTING only.",
-        "Separate owner Publish needed for any production release."
+      "ci_runs": [
+        43972058918,
+        43972058992,
+        43972066037,
+        43972058943,
+        43972058957,
+        43972699836,
+        43972699859,
+        43972699818
       ],
-      "notes": "SAFE UI-only evidence selector guard, does not alter engine math, five ratings, measurements, archived notes, private shots, history or source ranges. No provider writes.",
+      "blockers": [],
+      "notes": "READY DEVELOPMENT ONLY. Preserve original full five-rated shot evidence: reject explicitly out-of-archived-range or inverted original grinder bounds before Coffee overview latest-shot feedback, without rewriting private History, dose, yield, grind, notes or taste ratings. Original optional legacy limits may be absent. NO owner Publish; production_deployed=false.",
       "production_deployed": false
     }
   ],
@@ -18073,6 +18082,15 @@
       "source_sha": "29b5a3995314e4a5a934dad65b91b7e108fba3f5",
       "production_deployed": false,
       "evidence": "PR #3079 exact head a0052d80 with 5 source/test/ledger/queue/journal blobs and five applicable checks SUCCESS; R311 3 focused Node PASS, 5274 total PASS/0 FAIL/6 intentional SKIP on head 43963356521 and merge 43964193581. Cloud/mobile 43963356733/43964193542, head SQL 43963356329/security 43963356289, head/merged governance 43963356341/43964193562 SUCCESS. Nonforce [skip netlify] merge 29b5a3995314e4a5a934dad65b91b7e108fba3f5. Frozen603 SKIPPED; no member evidence/deploy."
+    },
+    {
+      "date": "2026-11-16",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r312-overview-archived-range",
+      "state": "READY",
+      "source_sha": "5898fc8dbf23ca72f2cdd8ce6a7b8b7f427934a2",
+      "production_deployed": false,
+      "evidence": "PR #3084 source head 00cb8d8 five CI successes; four R312 focused tests 4711-4714 PASS, Node22 5278 PASS/0 FAIL/6 SKIP on PR head 43972058918 and source merge 43972699836. PR head UX/mobile 43972058992, SQL 43972066037, security 43972058943, approval 43972058957 SUCCESS; merged UX 43972699859 and pushed governance 43972699818 SUCCESS. Nonforce one-parent [skip netlify] merge 5898fc8, five Git blobs equal exact PR head. Frozen603 SKIPPED not PASS. No deployment/member data."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
