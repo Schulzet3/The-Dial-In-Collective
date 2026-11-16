@@ -3428,11 +3428,23 @@
         "site/cloud/main.js": "0a5274ec660ad435b499d58c9b5985ae400f37ea"
       },
       "access": "IMMUTABLE_GITHUB_ACTIVE_UI_MODEL_AND_COFFEE_LOG_CALL_PATH_REVIEWED",
-      "review_status": "R455_313_SAFE_LOCKED_COMPATIBLE_TESTING_NOT_MERGED",
-      "evidence_grade": "DIRECT_CODE_PATH_VERIFIED; THREE_FOCUSED_SYNTHETIC_TESTS_WRITTEN_NOT_YET_EXECUTED",
+      "review_status": "R455-313_CODE_TESTED_HEAD_MERGED_NONFORCE_DEV_READY",
+      "evidence_grade": "DIRECT_SOURCE_AND_THREE_SYNTHETIC_NODE22_CASES_PASS_PR_HEAD_MERGED; NO_MEMBER_QUALITY_DATA",
       "claims_verified_externally": "No new science claim. recipeGrid rendered raw temp unit in HTML; normal create/revise setup already normalizes F/C and production F/C constraint reduces ordinary-path exposure, but imported/malformed archived state is not certified safe for every rendering call. No observed exploit/member event.",
       "github267_literal_review_credit": 0,
-      "production_deployed": false
+      "production_deployed": false,
+      "implementation_merge_sha": "da74f54d41ac24253f31918f11f05589a5b25915",
+      "implementation_status": "SAFE_CODE_MERGED_DEVELOPMENT_READY_NOT_DEPLOYED",
+      "ci_runs": [
+        43981866379,
+        43981866456,
+        43981866370,
+        43981866483,
+        43981866376,
+        43982389862,
+        43982389961,
+        43982389866
+      ]
     }
   ],
   "evidence_checks": [
@@ -10432,8 +10444,8 @@
       "source": "LIVE-20261116-R313-RECIPE-GRID-TEMP-UNIT",
       "claim": "Current RecipeGrid uses raw unit both for unit glyph and tempDisplay selection; non-C/F is interpreted as Celsius by tempDisplay and raw HTML string is interpolated in the visible recommendation grid.",
       "source_locator": "site/lib/ui.js::recipeGrid; site/lib/constants.js::tempDisplay; site/cloud/main.js::home and showLog; site/lib/model.js::createSetup/reviseSetup",
-      "grade": "SOURCE_CODE_VERIFIED_SAFE_RENDER_BOUNDARY_TO_BE_TESTED",
-      "result": "Three focused synthetic Node22 regressions written, hosted exact-source CI PENDING; no production exploit claimed.",
+      "grade": "EXACT_HEAD_MERGED_SOURCE_AND_R313_POSITIVE_NEGATIVE_TESTS_PASS",
+      "result": "PR #3090 five exact-source PR-head CI SUCCESS; 5288 PASS/0 FAIL/6 intentional SKIP head+merge, R313 3/3 PASS, exact merged browser/cloud and approval retry SUCCESS. Transient unrelated historical GitHub READY read HTTP502 in first governance attempt fixed by selective retry, no bypass.",
       "github267_literal_review_credit": 0
     },
     {
@@ -10441,8 +10453,8 @@
       "source": "LIVE-20261116-R313-RECIPE-GRID-TEMP-UNIT",
       "claim": "Safe fallback to F for malformed unit must preserve valid C/F output, original numeric recipe, source label, and hidden-temperature render.",
       "source_locator": "site/lib/ui.js; tests/issue455-r313-recipe-grid-temp-unit.test.mjs",
-      "grade": "SYNTHETIC_REGRESSION_ADDED_NOT_YET_CI_VERIFIED",
-      "result": "Candidate exact-PR Node22, UX/mobile, isolated SQL/privacy, security and governance PENDING; 48/48 research reference-only not app CI.",
+      "grade": "EXACT_HEAD_MERGED_SOURCE_AND_R313_POSITIVE_NEGATIVE_TESTS_PASS",
+      "result": "PR #3090 five exact-source PR-head CI SUCCESS; 5288 PASS/0 FAIL/6 intentional SKIP head+merge, R313 3/3 PASS, exact merged browser/cloud and approval retry SUCCESS. Transient unrelated historical GitHub READY read HTTP502 in first governance attempt fixed by selective retry, no bypass.",
       "github267_literal_review_credit": 0
     }
   ],
@@ -10680,7 +10692,8 @@
     "R455-311 FINAL: PR #3079 merged 29b5a3995314e4a5a934dad65b91b7e108fba3f5 with five head-identical blobs; Node 5274 PASS/0 FAIL/6 SKIP both head+merge, three R311 focused PASS; source-bound cloud/mobile/SQL/security/governance success. READY development-only, no deploy. Continue next research/UX increment with fresh immutable preflight; S019 and ZIP original fresh byte proof still unavailable.",
     "R455-312: finish exact-source CI for original archived grinder-range overview context gate, repair failures, nonforce [skip netlify] merge only after successful applicable checks, read back source/test/journal/ledger/queue SHA, reconcile unique TESTING entry to READY only with exact merged evidence. Do not deploy or mutate member data.",
     "R455-312 FINAL: PR #3084 safe nonforce [skip netlify] merged 5898fc8, five source/test/ledger/queue/journal blobs byte-identical; 4 R312 Node22 tests PASS; exact head/merged Node 5278 PASS/0 FAIL/6 SKIP, head UX/security/SQL/governance SUCCESS, merged cloud/mobile and pushed approval SUCCESS. Queue uniquely READY development-only, no Publish. Continue next distinct source/UX issue; original S019 fresh bytes unavailable, original October29 ZIP fresh check unavailable.",
-    "R455-313: confirm PR-head exact CI for strict F/C RecipeGrid rendering boundary, fix any failing cases, recheck concurrent dev and nonforce [skip netlify] merge only if successful, independently read back five Git blob SHAs and merged governance, then reconcile canonical ledger and queue to READY only with tested merged-source evidence. Source ZIP original bytes and S019 separate original still unverified."
+    "R455-313: confirm PR-head exact CI for strict F/C RecipeGrid rendering boundary, fix any failing cases, recheck concurrent dev and nonforce [skip netlify] merge only if successful, independently read back five Git blob SHAs and merged governance, then reconcile canonical ledger and queue to READY only with tested merged-source evidence. Source ZIP original bytes and S019 separate original still unverified.",
+    "R455-313 FINAL: PR #3090 source da74f54d41ac24253f31918f11f05589a5b25915 five tested Git blobs match head, head five CI SUCCESS, merged Node22 5288 PASS/0 FAIL/6 SKIP and 3 focused R313 PASS, merged browser and governance retry SUCCESS. One unique R313 dev-only READY. No deployment. Continue distinct safe issue; original ZIP and S019 raw-byte check unavailable."
   ],
   "latest_review_checkpoint": {
     "run_id": "R455-312",
@@ -16367,16 +16380,17 @@
       "proposed_change": "SAFE: allow C explicitly, fallback otherwise to F, use the same validated display unit in temperature calculation and HTML label; no new input or policy.",
       "approval_required_for_behavior_change": false,
       "owner_approval_now_required": false,
-      "implementation": "SAFE_SOURCE_TEST_AND_SAME_COMMIT_JOURNAL_CANDIDATE_NOT_MERGED",
+      "implementation": "SAFE_NONFORCE_TESTED_MERGE_DEVELOPMENT_READY_NO_PUBLISH",
       "files": [
         "site/lib/ui.js",
         "tests/issue455-r313-recipe-grid-temp-unit.test.mjs"
       ],
-      "test_plan": "Three synthetic positive/negative Node22 cases plus exact PR-head Node/lint/build, browser/mobile/offline, isolated SQL/privacy, security and governance as applicable; head+merge same-source evidence. No physical efficacy claim.",
+      "test_plan": "R313 three synthetic tests 4722–4724 PASS; exact PR-head five workflows SUCCESS; head+merge Node22 5288 PASS/0 FAIL/6 SKIP; merged Node 43982389866, browser/cloud 43982389961 and approval 43982389862 attempt 2 SUCCESS; frozen603 SKIPPED not PASS.",
       "release_queue": "DIC-Q-455-r313-recipe-grid-temp-unit",
       "production_deployed": false,
       "github267_literal_review_credit": 0,
-      "release_queue_status": "TESTING"
+      "release_queue_status": "READY_DEVELOPMENT_ONLY",
+      "verified_merge_sha": "da74f54d41ac24253f31918f11f05589a5b25915"
     }
   ],
   "changeScope": {
