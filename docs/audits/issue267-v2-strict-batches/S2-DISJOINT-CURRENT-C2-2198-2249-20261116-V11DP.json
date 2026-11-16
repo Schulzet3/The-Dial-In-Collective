@@ -1,0 +1,1670 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "V11DP",
+  "date_utc": "2026-11-16",
+  "track": "STRICT_V2_PINNED_CURRENT_EXECUTABLE",
+  "reviewer": "Direct numbered AI semantic reading, not independent human certification",
+  "preflight": {
+    "development_sha": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "git_blob_verified": true
+  },
+  "source": {
+    "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+    "path": "scripts/audit/coffee-frozen-ci.py",
+    "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+    "first_line": 2198,
+    "last_line": 2249,
+    "line_count": 52
+  },
+  "previous_receipt": "S2-DISJOINT-CURRENT-C2-2167-2197-20261116-V11DO.json",
+  "per_line": [
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2198,
+      "literal": "        def test_reviewed_manifest_path_pin_and_strict_json(self):",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Defines strict reviewed-manifest path/hash/JSON validation test.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2198,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2214,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2199,
+      "literal": "            with tempfile.TemporaryDirectory() as temporary:",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Opens isolated temporary workspace for synthetic test.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2199,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2215,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2200,
+      "literal": "                root = Path(temporary).resolve()",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Resolves test root to absolute canonical path.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2200,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2216,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2201,
+      "literal": "                folder = root / \"docs/audits\"",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Selects audit subfolder in temporary root.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2201,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2217,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2202,
+      "literal": "                folder.mkdir(parents=True)",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Creates audit folder with parent directories for file fixture.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2202,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2218,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2203,
+      "literal": "                path = folder / \"review.json\"",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Targets specific in-folder review.json path.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2203,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2219,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2204,
+      "literal": "                path.write_text('{\"public_fixture\":true}', encoding=\"utf-8\")",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Writes well-formed minimal JSON fixture to temp file.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2204,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2220,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2205,
+      "literal": "                pin = file_hash(path)",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Computes true digest of fixture for content pin.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2205,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2221,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2206,
+      "literal": "                document, info = read_reviewed_changes(root, Path(\"docs/audits/review.json\"), pin)",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Reads reviewed changes with exact allowed relative path and hash.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2206,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2222,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2207,
+      "literal": "                self.assertEqual(document, {\"public_fixture\": True})",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Asserts decoded document equals expected JSON object.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2207,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2223,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2208,
+      "literal": "                self.assertEqual(info[\"sha256\"], pin)",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Asserts returned metadata SHA-256 equals measured pin.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2208,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2224,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2209,
+      "literal": "                self.assertEqual(read_reviewed_changes(root, None, None), (None, None))",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Confirms both absent path and pin produce benign None,None no-review.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2209,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2225,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2210,
+      "literal": "                for supplied, digest in ((None, pin), (Path(\"docs/audits/review.json\"), None),",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Iterates incomplete path/pin pairs and a mismatched-hash mutation.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2210,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2226,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2211,
+      "literal": "                                         (Path(\"docs/audits/review.json\"), \"0\" * 64),",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Includes 64-character zero hash invalid case.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2211,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2227,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2212,
+      "literal": "                                         (Path(\"docs/audits/review.json\"), \"1\" * 64)):",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Includes 64-character one hash invalid case.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2212,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2228,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2213,
+      "literal": "                    with self.subTest(path=supplied, pin=digest), self.assertRaises(ValueError):",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Subtest expects ValueError for each invalid path/pin pair.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2213,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2229,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2214,
+      "literal": "                        read_reviewed_changes(root, supplied, digest)",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Invokes path/pin validator for negative case.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2214,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2230,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2215,
+      "literal": "                outside = root / \"outside.json\"",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Creates path outside allowed audit folder.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2215,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2231,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2216,
+      "literal": "                outside.write_text(\"{}\", encoding=\"utf-8\")",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Writes external test JSON outside confined audit folder.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2216,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2232,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2217,
+      "literal": "                with self.assertRaises(ValueError):",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Expects exception for out-of-scope path despite correct hash.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2217,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2233,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2218,
+      "literal": "                    read_reviewed_changes(root, outside, file_hash(outside))",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Passes external path and its true digest to reject directory escape.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2218,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2234,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2219,
+      "literal": "                linked = folder / \"linked.json\"",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Creates audit-folder symlink path for escape attempt.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2219,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2235,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2220,
+      "literal": "                linked.symlink_to(outside)",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Symlinks in-folder name to out-of-scope file.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2220,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2236,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2221,
+      "literal": "                with self.assertRaises(ValueError):",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Expects ValueError for symlink target outside permitted root.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2221,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2237,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2222,
+      "literal": "                    read_reviewed_changes(root, linked, file_hash(outside))",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Passes symlink and valid target hash; must reject physical traversal.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2222,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2238,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2223,
+      "literal": "                for content in ('{\"same\":1,\"same\":2}', '{\"bad\":NaN}'):",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Iterates duplicate JSON key and nonstandard NaN JSON corpus.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2223,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2239,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2224,
+      "literal": "                    path.write_text(content, encoding=\"utf-8\")",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Overwrites fixture with invalid JSON before each subcase.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2224,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2240,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2225,
+      "literal": "                    with self.subTest(content=content), self.assertRaises(ValueError):",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Expects ValueError for duplicate keys and NaN under strict parse.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2225,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2241,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2226,
+      "literal": "                        read_reviewed_changes(root, path, file_hash(path))",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Invokes parser with actual invalid content hash; digest alone insufficient.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2226,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2242,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2227,
+      "literal": "",
+      "classification": "nonexecuting_blank",
+      "individual_semantic_interpretation": "Blank physical boundary between separate test methods.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2227,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2243,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2228,
+      "literal": "        def test_reviewed_changes_reject_stale_or_changed_source_and_scorer_bindings(self):",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Defines rejection of changed/stale source and scorer fingerprint bindings.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2228,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2244,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2229,
+      "literal": "            with tempfile.TemporaryDirectory() as temporary:",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Creates isolated temp test environment.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2229,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2245,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2230,
+      "literal": "                root = Path(temporary).resolve()",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Resolves temp test root.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2230,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2246,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2231,
+      "literal": "                manifest, material, expected, index, *_rest = self._review_fixture(root)",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Obtains manifest, material, expected and index from fixture.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2231,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2247,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2232,
+      "literal": "                keys = (\"oracle_freeze_sha256\", \"packet_archive_attestation_sha256\", \"source_archive_sha256\",",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Starts tuple of source attestation bindings including frozen oracle/archive hashes.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2232,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2248,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2233,
+      "literal": "                        \"recovery_archive_sha256\", \"baseline_runtime_fingerprint\", \"candidate_runtime_fingerprint\",",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Adds recovery hash and baseline/candidate runtime fingerprints.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2233,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2249,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2234,
+      "literal": "                        \"baseline_stable_cases_sha256\", \"candidate_stable_cases_sha256\")",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Adds stable-case projection hashes to exact provenance bindings.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2234,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2250,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2235,
+      "literal": "                for key in keys:",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Iterates each protected manifest binding key independently.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2235,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2251,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2236,
+      "literal": "                    bad = json.loads(json.dumps(manifest))",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Clones manifest JSON before tampering each binding.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2236,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2252,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2237,
+      "literal": "                    bad[key] = \"f\" * 64",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Replaces protected hash with 64 f characters to simulate stale source.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2237,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2253,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2238,
+      "literal": "                    with self.subTest(binding=key), self.assertRaises(ValueError):",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Names affected binding and expects ValueError.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2238,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2254,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2239,
+      "literal": "                        verify_reviewed_changes(bad, material, root, expected, index, \"789\")",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Invokes reviewed-change verifier with stale source fingerprint.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2239,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2255,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2240,
+      "literal": "                for key in (\"baseline_artifacts\", \"preserved_script_hashes\"):",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Iterates nested baseline artifact and preserved script hash maps.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2240,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2256,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2241,
+      "literal": "                    bad = json.loads(json.dumps(manifest))",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Clones original manifest for each nested-map mutation.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2241,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2257,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2242,
+      "literal": "                    bad[key][next(iter(bad[key]))] = \"f\" * 64",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Mutates first nested hash entry to synthetic 64 f digest.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2242,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2258,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2243,
+      "literal": "                    with self.subTest(binding=key), self.assertRaises(ValueError):",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Expects ValueError for each tampered nested binding.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2243,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2259,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2244,
+      "literal": "                        verify_reviewed_changes(bad, material, root, expected, index, \"789\")",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Passes nested mutation to reviewed-change verification.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2244,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2260,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2245,
+      "literal": "                bad = json.loads(json.dumps(manifest))",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Clones manifest for stable-case projection mutation.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2245,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2261,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2246,
+      "literal": "                bad[\"stable_case_projection\"][\"ignored_case_properties\"].append(\"calls\")",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Appends calls to ignored-case properties, attempting to conceal call drift.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2246,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2262,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2247,
+      "literal": "                with self.assertRaises(ValueError):",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Expects rejection of expanded ignored-case properties.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2247,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2263,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2248,
+      "literal": "                    verify_reviewed_changes(bad, material, root, expected, index, \"789\")",
+      "classification": "python_test_or_fixture_statement",
+      "individual_semantic_interpretation": "Verifies altered ignored-case projection causes ValueError.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2248,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2264,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2249,
+      "literal": "",
+      "classification": "nonexecuting_blank",
+      "individual_semantic_interpretation": "Blank line following closed provenance tamper test.",
+      "quality_assessment": "Focused synthetic security/integrity negative-path assertion; preserve exact source hash, path confinement, strict JSON and scorer/case drift checks.",
+      "bug_security_privacy_performance_assessment": "Test uses isolated filesystem only; no demonstrated production SQL/Auth/member/provider effect. Source-path/symlink, JSON duplicate/NaN and hash forgery protections asserted but actual test not executed in this review.",
+      "dead_obsolete_assessment": "Pinned executable test and support fixture; no proven dead test or safe elimination.",
+      "duplicate_assessment": "Repeated fixtures target independent path/hash/JSON/provenance tamper classes; no established redundant test behavior.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2249,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "7caa5978bc66bc94ce5b5a9729be310042363c21",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2265,
+        "exact_literal_match": true,
+        "full_live_drift_review_credit": false
+      },
+      "testability": "Run Python unittest on exact source and original603 guard checks before counting runtime PASS; review here NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current test defect or proven safe deletion; retain strict validation.",
+      "locked_decision_fit": "Protect original603/captures/scorer and member source trust, never weaken Auth/path confinement or current Locked decisions."
+    }
+  ],
+  "first_file_revalidation": {
+    "frozen_f001_lines": 41,
+    "strict_s2_001_literal_matches": 41,
+    "additional_credit": 0
+  },
+  "older_R2_C2": "Grouped old V2 summaries not elevated to strict per-line semantic proof.",
+  "verification": {
+    "direct_literals": 52,
+    "unique_positions": 52,
+    "contiguous": true,
+    "prior_end": 2197,
+    "live_exact_offset": 16,
+    "full_post_pin_drift_complete": false,
+    "python_tests_run": false
+  },
+  "findings": [
+    {
+      "type": "SECURITY_TEST_COVERAGE_REVIEW_ONLY",
+      "detail": "Pinned suite tests path+SHA pairing, symlink escape, strict duplicate-key/NaN JSON and stale hashes; no actual execution or verified vulnerability."
+    },
+    {
+      "type": "FINGERPRINT_PROTECTION_REVIEW_ONLY",
+      "detail": "Attempts to hide calls in ignored-case projection or tamper source/scorer hashes are negative fixtures; full original603 acceptance not run."
+    }
+  ],
+  "software_tests": "NOT_RUN_DOCS_ONLY",
+  "source_ci": "PENDING",
+  "provider": "NOT_APPLICABLE",
+  "next": {
+    "F215": 5151,
+    "C48": 2250,
+    "issue_complete": false
+  }
+}
