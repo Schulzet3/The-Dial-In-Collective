@@ -15215,6 +15215,36 @@
       ],
       "notes": "Development-only narrow returned JSON name correction, preserve historical migrations, RLS, private function grants, first-entry precedence, alias/provenance, existing shots and Locked member behavior. No production provider write, Publish or release authorization.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-r306-unrated-archived-advice",
+      "issue": 455,
+      "pr": 3055,
+      "title": "Exclude incomplete archived taste ratings from next-shot recommendation evidence",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "owner_source": "Issue #455 Option B SAFE Log Shot -> Rate -> Recommendation correctness; DIC_PREFLIGHT_VERIFIED development_sha=3d6148e23a891f351e1181ed145d48b902739fae preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Source-bound R306: current recommendation() selects physically valid newest shot without requiring all five recorded taste ratings; an incomplete legacy cached next step can displace earlier fully rated advice. Three synthetic regression cases authored, but no hosted PASS asserted yet.",
+        "Original PR-head approval 43910679133 FAILED: untracked site/lib/engine.js. This IN_PROGRESS intake corrects that governance error; subsequent exact-source workflow checks, Node22, cloud/browser/mobile/offline, SQL/security and postmerge governance remain pending.",
+        "Original frozen603 workflow 43910679285 SKIPPED (not PASS); unrelated #33 and #267 tests are not applicable certification."
+      ],
+      "ci_runs": [
+        43910679133,
+        43910679148,
+        43910679131,
+        43910679101,
+        43910679063
+      ],
+      "blockers": [
+        "New corrected head exact-source five applicable GitHub workflow checks must complete SUCCESS before nonforce merge.",
+        "Merged SHA/Git blobs and applicable governance must be read back before any READY certification."
+      ],
+      "notes": "Preserves all original private shot measurements, five ratings (including missing), notes, family history, prior grind calibration, espresso styles, offline records and current Locked numeric rules. No real member incident observed, no efficacy or production claim. Development TESTING/IN_PROGRESS only; no deploy, no new telemetry, no owner Publish.",
+      "production_deployed": false
     }
   ],
   "history": [

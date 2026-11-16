@@ -65,10 +65,15 @@ test('R083 valid measured temperatures continue informing same-style personal gu
  assert.equal(rec(s).tempC,85);
 });
 
-test('R083 invalid or incomplete five-taste success evidence never becomes temperature proof',()=>{
+test('R083 incomplete five-taste success cannot prove temperature while an older rated shot keeps its actual control',()=>{
  const s=state();s.shots.push(
   shot('stale',newer,{tempC:91,tasteScales:{...green(),sweetness:null}}),
   shot('not-green',older,{tempC:92,tasteScales:{...green(),body:2}})
  );
- assert.equal(rec(s).tempC,95);
+ const before=structuredClone(s),guide=rec(s);
+ assert.equal(guide.source,'Adjustment from your latest taste rating');
+ assert.equal(guide.established,false,'non-green rated history is not a proven success');
+ assert.equal(guide.familyId,null,'incomplete all-green marker cannot establish a family');
+ assert.equal(guide.tempC,92,'preserve original actual temperature for one-control adjustment');
+ assert.deepEqual(s,before,'never rewrite original private rated or incomplete archive');
 });
