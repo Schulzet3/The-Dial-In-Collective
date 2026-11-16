@@ -28,7 +28,7 @@ test('#412 selected Brown Bear Dark roast with its own direct notes',()=>{
 });
 test('#413 explicit selected Swiss Water decaf is water method, not Washed processing',()=>{
   const p=parse(413,['A medium roast that delivers sweet, floral and spice.',
-    'Using the Swiss Water Process our decaf is 99.9% caffeine free.',
+    'Decaf is decaffeinated using the Swiss Water Process. Our decaf is 99.9% caffeine free.',
     'Medium Roast','Notes: Sweet | Floral | Spice','Swiss Water Process']);
   assert.equal(p.ok,true);
   assert.equal(p.fields.name,'Decaf');
