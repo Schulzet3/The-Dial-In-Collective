@@ -1,0 +1,18 @@
+# Issue #455 R306 — incomplete historical taste ratings cannot drive next-shot advice
+DIC_PREFLIGHT_VERIFIED development_sha=3d6148e23a891f351e1181ed145d48b902739fae preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+**Owner authority:** #455 Option B authorizes narrow Locked-compatible Log Shot → Rate → Recommendation correction; NO Publish, production provider/member/auth/SQL/Edge writes, telemetry or numeric/scientific policy changes. Scope is current read-only app state and synthetic test fixtures.
+
+**Source preflight and concurrency:** live development 3d6148e23a891f351e1181ed145d48b902739fae; immutable PREFLIGHT.md Git blob 2fb236bbfa6bac48513eeb3bd157b260853af06d independently verified byte-identical before other documents; pre-write branch rechecked 3d6148e23a891f351e1181ed145d48b902739fae. Existing source `site/lib/engine.js` Git blob `f384ae67c1a9148990cab4716dc8ad22d1ca81f3`. Main `3b372215ac7ccfd6db406f27090706e8cb8f3e80`, release/production `0f3641b4fff07e2a88d7747e621304ec2cf0ead5`, both read-only.
+
+**Reproduced source-level failure:** `recommendation()` selected `last` using only physical measurement, setup context and timestamp. An imported newer record with one missing taste rating can be physically valid, carry a stale cached `suggestion.next`, and mask the preceding genuinely rated shot. If an incomplete record alone is selected, the next recipe can incorrectly display an imported cached adjustment. Old private archival rows themselves must remain visible/unchanged; no evidence that a real member encountered this.
+
+**SAFE change:** select latest recorded shot for next-shot advice only when `tastesComplete(sh.tasteScales)` is true, keeping the existing physical calibration/timestamp/context checks. Original records, ratings, notes, offline history, all-green success handling, style/feed/basket/grinder/temperature, exact-coffee matching, one-control advice and numeric targets unchanged. This is NOT a change to save/edit acceptance or scientific inference.
+
+**Atomic paths:** `site/lib/engine.js`; `tests/issue455-r306-unrated-history-advice.test.mjs`; this same-commit `docs/workstreams/ops-issue455-r306-unrated-history-advice-20261116.md`.
+
+**Negative/positive regression criteria:** (1) synthetic newer measured partial-ratings archive with a cached next 75g must NOT replace earlier fully rated 55g advice; (2) archive-only partial ratings must show baseline instead of cached next; (3) a newer fully rated historical shot still supplies its valid cached next; (4) all original private content remains exactly unchanged. This is a code-level repro/expected regression, not empirical real-member or cup-quality evidence.
+
+**Tests:** local Node22 unavailable due execution runtime ClientError; do NOT claim any local PASS. Run exactly one targeted hosted Node22 source suite and applicable cloud/offline/mobile/approval/security checks at PR head; inspect exact status and fix any failures. Do not duplicate unrelated unchanged suites. Frozen603 SKIPPED is not PASS. Only nonforce [skip netlify] merge after current-head overlap check and successful exact source checks. After merge read back source/test/journal blobs and merged governance. Any queue READY claim requires separate exact source-bound #457 coverage reconciliation.
+
+**Research:** no new source or evidence count credit, no #267 literal-line credit, no change to #335/33/96 ownership; original Oct29 pack and S019 byte evidence remain unverified because container and Python execution failed. No provider or production writes. **Next action:** inspect CI, resolve any failure and integrate nonforce; then reconcile issue/queue/current status with actual results.
