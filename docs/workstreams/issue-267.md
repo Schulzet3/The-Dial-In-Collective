@@ -1,3 +1,10 @@
+## November 16, 2026 UTC — #267 V11DU direct disjoint F215:5393–5404 / C48:2467–2478 [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=ed21ad60139f8ca554b16a8baf6492654cf9e2fe preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- Source-bound 12/12 immutable frozen and 12/12 pinned executable literal lines read individually and interpreted; 24/24 exact selected current counterpart parity. [Frozen receipt](../audits/issue267-v2-strict-batches/S2-DISJOINT-F215-5393-5404-20261116-V11DU.json) and [pinned receipt](../audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C2-2467-2478-20261116-V11DU.json), both SOURCE-SHA and 1-based per-line. Ghost Roast 2316 vs 2316 MASL historical numeric equality with strict review_required; capture not independently rehashed. Pinned synthetic score-integrity test and public interoperability Box key fixture are not executed real-603/backup verification.
+- Concurrent protection: #3043 F215:5329-5392/C48:2405-2466 OPEN; overlapping shorter #3050 F215:5329-5360/C48:2405-2435 OPEN. These are **not merged coverage** and require separate reconciliation. V11DU starts AFTER longer #3043, nonoverlapping. Historical V1, grouped R2/C2 and machine inventories not promoted. Existing first-file F001:1-41 strict S2-001 revalidated previously, no duplicate credit.
+- Tests: 24/24 literal and bounded counterpart PASS; new PR/merged exact-source approval CI PENDING, Python/Node22/build/browser/mobile/offline/SQL/Auth/original603 NOT_RUN_DOCS_ONLY, provider NOT_APPLICABLE. No live app defect reproduced, no runtime/test/source edits, no provider/member/Netlify/release/backup production change, no READY or COMPLETE. #267 OPEN, next disjoint positions F215:5405/C48:2479 after earlier PR adjudication.
+
 ## November 16, 2026 UTC — Issue #267 V11DS frozen F215:5267–5328 and pinned C48:2350–2404 [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=562c97dac97ab53da3d5e93f49ea691762059e74 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
