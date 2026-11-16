@@ -1,0 +1,29 @@
+# Issue #33 R255 — original603 #433 AM and #447 Sumatra Mandheling current selected official review (DEVELOPMENT ONLY)
+
+DIC_PREFLIGHT_VERIFIED development_sha=064b9e0522c4df497cf9824977ce0b120181ee0d preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+## November 16, 2026 — independent source-bound test work [skip netlify]
+- Authority: owner hourly Issue #33 development-only original603 accuracy; live immutable PREFLIGHT verified by independent Git blob fetch before AGENTS/context/issue, Locked Master Specification, Decision Ledger, approval matrix, source register, queue or merchant reads. Rechecked live development SHA before authoring. #267 V2 and #96 separately owned.
+- Current direct selected seller evidence: #433 https://www.blackcoffeeroastingco.com/product/am-blend displays one AM title; selected prose explicitly says graham cracker, cashew, hibiscus, a hint of lemon, while figurative sunrise is not independently a tasting ingredient. Selected `Roast Level: Lighter` is not one of the approved normalized roast categories. #447 https://www.bluejazzcoffee.com/products/sumatra-mandheling says Jegarang/Sumatra, 1375 & 1600 meters, deep fruit cup notes, Medium-Dark; grinding aromatics are not extra cup notes. Fresh public browser today, not yet source-byte/official-runtime verified until hosted CI.
+- Original frozen CSV Git blob `3e0d3036ea727de091f304f538c6de2dfcaa10d6` retained. #433 archive: old extraction `lemon and sunrise` and Medium, original expected graham cracker/cashew/hibiscus/lemon. #447 historical selected fields broadly agree; real current source must still independently pass.
+- Added guarded exact-two-official-URL workflow, actual parser/Add Coffee/Source Review runner, independent raw HTML SHA256 and immutable-corpus afterproof, plus focused positive/adversarial tests. This is test/CI only; no broad parser behavior change or READY claim until exact current official evidence. If current parser misses direct selected facts, retain FAILED receipt and fix narrowly, never weaken the selected-product/related/review boundary.
+- Acceptance: exact currently selected product identity, fresh bounded safe HTTPS, raw hash, actual Add Coffee and Source Review, four direct #433 tasting words or reviewable contradiction, no auto-guessed `Lighter` category, #447 direct flavor and cultivation context, no review/SEO/related/ground-aroma cross-contamination. No publication, production provider/SQL/Edge/Auth/member writes, forced Git, accounts, paid services, original oracle/scorer/captures/603-row CSV changes. Continue with exact-source CI and safe nonforce integration; Issue #33 remains OPEN, entire 603 individual review UNVERIFIED.
+
+## November 16, 2026 UTC — R255 red-first actual source defect repaired [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=064b9e0522c4df497cf9824977ce0b120181ee0d preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- First exact PR-head guarded current official [run 43946406070](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/43946406070) **FAILED** focused 5/6 Node positive/adversarial tests and independent source afterproof while primary guarded public fetch/parser step completed SUCCESS 2/2: selected #433 AM leaked figurative `sunrise` into canonical tasting notes `Graham cracker, cashew, hibiscus, lemon and sunrise`. Raw current #433 262544 B SHA256 `7af0865ab306f55b8c0048c536b4515a0d8bc4b3dbe63e2a99de82481f4db1ad`; selected #447 179728 B SHA256 `9b700a1747ac4e419f53e1cc89e0deed48205e82bd96a9078475c248c8765591`. This confirms a current code defect, not just old CSV historical drift. Initial approval/isolated SQL/Python/private-source check PASS; frozen original603 workflow SKIPPED, not PASS.
+- Narrow generic sensory-only guard in `src/server/coffee-flavor-evidence.mjs` excludes **terminal sky/time-of-day scene metaphors** `sunrise` or `sunset` when joined to actual notes, retains all literal seller flavor words and original unsanitized source facts; does not alter selected identity, origins, taxonomy, privacy, snapshots, roaster records or frozen oracle. Adds 2 focused positive/adversarial test cases; exact corrected-head tests and current official probe REQUIRED before READY or merge. No deployment, production/data/provider write, no owner decision. Full 603 certification remains IN_PROGRESS; #33 OPEN.
+
+## November 16, 2026 UTC — R255 regex escaping correction before acceptance [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=064b9e0522c4df497cf9824977ce0b120181ee0d preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- Read back first source patch Git blob and caught double-escaped whitespace tokens in the newly authored narrow metaphor regex before treating it as passing evidence; restored real JS regex `\\s` whitespace metacharacters (not literal backslash-s). The prior PR head is historical evidence only; current head must independently run all source-bound tests and afterproof. No policy, source fact, original data, member or production change.
+
+## November 16, 2026 UTC — R255 queue intake for actual parser source change [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=064b9e0522c4df497cf9824977ce0b120181ee0d preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- First PR-head approval 43946827777 FAILED at required `release-queue.mjs --enforce-intake`: `src/server/coffee-flavor-evidence.mjs` not listed in an IN_PROGRESS/TESTING/READY queue item. This new independent `DIC-Q-33-r255-selected-sensory-sky-scene-guard` is deliberately TESTING and records that failure and exact red-first evidence. It makes NO unrelated READY/DEPLOYED change; original 603 scope stays OPEN. Corrected-head CI and safe merge/readback still unverified.

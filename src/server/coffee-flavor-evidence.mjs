@@ -44,7 +44,13 @@ function attributesOf(node,page){
  return attributes;
 }
 function shortFlavorList(raw,clean,{allowSingle=false}={}){
- const text=clean(raw,401).trim(),body=text.replace(/[.]$/,'');
+ // A trailing sky/time-of-day metaphor after a literal flavor is not an
+ // independently identifiable cup descriptor. Preserve the source prose
+ // separately; only the canonical sensory candidate excludes that scene.
+ const original=clean(raw,401).trim();
+ const text=original.replace(/(?:,\s*|\s+and\s+)(?:the\s+)?(?:sunrise|sunset)\s*[.!?]?$/iu,'').trim(),
+  body=text.replace(/[.]$/,'');
+ if(/^(?:sunrise|sunset)$/iu.test(text))return '';
  if(text.length<2||text.length>350||/\b(?:masl|variet(?:y|ies|al)|farm(?:ers?)?|producers?|co-?op|elevation|process|processing|fermented|fermentation|washed|anaerobic|carbonic|maceration|relationship|espresso|coffee in|brew time|roast level|subscribe|shipping|sourcing|quantity|order|purchase|grind|brewing|recipe|certified|certifications?|fair trade|harvest competition)\b/i.test(text))return '';
  if(/\b(?:roasted coffee|whole beans?|ground coffee|each and every bean|each bean|every bean|(?:final|finished) brew|notes?|roast|decaf|pair perfectly|zoom|hover|expand|collapse|caption|click|swipe|navigation|every sip|each sip)\b/i.test(text)||
   /\b(?:not|never|without|allowing|walking|reminding|giving|bringing|bridging|finishing|preserving|resulting|delivering|expect|dance|dances|pair|pairs)\b/i.test(text)||
