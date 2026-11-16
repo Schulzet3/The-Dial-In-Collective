@@ -15184,6 +15184,28 @@
       ],
       "notes": "Local new/edited setup unit is constrained to supported F/C. Existing private history and full five-taste shot ratings unaffected. No new science, universal numeric target, production member reads, member changes or deploy; #267 V2 literal audit zero credit.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-pending-canonical-name-response",
+      "issue": 509,
+      "pr": null,
+      "title": "Return current canonical name after an earlier Pending coffee becomes the global primary name",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261116151600_dic_pending_canonical_name_response.sql"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
+      "tests": [
+        "Immutable live function SQL MD5 140c211a4bfef175b041c037561a1e37 directly read; source shows record target.name retained after canonical UPDATE; no production data mutation.",
+        "Synthetic two-owner older/later Pending rename, alias, original library ID and unmodified shot-history regression added for disposable PostgreSQL17; not yet executed."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Isolated PostgreSQL17, SQL/JWT, Node22, privacy/security and exact-source governance CI not yet verified; downstream #33 contract pending."
+      ],
+      "notes": "Development-only narrow returned JSON name correction, preserve historical migrations, RLS, private function grants, first-entry precedence, alias/provenance, existing shots and Locked member behavior. No production provider write, Publish or release authorization.",
+      "production_deployed": false
     }
   ],
   "history": [
