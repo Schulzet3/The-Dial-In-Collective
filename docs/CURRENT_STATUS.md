@@ -1,3 +1,15 @@
+## November 16, 2026 UTC — Issue #455 R304 new/edit setup temperature-unit integrity SAFE development READY [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=92a1a80be5c01cae138404c27c8e5f2ccb2941d7 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+[PR #3046](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3046) safely merged nonforce at `92a1a80be5c01cae138404c27c8e5f2ccb2941d7` with explicit [skip netlify] title/message and five identical code/test/ledger/queue/journal Git blobs. Source `site/lib/model.js` previously accepted unsupported truthy temperature units for new/edited setups, which propagated into **future** shot snapshots. SAFE exact-C-otherwise-F normalization now protects setup provenance without rewriting historic measurements, original five independent taste ratings, private notes, grinder calibration, recipes or offline history. No observed member incident or demonstrated espresso cup quality.
+
+Exact PR-head Node22 [43890576519](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/43890576519) and merged Node22 [43891508442](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/43891508442) each **5,225 PASS /0 FAIL /6 intentional SKIP**, both focused synthetic R304 tests PASS. PR-head cloud/mobile/offline 43890576619, SQL/privacy 43890576676, security 43890576880, approval/governance 43890576688 **SUCCESS**. Merged cloud/mobile 43891508473 and governance 43891508500 **SUCCESS**. Frozen603 43890576638 **SKIPPED NOT PASS**; unrelated extractor checks are not #455 evidence. Source and tests are merged and verified; this docs-only reconciliation must itself pass applicable exact-source governance before final integration assertion.
+
+Research/UX canonical ledger **168 distinct sources /515 bounded evidence checks /233 proposals**; unique `DIC-Q-455-r304-setup-temp-unit-integrity` marked **READY DEVELOPMENT ONLY** in this reconciliation, never deployed (`production_deployed=false`). Original October29 ZIP attachment surfaced but bytes/hash not accessible to this execution; S019 original PDF also unverified. #267 V2 literal-review credit zero. No science or owner-Locked rule changes, new capture, real member experiment, provider/SQL/Auth/Edge, Netlify release, main/release/production or backup changes. Issue #455 remains OPEN for further evidence and safe UX work.
+
+---
+
 ## November 16, 2026 UTC — Issue #455 R303 historic Edit Shot temperature-unit integrity SAFE development READY [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=5935239398d08ed5c3aceb173a442570389cd186 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d

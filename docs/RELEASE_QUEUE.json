@@ -15166,23 +15166,32 @@
     {
       "id": "DIC-Q-455-r304-setup-temp-unit-integrity",
       "issue": 455,
-      "pr": null,
+      "pr": 3046,
       "title": "Canonicalize new/edited setup temperature unit before future shot snapshots",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "92a1a80be5c01cae138404c27c8e5f2ccb2941d7",
       "scope_paths": [
         "site/lib/model.js"
       ],
       "owner_source": "Issue #455 Option B independently authorized SAFE consistency fix; DIC_PREFLIGHT_VERIFIED development_sha=bea552e25f39593b2feea6ed0969a3ee4e396308 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "tests": [
-        "Two synthetic create/revise/snapshot tests authored with positive valid F/C and negative invalid units, archived private shot/notes/five-taste preservation; NOT RUN, NOT PASS.",
-        "Hosted source-bound Node22/build, cloud/mobile/offline, isolated SQL/security and governance pending; NOT PASS."
+        "Two focused synthetic R304 module tests PASS on PR-head Node22 43890576519 and exact merged Node22 43891508442; new/edited C/F vs invalid units and archived private shot/notes/five tastes.",
+        "PR head Node22/lint 43890576519 SUCCESS: 5225 PASS, 0 FAIL, 6 intentional SKIP; merged Node22/lint 43891508442 SUCCESS: 5225 PASS, 0 FAIL, 6 SKIP. Same five tested code/test/ledger/queue/journal Git blobs verified unchanged at merged source.",
+        "Exact PR-head cloud/mobile/offline/UX 43890576619, SQL/privacy 43890576676, security 43890576880 and approval/governance 43890576688 completed SUCCESS; merged cloud/mobile 43891508473 and approval/governance 43891508500 completed SUCCESS.",
+        "Frozen603 43890576638 intentionally SKIPPED, NOT PASS; unrelated #33 workflows do not certify #455."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "PR-head source tests, merge, exact-source CI and readback pending; not READY."
+      "ci_runs": [
+        43890576519,
+        43890576619,
+        43890576676,
+        43890576880,
+        43890576688,
+        43891508442,
+        43891508473,
+        43891508500
       ],
-      "notes": "Local new/edited setup unit is constrained to supported F/C. Existing private history and full five-taste shot ratings unaffected. No new science, universal numeric target, production member reads, member changes or deploy; #267 V2 literal audit zero credit.",
+      "blockers": [],
+      "notes": "Local new/edited setup unit is constrained to supported F/C. Existing private history and full five-taste shot ratings unaffected. No new science, universal numeric target, production member reads, member changes or deploy; #267 V2 literal audit zero credit.\n2026-11-16 R304 exact PR-head five CI checks and merged source Node/browser/governance SUCCESS; 5225 Node PASS/0 FAIL/6 intentional SKIP, two R304 tests PASS, five exact merged Git blobs read back. Development-only READY, no owner Publish.",
       "production_deployed": false
     }
   ],
@@ -17817,6 +17826,15 @@
       "source_sha": "5935239398d08ed5c3aceb173a442570389cd186",
       "production_deployed": false,
       "evidence": "PR #3031 exact head 00e4892, code merged nonforce 5935239398d08ed5c3aceb173a442570389cd186; R303 three focused tests and Node22 43863881030/43864545682 5204 PASS/0 FAIL/6 SKIP, PR head cloud/SQL/security/governance and merged cloud/governance SUCCESS. Same-commit preflight and all five code/test/ledger/queue/journal Git blobs checked. Development-only no Publish."
+    },
+    {
+      "date": "2026-11-16",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r304-setup-temp-unit-integrity",
+      "state": "READY",
+      "source_sha": "92a1a80be5c01cae138404c27c8e5f2ccb2941d7",
+      "production_deployed": false,
+      "evidence": "PR #3046 exact head 7e0d425c72687902215f4f18f58ac6378225dcfa and nonforce two-parent [skip netlify] merged 92a1a80be5c01cae138404c27c8e5f2ccb2941d7; Node head 43890576519 and merged 43891508442 each 5225 PASS/0 FAIL/6 intentional SKIP including R304 tests; five head CI and merged browser/governance SUCCESS. Five source/test/journal/queue/ledger Git blobs identical. No deployment."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
