@@ -1,3 +1,10 @@
+## November 16, 2026 — #267 V11DD F215:4326–4387 directly inspected archived evidence [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=2077a489b797ba15114792146c7647f4506b6225 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- **Source:** 62/62 individually interpreted physical original frozen lines F215:4326–4387 (docs/audits/2026-10-24-extractor-elevation-roaster-adjudication.json), immutable abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9, tree c54ade64eca30946df8858297578a172f5cf6fa8, blob c3a92e1e2d7045c9a53a903f82f0183fa79dc7cf. [Per-line receipt](../audits/issue267-v2-strict-batches/S2-DISJOINT-F215-4326-4387-20261116-V11DD.json) records every literal, unique interpretation, quality/risk, dead/duplicate, pinned/live counterpart, tests, disposition and Locked fit. V11DC previously ended 4325, no gap or overlap. F001:1–41 rechecked against strict S2-001, without duplicate credit; V1/grouped R2/C2 not promoted. Frozen/pinned/live F215 archive blob identical, not executable coverage or post-pin drift evidence.
+- **Findings:** Confident Even Steven 1300 vs 1300 masl and WEBE Strawberry Jam Colombia Santa Monica 1450–1500 vs 1,450–1,500 m retain identical metric values/bounds but remain review_required and production_parser_used=false. Archived source capture hashes, .js endpoints and live #33 parser were NOT re-verified; no active code defect established. Preserve original603, #33 current-source and #96 security ownership, Locked decisions and private data.
+- **Checks:** 62/62 literal/range/source and first-file source match PASS; PR-head/merged governance CI PENDING; Node22/build/browser/offline/SQL/Auth/603 NOT_RUN_DOCS_ONLY, provider NOT_APPLICABLE. #267 OPEN; next F215:4388. No app, production, provider, publication, backups, schedule, alert policy or READY queue changes.
+
 ## November 16, 2026 — #267 V11DC original frozen F215:4234–4325 direct line audit [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=694aee2b8e3b80a8fcd8b47cebb53d8c25da86a4 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
