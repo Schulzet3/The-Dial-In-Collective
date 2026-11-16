@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R295",
+  "project_ref": "azviqqejypsefzilgonr",
+  "date_utc": "2026-11-16",
+  "preflight": {
+    "development_sha": "c98e27203197038e9203c064419b0d6e5d90a0ff",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "verified_by": "IMMUTABLE_GITHUB_FETCH_AND_RECOMPUTED_GIT_BLOB_SHA1"
+  },
+  "branch_context": {
+    "main": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release_production": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+  },
+  "owner_scope": "FULL_CODE_QUALITY_AND_OBSOLESCENCE_AUDIT; security only a guardrail; NO_PROVIDER_WRITES",
+  "provider": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.11.0.003",
+    "migrations_count": 69,
+    "edge_active_count": 5,
+    "database_writes": 0
+  },
+  "source_reference_blobs": [
+    {
+      "path": "supabase/migrations/20261113050000_dic_retire_roaster_directory.sql",
+      "git_blob_sha": "10775c86bf88e61160fdc66d35c65698638742d6"
+    },
+    {
+      "path": "supabase/migrations/20261112135900_dic_member_approval_notices.sql",
+      "git_blob_sha": "ce17e3801d8d4e100e8ec1fb95fa5a723ad3a7a4"
+    }
+  ],
+  "directly_read_current_function_source": [
+    [
+      "private.dic_canonical_roaster_key(value text)",
+      "646cff7cceed7011b1fc3a1b69c4d3f0",
+      402
+    ],
+    [
+      "private.dic_find_coffee_matches(p jsonb)",
+      "b4b845d29ccb65ac7922109dc89816b6",
+      6135
+    ],
+    [
+      "private.dic_roaster_key(value text)",
+      "e553ae6c1cf99c3784f5d14a4f05d355",
+      388
+    ],
+    [
+      "private.dic_verified_roaster_page_proof(roaster_name text)",
+      "7ce32408a61728294ad667a9c985f5da",
+      1947
+    ],
+    [
+      "public.dic_admin_push_bootstrap_key(p_public_key text, p_private_key text)",
+      "637217a555887f78d812deb347455e4d",
+      931
+    ],
+    [
+      "public.dic_admin_push_claim_poll()",
+      "e3bbf384effe7e29b5cffd89135c0666",
+      414
+    ],
+    [
+      "public.dic_admin_push_runtime_keys()",
+      "16fd1cc2a0cbf0110cd253e661c4cdef",
+      427
+    ],
+    [
+      "public.dic_admin_push_snapshot()",
+      "c6c2c674fa8358a3dd4946a3c0f9d8ed",
+      1007
+    ],
+    [
+      "public.dic_member_approval_claim(p_channel text, p_limit integer)",
+      "b0d1e8d2622852b6b930def5c8a171d9",
+      1920
+    ],
+    [
+      "public.dic_member_approval_claim_poll()",
+      "b94ddc2223993aa7685faf482d3871e4",
+      335
+    ],
+    [
+      "public.dic_member_approval_finish(p_event_id bigint, p_channel text, p_claim_token uuid, p_outcome text)",
+      "e92ba8e17ab274bcab1a564475d16f28",
+      1003
+    ],
+    [
+      "public.dic_source_check_target(submission_id uuid)",
+      "496ad9d2e74fa2d07592a442438d8ca9",
+      1397
+    ],
+    [
+      "public.dic_source_claim(submission_id uuid)",
+      "68bc86486e485565d4273daf3655e0d3",
+      2348
+    ]
+  ],
+  "semantic_verdicts": [
+    {
+      "group": "Legacy approved-directory retirement and source-worker contract",
+      "result": "No static SQL/view call of retired directory/table/API names detected among 261 catalog definitions; private.dic_canonical_roaster_key reads LEGACY ACTIVE name_aliases; private.dic_verified_roaster_page_proof reads LEGACY ACTIVE official_source_attestations and verified coffee source URLs, not retired archive. Old approved-directory route remains retired; archives must be preserved.",
+      "limitation": "The 261-definition sweep is pattern/call-name discovery only, NOT 261 individual full semantic reviews. Dynamic SQL, extension binaries and external callers not thereby excluded."
+    },
+    {
+      "group": "Member approval email/push queue",
+      "result": "Full claim/finish/poll source reviewed: two independent channels, SKIP LOCKED leases, token-bound finish, exponential backoff, initialized -infinity poll gate, push-subscription last_sent_event_id default 0. No new reproduced defect or deletion justified.",
+      "limitation": "No real member delivery/handset test; #96/#2258 outside this run."
+    },
+    {
+      "group": "Admin push snapshot",
+      "result": "Three token categories use separate prefixes and unique record IDs; UNION DISTINCT is redundant by identity, but current pending coffee and delete counts are zero and no measurable bottleneck was demonstrated. Avoid a low-benefit SQL migration without source-bound differential tests.",
+      "classification": "LOW_PRIORITY_POTENTIAL_SIMPLIFICATION_NOT_CONFIRMED_DEFECT"
+    },
+    {
+      "group": "Coffee matching/source claim",
+      "result": "Verified exact/near-match classification depends on still-live canonical aliases and historical official attestations as specified. Candidate scan applies normalization/fuzzy similarity to verified coffee rows, a scale-dependent optimization candidate, not a current proved latency defect at 9 verified coffees.",
+      "classification": "PERFORMANCE_WATCH_ONLY"
+    }
+  ],
+  "catalog_evidence": {
+    "function_and_view_definition_pattern_scan_count": 261,
+    "retired_name_hits": 0,
+    "active_alias_or_attestation_name_hits": 2,
+    "archived_table_dependents": "pg_attrdef, pg_class, pg_constraint, pg_policy, pg_type only; no pg_proc/pg_rewrite dependency edges observed",
+    "post_retirement_live_migration_versions": 69,
+    "table_column_defaults_and_index_ddl_rechecked": [
+      "private.dic_member_approval_deliveries",
+      "private.dic_member_approval_poll_gate",
+      "private.dic_admin_push_runtime",
+      "public.dic_member_approval_push_subscriptions",
+      "private.dic_admin_account_delete_operations",
+      "public.coffee_submissions"
+    ],
+    "aggregate_row_counts": {
+      "verified_coffees": 9,
+      "pending_or_conflict_submissions": 0,
+      "active_admin_delete_operations": 0,
+      "pending_or_sending_member_approval_deliveries": 0
+    }
+  },
+  "coverage": {
+    "new_unique_baseline_source_words_credited": 0,
+    "review_repeated_current_functions": 13,
+    "pattern_scanned_definitions_not_credited_as_semantic": 261,
+    "full_baseline": "IN_PROGRESS",
+    "vendor_native_and_dashboard_only": "UNVERIFIED"
+  },
+  "action": {
+    "new_confirmed_defect": false,
+    "source_changes": 0,
+    "provider_changes": 0,
+    "tests_run": 0,
+    "github_approval_ci": "NOT_RUN_DOCS_ONLY",
+    "prior_credential_guard_fix": "SOURCE_MERGED_TESTING_NOT_PUBLISHED",
+    "next": "Resume from first unreviewed or actually changed provider definition; review dependency proof for any suggested obsolete SQL or Edge cleanup. Refresh descendant Node22/hosted Auth only when source-bound tests are required; do not re-run unaffected suites. Numeric pg_stat_statements 4961–5040 only if range exists."
+  },
+  "owner_notification": "NONE_REQUIRED_UNCHANGED_OR_LOW_PRIORITY; record checkpoint only"
+}
