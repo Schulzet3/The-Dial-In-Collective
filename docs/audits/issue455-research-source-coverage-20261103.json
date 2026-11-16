@@ -3380,6 +3380,30 @@
       "claims_verified_externally": "No empirical espresso quality or production member observations; direct source shows overview selection did not require all five ratings unlike engine R306 advice eligibility. The latest measured but partial imported shot could displace earlier genuinely five-rated overview feedback and display a Finish ratings panel rather than the older rated instruction.",
       "github267_literal_review_credit": 0,
       "implementation_merge_sha": "29b5a3995314e4a5a934dad65b91b7e108fba3f5"
+    },
+    {
+      "id": "LIVE-20261116-R312-OVERVIEW-ARCHIVED-GRINDER-RANGE",
+      "type": "live_source_code_reproducible_historical_snapshot_context_integrity",
+      "title": "Coffee overview feedback selector admits imported shot outside its original archived grinder limits",
+      "source_branch": "development/backend-foundation",
+      "source_commit_sha": "afd711b47a2f39254c14885b9bb822bf0a847b3f",
+      "source_git_blobs": {
+        "site/lib/ui.js": "646d0b987aae917d33d06366084fb9d114065871",
+        "site/lib/engine.js": "8e5e93f42f02444533aee9256569baefc6028325",
+        "site/lib/model.js": "baafc8fa64fa3e359d8e42094e41c5d72a3b22df"
+      },
+      "source_locators": [
+        "site/lib/ui.js lastRecipeContextShot current grinder bounds but no original snapshot bounds",
+        "site/lib/engine.js familyEvidenceShots validates shot.snapshot original range"
+      ],
+      "access": "IMMUTABLE_GITHUB_SOURCE_INSPECTION; PR_HEAD_TESTS_PENDING",
+      "review_status": "R455_312_SAFE_TESTING_NOT_MERGED_OR_READY",
+      "evidence_grade": "DIRECT_STATIC_CODE_CONTRADICTION_AND_SYNTHETIC_NEGATIVE_POSITIVE_TEST_DESIGN; HOSTED_TESTS_PENDING_NO_MEMBER_OUTCOME",
+      "claims_verified_externally": "Current UI permits a complete-rated imported shot with grind inside today's dial but outside explicit shot.snapshot grinderMin/max. Engine familyEvidenceShots rejects this recorded original-range mismatch for recipe evidence. Selecting it for overview advice risks displaying a nonadmissible feedback source. No production occurrence or change in espresso taste is evidenced.",
+      "factual_status": "SAFE_LOCKED_COMPATIBLE_UI_EVIDENCE_GATE_ONLY",
+      "github267_literal_review_credit": 0,
+      "implementation_status": "PR_TESTING_NOT_MERGED",
+      "production_deployed": false
     }
   ],
   "evidence_checks": [
@@ -10355,6 +10379,24 @@
       "grade": "HEAD_AND_MERGED_NODE22_R311_3_OF_3_PASS_TOTAL_5274_PASS_0_FAIL_6_INTENTIONAL_SKIP",
       "result": "R311_FOCUSED_3_PASS_4708_4710_HEAD_43963356521_MERGE_43964193581_CLOUD_MOBILE_43963356733_43964193542_APPROVAL_43963356341_43964193562_SUCCESS",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CODE-312-A",
+      "source": "LIVE-20261116-R312-OVERVIEW-ARCHIVED-GRINDER-RANGE",
+      "claim": "Current lastRecipeContextShot tests active grinderMin/Max, timestamp, all five ratings and measured fields, but not original snapshot bounds; engine familyEvidenceShots uses original bounds as provenance gate.",
+      "source_locator": "site/lib/ui.js lastRecipeContextShot; site/lib/engine.js familyEvidenceShots; Master Spec snapshot and recommendation evidence authority",
+      "grade": "DIRECT_GITHUB_IMMUTABLE_SOURCE_REVIEW",
+      "result": "DEFECT_FOUND_SYNTHETIC_TESTS_PREPARED_PENDING_CI",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CODE-312-B",
+      "source": "LIVE-20261116-R312-OVERVIEW-ARCHIVED-GRINDER-RANGE",
+      "claim": "Check explicit original min/max without rewriting snapshot or History: out-of-range and inverted imported ranges excluded; valid endpoint and absent optional legacy snapshot fields still accepted; cross-coffee and incomplete taste exclusion unchanged.",
+      "source_locator": "site/lib/ui.js lastRecipeContextShot; tests/issue455-r312-overview-archived-range.test.mjs",
+      "grade": "SYNTHETIC_POSITIVE_NEGATIVE_TEST_DESIGNED_NOT_RUN",
+      "result": "AWAIT_EXACT_SOURCE_NODE_CI",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -10588,7 +10630,8 @@
     "R455-309: verify original Zenodo DOI software and tag-linked source provenance for Waszkiewicz model; author preprocessing 100s/31-point smoothing and unweighted static/TDS fits are research-method boundaries only, no universal pressure/taste claim; full archive binary/run reproduction remains unverified. Exact docs-only source-bound CI/nonforce [skip netlify] merge and merged governance required; original Oct29 pack/S019 unresolved; no #267 literal credit.",
     "R455-310: source-only conditional markup integrity fix merged 510bc9d7d6b53d3d1fc0de3d92e7de7f20b276a2, three synthetic cases and merged CI PASS. Development READY only, production_deployed=false. Continue next independent #455 source/UX source-hash-bound increment, no direct deployment or new member capture; original S019/Oct29 ZIP not independently verified.",
     "R455-311: verify exact-source CI for SAFE overview feedback selector requiring five complete ratings, fix/retest failures, nonforce [skip netlify] merge and readback tested Git blobs, exact merged CI and reconcile sole development queue item. Do not alter original incomplete imports or deploy.",
-    "R455-311 FINAL: PR #3079 merged 29b5a3995314e4a5a934dad65b91b7e108fba3f5 with five head-identical blobs; Node 5274 PASS/0 FAIL/6 SKIP both head+merge, three R311 focused PASS; source-bound cloud/mobile/SQL/security/governance success. READY development-only, no deploy. Continue next research/UX increment with fresh immutable preflight; S019 and ZIP original fresh byte proof still unavailable."
+    "R455-311 FINAL: PR #3079 merged 29b5a3995314e4a5a934dad65b91b7e108fba3f5 with five head-identical blobs; Node 5274 PASS/0 FAIL/6 SKIP both head+merge, three R311 focused PASS; source-bound cloud/mobile/SQL/security/governance success. READY development-only, no deploy. Continue next research/UX increment with fresh immutable preflight; S019 and ZIP original fresh byte proof still unavailable.",
+    "R455-312: finish exact-source CI for original archived grinder-range overview context gate, repair failures, nonforce [skip netlify] merge only after successful applicable checks, read back source/test/journal/ledger/queue SHA, reconcile unique TESTING entry to READY only with exact merged evidence. Do not deploy or mutate member data."
   ],
   "latest_review_checkpoint": {
     "run_id": "R455-311_FINAL_EXACT_SOURCE_CI_NONFORCE_READY",
@@ -16211,6 +16254,34 @@
       "github267_literal_review_credit": 0,
       "release_queue_status": "READY_DEVELOPMENT_ONLY",
       "verified_merge_sha": "29b5a3995314e4a5a934dad65b91b7e108fba3f5"
+    },
+    {
+      "id": "R455-PROP-312-OVERVIEW-ORIGINAL-GRINDER-RANGE",
+      "severity": "P2_PRIVATE_RECOMMENDATION_FEEDBACK_PROVENANCE",
+      "source": [
+        "LIVE-20261116-R312-OVERVIEW-ARCHIVED-GRINDER-RANGE"
+      ],
+      "evidence": [
+        "R455-EV-CODE-312-A",
+        "R455-EV-CODE-312-B"
+      ],
+      "finding": "An archived all-five-rated import can pass current grinder range while violating explicitly archived original grind limits, becoming a misleading latest Coffee overview feedback source.",
+      "user_benefit": "Avoid nonadmissible personal recommendation input without removing old shots or changing the recipe model.",
+      "current_locked": "Preserve original snapshots, grinder calibration histories, all five taste ratings and private shot history; one truly controllable next-shot recommendation; no new data or numeric policy.",
+      "current_app": "site/lib/ui.js lastRecipeContextShot used current grinder limits, omitting archived snapshot limits unlike engine recipe evidence.",
+      "proposed_change": "SAFE: filter original snapshot min/max mismatch and inverted bounds before latest feedback selection, allowing missing legacy snapshot limits; no saved data changes.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "TESTING_PENDING_EXACT_SOURCE_HOSTED_CI_AND_NONFORCE_MERGE",
+      "files": [
+        "site/lib/ui.js",
+        "tests/issue455-r312-overview-archived-range.test.mjs"
+      ],
+      "test_plan": "Four local synthetic Node22 test groups through exact PR-head CI (no local container); reuse source-bound unchanged security/SQL/browser evidence and run applicable new CI; don't claim frozen603 SKIP as PASS.",
+      "release_queue": "DIC-Q-455-r312-overview-archived-range",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0,
+      "release_queue_status": "TESTING_NOT_READY"
     }
   ],
   "changeScope": {
