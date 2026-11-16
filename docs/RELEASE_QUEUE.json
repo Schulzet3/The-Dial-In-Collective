@@ -15032,24 +15032,34 @@
     {
       "id": "DIC-Q-455-r295-shot-edit-stale-validation-alert",
       "issue": 455,
-      "pr": null,
+      "pr": 2989,
       "title": "Clear stale Log Shot Save validation alert when correcting a locally invalid numeric input",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "8593fdc856c4257201a245ea3195921eb0ec4466",
       "scope_paths": [
         "site/lib/ui.js",
         "site/cloud/main.js"
       ],
       "owner_source": "Owner #455 Option B SAFE existing-form feedback correction; DIC_PREFLIGHT_VERIFIED development_sha=2cb0d03b90fc3bcc207b58064044f7bb07f4e356 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "tests": [
-        "Original current source call chain reproduced numeric edits remove aria-invalid but left stale Save alert; rating tap already cleared it.",
-        "Five new actual helper positive/negative Node22 tests authored, NOT_RUN at Git-object creation. Hosted Node22/lint, browser/mobile/offline, isolated SQL/security/approval PENDING; frozen603 NOT_APPLICABLE not PASS."
+        "Preflight original development 2cb0d03b90fc3bcc207b58064044f7bb07f4e356 and raw PREFLIGHT Git blob 2fb236bbfa6bac48513eeb3bd157b260853af06d equal before project source/provider access; source/test/ledger/TESTING queue/SAME-COMMIT journal atomic head 9e4eed504a56a150d88fb668395216b17f2d7483.",
+        "Exact PR-head Node22/lint run 43794463528 SUCCESS 5159 PASS / 0 FAIL / 6 intentional SKIP; all five new R295 direct-input regression tests PASS; approval 43794463519, mobile/browser/cloud 43794463500, isolated SQL/privacy 43794463555 and security 43794463546 SUCCESS.",
+        "Unrelated #33 original241 roaster source run 43794463634 FAILED PR head, owned by #33 and not part of R295 approval; original frozen603 43794463596 SKIPPED not PASS.",
+        "After live development/PREFLIGHT recheck source PR #2989 nonforce squash-merged with [skip netlify] at 8593fdc856c4257201a245ea3195921eb0ec4466. All six merged Git blobs match exact tested PR head, including unchanged saved source, five tests, SAME-COMMIT scoped journal, full research ledger and TESTING queue.",
+        "Exact merged-source Node22/lint 43794848885 SUCCESS 5159 PASS / 0 FAIL / 6 SKIP; merged Chromium/mobile/offline/cloud 43794848874 SUCCESS and merged governance 43794848896 SUCCESS; unchanged source PR-head isolated SQL/security PASS reused. Frozen603 still skipped and no real physical cup effect validated."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact-source head CI and nonforce merge not yet verified; READY prohibited until checks and merge blobs read back."
+      "ci_runs": [
+        43794463528,
+        43794463519,
+        43794463500,
+        43794463555,
+        43794463546,
+        43794848885,
+        43794848874,
+        43794848896
       ],
-      "notes": "Only local shot error feedback; other invalid controls remain marked; unrelated cloud errors preserved on ordinary input. No espresso math, taste model, measurements, notes/history, privacy/Community, main/release, provider, member data or Publish changes.",
+      "blockers": [],
+      "notes": "Development-only READY: acknowledge stale client-invalid Log Shot measurement alert on editing, preserve other invalid markers and unrelated cloud alerts. No engine/numeric rules, five rating scales, history/notes, privacy/RLS/Community, production/provider writes or Publish. Source PR #2989 exact head and merged CI verified; original S019 unavailable and #267 literal audit independent.",
       "production_deployed": false
     }
   ],

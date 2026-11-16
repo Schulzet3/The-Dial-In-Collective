@@ -1,3 +1,8 @@
+## November 16, 2026 UTC — Issue #455 R295 Log Shot invalid-input feedback SAFE development READY [skip netlify]
+
+After immutable preflight (development `2cb0d03b90fc3bcc207b58064044f7bb07f4e356`, PREFLIGHT Git blob `2fb236bbfa6bac48513eeb3bd157b260853af06d`), [PR #2989](https://github.com/Schulzet3/The-Dial-In-Collective/pull/2989) repaired a source-reproduced Log Shot feedback discrepancy: editing an invalid numeric field cleared its invalid marker but left obsolete validation alert text. The narrow helper now dismisses that stale local alert while ordinary inputs preserve unrelated cloud errors. Five focused regressions passed, original taste ratings/shot fields/history, validation, engine/Locked policy, privacy and Community unchanged. Nonforce merged source `8593fdc856c4257201a245ea3195921eb0ec4466`; six source/test/ledger/queue/original journal Git blobs identical to tested PR head. Head and exact merge Node22 **5159 PASS/0 FAIL/6 intentional SKIP**, browser/mobile/offline and approval successful; head isolated SQL/privacy and security successful. One R295 dev queue item moves TESTING → READY after exact-source CI. Not published, no provider/member data writes or evidence of better taste. Ledger **161 sources / 493 evidence checks / 226 proposals**; original standalone S019 inaccessible; #267 exhaustive line task independent. Further #455 research remains OPEN.
+
+---
 ## November 15, 2026 — Issue #455 R292 visible Next Shot coaching SAFE READY, development only [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=ed303d079978a4490bede1d4b9a014f1353785d4 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
