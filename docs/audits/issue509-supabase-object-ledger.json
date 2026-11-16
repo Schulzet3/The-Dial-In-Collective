@@ -4388,6 +4388,22 @@
       "provider_writes": 0,
       "confirmed_new_defects": 0,
       "next": "numeric 4721-4800; remaining provider source; isolated canonical name"
+    },
+    {
+      "run": "R291 Nov16 2026",
+      "source_sha": "84c261657912d922623fe7285f763ecec3ad7934",
+      "preflight_blob": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r291-admin-delete-parity-20261116.json",
+      "reviewed_sql_definitions": 12,
+      "reviewed_sql_chars": 24155,
+      "source_body_parity": 2,
+      "FKs": 30,
+      "triggers": 14,
+      "first_time_credit": 0,
+      "pgss_count": 4789,
+      "provider_writes": 0,
+      "new_confirmed_defects": 0,
+      "next": "Inspect first changed/new or not-yet-semantically-reviewed provider function/definition after R290, with exact Git migration source parity. Retry numeric ranks 4961-5040 only if pg_stat_statements has enough live rows. Coordinate #96 hosted Auth and #33 canonical response downstream contract."
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -22095,5 +22111,23 @@
     "new_confirmed_defects": 0,
     "baseline": "IN_PROGRESS",
     "next": "Directly review current private.dic_admin_delete_preview and dic_admin_delete_record full changed function definitions plus source parity, then remaining unreviewed current provider objects; monitor next pgss numeric 4961-5040 only if count grows; coordinate #33/#96 downstream acceptance."
+  },
+  "provider_admin_delete_source_parity_run291": {
+    "receipt_path": "docs/audits/issue509-r291-admin-delete-parity-20261116.json",
+    "preflight_development_sha": "84c261657912d922623fe7285f763ecec3ad7934",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_development_sha": "84c261657912d922623fe7285f763ecec3ad7934",
+    "complete_live_sql_definitions": 12,
+    "complete_literal_characters": 24155,
+    "complete_fk_definitions": 30,
+    "complete_relevant_trigger_definitions": 14,
+    "source_body_matches_migration": 2,
+    "new_first_time_coverage_credit": 0,
+    "pgss_count": 4789,
+    "cumulative_numeric_distinct_retained": 4604,
+    "new_confirmed_defects": 0,
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Inspect first changed/new or not-yet-semantically-reviewed provider function/definition after R290, with exact Git migration source parity. Retry numeric ranks 4961-5040 only if pg_stat_statements has enough live rows. Coordinate #96 hosted Auth and #33 canonical response downstream contract."
   }
 }

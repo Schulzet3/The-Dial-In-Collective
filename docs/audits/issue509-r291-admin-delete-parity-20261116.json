@@ -1,0 +1,220 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R291",
+  "title": "Admin destructive path source parity, FK/triggers and community-detachment semantics",
+  "project_ref": "azviqqejypsefzilgonr",
+  "provider_observed_at_utc": "2026-11-16T17:46:44Z",
+  "project_status": "ACTIVE_HEALTHY",
+  "postgres_version": "17.11.0.003",
+  "preflight": {
+    "development_sha": "84c261657912d922623fe7285f763ecec3ad7934",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "blob_bytes_verified": true
+  },
+  "prewrite_development_sha": "84c261657912d922623fe7285f763ecec3ad7934",
+  "main_sha": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+  "release_production_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5",
+  "complete_live_definitions": [
+    {
+      "signature": "private.dic_admin_delete_preview(text,uuid)",
+      "characters": 4078,
+      "md5": "83f516f852832cdf06f44b34339bbc0d",
+      "reviewed_char_range": [
+        1,
+        4078
+      ],
+      "complete_definition": true
+    },
+    {
+      "signature": "private.dic_admin_delete_record(text,uuid,bigint,jsonb)",
+      "characters": 4109,
+      "md5": "39b6e1a4fc51c2ce8121ef34d2067b51",
+      "reviewed_char_range": [
+        1,
+        4109
+      ],
+      "complete_definition": true
+    },
+    {
+      "signature": "public.dic_admin_delete_preview(text,uuid)",
+      "characters": 237,
+      "md5": "102b8d2797413ed02a943d093cc60427",
+      "reviewed_char_range": [
+        1,
+        237
+      ],
+      "complete_definition": true
+    },
+    {
+      "signature": "public.dic_admin_delete_record(text,uuid,bigint,jsonb)",
+      "characters": 318,
+      "md5": "54ad38cc86048b526c158f4f34867398",
+      "reviewed_char_range": [
+        1,
+        318
+      ],
+      "complete_definition": true
+    },
+    {
+      "signature": "private.require_member()",
+      "characters": 347,
+      "md5": "27ff3a2a7fcf231171778a2d584b1851",
+      "reviewed_char_range": [
+        1,
+        347
+      ],
+      "complete_definition": true
+    },
+    {
+      "signature": "private.is_admin()",
+      "characters": 264,
+      "md5": "396d3e8e29dbd4550ec7ac26b7589a63",
+      "reviewed_char_range": [
+        1,
+        264
+      ],
+      "complete_definition": true
+    },
+    {
+      "signature": "private.project_shot()",
+      "characters": 3045,
+      "md5": "79e6fd0668fa4502c8785b3e92a14a61",
+      "reviewed_char_range": [
+        1,
+        3045
+      ],
+      "complete_definition": true
+    },
+    {
+      "signature": "private.dic_review_community_shot(uuid)",
+      "characters": 7734,
+      "md5": "c5aea4d32aa8027a39d80341feade406",
+      "reviewed_char_range": [
+        1,
+        7734
+      ],
+      "complete_definition": true
+    },
+    {
+      "signature": "private.dic_recheck_after_link()",
+      "characters": 251,
+      "md5": "9fc3b44ef631cb87bc0b40e689c123b8",
+      "reviewed_char_range": [
+        1,
+        251
+      ],
+      "complete_definition": true
+    },
+    {
+      "signature": "private.dic_backfill_library_contributions(uuid,uuid,uuid)",
+      "characters": 2360,
+      "md5": "424a5c87c53165a918f7094bf67d25bb",
+      "reviewed_char_range": [
+        1,
+        2360
+      ],
+      "complete_definition": true
+    },
+    {
+      "signature": "private.dic_on_library_coffee_change()",
+      "characters": 347,
+      "md5": "b6cbc45072b0e9f8ebb511b2eca3895f",
+      "reviewed_char_range": [
+        1,
+        347
+      ],
+      "complete_definition": true
+    },
+    {
+      "signature": "private.dic_on_community_coffee_verification()",
+      "characters": 1065,
+      "md5": "cefee7b991e40185eadbacde89def3aa",
+      "reviewed_char_range": [
+        1,
+        1065
+      ],
+      "complete_definition": true
+    }
+  ],
+  "reviewed_total_literal_characters": 24155,
+  "first_time_coverage_credit": 0,
+  "exact_source_parity": {
+    "source_migration": "supabase/migrations/20261110194500_dic_admin_delete_null_kind_guard.sql",
+    "source_blob_sha": "897263ae87ad0844456ac690b09efd56b67f5fd2",
+    "live_body_matches_migration": {
+      "dic_admin_delete_preview": true,
+      "dic_admin_delete_record": true
+    },
+    "body_characters": {
+      "dic_admin_delete_preview": 3880,
+      "dic_admin_delete_record": 3866
+    },
+    "format_note": "Compared literal PL/pgSQL bodies delimited by $function$; ACL separately inspected; does not imply unshipped development migrations are deployed."
+  },
+  "dependency_verification": {
+    "complete_fk_definitions_read": 30,
+    "complete_relevant_noninternal_trigger_definitions_read": 14,
+    "shot_note_delete": "ON DELETE CASCADE",
+    "shot_contribution_link_delete": "ON DELETE SET NULL",
+    "contribution_link_update_trigger": "dic_recheck_after_link",
+    "review_callback": "dic_review_community_shot",
+    "detached_eligible_rule": "Existing eligible community observations remain eligible; unvalidated detached observations become held; withdrawn never automatically revived",
+    "approved_coffee_delete_block": "community_shots>0 OR merged_coffees>0 OR linked first-entry references>0",
+    "pending_delete_block": "first-entry references>0",
+    "canonical_revision_lock_and_exact_impact_confirm": true,
+    "receipt_insert_on_success": true,
+    "demonstrated_live_mutation": false
+  },
+  "access_verification": {
+    "anon_private_schema_usage": false,
+    "anon_execute_admin_functions": false,
+    "authenticated_execute_public_wrappers": true,
+    "private_require_member_authenticated_execute": false,
+    "private_receipts_anon_select": false,
+    "private_receipts_authenticated_select": false,
+    "private_receipts_authenticated_insert": false,
+    "admin_guard_uses_membership_and_admin_status": true,
+    "hosted_real_auth_session": "UNVERIFIED_ISSUE_96"
+  },
+  "advisors": {
+    "rls_no_policy_info": 13,
+    "signed_in_definer_warn": 10,
+    "leaked_password_protection_warn": 1,
+    "unindexed_fk_info": 14,
+    "zero_scan_index_info": 8,
+    "new_confirmed_risk": false,
+    "remediation_assessed": "Prior source-backed triage reused; no basis to drop/create indexes or change production Auth settings"
+  },
+  "pg_stat_statements": {
+    "rows": 4789,
+    "unavailable_next_rank_range": [
+      4961,
+      5040
+    ],
+    "distinct_numeric_fingerprints_previously_credited": 4604,
+    "new_credited": 0
+  },
+  "prior_exact_ci": {
+    "merged_source": "e50727444db83e76a02a037c7575a995707a585f",
+    "applicable_completed_success": 6,
+    "source_bound_and_reused": true,
+    "no_new_functional_tests": true,
+    "canonical_name_queue": "TESTING_NOT_DEPLOYED"
+  },
+  "legacy": {
+    "directory_issue_2389": "RETIRED_COMPLETED",
+    "active_aliases": "LEGACY_ACTIVE",
+    "provenance_archive": "HISTORICAL"
+  },
+  "status": "IN_PROGRESS",
+  "new_confirmed_defects": 0,
+  "production_writes": 0,
+  "github_application_code_writes": 0,
+  "limitations": [
+    "Cross-request FK race and real signed-in Auth/delete behavior not tested in this production read-only task",
+    "Native compiled vendor code and provider-console-only settings remain UNVERIFIED",
+    "No numeric pgss rank coverage beyond 4960 is claimed"
+  ],
+  "next": "Inspect first changed/new or not-yet-semantically-reviewed provider function/definition after R290, with exact Git migration source parity. Retry numeric ranks 4961-5040 only if pg_stat_statements has enough live rows. Coordinate #96 hosted Auth and #33 canonical response downstream contract."
+}
