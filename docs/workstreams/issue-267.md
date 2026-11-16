@@ -1,3 +1,12 @@
+## November 16, 2026 UTC — #267 V11DX literal F215:5441–5462 / C48:2523–2545 [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=791c9cd85b094d0451904d95a658b93818637a79 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- Immutable GitHub preflight: live development above, docs/ai/PREFLIGHT.md independently fetched at SHA and matching Git blob verified; scoped #267 and current Locked authority read, no Publish permission.
+- Original frozen 22/22 distinct literal lines F215:5441–5462 at original abc4d3aa / blob c3a92e1e; Tanzania 1000–1700 manual metric equality is not parser PASS, Bali first null/missing vs later scoped replay retained. [Individual frozen receipt](../audits/issue267-v2-strict-batches/S2-DISJOINT-F215-5441-5462-20261116-V11DX.json).
+- Pinned 23/23 literal executable-test lines C48:2523–2545 at 9707553a / blob 266631b5; individual negative-test review of inner-context, plaintext marker rejection, restrictive temporary key permissions and one-use deletion. [Individual pinned receipt](../audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C2-2523-2545-20261116-V11DX.json).
+- Original and selected current literal parity 45/45, pinned +16 live line offset at blob d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7. Prior F215:5440/C48:2522 adjacent; old V1/R2/C2/F001 zero additional credit. Each line records original SHA/path/line/literal/meaning/quality/risk/dead/duplication/current counterpart/testability/remedy/Locked fit; no confirmed active defect.
+- Docs-only semantic source review; Python/Node22/original603/browser/SQL/Auth NOT_RUN; approval governance requires exact PR-head and merged-source check verification. No production/provider/Netlify/member/backup/release/READY/schedule change. #267 OPEN: next F215:5463 / C48:2546, full frozen/current/live drift and final QA incomplete.
+
 ## November 16, 2026 UTC — #267 V11DW individually reviewed disjoint F215:5423–5440 / C48:2501–2522 [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=0d706750556ffd9097654a7fb6e4d08d0deb07a7 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
