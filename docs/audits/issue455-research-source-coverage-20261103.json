@@ -3172,6 +3172,27 @@
       "raw_data": "Authors say on-request due to privacy restrictions; underlying participants, PDF binary, supplementary image pixels and independent outcome trial not verified or downloaded.",
       "current_app_crosswalk": "Actual development constants.js blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2, engine.js blob f384ae67c1a9148990cab4716dc8ad22d1ca81f3 and CloudApp Log Shot direct read. Preserve five personally rated tastes, complete-vs-missing, original measurements and single controllable next-shot; no new member data collection.",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "LIT-2021-LIANG-IMMERSION-EQUILIBRIUM",
+      "type": "peer_reviewed_primary_full_immersion_equilibrium_model_not_espresso",
+      "title": "An equilibrium desorption model for the strength and extraction yield of full immersion brewed coffee",
+      "authors": "Jiexin Liang; Ka Chun Chan; William D. Ristenpart",
+      "journal": "Scientific Reports 11:6904",
+      "published": "2021-03-25",
+      "doi": "10.1038/s41598-021-85787-1",
+      "original_primary_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7994670/",
+      "access": "ORIGINAL_PEER_REVIEWED_NIH_PMC_FULL_OPEN_ARTICLE_HTML_THEORY_METHODS_TABLE1_RESULTS_DISCUSSION_CONCLUSIONS_READ_20261116",
+      "review_status": "R455-302_SUBSTANTIVE_DIRECT_ORIGINAL_FULL_HTML_EQUATIONS_1_11_15_17_METHODS_TABLE1_TEMPERATURE_TIMES_EQUILIBRIUM_CUPPING_RESULTS_AND_LIMITATIONS_READ; ORIGINAL_PDF_BINARY_FIGURES_SUPPLEMENT_RAW_REPLICATES_NOT_VERIFIED",
+      "evidence_grade": "CONTROLLED_FULL_IMMERSION_BEAKER_AND_CUPPING_PHYSICOCHEMICAL_MEASUREMENTS; NOT_PRESSURIZED_ESPRESSO_NOT_SENSORY_PANEL_OR_PERSONAL_RATING_INTERVENTION",
+      "source_binary_sha256": null,
+      "version": "Original NIH PMC peer-reviewed open full HTML checked November 16 2026, no original PDF/HTML binary hash preserved",
+      "methods_summary": "1-L 30g four-African-Arabica blend water 80/85/94/99 C, 20–60min to pseudoequilibrium; 11 input water:coffee mass ratios, triple replicates, 99 equilibrium brews; separate 300mL time series and 90 commercial five-coffee cuppings. No randomized single-shot espresso adjustments or taste panel.",
+      "measurement_boundary": "R_brew=M_added_water/M_dry_coffee versus DIC shot mass-out/dry-dose are non-equivalent denominators; equilibrium TDS and mass-conservation-calculated E not directly measured personal espresso extraction yield or cup-quality preferences.",
+      "key_results_limit": "1-L results fit inverse TDS-input ratio at pseudo-equilibrium; E around 20.7 +/- 1.08% conditional. 5-coffee cupping around 23.9 +/- 0.6% caffeinated vs 22.2 +/- 0.4% decaf; these are not universal espresso targets. Authors explicitly note identical TDS/E can differ in chemical mixture and perceived taste.",
+      "original_limitations": "PDF figures/pixels, supplement, raw replicates and author code not independently downloaded or reanalyzed; no individual sensory preference or next-shot adverse-outcome observations.",
+      "current_app_crosswalk": "Unchanged engine.js Git blob f384ae67c1a9148990cab4716dc8ad22d1ca81f3, constants.js d3559dc1c9560c4d68fbcad1dc91e3a792a100a2, model.js fdc65f869546cddbb6552e555dca12117f2c47fc at preflight source 21fed7c1488783919e55b38dfd1843feb7b805d2; no extrapolation to Locked mass-out recipe or five tastes.",
+      "github267_literal_review_credit": 0
     }
   ],
   "evidence_checks": [
@@ -9883,6 +9904,45 @@
       "result": "NO_POLICY_ELEVATION; NO_NEW_OWNER_DECISION_NEEDED",
       "owner_approval_now_required": false,
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-METHOD-302-A",
+      "source": "LIT-2021-LIANG-IMMERSION-EQUILIBRIUM",
+      "source_git_commit": "21fed7c1488783919e55b38dfd1843feb7b805d2",
+      "original_primary_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7994670/",
+      "page_section": "Original Theory Eq. (1), (11), (15), (17), Methods Table 1; NIH PMC lines 105–181 and 206–268",
+      "claim": "Input water/dry coffee mass R_brew, not DIC mass-out/dose, is the studied variable. 1-L full-immersion four-African-Arabica blend uses 30g, 80–99°C water, up to 60-min equilibration; 99 triple-replicate equilibrium beaker brews and separate 90 five-coffee cupping brews. No pressurized espresso shots or controlled same-coffee personal rating follow-up.",
+      "grade": "DIRECT_PEER_REVIEWED_FULL_HTML_EQUATIONS_AND_METHODS; PHYSICAL_BREW_METHOD_EXTERNAL_VALIDITY_LIMIT",
+      "current_app": "Preserve explicitly measured doseG/yieldG/timeS, style-specific times and real 5 personal tastes; never transfer R_brew model to espresso 1:2 etc.",
+      "result": "CONDITIONAL_IMMERSION_METHODS_ONLY_NO_ESPRESSO_NUMERIC_POLICY",
+      "owner_approval_now_required": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-METHOD-302-B",
+      "source": "LIT-2021-LIANG-IMMERSION-EQUILIBRIUM",
+      "source_git_commit": "21fed7c1488783919e55b38dfd1843feb7b805d2",
+      "original_primary_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7994670/",
+      "page_section": "Theory Eq. (11)–(24), Results 1-L beaker and cupping; NIH PMC lines 151–205 and 270–320",
+      "claim": "At full-immersion pseudo-equilibrium, TDS declines approximately inversely with added-water/dose; E=K Emax is inferred from TDS and input brew ratio, while retained wet grounds and volatilization bias spent-grounds oven estimates. Approximate 20.7% 1-L equilibrium and 23.9% regular vs 22.2% decaf cupping values are sample- and method-conditional, not an espresso extraction optimum.",
+      "grade": "DIRECT_PRIMARY_PHYSICOCHEMICAL_MODEL_AND_DATA_TEXT; NO_INDEPENDENT_PDF_FIGURE_RAW_DATA_CHECK",
+      "current_app": "No universal extraction yield, pressure, temperature, shot time or recipe ratio prescribed; conditional model cannot predict espresso taste.",
+      "result": "RESEARCH_ONLY_NO_CAUSAL_TASTE_OR_ESPRESSO_EFFECTIVENESS",
+      "owner_approval_now_required": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-METHOD-302-C",
+      "source": "LIT-2021-LIANG-IMMERSION-EQUILIBRIUM",
+      "source_git_commit": "21fed7c1488783919e55b38dfd1843feb7b805d2",
+      "original_primary_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7994670/",
+      "page_section": "Discussion and Conclusions; NIH PMC lines 321–345",
+      "claim": "Authors explicitly distinguish identical total dissolved solids/extraction yield from identical chemical/sensory outcomes and call for separate sensory studies. There is NO five 1–5 taste panel, no personal before/after one-change next-shot outcome, no observed espresso adverse/benefit measurements or scientific confidence calibration.",
+      "grade": "DIRECT_PRIMARY_AUTHOR_LIMITATIONS; INDIVIDUAL_TASTE_NEXT_SHOT_EFFECT_UNMEASURED",
+      "current_app": "Preserve five explicit rated scales, green vs unrated, private shot history, feed/style/grinder versions, one truly controllable suggestion; no new telemetry or experimentation.",
+      "result": "NO_POLICY_OR_PRODUCT_CHANGE; RESEARCH_ONLY_EVIDENCE_BOUNDARY",
+      "owner_approval_now_required": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -10105,22 +10165,23 @@
     "R455-297: Direct primary An/Lee 2023 CATA versus intensity rating comparison across orange juice and yogurt; no espresso, DIC five-scale validation or personalized next-shot outcome. New source+3 checks+1 research-only proposal; no app/member data/policy changes. Exact documentation governance PR/merge pending. Original S019 unavailable.",
     "R455-299: Natsume & Okamoto 2025 four-instant-coffee, 21-person group-temporal-ML primary review. Non-personal bootstrapped predictions do not validate DIC next-shot efficacy; source+3 checks+1 proposal. Verify docs PR exact-source governance/nonforce merge; keep S019 inaccessible and zero #267 literal credit.",
     "R455-300: Direct full publisher 2026 Lee et al. six-cafe-latte context study, 77-person fixed environment order; randomized product order cannot remove context/session confounding. One new source, three evidence checks, one research-only proposal. Docs-only PR CI/merge pending; S019 separate original unavailable, #267 direct audit zero credit.",
-    "R455-301: Existing Andueza 2007 DOI 10.1002/jsfa.2720 upgraded from original Wiley abstract to bounded substantive 20-page author-attributed manuscript Methods, Tables 1-3, Results and limits, without treating third-party text as publisher-final. Added 3 evidence checks, no new source/proposal or code/Locked target; 165 sources/508 checks/230 proposals proposed until exact PR-head and merged evidence verified. Standalone S019/October29 pack unavailable in fresh Drive/Library, zero #267 literal line credit. Next: verify docs PR CI, nonforce merge, then continue a distinct bounded claim or SAFE source-reproducible UX defect."
+    "R455-301: Existing Andueza 2007 DOI 10.1002/jsfa.2720 upgraded from original Wiley abstract to bounded substantive 20-page author-attributed manuscript Methods, Tables 1-3, Results and limits, without treating third-party text as publisher-final. Added 3 evidence checks, no new source/proposal or code/Locked target; 165 sources/508 checks/230 proposals proposed until exact PR-head and merged evidence verified. Standalone S019/October29 pack unavailable in fresh Drive/Library, zero #267 literal line credit. Next: verify docs PR CI, nonforce merge, then continue a distinct bounded claim or SAFE source-reproducible UX defect.",
+    "R455-302: Independently read Liang/Chan/Ristenpart 2021 original Scientific Reports full NIH PMC HTML equilibrium full-immersion methods/equations/cupping and explicit no-sensory transfer limits. One unique source +3 primary-method checks +1 research-only proposal; no app code/owner policy change, S019 original unavailable in Drive/Library, #267 literal credit zero. Verify docs PR exact CI and nonforce merge before final integration claim."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-300_LATTE_CONTEXT_FIXED_ORDER_BOUNDARY_PENDING_CI",
+    "run_id": "R455-302_LIANG_IMMERSION_EQUILIBRIUM_PENDING_CI",
     "date": "2026-11-16",
-    "development_preflight_sha": "dfd8aacdd13287ab2bcdd865d66a2dbbc8a107f4",
+    "development_preflight_sha": "21fed7c1488783919e55b38dfd1843feb7b805d2",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "prior_ledger_blob_sha": "8ddb528e619fd7ed0463ddd71904834856401108",
+    "prior_ledger_blob_sha": "f0ee914b8f0df39ad24389b86843f7859b6d2c79",
     "source_counts": {
-      "sources": 165,
-      "evidence_checks": 505,
-      "proposals": 230
+      "sources": 166,
+      "evidence_checks": 511,
+      "proposals": 231
     },
     "github267_literal_review_credit": 0,
-    "scope": "Full original first-party methods/results/discussion limits on fixed context order in latte sensory evaluation; no DIC live behavior/data/policy change",
-    "next": "Verify exact docs PR source CI; nonforce merge with skip netlify after concurrent recheck and verify merged blobs/governance; continue distinct original source/UX gap."
+    "scope": "Primary 2021 Liang immersion equilibrium water:grounds denominator cannot become DIC output mass ratio/espresso taste policy",
+    "next": "Complete source-bound docs-only PR checks, recheck branch, nonforce merge, verify merged blobs/governance, continue new source or SAFE UX gap."
   },
   "policy_decisions_resolved": [
     {
@@ -15466,6 +15527,32 @@
       "owner_approval_now_required": false,
       "implementation": "RESEARCH_LEDGER_ONLY_NO_RUNTIME_OR_POLICY_CHANGE",
       "test_plan": "Docs-only source provenance/continuity and nonforce PR governance; app tests NOT re-run because unchanged. Any future member outcome study must obtain new owner approval/privacy/security and actual observed results.",
+      "release_queue": "NO_NEW_APP_ITEM",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-302-IMMERSION-RATIO-NOT-ESPRESSO",
+      "severity": "P3_SCIENTIFIC_EXTERNAL_VALIDITY_GUARD_NOT_REPRODUCED_APP_BUG",
+      "source": [
+        "LIT-2021-LIANG-IMMERSION-EQUILIBRIUM"
+      ],
+      "evidence": [
+        "R455-EV-METHOD-302-A",
+        "R455-EV-METHOD-302-B",
+        "R455-EV-METHOD-302-C"
+      ],
+      "original_primary_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7994670/",
+      "evidence_grade": "DIRECT_ORIGINAL_OPEN_FULL_HTML_METHODS_THEORY_RESULTS_DISCUSSION_NO_RAW_REANALYSIS",
+      "finding": "Immersion equilibrium added-water/coffee ratio and time-dependent TDS/E are not pressurized espresso measured beverage-out/dose or personal taste improvement; percent EY is not an approved numerical espresso target.",
+      "user_benefit": "Prevent false precision, erroneous recipe-ratio/science transfer and inappropriate taste-confidence language; preserve a useful honest single-controllable-adjustment UX.",
+      "current_locked": "Five 1–5 tastes explicitly rated; all-green vs unrated; same-coffee, setup, style, grinder/feed/calibration and original measurements, notes/history; independent Turbo vs Fast-Flow; no speculative universal numbers or telemetry.",
+      "current_app": "Reviewed current engine.js blob f384ae67c1a9148990cab4716dc8ad22d1ca81f3, constants.js d3559dc1c9560c4d68fbcad1dc91e3a792a100a2 and CloudApp Log Shot as of 21fed7c1488783919e55b38dfd1843feb7b805d2; no deterministic app bug established by immersion paper.",
+      "proposed_change": "RESEARCH-ONLY: retain existing explicit measured espresso controls and five personal tastes, cite method transfer limits. If someday evaluating effectiveness, first obtain separate approval for optional/consented privacy-safe same-coffee/setup/style/grinder/feed one-change -> next shot -> all five ratings with time/confounders/adverse outcomes; do not implement new capture or policy here.",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "RESEARCH_ONLY_NO_RUNTIME_OR_POLICY_CHANGE",
+      "test_plan": "Primary original methods/data limits and actual current source crosswalk; docs-only PR and exact hosted CI, nonforce [skip netlify] merge if all applicable checks pass; no app suites duplicated solely for unchanged code.",
       "release_queue": "NO_NEW_APP_ITEM",
       "github267_literal_review_credit": 0,
       "production_deployed": false
