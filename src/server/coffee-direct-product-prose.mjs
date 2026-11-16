@@ -350,6 +350,21 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
    else decafEvidenceOverflow=true;
   }
  }
+
+ // A fully decaffeinated selected H1 can literally name its water treatment:
+ // "Mountain Water Decaf". Name alone is NOT method evidence. Credit only
+ // when the SAME selected product paragraph affirmatively states that its
+ // identically named beans undergo decaffeination, without sibling, history
+ // or metadata/SEO evidence. Both method and origin are independently scoped.
+ const titleWater=fold(name).match(/^(swiss|mountain) water decaf(?:feinated)?$/u);
+ if(titleWater&&decafOnlyCoffee(name)&&
+   body.some(b=>{
+    if(!['p','div'].includes(b.tag)||b.educational||b.text.length>600||
+       NONCURRENT_DECAF_METHOD.test(b.text))return false;
+    const hit=/(?:^|[.!?]\\s+)(?:our|this|these)\\s+(swiss|mountain)[ -]?water\\s+decaf(?:feinated)?\\s+beans\\s+undergo(?:es)?\\s+(?:(?:a|an|100%|chemical[- ]free)\\s+){0,5}decaffeination\\s+process\\b/iu.exec(b.text);
+    return hit&&hit[1].toLowerCase()===titleWater[1];
+   })&&inferDecaffeinationMethod({name,selectedMethod:name})==='Water Process')
+   decafEvidence.add(name);
  let anotherExplicitList=false;
  for(const b of body){
   const line=b.text.replace(/\s+/g,' ').trim();

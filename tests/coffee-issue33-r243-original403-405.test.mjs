@@ -69,3 +69,19 @@ test('unavailable and changed H1 remain unverified even with a parsed URL',()=>{
  assert.ok(requiredFocusedSourceFailures([404],[row])
   .some(e=>e.reason==='selected_original_product_heading_identity_unverified'));
 });
+
+test('#405 H1 alone or sibling named Water is NOT selected method evidence',()=>{
+ const titleOnly=parse(405,['Fresh roasted decaf coffee from three regions.']);
+ assert.equal(titleOnly.ok,true);assert.equal(titleOnly.fields.decaffeination_method,undefined);
+ const fromSibling=parse(405,['Fresh roasted decaf coffee with no stated method.'],
+  '<aside class="related-products"><p>Our Mountain Water Decaf Beans undergo a chemical-free decaffeination process.</p></aside>');
+ assert.equal(fromSibling.fields.decaffeination_method,undefined);
+});
+test('#405 one selected paragraph with competing Sugar decaf spec is withheld',()=>{
+ const p=parse(405,[
+  'Our Mountain Water Decaf Beans undergo a 100% chemical-free decaffeination process.',
+  'Decaffeination Method: Sugar Cane Process'
+ ]);
+ assert.equal(p.ok,true);
+ assert.equal(p.fields.decaffeination_method,undefined);
+});
