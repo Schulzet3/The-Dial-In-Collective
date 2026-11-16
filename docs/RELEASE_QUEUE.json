@@ -15129,6 +15129,28 @@
       "blockers": [],
       "notes": "DEVELOPMENT ONLY, not READY or DEPLOYED. No full-603 certification or real hosted GoTrue/device claim, no publication, production SQL/Auth/Edge/provider/member writes, new accounts/spend or forced Git. Preserve all other queue rows, original oracle/captures/history and Locked values.\nVERIFIED NARROW READY, DEVELOPMENT ONLY 2026-11-16: independently current-source parser and Source Review correct for #403-405; no publication authorized. Parent Issue #33 OPEN: 603 individual semantic review remains incomplete; #401 recycled slug and #566/#567/#594 external inaccessible cases separately unresolved. Do not infer actual hosted signed-in GoTrue/device tests or global 603 certification. Prior two failures 43808031204 and 43808212807 retained as failures in scoped journal, not in successful ci_runs.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-r303-historic-temp-unit-integrity",
+      "issue": 455,
+      "pr": null,
+      "title": "Keep historical Edit Shot temperature display in supported F/C units",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "owner_source": "Issue #455 Option B independently authorized SAFE legacy form integrity; DIC_PREFLIGHT_VERIFIED development_sha=005104342dff98305096a6cf4e8e3c01a77bc55e preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Three focused synthetic module test groups authored for invalid archived/current temperature unit and valid historical F/C, original measured shot, private notes and five explicit ratings. NOT RUN, NOT PASS.",
+        "Applicable exact-source hosted Node22/lint, cloud/browser/mobile/offline, isolated SQL/security, and governance are PENDING. Frozen603 SKIPPED is NOT PASS."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "PR-head and merged-source applicable CI not yet verified; no READY or Publish."
+      ],
+      "notes": "Conditional malformed historical snapshot or preference unit could display invented °unit while converting as Celsius. UI-only safe fallback to supported F/C; source, tests, evidence ledger and same-commit scoped journal. No Locked engine, science, member data, SQL/Auth/Edge/provider, main/release or deployment changes; #267 V2 exhaustive line-credit zero.",
+      "production_deployed": false
     }
   ],
   "history": [

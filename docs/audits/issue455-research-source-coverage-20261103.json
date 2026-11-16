@@ -3193,6 +3193,27 @@
       "original_limitations": "PDF figures/pixels, supplement, raw replicates and author code not independently downloaded or reanalyzed; no individual sensory preference or next-shot adverse-outcome observations.",
       "current_app_crosswalk": "Unchanged engine.js Git blob f384ae67c1a9148990cab4716dc8ad22d1ca81f3, constants.js d3559dc1c9560c4d68fbcad1dc91e3a792a100a2, model.js fdc65f869546cddbb6552e555dca12117f2c47fc at preflight source 21fed7c1488783919e55b38dfd1843feb7b805d2; no extrapolation to Locked mass-out recipe or five tastes.",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "LIVE-20261116-CLOUD-HISTORIC-TEMP-UNIT-R303",
+      "type": "live_app_historical_snapshot_display_unit_integrity",
+      "title": "Edit Shot archived temperature units must be validated before labeling/formatting",
+      "source_paths": [
+        "site/cloud/main.js",
+        "site/lib/constants.js",
+        "site/cloud/mapping.js",
+        "tests/issue455-r303-historic-temp-unit-integrity.test.mjs"
+      ],
+      "source_sha": "005104342dff98305096a6cf4e8e3c01a77bc55e",
+      "source_git_blobs": {
+        "main": "cccc340bd888fbb804ff8ae4c56262655f612044",
+        "constants": "d3559dc1c9560c4d68fbcad1dc91e3a792a100a2",
+        "mapping": "acbfad05f6c197f3884054f8709ea5bc2e7c9ad0"
+      },
+      "access": "IMMUTABLE_GITHUB_DIRECT_SOURCE_MAIN_791_TO_800_AND_CONSTANTS_UNIT_CONVERSION_AND_HISTORICAL_MAPPING",
+      "review_status": "R455_303_DIRECT_SOURCE_REPRODUCIBLE_INVALID_NONEMPTY_SNAPSHOT_UNIT_HANDLING; HOSTED_NEGATIVE_POSITIVE_TESTS_PENDING",
+      "evidence_grade": "DETERMINISTIC_SYNTHETIC_LEGACY_INPUT_UI_FALLBACK_NO_OBSERVED_REAL_MEMBER_OR_ESPRESSO_OUTCOME",
+      "github267_literal_review_credit": 0
     }
   ],
   "evidence_checks": [
@@ -9943,6 +9964,34 @@
       "result": "NO_POLICY_OR_PRODUCT_CHANGE; RESEARCH_ONLY_EVIDENCE_BOUNDARY",
       "owner_approval_now_required": false,
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-APP-303-A",
+      "source": "LIVE-20261116-CLOUD-HISTORIC-TEMP-UNIT-R303",
+      "source_git_commit": "005104342dff98305096a6cf4e8e3c01a77bc55e",
+      "source_paths": [
+        "site/cloud/main.js:798-799",
+        "site/lib/constants.js:tempDisplay/tempInput"
+      ],
+      "claim": "Previously, nonempty malformed historical snapshot.tempUnit ('K','unknown') was accepted for Edit Shot unit labeling; tempDisplay interpreted any non-F as C and rendered unknown unit. This can mislabel the stored °C physical measurement during editing.",
+      "grade": "DIRECT_IMMUTABLE_CODE_TRACE_AND_SYNTHETIC_NEGATIVE_TEST_WRITTEN_NOT_YET_CI_VERIFIED",
+      "result": "SAFE_UI_UNIT_FALLBACK_PROPOSED_UNVERIFIED_TESTS",
+      "owner_approval_now_required": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-APP-303-B",
+      "source": "LIVE-20261116-CLOUD-HISTORIC-TEMP-UNIT-R303",
+      "source_git_commit": "005104342dff98305096a6cf4e8e3c01a77bc55e",
+      "source_paths": [
+        "site/cloud/main.js",
+        "tests/issue455-r303-historic-temp-unit-integrity.test.mjs"
+      ],
+      "claim": "A valid historical F/C unit must beat current setup display preference. Invalid historical units should use an explicitly valid current C or fallback F, without mutating archived tempC, all five recorded taste ratings, notes, snapshot or private history.",
+      "grade": "SYNTHETIC_POSITIVE_NEGATIVE_REGRESSION_AUTHORED_NODE22_AND_BROWSER_CI_NOT_YET_RUN",
+      "result": "TEST_PENDING_NO_REAL_MEMBER_CUP_EFFICACY",
+      "owner_approval_now_required": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -10166,22 +10215,23 @@
     "R455-299: Natsume & Okamoto 2025 four-instant-coffee, 21-person group-temporal-ML primary review. Non-personal bootstrapped predictions do not validate DIC next-shot efficacy; source+3 checks+1 proposal. Verify docs PR exact-source governance/nonforce merge; keep S019 inaccessible and zero #267 literal credit.",
     "R455-300: Direct full publisher 2026 Lee et al. six-cafe-latte context study, 77-person fixed environment order; randomized product order cannot remove context/session confounding. One new source, three evidence checks, one research-only proposal. Docs-only PR CI/merge pending; S019 separate original unavailable, #267 direct audit zero credit.",
     "R455-301: Existing Andueza 2007 DOI 10.1002/jsfa.2720 upgraded from original Wiley abstract to bounded substantive 20-page author-attributed manuscript Methods, Tables 1-3, Results and limits, without treating third-party text as publisher-final. Added 3 evidence checks, no new source/proposal or code/Locked target; 165 sources/508 checks/230 proposals proposed until exact PR-head and merged evidence verified. Standalone S019/October29 pack unavailable in fresh Drive/Library, zero #267 literal line credit. Next: verify docs PR CI, nonforce merge, then continue a distinct bounded claim or SAFE source-reproducible UX defect.",
-    "R455-302: Independently read Liang/Chan/Ristenpart 2021 original Scientific Reports full NIH PMC HTML equilibrium full-immersion methods/equations/cupping and explicit no-sensory transfer limits. One unique source +3 primary-method checks +1 research-only proposal; no app code/owner policy change, S019 original unavailable in Drive/Library, #267 literal credit zero. Verify docs PR exact CI and nonforce merge before final integration claim."
+    "R455-302: Independently read Liang/Chan/Ristenpart 2021 original Scientific Reports full NIH PMC HTML equilibrium full-immersion methods/equations/cupping and explicit no-sensory transfer limits. One unique source +3 primary-method checks +1 research-only proposal; no app code/owner policy change, S019 original unavailable in Drive/Library, #267 literal credit zero. Verify docs PR exact CI and nonforce merge before final integration claim.",
+    "R455-303: Conditional reproducible historic Edit Shot malformed tempUnit fallback, original source blob cccc340b, +1 live-code source/+2 bounded checks/+1 SAFE backlog. TESTS UNRUN; execute exact-source Node22 PR/merged CI before READY; only nonforce merge if passing. No #267 line credit, new telemetry, numeric policy, member/provider reads, or deployment."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-302_LIANG_IMMERSION_EQUILIBRIUM_PENDING_CI",
+    "run_id": "R455-303_HISTORIC_TEMP_UNIT_TESTING",
     "date": "2026-11-16",
-    "development_preflight_sha": "21fed7c1488783919e55b38dfd1843feb7b805d2",
+    "development_preflight_sha": "005104342dff98305096a6cf4e8e3c01a77bc55e",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "prior_ledger_blob_sha": "f0ee914b8f0df39ad24389b86843f7859b6d2c79",
+    "prior_ledger_blob_sha": "772a627c4c97f0179403d08b7d081516ae973587",
     "source_counts": {
-      "sources": 166,
-      "evidence_checks": 511,
-      "proposals": 231
+      "sources": 167,
+      "evidence_checks": 513,
+      "proposals": 232
     },
     "github267_literal_review_credit": 0,
-    "scope": "Primary 2021 Liang immersion equilibrium water:grounds denominator cannot become DIC output mass ratio/espresso taste policy",
-    "next": "Complete source-bound docs-only PR checks, recheck branch, nonforce merge, verify merged blobs/governance, continue new source or SAFE UX gap."
+    "scope": "Malformed historic edit-shot temperature display units fail closed to supported F/C; no legacy data mutation",
+    "next": "Verify exact PR-head Node22 and scoped suites, diagnose failures, nonforce merge, validate merged Git blob parity and governance, reconcile READY only when proved."
   },
   "policy_decisions_resolved": [
     {
@@ -15554,6 +15604,34 @@
       "implementation": "RESEARCH_ONLY_NO_RUNTIME_OR_POLICY_CHANGE",
       "test_plan": "Primary original methods/data limits and actual current source crosswalk; docs-only PR and exact hosted CI, nonforce [skip netlify] merge if all applicable checks pass; no app suites duplicated solely for unchanged code.",
       "release_queue": "NO_NEW_APP_ITEM",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-303-HISTORIC-TEMP-UNIT-SAFE",
+      "severity": "P2_LEGACY_EDIT_SHOT_TEMPERATURE_LABEL_MISMATCH",
+      "source": [
+        "LIVE-20261116-CLOUD-HISTORIC-TEMP-UNIT-R303"
+      ],
+      "evidence": [
+        "R455-EV-APP-303-A",
+        "R455-EV-APP-303-B"
+      ],
+      "evidence_grade": "SOURCE_REPRODUCED_CONDITIONAL_MALFORMED_ARCHIVE_ONLY_NO_REAL_USER_INCIDENT",
+      "finding": "Unsupported legacy snapshot temperature unit can show an invented temperature scale while formatting it as Celsius, risking misleading Edit Shot controls.",
+      "user_benefit": "Retain trustworthy F/C display of measured shot and private historical edit flow even with malformed archive/preferences; unchanged five-rating completion and single-control recommendation.",
+      "current_locked": "Original measured shot, private history/notes and five tastes preserved. No temperature target, espresso science or policy changes.",
+      "current_app": "main.js chose any truthy snapshot.tempUnit and constants tempDisplay only recognized F for conversion; all non-F treated as C.",
+      "proposed_change": "SAFE implementation: accept only exact F/C historical unit; otherwise current explicit C or default F, with focused F/C, invalid unit, notes and ratings tests.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "CODE_TEST_QUEUED_TESTING_NOT_YET_CI_VERIFIED",
+      "files": [
+        "site/cloud/main.js",
+        "tests/issue455-r303-historic-temp-unit-integrity.test.mjs"
+      ],
+      "test_plan": "Focused synthetic Node22 positive/negative, applicable PR-head Node/lint/UX/mobile/offline/SQL/privacy/security/governance and merged-source readback. No production or actual member experimentation.",
+      "release_queue": "DIC-Q-455-r303-historic-temp-unit-integrity_TESTING_NOT_READY",
       "github267_literal_review_credit": 0,
       "production_deployed": false
     }
