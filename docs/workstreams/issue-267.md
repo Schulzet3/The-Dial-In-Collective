@@ -1,3 +1,10 @@
+## November 16, 2026 UTC — #267 V11DK frozen F215:4768–4831 original two Great Circle cases [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=267bdf84a67e0a2664c02b2d33b5a36ac254bc6c preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- At immutable frozen abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9 tree c54ade64eca30946df8858297578a172f5cf6fa8 blob c3a92e1e2d7045c9a53a903f82f0183fa79dc7cf, directly inspected and individually recorded all 64 physical source literals F215 4768–4831. [Append-only V11DK receipt](../audits/issue267-v2-strict-batches/S2-DISJOINT-F215-4768-4831-20261116-V11DK.json) contains behavior, quality, risk, dead/duplication, exact pinned/live archive counterpart, tests, possible safe changes and Locked fit. Contiguous/nonoverlap after merged V11DJ 4767. Historical F001 first 41 source/strict receipt already verified this run and not double-credited; grouped R2/C2 provisional.
+- Great Circle Young Producers Alejandro Ariza Inza and La Josefina Sudan Rume are separate coffees with frozen elevation 1700–1800m vs candidate 1,700 - 1,800 m. Recorded page vs product-endpoint .js source evidence differs; quoted typography differs but both numeric bounds match. Archived capture hashes not freshly recomputed; review_required and production_parser_used=false remain. No active extractor defect proven; present coffee/source parser under #33 and Auth/privacy under #96. Original/pinned/live historical archive blobs identical but zero newly credited pinned executable or live drift lines.
+- Docs-only source-bound review; no code, tests, CI, member data, SQL, Auth, Netlify, production, backup, release, schedule or notifications changed. PR-head and merged CI PENDING, app/Node/browser/Auth/SQL/603 NOT_RUN_DOCS_ONLY, provider NOT_APPLICABLE. #267 stays OPEN; next F215:4832; pinned, drift and functional reconciliation incomplete.
+
 ## November 16, 2026 UTC — #267 V11DJ frozen F215:4704–4767 strictly source-bound review [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=21fed7c1488783919e55b38dfd1843feb7b805d2 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
