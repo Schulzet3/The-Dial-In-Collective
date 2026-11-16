@@ -1,3 +1,10 @@
+## November 15, 2026 — #267 V11CU F215:3723–3784 two additional frozen source cases [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=12e7e8bb19205de17a80921c1e57dad1b00279e1 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- **Scope:** direct AI inspection of 62 source-bound numbered frozen original lines for Subliminal La Piragua and White Rhino Decaf at abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9, blob c3a92e1e2d7045c9a53a903f82f0183fa79dc7cf. [Append-only individual-line V11CU receipt](../audits/issue267-v2-strict-batches/S2-DISJOINT-F215-3723-3784-20261115-V11CU.json) includes each literal and required semantic/risk/duplication/current counterpart/testability/Locked fit assessment. Preceding V11CT ends at 3722, exact adjacency; pinned and observed live historical archive whole blob same. Old grouped R2/C2/V1 not newly credited and first workflow source strict check reuses this run's 41/41 validation with no duplicate credit.
+- **Case findings:** La Piragua 1800 vs 1800m and White Rhino Decaf two-bound 1320–1600 vs 1320 - 1600 meters are numerically equal but still strict review_required. Original Decaf evidence quotes a different .js product endpoint than the selected friendly URL; do not infer equivalence without original capture. Historic capture_hash_verified flags not independently rehashed, production_parser_used false. Preserve #33 ownership and exact original oracle.
+- **Validation:** 62/62 source literal/line checks and pinned/live archive full Git blob identity PASS. PR-head and merged-source approval PENDING, Node22/browser/offline/SQL/Auth/603 NOT_RUN_DOCS_ONLY, provider NOT_APPLICABLE. No code, release, production, provider, backup, schedule or alert changes. #267 OPEN, next frozen F215:3785, pinned and live drift still pending.
+
 ## November 15, 2026 — #267 V11CT original frozen F215:3663–3722, two source-elevation cases [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=abb038dc453171d965d2309264a712fc18be2119 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
