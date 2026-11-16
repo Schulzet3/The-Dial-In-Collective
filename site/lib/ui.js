@@ -130,6 +130,12 @@ export function lastRecipeContextShot(shots,coffeeId,recipe,version){
    (finite(version.grinderMax)&&sh.grindSetting>version.grinderMax)||
    (sh.tempC!=null&&(!finite(sh.tempC)||
     sh.tempC<CONFIG.bounds.tempC[0]||sh.tempC>CONFIG.bounds.tempC[1])))continue;
+  // A present-day calibration cannot validate an imported shot against its
+  // explicitly recorded ORIGINAL grinder limits. Keep that shot in History.
+  const oldMin=sh.snapshot?.grinderMin,oldMax=sh.snapshot?.grinderMax;
+  if((finite(oldMin)&&finite(oldMax)&&oldMax<=oldMin)||
+     (finite(oldMin)&&sh.grindSetting<oldMin)||
+     (finite(oldMax)&&sh.grindSetting>oldMax))continue;
   if(at>latestInstant){latest=sh;latestInstant=at;}
  }
  return latest;
