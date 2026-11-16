@@ -1,0 +1,263 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 292,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "ef2707442fdb194ebb70fc45b50634c9a06c2201",
+    "blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "content_verified_against_git_blob": true
+  },
+  "source": {
+    "prewrite_development_sha": "ef2707442fdb194ebb70fc45b50634c9a06c2201",
+    "main_sha": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+  },
+  "provider": {
+    "status": "ACTIVE_HEALTHY",
+    "pg_version": "17.11.0.003",
+    "observed_utc": "2026-11-16 18:43:50+00",
+    "application_sql_functions": 114,
+    "application_tables": 52,
+    "migrations": 69,
+    "pgss_current_rows": 4793,
+    "pgss_stats_reset": "2026-10-09 11:11:31.487298+00",
+    "wait_on_locks": 0
+  },
+  "inspected_function_definitions": [
+    {
+      "signature": "private.dic_admin_account_delete_finish(uuid,uuid)",
+      "md5": "51cd64deed985a9ddf622926b8784a84",
+      "source_chars": 2492,
+      "range_characters": [
+        1,
+        2492
+      ],
+      "review": "DIRECT_COMPLETE_LIVE_PG_GET_FUNCTIONDEF",
+      "verdict": "service-only; requires matching operation actor and prepared phase; verifies auth.users absence before optional Community removal; no direct client EXECUTE"
+    },
+    {
+      "signature": "private.dic_admin_account_delete_impact(uuid)",
+      "md5": "a20e399d6c87c60be0661c80a17728d4",
+      "source_chars": 1588,
+      "range_characters": [
+        1,
+        1588
+      ],
+      "review": "DIRECT_COMPLETE_LIVE_PG_GET_FUNCTIONDEF",
+      "verdict": "internal aggregate impact includes target email but anon/authenticated/service direct EXECUTE denied; no member data read"
+    },
+    {
+      "signature": "private.dic_admin_account_delete_prepare(uuid,uuid)",
+      "md5": "6e7e0589cbda1bc5023771724ce8b77f",
+      "source_chars": 3899,
+      "range_characters": [
+        1,
+        3899
+      ],
+      "review": "DIRECT_COMPLETE_LIVE_PG_GET_FUNCTIONDEF",
+      "verdict": "service-only; rechecks admitted Admin, protected target, impact equality and Storage ownership; serial operation and disables admission ahead of Auth deletion"
+    },
+    {
+      "signature": "private.dic_admin_account_delete_preview(uuid)",
+      "md5": "55ad6325a6a3b8eb97d830bd4a5acc26",
+      "source_chars": 687,
+      "range_characters": [
+        1,
+        687
+      ],
+      "review": "DIRECT_COMPLETE_LIVE_PG_GET_FUNCTIONDEF",
+      "verdict": "requires admitted Admin and protects admin/self target; authenticated EXECUTE wrapper reachable under guard"
+    },
+    {
+      "signature": "private.dic_admin_account_delete_request(uuid,text,jsonb)",
+      "md5": "b91e425cd94b4c749b28adf8fd0b96a1",
+      "source_chars": 1949,
+      "range_characters": [
+        1,
+        1949
+      ],
+      "review": "DIRECT_COMPLETE_LIVE_PG_GET_FUNCTIONDEF",
+      "verdict": "requires admitted Admin, explicit keep/remove, exact impact and non-self/nonadmin target; unique active operation index bounds races"
+    },
+    {
+      "signature": "public.dic_admin_push_bootstrap_key(text,text)",
+      "md5": "637217a555887f78d812deb347455e4d",
+      "source_chars": 931,
+      "range_characters": [
+        1,
+        931
+      ],
+      "review": "DIRECT_COMPLETE_LIVE_PG_GET_FUNCTIONDEF",
+      "verdict": "service-only VAPID bootstrap checks key shape, creates Vault secret, one-use advisory lock; no credentials retrieved"
+    },
+    {
+      "signature": "public.dic_admin_push_claim_poll()",
+      "md5": "e3bbf384effe7e29b5cffd89135c0666",
+      "source_chars": 414,
+      "range_characters": [
+        1,
+        414
+      ],
+      "review": "DIRECT_COMPLETE_LIVE_PG_GET_FUNCTIONDEF",
+      "verdict": "service-only four-minute atomically updated poll gate; NULL initial timestamp admitted"
+    },
+    {
+      "signature": "public.dic_admin_push_runtime_keys()",
+      "md5": "16fd1cc2a0cbf0110cd253e661c4cdef",
+      "source_chars": 427,
+      "range_characters": [
+        1,
+        427
+      ],
+      "review": "DIRECT_COMPLETE_LIVE_PG_GET_FUNCTIONDEF",
+      "verdict": "service-only decrypts stored Vault signing key; key contents not queried or stored in audit"
+    },
+    {
+      "signature": "public.dic_admin_push_snapshot()",
+      "md5": "c6c2c674fa8358a3dd4946a3c0f9d8ed",
+      "source_chars": 1007,
+      "range_characters": [
+        1,
+        1007
+      ],
+      "review": "DIRECT_COMPLETE_LIVE_PG_GET_FUNCTIONDEF",
+      "verdict": "service-only aggregate Admin/pending identifiers; no client EXECUTE"
+    },
+    {
+      "signature": "public.dic_member_approval_claim(text,integer)",
+      "md5": "b0d1e8d2622852b6b930def5c8a171d9",
+      "source_chars": 1920,
+      "range_characters": [
+        1,
+        1920
+      ],
+      "review": "DIRECT_COMPLETE_LIVE_PG_GET_FUNCTIONDEF",
+      "verdict": "service-only 1-20 claims; eligible admitted confirmed members; SKIP LOCKED, two-minute lease; endpoint delivery gated by last_sent_event_id, defined NOT NULL DEFAULT 0"
+    },
+    {
+      "signature": "public.dic_member_approval_claim_poll()",
+      "md5": "b94ddc2223993aa7685faf482d3871e4",
+      "source_chars": 335,
+      "range_characters": [
+        1,
+        335
+      ],
+      "review": "DIRECT_COMPLETE_LIVE_PG_GET_FUNCTIONDEF",
+      "verdict": "service-only four-minute poll gate; NOT NULL timestamp DEFAULT -infinity"
+    },
+    {
+      "signature": "public.dic_member_approval_finish(bigint,text,uuid,text)",
+      "md5": "e92ba8e17ab274bcab1a564475d16f28",
+      "source_chars": 1003,
+      "range_characters": [
+        1,
+        1003
+      ],
+      "review": "DIRECT_COMPLETE_LIVE_PG_GET_FUNCTIONDEF",
+      "verdict": "service-only claim-token reconciliation and bounded retry backoff; live NULL behavior differs from newer unpublished development migration as expected"
+    }
+  ],
+  "complete_current_function_source_characters": 16652,
+  "current_complete_function_definitions": 12,
+  "current_table_definitions_checked": [
+    {
+      "table": "private.dic_admin_account_delete_operations",
+      "column_count": 11,
+      "rls": true,
+      "anon_select": false,
+      "authenticated_select": false,
+      "unique_active_target": "dic_admin_account_delete_one_active",
+      "verdict": "partial unique index prevents multiple concurrent noncompleted target deletion operations"
+    },
+    {
+      "table": "private.dic_admin_push_runtime",
+      "column_count": 4,
+      "rls": true,
+      "anon_select": false,
+      "authenticated_select": false,
+      "verdict": "private Vault secret reference, no raw key data read; service-role table SELECT denied but definer RPC handles custody"
+    },
+    {
+      "table": "private.dic_member_approval_deliveries",
+      "column_count": 10,
+      "rls": true,
+      "anon_select": false,
+      "authenticated_select": false,
+      "verdict": "service-claimed deliveries, states and two-minute leases"
+    },
+    {
+      "table": "private.dic_member_approval_poll_gate",
+      "column_count": 2,
+      "rls": true,
+      "anon_select": false,
+      "authenticated_select": false,
+      "verdict": "NOT NULL last_polled_at DEFAULT -infinity; no null gate"
+    },
+    {
+      "table": "public.dic_member_approval_push_subscriptions",
+      "column_count": 7,
+      "rls": true,
+      "anon_select": false,
+      "authenticated_select": false,
+      "verdict": "last_sent_event_id bigint NOT NULL DEFAULT 0; service recipient lookups only; no public/member table access"
+    }
+  ],
+  "extra_dependency_evidence": {
+    "storage_objects_owner_type": "uuid",
+    "storage_objects_owner_id_type": "text",
+    "account_delete_dynamic_storage_check": "TYPE_CORRECT",
+    "unique_noncompleted_account_delete_index": "CONFIRMED"
+  },
+  "edge_source_parity": {
+    "slug": "dic-member-approval-broker",
+    "status": "ACTIVE",
+    "version": 1,
+    "verify_jwt": false,
+    "deployed_core_chars": 11751,
+    "release_core_blob": "1bc82c0c0f7e90bb86dd7da895c18f9c4e015c5a",
+    "development_core_blob": "1bc82c0c0f7e90bb86dd7da895c18f9c4e015c5a",
+    "deployed_exact_equals_release_and_development": true,
+    "security_verdict": "Public poll is fixed-operation/no recipient inputs, four-minute database gate; non-poll requires verified Supabase Auth and admitted-state checks. Hosted live-auth end-to-end UNVERIFIED."
+  },
+  "source_status": {
+    "live_finish_md5": "e92ba8e17ab274bcab1a564475d16f28",
+    "development_null_guard_migration": "supabase/migrations/20261114195000_dic_member_approval_finish_null_receipts.sql",
+    "development_migration_blob": "dea27e959e052b06bc032f4522d91312eea779eb",
+    "migration_not_on_release_branch": true,
+    "classification": "EXPECTED_UNPUBLISHED_SOURCE_FIX_NOT_NEW_DRIFT",
+    "newer_canonical_name_response": "DEVELOPMENT_MERGED_TESTING_UNDEPLOYED"
+  },
+  "live_advisors": {
+    "security": {
+      "rls_no_policy": 13,
+      "authenticated_definer_executable": 10,
+      "leaked_password_protection": 1
+    },
+    "performance": {
+      "unindexed_fk": 14,
+      "unused_index": 8
+    },
+    "classification": "ADVISORY_NOT_AUTOMATIC_DEFECT_OR_DELETION"
+  },
+  "scope": {
+    "member_rows_read": 0,
+    "auth_identities_read": 0,
+    "private_data_extracted": false,
+    "raw_logs_read": false,
+    "provider_writes": 0,
+    "production_changes": 0,
+    "code_test_ci_changes": 0,
+    "functional_tests_run": 0,
+    "first_time_baseline_credit": 0,
+    "prior_numeric_distinct_preserved": 4604,
+    "pgss_next_rank_window": "4961-5040 UNAVAILABLE_TOTAL_4793"
+  },
+  "result": {
+    "new_confirmed_defects": 0,
+    "justified_deletions": 0,
+    "baseline": "IN_PROGRESS",
+    "queue": "CURRENT_LIVE_QUEUE_UNREADABLE_FILE_SIZE_PRIOR_509_TESTING_NOT_RECLASSIFIED",
+    "next": "Review genuinely new/changed or uncredited provider objects with exact source; pgss numeric ranks 4961-5040 only when available; coordinate #33 downstream canonical response and #96 genuine Auth. No production writes."
+  }
+}
