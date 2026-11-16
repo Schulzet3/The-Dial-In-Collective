@@ -42,6 +42,7 @@ jobs:
           DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r250
           DIC_R250_VERIFY: '1'
           DIC_R250_SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_R250_EVENT_SHA: ${{ github.sha }}
         run: node scripts/audit/issue33-r250-aldea-check.mjs
       - name: Retain bounded public raw evidence for one day
         if: always()

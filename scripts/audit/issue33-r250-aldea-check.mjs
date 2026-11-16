@@ -2,6 +2,7 @@
 // Issue #33 R250: source-bound selected coffee evidence, not a global 603 certification.
 import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
 import {join,resolve} from 'node:path';
+import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
 import {selectedProductHeadings} from './issue33-selected-product-heading.mjs';
@@ -39,7 +40,8 @@ if(process.env.DIC_R250_VERIFY==='1'){
  const failures=[],ok=(v,why)=>{if(!v)failures.push(why);};
  let bytes,report;try{bytes=readFileSync(join(dir,'focused-current-evidence.json'));report=JSON.parse(bytes.toString('utf8'))}catch{}
  ok(JSON.stringify(report?.case_numbers)==='[424,425,426]'&&report.records?.length===3,'exact_cohort');
- ok(report?.source_sha===process.env.DIC_R250_SOURCE_SHA,'exact_sha');
+ ok(report?.source_sha===process.env.DIC_R250_EVENT_SHA,'report_event_sha');
+ ok(execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim()===process.env.DIC_R250_SOURCE_SHA,'exact_checked_out_source_sha');
  ok(report?.original603_register_sha256==='2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353','frozen_csv_sha256');
  ok(report?.original_corpus_modified===false&&report?.production_operations===0&&report?.manual_certified===0,'preserve_frozen_and_boundaries');
  const evidence=[];
