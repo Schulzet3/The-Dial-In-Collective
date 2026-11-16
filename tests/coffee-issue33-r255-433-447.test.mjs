@@ -59,3 +59,24 @@ test('nonretrievable exact original URL can never be marked complete from metada
    .some(x=>x.reason==='required_official_source_not_fetched'));
  }
 });
+
+test('sky-time metaphors after an actual sensory noun stay as source prose, not autofilled cup notes',()=>{
+ for(const scene of ['sunrise','sunset']){
+  const p=extractPublicCoffeeFacts(product(433,
+   'Graham cracker, cashew, hibiscus, with a hint of lemon and '+scene+
+   '. Perfect everyday coffee no matter how you brew.'),{source_url:cases[433].url});
+  assert.equal(p.ok,true);
+  const taste=String(p.fields?.tasting_notes||'').toLowerCase();
+  for(const literal of ['graham cracker','cashew','hibiscus','lemon'])
+   assert.ok(taste.includes(literal),'must preserve exact printed gustatory '+literal);
+  assert.ok(!taste.includes(scene),'time-of-day metaphor should not be treated as taste '+scene);
+ }
+});
+test('literal direct flavor from selected coffee is not erased by unrelated sky metaphor',()=>{
+ const p=extractPublicCoffeeFacts(product(433,'Graham cracker, cashew, hibiscus, lemon',
+  '<aside class="related-products">A different coffee has sunrise and sunset flavor.</aside>'),
+  {source_url:cases[433].url});
+ assert.equal(p.ok,true);
+ assert.ok(!String(p.fields?.tasting_notes||'').toLowerCase().includes('sunrise'));
+ assert.ok(!String(p.fields?.tasting_notes||'').toLowerCase().includes('sunset'));
+});
