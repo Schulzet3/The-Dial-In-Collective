@@ -3296,6 +3296,36 @@
       "limitations": "Primary original studies underpinning numeric and sensory examples NOT independently rechecked, full 55-page reference-by-reference assessment NOT done; PDF SHA, graphics, manufacturer-specific validity, any DIC personal five-rating efficacy and replicated outcome NOT verified. Do not infer all 55 pages independently reviewed.",
       "current_live_code": "site/lib/constants.js Git blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2 maintains five independently recorded 1-5 tastes and style-specific Traditional/Turbo/Fast-Flow/Ristretto/Lungo starting times; site/lib/engine.js Git blob 8e5e93f42f02444533aee9256569baefc6028325 retains tastesComplete eligibility and at most one controllable next step.",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "DATA-2025-WASZKIEWICZ-ESPRESSO-ZENODO-V101",
+      "type": "external_original_research_software_release_and_processed_measurements",
+      "title": "Under pressure: poroelastic regulation of flow in espresso brewing — reproducibility software v1.0.1",
+      "authors": "Radost Waszkiewicz; Franciszek Myck; Łukasz Białas; Maria Puciata-Mroczyńska; Michał Dzikowski; Piotr Szymczak; Maciej Lisicki",
+      "published": "2025-12-24 archived software release",
+      "version": "v1.0.1; immutable Git tag commit fbc33d3380a9c8cff2467bae70fec7137a6ed46f",
+      "doi": "10.5281/zenodo.18046315",
+      "url": "https://zenodo.org/records/18046315",
+      "related_primary_source_id": "LIT-2026-ESPRESSO-POROELASTIC",
+      "access": "DIRECT_ZENODO_FIRST_PARTY_RECORD_METADATA_AND_GITHUB_TAGGED_README_MAIN_FORMATTING_STATIC_TDS_SOLIDS_SCRIPTS_AND_FIRST_18_PROCESSED_CSV_ROWS_READ; ORIGINAL_ZENODO_BINARY_NOT_DOWNLOADED_OR_REEXECUTED",
+      "source_bytes_sha256": null,
+      "archive_zip_md5_repository_advertised": "ee7ea52d03ea3838b0815ccf0364177f",
+      "source_git_tag_commit": "fbc33d3380a9c8cff2467bae70fec7137a6ed46f",
+      "source_git_blobs": {
+        "README": "d6c0c579a63ec78aed98558d300b85779bb862d4",
+        "main": "4a7bd9e758130d595d1067787a4a97b6e41b699b",
+        "format_time": "4cf488f567080834e3671bdb787f9349be909d56",
+        "fit_static": "934339dcce2bb0c9b54f8519d9987a7b3da3002b",
+        "fit_tds": "ab2eaee1ecf5e8adebdc73cc4f67d90f3fddabbc",
+        "fit_solids": "92af018f2288ca69793ddf8ca6b7122c7f50a564",
+        "processed_time_csv": "d86dc2f9af8b4963869318e5b0728a3481827b02",
+        "processed_tds_csv": "da500ac8e8cf0f49b4c70b2f04fb0cc0e7bca026"
+      },
+      "evidence_grade": "ORIGINAL_AUTHOR_SOFTWARE_AND_TAGGED_PROCESSED_DATA_PROVENANCE; STATIC_CODE_REVIEW_ONLY_NOT_EXECUTED_REPRODUCTION_OR_CONSUMER_SENSORY_VALIDATION",
+      "review_status": "R455-309_BOUNDED_AUTHOR_SOFTWARE_SOURCE_AND_PREPROCESSING_CHECK; ZIP_ARCHIVE_FULL_CSV_RAW_RUNS_OUTPUT_GRAPHS_AND_EXECUTABLE_DEPENDENCIES_UNVERIFIED",
+      "claims_verified_externally": "Zenodo author release links to Git tag v1.0.1 and archives 5.2MB zip (advertised MD5 only). Source pipeline applies finite 100s time window, 31-point first-order Savitzky-Golay smoothing, per-run interpolation to 1000 samples and aggregation by pressure. Static pressure-flow fit uses groupwise final aggregated sample; scipy curve_fit call omits sigma despite reading reported SEM, and TDS curve_fit likewise omits sigma. No source script measures DIC five personal taste responses or validates universal user pressure/flow/time prescriptions.",
+      "limitations": "No 5.2MB ZIP download/hash verification, full raw time series/metadata checks or execution; externally advertised MD5 not independently recomputed. The code's MAX_TIME=100s is a preprocessing window and does not by itself disprove paper's long-time >120s original shot protocol. No independently re-fitted model, parameter confidence, cup sensory outcome, privacy-sensitive membership data or product policy validation.",
+      "github267_literal_review_credit": 0
     }
   ],
   "evidence_checks": [
@@ -10202,6 +10232,39 @@
       "result": "RESEARCH_LIMITATION_NOT_NEW_TEMPERATURE_CORRECTION_OR_CAPTURE",
       "research_only": true,
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-REPRO-309-A",
+      "source": "DATA-2025-WASZKIEWICZ-ESPRESSO-ZENODO-V101",
+      "claim": "First-party archived software has a stable Zenodo DOI 10.5281/zenodo.18046315, release v1.0.1 and a linked exact immutable Git commit, with author original preprocessing and fitting scripts; an advertised 5.2 MB ZIP MD5 is metadata only, not an independently verified download checksum.",
+      "source_url": "https://zenodo.org/records/18046315",
+      "source_locator": "Zenodo v1.0.1 record metadata; Git ref tags/v1.0.1; README/main.py",
+      "grade": "DIRECT_PRIMARY_RELEASE_METADATA_AND_TAGGED_GIT_BLOBS_NO_BINARY_VERIFICATION",
+      "result": "AUTHOR_RELEASE_PROVENANCE_CHECKED_ORIGINAL_BINARY_EXECUTION_PENDING_NOT_PRODUCT_POLICY",
+      "research_only": true,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-REPRO-309-B",
+      "source": "DATA-2025-WASZKIEWICZ-ESPRESSO-ZENODO-V101",
+      "claim": "At immutable v1.0.1, format_measurements_time_dependent.py sets MAX_TIME=100 seconds, Savitzky-Golay 31-point/first-order smoothing, interpolates runs to 1000 common time samples and aggregates pressure series with mean/SEM. Static fit reads formatted aggregated pressure series and selects groupby final available time sample. This is a processed late-time model input, not one-shot first 30-second taste evidence or a universal 5-bar optimum.",
+      "source_url": "https://github.com/RadostW/espresso/blob/v1.0.1/format_measurements_time_dependent.py",
+      "source_locator": "format_measurements_time_dependent.py lines 13-17, ~64-100, ~160-250; fit_model_static_flow_rate.py lines 14-33; processed time_dependent.csv lines 1-18",
+      "grade": "SOURCE_CODE_DIRECT_TAGGED_INSPECTION_PROCESSED_CSV_SAMPLE_NO_MODEL_RERUN",
+      "result": "MODEL_PREPROCESSING_PROVENANCE_QUALIFIED_NO_PRESSURE_TIME_TASTE_POLICY",
+      "research_only": true,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-REPRO-309-C",
+      "source": "DATA-2025-WASZKIEWICZ-ESPRESSO-ZENODO-V101",
+      "claim": "At v1.0.1 the static pressure-flow script loads mass_flow_rate_std__g_per_s but calls scipy curve_fit without sigma; the TDS fit similarly reads tds_std__percent without sigma. The solids fit builds a modelled solids time series with fixed FIRST_DROP_OFFSET=8s. These are implementation/model assumptions, not proof of calibrated uncertainty across coffees or measured human taste outcomes.",
+      "source_url": "https://github.com/RadostW/espresso/blob/v1.0.1/fit_model_static_flow_rate.py",
+      "source_locator": "fit_model_static_flow_rate.py ~24-60; fit_model_tds.py ~16-53; fit_model_solids.py FIRST_DROP_OFFSET and curve_fit",
+      "grade": "DIRECT_STATIC_PRIMARY_RESEARCH_CODE_READ_WITHOUT_EXECUTING_NO_JUDGEMENT_OF_OVERALL_STATISTICAL_CORRECTNESS",
+      "result": "HOLD_NUMERIC_CONFIDENCE_TRANSFER_AND_SENSORY_EFFICACY_CLAIMS_NO_APP_CHANGE",
+      "research_only": true,
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -10431,23 +10494,25 @@
     "R455-305: Carvalho et al. 2025 indexed original professional canephora cupping RATA Methods/Results/Discussion, +1 distinct study/+3 bounded checks/+1 research-only proposal; no espresso personal outcome or new controls. Direct full publisher HTML open auth-redirected; PDF/hash/raw outcomes not audited. Original standalone S019 and Oct29 ZIP bytes still unverified due runtime ClientError. Validate docs-only exact-source governance and nonforce merge, then continue real Log Shot/Rate usability reproduction. No #267 line credit.",
     "R455-306 active safe app correction PR #3055 with original source/preflight receipt and 3 synthetic tests; initial approval 43910679133 HOLD missing queue intake; corrected unique R306 IN_PROGRESS queue item authored, exact updated PR-head CI and merge still pending; no production writes, no #267 literal review credit.",
     "R455-306 FINAL: PR #3055 source/test/journal and queue/ledger nonforce merged f3f17d3a386211388023a4a38f7a9ab32abe8cbb; all six files match PR head; final Node 5236 PASS/0 FAIL/6 intentional SKIP on both PR head 43912006010 and merge 43912750124; head cloud 43912006318, SQL 43912006372, security 43912006276, approval 43912006152, merged cloud 43912750206 and governance 43912750041 SUCCESS. Original approval and first Node failures corrected, retained. Development READY only pending this documentation reconciliation CI; no deploy, member, science or #267 literal credit.",
-    "R455-307: verify and integrate publisher-first secondary brewing REVIEW (2025 DOI 10.3390/beverages11050125), three bounded evidence checks and one no-change policy hold; direct MDPI HTML sections checked; do not infer universal 25-30s/6.5g/9bar targets, confuse cup serving temperature with brew temperature, certify original PDF/primary studies or claim measured recommendation efficacy. Original Oct29 ZIP and S019 remain inaccessible/unhashed. Code/Locked policy unchanged. After docs-only CI and nonforce merge, crosslink issue #455; #267 zero semantic line credit."
+    "R455-307: verify and integrate publisher-first secondary brewing REVIEW (2025 DOI 10.3390/beverages11050125), three bounded evidence checks and one no-change policy hold; direct MDPI HTML sections checked; do not infer universal 25-30s/6.5g/9bar targets, confuse cup serving temperature with brew temperature, certify original PDF/primary studies or claim measured recommendation efficacy. Original Oct29 ZIP and S019 remain inaccessible/unhashed. Code/Locked policy unchanged. After docs-only CI and nonforce merge, crosslink issue #455; #267 zero semantic line credit.",
+    "R455-309: verify original Zenodo DOI software and tag-linked source provenance for Waszkiewicz model; author preprocessing 100s/31-point smoothing and unweighted static/TDS fits are research-method boundaries only, no universal pressure/taste claim; full archive binary/run reproduction remains unverified. Exact docs-only source-bound CI/nonforce [skip netlify] merge and merged governance required; original Oct29 pack/S019 unresolved; no #267 literal credit."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-307_SECONDARY_BREWING_REVIEW_DOCS_CANDIDATE",
+    "run_id": "R455-309_AUTHOR_SOFTWARE_PROVENANCE_DOCS_CANDIDATE",
     "date": "2026-11-16",
-    "development_preflight_sha": "84c261657912d922623fe7285f763ecec3ad7934",
+    "development_preflight_sha": "a28c9bc38f20cfaf8e7194a816d7994a72f3962f",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
     "source_counts": {
-      "sources": 171,
-      "evidence_checks": 523,
-      "proposals": 236
+      "sources": 172,
+      "evidence_checks": 526,
+      "proposals": 237
     },
+    "source_tag_commit": "fbc33d3380a9c8cff2467bae70fec7137a6ed46f",
     "production_deployed": false,
     "github267_literal_review_credit": 0,
     "owner_approval_now_required": false,
     "ci": "NOT_RUN_AT_AUTHORING",
-    "next": "Exact source-bound documentation CI, nonforce [skip netlify] merge, merged file/blob and governance readback; original 55-page reference audit remains incomplete."
+    "next": "Verify four applicable exact PR-head checks, then nonforce [skip netlify] merge, readback merged 2 blobs and push-event governance; no deploy. Full author ZIP/CPU reproduction, Oct29 pack and S019 original remain unverified."
   },
   "policy_decisions_resolved": [
     {
@@ -15960,6 +16025,35 @@
         "docs/workstreams/ops-issue455-r307-brewing-review-20261116.md"
       ],
       "test_plan": "Docs-only GitHub governance/Node/cloud/isolated-SQL source-bound CI as applicable; no new app tests or espresso taste-efficacy PASS.",
+      "release_queue": "NOT_APPLICABLE_NO_RUNTIME_CHANGE",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-PROP-309-REPRO-SOFTWARE-DOES-NOT-VALIDATE-SENSORY",
+      "severity": "RESEARCH_PROVENANCE_UNCERTAINTY_NO_REPRODUCED_APP_DEFECT",
+      "source": [
+        "DATA-2025-WASZKIEWICZ-ESPRESSO-ZENODO-V101",
+        "LIT-2026-ESPRESSO-POROELASTIC"
+      ],
+      "evidence": [
+        "R455-EV-REPRO-309-A",
+        "R455-EV-REPRO-309-B",
+        "R455-EV-REPRO-309-C"
+      ],
+      "evidence_grade": "PRIMARY_AUTHOR_TAGGED_SOFTWARE_STATIC_READ_NO_EXECUTION_OR_SENSORY_OUTCOMES",
+      "finding": "The original paper's author software provides actual pressure-flow processing provenance, but fixed windows, averaging, smoothing, and unweighted curve fitting prevent treating author scripts or fitted pressure curves as externally validated confidence that an individual user's five taste ratings will improve.",
+      "current_locked": "Five explicit personal taste scales and green/missing separation, one controllable next recommendation, measured shot/private notes/history, independent Turbo/Fast-Flow/feed/calibration/recipe boundaries and no inferred pressure optimum.",
+      "current_app": "Directly inspected immutable live site/lib/engine.js 8e5e93f42f02444533aee9256569baefc6028325, constants d3559dc1c9560c4d68fbcad1dc91e3a792a100a2, model baafc8fa64fa3e359d8e42094e41c5d72a3b22df, ui 3083752ef7f6eedae51032189727504b9fe0e524. No pressure-control recommendation, one-change and five-rating guards preserved.",
+      "proposed_change": "RESEARCH-ONLY: retain numeric and epistemic uncertainty; require isolated dependency-pinned reproduction, original binary/data checksum, additional coffee/device setups and optionally consented five-taste same-coffee one-change outcomes before proposing any user-facing pressure/flow confidence or target. Do not add fields or run experiments.",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "RESEARCH_ONLY_DOCS_BRANCH_CANDIDATE_NO_RUNTIME_CHANGE",
+      "files": [
+        "docs/audits/issue455-research-source-coverage-20261103.json",
+        "docs/workstreams/ops-issue455-r309-poroelastic-code-provenance-20261116.md"
+      ],
+      "test_plan": "Docs-only source-bound hosted governance plus applicable GitHub CI; no duplicate engine suite or live experiments; research Python reproduction NOT_RUN",
       "release_queue": "NOT_APPLICABLE_NO_RUNTIME_CHANGE",
       "production_deployed": false,
       "github267_literal_review_credit": 0
