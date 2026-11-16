@@ -3070,6 +3070,25 @@
       "review_status": "R455-295_REPRODUCED_IN_PRIOR_IMMUTABLE_APP_AND_VERIFIED_MERGED_SOURCE_WITH_FIVE_FOCUSED_TESTS",
       "evidence_grade": "SOURCE_REPRODUCED_SAFE_UI_BUG_EXACT_5159_NODE_PASS_0_FAIL_6_SKIP_PLUS_BROWSER_SQL_SECURITY_GOVERNANCE_NO_REAL_MEMBER_INCIDENT",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "LIVE-20261116-CLOUD-LEGACY-SHOT-EDIT-MISSING-SNAPSHOT-R296",
+      "type": "source_bound_current_app_legacy_shot_ux_defect",
+      "title": "Historical shot Edit crashes for missing optional snapshot",
+      "source_paths": [
+        "site/cloud/main.js",
+        "site/cloud/shot_card.js",
+        "tests/issue455-r296-legacy-edit-snapshot.test.mjs"
+      ],
+      "source_sha": "fc6496d07b3126d24e12462808a5b2c7071773ed",
+      "source_git_blobs": {
+        "cloud": "14a72a8e425d2b5f629dea17eb7b4d217cde92e6",
+        "history_card": "c96048c63e504a9bfc0c1b196aaeb0de376ceb2f"
+      },
+      "access": "DIRECT_IMMUTABLE_GITHUB_SOURCE_AND_REPRODUCIBLE_OPTIONAL_CHAIN_NULLISH_PROPERTY_EVALUATION",
+      "review_status": "R455-296_REPRODUCED_SOURCE_AND_TEST_AUTHORED_HOSTED_CI_PENDING",
+      "evidence_grade": "DETERMINISTIC_SOURCE_DEFECT_NOT_AN_OBSERVED_MEMBER_INCIDENT",
+      "github267_literal_review_credit": 0
     }
   ],
   "evidence_checks": [
@@ -9587,6 +9606,16 @@
       "grade": "POSITIVE_NEGATIVE_ACTUAL_UI_HELPER_FIVE_CASES_PASS_ON_EXACT_PR_AND_MERGE; NO_MEMBER_DEVICE_EXPERIMENT",
       "result": "SAFE_MERGED_SOURCE_READY_NOT_DEPLOYED",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-APP-296-A",
+      "source": "LIVE-20261116-CLOUD-LEGACY-SHOT-EDIT-MISSING-SNAPSHOT-R296",
+      "source_sha": "fc6496d07b3126d24e12462808a5b2c7071773ed",
+      "page_section": "site/cloud/main.js showLog editing historical tempUnit; site/cloud/shot_card.js archived optional snapshot display; tests/issue455-r296-legacy-edit-snapshot.test.mjs",
+      "claim": "The expression editing?.snapshot.tempUnit dereferences tempUnit when editing exists and snapshot is absent, throwing before historical Edit Shot can show. Other history rendering already treats snapshot as optional. A second optional chain editing?.snapshot?.tempUnit retains historical stored units when available, falls back to current display unit when absent, and leaves private original shot, notes, measured values, and five taste ratings untouched.",
+      "grade": "STATIC_SOURCE_VERIFIED_AND_REPRODUCIBLE_JS_OPTIONAL_CHAIN_SEMANTICS; HOSTED_NEGATIVE_POSITIVE_TESTS_PENDING",
+      "result": "SAFE_FIX_AUTHORED_CI_PENDING_NO_DEPLOY",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -9803,22 +9832,23 @@
     "R455-293: Direct original Wiley Vezzulli 2021 Tables 3/4 all-eight-origin crosswalk: 6/8 three-level time/end-temperature source names permuted, plus Table3 Brazil SW 6:27 first crack later than 05:54 roast end. Two bounded original-source checks, 159/488/224. Underlying PDF/Appendix S1/Cropster logs, correction and standalone S019 original not verified; no app policy or #267 literal audit credit. Continue separate live UX/primary source review.",
     "R455-294: Direct MDPI original Sek et al 2026 single-Brazilian-Arabica four-method chemistry/HPLC-onlineTEAC: +1 source +3 bounded checks +1 research-only proposal; preserve full previous counts 159/488/224. Doses and final dilution cause non-comparable numeric rankings; NO five-taste preference/espresso efficacy, no numeric/health/data change. Supplementary Table S1 and raw series unverified; standalone S019 inaccessible. Continue high-value live UX gap and outstanding claim verification; #267 literal credit zero.",
     "R455-295: Source-reproduced narrow Log Shot stale validation feedback on numeric corrections; proposed safe helper and five new test cases; 161 sources/493 checks/226 proposals at source authoring. Exact hosted CI and nonforce merge pending; no production/member reads or scientific taste claim. Standalone S019 original still unavailable; #267 literal audit zero.",
-    "R455-295 FINAL: PR #2989 source/test/ledger/queue/same-commit journal nonforce merged 8593fdc856c4257201a245ea3195921eb0ec4466; head/merged Node22 5159 PASS/0 FAIL/6 SKIP, all five R295 tests PASS, applicable head/merged browser/offline/governance, isolated SQL/security successful. One unique development-only READY row; no Publish/member data or new taste policy. Ledger remains 161/493/226; original S019 inaccessible, #267 separate."
+    "R455-295 FINAL: PR #2989 source/test/ledger/queue/same-commit journal nonforce merged 8593fdc856c4257201a245ea3195921eb0ec4466; head/merged Node22 5159 PASS/0 FAIL/6 SKIP, all five R295 tests PASS, applicable head/merged browser/offline/governance, isolated SQL/security successful. One unique development-only READY row; no Publish/member data or new taste policy. Ledger remains 161/493/226; original S019 inaccessible, #267 separate.",
+    "R455-296 staged SAFE legacy edit snapshot optional-chain correction plus three CloudApp tests; exact-source hosted CI and nonforce integration pending. No app efficacy or real-member validation."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-295_FINAL_SOURCE_CI_DEVELOPMENT_READY",
+    "run_id": "R455-296_SOURCE_TEST_AUTHORED_NOT_READY",
     "date": "2026-11-16",
-    "development_preflight_sha": "8593fdc856c4257201a245ea3195921eb0ec4466",
+    "development_preflight_sha": "fc6496d07b3126d24e12462808a5b2c7071773ed",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "original_ledger_blob_sha": "fd85dcaa35ddb439dcff0f16fc670117be81e44b",
+    "original_ledger_blob_sha": "a3d25270262a2cad2cb8c6dfe37a41077360dbee",
     "source_counts": {
-      "sources": 161,
-      "evidence_checks": 493,
-      "proposals": 226
+      "sources": 162,
+      "evidence_checks": 494,
+      "proposals": 227
     },
-    "scope": "One source-reproduced Log Shot stale client-validation alert SAFE fix; atomic six-file PR #2989, five new Node tests; exact head and merged CI verified, no publish.",
+    "scope": "One deterministic legacy shot edit null-snapshot exception corrected by nested optional chaining, three focused tests authored pending hosted verification.",
     "github267_line_credit": 0,
-    "next": "Further non-overlapping original paper/claim verification and separate safe reproducible UX gap. S019 original unavailable; no new member data/telemetry/experiments. Keep Issue #455 open."
+    "next": "Run exact-source Node22/CloudApp/browser/accessibility and applicable privacy/governance checks; correct failures; nonforce integrate only if PASS; reconcile docs/queue READY only after merged acceptance; S019 not available."
   },
   "policy_decisions_resolved": [
     {
@@ -15067,6 +15097,28 @@
       "github267_literal_review_credit": 0,
       "source_commit": "8593fdc856c4257201a245ea3195921eb0ec4466",
       "implementation_pr": 2989
+    },
+    {
+      "id": "R455-PROP-296-EDIT-LEGACY-SHOT-MISSING-SNAPSHOT",
+      "severity": "P2_REPRODUCIBLE_LEGACY_SHOT_EDIT_EXCEPTION",
+      "source": [
+        "LIVE-20261116-CLOUD-LEGACY-SHOT-EDIT-MISSING-SNAPSHOT-R296"
+      ],
+      "evidence": [
+        "R455-EV-APP-296-A"
+      ],
+      "finding": "A historical shot without an optional snapshot crashes on Edit due to a single unsafe nested property dereference. This blocks a legitimate private-history correction and does not merely affect formatting.",
+      "evidence_grade": "DIRECT_SOURCE_REPRODUCIBLE; ACTUAL_HOSTED_TESTS_PENDING",
+      "current_locked": "Preserve original measured history/notes, all five taste ratings, unchanged recording and private owner scope; honor historical temperature units when present and current display unit only when missing.",
+      "current_app": "site/cloud/main.js showLog uses editing?.snapshot.tempUnit despite history card supporting snapshot?.; same saved shot object is cloned, never mutated.",
+      "proposed_change": "SAFE add the missing nested optional chain and three actual CloudApp synthetic positive/negative tests; no data migration or experimental recommendation policy.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "FEATURE_BRANCH_ATOMIC_SOURCE_TEST_JOURNAL_TESTING_PENDING_CI",
+      "test_plan": "New Node22 CloudApp showLog tests: (1) absent and null snapshot edits preserve notes/five ratings/record, (2) original historical Fahrenheit remains authoritative over current Celsius, (3) new shot five tastes remain unselected. Hosted Node/browser/SQL/security/governance pending; no live member/device testing.",
+      "release_queue_status": "DIC-Q-455-r296-legacy-shot-edit-snapshot_TESTING_NOT_DEPLOYED",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "changeScope": {
