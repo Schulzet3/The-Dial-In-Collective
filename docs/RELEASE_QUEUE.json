@@ -15065,23 +15065,32 @@
     {
       "id": "DIC-Q-455-r296-legacy-shot-edit-snapshot",
       "issue": 455,
-      "pr": null,
+      "pr": 2995,
       "title": "Keep Edit Shot usable for legacy archived shots missing optional snapshot metadata",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "53847034a3542c17c5f964e189758e972a75fb5e",
       "scope_paths": [
         "site/cloud/main.js"
       ],
       "owner_source": "Issue #455 Option B SAFE regression; DIC_PREFLIGHT_VERIFIED development_sha=fc6496d07b3126d24e12462808a5b2c7071773ed preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "tests": [
         "Immutable source showLog prior unsafe editing?.snapshot.tempUnit; nested optional-chain safe fix plus three focused synthetic CloudApp tests authored in same commit; NOT YET RUN.",
-        "Node22, browser/cloud, SQL/security and approval exact-source CI NOT VERIFIED. Do not label any pending/skipped test PASS."
+        "Node22, browser/cloud, SQL/security and approval exact-source CI NOT VERIFIED. Do not label any pending/skipped test PASS.",
+        "Final PR-head 9fe38c72f84df283e0dad750e8021ba890fd6020: Node22/lint 43800147437 SUCCESS 5162 PASS / 0 FAIL / 6 intentional SKIP; all three new R296 CloudApp cases PASS; approval 43800147397, mobile/Chromium/offline 43800147336, isolated SQL/privacy 43800147321 and security 43800147337 SUCCESS. Initial unrun TESTING note above is superseded by verified results.",
+        "Nonforce two-parent PR #2995 merge 53847034a3542c17c5f964e189758e972a75fb5e, all 5 original source/test/evidence/queue/journal blobs equal passing PR head; merged Node22/lint 43800496821 SUCCESS 5162 PASS / 0 FAIL / 6 intentional SKIP, cloud mobile 43800496732 and governance 43800496753 SUCCESS. Unrelated #33 Buesaco product checker 43800496773 FAILED and remains outside this scoped acceptance; frozen603 43800147347 SKIPPED, not PASS."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact source/test CI and merged SHA readback pending; READY requires completed applicable checks and docs reconciliation."
+      "ci_runs": [
+        43800147437,
+        43800147336,
+        43800147397,
+        43800147321,
+        43800147337,
+        43800496821,
+        43800496732,
+        43800496753
       ],
-      "notes": "No change to engine, five tastes, numeric model, shot values/notes, privacy/RLS/community, telemetry, Auth/SQL/Edge or member data; no publication. Separate #267 literal audit receives zero line credit.",
+      "blockers": [],
+      "notes": "No change to engine, five tastes, numeric model, shot values/notes, privacy/RLS/community, telemetry, Auth/SQL/Edge or member data; no publication. Separate #267 literal audit receives zero line credit.\n2026-11-16 R296 final unique row READY DEVELOPMENT ONLY, exact verified merge/head CI; original TESTING/NOT RUN notes above are historical before acceptance. No deployment or data/policy/provider changes.",
       "production_deployed": false
     }
   ],
