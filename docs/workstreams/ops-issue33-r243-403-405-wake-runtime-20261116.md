@@ -1,0 +1,24 @@
+# Issue #33 R243 — original603 #403–405 Wake selected-source acceptance (DEVELOPMENT ONLY)
+
+DIC_PREFLIGHT_VERIFIED development_sha=1218ed098231d9fb4d7f38aaae91f341be1dda5c preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+## Scope, authority, and original identity
+Owner's continuing Issue #33 development-only mandate; live PREFLIGHT independently Git-blob/byte verified before AGENTS, CONTEXT, current status, Master Specification, Decision Ledger, approval coverage, Issue #33, source register, concurrent PRs/#267/#96 or provider/source reads. Original frozen 603/201/1197, CSV blob 3e0d3036ea727de091f304f538c6de2dfcaa10d6, immutable oracle and captures untouched. Latest development base 1218ed098231d9fb4d7f38aaae91f341be1dda5c; no production, release, user data, paid service, Auth/SQL/Edge or task changes.
+
+## Selected official source read, November 16 2026 UTC (browser-visible, raw guarded run pending)
+- #403 [Ambler Blend](https://wakecoffee.com/products/ambler-blend): selected H1 Ambler Blend, direct Latin-American beans and light-bodied/mellow description. A customer calling it a 'roast' does not certify a canonical roast level. No selected green process, lot, producer, recipe or release edition.
+- #404 [Bromo](https://wakecoffee.com/products/bromo-blend): selected H1 Bromo, *own* espresso blend of Central American and Indonesian beans with robust caramel flavor. Customer comments about a dark roast, drip or espresso are NOT current selected roast/recipe evidence; Bromo Caffeine patent history is not its decaffeination.
+- #405 [Mountain Water Decaf](https://wakecoffee.com/products/decaf): selected H1 Mountain Water Decaf, a direct fully decaf identity with named water method; current selected copy states herbal/dark chocolate/medium **body** and Latin American, Indonesian, African blend. Medium body is NOT Medium roast and a caffeine-removal treatment is NOT green-bean Washed.
+
+Current *backend raw* HTML, SHA256, parser, Add Coffee and Source Review are NOT yet verified by browser-visible text. No new production claim. Older original R85 #400 and R86 #402 are separately source verified; #401 recycled slug identity still unresolved; do not duplicate either or contaminate fields from another coffee. No change to #267 V2 or #96.
+
+## Same-commit source/test/CI scope
+- tests/coffee-issue33-r243-original403-405.test.mjs
+- scripts/audit/issue33-r243-original403-405-check.mjs
+- .github/workflows/issue33-r243-original403-405.yml
+- this SAME-COMMIT scoped journal
+
+Positive and hostile tests target exact selected names, source roles, decaf-vs-green separation, multi-region blend, customer-review and sibling/product/year contamination, and fail-closed identity. Dedicated bounded HTTPS workflow independently saves exact raw HTML, original register hash, actual parser, Add Coffee, Source Review and afterproof; raw evidence retained one day. New runtime parser code, queue, release and master authority remain unchanged until a reproducible defect warrants a narrow repair and own risk-routed checks.
+
+## Acceptance state at creation / next action
+TESTING; not current-source VERIFIED, READY or DEPLOYED. Run exact PR-head focused real official source plus applicable Node/approval, examine any actual failure, correct in SAME-COMMIT journaled commit, nonforce merge with [skip netlify] only after applicable PASS; read back merged blobs and official exact-source CI. Do not infer PASS from SKIPPED, leave unsupported/source-contradicted fields blank and reviewable. Keep parent Issue #33 OPEN until original 603 independent adjudications complete.
