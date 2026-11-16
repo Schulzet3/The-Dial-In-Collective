@@ -361,7 +361,7 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
    body.some(b=>{
     if(!['p','div'].includes(b.tag)||b.educational||b.text.length>600||
        NONCURRENT_DECAF_METHOD.test(b.text))return false;
-    const hit=/(?:^|[.!?]\\s+)(?:our|this|these)\\s+(swiss|mountain)[ -]?water\\s+decaf(?:feinated)?\\s+beans\\s+undergo(?:es)?\\s+(?:(?:a|an|100%|chemical[- ]free)\\s+){0,5}decaffeination\\s+process\\b/iu.exec(b.text);
+    const hit=/(?:^|[.!?]\s+)(?:our|this|these)\s+(swiss|mountain)[ -]?water\s+decaf(?:feinated)?\s+beans\s+undergo(?:es)?\s+(?:(?:a|an|100%|chemical[- ]free)\s+){0,5}decaffeination\s+process\b/iu.exec(b.text);
     return hit&&hit[1].toLowerCase()===titleWater[1];
    })&&inferDecaffeinationMethod({name,selectedMethod:name})==='Water Process')
    decafEvidence.add(name);
