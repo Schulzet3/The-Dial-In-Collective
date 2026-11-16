@@ -21791,5 +21791,40 @@
     "source_key_fix": "TESTING_UNDEPLOYED",
     "baseline": "IN_PROGRESS",
     "next": "numeric 4321-4400; isolated canonical-name test, remaining provider-source parity and #96 Auth"
+  },
+  "provider_fk_index_dossier_pgss_run279": {
+    "preflight_development_sha": "37fe578a45378c4d1cd7b81081deef37bdd86bb3",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "provider_observed_at": "2026-11-16 02:43:20.421882+00",
+    "receipt_path": "docs/audits/issue509-r279-fk-dossier-pgss-20261116.json",
+    "fk_constraints_directly_reviewed": 14,
+    "complete_fk_ddl": 14,
+    "existing_index_definitions_reviewed": true,
+    "estimated_rows_max": 13,
+    "source_migration_blobs": [
+      {
+        "path": "supabase/migrations/20261112135900_dic_member_approval_notices.sql",
+        "blob": "ce17e3801d8d4e100e8ec1fb95fa5a723ad3a7a4"
+      },
+      {
+        "path": "supabase/migrations/20261113050000_dic_retire_roaster_directory.sql",
+        "blob": "10775c86bf88e61160fdc66d35c65698638742d6"
+      },
+      {
+        "path": "supabase/migrations/20261109152500_dic_admin_invite_account_delete.sql",
+        "blob": "bd80a9f6a17b4535f52caf77548eaa568d9b0b25"
+      }
+    ],
+    "pgss_numeric_rank_range": [
+      4321,
+      4400
+    ],
+    "new_numeric_distinct": 74,
+    "overlap": 6,
+    "cumulative_numeric_distinct": 4112,
+    "new_confirmed_defects": 0,
+    "production_writes": 0,
+    "status": "IN_PROGRESS_NO_PRODUCTION_WRITES",
+    "next": "Numeric pgss ranks 4401-4480; finish unreviewed complete provider definitions/parity, isolated canonical-name fixture when disposable PostgreSQL available, coordinate #96 actual JWT/Auth"
   }
 }
