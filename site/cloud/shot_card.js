@@ -33,7 +33,10 @@ const recordedControlsUsable=(shot,grinderMin=null,grinderMax=null)=>{
 export const feedLabel=mode=>mode==='slow'?'Slow Feed':mode==='standard'?'Standard Feed':'Feed Not Recorded';
 
 export function shotCard(shot,{expanded=false,activeVersionId=null,unit='F',familyRecorded=true,grinderMin=null,grinderMax=null}={}){
- const recordUnit=shot.snapshot?.tempUnit||unit;
+ // Retain valid historical C/F; a malformed archived label must not enter markup.
+ const fallbackUnit=unit==='C'?'C':'F';
+ const archivedUnit=shot.snapshot?.tempUnit;
+ const recordUnit=archivedUnit==='C'||archivedUnit==='F'?archivedUnit:fallbackUnit;
  const context=[
   ['Setup',shot.snapshot?.setupName],
   ['Basket Dose',shot.snapshot?.basketDoseG!=null?`${shot.snapshot.basketDoseG} g`:null],

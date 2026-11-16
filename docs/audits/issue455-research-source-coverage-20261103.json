@@ -3326,6 +3326,27 @@
       "claims_verified_externally": "Zenodo author release links to Git tag v1.0.1 and archives 5.2MB zip (advertised MD5 only). Source pipeline applies finite 100s time window, 31-point first-order Savitzky-Golay smoothing, per-run interpolation to 1000 samples and aggregation by pressure. Static pressure-flow fit uses groupwise final aggregated sample; scipy curve_fit call omits sigma despite reading reported SEM, and TDS curve_fit likewise omits sigma. No source script measures DIC five personal taste responses or validates universal user pressure/flow/time prescriptions.",
       "limitations": "No 5.2MB ZIP download/hash verification, full raw time series/metadata checks or execution; externally advertised MD5 not independently recomputed. The code's MAX_TIME=100s is a preprocessing window and does not by itself disprove paper's long-time >120s original shot protocol. No independently re-fitted model, parameter confidence, cup sensory outcome, privacy-sensitive membership data or product policy validation.",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "LIVE-20261116-SHOT-HISTORY-TEMP-UNIT-MARKUP-R310",
+      "type": "live_source_code_reproducible_archived_html_render_integrity",
+      "title": "Malformed archived temperature unit rendered into Shot History HTML",
+      "source_branch": "development/backend-foundation",
+      "source_commit_sha": "ba5988e206ec0bddc57d0d463f02988bc830d841",
+      "source_git_blobs": {
+        "site/cloud/shot_card.js": "c96048c63e504a9bfc0c1b196aaeb0de376ceb2f",
+        "site/lib/ui.js": "3083752ef7f6eedae51032189727504b9fe0e524"
+      },
+      "source_locators": [
+        "site/cloud/shot_card.js recordUnit derived from shot.snapshot.tempUnit",
+        "site/lib/ui.js shotSummary interpolation of unit into HTML"
+      ],
+      "access": "DIRECT_IMMUTABLE_GITHUB_CODE_STATIC_READ_AND_SYNTHETIC_REGRESSION_AUTHORED_NO_LOCAL_NODE_EXECUTION",
+      "review_status": "R455-310_CONFIRMED_UNVALIDATED_HTML_INTERPOLATION_STATIC_CODE; HOSTED_TESTS_PENDING",
+      "evidence_grade": "DIRECT_CODE_STATIC_REPRODUCTION_WITH_SCRIPTLESS_MARKUP_PAYLOAD_NO_BROWSER_EXECUTION",
+      "claims_verified_externally": "Legacy temperature preference can be arbitrarily formatted in synthetic archived shot; previous Card render passed it directly to shotSummary and the summary interpolated arbitrary string into HTML while tempDisplay selected Celsius for every non-F value. This is an unsafe HTML output construction and a wrong physical-unit label risk; no observed production exploit or member incident.",
+      "factual_status": "SAFE_LOCKED_COMPATIBLE_ESCAPING_AND_F_C_ALLOWLIST_NO_CHANGE_TO_SAVED_MEASUREMENTS_OR_TASTE",
+      "github267_literal_review_credit": 0
     }
   ],
   "evidence_checks": [
@@ -10265,6 +10286,24 @@
       "result": "HOLD_NUMERIC_CONFIDENCE_TRANSFER_AND_SENSORY_EFFICACY_CLAIMS_NO_APP_CHANGE",
       "research_only": true,
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CODE-310-A",
+      "source": "LIVE-20261116-SHOT-HISTORY-TEMP-UNIT-MARKUP-R310",
+      "claim": "Current Shot History uses shot.snapshot?.tempUnit||unit and direct HTML interpolation of unit in shotSummary, with tempDisplay treating all non-F values as Celsius. A malformed archived unit such as <img ...> can reach HTML string output; the previous Edit Shot and new Setup F/C guards do not cover this direct history rendering path.",
+      "source_locator": "site/cloud/shot_card.js recordUnit; site/lib/ui.js shotSummary; site/lib/constants.js tempDisplay",
+      "grade": "DIRECT_GITHUB_IMMUTABLE_STATIC_SOURCE_REVIEW; SYNTHETIC_TESTS_PENDING",
+      "result": "SAFE_TARGETED_FIX_CANONICALIZE_F_C_AT_CARD_AND_SUMMARY_BEFORE_HTML; PRESERVE_ARCHIVE",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CODE-310-B",
+      "source": "LIVE-20261116-SHOT-HISTORY-TEMP-UNIT-MARKUP-R310",
+      "claim": "Synthetic negative/positive regression authored: invalid raw HTML-like/Kelvin/empty history units must render safely in supported active C or Fahrenheit fallback; genuine historic Celsius and Fahrenheit must survive preference changes; five green ratings and original notes/history must remain unmodified. Local Node/browser execution unavailable due container/Python ClientError; GitHub exact-head CI required.",
+      "source_locator": "tests/issue455-r310-history-temp-unit-markup.test.mjs",
+      "grade": "STATIC_TEST_AUTHORED_NOT_EXECUTED",
+      "result": "PENDING_EXACT_SOURCE_HOSTED_NODE22_BROWSER_SECURITY_APPROVAL",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -10495,7 +10534,8 @@
     "R455-306 active safe app correction PR #3055 with original source/preflight receipt and 3 synthetic tests; initial approval 43910679133 HOLD missing queue intake; corrected unique R306 IN_PROGRESS queue item authored, exact updated PR-head CI and merge still pending; no production writes, no #267 literal review credit.",
     "R455-306 FINAL: PR #3055 source/test/journal and queue/ledger nonforce merged f3f17d3a386211388023a4a38f7a9ab32abe8cbb; all six files match PR head; final Node 5236 PASS/0 FAIL/6 intentional SKIP on both PR head 43912006010 and merge 43912750124; head cloud 43912006318, SQL 43912006372, security 43912006276, approval 43912006152, merged cloud 43912750206 and governance 43912750041 SUCCESS. Original approval and first Node failures corrected, retained. Development READY only pending this documentation reconciliation CI; no deploy, member, science or #267 literal credit.",
     "R455-307: verify and integrate publisher-first secondary brewing REVIEW (2025 DOI 10.3390/beverages11050125), three bounded evidence checks and one no-change policy hold; direct MDPI HTML sections checked; do not infer universal 25-30s/6.5g/9bar targets, confuse cup serving temperature with brew temperature, certify original PDF/primary studies or claim measured recommendation efficacy. Original Oct29 ZIP and S019 remain inaccessible/unhashed. Code/Locked policy unchanged. After docs-only CI and nonforce merge, crosslink issue #455; #267 zero semantic line credit.",
-    "R455-309: verify original Zenodo DOI software and tag-linked source provenance for Waszkiewicz model; author preprocessing 100s/31-point smoothing and unweighted static/TDS fits are research-method boundaries only, no universal pressure/taste claim; full archive binary/run reproduction remains unverified. Exact docs-only source-bound CI/nonforce [skip netlify] merge and merged governance required; original Oct29 pack/S019 unresolved; no #267 literal credit."
+    "R455-309: verify original Zenodo DOI software and tag-linked source provenance for Waszkiewicz model; author preprocessing 100s/31-point smoothing and unweighted static/TDS fits are research-method boundaries only, no universal pressure/taste claim; full archive binary/run reproduction remains unverified. Exact docs-only source-bound CI/nonforce [skip netlify] merge and merged governance required; original Oct29 pack/S019 unresolved; no #267 literal credit.",
+    "R455-310: original unsafe historical temperature-unit HTML interpolation bounded source diff authored. Host exact PR-head Node22 3 synthetic cases and full appropriate CI, repair failures, recheck concurrency and nonforce [skip netlify] merge only on all required success, then readback exact merged blobs/governance and reconcile READY. No production/provider writes."
   ],
   "latest_review_checkpoint": {
     "run_id": "R455-309_AUTHOR_SOFTWARE_PROVENANCE_DOCS_CANDIDATE",
@@ -16055,6 +16095,35 @@
       ],
       "test_plan": "Docs-only source-bound hosted governance plus applicable GitHub CI; no duplicate engine suite or live experiments; research Python reproduction NOT_RUN",
       "release_queue": "NOT_APPLICABLE_NO_RUNTIME_CHANGE",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-PROP-310-HISTORY-UNIT-MARKUP-ALLOWLIST",
+      "severity": "HIGH_HISTORICAL_RENDER_HTML_INJECTION_POTENTIAL_NO_OBSERVED_MEMBER_EXPLOIT",
+      "source": [
+        "LIVE-20261116-SHOT-HISTORY-TEMP-UNIT-MARKUP-R310"
+      ],
+      "evidence": [
+        "R455-EV-CODE-310-A",
+        "R455-EV-CODE-310-B"
+      ],
+      "finding": "Archived tempUnit cannot be trusted as HTML nor as an arbitrary physical-unit conversion selector. Direct Shot History markup bypasses earlier Edit Shot and new setup F/C guards.",
+      "current_locked": "Preserve original °C measurement, user-selected valid F/C and historical provenance; no changes to five ratings, notes, recommendation engine or private history.",
+      "current_app": "Card and summary directly interpolate archived unit into HTML, choosing Celsius for non-F labels.",
+      "proposed_change": "SAFE code fix: accept only historical F or C, fall back to supported active unit or F; also enforce safe unit inside generic shotSummary; no saved record mutation. Add explicit malicious-shaped string, valid history and immutability regressions.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "CODE_TEST_QUEUE_JOURNAL_CANDIDATE_NOT_RUN_NOT_READY",
+      "files": [
+        "site/lib/ui.js",
+        "site/cloud/shot_card.js",
+        "tests/issue455-r310-history-temp-unit-markup.test.mjs",
+        "docs/RELEASE_QUEUE.json",
+        "docs/workstreams/ops-issue455-r310-shot-history-unit-render-20261116.md"
+      ],
+      "test_plan": "Node22 focused negative/positive + applicable exact-head Node/build cloud/mobile/offline SQL/security governance; one build, reuse unchanged; no production smoke writes.",
+      "release_queue": "DIC-Q-455-r310-history-temperature-unit-render",
       "production_deployed": false,
       "github267_literal_review_credit": 0
     }
