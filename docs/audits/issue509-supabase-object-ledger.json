@@ -4444,6 +4444,24 @@
       "baseline": "IN_PROGRESS",
       "provider_writes": 0,
       "next": "Descendant exact CI readback / #96 hosted Auth / first new provider definition"
+    },
+    {
+      "run": "R295 Nov16 2026",
+      "source_sha": "c98e27203197038e9203c064419b0d6e5d90a0ff",
+      "preflight_blob": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r295-retired-api-and-notification-function-review-20261116.json",
+      "receipt_blob_sha": "6bb5036f7154c0372b3b384f0a985dbddffbe37b",
+      "full_current_function_sources_semantically_rereviewed": 13,
+      "source_characters_rereviewed": 18654,
+      "retired_sql_view_name_pattern_scanned": 261,
+      "deprecated_symbol_hits": 0,
+      "new_first_time_baseline_word_credit": 0,
+      "provider_writes": 0,
+      "source_functional_changes": 0,
+      "tests_run": 0,
+      "verdict": "NO_NEW_CONFIRMED_DEFECT; NO_SAFE_DROP_PROVEN; LOW_BENEFIT_UNION_DISTINCT_SIMPLIFICATION_ONLY",
+      "baseline": "IN_PROGRESS",
+      "next": "Review first new/changed/unreviewed live provider definition and dependency-backed cleanup; old pgss range only if visible"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -22231,5 +22249,35 @@
     "provider_writes": 0,
     "baseline": "IN_PROGRESS",
     "queue": "TESTING"
+  },
+  "provider_legacy_sql_dependency_cleanup_run295": {
+    "receipt": "docs/audits/issue509-r295-retired-api-and-notification-function-review-20261116.json",
+    "development_preflight_sha": "c98e27203197038e9203c064419b0d6e5d90a0ff",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "full_sql_function_bodies_reread": 13,
+    "full_sql_characters_reread": 18654,
+    "retired_route_symbols_checked": [
+      "dic_roaster_directory",
+      "dic_roaster_aliases",
+      "dic_roaster_preview_target",
+      "redeem_beta_invite",
+      "dic_admin_issue_invite",
+      "dic_admin_revoke_invite"
+    ],
+    "current_function_view_pattern_scan_count": 261,
+    "retired_name_match_count": 0,
+    "active_alias_attestation_match_count": 2,
+    "archived_table_dependency_categories": [
+      "pg_attrdef",
+      "pg_class",
+      "pg_constraint",
+      "pg_policy",
+      "pg_type"
+    ],
+    "indexes_and_defaults_inspected": 11,
+    "first_time_word_credit": 0,
+    "provider_writes": 0,
+    "status": "IN_PROGRESS",
+    "note": "Word-level baseline is not enlarged by a grep/call-name scan or unchanged re-review; R295 is a cross-object dependency/no-unjustified-removal proof."
   }
 }
