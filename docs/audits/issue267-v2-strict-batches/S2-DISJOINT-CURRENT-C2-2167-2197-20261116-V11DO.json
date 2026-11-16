@@ -1,0 +1,1018 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "V11DO",
+  "date_utc": "2026-11-16",
+  "reviewer": "Direct numbered AI source reading, not independently human-signed",
+  "preflight": {
+    "development_sha": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "full_content_verified": true
+  },
+  "track": "STRICT_V2_PINNED_CURRENT_EXECUTABLE",
+  "source": {
+    "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+    "path": "scripts/audit/coffee-frozen-ci.py",
+    "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+    "first_line": 2167,
+    "last_line": 2197,
+    "line_count": 31
+  },
+  "prior_receipt": "S2-DISJOINT-CURRENT-C2-2117-2166-20261116-V11DN.json",
+  "first_file_revalidation": {
+    "strict_s2_001_matches": 41,
+    "credit": 0
+  },
+  "historical_r2_c2": "C2/R2 grouped multi-line summaries remain provisional",
+  "per_line": [
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2167,
+      "literal": "                self.assertEqual(material[\"status\"], \"UNREVIEWED\")",
+      "classification": "python_unit_test_statement",
+      "individual_semantic_interpretation": "Prior test asserts material is UNREVIEWED after rejected mutation.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2167,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2183,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2168,
+      "literal": "",
+      "classification": "nonexecuting_blank",
+      "individual_semantic_interpretation": "Blank test spacer; no runtime statement.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2168,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2184,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2169,
+      "literal": "",
+      "classification": "nonexecuting_blank",
+      "individual_semantic_interpretation": "Another blank spacer before next method.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2169,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2185,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2170,
+      "literal": "        def test_reviewed_changes_reject_previous_candidate_artifact_names(self):",
+      "classification": "python_unit_test_statement",
+      "individual_semantic_interpretation": "Defines stale prior-candidate artifact-name rejection test.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2170,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2186,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2171,
+      "literal": "            self.assertEqual(CANDIDATE, 12)",
+      "classification": "python_unit_test_statement",
+      "individual_semantic_interpretation": "Pins expected CANDIDATE number to 12.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2171,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2187,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2172,
+      "literal": "            with tempfile.TemporaryDirectory() as temporary:",
+      "classification": "python_unit_test_statement",
+      "individual_semantic_interpretation": "Creates temporary directory scoped to this test.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2172,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2188,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2173,
+      "literal": "                root = Path(temporary).resolve()",
+      "classification": "python_unit_test_statement",
+      "individual_semantic_interpretation": "Canonicalizes temporary directory root.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2173,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2189,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2174,
+      "literal": "                manifest, material, expected, index, *_rest = self._review_fixture(root)",
+      "classification": "python_unit_test_statement",
+      "individual_semantic_interpretation": "Loads fixture review manifest, material, expected and index.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2174,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2190,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2175,
+      "literal": "                self.assertEqual(material[\"candidate\"], 12)",
+      "classification": "python_unit_test_statement",
+      "individual_semantic_interpretation": "Ensures fixture material candidate is current 12.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2175,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2191,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2176,
+      "literal": "                for key in (\"replay\", \"comparison\", \"retention\"):",
+      "classification": "python_unit_test_statement",
+      "individual_semantic_interpretation": "Iterates replay, comparison, retention artifact keys separately.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2176,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2192,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2177,
+      "literal": "                    bad = json.loads(json.dumps(manifest))",
+      "classification": "python_unit_test_statement",
+      "individual_semantic_interpretation": "Copies JSON manifest to prevent cross-case mutation.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2177,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2193,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2178,
+      "literal": "                    bad[\"first_observed_run\"][\"artifacts\"][key][\"file\"] = \"candidate11-\" + key + \".json\"",
+      "classification": "python_unit_test_statement",
+      "individual_semantic_interpretation": "Injects candidate11 filename in candidate12 manifest artifact.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2178,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2194,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2179,
+      "literal": "                    with self.subTest(artifact=key), self.assertRaises(ValueError):",
+      "classification": "python_unit_test_statement",
+      "individual_semantic_interpretation": "Labels targeted subtest and expects ValueError.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2179,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2195,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2180,
+      "literal": "                        verify_reviewed_changes(bad, material, root, expected, index, \"789\")",
+      "classification": "python_unit_test_statement",
+      "individual_semantic_interpretation": "Verifies tampered manifest is rejected by review guard.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2180,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2196,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2181,
+      "literal": "",
+      "classification": "nonexecuting_blank",
+      "individual_semantic_interpretation": "Blank separator between independent tests.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2181,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2197,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2182,
+      "literal": "        def test_reviewed_changes_missing_manifest_remains_strict(self):",
+      "classification": "python_unit_test_statement",
+      "individual_semantic_interpretation": "Defines strict absent-manifest blocker test.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2182,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2198,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2183,
+      "literal": "            with tempfile.TemporaryDirectory() as temporary:",
+      "classification": "python_unit_test_statement",
+      "individual_semantic_interpretation": "Sets up isolated temporary fixture directory.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2183,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2199,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2184,
+      "literal": "                root = Path(temporary).resolve()",
+      "classification": "python_unit_test_statement",
+      "individual_semantic_interpretation": "Resolves the fixture root path.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2184,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2200,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2185,
+      "literal": "                _manifest, material, _expected, _index, old, _current, exports = self._review_fixture(root)",
+      "classification": "python_unit_test_statement",
+      "individual_semantic_interpretation": "Retrieves old source and exports with fixture, ignores unused values.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2185,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2201,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2186,
+      "literal": "                helper = {\"passed\": 603, \"failures\": [], \"attempted_external_operations\": []}",
+      "classification": "python_unit_test_statement",
+      "individual_semantic_interpretation": "Synthetic helper claims 603 passes; not an actual run result.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2186,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2202,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2187,
+      "literal": "                absent = {\"status\": \"NOT_PROVIDED\"}",
+      "classification": "python_unit_test_statement",
+      "individual_semantic_interpretation": "Uses NOT_PROVIDED marker for absent review manifest.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2187,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2203,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2188,
+      "literal": "                failures = benchmark_change_blockers(material, absent, [], [], exports, helper)",
+      "classification": "python_unit_test_statement",
+      "individual_semantic_interpretation": "Computes benchmark_change_blockers with missing review evidence.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2188,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2204,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2189,
+      "literal": "                self.assertTrue(any(\"output/call changes\" in message for message in failures))",
+      "classification": "python_unit_test_statement",
+      "individual_semantic_interpretation": "Requires blocker message for output or call changes.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2189,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2205,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2190,
+      "literal": "                self.assertTrue(any(\"Canonical counts\" in message for message in failures))",
+      "classification": "python_unit_test_statement",
+      "individual_semantic_interpretation": "Requires blocker message for canonical count changes.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2190,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2206,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2191,
+      "literal": "                self.assertTrue(any(\"snapshot/download equality\" in message for message in failures))",
+      "classification": "python_unit_test_statement",
+      "individual_semantic_interpretation": "Requires blocker message for snapshot/download mismatch.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2191,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2207,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2192,
+      "literal": "                unchanged_exports = self._review_exports(old, old)",
+      "classification": "python_unit_test_statement",
+      "individual_semantic_interpretation": "Builds same old baseline/current export fixture.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2192,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2208,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2193,
+      "literal": "                unchanged = review_material(old, old, [], unchanged_exports, material[\"baseline_counts\"],",
+      "classification": "python_unit_test_statement",
+      "individual_semantic_interpretation": "Constructs review_material with unchanged old source and no changes.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2193,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2209,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2194,
+      "literal": "                                            material[\"baseline_counts\"], material[\"preserved_script_hashes\"],",
+      "classification": "python_unit_test_statement",
+      "individual_semantic_interpretation": "Passes unchanged baseline counts and preserved script hashes.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2194,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2210,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2195,
+      "literal": "                                            material[\"candidate_runtime_fingerprint\"])",
+      "classification": "python_unit_test_statement",
+      "individual_semantic_interpretation": "Adds same candidate runtime fingerprint as original.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2195,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2211,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2196,
+      "literal": "                self.assertEqual(benchmark_change_blockers(unchanged, absent, [], [], unchanged_exports, helper), [])",
+      "classification": "python_unit_test_statement",
+      "individual_semantic_interpretation": "Asserts no blockers for unchanged source without manifest, avoiding false failure.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2196,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2212,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "line": 2197,
+      "literal": "",
+      "classification": "nonexecuting_blank",
+      "individual_semantic_interpretation": "Blank physical separator after test.",
+      "quality_assessment": "Synthetic negative/positive test contract; preserve distinct provenance, artifact integrity and unchanged-case behavior.",
+      "bug_security_privacy_performance_assessment": "Temporary fixture test, no demonstrated real member/Auth/SQL/provider write; real test runner/performance not exercised.",
+      "dead_obsolete_assessment": "Pinned executable unit test code, no proof of unreferenced dead code.",
+      "duplicate_assessment": "Different corruption cases and assertions; repetition alone does not justify deletion.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2197,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "d4f74630eaa204ba9963c446c158df7ea8f25872",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2213,
+        "exact_literal_match": true,
+        "full_live_drift_covered": false
+      },
+      "testability": "Run this specific Python unit test and original603 job on exact code before asserting PASS; NOT_RUN_DOCS_ONLY.",
+      "remediation": "No reproduced defect; keep runner, oracle and protected tests untouched.",
+      "locked_fit": "Preserve original603 captures/scorer, no synthetic member data or source promotion; #33/#96 boundaries; no deployment."
+    }
+  ],
+  "validation": {
+    "direct_literals": 31,
+    "contiguous": true,
+    "unique_positions": 31,
+    "prior_last_line": 2166,
+    "live_shift": 16,
+    "full_live_drift_reviewed": false,
+    "python_test_executed": false
+  },
+  "findings": [
+    {
+      "type": "NEGATIVE_TEST_REVIEW_ONLY",
+      "details": "Stale candidate artifact and changed-case absent review manifest should reject; unchanged-case absence should not block. Assertions were read but not executed."
+    },
+    {
+      "type": "BOUNDED_CURRENT_SOURCE_MATCH",
+      "details": "Pinned 2167–2197 equals current 2183–2213; surrounding post-pin file changes are separate unreviewed work."
+    }
+  ],
+  "next": {
+    "F215": 5098,
+    "C48": 2198,
+    "issue_complete": false
+  },
+  "software_tests": "NOT_RUN_DOCS_ONLY",
+  "source_ci": "PENDING",
+  "provider": "NOT_APPLICABLE"
+}
