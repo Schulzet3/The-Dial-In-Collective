@@ -3030,6 +3030,27 @@
       "implementation_status": "RESEARCH_ONLY_NO_APP_TASTE_NUMERIC_POLICY_OR_DATA_CHANGE",
       "reviewed_date_utc": "2026-11-15",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "LIT-2026-SEK-MULTIBREW-HPLC-ONLINE-TEAC",
+      "type": "peer_reviewed_primary_analytical_brew_comparison_not_espresso_sensory",
+      "title": "Brewing-Method-Dependent Changes in the Bioactive Compound Profile and Antioxidant Potential of Coffee Beverages",
+      "authors": "Magdalena Sek; Urszula Cieciel; Malgorzata Tkacz; Sascha Rohn; Michal Halagarda",
+      "published": "2026-06-19",
+      "journal": "Molecules 31(12):2163 (2026)",
+      "doi": "10.3390/molecules31122163",
+      "url": "https://www.mdpi.com/1420-3049/31/12/2163",
+      "access": "ORIGINAL_PUBLISHER_OPEN_HTML_METHODS_3_1_TO_3_7_RESULTS_2_1_TO_2_3_CONCLUSION_FUNDING_DISCLOSURES_READ_20261115",
+      "review_status": "R455-294_SUBSTANTIVE_FIRST_PARTY_TEXT_METHODS_RESULTS_STATISTICS_DISCLOSURES; TABLE_S1_RAW_EXPERIMENTAL_DATA_PDF_BINARY_FIGURE_PIXELS_NOT_AUDITED",
+      "evidence_grade": "PRIMARY_PEER_REVIEWED_SINGLE_DARK_BRAZILIAN_ARABICA_FOUR_UNMATCHED_BREW_METHODS_THREE_INDEPENDENT_EXPERIMENTAL_SERIES_TRIPLICATE_LAB_ASSAYS_NO_CONSUMER_TASTE",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "No frozen original HTML/PDF byte hash, independently reprocessed chromatograms, Supplementary Table S1 numeric reanalysis, raw experimental series, or human preference records; original publisher HTML read directly. The conclusion is analytical in vitro radical scavenging, not clinical health effect or espresso taste efficacy.",
+      "claims_verified_externally": "One Brazilian dark-roast Arabica, EK43 nominal medium grind; methods were dose/contact/filter/temperature confounded. Americano: 6.5g extracted as 25mL in 30s on DeLonghi Dinamica then diluted to 200mL; French press: 40g/700mL 90C 4min; V60: 10g to 200mL; cold brew: 60g/800mL 7C for 12h. Three independent experimental series each triplicate, analytical ANOVA/LSD (not human five taste ratings). Cold brew caffeine 939.28 mg/L vs V60 217.57 mg/L; caffeine normalized per gram grounds reverses cold brew/French press order. TPC per liter French press 1040 mg GAE/L vs Americano 621, but per gram coffee Americano ranks first. Study reports CGA isomers 84.92-87.83% of HPLC-onlineTEAC detected antioxidant potential, not proven consumer liking or nutritional benefit.",
+      "factual_status": "ORIGINAL_METHODS_AND_COMPARATIVE_ASSAY_BOUNDS_VERIFIED_UNNORMALIZED_VS_GROUND_MASS_SCALING_CONFOUND",
+      "current_app_crosswalk": "At development 910f29a8d0fcc48a70af5126bdfc2739eb523732, engine.js blob f384ae67c1a9148990cab4716dc8ad22d1ca81f3, model.js blob fdc65f869546cddbb6552e555dca12117f2c47fc, constants.js blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2 and UI blob bdaf4e9292229aeac4b03fc3f9da51c5497d76e5 keep all five taste ratings, one controllable change, measured shot history, Turbo/Fast-Flow, grind range and slow-feed context; no total phenolic, assay-driven taste target or member health feature. No reproducible safe code defect from this study.",
+      "reviewed_date_utc": "2026-11-15",
+      "implementation_status": "RESEARCH_ONLY_NO_APP_LOCKED_MEMBER_DATA_PROVIDER_OR_DEPLOYMENT_CHANGE",
+      "github267_literal_review_credit": 0
     }
   ],
   "evidence_checks": [
@@ -9479,6 +9500,54 @@
       "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "original_pdf_sha256": null,
       "github267_line_credit": 0
+    },
+    {
+      "id": "R455-EV-294-A",
+      "page_section": "Publisher Methods 3.1, 3.7 and Results 2.1",
+      "claim": "Single dark-roasted Brazilian Arabica study compared non-equivalent doses, brewing times, filters and extraction techniques: the 'Americano' was a 6.5g/25mL 30s espresso subsequently diluted to 200mL, whereas French press used 40g/700mL, V60 10g/200mL, and cold brew 60g/800mL. Different cup concentrations cannot isolate espresso grind, temperature or user taste preference.",
+      "grade": "DIRECT_ORIGINAL_METHODS_HIGH_FOR_RECIPE_DESCRIPTION_ONLY; NO_CAUSAL_ESPRESSO_TASTE_TEST",
+      "result": "RESEARCH_ONLY_CANNOT_TRANSFER_TO_DIC_NUMERIC_BREW_WINDOWS_OR_USER_QUALITY",
+      "source": "LIT-2026-SEK-MULTIBREW-HPLC-ONLINE-TEAC",
+      "source_doi": "10.3390/molecules31122163",
+      "primary_original_url": "https://www.mdpi.com/1420-3049/31/12/2163",
+      "reviewed_utc_date": "2026-11-15",
+      "preflight_development_sha": "910f29a8d0fcc48a70af5126bdfc2739eb523732",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "app_engine_blob": "f384ae67c1a9148990cab4716dc8ad22d1ca81f3",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-294-B",
+      "page_section": "Publisher Results 2.1-2.2, Table 1/2 narrative, Supplementary Table S1 mentioned but not independently reviewed",
+      "claim": "Cold brew measured 939.28 mg/L caffeine versus V60 217.57 mg/L, but per gram ground coffee French press exceeds cold brew. TPC per liter French press 1040 mg GAE/L exceeds diluted Americano 621, while dose-normalized TPC has Americano first. The apparent rankings depend on concentration/dilution vs coffee mass normalization; no universal espresso optimization follows.",
+      "grade": "DIRECT_ORIGINAL_PUBLISHER_HTML_VALUES_AND_EXPLICIT_NORMALIZATION_STATEMENTS; SUPPLEMENT_S1_NOT_VERIFIED",
+      "result": "BOUND_ANALYTICAL_CLAIMS_BY_DENOMINATOR_NO_ESPRESSO_TASTE_CORRECTION",
+      "source": "LIT-2026-SEK-MULTIBREW-HPLC-ONLINE-TEAC",
+      "source_doi": "10.3390/molecules31122163",
+      "primary_original_url": "https://www.mdpi.com/1420-3049/31/12/2163",
+      "reviewed_utc_date": "2026-11-15",
+      "preflight_development_sha": "910f29a8d0fcc48a70af5126bdfc2739eb523732",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "app_engine_blob": "f384ae67c1a9148990cab4716dc8ad22d1ca81f3",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-294-C",
+      "page_section": "Publisher Methods 3.5-3.7, Results 2.2, Conclusions and ethics/data disclosures",
+      "claim": "Three independent experimental series each in triplicate underpin chemical HPLC-onlineTEAC, UHPLC, Folin-Ciocalteu and DPPH measurements. CGA isomers represented 84.92-87.83% of measured HPLC-onlineTEAC antioxidant response in four studied beverages; the study collected no human sensory scores and did not test actual health outcomes. Raw data on request, Supplementary Table S1, figure pixels and assay replication not independently reviewed.",
+      "grade": "FIRST_PARTY_METHOD_AND_RESULT_TEXT_VERIFIED_NO_RAW_ASSAY_REANALYSIS_OR_CONSUMER_EXPERIMENT",
+      "result": "IN_VITRO_ASSAY_NOT_HUMAN_PREFERENCE_OR_IMPROVED_CUP_EFFICACY",
+      "source": "LIT-2026-SEK-MULTIBREW-HPLC-ONLINE-TEAC",
+      "source_doi": "10.3390/molecules31122163",
+      "primary_original_url": "https://www.mdpi.com/1420-3049/31/12/2163",
+      "reviewed_utc_date": "2026-11-15",
+      "preflight_development_sha": "910f29a8d0fcc48a70af5126bdfc2739eb523732",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "app_engine_blob": "f384ae67c1a9148990cab4716dc8ad22d1ca81f3",
+      "owner_approval": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -9692,22 +9761,23 @@
     "R455-286: Canonical ledger reconciliation of the original R285 Choi 2025 expert CATA Table6/Table8 distinct three bounded checks and one research-only proposal after independently reading original HTML; no new source (158/479/223). All original 158 source entries/476 checks/222 proposals preserved. Source PDF bytes and raw human panel dataset not validated; original S019 still inaccessible. Next inspect current Log Shot/Rate UX for separately reproducible defect or another unique espresso claim, without copying #267 line review.",
     "R455-287: Naliyadhara 2026 original Results 3.3 caffeine/CGA and 3.4 Table 2 physical/colour measurements independently checked without duplicating R134. Source 158 / evidence checks 481 / proposals 223; full PDF, raw assays and figure pixels unverified; no member espresso outcomes, new numeric policy or code change. Resume distinct primary evidence or reproducible Log Shot UX defect. S019 still inaccessible and #267 line credit zero.",
     "R455-291: New DOI-verified original Caprioli 2012 accepted-manuscript espresso machine odorant/panel review (+1 distinct study, +3 bounded evidence checks, +1 research-only proposal): 159 sources / 486 checks / 224 proposals. Final typeset PDF figures/raw judge data not checked; no universal 92C/9bar optimum, taste effectiveness or DIC app/Locked change. R290 numerical-arrow advice text pending atomic safe implementation. Standalone S019 inaccessible; #267 literal credit zero.",
-    "R455-293: Direct original Wiley Vezzulli 2021 Tables 3/4 all-eight-origin crosswalk: 6/8 three-level time/end-temperature source names permuted, plus Table3 Brazil SW 6:27 first crack later than 05:54 roast end. Two bounded original-source checks, 159/488/224. Underlying PDF/Appendix S1/Cropster logs, correction and standalone S019 original not verified; no app policy or #267 literal audit credit. Continue separate live UX/primary source review."
+    "R455-293: Direct original Wiley Vezzulli 2021 Tables 3/4 all-eight-origin crosswalk: 6/8 three-level time/end-temperature source names permuted, plus Table3 Brazil SW 6:27 first crack later than 05:54 roast end. Two bounded original-source checks, 159/488/224. Underlying PDF/Appendix S1/Cropster logs, correction and standalone S019 original not verified; no app policy or #267 literal audit credit. Continue separate live UX/primary source review.",
+    "R455-294: Direct MDPI original Sek et al 2026 single-Brazilian-Arabica four-method chemistry/HPLC-onlineTEAC: +1 source +3 bounded checks +1 research-only proposal; preserve full previous counts 159/488/224. Doses and final dilution cause non-comparable numeric rankings; NO five-taste preference/espresso efficacy, no numeric/health/data change. Supplementary Table S1 and raw series unverified; standalone S019 inaccessible. Continue high-value live UX gap and outstanding claim verification; #267 literal credit zero."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-293_VEZZULLI_2021_TABLES_3_4",
+    "run_id": "R455-294_SEK_2026_ASSAY_DENOMINATOR_AND_TASTE_SCOPE",
     "date": "2026-11-15",
-    "development_preflight_sha": "d9c1c29fbaa9547473c017822cc06ff25fa8bd03",
+    "development_preflight_sha": "910f29a8d0fcc48a70af5126bdfc2739eb523732",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "original_ledger_blob_sha": "853f37c90bb67de475ecc1a10d745c6ec9d99cc9",
+    "original_ledger_blob_sha": "5746579ab54a268e3951457759ef31bfa0eba595",
     "source_counts": {
-      "sources": 159,
-      "evidence_checks": 488,
-      "proposals": 224
+      "sources": 160,
+      "evidence_checks": 491,
+      "proposals": 225
     },
-    "scope": "Original Wiley numeric Table 3/4 consistency; 6 of 8 sample assignments vs three-level roast results, and one first-crack vs total-duration contradiction; no original PDF/raw study claim",
+    "scope": "Direct primary publisher Methods 3.1-3.7 Results 2.1-2.3, lab in-vitro antioxidant and brew/dose confounders; no espresso quality claims",
     "github267_line_credit": 0,
-    "next": "Verify exact source PR CI/nonforce merge/merged hashes; source appendix remains unreviewed; continue distinct UX/science work"
+    "next": "Verify exact-source PR governance before non-force merge; original assay/source bytes and S019 standalone still pending; continue safely reproducible UX or distinct primary science."
   },
   "policy_decisions_resolved": [
     {
@@ -14906,6 +14976,31 @@
       "production_deployed": false,
       "github267_literal_review_credit": 0,
       "exact_source": "8ea4efb32cc9fa448ba176ac03efbc3c7eff6293"
+    },
+    {
+      "id": "R455-PROP-294-ANALYTICAL-BIOACTIVES-NOT-ESPRESSO-TASTE",
+      "source": [
+        "LIT-2026-SEK-MULTIBREW-HPLC-ONLINE-TEAC"
+      ],
+      "evidence": [
+        "R455-EV-294-A",
+        "R455-EV-294-B",
+        "R455-EV-294-C"
+      ],
+      "severity": "P3_RESEARCH_ONLY_NO_SAFE_APP_BUG_REPRODUCED",
+      "finding": "Different whole-beverage caffeine/phenolic concentrations, brewing dose-normalization and in-vitro antioxidant values do not establish personal espresso cup quality, a user rating score, or a universal grind/temperature/yield intervention.",
+      "evidence_grade": "PRIMARY_ANALYTICAL_ONE_ARABICA_FOUR_UNMATCHED_BREW_TYPES_NO_HUMAN_TASTE_OR_HEALTH_OUTCOME",
+      "current_locked": "Preserve five independent taste ratings, all-green versus not rated, at most one controllable adjustment, original shot notes and private history, versioned grinder setup/calibration, Turbo versus Fast-Flow, slow feed, equipment temperature and RLS/Community.",
+      "current_app": "Direct live code read at 910f29a8d0fcc48a70af5126bdfc2739eb523732: engine f384ae67c1a9148990cab4716dc8ad22d1ca81f3, UI bdaf4e9292229aeac4b03fc3f9da51c5497d76e5, model fdc65f869546cddbb6552e555dca12117f2c47fc. No total-phenolic target or measurement and no reproduced safe bug.",
+      "proposed_change": "Retain primary methods and normalization caveat research-only. No nutrition/health, numeric espresso threshold, member rating or telemetry changes. Optional future consented same-coffee/setup/style/grinder/feed single-change -> next shot -> all five ratings and confounders/adverse outcomes protocol only after owner data/experiment approval.",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "RESEARCH_LEDGER_ONLY_NO_RUNTIME_CHANGE",
+      "test_plan": "Validate full JSON old arrays unchanged in order; append one original source, three unique claims, one proposal; same-commit preflight journal; non-force PR and exact CI, no app suite without source change.",
+      "release_queue_status": "NO_ITEM_RESEARCH_ONLY",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0,
+      "exact_source": "910f29a8d0fcc48a70af5126bdfc2739eb523732"
     }
   ],
   "changeScope": {
