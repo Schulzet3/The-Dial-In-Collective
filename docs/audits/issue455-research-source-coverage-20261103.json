@@ -3235,6 +3235,24 @@
       "evidence_grade": "DETERMINISTIC_SYNTHETIC_TWO_R304_TESTS_HEAD_AND_MERGED_PASS_NO_REAL_MEMBER_OR_CUP_OUTCOME",
       "github267_literal_review_credit": 0,
       "verified_implementation_commit": "92a1a80be5c01cae138404c27c8e5f2ccb2941d7"
+    },
+    {
+      "id": "LIT-2025-CARVALHO-CANEPHORA-RATA-WHEEL",
+      "type": "external_primary_descriptive_sensory_method_study",
+      "title": "Development of a flavour wheel for Coffea canephora using rate-all-that-apply",
+      "authors": "Carvalho, Alves, Artêncio, Cassago, Pereira",
+      "published": "2025-05-13",
+      "doi": "10.1038/s41598-025-99921-w",
+      "url": "https://www.nature.com/articles/s41598-025-99921-w",
+      "secondary_identity": "https://pubmed.ncbi.nlm.nih.gov/40360712/",
+      "access": "ORIGINAL_PUBLISHER_AND_PMC_SEARCH_INDEXED_FULL_METHODS_RESULTS_DISCUSSION; DIRECT_PUBLISHER_OPEN_REDIRECTED_AUTH_AND_PMC_OPEN_RECAPTCHA; AUTHOR_INSTITUTION_AND_PUBMED_BIBLIOGRAPHIC_CROSSCHECK",
+      "source_bytes_sha256": null,
+      "evidence_grade": "PEER_REVIEWED_DESCRIPTIVE_CUPPING_METHOD_CONVENIENCE_PROFESSIONAL_PANEL_NOT_CONSUMER_PREFERENCE_OR_ESPRESSO_INTERVENTION",
+      "review_status": "R455-305_SUBSTANTIVE_INDEXED_FULL_ARTICLE_METHODS_RATA_PROTOCOL_67_SAMPLES_49_GRADERS_13_ORIGINS_RESULTS_103_DESCRIPTOR_WHEEL_CONCLUSION_LIMITS; ORIGINAL_PDF_BYTES_FIGURES_SUPPLEMENT_AND_RAW_DATA_NOT_CHECKED",
+      "claims_verified_externally": "49 professional coffee graders across Brazil/Switzerland evaluated 67 C. canephora coffees from 13 origins in three cupping sessions; 34 in first cross-location development and 33 Brazil-only in validation. Prepared by standardized cupping (8.75g/150mL at 92-94C), using a seven-point RATA lexicon with CQI 0-100 quality scores. 202 descriptor expressions were consolidated into 170 terms and 103 displayed on the wheel. Neither DIC espresso extraction nor consumer liking, next-shot five-rating change, or causal single-control recipe improvement was tested.",
+      "limitations": "First session different personnel/location and roasting machines; second validation Brazil-only; professional cupping vocabulary and sample mix limit transport to everyday member espresso taste. Full original PDF SHA-256, tables/figures pixel inspection, raw data, supplementary validation and replication not verified.",
+      "current_live_code": "site/lib/constants.js d3559dc1c9560c4d68fbcad1dc91e3a792a100a2 retains five independent 1-5 SCALES/tastesComplete; site/lib/engine.js f384ae67c1a9148990cab4716dc8ad22d1ca81f3 enforces complete ratings and one next-control step; source branch pinned 2b03f9c5480ff2ffcae31858505cf1d27b428e32.",
+      "github267_literal_review_credit": 0
     }
   ],
   "evidence_checks": [
@@ -10042,6 +10060,42 @@
       "result": "SAFE_SOURCE_FIX_VERIFIED_DEVELOPMENT_READY_NOT_DEPLOYED",
       "owner_approval_now_required": false,
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-METHOD-305-A",
+      "source": "LIT-2025-CARVALHO-CANEPHORA-RATA-WHEEL",
+      "doi": "10.1038/s41598-025-99921-w",
+      "provenance": "Original publisher original indexed Materials and methods: Participants, Coffee samples, RATA list, Experimental procedure; corroborated article/DOI with PubMed and author-institution record",
+      "claim": "49 professionals, 67 C. canephora samples, 13 countries, controlled cupping with 8.75 g/150 mL; seven-point descriptive RATA and CQI overall quality score are NOT personal five-taste espresso ratings.",
+      "grade": "PRIMARY_PUBLISHER_INDEXED_METHODS_WITH_INDEPENDENT_BIBLIOGRAPHIC_CROSSCHECK_NO_ORIGINAL_PDF_BINARY",
+      "result": "SUPPORTED_WITH_DESIGN_SCOPE_LIMITS_NOT_APP_POLICY",
+      "owner_approval_now_required": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-METHOD-305-B",
+      "source": "LIT-2025-CARVALHO-CANEPHORA-RATA-WHEEL",
+      "doi": "10.1038/s41598-025-99921-w",
+      "provenance": "Original indexed Results and Conclusion plus country/session design",
+      "claim": "Descriptors were reduced from 202 elicited expressions to 170 grouped terms and 103 wheel labels; cross-location group differences cannot identify causal geography or consumer taste preference due to differing panels and contextual confounding.",
+      "grade": "PRIMARY_INDEXED_METHODS_RESULTS_CONCLUSION_NOT_REPLICATED_FULL_FIGURES_OR_RAW_DATA",
+      "result": "DESCRIPTIVE_LEXICON_ONLY_NO_VALIDATED_ESPRESSO_OUTCOME",
+      "owner_approval_now_required": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-APP-305-C",
+      "source": "LIT-2025-CARVALHO-CANEPHORA-RATA-WHEEL",
+      "source_sha": "2b03f9c5480ff2ffcae31858505cf1d27b428e32",
+      "code_blobs": {
+        "constants": "d3559dc1c9560c4d68fbcad1dc91e3a792a100a2",
+        "engine": "f384ae67c1a9148990cab4716dc8ad22d1ca81f3"
+      },
+      "claim": "Current five independent member ratings, completion logic and one-control next-shot advice cannot be validated or replaced by a professional cupping descriptive aroma/flavour lexicon and industry 0-100 quality score.",
+      "grade": "DIRECT_IMMUTABLE_GITHUB_CODE_PLUS_PRIMARY_DESCRIPTIVE_STUDY_SCOPE_CROSSWALK_NO_EXECUTED_TEST_OR_MEMBER_OUTCOME",
+      "result": "NO_PRODUCT_CHANGE_SUPPORTED; PRESERVE_LOCKED_INPUTS_AND_NOTES",
+      "owner_approval_now_required": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -10267,24 +10321,22 @@
     "R455-301: Existing Andueza 2007 DOI 10.1002/jsfa.2720 upgraded from original Wiley abstract to bounded substantive 20-page author-attributed manuscript Methods, Tables 1-3, Results and limits, without treating third-party text as publisher-final. Added 3 evidence checks, no new source/proposal or code/Locked target; 165 sources/508 checks/230 proposals proposed until exact PR-head and merged evidence verified. Standalone S019/October29 pack unavailable in fresh Drive/Library, zero #267 literal line credit. Next: verify docs PR CI, nonforce merge, then continue a distinct bounded claim or SAFE source-reproducible UX defect.",
     "R455-302: Independently read Liang/Chan/Ristenpart 2021 original Scientific Reports full NIH PMC HTML equilibrium full-immersion methods/equations/cupping and explicit no-sensory transfer limits. One unique source +3 primary-method checks +1 research-only proposal; no app code/owner policy change, S019 original unavailable in Drive/Library, #267 literal credit zero. Verify docs PR exact CI and nonforce merge before final integration claim.",
     "R455-303: Conditional reproducible historic Edit Shot malformed tempUnit fallback, original source blob cccc340b, +1 live-code source/+2 bounded checks/+1 SAFE backlog. TESTS UNRUN; execute exact-source Node22 PR/merged CI before READY; only nonforce merge if passing. No #267 line credit, new telemetry, numeric policy, member/provider reads, or deployment.",
-    "R455-303 FINAL: PR #3031 nonforce merge 5935239398d08ed5c3aceb173a442570389cd186; 5 Git blobs identical to tested head, head and merged Node22 5204 PASS/0 FAIL/6 SKIP, 3 R303 tests PASS, applicable hosted security/SQL/mobile/cloud/governance successful. Unique development-only READY queue and one history entry reconciled, not published. Standalone S019/Pack inaccessible; zero #267 literal audit credit; #455 remains open for substantive source/effectiveness work."
+    "R455-303 FINAL: PR #3031 nonforce merge 5935239398d08ed5c3aceb173a442570389cd186; 5 Git blobs identical to tested head, head and merged Node22 5204 PASS/0 FAIL/6 SKIP, 3 R303 tests PASS, applicable hosted security/SQL/mobile/cloud/governance successful. Unique development-only READY queue and one history entry reconciled, not published. Standalone S019/Pack inaccessible; zero #267 literal audit credit; #455 remains open for substantive source/effectiveness work.",
+    "R455-305: Carvalho et al. 2025 indexed original professional canephora cupping RATA Methods/Results/Discussion, +1 distinct study/+3 bounded checks/+1 research-only proposal; no espresso personal outcome or new controls. Direct full publisher HTML open auth-redirected; PDF/hash/raw outcomes not audited. Original standalone S019 and Oct29 ZIP bytes still unverified due runtime ClientError. Validate docs-only exact-source governance and nonforce merge, then continue real Log Shot/Rate usability reproduction. No #267 line credit."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-304_FINAL_SOURCE_CI_VERIFIED",
+    "run_id": "R455-305_PROPOSED_DOCS_ONLY_SOURCE_CLAIM_REVIEW",
     "date": "2026-11-16",
-    "development_preflight_sha": "bea552e25f39593b2feea6ed0969a3ee4e396308",
+    "development_preflight_sha": "2b03f9c5480ff2ffcae31858505cf1d27b428e32",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "source_merged_sha": "92a1a80be5c01cae138404c27c8e5f2ccb2941d7",
-    "pr": 3046,
     "source_counts": {
-      "sources": 168,
-      "evidence_checks": 515,
-      "proposals": 233
+      "sources": 169,
+      "evidence_checks": 518,
+      "proposals": 234
     },
-    "release_queue_id": "DIC-Q-455-r304-setup-temp-unit-integrity",
     "production_deployed": false,
     "github267_literal_review_credit": 0,
-    "next": "Verify docs-only queue READY reconciliation PR governance, nonforce merge and exact Git blobs; continue next source or safe Log Shot/Rate/Recommendation gap. Original S019 and October29 ZIP bytes unverified."
+    "next": "Check source-bound docs CI, nonforce integrate and verify merged blobs; then app workflow testing. Original S019/Oct29 ZIP unverified."
   },
   "policy_decisions_resolved": [
     {
@@ -15713,6 +15765,34 @@
       ],
       "test_plan": "Node22 focused tests and one applicable hosted build/CI, mobile/offline/cloud and governance reusing unchanged evidence where exact-source suitable; no production/real-user tests. Completed: head and merge Node22 5225 PASS/0 FAIL/6 intentional SKIP; five exact head workflows and merged cloud/governance SUCCESS; frozen603 SKIPPED NOT PASS.",
       "release_queue": "DIC-Q-455-r304-setup-temp-unit-integrity_READY_DEV_ONLY",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-305-CANEPHORA-RATA-DESCRIPTIVE-NOT-FIVE-TASTE-EFFICACY",
+      "severity": "RESEARCH_METHOD_TRANSLATION_BOUNDARY_NO_REPRODUCIBLE_APP_DEFECT",
+      "source": [
+        "LIT-2025-CARVALHO-CANEPHORA-RATA-WHEEL"
+      ],
+      "evidence": [
+        "R455-EV-METHOD-305-A",
+        "R455-EV-METHOD-305-B",
+        "R455-EV-APP-305-C"
+      ],
+      "evidence_grade": "FIRST_PARTY_INDEXED_PEER_REVIEWED_DESCRIPTIVE_CUPPING_NOT_CONSUMER_INTERVENTION",
+      "finding": "A 103-label professional canephora flavour wheel cannot establish personal espresso five-rating accuracy, better next-shot tastes or universal correction confidence.",
+      "current_locked": "Member keeps five separate taste inputs and optional private notes; at most one truly controllable next-step change and no unapproved capture/target model alteration.",
+      "current_app": "Taste scales validated in site/lib/constants.js, recommendation in site/lib/engine.js; no observed app code defect in this bounded comparison.",
+      "proposed_change": "RESEARCH-ONLY NO-CHANGE: preserve five ratings and private notes. New RATA descriptors or robusta-specific numeric rule would require explicit scoped owner decision and genuine app/member evidence, not assumed here.",
+      "owner_approval_now_required": false,
+      "approval_required_for_behavior_change": true,
+      "implementation": "RESEARCH_ONLY_NOT_APP_POLICY_NOT_READY_NOT_DEPLOYED",
+      "files": [
+        "docs/audits/issue455-research-source-coverage-20261103.json",
+        "docs/workstreams/ops-issue455-r305-canephora-ratascope-20261116.md"
+      ],
+      "test_plan": "No code change; GitHub documentation/governance checks only, no fabricated app CI or new user telemetry.",
+      "release_queue": "NOT_APPLICABLE_NO_RUNTIME_CHANGE",
       "github267_literal_review_credit": 0,
       "production_deployed": false
     }
