@@ -15133,23 +15133,34 @@
     {
       "id": "DIC-Q-455-r303-historic-temp-unit-integrity",
       "issue": 455,
-      "pr": null,
+      "pr": 3031,
       "title": "Keep historical Edit Shot temperature display in supported F/C units",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "5935239398d08ed5c3aceb173a442570389cd186",
       "scope_paths": [
         "site/cloud/main.js"
       ],
       "owner_source": "Issue #455 Option B independently authorized SAFE legacy form integrity; DIC_PREFLIGHT_VERIFIED development_sha=005104342dff98305096a6cf4e8e3c01a77bc55e preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "tests": [
         "Three focused synthetic module test groups authored for invalid archived/current temperature unit and valid historical F/C, original measured shot, private notes and five explicit ratings. NOT RUN, NOT PASS.",
-        "Applicable exact-source hosted Node22/lint, cloud/browser/mobile/offline, isolated SQL/security, and governance are PENDING. Frozen603 SKIPPED is NOT PASS."
+        "Applicable exact-source hosted Node22/lint, cloud/browser/mobile/offline, isolated SQL/security, and governance are PENDING. Frozen603 SKIPPED is NOT PASS.",
+        "Corrected PR head 00e4892f3b8c54b5399258c4ac0e8c88c65d8c91: Node22/lint 43863881030 SUCCESS 5204 PASS, 0 FAIL, 6 intentional SKIP; three actual R303 module tests #4638-4640 PASS. Earlier 4de0e90a authored regex test matcher defect was corrected in next SAME-COMMIT journal commit; its cancelled runs are NOT PASS.",
+        "Corrected PR-head cloud/mobile/offline 43863881287, isolated SQL/privacy 43863881058, security inventory 43863881199, approval governance 43863881028 SUCCESS; frozen603 43863881104 SKIPPED NOT PASS. #33 separate workflows not evidence for #455.",
+        "PR #3031 nonforce two-parent [skip netlify] merged 5935239398d08ed5c3aceb173a442570389cd186; all five exact Git blobs match reviewed head: UI 0a5274ec660ad435b499d58c9b5985ae400f37ea, test 6a515e2f986e21daef4dd8e1b9403f1ab1eadccc, ledger c19e5c5fda83601b0dab88bf9593fa69aafa2d51, queue 6188c7b847097d1fac57180f1580fb32daa2c7e3, journal df512c41728e4b4c0441aee1abe78cbf4ab3f836.",
+        "Merged exact-source Node22/lint 43864545682 SUCCESS 5204 PASS, 0 FAIL, 6 intentional SKIP including all three R303 tests; merged cloud UX/mobile 43864545714 and governance 43864545736 SUCCESS. Head isolated SQL/security already SUCCESS, not falsely claimed merged repeat."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "PR-head and merged-source applicable CI not yet verified; no READY or Publish."
+      "ci_runs": [
+        43863881030,
+        43863881287,
+        43863881058,
+        43863881199,
+        43863881028,
+        43864545682,
+        43864545714,
+        43864545736
       ],
-      "notes": "Conditional malformed historical snapshot or preference unit could display invented °unit while converting as Celsius. UI-only safe fallback to supported F/C; source, tests, evidence ledger and same-commit scoped journal. No Locked engine, science, member data, SQL/Auth/Edge/provider, main/release or deployment changes; #267 V2 exhaustive line-credit zero.",
+      "blockers": [],
+      "notes": "Conditional malformed historical snapshot or preference unit could display invented °unit while converting as Celsius. UI-only safe fallback to supported F/C; source, tests, evidence ledger and same-commit scoped journal. No Locked engine, science, member data, SQL/Auth/Edge/provider, main/release or deployment changes; #267 V2 exhaustive line-credit zero.\n2026-11-16 R303 exact source and merge CI independently verified; READY development only. Original physical °C shot unchanged; no owner Publish, member observations or product Locked/science claim. Queue final docs CI itself pending until PR integration.",
       "production_deployed": false
     }
   ],
@@ -17775,6 +17786,15 @@
       "source_sha": "0c320602bc1c979877259a6f34de0aaa61428fe3",
       "production_deployed": true,
       "evidence": "One issue-only owner authorized publication DIC-20261115-DRIVECSP-08; frozen candidate 0c320602bc1c979877259a6f34de0aaa61428fe3 all five exact-SHA checks SUCCESS: approval 43686570584, validate 43686570572, cloud/mobile 43686570580, SQL 43686570603. Single-parent exact two-file main request 5730a717; controller 43686882333 and independent main acceptance 43686882360 SUCCESS; release 0f3641b4fff07e2a88d7747e621304ec2cf0ead5 nonforce, Netlify 6af9551c6515ddfa3786f76e READY/current 2026-11-15T06:46:06.231Z, five functions. Only CSP-safe owner OAuth function; 8 unready deployables and 127 workflows restored, 33 unready + 1 workflow test excluded. No SQL/Auth/member/backup export/private key writes. Google actual browser/account consent and native GH courier handoff NOT VERIFIED; issue remains OPEN."
+    },
+    {
+      "date": "2026-11-16",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r303-historic-temp-unit-integrity",
+      "state": "READY",
+      "source_sha": "5935239398d08ed5c3aceb173a442570389cd186",
+      "production_deployed": false,
+      "evidence": "PR #3031 exact head 00e4892, code merged nonforce 5935239398d08ed5c3aceb173a442570389cd186; R303 three focused tests and Node22 43863881030/43864545682 5204 PASS/0 FAIL/6 SKIP, PR head cloud/SQL/security/governance and merged cloud/governance SUCCESS. Same-commit preflight and all five code/test/ledger/queue/journal Git blobs checked. Development-only no Publish."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
