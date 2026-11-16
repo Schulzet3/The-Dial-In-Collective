@@ -1166,7 +1166,8 @@
       "domains": "5/5 DIRECT DECLARATION",
       "receipt": "docs/audits/issue509-information-schema-full-direct-review-2026-11-10-run154.json"
     },
-    "stored_migrations_sql": "69/69 current provider-stored SQL migration statements directly semantically reviewed, source-identical to mapped immutable Git migration files. Last new 3=40734 chars Run241. New development-only migration #509 not applied."
+    "stored_migrations_sql": "69/69 current provider-stored SQL migration statements directly semantically reviewed, source-identical to mapped immutable Git migration files. Last new 3=40734 chars Run241. New development-only migration #509 not applied.",
+    "current_app_table_component_review_verified_from_reconciled_receipts": "52/52 visible current app table components; 41 reused original + 3 direct R290 + 8 new R297; compiled/native/hosted and provider-wide all-word audit NOT complete"
   },
   "reviews": [
     {
@@ -4462,6 +4463,19 @@
       "verdict": "NO_NEW_CONFIRMED_DEFECT; NO_SAFE_DROP_PROVEN; LOW_BENEFIT_UNION_DISTINCT_SIMPLIFICATION_ONLY",
       "baseline": "IN_PROGRESS",
       "next": "Review first new/changed/unreviewed live provider definition and dependency-backed cleanup; old pgss range only if visible"
+    },
+    {
+      "run": "R297 Nov16 2026",
+      "source_sha": "c557fd4e42c1dbc010a49323aa9a0f7fb8f569b9",
+      "preflight_blob": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r297-app-table-definition-reconciliation-20261116.json",
+      "first_time_app_table_definitions_reviewed": 8,
+      "visible_current_table_components_reviewed_total": 52,
+      "first_time_function_word_credit": 0,
+      "confirmed_safe_deletions": 0,
+      "production_writes": 0,
+      "baseline": "IN_PROGRESS",
+      "next": "Exact merged CI for #3086 and new/unreviewed provider definitions."
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -22297,5 +22311,47 @@
     "production_writes": 0,
     "baseline": "IN_PROGRESS",
     "next": "Exact source PG17/Node22/approval CI; nonforce merge only if PASS; no deploy"
+  },
+  "provider_app_table_catalog_direct_review_run297": {
+    "status": "CURRENT_VISIBLE_APP_TABLE_CATALOG_COMPONENTS_52_52_FROM_DISTINCT_DIRECT_RECEIPTS_FULL_PROVIDER_BASELINE_IN_PROGRESS",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_preflight_development_sha": "c557fd4e42c1dbc010a49323aa9a0f7fb8f569b9",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt_path": "docs/audits/issue509-r297-app-table-definition-reconciliation-20261116.json",
+    "receipt_blob_sha": "df2e2a4b867accaf9348cc362ec8f4ed21757681",
+    "live_table_count": 52,
+    "original_legacy_catalog_count": 46,
+    "original_live_table_count": 41,
+    "original_removed_table_count": 5,
+    "new_since_original": 11,
+    "new_since_original_prior_R290_reviewed": 3,
+    "first_time_complete_visible_definition_component_tables_reviewed": 8,
+    "table_names": [
+      "private.dic_admin_account_delete_operations",
+      "private.dic_admin_push_runtime",
+      "private.dic_member_approval_deliveries",
+      "private.dic_member_approval_poll_gate",
+      "private.dic_official_source_attestations",
+      "private.dic_signup_review_events",
+      "public.dic_admin_push_subscriptions",
+      "public.dic_member_approval_push_subscriptions"
+    ],
+    "complete_visible_definition_components": {
+      "columns": 54,
+      "constraints": 32,
+      "indexes": 12,
+      "policies": 1,
+      "triggers": 1,
+      "hashed_catalog_characters": 7364
+    },
+    "full_current_app_table_catalog_component_coverage": 52,
+    "source_code_review_not_recredited": true,
+    "confirmed_new_defects": 0,
+    "safe_deletions": 0,
+    "prod_writes": 0,
+    "tests_run": "NOT_APPLICABLE_DOCS_ONLY",
+    "exact_pr_head_ci_3086": "SIX_APPLICABLE_SUCCESS_INCLUDING_NODE22",
+    "exact_merged_push_ci_3086": "UNVERIFIED",
+    "next": "Current changed/new provider definitions, source/drift, exact merged workflow CI for PR3086, unverified native and hosted surfaces. Numeric pgss 4961-5040 only if provider count reaches threshold."
   }
 }
