@@ -15313,18 +15313,17 @@
     {
       "id": "DIC-Q-509-import-additional-credential-keys",
       "issue": 509,
-      "pr": null,
+      "pr": 3073,
       "title": "Reject additional credential-bearing key spellings in import backups before private source archive",
       "state": "TESTING",
       "merged_source_sha": null,
       "scope_paths": [
-        "supabase/migrations/20261116210000_dic_import_additional_credential_keys.sql",
-        "supabase/tests/import_additional_credential_keys.sql",
-        "scripts/audit/isolated-sql-regression.sh"
+        "supabase/migrations/20261116210000_dic_import_additional_credential_keys.sql"
       ],
       "tests": [
         "Read-only live SQL function and stored archive-path inspection; synthetic normalized-key expression probe reproduced missed client_secret, private_key and bearer_token, without private data.",
-        "Disposable PostgreSQL17 and source-bound CI NOT YET RUN; do not promote READY."
+        "Disposable PostgreSQL17 and source-bound CI NOT YET RUN; do not promote READY.",
+        "Initial PR-head approval run 43954716386 FAILED because queue scope_paths wrongly included SQL tests and CI runner, which are nondeployable. Corrected schema; awaiting exact retry. Frozen603 SKIPPED and unrelated #33 R171 live selected-source check failed (do not call PASS)."
       ],
       "ci_runs": [],
       "blockers": [

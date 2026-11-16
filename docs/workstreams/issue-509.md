@@ -97,3 +97,10 @@ Staged additive narrow-source replacement supabase/migrations/20261116210000_dic
 
 
 R294 receipt correction: independently checked `private.import_operation` full source length = 3,124 characters (MD5 `b684a6af862302d9d4bb7c212208f5e0`). Directly read six complete definitions total 37,077 literal characters, not prior 35,324; no new distinct first-time word credit. Documentation-only correction, provider unchanged.
+
+
+### R294a — approval intake repair after actual CI failure [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=510bc9d7d6b53d3d1fc0de3d92e7de7f20b276a2 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+PR #3073 exact head 49cd7f490d5f4f6d66f3a6cd67270b9a66502741 approval 43954716386 **FAILED** because new TESTING queue item incorrectly listed nondeployable test and CI-runner files in `scope_paths`. Source migration is the only actual deployable path; corrected queue `scope_paths` accordingly and bound PR #3073. SQL regression 43954716629 / Node 43954716641 were still running at that CI diagnosis. Independent #33 R171 selected-source CI run 43954716559 FAILED because fetched external product did not render expected identity; **unrelated #33 work, not credited to #509 and not fixed here**. No change to application migration/test/CI code; no production data/config/provider changes. Queue remains TESTING; baseline IN_PROGRESS. Next recheck exact new PR SHA and all applicable checks before nonforce integration.
