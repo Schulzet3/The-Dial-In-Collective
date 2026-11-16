@@ -62,7 +62,6 @@ test('missing or changed selected official product is not current-source certifi
 function h3Fixture({name='AFRICAN BLEND',id=7438983954689,handle='african-blend',
  h3Name=name,formId=id,productId=id,trackerId=id,jsonHandle=handle,section='sw-product-template',
  cart='/cart/add',additionalTitle='',hiddenRoot=false}={}){
- const url='https://www.ahrre.com/products/'+handle;
  const tracker=JSON.stringify({p:'product',rtyp:'product',rid:trackerId,pageurl:'www.ahrre.com/products/'+handle});
  const product=JSON.stringify({id,title:name,handle:jsonHandle,description:'Selected current coffee'});
  return '<html><head><script id="__st">var __st='+tracker+';</script></head><body>'+
