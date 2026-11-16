@@ -3123,6 +3123,26 @@
       "locked_boundary": "Retain five individually rated owner-Locked DIC senses and all-green versus missing ratings, at most one controllable setting recommendation, original measured shot and private history. Non-espresso CATA methodological evidence cannot justify replacement controls, new telemetry, new numeric thresholds or claimed espresso improvement.",
       "git_source_sha": "9b55051298d518a4076b4c30a520476dbf605b22",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "LIT-2025-NATSUME-OKAMOTO-INSTANT-TL-ML",
+      "type": "peer_reviewed_primary_group_aggregated_instant_coffee_sensory_prediction_not_espresso",
+      "title": "Cross-Brand Machine Learning of Coffee's Temporal Liking from Temporal Dominance of Sensations Curves",
+      "authors": "Hiroharu Natsume; Shogo Okamoto",
+      "journal": "Applied Sciences 15(2):948",
+      "published": "2025-01-19",
+      "doi": "10.3390/app15020948",
+      "original_primary_url": "https://www.mdpi.com/2076-3417/15/2/948",
+      "access": "DIRECT_FIRST_PARTY_MDPI_FULL_OPEN_HTML_METHODS_2_RESULTS_4_DISCUSSION_5_CONCLUSIONS_6_ETHICS_DATA_AVAILABILITY_READ_20261116",
+      "review_status": "R455-299_SUBSTANTIVE_FULL_PRIMARY_TEXT_EXPERIMENT_TDS_TL_21_PARTICIPANTS_BOOTSTRAP_VALIDATION_METRICS_AND_LIMITS_READ; ORIGINAL_PDF_BINARY_FIGURE_PIXELS_ORIGINAL_RAW_PANEL_CURVES_CODE_EXECUTION_NOT_VERIFIED",
+      "evidence_grade": "PEER_REVIEWED_FOUR_SAME_MANUFACTURER_INSTANT_COFFEES_AGGREGATED_TEMPORAL_LIKING_PREDICTION; NO_PERSONAL_ESPRESSO_SAME_COFFEE_RECIPE_CAUSALITY",
+      "source_binary_sha256": null,
+      "version": "Publisher version of record HTML checked 2026-11-16; source bytes not archived or independently SHA256-hashed",
+      "methods_summary": "Four soluble instant coffee powders from one maker, each 1 g in 80 mL water at 65 C; 21 university participants tested each three times. Temporal-dominance sensory labels (11) and time-varying 1-9 liking were group-aggregated; 21-participant resampling produced bootstrap curves for machine learning.",
+      "metrics_scope": "Leave-one-coffee-brand-out averaged liking curve RMSE 0.59-0.71 versus within-brand RMSE 0.46-0.59, all conditional on four similar commercial instant coffees and constructed bootstrap curves, not 320 distinct humans or personal espresso decisions.",
+      "privacy_and_limitations": "Consent and ethics reported; underlying participant data upon author request/approval, not independently accessed. Original PDF, raw participant outcomes, exact code/reruns and truly independent external participants unverified. Authors explicitly acknowledge individual preference differences not modeled.",
+      "current_app_crosswalk": "Live constants.js blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2 and engine.js blob f384ae67c1a9148990cab4716dc8ad22d1ca81f3; retain five owner-Locked rating dimensions, incomplete-vs-all-green separation, same-coffee original measured shots and at most one truly controllable recommendation.",
+      "github267_literal_review_credit": 0
     }
   ],
   "evidence_checks": [
@@ -9714,6 +9734,45 @@
       "current_app": "No new member data, telemetry, experiment, numeric confidence or changes to Locked behavior",
       "result": "RESEARCH_ONLY_REANALYSIS_LIMIT",
       "owner_approval_now_required": false
+    },
+    {
+      "id": "R455-EV-METHOD-299-A",
+      "source": "LIT-2025-NATSUME-OKAMOTO-INSTANT-TL-ML",
+      "source_sha": "09a387f9db79466e112f1e6e98d959381e66c7de",
+      "original_url": "https://www.mdpi.com/2076-3417/15/2/948",
+      "page_section": "Original publisher sections 2.1-2.6, sensory protocol and sampling",
+      "grade": "DIRECT_FIRST_PARTY_FULL_ORIGINAL_METHODS;PDF_RAW_PARTICIPANT_DATA_UNVERIFIED",
+      "claim": "The four source stimuli were instant soluble powders from one manufacturer, each 1 g dissolved in 80 mL of 65 C water. Twenty-one regular-coffee-drinking university students each repeated four-product time-dominance and time-varying liking protocols three times; separate 11-attribute TDS and 1-9 TL curves are panel-aggregated. No pressure-driven espresso preparation, espresso dose/yield/grind intervention, or DIC five independent taste scores was tested.",
+      "result": "NON_ESPRESSO_GROUP_AGGREGATE_METHOD_SCOPE",
+      "current_app": "Do not infer espresso recipe-specific or member-specific score outputs from this external TDS/TL procedure.",
+      "owner_approval_now_required": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-METHOD-299-B",
+      "source": "LIT-2025-NATSUME-OKAMOTO-INSTANT-TL-ML",
+      "source_sha": "09a387f9db79466e112f1e6e98d959381e66c7de",
+      "original_url": "https://www.mdpi.com/2076-3417/15/2/948",
+      "page_section": "Original sections 3.2-3.4, 4.1-4.3 and Tables 3-5",
+      "grade": "DIRECT_FIRST_PARTY_METHODS_RESULT_TEXT;ORIGINAL_BOOTSTRAP_CURVES_AND_INDEPENDENT_REPLICATION_UNVERIFIED",
+      "claim": "Leave-one-brand-out reservoir models averaged RMSE 0.59-0.71 in temporal liking on its 1-9 scale, whereas within-brand comparisons averaged 0.46-0.59; three of four brand comparisons reportedly p<0.01. Their 320 test trials per target are reused bootstrap resamples of the same 21 original panelists, NOT 320 independent consumers or real future shots. The reservoir size was selected using data across four brands, so this is not an independently pre-registered untouched external holdout; the exact effect of this choice is not established.",
+      "result": "CONDITIONAL_AGGREGATE_MODEL_FIT_NOT_PERSONAL_CAUSAL_TASTE_EFFECT",
+      "current_app": "Preserve real individual five tastes, own-coffee shot identity and one-controllable-setting advice; no unsupported numeric accuracy or confidence mapping.",
+      "owner_approval_now_required": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-METHOD-299-C",
+      "source": "LIT-2025-NATSUME-OKAMOTO-INSTANT-TL-ML",
+      "source_sha": "09a387f9db79466e112f1e6e98d959381e66c7de",
+      "original_url": "https://www.mdpi.com/2076-3417/15/2/948",
+      "page_section": "Original Discussion 5, Conclusions 6, Data availability and Ethics",
+      "grade": "DIRECT_FIRST_PARTY_PUBLISHER_LIMITATIONS_DISCLOSURES;DATA_UPON_REQUEST_UNOBTAINED",
+      "claim": "Authors expressly state the model does not account for individual consumer preference differences, has uncertain transferability to divergent coffee brands, and may complement rather than replace human panels. Underlying data require author request and approval; there is no evidence of within-person randomized single-shot changes, five DIC ratings, adverse direction changes or validated espresso cup-quality improvements.",
+      "result": "RESEARCH_ONLY_EXTERNAL_VALIDITY_AND_DATA_AVAILABILITY_LIMIT",
+      "current_app": "No new member capture, telemetry, ML engine, confidence value or user-facing policy change; optional outcome evaluation would need consent and new owner authority.",
+      "owner_approval_now_required": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -9933,22 +9992,23 @@
     "R455-295 FINAL: PR #2989 source/test/ledger/queue/same-commit journal nonforce merged 8593fdc856c4257201a245ea3195921eb0ec4466; head/merged Node22 5159 PASS/0 FAIL/6 SKIP, all five R295 tests PASS, applicable head/merged browser/offline/governance, isolated SQL/security successful. One unique development-only READY row; no Publish/member data or new taste policy. Ledger remains 161/493/226; original S019 inaccessible, #267 separate.",
     "R455-296 staged SAFE legacy edit snapshot optional-chain correction plus three CloudApp tests; exact-source hosted CI and nonforce integration pending. No app efficacy or real-member validation.",
     "R455-296 final verified source and CI, queued development-only READY; resume independent research & additional source-reproducible UX and optional/consented study design without new member data.",
-    "R455-297: Direct primary An/Lee 2023 CATA versus intensity rating comparison across orange juice and yogurt; no espresso, DIC five-scale validation or personalized next-shot outcome. New source+3 checks+1 research-only proposal; no app/member data/policy changes. Exact documentation governance PR/merge pending. Original S019 unavailable."
+    "R455-297: Direct primary An/Lee 2023 CATA versus intensity rating comparison across orange juice and yogurt; no espresso, DIC five-scale validation or personalized next-shot outcome. New source+3 checks+1 research-only proposal; no app/member data/policy changes. Exact documentation governance PR/merge pending. Original S019 unavailable.",
+    "R455-299: Natsume & Okamoto 2025 four-instant-coffee, 21-person group-temporal-ML primary review. Non-personal bootstrapped predictions do not validate DIC next-shot efficacy; source+3 checks+1 proposal. Verify docs PR exact-source governance/nonforce merge; keep S019 inaccessible and zero #267 literal credit."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-298_KIM_TEP_ORIGINAL_PUBLISHER_CHECK_PENDING_CI",
+    "run_id": "R455-299_INSTANT_COFFEE_TEMPORAL_MODEL_BOUNDARY_PENDING_CI",
     "date": "2026-11-16",
-    "development_preflight_sha": "1fff3427c05f754d63dca4af5721c012b8481591",
+    "development_preflight_sha": "09a387f9db79466e112f1e6e98d959381e66c7de",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "prior_ledger_blob_sha": "7c4272b90b13f9320eeb89f8a01306c572fcc616",
+    "prior_ledger_blob_sha": "9250eb7624c5f2260f6fa723b542c8e162806b77",
     "source_counts": {
-      "sources": 163,
-      "evidence_checks": 499,
-      "proposals": 228
+      "sources": 164,
+      "evidence_checks": 502,
+      "proposals": 229
     },
     "github267_literal_review_credit": 0,
-    "scope": "Original publisher abstract/highlights/data availability crosscheck, research-only; no DIC espresso improvement evidence",
-    "next": "Exact PR-head docs checks; nonforce merge on PASS, verify both merged blobs and merged governance; then next distinct source. Original S019 inaccessible."
+    "scope": "Primary source methods/results/bootstrap/individual preference external-validity caveats, research-only no runtime/data/policy effect",
+    "next": "Verify GitHub PR source/CI, nonforce merge with explicit skip netlify, read back actual merged blobs and governance; continue next unique source/UX finding."
   },
   "policy_decisions_resolved": [
     {
@@ -15245,6 +15305,32 @@
       "test_plan": "No app test for no-code finding. If new UX intervention proposed, require real consenting privacy-safe field study with complete five-taste rating outcomes, confounders and adverse effects; no member-data reads or collection now.",
       "release_queue": "NO_NEW_ITEM",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-PROP-299-INSTANT-TL-ML-NOT-PERSONAL-ESPRESSO",
+      "severity": "P3_RESEARCH_MODEL_EXTERNAL_VALIDITY_GUARD_NOT_LIVE_APP_BUG",
+      "source": [
+        "LIT-2025-NATSUME-OKAMOTO-INSTANT-TL-ML"
+      ],
+      "evidence": [
+        "R455-EV-METHOD-299-A",
+        "R455-EV-METHOD-299-B",
+        "R455-EV-METHOD-299-C"
+      ],
+      "original_primary_url": "https://www.mdpi.com/2076-3417/15/2/948",
+      "evidence_grade": "DIRECT_PRIMARY_FULL_HTML_METHODS_AND_RESULTS_NO_RAW_REANALYSIS",
+      "finding": "Aggregated temporal liking predictions for four commercial instant coffees cannot substantiate the causal effectiveness of DIC's single adjustment or individual five espresso ratings. Bootstrap repetitions are not independent people, and model authors explicitly did not capture individual preference differences.",
+      "user_benefit": "Prevent unsupported algorithmic confidence, efficacy language or predictive personalization claims; preserve accountable member-controlled recommendations.",
+      "current_locked": "All five 1-5 tastes, rated all-green vs missing, same-coffee/style/setup/grinder/feed/version, original history and notes; a single controllable adjustment and uncertainty; no unapproved experimentation or data fields.",
+      "current_app": "Current engine.js blob f384ae67c1a9148990cab4716dc8ad22d1ca81f3; constants.js blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2, no proposal for runtime change.",
+      "proposed_change": "SAFE research-only evidence boundary, no new ML predictions or universal numeric rules. Future separate optional/consented same-coffee+setup+style+grinder baseline -> one controllable change -> next shot -> all five outcome comparison must handle timing, feed, temperature, repeat tests, missing ratings, confounders, adverse outcomes, and privacy; requires specific approval before new collection/intervention.",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "RESEARCH_ONLY_ORIGINAL_FULL_HTML_NO_APP_EDIT",
+      "test_plan": "Document original DOI, full methods/results and precise current code crosswalk. Docs PR exact governance and nonforce merge. NO DIC member/espresso outcomes tested.",
+      "release_queue": "NO_NEW_APP_ITEM",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
     }
   ],
   "changeScope": {
