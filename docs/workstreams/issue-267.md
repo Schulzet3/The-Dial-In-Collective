@@ -1,3 +1,10 @@
+## November 16, 2026 — #267 V11DE individual frozen F215:4388–4451 archive review [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=4f3797a3db6e3ba484640a8d091739ab1075f543 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- **Original source:** directly read and interpreted all 64 physical lines F215:4388–4451 from docs/audits/2026-10-24-extractor-elevation-roaster-adjudication.json, frozen abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9, tree c54ade64eca30946df8858297578a172f5cf6fa8, Git blob c3a92e1e2d7045c9a53a903f82f0183fa79dc7cf. [V11DE exact line receipt](../audits/issue267-v2-strict-batches/S2-DISJOINT-F215-4388-4451-20261116-V11DE.json) records literal/semantics/quality/risk/dead/duplication/pinned-live archive counterpart/testability/Locked disposition for every line. V11DD ends 4387, no gap/overlap; first original F001:1–41 previously checked against S2-001 without duplicate credit. Old R2/C2/V1 summaries not promoted. Exact frozen/pinned/live archive Git blob matches; this does not credit pinned executable or post-pin drift.
+- **Findings:** WEBE Guji Buku Sayasa Supernatural 1900–2300 vs 1,900–2,300 masl, WEBE Guatemala Los Volcanes 1300–1500 vs 1,300–1,500 meters; numeric bounds agree, but original review_required and production_parser_used=false. Archived capture digest/URLs not independently retested, current #33 parser not exercised. No active code issue confirmed, #33 and #96 ownership unchanged, original603/member/history preserved.
+- **Checks:** 64/64 source positions and adjacency PASS; exact PR-head and merged-source governance PENDING. Node22/browser/mobile/offline/SQL/Auth/original603 NOT_RUN_DOCS_ONLY, provider NOT_APPLICABLE. #267 OPEN; next F215:4452; full coverage and drift incomplete. No application, production/provider/deployment, backup, schedule, alert or queue changes.
+
 ## November 16, 2026 — #267 V11DD F215:4326–4387 directly inspected archived evidence [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=2077a489b797ba15114792146c7647f4506b6225 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
