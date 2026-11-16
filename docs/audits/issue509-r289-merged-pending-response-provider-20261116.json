@@ -1,0 +1,104 @@
+{
+  "run": 289,
+  "observed_date_utc": "2026-11-16",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight_development_sha": "e3506e5dcd2ca1f5c28a97e8f895c96eb0028a95",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "prewrite_development_sha": "e50727444db83e76a02a037c7575a995707a585f",
+  "main_sha": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+  "release_production_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5",
+  "issue": 509,
+  "pr": 3048,
+  "pr_merged": true,
+  "merged_sha": "e50727444db83e76a02a037c7575a995707a585f",
+  "merged_migration_blob": "bbc6983264c9ad05158bf782a8c4b8aaa5651fe7",
+  "merged_regression_blob": "70d6f1943402785e319a8651239c24598a30bf4e",
+  "exact_pr_source_sha": "cccd5c0ebc63203326829f61d85b96403b951465",
+  "pr_sql_ci": {
+    "run": 43894728539,
+    "job": 133395054857,
+    "conclusion": "SUCCESS",
+    "synthetic_result": "PASS older Pending canonical_name, aliases/library IDs, later reuse, no shot changes (disposable pg17 rollback)",
+    "signed_http_assertions_passed": 94,
+    "hosted_go_true": "UNVERIFIED"
+  },
+  "merged_ci_at_checkpoint": {
+    "sql": {
+      "id": 43901492065,
+      "conclusion": "SUCCESS"
+    },
+    "approval": {
+      "id": 43901492003,
+      "conclusion": "SUCCESS"
+    },
+    "node": {
+      "id": 43901492706,
+      "status": "IN_PROGRESS"
+    },
+    "browser": {
+      "id": 43901492764,
+      "status": "IN_PROGRESS"
+    },
+    "coffee_python": {
+      "id": 43901492455,
+      "conclusion": "SUCCESS"
+    },
+    "original_source_probe": "SKIPPED_NOT_PASS"
+  },
+  "release_queue": "DIC-Q-509-pending-canonical-name-response: TESTING; not READY; downstream #33 and genuine hosted Auth #96 unverified",
+  "provider": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.11.0.003",
+    "production_migration_applied": false,
+    "live_function_md5": "140c211a4bfef175b041c037561a1e37",
+    "live_definition_review": {
+      "count": 5,
+      "complete_sql_chars": 25881,
+      "definitions": [
+        {
+          "signature": "private.dic_admin_review_coffee(uuid,bigint,text,text,uuid)",
+          "md5": "cb5c264aceb9699a498177f3f6861783",
+          "chars": 4526
+        },
+        {
+          "signature": "private.dic_confirm_coffee_existing(uuid,jsonb)",
+          "md5": "0fcc44bb8a05f46e87694d3474eb7c23",
+          "chars": 3239
+        },
+        {
+          "signature": "private.dic_link_pending_coffee(uuid,uuid,text,jsonb)",
+          "md5": "140c211a4bfef175b041c037561a1e37",
+          "chars": 3954
+        },
+        {
+          "signature": "private.dic_member_retry_pending_approval(uuid,bigint)",
+          "md5": "5ebb55ad50529a080b3c2332a29d3309",
+          "chars": 2166
+        },
+        {
+          "signature": "private.dic_promote_pending_coffee(uuid,text,jsonb,boolean)",
+          "md5": "74ffb76151d846bfff79e7ba40fa1850",
+          "chars": 11996
+        }
+      ],
+      "method": "DIRECT_CURRENT_COMPLETE_PG_GET_FUNCTIONDEF_REPEAT_PRIOR_BASELINE_NO_NEW_WORD_CREDIT",
+      "findings": "Admin review, self-confirm and member retry delegate to same link routine; production still returns stale canonical_name after earlier Pending precedence; no new distinct flaw confirmed; original immutable migration history retained"
+    },
+    "roles": "anon denies private schema and involved EXECUTE; authenticated has private usage and admin review/confirm/promotion execute but private admin guard enforces authorized member; link function denies direct all tested roles; service promotion uses JWT role-specific verification guard",
+    "pg_stat_statements_numeric_count": 4768,
+    "unreachable_next_rank": "4961-5040",
+    "cumulative_distinct_numeric_ids_prior": 4604,
+    "advisors": {
+      "rls_enabled_no_policy": 13,
+      "authenticated_security_definer_function_executable": 10,
+      "auth_leaked_password_protection": 1,
+      "unindexed_foreign_keys": 14,
+      "unused_index": 8
+    },
+    "active_edge_functions": 5,
+    "provider_writes": 0
+  },
+  "privacy": "No Auth identities, member/shot/note rows, passwords, secret values, raw statement text or sensitive raw logs",
+  "conclusion": "SOURCE_MERGED_ISOLATED_TESTS_PASS_PRODUCTION_UNCHANGED_FULL_BASELINE_IN_PROGRESS",
+  "next": "Recheck both exact merged-source Node/browser workflows, close #509 source-bound queue blockers with #33 contract and #96 Auth, continue first unreviewed provider definitions; 4961-5040 only if stats available"
+}
