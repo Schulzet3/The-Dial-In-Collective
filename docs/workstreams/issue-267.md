@@ -1,3 +1,10 @@
+## November 15, 2026 — #267 V11CV F215:3785–3848 Hidden Eagle/Sumato source-range audit [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=6563d92e868ffa7865db1420fd997636514047c2 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- **Authority:** development-only strict review of 64 original physical frozen lines against abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9, original blob c3a92e1e2d7045c9a53a903f82f0183fa79dc7cf, source tree c54ade64eca30946df8858297578a172f5cf6fa8. [V11CV line-by-line append-only receipt](../audits/issue267-v2-strict-batches/S2-DISJOINT-F215-3785-3848-20261115-V11CV.json) accounts for each original literal, behavioral interpretation, risk, redundancy, archive/nonexecutability, current counterpart, testability and Locked decisions. Exact contiguous after V11CU 3784; first frozen workflow already strictly revalidated 41/41 this run without additional credit; V1/R2/C2 not promoted. Pinned/live historical archive retains identical complete Git blob.
+- **Findings:** Hidden Eagle numeric altitude 900–1800 vs 900-1800 meters; Sumato The Founder 1900–2100 vs 1,900-2,100 meters, preserving both bounds. Both historical cases remain review_required and production_parser_used false; endpoint .js capture hashes/identities not freshly reverified. No current parser defect, live code coverage or active security issue established; preserve #33 ownership and original 603 source.
+- **Verification:** 64/64 literal source positions and original/pinned/live whole blob, disjoint range adjacency. PR-head/merged governance PENDING, app/Node/browser/SQL/Auth/603 NOT_RUN_DOCS_ONLY, provider NOT_APPLICABLE. No deployment, release, SQL/Auth/member, backup, schedule, or alert changes. #267 stays OPEN; next F215:3849, pinned and live drift unfinished.
+
 ## November 15, 2026 — #267 V11CU F215:3723–3784 two additional frozen source cases [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=12e7e8bb19205de17a80921c1e57dad1b00279e1 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
