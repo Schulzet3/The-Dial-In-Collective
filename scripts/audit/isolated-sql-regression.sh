@@ -58,4 +58,10 @@ if [[ -f supabase/migrations/20261114195000_dic_member_approval_finish_null_rece
 else
   echo "NOT_APPLICABLE: #509 member_approval_finish_null_receipts; migration excluded from tested source"
 fi
+if [[ -f supabase/migrations/20261116151600_dic_pending_canonical_name_response.sql ]]; then
+  echo "Running pending_canonical_name_response"
+  run_sql supabase/tests/pending_canonical_name_response.sql
+else
+  echo "NOT_APPLICABLE: #509 pending_canonical_name_response; migration excluded from source"
+fi
 echo 'PASS: all checked-in migrations and SQL suites, including staged import/setup, cross-account and source-worker authorization and first-style owner isolation regressions; no hosted connection.'
