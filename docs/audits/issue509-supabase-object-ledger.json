@@ -4419,6 +4419,18 @@
       "provider_writes": 0,
       "new_confirmed_defects": 0,
       "next": "First new or unreviewed provider definition; numeric pgss ranks 4961-5040 if accessible; #33/#96 acceptance unverified"
+    },
+    {
+      "run": "R294 Nov16 2026",
+      "source_sha": "510bc9d7d6b53d3d1fc0de3d92e7de7f20b276a2",
+      "preflight_blob": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r294-additional-import-credential-key-guard-20261116.json",
+      "confirmed_source_level_credential_guard_gap": 1,
+      "synthetic_key_probe_only": true,
+      "first_time_word_credit": 0,
+      "production_writes": 0,
+      "source_status": "TESTING",
+      "next": "Isolated PostgreSQL17 exact-source test, nonforce development merge, readback CI; no production publication"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -22179,5 +22191,18 @@
     "source_or_test_writes": 0,
     "new_confirmed_defects": 0,
     "baseline": "IN_PROGRESS"
+  },
+  "provider_import_additional_credential_key_guard_run294": {
+    "receipt_path": "docs/audits/issue509-r294-additional-import-credential-key-guard-20261116.json",
+    "preflight_development_sha": "510bc9d7d6b53d3d1fc0de3d92e7de7f20b276a2",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "observed_pgss": 4808,
+    "prior_distinct_retained": 4604,
+    "live_import_md5": "2af6a48d0fe80841fcc27c1f1d5532e3",
+    "confirmed_source_level_guard_gap": true,
+    "first_time_word_credit": 0,
+    "production_writes": 0,
+    "source_status": "TESTING",
+    "next": "Source-bound isolated SQL test and exact PR CI before development merge; hosted privacy risk remains unproven actual exposure"
   }
 }
