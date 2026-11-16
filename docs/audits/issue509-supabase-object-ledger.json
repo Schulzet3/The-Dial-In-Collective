@@ -22072,5 +22072,28 @@
     "source_queue_status": "TESTING_NOT_READY",
     "provider_writes": 0,
     "baseline": "IN_PROGRESS"
+  },
+  "provider_roaster_archive_semantic_run290": {
+    "receipt_path": "docs/audits/issue509-r290-roaster-archive-alias-definitions-20261116.json",
+    "preflight_development_sha": "3d6148e23a891f351e1181ed145d48b902739fae",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "complete_live_sql_functions": 8,
+    "complete_sql_chars": 28892,
+    "complete_live_table_structures": 4,
+    "columns": 20,
+    "constraints": 19,
+    "indexes": 5,
+    "policies": 3,
+    "pgss_count": 4776,
+    "unavailable_ranks": [
+      4961,
+      5040
+    ],
+    "cumulative_numeric_distinct_retained": 4604,
+    "first_time_coverage_credit": 0,
+    "production_writes": 0,
+    "new_confirmed_defects": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Directly review current private.dic_admin_delete_preview and dic_admin_delete_record full changed function definitions plus source parity, then remaining unreviewed current provider objects; monitor next pgss numeric 4961-5040 only if count grows; coordinate #33/#96 downstream acceptance."
   }
 }

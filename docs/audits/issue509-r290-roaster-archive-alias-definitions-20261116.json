@@ -1,0 +1,562 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R290",
+  "executed_at_utc": "2026-11-16T16:42:00Z",
+  "authority": "GitHub #509 development-only provider read-only, no publish",
+  "preflight": {
+    "development_sha": "3d6148e23a891f351e1181ed145d48b902739fae",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "git_blob_content_verified": true
+  },
+  "observed_refs": {
+    "development_sha": "3d6148e23a891f351e1181ed145d48b902739fae",
+    "main_sha": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+  },
+  "provider": {
+    "project_ref": "azviqqejypsefzilgonr",
+    "status": "ACTIVE_HEALTHY",
+    "pg_version": "17.11.0.003",
+    "all_schemas_table_inventory_again_checked": true,
+    "app_table_counts": {
+      "private": 28,
+      "public": 24
+    },
+    "statement_stat_count": 4776,
+    "statement_stats_reset": "2026-10-09 11:11:31.487298+00",
+    "waiting_backends": 0,
+    "numeric_cursor": "4961-5040 UNAVAILABLE because count <4961"
+  },
+  "tables": [
+    {
+      "object": "private.dic_coffee_aliases",
+      "rls": true,
+      "force_rls": false,
+      "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "coffee_id",
+          "default": null,
+          "ordinal": 1,
+          "not_null": true
+        },
+        {
+          "type": "text",
+          "column": "alias_key",
+          "default": null,
+          "ordinal": 2,
+          "not_null": true
+        },
+        {
+          "type": "text",
+          "column": "original_name",
+          "default": null,
+          "ordinal": 3,
+          "not_null": true
+        },
+        {
+          "type": "text",
+          "column": "origin_kind",
+          "default": null,
+          "ordinal": 4,
+          "not_null": true
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": "now()",
+          "ordinal": 5,
+          "not_null": true
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "CHECK (alias_key ~ '^[a-z0-9]+$'::text)",
+          "name": "dic_coffee_aliases_alias_key_check",
+          "type": "c"
+        },
+        {
+          "ddl": "FOREIGN KEY (coffee_id) REFERENCES coffees(id)",
+          "name": "dic_coffee_aliases_coffee_id_fkey",
+          "type": "f"
+        },
+        {
+          "ddl": "CHECK (origin_kind = ANY (ARRAY['user_confirmed'::text, 'source_confirmed'::text, 'admin_entry'::text]))",
+          "name": "dic_coffee_aliases_origin_kind_check",
+          "type": "c"
+        },
+        {
+          "ddl": "CHECK (length(original_name) >= 1 AND length(original_name) <= 200)",
+          "name": "dic_coffee_aliases_original_name_check",
+          "type": "c"
+        },
+        {
+          "ddl": "PRIMARY KEY (coffee_id, alias_key)",
+          "name": "dic_coffee_aliases_pkey",
+          "type": "p"
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX dic_coffee_aliases_pkey ON private.dic_coffee_aliases USING btree (coffee_id, alias_key)",
+          "name": "dic_coffee_aliases_pkey"
+        }
+      ],
+      "policies": null,
+      "triggers": null,
+      "semantic_review": "DIRECT_COMPLETE_COLUMNS_CONSTRAINTS_INDEX_DDL_POLICY_EXPRESSION_TRIGGER_DEFINITION_AND_EFFECTIVE_GRANTS",
+      "verdict": "LEGACY ACTIVE coffee identity aliases; composite PK, bounded origin kinds, FK to coffees; client DML denied; preserve.",
+      "original_word_level_baseline_credit": 0
+    },
+    {
+      "object": "private.dic_roaster_alias_provenance_archive",
+      "rls": true,
+      "force_rls": false,
+      "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+      "columns": [
+        {
+          "type": "text",
+          "column": "alias_key",
+          "default": null,
+          "ordinal": 1,
+          "not_null": true
+        },
+        {
+          "type": "uuid",
+          "column": "roaster_id",
+          "default": null,
+          "ordinal": 2,
+          "not_null": true
+        },
+        {
+          "type": "text",
+          "column": "evidence_url",
+          "default": null,
+          "ordinal": 3,
+          "not_null": true
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": "now()",
+          "ordinal": 4,
+          "not_null": true
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "CHECK (alias_key ~ '^[a-z0-9]{3,}$'::text)",
+          "name": "dic_roaster_aliases_alias_key_check",
+          "type": "c"
+        },
+        {
+          "ddl": "CHECK (evidence_url ~ '^https://'::text)",
+          "name": "dic_roaster_aliases_evidence_url_check",
+          "type": "c"
+        },
+        {
+          "ddl": "PRIMARY KEY (alias_key)",
+          "name": "dic_roaster_aliases_pkey",
+          "type": "p"
+        },
+        {
+          "ddl": "FOREIGN KEY (roaster_id) REFERENCES private.dic_roaster_identity_provenance_archive(id) ON DELETE CASCADE",
+          "name": "dic_roaster_aliases_roaster_id_fkey",
+          "type": "f"
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX dic_roaster_aliases_pkey ON private.dic_roaster_alias_provenance_archive USING btree (alias_key)",
+          "name": "dic_roaster_aliases_pkey"
+        }
+      ],
+      "policies": [
+        {
+          "cmd": "*",
+          "name": "no_client_access",
+          "qual": "false",
+          "with_check": "false"
+        }
+      ],
+      "triggers": null,
+      "semantic_review": "DIRECT_COMPLETE_COLUMNS_CONSTRAINTS_INDEX_DDL_POLICY_EXPRESSION_TRIGGER_DEFINITION_AND_EFFECTIVE_GRANTS",
+      "verdict": "HISTORICAL archived alias provenance, FK to archived identity, deny-all RLS; preserve records and old constraint names.",
+      "original_word_level_baseline_credit": 0
+    },
+    {
+      "object": "private.dic_roaster_identity_provenance_archive",
+      "rls": true,
+      "force_rls": false,
+      "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": "gen_random_uuid()",
+          "ordinal": 1,
+          "not_null": true
+        },
+        {
+          "type": "text",
+          "column": "canonical_name",
+          "default": null,
+          "ordinal": 2,
+          "not_null": true
+        },
+        {
+          "type": "text",
+          "column": "canonical_key",
+          "default": null,
+          "ordinal": 3,
+          "not_null": true
+        },
+        {
+          "type": "text",
+          "column": "official_domain",
+          "default": null,
+          "ordinal": 4,
+          "not_null": true
+        },
+        {
+          "type": "text",
+          "column": "evidence_url",
+          "default": null,
+          "ordinal": 5,
+          "not_null": true
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "verified_at",
+          "default": "now()",
+          "ordinal": 6,
+          "not_null": true
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": "now()",
+          "ordinal": 7,
+          "not_null": true
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "CHECK (canonical_key ~ '^[a-z0-9]{3,}$'::text)",
+          "name": "dic_roaster_directory_canonical_key_check",
+          "type": "c"
+        },
+        {
+          "ddl": "UNIQUE (canonical_key)",
+          "name": "dic_roaster_directory_canonical_key_key",
+          "type": "u"
+        },
+        {
+          "ddl": "CHECK (length(btrim(canonical_name)) >= 2 AND length(btrim(canonical_name)) <= 200)",
+          "name": "dic_roaster_directory_canonical_name_check",
+          "type": "c"
+        },
+        {
+          "ddl": "CHECK (evidence_url ~ '^https://'::text)",
+          "name": "dic_roaster_directory_evidence_url_check",
+          "type": "c"
+        },
+        {
+          "ddl": "CHECK (official_domain ~ '^[a-z0-9-]+(\\.[a-z0-9-]+)+$'::text)",
+          "name": "dic_roaster_directory_official_domain_check",
+          "type": "c"
+        },
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "dic_roaster_directory_pkey",
+          "type": "p"
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX dic_roaster_directory_canonical_key_key ON private.dic_roaster_identity_provenance_archive USING btree (canonical_key)",
+          "name": "dic_roaster_directory_canonical_key_key"
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX dic_roaster_directory_pkey ON private.dic_roaster_identity_provenance_archive USING btree (id)",
+          "name": "dic_roaster_directory_pkey"
+        }
+      ],
+      "policies": [
+        {
+          "cmd": "*",
+          "name": "no_client_access",
+          "qual": "false",
+          "with_check": "false"
+        }
+      ],
+      "triggers": null,
+      "semantic_review": "DIRECT_COMPLETE_COLUMNS_CONSTRAINTS_INDEX_DDL_POLICY_EXPRESSION_TRIGGER_DEFINITION_AND_EFFECTIVE_GRANTS",
+      "verdict": "HISTORICAL archived directory provenance, uniqueness and URL/domain integrity, deny-all RLS; preserve.",
+      "original_word_level_baseline_credit": 0
+    },
+    {
+      "object": "private.dic_roaster_name_aliases",
+      "rls": true,
+      "force_rls": false,
+      "acl": "{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+      "columns": [
+        {
+          "type": "text",
+          "column": "alias_key",
+          "default": null,
+          "ordinal": 1,
+          "not_null": true
+        },
+        {
+          "type": "text",
+          "column": "canonical_key",
+          "default": null,
+          "ordinal": 2,
+          "not_null": true
+        },
+        {
+          "type": "text",
+          "column": "evidence_url",
+          "default": null,
+          "ordinal": 3,
+          "not_null": true
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": null,
+          "ordinal": 4,
+          "not_null": true
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "CHECK (alias_key ~ '^[a-z0-9]{3,}$'::text)",
+          "name": "dic_roaster_name_aliases_alias_key_check",
+          "type": "c"
+        },
+        {
+          "ddl": "CHECK (canonical_key ~ '^[a-z0-9]{3,}$'::text)",
+          "name": "dic_roaster_name_aliases_canonical_key_check",
+          "type": "c"
+        },
+        {
+          "ddl": "CHECK (evidence_url ~ '^https://'::text)",
+          "name": "dic_roaster_name_aliases_evidence_url_check",
+          "type": "c"
+        },
+        {
+          "ddl": "PRIMARY KEY (alias_key)",
+          "name": "dic_roaster_name_aliases_pkey",
+          "type": "p"
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX dic_roaster_name_aliases_pkey ON private.dic_roaster_name_aliases USING btree (alias_key)",
+          "name": "dic_roaster_name_aliases_pkey"
+        }
+      ],
+      "policies": [
+        {
+          "cmd": "*",
+          "name": "no_client_access",
+          "qual": "false",
+          "with_check": "false"
+        }
+      ],
+      "triggers": null,
+      "semantic_review": "DIRECT_COMPLETE_COLUMNS_CONSTRAINTS_INDEX_DDL_POLICY_EXPRESSION_TRIGGER_DEFINITION_AND_EFFECTIVE_GRANTS",
+      "verdict": "LEGACY ACTIVE roaster key aliases referenced by canonicalization function; deny-all RLS, service-only table; preserve.",
+      "original_word_level_baseline_credit": 0
+    }
+  ],
+  "functions": [
+    {
+      "signature": "private.apply_prototype_import(u uuid, doc jsonb)",
+      "source_md5": "2af6a48d0fe80841fcc27c1f1d5532e3",
+      "source_chars": 16445,
+      "source_lines": 193,
+      "security_definer": true,
+      "search_path": "search_path=\"\"",
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "coverage": "DIRECT_COMPLETE_LIVE_SQL_READ_AND_SEMANTIC_REVIEW",
+      "verdict": "LEGACY ACTIVE: empty-workspace-only one-setup import; validates size/shape/credentials, rejects retired experiment links and lossy history; private direct client EXECUTE denied; no deletion."
+    },
+    {
+      "signature": "private.dic_admin_access_overview()",
+      "source_md5": "e377ac910af0115040ad8f881cb01bfc",
+      "source_chars": 1432,
+      "source_lines": 35,
+      "security_definer": true,
+      "search_path": "search_path=\"\"",
+      "anon_execute": false,
+      "authenticated_execute": true,
+      "coverage": "DIRECT_COMPLETE_LIVE_SQL_READ_AND_SEMANTIC_REVIEW",
+      "verdict": "ACTIVE admin-only member overview; require_member + auth.uid + is_admin guard; bounded 50-member list; authorized admin PII response, no private rows queried for audit."
+    },
+    {
+      "signature": "private.dic_admin_dashboard_read()",
+      "source_md5": "5fa33bbe05e8408c1c2fe1b82d73a8ee",
+      "source_chars": 2901,
+      "source_lines": 57,
+      "security_definer": true,
+      "search_path": "search_path=\"\"",
+      "anon_execute": false,
+      "authenticated_execute": true,
+      "coverage": "DIRECT_COMPLETE_LIVE_SQL_READ_AND_SEMANTIC_REVIEW",
+      "verdict": "ACTIVE admin-only review dashboard; auth.uid + is_admin guard, counts and bounded 50-item metadata queue; no false backup freshness claim."
+    },
+    {
+      "signature": "private.dic_canonical_roaster_key(value text)",
+      "source_md5": "646cff7cceed7011b1fc3a1b69c4d3f0",
+      "source_chars": 402,
+      "source_lines": 14,
+      "security_definer": true,
+      "search_path": "search_path=\"\"",
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "coverage": "DIRECT_COMPLETE_LIVE_SQL_READ_AND_SEMANTIC_REVIEW",
+      "verdict": "LEGACY ACTIVE normalization maps to private.dic_roaster_name_aliases, not retired directory; no direct client EXECUTE."
+    },
+    {
+      "signature": "private.dic_find_coffee_matches(p jsonb)",
+      "source_md5": "b4b845d29ccb65ac7922109dc89816b6",
+      "source_chars": 6135,
+      "source_lines": 118,
+      "security_definer": true,
+      "search_path": "search_path=\"\"",
+      "anon_execute": false,
+      "authenticated_execute": true,
+      "coverage": "DIRECT_COMPLETE_LIVE_SQL_READ_AND_SEMANTIC_REVIEW",
+      "verdict": "ACTIVE admitted-member gate and bounded input; exact verified/needs confirmation/new pending differentiated, no fuzzy unapproved Verified promotion."
+    },
+    {
+      "signature": "private.dic_roaster_key(value text)",
+      "source_md5": "e553ae6c1cf99c3784f5d14a4f05d355",
+      "source_chars": 388,
+      "source_lines": 13,
+      "security_definer": false,
+      "search_path": "search_path=\"\"",
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "coverage": "DIRECT_COMPLETE_LIVE_SQL_READ_AND_SEMANTIC_REVIEW",
+      "verdict": "LEGACY ACTIVE reusable roaster normalization, not a directory admission gate; private direct client EXECUTE denied."
+    },
+    {
+      "signature": "private.dic_source_key(value text)",
+      "source_md5": "07e0ef286246fdae29b9151018296f79",
+      "source_chars": 981,
+      "source_lines": 27,
+      "security_definer": false,
+      "search_path": "search_path=\"\"",
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "coverage": "DIRECT_COMPLETE_LIVE_SQL_READ_AND_SEMANTIC_REVIEW",
+      "verdict": "ACTIVE normalized URL identity key for comparison only, not a network retrieval or independent trust claim."
+    },
+    {
+      "signature": "public.dic_find_coffee_matches(payload jsonb)",
+      "source_md5": "b3e36084c168cabe7a11a6d176e8951f",
+      "source_chars": 208,
+      "source_lines": 9,
+      "security_definer": false,
+      "search_path": "search_path=\"\"",
+      "anon_execute": false,
+      "authenticated_execute": true,
+      "coverage": "DIRECT_COMPLETE_LIVE_SQL_READ_AND_SEMANTIC_REVIEW",
+      "verdict": "ACTIVE authenticated wrapper delegating to guarded private matching; anon direct execution denied."
+    }
+  ],
+  "dependency": "Complete current public/private function-body search (prokind f/p only) found only private.dic_canonical_roaster_key referencing dic_roaster_name_aliases; no active function-body references to retired directory/archived table names. Search cannot independently prove absence of dynamic SQL, external clients, or privileged console dependencies.",
+  "archive_index_telemetry": [
+    {
+      "name": "coffee_aliases_pkey",
+      "cumulative_idx_scan": 6,
+      "not_evidence_of_current_use_or_safe_deletion": true
+    },
+    {
+      "name": "roaster_alias_archive_pkey",
+      "cumulative_idx_scan": 263,
+      "not_evidence_of_current_use_or_safe_deletion": true
+    },
+    {
+      "name": "roaster_identity_canonical",
+      "cumulative_idx_scan": 2150,
+      "not_evidence_of_current_use_or_safe_deletion": true
+    },
+    {
+      "name": "roaster_identity_pkey",
+      "cumulative_idx_scan": 36,
+      "not_evidence_of_current_use_or_safe_deletion": true
+    },
+    {
+      "name": "roaster_name_aliases_pkey",
+      "cumulative_idx_scan": 318,
+      "not_evidence_of_current_use_or_safe_deletion": true
+    }
+  ],
+  "published_migration_latest": {
+    "version": "20261113195659",
+    "name": "dic_retire_roaster_directory",
+    "source_only_canonical_fix_unpublished": true
+  },
+  "advisories": {
+    "rls_no_policy": 13,
+    "authenticated_definer": 10,
+    "foreign_keys_unindexed": 14,
+    "unused_index": 8,
+    "all_prior_reviewed_not_new_confirmed_exploit": true
+  },
+  "logs": {
+    "window": "default last 24 hours",
+    "aggregate_only": true,
+    "event_counts": {
+      "edge_logs": 2368,
+      "function_logs": 1151,
+      "postgres_logs": 580,
+      "function_edge_logs": 576,
+      "pgbouncer_logs": 72,
+      "supavisor_logs": 17,
+      "auth_logs": 8,
+      "auth_audit_logs": 4
+    },
+    "raw_sensitive_logs_read": false
+  },
+  "source_reuse": {
+    "merged_pr": 3048,
+    "merged_sha": "e50727444db83e76a02a037c7575a995707a585f",
+    "three_unchanged_source_blobs": {
+      "migration": "bbc6983264c9ad05158bf782a8c4b8aaa5651fe7",
+      "regression": "70d6f1943402785e319a8651239c24598a30bf4e",
+      "runner": "a6f6374d5a20f29a057f698401b4e870e77254cc"
+    },
+    "prior_merged_six_applicable_CI_success": true,
+    "hosted_auth_and_downstream_approval": "UNVERIFIED",
+    "release_queue": "TESTING_NOT_READY"
+  },
+  "classification": {
+    "archive": "HISTORICAL_RETAIN",
+    "alias": "LEGACY_ACTIVE_RETAIN",
+    "directory": "RETIRED_SOURCE_AND_PROVIDER",
+    "directory_issue_2389_closed": true,
+    "unverified_console_surfaces": [
+      "hosted Auth dashboard settings",
+      "provider secret values",
+      "unexposed external clients"
+    ],
+    "no_new_confirmed_app_defect": true,
+    "no_justified_deletions": true
+  },
+  "limitations": [
+    "Earlier first function-body caller search incorrectly included aggregates and returned ERROR 42809; corrected by prokind f/p filter and repeated successfully.",
+    "All these objects are directly re-reviewed for current-state drift; prior baseline word-level coverage must NOT be incremented without a truly new object/range.",
+    "No genuine signed-in session, customer data, isolated new test, CI run, production changes, publication or release status claim."
+  ],
+  "next": "Directly review current private.dic_admin_delete_preview and dic_admin_delete_record full changed function definitions plus source parity, then remaining unreviewed current provider objects; monitor next pgss numeric 4961-5040 only if count grows; coordinate #33/#96 downstream acceptance.",
+  "status": "BASELINE_IN_PROGRESS_NO_PROVIDER_WRITE"
+}
