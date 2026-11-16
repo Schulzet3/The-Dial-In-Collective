@@ -1,3 +1,10 @@
+## November 15, 2026 — #267 V11CT original frozen F215:3663–3722, two source-elevation cases [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=abb038dc453171d965d2309264a712fc18be2119 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- **Owner scope:** development-only literal #267 review. Directly fetched and individually interpreted 60 historical lines against original frozen abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9, blob c3a92e1e2d7045c9a53a903f82f0183fa79dc7cf; pinned and observed live archive whole blobs equal. Per-line mandatory dimensions preserved in [V11CT standalone append-only receipt](../audits/issue267-v2-strict-batches/S2-DISJOINT-F215-3663-3722-20261115-V11CT.json). Prior V11CS stops at 3662, no overlap. First original workflow 1–41 checked against S2-001 individually exact, **zero** duplicated credit; R2/C2 summaries stay provisional.
+- **Findings:** Subliminal Finca La Unica expected 1400 vs 1400m and Terrerito expected 1200 vs 1200m are numeric-equal but explicitly review_required; independent comparison did not run the production parser. Historical SHA256 capture verification flags were **not** independently rehashed. No fresh parser acceptance, current defect, live-code coverage, or 603 oracle change claimed. Preserve #33 ownership and immutable source/history.
+- **Tests:** 60/60 literal source mappings and whole Git blob identity verified, 41/41 first-workflow literals checked, prior range adjacency verified. Exact PR-head/merged-source governance PENDING; Node/browser/SQL/Auth/603 NOT_RUN_DOCS_ONLY; Netlify/provider NOT_APPLICABLE. No production, publication, provider, backup, schedule or alert change. #267 stays OPEN. Next frozen F215:3723, pinned and post-pin live reviews still incomplete.
+
 ## November 15, 2026 — #267 QA15B corrected scoped-journal test-guard regression [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=beee3d99cf23f538ecae300a8e22a4feedfa9bc6 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
