@@ -1,0 +1,436 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R287",
+  "project_ref": "azviqqejypsefzilgonr",
+  "at_utc": "2026-11-16 13:58:52.26145+00",
+  "preflight": {
+    "development_sha": "a4f58a695f284792c57c76220ba92c17c24c44fa",
+    "git_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_sha": "a4f58a695f284792c57c76220ba92c17c24c44fa",
+    "verified": true
+  },
+  "git_refs": {
+    "main": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+  },
+  "provider": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.11.0.003",
+    "stats": {
+      "observed_at": "2026-11-16 13:58:52.26145+00",
+      "postmaster_started": "2026-10-09 11:13:53.653584+00",
+      "visible_pgss": 4761,
+      "dealloc": 5,
+      "stats_reset": "2026-10-09 11:11:31.487298+00"
+    },
+    "initial_numeric_rows_earlier_same_run": 4991,
+    "numeric_count_decline": "NOT YET EXPLAINED; global stats_reset and postmaster start unchanged"
+  },
+  "direct_complete_current_definitions": {
+    "functions": [
+      {
+        "signature": "auth.email()",
+        "md5": "bf3569f4ae1c7e250e74daf51d0311c7",
+        "security_definer": false,
+        "proconfig": null,
+        "anon_execute": true,
+        "auth_execute": true,
+        "service_execute": true,
+        "complete_definition": "CREATE OR REPLACE FUNCTION auth.email()\n RETURNS text\n LANGUAGE sql\n STABLE\nAS $function$\n  select \n  coalesce(\n    nullif(current_setting('request.jwt.claim.email', true), ''),\n    (nullif(current_setting('request.jwt.claims', true), '')::jsonb ->> 'email')\n  )::text\n$function$\n",
+        "source_characters": 280,
+        "source_lines": 12,
+        "source_words": 24,
+        "coverage": "FULL_DIRECT_CURRENT_SOURCE",
+        "semantic_verdict": "JWT request claim email helper, no backing Auth record read; no independent signed-in session test."
+      },
+      {
+        "signature": "auth.jwt()",
+        "md5": "20054548ba2003f61a6bcb472175700b",
+        "security_definer": false,
+        "proconfig": null,
+        "anon_execute": true,
+        "auth_execute": true,
+        "service_execute": true,
+        "complete_definition": "CREATE OR REPLACE FUNCTION auth.jwt()\n RETURNS jsonb\n LANGUAGE sql\n STABLE\nAS $function$\n  select \n    coalesce(\n        nullif(current_setting('request.jwt.claim', true), ''),\n        nullif(current_setting('request.jwt.claims', true), '')\n    )::jsonb\n$function$\n",
+        "source_characters": 265,
+        "source_lines": 12,
+        "source_words": 22,
+        "coverage": "FULL_DIRECT_CURRENT_SOURCE",
+        "semantic_verdict": "JWT claim GUC accessor, not signature verification. Upstream JWT trust remains provider-dependent."
+      },
+      {
+        "signature": "auth.role()",
+        "md5": "8a3e05459e07e0633d43c6fba2a2cdf4",
+        "security_definer": false,
+        "proconfig": null,
+        "anon_execute": true,
+        "auth_execute": true,
+        "service_execute": true,
+        "complete_definition": "CREATE OR REPLACE FUNCTION auth.role()\n RETURNS text\n LANGUAGE sql\n STABLE\nAS $function$\n  select \n  coalesce(\n    nullif(current_setting('request.jwt.claim.role', true), ''),\n    (nullif(current_setting('request.jwt.claims', true), '')::jsonb ->> 'role')\n  )::text\n$function$\n",
+        "source_characters": 277,
+        "source_lines": 12,
+        "source_words": 24,
+        "coverage": "FULL_DIRECT_CURRENT_SOURCE",
+        "semantic_verdict": "JWT role accessor with no privilege escalation in source; #96 owns real-session control."
+      },
+      {
+        "signature": "auth.uid()",
+        "md5": "ea3b41bf29e2ad573067939329aa088e",
+        "security_definer": false,
+        "proconfig": null,
+        "anon_execute": true,
+        "auth_execute": true,
+        "service_execute": true,
+        "complete_definition": "CREATE OR REPLACE FUNCTION auth.uid()\n RETURNS uuid\n LANGUAGE sql\n STABLE\nAS $function$\n  select \n  coalesce(\n    nullif(current_setting('request.jwt.claim.sub', true), ''),\n    (nullif(current_setting('request.jwt.claims', true), '')::jsonb ->> 'sub')\n  )::uuid\n$function$\n",
+        "source_characters": 274,
+        "source_lines": 12,
+        "source_words": 24,
+        "coverage": "FULL_DIRECT_CURRENT_SOURCE",
+        "semantic_verdict": "JWT sub UUID accessor; malformed subject may fail cast, not a proven defect."
+      },
+      {
+        "signature": "realtime.authorize(role_name text, topic_name text, claims text, sub text, headers text, read_extensions text[], write_extensions text[], OUT read_allowed boolean[], OUT write_allowed boolean[])",
+        "md5": "3f406642afec1126e2ddb86b33ff8177",
+        "security_definer": false,
+        "proconfig": null,
+        "anon_execute": true,
+        "auth_execute": true,
+        "service_execute": true,
+        "complete_definition": "CREATE OR REPLACE FUNCTION realtime.authorize(role_name text, topic_name text, claims text, sub text, headers text, read_extensions text[], write_extensions text[], OUT read_allowed boolean[], OUT write_allowed boolean[])\n RETURNS record\n LANGUAGE plpgsql\nAS $function$\ndeclare\n  probe_ids uuid[];\n  probe_inserted_at timestamp := now() at time zone 'utc';\n  visible_ids uuid[];\n  ext text;\n  allowed boolean;\nbegin\n  -- The probe inserts are rolled back, but they still give the transaction an xid, so it ends\n  -- in a commit. Nothing durable was written, so skip waiting on the WAL flush and sync standbys.\n  -- Set outside the block below, whose rollback would undo it.\n  perform set_config('synchronous_commit', 'off', true);\n\n  -- The RAISE at the end of this block rolls back everything in it.\n  begin\n    probe_ids := array(select gen_random_uuid() from unnest(read_extensions));\n\n    insert into realtime.messages (id, topic, extension, inserted_at, updated_at)\n    select p.id, topic_name, p.extension, probe_inserted_at, probe_inserted_at\n    from unnest(probe_ids, read_extensions) as p(id, extension);\n\n    perform set_config('role', role_name, true),\n            set_config('realtime.topic', topic_name, true),\n            set_config('request.jwt.claims', claims, true),\n            set_config('request.jwt.claim.sub', sub, true),\n            set_config('request.jwt.claim.role', role_name, true),\n            set_config('request.headers', headers, true);\n\n    -- One lookup for every probe, by the full primary key.\n    visible_ids := array(\n      select m.id\n      from realtime.messages m\n      where m.inserted_at = probe_inserted_at\n        and m.id = any(probe_ids));\n\n    read_allowed := array(\n      select p.id = any(visible_ids)\n      from unnest(probe_ids) with ordinality as p(id, n)\n      order by p.n);\n\n    write_allowed := '{}';\n\n    foreach ext in array write_extensions loop\n      begin\n        insert into realtime.messages (topic, extension, inserted_at, updated_at)\n        values (topic_name, ext, now() at time zone 'utc', now() at time zone 'utc');\n\n        allowed := true;\n      exception when insufficient_privilege then\n        allowed := false;\n      end;\n\n      write_allowed := write_allowed || allowed;\n    end loop;\n\n    raise sqlstate 'RTA01';\n  exception when sqlstate 'RTA01' then\n    null;\n  end;\nend;\n$function$\n",
+        "source_characters": 2364,
+        "source_lines": 65,
+        "source_words": 263,
+        "coverage": "FULL_DIRECT_CURRENT_SOURCE",
+        "semantic_verdict": "Simulated read/write RLS probes in rollback subtransaction and role-local settings; no probe executed by this audit."
+      },
+      {
+        "signature": "realtime.is_visible_through_filters(columns realtime.wal_column[], filters realtime.user_defined_filter[])",
+        "md5": "5dff3ea0345e185330be6127d0dce0df",
+        "security_definer": false,
+        "proconfig": null,
+        "anon_execute": true,
+        "auth_execute": true,
+        "service_execute": true,
+        "complete_definition": "CREATE OR REPLACE FUNCTION realtime.is_visible_through_filters(columns realtime.wal_column[], filters realtime.user_defined_filter[])\n RETURNS boolean\n LANGUAGE sql\n STABLE\nAS $function$\n    select\n        filters is null\n        or array_length(filters, 1) is null\n        or coalesce(\n            count(col.name) = count(1)\n            and sum(\n                realtime.check_equality_op(\n                    op:=f.op,\n                    type_:=coalesce(col.type_oid::regtype, col.type_name::regtype),\n                    val_1:=col.value #>> '{}',\n                    val_2:=f.value,\n                    negate:=coalesce(f.negate, false)\n                )::int\n            ) filter (where col.name is not null) = count(col.name),\n            false\n        )\n    from\n        unnest(filters) f\n        left join unnest(columns) col\n            on f.column_name = col.name;\n$function$\n",
+        "source_characters": 887,
+        "source_lines": 27,
+        "source_words": 65,
+        "coverage": "FULL_DIRECT_CURRENT_SOURCE",
+        "semantic_verdict": "All filter comparisons required; missing referenced columns fail closed."
+      },
+      {
+        "signature": "realtime.send(payload jsonb, event text, topic text, private boolean)",
+        "md5": "77afe4a67a0330f080cb562cec0898bd",
+        "security_definer": false,
+        "proconfig": null,
+        "anon_execute": true,
+        "auth_execute": true,
+        "service_execute": true,
+        "complete_definition": "CREATE OR REPLACE FUNCTION realtime.send(payload jsonb, event text, topic text, private boolean DEFAULT true)\n RETURNS void\n LANGUAGE plpgsql\nAS $function$\nDECLARE\n  generated_id uuid;\n  final_payload jsonb;\nBEGIN\n  BEGIN\n    generated_id := gen_random_uuid();\n\n    -- Check if payload has an 'id' key, if not, add the generated UUID\n    IF payload ? 'id' THEN\n      final_payload := payload;\n    ELSE\n      final_payload := jsonb_set(payload, '{id}', to_jsonb(generated_id));\n    END IF;\n\n    -- Set the topic configuration\n    EXECUTE format('SET LOCAL realtime.topic TO %L', topic);\n\n    INSERT INTO realtime.messages (id, payload, event, topic, private, extension)\n    VALUES (generated_id, final_payload, event, topic, private, 'broadcast');\n  EXCEPTION\n    WHEN OTHERS THEN\n      RAISE WARNING 'WarnSendingBroadcastMessage: %', SQLERRM;\n  END;\nEND;\n$function$\n",
+        "source_characters": 866,
+        "source_lines": 30,
+        "source_words": 100,
+        "coverage": "FULL_DIRECT_CURRENT_SOURCE",
+        "semantic_verdict": "Caller-privilege broadcast insert; exceptions downgraded to warning, vendor-controlled observation not project defect proof."
+      },
+      {
+        "signature": "realtime.topic()",
+        "md5": "cd1d746eed2ae8a6e309899adfe95988",
+        "security_definer": false,
+        "proconfig": null,
+        "anon_execute": true,
+        "auth_execute": true,
+        "service_execute": true,
+        "complete_definition": "CREATE OR REPLACE FUNCTION realtime.topic()\n RETURNS text\n LANGUAGE sql\n STABLE\nAS $function$\nselect nullif(current_setting('realtime.topic', true), '')::text;\n$function$\n",
+        "source_characters": 171,
+        "source_lines": 8,
+        "source_words": 17,
+        "coverage": "FULL_DIRECT_CURRENT_SOURCE",
+        "semantic_verdict": "Reads session-local topic claim only."
+      },
+      {
+        "signature": "storage.allow_any_operation(expected_operations text[])",
+        "md5": "ccefb34283c346cc88e224d075bd5312",
+        "security_definer": false,
+        "proconfig": null,
+        "anon_execute": true,
+        "auth_execute": true,
+        "service_execute": true,
+        "complete_definition": "CREATE OR REPLACE FUNCTION storage.allow_any_operation(expected_operations text[])\n RETURNS boolean\n LANGUAGE sql\n STABLE\nAS $function$\n  WITH current_operation AS (\n    SELECT storage.operation() AS raw_operation\n  ),\n  normalized AS (\n    SELECT CASE\n      WHEN raw_operation LIKE 'storage.%' THEN substr(raw_operation, 9)\n      ELSE raw_operation\n    END AS current_operation\n    FROM current_operation\n  )\n  SELECT EXISTS (\n    SELECT 1\n    FROM normalized n\n    CROSS JOIN LATERAL unnest(expected_operations) AS expected_operation\n    WHERE expected_operation IS NOT NULL\n      AND expected_operation <> ''\n      AND n.current_operation = CASE\n        WHEN expected_operation LIKE 'storage.%' THEN substr(expected_operation, 9)\n        ELSE expected_operation\n      END\n  );\n$function$\n",
+        "source_characters": 791,
+        "source_lines": 28,
+        "source_words": 81,
+        "coverage": "FULL_DIRECT_CURRENT_SOURCE",
+        "semantic_verdict": "Prefix-normalized allowlist operation comparison; empty/null items excluded."
+      },
+      {
+        "signature": "storage.allow_only_operation(expected_operation text)",
+        "md5": "e2f7d55adc027df69ec4b42c6c08f50f",
+        "security_definer": false,
+        "proconfig": null,
+        "anon_execute": true,
+        "auth_execute": true,
+        "service_execute": true,
+        "complete_definition": "CREATE OR REPLACE FUNCTION storage.allow_only_operation(expected_operation text)\n RETURNS boolean\n LANGUAGE sql\n STABLE\nAS $function$\n  WITH current_operation AS (\n    SELECT storage.operation() AS raw_operation\n  ),\n  normalized AS (\n    SELECT\n      CASE\n        WHEN raw_operation LIKE 'storage.%' THEN substr(raw_operation, 9)\n        ELSE raw_operation\n      END AS current_operation,\n      CASE\n        WHEN expected_operation LIKE 'storage.%' THEN substr(expected_operation, 9)\n        ELSE expected_operation\n      END AS requested_operation\n    FROM current_operation\n  )\n  SELECT CASE\n    WHEN requested_operation IS NULL OR requested_operation = '' THEN FALSE\n    ELSE COALESCE(current_operation = requested_operation, FALSE)\n  END\n  FROM normalized;\n$function$\n",
+        "source_characters": 773,
+        "source_lines": 27,
+        "source_words": 76,
+        "coverage": "FULL_DIRECT_CURRENT_SOURCE",
+        "semantic_verdict": "Prefix-normalized exact operation comparator, null/empty expected operation denies."
+      },
+      {
+        "signature": "storage.can_insert_object(bucketid text, name text, owner uuid, metadata jsonb)",
+        "md5": "73733c9319875273d5937b05d68a7930",
+        "security_definer": false,
+        "proconfig": null,
+        "anon_execute": true,
+        "auth_execute": true,
+        "service_execute": true,
+        "complete_definition": "CREATE OR REPLACE FUNCTION storage.can_insert_object(bucketid text, name text, owner uuid, metadata jsonb)\n RETURNS void\n LANGUAGE plpgsql\nAS $function$\nBEGIN\n  INSERT INTO \"storage\".\"objects\" (\"bucket_id\", \"name\", \"owner\", \"metadata\") VALUES (bucketid, name, owner, metadata);\n  -- hack to rollback the successful insert\n  RAISE sqlstate 'PT200' using\n  message = 'ROLLBACK',\n  detail = 'rollback successful insert';\nEND\n$function$\n",
+        "source_characters": 433,
+        "source_lines": 13,
+        "source_words": 52,
+        "coverage": "FULL_DIRECT_CURRENT_SOURCE",
+        "semantic_verdict": "Probe helper attempts an INSERT then deliberately raises PT200; NEVER execute on live project."
+      },
+      {
+        "signature": "storage.protect_active_lifecycle_states()",
+        "md5": "fce9d03398ec222c77feec887c25c384",
+        "security_definer": true,
+        "proconfig": "{search_path=pg_catalog}",
+        "anon_execute": false,
+        "auth_execute": false,
+        "service_execute": false,
+        "complete_definition": "CREATE OR REPLACE FUNCTION storage.protect_active_lifecycle_states()\n RETURNS trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO 'pg_catalog'\nAS $function$\nBEGIN\n    IF EXISTS (\n        SELECT 1 FROM storage.bucket_lifecycle_states\n        WHERE bucket_id = OLD.id\n          AND NOT (\n              continuation IS NULL\n              OR (continuation @> '{\"continuationVersion\": 1}' AND continuation #> '{batch,inFlight}' IS NULL)\n          )\n    ) THEN\n        RAISE EXCEPTION 'update or delete on table \"buckets\" violates foreign key constraint \"bucket_lifecycle_states_bucket_id_fkey\" on table \"bucket_lifecycle_states\"'\n            USING ERRCODE = 'foreign_key_violation',\n                  DETAIL = format('Key (id)=(%s) is still referenced from table \"bucket_lifecycle_states\".', OLD.id),\n                  SCHEMA = 'storage',\n                  TABLE = 'bucket_lifecycle_states',\n                  CONSTRAINT = 'bucket_lifecycle_states_bucket_id_fkey';\n    END IF;\n    RETURN OLD;\nEND;\n$function$\n",
+        "source_characters": 1016,
+        "source_lines": 26,
+        "source_words": 95,
+        "coverage": "FULL_DIRECT_CURRENT_SOURCE",
+        "semantic_verdict": "Trigger SECDEF rejects lifecycle-active bucket deletion and uses restricted search_path."
+      },
+      {
+        "signature": "storage.protect_bucket_control_columns()",
+        "md5": "7c31ae406e2f6281ead4009fff69fc68",
+        "security_definer": false,
+        "proconfig": "{search_path=pg_catalog}",
+        "anon_execute": true,
+        "auth_execute": true,
+        "service_execute": true,
+        "complete_definition": "CREATE OR REPLACE FUNCTION storage.protect_bucket_control_columns()\n RETURNS trigger\n LANGUAGE plpgsql\n SET search_path TO 'pg_catalog'\nAS $function$\nDECLARE\n  configuration_changed boolean;\nBEGIN\n  IF TG_OP = 'INSERT' THEN\n    IF NEW.lifecycle_configuration IS NOT NULL\n       OR NEW.lifecycle_configuration_generation IS NOT NULL THEN\n      IF NOT pg_has_role(current_user, TG_ARGV[0], 'MEMBER') THEN\n        RAISE EXCEPTION 'only members of the configured storage service role may insert lifecycle policy state'\n          USING ERRCODE = '42501',\n                HINT = format(\n                  'Insert with both lifecycle columns NULL and configure lifecycle through the Storage API afterward, or insert as a member of %I.',\n                  TG_ARGV[0]\n                );\n      END IF;\n    END IF;\n\n    RETURN NEW;\n  END IF;\n\n  configuration_changed =\n    OLD.lifecycle_configuration IS DISTINCT FROM NEW.lifecycle_configuration\n    OR OLD.lifecycle_configuration_generation IS DISTINCT FROM NEW.lifecycle_configuration_generation;\n\n  IF NOT configuration_changed THEN\n    RETURN NEW;\n  END IF;\n\n  IF NEW.type IS DISTINCT FROM 'STANDARD' THEN\n    RAISE EXCEPTION 'bucket versioning and lifecycle controls require a Standard bucket'\n      USING ERRCODE = '0A000';\n  END IF;\n\n  IF NEW.lifecycle_configuration IS NULL\n     AND NEW.lifecycle_configuration_generation IS NULL THEN\n    RETURN NEW;\n  END IF;\n\n  IF NEW.lifecycle_configuration IS NULL\n     OR NEW.lifecycle_configuration_generation IS NULL\n     OR OLD.lifecycle_configuration IS NOT DISTINCT FROM NEW.lifecycle_configuration\n     OR OLD.lifecycle_configuration_generation IS NOT DISTINCT FROM NEW.lifecycle_configuration_generation THEN\n    RAISE EXCEPTION 'a changed lifecycle policy requires a new non-null generation'\n      USING ERRCODE = '22023';\n  END IF;\n\n  RETURN NEW;\nEND;\n$function$\n",
+        "source_characters": 1858,
+        "source_lines": 54,
+        "source_words": 196,
+        "coverage": "FULL_DIRECT_CURRENT_SOURCE",
+        "semantic_verdict": "Validates bucket lifecycle generation controls on write, plus configured-role check on nonnull lifecycle INSERT."
+      },
+      {
+        "signature": "storage.protect_delete()",
+        "md5": "4371ae544fb1ef704f9c5d42265ac324",
+        "security_definer": false,
+        "proconfig": null,
+        "anon_execute": true,
+        "auth_execute": true,
+        "service_execute": true,
+        "complete_definition": "CREATE OR REPLACE FUNCTION storage.protect_delete()\n RETURNS trigger\n LANGUAGE plpgsql\nAS $function$\nBEGIN\n    -- Check if storage.allow_delete_query is set to 'true'\n    IF COALESCE(current_setting('storage.allow_delete_query', true), 'false') != 'true' THEN\n        RAISE EXCEPTION 'Direct deletion from storage tables is not allowed. Use the Storage API instead.'\n            USING HINT = 'This prevents accidental data loss from orphaned objects.',\n                  ERRCODE = '42501';\n    END IF;\n    RETURN NULL;\nEND;\n$function$\n",
+        "source_characters": 535,
+        "source_lines": 15,
+        "source_words": 62,
+        "coverage": "FULL_DIRECT_CURRENT_SOURCE",
+        "semantic_verdict": "Storage-managed direct DELETE protection wired to buckets/objects statement triggers."
+      },
+      {
+        "signature": "storage.reconcile_lifecycle_state(target_bucket_id text, policy_changed boolean)",
+        "md5": "271a57ecfb24df02a5d9100c2a801323",
+        "security_definer": true,
+        "proconfig": "{search_path=pg_catalog}",
+        "anon_execute": false,
+        "auth_execute": false,
+        "service_execute": true,
+        "complete_definition": "CREATE OR REPLACE FUNCTION storage.reconcile_lifecycle_state(target_bucket_id text, policy_changed boolean)\n RETURNS void\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO 'pg_catalog'\nAS $function$\nDECLARE\n    bucket storage.buckets%ROWTYPE;\n    active boolean;\n    idle boolean;\n    state_generation uuid;\nBEGIN\n    SELECT * INTO bucket FROM storage.buckets WHERE id = target_bucket_id FOR NO KEY UPDATE;\n    IF NOT FOUND THEN\n        RETURN;\n    END IF;\n\n    SELECT continuation IS NULL OR (\n               continuation @> '{\"continuationVersion\": 1}'\n               AND continuation #> '{batch,inFlight}' IS NULL\n           ), generation\n    INTO idle, state_generation\n    FROM storage.bucket_lifecycle_states\n    WHERE bucket_id = target_bucket_id\n    FOR UPDATE;\n\n    IF bucket.lifecycle_configuration IS NULL THEN\n        DELETE FROM storage.bucket_lifecycle_states\n        WHERE bucket_id = target_bucket_id\n          AND idle IS TRUE;\n\n        UPDATE storage.bucket_lifecycle_states\n        SET next_run_at = clock_timestamp(), updated_at = clock_timestamp()\n        WHERE bucket_id = target_bucket_id\n          AND idle IS NOT TRUE;\n        RETURN;\n    END IF;\n\n    active := bucket.versioning_status <> 'DISABLED'\n        AND bucket.lifecycle_configuration @> '{\"rules\":[{\"status\":\"Enabled\"}]}'::jsonb;\n\n    -- The state row records the generation it was reconciled with so callers need not detect\n    -- policy changes. Rows without a recorded generation keep their work.\n    policy_changed := policy_changed OR (\n        state_generation IS NOT NULL AND state_generation <> bucket.lifecycle_configuration_generation\n    );\n\n    INSERT INTO storage.bucket_lifecycle_states AS state (bucket_id, generation, next_run_at)\n    VALUES (bucket.id, bucket.lifecycle_configuration_generation, CASE WHEN active THEN clock_timestamp() END)\n    ON CONFLICT (bucket_id) DO UPDATE\n    SET next_run_at = CASE\n            WHEN policy_changed THEN\n                CASE WHEN active OR idle IS NOT TRUE THEN clock_timestamp() END\n            ELSE EXCLUDED.next_run_at\n        END,\n        generation = EXCLUDED.generation,\n        claim_id = CASE WHEN policy_changed AND idle IS TRUE\n                        THEN NULL ELSE state.claim_id END,\n        claim_until = CASE WHEN policy_changed AND idle IS TRUE\n                           THEN NULL ELSE state.claim_until END,\n        continuation = CASE WHEN policy_changed AND idle IS TRUE\n                            THEN NULL ELSE state.continuation END,\n        failure_count = CASE WHEN policy_changed AND idle IS TRUE\n                             THEN 0 ELSE state.failure_count END,\n        last_error = CASE WHEN policy_changed AND idle IS TRUE\n                          THEN NULL ELSE state.last_error END,\n        updated_at = clock_timestamp()\n    WHERE policy_changed OR (state.next_run_at IS NULL AND EXCLUDED.next_run_at IS NOT NULL);\nEND;\n$function$\n",
+        "source_characters": 2912,
+        "source_lines": 71,
+        "source_words": 299,
+        "coverage": "FULL_DIRECT_CURRENT_SOURCE",
+        "semantic_verdict": "Service-role-only SECDEF reconciles lifecycle generation/claims; provider DML not invoked."
+      },
+      {
+        "signature": "vault.create_secret(new_secret text, new_name text, new_description text, new_key_id uuid)",
+        "md5": "3cd3211da1236685869a58787071c534",
+        "security_definer": true,
+        "proconfig": "{\"search_path=\\\"\\\"\"}",
+        "anon_execute": false,
+        "auth_execute": false,
+        "service_execute": true,
+        "complete_definition": "CREATE OR REPLACE FUNCTION vault.create_secret(new_secret text, new_name text DEFAULT NULL::text, new_description text DEFAULT ''::text, new_key_id uuid DEFAULT NULL::uuid)\n RETURNS uuid\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nDECLARE\n  rec record;\nBEGIN\n  INSERT INTO vault.secrets (secret, name, description)\n  VALUES (\n    new_secret,\n    new_name,\n    new_description\n  )\n  RETURNING * INTO rec;\n  UPDATE vault.secrets s\n  SET secret = encode(vault._crypto_aead_det_encrypt(\n    message := convert_to(rec.secret, 'utf8'),\n    additional := convert_to(s.id::text, 'utf8'),\n    key_id := 0,\n    context := 'pgsodium'::bytea,\n    nonce := rec.nonce\n  ), 'base64')\n  WHERE id = rec.id;\n  RETURN rec.id;\nEND\n$function$\n",
+        "source_characters": 751,
+        "source_lines": 29,
+        "source_words": 84,
+        "coverage": "FULL_DIRECT_CURRENT_SOURCE",
+        "semantic_verdict": "Service-only SECDEF encrypts Vault secret; no secret values retrieved."
+      },
+      {
+        "signature": "vault.update_secret(secret_id uuid, new_secret text, new_name text, new_description text, new_key_id uuid)",
+        "md5": "dab0a8cc49e4b57f27bfa5dca12a705c",
+        "security_definer": true,
+        "proconfig": "{\"search_path=\\\"\\\"\"}",
+        "anon_execute": false,
+        "auth_execute": false,
+        "service_execute": true,
+        "complete_definition": "CREATE OR REPLACE FUNCTION vault.update_secret(secret_id uuid, new_secret text DEFAULT NULL::text, new_name text DEFAULT NULL::text, new_description text DEFAULT NULL::text, new_key_id uuid DEFAULT NULL::uuid)\n RETURNS void\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nDECLARE\n  decrypted_secret text := (SELECT decrypted_secret FROM vault.decrypted_secrets WHERE id = secret_id);\nBEGIN\n  UPDATE vault.secrets s\n  SET\n    secret = CASE WHEN new_secret IS NULL THEN s.secret\n                  ELSE encode(vault._crypto_aead_det_encrypt(\n                    message := convert_to(new_secret, 'utf8'),\n                    additional := convert_to(s.id::text, 'utf8'),\n                    key_id := 0,\n                    context := 'pgsodium'::bytea,\n                    nonce := s.nonce\n                  ), 'base64') END,\n    name = coalesce(new_name, s.name),\n    description = coalesce(new_description, s.description),\n    updated_at = now()\n  WHERE s.id = secret_id;\nEND\n$function$\n",
+        "source_characters": 1012,
+        "source_lines": 26,
+        "source_words": 99,
+        "coverage": "FULL_DIRECT_CURRENT_SOURCE",
+        "semantic_verdict": "Service-only SECDEF encrypts Vault replacement; DECLARE queries decrypted_secret into unused variable, vendor-managed minor inefficiency candidate."
+      }
+    ],
+    "source_characters": 15465,
+    "function_count": 17,
+    "table_access_rls": [
+      {
+        "relation": "realtime.messages",
+        "rls_enabled": true,
+        "rls_forced": false,
+        "anon_select": true,
+        "anon_insert": true,
+        "authenticated_select": true,
+        "authenticated_insert": true,
+        "policies": null
+      },
+      {
+        "relation": "storage.bucket_lifecycle_states",
+        "rls_enabled": true,
+        "rls_forced": false,
+        "anon_select": false,
+        "anon_insert": false,
+        "authenticated_select": false,
+        "authenticated_insert": false,
+        "policies": null
+      },
+      {
+        "relation": "storage.buckets",
+        "rls_enabled": true,
+        "rls_forced": false,
+        "anon_select": true,
+        "anon_insert": true,
+        "authenticated_select": true,
+        "authenticated_insert": true,
+        "policies": null
+      },
+      {
+        "relation": "storage.objects",
+        "rls_enabled": true,
+        "rls_forced": false,
+        "anon_select": true,
+        "anon_insert": true,
+        "authenticated_select": true,
+        "authenticated_insert": true,
+        "policies": null
+      }
+    ],
+    "complete_noninternal_triggers": [
+      {
+        "relation": "storage.buckets",
+        "trigger": "enforce_bucket_name_length_trigger",
+        "complete_definition": "CREATE TRIGGER enforce_bucket_name_length_trigger BEFORE INSERT OR UPDATE OF name ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.enforce_bucket_name_length()",
+        "function_signature": "storage.enforce_bucket_name_length()"
+      },
+      {
+        "relation": "storage.buckets",
+        "trigger": "enforce_versioning_status_transition",
+        "complete_definition": "CREATE TRIGGER enforce_versioning_status_transition BEFORE UPDATE OF versioning_status ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.enforce_versioning_status_transition()",
+        "function_signature": "storage.enforce_versioning_status_transition()"
+      },
+      {
+        "relation": "storage.buckets",
+        "trigger": "protect_active_lifecycle_states",
+        "complete_definition": "CREATE TRIGGER protect_active_lifecycle_states BEFORE DELETE ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.protect_active_lifecycle_states()",
+        "function_signature": "storage.protect_active_lifecycle_states()"
+      },
+      {
+        "relation": "storage.buckets",
+        "trigger": "protect_bucket_control_insert",
+        "complete_definition": "CREATE TRIGGER protect_bucket_control_insert BEFORE INSERT ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.protect_bucket_control_columns('service_role')",
+        "function_signature": "storage.protect_bucket_control_columns()"
+      },
+      {
+        "relation": "storage.buckets",
+        "trigger": "protect_bucket_control_update",
+        "complete_definition": "CREATE TRIGGER protect_bucket_control_update BEFORE UPDATE OF lifecycle_configuration, lifecycle_configuration_generation ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.protect_bucket_control_columns()",
+        "function_signature": "storage.protect_bucket_control_columns()"
+      },
+      {
+        "relation": "storage.buckets",
+        "trigger": "protect_bucket_control_update_role",
+        "complete_definition": "CREATE TRIGGER protect_bucket_control_update_role AFTER UPDATE OF lifecycle_configuration, lifecycle_configuration_generation ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.enforce_bucket_lifecycle_service_role('service_role')",
+        "function_signature": "storage.enforce_bucket_lifecycle_service_role()"
+      },
+      {
+        "relation": "storage.buckets",
+        "trigger": "protect_buckets_delete",
+        "complete_definition": "CREATE TRIGGER protect_buckets_delete BEFORE DELETE ON storage.buckets FOR EACH STATEMENT EXECUTE FUNCTION storage.protect_delete()",
+        "function_signature": "storage.protect_delete()"
+      },
+      {
+        "relation": "storage.buckets",
+        "trigger": "wake_lifecycle_on_policy_write",
+        "complete_definition": "CREATE TRIGGER wake_lifecycle_on_policy_write AFTER INSERT OR UPDATE OF lifecycle_configuration_generation ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.wake_lifecycle_state()",
+        "function_signature": "storage.wake_lifecycle_state()"
+      },
+      {
+        "relation": "storage.buckets",
+        "trigger": "wake_lifecycle_on_versioning_enable",
+        "complete_definition": "CREATE TRIGGER wake_lifecycle_on_versioning_enable AFTER UPDATE OF versioning_status ON storage.buckets FOR EACH ROW WHEN (new.lifecycle_configuration IS NOT NULL) EXECUTE FUNCTION storage.wake_lifecycle_state()",
+        "function_signature": "storage.wake_lifecycle_state()"
+      },
+      {
+        "relation": "storage.objects",
+        "trigger": "protect_objects_delete",
+        "complete_definition": "CREATE TRIGGER protect_objects_delete BEFORE DELETE ON storage.objects FOR EACH STATEMENT EXECUTE FUNCTION storage.protect_delete()",
+        "function_signature": "storage.protect_delete()"
+      },
+      {
+        "relation": "storage.objects",
+        "trigger": "update_objects_updated_at",
+        "complete_definition": "CREATE TRIGGER update_objects_updated_at BEFORE UPDATE ON storage.objects FOR EACH ROW EXECUTE FUNCTION storage.update_updated_at_column()",
+        "function_signature": "storage.update_updated_at_column()"
+      }
+    ],
+    "relation_count": 4,
+    "trigger_count": 11
+  },
+  "numeric_pgss": {
+    "requested_range": [
+      4961,
+      5040
+    ],
+    "observed_rows": [],
+    "observed_count": 0,
+    "previous_confirmed_cumulative_distinct": 4604,
+    "additional_distinct_vs_prior": "UNVERIFIED",
+    "cursor_status": "UNAVAILABLE_AT_CURRENT_RANKING",
+    "next_rank": 4961,
+    "statement_text_semantic_review": false
+  },
+  "findings": {
+    "new_confirmed_project_defect": 0,
+    "justified_removals": 0,
+    "platform_vendor_candidate": "vault.update_secret unused local decrypted_secret SELECT on function entry; service-only/vendor managed, no production change",
+    "auth_and_signed_in": "UNVERIFIED_ISSUE_96",
+    "source_comparison": "No new migration or published runtime source byte equality claimed",
+    "case_key_fix": "DEVELOPMENT_TESTING_ONLY",
+    "canonical_name": "REQUIRES_ISOLATED_POSTGRES_REGRESSION",
+    "legacy_roaster_aliases": "LEGACY_ACTIVE",
+    "historical_archives": "PRESERVE",
+    "baseline": "IN_PROGRESS",
+    "next": "Continue full platform definition/source parity, isolate canonical_name; retry numeric ranks 4961-5040 only when available, since current lifetime rows have fallen below this cursor"
+  },
+  "boundaries": {
+    "production_writes": 0,
+    "application_code_test_ci_writes": 0,
+    "sql_function_executions": 0,
+    "member_data_reads": 0,
+    "raw_sensitive_logs": 0
+  }
+}
