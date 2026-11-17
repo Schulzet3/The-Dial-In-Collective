@@ -38,3 +38,16 @@ test('no #503 official source does not count as a semantic PASS',()=>{
  assert.deepEqual(requiredFocusedSourceFailures([503],[{number:503,status:'UNAVAILABLE',parser_ok:false}])
   .map(x=>x.reason),['required_official_source_not_fetched']);
 });
+
+// R262: actual current #503 seller printed a marketing recommendation
+// after a genuine tasting paragraph; canonical sensory must not contain it.
+test('#503 direct selected tasting prose excludes a separate generic sales invitation',()=>{
+ const sensory='Very sweet with juicy fruit acidity and a creamy mouthfeel; lots of fruity and floral flavors with blackberry, vanilla bean creaminess, and botanical notes.';
+ const pitch=' If you love Ethiopian or African coffee in general, this is a great coffee for you.';
+ const p=parse(desc.replace(sensory,sensory+pitch));
+ assert.equal(p.ok,true,JSON.stringify(p));
+ assert.match(p.fields.tasting_notes||'',/blackberry.*vanilla bean.*botanical notes/i);
+ assert.doesNotMatch(p.fields.tasting_notes||'',/If you love.*coffee in general/i);
+ assert.ok(coffeeUrlPreviewMarkup(p).includes('coffee-url-preview'));
+ assert.ok(coffeeSourceReviewSnapshot({...p,source_url:entry.url}));
+});
