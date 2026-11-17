@@ -10,10 +10,10 @@
     {
       "id": "DIC-Q-455-r319-original-yield-next-recipe-precision",
       "issue": 455,
-      "pr": null,
+      "pr": 3122,
       "title": "Preserve recorded non-tenth yield when Next Recipe recommends only grind or preparation changes",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "e92b15de8c0032eb528b8df801a10e5025aed4e6",
       "scope_paths": [
         "site/lib/engine.js",
         "site/lib/ui.js"
@@ -21,13 +21,22 @@
       "owner_source": "Issue #455 owner Option B SAFE Locked-compatible; DIC_PREFLIGHT_VERIFIED development_sha=67c71584781538911e8667690bb7027ee302f5ff preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "tests": [
         "Pre-change immutable source: nextAdviceRaw retains measured yield 36.35 on grind-only feedback, but recommendation() rounds it to 36.4 and RecipeGrid shows 36.4; Next Shot original-yield arrow also rounds before value. Synthetic regression authored, not yet executed.",
-        "Five focused Node22 synthetic positive/negative cases authored: grind-only exact measured 36.35, genuine new yield tenth with before-arrow, diagnostic-only exact 36.35, ordinary tenth inputs, min/max measured original and bounded interval. Node22/UX/mobile/offline/CI NOT YET RUN, not PASS."
+        "Five focused Node22 synthetic positive/negative cases authored: grind-only exact measured 36.35, genuine new yield tenth with before-arrow, diagnostic-only exact 36.35, ordinary tenth inputs, min/max measured original and bounded interval. Node22/UX/mobile/offline/CI NOT YET RUN, not PASS.",
+        "Exact-source PR #3122 head 66d1b47326297d1047cbb255f3c5bb194c64add8 Node22/lint workflow 44025664376 completed SUCCESS: 5333 PASS/0 FAIL/6 intentional SKIP including all five new R319 synthetic 4765-4769 PASS. Head cloud/mobile/browser/offline 44025664380, isolated SQL 44025664418, security 44025664252, approval 44025664233 all SUCCESS. Frozen603 44025664289 SKIPPED, NOT PASS.",
+        "Nonforce [skip netlify] one-parent PR #3122 squash merged to development e92b15de8c0032eb528b8df801a10e5025aed4e6. All five exact source/test/queue/journal Git blobs match passing PR head, no omitted or deleted paths. Exact merged Node22/lint 44026133302 SUCCESS 5333 PASS/0 FAIL/6 SKIP, cloud/mobile/browser/offline 44026133308 SUCCESS, approval/continuity 44026133253 SUCCESS. Isolated merged SQL/security not retriggered and NOT separately claimed PASS; reuse unchanged PR-head results."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact source-bound Node22/application/cloud/mobile/browser/SQL/security/approval and nonforce integration not yet verified"
+      "ci_runs": [
+        44025664233,
+        44025664252,
+        44025664376,
+        44025664380,
+        44025664418,
+        44026133253,
+        44026133308,
+        44026133302
       ],
-      "notes": "TESTING only; no new numeric policy, owner consent, community/telemetry, member-data, Live SQL/Auth/Edge, Netlify or release permission. Existing frozen603 and #267 exhaustive tasks untouched; original recorded notes and all five ratings preserved.",
+      "blockers": [],
+      "notes": "SAFE one-change measured yield integrity development-only READY after exact PR head and merged-source verified Node22 5333/0/6, five R319 cases, cloud/mobile/browser/offline, isolated SQL/security and approval. Frozen603 SKIPPED, no real member data, new science policy, measured espresso benefit or deploy.",
       "production_deployed": false
     },
     {

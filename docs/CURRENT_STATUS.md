@@ -1,3 +1,15 @@
+## November 17, 2026 UTC — Issue #455 R319 exact unchanged measured yield in Next Recipe (SAFE DEV READY, NOT DEPLOYED) [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=e92b15de8c0032eb528b8df801a10e5025aed4e6 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+[PR #3122](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3122) source head `66d1b47326297d1047cbb255f3c5bb194c64add8` nonforce squash merged with [skip netlify] at `e92b15de8c0032eb528b8df801a10e5025aed4e6` after independently matching all FIVE engine, UI, regression-test, queue and SAME-COMMIT scoped journal Git blobs. Fixed grind-only and preparation-only Next Recipe rounding of the *unchanged recorded* 36.35g yield to 36.4g and original before-yield arrow precision. Genuine NEW yield targets still round to tenth, and displayed yield interval stays within existing 5–200g input bounds. Five taste inputs, notes, private history, original calibration, recipe families, independent Turbo/Fast-Flow and feed modes and Locked one-adjustable-setting rule preserved; no member occurrence or taste improvement claimed.
+
+**Exact-source checks:** PR-head [Node22/lint 44025664376](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44025664376) and merged [Node22/lint 44026133302](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44026133302) each 5,333 PASS /0 FAIL /6 intentional SKIP, including five R319 synthetic 4765–4769 PASS. PR-head [cloud/browser/mobile/offline 44025664380](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44025664380), [isolated SQL 44025664418](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44025664418), [security 44025664252](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44025664252), [approval 44025664233](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44025664233) SUCCESS; exact merged [cloud/browser 44026133308](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44026133308) and [approval/governance 44026133253](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44026133253) SUCCESS. Original frozen603 SKIPPED, NOT PASS; merged SQL/security not separately rerun. Source ledger 183 /549 checks /247 proposals; queue `DIC-Q-455-r319-original-yield-next-recipe-precision` READY **development only**, not published. **Docs-only reconciliation PR and its CI remain subject to independent verification**, no CI presumed for this documentation text.
+
+No production/release/main moves, Netlify, live SQL/Auth/Edge, member/provider writes or experiment, numeric science or Locked policy changes, purchase, backup/schedule/notification change, force Git, visibility changes or #267 literal-line credit. Original October29 ZIP and separate S019 PDF source bytes still UNVERIFIED; #455 remains OPEN.
+
+---
+
 ## November 17, 2026 UTC — Issue #455 R318 original measured grind continuity into Next Recipe (SAFE DEV READY / NOT DEPLOYED) [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=a91bd34d371d1a564c4212c30022f9e29d32ec26 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
