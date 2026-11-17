@@ -4512,6 +4512,17 @@
       "first_time_word_credit": 0,
       "production_writes": 0,
       "baseline": "IN_PROGRESS"
+    },
+    {
+      "run": "R311 Nov17 2026",
+      "preflight_sha": "4c3fead238a57e338f45055b123cb66786afaaca",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r311-source-retry-rollover-20261117.json",
+      "new_latent_defect": "15min worker retry bypass at 24h window reset",
+      "source_only_fix": true,
+      "new_unique_word_credit": 0,
+      "production_writes": 0,
+      "next": "Exact source-bound CI then nonforce merge; isolate candidate and #96 hosted Auth before READY."
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -22879,5 +22890,18 @@
     "source_test": "supabase/tests/admin_coffee_review.sql",
     "status": "TESTING",
     "live_provider_changes": 0
+  },
+  "provider_source_claim_rollover_run311": {
+    "receipt_path": "docs/audits/issue509-r311-source-retry-rollover-20261117.json",
+    "preflight_sha": "4c3fead238a57e338f45055b123cb66786afaaca",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "sql_md5": "68bc86486e485565d4273daf3655e0d3",
+    "sql_chars": 2348,
+    "synthetic_reproduction": true,
+    "source_fix": "supabase/migrations/20261117133000_dic_source_retry_rollover_cooldown.sql",
+    "status": "TESTING_CI_PENDING",
+    "first_time_word_credit": 0,
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS"
   }
 }

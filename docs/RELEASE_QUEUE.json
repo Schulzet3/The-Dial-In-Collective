@@ -15916,6 +15916,29 @@
       "production_deployed": false,
       "pr": 3160,
       "merged_source_sha": null
+    },
+    {
+      "id": "DIC-Q-509-source-retry-rollover-cooldown",
+      "issue": 509,
+      "pr": null,
+      "title": "Preserve 15-minute trusted source retry cooldown across 24-hour budget rollover",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261117133000_dic_source_retry_rollover_cooldown.sql"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
+      "tests": [
+        "Direct live full SQL definition plus ACTIVE v10 Edge consumer; read-only synthetic 24h+1s window and 30s last-attempt predicate proves cooldown bypass.",
+        "Development-only additive SQL plus synthetic rollback-only source_worker_auth_and_admission.sql regression; CI PENDING."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source isolated PostgreSQL17, Node22, privacy/auth boundary and approval checks not yet proven.",
+        "Source-isolated candidate and #96 genuine hosted Auth tests not yet verified. New owner Publish required for production."
+      ],
+      "notes": "No production provider changes, no known member incident, preserve backups, migrations and current business behavior. Owner-action-only alerts remain unchanged.",
+      "production_deployed": false
     }
   ],
   "history": [
@@ -18638,6 +18661,15 @@
       "state": "TESTING",
       "production_deployed": false,
       "evidence": "R310 direct live provider source + read-only synthetic proof; source-only correction and rollback fixture staged, CI pending."
+    },
+    {
+      "date": "2026-11-17",
+      "issue": 509,
+      "item_id": "DIC-Q-509-source-retry-rollover-cooldown",
+      "state": "TESTING",
+      "source_sha": "4c3fead238a57e338f45055b123cb66786afaaca",
+      "production_deployed": false,
+      "evidence": "R311 proof/rollback-only regression staged in same-commit journal; exact-source CI pending."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
