@@ -29,9 +29,10 @@ check(final?.protocol==='https:'&&final?.hostname==='www.mysticmonkcoffee.com'&&
 check(raw?.length>0&&raw?.length===row.html_bytes&&digest(raw)===row.html_sha256,'raw_sha256_bytes');
 check(headings.length===1&&headings[0]==='Thanksgiving Blend'&&f.name==='Thanksgiving Blend','selected_unique_h1');
 check(requiredFocusedSourceFailures([528],[row]).length===0,'selected_identity_add_coffee_source_review');
-check(['cocoa','peach','raisin'].every(x=>notes.includes(x)),'direct_three_tasting_chips');
-check(['cocoa','peach','raisin'].every(x=>visible.toLowerCase().includes(x)),'selected_tasting_direct_html');
-check(!/dark cherry|wild honey|persimmon|gladiola|pink peppercorn/i.test(notes),'no_catalog_or_third_party_flavor_leakage');
+check(['dark chocolate','dark cherry','wild honey'].every(x=>notes.includes(x)),'direct_three_tasting_chips');
+check(['dark chocolate','dark cherry','wild honey'].every(x=>visible.toLowerCase().includes(x)),'selected_tasting_direct_html');
+check(notes.includes('malt'),'selected_current_medium_dark_story_malt');
+check(!/persimmon|gladiola|pink peppercorn|raisin/i.test(notes),'no_stale_index_or_third_party_flavor_leakage');
 check(/medium[\s-]?dark/i.test(visible),'current_selected_medium_dark_narrative');
 check(f.roast_level==='Medium-Dark'||(!f.roast_level&&(row.conflicts||[]).includes('roast_level')),'direct_medium_dark_or_explicit_conflict_review');
 check(!f.decaffeination_method,'no_invented_decaf');
