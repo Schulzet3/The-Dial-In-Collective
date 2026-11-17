@@ -603,6 +603,9 @@ export function recommendation(s,coffeeId,options={}) {
    rec.source=diagnostic?'Your last measured shot (preparation check)':'Adjustment from your latest taste rating';
    rec.diagnosticOnly=diagnostic;
    rec.doseG=a.next?.doseG??last.doseG;
+   // Preserve exact original dose precision only when no new dose is proposed.
+   rec.measuredDoseUnchanged=finite(rec.doseG)&&finite(last.doseG)&&
+    Math.abs(rec.doseG-last.doseG)<=1e-8;
    rec.tempC=a.next?.tempC??last.tempC??null;
    rec.grind={value:a.next?.grindSetting??last.grindSetting,
     source:diagnostic?'Last measured grind; no change suggested':'Next setting to try',proven:false};

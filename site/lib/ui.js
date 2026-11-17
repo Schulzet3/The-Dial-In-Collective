@@ -61,7 +61,7 @@ export function recipeGrid(rec,showTemp=false,unit='F') {
  // Imported/legacy setup units are untrusted. Match the approved F/C physical display boundary.
  const safeUnit=unit==='C'?'C':'F';
  const stat=(label,value,sub,ico)=>`<div class="metric"><div class="metric-label">${icon(ico,15)} ${label}</div><div class="metric-value">${value}</div>${sub?`<div class="metric-sub">${sub}</div>`:''}</div>`;
- return `<div class="recipe-grid">${stat('Dose',`${fmt(rec.doseG)} <span class="unit">g</span>`,'Basket-based','scale')}${stat('Yield',range(rec.yield,'g'),`Center ${rec.source==='Adjustment from your latest taste rating'||rec.diagnosticOnly?fmtMeasuredControl(rec.yield.center):fmt(rec.yield.center)} g \u00b7 1:${fmt(rec.ratio.center,2)}`,'drop')}${stat('Time',range(rec.time,'s'),`Center ${fmt(rec.time.center)} s`,'clock')}${stat('Grind',rec.grind.range?range(rec.grind.range):(rec.source==='Adjustment from your latest taste rating'||rec.diagnosticOnly?fmtMeasuredControl(rec.grind.value):fmt(rec.grind.value)),`${rec.grind.range?`Try ${fmt(rec.grind.value)} · `:''}${e(rec.grind.source)}`,'settings')}${showTemp?stat('Temperature',`${tempDisplay(rec.tempC,safeUnit)}<span class="unit">\u00b0${safeUnit}</span>`,'','thermometer'):''}</div>`;
+ return `<div class="recipe-grid">${stat('Dose',`${rec.measuredDoseUnchanged?fmtMeasuredControl(rec.doseG):fmt(rec.doseG)} <span class="unit">g</span>`,'Basket-based','scale')}${stat('Yield',range(rec.yield,'g'),`Center ${rec.source==='Adjustment from your latest taste rating'||rec.diagnosticOnly?fmtMeasuredControl(rec.yield.center):fmt(rec.yield.center)} g \u00b7 1:${fmt(rec.ratio.center,2)}`,'drop')}${stat('Time',range(rec.time,'s'),`Center ${fmt(rec.time.center)} s`,'clock')}${stat('Grind',rec.grind.range?range(rec.grind.range):(rec.source==='Adjustment from your latest taste rating'||rec.diagnosticOnly?fmtMeasuredControl(rec.grind.value):fmt(rec.grind.value)),`${rec.grind.range?`Try ${fmt(rec.grind.value)} · `:''}${e(rec.grind.source)}`,'settings')}${showTemp?stat('Temperature',`${tempDisplay(rec.tempC,safeUnit)}<span class="unit">\u00b0${safeUnit}</span>`,'','thermometer'):''}</div>`;
 }
 
 // Show before → after only for one measured, controllable adjustment.
@@ -82,7 +82,7 @@ export function nextShotAdjustment(advice,shot,showTemp=false,unit='F'){
  // Imported/legacy unit labels must never misstate a temperature adjustment.
  const safeUnit=unit==='C'?'C':'F';
  const units={grindSetting:'',yieldCenter:'g',tempC:`°${safeUnit}`,doseG:'g'};
- const format=(n,isOriginal=false)=>key==='tempC'?String(tempDisplay(n,safeUnit)):key==='grindSetting'?fmtMeasuredControl(n):key==='yieldCenter'&&isOriginal?fmtMeasuredControl(n):fmt(n);
+ const format=(n,isOriginal=false)=>key==='tempC'?String(tempDisplay(n,safeUnit)):key==='grindSetting'?fmtMeasuredControl(n):(key==='yieldCenter'||key==='doseG')&&isOriginal?fmtMeasuredControl(n):fmt(n);
  const controls=[['doseG','dose'],['grindSetting','grind'],['yieldCenter','yield'],['tempC','temperature']];
  const unchanged=controls.filter(([k])=>k!==key&&(k!=='tempC'||(showTemp&&Number.isFinite(shot.tempC)))).map(([,name])=>name);
  const keep=unchanged.length===3?`${unchanged[0]}, ${unchanged[1]}, and ${unchanged[2]}`:

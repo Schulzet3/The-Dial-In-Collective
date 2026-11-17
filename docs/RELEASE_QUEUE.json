@@ -15744,6 +15744,29 @@
       "blockers": [],
       "notes": "DEV-ONLY READY after exact final PR-head and merged Git blobs, Node22 5324/0/6 and successful applicable cloud/mobile/offline/browser/security/SQL/approval. Initial failed Node and transient browser rerun are preserved in tests/journal; no production deployment, new taste policy or data change.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-r322-next-recipe-unchanged-measured-dose-precision",
+      "issue": 455,
+      "pr": null,
+      "title": "Preserve exact unchanged recorded shot dose precision in Next Recipe",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js",
+        "site/lib/ui.js"
+      ],
+      "owner_source": "Issue #455 Option B SAFE; DIC_PREFLIGHT_VERIFIED development_sha=992262e1ae2f8787b51d5040b2b31436a9803d8d preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Source inspected: Next Recipe rec.doseG uses an unchanged original 18.25 g but one-decimal RecipeGrid fmt renders 18.3 g, implying another control change; not a real member incident.",
+        "Five focused synthetic Node22 regressions authored; no execution, hosted CI or empirical cup-quality evidence yet."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact PR-head and merged-source applicable CI, source blob verification and docs reconciliation pending"
+      ],
+      "notes": "Development-only TESTING. Preserve all five tastes, original shots/notes/history, style/feed/setup and Locked numeric rules. Do not publish or access member/provider data.",
+      "production_deployed": false
     }
   ],
   "history": [
