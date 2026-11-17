@@ -1,0 +1,1104 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 315,
+  "observed_at_utc": "2026-11-17",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "b97af5b8842c686612cbd5fb668967b6bcd558fa",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "git_content_hash_verified": true,
+    "prewrite_revalidated_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d"
+  },
+  "git_branches": {
+    "main": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release_production": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5",
+    "prewrite_development_head": "79fef81c7d7bce7a8030bb26d88a6702ab0cfbd9"
+  },
+  "semantic_scope": {
+    "non_app_provider_functions": 54,
+    "current_complete_visible_definition_characters": 139636,
+    "full_sql_and_plpgsql_bodies": 51,
+    "c_external_binary_declarations_only": 3,
+    "provider_views_full_sql": 3,
+    "provider_custom_triggers_full_sql": 12,
+    "functions_by_schema": {
+      "auth": 4,
+      "graphql_public": 1,
+      "pgbouncer": 1,
+      "realtime": 19,
+      "storage": 24,
+      "vault": 5
+    },
+    "first_time_baseline_credit": "NOT_RECONCILED_AGAINST_ALL_HISTORICAL_RECEIPTS; NO_DUPLICATE_CREDIT_CLAIM"
+  },
+  "functions": [
+    {
+      "signature": "auth.email()",
+      "md5": "bf3569f4ae1c7e250e74daf51d0311c7",
+      "source_characters": 280,
+      "inspected_characters": [
+        1,
+        280
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "sql",
+      "provider_owner": "supabase_auth_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Request JWT claims readers; current app/SQL Auth callers; not redundant"
+    },
+    {
+      "signature": "auth.jwt()",
+      "md5": "20054548ba2003f61a6bcb472175700b",
+      "source_characters": 265,
+      "inspected_characters": [
+        1,
+        265
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "sql",
+      "provider_owner": "supabase_auth_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Request JWT claims readers; current app/SQL Auth callers; not redundant"
+    },
+    {
+      "signature": "auth.role()",
+      "md5": "8a3e05459e07e0633d43c6fba2a2cdf4",
+      "source_characters": 277,
+      "inspected_characters": [
+        1,
+        277
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "sql",
+      "provider_owner": "supabase_auth_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Request JWT claims readers; current app/SQL Auth callers; not redundant"
+    },
+    {
+      "signature": "auth.uid()",
+      "md5": "ea3b41bf29e2ad573067939329aa088e",
+      "source_characters": 274,
+      "inspected_characters": [
+        1,
+        274
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "sql",
+      "provider_owner": "supabase_auth_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Request JWT claims readers; current app/SQL Auth callers; not redundant"
+    },
+    {
+      "signature": "graphql_public.graphql(\"operationName\" text, query text, variables jsonb, extensions jsonb)",
+      "md5": "dfa83944e7a73368d44e3ee4d2a1167c",
+      "source_characters": 1189,
+      "inspected_characters": [
+        1,
+        1189
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Disabled pg_graphql sentinel returning explicit not-enabled error; no app runtime action"
+    },
+    {
+      "signature": "pgbouncer.get_auth(p_usename text)",
+      "md5": "ea716a894cc6ade82e6754c47336a307",
+      "source_characters": 502,
+      "inspected_characters": [
+        1,
+        502
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_admin",
+      "security_definer": true,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider pooler authentication routine; privileged catalog access, not an app cleanup candidate"
+    },
+    {
+      "signature": "realtime.apply_rls(wal jsonb, max_record_bytes integer)",
+      "md5": "0692f127b26cc5843c85852b03a1299a",
+      "source_characters": 16972,
+      "inspected_characters": [
+        1,
+        16972
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_realtime_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Platform Realtime broadcast, subscription filter/authorization, logical WAL and RLS projection; no current subscriptions/publication tables/slots, retained"
+    },
+    {
+      "signature": "realtime.authorize(role_name text, topic_name text, claims text, sub text, headers text, read_extensions text[], write_extensions text[], OUT read_allowed boolean[], OUT write_allowed boolean[])",
+      "md5": "3f406642afec1126e2ddb86b33ff8177",
+      "source_characters": 2364,
+      "inspected_characters": [
+        1,
+        2364
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_realtime_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Platform Realtime broadcast, subscription filter/authorization, logical WAL and RLS projection; no current subscriptions/publication tables/slots, retained"
+    },
+    {
+      "signature": "realtime.broadcast_changes(topic_name text, event_name text, operation text, table_name text, table_schema text, new record, old record, level text)",
+      "md5": "ed087c81e8e1cf26699bc89b9352dd97",
+      "source_characters": 1046,
+      "inspected_characters": [
+        1,
+        1046
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_realtime_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Platform Realtime broadcast, subscription filter/authorization, logical WAL and RLS projection; no current subscriptions/publication tables/slots, retained"
+    },
+    {
+      "signature": "realtime.build_prepared_statement_sql(prepared_statement_name text, entity regclass, columns realtime.wal_column[])",
+      "md5": "063be385f49a345d2f3c89dc5dcf7fa3",
+      "source_characters": 1002,
+      "inspected_characters": [
+        1,
+        1002
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "sql",
+      "provider_owner": "supabase_realtime_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Platform Realtime broadcast, subscription filter/authorization, logical WAL and RLS projection; no current subscriptions/publication tables/slots, retained"
+    },
+    {
+      "signature": "realtime.cast(val text, type_ regtype)",
+      "md5": "2d38c9a2b85fe787afe48a12c02839e8",
+      "source_characters": 327,
+      "inspected_characters": [
+        1,
+        327
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_realtime_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Platform Realtime broadcast, subscription filter/authorization, logical WAL and RLS projection; no current subscriptions/publication tables/slots, retained"
+    },
+    {
+      "signature": "realtime.check_equality_op(op realtime.equality_op, type_ regtype, val_1 text, val_2 text)",
+      "md5": "dc96014b6232b30f11a6465db31bd20a",
+      "source_characters": 950,
+      "inspected_characters": [
+        1,
+        950
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_realtime_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Platform Realtime broadcast, subscription filter/authorization, logical WAL and RLS projection; no current subscriptions/publication tables/slots, retained"
+    },
+    {
+      "signature": "realtime.check_equality_op(op realtime.equality_op, type_ regtype, val_1 text, val_2 text, negate boolean)",
+      "md5": "3db26de03f6feab4f7fc8f9a8a48c07e",
+      "source_characters": 2021,
+      "inspected_characters": [
+        1,
+        2021
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_realtime_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Platform Realtime broadcast, subscription filter/authorization, logical WAL and RLS projection; no current subscriptions/publication tables/slots, retained"
+    },
+    {
+      "signature": "realtime.filters_hash(filters realtime.user_defined_filter[])",
+      "md5": "224d7075f0e9ccb1178b20e9d8eb4962",
+      "source_characters": 321,
+      "inspected_characters": [
+        1,
+        321
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "sql",
+      "provider_owner": "supabase_realtime_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Platform Realtime broadcast, subscription filter/authorization, logical WAL and RLS projection; no current subscriptions/publication tables/slots, retained"
+    },
+    {
+      "signature": "realtime.is_visible_through_filters(columns realtime.wal_column[], filters realtime.user_defined_filter[])",
+      "md5": "5dff3ea0345e185330be6127d0dce0df",
+      "source_characters": 887,
+      "inspected_characters": [
+        1,
+        887
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "sql",
+      "provider_owner": "supabase_realtime_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Platform Realtime broadcast, subscription filter/authorization, logical WAL and RLS projection; no current subscriptions/publication tables/slots, retained"
+    },
+    {
+      "signature": "realtime.list_changes(publication name, slot_name name, max_changes integer, max_record_bytes integer)",
+      "md5": "d2cd4e1195236fa92705bdba784719ae",
+      "source_characters": 2220,
+      "inspected_characters": [
+        1,
+        2220
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "sql",
+      "provider_owner": "supabase_realtime_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Platform Realtime broadcast, subscription filter/authorization, logical WAL and RLS projection; no current subscriptions/publication tables/slots, retained"
+    },
+    {
+      "signature": "realtime.list_changes_sync(publication name, slot_name name, max_changes integer, max_record_bytes integer)",
+      "md5": "fcbc1eeaa0bd65e2d79fa397fb6f5834",
+      "source_characters": 2226,
+      "inspected_characters": [
+        1,
+        2226
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "sql",
+      "provider_owner": "supabase_realtime_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Platform Realtime broadcast, subscription filter/authorization, logical WAL and RLS projection; no current subscriptions/publication tables/slots, retained"
+    },
+    {
+      "signature": "realtime.quote_wal2json(entity regclass)",
+      "md5": "441bd4aad4024c86ab1fafe7855b9cd4",
+      "source_characters": 375,
+      "inspected_characters": [
+        1,
+        375
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "sql",
+      "provider_owner": "supabase_realtime_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Platform Realtime broadcast, subscription filter/authorization, logical WAL and RLS projection; no current subscriptions/publication tables/slots, retained"
+    },
+    {
+      "signature": "realtime.send(payload jsonb, event text, topic text, private boolean)",
+      "md5": "77afe4a67a0330f080cb562cec0898bd",
+      "source_characters": 866,
+      "inspected_characters": [
+        1,
+        866
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_realtime_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Platform Realtime broadcast, subscription filter/authorization, logical WAL and RLS projection; no current subscriptions/publication tables/slots, retained"
+    },
+    {
+      "signature": "realtime.send_binary(payload bytea, event text, topic text, private boolean)",
+      "md5": "ccdcf82b70a4df521737be16ff40daee",
+      "source_characters": 588,
+      "inspected_characters": [
+        1,
+        588
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_realtime_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Platform Realtime broadcast, subscription filter/authorization, logical WAL and RLS projection; no current subscriptions/publication tables/slots, retained"
+    },
+    {
+      "signature": "realtime.settled_changes(slot_name name, max_changes integer, VARIADIC opts text[])",
+      "md5": "0460b15f876014713ccc4a997ebb3dbd",
+      "source_characters": 3763,
+      "inspected_characters": [
+        1,
+        3763
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_realtime_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Platform Realtime broadcast, subscription filter/authorization, logical WAL and RLS projection; no current subscriptions/publication tables/slots, retained"
+    },
+    {
+      "signature": "realtime.subscription_check_filters()",
+      "md5": "ff71dc5fe6923e2a5b8b9f79f5ccbf0d",
+      "source_characters": 5465,
+      "inspected_characters": [
+        1,
+        5465
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_realtime_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Platform Realtime broadcast, subscription filter/authorization, logical WAL and RLS projection; no current subscriptions/publication tables/slots, retained"
+    },
+    {
+      "signature": "realtime.to_regrole(role_name text)",
+      "md5": "06910e957a8215a4bd3cd66c8182052c",
+      "source_characters": 156,
+      "inspected_characters": [
+        1,
+        156
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "sql",
+      "provider_owner": "supabase_realtime_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Platform Realtime broadcast, subscription filter/authorization, logical WAL and RLS projection; no current subscriptions/publication tables/slots, retained"
+    },
+    {
+      "signature": "realtime.topic()",
+      "md5": "cd1d746eed2ae8a6e309899adfe95988",
+      "source_characters": 171,
+      "inspected_characters": [
+        1,
+        171
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "sql",
+      "provider_owner": "supabase_realtime_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Platform Realtime broadcast, subscription filter/authorization, logical WAL and RLS projection; no current subscriptions/publication tables/slots, retained"
+    },
+    {
+      "signature": "realtime.wal2json_escape_identifier(name text)",
+      "md5": "0efca81765a5fd58739e8eb42339d68d",
+      "source_characters": 264,
+      "inspected_characters": [
+        1,
+        264
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "sql",
+      "provider_owner": "supabase_realtime_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Platform Realtime broadcast, subscription filter/authorization, logical WAL and RLS projection; no current subscriptions/publication tables/slots, retained"
+    },
+    {
+      "signature": "storage.allow_any_operation(expected_operations text[])",
+      "md5": "ccefb34283c346cc88e224d075bd5312",
+      "source_characters": 791,
+      "inspected_characters": [
+        1,
+        791
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "sql",
+      "provider_owner": "supabase_storage_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider S3 object listing, lifecycle, versioning, helpers and triggers; zero current buckets/objects, retained for managed Storage API"
+    },
+    {
+      "signature": "storage.allow_only_operation(expected_operation text)",
+      "md5": "e2f7d55adc027df69ec4b42c6c08f50f",
+      "source_characters": 773,
+      "inspected_characters": [
+        1,
+        773
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "sql",
+      "provider_owner": "supabase_storage_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider S3 object listing, lifecycle, versioning, helpers and triggers; zero current buckets/objects, retained for managed Storage API"
+    },
+    {
+      "signature": "storage.can_insert_object(bucketid text, name text, owner uuid, metadata jsonb)",
+      "md5": "73733c9319875273d5937b05d68a7930",
+      "source_characters": 433,
+      "inspected_characters": [
+        1,
+        433
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_storage_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider S3 object listing, lifecycle, versioning, helpers and triggers; zero current buckets/objects, retained for managed Storage API"
+    },
+    {
+      "signature": "storage.delete_lifecycle_objects(object_ids uuid[])",
+      "md5": "b9737ba9f65ae16796874a5ff3b82a33",
+      "source_characters": 2327,
+      "inspected_characters": [
+        1,
+        2327
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_storage_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider S3 object listing, lifecycle, versioning, helpers and triggers; zero current buckets/objects, retained for managed Storage API"
+    },
+    {
+      "signature": "storage.enforce_bucket_lifecycle_service_role()",
+      "md5": "b4b21fec5ffef02e74e2477049138937",
+      "source_characters": 655,
+      "inspected_characters": [
+        1,
+        655
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_storage_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider S3 object listing, lifecycle, versioning, helpers and triggers; zero current buckets/objects, retained for managed Storage API"
+    },
+    {
+      "signature": "storage.enforce_bucket_name_length()",
+      "md5": "11b3bd509f6b254ec1cd859e712e8c78",
+      "source_characters": 309,
+      "inspected_characters": [
+        1,
+        309
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_storage_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider S3 object listing, lifecycle, versioning, helpers and triggers; zero current buckets/objects, retained for managed Storage API"
+    },
+    {
+      "signature": "storage.enforce_versioning_status_transition()",
+      "md5": "47dc86fbd138d125125250b28b31d7ff",
+      "source_characters": 539,
+      "inspected_characters": [
+        1,
+        539
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_storage_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider S3 object listing, lifecycle, versioning, helpers and triggers; zero current buckets/objects, retained for managed Storage API"
+    },
+    {
+      "signature": "storage.extension(name text)",
+      "md5": "75d83971130753081a84c3270878d8e7",
+      "source_characters": 515,
+      "inspected_characters": [
+        1,
+        515
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_storage_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider S3 object listing, lifecycle, versioning, helpers and triggers; zero current buckets/objects, retained for managed Storage API"
+    },
+    {
+      "signature": "storage.filename(name text)",
+      "md5": "0e8171709dc2934861de959d743ff809",
+      "source_characters": 255,
+      "inspected_characters": [
+        1,
+        255
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_storage_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider S3 object listing, lifecycle, versioning, helpers and triggers; zero current buckets/objects, retained for managed Storage API"
+    },
+    {
+      "signature": "storage.foldername(name text)",
+      "md5": "93671af66e1fe108a56068ad4137d001",
+      "source_characters": 356,
+      "inspected_characters": [
+        1,
+        356
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_storage_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider S3 object listing, lifecycle, versioning, helpers and triggers; zero current buckets/objects, retained for managed Storage API"
+    },
+    {
+      "signature": "storage.get_common_prefix(p_key text, p_prefix text, p_delimiter text)",
+      "md5": "0dc62b74fb855d4f504f50f900f93927",
+      "source_characters": 486,
+      "inspected_characters": [
+        1,
+        486
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "sql",
+      "provider_owner": "supabase_storage_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider S3 object listing, lifecycle, versioning, helpers and triggers; zero current buckets/objects, retained for managed Storage API"
+    },
+    {
+      "signature": "storage.get_size_by_bucket(noncurrent_versions text, delete_markers text)",
+      "md5": "75dc6041ab2b273a08279126efecbcd0",
+      "source_characters": 1229,
+      "inspected_characters": [
+        1,
+        1229
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_storage_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider S3 object listing, lifecycle, versioning, helpers and triggers; zero current buckets/objects, retained for managed Storage API"
+    },
+    {
+      "signature": "storage.list_multipart_uploads_with_delimiter(bucket_id text, prefix_param text, delimiter_param text, max_keys integer, next_key_token text, next_upload_token text, raw_prefix_param text)",
+      "md5": "961eef74f03a12751abf768384b84371",
+      "source_characters": 2378,
+      "inspected_characters": [
+        1,
+        2378
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "sql",
+      "provider_owner": "supabase_storage_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider S3 object listing, lifecycle, versioning, helpers and triggers; zero current buckets/objects, retained for managed Storage API"
+    },
+    {
+      "signature": "storage.list_objects_with_delimiter(_bucket_id text, prefix_param text, delimiter_param text, max_keys integer, start_after text, next_token text, sort_order text, noncurrent_versions text, delete_markers text, next_token_archived_at timestamp with time zone, next_token_version text)",
+      "md5": "7747efec8583d78cd01449d9b99cd2eb",
+      "source_characters": 32892,
+      "inspected_characters": [
+        1,
+        32892
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_storage_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider S3 object listing, lifecycle, versioning, helpers and triggers; zero current buckets/objects, retained for managed Storage API"
+    },
+    {
+      "signature": "storage.operation()",
+      "md5": "0720a7c3d1b49f9a8eee19e90d73bb97",
+      "source_characters": 178,
+      "inspected_characters": [
+        1,
+        178
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_storage_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider S3 object listing, lifecycle, versioning, helpers and triggers; zero current buckets/objects, retained for managed Storage API"
+    },
+    {
+      "signature": "storage.protect_active_lifecycle_states()",
+      "md5": "fce9d03398ec222c77feec887c25c384",
+      "source_characters": 1016,
+      "inspected_characters": [
+        1,
+        1016
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_storage_admin",
+      "security_definer": true,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider S3 object listing, lifecycle, versioning, helpers and triggers; zero current buckets/objects, retained for managed Storage API"
+    },
+    {
+      "signature": "storage.protect_bucket_control_columns()",
+      "md5": "7c31ae406e2f6281ead4009fff69fc68",
+      "source_characters": 1858,
+      "inspected_characters": [
+        1,
+        1858
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_storage_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider S3 object listing, lifecycle, versioning, helpers and triggers; zero current buckets/objects, retained for managed Storage API"
+    },
+    {
+      "signature": "storage.protect_delete()",
+      "md5": "4371ae544fb1ef704f9c5d42265ac324",
+      "source_characters": 535,
+      "inspected_characters": [
+        1,
+        535
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_storage_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider S3 object listing, lifecycle, versioning, helpers and triggers; zero current buckets/objects, retained for managed Storage API"
+    },
+    {
+      "signature": "storage.reconcile_lifecycle_state(target_bucket_id text, policy_changed boolean)",
+      "md5": "271a57ecfb24df02a5d9100c2a801323",
+      "source_characters": 2912,
+      "inspected_characters": [
+        1,
+        2912
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_storage_admin",
+      "security_definer": true,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider S3 object listing, lifecycle, versioning, helpers and triggers; zero current buckets/objects, retained for managed Storage API"
+    },
+    {
+      "signature": "storage.search(prefix text, bucketname text, limits integer, levels integer, offsets integer, search text, sortcolumn text, sortorder text, noncurrent_versions text, delete_markers text)",
+      "md5": "fed15c85bb96faaa21ec40176026a0fd",
+      "source_characters": 31522,
+      "inspected_characters": [
+        1,
+        31522
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_storage_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider S3 object listing, lifecycle, versioning, helpers and triggers; zero current buckets/objects, retained for managed Storage API"
+    },
+    {
+      "signature": "storage.search_by_timestamp(p_prefix text, p_bucket_id text, p_limit integer, p_level integer, p_start_after text, p_sort_order text, p_sort_column text, p_sort_column_after text, noncurrent_versions text, delete_markers text, p_start_after_version text)",
+      "md5": "323c4e2739e9c9bcfc082f7f14289338",
+      "source_characters": 6929,
+      "inspected_characters": [
+        1,
+        6929
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_storage_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider S3 object listing, lifecycle, versioning, helpers and triggers; zero current buckets/objects, retained for managed Storage API"
+    },
+    {
+      "signature": "storage.search_v2(prefix text, bucket_name text, limits integer, levels integer, start_after text, sort_order text, sort_column text, sort_column_after text, noncurrent_versions text, delete_markers text, start_after_archived_at timestamp with time zone, start_after_version text, start_after_is_continuation boolean)",
+      "md5": "7a010a87c94770b1c8f0b49a616082f4",
+      "source_characters": 2862,
+      "inspected_characters": [
+        1,
+        2862
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_storage_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider S3 object listing, lifecycle, versioning, helpers and triggers; zero current buckets/objects, retained for managed Storage API"
+    },
+    {
+      "signature": "storage.update_updated_at_column()",
+      "md5": "bfecc08a6034296258f0c3e10193076c",
+      "source_characters": 178,
+      "inspected_characters": [
+        1,
+        178
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_storage_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider S3 object listing, lifecycle, versioning, helpers and triggers; zero current buckets/objects, retained for managed Storage API"
+    },
+    {
+      "signature": "storage.wake_lifecycle_state()",
+      "md5": "326028b9d567ca2de47e9ecf67a4553b",
+      "source_characters": 360,
+      "inspected_characters": [
+        1,
+        360
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_storage_admin",
+      "security_definer": true,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider S3 object listing, lifecycle, versioning, helpers and triggers; zero current buckets/objects, retained for managed Storage API"
+    },
+    {
+      "signature": "vault._crypto_aead_det_decrypt(message bytea, additional bytea, key_id bigint, context bytea, nonce bytea)",
+      "md5": "4c011d33059455a2046b6baaadf95134",
+      "source_characters": 316,
+      "inspected_characters": [
+        1,
+        316
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": false,
+      "language": "c",
+      "provider_owner": "supabase_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider Vault encrypt/decrypt/secret lifecycle; declared C entrypoints opaque; preserve platform keys/data"
+    },
+    {
+      "signature": "vault._crypto_aead_det_encrypt(message bytea, additional bytea, key_id bigint, context bytea, nonce bytea)",
+      "md5": "c09967f7ad587d50825d20c0669a22b4",
+      "source_characters": 316,
+      "inspected_characters": [
+        1,
+        316
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": false,
+      "language": "c",
+      "provider_owner": "supabase_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider Vault encrypt/decrypt/secret lifecycle; declared C entrypoints opaque; preserve platform keys/data"
+    },
+    {
+      "signature": "vault._crypto_aead_det_noncegen()",
+      "md5": "847e31112efd29b794bca8ee8435cb12",
+      "source_characters": 182,
+      "inspected_characters": [
+        1,
+        182
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": false,
+      "language": "c",
+      "provider_owner": "supabase_admin",
+      "security_definer": false,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider Vault encrypt/decrypt/secret lifecycle; declared C entrypoints opaque; preserve platform keys/data"
+    },
+    {
+      "signature": "vault.create_secret(new_secret text, new_name text, new_description text, new_key_id uuid)",
+      "md5": "3cd3211da1236685869a58787071c534",
+      "source_characters": 751,
+      "inspected_characters": [
+        1,
+        751
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_admin",
+      "security_definer": true,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider Vault encrypt/decrypt/secret lifecycle; declared C entrypoints opaque; preserve platform keys/data"
+    },
+    {
+      "signature": "vault.update_secret(secret_id uuid, new_secret text, new_name text, new_description text, new_key_id uuid)",
+      "md5": "dab0a8cc49e4b57f27bfa5dca12a705c",
+      "source_characters": 1012,
+      "inspected_characters": [
+        1,
+        1012
+      ],
+      "full_available_sql_definition_reviewed": true,
+      "binary_implementation_reviewed": null,
+      "language": "plpgsql",
+      "provider_owner": "supabase_admin",
+      "security_definer": true,
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "semantic_verdict": "Provider Vault encrypt/decrypt/secret lifecycle; declared C entrypoints opaque; preserve platform keys/data"
+    }
+  ],
+  "views": [
+    {
+      "signature": "extensions.pg_stat_statements",
+      "md5": "b123763d3bfc8f8cb240c37c7d00dc7a",
+      "source_characters": 1847,
+      "inspected_characters": [
+        1,
+        1847
+      ],
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "note": "Statistics/introspection provider view"
+    },
+    {
+      "signature": "extensions.pg_stat_statements_info",
+      "md5": "4535ca37bd2670cfc7d0f68a0d17048b",
+      "source_characters": 113,
+      "inspected_characters": [
+        1,
+        113
+      ],
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "note": "Statistics/introspection provider view"
+    },
+    {
+      "signature": "vault.decrypted_secrets",
+      "md5": "57c0d83a093a98ade3c4f14287e445ec",
+      "source_characters": 387,
+      "inspected_characters": [
+        1,
+        387
+      ],
+      "classification": "PLATFORM_MANAGED_KEEP",
+      "note": "Decryption is in view definition only; NO secret rows were read"
+    }
+  ],
+  "triggers": [
+    {
+      "signature": "realtime.subscription.tr_check_filters",
+      "md5": "5b8936f1aa0adc9b448dfa768d78bd42",
+      "source_characters": 148,
+      "inspected_characters": [
+        1,
+        148
+      ],
+      "classification": "PLATFORM_MANAGED_KEEP"
+    },
+    {
+      "signature": "storage.buckets.enforce_bucket_name_length_trigger",
+      "md5": "7774f4b5e39e4ad07a16a589aef6277c",
+      "source_characters": 167,
+      "inspected_characters": [
+        1,
+        167
+      ],
+      "classification": "PLATFORM_MANAGED_KEEP"
+    },
+    {
+      "signature": "storage.buckets.enforce_versioning_status_transition",
+      "md5": "b55e8f45d9b7b5cf3f05aa502d8f5d08",
+      "source_characters": 182,
+      "inspected_characters": [
+        1,
+        182
+      ],
+      "classification": "PLATFORM_MANAGED_KEEP"
+    },
+    {
+      "signature": "storage.buckets.protect_active_lifecycle_states",
+      "md5": "09702e30b4601803dd3bea9af03625fa",
+      "source_characters": 151,
+      "inspected_characters": [
+        1,
+        151
+      ],
+      "classification": "PLATFORM_MANAGED_KEEP"
+    },
+    {
+      "signature": "storage.buckets.protect_bucket_control_insert",
+      "md5": "5c2f86adf97481d45808f2ed4eb4673b",
+      "source_characters": 162,
+      "inspected_characters": [
+        1,
+        162
+      ],
+      "classification": "PLATFORM_MANAGED_KEEP"
+    },
+    {
+      "signature": "storage.buckets.protect_bucket_control_update",
+      "md5": "ae169c5f8d35b69020459ddddbe65d7e",
+      "source_characters": 211,
+      "inspected_characters": [
+        1,
+        211
+      ],
+      "classification": "PLATFORM_MANAGED_KEEP"
+    },
+    {
+      "signature": "storage.buckets.protect_bucket_control_update_role",
+      "md5": "34d64d2c71ac2a26720ae99bd0da100b",
+      "source_characters": 236,
+      "inspected_characters": [
+        1,
+        236
+      ],
+      "classification": "PLATFORM_MANAGED_KEEP"
+    },
+    {
+      "signature": "storage.buckets.protect_buckets_delete",
+      "md5": "50288cfc0da92cd8f2f573c018c16382",
+      "source_characters": 131,
+      "inspected_characters": [
+        1,
+        131
+      ],
+      "classification": "PLATFORM_MANAGED_KEEP"
+    },
+    {
+      "signature": "storage.buckets.wake_lifecycle_on_policy_write",
+      "md5": "8c3fbea0b2a980f26fd4052160e92820",
+      "source_characters": 186,
+      "inspected_characters": [
+        1,
+        186
+      ],
+      "classification": "PLATFORM_MANAGED_KEEP"
+    },
+    {
+      "signature": "storage.buckets.wake_lifecycle_on_versioning_enable",
+      "md5": "605b230af4479dcf2f00e2c36279cfa1",
+      "source_characters": 211,
+      "inspected_characters": [
+        1,
+        211
+      ],
+      "classification": "PLATFORM_MANAGED_KEEP"
+    },
+    {
+      "signature": "storage.objects.protect_objects_delete",
+      "md5": "45c5692d486583888bac16ef789d847f",
+      "source_characters": 131,
+      "inspected_characters": [
+        1,
+        131
+      ],
+      "classification": "PLATFORM_MANAGED_KEEP"
+    },
+    {
+      "signature": "storage.objects.update_objects_updated_at",
+      "md5": "7457963f6a733c584baf08e4e7a451d0",
+      "source_characters": 138,
+      "inspected_characters": [
+        1,
+        138
+      ],
+      "classification": "PLATFORM_MANAGED_KEEP"
+    }
+  ],
+  "dependency_and_live_usage": {
+    "storage_buckets": 0,
+    "storage_objects": 0,
+    "storage_multipart_uploads": 0,
+    "storage_lifecycle_states": 0,
+    "storage_policies": 0,
+    "realtime_subscriptions": 0,
+    "realtime_messages": 0,
+    "replication_slots": 0,
+    "publication_tables": 0,
+    "publication": "supabase_realtime exists but contains no published tables",
+    "notes": "Counts are live bounded read-only aggregates; no private Auth identities, member records, Storage objects or secret values were read. A zero count does not justify removing provider-owned routines."
+  },
+  "review_findings": [
+    {
+      "kind": "REDUNDANCY_OBSERVATION_NO_APP_FIX",
+      "detail": "vault.update_secret declares a decrypted_secret initializer that is unused, and create_secret/update_secret accept new_key_id without using it in the visible PL/pgSQL. These are provider-managed routines, not proven application bugs, so no GitHub app or provider edit is justified."
+    },
+    {
+      "kind": "PLATFORM_COMPLEXITY_NOT_DEFECT",
+      "detail": "Storage search/list code maintains two similar legacy/listing paths, pagination and partial-index-aware paths; they serve distinct contracts. Current project has zero buckets and no meaningful performance workload."
+    },
+    {
+      "kind": "PROVIDER_EVOLUTION_NOT_APP_DRIFT",
+      "detail": "Current storage 24 functions versus historical index 19 and realtime 19 versus historical 18. Treat historical inventory as dated; no claim of a broken migration or user regression."
+    },
+    {
+      "kind": "UNVERIFIED",
+      "detail": "C-language Vault implementations and provider-console Auth/settings not readable. No hosted signed-in member or handset/recipient acceptance performed."
+    },
+    {
+      "kind": "PREWRITE_CONCURRENCY",
+      "detail": "Development ref moved from original preflight SHA due to unrelated #455 documentation; prewrite current head read and journal/PREFLIGHT revalidated."
+    }
+  ],
+  "outcome": {
+    "new_reproducible_app_bugs": 0,
+    "justified_deletions": 0,
+    "github_app_source_changes": 0,
+    "production_writes": 0,
+    "deployments": 0,
+    "ci_runs": 0,
+    "queue_state": "UNCHANGED; existing fixes TESTING, not recertified",
+    "overall_provider_baseline": "IN_PROGRESS"
+  },
+  "next_exact": "Resume first unreconciled current provider schema/table text: storage.buckets columns/defaults/constraints/indexes then storage.bucket_lifecycle_states, storage.objects, and realtime.subscription. Inventory extensions and pg_catalog callable definitions separately; C/console-only remain UNVERIFIED."
+}
