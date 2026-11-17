@@ -15481,24 +15481,32 @@
     {
       "id": "DIC-Q-455-r314-next-shot-temperature-unit",
       "issue": 455,
-      "pr": null,
+      "pr": 3096,
       "title": "Correct malformed historical Next Shot temperature delta unit",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "9d337c0cff19022b269bdd95d3d95ef63cbf31d5",
       "scope_paths": [
         "site/lib/ui.js"
       ],
       "owner_source": "Issue #455 Option B SAFE; DIC_PREFLIGHT_VERIFIED development_sha=0ff4a272aa313fd7c0478b794f68fef14cde9969 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "tests": [
-        "Direct code reproduced raw temperature unit mismatch in before/after guidance.",
-        "Three synthetic positive/negative Node22 regression groups authored; CI NOT RUN."
+        "Source one-parent PR #3096 head d153c2459ae713504646a67b22e264049f09e43d five exact Git blobs match nonforce [skip netlify] merge 9d337c0cff19022b269bdd95d3d95ef63cbf31d5.",
+        "Three focused synthetic R314 cases #4732–4734 PASS on exact head and merge, valid C/F, malformed imported K/Kelvin/HTML/null, temp OFF and unrelated grind; immutable original shot/notes/5 tastes.",
+        "Exact head Node22 43989878790 and merged Node22 43990526458 each 5298 PASS/0 FAIL/6 intentional SKIP. Head cloud/mobile 43989878803, SQL 43989878879, security 43989878834, approval 43989879046 SUCCESS; merged cloud/mobile 43990526417 and merged governance 43990526479 SUCCESS.",
+        "Unrelated #33 exact-selected current product #241 43990526424 FAILED source/identity after merge, not applicable R314 UI acceptance; original frozen603 SKIPPED not PASS. No provider/member writes or taste-quality evidence."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact PR-head app/UX/governance testing and merged SHA verification not yet completed.",
-        "No owner Publish permission; development only."
+      "ci_runs": [
+        43989878790,
+        43989878803,
+        43989878879,
+        43989878834,
+        43989879046,
+        43990526458,
+        43990526417,
+        43990526479
       ],
-      "notes": "No product/Locked numeric change, no taste or member-effect measurements, no deployment. Other advice and original five ratings/notes/history preserved.",
+      "blockers": [],
+      "notes": "READY DEVELOPMENT ONLY; production_deployed=false; strict C-else-F before/after display parity, source/shot/five tastes/notes/history preserved. No deployment, new numeric policy, member data or measured espresso improvement. Unrelated #33 current source failure isolated to extractor ownership.",
       "production_deployed": false
     }
   ],
@@ -18178,6 +18186,15 @@
       "source_sha": "da74f54d41ac24253f31918f11f05589a5b25915",
       "production_deployed": false,
       "evidence": "PR #3090 tested head c32e516a074b252743d6c289889d8d9770cb4b38, nonforce merge da74f54d41ac24253f31918f11f05589a5b25915, 5 Git blobs match, five head CI SUCCESS, head+merged Node22 5288 PASS/0 FAIL/6 SKIP, 3 R313 focused PASS, merged browser 43982389961 and governance 43982389862 attempt2 SUCCESS after transient unrelated historical API HTTP502. No publish."
+    },
+    {
+      "date": "2026-11-16",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r314-next-shot-temperature-unit",
+      "state": "READY",
+      "source_sha": "9d337c0cff19022b269bdd95d3d95ef63cbf31d5",
+      "production_deployed": false,
+      "evidence": "PR #3096 exact head/merge blobs match, 3 R314 tests PASS both; 5298 Node22 PASS/0 FAIL/6 SKIP; five applicable head checks, merged Node+browser+governance SUCCESS. Unrelated #33 exact-selected product241 job failed; frozen603 SKIPPED not PASS. No deploy."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
