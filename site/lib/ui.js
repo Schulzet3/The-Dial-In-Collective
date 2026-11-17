@@ -1,4 +1,4 @@
-import {SCALES,tasteSeverity,tasteLabel,tempDisplay,CONFIG,finite,tastesComplete} from './constants.js';
+import {SCALES,tasteSeverity,tasteLabel,tempDisplay,tempInput,CONFIG,finite,tastesComplete} from './constants.js';
 export const e = x => String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const paths={
  signout:'M9 4H4v16h5m5-12 4 4-4 4m-6-4h10',
@@ -208,11 +208,22 @@ export function updateTasteSelection(ratings,key,value) {
 // Do not falsely mark an edited measurement or note as corrected while its
 // current value still violates the SAME existing model Save bounds. Keep the
 // original alert and aria-invalid until the member actually fixes it.
-// Temperature displays in F or C; its conversion is handled at Save, not here.
+// Temperature display units are explicitly provided by the existing Log form.
 function unresolvedShotField(target){
  if(typeof target.value!=='string')return false;
  const value=target.value,name=target.name;
  if(name==='notes')return Array.from(value).length>16000;
+ // Optional temperature is entered in the member's displayed F/C unit,
+ // while the existing model Save boundary is 70-100 degrees C.
+ // Do not dismiss a flagged error when the unit cannot be established.
+ if(name==='temperature'){
+  const trimmed=value.trim();
+  if(!trimmed)return false;
+  const unit=target.dataset?.temperatureUnit;
+  if(unit!=='F'&&unit!=='C')return true;
+  const c=tempInput(trimmed,unit),[low,high]=CONFIG.bounds.tempC;
+  return c==null||c<low||c>high;
+ }
  if(!['doseG','yieldG','timeS','grindSetting'].includes(name))return false;
  const trimmed=value.trim();
  if(!trimmed||!Number.isFinite(Number(trimmed)))return true;

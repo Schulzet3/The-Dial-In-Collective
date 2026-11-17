@@ -15998,6 +15998,30 @@
       "blockers": [],
       "notes": "READY DEVELOPMENT ONLY; no Publish/deployment. Original model physical bounds and Unicode notes now retain unresolved local field aria-invalid and shared Save message until edited value satisfies existing rules. Five ratings, original shots/notes/history, one-control recommendation, styles/feed/grinder/equipment, privacy/Community/offline unchanged. Actual member incidence or espresso cup quality unmeasured. Release/main/provider/member unchanged.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-r328-temperature-input-validation-feedback",
+      "issue": 455,
+      "pr": null,
+      "title": "Keep invalid Log Shot temperature guidance until a truly valid F/C edit or optional clear",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/ui.js",
+        "site/cloud/main.js"
+      ],
+      "owner_source": "Issue #455 Option B SAFE; existing model temperature bounds only. DIC_PREFLIGHT_VERIFIED development_sha=fc50184b2bf14aabb82f881f70a8f526454120f3 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Current-source reproduction: a flagged invalid temperature field is unconditionally acknowledged on any edit even when still beyond 70-100 C in displayed F/C; original model retains its error.",
+        "R328 ten focused positive/negative synthetic regressions submitted, including both units, boundary values, missing/invalid values, another invalid taste, cloud-error isolation, real Log Shot form binding; CI NOT YET RUN."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Applicable exact-source Node22/browser/mobile/offline/accessibility, SQL/security/governance CI, nonforce source merge and merged-source readback pending.",
+        "No separate owner Publish authorization; no production/provider effects permitted."
+      ],
+      "notes": "TESTING development only. No change to actual model validation bounds, all five tastes, measured shot/notes/history, recommendation controls, grinder, Turbo/Fast-Flow, slow feeding, offline, Community/RLS or privacy; no taste-outcome assertion.",
+      "production_deployed": false
     }
   ],
   "history": [
