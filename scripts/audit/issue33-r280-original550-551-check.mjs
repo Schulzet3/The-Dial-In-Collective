@@ -28,7 +28,7 @@ for(const n of [550,551]){
  const t=targets[n],r=report?.records?.find(x=>x.number===n)||{},f=r.current_fields||{};
  let raw;try{raw=readFileSync(join(dir,'case-'+n+'.html'))}catch(e){errors.push(n+'_html_missing_'+(e.code||e.message))}
  const chosen=productMarkup(raw?.toString('utf8')||''),h1=selectedProductHeadings(chosen);
- const visible=chosen.replace(/<(?:script|style|nav|aside|footer)\\b[^>]*>[\\s\\S]*?<\\/(?:script|style|nav|aside|footer)>/gi,' ').replace(/<[^>]{0,2000}>/g,' ').replace(/\\s+/g,' ').toLowerCase();
+ const visible=chosen.replace(/<(?:script|style|nav|aside|footer)\b[^>]*>[\s\S]*?<\/(?:script|style|nav|aside|footer)>/gi,' ').replace(/<[^>]{0,2000}>/g,' ').replace(/\s+/g,' ').toLowerCase();
  let final;try{final=new URL(r.final_url)}catch{}
  requireFact(r.status==='FETCHED'&&r.parser_ok===true&&r.official_url===t.url,n+'_fetched_parser');
  requireFact(final?.protocol==='https:'&&final.hostname==='www.roasted-beans.com'&&final.pathname===new URL(t.url).pathname,n+'_unchanged_selected_url');
