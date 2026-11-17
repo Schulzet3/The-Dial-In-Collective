@@ -12,7 +12,7 @@ const targets=[
  {number:549,name:'Tanzania Peaberry',url:'https://www.realdope.coffee/products/tanazania-peaberry'},
  {number:555,name:'Organic Timor',url:'https://www.roc2.com/products/organic-timor'}
 ];
-const page=(name,own,siblings='')=>'<html><head><title>Old SEO: other roasts, decaf, mango</title></head><body><main><article class="product"><h1>'+name+'</h1><div class="description"><p>'+own+'</p></div></article></main>'+siblings+'</body></html>';
+const page=(name,own,siblings='')=>'<html><head><title>Old SEO: other roasts, decaf, mango</title></head><body><main><article class="product"><h1>'+name+'</h1><div class="description">'+own+'</div></article></main>'+siblings+'</body></html>';
 const rec=t=>({number:t.number,archived_coffee:t.name,status:'FETCHED',parser_ok:true,selected_h1:[t.name],selected_h1_present_in_scoped_html:true,selected_heading_identity_verified:true,current_fields:{name:t.name},add_coffee_ui_rendered:true,source_review_rendered:true});
 test('549/555 selected identity requires both distinct current source pages and editable review',()=>{
  const good=targets.map(rec);
@@ -22,7 +22,7 @@ test('549/555 selected identity requires both distinct current source pages and 
 });
 test('549 selected Tanzania tasting/roast cannot inherit Southern Highlands or recommendation notes',()=>{
  const t=targets[0];
- const own="Single-origin peaberry. Tanzania. Our Tanzania Peaberry is dark roasted but certainly not bitter. This peaberry is full of earth and playful fruity notes with hints of cacao. Origin: Tanzania (Peaberry). Roast: Dark. Tasting notes: Earthy, fruity, hints of cacao.";
+ const own="<p>Single-origin peaberry from Tanzania. Our Tanzania Peaberry is dark roasted but certainly not bitter. This peaberry is full of earth and playful fruity notes with hints of cacao.</p><p>Origin: Tanzania (Peaberry)</p><p>Roast: Dark</p><p>Tasting notes: Earthy, fruity, hints of cacao</p>";
  const html=page(t.name,own,'<aside class="related-products">Burundi Kibingo: peach, raspberry. Previous lot from Southern Highlands. Swiss Water decaf.</aside>');
  assert.deepEqual(selectedProductHeadings(productMarkup(html)),[t.name]);
  const p=extractPublicCoffeeFacts(html,{source_url:t.url});
@@ -37,7 +37,7 @@ test('549 selected Tanzania tasting/roast cannot inherit Southern Highlands or r
 });
 test('555 exact Organic Timor own current sensory arc includes raw sugar finish',()=>{
  const t=targets[1];
- const own="Sourced from the highlands of Timor, this single-origin medium roast offers a bright, clean cup with natural sweetness. Lively notes of pineapple and fresh orange juice lead the way, balanced by a smooth finish of raw sugar. A well-rounded, vibrant coffee that highlights the unique character of its origin in every sip.";
+ const own="<p>Sourced from the highlands of Timor, this single-origin medium roast offers a bright, clean cup with natural sweetness. Lively notes of pineapple and fresh orange juice lead the way, balanced by a smooth finish of raw sugar. A well-rounded, vibrant coffee that highlights the unique character of its origin in every sip.</p>";
  const html=page(t.name,own,'<aside>Organic Mexican: molasses, caramel and lemongrass; decaf via Swiss Water. Customer reviews say mango.</aside>');
  assert.deepEqual(selectedProductHeadings(productMarkup(html)),[t.name]);
  const p=extractPublicCoffeeFacts(html,{source_url:t.url});
