@@ -38,7 +38,7 @@ test('535 selected Las Nubes stays Colombian and does not borrow the Spanish-loc
 });
 test('536 chosen Alma Negra is Costa Rican, with no neighboring Las Nubes or merely likely cultivars',()=>{
  const t=selected[1];
- const source='<p>TASTING NOTES: DRIED CRANBERRY, BLACKBERRY, HIBISCUS, LAVENDER.</p><p>ORIGIN COSTA RICA. REGION CENTRAL VALLEY. PRODUCER OSCAR & FRANCISCA CHACÓN - LAS LAJAS MICROMILL. FARM / LOT FINCA MIRELLA - F5.</p><p>VARIETY COMMON COSTA RICAN VARIETIES. Likely a mix of Caturra, Catuai, Bourbon and other local varieties.</p><p>PROCESS METHOD ALMA NEGRA NATURAL. Alma Negra dried cherries in greenhouse and on raised beds.</p>';
+ const source='<h3>TASTING NOTES</h3><p>DRIED CRANBERRY, BLACKBERRY, HIBISCUS, LAVENDER</p><h3>ORIGIN</h3><p>COSTA RICA</p><h3>REGION</h3><p>CENTRAL VALLEY</p><h3>PRODUCER</h3><p>OSCAR & FRANCISCA CHACÓN - LAS LAJAS MICROMILL</p><h3>FARM / LOT</h3><p>FINCA MIRELLA - F5</p><h3>VARIETY</h3><p>COMMON COSTA RICAN VARIETIES</p><p>Likely a mix of Caturra, Catuai, Bourbon and other local varieties.</p><h3>PROCESS METHOD</h3><p>ALMA NEGRA NATURAL</p>';
  const markup=fixture(t.name,source,'<h2>FIRST CLASS - LAS NUBES</h2><p>Pink peppercorn, milk chocolate, amber honey, anaerobic fermentation.</p>');
  assert.deepEqual(selectedProductHeadings(productMarkup(markup)),[t.name]);
  const r=extractPublicCoffeeFacts(markup,{source_url:t.url});

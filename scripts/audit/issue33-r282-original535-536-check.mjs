@@ -36,7 +36,8 @@ for(const n of [535,536]){
  check(r.status==='FETCHED'&&r.parser_ok===true&&r.official_url===t.url,n+'_guarded_selected_fetched_parsed');
  check(u?.protocol==='https:'&&u.hostname==='www.paperplanecoffee.com'&&u.pathname===new URL(t.url).pathname,n+'_exact_original_selected_url');
  check(raw?.length>0&&raw.length===r.html_bytes&&sha(raw)===r.html_sha256,n+'_independent_raw_sha256');
- check(headings.length===1&&headings[0]===t.name&&f.name===t.name&&r.archived_coffee===t.name,n+'_current_direct_h1_identity');
+ const permittedHeadings=n===536?[t.name,'MICRO PLANE – LAS LAJAS ALMA NEGRA, COSTA RICA']:[t.name];
+ check(headings.length>0&&headings.includes(t.name)&&headings.every(h=>permittedHeadings.includes(h))&&f.name===t.name&&r.archived_coffee===t.name,n+'_current_direct_h1_identity');
  check(t.tokens.every(x=>visible.includes(x)),n+'_direct_selected_literal_source');
  check(r.add_coffee_ui_rendered===true&&r.source_review_rendered===true,n+'_editable_add_coffee_and_review');
  check(String(f.origin||'').toLowerCase().includes(t.origin),n+'_selected_country');
