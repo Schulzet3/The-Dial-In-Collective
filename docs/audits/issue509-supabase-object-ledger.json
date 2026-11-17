@@ -4591,6 +4591,22 @@
       "production_writes": 0,
       "baseline": "IN_PROGRESS",
       "next": "First genuinely changed/unreviewed nonapp provider definition; hosted provider console UNVERIFIED."
+    },
+    {
+      "run": "R318 Nov17 2026",
+      "preflight_sha": "4cddd5987544c36edfd3a7cf5617cf316b7a441a",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r318-retired-table-integrity-crosschecks-20261117.json",
+      "live_tables": 52,
+      "retired_table_ref_check": 5,
+      "matched_development_retirement_migration_count": 2,
+      "integrity_owner_categories": 11,
+      "violations": 0,
+      "first_time_word_credit": 0,
+      "production_writes": 0,
+      "new_verified_defects": 0,
+      "baseline": "IN_PROGRESS",
+      "next": "Resume with first genuinely changed/unreviewed provider definition or reproducible application bottleneck; no recrediting unchanged SQL; full hosted #96 and compiled/console surfaces remain unverified"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -23252,5 +23268,43 @@
       "Complete provider word-level baseline"
     ],
     "next": "First genuinely unreviewed/new/changed provider definition or reproducible measured regression; retain no production write/no publish and owner-action-only alert boundary."
+  },
+  "provider_retired_schema_integrity_run318": {
+    "preflight_development_sha": "4cddd5987544c36edfd3a7cf5617cf316b7a441a",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "observed_at": "2026-11-17T20:56:31.720Z",
+    "receipt_path": "docs/audits/issue509-r318-retired-table-integrity-crosschecks-20261117.json",
+    "live_application_tables": 52,
+    "retired_original_tables": [
+      "private.beta_invites",
+      "private.invite_attempts",
+      "private.invite_redemptions",
+      "private.dic_roaster_aliases",
+      "private.dic_roaster_directory"
+    ],
+    "legacy_current_sql_mentions_each": 0,
+    "immutable_retirement_migration_blobs": [
+      {
+        "path": "supabase/migrations/20261110020500_dic_admin_signup_approval_retire_invites.sql",
+        "blob": "fea285d31190b996160d7672c1d90887f3d0c647"
+      },
+      {
+        "path": "supabase/migrations/20261113050000_dic_retire_roaster_directory.sql",
+        "blob": "10775c86bf88e61160fdc66d35c65698638742d6"
+      }
+    ],
+    "complete_current_signup_sql_chars": 3484,
+    "observed_shot_count": 27,
+    "owner_link_categories": 11,
+    "owner_link_failures": 0,
+    "observed_coffees": 9,
+    "merge_or_orphan_failures": 0,
+    "first_time_source_word_credit": 0,
+    "new_confirmed_defects": 0,
+    "production_writes": 0,
+    "code_test_ci_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "queue": "UNCHANGED_TESTING",
+    "next": "Resume with first genuinely changed/unreviewed provider definition or reproducible application bottleneck; no recrediting unchanged SQL; full hosted #96 and compiled/console surfaces remain unverified"
   }
 }
