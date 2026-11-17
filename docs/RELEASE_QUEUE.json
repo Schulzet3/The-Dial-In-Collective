@@ -15621,25 +15621,35 @@
     {
       "id": "DIC-Q-455-r318-next-recipe-measured-grind-precision",
       "issue": 455,
-      "pr": null,
+      "pr": 3116,
       "title": "Preserve precise unchanged actual grinder setting throughout Next Recipe and its before-arrow",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "a91bd34d371d1a564c4212c30022f9e29d32ec26",
       "scope_paths": [
         "site/lib/engine.js",
         "site/lib/ui.js"
       ],
       "owner_source": "Issue #455 Option B SAFE, DIC_PREFLIGHT_VERIFIED development_sha=52928f3437ea44bc5943757fd7f1d98051cb54c0 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "tests": [
-        "R318 source negative: latest yield-only recommendation preserves 2.45 in nextAdvice but rounded to 2.5 in recommendation()/recipeGrid; no member data involved.",
-        "Four synthetic focused regression scenarios authored; all hosted checks not yet executed."
+        "Original source: R317 direct nextAdvice kept 2.45 unchanged on yield-only, but rec.grind/RecipeGrid/Before arrow later rendered 2.5. This is deterministic code evidence, not a live member occurrence or cup-quality outcome.",
+        "R318 five synthetic regression cases all PASS on final exact PR head: yield-only 2.45 preserved across card+arrow, preparation-only original, genuine grind-only 0.1 new targets, normal starting/tenth, legacy cached new 2.35 rounds to 2.4.",
+        "Initial PR head CI Node22 44018984152 FAILED (5318 pass /2 fail /6 skipped), both failures from fifth test malformed regex plus whole-source syntax guard; fixed SAME COMMIT and rechecked. Initial approval 44018852465 FAILED on transient GitHub HTTP500 for an unrelated existing READY receipt; final approval succeeded.",
+        "Final PR head c72473c4e5209098f136ba42b269295ad3c5f5b9 Node22/lint 44019542875 5324 PASS /0 FAIL /6 intentional SKIP. Cloud/browser 44019543035 first attempt offline service-worker reload timed out; only failed browser job rerun attempt 2 SUCCESS. Security 44019542832, isolated SQL 44019542815, approval 44019542795 SUCCESS; unrelated #33 selected checks success.",
+        "Nonforce [skip netlify] PR #3116 merged over concurrent #509 docs to source a91bd34d371d1a564c4212c30022f9e29d32ec26; all five exact Git blobs matched final PR head. Merged Node22/lint 44020186111 5324 PASS /0 FAIL /6 intentional SKIP, cloud/visual/mobile/offline browser 44020186186 SUCCESS, approval/governance 44020186567 SUCCESS.",
+        "Frozen603 original corpus intentionally SKIPPED (44019543115), not PASS. No native device, live auth/member, provider/production experiment, empirical espresso-quality outcome or deployment."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Applicable exact source PR-head/merged CI not yet verified",
-        "No owner Publish or production release authority"
+      "ci_runs": [
+        44019542875,
+        44019543035,
+        44019542832,
+        44019542815,
+        44019542795,
+        44020186111,
+        44020186186,
+        44020186567
       ],
-      "notes": "TESTING only; code+test+queue+same-commit journal authored, not independently certified; one-control historical actual display correction, no new numeric policy.",
+      "blockers": [],
+      "notes": "DEV-ONLY READY after exact final PR-head and merged Git blobs, Node22 5324/0/6 and successful applicable cloud/mobile/offline/browser/security/SQL/approval. Initial failed Node and transient browser rerun are preserved in tests/journal; no production deployment, new taste policy or data change.",
       "production_deployed": false
     }
   ],

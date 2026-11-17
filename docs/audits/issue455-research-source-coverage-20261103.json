@@ -3588,6 +3588,46 @@
         44012787579,
         44012787562
       ]
+    },
+    {
+      "id": "LIVE-20261117-R318-NEXT-RECIPE-MEASURED-GRIND-CONTINUITY",
+      "type": "exact_immutable_app_source_and_synthetic_regressions",
+      "title": "Next Recipe inadvertently rounds original unchanged measured grinder dial, suggesting a phantom second change",
+      "source_branch": "development/backend-foundation",
+      "source_commit_sha": "a91bd34d371d1a564c4212c30022f9e29d32ec26",
+      "source_git_blobs": {
+        "site/lib/engine.js_before": "5504a30d466a20d373b7fabed084880b69f455b8",
+        "site/lib/ui.js_before": "3819152094686bd8a7704dabeeb5e207727aec3e",
+        "site/lib/engine.js_after": "592dcb2e58e1d2343703e3086f1cb3992fe3cf40",
+        "site/lib/ui.js_after": "a67d9462838ca94b4d2970c3a6c78de128a1a708",
+        "tests/issue455-r318-next-recipe-measured-grind.test.mjs": "9444d23829ca78856fec0aac7214d554752ad8f4",
+        "docs/workstreams/ops-issue455-r318-measured-grind-next-recipe-20261117.md": "ce2659d0fce9ffbf74d1008212a9878438fd20ba"
+      },
+      "access": "DIRECT_GITHUB_IMMUTABLE_SOURCE_BEFORE_AND_AFTER_AND_FINAL_EXACT_SOURCE_ACTIONS",
+      "review_status": "R455-318_SAFE_LOCKED_COMPATIBLE_NODE22_BROWSER_HEAD_AND_MERGED_SOURCE_PASS_DEV_ONLY",
+      "evidence_grade": "DETERMINISTIC_SOURCE_NEGATIVE_AND_SYNTHETIC_POSITIVE_NEGATIVE_REGRESSIONS_NOT_REAL_CUP_QUALITY",
+      "claims_verified_externally": "No new external science claim: prior R317 nextAdvice correctly preserved measured 2.45 unchanged for yield-only; subsequent recommendation() and UI fmt silently rounded 2.5. Fixed current recommendation card and original-before arrow; no actual member occurrence established.",
+      "source_locators": [
+        "site/lib/engine.js recommendation final guard",
+        "site/lib/ui.js recipeGrid / nextShotAdjustment",
+        "tests/issue455-r318-next-recipe-measured-grind.test.mjs"
+      ],
+      "implementation_status": "SAFE_NONFORCE_MERGED_DEVELOPMENT_ONLY_READY_NOT_DEPLOYED",
+      "implementation_pr": 3116,
+      "implementation_merge_sha": "a91bd34d371d1a564c4212c30022f9e29d32ec26",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0,
+      "ci_runs": [
+        44018984152,
+        44019542875,
+        44019543035,
+        44019542832,
+        44019542815,
+        44019542795,
+        44020186111,
+        44020186186,
+        44020186567
+      ]
     }
   ],
   "evidence_checks": [
@@ -10698,6 +10738,24 @@
       "grade": "EXACT_PR_HEAD_AND_MERGED_NODE22_SYNTHETIC_REGRESSION_AND_LINT_5316_PASS_0_FAIL_6_INTENTIONAL_SKIP; SOURCE_BOUND_MOBILE_APPROVAL_SQL_SECURITY_SUCCESS; FROZEN603_SKIPPED",
       "result": "DEV_ONLY_SAFE_MERGED_READY; tests 5322 total /5316 passed /0 failed /6 intentional skips on corrected head+merged, 4 new R317 synthetic and repaired legacy guard pass. No actual live member testing, production deployment, or espresso quality improvement.",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CODE-318-A",
+      "source": "LIVE-20261117-R318-NEXT-RECIPE-MEASURED-GRIND-CONTINUITY",
+      "claim": "On the original development SHA 52928f3437ea44bc5943757fd7f1d98051cb54c0, nextAdvice preserved unchanged 2.45 grinder setting during yield-only advice, yet recommendation() unconditionally rounded rec.grind.value and UI fmt rounded the displayed last actual. The resulting Next Recipe card suggested an unintended second knob change.",
+      "source_locator": "Original engine blob 5504a30d466a20d373b7fabed084880b69f455b8, ui blob 3819152094686bd8a7704dabeeb5e207727aec3e, source review R318 scoped journal",
+      "grade": "DIRECT_IMMUTABLE_SOURCE_NEGATIVE_REPRODUCTION_NO_LIVE_MEMBER_READ",
+      "result": "SAFE_LOCKED_COMPATIBLE_CORRECTION_JUSTIFIED; no new policy/taste optimum or empiric recommendation benefit",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CI-318-B",
+      "source": "LIVE-20261117-R318-NEXT-RECIPE-MEASURED-GRIND-CONTINUITY",
+      "claim": "R318 five synthetic positive/negative tests pass for unchanged measured grinder precision, preparation-only, genuine grinder changes at tenths, ordinary starting display and legacy cached new target 2.35 rounded to 2.4. Exact final PR head and merged-source Node22, cloud/browser/mobile/offline, SQL/security/approval passed with failure receipts preserved.",
+      "source_locator": "PR #3116 head c72473c4e5209098f136ba42b269295ad3c5f5b9, merged a91bd34d371d1a564c4212c30022f9e29d32ec26; head Node22 44019542875, browser attempt2 44019543035, SQL 44019542815, security 44019542832, approval 44019542795; merged Node22 44020186111, browser 44020186186, approval 44020186567; initial failed Node22 44018984152",
+      "grade": "EXACT_PR_HEAD_AND_MERGED_SOURCE_NODE22_5324_PASS_0_FAIL_6_SKIP; FIVE_NEW_SYNTHETIC_PASS; APPLICABLE_BROWSER_CLOUD_OFFLINE_SQL_SECURITY_APPROVAL_SUCCESS; FROZEN603_SKIPPED",
+      "result": "DEVELOPMENT_ONLY_SAFE_READY_AFTER_NONFORCE_MERGE_NO_DEPLOYMENT_OR_ESPRESSO_QUALITY_EFFICACY_CLAIM",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -10706,7 +10764,7 @@
     "tests_executed": true,
     "production_deployed": false,
     "queue_changed": true,
-    "reason": "R455-303 source fix three synthetic tests full exact PR and merged 5204 pass, no member or production app change; development READY after documentation reconciliation."
+    "reason": "R318 source fix exact original measured grinder 2.45 no second change; final head and merged Node22 5324 pass/0 fail/6 skip, all five R318 tests plus applicable browser/mobile/offline/approval/security/SQL success, no production/member or empiric cup improvement."
   },
   "next_actions": [
     "R455-246 author full preprint model Table I and Discussion checked: physical 399 vs unphysical imposed 798 kg/m3 needed to reproduce declining EY, no direct local flow/sensory validation. Existing 139 source identities retained; +3 source-specific checks, +1 research-only proposal, no app action. Original S019 inaccessible; exact docs-only PR CI and merge pending; next nonoverlapping claim or reproduced SAFE Log Shot-Rate-Recommendation gap.",
@@ -10940,25 +10998,26 @@
     "R455-314 FINAL: exact tested source PR #3096 one-parent merge 9d337c0cff19022b269bdd95d3d95ef63cbf31d5, five Git blobs matched; 3/3 R314 Node tests PASS head+merge, 5298 PASS/0 FAIL/6 SKIP, merged approval/browser SUCCESS. Unique R314 queue READY development-only, not deployed. Separate #33 original241 current source fail on merged push, owned #33 (not #455). Continue next distinct SAFE source/effectiveness review; ZIP and S019 original bytes still unverified.",
     "R455-315: primary author 2021 EG-1 SSP ULF vs Niche 6+5 same-coffee 1:4 bloom study verified descriptively against original report09; original PSD measurements/raw DE1 logs/independent brew or five-taste efficacy NOT verified. Distinguish measured raw/filtered terminal EY from modeled time-course and low-fines hypotheses; no universal recipe changes, no owner decision presently. Original S019/Oct29 pack fresh raw bytes still outstanding; no #267 literal-line credit. Exact docs-only PR CI and integration to verify.",
     "R455-316: CENT original BMJ 2015 methodological statement and companion scoped to N-of-1 reporting vs observational same-coffee single-change next-shot evaluation, NO actual espresso treatment effect, member data or product change. Publisher full article 403 and original paper bytes not independently verified. Exact docs-only source CI/merge and research ledger integration to check; original October29 implementation ZIP and standalone S019 bytes outstanding; zero #267 literal-line credit.",
-    "R455-317 FINAL CODE: PR #3111 source-head 75246b1bfaa4e37c5b6710f0750282ed0d891b0d nonforce merged development 02e831b806366cc75ebdca1ab20c233e8d203b46 with identical five Git blobs; one initial failing legacy test fixed, corrected head+merged Node22 each 5316 pass /0 fail /6 skip and scoped UX/mobile/offline/security/SQL/approval success. Development READY, NOT deployed; docs reconciliation still needs its own source-bound PR CI and merge, do not confuse docs-only checks with app efficacy. No original ZIP/S019 verification or #267 line credit."
+    "R455-317 FINAL CODE: PR #3111 source-head 75246b1bfaa4e37c5b6710f0750282ed0d891b0d nonforce merged development 02e831b806366cc75ebdca1ab20c233e8d203b46 with identical five Git blobs; one initial failing legacy test fixed, corrected head+merged Node22 each 5316 pass /0 fail /6 skip and scoped UX/mobile/offline/security/SQL/approval success. Development READY, NOT deployed; docs reconciliation still needs its own source-bound PR CI and merge, do not confuse docs-only checks with app efficacy. No original ZIP/S019 verification or #267 line credit.",
+    "R455-318 source PR #3116 NONFORCE MERGED development a91bd34d371d1a564c4212c30022f9e29d32ec26 after final head and merged exact Node22 5324 pass/0 fail/6 skip and five new synthetic PASS; mobile browser initial offline timeout rerun success; frozen603 skipped, neither empirical quality claim nor deployment. Final docs-only CI/merge/readback pending. #267 literal line audit separate; October29 ZIP and S019 raw not accessible in this session."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-317",
+    "run_id": "R455-318",
     "date": "2026-11-17",
-    "development_preflight_sha": "02e831b806366cc75ebdca1ab20c233e8d203b46",
+    "development_preflight_sha": "a91bd34d371d1a564c4212c30022f9e29d32ec26",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
     "source_counts": {
-      "sources": 181,
-      "evidence_checks": 545,
-      "proposals": 245
+      "sources": 182,
+      "evidence_checks": 547,
+      "proposals": 246
     },
-    "research_status": "SOURCE_BOUND_ACTUAL_NEXT_ADVICE_ONE_CONTROL_CORRECTION_VERIFIED_TESTED_NONFORCE_MERGED_DEV_ONLY",
+    "research_status": "EXACT_SOURCE_ONE_CONTROL_MEASURED_GRIND_RECIPE_CARD_CORRECTION_NONFORCE_MERGED_AND_APP_CI_PASS_DEV_ONLY",
     "runtime_changed": true,
     "tests_run": true,
     "production_deployed": false,
     "github267_literal_review_credit": 0,
     "owner_approval_now_required": false,
-    "next": "Verify final docs-only reconciliation PR source-bound governance and merge/readback, then continue source/claim ledger and distinct Log Shot -> Rate -> Recommendations reviews, without deploying. Original October29 ZIP and standalone S019 raw bytes remain inaccessible."
+    "next": "Verify docs-only R318 READY evidence ledger and release queue reconciliation PR governance/merge/readback, then continue distinct new source and Log Shot -> Rate -> Recommendations reviews. Oct29 ZIP and S019 raw current-session access not established; no #267 line credit."
   },
   "policy_decisions_resolved": [
     {
@@ -16738,6 +16797,36 @@
       ],
       "test_plan": "All four focused synthetic positive/negative cases and historical grinder guard PASS; Node22 5316/0/6 + lint, packaged mobile/browser/offline/a11y and approval/security/cloud/isolated SQL CI. Do not imply frozen603, live device or measured taste effect.",
       "release_queue": "DIC-Q-455-r317-next-advice-single-control-grind",
+      "release_queue_status": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-PROP-318-PRESERVE-ORIGINAL-GRIND-IN-NEXT-RECIPE",
+      "severity": "P2_OWNED_SAFE_ONE_CONTROL_PRESENTATION_CORRECTNESS",
+      "source": [
+        "LIVE-20261117-R318-NEXT-RECIPE-MEASURED-GRIND-CONTINUITY"
+      ],
+      "evidence": [
+        "R455-EV-CODE-318-A",
+        "R455-EV-CI-318-B"
+      ],
+      "finding": "The final Next Recipe card and Before arrow rounded an unchanged actual grinder setting, e.g. 2.45 to 2.5, despite a yield-only next-action request; phantom second change conflicts with the owner Locked one-controllable-variable guidance.",
+      "user_benefit": "Keep original physical measurement visible exactly, avoid accidental second control changes, preserve clear Next Shot guidance and mobile/history correctness.",
+      "current_locked": "Master 13.5 and 19.3: NEW recommended grinds use tenths and current setup range; original measured shot, five tastes, notes/private History and one intended controllable change preserved.",
+      "current_app": "R317 already kept exact unchanged original in nextAdvice(), but recommendation() and UI formatting lost that precision. R318 corrected the engine's display guard and original-card/arrow formatting; genuinely changed new grinder targets are still rounded/clamped.",
+      "proposed_change": "SAFE implemented: preserve in-range unchanged measured grind for yield/diagnostic card and Before arrow; retain existing one-tenth convention on new grind suggestions including cached legacy suggestions. No taste scoring or numeric targets change.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "Nonforce [skip netlify] PR #3116 merged at a91bd34d371d1a564c4212c30022f9e29d32ec26 over concurrent unrelated #509; same-commit preflight journal and five exact Git file blobs head=merge; 5 focused cases and merged CI pass.",
+      "files": [
+        "site/lib/engine.js",
+        "site/lib/ui.js",
+        "tests/issue455-r318-next-recipe-measured-grind.test.mjs",
+        "docs/workstreams/ops-issue455-r318-measured-grind-next-recipe-20261117.md"
+      ],
+      "test_plan": "Negative original source proof and five synthetic regressions PASS; final PR head/merged Node22 5324/0/6, browser/mobile/offline, SQL/security/approval SUCCESS. Initial malformed-test Node22 failure repaired, one transient offline browser reload failure rerun once successful. No frozen603, live account, real device or measured taste-effect claim.",
+      "release_queue": "DIC-Q-455-r318-next-recipe-measured-grind-precision",
       "release_queue_status": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
       "production_deployed": false,
       "github267_literal_review_credit": 0
