@@ -8,6 +8,27 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-r320-shot-history-measured-precision",
+      "issue": 455,
+      "pr": null,
+      "title": "Show original measured dose, yield, time and grind precision in Shot History",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/ui.js"
+      ],
+      "owner_source": "Issue #455 Option B SAFE Locked-compatible; DIC_PREFLIGHT_VERIFIED development_sha=6e8024d2d2229b8dbd8bc0c703872b4638d9014f preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Direct immutable source inspected: shotSummary() used fmt(...,1) for historic dose/yield/time/grind while R318/R319 already preserve unchanged measured 2.45/36.35 in recommendation; focused negative/positive Node22 regressions authored but NOT EXECUTED at authoring."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Await exact PR-head focused/full applicable Node22 and cloud/mobile/offline/governance CI, nonforce merge, merged-source readback and documentation/evidence reconciliation."
+      ],
+      "notes": "DEV-ONLY TESTING; original stored measurement not altered. All five ratings, notes, calibration, separate styles, Community/privacy and Locked numeric policy unchanged. No actual member occurrence or improved-cup-quality evidence.",
+      "production_deployed": false
+    },
+    {
       "id": "DIC-Q-455-r319-original-yield-next-recipe-precision",
       "issue": 455,
       "pr": 3122,
