@@ -23065,5 +23065,117 @@
     "provider_writes": 0,
     "queue_state": "NOT_UPDATED_QUEUE_CURRENT_CONTENT_UNVERIFIED",
     "next": "First genuinely changed/new/unreviewed nonapp provider object and remaining source-isolated acceptance, no restart."
+  },
+  "provider_current_storage_realtime_vault_table_semantics_run316": {
+    "status": "CURRENT_COMPLETE_VISIBLE_TABLE_CATALOG_COMPONENT_REVIEW_NO_DUPLICATE_BASELINE_CREDIT",
+    "project_ref": "azviqqejypsefzilgonr",
+    "preflight_initial_sha": "377303eedd136ceeec0ecc47645400bfcea100d4",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_development_sha": "22704f26a5fc9eebe158f3bc99b7ed7138548c65",
+    "receipt_path": "docs/audits/issue509-r316-storage-realtime-vault-table-catalog-20261117.json",
+    "receipt_blob_sha": "5c55e8b5591e4d8b4c6987326ddd042a00df7310",
+    "previous_source_commit": "ee76002755d963da6a445458a4e31f786cdb53d5",
+    "scoped_journal_commit": "22704f26a5fc9eebe158f3bc99b7ed7138548c65",
+    "current_schema_tables": 14,
+    "by_schema": {
+      "storage": 10,
+      "realtime": 3,
+      "vault": 1
+    },
+    "complete_normalized_visible_characters": 33698,
+    "component_counts": {
+      "columns": 121,
+      "constraints": 32,
+      "indexes": 34,
+      "triggers": 12,
+      "policies": 0
+    },
+    "per_object_canonical_md5": [
+      {
+        "name": "realtime.messages",
+        "md5": "e7e74029c8c9d333ae1a417a3e30c602",
+        "length": 2537
+      },
+      {
+        "name": "realtime.schema_migrations",
+        "md5": "319c9745038faf9395b06dde2c0dfb19",
+        "length": 869
+      },
+      {
+        "name": "realtime.subscription",
+        "md5": "5ad006e42bc672e498e9fdc68dc98997",
+        "length": 2662
+      },
+      {
+        "name": "storage.bucket_lifecycle_states",
+        "md5": "8988cbb7e9b71b9b05c1637d5240a7a4",
+        "length": 3401
+      },
+      {
+        "name": "storage.buckets",
+        "md5": "09cd14a2d5d3d67151477f799d095c02",
+        "length": 5433
+      },
+      {
+        "name": "storage.buckets_analytics",
+        "md5": "8e511db2f394f985025c1553abd69e83",
+        "length": 1772
+      },
+      {
+        "name": "storage.buckets_vectors",
+        "md5": "4b9cd78ce50b144cc0c0524879ead2a6",
+        "length": 1140
+      },
+      {
+        "name": "storage.lifecycle_abandoned_artifacts",
+        "md5": "5e0a2c08f58a6158d10971130d7bc9f5",
+        "length": 1509
+      },
+      {
+        "name": "storage.migrations",
+        "md5": "efb414d3f3489ff1a07de5c1fbdbb34c",
+        "length": 1339
+      },
+      {
+        "name": "storage.objects",
+        "md5": "7f41745297dab3d43f09455c48f5cc37",
+        "length": 4845
+      },
+      {
+        "name": "storage.s3_multipart_uploads",
+        "md5": "cdb80d756d96e511a1e60825b5c075f4",
+        "length": 2168
+      },
+      {
+        "name": "storage.s3_multipart_uploads_parts",
+        "md5": "6ef45dd9c696031cdfbeed10ea3569c1",
+        "length": 2164
+      },
+      {
+        "name": "storage.vector_indexes",
+        "md5": "c76b1ec5671b84987233aecde5c6a4cc",
+        "length": 2072
+      },
+      {
+        "name": "vault.secrets",
+        "md5": "157507a835ed658a4a07927b3ec42eee",
+        "length": 1787
+      }
+    ],
+    "first_time_semantic_credit": 0,
+    "reason_no_recredit": "Already separately evidenced R221/R239/R300 and prior provider catalog receipts. Current MD5 is normalized on newly collected field set; no unsupported drift inference.",
+    "confirmed_new_defect": 0,
+    "safe_deletions": 0,
+    "github_code_edits": 0,
+    "ci_runs": 0,
+    "provider_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "queue": "NO_CHANGE_EXISTING_FIXES_TESTING",
+    "unverified": [
+      "Managed native/worker runtime",
+      "Hosted realtime.subscription Data API exposure #96",
+      "Provider dashboard Auth and Vault C implementations"
+    ],
+    "next": "First truly changed/new/unreviewed accessible provider object; otherwise evidence-based application SQL/Edge bottleneck path; preserve R221/R300 receipts and #96 ownership."
   }
 }
