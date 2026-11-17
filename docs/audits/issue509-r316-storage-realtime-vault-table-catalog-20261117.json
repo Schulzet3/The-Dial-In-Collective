@@ -1,0 +1,1995 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 316,
+  "utc_date": "2026-11-17",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "initial_development_sha": "377303eedd136ceeec0ecc47645400bfcea100d4",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "verified_equal_git_blob": true,
+    "prewrite_development_sha": "377303eedd136ceeec0ecc47645400bfcea100d4"
+  },
+  "observed_main_sha": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+  "observed_release_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5",
+  "classification": "PROVIDER_CATALOG_DIRECT_VISIBLE_COMPONENT_REVIEW_NOT_BINARY_OR_HOSTED_RUNTIME",
+  "scope": "All 14 current storage(10), realtime(3), vault(1) table visible column/default/constraints/index/trigger/policy/role metadata, retaining exact provider text and per-object SQL-produced canonical JSON MD5.",
+  "objects": [
+    {
+      "object": "realtime.messages",
+      "canonical_md5": "e7e74029c8c9d333ae1a417a3e30c602",
+      "canonical_characters": 2537,
+      "definition": {
+        "rls": true,
+        "kind": "p",
+        "owner": "supabase_realtime_admin",
+        "columns": [
+          {
+            "name": "topic",
+            "type": "text",
+            "default": null,
+            "ordinal": 1,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "extension",
+            "type": "text",
+            "default": null,
+            "ordinal": 2,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "payload",
+            "type": "jsonb",
+            "default": null,
+            "ordinal": 3,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "event",
+            "type": "text",
+            "default": null,
+            "ordinal": 4,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "private",
+            "type": "boolean",
+            "default": "false",
+            "ordinal": 5,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp without time zone",
+            "default": "timezone('utc'::text, clock_timestamp())",
+            "ordinal": 6,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "inserted_at",
+            "type": "timestamp without time zone",
+            "default": "timezone('utc'::text, clock_timestamp())",
+            "ordinal": 7,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "id",
+            "type": "uuid",
+            "default": "gen_random_uuid()",
+            "ordinal": 8,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "binary_payload",
+            "type": "bytea",
+            "default": null,
+            "ordinal": 9,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "skip_broadcast",
+            "type": "boolean",
+            "default": "false",
+            "ordinal": 10,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "expires_at",
+            "type": "timestamp without time zone",
+            "default": null,
+            "ordinal": 11,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          }
+        ],
+        "indexes": [
+          {
+            "sql": "CREATE UNIQUE INDEX messages_pkey ON ONLY realtime.messages USING btree (id, inserted_at)",
+            "name": "messages_pkey",
+            "ready": true,
+            "valid": true
+          },
+          {
+            "sql": "CREATE INDEX messages_replay_index ON ONLY realtime.messages USING btree (topic, inserted_at DESC, COALESCE(expires_at, 'infinity'::timestamp without time zone)) WHERE ((extension = 'broadcast'::text) AND (private = true))",
+            "name": "messages_replay_index",
+            "ready": true,
+            "valid": true
+          }
+        ],
+        "policies": [],
+        "triggers": [],
+        "force_rls": false,
+        "constraints": [
+          {
+            "sql": "CHECK (payload IS NULL OR binary_payload IS NULL) NOT VALID",
+            "name": "messages_payload_exclusive",
+            "validated": false
+          },
+          {
+            "sql": "PRIMARY KEY (id, inserted_at)",
+            "name": "messages_pkey",
+            "validated": true
+          }
+        ],
+        "role_access": {
+          "anon_select": true,
+          "auth_select": true,
+          "service_select": true,
+          "anon_schema_usage": true,
+          "auth_schema_usage": true
+        },
+        "partition_key": "RANGE (inserted_at)",
+        "replica_identity": "d"
+      },
+      "inspected_canonical_characters": [
+        1,
+        2537
+      ],
+      "complete_visible_component_review": true,
+      "semantic_verdict": "Partitioned message envelope: payload/binary exclusivity NOT VALID, replay-only partial index, no child partitions currently. Provider-managed; no active messages. Runtime partition provisioning UNVERIFIED.",
+      "first_time_credit": 0
+    },
+    {
+      "object": "realtime.schema_migrations",
+      "canonical_md5": "319c9745038faf9395b06dde2c0dfb19",
+      "canonical_characters": 869,
+      "definition": {
+        "rls": false,
+        "kind": "r",
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "name": "version",
+            "type": "bigint",
+            "default": null,
+            "ordinal": 1,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "inserted_at",
+            "type": "timestamp(0) without time zone",
+            "default": "now()",
+            "ordinal": 2,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          }
+        ],
+        "indexes": [
+          {
+            "sql": "CREATE UNIQUE INDEX schema_migrations_pkey ON realtime.schema_migrations USING btree (version)",
+            "name": "schema_migrations_pkey",
+            "ready": true,
+            "valid": true
+          }
+        ],
+        "policies": [],
+        "triggers": [],
+        "force_rls": false,
+        "constraints": [
+          {
+            "sql": "PRIMARY KEY (version)",
+            "name": "schema_migrations_pkey",
+            "validated": true
+          }
+        ],
+        "role_access": {
+          "anon_select": false,
+          "auth_select": false,
+          "service_select": false,
+          "anon_schema_usage": true,
+          "auth_schema_usage": true
+        },
+        "partition_key": null,
+        "replica_identity": "d"
+      },
+      "inspected_canonical_characters": [
+        1,
+        869
+      ],
+      "complete_visible_component_review": true,
+      "semantic_verdict": "Provider migration history with immutable version PK; no client SELECT grants. Historical rows not altered.",
+      "first_time_credit": 0
+    },
+    {
+      "object": "realtime.subscription",
+      "canonical_md5": "5ad006e42bc672e498e9fdc68dc98997",
+      "canonical_characters": 2662,
+      "definition": {
+        "rls": false,
+        "kind": "r",
+        "owner": "supabase_realtime_admin",
+        "columns": [
+          {
+            "name": "id",
+            "type": "bigint",
+            "default": null,
+            "ordinal": 1,
+            "identity": "a",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "subscription_id",
+            "type": "uuid",
+            "default": null,
+            "ordinal": 2,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "entity",
+            "type": "regclass",
+            "default": null,
+            "ordinal": 3,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "filters",
+            "type": "realtime.user_defined_filter[]",
+            "default": "'{}'::realtime.user_defined_filter[]",
+            "ordinal": 4,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "claims",
+            "type": "jsonb",
+            "default": null,
+            "ordinal": 5,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "claims_role",
+            "type": "regrole",
+            "default": "realtime.to_regrole((claims ->> 'role'::text))",
+            "ordinal": 6,
+            "identity": "",
+            "not_null": true,
+            "generated": "s"
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp without time zone",
+            "default": "timezone('utc'::text, now())",
+            "ordinal": 7,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "action_filter",
+            "type": "text",
+            "default": "'*'::text",
+            "ordinal": 8,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "selected_columns",
+            "type": "text[]",
+            "default": null,
+            "ordinal": 9,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          }
+        ],
+        "indexes": [
+          {
+            "sql": "CREATE INDEX ix_realtime_subscription_entity ON realtime.subscription USING btree (entity)",
+            "name": "ix_realtime_subscription_entity",
+            "ready": true,
+            "valid": true
+          },
+          {
+            "sql": "CREATE UNIQUE INDEX pk_subscription ON realtime.subscription USING btree (id)",
+            "name": "pk_subscription",
+            "ready": true,
+            "valid": true
+          },
+          {
+            "sql": "CREATE UNIQUE INDEX subscription_subscription_id_entity_filters_hash_key ON realtime.subscription USING btree (subscription_id, entity, realtime.filters_hash(filters), action_filter, COALESCE(selected_columns, '{}'::text[]))",
+            "name": "subscription_subscription_id_entity_filters_hash_key",
+            "ready": true,
+            "valid": true
+          }
+        ],
+        "policies": [],
+        "triggers": [
+          "CREATE TRIGGER tr_check_filters BEFORE INSERT OR UPDATE ON realtime.subscription FOR EACH ROW EXECUTE FUNCTION realtime.subscription_check_filters()"
+        ],
+        "force_rls": false,
+        "constraints": [
+          {
+            "sql": "PRIMARY KEY (id)",
+            "name": "pk_subscription",
+            "validated": true
+          },
+          {
+            "sql": "CHECK (action_filter = ANY (ARRAY['*'::text, 'INSERT'::text, 'UPDATE'::text, 'DELETE'::text]))",
+            "name": "subscription_action_filter_check",
+            "validated": true
+          }
+        ],
+        "role_access": {
+          "anon_select": true,
+          "auth_select": true,
+          "service_select": true,
+          "anon_schema_usage": true,
+          "auth_schema_usage": true
+        },
+        "partition_key": null,
+        "replica_identity": "d"
+      },
+      "inspected_canonical_characters": [
+        1,
+        2662
+      ],
+      "complete_visible_component_review": true,
+      "semantic_verdict": "Filter validation trigger plus entity and uniqueness hash indexes; JSON claims. Existing broad table SELECT and no RLS require hosted Data API exposure validation by #96; current zero rows, no observed exfiltration. Keep.",
+      "first_time_credit": 0
+    },
+    {
+      "object": "storage.bucket_lifecycle_states",
+      "canonical_md5": "8988cbb7e9b71b9b05c1637d5240a7a4",
+      "canonical_characters": 3401,
+      "definition": {
+        "rls": true,
+        "kind": "r",
+        "owner": "supabase_storage_admin",
+        "columns": [
+          {
+            "name": "bucket_id",
+            "type": "text",
+            "default": null,
+            "ordinal": 1,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "generation",
+            "type": "uuid",
+            "default": null,
+            "ordinal": 2,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "next_run_at",
+            "type": "timestamp with time zone",
+            "default": null,
+            "ordinal": 3,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "claim_id",
+            "type": "uuid",
+            "default": null,
+            "ordinal": 4,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "claim_until",
+            "type": "timestamp with time zone",
+            "default": null,
+            "ordinal": 5,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "continuation",
+            "type": "jsonb",
+            "default": null,
+            "ordinal": 6,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "last_started_at",
+            "type": "timestamp with time zone",
+            "default": null,
+            "ordinal": 7,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "last_completed_at",
+            "type": "timestamp with time zone",
+            "default": null,
+            "ordinal": 8,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "last_success_at",
+            "type": "timestamp with time zone",
+            "default": null,
+            "ordinal": 9,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "last_result",
+            "type": "jsonb",
+            "default": null,
+            "ordinal": 10,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "failure_count",
+            "type": "integer",
+            "default": "0",
+            "ordinal": 11,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "last_error",
+            "type": "jsonb",
+            "default": null,
+            "ordinal": 12,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "default": "now()",
+            "ordinal": 13,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          }
+        ],
+        "indexes": [
+          {
+            "sql": "CREATE INDEX bucket_lifecycle_states_due_idx ON storage.bucket_lifecycle_states USING btree (next_run_at, bucket_id) WHERE (next_run_at IS NOT NULL)",
+            "name": "bucket_lifecycle_states_due_idx",
+            "ready": true,
+            "valid": true
+          },
+          {
+            "sql": "CREATE UNIQUE INDEX bucket_lifecycle_states_pkey ON storage.bucket_lifecycle_states USING btree (bucket_id)",
+            "name": "bucket_lifecycle_states_pkey",
+            "ready": true,
+            "valid": true
+          }
+        ],
+        "policies": [],
+        "triggers": [],
+        "force_rls": false,
+        "constraints": [
+          {
+            "sql": "CHECK (continuation IS NULL OR jsonb_typeof(continuation) = 'object'::text)",
+            "name": "bucket_lifecycle_continuation_object_check",
+            "validated": true
+          },
+          {
+            "sql": "CHECK (failure_count >= 0)",
+            "name": "bucket_lifecycle_failure_count_check",
+            "validated": true
+          },
+          {
+            "sql": "CHECK (last_result IS NULL OR jsonb_typeof(last_result) = 'object'::text)",
+            "name": "bucket_lifecycle_last_result_object_check",
+            "validated": true
+          },
+          {
+            "sql": "CHECK (next_run_at IS NOT NULL OR NOT jsonb_path_exists(COALESCE(continuation, '{}'::jsonb), '$.\"batch\".\"inFlight\"'::jsonpath))",
+            "name": "bucket_lifecycle_recovery_due_check",
+            "validated": true
+          },
+          {
+            "sql": "FOREIGN KEY (bucket_id) REFERENCES storage.buckets(id) ON DELETE CASCADE",
+            "name": "bucket_lifecycle_states_bucket_id_fkey",
+            "validated": true
+          },
+          {
+            "sql": "PRIMARY KEY (bucket_id)",
+            "name": "bucket_lifecycle_states_pkey",
+            "validated": true
+          }
+        ],
+        "role_access": {
+          "anon_select": false,
+          "auth_select": false,
+          "service_select": true,
+          "anon_schema_usage": true,
+          "auth_schema_usage": true
+        },
+        "partition_key": null,
+        "replica_identity": "d"
+      },
+      "inspected_canonical_characters": [
+        1,
+        3401
+      ],
+      "complete_visible_component_review": true,
+      "semantic_verdict": "Single bucket key, FK cascading from bucket, due-time partial index; JSON continuation shape and recovery scheduling checks. No active buckets or lifecycle tasks. Keep.",
+      "first_time_credit": 0
+    },
+    {
+      "object": "storage.buckets",
+      "canonical_md5": "09cd14a2d5d3d67151477f799d095c02",
+      "canonical_characters": 5433,
+      "definition": {
+        "rls": true,
+        "kind": "r",
+        "owner": "supabase_storage_admin",
+        "columns": [
+          {
+            "name": "id",
+            "type": "text",
+            "default": null,
+            "ordinal": 1,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "name",
+            "type": "text",
+            "default": null,
+            "ordinal": 2,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "owner",
+            "type": "uuid",
+            "default": null,
+            "ordinal": 3,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "default": "now()",
+            "ordinal": 4,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "default": "now()",
+            "ordinal": 5,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "public",
+            "type": "boolean",
+            "default": "false",
+            "ordinal": 6,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "avif_autodetection",
+            "type": "boolean",
+            "default": "false",
+            "ordinal": 7,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "file_size_limit",
+            "type": "bigint",
+            "default": null,
+            "ordinal": 8,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "allowed_mime_types",
+            "type": "text[]",
+            "default": null,
+            "ordinal": 9,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "owner_id",
+            "type": "text",
+            "default": null,
+            "ordinal": 10,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "type",
+            "type": "storage.buckettype",
+            "default": "'STANDARD'::storage.buckettype",
+            "ordinal": 11,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "versioning_status",
+            "type": "text",
+            "default": "'DISABLED'::text",
+            "ordinal": 12,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "lifecycle_configuration",
+            "type": "jsonb",
+            "default": null,
+            "ordinal": 13,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "lifecycle_configuration_generation",
+            "type": "uuid",
+            "default": null,
+            "ordinal": 14,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          }
+        ],
+        "indexes": [
+          {
+            "sql": "CREATE UNIQUE INDEX bname ON storage.buckets USING btree (name)",
+            "name": "bname",
+            "ready": true,
+            "valid": true
+          },
+          {
+            "sql": "CREATE UNIQUE INDEX buckets_pkey ON storage.buckets USING btree (id)",
+            "name": "buckets_pkey",
+            "ready": true,
+            "valid": true
+          }
+        ],
+        "policies": [],
+        "triggers": [
+          "CREATE TRIGGER enforce_bucket_name_length_trigger BEFORE INSERT OR UPDATE OF name ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.enforce_bucket_name_length()",
+          "CREATE TRIGGER enforce_versioning_status_transition BEFORE UPDATE OF versioning_status ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.enforce_versioning_status_transition()",
+          "CREATE TRIGGER protect_active_lifecycle_states BEFORE DELETE ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.protect_active_lifecycle_states()",
+          "CREATE TRIGGER protect_bucket_control_insert BEFORE INSERT ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.protect_bucket_control_columns('service_role')",
+          "CREATE TRIGGER protect_bucket_control_update BEFORE UPDATE OF lifecycle_configuration, lifecycle_configuration_generation ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.protect_bucket_control_columns()",
+          "CREATE TRIGGER protect_bucket_control_update_role AFTER UPDATE OF lifecycle_configuration, lifecycle_configuration_generation ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.enforce_bucket_lifecycle_service_role('service_role')",
+          "CREATE TRIGGER protect_buckets_delete BEFORE DELETE ON storage.buckets FOR EACH STATEMENT EXECUTE FUNCTION storage.protect_delete()",
+          "CREATE TRIGGER wake_lifecycle_on_policy_write AFTER INSERT OR UPDATE OF lifecycle_configuration_generation ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.wake_lifecycle_state()",
+          "CREATE TRIGGER wake_lifecycle_on_versioning_enable AFTER UPDATE OF versioning_status ON storage.buckets FOR EACH ROW WHEN (new.lifecycle_configuration IS NOT NULL) EXECUTE FUNCTION storage.wake_lifecycle_state()"
+        ],
+        "force_rls": false,
+        "constraints": [
+          {
+            "sql": "CHECK ((lifecycle_configuration IS NULL) = (lifecycle_configuration_generation IS NULL))",
+            "name": "buckets_lifecycle_configuration_pair_check",
+            "validated": true
+          },
+          {
+            "sql": "CHECK (lifecycle_configuration IS NULL OR jsonb_typeof(lifecycle_configuration) = 'object'::text AND lifecycle_configuration ? 'rules'::text AND\nCASE\n    WHEN jsonb_typeof(lifecycle_configuration -> 'rules'::text) = 'array'::text THEN jsonb_array_length(lifecycle_configuration -> 'rules'::text) >= 1 AND jsonb_array_length(lifecycle_configuration -> 'rules'::text) <= 1000\n    ELSE false\nEND)",
+            "name": "buckets_lifecycle_configuration_shape_check",
+            "validated": true
+          },
+          {
+            "sql": "CHECK (type = 'STANDARD'::storage.buckettype OR lifecycle_configuration IS NULL AND lifecycle_configuration_generation IS NULL)",
+            "name": "buckets_lifecycle_configuration_standard_only_check",
+            "validated": true
+          },
+          {
+            "sql": "PRIMARY KEY (id)",
+            "name": "buckets_pkey",
+            "validated": true
+          },
+          {
+            "sql": "CHECK (type = 'STANDARD'::storage.buckettype OR versioning_status = 'DISABLED'::text)",
+            "name": "buckets_versioning_standard_only_check",
+            "validated": true
+          },
+          {
+            "sql": "CHECK (versioning_status = ANY (ARRAY['DISABLED'::text, 'ENABLED'::text, 'SUSPENDED'::text]))",
+            "name": "buckets_versioning_status_check",
+            "validated": true
+          }
+        ],
+        "role_access": {
+          "anon_select": true,
+          "auth_select": true,
+          "service_select": true,
+          "anon_schema_usage": true,
+          "auth_schema_usage": true
+        },
+        "partition_key": null,
+        "replica_identity": "d"
+      },
+      "inspected_canonical_characters": [
+        1,
+        5433
+      ],
+      "complete_visible_component_review": true,
+      "semantic_verdict": "PK and unique name plus lifecycle JSON shape/generation and STANDARD/versioning restrictions; nine protective/wakeup triggers. No configured buckets. Keep managed schema.",
+      "first_time_credit": 0
+    },
+    {
+      "object": "storage.buckets_analytics",
+      "canonical_md5": "8e511db2f394f985025c1553abd69e83",
+      "canonical_characters": 1772,
+      "definition": {
+        "rls": true,
+        "kind": "r",
+        "owner": "supabase_storage_admin",
+        "columns": [
+          {
+            "name": "name",
+            "type": "text",
+            "default": null,
+            "ordinal": 1,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "type",
+            "type": "storage.buckettype",
+            "default": "'ANALYTICS'::storage.buckettype",
+            "ordinal": 2,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "format",
+            "type": "text",
+            "default": "'ICEBERG'::text",
+            "ordinal": 3,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "default": "now()",
+            "ordinal": 4,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "default": "now()",
+            "ordinal": 5,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "id",
+            "type": "uuid",
+            "default": "gen_random_uuid()",
+            "ordinal": 6,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "deleted_at",
+            "type": "timestamp with time zone",
+            "default": null,
+            "ordinal": 7,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          }
+        ],
+        "indexes": [
+          {
+            "sql": "CREATE UNIQUE INDEX buckets_analytics_pkey ON storage.buckets_analytics USING btree (id)",
+            "name": "buckets_analytics_pkey",
+            "ready": true,
+            "valid": true
+          },
+          {
+            "sql": "CREATE UNIQUE INDEX buckets_analytics_unique_name_idx ON storage.buckets_analytics USING btree (name) WHERE (deleted_at IS NULL)",
+            "name": "buckets_analytics_unique_name_idx",
+            "ready": true,
+            "valid": true
+          }
+        ],
+        "policies": [],
+        "triggers": [],
+        "force_rls": false,
+        "constraints": [
+          {
+            "sql": "PRIMARY KEY (id)",
+            "name": "buckets_analytics_pkey",
+            "validated": true
+          }
+        ],
+        "role_access": {
+          "anon_select": true,
+          "auth_select": true,
+          "service_select": true,
+          "anon_schema_usage": true,
+          "auth_schema_usage": true
+        },
+        "partition_key": null,
+        "replica_identity": "d"
+      },
+      "inspected_canonical_characters": [
+        1,
+        1772
+      ],
+      "complete_visible_component_review": true,
+      "semantic_verdict": "Iceberg analytics bucket metadata with partial unique active name and soft-delete timestamp; no buckets. Keep.",
+      "first_time_credit": 0
+    },
+    {
+      "object": "storage.buckets_vectors",
+      "canonical_md5": "4b9cd78ce50b144cc0c0524879ead2a6",
+      "canonical_characters": 1140,
+      "definition": {
+        "rls": true,
+        "kind": "r",
+        "owner": "supabase_storage_admin",
+        "columns": [
+          {
+            "name": "id",
+            "type": "text",
+            "default": null,
+            "ordinal": 1,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "type",
+            "type": "storage.buckettype",
+            "default": "'VECTOR'::storage.buckettype",
+            "ordinal": 2,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "default": "now()",
+            "ordinal": 3,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "default": "now()",
+            "ordinal": 4,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          }
+        ],
+        "indexes": [
+          {
+            "sql": "CREATE UNIQUE INDEX buckets_vectors_pkey ON storage.buckets_vectors USING btree (id)",
+            "name": "buckets_vectors_pkey",
+            "ready": true,
+            "valid": true
+          }
+        ],
+        "policies": [],
+        "triggers": [],
+        "force_rls": false,
+        "constraints": [
+          {
+            "sql": "PRIMARY KEY (id)",
+            "name": "buckets_vectors_pkey",
+            "validated": true
+          }
+        ],
+        "role_access": {
+          "anon_select": true,
+          "auth_select": true,
+          "service_select": true,
+          "anon_schema_usage": true,
+          "auth_schema_usage": true
+        },
+        "partition_key": null,
+        "replica_identity": "d"
+      },
+      "inspected_canonical_characters": [
+        1,
+        1140
+      ],
+      "complete_visible_component_review": true,
+      "semantic_verdict": "Vector bucket type metadata and PK; companion vector index FK. No buckets. Keep.",
+      "first_time_credit": 0
+    },
+    {
+      "object": "storage.lifecycle_abandoned_artifacts",
+      "canonical_md5": "5e0a2c08f58a6158d10971130d7bc9f5",
+      "canonical_characters": 1509,
+      "definition": {
+        "rls": true,
+        "kind": "r",
+        "owner": "supabase_storage_admin",
+        "columns": [
+          {
+            "name": "bucket_id",
+            "type": "text",
+            "default": null,
+            "ordinal": 1,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "key",
+            "type": "text",
+            "default": null,
+            "ordinal": 2,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "name",
+            "type": "text",
+            "default": null,
+            "ordinal": 3,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "version",
+            "type": "text",
+            "default": null,
+            "ordinal": 4,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "attempted_at",
+            "type": "timestamp with time zone",
+            "default": "now()",
+            "ordinal": 5,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          }
+        ],
+        "indexes": [
+          {
+            "sql": "CREATE INDEX lifecycle_abandoned_artifacts_attempted_at_idx ON storage.lifecycle_abandoned_artifacts USING btree (attempted_at)",
+            "name": "lifecycle_abandoned_artifacts_attempted_at_idx",
+            "ready": true,
+            "valid": true
+          },
+          {
+            "sql": "CREATE UNIQUE INDEX lifecycle_abandoned_artifacts_pkey ON storage.lifecycle_abandoned_artifacts USING btree (bucket_id, key)",
+            "name": "lifecycle_abandoned_artifacts_pkey",
+            "ready": true,
+            "valid": true
+          }
+        ],
+        "policies": [],
+        "triggers": [],
+        "force_rls": false,
+        "constraints": [
+          {
+            "sql": "PRIMARY KEY (bucket_id, key)",
+            "name": "lifecycle_abandoned_artifacts_pkey",
+            "validated": true
+          }
+        ],
+        "role_access": {
+          "anon_select": false,
+          "auth_select": false,
+          "service_select": true,
+          "anon_schema_usage": true,
+          "auth_schema_usage": true
+        },
+        "partition_key": null,
+        "replica_identity": "d"
+      },
+      "inspected_canonical_characters": [
+        1,
+        1509
+      ],
+      "complete_visible_component_review": true,
+      "semantic_verdict": "Lifecycle cleanup retry registry, attempted_at lookup and composite PK; no current task rows. Keep.",
+      "first_time_credit": 0
+    },
+    {
+      "object": "storage.migrations",
+      "canonical_md5": "efb414d3f3489ff1a07de5c1fbdbb34c",
+      "canonical_characters": 1339,
+      "definition": {
+        "rls": true,
+        "kind": "r",
+        "owner": "supabase_storage_admin",
+        "columns": [
+          {
+            "name": "id",
+            "type": "integer",
+            "default": null,
+            "ordinal": 1,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "name",
+            "type": "character varying(100)",
+            "default": null,
+            "ordinal": 2,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "hash",
+            "type": "character varying(40)",
+            "default": null,
+            "ordinal": 3,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "executed_at",
+            "type": "timestamp without time zone",
+            "default": "CURRENT_TIMESTAMP",
+            "ordinal": 4,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          }
+        ],
+        "indexes": [
+          {
+            "sql": "CREATE UNIQUE INDEX migrations_name_key ON storage.migrations USING btree (name)",
+            "name": "migrations_name_key",
+            "ready": true,
+            "valid": true
+          },
+          {
+            "sql": "CREATE UNIQUE INDEX migrations_pkey ON storage.migrations USING btree (id)",
+            "name": "migrations_pkey",
+            "ready": true,
+            "valid": true
+          }
+        ],
+        "policies": [],
+        "triggers": [],
+        "force_rls": false,
+        "constraints": [
+          {
+            "sql": "UNIQUE (name)",
+            "name": "migrations_name_key",
+            "validated": true
+          },
+          {
+            "sql": "PRIMARY KEY (id)",
+            "name": "migrations_pkey",
+            "validated": true
+          }
+        ],
+        "role_access": {
+          "anon_select": false,
+          "auth_select": false,
+          "service_select": false,
+          "anon_schema_usage": true,
+          "auth_schema_usage": true
+        },
+        "partition_key": null,
+        "replica_identity": "d"
+      },
+      "inspected_canonical_characters": [
+        1,
+        1339
+      ],
+      "complete_visible_component_review": true,
+      "semantic_verdict": "Storage-managed migration version/name/hash uniqueness; no app-level edit of historical provider migrations.",
+      "first_time_credit": 0
+    },
+    {
+      "object": "storage.objects",
+      "canonical_md5": "7f41745297dab3d43f09455c48f5cc37",
+      "canonical_characters": 4845,
+      "definition": {
+        "rls": true,
+        "kind": "r",
+        "owner": "supabase_storage_admin",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "default": "gen_random_uuid()",
+            "ordinal": 1,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "bucket_id",
+            "type": "text",
+            "default": null,
+            "ordinal": 2,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "name",
+            "type": "text",
+            "default": null,
+            "ordinal": 3,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "owner",
+            "type": "uuid",
+            "default": null,
+            "ordinal": 4,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "default": "now()",
+            "ordinal": 5,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "default": "now()",
+            "ordinal": 6,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "last_accessed_at",
+            "type": "timestamp with time zone",
+            "default": "now()",
+            "ordinal": 7,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "metadata",
+            "type": "jsonb",
+            "default": null,
+            "ordinal": 8,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "path_tokens",
+            "type": "text[]",
+            "default": "string_to_array(name, '/'::text)",
+            "ordinal": 9,
+            "identity": "",
+            "not_null": false,
+            "generated": "s"
+          },
+          {
+            "name": "version",
+            "type": "text",
+            "default": null,
+            "ordinal": 10,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "owner_id",
+            "type": "text",
+            "default": null,
+            "ordinal": 11,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "user_metadata",
+            "type": "jsonb",
+            "default": null,
+            "ordinal": 12,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "archived_at",
+            "type": "timestamp with time zone",
+            "default": null,
+            "ordinal": 13,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "is_delete_marker",
+            "type": "boolean",
+            "default": "false",
+            "ordinal": 14,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "is_versioned",
+            "type": "boolean",
+            "default": "false",
+            "ordinal": 15,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          }
+        ],
+        "indexes": [
+          {
+            "sql": "CREATE INDEX idx_objects_bucket_id_name ON storage.objects USING btree (bucket_id, name COLLATE \"C\")",
+            "name": "idx_objects_bucket_id_name",
+            "ready": true,
+            "valid": true
+          },
+          {
+            "sql": "CREATE INDEX idx_objects_bucket_id_name_lower ON storage.objects USING btree (bucket_id, lower(name) COLLATE \"C\")",
+            "name": "idx_objects_bucket_id_name_lower",
+            "ready": true,
+            "valid": true
+          },
+          {
+            "sql": "CREATE UNIQUE INDEX idx_objects_current_version ON storage.objects USING btree (bucket_id, name COLLATE \"C\") WHERE (archived_at IS NULL)",
+            "name": "idx_objects_current_version",
+            "ready": true,
+            "valid": true
+          },
+          {
+            "sql": "CREATE INDEX idx_objects_delete_markers ON storage.objects USING btree (bucket_id, name COLLATE \"C\") WHERE is_delete_marker",
+            "name": "idx_objects_delete_markers",
+            "ready": true,
+            "valid": true
+          },
+          {
+            "sql": "CREATE UNIQUE INDEX idx_objects_null_version ON storage.objects USING btree (bucket_id, name COLLATE \"C\") WHERE (NOT is_versioned)",
+            "name": "idx_objects_null_version",
+            "ready": true,
+            "valid": true
+          },
+          {
+            "sql": "CREATE INDEX name_prefix_search ON storage.objects USING btree (name text_pattern_ops)",
+            "name": "name_prefix_search",
+            "ready": true,
+            "valid": true
+          },
+          {
+            "sql": "CREATE INDEX objects_archived_due_idx ON storage.objects USING btree (bucket_id, archived_at, name COLLATE \"C\") INCLUDE (id, version, is_delete_marker) WHERE (archived_at IS NOT NULL)",
+            "name": "objects_archived_due_idx",
+            "ready": true,
+            "valid": true
+          },
+          {
+            "sql": "CREATE UNIQUE INDEX objects_archived_order_uq ON storage.objects USING btree (bucket_id, name COLLATE \"C\", archived_at) WHERE (archived_at IS NOT NULL)",
+            "name": "objects_archived_order_uq",
+            "ready": true,
+            "valid": true
+          },
+          {
+            "sql": "CREATE UNIQUE INDEX objects_bucket_id_name_version_key ON storage.objects USING btree (bucket_id, name COLLATE \"C\", version) NULLS NOT DISTINCT",
+            "name": "objects_bucket_id_name_version_key",
+            "ready": true,
+            "valid": true
+          },
+          {
+            "sql": "CREATE UNIQUE INDEX objects_pkey ON storage.objects USING btree (id)",
+            "name": "objects_pkey",
+            "ready": true,
+            "valid": true
+          }
+        ],
+        "policies": [],
+        "triggers": [
+          "CREATE TRIGGER protect_objects_delete BEFORE DELETE ON storage.objects FOR EACH STATEMENT EXECUTE FUNCTION storage.protect_delete()",
+          "CREATE TRIGGER update_objects_updated_at BEFORE UPDATE ON storage.objects FOR EACH ROW EXECUTE FUNCTION storage.update_updated_at_column()"
+        ],
+        "force_rls": false,
+        "constraints": [
+          {
+            "sql": "FOREIGN KEY (bucket_id) REFERENCES storage.buckets(id)",
+            "name": "objects_bucketId_fkey",
+            "validated": true
+          },
+          {
+            "sql": "PRIMARY KEY (id)",
+            "name": "objects_pkey",
+            "validated": true
+          }
+        ],
+        "role_access": {
+          "anon_select": true,
+          "auth_select": true,
+          "service_select": true,
+          "anon_schema_usage": true,
+          "auth_schema_usage": true
+        },
+        "partition_key": null,
+        "replica_identity": "d"
+      },
+      "inspected_canonical_characters": [
+        1,
+        4845
+      ],
+      "complete_visible_component_review": true,
+      "semantic_verdict": "UUID PK, bucket FK, path generated tokens, version/delete marker and archived/current uniqueness indexes, plus statement delete guard. Overlapping key prefixes implement distinct version/prefix/list operations; no justified index drop.",
+      "first_time_credit": 0
+    },
+    {
+      "object": "storage.s3_multipart_uploads",
+      "canonical_md5": "cdb80d756d96e511a1e60825b5c075f4",
+      "canonical_characters": 2168,
+      "definition": {
+        "rls": true,
+        "kind": "r",
+        "owner": "supabase_storage_admin",
+        "columns": [
+          {
+            "name": "id",
+            "type": "text",
+            "default": null,
+            "ordinal": 1,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "in_progress_size",
+            "type": "bigint",
+            "default": "0",
+            "ordinal": 2,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "upload_signature",
+            "type": "text",
+            "default": null,
+            "ordinal": 3,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "bucket_id",
+            "type": "text",
+            "default": null,
+            "ordinal": 4,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "key",
+            "type": "text",
+            "default": null,
+            "ordinal": 5,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "version",
+            "type": "text",
+            "default": null,
+            "ordinal": 6,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "owner_id",
+            "type": "text",
+            "default": null,
+            "ordinal": 7,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "default": "now()",
+            "ordinal": 8,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "user_metadata",
+            "type": "jsonb",
+            "default": null,
+            "ordinal": 9,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "metadata",
+            "type": "jsonb",
+            "default": null,
+            "ordinal": 10,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          }
+        ],
+        "indexes": [
+          {
+            "sql": "CREATE INDEX idx_multipart_uploads_list ON storage.s3_multipart_uploads USING btree (bucket_id, key, created_at)",
+            "name": "idx_multipart_uploads_list",
+            "ready": true,
+            "valid": true
+          },
+          {
+            "sql": "CREATE UNIQUE INDEX s3_multipart_uploads_pkey ON storage.s3_multipart_uploads USING btree (id)",
+            "name": "s3_multipart_uploads_pkey",
+            "ready": true,
+            "valid": true
+          }
+        ],
+        "policies": [],
+        "triggers": [],
+        "force_rls": false,
+        "constraints": [
+          {
+            "sql": "FOREIGN KEY (bucket_id) REFERENCES storage.buckets(id)",
+            "name": "s3_multipart_uploads_bucket_id_fkey",
+            "validated": true
+          },
+          {
+            "sql": "PRIMARY KEY (id)",
+            "name": "s3_multipart_uploads_pkey",
+            "validated": true
+          }
+        ],
+        "role_access": {
+          "anon_select": true,
+          "auth_select": true,
+          "service_select": true,
+          "anon_schema_usage": true,
+          "auth_schema_usage": true
+        },
+        "partition_key": null,
+        "replica_identity": "d"
+      },
+      "inspected_canonical_characters": [
+        1,
+        2168
+      ],
+      "complete_visible_component_review": true,
+      "semantic_verdict": "Multipart parent with bucket FK and list index (bucket, key, created_at), no current uploads. Keep.",
+      "first_time_credit": 0
+    },
+    {
+      "object": "storage.s3_multipart_uploads_parts",
+      "canonical_md5": "6ef45dd9c696031cdfbeed10ea3569c1",
+      "canonical_characters": 2164,
+      "definition": {
+        "rls": true,
+        "kind": "r",
+        "owner": "supabase_storage_admin",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "default": "gen_random_uuid()",
+            "ordinal": 1,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "upload_id",
+            "type": "text",
+            "default": null,
+            "ordinal": 2,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "size",
+            "type": "bigint",
+            "default": "0",
+            "ordinal": 3,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "part_number",
+            "type": "integer",
+            "default": null,
+            "ordinal": 4,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "bucket_id",
+            "type": "text",
+            "default": null,
+            "ordinal": 5,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "key",
+            "type": "text",
+            "default": null,
+            "ordinal": 6,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "etag",
+            "type": "text",
+            "default": null,
+            "ordinal": 7,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "owner_id",
+            "type": "text",
+            "default": null,
+            "ordinal": 8,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "version",
+            "type": "text",
+            "default": null,
+            "ordinal": 9,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "default": "now()",
+            "ordinal": 10,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          }
+        ],
+        "indexes": [
+          {
+            "sql": "CREATE UNIQUE INDEX s3_multipart_uploads_parts_pkey ON storage.s3_multipart_uploads_parts USING btree (id)",
+            "name": "s3_multipart_uploads_parts_pkey",
+            "ready": true,
+            "valid": true
+          }
+        ],
+        "policies": [],
+        "triggers": [],
+        "force_rls": false,
+        "constraints": [
+          {
+            "sql": "FOREIGN KEY (bucket_id) REFERENCES storage.buckets(id)",
+            "name": "s3_multipart_uploads_parts_bucket_id_fkey",
+            "validated": true
+          },
+          {
+            "sql": "PRIMARY KEY (id)",
+            "name": "s3_multipart_uploads_parts_pkey",
+            "validated": true
+          },
+          {
+            "sql": "FOREIGN KEY (upload_id) REFERENCES storage.s3_multipart_uploads(id) ON DELETE CASCADE",
+            "name": "s3_multipart_uploads_parts_upload_id_fkey",
+            "validated": true
+          }
+        ],
+        "role_access": {
+          "anon_select": true,
+          "auth_select": true,
+          "service_select": true,
+          "anon_schema_usage": true,
+          "auth_schema_usage": true
+        },
+        "partition_key": null,
+        "replica_identity": "d"
+      },
+      "inspected_canonical_characters": [
+        1,
+        2164
+      ],
+      "complete_visible_component_review": true,
+      "semantic_verdict": "Multipart child with upload FK ON DELETE CASCADE and bucket FK, only PK index. Missing upload_id lookup index could affect large cleanup, but zero rows/usage and provider-owned; monitor, no change.",
+      "first_time_credit": 0
+    },
+    {
+      "object": "storage.vector_indexes",
+      "canonical_md5": "c76b1ec5671b84987233aecde5c6a4cc",
+      "canonical_characters": 2072,
+      "definition": {
+        "rls": true,
+        "kind": "r",
+        "owner": "supabase_storage_admin",
+        "columns": [
+          {
+            "name": "id",
+            "type": "text",
+            "default": "gen_random_uuid()",
+            "ordinal": 1,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "name",
+            "type": "text",
+            "default": null,
+            "ordinal": 2,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "bucket_id",
+            "type": "text",
+            "default": null,
+            "ordinal": 3,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "data_type",
+            "type": "text",
+            "default": null,
+            "ordinal": 4,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "dimension",
+            "type": "integer",
+            "default": null,
+            "ordinal": 5,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "distance_metric",
+            "type": "text",
+            "default": null,
+            "ordinal": 6,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "metadata_configuration",
+            "type": "jsonb",
+            "default": null,
+            "ordinal": 7,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "default": "now()",
+            "ordinal": 8,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "default": "now()",
+            "ordinal": 9,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          }
+        ],
+        "indexes": [
+          {
+            "sql": "CREATE UNIQUE INDEX vector_indexes_name_bucket_id_idx ON storage.vector_indexes USING btree (name, bucket_id)",
+            "name": "vector_indexes_name_bucket_id_idx",
+            "ready": true,
+            "valid": true
+          },
+          {
+            "sql": "CREATE UNIQUE INDEX vector_indexes_pkey ON storage.vector_indexes USING btree (id)",
+            "name": "vector_indexes_pkey",
+            "ready": true,
+            "valid": true
+          }
+        ],
+        "policies": [],
+        "triggers": [],
+        "force_rls": false,
+        "constraints": [
+          {
+            "sql": "FOREIGN KEY (bucket_id) REFERENCES storage.buckets_vectors(id)",
+            "name": "vector_indexes_bucket_id_fkey",
+            "validated": true
+          },
+          {
+            "sql": "PRIMARY KEY (id)",
+            "name": "vector_indexes_pkey",
+            "validated": true
+          }
+        ],
+        "role_access": {
+          "anon_select": true,
+          "auth_select": true,
+          "service_select": true,
+          "anon_schema_usage": true,
+          "auth_schema_usage": true
+        },
+        "partition_key": null,
+        "replica_identity": "d"
+      },
+      "inspected_canonical_characters": [
+        1,
+        2072
+      ],
+      "complete_visible_component_review": true,
+      "semantic_verdict": "Vector metadata keyed per name/bucket, FK to vector buckets, unique composite lookup; no current vectors. Keep.",
+      "first_time_credit": 0
+    },
+    {
+      "object": "vault.secrets",
+      "canonical_md5": "157507a835ed658a4a07927b3ec42eee",
+      "canonical_characters": 1787,
+      "definition": {
+        "rls": false,
+        "kind": "r",
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "default": "gen_random_uuid()",
+            "ordinal": 1,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "name",
+            "type": "text",
+            "default": null,
+            "ordinal": 2,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "description",
+            "type": "text",
+            "default": "''::text",
+            "ordinal": 3,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "secret",
+            "type": "text",
+            "default": null,
+            "ordinal": 4,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "key_id",
+            "type": "uuid",
+            "default": null,
+            "ordinal": 5,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "nonce",
+            "type": "bytea",
+            "default": "vault._crypto_aead_det_noncegen()",
+            "ordinal": 6,
+            "identity": "",
+            "not_null": false,
+            "generated": ""
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "default": "CURRENT_TIMESTAMP",
+            "ordinal": 7,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "default": "CURRENT_TIMESTAMP",
+            "ordinal": 8,
+            "identity": "",
+            "not_null": true,
+            "generated": ""
+          }
+        ],
+        "indexes": [
+          {
+            "sql": "CREATE UNIQUE INDEX secrets_name_idx ON vault.secrets USING btree (name) WHERE (name IS NOT NULL)",
+            "name": "secrets_name_idx",
+            "ready": true,
+            "valid": true
+          },
+          {
+            "sql": "CREATE UNIQUE INDEX secrets_pkey ON vault.secrets USING btree (id)",
+            "name": "secrets_pkey",
+            "ready": true,
+            "valid": true
+          }
+        ],
+        "policies": [],
+        "triggers": [],
+        "force_rls": false,
+        "constraints": [
+          {
+            "sql": "PRIMARY KEY (id)",
+            "name": "secrets_pkey",
+            "validated": true
+          }
+        ],
+        "role_access": {
+          "anon_select": false,
+          "auth_select": false,
+          "service_select": true,
+          "anon_schema_usage": false,
+          "auth_schema_usage": false
+        },
+        "partition_key": null,
+        "replica_identity": "d"
+      },
+      "inspected_canonical_characters": [
+        1,
+        1787
+      ],
+      "complete_visible_component_review": true,
+      "semantic_verdict": "Encrypted Vault secret metadata and indexes only; app-role schema USAGE/SELECT denied. Never inspected secret rows, ciphertext, plaintext or names.",
+      "first_time_credit": 0
+    }
+  ],
+  "source_chars": 33698,
+  "prior_receipts": "Storage/Realtimes/Vault catalog families were previously reviewed in R221/R239/R300 or earlier; no first-time credit repeated. SQL canonical hash includes current normalized fields and cannot be compared to old differently serialized hashes as evidence of drift.",
+  "integrity_and_perf": "Current managed schemas retain 0 relevant bucket, object and Realtime subscription usage from prior R315; present pg_stat_user_tables estimate zero for active Storage/Realtime user tables. No live row contents read. Index scans/NOT VALID parent check/0 partitions do not justify managed deletion or schema mutation.",
+  "unverified": [
+    "Hosted PostgREST API exposure for realtime.subscription claims; coordinate #96",
+    "Managed Storage lifecycle/Realtime partition worker behavior and native compiled code",
+    "Supabase console-only Auth, Vault native implementation, service configuration"
+  ],
+  "results": {
+    "reproducible_new_application_defect": 0,
+    "justified_removal": 0,
+    "github_app_code_changes": 0,
+    "provider_writes": 0,
+    "ci_runs": 0,
+    "baseline": "IN_PROGRESS",
+    "queue": "UNCHANGED_EXISTING_FIXES_TESTING"
+  },
+  "next": "First changed/new or otherwise unreviewed accessible provider definition, with concrete app consumer/performance evidence. Prior R221/R300 catalog source credit preserved; source-isolation and #96 hosted acceptance remain separate."
+}
