@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R304",
+  "project_ref": "azviqqejypsefzilgonr",
+  "date_utc": "2026-11-17",
+  "status": "READ_ONLY_CROSS_OBJECT_CAUSAL_REVIEW_NO_NEW_FIRST_TIME_CREDIT",
+  "authority": "GitHub Issue #509 owner corrected code-quality priority; no production provider writes; no Publish",
+  "preflight": {
+    "task_initial_sha": "55c5d5d42079cd95aca3e4a8a7252121a02e8cc3",
+    "prewrite_development_sha": "678d124b893c7c70b6384e25c902cc1bebd6fab9",
+    "verified_preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d"
+  },
+  "provider": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.11.0.003",
+    "app_sql_function_count": 114,
+    "current_pg_stat_statements_count": 4918,
+    "production_mutations": 0
+  },
+  "direct_full_current_definition_review": [
+    {
+      "signature": "private.dic_community_fingerprint(c community_shots)",
+      "source_md5": "06eaeadaef87a445b99d431ae67dd409"
+    },
+    {
+      "signature": "public.dic_browse_community_shots(p_limit integer, p_offset integer)",
+      "source_md5": "edcc2c6a9fb24b3455a446d964a2ed2d"
+    },
+    {
+      "signature": "public.dic_community_evidence_counts(p_coffee_id uuid, p_style text)",
+      "source_md5": "1bddea7e3160c0282bea1d6e74d1fbaf"
+    },
+    {
+      "signature": "public.dic_community_recommendation_evidence(p_library_entry_id uuid, p_style text)",
+      "source_md5": "085f92a3814dce624e5b9a3759e893ef"
+    }
+  ],
+  "direct_deployed_edge_caller_crosscheck": {
+    "edge_slug": "dic-verify-coffee",
+    "version": 10,
+    "provider_source_bundle_sha256": "d59e9da29335f2d626a2779238b4f1176148f5f8f3d54539bf831ff20aa6a77e",
+    "contract": "Active Edge worker calls public.dic_source_check_target and dic_source_claim, so roaster proof functions and active alias normalization are not demonstrably dead even after directory retirement",
+    "source_parts_reviewed": "index.ts relevant request lines 57-109 plus evidence.mjs officialProductUrl lines 17-32; not new source baseline credit"
+  },
+  "canonical_merge_invariant": {
+    "catalog_constraint": "CHECK ((verification_state = 'merged') = (merged_into_id IS NOT NULL))",
+    "merged_coffees": 0,
+    "merged_still_verified": 0,
+    "eligible_on_merged": 0,
+    "verdict": "FALSE_POSITIVE: browse/evidence_count functions omit merged_into_id IS NULL, but a database CHECK forbids any verified row with a nonnull merged_into_id. No behavior change warranted"
+  },
+  "community_projection_link_consistency": {
+    "eligible_visible": 13,
+    "linked_rows": 13,
+    "eligible_without_link": 0,
+    "eligible_with_multiple_links": 0,
+    "maximum_links_per_shot": 1,
+    "verdict": "PASS_CURRENT_AGGREGATE: browse total and linked eligible evidence are consistent at current aggregate state; do not assume globally invariant absent explicit constraint"
+  },
+  "release_label_semantics": {
+    "verified_unmerged_coffees": 9,
+    "outer_whitespace_labels": 0,
+    "nonlowercase_labels": 0,
+    "release_label_constraints": 0,
+    "verdict": "Untrimmed release-label inequality in related-release tier could differ for atypical whitespace, but no current matching case or confirmed user-visible defect; no speculative rewrite"
+  },
+  "tests": {
+    "read_only_catalog_source_and_aggregate_queries": "PASS",
+    "hosted_member_auth": "NOT_RUN",
+    "isolated_database_migrations": "NOT_RUN",
+    "node22": "NOT_RUN",
+    "github_ci": "NOT_RUN"
+  },
+  "baseline": {
+    "new_first_time_provider_source_definitions": 0,
+    "new_first_time_word_credit": 0,
+    "code_review_credit_to_issue267": 0,
+    "status": "IN_PROGRESS"
+  },
+  "changes": {
+    "application_source": 0,
+    "production_sql": 0,
+    "production_edge": 0,
+    "production_storage": 0,
+    "release_queue": 0
+  },
+  "next": "Prioritize a genuinely changed/unreviewed provider object or reproducible application bug with full dependency evidence. No new pg_stat_statements ranks 4961-5040 while count is 4918; do not repeat existing hash/coverage or fabricate read results. Preserve active roaster source worker and aliases and historical archives."
+}
