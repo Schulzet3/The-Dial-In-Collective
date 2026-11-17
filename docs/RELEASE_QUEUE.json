@@ -15824,23 +15824,33 @@
     {
       "id": "DIC-Q-455-r324-partial-input-validation-alert",
       "issue": 455,
-      "pr": null,
+      "pr": 3149,
       "title": "Preserve unresolved Log Shot Save validation alert when editing one of multiple invalid inputs",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "e0348d0869f1c783f6c7470afb1048f2f2625139",
       "scope_paths": [
         "site/lib/ui.js"
       ],
       "owner_source": "Issue #455 owner Option B SAFE, mandatory DIC_PREFLIGHT_VERIFIED development_sha=d491f7b0ee12c3d16eaf6e721ea6a12b79319767 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "tests": [
         "Immutable source-level negative: acknowledgeShotInput() clears shared feedback when one edited invalid field is acknowledged despite other aria-invalid fields/taste groups remaining; differs from R295 final-field stale-alert repair and mirrors R323 rating partial feedback safeguard.",
-        "Six positive/negative synthetic Node22 tests authored: other measurement invalid, other tastes invalid, last invalid clears, valid input retains cloud alert, detached form retains alert, actual Cloud main input handler call. Exact-source hosted CI NOT STARTED."
+        "Six positive/negative synthetic Node22 tests authored: other measurement invalid, other tastes invalid, last invalid clears, valid input retains cloud alert, detached form retains alert, actual Cloud main input handler call. Exact-source hosted CI NOT STARTED.",
+        "Original PR #3148 CLOSED UNMERGED: first Node22 44067809720 FAILED two old R295 fixtures (5380 PASS/2 FAIL/6 SKIP); subsequent altered PR history failed mandatory preflight governance 44068788552; no force or failed-history merge. CLEAN replacement PR #3149 exact head be6dbba4df35897c758b3818ba582542cf119355 safe nonforce [skip netlify] merged e0348d0869f1c783f6c7470afb1048f2f2625139; original failed runs remain historical failures, never PASS.",
+        "PR #3149 head Node22 44069335890 SUCCESS and merged push Node22 44069931811 log independently read: 5,382 PASS/0 FAIL/6 intentional SKIP, including R324 six regression IDs 4813-4818 PASS and prior R295 fixture cases 4752-4754 PASS. Exact head mobile/Chromium/offline 44069335963, SQL 44069336049, security 44069336018, governance 44069335974 SUCCESS; merged real 390px/browser/offline/accessibility 44069931658 and governance 44069931986 SUCCESS. Targeted cloud unit NOT_APPLICABLE, original frozen603 SKIPPED, neither PASS.",
+        "Exact final source, both regression test files, TESTING queue and same-commit scoped R324 journal Git blobs head=merged: site/lib/ui.js 1b8109c255b51f846c151c976021891a752509e0, R324 tests 9591a5ef88f322566260aa7ee3feab5c9c5cbb31, R295 tests 8978031cf7779dd05da69e62cfd0369604ecddd2, queue fdd94f2aba6b48c488fb0275067de6f15f7dea0e, journal 2a5650b9cc02a4e79e960162698ec25a4b4b62d1."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact-source Node22 tests and applicable Chromium/mobile/offline/a11y/approval/governance, SQL/security classification and merged-source readback pending. TESTING, not READY."
+      "ci_runs": [
+        44069335890,
+        44069335963,
+        44069336049,
+        44069336018,
+        44069335974,
+        44069931811,
+        44069931658,
+        44069931986
       ],
-      "notes": "Code change only in local Log Shot form feedback acknowledgement. No actual member event or cup-quality improvement demonstrated. Original five tastes, old shots/notes/history, one-control advice, equipment/temperature/style/feed and privacy/RLS unchanged. No production or provider write.",
+      "blockers": [],
+      "notes": "READY IN DEVELOPMENT ONLY; no deployment. Preserve shared Log Shot Save validation alert while other form inputs/tastes remain invalid; clear only resolved local message after last invalid, leave unrelated cloud error. No observed member event or espresso sensory improvement, no changes to five tastes, recommendation/numerical policy, saved history/notes, grinder calibration, slow feed, styles, privacy/offline/Community, production/providers or main/release.",
       "production_deployed": false
     }
   ],
@@ -18547,6 +18557,15 @@
       "source_sha": "a0dd123f7b98c9fd25e2206c3efe53967cbdf8ca",
       "production_deployed": false,
       "evidence": "PR #3143 six Git blobs match exact final head and merged; Node22 head+merged 5372/0/6, six R323 positive/negative tests 4803–4808 PASS; cloud/browser/mobile/offline head+merged, head SQL/security, head+merged approval SUCCESS; original603 skipped. No production changes."
+    },
+    {
+      "date": "2026-11-17",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r324-partial-input-validation-alert",
+      "state": "READY",
+      "source_sha": "e0348d0869f1c783f6c7470afb1048f2f2625139",
+      "production_deployed": false,
+      "evidence": "Source PR #3149 head/merge exact five Git blobs matched; initial PR #3148 two stale R295 synthetic fixture failures and bad preflight receipt retained; clean PR-head and merged Node22 5382 PASS/0 FAIL/6 SKIP, six R324 new regression cases 4813-4818 plus R295 4752-4754 PASS. Head cloud/mobile/offline, isolated SQL/security/governance SUCCESS; exact merged 390px/mobile/offline/a11y and governance SUCCESS; frozen603 SKIPPED and targeted cloud unit NOT_APPLICABLE. No provider, member or espresso-quality test."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
