@@ -3667,6 +3667,42 @@
         44026133308,
         44026133302
       ]
+    },
+    {
+      "id": "LIVE-20261117-R320-SHOT-HISTORY-MEASURED-PRECISION",
+      "type": "exact_immutable_current_app_source_and_synthetic_regressions",
+      "title": "Original historic shot measurements rounded inaccurately in Shot History",
+      "source_branch": "development/backend-foundation",
+      "source_commit_sha": "55c5d5d42079cd95aca3e4a8a7252121a02e8cc3",
+      "source_git_blobs": {
+        "site/lib/ui.js_pre": "c32cc1081cb5d0191c77a03b42197f2b6b144bc9",
+        "site/lib/ui.js_post": "af8ab0a07198e88f503a80b68ebb1aff1d56fac7",
+        "tests/issue455-r320-shot-history-measured-precision.test.mjs": "dccbb08f68400591fcb2d7b6870e9cf59866662b"
+      },
+      "access": "IMMUTABLE_GITHUB_HEAD_MERGE_BLOB_READBACK_AND_EXACT_SOURCE_CI",
+      "review_status": "SAFE_NONFORCE_MERGED_DEV_READY_NOT_DEPLOYED",
+      "evidence_grade": "DETERMINISTIC_CODE_BEHAVIOR_FIVE_SYNTHETIC_TESTS_NO_MEASURED_ESPRESSO_EFFECT",
+      "claims_verified_externally": "Original 18.25g/36.35g/25.25s/grind2.45 were shown rounded in History despite unchanged recorded values; no external science assertion or real user occurrence proven.",
+      "source_locators": [
+        "site/lib/ui.js shotSummary()",
+        "site/lib/ui.js fmtMeasuredControl()",
+        "tests/issue455-r320-shot-history-measured-precision.test.mjs"
+      ],
+      "implementation_status": "SAFE_NONFORCE_MERGED_DEVELOPMENT_ONLY_READY_NOT_DEPLOYED",
+      "implementation_pr": 3126,
+      "implementation_merge_sha": "55c5d5d42079cd95aca3e4a8a7252121a02e8cc3",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0,
+      "ci_runs": [
+        44032708320,
+        44032708276,
+        44032708702,
+        44032708315,
+        44032708310,
+        44033182252,
+        44033182317,
+        44033182276
+      ]
     }
   ],
   "evidence_checks": [
@@ -10813,6 +10849,24 @@
       "grade": "EXACT_SOURCE_NODE22_5333_PASS_0_FAIL_6_INTENTIONAL_SKIP_FIVE_SYNTHETIC_PASS_MERGED_BROWSER_GOVERNANCE_PASS",
       "result": "DEVELOPMENT_ONLY_READY_NOT_DEPLOYED_NO_EMPIRICAL_TASTE_QUALITY_VALIDATION",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CODE-320-A",
+      "source": "LIVE-20261117-R320-SHOT-HISTORY-MEASURED-PRECISION",
+      "claim": "Historical shotSummary used fmt(...,1) on actual dose/yield/time/grinder, hiding original non-tenth precision while preserving stored observations. Existing fmtMeasuredControl now renders exact meaningful non-tenth original values without changing target rounding.",
+      "source_locator": "UI c32cc1081cb5d0191c77a03b42197f2b6b144bc9 → af8ab0a07198e88f503a80b68ebb1aff1d56fac7",
+      "grade": "DETERMINISTIC_SOURCE_BEFORE_AFTER",
+      "result": "SAFE_HISTORY_DISPLAY_PROVENANCE_REPAIR",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CI-320-B",
+      "source": "LIVE-20261117-R320-SHOT-HISTORY-MEASURED-PRECISION",
+      "claim": "Five R320 synthetic test cases 4775–4779 pass. Head and merged Node22 5343 PASS/0 FAIL/6 SKIP, merged browser/cloud/offline/governance SUCCESS, head SQL/security SUCCESS; original603 SKIPPED.",
+      "source_locator": "PR #3126 head c54927c1302b58d69ae619a93e5e2fb5778fbd55 merged 55c5d5d42079cd95aca3e4a8a7252121a02e8cc3; head Node 44032708320, merge 44033182252, browser 44033182317, governance 44033182276",
+      "grade": "EXACT_SOURCE_5343_PASS_ZERO_FAIL_SIX_INTENTIONAL_SKIPS_FIVE_FOCUSED_PASS",
+      "result": "DEVELOPMENT_ONLY_READY_NOT_DEPLOYED_NO_TASTE_OUTCOME",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -11057,25 +11111,26 @@
     "R455-316: CENT original BMJ 2015 methodological statement and companion scoped to N-of-1 reporting vs observational same-coffee single-change next-shot evaluation, NO actual espresso treatment effect, member data or product change. Publisher full article 403 and original paper bytes not independently verified. Exact docs-only source CI/merge and research ledger integration to check; original October29 implementation ZIP and standalone S019 bytes outstanding; zero #267 literal-line credit.",
     "R455-317 FINAL CODE: PR #3111 source-head 75246b1bfaa4e37c5b6710f0750282ed0d891b0d nonforce merged development 02e831b806366cc75ebdca1ab20c233e8d203b46 with identical five Git blobs; one initial failing legacy test fixed, corrected head+merged Node22 each 5316 pass /0 fail /6 skip and scoped UX/mobile/offline/security/SQL/approval success. Development READY, NOT deployed; docs reconciliation still needs its own source-bound PR CI and merge, do not confuse docs-only checks with app efficacy. No original ZIP/S019 verification or #267 line credit.",
     "R455-318 source PR #3116 NONFORCE MERGED development a91bd34d371d1a564c4212c30022f9e29d32ec26 after final head and merged exact Node22 5324 pass/0 fail/6 skip and five new synthetic PASS; mobile browser initial offline timeout rerun success; frozen603 skipped, neither empirical quality claim nor deployment. Final docs-only CI/merge/readback pending. #267 literal line audit separate; October29 ZIP and S019 raw not accessible in this session.",
-    "R455-319 SAFE original measured yield 36.35 display fixed in Next Recipe; PR #3122 merged e92b15de8c0032eb528b8df801a10e5025aed4e6, exact five source Git blobs matched, five synthetic tests PASS, head+merge Node22 5333/0/6 and browser/approval SUCCESS. R319 docs READY reconciliation pending exact docs CI/merge. No deployment, member/Provider changes, #267 line credit or new science policy."
+    "R455-319 SAFE original measured yield 36.35 display fixed in Next Recipe; PR #3122 merged e92b15de8c0032eb528b8df801a10e5025aed4e6, exact five source Git blobs matched, five synthetic tests PASS, head+merge Node22 5333/0/6 and browser/approval SUCCESS. R319 docs READY reconciliation pending exact docs CI/merge. No deployment, member/Provider changes, #267 line credit or new science policy.",
+    "R455-320 shot history original measurement precision source merged 55c5d5d42079cd95aca3e4a8a7252121a02e8cc3; five synthetic PASS, head/merge Node22 5343/0/6, browser/governance SUCCESS. Docs reconciliation pending own CI. Original S019/Oct29 ZIP unverified; no #267 literal credit or measured member quality outcomes."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-319",
+    "run_id": "R455-320",
     "date": "2026-11-17",
-    "development_preflight_sha": "e92b15de8c0032eb528b8df801a10e5025aed4e6",
+    "development_preflight_sha": "55c5d5d42079cd95aca3e4a8a7252121a02e8cc3",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
     "source_counts": {
-      "sources": 183,
-      "evidence_checks": 549,
-      "proposals": 247
+      "sources": 184,
+      "evidence_checks": 551,
+      "proposals": 248
     },
-    "research_status": "SAFE_LOCKED_COMPATIBLE_MEASURED_YIELD_NEXT_RECIPE_CORRECTION_MERGED_EXACT_SOURCE_CI_PASS_DEV_ONLY",
+    "research_status": "SAFE_R320_EXACT_SOURCE_MERGED_CI_PASS_DEV_ONLY",
     "runtime_changed": true,
     "tests_run": true,
     "production_deployed": false,
     "github267_literal_review_credit": 0,
     "owner_approval_now_required": false,
-    "next": "Verify R319 docs-only PR exact CI, nonforce merge and blobs. Continue distinct original citations and UX logic verification; October29 ZIP and original S019 raw bytes remain unavailable, no empirical taste evidence, #267 direct lines separate."
+    "next": "Verify R320 docs PR CI, nonforce merge and merged docs blobs. Continue independent source/UX review; original S019 and Oct29 pack bytes unverified."
   },
   "policy_decisions_resolved": [
     {
@@ -16915,6 +16970,35 @@
       ],
       "test_plan": "Five synthetic cases PASS, exact head/merge Node22 5333 PASS/0 FAIL/6 SKIP; cloud/mobile/browser/offline/security/isolated SQL and governance success as applicable, frozen603 SKIPPED; no physical member observation.",
       "release_queue": "DIC-Q-455-r319-original-yield-next-recipe-precision",
+      "release_queue_status": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-PROP-320-HISTORY-ORIGINAL-SCALAR-PRECISION",
+      "severity": "P2_SAFE_UI_MEASUREMENT_PROVENANCE",
+      "source": [
+        "LIVE-20261117-R320-SHOT-HISTORY-MEASURED-PRECISION"
+      ],
+      "evidence": [
+        "R455-EV-CODE-320-A",
+        "R455-EV-CI-320-B"
+      ],
+      "finding": "Original historical dose/yield/time/grind were rounded silently, potentially misrepresenting actual measured recipe.",
+      "user_benefit": "History displays exact previously saved measurements in a compact format, consistent with Next Shot's original-control precision.",
+      "current_locked": "Keep original measured shot, all five taste ratings, private notes/history and one truly controllable new recommendation; no numeric target changes.",
+      "current_app": "History originally used tenth-only fmt; R320 preserves actual non-tenth measured scalar with existing fmtMeasuredControl.",
+      "proposed_change": "SAFE implemented narrow Shot History display correction only.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "PR #3126 merged 55c5d5d42079cd95aca3e4a8a7252121a02e8cc3 with four original Git blobs equal to passing head",
+      "files": [
+        "site/lib/ui.js",
+        "tests/issue455-r320-shot-history-measured-precision.test.mjs",
+        "docs/workstreams/ops-issue455-r320-shot-history-measurement-display-20261117.md"
+      ],
+      "test_plan": "Five focused synthetic Node22 cases PASS; merged Node22 5343/0/6; Chromium/mobile/offline, governance success; no member outcome test.",
+      "release_queue": "DIC-Q-455-r320-shot-history-measured-precision",
       "release_queue_status": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
       "production_deployed": false,
       "github267_literal_review_credit": 0
