@@ -1,3 +1,16 @@
+## November 17, 2026 UTC — #455 R331 original Costa TDS trained/consumer claim-level closure [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=2919984b5c14f668d6a361fa6cbe020cb63b5da5 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+**FIRST:** Retrieved live development SHA 2919984b5c14f668d6a361fa6cbe020cb63b5da5, fetched docs/ai/PREFLIGHT.md AT THAT IMMUTABLE SHA blob 2fb236bbfa6bac48513eeb3bd157b260853af06d and separately retrieved exact blob; all 5,532 text bytes identical BEFORE AGENTS, topic route, journal/issue, research, Project/Drive and other source. Main 3b372215ac7ccfd6db406f27090706e8cb8f3e80, release/production 0f3641b4fff07e2a88d7747e621304ec2cf0ead5 read-only. Rechecked development pre-write and original file blob IDs ef758ae0e827e8a86316fed721e94b1ef2731613/dc5d5627ce32d1e0e9303b2af39dabea73307d3a.
+
+**Independent bounded increment:** Existing original 2025 Costa sensory-panels source has 2026-11-09 full HTML read receipt but *zero* formal canonical evidence checks. Re-read directly original Wiley Methods 2.1-2.4, Results 3/3.1, Discussion 4, Conclusion 5, data restrictions; formalized three unique new claims with exact primary section locators, uncertainty and limitations. Drip 1g:16mL Bunn (NOT espresso), 16 trained (3 Q graders), 63 convenience consumers, categorical TDS dominance not individual five-slider liking; original Methods 65 C handling vs 80 C served unresolved, no raw individual records or original PDF hash, no personal causal improvement. Full [R331 note](../research/issue455-r331-costa-tds-panels-claim-audit-20261117.md). Previous source preserved, no duplicate source ID. All five owner-Locked taste inputs/green-vs-missing and measured shot, single adjustment, styles/feed/grinder/calibration/history/privacy remain unchanged. Live engine 90c55379be60a252a2026e01bb3d786b66c49aef, constants d3559dc1c9560c4d68fbcad1dc91e3a792a100a2 directly inspected for this bounded crosswalk.
+
+**Same-commit scope**: canonical JSON ledger existing source metadata + three new claim checks, one research-only proposal, latest checkpoint and next action; this scoped journal (new first entry); new original-paper review. Expected 193 source identities unchanged, 575 claim checks, 259 proposals. IDs unique. No source code, tests, CI scripts, scope elsewhere, queue/approval/status changes, #267 line credit, member data, SQL/Auth/Edge, provider or Netlify writes, deployment, publication, backup, schedule or alert modifications. Original Oct29 ZIP/S019 again not accessible via connected Drive/Project searches; slow-feed PDF different. No new owner approval question.
+
+**Verification at authoring:** new Git tree/commit, PR, CI and merge NOT YET VERIFIED or READY; next create feature-branch PR safely, verify exact head CI, nonforce merge [skip netlify] if applicable checks pass, re-read merged blobs and issue checkpoint; if unresolved leave pending evidence without fake PASS. Subsequent run inspect next non-overlapping #335 citation gap or reproducible SAFE Log Shot/Rate/Recommendations defect.
+
+
 ## November 17, 2026 UTC — #455 R330 original espresso e-nose paper, full-method bound [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=b97af5b8842c686612cbd5fb668967b6bcd558fa preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
