@@ -4620,6 +4620,19 @@
       "production_writes": 0,
       "baseline": "IN_PROGRESS",
       "next": "New/changed provider source or unreviewed query text"
+    },
+    {
+      "run": "R321 Nov17 2026",
+      "preflight_sha": "370fcedd3f817d3e8bfca1dcc63ff69dff5671f9",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r321-rare-postgrest-workload-20261117.json",
+      "unreviewed_low_frequency_statements_direct": 42,
+      "original_normalized_sql_characters": 28726,
+      "retired_invitation_rpc_historical": 3,
+      "new_verified_defects": 0,
+      "provider_writes": 0,
+      "baseline": "IN_PROGRESS",
+      "next": "Changed/unreviewed provider source or proven functional bottleneck, hosted Auth UNVERIFIED"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -23359,5 +23372,24 @@
     "source_code_writes": 0,
     "baseline": "IN_PROGRESS",
     "next": "First new/changed definition or first unreviewed normalized PostgREST query outside the 22 scoped queryid+role+MD5 identities, e.g. calls<10/nonfiltered roles; keep exact identity keys and avoid historic-row=active-call fallacy. Hosted Auth, console and compiled-provider implementations UNVERIFIED."
+  },
+  "provider_rare_postgrest_workload_semantics_run321": {
+    "run": "R321",
+    "preflight_development_sha": "370fcedd3f817d3e8bfca1dcc63ff69dff5671f9",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt_path": "docs/audits/issue509-r321-rare-postgrest-workload-20261117.json",
+    "normalized_sql_statements": 42,
+    "original_sql_characters": 28726,
+    "query_identity": "role+queryid+MD5",
+    "retired_invite_rpc_names": [
+      "dic_admin_issue_invite",
+      "dic_admin_delete_invite",
+      "dic_admin_revoke_invite"
+    ],
+    "source_code_credit": 0,
+    "new_verified_defects": 0,
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Complete scoped rare PostgREST normalized-statement cohort 42/42; next genuinely new/changed provider definition, non-PostgREST workload SQL not already credited, or independently reproduced user-impacting bottleneck. Avoid re-review for its own sake."
   }
 }
