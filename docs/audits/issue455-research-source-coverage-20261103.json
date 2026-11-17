@@ -3970,6 +3970,41 @@
         44099483134,
         44099483157
       ]
+    },
+    {
+      "id": "LIVE-20261117-R328-TEMPERATURE-FEEDBACK-UNIT-VALIDATION",
+      "type": "immutable_live_GitHub_UI_source_and_synthetic_browser_accessibility_regression",
+      "title": "Log Shot temperature Save warning was incorrectly dismissed on still-invalid Fahrenheit/Celsius edit",
+      "source_branch": "development/backend-foundation",
+      "preflight_source_sha": "fc50184b2bf14aabb82f881f70a8f526454120f3",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "source_commit_sha": "863357133e810dea95df0f066e0284210a780ab3",
+      "source_git_blobs": {
+        "old_ui": "af00c36ba1139b9faf1d2da3c28d6c9455643335",
+        "new_ui": "06772359e5bd289f0e6c51fb6efc0d64c54d7110",
+        "old_cloud": "e3464243bcbbf4477127e81f9b21e95a2fae2833",
+        "new_cloud": "54de6067d02965ba36ab5e5863baac86c8afbb4e",
+        "model_unchanged": "baafc8fa64fa3e359d8e42094e41c5d72a3b22df",
+        "constants_unchanged": "d3559dc1c9560c4d68fbcad1dc91e3a792a100a2",
+        "regression": "fdbf18fe7b419888c536bd31d7eb0521278c15cf",
+        "same_commit_journal": "3e13ecaba745c477db3daabe968e1dbfe09cd799"
+      },
+      "source_locators": [
+        "site/lib/ui.js acknowledgeShotInput/unresolvedShotField",
+        "site/cloud/main.js showLog/input/readDraft",
+        "site/lib/model.js validateShot",
+        "site/lib/constants.js CONFIG.bounds.tempC/tempInput",
+        "tests/issue455-r328-temperature-validation-feedback.test.mjs"
+      ],
+      "review_status": "SOURCE_REPRODUCED_NARROW_SAFE_NONFORCE_MERGED_DEV_ONLY_READY",
+      "access": "DIRECT_IMMUTABLE_GITHUB_HEAD_AND_MERGED_SOURCE_LOG_AND_SYNTHETIC_REGRESSIONS",
+      "evidence_grade": "SOURCE_BOUND_NEGATIVE_CODE_REPRO_AND_TEN_POSITIVE_NEGATIVE_SYNTHETIC_TESTS_NOT_MEMBER_OUTCOMES",
+      "claims_verified_externally": "No external espresso science claim. Existing 70-100 Celsius bounds and F/C conversion unchanged. Production/user incident not independently observed.",
+      "limitations": "Synthetic tests cannot quantify user incidence, sensory improvement, real member offline sync or empirical espresso quality. Frozen603 skipped; cloud unit not applicable. Study original ZIP and standalone S019 unavailable.",
+      "implementation_pr": 3169,
+      "implementation_status": "SAFE_DEVELOPMENT_ONLY_READY_NOT_DEPLOYED",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "evidence_checks": [
@@ -11276,6 +11311,24 @@
       "grade": "EXACT_SOURCE_NODE22_5397_PASS_0_FAIL_6_INTENTIONAL_SKIP_AND_EIGHT_FOCUSED_CASES_PLUS_BROWSER_GOVERNANCE",
       "result": "DEV_READY_NOT_DEPLOYED_NO_ESPRESSO_EFFECTIVENESS_OR_MEMBER_INCIDENT_CLAIM",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CODE-328-A",
+      "source": "LIVE-20261117-R328-TEMPERATURE-FEEDBACK-UNIT-VALIDATION",
+      "claim": "Existing model rejects temperature outside 70-100 C after unit conversion, but pre-change ui.acknowledgeShotInput did not check temperature and dismissed unresolved local Save feedback. R328 ties input's existing member-selected F/C metadata to tempInput and preserves flagged aria-invalid/message until corrected or blank optional; unknown units and nonnumeric remain invalid.",
+      "source_locator": "source PR #3169 merged 863357133e810dea95df0f066e0284210a780ab3; site/lib/ui.js blobs af00c36ba1139b9faf1d2da3c28d6c9455643335 -> 06772359e5bd289f0e6c51fb6efc0d64c54d7110; site/cloud/main.js blobs e3464243bcbbf4477127e81f9b21e95a2fae2833 -> 54de6067d02965ba36ab5e5863baac86c8afbb4e; model baafc8fa64fa3e359d8e42094e41c5d72a3b22df",
+      "grade": "DIRECT_IMMUTABLE_BEFORE_AFTER_CODE_AND_TEN_SYNTHETIC_POSITIVE_NEGATIVE_CASES",
+      "result": "LOCKED_COMPATIBLE_FEEDBACK_INTEGRITY_CORRECTED; NO_POLICY_OR_MEMBER_DATA_CHANGE",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CI-328-B",
+      "source": "LIVE-20261117-R328-TEMPERATURE-FEEDBACK-UNIT-VALIDATION",
+      "claim": "PR #3169 corrected exact head Node22/lint, browser/mobile/offline, SQL/security and governance all SUCCESS. Nonforce squash merge 863357133e810dea95df0f066e0284210a780ab3 contains identical five changed Git blobs. Exact merged Node22 5415 PASS/0 FAIL/6 intentional SKIP with R328 ten regressions #4842-4851 PASS; merged browser/mobile/offline and governance SUCCESS. Initial lint failure for unused test import corrected with documented same-commit receipt, not erased. Frozen603 SKIPPED and targeted cloud unit NOT_APPLICABLE, never PASS.",
+      "source_locator": "PR https://github.com/Schulzet3/The-Dial-In-Collective/pull/3169; Actions head 44109181680,44109181881,44109181651,44109181733,44109182127; merged 44113204249,44113204470,44113204162; exact merged Node22 logs job 134144092743",
+      "grade": "EXACT_SOURCE_NODE22_5415_PASS_0_FAIL_6_INTENTIONAL_SKIP_TEN_FOCUSED_CASES_CHROMIUM_OFFLINE_GOVERNANCE",
+      "result": "READY_DEV_ONLY_NOT_PUBLISHED; NO_REAL_TASTE_OR_MEMBER_OUTCOME_CLAIM",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -11540,25 +11593,32 @@
       "run_id": "R455-327",
       "next": "Continue new non-overlapping research/source claim verification or source-reproduced SAFE Log Shot→Rate→Recommendation improvement; October 29 research archive and standalone S019 original bytes remain unverified; no member-outcome claims or #267 literal credit.",
       "owner_approval_now_required": false
+    },
+    {
+      "run_id": "R455-328",
+      "next": "Continue additional original scientific claim verification or distinct source-reproducible SAFE UX finding. Do not redo R328 fix or #267 line audit. Original Oct29 ZIP and standalone S019 bytes unverified; no member-data/recommendation efficacy claim.",
+      "owner_approval_now_required": false
     }
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-327",
+    "run_id": "R455-328",
     "date": "2026-11-17",
-    "development_preflight_sha": "3a08847f972107a83fff92d8f0574847f78ef743",
+    "development_preflight_sha": "863357133e810dea95df0f066e0284210a780ab3",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "original_source_preflight_sha": "fc50184b2bf14aabb82f881f70a8f526454120f3",
+    "original_source_merge_sha": "863357133e810dea95df0f066e0284210a780ab3",
     "source_counts": {
-      "sources": 191,
-      "evidence_checks": 565,
-      "proposals": 255
+      "sources": 192,
+      "evidence_checks": 567,
+      "proposals": 256
     },
-    "research_status": "SOURCE_BOUND_R327_SAFE_UI_FIX_VERIFIED_RECONCILIATION_DOC_PR_PENDING",
+    "research_status": "SOURCE_BOUND_R328_SAFE_LOG_SHOT_TEMPERATURE_FIX_SOURCE_AND_MERGED_CI_VERIFIED_DOC_RECONCILIATION_PENDING",
     "runtime_changed": true,
     "tests_run": true,
     "production_deployed": false,
     "github267_literal_review_credit": 0,
     "owner_approval_now_required": false,
-    "next": "Read back docs CI and queue READY only after nonforce merge; then progress nonoverlapping science/UX findings."
+    "next": "Merge scoped docs-only reconciliation after exact CI; continue nonoverlap research/source UX gap. Original Oct29 pack and standalone S019 PDF remain inaccessible."
   },
   "policy_decisions_resolved": [
     {
@@ -17629,6 +17689,37 @@
       ],
       "test_plan": "Eight R327 positive/negative synthetic cases PASS; exact merged Node22 5397/0/6, 390px/Chromium/mobile/offline, source governance SUCCESS; head SQL/security SUCCESS; frozen603 SKIPPED, targeted cloud NOT_APPLICABLE. No real user or taste experiment.",
       "release_queue": "DIC-Q-455-r327-unresolved-field-validation-feedback",
+      "release_queue_status": "READY_DEV_ONLY_NOT_DEPLOYED",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-PROP-328-INVALID-TEMPERATURE-ALERT-PERSISTENCE",
+      "severity": "P2_SAFE_LOG_SHOT_VALIDATION_ACCESSIBILITY_INTEGRITY",
+      "source": [
+        "LIVE-20261117-R328-TEMPERATURE-FEEDBACK-UNIT-VALIDATION"
+      ],
+      "evidence": [
+        "R455-EV-CODE-328-A",
+        "R455-EV-CI-328-B"
+      ],
+      "finding": "Previously an invalid 240F -> 239F or 110C -> 101C Log Shot temperature edit cleared the Save error despite existing model rejection.",
+      "user_benefit": "Retain actionable alert and aria-invalid on still-invalid optional temperature, including displayed F/C and existing model boundaries; clear on valid reading or blank optional.",
+      "current_locked": "Preserve all five taste inputs, original measurements/private notes/history, one controllable change, style/feed/grinder/equipment boundaries and unchanged 70-100 C input model limits.",
+      "current_app": "R328 revised UI checks existing model bounds and display-unit provenance; no model/schema/numeric target change or new data capture.",
+      "proposed_change": "Narrow SAFE owner Option B fix and ten source-bound tests; no owner approval required for unchanged rule.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "PR #3169 corrected source head 988a0b43625bfdbd8f49fee9c3b528a2d8bf0755 safely squash merged 863357133e810dea95df0f066e0284210a780ab3 [skip netlify]",
+      "files": [
+        "site/lib/ui.js",
+        "site/cloud/main.js",
+        "tests/issue455-r328-temperature-validation-feedback.test.mjs",
+        "docs/workstreams/ops-issue455-r328-temperature-validation-feedback-20261117.md",
+        "docs/RELEASE_QUEUE.json"
+      ],
+      "test_plan": "Exact merged Node22 5,415/0/6 with ten synthetic cases #4842-4851; head SQL/security/UX and merged Chromium/offline/governance SUCCESS. No member studies or espresso outcomes.",
+      "release_queue": "DIC-Q-455-r328-temperature-input-validation-feedback",
       "release_queue_status": "READY_DEV_ONLY_NOT_DEPLOYED",
       "production_deployed": false,
       "github267_literal_review_credit": 0
