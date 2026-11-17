@@ -15,5 +15,12 @@ export function identicalCurrentSelectedTitle(expected,h1,parsed){
  // A selected commerce-price suffix is decoration, not coffee identity.
  // All three selected names must still match exactly after this one narrow
  // normalization. Wrong coffee or stale release still fails closed.
- const a=norm(expected);return !!a&&a===norm(selectedCoffeeNameWithoutPrice(h1))&&a===norm(parsed);
+ const a=norm(expected),h=norm(selectedCoffeeNameWithoutPrice(h1)),p=norm(parsed);
+ if(!a||!h||h!==p)return false;
+ if(a===h)return true;
+ // A current H1 may append the literal commerce descriptor "Coffee Beans".
+ // Admit ONLY when both actual selected H1 and parser agree EXACTLY, and
+ // the archived identity is otherwise identical. No arbitrary suffixes,
+ // changed lot names, SEO title or partial-name fallbacks.
+ return a.length>=9&&!a.endsWith('coffee beans')&&h===a+' coffee beans';
 }
