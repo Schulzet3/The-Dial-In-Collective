@@ -17,7 +17,7 @@ test('#501 exact selected official identity and literal own-product evidence, no
  assert.equal(proof.identity,true);assert.equal(proof.direct,true);
  for(const wrong of [[],['Another Coffee'],[entry.name,entry.name]])
   assert.equal(selectedEvidence(markup,wrong).identity,false);
- assert.equal(selectedEvidence(productMarkup(page(copy.replace('Tenejapa','Oaxaca'))),[entry.name]).direct,false);
+ assert.equal(selectedEvidence(productMarkup(page(copy.replace('Chiapas','Oaxaca'))),[entry.name]).direct,false);
 });
 test('#501 seller-owned direct notes and locality; high altitude is NOT a numeric elevation or a Medium roast',()=>{
  const p=parse();assert.equal(p.ok,true,JSON.stringify(p));
