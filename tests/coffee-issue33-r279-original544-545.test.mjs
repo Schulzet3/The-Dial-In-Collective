@@ -95,3 +95,15 @@ test('infused current direct bourbon and bacon impressions are flavor notes, not
  const sibling='<aside class="related-products"><p>Smooth oaky notes of bourbon with the smoky richness of crispy bacon</p></aside>';
  assert.equal(selectedFlavoredProductLiteralNotes('<main><h1>Autumn Bourbon Blend</h1><h3>Autumn Bourbon Blend</h3><p>Our Bourbon Blend infused medium roast coffee celebrates autumn richness.</p>'+sibling+'</main>',{clean,existing:'Spice, Grain & Cereal',sourceFacts:facts}),null);
 });
+
+test('apostrophized selected titles retain an exact current product section prefix',()=>{
+ const clean=(s,n=6001)=>String(s||'').replace(/<[^<>]{0,1200}>/g,' ').replace(/\s+/g,' ').trim().slice(0,n);
+ const markup='<main><h1>It&#39;s Bourbon &amp; Bacon, Hon! — Fall Coffee</h1><h3>It&#39;s Bourbon &amp; Bacon, Hon! - Fall Season Premium Flavored Coffee</h3>'+
+ '<p>Smooth, oaky notes of bourbon with the smoky richness of crispy bacon, create a daring cup.</p>'+
+ '<p>Discover our Bourbon &amp; Bacon infused medium roast coffee with an unmistakable sensory experience.</p></main>';
+ const r=selectedFlavoredProductLiteralNotes(markup,{clean,existing:'Spice, Grain & Cereal',
+ sourceFacts:[{field:'tasting_notes',label:'Flavors',value:'Spice, Grain & Cereal',source_type:'html'}]});
+ assert.ok(r);
+ assert.match(r.value,/bourbon/i);
+ assert.match(r.value,/bacon/i);
+});

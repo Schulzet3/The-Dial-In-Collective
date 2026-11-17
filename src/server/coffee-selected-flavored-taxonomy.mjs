@@ -25,7 +25,10 @@ export function selectedFlavoredProductLiteralNotes(html,{clean,existing,sourceF
  const blocks=productCoffeeProse(html,clean);
  const titles=blocks.filter(b=>b.tag==='h1'&&!b.educational);
  if(titles.length!==1||titles[0].text.length>180)return null;
- const core=fold(titles[0].text).split(/\s+/u).slice(0,2).join(' ');
+ const titleWords=fold(titles[0].text).split(/\s+/u);
+ // Apostrophized names such as "It's Bourbon" tokenize as "it s bourbon".
+ // Expand the SAME selected-H1 prefix rather than rejecting a valid title.
+ const core=titleWords.slice(0,titleWords.slice(0,2).join(' ').length<6?4:2).join(' ');
  if(core.length<6)return null;
  const allowed=/^(?:description|product description|coffee description|about this coffee|about the coffee|coffee details|details|product information)$/u;
  const stories=blocks.filter(b=>b.tag==='p'&&!b.educational&&
