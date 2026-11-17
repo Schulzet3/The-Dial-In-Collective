@@ -90,7 +90,7 @@ test('Log Shot keeps semantic error announcement and re-enables fields before fo
  assert.ok(main.includes('role=alert id=shot-validation-feedback'));
  assert.ok(main.includes("form.querySelectorAll('button').forEach(b=>b.disabled=false);if(id==='shot'&&shotValidation?.length)U.focusShotValidationError"));
  assert.ok(main.includes('target.closest('));
- assert.ok(main.includes("group?.removeAttribute('aria-invalid')"));
+ assert.ok(main.includes("U.acknowledgeShotRating(target.closest('[role=\"group\"]'),sheet.querySelector('#shot-validation-feedback'))"));
 });
 
 test('invalid restored taste ratings show an explicit unrated label without preselecting or rewriting five inputs',()=>{

@@ -217,6 +217,20 @@ export function acknowledgeShotInput(target,feedback){
  if(invalid&&feedback)feedback.textContent='';
  return invalid;
 }
+// A rating tap can fix one missing taste while other marked invalid fields
+// remain unresolved. Retain the shared alert until the final flagged control
+// is corrected. A routine tap must never dismiss a cloud/sync error.
+export function acknowledgeShotRating(group,feedback){
+ if(!group)return false;
+ const invalid=group.getAttribute?.('aria-invalid')==='true';
+ group.removeAttribute?.('aria-invalid');
+ if(group.getAttribute?.('aria-describedby')==='shot-validation-feedback')
+  group.removeAttribute?.('aria-describedby');
+ const form=group.closest?.('form');
+ if(invalid&&feedback&&typeof form?.querySelector==='function'&&
+    !form.querySelector('[aria-invalid="true"]'))feedback.textContent='';
+ return invalid;
+}
 
 // Model validation remains authoritative. Move focus to the first invalid
 // measurement or missing sensory choice only after submit buttons are reenabled.

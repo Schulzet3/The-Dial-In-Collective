@@ -1033,7 +1033,7 @@ class CloudApp {
    if(a==='log'){this.showLog(id);return;}
    if(a==='edit-coffee'){if(this.pending.length)throw new Error('Finish syncing before editing coffee details.');this.showEditCoffee(id);return;}
    if(a==='edit'){if(this.pending.length)throw new Error('Finish syncing before editing existing shots.');const sh=this.state.shots.find(x=>x.id===id);this.showLog(sh.coffeeId,sh);return;}
-   if(a==='rate'){this.readDraft();this.draft.tasteScales[target.dataset.key]=Number(target.dataset.value);U.updateTasteSelection(sheet.querySelector('#ratings'),target.dataset.key,Number(target.dataset.value));const group=target.closest('[role="group"]');group?.removeAttribute('aria-invalid');group?.removeAttribute('aria-describedby');const alert=sheet.querySelector('[role=alert]');if(alert)alert.textContent='';return;}
+   if(a==='rate'){this.readDraft();this.draft.tasteScales[target.dataset.key]=Number(target.dataset.value);U.updateTasteSelection(sheet.querySelector('#ratings'),target.dataset.key,Number(target.dataset.value));U.acknowledgeShotRating(target.closest('[role="group"]'),sheet.querySelector('#shot-validation-feedback'));return;}
    if(a==='use-grind'||a==='use-temp'){
     this.readDraft();
     const r=E.recommendation(this.state,this.logCoffee,{style:this.draft.style,basketId:this.draft.basketId,feedMode:this.draft.feedMode});
