@@ -15920,24 +15920,38 @@
     {
       "id": "DIC-Q-509-source-retry-rollover-cooldown",
       "issue": 509,
-      "pr": null,
+      "pr": 3162,
       "title": "Preserve 15-minute trusted source retry cooldown across 24-hour budget rollover",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "2069fda2279dbe02ec8f2766348bb8123a483e73",
       "scope_paths": [
         "supabase/migrations/20261117133000_dic_source_retry_rollover_cooldown.sql"
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
       "tests": [
         "Direct live full SQL definition plus ACTIVE v10 Edge consumer; read-only synthetic 24h+1s window and 30s last-attempt predicate proves cooldown bypass.",
-        "Development-only additive SQL plus synthetic rollback-only source_worker_auth_and_admission.sql regression; CI PENDING."
+        "Development-only additive SQL plus synthetic rollback-only source_worker_auth_and_admission.sql regression; CI PENDING.",
+        "R311b PR head 6f271a49ee5904a78250a826bdfd1dce4d4843ad: six workflows/seven completed-success jobs, including isolated PostgreSQL17 SQL/JWT, Node22, cloud/browser and governance; initial synthetically faulty fixture SQL failure retained and repaired.",
+        "R311c exact merged push 2069fda2279dbe02ec8f2766348bb8123a483e73: five workflows/six jobs SUCCESS; isolated SQL 44094073714, Node22 44094073651 (5389 pass/0 fail/6 skipped), cloud/browser 44094073782, approval 44094074023, selected #33 44094073644. Migration and rollback-only test Git blobs exact match PR head."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        44093318658,
+        44093318757,
+        44093318797,
+        44093318803,
+        44093318673,
+        44093318687,
+        44094073644,
+        44094074023,
+        44094073714,
+        44094073782,
+        44094073651
+      ],
       "blockers": [
-        "Exact-source isolated PostgreSQL17, Node22, privacy/auth boundary and approval checks not yet proven.",
-        "Source-isolated candidate and #96 genuine hosted Auth tests not yet verified. New owner Publish required for production."
+        "Separate source-isolated release candidate and hosted #96 Auth/member acceptance not verified; preserve TESTING.",
+        "New owner one-command Publish required for production; current migration not applied."
       ],
-      "notes": "No production provider changes, no known member incident, preserve backups, migrations and current business behavior. Owner-action-only alerts remain unchanged.",
+      "notes": "No production provider changes, no known member incident, preserve backups, migrations and current business behavior. Owner-action-only alerts remain unchanged.\nR311c merged source/readback and CI certified. No production changes or READY promotion.",
       "production_deployed": false
     }
   ],
@@ -18670,6 +18684,15 @@
       "source_sha": "4c3fead238a57e338f45055b123cb66786afaaca",
       "production_deployed": false,
       "evidence": "R311 proof/rollback-only regression staged in same-commit journal; exact-source CI pending."
+    },
+    {
+      "date": "2026-11-17",
+      "issue": 509,
+      "item_id": "DIC-Q-509-source-retry-rollover-cooldown",
+      "state": "TESTING",
+      "source_sha": "2069fda2279dbe02ec8f2766348bb8123a483e73",
+      "production_deployed": false,
+      "evidence": "R311c PR #3162 merge 2069fda, 6/6 head and 5/5 merged workflow successes. Source/regr blobs exact. Hosted Auth and candidate isolation unverified; keep TESTING."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"

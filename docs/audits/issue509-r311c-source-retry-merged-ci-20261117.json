@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R311c",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight_development_sha": "2069fda2279dbe02ec8f2766348bb8123a483e73",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "pr": 3162,
+  "pr_head_sha": "6f271a49ee5904a78250a826bdfd1dce4d4843ad",
+  "merge_sha": "2069fda2279dbe02ec8f2766348bb8123a483e73",
+  "merge_message": "[skip netlify] fix(#509): source-worker retry rollover cooldown (#3162)",
+  "ci_pr_head": {
+    "runs": [
+      44093318658,
+      44093318757,
+      44093318797,
+      44093318803,
+      44093318673,
+      44093318687
+    ],
+    "workflows_completed_success": 6,
+    "jobs_completed_success": 7
+  },
+  "ci_merged": {
+    "runs": [
+      44094073644,
+      44094074023,
+      44094073714,
+      44094073782,
+      44094073651
+    ],
+    "workflows_completed_success": 5,
+    "jobs_completed_success": 6,
+    "exact_source": true,
+    "node22": {
+      "tests": 5395,
+      "pass": 5389,
+      "fail": 0,
+      "intentional_skips": 6,
+      "lint": "PASS"
+    }
+  },
+  "blob_parity": {
+    "migration": "6fed54555a82d78080873c886cf1c46df46caa8d",
+    "regression": "7a4c4d370f8cf8085d32084141758ffa2f78c40b",
+    "matching_pr_head_and_merge": true
+  },
+  "previous_failed_run": {
+    "id": 44092868139,
+    "reason": "Synthetic fixture duplicate beta_members after auth trigger; explicitly repaired",
+    "actual_fix_test_only": true
+  },
+  "live_readback": {
+    "function_md5": "68bc86486e485565d4273daf3655e0d3",
+    "migration_applied": false,
+    "source_attempt_rows": 0,
+    "production_writes": 0
+  },
+  "baseline": "IN_PROGRESS",
+  "release_state": "TESTING",
+  "remaining": [
+    "Source-isolated candidate release acceptance",
+    "Hosted Auth boundary #96 if applicable",
+    "Separate owner Publish; production unchanged"
+  ],
+  "first_time_provider_word_credit": 0
+}
