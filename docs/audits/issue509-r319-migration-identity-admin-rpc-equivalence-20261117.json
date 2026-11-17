@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R319",
+  "observed_at_utc": "2026-11-17T21:46:16.452Z",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "original_development_commit_sha": "8a9c5502ccfee5ae077c33b4c934ebb779fc9612",
+    "prewrite_development_commit_sha": "8a9c5502ccfee5ae077c33b4c934ebb779fc9612",
+    "git_preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "verified_content_against_git_blob": true,
+    "ops_main_sha": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release_production_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+  },
+  "scope": "Production provider read-only. Historical source files immutable. No source/test/CI, data or live provider edits.",
+  "provider_project": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.11.0.003"
+  },
+  "sql_migration_identity": {
+    "live_stored_records": 69,
+    "release_branch_sql_files": 68,
+    "development_branch_sql_files": 79,
+    "all_68_release_migration_names_have_live_provider_record": true,
+    "release_migration_names_with_extra_record": [
+      "dic_admin_shot_coffee_group_identity"
+    ],
+    "development_only_source_files_after_release": 11,
+    "these_11_live_provider_migrations": 0,
+    "provider_timestamps_differ_from_rebased_github_filenames": true,
+    "warning": "Compare migration names/complete SQL, not exact timestamp prefixes; this run byte-verifies the duplicate only, not every current migration statement."
+  },
+  "duplicate_provider_migration": {
+    "name": "dic_admin_shot_coffee_group_identity",
+    "stored_versions": [
+      "20261022162910",
+      "20261022165047"
+    ],
+    "each_statement_count": 1,
+    "each_sql_chars": 6344,
+    "each_full_sql_md5": "5bfd5b708e068c32982d30bcd30da8b6",
+    "byte_identical_to_each_other": true,
+    "exact_source_path": "supabase/migrations/20261022023000_dic_admin_shot_coffee_group_identity.sql",
+    "source_git_blob_sha": "a42d1623d4184623b88cdc3fb409ff52a2135809",
+    "both_live_stored_sql_byte_equal_to_exact_development_source": true,
+    "interpretation": "HISTORICAL DUPLICATE APPLICATION of same CREATE OR REPLACE source; not proof of current functionality failure. Preserve every immutable migration record and historical source, no correction/deletion warranted."
+  },
+  "duplicate_application_function_body_review": {
+    "current_app_function_bodies_compared": 114,
+    "one_exact_duplicate_prosrc_pair": [
+      "public.dic_admin_edit_coffee(uuid,bigint,jsonb,text,text)",
+      "public.dic_admin_edit_shot(uuid,bigint,jsonb,text,text)"
+    ],
+    "shared_body_md5": "5a9263855e11432fc325b762d43afa9e",
+    "complete_live_ddl": [
+      {
+        "signature": "public.dic_admin_edit_coffee(p_record_id uuid, p_expected_revision bigint, p_details jsonb, p_reason text, p_kind text)",
+        "ddl_md5": "24e3081d08de58a97f7eeaa65cb568bc",
+        "ddl_chars": 550,
+        "complete_visible_range": "1-550",
+        "disposition": "RETAIN: public coffee form dispatch uses this named endpoint"
+      },
+      {
+        "signature": "public.dic_admin_edit_shot(p_record_id uuid, p_expected_revision bigint, p_details jsonb, p_reason text, p_kind text)",
+        "ddl_md5": "b4e2f07488e5ebc93d1569ca46ad0fbd",
+        "ddl_chars": 548,
+        "complete_visible_range": "1-548",
+        "disposition": "RETAIN: shot form dispatch uses this named endpoint"
+      },
+      {
+        "signature": "private.dic_admin_edit_record(p_record_id uuid, p_expected_revision bigint, p_details jsonb, p_reason text, p_kind text)",
+        "ddl_md5": "290b98b6bb6f99a1afb73b13ff315b12",
+        "ddl_chars": 13186,
+        "complete_visible_range": "1-13186",
+        "disposition": "Shared implementation validates p_kind, requires authenticated member/Admin and record-specific optimistic revision; no reproducible non-Admin edit."
+      }
+    ],
+    "current_consumer_path": "site/admin/main.js",
+    "consumer_git_blob_sha": "f0c158ae7b57277ab99551ce7bca94438bce6919",
+    "consumer_dispatch": "type==='shot' ? dic_admin_edit_shot : dic_admin_edit_coffee, passing p_kind:type",
+    "privilege_guard": "anon cannot EXECUTE either public edit wrapper or private implementation; authenticated has EXECUTE plus private USAGE, private implementation enforces require_member and is_admin.",
+    "verdict": "Same-body wrappers are intentionally two public API names in active use, so redundancy is not a safe removal. No runtime bug reproduced; source not modified."
+  },
+  "cumulative_pgstat_non_slow_claim": {
+    "reset_historical": "2026-10-09",
+    "dic_read_personal_state_calls": 4787,
+    "total_exec_ms": 73163.07,
+    "mean_exec_ms": 15.28,
+    "max_exec_ms": 1566.38,
+    "shared_block_hits": 8403391,
+    "shared_block_reads": 0,
+    "temp_blocks_written": 0,
+    "interpretation": "Cumulative latency cannot by itself prove regression or justify refactoring; no query text/private rows exported."
+  },
+  "first_time_coverage_claim": 0,
+  "prior_direct_source_receipts_not_recredited": true,
+  "new_verified_bugs": 0,
+  "safe_removals": 0,
+  "source_test_ci_changes": 0,
+  "production_writes": 0,
+  "source_bound_new_ci_runs": 0,
+  "release_queue": "UNCHANGED_IN_PROGRESS_OR_TESTING_NOT_PROMOTED",
+  "baseline": "IN_PROGRESS",
+  "unverified": [
+    "Hosted #96 Auth/session and recipient acceptance",
+    "Provider-console-only settings",
+    "Native compiled Vault/PostgreSQL binaries",
+    "All-accessible-source baseline completeness"
+  ],
+  "next_exact_cursor": "Inspect first live new/changed object vs R314/R315/R316/R318 manifests; otherwise identify a reproducible active member/admin query or Edge regression before development-only correction; no repeated unchanged function reading."
+}
