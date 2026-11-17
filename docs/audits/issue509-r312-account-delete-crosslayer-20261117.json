@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 312,
+  "project_ref": "azviqqejypsefzilgonr",
+  "date_utc": "2026-11-17",
+  "preflight_development_sha": "fc50184b2bf14aabb82f881f70a8f526454120f3",
+  "preflight_git_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "main_sha": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+  "release_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5",
+  "scope": "ACCOUNT_DELETE_LIVE_SQL_EDGE_AND_ADMIN_CONSUMER_SEMANTICS",
+  "complete_live_sql_definitions": [
+    {
+      "signature": "private.dic_admin_account_delete_impact(uuid)",
+      "characters": 1588,
+      "md5": "a20e399d6c87c60be0661c80a17728d4",
+      "inspected_range": [
+        1,
+        1588
+      ]
+    },
+    {
+      "signature": "private.dic_admin_account_delete_preview(uuid)",
+      "characters": 687,
+      "md5": "55ad6325a6a3b8eb97d830bd4a5acc26",
+      "inspected_range": [
+        1,
+        687
+      ]
+    },
+    {
+      "signature": "private.dic_admin_account_delete_request(uuid,text,jsonb)",
+      "characters": 1949,
+      "md5": "b91e425cd94b4c749b28adf8fd0b96a1",
+      "inspected_range": [
+        1,
+        1949
+      ]
+    },
+    {
+      "signature": "private.dic_admin_account_delete_prepare(uuid,uuid)",
+      "characters": 3899,
+      "md5": "6e7e0589cbda1bc5023771724ce8b77f",
+      "inspected_range": [
+        1,
+        3899
+      ]
+    },
+    {
+      "signature": "private.dic_admin_account_delete_finish(uuid,uuid)",
+      "characters": 2492,
+      "md5": "51cd64deed985a9ddf622926b8784a84",
+      "inspected_range": [
+        1,
+        2492
+      ]
+    },
+    {
+      "signature": "public.dic_admin_account_delete_preview(uuid)",
+      "characters": 233,
+      "md5": "b8f41cc6faf702f27c678a45127d0723",
+      "inspected_range": [
+        1,
+        233
+      ]
+    },
+    {
+      "signature": "public.dic_admin_account_delete_request(uuid,text,jsonb)",
+      "characters": 308,
+      "md5": "779f19212d19ebbfb88f2a859fd92c21",
+      "inspected_range": [
+        1,
+        308
+      ]
+    },
+    {
+      "signature": "public.dic_admin_account_delete_prepare(uuid,uuid)",
+      "characters": 259,
+      "md5": "a0c67fbfbbfd122a8e16596c79333092",
+      "inspected_range": [
+        1,
+        259
+      ]
+    },
+    {
+      "signature": "public.dic_admin_account_delete_finish(uuid,uuid)",
+      "characters": 257,
+      "md5": "2fc16586443318c1594d1939544920dd",
+      "inspected_range": [
+        1,
+        257
+      ]
+    }
+  ],
+  "sql_characters": 11672,
+  "edge": {
+    "slug": "dic-delete-member-account",
+    "version": 4,
+    "status": "ACTIVE",
+    "verify_jwt": true,
+    "archive_sha256": "5d4b6d84458b289c6a25bc76fec4a4b562594c0802e3ee9f7abd633fe87dcafb",
+    "source_files": [
+      {
+        "path": "supabase/functions/dic-delete-member-account/index.ts",
+        "chars": 4518,
+        "git_blob": "45706c9c78e0755a35159e8a96152cc2aa293d2c",
+        "live_dev_and_release_exact": true
+      },
+      {
+        "path": "supabase/functions/_shared/request-budget.mjs",
+        "chars": 2455,
+        "git_blob": "d8b70824cb71d4dc4a747a8f20e23b429abb3094",
+        "live_development_exact": true
+      }
+    ]
+  },
+  "consumer": {
+    "path": "site/admin/main.js",
+    "git_blob": "f0c158ae7b57277ab99551ce7bca94438bce6919"
+  },
+  "semantic_verdict": "Impact/confirmation is server-checked; prior in-flight request same-actor/mode retries; service Edge validates current Admin before prepare; prepared state checks Auth and dependent Storage/audit; finish requires Auth absent; Community removal uses unique community_shot_id. No new reproducible defect or justified deletion.",
+  "catalog_checks": {
+    "storage_owner_type": "uuid",
+    "storage_owner_id_type": "text",
+    "contribution_link_community_shot_id_unique": true,
+    "all_anonymous_exec": false,
+    "member_preview_request_granted": true,
+    "service_prepare_finish_only": true
+  },
+  "aggregate_only": {
+    "completed_deletion_operations": 6,
+    "other_deletion_operations": 0,
+    "storage_objects": 0
+  },
+  "first_time_coverage_credit": 0,
+  "reason": "Historical receipts not reconciled for distinct word credit; this is current semantic review, not a completeness claim.",
+  "ci": "NOT_RUN",
+  "source_changes": 0,
+  "provider_writes": 0,
+  "production_unchanged": true,
+  "queue": "TESTING_UNCHANGED",
+  "baseline": "IN_PROGRESS",
+  "unverified": [
+    "Hosted genuine Admin delete acceptance #96-owned",
+    "Provider-only hidden admin settings",
+    "Full all-object current 114-function audit not yet complete"
+  ],
+  "next": "Compare historical receipts before credit; direct-review private.dic_admin_dashboard_read and exact consumers."
+}
