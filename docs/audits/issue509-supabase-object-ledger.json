@@ -22353,5 +22353,71 @@
     "exact_pr_head_ci_3086": "SIX_APPLICABLE_SUCCESS_INCLUDING_NODE22",
     "exact_merged_push_ci_3086": "UNVERIFIED",
     "next": "Current changed/new provider definitions, source/drift, exact merged workflow CI for PR3086, unverified native and hosted surfaces. Numeric pgss 4961-5040 only if provider count reaches threshold."
+  },
+  "provider_rpc_catalog_crosscheck_run298": {
+    "status": "IN_PROGRESS_NO_NEW_BASELINE_WORD_CREDIT",
+    "project_ref": "azviqqejypsefzilgonr",
+    "preflight_development_sha": "9d337c0cff19022b269bdd95d3d95ef63cbf31d5",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "live_development_parent_sha_at_write": "b7d9b7500b1a9fc6a03be7361a472046ceede504",
+    "main_sha": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "production_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5",
+    "provider_status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.11.0.003",
+    "live_application_function_count": 114,
+    "historical_manifest_count": 99,
+    "current_vs_historical": {
+      "new_signatures": 22,
+      "same_signature_md5_changed": 17,
+      "removed_signatures": 7,
+      "qualifier": "STRUCTURAL_DRIFT_REFERENCE_NOT_PROOF_OF_UNAPPROVED_CHANGE"
+    },
+    "complete_sql_semantic_rereads": {
+      "public_admin_sql_wrappers": {
+        "count": 6,
+        "chars": 1614
+      },
+      "preview_sources": {
+        "count": 5,
+        "chars": 7951
+      },
+      "community_browse_search_recommendation": {
+        "count": 3,
+        "chars": 13342
+      },
+      "admin_search": {
+        "count": 1,
+        "chars": 7574
+      },
+      "signup_and_retry": {
+        "count": 3,
+        "chars": 5650
+      },
+      "member_approval_enqueue": {
+        "count": 1,
+        "chars": 460
+      },
+      "pg_catalog_views": {
+        "count": 4,
+        "chars": 2524
+      },
+      "sum_chars": 39115,
+      "first_time_word_credit": 0,
+      "notes": "Cross-functional parity/dependency review; earlier hash-bound source receipts already cover these definitions."
+    },
+    "ruled_out": [
+      "shot_notes one-to-one join by PRIMARY KEY(owner_id,shot_id)",
+      "dic_coffee_first_entry one-to-one coffee join by PRIMARY KEY(coffee_id)",
+      "SQL wrapper private-schema USAGE denial inference false: authenticated has USAGE (checked live catalog)"
+    ],
+    "confirmed_new_bugs": 0,
+    "safe_deletions": 0,
+    "known_unpublished_bug": "Community producer-only total/page mismatch remains live; #3086 merged source correction c155d54fd16c49ecb8744a1c1bb1c7181491790b",
+    "merged_CI": "UNVERIFIED_PR_ONLY_GITHUB_CONNECTOR_RETURNED_NO_RUNS_NOT_PASS",
+    "queue": "TESTING_NOT_READY",
+    "prod_writes": 0,
+    "tests_run": "NONE_READ_ONLY_CATALOG_ONLY",
+    "issue509_journal": "docs/workstreams/issue-509.md",
+    "next": "Verify #3086 exact merged-source Actions push jobs when available, then inspect actually changed/unreviewed provider definitions and source parity; no duplication or owner alert on routine unchanged work."
   }
 }
