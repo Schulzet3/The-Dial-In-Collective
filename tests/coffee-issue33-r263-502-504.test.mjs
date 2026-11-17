@@ -59,10 +59,14 @@ test('source-review same current labeled #504 notes is not a false conflict; riv
  const same={...common,value:'This beautiful coffee out of Tanzania is an incredibly approachable light roast. Very clean profile with subtle notes of '+selected+'.'};
  const rival={...common,value:'orange, dark chocolate, and red apple'};
  const additional={...common,value:'Our coffee tastes of fresh banana. Very clean notes of '+selected+'.'};
+ const arbitrary={...common,value:'Mango and cherry aromas. Very clean profile with subtle notes of '+selected+'.'};
+ const unmarked={...common,value:'Sweet pineapple appears first. Very clean profile with subtle notes of '+selected+'.'};
  const other={...common,value:'A different coffee has notes of '+selected+'.'};
- const tested=markSelectedTastingSourceDisagreements([same,rival,additional,other],selected);
+ const tested=markSelectedTastingSourceDisagreements([same,rival,additional,other,arbitrary,unmarked],selected);
  assert.notEqual(tested[0].conflicting,true,'exact printed list in a nonconflicting own intro');
  assert.equal(tested[1].conflicting,true,'genuinely different printed flavor list');
  assert.equal(tested[2].conflicting,true,'extra contradictory earlier taste claim');
  assert.equal(tested[3].conflicting,true,'other coffee label not current selected identity');
+ assert.equal(tested[4].conflicting,true,'earlier distinct aromatic note cannot be hidden by trailing identical list');
+ assert.equal(tested[5].conflicting,true,'arbitrary earlier fruity sentence cannot be suppressed as editorial');
 });
