@@ -1,0 +1,19 @@
+# #455 R322 — preserve unchanged measured dose precision in Next Recipe [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=992262e1ae2f8787b51d5040b2b31436a9803d8d preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+**Authority:** Owner #455 Option B SAFE Locked-compatible correctness, development only. Immutable PREFLIGHT.md blob was independently verified before AGENTS/route/issue/source/provider reads. Pre-write live development 992262e1ae2f8787b51d5040b2b31436a9803d8d, main 3b372215ac7ccfd6db406f27090706e8cb8f3e80, release/production 0f3641b4fff07e2a88d7747e621304ec2cf0ead5. No publication, production data/provider writes, new science policy or user tracking.
+
+**Source-bound problem:** engine blob 7dbc8f29e81edb1bc227066cb4fd9e5144803afd sets Next Recipe doseG to latest measured shot dose on grind/yield/preparation-only advice, but UI blob e8b6b1de2412f7626517b60c3edf36b1aecea975 formats rec.doseG to one decimal. A valid 18.25 g measurement therefore appeared as 18.3 g, suggesting an unintended dose change; unlike R318/R319 grinder/yield precision and R320 Shot History fix, this card remained inconsistent. This is deterministic current-code reasoning, not proven live member incidence or improved espresso quality.
+
+**Narrow correction:** Mark the dose as an unchanged measured control only when it equals the last shot, and display its original precision in RecipeGrid. Genuine NEW dose targets and basket-based starting recipes retain existing one-decimal convention. The original-dose side of any future legitimate dose change arrow keeps original precision. Do not change Locked Dose caption, dose limits, ratios/times/temperature, grinder calibration, Turbo/Fast-Flow/slow-feed, successful families, saved private history/notes, all five ratings, Community, offline, Auth/RLS or production.
+
+**SAME COMMIT paths:** site/lib/engine.js, site/lib/ui.js, tests/issue455-r322-next-recipe-measured-dose.test.mjs, docs/RELEASE_QUEUE.json and this scoped journal. Five synthetic positive/negative cases authored: grind-only, yield-only, diagnostic-only, ordinary 0.1 and starting basket, genuine NEW dose target and original dose arrow. Tests/CI/browser/SQL/PR and real member outcomes NOT RUN or certified at authoring. Frozen603 and #267 line-by-line credit remain untouched.
+
+**Next:** Check exact-source CI Node22/lint, cloud/mobile/offline/browser, isolated SQL/security, approval. Fix failures with new same-commit receipt, safely nonforce [skip netlify] merge and independently read back source/tests/CI. Only then reconcile evidence ledger/CURRENT_STATUS and queue to READY. Original Oct29 ZIP and S019 bytes still unverified; owner approval not needed for this bounded SAFE correction.
+
+## R322 first hosted CI repair — test fixture expectation only [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=4d3a065025a7dfd17bac6b4ec695a339f95c10e6 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+Initial exact PR-head Node22/lint [44045885571](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44045885571) FAILED: 5360 PASS /1 FAIL /6 intentional SKIP. Four R322 cases passed; the fifth failure was **test-only**: the rawFixture starting basket is 18.0 g, while the new test incorrectly expected 20.0 g merely because the latest shot override was 20 g. The owner-Locked basket-based starting recipe is correctly 18.0 g; fix the assertion to verify 18 g starting and 20 g original actual adjustment separately. No app/engine/UI/queue changes. Head source security 44045885492, isolated SQL 44045885482, cloud/mobile/browser 44045885546, approval 44045885516 SUCCESS. Frozen603 44045885629 SKIPPED (not PASS). Re-run corrected exact-source Node22 before any merge or READY promotion; no failure rewritten as success.
