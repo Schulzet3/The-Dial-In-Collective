@@ -24,7 +24,6 @@ test('three distinct original selected sources must each independently pass iden
  }
 });
 test('missing source, changed selected coffee and missing Add Coffee/Source Review cannot be certified',()=>{
- const rows=cases.map(row);
  for(const c of cases){
   assert.ok(requiredFocusedSourceFailures([c.n],[{number:c.n,status:'UNAVAILABLE',parser_ok:false}]).some(x=>x.reason==='required_official_source_not_fetched'));
   assert.ok(requiredFocusedSourceFailures([c.n],[{...row(c),parser_ok:false}]).some(x=>x.reason==='selected_product_parser_not_verified'));
