@@ -15903,19 +15903,33 @@
       "tests": [
         "Complete current live 4,526-character Admin review SQL definition read, original MD5 cb5c264aceb9699a498177f3f6861783",
         "Read-only synthetic SQL proven NULL name-key / NOT (NULL OR NULL) skips rejection; corrected guard rejects",
-        "Rollback-only isolated admin_coffee_review.sql extended; PR-head CI PENDING",
-        "Original PR SQL run 44088964914 successfully compiled migration but new regression DO used ambiguous status column; qualified cs.status, preserving expected rejection. Original approval run 44088964885 correctly HOLD for missing explicit merged_source_sha:null; corrected."
+        "Rollback-only isolated admin_coffee_review.sql extended; PR-head isolated PostgreSQL17.11 44089410812 SUCCESS, fixture executed",
+        "Original PR SQL run 44088964914 successfully compiled migration but new regression DO used ambiguous status column; qualified cs.status, preserving expected rejection. Original approval run 44088964885 correctly HOLD for missing explicit merged_source_sha:null; corrected.",
+        "R310c PR head 942c3d1b7051553ccd9c5795d2db2412418c56e7: six successful source-bound PR workflows: 44089410666, 44089410741, 44089410668, 44089410812, 44089410714, 44089410674.",
+        "R310c merged source 66e2d2ec5cf9450e4b11c809ccbe260b0511f5e2: five successful source-bound PUSH workflows: 44090275709, 44090275784, 44090275602, 44090275737, 44090275667. SQL log ran 20261117130000 migration and admin_coffee_review rollback-only regression in disposable PostgreSQL.",
+        "Migration blob 7bc866ec985f9706abcbe10d900728a1bb6dc991 and test blob 080e37931406845eae8e8f8e0430b3046ab616c1 match final PR head, merged commit and current development."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        44089410666,
+        44089410741,
+        44089410668,
+        44089410812,
+        44089410714,
+        44089410674,
+        44090275709,
+        44090275784,
+        44090275602,
+        44090275737,
+        44090275667
+      ],
       "blockers": [
-        "Corrected PR-head isolated PostgreSQL17.11 and exact-source CI PENDING; initial failed SQL fixture query and queue schema diagnosed and repaired.",
-        "Exact merged-source CI, source isolation and hosted #96 Auth acceptance UNVERIFIED",
-        "Production effect requires separate owner Publish"
+        "Source-isolated release candidate and #96 genuine hosted Auth acceptance UNVERIFIED; remain TESTING.",
+        "Production migration not applied; separate owner Publish required."
       ],
-      "notes": "Potential malformed Admin merge from symbol-only Pending; no evidence real member impacted, production unchanged.",
+      "notes": "Potential malformed Admin merge from symbol-only Pending; no evidence real member impacted, production unchanged.\nR310c exact merged-source CI and source blobs confirmed; no READY promotion or live provider write.",
       "production_deployed": false,
       "pr": 3160,
-      "merged_source_sha": null
+      "merged_source_sha": "66e2d2ec5cf9450e4b11c809ccbe260b0511f5e2"
     },
     {
       "id": "DIC-Q-509-source-retry-rollover-cooldown",
@@ -18693,6 +18707,15 @@
       "source_sha": "2069fda2279dbe02ec8f2766348bb8123a483e73",
       "production_deployed": false,
       "evidence": "R311c PR #3162 merge 2069fda, 6/6 head and 5/5 merged workflow successes. Source/regr blobs exact. Hosted Auth and candidate isolation unverified; keep TESTING."
+    },
+    {
+      "date": "2026-11-17",
+      "issue": 509,
+      "item_id": "DIC-Q-509-admin-merge-null-normalized-name",
+      "state": "TESTING",
+      "source_sha": "66e2d2ec5cf9450e4b11c809ccbe260b0511f5e2",
+      "production_deployed": false,
+      "evidence": "R310c PR #3160 merged. Six PR-head and five exact merged-source CI workflows succeeded; isolated SQL log executed Admin regression. Separate release isolation/hosted Auth unverified."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
