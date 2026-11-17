@@ -3546,6 +3546,48 @@
       "review_status": "SUBSTANTIVE_TARGETED_EXCERPTS_ONLY_NOT_FULL_PAPER",
       "github267_literal_review_credit": 0,
       "implementation_status": "RESEARCH_DESIGN_ONLY_NO_APP_POLICY_OR_DATA_CHANGE"
+    },
+    {
+      "id": "LIVE-20261117-R317-NEXT-ADVICE-UNCHANGED-GRIND-ONE-CONTROL",
+      "type": "exact_immutable_app_source_and_synthetic_regressions",
+      "title": "Non-grind Next Shot advice silently rounded/clamped original measured grinder setting, adding a second unexpected intervention",
+      "source_branch": "development/backend-foundation",
+      "source_commit_sha": "02e831b806366cc75ebdca1ab20c233e8d203b46",
+      "source_git_blobs": {
+        "site/lib/engine.js_before": "8e5e93f42f02444533aee9256569baefc6028325",
+        "site/lib/engine.js_after": "5504a30d466a20d373b7fabed084880b69f455b8",
+        "tests/issue455-next-advice-single-control-grind.test.mjs": "4e7ff1e0ca2ec78a352e5c15ebf845b66063b476",
+        "tests/grinder17-history-guard.test.mjs": "dbaa9ca1a6dcb7ddaea7ea0fb36764e772e60cbf"
+      },
+      "access": "DIRECT_GITHUB_IMMUTABLE_SOURCE_BEFORE_AND_AFTER_AND_EXACT_SOURCE_JOB_LOGS",
+      "review_status": "R455-317_SAFE_LOCKED_COMPATIBLE_NODE22_AND_BROWSER_MERGED_SOURCE_PASS_DEV_ONLY",
+      "evidence_grade": "DETERMINISTIC_SOURCE_NEGATIVE_AND_SYNTHETIC_POSITIVE_AND_NEGATIVE_REGRESSION; NOT_REAL_MEMBER_CUP_QUALITY",
+      "claims_verified_externally": "No new scientific claim. Original Next Shot engine rounded/clamped unchanged actual 2.45 to 2.5 with yield-only 36 -> 31 g recommendation. Historical recorded grind 8 outside active [2.5,3.5] previously recommended a clamped 3.5 while describing a coarser move. No real-user occurrence or observed cup result established.",
+      "source_locators": [
+        "site/lib/engine.js nextAdvice",
+        "site/lib/ui.js nextShotAdjustment",
+        "tests/grinder17-history-guard.test.mjs",
+        "tests/issue455-next-advice-single-control-grind.test.mjs"
+      ],
+      "implementation_status": "SAFE_NONFORCE_MERGED_DEVELOPMENT_ONLY_READY_NOT_DEPLOYED",
+      "implementation_pr": 3111,
+      "implementation_merge_sha": "02e831b806366cc75ebdca1ab20c233e8d203b46",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0,
+      "ci_runs": [
+        44011794190,
+        44012287662,
+        44012287666,
+        44012287657,
+        44012287742,
+        44012287655,
+        44012287643,
+        44012287516,
+        44012787532,
+        44012787577,
+        44012787579,
+        44012787562
+      ]
     }
   ],
   "evidence_checks": [
@@ -10638,6 +10680,24 @@
       "grade": "PROPOSED_METHOD_TRANSFER_ONLY_EXPLICIT_CONFOUNDERS_NOT_VALIDATED_TASTE_BENEFIT",
       "result": "Do not introduce telemetry, fields, cohort assignment, statistics, experiments, new member reads or quality claims without separate owner authority; preregister adverse/missingness/coffee aging before any authorized future analysis.",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CODE-317-A",
+      "source": "LIVE-20261117-R317-NEXT-ADVICE-UNCHANGED-GRIND-ONE-CONTROL",
+      "claim": "Active old nextAdvice() unconditionally rounds/clamps an unchanged measured grinder 2.45 during a yield-only adjustment, yielding a hidden second 2.5 setting; out-of-current-range historical actual settings can result in contradictory grinder moves. The immutable recorded shot and five ratings must remain unmodified.",
+      "source_locator": "engine old blob 8e5e93f42f02444533aee9256569baefc6028325 nextAdvice lines 833-838, current owner Locked Master Specification 13.5 and 19.3, old tests/grinder17-history-guard.test.mjs source",
+      "grade": "IMMUTABLE_DIRECT_APP_CODE_DETERMINISTIC_REPRODUCTION_NOT_MEMBER_OBSERVATION",
+      "result": "SAFE source repair preserves original in-range finite actual and abstains for invalid/out-of-range while genuine grinder recommendations remain rounded/clamped. No numeric targets, taste values or source history changed.",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CI-317-B",
+      "source": "LIVE-20261117-R317-NEXT-ADVICE-UNCHANGED-GRIND-ONE-CONTROL",
+      "claim": "Exact corrected source PR #3111 and development merge preserves one-control Next Shot semantics, historical original shot/notes/all five ratings, normal in-range edge settings and genuine grinder-step advice. Initial CI failure was an older test that required misleading clamp; it was fixed in source-bound test commit and 4 new synthetic regressions passed.",
+      "source_locator": "PR #3111 head 75246b1bfaa4e37c5b6710f0750282ed0d891b0d, merged 02e831b806366cc75ebdca1ab20c233e8d203b46, five identical Git blobs; head validate 44012287662, merged validate 44012787532, head mobile/cloud 44012287666, merged 44012787577, approval 44012287643 and merged 44012787579; original initial failure 44011794190",
+      "grade": "EXACT_PR_HEAD_AND_MERGED_NODE22_SYNTHETIC_REGRESSION_AND_LINT_5316_PASS_0_FAIL_6_INTENTIONAL_SKIP; SOURCE_BOUND_MOBILE_APPROVAL_SQL_SECURITY_SUCCESS; FROZEN603_SKIPPED",
+      "result": "DEV_ONLY_SAFE_MERGED_READY; tests 5322 total /5316 passed /0 failed /6 intentional skips on corrected head+merged, 4 new R317 synthetic and repaired legacy guard pass. No actual live member testing, production deployment, or espresso quality improvement.",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -10879,25 +10939,26 @@
     "R314: verify exact PR-head 3 focused Node22 tests and applicable source-bound CI, fix failures, recheck branch, nonforce merge [skip netlify], verify merged blobs and governance, then reconcile queue/current status to READY only with evidence. No S019 or Oct29 ZIP original-byte verification yet.",
     "R455-314 FINAL: exact tested source PR #3096 one-parent merge 9d337c0cff19022b269bdd95d3d95ef63cbf31d5, five Git blobs matched; 3/3 R314 Node tests PASS head+merge, 5298 PASS/0 FAIL/6 SKIP, merged approval/browser SUCCESS. Unique R314 queue READY development-only, not deployed. Separate #33 original241 current source fail on merged push, owned #33 (not #455). Continue next distinct SAFE source/effectiveness review; ZIP and S019 original bytes still unverified.",
     "R455-315: primary author 2021 EG-1 SSP ULF vs Niche 6+5 same-coffee 1:4 bloom study verified descriptively against original report09; original PSD measurements/raw DE1 logs/independent brew or five-taste efficacy NOT verified. Distinguish measured raw/filtered terminal EY from modeled time-course and low-fines hypotheses; no universal recipe changes, no owner decision presently. Original S019/Oct29 pack fresh raw bytes still outstanding; no #267 literal-line credit. Exact docs-only PR CI and integration to verify.",
-    "R455-316: CENT original BMJ 2015 methodological statement and companion scoped to N-of-1 reporting vs observational same-coffee single-change next-shot evaluation, NO actual espresso treatment effect, member data or product change. Publisher full article 403 and original paper bytes not independently verified. Exact docs-only source CI/merge and research ledger integration to check; original October29 implementation ZIP and standalone S019 bytes outstanding; zero #267 literal-line credit."
+    "R455-316: CENT original BMJ 2015 methodological statement and companion scoped to N-of-1 reporting vs observational same-coffee single-change next-shot evaluation, NO actual espresso treatment effect, member data or product change. Publisher full article 403 and original paper bytes not independently verified. Exact docs-only source CI/merge and research ledger integration to check; original October29 implementation ZIP and standalone S019 bytes outstanding; zero #267 literal-line credit.",
+    "R455-317 FINAL CODE: PR #3111 source-head 75246b1bfaa4e37c5b6710f0750282ed0d891b0d nonforce merged development 02e831b806366cc75ebdca1ab20c233e8d203b46 with identical five Git blobs; one initial failing legacy test fixed, corrected head+merged Node22 each 5316 pass /0 fail /6 skip and scoped UX/mobile/offline/security/SQL/approval success. Development READY, NOT deployed; docs reconciliation still needs its own source-bound PR CI and merge, do not confuse docs-only checks with app efficacy. No original ZIP/S019 verification or #267 line credit."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-316",
+    "run_id": "R455-317",
     "date": "2026-11-17",
-    "development_preflight_sha": "d712c38e2c2a65119a68e153c4334e1747dc8dc0",
+    "development_preflight_sha": "02e831b806366cc75ebdca1ab20c233e8d203b46",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
     "source_counts": {
-      "sources": 180,
-      "evidence_checks": 543,
-      "proposals": 244
+      "sources": 181,
+      "evidence_checks": 545,
+      "proposals": 245
     },
-    "research_status": "BOUNDED_CENT_ORIGINAL_PUBLISHER_INDEXED_METHODS_CROSSWALK_DOCS_CANDIDATE_CI_UNVERIFIED",
-    "runtime_changed": false,
-    "tests_run": false,
+    "research_status": "SOURCE_BOUND_ACTUAL_NEXT_ADVICE_ONE_CONTROL_CORRECTION_VERIFIED_TESTED_NONFORCE_MERGED_DEV_ONLY",
+    "runtime_changed": true,
+    "tests_run": true,
     "production_deployed": false,
     "github267_literal_review_credit": 0,
     "owner_approval_now_required": false,
-    "next": "Pass docs PR source-bound CI, nonforce merge, verify merged ledger/journal blobs and governance, record final Issue #455 receipt. Continue source evidence gaps and consent-safe effectiveness design."
+    "next": "Verify final docs-only reconciliation PR source-bound governance and merge/readback, then continue source/claim ledger and distinct Log Shot -> Rate -> Recommendations reviews, without deploying. Original October29 ZIP and standalone S019 raw bytes remain inaccessible."
   },
   "policy_decisions_resolved": [
     {
@@ -16648,6 +16709,36 @@
       "test_plan": "Original BMJ publisher indexed excerpts + official research network crosscheck; immutable Git source review, ledger structural checks; no app source/test touched, CI only for docs integration; no next-shot outcome data or real espresso trial.",
       "release_queue": null,
       "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-PROP-317-PRESERVE-ORIGINAL-GRIND-ON-YIELD-ADVICE",
+      "severity": "P2_OWNED_SAFE_ONE_CONTROL_CORRECTNESS",
+      "source": [
+        "LIVE-20261117-R317-NEXT-ADVICE-UNCHANGED-GRIND-ONE-CONTROL"
+      ],
+      "evidence": [
+        "R455-EV-CODE-317-A",
+        "R455-EV-CI-317-B"
+      ],
+      "finding": "Next Shot yield-only/temperature-only recommendation silently changed a non-tenth original grinder dial due unconditional rounding/clamping, violating one-adjustment Locked UX and potentially showing contradictory grinder direction for original outside-range history.",
+      "user_benefit": "Ensure one actionable new control and avoid telling the member to alter both yield and grind while preserving historical measured values.",
+      "current_locked": "Master 13.5: only NEW grind recommendations rounded to tenths and inside current espresso range; Master 19.3: only one intentional change, original shot preserved, no invented precise measurement.",
+      "current_app": "Fixed in site/lib/engine.js nextAdvice() direct guard; source under PR #3111 merged exact development 02e831b806366cc75ebdca1ab20c233e8d203b46. Distinguishes unchanged measured grind from genuinely changed requested grind.",
+      "proposed_change": "SAFE implemented: carry original finite in-active-range grind unchanged in yield/temperature suggestions; abstain and explain when historical measured grinder outside current working range or invalid, rather than silently clamp; actual new grinder targets retain one-tenth in-range rounding.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "PR #3111 SAFE NONFORCE MERGED DEVELOPMENT, five exact blobs head=merge, initial failed legacy expected silent clamp corrected with receipt; exact corrected head+merged applicable CI success.",
+      "files": [
+        "site/lib/engine.js",
+        "tests/issue455-next-advice-single-control-grind.test.mjs",
+        "tests/grinder17-history-guard.test.mjs",
+        "docs/workstreams/ops-issue455-r317-next-advice-single-control-grind-20261117.md"
+      ],
+      "test_plan": "All four focused synthetic positive/negative cases and historical grinder guard PASS; Node22 5316/0/6 + lint, packaged mobile/browser/offline/a11y and approval/security/cloud/isolated SQL CI. Do not imply frozen603, live device or measured taste effect.",
+      "release_queue": "DIC-Q-455-r317-next-advice-single-control-grind",
+      "release_queue_status": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
       "production_deployed": false,
       "github267_literal_review_credit": 0
     }

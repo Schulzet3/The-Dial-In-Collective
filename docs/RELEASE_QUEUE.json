@@ -15585,23 +15585,37 @@
     {
       "id": "DIC-Q-455-r317-next-advice-single-control-grind",
       "issue": 455,
-      "pr": null,
+      "pr": 3111,
       "title": "Preserve exact original measured grinder setting in yield-only advice and abstain for out-of-range history",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "02e831b806366cc75ebdca1ab20c233e8d203b46",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "owner_source": "Issue #455 Option B SAFE; DIC_PREFLIGHT_VERIFIED development_sha=65a5d5bef299c1986a7dad15a9509ea2c550c03d preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "tests": [
         "Original engine source-level negative: non-tenth measured 2.45 is silently rounded to 2.5 during yield-only advice; out-of-active-range measured setting silently clamped and possibly contradicts intended direction. Not a member-data finding.",
-        "Four R317 synthetic targeted regression groups authored; Node22, packaged browser/mobile/offline/a11y, SQL/security/governance and source-bound CI not yet run, not PASS."
+        "Four R317 synthetic targeted regression groups authored; Node22, packaged browser/mobile/offline/a11y, SQL/security/governance and source-bound CI not yet run, not PASS.",
+        "Initial PR head Node22 44011794190 failed one original legacy guard that expected silently clamp outside-range 8 to 3.5 in a contradictory 'coarser' suggestion; corrected test now verifies abstention. Initial 5315/1/6 not credited PASS.",
+        "Revised exact PR head 75246b1bfaa4e37c5b6710f0750282ed0d891b0d Node22/lint run 44012287662: 5316 PASS /0 FAIL /6 intentional skips, four new R317 synthetic 4570-4573 PASS and corrected original test 4190 PASS; browser/mobile/offline/cloud 44012287666, SQL 44012287655, security 44012287657, approval 44012287643, exact-selected 44012287516/44012287742 SUCCESS. Frozen603 SKIPPED, no original whole-corpus claim.",
+        "Nonforce [skip netlify] PR #3111 merged source 02e831b806366cc75ebdca1ab20c233e8d203b46 with all FIVE exact Git file blobs identical; concurrent #509 three-doc source preserved. Merged exact Node22/lint 44012787532 5316 PASS/0 FAIL/6 SKIP; merged mobile/cloud 44012787577, approval 44012787579, exact-selected 44012787562 SUCCESS. No live member, quality or provider test."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact PR-head and merged-source applicable CI and Git blob/readback not yet verified; cannot mark READY."
+      "ci_runs": [
+        44011794190,
+        44012287662,
+        44012287666,
+        44012287657,
+        44012287742,
+        44012287655,
+        44012287643,
+        44012287516,
+        44012787532,
+        44012787577,
+        44012787579,
+        44012787562
       ],
-      "notes": "Development only; no research-derived numeric recipe change, original shot edits, member/production operations or deployment.",
+      "blockers": [],
+      "notes": "READY development-only after verified original failed CI repair, corrected exact PR/head and merged-source Node/lint, mobile/browser/offline/cloud, SQL/security, approval checks. Frozen603 SKIPPED not PASS. No deployment or member-data/Locked numeric policy change.",
       "production_deployed": false
     }
   ],
