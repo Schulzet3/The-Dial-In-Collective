@@ -34,7 +34,8 @@ ok(/oscar/i.test(String(f.producer||''))&&/francisca/i.test(String(f.producer||'
 ok(f.process==='Natural','current_direct_perla_negra_natural');
 ok(!f.decaffeination_method&&!f.roast_level,'no_unpublished_roast_or_decaf');
 ok(!/colombia|papaya|strawberry/i.test(String(f.tasting_notes||'')),'no_cross_coffee_flavor_transfer');
-const out={source_sha:report?.source_sha,checkout_sha:process.env.DIC_R276_CHECKOUT_SHA,report_sha256:bytes?sha(bytes):null,original:541,selected_h1:h,raw_html_sha256:raw?sha(raw):null,html_bytes:raw?.length||0,fields:f,seo_fallback_fields:r.seo_fallback_fields||[],conflicts:r.conflicts||[],add_coffee:r.add_coffee_ui_rendered,source_review:r.source_review_rendered,passed:errors.length===0,errors,manual_certified:0,production_operations:0};
+ok(Array.isArray(r.seo_fallback_fields)&&r.seo_fallback_fields.includes('tasting_notes')&&r.metadata_review_notice_rendered===true,'identity_matched_seo_tasting_review_not_confirmed');
+const out={source_sha:report?.source_sha,checkout_sha:process.env.DIC_R276_CHECKOUT_SHA,report_sha256:bytes?sha(bytes):null,original:541,selected_h1:h,raw_html_sha256:raw?sha(raw):null,html_bytes:raw?.length||0,fields:f,seo_fallback_fields:r.seo_fallback_fields||[],metadata_review_notice_rendered:r.metadata_review_notice_rendered,conflicts:r.conflicts||[],add_coffee:r.add_coffee_ui_rendered,source_review:r.source_review_rendered,passed:errors.length===0,errors,manual_certified:0,production_operations:0};
 writeFileSync(join(dir,'r276-afterproof.json'),JSON.stringify(out,null,2)+'\n');
 console.log('[DIC33 R276 RALLY ORIGINAL541] '+JSON.stringify(out));
 if(errors.length)process.exitCode=1;

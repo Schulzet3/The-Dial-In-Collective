@@ -39,3 +39,13 @@ test('missing selected source cannot be rescued by menu-only producer and proces
  assert.equal(p.ok,true);
  assert.doesNotMatch(String(p.fields.tasting_notes||''),/berry|vanilla/i);
 });
+
+test('SEO-only same-product tasting suggestion is explicitly labelled as unconfirmed metadata, never silently certified',()=>{
+ const html=page(selected);
+ const p=extractPublicCoffeeFacts(html,{source_url:url});
+ assert.equal(p.ok,true);
+ const fallback={...p,fields:{...p.fields,tasting_notes:'cooked cranberry, orange, hibiscus'},seo_fallback_fields:['tasting_notes']};
+ assert.match(coffeeUrlPreviewMarkup(fallback),/metadata-only suggestions:/);
+ assert.match(coffeeUrlPreviewMarkup(fallback),/not confirmed product facts/i);
+ assert.doesNotMatch(coffeeUrlPreviewMarkup({...fallback,seo_fallback_fields:[]}),/metadata-only suggestions:/);
+});
