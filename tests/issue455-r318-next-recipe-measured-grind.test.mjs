@@ -61,3 +61,15 @@ test('R318 starting recipe and already-tenth measurements preserve existing disp
  assert.equal(typeof start.grind.value,'number');
  assert.match(recipeGrid(start),/Grind<\/div><div class="metric-value">/);
 });
+
+test('R318 legacy cached NEW grind target still rounds to selectable tenth',()=>{
+ const {state,shot}=fixture({timeS:10});
+ shot.suggestion={title:'Legacy smaller grind',text:'Try a finer grind',
+  next:{grindSetting:2.35,yieldCenter:50}};
+ const before=structuredClone(shot);
+ const rec=recommendation(state,'coffee');
+ assert.equal(rec.source,'Adjustment from your latest taste rating');
+ assert.equal(rec.grind.value,2.4,'new target is rounded; only an unchanged actual retains precision');
+ assert.match(recipeGrid(rec),/Grind<\\/div><div class="metric-value">2\\.4<\\/div>/);
+ assert.deepEqual(shot,before);
+});
