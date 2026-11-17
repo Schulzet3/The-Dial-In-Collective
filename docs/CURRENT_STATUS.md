@@ -1,3 +1,15 @@
+## November 17, 2026 UTC — #455 R321 historical calendar-only Shot History DEV READY, NOT deployed [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=9474daa7526a68cd65301e7c08bf2ca65360c274 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+[PR #3132](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3132) source head `1710f7777b2400a7dd50cfd8eaf22a42b5fb79ae` nonforce [skip netlify] merged `145076b4ce7808faf10971636c05b9e28ca2e883`; four code/test/TESTING queue/SAME-COMMIT journal Git blobs read back identical head→merge. R321 corrects date-only `2026-11-05` misrendering as `11/4/2026` in Denver; valid calendar-only dates retain recorded M/D/YYYY, impossible dates remain absent, timestamp-bearing ISO continues locale/instant behavior. Original shots, private notes, five tastes, setup/style/feed/history/Community/RLS/offline and engine unchanged.
+
+R321 synthetic cases 4785–4787 PASS. Head Node22/lint [44041450131](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44041450131) and merged [44041986982](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44041986982) each **5,351 PASS /0 FAIL /6 intentional SKIP**; head cloud/browser/mobile 44041450035, SQL 44041450133, security 44041450265, approval 44041450072 and merged cloud/mobile/browser 44041987063 and governance 44041987046 SUCCESS. Frozen603 SKIPPED, not PASS. #33 R171 PR-head separate current original241 check failed (owned by #33), merged R171 44041987065 SUCCESS; not confused with complete original603 acceptance.
+
+R321 unique queue entry is READY **DEVELOPMENT ONLY**, `production_deployed=false`; canonical #455 ledger now **185 sources / 553 bounded checks / 249 proposals**, zero #267 direct-line credit. Original October29 ZIP and standalone S019 PDF original bytes still inaccessible/unverified. #455 stays OPEN, no empirical cup improvement or actual member occurrence claimed. No provider/member data, Locked policy, main/release/Netlify, backups, schedule or notification changes.
+
+---
+
 ## November 17, 2026 UTC — #455 R320 historical Shot History precision DEV READY (not deployed) [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=55c5d5d42079cd95aca3e4a8a7252121a02e8cc3 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d

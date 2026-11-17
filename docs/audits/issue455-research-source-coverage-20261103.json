@@ -3703,6 +3703,42 @@
         44033182317,
         44033182276
       ]
+    },
+    {
+      "id": "LIVE-20261117-R321-HISTORIC-DATE-ONLY-TIMEZONE-GUARD",
+      "title": "Date-only Shot History dates were shifted in member-local timezone",
+      "type": "exact_source_with_hosted_synthetic_regressions",
+      "source_branch": "development/backend-foundation",
+      "source_commit_sha": "145076b4ce7808faf10971636c05b9e28ca2e883",
+      "source_git_blobs": {
+        "site/lib/ui.js_before": "af8ab0a07198e88f503a80b68ebb1aff1d56fac7",
+        "site/lib/ui.js_after": "e8b6b1de2412f7626517b60c3edf36b1aecea975",
+        "tests/issue455-r321-history-calendar-date.test.mjs": "dbb463984c42325f2390d8a87ca0cfa7282353a1"
+      },
+      "access": "DIRECT_IMMUTABLE_GITHUB_SOURCE_AND_ACTIONS",
+      "review_status": "SAFE_MERGED_DEV_READY",
+      "evidence_grade": "DETERMINISTIC_SOURCE_BEFORE_AFTER_AND_THREE_SYNTHETIC_TESTS",
+      "claims_verified_externally": "No external science source claim or actual member incident; original calendar-only 2026-11-05 formerly displayed 11/4/2026 in Denver because parsed as UTC midnight.",
+      "source_locators": [
+        "site/lib/ui.js humanDate()",
+        "site/cloud/shot_card.js",
+        "tests/issue455-r321-history-calendar-date.test.mjs"
+      ],
+      "implementation_status": "SAFE_NONFORCE_MERGED_DEV_READY_NOT_DEPLOYED",
+      "implementation_pr": 3132,
+      "implementation_merge_sha": "145076b4ce7808faf10971636c05b9e28ca2e883",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0,
+      "ci_runs": [
+        44041450131,
+        44041450035,
+        44041450072,
+        44041450133,
+        44041450265,
+        44041986982,
+        44041987063,
+        44041987046
+      ]
     }
   ],
   "evidence_checks": [
@@ -10867,6 +10903,24 @@
       "grade": "EXACT_SOURCE_5343_PASS_ZERO_FAIL_SIX_INTENTIONAL_SKIPS_FIVE_FOCUSED_PASS",
       "result": "DEVELOPMENT_ONLY_READY_NOT_DEPLOYED_NO_TASTE_OUTCOME",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CODE-321-A",
+      "source": "LIVE-20261117-R321-HISTORIC-DATE-ONLY-TIMEZONE-GUARD",
+      "claim": "Original YYYY-MM-DD historical Shot History date shifted west of UTC; safe display-only strict calendar validation corrects it without rewriting private timestamps or changing offset ISO behavior.",
+      "source_locator": "site/lib/ui.js old blob af8ab0a07198e88f503a80b68ebb1aff1d56fac7 -> new e8b6b1de2412f7626517b60c3edf36b1aecea975",
+      "grade": "IMMUTABLE_CURRENT_SOURCE_BEFORE_AFTER",
+      "result": "SAFE_LOCKED_COMPATIBLE_UI_CORRECTION",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CI-321-B",
+      "source": "LIVE-20261117-R321-HISTORIC-DATE-ONLY-TIMEZONE-GUARD",
+      "claim": "R321 tests 4785-4787 PASS (Denver, Auckland, UTC, leap/invalid date, offset ISO, private original unchanged); exact-source head and merge Node22 5351 PASS, 0 FAIL, 6 SKIP; browser/offline and approval SUCCESS.",
+      "source_locator": "PR #3132 merge 145076b4ce7808faf10971636c05b9e28ca2e883, Actions 44041450131,44041450035,44041450072,44041450133,44041450265,44041986982,44041987063,44041987046",
+      "grade": "EXACT_SOURCE_HOSTED_NODE22_5351_PASS_0_FAIL_6_INTENTIONAL_SKIPS",
+      "result": "DEV_READY_NOT_DEPLOYED_NO_CUP_QUALITY_CLAIM",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -11112,25 +11166,26 @@
     "R455-317 FINAL CODE: PR #3111 source-head 75246b1bfaa4e37c5b6710f0750282ed0d891b0d nonforce merged development 02e831b806366cc75ebdca1ab20c233e8d203b46 with identical five Git blobs; one initial failing legacy test fixed, corrected head+merged Node22 each 5316 pass /0 fail /6 skip and scoped UX/mobile/offline/security/SQL/approval success. Development READY, NOT deployed; docs reconciliation still needs its own source-bound PR CI and merge, do not confuse docs-only checks with app efficacy. No original ZIP/S019 verification or #267 line credit.",
     "R455-318 source PR #3116 NONFORCE MERGED development a91bd34d371d1a564c4212c30022f9e29d32ec26 after final head and merged exact Node22 5324 pass/0 fail/6 skip and five new synthetic PASS; mobile browser initial offline timeout rerun success; frozen603 skipped, neither empirical quality claim nor deployment. Final docs-only CI/merge/readback pending. #267 literal line audit separate; October29 ZIP and S019 raw not accessible in this session.",
     "R455-319 SAFE original measured yield 36.35 display fixed in Next Recipe; PR #3122 merged e92b15de8c0032eb528b8df801a10e5025aed4e6, exact five source Git blobs matched, five synthetic tests PASS, head+merge Node22 5333/0/6 and browser/approval SUCCESS. R319 docs READY reconciliation pending exact docs CI/merge. No deployment, member/Provider changes, #267 line credit or new science policy.",
-    "R455-320 shot history original measurement precision source merged 55c5d5d42079cd95aca3e4a8a7252121a02e8cc3; five synthetic PASS, head/merge Node22 5343/0/6, browser/governance SUCCESS. Docs reconciliation pending own CI. Original S019/Oct29 ZIP unverified; no #267 literal credit or measured member quality outcomes."
+    "R455-320 shot history original measurement precision source merged 55c5d5d42079cd95aca3e4a8a7252121a02e8cc3; five synthetic PASS, head/merge Node22 5343/0/6, browser/governance SUCCESS. Docs reconciliation pending own CI. Original S019/Oct29 ZIP unverified; no #267 literal credit or measured member quality outcomes.",
+    "R321 date-only History display source PR #3132 merged 145076b4ce7808faf10971636c05b9e28ca2e883; three synthetic cases and head/merged Node22 5351/0/6 SUCCESS. No member/production operation, no #267 line-by-line credit. Continue primary research claim validation; S019 and October29 ZIP originals still unverified."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-320",
+    "run_id": "R455-321",
     "date": "2026-11-17",
-    "development_preflight_sha": "55c5d5d42079cd95aca3e4a8a7252121a02e8cc3",
+    "development_preflight_sha": "9474daa7526a68cd65301e7c08bf2ca65360c274",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
     "source_counts": {
-      "sources": 184,
-      "evidence_checks": 551,
-      "proposals": 248
+      "sources": 185,
+      "evidence_checks": 553,
+      "proposals": 249
     },
-    "research_status": "SAFE_R320_EXACT_SOURCE_MERGED_CI_PASS_DEV_ONLY",
+    "research_status": "R321_SAFE_MERGED_SOURCE_CI_PASS_DEV_ONLY",
     "runtime_changed": true,
     "tests_run": true,
     "production_deployed": false,
     "github267_literal_review_credit": 0,
     "owner_approval_now_required": false,
-    "next": "Verify R320 docs PR CI, nonforce merge and merged docs blobs. Continue independent source/UX review; original S019 and Oct29 pack bytes unverified."
+    "next": "Verify R321 docs merge and exact source governance, continue source claims and UX work, Oct29 ZIP/S019 original unverified."
   },
   "policy_decisions_resolved": [
     {
@@ -17000,6 +17055,35 @@
       "test_plan": "Five focused synthetic Node22 cases PASS; merged Node22 5343/0/6; Chromium/mobile/offline, governance success; no member outcome test.",
       "release_queue": "DIC-Q-455-r320-shot-history-measured-precision",
       "release_queue_status": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-PROP-321-SHOT-HISTORY-DATE-ONLY",
+      "severity": "P2_SAFE_DATE_DISPLAY_CORRECTNESS",
+      "source": [
+        "LIVE-20261117-R321-HISTORIC-DATE-ONLY-TIMEZONE-GUARD"
+      ],
+      "evidence": [
+        "R455-EV-CODE-321-A",
+        "R455-EV-CI-321-B"
+      ],
+      "finding": "Imported date-only history calendar day shown incorrectly as previous day in Denver.",
+      "user_benefit": "History renders original recorded calendar day, not invented timezone interpretation.",
+      "current_locked": "Preserve timestamp, original shot/notes/all five taste scores and US M/D/YYYY compact history.",
+      "current_app": "Strict YYYY-MM-DD renders directly; real ISO instants retain local display.",
+      "proposed_change": "SAFE UI-only exact source fix, no new recommendation policy.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "PR #3132 merge 145076b4ce7808faf10971636c05b9e28ca2e883",
+      "files": [
+        "site/lib/ui.js",
+        "tests/issue455-r321-history-calendar-date.test.mjs",
+        "docs/workstreams/ops-issue455-r321-history-calendar-date-20261117.md"
+      ],
+      "test_plan": "Three R321 positive/negative PASS, exact PR-head+merge Node22 5351/0/6 plus UX/approval PASS; real member outcome untested.",
+      "release_queue": "DIC-Q-455-r321-history-calendar-date-display",
+      "release_queue_status": "READY_DEV_ONLY_NOT_DEPLOYED",
       "production_deployed": false,
       "github267_literal_review_credit": 0
     }
