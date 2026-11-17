@@ -16008,15 +16008,15 @@
       "merged_source_sha": "863357133e810dea95df0f066e0284210a780ab3",
       "scope_paths": [
         "site/lib/ui.js",
-        "site/cloud/main.js",
-        "tests/issue455-r328-temperature-validation-feedback.test.mjs"
+        "site/cloud/main.js"
       ],
       "owner_source": "Issue #455 Option B SAFE; existing model temperature bounds only. DIC_PREFLIGHT_VERIFIED development_sha=fc50184b2bf14aabb82f881f70a8f526454120f3 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "tests": [
         "Negative source repro before fix: after failed Save a 240F -> 239F or 110C -> 101C input edit cleared the invalid temperature alert while model.validateShot continued rejecting the out-of-range temperature.",
         "PR #3169 corrected head 988a0b43625bfdbd8f49fee9c3b528a2d8bf0755: exact-source Node22/lint, actual Chromium/mobile/offline/accessibility, isolated SQL, security and governance SUCCESS. Original frozen coffee corpus SKIPPED, not PASS.",
         "Exact merged source 863357133e810dea95df0f066e0284210a780ab3 Node22/lint run 44113204249: 5,415 PASS, 0 FAIL, 6 intentional SKIP; R328 ten synthetic positive/negative cases #4842-4851 individually PASS; lint exit 0.",
-        "Merged source actual browser/390px/mobile/offline/a11y run 44113204470 SUCCESS and governance run 44113204162 SUCCESS. Targeted cloud unit NOT_APPLICABLE (job skipped), original frozen603 SKIPPED. No real member outcomes or espresso taste/effectiveness measurement."
+        "Merged source actual browser/390px/mobile/offline/a11y run 44113204470 SUCCESS and governance run 44113204162 SUCCESS. Targeted cloud unit NOT_APPLICABLE (job skipped), original frozen603 SKIPPED. No real member outcomes or espresso taste/effectiveness measurement.",
+        "Initial docs-only PR #3172 governance run 44114583480 FAILED: queue intake rejects tests/ file in scope_paths (only deployable app files permitted). Corrected scope_paths to site/lib/ui.js and site/cloud/main.js, retained test file in independent test source ledger, rerun exact PR-head governance pending; no source behavior changed."
       ],
       "ci_runs": [
         44109181680,
