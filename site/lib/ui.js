@@ -253,6 +253,9 @@ export function focusShotValidationError(form,errors,tastes={}) {
  return true;
 }
 
+// History must show the ORIGINAL recorded measurements, not subtly rounded
+// recommendations. Reuse the established scalar formatting guard; do not
+// mutate archived dose/yield/time/grind values or invent absent readings.
 export function shotSummary(sh,unit='F') {
  const dose=numericMeasurement(sh.doseG)?Number(sh.doseG):NaN;
  const yieldG=numericMeasurement(sh.yieldG)?Number(sh.yieldG):NaN;
@@ -260,8 +263,8 @@ export function shotSummary(sh,unit='F') {
   // Archived unit labels are untrusted; never interpolate arbitrary HTML or invent a physical unit.
   const safeUnit=unit==='C'?'C':'F';
  const temperature=numericMeasurement(sh.tempC)?` \u00b7 ${tempDisplay(sh.tempC,safeUnit)}\u00b0${safeUnit}`:'';
- const grind=numericMeasurement(sh.grindSetting)?` \u00b7 Grind ${fmt(sh.grindSetting)}`:'';
- return `<span class="shot-numbers">${fmt(sh.doseG)}g \u2192 ${fmt(sh.yieldG)}g${ratio} \u00b7 ${fmt(sh.timeS)}s${temperature}${grind}</span>`;
+ const grind=numericMeasurement(sh.grindSetting)?` \u00b7 Grind ${fmtMeasuredControl(sh.grindSetting)}`:'';
+ return `<span class="shot-numbers">${fmtMeasuredControl(sh.doseG)}g \u2192 ${fmtMeasuredControl(sh.yieldG)}g${ratio} \u00b7 ${fmtMeasuredControl(sh.timeS)}s${temperature}${grind}</span>`;
 }
 export const humanDate=d=>{if(typeof d!=='string'||!d.trim())return '';try{const date=new Date(d);return Number.isNaN(date.getTime())?'':date.toLocaleDateString('en-US',{month:'numeric',day:'numeric',year:'numeric'});}catch{return '';}};
 export const previewNotice=()=>`<div class="preview-note">${icon('eye',16)}<div><strong>Design preview</strong><span>Fictional sample data. Nothing is shared, synced or sent to an account.</span></div></div>`;
