@@ -22823,5 +22823,21 @@
     "baseline": "IN_PROGRESS",
     "status": "HISTORICAL_LEDGER_CURRENTNESS_CORRECTED_WITH_R308_RECEIPT",
     "next": "Per-object verify genuinely unreviewed live SQL and caller/provider drift; no 114-of-114 semantic completion assertion"
+  },
+  "provider_shared_preview_rollover_run309": {
+    "run": 309,
+    "receipt_path": "docs/audits/issue509-r309-preview-rollover-cooldown-20261117.json",
+    "preflight_sha": "00fd25e70cf3375e4b0c5effc3a29cc261d46fc5",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "provider_source_chars_fully_reread": 5367,
+    "first_time_word_credit": 0,
+    "new_confirmed_bugs": 1,
+    "read_only_repro": "ALLOWED_OLD_BRANCH despite 3s cooldown",
+    "source_migration": "supabase/migrations/20261117114500_dic_shared_preview_rollover_cooldown.sql",
+    "source_test": "supabase/tests/universal_url_preview.sql",
+    "source_state": "TESTING_CI_PENDING",
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Verify exact PR-head isolated PostgreSQL and relevant CI, no live DDL."
   }
 }
