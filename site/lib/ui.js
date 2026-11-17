@@ -54,14 +54,14 @@ export const range=(v,unit='')=>`${fmt(v.low)}<span class="range-dash">\u2013</s
 // UI must not silently round the unchanged measured grinder control into a
 // second change while showing yield-only or preparation-only guidance.
 // New recommendations still use their existing 0.1 output precision.
-const fmtMeasuredGrind=v=>numericMeasurement(v)&&
+const fmtMeasuredControl=v=>numericMeasurement(v)&&
  Math.abs(Number(v)*10-Math.round(Number(v)*10))>1e-8?String(Number(v)):fmt(v);
 export function recipeGrid(rec,showTemp=false,unit='F') {
  if(!rec)return '';
  // Imported/legacy setup units are untrusted. Match the approved F/C physical display boundary.
  const safeUnit=unit==='C'?'C':'F';
  const stat=(label,value,sub,ico)=>`<div class="metric"><div class="metric-label">${icon(ico,15)} ${label}</div><div class="metric-value">${value}</div>${sub?`<div class="metric-sub">${sub}</div>`:''}</div>`;
- return `<div class="recipe-grid">${stat('Dose',`${fmt(rec.doseG)} <span class="unit">g</span>`,'Basket-based','scale')}${stat('Yield',range(rec.yield,'g'),`Center ${fmt(rec.yield.center)} g \u00b7 1:${fmt(rec.ratio.center,2)}`,'drop')}${stat('Time',range(rec.time,'s'),`Center ${fmt(rec.time.center)} s`,'clock')}${stat('Grind',rec.grind.range?range(rec.grind.range):(rec.source==='Adjustment from your latest taste rating'||rec.diagnosticOnly?fmtMeasuredGrind(rec.grind.value):fmt(rec.grind.value)),`${rec.grind.range?`Try ${fmt(rec.grind.value)} · `:''}${e(rec.grind.source)}`,'settings')}${showTemp?stat('Temperature',`${tempDisplay(rec.tempC,safeUnit)}<span class="unit">\u00b0${safeUnit}</span>`,'','thermometer'):''}</div>`;
+ return `<div class="recipe-grid">${stat('Dose',`${fmt(rec.doseG)} <span class="unit">g</span>`,'Basket-based','scale')}${stat('Yield',range(rec.yield,'g'),`Center ${rec.source==='Adjustment from your latest taste rating'||rec.diagnosticOnly?fmtMeasuredControl(rec.yield.center):fmt(rec.yield.center)} g \u00b7 1:${fmt(rec.ratio.center,2)}`,'drop')}${stat('Time',range(rec.time,'s'),`Center ${fmt(rec.time.center)} s`,'clock')}${stat('Grind',rec.grind.range?range(rec.grind.range):(rec.source==='Adjustment from your latest taste rating'||rec.diagnosticOnly?fmtMeasuredControl(rec.grind.value):fmt(rec.grind.value)),`${rec.grind.range?`Try ${fmt(rec.grind.value)} · `:''}${e(rec.grind.source)}`,'settings')}${showTemp?stat('Temperature',`${tempDisplay(rec.tempC,safeUnit)}<span class="unit">\u00b0${safeUnit}</span>`,'','thermometer'):''}</div>`;
 }
 
 // Show before → after only for one measured, controllable adjustment.
@@ -82,12 +82,12 @@ export function nextShotAdjustment(advice,shot,showTemp=false,unit='F'){
  // Imported/legacy unit labels must never misstate a temperature adjustment.
  const safeUnit=unit==='C'?'C':'F';
  const units={grindSetting:'',yieldCenter:'g',tempC:`°${safeUnit}`,doseG:'g'};
- const format=n=>key==='tempC'?String(tempDisplay(n,safeUnit)):key==='grindSetting'?fmtMeasuredGrind(n):fmt(n);
+ const format=(n,isOriginal=false)=>key==='tempC'?String(tempDisplay(n,safeUnit)):key==='grindSetting'?fmtMeasuredControl(n):key==='yieldCenter'&&isOriginal?fmtMeasuredControl(n):fmt(n);
  const controls=[['doseG','dose'],['grindSetting','grind'],['yieldCenter','yield'],['tempC','temperature']];
  const unchanged=controls.filter(([k])=>k!==key&&(k!=='tempC'||(showTemp&&Number.isFinite(shot.tempC)))).map(([,name])=>name);
  const keep=unchanged.length===3?`${unchanged[0]}, ${unchanged[1]}, and ${unchanged[2]}`:
   unchanged.length===2?`${unchanged[0]} and ${unchanged[1]}`:unchanged.join('');
- return {label:names[key],before:format(before[key]),after:format(next[key]),unit:units[key],keep};
+ return {label:names[key],before:format(before[key],true),after:format(next[key]),unit:units[key],keep};
 }
 export function nextShotTitle(advice){
  if(advice?.title==='Try a little finer')return 'Try grinding slightly finer';

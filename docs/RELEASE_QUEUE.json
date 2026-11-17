@@ -8,6 +8,29 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-r319-original-yield-next-recipe-precision",
+      "issue": 455,
+      "pr": null,
+      "title": "Preserve recorded non-tenth yield when Next Recipe recommends only grind or preparation changes",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js",
+        "site/lib/ui.js"
+      ],
+      "owner_source": "Issue #455 owner Option B SAFE Locked-compatible; DIC_PREFLIGHT_VERIFIED development_sha=67c71584781538911e8667690bb7027ee302f5ff preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Pre-change immutable source: nextAdviceRaw retains measured yield 36.35 on grind-only feedback, but recommendation() rounds it to 36.4 and RecipeGrid shows 36.4; Next Shot original-yield arrow also rounds before value. Synthetic regression authored, not yet executed.",
+        "Five focused Node22 synthetic positive/negative cases authored: grind-only exact measured 36.35, genuine new yield tenth with before-arrow, diagnostic-only exact 36.35, ordinary tenth inputs, min/max measured original and bounded interval. Node22/UX/mobile/offline/CI NOT YET RUN, not PASS."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact source-bound Node22/application/cloud/mobile/browser/SQL/security/approval and nonforce integration not yet verified"
+      ],
+      "notes": "TESTING only; no new numeric policy, owner consent, community/telemetry, member-data, Live SQL/Auth/Edge, Netlify or release permission. Existing frozen603 and #267 exhaustive tasks untouched; original recorded notes and all five ratings preserved.",
+      "production_deployed": false
+    },
+    {
       "id": "DIC-Q-33-r255-selected-sensory-sky-scene-guard",
       "issue": 33,
       "pr": 3068,
