@@ -101,6 +101,14 @@ export function markSelectedTastingSourceDisagreements(facts,selectedNotes){
      [...before.matchAll(sensoryLead)].length===1&&
      !/[,:;]/u.test(before)&&
      !/\b(?:other|another|different|previous|historical|former)\s+(?:coffee|lot|product)\b/iu.test(before))continue;
+  // Do not apply ordinary comma-list subset logic to a preceding sentence
+  // plus a trailing matching note list. The earlier sentence may itself
+  // assert an extra flavor (even without a "tastes of" keyword). Preserve
+  // the literal source as conflicting and leave canonical notes unchanged.
+  if(selectedTail.length>=10&&printedTail.toLowerCase().endsWith(selectedTail.toLowerCase())&&
+     /[.!?]\s+/u.test(before)&&(!safeProfileLead||!safeEarlier)){
+    fact.conflicting=true;continue;
+  }
   const printed=normalizeExplicitCoffeeTastingNotes(raw)||
    (raw.length<=240&&raw.length>=6&&/[,;|]/.test(raw)&&!/[<>]/.test(raw)?raw:'');
   if(printed&&!equivalentCoffeeTastingNotes(printed,selectedNotes)&&
