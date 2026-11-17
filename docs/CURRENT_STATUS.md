@@ -1,3 +1,11 @@
+## November 17, 2026 UTC — #455 R329 disjoint R328 temperature/roast documentation reconciliation (docs CI pending) [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=96d73f22205aa3ff879b1f6e030756a637e810f3 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+**Source/test outcome reused (not rerun):** [SAFE source fix PR #3169](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3169) safely merged nonforce `863357133e810dea95df0f066e0284210a780ab3`; all five original source/test/queue/journal Git blobs matched. Exact-source PR-head Node22, browser/mobile/offline/a11y, SQL/security and governance SUCCESS; source-merged Node22 [44113204249](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44113204249) **5,415 PASS/0 FAIL/6 intentional SKIP** with ten temperature/F-C positive/negative regressions, merged browser/offline [44113204470](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44113204470) and governance [44113204162](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44113204162) SUCCESS. Original603 SKIPPED and targeted cloud unit NOT_APPLICABLE, neither PASS. No real member/taste improvement claim.
+
+Concurrent separately valid [R328 roast original study PR #3174](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3174) made earlier temperature docs [PR #3172](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3172) nonmergeable, so R329 preserves both unique sources/evidence/proposals and corrects its original failed governance deployable-only scope. Research **193 sources / 569 checks / 257 proposals**; queue **405 items / 195 histories**, temperature item `DIC-Q-455-r328-temperature-input-validation-feedback` READY **development only**, never deployed. This combined docs-only PR and exact merge governance **NOT YET VERIFIED** at authoring. No app source/Locked policy changes, publication, live SQL/Auth/Edge/member/provider writes or main/release move. Original October29 ZIP and standalone S019 original bytes unverified; #267 literal audit unrelated. Issue #455 remains OPEN.
+
 ## November 17, 2026 UTC — #455 R327 unresolved invalid Log Shot field feedback DEV READY, NOT DEPLOYED [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=3a08847f972107a83fff92d8f0574847f78ef743 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d

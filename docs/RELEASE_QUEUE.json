@@ -16002,25 +16002,34 @@
     {
       "id": "DIC-Q-455-r328-temperature-input-validation-feedback",
       "issue": 455,
-      "pr": null,
+      "pr": 3169,
       "title": "Keep invalid Log Shot temperature guidance until a truly valid F/C edit or optional clear",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "863357133e810dea95df0f066e0284210a780ab3",
       "scope_paths": [
         "site/lib/ui.js",
         "site/cloud/main.js"
       ],
       "owner_source": "Issue #455 Option B SAFE; existing model temperature bounds only. DIC_PREFLIGHT_VERIFIED development_sha=fc50184b2bf14aabb82f881f70a8f526454120f3 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "tests": [
-        "Current-source reproduction: a flagged invalid temperature field is unconditionally acknowledged on any edit even when still beyond 70-100 C in displayed F/C; original model retains its error.",
-        "R328 ten focused positive/negative synthetic regressions submitted, including both units, boundary values, missing/invalid values, another invalid taste, cloud-error isolation, real Log Shot form binding; CI NOT YET RUN."
+        "Negative source repro before fix: after failed Save a 240F -> 239F or 110C -> 101C input edit cleared the invalid temperature alert while model.validateShot continued rejecting the out-of-range temperature.",
+        "PR #3169 corrected head 988a0b43625bfdbd8f49fee9c3b528a2d8bf0755: exact-source Node22/lint, actual Chromium/mobile/offline/accessibility, isolated SQL, security and governance SUCCESS. Original frozen coffee corpus SKIPPED, not PASS.",
+        "Exact merged source 863357133e810dea95df0f066e0284210a780ab3 Node22/lint run 44113204249: 5,415 PASS, 0 FAIL, 6 intentional SKIP; R328 ten synthetic positive/negative cases #4842-4851 individually PASS; lint exit 0.",
+        "Merged source actual browser/390px/mobile/offline/a11y run 44113204470 SUCCESS and governance run 44113204162 SUCCESS. Targeted cloud unit NOT_APPLICABLE (job skipped), original frozen603 SKIPPED. No real member outcomes or espresso taste/effectiveness measurement.",
+        "Stale docs PR #3172 governance failed for a test path in deployable scope_paths; corrected two deployable paths retained, original test path documented in source receipts. R329 non-overlap docs reconciliation preserves concurrent R328 roast study; docs PR/merged governance not yet checked."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Applicable exact-source Node22/browser/mobile/offline/accessibility, SQL/security/governance CI, nonforce source merge and merged-source readback pending.",
-        "No separate owner Publish authorization; no production/provider effects permitted."
+      "ci_runs": [
+        44109181680,
+        44109181881,
+        44109181651,
+        44109181733,
+        44109182127,
+        44113204249,
+        44113204470,
+        44113204162
       ],
-      "notes": "TESTING development only. No change to actual model validation bounds, all five tastes, measured shot/notes/history, recommendation controls, grinder, Turbo/Fast-Flow, slow feeding, offline, Community/RLS or privacy; no taste-outcome assertion.",
+      "blockers": [],
+      "notes": "READY development only after exact PR-head and merged-source Node22/browser/governance readback and identical head/merge Git blobs, no deployment. Previous initial head CI lint failed solely unused test import, corrected with distinct SAME-COMMIT preflight receipt and successful rerun; original failure preserved in scoped journal. All original Locked numeric taste/temperature, five ratings, shot history, privacy/RLS/offline/Community remain unchanged.",
       "production_deployed": false
     }
   ],
@@ -18780,6 +18789,15 @@
       "source_sha": "1d32edc552a85336bf503e6316ad0ff3ccd62076",
       "production_deployed": false,
       "evidence": "PR #3164 nonforce source merge 1d32edc; four identical head/merge Git blobs, exact PR-head Node/UX/SQL/security/governance success; exact merged Node22 5397 PASS/0 FAIL/6 SKIP with eight R327 cases #4826-4833 PASS, merged browser/mobile/offline and governance success; frozen603 SKIPPED, targeted cloud unit NOT_APPLICABLE. No member/production/quality claim."
+    },
+    {
+      "date": "2026-11-17",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r328-temperature-input-validation-feedback",
+      "state": "READY",
+      "source_sha": "863357133e810dea95df0f066e0284210a780ab3",
+      "production_deployed": false,
+      "evidence": "PR #3169 corrected head 988a0b... nonforce squash merged [skip netlify] 863357133e810dea95df0f066e0284210a780ab3; five head/merge Git blobs identical. Exact merged run 44113204249 5415 Node22 PASS/0 FAIL/6 SKIP, ten R328 tests #4842-4851 PASS; browser/mobile/offline 44113204470 and governance 44113204162 SUCCESS; head SQL/security SUCCESS; not deployed."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
