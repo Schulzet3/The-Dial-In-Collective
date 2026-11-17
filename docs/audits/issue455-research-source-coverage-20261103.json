@@ -3463,13 +3463,24 @@
         "site/cloud/main.js Coffee overview Next Shot"
       ],
       "access": "EXACT_IMMUTABLE_GITHUB_SOURCE_READ",
-      "review_status": "R314_SAFE_SOURCE_TEST_PATCH_WRITTEN_PENDING_HOSTED_CI",
-      "evidence_grade": "DIRECT_CODE_NOT_EMPIRICAL_TASTE_EVIDENCE",
+      "review_status": "R455_314_SAFE_CODE_HEAD_AND_MERGED_NODE_UX_APPROVAL_PASS_DEV_ONLY_READY",
+      "evidence_grade": "DIRECT_GIT_SOURCE_AND_3_SYNTHETIC_REGRESSIONS_PR_HEAD_AND_MERGED_NODE22_PASS; NO_REAL_MEMBER_OR_CUP_OUTCOME",
       "claims_verified_externally": "No new scientific claim. The code used non-F inputs as Celsius in tempDisplay but rendered them as supplied unit strings; normal setup F/C controls reduce reachability. No production exploit/member incident demonstrated.",
       "factual_status": "SAFE_LOCKED_COMPATIBLE_PRESENTATION_ONLY",
       "github267_literal_review_credit": 0,
-      "implementation_status": "PR_PENDING_EXACT_SOURCE_CI",
-      "production_deployed": false
+      "implementation_status": "SAFE_TESTED_NONFORCE_MERGED_DEVELOPMENT_ONLY_READY_NOT_DEPLOYED",
+      "production_deployed": false,
+      "implementation_merge_sha": "9d337c0cff19022b269bdd95d3d95ef63cbf31d5",
+      "ci_runs": [
+        43989878790,
+        43989878803,
+        43989878879,
+        43989878834,
+        43989879046,
+        43990526458,
+        43990526417,
+        43990526479
+      ]
     }
   ],
   "evidence_checks": [
@@ -10487,8 +10498,8 @@
       "source": "LIVE-20261116-R314-NEXT-SHOT-TEMP-DELTA-UNIT",
       "claim": "Original 93°C shot + malformed unit K displays 93°K instead of 199°F in Next Shot arrow; valid F/C remain physically convertible.",
       "source_locator": "site/lib/ui.js nextShotAdjustment, constants.js tempDisplay",
-      "grade": "DIRECT_GITHUB_CODE_REVIEW_NOT_RUNTIME_RESULT",
-      "result": "Safe explicit C/F boundary identified; no observed real member impact.",
+      "grade": "DIRECT_IMMUTABLE_SOURCE_AND_R314_3_POSITIVE_NEGATIVE_TESTS_PASS_PR_HEAD_MERGED",
+      "result": "PR #3096 5 applicable PR-head checks SUCCESS; exact Node22 5298 PASS/0 FAIL/6 intended SKIP, R314 cases 4732–4734 PASS both PR head and merged. Merged Node, browser/cloud, approval governance all SUCCESS; frozen603 SKIPPED, unrelated #33 selected-original241 FAILED in merged push and is not R314 code/UX acceptance. No member incident or espresso efficacy claim.",
       "github267_literal_review_credit": 0
     },
     {
@@ -10496,8 +10507,8 @@
       "source": "LIVE-20261116-R314-NEXT-SHOT-TEMP-DELTA-UNIT",
       "claim": "Three focused synthetic cases for true C/F, invalid units and no-temperature/grind-only fallbacks retain original shot/taste/notes and advice evidence.",
       "source_locator": "tests/issue455-r314-next-shot-temp-unit.test.mjs",
-      "grade": "TEST_AUTHORED_CI_NOT_YET_RUN",
-      "result": "No tests reported PASS at commit authoring.",
+      "grade": "DIRECT_IMMUTABLE_SOURCE_AND_R314_3_POSITIVE_NEGATIVE_TESTS_PASS_PR_HEAD_MERGED",
+      "result": "PR #3096 5 applicable PR-head checks SUCCESS; exact Node22 5298 PASS/0 FAIL/6 intended SKIP, R314 cases 4732–4734 PASS both PR head and merged. Merged Node, browser/cloud, approval governance all SUCCESS; frozen603 SKIPPED, unrelated #33 selected-original241 FAILED in merged push and is not R314 code/UX acceptance. No member incident or espresso efficacy claim.",
       "github267_literal_review_credit": 0
     }
   ],
@@ -10737,27 +10748,43 @@
     "R455-312 FINAL: PR #3084 safe nonforce [skip netlify] merged 5898fc8, five source/test/ledger/queue/journal blobs byte-identical; 4 R312 Node22 tests PASS; exact head/merged Node 5278 PASS/0 FAIL/6 SKIP, head UX/security/SQL/governance SUCCESS, merged cloud/mobile and pushed approval SUCCESS. Queue uniquely READY development-only, no Publish. Continue next distinct source/UX issue; original S019 fresh bytes unavailable, original October29 ZIP fresh check unavailable.",
     "R455-313: confirm PR-head exact CI for strict F/C RecipeGrid rendering boundary, fix any failing cases, recheck concurrent dev and nonforce [skip netlify] merge only if successful, independently read back five Git blob SHAs and merged governance, then reconcile canonical ledger and queue to READY only with tested merged-source evidence. Source ZIP original bytes and S019 separate original still unverified.",
     "R455-313 FINAL: PR #3090 source da74f54d41ac24253f31918f11f05589a5b25915 five tested Git blobs match head, head five CI SUCCESS, merged Node22 5288 PASS/0 FAIL/6 SKIP and 3 focused R313 PASS, merged browser and governance retry SUCCESS. One unique R313 dev-only READY. No deployment. Continue distinct safe issue; original ZIP and S019 raw-byte check unavailable.",
-    "R314: verify exact PR-head 3 focused Node22 tests and applicable source-bound CI, fix failures, recheck branch, nonforce merge [skip netlify], verify merged blobs and governance, then reconcile queue/current status to READY only with evidence. No S019 or Oct29 ZIP original-byte verification yet."
+    "R314: verify exact PR-head 3 focused Node22 tests and applicable source-bound CI, fix failures, recheck branch, nonforce merge [skip netlify], verify merged blobs and governance, then reconcile queue/current status to READY only with evidence. No S019 or Oct29 ZIP original-byte verification yet.",
+    "R455-314 FINAL: exact tested source PR #3096 one-parent merge 9d337c0cff19022b269bdd95d3d95ef63cbf31d5, five Git blobs matched; 3/3 R314 Node tests PASS head+merge, 5298 PASS/0 FAIL/6 SKIP, merged approval/browser SUCCESS. Unique R314 queue READY development-only, not deployed. Separate #33 original241 current source fail on merged push, owned #33 (not #455). Continue next distinct SAFE source/effectiveness review; ZIP and S019 original bytes still unverified."
   ],
   "latest_review_checkpoint": {
     "run_id": "R455-314",
     "date": "2026-11-16",
-    "development_preflight_sha": "0ff4a272aa313fd7c0478b794f68fef14cde9969",
+    "development_preflight_sha": "9d337c0cff19022b269bdd95d3d95ef63cbf31d5",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "implementation_merge_sha": "9d337c0cff19022b269bdd95d3d95ef63cbf31d5",
     "source_counts": {
       "sources": 177,
       "evidence_checks": 536,
       "proposals": 242
     },
     "ci": {
-      "pr_head": "NOT_RUN",
-      "merged": "NOT_RUN",
-      "focused_tests": "AUTHORED_NOT_EXECUTED"
+      "pr_head": [
+        43989878790,
+        43989878803,
+        43989878879,
+        43989878834,
+        43989879046
+      ],
+      "merged": [
+        43990526458,
+        43990526417,
+        43990526479
+      ],
+      "node_tests_pass": 5298,
+      "node_tests_fail": 0,
+      "intentional_node_skips": 6,
+      "r314_focused_tests_pass": 3,
+      "extractor_selected_241_failed_unrelated": 43990526424
     },
     "production_deployed": false,
     "github267_literal_review_credit": 0,
     "owner_approval_now_required": false,
-    "next": "CI verify and nonforce integrate without deployment."
+    "next": "Continue research and SAFE UX. Maintain separate #33 source failure without overlapping writes; no publication."
   },
   "policy_decisions_resolved": [
     {
@@ -16439,16 +16466,17 @@
       "proposed_change": "SAFE: only C explicitly, otherwise F; same normalized unit for display conversion and label.",
       "approval_required_for_behavior_change": false,
       "owner_approval_now_required": false,
-      "implementation": "SOURCE_PATCH_AND_THREE_SYNTHETIC_REGRESSIONS_PENDING_GITHUB_CI",
+      "implementation": "SAFE_NONFORCE_TESTED_MERGE_DEV_ONLY_READY_NO_PUBLISH",
       "files": [
         "site/lib/ui.js",
         "tests/issue455-r314-next-shot-temp-unit.test.mjs"
       ],
-      "test_plan": "Node22 3-case positive/negative, applicable browser/mobile/governance/SQL/privacy exact PR head + merge; frozen603 SKIPPED not PASS.",
+      "test_plan": "Three R314 synthetic regressions 4732–4734 PASS exact PR head+merge. Node22 tests 5304 total /5298 PASS/0 FAIL/6 intentional SKIP both; PR head approval 43989879046, validate 43989878790, UX/cloud 43989878803, SQL 43989878879, security 43989878834 SUCCESS. Merged approval 43990526479, Node 43990526458, UX/cloud 43990526417 SUCCESS. Frozen603 SKIPPED not PASS. Unrelated #33 exact-selected original241 43990526424 FAILED current official product checks, not this UI path.",
       "release_queue": "DIC-Q-455-r314-next-shot-temperature-unit",
-      "release_queue_status": "TESTING_NOT_READY",
+      "release_queue_status": "READY_DEVELOPMENT_ONLY",
       "production_deployed": false,
-      "github267_literal_review_credit": 0
+      "github267_literal_review_credit": 0,
+      "verified_merge_sha": "9d337c0cff19022b269bdd95d3d95ef63cbf31d5"
     }
   ],
   "changeScope": {
