@@ -1,3 +1,9 @@
+## November 17, 2026 UTC — #455 R328 original roast/sensory primary-source crosswalk [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=0433d9c22ff15788ec63564e0f48b8233272c984 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+Original Münchow et al. (2020) final published 14-page PDF directly examined via university-hosted primary source including Tables 1–5/Methods/Results/Limitations and original page screenshots; see [R328 review](../research/issue455-r328-roast-colour-development-source-review-20261117.md), evidence R455-EV-ROAST-328-A/B, proposal R455-PROP-328-ROAST-SENSORY-PROVENANCE-BOUNDARY. **French press, not espresso**, roast/sensory panel correlations are not member five-taste outcome or new numeric/Locked recommendation policy. New-source/nonoverlap ledger 192 sources / 567 checks / 256 proposals if merged. PDF binary SHA and original participant data not verified. No application/test/CI or member/production/Netlify writes; no new queue/READY; #267 line credit zero. Prior Oct29 ZIP and standalone S019 still inaccessible; distinct slow-feed Library version already covered, no duplicate. Docs PR and exact governance not yet checked/merged.
+
 ## November 17, 2026 UTC — R455-325 original primary PDF source verification [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=00fd25e70cf3375e4b0c5effc3a29cc261d46fc5 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
