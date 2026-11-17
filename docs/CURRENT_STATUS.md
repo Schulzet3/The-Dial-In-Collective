@@ -1,3 +1,11 @@
+## November 17, 2026 UTC — #455 R322 unchanged measured dose Next Recipe source merged, PR-head CI PASS, push CI unverified, NOT READY/DEPLOYED [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=929a34d39dbd0e359e5beabd99bc0d5de3796c9e preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+[Source PR #3135](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3135) corrected head `31e8c74046be60338460b775a6d3a31cc0c76a82` nonforce [skip netlify] merged `81d82f58a6060d30058d2992da7780a5b7c74d9e`; all five final engine/UI/test/queue/same-commit journal Git blobs match. A last measured 18.25 g dose previously appeared as 18.3 g in grind/yield/preparation Next Recipe; safe display guard now preserves exact unchanged measured dose, and new targets/basket starting recipes retain existing tenth precision. No source data or five taste ratings rewritten. The initial PR-head Node22 run 44045885571 FAILED 5360/1/6 due a wrong test fixture expectation (basket was 18.0 g); corrected head [44046638627](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44046638627) SUCCESS **5,361 PASS /0 FAIL /6 intentional SKIP**, all R322 tests 4793–4797 PASS. PR-head browser/mobile/offline 44046638552, SQL 44046638615, security 44046638496, governance 44046638529 SUCCESS. Frozen603 SKIPPED, never PASS. The connector returned zero merged push runs; **merged-source push CI unverified, queue R322 stays TESTING not READY**. #455 source ledger now 186/555/250, source factual and empirical boundaries preserved. Original October29 ZIP and S019 PDF still not byte-verified, no external science promotion. No publication, Netlify/provider/member/SQL/Auth changes. #455 remains OPEN.
+
+---
+
 ## November 17, 2026 UTC — #455 R321 historical calendar-only Shot History DEV READY, NOT deployed [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=9474daa7526a68cd65301e7c08bf2ca65360c274 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
