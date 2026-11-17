@@ -51,7 +51,11 @@ for(const c of cases){
   check(!fields.decaffeination_method,'no_unpublished_decaf_520');
  }
  if(c.n===521){
-  check(/sugar/i.test(String(fields.decaffeination_method||'')),'direct_sugarcane_decaffeination_521');
+  // This seller says "Processing Method: Sugarcane Washed", which supports
+  // separate review of the treatment but does not unequivocally label the
+  // caffeine-removal method. Do not require an inferred canonical method.
+  check(/processing method\\s+sugarcane washed/i.test(selected),'direct_selected_sugarcane_washed_context_521');
+  check(!fields.decaffeination_method||/sugar/i.test(String(fields.decaffeination_method)),'blank_or_directly_qualified_decaf_521');
   check(!/caramel|fig|starfruit|red fruit/i.test(notes),'no_sibling_notes_521');
  }
  if(c.n===522){
@@ -59,7 +63,7 @@ for(const c of cases){
   check(!fields.decaffeination_method,'no_unpublished_decaf_522');
  }
  check(row.add_coffee_ui_rendered===true&&row.source_review_rendered===true,'preview_and_review_'+c.n);
- outputs.push({case:c.n,url:c.url,h1:heads,source_sha256:raw?digest(raw):null,raw_bytes:raw?.length||0,fields,conflicts:row.conflicts||[],direct_tasting:chosenTasting.slice(0,120)});
+ outputs.push({case:c.n,url:c.url,h1:heads,source_sha256:raw?digest(raw):null,raw_bytes:raw?.length||0,fields,conflicts:row.conflicts||[],direct_tasting:chosenTasting.slice(0,120),decaf_method_needs_manual_review:c.n===521&&!fields.decaffeination_method,harvest_period_not_current_release_proof:c.n===521});
 }
 const result={event_sha:report?.source_sha,checkout_sha:process.env.DIC_R268_CHECKOUT_SHA,report_sha256:reportBytes?digest(reportBytes):null,original603_manual_certified:0,production_operations:0,selected_cases:outputs,passed:errors.length===0,errors};
 writeFileSync(join(dir,'r268-afterproof.json'),JSON.stringify(result,null,2)+'\n');

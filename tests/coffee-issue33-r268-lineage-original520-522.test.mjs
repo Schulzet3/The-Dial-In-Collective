@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {identicalCurrentSelectedTitle} from '../scripts/audit/issue33-selected-public-alternate.mjs';
 import {requiredFocusedSourceFailures} from '../scripts/audit/issue33-focused-source-acceptance.mjs';
 import {normalizeExplicitCoffeeTastingNotes} from '../src/server/coffee-flavor-evidence.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../site/cloud/coffee-url-autofill.js';
@@ -47,4 +48,14 @@ test('preview and Source Review remain explicit editable UI, not automatic Add C
  const preview={ok:true,fields:{name:'Colombia Select Decaf Coffee Beans',tasting_notes:'Chocolate, Ripe Berries',process:'Washed',decaffeination_method:'Sugar Process'},conflicts:[],source_url:'https://www.lineageroasting.com/products/decaf'};
  assert.ok(coffeeUrlPreviewMarkup(preview).includes('coffee-url-preview'));
  assert.ok(coffeeSourceReviewSnapshot(preview));
+});
+
+test('literal selected commerce Coffee Beans suffix must match both actual H1 and parser exactly',()=>{
+ assert.equal(identicalCurrentSelectedTitle('Colombia Select Decaf','Colombia Select Decaf Coffee Beans','Colombia Select Decaf Coffee Beans'),true);
+ assert.equal(identicalCurrentSelectedTitle('Ethiopia, Bishaan','Ethiopia, Bishaan Coffee Beans','Ethiopia, Bishaan Coffee Beans'),true);
+ assert.equal(identicalCurrentSelectedTitle('Colombia Select Decaf','Colombia Select Decaf Coffee Beans','Colombia Select Decaf'),false);
+ assert.equal(identicalCurrentSelectedTitle('Colombia Select Decaf','Colombia Select Decaf Coffee Beans','Different Coffee Beans'),false);
+ assert.equal(identicalCurrentSelectedTitle('Colombia Select Decaf','Colombia Select Decaf New Lot Coffee Beans','Colombia Select Decaf New Lot Coffee Beans'),false);
+ assert.equal(identicalCurrentSelectedTitle('Colombia Select Decaf','Another Colombian Coffee Beans','Another Colombian Coffee Beans'),false);
+ assert.equal(identicalCurrentSelectedTitle('Coffee Beans','Coffee Beans Coffee Beans','Coffee Beans Coffee Beans'),false);
 });
