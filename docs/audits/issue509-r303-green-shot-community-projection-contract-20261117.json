@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R303",
+  "project_ref": "azviqqejypsefzilgonr",
+  "date_utc": "2026-11-17",
+  "status": "PROVIDER_SEMANTIC_CAUSAL_CHECK_NOT_FULL_BASELINE",
+  "preflight": {
+    "development_sha": "e92b15de8c0032eb528b8df801a10e5025aed4e6",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "verified_git_blob": true,
+    "prewrite_head": "e92b15de8c0032eb528b8df801a10e5025aed4e6"
+  },
+  "scope": "Cross-object functional review of green-shot Community projection lifecycle; production database strictly read-only",
+  "provider": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.11.0.003",
+    "edge_registrations": 5,
+    "production_writes": 0
+  },
+  "direct_full_source_and_hashes": [
+    {
+      "signature": "private.project_shot()",
+      "chars": 3045,
+      "md5": "79e6fd0668fa4502c8785b3e92a14a61",
+      "prior_baseline_review": true
+    },
+    {
+      "signature": "private.dic_review_community_shot(p_id uuid)",
+      "chars": 7734,
+      "md5": "c5aea4d32aa8027a39d80341feade406",
+      "prior_baseline_review": true
+    },
+    {
+      "signature": "private.dic_recheck_after_link()",
+      "chars": 251,
+      "md5": "9fc3b44ef631cb87bc0b40e689c123b8",
+      "prior_baseline_review": true
+    },
+    {
+      "signature": "private.dic_backfill_library_contributions(p_owner uuid, p_entry uuid, p_canonical uuid)",
+      "chars": 2360,
+      "md5": "424a5c87c53165a918f7094bf67d25bb",
+      "prior_baseline_review": true
+    },
+    {
+      "signature": "private.dic_on_library_coffee_change()",
+      "chars": 347,
+      "md5": "b6cbc45072b0e9f8ebb511b2eca3895f",
+      "prior_baseline_review": true
+    }
+  ],
+  "catalog_triggers": [
+    "public.shots AFTER INSERT OR UPDATE -> private.project_shot()",
+    "private.contribution_links AFTER INSERT OR UPDATE OF shot_id,source_revision -> private.dic_recheck_after_link()",
+    "public.shots BEFORE UPDATE -> private.bump_revision()"
+  ],
+  "generated_green_expression": "(extraction = 3) AND (body = 3) AND (clarity = 5) AND (sweetness = 5) AND (astringency = 1)",
+  "synthetic_read_only_cases": [
+    {
+      "label": "original green",
+      "green": true,
+      "changed": true
+    },
+    {
+      "label": "corrected nongreen (clarity 4)",
+      "green": false,
+      "changed": true
+    },
+    {
+      "label": "restored green (clarity 5)",
+      "green": true,
+      "changed": true
+    }
+  ],
+  "semantic_verdict": "FALSE_POSITIVE_RESOLVED; GENERATED_GREEN_CANNOT_FLIP_WITHOUT_CHANGED_MEMBER_FIELD. Non-green corrections withdraw prior projection; restored green necessarily enters project_shot material-changed branch, resets to pending_quality, updates source_revision, triggers quality review; no duplicate projection or unjustified function rewrite.",
+  "regression_reused": {
+    "path": "supabase/tests/community_quality_integrity.sql",
+    "blob_sha": "80c49e9e2a3a3e5c3be89660ff624864d487b25e",
+    "scope": "isolation-only synthetic clarity 4 -> 5 restoration and exact projection link requalification",
+    "execution_this_run": "NOT_RUN",
+    "source_bound_ci_this_run": "NOT_CHECKED"
+  },
+  "coverage": {
+    "first_time_provider_full_source_definitions": 0,
+    "first_time_source_characters": 0,
+    "prior_words_recredited": 0,
+    "source_code_review_credit_to_issue267": 0
+  },
+  "fixes": [],
+  "justified_deletions": [],
+  "app_source_edits": 0,
+  "production_mutations": 0,
+  "limitations": [
+    "Read-only catalog and synthetic expressions, no live member update or authorized fixture DML in hosted database",
+    "Tests not rerun or newly claimed PASS",
+    "Provider baseline remains IN_PROGRESS; inaccessible hosted Auth/dashboard and native implementation remain UNVERIFIED"
+  ],
+  "next": "Review objectively new/changed provider definition or a demonstrably unreviewed hosted object; reconcile R302 exact source hashes before credit. Any newly proven functional defect gets a source-only migration plus disposable Postgres regression, same-commit journal and exact CI. Reuse prior #3086 exact merged-source checks; no provider writes or owner notification for routine work."
+}

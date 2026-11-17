@@ -4476,6 +4476,19 @@
       "production_writes": 0,
       "baseline": "IN_PROGRESS",
       "next": "Exact merged CI for #3086 and new/unreviewed provider definitions."
+    },
+    {
+      "run": "R303 Nov17 2026",
+      "preflight_development_sha": "e92b15de8c0032eb528b8df801a10e5025aed4e6",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r303-green-shot-community-projection-contract-20261117.json",
+      "cross_object_provider_definitions_rereviewed": 5,
+      "incremental_unique_definitions": 0,
+      "new_verified_defect": false,
+      "proven_no_change_green_reentry_contract": true,
+      "provider_writes": 0,
+      "source_edits": 0,
+      "next": "Changed/new/unreviewed provider definition; preserve baseline IN_PROGRESS"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -22543,5 +22556,26 @@
     "new_ci": 0,
     "baseline": "IN_PROGRESS",
     "next": "Next genuinely changed/unreviewed provider definition or consumer contract; catalog expansion should trigger recheck of matcher planner. Do not credit repeated SQL or alter source-key/Community queue without required acceptance evidence."
+  },
+  "provider_generated_green_projection_run303": {
+    "run": 303,
+    "preflight_development_sha": "e92b15de8c0032eb528b8df801a10e5025aed4e6",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt_path": "docs/audits/issue509-r303-green-shot-community-projection-contract-20261117.json",
+    "source_definitions_directly_re_reviewed": 5,
+    "source_characters_rereviewed": 13737,
+    "new_first_time_source_characters": 0,
+    "new_first_time_definitions": 0,
+    "catalog_generated_expression_verified": true,
+    "trigger_chain_verified": true,
+    "synthetic_transition_results": "3_CASES_PASS_READ_ONLY",
+    "confirmed_defects": 0,
+    "justified_deletions": 0,
+    "production_writes": 0,
+    "source_changes": 0,
+    "existing_sql_regression_test_blob": "80c49e9e2a3a3e5c3be89660ff624864d487b25e",
+    "new_ci_or_tests": "NOT_RUN",
+    "baseline_complete": false,
+    "next_cursor": "First changed/new or demonstrably unreviewed provider definition; no first-time credit for five rereads"
   }
 }
