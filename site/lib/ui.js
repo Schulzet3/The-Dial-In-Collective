@@ -74,8 +74,10 @@ export function nextShotAdjustment(advice,shot,showTemp=false,unit='F'){
  if(changes.length!==1)return null;
  const key=changes[0];if(key==='tempC'&&(!showTemp||!Number.isFinite(shot.tempC)))return null;
  const names={grindSetting:'Grind',yieldCenter:'Yield',tempC:'Temperature',doseG:'Dose'};
- const units={grindSetting:'',yieldCenter:'g',tempC:`°${unit}`,doseG:'g'};
- const format=n=>key==='tempC'?String(tempDisplay(n,unit)):fmt(n);
+ // Imported/legacy unit labels must never misstate a temperature adjustment.
+ const safeUnit=unit==='C'?'C':'F';
+ const units={grindSetting:'',yieldCenter:'g',tempC:`°${safeUnit}`,doseG:'g'};
+ const format=n=>key==='tempC'?String(tempDisplay(n,safeUnit)):fmt(n);
  const controls=[['doseG','dose'],['grindSetting','grind'],['yieldCenter','yield'],['tempC','temperature']];
  const unchanged=controls.filter(([k])=>k!==key&&(k!=='tempC'||(showTemp&&Number.isFinite(shot.tempC)))).map(([,name])=>name);
  const keep=unchanged.length===3?`${unchanged[0]}, ${unchanged[1]}, and ${unchanged[2]}`:

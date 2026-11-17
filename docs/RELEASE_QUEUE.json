@@ -15477,6 +15477,29 @@
       "blockers": [],
       "notes": "READY DEVELOPMENT ONLY; not deployed. RecipeGrid uses strict F/C label and same physical conversion, malformed unknown unit safely displays Fahrenheit; original measured Celsius, five tastes, notes/history, one-control advice, calibration, offline/Community intact. No observed exploit or real taste outcomes.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-r314-next-shot-temperature-unit",
+      "issue": 455,
+      "pr": null,
+      "title": "Correct malformed historical Next Shot temperature delta unit",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/ui.js"
+      ],
+      "owner_source": "Issue #455 Option B SAFE; DIC_PREFLIGHT_VERIFIED development_sha=0ff4a272aa313fd7c0478b794f68fef14cde9969 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Direct code reproduced raw temperature unit mismatch in before/after guidance.",
+        "Three synthetic positive/negative Node22 regression groups authored; CI NOT RUN."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact PR-head app/UX/governance testing and merged SHA verification not yet completed.",
+        "No owner Publish permission; development only."
+      ],
+      "notes": "No product/Locked numeric change, no taste or member-effect measurements, no deployment. Other advice and original five ratings/notes/history preserved.",
+      "production_deployed": false
     }
   ],
   "history": [
