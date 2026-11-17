@@ -15890,6 +15890,29 @@
       ],
       "notes": "Development-only replacement of shared legacy authenticated/worker claim ordering; modern Netlify preview uses separate public preflight, legacy Edge is 410. Do not infer actual member incident or drop public wrappers. Historical migration preserved, no production provider changes.\nR309b: source safely merged nonforce by [PR #3154](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3154) at 849d89650006c545dc86045a947bb39e1d081146 with [skip netlify]. 7/7 PR-head jobs and five merged SHA-bound push workflows SUCCESS; member/hosted release acceptance remains UNVERIFIED, queue TESTING.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-admin-merge-null-normalized-name",
+      "issue": 509,
+      "title": "Reject NULL-normalized Pending coffee names in Admin duplicate merge",
+      "state": "TESTING",
+      "scope_paths": [
+        "supabase/migrations/20261117130000_dic_admin_merge_null_normalized_name_guard.sql"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509; DIC_PREFLIGHT_VERIFIED development_sha=b5c25ff3fb71709d2f2b29edd38964f8521a7efa preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Complete current live 4,526-character Admin review SQL definition read, original MD5 cb5c264aceb9699a498177f3f6861783",
+        "Read-only synthetic SQL proven NULL name-key / NOT (NULL OR NULL) skips rejection; corrected guard rejects",
+        "Rollback-only isolated admin_coffee_review.sql extended; PR-head CI PENDING"
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Isolated PostgreSQL17.11 PR-head functional and source-bound Node22/governance CI PENDING",
+        "Exact merged-source CI, source isolation and hosted #96 Auth acceptance UNVERIFIED",
+        "Production effect requires separate owner Publish"
+      ],
+      "notes": "Potential malformed Admin merge from symbol-only Pending; no evidence real member impacted, production unchanged.",
+      "production_deployed": false
     }
   ],
   "history": [
@@ -18604,6 +18627,14 @@
       "source_sha": "e0348d0869f1c783f6c7470afb1048f2f2625139",
       "production_deployed": false,
       "evidence": "Source PR #3149 head/merge exact five Git blobs matched; initial PR #3148 two stale R295 synthetic fixture failures and bad preflight receipt retained; clean PR-head and merged Node22 5382 PASS/0 FAIL/6 SKIP, six R324 new regression cases 4813-4818 plus R295 4752-4754 PASS. Head cloud/mobile/offline, isolated SQL/security/governance SUCCESS; exact merged 390px/mobile/offline/a11y and governance SUCCESS; frozen603 SKIPPED and targeted cloud unit NOT_APPLICABLE. No provider, member or espresso-quality test."
+    },
+    {
+      "date": "2026-11-17",
+      "issue": 509,
+      "item_id": "DIC-Q-509-admin-merge-null-normalized-name",
+      "state": "TESTING",
+      "production_deployed": false,
+      "evidence": "R310 direct live provider source + read-only synthetic proof; source-only correction and rollback fixture staged, CI pending."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
