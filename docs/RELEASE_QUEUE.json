@@ -15788,6 +15788,29 @@
       "blockers": [],
       "notes": "SAFE DEVELOPMENT-ONLY READY; original measured 18.25g dose displayed exactly in unchanged Next Recipe while new dose targets remain one decimal. Corrected PR head five focused synthetic tests PASS, exact merged push Node/build/lint, real Chromium/mobile/offline/a11y and approval/governance SUCCESS; docs merge governance SUCCESS. All five code/test/queue/journal PR-head Git blobs equal source merge. Earlier fixture failure preserved in tests; original603 SKIPPED, targeted cloud unit NOT_APPLICABLE, no empirical taste/member experiment, provider writes or deployment.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-r323-rating-validation-alert-integrity",
+      "issue": 455,
+      "pr": null,
+      "title": "Keep unresolved Log Shot validation feedback while rating individual tastes",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/main.js",
+        "site/lib/ui.js"
+      ],
+      "owner_source": "Issue #455 Option B SAFE; DIC_PREFLIGHT_VERIFIED development_sha=cebdd9e7b5c67521df54c6b0d95dda8e05fc7b6a preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Live rating handler source previously cleared shared validation alert on any rating tap even with other invalid measurement fields or unrated taste groups remaining.",
+        "Six focused synthetic regression cases authored; not yet executed."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source CI, source merge and final governance NOT RUN/VERIFIED"
+      ],
+      "notes": "Development only, no Locked taste/numeric/science, private history, notes, RLS/Community/offline or production/provider changes; actual member incident and cup-quality outcomes unverified.",
+      "production_deployed": false
     }
   ],
   "history": [
