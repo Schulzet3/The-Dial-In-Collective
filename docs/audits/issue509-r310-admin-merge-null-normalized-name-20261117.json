@@ -16,10 +16,16 @@
   "migration": "supabase/migrations/20261117130000_dic_admin_merge_null_normalized_name_guard.sql",
   "test": "supabase/tests/admin_coffee_review.sql",
   "source_changes_only": true,
-  "tests_status": "PENDING_ISOLATED_PR_HEAD_CI",
+  "tests_status": "RETRY_PENDING",
   "queue": "TESTING",
   "semantic_new_coverage": 0,
   "production_writes": 0,
   "baseline": "IN_PROGRESS",
-  "next": "Source-isolated PR SQL and exact-source CI; nonforce integrate only on passing evidence; continue genuine unreviewed provider objects."
+  "next": "Source-isolated PR SQL and exact-source CI; nonforce integrate only on passing evidence; continue genuine unreviewed provider objects.",
+  "pr": 3160,
+  "initial_ci_failures": {
+    "sql_run": 44088964914,
+    "reason": "Queue merged_source_sha missing instead of explicit null; corrected",
+    "governance_run": 44088964885
+  }
 }

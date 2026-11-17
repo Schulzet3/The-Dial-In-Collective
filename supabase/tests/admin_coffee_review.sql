@@ -147,8 +147,8 @@ begin
  end;
  if not denied then raise exception 'Symbol-only Pending name bypassed Admin merge identity checks';end if;
  execute 'reset role';
- if not exists(select 1 from public.coffee_submissions
-      where id=malformed_id and status='pending' and canonical_coffee_id is null)
+ if not exists(select 1 from public.coffee_submissions cs
+      where cs.id=malformed_id and cs.status='pending' and cs.canonical_coffee_id is null)
  then raise exception 'Rejected malformed merge changed Pending submission';end if;
  if not exists(select 1 from public.library_entries where owner_id=member_id
       and submission_id=malformed_id and coffee_id is null)

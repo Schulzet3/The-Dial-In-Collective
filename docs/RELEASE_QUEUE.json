@@ -15903,16 +15903,19 @@
       "tests": [
         "Complete current live 4,526-character Admin review SQL definition read, original MD5 cb5c264aceb9699a498177f3f6861783",
         "Read-only synthetic SQL proven NULL name-key / NOT (NULL OR NULL) skips rejection; corrected guard rejects",
-        "Rollback-only isolated admin_coffee_review.sql extended; PR-head CI PENDING"
+        "Rollback-only isolated admin_coffee_review.sql extended; PR-head CI PENDING",
+        "Original PR SQL run 44088964914 successfully compiled migration but new regression DO used ambiguous status column; qualified cs.status, preserving expected rejection. Original approval run 44088964885 correctly HOLD for missing explicit merged_source_sha:null; corrected."
       ],
       "ci_runs": [],
       "blockers": [
-        "Isolated PostgreSQL17.11 PR-head functional and source-bound Node22/governance CI PENDING",
+        "Corrected PR-head isolated PostgreSQL17.11 and exact-source CI PENDING; initial failed SQL fixture query and queue schema diagnosed and repaired.",
         "Exact merged-source CI, source isolation and hosted #96 Auth acceptance UNVERIFIED",
         "Production effect requires separate owner Publish"
       ],
       "notes": "Potential malformed Admin merge from symbol-only Pending; no evidence real member impacted, production unchanged.",
-      "production_deployed": false
+      "production_deployed": false,
+      "pr": 3160,
+      "merged_source_sha": null
     }
   ],
   "history": [
