@@ -194,7 +194,8 @@ begin
  insert into auth.users(id,aud,role,email)
  values(fixture_user,'authenticated','authenticated',fixture_user::text||'@example.invalid');
  insert into private.beta_members(owner_id,enabled,admitted_at)
- values(fixture_user,true,now());
+ values(fixture_user,true,now())
+ on conflict(owner_id) do update set enabled=true,admitted_at=now();
  insert into public.coffee_submissions(owner_id,source_url,proposed_data)
  values(fixture_user,'https://example.org/products/rollover',
         '{"name":"Rollover Fixture","roaster":"Synthetic Rollover Coffee"}'::jsonb)
