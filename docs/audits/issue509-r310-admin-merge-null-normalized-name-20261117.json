@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 310,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight_sha": "b5c25ff3fb71709d2f2b29edd38964f8521a7efa",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "live_function": "private.dic_admin_review_coffee(uuid,bigint,text,text,uuid)",
+  "live_md5": "cb5c264aceb9699a498177f3f6861783",
+  "live_source_characters": 4526,
+  "live_proof": "Synthetic read-only SQL: dic_coffee_key('Espresso')='espresso'; dic_coffee_key('☕') IS NULL; live NOT ((key=key) OR similarity>=0.63) returned NULL, corrected guard TRUE.",
+  "consumer_path": "private.dic_submit_coffee_auto and private.mutate submit_coffee accept symbol-only name; possible Admin manual merge; no real incident established",
+  "current_verified_coffees": 9,
+  "current_verified_bad_normalized_keys": 0,
+  "current_pending_or_conflict": 0,
+  "migration": "supabase/migrations/20261117130000_dic_admin_merge_null_normalized_name_guard.sql",
+  "test": "supabase/tests/admin_coffee_review.sql",
+  "source_changes_only": true,
+  "tests_status": "RETRY_PENDING",
+  "queue": "TESTING",
+  "semantic_new_coverage": 0,
+  "production_writes": 0,
+  "baseline": "IN_PROGRESS",
+  "next": "Source-isolated PR SQL and exact-source CI; nonforce integrate only on passing evidence; continue genuine unreviewed provider objects.",
+  "pr": 3160,
+  "initial_ci_failures": {
+    "sql_run": 44088964914,
+    "reason": "Queue merged_source_sha missing instead of explicit null; corrected",
+    "governance_run": 44088964885
+  }
+}
