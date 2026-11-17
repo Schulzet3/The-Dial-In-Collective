@@ -15546,6 +15546,41 @@
       "blockers": [],
       "notes": "Narrow verified original603 #503 current official semantic source correction is development-only READY, not production deployed and not full original603 manual certification. Other 390 release queue items remain unmodified. Original frozen603 CSV/oracle/scorer/603 coffees/201 roasters/1197 captures preserved. Full Issue33 OPEN, #267 V2 and #96 separately owned. No Netlify publish, release, provider/production SQL/Edge/Auth/member writes, secrets, purchases, forced refs, backup or schedule changes.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-33-r263-original502-504-selected-review-false-conflict",
+      "issue": 33,
+      "pr": 3107,
+      "title": "Protect current selected tasting Source Review from false conflicts when identical canonical notes appear in a bounded seller introduction while preserving earlier contradictory flavors",
+      "state": "READY",
+      "merged_source_sha": "9fdd59d340047daaa94040274b766c4ab543d63f",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "owner_source": "Issue #33 original frozen603 selected exact #502 https://www.kamiakcoffeeco.com/products/brazil-single-estate and #504 https://www.kamiakcoffeeco.com/products/tanzania-aa-amcos ; mandatory immutable preflight development_sha=3bd6b5cc72a82869abcfe0c8261aeca7517fc74a preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d. Both original selected rows QUALIFIED_CONTEXT_OR_SEMANTIC_REVIEW_REQUIRED.",
+      "tests": [
+        "Current source before fix actually produced an incorrect conflicting:true Source Review Tasting Notes fact for original #504 with exact canonical honeydew/agave/peatiness; canonical conflicts were [] and taste suggestion otherwise correct. Exact merchant source captured and hashed in guarded R263 CI, not presumed from old oracle.",
+        "Narrow generic labeled Source Review guard allows only an identical complete trailing selected flavor list with a conservative nonsensory editorial lead. Earlier separate contradictory flavors and other-coffee notes remain conflicting, original seller source fact retained. One failed adversarial PR-head test 44007776982 exposed pre-existing substring-superset blind spot; resolved in final head, not mislabeled PASS.",
+        "Final PR head 6adb4c6cb0cc261f7dd53c92b3e2cdae30313783 R263 official 44007952980 SUCCESS 5/5 focused including two fresh selected product sources, selected identity, exact URL, parser/Add Coffee/Source Review, negative other-product/unavailable, afterproof [], raw hashes independently rechecked. Node/lint 44007950355 5312 PASS/0 FAIL/6 SKIP; cloud/mobile 44007950362, Python 44007953050, SQL 44007950506, approval 44007950475 SUCCESS.",
+        "Nonforce [skip netlify] PR #3107 merged 9fdd59d340047daaa94040274b766c4ab543d63f; five reviewed Git file blobs and protected frozen CSV identical. Exact merged 44008560336 R263 official SUCCESS 5/5 with #502 raw 288065 bytes SHA256 ba06cc9449ab03aa4846e479cd20629bbbf68cf3871dee291e7deef82f2be7f1, #504 288853 bytes SHA256 64b71c333c98cab020a2e0d0269b015fa35527664314eb0aa9c5bd8bf447f0b0; merged JSON report SHA256 36f0350732b97f3072c086bc952466e12764e1d3fc284dc5ef1ef4bea9af14fd, independently hashed artifact ZIP efcd633205e07e0b8f5f8ec61417bcd6c242c82d12b8f225c4c6d0998e8717ed; afterproof [] and #504 false flag now false.",
+        "Exact merged Node/lint 44008560167 SUCCESS 5312 PASS/0 FAIL/6 SKIP, lint PASS; merged cloud/mobile 44008562197, Python 44008559939, approval 44008560057 SUCCESS. Other original241 selected H1 absent and original260 source unavailable in unrelated source-specific checks; those are source UNVERIFIED, not whole original603 PASS. Frozen603 skipped, signed-in GoTrue/device not performed."
+      ],
+      "ci_runs": [
+        44007952980,
+        44007950355,
+        44007950362,
+        44007953050,
+        44007950506,
+        44007950475,
+        44008560336,
+        44008560167,
+        44008562197,
+        44008559939,
+        44008560057
+      ],
+      "blockers": [],
+      "notes": "Narrow #504 false Source Review conflict correction and guarded exact original #502/#504 source evidence READY in development only, not production deployed. Selected #502 farm-versus-named-producer remains explicitly qualified; full original603 human semantic certification is NOT asserted. All other release queue items preserved. Original immutable corpus/scorer/CSV untouched, #33 OPEN; #267 V2 and #96 separate. No Netlify, paid services, production/provider/member writes, force history, backups or schedule edits.",
+      "production_deployed": false
     }
   ],
   "history": [
@@ -18233,6 +18268,15 @@
       "source_sha": "9d337c0cff19022b269bdd95d3d95ef63cbf31d5",
       "production_deployed": false,
       "evidence": "PR #3096 exact head/merge blobs match, 3 R314 tests PASS both; 5298 Node22 PASS/0 FAIL/6 SKIP; five applicable head checks, merged Node+browser+governance SUCCESS. Unrelated #33 exact-selected product241 job failed; frozen603 SKIPPED not PASS. No deploy."
+    },
+    {
+      "date": "2026-11-17",
+      "issue": 33,
+      "item_id": "DIC-Q-33-r263-original502-504-selected-review-false-conflict",
+      "state": "READY",
+      "source_sha": "9fdd59d340047daaa94040274b766c4ab543d63f",
+      "production_deployed": false,
+      "evidence": "PR #3107 exact head 6adb4c6, nonforce [skip netlify] merged 9fdd59d340047daaa94040274b766c4ab543d63f, 5 Git blobs + frozen CSV identical. Official selected source 44008560336 5/5 PASS with independent raw SHA256 #502 ba06cc94 / #504 64b71c33 and Source Review no false conflict. Merged Node/lint 44008560167 5312 PASS/0 FAIL/6 SKIP; merged cloud 44008562197, governance 44008560057, Python 44008559939 PASS. Original241/260 current source exceptions unverified, full 603 not certified, no deployment."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
