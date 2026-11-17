@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {acknowledgeShotInput,field} from '../site/lib/ui.js';
-import {tempInput,CONFIG,STYLES} from '../site/lib/constants.js';
+import {tempInput,STYLES} from '../site/lib/constants.js';
 import {validateShot} from '../site/lib/model.js';
 
 function fixture(value,unit='F',invalid=true,otherInvalid=false){
