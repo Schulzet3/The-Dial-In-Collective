@@ -3445,6 +3445,31 @@
         43982389961,
         43982389866
       ]
+    },
+    {
+      "id": "LIVE-20261116-R314-NEXT-SHOT-TEMP-DELTA-UNIT",
+      "type": "direct_current_code_correctness",
+      "title": "Next Shot before/after arrow mislabels malformed imported temperature unit",
+      "source_branch": "development/backend-foundation",
+      "source_commit_sha": "0ff4a272aa313fd7c0478b794f68fef14cde9969",
+      "source_git_blobs": {
+        "site/lib/ui.js": "052bd57e2218a04c571a1d69dccb07e0cafd3b80",
+        "site/lib/constants.js": "d3559dc1c9560c4d68fbcad1dc91e3a792a100a2",
+        "site/cloud/main.js": "0a5274ec660ad435b499d58c9b5985ae400f37ea"
+      },
+      "source_locators": [
+        "site/lib/ui.js nextShotAdjustment/nextShotGuidance",
+        "site/lib/constants.js tempDisplay",
+        "site/cloud/main.js Coffee overview Next Shot"
+      ],
+      "access": "EXACT_IMMUTABLE_GITHUB_SOURCE_READ",
+      "review_status": "R314_SAFE_SOURCE_TEST_PATCH_WRITTEN_PENDING_HOSTED_CI",
+      "evidence_grade": "DIRECT_CODE_NOT_EMPIRICAL_TASTE_EVIDENCE",
+      "claims_verified_externally": "No new scientific claim. The code used non-F inputs as Celsius in tempDisplay but rendered them as supplied unit strings; normal setup F/C controls reduce reachability. No production exploit/member incident demonstrated.",
+      "factual_status": "SAFE_LOCKED_COMPATIBLE_PRESENTATION_ONLY",
+      "github267_literal_review_credit": 0,
+      "implementation_status": "PR_PENDING_EXACT_SOURCE_CI",
+      "production_deployed": false
     }
   ],
   "evidence_checks": [
@@ -10456,6 +10481,24 @@
       "grade": "EXACT_HEAD_MERGED_SOURCE_AND_R313_POSITIVE_NEGATIVE_TESTS_PASS",
       "result": "PR #3090 five exact-source PR-head CI SUCCESS; 5288 PASS/0 FAIL/6 intentional SKIP head+merge, R313 3/3 PASS, exact merged browser/cloud and approval retry SUCCESS. Transient unrelated historical GitHub READY read HTTP502 in first governance attempt fixed by selective retry, no bypass.",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CODE-314-A",
+      "source": "LIVE-20261116-R314-NEXT-SHOT-TEMP-DELTA-UNIT",
+      "claim": "Original 93°C shot + malformed unit K displays 93°K instead of 199°F in Next Shot arrow; valid F/C remain physically convertible.",
+      "source_locator": "site/lib/ui.js nextShotAdjustment, constants.js tempDisplay",
+      "grade": "DIRECT_GITHUB_CODE_REVIEW_NOT_RUNTIME_RESULT",
+      "result": "Safe explicit C/F boundary identified; no observed real member impact.",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CODE-314-B",
+      "source": "LIVE-20261116-R314-NEXT-SHOT-TEMP-DELTA-UNIT",
+      "claim": "Three focused synthetic cases for true C/F, invalid units and no-temperature/grind-only fallbacks retain original shot/taste/notes and advice evidence.",
+      "source_locator": "tests/issue455-r314-next-shot-temp-unit.test.mjs",
+      "grade": "TEST_AUTHORED_CI_NOT_YET_RUN",
+      "result": "No tests reported PASS at commit authoring.",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -10693,41 +10736,28 @@
     "R455-312: finish exact-source CI for original archived grinder-range overview context gate, repair failures, nonforce [skip netlify] merge only after successful applicable checks, read back source/test/journal/ledger/queue SHA, reconcile unique TESTING entry to READY only with exact merged evidence. Do not deploy or mutate member data.",
     "R455-312 FINAL: PR #3084 safe nonforce [skip netlify] merged 5898fc8, five source/test/ledger/queue/journal blobs byte-identical; 4 R312 Node22 tests PASS; exact head/merged Node 5278 PASS/0 FAIL/6 SKIP, head UX/security/SQL/governance SUCCESS, merged cloud/mobile and pushed approval SUCCESS. Queue uniquely READY development-only, no Publish. Continue next distinct source/UX issue; original S019 fresh bytes unavailable, original October29 ZIP fresh check unavailable.",
     "R455-313: confirm PR-head exact CI for strict F/C RecipeGrid rendering boundary, fix any failing cases, recheck concurrent dev and nonforce [skip netlify] merge only if successful, independently read back five Git blob SHAs and merged governance, then reconcile canonical ledger and queue to READY only with tested merged-source evidence. Source ZIP original bytes and S019 separate original still unverified.",
-    "R455-313 FINAL: PR #3090 source da74f54d41ac24253f31918f11f05589a5b25915 five tested Git blobs match head, head five CI SUCCESS, merged Node22 5288 PASS/0 FAIL/6 SKIP and 3 focused R313 PASS, merged browser and governance retry SUCCESS. One unique R313 dev-only READY. No deployment. Continue distinct safe issue; original ZIP and S019 raw-byte check unavailable."
+    "R455-313 FINAL: PR #3090 source da74f54d41ac24253f31918f11f05589a5b25915 five tested Git blobs match head, head five CI SUCCESS, merged Node22 5288 PASS/0 FAIL/6 SKIP and 3 focused R313 PASS, merged browser and governance retry SUCCESS. One unique R313 dev-only READY. No deployment. Continue distinct safe issue; original ZIP and S019 raw-byte check unavailable.",
+    "R314: verify exact PR-head 3 focused Node22 tests and applicable source-bound CI, fix failures, recheck branch, nonforce merge [skip netlify], verify merged blobs and governance, then reconcile queue/current status to READY only with evidence. No S019 or Oct29 ZIP original-byte verification yet."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-312",
+    "run_id": "R455-314",
     "date": "2026-11-16",
-    "development_preflight_sha": "5898fc8dbf23ca72f2cdd8ce6a7b8b7f427934a2",
+    "development_preflight_sha": "0ff4a272aa313fd7c0478b794f68fef14cde9969",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "implementation_merge_sha": "5898fc8dbf23ca72f2cdd8ce6a7b8b7f427934a2",
     "source_counts": {
-      "sources": 175,
-      "evidence_checks": 532,
-      "proposals": 240
+      "sources": 177,
+      "evidence_checks": 536,
+      "proposals": 242
+    },
+    "ci": {
+      "pr_head": "NOT_RUN",
+      "merged": "NOT_RUN",
+      "focused_tests": "AUTHORED_NOT_EXECUTED"
     },
     "production_deployed": false,
     "github267_literal_review_credit": 0,
     "owner_approval_now_required": false,
-    "ci": {
-      "pr_head": [
-        43972058918,
-        43972058992,
-        43972066037,
-        43972058943,
-        43972058957
-      ],
-      "merged": [
-        43972699836,
-        43972699859,
-        43972699818
-      ],
-      "node_tests_pass": 5278,
-      "node_tests_fail": 0,
-      "intentional_node_skips": 6,
-      "r312_tests_pass": 4
-    },
-    "next": "Continue source-backed evidence/UX auditing; #455 OPEN. No publication, member experiments or new telemetry."
+    "next": "CI verify and nonforce integrate without deployment."
   },
   "policy_decisions_resolved": [
     {
@@ -16391,6 +16421,34 @@
       "github267_literal_review_credit": 0,
       "release_queue_status": "READY_DEVELOPMENT_ONLY",
       "verified_merge_sha": "da74f54d41ac24253f31918f11f05589a5b25915"
+    },
+    {
+      "id": "R455-PROP-314-NEXT-SHOT-TEMP-UNIT",
+      "severity": "P2_DEFENSIVE_DISPLAY_CORRECTNESS",
+      "source": [
+        "LIVE-20261116-R314-NEXT-SHOT-TEMP-DELTA-UNIT"
+      ],
+      "evidence": [
+        "R455-EV-CODE-314-A",
+        "R455-EV-CODE-314-B"
+      ],
+      "finding": "Temperature change arrow accepts malformed historical unit and mismatches physical unit to numeric before/after readings.",
+      "user_benefit": "Understand one controllable temperature change in consistent Celsius/Fahrenheit without modifying measured shot history.",
+      "current_locked": "Preserve five ratings, original measured Celsius, notes/history, calibrated grinder/style/feed, optional temp controls, one-variable advice.",
+      "current_app": "nextShotAdjustment raw unit used in both tempDisplay and printed unit; no strict unit normalization.",
+      "proposed_change": "SAFE: only C explicitly, otherwise F; same normalized unit for display conversion and label.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "SOURCE_PATCH_AND_THREE_SYNTHETIC_REGRESSIONS_PENDING_GITHUB_CI",
+      "files": [
+        "site/lib/ui.js",
+        "tests/issue455-r314-next-shot-temp-unit.test.mjs"
+      ],
+      "test_plan": "Node22 3-case positive/negative, applicable browser/mobile/governance/SQL/privacy exact PR head + merge; frozen603 SKIPPED not PASS.",
+      "release_queue": "DIC-Q-455-r314-next-shot-temperature-unit",
+      "release_queue_status": "TESTING_NOT_READY",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "changeScope": {
