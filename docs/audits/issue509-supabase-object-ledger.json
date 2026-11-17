@@ -22419,5 +22419,52 @@
     "tests_run": "NONE_READ_ONLY_CATALOG_ONLY",
     "issue509_journal": "docs/workstreams/issue-509.md",
     "next": "Verify #3086 exact merged-source Actions push jobs when available, then inspect actually changed/unreviewed provider definitions and source parity; no duplication or owner alert on routine unchanged work."
+  },
+  "provider_storage_realtime_lifecycle_source_review_run300": {
+    "status": "FOUR_NEW_CURRENT_PLATFORM_SQL_BODIES_DIRECT_FULL_REVIEW_PLUS_CHANGED_REALTIME_APPLY_RLS_AND_TWO_NEW_STORAGE_TABLE_COMPONENTS",
+    "development_preflight_sha": "68b67264734cb9451e015a60a33fb6a8ca7a1ad9",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt_path": "docs/audits/issue509-r300-storage-realtime-new-definitions-20261117.json",
+    "receipt_commit_sha": "d023e695576afa33a3fcfef5938427bcd130f217",
+    "receipt_blob_sha": "485f6ff6f2d6c1a202e5f6343e46fd16feb37abb",
+    "storage_current_sql": "24/24 WITH HISTORIC+R299+R300 FULL SOURCE",
+    "realtime_current_sql": "19/19 WITH HISTORIC+R300 FULL SOURCE",
+    "new_first_time_full_function_names": [
+      "storage.delete_lifecycle_objects",
+      "storage.protect_active_lifecycle_states",
+      "storage.reconcile_lifecycle_state",
+      "realtime.filters_hash"
+    ],
+    "new_first_time_complete_sql_chars": 6576,
+    "changed_definition_full_review": [
+      "realtime.apply_rls"
+    ],
+    "changed_source_chars": 16972,
+    "new_full_table_component_names": [
+      "storage.bucket_lifecycle_states",
+      "storage.lifecycle_abandoned_artifacts"
+    ],
+    "new_table_component_counts": {
+      "columns": 18,
+      "constraints": 7,
+      "indexes": 4,
+      "policies": 0,
+      "triggers": 0
+    },
+    "source_only": true,
+    "proven_new_app_defect": false,
+    "removal_justified": false,
+    "provider_rows_read_private": 0,
+    "provider_writes": 0,
+    "git_app_source_edits": 0,
+    "ci_pass_claims": 0,
+    "queue_status": "UNCHANGED_TESTING_NOT_READY",
+    "audit_baseline_complete": false,
+    "unverified": [
+      "hosted Auth/Storage API runtime",
+      "compiled provider internals",
+      "#3086 exact merged-source push Actions jobs"
+    ],
+    "next": "Next genuinely unreviewed or changed provider definition or source drift; reconcile #3086 exact merged-source GitHub push CI without PR-only assumptions"
   }
 }
