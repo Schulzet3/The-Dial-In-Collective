@@ -266,5 +266,22 @@ export function shotSummary(sh,unit='F') {
  const grind=numericMeasurement(sh.grindSetting)?` \u00b7 Grind ${fmtMeasuredControl(sh.grindSetting)}`:'';
  return `<span class="shot-numbers">${fmtMeasuredControl(sh.doseG)}g \u2192 ${fmtMeasuredControl(sh.yieldG)}g${ratio} \u00b7 ${fmtMeasuredControl(sh.timeS)}s${temperature}${grind}</span>`;
 }
-export const humanDate=d=>{if(typeof d!=='string'||!d.trim())return '';try{const date=new Date(d);return Number.isNaN(date.getTime())?'':date.toLocaleDateString('en-US',{month:'numeric',day:'numeric',year:'numeric'});}catch{return '';}};
+// An archived YYYY-MM-DD carries a calendar date, not a UTC instant.
+// Parsing it with new Date(dateOnly) shifts a real Nov 5 to Nov 4 in
+// America/Denver. Keep offset-bearing shot timestamps on the existing
+// local-instant display path and reject impossible legacy calendar dates.
+export const humanDate=d=>{
+ if(typeof d!=='string'||!d.trim())return '';
+ const calendar=d.trim();
+ if(/^\d{4}-\d{2}-\d{2}$/.test(calendar)){
+  const validated=new Date(calendar+'T12:00:00Z');
+  if(!Number.isFinite(validated.getTime())||validated.toISOString().slice(0,10)!==calendar)return '';
+  const [year,month,day]=calendar.split('-');
+  return Number(month)+'/'+Number(day)+'/'+year;
+ }
+ try{
+  const date=new Date(d);
+  return Number.isNaN(date.getTime())?'':date.toLocaleDateString('en-US',{month:'numeric',day:'numeric',year:'numeric'});
+ }catch{return '';}
+};
 export const previewNotice=()=>`<div class="preview-note">${icon('eye',16)}<div><strong>Design preview</strong><span>Fictional sample data. Nothing is shared, synced or sent to an account.</span></div></div>`;
