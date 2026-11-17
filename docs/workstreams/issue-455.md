@@ -1,3 +1,17 @@
+## November 17, 2026 UTC — #455 R332 original Cotter consumer segmentation / Dryad data-method crosswalk [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=38ba3c7a3cc5ba244bccffd05642bb3b1e35fc64 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+**Preflight/authority:** LIVE development 38ba3c7a3cc5ba244bccffd05642bb3b1e35fc64, exact original `docs/ai/PREFLIGHT.md` Git blob 2fb236bbfa6bac48513eeb3bd157b260853af06d fetched at this immutable SHA and verified identical to independent Git blob BEFORE AGENTS, journals, other sources or providers. Rechecked development/preflight and old source blobs immediately before writing. Main `3b372215ac7ccfd6db406f27090706e8cb8f3e80`, release/production `0f3641b4fff07e2a88d7747e621304ec2cf0ead5` read-only. Issue #455 Option B research-only scope; Master Specification and Decision Ledger Locked remain controlling; #33/#267/#96 scopes not touched.
+
+**Bounded substantive original-source advance:** Primary publisher Cotter et al. 2021 DOI 10.1111/1750-3841.15561 abstract and supplement descriptions plus original researchers' 2023 Dryad dataset Methods/Usage metadata independently read; [R332 full traceable note](../research/issue455-r332-cotter-consumer-preference-transfer-20261117.md). A 118-person 27-condition **drip** coffee 3×3×3 TDS/extraction/temperature design produced *reported* two preference segments, not DIC member-specific espresso five-input recommendations. Three new checks explicitly distinguish 9-point liking/5-point JAR/17 CATA from DIC five scales; note unresolved metadata **3,186 expected vs 3,168 described rows**, no raw CSV download/analysis, full paper/PDF/supplements not checked. No verified cup quality outcome or experimentally improved next-shot recommendation.
+
+**Proposed SAME-COMMIT docs scope:** Add 1 distinct source, 3 checks and 1 research-only proposal to existing ledger (194/578/260, ID uniqueness verified); new research note; prepend this journal. No code/test/CI, CURRENT_STATUS, release queue, approval matrix, source register, provider, member data, SQL/Auth/Edge, Netlify, main/release, backup/visibility/schedule/alert changes. Existing nine original Markdown archive, separate slow-feed PDF verified past receipt, #335 completed four technical fixes and #267 V2 original-source audit all reused without duplicate credit. October29 ZIP/S019 still inaccessible in explicit connected Google Drive/Project search. Research-only, NO READY/DEPLOYED.
+
+**Tests/CI at authoring:** JSON parsed; strict unique IDs and 194/578/260 counts in memory. GitHub PR-head/merged governance and source readback NOT YET EXECUTED, not PASS. No runtime tests/app CI or author-contributed public dataset row verification performed. Next: review exact PR checks, nonforce [skip netlify] integration with merged Git blob/source parity and exact push governance, then comment #455; continue next disjoint claim or high-confidence safe Log Shot UX gap.
+
+---
+
 ## November 17, 2026 UTC — #455 R331 original Costa TDS trained/consumer claim-level closure [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=2919984b5c14f668d6a361fa6cbe020cb63b5da5 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
