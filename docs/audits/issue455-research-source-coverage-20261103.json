@@ -3877,6 +3877,59 @@
       "constants_blob_sha": "d3559dc1c9560c4d68fbcad1dc91e3a792a100a2",
       "implications": "Do not convert Bodenstein numbers or component R2 into universal shot-time/ratio targets, taste-quality certainty, grinder corrections, automatic flow-based advice, or a second controllable change. Preserve measured Log Shot, all five tastes, user-specific comparable evidence and original history. No code or numeric policy change.",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "DATA-2019-GAGNE-POPCORNING-ORIGINAL-CSV",
+      "type": "original_author_public_machine_readable_particle_image_dataset_not_a_new_peer_reviewed_science_publication",
+      "title": "Jonathan Gagne 2019 Grind Quality and the Popcorning Effect: original four particle-surface CSV exports",
+      "relation_to_existing_source": "LIT-2019-GAGNE-POPCORNING (already reviewed in R045; do NOT double-count the 2019 paper or its conclusions)",
+      "url": "https://github.com/jgagneastro/Coffee_Blog/tree/c907911623759ae7049191f754f9cc6d48007ca4/Single_Dosing_PSD/csv_data",
+      "immutable_git_repository_commit": "c907911623759ae7049191f754f9cc6d48007ca4",
+      "retrieved_source": "GitHub original author's public repository at exact source SHA, direct immutable Git blob retrieval of complete four CSV texts",
+      "source_objects": [
+        {
+          "path": "Single_Dosing_PSD/csv_data/Forte_6L_20190320_data_comb_1-12_corrpix.csv",
+          "git_blob_sha": "373674497c5888d5bcf6fe6bca68dcc6549c3230",
+          "bytes": 1010675,
+          "particle_rows": 15284,
+          "raw_unweighted_surface_mean_pixels_squared": 33.48933525255169
+        },
+        {
+          "path": "Single_Dosing_PSD/csv_data/Forte_6L_bbb_20190320_data_comb_1-12_corrpix.csv",
+          "git_blob_sha": "4d87a22a4dcacd38a760b441cb4993734802446a",
+          "bytes": 853433,
+          "particle_rows": 12932,
+          "raw_unweighted_surface_mean_pixels_squared": 36.808614290133
+        },
+        {
+          "path": "Single_Dosing_PSD/csv_data/Forte_6L_emptyhopper_20190320_data_comb_1-12_corrpix.csv",
+          "git_blob_sha": "469c13a09c28ec45ef1ae33b2097fe0d11f4d306",
+          "bytes": 1006198,
+          "particle_rows": 15220,
+          "raw_unweighted_surface_mean_pixels_squared": 32.828449408672796
+        },
+        {
+          "path": "Single_Dosing_PSD/csv_data/Forte_6Q_20190320_data_comb_1-12.csv",
+          "git_blob_sha": "ed7a1689c2b6f8339fe7601c71f397693a80a553",
+          "bytes": 1582478,
+          "particle_rows": 23852,
+          "raw_unweighted_surface_mean_pixels_squared": 32.08674325004193
+        }
+      ],
+      "rows_total": 67288,
+      "parsed_facts": "All four exact Git blobs directly read in full, header and every row parsed as CSV, finite numeric SURFACE and distinct ID counts validated. Three 6L files share seven-field column order; 6Q original export has different order and was header-mapped. All raw means are descriptive arithmetic means of each image-particle SURFACE column in apparent pixel-squared units, NOT author graph's mass-weighted 100um shell available fraction or physical millimeter-square result.",
+      "source_sha256": null,
+      "source_sha256_status": "Git SHA-1 blob identities supplied by exact Git objects; independently computed raw CSV SHA-256 not obtained",
+      "accessed_at_utc": "2026-11-17",
+      "evidence_grade": "FIRST_PARTY_UNPEER_REVIEWED_FILTER_GRIND_SINGLE_COFFEE_SINGLE_GRINDER_IMAGE_PARTICLE_OBSERVATION_COMPLETE_MACHINE_READABLE_CSV_REVIEW_NOT_REANALYSIS_OF_AUTHOR_FULL_FIGURE_OR_ESPRESSO_TASTE",
+      "review_status": "R455-326_FOUR_ORIGINAL_CSV_BYTES_AND_67288_ROWS_READ_AND_DESCRIPTIVE_STATISTICS_CHECKED_AUTHOR_METHOD_WEIGHTING_UNVERIFIED",
+      "limitations": "No independent calibration check for PIXEL_SCALE or physical mm^2, no volume-weighted or available-mass plot reproduction, no sample-level 12-image labels, no error bars/independent replicates, no espresso shots/personal 5-rating outcomes. Do NOT equate CSV number-weighted surface mean or author stated 0.08 mm^2 with a universal grinder offset.",
+      "current_app_source_sha": "4b29995d0e32c18b70ab14c23295551360413035",
+      "current_engine_blob_sha": "90c55379be60a252a2026e01bb3d786b66c49aef",
+      "current_model_blob_sha": "baafc8fa64fa3e359d8e42094e41c5d72a3b22df",
+      "github267_literal_review_credit": 0,
+      "implementation_status": "RESEARCH_ONLY_NO_APP_CHANGE",
+      "production_deployed": false
     }
   ],
   "evidence_checks": [
@@ -11139,6 +11192,32 @@
       "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "implementation_status": "RESEARCH_ONLY_NO_APP_CHANGE",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-RAW-326-A",
+      "source": "DATA-2019-GAGNE-POPCORNING-ORIGINAL-CSV",
+      "source_locator": "https://github.com/jgagneastro/Coffee_Blog/tree/c907911623759ae7049191f754f9cc6d48007ca4/Single_Dosing_PSD/csv_data; four immutable Git blobs as pinned on source record",
+      "claim": "Direct parsing of the author's FOUR original Git-blob CSV files (entire file text) produced 15,284 full hopper, 15,220 empty-hopper, 12,932 bean-by-bean, 23,852 comparison 6Q particle rows (67,288 total); no malformed SURFACE row or duplicate ID within any file. Four distinct raw data objects are now identified with version and exact Git blob hash, not just secondary summary.",
+      "grade": "PRIMARY_AUTHOR_PUBLIC_RAW_CSV_COMPLETE_ROW_SCHEMA_AND_NUMERICAL_PARSE; NO_RANDOMIZED_STUDY_OR_HUMAN_SENSORY_END_POINT",
+      "factual_status": "DATA_PROVENANCE_AND_ROW_COUNTS_VERIFIED_NOT_AUTHOR_PLOT_REANALYSIS_OR_ESPRESSO_CLAIM",
+      "uncertainty": "Raw image sampling, 12 image grouping and original physical pixel calibration not audited. Git blob SHA-1 object matches retrieval; independent SHA-256 and external archive not obtained.",
+      "exact_preflight_sha": "4b29995d0e32c18b70ab14c23295551360413035",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "implementation_status": "RESEARCH_ONLY_NO_APP_OR_NUMERIC_CHANGE",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-RAW-326-B",
+      "source": "DATA-2019-GAGNE-POPCORNING-ORIGINAL-CSV",
+      "source_locator": "original Git 6L three CSVs, SURFACE numeric column; source blog https://coffeeadastra.com/2019/04/12/grind-quality-and-the-popcorning-effect/ paragraphs after initial plot and author May 2, 2019 response",
+      "claim": "Simple unweighted particle-row arithmetic SURFACE means (raw image-pixel^2) are full 33.489335, empty 32.828449 and bean-by-bean 36.808614, with substantially different particle row counts; these descriptive image-particle differences do not reproduce the author's separately reported ~0.08 mm^2 of his plotted analysis because published weighting, available-mass/shell transformation and physical pixel-to-mm^2 calibration were not verified. The author explicitly said in May 2019 that this filter-grind experiment is NOT conclusive for espresso.",
+      "grade": "SOURCE_BLOB_PARSED_DESCRIPTIVE_RAW_COUNTS_AND_FIRST_PERSON_LIMITATION; NOT_INDEPENDENT_PUBLISHED_MODEL_REPLICATION_OR_TASTE_CAUSAL_EVIDENCE",
+      "factual_status": "CONDITION_SPECIFIC_RAW_DATA_SUMMARY_VERIFIED_WITH_CALIBRATION_AND_MODEL_LIMITS; NO_ESPRESSO_PRODUCT_POLICY_EVIDENCE",
+      "uncertainty": "No statistical significance test, no independent true-replicate measurements, differing row counts/selection, no measurement pixel recalibration; raw SURFACE pixel^2 must not be represented as mm^2 or author graph's reported difference.",
+      "exact_preflight_sha": "4b29995d0e32c18b70ab14c23295551360413035",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "implementation_status": "RESEARCH_ONLY_NO_APP_OR_NUMERIC_CHANGE",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -11393,25 +11472,30 @@
       "run_id": "R455-325",
       "next": "Continue nonoverlapping primary source verification and UX source inspection; original S019 PDF and Oct29 ZIP still inaccessible. Do not interpret Vaca-Guerra lab fit R2 as human taste confidence or changing shot control. Original PDFs/figures raw data not completely verified.",
       "owner_approval_now_required": false
+    },
+    {
+      "run_id": "R455-326",
+      "next": "Verify source-bound docs head CI; preserve concurrent ledger changes via nonforce merge/rebase, verify actual merged SHA/files and governance; original S019 and Oct29 ZIP source bytes remain inaccessible.",
+      "owner_approval_now_required": false
     }
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-325",
+    "run_id": "R455-326",
     "date": "2026-11-17",
-    "development_preflight_sha": "00fd25e70cf3375e4b0c5effc3a29cc261d46fc5",
+    "development_preflight_sha": "4b29995d0e32c18b70ab14c23295551360413035",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
     "source_counts": {
-      "sources": 189,
-      "evidence_checks": 561,
-      "proposals": 253
+      "sources": 190,
+      "evidence_checks": 563,
+      "proposals": 254
     },
-    "research_status": "NEW_PRIMARY_ORIGINAL_DIRECT_SUBSTANTIVE_REVIEW_DOCUMENTATION_PR_UNDER_VERIFICATION",
+    "research_status": "ORIGINAL_RAW_AUTHOR_CSV_FULL_ROW_PARSE_COMPLETE_DOC_PR_UNDER_VERIFICATION",
     "runtime_changed": false,
     "tests_run": false,
     "production_deployed": false,
     "github267_literal_review_credit": 0,
     "owner_approval_now_required": false,
-    "next": "Read back documentation PR merged exact blobs and governance; continue distinct claim/source or safe UX regression, no numeric policy changes."
+    "next": "Verify source-bound docs head CI; preserve concurrent ledger changes via nonforce merge/rebase, verify actual merged SHA/files and governance; original S019 and Oct29 ZIP source bytes remain inaccessible."
   },
   "policy_decisions_resolved": [
     {
@@ -17428,6 +17512,29 @@
       "owner_approval_now_required": false,
       "implementation": "DOC_ONLY_PR_PENDING_EXACT_SOURCE_GOVERNANCE",
       "release_queue_status": "NO_APP_CHANGE_NO_RELEASE_ITEM",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-326-RAW-POPCORNING-DATA-METHOD-GUARD",
+      "severity": "P3_RESEARCH_PROVENANCE_QUANTITATIVE_OVERGENERALIZATION",
+      "evidence": [
+        "R455-EV-CIT-045-A",
+        "R455-EV-RAW-326-A",
+        "R455-EV-RAW-326-B"
+      ],
+      "original_source": "DATA-2019-GAGNE-POPCORNING-ORIGINAL-CSV",
+      "finding": "Original author's now independently retrievable full filter-grind CSV rows demonstrate measured image-particle context, but do not independently reproduce graph-derived physical 0.08 mm^2 or establish espresso slow feed adjustment / taste quality; the published original author explicitly limits transfer to espresso.",
+      "user_benefit": "Prevent raw PSD particle counts and unverified physical conversion being mislabeled as confidence, universal grinder clicks, or member personalized improved cups.",
+      "current_locked": "Five private taste inputs, original raw measured shot/notes, one truly controllable recommendation adjustment, separate Turbo/Fast-Flow, slow-feed and same-coffee/calibration evidence, privacy/Community remain.",
+      "current_app": "site/lib/engine.js 90c55379be60a252a2026e01bb3d786b66c49aef: feed-mode selection uses same-setup conditions and paired history with cautious unproven fallback; no universal 0.08mm2 or 5-click from Gagne is installed.",
+      "proposed_change": "Document source object hashes and bounded raw descriptive observations, preserve existing SAFE logic; any new slow-feed numeric product rule or collected member measurements needs separate owner product/consent authorization with actual paired espresso evidence.",
+      "evidence_grade": "AUTHOR_ORIGINAL_COMPLETE_CSV_DESCRIPTIVE_NOT_ESPRESSO_FIVE_RATINGS_TEST",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "RESEARCH_ONLY_DOC_PR_UNDER_TEST",
+      "release_queue_status": "NO_APP_CHANGE_NO_RELEASE_ITEM",
+      "test_plan": "Docs-only governance and source CI; no unchanged Node22 suite repetition beyond existing CI; no personal member, live SQL/Auth, experimental or espresso trials.",
       "github267_literal_review_credit": 0,
       "production_deployed": false
     }
