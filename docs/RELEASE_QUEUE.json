@@ -15852,6 +15852,30 @@
       "blockers": [],
       "notes": "READY IN DEVELOPMENT ONLY; no deployment. Preserve shared Log Shot Save validation alert while other form inputs/tastes remain invalid; clear only resolved local message after last invalid, leave unrelated cloud error. No observed member event or espresso sensory improvement, no changes to five tastes, recommendation/numerical policy, saved history/notes, grinder calibration, slow feed, styles, privacy/offline/Community, production/providers or main/release.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-preview-rollover-cooldown",
+      "issue": 509,
+      "pr": null,
+      "title": "Preserve 15-second ordinary-member preview cooldown across 24-hour quota rollover",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261117114500_dic_shared_preview_rollover_cooldown.sql"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509; owner development-only error-repair authority; DIC_PREFLIGHT_VERIFIED development_sha=00fd25e70cf3375e4b0c5effc3a29cc261d46fc5 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Read-only live full shared preview SQL and public wrappers: rollover precedes cooldown, 24h+1s age with attempt 3s ago returns allowed instead of preview_cooldown.",
+        "Synthetic production SELECT only: old and corrected branch outcomes reproduced without Auth/member reads or writes.",
+        "Rollback-only PostgreSQL17.11 isolated synthetic universal_url_preview.sql regression staged for both public wrapper paths and legitimate 16s cooldown expiration; not yet run."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source offline PostgreSQL, Node22 and approval CI not yet confirmed SUCCESS.",
+        "Additional consumer validation and separate source-isolated release/hosted Auth acceptance still UNVERIFIED; no owner Publish."
+      ],
+      "notes": "Development-only replacement of shared legacy authenticated/worker claim ordering; modern Netlify preview uses separate public preflight, legacy Edge is 410. Do not infer actual member incident or drop public wrappers. Historical migration preserved, no production provider changes.",
+      "production_deployed": false
     }
   ],
   "history": [

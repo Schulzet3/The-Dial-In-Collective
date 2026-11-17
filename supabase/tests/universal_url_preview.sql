@@ -75,6 +75,37 @@ begin
  then raise exception 'Universal path bypassed trusted worker cooldown: %',got;end if;
  execute 'reset role';
 
+ -- [#509 R309] A 24-hour counter rollover must not bypass the shared 15s
+ -- cooldown. Synthetic fixture only; entire transaction rolls back.
+ update private.dic_url_preview_attempts
+ set window_started_at=now()-interval '24 hours 1 second',
+     last_attempt_at=now()-interval '3 seconds', attempts=11
+ where owner_id=member_account;
+ perform set_config('request.jwt.claim.role','authenticated',true);
+ execute 'set local role authenticated';
+ got:=public.dic_claim_universal_preview();
+ if got->>'reason' is distinct from 'preview_cooldown'
+ then raise exception 'R309 universal claim bypassed cooldown at daily rollover: %',got;end if;
+ execute 'reset role';
+ perform set_config('request.jwt.claim.role','service_role',true);
+ execute 'set local role service_role';
+ got:=public.dic_url_preview_claim(member_account);
+ if got->>'reason' is distinct from 'preview_cooldown'
+ then raise exception 'R309 worker claim bypassed cooldown at daily rollover: %',got;end if;
+ execute 'reset role';
+ if (select attempts from private.dic_url_preview_attempts where owner_id=member_account)<>11
+ then raise exception 'R309 denied rollover must preserve claim counter';end if;
+ update private.dic_url_preview_attempts
+ set last_attempt_at=now()-interval '16 seconds' where owner_id=member_account;
+ perform set_config('request.jwt.claim.role','authenticated',true);
+ execute 'set local role authenticated';
+ got:=public.dic_claim_universal_preview();
+ if got->>'allowed' is distinct from 'true'
+ then raise exception 'R309 expired cooldown should permit new daily window: %',got;end if;
+ execute 'reset role';
+ if (select attempts from private.dic_url_preview_attempts where owner_id=member_account)<>1
+ then raise exception 'R309 rollover must reset daily counter to one';end if;
+
  -- 12th shared member claim allowed, 13th denied.
  update private.dic_url_preview_attempts
  set attempts=11,last_attempt_at=now()-interval '16 seconds' where owner_id=member_account;
