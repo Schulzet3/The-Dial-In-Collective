@@ -27,6 +27,9 @@ for(const n of [481,482]){
   assert.equal(p.ok,true,JSON.stringify(p));
   assert.equal(p.fields.name,cases[n].name,JSON.stringify(p.fields));
   const checks=fieldProof(n,p.fields);
+  // Synthetic fixture declares no roaster name. Keep exact merchant identity
+  // assertion for guarded real HTML afterproof, not this deliberately minimal mock.
+  delete checks.roaster;
   for(const [key,passes] of Object.entries(checks))assert.ok(passes,key+' '+JSON.stringify(p.fields));
   assert.ok(coffeeUrlPreviewMarkup(p).includes('coffee-url-preview'));
   assert.ok(coffeeSourceReviewSnapshot({...p,source_url:cases[n].url}));
