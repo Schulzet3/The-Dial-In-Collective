@@ -1,0 +1,12 @@
+# Issue #33 R275 — Radial selected #538/#540 recycled-country URL source review [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=fc50184b2bf14aabb82f881f70a8f526454120f3 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+## Authority, source and next verification
+Owner Issue #33 development-only authorization, mandatory full immutable preflight/blob verified first, then AGENTS, context, issue comments, workstream, current status/queue, Master Specification and Locked decisions/coverage and relevant #267 V2/#96 boundaries; concurrent open PRs checked. Prior to this write live development rechecked; no other Issue33 current source PR overlaps these selected cases. Original 603 coffees, 201 roasters, 1197 captures, frozen CSV blob 3e0d3036ea727de091f304f538c6de2dfcaa10d6, oracle/scorer unchanged.
+
+- Current official [#538 Guatemala — Pablo & Eva Del Cid](https://www.radialcoffee.com/products/colombia-pablo-eva-del-cid) selected visible H1 is **Guatemala**, while old URL slug says Colombia. Official product body identifies Santa Elena Barillas/Guatemala, washed, light, Pablo & Eva, praline/nougat/raspberry. Direct selected country overrides URL/SEO.
+- Current official [#540 Colombia — Inza Decaf](https://www.radialcoffee.com/products/guatemala) selected visible H1 is **Colombia**, while URL slug says Guatemala. Direct body identifies Inza/Colombia, washed, medium, collective of smallholders, sweet dark chocolate/cherries/raisins. Red Fox is importer, not farmer; selected description does not specify decaffeination METHOD, so do not invent one. Source browser reads on November 17, 2026 are preliminary, NOT guarded raw HTTPS/parser proof.
+
+## Four-file TESTING scope
+New focused positive/hostile selected identity/URL-handle/related-product/no-unsupported-field Node regressions; fail-closed verifier with raw source SHA256, exact H1, parser, Add Coffee and Source Review; targeted guarded public HTTPS GitHub Action, and this same-commit journal. `DIC_PREFLIGHT_VERIFIED` is bound to the actual initial SHA/blob; normal code/test/CI commit [skip netlify]. **Not READY** until actual exact source/CI and safe merge + merged checks. Actual parser defect not yet asserted. If test fails, diagnose whether product source changed, verifier expectation stale, or generic parser field wrong; fix only demonstrated generic error with fresh preflight receipt and tests. Issue #33 remains OPEN; #267/#96 separate. No Netlify publication, SQL/Edge/Auth/provider/member write, paid service, new accounts or forced Git.
