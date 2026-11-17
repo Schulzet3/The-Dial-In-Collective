@@ -3628,6 +3628,45 @@
         44020186186,
         44020186567
       ]
+    },
+    {
+      "id": "LIVE-20261117-R319-NEXT-RECIPE-MEASURED-YIELD-CONTINUITY",
+      "type": "exact_immutable_app_source_and_synthetic_regressions",
+      "title": "Unchanged original measured yield is rounded in Next Recipe during grind-only feedback and original yield arrow",
+      "source_branch": "development/backend-foundation",
+      "source_commit_sha": "e92b15de8c0032eb528b8df801a10e5025aed4e6",
+      "source_git_blobs": {
+        "site/lib/engine.js_before": "592dcb2e58e1d2343703e3086f1cb3992fe3cf40",
+        "site/lib/ui.js_before": "a67d9462838ca94b4d2970c3a6c78de128a1a708",
+        "site/lib/engine.js_after": "7dbc8f29e81edb1bc227066cb4fd9e5144803afd",
+        "site/lib/ui.js_after": "c32cc1081cb5d0191c77a03b42197f2b6b144bc9",
+        "tests/issue455-r319-original-yield-next-recipe.test.mjs": "fc33e2d09af08d9c1d5872a19c4f735878c7d091",
+        "docs/workstreams/ops-issue455-r319-measured-yield-next-recipe-20261117.md": "290622858006d644eb7c4f066f88567c4bbef6e4"
+      },
+      "access": "DIRECT_IMMUTABLE_GITHUB_PRE_AND_POST_SOURCE_AND_EXACT_SOURCE_ACTIONS",
+      "review_status": "R455-319_SAFE_LOCKED_COMPATIBLE_SOURCE_HEAD_AND_MERGED_NODE22_BROWSER_APPROVAL_PASS_DEV_ONLY",
+      "evidence_grade": "DETERMINISTIC_SOURCE_NEGATIVE_SYNTHETIC_POSITIVE_NEGATIVE_REGRESSIONS_NO_REAL_CUP_EFFECTIVENESS",
+      "claims_verified_externally": "No new external science claim. Original measured 36.35g was rounded to 36.4g in displayed next recipe during grind-only advice although engine retained actual yield; new target rounding and old taste data untouched. No measured real-member incidence.",
+      "source_locators": [
+        "site/lib/engine.js recommendation()",
+        "site/lib/ui.js recipeGrid() / nextShotAdjustment()",
+        "tests/issue455-r319-original-yield-next-recipe.test.mjs"
+      ],
+      "implementation_status": "SAFE_NONFORCE_MERGED_DEVELOPMENT_ONLY_READY_NOT_DEPLOYED",
+      "implementation_pr": 3122,
+      "implementation_merge_sha": "e92b15de8c0032eb528b8df801a10e5025aed4e6",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0,
+      "ci_runs": [
+        44025664233,
+        44025664252,
+        44025664376,
+        44025664380,
+        44025664418,
+        44026133253,
+        44026133308,
+        44026133302
+      ]
     }
   ],
   "evidence_checks": [
@@ -10756,6 +10795,24 @@
       "grade": "EXACT_PR_HEAD_AND_MERGED_SOURCE_NODE22_5324_PASS_0_FAIL_6_SKIP; FIVE_NEW_SYNTHETIC_PASS; APPLICABLE_BROWSER_CLOUD_OFFLINE_SQL_SECURITY_APPROVAL_SUCCESS; FROZEN603_SKIPPED",
       "result": "DEVELOPMENT_ONLY_SAFE_READY_AFTER_NONFORCE_MERGE_NO_DEPLOYMENT_OR_ESPRESSO_QUALITY_EFFICACY_CLAIM",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CODE-319-A",
+      "source": "LIVE-20261117-R319-NEXT-RECIPE-MEASURED-YIELD-CONTINUITY",
+      "claim": "In prior source, grind-only `nextAdviceRaw()` kept last.yieldG 36.35 but `recommendation()` unconditionally rounded rec.yield.center to 36.4 and one-decimal RecipeGrid/Before-arrow hid original measurement. R319 preserves only unchanged measured yield precision, not new target policies.",
+      "source_locator": "engine blobs 592dcb2e58e1d2343703e3086f1cb3992fe3cf40 -> 7dbc8f29e81edb1bc227066cb4fd9e5144803afd; UI a67d9462838ca94b4d2970c3a6c78de128a1a708 -> c32cc1081cb5d0191c77a03b42197f2b6b144bc9",
+      "grade": "DETERMINISTIC_SOURCE_PRE_FIX_AND_EXACT_MERGED_CORRECTION_NO_MEMBER_EFFECTIVENESS",
+      "result": "SAFE_SINGLE_CONTROL_PRESENTATION_INTEGRITY_REPAIRED_NO_LOCKED_CHANGE",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CI-319-B",
+      "source": "LIVE-20261117-R319-NEXT-RECIPE-MEASURED-YIELD-CONTINUITY",
+      "claim": "Five R319 synthetic cases 4765–4769 PASS for unchanged 36.35 grind-only, genuine new yield target plus real before-arrow, diagnostic, tenth and min/max boundaries. Exact PR head/merged Node22 5333 PASS/0 FAIL/6 SKIP, merged cloud/mobile/offline and governance SUCCESS; frozen603 SKIPPED.",
+      "source_locator": "PR #3122 source 66d1b47326297d1047cbb255f3c5bb194c64add8, merge e92b15de8c0032eb528b8df801a10e5025aed4e6; Node runs 44025664376 /44026133302; UX 44025664380 /44026133308; SQL 44025664418; security 44025664252; approval 44025664233 /44026133253",
+      "grade": "EXACT_SOURCE_NODE22_5333_PASS_0_FAIL_6_INTENTIONAL_SKIP_FIVE_SYNTHETIC_PASS_MERGED_BROWSER_GOVERNANCE_PASS",
+      "result": "DEVELOPMENT_ONLY_READY_NOT_DEPLOYED_NO_EMPIRICAL_TASTE_QUALITY_VALIDATION",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -10999,25 +11056,26 @@
     "R455-315: primary author 2021 EG-1 SSP ULF vs Niche 6+5 same-coffee 1:4 bloom study verified descriptively against original report09; original PSD measurements/raw DE1 logs/independent brew or five-taste efficacy NOT verified. Distinguish measured raw/filtered terminal EY from modeled time-course and low-fines hypotheses; no universal recipe changes, no owner decision presently. Original S019/Oct29 pack fresh raw bytes still outstanding; no #267 literal-line credit. Exact docs-only PR CI and integration to verify.",
     "R455-316: CENT original BMJ 2015 methodological statement and companion scoped to N-of-1 reporting vs observational same-coffee single-change next-shot evaluation, NO actual espresso treatment effect, member data or product change. Publisher full article 403 and original paper bytes not independently verified. Exact docs-only source CI/merge and research ledger integration to check; original October29 implementation ZIP and standalone S019 bytes outstanding; zero #267 literal-line credit.",
     "R455-317 FINAL CODE: PR #3111 source-head 75246b1bfaa4e37c5b6710f0750282ed0d891b0d nonforce merged development 02e831b806366cc75ebdca1ab20c233e8d203b46 with identical five Git blobs; one initial failing legacy test fixed, corrected head+merged Node22 each 5316 pass /0 fail /6 skip and scoped UX/mobile/offline/security/SQL/approval success. Development READY, NOT deployed; docs reconciliation still needs its own source-bound PR CI and merge, do not confuse docs-only checks with app efficacy. No original ZIP/S019 verification or #267 line credit.",
-    "R455-318 source PR #3116 NONFORCE MERGED development a91bd34d371d1a564c4212c30022f9e29d32ec26 after final head and merged exact Node22 5324 pass/0 fail/6 skip and five new synthetic PASS; mobile browser initial offline timeout rerun success; frozen603 skipped, neither empirical quality claim nor deployment. Final docs-only CI/merge/readback pending. #267 literal line audit separate; October29 ZIP and S019 raw not accessible in this session."
+    "R455-318 source PR #3116 NONFORCE MERGED development a91bd34d371d1a564c4212c30022f9e29d32ec26 after final head and merged exact Node22 5324 pass/0 fail/6 skip and five new synthetic PASS; mobile browser initial offline timeout rerun success; frozen603 skipped, neither empirical quality claim nor deployment. Final docs-only CI/merge/readback pending. #267 literal line audit separate; October29 ZIP and S019 raw not accessible in this session.",
+    "R455-319 SAFE original measured yield 36.35 display fixed in Next Recipe; PR #3122 merged e92b15de8c0032eb528b8df801a10e5025aed4e6, exact five source Git blobs matched, five synthetic tests PASS, head+merge Node22 5333/0/6 and browser/approval SUCCESS. R319 docs READY reconciliation pending exact docs CI/merge. No deployment, member/Provider changes, #267 line credit or new science policy."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-318",
+    "run_id": "R455-319",
     "date": "2026-11-17",
-    "development_preflight_sha": "a91bd34d371d1a564c4212c30022f9e29d32ec26",
+    "development_preflight_sha": "e92b15de8c0032eb528b8df801a10e5025aed4e6",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
     "source_counts": {
-      "sources": 182,
-      "evidence_checks": 547,
-      "proposals": 246
+      "sources": 183,
+      "evidence_checks": 549,
+      "proposals": 247
     },
-    "research_status": "EXACT_SOURCE_ONE_CONTROL_MEASURED_GRIND_RECIPE_CARD_CORRECTION_NONFORCE_MERGED_AND_APP_CI_PASS_DEV_ONLY",
+    "research_status": "SAFE_LOCKED_COMPATIBLE_MEASURED_YIELD_NEXT_RECIPE_CORRECTION_MERGED_EXACT_SOURCE_CI_PASS_DEV_ONLY",
     "runtime_changed": true,
     "tests_run": true,
     "production_deployed": false,
     "github267_literal_review_credit": 0,
     "owner_approval_now_required": false,
-    "next": "Verify docs-only R318 READY evidence ledger and release queue reconciliation PR governance/merge/readback, then continue distinct new source and Log Shot -> Rate -> Recommendations reviews. Oct29 ZIP and S019 raw current-session access not established; no #267 line credit."
+    "next": "Verify R319 docs-only PR exact CI, nonforce merge and blobs. Continue distinct original citations and UX logic verification; October29 ZIP and original S019 raw bytes remain unavailable, no empirical taste evidence, #267 direct lines separate."
   },
   "policy_decisions_resolved": [
     {
@@ -16827,6 +16885,36 @@
       ],
       "test_plan": "Negative original source proof and five synthetic regressions PASS; final PR head/merged Node22 5324/0/6, browser/mobile/offline, SQL/security/approval SUCCESS. Initial malformed-test Node22 failure repaired, one transient offline browser reload failure rerun once successful. No frozen603, live account, real device or measured taste-effect claim.",
       "release_queue": "DIC-Q-455-r318-next-recipe-measured-grind-precision",
+      "release_queue_status": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-PROP-319-PRESERVE-UNCHANGED-MEASURED-YIELD-PRECISION",
+      "severity": "P2_SAFE_ONE_CONTROLLABLE_VARIABLE_UI_CORRECTNESS",
+      "source": [
+        "LIVE-20261117-R319-NEXT-RECIPE-MEASURED-YIELD-CONTINUITY"
+      ],
+      "evidence": [
+        "R455-EV-CODE-319-A",
+        "R455-EV-CI-319-B"
+      ],
+      "finding": "RecipeGrid rounded original measured 36.35g to 36.4g during grind-only or prep-only advice; prior Before arrow truncated original when recommending genuine new yield; misleading second adjustment risk.",
+      "user_benefit": "Unchanged recorded measurement remains unambiguous and visible, preserving one intentional intervention and clearer Next Shot comparison.",
+      "current_locked": "Master RECOMMENDATION-SINGLE-INTENTIONAL-CHANGE-20261019 and owner selected previous → next arrow; new yield/grind adjustments keep existing numeric conventions, original measured shots, five ratings, notes and privacy unchanged.",
+      "current_app": "R318 protected unchanged measured grinder precision, but recommendation's rec.yield.center=round(nextYield) and UI formatted original yield to tenth. R319 distinguishes original control from newly proposed yield.",
+      "proposed_change": "SAFE implemented: exact old measured yield for unchanged controls, precise original Before-arrow, new target tenth and 5–200g clipping preserved.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "PR #3122 source head 66d1b47326297d1047cbb255f3c5bb194c64add8, source nonforce squash merge e92b15de8c0032eb528b8df801a10e5025aed4e6, five blobs matched; same-commit preflight receipt.",
+      "files": [
+        "site/lib/engine.js",
+        "site/lib/ui.js",
+        "tests/issue455-r319-original-yield-next-recipe.test.mjs",
+        "docs/workstreams/ops-issue455-r319-measured-yield-next-recipe-20261117.md"
+      ],
+      "test_plan": "Five synthetic cases PASS, exact head/merge Node22 5333 PASS/0 FAIL/6 SKIP; cloud/mobile/browser/offline/security/isolated SQL and governance success as applicable, frozen603 SKIPPED; no physical member observation.",
+      "release_queue": "DIC-Q-455-r319-original-yield-next-recipe-precision",
       "release_queue_status": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
       "production_deployed": false,
       "github267_literal_review_credit": 0
