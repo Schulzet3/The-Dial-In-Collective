@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R305",
+  "date_utc": "2026-11-17",
+  "authority": "Issue #509; read-only production; development-only documentation checkpoint",
+  "preflight": {
+    "verified": true,
+    "observed_development_sha": "6b6df2a9b4b48e1e1f23b34cb14756b76dfe6e94",
+    "verified_preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "current_prewrite_sha": "145076b4ce7808faf10971636c05b9e28ca2e883",
+    "same_preflight_blob_at_prewrite": true
+  },
+  "provider": {
+    "project_ref": "azviqqejypsefzilgonr",
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.11.0.003",
+    "writes": 0
+  },
+  "direct_re_review": {
+    "sql_source": [
+      {
+        "signature": "private.dic_edit_my_coffee(p_library_entry uuid,p_expected_revision bigint,p_details jsonb,p_source_url text)",
+        "md5": "5a52eee42d3427ccbad8b7272ff8df90",
+        "chars": 7162
+      },
+      {
+        "signature": "public.dic_edit_my_coffee(...)",
+        "md5": "fa2193422c742ae9f42e2239c166f245",
+        "chars": 331
+      },
+      {
+        "signature": "private.dic_admin_dashboard_read()",
+        "md5": "5fa33bbe05e8408c1c2fe1b82d73a8ee",
+        "chars": 2901
+      },
+      {
+        "signature": "private.dic_admin_records(...)",
+        "md5": "6976e717b7c5cbb34d8e3c41bc2aeba2",
+        "chars": 5386
+      },
+      {
+        "signature": "private.dic_admin_search_records(...)",
+        "md5": "253a3fe2fe1e1e65f61b5a71a2063fdd",
+        "chars": 7574
+      }
+    ],
+    "frontend": [
+      {
+        "path": "site/cloud/main.js",
+        "git_blob": "0a5274ec660ad435b499d58c9b5985ae400f37ea",
+        "inspection": "showEditCoffee form and submit caller"
+      },
+      {
+        "path": "site/cloud/client.js",
+        "git_blob": "08e1ac1f2610dca9fad162272c8e3c7ea56566a5",
+        "inspection": "RPC p_source_url forwarded explicitly"
+      },
+      {
+        "path": "site/admin/main.js",
+        "inspection": "Search form resets page offset and uses query-specific RPC"
+      },
+      {
+        "path": "site/admin/view.js",
+        "inspection": "Account access removed label and admin result display"
+      },
+      {
+        "path": "supabase/tests/admin_server_search.sql",
+        "git_blob": "e10e67f67a16e465f3625e539c7f438ee0501985",
+        "inspection": "Existing isolated fixture inspected, not re-executed"
+      }
+    ],
+    "first_time_provider_function_or_word_coverage": 0
+  },
+  "findings": {
+    "member_edit_source_url": "Current frontend form preloads pending/original URL, sends its explicit value; empty field intentionally passes null and clears optional source_url. Earlier ledger's omitted-argument concern has no reproduced CURRENT APP caller; external direct RPC contracts remain UNVERIFIED.",
+    "admin_search": "Read-only aggregate source-to-join row cardinality preserved across all five listing groups, and client search submit/clear resets per-kind pagination; no demonstrated count/page mismatch.",
+    "synthetic_or_readonly_test_results": {
+      "type": "READ_ONLY_AGGREGATE_SQL",
+      "join_fanout": [
+        {
+          "kind": "accounts",
+          "base": 6,
+          "joined": 6
+        },
+        {
+          "kind": "approved",
+          "base": 9,
+          "joined": 9
+        },
+        {
+          "kind": "conflicts",
+          "base": 0,
+          "joined": 0
+        },
+        {
+          "kind": "pending",
+          "base": 0,
+          "joined": 0
+        },
+        {
+          "kind": "shots",
+          "base": 27,
+          "joined": 27
+        }
+      ],
+      "all_cardinalities_preserved": true
+    },
+    "confirmed_new_defects": 0,
+    "justified_sql_or_edge_deletions": 0,
+    "source_fixes": 0
+  },
+  "validations": {
+    "isolated_postgres": "NOT_RUN_NO_SOURCE_CHANGE",
+    "node22": "NOT_RUN_NO_SOURCE_CHANGE",
+    "hosted_auth_session": "UNVERIFIED_NO_PRIVATE_SESSION",
+    "new_exact_source_ci": "NOT_RUN",
+    "queue": "UNCHANGED_TESTING_NOT_INDEPENDENTLY_REQUALIFIED",
+    "published_effect": "NOT_APPLICABLE"
+  },
+  "limitations": [
+    "All five SQL functions were previously semantically credited: no first-time audit credit.",
+    "Direct external RPC clients may omit p_source_url; no observed current-app invocation or approved change.",
+    "Large CURRENT_STATUS/RELEASE_QUEUE GitHub contents reads returned blank; no state advancement inferred.",
+    "Compiled vendor code and dashboard-only Auth settings remain unverified."
+  ],
+  "baseline": "IN_PROGRESS",
+  "next": "Resume first changed/genuinely unreviewed provider definition or independently reproducible source defect; preserve existing R301 exact source CI and separate #33/#96 acceptance; no redundant rerun."
+}
