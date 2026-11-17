@@ -7,8 +7,6 @@ import {execFileSync} from 'node:child_process';
 import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
 import {selectedProductHeadings} from './issue33-selected-product-heading.mjs';
 import {identicalCurrentSelectedTitle} from './issue33-selected-public-alternate.mjs';
-import {selectedFlavoredProductLiteralNotes,isCoarseFlavoredProductTaxonomy} from '../../src/server/coffee-selected-flavored-taxonomy.mjs';
-import {productCoffeeProse} from '../../src/server/coffee-product-prose.mjs';
 import {requiredFocusedSourceFailures} from './issue33-focused-source-acceptance.mjs';
 const hash=b=>createHash('sha256').update(b).digest('hex');
 const dir=process.env.DIC_ISSUE33_FOCUSED_PUBLIC_DIR||'/tmp/dic33-r279',errors=[];
@@ -31,36 +29,6 @@ for(const n of [544,545]){
  const t=targets[n],r=report?.records?.find(x=>x.number===n)||{},f=r.current_fields||{};
  let raw;try{raw=readFileSync(join(dir,'case-'+n+'.html'))}catch(e){errors.push(n+'_missing_html_'+(e.code||e.message))}
  const scoped=productMarkup(raw?.toString('utf8')||''),heads=selectedProductHeadings(scoped);
- if(n===545){
-  const clean=(value,max=250)=>String(value||'').replace(/&amp;/giu,'&').replace(/&#39;/giu,"'")
-    .replace(/<[^<>]{0,2000}>/gu,' ').replace(/\\s+/gu,' ').trim().slice(0,max);
-  const blocks=productCoffeeProse(scoped,clean);
-  const diag=selectedFlavoredProductLiteralNotes(scoped,{clean,existing:f.tasting_notes,sourceFacts:r.source_facts||[]});
-  console.log('[DIC33 R279 DIRECT FLAVOR DIAG] '+JSON.stringify({
-    parsed:f.tasting_notes,raw_h1:heads,category:isCoarseFlavoredProductTaxonomy(f.tasting_notes),
-    sourceFacts:(r.source_facts||[]).filter(x=>x.field==='tasting_notes').slice(0,10),
-    prose:blocks.filter(x=>x.tag==='h1'||x.tag==='h3'||x.tag==='p'&&/bourbon|bacon/i.test(x.text))
-      .slice(0,12).map(x=>({tag:x.tag,section:x.section,educational:x.educational,text:x.text.slice(0,500)})),
-    direct:diag,
-    flags:(()=>{
-      const fold=v=>String(v||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
-      const titleWords=fold(blocks.find(x=>x.tag==='h1')?.text).split(/\s+/u);
-      const core=titleWords.slice(0,titleWords.slice(0,2).join(' ').length<6?4:2).join(' ');
-      const noncurrent=/\b(?:not|never|without|neither|no|isn['’]t|wasn['’]t|doesn['’]t|rather than|unlike|generally|typically|usually|for example|for instance|such as|other coffees?|another (?:coffee|lot|farm)|different (?:coffee|lot)|previous (?:harvest|lot|crop|year)|last year|our coffees (?:are|tend)|most (?:of )?our coffees)\b/iu;
-      const forbidden=/\b(?:with milk|in milk|when served|only when|if served|prepared with|syrup added|another coffee|other coffees|previous season|previous lot|formerly|historically|for example|typically)\b/iu;
-      const eligible=blocks.filter(x=>x.tag==='p'&&x.text.length>=40&&x.text.length<=900&&
-        !noncurrent.test(x.text)&&!forbidden.test(x.text)&&
-        (fold(x.section).startsWith(core)||/^(?:description|product description|coffee description|about this coffee|about the coffee|coffee details|details|product information)$/u.test(fold(x.section))));
-      return {
-        core,eligible:eligible.map(x=>({length:x.text.length,section:x.section,
-          infusion:/\bflavou?red coffee\b|\binfused(?:\s+[a-z-]+){0,4}\s+(?:roast\s+)?coffee\b/iu.test(x.text),
-          one:x.text.match(/\b(?:notes?|hints?)\s+of\s+(?:(?:rich|velvety|smooth|creamy|oaky)\s+){0,3}([a-z]{3,24})(?=\s+(?:blend(?:s|ed)?|with|that|followed|balanced)\b|[,.;!?]|$)/iu)?.[1],
-          smoky:x.text.match(/\bsmoky richness of\s+(?:crispy\s+)?([a-z]{3,24})(?=\s*[,.;!?]|\s|$)/iu)?.[1]
-        }))
-      };
-    })()
-  }));
- }
  const text=scoped.replace(/<(?:script|style|nav|aside|footer)\b[^>]*>[\s\S]*?<\/(?:script|style|nav|aside|footer)>/gi,' ').replace(/<[^>]{0,2000}>/g,' ').replace(/\s+/g,' ').toLowerCase();
  let final;try{final=new URL(r.final_url)}catch{}
  must(r.status==='FETCHED'&&r.parser_ok===true&&r.official_url===t.url,n+'_current_exact_fetched_parser');

@@ -31,11 +31,17 @@ export function selectedFlavoredProductLiteralNotes(html,{clean,existing,sourceF
  const core=titleWords.slice(0,titleWords.slice(0,2).join(' ').length<6?4:2).join(' ');
  if(core.length<6)return null;
  const allowed=/^(?:description|product description|coffee description|about this coffee|about the coffee|coffee details|details|product information)$/u;
+ // A later separate sentence like "without overpowering the palate" is
+ // not a denial of the earlier explicit flavored-coffee claim. Qualify EACH
+ // sentence independently: a genuinely conditional/previous/sibling sentence
+ // still cannot authorize extraction, but unrelated later copy cannot erase
+ // an already positive source claim.
  const stories=blocks.filter(b=>b.tag==='p'&&!b.educational&&
-  b.text.length>=40&&b.text.length<=900&&!NONCURRENT_COFFEE_PROSE.test(b.text)&&
-  !forbidden.test(b.text)&&
+  b.text.length>=40&&b.text.length<=900&&
   (fold(b.section).startsWith(core)||allowed.test(fold(b.section))));
- if(!stories.some(b=>/\bflavou?red coffee\b|\binfused(?:\s+[a-z-]+){0,4}\s+(?:roast\s+)?coffee\b/iu.test(b.text)))
+ const isFlavoredOwnSentence=s=>!forbidden.test(s)&&!NONCURRENT_COFFEE_PROSE.test(s)&&
+  /\bflavou?red coffee\b|\binfused(?:\s+[a-z-]+){0,4}\s+(?:roast\s+)?coffee\b/iu.test(s);
+ if(!stories.some(b=>b.text.split(/(?<=[.!?])\s+/u).slice(0,14).some(isFlavoredOwnSentence)))
   return null;
  const terms=new Map(),raw=[];
  const add=value=>{

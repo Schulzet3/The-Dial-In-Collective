@@ -107,3 +107,18 @@ test('apostrophized selected titles retain an exact current product section pref
  assert.match(r.value,/bourbon/i);
  assert.match(r.value,/bacon/i);
 });
+
+test('a later nonflavor negative sentence never erases earlier positive flavored-coffee description',()=>{
+ const clean=(s,n=6001)=>String(s||'').replace(/<[^<>]{0,1200}>/g,' ').replace(/\s+/g,' ').trim().slice(0,n);
+ const facts=[{field:'tasting_notes',label:'Flavors',value:'Spice, Grain & Cereal',source_type:'html'}];
+ const own='<main><h1>It&#39;s Bourbon &amp; Bacon, Hon! - Fall Coffee</h1>'+
+ '<h3>It&#39;s Bourbon &amp; Bacon, Hon! - Fall Season Premium Flavored Coffee</h3>'+
+ '<p>Smooth, oaky notes of bourbon with the smoky richness of crispy bacon, create an unforgettable cup.</p>'+
+ '<p>Discover our Bourbon &amp; Bacon infused medium roast coffee. The infusion of flavors shines without overpowering the palate. The cup is balanced.</p></main>';
+ const actual=selectedFlavoredProductLiteralNotes(own,{clean,existing:'Spice, Grain & Cereal',sourceFacts:facts});
+ assert.ok(actual);
+ assert.match(actual.value,/bourbon/i);assert.match(actual.value,/bacon/i);
+ const unsupported=own.replace('Discover our Bourbon &amp; Bacon infused medium roast coffee.',
+   'Previously, the other coffee was a Bourbon &amp; Bacon infused medium roast coffee.');
+ assert.equal(selectedFlavoredProductLiteralNotes(unsupported,{clean,existing:'Spice, Grain & Cereal',sourceFacts:facts}),null);
+});
