@@ -54,7 +54,7 @@ for(const c of cases){
   // This seller says "Processing Method: Sugarcane Washed", which supports
   // separate review of the treatment but does not unequivocally label the
   // caffeine-removal method. Do not require an inferred canonical method.
-  check(/processing method\\s+sugarcane washed/i.test(selected),'direct_selected_sugarcane_washed_context_521');
+  check(/processing method\s+sugarcane washed/i.test(selected),'direct_selected_sugarcane_washed_context_521');
   check(!fields.decaffeination_method||/sugar/i.test(String(fields.decaffeination_method)),'blank_or_directly_qualified_decaf_521');
   check(!/caramel|fig|starfruit|red fruit/i.test(notes),'no_sibling_notes_521');
  }
