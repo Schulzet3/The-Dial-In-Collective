@@ -15750,7 +15750,7 @@
       "issue": 455,
       "pr": 3135,
       "title": "Preserve exact unchanged recorded shot dose precision in Next Recipe",
-      "state": "TESTING",
+      "state": "READY",
       "merged_source_sha": "81d82f58a6060d30058d2992da7780a5b7c74d9e",
       "scope_paths": [
         "site/lib/engine.js",
@@ -15762,19 +15762,23 @@
         "Five focused synthetic Node22 regressions authored; no execution, hosted CI or empirical cup-quality evidence yet.",
         "Initial head e97224bafaafdeeba41e2b73b57420a43dc5625c Node22/lint 44045885571 FAILED 5360 pass/1 fail/6 intentional SKIP because one synthetic fixture wrongly expected basket 20g instead of actual 18g; source code did not fail, four R322 cases passed. Corrected test-only plus NEW same-commit preflight receipt on head 31e8c74046be60338460b775a6d3a31cc0c76a82.",
         "Corrected head Node22/lint 44046638627 SUCCESS 5361 pass/0 fail/6 intentional SKIP; five R322 tests 4793–4797 PASS. PR head 44046638496 security, 44046638552 cloud/mobile/offline/browser, 44046638615 isolated SQL, 44046638529 approval governance SUCCESS. Original603 44046638653 SKIPPED not PASS.",
-        "Nonforce [skip netlify] PR #3135 squash merged 81d82f58a6060d30058d2992da7780a5b7c74d9e; ALL FIVE final source/test/queue/journal Git blobs exactly match corrected PR head. Merged push-run CI could not be independently retrieved with this PR-only workflow-run connector, and is NOT asserted PASS. Development only, queue still TESTING until full source-bound merged evidence recovered."
+        "Nonforce [skip netlify] PR #3135 squash merged 81d82f58a6060d30058d2992da7780a5b7c74d9e; ALL FIVE final source/test/queue/journal Git blobs exactly match corrected PR head. Merged push-run CI could not be independently retrieved with this PR-only workflow-run connector, and is NOT asserted PASS. Development only, queue still TESTING until full source-bound merged evidence recovered.",
+        "Exact source merge 81d82f58a6060d30058d2992da7780a5b7c74d9e push Actions independently retrieved via repository runs?head_sha, not PR-only connector: 44047374171 Node22/build/lint job COMPLETE SUCCESS including Run all checked-in Node tests; 44047374041 real Chromium 390px/mobile/offline/accessibility SUCCESS, targeted cloud unit check NOT_APPLICABLE; 44047374033 approval/governance and READY audit SUCCESS. Merged Node test count not separately extracted; prior corrected PR head 44046638627 had 5361 PASS/0 FAIL/6 intentional SKIP, all five R322 cases PASS.",
+        "Documentation merge 56fd78529a9eefe5cd7acc182b3b16dda85ce5bd approval 44048531572 COMPLETE SUCCESS (schema, continuity and READY audit). Head SQL 44046638615 and security 44046638496 reused with unchanged five exact source/test blobs; no merged SQL/security or frozen603 PASS claimed."
       ],
       "ci_runs": [
         44046638627,
         44046638496,
         44046638552,
         44046638615,
-        44046638529
+        44046638529,
+        44047374171,
+        44047374041,
+        44047374033,
+        44048531572
       ],
-      "blockers": [
-        "Merged push-source CI cannot be independently retrieved via current PR-only run connector; verify exact actual merged run before READY promotion"
-      ],
-      "notes": "Five focused regressions passed at corrected PR head, one initial synthetic fixture expectation fixed, nonforce merge and blob parity verified. Merged push CI pending independent receipt; development-only TESTING NOT READY/DEPLOYED. No new member data, policy, provider operations, empirical coffee quality or #267 line credit.",
+      "blockers": [],
+      "notes": "SAFE DEVELOPMENT-ONLY READY; original measured 18.25g dose displayed exactly in unchanged Next Recipe while new dose targets remain one decimal. Corrected PR head five focused synthetic tests PASS, exact merged push Node/build/lint, real Chromium/mobile/offline/a11y and approval/governance SUCCESS; docs merge governance SUCCESS. All five code/test/queue/journal PR-head Git blobs equal source merge. Earlier fixture failure preserved in tests; original603 SKIPPED, targeted cloud unit NOT_APPLICABLE, no empirical taste/member experiment, provider writes or deployment.",
       "production_deployed": false
     }
   ],
