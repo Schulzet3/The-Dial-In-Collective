@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
+import {extractPublicCoffeeFacts,markSelectedTastingSourceDisagreements} from '../src/server/coffee-page-metadata.mjs';
 import {productMarkup} from '../src/server/coffee-product-scope.mjs';
 import {selectedProductHeadings} from '../scripts/audit/issue33-selected-product-heading.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../site/cloud/coffee-url-autofill.js';
@@ -51,4 +51,18 @@ test('unavailable official original603 selected pages are never source accepted'
  assert.deepEqual(requiredFocusedSourceFailures([502,504],
   [{number:502,status:'UNAVAILABLE',parser_ok:false},{number:504,status:'UNAVAILABLE',parser_ok:false}])
   .map(x=>x.reason),['required_official_source_not_fetched','required_official_source_not_fetched']);
+});
+
+test('source-review same current labeled #504 notes is not a false conflict; rival notes stay flagged',()=>{
+ const selected='honeydew, agave sweetness, and a mild peatiness';
+ const common={field:'tasting_notes',label:'Tasting Notes',section:'Description',source_type:'html'};
+ const same={...common,value:'This beautiful coffee out of Tanzania is an incredibly approachable light roast. Very clean profile with subtle notes of '+selected+'.'};
+ const rival={...common,value:'orange, dark chocolate, and red apple'};
+ const additional={...common,value:'Our coffee tastes of fresh banana. Very clean notes of '+selected+'.'};
+ const other={...common,value:'A different coffee has notes of '+selected+'.'};
+ const tested=markSelectedTastingSourceDisagreements([same,rival,additional,other],selected);
+ assert.notEqual(tested[0].conflicting,true,'exact printed list in a nonconflicting own intro');
+ assert.equal(tested[1].conflicting,true,'genuinely different printed flavor list');
+ assert.equal(tested[2].conflicting,true,'extra contradictory earlier taste claim');
+ assert.equal(tested[3].conflicting,true,'other coffee label not current selected identity');
 });

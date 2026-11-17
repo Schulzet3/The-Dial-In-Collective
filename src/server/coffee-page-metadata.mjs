@@ -75,6 +75,20 @@ export function markSelectedTastingSourceDisagreements(facts,selectedNotes){
   // Keep that source's own caption as review-only evidence when it is a
   // bounded multi-item literal, never as an inferred canonical flavor.
   const raw=String(fact.value||'').trim();
+  // A selected label can wrap its identical cup list in an editorial
+  // introductory sentence. The final complete literal list is not a
+  // contradictory second list. Require an explicit sensory lead-in, exact
+  // trailing full canonical list, and no earlier competing flavor cues.
+  // Keep the original prose and label in Source Review unchanged.
+  const printedTail=raw.replace(/[.!?]+$/u,'').trim();
+  const selectedTail=selectedNotes.replace(/[.!?]+$/u,'').trim();
+  const before=printedTail.slice(0,-selectedTail.length);
+  const sensoryLead=/\b(?:notes?|flavou?rs?|tastes?|aromas?)\s+(?:of|include|including|are|like)\b/giu;
+  if(selectedTail.length>=10&&printedTail.toLowerCase().endsWith(selectedTail.toLowerCase())&&
+     /(?:notes?|flavou?rs?|tastes?|aromas?)\s+(?:of|include|including|are|like)\s*$/iu.test(before)&&
+     [...before.matchAll(sensoryLead)].length===1&&
+     !/[,:;]/u.test(before)&&
+     !/\b(?:other|another|different|previous|historical|former)\s+(?:coffee|lot|product)\b/iu.test(before))continue;
   const printed=normalizeExplicitCoffeeTastingNotes(raw)||
    (raw.length<=240&&raw.length>=6&&/[,;|]/.test(raw)&&!/[<>]/.test(raw)?raw:'');
   if(printed&&!equivalentCoffeeTastingNotes(printed,selectedNotes)&&

@@ -59,6 +59,12 @@ if(process.env.DIC_R263_VERIFY==='1'){
   check(r.add_coffee_ui_rendered===true&&r.source_review_rendered===true,entry.number+'_add_coffee_and_review');
   for(const [key,value] of Object.entries(fields))check(value,entry.number+'_'+key);
   check((r.conflicts||[]).length===0,entry.number+'_actual_canonical_conflicts');
+  // R263: exact #504 direct labeled narrative repeats the very same cup
+  // notes; it must not claim a contradictory second tasting note in Review.
+  if(entry.number===504){
+    const reviews=(r.source_facts||[]).filter(f=>f.field==='tasting_notes'&&/^tasting notes$/iu.test(String(f.label||'')));
+    check(reviews.length===1&&reviews.every(f=>f.conflicting!==true),entry.number+'_no_false_source_review_tasting_conflict');
+  }
   records.push({number:entry.number,source_url:r.final_url,raw_sha256:raw?hash(raw):null,
     bytes:raw?.length||0,heads,selected,fields,canonical:f,conflicts:r.conflicts||[],
     process_literal_review:entry.number===502?'Direct seller labels Pulped Natural, not Honey':null,
