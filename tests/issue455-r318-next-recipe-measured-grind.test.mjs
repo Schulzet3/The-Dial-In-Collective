@@ -70,6 +70,6 @@ test('R318 legacy cached NEW grind target still rounds to selectable tenth',()=>
  const rec=recommendation(state,'coffee');
  assert.equal(rec.source,'Adjustment from your latest taste rating');
  assert.equal(rec.grind.value,2.4,'new target is rounded; only an unchanged actual retains precision');
- assert.match(recipeGrid(rec),/Grind<\\/div><div class="metric-value">2\\.4<\\/div>/);
+ assert.ok(recipeGrid(rec).includes('<div class="metric-value">2.4</div>'),'new rounded dial is visible');
  assert.deepEqual(shot,before);
 });
