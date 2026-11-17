@@ -15820,6 +15820,28 @@
       "blockers": [],
       "notes": "SAFE development-only READY, NOT DEPLOYED. Preserve unresolved shared alert after rating any one taste while other marked invalid controls remain; final invalid rating clears resolved validation only; valid rating tap never dismisses cloud error. Real member occurrence/espresso quality benefit unverified; no new policy, data or provider writes.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-r324-partial-input-validation-alert",
+      "issue": 455,
+      "pr": null,
+      "title": "Preserve unresolved Log Shot Save validation alert when editing one of multiple invalid inputs",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/ui.js"
+      ],
+      "owner_source": "Issue #455 owner Option B SAFE, mandatory DIC_PREFLIGHT_VERIFIED development_sha=d491f7b0ee12c3d16eaf6e721ea6a12b79319767 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Immutable source-level negative: acknowledgeShotInput() clears shared feedback when one edited invalid field is acknowledged despite other aria-invalid fields/taste groups remaining; differs from R295 final-field stale-alert repair and mirrors R323 rating partial feedback safeguard.",
+        "Six positive/negative synthetic Node22 tests authored: other measurement invalid, other tastes invalid, last invalid clears, valid input retains cloud alert, detached form retains alert, actual Cloud main input handler call. Exact-source hosted CI NOT STARTED."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source Node22 tests and applicable Chromium/mobile/offline/a11y/approval/governance, SQL/security classification and merged-source readback pending. TESTING, not READY."
+      ],
+      "notes": "Code change only in local Log Shot form feedback acknowledgement. No actual member event or cup-quality improvement demonstrated. Original five tastes, old shots/notes/history, one-control advice, equipment/temperature/style/feed and privacy/RLS unchanged. No production or provider write.",
+      "production_deployed": false
     }
   ],
   "history": [
