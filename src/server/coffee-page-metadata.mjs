@@ -75,6 +75,40 @@ export function markSelectedTastingSourceDisagreements(facts,selectedNotes){
   // Keep that source's own caption as review-only evidence when it is a
   // bounded multi-item literal, never as an inferred canonical flavor.
   const raw=String(fact.value||'').trim();
+  // A selected label can wrap its identical cup list in an editorial
+  // introductory sentence. The final complete literal list is not a
+  // contradictory second list. Require an explicit sensory lead-in, exact
+  // trailing full canonical list, and no earlier competing flavor cues.
+  // Keep the original prose and label in Source Review unchanged.
+  const printedTail=raw.replace(/[.!?]+$/u,'').trim();
+  const selectedTail=selectedNotes.replace(/[.!?]+$/u,'').trim();
+  const before=printedTail.slice(0,-selectedTail.length);
+  const sensoryLead=/\b(?:notes?|flavou?rs?|tastes?|aromas?)\s+(?:of|include|including|are|like)\b/giu;
+  // Even a complete list at the end is NOT equivalent if an earlier sentence
+  // asserts other tastes. Accept only a non-sensory roast introduction and a
+  // generic "clean profile with subtle notes of" lead-in, or just "notes of".
+  // Anything richer stays reviewable as a potentially conflicting source.
+  const wrapper=before.replace(/(?:notes?|flavou?rs?|tastes?|aromas?)\s+(?:of|include|including|are|like)\s*$/iu,'').trim();
+  const clauses=wrapper?wrapper.split(/(?<=[.!?])\s+/u):[''];
+  const profileLead=clauses.at(-1)||'';
+  const safeProfileLead=profileLead===''||
+    /^(?:(?:very|particularly|especially)\s+)?(?:clean|balanced|smooth|delicate|rounded)\s+profile\s+with\s+(?:subtle|delicate|clear)\s*$/iu.test(profileLead);
+  const safeEarlier=clauses.length===1||(clauses.length===2&&
+    /^(?:this|our|the)\s+[^.!?]{0,150}\bcoffee\b[^.!?]{0,130}\b(?:light|medium|dark)(?:[- ](?:light|medium|dark))?\s+roast[.!?]?$/iu.test(clauses[0])&&
+    !/\b(?:notes?|flavou?rs?|tastes?|aromas?|cup)\b/iu.test(clauses[0]));
+  if(selectedTail.length>=10&&safeProfileLead&&safeEarlier&&printedTail.toLowerCase().endsWith(selectedTail.toLowerCase())&&
+     /(?:notes?|flavou?rs?|tastes?|aromas?)\s+(?:of|include|including|are|like)\s*$/iu.test(before)&&
+     [...before.matchAll(sensoryLead)].length===1&&
+     !/[,:;]/u.test(before)&&
+     !/\b(?:other|another|different|previous|historical|former)\s+(?:coffee|lot|product)\b/iu.test(before))continue;
+  // Do not apply ordinary comma-list subset logic to a preceding sentence
+  // plus a trailing matching note list. The earlier sentence may itself
+  // assert an extra flavor (even without a "tastes of" keyword). Preserve
+  // the literal source as conflicting and leave canonical notes unchanged.
+  if(selectedTail.length>=10&&printedTail.toLowerCase().endsWith(selectedTail.toLowerCase())&&
+     /[.!?]\s+/u.test(before)&&(!safeProfileLead||!safeEarlier)){
+    fact.conflicting=true;continue;
+  }
   const printed=normalizeExplicitCoffeeTastingNotes(raw)||
    (raw.length<=240&&raw.length>=6&&/[,;|]/.test(raw)&&!/[<>]/.test(raw)?raw:'');
   if(printed&&!equivalentCoffeeTastingNotes(printed,selectedNotes)&&
