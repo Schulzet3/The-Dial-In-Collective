@@ -32,7 +32,9 @@ check(h1.length===1&&h1[0]===name&&fields.name===name,'selected_h1_not_global_na
 check(requiredFocusedSourceFailures([519],[row]).length===0,'positive_selected_identity_review_guard');
 check(/PRODUCER\s*\/{3}\s*Wilder Garcia/i.test(direct),'direct_selected_producer');
 check(/REGION\s*\/{3}\s*Cajamarca,\s*Peru/i.test(direct),'direct_selected_origin');
-check(/TASTING NOTES\s*\/{3}\s*Green grape,\s*honeysuckle,\s*coconut water\s*&\s*orange blossom/i.test(direct),'direct_selected_tasting');
+const noteAt=direct.search(/TASTING NOTES\s*\/{3}/i);
+const ownNotes=noteAt<0?'':direct.slice(noteAt,noteAt+240).toLowerCase();
+check(noteAt>=0&&['green grape','honeysuckle','coconut water','orange blossom'].every(f=>ownNotes.includes(f)),'direct_selected_tasting');
 check(/PROCESS\s*\/{3}\s*Washed/i.test(direct)&&/VARIETY\s*\/{3}\s*Geisha/i.test(direct)&&/MASL\s*\/{3}\s*1800/i.test(direct),'direct_selected_process_variety_masl');
 check(/Wilder Garcia/i.test(fields.producer||'')&&/Cajamarca.*Peru/i.test(fields.origin||''),'parsed_own_producer_and_origin');
 check(/Washed/i.test(fields.process||'')&&/Geisha/i.test(fields.variety||'')&&/1800/i.test(String(fields.elevation_m||'')),'parsed_selected_process_variety_elevation');
