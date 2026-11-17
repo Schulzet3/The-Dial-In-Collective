@@ -8,8 +8,8 @@ import {requiredFocusedSourceFailures} from '../scripts/audit/issue33-focused-so
 import {entries,selectedEvidence,selectedFields} from '../scripts/audit/issue33-r260-499-500-check.mjs';
 const map=Object.fromEntries(entries.map(x=>[x.number,x]));
 const words={
- 499:'Our ALUX medium dark roast blend is a fusion of high-altitude Guatemalan, Mexican, and Colombian coffee. Notes: Berries, Bakers Chocolate, Almonds.',
- 500:'A Mexican and Guatemalan dark roast blend. The dark roast adds a layer of smoky intensity. Notes: Heavy Body, Caramel, Dark Chocolate, Roasted Almonds.'
+ 499:'<p>Our ALUX medium dark roast blend is your ticket out of the mundane. It is a fusion of high-altitude Guatemalan, Mexican, and Colombian coffee, each bringing their A-game.</p><p>Notes: Berries, Bakers Chocolate, Almonds</p>',
+ 500:'<p>A Mexican and Guatemalan dark roast blend bold, rich, and unapologetically deep. From the volcanic soils of Chiapas to the highlands of Huehuetenango, this blend marries the earthy, chocolatey notes of Mexico with the bright, complex flavors of Guatemala. The dark roast adds a layer of smoky intensity, while still letting the origins shine through.</p><p>Notes: Heavy Body, Caramel, Dark Chocolate, Roasted Almonds</p>'
 };
 const html=(n,description=words[n],other='')=>'<html><body><main><article class="product"><h1>'+map[n].name+'</h1><div class="product__description">'+description+'</div></article></main>'+other+'</body></html>';
 const parse=(n,d=words[n],o='')=>extractPublicCoffeeFacts(html(n,d,o),{source_url:map[n].url});
