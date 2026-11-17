@@ -10,22 +10,32 @@
     {
       "id": "DIC-Q-455-r320-shot-history-measured-precision",
       "issue": 455,
-      "pr": null,
+      "pr": 3126,
       "title": "Show original measured dose, yield, time and grind precision in Shot History",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "55c5d5d42079cd95aca3e4a8a7252121a02e8cc3",
       "scope_paths": [
         "site/lib/ui.js"
       ],
       "owner_source": "Issue #455 Option B SAFE Locked-compatible; DIC_PREFLIGHT_VERIFIED development_sha=6e8024d2d2229b8dbd8bc0c703872b4638d9014f preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "tests": [
-        "Direct immutable source inspected: shotSummary() used fmt(...,1) for historic dose/yield/time/grind while R318/R319 already preserve unchanged measured 2.45/36.35 in recommendation; focused negative/positive Node22 regressions authored but NOT EXECUTED at authoring."
+        "Direct immutable source inspected: shotSummary() used fmt(...,1) for historic dose/yield/time/grind while R318/R319 already preserve unchanged measured 2.45/36.35 in recommendation; focused negative/positive Node22 regressions authored but NOT EXECUTED at authoring.",
+        "PR #3126 exact head c54927c1302b58d69ae619a93e5e2fb5778fbd55, nonforce [skip netlify] merge 55c5d5d42079cd95aca3e4a8a7252121a02e8cc3: four source/test/queue/same-commit journal Git blobs identical and no deletions.",
+        "Head Node22/lint run 44032708320 5343 PASS/0 FAIL/6 SKIP, R320 cases 4775–4779 PASS; cloud/mobile/browser 44032708276, SQL 44032708315, security 44032708702, governance 44032708310 SUCCESS.",
+        "Merged Node22/lint 44033182252 5343 PASS/0 FAIL/6 SKIP (GitHub job log inspected); cloud/mobile/browser/offline 44033182317, approval 44033182276 SUCCESS. Merged SQL/security not separately triggered; frozen603 SKIPPED not PASS."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Await exact PR-head focused/full applicable Node22 and cloud/mobile/offline/governance CI, nonforce merge, merged-source readback and documentation/evidence reconciliation."
+      "ci_runs": [
+        44032708320,
+        44032708276,
+        44032708702,
+        44032708315,
+        44032708310,
+        44033182252,
+        44033182317,
+        44033182276
       ],
-      "notes": "DEV-ONLY TESTING; original stored measurement not altered. All five ratings, notes, calibration, separate styles, Community/privacy and Locked numeric policy unchanged. No actual member occurrence or improved-cup-quality evidence.",
+      "blockers": [],
+      "notes": "SAFE DEV-ONLY READY: five R320 synthetic tests PASS, head and merged Node22/lint 5343 PASS/0 FAIL/6 SKIP, browser/cloud/offline and governance SUCCESS; isolated head SQL/security SUCCESS. Original603 SKIPPED, no actual user experiment, data or publication change; source blob parity verified.",
       "production_deployed": false
     },
     {
