@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R313",
+  "date_utc": "2026-11-17",
+  "scope": "DIRECT_LIVE_BROKER_SEMANTIC_READ_SOURCE_PARITY_AND_BOUNDED_OPERATIONAL_TELEMETRY",
+  "preflight": {
+    "initial_branch_sha": "0433d9c22ff15788ec63564e0f48b8233272c984",
+    "prewrite_branch_sha": "21096ed89cbba7e45cfeaef06b22a13d85ceeb60",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_content_matches_git_blob": true
+  },
+  "git": {
+    "repository": "Schulzet3/The-Dial-In-Collective",
+    "branch": "development/backend-foundation",
+    "main_sha": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release_production_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+  },
+  "provider": {
+    "ref": "azviqqejypsefzilgonr",
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.11.0.003",
+    "applied_migrations": 69,
+    "active_edge_functions": 5,
+    "production_writes": 0
+  },
+  "inspected_files": [
+    {
+      "slug": "dic-admin-push-broker",
+      "file": "index.ts",
+      "chars": 252,
+      "release_blob": "7c7a851f510dd5c21409cd8b9f6560b059dd64fd",
+      "provider_release_exact_bytes": true
+    },
+    {
+      "slug": "dic-admin-push-broker",
+      "file": "core.mjs",
+      "chars": 9706,
+      "release_blob": "e1a467cc0bb9d94ea824953eec88aaf8d6c428dd",
+      "provider_release_exact_bytes": true
+    },
+    {
+      "slug": "dic-member-approval-broker",
+      "file": "index.ts",
+      "chars": 178,
+      "release_blob": "046781fa56426c761ded24679000212549999ba0",
+      "provider_release_exact_bytes": true
+    },
+    {
+      "slug": "dic-member-approval-broker",
+      "file": "core.mjs",
+      "chars": 11751,
+      "release_blob": "1bc82c0c0f7e90bb86dd7da895c18f9c4e015c5a",
+      "provider_release_exact_bytes": true
+    }
+  ],
+  "complete_deployed_edge_file_chars": 21887,
+  "semantic_review": [
+    {
+      "subject": "admin_push_broker",
+      "verdict": "REVIEWED_NO_NEW_REPRODUCIBLE_DEFECT",
+      "evidence": "Current signed-in Admin identity for manage; bounded 50-record keyset poll; queue snapshot and endpoint-hash identity; send/ack/expiry handling. No action without observed consumer defect."
+    },
+    {
+      "subject": "member_approval_broker",
+      "verdict": "REVIEWED_NO_NEW_REPRODUCIBLE_DEFECT",
+      "evidence": "Pending, verified non-Admin checks on opt-in; bounded 12-event per-channel claims; email provider idempotency; push endpoint acknowledgment and retry receipts. Actual recipient/device delivery remains unverified."
+    },
+    {
+      "subject": "cross_edge_duplication",
+      "verdict": "NO_JUSTIFIED_DELETION",
+      "evidence": "Shared VAPID/endpoint/fingerprint patterns found, but separately deployed bundles, distinct enrollment and delivery contracts and service-only lifecycle; no proven consumer-free functionality or safe removal."
+    }
+  ],
+  "bounded_logs": {
+    "source": "Supabase unified logs, default previous 24h; function_edge_logs aggregate only; no private fields",
+    "function_edge_requests": 575,
+    "by_slug": [
+      {
+        "slug": "dic-admin-push-broker",
+        "requests": 287,
+        "http_4xx": 0,
+        "http_5xx": 0,
+        "mean_execution_ms": 898.4,
+        "p95_execution_ms": 1238,
+        "max_execution_ms": 4392
+      },
+      {
+        "slug": "dic-member-approval-broker",
+        "requests": 288,
+        "http_4xx": 0,
+        "http_5xx": 0,
+        "mean_execution_ms": 920,
+        "p95_execution_ms": 1254,
+        "max_execution_ms": 4060
+      }
+    ],
+    "conclusion": "No observed 4xx/5xx in sampled request logs; no measured bottleneck proved. Broker response success does not certify individual recipient/delivery outcomes."
+  },
+  "ancillary_semantics": {
+    "preview_sql_complete_definitions_read": 5,
+    "read_only_table_scan_telemetry": "22-27-row tables and cumulative scan counts; no proven index or deletion justification",
+    "first_time_unique_source_credit": 0
+  },
+  "limitations": [
+    "Historical source-level review overlaps; count no new first-time credits before reconcile.",
+    "Owner #96 hosted real-account Auth and recipient/device acceptance not performed.",
+    "Provider-only dashboard settings, secrets and external consumer endpoints not inspected.",
+    "Query/index totals are cumulative, not measured request latency."
+  ],
+  "fixes": [],
+  "tests_run": 0,
+  "ci_assertions": "NONE_NEW",
+  "release_queue": "UNCHANGED_EXISTING_FIXES_TESTING",
+  "baseline": "IN_PROGRESS",
+  "next_safe_item": "Reconcile live 114-function signature list against historical direct review receipts to select first genuinely unreviewed full provider definition; test demonstrable consumer/latency issue only before source-only change."
+}
