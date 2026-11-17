@@ -22494,5 +22494,54 @@
     "provider_writes": 0,
     "baseline": "IN_PROGRESS",
     "next": "Source-bound READY requirements plus unreviewed changed provider definitions."
+  },
+  "provider_coffee_matching_planner_run302": {
+    "status": "READ_ONLY_FUNCTIONAL_MATCHING_QUERY_PLAN_AND_COLLISION_SCOPE_REVIEW_NO_NEW_BUG",
+    "receipt_path": "docs/audits/issue509-r302-coffee-match-planner-source-key-20261117.json",
+    "receipt_blob_sha": "a73b65bf672adf2d0acfe1a959fff5409ec67f55",
+    "preflight_development_sha": "52928f3437ea44bc5943757fd7f1d98051cb54c0",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "reviewed_complete_current_provider_sql_definitions": 4,
+    "reviewed_sql_chars": 14126,
+    "first_time_semantic_source_credit": 0,
+    "source_md5s": {
+      "private.dic_find_coffee_matches": "b4b845d29ccb65ac7922109dc89816b6",
+      "private.dic_confirm_coffee_existing": "0fcc44bb8a05f46e87694d3474eb7c23",
+      "private.dic_submit_coffee_auto": "e2b11c83a686a5a9949699cd23b52e13",
+      "private.dic_source_key": "07e0ef286246fdae29b9151018296f79"
+    },
+    "catalog": {
+      "coffees": 9,
+      "active_verified_coffees": 9,
+      "coffee_sources": 11,
+      "roaster_page_sources": 3,
+      "distinct_normalized_roaster_page_keys": 3,
+      "source_collision_groups": 0
+    },
+    "matching_candidate_planner": {
+      "synthetic_query": true,
+      "explain_analyze": false,
+      "index_used": "coffees_merge_idx",
+      "cost_start": 0.14,
+      "cost_total": 4.38,
+      "estimated_rows": 1,
+      "real_latency": "UNVERIFIED",
+      "track_functions": "none"
+    },
+    "known_path_case_fix": {
+      "migration": "supabase/migrations/20261115124500_dic_source_key_path_case_guard.sql",
+      "git_blob": "72d24dca72d1171ea832b26c0ebe080f2ad858c5",
+      "production": "UNPUBLISHED",
+      "source": "EXISTING_FIX_DO_NOT_DUPLICATE"
+    },
+    "source_queue_status": "TESTING_NOT_READY",
+    "source_isolation_and_hosted_acceptance": "UNVERIFIED",
+    "confirmed_new_defects": 0,
+    "safe_index_changes": 0,
+    "safe_deletions": 0,
+    "production_writes": 0,
+    "new_ci": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Next genuinely changed/unreviewed provider definition or consumer contract; catalog expansion should trigger recheck of matcher planner. Do not credit repeated SQL or alter source-key/Community queue without required acceptance evidence."
   }
 }
