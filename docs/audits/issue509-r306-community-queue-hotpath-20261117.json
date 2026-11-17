@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R306",
+  "date_utc": "2026-11-17",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "initial_development_sha": "56fd78529a9eefe5cd7acc182b3b16dda85ce5bd",
+    "prewrite_development_sha": "6cebce9b608eca191ea8bc3c909124836f41f1ae",
+    "blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "immutable_file_verified": true
+  },
+  "branches": {
+    "main": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release_production": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+  },
+  "provider": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.11.0.003",
+    "production_read_only": true,
+    "live_search_md5": "1124d2bbfec7f47d38d06ceb2e049fe4",
+    "live_search_chars": 3949,
+    "migration_20261116224000_applied": false
+  },
+  "semantic_cross_layer_review": {
+    "sql_full_sources": [
+      {
+        "signature": "private.read_personal_state()",
+        "md5": "037d248b67cc3e8490c1689d3200990f",
+        "chars": 2339
+      },
+      {
+        "signature": "public.dic_read_personal_state()",
+        "md5": "811aee397f3505117fcc38715e09af94"
+      },
+      {
+        "signature": "private.session_status()",
+        "md5": "0aa8e57bb4846aac7dd8e3b6c0cf690c"
+      },
+      {
+        "signature": "public.dic_session_status()",
+        "md5": "742e5bd0fc8544807886b514d95d6688"
+      },
+      {
+        "signature": "private.is_member()",
+        "md5": "e406adb7ba7c86dcb000cb089b2693d1"
+      },
+      {
+        "signature": "public.dic_my_community_outliers()",
+        "md5": "312b59594de640adacb12ab0aa0d18e4"
+      }
+    ],
+    "active_caller": {
+      "path": "site/cloud/main.js",
+      "blob": "0a5274ec660ad435b499d58c9b5985ae400f37ea",
+      "status_visible_poll_seconds": 30,
+      "heavy_personal_sync_seconds": 180
+    },
+    "adapter": {
+      "path": "site/cloud/client.js",
+      "blob": "08e1ac1f2610dca9fad162272c8e3c7ea56566a5"
+    },
+    "personal_state_queried_owner_table_counts": 15,
+    "owner_indexed_table_counts": 15,
+    "current_shots_aggregate": {
+      "total": 27,
+      "distinct_owner_groups": 2,
+      "max_per_owner": 19
+    },
+    "current_library_aggregate": {
+      "total": 10,
+      "distinct_owner_groups": 3,
+      "max_per_owner": 6
+    },
+    "first_time_semantic_function_word_credit": 0
+  },
+  "performance_observations": {
+    "pgss_reset": "2026-10-09 11:11:31.487298+00",
+    "personal_state": {
+      "queryid": "1725044562985116050",
+      "calls": 4787,
+      "total_ms": 73163.1,
+      "mean_ms": 15.28,
+      "max_ms": 1566.4,
+      "temp_blocks": 0
+    },
+    "admin_push_poll": {
+      "queryid": "-7990357377309318073",
+      "calls": 1524,
+      "total_ms": 18901.4,
+      "mean_ms": 12.4
+    },
+    "member_approval_poll": {
+      "queryid": "-4828288663145051522",
+      "calls": 1329,
+      "total_ms": 15415.2,
+      "mean_ms": 11.6
+    },
+    "audit_rank_window": {
+      "queryid": "4231681690601413654",
+      "calls": 53,
+      "total_ms": 11865,
+      "mean_ms": 223.87,
+      "temp_blocks_written": 89966,
+      "temp_mib_at_8k_page": 702.859375
+    }
+  },
+  "performance_verdict": "Full personal-state aggregation reread and 15/15 owner-prefixed indexes checked. Live payload limited to aggregate 27 shots / 10 library records; 15.28 ms historical mean is not sufficient to justify a change. Separate audit pg_stat_statements ranked-window query shows 89,966 cumulative temp blocks (~702.9 MiB) since Oct 9; avoid wide unbounded ranking/sorting in future audit queries and prefer bounded keyset/limit. Does not prove an app runtime bug.",
+  "queue_correction": {
+    "id": "DIC-Q-509-community-producer-search-parity",
+    "prior": {
+      "state": "TESTING",
+      "pr": null,
+      "merged_source_sha": null,
+      "ci_runs": [],
+      "blockers": [
+        "SQL functional/Node22/governance exact-source CI PENDING. No READY before all required checks.",
+        "No production publication authorized; live function stays unchanged."
+      ]
+    },
+    "new": {
+      "state": "TESTING",
+      "pr": 3086,
+      "merged_source_sha": "c155d54fd16c49ecb8744a1c1bb1c7181491790b",
+      "ci_runs": [
+        43974714497,
+        43974711815,
+        43974711818,
+        43974711837,
+        43974711820
+      ],
+      "blockers": [
+        "Independent source-isolated release-candidate acceptance, #33 Community/extractor compatibility and applicable #96 live Auth/privacy boundaries remain UNVERIFIED; development-only TESTING, not READY.",
+        "Owner has not authorized Publish; production live SQL remains unmodified. This is not a missing CI blocker."
+      ]
+    },
+    "source_blob": "4d4fc469de4dc5ee4d55f7b15ab35f80e6809ac2",
+    "exact_merged_actions_all_six_jobs_success": true
+  },
+  "tests": {
+    "new_tests": "NONE_DOCS_ONLY",
+    "reused_CI": "5 PUSH WORKFLOWS AT c155d54 SUCCESS",
+    "auth_session": "NOT_RUN",
+    "isolated_sql": "PRIOR_PASS_NOT_REEXECUTED"
+  },
+  "new_app_bugs": 0,
+  "new_safe_sql_deletions": 0,
+  "github_code_changes": 0,
+  "production_provider_writes": 0,
+  "baseline": "IN_PROGRESS",
+  "next": "First truly new/changed provider definition or unreconciled provider word-range, and #509 source-isolation/#33/#96 acceptance. Avoid re-reviewing unchanged SQL or pg_stat_statements-only fingerprints; no duplicate CI."
+}

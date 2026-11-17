@@ -15519,10 +15519,10 @@
     {
       "id": "DIC-Q-509-community-producer-search-parity",
       "issue": 509,
-      "pr": null,
+      "pr": 3086,
       "title": "Correct Community producer-only search count/page mismatch",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "c155d54fd16c49ecb8744a1c1bb1c7181491790b",
       "scope_paths": [
         "supabase/migrations/20261116224000_dic_community_search_producer_parity.sql"
       ],
@@ -15530,14 +15530,22 @@
       "tests": [
         "Read full live search SQL, stored migration SQL and original GitHub immutable source: current paged filter omits producer.",
         "Read-only deterministic synthetic SQL verified producer-only count=true vs page=false.",
-        "Isolated PostgreSQL17 authenticated seven-shot/one-shot fixture added; exact-source CI PENDING."
+        "Isolated PostgreSQL17 authenticated seven-shot/one-shot fixture added; isolated fixture merged; see verified five exact merged-source push runs below.",
+        "R306 2026-11-17 independent GitHub Actions push-run list at exact merged SHA c155d54fd16c49ecb8744a1c1bb1c7181491790b: SQL 43974714497, governance 43974711815, #33 selected 43974711818, cloud/browser 43974711837 (two jobs), Node22 43974711820 all completed SUCCESS (6 jobs). No suite rerun.",
+        "R306 readback migration blob 4d4fc469de4dc5ee4d55f7b15ab35f80e6809ac2 identical at merged c155d54 and current development. Live SQL function MD5 1124d2bbfec7f47d38d06ceb2e049fe4; migration version 20261116224000 NOT APPLIED on read-only production."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        43974714497,
+        43974711815,
+        43974711818,
+        43974711837,
+        43974711820
+      ],
       "blockers": [
-        "SQL functional/Node22/governance exact-source CI PENDING. No READY before all required checks.",
-        "No production publication authorized; live function stays unchanged."
+        "Independent source-isolated release-candidate acceptance, #33 Community/extractor compatibility and applicable #96 live Auth/privacy boundaries remain UNVERIFIED; development-only TESTING, not READY.",
+        "Owner has not authorized Publish; production live SQL remains unmodified. This is not a missing CI blocker."
       ],
-      "notes": "Forward-only additive original-function reassertion, no member data/ACL/history changes.",
+      "notes": "Forward-only additive original-function reassertion, no member data/ACL/history changes.\n2026-11-17 R306 safe queue metadata correction: PR #3086 closed MERGED c155d54 (exact migration blob unchanged); five merged-source push workflows / six jobs SUCCESS verified, stale 'CI PENDING' replaced with correct evidence. State intentionally TESTING pending isolated candidate + #33/#96 acceptance. No source/runtime/production/provider changes.",
       "production_deployed": false
     },
     {
