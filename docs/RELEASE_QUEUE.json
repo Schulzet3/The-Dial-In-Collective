@@ -15967,6 +15967,29 @@
       ],
       "notes": "No production provider changes, no known member incident, preserve backups, migrations and current business behavior. Owner-action-only alerts remain unchanged.\nR311c merged source/readback and CI certified. No production changes or READY promotion.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-r327-unresolved-field-validation-feedback",
+      "issue": 455,
+      "pr": null,
+      "title": "Keep Log Shot invalid-field feedback until the edited physical measurement or notes actually becomes valid",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/ui.js"
+      ],
+      "owner_source": "Issue #455 Option B SAFE, Locked existing model bounds only. DIC_PREFLIGHT_VERIFIED development_sha=ec03e10ee456738681a1d042e08b603dcbde3f70 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Source-repro: R324 partial-alert acknowledgement clears the last invalid dose/yield/time/grinder/notes field whenever any edit occurs, even while its new value remains outside current existing Save bounds.",
+        "R327 focused negative/positive synthetic regression added, including original model limits, Unicode notes, remaining invalid group, cloud error, reentry correction. GitHub CI and live-member acceptance pending."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact source-bound Node22, Chromium/mobile/offline/a11y, SQL/privacy/security and governance acceptance plus nonforce source merge and readback pending.",
+        "No owner Publish instruction; production not authorized."
+      ],
+      "notes": "TESTING development only. UI feedback semantics; no adjustment to numeric bounds, five taste ratings, recipes, private history, styles/feed, offline, Community, member access or providers. Temperature F/C conversion stays in existing Save path. No taste-effectiveness claim.",
+      "production_deployed": false
     }
   ],
   "history": [

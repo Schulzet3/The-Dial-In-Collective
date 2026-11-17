@@ -205,12 +205,29 @@ export function updateTasteSelection(ratings,key,value) {
  return true;
 }
 
+// Do not falsely mark an edited measurement or note as corrected while its
+// current value still violates the SAME existing model Save bounds. Keep the
+// original alert and aria-invalid until the member actually fixes it.
+// Temperature displays in F or C; its conversion is handled at Save, not here.
+function unresolvedShotField(target){
+ if(typeof target.value!=='string')return false;
+ const value=target.value,name=target.name;
+ if(name==='notes')return Array.from(value).length>16000;
+ if(!['doseG','yieldG','timeS','grindSetting'].includes(name))return false;
+ const trimmed=value.trim();
+ if(!trimmed||!Number.isFinite(Number(trimmed)))return true;
+ const n=Number(trimmed);
+ if(name==='grindSetting')return n<0;
+ const [low,high]=CONFIG.bounds[name];
+ return n<low||n>high;
+}
 // An edited field invalidates its old local Save validation summary. Ordinary
 // inputs must not dismiss unrelated cloud/sync errors, and other fields' status
 // is left intact until the member corrects or submits those fields.
 export function acknowledgeShotInput(target,feedback){
  if(!target)return false;
  const invalid=target.getAttribute?.('aria-invalid')==='true';
+ if(invalid&&unresolvedShotField(target))return true;
  target.removeAttribute?.('aria-invalid');
  if(target.getAttribute?.('aria-describedby')==='shot-validation-feedback')
   target.removeAttribute?.('aria-describedby');
