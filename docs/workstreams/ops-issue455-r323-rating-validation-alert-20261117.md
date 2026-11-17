@@ -18,3 +18,9 @@ Original five taste entries, single-controllable-change advice, notes/history, g
 
 ## Test status at authoring
 Node22, browser/mobile/offline/a11y, cloud, SQL/security, approval/governance and real-member tests **NOT YET EXECUTED**. Source PR and CI not yet created. No PASS/READY/DEPLOYED or empirical espresso improvement claim. Next: verify five-path non-destructive compare, run exact PR-head suite/repair failures and same-commit journal, nonforce [skip netlify] PR merge only after checks, read back merge blobs and exact merged CI; then update evidence ledger, CURRENT_STATUS and queue appropriately without deployment.
+
+## Corrected existing UX test expectation before CI [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=cebdd9e7b5c67521df54c6b0d95dda8e05fc7b6a preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+Previously existing tests/cloud-shot-rating-focus.test.mjs asserts the now-removed unconditional inline aria-invalid clear statement. That is a static test expectation for the old behavior; update it to the new specific acknowledgement helper without changing any existing rating interactions or assertions elsewhere. Exact hosted CI still pending; do not label PASS, READY or deployed. Preserve earlier source/test changes and original audit history.
