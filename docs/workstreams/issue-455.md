@@ -1,3 +1,9 @@
+## November 17, 2026 UTC — R455-325 original primary PDF source verification [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=00fd25e70cf3375e4b0c5effc3a29cc261d46fc5 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+Non-overlapping #455 research increment: directly inspected new original Vaca Guerra et al. 2024 J. Food Eng. 368:111913 university-hosted publisher PDF text (13 pp), original page-one screenshot, methods, Tables 1–8, results, limitations/appendix; source was absent from preceding ledger. See [source-bound R325 review](../research/issue455-r325-dispersed-flow-primary-review-20261117.md), evidence IDs R455-EV-PRIMARY-325-A/B and proposal R455-PROP-325. Distinct bounded facts: Distribution B Bo 16.84 → 10.01 → 7.74 over 0/30/60g tracer stages; fitted TDS/chemical concentration R² are *not* personal taste confidence or a user outcome. No member-data experiments, code/tests/CI changes, numeric Locked rule, release queue or deployment. Original PDF binary SHA-256, raw replicates and complete figure pixels remain pending. Original Oct29 ZIP and S019 bytes remain unverified; #267 line-review credit zero. Docs PR exact-source governance pending; DO NOT describe unrun checks as passing.
+
 ## November 13, 2026 UTC — R455-242 FINAL source-integrity merge and bounded outcome [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=6a7b9c3faca7ff4053189518e5470cca22ae60a3 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
