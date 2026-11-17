@@ -13,3 +13,9 @@ Owner Issue #33 autonomous DEVELOPMENT-only selected URL accuracy. Mandatory fir
 
 ## Continuation
 Inspect PR-head focused Node and official workflow, download/hash raw artifacts, compare direct prose with fields and source facts; diagnose red checks and adjust only evidence-backed scope. Recheck branch and concurrent PRs before safe [skip netlify] integration, verify exact merged SHA and applicable CI, then log honest Issue #33 result without owner progress alert.
+
+## Same-run authoring fix, before hosted test
+
+DIC_PREFLIGHT_VERIFIED development_sha=dfdb4fe9f54f9a42ce9a910930504ac34afab63c preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+Read back generated R276 checker before PR and caught erroneous doubled JavaScript backslash escapes in regular expressions/newline serialization; replaced with the intended single JavaScript source escapes. Original source/test/CI still UNTESTED; no parser or product change. Rechecked live development before this corrective source+SAME-COMMIT journal write; next execute exact source-backed PR CI and correct verified failures only.

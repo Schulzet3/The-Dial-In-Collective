@@ -8,7 +8,7 @@ import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
 import {selectedProductHeadings} from './issue33-selected-product-heading.mjs';
 import {requiredFocusedSourceFailures} from './issue33-focused-source-acceptance.mjs';
 const sha=v=>createHash('sha256').update(v).digest('hex');
-const norm=v=>String(v||'').normalize('NFKC').replace(/\\s+/g,' ').trim();
+const norm=v=>String(v||'').normalize('NFKC').replace(/\s+/g,' ').trim();
 const dir=process.env.DIC_ISSUE33_FOCUSED_PUBLIC_DIR||'/tmp/dic33-r276';
 const errors=[],ok=(c,s)=>{if(!c)errors.push(s);};
 let bytes,report;try{bytes=readFileSync(join(dir,'focused-current-evidence.json'));report=JSON.parse(bytes);}catch(e){errors.push('missing_report_'+(e.code||e.message));}
@@ -21,7 +21,7 @@ ok(execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim()===process.e
 let raw;try{raw=readFileSync(join(dir,'case-541.html'));}catch(e){errors.push('raw_'+(e.code||e.message));}
 const selected=productMarkup(raw?.toString('utf8')||'');
 const h=selectedProductHeadings(selected);
-const selectedText=selected.replace(/<(?:script|style|nav|aside|footer)\\b[^>]*>[\\s\\S]*?<\\/(?:script|style|nav|aside|footer)>/gi,' ').replace(/<[^>]{0,2000}>/g,' ').replace(/\\s+/g,' ').toLowerCase();
+const selectedText=selected.replace(/<(?:script|style|nav|aside|footer)\b[^>]*>[\s\S]*?<\/(?:script|style|nav|aside|footer)>/gi,' ').replace(/<[^>]{0,2000}>/g,' ').replace(/\s+/g,' ').toLowerCase();
 let final;try{final=new URL(r.final_url)}catch{}
 ok(r.official_url==='https://www.rallycoffee.co/products/costa-rica-las-lajas'&&r.status==='FETCHED'&&r.parser_ok===true,'exact_original_fetched_parsed');
 ok(final?.protocol==='https:'&&final.hostname==='www.rallycoffee.co'&&final.pathname==='/products/costa-rica-las-lajas','same_selected_url');
@@ -35,6 +35,6 @@ ok(f.process==='Natural','current_direct_perla_negra_natural');
 ok(!f.decaffeination_method&&!f.roast_level,'no_unpublished_roast_or_decaf');
 ok(!/colombia|papaya|strawberry/i.test(String(f.tasting_notes||'')),'no_cross_coffee_flavor_transfer');
 const out={source_sha:report?.source_sha,checkout_sha:process.env.DIC_R276_CHECKOUT_SHA,report_sha256:bytes?sha(bytes):null,original:541,selected_h1:h,raw_html_sha256:raw?sha(raw):null,html_bytes:raw?.length||0,fields:f,seo_fallback_fields:r.seo_fallback_fields||[],conflicts:r.conflicts||[],add_coffee:r.add_coffee_ui_rendered,source_review:r.source_review_rendered,passed:errors.length===0,errors,manual_certified:0,production_operations:0};
-writeFileSync(join(dir,'r276-afterproof.json'),JSON.stringify(out,null,2)+'\\n');
+writeFileSync(join(dir,'r276-afterproof.json'),JSON.stringify(out,null,2)+'\n');
 console.log('[DIC33 R276 RALLY ORIGINAL541] '+JSON.stringify(out));
 if(errors.length)process.exitCode=1;
