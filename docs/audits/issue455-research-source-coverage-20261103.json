@@ -3481,6 +3481,31 @@
         43990526417,
         43990526479
       ]
+    },
+    {
+      "id": "LIT-2021-GAGNE-ULF-NICHE-ESPRESSO",
+      "type": "primary_author_original_small_sample_home_espresso_experiment",
+      "title": "A Comparison between Standard and Low-Fines Espresso Shots",
+      "author": "Jonathan Gagné",
+      "publisher": "Coffee ad Astra (author original experiment, not a peer-reviewed study)",
+      "published": "2021-05-10",
+      "url": "https://coffeeadastra.com/2021/05/10/a-comparison-between-standard-and-low-fines-espresso-shots/",
+      "source_type": "AUTHOR_PUBLISHER_HTML_DIRECTLY_SUBSTANTIVELY_READ",
+      "source_sha256": null,
+      "source_git_blob_sha": null,
+      "source_version": "PUBLISHER_HTML_AS_RETRIEVED_2026-11-16; ARCHIVE_BYTES_NOT_CAPTURED",
+      "original_archived_claim_source": "docs/research/originals/09_The_Causal_Foundation_of_Espresso_Extraction_Grinder_and_Burr_Interactions.md",
+      "archived_claim_source_git_blob_sha": "1e1b8bbef0ecb05ed0b20195191bcad26663cf0d",
+      "access": "FULL_ORIGINAL_PUBLISHER_HTML_READ; linked raw shot logs/DE1 ZIP and full sample calculations NOT independently downloaded or rerun",
+      "provenance": "Original report 09's quantitative EG-1 SSP ULF vs Niche Zero comparison checked against cited author's dated 2021 original experiment; distinct from previously registered Gagne 24-grinder PSD survey and popcorning/seasoning posts.",
+      "evidence_grade": "FIRST_PERSON_NON_PEER_REVIEWED_SINGLE_COFFEE_N11_EXPERIMENT_WITH_SAMPLE_AND_MEASUREMENT_LIMITS",
+      "claims_verified_externally": "Author alternated six EG-1/SSP ULF and five Niche Zero accepted shots on one frozen/thawed washed Colombian coffee using Decent DE1+, 18 g basket, WDT/filter papers, 30-second bloom, 1:4 beverage ratio and ~2mL/s showerhead flow control. Author reports raw refractometer EY EG-1 26.8±0.2% versus Niche 24.8±0.1% (author quoted difference 2.1±0.3 percentage points); VST-filtered EG-1 24.1±0.3% versus Niche 22.7±0.2% (quoted difference 1.3±0.3 points). Original archived report repeats this restricted experiment appropriately; exact printed means and reported difference need not arithmetically reconcile at displayed precision because of rounding.",
+      "limitations": "Burr particle-size distributions NOT directly measured; lower-fines mechanism was an author hypothesis. No randomized multi-coffee factorial burr test, independent peer review, external raw DE1/refractometer files readback, author analysis reproduction, blinded five-taste sensory efficacy, user/member recommendation benefit, universal optimal grind/temperature/ratio/shot time or cross-grinder calibration established. Filtered vs raw differences and evolving TDS measurement handling discourage universal effect-size transfer.",
+      "current_live_code": "site/lib/engine.js Git blob 8e5e93f42f02444533aee9256569baefc6028325 uses same-coffee/style/feed/calibration-restricted recipe evidence and user-controlled single adjustment; site/lib/constants.js blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2 retains approved style-specific heuristics/five independent taste inputs. No universal burr correction is applied or approved.",
+      "research_use": "DESCRIPTIVE_METHOD_BOUNDARY_ONLY_DO_NOT_ELEVATE_TO_NEW_POLICY",
+      "implementation_status": "RESEARCH_ONLY_NO_APP_CHANGE",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "evidence_checks": [
@@ -10510,6 +10535,33 @@
       "grade": "DIRECT_IMMUTABLE_SOURCE_AND_R314_3_POSITIVE_NEGATIVE_TESTS_PASS_PR_HEAD_MERGED",
       "result": "PR #3096 5 applicable PR-head checks SUCCESS; exact Node22 5298 PASS/0 FAIL/6 intended SKIP, R314 cases 4732–4734 PASS both PR head and merged. Merged Node, browser/cloud, approval governance all SUCCESS; frozen603 SKIPPED, unrelated #33 selected-original241 FAILED in merged push and is not R314 code/UX acceptance. No member incident or espresso efficacy claim.",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-LIT-315-A",
+      "source": "LIT-2021-GAGNE-ULF-NICHE-ESPRESSO",
+      "claim": "The original archived grinder report's EG-1 SSP ULF versus Niche Zero raw/filtered extraction-yield means are grounded in Gagne's original May 10 2021 experiment but refer to only 6+5 shots with one coffee and specific blooming ratio/flow setup.",
+      "source_locator": "Coffee ad Astra 2021-05-10 paragraph 'All in all'; 'For today's comparison'; figure discussion and 'The average raw extraction yields'; original Git report 09 blob 1e1b8bb...",
+      "grade": "PUBLISHER_AUTHOR_ORIGINAL_HTML_DIRECTLY_CHECKED_SMALL_N_NON_PEER_REVIEWED",
+      "result": "Supported as author-reported setup-specific measurements, NOT cross-coffee quantitative effect. Linked author logs and raw datasets not independently reproduced.",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-LIT-315-B",
+      "source": "LIT-2021-GAGNE-ULF-NICHE-ESPRESSO",
+      "claim": "The same experiment did not directly measure the two grinder PSDs; assumed fines differences, later inferred dynamic TDS/viscosity, proposed shorter ratios or temperature changes and taste assertions are hypotheses rather than replicated outcomes.",
+      "source_locator": "Coffee ad Astra 2021-05-10 introduction 'I do not yet have great data', paragraphs after pressure/temperature graphs and extraction curves, late interpolation description",
+      "grade": "FIRST_PARTY_EXPERIMENT_METHOD_DISCLOSURE_VERIFIED; MECHANISTIC_CLAIMS_UNPROVEN",
+      "result": "Author explicitly says no direct measured PSDs; time-resolved TDS curves inferred/anchored to terminal measured EY. No independent five-dimensional taste efficacy was tested. Do not install universal low-fines numeric correction.",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-LIT-315-C",
+      "source": "LIT-2021-GAGNE-ULF-NICHE-ESPRESSO",
+      "claim": "Current DIC recommendation core does not apply a universal grind or temperature offset by burr class; applicable Locked rules require same-coffee/setup/style/grinder calibration, five rated tastes and at most one controllable recommendation change.",
+      "source_locator": "site/lib/engine.js current blob 8e5e93f42f02444533aee9256569baefc6028325; site/lib/constants.js blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2; original report09 Git blob 1e1b8bbef0ecb05ed0b20195191bcad26663cf0d",
+      "grade": "EXACT_IMMUTABLE_GITHUB_DIRECT_CODE_AND_AUTHOR_EXPERIMENT_READ",
+      "result": "No independently verified app behavior requiring alteration; keep current Locked logic untouched, no runtime patch/tests or member data. Scenario-specific extraction difference does not prove future recommendation success.",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -10749,42 +10801,26 @@
     "R455-313: confirm PR-head exact CI for strict F/C RecipeGrid rendering boundary, fix any failing cases, recheck concurrent dev and nonforce [skip netlify] merge only if successful, independently read back five Git blob SHAs and merged governance, then reconcile canonical ledger and queue to READY only with tested merged-source evidence. Source ZIP original bytes and S019 separate original still unverified.",
     "R455-313 FINAL: PR #3090 source da74f54d41ac24253f31918f11f05589a5b25915 five tested Git blobs match head, head five CI SUCCESS, merged Node22 5288 PASS/0 FAIL/6 SKIP and 3 focused R313 PASS, merged browser and governance retry SUCCESS. One unique R313 dev-only READY. No deployment. Continue distinct safe issue; original ZIP and S019 raw-byte check unavailable.",
     "R314: verify exact PR-head 3 focused Node22 tests and applicable source-bound CI, fix failures, recheck branch, nonforce merge [skip netlify], verify merged blobs and governance, then reconcile queue/current status to READY only with evidence. No S019 or Oct29 ZIP original-byte verification yet.",
-    "R455-314 FINAL: exact tested source PR #3096 one-parent merge 9d337c0cff19022b269bdd95d3d95ef63cbf31d5, five Git blobs matched; 3/3 R314 Node tests PASS head+merge, 5298 PASS/0 FAIL/6 SKIP, merged approval/browser SUCCESS. Unique R314 queue READY development-only, not deployed. Separate #33 original241 current source fail on merged push, owned #33 (not #455). Continue next distinct SAFE source/effectiveness review; ZIP and S019 original bytes still unverified."
+    "R455-314 FINAL: exact tested source PR #3096 one-parent merge 9d337c0cff19022b269bdd95d3d95ef63cbf31d5, five Git blobs matched; 3/3 R314 Node tests PASS head+merge, 5298 PASS/0 FAIL/6 SKIP, merged approval/browser SUCCESS. Unique R314 queue READY development-only, not deployed. Separate #33 original241 current source fail on merged push, owned #33 (not #455). Continue next distinct SAFE source/effectiveness review; ZIP and S019 original bytes still unverified.",
+    "R455-315: primary author 2021 EG-1 SSP ULF vs Niche 6+5 same-coffee 1:4 bloom study verified descriptively against original report09; original PSD measurements/raw DE1 logs/independent brew or five-taste efficacy NOT verified. Distinguish measured raw/filtered terminal EY from modeled time-course and low-fines hypotheses; no universal recipe changes, no owner decision presently. Original S019/Oct29 pack fresh raw bytes still outstanding; no #267 literal-line credit. Exact docs-only PR CI and integration to verify."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-314",
+    "run_id": "R455-315",
     "date": "2026-11-16",
-    "development_preflight_sha": "9d337c0cff19022b269bdd95d3d95ef63cbf31d5",
+    "development_preflight_sha": "c51b507f325064a7438f7cb00d00c0b536aaa80c",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "implementation_merge_sha": "9d337c0cff19022b269bdd95d3d95ef63cbf31d5",
     "source_counts": {
-      "sources": 177,
-      "evidence_checks": 536,
-      "proposals": 242
+      "sources": 178,
+      "evidence_checks": 539,
+      "proposals": 243
     },
-    "ci": {
-      "pr_head": [
-        43989878790,
-        43989878803,
-        43989878879,
-        43989878834,
-        43989879046
-      ],
-      "merged": [
-        43990526458,
-        43990526417,
-        43990526479
-      ],
-      "node_tests_pass": 5298,
-      "node_tests_fail": 0,
-      "intentional_node_skips": 6,
-      "r314_focused_tests_pass": 3,
-      "extractor_selected_241_failed_unrelated": 43990526424
-    },
+    "research_status": "PRIMARY_AUTHOR_HTML_BOUNDARY_CHECK_VERIFIED_DOCS_CANDIDATE_CI_PENDING",
+    "runtime_changed": false,
+    "tests_run": false,
     "production_deployed": false,
     "github267_literal_review_credit": 0,
     "owner_approval_now_required": false,
-    "next": "Continue research and SAFE UX. Maintain separate #33 source failure without overlapping writes; no publication."
+    "next": "Verify docs-only PR exact-source CI/nonforce merge, merged governance; continue S019/Oct29 original bytes and next distinct evidence claim; no publication."
   },
   "policy_decisions_resolved": [
     {
@@ -16477,6 +16513,35 @@
       "production_deployed": false,
       "github267_literal_review_credit": 0,
       "verified_merge_sha": "9d337c0cff19022b269bdd95d3d95ef63cbf31d5"
+    },
+    {
+      "id": "R455-PROP-315-ULF-NICHE-EFFICACY-SCOPE",
+      "severity": "P3_RESEARCH_CAUSAL_UNCERTAINTY_NO_REPRODUCIBLE_APP_DEFECT",
+      "source": [
+        "LIT-2021-GAGNE-ULF-NICHE-ESPRESSO"
+      ],
+      "evidence": [
+        "R455-EV-LIT-315-A",
+        "R455-EV-LIT-315-B",
+        "R455-EV-LIT-315-C"
+      ],
+      "finding": "Source09's numerical burr-comparison observations derive from one small-N author experiment; direct PSD and validated sensory effectiveness are absent, and extrapolated low-fines grinder-specific universal corrections would exceed evidence and product authorization.",
+      "user_benefit": "Avoid false scientific confidence and incorrect universal grind, extraction-yield, time or temperature policy for unlike grinders and coffees.",
+      "current_locked": "Original five independent tastes, one controllable recommendation variable, coffee/setup/style/feed/grinder calibration matching, distinct Turbo vs Fast-Flow, optional temperature, original shots and private History; no new numeric policy absent owner decision.",
+      "current_app": "Live engine.js and constants.js preserve setup/coffee/style matching and do not claim universal low-fines extraction optimum.",
+      "proposed_change": "RESEARCH ONLY: label author-reported small-sample EY difference as setup-specific, classify unmeasured PSD mechanism as hypothesis, preserve original study and Locked algorithm. Future efficacy assessment ONLY optional consented matched same-coffee setup/style/grinder single-change to next-shot five tastes after separate authorization.",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "RESEARCH_ONLY_NO_APP_SOURCE_TEST_OR_POLICY_CHANGE_NO_RELEASE_QUEUE",
+      "files": [
+        "docs/audits/issue455-research-source-coverage-20261103.json",
+        "docs/workstreams/ops-issue455-r315-gagne-low-fines-claim-20261116.md"
+      ],
+      "test_plan": "Static primary-source and current-live-code review. No application source/test/CI modified; PR-head docs/build/governance applicability to be verified separately. 48/48 reference cases and synthetic Node tests do not validate cup quality.",
+      "release_queue": null,
+      "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "changeScope": {
