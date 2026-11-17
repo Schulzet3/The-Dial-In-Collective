@@ -618,7 +618,15 @@ export function recommendation(s,coffeeId,options={}) {
  }
  // Every recommendation is a selectable tenth inside this setup's actual
  // espresso range. The guard also protects older measurements and fallbacks.
- if(rec.grind&&finite(rec.grind.value))rec.grind.value=clamp(round(rec.grind.value),v.grinderMin,v.grinderMax);
+ // A yield-only adjustment or preparation check displays the original measured
+ // grind, which may legitimately have more than one decimal place. Only NEW
+ // proposed grind controls use the owner's rounded tenth convention.
+ // The latest usable actual was already checked against the active range.
+ const unchangedMeasuredGrind=last&&rec.grind&&finite(rec.grind.value)&&
+  (rec.source==='Adjustment from your latest taste rating'||rec.diagnosticOnly)&&
+  Math.abs(rec.grind.value-last.grindSetting)<=1e-8;
+ if(rec.grind&&finite(rec.grind.value)&&!unchangedMeasuredGrind)
+  rec.grind.value=clamp(round(rec.grind.value),v.grinderMin,v.grinderMax);
  if(!rec.established&&!rec.diagnosticOnly&&!rec.grind?.proven&&finite(rec.grind?.value)&&rec.source!=='Adjustment from your latest taste rating'){
   const step=grindStep(v);
   // A calibrated starting search band is NOT a statistical confidence interval.

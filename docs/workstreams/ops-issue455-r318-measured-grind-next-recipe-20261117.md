@@ -1,0 +1,29 @@
+# Issue #455 R318 — measured-grind Next Recipe continuity (pre-CI) [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=52928f3437ea44bc5943757fd7f1d98051cb54c0 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- **Authority:** Owner-approved #455 Option B, SAFE Locked-compatible presentation fix; no new product policy, numeric target, member-data read or deployment.
+- **Source:** immutable development `52928f3437ea44bc5943757fd7f1d98051cb54c0`; preflight content separately verified from Git file and Git blob `2fb236bbfa6bac48513eeb3bd157b260853af06d` before AGENTS and topic route. Existing live `site/lib/engine.js` blob `5504a30d466a20d373b7fabed084880b69f455b8`; `site/lib/ui.js` blob `3819152094686bd8a7704dabeeb5e207727aec3e`; queue blob `82c05b1d8e3aaeab8ed859afcfb87c64eca3f17f`.
+- **Reproducible defect (current source):** `nextAdvice()` R317 preserves a yield-only unchanged actual 2.45 grinder dial, but `recommendation()` then unconditionally rounds `rec.grind.value` to 2.5. `recipeGrid()` and numeric Next Shot arrows format the original at one decimal, hiding the original measured precision. The displayed second change conflicts with the approved one-controllable-variable advice. No real-member incidence established.
+- **Changed paths in SAME COMMIT:** `site/lib/engine.js` (preserve only actual old grind for yield/diagnostic feedback); `site/lib/ui.js` (show non-tenth original measured precision in active recipe grid and before arrow, retain one-decimal new targets); `tests/issue455-r318-next-recipe-measured-grind.test.mjs` (four local synthetic positive/negative tests); `docs/RELEASE_QUEUE.json` (one unique TESTING item, no existing entry changes); this scoped journal.
+- **Locked/safety:** New recommended grind targets stay at 0.1 precision inside configured active espresso range. Keep original shots/notes/five ratings, successful families, style-specific Turbo/Fast-Flow, feed, temperature, offline, privacy/RLS and Community unchanged. No scientific taste claim.
+- **Test status at authoring:** targeted Node22 regression, lint/build, mobile/browser/offline, SQL/security, governance, exact-source PR CI and merged CI **NOT YET RUN**, never PASS. Frozen603 **NOT RUN**, not needed for this narrowed UI/engine fix. No production/provider comparison requested.
+- **Next action:** independently inspect PR changed path/tree and exact PR-head CI, diagnose/fix failures, recheck concurrent development before nonforce [skip netlify] merge. Verify merged source/test/journal blobs and exact-source CI; reconcile existing release queue, CURRENT_STATUS, #455 research evidence ledger and Issue #455. Promote to READY only with real passing evidence; never publish.
+
+## R318 pre-CI correction to distinguish unchanged actual from new grind target [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=52928f3437ea44bc5943757fd7f1d98051cb54c0 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- **Parent source:** PR #3116 first source `66e77cce0a72d2aa06e7e04b4eeecdcb54d97cd9`, original R318 same-commit journal and source blobs retained; live development rechecked unchanged at `52928f3437ea44bc5943757fd7f1d98051cb54c0`, preflight blob independently identical before this modification.
+- **Risk found during bounded code review, before CI certification:** blanket skip-rounding for all adjustment cards could let a legacy cached genuine NEW grind target with non-tenth precision bypass the Locked 0.1 recommendation rule.
+- **SAFE repair:** skip recommendation's final rounding ONLY when the displayed grind equals the last recorded actual for a yield-only or preparation diagnostic. All genuinely changed grind targets, including legacy cached next targets, still round/clamp. New fifth synthetic case verifies 2.35 legacy NEW target displays 2.4, while original measured 2.45 stays exact for unchanged actions. Notes/five tastes/history untouched.
+- **Changed paths SAME COMMIT:** `site/lib/engine.js`, `tests/issue455-r318-next-recipe-measured-grind.test.mjs`, `docs/workstreams/ops-issue455-r318-measured-grind-next-recipe-20261117.md`. Prior CI if any is obsolete when HEAD moves. All tests/CI remain pending until independently verified.
+- **Next:** verify PR #3116 updated head checks, merged guard, source blobs; reconcile queue/status/research ledger. No publication/provider/member access.
+
+## R318 PR-head CI syntax repair (same-commit) [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=52928f3437ea44bc5943757fd7f1d98051cb54c0 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- **Failure diagnosed, not credited PASS:** corrected head `0d0e5aafc14067812c6e37ac96cea1afa4fd902d` Node22/lint run [44018984152](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44018984152) FAILED: 5318 passed /2 failed /6 intentional skips. Both failures originate from the fifth R318 test's over-escaped regex at line 73, a JavaScript syntax error, and the whole-source parse guard catching that same syntax error; NOT two separate application bugs. Other corrected-head approval 44018984171, cloud/mobile 44018984246, SQL 44018984230, security 44018984303 SUCCESS. Frozen603 44018984192 SKIPPED.
+- **SAFE fix:** replace malformed fifth test regex with a literal HTML substring assertion that preserves the same expected rounded `2.4` display. No application code, member records, Locked targets or queue state change. Both failed tests to be rerun on new PR head; all previously completed results remain historical (not inherited as new-head PASS).
+- **Changed paths same commit:** `tests/issue455-r318-next-recipe-measured-grind.test.mjs`, this scoped journal. Source latest development remained `52928f3437ea44bc5943757fd7f1d98051cb54c0`, preflight blob independently byte-matched. Next verify exact new-head Node22/CI, nonforce merge, merged CI and full docs reconciliation. No deploy.

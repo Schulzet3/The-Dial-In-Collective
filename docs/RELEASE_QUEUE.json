@@ -15617,6 +15617,30 @@
       "blockers": [],
       "notes": "READY development-only after verified original failed CI repair, corrected exact PR/head and merged-source Node/lint, mobile/browser/offline/cloud, SQL/security, approval checks. Frozen603 SKIPPED not PASS. No deployment or member-data/Locked numeric policy change.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-r318-next-recipe-measured-grind-precision",
+      "issue": 455,
+      "pr": null,
+      "title": "Preserve precise unchanged actual grinder setting throughout Next Recipe and its before-arrow",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js",
+        "site/lib/ui.js"
+      ],
+      "owner_source": "Issue #455 Option B SAFE, DIC_PREFLIGHT_VERIFIED development_sha=52928f3437ea44bc5943757fd7f1d98051cb54c0 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "R318 source negative: latest yield-only recommendation preserves 2.45 in nextAdvice but rounded to 2.5 in recommendation()/recipeGrid; no member data involved.",
+        "Four synthetic focused regression scenarios authored; all hosted checks not yet executed."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Applicable exact source PR-head/merged CI not yet verified",
+        "No owner Publish or production release authority"
+      ],
+      "notes": "TESTING only; code+test+queue+same-commit journal authored, not independently certified; one-control historical actual display correction, no new numeric policy.",
+      "production_deployed": false
     }
   ],
   "history": [
