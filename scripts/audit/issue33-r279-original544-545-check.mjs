@@ -38,6 +38,16 @@ for(const n of [544,545]){
  must(f.name!==r.archived_coffee&&!identicalCurrentSelectedTitle(r.archived_coffee,heads[0],f.name)&&r.selected_heading_identity_verified===false,n+'_preserve_historical_mismatch');
  must(r.original_product_not_certified===true&&r.current_identity_exception==='CHANGED_SELECTED_PRODUCT_EXPLICIT_NEGATIVE_DO_NOT_TRANSFER_ARCHIVED_FIELDS',n+'_negative_certification_receipt');
  must(t.tokens.every(w=>text.includes(w)),n+'_own_current_description_tokens');
+ // The real selected-page regression must NEVER certify broad category chips
+ // as direct selected tasting when own explicit infused flavor descriptions exist.
+ if(n===544){
+  for(const word of ['cinnamon','cardamom','ginger','cloves','cheesecake'])
+   must(String(f.tasting_notes||'').toLowerCase().includes(word),n+'_direct_'+word);
+ }else{
+  for(const word of ['bourbon','bacon'])
+   must(String(f.tasting_notes||'').toLowerCase().includes(word),n+'_direct_'+word);
+ }
+ must(!/sweet\s*&\s*sugary|grain\s*&\s*cereal/i.test(String(f.tasting_notes||'')),n+'_coarse_flavor_tags_not_direct_notes');
  must(!f.decaffeination_method,n+'_optional_decaf_not_selected_method');
  must(!/mango|raspberry/i.test(String(f.tasting_notes||'')),n+'_no_unrelated_sibling_notes');
  must(r.add_coffee_ui_rendered===true&&r.source_review_rendered===true,n+'_preview_review');

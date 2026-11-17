@@ -28,6 +28,7 @@ import {extractCoffeeGeographyEntityRoles,cleanCoffeeGeographyEntityPrefix} from
 import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProductFlavorProfileEvidence,refineSelectedNamedTastingNotes,normalizeExplicitCoffeeTastingNotes,equivalentCoffeeTastingNotes,coffeeTastingNotesSubset} from './coffee-flavor-evidence.mjs';
 import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,refineSelectedCurrentCoordinatedFinish,refineSelectedCurrentTrailingFlavorNote,refineSelectedCurrentFlavorBase,refineSelectedCurrentSensoryArc,selectedCoffeeSupplementalTastingProse,selectedCurrentNarrativeAdditionalTastingNote,selectedCurrentMultiSentenceNarrativeNotes,selectedCurrentProductOvertone,selectedCurrentIntrinsicAromaContext,selectedCurrentUnlabeledFlavorPair} from './coffee-selected-description-sensory.mjs';
 import {selectedCoffeeMilkSensoryContext} from './coffee-selected-milk-sensory-context.mjs';
+import {selectedFlavoredProductLiteralNotes,isCoarseFlavoredProductTaxonomy} from './coffee-selected-flavored-taxonomy.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {parseCoffeeElevation,equivalentCoffeeElevations,compatibleCoffeeElevations,extractCoffeeElevationEvidence} from './coffee-elevation-evidence.mjs';
 import {withoutNaturalDecaffeinationModifier,recordCoffeeProcessingClaim,reconcileCoffeeProcessingClaims} from './coffee-processing-evidence.mjs';
@@ -2104,6 +2105,27 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    // in source_facts instead of inventing a new preferred entry.
    conflicts.add('tasting_notes');delete fields.tasting_notes;
   }
+ }
+ // A seller's broad "Flavors" taxonomy (e.g. "Spice, Grain & Cereal")
+ // cannot trump a stronger literal description of the CURRENT selected
+ // flavored coffee. The source-bound helper requires the actual chosen H1,
+ // its own flavored-product prose and two or more explicit literal substances.
+ // Strong independent cupping notes and actual structured flavor facts still
+ // win. No unqualified ingredients, optional decaf or previous-release facts.
+ const printedStrong=printedNotes.some(row=>row.rank>=2);
+ const structuredPrior=structuredFlavorByFields.get(fields);
+ const selectedFlavored=(!printedStrong&&!conflicts.has('tasting_notes')&&
+    (!structuredPrior||isCoarseFlavoredProductTaxonomy(structuredPrior)))?
+  selectedFlavoredProductLiteralNotes(currentProduct,{
+   clean,existing:fields.tasting_notes,sourceFacts:source_facts
+  }):null;
+ if(selectedFlavored){
+  fields.tasting_notes=selectedFlavored.value;
+  if(source_facts.length<384)source_facts.push({
+   field:'tasting_notes',label:'Selected current flavored-coffee literal notes',
+   value:selectedFlavored.value,source_type:'html',source_url,
+   section:'Current selected flavored-coffee narrative (not ingredients)'
+  });
  }
  // The exact selected product's country-qualified hero, adjacent to its
  // title, outranks a municipality guessed from the coffee's name. A three-

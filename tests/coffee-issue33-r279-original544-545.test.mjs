@@ -6,6 +6,7 @@ import {selectedProductHeadings} from '../scripts/audit/issue33-selected-product
 import {identicalCurrentSelectedTitle} from '../scripts/audit/issue33-selected-public-alternate.mjs';
 import {requiredFocusedSourceFailures} from '../scripts/audit/issue33-focused-source-acceptance.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../site/cloud/coffee-url-autofill.js';
+import {selectedFlavoredProductLiteralNotes,isCoarseFlavoredProductTaxonomy} from '../src/server/coffee-selected-flavored-taxonomy.mjs';
 
 const targets=[
  {number:544,archived:'Chai Cheesecake Fall Season Premium Flavored Coffee',current:'Chai Cheesecake — Fall Coffee',url:'https://www.readingcoffee.com/products/chai-cheesecake-fall-season-premium-flavored-coffee'},
@@ -60,4 +61,37 @@ test('selected Bourbon & Bacon flavor description does not prove real ingredient
  assert.ok(!parsed.fields.decaffeination_method);
  assert.ok(coffeeUrlPreviewMarkup(parsed).includes('coffee-url-preview'));
  assert.ok(coffeeSourceReviewSnapshot({...parsed,source_url:t.url}));
+});
+
+test('only selected literal flavored-product notes can supersede a broad Flavors taxonomy',()=>{
+ const clean=(s,n=6001)=>String(s||'').replace(/<[^<>]{0,1200}>/g,' ').replace(/\s+/g,' ').trim().slice(0,n);
+ const facts=[{field:'tasting_notes',label:'Flavors',value:'Sweet & Sugary, Spice, Earthy, Savory',source_type:'html'}];
+ const actual='<main><h1>Chai Cheesecake — Fall Coffee</h1><h3>Chai Cheesecake - Fall Season Premium Flavored Coffee</h3>'+
+ '<p>Exotic warming spices yield notes of cinnamon, cardamom, and ginger balanced with a smooth sweetness.</p>'+
+ '<p>This chai cheesecake flavored coffee has creamy notes of velvety cheesecake blended with hints of cinnamon, cardamom, and cloves.</p></main>';
+ assert.equal(isCoarseFlavoredProductTaxonomy('Sweet & Sugary, Spice, Earthy, Savory'),true);
+ assert.equal(isCoarseFlavoredProductTaxonomy('Chocolate, Lemon, Orange'),false);
+ const r=selectedFlavoredProductLiteralNotes(actual,{clean,existing:'Sweet & Sugary, Spice, Earthy, Savory',sourceFacts:facts});
+ assert.ok(r,'literal current product flavor evidence');
+ for(const literal of ['cinnamon','cardamom','ginger','cloves','cheesecake'])
+  assert.match(r.value,new RegExp(literal,'i'));
+ assert.equal(selectedFlavoredProductLiteralNotes(actual,{clean,existing:'Chocolate, Lemon, Orange',sourceFacts:facts}),null);
+ assert.equal(selectedFlavoredProductLiteralNotes(actual.replace('flavored coffee','coffee'),{clean,existing:'Sweet & Sugary, Spice, Earthy, Savory',sourceFacts:facts}),null);
+ assert.equal(selectedFlavoredProductLiteralNotes(actual.replace('<h1>Chai Cheesecake — Fall Coffee</h1>',''),{clean,existing:'Sweet & Sugary, Spice, Earthy, Savory',sourceFacts:facts}),null);
+ assert.equal(selectedFlavoredProductLiteralNotes(actual,{clean,existing:'Sweet & Sugary, Spice, Earthy, Savory',sourceFacts:[...facts,{field:'tasting_notes',label:'Cupping Notes',value:'Apple, Cherry',source_type:'html'}]}),null);
+});
+
+test('infused current direct bourbon and bacon impressions are flavor notes, not ingredients',()=>{
+ const clean=(s,n=6001)=>String(s||'').replace(/<[^<>]{0,1200}>/g,' ').replace(/\s+/g,' ').trim().slice(0,n);
+ const h='<main><h1>Autumn Bourbon Blend</h1><h3>Autumn Bourbon Blend - Seasonal</h3>'+
+ '<p>Smooth oaky notes of bourbon with the smoky richness of crispy bacon, create an unforgettable cup.</p>'+
+ '<p>Our Bourbon Blend infused medium roast coffee celebrates autumn richness.</p></main>';
+ const facts=[{field:'tasting_notes',label:'Flavors',value:'Spice, Grain & Cereal',source_type:'html'}];
+ const r=selectedFlavoredProductLiteralNotes(h,{clean,existing:'Spice, Grain & Cereal',sourceFacts:facts});
+ assert.ok(r);
+ assert.match(r.value,/bourbon/i);assert.match(r.value,/bacon/i);
+ const unsafe=h.replace('Smooth oaky notes','When served with milk, smooth oaky notes');
+ assert.equal(selectedFlavoredProductLiteralNotes(unsafe,{clean,existing:'Spice, Grain & Cereal',sourceFacts:facts}),null);
+ const sibling='<aside class="related-products"><p>Smooth oaky notes of bourbon with the smoky richness of crispy bacon</p></aside>';
+ assert.equal(selectedFlavoredProductLiteralNotes('<main><h1>Autumn Bourbon Blend</h1><h3>Autumn Bourbon Blend</h3><p>Our Bourbon Blend infused medium roast coffee celebrates autumn richness.</p>'+sibling+'</main>',{clean,existing:'Spice, Grain & Cereal',sourceFacts:facts}),null);
 });
