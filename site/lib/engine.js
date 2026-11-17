@@ -832,9 +832,22 @@ function nextAdviceRaw(s,shot,rec) {
 // which retains the last shot's setting even when history used an old range.
 export function nextAdvice(s,shot,rec){
  const advice=nextAdviceRaw(s,shot,rec),v=activeVersion(s);
- if(!v||!advice?.next||!finite(advice.next.grindSetting))return advice;
- return {...advice,next:{...advice.next,
-  grindSetting:clamp(round(advice.next.grindSetting),v.grinderMin,v.grinderMax)}};
+ if(!v||!advice?.next)return advice;
+ // A historical or imported actual grind may fall outside the CURRENT
+ // espresso range. Keep that measurement intact; do not silently clamp
+ // an unchanged grind into a SECOND, contradictory proposed adjustment.
+ if(!finite(shot?.grindSetting)||!finite(advice.next.grindSetting))
+  return {title:'Review your recorded grind',text:'The original grind measurement is not usable for a next-shot adjustment. Keep this shot in History and confirm your setup before trying another change.',next:null};
+ if(shot.grindSetting<v.grinderMin||shot.grindSetting>v.grinderMax)
+  return {title:'Review your grinder espresso range',text:'This recorded grind falls outside the current setup espresso range. Keep your measured shot and confirm the range before trying a single next-shot change.',next:null};
+ // An unchanged actual setting is not a NEW grind recommendation. Preserve
+ // its exact measured precision when recommending yield or temperature.
+ // Only a genuinely changed grinder target is rounded/clamped to the
+ // owner's 0.1-precision, in-range new-grind guidance rule.
+ const unchanged=Math.abs(advice.next.grindSetting-shot.grindSetting)<=1e-8;
+ const target=unchanged?shot.grindSetting:
+  clamp(round(advice.next.grindSetting),v.grinderMin,v.grinderMax);
+ return {...advice,next:{...advice.next,grindSetting:target}};
 }
 export function isExtreme(s,shot) {
  // Incomplete imported measurements remain in History, but cannot establish

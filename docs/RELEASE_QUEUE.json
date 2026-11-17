@@ -15581,6 +15581,28 @@
       "blockers": [],
       "notes": "Narrow #504 false Source Review conflict correction and guarded exact original #502/#504 source evidence READY in development only, not production deployed. Selected #502 farm-versus-named-producer remains explicitly qualified; full original603 human semantic certification is NOT asserted. All other release queue items preserved. Original immutable corpus/scorer/CSV untouched, #33 OPEN; #267 V2 and #96 separate. No Netlify, paid services, production/provider/member writes, force history, backups or schedule edits.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-r317-next-advice-single-control-grind",
+      "issue": 455,
+      "pr": null,
+      "title": "Preserve exact original measured grinder setting in yield-only advice and abstain for out-of-range history",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "owner_source": "Issue #455 Option B SAFE; DIC_PREFLIGHT_VERIFIED development_sha=65a5d5bef299c1986a7dad15a9509ea2c550c03d preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Original engine source-level negative: non-tenth measured 2.45 is silently rounded to 2.5 during yield-only advice; out-of-active-range measured setting silently clamped and possibly contradicts intended direction. Not a member-data finding.",
+        "Four R317 synthetic targeted regression groups authored; Node22, packaged browser/mobile/offline/a11y, SQL/security/governance and source-bound CI not yet run, not PASS."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact PR-head and merged-source applicable CI and Git blob/readback not yet verified; cannot mark READY."
+      ],
+      "notes": "Development only; no research-derived numeric recipe change, original shot edits, member/production operations or deployment.",
+      "production_deployed": false
     }
   ],
   "history": [
