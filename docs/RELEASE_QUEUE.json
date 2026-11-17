@@ -15792,10 +15792,10 @@
     {
       "id": "DIC-Q-455-r323-rating-validation-alert-integrity",
       "issue": 455,
-      "pr": null,
+      "pr": 3143,
       "title": "Keep unresolved Log Shot validation feedback while rating individual tastes",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "a0dd123f7b98c9fd25e2206c3efe53967cbdf8ca",
       "scope_paths": [
         "site/cloud/main.js",
         "site/lib/ui.js"
@@ -15803,13 +15803,22 @@
       "owner_source": "Issue #455 Option B SAFE; DIC_PREFLIGHT_VERIFIED development_sha=cebdd9e7b5c67521df54c6b0d95dda8e05fc7b6a preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "tests": [
         "Live rating handler source previously cleared shared validation alert on any rating tap even with other invalid measurement fields or unrated taste groups remaining.",
-        "Six focused synthetic regression cases authored; not yet executed."
+        "Six focused synthetic regression cases authored; not yet executed.",
+        "Corrected exact PR head 2eaa2af3711b02672a6e43b57e3ebc4f59c64132: Node22/build/lint 44060009594 SUCCESS, 5,372 PASS/0 FAIL/6 intentional SKIP; all six R323 positive/negative tests #4803-4808 PASS; UX/mobile/Chromium/offline 44060009418, isolated SQL 44060009459, security 44060009381, governance 44060009638 SUCCESS. Two unrelated #33 selected checks SUCCESS; original603 SKIPPED, not PASS.",
+        "Nonforce [skip netlify] PR #3143 squash merge a0dd123f7b98c9fd25e2206c3efe53967cbdf8ca; all six changed file Git blobs EXACTLY matched final reviewed PR-head. Merged exact-source Node22 44060901851 5,372 PASS/0 FAIL/6 intentional SKIP, all six R323 tests PASS; real cloud/Chromium/mobile/offline/a11y 44060902016 and governance 44060902031 SUCCESS. Merged SQL/security not separately triggered; frozen603 not run."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact-source CI, source merge and final governance NOT RUN/VERIFIED"
+      "ci_runs": [
+        44060009594,
+        44060009418,
+        44060009459,
+        44060009381,
+        44060009638,
+        44060901851,
+        44060902016,
+        44060902031
       ],
-      "notes": "Development only, no Locked taste/numeric/science, private history, notes, RLS/Community/offline or production/provider changes; actual member incident and cup-quality outcomes unverified.",
+      "blockers": [],
+      "notes": "SAFE development-only READY, NOT DEPLOYED. Preserve unresolved shared alert after rating any one taste while other marked invalid controls remain; final invalid rating clears resolved validation only; valid rating tap never dismisses cloud error. Real member occurrence/espresso quality benefit unverified; no new policy, data or provider writes.",
       "production_deployed": false
     }
   ],
@@ -18507,6 +18516,15 @@
       "source_sha": "9fdd59d340047daaa94040274b766c4ab543d63f",
       "production_deployed": false,
       "evidence": "PR #3107 exact head 6adb4c6, nonforce [skip netlify] merged 9fdd59d340047daaa94040274b766c4ab543d63f, 5 Git blobs + frozen CSV identical. Official selected source 44008560336 5/5 PASS with independent raw SHA256 #502 ba06cc94 / #504 64b71c33 and Source Review no false conflict. Merged Node/lint 44008560167 5312 PASS/0 FAIL/6 SKIP; merged cloud 44008562197, governance 44008560057, Python 44008559939 PASS. Original241/260 current source exceptions unverified, full 603 not certified, no deployment."
+    },
+    {
+      "date": "2026-11-17",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r323-rating-validation-alert-integrity",
+      "state": "READY",
+      "source_sha": "a0dd123f7b98c9fd25e2206c3efe53967cbdf8ca",
+      "production_deployed": false,
+      "evidence": "PR #3143 six Git blobs match exact final head and merged; Node22 head+merged 5372/0/6, six R323 positive/negative tests 4803–4808 PASS; cloud/browser/mobile/offline head+merged, head SQL/security, head+merged approval SUCCESS; original603 skipped. No production changes."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"

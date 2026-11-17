@@ -3774,6 +3774,46 @@
         44046638615,
         44046638529
       ]
+    },
+    {
+      "id": "LIVE-20261117-R323-LOG-SHOT-RATING-VALIDATION-ALERT",
+      "title": "Log Shot rating tap incorrectly dismissed unresolved shared validation error",
+      "type": "immutable_current_app_source_and_hosted_synthetic_accessibility_regression",
+      "source_branch": "development/backend-foundation",
+      "source_commit_sha": "a0dd123f7b98c9fd25e2206c3efe53967cbdf8ca",
+      "source_git_blobs": {
+        "site/lib/ui.js_before": "d9127077364ec8d234666aa9d9fce1a87e3a5515",
+        "site/lib/ui.js_after": "0faf87694eeafb0dff619b5be7a8c7cf34da2581",
+        "site/cloud/main.js_before": "0a5274ec660ad435b499d58c9b5985ae400f37ea",
+        "site/cloud/main.js_after": "e3464243bcbbf4477127e81f9b21e95a2fae2833",
+        "tests/cloud-shot-rating-focus.test.mjs": "d3538fd1bd8894d77ace3d928fda0f003cdec4c7",
+        "tests/issue455-r323-rating-validation-alert.test.mjs": "b7e42bf00704bd1ca14d75fdd28daf85b2d2be3a"
+      },
+      "access": "DIRECT_IMMUTABLE_GITHUB_SOURCE_AND_EXACT_HEAD_MERGED_WORKFLOW_LOGS",
+      "review_status": "SOURCE_REPRODUCED_SAFE_NONFORCE_MERGED_DEVELOPMENT_ONLY_READY",
+      "evidence_grade": "DETERMINISTIC_BEFORE_AFTER_SOURCE_AND_SIX_SYNTHETIC_NODE22_NEGATIVE_POSITIVE_CHECKS_NO_REAL_MEMBER_OUTCOME",
+      "claims_verified_externally": "Not external science; source-level UX/validation bug and synthetic test; actual member occurrence and improved-cup outcome NOT measured.",
+      "source_locators": [
+        "site/lib/ui.js acknowledgeShotRating()",
+        "site/cloud/main.js action rate handler",
+        "tests/cloud-shot-rating-focus.test.mjs",
+        "tests/issue455-r323-rating-validation-alert.test.mjs"
+      ],
+      "implementation_status": "SAFE_DEV_READY_NOT_DEPLOYED",
+      "implementation_pr": 3143,
+      "implementation_merge_sha": "a0dd123f7b98c9fd25e2206c3efe53967cbdf8ca",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0,
+      "ci_runs": [
+        44060009594,
+        44060009418,
+        44060009459,
+        44060009381,
+        44060009638,
+        44060901851,
+        44060902016,
+        44060902031
+      ]
     }
   ],
   "evidence_checks": [
@@ -10974,6 +11014,24 @@
       "grade": "EXACT_PR_HEAD_HOSTED_NODE22_5361_PASS_0_FAIL_6_INTENTIONAL_SKIPS_MERGED_PUSH_UNVERIFIED",
       "result": "PR_HEAD_VALIDATED_SOURCE_MERGED_QUEUE_TESTING_NOT_READY_NOT_DEPLOYED",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CODE-323-A",
+      "source": "LIVE-20261117-R323-LOG-SHOT-RATING-VALIDATION-ALERT",
+      "claim": "Prior direct rate handler unconditionally erased #shot-validation-feedback after selecting just one taste, even when other controls remained marked aria-invalid after failed Save. New handler clears only resolved invalid group's marker and shared alert only when the form contains no other invalid markers; preserves unrelated cloud alerts.",
+      "source_locator": "site/cloud/main.js 0a5274ec660ad435b499d58c9b5985ae400f37ea -> e3464243bcbbf4477127e81f9b21e95a2fae2833; site/lib/ui.js d9127077364ec8d234666aa9d9fce1a87e3a5515 -> 0faf87694eeafb0dff619b5be7a8c7cf34da2581",
+      "grade": "EXACT_GIT_SOURCE_BEFORE_AFTER_AND_SIX_BLOB_PR_HEAD_MERGE_PARITY",
+      "result": "SAFE_LOCKED_COMPATIBLE_DEV_MERGED_NO_REAL_USER_OR_SCIENTIFIC_QUALITY_CLAIM",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CI-323-B",
+      "source": "LIVE-20261117-R323-LOG-SHOT-RATING-VALIDATION-ALERT",
+      "claim": "Six focused direct synthetic positive/negative UI cases #4803–4808 all PASS; Node22 PR head 44060009594 and exact source merged 44060901851 each 5372 PASS/0 FAIL/6 intentional SKIP. Cloud/browser/mobile/offline and governance head+merge SUCCESS; isolated SQL and security head SUCCESS. Original603 SKIPPED; no provider or member experiments.",
+      "source_locator": "PR #3143 final head 2eaa2af3711b02672a6e43b57e3ebc4f59c64132, merge a0dd123f7b98c9fd25e2206c3efe53967cbdf8ca; GitHub Actions 44060009594,44060901851,44060009418,44060902016,44060009459,44060009381,44060009638,44060902031",
+      "grade": "EXACT_HEAD_AND_MERGED_NODE22_5372_PASS_0_FAIL_6_INTENTIONAL_SKIP_6_SCOPED_REGRESSIONS",
+      "result": "DEVELOPMENT_READY_NOT_DEPLOYED_NO_EMPIRICAL_QUALITY",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -11221,25 +11279,26 @@
     "R455-319 SAFE original measured yield 36.35 display fixed in Next Recipe; PR #3122 merged e92b15de8c0032eb528b8df801a10e5025aed4e6, exact five source Git blobs matched, five synthetic tests PASS, head+merge Node22 5333/0/6 and browser/approval SUCCESS. R319 docs READY reconciliation pending exact docs CI/merge. No deployment, member/Provider changes, #267 line credit or new science policy.",
     "R455-320 shot history original measurement precision source merged 55c5d5d42079cd95aca3e4a8a7252121a02e8cc3; five synthetic PASS, head/merge Node22 5343/0/6, browser/governance SUCCESS. Docs reconciliation pending own CI. Original S019/Oct29 ZIP unverified; no #267 literal credit or measured member quality outcomes.",
     "R321 date-only History display source PR #3132 merged 145076b4ce7808faf10971636c05b9e28ca2e883; three synthetic cases and head/merged Node22 5351/0/6 SUCCESS. No member/production operation, no #267 line-by-line credit. Continue primary research claim validation; S019 and October29 ZIP originals still unverified.",
-    "R322 source PR #3135 merged 81d82f58a6060d30058d2992da7780a5b7c74d9e with all five final Git blobs matched corrected passing PR head; initial synthetic fixture test failure 44045885571 repaired, corrected head 44046638627 5361 PASS/0 FAIL/6 SKIP and four additional applicable head checks SUCCESS. Merged push CI not retrievable via current connector, leave R322 TESTING not READY. No deploy/member/Locked change; original S019/Oct29 ZIP unverified, no #267 line credit."
+    "R322 source PR #3135 merged 81d82f58a6060d30058d2992da7780a5b7c74d9e with all five final Git blobs matched corrected passing PR head; initial synthetic fixture test failure 44045885571 repaired, corrected head 44046638627 5361 PASS/0 FAIL/6 SKIP and four additional applicable head checks SUCCESS. Merged push CI not retrievable via current connector, leave R322 TESTING not READY. No deploy/member/Locked change; original S019/Oct29 ZIP unverified, no #267 line credit.",
+    "R323 PR #3143 six source/test/journal/queue Git blobs matched exact nonforce merge a0dd123f7b98c9fd25e2206c3efe53967cbdf8ca; head+merged Node22 5372/0/6, six focused synthetic PASS, mobile/browser/offline/governance SUCCESS; head isolated SQL/security SUCCESS. Dev READY only, no deployment. Source #455 remains open for unfinished citation/effectiveness work, S019/Oct29 ZIP unverified and #267 semantic audit not duplicated."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-322",
+    "run_id": "R455-323",
     "date": "2026-11-17",
-    "development_preflight_sha": "929a34d39dbd0e359e5beabd99bc0d5de3796c9e",
+    "development_preflight_sha": "cebdd9e7b5c67521df54c6b0d95dda8e05fc7b6a",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
     "source_counts": {
-      "sources": 186,
-      "evidence_checks": 555,
-      "proposals": 250
+      "sources": 187,
+      "evidence_checks": 557,
+      "proposals": 251
     },
-    "research_status": "SAFE_SOURCE_MERGED_HEAD_CI_PASS_MERGED_PUSH_CI_PENDING",
+    "research_status": "SOURCE_MERGED_EXACT_HEAD_AND_MERGED_CI_PASS_RESEARCH_INCOMPLETE",
     "runtime_changed": true,
     "tests_run": true,
     "production_deployed": false,
     "github267_literal_review_credit": 0,
     "owner_approval_now_required": false,
-    "next": "Obtain independent merged-source PR #3135 push CI receipts (GitHub PR-run connector excludes push), then promote existing TESTING R322 row only if applicable merged checks successful; continue #335 transferred research claim verification, ZIP/S019 original bytes unverified."
+    "next": "Continue disjoint source/citation verification and SAFE Log Shot UX; original S019/Oct29 ZIP bytes remain unavailable. Do not credit #267 audit or claim real cup-quality improvement."
   },
   "policy_decisions_resolved": [
     {
@@ -17168,6 +17227,37 @@
       "test_plan": "Five synthetic PASS corrected PR head; merged push CI not retrievable in current connector, do not assert PASS/READY. No genuine member or cup-quality testing.",
       "release_queue": "DIC-Q-455-r322-next-recipe-unchanged-measured-dose-precision",
       "release_queue_status": "TESTING_MERGED_SOURCE_PUSH_CI_UNVERIFIED_NOT_DEPLOYED",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-PROP-323-RATING-VALIDATION-ALERT-PRESERVATION",
+      "severity": "P2_SAFE_ACCESSIBILITY_SAVE_VALIDATION_INTEGRITY",
+      "source": [
+        "LIVE-20261117-R323-LOG-SHOT-RATING-VALIDATION-ALERT"
+      ],
+      "evidence": [
+        "R455-EV-CODE-323-A",
+        "R455-EV-CI-323-B"
+      ],
+      "finding": "Tapping one rating after a failed Save silently hid the global validation message even though other marked-invalid fields remained.",
+      "user_benefit": "Keep unresolved Save errors visible and announced while members correct individual ratings; avoid losing feedback or cloud error context.",
+      "current_locked": "Five independent taste ratings required; preserve stored shot/notes/measurements and private history, recommendation one controllable variable, existing style/grinder/feed and privacy.",
+      "current_app": "Rate tap now only resolves its own invalid marking; shared alert clears once no unresolved marked-invalid fields remain.",
+      "proposed_change": "SAFE narrow UI/accessibility correction, no product policy changes.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "PR #3143 merge a0dd123f7b98c9fd25e2206c3efe53967cbdf8ca",
+      "files": [
+        "site/lib/ui.js",
+        "site/cloud/main.js",
+        "tests/cloud-shot-rating-focus.test.mjs",
+        "tests/issue455-r323-rating-validation-alert.test.mjs",
+        "docs/workstreams/ops-issue455-r323-rating-validation-alert-20261117.md"
+      ],
+      "test_plan": "Six real-source synthetic cases PASS, head+merged Node22 5372/0/6, cloud browser/mobile/offline/governance head+merged SUCCESS; head isolated SQL/security SUCCESS, original603 SKIPPED; actual member benefit untested.",
+      "release_queue": "DIC-Q-455-r323-rating-validation-alert-integrity",
+      "release_queue_status": "READY_DEV_ONLY_NOT_DEPLOYED",
       "production_deployed": false,
       "github267_literal_review_credit": 0
     }
