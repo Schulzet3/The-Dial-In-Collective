@@ -3930,6 +3930,46 @@
       "github267_literal_review_credit": 0,
       "implementation_status": "RESEARCH_ONLY_NO_APP_CHANGE",
       "production_deployed": false
+    },
+    {
+      "id": "LIVE-20261117-R327-UNRESOLVED-SHOT-FIELD-VALIDATION",
+      "title": "Log Shot edited physical field remains invalid after failed Save until it actually passes existing model bounds",
+      "type": "immutable_current_app_source_and_source_bound_hosted_ux_regression",
+      "source_branch": "development/backend-foundation",
+      "source_commit_sha": "1d32edc552a85336bf503e6316ad0ff3ccd62076",
+      "source_git_blobs": {
+        "site/lib/ui.js_before": "1b8109c255b51f846c151c976021891a752509e0",
+        "site/lib/ui.js_after": "af00c36ba1139b9faf1d2da3c28d6c9455643335",
+        "tests/issue455-r327-unresolved-shot-field.test.mjs": "ceedcd9b503dfe3fca51336554274d5dcc4420eb",
+        "docs/workstreams/ops-issue455-r327-unresolved-shot-field-20261117.md": "57f7f10df431d04bb26ba6af60774253aa28171f",
+        "docs/RELEASE_QUEUE.json_initial": "297105d840629dad7713056eb933a1d381616b5c"
+      },
+      "access": "DIRECT_IMMUTABLE_GITHUB_SOURCE_AND_PR_HEAD_MERGED_ACTIONS_LOGS",
+      "review_status": "SOURCE_REPRODUCED_NONFORCE_MERGED_SAFE_DEVELOPMENT_ONLY_READY",
+      "evidence_grade": "SOURCE_BEFORE_AFTER_EIGHT_POSITIVE_NEGATIVE_SYNTHETIC_REGRESSIONS_NO_ACTUAL_MEMBER_OUTCOME",
+      "claims_verified_externally": "No external science or espresso taste claim; existing source and hosted synthetic tests only. No member incident measured.",
+      "source_locators": [
+        "site/lib/ui.js unresolvedShotField, acknowledgeShotInput",
+        "site/lib/model.js validateShot",
+        "site/lib/constants.js CONFIG.bounds",
+        "site/cloud/main.js Log Shot input binding",
+        "tests/issue455-r327-unresolved-shot-field.test.mjs"
+      ],
+      "implementation_status": "SAFE_DEV_READY_NOT_DEPLOYED",
+      "implementation_pr": 3164,
+      "implementation_merge_sha": "1d32edc552a85336bf503e6316ad0ff3ccd62076",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0,
+      "ci_runs": [
+        44098707859,
+        44098707673,
+        44098707675,
+        44098707888,
+        44098707850,
+        44099483105,
+        44099483134,
+        44099483157
+      ]
     }
   ],
   "evidence_checks": [
@@ -11218,6 +11258,24 @@
       "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "implementation_status": "RESEARCH_ONLY_NO_APP_OR_NUMERIC_CHANGE",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CODE-327-A",
+      "source": "LIVE-20261117-R327-UNRESOLVED-SHOT-FIELD-VALIDATION",
+      "claim": "Before R327 an invalid dose, yield, time, grind or oversized note was acknowledged on any edit even when still outside Save's existing model bounds. R327 uses the original model bounds and code-point length at input acknowledgement to preserve invalid semantics and shared guidance, without changing actual Save validation, ratings, numeric rules or privacy.",
+      "source_locator": "site/lib/ui.js old blob 1b8109c255b51f846c151c976021891a752509e0, new af00c36ba1139b9faf1d2da3c28d6c9455643335; site/lib/model.js validateShot and site/lib/constants.js CONFIG.bounds; PR #3164 merged 1d32edc552a85336bf503e6316ad0ff3ccd62076",
+      "grade": "IMMUTABLE_BEFORE_AFTER_CURRENT_SOURCE_DIRECT_REVIEW",
+      "result": "SAFE_LOCKED_COMPATIBLE_CODE_FIX_NOT_REAL_MEMBER_OR_CUP_QUALITY_EVIDENCE",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CI-327-B",
+      "source": "LIVE-20261117-R327-UNRESOLVED-SHOT-FIELD-VALIDATION",
+      "claim": "Exact PR #3164 head Node, Chromium/390px/mobile/offline, isolated SQL, source security and governance SUCCESS; exact merged Node22 full suite 5397 PASS/0 FAIL/6 intentional SKIP and eight new R327 tests 4826-4833 PASS; exact merged browser/offline/governance SUCCESS. Targeted cloud unit NOT_APPLICABLE and original603 SKIPPED, never PASS.",
+      "source_locator": "PR #3164 head b4b3bad04bcea8db7c58836882c0cc57aaf746cf / merge 1d32edc552a85336bf503e6316ad0ff3ccd62076; Actions 44098707859,44098707673,44098707675,44098707888,44098707850,44099483105,44099483134,44099483157; R327 source/test/queue/same-commit journal exact head=merge Git blobs",
+      "grade": "EXACT_SOURCE_NODE22_5397_PASS_0_FAIL_6_INTENTIONAL_SKIP_AND_EIGHT_FOCUSED_CASES_PLUS_BROWSER_GOVERNANCE",
+      "result": "DEV_READY_NOT_DEPLOYED_NO_ESPRESSO_EFFECTIVENESS_OR_MEMBER_INCIDENT_CLAIM",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -11477,25 +11535,30 @@
       "run_id": "R455-326",
       "next": "Verify source-bound docs head CI; preserve concurrent ledger changes via nonforce merge/rebase, verify actual merged SHA/files and governance; original S019 and Oct29 ZIP source bytes remain inaccessible.",
       "owner_approval_now_required": false
+    },
+    {
+      "run_id": "R455-327",
+      "next": "Continue new non-overlapping research/source claim verification or source-reproduced SAFE Log Shot→Rate→Recommendation improvement; October 29 research archive and standalone S019 original bytes remain unverified; no member-outcome claims or #267 literal credit.",
+      "owner_approval_now_required": false
     }
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-326",
+    "run_id": "R455-327",
     "date": "2026-11-17",
-    "development_preflight_sha": "4b29995d0e32c18b70ab14c23295551360413035",
+    "development_preflight_sha": "3a08847f972107a83fff92d8f0574847f78ef743",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
     "source_counts": {
-      "sources": 190,
-      "evidence_checks": 563,
-      "proposals": 254
+      "sources": 191,
+      "evidence_checks": 565,
+      "proposals": 255
     },
-    "research_status": "ORIGINAL_RAW_AUTHOR_CSV_FULL_ROW_PARSE_COMPLETE_DOC_PR_UNDER_VERIFICATION",
-    "runtime_changed": false,
-    "tests_run": false,
+    "research_status": "SOURCE_BOUND_R327_SAFE_UI_FIX_VERIFIED_RECONCILIATION_DOC_PR_PENDING",
+    "runtime_changed": true,
+    "tests_run": true,
     "production_deployed": false,
     "github267_literal_review_credit": 0,
     "owner_approval_now_required": false,
-    "next": "Verify source-bound docs head CI; preserve concurrent ledger changes via nonforce merge/rebase, verify actual merged SHA/files and governance; original S019 and Oct29 ZIP source bytes remain inaccessible."
+    "next": "Read back docs CI and queue READY only after nonforce merge; then progress nonoverlapping science/UX findings."
   },
   "policy_decisions_resolved": [
     {
@@ -17537,6 +17600,38 @@
       "test_plan": "Docs-only governance and source CI; no unchanged Node22 suite repetition beyond existing CI; no personal member, live SQL/Auth, experimental or espresso trials.",
       "github267_literal_review_credit": 0,
       "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-327-RETAIN-UNRESOLVED-FIELD-VALIDATION",
+      "severity": "P2_SAFE_LOG_SHOT_ACCESSIBILITY_FEEDBACK_INTEGRITY",
+      "source": [
+        "LIVE-20261117-R327-UNRESOLVED-SHOT-FIELD-VALIDATION"
+      ],
+      "evidence": [
+        "R455-EV-CODE-327-A",
+        "R455-EV-CI-327-B"
+      ],
+      "finding": "Field edit previously dismissed the Save validation message before the edited physical measurement or notes were corrected, including last remaining invalid field.",
+      "user_benefit": "Keep actionable Save error guidance and aria-invalid semantics until the edited input is actually within existing bounds while preserving other invalid tastes and cloud errors.",
+      "current_locked": "All five taste inputs; original measured shot, notes/history; no new time/yield/grinder policy; one true controllable change, temperature and feed/style distinctions, Community/offline privacy.",
+      "current_app": "R327 checks only already-approved existing model bounds for edited invalid dose/yield/time/grind/notes before clearing local feedback. No new numeric limits or speculative science.",
+      "proposed_change": "Narrow SAFE UX validation feedback persistence, no owner product approval required for unchanged existing Save bounds.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "PR #3164 head b4b3bad04bcea8db7c58836882c0cc57aaf746cf source merged 1d32edc552a85336bf503e6316ad0ff3ccd62076 [skip netlify]",
+      "files": [
+        "site/lib/ui.js",
+        "site/lib/model.js (read only)",
+        "site/lib/constants.js (read only)",
+        "site/cloud/main.js (read only)",
+        "tests/issue455-r327-unresolved-shot-field.test.mjs",
+        "docs/workstreams/ops-issue455-r327-unresolved-shot-field-20261117.md"
+      ],
+      "test_plan": "Eight R327 positive/negative synthetic cases PASS; exact merged Node22 5397/0/6, 390px/Chromium/mobile/offline, source governance SUCCESS; head SQL/security SUCCESS; frozen603 SKIPPED, targeted cloud NOT_APPLICABLE. No real user or taste experiment.",
+      "release_queue": "DIC-Q-455-r327-unresolved-field-validation-feedback",
+      "release_queue_status": "READY_DEV_ONLY_NOT_DEPLOYED",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "changeScope": {
