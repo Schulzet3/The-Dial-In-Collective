@@ -3814,6 +3814,45 @@
         44060902016,
         44060902031
       ]
+    },
+    {
+      "id": "LIVE-20261117-R324-LOG-SHOT-INPUT-VALIDATION-ALERT",
+      "title": "Log Shot partial field correction prematurely erased unresolved Save validation message",
+      "type": "immutable_current_app_source_and_source_bound_hosted_ux_regression",
+      "source_branch": "development/backend-foundation",
+      "source_commit_sha": "e0348d0869f1c783f6c7470afb1048f2f2625139",
+      "source_git_blobs": {
+        "site/lib/ui.js_before": "0faf87694eeafb0dff619b5be7a8c7cf34da2581",
+        "site/lib/ui.js_after": "1b8109c255b51f846c151c976021891a752509e0",
+        "site/cloud/main.js": "e3464243bcbbf4477127e81f9b21e95a2fae2833",
+        "tests/issue455-r324-input-validation-alert.test.mjs": "9591a5ef88f322566260aa7ee3feab5c9c5cbb31",
+        "tests/issue455-r295-shot-validation-feedback.test.mjs": "8978031cf7779dd05da69e62cfd0369604ecddd2"
+      },
+      "access": "DIRECT_IMMUTABLE_GITHUB_SOURCE_AND_EXACT_HEAD_MERGED_ACTIONS_LOGS",
+      "review_status": "SOURCE_REPRODUCED_SAFE_NONFORCE_MERGED_DEVELOPMENT_ONLY_READY",
+      "evidence_grade": "DETERMINISTIC_BEFORE_AFTER_SOURCE_AND_SIX_POSITIVE_NEGATIVE_SYNTHETIC_REGRESSIONS_NO_REAL_MEMBER_OUTCOME",
+      "claims_verified_externally": "Not an external science or cup-quality claim; directly inspected source and hosted synthetic UX tests. Actual member occurrence and espresso quality effect unmeasured.",
+      "source_locators": [
+        "site/lib/ui.js acknowledgeShotInput()",
+        "site/cloud/main.js Log Shot input binding",
+        "tests/issue455-r324-input-validation-alert.test.mjs",
+        "tests/issue455-r295-shot-validation-feedback.test.mjs"
+      ],
+      "implementation_status": "SAFE_DEV_READY_NOT_DEPLOYED",
+      "implementation_pr": 3149,
+      "implementation_merge_sha": "e0348d0869f1c783f6c7470afb1048f2f2625139",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0,
+      "ci_runs": [
+        44069335890,
+        44069335963,
+        44069336049,
+        44069336018,
+        44069335974,
+        44069931811,
+        44069931658,
+        44069931986
+      ]
     }
   ],
   "evidence_checks": [
@@ -11032,6 +11071,24 @@
       "grade": "EXACT_HEAD_AND_MERGED_NODE22_5372_PASS_0_FAIL_6_INTENTIONAL_SKIP_6_SCOPED_REGRESSIONS",
       "result": "DEVELOPMENT_READY_NOT_DEPLOYED_NO_EMPIRICAL_QUALITY",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CODE-324-A",
+      "source": "LIVE-20261117-R324-LOG-SHOT-INPUT-VALIDATION-ALERT",
+      "claim": "Old acknowledgeShotInput cleared shared local Save feedback whenever edited field itself had aria-invalid, even if additional marked-invalid form controls/tastes remained. R324 now checks containing form for other aria-invalid controls before clearing final resolved local feedback; existing cloud input binding, valid-input error preservation, R295 final field and R323 rating paths retained.",
+      "source_locator": "site/lib/ui.js old blob 0faf87694eeafb0dff619b5be7a8c7cf34da2581 vs merged blob 1b8109c255b51f846c151c976021891a752509e0; site/cloud/main.js blob e3464243bcbbf4477127e81f9b21e95a2fae2833; PR #3149",
+      "grade": "IMMUTABLE_BEFORE_AFTER_CURRENT_SOURCE_DIRECT_REVIEW",
+      "result": "SAFE_LOCKED_COMPATIBLE_DEVELOPMENT_FIX_NO_EMPIRICAL_CUP_QUALITY",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CI-324-B",
+      "source": "LIVE-20261117-R324-LOG-SHOT-INPUT-VALIDATION-ALERT",
+      "claim": "Clean replacement PR #3149 exact head and merged source Node22 5382 PASS/0 FAIL/6 intentional SKIP; six R324 regressions #4813-4818 and prior R295 #4752-4754 PASS in independently inspected merged job log. Exact head SQL/security/browser/mobile/offline/governance SUCCESS, exact merged browser mobile 390px/offline/a11y and governance SUCCESS; frozen603 SKIPPED, targeted cloud unit NOT_APPLICABLE. Earlier abandoned PR #3148 Node22 two failures and malformed preflight governance remain failed historical evidence.",
+      "source_locator": "PR #3149 exact head be6dbba4df35897c758b3818ba582542cf119355, merge e0348d0869f1c783f6c7470afb1048f2f2625139; Actions 44069335890,44069335963,44069336049,44069336018,44069335974; merged push 44069931811,44069931658,44069931986; original failed 44067809720,44068788552",
+      "grade": "EXACT_HEAD_AND_MERGED_NODE22_5382_PASS_0_FAIL_6_INTENTIONAL_SKIP_6_SCOPED_AND_R295_PASS",
+      "result": "DEVELOPMENT_READY_NOT_DEPLOYED_NO_REAL_MEMBER_OR_QUALITY_EVIDENCE",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -11280,17 +11337,18 @@
     "R455-320 shot history original measurement precision source merged 55c5d5d42079cd95aca3e4a8a7252121a02e8cc3; five synthetic PASS, head/merge Node22 5343/0/6, browser/governance SUCCESS. Docs reconciliation pending own CI. Original S019/Oct29 ZIP unverified; no #267 literal credit or measured member quality outcomes.",
     "R321 date-only History display source PR #3132 merged 145076b4ce7808faf10971636c05b9e28ca2e883; three synthetic cases and head/merged Node22 5351/0/6 SUCCESS. No member/production operation, no #267 line-by-line credit. Continue primary research claim validation; S019 and October29 ZIP originals still unverified.",
     "R322 source PR #3135 merged 81d82f58a6060d30058d2992da7780a5b7c74d9e with all five final Git blobs matched corrected passing PR head; initial synthetic fixture test failure 44045885571 repaired, corrected head 44046638627 5361 PASS/0 FAIL/6 SKIP and four additional applicable head checks SUCCESS. Merged push CI not retrievable via current connector, leave R322 TESTING not READY. No deploy/member/Locked change; original S019/Oct29 ZIP unverified, no #267 line credit.",
-    "R323 PR #3143 six source/test/journal/queue Git blobs matched exact nonforce merge a0dd123f7b98c9fd25e2206c3efe53967cbdf8ca; head+merged Node22 5372/0/6, six focused synthetic PASS, mobile/browser/offline/governance SUCCESS; head isolated SQL/security SUCCESS. Dev READY only, no deployment. Source #455 remains open for unfinished citation/effectiveness work, S019/Oct29 ZIP unverified and #267 semantic audit not duplicated."
+    "R323 PR #3143 six source/test/journal/queue Git blobs matched exact nonforce merge a0dd123f7b98c9fd25e2206c3efe53967cbdf8ca; head+merged Node22 5372/0/6, six focused synthetic PASS, mobile/browser/offline/governance SUCCESS; head isolated SQL/security SUCCESS. Dev READY only, no deployment. Source #455 remains open for unfinished citation/effectiveness work, S019/Oct29 ZIP unverified and #267 semantic audit not duplicated.",
+    "R324 clean source PR #3149 merged e0348d0869f1c783f6c7470afb1048f2f2625139 and independently read merged Node22 log 5382/0/6, six new R324 cases and older R295 pass, real Chromium/mobile/offline/a11y/governance PASS; dev queue READY after documentation integration. Original #3148 failed, kept unmerged. Continue nonoverlapping #455 primary claim checks and genuinely new SAFE Log Shot UX, no #267 literal credit. October29 ZIP and standalone S019 bytes not verified."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-323",
+    "run_id": "R455-324",
     "date": "2026-11-17",
-    "development_preflight_sha": "cebdd9e7b5c67521df54c6b0d95dda8e05fc7b6a",
+    "development_preflight_sha": "e0348d0869f1c783f6c7470afb1048f2f2625139",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
     "source_counts": {
-      "sources": 187,
-      "evidence_checks": 557,
-      "proposals": 251
+      "sources": 188,
+      "evidence_checks": 559,
+      "proposals": 252
     },
     "research_status": "SOURCE_MERGED_EXACT_HEAD_AND_MERGED_CI_PASS_RESEARCH_INCOMPLETE",
     "runtime_changed": true,
@@ -11298,7 +11356,7 @@
     "production_deployed": false,
     "github267_literal_review_credit": 0,
     "owner_approval_now_required": false,
-    "next": "Continue disjoint source/citation verification and SAFE Log Shot UX; original S019/Oct29 ZIP bytes remain unavailable. Do not credit #267 audit or claim real cup-quality improvement."
+    "next": "Verify docs-only reconciliation PR checks and merged governance; then continue distinct source/citation audit or safe Log Shot improvement. Original standalone S019 and Oct29 ZIP bytes remain unverified. No member/quality experiment, #267 credit 0."
   },
   "policy_decisions_resolved": [
     {
@@ -17257,6 +17315,37 @@
       ],
       "test_plan": "Six real-source synthetic cases PASS, head+merged Node22 5372/0/6, cloud browser/mobile/offline/governance head+merged SUCCESS; head isolated SQL/security SUCCESS, original603 SKIPPED; actual member benefit untested.",
       "release_queue": "DIC-Q-455-r323-rating-validation-alert-integrity",
+      "release_queue_status": "READY_DEV_ONLY_NOT_DEPLOYED",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-PROP-324-INPUT-VALIDATION-ALERT-PRESERVATION",
+      "severity": "P2_SAFE_ACCESSIBILITY_FORM_VALIDATION_INTEGRITY",
+      "source": [
+        "LIVE-20261117-R324-LOG-SHOT-INPUT-VALIDATION-ALERT"
+      ],
+      "evidence": [
+        "R455-EV-CODE-324-A",
+        "R455-EV-CI-324-B"
+      ],
+      "finding": "Correcting one invalid shot input unexpectedly removed shared Save validation guidance despite other invalid fields or taste groups remaining.",
+      "user_benefit": "Keep outstanding form guidance visible while correcting one field, without suppressing genuine cloud/server feedback or dropping any taste rating.",
+      "current_locked": "All five independent taste ratings, original saved shot/notes/history, one controllable advice change, style/grinder/feed/equipment boundaries and member privacy remain unchanged.",
+      "current_app": "The form acknowledges only the edited invalid control; the shared local alert clears only when no invalid controls remain in its containing form; ordinary valid inputs preserve unrelated cloud feedback.",
+      "proposed_change": "SAFE narrowly scoped local validation feedback integrity; no Locked product/numeric/scientific change.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "Clean PR #3149 nonforce [skip netlify] merged e0348d0869f1c783f6c7470afb1048f2f2625139; flawed predecessor #3148 closed unmerged",
+      "files": [
+        "site/lib/ui.js",
+        "site/cloud/main.js (read only)",
+        "tests/issue455-r324-input-validation-alert.test.mjs",
+        "tests/issue455-r295-shot-validation-feedback.test.mjs",
+        "docs/workstreams/ops-issue455-r324-input-validation-alert-20261117.md"
+      ],
+      "test_plan": "Six R324+existing R295 positive/negative cases PASS; exact source head and merge Node22 5382/0/6, relevant Chromium/390px/mobile/offline/a11y and approval head+merge SUCCESS; head isolated SQL/security SUCCESS; frozen603 SKIPPED, targeted cloud unit NOT_APPLICABLE. No real-member quality effect testing.",
+      "release_queue": "DIC-Q-455-r324-partial-input-validation-alert",
       "release_queue_status": "READY_DEV_ONLY_NOT_DEPLOYED",
       "production_deployed": false,
       "github267_literal_review_credit": 0
