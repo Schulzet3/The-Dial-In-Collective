@@ -15748,10 +15748,10 @@
     {
       "id": "DIC-Q-455-r322-next-recipe-unchanged-measured-dose-precision",
       "issue": 455,
-      "pr": null,
+      "pr": 3135,
       "title": "Preserve exact unchanged recorded shot dose precision in Next Recipe",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "81d82f58a6060d30058d2992da7780a5b7c74d9e",
       "scope_paths": [
         "site/lib/engine.js",
         "site/lib/ui.js"
@@ -15759,13 +15759,22 @@
       "owner_source": "Issue #455 Option B SAFE; DIC_PREFLIGHT_VERIFIED development_sha=992262e1ae2f8787b51d5040b2b31436a9803d8d preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "tests": [
         "Source inspected: Next Recipe rec.doseG uses an unchanged original 18.25 g but one-decimal RecipeGrid fmt renders 18.3 g, implying another control change; not a real member incident.",
-        "Five focused synthetic Node22 regressions authored; no execution, hosted CI or empirical cup-quality evidence yet."
+        "Five focused synthetic Node22 regressions authored; no execution, hosted CI or empirical cup-quality evidence yet.",
+        "Initial head e97224bafaafdeeba41e2b73b57420a43dc5625c Node22/lint 44045885571 FAILED 5360 pass/1 fail/6 intentional SKIP because one synthetic fixture wrongly expected basket 20g instead of actual 18g; source code did not fail, four R322 cases passed. Corrected test-only plus NEW same-commit preflight receipt on head 31e8c74046be60338460b775a6d3a31cc0c76a82.",
+        "Corrected head Node22/lint 44046638627 SUCCESS 5361 pass/0 fail/6 intentional SKIP; five R322 tests 4793–4797 PASS. PR head 44046638496 security, 44046638552 cloud/mobile/offline/browser, 44046638615 isolated SQL, 44046638529 approval governance SUCCESS. Original603 44046638653 SKIPPED not PASS.",
+        "Nonforce [skip netlify] PR #3135 squash merged 81d82f58a6060d30058d2992da7780a5b7c74d9e; ALL FIVE final source/test/queue/journal Git blobs exactly match corrected PR head. Merged push-run CI could not be independently retrieved with this PR-only workflow-run connector, and is NOT asserted PASS. Development only, queue still TESTING until full source-bound merged evidence recovered."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        44046638627,
+        44046638496,
+        44046638552,
+        44046638615,
+        44046638529
+      ],
       "blockers": [
-        "Exact PR-head and merged-source applicable CI, source blob verification and docs reconciliation pending"
+        "Merged push-source CI cannot be independently retrieved via current PR-only run connector; verify exact actual merged run before READY promotion"
       ],
-      "notes": "Development-only TESTING. Preserve all five tastes, original shots/notes/history, style/feed/setup and Locked numeric rules. Do not publish or access member/provider data.",
+      "notes": "Five focused regressions passed at corrected PR head, one initial synthetic fixture expectation fixed, nonforce merge and blob parity verified. Merged push CI pending independent receipt; development-only TESTING NOT READY/DEPLOYED. No new member data, policy, provider operations, empirical coffee quality or #267 line credit.",
       "production_deployed": false
     }
   ],

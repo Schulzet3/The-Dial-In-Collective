@@ -3739,6 +3739,41 @@
         44041987063,
         44041987046
       ]
+    },
+    {
+      "id": "LIVE-20261117-R322-UNCHANGED-MEASURED-DOSE-NEXT-RECIPE",
+      "type": "immutable_current_application_source_and_hosted_synthetic_regressions",
+      "title": "Next Recipe silently rounds unchanged recorded dose measurement during grind/yield/preparation advice",
+      "source_branch": "development/backend-foundation",
+      "source_commit_sha": "81d82f58a6060d30058d2992da7780a5b7c74d9e",
+      "source_git_blobs": {
+        "site/lib/engine.js_before": "7dbc8f29e81edb1bc227066cb4fd9e5144803afd",
+        "site/lib/engine.js_after": "90c55379be60a252a2026e01bb3d786b66c49aef",
+        "site/lib/ui.js_before": "e8b6b1de2412f7626517b60c3edf36b1aecea975",
+        "site/lib/ui.js_after": "d9127077364ec8d234666aa9d9fce1a87e3a5515",
+        "tests/issue455-r322-next-recipe-measured-dose.test.mjs": "a7e523beba53a38502c2fd3bf9e0078f8a89e879"
+      },
+      "access": "DIRECT_IMMUTABLE_GITHUB_BEFORE_AFTER_PR_HEAD_CI_AND_MERGED_BLOB_PARITY",
+      "review_status": "SOURCE_NONFORCE_MERGED_PR_HEAD_PASS_MERGED_PUSH_CI_NOT_INDEPENDENTLY_RETRIEVED",
+      "evidence_grade": "DETERMINISTIC_CODE_PATH_AND_FIVE_SYNTHETIC_TESTS_NO_REAL_MEMBERS_OR_ESPRESSO_OUTCOMES",
+      "claims_verified_externally": "Source shows measured doseG=18.25 preserved internally but previously rendered 18.3 in Next Recipe; source now preserves original display precision when unchanged. This is not external science or observed member usage.",
+      "source_locators": [
+        "site/lib/engine.js recommendation() measured dose",
+        "site/lib/ui.js recipeGrid() and nextShotAdjustment()",
+        "tests/issue455-r322-next-recipe-measured-dose.test.mjs"
+      ],
+      "implementation_status": "SOURCE_MERGED_PR_HEAD_VALIDATED_RELEASE_QUEUE_TESTING_NOT_DEPLOYED",
+      "implementation_pr": 3135,
+      "implementation_merge_sha": "81d82f58a6060d30058d2992da7780a5b7c74d9e",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0,
+      "ci_runs": [
+        44046638627,
+        44046638496,
+        44046638552,
+        44046638615,
+        44046638529
+      ]
     }
   ],
   "evidence_checks": [
@@ -10921,6 +10956,24 @@
       "grade": "EXACT_SOURCE_HOSTED_NODE22_5351_PASS_0_FAIL_6_INTENTIONAL_SKIPS",
       "result": "DEV_READY_NOT_DEPLOYED_NO_CUP_QUALITY_CLAIM",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CODE-322-A",
+      "source": "LIVE-20261117-R322-UNCHANGED-MEASURED-DOSE-NEXT-RECIPE",
+      "claim": "Unchanged 18.25g dose from the last measured shot previously appeared as 18.3g on grind-only/yield-only/diagnostic Next Recipe, implying a second change. New explicit equality guard and unchanged-measurement formatting preserve actual dose; original shots, five ratings and Locked targets unchanged.",
+      "source_locator": "site/lib/engine.js 7dbc8f29e81edb1bc227066cb4fd9e5144803afd -> 90c55379be60a252a2026e01bb3d786b66c49aef; site/lib/ui.js e8b6b1de2412f7626517b60c3edf36b1aecea975 -> d9127077364ec8d234666aa9d9fce1a87e3a5515",
+      "grade": "IMMUTABLE_CURRENT_SOURCE_BEFORE_AFTER_AND_MERGED_BLOB_PARITY",
+      "result": "SAFE_LOCKED_COMPATIBLE_SOURCE_MERGED_NO_EMPIRICAL_QUALITY_CLAIM",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CI-322-B",
+      "source": "LIVE-20261117-R322-UNCHANGED-MEASURED-DOSE-NEXT-RECIPE",
+      "claim": "Initial head Node22 5360 PASS/1 FAIL/6 SKIP from synthetic test fixture misunderstanding; corrected exact head Node22 5361 PASS/0 FAIL/6 SKIP, all five R322 positive/negative cases 4793–4797 PASS, browser/mobile/offline/SQL/security/governance PR-head SUCCESS; merged source blob parity verified but merged push CI not independently retrieved.",
+      "source_locator": "PR #3135 corrected head 31e8c74046be60338460b775a6d3a31cc0c76a82 exact-source GitHub Actions 44046638627,44046638496,44046638552,44046638615,44046638529; initial fail 44045885571 preserved; nonforce merge 81d82f58a6060d30058d2992da7780a5b7c74d9e",
+      "grade": "EXACT_PR_HEAD_HOSTED_NODE22_5361_PASS_0_FAIL_6_INTENTIONAL_SKIPS_MERGED_PUSH_UNVERIFIED",
+      "result": "PR_HEAD_VALIDATED_SOURCE_MERGED_QUEUE_TESTING_NOT_READY_NOT_DEPLOYED",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -11167,25 +11220,26 @@
     "R455-318 source PR #3116 NONFORCE MERGED development a91bd34d371d1a564c4212c30022f9e29d32ec26 after final head and merged exact Node22 5324 pass/0 fail/6 skip and five new synthetic PASS; mobile browser initial offline timeout rerun success; frozen603 skipped, neither empirical quality claim nor deployment. Final docs-only CI/merge/readback pending. #267 literal line audit separate; October29 ZIP and S019 raw not accessible in this session.",
     "R455-319 SAFE original measured yield 36.35 display fixed in Next Recipe; PR #3122 merged e92b15de8c0032eb528b8df801a10e5025aed4e6, exact five source Git blobs matched, five synthetic tests PASS, head+merge Node22 5333/0/6 and browser/approval SUCCESS. R319 docs READY reconciliation pending exact docs CI/merge. No deployment, member/Provider changes, #267 line credit or new science policy.",
     "R455-320 shot history original measurement precision source merged 55c5d5d42079cd95aca3e4a8a7252121a02e8cc3; five synthetic PASS, head/merge Node22 5343/0/6, browser/governance SUCCESS. Docs reconciliation pending own CI. Original S019/Oct29 ZIP unverified; no #267 literal credit or measured member quality outcomes.",
-    "R321 date-only History display source PR #3132 merged 145076b4ce7808faf10971636c05b9e28ca2e883; three synthetic cases and head/merged Node22 5351/0/6 SUCCESS. No member/production operation, no #267 line-by-line credit. Continue primary research claim validation; S019 and October29 ZIP originals still unverified."
+    "R321 date-only History display source PR #3132 merged 145076b4ce7808faf10971636c05b9e28ca2e883; three synthetic cases and head/merged Node22 5351/0/6 SUCCESS. No member/production operation, no #267 line-by-line credit. Continue primary research claim validation; S019 and October29 ZIP originals still unverified.",
+    "R322 source PR #3135 merged 81d82f58a6060d30058d2992da7780a5b7c74d9e with all five final Git blobs matched corrected passing PR head; initial synthetic fixture test failure 44045885571 repaired, corrected head 44046638627 5361 PASS/0 FAIL/6 SKIP and four additional applicable head checks SUCCESS. Merged push CI not retrievable via current connector, leave R322 TESTING not READY. No deploy/member/Locked change; original S019/Oct29 ZIP unverified, no #267 line credit."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-321",
+    "run_id": "R455-322",
     "date": "2026-11-17",
-    "development_preflight_sha": "9474daa7526a68cd65301e7c08bf2ca65360c274",
+    "development_preflight_sha": "929a34d39dbd0e359e5beabd99bc0d5de3796c9e",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
     "source_counts": {
-      "sources": 185,
-      "evidence_checks": 553,
-      "proposals": 249
+      "sources": 186,
+      "evidence_checks": 555,
+      "proposals": 250
     },
-    "research_status": "R321_SAFE_MERGED_SOURCE_CI_PASS_DEV_ONLY",
+    "research_status": "SAFE_SOURCE_MERGED_HEAD_CI_PASS_MERGED_PUSH_CI_PENDING",
     "runtime_changed": true,
     "tests_run": true,
     "production_deployed": false,
     "github267_literal_review_credit": 0,
     "owner_approval_now_required": false,
-    "next": "Verify R321 docs merge and exact source governance, continue source claims and UX work, Oct29 ZIP/S019 original unverified."
+    "next": "Obtain independent merged-source PR #3135 push CI receipts (GitHub PR-run connector excludes push), then promote existing TESTING R322 row only if applicable merged checks successful; continue #335 transferred research claim verification, ZIP/S019 original bytes unverified."
   },
   "policy_decisions_resolved": [
     {
@@ -17084,6 +17138,36 @@
       "test_plan": "Three R321 positive/negative PASS, exact PR-head+merge Node22 5351/0/6 plus UX/approval PASS; real member outcome untested.",
       "release_queue": "DIC-Q-455-r321-history-calendar-date-display",
       "release_queue_status": "READY_DEV_ONLY_NOT_DEPLOYED",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-PROP-322-UNCHANGED-MEASURED-DOSE-PRECISION",
+      "severity": "P2_SAFE_UX_ORIGINAL_MEASUREMENT_INTEGRITY",
+      "source": [
+        "LIVE-20261117-R322-UNCHANGED-MEASURED-DOSE-NEXT-RECIPE"
+      ],
+      "evidence": [
+        "R455-EV-CODE-322-A",
+        "R455-EV-CI-322-B"
+      ],
+      "finding": "Next Recipe silently rounded unchanged original non-tenth dose, visually suggesting an unapproved second controlled adjustment.",
+      "user_benefit": "Display actual measured dose faithfully while keeping new target and baseline basket tenth precision, preserving single-change guidance.",
+      "current_locked": "All five taste inputs, original private shots/notes/history, one truly controllable change, basket-based new-recipe starting dose, no new numeric science policy.",
+      "current_app": "Merged safe correction with explicit measured-dose-unchanged predicate and precision-safe original-control formatter.",
+      "proposed_change": "SAFE source implemented; merged-source CI evidence pending before READY.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "PR #3135 source nonforce merged 81d82f58a6060d30058d2992da7780a5b7c74d9e with final five Git blobs identical to PR head 31e8c74046be60338460b775a6d3a31cc0c76a82",
+      "files": [
+        "site/lib/engine.js",
+        "site/lib/ui.js",
+        "tests/issue455-r322-next-recipe-measured-dose.test.mjs",
+        "docs/workstreams/ops-issue455-r322-next-recipe-measured-dose-20261117.md"
+      ],
+      "test_plan": "Five synthetic PASS corrected PR head; merged push CI not retrievable in current connector, do not assert PASS/READY. No genuine member or cup-quality testing.",
+      "release_queue": "DIC-Q-455-r322-next-recipe-unchanged-measured-dose-precision",
+      "release_queue_status": "TESTING_MERGED_SOURCE_PUSH_CI_UNVERIFIED_NOT_DEPLOYED",
       "production_deployed": false,
       "github267_literal_review_credit": 0
     }
