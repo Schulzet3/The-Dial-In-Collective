@@ -15971,24 +15971,32 @@
     {
       "id": "DIC-Q-455-r327-unresolved-field-validation-feedback",
       "issue": 455,
-      "pr": null,
+      "pr": 3164,
       "title": "Keep Log Shot invalid-field feedback until the edited physical measurement or notes actually becomes valid",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "1d32edc552a85336bf503e6316ad0ff3ccd62076",
       "scope_paths": [
         "site/lib/ui.js"
       ],
       "owner_source": "Issue #455 Option B SAFE, Locked existing model bounds only. DIC_PREFLIGHT_VERIFIED development_sha=ec03e10ee456738681a1d042e08b603dcbde3f70 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "tests": [
         "Source-repro: R324 partial-alert acknowledgement clears the last invalid dose/yield/time/grinder/notes field whenever any edit occurs, even while its new value remains outside current existing Save bounds.",
-        "R327 focused negative/positive synthetic regression added, including original model limits, Unicode notes, remaining invalid group, cloud error, reentry correction. GitHub CI and live-member acceptance pending."
+        "R327 eight focused synthetic Node22 negative/positive regressions #4826-4833 PASS at exact source merge 1d32edc: dose/yield/time bounds, grinder blank/negative/real zero, 16,000 Unicode codepoints, remaining invalid taste, unrelated cloud error, actual CloudApp input handler.",
+        "PR #3164 head b4b3bad04bcea8db7c58836882c0cc57aaf746cf safely nonforce squash merged [skip netlify] 1d32edc552a85336bf503e6316ad0ff3ccd62076; all four changed source/test/queue/SAME-COMMIT journal Git blobs head=merge.",
+        "Exact source merged Node22/lint run 44099483105: 5,397 PASS/0 FAIL/6 intentional SKIP; eight R327 cases 4826-4833 independently read in full run job log. Head Node22 44098707859, real Chromium/mobile/offline 44098707673, isolated SQL 44098707675, security 44098707888 and governance 44098707850 SUCCESS. Merged real browser/offline 44099483134 and governance 44099483157 SUCCESS. Merged targeted cloud unit NOT_APPLICABLE and original603 SKIPPED, not PASS."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact source-bound Node22, Chromium/mobile/offline/a11y, SQL/privacy/security and governance acceptance plus nonforce source merge and readback pending.",
-        "No owner Publish instruction; production not authorized."
+      "ci_runs": [
+        44098707859,
+        44098707673,
+        44098707675,
+        44098707888,
+        44098707850,
+        44099483105,
+        44099483134,
+        44099483157
       ],
-      "notes": "TESTING development only. UI feedback semantics; no adjustment to numeric bounds, five taste ratings, recipes, private history, styles/feed, offline, Community, member access or providers. Temperature F/C conversion stays in existing Save path. No taste-effectiveness claim.",
+      "blockers": [],
+      "notes": "READY DEVELOPMENT ONLY; no Publish/deployment. Original model physical bounds and Unicode notes now retain unresolved local field aria-invalid and shared Save message until edited value satisfies existing rules. Five ratings, original shots/notes/history, one-control recommendation, styles/feed/grinder/equipment, privacy/Community/offline unchanged. Actual member incidence or espresso cup quality unmeasured. Release/main/provider/member unchanged.",
       "production_deployed": false
     }
   ],
@@ -18739,6 +18747,15 @@
       "source_sha": "66e2d2ec5cf9450e4b11c809ccbe260b0511f5e2",
       "production_deployed": false,
       "evidence": "R310c PR #3160 merged. Six PR-head and five exact merged-source CI workflows succeeded; isolated SQL log executed Admin regression. Separate release isolation/hosted Auth unverified."
+    },
+    {
+      "date": "2026-11-17",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r327-unresolved-field-validation-feedback",
+      "state": "READY",
+      "source_sha": "1d32edc552a85336bf503e6316ad0ff3ccd62076",
+      "production_deployed": false,
+      "evidence": "PR #3164 nonforce source merge 1d32edc; four identical head/merge Git blobs, exact PR-head Node/UX/SQL/security/governance success; exact merged Node22 5397 PASS/0 FAIL/6 SKIP with eight R327 cases #4826-4833 PASS, merged browser/mobile/offline and governance success; frozen603 SKIPPED, targeted cloud unit NOT_APPLICABLE. No member/production/quality claim."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
