@@ -8,6 +8,28 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-r321-history-calendar-date-display",
+      "issue": 455,
+      "pr": null,
+      "title": "Render date-only archived Shot History calendar dates without timezone day drift",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/ui.js"
+      ],
+      "owner_source": "Issue #455 autonomous Option B SAFE Locked-compatible; DIC_PREFLIGHT_VERIFIED development_sha=6b6df2a9b4b48e1e1f23b34cb14756b76dfe6e94 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Exact immutable UI source formerly parsed YYYY-MM-DD as a UTC instant; negative America/Denver example 2026-11-05 appeared 11/4/2026. Three Node22 tests newly authored; hosted source-bound CI NOT YET EXECUTED.",
+        "Positive/negative synthetic cases include Denver/Auckland/UTC, valid leap date, offset-bearing real instants, invalid dates, and original five tastes/shot/notes immutability."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source PR and merged Node22, mobile/browser/offline and approval CI pending. No READY or production release."
+      ],
+      "notes": "Development-only TESTING: correct visible date-only historical calendar provenance; preserve offset-bearing ISO instant display. No data mutation, science change, telemetry or empirical quality claim.",
+      "production_deployed": false
+    },
+    {
       "id": "DIC-Q-455-r320-shot-history-measured-precision",
       "issue": 455,
       "pr": 3126,
