@@ -1,0 +1,16 @@
+# #455 R324 — Preserve partial Log Shot input validation feedback [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=d491f7b0ee12c3d16eaf6e721ea6a12b79319767 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+## Mandatory immutable preflight and authority
+Live development SHA d491f7b0ee12c3d16eaf6e721ea6a12b79319767, exact PREFLIGHT Git blob 2fb236bbfa6bac48513eeb3bd157b260853af06d fetched/checked before AGENTS, issue, scoped source and providers. Prewrite development rechecked at same SHA and base tree e8453f8c20811cc962797f65f5f9701ad9437ed6. Main 3b372215ac7ccfd6db406f27090706e8cb8f3e80 and release 0f3641b4fff07e2a88d7747e621304ec2cf0ead5 read only. Owner #455 Option B SAFE Locked-compatible correction, not new taste/numeric policy.
+
+## Reproducible source finding, scope, tests
+Current site/lib/ui.js original Git blob 0faf87694eeafb0dff619b5be7a8c7cf34da2581; acknowledgeShotInput(target,feedback) removes invalid marker on one input, then ALWAYS erased shared Save validation feedback if that one field was marked invalid. Other invalid fields or missing taste groups retain aria-invalid but lose the shared explanation. This is a **distinct partial-form state** from R295 fixing stale feedback when final invalid field is edited and from R323 fixing partial rating taps. Site/cloud/main.js Git blob e3464243bcbbf4477127e81f9b21e95a2fae2833 invokes the existing input acknowledgement. No real member occurrence established.
+
+Exactly four same-commit paths: site/lib/ui.js; tests/issue455-r324-input-validation-alert.test.mjs; docs/RELEASE_QUEUE.json; this scoped journal. Code now only clears the resolved local alert if the input was flagged invalid, the containing form exists and NO remaining marked invalid control exists; otherwise preserves feedback. Cloud handler, saved original shot/notes, all five tastes and all-green distinction, one controllable recommendation, Turbo/Fast-Flow and Slow Feed, grinder versions/calibration, temperatures, Community/offline/SQL/Auth/RLS/privacy unchanged. No user data capture, numerical science or policy edit.
+
+Six direct Node22 synthetic positive and negative regressions authored: (1) other invalid yield, (2) other unrated tastes, (3) last invalid field, (4) valid input with unrelated cloud error, (5) detached invalid field, (6) live event wiring. At authoring all actual test commands, GitHub PR and CI **NOT YET EXECUTED**; no PASS/READY/DEPLOYED claim. Prior queue 399 items/188 history preserved; new unique DIC-Q-455-r324-partial-input-validation-alert is TESTING, not published. Original October 29 implementation ZIP and S019 bytes remain unverified, #267 line-by-line credit ZERO, no empirically better espresso claims.
+
+## Next action
+Create isolated non-destructive PR; verify exact changed paths and full source/queue/journal blobs, run focused and applicable hosted Node22, real Chromium/mobile/offline/a11y, selected SQL/security/governance by #457 risk tier; repair failures with a **new** same-commit preflight journal line; nonforce [skip netlify] merge only on source-bound PASS, inspect merge SHA and actual push CI; then reconcile canonical #455 research ledger, CURRENT_STATUS and queue via separately governed docs change, and issue comment. Do not publish or move main/release or write production providers.
