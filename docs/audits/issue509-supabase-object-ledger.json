@@ -4577,6 +4577,20 @@
       "new_verified_defects": 0,
       "baseline": "IN_PROGRESS",
       "next": "Reconcile current 114 SQL signatures against historical full direct coverage receipts; inspect first unreviewed current provider definition."
+    },
+    {
+      "run": "R314 Nov17 2026",
+      "preflight_sha": "96d73f22205aa3ff879b1f6e030756a637e810f3",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r314-app-function-current-source-reconciliation-20261117.json",
+      "current_app_sql_source_coverage": "114_OF_114_CURRENT_MD5_RECONCILED",
+      "two_direct_full_bodies_chars": 19570,
+      "new_first_time_duplicate_credit": 0,
+      "known_unpublished_null_guard": "ALREADY_IN_SOURCE_NOT_NEW",
+      "new_defects": 0,
+      "production_writes": 0,
+      "baseline": "IN_PROGRESS",
+      "next": "First genuinely changed/unreviewed nonapp provider definition; hosted provider console UNVERIFIED."
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -23033,5 +23047,23 @@
     "first_time_word_credit": 0,
     "production_writes": 0,
     "baseline": "IN_PROGRESS"
+  },
+  "provider_current_app_function_full_receipt_reconciliation_run314": {
+    "run": 314,
+    "receipt_path": "docs/audits/issue509-r314-app-function-current-source-reconciliation-20261117.json",
+    "preflight_development_sha": "96d73f22205aa3ff879b1f6e030756a637e810f3",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "current_live_app_sql_functions": 114,
+    "unchanged_original_exact_hash_and_reviewed": 75,
+    "added_exact_hash_complete_body_receipt": 22,
+    "changed_exact_hash_complete_body_receipt": 17,
+    "new_complete_current_body_reads": 2,
+    "new_direct_body_characters": 19570,
+    "first_time_duplicate_coverage_credit": 0,
+    "full_provider_baseline": "IN_PROGRESS",
+    "no_new_defect_or_source_change": true,
+    "provider_writes": 0,
+    "queue_state": "NOT_UPDATED_QUEUE_CURRENT_CONTENT_UNVERIFIED",
+    "next": "First genuinely changed/new/unreviewed nonapp provider object and remaining source-isolated acceptance, no restart."
   }
 }

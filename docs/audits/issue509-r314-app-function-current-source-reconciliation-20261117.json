@@ -1,0 +1,455 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 314,
+  "observed_date_utc": "2026-11-17",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "96d73f22205aa3ff879b1f6e030756a637e810f3",
+    "git_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "fetch_file_blob_content_identical": true,
+    "branch_rechecked_before_write": true
+  },
+  "branches": {
+    "main": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release_production": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+  },
+  "source_material": {
+    "historical_direct_semantic_review": "99/99 original application SQL function bodies",
+    "historical_ledger_path": "docs/audits/issue509-supabase-object-ledger.json",
+    "current_114_metadata_receipt": "docs/audits/issue509-r308-current-function-manifest-admin-lifecycle-20261117.json"
+  },
+  "current_application_functions": {
+    "current_signature_count": 114,
+    "previous_unchanged_and_source_complete": 75,
+    "new_signatures_with_matching_complete_source_receipts": 22,
+    "changed_original_signatures": 17,
+    "removed_old_signatures": 7,
+    "current_full_source_receipt_reconciliation": "114_OF_114_AT_MATCHING_FUNCTION_MD5",
+    "added_signatures": [
+      {
+        "signature": "private.dic_admin_account_delete_finish(p_operation_id uuid, p_actor_id uuid)",
+        "source_md5": "51cd64deed985a9ddf622926b8784a84",
+        "source_characters": 2492,
+        "matching_complete_source_receipts": [
+          "R292",
+          "R312"
+        ]
+      },
+      {
+        "signature": "private.dic_admin_account_delete_impact(p_member_id uuid)",
+        "source_md5": "a20e399d6c87c60be0661c80a17728d4",
+        "source_characters": 1588,
+        "matching_complete_source_receipts": [
+          "R292",
+          "R312"
+        ]
+      },
+      {
+        "signature": "private.dic_admin_account_delete_prepare(p_operation_id uuid, p_actor_id uuid)",
+        "source_md5": "6e7e0589cbda1bc5023771724ce8b77f",
+        "source_characters": 3899,
+        "matching_complete_source_receipts": [
+          "R292",
+          "R312"
+        ]
+      },
+      {
+        "signature": "private.dic_admin_account_delete_preview(p_member_id uuid)",
+        "source_md5": "55ad6325a6a3b8eb97d830bd4a5acc26",
+        "source_characters": 687,
+        "matching_complete_source_receipts": [
+          "R292",
+          "R312"
+        ]
+      },
+      {
+        "signature": "private.dic_admin_account_delete_request(p_member_id uuid, p_community_mode text, p_expected_impact jsonb)",
+        "source_md5": "b91e425cd94b4c749b28adf8fd0b96a1",
+        "source_characters": 1949,
+        "matching_complete_source_receipts": [
+          "R292",
+          "R312"
+        ]
+      },
+      {
+        "signature": "private.dic_admin_review_signup(p_member_id uuid, p_action text, p_expected_state text)",
+        "source_md5": "7e0d3bf10542694b60177fcfa9c6f7be",
+        "source_characters": 2073,
+        "matching_complete_source_receipts": [
+          "R293",
+          "R307"
+        ]
+      },
+      {
+        "signature": "private.dic_admin_signup_requests(p_offset integer, p_limit integer)",
+        "source_md5": "663c13571f70bb29b6a4351e8e6a45eb",
+        "source_characters": 1411,
+        "matching_complete_source_receipts": [
+          "R293"
+        ]
+      },
+      {
+        "signature": "private.dic_enqueue_member_approval_notices()",
+        "source_md5": "36defca729c42b4ec35d4d2a4e1cfea5",
+        "source_characters": 460,
+        "matching_complete_source_receipts": [
+          "R307"
+        ]
+      },
+      {
+        "signature": "private.dic_verified_roaster_page_proof(roaster_name text)",
+        "source_md5": "7ce32408a61728294ad667a9c985f5da",
+        "source_characters": 1947,
+        "matching_complete_source_receipts": [
+          "R293"
+        ]
+      },
+      {
+        "signature": "public.dic_admin_account_delete_finish(p_operation_id uuid, p_actor_id uuid)",
+        "source_md5": "2fc16586443318c1594d1939544920dd",
+        "source_characters": 257,
+        "matching_complete_source_receipts": [
+          "R312"
+        ]
+      },
+      {
+        "signature": "public.dic_admin_account_delete_prepare(p_operation_id uuid, p_actor_id uuid)",
+        "source_md5": "a0c67fbfbbfd122a8e16596c79333092",
+        "source_characters": 259,
+        "matching_complete_source_receipts": [
+          "R312"
+        ]
+      },
+      {
+        "signature": "public.dic_admin_account_delete_preview(p_member_id uuid)",
+        "source_md5": "b8f41cc6faf702f27c678a45127d0723",
+        "source_characters": 233,
+        "matching_complete_source_receipts": [
+          "R312"
+        ]
+      },
+      {
+        "signature": "public.dic_admin_account_delete_request(p_member_id uuid, p_community_mode text, p_expected_impact jsonb)",
+        "source_md5": "779f19212d19ebbfb88f2a859fd92c21",
+        "source_characters": 308,
+        "matching_complete_source_receipts": [
+          "R312"
+        ]
+      },
+      {
+        "signature": "public.dic_admin_push_bootstrap_key(p_public_key text, p_private_key text)",
+        "source_md5": "637217a555887f78d812deb347455e4d",
+        "source_characters": 931,
+        "matching_complete_source_receipts": [
+          "R292",
+          "R307"
+        ]
+      },
+      {
+        "signature": "public.dic_admin_push_claim_poll()",
+        "source_md5": "e3bbf384effe7e29b5cffd89135c0666",
+        "source_characters": 414,
+        "matching_complete_source_receipts": [
+          "R292",
+          "R307"
+        ]
+      },
+      {
+        "signature": "public.dic_admin_push_runtime_keys()",
+        "source_md5": "16fd1cc2a0cbf0110cd253e661c4cdef",
+        "source_characters": 427,
+        "matching_complete_source_receipts": [
+          "R292",
+          "R307"
+        ]
+      },
+      {
+        "signature": "public.dic_admin_push_snapshot()",
+        "source_md5": "c6c2c674fa8358a3dd4946a3c0f9d8ed",
+        "source_characters": 1007,
+        "matching_complete_source_receipts": [
+          "R292",
+          "R293",
+          "R307"
+        ]
+      },
+      {
+        "signature": "public.dic_admin_review_signup(p_member_id uuid, p_action text, p_expected_state text)",
+        "source_md5": "ebfec67f4da9cf3adc0d3e3431f2a295",
+        "source_characters": 295,
+        "matching_complete_source_receipts": [
+          "R293"
+        ]
+      },
+      {
+        "signature": "public.dic_admin_signup_requests(p_offset integer, p_limit integer)",
+        "source_md5": "ab3a82cfe5d926fa485c39b153aa701e",
+        "source_characters": 262,
+        "matching_complete_source_receipts": [
+          "R293"
+        ]
+      },
+      {
+        "signature": "public.dic_member_approval_claim(p_channel text, p_limit integer)",
+        "source_md5": "b0d1e8d2622852b6b930def5c8a171d9",
+        "source_characters": 1920,
+        "matching_complete_source_receipts": [
+          "R292",
+          "R307"
+        ]
+      },
+      {
+        "signature": "public.dic_member_approval_claim_poll()",
+        "source_md5": "b94ddc2223993aa7685faf482d3871e4",
+        "source_characters": 335,
+        "matching_complete_source_receipts": [
+          "R292",
+          "R307"
+        ]
+      },
+      {
+        "signature": "public.dic_member_approval_finish(p_event_id bigint, p_channel text, p_claim_token uuid, p_outcome text)",
+        "source_md5": "e92ba8e17ab274bcab1a564475d16f28",
+        "source_characters": 1003,
+        "matching_complete_source_receipts": [
+          "R292",
+          "R307"
+        ]
+      }
+    ],
+    "changed_signatures": [
+      {
+        "signature": "private.apply_prototype_import(u uuid, doc jsonb)",
+        "source_md5": "2af6a48d0fe80841fcc27c1f1d5532e3",
+        "source_characters": 16445,
+        "review_source": "PREVIOUS_FULL_SOURCE_RECEIPT_AT_MATCHING_MD5",
+        "ledger_evidence_paths": [
+          "ledger.provider_pgss_admin_import_run254.full_sql_definitions.0.md5",
+          "ledger.provider_import_additional_credential_key_guard_run294.live_import_md5"
+        ],
+        "current_full_source_read": false
+      },
+      {
+        "signature": "private.dic_admin_access_overview()",
+        "source_md5": "e377ac910af0115040ad8f881cb01bfc",
+        "source_characters": 1432,
+        "review_source": "PREVIOUS_FULL_SOURCE_RECEIPT_AT_MATCHING_MD5",
+        "ledger_evidence_paths": [
+          "ledger.provider_pgss_admin_import_run254.full_sql_definitions.1.md5"
+        ],
+        "current_full_source_read": false
+      },
+      {
+        "signature": "private.dic_admin_dashboard_read()",
+        "source_md5": "5fa33bbe05e8408c1c2fe1b82d73a8ee",
+        "source_characters": 2901,
+        "review_source": "PREVIOUS_FULL_SOURCE_RECEIPT_AT_MATCHING_MD5",
+        "ledger_evidence_paths": [
+          "ledger.provider_admin_dashboard_run312b.definition_md5"
+        ],
+        "current_full_source_read": false
+      },
+      {
+        "signature": "private.dic_admin_delete_preview(p_kind text, p_record_id uuid)",
+        "source_md5": "83f516f852832cdf06f44b34339bbc0d",
+        "source_characters": 4078,
+        "review_source": "PREVIOUS_FULL_SOURCE_RECEIPT_AT_MATCHING_MD5",
+        "ledger_evidence_paths": [
+          "ledger.provider_pgss_admin_delete_run258.complete_sql_definitions.0.md5"
+        ],
+        "current_full_source_read": false
+      },
+      {
+        "signature": "private.dic_admin_delete_record(p_kind text, p_record_id uuid, p_expected_revision bigint, p_expected_impact jsonb)",
+        "source_md5": "39b6e1a4fc51c2ce8121ef34d2067b51",
+        "source_characters": 4109,
+        "review_source": "PREVIOUS_FULL_SOURCE_RECEIPT_AT_MATCHING_MD5",
+        "ledger_evidence_paths": [
+          "ledger.provider_pgss_admin_delete_run258.complete_sql_definitions.1.md5"
+        ],
+        "current_full_source_read": false
+      },
+      {
+        "signature": "private.dic_admin_records(p_kind text, p_offset integer, p_limit integer)",
+        "source_md5": "6976e717b7c5cbb34d8e3c41bc2aeba2",
+        "source_characters": 5386,
+        "review_source": "PREVIOUS_FULL_SOURCE_RECEIPT_AT_MATCHING_MD5",
+        "ledger_evidence_paths": [
+          "ledger.provider_pgss_admin_candidates_run256.complete_sql_definitions.1.md5"
+        ],
+        "current_full_source_read": false
+      },
+      {
+        "signature": "private.dic_admin_search_records(p_kind text, p_query text, p_offset integer, p_limit integer)",
+        "source_md5": "253a3fe2fe1e1e65f61b5a71a2063fdd",
+        "source_characters": 7574,
+        "review_source": "R314_DIRECT_COMPLETE_LIVE_SOURCE",
+        "ledger_evidence_paths": [],
+        "current_full_source_read": true
+      },
+      {
+        "signature": "private.dic_admin_set_member_access(p_member_id uuid, p_enabled boolean)",
+        "source_md5": "d7a339f277e9da0d8393d5efcdbc0e89",
+        "source_characters": 2354,
+        "review_source": "PREVIOUS_FULL_SOURCE_RECEIPT_AT_MATCHING_MD5",
+        "ledger_evidence_paths": [
+          "ledger.provider_enabled_requires_admission_constraint_run140.provider_direct_writer_full_body_md5.private.dic_admin_set_member_access(uuid,boolean)",
+          "ledger.provider_pgss_admin_candidates_run256.complete_sql_definitions.4.md5",
+          "ledger.provider_source_identity_edge_pgss_run263.sql_definitions.0.md5"
+        ],
+        "current_full_source_read": false
+      },
+      {
+        "signature": "private.dic_canonical_roaster_key(value text)",
+        "source_md5": "646cff7cceed7011b1fc3a1b69c4d3f0",
+        "source_characters": 402,
+        "review_source": "PREVIOUS_FULL_SOURCE_RECEIPT_AT_MATCHING_MD5",
+        "ledger_evidence_paths": [
+          "ledger.provider_pgss_legacy_roaster_run249.sql_functions.0.md5"
+        ],
+        "current_full_source_read": false
+      },
+      {
+        "signature": "private.dic_find_coffee_matches(p jsonb)",
+        "source_md5": "b4b845d29ccb65ac7922109dc89816b6",
+        "source_characters": 6135,
+        "review_source": "PREVIOUS_FULL_SOURCE_RECEIPT_AT_MATCHING_MD5",
+        "ledger_evidence_paths": [
+          "ledger.provider_pgss_coffee_submission_community_run253.definition_reviews.1.md5",
+          "ledger.provider_source_identity_edge_pgss_run263.sql_definitions.1.md5",
+          "ledger.provider_coffee_matching_planner_run302.source_md5s.private.dic_find_coffee_matches"
+        ],
+        "current_full_source_read": false
+      },
+      {
+        "signature": "private.dic_promote_pending_coffee(sid uuid, method text, evidence jsonb, distinct_confirmed boolean)",
+        "source_md5": "74ffb76151d846bfff79e7ba40fa1850",
+        "source_characters": 11996,
+        "review_source": "R314_DIRECT_COMPLETE_LIVE_SOURCE",
+        "ledger_evidence_paths": [],
+        "current_full_source_read": true
+      },
+      {
+        "signature": "private.dic_shared_preview_claim(account_id uuid)",
+        "source_md5": "8d8c9c371ecdb320dd03cbae2ab4c2dd",
+        "source_characters": 1876,
+        "review_source": "PREVIOUS_FULL_SOURCE_RECEIPT_AT_MATCHING_MD5",
+        "ledger_evidence_paths": [
+          "ledger.provider_pgss_preview_edge_run250.sql_definitions.0.md5"
+        ],
+        "current_full_source_read": false
+      },
+      {
+        "signature": "private.is_member()",
+        "source_md5": "e406adb7ba7c86dcb000cb089b2693d1",
+        "source_characters": 311,
+        "review_source": "PREVIOUS_FULL_SOURCE_RECEIPT_AT_MATCHING_MD5",
+        "ledger_evidence_paths": [
+          "ledger.provider_community_queue_hotpath_run306.semantic_cross_layer_review.sql_full_sources.4.md5"
+        ],
+        "current_full_source_read": false
+      },
+      {
+        "signature": "private.session_status()",
+        "source_md5": "0aa8e57bb4846aac7dd8e3b6c0cf690c",
+        "source_characters": 729,
+        "review_source": "PREVIOUS_FULL_SOURCE_RECEIPT_AT_MATCHING_MD5",
+        "ledger_evidence_paths": [
+          "ledger.provider_community_queue_hotpath_run306.semantic_cross_layer_review.sql_full_sources.2.md5"
+        ],
+        "current_full_source_read": false
+      },
+      {
+        "signature": "public.dic_preview_complete(p_ticket uuid)",
+        "source_md5": "95324ba674010588a74507024c12ef91",
+        "source_characters": 1339,
+        "review_source": "PREVIOUS_FULL_SOURCE_RECEIPT_AT_MATCHING_MD5",
+        "ledger_evidence_paths": [
+          "ledger.provider_pgss_preview_edge_run250.sql_definitions.3.md5"
+        ],
+        "current_full_source_read": false
+      },
+      {
+        "signature": "public.dic_preview_preflight(p_cached boolean)",
+        "source_md5": "395d4a717122f9feb5ae04ac3c5a1d6a",
+        "source_characters": 2460,
+        "review_source": "PREVIOUS_FULL_SOURCE_RECEIPT_AT_MATCHING_MD5",
+        "ledger_evidence_paths": [
+          "ledger.provider_pgss_preview_edge_run250.sql_definitions.4.md5"
+        ],
+        "current_full_source_read": false
+      },
+      {
+        "signature": "public.dic_source_check_target(submission_id uuid)",
+        "source_md5": "496ad9d2e74fa2d07592a442438d8ca9",
+        "source_characters": 1397,
+        "review_source": "PREVIOUS_FULL_SOURCE_RECEIPT_AT_MATCHING_MD5",
+        "ledger_evidence_paths": [
+          "ledger.provider_pgss_source_rpc_run252.source_definitions.2.md5"
+        ],
+        "current_full_source_read": false
+      }
+    ]
+  },
+  "run314_new_direct_complete_live_sql_review": [
+    {
+      "signature": "private.dic_admin_search_records(p_kind text, p_query text, p_offset integer, p_limit integer)",
+      "md5": "253a3fe2fe1e1e65f61b5a71a2063fdd",
+      "chars": 7574,
+      "range": [
+        1,
+        7574
+      ],
+      "verdict": "Authenticated admitted-Admin guard, bounded 50-row listing, five categories; filter and count use same predicates; indexed large-scale search performance not claimed; web consumer admin main.js line 86"
+    },
+    {
+      "signature": "private.dic_promote_pending_coffee(sid uuid, method text, evidence jsonb, distinct_confirmed boolean)",
+      "md5": "74ffb76151d846bfff79e7ba40fa1850",
+      "chars": 11996,
+      "range": [
+        1,
+        11996
+      ],
+      "verdict": "Verified/Admin/member status guards, source-domain evidence, canonical identity lock and older Pending holds; live NULL method/confirmation guard is absent but exact development-only migration already repairs both; do not file duplicate new finding"
+    }
+  ],
+  "consumer": {
+    "admin_path": "site/admin/main.js",
+    "git_blob": "f0c158ae7b57277ab99551ce7bca94438bce6919",
+    "rpc_call_line": 86,
+    "cloud_adapter": "site/cloud/client.js",
+    "cloud_adapter_git_blob": "08e1ac1f2610dca9fad162272c8e3c7ea56566a5"
+  },
+  "deployed_source_parity": {
+    "existing_dev_guard": "supabase/migrations/20261114135500_dic_promote_pending_coffee_null_flags.sql",
+    "git_blob": "252f96469855dd7b8e56528ef5db99e5bccbf439",
+    "test": "supabase/tests/pending_coffee_null_guards.sql",
+    "test_blob": "be4ea6842ab2dd8c4eaf364c68f98613eb6424b0",
+    "sql_runner": "scripts/audit/isolated-sql-regression.sh",
+    "runner_blob": "6ce4f5eeb73df303d39d454cd742cbf16bfd7e57",
+    "status": "PREEXISTING_UNPUBLISHED_GUARD_ALREADY_TEST_REGISTERED; NO_NEW_BUG_NO_DUPLICATE_FIX",
+    "hosted_external_access": "UNVERIFIED"
+  },
+  "production": {
+    "provider": "ACTIVE_HEALTHY",
+    "postgres": "17.11.0.003",
+    "current_sql_function_hashes_equal_to_R308": "114_OF_114",
+    "writes": 0
+  },
+  "findings": {
+    "newly_discovered_defects": 0,
+    "new_justified_deletions": 0,
+    "first_time_word_credit": 0,
+    "app_sql_current_hash_source_evidence": "RECONCILED",
+    "entire_provider_word_baseline": "IN_PROGRESS",
+    "compiled_native_Auth_console": "UNVERIFIED"
+  },
+  "checks": {
+    "new_functional_tests": "NONE",
+    "new_ci_runs": "NONE",
+    "prior_ci_evidence_reused": "HISTORICAL_ONLY",
+    "queue_fetch": "UNAVAILABLE_EMPTY_CONNECTOR_RESPONSE; NO_CHANGE_NO_READY_CLAIM"
+  },
+  "next": "Continue first genuinely unreviewed or changed provider object outside the fully reconciled 114 application SQL sources; maintain unresolved platform/native/console surfaces explicitly UNVERIFIED and source-isolated acceptance for existing TESTING fixes. Do not reset pgss numeric cursor or revisit unchanged objects."
+}
