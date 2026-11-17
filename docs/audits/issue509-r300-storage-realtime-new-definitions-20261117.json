@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "round": "R300",
+  "project_ref": "azviqqejypsefzilgonr",
+  "audited_date_utc": "2026-11-17",
+  "preflight": {
+    "development_sha": "68b67264734cb9451e015a60a33fb6a8ca7a1ad9",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "immutable_blob_content_git_sha1_verified": true,
+    "main_sha": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+  },
+  "authority": "Owner Nov 16 functional bugs/obsolete code/dead logic/redundancy/performance focus; read-only live provider; development-only fixes; no publication",
+  "provider": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.11.0.003",
+    "read_only": true,
+    "private_member_auth_rows_read": 0,
+    "storage_bucket_rows": 0,
+    "storage_object_rows": 0,
+    "storage_lifecycle_state_rows": 0,
+    "storage_publication_tables": 0
+  },
+  "prior_direct_review_provenance": [
+    "docs/audits/issue509-provider-realtime-001-018-storage-001-011-20261106-run28c.json",
+    "docs/audits/issue509-provider-storage-functions-012-019-20261106-run28d.json",
+    "docs/audits/issue509-r299-platform-helpers-and-broker-parity-20261116.json"
+  ],
+  "current_function_manifest": {
+    "storage": 24,
+    "storage_prior": 19,
+    "storage_new_names": [
+      "delete_lifecycle_objects",
+      "enforce_versioning_status_transition",
+      "protect_active_lifecycle_states",
+      "reconcile_lifecycle_state",
+      "wake_lifecycle_state"
+    ],
+    "storage_old_changed": [
+      "enforce_bucket_lifecycle_service_role"
+    ],
+    "storage_new_already_reviewed_r299": [
+      "enforce_versioning_status_transition",
+      "wake_lifecycle_state"
+    ],
+    "storage_old_changed_reviewed_r299": [
+      "enforce_bucket_lifecycle_service_role"
+    ],
+    "storage_new_direct_this_run": 3,
+    "realtime": 19,
+    "realtime_prior": 18,
+    "realtime_new_names": [
+      "filters_hash"
+    ],
+    "realtime_changed": [
+      "apply_rls"
+    ],
+    "all_other_prior_function_hashes_match": true
+  },
+  "new_full_source_semantic_reviews": [
+    {
+      "object": "storage.delete_lifecycle_objects(object_ids uuid[])",
+      "source_chars": 2327,
+      "source_md5": "b9737ba9f65ae16796874a5ff3b82a33",
+      "complete_body_read": true,
+      "semantics": "Archived-only bulk DELETE returning IDs/markers/metadata, transaction-local delete guard, error-aware single-row fallback; provider-managed lifecycle cleanup. No live objects or authorized live execution.",
+      "verdict": "NO_VERIFIED_APP_DEFECT_OR_SAFE_DELETION"
+    },
+    {
+      "object": "storage.protect_active_lifecycle_states()",
+      "source_chars": 1016,
+      "source_md5": "fce9d03398ec222c77feec887c25c384",
+      "complete_body_read": true,
+      "semantics": "BEFORE bucket DELETE guard prevents removal while lifecycle continuation has in-flight batch; behaves alongside existing FK ON DELETE CASCADE.",
+      "verdict": "NO_VERIFIED_APP_DEFECT_OR_SAFE_DELETION"
+    },
+    {
+      "object": "storage.reconcile_lifecycle_state(target_bucket_id text, policy_changed boolean)",
+      "source_chars": 2912,
+      "source_md5": "271a57ecfb24df02a5d9100c2a801323",
+      "complete_body_read": true,
+      "semantics": "Locks bucket/state; reconciles policy generation, next-run scheduling, active/idle state and worker continuation; triggered by policy/version changes and invoked by wake_lifecycle_state. No actual buckets.",
+      "verdict": "NO_VERIFIED_APP_DEFECT_OR_SAFE_DELETION"
+    },
+    {
+      "object": "realtime.filters_hash(filters realtime.user_defined_filter[])",
+      "source_chars": 321,
+      "source_md5": "224d7075f0e9ccb1178b20e9d8eb4962",
+      "complete_body_read": true,
+      "semantics": "Deterministic two-seed 128-bit hash-array byte concatenation, likely subscription filter grouping; provider-owned; SQL-only semantic scope, no identity equivalence guarantee.",
+      "verdict": "NO_VERIFIED_APP_DEFECT_OR_SAFE_DELETION"
+    }
+  ],
+  "changed_full_source_semantic_reviews": [
+    {
+      "object": "realtime.apply_rls(wal jsonb,max_record_bytes integer)",
+      "source_chars": 16972,
+      "source_md5": "0692f127b26cc5843c85852b03a1299a",
+      "historical_md5": "d7b17bcce71440ab486770b53d15bd3d",
+      "historical_chars": 16476,
+      "full_current_source_read": true,
+      "direct_historical_full_source_diff": true,
+      "delta": "Adds raw WAL columns/identity arrays and uses these raw arrays for action filter matching; keeps role permission, selected-column fanout and record-size checks. Difference confirmed, but vendor intent and hosted Realtime runtime unverified.",
+      "verdict": "PROVIDER_MANAGED_SOURCE_CHANGE_NO_PROVEN_APP_BREAKAGE"
+    }
+  ],
+  "supporting_full_source_rereviews": [
+    {
+      "object": "storage.enforce_bucket_lifecycle_service_role()",
+      "md5": "b4b21fec5ffef02e74e2477049138937"
+    },
+    {
+      "object": "storage.enforce_versioning_status_transition()",
+      "md5": "47dc86fbd138d125125250b28b31d7ff"
+    },
+    {
+      "object": "storage.protect_bucket_control_columns()",
+      "md5": "7c31ae406e2f6281ead4009fff69fc68"
+    },
+    {
+      "object": "storage.wake_lifecycle_state()",
+      "md5": "326028b9d567ca2de47e9ecf67a4553b"
+    },
+    {
+      "object": "storage.get_size_by_bucket(noncurrent_versions text,delete_markers text)",
+      "md5": "75dc6041ab2b273a08279126efecbcd0"
+    },
+    {
+      "object": "storage.protect_delete()",
+      "md5": "4371ae544fb1ef704f9c5d42265ac324"
+    },
+    {
+      "object": "storage.operation()",
+      "md5": "0720a7c3d1b49f9a8eee19e90d73bb97"
+    },
+    {
+      "object": "storage.update_updated_at_column()",
+      "md5": "bfecc08a6034296258f0c3e10193076c"
+    }
+  ],
+  "new_table_component_semantic_reviews": [
+    {
+      "object": "storage.bucket_lifecycle_states",
+      "columns": 13,
+      "constraints": 6,
+      "indexes": 2,
+      "custom_triggers": 0,
+      "policies": 0,
+      "rls_enabled": true,
+      "complete_visible_column_default_constraint_index_trigger_policy_text_read": true,
+      "semantics": "One PK row per bucket; generation/worker lease/cursors, continuation, retry and next-run state; FK cascade gated by bucket active-work trigger; partial due-work index."
+    },
+    {
+      "object": "storage.lifecycle_abandoned_artifacts",
+      "columns": 5,
+      "constraints": 1,
+      "indexes": 2,
+      "custom_triggers": 0,
+      "policies": 0,
+      "rls_enabled": true,
+      "complete_visible_column_default_constraint_index_trigger_policy_text_read": true,
+      "semantics": "Composite bucket/key PK records abandoned lifecycle objects and attempt time; indexed attempted_at; no verified redundant or unused index from no rows."
+    }
+  ],
+  "related_table_validation": [
+    "storage.buckets: full visible current columns, six constraints, two indexes and nine custom triggers read; version/lifecycle generation guards call new helpers",
+    "storage.objects: full visible current columns, two constraints, ten indexes and two custom triggers read; only archived object IDs eligible for cleanup",
+    "No app/storage tables or functions deleted; no in-database function invocation with side effects"
+  ],
+  "coverage": {
+    "new_unique_full_sql_functions": 4,
+    "new_unique_full_sql_source_chars": 6576,
+    "changed_full_sql_function_body_reviews": 1,
+    "changed_body_chars": 16972,
+    "supporting_full_sql_rereviews": 8,
+    "three_storage_new_body_chars": 6255,
+    "storage_existing_19_reconciled_hashes": "18 SAME; 1 changed and already reviewed R299",
+    "storage_new_5": "2 reviewed R299; 3 reviewed R300",
+    "storage_current_visible_full_source_coverage": "24/24 WITH HISTORIC+R299+R300 RECEIPTS",
+    "realtime_existing_18": "17 SAME; 1 changed apply_rls reviewed R300",
+    "realtime_new_1": "filters_hash reviewed R300",
+    "realtime_current_visible_full_source_coverage": "19/19 WITH HISTORIC+R300 RECEIPTS",
+    "new_storage_tables_reviewed": "2/2 previously absent; current provider storage tables 10 vs historic eight",
+    "global_baseline": "IN_PROGRESS"
+  },
+  "tests": {
+    "live_mutations": 0,
+    "synthetic_data_mutations": 0,
+    "function_invocations_with_side_effects": 0,
+    "isolated_postgresql": "NOT_RUN_DOCS_AND_PROVIDER_READ_ONLY",
+    "node22": "NOT_RUN_NO_SOURCE_CHANGE",
+    "merged_source_community_fix_ci": "UNVERIFIED — PR-filtered connector returned zero push runs and commit statuses []; do not infer PASS or READY"
+  },
+  "outcome": {
+    "new_reproducible_first_party_defect": 0,
+    "source_fixes": 0,
+    "docs_only": true,
+    "production_changed": false,
+    "ready_claim": false,
+    "retired_directory_status": "RETIRED (#2389 closed); unrelated still-live aliases preserved",
+    "note": "Zero Storage buckets/objects does not prove vendor lifecycle infrastructure removable; no deletion justified."
+  },
+  "next_exact": "Review next genuinely unreviewed or changed current provider source (start with new/changed pg_catalog or nonapp helper definitions following ledger), and obtain source-bound #3086 push Actions runs/jobs by supported authoritative endpoint before queue advancement. Keep #96 hosted tests UNVERIFIED and #267 code-line credit separate."
+}
