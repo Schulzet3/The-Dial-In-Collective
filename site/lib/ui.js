@@ -214,7 +214,9 @@ export function acknowledgeShotInput(target,feedback){
  target.removeAttribute?.('aria-invalid');
  if(target.getAttribute?.('aria-describedby')==='shot-validation-feedback')
   target.removeAttribute?.('aria-describedby');
- if(invalid&&feedback)feedback.textContent='';
+ const form=target.closest?.('form');
+ if(invalid&&feedback&&typeof form?.querySelector==='function'&&
+    !form.querySelector('[aria-invalid="true"]'))feedback.textContent='';
  return invalid;
 }
 // A rating tap can fix one missing taste while other marked invalid fields

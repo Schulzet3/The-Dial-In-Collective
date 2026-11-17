@@ -3,14 +3,16 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {acknowledgeShotInput} from '../site/lib/ui.js';
 
-const field=(attrs={})=>({
+const field=(attrs={},form=null)=>({
  attrs:{...attrs},
  getAttribute(name){return this.attrs[name]??null;},
- removeAttribute(name){delete this.attrs[name];}
+ removeAttribute(name){delete this.attrs[name];},
+ closest(selector){assert.equal(selector,'form');return form;}
 });
 
 test('R295 correcting a client-invalid Log Shot measurement clears stale feedback and its own invalid semantics',()=>{
- const dose=field({'aria-invalid':'true','aria-describedby':'shot-validation-feedback'});
+ const form={querySelector(selector){assert.equal(selector,'[aria-invalid="true"]');return null;}};
+ const dose=field({'aria-invalid':'true','aria-describedby':'shot-validation-feedback'},form);
  const feedback={textContent:'Dose must be between valid measured limits.'};
  assert.equal(acknowledgeShotInput(dose,feedback),true);
  assert.equal(feedback.textContent,'');
@@ -26,13 +28,14 @@ test('R295 ordinary input must not erase an unrelated cloud/server error',()=>{
 });
 
 test('R295 field correction preserves unrelated describedby and other invalid inputs',()=>{
- const timeField=field({'aria-invalid':'true','aria-describedby':'help-time'});
+ const form={querySelector(selector){assert.equal(selector,'[aria-invalid="true"]');return other.getAttribute('aria-invalid')==='true'?other:null;}};
+ const timeField=field({'aria-invalid':'true','aria-describedby':'help-time'},form);
  const other=field({'aria-invalid':'true','aria-describedby':'shot-validation-feedback'});
  const feedback={textContent:'Time invalid; yield invalid.'};
  assert.equal(acknowledgeShotInput(timeField,feedback),true);
  assert.equal(timeField.getAttribute('aria-describedby'),'help-time');
  assert.equal(other.getAttribute('aria-invalid'),'true');
- assert.equal(feedback.textContent,'');
+ assert.equal(feedback.textContent,'Time invalid; yield invalid.');
 });
 
 test('R295 harmless null/missing input and noninvalid legacy validation label',()=>{
