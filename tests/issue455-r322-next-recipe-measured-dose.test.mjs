@@ -53,7 +53,8 @@ test('R322 basket-based starting recipe and ordinary tenth measurement keep exis
  const {state}=fixture({doseG:20});
  const baseline=recommendation(state,'coffee',{ignoreAdvice:true});
  assert.equal(baseline.measuredDoseUnchanged,undefined);
- assert.equal(doseText(recipeGrid(baseline)),'20.0 ');
+ assert.equal(baseline.doseG,18,'basket-based starting dose remains the actual 18 g basket');
+ assert.equal(doseText(recipeGrid(baseline)),'18.0 ');
  const adjusted=recommendation(state,'coffee');
  assert.equal(adjusted.measuredDoseUnchanged,true);
  assert.equal(doseText(recipeGrid(adjusted)),'20.0 ');
