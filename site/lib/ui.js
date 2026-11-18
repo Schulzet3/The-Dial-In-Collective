@@ -78,6 +78,8 @@ export function nextShotAdjustment(advice,shot,showTemp=false,unit='F'){
  }
  if(changes.length!==1)return null;
  const key=changes[0];if(key==='tempC'&&(!showTemp||!Number.isFinite(shot.tempC)))return null;
+ // A real difference can still round to one identical visible setting;
+ // never display an impossible 158 → 158 °F (or 70 → 70 °C) arrow.
  const names={grindSetting:'Grind',yieldCenter:'Yield',tempC:'Temperature',doseG:'Dose'};
  // Imported/legacy unit labels must never misstate a temperature adjustment.
  const safeUnit=unit==='C'?'C':'F';
@@ -87,7 +89,9 @@ export function nextShotAdjustment(advice,shot,showTemp=false,unit='F'){
  const unchanged=controls.filter(([k])=>k!==key&&(k!=='tempC'||(showTemp&&Number.isFinite(shot.tempC)))).map(([,name])=>name);
  const keep=unchanged.length===3?`${unchanged[0]}, ${unchanged[1]}, and ${unchanged[2]}`:
   unchanged.length===2?`${unchanged[0]} and ${unchanged[1]}`:unchanged.join('');
- return {label:names[key],before:format(before[key],true),after:format(next[key]),unit:units[key],keep};
+ const displayedBefore=format(before[key],true),displayedAfter=format(next[key]);
+ if(displayedBefore===displayedAfter)return null;
+ return {label:names[key],before:displayedBefore,after:displayedAfter,unit:units[key],keep};
 }
 export function nextShotTitle(advice){
  if(advice?.title==='Try a little finer')return 'Try grinding slightly finer';
@@ -99,7 +103,21 @@ export function nextShotGuidance(advice,shot,showTemp=false,unit='F'){
  // Whether a numeric arrow is possible or not, never conceal a supplied
  // source/uncertainty note. Keep the original textual guidance as fallback.
  const note=advice?.evidenceNote?'<p class="next-shot-evidence">'+e(advice.evidenceNote)+'</p>':'';
- if(!adjustment)return `<p class="helper next-shot-original-advice">${e(advice?.text||'')}</p>${note}`;
+ if(!adjustment){
+  // A clipped near-floor suggestion can disappear under approved whole-degree
+  // F/C display rounding; don't repeat an inaccurate full-degree claim.
+  const target=advice?.next,original=shot&&{grindSetting:shot.grindSetting,yieldCenter:shot.yieldG,doseG:shot.doseG};
+  const displayUnit=unit==='C'?'C':'F';
+  const tinyTemperatureStep=showTemp&&Number.isFinite(shot?.tempC)&&Number.isFinite(target?.tempC)&&
+   Math.abs(shot.tempC-target.tempC)>1e-8&&
+   tempDisplay(shot.tempC,displayUnit)===tempDisplay(target.tempC,displayUnit)&&
+   ['grindSetting','yieldCenter','doseG'].every(key=>target[key]==null||
+    (Number.isFinite(target[key])&&Number.isFinite(original?.[key])&&Math.abs(target[key]-original[key])<=1e-8));
+  const wording=tinyTemperatureStep?
+   'The suggested temperature difference is smaller than one displayed degree. Keep your logged measurements unchanged and check whether your machine can make that small adjustment before trying it.':
+   advice?.text||'';
+  return `<p class="helper next-shot-original-advice">${e(wording)}</p>${note}`;
+ }
  const {label,before,after,unit:measure,keep}=adjustment;
  const spoken=e(`${label} from ${before} to ${after}${measure?' '+measure:''}`);
  const source=advice?.text?.includes('Sized from your own comparable adjustments.')?
