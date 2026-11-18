@@ -13,6 +13,7 @@ const name='Organic Mexican';
 const url='https://www.roc2.com/products/organic-mexican';
 const description='A well-balanced lighter roast with molasses, caramel, and lemongrass tasting notes. Sourced from organic Mexican farms, this single-origin coffee is exceptionally smooth and bright, offering a clean, sweet finish.';
 const page=(selectedName=name,text=description)=>'<html><head><title>Light Roast Ethiopian Coffee</title>'+
+ '<meta property="og:site_name" content="ROC²">'+
  '<meta name="description" content="Other coffee: strawberry, vanilla, natural process, light roast"></head>'+
  '<body><main><article class="product"><h1>'+selectedName+'</h1><div class="description"><p>'+text+
  '</p></div></article></main><aside class="related-products"><h2>Organic Ethiopian</h2>'+
