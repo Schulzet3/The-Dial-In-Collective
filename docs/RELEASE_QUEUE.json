@@ -16116,23 +16116,34 @@
     {
       "id": "DIC-Q-455-r337-readable-history-taste-chips",
       "issue": 455,
-      "pr": null,
+      "pr": 3216,
       "title": "Show every recorded taste value in expanded Shot History chips, not solely severity color",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "63362199882ebf71248b4af584cc685d4243452a",
       "scope_paths": [
         "site/lib/ui.js"
       ],
       "owner_source": "Issue #455 owner Option B SAFE, unchanged five Locked scales and historical measurements; DIC_PREFLIGHT_VERIFIED development_sha=ee2d587cb847460330b7256c7667bee46c9dc39c preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "tests": [
         "Reproduced source: rated Clarity, Sweetness and Dryness chips showed no textual rating; green Extraction and Body also lacked a value, leaving meaning dependent on severity colors. Actual member impact unverified.",
-        "Four synthetic Node22 positive/negative cases authored: complete five green, nonideal with missing, invalid legacy, immutable expanded History. Hosted exact-source CI and real browser/mobile/a11y NOT YET RUN."
+        "Four synthetic Node22 positive/negative cases authored: complete five green, nonideal with missing, invalid legacy, immutable expanded History. Hosted exact-source CI and real browser/mobile/a11y NOT YET RUN.",
+        "Original exact PR-head cb30d9f: Node22 44210507558 SUCCESS 5,458 PASS/0 FAIL/6 intentional SKIP; all four R337 synthetic positive/negative cases PASS. Original head cloud/real browser/mobile/offline/a11y 44210507645, SQL 44210507566, security 44210507634 and approval 44210507635 SUCCESS; frozen603 SKIPPED, not PASS.",
+        "All four changed UI/test/queue/SAME-COMMIT journal Git blobs independently identical at original PR head cb30d9f, nonforce [skip netlify] merge 63362199882ebf71248b4af584cc685d4243452a, and current preflight 0482fa8b4b66c7264fd3b18e86bb20ece2e194d1; intervening #267 change touched only three disjoint audit-doc paths.",
+        "Exact merged-source push Node22 44211708633 attempt 1 CANCELLED (not PASS); narrow failed/cancelled-job rerun attempt 2 COMPLETED SUCCESS at SAME merge SHA: 5,462 PASS / 0 FAIL / 6 intentional SKIP, four R337 cases #4895-4898 PASS; ESLint zero warnings. No duplicate unrelated suite triggered.",
+        "Exact merged-source real Chromium/mobile/offline/a11y 44211707336 and governance 44211707153 both COMPLETED SUCCESS; same PR-head isolated SQL/security evidence valid with identical reviewed source/test/queue/journal blobs. No direct physical-device, real member taste-outcome, or production verification claimed."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact-source applicable CI, merge readback and independent release-queue reconciliation pending: TESTING, not READY."
+      "ci_runs": [
+        44210507558,
+        44210507645,
+        44210507566,
+        44210507634,
+        44210507635,
+        44211708633,
+        44211707336,
+        44211707153
       ],
-      "notes": "Development-only accessible display copy; preserve complete/partial five rating state, palette/weight, compass, recorded shots and notes, one-control recommendations, styles/feed/equipment, offline and privacy. No Locked rule or data change; no Publish.",
+      "blockers": [],
+      "notes": "READY in development only; NO Publish/deployment. All five recorded History ratings display existing textual taste labels without color dependence; missing/invalid remain Not rated. Original shots/notes/history and Locked one-change/taste scales, styles/feed/grinder/privacy untouched. First merged Node attempt cancelled; second verified PASS. No real-member espresso-quality claim.",
       "production_deployed": false
     }
   ],
