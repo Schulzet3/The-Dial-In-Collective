@@ -8,6 +8,38 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-r346-search-ime-composition",
+      "issue": 455,
+      "pr": 3263,
+      "title": "Preserve coffee Search IME composition until committed input",
+      "state": "READY",
+      "merged_source_sha": "19180403495416d296ab743d016192056541bc45",
+      "scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "owner_source": "Issue #455 owner Option B SAFE input/accessibility fix, source-bound preflight 2fb236bbfa6bac48513eeb3bd157b260853af06d at development 37f2817b6e75f9289a7bd359b6fd02c5ab1c681a; feature source preflight 07343a95c8f4cb7af963d852a276567ebf1872ac",
+      "tests": [
+        "Reproduced source-level: Search rebuilt focused input on composing events; new guard leaves composing input intact and applies final value at compositionend. No physical-device/real-member acceptance claim.",
+        "Four synthetic negative/positive regressions in tests/issue455-r346-search-ime-composition.test.mjs: no composing redraw, committed typing retains cursor/focus, compositionend commits even without follow-up input, original five taste/search behavior remains.",
+        "Exact PR head 68b2332d4696b24062535449606c70c542b5b8f3: Node22/lint 44297347257 5521 PASS / 0 FAIL / 6 intentional SKIP; cloud and Chromium/mobile/offline/a11y 44297347154, SQL 44297347192, security-inventory 44297347093, approval 44297347346 all COMPLETED SUCCESS; frozen603 44297347128 SKIPPED, not PASS.",
+        "Nonforce [skip netlify] PR #3263 squash merged 19180403495416d296ab743d016192056541bc45; exactly three original feature/test/journal Git blobs identical head=merge=current development, no subsequent overlap.",
+        "Actual exact merged source: Node22/lint 44298232248 SUCCESS with 5521 PASS/0 FAIL/6 SKIP independently read from job log; Chromium/mobile/offline/a11y and cloud 44298232187 SUCCESS; push approval/governance 44298232397 SUCCESS. Merge title AND message [skip netlify]."
+      ],
+      "ci_runs": [
+        44297347257,
+        44297347154,
+        44297347192,
+        44297347093,
+        44297347346,
+        44298232248,
+        44298232187,
+        44298232397
+      ],
+      "blockers": [],
+      "notes": "READY development only, NOT DEPLOYED. No new numeric policy, data capture, member read, espresso effectiveness claim, live device IME certification, provider/SQL/Auth/Edge/Netlify action or product behavior change beyond safe input composition. #455 remains open; #33/#267/#96/#509 scopes disjoint.",
+      "production_deployed": false
+    },
+    {
       "id": "DIC-Q-455-r344-coffee-search-empty-state",
       "issue": 455,
       "pr": 3242,
@@ -19196,6 +19228,15 @@
       "source_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
       "production_deployed": false,
       "evidence": "R344 original source PR #3242 8/8 immutable head/merge blob parity; merged Node22 44272018599 5503 PASS/0 FAIL/6 SKIP, real Chromium/mobile/offline 44272018809 and governance 44272018771 SUCCESS; head SQL/security SUCCESS. Frozen603 SKIPPED, separate #33 original241 live parser FAILED owned by #33. DIC_PREFLIGHT_VERIFIED development_sha=c9e510df31d0fb8ff14fdc569477037da7b4ba1b preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d. READY development only; NO publication."
+    },
+    {
+      "date": "2026-11-18",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r346-search-ime-composition",
+      "state": "READY",
+      "source_sha": "19180403495416d296ab743d016192056541bc45",
+      "production_deployed": false,
+      "evidence": "R346 source #3263 merged nonforce [skip netlify] 19180403495416d296ab743d016192056541bc45, original 3/3 feature/test/journal Git blobs exactly match PR-head and current development. PR-head Node22 44297347257 5521 PASS/0 FAIL/6 SKIP; merged 44298232248 5521 PASS/0 FAIL/6 SKIP; source-bound merged browser/offline/a11y/cloud 44298232187, governance 44298232397 SUCCESS; head SQL/security/approval SUCCESS. Frozen603 SKIPPED, physical-device actual IME unverified, no deploy. DIC_PREFLIGHT_VERIFIED development_sha=37f2817b6e75f9289a7bd359b6fd02c5ab1c681a preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
