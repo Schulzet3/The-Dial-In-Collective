@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R338",
+  "date_utc": "2026-11-18",
+  "preflight": {
+    "initial_dev_sha": "e9aed34d6d04c92dc748ddfa0a06d55450fdb8ab",
+    "prewrite_dev_sha": "22ea586a454cd4a61fa4ce0e3bd2ac349e3082a4",
+    "git_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "content_equal_fetched_git_blob": true
+  },
+  "branch": {
+    "main_sha": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release_production_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+  },
+  "provider": {
+    "ref": "azviqqejypsefzilgonr",
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.11.0.003",
+    "sql_reads_only": true,
+    "provider_mutations": 0
+  },
+  "new_increment": "Complete current direct singleton poll-gate SQL/table-component review, migration-to-live and Edge consumer lineage, SQL workload source/latency and fresh bounded HTTP/error aggregates; no duplicated first-time object credit",
+  "object": {
+    "identity": "private.dic_member_approval_poll_gate",
+    "kind": "ordinary table",
+    "owner": "postgres",
+    "rls_enabled": true,
+    "force_rls": false,
+    "complete_catalog_components": {
+      "columns": [
+        {
+          "name": "singleton",
+          "type": "boolean",
+          "default": "true",
+          "not_null": true
+        },
+        {
+          "name": "last_polled_at",
+          "type": "timestamp with time zone",
+          "default": "'-infinity'::timestamp with time zone",
+          "not_null": true
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (singleton)",
+        "CHECK (singleton = true)"
+      ],
+      "indexes": [
+        "CREATE UNIQUE INDEX dic_member_approval_poll_gate_pkey ON private.dic_member_approval_poll_gate USING btree (singleton)"
+      ],
+      "policies": [],
+      "noninternal_triggers": [],
+      "explicit_grants": {
+        "postgres": "ALL standard relation privileges",
+        "service_role": "SELECT,UPDATE",
+        "anon": "none",
+        "authenticated": "none"
+      }
+    },
+    "safe_aggregate_state": {
+      "rows": 1,
+      "rows_true": 1,
+      "last_polled_at_utc": "2026-11-18T15:45:11.917057+00:00",
+      "elapsed_seconds_at_probe": 95
+    },
+    "stats": {
+      "estimated_rows": 1,
+      "estimated_pages": 1,
+      "seq_scans": 1669,
+      "index_scans": 51,
+      "inserted": 1,
+      "updated": 1699,
+      "deleted": 0,
+      "live_rows": 1,
+      "dead_rows": 16,
+      "last_autoanalyze": "2026-11-18T14:20:50.876103+00:00"
+    },
+    "prior_complete_catalog_receipt": "docs/audits/issue509-r297-app-table-definition-reconciliation-20261116.json",
+    "verdict": "ACTIVE singleton service poll throttle; PK + CHECK prohibit a second false row; 1-row seq scans not an index defect; low dead-tuple count and read-only live state do not justify tuning or removal"
+  },
+  "poll_rpc": {
+    "signature": "public.dic_member_approval_claim_poll()",
+    "full_current_definition": "CREATE OR REPLACE FUNCTION public.dic_member_approval_claim_poll()\n RETURNS boolean\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n update private.dic_member_approval_poll_gate set last_polled_at=now()\n where singleton=true and last_polled_at < now()-interval '4 minutes';\n return found;\nend $function$\n",
+    "definition_md5": "b94ddc2223993aa7685faf482d3871e4",
+    "characters": 335,
+    "reviewed_characters_1_based": [
+      1,
+      335
+    ],
+    "prior_full_source_receipt": "docs/audits/issue509-r307-approval-delivery-crosslayer-20261117.json",
+    "behavior": "Atomic conditional UPDATE and FOUND returns one successful poll per four-minute window; zero rows in table would prevent all polls; current singleton exists"
+  },
+  "git_lineage": {
+    "migration_path": "supabase/migrations/20261112135900_dic_member_approval_notices.sql",
+    "migration_blob_sha": "ce17e3801d8d4e100e8ec1fb95fa5a723ad3a7a4",
+    "reviewed_migration_lines_1_based": [
+      54,
+      74
+    ],
+    "release_broker_path": "supabase/functions/dic-member-approval-broker/core.mjs",
+    "release_broker_blob_sha": "1bc82c0c0f7e90bb86dd7da895c18f9c4e015c5a",
+    "broker_consumer_rpc_call_line_1_based": 143,
+    "broker_claim_and_finish_lines_1_based": [
+      157,
+      204
+    ],
+    "relative_schedule": "*/5 minutes from previously verified Netlify poll schedule",
+    "drift": "LIVE DDL/function behavior matches immutable migration; broker call exists at pinned release source; live broker v1 recorded in earlier R336"
+  },
+  "service_workload": {
+    "role": "service_role",
+    "queryid": "-4828288663145051522",
+    "normalized_sql_md5": "e0ea82f34b184c7bb5b73e1a11749c60",
+    "normalized_sql_chars": 535,
+    "calls_since_pgss_reset": 1701,
+    "mean_ms": 12.095,
+    "max_ms": 773.82,
+    "temp_blocks_written": 0,
+    "sql_matches_poll_rpc": true,
+    "interpretation": "No verified query-side bottleneck; cumulative calls not a 24h count"
+  },
+  "fresh_bounded_logs": {
+    "window_utc": [
+      "2026-11-18T14:00:00Z",
+      "2026-11-18T15:55:00Z"
+    ],
+    "edge_gateway_http200": 176,
+    "function_edge_http200": 44,
+    "any_non200_in_selected_sources": 0,
+    "postgres_logs": {
+      "LOG_00000": 44,
+      "ERROR_42703": 2,
+      "ERROR_42P01": 1
+    },
+    "postgres_error_db_role": "postgres",
+    "function_boot": 44,
+    "function_shutdown": 44,
+    "attribution": "At least one 42703 was caused by this auditor's invalid pg_stat_statements column query; other postgres-role introspection errors not proven application errors. No raw queries, logs or private identities collected",
+    "recipient_delivery": "UNVERIFIED; HTTP success is not recipient acknowledgement"
+  },
+  "findings": {
+    "new_confirmed_application_bugs": 0,
+    "justified_deletions": 0,
+    "first_time_provider_words": 0,
+    "issue_267_source_lines": 0,
+    "source_test_ci_edits": 0,
+    "new_ci_pass_claims": 0,
+    "release_queue_promotion": 0,
+    "provider_writes": 0,
+    "publish": 0
+  },
+  "status": {
+    "baseline": "IN_PROGRESS",
+    "preexisting_development_only_fixes": "TESTING",
+    "production": "READ_ONLY",
+    "hosted_auth_console_native": "UNVERIFIED"
+  },
+  "next_exact_cursor": "Compare next changed/new provider object against R337/R338 fingerprint receipts; if no drift, investigate next unreviewed distinct active member-facing SQL/query identity only after original identity dedup; no redundant first-time credit"
+}
