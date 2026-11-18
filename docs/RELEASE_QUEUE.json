@@ -8,6 +8,28 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-r339-shot-toggle-descriptive-accessibility",
+      "issue": 455,
+      "pr": null,
+      "title": "Make same-day Shot History disclosure buttons distinguishable to screen readers",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/shot_card.js"
+      ],
+      "owner_source": "Issue #455 Option B SAFE Locked-compatible accessibility fix; DIC_PREFLIGHT_VERIFIED development_sha=e507e27280d10ccb6810553cf9c8cdc551349ef6 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Immutable current Shot History code overrode each disclosure button's visible measurements/style with a date-only aria-label; multiple same-day shots were indistinguishable to assistive-technology users. Real member incident not established.",
+        "Four synthetic Node22 regression cases newly authored: native accessible name details, same-day differing measured shots, expanded panel five ratings/notes immutability, unknown legacy values; hosted Node22/Chromium/mobile/offline/a11y/SQL/privacy/governance NOT YET RUN and NOT PASS."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Verify PR-head and applicable exact merged-source CI before READY; no deployment permitted"
+      ],
+      "notes": "SAFE developer-only TESTING. Remove only date-only aria-label so native disclosure button name includes already-visible measured shot, style and calendar date. Existing aria-expanded and all historical originals, five ratings, controls, privacy, offline and Locked rules unchanged. No product/espresso numeric policy or provider effects.",
+      "production_deployed": false
+    },
+    {
       "id": "DIC-Q-455-r321-history-calendar-date-display",
       "issue": 455,
       "pr": 3132,

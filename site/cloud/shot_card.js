@@ -53,8 +53,11 @@ export function shotCard(shot,{expanded=false,activeVersionId=null,unit='F',fami
  const hasFamily=typeof shot.familyId==='string'&&!!shot.familyId.trim();
  const canChoose=canEdit&&genuineSuccess&&isMeasuredRecipeShot(shot)&&
   recordedControlsUsable(shot,grinderMin,grinderMax)&&hasFamily&&familyRecorded&&shot.setupVersionId===activeVersionId;
+ // Use the original measurements, style and date already visible inside the
+ // disclosure button as its accessible name. A date-only aria-label hid these
+ // distinctions from screen readers for multiple shots logged on one day.
  return `<section class="shot">
-  <button class="shot-toggle" data-action="shot-expand" data-id="${e(shot.id)}" aria-expanded="${expanded}" aria-label="Toggle details for shot on ${e(displayDate)}">
+  <button class="shot-toggle" data-action="shot-expand" data-id="${e(shot.id)}" aria-expanded="${expanded}">
    <div class="shot-overview">
     <div class="shot-topline">
      ${shotSummary(shot,recordUnit)}

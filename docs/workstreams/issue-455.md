@@ -1,3 +1,19 @@
+## November 18, 2026 UTC — #455 R339 same-day Shot History disclosure accessibility [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=e507e27280d10ccb6810553cf9c8cdc551349ef6 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+**Mandatory first:** retrieved development branch SHA e507e27280d10ccb6810553cf9c8cdc551349ef6, immutable docs/ai/PREFLIGHT.md blob 2fb236bbfa6bac48513eeb3bd157b260853af06d with independent Git blob content, BEFORE AGENTS, context, topic issues/journal, Drive/Project or other providers; reread live branch and checked original source blobs immediately before authoring. Read-only main 3b372215ac7ccfd6db406f27090706e8cb8f3e80 and release/production 0f3641b4fff07e2a88d7747e621304ec2cf0ead5. Governing owner Issue #455 Option B SAFE, Master Spec/Decision Ledger Locked, #335 remaining research transfer; #33/#267/#96 disjoint. No owner product-change approval inferred.
+
+**Reproducible accessibility gap:** live site/cloud/shot_card.js blob 0f42f6cb18280da00cc0268dbaf050abf1276a75 builds collapsed Shot History buttons with visible original dose/yield/time/grind, date, style but sets aria-label="Toggle details for shot on <calendar date>". That override hides all visible measurement/style details from a screen reader's computed accessible name, so multiple same-date shots cannot be distinguished. No measured real-member incidence or taste outcome claim.
+
+**SAFE bounded fix:** remove only the date-only aria-label override; native button content now supplies the visible original measured shot, date, style, unchanged with aria-expanded. Preserve five rating inputs, success vs missing ratings, all notes/private shots, one-control advice, exact original precision, styles Turbo vs Fast-Flow, feed/grinder/calibration/temperature, editable data, Community/RLS and offline semantics. No research-derived target, telemetry, experiment, SQL/Auth/Edge/member/provider or Netlify effect.
+
+**SAME-COMMIT proposed paths:** site/cloud/shot_card.js; tests/issue455-r339-history-disclosure-accessible-name.test.mjs (four synthetic negative/positive cases); docs/RELEASE_QUEUE.json (TESTING ID DIC-Q-455-r339-shot-toggle-descriptive-accessibility, no READY assertion); docs/workstreams/issue-455.md (this source-bound receipt). Parent development SHA e507e27280d10ccb6810553cf9c8cdc551349ef6, parent tree 839d25abf3db96173f7d030dd4030419bee01d2c; original source Git blob 0f42f6cb18280da00cc0268dbaf050abf1276a75, queue blob 88ae222f08e8e2c538c65667ede4624369c7c1ff, journal blob d89b4cd02a8519302bc612fc7c9a0aa04d5e011f. No CURRENT_STATUS, approval matrix, source register, research ledger, main or release changes warranted before evidence.
+
+**Verification at authoring:** source-level negative reproduction and syntactically authored tests only. Hosted Node22, browser/mobile/offline/a11y, SQL/privacy, security, approval and merge CI NOT RUN, not PASS. Tests are synthetic and cannot establish measured espresso improvement. Next action: independent PR-head relevant CI, repair failures, recheck concurrent branch/files before nonforce [skip netlify] merge, read back merged blobs and exact-source CI; only after full actual evidence update TESTING to READY in a distinct docs-only PR and Issue #455. October 29 ZIP/S019 PDF still unavailable from explicitly searched Drive and Library Project sources; slow-feed PDF is separate. No #267 line credit, no rerun of #335 finished tests.
+
+---
+
 ## November 18, 2026 UTC — #455 R337 accessible saved five-taste History chip text [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=ee2d587cb847460330b7256c7667bee46c9dc39c preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
