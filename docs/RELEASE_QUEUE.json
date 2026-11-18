@@ -8,6 +8,29 @@
   },
   "items": [
     {
+      "id": "DIC-Q-509-admin-normalized-identity",
+      "issue": 509,
+      "pr": null,
+      "title": "Reject NULL-normalized canonical name and roaster in admin approved coffee edits",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261118214500_dic_admin_edit_normalized_identity_guard.sql"
+      ],
+      "owner_source": "Issue #509 autonomous development-only R345; DIC_PREFLIGHT_VERIFIED development_sha=9ef9e69b8586313e1efe38fc9680766d1e67ea14 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Live SQL constants show name and roaster !!! satisfy original 1..200 display length check but canonical keys are NULL, which bypasses duplicate detection; no member incident established.",
+        "Scoped standalone rollback-only dic_ci PG17 regression tests reject both malformed identity changes, preserve valid admin edits and audit, unchanged shot counts."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source isolated PostgreSQL17/JWT, Node22, cloud/browser, Python, approval and privacy nonregression tests not yet verified.",
+        "Genuine hosted admin acceptance and release candidate approval unavailable; owner separate Publish required before any live migration."
+      ],
+      "notes": "Only two optional approved canonical identity input validations extended to require non-NULL normalized keys. Complete 13,186-character function otherwise identical to live source. No production writes, no old migration rewrite, no changes to public wrapper, Auth, Community, member histories.",
+      "production_deployed": false
+    },
+    {
       "id": "DIC-Q-33-r309-source-html-challenge-classification",
       "issue": 33,
       "pr": 3308,
