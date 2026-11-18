@@ -16468,6 +16468,28 @@
       ],
       "notes": "Do not drop private.mutate or rewrite historical migrations, existing receipts, hidden records, member or Community data. Production read-only; no active incident established.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-recommendation-unique-controls",
+      "issue": 509,
+      "pr": null,
+      "title": "Reject duplicate controls in member-selected recommendation provenance",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261118180000_dic_recommendation_unique_controls.sql"
+      ],
+      "owner_source": "Issue #509 R340 2026-11-18 owner-authorized Supabase audit and direct live PG17 synthetic reproduction",
+      "tests": [
+        "R340: 6 safe live PostgreSQL synthetic constant cases; disposable dic_ci PG17 rollback fixture source added, hosted CI pending"
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Applicable exact-source isolated PostgreSQL17/JWT, Node22, cloud/browser, approval and privacy regression CI pending",
+        "Isolated release-candidate readiness and actual #96 hosted member acceptance unverified; separate owner Publish is required"
+      ],
+      "notes": "Development-only immutable migration adds distinct-element validation to optional shot recommendation_context; preserves prior JSON-null guard, two allowed controls and original shot history; no known member incident, no production effects.",
+      "production_deployed": false
     }
   ],
   "history": [

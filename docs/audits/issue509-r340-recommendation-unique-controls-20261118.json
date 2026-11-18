@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R340",
+  "date_utc": "2026-11-18",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "42fc49e946b213b86f21ff78eb8bbd864b58d07e",
+    "blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "verified": true
+  },
+  "production": {
+    "read_only": true,
+    "postgres": "17.11",
+    "status": "ACTIVE_HEALTHY",
+    "sql_function": "private.dic_capture_recommendation_context()",
+    "sql_chars": 1760,
+    "md5": "962e12faeac2a7b5a671bd837c6c5c41",
+    "definition_fully_read": true,
+    "already_covered_in_prior_issue509": true,
+    "trigger": "BEFORE INSERT ON public.shots",
+    "caller": "public.dic_apply_client_change() sets dic.recommendation_context from authenticated save_shot payload",
+    "history_consumer": "site/cloud/shot_card.js joins used_controls as printed private historical attribution",
+    "ui_producer": "site/cloud/recommendation-use.js uses new Set() to deduplicate legitimate controls"
+  },
+  "safe_synthetic_readonly_sql": {
+    "cases": [
+      {
+        "controls": [
+          "grind",
+          "grind"
+        ],
+        "live_invalid_predicate": false,
+        "distinct": 1,
+        "valid": false
+      },
+      {
+        "controls": [
+          "temperature",
+          "temperature"
+        ],
+        "live_invalid_predicate": false,
+        "distinct": 1,
+        "valid": false
+      },
+      {
+        "controls": [
+          "grind",
+          "temperature"
+        ],
+        "live_invalid_predicate": false,
+        "distinct": 2,
+        "valid": true
+      },
+      {
+        "controls": [
+          "grind"
+        ],
+        "live_invalid_predicate": false,
+        "distinct": 1,
+        "valid": true
+      },
+      {
+        "controls": [
+          "grind",
+          null
+        ],
+        "live_invalid_predicate": false,
+        "distinct": 2,
+        "valid": false
+      },
+      {
+        "controls": [
+          "other"
+        ],
+        "live_invalid_predicate": true,
+        "distinct": 1,
+        "valid": false
+      }
+    ],
+    "reason": "Current live 1-2 total array bound does not require elements distinct. Two repeated controls can lead to 'Used grind and grind' in private shot history; no actual member occurrence verified."
+  },
+  "independent_existing_fix": {
+    "migration": "supabase/migrations/20261114115000_dic_recommendation_context_null_control_guard.sql",
+    "blob": "dadd06e1982a84d289481b661702f9940e375b7d",
+    "state": "DEVELOPMENT_ONLY_TESTING_UNAPPLIED",
+    "retained_not_reimplemented": true
+  },
+  "source_only_repair": {
+    "migration": "supabase/migrations/20261118180000_dic_recommendation_unique_controls.sql",
+    "migration_blob": "eaed6b0418aeb60970c43e0c8dd4cfda3ae9e1a1",
+    "isolated_regression": "supabase/tests/recommendation_unique_controls.sql",
+    "regression_blob": "9ae348244ea6545b208e8ad1fbb76dff652b7da4",
+    "runner": "scripts/audit/isolated-sql-regression.sh",
+    "runner_blob": "10797219a9706caec8baa17910d01fe76b85d750",
+    "change": "Add count(distinct used_controls) == array_length guard after retained NULL and unknown-control guards; no backfill, no shot rejection, no other functional change",
+    "queue": "DIC-Q-509-recommendation-unique-controls"
+  },
+  "tests": {
+    "read_only_live_sql": "6_SYNTHETIC_CASES_REPRO",
+    "isolated_pg17": "PENDING_EXACT_PR_SOURCE",
+    "node22": "PENDING",
+    "cloud_browser": "PENDING",
+    "approval": "PENDING",
+    "hosted_member": "UNVERIFIED",
+    "frozen603": "NOT_RUN"
+  },
+  "scope": {
+    "historical_migrations_unchanged": true,
+    "production_sql_data_auth_storage_edge_config_writes": 0,
+    "source_267_code_line_credit": 0,
+    "new_provider_definition_words_credit": 0,
+    "no_publish": true,
+    "no_backup_or_schedule_changes": true,
+    "owner_alert": "NONE"
+  },
+  "overall_status": "IN_PROGRESS_TESTING",
+  "next": "Create source-bound development-only PR; confirm disposable PG17/Node22/browser/approval PASS before safe nonforce integration; then resume genuinely new/changed Supabase object"
+}

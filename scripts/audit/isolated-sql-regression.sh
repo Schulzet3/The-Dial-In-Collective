@@ -94,4 +94,10 @@ if [[ -f supabase/migrations/20261118164500_dic_remove_legacy_private_hide_shot_
 else
   echo "NOT_APPLICABLE: #509 legacy internal Hide Shot retirement; migration excluded from tested source"
 fi
+if [[ -f supabase/migrations/20261118180000_dic_recommendation_unique_controls.sql ]]; then
+  echo "Running recommendation_unique_controls"
+  run_sql supabase/tests/recommendation_unique_controls.sql
+else
+  echo "NOT_APPLICABLE: #509 recommendation unique-controls; migration excluded from tested source"
+fi
 echo 'PASS: all checked-in migrations and SQL suites, including staged import/setup, cross-account and source-worker authorization and first-style owner isolation regressions; no hosted connection.'
