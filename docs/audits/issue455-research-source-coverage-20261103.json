@@ -3496,7 +3496,7 @@
       "source_version": "PUBLISHER_HTML_AS_RETRIEVED_2026-11-16; ARCHIVE_BYTES_NOT_CAPTURED",
       "original_archived_claim_source": "docs/research/originals/09_The_Causal_Foundation_of_Espresso_Extraction_Grinder_and_Burr_Interactions.md",
       "archived_claim_source_git_blob_sha": "1e1b8bbef0ecb05ed0b20195191bcad26663cf0d",
-      "access": "FULL_ORIGINAL_PUBLISHER_HTML_READ; linked raw shot logs/DE1 ZIP and full sample calculations NOT independently downloaded or rerun",
+      "access": "AUTHOR_ORIGINAL_ARTICLE_HTML_AND_AUTHOR_LINKED_PUBLIC_11_SHOT_GOOGLE_SHEET_VISIBLE_ROWS_DIRECTLY_REVIEWED; SHEET_EXPORT_BYTES_AND_DE1_ZIP_NOT_ACCESSED",
       "provenance": "Original report 09's quantitative EG-1 SSP ULF vs Niche Zero comparison checked against cited author's dated 2021 original experiment; distinct from previously registered Gagne 24-grinder PSD survey and popcorning/seasoning posts.",
       "evidence_grade": "FIRST_PERSON_NON_PEER_REVIEWED_SINGLE_COFFEE_N11_EXPERIMENT_WITH_SAMPLE_AND_MEASUREMENT_LIMITS",
       "claims_verified_externally": "Author alternated six EG-1/SSP ULF and five Niche Zero accepted shots on one frozen/thawed washed Colombian coffee using Decent DE1+, 18 g basket, WDT/filter papers, 30-second bloom, 1:4 beverage ratio and ~2mL/s showerhead flow control. Author reports raw refractometer EY EG-1 26.8±0.2% versus Niche 24.8±0.1% (author quoted difference 2.1±0.3 percentage points); VST-filtered EG-1 24.1±0.3% versus Niche 22.7±0.2% (quoted difference 1.3±0.3 points). Original archived report repeats this restricted experiment appropriately; exact printed means and reported difference need not arithmetically reconcile at displayed precision because of rounding.",
@@ -3505,7 +3505,42 @@
       "research_use": "DESCRIPTIVE_METHOD_BOUNDARY_ONLY_DO_NOT_ELEVATE_TO_NEW_POLICY",
       "implementation_status": "RESEARCH_ONLY_NO_APP_CHANGE",
       "production_deployed": false,
-      "github267_literal_review_credit": 0
+      "github267_literal_review_credit": 0,
+      "original_public_log_reanalysis_20261118": {
+        "evidence_note_path": "docs/research/issue455-r340-gagne-public-11-shot-log-reanalysis-20261118.md",
+        "public_author_sheet_url": "https://docs.google.com/spreadsheets/d/1r33CI6lczJhuYcNjy8z3jABagZoxO8Z0kkd6h5Ppos0/edit?usp=sharing",
+        "original_article_url": "https://coffeeadastra.com/2021/05/10/a-comparison-between-standard-and-low-fines-espresso-shots/",
+        "original_study_shots": 11,
+        "groups": {
+          "EG1": 6,
+          "Niche": 5
+        },
+        "row_level_data": "Directly read public Google Sheet rendered rows 2-12, 11 structured measurements; original file download/hash and 11 raw DE1 shot files NOT verified",
+        "extraction_yield_formula": "EY_percent=output_weight_g*TDS_percent/dose_g",
+        "independently_recomputed": {
+          "raw_EG1_mean_percent": 26.84017030718412,
+          "raw_Niche_mean_percent": 24.78741334878025,
+          "raw_difference_pp": 2.0527569584038687,
+          "filtered_EG1_mean_percent": 24.07487118324687,
+          "filtered_Niche_mean_percent": 22.725736213639934,
+          "filtered_difference_pp": 1.3491349696069364,
+          "raw_EG1_sample_SD": 0.5869001267457485,
+          "raw_Niche_sample_SD": 0.2652725662714876,
+          "filtered_EG1_sample_SD": 0.6439171610734291,
+          "filtered_Niche_sample_SD": 0.4123805390013002
+        },
+        "open_source_ambiguities": [
+          "Niche shot #2 prose grind setting 9.5 vs author article fixed 10.0",
+          "Niche shot #2 structured 74.5 g output vs comment's probably typo 746.5 g",
+          "EG1 shot #5 drip cell NaN vs comment drip 4.2",
+          "Filtered sample-prism protocol changed after sixth reading, raw DE1 files not independently obtained"
+        ],
+        "scientific_scope": "Small single-coffee author unblinded-condition extraction-yield comparison, NOT a direct burr PSD measurement, independent multi-coffee rep, taste rating trial, or evidence to change DIC numeric targets.",
+        "source_bytes_sha256": null,
+        "source_hash_status": "HTML_PUBLIC_SHEET_RENDERED_LIVE_NO_IMMUTABLE_EXPORT_HASH",
+        "github267_literal_review_credit": 0
+      },
+      "review_status": "; R455-340_AUTHOR_PUBLIC_11_ROW_LOG_DIRECTLY_READ_INDEPENDENT_EY_CALC_AND_LIMITS; NO_RAW_DE1_FILES_OR_IMMUTABLE_SHEET_HASH"
     },
     {
       "id": "LIT-2015-VOHRA-CENT-NOF1-STATEMENT",
@@ -11609,6 +11644,36 @@
       "grade": "ORIGINAL_PUBLISHER_RESULTS_PRIOR_R333; FIGURE_PIXELS_RAW_RATINGS_NOT_VERIFIED",
       "factual_status": "SCHEMA_AND_EXTERNAL_VALIDITY_BOUNDARY_VERIFIED; PERSONAL_ESPRESSO_EFFECTIVENESS_UNPROVEN",
       "result": "NO_NEW_TASTE_TARGET_TEMPERATURE_CAPTURE_OR_OPTIMUM"
+    },
+    {
+      "id": "R455-EV-R340-A",
+      "source": "LIT-2021-GAGNE-ULF-NICHE-ESPRESSO",
+      "claim": "All 11 author-published March 2021 public EG1/Niche Sheet rows independently permit recalculation EY% = beverage output g times raw TDS% divided by puck dose g: 6 EG1 mean 26.840%, 5 Niche mean 24.787%, difference 2.053 pp. Matches author's rounded raw averages 26.8/24.8, diff 2.1 pp.",
+      "source_locator": "https://docs.google.com/spreadsheets/d/1r33CI6lczJhuYcNjy8z3jABagZoxO8Z0kkd6h5Ppos0/edit?usp=sharing rows 2-12 columns 'Output weight', 'dose', 'TDS'; https://coffeeadastra.com/2021/05/10/a-comparison-between-standard-and-low-fines-espresso-shots/ 'average raw extraction yields'",
+      "grade": "ORIGINAL_AUTHOR_PUBLIC_MEASUREMENT_LOG_DIRECT_READ_AND_11_ROW_INDEPENDENT_ARITHMETIC_RECHECK; NOT_CALIBRATION_OR_EXPERIMENT_REPLICATION",
+      "factual_status": "SOURCE_RECORDED_DESCRIPTIVE_EY_RECOMPUTED_ROUNDED_INPUTS_ONLY",
+      "result": "Record exact sample-specific observation and formula, not cross-coffee or member cup-quality efficacy.",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-R340-B",
+      "source": "LIT-2021-GAGNE-ULF-NICHE-ESPRESSO",
+      "claim": "Filtered raw Sheet TDS values independently yield EG1 24.075% and Niche 22.726%, difference 1.349 pp; original author 24.1/22.7 and 1.3 pp match displayed precision. Raw group SD EG1 0.587, Niche 0.265 pp; filtered SD EG1 0.644, Niche 0.412 pp. Descriptive SEM from 11 shot samples is NOT validated systematic measurement uncertainty or a causal CI.",
+      "source_locator": "https://docs.google.com/spreadsheets/d/1r33CI6lczJhuYcNjy8z3jABagZoxO8Z0kkd6h5Ppos0/edit?usp=sharing rows 2-12 TDS-f/dose/output; https://coffeeadastra.com/2021/05/10/a-comparison-between-standard-and-low-fines-espresso-shots/ quoted filtered EY means; R340 note full row table",
+      "grade": "AUTHOR_LOG_ROW_LEVEL_NUMERIC_REANALYSIS_AUTHOR_INSTRUMENT_CLAIMS_UNVERIFIED",
+      "factual_status": "ARITHMETIC_VERIFIED_AUTHOR_NUMBERS_NOT_INDEPENDENT_SENSOR_CALIBRATION",
+      "result": "Do not use a universal burr correction or scientific personal-confidence label from these limited measurements.",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-R340-C",
+      "source": "LIT-2021-GAGNE-ULF-NICHE-ESPRESSO",
+      "claim": "Original public shot #2 comment '9.5' conflicts with author's prose all Niche shots held at grind 10.0; #2 weight comment 'bevw746.5 (probably 74.5 but check in shot data)' conflicts with structured 74.5 g; EG1 #5 drip NaN conflicts with note drip 4.2; DE1 ZIP/raw curves and source revisions not verified.",
+      "source_locator": "https://docs.google.com/spreadsheets/d/1r33CI6lczJhuYcNjy8z3jABagZoxO8Z0kkd6h5Ppos0/edit?usp=sharing rows 7,11 and https://coffeeadastra.com/2021/05/10/a-comparison-between-standard-and-low-fines-espresso-shots/ setup/measurement methods; original DIC report09 blob 1e1b8bbef0ecb05ed0b20195191bcad26663cf0d",
+      "grade": "AUTHOR_SOURCE_INTERNAL_DISCREPANCIES_DIRECTLY_CHECKED_UNRESOLVED_WITHOUT_RAW_DE1_FILES",
+      "factual_status": "INTERNAL_PROVENANCE_AMBIGUITIES_CONFIRMED_NO_AUTHOR_CORRECTION_ASSUMED",
+      "result": "Preserve contradictory source versions; cannot certify every shot held identical calibration, mechanism or user outcome.",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -11903,26 +11968,31 @@
       "run_id": "R455-336",
       "next": "Verify full Git blob and docs-only PR/merged governance; original S019/Oct29 ZIP inaccessible in prior explicit connected searches; review a distinct reproducible Log Shot/Rate/Recommendation UX gap with tests. Preserve #267/#33/#96 boundaries and owner consent for empirical outcome work.",
       "owner_approval_now_required": false
+    },
+    {
+      "run_id": "R455-340",
+      "next": "Independently recomputed original Gagne 11-shot public log, three checks added to existing study/proposal with raw data provenance caveats; verify docs-only PR and merged Git readback; no universal burr correction or member outcome claim.",
+      "owner_approval_now_required": false
     }
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-336",
-    "date": "2026-11-17",
-    "development_preflight_sha": "cd242ba5ade0b90f0a0f33b0b189582e34ed5125",
+    "run_id": "R455-340",
+    "date": "2026-11-18",
+    "development_preflight_sha": "facbc8178a46b4c257557a48f08005d5f760010a",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
     "source_counts": {
       "sources": 195,
-      "evidence_checks": 581,
+      "evidence_checks": 584,
       "proposals": 261
     },
-    "research_status": "OVERSIZED_CANONICAL_GIT_BLOB_FULLY_RECOVERED_PARSED; R333_DISTINCT_SAME_COHORT_INGESTED; R334_R335_DEDUPED",
+    "research_status": "PUBLIC_AUTHOR_11_ROW_DATA_DIRECTLY_READ_AND_EY_RECOMPUTED; ORIGINAL_RAW_DE1_LINK_AND_SOURCE_VERSION_HASH_NOT_VERIFIED",
     "runtime_changed": false,
     "tests_run": false,
     "ci_not_yet_verified": true,
     "production_deployed": false,
     "github267_literal_review_credit": 0,
     "owner_approval_now_required": false,
-    "next": "Verify exact source docs PR and merged governance/readback; continue nonoverlapping SAFE UX bug investigation or primary citation gap; original Oct29 ZIP and standalone S019 still not verified."
+    "next": "Read exact docs-only PR-head/merged approval CI, verify merged Git blobs, comment #455; preserve source ambiguity and no numeric policy; next distinct primary claim or SAFE Log Shot UX."
   },
   "policy_decisions_resolved": [
     {
@@ -17625,7 +17695,10 @@
       "evidence": [
         "R455-EV-LIT-315-A",
         "R455-EV-LIT-315-B",
-        "R455-EV-LIT-315-C"
+        "R455-EV-LIT-315-C",
+        "R455-EV-R340-A",
+        "R455-EV-R340-B",
+        "R455-EV-R340-C"
       ],
       "finding": "Source09's numerical burr-comparison observations derive from one small-N author experiment; direct PSD and validated sensory effectiveness are absent, and extrapolated low-fines grinder-specific universal corrections would exceed evidence and product authorization.",
       "user_benefit": "Avoid false scientific confidence and incorrect universal grind, extraction-yield, time or temperature policy for unlike grinders and coffees.",
@@ -17637,9 +17710,10 @@
       "implementation": "RESEARCH_ONLY_NO_APP_SOURCE_TEST_OR_POLICY_CHANGE_NO_RELEASE_QUEUE",
       "files": [
         "docs/audits/issue455-research-source-coverage-20261103.json",
-        "docs/workstreams/ops-issue455-r315-gagne-low-fines-claim-20261116.md"
+        "docs/workstreams/ops-issue455-r315-gagne-low-fines-claim-20261116.md",
+        "docs/research/issue455-r340-gagne-public-11-shot-log-reanalysis-20261118.md"
       ],
-      "test_plan": "Static primary-source and current-live-code review. No application source/test/CI modified; PR-head docs/build/governance applicability to be verified separately. 48/48 reference cases and synthetic Node tests do not validate cup quality.",
+      "test_plan": "Static primary-source and current-live-code review. No application source/test/CI modified; PR-head docs/build/governance applicability to be verified separately. 48/48 reference cases and synthetic Node tests do not validate cup quality. R340 independently reanalysed 11 public author shot rows; DIC app CI not run for docs-only claim validation.",
       "release_queue": null,
       "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY",
       "production_deployed": false,
