@@ -4121,6 +4121,20 @@
       "evidence_grade": "DIRECT_SOURCE_CONTROL_FLOW_REPRODUCTION_NO_REAL_MEMBER_UX_TRIAL",
       "source_access": "IMMUTABLE_GITHUB_BLOBS",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "LIVE-20261118-COFFEE-SEARCH-EMPTY-STATE-R344",
+      "type": "original_current_app_source_ux_reproduction",
+      "path": "site/cloud/main.js",
+      "git_blob_sha": "0c586968d8c4c126fbf49f3571128b45f3993a1a",
+      "supporting_path": "site/lib/model.js",
+      "supporting_git_blob_sha": "baafc8fa64fa3e359d8e42094e41c5d72a3b22df",
+      "source_commit_sha": "cb972e74dd6dac301604dc1d4df815b257c41636",
+      "review_status": "DIRECT_LIVE_COFFEES_RENDER_FALLBACK_AND_MODEL_SEARCH_FILTER_READ",
+      "claim": "M.visibleCoffees may return no rows for a nonempty unmatched search while a saved visible coffee exists; main.js renders the same unconditional first-coffee empty state as a truly empty library.",
+      "evidence_grade": "DIRECT_SOURCE_CONTROL_FLOW_NO_MEMBER_REPORT_OR_FIELD_EXPERIMENT",
+      "source_access": "IMMUTABLE_GITHUB_BLOBS",
+      "github267_literal_review_credit": 0
     }
   ],
   "evidence_checks": [
@@ -11755,6 +11769,26 @@
         44246507251,
         44246507254
       ]
+    },
+    {
+      "id": "R455-EV-R344-NO-MATCH-NEGATIVE",
+      "source": "LIVE-20261118-COFFEE-SEARCH-EMPTY-STATE-R344",
+      "claim": "Original main.js reused 'Add your first coffee to get started.' when active search produced zero matches, including with saved coffee; model.visibleCoffees deliberately filters and does not change current selection.",
+      "grade": "DIRECT_SOURCE_CONTROL_FLOW",
+      "factual_status": "REPRODUCED_STATIC_AT_IMMUTABLE_GIT_BLOB",
+      "result": "Use a search-specific empty result message, not a new search filter/selection behavior.",
+      "owner_approval_required": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-R344-EMPTY-POSITIVE",
+      "source": "LIVE-20261118-COFFEE-SEARCH-EMPTY-STATE-R344",
+      "claim": "Pure helper differentiates unmatched nonempty search and true empty/whitespace search, without displaying member-entered search text; the active render branch calls it only after list markup is empty.",
+      "grade": "SOURCE_CHANGE_AUTHORED_SYNTHETIC_TESTS_PENDING_CI",
+      "factual_status": "PROPOSED_TESTING_NOT_YET_VERIFIED",
+      "result": "Maintain default first-coffee guidance for empty collection, and existing pinning, private history and all five rating/recommendation behaviors.",
+      "owner_approval_required": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -12069,28 +12103,32 @@
       "run_id": "R455-343-FINAL",
       "next": "Verify docs-only R343 READY PR/approval and read back merge; #455 remains OPEN for safe UX and outstanding source inventory; no #33 original241 ownership overlap.",
       "owner_approval_now_required": false
+    },
+    {
+      "run_id": "R455-344",
+      "next": "Verify R344 exact PR-head Node22/lint, browser/mobile/offline/a11y, applicable SQL/security/governance; if SUCCESS and no conflicts nonforce [skip netlify] merge, read merged Git blobs and exact-source CI, then docs-only READY reconciliation. Continue remaining external S019/Oct29 ZIP research; keep #455 open.",
+      "owner_approval_now_required": false
     }
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-343-FINAL",
+    "run_id": "R455-344",
     "date": "2026-11-18",
-    "development_preflight_sha": "2f00b7f87ce599bd181f8c244290814812aa77a2",
+    "development_preflight_sha": "cb972e74dd6dac301604dc1d4df815b257c41636",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "prewrite_source_sha": "2f00b7f87ce599bd181f8c244290814812aa77a2",
+    "prewrite_source_sha": "cb972e74dd6dac301604dc1d4df815b257c41636",
     "source_counts": {
-      "sources": 196,
-      "evidence_checks": 589,
-      "proposals": 262
+      "sources": 197,
+      "evidence_checks": 591,
+      "proposals": 263
     },
-    "research_status": "R343_VERIFIED_SAFE_ZERO_HISTORY_UX_MERGED_CI_READY_DEVELOPMENT_ONLY",
-    "runtime_changed": false,
-    "source_runtime_merge_sha": "6c985ed1f8027d3bb91017a6eaaccc31030b448f",
+    "research_status": "DIRECT_SOURCE_VERIFIED_SAFE_SEARCH_EMPTY_STATE_PROPOSED_TESTING",
+    "runtime_changed": true,
     "tests_run": false,
-    "source_bound_prior_ci_verified": true,
+    "ci_not_yet_verified": true,
     "production_deployed": false,
     "github267_literal_review_credit": 0,
     "owner_approval_now_required": false,
-    "next": "Verify docs-only R343 READY PR/approval and read back merge; #455 remains OPEN for safe UX and outstanding source inventory; no #33 original241 ownership overlap."
+    "next": "Run exact-source PR CI and nonforce merge if successful, verify and reconcile queue READY development only."
   },
   "policy_decisions_resolved": [
     {
@@ -18387,6 +18425,38 @@
         44246507251,
         44246507254
       ]
+    },
+    {
+      "id": "R455-PROP-R344-COFFEE-SEARCH-ZERO-MATCH",
+      "severity": "P3_SAFE_SEARCH_EMPTY_RESULT_USABILITY",
+      "source": [
+        "LIVE-20261118-COFFEE-SEARCH-EMPTY-STATE-R344"
+      ],
+      "evidence": [
+        "R455-EV-R344-NO-MATCH-NEGATIVE",
+        "R455-EV-R344-EMPTY-POSITIVE"
+      ],
+      "finding": "Searching for a coffee with zero matches incorrectly tells members to add their first coffee even if their collection contains saved coffees.",
+      "user_benefit": "Make search results truthful and quickly recoverable without creating a new control or confusing new users.",
+      "current_locked": "Single coffee search in tucked Search & Sort, metadata matches only, current coffee pinned outside search and unchanged by searching; all shot history/five tastes/privacy/offline/recommendation behavior retained.",
+      "current_app": "Original site/cloud/main.js blob 0c586968d8c4c126fbf49f3571128b45f3993a1a; site/lib/model.js baafc8fa64fa3e359d8e42094e41c5d72a3b22df at cb972e74dd6dac301604dc1d4df815b257c41636.",
+      "proposed_change": "SAFE display-only active-search no-matches copy; retain original first-coffee copy when no visible saved coffees and for non-search empty results.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "AUTHORED_TESTING_CI_PENDING",
+      "files": [
+        "site/cloud/main.js",
+        "site/cloud/coffee-list-empty.js",
+        "tests/issue455-r344-coffee-search-empty-state.test.mjs",
+        "docs/RELEASE_QUEUE.json",
+        "docs/audits/issue455-research-source-coverage-20261103.json",
+        "docs/workstreams/ops-issue455-r344-coffee-search-empty-state-20261118.md",
+        "build_cloud.mjs"
+      ],
+      "test_plan": "Three synthetic Node22 cases; exact-source Node22 and relevant real Chromium/mobile/offline/a11y/SQL/security/governance; reuse unchanged evidence, no live user or member reads. First PR-head 44253946139 failed pre-browser source graph due missing new module allowlist; updated build_cloud.mjs allowlist and synthetic source contract, retest pending.",
+      "release_queue_status": "TESTING_NOT_DEPLOYED",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "changeScope": {
