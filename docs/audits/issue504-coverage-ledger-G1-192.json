@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "issue": 504,
+  "batch_id": "G1-192",
+  "append_only_independent_shard": true,
+  "reason": "G1-187 central ledger/journal PR #2112 is OPEN and queued, so no concurrent edits to those canonical paths.",
+  "prior_merged_through": "G1-186",
+  "prior_merged_gh_records": 1228,
+  "prior_merged_gh_words": 292217,
+  "pending_previous": [
+    {
+      "batch": "G1-187",
+      "pr": 2112,
+      "records": 8,
+      "words": 993
+    },
+    {
+      "batch": "G1-188",
+      "pr": 2117,
+      "records": 8,
+      "words": 987
+    },
+    {
+      "batch": "G1-189",
+      "pr": 2123,
+      "records": 8,
+      "words": 1014
+    },
+    {
+      "batch": "G1-190",
+      "pr": 2131,
+      "records": 8,
+      "words": 896
+    },
+    {
+      "batch": "G1-191",
+      "pr": 2139,
+      "records": 8,
+      "words": 855
+    }
+  ],
+  "this_batch": {
+    "PR_original_metadata_ids": [
+      "github:pull/1095:title+body",
+      "github:pull/1096:title+body",
+      "github:pull/1097:title+body",
+      "github:pull/1098:title+body",
+      "github:pull/1099:title+body",
+      "github:pull/1100:title+body",
+      "github:pull/1101:title+body",
+      "github:pull/1102:title+body"
+    ],
+    "original_objects": 8,
+    "original_words": 840,
+    "utf8_bytes": 7973,
+    "source_receipt_path": "docs/audits/issue504-review-G1-192.json",
+    "status": "DIRECT_REVIEW_COMPLETE; INTEGRATION_PENDING"
+  },
+  "conditional_only_if_187_through_192_integrated_once": {
+    "batches": 192,
+    "file_lines": 7919,
+    "file_words": 60754,
+    "github_original_objects": 1276,
+    "github_original_words": 297802
+  },
+  "previous_correction": "G1-117 −15 records/−4012 words already applied to prior cumulative, do not apply twice",
+  "historic_release_queue_coverage": "lines 1–4736/5377 only, not complete",
+  "unreviewed_surfaces": "PR reviews/threads/comments/diffs, remaining issue content, workflows/jobs/logs/artifacts, commits/tags/releases/trees/binaries, drift and delegated #267 gaps",
+  "next_exact_original": "PR #1103 title word 1; then body",
+  "promotion_rule": "Keep conditional counts until all pending PR heads and merged-source checks have passed, nonforce integration and readback verified."
+}
