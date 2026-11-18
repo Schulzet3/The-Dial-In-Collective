@@ -16360,6 +16360,38 @@
       ],
       "notes": "Preserves historical migrations, original submission precedence, mutation receipts, library IDs and shots. R331-A alias matcher not using recorded aliases remains separately OPEN and must not be silently auto-linked.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-r346-search-ime-composition",
+      "issue": 455,
+      "pr": 3263,
+      "title": "Preserve active IME composition during private coffee Search",
+      "state": "READY",
+      "merged_source_sha": "19180403495416d296ab743d016192056541bc45",
+      "scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "owner_source": "Issue #455 Option B safe Locked-compatible UX; DIC_PREFLIGHT_VERIFIED development_sha=07343a95c8f4cb7af963d852a276567ebf1872ac preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Live original site/cloud/main.js red-source reproduction: coffee Search rerendered root.innerHTML on every input, including during active IME composition; no physical-device/user incidence claimed.",
+        "Four synthetic targeted Node22 R346 negative/positive checks #4954-4957 PASS on PR head and exact merged source: composing keystrokes do not replace input; committed typing and compositionend restore final query/focus/caret; existing five-taste handler and empty search remain.",
+        "Exact PR #3263 head 68b2332d4696b24062535449606c70c542b5b8f3 Node22/lint 44297347257 SUCCESS (5521 PASS / 0 FAIL / 6 intentional SKIP); browser/mobile/offline/a11y+cloud 44297347154, isolated SQL 44297347192, security 44297347093, approval 44297347346 all SUCCESS. Frozen603 44297347128 SKIPPED, not PASS.",
+        "Nonforce squash [skip netlify] source merge 19180403495416d296ab743d016192056541bc45; exact source/test/journal Git blobs 3/3 identical PR head and merged source.",
+        "Merged-source Node22/lint 44298232248 5521 PASS / 0 FAIL / 6 SKIP including R346 #4954-4957; actual browser/390px/mobile/offline/a11y+cloud 44298232187 and governance 44298232397 COMPLETED SUCCESS at exact merge SHA."
+      ],
+      "ci_runs": [
+        44297347257,
+        44297347154,
+        44297347346,
+        44297347192,
+        44297347093,
+        44298232248,
+        44298232187,
+        44298232397
+      ],
+      "blockers": [],
+      "notes": "READY DEVELOPMENT ONLY; production_deployed=false. This is a source-level IME composition continuity guard, not verified physical CJK handset testing. No taste/numeric engine change, private member/provider reads, telemetry, experimental cup-quality data, SQL/Auth/Edge, main/release or deployment. Existing shot records, five taste inputs, offline persistence, calibration, style/feed, Community/RLS preserved. Research inventory remains 197/594/263; #267 exhaustive line audit separate.",
+      "production_deployed": false
     }
   ],
   "history": [
@@ -19181,6 +19213,15 @@
       "source_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
       "production_deployed": false,
       "evidence": "R344 original source PR #3242 8/8 immutable head/merge blob parity; merged Node22 44272018599 5503 PASS/0 FAIL/6 SKIP, real Chromium/mobile/offline 44272018809 and governance 44272018771 SUCCESS; head SQL/security SUCCESS. Frozen603 SKIPPED, separate #33 original241 live parser FAILED owned by #33. DIC_PREFLIGHT_VERIFIED development_sha=c9e510df31d0fb8ff14fdc569477037da7b4ba1b preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d. READY development only; NO publication."
+    },
+    {
+      "date": "2026-11-18",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r346-search-ime-composition",
+      "state": "READY",
+      "source_sha": "19180403495416d296ab743d016192056541bc45",
+      "production_deployed": false,
+      "evidence": "R346 PR #3263 source/head/merge 3/3 Git blobs identical, initial Node22 44297347257 and merged 44298232248 both 5,521 PASS/0 FAIL/6 SKIP, browser/cloud/mobile/offline/a11y 44297347154 and 44298232187 SUCCESS, head SQL 44297347192/security 44297347093, head/merge governance 44297347346/44298232397 SUCCESS; original603 SKIPPED. Development-only, not deployed."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
