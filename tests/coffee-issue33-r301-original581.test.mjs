@@ -37,7 +37,7 @@ test('R301 current selected direct notes outrank secondary narrative; YouTube Cl
  const r=extractPublicCoffeeFacts(build(),{source_url:url});
  assert.equal(r.ok,true);assert.equal(r.fields.name,title);
  const notes=String(r.fields.tasting_notes||'');
- console.log('[R301 DL CONFLICT DIAGNOSTIC] '+JSON.stringify({fields:r.fields,conflicts:r.conflicts,related:(r.source_facts||[]).filter(f=>/we hear|plum|cleo|tasting/i.test(String(f.label||'')+' '+String(f.value||''))).slice(0,16)}));
+ assert.ok((r.source_facts||[]).some(f=>f.label==='We hear'&&/Cleo/.test(String(f.value||''))&&!f.field),'keep linked song literal in member Source Review without typing it as a taste');
  for(const note of ['Plum','Lemonade','Wildflower Honey'])assert.match(notes,new RegExp(note,'i'));
  assert.doesNotMatch(notes,/\bCleo\b|blueberry|dark roast|tropical flavors|stone fruit/i);
  assert.ok(!r.seo_fallback_fields?.includes('tasting_notes'));

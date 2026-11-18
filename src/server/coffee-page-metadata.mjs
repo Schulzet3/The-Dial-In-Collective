@@ -1261,8 +1261,16 @@ function removeSiteSuffix(title,site){
  return stem||raw;
 }
 function labeledPairs(html,fields){
- const flavorText=(label,raw,max)=>clean(LOOKUP.get(keyOf(label))==='tasting_notes'?
-  raw.replace(/<\/?(?:span|strong|b|em|i|small|sup|sub|a|u|s|mark|abbr)\b[^<>]{0,2000}>/gi,''):raw,max);
+ const flavorText=(label,raw,max)=>{
+  // A selected "We hear" definition-list field may finish with linked
+  // music, not a fourth flavor. Retain the raw note list in Source Review.
+  if(keyOf(label)==='wehear'){
+   const song=raw.match(/^(.*?,.*?)\s*,\s*<a\b(?=[^>]{0,800}\bhref=["']https:\/\/(?:www\.)?(?:youtube\.com|youtu\.be|open\.spotify\.com|music\.apple\.com)\/)[^>]{0,800}>[^<>]{1,60}<\/a>\s*$/iu);
+   if(song&&song[1].split(/\s*,\s*/).length>=2)raw=song[1];
+  }
+  return clean(LOOKUP.get(keyOf(label))==='tasting_notes'?
+   raw.replace(/<\/?(?:span|strong|b|em|i|small|sup|sub|a|u|s|mark|abbr)\b[^<>]{0,2000}>/gi,''):raw,max);
+ };
  // Structured specifications: <dt>Label</dt><dd>Value</dd>,
  // <tr><th>Label</th><td>Value</td></tr> and common flat key:value.
  for(const m of html.matchAll(/<dt\b[^<>]{0,2000}>([\s\S]{0,180}?)<\/dt>\s*<dd\b[^<>]{0,2000}>([\s\S]{0,800}?)<\/dd>/gi)){
