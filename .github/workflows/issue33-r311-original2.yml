@@ -1,0 +1,53 @@
+name: DIC Issue33 R311 original603 Durable Solution Blend selected source
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - tests/coffee-issue33-r311-original2.test.mjs
+      - scripts/audit/issue33-r311-original2-check.mjs
+      - .github/workflows/issue33-r311-original2.yml
+      - docs/workstreams/ops-issue33-r311-original2-20261118.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - tests/coffee-issue33-r311-original2.test.mjs
+      - scripts/audit/issue33-r311-original2-check.mjs
+      - .github/workflows/issue33-r311-original2.yml
+      - docs/workstreams/ops-issue33-r311-original2-20261118.md
+permissions:
+  contents: read
+jobs:
+  selected-official:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Five selected positive and adversarial current parser cases
+        run: node --test tests/coffee-issue33-r311-original2.test.mjs
+      - name: One guarded exact original #2 selected public HTTPS
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '2'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r311
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Fail-closed selected raw H1 parser Add Coffee and Source Review
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r311
+          DIC_R311_CHECKOUT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_R311_EVENT_SHA: ${{ github.sha }}
+        run: node scripts/audit/issue33-r311-original2-check.mjs
+      - name: One-day public selected source diagnostic
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r311-original2
+          path: /tmp/dic33-r311/
+          retention-days: 1
+          if-no-files-found: warn
