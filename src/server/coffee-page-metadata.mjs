@@ -313,6 +313,28 @@ function samePage(raw,target){
   return !!handle(a.pathname)&&handle(a.pathname)===handle(b.pathname);
  }catch{return false;}
 }
+
+function selectedDistrictLabelNarrativeDisagreement(product,clean,selectedName){
+ // Only direct, currently selected product claims; never generic SEO or siblings.
+ const blocks=productCoffeeProse(product,clean).filter(block=>!block.educational);
+ const headings=blocks.filter(block=>block.tag==='h1');
+ if(headings.length!==1||keyOf(headings[0].text)!==keyOf(selectedName))return null;
+ const prose=blocks.filter(block=>['p','li','dd'].includes(block.tag)&&block.text.length<=1000);
+ const narrative=/\b(?:this|the|our)\s+(?:co[- ]?op(?:erative)?|farm|estate|association)\s+(?:is|was)\s+(?:located|based)\s+in\s+(?:the\s+)?([\p{Lu}][\p{L}\p{M}'’-]{2,49})\s+District\b/iu;
+ const labeled=/^(?:Farm\s*\/\s*Region|Farm\s+Region|Growing\s+Region|District)\s*[:：]\s*([\p{Lu}][\p{L}\p{M}'’-]{2,49})\s+District\b/iu;
+ const stories=new Map(),labels=new Map();
+ for(const block of prose){
+  const story=block.text.match(narrative);
+  if(story)stories.set(keyOf(story[1]),story[1]+' District');
+  const label=block.text.match(labeled);
+  if(label)labels.set(keyOf(label[1]),block.text.replace(/^(?:Farm\s*\/\s*Region|Farm\s+Region|Growing\s+Region|District)\s*[:：]\s*/iu,'').trim().slice(0,200));
+ }
+ if(stories.size!==1||labels.size!==1)return null;
+ const [a]=stories.keys(),[b]=labels.keys();
+ if(a===b)return null;
+ return {narrative:[...stories.values()][0],label:[...labels.values()][0]};
+}
+
 const conflictsByFields=new WeakMap();
 const structuredFlavorByFields=new WeakMap();
 // Public-only evidence for a member to compare.  Never submit these candidates
@@ -3175,6 +3197,26 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    delete fields.producer;
   }
  }
+ // The selected co-op/farm narrative and direct Farm/Region label disagree
+ // on district. Preserve both raw claims, but choose neither automatically.
+ const selectedDistrictConflict=selectedDistrictLabelNarrativeDisagreement(
+  canonicalProduct,clean,publishedFullTitle);
+ if(selectedDistrictConflict){
+  rememberCoffeeReviewCandidate(fields,'origin',selectedDistrictConflict.narrative,
+   'Exact selected producer/cooperative location narrative');
+  rememberCoffeeReviewCandidate(fields,'origin',selectedDistrictConflict.label,
+   'Exact selected Farm/Region specification');
+  conflicts.add('origin');
+  delete fields.origin;
+  for(const [label,value] of [
+   ['Selected producer location (disputed)',selectedDistrictConflict.narrative],
+   ['Selected Farm/Region (disputed)',selectedDistrictConflict.label]
+  ])if(source_facts.length<384)source_facts.push({
+   field:'origin_context',label,value,source_url,source_type:'html',
+   section:'Contradictory exact selected-product districts; member review',conflicting:true
+  });
+ }
+
  // An extracted value is a suggestion, never proof of an official source.
  // Keep unexpected/absent facts blank instead of guessing.
  return {ok:true,source:'unverified_public_page',fields,available:Object.keys(fields),

@@ -67,11 +67,40 @@ test('R296 original Sholi is not certified when current exact selected H1 change
  assert.doesNotMatch(String(result.fields.tasting_notes||''),/chocolate|raspberry|coconut|vanilla/i);
 });
 
-test('R296 two printed district spellings are not independent proof of a single current district',()=>{
- const shown=productMarkup(page());
- assert.match(shown,/Muhanga District/i);
- assert.match(shown,/Muganga District/i);
- assert.notEqual('Muhanga District','Muganga District');
- assert.doesNotMatch(String(extractPublicCoffeeFacts(page(),{source_url:url}).fields.tasting_notes||''),
-  /Muhanga|Muganga/i,'place context is not a taste note');
+test('R296 conflicting selected districts withhold origin and expose both choices',()=>{
+ const result=extractPublicCoffeeFacts(page(),{source_url:url});
+ assert.equal(result.ok,true);
+ assert.equal(result.fields.origin,undefined,'no automatic choice between contradictory districts');
+ assert.ok(result.conflicts?.includes('origin'));
+ const options=result.conflict_options?.origin||[];
+ assert.ok(options.some(v=>/Muhanga District/i.test(v.value)),'narrative literal available');
+ assert.ok(options.some(v=>/Muganga District/i.test(v.value)),'Farm/Region literal available');
+ assert.ok((result.source_facts||[]).filter(v=>v.field==='origin_context'&&v.conflicting).length>=2);
+ assert.doesNotMatch(String(result.fields.tasting_notes||''),/Muhanga|Muganga/i);
+ assert.match(coffeeUrlPreviewMarkup(result),/Conflicting coffee information/);
+ assert.ok(coffeeSourceReviewSnapshot({...result,source_url:url})?.conflicts.includes('origin'));
+});
+test('R296 same source spelling does not generate a false district conflict',()=>{
+ const consistent=selected.replace('Muganga District','Muhanga District');
+ const result=extractPublicCoffeeFacts(page(name,consistent),{source_url:url});
+ assert.equal(result.ok,true);
+ assert.equal(result.conflicts?.includes('origin')||false,false);
+});
+test('R296 sibling district and different cooperative narrative cannot create a selected conflict',()=>{
+ const consistent=selected.replace('Muganga District','Muhanga District');
+ const sibling=page(name,consistent).replace('</aside>',
+  '<p>Farm/Region: Muganga District, Southern Province</p></aside>');
+ const unrelated=selected.replace('This Coop is located in the Muhanga District',
+  'Another cooperative is located in the Muhanga District');
+ for(const html of [sibling,page(name,unrelated)]){
+  const result=extractPublicCoffeeFacts(html,{source_url:url});
+  assert.equal(result.conflicts?.includes('origin')||false,false);
+ }
+});
+test('R296 different selected district labels also stay unresolved, not autocorrected',()=>{
+ const contradictory=selected.replace('Muganga District','Kigali District');
+ const result=extractPublicCoffeeFacts(page(name,contradictory),{source_url:url});
+ assert.equal(result.fields.origin,undefined);
+ assert.ok(result.conflicts?.includes('origin'));
+ assert.ok((result.conflict_options?.origin||[]).some(v=>/Kigali District/i.test(v.value)));
 });

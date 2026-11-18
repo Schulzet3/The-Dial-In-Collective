@@ -5,6 +5,7 @@ import {join} from 'node:path';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
+import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
 import {selectedProductHeadings} from './issue33-selected-product-heading.mjs';
 import {identicalCurrentSelectedTitle} from './issue33-selected-public-alternate.mjs';
 import {requiredFocusedSourceFailures} from './issue33-focused-source-acceptance.mjs';
@@ -32,6 +33,15 @@ const direct=scoped.replace(/<(?:script|style|nav|footer)\b[^>]*>[\s\S]*?<\/(?:s
 must(r.status==='FETCHED'&&r.parser_ok===true&&r.official_url===official,'exact_original_public_https_fetched');
 must(final?.protocol==='https:'&&final.hostname===new URL(official).hostname&&final.pathname===new URL(official).pathname,'current_same_exact_selected_url');
 must(raw?.length>0&&raw.length===r.html_bytes&&sha(raw)===r.html_sha256,'raw_html_sha256_and_byte_parity');
+const independentlyParsed=extractPublicCoffeeFacts(raw?.toString('utf8')||'',{source_url:official});
+const districtAlternatives=independentlyParsed.conflict_options?.origin||[];
+must(!f.origin&&r.conflicts?.includes('origin')&&
+ !independentlyParsed.fields?.origin&&independentlyParsed.conflicts?.includes('origin'),
+ 'contradictory_selected_district_origin_withheld');
+must(districtAlternatives.some(option=>/Muhanga District/i.test(option.value))&&
+ districtAlternatives.some(option=>/Muganga District/i.test(option.value)),
+ 'both_exact_selected_district_alternatives_reviewable');
+
 must(headings.length===1&&headings[0]===selected&&f.name===selected&&r.archived_coffee===selected&&
  identicalCurrentSelectedTitle(selected,headings[0],f.name),'one_exact_selected_h1_and_parser_identity');
 must(r.selected_heading_identity_verified===true&&r.add_coffee_ui_rendered===true&&r.source_review_rendered===true,'actual_add_coffee_and_source_review');
