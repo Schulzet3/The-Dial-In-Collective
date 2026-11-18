@@ -10,23 +10,34 @@
     {
       "id": "DIC-Q-455-r339-shot-toggle-descriptive-accessibility",
       "issue": 455,
-      "pr": null,
+      "pr": 3223,
       "title": "Make same-day Shot History disclosure buttons distinguishable to screen readers",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "fcf326e97119493fad62fd26dd7f2bd54bb160aa",
       "scope_paths": [
         "site/cloud/shot_card.js"
       ],
       "owner_source": "Issue #455 Option B SAFE Locked-compatible accessibility fix; DIC_PREFLIGHT_VERIFIED development_sha=e507e27280d10ccb6810553cf9c8cdc551349ef6 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "tests": [
         "Immutable current Shot History code overrode each disclosure button's visible measurements/style with a date-only aria-label; multiple same-day shots were indistinguishable to assistive-technology users. Real member incident not established.",
-        "Four synthetic Node22 regression cases newly authored: native accessible name details, same-day differing measured shots, expanded panel five ratings/notes immutability, unknown legacy values; hosted Node22/Chromium/mobile/offline/a11y/SQL/privacy/governance NOT YET RUN and NOT PASS."
+        "Four synthetic Node22 regression cases newly authored: native accessible name details, same-day differing measured shots, expanded panel five ratings/notes immutability, unknown legacy values; hosted Node22/Chromium/mobile/offline/a11y/SQL/privacy/governance NOT YET RUN and NOT PASS.",
+        "Initial source-head 27058e67d23bfec4ccf95aeefe502e30c04e39db Node attempt 44225367467 CANCELLED during test correction; never PASS. First corrected R339 head 9edf86bd0e87c79bba7a3114117186583ee604a1 Node22 run 44225589430 FAILED: 5468 PASS/2 FAIL/6 SKIP, caused solely by two existing stale aria-label expectations. New R339 four tests PASS; original failing 4914–4915 retained as red-first evidence.",
+        "Final corrected PR head 9551bce3b42377d044d5d1c074a8accef57f87e0 Node22/lint 44226256526 SUCCESS 5470 PASS/0 FAIL/6 intentional SKIP, R339 new cases 4903–4906 PASS and original date cases 4914–4915 PASS; head browser/mobile/offline/a11y 44226256523, isolated SQL 44226256508, security 44226256539, approval 44226256505 SUCCESS, exact SHA independently verified.",
+        "Non-force [skip netlify] PR #3223 squash merged fcf326e97119493fad62fd26dd7f2bd54bb160aa. All five final source/2-test/queue/SAME-COMMIT scoped journal Git blobs independently match tested PR head and final merge; merged exact-source Node22 44226766251 SUCCESS 5470 PASS/0 FAIL/6 SKIP with all R339/legacy date cases PASS and lint PASS; merged browser/mobile/offline/a11y 44226766218, approval/continuity 44226766198 SUCCESS.",
+        "Separate #33 original241 public selected-source workflow 44226256577 FAILED on current official H1/parser (not R339); exact merged #33 source workflow 44226766283 SUCCESS, but neither counted among R339 CI runs. Original frozen603 SKIPPED not PASS; no member/physical-device or measured espresso taste result."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Verify PR-head and applicable exact merged-source CI before READY; no deployment permitted"
+      "ci_runs": [
+        44226256526,
+        44226256523,
+        44226256508,
+        44226256539,
+        44226256505,
+        44226766251,
+        44226766218,
+        44226766198
       ],
-      "notes": "SAFE developer-only TESTING. Remove only date-only aria-label so native disclosure button name includes already-visible measured shot, style and calendar date. Existing aria-expanded and all historical originals, five ratings, controls, privacy, offline and Locked rules unchanged. No product/espresso numeric policy or provider effects.",
+      "blockers": [],
+      "notes": "READY development-only after R339 four new + two pre-existing cross-coverage positive/negative synthetic regressions, exact original corrected PR-head and merged-source Node22/lint 5,470 PASS / 0 FAIL / 6 intentional SKIP, real Chromium/mobile/offline/a11y, isolated SQL/security and governance success. Earlier cancelled and red-first attempts retained as failures; unrelated #33 public original241 PR-head source-unavailable fail separately tracked; no invented espresso-quality outcome. Native button accessible name includes original visible measured values/date/style without date-only override, five tastes and historical notes/records preserved. NOT DEPLOYED; production release requires separate explicit owner authority.",
       "production_deployed": false
     },
     {
