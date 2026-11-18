@@ -729,3 +729,26 @@ One live approve event at 2026-11-12T13:00:50Z, zero delivery rows/expired lease
 No private identities/member records/endpoints/keys, no DML/function execution, no production or other provider mutations. No new code/test/CI writes, fresh PASS/READY, publication, release, billing, backups or schedule changes. Full baseline IN_PROGRESS, genuine #96 end-user hosted delivery UNVERIFIED. No new owner-action alert.
 
 **Next exact cursor:** private.dic_member_approval_poll_gate singleton DDL/state, then next changed/unreviewed provider object or delivery outcome; never recredit R307 or #267.
+
+
+## November 18, 2026 UTC — Issue #509 R341 Community NULL revision bypass [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=9f7b9787dddcdef52143045023862f3cbb1bd1f7 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+Live Supabase azviqqejypsefzilgonr ACTIVE_HEALTHY PG17.11 and strictly SELECT-only. Directly reviewed full `public.dic_confirm_community_outlier(uuid,bigint)` (1,432 literal characters; MD5 `0657114255a0375b7f3fc502f780aa54`), read actual `public.shots.revision` NOT NULL catalog declaration, same-member browser client consumer and existing `community_quality_integrity.sql` synthetic contract. **Reproduced exact bug with three read-only SQL constants:** existing owned shot plus NULL p_expected_revision produces SQL UNKNOWN for `s.revision<>p_expected_revision`; PL/pgSQL `IF` does not reject, bypassing required optimistic revision. Stale non-NULL still rejects and exact non-NULL passes. Existing UI supplies a revision; no actual member incident established.
+
+Staged a narrow **GitHub development-source-only** additive replacement `supabase/migrations/20261118181500_dic_community_outlier_null_revision_guard.sql` changing just the null-unsafe predicate to `IS DISTINCT FROM`, preserving all other full-source bytes and authorization/fingerprint handling. New rollback-only isolated six-contributor PostgreSQL 17 behavioral fixture `supabase/tests/community_outlier_null_revision.sql` checks NULL/stale refusal, genuine admitted owner confirmation, held -> eligible and replay; runner conditionally gates test to included migration, never treats NOT_APPLICABLE as PASS. SAME-COMMIT Git preflight, scoped journal, structured receipt `docs/audits/issue509-r341-community-outlier-null-revision-20261118.json` and append-only ledger included. PR/head/hosted CI **NOT_YET_RUN**; status TESTING not READY, baseline IN_PROGRESS, no first-time provider word or #267 source-line credit. No production/provider SQL/data/Auth/Edge/Storage/config changes, publish, backups, billing or schedule. Next: exact PR-head PG17 + Node22/browser/approval CI, repair if necessary, nonforce [skip netlify] merge only on successful source-bound checks; #96 hosted real-member acceptance unverified.
+
+
+## November 18, 2026 UTC — Issue #509 R341a isolated test fixture variable collision correction [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=9f7b9787dddcdef52143045023862f3cbb1bd1f7 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+Before any source-bound CI acceptance, independently caught an ambiguous PL/pgSQL fixture variable: `shot_id=shot_id` could resolve to both test local and `private.contribution_links.shot_id` and incorrectly fail PostgreSQL compilation. The **test-only** same-commit correction renames the local `fixture_shot_id` and qualifies `link.shot_id=fixture_shot_id` in `supabase/tests/community_outlier_null_revision.sql`. No migration, application function, production, permission or behavioral change. Recheck CI at this NEW PR head; older pending runs are not evidence. Same-commit mandatory preflight receipt above. R341 live bug and release TESTING status unchanged.
+
+
+## November 18, 2026 UTC — Issue #509 R341b queue intake CI repair [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=9f7b9787dddcdef52143045023862f3cbb1bd1f7 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+Read back exact PR #3295 latest head `fd48065ca1b027e0f0425a040e1c041fcd4914d5`; approval/continuity run [44369193184](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44369193184) **FAILED** due mandatory release queue intake: new additive migration was untracked in `docs/RELEASE_QUEUE.json`. No source correctness failure established from that job. Added `DIC-Q-509-outlier-null-revision-guard` with **TESTING**, exact scope migration, issue/PR, CI and hosted acceptance blockers, no READY/DEPLOYED claim. This is documentation queue tracking and journal only; no app/test/CI changes to the previously source-bound R341/R341a commits, no Supabase/prod release/write or billing/backup/schedule change. Next verify **new exact PR head** CI; prior failed/overlapped jobs are not PASS. Baseline IN_PROGRESS.

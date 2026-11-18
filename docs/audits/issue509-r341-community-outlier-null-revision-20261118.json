@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R341",
+  "date_utc": "2026-11-18",
+  "scope": "DEVELOPMENT_SOURCE_ONLY",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "9f7b9787dddcdef52143045023862f3cbb1bd1f7",
+    "blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "content_verified": true
+  },
+  "provider": {
+    "pg_version": "17.11.0.003",
+    "status": "ACTIVE_HEALTHY",
+    "signature": "public.dic_confirm_community_outlier(uuid,bigint)",
+    "live_md5": "0657114255a0375b7f3fc502f780aa54",
+    "full_definition_characters": 1432
+  },
+  "finding": "NULL p_expected_revision bypasses revision conflict via SQL three-value NULL in PLpgSQL IF",
+  "read_only_repro": [
+    {
+      "given": null,
+      "old_rejects": false,
+      "fixed_rejects": true
+    },
+    {
+      "given": 1,
+      "old_rejects": false,
+      "fixed_rejects": false
+    },
+    {
+      "given": 2,
+      "old_rejects": true,
+      "fixed_rejects": true
+    }
+  ],
+  "source": {
+    "migration": "supabase/migrations/20261118181500_dic_community_outlier_null_revision_guard.sql",
+    "test": "supabase/tests/community_outlier_null_revision.sql",
+    "runner": "scripts/audit/isolated-sql-regression.sh",
+    "only_semantic_change": "s.revision<>p_expected_revision -> s.revision IS DISTINCT FROM p_expected_revision",
+    "full_def_reversible": true
+  },
+  "real_member_impact": "NOT_ESTABLISHED",
+  "source_ci": "NOT_YET_RUN",
+  "provider_writes": 0,
+  "baseline": "IN_PROGRESS",
+  "next": "Run exact PR-head isolated PG17/Node22/browser/approval, repair, safe nonforce integration; hosted #96 acceptance remains unverified"
+}
