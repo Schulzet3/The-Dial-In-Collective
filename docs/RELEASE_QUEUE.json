@@ -16407,6 +16407,31 @@
       ],
       "notes": "Preserves historical migrations, original submission precedence, mutation receipts, library IDs and shots. R331-A alias matcher not using recorded aliases remains separately OPEN and must not be silently auto-linked.\nR333b: nonforce [skip netlify] source/test integration PR #3264 at 5f7193fb218850a3119a227c062b9a6c8ed9f19e; original exact merge source blobs migration 6a34eff579b75e70eabca1b6c7ca99ecb2292d9d, test 52afd0ebfc7ace8d9274ecd4ed2357ed54f91cf2, runner 042184570ea918564062af8e547fa3da2a675943. All five relevant exact merged-push checks SUCCESS. Scope remains TESTING until release-specific source isolation and #96 hosted Auth acceptance; production unchanged.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-historical-alias-suggestion-confirmation",
+      "issue": 509,
+      "pr": null,
+      "title": "Recognize recorded coffee aliases for suggestions and explicit member confirmation, never automatic merging",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261118135000_dic_historical_alias_suggestion_confirmation.sql"
+      ],
+      "owner_source": "Issue #509 R335 development-only. DIC_PREFLIGHT_VERIFIED development_sha=d10e6e48742d1a43110ec331be9294d24510fcff preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "R334 live SQL bodies and read-only synthetic comparisons reproduced alias mismatch across both candidate and explicit confirmation gates; zero production alias rows.",
+        "R335 additive migration extends suggestion-only matcher and explicit member confirmation, preserving admission, roaster, origin, lot, original history and idempotency.",
+        "R335 rollback-only isolated PostgreSQL17 dic_ci synthetic role fixture and hosted exact-source CI PENDING at initial commit; no local PASS asserted."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Isolated PostgreSQL 17/Node 22/browser/approval exact-source CI pending.",
+        "#96 hosted genuine-member Auth acceptance and source-isolated release-candidate approval UNVERIFIED.",
+        "Production migration not applied; requires separate explicit Publish."
+      ],
+      "notes": "No real member incident verified. Existing canonical-name matching must remain auto-matchable; alias-only never returns exact_verified. Preserve prior migrations and privacy.",
+      "production_deployed": false
     }
   ],
   "history": [

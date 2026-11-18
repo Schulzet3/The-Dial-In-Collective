@@ -1,0 +1,36 @@
+{
+  "run": "R335",
+  "date_utc": "2026-11-18",
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "d10e6e48742d1a43110ec331be9294d24510fcff",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "verified_by_live_git_blob": true
+  },
+  "provider": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.11.0.003",
+    "access": "READ_ONLY",
+    "matcher_live_md5": "b4b845d29ccb65ac7922109dc89816b6",
+    "confirm_live_md5": "0fcc44bb8a05f46e87694d3474eb7c23",
+    "alias_writer_live_md5": "140c211a4bfef175b041c037561a1e37",
+    "R334_live_alias_rows": 0,
+    "source_word_first_time_credit": 0
+  },
+  "defect": "R334-A historical alias fails BOTH candidate and explicit self-confirmation normalized-name gates",
+  "implementation": {
+    "migration": "supabase/migrations/20261118135000_dic_historical_alias_suggestion_confirmation.sql",
+    "test": "supabase/tests/coffee_historical_alias_suggestion_confirmation.sql",
+    "runner": "scripts/audit/isolated-sql-regression.sh",
+    "semantics": "suggestion-only same-roaster/lot/origin; never exact_id from alias; recorded alias accepted only for explicit member self-confirmation with original authorization and idempotency",
+    "index_reused": "private.dic_coffee_aliases_pkey(coffee_id,alias_key)",
+    "prior_migrations_modified": false,
+    "source_bound_ci": "PENDING",
+    "production_writes": 0,
+    "publication": "NOT_AUTHORIZED",
+    "queue": "TESTING"
+  },
+  "baseline": "IN_PROGRESS",
+  "next": "Read back feature branch commit and full PostgreSQL17/Node22/cloud-browser/approval CI. Fix failing synthetic tests, then safe nonforce [skip netlify] merge and exact source provider readback; no publication."
+}
