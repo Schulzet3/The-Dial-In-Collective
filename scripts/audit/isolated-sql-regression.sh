@@ -100,4 +100,10 @@ if [[ -f supabase/migrations/20261118180000_dic_recommendation_unique_controls.s
 else
   echo "NOT_APPLICABLE: #509 recommendation unique-controls; migration excluded from tested source"
 fi
+if [[ -f supabase/migrations/20261118181500_dic_community_outlier_null_revision_guard.sql ]]; then
+  echo "Running community_outlier_null_revision"
+  run_sql supabase/tests/community_outlier_null_revision.sql
+else
+  echo "NOT_APPLICABLE: #509 outlier NULL revision; migration excluded from tested source"
+fi
 echo 'PASS: all checked-in migrations and SQL suites, including staged import/setup, cross-account and source-worker authorization and first-style owner isolation regressions; no hosted connection.'
