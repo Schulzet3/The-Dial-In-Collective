@@ -678,6 +678,22 @@
         ],
         "source_bytes_sha256": null,
         "caveat": "Full publisher HTML table values read, original PDF binary and figures/supplement/raw panel data not audited; avoid confusing professional sensory repeatability with novice member taste-quality or personal next-shot causal benefit."
+      },
+      "r350_addendum": {
+        "date": "2026-11-18",
+        "reviewed": "Primary publisher Table 6 numeric cluster-size header/response encoding, and pooled vs country-specific Table 7 denominator comparison",
+        "source_url": "https://www.mdpi.com/2304-8158/14/4/593",
+        "evidence_ids": [
+          "R455-EV-R350-TEP-TABLE6-CLUSTER-SIZES",
+          "R455-EV-R350-TEP-TABLE7-CROSS-ANALYSIS"
+        ],
+        "source_pdf_sha256": null,
+        "participant_data_reanalysis": "NOT_DONE",
+        "existing_table7_8_prior_checks_reused": [
+          "R455-EV-TABLE-272-B",
+          "R455-EV-TABLE-285-B"
+        ],
+        "product": "RESEARCH_ONLY_NO_RUNTIME_OR_TASTE_POLICY_CHANGE"
       }
     },
     {
@@ -11914,6 +11930,48 @@
       "implementation_status": "RESEARCH_ONLY_NO_CLEANING_INTERVENTION",
       "exact_development_sha": "367266c2b42b42c9daff468ec21aa34f918fe78c",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-R350-TEP-TABLE6-CLUSTER-SIZES",
+      "source": "LIT-2025-CHOI-TEP-REPEATABILITY",
+      "source_url": "https://www.mdpi.com/2304-8158/14/4/593",
+      "source_location": "Foods 2025 14(4):593, first-party HTML Results 3.1.1 and original Table 6 header/identifier footnote",
+      "date": "2026-11-18",
+      "claim": "Pooled CLUSCATA Table 6 has cluster sizes 21,9,44,42,22, exactly totaling 138 coded observations; 46 professional experts each rated three repetitions. A row is an evaluation, not a distinct expert, a five-taste DIC member score, personal liking or a verified shot intervention. Original identifier encodes repetition, country and expert.",
+      "grade": "DIRECT_PUBLISHER_TABLE6_HEADER_FOOTNOTE_AND_ARITHMETIC; ORIGINAL_RAW_PERSON_CLUSTER_ASSIGNMENT_NOT_INDEPENDENTLY_REANALYZED",
+      "result": "DESCRIPTIVE_EXPERT_CATA_CLUSTER_COUNTS_NOT_ESPRESSO_RECOMMENDATION_EFFICACY",
+      "current_app": "Source-bound engine blob 90c55379be60a252a2026e01bb3d786b66c49aef, constants blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2 and model blob baafc8fa64fa3e359d8e42094e41c5d72a3b22df retain all five owner-Locked taste inputs, all-green vs incomplete ratings, one controllable next-shot adjustment, original measurements and privacy/history; paper is not used to compute personal recommendation confidence.",
+      "source_sha256": null,
+      "owner_approval": false,
+      "implementation_status": "RESEARCH_ONLY_NO_APP_CHANGE",
+      "reused_prior_checks": [
+        "R455-EV-TABLE-272-B",
+        "R455-EV-TABLE-285-B"
+      ],
+      "reviewed_at_development_sha": "22ea586a454cd4a61fa4ce0e3bd2ac349e3082a4",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-R350-TEP-TABLE7-CROSS-ANALYSIS",
+      "source": "LIT-2025-CHOI-TEP-REPEATABILITY",
+      "source_url": "https://www.mdpi.com/2304-8158/14/4/593",
+      "source_location": "Original §3.1, Tables 6-7 and Table 7 separate pooled/national CLUSCATA columns",
+      "date": "2026-11-18",
+      "claim": "Printed overall 91.3% of 46 (approximately 42/46) expert responses grouped with their own three repetitions under pooled analysis, whereas separately calculated country rates: France 85.7%=6/7, India 75%=9/12, Italy 71.4%=5/7, Korea 100%=10/10 and USA 90%=9/10, total 39/46 or 84.8%. The separately fitted analyses must not be added or turned into a single universal reliability probability; three-person assignment difference cannot be independently resolved without full person-level cluster mappings and is not proved to be a publisher arithmetic error. Previous R272 Table7 numeric review reused without duplicate credit.",
+      "grade": "DIRECT_PRIMARY_NUMERIC_TABLE_COUNTRY_VS_ALL_ANALYSIS_COMPARISON_AND_ARITHMETIC; RAW_PERSON_MAPPING_UNAVAILABLE",
+      "result": "NOT_ADDITIVE_COHORT_RELIABILITY_AND_NO_INDIVIDUAL_TASTE_CONFIDENCE_CLAIM",
+      "current_app": "Source-bound engine blob 90c55379be60a252a2026e01bb3d786b66c49aef, constants blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2 and model blob baafc8fa64fa3e359d8e42094e41c5d72a3b22df retain all five owner-Locked taste inputs, all-green vs incomplete ratings, one controllable next-shot adjustment, original measurements and privacy/history; paper is not used to compute personal recommendation confidence.",
+      "source_sha256": null,
+      "owner_approval": false,
+      "implementation_status": "RESEARCH_ONLY_NO_NEW_POLICY_OR_CONFIDENCE_NUMBER",
+      "reused_prior_checks": [
+        "R455-EV-TABLE-272-B",
+        "R455-EV-TABLE-285-B"
+      ],
+      "reviewed_at_development_sha": "22ea586a454cd4a61fa4ce0e3bd2ac349e3082a4",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -12243,28 +12301,32 @@
       "run_id": "R455-349",
       "next": "Docs-only canonical reconciled R347/R348 after original article and prior evidence duplicate check. Complete exact PR-head CI, safe nonforce merge with [skip netlify] and exact merged readback; no app/quality claims, Oct29 pack/S019 still unavailable, #267 separate.",
       "owner_approval_now_required": false
+    },
+    {
+      "run_id": "R455-350",
+      "next": "Verify isolated docs PR exact-source governance, nonforce [skip netlify] merge only after checked CI/concurrency, read back three changed Git blobs; continue distinct primary/UX gap. Pack/S019 inaccessible; no #267 literal line credit.",
+      "owner_approval_now_required": false
     }
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-349",
+    "run_id": "R455-350",
     "date": "2026-11-18",
-    "development_preflight_sha": "367266c2b42b42c9daff468ec21aa34f918fe78c",
+    "development_preflight_sha": "22ea586a454cd4a61fa4ce0e3bd2ac349e3082a4",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "prewrite_canonical_blob_sha": "d836056a25ee42481487d63fb299db50c275ec77",
-    "prewrite_journal_blob_sha": "0fa205d05d9dd92202f866a0db6fc49bf9e6f779",
+    "prewrite_canonical_blob_sha": "0179d3cfc7b5132269a4250cad806e3df811e339",
     "source_counts": {
       "sources": 198,
-      "evidence_checks": 598,
+      "evidence_checks": 600,
       "proposals": 264
     },
-    "research_status": "R347_DUPLICATE_EVIDENCE_RECONCILED_AND_R348_PRIMARY_METHODS_CANONICALLY_ADDED_NO_APP_DEFECT_REPRODUCED",
+    "research_status": "DISTINCT_PRIMARY_TABLE6_COUNTS_AND_TABLE7_NONADDITIVE_ANALYSIS; EXISTING_R272_R285_REUSED",
     "runtime_changed": false,
     "tests_run": false,
     "ci_not_yet_verified": true,
     "production_deployed": false,
     "github267_literal_review_credit": 0,
     "owner_approval_now_required": false,
-    "next": "Verify exact docs PR governance success, nonforce [skip netlify] merge/readback when safe; continue next distinct source or source-reproduced Log Shot UX issue; Oct29 ZIP/S019 unavailable."
+    "next": "Verify docs-only exact PR head CI and safe nonforce integration then next nonduplicating source or reproduced UX bug."
   },
   "policy_decisions_resolved": [
     {
