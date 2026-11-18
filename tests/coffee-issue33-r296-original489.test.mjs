@@ -104,3 +104,14 @@ test('R296 different selected district labels also stay unresolved, not autocorr
  assert.ok(result.conflicts?.includes('origin'));
  assert.ok((result.conflict_options?.origin||[]).some(v=>/Kigali District/i.test(v.value)));
 });
+
+test('R296 selected literal Farm/Region after BR inside a multi-spec paragraph remains a conflicting district',()=>{
+ const inline=selected.replace('</p><p>Farm/Region:','<br>Farm/Region:');
+ const result=extractPublicCoffeeFacts(page(name,inline),{source_url:url});
+ assert.equal(result.ok,true);
+ assert.equal(result.fields.origin,undefined);
+ assert.ok(result.conflicts?.includes('origin'));
+ const alternatives=result.conflict_options?.origin||[];
+ assert.ok(alternatives.some(x=>/Muhanga District/i.test(x.value)));
+ assert.ok(alternatives.some(x=>/Muganga District, Southern Province/i.test(x.value)));
+});

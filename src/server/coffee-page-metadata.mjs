@@ -321,13 +321,13 @@ function selectedDistrictLabelNarrativeDisagreement(product,clean,selectedName){
  if(headings.length!==1||keyOf(headings[0].text)!==keyOf(selectedName))return null;
  const prose=blocks.filter(block=>['p','li','dd'].includes(block.tag)&&block.text.length<=1000);
  const narrative=/\b(?:this|the|our)\s+(?:co[- ]?op(?:erative)?|farm|estate|association)\s+(?:is|was)\s+(?:located|based)\s+in\s+(?:the\s+)?([\p{Lu}][\p{L}\p{M}'’-]{2,49})\s+District\b/iu;
- const labeled=/^(?:Farm\s*\/\s*Region|Farm\s+Region|Growing\s+Region|District)\s*[:：]\s*([\p{Lu}][\p{L}\p{M}'’-]{2,49})\s+District\b/iu;
+ const labeled=/(?:Farm\s*\/\s*Region|Farm\s+Region|Growing\s+Region|District)\s*[:：]\s*([\p{Lu}][\p{L}\p{M}'’-]{2,49})\s+District\b(?:\s*,\s*[\p{Lu}][\p{L}\p{M}'’-]{2,49}\s+Province)?/iu;
  const stories=new Map(),labels=new Map();
  for(const block of prose){
   const story=block.text.match(narrative);
   if(story)stories.set(keyOf(story[1]),story[1]+' District');
   const label=block.text.match(labeled);
-  if(label)labels.set(keyOf(label[1]),block.text.replace(/^(?:Farm\s*\/\s*Region|Farm\s+Region|Growing\s+Region|District)\s*[:：]\s*/iu,'').trim().slice(0,200));
+  if(label)labels.set(keyOf(label[1]),label[0].replace(/^(?:Farm\s*\/\s*Region|Farm\s+Region|Growing\s+Region|District)\s*[:：]\s*/iu,'').trim());
  }
  if(stories.size!==1||labels.size!==1)return null;
  const [a]=stories.keys(),[b]=labels.keys();
