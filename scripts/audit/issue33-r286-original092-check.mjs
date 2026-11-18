@@ -38,6 +38,7 @@ need(raw?.length>0&&raw.length===rec.html_bytes&&hash(raw)===rec.html_sha256,'in
 need(h1.length===1&&h1[0]===name&&f.name===name&&rec.selected_heading_identity_verified===true,'exact_current_h1_and_parser_name');
 for(const literal of ['butterscotch','french vanilla','irish cr'])need(visible.includes(literal),'own_visible_literal_'+literal.replace(/ /g,'_'));
 for(const note of ['butterscotch','french vanilla','irish cr'])need(notes.includes(note),'canonical_direct_flavor_'+note.replace(/ /g,'_'));
+need(notes.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').trim()==='butterscotch, french vanilla, irish creme','canonical_three_descriptors_without_bridge_prose');
 need(!/graham cracker|hazelnut|cinnamon|jingle bell|frosty/i.test(notes),'no_related_coffee_sensory');
 need(!f.decaffeination_method,'unselected_decaf_option_is_not_method');
 need(rec.add_coffee_ui_rendered===true&&rec.source_review_rendered===true,'editable_add_coffee_source_review');

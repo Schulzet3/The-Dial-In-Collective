@@ -26,7 +26,7 @@ import {equivalentCoffeeProductNames,preferredCoffeeRoasterName,selectedCoffeeNa
 import {isolateCoffeeIdentityCohorts} from './coffee-source-identity-scope.mjs';
 import {extractCoffeeGeographyEntityRoles,cleanCoffeeGeographyEntityPrefix} from './coffee-geography-entity-roles.mjs';
 import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProductFlavorProfileEvidence,refineSelectedNamedTastingNotes,normalizeExplicitCoffeeTastingNotes,equivalentCoffeeTastingNotes,coffeeTastingNotesSubset} from './coffee-flavor-evidence.mjs';
-import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,refineSelectedCurrentCoordinatedFinish,refineSelectedCurrentTrailingFlavorNote,refineSelectedCurrentFlavorBase,refineSelectedCurrentSensoryArc,selectedCoffeeSupplementalTastingProse,selectedCurrentNarrativeAdditionalTastingNote,selectedCurrentMultiSentenceNarrativeNotes,selectedCurrentProductOvertone,selectedCurrentIntrinsicAromaContext,selectedCurrentUnlabeledFlavorPair} from './coffee-selected-description-sensory.mjs';
+import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,refineSelectedCurrentCoordinatedFinish,refineSelectedCurrentTrailingFlavorNote,refineSelectedCurrentFlavorBase,refineSelectedCurrentSensoryArc,selectedCoffeeSupplementalTastingProse,selectedCurrentNarrativeAdditionalTastingNote,selectedCurrentMultiSentenceNarrativeNotes,selectedCurrentProductOvertone,selectedCurrentIntrinsicAromaContext,selectedCurrentUnlabeledFlavorPair,refineSelectedCoordinatedFlavoredSubstances} from './coffee-selected-description-sensory.mjs';
 import {selectedCoffeeMilkSensoryContext} from './coffee-selected-milk-sensory-context.mjs';
 import {selectedFlavoredProductLiteralNotes,isCoarseFlavoredProductTaxonomy} from './coffee-selected-flavored-taxonomy.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
@@ -2205,6 +2205,20 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    // when an inferred notes caption has been indexed as a printed profile.
    const flavorBase=refineSelectedCurrentFlavorBase(product,{clean,notes:fields.tasting_notes});
    if(flavorBase)fields.tasting_notes=flavorBase;
+   // Only already accepted SAME-selected prose may lose decorative connectors.
+   if(!printedNotes.length&&!structuredFlavorByFields.get(fields)){
+    const literal=refineSelectedCoordinatedFlavoredSubstances(currentProduct,{
+     clean,notes:fields.tasting_notes
+    });
+    if(literal){
+     fields.tasting_notes=literal;
+     if(source_facts.length<384)source_facts.push({
+      field:'tasting_notes',label:'Selected current coordinated flavor substances',
+      value:literal,source_url,source_type:'html',
+      section:'Exact chosen current flavor, not ingredients'
+     });
+    }
+   }
    // A selected current unlabelled sensory arc may add literal aroma/finish
    // only when no stronger printed or structured note list exists.
    if(!printedNotes.length&&!structuredFlavorByFields.get(fields)){

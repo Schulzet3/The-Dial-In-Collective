@@ -7,6 +7,7 @@ import {productMarkup} from '../src/server/coffee-product-scope.mjs';
 import {selectedProductHeadings} from '../scripts/audit/issue33-selected-product-heading.mjs';
 import {requiredFocusedSourceFailures} from '../scripts/audit/issue33-focused-source-acceptance.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../site/cloud/coffee-url-autofill.js';
+import {refineSelectedCoordinatedFlavoredSubstances} from '../src/server/coffee-selected-description-sensory.mjs';
 const name='Highlander Grogg';
 const url='https://darkcanyon-coffee.com/collections/best-sellers/products/highlander-grogg';
 const page=(selected,body,other='')=>'<html><head><title>Old SEO: other coffee, dark roast, Swiss Water</title></head><body><main><article class="product"><h1>'+selected+'</h1><div class="description"><p>'+body+'</p><p>Roast Level</p><p>Light Medium Dark</p></div></article></main><aside class="related-products">'+other+'</aside></body></html>';
@@ -19,6 +20,7 @@ test('92 selected own current flavored-coffee wording preserves literal trio wit
  assert.equal(p.fields.name,name);
  const notes=String(p.fields.tasting_notes||'').toLowerCase();
  for(const w of ['butterscotch','french vanilla','irish crème'])assert.ok(notes.includes(w.toLowerCase()),'missing selected literal '+w+': '+notes);
+ assert.equal(p.fields.tasting_notes,'Butterscotch, French Vanilla, Irish Crème','canonical flavor list drops ornamental source connectors');
  assert.doesNotMatch(notes,/graham cracker|hazelnut|cinnamon|swiss water/);
  assert.ok(!p.fields.decaffeination_method,'pod sibling cannot supply method');
  assert.ok(coffeeUrlPreviewMarkup(p).includes('coffee-url-preview'));
@@ -40,4 +42,15 @@ test('92 only unselected roast scale cannot itself certify original Medium roast
  assert.ok(!p.fields.decaffeination_method);
  // No selected roast label is marked by this synthetic scale; do not guess from options.
  assert.ok(!p.fields.roast_level,'unselected Light Medium Dark scale is not a roast choice: '+p.fields.roast_level);
+});
+
+test('92 exact selected flavor substance normalization rejects old, serving-conditional and sibling prose',()=>{
+ const clean=(s,n=1000)=>String(s).replace(/<[^<>]{0,1200}>/g,' ').replace(/\s+/g,' ').trim().slice(0,n);
+ const notes='Butterscotch, the smooth sweetness of French Vanilla, and the velvety warmth of Irish Crème';
+ const run=html=>refineSelectedCoordinatedFlavoredSubstances(productMarkup(html),{clean,notes});
+ assert.equal(run(page(name,own)),'Butterscotch, French Vanilla, Irish Crème');
+ for(const bad of [page(name,'Previously, '+own),page(name,'When served with milk, '+own),
+   page(name,'Other coffees: '+own),page('Another coffee',own),
+   page(name,'Our coffee tastes of chocolate, honey and citrus.',own)])
+   assert.equal(run(bad),'','no borrowed, stale or conditional current flavor');
 });
