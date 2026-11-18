@@ -157,7 +157,8 @@ export function chips(t){
  return `<div class="taste-chips">${SCALES.map(sc=>{
   const value=t?.[sc.key],rated=hasRecordedTaste(value);
   const label=sc.label==='Astringency / Dryness'?'Dryness':sc.label;
-  const extra=!rated?': Not rated':sc.ideal===3&&value!==3?`: ${tasteLabel(sc,value)}`:'';
+  // Every recorded taste needs its readable value, not just a severity color.
+  const extra=!rated?': Not rated':`: ${tasteLabel(sc,value)}`;
   return `<span class="taste-chip ${rated?`severity-${tasteSeverity(sc,value)}`:'is-unrated'}">${e(label)}${e(extra)}</span>`;
  }).join('')}</div>`;
 }

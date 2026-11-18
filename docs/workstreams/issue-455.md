@@ -1,3 +1,17 @@
+## November 18, 2026 UTC — #455 R337 accessible saved five-taste History chip text [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=ee2d587cb847460330b7256c7667bee46c9dc39c preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+**Mandatory first:** live development `ee2d587cb847460330b7256c7667bee46c9dc39c`; fetched `docs/ai/PREFLIGHT.md` from this immutable commit, separately fetched exact Git blob `2fb236bbfa6bac48513eeb3bd157b260853af06d`, and content compared equal before AGENTS, topic materials and provider/source reads. Governing owner #455 Option B SAFE, live Master Spec/Decision Ledger, current #335 closure/transfer and #33/#267/#96 disjoint scopes. Read-only main 3b372215ac7ccfd6db406f27090706e8cb8f3e80 and release/production 0f3641b4fff07e2a88d7747e621304ec2cf0ead5.
+
+**Reproduced new bounded UX/accessibility defect:** current `site/lib/ui.js` blob `06772359e5bd289f0e6c51fb6efc0d64c54d7110` renders expanded Shot History five taste chips. A recorded **Clarity**, **Sweetness** or **Dryness** shows the dimension name but NO textual value, only color severity; even fully green **Extraction** and **Body** omit the visible result. Existing `radar()` has an accessible label, but text chips themselves remain color-dependent, especially for low vision/color-deficiency and fast phone review. No real-member incident or empirical espresso quality claim. `site/cloud/shot_card.js` expands `chips(shot.tasteScales)`; `site/visual.css` already wraps taste chips on narrow screens.
+
+**SAFE change:** append the existing `tasteLabel()` descriptive value to **every valid recorded taste chip**; invalid/missing imported taste remains **Not rated**, and existing severity classes, green-vs-missing, five sensory inputs, radar, current recipe and all original measurements/notes/history remain intact. No taste values, numeric heuristic, style/grinder/feed, persistence, Community/RLS or consent changes. No new product decision. Test `tests/issue455-r337-readable-history-taste-chips.test.mjs` covers all-green, mixed nonideal/missing, invalid legacy, and unchanged expanded archived shot records, four synthetic positive/negative cases. New queue `DIC-Q-455-r337-readable-history-taste-chips` marked TESTING. No member data reads, production SQL/Auth/Edge/provider/Netlify, release/main/production, backup, schedule or alert effects.
+
+**Scoped same-commit paths:** `site/lib/ui.js`, `tests/issue455-r337-readable-history-taste-chips.test.mjs`, `docs/RELEASE_QUEUE.json`, `docs/workstreams/issue-455.md`. Initial source SHA `ee2d587cb847460330b7256c7667bee46c9dc39c`, original queue blob `4c6a42446b318106f753e870a1d85a4fb7e577d0`, original journal blob `36abd9e46a8a73eb4eca5bada57a1c5b190eef39`. At authoring, Node22, browser/mobile/offline/accessibility and GitHub CI/PR/merge NOT RUN, not PASS; queue remains TESTING. Next: verify actual PR-head exact-source CI and applicable browser/mobile/a11y, repair failures, non-force merge with [skip netlify], independently read merged blobs + push CI, reconcile TESTING=>READY only with full evidence and update Issue #455.
+
+---
+
 ## November 17, 2026 UTC — #455 R332 original Cotter consumer segmentation / Dryad data-method crosswalk [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=38ba3c7a3cc5ba244bccffd05642bb3b1e35fc64 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
