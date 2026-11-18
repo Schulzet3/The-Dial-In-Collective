@@ -468,3 +468,42 @@ export function selectedCurrentUnlabeledFlavorPair(html,{clean,notes}={}){
  // Competing descriptions cannot establish one unambiguous current pair.
  return found.size===1?[...found][0]:'';
 }
+
+// Normalize three explicitly selected flavored-coffee substances only when
+// current canonical extraction equals the WHOLE merchant sentence. Decorative
+// "sweetness of" and "warmth of" connectors are source prose, not flavors.
+// Preserve the original paragraph as Source Review. No sibling, metadata,
+// previous lot, conditional drink, ingredient, roast or decaf inference.
+export function refineSelectedCoordinatedFlavoredSubstances(html,{clean,notes}={}){
+ if(typeof html!=='string'||html.length>2_000_000||typeof clean!=='function'||
+    typeof notes!=='string'||notes.length<20||notes.length>300)return '';
+ const blocks=productCoffeeProse(html,clean),heads=blocks.filter(b=>b.tag==='h1'&&!b.educational);
+ if(heads.length!==1||!heads[0].text||heads[0].text.length>180)return '';
+ const selected=fold(heads[0].text),allowed=/^(?:description|product description|coffee description|about this coffee|about the coffee|details|coffee details)$/u;
+ const found=new Set();
+ for(const block of blocks){
+  if(block.tag!=='p'||block.educational||block.text.length<75||block.text.length>650||
+     unavailable.test(block.text)||unavailable.test(block.section)||NONCURRENT_COFFEE_PROSE.test(block.text))continue;
+  const section=fold(block.section);
+  if(section&&section!==selected&&!allowed.test(section))continue;
+  for(const sentence of block.text.split(/(?<=[.!?])\s+/u).slice(0,12)){
+   if(sentence.length<80||sentence.length>450||unavailable.test(sentence)||NONCURRENT_COFFEE_PROSE.test(sentence))continue;
+   const m=sentence.match(/\b(?:combines|blends|features)\s+the\s+(?:rich|distinct|delightful|delicious)\s+flavou?rs?\s+of\s+([\p{L}\p{M}][\p{L}\p{M} -]{2,48}),\s+the\s+(?:smooth|creamy|subtle|gentle)\s+sweetness\s+of\s+([\p{L}\p{M}][\p{L}\p{M} -]{2,48}),\s+and\s+the\s+(?:velvety|gentle|soft|warm)\s+warmth\s+of\s+([\p{L}\p{M}][\p{L}\p{M} -]{2,48})(?=[.!?]|$)/iu);
+   if(!m)continue;
+   // The merchant must actually name THIS current H1 in the same source
+   // sentence before the flavor list. A sibling coffee under the same
+   // layout/heading does not confer its tasting substances.
+   const prefix=sentence.slice(0,m.index);
+   if(!fold(prefix).includes(selected))continue;
+   const originalList=m[0].replace(/^.*?\bflavou?rs?\s+of\s+/iu,'').trim();
+   if(fold(notes)!==fold(originalList))continue;
+   const literal=m.slice(1,4).map(v=>v.trim());
+   if(literal.some(v=>v.length>48||v.split(/\s+/u).length>5||
+     /\b(?:body|mouthfeel|acidity|finish|sweetness|roast|process|coffee|beans?|milk|cream|syrup|added|mixed|ingredient)\b/iu.test(v)||
+     !normalizeExplicitCoffeeTastingNotes(v)))continue;
+   const normalized=normalizeExplicitCoffeeTastingNotes(literal.join(', '));
+   if(normalized)found.add(normalized);
+  }
+ }
+ return found.size===1?[...found][0]:'';
+}
