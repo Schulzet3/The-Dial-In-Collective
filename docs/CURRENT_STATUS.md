@@ -1,3 +1,11 @@
+## November 18, 2026 UTC — #33 R301 selected current coffee sensory fix READY DEVELOPMENT ONLY [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=bb7184e592f3349fc4aea25eb533c68326034fb3 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+Exact current chosen #581 Tandem Heri Agena `We hear` notes were incorrectly replaced with generic narrative; safe source-bound generic parser guard now selects Plum, Lemonade, Wildflower Honey and excludes only a linked music track. PR #3280 merged nonforce `[skip netlify]` `977b02055b6f8e34b7eac7b004ad1dafd23e3fea`; eight changed Git blobs identical to tested PR head. Exact merged guarded HTTPS/H1/parser/Add Coffee/Source Review [44388714584](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44388714584), Node/lint [44388714044](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44388714044) (5572 PASS/0 FAIL/6 SKIP), cloud/browser/mobile [44388714655](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44388714655) and approval [44388717472](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44388717472) all SUCCESS. Only `DIC-Q-33-r301-original581-we-hear-selected-sensory` READY development; no deploy/publish or production/member/provider write. Historical first approval intake failure resolved with explicit queue entry; original frozen603 SKIPPED and full individual 603-case certification remains UNVERIFIED, #33 OPEN, original oracle/scorer/captures/CSV untouched. Separate #267 V2/#96 preserved.
+
+---
+
 ## November 18, 2026 UTC — #455 R352 rounded next-shot temperature coaching READY in development ONLY [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=dce0d5c46e6ba2b180d69c829d2734f21b5fb5bf preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
