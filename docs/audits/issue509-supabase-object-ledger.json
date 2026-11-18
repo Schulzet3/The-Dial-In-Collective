@@ -23391,5 +23391,33 @@
     "production_writes": 0,
     "baseline": "IN_PROGRESS",
     "next": "Complete scoped rare PostgREST normalized-statement cohort 42/42; next genuinely new/changed provider definition, non-PostgREST workload SQL not already credited, or independently reproduced user-impacting bottleneck. Avoid re-review for its own sake."
+  },
+  "provider_nonpostgrest_workload_semantics_run322": {
+    "run": "R322",
+    "preflight_development_sha": "ee2d587cb847460330b7256c7667bee46c9dc39c",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt_path": "docs/audits/issue509-r322-nonpostgrest-workload-20261118.json",
+    "normalized_sql_statements": 41,
+    "original_sql_characters": 32060,
+    "role_counts": {
+      "authenticator": 18,
+      "authenticated": 18,
+      "service_role": 2,
+      "anon": 3
+    },
+    "semantic_categories": {
+      "POSTGREST_TIMEZONE_METADATA": 1,
+      "POSTGREST_METADATA_DISCOVERY": 10,
+      "TRANSPORT_GUC_INITIALIZATION": 4,
+      "SESSION_CONTROL": 12,
+      "HISTORICAL_ROLE_BOUND_INTEGRATION_OR_AUDIT_QUERY": 14
+    },
+    "pgss_reset_utc": "2026-10-09 11:11:31.487298+00",
+    "first_time_source_or_app_object_credit": 0,
+    "reproduced_app_defects": 0,
+    "github_app_code_or_test_writes": 0,
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "First genuinely changed/unreviewed provider definition or independent reproducible app/Edge bottleneck; account for prior complete receipts, do not repeat unchanged session/proxy SQL."
   }
 }
