@@ -8,6 +8,29 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-r343-shot-history-empty-state",
+      "issue": 455,
+      "pr": null,
+      "title": "Explain empty Shot History instead of presenting a blank disclosure",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/main.js",
+        "site/cloud/shot_card.js"
+      ],
+      "owner_source": "Issue #455 Option B SAFE additive UX only. DIC_PREFLIGHT_VERIFIED development_sha=1ce0dfcd5d2e98e32d88f5b21c64fe2a0328e3e1 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Direct source reproduction: when shots.length===0, History previously rendered only a count and zero child content; first-shot CTA was elsewhere on the coffee card. No member incident claimed.",
+        "Focused three Node22 synthetic checks authored for truthful no-shot message, conditional coffee-card integration, and unchanged five-rated private populated History. Actual CI NOT RUN at source authoring."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact source-bound Node22/browser/mobile/offline/accessibility, security, SQL and governance evidence must be checked before READY."
+      ],
+      "notes": "Additive no-shot copy only in private coffee History. Preserve first-shot CTA/selection, all five ratings, measured shot/notes, feed/style/grinder, privacy/offline and one-control recommendation. No policy change. Not deployed.",
+      "production_deployed": false
+    },
+    {
       "id": "DIC-Q-455-r339-shot-toggle-descriptive-accessibility",
       "issue": 455,
       "pr": 3223,

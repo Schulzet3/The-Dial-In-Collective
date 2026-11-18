@@ -80,3 +80,7 @@ export function shotCard(shot,{expanded=false,activeVersionId=null,unit='F',fami
   </div>`:''}
  </section>`;
 }
+
+// Keep a zero-shot coffee's disclosure informative without inventing history.
+// The CTA remains the existing Log First Shot / Log A Shot outside History.
+export const emptyShotHistory=()=>'<p class="helper shot-history-empty">No shots to show yet. Log a shot to start your private history.</p>';
