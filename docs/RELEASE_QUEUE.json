@@ -10,10 +10,10 @@
     {
       "id": "DIC-Q-455-r344-coffee-search-empty-state",
       "issue": 455,
-      "pr": null,
+      "pr": 3242,
       "title": "Distinguish no coffee search matches from an empty saved coffee collection",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
       "scope_paths": [
         "site/cloud/main.js",
         "site/cloud/coffee-list-empty.js",
@@ -23,13 +23,24 @@
       "tests": [
         "Direct source reproduction: unmatched nonempty coffee search returned an empty list, whose unconditional fallback claimed 'Add your first coffee' despite saved coffee. No real member incident claimed.",
         "Three synthetic positive/negative regressions newly authored for unmatched search, first-coffee and whitespace behavior, and live main.js wiring. GitHub CI NOT YET RUN, not PASS.",
-        "First PR-head mobile-browser-qa run 44253946139 FAILED before browser tests at npm run build:cloud: site-integrity correctly rejected an imported cloud/coffee-list-empty.js missing from explicit build_cloud.mjs shipped asset allowlist. Not PASS. Follow-up commit adds only the new reachable module to the allowlist and extends focused regression. CI rerun needed."
+        "First PR-head mobile-browser-qa run 44253946139 FAILED before browser tests at npm run build:cloud: site-integrity correctly rejected an imported cloud/coffee-list-empty.js missing from explicit build_cloud.mjs shipped asset allowlist. Not PASS. Follow-up commit adds only the new reachable module to the allowlist and extends focused regression. CI rerun needed.",
+        "Prior source/QA failures remain in PR/Issue #455 records: shipped cloud asset allowlist omitted imported helper (44253946139), isolated browser harness did not include new module (44254280457), malformed duplicated Node assertion caused 5492 pass / 2 fail / 6 skips (44261400516); all corrected on integrated exact head, not relabeled PASS.",
+        "Verified all eight changed Git blobs at exact passing PR-head 6e6bc992b150670c5abf4a2a8453f1d8ee393358 and nonforce [skip netlify] merged source c9e510df31d0fb8ff14fdc569477037da7b4ba1b; exact 8/8 equal, zero source/test drift.",
+        "Exact integrated PR head: Node22/lint 44271090229 SUCCESS 5503 pass, 0 fail, 6 skipped; actual Chromium/mobile/offline/accessibility+cloud 44271090334, isolated SQL 44271090641, source security 44271090295, approval/governance 44271090375 SUCCESS.",
+        "Exact merged source: Node22/lint 44272018599 COMPLETED SUCCESS (job log 5503 pass / 0 fail / 6 skipped); browser/mobile/offline/a11y+cloud 44272018809 and approval/governance 44272018771 each COMPLETED SUCCESS. Frozen original603 44271090496 SKIPPED not PASS; unrelated #33 original241 provider/parser 44271090120 FAILED and is not claimed successful."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact Node22, browser/mobile/offline/accessibility and applicable isolated SQL/security/governance CI, non-force merge/readback needed before READY."
+      "ci_runs": [
+        44271090229,
+        44271090334,
+        44271090641,
+        44271090295,
+        44271090375,
+        44272018599,
+        44272018809,
+        44272018771
       ],
-      "notes": "No new search control, telemetry or policy; current-coffee pinning and filtering unchanged. Safe copy only when zero visible results and genuine active search. No production or provider effects.",
+      "blockers": [],
+      "notes": "No new search control, telemetry or policy; current-coffee pinning and filtering unchanged. Safe copy only when zero visible results and genuine active search. No production or provider effects. READY verified DEVELOPMENT ONLY after exact merged source, browser/mobile/offline/a11y, Node and governance readback; source [skip netlify] merge c9e510df. No Netlify/publication/member change. Independent real-member and cup-quality outcomes remain unmeasured.",
       "production_deployed": false
     },
     {
@@ -19090,6 +19101,15 @@
       "source_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
       "production_deployed": false,
       "evidence": "R295 postmerge narrow source READY, original #554 ROC² Organic Mexican exact selected product-owned Light Roast taxonomy recovered. PR3246 nonforce merged fbde1111, six reviewed head/merge blobs equal; merged official 44265846785 6/6 + 1/1 fresh HTTPS SHA256 83e49b... afterproof success; merged Node/lint 44265846763 5499 PASS/0 FAIL/6 SKIP; merged cloud/mobile 44265846775, approval 44265846936, Python 44265846836 SUCCESS; PR-head isolated SQL/security SUCCESS. R171 PR-head separate source-access FAILURE and global frozen603 SKIPPED not disguised as PASS. DIC_PREFLIGHT_VERIFIED development_sha=98dfe16e1134d48d28ce4e5913866eb8b7df74f1 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d; full603 remains incomplete, no deployment."
+    },
+    {
+      "date": "2026-11-18",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r344-coffee-search-empty-state",
+      "state": "READY",
+      "source_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+      "production_deployed": false,
+      "evidence": "R344 original source PR #3242 8/8 immutable head/merge blob parity; merged Node22 44272018599 5503 PASS/0 FAIL/6 SKIP, real Chromium/mobile/offline 44272018809 and governance 44272018771 SUCCESS; head SQL/security SUCCESS. Frozen603 SKIPPED, separate #33 original241 live parser FAILED owned by #33. DIC_PREFLIGHT_VERIFIED development_sha=c9e510df31d0fb8ff14fdc569477037da7b4ba1b preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d. READY development only; NO publication."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
