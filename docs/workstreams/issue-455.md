@@ -1,3 +1,15 @@
+## November 18, 2026 UTC — #455 R339 source-bound test expectation correction [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=e507e27280d10ccb6810553cf9c8cdc551349ef6 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+**Preflight and concurrency:** current development SHA e507e27280d10ccb6810553cf9c8cdc551349ef6, original immutable PREFLIGHT blob 2fb236bbfa6bac48513eeb3bd157b260853af06d verified; existing R339 feature parent 27058e67d23bfec4ccf95aeefe502e30c04e39db unchanged, original test blob 9dcf4903c2378c17b518e42b8c6aa02f65f43aa4 and scoped journal 3bc8b804e30daa29518376c83e91b1d995f1d77d. Two files only in this same commit, no product/source/queue change.
+
+**Test-only precision correction:** initial positive expectations used `18g` and `41g` while existing deliberately unchanged `fmtMeasuredControl` outputs one decimal for tenth-aligned original measurements (`18.0g`, `41.0g`). This is a mistaken test expectation, NOT a reported application bug or observed CI failure at correction time. Preserve exact original measured values and all other R339 negative/positive cases. Correct the two strings and keep original attempted CI statuses separately, never call them PASS without finished logs. No additional test scope or unrelated suites authorized.
+
+**Status:** original PR-head Node22 and browser checks IN_PROGRESS when correction begun, new corrected-head CI not yet run; pending same PR final exact-source verification, nonforce merge, merged readback, queue reconciliation. No member/provider/SQL/Auth/Edge or release/publish writes.
+
+---
+
 ## November 18, 2026 UTC — #455 R339 same-day Shot History disclosure accessibility [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=e507e27280d10ccb6810553cf9c8cdc551349ef6 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d

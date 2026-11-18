@@ -20,7 +20,7 @@ test('R339 collapsed History toggle derives screen reader name from visible shot
  const html=toggle(shotCard(shot(),{expanded:false}));
  assert.match(html,/aria-expanded="false"/);
  assert.doesNotMatch(html,/\saria-label=/,'date-only override must not hide shot details');
- for(const visible of ['18g','36.35g','24.75s','Grind 4.25','11/17/2026','Turbo'])
+ for(const visible of ['18.0g','36.35g','24.75s','Grind 4.25','11/17/2026','Turbo'])
   assert.ok(html.includes(visible),'visible text should name original '+visible);
 });
 
@@ -30,7 +30,7 @@ test('R339 separate same-day shots expose different measured values to accessibl
  assert.match(a,/11\/17\/2026/);
  assert.match(b,/11\/17\/2026/);
  assert.ok(a.includes('36.35g'));
- assert.ok(b.includes('41g'));
+ assert.ok(b.includes('41.0g'));
  assert.ok(!b.includes('36.35g'));
  assert.doesNotMatch(a,/\saria-label=/);
  assert.doesNotMatch(b,/\saria-label=/);
