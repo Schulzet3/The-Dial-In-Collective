@@ -16,12 +16,14 @@
       "merged_source_sha": null,
       "scope_paths": [
         "site/cloud/main.js",
-        "site/cloud/coffee-list-empty.js"
+        "site/cloud/coffee-list-empty.js",
+        "build_cloud.mjs"
       ],
       "owner_source": "Issue #455 Option B SAFE additive search empty-state UX; DIC_PREFLIGHT_VERIFIED development_sha=cb972e74dd6dac301604dc1d4df815b257c41636 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "tests": [
         "Direct source reproduction: unmatched nonempty coffee search returned an empty list, whose unconditional fallback claimed 'Add your first coffee' despite saved coffee. No real member incident claimed.",
-        "Three synthetic positive/negative regressions newly authored for unmatched search, first-coffee and whitespace behavior, and live main.js wiring. GitHub CI NOT YET RUN, not PASS."
+        "Three synthetic positive/negative regressions newly authored for unmatched search, first-coffee and whitespace behavior, and live main.js wiring. GitHub CI NOT YET RUN, not PASS.",
+        "First PR-head mobile-browser-qa run 44253946139 FAILED before browser tests at npm run build:cloud: site-integrity correctly rejected an imported cloud/coffee-list-empty.js missing from explicit build_cloud.mjs shipped asset allowlist. Not PASS. Follow-up commit adds only the new reachable module to the allowlist and extends focused regression. CI rerun needed."
       ],
       "ci_runs": [],
       "blockers": [

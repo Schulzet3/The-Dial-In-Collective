@@ -18450,9 +18450,10 @@
         "tests/issue455-r344-coffee-search-empty-state.test.mjs",
         "docs/RELEASE_QUEUE.json",
         "docs/audits/issue455-research-source-coverage-20261103.json",
-        "docs/workstreams/ops-issue455-r344-coffee-search-empty-state-20261118.md"
+        "docs/workstreams/ops-issue455-r344-coffee-search-empty-state-20261118.md",
+        "build_cloud.mjs"
       ],
-      "test_plan": "Three synthetic Node22 cases; exact-source Node22 and relevant real Chromium/mobile/offline/a11y/SQL/security/governance; reuse unchanged evidence, no live user or member reads.",
+      "test_plan": "Three synthetic Node22 cases; exact-source Node22 and relevant real Chromium/mobile/offline/a11y/SQL/security/governance; reuse unchanged evidence, no live user or member reads. First PR-head 44253946139 failed pre-browser source graph due missing new module allowlist; updated build_cloud.mjs allowlist and synthetic source contract, retest pending.",
       "release_queue_status": "TESTING_NOT_DEPLOYED",
       "production_deployed": false,
       "github267_literal_review_credit": 0

@@ -35,4 +35,6 @@ test('R344 live coffee-card rendering uses zero-results fallback, without changi
  assert.match(main,/\}\)\.join\(''\)\|\|coffeeListEmptyState\(this\.search,s\.coffees\.some\(c=>!c\.hidden\)\)/);
  assert.match(main,/this\.searchOpen\?\x60<div class=search-tools/);
  assert.match(main,/Shot History \(\$\{shots\.length\}\)/);
+ const build=readFileSync(new URL('../build_cloud.mjs',import.meta.url),'utf8');
+ assert.match(build,/'cloud\/coffee-list-empty\.js'/);
 });
