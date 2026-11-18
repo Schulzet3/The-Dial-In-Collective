@@ -1,0 +1,23 @@
+# Issue #33 R302 — original603 #591 Vail decaf selected-source acceptance, DEVELOPMENT ONLY [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=e9aed34d6d04c92dc748ddfa0a06d55450fdb8ab preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+## Authority / nonoverlap
+- Resolved live development SHA, exact immutable PREFLIGHT file and independently fetched same-content Git blob FIRST. Then read AGENTS, CONTEXT_ENTRYPOINT, #33 latest journal/comments, #267 V2 and #96 different ownership, current source register, Master Specification, Locked Decision Ledger, approval coverage, and status/queue file Git blob identities; large queue/status content fetch cannot be claimed fully reviewed. Nonrelease development authorization only.
+- [R301 PR #3280](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3280) concurrently owns Tandem #581; this is deliberately **disjoint original #591**, not an overlapping case. Existing draft [R298 #3262](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3262) separately owns #588. No #267 V2 line-credit and no #96 Auth changes.
+- Immutable original 603-source adjudication CSV **Git blob 3e0d3036ea727de091f304f538c6de2dfcaa10d6** not modified, original 603 coffees / 201 roasters / 1197 captures and scorer/oracle retained.
+
+## Source and defect hypothesis
+- Historical #591 selected exact official https://www.vailcoffee.com/products/reserve-coffee-4; frozen selected seller is **Decaf Ethiopian Yirgacheffe SW**. Historical original register says CURRENT_OFFICIAL_FACTS_DIFFER_FROM_FROZEN_HISTORY and old current extraction Natural, Light, producer Oromia Coffee Farmers Cooperative, elevation 1550–2200, origin Oromia Region Ethiopia, notes Sweet Dark Berries/Jasmine/Hint of Cocoa, but omits distinct decaffeination_method.
+- Fresh live public selected product HTML read November 18, 2026; matching chosen H1. Its own description separately labels **Process: Full natural & dried on raised beds** (green-bean processing), **Swiss Water Process Decaf** (decaffeination), Grower Oromia Coffee Farmers Cooperative, Variety Indigenous heirloom, Region Oromia Region Ethiopia, Profile Sweet Dark Berries/Jasmine/Hint of Cocoa, Altitude 1550–2200 masl, and explicit LIGHT ROAST. Generic roastery FAQ's **8,000 feet** is roasting location, NOT the coffee farm growing elevation; generic lighter-roast recommendations or sibling coffees are not this lot.
+- Source currently a fresh publicly read official page with H1; no native guarded raw HTML hash, actual parser, Add Coffee or Source Review proof yet. The missing decaf_method in HISTORICAL parser is an independently testable candidate, **not yet a proven defect in current code**. Do not assume newer parser still lacks it, or hardcode a product-specific remedy.
+
+## This same-commit narrow changed surface
+- New tests `tests/coffee-issue33-r302-original591.test.mjs`: strict live selected H1 acceptance predicate, no recycled coffee identity, independent natural-versus-Swiss Water roles, no unrelated SEO/sibling tasting or generic roastery altitude, manual Add Coffee and Source Review.
+- New `scripts/audit/issue33-r302-original591-check.mjs` requires only **one** current exact seller HTTPS retrieval through unchanged guarded `scripts/audit/issue33-original603-focused-source-review.mjs`, pinned immutable-register hash, HTML byte length and SHA256, exact selected H1, actual parser, manual UI and provenance, field-specific positive/negative checks. Refuses unverified pages rather than faking PASS.
+- New `.github/workflows/issue33-r302-original591.yml` invokes focused fixtures plus bounded read-only real selected source and stores diagnostic one day. No broad 603 suite, no scorer/oracle/source register edits, no production services or member data. All new verification pending actual GitHub CI on this PR/merged SHA.
+
+## Acceptance / next executable
+1. Inspect actual first PR-head focused/official run and any failures, distinguish parser defect from source-unavailability/fixture assumptions; fix only generic demonstrated defect with new same-commit preflight journal receipt and adversarial regression.
+2. Require applicable exact-source approval/Node/cloud or unchanged-parity checks; inspect concurrent upstream refs before nonforce [skip netlify] integration; independently read back merged sources and exact merged selected official afterproof. If current official source inaccessible leave DRAFT/TESTING and document bounded blocker.
+3. Keep #33 OPEN and 603 manual semantics incomplete. No READY promotion absent independent integrated complete evidence; preserve all other queue states. No Netlify publication, provider, production SQL/Edge/Auth, member/account data, backup or schedule/alert mutations.
