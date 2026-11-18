@@ -6,6 +6,7 @@ import {resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {assessReadyEvidence,preflightReadyBatch,PRODUCTION_CHECKS} from './release-reliability.mjs';
 import {deployableChangedPaths,queueSchemaErrors} from './release-queue.mjs';
+import {githubBatchEvidenceReaders} from './github-live-evidence-batch.mjs';
 const SHA=/^[a-f0-9]{40}$/;
 const REPO='Schulzet3/The-Dial-In-Collective';
 const RUN_URL=/^https:\/\/github\.com\/Schulzet3\/The-Dial-In-Collective\/actions\/runs\/([1-9][0-9]*)\/job\/([1-9][0-9]*)$/;
@@ -173,9 +174,17 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const queue=JSON.parse(readFileSync(new URL('../../docs/RELEASE_QUEUE.json',import.meta.url),'utf8'));
   const items=(queue.items||[]).filter(x=>x.state==='READY');
   const readers=await githubReleaseReaders(process.env.GITHUB_TOKEN);
+  // Live, fail-closed GraphQL batches replace hundreds of GitHub Actions
+  // REST GETs on every PR/push. Do not cache a PASS or relax check integrity.
+  const batch=githubBatchEvidenceReaders(process.env.GITHUB_TOKEN);
+  const runIds=[...new Set(items.flatMap(item=>item.ci_runs||[]))].sort((a,b)=>a-b);
+  const liveRuns=await batch.loadRuns(runIds);
+  const sourceShas=[...new Set([...liveRuns.values()].map(run=>run.head_sha))].sort();
+  const liveChecks=await batch.loadChecksBatch(sourceShas);
   const git=localReadyGitReaders();
-  const report=await verifyReadyItems({queue,items,...readers,...git,
-   currentSourceSha:git.currentSourceSha()});
+  const report=await verifyReadyItems({queue,items,...readers,
+   loadRun:async id=>liveRuns.get(id),loadChecks:async sha=>liveChecks.get(sha),
+   ...git,currentSourceSha:git.currentSourceSha()});
   if(!report.ready)throw Error(report.errors.join(' | ').slice(0,4000));
   const drifted=report.verified.filter(x=>x.source_drift_paths.length);
   console.log('[READY evidence] VERIFIED '+report.verified.length+
