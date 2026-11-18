@@ -1,0 +1,670 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch": "V11F8-C50",
+  "preflight": {
+    "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "content_byte_match": true,
+    "method": "exact immutable Git file and separately fetched Git blob, byte equal"
+  },
+  "source": {
+    "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+    "file_index_1_based": 50,
+    "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+    "blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+    "from_line": 884,
+    "to_line": 913,
+    "live_blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+    "live_offset": 6
+  },
+  "coverage": {
+    "new_direct_physical_lines": 30,
+    "prior_receipt": "V11F7-C50:854-883",
+    "next_line": 914,
+    "duplicate_credit": 0,
+    "reviewer": "AI_DIRECT_NOT_HUMAN"
+  },
+  "tests": {
+    "immutable_original_source_literals": "PASS_30_OF_30",
+    "selected_live_source_literals": "PASS_30_OF_30",
+    "node22_lint_build_original603_browser_mobile_offline_SQL_Auth_RLS": "NOT_RUN_DOCS_ONLY",
+    "archived_capture_sha256": "NOT_RUN",
+    "hostile_zip_real_remote_member_privacy": "NOT_RUN",
+    "provider_readback": "NOT_APPLICABLE",
+    "actions": "PENDING_PR_AND_MERGED_SOURCE"
+  },
+  "per_line": [
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 884,
+      "literal": "        def test_structured_fact_omission_is_explicit_and_never_complete(self):",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Defines synthetic structured-fact omission regression",
+      "quality": "Method is invoked by unittest collection, not an executed PASS in this run",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Unexecuted test literal is not a test PASS.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 890,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 885,
+      "literal": "            fact = {\"label\": \"Public product JSON\", \"format\": \"json\", \"value\": '{\"product\":{\"name\":\"Coffee\"}}'}",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Builds synthetic product JSON fact with Coffee name",
+      "quality": "No private/member record; intentionally exercises structured JSON redaction",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Unexecuted test literal is not a test PASS.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 891,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 886,
+      "literal": "            projected = fact_projection(fact)",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Calls fact_projection on synthetic structured fact",
+      "quality": "Pinned function at 400-417 chooses metadata-only incomplete projection",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Unexecuted test literal is not a test PASS.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 892,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 887,
+      "literal": "            self.assertFalse(projected[\"complete\"])",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Asserts projected.complete is false",
+      "quality": "Prevents false full-certification when a whole JSON body changes",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Unexecuted test literal is not a test PASS.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 893,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 888,
+      "literal": "            self.assertNotIn(\"value\", projected[\"metadata\"])",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Asserts metadata omits raw value property",
+      "quality": "Guards against product JSON body in projected public metadata",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Unexecuted test literal is not a test PASS.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 894,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 889,
+      "literal": "            self.assertNotIn(\"Coffee\", json.dumps(projected))",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Asserts rendered projection does not contain Coffee",
+      "quality": "Detects leaking raw nested product name from structured fact",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Unexecuted test literal is not a test PASS.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 895,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 890,
+      "literal": "            _changes, complete = fact_differences([], [fact])",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Compares empty and new structured fact via fact_differences",
+      "quality": "SequenceMatcher uses stable_hash and fact_projection at 420-434",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Unexecuted test literal is not a test PASS.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 896,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 891,
+      "literal": "            self.assertFalse(complete)",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Asserts diff remains incomplete",
+      "quality": "Review must be targeted rather than auto-approved",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Unexecuted test literal is not a test PASS.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 897,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 892,
+      "literal": "",
+      "inspection_class": "trivial_read",
+      "behavior": "Blank visual separator between test methods",
+      "quality": "No executable side effect",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Unexecuted test literal is not a test PASS.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 898,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 893,
+      "literal": "        def test_sensitive_patterns_and_output_overflow_are_never_printed(self):",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Defines sensitive-pattern and output-size negative regression",
+      "quality": "Synthetic test only; no live provider security validation",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Unexecuted test literal is not a test PASS.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 899,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 894,
+      "literal": "            global EMITTED",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "References global EMITTED counter",
+      "quality": "Test mutates process-local output accounting and restores it",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Unexecuted test literal is not a test PASS.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 900,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 895,
+      "literal": "            for value in (\"Bearer PUBLIC_TEST_FIXTURE\", \"https://example.oaiusercontent.com/?sig=fixture\",",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Starts bad-value fixtures: Bearer token-like string and signed URL",
+      "quality": "PRIVATE regex at 57-59 expected to reject both patterns",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Synthetic negative paths are not equivalent to real member/privacy/provider acceptance.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 901,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 896,
+      "literal": "                          {\"completion_token\": \"fixture\"}):",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Adds synthetic completion_token object",
+      "quality": "Rejects a sensitive key without printing it",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Synthetic negative paths are not equivalent to real member/privacy/provider acceptance.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 902,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 897,
+      "literal": "                with self.subTest(value=type(value).__name__), self.assertRaises(ValueError):",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Wraps each fixture with subTest and assertRaises(ValueError)",
+      "quality": "Per-fixture negative assertion; not runtime execution evidence",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Synthetic negative paths are not equivalent to real member/privacy/provider acceptance.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 903,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 898,
+      "literal": "                    safe_public(value)",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Invokes safe_public on forbidden value",
+      "quality": "Recursive guard checks string/key patterns and size at 116-131",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Synthetic negative paths are not equivalent to real member/privacy/provider acceptance.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 904,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 899,
+      "literal": "            with contextlib.redirect_stdout(io.StringIO()) as out:",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Redirects stdout into memory buffer",
+      "quality": "Tests fail-closed without partial printing",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Synthetic negative paths are not equivalent to real member/privacy/provider acceptance.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 905,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 900,
+      "literal": "                with self.assertRaises(ValueError):",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Requires oversized emission to raise ValueError",
+      "quality": "Limit enforcement checked by nested exception context",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Synthetic negative paths are not equivalent to real member/privacy/provider acceptance.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 906,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 901,
+      "literal": "                    emit(\"too_large\", [\"x\" * 1024] * 200)",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Attempts 200 x 1KiB strings in emit('too_large')",
+      "quality": "Output exceeds MAX_EMIT; no sensitive material transmitted",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Synthetic negative paths are not equivalent to real member/privacy/provider acceptance.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 907,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 902,
+      "literal": "                self.assertEqual(out.getvalue(), \"\")",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Asserts stdout buffer stayed empty",
+      "quality": "Validates size failure before print",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Synthetic negative paths are not equivalent to real member/privacy/provider acceptance.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 908,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 903,
+      "literal": "            saved = EMITTED",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Snapshots EMITTED counter before total-limit test",
+      "quality": "Needed to avoid test pollution",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Unexecuted test literal is not a test PASS.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 909,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 904,
+      "literal": "            try:",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Enters restoration try/finally scope",
+      "quality": "Guards global counter cleanup after negative checks",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Unexecuted test literal is not a test PASS.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 910,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 905,
+      "literal": "                EMITTED = MAX_ALL_EMIT",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Sets EMITTED to MAX_ALL_EMIT",
+      "quality": "Forces global emission-budget overflow without allocating secret data",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Unexecuted test literal is not a test PASS.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 911,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 906,
+      "literal": "                with contextlib.redirect_stdout(io.StringIO()) as out:",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Redirects stdout for global overflow branch",
+      "quality": "Captures potential accidental print",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Synthetic negative paths are not equivalent to real member/privacy/provider acceptance.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 912,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 907,
+      "literal": "                    with self.assertRaises(ValueError):",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Requires total-budget emit to raise ValueError",
+      "quality": "Negative assertion for aggregate output cap",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Synthetic negative paths are not equivalent to real member/privacy/provider acceptance.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 913,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 908,
+      "literal": "                        emit(\"over_total\", {})",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Calls emit('over_total', {}) with forced-full counter",
+      "quality": "Must fail before print; no provider writes",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Synthetic negative paths are not equivalent to real member/privacy/provider acceptance.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 914,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 909,
+      "literal": "                    self.assertEqual(out.getvalue(), \"\")",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Asserts no text emitted on aggregate overflow",
+      "quality": "Guards fail-closed output behavior",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Synthetic negative paths are not equivalent to real member/privacy/provider acceptance.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 915,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 910,
+      "literal": "            finally:",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Finally always restores prior counter",
+      "quality": "Avoids corrupting later forensic tests",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Unexecuted test literal is not a test PASS.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 916,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 911,
+      "literal": "                EMITTED = saved",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Restores saved global EMITTED",
+      "quality": "Explicit reset, even when assertions fail",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Unexecuted test literal is not a test PASS.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 917,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 912,
+      "literal": "",
+      "inspection_class": "trivial_read",
+      "behavior": "Blank separator after final test method",
+      "quality": "No executable side effect",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Unexecuted test literal is not a test PASS.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 918,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 913,
+      "literal": "    result = unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromTestCase(ForensicControls))",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Runs discovered ForensicControls unittest suite",
+      "quality": "Source line invokes tests when self_test called; suite was NOT executed in this docs-only review",
+      "security_privacy_performance": "Local source-only synthetic test; no live credentials, account data, Auth/SQL/Edge/provider action or performance benchmark.",
+      "risk": "Unexecuted test literal is not a test PASS.",
+      "dead_obsolete_duplicate": "Original pinned executable test has an exact current counterpart; no demonstrated redundant/dead test or safe deletion.",
+      "counterpart": {
+        "development_sha": "c9e510df31d0fb8ff14fdc569477037da7b4ba1b",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 919,
+        "literal_match": true
+      },
+      "testability": "Python self-test, real hostile ZIP, remote artifact and negative privacy/integration tests NOT_EXECUTED in this docs-only batch.",
+      "remediation": "No reproduced current defect; no test or runtime source edits.",
+      "locked_fit": "Preserves original603 forensic evidence, no fabricated approval, #96 privacy guard and unchanged product behavior."
+    }
+  ]
+}
