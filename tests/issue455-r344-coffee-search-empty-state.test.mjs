@@ -30,7 +30,7 @@ test('R344 genuine empty collection and whitespace-only input retain first-coffe
 
 test('R344 live coffee-card rendering uses zero-results fallback, without changing filtering',()=>{
  const main=readFileSync(new URL('../site/cloud/main.js',import.meta.url),'utf8');
- assert.match(main,/import \{coffeeListEmptyState\} from '\.\/coffee-list-empty\.js';/);
+ assert.ok(main.includes("import {coffeeListEmptyState} from './coffee-list-empty.js';"));
  assert.match(main,/const list=M\.visibleCoffees\(s,this\.sort,this\.search,this\.tempCoffee\)/);
  assert.match(main,/\}\)\.join\(''\)\|\|coffeeListEmptyState\(this\.search,s\.coffees\.some\(c=>!c\.hidden\)\)/);
  assert.match(main,/this\.searchOpen\?\x60<div class=search-tools/);
