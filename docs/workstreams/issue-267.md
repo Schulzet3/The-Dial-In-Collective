@@ -1,3 +1,10 @@
+## November 18, 2026 UTC — #267 CI GraphQL error diagnosis, still FAIL-CLOSED [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=14f7a639ea5974d19bd10e75675f5dbf42ad0037 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- **Exact PR diagnostic:** #3279 approval 44331089309 rejected the new live batch at a GitHub GraphQL response containing errors and no accepted result; original strict approval remains FAILURE. Root GraphQL schema/permission reason could not be distinguished by prior nonverbose error; cannot claim PASS. The existing code still refuses missing, foreign, failed or incomplete results.
+- **Change:** Log at most two bounded sanitized GraphQL schema/permission descriptions (token redacted), never response bodies, credentials or private data. No authorization/check acceptance, READY queue, member, production or provider mutation. Risk-based source/CI checks PENDING on next actual PR head; do not conflate passed unrelated jobs with approval.
+- **Scope:** #267 OPEN; blocked V11FC #3276 unmerged and no review-position advance. [skip netlify]
+
 ## November 18, 2026 UTC — #267 CI 403 live-evidence fanout repair, DEVELOPMENT ONLY [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=14f7a639ea5974d19bd10e75675f5dbf42ad0037 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 

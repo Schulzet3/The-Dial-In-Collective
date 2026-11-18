@@ -62,8 +62,17 @@ export function githubBatchEvidenceReaders(token,{request=globalThis.fetch}={}){
    method:'POST',headers:{'Content-Type':'application/json'},
    body:JSON.stringify({query,variables})
   },'/graphql');
-  if(payload.errors?.length||!payload.data||typeof payload.data!=='object')
-   fail('/graphql partial, denied or schema-invalid response');
+  if(payload.errors?.length||!payload.data||typeof payload.data!=='object'){
+   // Schema/permission diagnostics are needed to fix provider-side 403s.
+   // Sanitize messages: never print token, response bodies or private data.
+   const reason=Array.isArray(payload.errors)?payload.errors.slice(0,2).map(e=>{
+    const type=String(e?.type||'UNKNOWN').replace(/[^A-Z_]/g,'');
+    const msg=String(e?.message||'').replaceAll(token,'[REDACTED]')
+     .replace(/[^a-zA-Z0-9_ .,:!?'"/()\\-]/g,' ').slice(0,180);
+    return type+': '+msg;
+   }).join(' | '):'NO_DATA';
+   fail('/graphql partial, denied or schema-invalid response '+reason);
+  }
   return payload.data;
  };
  const loadRuns=async ids=>{
