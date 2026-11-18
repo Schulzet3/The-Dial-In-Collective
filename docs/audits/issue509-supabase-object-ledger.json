@@ -23886,5 +23886,23 @@
     "baseline": "IN_PROGRESS",
     "queue": "PRIOR_FIXES_TESTING",
     "next": "public.dic_member_approval_claim(p_channel text,p_limit integer), char 1; verify finish/claim per outcome without private rows"
+  },
+  "provider_approval_claim_pretrigger_reconciliation_run337": {
+    "run": "R337",
+    "receipt_path": "docs/audits/issue509-r337-approval-claim-pretrigger-timeline-20261118.json",
+    "preflight_sha": "6475faea3f42f6a7570b2aceb71833d5e4ca9201",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "complete_sources": 4,
+    "reviewed_characters": 3718,
+    "first_time_word_credit": 0,
+    "approved_events": 1,
+    "deliveries": 0,
+    "push_subscriptions": 0,
+    "index_used": "dic_member_approval_claim_idx",
+    "known_null_fix": "TESTING_NOT_PUBLISHED",
+    "provider_writes": 0,
+    "code_test_ci_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "private.dic_member_approval_poll_gate singleton DDL/state"
   }
 }
