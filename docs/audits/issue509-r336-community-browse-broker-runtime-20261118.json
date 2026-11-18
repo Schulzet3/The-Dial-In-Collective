@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R336",
+  "date_utc": "2026-11-18",
+  "preflight": {
+    "initial_immutable_development_sha": "f32a722cba83a863095b1886990928b2ddc2e466",
+    "prewrite_development_sha": "14f7a639ea5974d19bd10e75675f5dbf42ad0037",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "git_content_sha1_independently_matched_at_initial_sha": true,
+    "preflight_refetched_at_prewrite_sha": true
+  },
+  "project": {
+    "ref": "azviqqejypsefzilgonr",
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.11.0.003",
+    "production_writes": 0
+  },
+  "git": {
+    "main_sha": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5",
+    "new_release_or_deploy": false
+  },
+  "new_increment": "24-hour member/Admin broker HTTP/runtime outcomes, source-bound current release parity and Community feed/search semantic/index/planner diagnosis; first-time provider word credit zero",
+  "sql_complete_current_provider_sources": [
+    {
+      "signature": "public.dic_browse_community_shots",
+      "characters": 3222,
+      "md5": "edcc2c6a9fb24b3455a446d964a2ed2d",
+      "reviewed_1_based_characters": [
+        1,
+        3222
+      ],
+      "complete_sql_definition": "CREATE OR REPLACE FUNCTION public.dic_browse_community_shots(p_limit integer DEFAULT 20, p_offset integer DEFAULT 0)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare entries jsonb; total_count integer; member_id uuid;\nbegin\n member_id:=private.require_member();\n if p_limit is null or p_limit not between 1 and 40 or\n    p_offset is null or p_offset not between 0 and 2000 then\n   raise exception using errcode='22023',\n    message='Community page size or offset is invalid.';\n end if;\n select count(*)::integer into total_count\n from public.community_shots cs\n join public.coffees coffee on coffee.id=cs.coffee_id\n where cs.quality_state='eligible' and coffee.verification_state='verified';\n\n select coalesce(jsonb_agg(jsonb_build_object(\n   'coffee_name',page.coffee_name,'roaster',page.roaster,\n   'release_key',page.release_key,'release_label',page.release_label,\n   'release_origin',page.release_origin,'release_process',page.release_process,\n   'release_producer',page.release_producer,'release_variety',page.release_variety,\n   'release_roast_level',page.release_roast_level,\n   'style',page.style,'observed_on',page.observed_on,\n   'dose_g',page.dose_g,'yield_g',page.yield_g,\n   'ratio',page.ratio,'time_s',page.time_s,\n   'extraction',page.extraction,'body',page.body,\n   'clarity',page.clarity,'sweetness',page.sweetness,\n   'astringency',page.astringency,\n   'shot_count',page.shot_count,\n   'contributor_count',page.contributor_count\n ) order by page.observed_on desc,page.sort_id desc),'[]'::jsonb)\n into entries from (\n  select cs.id as sort_id,cs.observed_on,cs.style,cs.dose_g,\n    cs.yield_g,cs.ratio,cs.time_s,cs.extraction,cs.body,\n    cs.clarity,cs.sweetness,cs.astringency,\n    coffee.name as coffee_name,coffee.roaster,\n    encode(sha256(convert_to(coffee.id::text,'UTF8')),'hex') as release_key,\n    nullif(btrim(coffee.release_label),'') as release_label,\n    nullif(btrim(coffee.origin),'') as release_origin,\n    nullif(btrim(coffee.process),'') as release_process,\n    nullif(btrim(coffee.producer),'') as release_producer,\n    nullif(btrim(coffee.variety),'') as release_variety,\n    nullif(btrim(coffee.roast_level),'') as release_roast_level,\n    (select count(*)::integer from public.community_shots sibling\n      join public.coffees canon on canon.id=sibling.coffee_id\n      where sibling.coffee_id=cs.coffee_id and sibling.style=cs.style\n        and sibling.quality_state='eligible'\n        and canon.verification_state='verified') as shot_count,\n    (select count(distinct link.contributor_id)::integer\n      from public.community_shots sibling\n      join private.contribution_links link on link.community_shot_id=sibling.id\n      where sibling.coffee_id=cs.coffee_id and sibling.style=cs.style\n        and sibling.quality_state='eligible') as contributor_count\n  from public.community_shots cs\n  join public.coffees coffee on coffee.id=cs.coffee_id\n  where cs.quality_state='eligible' and coffee.verification_state='verified'\n  order by cs.observed_on desc,cs.id desc\n  limit p_limit offset p_offset\n ) page;\n return jsonb_build_object('shots',entries,'total',total_count,\n    'offset',p_offset,'page_size',p_limit);\nend $function$\n",
+      "semantic_verdict": "ACTIVE authenticated/admitted-only, verified-eligible Community page, validated page size/offset and consistent filtered counts"
+    },
+    {
+      "signature": "public.dic_search_community_shots",
+      "characters": 3949,
+      "md5": "1124d2bbfec7f47d38d06ceb2e049fe4",
+      "reviewed_1_based_characters": [
+        1,
+        3949
+      ],
+      "complete_sql_definition": "CREATE OR REPLACE FUNCTION public.dic_search_community_shots(p_query text DEFAULT ''::text, p_style text DEFAULT 'all'::text, p_limit integer DEFAULT 20, p_offset integer DEFAULT 0)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare entries jsonb; total_count integer; member_id uuid; q text;\nbegin\n member_id:=private.require_member();\n if p_limit is null or p_limit not between 1 and 40 or\n    p_offset is null or p_offset not between 0 and 2000 then\n   raise exception using errcode='22023',\n    message='Community page size or offset is invalid.';\n end if;\n if p_query is null or length(p_query)>80 or p_style is null or length(p_style)>40 then\n  raise exception using errcode='22023',message='Community search parameters are invalid.';\n end if;\n q:=lower(btrim(p_query));\n select count(*)::integer into total_count\n from public.community_shots cs\n join public.coffees coffee on coffee.id=cs.coffee_id\n where cs.quality_state='eligible' and coffee.verification_state='verified'\n  and (p_style='all' or cs.style=p_style)\n  and (q='' or strpos(lower(concat_ws(' ',coffee.name,coffee.roaster,coffee.release_label,coffee.origin,coffee.process,coffee.producer,coffee.variety,coffee.roast_level)),q)>0);\n\n select coalesce(jsonb_agg(jsonb_build_object(\n   'coffee_name',page.coffee_name,'roaster',page.roaster,\n   'release_key',page.release_key,'release_label',page.release_label,\n   'release_origin',page.release_origin,'release_process',page.release_process,\n   'release_producer',page.release_producer,'release_variety',page.release_variety,\n   'release_roast_level',page.release_roast_level,\n   'style',page.style,'observed_on',page.observed_on,\n   'dose_g',page.dose_g,'yield_g',page.yield_g,\n   'ratio',page.ratio,'time_s',page.time_s,\n   'extraction',page.extraction,'body',page.body,\n   'clarity',page.clarity,'sweetness',page.sweetness,\n   'astringency',page.astringency,\n   'shot_count',page.shot_count,\n   'contributor_count',page.contributor_count\n ) order by page.observed_on desc,page.sort_id desc),'[]'::jsonb)\n into entries from (\n  select cs.id as sort_id,cs.observed_on,cs.style,cs.dose_g,\n    cs.yield_g,cs.ratio,cs.time_s,cs.extraction,cs.body,\n    cs.clarity,cs.sweetness,cs.astringency,\n    coffee.name as coffee_name,coffee.roaster,\n    encode(sha256(convert_to(coffee.id::text,'UTF8')),'hex') as release_key,\n    nullif(btrim(coffee.release_label),'') as release_label,\n    nullif(btrim(coffee.origin),'') as release_origin,\n    nullif(btrim(coffee.process),'') as release_process,\n    nullif(btrim(coffee.producer),'') as release_producer,\n    nullif(btrim(coffee.variety),'') as release_variety,\n    nullif(btrim(coffee.roast_level),'') as release_roast_level,\n    (select count(*)::integer from public.community_shots sibling\n      join public.coffees canon on canon.id=sibling.coffee_id\n      where sibling.coffee_id=cs.coffee_id and sibling.style=cs.style\n        and sibling.quality_state='eligible'\n        and canon.verification_state='verified') as shot_count,\n    (select count(distinct link.contributor_id)::integer\n      from public.community_shots sibling\n      join private.contribution_links link on link.community_shot_id=sibling.id\n      where sibling.coffee_id=cs.coffee_id and sibling.style=cs.style\n        and sibling.quality_state='eligible') as contributor_count\n  from public.community_shots cs\n  join public.coffees coffee on coffee.id=cs.coffee_id\n  where cs.quality_state='eligible' and coffee.verification_state='verified'\n  and (p_style='all' or cs.style=p_style)\n  and (q='' or strpos(lower(concat_ws(' ',coffee.name,coffee.roaster,coffee.release_label,coffee.origin,coffee.process,coffee.producer,coffee.variety,coffee.roast_level)),q)>0)\n  order by cs.observed_on desc,cs.id desc\n  limit p_limit offset p_offset\n ) page;\n return jsonb_build_object('shots',entries,'total',total_count,\n    'offset',p_offset,'page_size',p_limit);\nend $function$\n",
+      "semantic_verdict": "ACTIVE authenticated/admitted-only, verified-eligible Community query, case-insensitive substring on selected release metadata, bounded input/offset, stable ordering; query text filter not generally indexable at future scale"
+    }
+  ],
+  "related_tables": [
+    {
+      "name": "public.community_shots",
+      "estimated_live_rows": 13,
+      "indexes": [
+        "community_shots_pkey",
+        "community_family_idx",
+        "community_eligible_idx"
+      ]
+    },
+    {
+      "name": "public.coffees",
+      "estimated_live_rows": 9,
+      "indexes": [
+        "coffees_pkey",
+        "coffees_group_idx",
+        "coffees_merge_idx"
+      ]
+    },
+    {
+      "name": "private.contribution_links",
+      "estimated_live_rows": 13,
+      "indexes": [
+        "contribution_links_pkey",
+        "contribution_links_shot_id_key",
+        "contribution_contributor_idx"
+      ]
+    }
+  ],
+  "indexes_complete_ddl_directly_read": 9,
+  "select_only_explain": {
+    "sql_ran_without_analyze": true,
+    "community_eligible_plan": [
+      "Limit",
+      "Sort observed_on DESC,id DESC",
+      "Nested Loop",
+      "Index Scan community_eligible_idx",
+      "Index Scan coffees_pkey"
+    ],
+    "estimated_total_cost": 9.11,
+    "interpretation": "13-row current estimate, no demonstrated live inefficiency requiring schema/index change"
+  },
+  "edge_function_live_complete_file_and_deployment_reconciliation": [
+    {
+      "slug": "dic-member-approval-broker",
+      "id": "7846a00a-6df5-4ee6-bf49-5869082591d4",
+      "version": 1,
+      "verify_jwt": false,
+      "bundle_sha256": "263f36326fa00934a4c7cfb7ecc6e3df9872e9b4f0395ef1326455d9bb2bded7",
+      "files": [
+        {
+          "path": "index.ts",
+          "characters": 178,
+          "git_release_blob": "046781fa56426c761ded24679000212549999ba0",
+          "reviewed_1_based_characters": [
+            1,
+            178
+          ],
+          "exact_match_to_release_git_file": true
+        },
+        {
+          "path": "core.mjs",
+          "characters": 11751,
+          "git_release_blob": "1bc82c0c0f7e90bb86dd7da895c18f9c4e015c5a",
+          "reviewed_1_based_characters": [
+            1,
+            11751
+          ],
+          "exact_match_to_release_git_file": true
+        }
+      ],
+      "requests": 289,
+      "http200": 289,
+      "avg_ms": 883.2,
+      "max_ms": 1837,
+      "semantic_verdict": "ACTIVE protected account-key/subscribe/status and bounded poll claim/finish, 4-minute SQL polling gate; no proven delivered recipient"
+    },
+    {
+      "slug": "dic-admin-push-broker",
+      "id": "9f93c00c-83eb-4089-9007-910c227f5f63",
+      "version": 3,
+      "verify_jwt": false,
+      "bundle_sha256": "ca7ce5f9b80bf6984a7517e9f3ef1750fa856b75557136817ccc040dc5635382",
+      "files": [
+        {
+          "path": "index.ts",
+          "characters": 252,
+          "git_release_blob": "7c7a851f510dd5c21409cd8b9f6560b059dd64fd",
+          "reviewed_1_based_characters": [
+            1,
+            252
+          ],
+          "exact_match_to_release_git_file": true
+        },
+        {
+          "path": "core.mjs",
+          "characters": 9706,
+          "git_release_blob": "e1a467cc0bb9d94ea824953eec88aaf8d6c428dd",
+          "reviewed_1_based_characters": [
+            1,
+            9706
+          ],
+          "exact_match_to_release_git_file": true
+        }
+      ],
+      "requests": 288,
+      "http200": 288,
+      "avg_ms": 898.1,
+      "max_ms": 3734,
+      "semantic_verdict": "ACTIVE role-checked Admin registration, poll gate, 50-entry keyset paging, safe push retry; no observed source/deployment mismatch"
+    }
+  ],
+  "log_window": {
+    "start_utc": "2026-11-17T14:00:00Z",
+    "end_utc": "2026-11-18T14:00:00Z",
+    "broker_requests_200": 577,
+    "other_broker_status": 0,
+    "postgres_sqlstates": {
+      "LOG_00000": 578,
+      "LOG_08006": 1,
+      "ERROR_42809": 5,
+      "ERROR_42P01": 2,
+      "ERROR_42703": 1
+    },
+    "postgres_errors_role": "postgres",
+    "notes": "At least one 42P01 arose from this auditor selecting public.pg_stat_statements before correcting to extensions.pg_stat_statements; aggregate introspection errors do not prove product impact. No raw log text/identities/requests retrieved."
+  },
+  "cumulative_stats": {
+    "role": "authenticated",
+    "scope": "normalized SQL statements containing browse/search/retry/Admin review function references; not all definitely end-user calls",
+    "shapes": 5,
+    "calls": 27,
+    "weighted_mean_ms": 18.767,
+    "max_ms": 161.372,
+    "temp_blocks_written": 0,
+    "shared_blocks_read": 0,
+    "window": "unknown pg_stat_statements reset, not equivalent to 24h"
+  },
+  "crosschecked_other_current_sql": [
+    {
+      "signature": "private.dic_member_retry_pending_approval",
+      "md5": "5ebb55ad50529a080b3c2332a29d3309",
+      "characters": 2166,
+      "verdict": "owner and revision controls, pending/Conflict retry; no status behavior changed without UI product evidence"
+    },
+    {
+      "signature": "private.dic_admin_review_coffee",
+      "md5": "cb5c264aceb9699a498177f3f6861783",
+      "characters": 4526,
+      "verdict": "Admin gate, revision check, approve/merge/hold review and audit provenance; no unsafe deletion of historical Hold SQL"
+    }
+  ],
+  "interpretation": "Observed HTTP 200 means Edge route responded, not that push/email reached a recipient. Actual handset/hosted Auth/console settings unverified.",
+  "findings": {
+    "new_reproduced_application_bugs": 0,
+    "measured_user_facing_bottlenecks": 0,
+    "verified_safe_deletions": 0,
+    "source_provider_drift": 0,
+    "first_time_source_words": 0,
+    "issue_267_lines": 0,
+    "code_test_ci_changes": 0,
+    "queue_promotions": 0
+  },
+  "status": {
+    "baseline": "IN_PROGRESS",
+    "existing_issue509_fixes": "TESTING",
+    "production": "READ_ONLY_NO_PUBLISH"
+  },
+  "next_exact_cursor": "public.dic_member_approval_claim(p_channel text,p_limit integer), definition character 1; reconcile claim/finish SQL and 24-hour broker success with actual outcome persistence using aggregates only, then new/changed source; no duplicate first-time word credit"
+}

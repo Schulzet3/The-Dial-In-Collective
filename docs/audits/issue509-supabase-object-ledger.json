@@ -4677,6 +4677,21 @@
       "queue": "TESTING",
       "baseline": "IN_PROGRESS",
       "next": "Continue #509 provider review, #96 Auth and isolated release evidence."
+    },
+    {
+      "run": "R336 Nov18 2026",
+      "preflight_sha": "14f7a639ea5974d19bd10e75675f5dbf42ad0037",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r336-community-browse-broker-runtime-20261118.json",
+      "edge_release_file_parity": 4,
+      "complete_sql_chars": 7171,
+      "complete_edge_chars": 21887,
+      "log_window_edge_200": 577,
+      "first_time_provider_source_credit": 0,
+      "production_writes": 0,
+      "source_test_ci_writes": 0,
+      "baseline": "IN_PROGRESS",
+      "next": "public.dic_member_approval_claim(p_channel text,p_limit integer) character 1"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -23846,5 +23861,30 @@
     "first_time_provider_word_credit": 0,
     "queue_state": "TESTING",
     "baseline": "IN_PROGRESS"
+  },
+  "provider_community_browse_and_broker_runtime_run336": {
+    "run": "R336",
+    "receipt_path": "docs/audits/issue509-r336-community-browse-broker-runtime-20261118.json",
+    "preflight_development_sha": "14f7a639ea5974d19bd10e75675f5dbf42ad0037",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "full_sql_definitions": 2,
+    "sql_characters": 7171,
+    "complete_edge_files": 4,
+    "edge_characters": 21887,
+    "release_git_byte_parity": true,
+    "related_index_ddl": 9,
+    "bounded_log_window": "2026-11-17T14:00Z/2026-11-18T14:00Z",
+    "member_broker_http200": 289,
+    "admin_broker_http200": 288,
+    "postgres_errors_role": "postgres",
+    "cumulative_authenticated_matching_sql_calls": 27,
+    "no_reproduced_defect": true,
+    "new_provider_word_credit": 0,
+    "issue267_line_credit": 0,
+    "code_test_ci_changes": 0,
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "queue": "PRIOR_FIXES_TESTING",
+    "next": "public.dic_member_approval_claim(p_channel text,p_limit integer), char 1; verify finish/claim per outcome without private rows"
   }
 }
