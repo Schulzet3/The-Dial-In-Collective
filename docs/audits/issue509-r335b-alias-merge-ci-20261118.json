@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "run": "R335b",
+  "date_utc": "2026-11-18",
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "live_development_sha": "7795d5a356e2afc27420e3fb86d7eae3316c13dc",
+    "git_preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "verified": true
+  },
+  "integration": {
+    "pr": 3273,
+    "source_pr_head": "d9df02a046ea3edef31e705f00568fee830a07fd",
+    "merged_development_sha": "7795d5a356e2afc27420e3fb86d7eae3316c13dc",
+    "nonforce_merge": true,
+    "merge_commit_message_skip_netlify": true,
+    "merged_same_source_blobs": {
+      "migration": "11594cd6b29e21d642acf864181669887205dc80",
+      "sql_regression": "5e520243be220c7c9893c0cd875f86c319d51162",
+      "runner": "9ab673ce0d9acd97c27030c1900367a35c2ed41f",
+      "same_commit_journal": "eb9cf57ab4e9efd8e88cbf03846164185d057080"
+    }
+  },
+  "source_bound_ci": {
+    "pr_head": {
+      "sql_pg17": 44318046495,
+      "approval": 44318046444,
+      "node22_build": 44318046417,
+      "cloud_browser": 44318046389,
+      "python": 44318046367
+    },
+    "merged_push": {
+      "sql_pg17": 44318819118,
+      "approval": 44318818689,
+      "node22_build": 44318819195,
+      "cloud_browser": 44318818842,
+      "python": 44318818676,
+      "source_r171": 44318818935
+    },
+    "all_required_listed_completed_success": true,
+    "sql_regression_log": "PASS: alias suggestion only, manual confirmation, independent canonical exact, cross-roaster/lot/origin rejection, histories intact; rollback",
+    "node_tests": {
+      "tests": 5536,
+      "pass": 5530,
+      "fail": 0,
+      "skipped": 6
+    },
+    "browser": {
+      "workflow": "SUCCESS",
+      "jobs": "mobile-browser-qa SUCCESS; cloud-tests SUCCESS"
+    },
+    "other": {
+      "public_roaster_source_probe": "SKIPPED; not PASS",
+      "frozen603": "PR-head SKIPPED; not PASS"
+    }
+  },
+  "provider_readback": {
+    "project_status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.11.0.003",
+    "matcher_md5": "b4b845d29ccb65ac7922109dc89816b6",
+    "confirmation_md5": "0fcc44bb8a05f46e87694d3474eb7c23",
+    "live_alias_rows": 0,
+    "new_migration_applied_count": 0,
+    "production_writes": 0
+  },
+  "queue": {
+    "id": "DIC-Q-509-alias-manual-confirm",
+    "state": "TESTING",
+    "reason": "candidate/source isolation and #96 genuine hosted member Auth remain UNVERIFIED; new owner Publish required for production"
+  },
+  "new_unique_provider_word_credit": 0,
+  "baseline": "IN_PROGRESS",
+  "next": "Continue exhaustive #509 from ledger cursor; isolate vetted alias SQL with #96 authentic hosted acceptance and new owner Publish before any live change."
+}

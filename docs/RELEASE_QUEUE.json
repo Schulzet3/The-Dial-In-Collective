@@ -16411,24 +16411,39 @@
     {
       "id": "DIC-Q-509-alias-manual-confirm",
       "issue": 509,
-      "pr": null,
+      "pr": 3273,
       "title": "Record historical coffee aliases as manual suggestions and allow gated explicit confirmation",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "7795d5a356e2afc27420e3fb86d7eae3316c13dc",
       "scope_paths": [
         "supabase/migrations/20261118140000_dic_coffee_alias_suggestion_confirm.sql"
       ],
       "owner_source": "Issue #509 approved development-only fix; DIC_PREFLIGHT_VERIFIED development_sha=d10e6e48742d1a43110ec331be9294d24510fcff preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "tests": [
         "R334 safe read-only synthetic SQL: alias name similarity 0.318182 is beneath matcher >=0.43 and confirmation >=0.60; existing aliases count zero, no user incident.",
-        "New PG17.11 dic_ci synthetic rollback alias suggestion/manual confirm/roaster-lot-origin regression and exact-source relevant CI PENDING."
+        "Exact PR-head SQL_PG17 44318046495, approval 44318046444, Node22 44318046417, cloud/browser 44318046389 and Python 44318046367 ALL SUCCESS.",
+        "Exact merged-push SQL_PG17/JWT/backup 44318819118 SUCCESS; run logs explicitly executed coffee_historical_alias_suggestion_confirm with PASS on candidate suggestion, explicit alias confirmation, cross-roaster/lot/origin and preserved history.",
+        "Exact merged-push approval/continuity 44318818689 SUCCESS; Node22/lint/build 44318819195 SUCCESS (5530 pass, 0 fail, 6 skipped); browser/cloud 44318818842 SUCCESS (both jobs); Python 44318818676 SUCCESS. R171 source 44318818935 SUCCESS. Separate roaster probe SKIPPED, NOT PASS.",
+        "Production provider read-only confirmation: matcher MD5 b4b845d29ccb65ac7922109dc89816b6, confirm MD5 0fcc44bb8a05f46e87694d3474eb7c23, alias rows 0, migration 20261118140000 not applied."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        44318046495,
+        44318046444,
+        44318046417,
+        44318046389,
+        44318046367,
+        44318819118,
+        44318818689,
+        44318819195,
+        44318818842,
+        44318818676,
+        44318818935
+      ],
       "blockers": [
-        "PG17/JWT/Node22/browser/approval exact source success and nonforce merge/readback required.",
-        "Release-candidate isolation and #96 genuine hosted Auth acceptance UNVERIFIED; no production writes without new Publish."
+        "Release-specific source-isolated candidate and #457 approval evidence are UNVERIFIED.",
+        "Genuine hosted #96 signed-in member Auth acceptance is UNVERIFIED; no production provider change without NEW owner Publish."
       ],
-      "notes": "Preserve exact canonical auto-match, no automatic alias link, original immutable migrations, pending/member history, RLS and member admission. New scope TESTING only.",
+      "notes": "Preserve exact canonical auto-match, no automatic alias link, original immutable migrations, pending/member history, RLS and member admission. New scope TESTING only.\nR335b: PR #3273 nonforce merged at 7795d5a356e2afc27420e3fb86d7eae3316c13dc; five source-bound PR-head and exact merged-push workflows SUCCESS; migration/test/runner blobs verified; production unchanged; standalone R335b receipt docs/audits/issue509-r335b-alias-merge-ci-20261118.json. TESTING pending release isolation/#96 hosted acceptance.",
       "production_deployed": false
     }
   ],

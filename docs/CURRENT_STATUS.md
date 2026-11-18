@@ -1,3 +1,6 @@
+## November 18, 2026 UTC — #509 R335 alias dual-gate development repair merged and source-tested [skip netlify]
+[PR #3273](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3273) merged nonforce at `7795d5a356e2afc27420e3fb86d7eae3316c13dc` with tested additive alias suggestion/explicit confirmation SQL and rollback-only synthetic PG17 fixture. Exact merged-push SQL 44318819118, approval 44318818689, Node/lint/one build 44318819195 (5530 pass/0 fail/6 skipped), cloud/browser 44318818842, Python 44318818676 ALL SUCCESS. [R335b receipt](audits/issue509-r335b-alias-merge-ci-20261118.json) + [Issue #509](https://github.com/Schulzet3/The-Dial-In-Collective/issues/509). Production read-only unchanged (0 aliases; migration unapplied). Queue `DIC-Q-509-alias-manual-confirm` stays **TESTING**, NOT READY or DEPLOYED pending release candidate isolation and genuine hosted #96 Auth acceptance. Full Supabase audit IN_PROGRESS; no publication, backup, or automation schedule change.
+
 ## November 18, 2026 UTC — #455 R346 IME coffee Search READY in development ONLY [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=37f2817b6e75f9289a7bd359b6fd02c5ab1c681a preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
