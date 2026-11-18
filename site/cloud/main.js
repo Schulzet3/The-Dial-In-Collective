@@ -165,7 +165,15 @@ class CloudApp {
  }
  async init(){
   document.addEventListener('click',ev=>this.click(ev));document.addEventListener('submit',ev=>this.submit(ev));
-  document.addEventListener('input',ev=>this.input(ev));document.addEventListener('change',ev=>this.change(ev));
+  document.addEventListener('input',ev=>this.input(ev));
+   // Preserve an active IME composition: rebuilding Search on each composing
+   // input destroys its DOM node and can cancel multi-keystroke characters.
+   // On compositionend commit the final search value even when a browser
+   // does not fire a subsequent non-composing input event.
+   document.addEventListener('compositionend',ev=>{
+    if(ev.target?.id==='search')this.input({target:ev.target,isComposing:false});
+   });
+   document.addEventListener('change',ev=>this.change(ev));
   sheet.addEventListener('cancel',ev=>ev.preventDefault());
   sheet.addEventListener('close',()=>this.syncReviewDialog());
   reviewSheet.addEventListener('cancel',ev=>ev.preventDefault());
@@ -1129,7 +1137,7 @@ class CloudApp {
    // Remove the misleading cross-style origin as soon as the member edits it.
    this.draft.tempSource='';
    ev.target.closest?.('.field')?.querySelector?.('small')?.remove?.();
-  }if(ev.target.name==='doseG'&&ev.target.closest?.('#shot'))this.updateDoseAdvisory();if(ev.target.name==='source_url'&&ev.target.closest('#new-coffee')){if(this.coffeeUrlPreviewInput!==ev.target.value.trim()){this.coffeeUrlPreviewInput=null;this.coffeeUrlSourceReview=null;this.coffeeUrlBasePreview=null;this.coffeeUrlActivePreview=null;const panel=sheet.querySelector('#coffee-url-feedback');if(panel)panel.replaceChildren();for(const [key] of autofillFields){const el=ev.target.closest('#new-coffee')?.elements.namedItem(key);if(el?.dataset)delete el.dataset.coffeeConflictChoiceValue;if(el?.getAttribute?.('aria-describedby')==='coffee-conflict-'+key){el.removeAttribute('aria-describedby');el.classList?.remove('coffee-needs-review');}}}}if(ev.target.id==='search'){const value=ev.target.value,position=ev.target.selectionStart;this.search=value;this.render();const input=root.querySelector('#search');input.focus();input.setSelectionRange(position,position);}}
+  }if(ev.target.name==='doseG'&&ev.target.closest?.('#shot'))this.updateDoseAdvisory();if(ev.target.name==='source_url'&&ev.target.closest('#new-coffee')){if(this.coffeeUrlPreviewInput!==ev.target.value.trim()){this.coffeeUrlPreviewInput=null;this.coffeeUrlSourceReview=null;this.coffeeUrlBasePreview=null;this.coffeeUrlActivePreview=null;const panel=sheet.querySelector('#coffee-url-feedback');if(panel)panel.replaceChildren();for(const [key] of autofillFields){const el=ev.target.closest('#new-coffee')?.elements.namedItem(key);if(el?.dataset)delete el.dataset.coffeeConflictChoiceValue;if(el?.getAttribute?.('aria-describedby')==='coffee-conflict-'+key){el.removeAttribute('aria-describedby');el.classList?.remove('coffee-needs-review');}}}}if(ev.target.id==='search'&&!ev.isComposing){const value=ev.target.value,position=ev.target.selectionStart;this.search=value;this.render();const input=root.querySelector('#search');input.focus();input.setSelectionRange(position,position);}}
  change(ev){if(ev.target.closest?.('#edit-coffee')&&ev.target.dataset?.coffeeDifferenceSelection&&ev.target.value!==ev.target.dataset.coffeeDifferenceValue){delete ev.target.dataset.coffeeDifferenceSelection;delete ev.target.dataset.coffeeDifferenceValue;markCoffeeSubmittedDifferences(ev.target.form?.querySelector('.coffee-source-differences'),ev.target.form,this.editCoffeeDifferences);}if(ev.target.closest?.('#new-coffee')&&ev.target.dataset?.coffeeConflictChoiceValue&&ev.target.value!==ev.target.dataset.coffeeConflictChoiceValue){delete ev.target.dataset.coffeeConflictChoiceValue;markCoffeeConflictChoices(ev.target.form?.querySelector('#coffee-url-feedback'),ev.target.form,this.coffeeUrlActivePreview);}if(['name','is_decaf'].includes(ev.target.name)&&ev.target.closest?.('#new-coffee,#edit-coffee'))updateDecafFields(ev.target.form);if(ev.target.id==='sort'){this.sort=ev.target.value;this.render();}if(ev.target.id==='community-style'){this.communityStyle=ev.target.value;this.communityCoffee='all';this.loadCommunity().catch(err=>this.error(err));}if(ev.target.id==='community-coffee'){this.communityCoffee=ev.target.value;this.render();}if(ev.target.name==='slowFeed'&&this.draft){const previousFeed=this.draft.feedMode;this.readDraft();if(!this.editing&&previousFeed!==this.draft.feedMode){this.draft.recommendationContext=null;this.appliedRecommendationValues={};}const v=M.activeVersion(this.state),rec=E.recommendation(this.state,this.logCoffee,{style:this.draft.style,basketId:this.draft.basketId,feedMode:this.draft.feedMode});const box=sheet.querySelector('#log-reference');if(box)box.innerHTML=recipeGrid(rec,v.advanced.temperature,v.tempUnit);}}
  async submit(ev){ev.preventDefault();if(this.busy)return;const form=ev.target,id=form.id,d=Object.fromEntries(new FormData(form));this.busy=true;form.querySelectorAll('button').forEach(b=>b.disabled=true);let shotValidation=null;
   try{
