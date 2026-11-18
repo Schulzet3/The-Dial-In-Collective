@@ -1,3 +1,10 @@
+## November 18, 2026 UTC — #267 GraphQL actual-schema correction, no PASS claimed [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=14f7a639ea5974d19bd10e75675f5dbf42ad0037 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- **Reproduction:** Approval PR #3279 on exact source 1081d601, run 44331610939, failed: official GitHub GraphQL CheckRun does NOT expose fullDatabaseId in this repository, contrary to current documentation; this causes a schema error, not accepted READY evidence. The bundled workflow-run batch query itself passed far enough to reach check source query.
+- **Fix:** Query official CheckRun.id instead. Derive its unsigned 64-bit numeric job ID from GitHub's current CR_ node representation, require valid encoding and exact agreement with the returned /job/{id} details URL; preserve source SHA, app slug, five recorded checks, latest failed supersession, all no-cache and HOLD rules. Any future Node encoding change fails CLOSED. Adjust adversarial synthetic fixtures to use authentic current GitHub Node shape and exact job URL; no fake CI PASS.
+- **Acceptance:** Source/test head and GitHub Actions results PENDING until actually completed. No publication, provider, owner approval, deployment, data, SQL/Auth, frozen historical audit, review credit or schedule change. #267 OPEN; #3276 stays pending. [skip netlify]
+
 ## November 18, 2026 UTC — #267 CI GraphQL error diagnosis, still FAIL-CLOSED [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=14f7a639ea5974d19bd10e75675f5dbf42ad0037 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 

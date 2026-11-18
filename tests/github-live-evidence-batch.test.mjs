@@ -11,6 +11,11 @@ const nodeFor=id=>{
 };
 const anchor={id:11,node_id:nodeFor(11),head_sha:SHA,
  status:'completed',conclusion:'success',event:'pull_request'};
+const checkNodeFor=id=>{
+ const bytes=Buffer.from('9300ce50cadf0ecf0000000000000000','hex');
+ bytes.writeBigUInt64BE(BigInt(id),bytes.length-8);
+ return 'CR_'+bytes.toString('base64url');
+};
 const names=['approval','validate','cloud-tests','mobile-browser-qa','sql'];
 const response=body=>({ok:true,json:async()=>body});
 function mockReaders({alterNode=n=>n,alterChecks=c=>c,alterAnchor=a=>a,runResponse=null}={}){
@@ -30,9 +35,9 @@ function mockReaders({alterNode=n=>n,alterChecks=c=>c,alterAnchor=a=>a,runRespon
    },i))}});
   }
   const contexts={totalCount:5,nodes:names.map((name,i)=>({
-   __typename:'CheckRun',fullDatabaseId:String(500+i),name,
+   __typename:'CheckRun',id:checkNodeFor(500+i),name,
    status:'COMPLETED',conclusion:'SUCCESS',
-   detailsUrl:'https://github.com/'+REPO+'/actions/runs/'+(11+i%2)+'/job/'+(100+i),
+   detailsUrl:'https://github.com/'+REPO+'/actions/runs/'+(11+i%2)+'/job/'+(500+i),
    checkSuite:{app:{slug:'github-actions'}}
   }))};
   return response({data:{repository:{s0:{oid:SHA,statusCheckRollup:{contexts:alterChecks(contexts)}}}}});
@@ -82,7 +87,7 @@ test('partial, corrupted or oversized check sets never turn into approval',async
  for(const modify of [
   c=>({...c,totalCount:101}),
   c=>({...c,totalCount:5,nodes:c.nodes.slice(1)}),
-  c=>({...c,nodes:c.nodes.map((n,i)=>i? n:{...n,fullDatabaseId:'not-an-id'})})
+  c=>({...c,nodes:c.nodes.map((n,i)=>i? n:{...n,id:'CR_bad'})})
  ]){
   const {readers}=mockReaders({alterChecks:modify});
   await assert.rejects(()=>readers.loadChecksBatch([SHA]),/Read-only GitHub CI/);

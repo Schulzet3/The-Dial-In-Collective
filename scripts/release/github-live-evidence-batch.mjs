@@ -114,7 +114,7 @@ export function githubBatchEvidenceReaders(token,{request=globalThis.fetch}={}){
   for(let start=0;start<selected.length;start+=10){
    const chunk=selected.slice(start,start+10);
    const fields=chunk.map((sha,i)=>
-    's'+i+':object(oid:"'+sha+'"){... on Commit{oid statusCheckRollup{contexts(first:100){totalCount nodes{__typename ... on CheckRun{fullDatabaseId name status conclusion detailsUrl checkSuite{app{slug}}}}}}}}').join(' ');
+    's'+i+':object(oid:"'+sha+'"){... on Commit{oid statusCheckRollup{contexts(first:100){totalCount nodes{__typename ... on CheckRun{id name status conclusion detailsUrl checkSuite{app{slug}}}}}}}}').join(' ');
    const data=await graphql('query {repository(owner:"Schulzet3",name:"The-Dial-In-Collective"){'+fields+'}}');
    if(!data.repository)fail('/graphql source repository unavailable');
    for(let i=0;i<chunk.length;i++){
@@ -131,10 +131,21 @@ export function githubBatchEvidenceReaders(token,{request=globalThis.fetch}={}){
      }
      // Only GitHub Actions jobs may satisfy the five existing required checks.
      if(n.checkSuite?.app?.slug!=='github-actions')continue;
-     const id=Number(n.fullDatabaseId);
+     // CheckRun.databaseId is 32-bit/nullable and fullDatabaseId is not
+     // available on this repository's live GraphQL schema. GitHub's actual
+     // opaque CR_ node contains the safe 64-bit job ID, which MUST match
+     // its returned official Actions details URL before credit is possible.
+     if(typeof n.id!=='string'||!n.id.startsWith('CR_'))
+      fail('/graphql missing exact-source check Node ID '+sha);
+     const raw=Buffer.from(n.id.slice(3),'base64url');
+     if(raw.length<12||raw.length>64||
+        raw.toString('base64url')!==n.id.slice(3))
+      fail('/graphql invalid exact-source check Node encoding '+sha);
+     const id=Number(raw.readBigUInt64BE(raw.length-8));
      if(!Number.isSafeInteger(id)||id<=0||
         typeof n.name!=='string'||!n.name||
         typeof n.detailsUrl!=='string'||
+        !n.detailsUrl.endsWith('/job/'+id)||
         typeof n.status!=='string')
       fail('/graphql invalid exact-source check object '+sha);
      checks.push({id,name:n.name,head_sha:sha,
