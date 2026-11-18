@@ -1,0 +1,53 @@
+name: DIC Issue33 R299 selected original603
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - tests/coffee-issue33-r299-original603.test.mjs
+      - scripts/audit/issue33-r299-original603-check.mjs
+      - .github/workflows/issue33-r299-original603.yml
+      - docs/workstreams/ops-issue33-r299-original603-20261118.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - tests/coffee-issue33-r299-original603.test.mjs
+      - scripts/audit/issue33-r299-original603-check.mjs
+      - .github/workflows/issue33-r299-original603.yml
+      - docs/workstreams/ops-issue33-r299-original603-20261118.md
+permissions:
+  contents: read
+jobs:
+  selected-official:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Focused selected parser and negative controls
+        run: node --test tests/coffee-issue33-r299-original603.test.mjs
+      - name: Guarded exact public selected product HTTPS
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '603'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r299
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Independent source bytes and parser afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r299
+          DIC_R299_CHECKOUT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_R299_EVENT_SHA: ${{ github.sha }}
+        run: node scripts/audit/issue33-r299-original603-check.mjs
+      - name: Preserve one-day public source artifact
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r299-original603
+          path: /tmp/dic33-r299/
+          retention-days: 1
+          if-no-files-found: warn
