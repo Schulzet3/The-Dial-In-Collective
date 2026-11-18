@@ -16513,6 +16513,38 @@
       ],
       "notes": "Only null-unsafe revision predicate changed to IS DISTINCT FROM in complete current function. Preserve admitted-owner checks, Community eligibility/fingerprint and replay rules, all migration history, member data. No live Supabase writes or deployment.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-r352-temperature-visible-step",
+      "issue": 455,
+      "pr": 3297,
+      "title": "Suppress visibly identical clipped temperature arrows and explain machine adjustability",
+      "state": "READY",
+      "merged_source_sha": "33f8f6025024b4a3e12833896ff7241de7bffd5c",
+      "scope_paths": [
+        "site/lib/ui.js"
+      ],
+      "owner_source": "Issue #455 owner Option B SAFE presentation-only precision correction; DIC_PREFLIGHT_VERIFIED development_sha=dce0d5c46e6ba2b180d69c829d2734f21b5fb5bf preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d; original UI 915504835d8873bf3746842b50aee53f2a9ea2ab.",
+      "tests": [
+        "Negative synthetic: original 70.2→70.0 C clips engine target but displays 70→70 C/158→158 F; generic text implied full-degree change.",
+        "Positive synthetic: F and C show no impossible arrow; 93→92 C and 36→38g arrows still work; hidden temp fallback, private recorded notes and all five inputs unchanged.",
+        "Exact PR head 02c401775192a620978a1382897bdba6f6b161f6: Node22/build 44374294109, Chromium/mobile/offline/a11y 44374294148, isolated SQL 44374294303, security 44374294155, approval 44374294251 COMPLETED SUCCESS; cloud target NOT_APPLICABLE; frozen603 SKIPPED not PASS.",
+        "Nonforce [skip netlify] PR #3297 merged 33f8f6025024b4a3e12833896ff7241de7bffd5c; source af983c5a8b39d5003e1e9b69638be24e7d7c9d11, test 61221871b65347dd7b890baf199384473a97f327, same-commit journal 7a7977cdf2d74da076a7989cde6c018db4ec9d66 exact matching head and merged.",
+        "Exact merged-source Node22 44375652681, Chromium/mobile/offline/a11y 44375652652 and approval/governance 44375652699 COMPLETED SUCCESS; no failed or unstarted check claimed PASS."
+      ],
+      "ci_runs": [
+        44374294109,
+        44374294148,
+        44374294303,
+        44374294155,
+        44374294251,
+        44375652681,
+        44375652652,
+        44375652699
+      ],
+      "blockers": [],
+      "notes": "READY DEVELOPMENT ONLY NOT DEPLOYED. No engine numeric target or Locked behavior, new telemetry, member reads, RLS/community/storage/history mutation or measured espresso effect; no physical machine temperature-step verification. Oct29 ZIP and S019 PDF still unverified, #267/#33/#96 workstreams untouched; no publication.",
+      "production_deployed": false
     }
   ],
   "history": [
@@ -19343,6 +19375,15 @@
       "source_sha": "19180403495416d296ab743d016192056541bc45",
       "production_deployed": false,
       "evidence": "R346 source #3263 merged nonforce [skip netlify] 19180403495416d296ab743d016192056541bc45, original 3/3 feature/test/journal Git blobs exactly match PR-head and current development. PR-head Node22 44297347257 5521 PASS/0 FAIL/6 SKIP; merged 44298232248 5521 PASS/0 FAIL/6 SKIP; source-bound merged browser/offline/a11y/cloud 44298232187, governance 44298232397 SUCCESS; head SQL/security/approval SUCCESS. Frozen603 SKIPPED, physical-device actual IME unverified, no deploy. DIC_PREFLIGHT_VERIFIED development_sha=37f2817b6e75f9289a7bd359b6fd02c5ab1c681a preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d."
+    },
+    {
+      "date": "2026-11-18",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r352-temperature-visible-step",
+      "state": "READY",
+      "source_sha": "33f8f6025024b4a3e12833896ff7241de7bffd5c",
+      "production_deployed": false,
+      "evidence": "R352 [skip netlify] PR3297 exact 3 Git blobs, head Node22 44374294109, Chromium 44374294148, isolated SQL 44374294303, security 44374294155, approval 44374294251 SUCCESS; merged Node22 44375652681, mobile/browser/offline 44375652652 and approval 44375652699 SUCCESS. frozen603 SKIPPED; no member/production/Netlify or numeric taste policy change. DIC_PREFLIGHT_VERIFIED development_sha=dce0d5c46e6ba2b180d69c829d2734f21b5fb5bf preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d"
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
