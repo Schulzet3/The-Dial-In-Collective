@@ -1,5 +1,15 @@
 # Issue #509 — active journal (rotated without deletion)
 
+DIC_PREFLIGHT_VERIFIED development_sha=915994396ea9e9289919939adc6b27f7d17bfb51 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+**R347 November 18 2026 — cross-layer Community merged-count invariant, read-only [skip netlify].** Verified live Supabase ACTIVE_HEALTHY PostgreSQL17.11 and direct complete source of `public.dic_community_evidence_counts(uuid,text)` (694 chars, MD5 `1bddea7e3160c0282bea1d6e74d1fbaf`), `private.dic_on_community_coffee_verification()` (1,065 chars, MD5 `cefee7b991e40185eadbacde89def3aa`), VALIDATED `public.coffees.coffees_check1` and enabled state trigger. The check enforces `(verification_state = 'merged') = (merged_into_id IS NOT NULL)`. Thus `verified` **logically excludes** a merged ID: R346's apparent missing `merged_into_id IS NULL` filter is **not a defect**. Coffee verification trigger also holds non-withdrawn Community shots when no longer verified. Nine currently verified coffees, none with merged ID (safe aggregates).
+
+Actual release and development `site/cloud/client.js` share blob `08e1ac1f`, have 16 SDK RPC call expressions, no counts invocation; released `site/cloud/main.js` blob `28c6f602` and `site/cloud/community.js` blob `1388743e` also no counts RPC call. Current app uses separately defined recommendation evidence. **No deletion:** external clients unverified; no source patch needed after invariant proof. Full structured [R347 evidence](../audits/issue509-r347-community-counts-invariant-20261118.json). This is novel cross-object dependency verification, not repeated new word credit: first-time provider 0; #267 line 0. Full #509 baseline IN_PROGRESS. No new CI/READY/DEPLOYED claims, production/GitHub source/test/CI writes, migrations, publish, backup, billing, schedule or owner-alert changes. Next: Continue to next changed/unreviewed provider definition; check other consumers only with real evidence, preserve #96 hosted Auth and console-only UNVERIFIED.
+
+---
+
+# Issue #509 — active journal (rotated without deletion)
+
 DIC_PREFLIGHT_VERIFIED development_sha=e3977c442ffebb65f66fd7cc64ffbfab263b7e20 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
 **R346 November 18 2026 UTC — source-bound migration timestamp mapping and cross-RPC semantic runtime [skip netlify], READ-ONLY.** Live Supabase `azviqqejypsefzilgonr` ACTIVE_HEALTHY PostgreSQL 17.11; 69 migrations. Resolved R342's previously UNVERIFIED `dic_retire_roaster_directory` version mapping: Supabase stored version `20261113195659`, one complete 25,326-character SQL statement, is **exactly byte-identical** to all 443 lines of published Git `supabase/migrations/20261113050000_dic_retire_roaster_directory.sql` (release blob `10775c86bf88e61160fdc66d35c65698638742d6`). This is version metadata remapping, **not SQL content drift**. Protected identity aliases and independent official evidence retain legitimate consumers; old preview function was dropped and original directory history preserved in archival relations. No rename/drop or archived-row deletion now authorized.
