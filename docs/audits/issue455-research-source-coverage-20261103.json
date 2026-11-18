@@ -4072,13 +4072,13 @@
       "publisher_url": "https://ift.onlinelibrary.wiley.com/doi/abs/10.1111/1750-3841.15561",
       "author_dataset_url": "https://datadryad.org/dataset/doi:10.25338/B8993H",
       "dataset_version": "Dryad dataset published 2023-01-16; 1 declared CSV 542.03KB and README 8.48KB",
-      "source_access": "DIRECT_PRIMARY_PUBLISHER_ABSTRACT_AND_DRYAD_METHODS_METADATA_20261117; R341_PUBLIC_ZENODO_ORIGINAL_CSV_TEXT_INDEX_HEADER_PLUS_3186_DATA_LINES_READ_20261118; FULL_PDF_AND_BYTE_HASH_UNVERIFIED",
+      "source_access": "DIRECT_PRIMARY_PUBLISHER_ABSTRACT_AND_DRYAD_METHODS_METADATA_20261117; R341_PUBLIC_ZENODO_ORIGINAL_CSV_TEXT_INDEX_HEADER_PLUS_3186_DATA_LINES_READ_20261118; FULL_PDF_AND_BYTE_HASH_UNVERIFIED; R342_ORIGINAL_AUTHOR_README_PUBLIC_HTML_PREVIEW_DIRECT_FULL_84_LINES_REVIEWED_20261118",
       "source_bytes_sha256": null,
-      "source_byte_caveat": "R341 independently inspected Zenodo-hosted original CSV as human-readable indexed text: header at line 0, last populated line 3186; Dryad 3168 catalog row claim now appears inconsistent with the publicly served CSV. Original CSV/PDF/README bytes not independently hashed or fully audited row-by-row; Zenodo-listed MD5 is provenance metadata, not a verified checksum.",
+      "source_byte_caveat": "R341 independently inspected Zenodo-hosted original CSV as human-readable indexed text: header at line 0, last populated line 3186; Dryad 3168 catalog row claim now appears inconsistent with the publicly served CSV. Original CSV/PDF/README bytes not independently hashed or fully audited row-by-row; Zenodo-listed MD5 is provenance metadata, not a verified checksum. R342 original author README preview directly read as HTML; downloadable raw bytes failed Unicode decoding, so displayed 84 lines are NOT a verified original text-file MD5/SHA or full 48-column CSV audit.",
       "source_locators": "Wiley original abstract and Supporting Information listing; Dryad Jan 16 2023 dataset Methods, Usage notes and 48-variable dictionary (page sections); PubMed PMID 33340109",
       "evidence_grade": "PRIMARY_PUBLISHER_ABSTRACT_WITH_AUTHOR_DEPOSITED_STUDY_PROTOCOL_AND_METADATA; CONDITIONED_DRIP_CONSUMER_HEDONIC_SEGMENTATION_NOT_EXPERIMENTAL_ESPRESSO_TASTE_EFFICACY",
-      "review_status": "R455-341_ORIGINAL_PUBLIC_CSV_INDEXED_TEXT_HEADER_PLUS_3186_LINES_VERIFIED; PER_ROW_UNIQUENESS_FIELD_COMPLETENESS_BYTE_HASH_AND_FULL_PUBLISHER_ARTICLE_PENDING",
-      "claims_verified_externally": "118 predominantly college-age black-coffee consumers evaluated a 3x3x3 strength/extraction/brew-temperature drip factorial using one medium-roast washed Honduran coffee; author dataset describes Curtis commercial drip brewer, 27 conditions, 87/90/93C, 1/1.25/1.5% TDS, 16/20/24% extraction, 9-point liking, 5-point JAR for intensity/acidity/mouthfeel/temp, 17 CATA flavors; publisher abstract describes two clusters with distinct preference maps; differs from DIC five five-point taste scales and personal next-shot interventions. Dryad/Zenodo description conflicts (3186 expected versus 3168 claimed rows); R341 original public CSV viewer has header at line 0 and records indexed through line 3186, supporting 3186 displayed data lines. Individual record/field/condition and byte-integrity audit remains pending.",
+      "review_status": "R455-341_ORIGINAL_PUBLIC_CSV_INDEXED_TEXT_HEADER_PLUS_3186_LINES_VERIFIED; PER_ROW_UNIQUENESS_FIELD_COMPLETENESS_BYTE_HASH_AND_FULL_PUBLISHER_ARTICLE_PENDING; R342_AUTHOR_README_3186_CASE_STATEMENT_MISSING_TITRATION_CODES_AND_DERIVED_COLUMNS_BOUNDARILY_CHECKED",
+      "claims_verified_externally": "118 predominantly college-age black-coffee consumers evaluated a 3x3x3 strength/extraction/brew-temperature drip factorial using one medium-roast washed Honduran coffee; author dataset describes Curtis commercial drip brewer, 27 conditions, 87/90/93C, 1/1.25/1.5% TDS, 16/20/24% extraction, 9-point liking, 5-point JAR for intensity/acidity/mouthfeel/temp, 17 CATA flavors; publisher abstract describes two clusters with distinct preference maps; differs from DIC five five-point taste scales and personal next-shot interventions. Dryad/Zenodo description conflicts (3186 expected versus 3168 claimed rows); R341 original public CSV viewer has header at line 0 and records indexed through line 3186, supporting 3186 displayed data lines. Individual record/field/condition and byte-integrity audit remains pending. R342 original author README dated 2023-01-13 explicitly states 3,186 rows (118×27), independently corroborating displayed 3,186 CSV lines and indicating catalog's 3,168 sentence is likely a description typo rather than 18 missing subjects. README states Percent Extraction and preference Cluster are interpreted/derived, reported manual transcription was double-checked (author claim only), and some titration pH measurements are 'n/a', so do not assert all 48 columns complete.",
       "related_current_app": "site/lib/engine.js baseline/recommendation and site/lib/constants.js SCALES/RATIOS/TIMES remain owner-Locked starting heuristics; no TDS, JAR, cluster classifier or conversion from drip to espresso.",
       "implementation_status": "RESEARCH_ONLY_NO_APP_CHANGE_NO_NUMERIC_POLICY_NO_MEMBER_DATA_NO_DEPLOYMENT",
       "github267_literal_review_credit": 0
@@ -11687,6 +11687,30 @@
       "owner_approval_required": false,
       "implementation_status": "RESEARCH_ONLY_NO_RUNTIME_TEST_CI_POLICY_TELEMETRY_MEMBER_DATA_OR_PRODUCTION_CHANGE",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-R342-COTTER-ORIGINAL-README-3186",
+      "source": "LIT-2021-COTTER-DRIP-CONSUMER-PREFERENCE-SEGMENTS",
+      "claim": "The archived original-author README generated 2023-01-13 explicitly identifies 48 variables and 3,186 cases, 118 judges each tasting 27 coffees. This is an independent DOCUMENT crosscheck against the dataset landing description's inconsistent 3,168 rows and the previously inspected CSV text indices, NOT independent recomputation of CSV binary/unique combinations.",
+      "source_locator": "https://zenodo.org/records/7542610/preview/README.txt?include_deleted=0 lines 0, 47-49; https://zenodo.org/records/7542610 abstract line 21; https://zenodo.org/records/7542610/preview/cotter_dataset.csv?include_deleted=0 CSV viewer indexed 1-3186",
+      "grade": "DIRECT_PUBLIC_ORIGINAL_AUTHOR_README_HTML_PREVIEW_FULL_84_LINES; ORIGINAL_RAW_README_MD5_679fd52d4a05edb67a3143a56856381e_ARCHIVE_REPORTED_NOT_RECOMPUTED",
+      "factual_status": "README_AUTHOR_DECLARED_3186_CASES_CORROBORATES_CSV_VIEWER_AND_118_TIMES_27; CATALOG_3168_DESCRIPTION_INCONSISTENCY_NOT_PROVIDER_CORRECTED",
+      "result": "Evidence strengthens provisional metadata-typo interpretation without proving there are no duplicate, blank, or repeated-condition rows; no espresso taste improvement or app target claim.",
+      "owner_approval_required": false,
+      "implementation_status": "RESEARCH_ONLY_NO_APP_OR_MEMBER_DATA_CHANGE",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-R342-COTTER-ORIGINAL-README-MISSINGNESS-DERIVED",
+      "source": "LIT-2021-COTTER-DRIP-CONSUMER-PREFERENCE-SEGMENTS",
+      "claim": "Original author README says only Percent Extraction and consumer-segment Cluster are interpreted variables, while other items are raw measurements/identifiers; some titration-pH cells were not recorded, coded 'n/a', and manual transcriptions were double-checked. These are author's documented processing/QA statements, not independently measured accuracy or complete variable-specific missingness.",
+      "source_locator": "https://zenodo.org/records/7542610/preview/README.txt?include_deleted=0 lines 39-49 and 82-83",
+      "grade": "DIRECT_ORIGINAL_AUTHOR_README_DESCRIPTIVE_METHODS_AND_MISSINGNESS_NOT_ROW_LEVEL_AUDIT",
+      "factual_status": "SOURCE_DESCRIBED_DERIVED_COLUMNS_MISSING_PH_CODES_AND_QA_PROCEDURE_AUTHOR_REPORT_NOT_INDEPENDENTLY_VERIFIED",
+      "result": "Do not use dataset size/cluster or author QA claim to assert universally optimal espresso taste targets, causal next-shot efficacy, or zero missingness.",
+      "owner_approval_required": false,
+      "implementation_status": "RESEARCH_ONLY_NO_ENGINE_TARGET_POLICY_OR_TELEMETRY_CHANGE",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -11986,26 +12010,32 @@
       "run_id": "R455-340",
       "next": "Independently recomputed original Gagne 11-shot public log, three checks added to existing study/proposal with raw data provenance caveats; verify docs-only PR and merged Git readback; no universal burr correction or member outcome claim.",
       "owner_approval_now_required": false
+    },
+    {
+      "run_id": "R455-342",
+      "next": "R342 author README viewer independently corroborates 3186 rows and identifies n/a titration pH plus interpreted Cluster/Percent Extraction; raw original README and CSV checksums / row-level validation still pending, keep dataset description's erroneous 3168 uncorrected in provider. Verify exact docs-only CI/merge before claiming durable integrated evidence; continue a SAFE UX source-backed issue.",
+      "owner_approval_now_required": false
     }
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-341",
+    "run_id": "R455-342",
     "date": "2026-11-18",
-    "development_preflight_sha": "4ebb7f6556a41085ddb3524f7fce9d780f0050fc",
+    "development_preflight_sha": "8be0b0bff0764c7fce06f3df3dd8393d83c22fde",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_source_sha": "8be0b0bff0764c7fce06f3df3dd8393d83c22fde",
     "source_counts": {
       "sources": 195,
-      "evidence_checks": 585,
+      "evidence_checks": 587,
       "proposals": 261
     },
-    "research_status": "PUBLIC_COTTER_ORIGINAL_48_COLUMN_CSV_VIEWER_HEADER_PLUS_3186_INDEXED_DATA_LINES; DRYAD_3168_DESCRIPTION_CONFLICT_BOUNDARILY_CLARIFIED_NOT_FULL_DATASET_QA",
+    "research_status": "ORIGINAL_AUTHOR_COTTER_84_LINE_README_DIRECT_PREVIEW_3186_COHORT_CONFIRMED_AND_NA_PH_CODES; CATALOG_3168_MISMATCH_PRESERVED",
     "runtime_changed": false,
     "tests_run": false,
     "ci_not_yet_verified": true,
     "production_deployed": false,
     "github267_literal_review_credit": 0,
     "owner_approval_now_required": false,
-    "next": "Verify exact R341 docs PR-head and merged governance, linked source/no duplicated scientific claims; continue remaining raw CSV byte/hash and claim-quality checks or nonoverlapping SAFE UX. S019 and October29 original ZIP still inaccessible."
+    "next": "Verify docs-only PR/head and merged governance after checks; raw CSV and README bytes/full 48-column condition+missingness QA remain outstanding; continue different SAFE UX gap. S019 and Oct29 ZIP still inaccessible."
   },
   "policy_decisions_resolved": [
     {
