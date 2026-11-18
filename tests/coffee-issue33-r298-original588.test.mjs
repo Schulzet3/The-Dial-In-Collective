@@ -80,3 +80,17 @@ test('R298 member can review or edit; source parsing never saves a coffee automa
  assert.match(coffeeUrlPreviewMarkup(p),/coffee-url-preview/);
  assert.equal(coffeeSourceReviewSnapshot({...p,source_url:url})?.type,'coffee_source_review');
 });
+
+
+test('R298 bare region guard rejects two conflicting selected labels and unrelated historic/education',()=>{
+ const disagreement=extractPublicCoffeeFacts(page(title,chosen+'<p>Region Colombia Cauca</p>'),{source_url:url});
+ assert.equal(disagreement.ok,true);
+ assert.notEqual(disagreement.fields.origin,'Antioquia, Colombia');
+ const historic=extractPublicCoffeeFacts(page(title,chosen.replace('<p>Region Colombia Antioquia</p>',
+  '<p>Previously Region Colombia Antioquia</p>')),{source_url:url});
+ assert.equal(historic.ok,true);
+ assert.notEqual(historic.fields.origin,'Antioquia, Colombia');
+ const unrecognized=extractPublicCoffeeFacts(page(title,chosen.replace('<p>Region Colombia Antioquia</p>',
+  '<p>Region Marshmallow Antioquia</p>')),{source_url:url});
+ assert.notEqual(unrecognized.fields.origin,'Antioquia, Colombia');
+});

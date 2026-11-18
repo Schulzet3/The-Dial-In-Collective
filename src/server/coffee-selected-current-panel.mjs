@@ -42,6 +42,33 @@ export function selectedCurrentCoffeeLabeledRegion(html,{name='',origin='',clean
  // Another labeled current coffee on the same selected document is ambiguous.
  return found.size===1?[...found.values()][0]:null;
 }
+
+// A seller may print "Region Colombia Antioquia" as a bare DIRECT selected
+// spec. Unlike geographic SEO or varietal education, this can supply a
+// source-published region, but only with one exact selected H1, one unique
+// country/region claim and a recognized literal country. No place is guessed.
+export function selectedCurrentBareRegionCountry(html,{name='',clean,isKnownCountry}={}){
+ if(typeof isKnownCountry!=='function')return null;
+ const blocks=selectedBlocks(html,{name,clean,maxDistance:80000}),found=new Map();
+ for(const b of blocks){
+  // Text must be precisely one printed product label, not a paragraph that
+  // mentions a region in a past lot/related product or educational essay.
+  if(!['p','span','li','dd','div'].includes(b.tag)||b.text.length>115)continue;
+  const m=b.text.trim().match(/^Region\s*:?\s*([\p{Lu}][\p{L}\p{M}'’.-]*(?:\s+[\p{Lu}][\p{L}\p{M}'’.-]*){1,4})\s*$/u);
+  if(!m)continue;
+  const parts=m[1].split(/\s+/u);
+  for(let i=1;i<parts.length;i++){
+   const country=parts.slice(0,i).join(' '),local=parts.slice(i).join(' ');
+   if(!isKnownCountry(country)||local.length<4||local.length>60||
+    /^(?:coffee|roast|beans?|blend|light|medium|dark|decaf|variety|process|natural|washed|honey|flavou?r|chocolate|caramel|cocoa|origin|country|region)$/iu.test(local))continue;
+   found.set(key(local)+'|'+key(country),{value:local+', '+country,quote:b.text});
+  }
+ }
+ // Two printed direct Region claims are contradictory. Keep both in review;
+ // the first encountered claim must never become an authoritative autofill.
+ return found.size===1?[...found.values()][0]:null;
+}
+
 // Direct chosen-coffee lead such as "Medium-dark roast with notes of ..."
 // outranks a shorter icon list, but never SEO, score reviews or roast range axes.
 export function selectedCurrentLeadRoastNotes(html,{name='',clean,notes=''}={}){
