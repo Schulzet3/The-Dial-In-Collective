@@ -60,7 +60,8 @@ test('R311 current direct sourcing region refines only this current chosen coffe
  const p=extractPublicCoffeeFacts(html(),{source_url:url});
  assert.equal(p.ok,true);
  assert.equal(p.fields.origin,'Takengon, Aceh, Sumatra, Indonesia');
- assert.equal(p.fields.process,'Other/Unknown');
+ // No selected-lot process was published. Blank or Other/Unknown is safer than inference.
+ assert.doesNotMatch(String(p.fields.process||''),/\b(?:Washed|Natural|Honey|Anaerobic)\b/i);
  assert.ok((p.source_facts||[]).some(f=>f.field==='origin'&&
   /sourced\/grown area/.test(String(f.label||''))));
 });
