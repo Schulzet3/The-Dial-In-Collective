@@ -16339,10 +16339,10 @@
     {
       "id": "DIC-Q-509-first-entry-no-self-alias",
       "issue": 509,
-      "pr": null,
+      "pr": 3264,
       "title": "Avoid recording the first-entry canonical coffee's own name as an alias after rename",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "5f7193fb218850a3119a227c062b9a6c8ed9f19e",
       "scope_paths": [
         "supabase/migrations/20261118114600_dic_first_entry_no_self_alias.sql"
       ],
@@ -16351,14 +16351,29 @@
         "Provider full SQL 3954 characters (MD5 140c211a4bfef175b041c037561a1e37) and R331 direct semantic evidence: target is selected before older Pending rename; later comparison uses stale target.name.",
         "Safe read-only synthetic normalized names have distinct keys; live alias table empty and nine first-entry rows: future-path redundancy, not a current member incident.",
         "Additive function replacement refreshes target via UPDATE RETURNING; prior canonical name remains alias, new canonical name cannot be inserted as alias; later distinct aliases still persist.",
-        "Rollback-only isolated dic_ci PG17 fixture and exact-source relevant hosted CI PENDING; not READY."
+        "Rollback-only isolated dic_ci PG17 fixture and exact-source relevant hosted CI PENDING; not READY.",
+        "Source-bound PR-head `bc4c79b3` isolated PostgreSQL17 PG/JWT/backup run 44298773239 SUCCESS. Direct job log confirms R333 synthetic rollback test PASS: first original canonical, old and later noncanonical aliases retained, no self alias, IDs/shots unchanged.",
+        "PR-head approval 44298773388, Node22 44298773048, cloud/browser 44298773073, Python 44298773429 all SUCCESS; original frozen corpus SKIPPED, not PASS.",
+        "Exact merged-push SQL_PG17 44299537452 success at 5f7193fb218850a3119a227c062b9a6c8ed9f19e; https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44299537452",
+        "Exact merged-push APPROVAL 44299537493 success at 5f7193fb218850a3119a227c062b9a6c8ed9f19e; https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44299537493",
+        "Exact merged-push NODE22 44299537486 success at 5f7193fb218850a3119a227c062b9a6c8ed9f19e; https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44299537486",
+        "Exact merged-push BROWSER 44299537502 success at 5f7193fb218850a3119a227c062b9a6c8ed9f19e; https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44299537502",
+        "Exact merged-push PYTHON 44299537545 success at 5f7193fb218850a3119a227c062b9a6c8ed9f19e; https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44299537545",
+        "Exact merged-push ISSUE33_R171 44299537461 success at 5f7193fb218850a3119a227c062b9a6c8ed9f19e; https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44299537461"
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        44299537452,
+        44299537493,
+        44299537486,
+        44299537502,
+        44299537545,
+        44299537461
+      ],
       "blockers": [
         "Isolated PostgreSQL17 migration and source-bound CI must pass on exact PR head and merged development source.",
         "Independently source-isolated release candidate/approval and hosted #96 genuine Auth remain UNVERIFIED. No production writes or publish."
       ],
-      "notes": "Preserves historical migrations, original submission precedence, mutation receipts, library IDs and shots. R331-A alias matcher not using recorded aliases remains separately OPEN and must not be silently auto-linked.",
+      "notes": "Preserves historical migrations, original submission precedence, mutation receipts, library IDs and shots. R331-A alias matcher not using recorded aliases remains separately OPEN and must not be silently auto-linked.\nR333b: nonforce [skip netlify] source/test integration PR #3264 at 5f7193fb218850a3119a227c062b9a6c8ed9f19e; original exact merge source blobs migration 6a34eff579b75e70eabca1b6c7ca99ecb2292d9d, test 52afd0ebfc7ace8d9274ecd4ed2357ed54f91cf2, runner 042184570ea918564062af8e547fa3da2a675943. All five relevant exact merged-push checks SUCCESS. Scope remains TESTING until release-specific source isolation and #96 hosted Auth acceptance; production unchanged.",
       "production_deployed": false
     }
   ],
