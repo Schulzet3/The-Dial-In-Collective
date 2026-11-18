@@ -23614,5 +23614,39 @@
     "production_writes": 0,
     "baseline": "IN_PROGRESS",
     "next": "Deduplicate 89 normalized postgres queryids against earlier run receipts before claiming first-time workload coverage; prioritize genuinely changed/unreviewed live DB/Edge definitions or reproducible member-path bug."
+  },
+  "provider_community_recommendation_runtime_run330": {
+    "run": "R330",
+    "review_type": "CURRENT_READ_ONLY_CROSS_LAYER_RPC_SEMANTIC_DEPENDENCIES_AND_OBSERVED_SQL_PERFORMANCE",
+    "preflight_development_sha": "283c714824079d92f10f04535c52010e81d3d992",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "project_ref": "azviqqejypsefzilgonr",
+    "receipt_path": "docs/audits/issue509-r330-community-recommendation-runtime-20261118.json",
+    "sql_functions_directly_reread": 2,
+    "full_source_characters": 6865,
+    "related_index_ddl_reviewed": 28,
+    "related_table_aggregate_stats_reviewed": 7,
+    "authenticated_rpc_queryid": "2669020654105127862",
+    "rpc_calls_cumulative": 130,
+    "rpc_sql_mean_ms": 21.554,
+    "rpc_sql_max_ms": 112.771,
+    "rpc_temp_blocks": 0,
+    "independent_contributor_filter_verified": true,
+    "personal_family_server_provenance_verified": true,
+    "indexes_valid_and_ready": true,
+    "measured_scaling_defect": false,
+    "new_reproducible_bugs": 0,
+    "justified_deletions": 0,
+    "first_time_source_word_credit": 0,
+    "source_test_ci_edits": 0,
+    "new_ci_claims": 0,
+    "provider_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "queue": "UNCHANGED_PRIOR_FIXES_TESTING_UNRECERTIFIED",
+    "unverified": [
+      "Member end-to-end latency/scaling",
+      "Hosted Auth and provider console-only/native implementations"
+    ],
+    "next": "Genuinely changed/unreviewed provider definition or reproduced member-path defect; avoid duplicate unchanged-object and telemetry credits"
   }
 }
