@@ -84,7 +84,7 @@ jobs:
           cache: 'npm'
       - name: Install locked dependencies for affected Node/build tasks
         if: steps.scope.outputs.node_mode != 'none' || steps.scope.outputs.lint == 'true' || steps.scope.outputs.build_validate == 'true'
-        run: npm ci --ignore-scripts --no-audit --no-fund
+        run: node scripts/audit/ci-install-recovery.mjs
       - name: Run all checked-in Node tests (HIGH risk only)
         if: steps.scope.outputs.node_mode == 'full'
         run: node scripts/audit/measure-stage.mjs --name full-tests --out qa_artifacts/ci-metrics/validate.jsonl -- npm test

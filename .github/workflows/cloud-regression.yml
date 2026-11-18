@@ -66,7 +66,7 @@ jobs:
           cache: 'npm'
       - name: Install cloud test dependencies once
         if: steps.scope.outputs.cloud_mode == 'targeted'
-        run: npm ci --ignore-scripts --no-audit --no-fund
+        run: node scripts/audit/ci-install-recovery.mjs
       - name: Run affected cloud/offline/Admin/coffee UI tests
         if: steps.scope.outputs.cloud_mode == 'targeted'
         run: node --test tests/cloud*.test.mjs tests/admin-*.test.mjs tests/offline-*.test.mjs tests/pwa-shell.test.mjs tests/coffee-duplicate-first-client.test.mjs tests/coffee-source-status-ui.test.mjs tests/recipe-family-selection.test.mjs tests/shot-temperature-preservation.test.mjs
@@ -97,7 +97,7 @@ jobs:
           cache: 'npm'
       - name: Install locked dependencies for browser-owned build
         if: steps.scope.outputs.build_browser == 'true'
-        run: npm ci --ignore-scripts --no-audit --no-fund
+        run: node scripts/audit/ci-install-recovery.mjs
       - name: Build shipped application ONCE for UI, visual or Auth
         if: steps.scope.outputs.build_browser == 'true'
         env:
