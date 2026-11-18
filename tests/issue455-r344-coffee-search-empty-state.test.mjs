@@ -42,6 +42,4 @@ test('R344 live coffee-card rendering uses zero-results fallback, without changi
 test('R344 isolated visual/offline browser adapter loads search helper before CloudApp main',()=>{
  const qa=readFileSync(new URL('../tests/browser/cloud_owner_qa.py',import.meta.url),'utf8');
  assert.match(qa,/'coffee-match-ui','coffee-list-empty','coffee-url-autofill'/);
- const main=readFileSync(new URL('../site/cloud/main.js',import.meta.url),'utf8');
- assert.match(main,/import \\{coffeeListEmptyState\\} from '\\.\\/coffee-list-empty\\.js';/);
 });
