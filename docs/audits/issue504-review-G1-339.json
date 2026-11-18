@@ -1,0 +1,486 @@
+{
+  "schema_version": 1,
+  "issue": 504,
+  "batch_id": "G1-339",
+  "reviewed_on_utc_date": "2026-11-18",
+  "audit_status": "IN_PROGRESS_NOT_COMPLETE",
+  "preflight": {
+    "development_sha": "ea2bf4f7bacf1bf98b4e9ed6e6d349f807ba0060",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "full_file_fetched_at_immutable_sha": true,
+    "git_blob_content_verified": true
+  },
+  "scope": "8 complete original historical PR title/body objects only; excludes reviews, inline threads, other comments, diffs and delegated executable code",
+  "reviewed_pr_numbers": [
+    2279,
+    2280,
+    2281,
+    2282,
+    2283,
+    2284,
+    2285,
+    2286
+  ],
+  "source_object_count": 8,
+  "total_unicode_whitespace_words": 818,
+  "total_utf8_bytes_title_newline_body": 7014,
+  "word_arithmetic": [
+    {
+      "pr": 2279,
+      "title": 8,
+      "body": 47,
+      "total": 55
+    },
+    {
+      "pr": 2280,
+      "title": 11,
+      "body": 119,
+      "total": 130
+    },
+    {
+      "pr": 2281,
+      "title": 10,
+      "body": 171,
+      "total": 181
+    },
+    {
+      "pr": 2282,
+      "title": 11,
+      "body": 80,
+      "total": 91
+    },
+    {
+      "pr": 2283,
+      "title": 10,
+      "body": 53,
+      "total": 63
+    },
+    {
+      "pr": 2284,
+      "title": 11,
+      "body": 98,
+      "total": 109
+    },
+    {
+      "pr": 2285,
+      "title": 14,
+      "body": 105,
+      "total": 119
+    },
+    {
+      "pr": 2286,
+      "title": 12,
+      "body": 58,
+      "total": 70
+    }
+  ],
+  "delegated_267_crosscheck": {
+    "strict_receipt_blob_sha": "1b1d3542180b1901700b8361296fc7abbd5c18b3",
+    "pinned_path": "scripts/audit/coffee-reviewed-change-forensics.py",
+    "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "pinned_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+    "pinned_lines_inclusive": [
+      824,
+      826
+    ],
+    "live_development_sha": "ea2bf4f7bacf1bf98b4e9ed6e6d349f807ba0060",
+    "live_blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+    "live_lines_inclusive": [
+      830,
+      832
+    ],
+    "verified_three_literal_lines": true,
+    "new_504_code_line_credit": 0,
+    "global_267_complete": false
+  },
+  "records": [
+    {
+      "kind": "GitHub_pull_request_observed_complete_original_title_body",
+      "pr_number": 2279,
+      "github_url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2279",
+      "connector_object_id": "NOT_EXPOSED_BY_GET_PR_INFO",
+      "source_version": {
+        "created_at": "2026-11-12T14:48:14Z",
+        "updated_at": "2026-11-12T14:49:20Z",
+        "base_branch": "main",
+        "base_sha": "57d7c9465a069457e3afd8ff70653e56350c3181",
+        "head_branch": "work/issue2169-track-unready-member-worker-20261112",
+        "head_sha": "249699ab61e5b8035db6a61ed544fb23b7a9850d",
+        "merge_commit_sha": "9ed4633f7919a8f49525e110ab31060d4502c0fa",
+        "closed_at": "2026-11-12T14:49:20Z",
+        "merged_at": "2026-11-12T14:49:20Z",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "commits": 1,
+        "changed_files": 3
+      },
+      "original_title": "fix(#2169): track member-approval worker as excluded unpublished source",
+      "original_body": "Only add exact new `scripts/pwa/member-approval-worker.template.txt` to main release controller's deployable source inventory. Focused regressions verify owning BLOCKED #2258 queue item and reject unowned worker drift. Necessary for current owner-frozen READY4 candidate safety after concurrent development PR #2273. Same-commit ops journal, no new gate/build/provider/grant or publication. [skip netlify]",
+      "title_word_range_inclusive": [
+        1,
+        8
+      ],
+      "body_word_range_inclusive": [
+        1,
+        47
+      ],
+      "body_physical_line_range_inclusive": [
+        1,
+        1
+      ],
+      "title_words": 8,
+      "body_words": 47,
+      "combined_words": 55,
+      "combined_utf8_bytes": 477,
+      "sha1_title": "f862a2654ef952cbce64b9c064a955b97e14a1ee",
+      "sha1_body": "283d82a8ddceb8fc1b5178df96ff6901ffe046b3",
+      "sha1_title_newline_body": "535137dd1c9ea87cec06727ae87d8f426fe14d28",
+      "review_method": "DIRECT_FULL_TITLE_AND_BODY_SEMANTIC_READING_NOT_INVENTORY",
+      "owner": "#2169/main",
+      "finding": "Historical main release-controller excluded-source inventory explicitly added a member-approval worker to unready #2258 scope. This describes prevention of accidental publication, not a current source audit of all controller callers or any owner Publish grant.",
+      "disposition": "Closed/merged; safe title-only historical archival with full original metadata preserved first. Do not delete controller source or worker based on title alone.",
+      "reviews_comments_threads_diffs": "NOT_SEMANTICALLY_REVIEWED_THIS_BATCH"
+    },
+    {
+      "kind": "GitHub_pull_request_observed_complete_original_title_body",
+      "pr_number": 2280,
+      "github_url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2280",
+      "connector_object_id": "NOT_EXPOSED_BY_GET_PR_INFO",
+      "source_version": {
+        "created_at": "2026-11-12T14:49:31Z",
+        "updated_at": "2026-11-12T14:59:44Z",
+        "base_branch": "development/backend-foundation",
+        "base_sha": "ffb73310ad5131e049010433fd20558d9156aade",
+        "head_branch": "work/issue2258-edge-jwt-cron-verification-20261112",
+        "head_sha": "b3d823383349d21dd8ab4b07db52bef5cc7466b9",
+        "merge_commit_sha": "60279ea802e7d986adb6bd2580f35645a8c621c0",
+        "closed_at": "2026-11-12T14:59:44Z",
+        "merged_at": "2026-11-12T14:59:44Z",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "commits": 3,
+        "changed_files": 6
+      },
+      "original_title": "#2258: Verify scheduled member-push broker gateway and preserve Admin JWT config",
+      "original_body": "Owner approved both user email and opt-in push, development/testing only. Correct a **confirmed configuration gap**: the five-minute Netlify poll posts to the Supabase Edge broker with no JWT. Supabase gateway defaults to `verify_jwt=true` and would reject it before the broker's service-only SQL claims. Add explicit `supabase/config.toml` for **only** the new member and already-deployed Admin brokers (`verify_jwt=false`); all user operations independently verify JWT via Auth/session status, and public polls cannot specify recipients/events. New test runs actual scheduled Netlify handler mock and asserts no anonymous user subscribe. Same-commit canonical journal, queue scope; #2258 stays **BLOCKED** on external verified Resend sender/Edge secret, a fresh owner Publish, and real inbox/APNs readback. No provider/production/DB/member writes, no auto-publication. Need exact-source high-risk CI and nonforce merge.",
+      "title_word_range_inclusive": [
+        1,
+        11
+      ],
+      "body_word_range_inclusive": [
+        1,
+        119
+      ],
+      "body_physical_line_range_inclusive": [
+        1,
+        1
+      ],
+      "title_words": 11,
+      "body_words": 119,
+      "combined_words": 130,
+      "combined_utf8_bytes": 1002,
+      "sha1_title": "28e6c66db41caa1f96cda649fe9ec0d18fc860bf",
+      "sha1_body": "f0021e89c19b31107f86162d6b69562279522dd9",
+      "sha1_title_newline_body": "ee1d11a996e5014291363dde9436cce938ca0a12",
+      "review_method": "DIRECT_FULL_TITLE_AND_BODY_SEMANTIC_READING_NOT_INVENTORY",
+      "owner": "#2258",
+      "finding": "Supabase Edge gateway verify_jwt=false was scoped to Admin/member brokers, while authenticated user calls are asserted to verify JWT inside handlers. This is a privileged/Auth boundary: no proof of live configuration, provider security or member delivery follows from merged PR text; #96/#2258 retain validation.",
+      "disposition": "Preserve historical PR and code/SQL/Auth evidence; #2258/#96 own implementation verification. No provider or Auth change.",
+      "reviews_comments_threads_diffs": "NOT_SEMANTICALLY_REVIEWED_THIS_BATCH"
+    },
+    {
+      "kind": "GitHub_pull_request_observed_complete_original_title_body",
+      "pr_number": 2281,
+      "github_url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2281",
+      "connector_object_id": "NOT_EXPOSED_BY_GET_PR_INFO",
+      "source_version": {
+        "created_at": "2026-11-12T14:52:24Z",
+        "updated_at": "2026-11-12T14:56:35Z",
+        "base_branch": "development/backend-foundation",
+        "base_sha": "ffb73310ad5131e049010433fd20558d9156aade",
+        "head_branch": "research/issue455-r211-espresso-tds-sugar-20261112",
+        "head_sha": "e3e5bbcb24138442a86d7405c26a5c1e4ab85217",
+        "merge_commit_sha": "018e4b5d35b6fd300b3db869fc29deacd44dcd1a",
+        "closed_at": "2026-11-12T14:56:34Z",
+        "merged_at": "2026-11-12T14:56:34Z",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "commits": 1,
+        "changed_files": 2
+      },
+      "original_title": "docs(issue455): original 2015 espresso sugar/TDS nosespace source verification [skip netlify]",
+      "original_body": "Issue #455 R455-211. SAFE research-only source-method upgrade, no application/Locked behavior change, no deployment or production writes.\n\nDirectly inspected Charles et al. 2015 original full published paper reprint in coauthor Sine Yener's institutional doctoral thesis (Ch4.1 printed pp112–137): two Illy espresso capsule roast levels × sugared/unsugared, 18 employee volunteers, nine 60-sec TDS dominance choices (not five independent taste intensity sliders), PTR-ToF-MS nosespace kinetics; sucrose changes taste dominance more than VOC release. Source is not independent replication or validation of recipe advice. Standalone S019 still unavailable, figures/screenshot/primary binary SHA and raw participant data unverified.\n\nAtomic same commit parent `ffb73310ad5131e049010433fd20558d9156aade`, head `e3e5bbcb24138442a86d7405c26a5c1e4ab85217`: **only 2 docs** changed: existing source ledger retains all 111 source identities, existing 331 checks and 169 proposals, augments one source and appends 2 bounded checks/1 research proposal (111/333/170); SAME-COMMIT scoped [journal](https://github.com/Schulzet3/The-Dial-In-Collective/blob/e3e5bbcb24138442a86d7405c26a5c1e4ab85217/docs/workstreams/ops-issue455-r211-author-thesis-sugar-nosespace-20261112.md). Blob readbacks confirmed `f8e8c38ed0349bad404e81df6c124aa64c67123e` and `4c733313f93ab878863153fa03454073ae48c2b2`.\n\nRequire applicable exact-head CI before non-force squash merge, exact merged blob readback and push governance. All app code/tests, release queue, CURRENT_STATUS and production remain unchanged; #267 literal review credit zero. No user decision requested.",
+      "title_word_range_inclusive": [
+        1,
+        10
+      ],
+      "body_word_range_inclusive": [
+        1,
+        171
+      ],
+      "body_physical_line_range_inclusive": [
+        1,
+        7
+      ],
+      "title_words": 10,
+      "body_words": 171,
+      "combined_words": 181,
+      "combined_utf8_bytes": 1731,
+      "sha1_title": "6d9437a7aff94c173cc6154d8600d6c7057ef01a",
+      "sha1_body": "a8352887d4686a8f07844903139d320a3e981be4",
+      "sha1_title_newline_body": "563bc24e7311b8139666339090ab820960269ace",
+      "review_method": "DIRECT_FULL_TITLE_AND_BODY_SEMANTIC_READING_NOT_INVENTORY",
+      "owner": "#455",
+      "finding": "Original 2015 espresso nosespace/sucrose study from an institutional thesis reprint: 18 employees, TDS dominance task and PTR-ToF-MS; cannot be generalized to universal dose/grind/shot advice or independent replication. S019 primary PDF and participant data remain unverified; research belongs #455.",
+      "disposition": "Preserve citation limitations and historical paper provenance; no reinterpretation as tested recipe outcomes. #455 retains research ownership.",
+      "reviews_comments_threads_diffs": "NOT_SEMANTICALLY_REVIEWED_THIS_BATCH"
+    },
+    {
+      "kind": "GitHub_pull_request_observed_complete_original_title_body",
+      "pr_number": 2282,
+      "github_url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2282",
+      "connector_object_id": "NOT_EXPOSED_BY_GET_PR_INFO",
+      "source_version": {
+        "created_at": "2026-11-12T15:07:36Z",
+        "updated_at": "2026-11-12T15:12:37Z",
+        "base_branch": "development/backend-foundation",
+        "base_sha": "4e0599afef576764141d1df9344d22051c3ceb06",
+        "head_branch": "work/issue2258-security-config-ci-20261112",
+        "head_sha": "f86840c588f2662e13205fcd63d06f9237647563",
+        "merge_commit_sha": "7767782f9aff230ddb3c9561153873283f35af33",
+        "closed_at": "2026-11-12T15:12:36Z",
+        "merged_at": "2026-11-12T15:12:36Z",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "commits": 2,
+        "changed_files": 3
+      },
+      "original_title": "test(#2258): include exact Supabase Edge gateway config in existing security CI",
+      "original_body": "Source-only correction for #2258 after nonforce merged PR #2280. The existing independent `security-inspection.yml` omitted `supabase/config.toml`, which controls JWT gateway behavior for #1938 Admin and #2258 member brokers. Add **only** the exact config path, not a broad TOML wildcard; add targeted Node regression and SAME-COMMIT canonical issue journal. No new CI suite or release gate. Requires exact-head risk-based approval/Node/SQL/browser/security SUCCESS and safe nonforce integration. Keep in-app READY distinct from BLOCKED email/member push. No Supabase/Netlify/production/member/provider writes, secrets, spending or publication. [skip netlify]",
+      "title_word_range_inclusive": [
+        1,
+        11
+      ],
+      "body_word_range_inclusive": [
+        1,
+        80
+      ],
+      "body_physical_line_range_inclusive": [
+        1,
+        1
+      ],
+      "title_words": 11,
+      "body_words": 80,
+      "combined_words": 91,
+      "combined_utf8_bytes": 739,
+      "sha1_title": "bad161993b448ffa32b4a0bd18c95ba95aa60bad",
+      "sha1_body": "617c27094c5cab5990f9b37cf6ab5f44e582a09e",
+      "sha1_title_newline_body": "5e66c9b9d267328692affbb6493c950f085c1e8f",
+      "review_method": "DIRECT_FULL_TITLE_AND_BODY_SEMANTIC_READING_NOT_INVENTORY",
+      "owner": "#2258",
+      "finding": "Adds the exact supabase/config.toml path to existing security inspection; narrow CI gap had been confirmed historically, but a merged security-workflow change alone does not prove live JWT/config correctness or justify separate #504 code edits.",
+      "disposition": "Preserve narrowly scoped CI security inclusion and existing tests; no overlapping #96/#2258 CI work or duplicate builds.",
+      "reviews_comments_threads_diffs": "NOT_SEMANTICALLY_REVIEWED_THIS_BATCH"
+    },
+    {
+      "kind": "GitHub_pull_request_observed_complete_original_title_body",
+      "pr_number": 2283,
+      "github_url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2283",
+      "connector_object_id": "NOT_EXPOSED_BY_GET_PR_INFO",
+      "source_version": {
+        "created_at": "2026-11-12T15:08:44Z",
+        "updated_at": "2026-11-12T15:22:18Z",
+        "base_branch": "development/backend-foundation",
+        "base_sha": "4e0599afef576764141d1df9344d22051c3ceb06",
+        "head_branch": "audit/issue33-r150-original166-iwana-20261112",
+        "head_sha": "00d43f44cc659fea7012244710825b27387c3ea6",
+        "merge_commit_sha": "7500cf42f387e3c0f7951e7b4dc9f87db7e8bff9",
+        "closed_at": "2026-11-12T15:22:18Z",
+        "merged_at": "2026-11-12T15:22:18Z",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "commits": 2,
+        "changed_files": 6
+      },
+      "original_title": "test(issue33): R150 original #166 Iwana Maragogipe selected source [skip netlify]",
+      "original_body": "Issue #33 development-only original frozen603 #166, source-bound original official selected WooCommerce page. One same-commit test/workflow/checker/journal; 13 positive and adversarial cases, bounded guarded official HTTPS and actual parser/Add Coffee/Source Review, strict SHA/H1/direct-fact afterproof. NOT certified until exact-source CI, no runtime source/queue/frozen corpus modification. Do not merge if any failure; no deployment or production writes.",
+      "title_word_range_inclusive": [
+        1,
+        10
+      ],
+      "body_word_range_inclusive": [
+        1,
+        53
+      ],
+      "body_physical_line_range_inclusive": [
+        1,
+        1
+      ],
+      "title_words": 10,
+      "body_words": 53,
+      "combined_words": 63,
+      "combined_utf8_bytes": 540,
+      "sha1_title": "b36ef894950d9e3e93debb8381e49f77df417459",
+      "sha1_body": "73e30b63470d7257362d197d0570fc2b71da11b0",
+      "sha1_title_newline_body": "fe473e0fcc71f9fc45f780db9da7639041aaeffb",
+      "review_method": "DIRECT_FULL_TITLE_AND_BODY_SEMANTIC_READING_NOT_INVENTORY",
+      "owner": "#33",
+      "finding": "Official selected original603 coffee #166 Iwana Maragogipe targeted 13 positive/adversarial cases; not equivalent to verifying all 603 cases, a current commercial listing or production extracted values. #33 owns actual extractor and original corpus.",
+      "disposition": "Preserve selected original603 evidence with bounded source identity and no current production assertion. #33 remains OPEN.",
+      "reviews_comments_threads_diffs": "NOT_SEMANTICALLY_REVIEWED_THIS_BATCH"
+    },
+    {
+      "kind": "GitHub_pull_request_observed_complete_original_title_body",
+      "pr_number": 2284,
+      "github_url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2284",
+      "connector_object_id": "NOT_EXPOSED_BY_GET_PR_INFO",
+      "source_version": {
+        "created_at": "2026-11-12T15:12:41Z",
+        "updated_at": "2026-11-12T15:23:21Z",
+        "base_branch": "development/backend-foundation",
+        "base_sha": "7767782f9aff230ddb3c9561153873283f35af33",
+        "head_branch": "work/preflight-single-entrypoint-20261112",
+        "head_sha": "0bff86c6a79cf804b38a38590b6731fa36d65fd6",
+        "merge_commit_sha": "0de14018a5e9d43c6f7b04c6c2e9208f143f6cff",
+        "closed_at": "2026-11-12T15:23:21Z",
+        "merged_at": "2026-11-12T15:23:21Z",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "commits": 2,
+        "changed_files": 12
+      },
+      "original_title": "#2169: Make live PREFLIGHT.md mandatory for every DIC task [skip netlify]",
+      "original_body": "Owner mandate: `docs/ai/PREFLIGHT.md` becomes the single first GitHub document for **every** project task. Read exact live development SHA, route to task-specific authority, fail closed on missing retrieval, and report actual source/tests/status. GitHub instructions, AGENTS, topic map, documentation indexes, source register and journal aligned; GitHub Project Instructions full 7,973-character paste-ready copy. Adds **one inexpensive static guard in existing approval job**, with six adversarial Node tests. Does not claim the platform can prove chat retrieval or privileged direct-write protection. No new build, status check, release gate, staging/grant, production/Netlify/Supabase/member data change. Same-commit #2169 journal; applicable exact-source checks and nonforce integration required.",
+      "title_word_range_inclusive": [
+        1,
+        11
+      ],
+      "body_word_range_inclusive": [
+        1,
+        98
+      ],
+      "body_physical_line_range_inclusive": [
+        1,
+        1
+      ],
+      "title_words": 11,
+      "body_words": 98,
+      "combined_words": 109,
+      "combined_utf8_bytes": 874,
+      "sha1_title": "c56ff45332b8f45477bede9ee9d2730003f5c3fc",
+      "sha1_body": "1eb941b0f53f93aac440b8a8bcd0bb93577127de",
+      "sha1_title_newline_body": "c8e7a7b983b887fa7d0ac9448cb58a30b16f07ae",
+      "review_method": "DIRECT_FULL_TITLE_AND_BODY_SEMANTIC_READING_NOT_INVENTORY",
+      "owner": "#2169",
+      "finding": "Defines preflight-first route and six negative static tests; CI guard checks repository documentation, cannot prove every ChatGPT invocation fetched the exact file or prevent privileged direct edits. Historical merged policy implementation remains active, not obsolete code to delete.",
+      "disposition": "Preserve live PREFLIGHT/AGENTS guard; recognize enforcement limits, avoid weakening security or treating self-attestation as proof.",
+      "reviews_comments_threads_diffs": "NOT_SEMANTICALLY_REVIEWED_THIS_BATCH"
+    },
+    {
+      "kind": "GitHub_pull_request_observed_complete_original_title_body",
+      "pr_number": 2285,
+      "github_url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2285",
+      "connector_object_id": "NOT_EXPOSED_BY_GET_PR_INFO",
+      "source_version": {
+        "created_at": "2026-11-12T15:19:28Z",
+        "updated_at": "2026-11-12T15:20:21Z",
+        "base_branch": "development/backend-foundation",
+        "base_sha": "7767782f9aff230ddb3c9561153873283f35af33",
+        "head_branch": "audit/issue267-a95-t11-20261112",
+        "head_sha": "cf1966d66ad8cedd14a710275ae25fe652d68f56",
+        "merge_commit_sha": "b57f683419e2c539c1846f1f1bb92621ff904e96",
+        "closed_at": "2026-11-12T15:20:21Z",
+        "merged_at": "2026-11-12T15:20:21Z",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "commits": 1,
+        "changed_files": 3
+      },
+      "original_title": "Issue #267 A95: 66 directly reviewed source lines and P075 classification correction [skip netlify]",
+      "original_body": "Development-only three-file SAME-COMMIT strict append-only source evidence. 34 frozen F166:206–239 and 32 pinned P137:131–162 individually read, interpreted and exact original/current literal checked (66/66, no local overlap). Source blobs frozen `4c4a3ee50a056c0f2b2971c9a647094db8c92601`, pinned `f90535c2d36373e8ce36fd33f961f2a295370e6e`, current `12d71abcba4f993daa2eb4841e05ea552236d455`. Separate append-only correction for already-reviewed shell script P075:7: original receipt `9e4ec0edc5b185562d055142718219fe83fa4143` mislabeled executable `*) echo ...; exit 2 ;;` as comment; original preserved, zero new numerator. Same-commit scoped journal references source/rights/Locked, test limits and next F166:240/P137:163. CI must confirm actual PR-head and merged-source. No code, test, Auth, SQL, member, provider, release, Netlify or deployment changes. Full global semantic coverage and postpin drift INCOMPLETE; #267 stays OPEN. Original603 and #33/#96 boundaries preserved.",
+      "title_word_range_inclusive": [
+        1,
+        14
+      ],
+      "body_word_range_inclusive": [
+        1,
+        105
+      ],
+      "body_physical_line_range_inclusive": [
+        1,
+        1
+      ],
+      "title_words": 14,
+      "body_words": 105,
+      "combined_words": 119,
+      "combined_utf8_bytes": 1087,
+      "sha1_title": "e42a67499014f6632881e199730024502ef0fb0f",
+      "sha1_body": "b82b061f0588ea02937f7f09ecdc571800277bf9",
+      "sha1_title_newline_body": "77f1beb3f9476bfe2e5575cac379fc999cbf4e47",
+      "review_method": "DIRECT_FULL_TITLE_AND_BODY_SEMANTIC_READING_NOT_INVENTORY",
+      "owner": "#267",
+      "finding": "66 original frozen/pinned #267 line receipts and correction of previously misclassified P075 shell case; preserve prior erroneous receipt and correction with zero duplicate #504 code-line credit. Global frozen/live/postpin coverage incomplete.",
+      "disposition": "Delegated source-line review to #267 only; independently verify three exact strict receipt literals without credit; do not rewrite old receipt.",
+      "reviews_comments_threads_diffs": "NOT_SEMANTICALLY_REVIEWED_THIS_BATCH"
+    },
+    {
+      "kind": "GitHub_pull_request_observed_complete_original_title_body",
+      "pr_number": 2286,
+      "github_url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2286",
+      "connector_object_id": "NOT_EXPOSED_BY_GET_PR_INFO",
+      "source_version": {
+        "created_at": "2026-11-12T15:21:55Z",
+        "updated_at": "2026-11-12T15:24:32Z",
+        "base_branch": "main",
+        "base_sha": "cf83b3873e36916b5a51303bac9f0fff69b94670",
+        "head_branch": "work/main-route-to-live-preflight-20261112",
+        "head_sha": "2add2d3176f3c847e40bf57f9f22f648eb9d5dd4",
+        "merge_commit_sha": "0240ff79338000c17970f8989e6245767ee07df3",
+        "closed_at": "2026-11-12T15:24:32Z",
+        "merged_at": "2026-11-12T15:24:32Z",
+        "state": "closed",
+        "merged": true,
+        "draft": false,
+        "commits": 1,
+        "changed_files": 3
+      },
+      "original_title": "docs(ops): Make live PREFLIGHT.md the first document for main tasks [skip netlify]",
+      "original_body": "Owner requires a **single starting point for every DIC task**. Route main `AGENTS.md` and `README.md` to current exact-SHA development `docs/ai/PREFLIGHT.md`, then task-specific main backup/release authority. Append-only SAME-COMMIT main ops journal. No controller/workflow/grant/release request changes, no staging, CI bypass, Netlify, Supabase or production data writes. Independent development enforcement is PR #2284. Read-only exact-source main CI and nonforce merge required.",
+      "title_word_range_inclusive": [
+        1,
+        12
+      ],
+      "body_word_range_inclusive": [
+        1,
+        58
+      ],
+      "body_physical_line_range_inclusive": [
+        1,
+        1
+      ],
+      "title_words": 12,
+      "body_words": 58,
+      "combined_words": 70,
+      "combined_utf8_bytes": 564,
+      "sha1_title": "954df20e072eb0b7dc62da4fd22bede710ecbecc",
+      "sha1_body": "7af141064e6ed2328c973bc2d241b5d6a8e57b68",
+      "sha1_title_newline_body": "3b095bc08eddaccd19a89a5f7a4f0e80dbc8f4a2",
+      "review_method": "DIRECT_FULL_TITLE_AND_BODY_SEMANTIC_READING_NOT_INVENTORY",
+      "owner": "#2169/main",
+      "finding": "Main AGENTS/README routing to development PREFLIGHT; historical documentation/navigation correction, not a new release-controller command, new READY status, or authorization to move main or production.",
+      "disposition": "Preserve dated main documentation and immutable backup/release history, with live status readbacks required for any new claim.",
+      "reviews_comments_threads_diffs": "NOT_SEMANTICALLY_REVIEWED_THIS_BATCH"
+    }
+  ],
+  "next": {
+    "pr_number": 2287,
+    "field": "title word1 then full body line1/word1 through EOF"
+  }
+}
