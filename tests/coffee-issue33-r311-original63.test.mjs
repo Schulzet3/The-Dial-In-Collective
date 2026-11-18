@@ -69,6 +69,11 @@ test('R311 sourced-region grammar refuses old lot, unselected or mill provenance
  const blocks=[{tag:'h1',text:title},good];
  const get=b=>selectedCurrentPublishedSourcingRegion({name:title,origin:'Sumatra, Indonesia',blocks:b});
  assert.equal(get(blocks)?.value,'Takengon, Aceh, Sumatra, Indonesia');
+ assert.equal(selectedCurrentPublishedSourcingRegion({name:title,
+  origin:'Aceh, Takengon, Sumatra, Indonesia',blocks})?.value,
+  'Takengon, Aceh, Sumatra, Indonesia');
+ assert.equal(selectedCurrentPublishedSourcingRegion({name:title,
+  origin:'Gayo, Takengon, Sumatra, Indonesia',blocks}),null);
  for(const falseProof of [
   'Previously sourced from the Takengon region within the province of Aceh, this coffee is grown by families.',
   'Sourced from the Takengon region within the province of Aceh, another coffee is grown there.',

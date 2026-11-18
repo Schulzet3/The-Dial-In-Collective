@@ -15,12 +15,13 @@ export function selectedCurrentPublishedSourcingRegion({name='',origin='',blocks
   !Array.isArray(blocks)||blocks.length>2500||
   /\b(?:blend|sampler|assortment)\b/iu.test(name))return null;
  const parts=origin.split(/\s*,\s*/u);
- // Only refine one already accepted growing area + its current country.
- // Existing geography authority, including country/lot conflict guards,
- // remains with the caller. Never invent a missing base country or area.
- if(parts.length!==2||parts.some(p=>p.length<3||p.length>55||
+ // Already-accepted broad area + producing country, OR a precisely reversed
+ // four-part tuple with the same direct current region/province witnesses.
+ // Never reorder a different source claim or invent a missing country.
+ const base=parts.length===4?parts.slice(2):parts;
+ if(![2,4].includes(parts.length)||parts.some(p=>p.length<3||p.length>55||
   !/^[\p{Lu}][\p{L}\p{M}'’ -]+$/u.test(p))||
-  !key(name).includes(key(parts[0])))return null;
+  !key(name).includes(key(base[0])))return null;
  const headings=blocks.filter(b=>b?.tag==='h1'&&!b.educational);
  if(headings.length!==1||key(headings[0].text)!==key(name))return null;
  const candidates=new Map();
@@ -32,7 +33,9 @@ export function selectedCurrentPublishedSourcingRegion({name='',origin='',blocks
    const region=m[1].trim(),province=m[2].trim();
    if([region,province].some(p=>p.length>65||key(p)===key(parts[0])||
     key(p)===key(parts[1]))||key(region)===key(province))continue;
-   const value=[region,province,...parts].join(', ');
+   if(parts.length===4&&
+    (key(parts[0])!==key(province)||key(parts[1])!==key(region)))continue;
+   const value=[region,province,...base].join(', ');
    candidates.set(key(value),{value,quote:m[0].trim().slice(0,420)});
   }
  }
