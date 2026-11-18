@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R343",
+  "date_utc": "2026-11-18",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "ff48ef70807737e910aad47c1d3999e584c140f9",
+    "blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "file_verified_by_independent_blob_readback": true
+  },
+  "github_refs": {
+    "main": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release_production": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+  },
+  "provider": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.11.0.003",
+    "edge_slug": "dic-preview-coffee",
+    "edge_version": 7,
+    "edge_verify_jwt": true,
+    "edge_entrypoint_git_blob": "df18de8eb7562eeb95e8e335ef791f615903a46e",
+    "edge_bytes": 1533,
+    "edge_exact_published_git_bytes": true,
+    "edge_behavior": "legacy POST 410 tombstone; does not call worker quota RPC",
+    "production_writes": 0
+  },
+  "table": {
+    "name": "private.dic_url_preview_attempts",
+    "catalog": "COMPLETE_CURRENT_VISIBLE",
+    "columns": 6,
+    "constraints": 3,
+    "indexes": 1,
+    "policy": "no_client_access role anon+authenticated USING false WITH CHECK false",
+    "rls": true,
+    "custom_triggers": 0,
+    "primary_key": "owner_id",
+    "foreign_key": "owner_id -> auth.users(id) ON DELETE CASCADE",
+    "attempt_constraint": "0<=attempts<=12",
+    "visible_aggregate": {
+      "counter_rows": 3,
+      "counter_sum": 3,
+      "max_attempts": 1,
+      "outstanding_tickets": 0
+    },
+    "estimated_stats": {
+      "n_live_tup": 3,
+      "n_dead_tup": 43,
+      "idx_scan": 119,
+      "seq_scan": 118,
+      "last_idx_scan_utc": "2026-11-13T03:40:54.255919+00:00"
+    },
+    "planner": {
+      "kind": "EXPLAIN without ANALYZE; fixed zero UUID, not member data",
+      "node": "LockRows -> Index Scan dic_url_preview_attempts_pkey",
+      "total_estimated_cost": 2.38
+    }
+  },
+  "functions_complete_current_source": [
+    {
+      "signature": "public.dic_url_preview_claim(uuid)",
+      "chars": 413,
+      "md5": "25b95f9449aeb73cc1937f880358c22f",
+      "range": "all 413/413",
+      "consumer": "service_role-only wrapper -> private.dic_shared_preview_claim",
+      "status": "LEGACY ACTIVE / no proven contemporary external worker"
+    },
+    {
+      "signature": "private.dic_shared_preview_claim(uuid)",
+      "chars": 1876,
+      "md5": "8d8c9c371ecdb320dd03cbae2ab4c2dd",
+      "range": "all 1876/1876",
+      "consumer": "public.dic_url_preview_claim + public.dic_claim_universal_preview",
+      "status": "LEGACY ACTIVE"
+    },
+    {
+      "signature": "public.dic_claim_universal_preview()",
+      "chars": 618,
+      "md5": "8f4bc6ecd8687594ff7200cda26104b5",
+      "range": "all 618/618",
+      "consumer": "authenticated shared URL budget caller; enforces member + email",
+      "status": "ACTIVE"
+    },
+    {
+      "signature": "public.dic_preview_preflight(boolean)",
+      "chars": 2460,
+      "md5": "395d4a717122f9feb5ae04ac3c5a1d6a",
+      "range": "all 2460/2460",
+      "consumer": "authenticated two-phase preflight for cached/uncached preview",
+      "status": "ACTIVE"
+    },
+    {
+      "signature": "public.dic_preview_complete(uuid)",
+      "chars": 1339,
+      "md5": "95324ba674010588a74507024c12ef91",
+      "range": "all 1339/1339",
+      "consumer": "authenticated 25-second ticket completion",
+      "status": "ACTIVE"
+    },
+    {
+      "signature": "public.dic_preview_cached_verified(text)",
+      "chars": 1658,
+      "md5": "86a08b5ae97f89c13b8c727ebdd0c50f",
+      "range": "all 1658/1658",
+      "consumer": "read-only verified-catalog cache, no quota table reference",
+      "status": "ACTIVE"
+    }
+  ],
+  "source_chars_direct_reviewed_this_run": 8364,
+  "sqlite_or_private_auth_user_rows_read": 0,
+  "source_semantic_findings": [
+    "Remaining active shared-quota consumers mean retired curated Edge endpoint does not justify dropping quota table or any referenced RPC.",
+    "Public member wrapper enforces admitted member and email; service_role-only worker wrapper does not itself prove a current external consumer.",
+    "Two-phase 15s cooldown/12-in-24h budget, 25s ticket, exclusive FOR UPDATE lock, reset and admin-unlimited flow preserve current known semantics; do not infer old 30s comments remain controlling.",
+    "Small table PK lock plan and cumulative authenticated query means (preflight 6.634ms, cached 12.096ms, universal claim 16.476ms, complete 3.135ms) do not establish current bottleneck."
+  ],
+  "cumulative_authenticated_pg_stat_statements": [
+    {
+      "operation": "preflight",
+      "calls": 16,
+      "mean_ms": 6.634
+    },
+    {
+      "operation": "cached_verified",
+      "calls": 13,
+      "mean_ms": 12.096
+    },
+    {
+      "operation": "universal_claim",
+      "calls": 12,
+      "mean_ms": 16.476
+    },
+    {
+      "operation": "complete",
+      "calls": 9,
+      "mean_ms": 3.135
+    }
+  ],
+  "errors": [
+    "Initial all-function textual dependency query hit PG 42809 because aggregate pg_get_functiondef was requested; corrected with MATERIALIZED CTE and prokind ('f','p'); auditor query error, not product error."
+  ],
+  "verification_limits": [
+    "pg_stat_statements cumulative since reset, not a 24-hour use/not-used proof.",
+    "Current Netlify universal /api/coffee-preview caller and deployment source not independently retrieved; external non-SQL consumers UNVERIFIED.",
+    "Preview migration filename/version mapping is not assumed identical solely because matching names exist.",
+    "No member account or shot/notes identities read; no test function executed or production mutation."
+  ],
+  "outcome": {
+    "reproduced_new_app_bug": false,
+    "justified_drop": false,
+    "safe_source_change": false,
+    "docs_only": true,
+    "ci": "NOT_RUN_NOT_PASS",
+    "release": "UNCHANGED",
+    "baseline": "IN_PROGRESS",
+    "first_time_provider_words_credited": 0,
+    "issue267_source_lines_credited": 0,
+    "production_writes": 0
+  },
+  "next_exact_cursor": "Verify current live Netlify /api/coffee-preview source-bound consumers of the legacy service_role public.dic_url_preview_claim and two-phase quota RPCs, then advance to a genuinely unreviewed or changed provider definition; retain all still-referenced SQL until no consumers are proven."
+}
