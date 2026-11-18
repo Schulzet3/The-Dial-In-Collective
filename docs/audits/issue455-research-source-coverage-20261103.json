@@ -4243,6 +4243,28 @@
       "review_status": "FULL_SHORT_FIRST_PARTY_CORRECTION_TEXT_READ_NIH_CROSSCHECKED_ORIGINAL_PDF_BINARY_UNVERIFIED",
       "github267_literal_review_credit": 0,
       "implementation_status": "RESEARCH_ONLY_NO_APP_OR_PRODUCT_POLICY_CHANGE"
+    },
+    {
+      "id": "LIT-2024-HAVIZ-INDONESIA-BOTTLED-WATER-CO2-ESPRESSO",
+      "type": "peer_reviewed_original_espresso_water_CO2_time_series_not_member_taste_efficacy",
+      "title": "Influence of water quality on CO2 degassing and sensory attributes in Lampung Robusta espresso",
+      "authors": "Muhammad Haviz; Miftahul Djana; Ni Putu Ariessa Nandini; Amandha Putri Eltri; Nadila Aura Fahrani; Oktaf Rina",
+      "journal": "Coffee Science 19:e192209 (2024)",
+      "published": "2024-08",
+      "doi": "10.25186/.v19i.2209",
+      "publisher_url": "https://coffeescience.ufla.br/index.php/Coffeescience/article/view/2209",
+      "original_paper_repository_pdf_url": "https://sbicafe.ufv.br/server/api/core/bitstreams/3c1c1897-9cb6-464c-a7f6-e8a867090b22/content",
+      "source_version": "2024_COFFEE_SCIENCE_AUTHOR_ARTICLE_PDF_PRIMARY_INDEXED_FULL_TEXT_RETRIEVED_20261118",
+      "source_git_blob_sha": null,
+      "source_sha256": null,
+      "source_access": "Original published paper full text from university-hosted PDF text extraction directly inspected through sections 2.1-2.5, 3.3, 3.4, Tables 4-6 and Conclusions. PDF screenshot/page pixels returned cache miss; original binary bytes, independent SHA256, raw brew-level CO2 series, sensory forms not retrieved.",
+      "provenance": "Peer-reviewed single-coffee apparatus study, five commercial bottled waters, physical single-machine repeated extractions; source of numeric table values is original original paper itself, not independent replication.",
+      "review_status": "PRIMARY_ARTICLE_SUBSTANTIVE_METHODS_TABLE4_AND_SENSORY_CONCLUSIONS_DIRECT_TEXT_REVIEW; TABLE_PIXELS_PDF_BINARY_RAW_REPLICATES_AND_PANEL_DATA_NOT_VERIFIED",
+      "evidence_grade": "BOUNDED_PRIMARY_AUTHOR_REPORT; LOW_FOR_PERSONAL_CAUSAL_ESPRESSO_TASTE_OR_WATER_POLICY; INDEPENDENCE_AND_ABSTRACT_ACCURACY_CONCERNS",
+      "claims_verified_externally": "Source reports 12g/24g/25s, one medium-dark Lampung Robusta, one DeLonghi Stilosa EC230-BK 51mm machine, five bottled water brands with three brews each. Postbrew CO2 measured every 10s for 120s. Table4 ANOVA shows 13 CO2 time readings per water rather than three independent brew replicates, 65 observations/60 within df, so between-water inferential p cannot be treated as 65 independent brews without raw brew-level grouping. Table4 Brand E is lowest (805.15 ppm), in direct conflict with abstract/conclusion falsely naming Brand D (about 865). Table6 descriptive panel of three does not establish member-level improvement.",
+      "related_current_app": "Live development 9ef9e69b8586313e1efe38fc9680766d1e67ea14 engine.js 90c55379be60a252a2026e01bb3d786b66c49aef, constants.js d3559dc1c9560c4d68fbcad1dc91e3a792a100a2, model.js baafc8fa64fa3e359d8e42094e41c5d72a3b22df and ui.js af983c5a8b39d5003e1e9b69638be24e7d7c9d11; no water-mineral/CO2 fields nor next-shot validated water correction.",
+      "implementation_status": "RESEARCH_ONLY_SOURCE_AND_STATISTICS_LIMITS_NOT_NEW_NUMERIC_POLICY_OR_USER_CAPTURE",
+      "github267_literal_review_credit": 0
     }
   ],
   "evidence_checks": [
@@ -12125,6 +12147,48 @@
       "github267_literal_review_credit": 0,
       "release_queue_status": "NOT_APPLICABLE_NO_READY",
       "production_deployed": false
+    },
+    {
+      "id": "R455-EV-R354-HAVIZ-REPEATED-SERIES-PSEUDOREPLICATION",
+      "source": "LIT-2024-HAVIZ-INDONESIA-BOTTLED-WATER-CO2-ESPRESSO",
+      "date": "2026-11-18",
+      "source_url": "https://sbicafe.ufv.br/server/api/core/bitstreams/3c1c1897-9cb6-464c-a7f6-e8a867090b22/content",
+      "source_location": "Original paper §2.2 p3; §2.3 p3-4; Table4 p6; PDF text lines 156-181, 210-215, 791-844",
+      "claim": "Methods state three espresso brews per water brand, while postbrew CO2 values were measured every 10 seconds for 120 seconds. CO2 Table4 uses COUNT 13 for each of five brands, 65 total data points, within df 60 and F 41.21326 (p 1.41e-16). Serial measures of one or more brews are not 13 independent extractions. Pseudoreplication/unclear unit-of-analysis risk means reported significance is not verified as brew-level independent water effect. Cannot quantify corrected p without raw extraction-level time series.",
+      "grade": "HIGH_FOR_ORIGINAL_TEXT_COUNT_AND_DF_CROSSCHECK; INDEPENDENCE_RISK_NOT_PROVEN_RAW_REPLICATION_ERROR",
+      "factual_status": "PRIMARY_INTERNAL_DESIGN_CONSISTENCY_BOUND; RAW_BREW_LEVEL_CO2_UNAVAILABLE",
+      "current_app": "No validated CO2-based recommendation rule; water brand not DIC one-variable advice",
+      "result": "RESEARCH_ONLY_CAUSAL_CONFIDENCE_HOLD_NO_NEW_PRODUCT_RULE",
+      "owner_approval_required": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-R354-HAVIZ-MISIDENTIFIED-LOWEST-CO2",
+      "source": "LIT-2024-HAVIZ-INDONESIA-BOTTLED-WATER-CO2-ESPRESSO",
+      "date": "2026-11-18",
+      "source_url": "https://sbicafe.ufv.br/server/api/core/bitstreams/3c1c1897-9cb6-464c-a7f6-e8a867090b22/content",
+      "source_location": "Original abstract p1 and conclusion §5 versus Table4 p6 and §4.1 p8; PDF text lines 24-27, 798-821, 1012-1016, 1092-1097",
+      "claim": "Abstract/conclusion call Brand D lowest CO2 (~865 ppm), but Table4 reports Brand E 805.1538462 ppm versus D 866.5384615 ppm; Discussion explicitly acknowledges Brand E lowest. Apparent internal reporting inconsistency confirmed from original text; do not repeat source abstract's incorrect ranking or infer water superiority.",
+      "grade": "HIGH_FOR_EXPLICIT_INTERNAL_PAPER_TEXT_ARITHMETIC; PDF_TABLE_PIXELS_NOT_VERIFIED",
+      "factual_status": "PAPER_INTERNAL_RANKING_INCONSISTENCY_NOT_DIC_APPLICATION_BUG",
+      "current_app": "No ranked recommended brewing waters",
+      "result": "RESEARCH_ONLY_DO_NOT_ELEVATE_BRAND_RANK",
+      "owner_approval_required": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-R354-HAVIZ-SENSORY-AND-WATER-CONFOUND",
+      "source": "LIT-2024-HAVIZ-INDONESIA-BOTTLED-WATER-CO2-ESPRESSO",
+      "date": "2026-11-18",
+      "source_url": "https://sbicafe.ufv.br/server/api/core/bitstreams/3c1c1897-9cb6-464c-a7f6-e8a867090b22/content",
+      "source_location": "Methods §§2.1-2.5, Table6 p7, Discussion §§4.1-4.2; original PDF text lines 100-112, 157-181, 220-233, 931-1003",
+      "claim": "Same Robusta coffee / grinder / nominal 12g dose, 24g yield, 25s time, five unnamed commercial water brands and only three trained descriptive panelists. Water-brand factors covary in unknown chemical composition; sensory Table6 is qualitative categories without independent member intervention outcomes. This cannot isolate a mineral/alkalinity coefficient, convert panel descriptors into DIC five 1-5 ratings, or validate any actionable personal one-variable improvement.",
+      "grade": "PRIMARY_STUDY_METHOD_AND_TABLE_READ; LOW_GENERALIZABILITY_FOR_PERSONAL_N_OF_1_ESPRESSO_EFFICACY",
+      "factual_status": "HYPOTHESIS_GENERATING_ONLY_NO_EMPIRICAL_DIC_CUP_QUALITY_VALIDATION",
+      "current_app": "Existing five taste inputs and single controllable recommendation remain owner-Locked heuristics",
+      "result": "NO_NEW_FIELDS_TARGETS_INTERVENTIONS_OR_PRODUCTION_EXPERIMENT",
+      "owner_approval_required": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -12474,28 +12538,33 @@
       "run_id": "R455-353",
       "next": "Verify exact docs-only PR checks, nonforce merge with [skip netlify] and exact merged hashes, or preserve pending PR; return to distinct primary claims and reproducible safe UX. Prospective study requires separate owner/privacy approval; Oct29 ZIP/S019 inaccessible; no #267 V2 line credit.",
       "owner_approval_now_required": false
+    },
+    {
+      "run_id": "R455-354",
+      "next": "After PR-head checks, nonforce [skip netlify] merge and exact merged hash/governance readback; leave water-brand paper RESEARCH ONLY; continue current-source UX/real-world optional evaluation without touching member data.",
+      "owner_approval_now_required": false
     }
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-353",
+    "run_id": "R455-354",
     "date": "2026-11-18",
-    "development_preflight_sha": "ff48ef70807737e910aad47c1d3999e584c140f9",
+    "development_preflight_sha": "9ef9e69b8586313e1efe38fc9680766d1e67ea14",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "prewrite_canonical_blob_sha": "3389e3e8ccfd638f5fd85192a5f4921b1e5f6d47",
+    "prewrite_canonical_blob_sha": "ef784045cec80a1d82b3ddadf0e9354bbf38b020",
     "source_counts": {
-      "sources": 200,
-      "evidence_checks": 605,
-      "proposals": 265
+      "sources": 201,
+      "evidence_checks": 608,
+      "proposals": 266
     },
-    "research_status": "DIRECT_ORIGINAL_BMJ_2016_CENT_ITEM4C_CORRECTION_VERIFIED_RESEARCH_ONLY",
+    "research_status": "ONE_NEW_PRIMARY_ESPRESSO_WATER_STUDY_METHOD_AND_INTERNAL_CLAIM_CHECK; ORIGINAL_BINARY_AND_RAW_DATA_UNVERIFIED",
     "runtime_changed": false,
     "numeric_policy_changed": false,
-    "tests_run": false,
-    "ci_verified": false,
+    "tests_run": "NONE (research-only documentation; source internal numeric crosscheck)",
+    "ci_verified": "PR_HEAD_AND_MERGED_UNVERIFIED_AT_AUTHORING",
     "production_deployed": false,
     "github267_literal_review_credit": 0,
     "owner_approval_now_required": false,
-    "next": "Check exact PR-head/merged docs governance; continue nonoverlapping science and UX. No real member outcomes."
+    "next": "Verify candidate PR applicable exact-source governance and merge if safe, then resume distinct unresolved literature and reproduced SAFE Log Shot→Rate→Recommendations; do not repeat full #267 or previously verified original studies."
   },
   "policy_decisions_resolved": [
     {
@@ -18898,6 +18967,35 @@
       "release_queue_status": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
       "production_deployed": false,
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-PROP-R354-WATER-BRAND-TIMESERIES-NOT-PERSONAL-RECOMMENDATION",
+      "severity": "P3_RESEARCH_SOURCE_CAUSAL_QUALITY_GUARD",
+      "source": [
+        "LIT-2024-HAVIZ-INDONESIA-BOTTLED-WATER-CO2-ESPRESSO"
+      ],
+      "evidence": [
+        "R455-EV-R354-HAVIZ-REPEATED-SERIES-PSEUDOREPLICATION",
+        "R455-EV-R354-HAVIZ-MISIDENTIFIED-LOWEST-CO2",
+        "R455-EV-R354-HAVIZ-SENSORY-AND-WATER-CONFOUND"
+      ],
+      "finding": "The original small bottled-water espresso paper reports 13 serial CO2 measurements per water brand but three physical extractions, while the abstract misstates which brand had lowest CO2. Sensory descriptors from three trained panelists and co-varying water brands cannot certify personal taste optimization.",
+      "user_benefit": "Prevent science-looking confidence and misleading water changes in future Log Shot → Rate → Recommendation explanations.",
+      "current_locked": "Master Specification/Decision Ledger preserve five distinct taste inputs, same-coffee/gear/style single controllable advice, original measured shots and history, privacy and no new water telemetry or numeric policy without explicit owner approval.",
+      "current_app": "Live development 9ef9e69b8586313e1efe38fc9680766d1e67ea14: engine.js 90c55379be60a252a2026e01bb3d786b66c49aef, constants.js d3559dc1c9560c4d68fbcad1dc91e3a792a100a2 and model.js baafc8fa64fa3e359d8e42094e41c5d72a3b22df; no CO2/pH/brand-driven user advice found in inspected relevant paths.",
+      "proposed_change": "SAFE documentation only: record inferential and narrative discrepancy, preserve existing science-uncertainty boundaries. Any optional member water inputs, dose-yield targets, CO2 or mineral correction, or prospective efficacy evaluation needs separate explicit owner decision, consent and independent outcomes; no such implementation proposed now.",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "files": [
+        "docs/audits/issue455-research-source-coverage-20261103.json",
+        "docs/research/issue455-r354-haviz-water-degassing-methods-20261118.md",
+        "docs/workstreams/ops-issue455-r354-haviz-water-source-review-20261118.md"
+      ],
+      "test_plan": "No engine, SQL/Auth, browser/offline or sensory model modification. Validate original source identity, uniqueness/count of ledger IDs and exact Git blob parity; use hosted PR-head governance then nonforce merge before any live development source certification.",
+      "implementation": "RESEARCH_ONLY_DOCS_PR_CANDIDATE",
+      "release_queue_status": "NOT_APPLICABLE_NO_READY",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
     }
   ],
   "changeScope": {
