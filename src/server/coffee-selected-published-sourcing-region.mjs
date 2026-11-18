@@ -31,8 +31,8 @@ export function selectedCurrentPublishedSourcingRegion({name='',origin='',blocks
   const sentences=b.text.matchAll(sourcing);
   for(const m of sentences){
    const region=m[1].trim(),province=m[2].trim();
-   if([region,province].some(p=>p.length>65||key(p)===key(parts[0])||
-    key(p)===key(parts[1]))||key(region)===key(province))continue;
+   if([region,province].some(p=>p.length>65||key(p)===key(base[0])||
+    key(p)===key(base[1]))||key(region)===key(province))continue;
    if(parts.length===4&&
     (key(parts[0])!==key(province)||key(parts[1])!==key(region)))continue;
    const value=[region,province,...base].join(', ');
