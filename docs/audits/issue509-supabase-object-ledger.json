@@ -23999,5 +23999,33 @@
     "release_queue_status": "TESTING_NOT_READY",
     "baseline": "IN_PROGRESS",
     "next": "Check merged-push exact-source workflow via supported run listing when available; continue genuinely changed/unreviewed live Supabase object, preserve no double-credit; host #96 candidate member acceptance remains unverified"
+  },
+  "provider_recommendation_unique_controls_run340": {
+    "run": "R340",
+    "date_utc": "2026-11-18",
+    "receipt_path": "docs/audits/issue509-r340-recommendation-unique-controls-20261118.json",
+    "preflight_development_sha": "42fc49e946b213b86f21ff78eb8bbd864b58d07e",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "project_ref": "azviqqejypsefzilgonr",
+    "provider": "ACTIVE_HEALTHY_PG17.11_READ_ONLY",
+    "function": "private.dic_capture_recommendation_context()",
+    "complete_live_function_chars": 1760,
+    "live_function_md5": "962e12faeac2a7b5a671bd837c6c5c41",
+    "prior_sql_semantic_review_reused": true,
+    "first_time_provider_words_credited": 0,
+    "github_code_line_267_credit": 0,
+    "six_safe_synthetic_cases_reviewed": 6,
+    "invalid_duplicate_controls_silently_accepted_in_current_production": true,
+    "issue": "Repeated allowed controls are accepted even though provenance is an unordered unique set and can mislabel private historical shot attribution; no proven real member occurrence",
+    "source_migration": "supabase/migrations/20261118180000_dic_recommendation_unique_controls.sql",
+    "regression": "supabase/tests/recommendation_unique_controls.sql",
+    "runner": "scripts/audit/isolated-sql-regression.sh",
+    "queue": "DIC-Q-509-recommendation-unique-controls",
+    "release": "TESTING_NOT_READY",
+    "exact_source_ci": "PENDING",
+    "no_provider_writes": true,
+    "no_production_publish": true,
+    "baseline": "IN_PROGRESS",
+    "next": "Validate PR-head exact source isolated PG17 + Node22/browser/approval; merge nonforce only after success; continue next changed/unreviewed provider definition"
   }
 }
