@@ -57,7 +57,7 @@ import {selectedCurrentColombianDepartmentOrigin} from './coffee-selected-depart
 import {selectedCurrentNamedMicroLotSector} from './coffee-selected-microlot-sector-origin.mjs';
 import {selectedCurrentNamedGrowingValley} from './coffee-selected-growing-valley-origin.mjs';
 import {conflictingCurrentSelectedDecafSource} from './coffee-selected-decaf-origin-conflict.mjs';
-import {selectedCurrentCoffeeLabeledRegion,selectedCurrentLeadRoastNotes} from './coffee-selected-current-panel.mjs';
+import {selectedCurrentCoffeeLabeledRegion,selectedCurrentBareRegionCountry,selectedCurrentLeadRoastNotes} from './coffee-selected-current-panel.mjs';
 
 // A chosen current selected coffee description can be more authoritative than
 // another labeled tasting list printed in the same selected product detail
@@ -2995,6 +2995,29 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    if(source_facts.length<384)source_facts.push({field:'processing_context',
     label:'Unselected processing alternatives',value:alternateProcess.text.slice(0,300),
     source_url,source_type:'html',section:'Current selected coffee description (review only)'});
+  }
+ }
+
+
+ // A unique exact-H1 selected product's *bare* Region Country Locality line
+ // is a direct source spec, not a country guess. Preserve competing published
+ // values as conflicts; never override another incompatible origin.
+ if(!conflicts.has('origin')&&(!fields.origin||
+  (geographyParts(fields.origin).length===1&&ORIGIN_COUNTRIES.has(keyOf(fields.origin))))){
+  const bare=selectedCurrentBareRegionCountry(product,{
+   name:fields.name,clean,isKnownCountry:country=>ORIGIN_COUNTRIES.has(keyOf(country))
+  });
+  if(bare&&(!fields.origin||compatibleGeography(fields.origin,bare.value))){
+   const prior=fields.origin||'';
+   addField(fields,'Origin',bare.value);
+   if(fields.origin===bare.value&&!conflicts.has('origin')){
+    if(prior)rememberCoffeeReviewCandidate(fields,'origin',prior,'Broader country of selected coffee');
+    if(source_facts.length<384)source_facts.push({
+     field:'origin',label:'Direct selected-product Region country/locality',
+     value:bare.quote,source_url,source_type:'html',
+     section:'Current selected product primary regional specification'
+    });
+   }
   }
  }
 
