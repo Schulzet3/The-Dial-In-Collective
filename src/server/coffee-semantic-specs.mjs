@@ -14,7 +14,7 @@ export const COFFEE_FIELD_ALIASES=Object.freeze({
  variety:['variety','variety/cultivar(s)','the bean','tree variety','tree varieties','arabica varieties','arabica variety','varietal','cultivar','cultivars','varieties','varietals','variété','variété(s)','variétés','variedad','variedades','variedade','variedades'],
  producer:['producer','producers','produced by','coffee farmer','meet the producer','meet the farm behind the coffee','farm name','farm names','farm/mill','farm / mill','farmers','growers','growing community','farms','farm','farmer','farmer/farm','farmer / farm','grower','owner','farm owner','cooperative','co-op','farm/co-op','farm co-op','farm / co-op','producer / farm','farm / producer','farmer partner','farmer cooperative','estate name','estate names','micromill','wet mill','dry mill','mill','producteur','productor','productora','finca','produtor'],
  roast_level:['roast','coffee roast','roast level','roast profile','roast type','roast degree','the roast',"roaster's level"],
- tasting_notes:['tasting notes','tasting notes of','taste notes','flavor notes','flavour notes','cup notes','flavor','flavour','taste','tasting','we taste','we taste notes of',"we're tasting",'we’re tasting',"what we're tasting",'what we’re tasting',"what you'll taste in your cup",'what you’ll taste in your cup','primary descriptors','coffee flavor profile','coffee flavour profile','in the cup','the cup','notes of','flavors','flavours','notes','reminds us of','tastes like','tasting profile','flavor profile','flavour profile','cupping notes','nota de cata','notas de cata','notas de sabor','sabores'],
+ tasting_notes:['tasting notes','tasting notes of','taste notes','flavor notes','flavour notes','cup notes','flavor','flavour','taste','tasting','we taste','we hear','we taste notes of',"we're tasting",'we’re tasting',"what we're tasting",'what we’re tasting',"what you'll taste in your cup",'what you’ll taste in your cup','primary descriptors','coffee flavor profile','coffee flavour profile','in the cup','the cup','notes of','flavors','flavours','notes','reminds us of','tastes like','tasting profile','flavor profile','flavour profile','cupping notes','nota de cata','notas de cata','notas de sabor','sabores'],
  release_label:['harvest','harvest year','harvest date','harvest period','crop year','lot','lot number','release','release year','cosecha','fecha de cosecha']
 });
 const EXTRA_ALIASES={
@@ -174,7 +174,20 @@ export function extractSemanticCoffeeSpecs(html,{clean}={}){
   if(educational)educationalNodes.add(node);
  }
  const protect=(start,end)=>result.handledRanges.push({start,end});
+ // Selected "We hear" notes may end with a linked music track.
+ // Preserve selected flavor words while retaining raw HTML for Source Review.
+ const withoutLinkedMusic=(value,start,end,label)=>{
+  if(keyOf(label)!=='wehear')return value;
+  const fragment=html.slice(start,end);
+  const linked=fragment.match(/<a\b(?=[^>]{0,800}\bhref=["']https:\/\/(?:www\.)?(?:youtube\.com|youtu\.be|open\.spotify\.com|music\.apple\.com)\/)[^>]{0,800}>([^<>]{1,60})<\/a>/iu);
+  if(!linked)return value;
+  const name=clean(linked[1],60);
+  const pieces=value.split(/\s*,\s*/u);
+  if(pieces.length<3||!name||pieces.at(-1).trim().toLocaleLowerCase()!==name.toLocaleLowerCase())return value;
+  return pieces.slice(0,-1).join(', ');
+ };
  const add=(kind,value,start,end,label=kind,options={})=>{
+  if(kind==='tasting_notes')value=withoutLinkedMusic(value,start,end,label);
   value=factualVarietyValue(kind,value.trim().replace(/\s+([,;])/g,'$1'));if(!plausible(kind,value,options)||result.facts.length>=MAX_FACTS)return;
   if(kind==='origin_process'){
    const parts=COMPOSITE_PROCESS.exec(value);

@@ -70,3 +70,24 @@ test('R301 official-source and selected/Add Coffee review guard rejects missing 
   [{...record,add_coffee_ui_rendered:false}],[{...record,source_review_rendered:false}]])
   assert.ok(requiredFocusedSourceFailures([581],bad).length>0);
 });
+
+test('R301 actual Shopify pmitem sensory label excludes a linked music title',()=>{
+ const own='<div class="prodmeta"><div class="pmitem"><div class="metafield-label">Producer</div>'+
+ '<div class="metafield-details"><p>Smallholder Farmers</p></div></div>'+
+ '<div class="pmitem"><div class="metafield-label">We hear</div>'+
+ '<div class="metafield-details"><p>Plum, Lemonade, Wildflower Honey, '+
+ '<a href="https://www.youtube.com/watch?v=music">Cleo</a></p></div></div></div>';
+ const r=extractPublicCoffeeFacts(build(title,own,narrative),{source_url:url});
+ assert.equal(r.ok,true);
+ for(const note of ['Plum','Lemonade','Wildflower Honey'])
+  assert.match(String(r.fields.tasting_notes||''),new RegExp(note,'i'));
+ assert.doesNotMatch(String(r.fields.tasting_notes||''),/\bCleo\b|stone fruit|tropical flavors/i);
+});
+test('R301 a nonmusic linked actual flavor is not silently dropped',()=>{
+ const own='<div class="prodmeta"><div class="pmitem"><div class="metafield-label">We hear</div>'+
+ '<div class="metafield-details"><p>Plum, Lemonade, '+
+ '<a href="https://example.org/coffee/flavor">Wildflower Honey</a></p></div></div></div>';
+ const r=extractPublicCoffeeFacts(build(title,own,''),{source_url:url});
+ assert.equal(r.ok,true);
+ assert.match(String(r.fields.tasting_notes||''),/Wildflower Honey/i);
+});
