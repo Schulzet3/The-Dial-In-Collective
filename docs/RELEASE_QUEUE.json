@@ -16296,7 +16296,7 @@
       "pr": 3258,
       "title": "Reject NULL-normalized titles in member self-confirmation of existing verified coffee",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "d516ae8a1e51b436331391b9cbb4683250704020",
       "scope_paths": [
         "supabase/migrations/20261118113500_dic_confirm_coffee_null_name_guard.sql"
       ],
@@ -16306,18 +16306,34 @@
         "New additive immutable migration rejects NULL-name-key and otherwise preserves existing fuzzy threshold, origin/release/roaster, ownership and receipts.",
         "New isolated rollback-only dic_ci PostgreSQL17 SQL test checks bad input denial and normal confirmed-name path, original Pending/library UUID and shots.",
         "Original PR SQL run 44289071815 FAILED in new fixture because auth.users trigger already added beta_members, not a migration failure. Fixture repaired with owner_id upsert; source-bound rerun PENDING.",
-        "Original approval run 44289071927 correctly HOLD because migration was untracked by release queue; new TESTING scope item fixes intake registration. Exact-source rerun PENDING."
+        "Original approval run 44289071927 correctly HOLD because migration was untracked by release queue; new TESTING scope item fixes intake registration. Initial run failed and was corrected in R332a; follow-up exact-source CI PASS.",
+        "Final PR #3258 head 78969b25dc5c0f258b05cc3bfb4cc0fd83fb5dd5: isolated PG17.11 SQL/JWT/backup 44289525367 SUCCESS (rollback-only bad title rejected and valid title confirmed); approval 44289525161, Node22 44289525347, cloud/browser 44289525196, Python 44289526091, unrelated #33 R172 44289525379 SUCCESS.",
+        "Nonforce [skip netlify] merge d516ae8a1e51b436331391b9cbb4683250704020 exact migration blob b8b9aa2e49ba6fe673207db926a393937b35e3d0 and test blob afd1640a6514abbe8b4779fbcc052ed1ea5f99c7 identical to PR head. Exact merged push PostgreSQL17/JWT/backup 44290199681, approval 44290199427, Node22 44290199501, cloud/browser 44290199544, Python 44290199542 all completed SUCCESS.",
+        "Unrelated #33 R171 current selected official Buesaco page 44289525218 PR and 44290199558 push FAILED with no H1/parsed current selected-product fields from novocoffee.com; source fixture independently outside this migration and #33 owner. Not represented as PASS or fixed here. Frozen corpus SKIPPED, not PASS.",
+        "Production read-only confirmation after merge: live private.dic_confirm_coffee_existing source MD5 0fcc44bb8a05f46e87694d3474eb7c23, original length 3239, new migration not applied; no provider writes."
       ],
       "ci_runs": [
         44289071815,
-        44289071927
+        44289071927,
+        44289525367,
+        44289525161,
+        44289525347,
+        44289525196,
+        44289526091,
+        44289525379,
+        44289525218,
+        44290199681,
+        44290199427,
+        44290199501,
+        44290199544,
+        44290199542,
+        44290199558
       ],
       "blockers": [
-        "Isolated PG17.11 test plus applicable exact-source PR CI not yet PASS following corrective commit.",
-        "Independent #96 genuine hosted Auth/member acceptance and candidate source isolation UNVERIFIED; retain TESTING, no READY.",
-        "Production is read-only and requires separate explicit owner one-command Publish authorization."
+        "Independently source-isolated release candidate, cross-feature #33 compatibility and genuine hosted #96 signed Auth/member acceptance UNVERIFIED; source merged and passing applicable PR/merged CI, but remain TESTING, not READY.",
+        "Production SQL/Edge/Auth/Storage/data strictly unchanged. Owner separate one-command Publish authorization required for any production migration."
       ],
-      "notes": "No live Supabase changes, no record deletion, no published migration, no claimed member incident. Standalone branch is PR #3258 only; preserve existing confirmed alias/product identity policy and existing #509 pending items.",
+      "notes": "No live Supabase changes, no record deletion, no published migration, no claimed member incident. Standalone branch is PR #3258 only; preserve existing confirmed alias/product identity policy and existing #509 pending items.\nR332b: exact source nonforce merged PR #3258 at d516ae8a1e51b436331391b9cbb4683250704020; five relevant PR-head and five relevant merged PUSH CI workflows SUCCESS; #33 R171 current external page failure tracked separately, no duplicated source audit. Queue still TESTING; production live guard unchanged.",
       "production_deployed": false
     }
   ],
