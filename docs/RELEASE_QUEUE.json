@@ -8,6 +8,29 @@
   },
   "items": [
     {
+      "id": "DIC-Q-33-r309-source-html-challenge-classification",
+      "issue": 33,
+      "pr": null,
+      "title": "Classify HTTP-200 scripted storefront challenge as unavailable source, not coffee HTML",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-url-guard.mjs"
+      ],
+      "owner_source": "Issue #33 development-only R309 real original603 #148 200-HTML access challenge; DIC_PREFLIGHT_VERIFIED development_sha=eb5d01c3cc0f68970e7c3a31ef1bdaf620d5aeb6 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Direct current guarded original603 #148 12028-byte HTML SHA256 0928d7e... was One moment, please script reload without selected product; transport wrongly returned ok:true, strict parser/source run 44397334750 correctly failed.",
+        "R309 five synthetic positive/hostile HTTPS transport checks for exact challenge and retained selected H1/MIME. PR/exact merged CI pending."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Changed-source PR-head Node22/lint/build, mobile/cloud, security/governance and safe nonforce merge plus exact merged CI pending.",
+        "Full original603 case-by-case acceptance and currently challenged #148 direct evidence remain unverified."
+      ],
+      "notes": "Only narrow source access classification, not source bypass or product extraction. Preserve all Locked, privacy, original603, member/offline, Netlify and release states. DEVELOPMENT only not READY or DEPLOYED.",
+      "production_deployed": false
+    },
+    {
       "id": "DIC-Q-455-r346-search-ime-composition",
       "issue": 455,
       "pr": 3263,
