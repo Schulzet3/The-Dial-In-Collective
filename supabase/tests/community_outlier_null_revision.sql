@@ -5,7 +5,7 @@ DECLARE
  u uuid; owner_uuid uuid; owner_shot uuid; held_id uuid;
  coffee_id uuid:=gen_random_uuid(); setup_id uuid; version_id uuid;
  basket_id uuid; basket_version_id uuid; calibration_id uuid;
- library_id uuid; shot_id uuid; i integer; outcome jsonb;
+ library_id uuid; fixture_shot_id uuid; i integer; outcome jsonb;
 BEGIN
  IF current_database()<>'dic_ci' THEN RAISE EXCEPTION 'Requires isolated dic_ci'; END IF;
  IF has_function_privilege('anon','private.dic_review_community_shot(uuid)','EXECUTE') THEN
@@ -17,7 +17,7 @@ BEGIN
  FOR i IN 1..6 LOOP
   u:=gen_random_uuid();setup_id:=gen_random_uuid();version_id:=gen_random_uuid();
   basket_id:=gen_random_uuid();basket_version_id:=gen_random_uuid();
-  calibration_id:=gen_random_uuid();library_id:=gen_random_uuid();shot_id:=gen_random_uuid();
+  calibration_id:=gen_random_uuid();library_id:=gen_random_uuid();fixture_shot_id:=gen_random_uuid();
   INSERT INTO auth.users(id,aud,role,email) VALUES
     (u,'authenticated','authenticated',u::text||'@fixture.invalid');
   UPDATE private.beta_members SET enabled=true,admitted_at=now() WHERE owner_id=u;
@@ -33,11 +33,11 @@ BEGIN
   INSERT INTO public.shots(id,owner_id,library_entry_id,setup_id,setup_version_id,
     basket_version_id,calibration_id,style,pulled_at,dose_g,yield_g,time_s,
     grind_setting,extraction,body,clarity,sweetness,astringency,equipment_snapshot)
-   VALUES(shot_id,u,library_id,setup_id,version_id,basket_version_id,
+   VALUES(fixture_shot_id,u,library_id,setup_id,version_id,basket_version_id,
     calibration_id,'Turbo',now(),18,42,CASE WHEN i=6 THEN 145 ELSE 25 END,
     1.1,3,3,5,5,1,'{}');
-  IF i=6 THEN owner_uuid:=u;owner_shot:=shot_id;
-   SELECT community_shot_id INTO STRICT held_id FROM private.contribution_links WHERE shot_id=shot_id;
+  IF i=6 THEN owner_uuid:=u;owner_shot:=fixture_shot_id;
+   SELECT community_shot_id INTO STRICT held_id FROM private.contribution_links link WHERE link.shot_id=fixture_shot_id;
   END IF;
  END LOOP;
  IF (SELECT quality_state FROM public.community_shots WHERE id=held_id)<>'held'
