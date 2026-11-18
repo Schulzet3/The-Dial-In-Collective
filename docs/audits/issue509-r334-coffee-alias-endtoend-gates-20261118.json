@@ -1,0 +1,112 @@
+{
+  "run": "R334",
+  "date_utc": "2026-11-18",
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "37f2817b6e75f9289a7bd359b6fd02c5ab1c681a",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "recomputed_git_blob_verified": true
+  },
+  "branches": {
+    "main": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release_production": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+  },
+  "provider": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.11.0.003",
+    "live_function_md5": {
+      "find": "b4b845d29ccb65ac7922109dc89816b6",
+      "confirm": "0fcc44bb8a05f46e87694d3474eb7c23",
+      "link": "140c211a4bfef175b041c037561a1e37"
+    },
+    "live_alias_rows": 0,
+    "live_first_entry_rows": 9,
+    "live_verified_coffees": 9,
+    "nov18_queued_migrations_applied": 0,
+    "all_query_access": "SELECT-only safe catalog and synthetic constant comparisons",
+    "private_member_or_auth_rows_read": false
+  },
+  "semantic_review": {
+    "scope": "End-to-end interaction of existing alias writer with matcher suggestion gate and explicit confirmation; R331 already credited full original SQL bodies, ZERO repeated first-time word credit",
+    "readable_functions": [
+      "private.dic_find_coffee_matches(jsonb)",
+      "private.dic_confirm_coffee_existing(uuid,jsonb)",
+      "private.dic_link_pending_coffee(uuid,uuid,text,jsonb)",
+      "private.dic_coffee_key(text)"
+    ],
+    "candidate_current_gate": "name_key equality OR similarity>=0.43; stored aliases are not read",
+    "confirm_current_gate": "canonical_name_key equality OR similarity>=0.60; stored aliases are not read",
+    "unsafe_automatic_matching": "No alias should independently produce exact_verified: exact_id must remain NULL for alias-only candidate",
+    "recognized_alias_table_dependencies": "live alias writer and admin-delete consumer; no live SQL alias reader; R331 earlier full dependency receipts"
+  },
+  "read_only_synthetic_cases": [
+    {
+      "case": "canonical_exact_same_release",
+      "canonical_name_similarity": 1,
+      "stored_alias_match": false,
+      "matcher_name_gate": true,
+      "confirm_name_gate": true,
+      "roaster_match": true,
+      "release_match": true,
+      "origin_match": true
+    },
+    {
+      "case": "exact_historical_alias_same_roaster",
+      "canonical_name_similarity": 0.318182,
+      "stored_alias_match": true,
+      "matcher_name_gate": false,
+      "confirm_name_gate": false,
+      "roaster_match": true,
+      "release_match": true,
+      "origin_match": true
+    },
+    {
+      "case": "same_alias_other_roaster",
+      "canonical_name_similarity": 0.318182,
+      "stored_alias_match": true,
+      "matcher_name_gate": false,
+      "confirm_name_gate": false,
+      "roaster_match": false,
+      "release_match": true,
+      "origin_match": true
+    },
+    {
+      "case": "same_alias_conflicting_lot",
+      "canonical_name_similarity": 0.318182,
+      "stored_alias_match": true,
+      "matcher_name_gate": false,
+      "confirm_name_gate": false,
+      "roaster_match": true,
+      "release_match": false,
+      "origin_match": true
+    },
+    {
+      "case": "same_alias_conflicting_origin",
+      "canonical_name_similarity": 0.318182,
+      "stored_alias_match": true,
+      "matcher_name_gate": false,
+      "confirm_name_gate": false,
+      "roaster_match": true,
+      "release_match": true,
+      "origin_match": false
+    }
+  ],
+  "finding": {
+    "id": "R334-A",
+    "classification": "PROVEN_SYNTHETIC_END_TO_END_LATENT_GAP_NOT_PRODUCTION_INCIDENT",
+    "description": "Stored historical alias can fail both candidate discovery and explicit member confirmation when canonical-name similarity is low; fixing matcher alone would still leave confirmation unusable. Actual live alias records zero; no member impact established.",
+    "safe_scope": "Suggest ONLY for admitted member matching stored alias within compatible roaster/lot; keep exact_id null unless current existing canonical exact-match gates independently pass. Explicit confirm must still check recorded alias and roaster, release, origin, owner, immutable receipt, library ID and availability, avoiding auto merge and cross-lot approval.",
+    "unverified": "No disposable PG17 end-to-end fixture executed; hosted Auth/#96, user-impact and outside-provider consumers remain UNVERIFIED."
+  },
+  "changes": {
+    "github_source_test_ci": 0,
+    "production_sql_data_auth_storage_edge_config": 0,
+    "release_publish": 0,
+    "schedule_backups": 0,
+    "reporting": "docs-only receipt/journal/ledger/Issue #509 checkpoint"
+  },
+  "baseline": "IN_PROGRESS",
+  "queue": "EXISTING_TESTING_UNCHANGED",
+  "next": "Write and execute disposable PG17 synthetic alias candidate+explicit confirm regression with admitted member, cross-roaster/lot/origin negative tests and exact_id-null assertion; implement only with atomic source+test+same-commit journal, relevant CI, queue TESTING and nonforce integration; production remains read-only."
+}
