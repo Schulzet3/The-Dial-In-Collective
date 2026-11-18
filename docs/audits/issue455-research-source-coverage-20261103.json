@@ -3592,14 +3592,22 @@
       "source_version": "ORIGINAL_PUBLISHER_INDEXED_HTML_2026-11-17",
       "source_sha256": null,
       "source_git_blob_sha": null,
-      "access": "BMJ publisher-indexed original HTML excerpt via fresh search; full direct BMJ article request HTTP403. NIH PubMed citation and official International Collaborative Network CENT guidance overview directly read. Entire original paper/pages and 2016 correction not byte-verified.",
+      "access": "BMJ publisher-indexed original HTML excerpt via fresh search; full direct BMJ article request HTTP403. NIH PubMed citation and official International Collaborative Network CENT guidance overview directly read. Entire original paper/pages and 2016 correction not byte-verified. R353 (2026-11-18): original publisher BMJ 2016 item4c erratum full short text now directly reviewed with NIH PMC/PubMed crosscheck; original Statement full PDF and PDF binary hashes remain unverified.",
       "provenance": "First-party original publisher citation verified separately against PubMed and research network; one reporting guideline family, not independently replicated empirical coffee evidence.",
       "evidence_grade": "AUTHORITATIVE_METHODOLOGICAL_REPORTING_STANDARD_NOT_PRIMARY_ESPRESSO_CAUSAL_OR_SENSORY_EVIDENCE; ARTICLE_FULL_TEXT_AND_CORRECTION_NOT_REVIEWED",
       "claim_verified": "CENT extends CONSORT guidance for transparent individual/series N-of-1 reporting, repeated within-person comparisons and methods transparency; 14 of 25 CONSORT items modified in the original statement.",
       "limitations": "Clinical study reporting practice is not proof an unrandomized first→next espresso shot changes taste or proves causal recommendation effectiveness. Does not authorize user telemetry, member-data reads or interventions.",
-      "review_status": "SUBSTANTIVE_TARGETED_PUBLISHER_INDEX_AND_OFFICIAL_CENT_OVERVIEW_NOT_FULL_PAPER",
+      "review_status": "TARGETED_ORIGINAL_PUBLISHER_PLUS_2016_CORRECTION_VERIFIED; ORIGINAL_2015_FULL_ARTICLE_AND_PDF_BINARY_UNREVIEWED",
       "github267_literal_review_credit": 0,
-      "implementation_status": "RESEARCH_DESIGN_ONLY_NO_APP_POLICY_OR_DATA_CHANGE"
+      "implementation_status": "RESEARCH_DESIGN_ONLY_NO_APP_POLICY_OR_DATA_CHANGE",
+      "correction_reviewed": {
+        "correction_source_id": "LIT-2016-BMJ-CENT-NOF1-ITEM4C-ERRATUM",
+        "doi": "10.1136/bmj.i5381",
+        "publication_date": "2016-10-10",
+        "access": "Original full short BMJ correction HTML directly retrieved and NIH PMC/PubMed corroborated 2026-11-18; original PDF/checksum not retrieved.",
+        "corrected_item": "Whether a trial is research and if so whether institutional ethics approval was obtained",
+        "scope": "Fixes original 2015 PDF table 1 production wording only; not an espresso intervention or a study-specific ethics mandate"
+      }
     },
     {
       "id": "LIT-2015-SHAMSEER-CENT-NOF1-EXPLANATION",
@@ -4214,6 +4222,27 @@
       "access": "FULL_IMMUTABLE_PRIVATE_GITHUB_SOURCE_BLOBS",
       "github267_literal_review_credit": 0,
       "production_deployed": false
+    },
+    {
+      "id": "LIT-2016-BMJ-CENT-NOF1-ITEM4C-ERRATUM",
+      "type": "primary_publisher_erratum_same_CENT_reporting_family_not_new_espresso_study",
+      "title": "CONSORT extension for reporting N-of-1 trials (CENT) 2015 Statement — BMJ 2016 item 4c correction",
+      "authors": "The BMJ editors",
+      "published": "2016-10-10",
+      "doi": "10.1136/bmj.i5381",
+      "url": "https://www.bmj.com/content/355/bmj.i5381",
+      "related_original_source": "LIT-2015-VOHRA-CENT-NOF1-STATEMENT",
+      "source_version": "BMJ_2016_FULL_SHORT_PUBLISHER_CORRECTION_HTML_RETRIEVED_2026-11-18",
+      "source_sha256": null,
+      "source_git_blob_sha": null,
+      "access": "Full first-party short BMJ publisher correction HTML directly read; independent NIH PMC index text and PubMed correction record checked. Original PDF bytes not downloaded or hashed.",
+      "provenance": "Editorial production correction to Vohra et al. BMJ 2015 Statement PDF checklist Table1 item4c; one methods family, not a second independent trial.",
+      "evidence_grade": "HIGH_FOR_PRIMARY_EDITORIAL_CORRECTION_WORDING_NOT_HUMAN_ESPRESSO_EFFICACY_EVIDENCE",
+      "claim_verified": "2016 BMJ correction states initial PDF checklist 4c erroneously referred to Research Methods and Reporting studies. Corrected item asks reporting whether an N-of-1 trial constitutes research and, if yes, whether institutional ethics approval was obtained.",
+      "limitations": "The correction does not determine ethical approval for hypothetical member espresso observations, validate a single next-shot taste change or authorize telemetry, intervention, new fields or production data reads.",
+      "review_status": "FULL_SHORT_FIRST_PARTY_CORRECTION_TEXT_READ_NIH_CROSSCHECKED_ORIGINAL_PDF_BINARY_UNVERIFIED",
+      "github267_literal_review_credit": 0,
+      "implementation_status": "RESEARCH_ONLY_NO_APP_OR_PRODUCT_POLICY_CHANGE"
     }
   ],
   "evidence_checks": [
@@ -12080,6 +12109,22 @@
       "github267_literal_review_credit": 0,
       "exact_head_sha": "02c401775192a620978a1382897bdba6f6b161f6",
       "exact_merged_sha": "33f8f6025024b4a3e12833896ff7241de7bffd5c"
+    },
+    {
+      "id": "R455-EV-R353-CENT-2016-ITEM4C-ETHICS-ERRATUM",
+      "source": "LIT-2016-BMJ-CENT-NOF1-ITEM4C-ERRATUM",
+      "date": "2026-11-18",
+      "source_url": "https://www.bmj.com/content/355/bmj.i5381",
+      "source_location": "BMJ 2016;355:i5381 original one-paragraph correction of 2015 Statement PDF Table1 item4c",
+      "claim": "Verified primary BMJ production erratum corrects CENT original Statement PDF item 4c, clarifying that research classification and, if applicable, institutional ethics approval should be disclosed in reporting. This is editorial guidance, already conceptually consistent with the 2015 companion explanation; NOT an independent experiment, rule that all coffee observations require ethics board approval, or DIC personalized taste validation.",
+      "grade": "FULL_PRIMARY_PUBLISHER_CORRECTION_TEXT_AND_NIH_PMC_PUBMED_CROSSCHECK; NO_PDF_BYTES_OR_COMPLETE_2015_PRIMARY_STUDY_READ",
+      "factual_status": "PUBLISHER_CORRECTION_CONFIRMED_NO_EMPRICAL_ESPRESSO_EFFICACY_INFERENCE",
+      "current_app": "Pinned development ff48ef70807737e910aad47c1d3999e584c140f9 engine.js blob 90c55379be60a252a2026e01bb3d786b66c49aef, model.js baafc8fa64fa3e359d8e42094e41c5d72a3b22df and UI blob af983c5a8b39d5003e1e9b69638be24e7d7c9d11 retain five ratings, original shots and one-control guidance; no prospective member trial implementation.",
+      "result": "RESEARCH_ONLY_CORRECTION_CITATION_GAP_CLOSED_NO_POLICY_OR_TELEMETRY_WRITE",
+      "owner_approval_required": false,
+      "github267_literal_review_credit": 0,
+      "release_queue_status": "NOT_APPLICABLE_NO_READY",
+      "production_deployed": false
     }
   ],
   "policy_decisions_pending": [],
@@ -12424,28 +12469,33 @@
       "run_id": "R455-352",
       "next": "R352 merged source exact verification and research-to-live-logic review recorded. Continue substantive non-overlap from source-bound ledger; October 29 original ZIP and separate S019 PDF inaccessible; #267 line audit separately owned. No user data/taste efficacy or numeric policies changed.",
       "owner_approval_now_required": false
+    },
+    {
+      "run_id": "R455-353",
+      "next": "Verify exact docs-only PR checks, nonforce merge with [skip netlify] and exact merged hashes, or preserve pending PR; return to distinct primary claims and reproducible safe UX. Prospective study requires separate owner/privacy approval; Oct29 ZIP/S019 inaccessible; no #267 V2 line credit.",
+      "owner_approval_now_required": false
     }
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-352",
+    "run_id": "R455-353",
     "date": "2026-11-18",
-    "development_preflight_sha": "dce0d5c46e6ba2b180d69c829d2734f21b5fb5bf",
+    "development_preflight_sha": "ff48ef70807737e910aad47c1d3999e584c140f9",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "prewrite_canonical_blob_sha": "bbf054906e93a4046a6fa3e3402e26a63296721f",
+    "prewrite_canonical_blob_sha": "3389e3e8ccfd638f5fd85192a5f4921b1e5f6d47",
     "source_counts": {
-      "sources": 199,
-      "evidence_checks": 604,
+      "sources": 200,
+      "evidence_checks": 605,
       "proposals": 265
     },
-    "research_status": "SAFE_UI_VISIBLE_TEMPERATURE_PRECISION_REPAIR_EXACT_SOURCE_NODE22_BROWSER_GOVERNANCE_VERIFIED_NOT_TASTE_EFFICACY",
-    "runtime_changed": true,
+    "research_status": "DIRECT_ORIGINAL_BMJ_2016_CENT_ITEM4C_CORRECTION_VERIFIED_RESEARCH_ONLY",
+    "runtime_changed": false,
     "numeric_policy_changed": false,
-    "tests_run": true,
-    "ci_verified": true,
+    "tests_run": false,
+    "ci_verified": false,
     "production_deployed": false,
     "github267_literal_review_credit": 0,
     "owner_approval_now_required": false,
-    "next": "Continue nonoverlapping source/claim inventory and app UX improvements; Oct29 research ZIP and separate S019 PDF remain unverified; real user cup-quality effects unobserved; no #267 line-by-line credit and no release."
+    "next": "Check exact PR-head/merged docs governance; continue nonoverlapping science and UX. No real member outcomes."
   },
   "policy_decisions_resolved": [
     {
