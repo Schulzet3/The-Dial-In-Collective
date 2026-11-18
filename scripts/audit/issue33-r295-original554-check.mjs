@@ -5,6 +5,7 @@ import {join} from 'node:path';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
+import {selectedCurrentInlineShopifyRoastTag} from '../../src/server/coffee-current-inline-shopify-product.mjs';
 import {selectedProductHeadings} from './issue33-selected-product-heading.mjs';
 import {identicalCurrentSelectedTitle} from './issue33-selected-public-alternate.mjs';
 import {requiredFocusedSourceFailures} from './issue33-focused-source-acceptance.mjs';
@@ -39,7 +40,15 @@ must(/sourced from organic mexican farms/.test(text),'own_country_context');
 must(['molasses','caramel','lemongrass'].every(x=>String(f.tasting_notes||'').toLowerCase().includes(x)),'three_current_literal_notes');
 must(!/blueberry|rose|strawberry|vanilla|black and tan/.test(String(f.tasting_notes||'').toLowerCase()),'no_sibling_or_seo_notes');
 must(/mexico/i.test(String(f.origin||'')),'selected_mexican_country');
-must(!f.roast_level,'lighter_comparative_does_not_certify_categorical_light');
+// Body's "lighter roast" remains noncategorical. Current merchant-owned
+// _RSConfig.product JSON explicitly tags this exact handle/title/vendor as
+// "Light Roast", a selected spec, not generic SEO/related-product promotion.
+const owned=selectedCurrentInlineShopifyRoastTag(raw?.toString('utf8')||'',{
+ name:f.name,roaster:f.roaster,source_url:official
+});
+must(owned?.value==='Light'&&owned?.source==='exact_selected_shopify_inline_product_roast_taxonomy',
+ 'selected_exact_shopify_product_Light_Roast_tag');
+must(f.roast_level==='Light','current_parser_must_recover_selected_owned_categorical_light');
 must(!f.process&&!f.producer&&!f.decaffeination_method&&!f.release_label&&!f.variety,'do_not_invent_unpublished_specs');
 must((r.conflicts||[]).length===0&&!(r.seo_fallback_fields||[]).includes('tasting_notes'),'no_selected_note_conflict_or_seo');
 const out={passed:failures.length===0,failures,source_sha:process.env.DIC_R295_EVENT_SHA,
