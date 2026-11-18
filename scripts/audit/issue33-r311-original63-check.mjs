@@ -36,7 +36,7 @@ must(r.selected_heading_identity_verified===true&&r.add_coffee_ui_rendered===tru
 must(['nutty','spicy','earthy','takengon','aceh','small'].every(x=>direct.includes(x)),'selected_source_direct_literals');
 must(/medium/i.test(String(f.roast_level||''))&&!/dark/i.test(String(f.roast_level||'')),'selected_medium_not_sibling_dark');
 must(['nutty','spicy','earthy'].every(x=>String(f.tasting_notes||'').toLowerCase().includes(x)),'selected_direct_labeled_notes');
-must(/Sumatra|Aceh|Takengon|Indonesia/i.test(String(f.origin||''))&&!/Whitefish|Montana|Colombia|Brazil|Ethiopia/i.test(String(f.origin||'')),'farm_origin_not_seller_or_related');
+must(String(f.origin||'')==='Takengon, Aceh, Sumatra, Indonesia'&&!/Whitefish|Montana|Colombia|Brazil|Ethiopia/i.test(String(f.origin||'')),'farm_origin_not_seller_or_related');
 must(/small.?holder|small holder|farmers?/i.test(String(f.producer||'')),'selected_smallholder_role');
 must(!/natural|washed|honey/i.test(String(f.process||'')),'regional_wet_hulling_not_sibling_or_unpublished_process');
 must(!f.decaffeination_method,'no_invented_decaf');
