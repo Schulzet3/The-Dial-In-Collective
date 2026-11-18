@@ -1,0 +1,1663 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R329",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight_initial_development_sha": "ea2bf4f7bacf1bf98b4e9ed6e6d349f807ba0060",
+  "prewrite_development_sha": "ea2bf4f7bacf1bf98b4e9ed6e6d349f807ba0060",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "main_sha": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+  "release_production_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5",
+  "observed_at_utc": "2026-11-18 07:54:22.441798+00",
+  "stats_reset": "2026-10-09 11:11:31.487298+00",
+  "scope": {
+    "role": "postgres",
+    "cohort": "recurring (calls>1) app-named or catalog-linked SELECT/WITH/EXPLAIN SQL text without quoted literal/comment/dollar body",
+    "excluded_prior_r328_queryids": 42,
+    "inspected_current_queryid_count": 89,
+    "original_sql_characters": 27223,
+    "each_sql_complete_original": true,
+    "other_prior_issues_receipt_overlap": "NOT_EXHAUSTIVELY_DEDUPLICATED; NO_FIRST_TIME_COVERAGE_CREDIT",
+    "not_provider_object_definitions": true,
+    "not_live_app_request_trace": true
+  },
+  "crosscheck": {
+    "retired_relations": [
+      "private.invite_redemptions",
+      "private.beta_invites",
+      "private.dic_roaster_directory",
+      "private.dic_roaster_aliases"
+    ],
+    "retired_relations_live_count": 0,
+    "retired_relations_current_app_routine_source_mentions": 0,
+    "active_relation": "private.dic_coffee_aliases",
+    "active_relation_app_routine_source_mentions": 2,
+    "active_alias_must_not_be_dropped": true
+  },
+  "findings": {
+    "new_app_defect_reproduced": false,
+    "new_source_fix_justified": false,
+    "app_latency_experiment_executed": false,
+    "proven_member_latency_regression": false,
+    "historical_query_text_is_not_current_consumer_proof": true,
+    "majority_historical_audit_diagnostics": true,
+    "security_checks_regression_only": true
+  },
+  "reviewed_sql": [
+    {
+      "ordinal": 1,
+      "role": "postgres",
+      "queryid": "4452039206039004727",
+      "raw_md5": "8979d7eb027ee833caa6677372c7b74b",
+      "original_sql_chars": 102,
+      "complete_reviewed_range": [
+        1,
+        102
+      ],
+      "calls": 101,
+      "total_ms": "70.425",
+      "mean_ms": "0.697",
+      "max_ms": "1.387",
+      "classification": "CATALOG_METADATA_INSPECTION",
+      "verdict": "Catalog/index/policy introspection; not evidence that an index is unused or broken.",
+      "complete_original_normalized_sql": "SELECT tableoid, oid, dictname, dictnamespace, dictowner, dicttemplate, dictinitoption FROM pg_ts_dict"
+    },
+    {
+      "ordinal": 2,
+      "role": "postgres",
+      "queryid": "7483268542255132232",
+      "raw_md5": "f10a17b923145c59897720c2eee7420c",
+      "original_sql_chars": 1822,
+      "complete_reviewed_range": [
+        1,
+        1822
+      ],
+      "calls": 12,
+      "total_ms": "279.514",
+      "mean_ms": "23.293",
+      "max_ms": "34.749",
+      "classification": "CATALOG_METADATA_INSPECTION",
+      "verdict": "Catalog/index/policy introspection; not evidence that an index is unused or broken.",
+      "complete_original_normalized_sql": "SELECT n.nspname AS schema, c.relname AS index_name, c.oid::text index_oid, t.relname AS table_name, t.oid::text table_oid, am.amname AS access_method, a.attnum AS index_attnum, a.attname AS index_attname, a.atttypid::text index_type_oid, pg_catalog.format_type(a.atttypid,a.atttypmod) AS formatted_index_type, a.attcollation::text AS index_collation_oid, a.attcollation::regcollation::text AS index_collation, i.indkey[a.attnum-$1] AS source_attnum, sa.attname AS source_column, sa.atttypid::text AS source_type_oid, pg_catalog.format_type(sa.atttypid,sa.atttypmod) AS formatted_source_type, sa.attcollation::text AS source_collation_oid, opc.opcname opclass, opc.opcintype::text opclass_input_type_oid, opc.opckeytype::text opclass_key_type_oid, i.indnatts,i.indnkeyatts,i.indisvalid,i.indisready,i.indislive,(SELECT COUNT(*)::int FROM pg_catalog.pg_attribute x WHERE x.attrelid=c.oid AND x.attnum>$2 AND NOT x.attisdropped) AS physical_attcount, (i.indexprs IS NOT NULL) has_expressions, (i.indpred IS NOT NULL) has_predicate, pg_catalog.pg_get_indexdef(i.indexrelid,a.attnum,$3) AS index_expression, pg_catalog.to_jsonb(a) AS full_catalog_tuple, md5(pg_catalog.to_jsonb(a)::text) AS full_tuple_md5 FROM pg_catalog.pg_attribute a JOIN pg_catalog.pg_class c ON c.oid=a.attrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_index i ON i.indexrelid=c.oid JOIN pg_catalog.pg_class t ON t.oid=i.indrelid JOIN pg_catalog.pg_am am ON am.oid=c.relam LEFT JOIN pg_catalog.pg_attribute sa ON sa.attrelid=i.indrelid AND sa.attnum=i.indkey[a.attnum-$4] AND NOT sa.attisdropped LEFT JOIN pg_catalog.pg_opclass opc ON opc.oid=i.indclass[a.attnum-$5] WHERE c.relkind IN ($6,$7) AND a.attnum>$8 AND NOT a.attisdropped AND n.nspname NOT IN ($9,$10) ORDER BY n.nspname,c.relname,a.attnum LIMIT $11 OFFSET $12"
+    },
+    {
+      "ordinal": 3,
+      "role": "postgres",
+      "queryid": "-7534629074424210964",
+      "raw_md5": "85d37d95f43293531b8b6b945deac016",
+      "original_sql_chars": 133,
+      "complete_reviewed_range": [
+        1,
+        133
+      ],
+      "calls": 11,
+      "total_ms": "1.389",
+      "mean_ms": "0.126",
+      "max_ms": "0.163",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from public.recipe_preferences t"
+    },
+    {
+      "ordinal": 4,
+      "role": "postgres",
+      "queryid": "-7146931389566905053",
+      "raw_md5": "14c49ba1960d7b29b61a7bf1b63370be",
+      "original_sql_chars": 133,
+      "complete_reviewed_range": [
+        1,
+        133
+      ],
+      "calls": 11,
+      "total_ms": "7.215",
+      "mean_ms": "0.656",
+      "max_ms": "1.066",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.mutation_receipts t"
+    },
+    {
+      "ordinal": 5,
+      "role": "postgres",
+      "queryid": "-7001672665039549173",
+      "raw_md5": "692adb9fde28b77de1d6db9e9a8aff45",
+      "original_sql_chars": 132,
+      "complete_reviewed_range": [
+        1,
+        132
+      ],
+      "calls": 11,
+      "total_ms": "1.336",
+      "mean_ms": "0.121",
+      "max_ms": "0.162",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from public.setup_preferences t"
+    },
+    {
+      "ordinal": 6,
+      "role": "postgres",
+      "queryid": "-5554453835405444679",
+      "raw_md5": "2b44e7b4196a25621ad88edbc3a912af",
+      "original_sql_chars": 129,
+      "complete_reviewed_range": [
+        1,
+        129
+      ],
+      "calls": 11,
+      "total_ms": "1.589",
+      "mean_ms": "0.144",
+      "max_ms": "0.195",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from public.coffee_sources t"
+    },
+    {
+      "ordinal": 7,
+      "role": "postgres",
+      "queryid": "-5190918201422540287",
+      "raw_md5": "a59c903aea45ea57bbccfac307ba1be6",
+      "original_sql_chars": 130,
+      "complete_reviewed_range": [
+        1,
+        130
+      ],
+      "calls": 11,
+      "total_ms": "1.563",
+      "mean_ms": "0.142",
+      "max_ms": "0.184",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from public.library_entries t"
+    },
+    {
+      "ordinal": 8,
+      "role": "postgres",
+      "queryid": "-5133557967346532249",
+      "raw_md5": "e3a6366608798990a95735b6dc02c5ac",
+      "original_sql_chars": 127,
+      "complete_reviewed_range": [
+        1,
+        127
+      ],
+      "calls": 11,
+      "total_ms": "0.381",
+      "mean_ms": "0.035",
+      "max_ms": "0.042",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.backup_runs t"
+    },
+    {
+      "ordinal": 9,
+      "role": "postgres",
+      "queryid": "-5088877956327106419",
+      "raw_md5": "5a54ebb80db8f1397e0eb681ebb4555e",
+      "original_sql_chars": 132,
+      "complete_reviewed_range": [
+        1,
+        132
+      ],
+      "calls": 11,
+      "total_ms": "1.501",
+      "mean_ms": "0.136",
+      "max_ms": "0.168",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from public.workspace_coffees t"
+    },
+    {
+      "ordinal": 10,
+      "role": "postgres",
+      "queryid": "-3379718941465499932",
+      "raw_md5": "ad4990fec0df425647a17bd3180a637a",
+      "original_sql_chars": 119,
+      "complete_reviewed_range": [
+        1,
+        119
+      ],
+      "calls": 11,
+      "total_ms": "1.228",
+      "mean_ms": "0.112",
+      "max_ms": "0.142",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from public.bags t"
+    },
+    {
+      "ordinal": 11,
+      "role": "postgres",
+      "queryid": "-3074484300859977236",
+      "raw_md5": "cdb30b1a3e2715c9d29eb49cf9546521",
+      "original_sql_chars": 135,
+      "complete_reviewed_range": [
+        1,
+        135
+      ],
+      "calls": 11,
+      "total_ms": "1.235",
+      "mean_ms": "0.112",
+      "max_ms": "0.154",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from public.grinder_calibrations t"
+    },
+    {
+      "ordinal": 12,
+      "role": "postgres",
+      "queryid": "-2859488849787691502",
+      "raw_md5": "d1e2ad1c276f95ab912892f0e553c7de",
+      "original_sql_chars": 130,
+      "complete_reviewed_range": [
+        1,
+        130
+      ],
+      "calls": 11,
+      "total_ms": "0.415",
+      "mean_ms": "0.038",
+      "max_ms": "0.055",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from public.recipe_families t"
+    },
+    {
+      "ordinal": 13,
+      "role": "postgres",
+      "queryid": "-2693129592320858303",
+      "raw_md5": "c9a9ad6f6d386b35e2779e8bfa62729c",
+      "original_sql_chars": 139,
+      "complete_reviewed_range": [
+        1,
+        139
+      ],
+      "calls": 11,
+      "total_ms": "1.587",
+      "mean_ms": "0.144",
+      "max_ms": "0.183",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from public.personal_recipe_families t"
+    },
+    {
+      "ordinal": 14,
+      "role": "postgres",
+      "queryid": "-1515965897737196673",
+      "raw_md5": "f2c80ef2767c4a78564e550147ecf5ce",
+      "original_sql_chars": 133,
+      "complete_reviewed_range": [
+        1,
+        133
+      ],
+      "calls": 11,
+      "total_ms": "2.153",
+      "mean_ms": "0.196",
+      "max_ms": "0.248",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from public.coffee_submissions t"
+    },
+    {
+      "ordinal": 15,
+      "role": "postgres",
+      "queryid": "-811226902195389628",
+      "raw_md5": "432e4157c7be2dd9a722c934b6e0c054",
+      "original_sql_chars": 130,
+      "complete_reviewed_range": [
+        1,
+        130
+      ],
+      "calls": 11,
+      "total_ms": "1.832",
+      "mean_ms": "0.167",
+      "max_ms": "0.343",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from public.community_shots t"
+    },
+    {
+      "ordinal": 16,
+      "role": "postgres",
+      "queryid": "-737751292318731377",
+      "raw_md5": "372cc1eee2d52f2f0c95c701acda9b4d",
+      "original_sql_chars": 128,
+      "complete_reviewed_range": [
+        1,
+        128
+      ],
+      "calls": 11,
+      "total_ms": "1.064",
+      "mean_ms": "0.097",
+      "max_ms": "0.128",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.beta_members t"
+    },
+    {
+      "ordinal": 17,
+      "role": "postgres",
+      "queryid": "-616585163080934343",
+      "raw_md5": "d92a13ed73adca1aa27797e73bbb3644",
+      "original_sql_chars": 128,
+      "complete_reviewed_range": [
+        1,
+        128
+      ],
+      "calls": 11,
+      "total_ms": "0.409",
+      "mean_ms": "0.037",
+      "max_ms": "0.041",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from public.coffee_groups t"
+    },
+    {
+      "ordinal": 18,
+      "role": "postgres",
+      "queryid": "725222585372945448",
+      "raw_md5": "2fabd183a73b21c561670e84a43a8083",
+      "original_sql_chars": 125,
+      "complete_reviewed_range": [
+        1,
+        125
+      ],
+      "calls": 11,
+      "total_ms": "1.917",
+      "mean_ms": "0.174",
+      "max_ms": "0.217",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from public.shot_notes t"
+    },
+    {
+      "ordinal": 19,
+      "role": "postgres",
+      "queryid": "1274550718219324541",
+      "raw_md5": "8940e4ce894ee1f8bf0794930bfd49d0",
+      "original_sql_chars": 130,
+      "complete_reviewed_range": [
+        1,
+        130
+      ],
+      "calls": 11,
+      "total_ms": "1.165",
+      "mean_ms": "0.106",
+      "max_ms": "0.159",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from public.workspace_state t"
+    },
+    {
+      "ordinal": 20,
+      "role": "postgres",
+      "queryid": "1881268941801847009",
+      "raw_md5": "e75d564464c92c1c9f8bf957d0eae155",
+      "original_sql_chars": 130,
+      "complete_reviewed_range": [
+        1,
+        130
+      ],
+      "calls": 11,
+      "total_ms": "11.836",
+      "mean_ms": "1.076",
+      "max_ms": "1.123",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.import_batches t"
+    },
+    {
+      "ordinal": 21,
+      "role": "postgres",
+      "queryid": "2182904262063667254",
+      "raw_md5": "f012cc4be7055b10897721362362cd08",
+      "original_sql_chars": 126,
+      "complete_reviewed_range": [
+        1,
+        126
+      ],
+      "calls": 11,
+      "total_ms": "0.705",
+      "mean_ms": "0.064",
+      "max_ms": "0.082",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.app_admins t"
+    },
+    {
+      "ordinal": 22,
+      "role": "postgres",
+      "queryid": "2393717796301632590",
+      "raw_md5": "bc013bc9e1b3d0cee7b50213c6a2c8c8",
+      "original_sql_chars": 128,
+      "complete_reviewed_range": [
+        1,
+        128
+      ],
+      "calls": 11,
+      "total_ms": "0.812",
+      "mean_ms": "0.074",
+      "max_ms": "0.122",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from public.admin_reviews t"
+    },
+    {
+      "ordinal": 23,
+      "role": "postgres",
+      "queryid": "2855273663072222840",
+      "raw_md5": "aac79eabc4a140753560cef10790cb4b",
+      "original_sql_chars": 121,
+      "complete_reviewed_range": [
+        1,
+        121
+      ],
+      "calls": 11,
+      "total_ms": "1.153",
+      "mean_ms": "0.105",
+      "max_ms": "0.159",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from public.setups t"
+    },
+    {
+      "ordinal": 24,
+      "role": "postgres",
+      "queryid": "2864453029995020056",
+      "raw_md5": "cf806793011c92274f9723c33f29f863",
+      "original_sql_chars": 120,
+      "complete_reviewed_range": [
+        1,
+        120
+      ],
+      "calls": 11,
+      "total_ms": "8.747",
+      "mean_ms": "0.795",
+      "max_ms": "0.957",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from public.shots t"
+    },
+    {
+      "ordinal": 25,
+      "role": "postgres",
+      "queryid": "3962656491660031824",
+      "raw_md5": "a10a58eb110b21487ba00e0413ebab42",
+      "original_sql_chars": 129,
+      "complete_reviewed_range": [
+        1,
+        129
+      ],
+      "calls": 11,
+      "total_ms": "1.085",
+      "mean_ms": "0.099",
+      "max_ms": "0.124",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from public.setup_versions t"
+    },
+    {
+      "ordinal": 26,
+      "role": "postgres",
+      "queryid": "4119724801889025478",
+      "raw_md5": "c4d4a2bc38a92e4455b2de6b91735764",
+      "original_sql_chars": 130,
+      "complete_reviewed_range": [
+        1,
+        130
+      ],
+      "calls": 11,
+      "total_ms": "0.765",
+      "mean_ms": "0.070",
+      "max_ms": "0.096",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.import_control t"
+    },
+    {
+      "ordinal": 27,
+      "role": "postgres",
+      "queryid": "4344431250722869146",
+      "raw_md5": "104bec151fac4d9199f12b2df8d44ca2",
+      "original_sql_chars": 128,
+      "complete_reviewed_range": [
+        1,
+        128
+      ],
+      "calls": 11,
+      "total_ms": "1.082",
+      "mean_ms": "0.098",
+      "max_ms": "0.136",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.contributors t"
+    },
+    {
+      "ordinal": 28,
+      "role": "postgres",
+      "queryid": "4752256669305034736",
+      "raw_md5": "1d7a54ebe5bf2134ddab92f7de97a4e2",
+      "original_sql_chars": 122,
+      "complete_reviewed_range": [
+        1,
+        122
+      ],
+      "calls": 11,
+      "total_ms": "1.945",
+      "mean_ms": "0.177",
+      "max_ms": "0.257",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from public.coffees t"
+    },
+    {
+      "ordinal": 29,
+      "role": "postgres",
+      "queryid": "4993484082889997936",
+      "raw_md5": "e4d01c670fc1a4dd73e10c8061a423b5",
+      "original_sql_chars": 134,
+      "complete_reviewed_range": [
+        1,
+        134
+      ],
+      "calls": 11,
+      "total_ms": "1.314",
+      "mean_ms": "0.119",
+      "max_ms": "0.165",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from public.account_preferences t"
+    },
+    {
+      "ordinal": 30,
+      "role": "postgres",
+      "queryid": "6161801686455634140",
+      "raw_md5": "3e974a197f55fe4c1efa687b373c3044",
+      "original_sql_chars": 134,
+      "complete_reviewed_range": [
+        1,
+        134
+      ],
+      "calls": 11,
+      "total_ms": "1.063",
+      "mean_ms": "0.097",
+      "max_ms": "0.154",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.contribution_links t"
+    },
+    {
+      "ordinal": 31,
+      "role": "postgres",
+      "queryid": "6516667713435798794",
+      "raw_md5": "1619fb7068360be74f50496caac661ef",
+      "original_sql_chars": 122,
+      "complete_reviewed_range": [
+        1,
+        122
+      ],
+      "calls": 11,
+      "total_ms": "1.138",
+      "mean_ms": "0.103",
+      "max_ms": "0.125",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from public.baskets t"
+    },
+    {
+      "ordinal": 32,
+      "role": "postgres",
+      "queryid": "7493234302096529799",
+      "raw_md5": "90634c7acc7eff202184523f571dc8b1",
+      "original_sql_chars": 130,
+      "complete_reviewed_range": [
+        1,
+        130
+      ],
+      "calls": 11,
+      "total_ms": "1.127",
+      "mean_ms": "0.102",
+      "max_ms": "0.125",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from public.basket_versions t"
+    },
+    {
+      "ordinal": 33,
+      "role": "postgres",
+      "queryid": "8456126485523865263",
+      "raw_md5": "c6f53a850b36608e5f9f2377a4e66e52",
+      "original_sql_chars": 126,
+      "complete_reviewed_range": [
+        1,
+        126
+      ],
+      "calls": 11,
+      "total_ms": "16.942",
+      "mean_ms": "1.540",
+      "max_ms": "2.042",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.shot_audit t"
+    },
+    {
+      "ordinal": 34,
+      "role": "postgres",
+      "queryid": "-5933423447353365251",
+      "raw_md5": "fafbce9c3dc0e6431f9083a384774ab7",
+      "original_sql_chars": 135,
+      "complete_reviewed_range": [
+        1,
+        135
+      ],
+      "calls": 9,
+      "total_ms": "0.303",
+      "mean_ms": "0.034",
+      "max_ms": "0.037",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.dic_source_attempts t"
+    },
+    {
+      "ordinal": 35,
+      "role": "postgres",
+      "queryid": "-3836338677963789547",
+      "raw_md5": "7c456ccd549c641f11b859b8f7c5a9bd",
+      "original_sql_chars": 128,
+      "complete_reviewed_range": [
+        1,
+        128
+      ],
+      "calls": 9,
+      "total_ms": "1.237",
+      "mean_ms": "0.137",
+      "max_ms": "0.207",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.beta_invites t"
+    },
+    {
+      "ordinal": 36,
+      "role": "postgres",
+      "queryid": "-3478814398450847865",
+      "raw_md5": "9d9d280d2917c8ad03f7a69903f58211",
+      "original_sql_chars": 134,
+      "complete_reviewed_range": [
+        1,
+        134
+      ],
+      "calls": 9,
+      "total_ms": "0.773",
+      "mean_ms": "0.086",
+      "max_ms": "0.127",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.invite_redemptions t"
+    },
+    {
+      "ordinal": 37,
+      "role": "postgres",
+      "queryid": "-2291293643283992751",
+      "raw_md5": "d96ba423c541fe7111d2916e9ea75362",
+      "original_sql_chars": 138,
+      "complete_reviewed_range": [
+        1,
+        138
+      ],
+      "calls": 9,
+      "total_ms": "0.942",
+      "mean_ms": "0.105",
+      "max_ms": "0.127",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.dic_coffee_first_entry t"
+    },
+    {
+      "ordinal": 38,
+      "role": "postgres",
+      "queryid": "1313585416000611009",
+      "raw_md5": "11bc76e4c137ffa87f8eb8144d9ea1f4",
+      "original_sql_chars": 131,
+      "complete_reviewed_range": [
+        1,
+        131
+      ],
+      "calls": 9,
+      "total_ms": "0.877",
+      "mean_ms": "0.097",
+      "max_ms": "0.153",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.invite_attempts t"
+    },
+    {
+      "ordinal": 39,
+      "role": "postgres",
+      "queryid": "5058460827776174665",
+      "raw_md5": "3c27e155d3da73c4daf3c94523a58579",
+      "original_sql_chars": 132,
+      "complete_reviewed_range": [
+        1,
+        132
+      ],
+      "calls": 9,
+      "total_ms": "1.605",
+      "mean_ms": "0.178",
+      "max_ms": "0.219",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.dic_coffee_audit t"
+    },
+    {
+      "ordinal": 40,
+      "role": "postgres",
+      "queryid": "5058892402307322648",
+      "raw_md5": "e2035b188d47bc5724358e96ac8d6417",
+      "original_sql_chars": 134,
+      "complete_reviewed_range": [
+        1,
+        134
+      ],
+      "calls": 9,
+      "total_ms": "0.325",
+      "mean_ms": "0.036",
+      "max_ms": "0.043",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.dic_coffee_aliases t"
+    },
+    {
+      "ordinal": 41,
+      "role": "postgres",
+      "queryid": "5646843535314035413",
+      "raw_md5": "f4ec3b915e44b4b288e32f80d5e7c959",
+      "original_sql_chars": 135,
+      "complete_reviewed_range": [
+        1,
+        135
+      ],
+      "calls": 9,
+      "total_ms": "0.828",
+      "mean_ms": "0.092",
+      "max_ms": "0.137",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.dic_roaster_aliases t"
+    },
+    {
+      "ordinal": 42,
+      "role": "postgres",
+      "queryid": "7841555933498247893",
+      "raw_md5": "69a2bdcbc667a3284c36d9bcf5b4f4b0",
+      "original_sql_chars": 137,
+      "complete_reviewed_range": [
+        1,
+        137
+      ],
+      "calls": 9,
+      "total_ms": "0.958",
+      "mean_ms": "0.106",
+      "max_ms": "0.134",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.dic_roaster_directory t"
+    },
+    {
+      "ordinal": 43,
+      "role": "postgres",
+      "queryid": "-3300434323673105442",
+      "raw_md5": "834279569d70aef81c8d3f6683884219",
+      "original_sql_chars": 1751,
+      "complete_reviewed_range": [
+        1,
+        1751
+      ],
+      "calls": 8,
+      "total_ms": "180.427",
+      "mean_ms": "22.553",
+      "max_ms": "30.377",
+      "classification": "CATALOG_METADATA_INSPECTION",
+      "verdict": "Catalog/index/policy introspection; not evidence that an index is unused or broken.",
+      "complete_original_normalized_sql": "SELECT n.nspname AS schema, c.relname AS index_name, c.oid::text index_oid, t.relname AS table_name, t.oid::text table_oid, a.attnum AS index_attnum, a.attname AS index_attname, a.atttypid::text index_type_oid, pg_catalog.format_type(a.atttypid,a.atttypmod) AS formatted_index_type, a.attcollation::text AS index_collation_oid, a.attcollation::regcollation::text AS index_collation, i.indkey[a.attnum-$1] AS source_attnum, sa.attname AS source_column, sa.atttypid::text AS source_type_oid, pg_catalog.format_type(sa.atttypid,sa.atttypmod) AS formatted_source_type, sa.attcollation::text AS source_collation_oid, opc.opcname opclass, opc.opcintype::text opclass_input_type_oid, opc.opckeytype::text opclass_key_type_oid, i.indnatts,i.indnkeyatts,i.indisvalid,i.indisready,i.indislive,(SELECT COUNT(*)::int FROM pg_catalog.pg_attribute x WHERE x.attrelid=c.oid AND x.attnum>$2 AND NOT x.attisdropped) AS physical_attcount, (i.indexprs IS NOT NULL) has_expressions, (i.indpred IS NOT NULL) has_predicate, pg_catalog.pg_get_indexdef(i.indexrelid,a.attnum,$3) AS index_expression, pg_catalog.to_jsonb(a) AS full_catalog_tuple, md5(pg_catalog.to_jsonb(a)::text) AS full_tuple_md5 FROM pg_catalog.pg_attribute a JOIN pg_catalog.pg_class c ON c.oid=a.attrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace JOIN pg_catalog.pg_index i ON i.indexrelid=c.oid JOIN pg_catalog.pg_class t ON t.oid=i.indrelid LEFT JOIN pg_catalog.pg_attribute sa ON sa.attrelid=i.indrelid AND sa.attnum=i.indkey[a.attnum-$4] AND NOT sa.attisdropped LEFT JOIN pg_catalog.pg_opclass opc ON opc.oid=i.indclass[a.attnum-$5] WHERE c.relkind IN ($6,$7) AND a.attnum>$8 AND NOT a.attisdropped AND n.nspname NOT IN ($9,$10) ORDER BY n.nspname,c.relname,a.attnum LIMIT $11 OFFSET $12"
+    },
+    {
+      "ordinal": 44,
+      "role": "postgres",
+      "queryid": "-1724209049801752955",
+      "raw_md5": "252af0722cccec4b4785b54119a68c9d",
+      "original_sql_chars": 140,
+      "complete_reviewed_range": [
+        1,
+        140
+      ],
+      "calls": 8,
+      "total_ms": "0.780",
+      "mean_ms": "0.097",
+      "max_ms": "0.135",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.dic_url_preview_attempts t"
+    },
+    {
+      "ordinal": 45,
+      "role": "postgres",
+      "queryid": "8960440146814133207",
+      "raw_md5": "97e7dd2a7270caaf04aa724b5c5e8cd6",
+      "original_sql_chars": 140,
+      "complete_reviewed_range": [
+        1,
+        140
+      ],
+      "calls": 8,
+      "total_ms": "0.930",
+      "mean_ms": "0.116",
+      "max_ms": "0.158",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.community_quality_checks t"
+    },
+    {
+      "ordinal": 46,
+      "role": "postgres",
+      "queryid": "-8099207827646671621",
+      "raw_md5": "964fe850a42744a1a89eeb88cdd9dc97",
+      "original_sql_chars": 135,
+      "complete_reviewed_range": [
+        1,
+        135
+      ],
+      "calls": 7,
+      "total_ms": "0.881",
+      "mean_ms": "0.126",
+      "max_ms": "0.147",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.admin_access_events t"
+    },
+    {
+      "ordinal": 47,
+      "role": "postgres",
+      "queryid": "5868360404398846214",
+      "raw_md5": "4bae6873f1224883c2bd5c53e43702d2",
+      "original_sql_chars": 126,
+      "complete_reviewed_range": [
+        1,
+        126
+      ],
+      "calls": 7,
+      "total_ms": "0.274",
+      "mean_ms": "0.039",
+      "max_ms": "0.068",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from public.experiments t"
+    },
+    {
+      "ordinal": 48,
+      "role": "postgres",
+      "queryid": "3449717515008740656",
+      "raw_md5": "daf6ee14bfc1a0e486dcb295c4faf57f",
+      "original_sql_chars": 143,
+      "complete_reviewed_range": [
+        1,
+        143
+      ],
+      "calls": 6,
+      "total_ms": "0.455",
+      "mean_ms": "0.076",
+      "max_ms": "0.096",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.dic_first_style_prompt_seen t"
+    },
+    {
+      "ordinal": 49,
+      "role": "postgres",
+      "queryid": "3687309782382905398",
+      "raw_md5": "117b2e539b7d00552cb9b56f61b8d5a3",
+      "original_sql_chars": 141,
+      "complete_reviewed_range": [
+        1,
+        141
+      ],
+      "calls": 6,
+      "total_ms": "0.368",
+      "mean_ms": "0.061",
+      "max_ms": "0.082",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.dic_admin_delete_receipts t"
+    },
+    {
+      "ordinal": 50,
+      "role": "postgres",
+      "queryid": "9141232101826707546",
+      "raw_md5": "3ee46cb1e8ffc1de52caf08d993b3e22",
+      "original_sql_chars": 135,
+      "complete_reviewed_range": [
+        1,
+        135
+      ],
+      "calls": 6,
+      "total_ms": "1.095",
+      "mean_ms": "0.182",
+      "max_ms": "0.299",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.admin_content_edits t"
+    },
+    {
+      "ordinal": 51,
+      "role": "postgres",
+      "queryid": "-5775020080852522657",
+      "raw_md5": "c6b98203f051d7e7bfd859d555e29349",
+      "original_sql_chars": 2319,
+      "complete_reviewed_range": [
+        1,
+        2319
+      ],
+      "calls": 5,
+      "total_ms": "21.438",
+      "mean_ms": "4.288",
+      "max_ms": "5.410",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "SELECT * FROM (SELECT $1 AS relation_name, COUNT(*)::bigint AS row_count, md5(COALESCE(string_agg(md5(to_jsonb(t)::text),$2 ORDER BY md5(to_jsonb(t)::text)),$3)) AS content_digest FROM public.coffees t UNION ALL SELECT $4 AS relation_name, COUNT(*)::bigint AS row_count, md5(COALESCE(string_agg(md5(to_jsonb(t)::text),$5 ORDER BY md5(to_jsonb(t)::text)),$6)) AS content_digest FROM public.shots t UNION ALL SELECT $7 AS relation_name, COUNT(*)::bigint AS row_count, md5(COALESCE(string_agg(md5(to_jsonb(t)::text),$8 ORDER BY md5(to_jsonb(t)::text)),$9)) AS content_digest FROM public.shot_notes t UNION ALL SELECT $10 AS relation_name, COUNT(*)::bigint AS row_count, md5(COALESCE(string_agg(md5(to_jsonb(t)::text),$11 ORDER BY md5(to_jsonb(t)::text)),$12)) AS content_digest FROM public.coffee_sources t UNION ALL SELECT $13 AS relation_name, COUNT(*)::bigint AS row_count, md5(COALESCE(string_agg(md5(to_jsonb(t)::text),$14 ORDER BY md5(to_jsonb(t)::text)),$15)) AS content_digest FROM public.coffee_submissions t UNION ALL SELECT $16 AS relation_name, COUNT(*)::bigint AS row_count, md5(COALESCE(string_agg(md5(to_jsonb(t)::text),$17 ORDER BY md5(to_jsonb(t)::text)),$18)) AS content_digest FROM public.library_entries t UNION ALL SELECT $19 AS relation_name, COUNT(*)::bigint AS row_count, md5(COALESCE(string_agg(md5(to_jsonb(t)::text),$20 ORDER BY md5(to_jsonb(t)::text)),$21)) AS content_digest FROM private.beta_members t UNION ALL SELECT $22 AS relation_name, COUNT(*)::bigint AS row_count, md5(COALESCE(string_agg(md5(to_jsonb(t)::text),$23 ORDER BY md5(to_jsonb(t)::text)),$24)) AS content_digest FROM public.community_shots t UNION ALL SELECT $25 AS relation_name, COUNT(*)::bigint AS row_count, md5(COALESCE(string_agg(md5(to_jsonb(t)::text),$26 ORDER BY md5(to_jsonb(t)::text)),$27)) AS content_digest FROM private.mutation_receipts t UNION ALL SELECT $28 AS relation_name, COUNT(*)::bigint AS row_count, md5(COALESCE(string_agg(md5(to_jsonb(t)::text),$29 ORDER BY md5(to_jsonb(t)::text)),$30)) AS content_digest FROM private.admin_content_edits t UNION ALL SELECT $31 AS relation_name, COUNT(*)::bigint AS row_count, md5(COALESCE(string_agg(md5(to_jsonb(t)::text),$32 ORDER BY md5(to_jsonb(t)::text)),$33)) AS content_digest FROM private.dic_admin_delete_receipts t) AS fingerprints ORDER BY relation_name"
+    },
+    {
+      "ordinal": 52,
+      "role": "postgres",
+      "queryid": "6461525762574205228",
+      "raw_md5": "1f0398a4eb18478de7650e15b08d7893",
+      "original_sql_chars": 1545,
+      "complete_reviewed_range": [
+        1,
+        1545
+      ],
+      "calls": 5,
+      "total_ms": "70.268",
+      "mean_ms": "14.054",
+      "max_ms": "30.747",
+      "classification": "CATALOG_METADATA_INSPECTION",
+      "verdict": "Catalog/index/policy introspection; not evidence that an index is unused or broken.",
+      "complete_original_normalized_sql": "WITH idxcols AS (\n  SELECT row_number() OVER (ORDER BY ci.relname,a.attnum) AS ordinal,\n   ci.oid::text AS index_oid, ci.relname AS index_name, tb.oid::text AS table_oid, tb.relname AS table_name,\n   a.attnum AS index_attnum, a.attname AS index_attname,\n   i.indnatts, i.indnkeyatts, i.indisvalid, i.indisready, i.indislive,\n   i.indkey[a.attnum-$1] AS table_attnum,\n   pa.attname AS source_column, pa.atttypid::text AS source_type_oid,\n   format_type(pa.atttypid,pa.atttypmod) AS source_formatted_type,\n   opc.opcname AS opclass, opc.opcintype::text AS opclass_input_type_oid,\n   opc.opckeytype::text AS opclass_key_type_oid,\n   format_type(a.atttypid,a.atttypmod) AS formatted_index_type,\n   a.attcollation::regcollation::text AS index_collation,\n   pa.attcollation::regcollation::text AS source_collation,\n   (i.indexprs IS NOT NULL) AS index_has_expressions,\n   (i.indpred IS NOT NULL) AS index_has_predicate,\n   to_jsonb(a) AS full_catalog_tuple,\n   md5(to_jsonb(a)::text) AS full_tuple_md5\n  FROM pg_catalog.pg_index i\n  JOIN pg_catalog.pg_class ci ON ci.oid=i.indexrelid AND ci.relnamespace=$2::regnamespace\n  JOIN pg_catalog.pg_class tb ON tb.oid=i.indrelid\n  JOIN pg_catalog.pg_attribute a ON a.attrelid=ci.oid AND a.attnum>$3\n  LEFT JOIN pg_catalog.pg_attribute pa ON pa.attrelid=tb.oid AND pa.attnum=i.indkey[a.attnum-$4]\n  LEFT JOIN pg_catalog.pg_opclass opc ON opc.oid=i.indclass[a.attnum-$5]\n )\n SELECT jsonb_agg(to_jsonb(x) ORDER BY ordinal) AS rows\n FROM (SELECT * FROM idxcols WHERE ordinal BETWEEN $6 AND $7 ORDER BY ordinal) x"
+    },
+    {
+      "ordinal": 53,
+      "role": "postgres",
+      "queryid": "-1044393655620106181",
+      "raw_md5": "d5bcfe8710792fde0297b9672780ac39",
+      "original_sql_chars": 360,
+      "complete_reviewed_range": [
+        1,
+        360
+      ],
+      "calls": 4,
+      "total_ms": "1.710",
+      "mean_ms": "0.428",
+      "max_ms": "1.335",
+      "classification": "HISTORICAL_RECIPE_DIAGNOSTIC",
+      "verdict": "Past aggregate/group query identifies candidate multi-family evidence; no runtime claim or basis to change family decision logic.",
+      "complete_original_normalized_sql": "select (select count(*) from public.shots where style=$1) as saved_custom_shots, (select count(*) from public.workspace_coffees where selected_style=$2) as custom_workspace_selections, (select count(*) from public.personal_recipe_families where style=$3) as custom_recipe_families, (select count(*) from public.experiments where style=$4) as custom_experiments"
+    },
+    {
+      "ordinal": 54,
+      "role": "postgres",
+      "queryid": "1777573649139629876",
+      "raw_md5": "a0e421f837e079db62c094e7d7da3b21",
+      "original_sql_chars": 400,
+      "complete_reviewed_range": [
+        1,
+        400
+      ],
+      "calls": 4,
+      "total_ms": "21.545",
+      "mean_ms": "5.386",
+      "max_ms": "8.946",
+      "classification": "HISTORICAL_AGGREGATE_OR_INTEGRITY_DIAGNOSTIC",
+      "verdict": "Earlier bounded count/aggregate/metadata test, not evidence of a current active application performance regression.",
+      "complete_original_normalized_sql": "with w as (select greatest((select max(updated_at) from public.shots),(select max(created_at) from private.mutation_receipts),(select max(updated_at) from public.coffees),(select max(updated_at) from public.library_entries),(select max(updated_at) from public.coffee_submissions),(select max(created_at) from private.beta_members)) as v) select to_char(v at time zone $1,$2) as latest_write_at from w"
+    },
+    {
+      "ordinal": 55,
+      "role": "postgres",
+      "queryid": "-6114732298839380451",
+      "raw_md5": "069d0a6106c926113d754ba8c2abcb97",
+      "original_sql_chars": 288,
+      "complete_reviewed_range": [
+        1,
+        288
+      ],
+      "calls": 3,
+      "total_ms": "14.161",
+      "mean_ms": "4.720",
+      "max_ms": "8.170",
+      "classification": "HISTORICAL_AGGREGATE_OR_INTEGRITY_DIAGNOSTIC",
+      "verdict": "Earlier bounded count/aggregate/metadata test, not evidence of a current active application performance regression.",
+      "complete_original_normalized_sql": "SELECT (SELECT count(*) FROM public.coffees) AS coffees, (SELECT count(*) FROM public.shots) AS shots, (SELECT count(*) FROM public.shot_notes) AS shot_notes, (SELECT count(*) FROM public.coffee_submissions) AS submissions, (SELECT count(*) FROM public.community_shots) AS community_shots"
+    },
+    {
+      "ordinal": 56,
+      "role": "postgres",
+      "queryid": "-4740995352907495501",
+      "raw_md5": "1c2f86f6b37c419383f1fda09a5b1f98",
+      "original_sql_chars": 743,
+      "complete_reviewed_range": [
+        1,
+        743
+      ],
+      "calls": 3,
+      "total_ms": "16.272",
+      "mean_ms": "5.424",
+      "max_ms": "9.926",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1 name,count(*) count,md5(coalesce(string_agg(to_jsonb(t)::text,$2 order by id),$3)) digest from public.shots t union all select $4,count(*),md5(coalesce(string_agg(to_jsonb(t)::text,$5 order by shot_id),$6)) from public.shot_notes t union all select $7,count(*),md5(coalesce(string_agg((to_jsonb(t)-$8-$9)::text,$10 order by id),$11)) from public.coffees t union all select $12,count(*),md5(coalesce(string_agg(to_jsonb(t)::text,$13 order by id),$14)) from public.library_entries t union all select $15,count(*),md5(coalesce(string_agg(to_jsonb(t)::text,$16 order by id),$17)) from public.community_shots t union all select $18,count(*),md5(coalesce(string_agg(to_jsonb(t)::text,$19 order by id),$20)) from public.coffee_submissions t"
+    },
+    {
+      "ordinal": 57,
+      "role": "postgres",
+      "queryid": "814127168682737598",
+      "raw_md5": "123e710ff4b1477284e0ed8c9dbea5ea",
+      "original_sql_chars": 331,
+      "complete_reviewed_range": [
+        1,
+        331
+      ],
+      "calls": 3,
+      "total_ms": "0.098",
+      "mean_ms": "0.033",
+      "max_ms": "0.036",
+      "classification": "HISTORICAL_AGGREGATE_OR_INTEGRITY_DIAGNOSTIC",
+      "verdict": "Earlier bounded count/aggregate/metadata test, not evidence of a current active application performance regression.",
+      "complete_original_normalized_sql": "SELECT count(*)::int AS accounts,count(*) FILTER(WHERE enabled AND admitted_at IS NULL)::int AS enabled_unadmitted,count(*) FILTER(WHERE enabled AND signup_review_state<>$1)::int AS enabled_nonapproved,count(*) FILTER(WHERE admitted_at IS NOT NULL AND signup_review_state<>$2)::int AS admitted_nonapproved FROM private.beta_members"
+    },
+    {
+      "ordinal": 58,
+      "role": "postgres",
+      "queryid": "5146099387978401087",
+      "raw_md5": "21ed6d152c32d8362a93848e2219a219",
+      "original_sql_chars": 890,
+      "complete_reviewed_range": [
+        1,
+        890
+      ],
+      "calls": 3,
+      "total_ms": "301.387",
+      "mean_ms": "100.462",
+      "max_ms": "120.319",
+      "classification": "SELF_AUDIT_TELEMETRY",
+      "verdict": "Past SQL statistics audit; costly introspection is not member-facing latency.",
+      "complete_original_normalized_sql": "WITH ranked AS (SELECT row_number() OVER (ORDER BY p.total_exec_time DESC,p.queryid) AS ordinal,p.queryid::text queryid, r.rolname AS role_name, p.calls, p.rows,round(p.total_exec_time::numeric,$1) total_ms,round(p.mean_exec_time::numeric,$2) mean_ms,round(p.max_exec_time::numeric,$3) max_ms,p.shared_blks_hit,p.shared_blks_read,p.temp_blks_read,p.temp_blks_written,CASE WHEN p.query ~* $4 THEN $5 WHEN p.query ~* $6 THEN $7 ELSE $8 END AS kind,(regexp_match(p.query,$9))[$10] dic_identifier FROM extensions.pg_stat_statements p LEFT JOIN pg_roles r ON r.oid=p.userid WHERE p.queryid IS NOT NULL) SELECT current_timestamp::text as observed_at,(SELECT stats_reset::text FROM extensions.pg_stat_statements_info) AS stats_reset, (SELECT count(*) FROM ranked) AS active_count, coalesce(jsonb_agg(to_jsonb(ranked) ORDER BY ordinal),$11::jsonb) rows FROM ranked WHERE ordinal BETWEEN $12 AND $13"
+    },
+    {
+      "ordinal": 59,
+      "role": "postgres",
+      "queryid": "5284542680600142255",
+      "raw_md5": "c0cc5854dc3c4dda37014a3f1a4822b5",
+      "original_sql_chars": 207,
+      "complete_reviewed_range": [
+        1,
+        207
+      ],
+      "calls": 3,
+      "total_ms": "16.440",
+      "mean_ms": "5.480",
+      "max_ms": "13.695",
+      "classification": "CATALOG_METADATA_INSPECTION",
+      "verdict": "Catalog/index/policy introspection; not evidence that an index is unused or broken.",
+      "complete_original_normalized_sql": "SELECT schemaname,tablename,policyname,cmd,roles,qual AS using_predicate,with_check FROM pg_policies WHERE schemaname IN($1,$2) AND tablename IN($3,$4,$5,$6,$7,$8,$9) ORDER BY schemaname,tablename,policyname"
+    },
+    {
+      "ordinal": 60,
+      "role": "postgres",
+      "queryid": "7674778185764620622",
+      "raw_md5": "6527d75f9303e77e3c65d4882d9963b6",
+      "original_sql_chars": 479,
+      "complete_reviewed_range": [
+        1,
+        479
+      ],
+      "calls": 3,
+      "total_ms": "1.203",
+      "mean_ms": "0.401",
+      "max_ms": "0.928",
+      "classification": "HISTORICAL_AGGREGATE_OR_INTEGRITY_DIAGNOSTIC",
+      "verdict": "Earlier bounded count/aggregate/metadata test, not evidence of a current active application performance regression.",
+      "complete_original_normalized_sql": "SELECT (SELECT count(*) FROM public.coffees) AS coffees, (SELECT count(*) FROM public.shots) AS shots, (SELECT count(*) FROM public.shot_notes) AS shot_notes, (SELECT count(*) FROM public.community_shots) AS community_shots, (SELECT count(*) FROM private.beta_members) AS beta_members, (SELECT count(*) FROM private.app_admins) AS app_admins, (SELECT count(*) FROM public.coffee_submissions) AS coffee_submissions, (SELECT count(*) FROM public.library_entries) AS library_entries"
+    },
+    {
+      "ordinal": 61,
+      "role": "postgres",
+      "queryid": "8594251015407792292",
+      "raw_md5": "c0e9cd301866d9d0d65e6a739d5d59ac",
+      "original_sql_chars": 427,
+      "complete_reviewed_range": [
+        1,
+        427
+      ],
+      "calls": 3,
+      "total_ms": "48.422",
+      "mean_ms": "16.141",
+      "max_ms": "26.940",
+      "classification": "HISTORICAL_AGGREGATE_OR_INTEGRITY_DIAGNOSTIC",
+      "verdict": "Earlier bounded count/aggregate/metadata test, not evidence of a current active application performance regression.",
+      "complete_original_normalized_sql": "select (select count(*) from public.coffees) as coffees, (select count(*) from public.shots) as shots, (select count(*) from public.shot_notes) as shot_notes, (select count(*) from public.coffee_submissions) as coffee_submissions, (select count(*) from private.beta_members) as beta_members, (select count(*) from public.community_shots) as community_shots, (select count(*) from private.mutation_receipts) as mutation_receipts"
+    },
+    {
+      "ordinal": 62,
+      "role": "postgres",
+      "queryid": "-8968698141417307314",
+      "raw_md5": "e3e1ffcd55ce1c6af1e8bef3ed3e6341",
+      "original_sql_chars": 146,
+      "complete_reviewed_range": [
+        1,
+        146
+      ],
+      "calls": 2,
+      "total_ms": "0.062",
+      "mean_ms": "0.031",
+      "max_ms": "0.032",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.dic_member_approval_deliveries t"
+    },
+    {
+      "ordinal": 63,
+      "role": "postgres",
+      "queryid": "-8574742821535885398",
+      "raw_md5": "6e013c18d1be72bf3d3f820ada47b184",
+      "original_sql_chars": 145,
+      "complete_reviewed_range": [
+        1,
+        145
+      ],
+      "calls": 2,
+      "total_ms": "0.130",
+      "mean_ms": "0.065",
+      "max_ms": "0.067",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.dic_member_approval_poll_gate t"
+    },
+    {
+      "ordinal": 64,
+      "role": "postgres",
+      "queryid": "-7281059570854299416",
+      "raw_md5": "7b70faee2ec14466946864fbc4b57c3c",
+      "original_sql_chars": 382,
+      "complete_reviewed_range": [
+        1,
+        382
+      ],
+      "calls": 2,
+      "total_ms": "0.358",
+      "mean_ms": "0.179",
+      "max_ms": "0.213",
+      "classification": "HISTORICAL_AGGREGATE_OR_INTEGRITY_DIAGNOSTIC",
+      "verdict": "Earlier bounded count/aggregate/metadata test, not evidence of a current active application performance regression.",
+      "complete_original_normalized_sql": "select (select count(*) from public.shots) shots,(select count(*) from public.shot_notes) notes,(select count(*) from public.coffees) coffees,(select count(*) from public.coffee_submissions) submissions,(select count(*) from private.beta_members) members,(select max(pulled_at) from public.shots) latest_shot,(select max(updated_at) from public.coffee_submissions) latest_submission"
+    },
+    {
+      "ordinal": 65,
+      "role": "postgres",
+      "queryid": "-7164203442359295079",
+      "raw_md5": "a736d053c82452f79e0fa8a0c9bd2777",
+      "original_sql_chars": 151,
+      "complete_reviewed_range": [
+        1,
+        151
+      ],
+      "calls": 2,
+      "total_ms": "0.321",
+      "mean_ms": "0.160",
+      "max_ms": "0.163",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.dic_admin_account_delete_operations t"
+    },
+    {
+      "ordinal": 66,
+      "role": "postgres",
+      "queryid": "-7137744545158194533",
+      "raw_md5": "314721c0828818a83771436a34e23183",
+      "original_sql_chars": 153,
+      "complete_reviewed_range": [
+        1,
+        153
+      ],
+      "calls": 2,
+      "total_ms": "0.060",
+      "mean_ms": "0.030",
+      "max_ms": "0.031",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from public.dic_member_approval_push_subscriptions t"
+    },
+    {
+      "ordinal": 67,
+      "role": "postgres",
+      "queryid": "-5537985326023243790",
+      "raw_md5": "c00f1d5c836feadf7f6452d1afa2bfbc",
+      "original_sql_chars": 143,
+      "complete_reviewed_range": [
+        1,
+        143
+      ],
+      "calls": 2,
+      "total_ms": "0.165",
+      "mean_ms": "0.082",
+      "max_ms": "0.090",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from public.dic_admin_push_subscriptions t"
+    },
+    {
+      "ordinal": 68,
+      "role": "postgres",
+      "queryid": "-5333880670881291984",
+      "raw_md5": "c9651d68097a49181d4ca7effc40aa4b",
+      "original_sql_chars": 344,
+      "complete_reviewed_range": [
+        1,
+        344
+      ],
+      "calls": 2,
+      "total_ms": "5.284",
+      "mean_ms": "2.642",
+      "max_ms": "4.577",
+      "classification": "HISTORICAL_AGGREGATE_OR_INTEGRITY_DIAGNOSTIC",
+      "verdict": "Earlier bounded count/aggregate/metadata test, not evidence of a current active application performance regression.",
+      "complete_original_normalized_sql": "select (select count(*) from public.coffees where verification_state=$1) as verified_coffees, (select count(*) from public.shots) as shots, (select count(*) from public.library_entries) as library_entries, (select count(*) from private.beta_members where enabled) as admitted_members, (select count(*) from private.app_admins) as admin_accounts"
+    },
+    {
+      "ordinal": 69,
+      "role": "postgres",
+      "queryid": "-3271039298092310234",
+      "raw_md5": "03ba924e580dbc17c24baac97cae4ed7",
+      "original_sql_chars": 1586,
+      "complete_reviewed_range": [
+        1,
+        1586
+      ],
+      "calls": 2,
+      "total_ms": "9.024",
+      "mean_ms": "4.512",
+      "max_ms": "5.675",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "with h as (\nselect $1 name,count(*) n,md5(coalesce(string_agg(to_jsonb(t)::text,$2 order by to_jsonb(t)::text),$3)) digest from public.coffees t\nunion all select $4,count(*),md5(coalesce(string_agg(to_jsonb(t)::text,$5 order by to_jsonb(t)::text),$6)) from public.coffee_sources t\nunion all select $7,count(*),md5(coalesce(string_agg(to_jsonb(t)::text,$8 order by to_jsonb(t)::text),$9)) from public.coffee_submissions t\nunion all select $10,count(*),md5(coalesce(string_agg(to_jsonb(t)::text,$11 order by to_jsonb(t)::text),$12)) from public.library_entries t\nunion all select $13,count(*),md5(coalesce(string_agg(to_jsonb(t)::text,$14 order by to_jsonb(t)::text),$15)) from public.shots t\nunion all select $16,count(*),md5(coalesce(string_agg(to_jsonb(t)::text,$17 order by to_jsonb(t)::text),$18)) from public.shot_notes t\nunion all select $19,count(*),md5(coalesce(string_agg(to_jsonb(t)::text,$20 order by to_jsonb(t)::text),$21)) from public.community_shots t\nunion all select $22,count(*),md5(coalesce(string_agg(to_jsonb(t)::text,$23 order by to_jsonb(t)::text),$24)) from private.beta_members t\nunion all select $25,count(*),md5(coalesce(string_agg(to_jsonb(t)::text,$26 order by to_jsonb(t)::text),$27)) from private.mutation_receipts t\nunion all select $28,count(*),md5(coalesce(string_agg(to_jsonb(t)::text,$29 order by to_jsonb(t)::text),$30)) from private.admin_content_edits t\nunion all select $31,count(*),md5(coalesce(string_agg(to_jsonb(t)::text,$32 order by to_jsonb(t)::text),$33)) from private.dic_admin_delete_receipts t\n) select name,n,digest from h order by name"
+    },
+    {
+      "ordinal": 70,
+      "role": "postgres",
+      "queryid": "-1927468958716578453",
+      "raw_md5": "8c2c107d397a6953d3d7dd478a969665",
+      "original_sql_chars": 235,
+      "complete_reviewed_range": [
+        1,
+        235
+      ],
+      "calls": 2,
+      "total_ms": "0.133",
+      "mean_ms": "0.067",
+      "max_ms": "0.068",
+      "classification": "HISTORICAL_AGGREGATE_OR_INTEGRITY_DIAGNOSTIC",
+      "verdict": "Earlier bounded count/aggregate/metadata test, not evidence of a current active application performance regression.",
+      "complete_original_normalized_sql": "SELECT count(*) AS member_rows,count(*) FILTER (WHERE enabled and admitted_at IS NOT NULL) AS admitted_enabled,count(*) FILTER (WHERE NOT enabled) AS disabled_count, count(distinct owner_id) AS distinct_owners FROM private.beta_members"
+    },
+    {
+      "ordinal": 71,
+      "role": "postgres",
+      "queryid": "-520285966426249326",
+      "raw_md5": "f8712404bba5df879849169e49fd1ff1",
+      "original_sql_chars": 114,
+      "complete_reviewed_range": [
+        1,
+        114
+      ],
+      "calls": 2,
+      "total_ms": "0.166",
+      "mean_ms": "0.083",
+      "max_ms": "0.105",
+      "classification": "HISTORICAL_AGGREGATE_OR_INTEGRITY_DIAGNOSTIC",
+      "verdict": "Earlier bounded count/aggregate/metadata test, not evidence of a current active application performance regression.",
+      "complete_original_normalized_sql": "SELECT quality_state,count(*) AS records FROM public.community_shots GROUP BY quality_state ORDER BY quality_state"
+    },
+    {
+      "ordinal": 72,
+      "role": "postgres",
+      "queryid": "-165753044819506677",
+      "raw_md5": "9da969441585059cdf3116971300e223",
+      "original_sql_chars": 112,
+      "complete_reviewed_range": [
+        1,
+        112
+      ],
+      "calls": 2,
+      "total_ms": "0.051",
+      "mean_ms": "0.026",
+      "max_ms": "0.026",
+      "classification": "HISTORICAL_OWNER_FILTER_PROBE",
+      "verdict": "Past parameterized owner-filter query; planner/app behavior not established by SQL shape alone.",
+      "complete_original_normalized_sql": "select count(*) from public.library_entries where owner_id=$1::uuid and coffee_id=$2::uuid and hidden_at is null"
+    },
+    {
+      "ordinal": 73,
+      "role": "postgres",
+      "queryid": "-105643435733735683",
+      "raw_md5": "cc466df720485b1be9a8197254b15ac7",
+      "original_sql_chars": 346,
+      "complete_reviewed_range": [
+        1,
+        346
+      ],
+      "calls": 2,
+      "total_ms": "3.098",
+      "mean_ms": "1.549",
+      "max_ms": "2.875",
+      "classification": "HISTORICAL_SUBMISSION_DIAGNOSTIC",
+      "verdict": "Past bounded Pending/library status diagnostic; no direct private records were queried in this audit.",
+      "complete_original_normalized_sql": "select \ns.id, s.created_at, s.status, s.proposed_data, s.source_url, s.canonical_coffee_id,\nl.id as library_entry_id,\n(select count(*) from public.shots sh where sh.library_entry_id=l.id) as shot_count\nfrom public.coffee_submissions s\nleft join public.library_entries l on l.submission_id=s.id\nwhere s.status in ($1,$2) order by s.created_at,s.id"
+    },
+    {
+      "ordinal": 74,
+      "role": "postgres",
+      "queryid": "684922875942732277",
+      "raw_md5": "21467d493daf837b5bf550c0518b763b",
+      "original_sql_chars": 140,
+      "complete_reviewed_range": [
+        1,
+        140
+      ],
+      "calls": 2,
+      "total_ms": "0.142",
+      "mean_ms": "0.071",
+      "max_ms": "0.075",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.dic_signup_review_events t"
+    },
+    {
+      "ordinal": 75,
+      "role": "postgres",
+      "queryid": "810110801688234990",
+      "raw_md5": "6b3db6848176fddbdd72c3dc14716aa8",
+      "original_sql_chars": 138,
+      "complete_reviewed_range": [
+        1,
+        138
+      ],
+      "calls": 2,
+      "total_ms": "0.129",
+      "mean_ms": "0.064",
+      "max_ms": "0.066",
+      "classification": "HISTORICAL_ROW_DIGEST_AUDIT",
+      "verdict": "Prior aggregate whole-row fingerprint reads; expensive/redundant diagnostics, NOT recurring application behavior. Do not execute again or expose rows.",
+      "complete_original_normalized_sql": "select $1, md5(coalesce(string_agg(md5(to_jsonb(t)::text), $2 order by md5(to_jsonb(t)::text)), $3)) from private.dic_admin_push_runtime t"
+    },
+    {
+      "ordinal": 76,
+      "role": "postgres",
+      "queryid": "1210709094882762875",
+      "raw_md5": "e2cee8fda64ecaf71831b66f0c44a6fc",
+      "original_sql_chars": 244,
+      "complete_reviewed_range": [
+        1,
+        244
+      ],
+      "calls": 2,
+      "total_ms": "0.923",
+      "mean_ms": "0.461",
+      "max_ms": "0.799",
+      "classification": "HISTORICAL_TEST_SESSION_FIXTURE",
+      "verdict": "A past fixture prepared session authorization context; not an application login path or authorized operation to rerun.",
+      "complete_original_normalized_sql": "SELECT set_config($1,m.owner_id::text,$2),set_config($3,jsonb_build_object($4,m.owner_id::text,$5,$6)::text,$7) FROM private.beta_members m ORDER BY EXISTS(SELECT $8 FROM private.app_admins a WHERE a.owner_id=m.owner_id) ASC,m.owner_id LIMIT $9"
+    },
+    {
+      "ordinal": 77,
+      "role": "postgres",
+      "queryid": "1913736379397899972",
+      "raw_md5": "26763cd2b37894f0f53c81c8e5c3182e",
+      "original_sql_chars": 338,
+      "complete_reviewed_range": [
+        1,
+        338
+      ],
+      "calls": 2,
+      "total_ms": "12.861",
+      "mean_ms": "6.430",
+      "max_ms": "6.652",
+      "classification": "HISTORICAL_RECIPE_DIAGNOSTIC",
+      "verdict": "Past aggregate/group query identifies candidate multi-family evidence; no runtime claim or basis to change family decision logic.",
+      "complete_original_normalized_sql": "select (select count(*) from public.experiments) as experiments, (select count(*) from public.shots where experiment_id is not null) as experiment_shots,(select count(*) from public.shots) as shots, (select count(*) from public.personal_recipe_families) as personal_families,(select count(*) from public.recipe_preferences) as preferences"
+    },
+    {
+      "ordinal": 78,
+      "role": "postgres",
+      "queryid": "2830428983072684063",
+      "raw_md5": "23765424131068067c19ccf2180759f5",
+      "original_sql_chars": 371,
+      "complete_reviewed_range": [
+        1,
+        371
+      ],
+      "calls": 2,
+      "total_ms": "5.391",
+      "mean_ms": "2.696",
+      "max_ms": "5.274",
+      "classification": "HISTORICAL_AGGREGATE_OR_INTEGRITY_DIAGNOSTIC",
+      "verdict": "Earlier bounded count/aggregate/metadata test, not evidence of a current active application performance regression.",
+      "complete_original_normalized_sql": "select (select count(*) from public.experiments) as experiment_rows, (select count(*) from public.shots where experiment_id is not null) as linked_shot_rows, (select count(*) from public.shots) as total_shots, to_regclass($1) is not null as experiment_table_present, (select count(*) from supabase_migrations.schema_migrations where name = $2) as retire_migration_applied"
+    },
+    {
+      "ordinal": 79,
+      "role": "postgres",
+      "queryid": "2830967461196509181",
+      "raw_md5": "df7fd51bda0f6436469d6c7838572e7c",
+      "original_sql_chars": 730,
+      "complete_reviewed_range": [
+        1,
+        730
+      ],
+      "calls": 2,
+      "total_ms": "3.867",
+      "mean_ms": "1.933",
+      "max_ms": "2.572",
+      "classification": "HISTORICAL_AGGREGATE_OR_INTEGRITY_DIAGNOSTIC",
+      "verdict": "Earlier bounded count/aggregate/metadata test, not evidence of a current active application performance regression.",
+      "complete_original_normalized_sql": "SELECT (SELECT count(*) FROM public.coffees) coffees,(SELECT count(*) FROM public.library_entries) library_entries,(SELECT count(*) FROM public.shots) shots,(SELECT count(*) FROM public.shot_notes) notes,(SELECT count(*) FROM public.community_shots) community_projections,(SELECT count(*) FROM private.beta_members WHERE enabled) enabled_members,(SELECT count(*) FROM private.app_admins) admins,(SELECT count(*) FROM private.beta_invites) invite_rows,(SELECT count(*) FROM private.beta_invites WHERE revoked_at IS NULL AND uses < COALESCE(max_uses,$1) AND (expires_at IS NULL OR expires_at>now())) usable_invites,(SELECT count(*) FROM public.shot_notes n LEFT JOIN public.shots s ON s.id=n.shot_id WHERE s.id IS NULL) orphan_notes"
+    },
+    {
+      "ordinal": 80,
+      "role": "postgres",
+      "queryid": "3632438881666536564",
+      "raw_md5": "27a9b9c03dc5b4e43e80a222160faae2",
+      "original_sql_chars": 352,
+      "complete_reviewed_range": [
+        1,
+        352
+      ],
+      "calls": 2,
+      "total_ms": "1.184",
+      "mean_ms": "0.592",
+      "max_ms": "1.047",
+      "classification": "HISTORICAL_AGGREGATE_OR_INTEGRITY_DIAGNOSTIC",
+      "verdict": "Earlier bounded count/aggregate/metadata test, not evidence of a current active application performance regression.",
+      "complete_original_normalized_sql": "select $1 as kind,count(*)::int as n from public.shots union all select $2,count(*)::int from public.shot_notes union all select $3,count(*)::int from public.coffees union all select $4,count(*)::int from public.coffee_submissions union all select $5,count(*)::int from public.community_shots union all select $6,count(*)::int from private.beta_members"
+    },
+    {
+      "ordinal": 81,
+      "role": "postgres",
+      "queryid": "4450115538663120813",
+      "raw_md5": "98dbd7fad049259b69a25094f1aa229f",
+      "original_sql_chars": 166,
+      "complete_reviewed_range": [
+        1,
+        166
+      ],
+      "calls": 2,
+      "total_ms": "6.213",
+      "mean_ms": "3.107",
+      "max_ms": "6.129",
+      "classification": "HISTORICAL_AGGREGATE_OR_INTEGRITY_DIAGNOSTIC",
+      "verdict": "Earlier bounded count/aggregate/metadata test, not evidence of a current active application performance regression.",
+      "complete_original_normalized_sql": "select (select count(*) from public.coffees) as coffees, (select count(*) from public.shots) as shots, (select count(*) from public.coffee_submissions) as submissions"
+    },
+    {
+      "ordinal": 82,
+      "role": "postgres",
+      "queryid": "4932150235385713386",
+      "raw_md5": "fd763f88fc72cdc4128a2a647f6b7bd9",
+      "original_sql_chars": 1061,
+      "complete_reviewed_range": [
+        1,
+        1061
+      ],
+      "calls": 2,
+      "total_ms": "41.602",
+      "mean_ms": "20.801",
+      "max_ms": "21.122",
+      "classification": "CATALOG_METADATA_INSPECTION",
+      "verdict": "Catalog/index/policy introspection; not evidence that an index is unused or broken.",
+      "complete_original_normalized_sql": "SELECT n.nspname schema_name,t.relname table_name,c.relname index_name,i.indexrelid::oid::text oid,am.amname access_method,pg_get_indexdef(i.indexrelid) index_ddl,i.indisunique,i.indisprimary,i.indisexclusion,i.indnullsnotdistinct,i.indisvalid,i.indisready,i.indislive,i.indnatts,i.indnkeyatts,i.indkey::text key_attnums,i.indclass::text opclass_oids,i.indcollation::text collation_oids,i.indoption::text options,pg_get_expr(i.indexprs,i.indrelid) expression_sql,pg_get_expr(i.indpred,i.indrelid) predicate_sql,coalesce((select string_agg(con.conname||$1||con.contype::text,$2 order by con.conname) from pg_constraint con where con.conindid=i.indexrelid),$3) backing_constraints,coalesce(st.idx_scan,$4)::bigint idx_scan,pg_relation_size(i.indexrelid)::bigint bytes FROM pg_index i JOIN pg_class c ON c.oid=i.indexrelid JOIN pg_class t ON t.oid=i.indrelid JOIN pg_namespace n ON n.oid=t.relnamespace JOIN pg_am am ON am.oid=c.relam LEFT JOIN pg_stat_user_indexes st ON st.indexrelid=i.indexrelid WHERE n.nspname IN ($5,$6) ORDER BY n.nspname,t.relname,c.relname"
+    },
+    {
+      "ordinal": 83,
+      "role": "postgres",
+      "queryid": "5677662516447645312",
+      "raw_md5": "96d008489e029a1adc1003f698bb3b15",
+      "original_sql_chars": 217,
+      "complete_reviewed_range": [
+        1,
+        217
+      ],
+      "calls": 2,
+      "total_ms": "4.384",
+      "mean_ms": "2.192",
+      "max_ms": "4.281",
+      "classification": "HISTORICAL_TEST_SESSION_FIXTURE",
+      "verdict": "A past fixture prepared session authorization context; not an application login path or authorized operation to rerun.",
+      "complete_original_normalized_sql": "SELECT set_config($1,\n  (SELECT a.owner_id::text FROM private.app_admins a JOIN private.beta_members m ON m.owner_id=a.owner_id WHERE m.enabled ORDER BY a.owner_id LIMIT $2), $3) IS NOT NULL AS admin_fixture_claim_set"
+    },
+    {
+      "ordinal": 84,
+      "role": "postgres",
+      "queryid": "5784638695446136062",
+      "raw_md5": "5afccf448fbf1b22c05720ad24b6051c",
+      "original_sql_chars": 229,
+      "complete_reviewed_range": [
+        1,
+        229
+      ],
+      "calls": 2,
+      "total_ms": "8.954",
+      "mean_ms": "4.477",
+      "max_ms": "8.869",
+      "classification": "HISTORICAL_AGGREGATE_OR_INTEGRITY_DIAGNOSTIC",
+      "verdict": "Earlier bounded count/aggregate/metadata test, not evidence of a current active application performance regression.",
+      "complete_original_normalized_sql": "select (select count(*) from public.coffees) as coffees, (select count(*) from public.shots) as shots, (select count(*) from public.shot_notes) as shot_notes, (select count(*) from public.coffee_submissions) as coffee_submissions"
+    },
+    {
+      "ordinal": 85,
+      "role": "postgres",
+      "queryid": "6195841309618158805",
+      "raw_md5": "46ee0e5aa50d1809f3f70f7d584fa42f",
+      "original_sql_chars": 307,
+      "complete_reviewed_range": [
+        1,
+        307
+      ],
+      "calls": 2,
+      "total_ms": "16.672",
+      "mean_ms": "8.336",
+      "max_ms": "16.472",
+      "classification": "HISTORICAL_TEST_SESSION_FIXTURE",
+      "verdict": "A past fixture prepared session authorization context; not an application login path or authorized operation to rerun.",
+      "complete_original_normalized_sql": "SELECT set_config($1,m.owner_id::text,$2),\n       set_config($3,jsonb_build_object($4,m.owner_id::text,$5,$6,$7,(extract($8 from now()+interval $9))::integer)::text,$10)\n  FROM private.beta_members m ORDER BY EXISTS(SELECT $11 FROM private.app_admins a WHERE a.owner_id=m.owner_id) ASC, m.owner_id LIMIT $12"
+    },
+    {
+      "ordinal": 86,
+      "role": "postgres",
+      "queryid": "8045813590880576469",
+      "raw_md5": "ad31bf306d14441abd553bc9bc5fa119",
+      "original_sql_chars": 168,
+      "complete_reviewed_range": [
+        1,
+        168
+      ],
+      "calls": 2,
+      "total_ms": "0.180",
+      "mean_ms": "0.090",
+      "max_ms": "0.095",
+      "classification": "HISTORICAL_TEST_SESSION_FIXTURE",
+      "verdict": "A past fixture prepared session authorization context; not an application login path or authorized operation to rerun.",
+      "complete_original_normalized_sql": "SELECT set_config($1,m.owner_id::text,$2),set_config($3,jsonb_build_object($4,m.owner_id::text,$5,$6)::text,$7) FROM private.beta_members m ORDER BY m.owner_id LIMIT $8"
+    },
+    {
+      "ordinal": 87,
+      "role": "postgres",
+      "queryid": "8277567013921209475",
+      "raw_md5": "d76d4859055d9e8ffd96a24977a5b75e",
+      "original_sql_chars": 679,
+      "complete_reviewed_range": [
+        1,
+        679
+      ],
+      "calls": 2,
+      "total_ms": "1.530",
+      "mean_ms": "0.765",
+      "max_ms": "1.380",
+      "classification": "HISTORICAL_RECIPE_DIAGNOSTIC",
+      "verdict": "Past aggregate/group query identifies candidate multi-family evidence; no runtime claim or basis to change family decision logic.",
+      "complete_original_normalized_sql": "with eligible as (select f.owner_id,f.library_entry_id,f.style,s.setup_version_id,f.id\n from public.personal_recipe_families f join public.shots s\n on s.owner_id=f.owner_id and s.library_entry_id=f.library_entry_id and s.style=f.style and s.personal_family_id=f.id\n where s.is_dialed_in and s.hidden_at is null and f.evidence_state<>$1\n group by f.owner_id,f.library_entry_id,f.style,s.setup_version_id,f.id),\n multi as (select owner_id,library_entry_id,style,setup_version_id,count(*) n from eligible group by 1,2,3,4 having count(*)>=$2)\n select (select count(*) from multi) as eligible_member_coffee_setup_groups,(select count(distinct owner_id) from multi) as member_accounts"
+    },
+    {
+      "ordinal": 88,
+      "role": "postgres",
+      "queryid": "8293418357430830806",
+      "raw_md5": "c6503b447ba1e8f38308f0caa22eaf60",
+      "original_sql_chars": 126,
+      "complete_reviewed_range": [
+        1,
+        126
+      ],
+      "calls": 2,
+      "total_ms": "0.786",
+      "mean_ms": "0.393",
+      "max_ms": "0.694",
+      "classification": "HISTORICAL_COFFEE_CATALOG_PROBE",
+      "verdict": "Earlier coffee identity listing SQL shape; no present-day app UI consumer or latency proven.",
+      "complete_original_normalized_sql": "SELECT roaster,name,roast_level,verification_state,merged_into_id IS NULL AS active\n FROM public.coffees ORDER BY roaster,name"
+    },
+    {
+      "ordinal": 89,
+      "role": "postgres",
+      "queryid": "8792642129463797999",
+      "raw_md5": "650a94bc67df07d58912867f2b7aa286",
+      "original_sql_chars": 279,
+      "complete_reviewed_range": [
+        1,
+        279
+      ],
+      "calls": 2,
+      "total_ms": "9.808",
+      "mean_ms": "4.904",
+      "max_ms": "9.641",
+      "classification": "HISTORICAL_AGGREGATE_OR_INTEGRITY_DIAGNOSTIC",
+      "verdict": "Earlier bounded count/aggregate/metadata test, not evidence of a current active application performance regression.",
+      "complete_original_normalized_sql": "select $1 entity,count(*) total,count(*) filter(where hidden_at is not null) hidden from public.shots union all select $2,count(*),$3 from public.shot_notes union all select $4,count(*),$5 from public.community_shots union all select $6,count(*),$7 from private.mutation_receipts"
+    }
+  ],
+  "unverified": [
+    "Prior R224-R327 overlap for these queryid shapes not yet exhaustively cross-indexed; no first-time credit",
+    "Hosted Auth provider console settings and compiled native internals",
+    "Current true member-facing request path or mobile acceptance"
+  ],
+  "baseline": "IN_PROGRESS",
+  "previous_fixes": "TESTING_NOT_RECERTIFIED",
+  "code_test_ci_changes": 0,
+  "new_ci_runs": 0,
+  "production_provider_writes": 0,
+  "publication": false,
+  "release_queue_edit": false,
+  "next": "Deduplicate 89 normalized postgres queryids against earlier run receipts before claiming first-time workload coverage; prioritize genuinely changed/unreviewed live DB/Edge definitions or reproducible member-path bug."
+}
