@@ -28,8 +28,8 @@ let raw;try{raw=readFileSync(join(dir,'case-537.html'))}catch(e){failures.push('
 let final;try{final=new URL(r.final_url)}catch{}
 const selectedMarkup=productMarkup(raw?.toString('utf8')||'');
 const headings=selectedProductHeadings(selectedMarkup);
-const selectedText=selectedMarkup.replace(/<(?:script|style|nav|aside|footer)\\b[^>]*>[\\s\\S]*?<\\/(?:script|style|nav|aside|footer)>/gi,' ')
- .replace(/<[^>]{0,2000}>/g,' ').replace(/\\s+/g,' ').toLowerCase();
+const selectedText=selectedMarkup.replace(/<(?:script|style|nav|aside|footer)\b[^>]*>[\s\S]*?<\/(?:script|style|nav|aside|footer)>/gi,' ')
+ .replace(/<[^>]{0,2000}>/g,' ').replace(/\s+/g,' ').toLowerCase();
 must(r.status==='FETCHED'&&r.parser_ok===true&&r.official_url===official,'exact_original_official_public_https');
 must(final?.protocol==='https:'&&final.hostname===new URL(official).hostname&&final.pathname===new URL(official).pathname,'same_selected_official_product_path');
 must(raw?.length>0&&raw.length===r.html_bytes&&sha(raw)===r.html_sha256,'raw_html_bytes_and_sha256');
@@ -44,13 +44,13 @@ must(/honey/i.test(String(f.process||'')),'selected_process_honey');
 must(['caturra','bourbon','catuai'].every(x=>String(f.variety||'').toLowerCase().includes(x)),'all_three_selected_varieties');
 must(/1,?500/.test(String(f.elevation_m||''))&&/1,?900/.test(String(f.elevation_m||'')),'selected_altitude_range');
 must(!f.decaffeination_method&&!f.roast_level,'do_not_invent_decaf_or_unpublished_roast');
-must(!f.release_label||!/\\b2021\\b/.test(f.release_label),'mill_establishment_year_not_selected_harvest');
+must(!f.release_label||!/\b2021\b/.test(f.release_label),'mill_establishment_year_not_selected_harvest');
 must(!/other coffee|different farm|joyabaj wet mill|fecc?eg/i.test(String(f.producer||'')),'do_not_name_wet_mill_or_federation_as_grower');
 must((r.conflicts||[]).length===0&&!(r.seo_fallback_fields||[]).includes('tasting_notes'),'no_unresolved_selected_note_conflicts_or_seo_notes');
 const out={passed:failures.length===0,failures,source_sha:process.env.DIC_R294_EVENT_SHA,
  checkout_sha:process.env.DIC_R294_CHECKOUT_SHA,manual_certified:0,production_operations:0,
  records:[{number:537,final_url:r.final_url,html_bytes:r.html_bytes,html_sha256:r.html_sha256,
   selected_h1:headings,current_fields:f,conflicts:r.conflicts||[],seo_fallback_fields:r.seo_fallback_fields||[]}]};
-writeFileSync(join(dir,'r294-afterproof.json'),JSON.stringify(out,null,2)+'\\n');
+writeFileSync(join(dir,'r294-afterproof.json'),JSON.stringify(out,null,2)+'\n');
 console.log('[DIC33 R294 AFTERPROOF] '+JSON.stringify(out));
 if(failures.length)process.exitCode=1;
