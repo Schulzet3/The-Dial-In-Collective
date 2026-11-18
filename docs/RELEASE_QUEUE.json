@@ -16445,6 +16445,29 @@
       ],
       "notes": "Preserve exact canonical auto-match, no automatic alias link, original immutable migrations, pending/member history, RLS and member admission. New scope TESTING only.\nR335b: PR #3273 nonforce merged at 7795d5a356e2afc27420e3fb86d7eae3316c13dc; five source-bound PR-head and exact merged-push workflows SUCCESS; migration/test/runner blobs verified; production unchanged; standalone R335b receipt docs/audits/issue509-r335b-alias-merge-ci-20261118.json. TESTING pending release isolation/#96 hosted acceptance.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-retire-internal-hide-shot",
+      "issue": 509,
+      "pr": null,
+      "title": "Remove obsolete internal Hide Shot branch while retaining active mutations and history",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261118164500_dic_remove_legacy_private_hide_shot_handler.sql"
+      ],
+      "owner_source": "Issue #509 active autonomous development cleanup; DIC_PREFLIGHT_VERIFIED development_sha=7a3c82c9064da6052145f311b41a2ae69fc85aac preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Live complete 10881-character private.mutate definition MD5 d1050c2ee3b2896c6fbd8b90bdba9052 directly semantically reviewed; public wrapper already blocks hide_shot; private function itself remains active through mutate_workspace.",
+        "Rollback-only dic_ci PostgreSQL17 synthetic regression for internal retired action, unchanged public guard, other mutation list, no shots/receipt changes; exact hosted CI pending."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "PR-head isolated PG17 SQL/JWT, Node22 and governance CI pending; do not infer PASS from patch.",
+        "Release source isolation/#96 hosted member acceptance UNVERIFIED. No production changes or automatic publish."
+      ],
+      "notes": "Do not drop private.mutate or rewrite historical migrations, existing receipts, hidden records, member or Community data. Production read-only; no active incident established.",
+      "production_deployed": false
     }
   ],
   "history": [

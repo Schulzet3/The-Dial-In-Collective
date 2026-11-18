@@ -23926,5 +23926,28 @@
     "provider_writes": 0,
     "baseline": "IN_PROGRESS",
     "next": "changed/new distinct provider object or independent member-flow repro"
+  },
+  "provider_legacy_private_hide_action_run339": {
+    "run": "R339",
+    "receipt_path": "docs/audits/issue509-r339-legacy-private-hide-action-20261118.json",
+    "preflight_development_sha": "7a3c82c9064da6052145f311b41a2ae69fc85aac",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "provider_project": "azviqqejypsefzilgonr",
+    "full_live_definition_characters": 10881,
+    "definition_md5": "d1050c2ee3b2896c6fbd8b90bdba9052",
+    "retired_action": "hide_shot",
+    "active_core_function_retained": true,
+    "legacy_handler_chars": 630,
+    "verified_public_boundary": "public.dic_apply_client_change rejects before any mutation",
+    "source_changes": [
+      "supabase/migrations/20261118164500_dic_remove_legacy_private_hide_shot_handler.sql",
+      "supabase/tests/legacy_private_hide_shot_retirement.sql",
+      "scripts/audit/isolated-sql-regression.sh"
+    ],
+    "source_tests": "PENDING",
+    "first_time_provider_word_credit": 0,
+    "baseline": "IN_PROGRESS",
+    "provider_writes": 0,
+    "next": "Exact-source PR PostgreSQL17/Node22/governance before merge; resume changed/unreviewed provider object; no publication"
   }
 }
