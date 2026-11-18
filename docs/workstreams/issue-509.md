@@ -745,3 +745,10 @@ Staged a narrow **GitHub development-source-only** additive replacement `supabas
 DIC_PREFLIGHT_VERIFIED development_sha=9f7b9787dddcdef52143045023862f3cbb1bd1f7 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
 Before any source-bound CI acceptance, independently caught an ambiguous PL/pgSQL fixture variable: `shot_id=shot_id` could resolve to both test local and `private.contribution_links.shot_id` and incorrectly fail PostgreSQL compilation. The **test-only** same-commit correction renames the local `fixture_shot_id` and qualifies `link.shot_id=fixture_shot_id` in `supabase/tests/community_outlier_null_revision.sql`. No migration, application function, production, permission or behavioral change. Recheck CI at this NEW PR head; older pending runs are not evidence. Same-commit mandatory preflight receipt above. R341 live bug and release TESTING status unchanged.
+
+
+## November 18, 2026 UTC — Issue #509 R341b queue intake CI repair [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=9f7b9787dddcdef52143045023862f3cbb1bd1f7 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+Read back exact PR #3295 latest head `fd48065ca1b027e0f0425a040e1c041fcd4914d5`; approval/continuity run [44369193184](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44369193184) **FAILED** due mandatory release queue intake: new additive migration was untracked in `docs/RELEASE_QUEUE.json`. No source correctness failure established from that job. Added `DIC-Q-509-outlier-null-revision-guard` with **TESTING**, exact scope migration, issue/PR, CI and hosted acceptance blockers, no READY/DEPLOYED claim. This is documentation queue tracking and journal only; no app/test/CI changes to the previously source-bound R341/R341a commits, no Supabase/prod release/write or billing/backup/schedule change. Next verify **new exact PR head** CI; prior failed/overlapped jobs are not PASS. Baseline IN_PROGRESS.

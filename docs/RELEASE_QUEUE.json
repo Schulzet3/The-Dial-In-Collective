@@ -16490,6 +16490,29 @@
       ],
       "notes": "Development-only immutable migration adds distinct-element validation to optional shot recommendation_context; preserves prior JSON-null guard, two allowed controls and original shot history; no known member incident, no production effects.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-outlier-null-revision-guard",
+      "issue": 509,
+      "pr": 3295,
+      "title": "Reject NULL expected revision during held Community outlier confirmation",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261118181500_dic_community_outlier_null_revision_guard.sql"
+      ],
+      "owner_source": "Issue #509 owner-authorized development-only R341; DIC_PREFLIGHT_VERIFIED development_sha=9f7b9787dddcdef52143045023862f3cbb1bd1f7 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "R341: complete live source 1432 characters MD5 0657114255a0375b7f3fc502f780aa54 and read-only SQL NULL/current/stale truth table identify bypass; no actual member incident verified.",
+        "Synthetic rollback-only dic_ci PostgreSQL17 six-member held outlier fixture staged; latest PR head full CI pending, previous approval HOLD was missing mandatory queue intake row."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Latest PR-head exact-source PG17, Node22, browser, Python, approval CI are pending: no PASS/READY.",
+        "Isolated approved release candidate and genuine #96 hosted signed-in acceptance unverified; NEW owner Publish required for production migration."
+      ],
+      "notes": "Only null-unsafe revision predicate changed to IS DISTINCT FROM in complete current function. Preserve admitted-owner checks, Community eligibility/fingerprint and replay rules, all migration history, member data. No live Supabase writes or deployment.",
+      "production_deployed": false
     }
   ],
   "history": [
