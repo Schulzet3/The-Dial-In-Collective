@@ -1,0 +1,667 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch": "V11F7-C50",
+  "preflight": {
+    "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "independent_blob_content_equal": true
+  },
+  "source": {
+    "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+    "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+    "blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+    "first": 854,
+    "last": 883,
+    "live_offset": 6
+  },
+  "coverage": {
+    "new": 30,
+    "prior_end": 853,
+    "immutable_literal_pass": 30,
+    "live_literal_pass": 30,
+    "legacy_provisional_unchanged": "5451/6462",
+    "strict_s2_143_unchanged": "7635/9318",
+    "pinned_total": 57913,
+    "complete": false
+  },
+  "tests": {
+    "literal": "PASS",
+    "runtime": "NOT_RUN_DOCS_ONLY",
+    "remote_zip_negative_privacy": "NOT_RUN",
+    "provider": "NOT_APPLICABLE"
+  },
+  "per_line": [
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 854,
+      "literal": "            self.assertEqual(parse_report(marker + b'{\"public\":true}</script>'), {\"public\": True})",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Positive HTML audit report parse extracts unique JSON true payload",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 860,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 855,
+      "literal": "            with self.assertRaises(ValueError):",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Opens ValueError assertion for malformed duplicate marker",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 861,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 856,
+      "literal": "                parse_report(marker + b'{}</script>' + marker + b'{}</script>')",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Rejects duplicate audit-data script markers by unique-marker guard",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 862,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 857,
+      "literal": "",
+      "inspection_class": "trivial_read",
+      "behavior": "Blank separator between tests, inspected",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 863,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 858,
+      "literal": "        def test_complete_case_hashes_and_deltas_keep_calls_facts_and_types(self):",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Names hash/delta/type regression method",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 864,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 859,
+      "literal": "            old = {\"one\": {\"case_id\": \"one\", \"elapsed_ms\": 1, \"output\": {\"ok\": True, \"fields\": {\"origin\": \"Brazil\"}},",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Original case fixture has elapsed_ms and Brazil origin",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 865,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 860,
+      "literal": "                           \"calls\": [{\"limit\": 900000}], \"fixture_calls\": [\"user\"]}}",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Fixture includes nested calls limit 900000, not just output",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 866,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 861,
+      "literal": "            after = decode_json(json.dumps(old).encode())",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Roundtrip strict JSON decode builds after snapshot",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 867,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 862,
+      "literal": "            after[\"one\"][\"elapsed_ms\"] = 20",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Changes only elapsed_ms, intentionally nonsemantic",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 868,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 863,
+      "literal": "            self.assertEqual(complete_changes(old, after), [])",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "complete_changes ignores elapsed_ms-only differences",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 869,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 864,
+      "literal": "            self.assertEqual(inventory_hash(old), inventory_hash(after))",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "inventory_hash likewise stable when only timing changes",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 870,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 865,
+      "literal": "            after[\"one\"][\"calls\"][0][\"limit\"] = 2000000",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Mutates calls.limit 900000 to 2000000",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 871,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 866,
+      "literal": "            self.assertEqual(complete_changes(old, after)[0][\"changed_case_keys\"], [\"calls\"])",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Calls metadata change must be reported as changed_case_keys calls",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 872,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 867,
+      "literal": "            self.assertNotEqual(inventory_hash(old), inventory_hash(after))",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Inventory fingerprint must change on changed calls",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 873,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 868,
+      "literal": "            self.assertFalse(same(True, 1))",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "same(True,1) false prevents boolean-numeric conflation",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 874,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 869,
+      "literal": "            self.assertNotEqual(stable_hash(True), stable_hash(1))",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "stable_hash(True) distinct from stable_hash(1)",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 875,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 870,
+      "literal": "",
+      "inspection_class": "trivial_read",
+      "behavior": "Blank separator between test methods",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 876,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 871,
+      "literal": "        def test_exact_changed_values_distinguish_absence_and_preserve_order(self):",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Names exact leaf differences, absent key and order regression",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 877,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 872,
+      "literal": "            result = value_differences({\"fields\": {\"origin\": \"Brazil\", \"producer\": None}},",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Before snapshot origin Brazil and producer present null",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 878,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 873,
+      "literal": "                                      {\"fields\": {\"origin\": \"Minas Gerais, Brazil\"}})",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "After snapshot origin Minas Gerais Brazil and producer absent",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 879,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 874,
+      "literal": "            self.assertEqual(result[0][\"path\"], \"/fields/origin\")",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "First JSON-pointer path points /fields/origin",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 880,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 875,
+      "literal": "            self.assertEqual(result[0][\"before\"], \"Brazil\")",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Before origin value Brazil retained in delta",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 881,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 876,
+      "literal": "            self.assertEqual(result[0][\"after\"], \"Minas Gerais, Brazil\")",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "After origin value Minas Gerais Brazil retained in delta",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 882,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 877,
+      "literal": "            self.assertFalse(result[1][\"after_present\"])",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Second delta after_present false distinguishes deletion from null",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 883,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 878,
+      "literal": "            facts, complete = fact_differences([{\"value\": \"old\"}], [{\"value\": \"new\"}, {\"value\": \"second\"}])",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Fact list changes from one old item to ordered two new",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 884,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 879,
+      "literal": "            self.assertTrue(complete)",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Complete=true asserts simple source-fact projections complete",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 885,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 880,
+      "literal": "            self.assertEqual(facts[0][\"before_span\"], [0, 1])",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "Before span [0,1] covers exactly one fact",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 886,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 881,
+      "literal": "            self.assertEqual(facts[0][\"after_span\"], [0, 2])",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "After span [0,2] covers exactly two new facts",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 887,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 882,
+      "literal": "            self.assertEqual(facts[0][\"after\"][0][\"fact\"][\"value\"], \"new\")",
+      "inspection_class": "semantic_direct_read",
+      "behavior": "First projected after fact value remains new",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 888,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    },
+    {
+      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "source_blob_sha": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "line": 883,
+      "literal": "",
+      "inspection_class": "trivial_read",
+      "behavior": "Blank separator at method end, inspected",
+      "quality": "Traced pinned parse_report 296-302, complete_changes 305-320, inventory_hash 100-101, same 104-113, value_differences 382-397, fact_differences 420-434; test source inspected, not run",
+      "security_privacy_performance": "Synthetic fixtures only; no real member/Auth/SQL/provider request, privacy negative or performance benchmark",
+      "risk": "Source assertion is not runtime test success",
+      "dead_obsolete_duplicate": "Live test counterpart present; no demonstrated dead code, redundant test or safe deletion",
+      "counterpart": {
+        "development_sha": "fbde1111171e9ba4320719f4d7183c0b2293db86",
+        "blob_sha": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+        "line": 889,
+        "literal_match": true
+      },
+      "testability": "Focused Python tests and remote hostile ZIP/privacy checks remain unexecuted in docs-only batch",
+      "remediation": "No current reproduced defect; no code/test edits",
+      "locked_fit": "Preserve original603 source-bound capture fingerprints, #96 Auth/privacy and original approved data"
+    }
+  ]
+}
