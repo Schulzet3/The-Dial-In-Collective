@@ -10,24 +10,35 @@
     {
       "id": "DIC-Q-455-r343-shot-history-empty-state",
       "issue": 455,
-      "pr": null,
+      "pr": 3236,
       "title": "Explain empty Shot History instead of presenting a blank disclosure",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "6c985ed1f8027d3bb91017a6eaaccc31030b448f",
       "scope_paths": [
         "site/cloud/main.js",
         "site/cloud/shot_card.js"
       ],
       "owner_source": "Issue #455 Option B SAFE additive UX only. DIC_PREFLIGHT_VERIFIED development_sha=1ce0dfcd5d2e98e32d88f5b21c64fe2a0328e3e1 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "tests": [
-        "Direct source reproduction: when shots.length===0, History previously rendered only a count and zero child content; first-shot CTA was elsewhere on the coffee card. No member incident claimed.",
-        "Focused three Node22 synthetic checks authored for truthful no-shot message, conditional coffee-card integration, and unchanged five-rated private populated History. Actual CI NOT RUN at source authoring."
+        "Source reproduction: Shot History (0) had no child message; adjacent Log First Shot CTA intact. No reported member incident.",
+        "Three new R343 synthetic Node22 cases cover empty message, actual coffee-card fallback only when zero cards, and unchanged populated five-rated private History. Tested source test blob f3e77b97342e39ea33085bb01dd2eca2aa2ac597.",
+        "Exact PR head Node22/lint 44246041795 SUCCESS, Chromium/mobile/offline/a11y 44246041758 SUCCESS, SQL 44246041839, security 44246041877, governance 44246041949 SUCCESS; frozen603 SKIPPED, not PASS; numeric Node22 count not independently retrieved.",
+        "Nonforce [skip netlify] PR #3236 squash merge 6c985ed1f8027d3bb91017a6eaaccc31030b448f; all SIX source/test/queue/ledger/same-commit journal Git blobs independently match tested head and actual merge.",
+        "Exact merged-source Node22/lint 44246507252 SUCCESS, browser/mobile/offline/a11y 44246507251 SUCCESS, approval 44246507254 SUCCESS. Unrelated #33 original241 official HTTPS/parser run 44246507214 FAILED under #33 scope; not counted as R343 test failure or PASS.",
+        "No live member/actual cup, physical-device, production/Netlify or original603 exhaustive audit verification."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact source-bound Node22/browser/mobile/offline/accessibility, security, SQL and governance evidence must be checked before READY."
+      "ci_runs": [
+        44246041795,
+        44246041758,
+        44246041839,
+        44246041877,
+        44246041949,
+        44246507252,
+        44246507251,
+        44246507254
       ],
-      "notes": "Additive no-shot copy only in private coffee History. Preserve first-shot CTA/selection, all five ratings, measured shot/notes, feed/style/grinder, privacy/offline and one-control recommendation. No policy change. Not deployed.",
+      "blockers": [],
+      "notes": "READY DEVELOPMENT ONLY after exact source-bound PR-head and merged Node22/lint/browser/mobile/offline/a11y/SQL/security/governance verified. Additive zero-visible-shot message only; all five original ratings, actual measurements/notes, recipe styles/slow feed/grinder versions, privacy/RLS/Community and offline unaffected. Unrelated #33 original241 source failure separately owned. NOT DEPLOYED.",
       "production_deployed": false
     },
     {
