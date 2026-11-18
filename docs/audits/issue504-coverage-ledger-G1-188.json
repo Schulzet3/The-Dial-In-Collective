@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "issue": 504,
+  "kind": "append_only_independent_coverage_shard",
+  "batch": "G1-188",
+  "date_utc": "2026-11-11",
+  "rationale": "G1-187 PR #2112 remains open and owns the central ledger/journal. Avoid overwriting concurrent work; reconcile this shard exactly once only after prior PR integration. Historical originals are preserved here, not counted twice.",
+  "source_development_sha": "a92c5050c1185cb981c8ab3673fce02dfbdd4041",
+  "source_main_sha": "f2673889d71b3f440bfd0fcfe5e8e294574509bb",
+  "source_release_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
+  "previous_merged_ledger_blob": "454ed62e1a891adc8969786d1694943b64acda38",
+  "prior_G1187_pr": 2112,
+  "prior_G1187_receipt_blob": "2fc3f8b7d21f7b6b7fc7edfbe1d1eb7eda601d58",
+  "current_receipt_blob": "6eb3cf74cc3b3ba976f2eee467d5851ac2ae15a8",
+  "direct_PR_numbers": [
+    1063,
+    1064,
+    1065,
+    1066,
+    1067,
+    1068,
+    1069,
+    1070
+  ],
+  "direct_original_PR_title_body_objects": 8,
+  "direct_whitespace_words": 987,
+  "direct_original_utf8_bytes": 8665,
+  "nonPR_issue_1062": "ISSUE_LANE_UNREVIEWED",
+  "delegated_267_source_lines_independently_matched": [
+    28,
+    30
+  ],
+  "delegated_267_new_credit": 0,
+  "expected_after_merge": {
+    "batches": 188,
+    "file_lines": 7919,
+    "file_words": 60754,
+    "github_objects": 1244,
+    "github_words": 294197
+  },
+  "credit_status": "CONDITIONAL_PENDING_G1187_AND_G1188_INTEGRATION",
+  "original_corrections_preserved": "G1-117 -15/-4012; original RELEASE_QUEUE lines1-4736/5377",
+  "next_original_PR": 1071,
+  "next_title_word": 1,
+  "status": "OPEN_IN_PROGRESS_TESTING"
+}
