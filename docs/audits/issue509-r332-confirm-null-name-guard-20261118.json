@@ -1,0 +1,55 @@
+{
+  "issue": 509,
+  "run": "R332",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "1f76f17ebef10c7caad69616fcbecd370a11d96a",
+    "blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "git_blob_verified": true
+  },
+  "live_provider": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.11",
+    "production_read_only": true,
+    "origin": "R331 full source and R332 constant-only SQL",
+    "identity": "private.dic_confirm_coffee_existing(mid uuid, p jsonb)",
+    "definition_md5": "0fcc44bb8a05f46e87694d3474eb7c23",
+    "source_chars": 3239,
+    "source_review_range": [
+      1,
+      3239
+    ],
+    "prior_full_source_receipt": "docs/audits/issue509-r331-coffee-alias-matcher-consumer-semantic-20261118.json",
+    "new_first_time_word_credit": 0
+  },
+  "reproducible_findings": [
+    {
+      "id": "R332-A",
+      "kind": "NULL_THREE_VALUED_IDENTITY_GUARD_BYPASS",
+      "synthetic_input": "!!!",
+      "normalized_name": null,
+      "old_condition_result": null,
+      "corrected_condition_result": false,
+      "live_member_corruption_confirmed": false
+    }
+  ],
+  "source_candidate": {
+    "migration": "supabase/migrations/20261118113500_dic_confirm_coffee_null_name_guard.sql",
+    "regression": "supabase/tests/coffee_confirm_null_name_guard.sql",
+    "runner": "scripts/audit/isolated-sql-regression.sh",
+    "journal": "docs/workstreams/issue-509.md",
+    "state": "TESTING_CI_PENDING",
+    "sql_isolated_local": "UNAVAILABLE",
+    "nonregression": [
+      "same name",
+      "roaster boundary",
+      "release and origin",
+      "pending and library privacy",
+      "shots preserved",
+      "no production changes"
+    ]
+  },
+  "pending": "Host isolated PG17 + privacy/approval exact-source PR tests and readback; if passing safe nonforce merge; do not mark READY from PR CI; follow R331 alias suggestion-only analysis",
+  "production_changes": 0,
+  "baseline": "IN_PROGRESS"
+}

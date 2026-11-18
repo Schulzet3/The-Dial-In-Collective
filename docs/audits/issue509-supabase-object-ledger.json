@@ -23686,5 +23686,36 @@
     "production_writes": 0,
     "baseline": "IN_PROGRESS",
     "next": "Isolated PG17 admitted synthetic alias fixture; preserve explicit confirmation and #33/#96 ownership; don't drop live table."
+  },
+  "provider_confirm_name_null_guard_run332": {
+    "run": "R332",
+    "preflight_development_sha": "1f76f17ebef10c7caad69616fcbecd370a11d96a",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "provider_synthetic_null_guard_reproduction": true,
+    "live_fn_md5": "0fcc44bb8a05f46e87694d3474eb7c23",
+    "source_chars_reexamined": 3239,
+    "first_time_live_definition_words": 0,
+    "developer_fix_candidate": true,
+    "isolated_pg17_sql_ci": "PENDING",
+    "publication": "NOT_AUTHORIZED",
+    "receipt_path": "docs/audits/issue509-r332-confirm-null-name-guard-20261118.json",
+    "baseline": "IN_PROGRESS",
+    "next": "Verify new regression on isolated PG17 source-bound PR; fix failures before integration; preserve alias source classification"
+  },
+  "provider_confirm_name_null_guard_run332a": {
+    "run": "R332a",
+    "parent_head": "e6634db4217ae446555d321719ada1fa0ae23ea1",
+    "development_preflight_sha": "1f76f17ebef10c7caad69616fcbecd370a11d96a",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prior_sql_run": 44289071815,
+    "prior_sql_result": "FAILED_SYNTHETIC_DUPLICATE_BETA_MEMBER_TRIGGER",
+    "prior_approval_run": 44289071927,
+    "prior_approval_result": "FAILED_MISSING_TRACKED_TESTING_ITEM",
+    "repaired_fixture": "ON_CONFLICT_OWNER_ID",
+    "queue_item": "DIC-Q-509-confirm-coffee-null-name",
+    "state": "TESTING_PENDING_NEW_EXACT_SOURCE_CI",
+    "no_provider_writes": true,
+    "first_time_provider_word_credit": 0,
+    "next": "PR #3258 exact-source rerun, repair failures, then nonforce integration"
   }
 }

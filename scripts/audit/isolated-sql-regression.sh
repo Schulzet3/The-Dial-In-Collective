@@ -70,4 +70,10 @@ if [[ -f supabase/migrations/20261116210000_dic_import_additional_credential_key
 else
   echo "NOT_APPLICABLE: #509 import_additional_credential_keys; migration excluded from source"
 fi
+if [[ -f supabase/migrations/20261118113500_dic_confirm_coffee_null_name_guard.sql ]]; then
+  echo "Running coffee_confirm_null_name_guard"
+  run_sql supabase/tests/coffee_confirm_null_name_guard.sql
+else
+  echo "NOT_APPLICABLE: #509 coffee_confirm_null_name_guard; migration excluded from tested source"
+fi
 echo 'PASS: all checked-in migrations and SQL suites, including staged import/setup, cross-account and source-worker authorization and first-style owner isolation regressions; no hosted connection.'
