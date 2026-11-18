@@ -52,7 +52,7 @@ test('one REST anchor plus two live GraphQL queries bind exact runs and check jo
  assert.equal(checkMap.get(SHA).length,5);
  assert.equal(calls.length,3,'batch must avoid per-record Actions REST fanout');
  assert.equal(calls.filter(c=>c.method==='GET').length,1);
- const item={id:'DIC-Q-test',state:'READY',merged_source_sha:'a'.repeat(40),
+ const item={id:'DIC-Q-1938-test',state:'READY',merged_source_sha:'a'.repeat(40),
   scope_paths:['site/admin/push.js'],ci_runs:[11,12],tests:['tests/push.test.mjs'],
   issue:267,title:'test',owner_source:'owner',blockers:[]};
  const queue={schema_version:1,authority:'OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022',

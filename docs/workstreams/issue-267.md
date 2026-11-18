@@ -1,3 +1,10 @@
+## November 18, 2026 UTC — #267 exact Node22 fixture schema correction, FAIL-CLOSED [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=494e7ef84f1b447abdf4059eea02ee8562e2bdec preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- **Reproduction:** PR #3279 exact run 44332243915 Node22 5,542 tests: 5,535 PASS, 1 FAIL, 6 SKIP. The sole failure was a newly authored synthetic fixture ID DIC-Q-test rejected by the unchanged mandatory release-queue ID schema; live GraphQL approval 44332243924 SUCCESS, actual 34/34 source-certified queue items. These distinct statuses are not interchangeable.
+- **Correction:** Replace only synthetic test ID with existing valid DIC-Q-1938-test form. No acceptance logic, READY/queue state, provider/data, application, SQL/Auth, production or publication change. Focused/full tests and actual PR head CI PENDING; never count prior failed head as PASS.
+- **Boundary:** #267 remains OPEN; #3276 still unmerged; original frozen/pinned coverage unchanged. [skip netlify]
+
 ## November 18, 2026 UTC — #267 GraphQL actual-schema correction, no PASS claimed [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=14f7a639ea5974d19bd10e75675f5dbf42ad0037 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 
