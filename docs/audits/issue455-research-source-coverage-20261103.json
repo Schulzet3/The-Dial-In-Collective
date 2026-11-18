@@ -4135,6 +4135,29 @@
       "evidence_grade": "DIRECT_SOURCE_CONTROL_FLOW_NO_MEMBER_REPORT_OR_FIELD_EXPERIMENT",
       "source_access": "IMMUTABLE_GITHUB_BLOBS",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "LIT-2020-APILETTI-PASTOR-ESPRESSO-RULES",
+      "type": "peer_reviewed_original_machine_sensor_association_rule_method_not_human_sensory_or_app_taste_efficacy",
+      "title": "Correlating Espresso Quality with Coffee-Machine Parameters by Means of Association Rule Mining",
+      "authors": "Daniele Apiletti; Eliana Pastor",
+      "journal": "Electronics 2020, 9(1), 100",
+      "published": "2020-01-04",
+      "doi": "10.3390/electronics9010100",
+      "url": "https://www.mdpi.com/2079-9292/9/1/100",
+      "source_access": "DIRECT_PUBLISHER_FULL_HTML_SECTIONS_3_4_5_1_TO_5_4_6_1_6_2_7_READ_IN_R348_AND_REOPENED_R349",
+      "original_source_html_sha256": null,
+      "original_pdf_sha256": null,
+      "raw_sensor_records": "NOT_ACCESSIBLE",
+      "review_status": "DIRECT_ORIGINAL_PRIMARY_METHODS_RESULTS_CONFIDENCE_DEFINITION_CONFOUND_DISCUSSION_READ_WITH_CAUSAL_AND_PERSONAL_TASTE_TRANSFER_LIMITS",
+      "evidence_grade": "HIGH_FOR_REPORTED_MACHINE_EXPERIMENTAL_DESIGN_AND_ASSOCIATION_RULES_NONE_FOR_PROSPECTIVE_PERSONAL_FIVE_RATING_CUP_QUALITY",
+      "claims_verified_externally": "One machine, same blend, 27 grind/dose/pressure configurations, two fixed different group heads for washing versus no washing, 20 repetitions per configuration/head, 1080 machine extractions and 1027 retained. Mechanical volume/time/flow threshold labels, not independent human five-rating espresso outcomes; conditional transaction confidence is not next-shot success probability.",
+      "source_locators": "Original §3, §4 Eq(2), §5.1-5.4, §6.1.1, §6.2, §7",
+      "crosswalk_original_issue": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455#issuecomment-6980445875",
+      "reviewed_at_development_sha": "367266c2b42b42c9daff468ec21aa34f918fe78c",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "app_engine_blob": "90c55379be60a252a2026e01bb3d786b66c49aef",
+      "github267_literal_review_credit": 0
     }
   ],
   "evidence_checks": [
@@ -11834,6 +11857,63 @@
       "source_location": "printed 4687-4688; PDF pages 11-12; Tables 10-11",
       "claim": "Original Table10 weighted S/N composite engineering totals -17.72 measured vs -17.94 predicted differ 0.22 = approximately 1.2263% of the predicted magnitude. This is about grinder size/uniformity/heat/operating time/output, NOT 0.22% member cup improvement or next-shot success probability. Table11 reports 20.30 s measured grind duration despite Table9 nominal 30 s, an additional study-interpretation ambiguity.",
       "result": "ARITHMETIC_BOUNDED_TO_ENGINEERING_NOT_CUP_TASTE"
+    },
+    {
+      "id": "R455-EV-R347-LIMONTITLA-PDF-EDITION",
+      "source": "PDF-SLOW-FEED-LIBRARY-20261101; LAB-KAFFEEMACHER-2025-SLOWFEED; LIT-2024-ESPRESSO-FINES-SENSORY",
+      "date": "2026-11-18",
+      "source_location": "Library PDF v1 SHA256 a068e5e3ae4ab30dda58e7f0f9e24bca16bd570fb67061c3ca4b00cfd28ac28b pp1-2 and References pp9-10; Kaffeemacher Table1; Smrke 2024 original methods",
+      "source_url": "https://kaffeemacher.de/en/blogs/kaffeewissen/slow-feeding",
+      "source_review_issue": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455#issuecomment-6979037490",
+      "claim": "For Limontitla on the reported DF64 same-setting manual feed comparison x50 changed 229→255µm and <100µm fines 33.4→28.4%, alongside existing Apas checks. The Library PDF's references [3] and [4] name the SAME Smrke 2024 study, not two independent replications. The original archive-embedded slow-feed PDF has different recorded bytes/hash and was not re-fetched; Smrke tested added-fines permeability, not slow-feeding, and one-taster three-attribute results are not DIC five-scale efficacy.",
+      "grade": "FIRST_PARTY_LAB_TABLE_DESCRIPTIVE_NON_PEER_REVIEWED_AND_BOUNDED_LIBRARY_PDF_CHECK; DISTINCT_ARTIFACT_NOT_RAW_SENSOR_REPLICATION; NONE_FOR_PERSONAL_CUP_EFFICACY",
+      "result": "RECONCILED_DISTINCT_LIMONTITLA_AND_BIBLIOGRAPHY_LIMIT_WITHOUT_DUPLICATING_EXISTING_APAS_OR_FLOW_CHECKS",
+      "owner_approval": false,
+      "implementation_status": "RESEARCH_ONLY_NO_RULE_RUNTIME_OR_TELEMETRY_CHANGE",
+      "exact_development_sha": "367266c2b42b42c9daff468ec21aa34f918fe78c",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-R348-PROXY-LABELS",
+      "source": "LIT-2020-APILETTI-PASTOR-ESPRESSO-RULES",
+      "date": "2026-11-18",
+      "source_url": "https://www.mdpi.com/2079-9292/9/1/100",
+      "source_location": "Original §3, §5.1-5.3 and Tables 1-4",
+      "claim": "27 3×3×3 grind/dose/pressure configurations × 2 fixed group-head washing assignments × 20 repetitions = 1080 machine extractions, filtered to 1027 records; labels are machine volume 20–30 mL, time 20–30 s and derived flow 0.67–1.50 mL/s (with alternative in-study thresholds), NOT taste-panel observations, personalized DIC five ratings or universal espresso targets.",
+      "grade": "DIRECT_FIRST_PARTY_ORIGINAL_METHODS_HIGH_FOR_DESIGN_NO_HUMAN_TASTE_OR_RAW_SENSOR_REPLICATION",
+      "result": "REPORTING_LABEL_PROXY_NOT_PERSONAL_SENSORY_EFFICACY",
+      "owner_approval": false,
+      "implementation_status": "RESEARCH_ONLY_NO_NUMERIC_POLICY_CHANGE",
+      "exact_development_sha": "367266c2b42b42c9daff468ec21aa34f918fe78c",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-R348-ASSOCIATION-CONFIDENCE",
+      "source": "LIT-2020-APILETTI-PASTOR-ESPRESSO-RULES",
+      "date": "2026-11-18",
+      "source_url": "https://www.mdpi.com/2079-9292/9/1/100",
+      "source_location": "Original §4 Equation(2), §6.1.1 percolation rules",
+      "claim": "Association-rule confidence denotes P(consequent | antecedent) on filtered transaction records; a 100%-confidence rule about high percolation time is neither a 100% good-tasting cup probability nor a calibrated chance of improving a member's next five ratings. The fixed-condition non-random cohort cannot establish causal personalization.",
+      "grade": "DIRECT_PRIMARY_FORMAL_DEFINITION_HIGH_FOR_IN_STUDY_RULES_NONE_FOR_CALIBRATED_TASTE_OUTCOME_PROBABILITY",
+      "result": "NO_APP_CONFIDENCE_PERCENTAGE_FROM_IN_STUDY_ASSOCIATIONS",
+      "owner_approval": false,
+      "implementation_status": "RESEARCH_ONLY_HOLD_PRODUCT_CONFIDENCE_EXTENSION",
+      "exact_development_sha": "367266c2b42b42c9daff468ec21aa34f918fe78c",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-R348-HEAD-CLEANING-CONFOUND",
+      "source": "LIT-2020-APILETTI-PASTOR-ESPRESSO-RULES",
+      "date": "2026-11-18",
+      "source_url": "https://www.mdpi.com/2079-9292/9/1/100",
+      "source_location": "Original §3, §6.2, §7",
+      "claim": "One of two fixed group heads always receives purging and the other never receives it, with no documented random crossover or switching assignments. Head-specific effects and time/order may confound any alleged cleaning-policy causal difference; authors request multi-machine, blend, environmental and duration expansion.",
+      "grade": "DIRECT_PUBLISHER_DESIGN_HIGH_FOR_FIXED_ASSIGNMENT_LIMITED_FOR_CAUSAL_CLEANING_BENEFIT",
+      "result": "HEAD_CONFOUND_PREVENTS_UNIVERSAL_CLEANING_OR_CONFIDENCE_CLAIM",
+      "owner_approval": false,
+      "implementation_status": "RESEARCH_ONLY_NO_CLEANING_INTERVENTION",
+      "exact_development_sha": "367266c2b42b42c9daff468ec21aa34f918fe78c",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -12158,27 +12238,33 @@
       "run_id": "R455-345",
       "next": "Original Huang 2025 primary PDF Table1/7/8/9/10/11 inconsistency and engineering model arithmetic independently reviewed; three source-level checks, 197/594/263. Verify docs-only PR/CI and nonforce merge; leave numeric espresso policies, original S019 and Oct29 ZIP and #267 separate.",
       "owner_approval_now_required": false
+    },
+    {
+      "run_id": "R455-349",
+      "next": "Docs-only canonical reconciled R347/R348 after original article and prior evidence duplicate check. Complete exact PR-head CI, safe nonforce merge with [skip netlify] and exact merged readback; no app/quality claims, Oct29 pack/S019 still unavailable, #267 separate.",
+      "owner_approval_now_required": false
     }
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-344",
+    "run_id": "R455-349",
     "date": "2026-11-18",
-    "development_preflight_sha": "cb972e74dd6dac301604dc1d4df815b257c41636",
+    "development_preflight_sha": "367266c2b42b42c9daff468ec21aa34f918fe78c",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "prewrite_source_sha": "cb972e74dd6dac301604dc1d4df815b257c41636",
+    "prewrite_canonical_blob_sha": "d836056a25ee42481487d63fb299db50c275ec77",
+    "prewrite_journal_blob_sha": "0fa205d05d9dd92202f866a0db6fc49bf9e6f779",
     "source_counts": {
-      "sources": 197,
-      "evidence_checks": 591,
-      "proposals": 263
+      "sources": 198,
+      "evidence_checks": 598,
+      "proposals": 264
     },
-    "research_status": "DIRECT_SOURCE_VERIFIED_SAFE_SEARCH_EMPTY_STATE_PROPOSED_TESTING",
-    "runtime_changed": true,
+    "research_status": "R347_DUPLICATE_EVIDENCE_RECONCILED_AND_R348_PRIMARY_METHODS_CANONICALLY_ADDED_NO_APP_DEFECT_REPRODUCED",
+    "runtime_changed": false,
     "tests_run": false,
     "ci_not_yet_verified": true,
     "production_deployed": false,
     "github267_literal_review_credit": 0,
     "owner_approval_now_required": false,
-    "next": "Run exact-source PR CI and nonforce merge if successful, verify and reconcile queue READY development only."
+    "next": "Verify exact docs PR governance success, nonforce [skip netlify] merge/readback when safe; continue next distinct source or source-reproduced Log Shot UX issue; Oct29 ZIP/S019 unavailable."
   },
   "policy_decisions_resolved": [
     {
@@ -18507,6 +18593,40 @@
       "release_queue_status": "READY_NOT_DEPLOYED",
       "production_deployed": false,
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-PROP-R348-ASSOCIATION-RULES-NOT-PERSONAL-TASTE-PROBABILITY",
+      "severity": "P2_RESEARCH_INTEGRITY_IF_NUMERIC_CONFIDENCE_OR_MACHINE_THRESHOLDS_PROPOSED_NO_PRESENT_APP_DEFECT",
+      "source": [
+        "LIT-2020-APILETTI-PASTOR-ESPRESSO-RULES",
+        "LAB-KAFFEEMACHER-2025-SLOWFEED",
+        "PDF-SLOW-FEED-LIBRARY-20261101"
+      ],
+      "evidence": [
+        "R455-EV-R347-LIMONTITLA-PDF-EDITION",
+        "R455-EV-R348-PROXY-LABELS",
+        "R455-EV-R348-ASSOCIATION-CONFIDENCE",
+        "R455-EV-R348-HEAD-CLEANING-CONFOUND"
+      ],
+      "source_original_url": "https://www.mdpi.com/2079-9292/9/1/100",
+      "source_review_issue": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455#issuecomment-6980445875",
+      "finding": "Machine-sensor optimal labels and conditional association confidence do not measure human taste or causal next-shot improvement; fixed head cleaning is confounded. Existing slow-feed lab values also remain hardware/bean/setting-specific.",
+      "evidence_grade": "DIRECT_PRIMARY_LAB_METHODS_AND_FORMAL_DEFINITION; ZERO_DIC_CONSENTED_NEXT_SHOT_FIVE_RATING_OUTCOMES",
+      "user_benefit": "Avoid misleading percent confidence, universal grind/shot-time optima or false cleaning/feeding claims in the Log Shot → Rate → Recommendation explanation.",
+      "current_locked": "All five taste inputs, fully rated all-green success versus missing ratings, one truly controllable advice change, original measured shot/notes/private history, same-coffee/setup/style/grinder/calibration and Slow Feed distinctions, privacy/RLS and Community.",
+      "current_app": "site/lib/engine.js blob 90c55379be60a252a2026e01bb3d786b66c49aef: nextAdviceRaw/nextAdvice source ~803-867 uses five-input completion and one-control guidance; constants d3559dc1c9560c4d68fbcad1dc91e3a792a100a2, model baafc8fa64fa3e359d8e42094e41c5d72a3b22df, Community 2f4c8e2d473d767445369af5af810aa473722aec. No scientific calibration percentage sourced from this paper and no reproduced current defect.",
+      "proposed_change": "RESEARCH-ONLY: DO NOT import these numeric thresholds, association-rule percentages, head-cleaning correlations or Lab slow-feed correction into recommendation policy. Retain existing Locked logic. Prospective consented same-coffee/setup/style/calibration/feed single-control -> next-shot all-five outcome design exists in R334, not authorized for collection.",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "files": [
+        "docs/audits/issue455-research-source-coverage-20261103.json",
+        "docs/workstreams/issue-455.md"
+      ],
+      "test_plan": "Parse full canonical JSON, strict ID uniqueness and count checks; verify original Git blob/branch before docs update; applicable PR governance CI; no app tests/research efficacy trial as no source code changed.",
+      "implementation": "R349_RESEARCH_ONLY_CANONICAL_RECONCILIATION_NOT_APP_CHANGE",
+      "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY_NOT_READY_NOT_DEPLOYED",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "changeScope": {
@@ -18854,6 +18974,79 @@
       },
       "release": "RESEARCH_ONLY_NOT_READY_NOT_DEPLOYED",
       "github267_literal_review_credit": 0
+    },
+    {
+      "run_id": "R455-349",
+      "topic": "R347_LAB_SLOWFEED_AND_R348_APILETTI_PRIMARY_CANONICAL_DEDUP",
+      "preflight_development_sha": "367266c2b42b42c9daff468ec21aa34f918fe78c",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "original_source_issue_comments": [
+        "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455#issuecomment-6979037490",
+        "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455#issuecomment-6980445875"
+      ],
+      "r347": {
+        "status": "THREE_SCOPED_IDS_CROSSWALKED_TO_PRIOR_CHECKS_WITH_ONE_NEW_DISTINCT_LIMONTITLA_AND_BIBLIOGRAPHY_CHECK",
+        "source_ids_already_existing": [
+          "PDF-SLOW-FEED-LIBRARY-20261101",
+          "LAB-KAFFEEMACHER-2025-SLOWFEED",
+          "LIT-2024-ESPRESSO-FINES-SENSORY"
+        ],
+        "source_additions": 0,
+        "checks_added": [
+          "R455-EV-R347-LIMONTITLA-PDF-EDITION"
+        ],
+        "crosswalk": [
+          {
+            "scoped": "R455-EV-R347-SLOW-PARTICLES",
+            "canonical": [
+              "R455-EV-CIT-A",
+              "R455-EV-CIT-045-B",
+              "R455-EV-R347-LIMONTITLA-PDF-EDITION"
+            ],
+            "basis": "Apas exact 250→299 and 33→23.9 already present; Limontitla exact 229→255,33.4→28.4 now separately recorded"
+          },
+          {
+            "scoped": "R455-EV-R347-SLOW-TIME",
+            "canonical": [
+              "R455-EV-CIT-045-B"
+            ],
+            "basis": "Apas n5 26→10→24s and GS21→10.5, subject to same study conditions"
+          },
+          {
+            "scoped": "R455-EV-R347-FINES-MECHANISM",
+            "canonical": [
+              "R455-EV-002-C",
+              "R455-EV-CIT-015-C",
+              "R455-EV-RESEARCH-188-A",
+              "R455-EV-R347-LIMONTITLA-PDF-EDITION"
+            ],
+            "basis": "Smrke added fines rather than slow feeding, with one taster and bibliography duplicate explicitly qualified"
+          }
+        ],
+        "artifact_distinction": "Current Library 10p PDF v1 134777 B SHA256 a068e5e3ae4ab30dda58e7f0f9e24bca16bd570fb67061c3ca4b00cfd28ac28b; archived ZIP-member variant 83122 B SHA256 a4db4f38c7c347de5c11332f762321e317a4abb24a323bed7a3b3d37ff156f33 NOT retrieved this run."
+      },
+      "r348": {
+        "status": "NEW_DISTINCT_PRIMARY_ARTICLE_NO_REPRODUCED_APP_DEFECT",
+        "source_added": "LIT-2020-APILETTI-PASTOR-ESPRESSO-RULES",
+        "checks_added": [
+          "R455-EV-R348-PROXY-LABELS",
+          "R455-EV-R348-ASSOCIATION-CONFIDENCE",
+          "R455-EV-R348-HEAD-CLEANING-CONFOUND"
+        ],
+        "proposal_added": "R455-PROP-R348-ASSOCIATION-RULES-NOT-PERSONAL-TASTE-PROBABILITY"
+      },
+      "source_count_before": {
+        "sources": 197,
+        "evidence_checks": 594,
+        "proposals": 263
+      },
+      "source_count_after": {
+        "sources": 198,
+        "evidence_checks": 598,
+        "proposals": 264
+      },
+      "github267_literal_review_credit": 0,
+      "release": "RESEARCH_ONLY_NOT_READY_NOT_DEPLOYED"
     }
   ]
 }
