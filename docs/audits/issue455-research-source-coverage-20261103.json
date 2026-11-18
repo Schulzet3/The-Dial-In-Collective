@@ -11789,6 +11789,51 @@
       "result": "Maintain default first-coffee guidance for empty collection, and existing pinning, private history and all five rating/recommendation behaviors. Original code PR #3242 merge c9e510df31d0fb8ff14fdc569477037da7b4ba1b matches all 8/8 tested head Git blobs. Node22 merged 44272018599: 5503 pass/0 fail/6 skip; browser/mobile/offline/a11y merged 44272018809 and approval merged 44272018771 SUCCESS; exact PR-head SQL/security also SUCCESS. Frozen603 SKIPPED, #33 original241 failure independent. No field effectiveness measurement.",
       "owner_approval_required": false,
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-R345-HUANG-SETTING-CONTRADICTION",
+      "source": "LIT-2025-HUANG-TAGUCHI-GRINDER-QC",
+      "date": "2026-11-18",
+      "source_url": "https://sensors.myu-group.co.jp/sm_pdf/SM4206.pdf",
+      "source_doi": "10.18494/SAM5901",
+      "grade": "FIRST_PARTY_ORIGINAL_PDF_PAGES_VISUALLY_VERIFIED; RAW_SENSOR_DATA_PDF_FILE_HASH_AND_CORRIGENDUM_NOT_VERIFIED",
+      "owner_approval": false,
+      "implementation_status": "RESEARCH_ONLY_NO_POLICY_OR_RUNTIME_CHANGE",
+      "exact_development_sha": "18b9975da3dbf5819cbbd5561a6592c5f2803a01",
+      "github267_literal_review_credit": 0,
+      "source_location": "printed 4687-4688; PDF pages 11-12; Tables 8/9 vs Conclusions",
+      "claim": "Original Tables 8-9 prescribe cooling fan OFF, gap 1.0 mm, 1000 rpm, input 10 g, grinding 30 s. Original Conclusions prescribe fan ON, gap 0.5 mm, 1200 rpm, 10 g, 10 s. Four of five settings conflict inside this paper; neither is an unambiguous scientifically proven espresso grinder optimum.",
+      "result": "SOURCE_INTERNAL_CONFLICT_HOLD_NUMERIC_PRODUCT_TRANSFER"
+    },
+    {
+      "id": "R455-EV-R345-HUANG-FACTOR-LABEL-CONFLICT",
+      "source": "LIT-2025-HUANG-TAGUCHI-GRINDER-QC",
+      "date": "2026-11-18",
+      "source_url": "https://sensors.myu-group.co.jp/sm_pdf/SM4206.pdf",
+      "source_doi": "10.18494/SAM5901",
+      "grade": "FIRST_PARTY_ORIGINAL_PDF_PAGES_VISUALLY_VERIFIED; RAW_SENSOR_DATA_PDF_FILE_HASH_AND_CORRIGENDUM_NOT_VERIFIED",
+      "owner_approval": false,
+      "implementation_status": "RESEARCH_ONLY_NO_POLICY_OR_RUNTIME_CHANGE",
+      "exact_development_sha": "18b9975da3dbf5819cbbd5561a6592c5f2803a01",
+      "github267_literal_review_credit": 0,
+      "source_location": "printed 4681,4686,4687; PDF pages 5,10,11; Tables 1/7/8",
+      "claim": "Tables 1/8 define B=burr gap, D=bean input, E=grind time. Original printed Table7 instead labels B=feed, D=time, E=gap for the same factor codes. Factor mapping is internally inconsistent; no silent reinterpretation of source numerical rows or DIC grinder policy is justified.",
+      "result": "PRIMARY_TABLE_FACTOR_LABELS_INCONSISTENT"
+    },
+    {
+      "id": "R455-EV-R345-HUANG-WEIGHTED-ENGINEERING-NOT-SENSORY",
+      "source": "LIT-2025-HUANG-TAGUCHI-GRINDER-QC",
+      "date": "2026-11-18",
+      "source_url": "https://sensors.myu-group.co.jp/sm_pdf/SM4206.pdf",
+      "source_doi": "10.18494/SAM5901",
+      "grade": "FIRST_PARTY_ORIGINAL_PDF_PAGES_VISUALLY_VERIFIED; RAW_SENSOR_DATA_PDF_FILE_HASH_AND_CORRIGENDUM_NOT_VERIFIED",
+      "owner_approval": false,
+      "implementation_status": "RESEARCH_ONLY_NO_POLICY_OR_RUNTIME_CHANGE",
+      "exact_development_sha": "18b9975da3dbf5819cbbd5561a6592c5f2803a01",
+      "github267_literal_review_credit": 0,
+      "source_location": "printed 4687-4688; PDF pages 11-12; Tables 10-11",
+      "claim": "Original Table10 weighted S/N composite engineering totals -17.72 measured vs -17.94 predicted differ 0.22 = approximately 1.2263% of the predicted magnitude. This is about grinder size/uniformity/heat/operating time/output, NOT 0.22% member cup improvement or next-shot success probability. Table11 reports 20.30 s measured grind duration despite Table9 nominal 30 s, an additional study-interpretation ambiguity.",
+      "result": "ARITHMETIC_BOUNDED_TO_ENGINEERING_NOT_CUP_TASTE"
     }
   ],
   "policy_decisions_pending": [],
@@ -12107,6 +12152,11 @@
     {
       "run_id": "R455-344",
       "next": "R344 code merged c9e510df and exact merged CI SUCCESS; documentation-only READY reconciliation PR in progress. Verify docs-only approval and merge/readback, then continue new nonoverlapping research/UX gaps; source counts remain 197/591/263; Oct29 ZIP and separate S019 PDF inaccessible, #267 literal review remains separately owned.",
+      "owner_approval_now_required": false
+    },
+    {
+      "run_id": "R455-345",
+      "next": "Original Huang 2025 primary PDF Table1/7/8/9/10/11 inconsistency and engineering model arithmetic independently reviewed; three source-level checks, 197/594/263. Verify docs-only PR/CI and nonforce merge; leave numeric espresso policies, original S019 and Oct29 ZIP and #267 separate.",
       "owner_approval_now_required": false
     }
   ],
