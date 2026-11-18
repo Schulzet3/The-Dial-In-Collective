@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R346",
+  "date_utc": "2026-11-18",
+  "preflight": {
+    "development_sha": "e3977c442ffebb65f66fd7cc64ffbfab263b7e20",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "immutable_git_blob_contents_verified": true
+  },
+  "main_sha": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+  "release_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5",
+  "authority": "Owner #509 development-only exhaustive read-only Supabase audit; R342 migration mapping resolution and new cross-RPC semantic comparison",
+  "provider": {
+    "project_ref": "azviqqejypsefzilgonr",
+    "status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.11.0.003",
+    "read_only": true,
+    "live_migrations": 69,
+    "admin_identity_guard_applied": 0,
+    "community_outlier_guard_applied": 0,
+    "stored_migration_version": "20261113195659",
+    "stored_migration_name": "dic_retire_roaster_directory",
+    "stored_statement_count": 1
+  },
+  "migration": {
+    "provider_version": "20261113195659",
+    "provider_name": "dic_retire_roaster_directory",
+    "source_git_ref": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5",
+    "source_path": "supabase/migrations/20261113050000_dic_retire_roaster_directory.sql",
+    "source_git_blob_sha": "10775c86bf88e61160fdc66d35c65698638742d6",
+    "source_bytes_and_characters": 25326,
+    "source_lines": 443,
+    "stored_characters": 25326,
+    "full_text_exact_match": true,
+    "semantic_effect": "Protected alias/attestation helpers retained for verified coffee and roaster normalization; old roaster preview function removed, historical directory and alias tables renamed to provenance archives without deleting history.",
+    "verdict": "PROVEN_SQL_IDENTITY; DIFFERENT_TIMESTAMP_VERSION_IS_METADATA_MAPPING_NOT_CONTENT_DRIFT",
+    "original_r342_disposition": "PREVIOUSLY_UNVERIFIED_MAPPING_NOW_RESOLVED_WITH_EXACT_STORED_SQL_VS_RELEASE_GIT_FILE",
+    "existing_archived_and_live_objects_remain_required": true
+  },
+  "full_source_rechecks": [
+    {
+      "object": "private.dic_admin_search_records(text,text,integer,integer)",
+      "definition_characters": 7574,
+      "definition_md5": "253a3fe2fe1e1e65f61b5a71a2063fdd",
+      "full_source_semantically_checked": true,
+      "findings": "Admitted admin-only, p_limit 1..50, p_offset 0..1000000, ordered bounded results and count; no current reproducible defect or measured bottleneck.",
+      "pgss": {
+        "shapes": 5,
+        "calls": 5,
+        "weighted_mean_ms": 6.961,
+        "max_ms": 22.032,
+        "temp_blocks": 0
+      }
+    },
+    {
+      "object": "public.dic_community_recommendation_evidence(uuid,text)",
+      "definition_characters": 6171,
+      "definition_md5": "085f92a3814dce624e5b9a3759e893ef",
+      "full_source_semantically_checked": true,
+      "findings": "Eligibility/verification, own-contributor exclusion, one person per ratio group, family provenance and 30-candidate bound checked; no established correctness error.",
+      "pgss": {
+        "shapes": 5,
+        "calls": 134,
+        "weighted_mean_ms": 21.251,
+        "max_ms": 112.771,
+        "temp_blocks": 0
+      }
+    },
+    {
+      "object": "public.dic_community_evidence_counts(uuid,text)",
+      "definition_characters": 694,
+      "definition_md5": "1bddea7e3160c0282bea1d6e74d1fbaf",
+      "full_source_semantically_checked": true,
+      "findings": "Counts verified eligible Community shots and distinct contributors. Unlike recommendation query it lacks merged_into_id IS NULL. Currently zero verified merged coffees and zero eligible merged links; potential latent output-contract mismatch requires client/fixture proof, not a verified defect.",
+      "pgss": {
+        "shapes": 3,
+        "calls": 3,
+        "weighted_mean_ms": 0.069,
+        "max_ms": 0.085,
+        "temp_blocks": 0
+      },
+      "candidate": "UNVERIFIED_CONSUMER_DEPENDENT_NO_PATCH"
+    },
+    {
+      "object": "public.dic_my_community_outliers()",
+      "definition_characters": 1318,
+      "definition_md5": "312b59594de640adacb12ab0aa0d18e4",
+      "full_source_semantically_checked": true,
+      "findings": "Own-shot/provenance/held extreme-outlier gate with deterministic latest-ten result; no reproduced bug."
+    }
+  ],
+  "safe_aggregate": {
+    "eligible_community_shots": 13,
+    "represented_coffees": 3,
+    "distinct_contributors": 1,
+    "verified_merged_coffees": 0,
+    "verified_merged_eligible_links": 0,
+    "pgss_cumulative_not_24h": true
+  },
+  "source_bound_ci_readback": {
+    "merged_development_sha": "e958c3acace0d908a4464b5cf95c0405510a1c8b",
+    "five_required_success_runs": [
+      44406406158,
+      44406406167,
+      44406406236,
+      44406406077,
+      44406406187
+    ],
+    "independent_issue33_source_failure_run": 44406406174,
+    "independent_issue33_failure": "LIVE_EXTERNAL_SELLER_FETCH_UNAVAILABLE_NOT_509_SQL_REGRESSION",
+    "new_ci_run": "NOT_RUN"
+  },
+  "disposition": "Migration content remap resolved; no safe application SQL change justified by other current diagnostics; preserved historical SQL and all live consumers",
+  "coverage": {
+    "new_first_time_provider_definition_words": 0,
+    "duplicate_source_line_credit_issue267": 0,
+    "source_range_reviewed": "full stored migration 443/443 lines (previously credited in earlier R157), full four existing SQL routines cross-compared (no new baseline word credit)",
+    "baseline": "IN_PROGRESS"
+  },
+  "guardrails": {
+    "prod_sql_data_auth_storage_edge_config_writes": 0,
+    "github_application_code_test_ci_writes": 0,
+    "publish": false,
+    "paid_branch": false,
+    "backup_schedule_alert_changes": false
+  },
+  "next_exact": "Trace the actual release/development caller and intended merged-coffee behavior for public.dic_community_evidence_counts(uuid,text); isolate rollback PG17 merged-ID fixture only if product contract confirms mismatch, otherwise proceed to next changed/unreviewed provider object. Keep #96 hosted Auth independently UNVERIFIED."
+}

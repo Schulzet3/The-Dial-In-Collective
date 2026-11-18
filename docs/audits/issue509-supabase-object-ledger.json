@@ -4692,6 +4692,18 @@
       "source_test_ci_writes": 0,
       "baseline": "IN_PROGRESS",
       "next": "public.dic_member_approval_claim(p_channel text,p_limit integer) character 1"
+    },
+    {
+      "run": "R346 Nov18 2026",
+      "preflight_sha": "e3977c442ffebb65f66fd7cc64ffbfab263b7e20",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r346-migration-remap-community-metrics-20261118.json",
+      "migration_mapping_exact": true,
+      "full_semantic_comparison_objects": 4,
+      "new_provider_source_credit": 0,
+      "prod_writes": 0,
+      "baseline": "IN_PROGRESS",
+      "next": "Trace the actual release/development caller and intended merged-coffee behavior for public.dic_community_evidence_counts(uuid,text); isolate rollback PG17 merged-ID fixture only if product contract confirms mismatch, otherwise proceed to next changed/unreviewed provider object. Keep #96 hosted Auth independently UNVERIFIED."
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -24218,5 +24230,26 @@
     "state": "TESTING",
     "baseline": "IN_PROGRESS",
     "next": "Merged Node22/browser readback and #33 official seller source fetch status; preserve #509 no-publish."
+  },
+  "provider_migration_mapping_community_runtime_run346": {
+    "run": "R346",
+    "preflight_development_sha": "e3977c442ffebb65f66fd7cc64ffbfab263b7e20",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt": "docs/audits/issue509-r346-migration-remap-community-metrics-20261118.json",
+    "provider_version": "20261113195659",
+    "release_file": "supabase/migrations/20261113050000_dic_retire_roaster_directory.sql",
+    "release_blob_sha": "10775c86bf88e61160fdc66d35c65698638742d6",
+    "full_sql_chars": 25326,
+    "stored_git_bytes_exact": true,
+    "mapping_resolved": true,
+    "full_sql_definition_review_characters": 15757,
+    "first_time_provider_source_credit": 0,
+    "issue267_line_credit": 0,
+    "community_counts_consumer_contract": "UNVERIFIED_POTENTIAL_MERGED_ID_DISCREPANCY_NO_AFFECTED_CURRENT_ROWS",
+    "exact_merged_source_ci": "FIVE_APPLICABLE_SUCCESS_EXCEPT_UNRELATED_ISSUE33_EXTERNAL_FETCH_FAILURE",
+    "state": "IN_PROGRESS",
+    "prod_writes": 0,
+    "code_test_ci_writes": 0,
+    "next": "Trace the actual release/development caller and intended merged-coffee behavior for public.dic_community_evidence_counts(uuid,text); isolate rollback PG17 merged-ID fixture only if product contract confirms mismatch, otherwise proceed to next changed/unreviewed provider object. Keep #96 hosted Auth independently UNVERIFIED."
   }
 }
