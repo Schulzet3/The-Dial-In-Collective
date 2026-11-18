@@ -40,6 +40,10 @@ must(['chocolate','caramel','vanilla'].every(x=>String(f.tasting_notes||'').toLo
 must(!/pineapple|blackberry/i.test(String(f.tasting_notes||'')),'no_sibling_sensory');
 must(!f.decaffeination_method&&!f.release_label,'no_unsupported_decaf_or_release');
 must(!(r.seo_fallback_fields||[]).includes('tasting_notes'),'no_seo_tasting_fallback');
+must(f.roast_level==='Light','selected_merchant_american_roast_light_taxonomy');
+must(!f.producer,'historical_cooperative_background_not_verified_current_grower');
+must(/Flavor Notes: Honey, Malt, Candied Lemon\./i.test(html),'stale_page_seo_sensory_negative_present');
+must(!/honey|malt|candied lemon/i.test(String(f.tasting_notes||'')),'stale_seo_does_not_override_selected_tastes');
 const parsed=extractPublicCoffeeFacts(html,{source_url:r.final_url||official});
 must(parsed?.ok===true&&parsed.fields?.name===f.name,'independent_raw_parser');
 const result={passed:failures.length===0,failures,source_sha:process.env.DIC_R297_EVENT_SHA,

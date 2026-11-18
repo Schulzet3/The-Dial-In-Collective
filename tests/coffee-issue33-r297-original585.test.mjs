@@ -59,3 +59,17 @@ test('R297 swapped selected H1 is not archived coffee identity',()=>{
  assert.equal(identicalCurrentSelectedTitle(title,name,p.fields.name),false);
  assert.doesNotMatch(String(p.fields.tasting_notes||''),/milk chocolate|vanilla/i);
 });
+
+test('R297 stale published SEO flavor must not replace direct selected notes',()=>{
+ const stale='<meta name="description" content="Flavor Notes: Honey, Malt, Candied Lemon.">'+
+  '<meta property="og:description" content="Flavor Notes: Honey, Malt, Candied Lemon.">';
+ const source=page().replace('<meta property="og:site_name" content="Coffee Exchange">',stale+
+  '<meta property="og:site_name" content="Coffee Exchange">');
+ const p=extractPublicCoffeeFacts(source,{source_url:url});
+ assert.equal(p.ok,true);
+ assert.equal(p.fields.name,title);
+ for(const note of ['chocolate','caramel','vanilla'])
+  assert.match(String(p.fields.tasting_notes||''),new RegExp(note,'i'));
+ assert.doesNotMatch(String(p.fields.tasting_notes||''),/honey|malt|lemon/i);
+ assert.ok(!p.seo_fallback_fields?.includes('tasting_notes'));
+});
