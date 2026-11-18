@@ -1,0 +1,15 @@
+# R455-353 — BMJ CENT N-of-1 2016 checklist correction (2026-11-18)
+
+Research-only, source-bound at development ff48ef70807737e910aad47c1d3999e584c140f9. Preflight blob 2fb236bbfa6bac48513eeb3bd157b260853af06d.
+
+## Primary-source provenance
+
+- Original publisher full short correction: BMJ 2016;355:i5381, DOI https://doi.org/10.1136/bmj.i5381, published 10 October 2016: https://www.bmj.com/content/355/bmj.i5381 . Independently matched to NIH PMC https://pmc.ncbi.nlm.nih.gov/articles/PMC5058423/ and PubMed https://pubmed.ncbi.nlm.nih.gov/27758798/ . First-party page directly read, not merely abstract.
+- Earlier 2015 statement: https://www.bmj.com/content/350/bmj.h1738 (DOI 10.1136/bmj.h1738); companion explanation item 4c: https://www.bmj.com/content/350/bmj.h1793 . The 2016 correction fixes a production error in the *PDF* Table 1 item 4c. It replaces a mistaken reference to 'Research Methods and Reporting studies' with a reporting question about whether the N-of-1 trial is research and, if applicable, whether institutional ethics approval was obtained. Companion original already discusses the distinction; no extra independent empirical trial is counted.
+- Limits: original complete 2015 Statement body, original 2015 PDF table image, 2016 PDF binary, immutable SHA-256, and clinical trial participant data were not reviewed or reproduced. The short 2016 BMJ correction HTML and NIH corroborating text are the verified content. The evidence grade is high only for the wording of this publisher erratum, none for personalized espresso outcomes.
+
+## Current approved DIC and methodological boundary
+
+At immutable development ff48ef70807737e910aad47c1d3999e584c140f9, directly inspected engine.js blob 90c55379be60a252a2026e01bb3d786b66c49aef, model.js baafc8fa64fa3e359d8e42094e41c5d72a3b22df, ui.js af983c5a8b39d5003e1e9b69638be24e7d7c9d11, constants.js d3559dc1c9560c4d68fbcad1dc91e3a792a100a2. Preserve five taste choices, original measured shots/private history, one controllable next-shot change, coffee/setup/style/feed/grinder/calibration, RLS/Community. Clinical reporting checklist language does not establish a legal or ethics-board mandate for DIC's hypothetical optional paired espresso observation, nor any improved cup quality or new consent authority. Existing R455-316 prospective study design is held until owner expressly approves member access/consent/experiments. No app bug was newly reproduced and no product behavior, data or privacy rules changed.
+
+One NEW original-source record and ONE distinct bounded evidence check; older CENT R455-316 source/checks retained and not double counted. Ledger 199→200 sources, 604→605 checks, 265 proposals unchanged. #267 line-by-line audit credited zero. October29 ZIP and separate S019 PDF remain inaccessible after current connected Drive and Library searches; distinct Slow Feeding PDF not substituted. No release, production, provider or tests run. Next verify hosted docs PR/governance and exact merged readback; continue another source or SAFE UX finding.
