@@ -4197,6 +4197,23 @@
       "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "app_engine_blob": "90c55379be60a252a2026e01bb3d786b66c49aef",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "LIVE-20261118-R352-TEMPERATURE-DISPLAY-PRECISION",
+      "type": "original_current_app_source_ux_reproduction",
+      "path": "site/lib/ui.js",
+      "source_preflight_branch_sha": "dce0d5c46e6ba2b180d69c829d2734f21b5fb5bf",
+      "source_original_git_blob_sha": "915504835d8873bf3746842b50aee53f2a9ea2ab",
+      "fixed_git_blob_sha": "af983c5a8b39d5003e1e9b69638be24e7d7c9d11",
+      "related_engine_blob_sha": "90c55379be60a252a2026e01bb3d786b66c49aef",
+      "related_constants_blob_sha": "d3559dc1c9560c4d68fbcad1dc91e3a792a100a2",
+      "exact_merged_source_sha": "33f8f6025024b4a3e12833896ff7241de7bffd5c",
+      "review_status": "ORIGINAL_SOURCE_NEGATIVE_REPRO_AND_MERGED_SAFE_PRESENTATION_POSITIVE_TESTS_FULL_GIT_BLOBS_READ",
+      "claim": "At a real recorded 70.2 C, existing engine can bound 1C cooling request to 70.0 C, but original UI rounds both before and after to equal whole displayed degrees (70 to 70C or 158 to 158F) and repeats generic full-degree text. Actual controllable difference is only 0.2C.",
+      "evidence_grade": "DIRECT_IMMUTABLE_SOURCE_AND_DETERMINISTIC_NUMERIC_REPRODUCTION_SYNTHETIC_TESTS_NOT_MEMBER_OR_ESPRESSO_EFFICACY",
+      "access": "FULL_IMMUTABLE_PRIVATE_GITHUB_SOURCE_BLOBS",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
     }
   ],
   "evidence_checks": [
@@ -12037,6 +12054,32 @@
       "owner_approval": false,
       "privacy": "PUBLIC_AUTHOR_SOURCE_ONLY_NO_MEMBER_DATA",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-R352-ROUNDED-TEMPERATURE-NEGATIVE",
+      "source": "LIVE-20261118-R352-TEMPERATURE-DISPLAY-PRECISION",
+      "section": "site/lib/engine.js:837; site/lib/constants.js:69-70; original site/lib/ui.js:69-109",
+      "claim": "With all five synthetic taste ratings extraction3/body3/clarity5/sweetness5/astringency2 and measured 70.2C, clamp(70.2-1,70,100)=70.0C. Original whole-degree app rendering shows visually identical 70→70C / 158→158F arrow and misleading approx 1C text, although actual step is 0.2C.",
+      "grade": "REPRODUCED_SOURCE_ARITHMETIC_NO_HUMAN_CUP_OUTCOME",
+      "factual_status": "VERIFIED_ORIGINAL_SOURCE_SNAPSHOT_NEGATIVE",
+      "result": "SAFE_DISPLAY_ONLY_PRECISION_GUARD_IMPLEMENTED_NOT_POLICY_CHANGE",
+      "owner_approval_required": false,
+      "github267_literal_review_credit": 0,
+      "source_preflight_sha": "dce0d5c46e6ba2b180d69c829d2734f21b5fb5bf",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d"
+    },
+    {
+      "id": "R455-EV-R352-UNCHANGED-POSITIVE",
+      "source": "LIVE-20261118-R352-TEMPERATURE-DISPLAY-PRECISION",
+      "section": "site/lib/ui.js nextShotAdjustment/nextShotGuidance; tests/issue455-r352-temperature-visible-step.test.mjs",
+      "claim": "Merged UI suppresses identical before/after visible values, substitutes a machine-adjustability warning only for otherwise single-change rounded-away temperature steps, and retains 93→92C temperature, 36→38g yield and no-temperature fallback. Original measured shot and five ratings unchanged.",
+      "grade": "FULL_GIT_BLOB_MATCH_WITH_EXACT_HEAD_AND_MERGED_NODE22_CHROMIUM_OFFLINE_ACCESSIBILITY_GOVERNANCE_CI",
+      "factual_status": "VERIFIED_SYNTHETIC_POSITIVE_AND_NEGATIVE_APP_SOURCE_REGRESSION_NOT_HUMAN_TASTE_EFFICACY",
+      "result": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
+      "owner_approval_required": false,
+      "github267_literal_review_credit": 0,
+      "exact_head_sha": "02c401775192a620978a1382897bdba6f6b161f6",
+      "exact_merged_sha": "33f8f6025024b4a3e12833896ff7241de7bffd5c"
     }
   ],
   "policy_decisions_pending": [],
@@ -12376,27 +12419,33 @@
       "run_id": "R455-351",
       "next": "Complete docs-only CI and nonforce merge/merged governance for bounded author code evidence; separately review genuine prospective same-coffee taste effectiveness only with owner authorization. Oct29 ZIP and S019 primary not accessible; #267 source line credit zero.",
       "owner_approval_now_required": false
+    },
+    {
+      "run_id": "R455-352",
+      "next": "R352 merged source exact verification and research-to-live-logic review recorded. Continue substantive non-overlap from source-bound ledger; October 29 original ZIP and separate S019 PDF inaccessible; #267 line audit separately owned. No user data/taste efficacy or numeric policies changed.",
+      "owner_approval_now_required": false
     }
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-351",
+    "run_id": "R455-352",
     "date": "2026-11-18",
-    "development_preflight_sha": "8e7d13c78e0fab663a96a00cabdcdc86c45041ad",
+    "development_preflight_sha": "dce0d5c46e6ba2b180d69c829d2734f21b5fb5bf",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "prewrite_canonical_blob_sha": "a3def564bc70f2e2c4e85bc40b712cbac53730c4",
+    "prewrite_canonical_blob_sha": "bbf054906e93a4046a6fa3e3402e26a63296721f",
     "source_counts": {
-      "sources": 198,
-      "evidence_checks": 602,
-      "proposals": 264
+      "sources": 199,
+      "evidence_checks": 604,
+      "proposals": 265
     },
-    "research_status": "AUTHOR_IMMUTABLE_CODE_R351_ROW_LEVEL_HOLDOUT_NO_JUDGE_GROUP_AND_GLOBAL_SUPERVISED_PRERANK_RISK; TWO_NEW_UNIQUE_CHECKS_NOT_NEW_INDEPENDENT_STUDY",
-    "runtime_changed": false,
-    "tests_run": false,
-    "ci_not_yet_verified": true,
+    "research_status": "SAFE_UI_VISIBLE_TEMPERATURE_PRECISION_REPAIR_EXACT_SOURCE_NODE22_BROWSER_GOVERNANCE_VERIFIED_NOT_TASTE_EFFICACY",
+    "runtime_changed": true,
+    "numeric_policy_changed": false,
+    "tests_run": true,
+    "ci_verified": true,
     "production_deployed": false,
     "github267_literal_review_credit": 0,
     "owner_approval_now_required": false,
-    "next": "Verify exact docs-only PR head CI, safely integrate [skip netlify], read back original three Git blobs and merged push governance; no metrics or data efficacy claim."
+    "next": "Continue nonoverlapping source/claim inventory and app UX improvements; Oct29 research ZIP and separate S019 PDF remain unverified; real user cup-quality effects unobserved; no #267 line-by-line credit and no release."
   },
   "policy_decisions_resolved": [
     {
@@ -18757,6 +18806,46 @@
       "test_plan": "Parse full canonical JSON, strict ID uniqueness and count checks; verify original Git blob/branch before docs update; applicable PR governance CI; no app tests/research efficacy trial as no source code changed.",
       "implementation": "R349_RESEARCH_ONLY_CANONICAL_RECONCILIATION_NOT_APP_CHANGE",
       "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY_NOT_READY_NOT_DEPLOYED",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-PROP-R352-TEMP-VISIBLE-PRECISION",
+      "severity": "P3_SAFE_ACTIONABLE_TEMPERATURE_DISPLAY_PRECISION",
+      "source": [
+        "LIVE-20261118-R352-TEMPERATURE-DISPLAY-PRECISION"
+      ],
+      "evidence": [
+        "R455-EV-R352-ROUNDED-TEMPERATURE-NEGATIVE",
+        "R455-EV-R352-UNCHANGED-POSITIVE"
+      ],
+      "finding": "A clipped temperature-only next-shot change can look identical before/after when app displays whole F/C degrees, and upstream text overstates actual step.",
+      "user_benefit": "Do not mislead members about a temperature control that may not be adjustable on their machine.",
+      "current_locked": "Owner's all-five-rating guard, one truly controllable change, original measurement/notes/private History, same-coffee success, independent styles Turbo/Fast-Flow, slow feed mode, grind range and translations, equipment adjustability, Community/RLS and offline safety stay unchanged.",
+      "current_app": "Original engine 90c55379be60a252a2026e01bb3d786b66c49aef, original UI 915504835d8873bf3746842b50aee53f2a9ea2ab; constants d3559dc1c9560c4d68fbcad1dc91e3a792a100a2; merged UI af983c5a8b39d5003e1e9b69638be24e7d7c9d11.",
+      "proposed_change": "SAFE additive display precision guard and neutral controllability text only. Engine temperature target, numerical policy, true recorded shot, stored notes/ratings, member consent/data and release remain untouched.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "files": [
+        "site/lib/ui.js",
+        "tests/issue455-r352-temperature-visible-step.test.mjs",
+        "docs/workstreams/ops-issue455-r352-temperature-visible-step-20261118.md"
+      ],
+      "implementation": "SAFE_VERIFIED_EXACT_MERGED_SOURCE_AND_NODE22_CHROMIUM_GOVERNANCE_PR3297_MERGE_33f8f6025024b4a3e12833896ff7241de7bffd5c",
+      "implementation_pr": 3297,
+      "merged_source_sha": "33f8f6025024b4a3e12833896ff7241de7bffd5c",
+      "test_plan": "Three focused synthetic Node22 negative/positive cases; exact PR-head Node22, Chromium/mobile/offline/a11y, isolated SQL, source-security and approval success; exact merge Node22, Chromium and governance success; frozen603 SKIPPED not PASS; cloud-targeted NOT_APPLICABLE.",
+      "ci_runs": [
+        44374294109,
+        44374294148,
+        44374294303,
+        44374294155,
+        44374294251,
+        44375652681,
+        44375652652,
+        44375652699
+      ],
+      "release_queue_status": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
       "production_deployed": false,
       "github267_literal_review_credit": 0
     }
