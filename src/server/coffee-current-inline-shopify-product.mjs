@@ -30,7 +30,10 @@ export function selectedCurrentInlineShopifyRoastTag(html,{name='',roaster='',so
  const matched=[];let assignments=0;
  for(const script of rawElements(html)){
   if(!script.closed||script.body.length>500000||/\bsrc\s*=/i.test(script.attributes))continue;
-  const marker=/(?:^|[;\n])\s*theme\.product\s*=\s*(\{)/g;
+  // Identity-bound theme.product and subscription-helper's _RSConfig.product carry
+  // complete JSON for the SELECTED purchasable product, not catalog HTML.
+  // Require the same title + handle + seller below before accepting tags.
+  const marker=/(?:^|[;\n])\s*(?:(?:var\s+)?_RSConfig\.product|theme\.product)\s*=\s*(\{)/g;
   while(marker.exec(script.body)){
    if(++assignments>6)return null;
    const start=marker.lastIndex-1,end=balancedJsonEnd(script.body,start);
@@ -49,8 +52,15 @@ export function selectedCurrentInlineShopifyRoastTag(html,{name='',roaster='',so
  if(typeof product.vendor!=='string'||norm(product.vendor)!==norm(roaster)||
    !Array.isArray(product.tags)||product.tags.length>100)return null;
  const roastTags=product.tags.filter(tag=>typeof tag==='string'&&tag.length<85)
-  .map(tag=>tag.trim().match(/^roast(?: level)?\s*:\s*(medium[- ]light|medium[- ]dark|light|medium|dark)(?:\s+roast)?$/i))
-  .filter(Boolean).map(row=>row[1].replace(/[- ]/g,'').toLowerCase());
+  .map(tag=>{
+   const explicit=tag.trim();
+   // Exact product-owned entire tags, not a roast-word suffix or collection
+   // label. "Light Roast" is a categorical product tag, "lighter" is not.
+   const labeled=explicit.match(/^roast(?: level)?\s*:\s*(medium[- ]light|medium[- ]dark|light|medium|dark)(?:\s+roast)?$/i);
+   const typed=explicit.match(/^(medium[- ]light|medium[- ]dark|light|medium|dark)\s+roast$/i);
+   return labeled?.[1]||typed?.[1]||null;
+  })
+  .filter(Boolean).map(value=>value.replace(/[- ]/g,'').toLowerCase());
  if(!roastTags.length||new Set(roastTags).size!==1)return null;
  const table={light:'Light',mediumlight:'Medium-Light',medium:'Medium',mediumdark:'Medium-Dark',dark:'Dark'};
  const value=table[roastTags[0]];
