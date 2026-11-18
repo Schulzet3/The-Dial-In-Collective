@@ -3617,15 +3617,15 @@
       "published": "2015-05-14",
       "doi": "10.1136/bmj.h1793",
       "url": "https://www.bmj.com/content/350/bmj.h1793",
-      "source_version": "ORIGINAL_PUBLISHER_INDEXED_HTML_EXCERPTS_2026-11-17",
+      "source_version": "ORIGINAL_BMJ_PUBLISHER_INDEXED_2015_EXCERPTS_ITEM6A2_FRESH_RECHECK_20261118",
       "source_sha256": null,
       "source_git_blob_sha": null,
-      "access": "BMJ original publisher indexed extended text/methods excerpts, several sections directly located through fresh first-party search; direct article GET HTTP403. PubMed and independent International Collaborative Network CENT citation matched; no full source binary/hash.",
+      "access": "BMJ original publisher indexed extended text/methods excerpts, several sections directly located through fresh first-party search; direct article GET HTTP403. PubMed and independent International Collaborative Network CENT citation matched; no full source binary/hash. R355 independently found the exact BMJ original publisher indexed Item 6a.2 Outcomes passage; direct BMJ .long GET 403, full contiguous article and original PDF binary still not available.",
       "provenance": "Companion explanation of SAME CENT framework, not second independent original experiment or additional N-of-1 effectiveness finding.",
       "evidence_grade": "METHODS_REPORTING_GUIDANCE_PARTIAL_FIRST_PARTY_ORIGINAL_TEXT_WITH_ACCESS_LIMITATIONS_NOT_ESPRESSO_EFFICACY",
-      "claim_verified": "Defines a medical N-of-1 as prospective repeated ABAB-style crossover, records actual sequence/periods, missing outcomes, harms, and analysis treatment of carryover, time/period effects and within-person correlation.",
-      "limitations": "A simple single next-shot comparison without prospective crossover is observational, not a CENT-quality randomized N-of-1 test; coffee ageing, fatigue, learning, grinder feed, calibration and other confounders preclude universal causal inference.",
-      "review_status": "SUBSTANTIVE_TARGETED_EXCERPTS_ONLY_NOT_FULL_PAPER",
+      "claim_verified": "Defines a medical N-of-1 as prospective repeated ABAB-style crossover, records actual sequence/periods, missing outcomes, harms, and analysis treatment of carryover, time/period effects and within-person correlation. R355 verified distinct CENT item 6a.2: report outcome instrument validity, reliability and sensitivity to change, distinct from item 6a.1 outcome definitions and earlier R316 missingness/crossover checks.",
+      "limitations": "A simple single next-shot comparison without prospective crossover is observational, not a CENT-quality randomized N-of-1 test; coffee ageing, fatigue, learning, grinder feed, calibration and other confounders preclude universal causal inference. CENT does not validate DIC member-specific five ordinal scales; no within-person test-retest reproducibility/sensitivity-to-change or causal recommendation efficacy demonstrated.",
+      "review_status": "SUBSTANTIVE_TARGETED_EXCERPTS_ONLY_NOT_FULL_PAPER;R455-355_DIRECT_FIRST_PARTY_INDEXED_ITEM_6A2_OUTCOME_MEASUREMENT_PROPERTIES_FULL_ARTICLE_PDF_BYTES_UNREVIEWED",
       "github267_literal_review_credit": 0,
       "implementation_status": "RESEARCH_DESIGN_ONLY_NO_APP_POLICY_OR_DATA_CHANGE"
     },
@@ -12189,6 +12189,20 @@
       "result": "NO_NEW_FIELDS_TARGETS_INTERVENTIONS_OR_PRODUCTION_EXPERIMENT",
       "owner_approval_required": false,
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-R355-CENT-6A2-SENSORY-RATING-INSTRUMENT",
+      "source": "LIT-2015-SHAMSEER-CENT-NOF1-EXPLANATION",
+      "date": "2026-11-18",
+      "source_url": "https://www.bmj.com/content/350/bmj.h1793",
+      "source_location": "Shamseer et al. BMJ 2015;350:h1793, Outcomes, CENT item 6a.2 and its explanation; original first-party publisher-indexed article text (direct BMJ HTML GET returned HTTP 403)",
+      "claim": "The CENT companion explicitly calls for reporting outcome instrument validity, reliability and sensitivity to change; a rating is not automatically a repeatable or change-sensitive trial outcome. DIC's existing five required member ordinal ratings are owner-Locked inputs but no independently verified same-coffee within-person repeatability or change sensitivity, so one-shot five-rating differences cannot establish causal improvement or calibrated scientific confidence.",
+      "grade": "DIRECT_FIRST_PARTY_PUBLISHER_INDEXED_ORIGINAL_ITEM_6A2_METHOD_GUIDANCE; FULL_CONTIGUOUS_HTML_AND_PDF_BINARY_UNRETRIEVED; TRANSLATION_TO_DIC_IS_REASONED_NOT_ESTABLISHED_CUP_EFFICACY",
+      "factual_status": "ORIGINAL_METHODOLOGICAL_REPORTING_FACT_VERIFIED_BOUNDED; DIC_VALIDITY_RELIABILITY_UNMEASURED_NOT_DISPROVEN",
+      "current_app": "Pinned development 915994396ea9e9289919939adc6b27f7d17bfb51: model.js baafc8fa64fa3e359d8e42094e41c5d72a3b22df validates five original 1–5 taste ratings; engine.js 90c55379be60a252a2026e01bb3d786b66c49aef withholds adjustment when incomplete, treats all-green success separately and provides at most one changed control; no consented prospective intervention/outcome measurement.",
+      "result": "SAFE_DOCS_ONLY; reuses R455-PROP-316 methodological proposal rather than inventing a new product recommendation; no new ratings/consent, data access, numeric policy or experiment",
+      "owner_approval_required": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -12542,6 +12556,11 @@
     {
       "run_id": "R455-354",
       "next": "After PR-head checks, nonforce [skip netlify] merge and exact merged hash/governance readback; leave water-brand paper RESEARCH ONLY; continue current-source UX/real-world optional evaluation without touching member data.",
+      "owner_approval_now_required": false
+    },
+    {
+      "run_id": "R455-355",
+      "next": "Verify source-bound hosted docs PR approval; nonforce merge only after exact PR-head checks pass and concurrent development/source paths are rechecked. Verify merge blobs and exact merged push approval; then resume a different source or reproducible UX bug. The research ZIP and S019 primary remain inaccessible.",
       "owner_approval_now_required": false
     }
   ],
@@ -18302,13 +18321,14 @@
         "R455-EV-LIT-316-A",
         "R455-EV-LIT-316-B",
         "R455-EV-CODE-316-C",
-        "R455-EV-DESIGN-316-D"
+        "R455-EV-DESIGN-316-D",
+        "R455-EV-R355-CENT-6A2-SENSORY-RATING-INSTRUMENT"
       ],
-      "finding": "Current source/synthetic success is not measured improvement in next-shot cup quality. The relevant first-party N-of-1 reporting methodology demands prospective repeated comparisons and bias accounting; a single user shot pair is observational, especially with coffee aging/sensory variability. Distinguish member-reported five-dimension change from causal effect.",
+      "finding": "Current source/synthetic success is not measured improvement in next-shot cup quality. The relevant first-party N-of-1 reporting methodology demands prospective repeated comparisons and bias accounting; a single user shot pair is observational, especially with coffee aging/sensory variability. Distinguish member-reported five-dimension change from causal effect. Distinct R355 outcome-instrument validity limit: five existing member ratings are product-authorized inputs, not yet externally validated repeatable or change-sensitive measures of next-shot effect.",
       "user_benefit": "Prevent falsely confident recommendation efficacy claims and establish future safe evidence criteria without increasing ordinary Log Shot friction.",
       "current_locked": "Exactly five original taste ratings, one truly controllable adjustment, same coffee/release + setup/grinder calibration/style/feed/basket, original notes and measured History, private RLS and no new data capture absent authorization.",
       "current_app": "engine.js recommendation/nextAdvice single-change; constants.js SCALES/tastesComplete and model.js snapshot/validateShot supply existing schema and guardrails but not consented paired efficacy evidence.",
-      "proposed_change": "RESEARCH ONLY: draft future owner-gated opt-in same-coffee/setup/style/grinder/feed paired shot → recommendation → next shot → five original pre/post taste ratings; log suggestion actually attempted, skipped/missing/partially rated, adverse/worse outcome, measurement timing, equipment/bean changes. Do NOT call a single pair randomized N-of-1; prospective multi-period counterbalanced approach only as separate explicitly approved study. Stratify/exclude confounded pairs; never infer population benefit or numeric targets from missing/selected data.",
+      "proposed_change": "RESEARCH ONLY: draft future owner-gated opt-in same-coffee/setup/style/grinder/feed paired shot → recommendation → next shot → five original pre/post taste ratings; log suggestion actually attempted, skipped/missing/partially rated, adverse/worse outcome, measurement timing, equipment/bean changes. Do NOT call a single pair randomized N-of-1; prospective multi-period counterbalanced approach only as separate explicitly approved study. Stratify/exclude confounded pairs; never infer population benefit or numeric targets from missing/selected data. Before any future separately authorized effectiveness analysis, declare all five subjective outcomes and evaluate same-context repeat-rating reliability/sensitivity to change and missingness without collapsing scales or reinterpreting a one-point change as proven improvement. This is study methodology only, not new telemetry or member-data authorization.",
       "approval_required_for_behavior_change": true,
       "owner_approval_now_required": false,
       "implementation": "RESEARCH_ONLY_METHODS_LEDGER_NO_APP_CODE_TELEMETRY_EXPERIMENT_OR_PROVIDER_WRITE",
@@ -18316,7 +18336,7 @@
         "docs/audits/issue455-research-source-coverage-20261103.json",
         "docs/workstreams/ops-issue455-r316-cent-nof1-efficacy-design-20261117.md"
       ],
-      "test_plan": "Original BMJ publisher indexed excerpts + official research network crosscheck; immutable Git source review, ledger structural checks; no app source/test touched, CI only for docs integration; no next-shot outcome data or real espresso trial.",
+      "test_plan": "Original BMJ publisher indexed excerpts + official research network crosscheck; immutable Git source review, ledger structural checks; no app source/test touched, CI only for docs integration; no next-shot outcome data or real espresso trial. R355 independently checked original BMJ indexed Item 6a.2 outcome-instrument measurement language and exact current five-score model/engine constraints; no user or app tests.",
       "release_queue": null,
       "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY",
       "production_deployed": false,
