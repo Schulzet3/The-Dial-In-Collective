@@ -88,4 +88,10 @@ if [[ -f supabase/migrations/20261118140000_dic_coffee_alias_suggestion_confirm.
 else
   echo "NOT_APPLICABLE: #509 historical alias; migration excluded from tested source"
 fi
+if [[ -f supabase/migrations/20261118164500_dic_remove_legacy_private_hide_shot_handler.sql ]]; then
+  echo "Running legacy_private_hide_shot_retirement"
+  run_sql supabase/tests/legacy_private_hide_shot_retirement.sql
+else
+  echo "NOT_APPLICABLE: #509 legacy internal Hide Shot retirement; migration excluded from tested source"
+fi
 echo 'PASS: all checked-in migrations and SQL suites, including staged import/setup, cross-account and source-worker authorization and first-style owner isolation regressions; no hosted connection.'
