@@ -8,6 +8,29 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-r344-coffee-search-empty-state",
+      "issue": 455,
+      "pr": null,
+      "title": "Distinguish no coffee search matches from an empty saved coffee collection",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/main.js",
+        "site/cloud/coffee-list-empty.js"
+      ],
+      "owner_source": "Issue #455 Option B SAFE additive search empty-state UX; DIC_PREFLIGHT_VERIFIED development_sha=cb972e74dd6dac301604dc1d4df815b257c41636 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Direct source reproduction: unmatched nonempty coffee search returned an empty list, whose unconditional fallback claimed 'Add your first coffee' despite saved coffee. No real member incident claimed.",
+        "Three synthetic positive/negative regressions newly authored for unmatched search, first-coffee and whitespace behavior, and live main.js wiring. GitHub CI NOT YET RUN, not PASS."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact Node22, browser/mobile/offline/accessibility and applicable isolated SQL/security/governance CI, non-force merge/readback needed before READY."
+      ],
+      "notes": "No new search control, telemetry or policy; current-coffee pinning and filtering unchanged. Safe copy only when zero visible results and genuine active search. No production or provider effects.",
+      "production_deployed": false
+    },
+    {
       "id": "DIC-Q-455-r343-shot-history-empty-state",
       "issue": 455,
       "pr": 3236,
