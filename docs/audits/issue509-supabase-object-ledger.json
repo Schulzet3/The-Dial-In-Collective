@@ -24164,5 +24164,28 @@
     "issue267_line_credit": 0,
     "baseline": "IN_PROGRESS",
     "next": "First changed/new or not-yet-directly-semantically-reviewed Supabase provider definition by existing ledger, excluding unchanged R343 SQL; verify any actual external consumer before proposing retirement of public.dic_url_preview_claim."
+  },
+  "provider_admin_normalized_identity_run345": {
+    "run": "R345",
+    "date_utc": "2026-11-18",
+    "preflight_development_sha": "9ef9e69b8586313e1efe38fc9680766d1e67ea14",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "project_ref": "azviqqejypsefzilgonr",
+    "receipt": "docs/audits/issue509-r345-admin-normalized-identity-20261118.json",
+    "live_function": "private.dic_admin_edit_record(uuid,bigint,jsonb,text,text)",
+    "complete_source_chars": 13186,
+    "live_source_md5": "290b98b6bb6f99a1afb73b13ff315b12",
+    "valid_synthetic_cases": 4,
+    "current_bug": "Punctuation-only admin approved name/roaster normalizes to NULL and bypasses duplicate identity check",
+    "actual_member_incident": "UNVERIFIED",
+    "source_fix_migration": "supabase/migrations/20261118214500_dic_admin_edit_normalized_identity_guard.sql",
+    "regression": "supabase/tests/admin_edit_normalized_identity_guard.sql",
+    "runner": "scripts/audit/isolated-sql-regression.sh",
+    "status": "STAGED_DEVELOPMENT_TESTING_NO_PROVIDER_WRITES",
+    "ci": "PENDING",
+    "first_time_provider_word_credit": 0,
+    "issue267_line_credit": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Exact PR-head CI then safe development integration if all applicable checks pass; no live migration or publish."
   }
 }

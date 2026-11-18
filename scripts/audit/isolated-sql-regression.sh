@@ -106,4 +106,10 @@ if [[ -f supabase/migrations/20261118181500_dic_community_outlier_null_revision_
 else
   echo "NOT_APPLICABLE: #509 outlier NULL revision; migration excluded from tested source"
 fi
+if [[ -f supabase/migrations/20261118214500_dic_admin_edit_normalized_identity_guard.sql ]]; then
+  echo "Running admin_edit_normalized_identity_guard"
+  run_sql supabase/tests/admin_edit_normalized_identity_guard.sql
+else
+  echo "NOT_APPLICABLE: #509 admin normalized identity guard; migration excluded from tested source"
+fi
 echo 'PASS: all checked-in migrations and SQL suites, including staged import/setup, cross-account and source-worker authorization and first-style owner isolation regressions; no hosted connection.'

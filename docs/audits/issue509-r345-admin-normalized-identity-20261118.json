@@ -1,0 +1,74 @@
+{
+  "run": "R345",
+  "date_utc": "2026-11-18",
+  "issue": 509,
+  "scope": "SUPABASE_APP_CORRECTNESS_NOT_STANDALONE_SECURITY",
+  "preflight_development_sha": "9ef9e69b8586313e1efe38fc9680766d1e67ea14",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "project_ref": "azviqqejypsefzilgonr",
+  "provider": "ACTIVE_HEALTHY_POSTGRES17_11_READ_ONLY",
+  "direct_complete_sql": [
+    {
+      "signature": "private.dic_admin_edit_record(uuid,bigint,jsonb,text,text)",
+      "chars": 13186,
+      "md5": "290b98b6bb6f99a1afb73b13ff315b12",
+      "reviewed_range": [
+        1,
+        13186
+      ],
+      "primary_app_caller": "public.dic_admin_edit_coffee"
+    },
+    {
+      "signature": "private.dic_admin_delete_record(text,uuid,bigint,jsonb)",
+      "md5": "39b6e1a4fc51c2ce8121ef34d2067b51",
+      "verdict": "explicit NULL revision guard; no similar bypass"
+    },
+    {
+      "signature": "private.dic_edit_my_coffee(uuid,bigint,jsonb,text)",
+      "md5": "5a52eee42d3427ccbad8b7272ff8df90",
+      "verdict": "explicit NULL revision guard; no similar bypass"
+    }
+  ],
+  "source_provenance": {
+    "last_historical_source": "supabase/migrations/20261027170000_dic_decaf_only_method.sql",
+    "source_blob": "6f474a56384afb3b7a7c3bfda2a29005a12d96f5",
+    "historical_function_text_matches_live_except_trailing_newline": true
+  },
+  "read_only_synthetic_proof": {
+    "input": "!!!",
+    "old_display_len_accepts": true,
+    "coffee_key": null,
+    "canonical_roaster_key": null,
+    "name_equality_result": null,
+    "similarity_gate_result": null
+  },
+  "findings": [
+    {
+      "id": "R345-A",
+      "severity": "LATENT_ADMIN_ONLY_INTEGRITY",
+      "current_member_incident": "NOT_ESTABLISHED",
+      "behavior": "Admin approved coffee edit accepts nonempty punctuation-only canonical coffee name or roaster that normalizes to NULL, so canonical matcher cannot identify it and duplicate checks evaluate UNKNOWN.",
+      "fix": "Reject a supplied canonical name or roaster when normalized identity key IS NULL, in addition to existing length gate."
+    }
+  ],
+  "source_paths": [
+    "supabase/migrations/20261118214500_dic_admin_edit_normalized_identity_guard.sql",
+    "supabase/tests/admin_edit_normalized_identity_guard.sql",
+    "scripts/audit/isolated-sql-regression.sh",
+    "docs/workstreams/issue-509.md",
+    "docs/audits/issue509-supabase-object-ledger.json",
+    "docs/RELEASE_QUEUE.json",
+    "docs/audits/issue509-r345-admin-normalized-identity-20261118.json"
+  ],
+  "semantic_delta": "Only two normalized-key null guards in the existing Admin approved coffee correction input validation; original SQL body otherwise unchanged",
+  "read_only_no_private_records": true,
+  "first_time_provider_word_credit": 0,
+  "issue267_code_line_credit": 0,
+  "tests_status": "NOT_YET_SOURCE_BOUND",
+  "queue": "DIC-Q-509-admin-normalized-identity",
+  "release": "TESTING_NOT_READY",
+  "baseline": "IN_PROGRESS",
+  "provider_writes": 0,
+  "publish": false,
+  "next": "Verify PR-head isolated PG17, Node22 and approval/continuity CI, repair failures, safe nonforce [skip netlify] merge if PASS; independently recheck live state. Hosted signed-in acceptance UNVERIFIED."
+}
