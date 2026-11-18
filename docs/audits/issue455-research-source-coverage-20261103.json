@@ -4107,6 +4107,20 @@
       "review_status": "R333_SOURCE_VERIFIED_PRIOR_RECEIPT_CANONICAL_INGESTED_R336_SECONDARY_COHORT_WITH_CAUSAL_LIMITS",
       "implementation_status": "RESEARCH_ONLY_NO_NEW_NUMERIC_TEMPERATURE_DEFAULT_NO_FIELD_NO_MEMBER_DATA_NO_DEPLOYMENT",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "LIVE-20261118-SHOT-HISTORY-EMPTY-STATE-R343",
+      "type": "original_current_app_source_ux_reproduction",
+      "path": "site/cloud/main.js",
+      "git_blob_sha": "54de6067d02965ba36ab5e5863baac86c8afbb4e",
+      "supporting_path": "site/cloud/shot_card.js",
+      "supporting_git_blob_sha": "9ac46492c71c725fb64450884c71428a4d933d52",
+      "source_commit_sha": "1ce0dfcd5d2e98e32d88f5b21c64fe2a0328e3e1",
+      "review_status": "DIRECT_CURRENT_LIVE_RENDER_PATH_READ; ZERO_SHOT_CONDITIONAL_EMPTY_BODY_REPRODUCED_AT_SOURCE",
+      "claim": "When current coffee has zero visible shot records, Shot History (0) disclosure has no explanatory child content; main coffee card separately offers Log First Shot or Log A Shot.",
+      "evidence_grade": "DIRECT_SOURCE_CONTROL_FLOW_REPRODUCTION_NO_REAL_MEMBER_UX_TRIAL",
+      "source_access": "IMMUTABLE_GITHUB_BLOBS",
+      "github267_literal_review_credit": 0
     }
   ],
   "evidence_checks": [
@@ -11711,6 +11725,26 @@
       "owner_approval_required": false,
       "implementation_status": "RESEARCH_ONLY_NO_ENGINE_TARGET_POLICY_OR_TELEMETRY_CHANGE",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-R343-EMPTY-HISTORY-NEGATIVE",
+      "source": "LIVE-20261118-SHOT-HISTORY-EMPTY-STATE-R343",
+      "claim": "At immutable prewrite main.js, shots array is filtered by coffee/hidden and mapped to cards; zero length produces empty string after the summary because no else branch exists.",
+      "grade": "DIRECT_CODE_CONTROL_FLOW",
+      "factual_status": "REPRODUCED_STATIC_NO_MEMBER_PRODUCTION_READ",
+      "result": "Add an explicit empty-state line only when list is empty.",
+      "owner_approval_required": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-R343-EMPTY-HISTORY-POSITIVE",
+      "source": "LIVE-20261118-SHOT-HISTORY-EMPTY-STATE-R343",
+      "claim": "New pure emptyShotHistory helper is referenced as the falsy-join fallback after shot-card mapping, preserving populated cards and existing five-rated shot data.",
+      "grade": "SOURCE_CHANGE_AUTHORED_SYNTHETIC_NODE_TEST_NOT_YET_EXECUTED",
+      "factual_status": "PROPOSED_PENDING_CI_MERGE_VERIFICATION",
+      "result": "Do not claim real mobile usability or measured espresso improvement.",
+      "owner_approval_required": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -12015,27 +12049,32 @@
       "run_id": "R455-342",
       "next": "R342 author README viewer independently corroborates 3186 rows and identifies n/a titration pH plus interpreted Cluster/Percent Extraction; raw original README and CSV checksums / row-level validation still pending, keep dataset description's erroneous 3168 uncorrected in provider. Verify exact docs-only CI/merge before claiming durable integrated evidence; continue a SAFE UX source-backed issue.",
       "owner_approval_now_required": false
+    },
+    {
+      "run_id": "R455-343",
+      "next": "Run exact R343 PR-head Node22/browser/mobile/offline/a11y/SQL/security/governance as applicable; nonforce merge after concurrency check, read merged blobs; only then READY queue reconciliation. Continue S019/Oct29 pack retrieval if accessible; leave #455 open.",
+      "owner_approval_now_required": false
     }
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-342",
+    "run_id": "R455-343",
     "date": "2026-11-18",
-    "development_preflight_sha": "8be0b0bff0764c7fce06f3df3dd8393d83c22fde",
+    "development_preflight_sha": "1ce0dfcd5d2e98e32d88f5b21c64fe2a0328e3e1",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "prewrite_source_sha": "8be0b0bff0764c7fce06f3df3dd8393d83c22fde",
+    "prewrite_source_sha": "1ce0dfcd5d2e98e32d88f5b21c64fe2a0328e3e1",
     "source_counts": {
-      "sources": 195,
-      "evidence_checks": 587,
-      "proposals": 261
+      "sources": 196,
+      "evidence_checks": 589,
+      "proposals": 262
     },
-    "research_status": "ORIGINAL_AUTHOR_COTTER_84_LINE_README_DIRECT_PREVIEW_3186_COHORT_CONFIRMED_AND_NA_PH_CODES; CATALOG_3168_MISMATCH_PRESERVED",
-    "runtime_changed": false,
+    "research_status": "NON_DUPLICATE_SAFE_EMPTY_SHOT_HISTORY_UI_GAP_SOURCE_VERIFIED; PRIOR_SLOWFEED_PAPER_RECHECK_REUSED_R045_NO_DUPLICATE_EVIDENCE",
+    "runtime_changed": true,
     "tests_run": false,
     "ci_not_yet_verified": true,
     "production_deployed": false,
     "github267_literal_review_credit": 0,
     "owner_approval_now_required": false,
-    "next": "Verify docs-only PR/head and merged governance after checks; raw CSV and README bytes/full 48-column condition+missingness QA remain outstanding; continue different SAFE UX gap. S019 and Oct29 ZIP still inaccessible."
+    "next": "Run exact R343 PR-head Node22/browser/mobile/offline/a11y/SQL/security/governance as applicable; nonforce merge after concurrency check, read merged blobs; only then READY queue reconciliation. Continue S019/Oct29 pack retrieval if accessible; leave #455 open."
   },
   "policy_decisions_resolved": [
     {
@@ -18287,6 +18326,37 @@
       ],
       "test_plan": "Full 2MB Git blob parse and uniqueness checks before write; verify prior R333 note blob; published original claim bounded by original prior review; docs governance exact source and merged readback, no runtime/coffee outcomes.",
       "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-PROP-R343-SHOT-HISTORY-ZERO-STATE",
+      "severity": "P3_SAFE_ESSENTIAL_EMPTY_STATE_DISCOVERABILITY",
+      "source": [
+        "LIVE-20261118-SHOT-HISTORY-EMPTY-STATE-R343"
+      ],
+      "evidence": [
+        "R455-EV-R343-EMPTY-HISTORY-NEGATIVE",
+        "R455-EV-R343-EMPTY-HISTORY-POSITIVE"
+      ],
+      "finding": "Shot History (0) is an empty disclosure without explanation although the adjacent main card can start logging.",
+      "user_benefit": "Tell new and zero-visible-shot members what to do next without invented history or new form burden.",
+      "current_locked": "All five taste inputs, all-green vs missing, one change, original measured shot/notes/private history, alternate successful recipes, feed/style/grinder/version/calibration, offline/RLS/Community.",
+      "current_app": "Original main.js 54de6067d02965ba36ab5e5863baac86c8afbb4e and shot_card.js 9ac46492c71c725fb64450884c71428a4d933d52 at 1ce0dfcd5d2e98e32d88f5b21c64fe2a0328e3e1.",
+      "proposed_change": "SAFE additive helper copy only in zero-shot history; populated cards still use existing shotCard(), no behavioral engine/persistence/telemetry mutation.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "CODE_TEST_QUEUE_SAME_COMMIT_TESTING_PENDING_EXACT_CI",
+      "files": [
+        "site/cloud/main.js",
+        "site/cloud/shot_card.js",
+        "tests/issue455-r343-empty-shot-history.test.mjs",
+        "docs/RELEASE_QUEUE.json",
+        "docs/audits/issue455-research-source-coverage-20261103.json",
+        "docs/workstreams/ops-issue455-r343-shot-history-empty-state-20261118.md"
+      ],
+      "test_plan": "Three synthetic Node22 checks; actual source-bound Node22/lint, real browser/mobile/offline/a11y, SQL/security/governance via PR/push as applicable. Do not repeat unrelated suites. No real member or taste experiment.",
+      "release_queue_status": "TESTING",
       "production_deployed": false,
       "github267_literal_review_credit": 0
     }
