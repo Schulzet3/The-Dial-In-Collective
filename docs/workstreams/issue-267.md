@@ -1,3 +1,11 @@
+## November 18, 2026 UTC — #267 CI evidence HTTP 403 bounded read-only retry, FAIL-CLOSED [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=d10e6e48742d1a43110ec331be9294d24510fcff preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+- **Authority and reproduction:** owner requested correction of repeated #267 CI issues; original exact PR-head #3268 approval run 44302711761 attempt 1 job 134796272121 rejected 33 recorded READY CI GET `/actions/runs/*` with HTTP 403. Exact same PR head attempt 2 and merged-source push later SUCCESS without permission/guard changes. True 403 cause (permissions/rate limit/service interruption) remains UNCONFIRMED; do not infer an unproven root cause.
+- **Scope and acceptance:** `scripts/release/ready-evidence-gate.mjs` retries read-only GitHub Actions GET responses 403/429/502/503/504 at most twice (250 ms then 1000 ms), with no synthetic success. HTTP 401/404 and persistent 403 fail; a persistent GitHub API read error aborts further READY-item requests and returns not-ready. Exact five statuses, source and test Git blobs, cue/queue schema, owner release permissions and one-use claim are unchanged.
+- **Tests:** `tests/ready-evidence-gate.test.mjs` adds mocked transient recovered read-only requests, persistent 403 denial/circuit breaker, 401/404 immediate denial, and HTTP-200 failed-CI denial. At this commit authoring stage focused Node22/PR-head/merged-source CI are PENDING (NOT PASS); require actual checks before completion. No extra build started by this journal.
+- **Boundary:** DEVELOPMENT ONLY, not Publish. No runtime espresso/shot/coffee/Auth/member SQL/Edge/provider/Netlify, original603 archives, readiness queue, production/main/release or schedules/owner notification policy changes. Complete #267 strict historical/pinned/live-drift review remains OPEN; continue next F215:6655, C51:53 only after fresh disjoint ledger, no duplicate credit.
+
 ## November 18, 2026 MDT — #267 V11FB F215:6625–6654 / C51:23–52 [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=37f2817b6e75f9289a7bd359b6fd02c5ab1c681a preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 

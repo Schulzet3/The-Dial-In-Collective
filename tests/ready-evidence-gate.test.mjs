@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {checkRunReceiptId,exactRecordedChecks,verifyReadyItems} from '../scripts/release/ready-evidence-gate.mjs';
+import {checkRunReceiptId,exactRecordedChecks,verifyReadyItems,githubReleaseReaders} from '../scripts/release/ready-evidence-gate.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40);
 const item={id:'DIC-Q-1938-test',issue:1938,title:'Toggle',owner_source:'Owner',state:'READY',
  merged_source_sha:A,scope_paths:['site/admin/push.js'],
@@ -51,4 +51,49 @@ test('candidate batch enforces actual published diff and exact ownership, not qu
  const bad=await verifyReadyItems({...deps,currentSourceSha:undefined,
   publishedSourceSha:B,candidateSha:C,candidateChangedPaths:['site/admin/push.js','site/admin/unfinished.js']});
  assert.equal(bad.ready,false);
+});
+
+test('read-only GitHub CI retries a temporary 403/429 and uses only actual successful JSON',async()=>{
+ let attempts=0;
+ const waits=[];
+ const {loadRun}=await githubReleaseReaders('test-only',{
+  request:async()=>{
+   attempts++;
+   if(attempts<=2)return {ok:false,status:attempts===1?403:429};
+   return {ok:true,json:async()=>({id:11,head_sha:B,status:'completed',conclusion:'success',event:'pull_request'})};
+  },sleep:async ms=>waits.push(ms)
+ });
+ const result=await loadRun(11);
+ assert.equal(result.id,11);
+ assert.equal(attempts,3);
+ assert.deepEqual(waits,[250,1000]);
+});
+test('permanent GitHub CI 403 fails closed without hammering other READY items',async()=>{
+ let attempts=0;
+ const readers=await githubReleaseReaders('test-only',{
+  request:async()=>{attempts++;return {ok:false,status:403};},sleep:async()=>{}
+ });
+ const bad={...item,ci_runs:[11]};
+ const result=await verifyReadyItems({...deps,items:[bad,{...bad,id:'DIC-Q-1939-second'}],
+  loadRun:readers.loadRun});
+ assert.equal(result.ready,false);
+ assert.equal(result.verified.length,0);
+ assert.equal(attempts,3,'a circuit breaker must stop at the first unrecoverable API error');
+ assert.ok(result.errors.some(s=>s.includes('HTTP 403')));
+});
+test('GitHub CI HTTP 401/404 deny immediately, and even HTTP 200 failed evidence is rejected',async()=>{
+ for(const status of [401,404]){
+  let attempts=0;
+  const readers=await githubReleaseReaders('test-only',{
+   request:async()=>{attempts++;return {ok:false,status};},sleep:async()=>{throw Error('unexpected retry');}
+  });
+  await assert.rejects(()=>readers.loadRun(11),new RegExp('HTTP '+status));
+  assert.equal(attempts,1);
+ }
+ const readers=await githubReleaseReaders('test-only',{
+  request:async()=>({ok:true,json:async()=>({id:11,head_sha:B,status:'completed',
+   conclusion:'failure',event:'pull_request'})})
+ });
+ const result=await verifyReadyItems({...deps,items:[{...item,ci_runs:[11]}],loadRun:readers.loadRun});
+ assert.equal(result.ready,false,'a successful HTTP response is NOT a successful CI run');
 });
