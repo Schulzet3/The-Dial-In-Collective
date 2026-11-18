@@ -1,0 +1,379 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R330",
+  "date_utc": "2026-11-18",
+  "scope": "READ_ONLY_COMMUNITY_RECOMMENDATION_RPC_SEMANTIC_CONSUMER_AND_RUNTIME_PLANNER_CROSSCHECK",
+  "preflight": {
+    "development_sha": "283c714824079d92f10f04535c52010e81d3d992",
+    "preflight_git_blob": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "branch_rechecked_before_write": true
+  },
+  "project": {
+    "id": "azviqqejypsefzilgonr",
+    "status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.11.0.003",
+    "production_writes": 0
+  },
+  "branches": {
+    "main": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release_production": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+  },
+  "direct_full_live_sql": [
+    {
+      "signature": "public.dic_community_evidence_counts",
+      "definition": "CREATE OR REPLACE FUNCTION public.dic_community_evidence_counts(p_coffee_id uuid, p_style text)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare n bigint; people bigint;\nbegin\n perform private.require_member();\n select count(*),count(distinct l.contributor_id) into n,people\n from public.community_shots c\n join private.contribution_links l on l.community_shot_id=c.id\n join public.coffees verified on verified.id=c.coffee_id\n where c.coffee_id=p_coffee_id and c.style=p_style and c.quality_state='eligible'\n  and verified.verification_state='verified';\n return jsonb_build_object('shot_count',n,'contributor_count',people);\nend $function$\n",
+      "md5": "1bddea7e3160c0282bea1d6e74d1fbaf",
+      "reviewed_characters": 694,
+      "range_1_based": [
+        1,
+        694
+      ],
+      "semantic_verdict": "ACTIVE: eligible verified Community evidence aggregate, independently scoped to member admission; does not itself make recipe recommendations"
+    },
+    {
+      "signature": "public.dic_community_recommendation_evidence",
+      "definition": "CREATE OR REPLACE FUNCTION public.dic_community_recommendation_evidence(p_library_entry_id uuid, p_style text)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare me uuid; target public.coffees; result jsonb;\nbegin\n me:=private.require_member();\n if p_style is null or p_style not in ('Traditional','Turbo','Ristretto','Lungo','Custom','Fast-Flow')\n    then raise exception using errcode='22023',message='Unknown espresso style';end if;\n select c.* into target from public.library_entries le\n join public.coffees c on c.id=le.coffee_id\n where le.id=p_library_entry_id and le.owner_id=me and le.hidden_at is null\n   and c.verification_state='verified' and c.merged_into_id is null;\n if not found then\n  return jsonb_build_object('style',p_style,'candidates','[]'::jsonb);\n end if;\n with matching as (\n  select cs.coffee_id,cl.contributor_id,cs.ratio,cs.time_s,\n   -- Only a server-maintained, eligible repeated-success *personal* family\n   -- qualifies. Do not infer a family from shot values or trust client labels.\n   case when pf.evidence_state='personally_confirmed'\n       and s.is_dialed_in and s.personal_family_id=pf.id\n       and s.style=cs.style and s.library_entry_id=pf.library_entry_id\n       then pf.id else null end as confirmed_personal_family_id,\n   floor(cs.ratio/0.25)::integer as observed_bucket,\n   case when cs.coffee_id=target.id then 3\n        when lower(btrim(c.roaster))=lower(btrim(target.roaster))\n          and lower(btrim(c.name))=lower(btrim(target.name))\n          and nullif(btrim(c.release_label),'') is not null\n          and nullif(btrim(target.release_label),'') is not null\n          and c.release_label<>target.release_label then 4\n        when nullif(btrim(c.roast_level),'')=nullif(btrim(target.roast_level),'')\n          and (\n            (nullif(btrim(c.origin),'') is not null and lower(btrim(c.origin))=lower(btrim(target.origin)))\n            or\n            (nullif(btrim(c.process),'') is not null and lower(btrim(c.process))=lower(btrim(target.process)))\n          ) then 6\n        else 99 end as tier\n  from public.community_shots cs\n  join public.coffees c on c.id=cs.coffee_id\n  join private.contribution_links cl on cl.community_shot_id=cs.id\n  join private.contributors contributor on contributor.id=cl.contributor_id\n  left join public.shots s on s.id=cl.shot_id and s.owner_id=contributor.owner_id\n      and s.style=cs.style and s.personal_family_id is not null\n  left join public.personal_recipe_families pf on pf.id=s.personal_family_id\n      and pf.owner_id=s.owner_id and pf.library_entry_id=s.library_entry_id\n      and pf.style=s.style\n  where cs.style=p_style and cs.quality_state='eligible' and c.verification_state='verified'\n    and c.merged_into_id is null and cs.ratio between 0.5 and 8 and cs.time_s between 1 and 180\n    -- A user's own Community projection must never reinforce their personal\n    -- evidence as if it came from another independent contributor.\n    and contributor.owner_id is distinct from me\n ), member_groups as (\n  select tier,coffee_id,contributor_id,ratio,time_s,\n    confirmed_personal_family_id is not null as confirmed,\n    case when confirmed_personal_family_id is not null\n      then 'family:'||confirmed_personal_family_id::text\n      else 'observation:'||observed_bucket::text end as member_group\n  from matching where tier in (3,4,6)\n ), member_centers as (\n  -- Preserve a real person's repeatedly successful family even if its shots\n  -- straddle two arbitrary 0.25 bucket edges.\n  select tier,coffee_id,contributor_id,member_group,\n    bool_or(confirmed) as personally_confirmed,\n    count(*)::integer as shot_count,\n    percentile_cont(0.5) within group(order by ratio)::numeric as ratio_center,\n    percentile_cont(0.5) within group(order by time_s)::numeric as time_center\n  from member_groups\n  group by tier,coffee_id,contributor_id,member_group\n ), member_buckets as (\n  -- One observation per independent person per estimated Community ratio\n  -- region; multiple shots or personal families from one member cannot\n  -- multiply that person's influence.\n  select tier,coffee_id,contributor_id,\n    floor(ratio_center/0.25)::integer as ratio_group,\n    sum(shot_count)::integer as shot_count,\n    count(*) filter(where personally_confirmed)::integer as confirmed_family_count,\n    percentile_cont(0.5) within group(order by ratio_center)::numeric as ratio_center,\n    percentile_cont(0.5) within group(order by time_center)::numeric as time_center\n  from member_centers\n  group by tier,coffee_id,contributor_id,floor(ratio_center/0.25)::integer\n ), ranked as (\n  select tier,coffee_id,ratio_group,\n    count(*)::integer as contributor_count,\n    sum(shot_count)::integer as shot_count,\n    sum(confirmed_family_count)::integer as confirmed_personal_family_count,\n    count(*) filter(where confirmed_family_count>0)::integer as confirmed_family_contributors,\n    percentile_cont(0.5) within group(order by ratio_center)::numeric as ratio_center,\n    percentile_cont(0.5) within group(order by time_center)::numeric as time_center\n  from member_buckets\n  group by tier,coffee_id,ratio_group\n )\n select coalesce(jsonb_agg(jsonb_build_object(\n   'tier',case tier when 3 then 'exact' when 4 then 'related_release' else 'similar_coffee' end,\n   'style',p_style,'ratio',round(ratio_center,3),'time_s',round(time_center,2),\n   'shot_count',shot_count,'contributor_count',contributor_count,\n   'confirmed_personal_family_count',confirmed_personal_family_count,\n   'confirmed_family_contributors',confirmed_family_contributors,\n   'distinct_family_basis',case when confirmed_personal_family_count>0\n      then 'confirmed_personal_families_in_observed_ratio_group'\n      else 'ratio_bucket_observed' end,\n   'community_group_identity_verified',false,\n   'source','eligible_verified_community','calibrated_grind',false\n ) order by tier,contributor_count desc,shot_count desc,ratio_center,coffee_id)\n , '[]'::jsonb) into result\n from (select * from ranked order by tier,contributor_count desc,shot_count desc,ratio_center,coffee_id\n limit 30) x;\n return jsonb_build_object('style',p_style,'candidates',result);\nend $function$\n",
+      "md5": "085f92a3814dce624e5b9a3759e893ef",
+      "reviewed_characters": 6171,
+      "range_1_based": [
+        1,
+        6171
+      ],
+      "semantic_verdict": "ACTIVE: owner+verified coffee filter, current style check, eligible-only contributions, independent-contributor exclusion, server-confirmed family source and per-person grouping; no reproduced incorrect output"
+    }
+  ],
+  "dependent_live_indexes": [
+    {
+      "table_name": "private.contribution_links",
+      "index_name": "contribution_contributor_idx",
+      "ddl": "CREATE INDEX contribution_contributor_idx ON private.contribution_links USING btree (contributor_id)",
+      "valid": true,
+      "ready": true,
+      "cumulative_scans": 43
+    },
+    {
+      "table_name": "private.contribution_links",
+      "index_name": "contribution_links_pkey",
+      "ddl": "CREATE UNIQUE INDEX contribution_links_pkey ON private.contribution_links USING btree (community_shot_id)",
+      "valid": true,
+      "ready": true,
+      "cumulative_scans": 1074
+    },
+    {
+      "table_name": "private.contribution_links",
+      "index_name": "contribution_links_shot_id_key",
+      "ddl": "CREATE UNIQUE INDEX contribution_links_shot_id_key ON private.contribution_links USING btree (shot_id)",
+      "valid": true,
+      "ready": true,
+      "cumulative_scans": 9027
+    },
+    {
+      "table_name": "private.contributors",
+      "index_name": "contributors_owner_id_key",
+      "ddl": "CREATE UNIQUE INDEX contributors_owner_id_key ON private.contributors USING btree (owner_id)",
+      "valid": true,
+      "ready": true,
+      "cumulative_scans": 71
+    },
+    {
+      "table_name": "private.contributors",
+      "index_name": "contributors_pkey",
+      "ddl": "CREATE UNIQUE INDEX contributors_pkey ON private.contributors USING btree (id)",
+      "valid": true,
+      "ready": true,
+      "cumulative_scans": 789
+    },
+    {
+      "table_name": "public.coffees",
+      "index_name": "coffees_group_idx",
+      "ddl": "CREATE INDEX coffees_group_idx ON public.coffees USING btree (group_id)",
+      "valid": true,
+      "ready": true,
+      "cumulative_scans": 0
+    },
+    {
+      "table_name": "public.coffees",
+      "index_name": "coffees_merge_idx",
+      "ddl": "CREATE INDEX coffees_merge_idx ON public.coffees USING btree (merged_into_id)",
+      "valid": true,
+      "ready": true,
+      "cumulative_scans": 456
+    },
+    {
+      "table_name": "public.coffees",
+      "index_name": "coffees_pkey",
+      "ddl": "CREATE UNIQUE INDEX coffees_pkey ON public.coffees USING btree (id)",
+      "valid": true,
+      "ready": true,
+      "cumulative_scans": 12716
+    },
+    {
+      "table_name": "public.community_shots",
+      "index_name": "community_eligible_idx",
+      "ddl": "CREATE INDEX community_eligible_idx ON public.community_shots USING btree (coffee_id, style, quality_state)",
+      "valid": true,
+      "ready": true,
+      "cumulative_scans": 2396
+    },
+    {
+      "table_name": "public.community_shots",
+      "index_name": "community_family_idx",
+      "ddl": "CREATE INDEX community_family_idx ON public.community_shots USING btree (coffee_id, style, family_id)",
+      "valid": true,
+      "ready": true,
+      "cumulative_scans": 1
+    },
+    {
+      "table_name": "public.community_shots",
+      "index_name": "community_shots_pkey",
+      "ddl": "CREATE UNIQUE INDEX community_shots_pkey ON public.community_shots USING btree (id)",
+      "valid": true,
+      "ready": true,
+      "cumulative_scans": 2015
+    },
+    {
+      "table_name": "public.library_entries",
+      "index_name": "library_coffee_idx",
+      "ddl": "CREATE INDEX library_coffee_idx ON public.library_entries USING btree (coffee_id)",
+      "valid": true,
+      "ready": true,
+      "cumulative_scans": 0
+    },
+    {
+      "table_name": "public.library_entries",
+      "index_name": "library_coffee_once_idx",
+      "ddl": "CREATE UNIQUE INDEX library_coffee_once_idx ON public.library_entries USING btree (owner_id, coffee_id) WHERE (coffee_id IS NOT NULL)",
+      "valid": true,
+      "ready": true,
+      "cumulative_scans": 308
+    },
+    {
+      "table_name": "public.library_entries",
+      "index_name": "library_entries_owner_id_id_key",
+      "ddl": "CREATE UNIQUE INDEX library_entries_owner_id_id_key ON public.library_entries USING btree (owner_id, id)",
+      "valid": true,
+      "ready": true,
+      "cumulative_scans": 780
+    },
+    {
+      "table_name": "public.library_entries",
+      "index_name": "library_entries_pkey",
+      "ddl": "CREATE UNIQUE INDEX library_entries_pkey ON public.library_entries USING btree (id)",
+      "valid": true,
+      "ready": true,
+      "cumulative_scans": 3
+    },
+    {
+      "table_name": "public.library_entries",
+      "index_name": "library_submission_once_idx",
+      "ddl": "CREATE UNIQUE INDEX library_submission_once_idx ON public.library_entries USING btree (owner_id, submission_id) WHERE (submission_id IS NOT NULL)",
+      "valid": true,
+      "ready": true,
+      "cumulative_scans": 1
+    },
+    {
+      "table_name": "public.personal_recipe_families",
+      "index_name": "personal_family_community_idx",
+      "ddl": "CREATE INDEX personal_family_community_idx ON public.personal_recipe_families USING btree (community_family_id)",
+      "valid": true,
+      "ready": true,
+      "cumulative_scans": 0
+    },
+    {
+      "table_name": "public.personal_recipe_families",
+      "index_name": "personal_recipe_families_owner_id_library_entry_id_style_id_key",
+      "ddl": "CREATE UNIQUE INDEX personal_recipe_families_owner_id_library_entry_id_style_id_key ON public.personal_recipe_families USING btree (owner_id, library_entry_id, style, id)",
+      "valid": true,
+      "ready": true,
+      "cumulative_scans": 3806
+    },
+    {
+      "table_name": "public.personal_recipe_families",
+      "index_name": "personal_recipe_families_pkey",
+      "ddl": "CREATE UNIQUE INDEX personal_recipe_families_pkey ON public.personal_recipe_families USING btree (id)",
+      "valid": true,
+      "ready": true,
+      "cumulative_scans": 52
+    },
+    {
+      "table_name": "public.shots",
+      "index_name": "shot_bag_idx",
+      "ddl": "CREATE INDEX shot_bag_idx ON public.shots USING btree (owner_id, library_entry_id, bag_id)",
+      "valid": true,
+      "ready": true,
+      "cumulative_scans": 0
+    },
+    {
+      "table_name": "public.shots",
+      "index_name": "shot_basket_idx",
+      "ddl": "CREATE INDEX shot_basket_idx ON public.shots USING btree (owner_id, setup_id, basket_version_id)",
+      "valid": true,
+      "ready": true,
+      "cumulative_scans": 0
+    },
+    {
+      "table_name": "public.shots",
+      "index_name": "shot_calibration_idx",
+      "ddl": "CREATE INDEX shot_calibration_idx ON public.shots USING btree (owner_id, setup_id, calibration_id)",
+      "valid": true,
+      "ready": true,
+      "cumulative_scans": 0
+    },
+    {
+      "table_name": "public.shots",
+      "index_name": "shot_family_idx",
+      "ddl": "CREATE INDEX shot_family_idx ON public.shots USING btree (owner_id, library_entry_id, style, personal_family_id)",
+      "valid": true,
+      "ready": true,
+      "cumulative_scans": 4227
+    },
+    {
+      "table_name": "public.shots",
+      "index_name": "shot_legacy_once_idx",
+      "ddl": "CREATE UNIQUE INDEX shot_legacy_once_idx ON public.shots USING btree (owner_id, legacy_id) WHERE (legacy_id IS NOT NULL)",
+      "valid": true,
+      "ready": true,
+      "cumulative_scans": 4
+    },
+    {
+      "table_name": "public.shots",
+      "index_name": "shot_library_time_idx",
+      "ddl": "CREATE INDEX shot_library_time_idx ON public.shots USING btree (owner_id, library_entry_id, pulled_at DESC)",
+      "valid": true,
+      "ready": true,
+      "cumulative_scans": 52
+    },
+    {
+      "table_name": "public.shots",
+      "index_name": "shots_owner_id_id_key",
+      "ddl": "CREATE UNIQUE INDEX shots_owner_id_id_key ON public.shots USING btree (owner_id, id)",
+      "valid": true,
+      "ready": true,
+      "cumulative_scans": 1704
+    },
+    {
+      "table_name": "public.shots",
+      "index_name": "shots_owner_id_setup_id_setup_version_id_library_entry_id_s_key",
+      "ddl": "CREATE UNIQUE INDEX shots_owner_id_setup_id_setup_version_id_library_entry_id_s_key ON public.shots USING btree (owner_id, setup_id, setup_version_id, library_entry_id, style, id)",
+      "valid": true,
+      "ready": true,
+      "cumulative_scans": 2
+    },
+    {
+      "table_name": "public.shots",
+      "index_name": "shots_pkey",
+      "ddl": "CREATE UNIQUE INDEX shots_pkey ON public.shots USING btree (id)",
+      "valid": true,
+      "ready": true,
+      "cumulative_scans": 164
+    }
+  ],
+  "table_runtime_statistics": [
+    {
+      "table_name": "private.contribution_links",
+      "seq_scan": 199,
+      "idx_scan": 10144,
+      "n_live_tup": 13,
+      "n_dead_tup": 32,
+      "last_analyze": null,
+      "last_autoanalyze": null
+    },
+    {
+      "table_name": "private.contributors",
+      "seq_scan": 163,
+      "idx_scan": 860,
+      "n_live_tup": 8,
+      "n_dead_tup": 1,
+      "last_analyze": null,
+      "last_autoanalyze": null
+    },
+    {
+      "table_name": "public.coffees",
+      "seq_scan": 1529,
+      "idx_scan": 13172,
+      "n_live_tup": 9,
+      "n_dead_tup": 38,
+      "last_analyze": null,
+      "last_autoanalyze": null
+    },
+    {
+      "table_name": "public.community_shots",
+      "seq_scan": 401,
+      "idx_scan": 4412,
+      "n_live_tup": 13,
+      "n_dead_tup": 41,
+      "last_analyze": null,
+      "last_autoanalyze": null
+    },
+    {
+      "table_name": "public.library_entries",
+      "seq_scan": 10132,
+      "idx_scan": 1092,
+      "n_live_tup": 10,
+      "n_dead_tup": 6,
+      "last_analyze": null,
+      "last_autoanalyze": null
+    },
+    {
+      "table_name": "public.personal_recipe_families",
+      "seq_scan": 1386,
+      "idx_scan": 3858,
+      "n_live_tup": 6,
+      "n_dead_tup": 7,
+      "last_analyze": null,
+      "last_autoanalyze": null
+    },
+    {
+      "table_name": "public.shots",
+      "seq_scan": 2760,
+      "idx_scan": 6153,
+      "n_live_tup": 27,
+      "n_dead_tup": 53,
+      "last_analyze": null,
+      "last_autoanalyze": "2026-10-21 14:47:46.431209+00"
+    }
+  ],
+  "rpc_workload": [
+    {
+      "role": "authenticated",
+      "queryid": "2669020654105127862",
+      "calls": 130,
+      "total_ms": "2802.041",
+      "mean_ms": "21.554",
+      "max_ms": "112.771",
+      "rows": 130,
+      "temp_blks_read": 0,
+      "temp_blks_written": 0
+    }
+  ],
+  "semantic_assessment": {
+    "total_current_full_sql_characters": 6865,
+    "all_index_definitions_examined": 28,
+    "all_index_valid_and_ready": true,
+    "independence_filter": "contributor.owner_id is distinct from me, confirmed family restricted to server-maintained matching shot/family",
+    "ranking_groups": "per contributor and ratio region, contributor count not multiplied by repeated shots",
+    "observed_mean_ms": 21.554,
+    "observed_max_ms": 112.771,
+    "measured_sql_spill_blocks": 0,
+    "interpretation": "Cumulative pg_stat_statements not an end-to-end request trace; 130 historical calls and tiny current table estimates do not demonstrate a scalable application bottleneck. Zero measured temp blocks for this statement. No speculative index drop or new index."
+  },
+  "review_credit": {
+    "first_time_current_definition_word_credit": 0,
+    "reason": "Functions and index families previously reviewed; this is a new cross-layer observed workload/consumer performance dossier, not a new baseline object or #267 code-line audit."
+  },
+  "findings": {
+    "new_reproducible_bugs": 0,
+    "safe_deletions": 0,
+    "source_fix": 0,
+    "performance_issue_proven": false,
+    "legacy": "No legacy roaster directory function implicated; preserve live canonical roaster key and separate source attestation functions."
+  },
+  "testing": "READ_ONLY_PROVIDER_DEFINITION_AND_STATISTICS; NO_SQL_ANALYZE, NO_USER_ROW_READ, NO_NEW_CI",
+  "limits": [
+    "No concrete member end-to-end percentile or isolated perf regression fixture; long-term scaling unverified",
+    "Statistics are cumulative; index zero scans not deletion proof",
+    "No hosted Auth/console-native access; overall baseline IN_PROGRESS"
+  ],
+  "next": "Select first provider object with changed definition hash, or a newly reproduced member-facing bug with source consumer; prioritize exact source-bound CI if new safe fix becomes justified."
+}
