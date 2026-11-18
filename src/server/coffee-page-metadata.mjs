@@ -68,7 +68,7 @@ export function markSelectedTastingSourceDisagreements(facts,selectedNotes){
  if(!Array.isArray(facts)||!selectedNotes||typeof selectedNotes!=='string')return facts;
  for(const fact of facts){
   if(fact.field!=='tasting_notes'||fact.conflicting===true||
-   !/^(?:tasting(?:\s+notes?)?|cupping(?:\s+notes?)?|flavou?r(?:\s+notes?)?|cup(?:\s+notes?)?|notes?|we\s+taste|what\s+you(?:'|’)?ll\s+taste)$/i.test(String(fact.label||'').trim().replace(/[:：]\s*$/u,''))||
+   !/^(?:tasting(?:\s+notes?)?|cupping(?:\s+notes?)?|flavou?r(?:\s+notes?)?|cup(?:\s+notes?)?|notes?|we\s+taste|we\s+hear|what\s+you(?:'|’)?ll\s+taste)$/i.test(String(fact.label||'').trim().replace(/[:：]\s*$/u,''))||
    !['html','product_json'].includes(fact.source_type)||
    /(?:different coffee|general guidance|education|recommendation|brewing recommendation|published page metadata)/i.test(String(fact.section||'')))continue;
   // An actual labeled Flavor list may contain unusual literal merchant words
@@ -1261,8 +1261,16 @@ function removeSiteSuffix(title,site){
  return stem||raw;
 }
 function labeledPairs(html,fields){
- const flavorText=(label,raw,max)=>clean(LOOKUP.get(keyOf(label))==='tasting_notes'?
-  raw.replace(/<\/?(?:span|strong|b|em|i|small|sup|sub|a|u|s|mark|abbr)\b[^<>]{0,2000}>/gi,''):raw,max);
+ const flavorText=(label,raw,max)=>{
+  // A selected "We hear" definition-list field may finish with linked
+  // music, not a fourth flavor. Retain the raw note list in Source Review.
+  if(keyOf(label)==='wehear'){
+   const song=raw.match(/^(.*?,.*?)\s*,\s*<a\b(?=[^>]{0,800}\bhref=["']https:\/\/(?:www\.)?(?:youtube\.com|youtu\.be|open\.spotify\.com|music\.apple\.com)\/)[^>]{0,800}>[^<>]{1,60}<\/a>\s*$/iu);
+   if(song&&song[1].split(/\s*,\s*/).length>=2)raw=song[1];
+  }
+  return clean(LOOKUP.get(keyOf(label))==='tasting_notes'?
+   raw.replace(/<\/?(?:span|strong|b|em|i|small|sup|sub|a|u|s|mark|abbr)\b[^<>]{0,2000}>/gi,''):raw,max);
+ };
  // Structured specifications: <dt>Label</dt><dd>Value</dd>,
  // <tr><th>Label</th><td>Value</td></tr> and common flat key:value.
  for(const m of html.matchAll(/<dt\b[^<>]{0,2000}>([\s\S]{0,180}?)<\/dt>\s*<dd\b[^<>]{0,2000}>([\s\S]{0,800}?)<\/dd>/gi)){
@@ -2092,11 +2100,11 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  const printedNotes=[];
  for(const fact of source_facts){
   if(fact.field!=='tasting_notes'||fact.conflicting&&fact.section==='Different coffee in the source'||
-   !/^(?:(?:tasting|cupping|flavou?r|flavor|cup)\s+(?:notes?|profile)|flavou?r|notes?|we\s+taste|what\s+you(?:'|’)?ll\s+taste)$/i.test(String(fact.label||'').trim())||
+   !/^(?:(?:tasting|cupping|flavou?r|flavor|cup)\s+(?:notes?|profile)|flavou?r|notes?|we\s+taste|we\s+hear|what\s+you(?:'|’)?ll\s+taste)$/i.test(String(fact.label||'').trim())||
    /(?:brewing\s+recommendations|different\s+coffee|education|general\s+guidance)/i.test(String(fact.section||''))||
    !['html','product_json'].includes(fact.source_type))continue;
   const label=String(fact.label||'').trim();
-  const rank=/^(?:tasting|cupping)\s+notes?$/i.test(label)?3:/^(?:notes?|we\s+taste|what\s+you(?:'|’)?ll\s+taste)$/i.test(label)?2:1;
+  const rank=/^(?:tasting|cupping)\s+notes?$/i.test(label)?3:/^(?:notes?|we\s+taste|we\s+hear|what\s+you(?:'|’)?ll\s+taste)$/i.test(label)?2:1;
   const value=normalizeExplicitCoffeeTastingNotes(fact.value);
   // A generic light-to-dark roast scale is not a tasting description.
   if(!value||/^(?:light|medium|dark|ultra light|very light)(?:\s+(?:light|medium|dark)){1,2}$/i.test(value))continue;
