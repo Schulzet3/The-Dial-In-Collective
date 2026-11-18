@@ -16289,6 +16289,36 @@
       "blockers": [],
       "notes": "READY in development only; NO Publish/deployment. All five recorded History ratings display existing textual taste labels without color dependence; missing/invalid remain Not rated. Original shots/notes/history and Locked one-change/taste scales, styles/feed/grinder/privacy untouched. First merged Node attempt cancelled; second verified PASS. No real-member espresso-quality claim.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-confirm-coffee-null-name",
+      "issue": 509,
+      "pr": 3258,
+      "title": "Reject NULL-normalized titles in member self-confirmation of existing verified coffee",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261118113500_dic_confirm_coffee_null_name_guard.sql"
+      ],
+      "owner_source": "Owner Issue #509 development-only safe bug repair. DIC_PREFLIGHT_VERIFIED development_sha=1f76f17ebef10c7caad69616fcbecd370a11d96a preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Direct complete live confirm RPC SQL source and Git migration parity from R331: SQL IF name mismatch guard omitted NULL-normalized names; SELECT-only synthetic punctuation-title / similarity NULL evaluation reproduced three-valued bypass with no personal data.",
+        "New additive immutable migration rejects NULL-name-key and otherwise preserves existing fuzzy threshold, origin/release/roaster, ownership and receipts.",
+        "New isolated rollback-only dic_ci PostgreSQL17 SQL test checks bad input denial and normal confirmed-name path, original Pending/library UUID and shots.",
+        "Original PR SQL run 44289071815 FAILED in new fixture because auth.users trigger already added beta_members, not a migration failure. Fixture repaired with owner_id upsert; source-bound rerun PENDING.",
+        "Original approval run 44289071927 correctly HOLD because migration was untracked by release queue; new TESTING scope item fixes intake registration. Exact-source rerun PENDING."
+      ],
+      "ci_runs": [
+        44289071815,
+        44289071927
+      ],
+      "blockers": [
+        "Isolated PG17.11 test plus applicable exact-source PR CI not yet PASS following corrective commit.",
+        "Independent #96 genuine hosted Auth/member acceptance and candidate source isolation UNVERIFIED; retain TESTING, no READY.",
+        "Production is read-only and requires separate explicit owner one-command Publish authorization."
+      ],
+      "notes": "No live Supabase changes, no record deletion, no published migration, no claimed member incident. Standalone branch is PR #3258 only; preserve existing confirmed alias/product identity policy and existing #509 pending items.",
+      "production_deployed": false
     }
   ],
   "history": [

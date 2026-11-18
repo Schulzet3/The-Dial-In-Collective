@@ -20,7 +20,8 @@ BEGIN
   INSERT INTO auth.users(id,aud,role,email)
   VALUES(member_id,'authenticated','authenticated',member_id::text||'@example.invalid');
   INSERT INTO private.beta_members(owner_id,enabled,admitted_at)
-  VALUES(member_id,true,now());
+  VALUES(member_id,true,now())
+  ON CONFLICT (owner_id) DO UPDATE SET enabled=EXCLUDED.enabled,admitted_at=EXCLUDED.admitted_at;
   INSERT INTO public.coffees(id,name,roaster,release_label,origin,verification_state)
   VALUES(canonical_id,'Known Lot Synthetic','Synthetic Guard Roaster',
          '2026 synthetic lot','Region Fixture','verified');

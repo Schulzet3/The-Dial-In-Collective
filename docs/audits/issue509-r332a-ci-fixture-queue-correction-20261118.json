@@ -1,0 +1,31 @@
+{
+  "run": "R332a",
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "1f76f17ebef10c7caad69616fcbecd370a11d96a",
+    "blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "verified": true
+  },
+  "candidate_pr": 3258,
+  "original_candidate_sha": "e6634db4217ae446555d321719ada1fa0ae23ea1",
+  "failures": [
+    {
+      "run_id": 44289071815,
+      "job": "sql",
+      "failed_step": "Apply isolated PostgreSQL schema and permissions",
+      "error": "Synthetic auth.users insertion trigger created beta_members first; duplicate key INSERT in new test",
+      "repair": "ON CONFLICT(owner_id) DO UPDATE enabled,admitted_at"
+    },
+    {
+      "run_id": 44289071927,
+      "job": "approval",
+      "failed_step": "Validate queue schema and intake",
+      "error": "Untracked migration scope",
+      "repair": "Added TESTING release queue item with migration only, merged_source_sha null"
+    }
+  ],
+  "new_test_ci": "PENDING",
+  "production_changes": 0,
+  "baseline": "IN_PROGRESS"
+}
