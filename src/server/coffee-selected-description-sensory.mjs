@@ -490,6 +490,11 @@ export function refineSelectedCoordinatedFlavoredSubstances(html,{clean,notes}={
    if(sentence.length<80||sentence.length>450||unavailable.test(sentence)||NONCURRENT_COFFEE_PROSE.test(sentence))continue;
    const m=sentence.match(/\b(?:combines|blends|features)\s+the\s+(?:rich|distinct|delightful|delicious)\s+flavou?rs?\s+of\s+([\p{L}\p{M}][\p{L}\p{M} -]{2,48}),\s+the\s+(?:smooth|creamy|subtle|gentle)\s+sweetness\s+of\s+([\p{L}\p{M}][\p{L}\p{M} -]{2,48}),\s+and\s+the\s+(?:velvety|gentle|soft|warm)\s+warmth\s+of\s+([\p{L}\p{M}][\p{L}\p{M} -]{2,48})(?=[.!?]|$)/iu);
    if(!m)continue;
+   // The merchant must actually name THIS current H1 in the same source
+   // sentence before the flavor list. A sibling coffee under the same
+   // layout/heading does not confer its tasting substances.
+   const prefix=sentence.slice(0,m.index);
+   if(!fold(prefix).includes(selected))continue;
    const originalList=m[0].replace(/^.*?\bflavou?rs?\s+of\s+/iu,'').trim();
    if(fold(notes)!==fold(originalList))continue;
    const literal=m.slice(1,4).map(v=>v.trim());
