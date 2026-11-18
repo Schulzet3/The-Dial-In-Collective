@@ -1,3 +1,17 @@
+## November 18, 2026 UTC — #455 R339 legacy date display regressions corrected after CI FAIL [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=9c32390c1f5eba1172814a5d2c5ed349b3753247 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+**Preflight/concurrency:** live development 9c32390c1f5eba1172814a5d2c5ed349b3753247, immutable PREFLIGHT.md SHA 2fb236bbfa6bac48513eeb3bd157b260853af06d reverified byte-identical to Git blob, current R339 feature parent 9edf86bd0e87c79bba7a3114117186583ee604a1, tree b9a89799eaadf285df7fdff3ce81eac8e3b57224, existing legacy test blob e67d5fdc7033edbba4be6311cad53f9fcc04857f, journal blob 9d013433bc5105107bca0bced34cffad166042f4; rechecked refs before nonforce feature write. Owner #455 Option B SAFE scope and Locked semantics unchanged.
+
+**Exact CI red-first diagnosis:** corrected R339 PR head 9edf86bd0e87c79bba7a3114117186583ee604a1 Node22/lint run 44225589430 completed **FAIL** (not PASS), job 134537963889 log shows 5,476 total, 5,468 PASS, **2 FAIL**, 6 intentional SKIP. All four new R339 tests #4903-4906 **PASS**. Failures #4914-4915 came only from older `tests/issue455-shot-history-date-display.test.mjs`, which still asserted the purposely retired date-only `aria-label` from before the SAFE a11y improvement. Their original calendar-date/unknown-date preservation assertions remain valid. This is a regression-test expectation mismatch caused by the R339 change, **not** proof of a date rendering bug.
+
+**Test-only corrective behavior:** update those two existing tests to assert native button content includes actual visible original measurements, style and date (or explicit Date not recorded), absence of overriding `aria-label`; retain no-1970 validation, pending sync, immutable notes and five ratings. No app/source/UI change in this corrective commit. The earlier failure remains recorded, not overwritten as PASS. Proposed same-commit paths: `tests/issue455-shot-history-date-display.test.mjs` plus this scoped journal with standalone preflight receipt. No new product decision, member data/telemetry, actual cup quality, SQL/Auth/Edge/Netlify/prod/main/release, backups, schedule or alert modifications.
+
+**CI/testing state at authoring:** corrected new PR-head Node22 and applicable browser/mobile/offline/a11y/governance still NOT RUN and not PASS. Original unchanged first-head CI cancellation and second-head red-first failure preserved; reuse other proven isolated tests only where valid. Next inspect corrected head source-bound CI, diagnose any subsequent failure, nonforce [skip netlify] merge with expected SHA after concurrent ref/path recheck; merged Git blob and exact push CI readback, only then queue TESTING=>READY and issue postflight. Original 29 October ZIP and S019 primary still inaccessible. No #267 audit credit.
+
+---
+
 ## November 18, 2026 UTC — #455 R339 source-bound test expectation correction [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=e507e27280d10ccb6810553cf9c8cdc551349ef6 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
