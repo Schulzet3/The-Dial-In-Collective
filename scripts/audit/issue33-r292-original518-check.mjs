@@ -26,7 +26,17 @@ const chosen=productMarkup(raw?.toString('utf8')||'');
 const headings=selectedProductHeadings(chosen);
 const txt=chosen.replace(/<(?:script|style|nav|aside|footer)\b[^>]*>[\s\S]*?<\/(?:script|style|nav|aside|footer)>/gi,' ').replace(/<[^>]{0,2000}>/g,' ').replace(/\s+/g,' ').toLowerCase();
 must(r.status==='FETCHED'&&r.parser_ok===true&&r.official_url===url,'chosen_original_official_url_fetched');
-must(final?.protocol==='https:'&&final.hostname===new URL(url).hostname&&final.pathname===new URL(url).pathname,'same_selected_host_path');
+// Live original URL redirects within the SAME verified seller to the new canonical
+// /products/embu-kenya route. This is an EXACT case-specific exception, not a
+// generic slug-based acceptance or license to transfer another coffee's facts.
+const knownCurrentSameProductRedirect=final?.pathname==='/products/embu-kenya'&&
+ headings.length===1&&headings[0]===name&&f.name===name&&
+ /kibugu fcs, gikirima factory/i.test(String(f.producer||''))&&
+ /gicherori, embu county, kenya/i.test(String(f.origin||''))&&
+ ['peach','black tea','green apple','honey'].every(x=>String(f.tasting_notes||'').toLowerCase().includes(x));
+must(final?.protocol==='https:'&&final.hostname===new URL(url).hostname&&
+ (final.pathname===new URL(url).pathname||knownCurrentSameProductRedirect),
+ 'exact_original_or_positively_selected_same_host_canonical_redirect');
 must(raw?.length>0&&raw?.length===r.html_bytes&&sha(raw)===r.html_sha256,'raw_sha256_bytes');
 must(headings.length===1&&headings[0]===name&&f.name===name&&r.archived_coffee===name,'one_exact_selected_embu_h1');
 must(['gicherori','embu county','kibugu','gikirima','kenya','peach','black tea','green apple','honey','washed','sl 34','sl 28'].every(x=>txt.includes(x)),'direct_selected_literals');
