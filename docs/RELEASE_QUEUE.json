@@ -16407,6 +16407,29 @@
       ],
       "notes": "Preserves historical migrations, original submission precedence, mutation receipts, library IDs and shots. R331-A alias matcher not using recorded aliases remains separately OPEN and must not be silently auto-linked.\nR333b: nonforce [skip netlify] source/test integration PR #3264 at 5f7193fb218850a3119a227c062b9a6c8ed9f19e; original exact merge source blobs migration 6a34eff579b75e70eabca1b6c7ca99ecb2292d9d, test 52afd0ebfc7ace8d9274ecd4ed2357ed54f91cf2, runner 042184570ea918564062af8e547fa3da2a675943. All five relevant exact merged-push checks SUCCESS. Scope remains TESTING until release-specific source isolation and #96 hosted Auth acceptance; production unchanged.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-alias-manual-confirm",
+      "issue": 509,
+      "pr": null,
+      "title": "Record historical coffee aliases as manual suggestions and allow gated explicit confirmation",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261118140000_dic_coffee_alias_suggestion_confirm.sql"
+      ],
+      "owner_source": "Issue #509 approved development-only fix; DIC_PREFLIGHT_VERIFIED development_sha=d10e6e48742d1a43110ec331be9294d24510fcff preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "R334 safe read-only synthetic SQL: alias name similarity 0.318182 is beneath matcher >=0.43 and confirmation >=0.60; existing aliases count zero, no user incident.",
+        "New PG17.11 dic_ci synthetic rollback alias suggestion/manual confirm/roaster-lot-origin regression and exact-source relevant CI PENDING."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "PG17/JWT/Node22/browser/approval exact source success and nonforce merge/readback required.",
+        "Release-candidate isolation and #96 genuine hosted Auth acceptance UNVERIFIED; no production writes without new Publish."
+      ],
+      "notes": "Preserve exact canonical auto-match, no automatic alias link, original immutable migrations, pending/member history, RLS and member admission. New scope TESTING only.",
+      "production_deployed": false
     }
   ],
   "history": [

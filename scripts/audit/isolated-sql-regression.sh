@@ -82,4 +82,10 @@ if [[ -f supabase/migrations/20261118114600_dic_first_entry_no_self_alias.sql ]]
 else
   echo "NOT_APPLICABLE: #509 coffee_first_entry_no_self_alias; migration excluded from tested source"
 fi
+if [[ -f supabase/migrations/20261118140000_dic_coffee_alias_suggestion_confirm.sql ]]; then
+  echo "Running coffee_historical_alias_suggestion_confirm"
+  run_sql supabase/tests/coffee_historical_alias_suggestion_confirm.sql
+else
+  echo "NOT_APPLICABLE: #509 historical alias; migration excluded from tested source"
+fi
 echo 'PASS: all checked-in migrations and SQL suites, including staged import/setup, cross-account and source-worker authorization and first-style owner isolation regressions; no hosted connection.'
