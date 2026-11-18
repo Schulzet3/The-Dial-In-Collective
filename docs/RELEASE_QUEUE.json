@@ -16445,6 +16445,140 @@
       ],
       "notes": "Preserve exact canonical auto-match, no automatic alias link, original immutable migrations, pending/member history, RLS and member admission. New scope TESTING only.\nR335b: PR #3273 nonforce merged at 7795d5a356e2afc27420e3fb86d7eae3316c13dc; five source-bound PR-head and exact merged-push workflows SUCCESS; migration/test/runner blobs verified; production unchanged; standalone R335b receipt docs/audits/issue509-r335b-alias-merge-ci-20261118.json. TESTING pending release isolation/#96 hosted acceptance.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-retire-internal-hide-shot",
+      "issue": 509,
+      "pr": null,
+      "title": "Remove obsolete internal Hide Shot branch while retaining active mutations and history",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261118164500_dic_remove_legacy_private_hide_shot_handler.sql"
+      ],
+      "owner_source": "Issue #509 active autonomous development cleanup; DIC_PREFLIGHT_VERIFIED development_sha=7a3c82c9064da6052145f311b41a2ae69fc85aac preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "Live complete 10881-character private.mutate definition MD5 d1050c2ee3b2896c6fbd8b90bdba9052 directly semantically reviewed; public wrapper already blocks hide_shot; private function itself remains active through mutate_workspace.",
+        "Rollback-only dic_ci PostgreSQL17 synthetic regression for internal retired action, unchanged public guard, other mutation list, no shots/receipt changes; exact hosted CI pending."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "PR-head isolated PG17 SQL/JWT, Node22 and governance CI pending; do not infer PASS from patch.",
+        "Release source isolation/#96 hosted member acceptance UNVERIFIED. No production changes or automatic publish."
+      ],
+      "notes": "Do not drop private.mutate or rewrite historical migrations, existing receipts, hidden records, member or Community data. Production read-only; no active incident established.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-recommendation-unique-controls",
+      "issue": 509,
+      "pr": null,
+      "title": "Reject duplicate controls in member-selected recommendation provenance",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261118180000_dic_recommendation_unique_controls.sql"
+      ],
+      "owner_source": "Issue #509 R340 2026-11-18 owner-authorized Supabase audit and direct live PG17 synthetic reproduction",
+      "tests": [
+        "R340: 6 safe live PostgreSQL synthetic constant cases; disposable dic_ci PG17 rollback fixture source added, hosted CI pending"
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Applicable exact-source isolated PostgreSQL17/JWT, Node22, cloud/browser, approval and privacy regression CI pending",
+        "Isolated release-candidate readiness and actual #96 hosted member acceptance unverified; separate owner Publish is required"
+      ],
+      "notes": "Development-only immutable migration adds distinct-element validation to optional shot recommendation_context; preserves prior JSON-null guard, two allowed controls and original shot history; no known member incident, no production effects.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-outlier-null-revision-guard",
+      "issue": 509,
+      "pr": 3295,
+      "title": "Reject NULL expected revision during held Community outlier confirmation",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261118181500_dic_community_outlier_null_revision_guard.sql"
+      ],
+      "owner_source": "Issue #509 owner-authorized development-only R341; DIC_PREFLIGHT_VERIFIED development_sha=9f7b9787dddcdef52143045023862f3cbb1bd1f7 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "tests": [
+        "R341: complete live source 1432 characters MD5 0657114255a0375b7f3fc502f780aa54 and read-only SQL NULL/current/stale truth table identify bypass; no actual member incident verified.",
+        "Synthetic rollback-only dic_ci PostgreSQL17 six-member held outlier fixture staged; latest PR head full CI pending, previous approval HOLD was missing mandatory queue intake row."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Latest PR-head exact-source PG17, Node22, browser, Python, approval CI are pending: no PASS/READY.",
+        "Isolated approved release candidate and genuine #96 hosted signed-in acceptance unverified; NEW owner Publish required for production migration."
+      ],
+      "notes": "Only null-unsafe revision predicate changed to IS DISTINCT FROM in complete current function. Preserve admitted-owner checks, Community eligibility/fingerprint and replay rules, all migration history, member data. No live Supabase writes or deployment.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-r352-temperature-visible-step",
+      "issue": 455,
+      "pr": 3297,
+      "title": "Suppress visibly identical clipped temperature arrows and explain machine adjustability",
+      "state": "READY",
+      "merged_source_sha": "33f8f6025024b4a3e12833896ff7241de7bffd5c",
+      "scope_paths": [
+        "site/lib/ui.js"
+      ],
+      "owner_source": "Issue #455 owner Option B SAFE presentation-only precision correction; DIC_PREFLIGHT_VERIFIED development_sha=dce0d5c46e6ba2b180d69c829d2734f21b5fb5bf preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d; original UI 915504835d8873bf3746842b50aee53f2a9ea2ab.",
+      "tests": [
+        "Negative synthetic: original 70.2→70.0 C clips engine target but displays 70→70 C/158→158 F; generic text implied full-degree change.",
+        "Positive synthetic: F and C show no impossible arrow; 93→92 C and 36→38g arrows still work; hidden temp fallback, private recorded notes and all five inputs unchanged.",
+        "Exact PR head 02c401775192a620978a1382897bdba6f6b161f6: Node22/build 44374294109, Chromium/mobile/offline/a11y 44374294148, isolated SQL 44374294303, security 44374294155, approval 44374294251 COMPLETED SUCCESS; cloud target NOT_APPLICABLE; frozen603 SKIPPED not PASS.",
+        "Nonforce [skip netlify] PR #3297 merged 33f8f6025024b4a3e12833896ff7241de7bffd5c; source af983c5a8b39d5003e1e9b69638be24e7d7c9d11, test 61221871b65347dd7b890baf199384473a97f327, same-commit journal 7a7977cdf2d74da076a7989cde6c018db4ec9d66 exact matching head and merged.",
+        "Exact merged-source Node22 44375652681, Chromium/mobile/offline/a11y 44375652652 and approval/governance 44375652699 COMPLETED SUCCESS; no failed or unstarted check claimed PASS."
+      ],
+      "ci_runs": [
+        44374294109,
+        44374294148,
+        44374294303,
+        44374294155,
+        44374294251,
+        44375652681,
+        44375652652,
+        44375652699
+      ],
+      "blockers": [],
+      "notes": "READY DEVELOPMENT ONLY NOT DEPLOYED. No engine numeric target or Locked behavior, new telemetry, member reads, RLS/community/storage/history mutation or measured espresso effect; no physical machine temperature-step verification. Oct29 ZIP and S019 PDF still unverified, #267/#33/#96 workstreams untouched; no publication.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-33-r301-original581-we-hear-selected-sensory",
+      "issue": 33,
+      "pr": 3280,
+      "title": "Recognize selected coffee We hear flavor caption without importing linked music or conflicting duplicate review text",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-semantic-specs.mjs",
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-source-facts.mjs"
+      ],
+      "owner_source": "Issue #33 owner-authorized DEVELOPMENT ONLY original603 #581 selected product; mandatory preflight development_sha=128d406abd3970a1a6692cbf315d9287cff6b727 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d; original 603-row CSV/oracle/scorer preserved.",
+      "tests": [
+        "RED first real current official #581 44332926459: exact Tandem Heri Agena - Ethiopia H1 and HTTPS raw capture, parser used secondary prose instead of selected direct 'We hear' plum/lemonade/wildflower honey; linked YouTube Cleo is music, not flavor.",
+        "Scoped generic selected-source fixes in coffee-semantic-specs, coffee-source-facts and coffee-page-metadata preserve original Source Review literal and trim only selected final explicit music-service link following at least two real flavors. Hostile nonmusic link remains a flavor, contradictory direct sources remain reviewable, no silent Add Coffee.",
+        "Corrected current exact PR head 4bf6d15e5a22b13d75659aaa54c062d068e260c5: selected official 44336059133 COMPLETED SUCCESS including eight synthetic positive/adversarial cases, 1/1 current exact HTTPS product H1 and raw 269742 bytes SHA256 26835020c94bfece253471e31bc7b81cd0ae84aaab2773481b13e54bc97e1d66; actual parser returns Plum, Lemonade, Wildflower Honey with zero conflict/SEO and Add Coffee/Source Review afterproof passed=true.",
+        "Exact old PR-head 44336058608 Node 5,544 PASS/0 FAIL/6 intentional SKIP, lint PASS; cloud UX 44336063979 SUCCESS, SQL 44336058432, Python 44336058478 and private source 44336058430 SUCCESS; full original frozen603 44336063624 SKIPPED, not universal manual certification.",
+        "Approval 44336059044 FAILED correctly only because 2 newly changed app paths had no current active queue intake; this TESTING record fixes intake specification. Re-run exact corrected PR-head approval before merge and independently validate source/CI/queue and merged files."
+      ],
+      "ci_runs": [
+        44336059133,
+        44336058608,
+        44336063979,
+        44336058432,
+        44336058478,
+        44336058430
+      ],
+      "blockers": [
+        "Corrected-head governance approval and source CI must finish and succeed; safe nonforce merge, exact merged CI/readback and READY decision remain pending. Original 603-case individual review incomplete."
+      ],
+      "notes": "DEVELOPMENT ONLY, NOT READY/DEPLOYED. Original 603 coffees/201 roasters/1197 captures and source CSV Git blob 3e0d3036ea727de091f304f538c6de2dfcaa10d6 unchanged. Preserve source review conflicts, privacy/offline/Community/Auth and explicit member Add Coffee; no Netlify/publication or production/provider/member/SQL/Edge/Auth writes.",
+      "production_deployed": false
     }
   ],
   "history": [
@@ -19275,6 +19409,24 @@
       "source_sha": "19180403495416d296ab743d016192056541bc45",
       "production_deployed": false,
       "evidence": "R346 source #3263 merged nonforce [skip netlify] 19180403495416d296ab743d016192056541bc45, original 3/3 feature/test/journal Git blobs exactly match PR-head and current development. PR-head Node22 44297347257 5521 PASS/0 FAIL/6 SKIP; merged 44298232248 5521 PASS/0 FAIL/6 SKIP; source-bound merged browser/offline/a11y/cloud 44298232187, governance 44298232397 SUCCESS; head SQL/security/approval SUCCESS. Frozen603 SKIPPED, physical-device actual IME unverified, no deploy. DIC_PREFLIGHT_VERIFIED development_sha=37f2817b6e75f9289a7bd359b6fd02c5ab1c681a preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d."
+    },
+    {
+      "date": "2026-11-18",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r352-temperature-visible-step",
+      "state": "READY",
+      "source_sha": "33f8f6025024b4a3e12833896ff7241de7bffd5c",
+      "production_deployed": false,
+      "evidence": "R352 [skip netlify] PR3297 exact 3 Git blobs, head Node22 44374294109, Chromium 44374294148, isolated SQL 44374294303, security 44374294155, approval 44374294251 SUCCESS; merged Node22 44375652681, mobile/browser/offline 44375652652 and approval 44375652699 SUCCESS. frozen603 SKIPPED; no member/production/Netlify or numeric taste policy change. DIC_PREFLIGHT_VERIFIED development_sha=dce0d5c46e6ba2b180d69c829d2734f21b5fb5bf preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d"
+    },
+    {
+      "date": "2026-11-18",
+      "issue": 33,
+      "item_id": "DIC-Q-33-r301-original581-we-hear-selected-sensory",
+      "state": "TESTING",
+      "source_sha": "4bf6d15e5a22b13d75659aaa54c062d068e260c5",
+      "production_deployed": false,
+      "evidence": "R301 exact current selected source and parser afterproof 44336059133 SUCCESS; approval 44336059044 FAILED missing intake, added this separate TESTING scoped row. DIC_PREFLIGHT_VERIFIED development_sha=128d406abd3970a1a6692cbf315d9287cff6b727 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d. No merge/READY or publication."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"

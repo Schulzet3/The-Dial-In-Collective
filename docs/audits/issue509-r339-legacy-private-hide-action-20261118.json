@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R339",
+  "date_utc": "2026-11-18",
+  "preflight": {
+    "development_sha": "7a3c82c9064da6052145f311b41a2ae69fc85aac",
+    "preflight_git_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "immutable_sha_verified": true
+  },
+  "project": {
+    "ref": "azviqqejypsefzilgonr",
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.11.0.003",
+    "production_reads_only": true,
+    "provider_mutations": 0
+  },
+  "scoped_semantic_review": {
+    "object": "private.mutate(uuid,text,jsonb)",
+    "kind": "SECURITY DEFINER PL/pgSQL",
+    "source_md5": "d1050c2ee3b2896c6fbd8b90bdba9052",
+    "complete_source_characters": 10881,
+    "reviewed_characters_1_based": [
+      1,
+      10881
+    ],
+    "live_action_list": [
+      "create_setup",
+      "save_preferences",
+      "submit_coffee",
+      "add_verified_coffee",
+      "save_shot",
+      "hide_shot"
+    ],
+    "obsolete_handler_characters": 630,
+    "post_cleanup_source_characters": 10239,
+    "active_sql_caller": "private.mutate_workspace(uuid,text,jsonb)",
+    "public_boundary": "public.dic_apply_client_change rejects hide_shot before user check and receipt replay, SQLSTATE 22023",
+    "acl": "private.mutate EXECUTE postgres only; anon/authenticated/service_role denied",
+    "other_live_sql_callers": 0,
+    "catalog_dependents": 0,
+    "postgrest_normalized_private_mutate_query_shapes": 6,
+    "cumulative_calls_since_stats_reset": 7,
+    "usage_proof_limitation": "historic normalized statements are not proof of current member use; no claim whole private.mutate is dead",
+    "incident": "No current member incident reproduced; public UI/operation was retired by Issue #20; preserve historical hidden records, data and receipts",
+    "source_mutation_policy": "Only remove redundant hidden action from private.mutate allowlist and branch. Keep all other core actions, exact public wrapper, original migrations, function identity and grants."
+  },
+  "non_private_provider_aggregate": {
+    "public_shots_with_hidden_at": 0,
+    "hidden_active_community": 0,
+    "non_green_active_community": 0,
+    "community_shots_total": 13,
+    "community_eligible": 13,
+    "green_missing_link": 0,
+    "stale_source_revision": 0
+  },
+  "planned_changes": [
+    "supabase/migrations/20261118164500_dic_remove_legacy_private_hide_shot_handler.sql",
+    "supabase/tests/legacy_private_hide_shot_retirement.sql",
+    "scripts/audit/isolated-sql-regression.sh",
+    "docs/workstreams/issue-509.md",
+    "docs/audits/issue509-r339-legacy-private-hide-action-20261118.json",
+    "docs/audits/issue509-supabase-object-ledger.json",
+    "docs/RELEASE_QUEUE.json"
+  ],
+  "premerge_status": "IN_PROGRESS_PENDING_PR_HEAD_SQL_PG17_NODE22_APPROVAL_AND_MERGED_CI",
+  "first_time_provider_word_credit": 0,
+  "issue267_code_line_credit": 0,
+  "release_queue": "DIC-Q-509-retire-internal-hide-shot TESTING (not READY)",
+  "unverified": [
+    "External provider-only console/native surfaces",
+    "Exact PR and merged CI pending",
+    "Hosted #96 authenticated member flow; needed for release acceptance"
+  ],
+  "next_exact_cursor": "Verify isolated PG17 synthetic rollback fixture and required exact-source PR CI; then safe nonforce merge and exact merged-SHA CI. Resume first truly changed/unreviewed provider definition; do not recredit preexisting bodies."
+}

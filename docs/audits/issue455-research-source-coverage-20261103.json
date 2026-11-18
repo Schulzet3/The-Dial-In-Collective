@@ -678,6 +678,22 @@
         ],
         "source_bytes_sha256": null,
         "caveat": "Full publisher HTML table values read, original PDF binary and figures/supplement/raw panel data not audited; avoid confusing professional sensory repeatability with novice member taste-quality or personal next-shot causal benefit."
+      },
+      "r350_addendum": {
+        "date": "2026-11-18",
+        "reviewed": "Primary publisher Table 6 numeric cluster-size header/response encoding, and pooled vs country-specific Table 7 denominator comparison",
+        "source_url": "https://www.mdpi.com/2304-8158/14/4/593",
+        "evidence_ids": [
+          "R455-EV-R350-TEP-TABLE6-CLUSTER-SIZES",
+          "R455-EV-R350-TEP-TABLE7-CROSS-ANALYSIS"
+        ],
+        "source_pdf_sha256": null,
+        "participant_data_reanalysis": "NOT_DONE",
+        "existing_table7_8_prior_checks_reused": [
+          "R455-EV-TABLE-272-B",
+          "R455-EV-TABLE-285-B"
+        ],
+        "product": "RESEARCH_ONLY_NO_RUNTIME_OR_TASTE_POLICY_CHANGE"
       }
     },
     {
@@ -2107,14 +2123,37 @@
       "data_url": "https://datadryad.org/dataset/doi:10.25338/B8993H",
       "code_url": "https://github.com/mhgun/sensory_prediction",
       "access": "ORIGINAL_OPEN_ACCESS_NATURE_PUBLISHER_FULL_HTML_20261112_INTRO_RESULTS_DISCUSSION_METHODS_DATA_CODE_LINKS_DIRECTLY_READ;ORIGINAL_PDF_FIGURES_NUMERIC_CELL_LEVEL_SUPPLEMENTS_RAW_PANEL_AND_EXACT_BYTES_HASH_NOT_VERIFIED",
-      "review_status": "R455-213_SUBSTANTIVE_PRIMARY_DIRECT_ORIGINAL_METHODS_MODEL_EVALUATION_MULTIPLE_AGGREGATION_STRATEGIES_EXTERNAL_VALIDITY_AND_HOLDOUT_LIMITS;REUSES_EXISTING_COTTER_DRIP_PANEL_NOT_INDEPENDENT_ESPRESSO_TASTE_VALIDATION",
+      "review_status": "R455-213_SUBSTANTIVE_PRIMARY_DIRECT_ORIGINAL_METHODS_MODEL_EVALUATION_MULTIPLE_AGGREGATION_STRATEGIES_EXTERNAL_VALIDITY_AND_HOLDOUT_LIMITS;REUSES_EXISTING_COTTER_DRIP_PANEL_NOT_INDEPENDENT_ESPRESSO_TASTE_VALIDATION;R455-351_IMMUTABLE_ORIGINAL_AUTHOR_SOURCE_CODE_NONAGG_ROW_HOLDOUT_AND_GLOBAL_FEATURE_RANKING_REVIEWED_NOT_EXECUTED",
       "evidence_grade": "PEER_REVIEWED_ONE_MEDIUM_ROAST_COFFEE_CALIFORNIA_118_CONSUMERS_27_FILTER_DRIP_BREWS_REANALYSIS_ASSOCIATION_AND_MODELING_NOT_CONTROLLABLE_SHOT_CAUSAL_INTERVENTION",
       "source_bytes_sha256": null,
       "source_byte_caveat": "Direct original publisher HTML read 2026-11-12. PDF/binary SHA256, supplement, code execution, Dryad raw and figure pixel/cell verification not performed. Do not assume random row holdout proves generalization to a new coffee/consumer; no independent new espresso dataset or DIC member test.",
       "claims_verified_externally": "Original article Methods: reanalysis of Cotter et al pre-existing 118 California black-drip consumers x 27 brew-condition samples of one medium-roast coffee (3x3x3 brew-temperature/TDS/extraction-yield factorial; 3,186 consumer-brew rows), one medium-roast coffee variety. JAR perceived adequacy for acidity/flavor intensity/mouthfeel, 17 CATA descriptors and 9-point hedonic liking are not DIC five independent 1-5 ratings. Classification cut at liking>=6. Original nonaggregated 80/20 row-level split reports 0.75 classification accuracy, AUROC0.81, regression holdout R2 0.47 and MAE1.03 on 9-point hedonic score, without a demonstrated independent unseen coffee or consumer deployment test. Brew-mean aggregation had only 27 rows; nested LOOCV no holdout. Personal preferences split into 57/61 clusters, with disagreements on roast/chocolate versus fruit/floral. Study authors explicitly limit single coffee, California consumers, drip-only generalization.",
       "locked_policy_boundary": "No three-taste substitute, five-slider changes, universal JAR or sweetness target, trained ML confidence badges, consumer cluster inference, new member data capture, science-based yield/grind/time coefficient or cross-coffee transfer. Keep owner's five distinct ratings, all-green versus missing, per-coffee user-specific successes, original dose/yield/time/notes/private history, at most one intentional controllable recommendation, separate Turbo/Fast-Flow and Slow Feed, grinder range/versions, Community/RLS.",
       "source_sha": "c2f5a9e2f49d0b8dc1e0985c17a22844e6154d2a",
-      "github267_literal_review_credit": 0
+      "github267_literal_review_credit": 0,
+      "author_code_direct_review_20261118": {
+        "repository": "mhgun/sensory_prediction",
+        "commit_sha": "1d63ad7d2ec2b2230d87a8df107c6e8e63524e47",
+        "code_files": [
+          {
+            "path": "src/feature_selection.py",
+            "blob_sha": "0f69a69f9f38a215e91b5d2d903cfaecd1feb130"
+          },
+          {
+            "path": "src/feature_stats.py",
+            "blob_sha": "3a8791c7d63d19f146b5b0287d5acf088e3d883b"
+          },
+          {
+            "path": "src/process_data.py",
+            "blob_sha": "53e5ec68c1940522397753153d9db41ccb055131"
+          },
+          {
+            "path": "src/cluster_judges.py",
+            "blob_sha": "a6826beb95655849c9755982320e29a89f7be82d"
+          }
+        ],
+        "status": "DIRECT_PINNED_AUTHOR_CODE_READ_NONAGG_SPLIT_UNIT_AND_FEATURE_RANK_ORDER_BOUNDED; NOT_AUTHOR_RAW_DATA_OR_CODE_EXECUTION"
+      }
     },
     {
       "id": "LIT-2026-OBLITAS-ESSENTIAL-OIL-ESPRESSO-ADDITIVES",
@@ -4158,6 +4197,23 @@
       "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "app_engine_blob": "90c55379be60a252a2026e01bb3d786b66c49aef",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "LIVE-20261118-R352-TEMPERATURE-DISPLAY-PRECISION",
+      "type": "original_current_app_source_ux_reproduction",
+      "path": "site/lib/ui.js",
+      "source_preflight_branch_sha": "dce0d5c46e6ba2b180d69c829d2734f21b5fb5bf",
+      "source_original_git_blob_sha": "915504835d8873bf3746842b50aee53f2a9ea2ab",
+      "fixed_git_blob_sha": "af983c5a8b39d5003e1e9b69638be24e7d7c9d11",
+      "related_engine_blob_sha": "90c55379be60a252a2026e01bb3d786b66c49aef",
+      "related_constants_blob_sha": "d3559dc1c9560c4d68fbcad1dc91e3a792a100a2",
+      "exact_merged_source_sha": "33f8f6025024b4a3e12833896ff7241de7bffd5c",
+      "review_status": "ORIGINAL_SOURCE_NEGATIVE_REPRO_AND_MERGED_SAFE_PRESENTATION_POSITIVE_TESTS_FULL_GIT_BLOBS_READ",
+      "claim": "At a real recorded 70.2 C, existing engine can bound 1C cooling request to 70.0 C, but original UI rounds both before and after to equal whole displayed degrees (70 to 70C or 158 to 158F) and repeats generic full-degree text. Actual controllable difference is only 0.2C.",
+      "evidence_grade": "DIRECT_IMMUTABLE_SOURCE_AND_DETERMINISTIC_NUMERIC_REPRODUCTION_SYNTHETIC_TESTS_NOT_MEMBER_OR_ESPRESSO_EFFICACY",
+      "access": "FULL_IMMUTABLE_PRIVATE_GITHUB_SOURCE_BLOBS",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
     }
   ],
   "evidence_checks": [
@@ -11914,6 +11970,116 @@
       "implementation_status": "RESEARCH_ONLY_NO_CLEANING_INTERVENTION",
       "exact_development_sha": "367266c2b42b42c9daff468ec21aa34f918fe78c",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-R350-TEP-TABLE6-CLUSTER-SIZES",
+      "source": "LIT-2025-CHOI-TEP-REPEATABILITY",
+      "source_url": "https://www.mdpi.com/2304-8158/14/4/593",
+      "source_location": "Foods 2025 14(4):593, first-party HTML Results 3.1.1 and original Table 6 header/identifier footnote",
+      "date": "2026-11-18",
+      "claim": "Pooled CLUSCATA Table 6 has cluster sizes 21,9,44,42,22, exactly totaling 138 coded observations; 46 professional experts each rated three repetitions. A row is an evaluation, not a distinct expert, a five-taste DIC member score, personal liking or a verified shot intervention. Original identifier encodes repetition, country and expert.",
+      "grade": "DIRECT_PUBLISHER_TABLE6_HEADER_FOOTNOTE_AND_ARITHMETIC; ORIGINAL_RAW_PERSON_CLUSTER_ASSIGNMENT_NOT_INDEPENDENTLY_REANALYZED",
+      "result": "DESCRIPTIVE_EXPERT_CATA_CLUSTER_COUNTS_NOT_ESPRESSO_RECOMMENDATION_EFFICACY",
+      "current_app": "Source-bound engine blob 90c55379be60a252a2026e01bb3d786b66c49aef, constants blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2 and model blob baafc8fa64fa3e359d8e42094e41c5d72a3b22df retain all five owner-Locked taste inputs, all-green vs incomplete ratings, one controllable next-shot adjustment, original measurements and privacy/history; paper is not used to compute personal recommendation confidence.",
+      "source_sha256": null,
+      "owner_approval": false,
+      "implementation_status": "RESEARCH_ONLY_NO_APP_CHANGE",
+      "reused_prior_checks": [
+        "R455-EV-TABLE-272-B",
+        "R455-EV-TABLE-285-B"
+      ],
+      "reviewed_at_development_sha": "22ea586a454cd4a61fa4ce0e3bd2ac349e3082a4",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-R350-TEP-TABLE7-CROSS-ANALYSIS",
+      "source": "LIT-2025-CHOI-TEP-REPEATABILITY",
+      "source_url": "https://www.mdpi.com/2304-8158/14/4/593",
+      "source_location": "Original §3.1, Tables 6-7 and Table 7 separate pooled/national CLUSCATA columns",
+      "date": "2026-11-18",
+      "claim": "Printed overall 91.3% of 46 (approximately 42/46) expert responses grouped with their own three repetitions under pooled analysis, whereas separately calculated country rates: France 85.7%=6/7, India 75%=9/12, Italy 71.4%=5/7, Korea 100%=10/10 and USA 90%=9/10, total 39/46 or 84.8%. The separately fitted analyses must not be added or turned into a single universal reliability probability; three-person assignment difference cannot be independently resolved without full person-level cluster mappings and is not proved to be a publisher arithmetic error. Previous R272 Table7 numeric review reused without duplicate credit.",
+      "grade": "DIRECT_PRIMARY_NUMERIC_TABLE_COUNTRY_VS_ALL_ANALYSIS_COMPARISON_AND_ARITHMETIC; RAW_PERSON_MAPPING_UNAVAILABLE",
+      "result": "NOT_ADDITIVE_COHORT_RELIABILITY_AND_NO_INDIVIDUAL_TASTE_CONFIDENCE_CLAIM",
+      "current_app": "Source-bound engine blob 90c55379be60a252a2026e01bb3d786b66c49aef, constants blob d3559dc1c9560c4d68fbcad1dc91e3a792a100a2 and model blob baafc8fa64fa3e359d8e42094e41c5d72a3b22df retain all five owner-Locked taste inputs, all-green vs incomplete ratings, one controllable next-shot adjustment, original measurements and privacy/history; paper is not used to compute personal recommendation confidence.",
+      "source_sha256": null,
+      "owner_approval": false,
+      "implementation_status": "RESEARCH_ONLY_NO_NEW_POLICY_OR_CONFIDENCE_NUMBER",
+      "reused_prior_checks": [
+        "R455-EV-TABLE-272-B",
+        "R455-EV-TABLE-285-B"
+      ],
+      "reviewed_at_development_sha": "22ea586a454cd4a61fa4ce0e3bd2ac349e3082a4",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-R351-GUNNING-NONAGG-ROW-HOLDOUT-CODE",
+      "source": "LIT-2026-GUNNING-DRIP-CONSUMER-ML",
+      "source_version": "mhgun/sensory_prediction@1d63ad7d2ec2b2230d87a8df107c6e8e63524e47",
+      "original_code_path": "src/feature_selection.py",
+      "original_code_git_blob_sha": "0f69a69f9f38a215e91b5d2d903cfaecd1feb130",
+      "original_code_lines": "229-243, 245-272, 274-292, 314-324; src/process_data.py lines 40-48 blob 53e5ec68c1940522397753153d9db41ccb055131",
+      "source_url": "https://github.com/mhgun/sensory_prediction/blob/1d63ad7d2ec2b2230d87a8df107c6e8e63524e47/src/feature_selection.py",
+      "claim": "The released nonaggregated 80/20 train/test exports use sklearn train_test_split(X,y,test_size=0.2,random_state=42) on consumer-by-brew rows WITHOUT a Judge/consumer-group argument or a held-out separate coffee. Therefore these exports do not enforce out-of-consumer or out-of-coffee validation. The distinct judge-mean aggregated exports split one-row-per-judge and must not be confused with nonaggregated reported results. The removed-judge sensitivity branch drops selected judges before splitting remaining rows, not evaluation on held-out excluded judges.",
+      "grade": "HIGH_DIRECT_IMMUTABLE_AUTHOR_CODE_SPLIT_SEMANTICS; MODEL_PERFORMANCE_AND_DATASETS_NOT_REEXECUTED",
+      "factual_status": "VERIFIED_CODE_PATH_ONLY; NO_CONFIRMED_REAL_WORLD_ESPRESSO_GENERALIZATION_OR_MEASURED_METRIC_INFLATION",
+      "current_app": "Development source engine.js blob 90c55379be60a252a2026e01bb3d786b66c49aef is rule-based and retains complete five sensory ratings, same-coffee evidence and no ML percentage confidence; no current app bug proven by this external code.",
+      "result": "HOLD_ANY_CLAIM_OF_NEW_PERSON_OR_UNSEEN_COFFEE_PREDICTIVE_VALIDATION; NO_APP_OR_LOCKED_POLICY_CHANGE",
+      "owner_approval": false,
+      "privacy": "NO_MEMBERS_OR_NEW_TELEMETRY; PUBLIC_AUTHOR_CODE_ONLY",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-R351-GUNNING-PRERANK-LEAKAGE-RISK",
+      "source": "LIT-2026-GUNNING-DRIP-CONSUMER-ML",
+      "source_version": "mhgun/sensory_prediction@1d63ad7d2ec2b2230d87a8df107c6e8e63524e47",
+      "original_code_paths": [
+        "src/feature_stats.py",
+        "src/feature_selection.py",
+        "src/cluster_judges.py"
+      ],
+      "original_code_git_blob_shas": [
+        "3a8791c7d63d19f146b5b0287d5acf088e3d883b",
+        "0f69a69f9f38a215e91b5d2d903cfaecd1feb130",
+        "a6826beb95655849c9755982320e29a89f7be82d"
+      ],
+      "original_code_lines": "feature_stats.py 8-45, 49-95; feature_selection.py 17-35, 102-110, 229-243; cluster_judges.py 160-184",
+      "source_url": "https://github.com/mhgun/sensory_prediction/blob/1d63ad7d2ec2b2230d87a8df107c6e8e63524e47/src/feature_stats.py",
+      "claim": "Author feature_stats.py computes outcome-supervised Pearson/Spearman/mutual-information and RFE feature ranks from full processed data, saves cof_feature_stats.csv, and feature_selection.py loads these precomputed ranks before ordinary 80/20 train/test exports and its row-wise CV. The visible workflow does not nest feature ranking within holdout or CV training folds. This presents a test-information/feature-selection leakage RISK in the described exported pipeline. Exact publication-table metric provenance, alternative training code, raw data and effect on any score were not independently established: do NOT assert proven statistical bias magnitude, invalidated reported metrics, or author misconduct.",
+      "grade": "HIGH_DIRECT_IMMUTABLE_AUTHOR_CODE_OPERATION_ORDER; RISK_INFERENCE_CONDITIONAL_ON_REPORTED_RESULTS_PIPELINE; NO_METRIC_REPRODUCTION",
+      "factual_status": "FULL_DATA_LABEL_SUPERVISED_PRERANK_AND_NONNESTED_CV_CODE_VERIFIED; METRIC_IMPACT_NOT_VERIFIED",
+      "current_app": "No import of paper ML weights, confidence percentages, preference clustering or new data collection in current DIC engine; research only.",
+      "result": "RETAIN_CAUTIOUS_EVIDENCE_GRADE; DO_NOT_ELEVATE_NONAGG_HELDOUT_ACCURACY_TO_PERSONAL_FIVE_TASTE_CUP_SUCCESS",
+      "owner_approval": false,
+      "privacy": "PUBLIC_AUTHOR_SOURCE_ONLY_NO_MEMBER_DATA",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-R352-ROUNDED-TEMPERATURE-NEGATIVE",
+      "source": "LIVE-20261118-R352-TEMPERATURE-DISPLAY-PRECISION",
+      "section": "site/lib/engine.js:837; site/lib/constants.js:69-70; original site/lib/ui.js:69-109",
+      "claim": "With all five synthetic taste ratings extraction3/body3/clarity5/sweetness5/astringency2 and measured 70.2C, clamp(70.2-1,70,100)=70.0C. Original whole-degree app rendering shows visually identical 70→70C / 158→158F arrow and misleading approx 1C text, although actual step is 0.2C.",
+      "grade": "REPRODUCED_SOURCE_ARITHMETIC_NO_HUMAN_CUP_OUTCOME",
+      "factual_status": "VERIFIED_ORIGINAL_SOURCE_SNAPSHOT_NEGATIVE",
+      "result": "SAFE_DISPLAY_ONLY_PRECISION_GUARD_IMPLEMENTED_NOT_POLICY_CHANGE",
+      "owner_approval_required": false,
+      "github267_literal_review_credit": 0,
+      "source_preflight_sha": "dce0d5c46e6ba2b180d69c829d2734f21b5fb5bf",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d"
+    },
+    {
+      "id": "R455-EV-R352-UNCHANGED-POSITIVE",
+      "source": "LIVE-20261118-R352-TEMPERATURE-DISPLAY-PRECISION",
+      "section": "site/lib/ui.js nextShotAdjustment/nextShotGuidance; tests/issue455-r352-temperature-visible-step.test.mjs",
+      "claim": "Merged UI suppresses identical before/after visible values, substitutes a machine-adjustability warning only for otherwise single-change rounded-away temperature steps, and retains 93→92C temperature, 36→38g yield and no-temperature fallback. Original measured shot and five ratings unchanged.",
+      "grade": "FULL_GIT_BLOB_MATCH_WITH_EXACT_HEAD_AND_MERGED_NODE22_CHROMIUM_OFFLINE_ACCESSIBILITY_GOVERNANCE_CI",
+      "factual_status": "VERIFIED_SYNTHETIC_POSITIVE_AND_NEGATIVE_APP_SOURCE_REGRESSION_NOT_HUMAN_TASTE_EFFICACY",
+      "result": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
+      "owner_approval_required": false,
+      "github267_literal_review_credit": 0,
+      "exact_head_sha": "02c401775192a620978a1382897bdba6f6b161f6",
+      "exact_merged_sha": "33f8f6025024b4a3e12833896ff7241de7bffd5c"
     }
   ],
   "policy_decisions_pending": [],
@@ -12243,28 +12409,43 @@
       "run_id": "R455-349",
       "next": "Docs-only canonical reconciled R347/R348 after original article and prior evidence duplicate check. Complete exact PR-head CI, safe nonforce merge with [skip netlify] and exact merged readback; no app/quality claims, Oct29 pack/S019 still unavailable, #267 separate.",
       "owner_approval_now_required": false
+    },
+    {
+      "run_id": "R455-350",
+      "next": "Verify isolated docs PR exact-source governance, nonforce [skip netlify] merge only after checked CI/concurrency, read back three changed Git blobs; continue distinct primary/UX gap. Pack/S019 inaccessible; no #267 literal line credit.",
+      "owner_approval_now_required": false
+    },
+    {
+      "run_id": "R455-351",
+      "next": "Complete docs-only CI and nonforce merge/merged governance for bounded author code evidence; separately review genuine prospective same-coffee taste effectiveness only with owner authorization. Oct29 ZIP and S019 primary not accessible; #267 source line credit zero.",
+      "owner_approval_now_required": false
+    },
+    {
+      "run_id": "R455-352",
+      "next": "R352 merged source exact verification and research-to-live-logic review recorded. Continue substantive non-overlap from source-bound ledger; October 29 original ZIP and separate S019 PDF inaccessible; #267 line audit separately owned. No user data/taste efficacy or numeric policies changed.",
+      "owner_approval_now_required": false
     }
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-349",
+    "run_id": "R455-352",
     "date": "2026-11-18",
-    "development_preflight_sha": "367266c2b42b42c9daff468ec21aa34f918fe78c",
+    "development_preflight_sha": "dce0d5c46e6ba2b180d69c829d2734f21b5fb5bf",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "prewrite_canonical_blob_sha": "d836056a25ee42481487d63fb299db50c275ec77",
-    "prewrite_journal_blob_sha": "0fa205d05d9dd92202f866a0db6fc49bf9e6f779",
+    "prewrite_canonical_blob_sha": "bbf054906e93a4046a6fa3e3402e26a63296721f",
     "source_counts": {
-      "sources": 198,
-      "evidence_checks": 598,
-      "proposals": 264
+      "sources": 199,
+      "evidence_checks": 604,
+      "proposals": 265
     },
-    "research_status": "R347_DUPLICATE_EVIDENCE_RECONCILED_AND_R348_PRIMARY_METHODS_CANONICALLY_ADDED_NO_APP_DEFECT_REPRODUCED",
-    "runtime_changed": false,
-    "tests_run": false,
-    "ci_not_yet_verified": true,
+    "research_status": "SAFE_UI_VISIBLE_TEMPERATURE_PRECISION_REPAIR_EXACT_SOURCE_NODE22_BROWSER_GOVERNANCE_VERIFIED_NOT_TASTE_EFFICACY",
+    "runtime_changed": true,
+    "numeric_policy_changed": false,
+    "tests_run": true,
+    "ci_verified": true,
     "production_deployed": false,
     "github267_literal_review_credit": 0,
     "owner_approval_now_required": false,
-    "next": "Verify exact docs PR governance success, nonforce [skip netlify] merge/readback when safe; continue next distinct source or source-reproduced Log Shot UX issue; Oct29 ZIP/S019 unavailable."
+    "next": "Continue nonoverlapping source/claim inventory and app UX improvements; Oct29 research ZIP and separate S019 PDF remain unverified; real user cup-quality effects unobserved; no #267 line-by-line credit and no release."
   },
   "policy_decisions_resolved": [
     {
@@ -18625,6 +18806,46 @@
       "test_plan": "Parse full canonical JSON, strict ID uniqueness and count checks; verify original Git blob/branch before docs update; applicable PR governance CI; no app tests/research efficacy trial as no source code changed.",
       "implementation": "R349_RESEARCH_ONLY_CANONICAL_RECONCILIATION_NOT_APP_CHANGE",
       "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY_NOT_READY_NOT_DEPLOYED",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-PROP-R352-TEMP-VISIBLE-PRECISION",
+      "severity": "P3_SAFE_ACTIONABLE_TEMPERATURE_DISPLAY_PRECISION",
+      "source": [
+        "LIVE-20261118-R352-TEMPERATURE-DISPLAY-PRECISION"
+      ],
+      "evidence": [
+        "R455-EV-R352-ROUNDED-TEMPERATURE-NEGATIVE",
+        "R455-EV-R352-UNCHANGED-POSITIVE"
+      ],
+      "finding": "A clipped temperature-only next-shot change can look identical before/after when app displays whole F/C degrees, and upstream text overstates actual step.",
+      "user_benefit": "Do not mislead members about a temperature control that may not be adjustable on their machine.",
+      "current_locked": "Owner's all-five-rating guard, one truly controllable change, original measurement/notes/private History, same-coffee success, independent styles Turbo/Fast-Flow, slow feed mode, grind range and translations, equipment adjustability, Community/RLS and offline safety stay unchanged.",
+      "current_app": "Original engine 90c55379be60a252a2026e01bb3d786b66c49aef, original UI 915504835d8873bf3746842b50aee53f2a9ea2ab; constants d3559dc1c9560c4d68fbcad1dc91e3a792a100a2; merged UI af983c5a8b39d5003e1e9b69638be24e7d7c9d11.",
+      "proposed_change": "SAFE additive display precision guard and neutral controllability text only. Engine temperature target, numerical policy, true recorded shot, stored notes/ratings, member consent/data and release remain untouched.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "files": [
+        "site/lib/ui.js",
+        "tests/issue455-r352-temperature-visible-step.test.mjs",
+        "docs/workstreams/ops-issue455-r352-temperature-visible-step-20261118.md"
+      ],
+      "implementation": "SAFE_VERIFIED_EXACT_MERGED_SOURCE_AND_NODE22_CHROMIUM_GOVERNANCE_PR3297_MERGE_33f8f6025024b4a3e12833896ff7241de7bffd5c",
+      "implementation_pr": 3297,
+      "merged_source_sha": "33f8f6025024b4a3e12833896ff7241de7bffd5c",
+      "test_plan": "Three focused synthetic Node22 negative/positive cases; exact PR-head Node22, Chromium/mobile/offline/a11y, isolated SQL, source-security and approval success; exact merge Node22, Chromium and governance success; frozen603 SKIPPED not PASS; cloud-targeted NOT_APPLICABLE.",
+      "ci_runs": [
+        44374294109,
+        44374294148,
+        44374294303,
+        44374294155,
+        44374294251,
+        44375652681,
+        44375652652,
+        44375652699
+      ],
+      "release_queue_status": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
       "production_deployed": false,
       "github267_literal_review_credit": 0
     }
