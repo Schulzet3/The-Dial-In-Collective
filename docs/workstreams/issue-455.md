@@ -1,3 +1,45 @@
+## November 18, 2026 UTC — #455 R339 legacy date display regressions corrected after CI FAIL [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=9c32390c1f5eba1172814a5d2c5ed349b3753247 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+**Preflight/concurrency:** live development 9c32390c1f5eba1172814a5d2c5ed349b3753247, immutable PREFLIGHT.md SHA 2fb236bbfa6bac48513eeb3bd157b260853af06d reverified byte-identical to Git blob, current R339 feature parent 9edf86bd0e87c79bba7a3114117186583ee604a1, tree b9a89799eaadf285df7fdff3ce81eac8e3b57224, existing legacy test blob e67d5fdc7033edbba4be6311cad53f9fcc04857f, journal blob 9d013433bc5105107bca0bced34cffad166042f4; rechecked refs before nonforce feature write. Owner #455 Option B SAFE scope and Locked semantics unchanged.
+
+**Exact CI red-first diagnosis:** corrected R339 PR head 9edf86bd0e87c79bba7a3114117186583ee604a1 Node22/lint run 44225589430 completed **FAIL** (not PASS), job 134537963889 log shows 5,476 total, 5,468 PASS, **2 FAIL**, 6 intentional SKIP. All four new R339 tests #4903-4906 **PASS**. Failures #4914-4915 came only from older `tests/issue455-shot-history-date-display.test.mjs`, which still asserted the purposely retired date-only `aria-label` from before the SAFE a11y improvement. Their original calendar-date/unknown-date preservation assertions remain valid. This is a regression-test expectation mismatch caused by the R339 change, **not** proof of a date rendering bug.
+
+**Test-only corrective behavior:** update those two existing tests to assert native button content includes actual visible original measurements, style and date (or explicit Date not recorded), absence of overriding `aria-label`; retain no-1970 validation, pending sync, immutable notes and five ratings. No app/source/UI change in this corrective commit. The earlier failure remains recorded, not overwritten as PASS. Proposed same-commit paths: `tests/issue455-shot-history-date-display.test.mjs` plus this scoped journal with standalone preflight receipt. No new product decision, member data/telemetry, actual cup quality, SQL/Auth/Edge/Netlify/prod/main/release, backups, schedule or alert modifications.
+
+**CI/testing state at authoring:** corrected new PR-head Node22 and applicable browser/mobile/offline/a11y/governance still NOT RUN and not PASS. Original unchanged first-head CI cancellation and second-head red-first failure preserved; reuse other proven isolated tests only where valid. Next inspect corrected head source-bound CI, diagnose any subsequent failure, nonforce [skip netlify] merge with expected SHA after concurrent ref/path recheck; merged Git blob and exact push CI readback, only then queue TESTING=>READY and issue postflight. Original 29 October ZIP and S019 primary still inaccessible. No #267 audit credit.
+
+---
+
+## November 18, 2026 UTC — #455 R339 source-bound test expectation correction [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=e507e27280d10ccb6810553cf9c8cdc551349ef6 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+**Preflight and concurrency:** current development SHA e507e27280d10ccb6810553cf9c8cdc551349ef6, original immutable PREFLIGHT blob 2fb236bbfa6bac48513eeb3bd157b260853af06d verified; existing R339 feature parent 27058e67d23bfec4ccf95aeefe502e30c04e39db unchanged, original test blob 9dcf4903c2378c17b518e42b8c6aa02f65f43aa4 and scoped journal 3bc8b804e30daa29518376c83e91b1d995f1d77d. Two files only in this same commit, no product/source/queue change.
+
+**Test-only precision correction:** initial positive expectations used `18g` and `41g` while existing deliberately unchanged `fmtMeasuredControl` outputs one decimal for tenth-aligned original measurements (`18.0g`, `41.0g`). This is a mistaken test expectation, NOT a reported application bug or observed CI failure at correction time. Preserve exact original measured values and all other R339 negative/positive cases. Correct the two strings and keep original attempted CI statuses separately, never call them PASS without finished logs. No additional test scope or unrelated suites authorized.
+
+**Status:** original PR-head Node22 and browser checks IN_PROGRESS when correction begun, new corrected-head CI not yet run; pending same PR final exact-source verification, nonforce merge, merged readback, queue reconciliation. No member/provider/SQL/Auth/Edge or release/publish writes.
+
+---
+
+## November 18, 2026 UTC — #455 R339 same-day Shot History disclosure accessibility [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=e507e27280d10ccb6810553cf9c8cdc551349ef6 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+**Mandatory first:** retrieved development branch SHA e507e27280d10ccb6810553cf9c8cdc551349ef6, immutable docs/ai/PREFLIGHT.md blob 2fb236bbfa6bac48513eeb3bd157b260853af06d with independent Git blob content, BEFORE AGENTS, context, topic issues/journal, Drive/Project or other providers; reread live branch and checked original source blobs immediately before authoring. Read-only main 3b372215ac7ccfd6db406f27090706e8cb8f3e80 and release/production 0f3641b4fff07e2a88d7747e621304ec2cf0ead5. Governing owner Issue #455 Option B SAFE, Master Spec/Decision Ledger Locked, #335 remaining research transfer; #33/#267/#96 disjoint. No owner product-change approval inferred.
+
+**Reproducible accessibility gap:** live site/cloud/shot_card.js blob 0f42f6cb18280da00cc0268dbaf050abf1276a75 builds collapsed Shot History buttons with visible original dose/yield/time/grind, date, style but sets aria-label="Toggle details for shot on <calendar date>". That override hides all visible measurement/style details from a screen reader's computed accessible name, so multiple same-date shots cannot be distinguished. No measured real-member incidence or taste outcome claim.
+
+**SAFE bounded fix:** remove only the date-only aria-label override; native button content now supplies the visible original measured shot, date, style, unchanged with aria-expanded. Preserve five rating inputs, success vs missing ratings, all notes/private shots, one-control advice, exact original precision, styles Turbo vs Fast-Flow, feed/grinder/calibration/temperature, editable data, Community/RLS and offline semantics. No research-derived target, telemetry, experiment, SQL/Auth/Edge/member/provider or Netlify effect.
+
+**SAME-COMMIT proposed paths:** site/cloud/shot_card.js; tests/issue455-r339-history-disclosure-accessible-name.test.mjs (four synthetic negative/positive cases); docs/RELEASE_QUEUE.json (TESTING ID DIC-Q-455-r339-shot-toggle-descriptive-accessibility, no READY assertion); docs/workstreams/issue-455.md (this source-bound receipt). Parent development SHA e507e27280d10ccb6810553cf9c8cdc551349ef6, parent tree 839d25abf3db96173f7d030dd4030419bee01d2c; original source Git blob 0f42f6cb18280da00cc0268dbaf050abf1276a75, queue blob 88ae222f08e8e2c538c65667ede4624369c7c1ff, journal blob d89b4cd02a8519302bc612fc7c9a0aa04d5e011f. No CURRENT_STATUS, approval matrix, source register, research ledger, main or release changes warranted before evidence.
+
+**Verification at authoring:** source-level negative reproduction and syntactically authored tests only. Hosted Node22, browser/mobile/offline/a11y, SQL/privacy, security, approval and merge CI NOT RUN, not PASS. Tests are synthetic and cannot establish measured espresso improvement. Next action: independent PR-head relevant CI, repair failures, recheck concurrent branch/files before nonforce [skip netlify] merge, read back merged blobs and exact-source CI; only after full actual evidence update TESTING to READY in a distinct docs-only PR and Issue #455. October 29 ZIP/S019 PDF still unavailable from explicitly searched Drive and Library Project sources; slow-feed PDF is separate. No #267 line credit, no rerun of #335 finished tests.
+
+---
+
 ## November 18, 2026 UTC — #455 R337 accessible saved five-taste History chip text [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=ee2d587cb847460330b7256c7667bee46c9dc39c preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
