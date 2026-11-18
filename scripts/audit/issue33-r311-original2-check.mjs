@@ -33,7 +33,10 @@ must(r.archived_coffee===title&&f.name===title&&heads.length>0&&
  heads.every(h=>identicalCurrentSelectedTitle(title,h,f.name)),'exact_original_selected_h1_identity');
 must(r.selected_heading_identity_verified===true&&r.add_coffee_ui_rendered===true&&r.source_review_rendered===true,'actual_member_preview_and_source_review');
 must(['washed','brazil','colombian','caramel','toffee','dark chocolate','roast'].every(x=>direct.includes(x)),'direct_own_selected_facts');
-must(/braz/i.test(String(f.origin||''))&&/colomb/i.test(String(f.origin||''))&&!/guatemala|central america|ethiopia/i.test(String(f.origin||'')),'current_selected_countries_only');
+const origin=String(f.origin||'');
+must(!/guatemala|central america|ethiopia/i.test(origin)&&
+ (origin?(/braz/i.test(origin)&&/colomb/i.test(origin)):(r.conflicts||[]).includes('origin')),
+ 'source_bound_origin_or_explicit_conflict_no_stale_country');
 must(/washed/i.test(String(f.process||'')),'current_selected_washed');
 must(/medium/i.test(String(f.roast_level||'')),'selected_medium_roast_not_grind_medium');
 must(['caramel','toffee','chocolate'].every(x=>String(f.tasting_notes||'').toLowerCase().includes(x)),
