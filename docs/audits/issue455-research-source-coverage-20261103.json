@@ -2123,14 +2123,37 @@
       "data_url": "https://datadryad.org/dataset/doi:10.25338/B8993H",
       "code_url": "https://github.com/mhgun/sensory_prediction",
       "access": "ORIGINAL_OPEN_ACCESS_NATURE_PUBLISHER_FULL_HTML_20261112_INTRO_RESULTS_DISCUSSION_METHODS_DATA_CODE_LINKS_DIRECTLY_READ;ORIGINAL_PDF_FIGURES_NUMERIC_CELL_LEVEL_SUPPLEMENTS_RAW_PANEL_AND_EXACT_BYTES_HASH_NOT_VERIFIED",
-      "review_status": "R455-213_SUBSTANTIVE_PRIMARY_DIRECT_ORIGINAL_METHODS_MODEL_EVALUATION_MULTIPLE_AGGREGATION_STRATEGIES_EXTERNAL_VALIDITY_AND_HOLDOUT_LIMITS;REUSES_EXISTING_COTTER_DRIP_PANEL_NOT_INDEPENDENT_ESPRESSO_TASTE_VALIDATION",
+      "review_status": "R455-213_SUBSTANTIVE_PRIMARY_DIRECT_ORIGINAL_METHODS_MODEL_EVALUATION_MULTIPLE_AGGREGATION_STRATEGIES_EXTERNAL_VALIDITY_AND_HOLDOUT_LIMITS;REUSES_EXISTING_COTTER_DRIP_PANEL_NOT_INDEPENDENT_ESPRESSO_TASTE_VALIDATION;R455-351_IMMUTABLE_ORIGINAL_AUTHOR_SOURCE_CODE_NONAGG_ROW_HOLDOUT_AND_GLOBAL_FEATURE_RANKING_REVIEWED_NOT_EXECUTED",
       "evidence_grade": "PEER_REVIEWED_ONE_MEDIUM_ROAST_COFFEE_CALIFORNIA_118_CONSUMERS_27_FILTER_DRIP_BREWS_REANALYSIS_ASSOCIATION_AND_MODELING_NOT_CONTROLLABLE_SHOT_CAUSAL_INTERVENTION",
       "source_bytes_sha256": null,
       "source_byte_caveat": "Direct original publisher HTML read 2026-11-12. PDF/binary SHA256, supplement, code execution, Dryad raw and figure pixel/cell verification not performed. Do not assume random row holdout proves generalization to a new coffee/consumer; no independent new espresso dataset or DIC member test.",
       "claims_verified_externally": "Original article Methods: reanalysis of Cotter et al pre-existing 118 California black-drip consumers x 27 brew-condition samples of one medium-roast coffee (3x3x3 brew-temperature/TDS/extraction-yield factorial; 3,186 consumer-brew rows), one medium-roast coffee variety. JAR perceived adequacy for acidity/flavor intensity/mouthfeel, 17 CATA descriptors and 9-point hedonic liking are not DIC five independent 1-5 ratings. Classification cut at liking>=6. Original nonaggregated 80/20 row-level split reports 0.75 classification accuracy, AUROC0.81, regression holdout R2 0.47 and MAE1.03 on 9-point hedonic score, without a demonstrated independent unseen coffee or consumer deployment test. Brew-mean aggregation had only 27 rows; nested LOOCV no holdout. Personal preferences split into 57/61 clusters, with disagreements on roast/chocolate versus fruit/floral. Study authors explicitly limit single coffee, California consumers, drip-only generalization.",
       "locked_policy_boundary": "No three-taste substitute, five-slider changes, universal JAR or sweetness target, trained ML confidence badges, consumer cluster inference, new member data capture, science-based yield/grind/time coefficient or cross-coffee transfer. Keep owner's five distinct ratings, all-green versus missing, per-coffee user-specific successes, original dose/yield/time/notes/private history, at most one intentional controllable recommendation, separate Turbo/Fast-Flow and Slow Feed, grinder range/versions, Community/RLS.",
       "source_sha": "c2f5a9e2f49d0b8dc1e0985c17a22844e6154d2a",
-      "github267_literal_review_credit": 0
+      "github267_literal_review_credit": 0,
+      "author_code_direct_review_20261118": {
+        "repository": "mhgun/sensory_prediction",
+        "commit_sha": "1d63ad7d2ec2b2230d87a8df107c6e8e63524e47",
+        "code_files": [
+          {
+            "path": "src/feature_selection.py",
+            "blob_sha": "0f69a69f9f38a215e91b5d2d903cfaecd1feb130"
+          },
+          {
+            "path": "src/feature_stats.py",
+            "blob_sha": "3a8791c7d63d19f146b5b0287d5acf088e3d883b"
+          },
+          {
+            "path": "src/process_data.py",
+            "blob_sha": "53e5ec68c1940522397753153d9db41ccb055131"
+          },
+          {
+            "path": "src/cluster_judges.py",
+            "blob_sha": "a6826beb95655849c9755982320e29a89f7be82d"
+          }
+        ],
+        "status": "DIRECT_PINNED_AUTHOR_CODE_READ_NONAGG_SPLIT_UNIT_AND_FEATURE_RANK_ORDER_BOUNDED; NOT_AUTHOR_RAW_DATA_OR_CODE_EXECUTION"
+      }
     },
     {
       "id": "LIT-2026-OBLITAS-ESSENTIAL-OIL-ESPRESSO-ADDITIVES",
@@ -11972,6 +11995,48 @@
       "reviewed_at_development_sha": "22ea586a454cd4a61fa4ce0e3bd2ac349e3082a4",
       "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-R351-GUNNING-NONAGG-ROW-HOLDOUT-CODE",
+      "source": "LIT-2026-GUNNING-DRIP-CONSUMER-ML",
+      "source_version": "mhgun/sensory_prediction@1d63ad7d2ec2b2230d87a8df107c6e8e63524e47",
+      "original_code_path": "src/feature_selection.py",
+      "original_code_git_blob_sha": "0f69a69f9f38a215e91b5d2d903cfaecd1feb130",
+      "original_code_lines": "229-243, 245-272, 274-292, 314-324; src/process_data.py lines 40-48 blob 53e5ec68c1940522397753153d9db41ccb055131",
+      "source_url": "https://github.com/mhgun/sensory_prediction/blob/1d63ad7d2ec2b2230d87a8df107c6e8e63524e47/src/feature_selection.py",
+      "claim": "The released nonaggregated 80/20 train/test exports use sklearn train_test_split(X,y,test_size=0.2,random_state=42) on consumer-by-brew rows WITHOUT a Judge/consumer-group argument or a held-out separate coffee. Therefore these exports do not enforce out-of-consumer or out-of-coffee validation. The distinct judge-mean aggregated exports split one-row-per-judge and must not be confused with nonaggregated reported results. The removed-judge sensitivity branch drops selected judges before splitting remaining rows, not evaluation on held-out excluded judges.",
+      "grade": "HIGH_DIRECT_IMMUTABLE_AUTHOR_CODE_SPLIT_SEMANTICS; MODEL_PERFORMANCE_AND_DATASETS_NOT_REEXECUTED",
+      "factual_status": "VERIFIED_CODE_PATH_ONLY; NO_CONFIRMED_REAL_WORLD_ESPRESSO_GENERALIZATION_OR_MEASURED_METRIC_INFLATION",
+      "current_app": "Development source engine.js blob 90c55379be60a252a2026e01bb3d786b66c49aef is rule-based and retains complete five sensory ratings, same-coffee evidence and no ML percentage confidence; no current app bug proven by this external code.",
+      "result": "HOLD_ANY_CLAIM_OF_NEW_PERSON_OR_UNSEEN_COFFEE_PREDICTIVE_VALIDATION; NO_APP_OR_LOCKED_POLICY_CHANGE",
+      "owner_approval": false,
+      "privacy": "NO_MEMBERS_OR_NEW_TELEMETRY; PUBLIC_AUTHOR_CODE_ONLY",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-R351-GUNNING-PRERANK-LEAKAGE-RISK",
+      "source": "LIT-2026-GUNNING-DRIP-CONSUMER-ML",
+      "source_version": "mhgun/sensory_prediction@1d63ad7d2ec2b2230d87a8df107c6e8e63524e47",
+      "original_code_paths": [
+        "src/feature_stats.py",
+        "src/feature_selection.py",
+        "src/cluster_judges.py"
+      ],
+      "original_code_git_blob_shas": [
+        "3a8791c7d63d19f146b5b0287d5acf088e3d883b",
+        "0f69a69f9f38a215e91b5d2d903cfaecd1feb130",
+        "a6826beb95655849c9755982320e29a89f7be82d"
+      ],
+      "original_code_lines": "feature_stats.py 8-45, 49-95; feature_selection.py 17-35, 102-110, 229-243; cluster_judges.py 160-184",
+      "source_url": "https://github.com/mhgun/sensory_prediction/blob/1d63ad7d2ec2b2230d87a8df107c6e8e63524e47/src/feature_stats.py",
+      "claim": "Author feature_stats.py computes outcome-supervised Pearson/Spearman/mutual-information and RFE feature ranks from full processed data, saves cof_feature_stats.csv, and feature_selection.py loads these precomputed ranks before ordinary 80/20 train/test exports and its row-wise CV. The visible workflow does not nest feature ranking within holdout or CV training folds. This presents a test-information/feature-selection leakage RISK in the described exported pipeline. Exact publication-table metric provenance, alternative training code, raw data and effect on any score were not independently established: do NOT assert proven statistical bias magnitude, invalidated reported metrics, or author misconduct.",
+      "grade": "HIGH_DIRECT_IMMUTABLE_AUTHOR_CODE_OPERATION_ORDER; RISK_INFERENCE_CONDITIONAL_ON_REPORTED_RESULTS_PIPELINE; NO_METRIC_REPRODUCTION",
+      "factual_status": "FULL_DATA_LABEL_SUPERVISED_PRERANK_AND_NONNESTED_CV_CODE_VERIFIED; METRIC_IMPACT_NOT_VERIFIED",
+      "current_app": "No import of paper ML weights, confidence percentages, preference clustering or new data collection in current DIC engine; research only.",
+      "result": "RETAIN_CAUTIOUS_EVIDENCE_GRADE; DO_NOT_ELEVATE_NONAGG_HELDOUT_ACCURACY_TO_PERSONAL_FIVE_TASTE_CUP_SUCCESS",
+      "owner_approval": false,
+      "privacy": "PUBLIC_AUTHOR_SOURCE_ONLY_NO_MEMBER_DATA",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -12306,27 +12371,32 @@
       "run_id": "R455-350",
       "next": "Verify isolated docs PR exact-source governance, nonforce [skip netlify] merge only after checked CI/concurrency, read back three changed Git blobs; continue distinct primary/UX gap. Pack/S019 inaccessible; no #267 literal line credit.",
       "owner_approval_now_required": false
+    },
+    {
+      "run_id": "R455-351",
+      "next": "Complete docs-only CI and nonforce merge/merged governance for bounded author code evidence; separately review genuine prospective same-coffee taste effectiveness only with owner authorization. Oct29 ZIP and S019 primary not accessible; #267 source line credit zero.",
+      "owner_approval_now_required": false
     }
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-350",
+    "run_id": "R455-351",
     "date": "2026-11-18",
-    "development_preflight_sha": "22ea586a454cd4a61fa4ce0e3bd2ac349e3082a4",
+    "development_preflight_sha": "8e7d13c78e0fab663a96a00cabdcdc86c45041ad",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "prewrite_canonical_blob_sha": "0179d3cfc7b5132269a4250cad806e3df811e339",
+    "prewrite_canonical_blob_sha": "a3def564bc70f2e2c4e85bc40b712cbac53730c4",
     "source_counts": {
       "sources": 198,
-      "evidence_checks": 600,
+      "evidence_checks": 602,
       "proposals": 264
     },
-    "research_status": "DISTINCT_PRIMARY_TABLE6_COUNTS_AND_TABLE7_NONADDITIVE_ANALYSIS; EXISTING_R272_R285_REUSED",
+    "research_status": "AUTHOR_IMMUTABLE_CODE_R351_ROW_LEVEL_HOLDOUT_NO_JUDGE_GROUP_AND_GLOBAL_SUPERVISED_PRERANK_RISK; TWO_NEW_UNIQUE_CHECKS_NOT_NEW_INDEPENDENT_STUDY",
     "runtime_changed": false,
     "tests_run": false,
     "ci_not_yet_verified": true,
     "production_deployed": false,
     "github267_literal_review_credit": 0,
     "owner_approval_now_required": false,
-    "next": "Verify docs-only exact PR head CI and safe nonforce integration then next nonduplicating source or reproduced UX bug."
+    "next": "Verify exact docs-only PR head CI, safely integrate [skip netlify], read back original three Git blobs and merged push governance; no metrics or data efficacy claim."
   },
   "policy_decisions_resolved": [
     {
