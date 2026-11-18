@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "issue": 504,
+  "kind": "APPEND_ONLY_CONDITIONAL_SHARD",
+  "batch": "G1-345",
+  "state": "IN_PROGRESS_TESTING_UNMERGED",
+  "source": {
+    "development_sha": "25888465a5f6f647771e405f700ce24052de10a5",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "review_receipt": "docs/audits/issue504-review-G1-345.json",
+    "review_receipt_git_blob_sha": "b976df872522ec14aa2c55247e6dd51f8d41756b",
+    "owner_issues": [
+      504,
+      267,
+      455,
+      33,
+      96
+    ]
+  },
+  "reviewed": {
+    "lane": "historical PR original complete title/body",
+    "prs": [
+      2327,
+      2328,
+      2329,
+      2330,
+      2331,
+      2332,
+      2333,
+      2334
+    ],
+    "objects": 8,
+    "original_words": 950,
+    "original_utf8_bytes": 7955,
+    "original_title_body_word_range": "each complete title word1..EOF, body physical line1 word1..EOF per literal receipt",
+    "comments_reviews_diffs_covered": 0
+  },
+  "prior_conditional": {
+    "batch": "G1-344",
+    "github_metadata_records": 2491,
+    "github_metadata_words": 428273
+  },
+  "this_conditional": {
+    "batch": "G1-345",
+    "github_metadata_records": 2499,
+    "github_metadata_words": 429223,
+    "arithmetic": "2491+8=2499;428273+950=429223; valid only after G1-187..344 separate predecessors integrated once and deduplicated"
+  },
+  "canonical_branch_baseline": {
+    "latest_known_merged_batch": "G1-186",
+    "github_metadata_records": 1228,
+    "github_metadata_words": 292217,
+    "historical_file_lines": 7919,
+    "historical_file_words": 60754,
+    "prior_correction": "G1-117 -15 records / -4012 words",
+    "partial_original_release_queue": "lines 1..4736/5377"
+  },
+  "ownership": {
+    "delegated_267_crosscheck": "V11FB C51 lines 23..25 verified 3/3 at pinned/live blob 1541f5b18283deb453269f0b313e359b01f0e8c5; 0 new #504 source credit",
+    "issues_33_455_96": "No overlapping code, queue, journal or provider writes"
+  },
+  "fixes": {
+    "archival_candidate": "#2327 CLOSED/MERGED: prefix title AFTER original source preserved, verify unchanged body/refs",
+    "current_bugs_reproduced": 0,
+    "deletions": 0,
+    "product_policy_changes": 0
+  },
+  "ci": {
+    "new_batch": "NOT_RUN_YET_DOCS_ONLY",
+    "prior_batch_3269_app": "run 44305891554 COMPLETED/SUCCESS at current check; PR-only, not merged",
+    "functional": "NOT_RUN_DOCS_ONLY",
+    "merged_source": "NOT_STARTED"
+  },
+  "gaps": [
+    "#504 prior shards G1-187..344 unmerged, conditional claims not canonical",
+    "CURRENT_STATUS and RELEASE_QUEUE content empty on connector for nonzero Git blob (ACCESS_LIMITED)",
+    "PR comments, reviews, diffs, issues, CI jobs/logs/artifacts, releases/tags/commits/trees/binary/current drift and global #267 require further semantic audit"
+  ],
+  "next": {
+    "object": "PR #2335",
+    "range": "ORIGINAL TITLE word 1 followed by full BODY physical line1 word1 through EOF; if non-PR record as issue-lane gap"
+  },
+  "deployment": "NOT_AUTHORIZED",
+  "publication": "NONE",
+  "owner_notification": "NO NEW ACTIONABLE ITEM"
+}
