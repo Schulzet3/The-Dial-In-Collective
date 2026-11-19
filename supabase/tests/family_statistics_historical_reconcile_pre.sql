@@ -76,6 +76,11 @@ BEGIN
   WHERE owner_id=member_id AND setup_version_id=version_id
     AND library_entry_id=library_id AND style='Turbo' AND current_family_id=fam;
  IF NOT FOUND THEN RAISE EXCEPTION 'Synthetic Current not available'; END IF;
+ -- R361: count-correct but range-stale family must remain stale in R360,
+ -- then be repaired by the complete derived-statistics migration.
+ UPDATE public.personal_recipe_families
+ SET statistics=jsonb_set(statistics,'{ratio,high}','99'::jsonb)
+ WHERE id=other_fam;
  SELECT statistics,evidence_state INTO other_stats,other_state
   FROM public.personal_recipe_families WHERE id=other_fam;
  INSERT INTO issue509_reconcile_fixture VALUES

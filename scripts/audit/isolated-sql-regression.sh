@@ -24,6 +24,13 @@ for migration in supabase/migrations/*.sql; do
       supabase/tests/family_statistics_historical_reconcile_post.sql \
       | docker exec -i "$DIC_SQL_CONTAINER" psql -X -v ON_ERROR_STOP=1 -U postgres -d dic_ci
   fi
+  # R361: literal second additive migration corrects count-equal stale ranges.
+  if [[ "$migration" == *20261119122000_dic_reconcile_all_personal_family_derived_stats.sql ]]; then
+    echo "Running complete personal-family derived statistics fixture"
+    cat supabase/tests/family_statistics_historical_reconcile_pre.sql "$migration" \
+      supabase/tests/family_statistics_complete_reconcile_post.sql \
+      | docker exec -i "$DIC_SQL_CONTAINER" psql -X -v ON_ERROR_STOP=1 -U postgres -d dic_ci
+  fi
   run_sql "$migration"
   # Historical suites run at the schema boundary they were written to protect.
   # Later migrations intentionally replace some of those permissions/gates.
