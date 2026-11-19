@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R359",
+  "date_utc": "2026-11-19",
+  "preflight": {
+    "development_sha": "8a45f21cbbd4526dade5ae12d7fe450ca6c551be",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "immutable_git_blob_verified": true
+  },
+  "project_ref": "azviqqejypsefzilgonr",
+  "database": "PostgreSQL 17.11",
+  "production_access": "SELECT_ONLY",
+  "provider_writes": 0,
+  "integration": {
+    "pull_request": 3399,
+    "merged_development_sha": "9b97754c7a80d988947657978ec7cad1af9ed3ae",
+    "first_parent": "8a45f21cbbd4526dade5ae12d7fe450ca6c551be",
+    "second_parent": "78dac5c9a2506041f1e2439281ab526058436b14",
+    "migration": "supabase/migrations/20261119105000_dic_admin_shot_delete_family_refresh.sql",
+    "migration_blob": "4e7d595d5a65e293e8153dd3b08f8c847bd6dd3a",
+    "test": "supabase/tests/admin_shot_delete_family_refresh.sql",
+    "test_blob": "73849edbbd737b69ea5e33570c93a6844967c1ea",
+    "same_commit_journal": true,
+    "merge_message_skip_netlify": true
+  },
+  "ci": {
+    "pr_head_applicable_success": true,
+    "merged_checks": [
+      {
+        "name": "mobile-browser-qa",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": "44512335054"
+      },
+      {
+        "name": "cloud-tests",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": "44512335054"
+      },
+      {
+        "name": "python-audit",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": "44512334996"
+      },
+      {
+        "name": "validate",
+        "status": "in_progress",
+        "conclusion": null,
+        "run_id": "44512335026"
+      },
+      {
+        "name": "approval",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": "44512334965"
+      },
+      {
+        "name": "exact-selected",
+        "status": "completed",
+        "conclusion": "failure",
+        "run_id": "44512335029"
+      },
+      {
+        "name": "sql",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": "44512334942"
+      }
+    ],
+    "merged_all_applicable_success": false,
+    "remaining_checks": [
+      "validate"
+    ],
+    "unrelated_issue33_selected_failed": true,
+    "release_qualification": "TESTING; isolated candidate and hosted member acceptance unverified"
+  },
+  "provider_semantics": {
+    "full_definitions": [
+      {
+        "signature": "private.dic_admin_account_delete_finish(uuid,uuid)",
+        "md5": "51cd64deed985a9ddf622926b8784a84",
+        "chars": 2492,
+        "reviewed": "1-end"
+      },
+      {
+        "signature": "private.dic_admin_account_delete_impact(uuid)",
+        "md5": "a20e399d6c87c60be0661c80a17728d4",
+        "chars": 1588,
+        "reviewed": "1-end"
+      }
+    ],
+    "shot_single_record_delete_source": "Only private.dic_admin_delete_record directly deletes public.shots among current stored SQL functions; additive development replacement now calls refresh.",
+    "auth_owner_delete": "Auth owner FK ON DELETE CASCADE removes personal_recipe_families and shots together, so account-removal path does not independently explain one surviving stale family.",
+    "privacy": "No member identities, shot rows, notes, credentials or sensitive logs read",
+    "first_time_provider_definition_word_credit": 0,
+    "issue267_line_credit": 0
+  },
+  "existing_integrity": {
+    "families_stale_stored_count": 1,
+    "total_families": 6,
+    "reported_count": 6,
+    "eligible_count": 4,
+    "causality": "UNVERIFIED",
+    "forward_fix_backfills_existing_data": false,
+    "production_unchanged": true
+  },
+  "baseline": "IN_PROGRESS",
+  "next": "Read back merged-push exact CI; coordinate separate source-validated historical family reconciliation without production DML. Continue first changed or unreviewed provider definition. No Publish."
+}

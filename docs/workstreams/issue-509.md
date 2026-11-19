@@ -1,3 +1,15 @@
+# Issue #509 — R359 Admin shot-family fix merge and account-deletion dependency review [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=8a45f21cbbd4526dade5ae12d7fe450ca6c551be preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**November 19, 2026 UTC.** [PR #3399](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3399) safely merged NONFORCE onto `development/backend-foundation` at **`9b97754c7a80d988947657978ec7cad1af9ed3ae`**, exact PR source `78dac5c9a2506041f1e2439281ab526058436b14`; merge title and message both include `[skip netlify]`. Read back identical added migration blob `4e7d595d5a65e293e8153dd3b08f8c847bd6dd3a`, PG17 rollback fixture blob `73849edbbd737b69ea5e33570c93a6844967c1ea`, and source commit containing SAME-COMMIT scoped journal. All six applicable exact PR-head tests/checks passed. Merged-push readback: STILL PENDING validate; independent #33 selected extractor check FAILED, not a #509 SQL test failure. Separate source-isolated release readiness and hosted member acceptance **UNVERIFIED**; queue remains **TESTING**, not READY or DEPLOYED.
+
+**Additional provider-only semantic crosscheck:** directly read complete live `private.dic_admin_account_delete_finish(uuid,uuid)` (2492 chars, MD5 `51cd64deed985a9ddf622926b8784a84`) and `private.dic_admin_account_delete_impact(uuid)` (1588 chars, MD5 `a20e399d6c87c60be0661c80a17728d4`), and relevant shot, personal-family, preference and Community FK ON DELETE actions. Current function corpus scan confirms `dic_admin_delete_record` is the sole direct SQL `DELETE FROM public.shots` path; authenticated account deletion instead removes both shots and personal-family rows by Auth-owner cascades. The existing one-of-six surviving stale personal-family counter (6 stored vs 4 eligible) is **not** attributed to any specific historical deletion; source fix is forward-only and does not backfill it. No private member/shot/identity rows were queried, no new first-time provider-word or #267 code-line credit.
+
+Structured evidence: [R359 receipt](../audits/issue509-r359-admin-shot-delete-merge-20261119.json) and append-only object ledger entry. Supabase production SQL/data/Auth/Edge/Storage/config entirely unchanged, no migration, release/publish, billing, backup, schedule or alert change. Exhaustive baseline **IN_PROGRESS**. **Next:** verify exact merged-push CI and investigate safe historical mismatch backfill as separate future development-only migration/fixture; continue first genuinely new/changed/unreviewed provider object; never run live DML or assert READY.
+
+---
+
 # Issue #509 — R358c synthetic Admin RLS-safe revision fixture [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=8a45f21cbbd4526dade5ae12d7fe450ca6c551be preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e

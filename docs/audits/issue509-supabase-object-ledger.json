@@ -4832,6 +4832,23 @@
       "ci": "PENDING",
       "provider_writes": 0,
       "baseline": "IN_PROGRESS"
+    },
+    {
+      "run": "R359",
+      "date": "2026-11-19",
+      "development_sha": "9b97754c7a80d988947657978ec7cad1af9ed3ae",
+      "preflight_development_sha": "8a45f21cbbd4526dade5ae12d7fe450ca6c551be",
+      "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "receipt": "docs/audits/issue509-r359-admin-shot-delete-merge-20261119.json",
+      "merged_pr": 3399,
+      "full_live_sql_definitions": 2,
+      "first_time_word_credit": 0,
+      "issue267_line_credit": 0,
+      "provider_writes": 0,
+      "ci": "MERGED_CHECKS_PENDING",
+      "release": "TESTING",
+      "baseline": "IN_PROGRESS",
+      "next": "Merged exact CI/possible source-only historical stale family backfill, then new provider definitions"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -24851,5 +24868,35 @@
     "provider_writes": 0,
     "baseline": "IN_PROGRESS",
     "next": "Exact candidate PG17, source-bound CI and safe nonforce merge; separately assess existing stale family without production writes."
+  },
+  "provider_admin_shot_delete_family_merge_run359": {
+    "preflight_development_sha": "8a45f21cbbd4526dade5ae12d7fe450ca6c551be",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "merged_sha": "9b97754c7a80d988947657978ec7cad1af9ed3ae",
+    "receipt": "docs/audits/issue509-r359-admin-shot-delete-merge-20261119.json",
+    "pr": 3399,
+    "full_sql_sources": {
+      "private_dic_admin_account_delete_finish": {
+        "md5": "51cd64deed985a9ddf622926b8784a84",
+        "characters": 2492,
+        "range": "1-end"
+      },
+      "private_dic_admin_account_delete_impact": {
+        "md5": "a20e399d6c87c60be0661c80a17728d4",
+        "characters": 1588,
+        "range": "1-end"
+      }
+    },
+    "new_sql_words": 0,
+    "issue267_line_credit": 0,
+    "foreign_key_semantics": "Account owner delete cascade removes both shot and family, other nonshot paths preserved",
+    "ci": "PENDING_MERGED",
+    "missing_ci": [
+      "validate"
+    ],
+    "release_queue": "TESTING",
+    "provider_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Separate safe stale family reconciliation and new/changed provider definitions"
   }
 }
