@@ -41,11 +41,11 @@ for(const {n,name,url} of targets){
  // This is a seller-owned selected roast label despite no visible body roast.
  // #80 deliberately has tags:[]; its "medium to heavy body" is NOT a roast.
  if(n===79){
-  const currentOwnTag=/window\\.BOLD\\.subscriptions\\.data\\.platform\\.product\\s*=\\s*\\{[\\s\\S]{0,800}?"title"\\s*:\\s*"Burundi"\\s*,\\s*"handle"\\s*:\\s*"burundi"[\\s\\S]{0,15000}?"vendor"\\s*:\\s*"Columbia Street Roastery"[\\s\\S]{0,1500}?"tags"\\s*:\\s*\\[\\s*"Burundi"\\s*,\\s*"medium roast"\\s*\\]/.test(html);
+  const currentOwnTag=/window\.BOLD\.subscriptions\.data\.platform\.product\s*=\s*\{[\s\S]{0,800}?"title"\s*:\s*"Burundi"\s*,\s*"handle"\s*:\s*"burundi"[\s\S]{0,15000}?"vendor"\s*:\s*"Columbia Street Roastery"[\s\S]{0,1500}?"tags"\s*:\s*\[\s*"Burundi"\s*,\s*"medium roast"\s*\]/.test(html);
   must(currentOwnTag,'selected_burundi_explicit_shopify_product_roast_tag');
   must(f.roast_level==='Medium','exact_selected_shopify_burundi_medium_roast');
  }else{
-  const emptyOwnTag=/window\\.BOLD\\.subscriptions\\.data\\.platform\\.product\\s*=\\s*\\{[\\s\\S]{0,800}?"title"\\s*:\\s*"Costa Rica"\\s*,\\s*"handle"\\s*:\\s*"costa-rica"[\\s\\S]{0,15000}?"vendor"\\s*:\\s*"Columbia Street Roastery"[\\s\\S]{0,1500}?"tags"\\s*:\\s*\\[\\s*\\]/.test(html);
+  const emptyOwnTag=/window\.BOLD\.subscriptions\.data\.platform\.product\s*=\s*\{[\s\S]{0,800}?"title"\s*:\s*"Costa Rica"\s*,\s*"handle"\s*:\s*"costa-rica"[\s\S]{0,15000}?"vendor"\s*:\s*"Columbia Street Roastery"[\s\S]{0,1500}?"tags"\s*:\s*\[\s*\]/.test(html);
   must(emptyOwnTag,'selected_costa_rica_has_no_current_roast_tag');
   must(!f.roast_level,'medium_heavy_body_is_not_roast');
  }
