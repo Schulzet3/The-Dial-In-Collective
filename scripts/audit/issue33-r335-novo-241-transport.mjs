@@ -23,11 +23,16 @@ export function exactNovo241Url(input){
 export function evaluateSelected241(record){
  const f=record?.parsed||{};
  const match=record?.h1?.length===1&&norm(record.h1[0])==='buesaco'&&norm(f.name)==='buesaco';
+ const conflicts=record?.conflicts||[];
+ // The official product has competing selected hero and labeled harvest sensory lists.
+ // Current parser correctly withholds such a field, while other direct fields remain testable.
+ const notesReview=conflicts.length===1&&conflicts[0]==='tasting_notes'&&!f.tasting_notes;
+ const allowed=conflicts.length===0||notesReview;
  const valid=Boolean(record?.fetched&&record?.html_bytes>0&&/^[0-9a-f]{64}$/.test(record?.html_sha256||'')&&
   exactNovo241Url(record?.source_url)&&match&&record?.parser_ok&&record?.add_coffee_ui&&
-  record?.source_review_ui&&record?.conflicts_count===0);
- return {accepted:valid,classification:valid?'EXACT_SELECTED_SOURCE_VERIFIED':
-   record?.fetched?'SELECTED_SOURCE_UNVERIFIED':'UNAVAILABLE'};
+  record?.source_review_ui&&allowed);
+ return {accepted:valid,classification:valid?(notesReview?'EXACT_SELECTED_SOURCE_TASTING_CONFLICT_REVIEW':'EXACT_SELECTED_SOURCE_VERIFIED'):
+   record?.fetched?'SELECTED_SOURCE_UNVERIFIED':'UNAVAILABLE',manual_semantic_certified:false};
 }
 async function probeHtml(url){
  const result=await fetchPublicCoffeeHtml(url,{maxBytes:MAX_PRODUCT_RETRY_BYTES});
@@ -42,7 +47,12 @@ async function probeHtml(url){
  r.parsed=Object.fromEntries(Object.entries(parser?.fields||{}).filter(([k])=>['name','origin','process','variety','elevation_m','tasting_notes','producer','decaffeination_method','roast_level'].includes(k)));
  r.add_coffee_ui=parser?.ok===true&&coffeeUrlPreviewMarkup(parser).includes('coffee-url-preview');
  r.source_review_ui=parser?.ok===true&&coffeeSourceReviewSnapshot({...parser,source_url:r.source_url})?.type==='coffee_source_review';
- r.conflicts_count=parser?.conflicts?.length||0;
+ r.conflicts=parser?.conflicts||[];
+ r.conflicts_count=r.conflicts.length;
+ r.conflict_options=parser?.conflict_options||{};
+ r.selected_notes_source_facts=(parser?.source_facts||[]).filter(f=>f.field==='tasting_notes').slice(0,12)
+  .map(f=>({label:String(f.label||'').slice(0,90),value:String(f.value||'').slice(0,180),
+   section:String(f.section||'').slice(0,90),conflicting:f.conflicting===true}));
  r.seo_fallback_fields=parser?.seo_fallback_fields||[];
  r.access_challenge=isCoffeeSourceAccessChallenge(html);
  return {record:r,html};
@@ -81,7 +91,8 @@ export async function diagnose(){
   original603_csv_blob:csvBlob,original603_case:241,manual_certified:0,
   production_operations:0,attempts:[originalProbe.record,slashProbe.record],
   store_api_diagnostic_only:api,original_result:originalResult,slash_result:slashResult,
-  acceptance:selected?'EXACT_SELECTED_SOURCE_VERIFIED':'UNAVAILABLE_OR_UNVERIFIED',
+  acceptance:selected?evaluateSelected241(selected.record).classification:'UNAVAILABLE_OR_UNVERIFIED',
+  manual_semantic_certified:false,all603_manual_semantic_certified:false,
   no_cache_or_third_party_fallback:true};
  if(selected){
   const bytes=Buffer.from(selected.html,'utf8');
