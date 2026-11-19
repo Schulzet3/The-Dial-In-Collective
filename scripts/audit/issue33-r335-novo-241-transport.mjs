@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // #33 R335 original603 #241: bounded runner-specific Novo Buesaco transport diagnosis.
 // No cloud credentials, bypasses, fallback field admission, or production mutations.
-import {mkdirSync,writeFileSync,readFileSync} from 'node:fs';
+import {mkdirSync,writeFileSync} from 'node:fs';
 import {join} from 'node:path';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
