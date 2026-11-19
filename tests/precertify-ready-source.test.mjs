@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {frozenReadyBranch,requiredReadyPins,selectedReadyItems,
- prevalidateReadySource} from '../scripts/release/precertify-ready-source.mjs';
+ prevalidateReadySource,neutralWorkflowTransportCommit} from '../scripts/release/precertify-ready-source.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40);
 const one={id:'DIC-Q-100',issue:100,title:'ready',owner_source:'owner approval',
  state:'READY',merged_source_sha:B,scope_paths:['site/main.js'],
@@ -53,4 +53,33 @@ test('#3347 candidate name is stable across unready changes, but changes with RE
 test('#3347 no candidate can be pushed without authenticated CI main context',()=>{
  assert.throws(()=>prevalidateReadySource({developmentSourceSha:'not-a-sha'}),/Exact development/);
  assert.throws(()=>selectedReadyItems({...q,authority:'wrong'}),/schema HOLD/);
+});
+
+import {execFileSync} from 'node:child_process';
+import {mkdtempSync,mkdirSync,rmSync,writeFileSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+test('#3347 transport carries exact candidate app bytes but NEVER mutates workflow files',()=>{
+ const dir=mkdtempSync(join(tmpdir(),'dic-ready-transport-unit-'));
+ const git=(...args)=>execFileSync('git',args,{cwd:dir,encoding:'utf8'}).trim();
+ const file=(p,s)=>{mkdirSync(join(dir,p.slice(0,p.lastIndexOf('/'))),{recursive:true});writeFileSync(join(dir,p),s);};
+ try{
+  git('init','-q');git('config','user.email','test@example.com');git('config','user.name','test');
+  file('.github/workflows/ci.yml','name: older\n');file('site/main.js','published');
+  git('add','-A');git('commit','-qm','published');const pub=git('rev-parse','HEAD');
+  file('.github/workflows/ci.yml','name: new\n');file('site/main.js','ready-app');
+  git('add','-A');git('commit','-qm','development');const dev=git('rev-parse','HEAD');
+  file('.github/workflows/ci.yml','name: older\n');
+  git('add','-A');git('commit','-qm','candidate');const candidate=git('rev-parse','HEAD');
+  const x=neutralWorkflowTransportCommit({repoDir:dir,developmentSourceSha:dev,candidateSha:candidate,
+   workflowPaths:['.github/workflows/ci.yml']});
+  assert.match(x.transport_sha,/^[a-f0-9]{40}$/);
+  assert.equal(git('show',x.transport_sha+':.github/workflows/ci.yml'),'name: new');
+  assert.equal(git('show',candidate+':.github/workflows/ci.yml'),'name: older');
+  assert.equal(git('show',x.transport_sha+':site/main.js'),'ready-app');
+  assert.equal(git('rev-parse',x.transport_sha+'^'),dev);
+  assert.equal(git('rev-parse','HEAD'),candidate);
+  assert.throws(()=>neutralWorkflowTransportCommit({repoDir:dir,developmentSourceSha:dev,
+   candidateSha:candidate,workflowPaths:['../../.github/workflows/ci.yml']}),/Unsafe transport/);
+ }finally{rmSync(dir,{recursive:true,force:true});}
 });
