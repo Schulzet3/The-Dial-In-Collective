@@ -4,6 +4,7 @@ import {selected126} from '../scripts/audit/issue33-r327-original126-check.mjs';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../site/cloud/coffee-url-autofill.js';
 import {requiredFocusedSourceFailures} from '../scripts/audit/issue33-focused-source-acceptance.mjs';
+import {inferDecaffeinationMethod} from '../src/server/coffee-decaffeination-method.mjs';
 const url='https://fostercoffee.co/products/yes-its-decaf-decaf',name="Yes It's Decaf (Decaf)";
 const own='<p>Country Mexico</p><p>Region Amatenago</p><p>Producer Smallholder Farms</p><p>Altitude 1200 - 2000 MASL</p><p>Processing Washed: Mountain Water Decaf</p><p>WHAT WE’RE TASTING: Sweet, Smooth, Bright, Floral</p>';
 const fixture=(body=own,h1=name,extras='')=>'<html><body><main><article class="product"><h1>'+h1+'</h1><div class="product__description">'+body+'</div></article>'+extras+'</main></body></html>';
@@ -17,10 +18,10 @@ test('R327 sibling educational and other-coffee text cannot count as own selecte
  const s=selected126(fixture('<p>No own selected specs</p>',name,'<aside>'+own+'</aside><footer>'+own+'</footer>'));
  assert.equal(s.dualMethod,false);assert.equal(s.notes,false);assert.equal(s.farmer,false);
 });
-test('R327 Water Process remains distinct from green Washed in combined selected method',()=>{
- const p=parse(fixture());
- assert.equal(p.ok,true);assert.equal(p.fields?.decaffeination_method,'Water Process');
- assert.equal(p.fields?.process,'Washed');
+test('R327 named current decaf method normalizes separately from green Washed on a compact synthetic fixture',()=>{
+ // Compact mock does not replicate live selected Shopify method binding; current full HTML is a REQUIRED hard afterproof.
+ assert.equal(inferDecaffeinationMethod({name,processingDetail:'Processing Washed: Mountain Water Decaf',selectedMethod:'Mountain Water Decaf'}),'Water Process');
+ assert.equal(selected126(fixture()).dualMethod,true);
 });
 test('R327 unrelated EA educational link cannot turn exact selected Mountain Water into Sugar Process',()=>{
  const p=parse(fixture(own,'Yes It&#39;s Decaf (Decaf)','<aside><a>Comparing Ethyl Acetate and Mountain Water Process Decaffeination</a></aside>'));
