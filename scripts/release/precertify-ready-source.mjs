@@ -51,7 +51,7 @@ export function neutralWorkflowTransportCommit({repoDir=process.cwd(),developmen
  candidateSha,workflowPaths=[]}={}){
  if(!SHA.test(developmentSourceSha||'')||!SHA.test(candidateSha||'')||
     !Array.isArray(workflowPaths)||workflowPaths.some(path=>
-     typeof path!=='string'||!/^\\.github\\/workflows\\/[A-Za-z0-9_.\\/-]+\\.ya?ml$/.test(path))||
+     typeof path!=='string'||!/^\.github\/workflows\/[A-Za-z0-9_.\/-]+\.ya?ml$/.test(path))||
     new Set(workflowPaths).size!==workflowPaths.length)
   throw Error('Unsafe transport Git refs or workflow inventory');
  const tmp=mkdtempSync(join(tmpdir(),'dic-ready-transport-'));
@@ -66,10 +66,10 @@ export function neutralWorkflowTransportCommit({repoDir=process.cwd(),developmen
   git(['read-tree',candidateSha]);
   for(const path of workflowPaths){
    const entries=git(['ls-tree','-z',developmentSourceSha,'--',path],{trim:false})
-    .split('\\0').filter(Boolean);
+    .split('\0').filter(Boolean);
    if(entries.length>1)throw Error('Ambiguous workflow transport tree entry');
    if(!entries.length){git(['update-index','--force-remove','--',path]);continue;}
-   const m=/^(100644|100755) blob ([a-f0-9]{40})\\t(.+)$/.exec(entries[0]);
+   const m=/^(100644|100755) blob ([a-f0-9]{40})\t(.+)$/.exec(entries[0]);
    if(!m||m[3]!==path)throw Error('Unsafe development workflow blob');
    git(['update-index','--add','--cacheinfo',m[1],m[2],path]);
   }
@@ -126,9 +126,17 @@ export function prevalidateReadySource({
   const before=git(['ls-remote','--heads','origin','refs/heads/development/backend-foundation'])
    .split(/\s+/)[0];
   if(before!==developmentSourceSha)throw Error('Development changed before candidate push');
-  git(['push','--porcelain','origin',staged.candidate_sha+':'+remoteRef]);
+  try{git(['push','--porcelain','origin',transport.transport_sha+':'+remoteRef]);}
+  catch(e){
+   const detail=(String(e.stdout||'')+' '+String(e.stderr||''))
+    .replace(/https?:\/\/[^\s]+/gi,'[REDACTED_REMOTE]')
+    .replace(/(?:gh[pousr]_[A-Za-z0-9_]+|github_pat_[A-Za-z0-9_]+)/g,'[REDACTED_TOKEN]')
+    .replace(/(?:bearer|basic)\s+[^\s]+/gi,'[REDACTED_AUTH]')
+    .replace(/[\x00-\x1f]/g,' ').slice(-1200);
+   throw Error('Transport-only ref push rejected: '+detail);
+  }
   const after=git(['ls-remote','--heads','origin',remoteRef]).split(/\s+/)[0];
-  if(after!==staged.candidate_sha)throw Error('Candidate Git ref readback mismatch');
+  if(after!==transport.transport_sha)throw Error('Transport-only ref readback mismatch');
  }
  return {status:push?'TRANSPORT_READY_AWAITING_CONNECTOR':'LOCAL_SOURCE_PREFLIGHT_PASS',
   branch,candidate_sha:staged.candidate_sha,
