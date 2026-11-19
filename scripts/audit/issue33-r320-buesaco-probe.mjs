@@ -4,7 +4,7 @@ import {mkdirSync,writeFileSync} from 'node:fs';
 import {join} from 'node:path';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
-import {fetchPublicCoffeeHtml,fetchPublicCoffeeJson,MAX_PRODUCT_RETRY_BYTES,isCoffeeSourceAccessChallenge} from '../../src/server/coffee-url-guard.mjs';
+import {fetchPublicCoffeeHtml,fetchPublicCoffeeJson,MAX_PRODUCT_RETRY_BYTES} from '../../src/server/coffee-url-guard.mjs';
 import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
 import {selectedProductHeadings} from './issue33-selected-product-heading.mjs';
