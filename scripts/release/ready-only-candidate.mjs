@@ -281,6 +281,10 @@ export function planReadyOnlyCandidate(queue,{publishedSourceSha,developmentSour
    // A tracked but never-merged issue cannot contaminate the actual candidate.
    // The staged candidate still compares exact READY blobs and refuses unseen
    // same-file edits; do not invent a pin requirement from an unmerged record.
+   // Without a chosen READY owner, even an unmerged queue record must keep
+   // the changed unfinished-only runtime in the restoration set. This does
+   // not prove it is safe to include; it is explicitly restored, not shipped.
+   if(!chosen.length)return true;
    if(!SHA.test(i.merged_source_sha||''))return i.state==='READY';
    try{return isAncestor(i.merged_source_sha,developmentSourceSha)===true;}
    catch{
