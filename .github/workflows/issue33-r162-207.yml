@@ -1,0 +1,49 @@
+name: DIC Issue33 R162 original207 current selected house blend
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r162-207.yml
+      - scripts/audit/issue33-r162-207-check.mjs
+      - tests/coffee-issue33-r162-207.test.mjs
+      - docs/workstreams/ops-issue33-r162-207-20261112.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r162-207.yml
+      - scripts/audit/issue33-r162-207-check.mjs
+      - tests/coffee-issue33-r162-207.test.mjs
+permissions:
+  contents: read
+jobs:
+  exact-selected:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Focused #207 positive and adversarial tests
+        run: node --test tests/coffee-issue33-r162-207.test.mjs
+      - name: Guarded current selected official HTTPS plus actual parser
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '207'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r162
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Strict current selected identity and field afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_R162_VERIFY: '1'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r162
+        run: node scripts/audit/issue33-r162-207-check.mjs
+      - name: Preserve bounded current source and failure evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r162-original207
+          path: /tmp/dic33-r162/
+          retention-days: 2
+          if-no-files-found: warn
