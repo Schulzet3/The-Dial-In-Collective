@@ -1038,3 +1038,8 @@ DIC_PREFLIGHT_VERIFIED development_sha=647aa39cfc4b784561545506ce2f191edf828af9 
 ## November 19, 2026 — #3347 exact READY blob parity, not unmerged label assumptions [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=647aa39cfc4b784561545506ce2f191edf828af9 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 - Second exact CI run 44461850330 FAILED 207 PASS / 6 FAIL because existing tests require true mixed-source holds even when an unfinished queue entry has a null merge SHA. The conservative base branch is restored. Waive only a genuinely stale unmerged queue-record overlap if a Git object reader proves current development bytes equal the unique chronological selected READY merged blob; no reader, real drift, ambiguous ancestry, any merged competitor, or a changed source still blocks or requires an exact review pin. Real disposable-Git acceptance tests for harmless label vs harmful edit. No Netlify/production/provider action; exact main CI required before nonforce merge.
+
+
+## November 19, 2026 — #3347 final disposable-Git fixture preservation [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=023f9cbd0ecc3779fff3f65ab441865fa1ef43b9 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+- Third exact main PR run 44462085118: 212 PASS, 1 FAIL. Test fixture for unmerged shared-file owner erroneously *overwrote* the existing unfinished extractor owner's scope, leaving a real changed extractor file untracked. Correct fixture by adding a separate never-merged issue for the shared READY file while retaining the unfinished extractor source owner. Strict untracked-file denial stays unchanged; this is test-only repair. Rerun existing suite once at new exact head; no provider/production changes.

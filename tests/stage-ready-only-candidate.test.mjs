@@ -76,7 +76,10 @@ test('real staging refuses an unready change to the same READY file',()=>{
 test('#3347 real Git staging checks unmerged overlapping label against exact READY bytes',()=>{
  const f=fixture();
  try{
-  f.queue.items[1].scope_paths=['site/card.js'];
+  // Preserve existing unfinished extractor ownership; add a separate
+  // never-merged issue's stale card label rather than erase a real owner.
+  f.queue.items.push({...f.queue.items[1],id:'DIC-Q-102',issue:102,
+   scope_paths:['site/card.js']});
   f.write('docs/RELEASE_QUEUE.json',JSON.stringify(f.queue,null,2)+'\n');
   f.git('add','-A');f.git('commit','-qm','Track unmerged same-file queue label [skip netlify]');
   f.development=f.git('rev-parse','HEAD');
