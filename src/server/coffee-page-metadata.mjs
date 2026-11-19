@@ -42,7 +42,6 @@ import {countrywideEducationalOriginCorrection} from './coffee-countrywide-conte
 import {selectedFarmStoryRegionMismatch} from './coffee-title-region-evidence.mjs';
 import {selectedCurrentFarmGrowingLocality} from './coffee-selected-farm-growing-locality.mjs';
 import {selectedCurrentFarmCountryLocality} from './coffee-selected-farm-country-locality.mjs';
-import {selectedCurrentPublishedSourcingRegion} from './coffee-selected-published-sourcing-region.mjs';
 import {selectedCurrentNamedFarmCountryRegion} from './coffee-selected-named-farm-country-region.mjs';
 import {selectedCurrentFarmVolcanoRegion} from './coffee-selected-farm-volcano-region.mjs';
 import {selectedCurrentNamedEstateCountyOrigin} from './coffee-selected-current-estate-county.mjs';
@@ -2839,27 +2838,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   }
  }
 
- // Direct current selected sourcing prose may name a growing area and province
-// more precisely than the broad area/country already accepted by the parser.
-// Require one exact selected H1, this coffee's present-tense growing statement,
-// unique uncontradicted places and already known current area/country. Never
-// borrow a mill, another coffee, generic regional history or store address.
-if(fields.origin&&!conflicts.has('origin')){
- const sourced=selectedCurrentPublishedSourcingRegion({
-  name:fields.name,origin:fields.origin,blocks:productCoffeeProse(canonicalProduct,clean)
- });
- if(sourced){
-  rememberCoffeeReviewCandidate(fields,'origin',fields.origin,'Broader current selected producing area');
-  fields.origin=sourced.value;
-  if(source_facts.length<384)source_facts.push({
-   field:'origin',label:'Direct selected current coffee sourced/grown area and province',
-   value:sourced.quote.slice(0,420),source_url,source_type:'html',
-   section:'Exact selected product description; present growing origin'
-  });
- }
-}
-
-// A current selected coffee can contrast its own lot against a PREVIOUS
+ // A current selected coffee can contrast its own lot against a PREVIOUS
  // named lot: only "This time from X region" is present growing-location proof.
  // A prior-lot sentence/other product/educational district cannot refine origin.
  if(fields.origin&&!conflicts.has('origin')){
