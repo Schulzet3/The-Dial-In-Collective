@@ -3272,6 +3272,43 @@ if(fields.origin&&!conflicts.has('origin')){
    delete fields.producer;
   }
  }
+ // Selected coffee's washing/processing station OWNER is not thereby the
+ // producer/grower of the selected green coffee. Preserve that ownership as
+ // reviewable provenance; do not invent a farm role from station ownership.
+ // An independent current Producer/Grower/Farmer label or affirmative current
+ // coffee-growing statement about that person remains positive evidence.
+ if(fields.producer&&!conflicts.has('producer')){
+  const person=String(fields.producer).trim();
+  const ownBlocks=productCoffeeProse(canonicalProduct,clean).filter(b=>!b.educational);
+  const facilityOwner=person.length>2&&person.length<=110&&ownBlocks.some(b=>{
+   const m=/\b(?:washing|processing|drying)\s+(?:station|mill)\b[^.!?]{0,180}\b(?:owned|operated|managed)\s+by\s+/iu.exec(b.text);
+   if(!m)return false;
+   const tail=normalized(b.text.slice(m.index+m[0].length)),name=normalized(person);
+   return tail===name||tail.startsWith(name+' ');
+  });
+  const directProducerCaption=source_facts.some(f=>
+   f.section!=='Different coffee in the source'&&f.field==='producer'&&
+   /^(?:producer|grower|farmer)$/iu.test(String(f.label||'').trim())&&
+   keyOf(f.value)===keyOf(person));
+  const currentGrowing=ownBlocks.some(b=>{
+   const s=normalized(b.text),name=normalized(person),at=s.indexOf(name);
+   return at>=0&&/^(?:\s+(?:grows?|cultivates?|harvests?|farms?|produces?)\s+(?:(?:this|the|selected|our|their)\s+)?(?:coffee|cherries|beans)\b)/iu.test(s.slice(at+name.length));
+  });
+  if(facilityOwner&&!directProducerCaption&&!currentGrowing){
+   rememberCoffeeReviewCandidate(fields,'producer',person,
+    'Selected processing-station owner, not independently verified coffee-growing producer');
+   delete fields.producer;
+   if(keyOf(roaster_details.named_producer||'')===keyOf(person))delete roaster_details.named_producer;
+   producer_review_note=[producer_review_note,
+    'The selected seller names '+person+' as a washing/processing station owner, not an established farm grower. Confirm Producer manually.']
+    .filter(Boolean).join(' | ').slice(0,1100);
+   if(source_facts.length<384)source_facts.push({
+    field:'producer_context',label:'Selected processing-station owner (review only)',
+    value:person,source_url,source_type:'html',
+    section:'Selected station ownership, no published farm-producer claim',conflicting:false
+   });
+  }
+ }
  // Exact selected Producer caption and own project co-leader can disagree
  // about the same named co-lead; neither surname gets silently certified.
  const namedTeamDisagreement=fields.producer&&!conflicts.has('producer')
