@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {checkRunReceiptId,exactRecordedChecks,verifyReadyItems} from '../scripts/release/ready-evidence-gate.mjs';
+import {checkRunReceiptId,exactRecordedChecks,verifyReadyItems,githubReleaseReaders} from '../scripts/release/ready-evidence-gate.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40);
 const item={id:'DIC-Q-1938-test',issue:1938,title:'Toggle',owner_source:'Owner',state:'READY',
  merged_source_sha:A,scope_paths:['site/admin/push.js'],
@@ -90,4 +90,39 @@ test('#2169 co-selected READY overlaps need first-parent, ancestry and exact can
   p===path&&sha===C?'100644:unreviewed':proof.sourceObjectAt(sha,p)})).ready,false);
  assert.equal((await verifyReadyItems({...proof,mergeChangedPaths:sha=>
   sha===D?['tests/issue1938-toggle.test.mjs']:proof.mergeChangedPaths(sha)})).ready,false);
+});
+
+test('#3424 bounded read-only transient GitHub CI retries preserve denial',async()=>{
+ let n=0;
+ const reader=await githubReleaseReaders('synthetic',{request:async()=>{
+  n++;if(n===1)throw new TypeError('fetch failed');
+  return {ok:true,status:200,json:async()=>({id:11,head_sha:A,status:'completed',conclusion:'success',event:'push'})};
+ }});
+ assert.equal((await reader.loadRun(11)).id,11);
+ assert.equal(n,2);
+ let deniedCount=0;
+ const denied=await githubReleaseReaders('synthetic',{request:async()=>{
+  deniedCount++;return {ok:false,status:403};}});
+ await assert.rejects(denied.loadRun(11),/HTTP 403/);
+ assert.equal(deniedCount,1);
+ let exhausted=0;
+ const broken=await githubReleaseReaders('synthetic',{request:async()=>{
+  exhausted++;throw new TypeError('fetch failed');}});
+ await assert.rejects(broken.loadRun(11),/transport unavailable after 3 attempt/);
+ assert.equal(exhausted,3);
+});
+test('#3424 missing live CI proof HOLDS without fabricated co-selected overlap errors',async()=>{
+ const other={...item,id:'DIC-Q-1938-other',merged_source_sha:C,
+  ci_runs:[21,22,23],scope_paths:['site/admin/push.js']};
+ const result=await verifyReadyItems({...deps,queue:{...queue,items:[item,other]},
+  items:[item,other],currentSourceSha:undefined,publishedSourceSha:B,
+  candidateSha:C,candidateChangedPaths:['site/admin/push.js'],
+  loadRun:async id=>{
+   if(id===11)throw new TypeError('fetch failed');
+   return {id,head_sha:B,status:'completed',conclusion:'success',event:'push'};
+  },isAncestor:(a,b)=>a===A&&b===C});
+ assert.equal(result.ready,false);
+ assert.ok(result.errors.some(x=>x.includes('fetch failed')));
+ assert.equal(result.errors.some(x=>x.includes('unreviewed same-file READY overlap')),false);
+ assert.equal(result.errors.some(x=>x.includes('missing successful exact-source CI status')),false);
 });

@@ -142,29 +142,52 @@ export async function verifyReadyItems({queue,items,loadRun,loadChecks,sourceObj
     source_drift_paths:sourceDriftPaths});
   }catch(e){errors.push(prefix+String(e.message||e));}
  }
- if(candidateChangedPaths!==undefined){
-  // Accept co-selected overlaps only AFTER each owner passed exact CI/byte parity.
+ if(candidateChangedPaths!==undefined&&errors.length===0){
+  // Verify co-owned chronology only when every selected READY item has complete
+  // exact recorded CI proof. A failed API read HOLDS without fake overlap errors.
   let coOwned=[];
-  if(!errors.length)try{
+  try{
    coOwned=reviewedSelectedReadyOverlaps(items,{
     candidateSha,candidateChangedPaths,sourceObjectAt,mergeChangedPaths,isAncestor
    });
   }catch(e){errors.push(String(e.message||e));}
-  const batch=preflightReadyBatch(queue,items,{publishedSourceSha,candidateSha,
-   changedPaths:candidateChangedPaths,checksByItem,ciSourceByItem,sourceObjectAt,
-   testPathsByItem,allowedPinnedPaths:[...new Set([...allowedPinnedPaths,...coOwned])]});
-  errors.push(...batch.errors);
+  if(errors.length===0){
+   const batch=preflightReadyBatch(queue,items,{publishedSourceSha,candidateSha,
+    changedPaths:candidateChangedPaths,checksByItem,ciSourceByItem,sourceObjectAt,
+    testPathsByItem,allowedPinnedPaths:[...new Set([...allowedPinnedPaths,...coOwned])]});
+   errors.push(...batch.errors);
+  }
  }
  return {ready:errors.length===0,errors,verified};
 }
 export async function githubReleaseReaders(token,{request=globalThis.fetch}={}){
  if(typeof token!=='string'||!token)throw Error('Read-only GitHub CI token unavailable');
  const get=async path=>{
-  const response=await request('https://api.github.com/repos/'+REPO+path,{
-   headers:{Authorization:'Bearer '+token,Accept:'application/vnd.github+json',
-    'X-GitHub-Api-Version':'2022-11-28'}});
-  if(!response?.ok)throw Error('Read-only GitHub CI '+path.split('?')[0]+' HTTP '+String(response?.status));
-  return response.json();
+  const endpoint=path.split('?')[0];
+  // Retry only transient GitHub metadata reads. Never retry writes/tests;
+  // every missing, stale, skipped or unrecorded status remains a HARD HOLD.
+  for(let attempt=0;attempt<3;attempt++){
+   let response;
+   try{
+    response=await request('https://api.github.com/repos/'+REPO+path,{
+     headers:{Authorization:'Bearer '+token,Accept:'application/vnd.github+json',
+      'X-GitHub-Api-Version':'2022-11-28'},signal:AbortSignal.timeout(18000)});
+   }catch(e){
+    if(attempt<2&&['TypeError','AbortError','TimeoutError'].includes(e?.name))continue;
+    throw Error('Read-only GitHub CI '+endpoint+' transport unavailable after '+
+     (attempt+1)+' attempt(s): '+String(e?.message||e).slice(0,120));
+   }
+   if(!response?.ok){
+    if(attempt<2&&[429,500,502,503,504].includes(response?.status))continue;
+    throw Error('Read-only GitHub CI '+endpoint+' HTTP '+String(response?.status));
+   }
+   try{return await response.json();}
+   catch{
+    if(attempt<2)continue;
+    throw Error('Read-only GitHub CI '+endpoint+' unreadable JSON after 3 attempts');
+   }
+  }
+  throw Error('Read-only GitHub CI '+endpoint+' could not be read');
  };
  return {
   loadRun:async id=>get('/actions/runs/'+id),
