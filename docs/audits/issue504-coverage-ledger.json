@@ -4546,13 +4546,79 @@
       "source_receipt_blob_sha": "27b6b4b639668b62d68ec78f26df144a7c290d46",
       "integrated_from_original_pr_head": "555719b5228ccd703c77f8e14d86e5d0da9a3ee3",
       "review_scope": "Complete original title/body native byte parity, exact CLOSED/MERGED SHA and eight semantic outcomes; no duplicate code, prior comments or current-PR version words."
+    },
+    {
+      "id": "G1-224",
+      "receipt": "docs/audits/issue504-review-G1-224.json",
+      "reviewed_file_lines": 0,
+      "reviewed_file_words": 0,
+      "reviewed_github_objects": 8,
+      "reviewed_github_words": 915,
+      "reviewed_pr_ids": [
+        1351,
+        1352,
+        1353,
+        1354,
+        1355,
+        1356,
+        1357,
+        1358
+      ],
+      "confirmed_safe_fixes": 0,
+      "source_receipt_blob_sha": "ba42694bc3a9726e5493731c007980a27cf99c78",
+      "integrated_from_original_pr_head": "2164c87354f18fd106187e8d03c6a45c87b96976",
+      "review_scope": "Original native GitHub PR title and full body read word1-EOF, 8/8 verified against unchanged prior semantic receipt, exact historic head/merge/state; archive prefix drift separately uncredited. Zero source code/earlier issue comment double credit."
+    },
+    {
+      "id": "G1-225",
+      "receipt": "docs/audits/issue504-review-G1-225.json",
+      "reviewed_file_lines": 0,
+      "reviewed_file_words": 0,
+      "reviewed_github_objects": 8,
+      "reviewed_github_words": 722,
+      "reviewed_pr_ids": [
+        1359,
+        1360,
+        1361,
+        1362,
+        1363,
+        1364,
+        1365,
+        1366
+      ],
+      "confirmed_safe_fixes": 0,
+      "source_receipt_blob_sha": "c52f302072c4bb2ceed24491c7e72e555a42780c",
+      "integrated_from_original_pr_head": "16def3f7c48b93c0b7806b11d02b9224335caad0",
+      "review_scope": "Original native GitHub PR title and full body read word1-EOF, 8/8 verified against unchanged prior semantic receipt, exact historic head/merge/state; archive prefix drift separately uncredited. Zero source code/earlier issue comment double credit."
+    },
+    {
+      "id": "G1-226",
+      "receipt": "docs/audits/issue504-review-G1-226.json",
+      "reviewed_file_lines": 0,
+      "reviewed_file_words": 0,
+      "reviewed_github_objects": 8,
+      "reviewed_github_words": 779,
+      "reviewed_pr_ids": [
+        1367,
+        1368,
+        1369,
+        1370,
+        1371,
+        1372,
+        1373,
+        1374
+      ],
+      "confirmed_safe_fixes": 0,
+      "source_receipt_blob_sha": "5404c40c30827c1a6ac5ba948e428d2eb5de05ea",
+      "integrated_from_original_pr_head": "a0f9483d067c4673b0c3a5af3dd04b962782bceb",
+      "review_scope": "Original native GitHub PR title and full body read word1-EOF, 8/8 verified against unchanged prior semantic receipt, exact historic head/merge/state; archive prefix drift separately uncredited. Zero source code/earlier issue comment double credit."
     }
   ],
   "totals": {
     "source_file_lines": 7919,
     "source_file_words": 60754,
-    "github_objects": 1524,
-    "github_words": 325087
+    "github_objects": 1548,
+    "github_words": 327503
   },
   "delegated_267_no_double_count": true,
   "source_manifests": [
@@ -4568,9 +4634,9 @@
   },
   "next": {
     "kind": "github_pull_request_title_and_description",
-    "pr_number": 1351,
+    "pr_number": 1375,
     "first_unreviewed_word": 1,
-    "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/1351"
+    "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/1375"
   },
   "uncovered": "Entire GitHub-wide direct review and #267 frozen/current/post-pin incomplete; new audit records are drift-unreviewed.",
   "latest_review_source_anchor": "42a6ee88aef2a06be4e02f68112dc86f69792294",
@@ -11817,5 +11883,49 @@
     "status": "IN_PROGRESS_TESTING",
     "no_release_provider_or_data_writes": true,
     "uncredited_archive_title_drift": true
+  },
+  "g1224_g1226_integration_20261119": {
+    "preflight_development_sha": "32741c1809bf76b7eca69b09d242deca935fdb2d",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "main_sha": "0bace905e6436eb67afd22db61d747539a8dab11",
+    "release_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5",
+    "source_original_drafts": [
+      2431,
+      2436,
+      2442
+    ],
+    "original_reviewed_pr_range": [
+      1351,
+      1374
+    ],
+    "original_records": 24,
+    "original_words": 2416,
+    "receipt_blobs": [
+      "ba42694bc3a9726e5493731c007980a27cf99c78",
+      "c52f302072c4bb2ceed24491c7e72e555a42780c",
+      "5404c40c30827c1a6ac5ba948e428d2eb5de05ea"
+    ],
+    "native_byte_checks": "24/24 original title (or separately archived prefix) and whole body exact, head and merge SHA and closed state checked; #1364 CLOSED UNMERGED superseded by #1365",
+    "prior": [
+      223,
+      1524,
+      325087
+    ],
+    "conditional_after_merge": [
+      226,
+      1548,
+      327503
+    ],
+    "unchanged_file_coverage": [
+      7919,
+      60754
+    ],
+    "delegated_267": "No source code lines credited by #504; #267 full frozen/current/post-pin semantic review still incomplete.",
+    "functional_tests": "NOT_RUN_DOCS_ONLY",
+    "exact_pr_head_CI": "PENDING",
+    "exact_merged_CI": "NOT_RUN",
+    "status": "IN_PROGRESS_TESTING",
+    "uncredited_archive_title_drift": true,
+    "no_release_provider_or_data_writes": true
   }
 }
