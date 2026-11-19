@@ -116,7 +116,7 @@ export function githubReadyPromotionReaders(token,{request=globalThis.fetch}={})
     throw Error('GitHub READY certification read HTTP '+response?.status);
    }
    try{return await response.json();}
-   catch(e){if(attempt===2)throw Error('Invalid GitHub READY read JSON');}
+   catch{if(attempt===2)throw Error('Invalid GitHub READY read JSON');}
   }
   throw Error('READY certification GitHub read exhausted');
  };
