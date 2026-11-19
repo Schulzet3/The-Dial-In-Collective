@@ -4938,6 +4938,21 @@
       "issue267_line_credit": 0,
       "release": "TESTING",
       "baseline": "IN_PROGRESS"
+    },
+    {
+      "run": "R366",
+      "date": "2026-11-19",
+      "preflight_development_sha": "eef18942b2fed1077513a3d7d1f01c792c84c710",
+      "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "receipt": "docs/audits/issue509-r366-community-pipeline-24h-runtime-20261119.json",
+      "existing_sql_definitions_directly_reread": 8,
+      "source_words_first_time": 0,
+      "issue267_lines": 0,
+      "known_fix_already_tracked": "DIC-Q-509-community-withdrawn-recheck-guard",
+      "provider_writes": 0,
+      "github_code_test_ci_writes": 0,
+      "release": "TESTING",
+      "baseline": "IN_PROGRESS"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -25272,5 +25287,30 @@
     "release": "TESTING",
     "baseline": "IN_PROGRESS",
     "next": "Continue next genuinely unreviewed or changed Supabase provider definition; coordinate #455 and #96, source isolation and release gates without repeating unchanged suites"
+  },
+  "provider_community_pipeline_24h_run366": {
+    "run": "R366",
+    "preflight_development_sha": "eef18942b2fed1077513a3d7d1f01c792c84c710",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "receipt_path": "docs/audits/issue509-r366-community-pipeline-24h-runtime-20261119.json",
+    "read_complete_existing_definitions": 8,
+    "existing_definition_characters": 17248,
+    "first_time_provider_words": 0,
+    "issue267_lines": 0,
+    "known_development_fix": "DIC-Q-509-community-withdrawn-recheck-guard TESTING; no duplicate patch",
+    "logs_window_utc": [
+      "2026-11-18T16:40:00Z",
+      "2026-11-19T16:40:00Z"
+    ],
+    "edge_200": 576,
+    "gateway_200": 2307,
+    "postgres_error_count": 14,
+    "community_eligible_verified": 13,
+    "provider_writes": 0,
+    "code_test_ci_writes": 0,
+    "source_ci": "NOT_RUN_UNCHANGED",
+    "release": "TESTING",
+    "baseline": "IN_PROGRESS",
+    "next_cursor": "First actually changed/new or previously unreviewed LIVE provider definition (compare current catalogs/hashes and Edge full source); separately pursue reproducible remaining application/Edge bug or measured bottleneck, not R365 repeats. Native compiled and console-only Auth/API/Vault worker settings UNVERIFIED."
   }
 }

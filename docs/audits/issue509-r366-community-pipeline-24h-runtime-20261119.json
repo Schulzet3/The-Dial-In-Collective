@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R366",
+  "date_utc": "2026-11-19",
+  "project_ref": "azviqqejypsefzilgonr",
+  "scope": "read-only cross-layer Community state semantics, existing source-fix provenance and fresh bounded live error/latency aggregates",
+  "preflight_development_sha": "eef18942b2fed1077513a3d7d1f01c792c84c710",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "main_sha": "57adc419ed4b106e158435b465971f5986537b41",
+  "release_sha": "07f054f6470b2ae36b36faef8fb9a8161dd3bfb5",
+  "postgres": "17.11",
+  "provider_status": "ACTIVE_HEALTHY",
+  "complete_live_definitions": [
+    {
+      "object": "private.capture_equipment_snapshot()",
+      "source_chars": 1166,
+      "definition_md5": "90c66b59638b48d360e9fd949db63707",
+      "range": "complete definition, characters 1-1166",
+      "review": "DIRECT_READ_CROSSLAYER_NO_FIRST_TIME_CREDIT"
+    },
+    {
+      "object": "private.dic_backfill_library_contributions(p_owner uuid, p_entry uuid, p_canonical uuid)",
+      "source_chars": 2360,
+      "definition_md5": "424a5c87c53165a918f7094bf67d25bb",
+      "range": "complete definition, characters 1-2360",
+      "review": "DIRECT_READ_CROSSLAYER_NO_FIRST_TIME_CREDIT"
+    },
+    {
+      "object": "private.dic_on_community_coffee_verification()",
+      "source_chars": 1065,
+      "definition_md5": "cefee7b991e40185eadbacde89def3aa",
+      "range": "complete definition, characters 1-1065",
+      "review": "DIRECT_READ_CROSSLAYER_NO_FIRST_TIME_CREDIT"
+    },
+    {
+      "object": "private.dic_recheck_after_link()",
+      "source_chars": 251,
+      "definition_md5": "9fc3b44ef631cb87bc0b40e689c123b8",
+      "range": "complete definition, characters 1-251",
+      "review": "DIRECT_READ_CROSSLAYER_NO_FIRST_TIME_CREDIT"
+    },
+    {
+      "object": "private.dic_review_community_shot(p_id uuid)",
+      "source_chars": 7734,
+      "definition_md5": "c5aea4d32aa8027a39d80341feade406",
+      "range": "complete definition, characters 1-7734",
+      "review": "DIRECT_READ_CROSSLAYER_NO_FIRST_TIME_CREDIT"
+    },
+    {
+      "object": "private.dic_review_pending_community(p_limit integer)",
+      "source_chars": 944,
+      "definition_md5": "ff876442da558f60f7eccb36bd6dbe62",
+      "range": "complete definition, characters 1-944",
+      "review": "DIRECT_READ_CROSSLAYER_NO_FIRST_TIME_CREDIT"
+    },
+    {
+      "object": "private.project_shot()",
+      "source_chars": 3045,
+      "definition_md5": "79e6fd0668fa4502c8785b3e92a14a61",
+      "range": "complete definition, characters 1-3045",
+      "review": "DIRECT_READ_CROSSLAYER_NO_FIRST_TIME_CREDIT"
+    },
+    {
+      "object": "private.protect_shot_provenance()",
+      "source_chars": 683,
+      "definition_md5": "9700d82ba097c7eba83b76135acbdac1",
+      "range": "complete definition, characters 1-683",
+      "review": "DIRECT_READ_CROSSLAYER_NO_FIRST_TIME_CREDIT"
+    }
+  ],
+  "definition_characters_reread": 17248,
+  "first_time_provider_word_credit": 0,
+  "issue267_github_source_line_credit": 0,
+  "crosslayer": {
+    "trigger_ddl_full_read": [
+      "private.contribution_links.dic_recheck_after_link",
+      "public.coffees.bump_revision",
+      "public.coffees.dic_on_community_coffee_verification",
+      "public.shots.bump_revision",
+      "public.shots.capture_equipment_snapshot",
+      "public.shots.dic_capture_recommendation_context",
+      "public.shots.project_shot",
+      "public.shots.protect_shot_provenance",
+      "public.shots.remember_feed_condition"
+    ],
+    "shot_generated_rating_gate": "public.shots.is_dialed_in generated from extraction=3,body=3,clarity=5,sweetness=5,astringency=1; no untracked manual flag transition",
+    "found_known_unpublished_production_gap": "private.dic_review_community_shot checks unverified coffee before withdrawn terminal state; may turn a withdrawn unverified projection to held on link recheck. Development migration already fixes by checking withdrawn first; do not create duplicate patch.",
+    "already_approved_development_fix": {
+      "migration": "supabase/migrations/20261115065000_dic_community_withdrawn_recheck_guard.sql",
+      "migration_blob_sha": "d629d2f0cbd6c9f291a8b4538340c1de549f04a1",
+      "queue_id": "DIC-Q-509-community-withdrawn-recheck-guard",
+      "queue_state": "TESTING",
+      "live_applied": false
+    },
+    "integrity_state": {
+      "eligible_verified": 13,
+      "held": 0,
+      "withdrawn": 0,
+      "source_member_rows_read": 0
+    },
+    "no_new_confirmed_bug_or_justified_deletion": true
+  },
+  "logs": {
+    "window_utc": [
+      "2026-11-18T16:40:00Z",
+      "2026-11-19T16:40:00Z"
+    ],
+    "source_entries": {
+      "edge_logs": 2307,
+      "function_logs": 1151,
+      "postgres_logs": 591,
+      "function_edge_logs": 576,
+      "pgbouncer_logs": 77,
+      "supavisor_logs": 11,
+      "postgrest_logs": 7,
+      "realtime_logs": 3
+    },
+    "http_status": {
+      "edge_logs": {
+        "200": 2307
+      },
+      "function_edge_logs": {
+        "200": 576
+      }
+    },
+    "function_edge_execution_mean_ms": 887,
+    "function_edge_max_ms": 3436,
+    "postgres_log_state_severity_counts": {
+      "LOG_00000": 576,
+      "LOG_08006": 1,
+      "ERROR_42809": 9,
+      "ERROR_42601": 1,
+      "ERROR_2201B": 1,
+      "ERROR_42883": 1,
+      "ERROR_22P02": 1,
+      "ERROR_42703": 1
+    },
+    "error_roles": "All 14 ERROR records observed with postgres role (aggregate only); no traced member-facing defect",
+    "safe_telemetry_limit": "Status 200 is not proof of real email/push reception; provider logs no raw identities, URLs or private text extracted; earlier wrong status_code key returned spurious zero and was replaced with response.status_code."
+  },
+  "pgss_cumulative": {
+    "matching_community_sql_shapes": 217,
+    "matching_calls": 496,
+    "total_exec_ms": 3594.8,
+    "max_exec_ms": 259.591,
+    "temp_blocks": 0,
+    "reset_window_not_24hr": true,
+    "reviewer_calls": 7,
+    "reviewer_mean_ms": 6.485,
+    "reviewer_max_ms": 34.341,
+    "justified_index_or_drop": false
+  },
+  "provider_edge_metadata": {
+    "active_count": 5,
+    "slugs": [
+      "dic-verify-coffee",
+      "dic-member-approval-broker",
+      "dic-preview-coffee",
+      "dic-admin-push-broker",
+      "dic-delete-member-account"
+    ],
+    "jwt_verification": [
+      true,
+      false,
+      true,
+      false,
+      true
+    ],
+    "bundle_reaudited_full_this_run": false
+  },
+  "current_object_inventory": {
+    "public_tables": 24,
+    "private_tables": 28,
+    "public_functions": 51,
+    "private_functions": 63,
+    "storage_tables": 10,
+    "storage_functions": 24,
+    "realtime_tables": 3,
+    "realtime_functions": 19,
+    "auth_tables": 27,
+    "applied_migrations_last_verified": 69
+  },
+  "provider_writes": 0,
+  "github_app_test_ci_writes": 0,
+  "github_documentation_only": true,
+  "new_source_bound_ci": "NOT_RUN_UNCHANGED_SOURCE",
+  "release": "TESTING",
+  "baseline": "IN_PROGRESS",
+  "owner_action": "NONE",
+  "next_cursor": "First actually changed/new or previously unreviewed LIVE provider definition (compare current catalogs/hashes and Edge full source); separately pursue reproducible remaining application/Edge bug or measured bottleneck, not R365 repeats. Native compiled and console-only Auth/API/Vault worker settings UNVERIFIED.",
+  "limitations": [
+    "All definition bodies listed were previously directly reviewed; no double-credit",
+    "Compiled vendor C code, hosted console-only settings and genuine end-user delivery are not verified",
+    "Provider error source identity limited to non-sensitive aggregate stats"
+  ]
+}

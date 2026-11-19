@@ -1,3 +1,15 @@
+# Issue #509 — R366 Community pipeline cross-layer confirmation and corrected 24-hour provider log triage [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=eef18942b2fed1077513a3d7d1f01c792c84c710 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-19 UTC, production strictly READ-ONLY.** Mandatory immutable GitHub preflight verified with exact blob; Supabase `azviqqejypsefzilgonr` ACTIVE_HEALTHY PG17.11. Direct complete rereview of **eight** live Community/provenance SQL bodies (17,248 characters) plus nine actual trigger definitions and generated shot rating columns; all are already covered in prior #509 receipts (**0 new word credit, 0 #267 source lines**). Cross-checked withdrawn/non-green link-update transitions, verified coffee backfill and read-only aggregate (13 eligible+verified; 0 held/withdrawn). The preexisting production `withdrawn`-to-`held` ordering defect is **already repaired in development source** by migration `20261115065000_dic_community_withdrawn_recheck_guard.sql` (Git blob `d629d2f0`, queue `DIC-Q-509-community-withdrawn-recheck-guard` **TESTING**); no duplicate migration or speculative live change. No affected current rows. Stored `is_dialed_in` is generated from five rated fields, ruling out an initially considered missed transition.
+
+**Correct 24-hour log fields `response.status_code`, `parsed.sql_state_code`:** from 2026-11-18 16:40Z to 2026-11-19 16:40Z, 2,307 gateway and 576 Edge-function HTTP **200** events, 0 4xx/5xx; Edge mean execution **887ms**, maximum **3,436ms**. Postgres 591 events: 14 ERROR, all logged `postgres` role, primarily 42809 (9); no traced member-facing error. Prior initial `status_code` field lookup was invalid and is explicitly superseded, not zero-error evidence. Cumulative Community-related SQL 217 shapes/496 calls, max 259.591ms, 0 temp blocks; not a 24-hour PGSS cohort and no justified index deletion or new measured bottleneck. A 200 is never proof of actual message/device receipt (#96 remains UNVERIFIED). No log text, members, shots/notes, keys or raw URL records retrieved.
+
+**Outcome:** No new independently verified defect warranting a duplicate patch; no code/test/CI or production SQL/Edge/Auth/Storage/config changes; no publication/backup/billing/scheduler edits. Development fixes remain **TESTING**, exhaustive baseline **IN_PROGRESS**, first-time direct provider words **0**. Structured [R366 receipt](../audits/issue509-r366-community-pipeline-24h-runtime-20261119.json) and append-only object ledger. **Next cursor:** First actually changed/new or previously unreviewed LIVE provider definition (compare current catalogs/hashes and Edge full source); separately pursue reproducible remaining application/Edge bug or measured bottleneck, not R365 repeats. Native compiled and console-only Auth/API/Vault worker settings UNVERIFIED.
+
+---
+
 # Issue #509 — R365c R365 merge CI closure [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=b79e1f2ad2cfa01624ee163fbcdcd9089a9b97f7 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
