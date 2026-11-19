@@ -1,0 +1,54 @@
+name: DIC Issue33 R328 original142 Heine selected current official source
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r328-original142.yml
+      - tests/coffee-issue33-r328-original142.test.mjs
+      - scripts/audit/issue33-r328-original142-check.mjs
+      - docs/workstreams/ops-issue33-r328-original142-20261119.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r328-original142.yml
+      - tests/coffee-issue33-r328-original142.test.mjs
+      - scripts/audit/issue33-r328-original142-check.mjs
+      - docs/workstreams/ops-issue33-r328-original142-20261119.md
+permissions:
+  contents: read
+jobs:
+  original142-current-source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Nine focused selected parser and negative tests
+        run: node --test tests/coffee-issue33-r328-original142.test.mjs
+      - name: One guarded public HTTPS exact official selected coffee
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '142'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r328
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Strict selected H1 raw HTML SHA parser and Medium Body boundary
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r328
+          DIC_R328_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_R328_EVENT_SHA: ${{ github.sha }}
+          DIC_R328_VERIFY: '1'
+        run: node scripts/audit/issue33-r328-original142-check.mjs
+      - name: Retain one-day first party source hash and afterproof
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r328-original142
+          path: /tmp/dic33-r328/
+          retention-days: 1
+          if-no-files-found: warn
