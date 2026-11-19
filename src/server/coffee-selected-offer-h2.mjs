@@ -1,3 +1,4 @@
+// R215 proof uniqueness is conservative: duplicate exact-product URL meta is ambiguous.
 // Exact current purchasable selected product can use H2[itemprop=name]
 // inside ONE schema.org/Product offer (instead of H1). Require exact seller
 // product meta URL + unique product root + cart form; never trust SEO, sibling,
