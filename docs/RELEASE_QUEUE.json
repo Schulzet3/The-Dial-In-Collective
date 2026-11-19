@@ -16838,6 +16838,29 @@
       ],
       "notes": "R360 immutable count-only migration source merged a45bb63 and seven merged-source CI workflows SUCCESS. R361 adds future-publication complete derived refresh without touching shots/notes/history. [skip netlify]",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-classify-family-single-refresh",
+      "issue": 509,
+      "pr": null,
+      "title": "Eliminate duplicate personal-family refresh for same-family shot corrections",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261119133000_dic_classify_family_refresh_single_pass.sql"
+      ],
+      "owner_source": "Issue #509 autonomous provider review; DIC_PREFLIGHT_VERIFIED development_sha=1def2c9d6573297c406192b413ffc3e7620ffe7a preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "tests": [
+        "Complete live SQL 3219 chars MD5 5183deb46474c10468638cef08d2bd05 and direct ordinary/Admin caller path show duplicate same-family refresh; 13 eligible linked shots from safe aggregate.",
+        "Rollback-only isolated PostgreSQL17 fixture with update-counter on same-family reclassification staged; exact-source CI PENDING."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact PR-head and merged-source PostgreSQL17, Node22, browser, approval and privacy checks PENDING, not PASS.",
+        "Source-isolated READY candidate and hosted #96 acceptance UNVERIFIED; NEW owner Publish required before live migration."
+      ],
+      "notes": "Only skip redundant previous-family refresh when previous=fid; moved, hidden, non-green, Current/favorite and historical rows preserved. Production read-only.",
+      "production_deployed": false
     }
   ],
   "history": [

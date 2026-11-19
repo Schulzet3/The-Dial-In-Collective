@@ -4894,6 +4894,20 @@
       "provider_writes": 0,
       "release": "TESTING",
       "baseline": "IN_PROGRESS"
+    },
+    {
+      "run": "R362",
+      "date": "2026-11-19",
+      "preflight_development_sha": "1def2c9d6573297c406192b413ffc3e7620ffe7a",
+      "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "receipt": "docs/audits/issue509-r362-classify-single-refresh-20261119.json",
+      "fix": "Guard redundant same-family refresh only",
+      "source": "supabase/migrations/20261119133000_dic_classify_family_refresh_single_pass.sql",
+      "test": "supabase/tests/personal_family_refresh_single_pass_post.sql",
+      "production_writes": 0,
+      "ci": "PR_HEAD_PENDING",
+      "release": "TESTING",
+      "baseline": "IN_PROGRESS"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -25021,5 +25035,35 @@
     "provider_writes": 0,
     "baseline": "IN_PROGRESS",
     "exact_next": "Verify exact-source tests and nonforce merge before any READY claim"
+  },
+  "provider_classify_single_refresh_run362": {
+    "preflight_development_sha": "1def2c9d6573297c406192b413ffc3e7620ffe7a",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "receipt": "docs/audits/issue509-r362-classify-single-refresh-20261119.json",
+    "provider_ref": "azviqqejypsefzilgonr",
+    "complete_sql_source": {
+      "signature": "private.classify_personal_shot(uuid)",
+      "chars": 3219,
+      "md5": "5183deb46474c10468638cef08d2bd05",
+      "range": "1-end",
+      "previous_review": true
+    },
+    "consumers": [
+      "private.mutate(uuid,text,jsonb)",
+      "private.dic_admin_edit_record(uuid,bigint,jsonb,text,text)"
+    ],
+    "duplicate_call_case": "previous = fid for existing green shot; two scans+two derived-row updates",
+    "safe_aggregate": {
+      "total_shots": 27,
+      "eligible_family_shots": 13
+    },
+    "source": "supabase/migrations/20261119133000_dic_classify_family_refresh_single_pass.sql",
+    "fixture": "supabase/tests/personal_family_refresh_single_pass_post.sql",
+    "ci": "PENDING",
+    "release": "TESTING",
+    "first_time_words": 0,
+    "issue267_line_credit": 0,
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS"
   }
 }

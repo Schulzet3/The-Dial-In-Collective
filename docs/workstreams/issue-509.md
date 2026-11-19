@@ -1,3 +1,13 @@
+# Issue #509 — R362 avoid duplicate family refresh for unchanged classification [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=1def2c9d6573297c406192b413ffc3e7620ffe7a preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-19 UTC; production READ-ONLY.** Full live `private.classify_personal_shot(uuid)` 3,219-character source MD5 5183deb46474c10468638cef08d2bd05 and callers `private.mutate` / `private.dic_admin_edit_record` show an eligible re-rating/correction staying in the same existing family runs `refresh_personal_family(previous)` and `refresh_personal_family(fid)` for the identical ID. That duplicates aggregate scans and derived-row writes; current aggregate 13/27 shots eligible/linked. No timed bottleneck or real user incident claimed. Preserve hidden, non-green, moved-family and preference behavior.
+
+**Development-only scoped optimization:** additive future-Publish migration `supabase/migrations/20261119133000_dic_classify_family_refresh_single_pass.sql` skips only the redundant previous-family call when `previous=fid`; original immutable SQL untouched. New disposable PG17 rollback-only test counts family-row UPDATE events under a known-green same-family reclassification while confirming original Current/Favorite and counts, with exact SQL-dispatch trace assertions and NOT_APPLICABLE when migration excluded. New queue item TESTING; CI PENDING, not READY or DEPLOYED. Structured [R362 receipt](../audits/issue509-r362-classify-single-refresh-20261119.json), append-only ledger, same-commit preflight. First-time provider word count 0 (#267 source-line credit 0). No Supabase writes, publish, billing/backup/schedule/alert changes. Next: PR-head exact-source CI, repair/merge nonforce only after PASS; independently inspect merged-source CI and queue isolation.
+
+---
+
 # Issue #509 — R361 complete family derived-range and metadata repair [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=15895eb1c5223d183c45af334109566329aff682 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e

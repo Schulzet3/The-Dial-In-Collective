@@ -32,6 +32,13 @@ for migration in supabase/migrations/*.sql; do
       | docker exec -i "$DIC_SQL_CONTAINER" psql -X -v ON_ERROR_STOP=1 -U postgres -d dic_ci
   fi
   run_sql "$migration"
+  # R362 isolated same-family double-refresh regression after this replacement.
+  if [[ "$migration" == *20261119133000_dic_classify_family_refresh_single_pass.sql ]]; then
+    echo "Running single-pass personal-family classification fixture"
+    cat supabase/tests/family_statistics_historical_reconcile_pre.sql \
+      supabase/tests/personal_family_refresh_single_pass_post.sql \
+      | docker exec -i "$DIC_SQL_CONTAINER" psql -X -v ON_ERROR_STOP=1 -U postgres -d dic_ci
+  fi
   # Historical suites run at the schema boundary they were written to protect.
   # Later migrations intentionally replace some of those permissions/gates.
   case "$migration" in
