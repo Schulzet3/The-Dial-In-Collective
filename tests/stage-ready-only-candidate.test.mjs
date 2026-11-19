@@ -15,6 +15,7 @@ function fixture(){
  const write=(path,text)=>{mkdirSync(join(root,path.slice(0,path.lastIndexOf('/'))),{recursive:true});writeFileSync(join(root,path),text);};
  git('init','-q','-b','development/backend-foundation');
  git('config','user.name','DIC candidate fixture');git('config','user.email','fixture@example.com');
+ write('docs/ai/PREFLIGHT.md','# Mandatory starting point for EVERY DIC task\nFixture authority.\n');
  write('site/card.js','published card\n');
  write('src/server/extractor.mjs','published extractor\n');
  write('docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md','# Fixture journal\n');
@@ -58,6 +59,9 @@ test('real Git staging restores only unfinished code, preserves READY content an
   assert.deepEqual(manifest.selected_ready_item_ids,['DIC-Q-100']);
   assert.deepEqual(manifest.restored_to_published_paths,['src/server/extractor.mjs']);
   assert.match(f.git('log','-1','--format=%B',sha),/\[skip netlify\]/);
+  const expectedPreflight=f.git('rev-parse',f.development+':docs/ai/PREFLIGHT.md');
+  assert.match(f.git('show',sha+':docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md'),
+   new RegExp('DIC_PREFLIGHT_VERIFIED development_sha='+f.development+' preflight_blob_sha='+expectedPreflight));
   assert.match(f.git('show',sha+':docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md'),/not published/);
   assert.equal(f.git('rev-parse','development/backend-foundation'),f.development,'staging never rewrites development');
   assert.throws(()=>stage(f),/update-ref|already exists/,'cannot silently duplicate a candidate ref');

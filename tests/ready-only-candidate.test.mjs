@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {planReadyOnlyCandidate,validateReadyOnlyCandidate,CANDIDATE_KIND,
  CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH,REVIEWED_WORKFLOW_TEST,discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,assertCandidateRelativeImports,
- assertCandidateStaticNamedExports} from '../scripts/release/ready-only-candidate.mjs';
+ assertCandidateStaticNamedExports,discoverReviewedRestoredSqlTests,REVIEWED_SOURCE_PATH_CASE_SQL_TEST} from '../scripts/release/ready-only-candidate.mjs';
 import {classifyReleaseRisk} from '../scripts/release/release-reliability.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40),D='d'.repeat(40);
 const one={id:'DIC-Q-100',issue:100,title:'READY card',state:'READY',
@@ -476,4 +476,34 @@ test('#2169 generator ESM exports pass frozen-source preflight, absent symbols s
  files['site/main.js']="import {rawElements,missingSymbol} from './html-scan.mjs';";
  assert.throws(()=>assertCandidateStaticNamedExports(['site/main.js'],args),
   /Missing static relative module export.*missingSymbol/);
+});
+
+test('#3342 source-bound SQL test restoration retains published guard while excluding TESTING migration',()=>{
+ const spec=REVIEWED_SOURCE_PATH_CASE_SQL_TEST;
+ const pub='a'.repeat(40),dev='b'.repeat(40),chosen='c'.repeat(40);
+ const source=new Map([
+  [pub+':'+spec.path,'100644:'+spec.publishedBlob],
+  [dev+':'+spec.path,'100644:'+spec.unpublishedBlob],
+  [spec.sourceMerge+':'+spec.path,'100644:'+spec.unpublishedBlob],
+  [spec.sourceMerge+'^:'+spec.path,'100644:'+spec.publishedBlob],
+  [dev+':'+spec.migration,'100644:'+('d'.repeat(40))],
+  [chosen+':'+spec.path,'100644:'+spec.unpublishedBlob],
+  [chosen+'^:'+spec.path,'100644:'+spec.unpublishedBlob]
+ ]);
+ const lookup=(ref,path)=>source.get(ref+':'+path)??null;
+ const item={id:spec.itemId,issue:509,state:'TESTING',merged_source_sha:spec.sourceMerge,
+  scope_paths:[spec.migration]};
+ const args={queue:{items:[item]},restoredPaths:[spec.migration],
+  publishedSourceSha:pub,developmentSourceSha:dev,sourceObjectAt:lookup,
+  selectedReadyItems:[{id:'DIC-Q-1',merged_source_sha:chosen}]};
+ assert.deepEqual(discoverReviewedRestoredSqlTests(args),[spec.path]);
+ assert.throws(()=>discoverReviewedRestoredSqlTests({...args,restoredPaths:[]}),/independently attributable/);
+ assert.throws(()=>discoverReviewedRestoredSqlTests({...args,queue:{items:[{...item,state:'READY'}]}}),
+  /independently attributable/);
+ assert.throws(()=>discoverReviewedRestoredSqlTests({...args,sourceObjectAt:(ref,path)=>
+  ref===pub&&path===spec.path?'100644:'+('e'.repeat(40)):lookup(ref,path)}),
+  /published SQL identity test blob/);
+ assert.throws(()=>discoverReviewedRestoredSqlTests({...args,sourceObjectAt:(ref,path)=>
+  ref===chosen&&path===spec.path?'100644:'+('f'.repeat(40)):lookup(ref,path)}),
+  /Selected READY merge modified/);
 });
