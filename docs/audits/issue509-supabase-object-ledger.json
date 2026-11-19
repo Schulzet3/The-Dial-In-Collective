@@ -4864,6 +4864,36 @@
       "queue": "TESTING",
       "baseline": "IN_PROGRESS",
       "next": "Historical family mismatch and new provider definitions"
+    },
+    {
+      "run": "R360",
+      "date": "2026-11-19",
+      "preflight_development_sha": "eac9b0b803a7209ddfd836369ad7e26f2afa1896",
+      "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "receipt": "docs/audits/issue509-r360-stale-family-derived-backfill-20261119.json",
+      "source_migration": "supabase/migrations/20261119120000_dic_reconcile_stale_personal_family_stats.sql",
+      "provider_writes": 0,
+      "first_time_word_credit": 0,
+      "issue267_line_credit": 0,
+      "ci": "PR_HEAD_PENDING",
+      "release": "TESTING",
+      "baseline": "IN_PROGRESS",
+      "next": "Exact PG17 fixture/Node22/browser/approval then nonforce integration, provider novel source"
+    },
+    {
+      "run": "R360a",
+      "date": "2026-11-19",
+      "preflight_development_sha": "5eca094cf069b820e9cbfd927f7dc6469e2e84fa",
+      "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "pr": 3405,
+      "prior_head": "df7679becf8eab421327932fccc7b80403afdf9b",
+      "receipt": "docs/audits/issue509-r360a-sql-dispatch-coverage-repair-20261119.json",
+      "ci": "NEW_HEAD_PENDING",
+      "repair": "exact bundled SQL dispatcher fixture recognition",
+      "source_migration_unchanged": true,
+      "provider_writes": 0,
+      "release": "TESTING",
+      "baseline": "IN_PROGRESS"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -24935,5 +24965,41 @@
     "issue267_source_line_credit": 0,
     "baseline": "IN_PROGRESS",
     "next": "New/changed provider definitions, separately prove safe historical stale count repair"
+  },
+  "provider_stale_family_reconciliation_run360": {
+    "families": 6,
+    "stale_count": 1,
+    "stored_count": 6,
+    "eligible_count": 4,
+    "evidence_state_mismatch": 0,
+    "historical_cause": "UNVERIFIED",
+    "preflight_development_sha": "eac9b0b803a7209ddfd836369ad7e26f2afa1896",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "provider_sql_source": {
+      "name": "private.refresh_personal_family(uuid)",
+      "characters": 2134,
+      "md5": "e6a15e6de21f56345479574cc575cf95",
+      "range": "1-end",
+      "review": "Recalculate eligible green unhidden shot evidence; derived 0-count retired, 1 candidate, >=2 personally_confirmed; no additional confirmed defect"
+    },
+    "scope": "future one-shot derived statistics only",
+    "migration": "supabase/migrations/20261119120000_dic_reconcile_stale_personal_family_stats.sql",
+    "migration_git_blob": "8b66a860e6dba420c447d0c9de13d7e69e53879c",
+    "test_pre": "supabase/tests/family_statistics_historical_reconcile_pre.sql",
+    "test_post": "supabase/tests/family_statistics_historical_reconcile_post.sql",
+    "provider_writes": 0,
+    "first_time_source_credit": 0,
+    "status": "TESTING_NO_CI_YET",
+    "exact_next": "Verify PR-head source-isolated PG17 and check new provider metadata/definitions"
+  },
+  "provider_stale_family_reconciliation_run360a": {
+    "preflight_development_sha": "5eca094cf069b820e9cbfd927f7dc6469e2e84fa",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "previous_head": "df7679becf8eab421327932fccc7b80403afdf9b",
+    "receipt": "docs/audits/issue509-r360a-sql-dispatch-coverage-repair-20261119.json",
+    "sql_ci_44518244434": "SUCCESS",
+    "node_44518244549": "FAILED_FIXTURE_EXPECTATION",
+    "new_head": "PENDING",
+    "production_writes": 0
   }
 }

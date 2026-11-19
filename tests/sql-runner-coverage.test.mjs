@@ -70,7 +70,17 @@ exit 99
   };
   const applicable=path=>!Object.hasOwn(migrationBoundSuites,path)||
     migrations.includes('supabase/migrations/'+migrationBoundSuites[path][0]);
-  const suites=allSuites.filter(applicable);
+  // R360 streams the literal migration between two rollback-only fixture
+  // halves as ONE psql transaction. These halves must not be executed alone.
+  const reconcileMigration='supabase/migrations/20261119120000_dic_reconcile_stale_personal_family_stats.sql';
+  const reconcileParts=[
+   'supabase/tests/family_statistics_historical_reconcile_pre.sql',
+   reconcileMigration,
+   'supabase/tests/family_statistics_historical_reconcile_post.sql'
+  ];
+  const stagedReconcile=migrations.includes(reconcileMigration);
+  const standaloneParts=new Set([reconcileParts[0],reconcileParts[2]]);
+  const suites=allSuites.filter(path=>!standaloneParts.has(path)).filter(applicable);
   for(const [suite,[migration,skipLabel]] of Object.entries(migrationBoundSuites)){
    const exists=migrations.includes('supabase/migrations/'+migration);
    assert.equal(output.includes('NOT_APPLICABLE: #509 '+skipLabel+'; migration excluded'),!exists,
@@ -78,14 +88,28 @@ exit 99
   }
   const expected=['tests/sql/bootstrap.sql',...migrations,'tests/sql/owner-fixture.sql',...suites];
   const byHash=new Map(expected.map(path=>[digest(path),path]));
-  assert.equal(byHash.size,expected.length,'SQL fixtures must have distinct traceable content');
+  const streamToken='R360_SYNTHETIC_STALE_RECONCILIATION_TRANSACTION';
+  if(stagedReconcile){
+   const bytes=Buffer.concat(reconcileParts.map(path=>readFileSync(join(root,path))));
+   byHash.set(createHash('sha256').update(bytes).digest('hex'),streamToken);
+  }
+  assert.equal(byHash.size,expected.length+(stagedReconcile?1:0),
+   'SQL fixtures and bundled R360 transaction must have distinct traceable content');
   const observed=readFileSync(trace,'utf8').trim().split('\n').map(line=>{
    const hash=line.split(/\s+/)[0];
    assert.ok(byHash.has(hash),'runner dispatched an unexpected SQL file');
    return byHash.get(hash);
   });
-  assert.deepEqual(observed.slice().sort(),expected.slice().sort(),
-   'every migration and regression must be dispatched exactly once');
+  assert.deepEqual(observed.filter(path=>path!==streamToken).slice().sort(),expected.slice().sort(),
+   'every migration and standalone regression must be dispatched exactly once');
+  assert.equal(observed.filter(path=>path===streamToken).length,stagedReconcile?1:0,
+   'the exact R360 migration+rollback fixture must run once iff staged');
+  if(stagedReconcile){
+   const i=observed.indexOf(reconcileMigration);
+   assert.ok(i>0,'R360 must be applied after historical migrations');
+   assert.equal(observed[i-1],streamToken,
+    'the literal migration must be tested in its rollback fixture immediately before application');
+  }
   assert.equal(observed[0],'tests/sql/bootstrap.sql');
   for(let index=1;index<migrations.length;index++)
    assert.ok(observed.indexOf(migrations[index-1])<observed.indexOf(migrations[index]),
