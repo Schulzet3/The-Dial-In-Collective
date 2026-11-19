@@ -209,20 +209,8 @@ function enumeratedComponents(page){
    const match=part.match(/^(.{3,160}?)\s*\(([^()]{3,80}\bProcess)\)$/i);
    if(!match||/\b(?:not|except|formerly|previous|example)\b/i.test(part)){components.length=0;break;}
    const countries=[...match[1].matchAll(COUNTRIES)];
-   // A selected component can explicitly identify an island/region rather than
-   // a country (e.g. "Sumatra - Gayo ..."). Keep that LITERAL region, never
-   // invent Indonesia or mark the region itself as a country. The same place
-   // names are already recognized by source-place evidence elsewhere.
-   // Require it at the BEGINNING of the current component, followed by an
-   // actual named-lot separator; "Sumatra-style" marketing is not an origin.
-   const namedRegion=/^(Sumatra|Bali|Timor|Kona|Hawaii)\s*[-–—]\s*(?!(?:style|flavou?r(?:ed|ing)?|themed|roast(?:ed|ing)?)\b)[\p{L}]/iu.exec(match[1]);
-   const literalRegion=countries.length===0&&namedRegion&&
-     literalCoffeeSourcePlaces(match[1]).some(place=>key(place)===key(namedRegion[1]));
-   const place=countries.length===1&&countries[0].index===0
-     ?{countries:[countries[0][1]],regions:[]}
-     :literalRegion?{countries:[],regions:[namedRegion[1]]}:null;
-   if(!place||!methodIn(match[2])){components.length=0;break;}
-   components.push({description:part,...place,methods:[match[2]],producers:[],varieties:[]});
+   if(countries.length!==1||countries[0].index!==0||!methodIn(match[2])){components.length=0;break;}
+   components.push({description:part,countries:[countries[0][1]],methods:[match[2]],producers:[],varieties:[]});
   }
   if(components.length>=2)return summarizeComponents(components,[[node.headEnd,node.contentEnd]],'enumerated');
  }
