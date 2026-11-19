@@ -51,33 +51,170 @@ export const REVIEWED_SOURCE_PATH_CASE_SQL_TEST=Object.freeze({
 // to silently certify the unfinished migration.
 export function discoverReviewedRestoredSqlTests({queue,restoredPaths,publishedSourceSha,
  developmentSourceSha,sourceObjectAt,selectedReadyItems=[]}={}){
- const spec=REVIEWED_SOURCE_PATH_CASE_SQL_TEST;
+ const original=REVIEWED_SOURCE_PATH_CASE_SQL_TEST;
  if(typeof sourceObjectAt!=='function'||!Array.isArray(restoredPaths)||
-    !Array.isArray(selectedReadyItems))throw Error('SQL test restoration provenance unavailable');
- const published=sourceObjectAt(publishedSourceSha,spec.path);
- const current=sourceObjectAt(developmentSourceSha,spec.path);
- if(current!=='100644:'+spec.unpublishedBlob)return [];
- if(published!=='100644:'+spec.publishedBlob)
-  throw Error('Published SQL identity test blob has unreviewed drift');
- const owner=queue?.items?.find(i=>i.id===spec.itemId);
- if(owner?.issue!==509||!['IN_PROGRESS','TESTING','BLOCKED'].includes(owner.state)||
-    owner.merged_source_sha!==spec.sourceMerge||
-    !Array.isArray(owner.scope_paths)||owner.scope_paths.length!==1||
-    owner.scope_paths[0]!==spec.migration||
-    !restoredPaths.includes(spec.migration)||
-    sourceObjectAt(publishedSourceSha,spec.migration)!==null||
-    sourceObjectAt(developmentSourceSha,spec.migration)===null||
-    sourceObjectAt(spec.sourceMerge,spec.path)!=='100644:'+spec.unpublishedBlob||
-    sourceObjectAt(spec.sourceMerge+'^',spec.path)!=='100644:'+spec.publishedBlob)
-  throw Error('Unready SQL case-path test source/owner is not independently attributable');
- for(const item of selectedReadyItems){
-  if(!SHA.test(item.merged_source_sha||'')||
-     sourceObjectAt(item.merged_source_sha,spec.path)!==
-       sourceObjectAt(item.merged_source_sha+'^',spec.path))
-   throw Error('Selected READY merge modified the unready SQL case-path test: '+item.id);
+    !Array.isArray(selectedReadyItems))
+  throw Error('SQL test restoration provenance unavailable');
+ // No migration is being excluded, so there is no migration-specific SQL
+ // fixture to restore. Synthetic READY-only tests legitimately have no SQL.
+ if(!restoredPaths.some(path=>path.startsWith('supabase/migrations/'))){
+  const original=REVIEWED_SOURCE_PATH_CASE_SQL_TEST;
+  if(sourceObjectAt(developmentSourceSha,original.path)==='100644:'+original.unpublishedBlob)
+   throw Error('Unready SQL case-path test source/owner is not independently attributable');
+  for(const fixture of REVIEWED_UNREADY_SQL_SUITE)
+   if(sourceObjectAt(developmentSourceSha,fixture.path)==='100644:'+fixture.unpublishedBlob)
+    throw Error('Unready SQL regression source lacks excluded TESTING migration: '+fixture.path);
+  return [];
  }
- return [spec.path];
+ const restored=[];
+ const same=(ref,path,blob)=>sourceObjectAt(ref,path)===(blob?'100644:'+blob:null);
+ const readyUnchanged=path=>{
+  for(const item of selectedReadyItems){
+   if(!SHA.test(item.merged_source_sha||'')||
+      sourceObjectAt(item.merged_source_sha,path)!==
+       sourceObjectAt(item.merged_source_sha+'^',path))
+    throw Error('Selected READY merge modified an unready SQL test: '+item.id+' '+path);
+  }
+ };
+ const originalCurrent=sourceObjectAt(developmentSourceSha,original.path);
+ if(originalCurrent==='100644:'+original.unpublishedBlob){
+  if(!same(publishedSourceSha,original.path,original.publishedBlob))
+   throw Error('Published SQL identity test blob has unreviewed drift');
+  const owner=queue?.items?.find(i=>i.id===original.itemId);
+  if(owner?.issue!==509||!['IN_PROGRESS','TESTING','BLOCKED'].includes(owner.state)||
+     owner.merged_source_sha!==original.sourceMerge||
+     !Array.isArray(owner.scope_paths)||owner.scope_paths.length!==1||
+     owner.scope_paths[0]!==original.migration||!restoredPaths.includes(original.migration)||
+     sourceObjectAt(publishedSourceSha,original.migration)!==null||
+     sourceObjectAt(developmentSourceSha,original.migration)===null||
+     !same(original.sourceMerge,original.path,original.unpublishedBlob)||
+     !same(original.sourceMerge+'^',original.path,original.publishedBlob))
+   throw Error('Unready SQL case-path test source/owner is not independently attributable');
+  readyUnchanged(original.path);
+  restored.push(original.path);
+ }else if(originalCurrent!==null){
+  throw Error('Unreviewed SQL case-path test source drift');
+ }
+ for(const spec of REVIEWED_UNREADY_SQL_SUITE){
+  const current=sourceObjectAt(developmentSourceSha,spec.path);
+  // Synthetic/older source fixtures without this exact unready test are not
+  // eligible to restore it; an altered real test is always a HOLD.
+  if(current===null&&sourceObjectAt(publishedSourceSha,spec.path)===null)continue;
+  if(!same(developmentSourceSha,spec.path,spec.unpublishedBlob)||
+     !same(publishedSourceSha,spec.path,spec.publishedBlob))
+   throw Error('Unreviewed current or published SQL test bytes: '+spec.path);
+  const owner=queue?.items?.find(i=>i.issue===509&&
+    ['IN_PROGRESS','TESTING','BLOCKED'].includes(i.state)&&
+    Array.isArray(i.scope_paths)&&i.scope_paths.length===1&&
+    i.scope_paths[0]===spec.migration);
+  if(!owner||!restoredPaths.includes(spec.migration)||
+     sourceObjectAt(publishedSourceSha,spec.migration)!==null||
+     sourceObjectAt(developmentSourceSha,spec.migration)===null||
+     !same(spec.sourceMerge,spec.path,spec.unpublishedBlob)||
+     sourceObjectAt(spec.sourceMerge+'^',spec.path)===current)
+   throw Error('Unready SQL regression test lacks exact source/migration provenance: '+spec.path);
+  readyUnchanged(spec.path);
+  restored.push(spec.path);
+ }
+ return sorted([...new Set(restored)]);
 }
+
+// Only these exact 13 reviewed post-published SQL test objects may be
+// restored/removed with their separately TESTING migration. No READY-owned
+// SQL test is eligible; hash or provenance drift remains a HOLD.
+export const REVIEWED_UNREADY_SQL_SUITE=Object.freeze([
+  {
+    "path": "supabase/tests/admin_coffee_review.sql",
+    "publishedBlob": "a3d1376e52bbe8b84bcf241f0de635d8f49062b4",
+    "unpublishedBlob": "080e37931406845eae8e8f8e0430b3046ab616c1",
+    "sourceMerge": "942c3d1b7051553ccd9c5795d2db2412418c56e7",
+    "migration": "supabase/migrations/20261117130000_dic_admin_merge_null_normalized_name_guard.sql"
+  },
+  {
+    "path": "supabase/tests/community_quality_integrity.sql",
+    "publishedBlob": "149453cc3177203ca96762dbf8312c966c87eb98",
+    "unpublishedBlob": "80c49e9e2a3a3e5c3be89660ff624864d487b25e",
+    "sourceMerge": "a6373cd1b9f6451603e147271750f89641bd03e1",
+    "migration": "supabase/migrations/20261116224000_dic_community_search_producer_parity.sql"
+  },
+  {
+    "path": "supabase/tests/source_worker_auth_and_admission.sql",
+    "publishedBlob": "85c2138a84911016f1dffffb34a960049af34ded",
+    "unpublishedBlob": "7a4c4d370f8cf8085d32084141758ffa2f78c40b",
+    "sourceMerge": "6f271a49ee5904a78250a826bdfd1dce4d4843ad",
+    "migration": "supabase/migrations/20261117133000_dic_source_retry_rollover_cooldown.sql"
+  },
+  {
+    "path": "supabase/tests/universal_url_preview.sql",
+    "publishedBlob": "4a18d99435b8ddc45406fdd3cfa7a520517f9705",
+    "unpublishedBlob": "663e7728fac240e0b576aab27948427dd4100f0c",
+    "sourceMerge": "12bdea41b49d0b4e558da11c2a6829e56e0e6c5a",
+    "migration": "supabase/migrations/20261117114500_dic_shared_preview_rollover_cooldown.sql"
+  },
+  {
+    "path": "supabase/tests/admin_edit_normalized_identity_guard.sql",
+    "publishedBlob": null,
+    "unpublishedBlob": "63f4c9d236f8fc727b8db3387128e79636f63b40",
+    "sourceMerge": "e958c3acace0d908a4464b5cf95c0405510a1c8b",
+    "migration": "supabase/migrations/20261118214500_dic_admin_edit_normalized_identity_guard.sql"
+  },
+  {
+    "path": "supabase/tests/coffee_confirm_null_name_guard.sql",
+    "publishedBlob": null,
+    "unpublishedBlob": "afd1640a6514abbe8b4779fbcc052ed1ea5f99c7",
+    "sourceMerge": "78969b25dc5c0f258b05cc3bfb4cc0fd83fb5dd5",
+    "migration": "supabase/migrations/20261118113500_dic_confirm_coffee_null_name_guard.sql"
+  },
+  {
+    "path": "supabase/tests/coffee_first_entry_no_self_alias.sql",
+    "publishedBlob": null,
+    "unpublishedBlob": "52afd0ebfc7ace8d9274ecd4ed2357ed54f91cf2",
+    "sourceMerge": "bc4c79b3c75fc3ead13be581430d96cbb29401b4",
+    "migration": "supabase/migrations/20261118114600_dic_first_entry_no_self_alias.sql"
+  },
+  {
+    "path": "supabase/tests/coffee_historical_alias_suggestion_confirm.sql",
+    "publishedBlob": null,
+    "unpublishedBlob": "5e520243be220c7c9893c0cd875f86c319d51162",
+    "sourceMerge": "d9df02a046ea3edef31e705f00568fee830a07fd",
+    "migration": "supabase/migrations/20261118140000_dic_coffee_alias_suggestion_confirm.sql"
+  },
+  {
+    "path": "supabase/tests/community_outlier_null_revision.sql",
+    "publishedBlob": null,
+    "unpublishedBlob": "43c7da7cc7df111c63ad42e56b95f44354e09115",
+    "sourceMerge": "fd48065ca1b027e0f0425a040e1c041fcd4914d5",
+    "migration": "supabase/migrations/20261118181500_dic_community_outlier_null_revision_guard.sql"
+  },
+  {
+    "path": "supabase/tests/import_additional_credential_keys.sql",
+    "publishedBlob": null,
+    "unpublishedBlob": "670a5cd2fa299861e105f585e02a45996909182b",
+    "sourceMerge": "949df84d4861cf316a82e82ea8201f158b1a1fd2",
+    "migration": "supabase/migrations/20261116210000_dic_import_additional_credential_keys.sql"
+  },
+  {
+    "path": "supabase/tests/legacy_private_hide_shot_retirement.sql",
+    "publishedBlob": null,
+    "unpublishedBlob": "7d9c4730b6e8c5170a7b5945d7730de5e5c42f3e",
+    "sourceMerge": "835883b0180d6bb1e7ff3ec2293fafd9f09643f7",
+    "migration": "supabase/migrations/20261118164500_dic_remove_legacy_private_hide_shot_handler.sql"
+  },
+  {
+    "path": "supabase/tests/pending_canonical_name_response.sql",
+    "publishedBlob": null,
+    "unpublishedBlob": "70d6f1943402785e319a8651239c24598a30bf4e",
+    "sourceMerge": "cccd5c0ebc63203326829f61d85b96403b951465",
+    "migration": "supabase/migrations/20261116151600_dic_pending_canonical_name_response.sql"
+  },
+  {
+    "path": "supabase/tests/recommendation_unique_controls.sql",
+    "publishedBlob": null,
+    "unpublishedBlob": "9ae348244ea6545b208e8ad1fbb76dff652b7da4",
+    "sourceMerge": "8b4e4e3edc42c821aa9f6858e62b20fdd4300ef8",
+    "migration": "supabase/migrations/20261118180000_dic_recommendation_unique_controls.sql"
+  }
+]);
 
 const REVIEWED_OWNER_DRIVE_TEST=Object.freeze({
  path:'tests/dic-owner-drive-connect.test.mjs',
@@ -532,8 +669,7 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
  if(!Array.isArray(restoredSqlTests)||!equal(restoredSqlTests,expectedRestoredSqlTests))
   reject('Restored unfinished SQL tests differ from exact reviewed source/ownership');
  for(const path of restoredSqlTests)
-  if(path!==REVIEWED_SOURCE_PATH_CASE_SQL_TEST.path||
-     sourceObjectAt(candidateSha,path)!==sourceObjectAt(publishedSourceSha,path))
+  if(sourceObjectAt(candidateSha,path)!==sourceObjectAt(publishedSourceSha,path))
    reject('Unready SQL test not restored to exact published Git object');
  const excludedTests=manifest.excluded_unready_test_paths||[];
  if(excludedTests.some(path=>compatibleAuditSupport.includes(path)))
