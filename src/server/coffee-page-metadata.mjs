@@ -83,6 +83,7 @@ import {selectedCurrentNamedMicroLotSector} from './coffee-selected-microlot-sec
 import {selectedCurrentNamedGrowingValley} from './coffee-selected-growing-valley-origin.mjs';
 import {conflictingCurrentSelectedDecafSource} from './coffee-selected-decaf-origin-conflict.mjs';
 import {selectedCurrentCoffeeLabeledRegion,selectedCurrentLeadRoastNotes} from './coffee-selected-current-panel.mjs';
+import {selectedIconLabeledCoffeeSpecs} from './coffee-selected-icon-specs.mjs';
 
 // A chosen current selected coffee description can be more authoritative than
 // another labeled tasting list printed in the same selected product detail
@@ -1514,6 +1515,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  const selectedProduct=canonicalIdentityScope(fields,product);
  const currentProduct=withoutDetachedFarmerProfiles(selectedProduct);
  const canonicalProduct=canonicalComponentScope(fields,currentProduct);
+ const selectedIconSpecs=selectedIconLabeledCoffeeSpecs(product,{name:fields.name,clean});
  rememberGeographyEntityRoles(fields,canonicalProduct);
  for(const place of extractCoffeeGeographyTuples(canonicalProduct,{name:fields.name,clean}))addField(fields,'Origin',place);
  productDetails(fields,p);
@@ -2141,6 +2143,13 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    source_url,source_type:'html',section:selectedRoastCupping.source_label
   });
  }
+ // Only a selected purchase-bound icon LABEL beside literal SAME-heading
+ // tasting words supplies a new strong tasting fact, never icon ALT or SEO.
+ // Incompatible direct lists remain separate and conflict in the usual gate.
+ for(const value of selectedIconSpecs.notes)if(source_facts.length<384)source_facts.push({
+  field:'tasting_notes',label:'Tasting Notes',value,source_type:'html',source_url,
+  section:'Exact selected current icon-labeled specification'
+ });
  // Owner-approved preference: a current-coffee labeled notes list outranks
  // incidental flavor prose, but a second coarse taxonomy/graphic is not an
  // equally strong source. Preserve established equivalent notes verbatim.
@@ -2490,7 +2499,8 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   ...(Array.isArray(directSelected.decaffeination_method_evidence)?
    directSelected.decaffeination_method_evidence:[]),
   ...namedDecafStatements,
-  ...selectedFormTitleWaterDecafEvidence(product,{name:fields.name,clean})
+  ...selectedFormTitleWaterDecafEvidence(product,{name:fields.name,clean}),
+  ...selectedIconSpecs.methods
  ])];
  // Generic Process labels can conflict in the layout reader while the EXACT
  // selected named decaf sentence and the selected EA Process spec AGREE.
@@ -2518,9 +2528,13 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   decafSpec.candidates.length>0&&
   decafSpec.candidates.every(spec=>Boolean(spec.method)&&
    spec.method===decafSpec.candidates[0].method);
+ // A single explicit exact-H1 icon decaf method can coexist with conflicting
+ // GREEN fermentation stages, not with opposing decaf-method specs.
+ const iconMethod=selectedIconSpecs.methods.length===1?
+  inferDecaffeinationMethod({name:fields.name,selectedMethod:selectedIconSpecs.methods[0]}):'';
  const decafSourceConflict=decafSpecConflict||
   (detailConflicts.has('processing_detail')&&
-   !exactNamedAndSpecAgreement&&!exactSelectedSpecMethod);
+   !exactNamedAndSpecAgreement&&!exactSelectedSpecMethod&&!iconMethod);
  // A generic page layout may contain labeled decaf PROCESS prose inside a
  // FAQ, related item, or contradictory second product heading. Only the
  // independently verified current selected-product decaf sentence or a
