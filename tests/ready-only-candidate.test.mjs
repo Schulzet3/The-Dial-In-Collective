@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {planReadyOnlyCandidate,validateReadyOnlyCandidate,CANDIDATE_KIND,
- CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH,REVIEWED_WORKFLOW_TEST,discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,discoverRestoredUnreadySqlTests,REVIEWED_UNREADY_SQL_TEST,assertCandidateRelativeImports,
+ CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH,REVIEWED_WORKFLOW_TEST,discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,discoverRestoredUnreadySqlTests,REVIEWED_UNREADY_SQL_TEST,discoverRestoredUnreadyCoffeeTests,REVIEWED_UNREADY_COFFEE_TESTS,assertCandidateRelativeImports,
  assertCandidateStaticNamedExports} from '../scripts/release/ready-only-candidate.mjs';
 import {classifyReleaseRisk} from '../scripts/release/release-reliability.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40),D='d'.repeat(40);
@@ -478,11 +478,12 @@ test('#2169 generator ESM exports pass frozen-source preflight, absent symbols s
   /Missing static relative module export.*missingSymbol/);
 });
 
-test('#3342 SQL protected regression restores only with source-proven excluded TESTING #509 R265',()=>{
+
+test('#3342 SQL protected R265 regression restores only with excluded TESTING migration',()=>{
  const s=REVIEWED_UNREADY_SQL_TEST;
  const owner={id:s.itemId,issue:509,state:'TESTING',
   merged_source_sha:s.sourceSha,scope_paths:[s.migration]};
- const chosen={...one,merged_source_sha:D};
+ const ready={...one,merged_source_sha:D};
  const objects=new Map([
   [A+':'+s.path,'100644:'+s.publishedBlob],
   [B+':'+s.path,'100644:'+s.unreadyBlob],
@@ -493,17 +494,47 @@ test('#3342 SQL protected regression restores only with source-proven excluded T
   [D+'^:'+s.path,'100644:'+s.unreadyBlob]
  ]);
  const read=(ref,path)=>objects.get(ref+':'+path)||null;
- const args={queue:{...q,items:[chosen,owner]},restoredPaths:[s.migration],
+ const args={queue:{...q,items:[ready,owner]},restoredPaths:[s.migration],
   publishedSourceSha:A,developmentSourceSha:B,sourceObjectAt:read,
-  selectedReadyItems:[chosen]};
+  selectedReadyItems:[ready],developmentChangedPaths:[s.path]};
  assert.deepEqual(discoverRestoredUnreadySqlTests(args),[s.path]);
- assert.deepEqual(discoverRestoredUnreadySqlTests({...args,
-  queue:{...q,items:[chosen,{...owner,state:'READY'}]}}),[]);
- assert.deepEqual(discoverRestoredUnreadySqlTests({...args,restoredPaths:[]}),[]);
+ assert.throws(()=>discoverRestoredUnreadySqlTests({...args,
+  queue:{...q,items:[ready,{...owner,state:'READY'}]}}),
+  /Unready SQL regression owner/);
+ assert.throws(()=>discoverRestoredUnreadySqlTests({...args,restoredPaths:[]}),
+  /Unready SQL regression owner/);
  assert.throws(()=>discoverRestoredUnreadySqlTests({...args,
   sourceObjectAt:(ref,path)=>ref===A&&path===s.path?'100644:'+'f'.repeat(40):read(ref,path)}),
-  /Published SQL regression differs/);
+  /Unreviewed published-to-development regression/);
  assert.throws(()=>discoverRestoredUnreadySqlTests({...args,
   sourceObjectAt:(ref,path)=>ref===D&&path===s.path?'100644:'+'f'.repeat(40):read(ref,path)}),
-  /Selected READY item changed/);
+  /Selected READY merge changed/);
+ assert.throws(()=>discoverRestoredUnreadySqlTests({...args,
+  developmentChangedPaths:['supabase/tests/unapproved.sql']}),
+  /New unreviewed SQL regression/);
+});
+test('#3342 only source-proven R232 coffee tests are restored with R232 parser excluded',()=>{
+ const rows=REVIEWED_UNREADY_COFFEE_TESTS;
+ const ready={...one,merged_source_sha:D};
+ const owner={id:'DIC-Q-33-r232-selected-annual-release-role',issue:33,
+  state:'TESTING',scope_paths:['src/server/coffee-identity-evidence.mjs']};
+ const map=new Map();
+ for(const row of rows){
+  map.set(A+':'+row.path,'100644:'+row.published);
+  map.set(B+':'+row.path,'100644:'+row.unready);
+  map.set('b585b9cf646da868e6c7c8871289c82f6d96e6ca:'+row.path,'100644:'+row.unready);
+  map.set('b585b9cf646da868e6c7c8871289c82f6d96e6ca^:'+row.path,'100644:'+row.published);
+  map.set(D+':'+row.path,'100644:'+row.unready);
+  map.set(D+'^:'+row.path,'100644:'+row.unready);
+ }
+ const read=(ref,path)=>map.get(ref+':'+path)||null;
+ const args={queue:{...q,items:[ready,owner]},restoredPaths:['src/server/coffee-identity-evidence.mjs'],
+  publishedSourceSha:A,developmentSourceSha:B,sourceObjectAt:read,
+  selectedReadyItems:[ready],developmentChangedPaths:rows.map(r=>r.path)};
+ assert.deepEqual(discoverRestoredUnreadyCoffeeTests(args),rows.map(r=>r.path).sort());
+ assert.throws(()=>discoverRestoredUnreadyCoffeeTests({...args,restoredPaths:[]}),
+  /Unready coffee identity source/);
+ assert.throws(()=>discoverRestoredUnreadyCoffeeTests({...args,
+  sourceObjectAt:(ref,path)=>ref===D&&path===rows[0].path?'100644:'+'f'.repeat(40):read(ref,path)}),
+  /Selected READY merge modified/);
 });
