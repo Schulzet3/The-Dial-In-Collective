@@ -4953,6 +4953,23 @@
       "github_code_test_ci_writes": 0,
       "release": "TESTING",
       "baseline": "IN_PROGRESS"
+    },
+    {
+      "run": "R367",
+      "date": "2026-11-19",
+      "preflight_development_sha": "96a848fde0011f48adede2be289d2f5bbdd97626",
+      "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "receipt": "docs/audits/issue509-r367-completed-account-delete-retry-20261119.json",
+      "existing_direct_full_sql_definitions_reviewed": 4,
+      "previously_reviewed_deployed_edge_files": 2,
+      "first_time_provider_words": 0,
+      "issue267_source_lines": 0,
+      "new_dormant_api_response_mismatch": 1,
+      "source_migration": "supabase/migrations/20261119175000_dic_admin_delete_completed_retry_count.sql",
+      "source_ci": "PENDING",
+      "production_writes": 0,
+      "release": "TESTING",
+      "baseline": "IN_PROGRESS"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -25312,5 +25329,23 @@
     "release": "TESTING",
     "baseline": "IN_PROGRESS",
     "next_cursor": "First actually changed/new or previously unreviewed LIVE provider definition (compare current catalogs/hashes and Edge full source); separately pursue reproducible remaining application/Edge bug or measured bottleneck, not R365 repeats. Native compiled and console-only Auth/API/Vault worker settings UNVERIFIED."
+  },
+  "provider_admin_delete_completed_retry_run367": {
+    "receipt_path": "docs/audits/issue509-r367-completed-account-delete-retry-20261119.json",
+    "preflight_sha": "96a848fde0011f48adede2be289d2f5bbdd97626",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "completed_operations": 6,
+    "completed_positive_community_removals": 0,
+    "provider_function_md5": "6e7e0589cbda1bc5023771724ce8b77f",
+    "edge_deployed_git_blob": "45706c9c78e0755a35159e8a96152cc2aa293d2c",
+    "bug": "completed Prepare omits community_removed; Edge falls back to 0",
+    "migration_path": "supabase/migrations/20261119175000_dic_admin_delete_completed_retry_count.sql",
+    "regression_path": "supabase/tests/admin_account_delete_completed_receipt.sql",
+    "new_first_time_source_word_credit": 0,
+    "issue267_lines": 0,
+    "provider_writes": 0,
+    "source_ci": "PENDING",
+    "release": "TESTING",
+    "baseline": "IN_PROGRESS"
   }
 }

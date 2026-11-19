@@ -140,4 +140,10 @@ if [[ -f supabase/migrations/20261119105000_dic_admin_shot_delete_family_refresh
 else
   echo "NOT_APPLICABLE: #509 Admin shot-family refresh; migration excluded from tested source"
 fi
+if [[ -f supabase/migrations/20261119175000_dic_admin_delete_completed_retry_count.sql ]]; then
+  echo "Running admin_account_delete_completed_receipt"
+  run_sql supabase/tests/admin_account_delete_completed_receipt.sql
+else
+  echo "NOT_APPLICABLE: #509 completed account deletion count; migration excluded from tested source"
+fi
 echo 'PASS: all checked-in migrations and SQL suites, including staged import/setup, cross-account and source-worker authorization and first-style owner isolation regressions; no hosted connection.'
