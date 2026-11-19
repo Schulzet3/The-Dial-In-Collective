@@ -51,32 +51,61 @@ export const REVIEWED_SOURCE_PATH_CASE_SQL_TEST=Object.freeze({
 // to silently certify the unfinished migration.
 export function discoverReviewedRestoredSqlTests({queue,restoredPaths,publishedSourceSha,
  developmentSourceSha,sourceObjectAt,selectedReadyItems=[]}={}){
- const spec=REVIEWED_SOURCE_PATH_CASE_SQL_TEST;
+ const original=REVIEWED_SOURCE_PATH_CASE_SQL_TEST;
  if(typeof sourceObjectAt!=='function'||!Array.isArray(restoredPaths)||
-    !Array.isArray(selectedReadyItems))throw Error('SQL test restoration provenance unavailable');
- const published=sourceObjectAt(publishedSourceSha,spec.path);
- const current=sourceObjectAt(developmentSourceSha,spec.path);
- if(current!=='100644:'+spec.unpublishedBlob)return [];
- if(published!=='100644:'+spec.publishedBlob)
-  throw Error('Published SQL identity test blob has unreviewed drift');
- const owner=queue?.items?.find(i=>i.id===spec.itemId);
- if(owner?.issue!==509||!['IN_PROGRESS','TESTING','BLOCKED'].includes(owner.state)||
-    owner.merged_source_sha!==spec.sourceMerge||
-    !Array.isArray(owner.scope_paths)||owner.scope_paths.length!==1||
-    owner.scope_paths[0]!==spec.migration||
-    !restoredPaths.includes(spec.migration)||
-    sourceObjectAt(publishedSourceSha,spec.migration)!==null||
-    sourceObjectAt(developmentSourceSha,spec.migration)===null||
-    sourceObjectAt(spec.sourceMerge,spec.path)!=='100644:'+spec.unpublishedBlob||
-    sourceObjectAt(spec.sourceMerge+'^',spec.path)!=='100644:'+spec.publishedBlob)
-  throw Error('Unready SQL case-path test source/owner is not independently attributable');
- for(const item of selectedReadyItems){
-  if(!SHA.test(item.merged_source_sha||'')||
-     sourceObjectAt(item.merged_source_sha,spec.path)!==
-       sourceObjectAt(item.merged_source_sha+'^',spec.path))
-   throw Error('Selected READY merge modified the unready SQL case-path test: '+item.id);
+    !Array.isArray(selectedReadyItems))
+  throw Error('SQL test restoration provenance unavailable');
+ const restored=[];
+ const same=(ref,path,blob)=>sourceObjectAt(ref,path)===(blob?'100644:'+blob:null);
+ const readyUnchanged=path=>{
+  for(const item of selectedReadyItems){
+   if(!SHA.test(item.merged_source_sha||'')||
+      sourceObjectAt(item.merged_source_sha,path)!==
+       sourceObjectAt(item.merged_source_sha+'^',path))
+    throw Error('Selected READY merge modified an unready SQL test: '+item.id+' '+path);
+  }
+ };
+ const originalCurrent=sourceObjectAt(developmentSourceSha,original.path);
+ if(originalCurrent==='100644:'+original.unpublishedBlob){
+  if(!same(publishedSourceSha,original.path,original.publishedBlob))
+   throw Error('Published SQL identity test blob has unreviewed drift');
+  const owner=queue?.items?.find(i=>i.id===original.itemId);
+  if(owner?.issue!==509||!['IN_PROGRESS','TESTING','BLOCKED'].includes(owner.state)||
+     owner.merged_source_sha!==original.sourceMerge||
+     !Array.isArray(owner.scope_paths)||owner.scope_paths.length!==1||
+     owner.scope_paths[0]!==original.migration||!restoredPaths.includes(original.migration)||
+     sourceObjectAt(publishedSourceSha,original.migration)!==null||
+     sourceObjectAt(developmentSourceSha,original.migration)===null||
+     !same(original.sourceMerge,original.path,original.unpublishedBlob)||
+     !same(original.sourceMerge+'^',original.path,original.publishedBlob))
+   throw Error('Unready SQL case-path test source/owner is not independently attributable');
+  readyUnchanged(original.path);
+  restored.push(original.path);
+ }else if(originalCurrent!==null){
+  throw Error('Unreviewed SQL case-path test source drift');
  }
- return [spec.path];
+ for(const spec of REVIEWED_UNREADY_SQL_SUITE){
+  const current=sourceObjectAt(developmentSourceSha,spec.path);
+  // Synthetic/older source fixtures without this exact unready test are not
+  // eligible to restore it; an altered real test is always a HOLD.
+  if(current===null&&sourceObjectAt(publishedSourceSha,spec.path)===null)continue;
+  if(!same(developmentSourceSha,spec.path,spec.unpublishedBlob)||
+     !same(publishedSourceSha,spec.path,spec.publishedBlob))
+   throw Error('Unreviewed current or published SQL test bytes: '+spec.path);
+  const owner=queue?.items?.find(i=>i.issue===509&&
+    ['IN_PROGRESS','TESTING','BLOCKED'].includes(i.state)&&
+    Array.isArray(i.scope_paths)&&i.scope_paths.length===1&&
+    i.scope_paths[0]===spec.migration);
+  if(!owner||!restoredPaths.includes(spec.migration)||
+     sourceObjectAt(publishedSourceSha,spec.migration)!==null||
+     sourceObjectAt(developmentSourceSha,spec.migration)===null||
+     !same(spec.sourceMerge,spec.path,spec.unpublishedBlob)||
+     sourceObjectAt(spec.sourceMerge+'^',spec.path)===current)
+   throw Error('Unready SQL regression test lacks exact source/migration provenance: '+spec.path);
+  readyUnchanged(spec.path);
+  restored.push(spec.path);
+ }
+ return sorted([...new Set(restored)]);
 }
 
 const REVIEWED_OWNER_DRIVE_TEST=Object.freeze({
@@ -532,8 +561,7 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
  if(!Array.isArray(restoredSqlTests)||!equal(restoredSqlTests,expectedRestoredSqlTests))
   reject('Restored unfinished SQL tests differ from exact reviewed source/ownership');
  for(const path of restoredSqlTests)
-  if(path!==REVIEWED_SOURCE_PATH_CASE_SQL_TEST.path||
-     sourceObjectAt(candidateSha,path)!==sourceObjectAt(publishedSourceSha,path))
+  if(sourceObjectAt(candidateSha,path)!==sourceObjectAt(publishedSourceSha,path))
    reject('Unready SQL test not restored to exact published Git object');
  const excludedTests=manifest.excluded_unready_test_paths||[];
  if(excludedTests.some(path=>compatibleAuditSupport.includes(path)))
