@@ -6,6 +6,12 @@ const rows=(raw,key)=>Array.isArray(raw?.[key])?raw[key]:[];
 // First-match and row-order semantics stay intact; lookups no longer scan every dataset repeatedly.
 const groupBy=(items,key)=>{const result=new Map();for(const item of items){const k=item[key];if(!result.has(k))result.set(k,[]);result.get(k).push(item);}return result;};
 const firstBy=(items,key)=>{const result=new Map();for(const item of items)if(!result.has(item[key]))result.set(item[key],item);return result;};
+// SQL jsonb_agg order is unspecified for calibrations; use chronology before the legacy fallback.
+const byCalibrationAge=(a,b)=>{
+ const aParsed=Date.parse(a.created_at||''),bParsed=Date.parse(b.created_at||'');
+ const at=Number.isFinite(aParsed)?aParsed:-Infinity,bt=Number.isFinite(bParsed)?bParsed:-Infinity;
+ return at===bt?String(a.id||'').localeCompare(String(b.id||'')):(at<bt?-1:1);
+};
 export function hydrate(raw){
  const s=M.blankState();s.theme=raw.preferences?.theme||'system';s.preferences=raw.preferences?.tasting_preferences||'';s.activeSetupId=raw.preferences?.active_setup_id||null;
  const versionsBySetup=groupBy(rows(raw,'versions'),'setup_id'),
@@ -22,7 +28,7 @@ export function hydrate(raw){
  for(const setup of rows(raw,'setups')){
   const versions=(versionsBySetup.get(setup.id)||[]).map(v=>{
    const pref=prefsByVersion.get(v.id)||{};
-   const calibrations=(calibrationsBySetup.get(setup.id)||[]).filter(g=>g.grinder_model===v.grinder_model&&g.burr_set===v.burr_set);
+   const calibrations=(calibrationsBySetup.get(setup.id)||[]).filter(g=>g.grinder_model===v.grinder_model&&g.burr_set===v.burr_set).sort(byCalibrationAge);
    const g=calibrations.find(g=>g.id===pref.calibration_id)||calibrations.at(-1)||{};
    const baskets=(basketsBySetup.get(setup.id)||[]).map(b=>{const meta=basketById.get(b.basket_id)||{};return {id:b.id,logicalId:b.basket_id,doseG:number(b.basket_dose_g),name:meta.name||'Basket',archived:!!meta.archived_at,createdAt:b.created_at};});
    return {id:v.id,label:v.label,createdAt:v.created_at,machine:v.machine_model||'',grinder:v.grinder_model||'',burrs:v.burr_set||'',grinderMin:number(g.finest_setting),grinderMax:number(g.coarsest_setting),calibrationId:g.id,calibrations:calibrations.map(g=>({id:g.id,min:number(g.finest_setting),max:number(g.coarsest_setting),at:g.created_at})),baskets,defaultBasketId:pref.default_basket_version_id,tempUnit:pref.temperature_unit||'F',advanced:{temperature:!!pref.track_temperature,slowFeed:!!pref.track_slow_feed,baskets:!!pref.multiple_baskets},slowFeed:!!pref.slow_feed};

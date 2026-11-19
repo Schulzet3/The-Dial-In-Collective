@@ -17143,6 +17143,28 @@
       ],
       "notes": "Only skip redundant previous-family refresh when previous=fid; moved, hidden, non-green, Current/favorite and historical rows preserved. Production read-only.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-calibration-order-fallback",
+      "issue": 509,
+      "title": "Deterministic compatible historical grinder-calibration fallback",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/mapping.js"
+      ],
+      "owner_source": "Issue #509 development-only R365; DIC_PREFLIGHT_VERIFIED development_sha=943c3f66c9999bf8b4da23d84f491f3b45e3fb00 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "tests": [
+        "Live full personal-state SQL: unordered calibration JSON aggregate; setup_preferences.calibration_id nullable; existing four versions have no NULL selections; current production incident not established",
+        "Two synthetic Node22 regression cases staged for reverse SQL order, timezone-equal and undated rows, and explicit pinned calibration; exact PR-head and merged-source CI PENDING"
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact PR-head source-bound Node22/cloud, browser and approval checks not yet PASS",
+        "Independent #3347 source-isolated candidate CI and future owner Publish required before production application update"
+      ],
+      "notes": "Sort compatible calibrations by created_at and id before legacy fallback only; preserves immutable calibration IDs, history, private shots/notes, offline queue, and explicit calibration selection. No SQL or production changes.",
+      "production_deployed": false
     }
   ],
   "history": [

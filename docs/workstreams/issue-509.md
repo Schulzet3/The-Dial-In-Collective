@@ -1,3 +1,15 @@
+# Issue #509 — R365 calibration fallback chronological determinism [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=943c3f66c9999bf8b4da23d84f491f3b45e3fb00 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**November 19, 2026 UTC — development-only.** Immutable PREFLIGHT source SHA and Git blob read back and matched before provider inspection. Supabase `azviqqejypsefzilgonr` ACTIVE_HEALTHY PostgreSQL 17.11; strictly READ-ONLY. Direct full provider `private.read_personal_state()` (2,339 chars MD5 037d248b67cc3e8490c1689d3200990f) assembles unordered `grinder_calibrations` JSON rows. Development `hydrate` used `calibrations.at(-1)` when a nullable explicit calibration preference is missing. An array permutation of synthetic historic compatible calibrations therefore chooses different grind ranges for the same saved data. Nullable schema verified. Current live aggregate has 4 setup versions, **zero NULL selected calibration** and at most 1 matching candidate/version: this is a **dormant deterministic-bug/compatibility fix**, NOT a verified member incident or measurable production slowdown.
+
+**Narrow safe source fix:** only sort matching calibration rows by actual timestamp with stable ID tie-break before the existing fallback; explicit selected calibration, grinder/burr compatibility, all immutable IDs, shot snapshots, source arrays, offline queues and historical rows remain unchanged. Added two synthetic Node22 test cases for order permutations, pinned selection, timestamp timezone tie and undated legacy row; no SQL migration or provider write. `site/cloud/mapping.js` and `tests/issue509-calibration-order.test.mjs` plus same-commit journal, structured receipt, append-only ledger and TESTING queue entry. **Exact-source CI PENDING / not READY**. All live SQL functions read this run were previously credited: 0 new first-time provider words and 0 #267 line credit. No repeat full-suite claim, release/publish/backup/schedule changes or owner alert.
+
+**Next:** exact PR-head Node22/cloud/browser/approval CI, repair if needed, preserve concurrent #455 mapping ownership, safe [skip netlify] integration and merged-source CI, then continue genuinely unreviewed provider definition. Evidence: [R365 receipt](../audits/issue509-r365-calibration-order-20261119.json). Baseline IN_PROGRESS.
+
+---
+
 # Issue #509 — R364 Community state integrity and R362 merged-source CI [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=e9084a8ed0c8372c58b46a1de94eb4e72909f323 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
