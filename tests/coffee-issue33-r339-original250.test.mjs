@@ -12,6 +12,12 @@ test('R339 own selected product contains two separately attributed literal flavo
  const a=selected250(page());assert.equal(a.exact,true);
  for(const k of ['ownRoast','ownWashed','ownSantander','ownElevation','ownVarieties','ownNotes','ownFlavor','ownDrying'])assert.equal(a[k],true,k);
 });
+test('R339 escaped HTML en dash in directly labeled altitude preserves exact range; altered range rejected',()=>{
+ const escaped=page(specs.replace('1,200 - 1,800 meters','1,200 &ndash; 1,800 meters'));
+ const bad=page(specs.replace('1,200 - 1,800 meters','1,200 &ndash; 1,900 meters'));
+ assert.equal(selected250(escaped).ownElevation,true);
+ assert.equal(selected250(bad).ownElevation,false);
+});
 test('R339 wrong selected H1 is never accepted as archived Colombia Supremo',()=>{
  assert.equal(selected250(page(specs,'French Roast Sumatra')).exact,false);
 });

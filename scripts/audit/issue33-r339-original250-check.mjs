@@ -25,7 +25,7 @@ export function selected250(html){
   ownRoast:/\bmedium roast\b/.test(t)||/\bmedium roasted\b/.test(t),
   ownWashed:/\bprocess washed\b/.test(t),
   ownSantander:/\bdept of santander\b/.test(t),
-  ownElevation:/\b1 200 1 800 meters\b/.test(t),
+  ownElevation:/\baltitude\s+1\s+200(?:\s+[a-z0-9]{2,12}){0,2}\s+1\s+800\s+meters\b/u.test(t),
   ownVarieties:['caturra','castillo','catimor'].every(v=>t.includes(v)),
   ownNotes:/\bnotes sweet tart peach apricot\b/.test(t),
   ownFlavor:/\bflavor hints of tangerine orange notes of tobacco\b/.test(t),
