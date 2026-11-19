@@ -108,6 +108,103 @@ export function discoverReviewedRestoredSqlTests({queue,restoredPaths,publishedS
  return sorted([...new Set(restored)]);
 }
 
+// Only these exact 13 reviewed post-published SQL test objects may be
+// restored/removed with their separately TESTING migration. No READY-owned
+// SQL test is eligible; hash or provenance drift remains a HOLD.
+export const REVIEWED_UNREADY_SQL_SUITE=Object.freeze([
+  {
+    "path": "supabase/tests/admin_coffee_review.sql",
+    "publishedBlob": "a3d1376e52bbe8b84bcf241f0de635d8f49062b4",
+    "unpublishedBlob": "080e37931406845eae8e8f8e0430b3046ab616c1",
+    "sourceMerge": "942c3d1b7051553ccd9c5795d2db2412418c56e7",
+    "migration": "supabase/migrations/20261117130000_dic_admin_merge_null_normalized_name_guard.sql"
+  },
+  {
+    "path": "supabase/tests/community_quality_integrity.sql",
+    "publishedBlob": "149453cc3177203ca96762dbf8312c966c87eb98",
+    "unpublishedBlob": "80c49e9e2a3a3e5c3be89660ff624864d487b25e",
+    "sourceMerge": "a6373cd1b9f6451603e147271750f89641bd03e1",
+    "migration": "supabase/migrations/20261116224000_dic_community_search_producer_parity.sql"
+  },
+  {
+    "path": "supabase/tests/source_worker_auth_and_admission.sql",
+    "publishedBlob": "85c2138a84911016f1dffffb34a960049af34ded",
+    "unpublishedBlob": "7a4c4d370f8cf8085d32084141758ffa2f78c40b",
+    "sourceMerge": "6f271a49ee5904a78250a826bdfd1dce4d4843ad",
+    "migration": "supabase/migrations/20261117133000_dic_source_retry_rollover_cooldown.sql"
+  },
+  {
+    "path": "supabase/tests/universal_url_preview.sql",
+    "publishedBlob": "4a18d99435b8ddc45406fdd3cfa7a520517f9705",
+    "unpublishedBlob": "663e7728fac240e0b576aab27948427dd4100f0c",
+    "sourceMerge": "12bdea41b49d0b4e558da11c2a6829e56e0e6c5a",
+    "migration": "supabase/migrations/20261117114500_dic_shared_preview_rollover_cooldown.sql"
+  },
+  {
+    "path": "supabase/tests/admin_edit_normalized_identity_guard.sql",
+    "publishedBlob": null,
+    "unpublishedBlob": "63f4c9d236f8fc727b8db3387128e79636f63b40",
+    "sourceMerge": "e958c3acace0d908a4464b5cf95c0405510a1c8b",
+    "migration": "supabase/migrations/20261118214500_dic_admin_edit_normalized_identity_guard.sql"
+  },
+  {
+    "path": "supabase/tests/coffee_confirm_null_name_guard.sql",
+    "publishedBlob": null,
+    "unpublishedBlob": "afd1640a6514abbe8b4779fbcc052ed1ea5f99c7",
+    "sourceMerge": "78969b25dc5c0f258b05cc3bfb4cc0fd83fb5dd5",
+    "migration": "supabase/migrations/20261118113500_dic_confirm_coffee_null_name_guard.sql"
+  },
+  {
+    "path": "supabase/tests/coffee_first_entry_no_self_alias.sql",
+    "publishedBlob": null,
+    "unpublishedBlob": "52afd0ebfc7ace8d9274ecd4ed2357ed54f91cf2",
+    "sourceMerge": "bc4c79b3c75fc3ead13be581430d96cbb29401b4",
+    "migration": "supabase/migrations/20261118114600_dic_first_entry_no_self_alias.sql"
+  },
+  {
+    "path": "supabase/tests/coffee_historical_alias_suggestion_confirm.sql",
+    "publishedBlob": null,
+    "unpublishedBlob": "5e520243be220c7c9893c0cd875f86c319d51162",
+    "sourceMerge": "d9df02a046ea3edef31e705f00568fee830a07fd",
+    "migration": "supabase/migrations/20261118140000_dic_coffee_alias_suggestion_confirm.sql"
+  },
+  {
+    "path": "supabase/tests/community_outlier_null_revision.sql",
+    "publishedBlob": null,
+    "unpublishedBlob": "43c7da7cc7df111c63ad42e56b95f44354e09115",
+    "sourceMerge": "fd48065ca1b027e0f0425a040e1c041fcd4914d5",
+    "migration": "supabase/migrations/20261118181500_dic_community_outlier_null_revision_guard.sql"
+  },
+  {
+    "path": "supabase/tests/import_additional_credential_keys.sql",
+    "publishedBlob": null,
+    "unpublishedBlob": "670a5cd2fa299861e105f585e02a45996909182b",
+    "sourceMerge": "949df84d4861cf316a82e82ea8201f158b1a1fd2",
+    "migration": "supabase/migrations/20261116210000_dic_import_additional_credential_keys.sql"
+  },
+  {
+    "path": "supabase/tests/legacy_private_hide_shot_retirement.sql",
+    "publishedBlob": null,
+    "unpublishedBlob": "7d9c4730b6e8c5170a7b5945d7730de5e5c42f3e",
+    "sourceMerge": "835883b0180d6bb1e7ff3ec2293fafd9f09643f7",
+    "migration": "supabase/migrations/20261118164500_dic_remove_legacy_private_hide_shot_handler.sql"
+  },
+  {
+    "path": "supabase/tests/pending_canonical_name_response.sql",
+    "publishedBlob": null,
+    "unpublishedBlob": "70d6f1943402785e319a8651239c24598a30bf4e",
+    "sourceMerge": "cccd5c0ebc63203326829f61d85b96403b951465",
+    "migration": "supabase/migrations/20261116151600_dic_pending_canonical_name_response.sql"
+  },
+  {
+    "path": "supabase/tests/recommendation_unique_controls.sql",
+    "publishedBlob": null,
+    "unpublishedBlob": "9ae348244ea6545b208e8ad1fbb76dff652b7da4",
+    "sourceMerge": "8b4e4e3edc42c821aa9f6858e62b20fdd4300ef8",
+    "migration": "supabase/migrations/20261118180000_dic_recommendation_unique_controls.sql"
+  }
+]);
+
 const REVIEWED_OWNER_DRIVE_TEST=Object.freeze({
  path:'tests/dic-owner-drive-connect.test.mjs',
  runtime:'netlify/functions/dic-owner-drive-connect.mjs',
