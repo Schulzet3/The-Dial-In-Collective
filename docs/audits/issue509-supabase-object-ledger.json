@@ -4879,6 +4879,21 @@
       "release": "TESTING",
       "baseline": "IN_PROGRESS",
       "next": "Exact PG17 fixture/Node22/browser/approval then nonforce integration, provider novel source"
+    },
+    {
+      "run": "R360a",
+      "date": "2026-11-19",
+      "preflight_development_sha": "5eca094cf069b820e9cbfd927f7dc6469e2e84fa",
+      "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "pr": 3405,
+      "prior_head": "df7679becf8eab421327932fccc7b80403afdf9b",
+      "receipt": "docs/audits/issue509-r360a-sql-dispatch-coverage-repair-20261119.json",
+      "ci": "NEW_HEAD_PENDING",
+      "repair": "exact bundled SQL dispatcher fixture recognition",
+      "source_migration_unchanged": true,
+      "provider_writes": 0,
+      "release": "TESTING",
+      "baseline": "IN_PROGRESS"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -24976,5 +24991,15 @@
     "first_time_source_credit": 0,
     "status": "TESTING_NO_CI_YET",
     "exact_next": "Verify PR-head source-isolated PG17 and check new provider metadata/definitions"
+  },
+  "provider_stale_family_reconciliation_run360a": {
+    "preflight_development_sha": "5eca094cf069b820e9cbfd927f7dc6469e2e84fa",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "previous_head": "df7679becf8eab421327932fccc7b80403afdf9b",
+    "receipt": "docs/audits/issue509-r360a-sql-dispatch-coverage-repair-20261119.json",
+    "sql_ci_44518244434": "SUCCESS",
+    "node_44518244549": "FAILED_FIXTURE_EXPECTATION",
+    "new_head": "PENDING",
+    "production_writes": 0
   }
 }

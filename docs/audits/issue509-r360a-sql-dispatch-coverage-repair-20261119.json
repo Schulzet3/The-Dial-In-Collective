@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R360a",
+  "date_utc": "2026-11-19",
+  "preflight_development_sha": "5eca094cf069b820e9cbfd927f7dc6469e2e84fa",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "pr": 3405,
+  "previous_head": "df7679becf8eab421327932fccc7b80403afdf9b",
+  "failure": {
+    "run": 44518244549,
+    "check": "validate Node22",
+    "total": 5681,
+    "passed": 5674,
+    "failed": 1,
+    "skipped": 6,
+    "failing_test": "tests/sql-runner-coverage.test.mjs",
+    "cause": "Actual runner's R360 bundled pre/migration/post transaction is a valid additional isolated SQL stream but dispatcher fixture expected only individual files and treated the group as unexpected; PG17 actual migration fixture passed"
+  },
+  "fix": {
+    "path": "tests/sql-runner-coverage.test.mjs",
+    "semantic": "Hash and expect one literal concatenated R360 transaction iff migration included, exclude both incomplete fixture halves from standalone suites, require stream immediately before migration; retain individual migrations/old suites exactly-once and ordered checks"
+  },
+  "provider_writes": 0,
+  "source_migration_unchanged": true,
+  "isolated_sql_pass_run": 44518244434,
+  "original_ci": "FAIL",
+  "new_head_ci": "PENDING",
+  "state": "TESTING",
+  "baseline": "IN_PROGRESS",
+  "next": "Verify new exact PR-head Node22, SQL, approval and browser before safe merge"
+}
