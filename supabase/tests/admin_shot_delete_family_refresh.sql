@@ -34,13 +34,13 @@ BEGIN
   basket_version_id,calibration_id,style,pulled_at,dose_g,yield_g,time_s,
   grind_setting,extraction,body,clarity,sweetness,astringency,equipment_snapshot)
  VALUES(member_id,library_id,setup_id,version_id,basket_version_id,cal_id,
-  'Turbo',now()-interval '2 hours',18,36,22,2,3,3,3,3,3,'{}') RETURNING id INTO shot_a;
+  'Turbo',now()-interval '2 hours',18,36,22,2,3,3,5,5,1,'{}') RETURNING id INTO shot_a;
  PERFORM private.classify_personal_shot(shot_a);
  INSERT INTO public.shots(owner_id,library_entry_id,setup_id,setup_version_id,
   basket_version_id,calibration_id,style,pulled_at,dose_g,yield_g,time_s,
   grind_setting,extraction,body,clarity,sweetness,astringency,equipment_snapshot)
  VALUES(member_id,library_id,setup_id,version_id,basket_version_id,cal_id,
-  'Turbo',now()-interval '1 hour',18,36,24,2.5,3,3,3,3,3,'{}') RETURNING id INTO shot_b;
+  'Turbo',now()-interval '1 hour',18,36,24,2.5,3,3,5,5,1,'{}') RETURNING id INTO shot_b;
  PERFORM private.classify_personal_shot(shot_b);
  SELECT personal_family_id INTO family_id FROM public.shots WHERE id=shot_a;
  IF family_id IS NULL OR (SELECT personal_family_id FROM public.shots WHERE id=shot_b) IS DISTINCT FROM family_id

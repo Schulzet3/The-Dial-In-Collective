@@ -1,3 +1,11 @@
+# Issue #509 — R358b synthetic green-cohort test correction [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=8a45f21cbbd4526dade5ae12d7fe450ca6c551be preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**November 19, 2026 UTC; same PR #3399, no production writes.** Exact PR-head PostgreSQL17 run [44510036266](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44510036266) FAILED at the new isolated fixture: two synthetic shots were scored 3/3/3/3/3 and therefore not green, so they could not enter a personal family. Earlier migrations and checks passed through the targeted new suite; this is **synthetic test setup**, not a demonstrated regression of the production Admin fix. Changed only the two fake shot scores to proven eligible 3/3/5/5/1, matching existing `recipe_family_lifecycle.sql` positive fixture. Full rerun of all applicable exact-new-head checks REQUIRED; prior failed SHA cannot be called PASS. Main source, migration and prod unchanged. R358 read-only 1-of-6 stale-family integrity finding and unknown historical cause remain unchanged. Audit IN_PROGRESS, release TESTING; next verify new exact-source SQL, Node22, browser and approval.
+
+---
+
 # Issue #509 — R358 Admin shot-delete family reconciliation [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=8a45f21cbbd4526dade5ae12d7fe450ca6c551be preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
