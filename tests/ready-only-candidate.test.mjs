@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {planReadyOnlyCandidate,validateReadyOnlyCandidate,CANDIDATE_KIND,
  CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH,REVIEWED_WORKFLOW_TEST,discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,assertCandidateRelativeImports,
- assertCandidateStaticNamedExports,discoverReviewedRestoredSqlTests,REVIEWED_SOURCE_PATH_CASE_SQL_TEST} from '../scripts/release/ready-only-candidate.mjs';
+ assertCandidateStaticNamedExports,discoverReviewedRestoredSqlTests,REVIEWED_SOURCE_PATH_CASE_SQL_TEST,discoverReviewedRestoredR232CoffeeTests,REVIEWED_R232_COFFEE_TEST} from '../scripts/release/ready-only-candidate.mjs';
 import {classifyReleaseRisk} from '../scripts/release/release-reliability.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40),D='d'.repeat(40);
 const one={id:'DIC-Q-100',issue:100,title:'READY card',state:'READY',
@@ -506,4 +506,29 @@ test('#3342 source-bound SQL test restoration retains published guard while excl
  assert.throws(()=>discoverReviewedRestoredSqlTests({...args,sourceObjectAt:(ref,path)=>
   ref===chosen&&path===spec.path?'100644:'+('f'.repeat(40)):lookup(ref,path)}),
   /Selected READY merge modified/);
+});
+
+test('#3347 R232 TESTING runtime and its two complete published coffee tests stay paired',()=>{
+ const s=REVIEWED_R232_COFFEE_TEST;
+ const owner={id:s.item,issue:s.issue,state:'TESTING',
+  merged_source_sha:null,scope_paths:[s.runtime]};
+ const testObj=(ref,path)=>{
+  if(path===s.runtime)return '100644:'+
+   ([A,s.merge+'^'].includes(ref)?s.oldRuntime:s.newRuntime);
+  const x=s.testBlobs[path];if(!x)return null;
+  return '100644:'+([A,s.merge+'^',D,D+'^'].includes(ref)?x.old:x.newer);
+ };
+ const input={queue:{items:[owner]},restoredPaths:[s.runtime],
+  publishedSourceSha:A,developmentSourceSha:B,
+  sourceObjectAt:testObj,selectedReadyItems:[one]};
+ assert.deepEqual(discoverReviewedRestoredR232CoffeeTests(input),Object.keys(s.testBlobs).sort());
+ assert.deepEqual(discoverReviewedRestoredR232CoffeeTests({...input,restoredPaths:[]}),[]);
+ assert.throws(()=>discoverReviewedRestoredR232CoffeeTests({...input,
+  queue:{items:[{...owner,state:'READY'}]}}),/owner or runtime provenance/);
+ assert.throws(()=>discoverReviewedRestoredR232CoffeeTests({...input,
+  sourceObjectAt:(ref,path)=>ref===B&&path===Object.keys(s.testBlobs)[0]?
+    '100644:'+'f'.repeat(40):testObj(ref,path)}),/historical test Git object changed/);
+ assert.throws(()=>discoverReviewedRestoredR232CoffeeTests({...input,
+  sourceObjectAt:(ref,path)=>ref===D&&path===Object.keys(s.testBlobs)[0]?
+    '100644:'+'f'.repeat(40):testObj(ref,path)}),/Selected READY merge edited/);
 });
