@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {frozenReadyBranch,requiredReadyPins,selectedReadyItems,
- prevalidateReadySource,neutralWorkflowTransportCommit,candidateTreeReceipt} from '../scripts/release/precertify-ready-source.mjs';
+ prevalidateReadySource,neutralWorkflowTransportCommit,candidateTreeReceipt,assertReadyCandidateJournalReceipt} from '../scripts/release/precertify-ready-source.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40);
 const one={id:'DIC-Q-100',issue:100,title:'ready',owner_source:'owner approval',
  state:'READY',merged_source_sha:B,scope_paths:['site/main.js'],
@@ -89,4 +89,14 @@ test('#3347 transport carries exact candidate app bytes but NEVER mutates workfl
 test('#3347 connector source receipt fail-closes absent staged tree and no Actions push',()=>{
  assert.throws(()=>candidateTreeReceipt({developmentSourceSha:'a'.repeat(40),staged:{candidate_sha:'b'.repeat(40)}}),/No verified staged/);
  assert.throws(()=>prevalidateReadySource({developmentSourceSha:'a'.repeat(40),push:true}),/Actions ref push prohibited/);
+});
+
+test('#3347 candidate read-only receipt requires the exact NEW dev parent preflight in journal',()=>{
+ const exact='\n\nDIC_PREFLIGHT_VERIFIED development_sha='+B+
+  ' preflight_blob_sha='+C+'\n\n## READY-only source candidate (not published)\n';
+ assert.equal(assertReadyCandidateJournalReceipt(exact,{developmentSourceSha:B,preflightBlob:C}),true);
+ assert.throws(()=>assertReadyCandidateJournalReceipt('\n\n## READY-only source candidate',{developmentSourceSha:B,preflightBlob:C}),/missing exact NEW/);
+ assert.throws(()=>assertReadyCandidateJournalReceipt(exact,{developmentSourceSha:A,preflightBlob:C}),/missing exact NEW/);
+ assert.throws(()=>assertReadyCandidateJournalReceipt(exact,{developmentSourceSha:B,preflightBlob:A}),/missing exact NEW/);
+ assert.throws(()=>assertReadyCandidateJournalReceipt(exact,{developmentSourceSha:'invalid',preflightBlob:C}),/Unverifiable/);
 });
