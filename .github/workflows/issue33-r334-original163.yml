@@ -1,0 +1,54 @@
+name: DIC Issue33 R334 original163 exact current selected EA decaf
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r334-original163.yml
+      - scripts/audit/issue33-r334-original163-check.mjs
+      - tests/coffee-issue33-r334-original163.test.mjs
+      - docs/workstreams/ops-issue33-r334-original163-20261119.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r334-original163.yml
+      - scripts/audit/issue33-r334-original163-check.mjs
+      - tests/coffee-issue33-r334-original163.test.mjs
+      - docs/workstreams/ops-issue33-r334-original163-20261119.md
+permissions:
+  contents: read
+jobs:
+  original163-current-source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Narrow positive and adversarial current selected EA vs green processing
+        run: node --test tests/coffee-issue33-r334-original163.test.mjs
+      - name: Exactly one chosen official product, bounded HTTPS, no credentials
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '163'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r334
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Verify selected product identity, raw source hash, parser and Add Coffee review
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r334
+          DIC_R334_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_R334_EVENT_SHA: ${{ github.sha }}
+          DIC_R334_VERIFY: '1'
+        run: node scripts/audit/issue33-r334-original163-check.mjs
+      - name: One-day exact original source diagnostic, never private user data
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r334-original163
+          path: /tmp/dic33-r334/
+          retention-days: 1
+          if-no-files-found: warn
