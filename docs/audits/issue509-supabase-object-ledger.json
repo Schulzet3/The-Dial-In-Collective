@@ -25511,5 +25511,22 @@
     "provider_writes": 0,
     "release": "TESTING",
     "baseline": "IN_PROGRESS"
+  },
+  "provider_equal_shot_order_browser_regression_run371b": {
+    "preflight_development_sha": "1b4cc1857e47104b45d4f5c202e5eae10f7ec300",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "prior_browser_run": 44622212777,
+    "prior_browser": "FAIL at visual_review.py:189",
+    "cause": "Unmerged proposed full ascending shot reorder changed synthetic UI first row and downstream next-shot guidance",
+    "repair": "Only sort shots by ID within identical parsed timestamp instants while preserving distinct-date input History ordering",
+    "code_path": "site/cloud/mapping.js",
+    "test_path": "tests/issue509-shot-order.test.mjs",
+    "first_time_provider_words": 0,
+    "issue267_lines": 0,
+    "production_writes": 0,
+    "source_ci": "PENDING_NEW_PR_HEAD",
+    "queue": "TESTING",
+    "baseline": "IN_PROGRESS",
+    "receipt": "docs/audits/issue509-r371b-browser-history-order-repair-20261119.json"
   }
 }

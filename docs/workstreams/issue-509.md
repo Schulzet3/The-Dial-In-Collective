@@ -1,3 +1,13 @@
+# Issue #509 — R371b preserve untied History order; repair browser acceptance [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=1b4cc1857e47104b45d4f5c202e5eae10f7ec300 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-19 UTC; source/test only, production READ-ONLY.** Exact old PR #3460 head `dc3142aa2d873e7839cf9c80a140e50dbe702cdd` browser run [44622212777](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44622212777) **FAILED** at `tests/browser/visual_review.py:189` ("light: non-green shot generates next-shot guidance"). The browser's synthetic seed puts newest `review-a` first and clones `s.shots[0]` when checking cross-coffee guidance. R371 initially sorted **all** shot instants ascending and changed the seed row to older Traditional `review-c`, affecting existing UI/History behavior. This is a **genuine nonregression bug caused by our unmerged proposal**, not a production incident.
+
+Narrow same-commit repair: only reorder within identical parsed-instant groups by stable shot ID, preserving original positions of distinct instants and invalid legacy rows, plus revised regression ensuring distinct History input order remains intact. Timestamp-equivalent offsets are still deterministic, no shot dropped, no SQL/Edge/provider changes. New R371b structured receipt and append-only ledger; queue TESTING unchanged. Initial approval CI failure [44622212830](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44622212830) was separately fixed by R371a queue schema repair. **New head CI PENDING**; do not merge or claim READY until exact-source Node22, cloud/browser, approval and applicable SQL tests pass. Next: verify newly triggered checks, repair if needed, safely nonforce integrate [skip netlify] then merged-source checks. Full provider baseline IN_PROGRESS.
+
+---
+
 # Issue #509 — R371a queue intake schema repair (PR #3460) [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=1b4cc1857e47104b45d4f5c202e5eae10f7ec300 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e

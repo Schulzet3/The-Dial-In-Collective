@@ -27,7 +27,7 @@ test('#509 hydrate preserves old malformed and hidden shots while ordering valid
   rawShot({id:'shot-a',pulled_at:TIME})
  ];
  const state=hydrate(raw);
- assert.deepEqual(state.shots.map(x=>x.id),['shot-z','shot-a','shot-b']);
+ assert.deepEqual(state.shots.map(x=>x.id),['shot-z','shot-b','shot-a'], 'distinct shot instants retain provider/History presentation order');
  assert.equal(state.shots[0].hidden,true);
  assert.equal(state.shots.length,3);
 });
