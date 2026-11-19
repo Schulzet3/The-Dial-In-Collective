@@ -1,3 +1,15 @@
+# Issue #509 — R368 R367 fix safely merged; current Storage corpus crosschecked [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=ac8b82ee9fbca4c3ea2c5b3dc854c2bab3ea919e preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-19 UTC, production strictly READ-ONLY.** Independent immutable Git blob matched live-SHA PREFLIGHT before any other authority/provider reads. Safely nonforce merged [PR #3445](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3445) to development **367e290386b1f659af4d6a2e54e21fbd43bbb841**, two parents and merge message `[skip netlify]`; source and rollback SQL test blobs identical to successful PR-head PostgreSQL17, Node22/cloud, browser/UX, approval, Python checks. Independent #33 R171 PR-head FAIL is separate from #509; merged-source #33 run passed. Exact merged-source PostgreSQL17, approval, Python PASS at checkpoint; Node22 and browser **IN_PROGRESS**, not PASS. No new READY: #3347 candidate isolation and genuine #96 acceptance UNVERIFIED; queue **TESTING**, no Publish.
+
+**Provider semantic work:** Directly reread 24/24 currently deployed Storage SQL/plpgsql function definitions (**92,288 characters**), including segmented full 31,522-char `storage.search` and 32,892-char `storage.list_objects_with_delimiter`, and reviewed 11 noninternal trigger definitions, crosscall/cursor/lifecycle behavior. Safe aggregates: **0** Storage buckets, objects, member-owned objects, active lifecycle states, or explicit Storage policies. These platform-managed full SQL bodies were ALREADY credited in R300; **0 first-time words or #267 code lines**. No verified new defect, justified deletion or measured bottleneck; no source patch. Do not remove provider functions just because buckets are empty. Hosted Storage worker internals and console-only Auth/API/Vault settings remain UNVERIFIED.
+
+No production SQL/data/Auth/Storage/Edge/config write, publish, billing, backup or schedule change. Full baseline **IN_PROGRESS**. [R368 per-object source/hash & CI receipt](../audits/issue509-r368-admin-count-merge-storage-revalidation-20261119.json), append-only ledger R368. **Next:** read remaining exact merged CI, then genuinely unreviewed or changed provider definition/Edge source or independently reproducible app bottleneck, without duplicate coverage credit.
+
+---
+
 # Issue #509 — R367 Admin account-deletion completed retry receipt count [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=96a848fde0011f48adede2be289d2f5bbdd97626 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
