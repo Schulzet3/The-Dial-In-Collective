@@ -57,5 +57,4 @@ jobs:
           echo "development_sha=$head_sha" >> "$GITHUB_OUTPUT"
       - name: Prove exact candidate Git tree and print source-bound read-only receipt
         if: steps.source.outputs.development_sha != ''
-        env:
         run: node scripts/release/precertify-ready-source.mjs "${{ steps.source.outputs.development_sha }}" --receipt
