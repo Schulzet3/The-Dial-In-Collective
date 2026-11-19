@@ -134,3 +134,10 @@ Owner requires unattended GitHub Actions restores, not manual ChatGPT workflow d
 
 ## 2026-11-13 — #2169 READY co-owner source proof
 - Controller -38 failed preclaim on five co-owned READY paths; main-only exact Git first-parent/ancestry/final-blob attestation and five-check parity with negative tests, no feature/deploy change. Same-commit journal with preflight SHA/blob and remediation boundaries.
+
+DIC_PREFLIGHT_VERIFIED development_sha=373131f7c55e635d3cbe3d46813913350cc8f996 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+## 2026-11-19 #3347 frozen READY42 candidate test-isolation repair [skip netlify]
+- Main read-only pre-certification run 44528671051 returned exact source-bound tree 2f94e290355aaa262f54fa9e1d1800bdd451c621 from development 373131f7c55e635d3cbe3d46813913350cc8f996. Connector reconstructed matching tree with only two new docs Git blobs and created one-parent nonforce candidate ea578a69a0a9c72379610bcbcea6f7e7dbca061d. Manifest selected 42 current READY, excluded 26 unready runtime, 216 workflows, 111 new unready tests; no Publish.
+- Native exact-head approval run 44530144573, cloud/mobile run 44530144562, isolated SQL run 44530144602 all SUCCESS. Validate 44530144671 FAILED with 4948 PASS, 3 FAIL, 6 SKIP: #509 unpublished Admin search test paired with restored published Admin code; #33 R324 new coffee test importing symbol absent from READY-pinned coffee parser; #509 new admin delete SQL test paired with excluded TESTING-only migration. FAILED candidate remains HOLD, not RELEASE_READY.
+- This source-safe main repair adds strict independently pinned Git blob/owner/test ancestry pairing, restores entire last-published Admin suite, excludes only the exact NEW unready coffee test and the exact NEW TESTING SQL fixture with its migration; adds positive/adversarial unit regressions. Unready development tests remain preserved. V4 identity ensures replacement candidate is distinct; revalidate all five exact SHA official CI before any new readiness claim. No release/production ref, grant, provider, Netlify, DB/member, force or visibility action.

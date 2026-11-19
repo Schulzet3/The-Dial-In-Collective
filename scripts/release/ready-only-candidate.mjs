@@ -213,6 +213,13 @@ export const REVIEWED_UNREADY_SQL_SUITE=Object.freeze([
     "unpublishedBlob": "9ae348244ea6545b208e8ad1fbb76dff652b7da4",
     "sourceMerge": "8b4e4e3edc42c821aa9f6858e62b20fdd4300ef8",
     "migration": "supabase/migrations/20261118180000_dic_recommendation_unique_controls.sql"
+  },
+  {
+    "path": "supabase/tests/admin_shot_delete_family_refresh.sql",
+    "publishedBlob": null,
+    "unpublishedBlob": "73849edbbd737b69ea5e33570c93a6844967c1ea",
+    "sourceMerge": "78dac5c9a2506041f1e2439281ab526058436b14",
+    "migration": "supabase/migrations/20261119105000_dic_admin_shot_delete_family_refresh.sql"
   }
 ]);
 
@@ -267,6 +274,42 @@ export function discoverReviewedRestoredR232CoffeeTests({queue,restoredPaths,
  return paths;
 }
 
+
+// #3347: preserve the COMPLETE published Admin test suite when the unfinished
+// #509 search recovery is excluded. Test-only provenance, no product changes.
+export const REVIEWED_UNREADY_ADMIN_TEST=Object.freeze({
+ path:'tests/admin-records.test.mjs',
+ runtime:'site/admin/main.js',
+ owner:'DIC-Q-509-admin-search-recovery-visible',
+ sourceMerge:'614e9ed2eb8db3cac1067a4a33fbc08b392123e0',
+ published:'18121e3fca15bdb7470d8cbba067a8877411911c',
+ development:'bd4e95b55c4f6b4f139739c77c4d1a215a8cf640',
+ mergeParent:'637fcd5471383b36056d460e52ead81c160a0272'
+});
+export function discoverReviewedRestoredUnreadyAdminTests({queue,restoredPaths,
+ publishedSourceSha,developmentSourceSha,sourceObjectAt,selectedReadyItems=[]}={}){
+ const s=REVIEWED_UNREADY_ADMIN_TEST;
+ if(!restoredPaths?.includes(s.runtime))return [];
+ if(typeof sourceObjectAt!=='function'||!Array.isArray(selectedReadyItems))
+  throw Error('Unready Admin test exact provenance unavailable');
+ const obj=(ref,path)=>sourceObjectAt(ref,path);
+ const owner=queue?.items?.find(i=>i.id===s.owner);
+ if(owner?.issue!==509||owner.state!=='TESTING'||
+    owner.scope_paths?.length!==1||owner.scope_paths[0]!==s.runtime||
+    obj(publishedSourceSha,s.runtime)===obj(developmentSourceSha,s.runtime)||
+    obj(publishedSourceSha,s.path)!=='100644:'+s.published||
+    obj(developmentSourceSha,s.path)!=='100644:'+s.development||
+    obj(s.sourceMerge,s.path)!=='100644:'+s.development||
+    obj(s.sourceMerge+'^',s.path)!=='100644:'+s.mergeParent)
+  throw Error('Unready Admin test/source exact owner or Git blob changed');
+ for(const item of selectedReadyItems){
+  if(!SHA.test(item.merged_source_sha||'')||
+     obj(item.merged_source_sha,s.path)!==obj(item.merged_source_sha+'^',s.path))
+   throw Error('Selected READY merge modified excluded Admin tests: '+item.id);
+ }
+ return [s.path];
+}
+
 const REVIEWED_OWNER_DRIVE_TEST=Object.freeze({
  path:'tests/dic-owner-drive-connect.test.mjs',
  runtime:'netlify/functions/dic-owner-drive-connect.mjs',
@@ -285,6 +328,31 @@ function eligibleOwnerDriveTestExclusion({queue,restoredPaths,publishedSourceSha
 }
 // Only new, issue-scoped tests for entirely restored unfinished/unselected
 // runtime may be absent from a candidate. Selected READY test edits never vanish.
+
+// #3347: newer #33 R324 fixture imports a symbol absent from the PINNED READY
+// coffee parser. It is new/unpublished and owned by unready #33 work only.
+export const REVIEWED_PINNED_COFFEE_TEST=Object.freeze({
+ path:'tests/coffee-producer-team-disagreement.test.mjs',
+ runtime:'src/server/coffee-page-metadata.mjs',
+ merge:'c9b1bf2a1cecce9a67c84983eb1fd8d379f2d5f2',
+ blob:'9a1263d7022311a5d313db64f1604e91504fce23'
+});
+function reviewedPinnedCoffeeTest(path,{queue,pinnedReadyPaths,
+ publishedSourceSha,developmentSourceSha,sourceObjectAt}){
+ const s=REVIEWED_PINNED_COFFEE_TEST;
+ if(path!==s.path||!pinnedReadyPaths.includes(s.runtime))return false;
+ const obj=(ref,p)=>sourceObjectAt(ref,p);
+ if(!(queue?.items||[]).some(i=>i.issue===33&&
+    ['IN_PROGRESS','TESTING','BLOCKED'].includes(i.state)&&
+    i.scope_paths?.includes(s.runtime))||
+    obj(publishedSourceSha,s.path)!==null||
+    obj(developmentSourceSha,s.path)!=='100644:'+s.blob||
+    obj(s.merge,s.path)!=='100644:'+s.blob||
+    obj(s.merge+'^',s.path)!==null||
+    obj(s.merge,s.runtime)===obj(s.merge+'^',s.runtime))
+  throw Error('Unready pinned coffee test/source owner or Git blob changed');
+ return true;
+}
 export function discoverExcludedUnreadyTests({queue,selectedIds,restoredPaths,pinnedReadyPaths=[],
  publishedSourceSha,developmentSourceSha,changedPaths,sourceObjectAt,compatibleAuditSupportPaths=[]}={}){
  if(typeof sourceObjectAt!=='function'||!Array.isArray(changedPaths)||
@@ -301,12 +369,14 @@ export function discoverExcludedUnreadyTests({queue,selectedIds,restoredPaths,pi
     developmentSourceSha,sourceObjectAt});
   const support=reviewedUnreadySupport(path,{queue,restoredPaths,pinnedReadyPaths,
    publishedSourceSha,developmentSourceSha,sourceObjectAt});
-  if(!m&&!ownerDrive&&!support)continue;
-  const issue=ownerDrive?28:support?.issue??Number(m[1]);
+  const pinnedCoffee=reviewedPinnedCoffeeTest(path,{queue,pinnedReadyPaths,
+   publishedSourceSha,developmentSourceSha,sourceObjectAt});
+  if(!m&&!ownerDrive&&!support&&!pinnedCoffee)continue;
+  const issue=pinnedCoffee?33:ownerDrive?28:support?.issue??Number(m[1]);
   // A named support helper may have an unfinished owner spanning exact published
   // restoration and a separately pinned READY file. reviewedUnreadySupport
   // already proves every owning path and the absent required runtime.
-  if(!support&&!(queue?.items||[]).some(i=>i.issue===issue&&!selected.has(i.id)&&
+  if(!support&&!pinnedCoffee&&!(queue?.items||[]).some(i=>i.issue===issue&&!selected.has(i.id)&&
     ['IN_PROGRESS','TESTING','BLOCKED','READY'].includes(i.state)&&
     i.scope_paths?.length>0&&i.scope_paths.every(x=>restored.has(x))))continue;
   if(sourceObjectAt(publishedSourceSha,path)!==null||
@@ -721,7 +791,11 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
   restoredPaths:plan.restored_paths,publishedSourceSha,
   developmentSourceSha:manifest.development_source_sha,sourceObjectAt,
   selectedReadyItems:plan.ready_items});
- const approvedTests=[...sqlTests,...coffeeTests].sort();
+ const adminTests=discoverReviewedRestoredUnreadyAdminTests({queue,
+  restoredPaths:plan.restored_paths,publishedSourceSha,
+  developmentSourceSha:manifest.development_source_sha,sourceObjectAt,
+  selectedReadyItems:plan.ready_items});
+ const approvedTests=[...sqlTests,...coffeeTests,...adminTests].sort();
  if(!Array.isArray(restoredTests)||!equal(restoredTests,approvedTests))
   reject('Restored existing unfinished tests differ from exact reviewed source/ownership');
  for(const path of restoredTests){
@@ -744,9 +818,11 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
    pinnedReadyPaths:plan.pinned_ready_paths,publishedSourceSha,
    developmentSourceSha:manifest.development_source_sha,sourceObjectAt});
   const eligibleSupport=Boolean(support)&&sourceObjectAt(candidateSha,path)===null;
-  if(!m&&!ownerDrive&&!eligibleSupport)
-   reject('Only proven issue-scoped, owner Drive, or exact unready support tests can be excluded');
-  const issue=ownerDrive?28:eligibleSupport?support.issue:Number(m[1]);
+  const pinnedCoffee=reviewedPinnedCoffeeTest(path,{queue,pinnedReadyPaths:plan.pinned_ready_paths,
+   publishedSourceSha,developmentSourceSha:manifest.development_source_sha,sourceObjectAt});
+  if(!m&&!ownerDrive&&!eligibleSupport&&!pinnedCoffee)
+   reject('Only proven issue-scoped, pinned coffee, owner Drive, or exact unready support tests can be excluded');
+  const issue=pinnedCoffee?33:ownerDrive?28:eligibleSupport?support.issue:Number(m[1]);
   const unfinishedMixed=queue.items.some(i=>i.issue===issue&&
    ['IN_PROGRESS','TESTING','BLOCKED'].includes(i.state)&&
    i.scope_paths?.some(p=>plan.pinned_ready_paths.includes(p)));
