@@ -101,6 +101,17 @@ export function neutralWorkflowTransportCommit({repoDir=process.cwd(),developmen
 // Strict, reproducible no-write source receipt. Every changed blob and deletion
 // comes from the staging Git tree, not a guessed README or queue label.
 // Connector finalization must independently reconstruct and compare tree SHA.
+// The candidate's FIRST-PARENT preflight line is now mandatory in the
+// staged journal; a legacy header alone is insufficient proof.
+export function assertReadyCandidateJournalReceipt(append,{developmentSourceSha,preflightBlob}={}){
+ if(!SHA.test(developmentSourceSha||'')||!SHA.test(preflightBlob||''))
+  throw Error('Unverifiable exact parent source preflight receipt');
+ const expected='\n\nDIC_PREFLIGHT_VERIFIED development_sha='+developmentSourceSha+
+  ' preflight_blob_sha='+preflightBlob+'\n\n## READY-only source candidate';
+ if(typeof append!=='string'||!append.startsWith(expected))
+  throw Error('Candidate journal missing exact NEW first-parent DIC_PREFLIGHT_VERIFIED receipt');
+ return true;
+}
 export function candidateTreeReceipt({repoDir=process.cwd(),developmentSourceSha,staged}={}){
  if(!SHA.test(developmentSourceSha||'')||!SHA.test(staged?.candidate_sha||'')||
    typeof staged?.manifest!=='object')throw Error('No verified staged source receipt');
@@ -133,8 +144,9 @@ export function candidateTreeReceipt({repoDir=process.cwd(),developmentSourceSha
  const prefix=journalFrom.trimEnd();
  if(!journalTo.startsWith(prefix))throw Error('Candidate journal is not derived from source');
  const journal_append=journalTo.slice(prefix.length);
- if(!journal_append.startsWith('\n\n## READY-only source candidate'))
-  throw Error('Unexpected source-bound candidate journal appendix');
+ const preflightBlob=git(['rev-parse','--verify',
+  developmentSourceSha+':docs/ai/PREFLIGHT.md']);
+ assertReadyCandidateJournalReceipt(journal_append,{developmentSourceSha,preflightBlob});
  const tree_sha=git(['rev-parse',staged.candidate_sha+'^{tree}']);
  if(!SHA.test(tree_sha))throw Error('Candidate Git tree SHA not available');
  return {status:'LOCAL_TREE_RECEIPT_NO_REMOTE_CANDIDATE',
