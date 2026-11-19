@@ -1,3 +1,19 @@
+## November 19, 2026 UTC — #455 R357 measured-yield bound on untrusted roaster starting prior [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=739cb591ba5b2bb04f14ad44d6f2fa748b710fe4 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+**Authority and live-source review:** owner Option B SAFE Locked-compatible code/test repair; fresh live development `739cb591ba5b2bb04f14ad44d6f2fa748b710fe4` and complete immutable preflight blob `2fb236bbfa6bac48513eeb3bd157b260853af06d` independently matched the verified preflight content. Rechecked code `site/lib/engine.js` Git blob `90c55379be60a252a2026e01bb3d786b66c49aef`, original #455 journal `b6af9ceb0a01c7058d3c7e9864a96c68a8460787`, existing measured Log Shot bounds `CONFIG.bounds.yieldG = [5,200]`, Master Spec existing roaster/style prior and single-controllable-change rules, #455/#335/#267/#33/#96 checkpoints and concurrent PR #3330 already merged. This is a **reproducible synthetic application correctness finding**, not a new coffee-science optimum.
+
+**Negative source-bound reproduction before fix:** dynamically executed exact four existing app library modules with a JSON-only structuredClone shim (no cloud/member reads). Synthetic Medium Traditional 18g basket with an external `roasterRecipe.ratio=100` gave a `1182.6g` starting output; ratio `100000` gave `1170012.6g`, exceeding the pre-existing 200g Log Shot upper bound while UI misleadingly said it was informed by the roaster. A normal no-recipe source gave 36g; valid roaster ratio 3 gave 47.7g. Real member incidence and tasting benefit are **UNVERIFIED**.
+
+**SAFE change:** only blend a roaster-provided Traditional ratio when its output at the active basket dose, including the existing preference nudge, fits the exact existing 5-200g Log Shot bounds; otherwise keep the approved roast/style baseline and explain the unusable ratio. Keep source coffee metadata untouched. Do not change roast/style priors, the owner-approved meaningful 5g next-shot change, five ratings, shot notes, private history, other styles, Slow Feed, temperature, grinder versions, Community, Auth/RLS or offline persistence.
+
+**Same-commit changed paths:** `site/lib/engine.js`, `tests/issue455-r357-roaster-yield-bounds.test.mjs`, `docs/audits/issue455-research-source-coverage-20261103.json` (one SAFE P2 proposal, source/evidence counts unchanged), and this `docs/workstreams/issue-455.md`.
+
+**Positive source-bound reproduction after exact narrow fix:** the same synthetic source-bound harness retained normal 36g without source, 47.7g with valid ratio 3 and returned safe 36g when source ratio 100/100000. Added four isolated Node22 tests: impossible ratio reject; legitimate ratio preserve; 40g basket + clarity preference crossing 200g reject; non-Traditional Turbo unaffected. Tests are **ADDED, NOT YET RUN by Node22 CI**. Browser/mobile, isolated SQL/Auth and privacy CI, lint/build, merged approval and source release evidence are **NOT YET VERIFIED**, never PASS by assumption; no production provider writes or data tests. Tests must fail on the original algorithm and pass after this change.
+
+**State / next action:** Proposed **IN_PROGRESS, not READY or deployed**. Verify exact PR-head hosted checks before a nonforce merge carrying explicit `[skip netlify]` in its merge commit message; repair CI failures. Verify merged file hashes and actual push-source CI. Then reconcile #455/source ledger/status/release queue without deploying; #267 semantic audit receives zero literal-review credit. The October research ZIP and S019 original remain inaccessible and no espresso-cup improvement is claimed.
+
 ## November 19, 2026 UTC — #455 R356 new original French-press expert clean-cup reliability claim review [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=cac322e186599fac40007757a67a898da6507780 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
