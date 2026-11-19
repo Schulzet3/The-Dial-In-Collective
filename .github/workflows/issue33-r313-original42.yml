@@ -1,0 +1,53 @@
+name: DIC Issue33 R313 original603 El Corazon exact selected source
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - tests/coffee-issue33-r313-original42.test.mjs
+      - scripts/audit/issue33-r313-original42-check.mjs
+      - .github/workflows/issue33-r313-original42.yml
+      - docs/workstreams/ops-issue33-r313-original42-20261118.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - tests/coffee-issue33-r313-original42.test.mjs
+      - scripts/audit/issue33-r313-original42-check.mjs
+      - .github/workflows/issue33-r313-original42.yml
+      - docs/workstreams/ops-issue33-r313-original42-20261118.md
+permissions:
+  contents: read
+jobs:
+  selected-official:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Five positive and adversarial parser cases
+        run: node --test tests/coffee-issue33-r313-original42.test.mjs
+      - name: One guarded exact original #42 official public HTTPS
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '42'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r313
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Strict current selected raw H1 parser and Add Coffee / Source Review
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r313
+          DIC_R313_CHECKOUT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_R313_EVENT_SHA: ${{ github.sha }}
+        run: node scripts/audit/issue33-r313-original42-check.mjs
+      - name: One-day public-only selected seller evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r313-original42
+          path: /tmp/dic33-r313/
+          retention-days: 1
+          if-no-files-found: warn
