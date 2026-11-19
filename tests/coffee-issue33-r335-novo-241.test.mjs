@@ -25,7 +25,7 @@ test('R335 Store API data never substitutes for exact HTML/H1 proof',()=>{
 });
 test('R335 current official source may be inaccessible without invented success',()=>{
  assert.deepEqual(evaluateSelected241({fetched:false,reason:'source_access_challenge'}),
-  {accepted:false,classification:'UNAVAILABLE'});
+  {accepted:false,classification:'UNAVAILABLE',manual_semantic_certified:false});
 });
 test('R335 challenge interstitial is a failure, not fetched selected HTML',()=>{
  const challenge='<html><head><title>One moment, please...</title></head><script>location.reload()</script></html>';
