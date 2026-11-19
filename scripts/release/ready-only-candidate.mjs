@@ -22,16 +22,33 @@ export const REVIEWED_WORKFLOW_TEST=Object.freeze({
  sourceBlob:'32174be8c42ba9ae73085e0f6f1f42613b2b08db',
  restoredWorkflow:'.github/workflows/cloud-regression.yml'
 });
+// R319 adds only a CI-only guard for the development workflow. Restoring that
+// workflow to published ABSENT bytes must also exclude its exact same-merge
+// development test, never the selected READY app's actual parser regressions.
+export const REVIEWED_R319_WORKFLOW_TEST=Object.freeze({
+ path:'tests/coffee-issue33-shared-ci-trigger.test.mjs',
+ sourceBlob:'4be0ecb4cf51ecbc0cf13f9b48c8c3819e59dc01',
+ restoredWorkflow:'.github/workflows/issue33-shared-parser-regressions.yml',
+ workflowBlob:'583da7b70b2605d14cbb308bc1ec23a868e8af99',
+ sourceMerge:'95ace6fb15211db4135180b3e874c0c705a7c412'
+});
 export function discoverReviewedWorkflowTestExclusions({publishedSourceSha,developmentSourceSha,restoredWorkflows,sourceObjectAt}={}){
- if(typeof sourceObjectAt!=='function'||!Array.isArray(restoredWorkflows)||
-    !restoredWorkflows.includes(REVIEWED_WORKFLOW_TEST.restoredWorkflow))return [];
- const path=REVIEWED_WORKFLOW_TEST.path;
- // This reviewed three-test R190 workflow check preserves strict candidate provenance;
- // it reads the development workflow while candidate workflows are restored.
- // above; it is not an app feature test. Never match by filename alone.
- return sourceObjectAt(publishedSourceSha,path)===null&&
-  sourceObjectAt(developmentSourceSha,path)==='100644:'+REVIEWED_WORKFLOW_TEST.sourceBlob?
-  [path]:[];
+ if(typeof sourceObjectAt!=='function'||!Array.isArray(restoredWorkflows))return [];
+ const specs=[REVIEWED_WORKFLOW_TEST,REVIEWED_R319_WORKFLOW_TEST];
+ return specs.filter(spec=>{
+  if(!restoredWorkflows.includes(spec.restoredWorkflow)||
+     sourceObjectAt(publishedSourceSha,spec.path)!==null||
+     sourceObjectAt(developmentSourceSha,spec.path)!=='100644:'+spec.sourceBlob)return false;
+  if(spec===REVIEWED_R319_WORKFLOW_TEST&&(
+     sourceObjectAt(publishedSourceSha,spec.restoredWorkflow)!==null||
+     sourceObjectAt(developmentSourceSha,spec.restoredWorkflow)!=='100644:'+spec.workflowBlob||
+     sourceObjectAt(spec.sourceMerge,spec.path)!=='100644:'+spec.sourceBlob||
+     sourceObjectAt(spec.sourceMerge+'^',spec.path)!==null||
+     sourceObjectAt(spec.sourceMerge,spec.restoredWorkflow)!=='100644:'+spec.workflowBlob||
+     sourceObjectAt(spec.sourceMerge+'^',spec.restoredWorkflow)!==null))
+   throw Error('R319 workflow-only test source provenance was not independently verified');
+  return true;
+ }).map(spec=>spec.path).sort();
 }
 
 
@@ -683,10 +700,12 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
      publishedSourceSha,developmentSourceSha:manifest.development_source_sha,
      restoredWorkflows:frozenWorkflows,sourceObjectAt
    })))
-  reject('Only one byte-pinned, reviewed workflow-only test can be excluded when its workflow was restored');
+  reject('Only byte-pinned, reviewed workflow-only tests can be excluded when their workflows are restored');
  for(const path of workflowOnlyTests){
-  if(path!==REVIEWED_WORKFLOW_TEST.path||sourceObjectAt(candidateSha,path)!==null||
-     sourceObjectAt(manifest.development_source_sha,path)!=='100644:'+REVIEWED_WORKFLOW_TEST.sourceBlob||
+  const spec=[REVIEWED_WORKFLOW_TEST,REVIEWED_R319_WORKFLOW_TEST]
+   .find(item=>item.path===path&&frozenWorkflows.includes(item.restoredWorkflow));
+  if(!spec||sourceObjectAt(candidateSha,path)!==null||
+     sourceObjectAt(manifest.development_source_sha,path)!=='100644:'+spec.sourceBlob||
      sourceObjectAt(publishedSourceSha,path)!==null)
    reject('Workflow-only test exclusion source/blob/absence mismatch: '+path);
   // Never exclude a test introduced or modified by ANY selected READY merge.
