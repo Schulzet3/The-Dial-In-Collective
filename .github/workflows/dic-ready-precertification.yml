@@ -1,6 +1,8 @@
 name: DIC proactive READY candidate pre-certification
 # Owner #3347 explicit supersession: pre-test immutable READY source without publishing.
 # Does NOT create a production grant, main request, Netlify build or provider write.
+# GITHUB_TOKEN pushes ONLY workflow-neutral ready-transports/ bytes. A scoped
+# connector must restore workflow blobs to form the final candidate CI source.
 on:
   push:
     branches: [main]
@@ -53,7 +55,7 @@ jobs:
             fi
           fi
           echo "development_sha=$head_sha" >> "$GITHUB_OUTPUT"
-      - name: Freeze source-isolated READY bytes and start five exact-source CI jobs
+      - name: Freeze exact READY source to workflow-neutral transport; connector finalizes candidate CI
         if: steps.source.outputs.development_sha != ''
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
