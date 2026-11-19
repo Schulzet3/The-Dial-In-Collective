@@ -276,7 +276,18 @@ export function planReadyOnlyCandidate(queue,{publishedSourceSha,developmentSour
  for(const path of changed){
   const owners=(queue?.items||[]).filter(i=>i.scope_paths?.includes(path));
   const chosen=owners.filter(i=>wanted.has(i.id)&&i.state==='READY');
-  const competing=owners.filter(i=>!wanted.has(i.id)&&i.state!=='DEPLOYED');
+  const competing=owners.filter(i=>{
+   if(wanted.has(i.id)||i.state==='DEPLOYED')return false;
+   // A tracked but never-merged issue cannot contaminate the actual candidate.
+   // The staged candidate still compares exact READY blobs and refuses unseen
+   // same-file edits; do not invent a pin requirement from an unmerged record.
+   if(!SHA.test(i.merged_source_sha||''))return i.state==='READY';
+   try{return isAncestor(i.merged_source_sha,developmentSourceSha)===true;}
+   catch{
+    errors.push('Competing owner merge ancestry unavailable: '+i.id);
+    return true;
+   }
+  });
   const deployed=owners.filter(i=>i.state==='DEPLOYED');
   if(!owners.length||(!chosen.length&&!competing.length))
    errors.push('Untracked or DEPLOYED-only unpublished deployable source: '+path);

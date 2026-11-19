@@ -179,10 +179,34 @@ test('isolated owner release excludes ONLY exact new tests of unselected frozen 
 });
 
 test('unready same-file overlap blocks even if another READY item covers the path',()=>{
- const overlapping={...unfinished,scope_paths:['site/card.js']};
+ const overlapping={...unfinished,merged_source_sha:D,scope_paths:['site/card.js']};
  const p=planReadyOnlyCandidate({...q,items:[one,overlapping]},opts);
  assert.equal(p.ready,false);
  assert.match(p.errors.join(' '),/overlap/);
+});
+test('#3347 unmerged tracked overlap does not create a false READY publication pin',()=>{
+ const neverMerged={...unfinished,id:'DIC-Q-103',issue:103,
+  merged_source_sha:null,scope_paths:['site/card.js']};
+ const planned=planReadyOnlyCandidate({...q,items:[one,unfinished,neverMerged]},opts);
+ assert.equal(planned.ready,true,planned.errors.join('; '));
+ assert.deepEqual(planned.pinned_ready_paths,[]);
+});
+test('#3347 actual merged unready overlapping READY source still HOLDs until pinned',()=>{
+ const merged={...unfinished,id:'DIC-Q-103',issue:103,
+  merged_source_sha:D,scope_paths:['site/card.js']};
+ const overlap={...q,items:[one,unfinished,merged]};
+ const denied=planReadyOnlyCandidate(overlap,opts);
+ assert.equal(denied.ready,false);
+ assert.match(denied.errors.join('; '),/overlap/);
+ const explicit=planReadyOnlyCandidate(overlap,{...opts,pinnedReadyPaths:['site/card.js']});
+ assert.equal(explicit.ready,true,explicit.errors.join('; '));
+ assert.deepEqual(explicit.pinned_ready_paths,['site/card.js']);
+ const unknowable=planReadyOnlyCandidate(overlap,{...opts,isAncestor:(x,y)=>{
+  if(x===D&&y===B)throw Error('missing remote object');
+  return ancestor(x,y);
+ }});
+ assert.equal(unknowable.ready,false);
+ assert.match(unknowable.errors.join('; '),/ancestry unavailable/);
 });
 test('unselected READY overlap and unknown paths cannot be silently included',()=>{
  const other={...one,id:'DIC-Q-102',issue:102,state:'READY',scope_paths:['site/card.js']};
