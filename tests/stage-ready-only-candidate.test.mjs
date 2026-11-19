@@ -5,6 +5,7 @@ import {mkdirSync,mkdtempSync,readFileSync,rmSync,writeFileSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {stageReadyOnlyCandidate} from '../scripts/release/stage-ready-only-candidate.mjs';
+import {candidateTreeReceipt} from '../scripts/release/precertify-ready-source.mjs';
 import {discoverCompatibleAuditSupport,REVIEWED_COMPATIBLE_AUDIT_SUPPORT} from '../scripts/release/ready-only-candidate.mjs';
 const qBase={schema_version:1,authority:'OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022',
  published_base:{tested_source_sha:'a'.repeat(40),release_sha:'b'.repeat(40),netlify_deploy_id:'fixture'},
@@ -403,4 +404,23 @@ test('#2837 published audit helper survives unfinished R215 while READY tests st
   sourceObjectAt:(ref,path)=>ref===selected&&path===spec.path?
     '100644:'+('e'.repeat(40)):read(ref,path)}),
    /Selected READY merge changed published heading helper/);
+});
+
+
+test('#3347 read-only receipt matches full staged candidate Git tree and exact parent preflight',()=>{
+ const f=fixture();
+ try{
+  const staged=stage(f,'ready3347-receipt-local');
+  const receipt=candidateTreeReceipt({repoDir:f.root,developmentSourceSha:f.development,staged});
+  const preflightBlob=f.git('rev-parse',f.development+':docs/ai/PREFLIGHT.md');
+  assert.equal(receipt.status,'LOCAL_TREE_RECEIPT_NO_REMOTE_CANDIDATE');
+  assert.equal(receipt.expected_tree_sha,f.git('rev-parse',staged.candidate_sha+'^{tree}'));
+  assert.deepEqual(receipt.manifest,staged.manifest);
+  assert.ok(receipt.journal_append.startsWith('\\n\\nDIC_PREFLIGHT_VERIFIED development_sha='.replaceAll('\\n','\n')+
+   f.development+' preflight_blob_sha='+preflightBlob));
+  assert.ok(receipt.delta_entries.some(entry=>entry.path==='docs/RELEASE_CANDIDATE.json'&&
+   /^[a-f0-9]{40}$/.test(entry.sha)&&entry.mode==='100644'));
+  assert.ok(receipt.delta_entries.some(entry=>entry.path==='src/server/extractor.mjs'&&
+   /^[a-f0-9]{40}$/.test(entry.sha)));
+ }finally{rmSync(f.root,{recursive:true,force:true});}
 });

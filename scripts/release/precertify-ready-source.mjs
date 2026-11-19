@@ -133,8 +133,11 @@ export function candidateTreeReceipt({repoDir=process.cwd(),developmentSourceSha
  const prefix=journalFrom.trimEnd();
  if(!journalTo.startsWith(prefix))throw Error('Candidate journal is not derived from source');
  const journal_append=journalTo.slice(prefix.length);
- if(!journal_append.startsWith('\n\n## READY-only source candidate'))
-  throw Error('Unexpected source-bound candidate journal appendix');
+ const preflightBlob=git(['rev-parse','--verify',developmentSourceSha+':docs/ai/PREFLIGHT.md']);
+ const expectedJournalLine='\n\nDIC_PREFLIGHT_VERIFIED development_sha='+developmentSourceSha+
+  ' preflight_blob_sha='+preflightBlob+'\n\n## READY-only source candidate (not published)\n';
+ if(!SHA.test(preflightBlob)||!journal_append.startsWith(expectedJournalLine))
+  throw Error('Unexpected exact-parent preflight or source-bound candidate journal appendix');
  const tree_sha=git(['rev-parse',staged.candidate_sha+'^{tree}']);
  if(!SHA.test(tree_sha))throw Error('Candidate Git tree SHA not available');
  return {status:'LOCAL_TREE_RECEIPT_NO_REMOTE_CANDIDATE',
