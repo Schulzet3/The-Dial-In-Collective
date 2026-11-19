@@ -4805,6 +4805,21 @@
       "queue": "TESTING",
       "prod_writes": 0,
       "next": "Admin merged-source CI; verify hidden/archived offline mutation contract before any source patch; next genuinely unseen/changed live definition."
+    },
+    {
+      "run": "R357 2026-11-19 UTC",
+      "preflight_sha": "2bb1a0f85cf9c815294533e44531b901c06cf659",
+      "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "reviewed_complete_definitions_reread": 3,
+      "read_current_chars": 10515,
+      "first_time_provider_words": 0,
+      "issue267_line_credit": 0,
+      "findings": "Dormant archived-setup UI/server mismatch; no current archive producer or impacted rows; no safe patch",
+      "source_test_ci": "UNCHANGED_NOT_RUN",
+      "provider_writes": 0,
+      "release": "TESTING_UNCHANGED",
+      "baseline": "IN_PROGRESS",
+      "next": "First genuinely new/changed/unreviewed provider definition or reproducible active behavior defect; archive pathway only if supported data producer emerges; do not remove historical setups or alter production."
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -24699,5 +24714,107 @@
     "baseline": "IN_PROGRESS",
     "provider_writes": 0,
     "next": "First changed/unreviewed live provider definition or isolated historically archived setup UI behavior proof"
+  },
+  "provider_archived_setup_crosslayer_run357": {
+    "run": "R357",
+    "project_ref": "azviqqejypsefzilgonr",
+    "preflight_development_sha": "2bb1a0f85cf9c815294533e44531b901c06cf659",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "scope": "Archived setup selector/server mutation eligibility, immutable historical imports; read-only provider and exact Git source",
+    "provider": {
+      "status": "ACTIVE_HEALTHY",
+      "postgres": "17.11.0.003",
+      "applied_migrations": 69,
+      "edge_deployments": 5,
+      "production_writes": 0
+    },
+    "current_app_source_sha": "2bb1a0f85cf9c815294533e44531b901c06cf659",
+    "main_sha": "0bace905e6436eb67afd22db61d747539a8dab11",
+    "release_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5",
+    "complete_rereviewed_sql": [
+      {
+        "signature": "private.mutate_workspace(uuid,text,jsonb)",
+        "chars": 6384,
+        "md5": "f3eb1b5086e4396625f3efa38f4c9165",
+        "range": "1-6384",
+        "disposition": "select_setup rejects archived setups; set_style and make_current enforce owner/version but not archived_at; no affected rows; already R355 full-covered"
+      },
+      {
+        "signature": "private.rename_setup(uuid,jsonb)",
+        "chars": 1792,
+        "md5": "d5efbc70d20f75d6e3aeea4b64ab078b",
+        "range": "1-1792",
+        "disposition": "rename_setup rejects archived setups; already R355 full-covered"
+      },
+      {
+        "signature": "private.read_personal_state()",
+        "chars": 2339,
+        "md5": "037d248b67cc3e8490c1689d3200990f",
+        "range": "1-2339",
+        "disposition": "deliberately returns archived setup rows for historical state; already R356 full-covered"
+      }
+    ],
+    "other_review": {
+      "signature": "private.apply_prototype_import(uuid,jsonb)",
+      "chars": 16445,
+      "md5": "2af6a48d0fe80841fcc27c1f1d5532e3",
+      "coverage": "relevant setup/archive/import branches inspected, NOT new complete-source credit",
+      "observation": "one fresh imported setup inserted without archived_at; does not create archived setup state"
+    },
+    "live_setup_ddl": {
+      "archived_at": "nullable timestamptz",
+      "triggers": [
+        "bump_revision BEFORE UPDATE"
+      ],
+      "constraints": [
+        "setup_active_version_fk",
+        "setups_name_check",
+        "setups_owner_id_fkey",
+        "setups_owner_id_id_key",
+        "setups_pkey",
+        "setups_revision_check"
+      ]
+    },
+    "live_aggregate_counts": {
+      "setups_total": 4,
+      "setups_archived": 0,
+      "active_preference_archived": 0,
+      "archived_workspace_coffees": 0,
+      "archived_setup_shots": 0,
+      "hidden_entries": 0
+    },
+    "source_evidence": [
+      {
+        "path": "site/cloud/mapping.js",
+        "dev_blob": "acbfad05f6c197f3884054f8709ea5bc2e7c9ad0",
+        "release_blob": "acbfad05f6c197f3884054f8709ea5bc2e7c9ad0",
+        "line": 31,
+        "assessment": "Hydrates all setups but does not carry archived_at into local setup state"
+      },
+      {
+        "path": "site/cloud/main.js",
+        "dev_blob": "30f5e6a90a4e59a9c5cc6bea6ef3d7642d6028c1",
+        "release_blob": "28c6f6026d0ff1e6fd6575d3813b76c06a29bb47",
+        "dev_line": 1070,
+        "release_line": 1058,
+        "assessment": "Both published and development switch controls list all hydrated setups, with Use and Rename actions"
+      }
+    ],
+    "verdict": "DORMANT_POTENTIAL_CLIENT_SERVER_MISMATCH_NOT_CONFIRMED_LIVE_BUG",
+    "semantic_result": "An archived setup returned by personal state would appear selectable/renameable while two server mutations deny it. No archived records currently exist; current approved importer creates a nonarchived setup; no current reachable archive producer was proved. Do not remove archived history, add speculative SQL behavior, or claim impacted members. Confirm upstream archive producer and synthetic UI acceptance before any patch.",
+    "coverage": {
+      "first_time_provider_source_words": 0,
+      "issue267_original_code_line_credit": 0,
+      "all_provider_baseline": "IN_PROGRESS",
+      "unverified": [
+        "actual historical archived UI scenario",
+        "external/direct SQL writers",
+        "provider console/hosted Auth settings"
+      ]
+    },
+    "tests": "NOT_RUN_DOCS_ONLY; no new CI PASS",
+    "release_queue": "EXISTING_509_ITEMS_TESTING_UNCHANGED",
+    "no_publish": true,
+    "next": "First genuinely new/changed/unreviewed provider definition or reproducible active behavior defect; archive pathway only if supported data producer emerges; do not remove historical setups or alter production."
   }
 }
