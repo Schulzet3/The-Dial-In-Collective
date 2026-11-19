@@ -93,7 +93,10 @@ async function start(){
     if(invalidated)return;
     // No stale hidden-page totals override the fresh dashboard count.
     records=Object.fromEntries(kinds.map((kind,i)=>[kind,pages[i]]));
-    access=loadAccess?nextAccess:null;
+    access=loadAccess?(searchText?{
+      members:[],members_total:0,
+      pending_deletions:nextAccess?.pending_deletions||[]
+    }:nextAccess):null;
      signupRequests=nextSignups;
      const stats=dashboard?.counts||{};
      lastAttentionCount=['pending_verified_accounts','pending_coffees','conflicts','unfinished_account_deletions'].reduce((total,key)=>total+(Number.isSafeInteger(Number(stats[key]))?Number(stats[key]):0),0);

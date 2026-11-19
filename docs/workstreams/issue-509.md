@@ -1,3 +1,11 @@
+# Issue #509 — R354a keep searched account fallback masked [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=54247af05c93268b8421e4e562a89fa6286b5101 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**PR #3384, November 19 UTC, no production change.** Additional consumer review identified a secondary potential regression: an overview read during search can expose 50 unrelated fallback accounts if filtered paging fails. Preserve prior search-mode masked account fallback while passing only pending_deletions through to Retry Completion. Targeted Node22 regression now checks both successful and failed account paging. No further SQL/Edge/Auth change; no live writes. Current exact-source CI **PENDING**, release **TESTING**; no READY or merged assertion. Previous provider words and #267 lines get zero duplicate credit. [R354a receipt](../audits/issue509-r354a-admin-search-fallback-20261119.json).
+
+---
+
 # Issue #509 — R354 Admin search no longer hides unfinished deletion retry [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=54247af05c93268b8421e4e562a89fa6286b5101 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e

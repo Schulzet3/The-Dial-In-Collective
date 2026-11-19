@@ -268,6 +268,7 @@ test('expanded Admin Accounts retain a single action status target',()=>{
 test('account search still fetches overview for unfinished deletion recovery, independently of filtered paging',()=>{
  const src=readFileSync(new URL('../site/admin/main.js',import.meta.url),'utf8');
  assert.match(src,/loadAccess\?adminRpc\('dic_admin_access_overview'\)/);
+ assert.match(src,/pending_deletions:nextAccess\?\.pending_deletions\|\|\[\]/);
  assert.doesNotMatch(src,/searchText\?Promise\.resolve\(\{members:/);
  const access={members:[{id:'other',email:'other@fixture.invalid'}],members_total:51,
   pending_deletions:[{id:'retry-id',phase:'prepared',community_mode:'keep'}]};
@@ -277,4 +278,9 @@ test('account search still fetches overview for unfinished deletion recovery, in
  assert.doesNotMatch(html,/other@fixture\.invalid/);
  assert.match(html,/data-action="retry-account-delete" data-id="retry-id"/);
  assert.match(html,/Pending prepared/);
+ const searchedAccess={members:[],members_total:0,pending_deletions:access.pending_deletions};
+ const failedPage=renderAdminAccessPanel(searchedAccess,{items:[],total:0,offset:0,error:'Unavailable'});
+ assert.match(failedPage,/data-action="retry-account-delete" data-id="retry-id"/);
+ assert.doesNotMatch(failedPage,/other@fixture\.invalid/);
+ assert.doesNotMatch(failedPage,/matching@fixture\.invalid/);
 });
