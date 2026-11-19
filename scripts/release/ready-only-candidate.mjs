@@ -162,6 +162,174 @@ export function discoverCompatibleAuditSupport({queue,restoredPaths,pinnedReadyP
  }
  return [spec.path];
 }
+
+
+export const REVIEWED_UNREADY_SQL_TEST=Object.freeze({
+ path:'supabase/tests/coffee_identity_matching.sql',
+ itemId:'DIC-Q-509-source-path-case-guard-20261115',
+ migration:'supabase/migrations/20261115124500_dic_source_key_path_case_guard.sql',
+ sourceSha:'9a7ffa65955d8c2b81e41153653e19fc512f3a31',
+ publishedBlob:'831bcc8535337d9bb4a028fb7688e1d3b6c57d27',
+ unreadyBlob:'1047d26527ddcb922fe8a366c7806e47b3e32b0c'
+});
+export const REVIEWED_SQL_BASELINE_TESTS=Object.freeze([
+ {
+  "path": "supabase/tests/admin_coffee_review.sql",
+  "published": "a3d1376e52bbe8b84bcf241f0de635d8f49062b4",
+  "unready": "080e37931406845eae8e8f8e0430b3046ab616c1"
+ },
+ {
+  "path": "supabase/tests/admin_edit_normalized_identity_guard.sql",
+  "published": null,
+  "unready": "63f4c9d236f8fc727b8db3387128e79636f63b40"
+ },
+ {
+  "path": "supabase/tests/coffee_confirm_null_name_guard.sql",
+  "published": null,
+  "unready": "afd1640a6514abbe8b4779fbcc052ed1ea5f99c7"
+ },
+ {
+  "path": "supabase/tests/coffee_first_entry_no_self_alias.sql",
+  "published": null,
+  "unready": "52afd0ebfc7ace8d9274ecd4ed2357ed54f91cf2"
+ },
+ {
+  "path": "supabase/tests/coffee_historical_alias_suggestion_confirm.sql",
+  "published": null,
+  "unready": "5e520243be220c7c9893c0cd875f86c319d51162"
+ },
+ {
+  "path": "supabase/tests/coffee_identity_matching.sql",
+  "published": "831bcc8535337d9bb4a028fb7688e1d3b6c57d27",
+  "unready": "1047d26527ddcb922fe8a366c7806e47b3e32b0c"
+ },
+ {
+  "path": "supabase/tests/community_outlier_null_revision.sql",
+  "published": null,
+  "unready": "43c7da7cc7df111c63ad42e56b95f44354e09115"
+ },
+ {
+  "path": "supabase/tests/community_quality_integrity.sql",
+  "published": "149453cc3177203ca96762dbf8312c966c87eb98",
+  "unready": "80c49e9e2a3a3e5c3be89660ff624864d487b25e"
+ },
+ {
+  "path": "supabase/tests/import_additional_credential_keys.sql",
+  "published": null,
+  "unready": "670a5cd2fa299861e105f585e02a45996909182b"
+ },
+ {
+  "path": "supabase/tests/legacy_private_hide_shot_retirement.sql",
+  "published": null,
+  "unready": "7d9c4730b6e8c5170a7b5945d7730de5e5c42f3e"
+ },
+ {
+  "path": "supabase/tests/member_approval_finish_null_receipts.sql",
+  "published": null,
+  "unready": "c64159bfa48d17a840c5f88551ff0ad1f2a058d1"
+ },
+ {
+  "path": "supabase/tests/pending_canonical_name_response.sql",
+  "published": null,
+  "unready": "70d6f1943402785e319a8651239c24598a30bf4e"
+ },
+ {
+  "path": "supabase/tests/recommendation_unique_controls.sql",
+  "published": null,
+  "unready": "9ae348244ea6545b208e8ad1fbb76dff652b7da4"
+ },
+ {
+  "path": "supabase/tests/source_worker_auth_and_admission.sql",
+  "published": "85c2138a84911016f1dffffb34a960049af34ded",
+  "unready": "7a4c4d370f8cf8085d32084141758ffa2f78c40b"
+ },
+ {
+  "path": "supabase/tests/universal_url_preview.sql",
+  "published": "4a18d99435b8ddc45406fdd3cfa7a520517f9705",
+  "unready": "663e7728fac240e0b576aab27948427dd4100f0c"
+ }
+]);
+export const REVIEWED_UNREADY_COFFEE_TESTS=Object.freeze([
+ {
+  "path": "tests/coffee-corpus-identity-regressions.test.mjs",
+  "published": "7269450ec113a605499c694bea1a53cf7bcb03cf",
+  "unready": "d9e9ea3f27b12a0f44fc40ababdc2e4c319e3cee"
+ },
+ {
+  "path": "tests/universal-coffee-preview.test.mjs",
+  "published": "8c49e473dbcb978860881654ff59e9d3224539a5",
+  "unready": "306c7d79f07f800f73ffc575b90ed881b57b8d67"
+ }
+]);
+const matched=({rows,developmentChangedPaths,publishedSourceSha,developmentSourceSha,sourceObjectAt})=>{
+ const changed=developmentChangedPaths.filter(p=>rows.some(r=>r.path===p)).sort();
+ for(const row of rows.filter(r=>changed.includes(r.path))){
+  const old=row.published?'100644:'+row.published:null;
+  if(sourceObjectAt(publishedSourceSha,row.path)!==old||
+     sourceObjectAt(developmentSourceSha,row.path)!=='100644:'+row.unready)
+   throw Error('Unreviewed published-to-development regression test drift: '+row.path);
+ }
+ return changed;
+};
+export function discoverRestoredUnreadySqlTests({queue,restoredPaths,
+ publishedSourceSha,developmentSourceSha,sourceObjectAt,selectedReadyItems=[],
+ developmentChangedPaths=[]}={}){
+ if(!Array.isArray(restoredPaths)||!Array.isArray(selectedReadyItems)||
+    !Array.isArray(developmentChangedPaths)||typeof sourceObjectAt!=='function')return [];
+ const paths=developmentChangedPaths.filter(p=>p.startsWith('supabase/tests/')&&p.endsWith('.sql')).sort();
+ if(!paths.length)return [];
+ if(paths.some(p=>!REVIEWED_SQL_BASELINE_TESTS.some(r=>r.path===p)))
+  throw Error('New unreviewed SQL regression must not be excluded');
+ const s=REVIEWED_UNREADY_SQL_TEST,owner=queue?.items?.find(i=>i.id===s.itemId);
+ if(owner?.issue!==509||!['TESTING','IN_PROGRESS','BLOCKED'].includes(owner.state)||
+    owner.merged_source_sha!==s.sourceSha||
+    !owner.scope_paths?.includes(s.migration)||!restoredPaths.includes(s.migration)||
+    sourceObjectAt(publishedSourceSha,s.migration)!==null||
+    sourceObjectAt(developmentSourceSha,s.migration)===null)
+  throw Error('Unready SQL regression owner/migration restoration unavailable');
+ if(selectedReadyItems.some(item=>item.scope_paths?.some(path=>path.startsWith('supabase/'))))
+  throw Error('Mixed READY SQL requires separately reviewed migration/test isolation');
+ if(sourceObjectAt(s.sourceSha,s.path)!=='100644:'+s.unreadyBlob||
+    sourceObjectAt(s.sourceSha+'^',s.path)!=='100644:'+s.publishedBlob)
+  throw Error('Unready path-case SQL test lacks exact first-parent provenance');
+ const chosen=matched({rows:REVIEWED_SQL_BASELINE_TESTS,developmentChangedPaths:paths,
+  publishedSourceSha,developmentSourceSha,sourceObjectAt});
+ for(const item of selectedReadyItems){
+  if(!SHA.test(item.merged_source_sha||''))throw Error('Selected READY merge missing');
+  for(const path of chosen)
+   if(sourceObjectAt(item.merged_source_sha,path)!==
+      sourceObjectAt(item.merged_source_sha+'^',path))
+    throw Error('Selected READY merge changed protected SQL test: '+path);
+ }
+ return chosen;
+}
+export function discoverRestoredUnreadyCoffeeTests({queue,restoredPaths,
+ publishedSourceSha,developmentSourceSha,sourceObjectAt,selectedReadyItems=[],
+ developmentChangedPaths=[]}={}){
+ if(!Array.isArray(restoredPaths)||!Array.isArray(selectedReadyItems)||
+    !Array.isArray(developmentChangedPaths)||typeof sourceObjectAt!=='function')return [];
+ const chosen=matched({rows:REVIEWED_UNREADY_COFFEE_TESTS,
+  developmentChangedPaths,publishedSourceSha,developmentSourceSha,sourceObjectAt});
+ if(!chosen.length)return [];
+ const owner=queue?.items?.find(i=>i.id==='DIC-Q-33-r232-selected-annual-release-role');
+ if(owner?.issue!==33||!['TESTING','IN_PROGRESS','BLOCKED'].includes(owner.state)||
+    !owner.scope_paths?.includes('src/server/coffee-identity-evidence.mjs')||
+    !restoredPaths.includes('src/server/coffee-identity-evidence.mjs'))
+  throw Error('Unready coffee identity source must be excluded with its newer tests');
+ const source='b585b9cf646da868e6c7c8871289c82f6d96e6ca';
+ for(const path of chosen){
+  if(sourceObjectAt(source,path)!==sourceObjectAt(developmentSourceSha,path)||
+     sourceObjectAt(source+'^',path)!==sourceObjectAt(publishedSourceSha,path))
+   throw Error('Unready coffee test lacks exact first-parent source provenance: '+path);
+  for(const item of selectedReadyItems){
+   if(!SHA.test(item.merged_source_sha||'')||
+      sourceObjectAt(item.merged_source_sha,path)!==
+      sourceObjectAt(item.merged_source_sha+'^',path))
+    throw Error('Selected READY merge modified excluded coffee test: '+path);
+  }
+ }
+ return chosen;
+}
 // Cheap, source-bound pre-CI static import existence check. The exact app
 // build remains mandatory for exported symbol/type/dynamic import semantics.
 export function assertCandidateRelativeImports(paths,{readSource,hasPath}={}){
@@ -481,6 +649,28 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
    if(path!==REVIEWED_COMPATIBLE_AUDIT_SUPPORT.path||
       sourceObjectAt(candidateSha,path)!=='100644:'+REVIEWED_COMPATIBLE_AUDIT_SUPPORT.historicalBlobSha)
      reject('Historical audit helper was not restored to exact independent reviewed bytes');
+ const restoredSqlTests=manifest.restored_unready_sql_test_paths||[];
+ const requiredSqlTests=discoverRestoredUnreadySqlTests({
+  queue,restoredPaths:plan.restored_paths,publishedSourceSha,
+  developmentSourceSha:manifest.development_source_sha,sourceObjectAt,
+  developmentChangedPaths,selectedReadyItems:plan.ready_items
+ });
+ if(!Array.isArray(restoredSqlTests)||!equal(restoredSqlTests,requiredSqlTests))
+  reject('Unready SQL test restoration lacks reviewed exact source provenance');
+ for(const path of restoredSqlTests)
+  if(sourceObjectAt(candidateSha,path)!==sourceObjectAt(publishedSourceSha,path))
+   reject('Unready SQL test not restored to published bytes: '+path);
+ const restoredCoffeeTests=manifest.restored_unready_coffee_test_paths||[];
+ const requiredCoffeeTests=discoverRestoredUnreadyCoffeeTests({
+  queue,restoredPaths:plan.restored_paths,publishedSourceSha,
+  developmentSourceSha:manifest.development_source_sha,sourceObjectAt,
+  developmentChangedPaths,selectedReadyItems:plan.ready_items
+ });
+ if(!Array.isArray(restoredCoffeeTests)||!equal(restoredCoffeeTests,requiredCoffeeTests))
+  reject('Unready coffee tests are not restored to reviewed source');
+ for(const path of restoredCoffeeTests)
+  if(sourceObjectAt(candidateSha,path)!==sourceObjectAt(publishedSourceSha,path))
+   reject('Unready coffee test missing exact published bytes: '+path);
  const excludedTests=manifest.excluded_unready_test_paths||[];
  if(excludedTests.some(path=>compatibleAuditSupport.includes(path)))
    reject('A reviewed compatible helper cannot be simultaneously excluded');
@@ -540,7 +730,7 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
     reject('Cannot exclude a test introduced or modified by an approved READY merge: '+path);
   }
  }
- const allowed=[...plan.restored_paths,...plan.pinned_ready_paths,...compatibleAuditSupport,...excludedTests,...workflowOnlyTests,...frozenWorkflows,CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH];
+ const allowed=[...plan.restored_paths,...plan.pinned_ready_paths,...compatibleAuditSupport,...restoredSqlTests,...restoredCoffeeTests,...excludedTests,...workflowOnlyTests,...frozenWorkflows,CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH];
  if(!equal(stagedCommitChangedPaths||[],allowed))
   reject('Candidate staging commit changes unrelated paths or lacks same-commit journal');
  for(const path of plan.restored_paths)
@@ -564,7 +754,7 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
  }
  return {ready:true,errors:[],deployable_paths:plan.included_paths,
   ready_items:plan.ready_items,other_items:plan.other_items,
-  excluded_paths:plan.restored_paths,pinned_ready_paths:plan.pinned_ready_paths,restored_compatible_audit_support_paths:compatibleAuditSupport,excluded_unready_test_paths:excludedTests,excluded_unpublished_workflow_test_paths:workflowOnlyTests,
+  excluded_paths:plan.restored_paths,pinned_ready_paths:plan.pinned_ready_paths,restored_compatible_audit_support_paths:compatibleAuditSupport,restored_unready_sql_test_paths:restoredSqlTests,restored_unready_coffee_test_paths:restoredCoffeeTests,excluded_unready_test_paths:excludedTests,excluded_unpublished_workflow_test_paths:workflowOnlyTests,
   development_source_sha:manifest.development_source_sha,
   candidate_source_sha:candidateSha};
 }

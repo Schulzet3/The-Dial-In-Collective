@@ -8,7 +8,7 @@ import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 import {CANDIDATE_KIND,CANDIDATE_JOURNAL_PATH,CANDIDATE_RECEIPT_PATH,
  planReadyOnlyCandidate,validateReadyOnlyCandidate,workflowChangedPaths,
- discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,discoverCompatibleAuditSupport,REVIEWED_COMPATIBLE_AUDIT_SUPPORT,
+ discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,discoverCompatibleAuditSupport,discoverRestoredUnreadySqlTests,discoverRestoredUnreadyCoffeeTests,REVIEWED_COMPATIBLE_AUDIT_SUPPORT,
  assertCandidateRelativeImports,assertCandidateStaticNamedExports} from './ready-only-candidate.mjs';
 import {classifyReleaseRisk} from './release-reliability.mjs';
 const SHA=/^[a-f0-9]{40}$/;
@@ -63,6 +63,14 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
   restoredPaths:plan.restored_paths,pinnedReadyPaths:plan.pinned_ready_paths,
   publishedSourceSha,developmentSourceSha,sourceObjectAt,
   selectedReadyItems:plan.ready_items});
+ const restoredSqlTests=discoverRestoredUnreadySqlTests({
+  queue,restoredPaths:plan.restored_paths,publishedSourceSha,developmentSourceSha,
+  sourceObjectAt,selectedReadyItems:plan.ready_items,developmentChangedPaths:developmentPaths
+ });
+ const restoredCoffeeTests=discoverRestoredUnreadyCoffeeTests({
+  queue,restoredPaths:plan.restored_paths,publishedSourceSha,developmentSourceSha,
+  sourceObjectAt,selectedReadyItems:plan.ready_items,developmentChangedPaths:developmentPaths
+ });
  const unpublishedTests=discoverExcludedUnreadyTests({queue,selectedIds:plan.selected_ids,
   restoredPaths:plan.restored_paths,pinnedReadyPaths:plan.pinned_ready_paths,
   publishedSourceSha,developmentSourceSha,changedPaths:developmentPaths,sourceObjectAt,
@@ -98,6 +106,12 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
   }
   for(const path of [...workflowOnlyTests,...unpublishedTests])
    git(['update-index','--force-remove','--',path],{env});
+  for(const path of [...restoredSqlTests,...restoredCoffeeTests]){
+   const object=sourceObjectAt(publishedSourceSha,path);
+   if(object){const [mode,sha]=object.split(':');
+    git(['update-index','--add','--cacheinfo',mode,sha,path],{env});}
+   else git(['update-index','--force-remove','--',path],{env});
+  }
   for(const path of compatibleAuditSupport)
    git(['update-index','--add','--cacheinfo','100644',
      REVIEWED_COMPATIBLE_AUDIT_SUPPORT.historicalBlobSha,path],{env});
@@ -107,6 +121,8 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    restored_to_published_paths:plan.restored_paths,
    pinned_to_ready_paths:plan.pinned_ready_paths,
    restored_compatible_audit_support_paths:compatibleAuditSupport,
+   restored_unready_sql_test_paths:restoredSqlTests,
+   restored_unready_coffee_test_paths:restoredCoffeeTests,
    restored_unpublished_workflow_paths:unpublishedWorkflows,
    excluded_unpublished_workflow_test_paths:workflowOnlyTests,
    excluded_unready_test_paths:unpublishedTests,
@@ -131,6 +147,8 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    '- Restored unfinished paths: '+(plan.restored_paths.join(', ')||'(none)')+'\n'+
    '- Pinned READY mixed-source paths: '+(plan.pinned_ready_paths.join(', ')||'(none)')+'\n'+
    '- Restored previously reviewed compatible audit helper: '+(compatibleAuditSupport.join(', ')||'(none)')+'\n'+
+   '- Restored published SQL regression files for unready migrations: '+(restoredSqlTests.join(', ')||'(none)')+'\n'+
+   '- Restored published coffee identity regressions for unready parser: '+(restoredCoffeeTests.join(', ')||'(none)')+'\n'+
    '- Restored development-only GitHub workflows to published bytes: '+(unpublishedWorkflows.join(', ')||'(none)')+'\n'+
    '- Omitted exact reviewed workflow-only, unpublished tests: '+(workflowOnlyTests.join(', ')||'(none)')+'\n'+
    '- Omitted source-bound unready issue tests: '+(unpublishedTests.join(', ')||'(none)')+'\n'+
