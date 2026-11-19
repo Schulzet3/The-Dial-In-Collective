@@ -6,7 +6,13 @@ name: DIC proactive READY candidate pre-certification
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/dic-ready-precertification.yml']
+    # A new main controller source repair must produce a fresh read-only source
+    # receipt, even when development's READY queue did not change in that hour.
+    paths:
+      - '.github/workflows/dic-ready-precertification.yml'
+      - 'scripts/release/precertify-ready-source.mjs'
+      - 'scripts/release/stage-ready-only-candidate.mjs'
+      - 'scripts/release/ready-only-candidate.mjs'
   workflow_run:
     workflows: ['DIC approval, implementation and continuity contract']
     types: [completed]
