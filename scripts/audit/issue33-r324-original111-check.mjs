@@ -43,6 +43,9 @@ if(process.env.DIC_R324_VERIFY==='1'){
  must(replay?.ok===true&&replay.fields?.name===f.name,'current_parser_raw_replay');
  const contradiction=own.directProducer&&own.narrativeProducer;
  const reviewable=!f.producer&&(r.conflicts||[]).includes('producer');
+ must(reviewable,'contradictory_current_selected_producer_not_withheld');
+ must((replay?.conflict_options?.producer||[]).length>=2,'both_selected_colead_names_reviewable');
+ must(!!replay?.producer_review_note,'producer_conflict_note_visible');
  const result={passed:errors.length===0,errors,event_sha:process.env.DIC_R324_EVENT_SHA,
   checkout_sha:process.env.DIC_R324_CHECKOUT_SHA,producer_conflict_review_required:contradiction,
   producer_field_reviewable:reviewable,producer_certified:false,observed_producer:f.producer||null,

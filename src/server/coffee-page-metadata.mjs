@@ -2,6 +2,7 @@ import {selectedLiteralBroadBlendRegions} from './coffee-selected-broad-blend-re
 import {selectedCurrentTwoRegionSingleCountryBlend} from './coffee-selected-two-region-blend.mjs';
 import {selectedCoffeeContextRoles} from './coffee-selected-context-roles.mjs';
 import {selectedDirectProductCredits,selectedNamedCurrentDecafEvidence,selectedCurrentDecafSpecMethodEvidence,selectedFormTitleWaterDecafEvidence} from './coffee-direct-product-prose.mjs';
+import {selectedProducerTeamNameDisagreement} from './coffee-producer-team-disagreement.mjs';
 import {rawElements,removeElements,removeComments} from '../../supabase/functions/_shared/html-scan.mjs';
 import {isRecurringCoffeeHarvestWindow,isGenericCoffeeLotLabel} from '../../supabase/functions/_shared/coffee-release-label.mjs';
 // Best-effort facts from arbitrary PUBLIC coffee pages. This is NOT official
@@ -3247,6 +3248,26 @@ if(fields.origin&&!conflicts.has('origin')){
     'Count-only selected Farm caption; named supplier not published');
    delete fields.producer;
   }
+ }
+ // Exact selected Producer caption and own project co-leader can disagree
+ // about the same named co-lead; neither surname gets silently certified.
+ const namedTeamDisagreement=fields.producer&&!conflicts.has('producer')
+  ?selectedProducerTeamNameDisagreement(canonicalProduct,{producer:fields.producer,clean}):null;
+ if(namedTeamDisagreement){
+  rememberCoffeeReviewCandidate(fields,'producer',namedTeamDisagreement.label,
+   'Exact selected Producer caption; surname unconfirmed');
+  rememberCoffeeReviewCandidate(fields,'producer',namedTeamDisagreement.narrative,
+   'Exact selected project co-leaders; surname unconfirmed');
+  conflicts.add('producer');delete fields.producer;delete roaster_details.named_producer;
+  producer_review_note=[producer_review_note,
+   'Selected Producer caption and same-coffee project team disagree on a co-lead surname. Confirm Producer manually.']
+   .filter(Boolean).join(' | ').slice(0,1100);
+  for(const fact of source_facts)if(fact.field==='producer')fact.conflicting=true;
+  if(source_facts.length<384)source_facts.push({
+   field:'producer_context',label:'Current selected project co-leaders (review only)',
+   value:namedTeamDisagreement.narrative,source_url,source_type:'html',
+   section:'Direct selected Producer caption vs same selected project team story',conflicting:true
+  });
  }
  // The selected co-op/farm narrative and direct Farm/Region label disagree
  // on district. Preserve both raw claims, but choose neither automatically.
