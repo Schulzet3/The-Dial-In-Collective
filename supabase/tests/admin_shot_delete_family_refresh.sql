@@ -53,8 +53,8 @@ BEGIN
  IF NOT FOUND THEN RAISE EXCEPTION 'Fixture Current preference missing'; END IF;
  PERFORM set_config('request.jwt.claim.sub',admin_id::text,true);
  PERFORM set_config('request.jwt.claims',jsonb_build_object('sub',admin_id,'role','authenticated')::text,true);
- EXECUTE 'SET LOCAL ROLE authenticated';
  SELECT revision INTO rev FROM public.shots WHERE id=shot_a;
+ EXECUTE 'SET LOCAL ROLE authenticated';
  impact:=public.dic_admin_delete_preview('shot',shot_a);
  response:=public.dic_admin_delete_record('shot',shot_a,rev,impact);
  EXECUTE 'RESET ROLE';
@@ -67,8 +67,8 @@ BEGIN
   AND library_entry_id=library_id AND style='Turbo' AND current_family_id=family_id AND favorite_shot_id IS NULL)
  THEN RAISE EXCEPTION 'Valid surviving Current or favorite clearing regressed'; END IF;
  PERFORM set_config('request.jwt.claim.sub',admin_id::text,true);
- EXECUTE 'SET LOCAL ROLE authenticated';
  SELECT revision INTO rev FROM public.shots WHERE id=shot_b;
+ EXECUTE 'SET LOCAL ROLE authenticated';
  impact:=public.dic_admin_delete_preview('shot',shot_b);
  response:=public.dic_admin_delete_record('shot',shot_b,rev,impact);
  EXECUTE 'RESET ROLE';

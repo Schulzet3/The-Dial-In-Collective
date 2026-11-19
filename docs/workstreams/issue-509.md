@@ -1,3 +1,11 @@
+# Issue #509 — R358c synthetic Admin RLS-safe revision fixture [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=8a45f21cbbd4526dade5ae12d7fe450ca6c551be preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**November 19, 2026 UTC, PR #3399 candidate repair only.** Exact PR-head PostgreSQL17 SQL run [44510293969](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44510293969) FAILED only in the new synthetic test at `Invalid delete confirmation`: the synthetic Admin's authenticated role cannot directly SELECT another member's `public.shots.revision` under RLS, so its local expected revision was NULL. The Admin's authorized SECURITY DEFINER preview is otherwise correct. The test now obtains the fixture shot revision before `SET LOCAL ROLE authenticated`, then invokes the real authenticated Admin preview/record wrappers. This preserves RLS and is NOT a production or source SQL change. Previous fixture green-score correction R358b was effective. New head requires ALL new exact-source CI, past failing run is not PASS. Queue TESTING, baseline IN_PROGRESS, production unchanged.
+
+---
+
 # Issue #509 — R358b synthetic green-cohort test correction [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=8a45f21cbbd4526dade5ae12d7fe450ca6c551be preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
