@@ -57,8 +57,15 @@ export function discoverReviewedRestoredSqlTests({queue,restoredPaths,publishedS
   throw Error('SQL test restoration provenance unavailable');
  // No migration is being excluded, so there is no migration-specific SQL
  // fixture to restore. Synthetic READY-only tests legitimately have no SQL.
- if(!restoredPaths.some(path=>path.startsWith('supabase/migrations/')))
+ if(!restoredPaths.some(path=>path.startsWith('supabase/migrations/'))){
+  const original=REVIEWED_SOURCE_PATH_CASE_SQL_TEST;
+  if(sourceObjectAt(developmentSourceSha,original.path)==='100644:'+original.unpublishedBlob)
+   throw Error('Unready SQL case-path test source/owner is not independently attributable');
+  for(const fixture of REVIEWED_UNREADY_SQL_SUITE)
+   if(sourceObjectAt(developmentSourceSha,fixture.path)==='100644:'+fixture.unpublishedBlob)
+    throw Error('Unready SQL regression source lacks excluded TESTING migration: '+fixture.path);
   return [];
+ }
  const restored=[];
  const same=(ref,path,blob)=>sourceObjectAt(ref,path)===(blob?'100644:'+blob:null);
  const readyUnchanged=path=>{

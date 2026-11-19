@@ -1107,3 +1107,7 @@ DIC_PREFLIGHT_VERIFIED development_sha=2f571c1071cdbc49e3fb013c3775aad80669c5ce 
 ## November 19, 2026 UTC — #3373 SQL restoration applies only to excluded SQL migrations [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=2f571c1071cdbc49e3fb013c3775aad80669c5ce preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
 - Exact PR run 44465065793 had 14 failing synthetic non-SQL candidate validator fixtures: mocked path reader returns generic non-null blobs even for unrelated SQL tests. Explicitly guard SQL-test restoration to only a candidate with at least one actually excluded `supabase/migrations/` path. REAL #509 excluded SQL migration still requires exact source/owner/READY-test checks. No modified SQL tests, no policy bypass, no production/DB action; rerun focused main controller tests.
+
+## November 19, 2026 UTC — #3373 synthetic no-SQL fixture plus exact-source no-bypass [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=2f571c1071cdbc49e3fb013c3775aad80669c5ce preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+- Exact main PR #3373 controller 44465303460: 1/219 failure, SQL-only regression test expected HOLD when actual *source-bound* unready SQL test exists but its migration was not excluded. Synthetic other test fixtures with no real source-bound SQL use no restoration. Preserve both: no restore/inspection for unrelated synthetic candidate, but reject source-bound unready test when excluded migration missing. No SQL mutation, Auth/prod/provider write or weakened five-check gate.
