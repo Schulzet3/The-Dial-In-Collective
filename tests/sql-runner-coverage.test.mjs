@@ -40,22 +40,41 @@ exit 99
     GITHUB_RUN_ID:'dispatch-test',GITHUB_RUN_ATTEMPT:'1',DIC_SQL_DISPATCH_TRACE:trace}
   });
   const migrations=files('supabase/migrations'),allSuites=files('supabase/tests');
-  // Two independently unfinished #509 regressions are meaningful ONLY with
-  // their corresponding migration. Never certify absent schema as tested.
+  // SQL regressions are applicable only if the exact paired migration was
+  // staged. A NOT_APPLICABLE record is NOT PASS and must be explicit.
   const migrationBoundSuites={
-   'supabase/tests/recommendation_context_null_controls.sql':
-     'supabase/migrations/20261114115000_dic_recommendation_context_null_control_guard.sql',
-   'supabase/tests/pending_coffee_null_guards.sql':
-     'supabase/migrations/20261114135500_dic_promote_pending_coffee_null_flags.sql'
+   'supabase/tests/recommendation_context_null_controls.sql':[
+    '20261114115000_dic_recommendation_context_null_control_guard.sql','recommendation_context_null_controls'],
+   'supabase/tests/pending_coffee_null_guards.sql':[
+    '20261114135500_dic_promote_pending_coffee_null_flags.sql','pending_coffee_null_guards'],
+   'supabase/tests/member_approval_finish_null_receipts.sql':[
+    '20261114195000_dic_member_approval_finish_null_receipts.sql','member_approval_finish_null_receipts'],
+   'supabase/tests/pending_canonical_name_response.sql':[
+    '20261116151600_dic_pending_canonical_name_response.sql','pending_canonical_name_response'],
+   'supabase/tests/import_additional_credential_keys.sql':[
+    '20261116210000_dic_import_additional_credential_keys.sql','import_additional_credential_keys'],
+   'supabase/tests/coffee_confirm_null_name_guard.sql':[
+    '20261118113500_dic_confirm_coffee_null_name_guard.sql','coffee_confirm_null_name_guard'],
+   'supabase/tests/coffee_first_entry_no_self_alias.sql':[
+    '20261118114600_dic_first_entry_no_self_alias.sql','coffee_first_entry_no_self_alias'],
+   'supabase/tests/coffee_historical_alias_suggestion_confirm.sql':[
+    '20261118140000_dic_coffee_alias_suggestion_confirm.sql','historical alias'],
+   'supabase/tests/legacy_private_hide_shot_retirement.sql':[
+    '20261118164500_dic_remove_legacy_private_hide_shot_handler.sql','legacy internal Hide Shot retirement'],
+   'supabase/tests/recommendation_unique_controls.sql':[
+    '20261118180000_dic_recommendation_unique_controls.sql','recommendation unique-controls'],
+   'supabase/tests/community_outlier_null_revision.sql':[
+    '20261118181500_dic_community_outlier_null_revision_guard.sql','outlier NULL revision'],
+   'supabase/tests/admin_edit_normalized_identity_guard.sql':[
+    '20261118214500_dic_admin_edit_normalized_identity_guard.sql','admin normalized identity guard']
   };
-  const suites=allSuites.filter(path=>
-    !migrationBoundSuites[path]||migrations.includes(migrationBoundSuites[path]));
-  for(const [suite,migration] of Object.entries(migrationBoundSuites)){
-   const suiteName=suite.split('/').at(-1).slice(0,-4);
-   assert.equal(
-    output.includes('NOT_APPLICABLE: #509 '+suiteName+'; migration excluded'),
-    !migrations.includes(migration),
-    'source-bound SQL test must report NOT_APPLICABLE iff its migration is absent');
+  const applicable=path=>!Object.hasOwn(migrationBoundSuites,path)||
+    migrations.includes('supabase/migrations/'+migrationBoundSuites[path][0]);
+  const suites=allSuites.filter(applicable);
+  for(const [suite,[migration,skipLabel]] of Object.entries(migrationBoundSuites)){
+   const exists=migrations.includes('supabase/migrations/'+migration);
+   assert.equal(output.includes('NOT_APPLICABLE: #509 '+skipLabel+'; migration excluded'),!exists,
+    suite+' must be NOT_APPLICABLE iff its exact schema migration is absent');
   }
   const expected=['tests/sql/bootstrap.sql',...migrations,'tests/sql/owner-fixture.sql',...suites];
   const byHash=new Map(expected.map(path=>[digest(path),path]));
