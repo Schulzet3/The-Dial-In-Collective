@@ -23,7 +23,9 @@ const snapshot=Object.fromEntries(CONTRACT_PATHS.map(path=>[path,read(path)]));
 const change=(path,fn)=>auditPreflightContract(p=>p===path?fn(snapshot[p]):snapshot[p]);
 test('single live preflight route is intact without added build or publisher',()=>{
  assert.deepEqual(auditPreflightContract(read),[]);
- assert.match(read('docs/ai/PREFLIGHT.md'),/No preparation, staging, grant or production write/);
+ const liveRoute=read('docs/ai/PREFLIGHT.md');
+ assert.match(liveRoute,/Owner #3347 narrowly permits early nonpublishing READY-only source isolation and exact candidate CI/);
+ assert.match(liveRoute,/No production grant, release request or publication write from a development-only request/);
 });
 test('missing or weakened fail-closed authority is rejected',()=>{
  assert.match(change('docs/ai/PREFLIGHT.md',s=>s.replace('**Fail closed:**','**Optional:**')).join(' '),/missing mandatory contract/);

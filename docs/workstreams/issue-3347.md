@@ -1,14 +1,9 @@
-# DIC issue #3347 — READY release-prevalidation policy and work ledger
+# Issue #3347 — READY candidate's historical test/source applicability
+DIC_PREFLIGHT_VERIFIED development_sha=2f571c1071cdbc49e3fb013c3775aad80669c5ce preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
 
-DIC_PREFLIGHT_VERIFIED development_sha=023f9cbd0ecc3779fff3f65ab441865fa1ef43b9 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
-
-## 2026-11-18 owner Locked scope update [skip netlify]
-- Authority: direct owner instruction; GitHub #3347. Supersedes #457 restriction ONLY on proactive nonpublishing readiness candidate validation. The Publish-only one-use release grant and single Git-connected Netlify publisher remain unchanged.
-- Live evidence: development 023f9cbd0ecc3779fff3f65ab441865fa1ef43b9, exact preflight blob 2fb236bbfa6bac48513eeb3bd157b260853af06d; approval run 44460771215 verified 39 independent source-ready items, 29 with later drift. None of those counts by itself proves a frozen READY batch can publish.
-- Changed: Master Specification, Decision Ledger, Approval Coverage Matrix owner key inventory, queue runbook and this scoped journal. Governance/documentation only: no queue status fabrication, application source, tests, publication, SQL, member, backup or provider writes.
-- Operational main fix PR #3349 investigated under same owner request; its initial two exact-source CI attempts failed and were corrected, so no claim of main CI PASS until new exact receipt.
-- Next: complete source-safe main PR/tests, add upstream nonpublishing source-isolation acceptance to READY workflow, reconcile existing 39 per actual candidate evidence and close #3347 only after verified merge checks and zero blockers.
-
-## Nov 19, 2026 UTC — canonical navigation #3347 [skip netlify]
-- Independently merged main PR #3354 at f0e5ec9b9cf09ea5cbed9cec7a4a383417f76db4, exact main merge acceptance 44462538404 SUCCESS; source/test/workflow candidates in release-candidates/ only. PR-head main acceptance 44462433494 SUCCESS. No production grant, Netlify or DB/member write.
-- Updated AGENTS, PREFLIGHT and topic map to cite the LATER Locked prevalidation supersession without changing the Publish-only single publisher. Previous duplicate PRs #3351 and #3353 closed without merging. Still to verify automatic pre-certification run and five exact candidate CI jobs for live READY inventory; raw queue label alone remains source evidence, NOT combined publication proof.
+## 2026-11-19 source-bound test diagnostics (nonproduction) [skip netlify]
+- Authority: owner #3347 requires READY releases without last-minute preventable failures; no source/feature READY promotion, no provider/SQL write, Netlify or Publish.
+- Exact first frozen 41-item candidate 63121945b0e7b02f95c3627632e28e5c41fd55cb validate CI 44463135532 FAILED four tests. Preflight contract test expected literal "No preparation, staging, grant or production write" from the old no-proactive-candidate policy. Actual governing docs/ai/PREFLIGHT.md blob 3742fed0176c809b115320c698a0e8b1675b2d3e now explicitly authorizes **nonpublishing** prevalidation while continuing to forbid production grants/writes. Repair test to assert both new owner #3347 prepublish allowance AND no release/prod grant. No weaker permissions.
+- SQL runner coverage was hardcoded for only two #509 migration-dependent suites, but inspected actual scripts/audit/isolated-sql-regression.sh pairs twelve SQL regression suites with exact SQL migrations. Frozen candidate restores unfinished migrations; runner correctly emits NOT_APPLICABLE for them. Test now requires all twelve paired suites to be applied ONCE iff their migration exists and otherwise explicit NOT_APPLICABLE, with no missing/hidden SQL tests or provider contact (fixture fake Docker only).
+- Two coffee evidence tests still reference unfinished #33 R232 Git commit b585b9cf646da868e6c7c8871289c82f6d96e6ca, despite its runtime source being restored to published bytes. Main stage requires separately proven test restoration based on exact Git merge/parent and selected READY ancestry; not changed here. Selected feature code/source unchanged.
+- Files: tests/preflight-contract.test.mjs, tests/sql-runner-coverage.test.mjs, same-commit workstream journal. Next: exact development approval/CI, nonforce integration, Main source staging restoration of two R232 tests with unit/CI; new frozen candidate 5 check SUCCESS only after both and byte parity. No success claimed here before CI.
