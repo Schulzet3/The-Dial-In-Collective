@@ -1,0 +1,19 @@
+# #455 R355 — CENT 2015 outcome measurement properties and five taste ratings (research only)
+
+## Verifiable primary-source claim
+
+- **Source identity:** Shamseer et al., *CONSORT extension for reporting N-of-1 trials (CENT) 2015: Explanation and elaboration*, *BMJ* 2015;350:h1793, published 14 May 2015, DOI 10.1136/bmj.h1793; [publisher version](https://www.bmj.com/content/350/bmj.h1793).
+- **Actually inspected:** indexed original BMJ first-party article passage, section **Outcomes → CENT item 6a.2**, plus its methodological explanation. Item 6a.2 asks authors to describe outcome assessment tools' **validity and reliability**, including whether tools are sensitive to change. This is distinct from item 6a.1's outcomes/timing definitions and the previously reviewed R316 period, carryover, missing, harms and preplanned crossovers. The nearby article's clinical questionnaire example is NOT a coffee-rating validation.
+- **Access and strength:** direct BMJ HTML retrieval returned HTTP 403; this run verified publisher-indexed original prose, NOT a full contiguous article download, all tables/figures, publisher PDF binary, independent primary-paper SHA-256, empirical coffee sensory validation or replication. Primary methods/reporting guidance is reliable for its limited reporting prescription; extension to espresso is a proposed methodological safeguard, not measured efficacy.
+
+## Specific DIC contract and live-source crosswalk
+
+At pinned development `915994396ea9e9289919939adc6b27f7d17bfb51`, `site/lib/model.js` Git blob `baafc8fa64fa3e359d8e42094e41c5d72a3b22df` requires the existing **five** separately rated 1–5 sensory dimensions for a loggable complete shot. `site/lib/engine.js` blob `90c55379be60a252a2026e01bb3d786b66c49aef` distinguishes incomplete ratings from five-green success and constrains next advice to one deliberate controllable change. The app stores original measurements/ratings and private notes; those Locked affordances are **preserved**. They do **not** demonstrate independent test–retest reliability, responsiveness to a controlled recipe intervention, or a scientifically calibrated probability of a better cup.
+
+## Research-only future acceptance criterion; no new member operations
+
+If separately approved later, specify all five original ordinal outcomes and the timing; compare **consented**, repeated member ratings under the **same coffee/release, equipment setup, grinder version/calibration, basket, style, feed mode and temperature**, accounting for bean age, preparation, dose, time, fatigue/expectation and temperature drift. Retain unchanged-control, skipped recommendation, incomplete/missing five-score, adverse/worse and contradictory observations instead of selecting only favorable outcomes. A single sequential shot pair is observational, not randomized crossover, and a one-point score change has no independently established minimum meaningful benefit. Design potential repeated within-person stability/check-change comparisons without adding any live fields, telemetry, interventions, member reads or numerical taste thresholds now. Any true prospective effectiveness study, collection/consent or Locked rating change needs new explicit owner authority.
+
+## Traceability and next action
+
+Reuse source `LIT-2015-SHAMSEER-CENT-NOF1-EXPLANATION`, existing owner-gated proposal `R455-PROP-316-OPTIONAL-SAME-COFFEE-EFFECTIVENESS-BOUNDARY`; new nonduplicating evidence check `R455-EV-R355-CENT-6A2-SENSORY-RATING-INSTRUMENT`. Original nine archived Markdown reports, Oct29 reference pack and S019 are **not** promoted to app policy. The canonical ledger changes 201 sources / 608 checks / 266 proposals → **201 / 609 / 266** on this proposed branch **only until merged**. #267 gets no line-review credit, #33/#96 unchanged; no production/release/deploy or provider read/write. Complete PR-head/merge/CI source-bound verification before updating integration status.
