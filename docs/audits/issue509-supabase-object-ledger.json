@@ -4986,6 +4986,23 @@
       "production_writes": 0,
       "release": "TESTING",
       "full_baseline": "IN_PROGRESS"
+    },
+    {
+      "run": "R369",
+      "date": "2026-11-19",
+      "preflight_development_sha": "31972dfeb87624ea5a8b3192c4bc88255e061ccf",
+      "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "receipt_path": "docs/audits/issue509-r369-member-approval-gone-receipt-20261119.json",
+      "fix": "Retired 404/410 push endpoints are skipped not sent",
+      "source_files": [
+        "supabase/functions/dic-member-approval-broker/core.mjs",
+        "tests/issue2258-member-approval-notices.test.mjs"
+      ],
+      "provider_writes": 0,
+      "source_ci": "PENDING",
+      "release": "TESTING",
+      "first_time_provider_words": 0,
+      "baseline": "IN_PROGRESS"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -25379,5 +25396,50 @@
     "provider_writes": 0,
     "baseline": "IN_PROGRESS",
     "release": "TESTING"
+  },
+  "provider_member_approval_gone_receipt_run369": {
+    "receipt_path": "docs/audits/issue509-r369-member-approval-gone-receipt-20261119.json",
+    "project_ref": "azviqqejypsefzilgonr",
+    "preflight_development_sha": "31972dfeb87624ea5a8b3192c4bc88255e061ccf",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "edge_slug": "dic-member-approval-broker",
+    "edge_version": 1,
+    "edge_core_git_blob_sha": "1bc82c0c0f7e90bb86dd7da895c18f9c4e015c5a",
+    "direct_live_sql": [
+      {
+        "signature": "public.dic_member_approval_claim(p_channel text, p_limit integer)",
+        "chars": 1920,
+        "md5": "b0d1e8d2622852b6b930def5c8a171d9"
+      },
+      {
+        "signature": "public.dic_member_approval_claim_poll()",
+        "chars": 335,
+        "md5": "b94ddc2223993aa7685faf482d3871e4"
+      },
+      {
+        "signature": "public.dic_member_approval_finish(p_event_id bigint, p_channel text, p_claim_token uuid, p_outcome text)",
+        "chars": 1003,
+        "md5": "e92ba8e17ab274bcab1a564475d16f28"
+      }
+    ],
+    "edge_sources_directly_reviewed": [
+      "dic-member-approval-broker/core.mjs",
+      "dic-member-approval-broker/index.ts",
+      "dic-admin-push-broker/core.mjs",
+      "dic-delete-member-account/index.ts"
+    ],
+    "bug": "Expired 404/410 push endpoint removed but promise fulfilled, event acknowledged as sent even when no push provider accepted; receipt should be skipped while successful alternate channel independent.",
+    "production_aggregate": {
+      "deliveries_total": 0,
+      "push_subscriptions_total": 0,
+      "confirmed_member_incidents": 0
+    },
+    "source_change": "Single Edge handler return classification and synthetic Node22 regression; no SQL or provider mutation",
+    "first_time_provider_words": 0,
+    "issue267_line_credit": 0,
+    "source_ci": "PENDING",
+    "release": "TESTING",
+    "full_baseline": "IN_PROGRESS",
+    "next_cursor": "Run exact PR-head Node22/cloud/browser/approval on source+test; nonforce integrate after PASS, then merged source/queue check; resume first genuinely unreviewed/changed provider object."
   }
 }
