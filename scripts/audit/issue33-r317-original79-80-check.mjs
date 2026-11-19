@@ -36,7 +36,19 @@ for(const {n,name,url} of targets){
   headings.every(h=>identicalCurrentSelectedTitle(name,h,f.name)),'selected_H1_identity_'+n);
  must(r.selected_heading_identity_verified===true&&r.add_coffee_ui_rendered===true&&r.source_review_rendered===true,'real_preview_and_review_'+n);
  must(new RegExp(name,'i').test(direct),'selected_body_origin_'+n);
- must(!f.roast_level,'body_and_acidity_not_explicit_roast_'+n);
+ // Selected #79 publishes an exact same-identity Shopify Product JSON tag:
+ // "title":"Burundi","handle":"burundi", merchant/vendor and "tags":["Burundi","medium roast"].
+ // This is a seller-owned selected roast label despite no visible body roast.
+ // #80 deliberately has tags:[]; its "medium to heavy body" is NOT a roast.
+ if(n===79){
+  const currentOwnTag=/window\\.BOLD\\.subscriptions\\.data\\.platform\\.product\\s*=\\s*\\{[\\s\\S]{0,800}?"title"\\s*:\\s*"Burundi"\\s*,\\s*"handle"\\s*:\\s*"burundi"[\\s\\S]{0,15000}?"vendor"\\s*:\\s*"Columbia Street Roastery"[\\s\\S]{0,1500}?"tags"\\s*:\\s*\\[\\s*"Burundi"\\s*,\\s*"medium roast"\\s*\\]/.test(html);
+  must(currentOwnTag,'selected_burundi_explicit_shopify_product_roast_tag');
+  must(f.roast_level==='Medium','exact_selected_shopify_burundi_medium_roast');
+ }else{
+  const emptyOwnTag=/window\\.BOLD\\.subscriptions\\.data\\.platform\\.product\\s*=\\s*\\{[\\s\\S]{0,800}?"title"\\s*:\\s*"Costa Rica"\\s*,\\s*"handle"\\s*:\\s*"costa-rica"[\\s\\S]{0,15000}?"vendor"\\s*:\\s*"Columbia Street Roastery"[\\s\\S]{0,1500}?"tags"\\s*:\\s*\\[\\s*\\]/.test(html);
+  must(emptyOwnTag,'selected_costa_rica_has_no_current_roast_tag');
+  must(!f.roast_level,'medium_heavy_body_is_not_roast');
+ }
  must(!f.decaffeination_method&&!f.release_label&&!f.producer&&!f.variety&&!f.elevation_m,'unpublished_not_filled_'+n);
  must(!/illinois|champaign|kenya/i.test(String(f.origin||'')),'no_merchant_or_sibling_origin_'+n);
  must(!/blueberry|cranberry|peach/i.test(String(f.tasting_notes||'')),'no_unrelated_notes_'+n);

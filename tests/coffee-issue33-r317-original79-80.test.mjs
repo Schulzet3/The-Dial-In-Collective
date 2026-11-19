@@ -2,6 +2,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
+import {selectedCurrentInlineShopifyRoastTag} from '../src/server/coffee-current-inline-shopify-product.mjs';
 import {productMarkup} from '../src/server/coffee-product-scope.mjs';
 import {selectedProductHeadings} from '../scripts/audit/issue33-selected-product-heading.mjs';
 import {requiredFocusedSourceFailures} from '../scripts/audit/issue33-focused-source-acceptance.mjs';
@@ -66,4 +67,21 @@ test('R317 Add Coffee and Source Review still require member action and source i
  for(const bad of [[],[{...good(79),status:'UNAVAILABLE'},good(80)],[good(79),{...good(80),parser_ok:false}],
   [good(79),{...good(80),selected_heading_identity_verified:false}]])
   assert.ok(requiredFocusedSourceFailures([79,80],bad).length>0);
+});
+
+test('R317 source-owned Shopify roast taxonomy uses exact selected title handle and vendor only',()=>{
+ const own={id:821042184307,title:'Burundi',handle:'burundi',
+  vendor:'Columbia Street Roastery',tags:['Burundi','medium roast']};
+ const script=x=>'<script>\ntheme.product = '+JSON.stringify(x)+';\n</script>';
+ assert.deepEqual(selectedCurrentInlineShopifyRoastTag(script(own),{
+  name:'Burundi',roaster:'Columbia Street Roastery',source_url:base+'burundi'}),{
+  value:'Medium',source:'exact_selected_shopify_inline_product_roast_taxonomy'});
+ for(const altered of [
+  {...own,title:'Guatemala'}, {...own,handle:'guatemala'},
+  {...own,vendor:'Other Roastery'}, {...own,tags:['Burundi']},
+  {...own,tags:['Burundi','medium roast','dark roast']}
+ ])assert.equal(selectedCurrentInlineShopifyRoastTag(script(altered),{
+  name:'Burundi',roaster:'Columbia Street Roastery',source_url:base+'burundi'}),null);
+ assert.equal(selectedCurrentInlineShopifyRoastTag(script(own),{
+  name:'Costa Rica',roaster:'Columbia Street Roastery',source_url:base+'costa-rica'}),null);
 });
