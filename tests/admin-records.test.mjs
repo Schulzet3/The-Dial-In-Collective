@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import {renderAdminRecord,renderAdminRecordCollection,groupAdminShots} from '../site/admin/records.js';
 import {renderAdminDashboard,renderAdminAccessPanel,renderPendingSignups} from '../site/admin/view.js';
 
@@ -262,4 +263,24 @@ test('expanded Admin Accounts retain a single action status target',()=>{
  assert.match(html,/New Account Requests/);
  assert.doesNotMatch(html,/id="admin-invite-form"/);
  assert.match(html,/id="admin-refresh"/);
+});
+
+test('account search still fetches overview for unfinished deletion recovery, independently of filtered paging',()=>{
+ const src=readFileSync(new URL('../site/admin/main.js',import.meta.url),'utf8');
+ assert.match(src,/loadAccess\?adminRpc\('dic_admin_access_overview'\)/);
+ assert.match(src,/pending_deletions:nextAccess\?\.pending_deletions\|\|\[\]/);
+ assert.doesNotMatch(src,/searchText\?Promise\.resolve\(\{members:/);
+ const access={members:[{id:'other',email:'other@fixture.invalid'}],members_total:51,
+  pending_deletions:[{id:'retry-id',phase:'prepared',community_mode:'keep'}]};
+ const page={items:[{id:'match',email:'matching@fixture.invalid',enabled:true}],total:1,offset:0};
+ const html=renderAdminAccessPanel(access,page);
+ assert.match(html,/matching@fixture\.invalid/);
+ assert.doesNotMatch(html,/other@fixture\.invalid/);
+ assert.match(html,/data-action="retry-account-delete" data-id="retry-id"/);
+ assert.match(html,/Pending prepared/);
+ const searchedAccess={members:[],members_total:0,pending_deletions:access.pending_deletions};
+ const failedPage=renderAdminAccessPanel(searchedAccess,{items:[],total:0,offset:0,error:'Unavailable'});
+ assert.match(failedPage,/data-action="retry-account-delete" data-id="retry-id"/);
+ assert.doesNotMatch(failedPage,/other@fixture\.invalid/);
+ assert.doesNotMatch(failedPage,/matching@fixture\.invalid/);
 });

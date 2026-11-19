@@ -4758,6 +4758,35 @@
       "new_bug": false,
       "baseline": "IN_PROGRESS",
       "next": "private.dic_admin_access_overview() complete definition starting at character 1: compare account overview/paging fallback and released UI, then first newly changed/unreviewed provider object"
+    },
+    {
+      "run": "R354 Nov19 2026 UTC",
+      "preflight_sha": "54247af05c93268b8421e4e562a89fa6286b5101",
+      "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "receipt": "docs/audits/issue509-r354-admin-search-recovery-20261119.json",
+      "reviewed_definitions": 9,
+      "current_definition_chars": 13689,
+      "first_time_provider_words": 0,
+      "issue267_code_lines": 0,
+      "verified_new_defect": true,
+      "source_fix": "PR_PENDING_TESTING",
+      "provider_writes": 0,
+      "baseline": "IN_PROGRESS",
+      "next": "private.dic_admin_account_delete_operations object constraints/trigger and Edge retry-path consumers at complete source character 1, assess genuinely unreviewed/changed objects"
+    },
+    {
+      "run": "R354a Nov19 2026 UTC",
+      "preflight_sha": "54247af05c93268b8421e4e562a89fa6286b5101",
+      "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "receipt": "docs/audits/issue509-r354a-admin-search-fallback-20261119.json",
+      "parent_pr_commit": "bf499dfc07a0e3c4cb7c4cc190389ecece5bcaf1",
+      "search_error_fallback_masked": true,
+      "first_time_provider_words": 0,
+      "issue267_code_lines": 0,
+      "provider_writes": 0,
+      "baseline": "IN_PROGRESS",
+      "ci": "PENDING",
+      "release": "TESTING"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -24518,5 +24547,74 @@
     "verified_new_defect": false,
     "baseline": "IN_PROGRESS",
     "next": "private.dic_admin_access_overview() complete definition starting at character 1: compare account overview/paging fallback and released UI, then first newly changed/unreviewed provider object"
+  },
+  "provider_admin_recovery_search_run354": {
+    "preflight_sha": "54247af05c93268b8421e4e562a89fa6286b5101",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "receipt": "docs/audits/issue509-r354-admin-search-recovery-20261119.json",
+    "functions": [
+      {
+        "signature": "private.dic_admin_access_overview()",
+        "md5": "e377ac910af0115040ad8f881cb01bfc",
+        "characters": 1432,
+        "range": "1-1432"
+      },
+      {
+        "signature": "private.dic_admin_account_delete_finish(p_operation_id uuid, p_actor_id uuid)",
+        "md5": "51cd64deed985a9ddf622926b8784a84",
+        "characters": 2492,
+        "range": "1-2492"
+      },
+      {
+        "signature": "private.dic_admin_account_delete_prepare(p_operation_id uuid, p_actor_id uuid)",
+        "md5": "6e7e0589cbda1bc5023771724ce8b77f",
+        "characters": 3899,
+        "range": "1-3899"
+      },
+      {
+        "signature": "private.dic_admin_account_delete_request(p_member_id uuid, p_community_mode text, p_expected_impact jsonb)",
+        "md5": "b91e425cd94b4c749b28adf8fd0b96a1",
+        "characters": 1949,
+        "range": "1-1949"
+      },
+      {
+        "signature": "private.dic_admin_dashboard_read()",
+        "md5": "5fa33bbe05e8408c1c2fe1b82d73a8ee",
+        "characters": 2901,
+        "range": "1-2901"
+      },
+      {
+        "signature": "public.dic_admin_access_overview()",
+        "md5": "15ea6e60d84362b6fa32f9f40f567df8",
+        "characters": 192,
+        "range": "1-192"
+      },
+      {
+        "signature": "public.dic_admin_account_delete_finish(p_operation_id uuid, p_actor_id uuid)",
+        "md5": "2fc16586443318c1594d1939544920dd",
+        "characters": 257,
+        "range": "1-257"
+      },
+      {
+        "signature": "public.dic_admin_account_delete_prepare(p_operation_id uuid, p_actor_id uuid)",
+        "md5": "a0c67fbfbbfd122a8e16596c79333092",
+        "characters": 259,
+        "range": "1-259"
+      },
+      {
+        "signature": "public.dic_admin_account_delete_request(p_member_id uuid, p_community_mode text, p_expected_impact jsonb)",
+        "md5": "779f19212d19ebbfb88f2a859fd92c21",
+        "characters": 308,
+        "range": "1-308"
+      }
+    ],
+    "client_development_blob": "f0c158ae7b57277ab99551ce7bca94438bce6919",
+    "release_client_blob": "f0c158ae7b57277ab99551ce7bca94438bce6919",
+    "source_correction": "Admin search no longer suppresses pending account deletion recovery",
+    "provider_writes": 0,
+    "first_time_provider_words": 0,
+    "issue267_lines": 0,
+    "state": "TESTING",
+    "search_error_fallback_masked": true
   }
 }
