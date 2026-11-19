@@ -79,7 +79,11 @@ exit 99
    'supabase/tests/family_statistics_historical_reconcile_post.sql'
   ];
   const stagedReconcile=migrations.includes(reconcileMigration);
-  const standaloneParts=new Set([reconcileParts[0],reconcileParts[2]]);
+  const completeMigration='supabase/migrations/20261119122000_dic_reconcile_all_personal_family_derived_stats.sql';
+  const completeParts=[reconcileParts[0],completeMigration,
+    'supabase/tests/family_statistics_complete_reconcile_post.sql'];
+  const stagedComplete=migrations.includes(completeMigration);
+  const standaloneParts=new Set([reconcileParts[0],reconcileParts[2],completeParts[2]]);
   const suites=allSuites.filter(path=>!standaloneParts.has(path)).filter(applicable);
   for(const [suite,[migration,skipLabel]] of Object.entries(migrationBoundSuites)){
    const exists=migrations.includes('supabase/migrations/'+migration);
@@ -93,14 +97,19 @@ exit 99
    const bytes=Buffer.concat(reconcileParts.map(path=>readFileSync(join(root,path))));
    byHash.set(createHash('sha256').update(bytes).digest('hex'),streamToken);
   }
-  assert.equal(byHash.size,expected.length+(stagedReconcile?1:0),
-   'SQL fixtures and bundled R360 transaction must have distinct traceable content');
+  const completeToken='R361_COMPLETE_DERIVED_STATISTICS_TRANSACTION';
+  if(stagedComplete){
+   const bytes=Buffer.concat(completeParts.map(path=>readFileSync(join(root,path))));
+   byHash.set(createHash('sha256').update(bytes).digest('hex'),completeToken);
+  }
+  assert.equal(byHash.size,expected.length+(stagedReconcile?1:0)+(stagedComplete?1:0),
+   'SQL fixtures and bundled R360/R361 transactions must have distinct traceable content');
   const observed=readFileSync(trace,'utf8').trim().split('\n').map(line=>{
    const hash=line.split(/\s+/)[0];
    assert.ok(byHash.has(hash),'runner dispatched an unexpected SQL file');
    return byHash.get(hash);
   });
-  assert.deepEqual(observed.filter(path=>path!==streamToken).slice().sort(),expected.slice().sort(),
+  assert.deepEqual(observed.filter(path=>path!==streamToken&&path!==completeToken).slice().sort(),expected.slice().sort(),
    'every migration and standalone regression must be dispatched exactly once');
   assert.equal(observed.filter(path=>path===streamToken).length,stagedReconcile?1:0,
    'the exact R360 migration+rollback fixture must run once iff staged');
@@ -109,6 +118,14 @@ exit 99
    assert.ok(i>0,'R360 must be applied after historical migrations');
    assert.equal(observed[i-1],streamToken,
     'the literal migration must be tested in its rollback fixture immediately before application');
+  }
+  assert.equal(observed.filter(path=>path===completeToken).length,stagedComplete?1:0,
+   'the exact R361 full-derived migration+rollback fixture must run once iff staged');
+  if(stagedComplete){
+   const i=observed.indexOf(completeMigration);
+   assert.ok(i>observed.indexOf(reconcileMigration),'R361 must apply after R360');
+   assert.equal(observed[i-1],completeToken,
+    'the literal R361 migration must be tested in rollback immediately before application');
   }
   assert.equal(observed[0],'tests/sql/bootstrap.sql');
   for(let index=1;index<migrations.length;index++)

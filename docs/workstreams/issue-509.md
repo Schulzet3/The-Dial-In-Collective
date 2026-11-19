@@ -1,3 +1,15 @@
+# Issue #509 — R361 complete family derived-range and metadata repair [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=15895eb1c5223d183c45af334109566329aff682 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-19 UTC; strictly production READ-ONLY.** New independent full derived-field semantic comparison against the complete live `private.refresh_personal_family(uuid)` estimator (2,134 characters, MD5 `e6a15e6de21f56345479574cc575cf95`) identified an R360 count-only reconciliation gap: **6/6** current families have at least one mismatch to recomputed source-of-truth statistics, but only **1/6** has an incorrect count (stored 6, eligible 4), leaving **5 additional count-correct stale derived records**. All six have stale ratio-high, four ratio-low; three missing evidenceScope/variation/significance fields. Evidence-state labels agree with counts. Live max 4 eligible shots/family, so the estimator's observed min/max/average branch applies. Read-only aggregates and complete SQL review only; no private user/shot/note/Auth rows exported, no new first-time provider words or #267 line credit.
+
+**Safe additive development-only fix:** Preserve immutable R360 migration, append `supabase/migrations/20261119122000_dic_reconcile_all_personal_family_derived_stats.sql`, invoking approved `private.refresh_personal_family` for each existing family once at a *future owner-authorized Publish*. Changes only derived metrics and evidence state; retains IDs, all shot/history records, notes, favorite and Current selections. Extend isolated PostgreSQL17 fixture with a count-correct stale ratio-high family: R360 rollback fixture proves it remains untouched; R361 literal-migration rollback fixture proves repair and identity preservation. SQL dispatcher hashes/recognizes each complete transaction conditionally. **Candidate tests PENDING**, no ready/deployed claim. Queue TESTING; baseline IN_PROGRESS.
+
+Original preflight development `15895eb1c5223d183c45af334109566329aff682`, Git blob `3742fed0176c809b115320c698a0e8b1675b2d3e`; Supabase ACTIVE_HEALTHY PostgreSQL17.11; [PR #3405](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3405) R360 merged as `a45bb63ffd8a3eee164828c3c81e63baa6a8f155`, 7 applicable merged-source workflows SUCCESS incl. SQL/Node/browser/approval/Python. Subsequent #3347 ops journal advanced development without overlapping source. Same-commit journal, append-only ledger, structured receipt and TESTING queue. Next: exact candidate PG17/Node22/browser/approval checks; repair failing fixtures if needed before safe nonforce merge; read back source/CI. **No** production provider, release, backup, schedule, billing or alert writes.
+
+---
+
 # Issue #509 — R360a trace-aware R360 SQL dispatcher fixture repair [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=5eca094cf069b820e9cbfd927f7dc6469e2e84fa preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e

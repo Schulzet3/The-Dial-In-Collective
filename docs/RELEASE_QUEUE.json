@@ -16817,23 +16817,26 @@
     {
       "id": "DIC-Q-509-stale-family-statistics-reconcile",
       "issue": 509,
-      "title": "Reconcile historical stale derived personal recipe-family evidence counts",
+      "title": "Reconcile historical stale derived family counts, ratio ranges and metadata",
       "state": "TESTING",
       "merged_source_sha": null,
       "scope_paths": [
-        "supabase/migrations/20261119120000_dic_reconcile_stale_personal_family_stats.sql"
+        "supabase/migrations/20261119120000_dic_reconcile_stale_personal_family_stats.sql",
+        "supabase/migrations/20261119122000_dic_reconcile_all_personal_family_derived_stats.sql"
       ],
       "owner_source": "Issue #509 owner-authorized development-only stale family repair; verified preflight eac9b0b803a7209ddfd836369ad7e26f2afa1896/3742fed0176c809b115320c698a0e8b1675b2d3e, R360 live catalog and aggregate receipt",
       "tests": [
         "Current READ-ONLY aggregate: 1/6 family counts stale (6 stored versus 4 eligible); cause unverified",
-        "PG17 disconnected synthetic transaction streams EXACT migration between setup/assertions; preserves favorite, shots, notes, unaffected family; CI pending"
+        "PG17 disconnected synthetic transaction streams EXACT migration between setup/assertions; preserves favorite, shots, notes, unaffected family; CI pending",
+        "R361 exact read-only estimator comparison: 6/6 current families stale; five count-correct but ratio bounds/metadata stale",
+        "R361 literal PG17 synthetic count-equal stale-range rollback regression; exact new PR-head CI PENDING"
       ],
       "ci_runs": [],
       "blockers": [
-        "PR-head exact-source PG17, Node22, browser, approval/continuity checks pending; NOT READY",
-        "Release-isolated source and owner-authorized new Publish required before production migration; live discrepancy unchanged"
+        "R361 exact-source PG17, Node22, browser and approval checks PENDING; NOT READY",
+        "Independent #3347 source-isolated release certification and NEW owner Publish required; live records unchanged"
       ],
-      "notes": "One-time idempotent derived-statistics-only repair via existing approved refresh_personal_family; preserves complete history and personal state; [skip netlify]",
+      "notes": "R360 immutable count-only migration source merged a45bb63 and seven merged-source CI workflows SUCCESS. R361 adds future-publication complete derived refresh without touching shots/notes/history. [skip netlify]",
       "production_deployed": false
     }
   ],
