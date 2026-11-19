@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {planReadyOnlyCandidate,validateReadyOnlyCandidate,CANDIDATE_KIND,
  CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH,REVIEWED_WORKFLOW_TEST,discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,assertCandidateRelativeImports,
- assertCandidateStaticNamedExports,discoverReviewedRestoredSqlTests,REVIEWED_SOURCE_PATH_CASE_SQL_TEST,REVIEWED_UNREADY_SQL_SUITE,discoverReviewedRestoredR232CoffeeTests,REVIEWED_R232_COFFEE_TEST} from '../scripts/release/ready-only-candidate.mjs';
+ assertCandidateStaticNamedExports,discoverReviewedRestoredSqlTests,REVIEWED_SOURCE_PATH_CASE_SQL_TEST,REVIEWED_UNREADY_SQL_SUITE,discoverReviewedRestoredR232CoffeeTests,REVIEWED_R232_COFFEE_TEST,discoverReviewedRestoredUnreadyAdminTests,REVIEWED_UNREADY_ADMIN_TEST,REVIEWED_PINNED_COFFEE_TEST} from '../scripts/release/ready-only-candidate.mjs';
 import {classifyReleaseRisk} from '../scripts/release/release-reliability.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40),D='d'.repeat(40);
 const one={id:'DIC-Q-100',issue:100,title:'READY card',state:'READY',
@@ -562,4 +562,65 @@ test('#3342 frozen SQL suite restores only exact unpublished source-bound tests'
  assert.throws(()=>discoverReviewedRestoredSqlTests({...args,
   sourceObjectAt:(r,path)=>r===ready&&path===spec.path?'100644:'+('d'.repeat(40)):read(r,path)}),
   /Selected READY merge modified/);
+});
+
+test('#3347 only source-proven #509 unfinished Admin search restores full published test blob',()=>{
+ const s=REVIEWED_UNREADY_ADMIN_TEST,ready='c'.repeat(40);
+ const owner={id:s.owner,issue:509,state:'TESTING',scope_paths:[s.runtime]};
+ const at=(ref,path)=>{
+  if(path===s.runtime)return '100644:'+(ref===A?'a':'b').repeat(40);
+  if(path!==s.path)return null;
+  if(ref===A)return '100644:'+s.published;
+  if(ref===B||ref===s.sourceMerge)return '100644:'+s.development;
+  if(ref===s.sourceMerge+'^')return '100644:'+s.mergeParent;
+  if(ref===ready||ref===ready+'^')return '100644:'+s.published;
+  return null;
+ };
+ const opts={queue:{items:[owner]},restoredPaths:[s.runtime],publishedSourceSha:A,
+  developmentSourceSha:B,sourceObjectAt:at,selectedReadyItems:[{id:'DIC-Q-ready',merged_source_sha:ready}]};
+ assert.deepEqual(discoverReviewedRestoredUnreadyAdminTests(opts),[s.path]);
+ assert.deepEqual(discoverReviewedRestoredUnreadyAdminTests({...opts,restoredPaths:[]}),[]);
+ assert.throws(()=>discoverReviewedRestoredUnreadyAdminTests({...opts,
+  queue:{items:[{...owner,state:'READY'}]}}),/Unready Admin test/);
+ assert.throws(()=>discoverReviewedRestoredUnreadyAdminTests({...opts,
+  sourceObjectAt:(ref,path)=>ref===B&&path===s.path?'100644:'+'f'.repeat(40):at(ref,path)}),/Unready Admin test/);
+ assert.throws(()=>discoverReviewedRestoredUnreadyAdminTests({...opts,
+  sourceObjectAt:(ref,path)=>ref===ready&&path===s.path?'100644:'+'f'.repeat(40):at(ref,path)}),/Selected READY merge modified/);
+});
+test('#3347 pinned READY coffee parser excludes exact new unready #33 R324 import test only',()=>{
+ const s=REVIEWED_PINNED_COFFEE_TEST;
+ const owner={id:'DIC-Q-33-test',issue:33,state:'TESTING',scope_paths:[s.runtime]};
+ const at=(ref,path)=>{
+  if(path===s.path)return ref===B||ref===s.merge?'100644:'+s.blob:null;
+  if(path===s.runtime)return ref===s.merge?'100644:'+'e'.repeat(40):
+   ref===s.merge+'^'?'100644:'+'f'.repeat(40):null;
+  return null;
+ };
+ const opts={queue:{items:[owner]},selectedIds:[],restoredPaths:[],
+  pinnedReadyPaths:[s.runtime],publishedSourceSha:A,developmentSourceSha:B,
+  changedPaths:[s.path],sourceObjectAt:at};
+ assert.deepEqual(discoverExcludedUnreadyTests(opts),[s.path]);
+ assert.deepEqual(discoverExcludedUnreadyTests({...opts,pinnedReadyPaths:[]}),[]);
+ assert.throws(()=>discoverExcludedUnreadyTests({...opts,
+  queue:{items:[{...owner,state:'READY'}]}}),/pinned coffee test/);
+ assert.throws(()=>discoverExcludedUnreadyTests({...opts,
+  sourceObjectAt:(ref,path)=>ref===B&&path===s.path?'100644:'+'f'.repeat(40):at(ref,path)}),/pinned coffee test/);
+});
+test('#3347 #509 new SQL regression excluded only with its own TESTING migration',()=>{
+ const spec=REVIEWED_UNREADY_SQL_SUITE.find(x=>x.path==='supabase/tests/admin_shot_delete_family_refresh.sql');
+ assert.ok(spec);
+ const owner={id:'DIC-Q-509-admin-shot-delete-family-refresh',issue:509,state:'TESTING',scope_paths:[spec.migration]};
+ const at=(ref,path)=>{
+  if(path===spec.migration)return ref===B?'100644:'+'f'.repeat(40):null;
+  if(path!==spec.path)return null;
+  if(ref===B||ref===spec.sourceMerge)return '100644:'+spec.unpublishedBlob;
+  if(ref===spec.sourceMerge+'^')return '100644:'+'e'.repeat(40);
+  return null;
+ };
+ const opts={queue:{items:[owner]},restoredPaths:[spec.migration],publishedSourceSha:A,
+  developmentSourceSha:B,sourceObjectAt:at,selectedReadyItems:[{id:'DIC-Q-ready',merged_source_sha:C}]};
+ assert.deepEqual(discoverReviewedRestoredSqlTests(opts),[spec.path]);
+ assert.throws(()=>discoverReviewedRestoredSqlTests({...opts,queue:{items:[{...owner,state:'READY'}]}}),/lacks exact source\/migration provenance/);
+ assert.throws(()=>discoverReviewedRestoredSqlTests({...opts,
+  sourceObjectAt:(ref,path)=>ref===B&&path===spec.path?'100644:'+'f'.repeat(40):at(ref,path)}),/Unreviewed current or published SQL test bytes/);
 });

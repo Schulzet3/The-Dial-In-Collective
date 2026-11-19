@@ -8,7 +8,7 @@ import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 import {CANDIDATE_KIND,CANDIDATE_JOURNAL_PATH,CANDIDATE_RECEIPT_PATH,
  planReadyOnlyCandidate,validateReadyOnlyCandidate,workflowChangedPaths,
- discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,discoverCompatibleAuditSupport,discoverReviewedRestoredSqlTests,discoverReviewedRestoredR232CoffeeTests,REVIEWED_COMPATIBLE_AUDIT_SUPPORT,
+ discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,discoverCompatibleAuditSupport,discoverReviewedRestoredSqlTests,discoverReviewedRestoredR232CoffeeTests,discoverReviewedRestoredUnreadyAdminTests,REVIEWED_COMPATIBLE_AUDIT_SUPPORT,
  assertCandidateRelativeImports,assertCandidateStaticNamedExports} from './ready-only-candidate.mjs';
 import {classifyReleaseRisk} from './release-reliability.mjs';
 const SHA=/^[a-f0-9]{40}$/;
@@ -74,7 +74,11 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
  const restoredR232Tests=discoverReviewedRestoredR232CoffeeTests({
   queue,restoredPaths:plan.restored_paths,publishedSourceSha,
   developmentSourceSha,sourceObjectAt,selectedReadyItems:plan.ready_items});
- const restoredTests=[...restoredSqlTests,...restoredR232Tests].sort();
+ const restoredAdminTests=discoverReviewedRestoredUnreadyAdminTests({
+  queue,restoredPaths:plan.restored_paths,publishedSourceSha,
+  developmentSourceSha,sourceObjectAt,selectedReadyItems:plan.ready_items
+ });
+ const restoredTests=[...restoredSqlTests,...restoredR232Tests,...restoredAdminTests].sort();
  // A later untracked same-file edit must not be smuggled under a READY scope.
  for(const path of plan.included_paths){
   const owners=plan.ready_items.filter(i=>i.scope_paths.includes(path));
