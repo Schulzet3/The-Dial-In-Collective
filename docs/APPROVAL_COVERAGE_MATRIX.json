@@ -2386,11 +2386,11 @@
     "source_drift": "Later #2389 changes site/cloud/coffee-url-autofill.js and related tests; frozen batch must isolate same-file READY bytes."
   },
   "current_owner_ready_means_prevalidated_20261118": {
-    "status": "Locked owner policy; implementation and queue recertification IN_PROGRESS",
+    "status": "Locked owner policy; prospective advisory gate implemented/verified; no current READY batches",
     "issue": 3347,
     "source": "Direct owner 2026-11-18 command",
     "supersedes_only": "Nov 3 #457 ban on proactive nonproduction readiness candidate checks",
     "preserves": "Publish-only one-use grant, exact five CI, single Netlify release, source/test/workflow isolation, no provider writes",
-    "evidence": "issue #3347 + operational main PR #3349; CI and live queue proof pending"
+    "evidence": "main #3349, source #3437 (merged b8a8ed2592820fb6421d533b9e2fecde08ee6d3f; five PR-head SUCCESS, postmerge approval/validate/cloud/mobile/rehearsal SUCCESS), previous READY42 published, queue 401 DEPLOYED/26 TESTING/6 IN_PROGRESS/0 READY; each new batch must re-certify before READY"
   }
 }
