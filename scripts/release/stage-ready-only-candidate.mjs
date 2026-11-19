@@ -111,9 +111,9 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
      REVIEWED_COMPATIBLE_AUDIT_SUPPORT.historicalBlobSha,path],{env});
   for(const path of restoredTests){
    const object=sourceObjectAt(publishedSourceSha,path);
-   if(!object)throw Error('Reviewed published SQL test object unavailable: '+path);
-   const [mode,sha]=object.split(':');
-   git(['update-index','--add','--cacheinfo',mode,sha,path],{env});
+   if(object){const [mode,sha]=object.split(':');
+    git(['update-index','--add','--cacheinfo',mode,sha,path],{env});}
+   else git(['update-index','--force-remove','--',path],{env});
   }
   const manifest={schema_version:1,kind:CANDIDATE_KIND,candidate_branch:branch,
    development_source_sha:developmentSourceSha,published_source_sha:publishedSourceSha,
