@@ -1,0 +1,53 @@
+name: DIC Issue33 R322 original603 #95 Daylily selected farmer and farm
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - tests/coffee-issue33-r322-original95.test.mjs
+      - scripts/audit/issue33-r322-original95-check.mjs
+      - .github/workflows/issue33-r322-original95.yml
+      - docs/workstreams/ops-issue33-r322-original95-20261119.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - tests/coffee-issue33-r322-original95.test.mjs
+      - scripts/audit/issue33-r322-original95-check.mjs
+      - .github/workflows/issue33-r322-original95.yml
+      - docs/workstreams/ops-issue33-r322-original95-20261119.md
+permissions:
+  contents: read
+jobs:
+  original95-current-source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Six source-role positive and adversarial parser contracts
+        run: node --test tests/coffee-issue33-r322-original95.test.mjs
+      - name: One exact selected original guarded current public HTTPS product
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '95'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r322
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Strict original selected identity, farmer, farm, source and UI afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r322
+          DIC_R322_CHECKOUT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_R322_EVENT_SHA: ${{ github.sha }}
+        run: node scripts/audit/issue33-r322-original95-check.mjs
+      - name: One-day public original selected source diagnostic
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r322-original95
+          path: /tmp/dic33-r322/
+          retention-days: 1
+          if-no-files-found: warn
