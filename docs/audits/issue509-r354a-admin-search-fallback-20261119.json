@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R354a",
+  "date_utc": "2026-11-19",
+  "preflight": {
+    "development_sha": "54247af05c93268b8421e4e562a89fa6286b5101",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "git_blob_content_verified": true
+  },
+  "parent_pr_commit": "bf499dfc07a0e3c4cb7c4cc190389ecece5bcaf1",
+  "provider_writes": 0,
+  "reason": "Pre-merge consumer review found that fetching overview during search could expose unrelated most-recent accounts when filtered paging fails. This is a possible regression against previously masked fallback, so preserve masking while displaying pending deletion recovery.",
+  "fix": "When searching, retain members:[] and members_total:0 but pass nextAccess.pending_deletions to Retry Completion; server-filtered account pages remain authoritative.",
+  "acceptance": [
+    "Search still loads protected overview for pending deletion retries",
+    "Search pages stay server-filtered",
+    "Search paging failure does not fall back to unfiltered overview users",
+    "Auth and admin guards unchanged"
+  ],
+  "provider_credit_new_words": 0,
+  "issue267_code_line_credit": 0,
+  "ci": "PENDING exact new PR head",
+  "release": "TESTING",
+  "baseline": "IN_PROGRESS"
+}

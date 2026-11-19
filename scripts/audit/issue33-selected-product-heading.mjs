@@ -35,7 +35,7 @@ export function selectedProductHeadings(markup){
 // must still match archived name, parsed selected name AND same-host/handle URL.
 import {coffeeHtmlElements} from '../../src/server/coffee-html-structure.mjs';
 import {coffeeHtmlAttributes} from '../../src/server/coffee-product-scope.mjs';
-export function selectedProductFormH2(markup){
+export function selectedProductFormH2(markup,{source_url=''}={}){
  if(typeof markup!=='string'||markup.length>2_000_000||/<h1\b/iu.test(markup))return [];
  const tree=coffeeHtmlElements(markup);
  if(tree.truncated)return [];
@@ -78,7 +78,44 @@ export function selectedProductFormH2(markup){
    }
    return false;
   });
-  if(ownDesc)matched.push(name);
+  // Some current Shopify product pages have own full product description but
+  // no H3 inside their selected purchase form. Accept only the same exact
+  // public source handle, direct cart form, unique form H2, named own
+  // description block, and substantial genuine product prose. Never use
+  // SEO, unrelated recommendation H2, or generic merchant footer as proof.
+  let sourceHandle='';
+  try{sourceHandle=decodeURIComponent(new URL(source_url).pathname.split('/').pop()||'');}catch{}
+  let sameSelectedRoot=false,rootAt=form.parent;
+  for(let depth=0;rootAt!==null&&depth<128;depth++){
+   const root=nodes[rootAt];if(!root)break;
+   const ra=coffeeHtmlAttributes(root.attributes);
+   if(root.tag==='div'&&String(ra.class||'').split(/\s+/u).includes('main-product--root')){
+    sameSelectedRoot=Boolean(sourceHandle)&&ra['data-handle']===sourceHandle;
+    break;
+   }
+   rootAt=root.parent;
+  }
+  const directCart=/^\/cart\/add(?:[?#]|$)/iu.test(String(a.action||''));
+  const ownNarrative=directCart&&sameSelectedRoot&&parts.some(n=>{
+   if(n.tag!=='div')return false;
+   const attrs=coffeeHtmlAttributes(n.attributes);
+   if(!String(attrs.class||'').split(/\s+/u).includes('product-form--block--description'))return false;
+   let at=n.parent,identified=false;
+   for(let depth=0;at!==null&&depth<16;depth++){
+    const ancestor=nodes[at];
+    if(!ancestor||ancestor.start<form.start||ancestor.end>form.end)break;
+    if(coffeeHtmlAttributes(ancestor.attributes)['data-block-type']==='description'){
+     identified=true;break;
+    }
+    if(at===i)break;
+    at=ancestor.parent;
+   }
+   if(!identified||n.contentEnd-n.headEnd>20000)return false;
+   const content=decode(markup.slice(n.headEnd,n.contentEnd)
+     .replace(/<[^>]{0,1200}>/gu,' ')).replace(/\\s+/gu,' ').trim();
+   return content.length>=120&&content.length<=9000;
+  });
+  if(ownDesc||ownNarrative)matched.push(name);
  }
  // Multiple distinct selected H2s on one document are not one chosen coffee.
  return matched.length&&matched.every(x=>x===matched[0])?[matched[0]]:[];
@@ -120,3 +157,5 @@ export function selectedProductPurchaseRootH2(html){
  const h=titles[0],name=decode(html.slice(h.headEnd,h.contentEnd).replace(/<[^>]{0,1200}>/gu,' ')).replace(/\s+/gu,' ').trim();
  return name&&name.length<=220?[name]:[];
 }
+
+export {selectedSchemaProductOfferH2} from '../../src/server/coffee-selected-offer-h2.mjs';

@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R323",
+  "date_utc": "2026-11-18",
+  "scope": "DIRECT_DEPLOYED_EDGE_VERIFY_SOURCE_AND_RELEASE_PARITY_WITH_SYNTHETIC_REPRODUCTION",
+  "preflight": {
+    "initial_development_sha": "0482fa8b4b66c7264fd3b18e86bb20ece2e194d1",
+    "prewrite_development_sha": "6e5126afb35c4e4050817fe50a45fb88e52f4f91",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "immutable_bytes_verified": true
+  },
+  "git": {
+    "repository": "Schulzet3/The-Dial-In-Collective",
+    "branch": "development/backend-foundation",
+    "main_sha": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release_production_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+  },
+  "provider": {
+    "project_ref": "azviqqejypsefzilgonr",
+    "status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.11.0.003",
+    "edge_slug": "dic-verify-coffee",
+    "edge_version": 10,
+    "status_edge": "ACTIVE",
+    "verify_jwt": true,
+    "ezbr_sha256": "d59e9da29335f2d626a2779238b4f1176148f5f8f3d54539bf831ff20aa6a77e",
+    "production_writes": 0
+  },
+  "direct_reviewed_deployed_files": [
+    {
+      "path": "dic-verify-coffee/index.ts",
+      "chars": 6909,
+      "release_blob": "2aa8d133a86aba8513d91f1557cdea230e24fa0e",
+      "byte_equal": true
+    },
+    {
+      "path": "_shared/request-budget.mjs",
+      "chars": 2455,
+      "release_blob": "d8b70824cb71d4dc4a747a8f20e23b429abb3094",
+      "byte_equal": true
+    },
+    {
+      "path": "dic-verify-coffee/evidence.mjs",
+      "chars": 11492,
+      "release_blob": "3cfb7a1b0a8c2064168ca41314085c48a0f768d1",
+      "byte_equal": true
+    },
+    {
+      "path": "_shared/html-scan.mjs",
+      "chars": 1723,
+      "deployed_bytes_exact_historical_blob": "e07319a5cfe5bb96cdf4891563b493bf2abb2f0e",
+      "release_blob": "c731e22fc2a05b1559b4619cd05e0deb24ddbcc5",
+      "release_chars": 2109,
+      "byte_equal": false
+    },
+    {
+      "path": "_shared/coffee-release-label.mjs",
+      "chars": 2250,
+      "release_blob": "2a3c0f10ea4d808accc05223c99d1afdcffa3761",
+      "byte_equal": true
+    }
+  ],
+  "total_deployed_chars": 24829,
+  "source_parity": "FOUR_OF_FIVE; HISTORICAL_SHARED_PARSER_DEPLOYED",
+  "semantic_finding": {
+    "id": "R323-EDGE-HTML-SCAN-DRIFT",
+    "classification": "REPRODUCED_LATENT_FUNCTIONAL_PROVIDER_SOURCE_DRIFT_NO_OBSERVED_MEMBER_INCIDENT",
+    "path": "supabase/functions/_shared/html-scan.mjs",
+    "deployed_git_blob": "e07319a5cfe5bb96cdf4891563b493bf2abb2f0e",
+    "published_release_source_blob": "c731e22fc2a05b1559b4619cd05e0deb24ddbcc5",
+    "existing_source_fix_commit": "18fb1c678c2e9fa5225e4f513ba0ef8ffdfa936d",
+    "existing_source_test_blob": "57dee7180fec6c29de8226bd784e5ff77a34fc8c",
+    "consumer": "deployed dic-verify-coffee/evidence.mjs extractOfficialEvidence uses rawElements to parse official-product script JSON-LD; trusted-source SQL claim/verify remains live",
+    "reproduction": "An opening <script type=application/ld+json data-note=\"before > after\"> makes deployed html.indexOf('>') split the opening attribute, leaving malformed JSON-LD body; source openingTagEnd scans quoted characters and parses same Product. Node v22.16.0 two-case synthetic double/single-quote reproduction passed, not a hosted call.",
+    "exposure": "Potential false-negative official source verification for a roaster product page with quoted > in script opening attribute; no concrete production page/customer impact established",
+    "safe_disposition": "Already fixed and tested in GitHub source owned by #33; do not duplicate code changes, apply no Edge deploy or SQL. Explicit owner publish authorization and permitted source-bound release procedure are necessary before updating deployed Edge bundle."
+  },
+  "review_credit": {
+    "new_first_time_edge_word_credit": 0,
+    "reason": "Earlier provider Edge v8 and source helper receipts exist; current complete version re-reviewed, no invented unique baseline count"
+  },
+  "new_tests_or_ci": "NO_NEW_CI; NODE22_SYNTHETIC_REPRO_ONLY",
+  "release_queue": "NOT_EDITED_CURRENT_STATUS_NOT_VERIFIED_FROM_OVERSIZED_CONTENT; no READY/DEPLOYED promotion",
+  "coordination": [
+    "#33 is owner of shared parser and its regression",
+    "Issue #509 owns actual live provider source drift"
+  ],
+  "limitations": [
+    "No hosted genuine-account invocation; no private member data or logs fetched",
+    "Full baseline IN_PROGRESS; Auth/console-only/native provider surfaces UNVERIFIED"
+  ],
+  "next_action": "Record drift in #509, preserve current source fix and test, check any authorized owner Publish and exact-source Edge deployment/readback separately; continue first genuinely unreviewed live provider object/dependency."
+}

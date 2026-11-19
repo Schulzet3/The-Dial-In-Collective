@@ -1,0 +1,17 @@
+# Issue #455 R304 — new/edit setup temperature unit integrity [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=bea552e25f39593b2feea6ed0969a3ee4e396308 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+**Source and authority:** Live development parent `bea552e25f39593b2feea6ed0969a3ee4e396308`, immutable `docs/ai/PREFLIGHT.md` blob `2fb236bbfa6bac48513eeb3bd157b260853af06d` verified independently before accessing any other project source. Owner Option B: independently implement only narrow SAFE Locked-compatible UX/shot provenance corrections, no publish. Main/release refs inspected read-only. Compare with prior R303 Edit Shot malformed historical unit fix; do not repeat its tests.
+
+**Reproduced current source:** `site/lib/model.js` original Git blob `fdc65f869546cddbb6552e555dca12117f2c47fc` createSetup line 28 and reviseSetup line 50 accepted any truthy `input.tempUnit`; snapshot line 158 copied it into future measured shots. R303 display guard lives separately in `site/cloud/main.js`, so new or edited setup provenance remained unrestricted. The normal UI may only expose F/C; this is a conditional malformed-input integrity gap, **not a proven member incident**.
+
+**SAFE change:** Restrict new/explicitly edited tempUnit to exact `C` or fallback `F` in the model. Existing historic setup and private shot bytes are NOT migrated or rewritten. Existing Celsius physical measurements, all five independent ratings, personal notes, coffee/style, grinder calibration, last successful recipe families, offline/Community/RLS and single controllable recommendation unchanged. No numeric/scientific recipe policy added.
+
+**Positive and negative regression:** New `tests/issue455-r304-setup-temp-unit-integrity.test.mjs` checks F/C preservation, invalid K/Kelvin/unknown/markup/blank/null/undefined future snapshot fallback, same-version calibration preservation and no archive/notes/taste mutation after edits. Authored only: **NOT RUN locally** because attached-tool container execution returned `ClientError`; no fabricated PASS. Hosted Node22 exact-source CI will be authoritative. No extra build or duplicate suite voluntarily launched.
+
+**Changed paths (same Git commit):** `site/lib/model.js`; `tests/issue455-r304-setup-temp-unit-integrity.test.mjs`; `docs/audits/issue455-research-source-coverage-20261103.json`; `docs/RELEASE_QUEUE.json`; this scoped journal. New direct-source ledger source `LIVE-20261116-MODEL-SETUP-TEMP-UNIT-R304`, 2 bounded checks, 1 SAFE proposal; canonical counts 168/515/233. Queue `DIC-Q-455-r304-setup-temp-unit-integrity` IN_PROGRESS; **NOT READY** until tested merge, exact five CI success/approvals and zero blockers. No new science citation or #267 V2 literal line credit.
+
+**Research source limitation:** October 29 pack now surfaced as a conversation attachment, but local container/Python execution and direct ZIP Files read failed; archive SHA and internal member bytes are **NOT VERIFIED OR REVIEWED**. Original S019 remains unverified. Do not substitute previous pack descriptions as evidence.
+
+**Next executable action:** PR-head hosted CI readback, repair any failures, recheck concurrent development SHA and file conflicts, non-force [skip netlify] merge; verify exact merged code/test/journal/queue/ledger blobs and applicable CI; then update scoped #455 checkpoint, queue and CURRENT_STATUS in a separate tested reconciliation. No owner approval requested for this SAFE fix and no deployment/provider writes.

@@ -1,0 +1,117 @@
+{
+  "run": "R333b",
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "5f7193fb218850a3119a227c062b9a6c8ed9f19e",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "git_blob_verified": true
+  },
+  "branch": "development/backend-foundation",
+  "pr": 3264,
+  "pr_head_sha": "bc4c79b3c75fc3ead13be581430d96cbb29401b4",
+  "merged_sha": "5f7193fb218850a3119a227c062b9a6c8ed9f19e",
+  "merge_message_skip_netlify": true,
+  "merged_git_tree": "dd0ab568380d0ba4bdcf3e951e0cc941cc6c112c",
+  "sources_read_back": [
+    {
+      "path": "supabase/migrations/20261118114600_dic_first_entry_no_self_alias.sql",
+      "blob": "6a34eff579b75e70eabca1b6c7ca99ecb2292d9d"
+    },
+    {
+      "path": "supabase/tests/coffee_first_entry_no_self_alias.sql",
+      "blob": "52afd0ebfc7ace8d9274ecd4ed2357ed54f91cf2"
+    },
+    {
+      "path": "scripts/audit/isolated-sql-regression.sh",
+      "blob": "042184570ea918564062af8e547fa3da2a675943"
+    }
+  ],
+  "ci": {
+    "pr_head": {
+      "sql": 44298773239,
+      "approval": 44298773388,
+      "node22": 44298773048,
+      "cloud_browser": 44298773073,
+      "python": 44298773429,
+      "all_required_success": true,
+      "sql_log_checked": true,
+      "synthetic_regression_pass": "PASS: first original canonical, old and later noncanonical aliases retained, no self alias, IDs/shots unchanged; rollback"
+    },
+    "exact_merged_source": [
+      {
+        "label": "SQL_PG17",
+        "id": 44299537452,
+        "head_sha": "5f7193fb218850a3119a227c062b9a6c8ed9f19e",
+        "status": "completed",
+        "conclusion": "success",
+        "uri": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44299537452"
+      },
+      {
+        "label": "APPROVAL",
+        "id": 44299537493,
+        "head_sha": "5f7193fb218850a3119a227c062b9a6c8ed9f19e",
+        "status": "completed",
+        "conclusion": "success",
+        "uri": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44299537493"
+      },
+      {
+        "label": "NODE22",
+        "id": 44299537486,
+        "head_sha": "5f7193fb218850a3119a227c062b9a6c8ed9f19e",
+        "status": "completed",
+        "conclusion": "success",
+        "uri": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44299537486"
+      },
+      {
+        "label": "BROWSER",
+        "id": 44299537502,
+        "head_sha": "5f7193fb218850a3119a227c062b9a6c8ed9f19e",
+        "status": "completed",
+        "conclusion": "success",
+        "uri": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44299537502"
+      },
+      {
+        "label": "PYTHON",
+        "id": 44299537545,
+        "head_sha": "5f7193fb218850a3119a227c062b9a6c8ed9f19e",
+        "status": "completed",
+        "conclusion": "success",
+        "uri": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44299537545"
+      },
+      {
+        "label": "ISSUE33_R171",
+        "id": 44299537461,
+        "head_sha": "5f7193fb218850a3119a227c062b9a6c8ed9f19e",
+        "status": "completed",
+        "conclusion": "success",
+        "uri": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44299537461"
+      }
+    ],
+    "all_required_success": true
+  },
+  "live_readback": {
+    "postgres_version": "17.11",
+    "function": "private.dic_link_pending_coffee(uuid,uuid,text,jsonb)",
+    "source_md5": "140c211a4bfef175b041c037561a1e37",
+    "source_characters": 3954,
+    "alias_rows": 0,
+    "provider_writes": 0
+  },
+  "coverage": {
+    "first_time_current_provider_word_credit": 0,
+    "scope": "targeted confirmation against R331 complete semantic source receipt"
+  },
+  "queue": {
+    "id": "DIC-Q-509-first-entry-no-self-alias",
+    "state": "TESTING",
+    "release_specific_ci_and_96_auth": "UNVERIFIED"
+  },
+  "independent_finding": {
+    "id": "R331-A",
+    "status": "UNRESOLVED",
+    "next": "Isolated Postgres alias-match suggestion-only fixture; preserve cross-roaster/lot gates and no implicit alias-based verified auto-link"
+  },
+  "baseline": "IN_PROGRESS",
+  "notification": "NO_OWNER_ACTION"
+}

@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "status": "SOURCE_BOUND_PROVIDER_CURRENTNESS_AND_BEHAVIOR_REVIEW",
+  "run": 317,
+  "as_of_utc": "2026-11-17",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight_development_sha": "9e33775d5611e1a355d4ca6ef7d0842906f6d057",
+  "preflight_git_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "main_sha": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+  "release_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5",
+  "receipt_path": "docs/audits/issue509-r317-hotpath-poll-retired-preview-20261117.json",
+  "sql_function_bodies_reread": 7,
+  "sql_source_characters": 15777,
+  "first_time_word_credit": 0,
+  "observations": {
+    "personal_state": {
+      "queryid": "1725044562985116050",
+      "calls": 4787,
+      "total_ms": 73163.07,
+      "mean_ms": 15.28,
+      "max_ms": 1566.38,
+      "shared_hits": 8403391,
+      "shared_reads": 0,
+      "temp_blocks": 0,
+      "previous_r223_calls": 4753,
+      "previous_r223_total_ms": 71625.4
+    },
+    "coffee_matching": {
+      "queryid": "-4904269737613224597",
+      "calls": 41,
+      "total_ms": 2537.4,
+      "mean_ms": 61.89,
+      "max_ms": 223.63,
+      "verified_coffees": 9,
+      "official_sources": 3
+    },
+    "pgss_reset": "2026-10-09 11:11:31.487298+00",
+    "pgss_dealloc": 6,
+    "poll_gate": {
+      "admin_last_polled_at_nullable": true,
+      "admin_function_handles_null": true,
+      "member_last_polled_at_nullable": false,
+      "member_default": "-infinity",
+      "singleton_rows_each": 1,
+      "current_null_values": 0,
+      "waiting_locks": 0
+    },
+    "retired_edge": {
+      "slug": "dic-preview-coffee",
+      "version": 7,
+      "verify_jwt": true,
+      "chars": 1533,
+      "byte_equal_to_release": true,
+      "release_git_blob": "df18de8eb7562eeb95e8e335ef791f615903a46e",
+      "live_behavior": "authenticated 410 retirement tombstone",
+      "current_client_routing": "Netlify /api/coffee-preview plus optional dic_find_coffee_matches"
+    }
+  },
+  "verified_source_consumer_files": {
+    "site/cloud/client.js": "08e1ac1f2610dca9fad162272c8e3c7ea56566a5",
+    "site/cloud/main.js": "54de6067d02965ba36ab5e5863baac86c8afbb4e"
+  },
+  "no_first_time_coverage_reason": "Full function bodies already reviewed in R223/R302/R313 and previous provider ledger; new bound cross-layer comparison/quantitative read only.",
+  "reproducible_new_defects": 0,
+  "justified_code_fix": 0,
+  "code_test_ci_changes": 0,
+  "production_writes": 0,
+  "ci_runs": 0,
+  "queue": "UNCHANGED_TESTING",
+  "baseline": "IN_PROGRESS",
+  "unverified": [
+    "Hosted #96 Auth and recipient acceptance",
+    "Compiled provider binaries and provider-console-only settings",
+    "Complete provider word-level baseline"
+  ],
+  "next": "First genuinely unreviewed/new/changed provider definition or reproducible measured regression; retain no production write/no publish and owner-action-only alert boundary.",
+  "complete_visible_source_review": [
+    {
+      "name": "private.dic_find_coffee_matches(jsonb)",
+      "chars": 6135,
+      "md5": "b4b845d29ccb65ac7922109dc89816b6",
+      "reviewed_range": "1-6135",
+      "verdict": "Full canonical roaster/name/release/source matching; tiny verified catalog, no proven defect"
+    },
+    {
+      "name": "private.read_personal_state()",
+      "chars": 2339,
+      "md5": "037d248b67cc3e8490c1689d3200990f",
+      "reviewed_range": "1-2339",
+      "verdict": "Owner-bounded 16-field MVCC state with full shots/offline; no proven regression"
+    },
+    {
+      "name": "public.dic_admin_push_claim_poll()",
+      "chars": 414,
+      "md5": "e3bbf384effe7e29b5cffd89135c0666",
+      "reviewed_range": "1-414",
+      "verdict": "NULL-safe four-minute poll; nullable table clock"
+    },
+    {
+      "name": "public.dic_community_recommendation_evidence(uuid,text)",
+      "chars": 6171,
+      "md5": "085f92a3814dce624e5b9a3759e893ef",
+      "reviewed_range": "1-6171",
+      "verdict": "Independent contributor buckets and verified target; no demonstrated defect"
+    },
+    {
+      "name": "public.dic_find_coffee_matches(jsonb)",
+      "chars": 208,
+      "md5": "b3e36084c168cabe7a11a6d176e8951f",
+      "reviewed_range": "1-208",
+      "verdict": "Stable wrapper to private matching function"
+    },
+    {
+      "name": "public.dic_member_approval_claim_poll()",
+      "chars": 335,
+      "md5": "b94ddc2223993aa7685faf482d3871e4",
+      "reviewed_range": "1-335",
+      "verdict": "NOT NULL -infinity gate supports four-minute claim"
+    },
+    {
+      "name": "public.dic_read_personal_state()",
+      "chars": 175,
+      "md5": "811aee397f3505117fcc38715e09af94",
+      "reviewed_range": "1-175",
+      "verdict": "Stable member personal-state RPC wrapper"
+    }
+  ],
+  "read_boundary": "Only live function definitions, aggregate statistics/metadata and old public endpoint source. No member data, Auth identities, credentials, secret values or raw logs read.",
+  "prior_covered_source_runs": [
+    223,
+    302,
+    313,
+    315,
+    316
+  ]
+}

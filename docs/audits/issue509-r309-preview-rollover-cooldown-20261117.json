@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R309",
+  "date_utc": "2026-11-17",
+  "project_ref": "azviqqejypsefzilgonr",
+  "status": "SOURCE_FIX_STAGED_TESTING",
+  "preflight": {
+    "development_sha": "00fd25e70cf3375e4b0c5effc3a29cc261d46fc5",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "independent_git_blob_equal": true
+  },
+  "provider": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.11.0.003",
+    "migrations": 69,
+    "edge_functions_active": 5,
+    "write_count": 0
+  },
+  "direct_full_source": [
+    {
+      "object": "private.dic_shared_preview_claim(uuid)",
+      "chars": 1876,
+      "md5": "8d8c9c371ecdb320dd03cbae2ab4c2dd"
+    },
+    {
+      "object": "public.dic_claim_universal_preview()",
+      "chars": 618,
+      "md5": "8f4bc6ecd8687594ff7200cda26104b5"
+    },
+    {
+      "object": "public.dic_url_preview_claim(uuid)",
+      "chars": 413,
+      "md5": "25b95f9449aeb73cc1937f880358c22f"
+    },
+    {
+      "object": "public.dic_preview_preflight(boolean)",
+      "chars": 2460,
+      "md5": "395d4a717122f9feb5ae04ac3c5a1d6a"
+    }
+  ],
+  "repro": {
+    "read_only_sql": true,
+    "synthetic_window_age_seconds": 86401,
+    "synthetic_last_attempt_seconds": 3,
+    "observed_old_branch": "ALLOWED_OLD_BRANCH",
+    "expected_branch": "preview_cooldown",
+    "hosted_auth_test": false,
+    "real_member_impact": "UNVERIFIED"
+  },
+  "consumers": {
+    "current_netlify": "public.dic_preview_preflight; separate implementation correct",
+    "legacy_deployed_edge": "410 tombstone",
+    "current_sql_wrappers": [
+      "public.dic_claim_universal_preview",
+      "public.dic_url_preview_claim"
+    ],
+    "external_calls": "UNVERIFIED"
+  },
+  "source": {
+    "migration": "supabase/migrations/20261117114500_dic_shared_preview_rollover_cooldown.sql",
+    "test": "supabase/tests/universal_url_preview.sql",
+    "change": "Check cooldown before branch resetting daily quota",
+    "branch": "audit/issue509-r309-preview-window-cooldown",
+    "source_tests_ci": "PENDING",
+    "state": "TESTING"
+  },
+  "new_first_time_source_coverage": 0,
+  "confirmed_new_defects": 1,
+  "production_writes": 0,
+  "baseline": "IN_PROGRESS",
+  "next": "Exact isolated PostgreSQL17.11/approval CI and source isolation; resume genuinely unreviewed provider definitions"
+}

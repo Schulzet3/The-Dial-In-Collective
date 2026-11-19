@@ -26,8 +26,9 @@ import {equivalentCoffeeProductNames,preferredCoffeeRoasterName,selectedCoffeeNa
 import {isolateCoffeeIdentityCohorts} from './coffee-source-identity-scope.mjs';
 import {extractCoffeeGeographyEntityRoles,cleanCoffeeGeographyEntityPrefix} from './coffee-geography-entity-roles.mjs';
 import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProductFlavorProfileEvidence,refineSelectedNamedTastingNotes,normalizeExplicitCoffeeTastingNotes,equivalentCoffeeTastingNotes,coffeeTastingNotesSubset} from './coffee-flavor-evidence.mjs';
-import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,refineSelectedCurrentCoordinatedFinish,refineSelectedCurrentTrailingFlavorNote,refineSelectedCurrentFlavorBase,refineSelectedCurrentSensoryArc,selectedCoffeeSupplementalTastingProse,selectedCurrentNarrativeAdditionalTastingNote,selectedCurrentMultiSentenceNarrativeNotes,selectedCurrentProductOvertone,selectedCurrentIntrinsicAromaContext,selectedCurrentUnlabeledFlavorPair} from './coffee-selected-description-sensory.mjs';
+import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,refineSelectedCurrentCoordinatedFinish,refineSelectedCurrentTrailingFlavorNote,refineSelectedCurrentFlavorBase,refineSelectedCurrentSensoryArc,selectedCoffeeSupplementalTastingProse,selectedCurrentNarrativeAdditionalTastingNote,selectedCurrentMultiSentenceNarrativeNotes,selectedCurrentProductOvertone,selectedCurrentIntrinsicAromaContext,selectedCurrentUnlabeledFlavorPair,refineSelectedCoordinatedFlavoredSubstances} from './coffee-selected-description-sensory.mjs';
 import {selectedCoffeeMilkSensoryContext} from './coffee-selected-milk-sensory-context.mjs';
+import {selectedFlavoredProductLiteralNotes,isCoarseFlavoredProductTaxonomy} from './coffee-selected-flavored-taxonomy.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {parseCoffeeElevation,equivalentCoffeeElevations,compatibleCoffeeElevations,extractCoffeeElevationEvidence} from './coffee-elevation-evidence.mjs';
 import {withoutNaturalDecaffeinationModifier,recordCoffeeProcessingClaim,reconcileCoffeeProcessingClaims} from './coffee-processing-evidence.mjs';
@@ -67,7 +68,7 @@ export function markSelectedTastingSourceDisagreements(facts,selectedNotes){
  if(!Array.isArray(facts)||!selectedNotes||typeof selectedNotes!=='string')return facts;
  for(const fact of facts){
   if(fact.field!=='tasting_notes'||fact.conflicting===true||
-   !/^(?:tasting(?:\s+notes?)?|cupping(?:\s+notes?)?|flavou?r(?:\s+notes?)?|cup(?:\s+notes?)?|notes?|we\s+taste|what\s+you(?:'|’)?ll\s+taste)$/i.test(String(fact.label||'').trim().replace(/[:：]\s*$/u,''))||
+   !/^(?:tasting(?:\s+notes?)?|cupping(?:\s+notes?)?|flavou?r(?:\s+notes?)?|cup(?:\s+notes?)?|notes?|we\s+taste|we\s+hear|what\s+you(?:'|’)?ll\s+taste)$/i.test(String(fact.label||'').trim().replace(/[:：]\s*$/u,''))||
    !['html','product_json'].includes(fact.source_type)||
    /(?:different coffee|general guidance|education|recommendation|brewing recommendation|published page metadata)/i.test(String(fact.section||'')))continue;
   // An actual labeled Flavor list may contain unusual literal merchant words
@@ -75,6 +76,40 @@ export function markSelectedTastingSourceDisagreements(facts,selectedNotes){
   // Keep that source's own caption as review-only evidence when it is a
   // bounded multi-item literal, never as an inferred canonical flavor.
   const raw=String(fact.value||'').trim();
+  // A selected label can wrap its identical cup list in an editorial
+  // introductory sentence. The final complete literal list is not a
+  // contradictory second list. Require an explicit sensory lead-in, exact
+  // trailing full canonical list, and no earlier competing flavor cues.
+  // Keep the original prose and label in Source Review unchanged.
+  const printedTail=raw.replace(/[.!?]+$/u,'').trim();
+  const selectedTail=selectedNotes.replace(/[.!?]+$/u,'').trim();
+  const before=printedTail.slice(0,-selectedTail.length);
+  const sensoryLead=/\b(?:notes?|flavou?rs?|tastes?|aromas?)\s+(?:of|include|including|are|like)\b/giu;
+  // Even a complete list at the end is NOT equivalent if an earlier sentence
+  // asserts other tastes. Accept only a non-sensory roast introduction and a
+  // generic "clean profile with subtle notes of" lead-in, or just "notes of".
+  // Anything richer stays reviewable as a potentially conflicting source.
+  const wrapper=before.replace(/(?:notes?|flavou?rs?|tastes?|aromas?)\s+(?:of|include|including|are|like)\s*$/iu,'').trim();
+  const clauses=wrapper?wrapper.split(/(?<=[.!?])\s+/u):[''];
+  const profileLead=clauses.at(-1)||'';
+  const safeProfileLead=profileLead===''||
+    /^(?:(?:very|particularly|especially)\s+)?(?:clean|balanced|smooth|delicate|rounded)\s+profile\s+with\s+(?:subtle|delicate|clear)\s*$/iu.test(profileLead);
+  const safeEarlier=clauses.length===1||(clauses.length===2&&
+    /^(?:this|our|the)\s+[^.!?]{0,150}\bcoffee\b[^.!?]{0,130}\b(?:light|medium|dark)(?:[- ](?:light|medium|dark))?\s+roast[.!?]?$/iu.test(clauses[0])&&
+    !/\b(?:notes?|flavou?rs?|tastes?|aromas?|cup)\b/iu.test(clauses[0]));
+  if(selectedTail.length>=10&&safeProfileLead&&safeEarlier&&printedTail.toLowerCase().endsWith(selectedTail.toLowerCase())&&
+     /(?:notes?|flavou?rs?|tastes?|aromas?)\s+(?:of|include|including|are|like)\s*$/iu.test(before)&&
+     [...before.matchAll(sensoryLead)].length===1&&
+     !/[,:;]/u.test(before)&&
+     !/\b(?:other|another|different|previous|historical|former)\s+(?:coffee|lot|product)\b/iu.test(before))continue;
+  // Do not apply ordinary comma-list subset logic to a preceding sentence
+  // plus a trailing matching note list. The earlier sentence may itself
+  // assert an extra flavor (even without a "tastes of" keyword). Preserve
+  // the literal source as conflicting and leave canonical notes unchanged.
+  if(selectedTail.length>=10&&printedTail.toLowerCase().endsWith(selectedTail.toLowerCase())&&
+     /[.!?]\s+/u.test(before)&&(!safeProfileLead||!safeEarlier)){
+    fact.conflicting=true;continue;
+  }
   const printed=normalizeExplicitCoffeeTastingNotes(raw)||
    (raw.length<=240&&raw.length>=6&&/[,;|]/.test(raw)&&!/[<>]/.test(raw)?raw:'');
   if(printed&&!equivalentCoffeeTastingNotes(printed,selectedNotes)&&
@@ -278,6 +313,28 @@ function samePage(raw,target){
   return !!handle(a.pathname)&&handle(a.pathname)===handle(b.pathname);
  }catch{return false;}
 }
+
+function selectedDistrictLabelNarrativeDisagreement(product,clean,selectedName){
+ // Only direct, currently selected product claims; never generic SEO or siblings.
+ const blocks=productCoffeeProse(product,clean).filter(block=>!block.educational);
+ const headings=blocks.filter(block=>block.tag==='h1');
+ if(headings.length!==1||keyOf(headings[0].text)!==keyOf(selectedName))return null;
+ const prose=blocks.filter(block=>['p','li','dd'].includes(block.tag)&&block.text.length<=1000);
+ const narrative=/\b(?:this|the|our)\s+(?:co[- ]?op(?:erative)?|farm|estate|association)\s+(?:is|was)\s+(?:located|based)\s+in\s+(?:the\s+)?([\p{Lu}][\p{L}\p{M}'’-]{2,49})\s+District\b/iu;
+ const labeled=/(?:Farm\s*\/\s*Region|Farm\s+Region|Growing\s+Region|District)\s*[:：]\s*([\p{Lu}][\p{L}\p{M}'’-]{2,49})\s+District\b(?:\s*,\s*[\p{Lu}][\p{L}\p{M}'’-]{2,49}\s+Province)?/iu;
+ const stories=new Map(),labels=new Map();
+ for(const block of prose){
+  const story=block.text.match(narrative);
+  if(story)stories.set(keyOf(story[1]),story[1]+' District');
+  const label=block.text.match(labeled);
+  if(label)labels.set(keyOf(label[1]),label[0].replace(/^(?:Farm\s*\/\s*Region|Farm\s+Region|Growing\s+Region|District)\s*[:：]\s*/iu,'').trim());
+ }
+ if(stories.size!==1||labels.size!==1)return null;
+ const [a]=stories.keys(),[b]=labels.keys();
+ if(a===b)return null;
+ return {narrative:[...stories.values()][0],label:[...labels.values()][0]};
+}
+
 const conflictsByFields=new WeakMap();
 const structuredFlavorByFields=new WeakMap();
 // Public-only evidence for a member to compare.  Never submit these candidates
@@ -1204,8 +1261,16 @@ function removeSiteSuffix(title,site){
  return stem||raw;
 }
 function labeledPairs(html,fields){
- const flavorText=(label,raw,max)=>clean(LOOKUP.get(keyOf(label))==='tasting_notes'?
-  raw.replace(/<\/?(?:span|strong|b|em|i|small|sup|sub|a|u|s|mark|abbr)\b[^<>]{0,2000}>/gi,''):raw,max);
+ const flavorText=(label,raw,max)=>{
+  // A selected "We hear" definition-list field may finish with linked
+  // music, not a fourth flavor. Retain the raw note list in Source Review.
+  if(keyOf(label)==='wehear'){
+   const song=raw.match(/^(.*?,.*?)\s*,\s*<a\b(?=[^>]{0,800}\bhref=["']https:\/\/(?:www\.)?(?:youtube\.com|youtu\.be|open\.spotify\.com|music\.apple\.com)\/)[^>]{0,800}>[^<>]{1,60}<\/a>\s*$/iu);
+   if(song&&song[1].split(/\s*,\s*/).length>=2)raw=song[1];
+  }
+  return clean(LOOKUP.get(keyOf(label))==='tasting_notes'?
+   raw.replace(/<\/?(?:span|strong|b|em|i|small|sup|sub|a|u|s|mark|abbr)\b[^<>]{0,2000}>/gi,''):raw,max);
+ };
  // Structured specifications: <dt>Label</dt><dd>Value</dd>,
  // <tr><th>Label</th><td>Value</td></tr> and common flat key:value.
  for(const m of html.matchAll(/<dt\b[^<>]{0,2000}>([\s\S]{0,180}?)<\/dt>\s*<dd\b[^<>]{0,2000}>([\s\S]{0,800}?)<\/dd>/gi)){
@@ -1544,7 +1609,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  // farm/grower attributions as reviewable, noncanonical details.
  const ownedContext=selectedCoffeeContextRoles(canonicalProduct,{name:fields.name,clean});
  const narrative=extractNarrativeCoffeeEvidence(canonicalProduct,{name:fields.name,fields,originConflict:conflicts.has('origin')});
-  const directSelected=selectedDirectProductCredits(canonicalProduct,{name:fields.name,clean,optionHtml:html});
+  const directSelected=selectedDirectProductCredits(canonicalProduct,{name:fields.name,clean,optionHtml:html,source_url});
   const selectedPriceBadge=selectedCurrentCoffeeReleaseBadge(canonicalProduct,{name:fields.name});
   if(selectedPriceBadge&&!fields.release_label&&!conflicts.has('release_label'))
    addField(fields,'release_label',selectedPriceBadge);
@@ -2035,11 +2100,11 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  const printedNotes=[];
  for(const fact of source_facts){
   if(fact.field!=='tasting_notes'||fact.conflicting&&fact.section==='Different coffee in the source'||
-   !/^(?:(?:tasting|cupping|flavou?r|flavor|cup)\s+(?:notes?|profile)|flavou?r|notes?|we\s+taste|what\s+you(?:'|’)?ll\s+taste)$/i.test(String(fact.label||'').trim())||
+   !/^(?:(?:tasting|cupping|flavou?r|flavor|cup)\s+(?:notes?|profile)|flavou?r|notes?|we\s+taste|we\s+hear|what\s+you(?:'|’)?ll\s+taste)$/i.test(String(fact.label||'').trim())||
    /(?:brewing\s+recommendations|different\s+coffee|education|general\s+guidance)/i.test(String(fact.section||''))||
    !['html','product_json'].includes(fact.source_type))continue;
   const label=String(fact.label||'').trim();
-  const rank=/^(?:tasting|cupping)\s+notes?$/i.test(label)?3:/^(?:notes?|we\s+taste|what\s+you(?:'|’)?ll\s+taste)$/i.test(label)?2:1;
+  const rank=/^(?:tasting|cupping)\s+notes?$/i.test(label)?3:/^(?:notes?|we\s+taste|we\s+hear|what\s+you(?:'|’)?ll\s+taste)$/i.test(label)?2:1;
   const value=normalizeExplicitCoffeeTastingNotes(fact.value);
   // A generic light-to-dark roast scale is not a tasting description.
   if(!value||/^(?:light|medium|dark|ultra light|very light)(?:\s+(?:light|medium|dark)){1,2}$/i.test(value))continue;
@@ -2070,6 +2135,27 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    // in source_facts instead of inventing a new preferred entry.
    conflicts.add('tasting_notes');delete fields.tasting_notes;
   }
+ }
+ // A seller's broad "Flavors" taxonomy (e.g. "Spice, Grain & Cereal")
+ // cannot trump a stronger literal description of the CURRENT selected
+ // flavored coffee. The source-bound helper requires the actual chosen H1,
+ // its own flavored-product prose and two or more explicit literal substances.
+ // Strong independent cupping notes and actual structured flavor facts still
+ // win. No unqualified ingredients, optional decaf or previous-release facts.
+ const printedStrong=printedNotes.some(row=>row.rank>=2);
+ const structuredPrior=structuredFlavorByFields.get(fields);
+ const selectedFlavored=(!printedStrong&&!conflicts.has('tasting_notes')&&
+    (!structuredPrior||isCoarseFlavoredProductTaxonomy(structuredPrior)))?
+  selectedFlavoredProductLiteralNotes(currentProduct,{
+   clean,existing:fields.tasting_notes,sourceFacts:source_facts
+  }):null;
+ if(selectedFlavored){
+  fields.tasting_notes=selectedFlavored.value;
+  if(source_facts.length<384)source_facts.push({
+   field:'tasting_notes',label:'Selected current flavored-coffee literal notes',
+   value:selectedFlavored.value,source_type:'html',source_url,
+   section:'Current selected flavored-coffee narrative (not ingredients)'
+  });
  }
  // The exact selected product's country-qualified hero, adjacent to its
  // title, outranks a municipality guessed from the coffee's name. A three-
@@ -2149,6 +2235,20 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    // when an inferred notes caption has been indexed as a printed profile.
    const flavorBase=refineSelectedCurrentFlavorBase(product,{clean,notes:fields.tasting_notes});
    if(flavorBase)fields.tasting_notes=flavorBase;
+   // Only already accepted SAME-selected prose may lose decorative connectors.
+   if(!printedNotes.length&&!structuredFlavorByFields.get(fields)){
+    const literal=refineSelectedCoordinatedFlavoredSubstances(currentProduct,{
+     clean,notes:fields.tasting_notes
+    });
+    if(literal){
+     fields.tasting_notes=literal;
+     if(source_facts.length<384)source_facts.push({
+      field:'tasting_notes',label:'Selected current coordinated flavor substances',
+      value:literal,source_url,source_type:'html',
+      section:'Exact chosen current flavor, not ingredients'
+     });
+    }
+   }
    // A selected current unlabelled sensory arc may add literal aroma/finish
    // only when no stronger printed or structured note list exists.
    if(!printedNotes.length&&!structuredFlavorByFields.get(fields)){
@@ -2361,8 +2461,19 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    new Set(decafSpec.candidates.map(spec=>spec.method)).size>1||
    Boolean(exactNamedDecafMethod&&
     decafSpec.candidates.some(spec=>spec.method!==exactNamedDecafMethod)));
+ // Complete, selected-H1 decaffeination Method is independent from a
+ // disagreement about GREEN processing details (e.g., carbonic maceration).
+ // Keep all green detail conflicts; only the separately and exactly scoped
+ // unambiguous caffeine-removal method is eligible for field autofill.
+ // Mixed caffeine, opposing selected methods and contradictory processing
+ // witness still fail closed in inferDecaffeinationMethod below.
+ const exactSelectedSpecMethod=decafSpec.complete&&
+  decafSpec.candidates.length>0&&
+  decafSpec.candidates.every(spec=>Boolean(spec.method)&&
+   spec.method===decafSpec.candidates[0].method);
  const decafSourceConflict=decafSpecConflict||
-  (detailConflicts.has('processing_detail')&&!exactNamedAndSpecAgreement);
+  (detailConflicts.has('processing_detail')&&
+   !exactNamedAndSpecAgreement&&!exactSelectedSpecMethod);
  // A generic page layout may contain labeled decaf PROCESS prose inside a
  // FAQ, related item, or contradictory second product heading. Only the
  // independently verified current selected-product decaf sentence or a
@@ -3030,6 +3141,34 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   }
  }
 
+ // The selected Product can describe Natural processing by a graded
+ // *named current lot* instead of the literal "Process:" field.
+ // Requiring an exact H1, matching name, and direct own-product sentence
+ // prevents menu, SEO, old harvest or adjacent coffee contamination.
+ if(!fields.process&&!conflicts.has('process')&&
+    /\bnatural\s+(?:light|medium|dark)(?:\s*[-–]\s*(?:light|medium|dark))?\s+roast\b/iu.test(String(fields.name||''))){
+   const blocks=productCoffeeProse(canonicalProduct,clean);
+   const headings=blocks.filter(b=>b.tag==='h1'&&!b.educational);
+   if(headings.length===1&&keyOf(headings[0].text)===keyOf(fields.name)){
+     const direct=blocks.find(b=>{
+       if(b.tag!=='p'||b.educational||b.text.length>500||
+          /\b(?:last|previous|former|historical|was formerly|unlike|rather than|not|never|without|other coffees?|for example|such as)\b/iu.test(b.text))return false;
+       const match=b.text.match(/\b(?:organic\s+)?natural\s+grade\s*[1-3]\s+([\p{L}\p{M}][\p{L}\p{M}'’-]*(?:\s+[\p{L}\p{M}][\p{L}\p{M}'’-]*){1,3})/iu);
+       if(!match)return false;
+       const words=match[1].trim().split(/\s+/u);
+       return words.length>=2&&keyOf(fields.name).includes(keyOf(words.slice(0,2).join(' ')));
+     });
+     if(direct){
+       addField(fields,'process','Natural');
+       if(fields.process==='Natural'&&source_facts.length<384)source_facts.push({
+         field:'process',label:'Current selected named natural-grade coffee',
+         value:direct.text.slice(0,300),source_url,source_type:'html',
+         section:'Exact current chosen H1 and own fresh-lot grade paragraph'
+       });
+     }
+   }
+ }
+
  // All identity/scope/field evidence above used the unmodified selected
  // Product name. Shorten only the user-facing name after those checks and
  // retain the original printed title for traceability and later review.
@@ -3066,6 +3205,26 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    delete fields.producer;
   }
  }
+ // The selected co-op/farm narrative and direct Farm/Region label disagree
+ // on district. Preserve both raw claims, but choose neither automatically.
+ const selectedDistrictConflict=selectedDistrictLabelNarrativeDisagreement(
+  canonicalProduct,clean,publishedFullTitle);
+ if(selectedDistrictConflict){
+  rememberCoffeeReviewCandidate(fields,'origin',selectedDistrictConflict.narrative,
+   'Exact selected producer/cooperative location narrative');
+  rememberCoffeeReviewCandidate(fields,'origin',selectedDistrictConflict.label,
+   'Exact selected Farm/Region specification');
+  conflicts.add('origin');
+  delete fields.origin;
+  for(const [label,value] of [
+   ['Selected producer location (disputed)',selectedDistrictConflict.narrative],
+   ['Selected Farm/Region (disputed)',selectedDistrictConflict.label]
+  ])if(source_facts.length<384)source_facts.push({
+   field:'origin_context',label,value,source_url,source_type:'html',
+   section:'Contradictory exact selected-product districts; member review',conflicting:true
+  });
+ }
+
  // An extracted value is a suggestion, never proof of an official source.
  // Keep unexpected/absent facts blank instead of guessing.
  return {ok:true,source:'unverified_public_page',fields,available:Object.keys(fields),

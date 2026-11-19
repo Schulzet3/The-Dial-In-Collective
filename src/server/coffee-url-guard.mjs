@@ -95,6 +95,16 @@ export function guardedLookup(resolve=systemLookup){
   });
  };
 }
+// A 200 text/html storefront response may be only a script-driven access
+// interstitial, not the selected coffee. Never execute or bypass the challenge.
+export function isCoffeeSourceAccessChallenge(value){
+ const html=Buffer.isBuffer(value)?value.toString('utf8',0,Math.min(value.length,64000)):String(value??'').slice(0,64000);
+ if(!html||/<h1\b/i.test(html))return false;
+ const title=html.match(/<title\b[^<>]{0,200}>([\s\S]{0,180}?)<\/title>/i)?.[1]||'';
+ return /^one moment,\s*please(?:\.{1,3})?$/i.test(title.trim())&&
+  /<script\b/i.test(html)&&/\b(?:window\.)?location\.reload\s*\(/i.test(html);
+}
+
 function decodeBody(bytes,encoding,cap){
  try{
   let decoded;
@@ -177,6 +187,9 @@ export async function fetchPublicCoffeeHtml(raw,{
      const decoded=decodeBody(Buffer.concat(chunks),String(res.headers['content-encoding']||'').toLowerCase().trim(),maxBytes);
      if(!decoded.body){finish({ok:false,reason:decoded.reason,source_url:url.toString()});return;}
      const body=decoded.body;
+     if(responseType==='html'&&isCoffeeSourceAccessChallenge(body)){
+      finish({ok:false,reason:'source_access_challenge',source_url:url.toString()});return;
+     }
      if(plainProductHtml&&!/<(?:!doctype\s+html|html|head|body|main|article|h1)\b/i.test(body.toString('utf8',0,2048))){
       finish({ok:false,reason:'not_html',source_url:url.toString()});return;
      }

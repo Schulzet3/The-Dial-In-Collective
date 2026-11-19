@@ -1,0 +1,805 @@
+{
+  "schema": 1,
+  "issue": 509,
+  "run": 265,
+  "project": "azviqqejypsefzilgonr",
+  "immutable_preflight_sha": "5b46ad137c06e7c06dcf10b2f0621a1f3f82011b",
+  "verified_preflight_blob": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "prewrite_sha": "5b46ad137c06e7c06dcf10b2f0621a1f3f82011b",
+  "provider_health": "ACTIVE_HEALTHY",
+  "provider_readonly": true,
+  "reviewed": [
+    {
+      "signature": "private.dic_find_coffee_matches(p jsonb)",
+      "complete_provider_sql": "CREATE OR REPLACE FUNCTION private.dic_find_coffee_matches(p jsonb)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare\n requested_roaster text; requested_name text; requested_release text; requested_origin text;\n search_roaster text; search_name text; search_release text; search_source text;\n registered_name text; registered boolean; candidates jsonb; exact_id uuid; exact_count int;\nbegin\n if not private.is_member() or auth.uid() is null then\n  raise exception using errcode='42501',message='Admitted account required.';\n end if;\n if p is null or jsonb_typeof(p)<>'object' or octet_length(p::text)>16000\n    or coalesce(length(btrim(p->>'roaster')),0) not between 2 and 200\n    or coalesce(length(btrim(p->>'name')),0) not between 1 and 200\n    or length(coalesce(p->>'release_label',''))>200\n    or length(coalesce(p->>'source_url',''))>4000 then\n  raise exception using errcode='22023',message='Invalid coffee match request.';\n end if;\n requested_roaster:=btrim(p->>'roaster');requested_name:=btrim(p->>'name');\n requested_release:=nullif(btrim(coalesce(p->>'release_label','')),'');\n requested_origin:=nullif(btrim(coalesce(p->>'origin','')),'');\n search_roaster:=private.dic_canonical_roaster_key(requested_roaster);\n search_name:=private.dic_coffee_key(requested_name);\n search_release:=private.dic_coffee_key(requested_release);\n search_source:=private.dic_source_key(p->>'source_url');\n if search_roaster is null or search_name is null then\n  return jsonb_build_object('classification','new_pending','roaster',jsonb_build_object('recognized',false,'canonical_name',requested_roaster),'exact_id',null,'candidates','[]'::jsonb);\n end if;\n select c.roaster into registered_name\n from public.coffees c where c.verification_state='verified' and c.merged_into_id is null\n   and private.dic_canonical_roaster_key(c.roaster)=search_roaster\n order by c.created_at,c.id limit 1;\n registered:=registered_name is not null;\n\n with candidates_scanned as (\n  select c.id,c.name,c.roaster,c.release_label,c.origin,c.process,c.verification_state,\n         private.dic_canonical_roaster_key(c.roaster) as brand_key,\n         private.dic_coffee_key(c.name) as title_key,\n         private.dic_coffee_key(c.release_label) as release_key,\n         extensions.similarity(private.dic_canonical_roaster_key(c.roaster),search_roaster) as brand_similarity,\n         extensions.similarity(private.dic_coffee_key(c.name),search_name) as title_similarity,\n         exists(\n           select 1 from public.coffee_sources src\n           where src.coffee_id=c.id and src.source_kind='roaster_page'\n             and search_source is not null\n             and src.checked_at>=now()-interval '120 days'\n             and private.dic_source_key(src.source_url)=search_source\n         ) as curated_url_match\n  from public.coffees c where c.verification_state='verified' and c.merged_into_id is null\n ), assessed as (\n   select s.*,\n     (s.brand_key=search_roaster) as exact_brand,\n     (s.title_key=search_name) as exact_title,\n     (requested_origin is null or s.origin is null\n       or private.dic_coffee_key(requested_origin)=private.dic_coffee_key(s.origin)) as compatible_origin\n   from candidates_scanned s\n   where (s.brand_key=search_roaster or s.brand_similarity>=0.70)\n     and (s.title_key=search_name or s.title_similarity>=0.43)\n     -- Explicitly different nonempty harvest/lot labels are different\n     -- releases, not fuzzy duplicates. Missing labels remain ambiguous.\n     and (search_release is null or s.release_key is null\n       or s.release_key=search_release)\n ), ranked as (\n  select s.*,\n    case\n      when s.exact_brand and s.exact_title and s.curated_url_match\n        and search_release is not null and s.release_key=search_release\n        and s.compatible_origin\n        and (nullif(btrim(coalesce(p->>'process','')),'') is null\n          or s.process is null\n          or private.dic_coffee_key(p->>'process')=private.dic_coffee_key(s.process))\n        then 'official_url'\n      when s.exact_brand and s.exact_title and search_release is not null\n        and s.release_key=search_release and s.compatible_origin\n        and (nullif(btrim(coalesce(p->>'process','')),'') is null\n          or s.process is null\n          or private.dic_coffee_key(p->>'process')=private.dic_coffee_key(s.process))\n        -- Official source URLs take priority; an exact-release label with\n        -- a different existing verified product URL is not sufficient.\n        and (search_source is null or s.curated_url_match or\n          not exists(select 1 from public.coffee_sources src\n           where src.coffee_id=s.id and src.source_kind='roaster_page'))\n        then 'exact_release'\n      when s.exact_brand and s.exact_title then 'same_name'\n      when s.exact_brand then 'similar_name'\n      else 'similar_roaster'\n    end as match_kind\n  from assessed s\n ), prioritized as (\n  select r.*, case r.match_kind\n    when 'official_url' then 5 when 'exact_release' then 4\n    when 'same_name' then 3 when 'similar_name' then 2 else 1 end as rank\n  from ranked r\n )\n select\n  (select jsonb_agg(jsonb_build_object(\n      'id',q.id, 'name',q.name,'roaster',q.roaster,'release_label',q.release_label,\n      'origin',q.origin,'match_kind',q.match_kind\n    ) order by q.rank desc, q.title_similarity desc, q.name, q.id)\n   from (select * from prioritized order by rank desc,title_similarity desc,name,id limit 6) q),\n  (select count(*) from prioritized where rank>=4),\n  (select id from prioritized where rank>=4 order by rank desc,id limit 1)\n into candidates,exact_count,exact_id;\n if exact_count<>1 then exact_id:=null; end if;\n return jsonb_build_object(\n   'classification',case when exact_id is not null then 'exact_verified'\n                    when coalesce(jsonb_array_length(candidates),0)>0 then 'needs_confirmation'\n                    else 'new_pending' end,\n   'roaster',jsonb_build_object('recognized',registered,\n                   'canonical_name',coalesce(registered_name,requested_roaster)),\n   'exact_id',exact_id,\n   'candidates',coalesce(candidates,'[]'::jsonb)\n );\nend $function$\n",
+      "source_md5": "b4b845d29ccb65ac7922109dc89816b6",
+      "chars": 6135,
+      "full_lines": [
+        1,
+        118
+      ],
+      "security_definer": true,
+      "config": [
+        "search_path=\"\""
+      ],
+      "grants": {
+        "anon": false,
+        "authenticated": true,
+        "service_role": false
+      },
+      "verdict": "Admitted member gate, canonical evidence and candidate cap; inherited URL path collision through source key; no additional independently proven defect"
+    },
+    {
+      "signature": "private.dic_source_key(value text)",
+      "complete_provider_sql": "CREATE OR REPLACE FUNCTION private.dic_source_key(value text)\n RETURNS text\n LANGUAGE plpgsql\n STABLE\n SET search_path TO ''\nAS $function$\ndeclare raw text; path text; params text; kept text:=''; part text;\nbegin\n raw:=btrim(coalesce(value,''));\n if raw !~* '^https?://[^/?#[:space:]]+' or length(raw)>4000 then return null;end if;\n raw:=split_part(raw,'#',1);\n raw:=regexp_replace(raw,'^https?://(www\\.)?','','i');\n path:=split_part(raw,'?',1);\n if path='' then return null;end if;\n params:=case when strpos(raw,'?')>0 then substring(raw from strpos(raw,'?')+1) else '' end;\n if params<>'' then\n  foreach part in array string_to_array(params,'&') loop\n   if split_part(lower(part),'=',1)!~'^utm_' and\n     lower(split_part(part,'=',1)) not in ('gclid','fbclid','msclkid','srsltid')\n       and part<>'' then\n    kept:=concat_ws('&',nullif(kept,''),part);\n   end if;\n  end loop;\n end if;\n return lower(rtrim(path,'/'))||case when kept<>'' then '?'||kept else '' end;\nend $function$\n",
+      "source_md5": "07e0ef286246fdae29b9151018296f79",
+      "chars": 981,
+      "full_lines": [
+        1,
+        27
+      ],
+      "security_definer": false,
+      "config": [
+        "search_path=\"\""
+      ],
+      "grants": {
+        "anon": false,
+        "authenticated": false,
+        "service_role": false
+      },
+      "verdict": "Verified path-case collision in complete live definition; development-only replacement with focused rollback regression; production impact not inspected"
+    },
+    {
+      "signature": "public.dic_browse_community_shots(p_limit integer, p_offset integer)",
+      "complete_provider_sql": "CREATE OR REPLACE FUNCTION public.dic_browse_community_shots(p_limit integer DEFAULT 20, p_offset integer DEFAULT 0)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare entries jsonb; total_count integer; member_id uuid;\nbegin\n member_id:=private.require_member();\n if p_limit is null or p_limit not between 1 and 40 or\n    p_offset is null or p_offset not between 0 and 2000 then\n   raise exception using errcode='22023',\n    message='Community page size or offset is invalid.';\n end if;\n select count(*)::integer into total_count\n from public.community_shots cs\n join public.coffees coffee on coffee.id=cs.coffee_id\n where cs.quality_state='eligible' and coffee.verification_state='verified';\n\n select coalesce(jsonb_agg(jsonb_build_object(\n   'coffee_name',page.coffee_name,'roaster',page.roaster,\n   'release_key',page.release_key,'release_label',page.release_label,\n   'release_origin',page.release_origin,'release_process',page.release_process,\n   'release_producer',page.release_producer,'release_variety',page.release_variety,\n   'release_roast_level',page.release_roast_level,\n   'style',page.style,'observed_on',page.observed_on,\n   'dose_g',page.dose_g,'yield_g',page.yield_g,\n   'ratio',page.ratio,'time_s',page.time_s,\n   'extraction',page.extraction,'body',page.body,\n   'clarity',page.clarity,'sweetness',page.sweetness,\n   'astringency',page.astringency,\n   'shot_count',page.shot_count,\n   'contributor_count',page.contributor_count\n ) order by page.observed_on desc,page.sort_id desc),'[]'::jsonb)\n into entries from (\n  select cs.id as sort_id,cs.observed_on,cs.style,cs.dose_g,\n    cs.yield_g,cs.ratio,cs.time_s,cs.extraction,cs.body,\n    cs.clarity,cs.sweetness,cs.astringency,\n    coffee.name as coffee_name,coffee.roaster,\n    encode(sha256(convert_to(coffee.id::text,'UTF8')),'hex') as release_key,\n    nullif(btrim(coffee.release_label),'') as release_label,\n    nullif(btrim(coffee.origin),'') as release_origin,\n    nullif(btrim(coffee.process),'') as release_process,\n    nullif(btrim(coffee.producer),'') as release_producer,\n    nullif(btrim(coffee.variety),'') as release_variety,\n    nullif(btrim(coffee.roast_level),'') as release_roast_level,\n    (select count(*)::integer from public.community_shots sibling\n      join public.coffees canon on canon.id=sibling.coffee_id\n      where sibling.coffee_id=cs.coffee_id and sibling.style=cs.style\n        and sibling.quality_state='eligible'\n        and canon.verification_state='verified') as shot_count,\n    (select count(distinct link.contributor_id)::integer\n      from public.community_shots sibling\n      join private.contribution_links link on link.community_shot_id=sibling.id\n      where sibling.coffee_id=cs.coffee_id and sibling.style=cs.style\n        and sibling.quality_state='eligible') as contributor_count\n  from public.community_shots cs\n  join public.coffees coffee on coffee.id=cs.coffee_id\n  where cs.quality_state='eligible' and coffee.verification_state='verified'\n  order by cs.observed_on desc,cs.id desc\n  limit p_limit offset p_offset\n ) page;\n return jsonb_build_object('shots',entries,'total',total_count,\n    'offset',p_offset,'page_size',p_limit);\nend $function$\n",
+      "source_md5": "edcc2c6a9fb24b3455a446d964a2ed2d",
+      "chars": 3222,
+      "full_lines": [
+        1,
+        66
+      ],
+      "security_definer": true,
+      "config": [
+        "search_path=\"\""
+      ],
+      "grants": {
+        "anon": false,
+        "authenticated": true,
+        "service_role": true
+      },
+      "verdict": "Admitted membership, page 1-40 and offset 0-2000; eligible verified Community values only, no personal identities; correlated counts performance not isolated"
+    },
+    {
+      "signature": "public.dic_community_evidence_counts(p_coffee_id uuid, p_style text)",
+      "complete_provider_sql": "CREATE OR REPLACE FUNCTION public.dic_community_evidence_counts(p_coffee_id uuid, p_style text)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare n bigint; people bigint;\nbegin\n perform private.require_member();\n select count(*),count(distinct l.contributor_id) into n,people\n from public.community_shots c\n join private.contribution_links l on l.community_shot_id=c.id\n join public.coffees verified on verified.id=c.coffee_id\n where c.coffee_id=p_coffee_id and c.style=p_style and c.quality_state='eligible'\n  and verified.verification_state='verified';\n return jsonb_build_object('shot_count',n,'contributor_count',people);\nend $function$\n",
+      "source_md5": "1bddea7e3160c0282bea1d6e74d1fbaf",
+      "chars": 694,
+      "full_lines": [
+        1,
+        18
+      ],
+      "security_definer": true,
+      "config": [
+        "search_path=\"\""
+      ],
+      "grants": {
+        "anon": false,
+        "authenticated": true,
+        "service_role": true
+      },
+      "verdict": "Admitted membership and aggregate eligible verified Community counts; no contributor identifier exposure"
+    },
+    {
+      "signature": "public.dic_community_recommendation_evidence(p_library_entry_id uuid, p_style text)",
+      "complete_provider_sql": "CREATE OR REPLACE FUNCTION public.dic_community_recommendation_evidence(p_library_entry_id uuid, p_style text)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare me uuid; target public.coffees; result jsonb;\nbegin\n me:=private.require_member();\n if p_style is null or p_style not in ('Traditional','Turbo','Ristretto','Lungo','Custom','Fast-Flow')\n    then raise exception using errcode='22023',message='Unknown espresso style';end if;\n select c.* into target from public.library_entries le\n join public.coffees c on c.id=le.coffee_id\n where le.id=p_library_entry_id and le.owner_id=me and le.hidden_at is null\n   and c.verification_state='verified' and c.merged_into_id is null;\n if not found then\n  return jsonb_build_object('style',p_style,'candidates','[]'::jsonb);\n end if;\n with matching as (\n  select cs.coffee_id,cl.contributor_id,cs.ratio,cs.time_s,\n   -- Only a server-maintained, eligible repeated-success *personal* family\n   -- qualifies. Do not infer a family from shot values or trust client labels.\n   case when pf.evidence_state='personally_confirmed'\n       and s.is_dialed_in and s.personal_family_id=pf.id\n       and s.style=cs.style and s.library_entry_id=pf.library_entry_id\n       then pf.id else null end as confirmed_personal_family_id,\n   floor(cs.ratio/0.25)::integer as observed_bucket,\n   case when cs.coffee_id=target.id then 3\n        when lower(btrim(c.roaster))=lower(btrim(target.roaster))\n          and lower(btrim(c.name))=lower(btrim(target.name))\n          and nullif(btrim(c.release_label),'') is not null\n          and nullif(btrim(target.release_label),'') is not null\n          and c.release_label<>target.release_label then 4\n        when nullif(btrim(c.roast_level),'')=nullif(btrim(target.roast_level),'')\n          and (\n            (nullif(btrim(c.origin),'') is not null and lower(btrim(c.origin))=lower(btrim(target.origin)))\n            or\n            (nullif(btrim(c.process),'') is not null and lower(btrim(c.process))=lower(btrim(target.process)))\n          ) then 6\n        else 99 end as tier\n  from public.community_shots cs\n  join public.coffees c on c.id=cs.coffee_id\n  join private.contribution_links cl on cl.community_shot_id=cs.id\n  join private.contributors contributor on contributor.id=cl.contributor_id\n  left join public.shots s on s.id=cl.shot_id and s.owner_id=contributor.owner_id\n      and s.style=cs.style and s.personal_family_id is not null\n  left join public.personal_recipe_families pf on pf.id=s.personal_family_id\n      and pf.owner_id=s.owner_id and pf.library_entry_id=s.library_entry_id\n      and pf.style=s.style\n  where cs.style=p_style and cs.quality_state='eligible' and c.verification_state='verified'\n    and c.merged_into_id is null and cs.ratio between 0.5 and 8 and cs.time_s between 1 and 180\n    -- A user's own Community projection must never reinforce their personal\n    -- evidence as if it came from another independent contributor.\n    and contributor.owner_id is distinct from me\n ), member_groups as (\n  select tier,coffee_id,contributor_id,ratio,time_s,\n    confirmed_personal_family_id is not null as confirmed,\n    case when confirmed_personal_family_id is not null\n      then 'family:'||confirmed_personal_family_id::text\n      else 'observation:'||observed_bucket::text end as member_group\n  from matching where tier in (3,4,6)\n ), member_centers as (\n  -- Preserve a real person's repeatedly successful family even if its shots\n  -- straddle two arbitrary 0.25 bucket edges.\n  select tier,coffee_id,contributor_id,member_group,\n    bool_or(confirmed) as personally_confirmed,\n    count(*)::integer as shot_count,\n    percentile_cont(0.5) within group(order by ratio)::numeric as ratio_center,\n    percentile_cont(0.5) within group(order by time_s)::numeric as time_center\n  from member_groups\n  group by tier,coffee_id,contributor_id,member_group\n ), member_buckets as (\n  -- One observation per independent person per estimated Community ratio\n  -- region; multiple shots or personal families from one member cannot\n  -- multiply that person's influence.\n  select tier,coffee_id,contributor_id,\n    floor(ratio_center/0.25)::integer as ratio_group,\n    sum(shot_count)::integer as shot_count,\n    count(*) filter(where personally_confirmed)::integer as confirmed_family_count,\n    percentile_cont(0.5) within group(order by ratio_center)::numeric as ratio_center,\n    percentile_cont(0.5) within group(order by time_center)::numeric as time_center\n  from member_centers\n  group by tier,coffee_id,contributor_id,floor(ratio_center/0.25)::integer\n ), ranked as (\n  select tier,coffee_id,ratio_group,\n    count(*)::integer as contributor_count,\n    sum(shot_count)::integer as shot_count,\n    sum(confirmed_family_count)::integer as confirmed_personal_family_count,\n    count(*) filter(where confirmed_family_count>0)::integer as confirmed_family_contributors,\n    percentile_cont(0.5) within group(order by ratio_center)::numeric as ratio_center,\n    percentile_cont(0.5) within group(order by time_center)::numeric as time_center\n  from member_buckets\n  group by tier,coffee_id,ratio_group\n )\n select coalesce(jsonb_agg(jsonb_build_object(\n   'tier',case tier when 3 then 'exact' when 4 then 'related_release' else 'similar_coffee' end,\n   'style',p_style,'ratio',round(ratio_center,3),'time_s',round(time_center,2),\n   'shot_count',shot_count,'contributor_count',contributor_count,\n   'confirmed_personal_family_count',confirmed_personal_family_count,\n   'confirmed_family_contributors',confirmed_family_contributors,\n   'distinct_family_basis',case when confirmed_personal_family_count>0\n      then 'confirmed_personal_families_in_observed_ratio_group'\n      else 'ratio_bucket_observed' end,\n   'community_group_identity_verified',false,\n   'source','eligible_verified_community','calibrated_grind',false\n ) order by tier,contributor_count desc,shot_count desc,ratio_center,coffee_id)\n , '[]'::jsonb) into result\n from (select * from ranked order by tier,contributor_count desc,shot_count desc,ratio_center,coffee_id\n limit 30) x;\n return jsonb_build_object('style',p_style,'candidates',result);\nend $function$\n",
+      "source_md5": "085f92a3814dce624e5b9a3759e893ef",
+      "chars": 6171,
+      "full_lines": [
+        1,
+        112
+      ],
+      "security_definer": true,
+      "config": [
+        "search_path=\"\""
+      ],
+      "grants": {
+        "anon": false,
+        "authenticated": true,
+        "service_role": true
+      },
+      "verdict": "Own visible library entry and verified coffee gate, exclude own contributor, 30 aggregate candidates, no direct private identity output"
+    },
+    {
+      "signature": "public.dic_confirm_community_outlier(p_shot_id uuid, p_expected_revision bigint)",
+      "complete_provider_sql": "CREATE OR REPLACE FUNCTION public.dic_confirm_community_outlier(p_shot_id uuid, p_expected_revision bigint)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare u uuid; target uuid; s public.shots; c public.community_shots;\n        reason_code text; disposition text;\nbegin\n u:=private.require_member();\n select * into s from public.shots where id=p_shot_id and owner_id=u;\n if s.id is null or s.revision<>p_expected_revision then\n  return jsonb_build_object('ok',false,'reason','not_found_or_conflict');\n end if;\n select cs.* into c from public.community_shots cs\n  join private.contribution_links l on l.community_shot_id=cs.id\n  where l.shot_id=s.id for update of cs;\n if c.id is null or c.quality_state<>'held' then\n  return jsonb_build_object('ok',false,'reason','no_outlier_confirmation_pending');\n end if;\n select reason into reason_code from private.community_quality_checks\n  where community_shot_id=c.id;\n if reason_code is distinct from 'extreme_outlier' then\n  return jsonb_build_object('ok',false,'reason','no_outlier_confirmation_pending');\n end if;\n update private.community_quality_checks\n   set confirmed_fingerprint=private.dic_community_fingerprint(c),\n       reviewed_at=clock_timestamp()\n   where community_shot_id=c.id;\n disposition:=private.dic_review_community_shot(c.id);\n return jsonb_build_object('ok',disposition='eligible','state',disposition);\nend $function$\n",
+      "source_md5": "0657114255a0375b7f3fc502f780aa54",
+      "chars": 1432,
+      "full_lines": [
+        1,
+        33
+      ],
+      "security_definer": true,
+      "config": [
+        "search_path=\"\""
+      ],
+      "grants": {
+        "anon": false,
+        "authenticated": true,
+        "service_role": true
+      },
+      "verdict": "Own-shot expected-revision gate and row-locked held extreme-outlier re-review; prior #509 withdrawn guard remains separate TESTING"
+    }
+  ],
+  "source_characters": 18635,
+  "numeric_pgss": {
+    "rank": [
+      3201,
+      3280
+    ],
+    "fingerprints": [
+      {
+        "rank": 3201,
+        "queryid": "1418752049375577986",
+        "calls": 3,
+        "total_ms": "0.783",
+        "mean_ms": "0.2611",
+        "rows": 30
+      },
+      {
+        "rank": 3202,
+        "queryid": "6146977585357348073",
+        "calls": 20,
+        "total_ms": "0.782",
+        "mean_ms": "0.0391",
+        "rows": 20
+      },
+      {
+        "rank": 3203,
+        "queryid": "-6653869139971737717",
+        "calls": 1,
+        "total_ms": "0.781",
+        "mean_ms": "0.7807",
+        "rows": 45
+      },
+      {
+        "rank": 3204,
+        "queryid": "6020200488263063549",
+        "calls": 1,
+        "total_ms": "0.780",
+        "mean_ms": "0.7804",
+        "rows": 7
+      },
+      {
+        "rank": 3205,
+        "queryid": "6984605935475824039",
+        "calls": 1,
+        "total_ms": "0.780",
+        "mean_ms": "0.7795",
+        "rows": 0
+      },
+      {
+        "rank": 3206,
+        "queryid": "8290805801310958651",
+        "calls": 2,
+        "total_ms": "0.779",
+        "mean_ms": "0.3893",
+        "rows": 4
+      },
+      {
+        "rank": 3207,
+        "queryid": "-3428788263965769957",
+        "calls": 1,
+        "total_ms": "0.777",
+        "mean_ms": "0.7770",
+        "rows": 0
+      },
+      {
+        "rank": 3208,
+        "queryid": "3926314092808428301",
+        "calls": 1,
+        "total_ms": "0.776",
+        "mean_ms": "0.7758",
+        "rows": 0
+      },
+      {
+        "rank": 3209,
+        "queryid": "-5996612729181537540",
+        "calls": 1,
+        "total_ms": "0.775",
+        "mean_ms": "0.7748",
+        "rows": 11
+      },
+      {
+        "rank": 3210,
+        "queryid": "2329745135407854297",
+        "calls": 1,
+        "total_ms": "0.775",
+        "mean_ms": "0.7745",
+        "rows": 9
+      },
+      {
+        "rank": 3211,
+        "queryid": "-3478814398450847865",
+        "calls": 9,
+        "total_ms": "0.773",
+        "mean_ms": "0.0859",
+        "rows": 9
+      },
+      {
+        "rank": 3212,
+        "queryid": "-1097732075481245335",
+        "calls": 1,
+        "total_ms": "0.773",
+        "mean_ms": "0.7732",
+        "rows": 45
+      },
+      {
+        "rank": 3213,
+        "queryid": "2556650931146470734",
+        "calls": 1,
+        "total_ms": "0.771",
+        "mean_ms": "0.7715",
+        "rows": 1
+      },
+      {
+        "rank": 3214,
+        "queryid": "8960440146814133207",
+        "calls": 7,
+        "total_ms": "0.771",
+        "mean_ms": "0.1102",
+        "rows": 7
+      },
+      {
+        "rank": 3215,
+        "queryid": "8825390332352979528",
+        "calls": 1,
+        "total_ms": "0.771",
+        "mean_ms": "0.7706",
+        "rows": 1
+      },
+      {
+        "rank": 3216,
+        "queryid": "1337313259896224697",
+        "calls": 96,
+        "total_ms": "0.768",
+        "mean_ms": "0.0080",
+        "rows": 0
+      },
+      {
+        "rank": 3217,
+        "queryid": "-8030194380895047254",
+        "calls": 1,
+        "total_ms": "0.767",
+        "mean_ms": "0.7669",
+        "rows": 0
+      },
+      {
+        "rank": 3218,
+        "queryid": "-2791974958675799332",
+        "calls": 1,
+        "total_ms": "0.765",
+        "mean_ms": "0.7648",
+        "rows": 0
+      },
+      {
+        "rank": 3219,
+        "queryid": "-7823589626439854538",
+        "calls": 1,
+        "total_ms": "0.760",
+        "mean_ms": "0.7603",
+        "rows": 46
+      },
+      {
+        "rank": 3220,
+        "queryid": "6803457254667566119",
+        "calls": 1,
+        "total_ms": "0.758",
+        "mean_ms": "0.7575",
+        "rows": 1
+      },
+      {
+        "rank": 3221,
+        "queryid": "-2968001756651489467",
+        "calls": 1,
+        "total_ms": "0.757",
+        "mean_ms": "0.7568",
+        "rows": 4
+      },
+      {
+        "rank": 3222,
+        "queryid": "3847340837486569342",
+        "calls": 1,
+        "total_ms": "0.755",
+        "mean_ms": "0.7549",
+        "rows": 19
+      },
+      {
+        "rank": 3223,
+        "queryid": "-3130317573238748551",
+        "calls": 1,
+        "total_ms": "0.755",
+        "mean_ms": "0.7547",
+        "rows": 1
+      },
+      {
+        "rank": 3224,
+        "queryid": "1738528159467915157",
+        "calls": 1,
+        "total_ms": "0.753",
+        "mean_ms": "0.7526",
+        "rows": 1
+      },
+      {
+        "rank": 3225,
+        "queryid": "-7006372605228840690",
+        "calls": 2,
+        "total_ms": "0.751",
+        "mean_ms": "0.3756",
+        "rows": 2
+      },
+      {
+        "rank": 3226,
+        "queryid": "-157524743935596885",
+        "calls": 1,
+        "total_ms": "0.750",
+        "mean_ms": "0.7501",
+        "rows": 2
+      },
+      {
+        "rank": 3227,
+        "queryid": "-8906874028674568710",
+        "calls": 1,
+        "total_ms": "0.748",
+        "mean_ms": "0.7477",
+        "rows": 1
+      },
+      {
+        "rank": 3228,
+        "queryid": "7519214470768602984",
+        "calls": 1,
+        "total_ms": "0.747",
+        "mean_ms": "0.7470",
+        "rows": 1
+      },
+      {
+        "rank": 3229,
+        "queryid": "-3127089618297146268",
+        "calls": 2,
+        "total_ms": "0.744",
+        "mean_ms": "0.3721",
+        "rows": 44
+      },
+      {
+        "rank": 3230,
+        "queryid": "-3717810824639423396",
+        "calls": 2,
+        "total_ms": "0.744",
+        "mean_ms": "0.3721",
+        "rows": 2
+      },
+      {
+        "rank": 3231,
+        "queryid": "-5717312940697327938",
+        "calls": 1,
+        "total_ms": "0.742",
+        "mean_ms": "0.7421",
+        "rows": 35
+      },
+      {
+        "rank": 3232,
+        "queryid": "5646843535314035413",
+        "calls": 8,
+        "total_ms": "0.740",
+        "mean_ms": "0.0925",
+        "rows": 8
+      },
+      {
+        "rank": 3233,
+        "queryid": "1390128700466253869",
+        "calls": 3,
+        "total_ms": "0.739",
+        "mean_ms": "0.2464",
+        "rows": 0
+      },
+      {
+        "rank": 3234,
+        "queryid": "-8765919911223983511",
+        "calls": 1,
+        "total_ms": "0.736",
+        "mean_ms": "0.7358",
+        "rows": 10
+      },
+      {
+        "rank": 3235,
+        "queryid": "8491560574760958763",
+        "calls": 1,
+        "total_ms": "0.732",
+        "mean_ms": "0.7317",
+        "rows": 6
+      },
+      {
+        "rank": 3236,
+        "queryid": "-6153267240414705599",
+        "calls": 1,
+        "total_ms": "0.731",
+        "mean_ms": "0.7308",
+        "rows": 1
+      },
+      {
+        "rank": 3237,
+        "queryid": "9023745809569360992",
+        "calls": 1,
+        "total_ms": "0.731",
+        "mean_ms": "0.7306",
+        "rows": 5
+      },
+      {
+        "rank": 3238,
+        "queryid": "-7545210804077349862",
+        "calls": 1,
+        "total_ms": "0.728",
+        "mean_ms": "0.7276",
+        "rows": 3
+      },
+      {
+        "rank": 3239,
+        "queryid": "4548261792688646722",
+        "calls": 1,
+        "total_ms": "0.726",
+        "mean_ms": "0.7262",
+        "rows": 1
+      },
+      {
+        "rank": 3240,
+        "queryid": "2376999282442178006",
+        "calls": 1,
+        "total_ms": "0.726",
+        "mean_ms": "0.7257",
+        "rows": 11
+      },
+      {
+        "rank": 3241,
+        "queryid": "9115913914885333950",
+        "calls": 1,
+        "total_ms": "0.725",
+        "mean_ms": "0.7255",
+        "rows": 1
+      },
+      {
+        "rank": 3242,
+        "queryid": "3691303778700840644",
+        "calls": 1,
+        "total_ms": "0.724",
+        "mean_ms": "0.7238",
+        "rows": 10
+      },
+      {
+        "rank": 3243,
+        "queryid": "1882564846331666613",
+        "calls": 1,
+        "total_ms": "0.719",
+        "mean_ms": "0.7195",
+        "rows": 0
+      },
+      {
+        "rank": 3244,
+        "queryid": "8730540425913992272",
+        "calls": 1,
+        "total_ms": "0.719",
+        "mean_ms": "0.7190",
+        "rows": 24
+      },
+      {
+        "rank": 3245,
+        "queryid": "-5786033232175789794",
+        "calls": 1,
+        "total_ms": "0.719",
+        "mean_ms": "0.7187",
+        "rows": 0
+      },
+      {
+        "rank": 3246,
+        "queryid": "7991651255016945149",
+        "calls": 1,
+        "total_ms": "0.717",
+        "mean_ms": "0.7166",
+        "rows": 0
+      },
+      {
+        "rank": 3247,
+        "queryid": "-6315891488362318402",
+        "calls": 1,
+        "total_ms": "0.717",
+        "mean_ms": "0.7165",
+        "rows": 4
+      },
+      {
+        "rank": 3248,
+        "queryid": "2946950693292133045",
+        "calls": 1,
+        "total_ms": "0.715",
+        "mean_ms": "0.7154",
+        "rows": 0
+      },
+      {
+        "rank": 3249,
+        "queryid": "5950059713058332150",
+        "calls": 1,
+        "total_ms": "0.712",
+        "mean_ms": "0.7124",
+        "rows": 0
+      },
+      {
+        "rank": 3250,
+        "queryid": "1425231052293401729",
+        "calls": 3,
+        "total_ms": "0.711",
+        "mean_ms": "0.2371",
+        "rows": 3
+      },
+      {
+        "rank": 3251,
+        "queryid": "-536946788791359525",
+        "calls": 2,
+        "total_ms": "0.711",
+        "mean_ms": "0.3556",
+        "rows": 2
+      },
+      {
+        "rank": 3252,
+        "queryid": "-6166648656154955204",
+        "calls": 1,
+        "total_ms": "0.710",
+        "mean_ms": "0.7099",
+        "rows": 1
+      },
+      {
+        "rank": 3253,
+        "queryid": "-2975807307350157061",
+        "calls": 1,
+        "total_ms": "0.707",
+        "mean_ms": "0.7071",
+        "rows": 4
+      },
+      {
+        "rank": 3254,
+        "queryid": "2617564628268264491",
+        "calls": 1,
+        "total_ms": "0.706",
+        "mean_ms": "0.7059",
+        "rows": 0
+      },
+      {
+        "rank": 3255,
+        "queryid": "-7215482576085729271",
+        "calls": 1,
+        "total_ms": "0.706",
+        "mean_ms": "0.7059",
+        "rows": 26
+      },
+      {
+        "rank": 3256,
+        "queryid": "2982464917547260881",
+        "calls": 1,
+        "total_ms": "0.706",
+        "mean_ms": "0.7058",
+        "rows": 1
+      },
+      {
+        "rank": 3257,
+        "queryid": "-4060258349490188055",
+        "calls": 1,
+        "total_ms": "0.705",
+        "mean_ms": "0.7049",
+        "rows": 5
+      },
+      {
+        "rank": 3258,
+        "queryid": "-8188835104903983145",
+        "calls": 1,
+        "total_ms": "0.704",
+        "mean_ms": "0.7039",
+        "rows": 0
+      },
+      {
+        "rank": 3259,
+        "queryid": "-818059822443451701",
+        "calls": 21,
+        "total_ms": "0.702",
+        "mean_ms": "0.0334",
+        "rows": 21
+      },
+      {
+        "rank": 3260,
+        "queryid": "8987028575150696014",
+        "calls": 1,
+        "total_ms": "0.697",
+        "mean_ms": "0.6967",
+        "rows": 1
+      },
+      {
+        "rank": 3261,
+        "queryid": "-6754810481989501191",
+        "calls": 4,
+        "total_ms": "0.697",
+        "mean_ms": "0.1742",
+        "rows": 0
+      },
+      {
+        "rank": 3262,
+        "queryid": "-385537180613115660",
+        "calls": 6,
+        "total_ms": "0.694",
+        "mean_ms": "0.1156",
+        "rows": 0
+      },
+      {
+        "rank": 3263,
+        "queryid": "4351016923251199550",
+        "calls": 1,
+        "total_ms": "0.693",
+        "mean_ms": "0.6929",
+        "rows": 6
+      },
+      {
+        "rank": 3264,
+        "queryid": "2602713611778082979",
+        "calls": 1,
+        "total_ms": "0.692",
+        "mean_ms": "0.6915",
+        "rows": 0
+      },
+      {
+        "rank": 3265,
+        "queryid": "-2484055832294289621",
+        "calls": 1,
+        "total_ms": "0.691",
+        "mean_ms": "0.6910",
+        "rows": 0
+      },
+      {
+        "rank": 3266,
+        "queryid": "2393717796301632590",
+        "calls": 10,
+        "total_ms": "0.690",
+        "mean_ms": "0.0690",
+        "rows": 10
+      },
+      {
+        "rank": 3267,
+        "queryid": "6748597677881731014",
+        "calls": 1,
+        "total_ms": "0.688",
+        "mean_ms": "0.6877",
+        "rows": 1
+      },
+      {
+        "rank": 3268,
+        "queryid": "2892101085410091212",
+        "calls": 1,
+        "total_ms": "0.686",
+        "mean_ms": "0.6861",
+        "rows": 5
+      },
+      {
+        "rank": 3269,
+        "queryid": "7412428002901086667",
+        "calls": 1,
+        "total_ms": "0.686",
+        "mean_ms": "0.6857",
+        "rows": 27
+      },
+      {
+        "rank": 3270,
+        "queryid": "-1844213974722567619",
+        "calls": 1,
+        "total_ms": "0.685",
+        "mean_ms": "0.6852",
+        "rows": 2
+      },
+      {
+        "rank": 3271,
+        "queryid": "4119724801889025478",
+        "calls": 10,
+        "total_ms": "0.684",
+        "mean_ms": "0.0684",
+        "rows": 10
+      },
+      {
+        "rank": 3272,
+        "queryid": "-1317258233865940902",
+        "calls": 1,
+        "total_ms": "0.682",
+        "mean_ms": "0.6816",
+        "rows": 1
+      },
+      {
+        "rank": 3273,
+        "queryid": "2521577924563144233",
+        "calls": 1,
+        "total_ms": "0.681",
+        "mean_ms": "0.6811",
+        "rows": 5
+      },
+      {
+        "rank": 3274,
+        "queryid": "-4821703001001862705",
+        "calls": 5,
+        "total_ms": "0.681",
+        "mean_ms": "0.1362",
+        "rows": 5
+      },
+      {
+        "rank": 3275,
+        "queryid": "1316338182858427641",
+        "calls": 1,
+        "total_ms": "0.680",
+        "mean_ms": "0.6798",
+        "rows": 1
+      },
+      {
+        "rank": 3276,
+        "queryid": "-196876050798439093",
+        "calls": 1,
+        "total_ms": "0.674",
+        "mean_ms": "0.6740",
+        "rows": 45
+      },
+      {
+        "rank": 3277,
+        "queryid": "1571400635509103364",
+        "calls": 1,
+        "total_ms": "0.671",
+        "mean_ms": "0.6712",
+        "rows": 7
+      },
+      {
+        "rank": 3278,
+        "queryid": "-5729245623677063188",
+        "calls": 1,
+        "total_ms": "0.670",
+        "mean_ms": "0.6699",
+        "rows": 0
+      },
+      {
+        "rank": 3279,
+        "queryid": "3399760740321843409",
+        "calls": 1,
+        "total_ms": "0.669",
+        "mean_ms": "0.6693",
+        "rows": 1
+      },
+      {
+        "rank": 3280,
+        "queryid": "1778686207726638030",
+        "calls": 1,
+        "total_ms": "0.668",
+        "mean_ms": "0.6678",
+        "rows": 29
+      }
+    ],
+    "prior_distinct": 3060,
+    "novel": 74,
+    "overlap": 6,
+    "cumulative": 3134,
+    "text_not_read": true
+  },
+  "fix": {
+    "source": "supabase/migrations/20261115124500_dic_source_key_path_case_guard.sql",
+    "test": "supabase/tests/coffee_identity_matching.sql",
+    "prior_live_md5": "07e0ef286246fdae29b9151018296f79",
+    "scope": "Lowercase authority hostname only; preserve HTTP path and query case, historic source rows and ACLs",
+    "status": "TESTING_PENDING_EXACT_SOURCE_CI",
+    "affected_user_records": "UNVERIFIED",
+    "release_isolation": "UNVERIFIED"
+  },
+  "advisory_state": "13 no-policy / 10 signed-in definer / 1 Auth password; 14 foreign-key indexes / 8 unused indexes; advisory only",
+  "full_baseline": "IN_PROGRESS",
+  "unverified": [
+    "Genuine HTTP/Auth with JWT",
+    "live affected rows",
+    "private dashboard-only Auth settings",
+    "remaining SQL/Edge object definitions"
+  ],
+  "next": "Isolated SQL CI exact commit, pgss ranks 3281-3360, remaining provider parity"
+}

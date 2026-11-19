@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R347",
+  "date_utc": "2026-11-18",
+  "preflight": {
+    "development_sha": "915994396ea9e9289919939adc6b27f7d17bfb51",
+    "git_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "verified_immutable_content": true
+  },
+  "main_sha": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+  "release_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5",
+  "provider": {
+    "project_ref": "azviqqejypsefzilgonr",
+    "status": "ACTIVE_HEALTHY",
+    "version": "17.11.0.003",
+    "read_only": true,
+    "verified_coffee_count": 9,
+    "verified_with_merged_id": 0
+  },
+  "objects": [
+    {
+      "object": "public.dic_community_evidence_counts(uuid,text)",
+      "full_source_characters": 694,
+      "md5": "1bddea7e3160c0282bea1d6e74d1fbaf",
+      "verdict": "Counts eligible Community shots only for verification_state verified"
+    },
+    {
+      "object": "private.dic_on_community_coffee_verification()",
+      "full_source_characters": 1065,
+      "md5": "cefee7b991e40185eadbacde89def3aa",
+      "verdict": "Enabled trigger sets nonverified Community shots held and only verified shots pending_quality then re-reviewed"
+    },
+    {
+      "object": "public.coffees.coffees_check1",
+      "constraint_ddl": "CHECK ((verification_state = 'merged'::text) = (merged_into_id IS NOT NULL))",
+      "validated": true,
+      "local": true,
+      "verdict": "verified state implies merged_into_id IS NULL; R346 suspected predicate difference is not a correctness defect"
+    },
+    {
+      "object": "public.coffees.dic_on_community_coffee_verification",
+      "trigger_enabled": "O",
+      "ddl": "AFTER UPDATE OF verification_state, merged_into_id ON coffees ... EXECUTE private.dic_on_community_coffee_verification()"
+    }
+  ],
+  "client_consumer_review": [
+    {
+      "path": "site/cloud/client.js",
+      "branches": "development/backend-foundation AND release/production",
+      "blob_sha": "08e1ac1f2610dca9fad162272c8e3c7ea56566a5",
+      "observation": "16 SDK RPC call expressions, recommendation RPC used, evidence-counts not invoked"
+    },
+    {
+      "path": "site/cloud/main.js",
+      "branch": "release/production",
+      "blob_sha": "28c6f6026d0ff1e6fd6575d3813b76c06a29bb47",
+      "observation": "No direct evidence-count RPC"
+    },
+    {
+      "path": "site/cloud/community.js",
+      "branch": "release/production",
+      "blob_sha": "1388743ee4876b8032de9e7b2d5ad2be4177dcfe",
+      "observation": "No direct evidence-count RPC"
+    }
+  ],
+  "verdict": "RESOLVED_NO_DEFECT; no unnecessary predicate patch. Retain RPC until other clients proven absent.",
+  "first_time_provider_words": 0,
+  "issue267_source_lines": 0,
+  "unverified": [
+    "Other external clients",
+    "Hosted genuine member #96 acceptance",
+    "Console-only settings"
+  ],
+  "source_test_ci_changes": 0,
+  "prod_writes": 0,
+  "new_ci_claims": 0,
+  "release_queue_changed": false,
+  "baseline": "IN_PROGRESS",
+  "next": "Continue to next changed/unreviewed provider definition; check other consumers only with real evidence, preserve #96 hosted Auth and console-only UNVERIFIED."
+}

@@ -1,0 +1,2639 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch": "QA11B-P436-WORKFLOW-RECONCILIATION",
+  "source": {
+    "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "pinned_tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+    "pinned_index": 436,
+    "pinned_path": "tests/workflow-reconciliation.test.mjs",
+    "pinned_blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+    "pinned_lines": 59,
+    "observed_live_commit": "098783d93b13140b9447cca51a716bed11595a94",
+    "live_tree_sha": "5116cf3b8e01682b628addef48da76373cc5d70a",
+    "live_blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+    "live_lines": 73,
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "frozen_same_blob_as_pinned": true,
+    "frozen_credit": 0
+  },
+  "review_scope": "DISJOINT P436 pinned 59 previously uncredited original executable lines + actual live 73 physical lines, including 52 exact equal literal counterparts and 21 separate changed/new original live lines. Old 7 literal lines lack exact live counterparts. Separate F215/P048 and older receipts untouched; current-code denominator not reset.",
+  "method": "Directly read every pinned and live original line. For each substantive physical position, individual manually written line-specific behavioral, quality, risk semantic reasoning; LCS only identifies exact literal source-counterpart mapping after independent reading and never manufactures semantic coverage. Reused reasoning only for 52 identical source literal spans, all 73 actual live physical positions fetched and checked. Historical status never treated as active authority.",
+  "pinned_per_line": [
+    {
+      "line": 1,
+      "source_text": "import test from 'node:test';",
+      "classification": "import",
+      "behavior": "Uses native Node test API",
+      "quality": "Standard isolated test harness",
+      "bug_security_privacy_performance_risk": "No credential or app execution by importing test",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 1,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 2,
+      "source_text": "import assert from 'node:assert/strict';",
+      "classification": "import",
+      "behavior": "Uses strict assert predicates",
+      "quality": "Explicit error failures",
+      "bug_security_privacy_performance_risk": "None on import",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 2,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 3,
+      "source_text": "import {readFileSync} from 'node:fs';",
+      "classification": "import",
+      "behavior": "Reads repository fixtures",
+      "quality": "Module-local file access",
+      "bug_security_privacy_performance_risk": "Safe here; fixture path from repository values deserves review",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 3,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 4,
+      "source_text": "import {createHash} from 'node:crypto';",
+      "classification": "import",
+      "behavior": "Uses SHA-1 for Git blob identity",
+      "quality": "Git GitObject SHA-1 rather than security password hashing",
+      "bug_security_privacy_performance_risk": "Cryptographic collision limitations inherit Git SHA-1; exact blob comparison only",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 4,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 5,
+      "source_text": "const text=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');",
+      "classification": "helper",
+      "behavior": "Defines module-relative UTF-8 fixture reader",
+      "quality": "Reusable stable resolution",
+      "bug_security_privacy_performance_risk": "No arbitrary member input; path composition would need sanitization if exposed",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 5,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 6,
+      "source_text": "const json=p=>JSON.parse(text(p));",
+      "classification": "helper",
+      "behavior": "Parses fixture JSON",
+      "quality": "Simple checked-in data parser",
+      "bug_security_privacy_performance_risk": "Malformed fixture throws, appropriate fail closed",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 6,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 7,
+      "source_text": "const matrix=json('docs/APPROVAL_COVERAGE_MATRIX.json');",
+      "classification": "fixture",
+      "behavior": "Loads current approval matrix",
+      "quality": "Ties tests to current checked-out matrix",
+      "bug_security_privacy_performance_risk": "Static equality not external owner reapproval",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 7,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 8,
+      "source_text": "const manifest=json('docs/audits/2026-10-23-archive-manifest.json');",
+      "classification": "fixture",
+      "behavior": "Loads original historical archive manifest",
+      "quality": "Protects frozen evidence",
+      "bug_security_privacy_performance_risk": "Archive manifest itself must be authentic",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 8,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 9,
+      "source_text": "const old=json(matrix.historical_snapshot);",
+      "classification": "fixture",
+      "behavior": "Loads immutable historical matrix",
+      "quality": "Scopes comparison to prior record",
+      "bug_security_privacy_performance_risk": "Historical snapshot should not override later supersessions",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 9,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 10,
+      "source_text": "const projection=m=>m.contracts.map(({id,decision_key,assertions})=>({id,decision_key,assertions}));",
+      "classification": "helper",
+      "behavior": "Projects each contract to decision and assertion fields",
+      "quality": "Reduces comparison to intended stable keys",
+      "bug_security_privacy_performance_risk": "Other contract fields deliberately out of this comparison",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 10,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 11,
+      "source_text": "test('workflow cleanup preserves exact historical blobs, not paraphrased evidence',()=>{",
+      "classification": "test",
+      "behavior": "Opens historical blob integrity test",
+      "quality": "Preserves archived originals",
+      "bug_security_privacy_performance_risk": "Metadata hash correctness not human historical review",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 12,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 12,
+      "source_text": " for(const [name,sha] of Object.entries(manifest.blobs)){",
+      "classification": "loop",
+      "behavior": "Iterates archived manifest file SHA pairs",
+      "quality": "Checks every listed artifact, not unlisted files",
+      "bug_security_privacy_performance_risk": "Manifest completeness is separate unverified property",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 13,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 13,
+      "source_text": "  const bytes=readFileSync(new URL('../'+manifest.directory+'/'+name,import.meta.url));",
+      "classification": "read",
+      "behavior": "Reads binary bytes from original archive directory",
+      "quality": "No UTF-8 transformation",
+      "bug_security_privacy_performance_risk": "Untrusted manifest path traversal not in scope of checked-in files",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 14,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 14,
+      "source_text": "  const actual=createHash('sha1').update(Buffer.concat([Buffer.from('blob '+bytes.length),Buffer.from([0])])).update(bytes).digest('hex');",
+      "classification": "hash",
+      "behavior": "Computes canonical Git blob SHA-1 via blob-size-null prefix",
+      "quality": "Correct Git object serialization",
+      "bug_security_privacy_performance_risk": "SHA-1 is identity, not modern collision-resistant signature",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 15,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 15,
+      "source_text": "  assert.equal(actual,sha,name+' must retain original Git blob');",
+      "classification": "assertion",
+      "behavior": "Requires archived source bytes hash equal saved SHA",
+      "quality": "Detects accidental evidence modifications",
+      "bug_security_privacy_performance_risk": "Does not prove external provenance if manifest compromised",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 16,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 16,
+      "source_text": " }",
+      "classification": "structure",
+      "behavior": "Closes archive iteration",
+      "quality": "Completes every declared entry check",
+      "bug_security_privacy_performance_risk": "No separate risk",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 17,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 17,
+      "source_text": "});",
+      "classification": "structure",
+      "behavior": "Closes archived blob test",
+      "quality": "Checks group boundary",
+      "bug_security_privacy_performance_risk": "No separate risk",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 18,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 18,
+      "source_text": "test('reconciliation retains every classified owner key and source assertion',()=>{",
+      "classification": "test",
+      "behavior": "Opens owner decision assertion retention test",
+      "quality": "Prevents losing original keys",
+      "bug_security_privacy_performance_risk": "Later approved supersessions require narrowly scoped exceptions",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 19,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 19,
+      "source_text": " for(const key of old.owner_decision_key_inventory)assert.ok(matrix.owner_decision_key_inventory.includes(key),'missing historical owner decision '+key);",
+      "classification": "loop/assertion",
+      "behavior": "Requires every historical owner decision key in current inventory",
+      "quality": "Detects key removal",
+      "bug_security_privacy_performance_risk": "Does not prove all new keys are valid",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 20,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 20,
+      "source_text": " assert.deepEqual(matrix.owner_decision_key_inventory,[...matrix.owner_decision_key_inventory].sort(),'current inventory remains sorted');",
+      "classification": "assertion",
+      "behavior": "Requires current inventory alphabetical order",
+      "quality": "Deterministic diff friendly",
+      "bug_security_privacy_performance_risk": "No uniqueness guarantee in pinned version; live adds it",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 21,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 21,
+      "source_text": " // Historical contracts remain exact. Later approved implementations may",
+      "classification": "comment",
+      "behavior": "Explains archived contracts retained exactly with later coverage",
+      "quality": "Clarifies historical versus active",
+      "bug_security_privacy_performance_risk": "Old wording superseded by first-coffee rule",
+      "dead_obsolete_or_superseded": "Historical pinned expectation/context superseded only by explicit live first-shot scope; immutable baseline retained",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "status": "NO_LITERAL_COUNTERPART_IN_OTHER_SNAPSHOT",
+        "reason": "Scoped source evolution; preserve separate original semantics"
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "Later live explicit first-shot supersession already supersedes pinned behavior; do not restore obsolete gate",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 22,
+      "source_text": " // add coverage; approval-coverage separately validates every current item.",
+      "classification": "comment",
+      "behavior": "Says approval coverage separately checks current items",
+      "quality": "Identifies test responsibility boundary",
+      "bug_security_privacy_performance_risk": "Must not infer all owner decisions from this file",
+      "dead_obsolete_or_superseded": "Historical pinned expectation/context superseded only by explicit live first-shot scope; immutable baseline retained",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "status": "NO_LITERAL_COUNTERPART_IN_OTHER_SNAPSHOT",
+        "reason": "Scoped source evolution; preserve separate original semantics"
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "Later live explicit first-shot supersession already supersedes pinned behavior; do not restore obsolete gate",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 23,
+      "source_text": " const originalIds=new Set(old.contracts.map(item=>item.id));",
+      "classification": "setup",
+      "behavior": "Collects original archived contract identifiers",
+      "quality": "Defines comparison identity set",
+      "bug_security_privacy_performance_risk": "Pinned includes later-retired first-coffee expansion contract",
+      "dead_obsolete_or_superseded": "Historical pinned expectation/context superseded only by explicit live first-shot scope; immutable baseline retained",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "status": "NO_LITERAL_COUNTERPART_IN_OTHER_SNAPSHOT",
+        "reason": "Scoped source evolution; preserve separate original semantics"
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "Later live explicit first-shot supersession already supersedes pinned behavior; do not restore obsolete gate",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 24,
+      "source_text": " const historical={contracts:matrix.contracts.filter(item=>originalIds.has(item.id))};",
+      "classification": "filter",
+      "behavior": "Selects historical contract IDs from current matrix",
+      "quality": "Preserves prior archive rows",
+      "bug_security_privacy_performance_risk": "One-time style gate since superseded",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 27,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 25,
+      "source_text": " const original=projection(old).map(row=>row.id==='fast_flow_sixth_style_hybrid'?{",
+      "classification": "projection",
+      "behavior": "Starts explicit old row mapping with fast-flow exception",
+      "quality": "Preserves approved delta narrowly",
+      "bug_security_privacy_performance_risk": "Historic exception may hide unwanted changes if too broad",
+      "dead_obsolete_or_superseded": "Historical pinned expectation/context superseded only by explicit live first-shot scope; immutable baseline retained",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "status": "NO_LITERAL_COUNTERPART_IN_OTHER_SNAPSHOT",
+        "reason": "Scoped source evolution; preserve separate original semantics"
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "Later live explicit first-shot supersession already supersedes pinned behavior; do not restore obsolete gate",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 26,
+      "source_text": "  ...row,assertions:row.assertions.map(a=>a.path==='site/cloud/main.js'&&a.contains===\"C.STYLES.filter(style=>style!=='Custom')\"?",
+      "classification": "mapping",
+      "behavior": "Matches one fast-flow legacy assertion text",
+      "quality": "Hardcoded exact source assertion",
+      "bug_security_privacy_performance_risk": "Depends on current UI source to validate actual behavior",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 29,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 27,
+      "source_text": "   {...a,contains:'C.STYLES,suggestion.style'}:a)",
+      "classification": "mapping",
+      "behavior": "Replaces legacy suggestion filter assertion with current equivalent",
+      "quality": "Makes intentional supersession explicit",
+      "bug_security_privacy_performance_risk": "Static assertion not runtime behavioral proof",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 30,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 28,
+      "source_text": " }:row);",
+      "classification": "structure",
+      "behavior": "Closes conditional projection mapping",
+      "quality": "Finishes exception shape",
+      "bug_security_privacy_performance_risk": "No separate risk",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 31,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 29,
+      "source_text": " assert.deepEqual(projection(historical),original);",
+      "classification": "assertion",
+      "behavior": "Compares preserved historical projection to transformed baseline",
+      "quality": "Fails on unexpected historical contract drift",
+      "bug_security_privacy_performance_risk": "Approved supersessions must be reflected consciously",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 32,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 30,
+      "source_text": " for(const key of ['locked_count','open_count','fnv1a32'])assert.equal(matrix.original_baseline[key],old.original_baseline[key]);",
+      "classification": "loop/assertion",
+      "behavior": "Checks original baseline counts and FNV hash metadata",
+      "quality": "Protects baseline declared metrics",
+      "bug_security_privacy_performance_risk": "FNV is noncryptographic; not content authenticity proof",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 33,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 31,
+      "source_text": " assert.equal(historical.contracts.length,15);",
+      "classification": "assertion",
+      "behavior": "Pinned expects 15 historical contracts",
+      "quality": "Old count superseded by first-coffee contract retirement",
+      "bug_security_privacy_performance_risk": "Active live now expects 14",
+      "dead_obsolete_or_superseded": "Historical pinned expectation/context superseded only by explicit live first-shot scope; immutable baseline retained",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "status": "NO_LITERAL_COUNTERPART_IN_OTHER_SNAPSHOT",
+        "reason": "Scoped source evolution; preserve separate original semantics"
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "Later live explicit first-shot supersession already supersedes pinned behavior; do not restore obsolete gate",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 32,
+      "source_text": " assert.equal(historical.contracts.reduce((sum,item)=>sum+item.assertions.length,0),66);",
+      "classification": "assertion",
+      "behavior": "Pinned expects 66 archived assertion entries",
+      "quality": "Old count superseded by scoped retirement",
+      "bug_security_privacy_performance_risk": "Active live now expects 59",
+      "dead_obsolete_or_superseded": "Historical pinned expectation/context superseded only by explicit live first-shot scope; immutable baseline retained",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "status": "NO_LITERAL_COUNTERPART_IN_OTHER_SNAPSHOT",
+        "reason": "Scoped source evolution; preserve separate original semantics"
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "Later live explicit first-shot supersession already supersedes pinned behavior; do not restore obsolete gate",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 33,
+      "source_text": "});",
+      "classification": "structure",
+      "behavior": "Closes decision-key retention test",
+      "quality": "Groups archival comparisons",
+      "bug_security_privacy_performance_risk": "No separate risk",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 42,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 34,
+      "source_text": "test('production evidence survives compact current view without a new release grant',()=>{",
+      "classification": "test",
+      "behavior": "Opens production evidence-preservation test",
+      "quality": "Checks metadata continuity without owner grant",
+      "bug_security_privacy_performance_risk": "Historical status not present provider readback",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 47,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 35,
+      "source_text": " for(const key of ['exact_source_sha','tested_application_source_sha','netlify_deploy_id'])assert.equal(matrix.production[key],old.production[key]);",
+      "classification": "loop/assertion",
+      "behavior": "Compares three production SHA/deploy fields against archive",
+      "quality": "Guards prior source evidence against accidental rewrite",
+      "bug_security_privacy_performance_risk": "Not proof deployed Netlify state now",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 48,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 36,
+      "source_text": " for(const key of ['id','tested_source_sha','actual_production_git_sha','netlify_deploy_id','claim_consumed_once'])assert.equal(matrix.production.pending_release[key],old.production.pending_release[key]);",
+      "classification": "loop/assertion",
+      "behavior": "Compares pending-release metadata archive fields",
+      "quality": "Ensures original release claims intact",
+      "bug_security_privacy_performance_risk": "Pending release state is historical",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 49,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 37,
+      "source_text": " assert.equal(matrix.production.pending_release.claim_consumed_once,true);",
+      "classification": "assertion",
+      "behavior": "Asserts original one-use grant consumed",
+      "quality": "Prevents rewriting historical grant record",
+      "bug_security_privacy_performance_risk": "No new release authority",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 50,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 38,
+      "source_text": " assert.equal(matrix.deployment_approval_policy.new_release_status,'NO_NEW_RELEASE_AUTHORIZED');",
+      "classification": "assertion",
+      "behavior": "Asserts no new release authorized metadata",
+      "quality": "Enforces no unapproved release in matrix",
+      "bug_security_privacy_performance_risk": "Not a substitute for actual queue/controller guard",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 51,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 39,
+      "source_text": " assert.equal(matrix.contracts.find(x=>x.id==='fast_flow_sixth_style_hybrid').production_migration_version,'20261022163126');",
+      "classification": "assertion",
+      "behavior": "Checks fast-flow SQL migration version",
+      "quality": "Historical migration metadata fixed",
+      "bug_security_privacy_performance_risk": "Does not connect to production database",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 52,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 40,
+      "source_text": " assert.equal(matrix.contracts.find(x=>x.id==='first_coffee_expansion_one_time_style').hosted_sql_applied,true);",
+      "classification": "assertion",
+      "behavior": "Pinned expects first-coffee one-time contract hosted SQL applied",
+      "quality": "Later superseded to first-shot behavior",
+      "bug_security_privacy_performance_risk": "Superseded historical assertion; live checks active new contract",
+      "dead_obsolete_or_superseded": "Historical pinned expectation/context superseded only by explicit live first-shot scope; immutable baseline retained",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "status": "NO_LITERAL_COUNTERPART_IN_OTHER_SNAPSHOT",
+        "reason": "Scoped source evolution; preserve separate original semantics"
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "Later live explicit first-shot supersession already supersedes pinned behavior; do not restore obsolete gate",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 41,
+      "source_text": "});",
+      "classification": "structure",
+      "behavior": "Closes production evidence test",
+      "quality": "No release operations performed",
+      "bug_security_privacy_performance_risk": "No separate risk",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 55,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 42,
+      "source_text": "test('current metadata cannot revive retired credit, device, dose or notification-evidence gates',()=>{",
+      "classification": "test",
+      "behavior": "Opens retired gating policy test",
+      "quality": "Protects prior owner decisions",
+      "bug_security_privacy_performance_risk": "Metadata tests do not verify device or real notifications",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 56,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 43,
+      "source_text": " assert.equal(matrix.netlify_credit_owner_only.assistant_balance_check_required,false);",
+      "classification": "assertion",
+      "behavior": "Credit balance evidence not required from assistant",
+      "quality": "Prevents revoked credit gate",
+      "bug_security_privacy_performance_risk": "No provider credit write",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 57,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 44,
+      "source_text": " assert.equal(matrix.netlify_credit_owner_only.minimum_balance_gate,false);",
+      "classification": "assertion",
+      "behavior": "Minimum balance gate false",
+      "quality": "Preserves owner-only spend approval",
+      "bug_security_privacy_performance_risk": "No price/cost inference",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 58,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 45,
+      "source_text": " assert.equal(matrix.netlify_credit_owner_only.request_credit_evidence,false);",
+      "classification": "assertion",
+      "behavior": "Credit evidence request false",
+      "quality": "Avoids repeated owner burden",
+      "bug_security_privacy_performance_risk": "Historical policy field not new budget permission",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 59,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 46,
+      "source_text": " assert.equal(matrix.netlify_credit_owner_only.netlify_build_credit_gate,false);",
+      "classification": "assertion",
+      "behavior": "Netlify build-credit gate false",
+      "quality": "Prevents invented blocking requirement",
+      "bug_security_privacy_performance_risk": "Does not authorize spend/deploy",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 60,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 47,
+      "source_text": " assert.equal(matrix.single_instruction_approval_policy.readiness_report_is_not_second_approval,true);",
+      "classification": "assertion",
+      "behavior": "Readiness report is not second owner approval",
+      "quality": "Preserves one instruction grant semantics",
+      "bug_security_privacy_performance_risk": "Still needs explicit publish instruction",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 61,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 48,
+      "source_text": " assert.equal(matrix.single_instruction_approval_policy.owner_device_testing,'NOT_REQUIRED');",
+      "classification": "assertion",
+      "behavior": "Owner device test marked optional",
+      "quality": "No physical-device gate",
+      "bug_security_privacy_performance_risk": "Not proof mobile UX works on handset",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 62,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 49,
+      "source_text": " assert.match(matrix.sitewide_direct_save_policy.current_dose_policy,/New shot only.*more than 2 g.*no repeat on historical edit/);",
+      "classification": "assertion",
+      "behavior": "New-shot dose policy warning threshold expression",
+      "quality": "Preserves >2g warning/no repeat on history",
+      "bug_security_privacy_performance_risk": "Regex-based metadata not direct UI behavior",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 63,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 50,
+      "source_text": " assert.ok(matrix.contracts.every(x=>x.device_acceptance.startsWith('RETIRED_NOT_REQUIRED')));",
+      "classification": "assertion",
+      "behavior": "Contract device gates remain retired",
+      "quality": "Avoids reinstating removed device acceptance",
+      "bug_security_privacy_performance_risk": "Still must test relevant browser flows when changed",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 64,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 51,
+      "source_text": " assert.ok(matrix.active_gap_flags.some(x=>x.id==='multi_worker_release_guard'&&x.issue===27));",
+      "classification": "assertion",
+      "behavior": "Multi-worker release guard gap references #27",
+      "quality": "Tracks unresolved operational risk",
+      "bug_security_privacy_performance_risk": "Cannot claim #27 fixed",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 65,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 52,
+      "source_text": " const delivery=matrix.active_gap_flags.find(x=>x.id==='backup_watchdog_delivery_channels');",
+      "classification": "setup",
+      "behavior": "Finds backup alert-delivery status entry",
+      "quality": "Keeps proof history accessible",
+      "bug_security_privacy_performance_risk": "Missing flag would throw before assertion",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 66,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 53,
+      "source_text": " assert.equal(delivery.issue,28);",
+      "classification": "assertion",
+      "behavior": "Backup delivery gap belongs to Issue 28",
+      "quality": "Correct owner scope",
+      "bug_security_privacy_performance_risk": "Not scheduled artifact acceptance",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 67,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 54,
+      "source_text": " assert.equal(delivery.status,'METADATA_DISCREPANCY_NATURAL_ALERT_DELIVERY_UNVERIFIED');",
+      "classification": "assertion",
+      "behavior": "Metadata says natural alert not fully verified",
+      "quality": "Avoids claiming real channel acceptance",
+      "bug_security_privacy_performance_risk": "May be stale; requires separate owner proof to supersede",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 68,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 55,
+      "source_text": " assert.equal(delivery.owner_global_notifications_enabled,'ACCEPTED_PREVIOUS_PROOF');",
+      "classification": "assertion",
+      "behavior": "Existing global notifications proof accepted",
+      "quality": "Avoids duplicate owner requests",
+      "bug_security_privacy_performance_risk": "Source is metadata, not fresh send receipt",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 69,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 56,
+      "source_text": " assert.equal(delivery.disabled_delivery_proven,false);",
+      "classification": "assertion",
+      "behavior": "Disabled delivery is not proven",
+      "quality": "Prevents speculative failure claim",
+      "bug_security_privacy_performance_risk": "No suppression needed",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 70,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 57,
+      "source_text": " assert.equal(delivery.request_owner_reconfirmation,false);",
+      "classification": "assertion",
+      "behavior": "No owner re-confirmation required",
+      "quality": "Respects prior owner evidence",
+      "bug_security_privacy_performance_risk": "Do not generate alerts without changed problem",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 71,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 58,
+      "source_text": " assert.equal(matrix.private_hide_shot_retirement_deferral.candidate_migration_applied,false);",
+      "classification": "assertion",
+      "behavior": "Hide Shot candidate migration not applied",
+      "quality": "Preserves explicitly deferred mutation",
+      "bug_security_privacy_performance_risk": "No authorization for private SQL change",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 72,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 59,
+      "source_text": "});",
+      "classification": "structure",
+      "behavior": "Closes retired-gate test",
+      "quality": "Concludes source-only assertions",
+      "bug_security_privacy_performance_risk": "No separate risk",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "1685d5515b5f2563796ca3f5cde613e86838c725",
+        "line": 73,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    }
+  ],
+  "live_per_line": [
+    {
+      "line": 1,
+      "source_text": "import test from 'node:test';",
+      "classification": "import",
+      "behavior": "Uses native Node test API",
+      "quality": "Standard isolated test harness",
+      "bug_security_privacy_performance_risk": "No credential or app execution by importing test",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 1,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 2,
+      "source_text": "import assert from 'node:assert/strict';",
+      "classification": "import",
+      "behavior": "Uses strict assert predicates",
+      "quality": "Explicit error failures",
+      "bug_security_privacy_performance_risk": "None on import",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 2,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 3,
+      "source_text": "import {readFileSync} from 'node:fs';",
+      "classification": "import",
+      "behavior": "Reads repository fixtures",
+      "quality": "Module-local file access",
+      "bug_security_privacy_performance_risk": "Safe here; fixture path from repository values deserves review",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 3,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 4,
+      "source_text": "import {createHash} from 'node:crypto';",
+      "classification": "import",
+      "behavior": "Uses SHA-1 for Git blob identity",
+      "quality": "Git GitObject SHA-1 rather than security password hashing",
+      "bug_security_privacy_performance_risk": "Cryptographic collision limitations inherit Git SHA-1; exact blob comparison only",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 4,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 5,
+      "source_text": "const text=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');",
+      "classification": "helper",
+      "behavior": "Defines module-relative UTF-8 fixture reader",
+      "quality": "Reusable stable resolution",
+      "bug_security_privacy_performance_risk": "No arbitrary member input; path composition would need sanitization if exposed",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 5,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 6,
+      "source_text": "const json=p=>JSON.parse(text(p));",
+      "classification": "helper",
+      "behavior": "Parses fixture JSON",
+      "quality": "Simple checked-in data parser",
+      "bug_security_privacy_performance_risk": "Malformed fixture throws, appropriate fail closed",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 6,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 7,
+      "source_text": "const matrix=json('docs/APPROVAL_COVERAGE_MATRIX.json');",
+      "classification": "fixture",
+      "behavior": "Loads current approval matrix",
+      "quality": "Ties tests to current checked-out matrix",
+      "bug_security_privacy_performance_risk": "Static equality not external owner reapproval",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 7,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 8,
+      "source_text": "const manifest=json('docs/audits/2026-10-23-archive-manifest.json');",
+      "classification": "fixture",
+      "behavior": "Loads original historical archive manifest",
+      "quality": "Protects frozen evidence",
+      "bug_security_privacy_performance_risk": "Archive manifest itself must be authentic",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 8,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 9,
+      "source_text": "const old=json(matrix.historical_snapshot);",
+      "classification": "fixture",
+      "behavior": "Loads immutable historical matrix",
+      "quality": "Scopes comparison to prior record",
+      "bug_security_privacy_performance_risk": "Historical snapshot should not override later supersessions",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 9,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 10,
+      "source_text": "const projection=m=>m.contracts.map(({id,decision_key,assertions})=>({id,decision_key,assertions}));",
+      "classification": "helper",
+      "behavior": "Projects each contract to decision and assertion fields",
+      "quality": "Reduces comparison to intended stable keys",
+      "bug_security_privacy_performance_risk": "Other contract fields deliberately out of this comparison",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 10,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 11,
+      "source_text": "const uniqueOwnerKeys=keys=>new Set(keys).size===keys.length;",
+      "classification": "helper",
+      "behavior": "Checks owner decision key inventory has no duplicate values",
+      "quality": "New focused negative property guard",
+      "bug_security_privacy_performance_risk": "Set uniqueness alone does not validate semantic key correctness",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "status": "NO_LITERAL_COUNTERPART_IN_OTHER_SNAPSHOT",
+        "reason": "Scoped source evolution; preserve separate original semantics"
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 12,
+      "source_text": "test('workflow cleanup preserves exact historical blobs, not paraphrased evidence',()=>{",
+      "classification": "test",
+      "behavior": "Opens historical blob integrity test",
+      "quality": "Preserves archived originals",
+      "bug_security_privacy_performance_risk": "Metadata hash correctness not human historical review",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 11,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 13,
+      "source_text": " for(const [name,sha] of Object.entries(manifest.blobs)){",
+      "classification": "loop",
+      "behavior": "Iterates archived manifest file SHA pairs",
+      "quality": "Checks every listed artifact, not unlisted files",
+      "bug_security_privacy_performance_risk": "Manifest completeness is separate unverified property",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 12,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 14,
+      "source_text": "  const bytes=readFileSync(new URL('../'+manifest.directory+'/'+name,import.meta.url));",
+      "classification": "read",
+      "behavior": "Reads binary bytes from original archive directory",
+      "quality": "No UTF-8 transformation",
+      "bug_security_privacy_performance_risk": "Untrusted manifest path traversal not in scope of checked-in files",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 13,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 15,
+      "source_text": "  const actual=createHash('sha1').update(Buffer.concat([Buffer.from('blob '+bytes.length),Buffer.from([0])])).update(bytes).digest('hex');",
+      "classification": "hash",
+      "behavior": "Computes canonical Git blob SHA-1 via blob-size-null prefix",
+      "quality": "Correct Git object serialization",
+      "bug_security_privacy_performance_risk": "SHA-1 is identity, not modern collision-resistant signature",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 14,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 16,
+      "source_text": "  assert.equal(actual,sha,name+' must retain original Git blob');",
+      "classification": "assertion",
+      "behavior": "Requires archived source bytes hash equal saved SHA",
+      "quality": "Detects accidental evidence modifications",
+      "bug_security_privacy_performance_risk": "Does not prove external provenance if manifest compromised",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 15,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 17,
+      "source_text": " }",
+      "classification": "structure",
+      "behavior": "Closes archive iteration",
+      "quality": "Completes every declared entry check",
+      "bug_security_privacy_performance_risk": "No separate risk",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 16,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 18,
+      "source_text": "});",
+      "classification": "structure",
+      "behavior": "Closes archived blob test",
+      "quality": "Checks group boundary",
+      "bug_security_privacy_performance_risk": "No separate risk",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 17,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 19,
+      "source_text": "test('reconciliation retains every classified owner key and source assertion',()=>{",
+      "classification": "test",
+      "behavior": "Opens owner decision assertion retention test",
+      "quality": "Prevents losing original keys",
+      "bug_security_privacy_performance_risk": "Later approved supersessions require narrowly scoped exceptions",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 18,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 20,
+      "source_text": " for(const key of old.owner_decision_key_inventory)assert.ok(matrix.owner_decision_key_inventory.includes(key),'missing historical owner decision '+key);",
+      "classification": "loop/assertion",
+      "behavior": "Requires every historical owner decision key in current inventory",
+      "quality": "Detects key removal",
+      "bug_security_privacy_performance_risk": "Does not prove all new keys are valid",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 19,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 21,
+      "source_text": " assert.deepEqual(matrix.owner_decision_key_inventory,[...matrix.owner_decision_key_inventory].sort(),'current inventory remains sorted');",
+      "classification": "assertion",
+      "behavior": "Requires current inventory alphabetical order",
+      "quality": "Deterministic diff friendly",
+      "bug_security_privacy_performance_risk": "No uniqueness guarantee in pinned version; live adds it",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 20,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 22,
+      "source_text": " assert.ok(uniqueOwnerKeys(matrix.owner_decision_key_inventory),'current inventory must not duplicate owner decision keys');",
+      "classification": "assertion",
+      "behavior": "Asserts uniqueness of all present owner decision keys",
+      "quality": "Closes old duplicate-inventory blind spot",
+      "bug_security_privacy_performance_risk": "Can still preserve unwanted but unique keys",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "status": "NO_LITERAL_COUNTERPART_IN_OTHER_SNAPSHOT",
+        "reason": "Scoped source evolution; preserve separate original semantics"
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 23,
+      "source_text": " // Preserve unchanged archived contracts. The owner superseded only the",
+      "classification": "comment",
+      "behavior": "States historical archived contracts retained only if unchanged",
+      "quality": "Context for scoped supersession",
+      "bug_security_privacy_performance_risk": "Comment not executable",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "status": "NO_LITERAL_COUNTERPART_IN_OTHER_SNAPSHOT",
+        "reason": "Scoped source evolution; preserve separate original semantics"
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 24,
+      "source_text": " // old first-expansion once-only UI gate, retaining its historical snapshot.",
+      "classification": "comment",
+      "behavior": "Explains original first-coffee once-only UI gate retired",
+      "quality": "Avoids resurrecting old constraint",
+      "bug_security_privacy_performance_risk": "Requires current owner Locked record crosscheck",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "status": "NO_LITERAL_COUNTERPART_IN_OTHER_SNAPSHOT",
+        "reason": "Scoped source evolution; preserve separate original semantics"
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 25,
+      "source_text": " const retiredId='first_coffee_expansion_one_time_style';",
+      "classification": "constant",
+      "behavior": "Names retired first_coffee_expansion_one_time_style contract",
+      "quality": "Explicit exception identity",
+      "bug_security_privacy_performance_risk": "Hardcoded key changes require careful review",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "status": "NO_LITERAL_COUNTERPART_IN_OTHER_SNAPSHOT",
+        "reason": "Scoped source evolution; preserve separate original semantics"
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 26,
+      "source_text": " const originalIds=new Set(old.contracts.map(item=>item.id).filter(id=>id!==retiredId));",
+      "classification": "filter",
+      "behavior": "Omits approved retired contract from original IDs",
+      "quality": "Prevents obsolete historical assertion gate",
+      "bug_security_privacy_performance_risk": "Must preserve immutable archive itself",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "status": "NO_LITERAL_COUNTERPART_IN_OTHER_SNAPSHOT",
+        "reason": "Scoped source evolution; preserve separate original semantics"
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 27,
+      "source_text": " const historical={contracts:matrix.contracts.filter(item=>originalIds.has(item.id))};",
+      "classification": "filter",
+      "behavior": "Selects historical contract IDs from current matrix",
+      "quality": "Preserves prior archive rows",
+      "bug_security_privacy_performance_risk": "One-time style gate since superseded",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 24,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 28,
+      "source_text": " const original=projection(old).filter(row=>row.id!==retiredId).map(row=>row.id==='fast_flow_sixth_style_hybrid'?{",
+      "classification": "projection",
+      "behavior": "Filters retired row then applies fast-flow mapping exception",
+      "quality": "Keeps original source separate from active supersession",
+      "bug_security_privacy_performance_risk": "Unexpected future exceptions not automatically covered",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "status": "NO_LITERAL_COUNTERPART_IN_OTHER_SNAPSHOT",
+        "reason": "Scoped source evolution; preserve separate original semantics"
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 29,
+      "source_text": "  ...row,assertions:row.assertions.map(a=>a.path==='site/cloud/main.js'&&a.contains===\"C.STYLES.filter(style=>style!=='Custom')\"?",
+      "classification": "mapping",
+      "behavior": "Matches one fast-flow legacy assertion text",
+      "quality": "Hardcoded exact source assertion",
+      "bug_security_privacy_performance_risk": "Depends on current UI source to validate actual behavior",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 26,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 30,
+      "source_text": "   {...a,contains:'C.STYLES,suggestion.style'}:a)",
+      "classification": "mapping",
+      "behavior": "Replaces legacy suggestion filter assertion with current equivalent",
+      "quality": "Makes intentional supersession explicit",
+      "bug_security_privacy_performance_risk": "Static assertion not runtime behavioral proof",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 27,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 31,
+      "source_text": " }:row);",
+      "classification": "structure",
+      "behavior": "Closes conditional projection mapping",
+      "quality": "Finishes exception shape",
+      "bug_security_privacy_performance_risk": "No separate risk",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 28,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 32,
+      "source_text": " assert.deepEqual(projection(historical),original);",
+      "classification": "assertion",
+      "behavior": "Compares preserved historical projection to transformed baseline",
+      "quality": "Fails on unexpected historical contract drift",
+      "bug_security_privacy_performance_risk": "Approved supersessions must be reflected consciously",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 29,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 33,
+      "source_text": " for(const key of ['locked_count','open_count','fnv1a32'])assert.equal(matrix.original_baseline[key],old.original_baseline[key]);",
+      "classification": "loop/assertion",
+      "behavior": "Checks original baseline counts and FNV hash metadata",
+      "quality": "Protects baseline declared metrics",
+      "bug_security_privacy_performance_risk": "FNV is noncryptographic; not content authenticity proof",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 30,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 34,
+      "source_text": " assert.equal(historical.contracts.length,14);",
+      "classification": "assertion",
+      "behavior": "Active archived-contract count is 14",
+      "quality": "Reflects retired once-only gate",
+      "bug_security_privacy_performance_risk": "Exact count may require update when owner adds contracts",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "status": "NO_LITERAL_COUNTERPART_IN_OTHER_SNAPSHOT",
+        "reason": "Scoped source evolution; preserve separate original semantics"
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 35,
+      "source_text": " assert.equal(historical.contracts.reduce((sum,item)=>sum+item.assertions.length,0),59);",
+      "classification": "assertion",
+      "behavior": "Active archived assertion total is 59",
+      "quality": "Captures expected post-retirement scope",
+      "bug_security_privacy_performance_risk": "Count does not replace per-assertion contract checks",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "status": "NO_LITERAL_COUNTERPART_IN_OTHER_SNAPSHOT",
+        "reason": "Scoped source evolution; preserve separate original semantics"
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 36,
+      "source_text": " const next=matrix.contracts.find(item=>item.id==='first_coffee_expansion_until_first_shot');",
+      "classification": "setup",
+      "behavior": "Finds replacement first-coffee-until-first-shot contract",
+      "quality": "Targets current Locked behavior",
+      "bug_security_privacy_performance_risk": "Missing contract throws on later assert",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "status": "NO_LITERAL_COUNTERPART_IN_OTHER_SNAPSHOT",
+        "reason": "Scoped source evolution; preserve separate original semantics"
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 37,
+      "source_text": " assert.equal(next.decision_key,'current_owner_first_shot_style_until_logged_20261108');",
+      "classification": "assertion",
+      "behavior": "New contract uses owner first-shot style key",
+      "quality": "Binds test to November 8 scoped supersession",
+      "bug_security_privacy_performance_risk": "Current owner authority should be checked separately",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "status": "NO_LITERAL_COUNTERPART_IN_OTHER_SNAPSHOT",
+        "reason": "Scoped source evolution; preserve separate original semantics"
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 38,
+      "source_text": " assert.ok(next.assertions.some(a=>a.path==='site/cloud/main.js'&&a.contains?.includes('const firstStyle=!s.shots.some(')));",
+      "classification": "assertion",
+      "behavior": "Requires current UI source assertion for firstStyle before any logged shot",
+      "quality": "Protects first-shot feature marker",
+      "bug_security_privacy_performance_risk": "String assertion not real UI or database validation",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "status": "NO_LITERAL_COUNTERPART_IN_OTHER_SNAPSHOT",
+        "reason": "Scoped source evolution; preserve separate original semantics"
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 39,
+      "source_text": " assert.equal(old.contracts.find(item=>item.id===retiredId).hosted_sql_applied,false,",
+      "classification": "assertion",
+      "behavior": "Old archived contract records hosted SQL unapplied",
+      "quality": "Avoids rewriting historical status",
+      "bug_security_privacy_performance_risk": "Historical fixture is preserved, not current provider truth",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "status": "NO_LITERAL_COUNTERPART_IN_OTHER_SNAPSHOT",
+        "reason": "Scoped source evolution; preserve separate original semantics"
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 40,
+      "source_text": "  'immutable archive records then-unapplied SQL without rewriting historical status');",
+      "classification": "message",
+      "behavior": "Clarifies immutable archived SQL status not rewritten",
+      "quality": "Documents intentional assertion purpose",
+      "bug_security_privacy_performance_risk": "Message text no functional guarantee",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "status": "NO_LITERAL_COUNTERPART_IN_OTHER_SNAPSHOT",
+        "reason": "Scoped source evolution; preserve separate original semantics"
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 41,
+      "source_text": " assert.equal(next.hosted_sql_applied,true,'active contract preserves later hosted SQL state');",
+      "classification": "assertion",
+      "behavior": "Active replacement records hosted SQL applied",
+      "quality": "Checks metadata supersession",
+      "bug_security_privacy_performance_risk": "Not readback of production SQL",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "status": "NO_LITERAL_COUNTERPART_IN_OTHER_SNAPSHOT",
+        "reason": "Scoped source evolution; preserve separate original semantics"
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 42,
+      "source_text": "});",
+      "classification": "structure",
+      "behavior": "Closes decision-key retention test",
+      "quality": "Groups archival comparisons",
+      "bug_security_privacy_performance_risk": "No separate risk",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 33,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 43,
+      "source_text": "test('owner decision key duplicate negative control',()=>{",
+      "classification": "test",
+      "behavior": "Adds duplicate owner-key negative control",
+      "quality": "Tests new uniqueness guard",
+      "bug_security_privacy_performance_risk": "Synthetic mutation only",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "status": "NO_LITERAL_COUNTERPART_IN_OTHER_SNAPSHOT",
+        "reason": "Scoped source evolution; preserve separate original semantics"
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 44,
+      "source_text": " const keys=matrix.owner_decision_key_inventory;",
+      "classification": "setup",
+      "behavior": "References current owner key list",
+      "quality": "Negative-test input",
+      "bug_security_privacy_performance_risk": "No source mutation",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "status": "NO_LITERAL_COUNTERPART_IN_OTHER_SNAPSHOT",
+        "reason": "Scoped source evolution; preserve separate original semantics"
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 45,
+      "source_text": " assert.equal(uniqueOwnerKeys([...keys,keys.at(-1)]),false);",
+      "classification": "assertion",
+      "behavior": "Appends duplicate last key and expects uniqueness false",
+      "quality": "Checks duplicate rejection",
+      "bug_security_privacy_performance_risk": "Empty inventory would be odd; earlier assertions cover inventory",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "status": "NO_LITERAL_COUNTERPART_IN_OTHER_SNAPSHOT",
+        "reason": "Scoped source evolution; preserve separate original semantics"
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 46,
+      "source_text": "});",
+      "classification": "structure",
+      "behavior": "Closes new duplicate-key test",
+      "quality": "Keeps check isolated",
+      "bug_security_privacy_performance_risk": "No separate risk",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "status": "NO_LITERAL_COUNTERPART_IN_OTHER_SNAPSHOT",
+        "reason": "Scoped source evolution; preserve separate original semantics"
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 47,
+      "source_text": "test('production evidence survives compact current view without a new release grant',()=>{",
+      "classification": "test",
+      "behavior": "Opens production evidence-preservation test",
+      "quality": "Checks metadata continuity without owner grant",
+      "bug_security_privacy_performance_risk": "Historical status not present provider readback",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 34,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 48,
+      "source_text": " for(const key of ['exact_source_sha','tested_application_source_sha','netlify_deploy_id'])assert.equal(matrix.production[key],old.production[key]);",
+      "classification": "loop/assertion",
+      "behavior": "Compares three production SHA/deploy fields against archive",
+      "quality": "Guards prior source evidence against accidental rewrite",
+      "bug_security_privacy_performance_risk": "Not proof deployed Netlify state now",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 35,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 49,
+      "source_text": " for(const key of ['id','tested_source_sha','actual_production_git_sha','netlify_deploy_id','claim_consumed_once'])assert.equal(matrix.production.pending_release[key],old.production.pending_release[key]);",
+      "classification": "loop/assertion",
+      "behavior": "Compares pending-release metadata archive fields",
+      "quality": "Ensures original release claims intact",
+      "bug_security_privacy_performance_risk": "Pending release state is historical",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 36,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 50,
+      "source_text": " assert.equal(matrix.production.pending_release.claim_consumed_once,true);",
+      "classification": "assertion",
+      "behavior": "Asserts original one-use grant consumed",
+      "quality": "Prevents rewriting historical grant record",
+      "bug_security_privacy_performance_risk": "No new release authority",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 37,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 51,
+      "source_text": " assert.equal(matrix.deployment_approval_policy.new_release_status,'NO_NEW_RELEASE_AUTHORIZED');",
+      "classification": "assertion",
+      "behavior": "Asserts no new release authorized metadata",
+      "quality": "Enforces no unapproved release in matrix",
+      "bug_security_privacy_performance_risk": "Not a substitute for actual queue/controller guard",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 38,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 52,
+      "source_text": " assert.equal(matrix.contracts.find(x=>x.id==='fast_flow_sixth_style_hybrid').production_migration_version,'20261022163126');",
+      "classification": "assertion",
+      "behavior": "Checks fast-flow SQL migration version",
+      "quality": "Historical migration metadata fixed",
+      "bug_security_privacy_performance_risk": "Does not connect to production database",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 39,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 53,
+      "source_text": " assert.equal(matrix.contracts.find(x=>x.id==='first_coffee_expansion_until_first_shot').hosted_sql_applied,true);",
+      "classification": "assertion",
+      "behavior": "Active first-shot contract marks hosted SQL applied",
+      "quality": "Replaces pinned obsolete one-time contract assertion",
+      "bug_security_privacy_performance_risk": "No provider readback",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "status": "NO_LITERAL_COUNTERPART_IN_OTHER_SNAPSHOT",
+        "reason": "Scoped source evolution; preserve separate original semantics"
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 54,
+      "source_text": " assert.equal(matrix.contracts.find(x=>x.id==='first_coffee_expansion_until_first_shot').site_published,false);",
+      "classification": "assertion",
+      "behavior": "Current first-shot contract not yet site published",
+      "quality": "Separates source readiness from production",
+      "bug_security_privacy_performance_risk": "Could become stale after a later legitimate publish",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "status": "NO_LITERAL_COUNTERPART_IN_OTHER_SNAPSHOT",
+        "reason": "Scoped source evolution; preserve separate original semantics"
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 55,
+      "source_text": "});",
+      "classification": "structure",
+      "behavior": "Closes production evidence test",
+      "quality": "No release operations performed",
+      "bug_security_privacy_performance_risk": "No separate risk",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 41,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 56,
+      "source_text": "test('current metadata cannot revive retired credit, device, dose or notification-evidence gates',()=>{",
+      "classification": "test",
+      "behavior": "Opens retired gating policy test",
+      "quality": "Protects prior owner decisions",
+      "bug_security_privacy_performance_risk": "Metadata tests do not verify device or real notifications",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 42,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 57,
+      "source_text": " assert.equal(matrix.netlify_credit_owner_only.assistant_balance_check_required,false);",
+      "classification": "assertion",
+      "behavior": "Credit balance evidence not required from assistant",
+      "quality": "Prevents revoked credit gate",
+      "bug_security_privacy_performance_risk": "No provider credit write",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 43,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 58,
+      "source_text": " assert.equal(matrix.netlify_credit_owner_only.minimum_balance_gate,false);",
+      "classification": "assertion",
+      "behavior": "Minimum balance gate false",
+      "quality": "Preserves owner-only spend approval",
+      "bug_security_privacy_performance_risk": "No price/cost inference",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 44,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 59,
+      "source_text": " assert.equal(matrix.netlify_credit_owner_only.request_credit_evidence,false);",
+      "classification": "assertion",
+      "behavior": "Credit evidence request false",
+      "quality": "Avoids repeated owner burden",
+      "bug_security_privacy_performance_risk": "Historical policy field not new budget permission",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 45,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 60,
+      "source_text": " assert.equal(matrix.netlify_credit_owner_only.netlify_build_credit_gate,false);",
+      "classification": "assertion",
+      "behavior": "Netlify build-credit gate false",
+      "quality": "Prevents invented blocking requirement",
+      "bug_security_privacy_performance_risk": "Does not authorize spend/deploy",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 46,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 61,
+      "source_text": " assert.equal(matrix.single_instruction_approval_policy.readiness_report_is_not_second_approval,true);",
+      "classification": "assertion",
+      "behavior": "Readiness report is not second owner approval",
+      "quality": "Preserves one instruction grant semantics",
+      "bug_security_privacy_performance_risk": "Still needs explicit publish instruction",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 47,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 62,
+      "source_text": " assert.equal(matrix.single_instruction_approval_policy.owner_device_testing,'NOT_REQUIRED');",
+      "classification": "assertion",
+      "behavior": "Owner device test marked optional",
+      "quality": "No physical-device gate",
+      "bug_security_privacy_performance_risk": "Not proof mobile UX works on handset",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 48,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 63,
+      "source_text": " assert.match(matrix.sitewide_direct_save_policy.current_dose_policy,/New shot only.*more than 2 g.*no repeat on historical edit/);",
+      "classification": "assertion",
+      "behavior": "New-shot dose policy warning threshold expression",
+      "quality": "Preserves >2g warning/no repeat on history",
+      "bug_security_privacy_performance_risk": "Regex-based metadata not direct UI behavior",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 49,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 64,
+      "source_text": " assert.ok(matrix.contracts.every(x=>x.device_acceptance.startsWith('RETIRED_NOT_REQUIRED')));",
+      "classification": "assertion",
+      "behavior": "Contract device gates remain retired",
+      "quality": "Avoids reinstating removed device acceptance",
+      "bug_security_privacy_performance_risk": "Still must test relevant browser flows when changed",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 50,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 65,
+      "source_text": " assert.ok(matrix.active_gap_flags.some(x=>x.id==='multi_worker_release_guard'&&x.issue===27));",
+      "classification": "assertion",
+      "behavior": "Multi-worker release guard gap references #27",
+      "quality": "Tracks unresolved operational risk",
+      "bug_security_privacy_performance_risk": "Cannot claim #27 fixed",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 51,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 66,
+      "source_text": " const delivery=matrix.active_gap_flags.find(x=>x.id==='backup_watchdog_delivery_channels');",
+      "classification": "setup",
+      "behavior": "Finds backup alert-delivery status entry",
+      "quality": "Keeps proof history accessible",
+      "bug_security_privacy_performance_risk": "Missing flag would throw before assertion",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 52,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 67,
+      "source_text": " assert.equal(delivery.issue,28);",
+      "classification": "assertion",
+      "behavior": "Backup delivery gap belongs to Issue 28",
+      "quality": "Correct owner scope",
+      "bug_security_privacy_performance_risk": "Not scheduled artifact acceptance",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 53,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 68,
+      "source_text": " assert.equal(delivery.status,'METADATA_DISCREPANCY_NATURAL_ALERT_DELIVERY_UNVERIFIED');",
+      "classification": "assertion",
+      "behavior": "Metadata says natural alert not fully verified",
+      "quality": "Avoids claiming real channel acceptance",
+      "bug_security_privacy_performance_risk": "May be stale; requires separate owner proof to supersede",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 54,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 69,
+      "source_text": " assert.equal(delivery.owner_global_notifications_enabled,'ACCEPTED_PREVIOUS_PROOF');",
+      "classification": "assertion",
+      "behavior": "Existing global notifications proof accepted",
+      "quality": "Avoids duplicate owner requests",
+      "bug_security_privacy_performance_risk": "Source is metadata, not fresh send receipt",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 55,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 70,
+      "source_text": " assert.equal(delivery.disabled_delivery_proven,false);",
+      "classification": "assertion",
+      "behavior": "Disabled delivery is not proven",
+      "quality": "Prevents speculative failure claim",
+      "bug_security_privacy_performance_risk": "No suppression needed",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 56,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 71,
+      "source_text": " assert.equal(delivery.request_owner_reconfirmation,false);",
+      "classification": "assertion",
+      "behavior": "No owner re-confirmation required",
+      "quality": "Respects prior owner evidence",
+      "bug_security_privacy_performance_risk": "Do not generate alerts without changed problem",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 57,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 72,
+      "source_text": " assert.equal(matrix.private_hide_shot_retirement_deferral.candidate_migration_applied,false);",
+      "classification": "assertion",
+      "behavior": "Hide Shot candidate migration not applied",
+      "quality": "Preserves explicitly deferred mutation",
+      "bug_security_privacy_performance_risk": "No authorization for private SQL change",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 58,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    },
+    {
+      "line": 73,
+      "source_text": "});",
+      "classification": "structure",
+      "behavior": "Closes retired-gate test",
+      "quality": "Concludes source-only assertions",
+      "bug_security_privacy_performance_risk": "No separate risk",
+      "dead_obsolete_or_superseded": "No verified unused executable line; historical status is not an active product instruction",
+      "redundant_or_duplicate_logic": "No independent duplicate proved; exact literal reused mapping counted once per source track",
+      "exact_counterpart": {
+        "path": "tests/workflow-reconciliation.test.mjs",
+        "blob_sha": "71519507d2de0b46a50ad29ce85f4b139d6f6700",
+        "line": 59,
+        "literal_identical": true
+      },
+      "testability": "Node 22 focused workflow-reconciliation.test.mjs, approved fixture mutations; tests NOT RUN in this documentation-only pass",
+      "improvement_opportunity": "No new fix justified absent failure reproduction",
+      "locked_decision_fit": "Preserve original archive, explicit later first-shot Locked supersession, owner-only release/SQL and no new credit/device/alert gates",
+      "reviewer": "AI direct complete line reading and contextual semantic assessment, not independent human signoff"
+    }
+  ],
+  "findings": [
+    {
+      "id": "ISSUE267-P436-001",
+      "status": "HISTORICAL_SUPERSESSION_REFLECTED_IN_CURRENT",
+      "summary": "Pinned 15-contract/66-assertion once-only first-coffee gate was replaced by live 14/59 archived assertions plus new first-shot contract and uniqueness negative tests. Do not reinstate retired once-only rule or rewrite original snapshot."
+    },
+    {
+      "id": "ISSUE267-P436-002",
+      "status": "STATIC_SOURCE_ASSERTIONS_ONLY",
+      "summary": "Git blob hashes, matrix assertions, and source-string checks do not independently confirm production SQL/Auth/Netlify, native device behavior, or actual owner delivery; no active defect reproduced."
+    }
+  ],
+  "verification": {
+    "all_pinned_literals_reconciled": true,
+    "all_live_literals_reconciled": true,
+    "exact_equal_reused_positions": 52,
+    "live_changed_new_positions": 21,
+    "pinned_no_exact_live_positions": 7,
+    "individual_semantic_entries": 132,
+    "first_pinned": 1,
+    "last_pinned": 59,
+    "first_live": 1,
+    "last_live": 73,
+    "one_source_runtime_test": "NOT_RUN_DOCS_ONLY",
+    "hosted_source_ci": "PENDING",
+    "provider_readback": "NOT_APPLICABLE",
+    "no_prod_app_test_migration_member_edit": true
+  },
+  "completion": "OPEN; preserve all prior receipts/coverage; globally current drift and frozen F215 remain incomplete"
+}

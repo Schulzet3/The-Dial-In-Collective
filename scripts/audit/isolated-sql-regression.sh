@@ -16,6 +16,21 @@ run_sql() { docker exec -i "$DIC_SQL_CONTAINER" psql -X -v ON_ERROR_STOP=1 -U po
 run_sql tests/sql/bootstrap.sql
 for migration in supabase/migrations/*.sql; do
   echo "Applying $migration to isolated PostgreSQL"
+  # R360: test the literal one-shot migration against synthetic stale state
+  # inside a single disconnected dic_ci transaction before normal application.
+  if [[ "$migration" == *20261119120000_dic_reconcile_stale_personal_family_stats.sql ]]; then
+    echo "Running actual family statistics historical reconciliation fixture"
+    cat supabase/tests/family_statistics_historical_reconcile_pre.sql "$migration" \
+      supabase/tests/family_statistics_historical_reconcile_post.sql \
+      | docker exec -i "$DIC_SQL_CONTAINER" psql -X -v ON_ERROR_STOP=1 -U postgres -d dic_ci
+  fi
+  # R361: literal second additive migration corrects count-equal stale ranges.
+  if [[ "$migration" == *20261119122000_dic_reconcile_all_personal_family_derived_stats.sql ]]; then
+    echo "Running complete personal-family derived statistics fixture"
+    cat supabase/tests/family_statistics_historical_reconcile_pre.sql "$migration" \
+      supabase/tests/family_statistics_complete_reconcile_post.sql \
+      | docker exec -i "$DIC_SQL_CONTAINER" psql -X -v ON_ERROR_STOP=1 -U postgres -d dic_ci
+  fi
   run_sql "$migration"
   # Historical suites run at the schema boundary they were written to protect.
   # Later migrations intentionally replace some of those permissions/gates.
@@ -57,5 +72,65 @@ if [[ -f supabase/migrations/20261114195000_dic_member_approval_finish_null_rece
   run_sql supabase/tests/member_approval_finish_null_receipts.sql
 else
   echo "NOT_APPLICABLE: #509 member_approval_finish_null_receipts; migration excluded from tested source"
+fi
+if [[ -f supabase/migrations/20261116151600_dic_pending_canonical_name_response.sql ]]; then
+  echo "Running pending_canonical_name_response"
+  run_sql supabase/tests/pending_canonical_name_response.sql
+else
+  echo "NOT_APPLICABLE: #509 pending_canonical_name_response; migration excluded from source"
+fi
+if [[ -f supabase/migrations/20261116210000_dic_import_additional_credential_keys.sql ]]; then
+  echo "Running import_additional_credential_keys"
+  run_sql supabase/tests/import_additional_credential_keys.sql
+else
+  echo "NOT_APPLICABLE: #509 import_additional_credential_keys; migration excluded from source"
+fi
+if [[ -f supabase/migrations/20261118113500_dic_confirm_coffee_null_name_guard.sql ]]; then
+  echo "Running coffee_confirm_null_name_guard"
+  run_sql supabase/tests/coffee_confirm_null_name_guard.sql
+else
+  echo "NOT_APPLICABLE: #509 coffee_confirm_null_name_guard; migration excluded from tested source"
+fi
+if [[ -f supabase/migrations/20261118114600_dic_first_entry_no_self_alias.sql ]]; then
+  echo "Running coffee_first_entry_no_self_alias"
+  run_sql supabase/tests/coffee_first_entry_no_self_alias.sql
+else
+  echo "NOT_APPLICABLE: #509 coffee_first_entry_no_self_alias; migration excluded from tested source"
+fi
+if [[ -f supabase/migrations/20261118140000_dic_coffee_alias_suggestion_confirm.sql ]]; then
+  echo "Running coffee_historical_alias_suggestion_confirm"
+  run_sql supabase/tests/coffee_historical_alias_suggestion_confirm.sql
+else
+  echo "NOT_APPLICABLE: #509 historical alias; migration excluded from tested source"
+fi
+if [[ -f supabase/migrations/20261118164500_dic_remove_legacy_private_hide_shot_handler.sql ]]; then
+  echo "Running legacy_private_hide_shot_retirement"
+  run_sql supabase/tests/legacy_private_hide_shot_retirement.sql
+else
+  echo "NOT_APPLICABLE: #509 legacy internal Hide Shot retirement; migration excluded from tested source"
+fi
+if [[ -f supabase/migrations/20261118180000_dic_recommendation_unique_controls.sql ]]; then
+  echo "Running recommendation_unique_controls"
+  run_sql supabase/tests/recommendation_unique_controls.sql
+else
+  echo "NOT_APPLICABLE: #509 recommendation unique-controls; migration excluded from tested source"
+fi
+if [[ -f supabase/migrations/20261118181500_dic_community_outlier_null_revision_guard.sql ]]; then
+  echo "Running community_outlier_null_revision"
+  run_sql supabase/tests/community_outlier_null_revision.sql
+else
+  echo "NOT_APPLICABLE: #509 outlier NULL revision; migration excluded from tested source"
+fi
+if [[ -f supabase/migrations/20261118214500_dic_admin_edit_normalized_identity_guard.sql ]]; then
+  echo "Running admin_edit_normalized_identity_guard"
+  run_sql supabase/tests/admin_edit_normalized_identity_guard.sql
+else
+  echo "NOT_APPLICABLE: #509 admin normalized identity guard; migration excluded from tested source"
+fi
+if [[ -f supabase/migrations/20261119105000_dic_admin_shot_delete_family_refresh.sql ]]; then
+  echo "Running admin_shot_delete_family_refresh"
+  run_sql supabase/tests/admin_shot_delete_family_refresh.sql
+else
+  echo "NOT_APPLICABLE: #509 Admin shot-family refresh; migration excluded from tested source"
 fi
 echo 'PASS: all checked-in migrations and SQL suites, including staged import/setup, cross-account and source-worker authorization and first-style owner isolation regressions; no hosted connection.'

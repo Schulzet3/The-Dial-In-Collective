@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R351",
+  "date_utc": "2026-11-19",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "75efa8d6e62a34e32b7557d83a66f5a0aa496c9a",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "immutable_fetch_and_git_blob_bytes_match": true
+  },
+  "branches": {
+    "main_sha": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+  },
+  "provider": {
+    "status": "ACTIVE_HEALTHY",
+    "pg_version": "17.11.0.003",
+    "read_only": true
+  },
+  "scope": "Complete live SQL source and cross-provider/source consumer/Locked-contract semantics; not first-time source credit",
+  "complete_sql_semantic_review": [
+    {
+      "signature": "private.dic_capture_first_decaf_method()",
+      "source_md5": "9a47ec8959cf43d08f1d326e4b0bce4f",
+      "source_chars": 1211,
+      "complete_definition": "CREATE OR REPLACE FUNCTION private.dic_capture_first_decaf_method()\n RETURNS trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare decaf boolean; method text; title text;\nbegin\n if new.status<>'approved' or new.canonical_coffee_id is null\n  or old.status='approved' then return new; end if;\n if not exists (select 1 from private.dic_coffee_first_entry first\n  where first.coffee_id=new.canonical_coffee_id and first.first_submission_id=new.id)\n then return new; end if;\n select c.name into title from public.coffees c where c.id=new.canonical_coffee_id;\n decaf := (coalesce(new.proposed_data->>'is_decaf','false')='true'\n   or title ~* '(^|[^[:alnum:]])decaf(feinated)?([^[:alnum:]]|$)')\n   and title !~* '(^|[^[:alnum:]])(half[ -]?caf|semi[ -]?decaf|partially[ -]?decaf)';\n method := nullif(btrim(coalesce(new.proposed_data->>'decaffeination_method','')),'');\n if method not in ('Water Process','Sugar Process','Carbon Dioxide (CO2)') then method:=null; end if;\n update public.coffees c set is_decaf=decaf,\n  decaffeination_method=case when decaf then method else null end\n where c.id=new.canonical_coffee_id and c.decaffeination_method is null;\n return new;\nend;\n$function$\n",
+      "source_range_chars": [
+        1,
+        1211
+      ],
+      "review_verdict": "ACTIVE_FIRST_APPROVED_SUBMISSION_GUARD"
+    },
+    {
+      "signature": "private.dic_capture_recommendation_context()",
+      "source_md5": "962e12faeac2a7b5a671bd837c6c5c41",
+      "source_chars": 1760,
+      "complete_definition": "CREATE OR REPLACE FUNCTION private.dic_capture_recommendation_context()\n RETURNS trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare raw text; p jsonb; controls jsonb; tier text; label text;\n contributors integer; shots integer;\nbegin\n raw:=current_setting('dic.recommendation_context',true);\n if raw is null or length(raw)>800 then return new;end if;\n begin p:=raw::jsonb;exception when others then return new;end;\n if jsonb_typeof(p) is distinct from 'object' then return new;end if;\n controls:=p->'used_controls';\n if jsonb_typeof(controls) is distinct from 'array' or\n    jsonb_array_length(controls) not between 1 and 2 then return new;end if;\n if exists(select 1 from jsonb_array_elements_text(controls) as x(control)\n    where x.control not in ('grind','temperature')) then return new;end if;\n label:=left(coalesce(nullif(btrim(p->>'source_label'),''),'Starting recommendation'),90);\n tier:=case when p->>'community_tier' in ('exact','related_release','similar_coffee')\n     then p->>'community_tier' else null end;\n contributors:=case when (p->>'contributor_count') ~ '^[0-9]{1,6}$'\n     then least(100000,(p->>'contributor_count')::integer) else null end;\n shots:=case when (p->>'shot_count') ~ '^[0-9]{1,6}$'\n     then least(100000,(p->>'shot_count')::integer) else null end;\n if contributors is null or shots is null or contributors<1 or shots<contributors then\n  tier:=null;contributors:=null;shots:=null;\n end if;\n new.recommendation_context:=jsonb_build_object(\n   'kind','member_selected_starting_reference',\n   'source_label',label,'used_controls',controls,\n   'community_tier',tier,'contributor_count',contributors,'shot_count',shots,\n   'source_verified_independently',false);\n return new;\nend $function$\n",
+      "source_range_chars": [
+        1,
+        1760
+      ],
+      "review_verdict": "ACTIVE_RECOMMENDATION_PROVENANCE_TRIGGER_WITH_KNOWN_DEVELOPMENT_ONLY_DUPLICATE_CONTROLS_FIX"
+    },
+    {
+      "signature": "private.dic_claim_first_style_prompt_impl(p_library_entry_id uuid)",
+      "source_md5": "31f06eec62a745bf998b749af71816db",
+      "source_chars": 940,
+      "complete_definition": "CREATE OR REPLACE FUNCTION private.dic_claim_first_style_prompt_impl(p_library_entry_id uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare u uuid:=private.require_member();claimed uuid;\nbegin\n if p_library_entry_id is null or not exists(\n  select 1 from public.library_entries l where l.owner_id=u and l.id=p_library_entry_id and l.hidden_at is null\n ) then raise exception using errcode='42501',message='Coffee is not accessible.'; end if;\n if exists(select 1 from public.shots s where s.owner_id=u and s.library_entry_id=p_library_entry_id) then\n  return jsonb_build_object('ok',true,'show',false);\n end if;\n insert into private.dic_first_style_prompt_seen(owner_id,library_entry_id)\n values(u,p_library_entry_id) on conflict(owner_id,library_entry_id) do nothing\n returning library_entry_id into claimed;\n return jsonb_build_object('ok',true,'show',claimed is not null);\nend $function$\n",
+      "source_range_chars": [
+        1,
+        940
+      ],
+      "review_verdict": "COMPATIBILITY_RETAIN_PER_LOCKED_UNTIL_SHOT_LOGGED"
+    },
+    {
+      "signature": "public.dic_claim_first_style_prompt(p_library_entry_id uuid)",
+      "source_md5": "5f652895cd7e0775e9fecd39f36fc34e",
+      "source_chars": 236,
+      "complete_definition": "CREATE OR REPLACE FUNCTION public.dic_claim_first_style_prompt(p_library_entry_id uuid)\n RETURNS jsonb\n LANGUAGE sql\n SET search_path TO ''\nAS $function$\n select private.dic_claim_first_style_prompt_impl(p_library_entry_id);\n$function$\n",
+      "source_range_chars": [
+        1,
+        236
+      ],
+      "review_verdict": "COMPATIBILITY_RETAIN_PER_LOCKED_UNTIL_SHOT_LOGGED"
+    }
+  ],
+  "associated_active_triggers": [
+    {
+      "table": "public.coffee_submissions",
+      "name": "dic_capture_first_decaf_method",
+      "enabled": true,
+      "complete_ddl": "CREATE TRIGGER dic_capture_first_decaf_method AFTER UPDATE OF status, canonical_coffee_id ON coffee_submissions FOR EACH ROW WHEN (new.status = 'approved'::text AND new.canonical_coffee_id IS NOT NULL) EXECUTE FUNCTION private.dic_capture_first_decaf_method()"
+    },
+    {
+      "table": "public.shots",
+      "name": "dic_capture_recommendation_context",
+      "enabled": true,
+      "complete_ddl": "CREATE TRIGGER dic_capture_recommendation_context BEFORE INSERT ON shots FOR EACH ROW EXECUTE FUNCTION private.dic_capture_recommendation_context()"
+    }
+  ],
+  "first_style_claim_table": {
+    "name": "private.dic_first_style_prompt_seen",
+    "columns": [
+      {
+        "name": "owner_id",
+        "type": "uuid",
+        "not_null": true
+      },
+      {
+        "name": "library_entry_id",
+        "type": "uuid",
+        "not_null": true
+      },
+      {
+        "name": "seen_at",
+        "type": "timestamptz",
+        "not_null": true,
+        "default": "now()"
+      }
+    ],
+    "constraints": [
+      "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+      "FOREIGN KEY (owner_id, library_entry_id) REFERENCES library_entries(owner_id, id) ON DELETE CASCADE",
+      "PRIMARY KEY (owner_id, library_entry_id)"
+    ],
+    "index_ddl": "CREATE UNIQUE INDEX dic_first_style_prompt_seen_pkey ON private.dic_first_style_prompt_seen USING btree (owner_id, library_entry_id)",
+    "rls_enabled": true,
+    "rls_policies": 0,
+    "custom_triggers": 0,
+    "table_acl_roles": [
+      "postgres",
+      "service_role"
+    ],
+    "read_only_aggregate_seen_rows": 2
+  },
+  "bounded_runtime": {
+    "role": "authenticated",
+    "rpc": "dic_claim_first_style_prompt",
+    "queryid": "-8010020381603919252",
+    "cumulative_calls": 8,
+    "mean_exec_ms": 4.541,
+    "max_exec_ms": 10.091,
+    "total_exec_ms": 36.326,
+    "temporal_limit": "CUMULATIVE_STATS_NOT_PROOF_OF_CURRENT_CLIENT"
+  },
+  "exact_git_consumers": {
+    "development_main_js_blob": "30f5e6a90a4e59a9c5cc6bea6ef3d7642d6028c1",
+    "release_main_js_blob": "28c6f6026d0ff1e6fd6575d3813b76c06a29bb47",
+    "shared_client_js_blob": "08e1ac1f2610dca9fad162272c8e3c7ea56566a5",
+    "development_and_release_main": "No first-style RPC invocation in each complete main.js; show panel whenever no logged shot including hidden past shot, repeating after reload",
+    "client_js": "Exports claimFirstStylePrompt RPC wrapper, which is not referenced in inspected current main.js or community.js; other/external clients unverified",
+    "decaf_ui": "Current main.js normalizeDecafSubmission uses explicit checkbox or fully-decaf name, excludes half-caf and validates method taxonomy"
+  },
+  "locked_authority": {
+    "id": "UX-FIRST-SHOT-STYLE-UNTIL-LOGGED-20261108",
+    "source": "docs/MASTER_SPECIFICATION.md and docs/DECISION_LEDGER.json at immutable development SHA",
+    "requires_repeat_until_shot_logged": true,
+    "requires_legacy_claim_records_and_sql_rpc_compatibility": true
+  },
+  "findings": {
+    "first_style_sql": "LEGACY_ACTIVE_COMPATIBILITY_RETENTION_NOT_SAFE_TO_DROP",
+    "first_style_client_wrapper": "POTENTIALLY_REDUNDANT_CURRENT_IN_APP; NOT_PROVEN_NO_CONSUMERS_ACROSS_REPO_EXTERNAL_CLIENTS_UNVERIFIED",
+    "decaf_trigger": "ACTIVE_INTENTIONAL_FIRST_APPROVAL_AND_METHOD_PRESERVATION",
+    "recommendation_trigger": "KNOWN_DUPLICATE_USED_CONTROLS_GAP_ALREADY_HAS_DEVELOPMENT_ONLY_MIGRATION_20261118180000; NO_DUPLICATE_FIX",
+    "confirmed_new_app_defect": false,
+    "justified_sql_deletion": false
+  },
+  "coverage": {
+    "complete_live_sql_definitions": 4,
+    "source_characters": 4147,
+    "first_time_provider_definition_words": 0,
+    "issue267_original_current_code_line_credit": 0,
+    "all_provider_baseline": "IN_PROGRESS"
+  },
+  "verification": {
+    "new_application_source_test_ci_changes": 0,
+    "new_ci": "NOT_RUN_DOCS_ONLY",
+    "prod_sql_data_auth_edge_storage_config_writes": 0,
+    "release_publish": 0,
+    "release_queue_change": 0,
+    "hosted_auth": "UNVERIFIED",
+    "compiled_bundles": "UNVERIFIED"
+  },
+  "next": "First genuinely changed/new or unreviewed live provider definition; prove all repository/external consumers before pruning claimFirstStylePrompt wrapper; never drop compatibility SQL/table per Locked November 8 decision. No owner action."
+}

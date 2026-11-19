@@ -25,7 +25,7 @@ export function createSetup(s,input) {
  if(lo==null||hi==null||lo<0||hi<=lo)throw new Error('Enter a finest and a higher coarsest espresso setting.');
  const basket={id:newId('basket'),name:input.basketName?.trim()||`${dose} g basket`,doseG:dose,archived:false,createdAt:now()};
  const calibrationId=newId('calibration');
- const version={id:newId('version'),createdAt:now(),label:'Original equipment',machine:input.machine?.trim()||'',grinder:input.grinder?.trim()||'',burrs:input.burrs?.trim()||'',grinderMin:lo,grinderMax:hi,calibrationId,calibrations:[{id:calibrationId,min:lo,max:hi,at:now()}],baskets:[basket],defaultBasketId:basket.id,tempUnit:input.tempUnit||'F',advanced:{temperature:false,slowFeed:false,baskets:false},slowFeed:false};
+ const version={id:newId('version'),createdAt:now(),label:'Original equipment',machine:input.machine?.trim()||'',grinder:input.grinder?.trim()||'',burrs:input.burrs?.trim()||'',grinderMin:lo,grinderMax:hi,calibrationId,calibrations:[{id:calibrationId,min:lo,max:hi,at:now()}],baskets:[basket],defaultBasketId:basket.id,tempUnit:input.tempUnit==='C'?'C':'F',advanced:{temperature:false,slowFeed:false,baskets:false},slowFeed:false};
  const setup={id:newId('setup'),name:input.name.trim(),activeVersionId:version.id,versions:[version],workspaces:{[version.id]:blankWorkspace()}};
  s.setups.push(setup);s.activeSetupId=setup.id;logAudit(s,'setup.created',{setupId:setup.id});return setup;
 }
@@ -47,7 +47,7 @@ export function reviseSetup(s,input) {
  }
  setup.name=input.name.trim();
  for(const k of ['machine','grinder','burrs'])v[k]=input[k]?.trim()||'';
- v.tempUnit=input.tempUnit||'F';
+ v.tempUnit=input.tempUnit==='C'?'C':'F';
  // Missing optional legacy controls default off until a member explicitly enables them.
  v.advanced ||= {temperature:false,slowFeed:false,baskets:false};
  for(const k of ['temperature','slowFeed','baskets']) {

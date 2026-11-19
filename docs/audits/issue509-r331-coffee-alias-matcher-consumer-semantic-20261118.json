@@ -1,0 +1,208 @@
+{
+  "run": "R331",
+  "observed_at_utc": "2026-11-18T09:50:08.553Z",
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "18b9975da3dbf5819cbbd5561a6592c5f2803a01",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "verified_with_git_blob": true
+  },
+  "refs": {
+    "main": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+  },
+  "scope": "Full current provider SQL source semantic review of alias writer/deleter, auto-match, submission, confirmation and normalization; aggregate no-personal-data catalog; historical migration language; all five accessible Edge bundles searched for literal alias table reference",
+  "functions": [
+    {
+      "identity": "private.dic_admin_delete_record(p_kind text, p_record_id uuid, p_expected_revision bigint, p_expected_impact jsonb)",
+      "md5": "39b6e1a4fc51c2ce8121ef34d2067b51",
+      "source_chars": 4109,
+      "inspected_start_character": 1,
+      "inspected_end_character": 4109,
+      "source": "CREATE OR REPLACE FUNCTION private.dic_admin_delete_record(p_kind text, p_record_id uuid, p_expected_revision bigint, p_expected_impact jsonb)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nDECLARE actor uuid; actual jsonb; current_revision bigint;\nBEGIN\n actor:=private.require_member();\n IF actor IS NULL OR NOT private.is_admin() THEN\n  RAISE EXCEPTION USING errcode='42501',message='Administrator required.';\n END IF;\n IF p_record_id IS NULL OR p_expected_revision IS NULL OR\n    p_kind IS NULL OR p_kind NOT IN ('shot','submission','approved') OR p_expected_impact IS NULL THEN\n  RAISE EXCEPTION USING errcode='22023',message='Invalid delete confirmation.';\n END IF;\n IF p_kind='shot' THEN\n  SELECT revision INTO current_revision FROM public.shots WHERE id=p_record_id FOR UPDATE;\n ELSIF p_kind='submission' THEN\n  SELECT revision INTO current_revision FROM public.coffee_submissions\n   WHERE id=p_record_id AND status IN ('pending','conflict') FOR UPDATE;\n ELSE\n  SELECT revision INTO current_revision FROM public.coffees\n   WHERE id=p_record_id AND merged_into_id IS NULL FOR UPDATE;\n END IF;\n IF NOT FOUND THEN RAISE EXCEPTION USING errcode='40001',message='Record changed or unavailable. Refresh.'; END IF;\n IF current_revision<>p_expected_revision THEN\n  RAISE EXCEPTION USING errcode='40001',message='Record revision changed. Refresh before deleting.';\n END IF;\n actual:=private.dic_admin_delete_preview(p_kind,p_record_id);\n IF actual IS DISTINCT FROM p_expected_impact THEN\n  RAISE EXCEPTION USING errcode='40001',message='Associated records changed. Review impact again.';\n END IF;\n IF (actual->>'blocked')::boolean THEN\n  RAISE EXCEPTION USING errcode='23514',message='Deletion blocked to preserve Community contributions or other canonical references.';\n END IF;\n IF p_kind='shot' THEN\n  UPDATE public.recipe_preferences SET favorite_shot_id=NULL,revision=revision+1,updated_at=now()\n   WHERE favorite_shot_id=p_record_id;\n  DELETE FROM public.shots WHERE id=p_record_id;\n ELSIF p_kind='submission' THEN\n  UPDATE public.workspace_state SET current_library_entry_id=NULL,revision=revision+1,updated_at=now()\n   WHERE current_library_entry_id IN (SELECT id FROM public.library_entries WHERE submission_id=p_record_id);\n  DELETE FROM public.library_entries WHERE submission_id=p_record_id;\n  UPDATE private.dic_coffee_audit SET submission_id=NULL WHERE submission_id=p_record_id;\n  DELETE FROM private.dic_source_attempts WHERE submission_id=p_record_id;\n  DELETE FROM public.coffee_submissions WHERE id=p_record_id AND status IN ('pending','conflict');\n ELSE\n  UPDATE public.workspace_state SET current_library_entry_id=NULL,revision=revision+1,updated_at=now()\n   WHERE current_library_entry_id IN (SELECT id FROM public.library_entries l\n    WHERE l.coffee_id=p_record_id OR l.submission_id IN\n     (SELECT id FROM public.coffee_submissions WHERE canonical_coffee_id=p_record_id));\n  DELETE FROM public.library_entries l WHERE l.coffee_id=p_record_id OR l.submission_id IN\n   (SELECT id FROM public.coffee_submissions WHERE canonical_coffee_id=p_record_id);\n  UPDATE private.dic_coffee_audit SET coffee_id=NULL,submission_id=NULL\n   WHERE coffee_id=p_record_id OR submission_id IN\n    (SELECT id FROM public.coffee_submissions WHERE canonical_coffee_id=p_record_id);\n  DELETE FROM private.dic_source_attempts WHERE submission_id IN\n   (SELECT id FROM public.coffee_submissions WHERE canonical_coffee_id=p_record_id);\n  DELETE FROM private.dic_coffee_first_entry WHERE coffee_id=p_record_id;\n  DELETE FROM public.coffee_submissions WHERE canonical_coffee_id=p_record_id;\n  DELETE FROM public.coffee_sources WHERE coffee_id=p_record_id;\n  DELETE FROM private.dic_coffee_aliases WHERE coffee_id=p_record_id;\n  DELETE FROM public.recipe_families WHERE coffee_id=p_record_id;\n  DELETE FROM public.coffees WHERE id=p_record_id;\n END IF;\n INSERT INTO private.dic_admin_delete_receipts(actor_id,record_kind,record_id,impact)\n  VALUES(actor,p_kind,p_record_id,actual);\n RETURN jsonb_build_object('ok',true,'deleted_kind',p_kind,'impact',actual);\nEND $function$\n",
+      "review_status": "COMPLETE_REPEAT_PREVIOUS_SOURCE_NO_FIRST_TIME_WORD_CREDIT"
+    },
+    {
+      "identity": "private.dic_coffee_key(value text)",
+      "md5": "8f6840ddd7e530e311c096591c01ce15",
+      "source_chars": 251,
+      "inspected_start_character": 1,
+      "inspected_end_character": 251,
+      "source": "CREATE OR REPLACE FUNCTION private.dic_coffee_key(value text)\n RETURNS text\n LANGUAGE sql\n STABLE\n SET search_path TO ''\nAS $function$\n select nullif(regexp_replace(lower(extensions.unaccent(coalesce(value,''))), '[^a-z0-9]', '', 'g'),'');\n$function$\n",
+      "review_status": "COMPLETE_REPEAT_PREVIOUS_SOURCE_NO_FIRST_TIME_WORD_CREDIT"
+    },
+    {
+      "identity": "private.dic_confirm_coffee_existing(mid uuid, p jsonb)",
+      "md5": "0fcc44bb8a05f46e87694d3474eb7c23",
+      "source_chars": 3239,
+      "inspected_start_character": 1,
+      "inspected_end_character": 3239,
+      "source": "CREATE OR REPLACE FUNCTION private.dic_confirm_coffee_existing(mid uuid, p jsonb)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare\n u uuid:=private.require_member(); prior private.mutation_receipts; s public.coffee_submissions;\n target public.coffees; sid uuid; cid uuid; match_result jsonb; accepted boolean;\n req_hash text; response jsonb; a_name text; b_name text;\nbegin\n if mid is null or jsonb_typeof(p) is distinct from 'object' or octet_length(p::text)>5000 then\n  raise exception using errcode='22023',message='Invalid coffee confirmation.';\n end if;\n sid:=(p->>'submission_id')::uuid;cid:=(p->>'coffee_id')::uuid;\n perform pg_advisory_xact_lock(hashtextextended(u::text,9311));\n req_hash:=encode(sha256(convert_to(jsonb_build_object('action','confirm_coffee_existing','payload',p)::text,'UTF8')),'hex');\n select * into prior from private.mutation_receipts where owner_id=u and mutation_id=mid;\n if found then\n  if prior.request_hash<>req_hash then raise exception using errcode='22023',message='Mutation ID reused for other confirmation.';end if;\n  return prior.response;\n end if;\n select * into s from public.coffee_submissions where id=sid and owner_id=u for update;\n select * into target from public.coffees where id=cid and verification_state='verified' and merged_into_id is null;\n if s.id is null or target.id is null then raise exception using errcode='42501',message='Coffee is not accessible.';end if;\n if private.dic_canonical_roaster_key(s.proposed_data->>'roaster') is distinct from\n   private.dic_canonical_roaster_key(target.roaster) then\n   raise exception using errcode='23514',message='Different roasters cannot be merged based on a fuzzy name.';\n end if;\n a_name:=private.dic_coffee_key(s.proposed_data->>'name');\n b_name:=private.dic_coffee_key(target.name);\n if (a_name<>b_name and extensions.similarity(a_name,b_name)<0.60) then\n  raise exception using errcode='23514',message='The names are too different for self-confirmed merging.';\n end if;\n if nullif(btrim(s.proposed_data->>'release_label'),'') is not null\n    and nullif(btrim(target.release_label),'') is not null\n    and private.dic_coffee_key(s.proposed_data->>'release_label')<>private.dic_coffee_key(target.release_label) then\n  raise exception using errcode='23514',message='Different releases require administrator review.';\n end if;\n if nullif(btrim(s.proposed_data->>'origin'),'') is not null\n    and nullif(btrim(target.origin),'') is not null\n    and private.dic_coffee_key(s.proposed_data->>'origin')<>private.dic_coffee_key(target.origin)\n    and position(private.dic_coffee_key(s.proposed_data->>'origin') in private.dic_coffee_key(target.origin))=0\n    and position(private.dic_coffee_key(target.origin) in private.dic_coffee_key(s.proposed_data->>'origin'))=0 then\n  raise exception using errcode='23514',message='Conflicting origins require administrator review.';\n end if;\n response:=private.dic_link_pending_coffee(sid,cid,'user_confirmed',\n  jsonb_build_object('requested_name',s.proposed_data->>'name','canonical_name',target.name));\n insert into private.mutation_receipts(owner_id,mutation_id,request_hash,response)\n values(u,mid,req_hash,response);\n return response;\nend $function$\n",
+      "review_status": "COMPLETE_REPEAT_PREVIOUS_SOURCE_NO_FIRST_TIME_WORD_CREDIT"
+    },
+    {
+      "identity": "private.dic_find_coffee_matches(p jsonb)",
+      "md5": "b4b845d29ccb65ac7922109dc89816b6",
+      "source_chars": 6135,
+      "inspected_start_character": 1,
+      "inspected_end_character": 6135,
+      "source": "CREATE OR REPLACE FUNCTION private.dic_find_coffee_matches(p jsonb)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare\n requested_roaster text; requested_name text; requested_release text; requested_origin text;\n search_roaster text; search_name text; search_release text; search_source text;\n registered_name text; registered boolean; candidates jsonb; exact_id uuid; exact_count int;\nbegin\n if not private.is_member() or auth.uid() is null then\n  raise exception using errcode='42501',message='Admitted account required.';\n end if;\n if p is null or jsonb_typeof(p)<>'object' or octet_length(p::text)>16000\n    or coalesce(length(btrim(p->>'roaster')),0) not between 2 and 200\n    or coalesce(length(btrim(p->>'name')),0) not between 1 and 200\n    or length(coalesce(p->>'release_label',''))>200\n    or length(coalesce(p->>'source_url',''))>4000 then\n  raise exception using errcode='22023',message='Invalid coffee match request.';\n end if;\n requested_roaster:=btrim(p->>'roaster');requested_name:=btrim(p->>'name');\n requested_release:=nullif(btrim(coalesce(p->>'release_label','')),'');\n requested_origin:=nullif(btrim(coalesce(p->>'origin','')),'');\n search_roaster:=private.dic_canonical_roaster_key(requested_roaster);\n search_name:=private.dic_coffee_key(requested_name);\n search_release:=private.dic_coffee_key(requested_release);\n search_source:=private.dic_source_key(p->>'source_url');\n if search_roaster is null or search_name is null then\n  return jsonb_build_object('classification','new_pending','roaster',jsonb_build_object('recognized',false,'canonical_name',requested_roaster),'exact_id',null,'candidates','[]'::jsonb);\n end if;\n select c.roaster into registered_name\n from public.coffees c where c.verification_state='verified' and c.merged_into_id is null\n   and private.dic_canonical_roaster_key(c.roaster)=search_roaster\n order by c.created_at,c.id limit 1;\n registered:=registered_name is not null;\n\n with candidates_scanned as (\n  select c.id,c.name,c.roaster,c.release_label,c.origin,c.process,c.verification_state,\n         private.dic_canonical_roaster_key(c.roaster) as brand_key,\n         private.dic_coffee_key(c.name) as title_key,\n         private.dic_coffee_key(c.release_label) as release_key,\n         extensions.similarity(private.dic_canonical_roaster_key(c.roaster),search_roaster) as brand_similarity,\n         extensions.similarity(private.dic_coffee_key(c.name),search_name) as title_similarity,\n         exists(\n           select 1 from public.coffee_sources src\n           where src.coffee_id=c.id and src.source_kind='roaster_page'\n             and search_source is not null\n             and src.checked_at>=now()-interval '120 days'\n             and private.dic_source_key(src.source_url)=search_source\n         ) as curated_url_match\n  from public.coffees c where c.verification_state='verified' and c.merged_into_id is null\n ), assessed as (\n   select s.*,\n     (s.brand_key=search_roaster) as exact_brand,\n     (s.title_key=search_name) as exact_title,\n     (requested_origin is null or s.origin is null\n       or private.dic_coffee_key(requested_origin)=private.dic_coffee_key(s.origin)) as compatible_origin\n   from candidates_scanned s\n   where (s.brand_key=search_roaster or s.brand_similarity>=0.70)\n     and (s.title_key=search_name or s.title_similarity>=0.43)\n     -- Explicitly different nonempty harvest/lot labels are different\n     -- releases, not fuzzy duplicates. Missing labels remain ambiguous.\n     and (search_release is null or s.release_key is null\n       or s.release_key=search_release)\n ), ranked as (\n  select s.*,\n    case\n      when s.exact_brand and s.exact_title and s.curated_url_match\n        and search_release is not null and s.release_key=search_release\n        and s.compatible_origin\n        and (nullif(btrim(coalesce(p->>'process','')),'') is null\n          or s.process is null\n          or private.dic_coffee_key(p->>'process')=private.dic_coffee_key(s.process))\n        then 'official_url'\n      when s.exact_brand and s.exact_title and search_release is not null\n        and s.release_key=search_release and s.compatible_origin\n        and (nullif(btrim(coalesce(p->>'process','')),'') is null\n          or s.process is null\n          or private.dic_coffee_key(p->>'process')=private.dic_coffee_key(s.process))\n        -- Official source URLs take priority; an exact-release label with\n        -- a different existing verified product URL is not sufficient.\n        and (search_source is null or s.curated_url_match or\n          not exists(select 1 from public.coffee_sources src\n           where src.coffee_id=s.id and src.source_kind='roaster_page'))\n        then 'exact_release'\n      when s.exact_brand and s.exact_title then 'same_name'\n      when s.exact_brand then 'similar_name'\n      else 'similar_roaster'\n    end as match_kind\n  from assessed s\n ), prioritized as (\n  select r.*, case r.match_kind\n    when 'official_url' then 5 when 'exact_release' then 4\n    when 'same_name' then 3 when 'similar_name' then 2 else 1 end as rank\n  from ranked r\n )\n select\n  (select jsonb_agg(jsonb_build_object(\n      'id',q.id, 'name',q.name,'roaster',q.roaster,'release_label',q.release_label,\n      'origin',q.origin,'match_kind',q.match_kind\n    ) order by q.rank desc, q.title_similarity desc, q.name, q.id)\n   from (select * from prioritized order by rank desc,title_similarity desc,name,id limit 6) q),\n  (select count(*) from prioritized where rank>=4),\n  (select id from prioritized where rank>=4 order by rank desc,id limit 1)\n into candidates,exact_count,exact_id;\n if exact_count<>1 then exact_id:=null; end if;\n return jsonb_build_object(\n   'classification',case when exact_id is not null then 'exact_verified'\n                    when coalesce(jsonb_array_length(candidates),0)>0 then 'needs_confirmation'\n                    else 'new_pending' end,\n   'roaster',jsonb_build_object('recognized',registered,\n                   'canonical_name',coalesce(registered_name,requested_roaster)),\n   'exact_id',exact_id,\n   'candidates',coalesce(candidates,'[]'::jsonb)\n );\nend $function$\n",
+      "review_status": "COMPLETE_REPEAT_PREVIOUS_SOURCE_NO_FIRST_TIME_WORD_CREDIT"
+    },
+    {
+      "identity": "private.dic_link_pending_coffee(sid uuid, canonical uuid, event_name text, evidence jsonb)",
+      "md5": "140c211a4bfef175b041c037561a1e37",
+      "source_chars": 3954,
+      "inspected_start_character": 1,
+      "inspected_end_character": 3954,
+      "source": "CREATE OR REPLACE FUNCTION private.dic_link_pending_coffee(sid uuid, canonical uuid, event_name text, evidence jsonb)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare s public.coffee_submissions; target public.coffees; l public.library_entries; existing uuid;\nbegin\n select * into s from public.coffee_submissions where id=sid for update;\n if not found then raise exception using errcode='22023',message='Submission unavailable.';end if;\n select * into target from public.coffees where id=canonical and verification_state='verified' and merged_into_id is null;\n if not found then raise exception using errcode='22023',message='Verified canonical coffee unavailable.';end if;\n if s.status in ('merged','approved') and s.canonical_coffee_id=canonical then\n  return jsonb_build_object('ok',true,'coffee_id',canonical,'status','verified','already_linked',true);\n end if;\n if s.status not in ('pending','conflict') then\n  raise exception using errcode='23514',message='Submission is already resolved.';\n end if;\n -- The global display name belongs to whichever *original submission* was first.\n -- An older Pending submission may have been verified later than this canonical.\n if s.created_at < coalesce((select first_seen_at from private.dic_coffee_first_entry\n                            where coffee_id=canonical),target.created_at) then\n  if private.dic_coffee_key(s.proposed_data->>'name') is distinct from private.dic_coffee_key(target.name) then\n   insert into private.dic_coffee_aliases(coffee_id,alias_key,original_name,origin_kind)\n    values(canonical,private.dic_coffee_key(target.name),target.name,'user_confirmed')\n    on conflict(coffee_id,alias_key) do nothing;\n  end if;\n  update public.coffees set name=left(s.proposed_data->>'name',200) where id=canonical;\n  insert into private.dic_coffee_first_entry(coffee_id,first_seen_at,first_submission_id,primary_name)\n   values(canonical,s.created_at,s.id,left(s.proposed_data->>'name',200))\n   on conflict(coffee_id) do update set first_seen_at=excluded.first_seen_at,\n     first_submission_id=excluded.first_submission_id,primary_name=excluded.primary_name;\n end if;\n select * into l from public.library_entries where owner_id=s.owner_id and submission_id=s.id for update;\n if not found then raise exception using errcode='23514',message='Original library entry is missing.';end if;\n select id into existing from public.library_entries\n  where owner_id=s.owner_id and coffee_id=canonical and id<>l.id and hidden_at is null limit 1;\n if existing is not null then\n  -- Do NOT orphan existing shots, recipes or pinned workspaces.\n  raise exception using errcode='23514',message='This account already has this coffee. Reconcile the two personal entries with their history before merging.';\n end if;\n update public.coffee_submissions set canonical_coffee_id=canonical,\n   status=case when event_name='admin_approved' or event_name='official_verified' then 'approved' else 'merged' end\n where id=s.id;\n update public.library_entries set coffee_id=canonical,submission_id=null where id=l.id;\n if private.dic_coffee_key(s.proposed_data->>'name') is distinct from private.dic_coffee_key(target.name)\n   and private.dic_coffee_key(s.proposed_data->>'name') is not null then\n   insert into private.dic_coffee_aliases(coffee_id,alias_key,original_name,origin_kind)\n   values(target.id,private.dic_coffee_key(s.proposed_data->>'name'),left(s.proposed_data->>'name',200),\n    case when event_name='official_verified' then 'source_confirmed' else 'user_confirmed' end)\n   on conflict(coffee_id,alias_key) do nothing;\n end if;\n insert into private.dic_coffee_audit(coffee_id,submission_id,actor_id,event_kind,evidence)\n values(target.id,s.id,auth.uid(),event_name,coalesce(evidence,'{}'::jsonb));\n return jsonb_build_object('ok',true,'coffee_id',target.id,'status','verified',\n    'library_entry_id',l.id,'canonical_name',target.name,'reused',true);\nend $function$\n",
+      "review_status": "COMPLETE_REPEAT_PREVIOUS_SOURCE_NO_FIRST_TIME_WORD_CREDIT"
+    },
+    {
+      "identity": "private.dic_submit_coffee_auto(mid uuid, p jsonb)",
+      "md5": "e2b11c83a686a5a9949699cd23b52e13",
+      "source_chars": 3771,
+      "inspected_start_character": 1,
+      "inspected_end_character": 3771,
+      "source": "CREATE OR REPLACE FUNCTION private.dic_submit_coffee_auto(mid uuid, p jsonb)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare u uuid:=private.require_member(); prior private.mutation_receipts;\n req_hash text; proposal jsonb; source text; lid uuid; sid uuid; match_result jsonb;\n exact uuid; existing uuid; response jsonb; managed_name text;\nbegin\n if mid is null or jsonb_typeof(p) is distinct from 'object'\n or octet_length(p::text)>32000 or jsonb_typeof(p->'proposed_data') is distinct from 'object'\n or coalesce(length(btrim(p->'proposed_data'->>'name')),0) not between 1 and 200\n or coalesce(length(btrim(p->'proposed_data'->>'roaster')),0) not between 2 and 200 then\n  raise exception using errcode='22023',message='Coffee name and roaster are required.';\n end if;\n source:=nullif(btrim(p->>'source_url'),'');\n if source is not null and (length(source)>4000 or source !~ '^https?://') then\n  raise exception using errcode='22023',message='Provide a valid product URL.';\n end if;\n perform pg_advisory_xact_lock(hashtextextended(u::text,9311));\n req_hash:=encode(sha256(convert_to(jsonb_build_object('action','submit_coffee','payload',p)::text,'UTF8')),'hex');\n select * into prior from private.mutation_receipts where owner_id=u and mutation_id=mid;\n if found then\n  if prior.request_hash<>req_hash then raise exception using errcode='22023',message='Mutation ID reused for different changes.';end if;\n  return prior.response;\n end if;\n proposal:=p->'proposed_data';\n match_result:=private.dic_find_coffee_matches(proposal||jsonb_build_object('source_url',source));\n if match_result->>'classification'='exact_verified' then\n  exact:=(match_result->>'exact_id')::uuid;\n  select id into existing from public.library_entries where owner_id=u and coffee_id=exact and hidden_at is null order by created_at limit 1;\n  if existing is null then\n   lid:=coalesce((p->>'library_entry_id')::uuid,gen_random_uuid());\n   insert into public.library_entries(id,owner_id,coffee_id) values(lid,u,exact);\n  else lid:=existing; end if;\n  response:=jsonb_build_object('ok',true,'status','verified','coffee_id',exact,'library_entry_id',lid,'reused',true);\n else\n  lid:=coalesce((p->>'library_entry_id')::uuid,gen_random_uuid());\n  managed_name:=nullif(match_result->'roaster'->>'canonical_name','');\n  if coalesce((match_result->'roaster'->>'recognized')::boolean,false) and managed_name is not null\n      and managed_name<>proposal->>'roaster' then\n   proposal:=jsonb_set(proposal,'{roaster_as_entered}',to_jsonb(proposal->>'roaster'),true);\n   proposal:=jsonb_set(proposal,'{roaster}',to_jsonb(managed_name),true);\n  end if;\n  insert into public.coffee_submissions(owner_id,proposed_data,source_url,created_at) values(u,proposal,source,clock_timestamp())\n   returning id into sid;\n  insert into public.library_entries(id,owner_id,submission_id) values(lid,u,sid);\n  response:=jsonb_build_object('ok',true,'status','pending','library_entry_id',lid,\n    'submission_id',sid,'source_check_recommended',\n      (source is not null and coalesce((match_result->'roaster'->>'recognized')::boolean,false)));\n  if match_result->>'classification'='needs_confirmation' then\n   -- User confirmed_distinct never bypasses server duplicate gates.\n   response:=response||jsonb_build_object('possible_duplicate',true,\n     'candidates',match_result->'candidates');\n  else\n   response:=response||private.dic_promote_pending_coffee(sid,'member_auto_approved',\n    jsonb_build_object('approval_basis','no_unresolved_duplicate',\n      'source_assurance','member_supplied_unverified'),false);\n  end if;\n end if;\n insert into private.mutation_receipts(owner_id,mutation_id,request_hash,response)\n values(u,mid,req_hash,response);\n return response;\nend $function$\n",
+      "review_status": "COMPLETE_REPEAT_PREVIOUS_SOURCE_NO_FIRST_TIME_WORD_CREDIT"
+    }
+  ],
+  "total_reexamined_provider_source_characters": 21459,
+  "table_definition": {
+    "columns": [
+      {
+        "name": "coffee_id",
+        "type": "uuid",
+        "default": null,
+        "not_null": true
+      },
+      {
+        "name": "alias_key",
+        "type": "text",
+        "default": null,
+        "not_null": true
+      },
+      {
+        "name": "original_name",
+        "type": "text",
+        "default": null,
+        "not_null": true
+      },
+      {
+        "name": "origin_kind",
+        "type": "text",
+        "default": null,
+        "not_null": true
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp with time zone",
+        "default": "now()",
+        "not_null": true
+      }
+    ],
+    "indexes": [
+      {
+        "ddl": "CREATE UNIQUE INDEX dic_coffee_aliases_pkey ON private.dic_coffee_aliases USING btree (coffee_id, alias_key)",
+        "name": "private.dic_coffee_aliases_pkey",
+        "ready": true,
+        "valid": true
+      }
+    ],
+    "triggers": [],
+    "alias_rows": 0,
+    "constraints": [
+      {
+        "name": "dic_coffee_aliases_alias_key_check",
+        "definition": "CHECK (alias_key ~ '^[a-z0-9]+$'::text)"
+      },
+      {
+        "name": "dic_coffee_aliases_coffee_id_fkey",
+        "definition": "FOREIGN KEY (coffee_id) REFERENCES coffees(id)"
+      },
+      {
+        "name": "dic_coffee_aliases_origin_kind_check",
+        "definition": "CHECK (origin_kind = ANY (ARRAY['user_confirmed'::text, 'source_confirmed'::text, 'admin_entry'::text]))"
+      },
+      {
+        "name": "dic_coffee_aliases_original_name_check",
+        "definition": "CHECK (length(original_name) >= 1 AND length(original_name) <= 200)"
+      },
+      {
+        "name": "dic_coffee_aliases_pkey",
+        "definition": "PRIMARY KEY (coffee_id, alias_key)"
+      }
+    ],
+    "first_entry_rows": 9,
+    "verified_canonical_rows": 9,
+    "alias_matches_canonical_name": 0
+  },
+  "edge_bundles": [
+    {
+      "slug": "dic-preview-coffee",
+      "literal_alias_refs": 0,
+      "accessibility": "provider_retrieval_only"
+    },
+    {
+      "slug": "dic-verify-coffee",
+      "literal_alias_refs": 0,
+      "accessibility": "provider_retrieval_only"
+    },
+    {
+      "slug": "dic-delete-member-account",
+      "literal_alias_refs": 0,
+      "accessibility": "provider_retrieval_only"
+    },
+    {
+      "slug": "dic-admin-push-broker",
+      "literal_alias_refs": 0,
+      "accessibility": "provider_retrieval_only"
+    },
+    {
+      "slug": "dic-member-approval-broker",
+      "literal_alias_refs": 0,
+      "accessibility": "provider_retrieval_only"
+    }
+  ],
+  "historical_source": {
+    "path": "supabase/migrations/20261014221324_dic_coffee_auto_catalog.sql",
+    "blob_sha": "594ebb9ef9968e12b3a79fed4b283697359ac330",
+    "narrative": "The first actual entry controls displayed coffee name; later spellings are aliases."
+  },
+  "synthetic_readonly_no_fixture": {
+    "canonical_key": "olderoriginalcoffeesynthetic",
+    "alias_key": "laterverifiedcoffeesynthetic",
+    "similarity": 0.318182,
+    "excluded_by_current_matcher": true
+  },
+  "findings": [
+    {
+      "id": "R331-A",
+      "status": "LATENT_MATCHING_CONTRACT_GAP_NOT_PRESENT_MEMBER_FAILURE",
+      "details": "private.dic_find_coffee_matches only checks public.coffees.name and its similarity; it has no dic_coffee_aliases read. Recorded later spelling cannot cause its canonical to become a candidate when name similarity falls below 0.43; synthetic SQL computed 0.318182. No alias records exist in current production, so actual member failure and intended broader alias lookup are UNVERIFIED.",
+      "disposition": "TEST_ON_DISPOSABLE_POSTGRES_WITH_ADMITTED_SYNTHETIC_MEMBER_AND_EXISTING_ALIAS; no source migration until match policy proven; preserve explicit-confirmation and exact-source safeguards"
+    },
+    {
+      "id": "R331-B",
+      "status": "POTENTIAL_REDUNDANT_FUTURE_ALIAS_ROW",
+      "details": "On an older-Pending precedence rename, target.name remains the prior value; subsequent alias INSERT can store the newly promoted canonical spelling as a separate alias. No current rows, no proven production cleanup; older stale canonical_name response already addressed by development-only R288/R289, do not duplicate.",
+      "disposition": "Add isolated no-self-alias assertion to future tests if current product requirement confirms canonical name should not also be recorded as an alias"
+    }
+  ],
+  "cannot_prove": [
+    "Frontend and external service consumers absent",
+    "Provider-console-only settings",
+    "Real member-facing reproduction",
+    "Full compiled/native provider word coverage"
+  ],
+  "changes": {
+    "production_sql_data_auth_storage_edge_config": 0,
+    "github_source_test_ci": 0,
+    "release_or_publish": 0,
+    "backup_or_schedule": 0
+  },
+  "status": "IN_PROGRESS",
+  "next": "Isolated PostgreSQL17 synthetic alias-matcher fixture and first-entry rename invariant; coordinate #33 ownership and #96 authenticated account contract; keep all live aliases/history, no automatic identity merge."
+}

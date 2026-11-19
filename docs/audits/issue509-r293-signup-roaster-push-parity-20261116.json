@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 293,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "a28c9bc38f20cfaf8e7194a816d7994a72f3962f",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "git_blob_content_byte_match": true
+  },
+  "observed_utc": "2026-11-16 19:48:47.904428+00",
+  "scope": "READ_ONLY_PROVIDER_DIRECT_COMPLETE_DEFINITION_AND_GIT_MIGRATION_BODY_PARITY",
+  "direct_reviewed_full_functions": 6,
+  "direct_reviewed_full_definition_characters": 6995,
+  "function_reviews": [
+    {
+      "signature": "private.dic_admin_review_signup(uuid,text,text)",
+      "source_chars": 2073,
+      "live_pg_get_functiondef_md5": "7e0d3bf10542694b60177fcfa9c6f7be",
+      "migration_path": "supabase/migrations/20261110020500_dic_admin_signup_approval_retire_invites.sql",
+      "migration_git_blob_sha": "fea285d31190b996160d7672c1d90887f3d0c647",
+      "migration_body_exact_match": true,
+      "review": "LIVE_COMPLETE_SQL_SOURCE_AND_POLICY_GUARDS",
+      "verdict": "Row-locked pending review; Admin/self protection and verified-email approval; stale reviews rejected; admitted Admin guard"
+    },
+    {
+      "signature": "private.dic_admin_signup_requests(integer,integer)",
+      "source_chars": 1411,
+      "live_pg_get_functiondef_md5": "663c13571f70bb29b6a4351e8e6a45eb",
+      "migration_path": "supabase/migrations/20261110020500_dic_admin_signup_approval_retire_invites.sql",
+      "migration_git_blob_sha": "fea285d31190b996160d7672c1d90887f3d0c647",
+      "migration_body_exact_match": true,
+      "review": "LIVE_COMPLETE_SQL_SOURCE_AND_POLICY_GUARDS",
+      "verdict": "Admitted Admin gate and bounded pagination before pending account email listing; no anonymous execution"
+    },
+    {
+      "signature": "public.dic_admin_review_signup(uuid,text,text)",
+      "source_chars": 295,
+      "live_pg_get_functiondef_md5": "ebfec67f4da9cf3adc0d3e3431f2a295",
+      "migration_path": "supabase/migrations/20261110020500_dic_admin_signup_approval_retire_invites.sql",
+      "migration_git_blob_sha": "fea285d31190b996160d7672c1d90887f3d0c647",
+      "migration_body_exact_match": true,
+      "review": "LIVE_COMPLETE_SQL_SOURCE_AND_POLICY_GUARDS",
+      "verdict": "Invoking-role SQL wrapper delegates to private admitted-Admin guarded routine"
+    },
+    {
+      "signature": "public.dic_admin_signup_requests(integer,integer)",
+      "source_chars": 262,
+      "live_pg_get_functiondef_md5": "ab3a82cfe5d926fa485c39b153aa701e",
+      "migration_path": "supabase/migrations/20261110020500_dic_admin_signup_approval_retire_invites.sql",
+      "migration_git_blob_sha": "fea285d31190b996160d7672c1d90887f3d0c647",
+      "migration_body_exact_match": true,
+      "review": "LIVE_COMPLETE_SQL_SOURCE_AND_POLICY_GUARDS",
+      "verdict": "Invoking-role SQL wrapper delegates to private pending-account listing guard"
+    },
+    {
+      "signature": "private.dic_verified_roaster_page_proof(text)",
+      "source_chars": 1947,
+      "live_pg_get_functiondef_md5": "7ce32408a61728294ad667a9c985f5da",
+      "migration_path": "supabase/migrations/20261113050000_dic_retire_roaster_directory.sql",
+      "migration_git_blob_sha": "10775c86bf88e61160fdc66d35c65698638742d6",
+      "migration_body_exact_match": true,
+      "review": "LIVE_COMPLETE_SQL_SOURCE_AND_POLICY_GUARDS",
+      "verdict": "Service-only source-domain proof with 120-day verified source evidence, disagreement deny and historical attestation fallback; does not gate URL preview"
+    },
+    {
+      "signature": "public.dic_admin_push_snapshot()",
+      "source_chars": 1007,
+      "live_pg_get_functiondef_md5": "c6c2c674fa8358a3dd4946a3c0f9d8ed",
+      "migration_path": "supabase/migrations/20261110235000_dic_admin_web_push.sql",
+      "migration_git_blob_sha": "bd1c28897ef71662faa4327dd79e005292a96578",
+      "migration_body_exact_match": true,
+      "review": "LIVE_COMPLETE_SQL_SOURCE_AND_POLICY_GUARDS",
+      "verdict": "Service-only Admin IDs and actionable opaque signup/coffee/delete tokens; no private emails or personal shot/note content returned"
+    }
+  ],
+  "guards": {
+    "private_signup_review": "EXECUTE authenticated; actor admitted Admin required inside routine; anon denied; service denied",
+    "private_signup_list": "EXECUTE authenticated; actor admitted Admin required inside routine; anon denied; service denied",
+    "roaster_page_proof": "service_role only, anon/authenticated denied",
+    "push_snapshot": "service_role only, anon/authenticated denied",
+    "public_signup_wrappers": "authenticated with private admitted-Admin guards; anonymous denied"
+  },
+  "provider": {
+    "status": "ACTIVE_HEALTHY",
+    "pg_version": "17.11.0.003",
+    "visible_pgss_rows": 4807,
+    "waiting_lock_sessions": 0,
+    "application_sql_functions": 114,
+    "application_tables": 52,
+    "deployed_edge_functions": 5,
+    "security_advisories": {
+      "rls_no_policy": 13,
+      "authenticated_definer": 10,
+      "leaked_password_warning": 1
+    },
+    "performance_advisories": {
+      "unindexed_fk": 14,
+      "unused_index": 8
+    }
+  },
+  "coverage": {
+    "first_time_credit": 0,
+    "prior_distinct_pgss_fingerprints_retained": 4604,
+    "numeric_pgss_pending_ranks": [
+      4961,
+      5040
+    ],
+    "ranks_currently_unavailable": true,
+    "baseline": "IN_PROGRESS"
+  },
+  "conclusions": {
+    "new_confirmed_defects": 0,
+    "justified_deletions": 0,
+    "source_parity_functions": 6,
+    "sql_or_provider_writes": 0,
+    "code_test_ci_changes": 0,
+    "functional_tests_performed": false,
+    "ci_source_claim": "NOT_APPLICABLE_DOC_ONLY",
+    "production_publication": "NOT_AUTHORIZED"
+  },
+  "remaining": "First genuinely changed/unreviewed provider object or new pgss cursor when visible; #33 downstream canonical caller and #96 genuine hosted Auth acceptance UNVERIFIED; console-only config UNVERIFIED",
+  "notification_policy": "Owner actionable NEW issue only",
+  "source": {
+    "prewrite_development_sha": "98a6381eba4bde3d5b5d8e838dbcee3f418e4489",
+    "main_sha": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+  }
+}

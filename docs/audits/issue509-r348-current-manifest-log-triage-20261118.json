@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R348",
+  "review_time_utc": "2026-11-19T00:45:00Z",
+  "project_ref": "azviqqejypsefzilgonr",
+  "github": {
+    "preflight_development_sha": "071294b383f941e175c774a516c06b1c79535b64",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "main_sha": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+  },
+  "provider": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.11",
+    "postgres_engine": "17",
+    "app_functions_current": 114,
+    "private_functions": 63,
+    "public_functions": 51,
+    "app_tables_current": 52,
+    "applied_migrations": 69,
+    "active_edge_functions": 5
+  },
+  "reconciled_functions": {
+    "frozen_original_manifest": 99,
+    "current_live": 114,
+    "new_relative_to_frozen": 22,
+    "changed_relative_to_frozen": 17,
+    "removed_relative_to_frozen": 7,
+    "unchanged_relative_to_frozen": 75,
+    "current_source_receipt": "docs/audits/issue509-r314-app-function-current-source-reconciliation-20261117.json",
+    "prior_reconciliation": "docs/audits/issue509-r308-current-function-manifest-admin-lifecycle-20261117.json",
+    "independent_current_catalog_recheck": "All current signatures and pg_get_functiondef MD5s checked against frozen 99-entry manifest; exact same 22+17+7+75 split as prior R308; no newly established drift",
+    "semantic_credit_this_run": 0,
+    "github_issue267_code_lines_credited": 0
+  },
+  "read_only_semantic_scope": [
+    "Direct complete live member approval broker and Admin push broker Edge source compared with service-only claim/poll/finish and VAPID SQL interfaces; no additional justified fix established beyond existing development-only migrations and previously reviewed R307/R337",
+    "Direct current Admin coffee merge, confirmation, matching, promotion and submission SQL caller review; confirmed NULL-normalized Admin merge prevention already addressed by development-only immutable 20261117130000 migration; not applied in live production",
+    "Measured relation statistics for 18 most scanned app tables, interpreting small live estimates and cumulative scans conservatively; no independently proven index bottleneck/deletion justification"
+  ],
+  "last24h_bounded_logs": {
+    "sources": {
+      "edge_logs": 2304,
+      "function_logs": 1152,
+      "postgres_logs": 598,
+      "function_edge_logs": 577,
+      "pgbouncer_logs": 72,
+      "supavisor_logs": 11
+    },
+    "edge_http_200": 2304,
+    "edge_sample_total": 2304,
+    "postgres_log": 579,
+    "postgres_error": 19,
+    "postgres_error_app": "mgmt-api",
+    "postgres_error_command": "SELECT",
+    "postgres_error_states": {
+      "42703": 3,
+      "42809": 10,
+      "42883": 1,
+      "42P01": 3,
+      "2201B": 1,
+      "22P02": 1
+    },
+    "privacy": "Safe group-by counts only; no log messages/queries/member identifiers read",
+    "interpretation": "All observed SQL ERROR entries are management-API SELECT errors; aggregate alone does not prove application defect. Avoid attributing prior auditor-caused 42809/42703 to end-user paths."
+  },
+  "existing_development_guard": {
+    "migration": "supabase/migrations/20261117130000_dic_admin_merge_null_normalized_name_guard.sql",
+    "git_blob": "7bc866ec985f9706abcbe10d900728a1bb6dc991",
+    "applied_to_production": false,
+    "novel_fix_credit": 0
+  },
+  "decision": "No newly proven defect, safe SQL deletion, or index/Edge performance change warranted from this bounded increment. Correct stale 99/46 and migration-1/54 CURRENT coverage pointers in scoped ledger without rewriting original frozen evidence.",
+  "writes": {
+    "production": 0,
+    "development_source": 0,
+    "development_tests": 0,
+    "development_CI": 0,
+    "documentation_only": true
+  },
+  "tests": "NOT_RUN_DOCS_ONLY_NO_PASS_CLAIM",
+  "release": "TESTING_UNCHANGED",
+  "full_baseline": "IN_PROGRESS",
+  "limitations": [
+    "24-hour default log slice is sampled/limited by provider; counts do not establish complete application health",
+    "Member signed-in Auth/privacy acceptance under #96 and hosted settings/compiled native implementations remain UNVERIFIED",
+    "Historic full-function manifest remains frozen at 99; current complete body receipts must be reconciled per R314, not falsely credited as 99 current objects"
+  ],
+  "next": "Inspect first genuinely changed/new/previously-unreviewed live provider definition or demonstrable member-facing query/Edge fault, with dependency checks; keep publication and production read-only."
+}

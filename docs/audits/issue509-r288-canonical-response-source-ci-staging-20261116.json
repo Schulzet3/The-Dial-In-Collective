@@ -1,0 +1,48 @@
+{
+  "run": 288,
+  "created_at_utc": "2026-11-16T15:11:12Z",
+  "project_ref": "azviqqejypsefzilgonr",
+  "repository": "Schulzet3/The-Dial-In-Collective",
+  "preflight_development_sha": "92a1a80be5c01cae138404c27c8e5f2ccb2941d7",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "main_sha": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+  "release_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5",
+  "provider_project": "ACTIVE_HEALTHY_PostgreSQL17.11.0.003",
+  "function": {
+    "identity": "private.dic_link_pending_coffee(uuid,uuid,text,jsonb)",
+    "source_md5": "140c211a4bfef175b041c037561a1e37",
+    "source_chars": 3954,
+    "review": "COMPLETE_CURRENT_REVIEW_REPEAT_NO_NEW_WORD_CREDIT",
+    "observation": "Older Pending branch changes public.coffees.name; target record remains old, canonical_name JSON built from stale target.name",
+    "api_impact": "UNVERIFIED_NO_PRIVATE_RECORDS"
+  },
+  "code": {
+    "migration": "supabase/migrations/20261116151600_dic_pending_canonical_name_response.sql",
+    "test": "supabase/tests/pending_canonical_name_response.sql",
+    "runner": "scripts/audit/isolated-sql-regression.sh",
+    "only_functional_difference": "final canonical_name selects current name from public.coffees",
+    "historical_migrations": "UNCHANGED",
+    "test_coverage": "synthetic older Pending, later Pending, first entry, old/new alias, original library identity and zero shot mutations",
+    "isolated_test": "PENDING",
+    "code_review": "PENDING",
+    "queue_id": "DIC-Q-509-pending-canonical-name-response",
+    "status": "TESTING"
+  },
+  "provider": {
+    "sql_queries": "READ_ONLY",
+    "mutations": 0,
+    "pgss_count": 4765,
+    "pgss_next": "4961-5040_UNREACHABLE",
+    "past_distinct_ids": 4604,
+    "advisors": {
+      "rls_no_policy": 13,
+      "auth_definer": 10,
+      "unindexed_fk": 14,
+      "unused_index": 8
+    },
+    "edge_active": 5
+  },
+  "privacy": "No users/notes/shots/identities/credentials or raw SQL logs read",
+  "overall": "IN_PROGRESS",
+  "next": "Source-bound isolated SQL and CI + PR; no production change"
+}

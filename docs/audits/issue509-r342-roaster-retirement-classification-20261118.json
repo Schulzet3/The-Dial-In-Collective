@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R342",
+  "date_utc": "2026-11-18",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "dce0d5c46e6ba2b180d69c829d2734f21b5fb5bf",
+    "blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "content_blob_readback_exact": true
+  },
+  "github_refs": {
+    "main": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release_production": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+  },
+  "live_provider": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.11.0.003",
+    "migrations": 69,
+    "provider_retirement_migration": {
+      "version": "20261113195659",
+      "name": "dic_retire_roaster_directory"
+    },
+    "github_retirement_file": "supabase/migrations/20261113050000_dic_retire_roaster_directory.sql",
+    "github_retirement_blob": "10775c86bf88e61160fdc66d35c65698638742d6",
+    "migration_version_filename_mapping": "NOT_INDEPENDENTLY_ESTABLISHED",
+    "production_writes": 0
+  },
+  "semantic_review": {
+    "scope": "Five roaster/archive/alias relation complete visible columns, constraints, indexes, RLS/ACL/policies/triggers plus four complete active SQL definitions, two deployed Edge entrypoints and active source verification caller; no private rows or secrets",
+    "relations": {
+      "count": 5,
+      "column_definitions": 26,
+      "constraint_definitions": 23,
+      "index_definitions": 6,
+      "rls_enabled": 5,
+      "custom_triggers": 0,
+      "explicit_client_deny_policies": 4
+    },
+    "functions": [
+      {
+        "name": "private.dic_roaster_key(text)",
+        "chars": 388,
+        "md5": "e553ae6c1cf99c3784f5d14a4f05d355"
+      },
+      {
+        "name": "private.dic_canonical_roaster_key(text)",
+        "chars": 402,
+        "md5": "646cff7cceed7011b1fc3a1b69c4d3f0"
+      },
+      {
+        "name": "private.dic_verified_roaster_page_proof(text)",
+        "chars": 1947,
+        "md5": "7ce32408a61728294ad667a9c985f5da"
+      },
+      {
+        "name": "public.dic_source_check_target(uuid)",
+        "chars": 1397,
+        "md5": "496ad9d2e74fa2d07592a442438d8ca9"
+      }
+    ],
+    "sql_sources_covered_complete": true,
+    "already_reviewed_first_time_provider_words_credit": 0,
+    "issue267_github_code_lines_credit": 0,
+    "sql_synthetic_regex_patterns": {
+      "one_literal_backslash_matches_www_and_bare_https_hosts": true,
+      "two_literal_backslashes_rejected_both": true,
+      "observed_live_source_uses_one_literal_backslash": true
+    }
+  },
+  "classification": [
+    {
+      "object": "private.dic_roaster_directory",
+      "state": "RETIRED",
+      "proof": "live relation absent"
+    },
+    {
+      "object": "private.dic_roaster_aliases",
+      "state": "RETIRED",
+      "proof": "live relation absent"
+    },
+    {
+      "object": "public.dic_roaster_preview_target",
+      "state": "RETIRED",
+      "proof": "live routine absent"
+    },
+    {
+      "object": "private.dic_roaster_identity_provenance_archive",
+      "state": "HISTORICAL_ARCHIVED",
+      "row_count": 4,
+      "sql_consumers": 0,
+      "disposition": "Preserve archival provenance and immutable migration"
+    },
+    {
+      "object": "private.dic_roaster_alias_provenance_archive",
+      "state": "HISTORICAL_ARCHIVED",
+      "row_count": 4,
+      "sql_consumers": 0,
+      "disposition": "Preserve archival provenance and immutable migration"
+    },
+    {
+      "object": "private.dic_roaster_name_aliases",
+      "state": "LEGACY_ACTIVE",
+      "row_count": 4,
+      "sql_consumers": [
+        "private.dic_canonical_roaster_key"
+      ],
+      "disposition": "Retain protected normalization map; not URL admission allowlist"
+    },
+    {
+      "object": "private.dic_official_source_attestations",
+      "state": "LEGACY_ACTIVE",
+      "row_count": 4,
+      "sql_consumers": [
+        "private.dic_verified_roaster_page_proof"
+      ],
+      "disposition": "Retain independent verified-brand source evidence; does not gate URL preview"
+    },
+    {
+      "object": "private.dic_coffee_aliases",
+      "state": "ACTIVE_ZERO_ROWS",
+      "row_count": 0,
+      "sql_consumers": [
+        "private.dic_link_pending_coffee",
+        "private.dic_admin_delete_record"
+      ],
+      "disposition": "Retain; no-consumers not proven; zero rows not grounds for drop"
+    },
+    {
+      "object": "dic-preview-coffee Edge",
+      "state": "RETIREMENT_COMPATIBILITY_TOMBSTONE_ACTIVE_DEPLOYMENT",
+      "deployed_version": 7,
+      "sha256": "5c1aa148443d83261fa35a375fa58b12ada6421a5131c93028a7dd26e3bfa1fb",
+      "source_chars": 1533,
+      "semantics": "POST 410 retired_endpoint; OPTIONS CORS; no URL fetch; no deletion authorized"
+    },
+    {
+      "object": "dic-verify-coffee Edge",
+      "state": "LEGACY_ACTIVE_INDEPENDENT_VERIFICATION",
+      "deployed_version": 10,
+      "sha256": "d59e9da29335f2d626a2779238b4f1176148f5f8f3d54539bf831ff20aa6a77e",
+      "consumer": "source/index.ts invokes service-role public.dic_source_check_target and dic_source_claim to verify separately from unrestricted Add Coffee URL intake"
+    }
+  ],
+  "verification_limitations": [
+    "This is a bounded provider subset; no whole-project COMPLETE claim",
+    "CLI migration provider version and Git migration filename differ; effective deployed object and archival parity checked, exact migration-version remapping cause remains unverified",
+    "No external clients/native consumers exhaustively proven absent; no live object dropped",
+    "No hosted endpoint request run; Edge tombstone status from complete deployed source only",
+    "No new first-time credit for previously reviewed definitions"
+  ],
+  "outcome": "NO_NEW_REPRODUCED_APP_DEFECT; CLEAR_LEGACY_CLASSIFICATION_AND_NO_UNSAFE_REMOVAL",
+  "baseline": "IN_PROGRESS",
+  "release": "NO_CHANGE_NO_PUBLISH",
+  "next": "Directly review private.dic_url_preview_attempts and public.dic_url_preview_claim full definitions and actual Netlify/Edge callers; independently reconcile provider 20261113195659 migration version alias before any source-migration identity claim"
+}

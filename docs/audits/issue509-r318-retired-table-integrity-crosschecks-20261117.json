@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 318,
+  "as_of_utc": "2026-11-17T20:56:31.720Z",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "immutable_development_sha": "4cddd5987544c36edfd3a7cf5617cf316b7a441a",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "git_blob_sha1_verified": true
+  },
+  "branches": {
+    "main": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release_production": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+  },
+  "provider": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.11.0.003",
+    "read_only": true
+  },
+  "scope": "App data-integrity and retired-invitation/directory dependency semantics; no #267 code-line credit; not a security-audit run",
+  "current_live_application_tables": 52,
+  "historical_original_tables": 46,
+  "original_no_longer_present": [
+    "private.beta_invites",
+    "private.invite_attempts",
+    "private.invite_redemptions",
+    "private.dic_roaster_aliases",
+    "private.dic_roaster_directory"
+  ],
+  "new_since_original_count": 11,
+  "live_retired_name_dependency_sql": "Five old names absent as live tables AND 0 direct mentions each in all present private/public app SQL function definitions; dynamic external consumers not proven absent",
+  "source_retirement_migrations": [
+    {
+      "path": "supabase/migrations/20261110020500_dic_admin_signup_approval_retire_invites.sql",
+      "git_blob_sha": "fea285d31190b996160d7672c1d90887f3d0c647",
+      "reviewed_selected_lines": [
+        9,
+        10,
+        11,
+        12,
+        57,
+        63,
+        66,
+        99,
+        109,
+        114,
+        424,
+        425,
+        429,
+        438
+      ],
+      "verdict": "Invite tables intentionally dropped and replaced with beta_members signup review workflow; historical migration retained"
+    },
+    {
+      "path": "supabase/migrations/20261113050000_dic_retire_roaster_directory.sql",
+      "git_blob_sha": "10775c86bf88e61160fdc66d35c65698638742d6",
+      "reviewed_selected_lines": [
+        19,
+        39,
+        438,
+        439,
+        440,
+        441
+      ],
+      "verdict": "Former roaster directory and aliases renamed into protected provenance archives; historical evidence retained, no active directory gate"
+    }
+  ],
+  "live_signup_functions_direct_complete_source": [
+    {
+      "signature": "private.dic_admin_review_signup(uuid,text,text)",
+      "chars": 2073,
+      "md5": "7e0d3bf10542694b60177fcfa9c6f7be"
+    },
+    {
+      "signature": "private.dic_admin_signup_requests(integer,integer)",
+      "chars": 1411,
+      "md5": "663c13571f70bb29b6a4351e8e6a45eb"
+    }
+  ],
+  "schema_guard": {
+    "table": "private.beta_members",
+    "signup_review_state": {
+      "not_null": true,
+      "default": "pending",
+      "allowed": [
+        "pending",
+        "approved",
+        "rejected"
+      ]
+    },
+    "verdict": "Reviewed nullability rules eliminate NULL three-valued bypass concern for the current stale-review comparison"
+  },
+  "read_only_aggregate_integrity": {
+    "shots_count": 27,
+    "owner_join_invariants_checked": 11,
+    "cross_owner_or_missing_violations": 0,
+    "owner_joins": [
+      "shot-library",
+      "shot-setup",
+      "shot-setup_version",
+      "shot-basket_version",
+      "shot-bag",
+      "shot-calibration",
+      "workspace-library",
+      "workspace-setup",
+      "recipe-library",
+      "shot_note-shot",
+      "submission-library"
+    ],
+    "coffee_count": 9,
+    "merged_coffee_count": 0,
+    "broken_merge_targets": 0,
+    "merge_cycle_roots": 0,
+    "self_merges": 0,
+    "orphan_community_coffee": 0,
+    "orphan_contribution_links": 0,
+    "orphan_quality_check": 0,
+    "orphan_recipe_family_coffee": 0,
+    "orphan_coffee_source": 0,
+    "source": "live SELECT-only aggregate catalog/data checks; no member identities, shots, notes, emails, credentials, raw logs or row values exported"
+  },
+  "findings": {
+    "new_reproducible_application_bugs": 0,
+    "justified_app_changes": 0,
+    "verified_production_drift": 0,
+    "retirement": "RETIRED for dropped invitation tables and roaster directory; provenance archives HISTORICAL, current alias map LEGACY ACTIVE only as identity normalization"
+  },
+  "coverage": {
+    "first_time_source_word_credit": 0,
+    "currentness_and_semantic_contract_review": true,
+    "full_provider_baseline": "IN_PROGRESS",
+    "native_binaries": "UNVERIFIED",
+    "hosted_auth_and_console": "UNVERIFIED"
+  },
+  "github": {
+    "scope": "DOCUMENTATION_EVIDENCE_ONLY",
+    "new_ci_runs": 0,
+    "release_queue": "UNCHANGED_TESTING"
+  },
+  "production_writes": 0,
+  "next": "Resume with first genuinely changed/unreviewed provider definition or reproducible application bottleneck; no recrediting unchanged SQL; full hosted #96 and compiled/console surfaces remain unverified",
+  "notification": "No owner decision or new materially changed actionable blocker; routine run stays in GitHub."
+}

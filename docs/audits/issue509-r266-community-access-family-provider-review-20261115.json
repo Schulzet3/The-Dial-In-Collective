@@ -1,0 +1,918 @@
+{
+  "schema": 1,
+  "issue": 509,
+  "run": 266,
+  "project": "azviqqejypsefzilgonr",
+  "status": "IN_PROGRESS",
+  "immutable_preflight_development_sha": "27ebf1b4cc8a8c4c0917798662511d8458132362",
+  "verified_preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "provider_read_only": true,
+  "provider_utc": "2026-11-15T13:51:06.601009+00:00",
+  "provider_snapshot": {
+    "app_tables": 52,
+    "functions": 114,
+    "migrations": 69,
+    "pgss_total": 4796,
+    "pgss_reset": "2026-10-09T11:11:31.487298+00:00",
+    "edge_metadata_count": 5,
+    "edge_source_recheck": "NOT_PERFORMED",
+    "advisors_summary": {
+      "security": "13 no-policy RLS, 10 signed-in SECURITY DEFINER EXECUTE, 1 password configuration warning; existing classifications only",
+      "performance": "14 foreign-key coverage and 8 unused-index suggestions; not proof of safe change",
+      "health": 0
+    }
+  },
+  "reviewed_count": 10,
+  "reviewed_full_definition_characters": 15072,
+  "reviewed": [
+    {
+      "chars": 478,
+      "lines": 14,
+      "config": [
+        "search_path=\"\""
+      ],
+      "grants": {
+        "anon": false,
+        "service_role": false,
+        "authenticated": false
+      },
+      "signature": "private.dic_community_fingerprint(c community_shots)",
+      "source_md5": "06eaeadaef87a445b99d431ae67dd409",
+      "security_definer": false,
+      "complete_provider_sql": "CREATE OR REPLACE FUNCTION private.dic_community_fingerprint(c community_shots)\n RETURNS text\n LANGUAGE sql\n IMMUTABLE\n SET search_path TO ''\nAS $function$\n select pg_catalog.md5(pg_catalog.jsonb_build_array(\n  c.coffee_id,c.style,c.dose_g,c.yield_g,c.time_s,c.temperature_c,\n  c.extraction,c.body,c.clarity,c.sweetness,c.astringency,c.grind_setting,\n  c.feed_mode,c.observed_on,c.machine_model,c.grinder_model,c.burr_set,\n  c.basket_model,c.basket_dose_g\n )::text);\n$function$\n",
+      "full_lines": [
+        1,
+        14
+      ],
+      "verdict": "Immutable hash of deidentified Community shot fields; stable duplicate detection input; no owner identifiers returned; uses MD5 only for fingerprint, not authentication; caller behavior not retested.",
+      "source_word_credit": "DIRECT_SQL_DEFINITION_ONLY"
+    },
+    {
+      "chars": 3954,
+      "lines": 58,
+      "config": [
+        "search_path=\"\""
+      ],
+      "grants": {
+        "anon": false,
+        "service_role": false,
+        "authenticated": false
+      },
+      "signature": "private.dic_link_pending_coffee(sid uuid, canonical uuid, event_name text, evidence jsonb)",
+      "source_md5": "140c211a4bfef175b041c037561a1e37",
+      "security_definer": true,
+      "complete_provider_sql": "CREATE OR REPLACE FUNCTION private.dic_link_pending_coffee(sid uuid, canonical uuid, event_name text, evidence jsonb)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare s public.coffee_submissions; target public.coffees; l public.library_entries; existing uuid;\nbegin\n select * into s from public.coffee_submissions where id=sid for update;\n if not found then raise exception using errcode='22023',message='Submission unavailable.';end if;\n select * into target from public.coffees where id=canonical and verification_state='verified' and merged_into_id is null;\n if not found then raise exception using errcode='22023',message='Verified canonical coffee unavailable.';end if;\n if s.status in ('merged','approved') and s.canonical_coffee_id=canonical then\n  return jsonb_build_object('ok',true,'coffee_id',canonical,'status','verified','already_linked',true);\n end if;\n if s.status not in ('pending','conflict') then\n  raise exception using errcode='23514',message='Submission is already resolved.';\n end if;\n -- The global display name belongs to whichever *original submission* was first.\n -- An older Pending submission may have been verified later than this canonical.\n if s.created_at < coalesce((select first_seen_at from private.dic_coffee_first_entry\n                            where coffee_id=canonical),target.created_at) then\n  if private.dic_coffee_key(s.proposed_data->>'name') is distinct from private.dic_coffee_key(target.name) then\n   insert into private.dic_coffee_aliases(coffee_id,alias_key,original_name,origin_kind)\n    values(canonical,private.dic_coffee_key(target.name),target.name,'user_confirmed')\n    on conflict(coffee_id,alias_key) do nothing;\n  end if;\n  update public.coffees set name=left(s.proposed_data->>'name',200) where id=canonical;\n  insert into private.dic_coffee_first_entry(coffee_id,first_seen_at,first_submission_id,primary_name)\n   values(canonical,s.created_at,s.id,left(s.proposed_data->>'name',200))\n   on conflict(coffee_id) do update set first_seen_at=excluded.first_seen_at,\n     first_submission_id=excluded.first_submission_id,primary_name=excluded.primary_name;\n end if;\n select * into l from public.library_entries where owner_id=s.owner_id and submission_id=s.id for update;\n if not found then raise exception using errcode='23514',message='Original library entry is missing.';end if;\n select id into existing from public.library_entries\n  where owner_id=s.owner_id and coffee_id=canonical and id<>l.id and hidden_at is null limit 1;\n if existing is not null then\n  -- Do NOT orphan existing shots, recipes or pinned workspaces.\n  raise exception using errcode='23514',message='This account already has this coffee. Reconcile the two personal entries with their history before merging.';\n end if;\n update public.coffee_submissions set canonical_coffee_id=canonical,\n   status=case when event_name='admin_approved' or event_name='official_verified' then 'approved' else 'merged' end\n where id=s.id;\n update public.library_entries set coffee_id=canonical,submission_id=null where id=l.id;\n if private.dic_coffee_key(s.proposed_data->>'name') is distinct from private.dic_coffee_key(target.name)\n   and private.dic_coffee_key(s.proposed_data->>'name') is not null then\n   insert into private.dic_coffee_aliases(coffee_id,alias_key,original_name,origin_kind)\n   values(target.id,private.dic_coffee_key(s.proposed_data->>'name'),left(s.proposed_data->>'name',200),\n    case when event_name='official_verified' then 'source_confirmed' else 'user_confirmed' end)\n   on conflict(coffee_id,alias_key) do nothing;\n end if;\n insert into private.dic_coffee_audit(coffee_id,submission_id,actor_id,event_kind,evidence)\n values(target.id,s.id,auth.uid(),event_name,coalesce(evidence,'{}'::jsonb));\n return jsonb_build_object('ok',true,'coffee_id',target.id,'status','verified',\n    'library_entry_id',l.id,'canonical_name',target.name,'reused',true);\nend $function$\n",
+      "full_lines": [
+        1,
+        58
+      ],
+      "verdict": "Restricted internal SECURITY DEFINER; locks submission/library, demands verified unmerged canonical, refuses duplicate existing library entry to preserve shots/offline history, audits action; first-submission alias naming preserved; synthetic merge tests and caller parity not independently rerun.",
+      "source_word_credit": "DIRECT_SQL_DEFINITION_ONLY"
+    },
+    {
+      "chars": 264,
+      "lines": 9,
+      "config": [
+        "search_path=\"\""
+      ],
+      "grants": {
+        "anon": false,
+        "service_role": true,
+        "authenticated": true
+      },
+      "signature": "private.is_admin()",
+      "source_md5": "396d3e8e29dbd4550ec7ac26b7589a63",
+      "security_definer": true,
+      "complete_provider_sql": "CREATE OR REPLACE FUNCTION private.is_admin()\n RETURNS boolean\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\n  select private.is_member() and exists(select 1 from private.app_admins a where a.owner_id=(select auth.uid()));\n$function$\n",
+      "full_lines": [
+        1,
+        9
+      ],
+      "verdict": "Admitted membership plus private app_admins membership; AUTH checks inside SECURITY DEFINER, no anon execution; genuine #96 JWT/HTTP acceptance unverified.",
+      "source_word_credit": "DIRECT_SQL_DEFINITION_ONLY"
+    },
+    {
+      "chars": 311,
+      "lines": 14,
+      "config": [
+        "search_path=\"\""
+      ],
+      "grants": {
+        "anon": false,
+        "service_role": true,
+        "authenticated": true
+      },
+      "signature": "private.is_member()",
+      "source_md5": "e406adb7ba7c86dcb000cb089b2693d1",
+      "security_definer": true,
+      "complete_provider_sql": "CREATE OR REPLACE FUNCTION private.is_member()\n RETURNS boolean\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\n  SELECT EXISTS(\n    SELECT 1 FROM private.beta_members m\n    WHERE m.owner_id=(SELECT auth.uid())\n      AND m.enabled\n      AND m.admitted_at IS NOT NULL\n  );\n$function$\n",
+      "full_lines": [
+        1,
+        14
+      ],
+      "verdict": "Admitted, enabled and admitted_at membership keyed to auth.uid; no anon execution; email verification through admission workflow, real session acceptance unverified.",
+      "source_word_credit": "DIRECT_SQL_DEFINITION_ONLY"
+    },
+    {
+      "chars": 2134,
+      "lines": 46,
+      "config": [
+        "search_path=\"\""
+      ],
+      "grants": {
+        "anon": false,
+        "service_role": false,
+        "authenticated": false
+      },
+      "signature": "private.refresh_personal_family(fid uuid)",
+      "source_md5": "e6a15e6de21f56345479574cc575cf95",
+      "security_definer": true,
+      "complete_provider_sql": "CREATE OR REPLACE FUNCTION private.refresh_personal_family(fid uuid)\n RETURNS void\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare\n n integer; rlo numeric; rhi numeric; rc numeric;\n tlo numeric; thi numeric; tc numeric; data jsonb;\n same_ratio_variation boolean;\nbegin\n select count(*) into n from public.shots where personal_family_id=fid and is_dialed_in and hidden_at is null;\n if n=0 then\n  update public.personal_recipe_families\n   set statistics='{\"count\":0}'::jsonb,evidence_state='retired' where id=fid;\n  return;\n end if;\n select\n  case when n>=12 then percentile_cont(.1) within group(order by ratio) else min(ratio) end,\n  case when n>=12 then percentile_cont(.9) within group(order by ratio) else max(ratio) end,\n  case when n>=12 then percentile_cont(.1) within group(order by time_s) else min(time_s) end,\n  case when n>=12 then percentile_cont(.9) within group(order by time_s) else max(time_s) end\n into rlo,rhi,tlo,thi\n from public.shots where personal_family_id=fid and is_dialed_in and hidden_at is null;\n select avg(ratio) filter(where n<12 or ratio between rlo and rhi),\n        avg(time_s) filter(where n<12 or time_s between tlo and thi)\n into rc,tc\n from public.shots where personal_family_id=fid and is_dialed_in and hidden_at is null;\n select count(distinct ratio)=1 and\n   (count(distinct time_s)>1 or count(distinct coalesce(temperature_c,-999))>1)\n into same_ratio_variation\n from public.shots where personal_family_id=fid and is_dialed_in and hidden_at is null;\n data:=jsonb_build_object(\n  'count',n,\n  'ratio',jsonb_build_object('low',rlo,'high',rhi,'center',rc),\n  'time',jsonb_build_object('low',tlo,'high',thi,'center',tc),\n  'rangeMethod',case when n>=12 then 'p10_p90' else 'observed' end,\n  'evidenceScope','ratio_only',\n  'sameRatioNonRatioVariation',coalesce(same_ratio_variation,false),\n  'nonRatioSignificance',case when same_ratio_variation then 'unproven' else 'not_indicated' end\n );\n update public.personal_recipe_families\n  set statistics=data,evidence_state=case when n>=2 then 'personally_confirmed' else 'candidate' end\n  where id=fid;\nend $function$\n",
+      "full_lines": [
+        1,
+        46
+      ],
+      "verdict": "Recomputes repeat-success ratio/time ranges, count 0 retirement, n>=2 personal confirmation; trims p10/p90 for n>=12; no client EXECUTE; no independent change justified.",
+      "source_word_credit": "DIRECT_SQL_DEFINITION_ONLY"
+    },
+    {
+      "chars": 1792,
+      "lines": 38,
+      "config": [
+        "search_path=\"\""
+      ],
+      "grants": {
+        "anon": false,
+        "service_role": false,
+        "authenticated": true
+      },
+      "signature": "private.rename_setup(mid uuid, p jsonb)",
+      "source_md5": "d5efbc70d20f75d6e3aeea4b64ab078b",
+      "security_definer": true,
+      "complete_provider_sql": "CREATE OR REPLACE FUNCTION private.rename_setup(mid uuid, p jsonb)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare\n u uuid:=private.require_member(); h text; prior private.mutation_receipts;\n s public.setups; sid uuid; expected bigint; result jsonb;\nbegin\n if mid is null or jsonb_typeof(p) is distinct from 'object' or octet_length(p::text)>32000 then\n  raise exception using errcode='22023',message='Invalid mutation payload.';\n end if;\n if coalesce(length(btrim(p->>'name')),0) not between 1 and 100 then\n  raise exception using errcode='22023',message='A setup name must be 1 to 100 characters.';\n end if;\n sid:=(p->>'setup_id')::uuid;expected:=private.required_revision(p);\n perform pg_advisory_xact_lock(hashtextextended(u::text,9311));\n h:=encode(sha256(convert_to(jsonb_build_object('action','rename_setup','payload',p)::text,'UTF8')),'hex');\n select * into prior from private.mutation_receipts where owner_id=u and mutation_id=mid;\n if found then\n  if prior.request_hash<>h then\n   raise exception using errcode='22023',message='Mutation ID reused for different changes.';\n  end if;\n  return prior.response;\n end if;\n select * into s from public.setups where owner_id=u and id=sid and archived_at is null for update;\n if not found then raise exception using errcode='42501',message='Setup is not accessible.'; end if;\n if s.revision<>expected then\n  return jsonb_build_object('ok',false,'code','conflict','revision',s.revision);\n end if;\n update public.setups set name=btrim(p->>'name') where owner_id=u and id=sid returning * into s;\n result:=jsonb_build_object('ok',true,'record',to_jsonb(s));\n insert into private.mutation_receipts(owner_id,mutation_id,request_hash,response)\n values(u,mid,h,result);\n return result;\nend $function$\n",
+      "full_lines": [
+        1,
+        38
+      ],
+      "verdict": "Admitted member, bounded payload, owner-scoped locked revision, replay hash and receipt/idempotency; authenticated EXECUTE but gated; no actual member data read.",
+      "source_word_credit": "DIRECT_SQL_DEFINITION_ONLY"
+    },
+    {
+      "chars": 347,
+      "lines": 12,
+      "config": [
+        "search_path=\"\""
+      ],
+      "grants": {
+        "anon": false,
+        "service_role": false,
+        "authenticated": false
+      },
+      "signature": "private.require_member()",
+      "source_md5": "27ff3a2a7fcf231171778a2d584b1851",
+      "security_definer": true,
+      "complete_provider_sql": "CREATE OR REPLACE FUNCTION private.require_member()\n RETURNS uuid\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare u uuid:=auth.uid();\nbegin\n if u is null or not private.is_member() then raise exception using errcode='42501',message='An admitted beta account is required.'; end if;\n return u;\nend $function$\n",
+      "full_lines": [
+        1,
+        12
+      ],
+      "verdict": "SECURITY DEFINER returns authenticated admitted member UUID or raises 42501; not directly client executable; #96 real Auth behavior unverified.",
+      "source_word_credit": "DIRECT_SQL_DEFINITION_ONLY"
+    },
+    {
+      "chars": 1286,
+      "lines": 32,
+      "config": [
+        "search_path=\"\""
+      ],
+      "grants": {
+        "anon": false,
+        "service_role": true,
+        "authenticated": true
+      },
+      "signature": "public.dic_apply_client_change(expected_owner uuid, mutation_id uuid, action text, payload jsonb)",
+      "source_md5": "da434f17a21539d72ebb8fc04c13f214",
+      "security_definer": false,
+      "complete_provider_sql": "CREATE OR REPLACE FUNCTION public.dic_apply_client_change(expected_owner uuid, mutation_id uuid, action text, payload jsonb)\n RETURNS jsonb\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\nbegin\n if action='hide_shot' then\n  raise exception using errcode='22023',\n   message='This action is no longer available. Your existing shot and offline record are unchanged.';\n end if;\n if expected_owner is null or expected_owner is distinct from auth.uid() then\n  raise exception using errcode='42501',message='Account changed before this mutation was submitted. Original pending data was retained.';\n end if;\n if action='rename_setup' then\n  return private.rename_setup(mutation_id,payload);\n end if;\n if action='submit_coffee' then\n  return private.dic_submit_coffee_auto(mutation_id,payload);\n end if;\n if action='confirm_coffee_existing' then\n  return private.dic_confirm_coffee_existing(mutation_id,payload);\n end if;\n if action='save_shot' then\n  perform set_config('dic.recommendation_context',\n    case when payload ? 'recommendation_context' and\n      octet_length((payload->'recommendation_context')::text)<=800\n     then (payload->'recommendation_context')::text\n     else 'null' end,true);\n end if;\n return private.mutate_workspace(mutation_id,action,payload);\nend $function$\n",
+      "full_lines": [
+        1,
+        32
+      ],
+      "verdict": "Owner/auth.uid match before dispatch; retired hide_shot blocked without touching original offline data; setup/coffee dispatch and recommendation context bounded; actual backend mutate_workspace behavior separate.",
+      "source_word_credit": "DIRECT_SQL_DEFINITION_ONLY"
+    },
+    {
+      "chars": 3949,
+      "lines": 74,
+      "config": [
+        "search_path=\"\""
+      ],
+      "grants": {
+        "anon": false,
+        "service_role": true,
+        "authenticated": true
+      },
+      "signature": "public.dic_search_community_shots(p_query text, p_style text, p_limit integer, p_offset integer)",
+      "source_md5": "1124d2bbfec7f47d38d06ceb2e049fe4",
+      "security_definer": true,
+      "complete_provider_sql": "CREATE OR REPLACE FUNCTION public.dic_search_community_shots(p_query text DEFAULT ''::text, p_style text DEFAULT 'all'::text, p_limit integer DEFAULT 20, p_offset integer DEFAULT 0)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare entries jsonb; total_count integer; member_id uuid; q text;\nbegin\n member_id:=private.require_member();\n if p_limit is null or p_limit not between 1 and 40 or\n    p_offset is null or p_offset not between 0 and 2000 then\n   raise exception using errcode='22023',\n    message='Community page size or offset is invalid.';\n end if;\n if p_query is null or length(p_query)>80 or p_style is null or length(p_style)>40 then\n  raise exception using errcode='22023',message='Community search parameters are invalid.';\n end if;\n q:=lower(btrim(p_query));\n select count(*)::integer into total_count\n from public.community_shots cs\n join public.coffees coffee on coffee.id=cs.coffee_id\n where cs.quality_state='eligible' and coffee.verification_state='verified'\n  and (p_style='all' or cs.style=p_style)\n  and (q='' or strpos(lower(concat_ws(' ',coffee.name,coffee.roaster,coffee.release_label,coffee.origin,coffee.process,coffee.producer,coffee.variety,coffee.roast_level)),q)>0);\n\n select coalesce(jsonb_agg(jsonb_build_object(\n   'coffee_name',page.coffee_name,'roaster',page.roaster,\n   'release_key',page.release_key,'release_label',page.release_label,\n   'release_origin',page.release_origin,'release_process',page.release_process,\n   'release_producer',page.release_producer,'release_variety',page.release_variety,\n   'release_roast_level',page.release_roast_level,\n   'style',page.style,'observed_on',page.observed_on,\n   'dose_g',page.dose_g,'yield_g',page.yield_g,\n   'ratio',page.ratio,'time_s',page.time_s,\n   'extraction',page.extraction,'body',page.body,\n   'clarity',page.clarity,'sweetness',page.sweetness,\n   'astringency',page.astringency,\n   'shot_count',page.shot_count,\n   'contributor_count',page.contributor_count\n ) order by page.observed_on desc,page.sort_id desc),'[]'::jsonb)\n into entries from (\n  select cs.id as sort_id,cs.observed_on,cs.style,cs.dose_g,\n    cs.yield_g,cs.ratio,cs.time_s,cs.extraction,cs.body,\n    cs.clarity,cs.sweetness,cs.astringency,\n    coffee.name as coffee_name,coffee.roaster,\n    encode(sha256(convert_to(coffee.id::text,'UTF8')),'hex') as release_key,\n    nullif(btrim(coffee.release_label),'') as release_label,\n    nullif(btrim(coffee.origin),'') as release_origin,\n    nullif(btrim(coffee.process),'') as release_process,\n    nullif(btrim(coffee.producer),'') as release_producer,\n    nullif(btrim(coffee.variety),'') as release_variety,\n    nullif(btrim(coffee.roast_level),'') as release_roast_level,\n    (select count(*)::integer from public.community_shots sibling\n      join public.coffees canon on canon.id=sibling.coffee_id\n      where sibling.coffee_id=cs.coffee_id and sibling.style=cs.style\n        and sibling.quality_state='eligible'\n        and canon.verification_state='verified') as shot_count,\n    (select count(distinct link.contributor_id)::integer\n      from public.community_shots sibling\n      join private.contribution_links link on link.community_shot_id=sibling.id\n      where sibling.coffee_id=cs.coffee_id and sibling.style=cs.style\n        and sibling.quality_state='eligible') as contributor_count\n  from public.community_shots cs\n  join public.coffees coffee on coffee.id=cs.coffee_id\n  where cs.quality_state='eligible' and coffee.verification_state='verified'\n  and (p_style='all' or cs.style=p_style)\n  and (q='' or strpos(lower(concat_ws(' ',coffee.name,coffee.roaster,coffee.release_label,coffee.origin,coffee.process,coffee.producer,coffee.variety,coffee.roast_level)),q)>0)\n  order by cs.observed_on desc,cs.id desc\n  limit p_limit offset p_offset\n ) page;\n return jsonb_build_object('shots',entries,'total',total_count,\n    'offset',p_offset,'page_size',p_limit);\nend $function$\n",
+      "full_lines": [
+        1,
+        74
+      ],
+      "verdict": "Admitted-only bounded 1–40/offset 0–2000/search<=80; verified coffee and eligible Community-only rows, no contributor identities in response; correlated counts/substring search may merit isolated plans, not a proven bottleneck.",
+      "source_word_credit": "DIRECT_SQL_DEFINITION_ONLY"
+    },
+    {
+      "chars": 557,
+      "lines": 13,
+      "config": [
+        "search_path=\"\""
+      ],
+      "grants": {
+        "anon": false,
+        "service_role": true,
+        "authenticated": false
+      },
+      "signature": "public.dic_trusted_source_verify(submission_id uuid, evidence jsonb)",
+      "source_md5": "59dfb6ecc6a2b8324fa9ba8512fdaaa3",
+      "security_definer": false,
+      "complete_provider_sql": "CREATE OR REPLACE FUNCTION public.dic_trusted_source_verify(submission_id uuid, evidence jsonb)\n RETURNS jsonb\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\nbegin\n if coalesce(nullif(current_setting('request.jwt.claims',true),'')::jsonb->>'role',\n             nullif(current_setting('request.jwt.claim.role',true),'')) is distinct from 'service_role' then\n  raise exception using errcode='42501',message='Trusted verifier only.';\n end if;\n return private.dic_promote_pending_coffee(submission_id,'official_verified',evidence,false);\nend $function$\n",
+      "full_lines": [
+        1,
+        13
+      ],
+      "verdict": "Restricted service_role grants and request.jwt role guard; passes to internal official verification; service-role JWT caller and downstream full promotion scope not independently revalidated.",
+      "source_word_credit": "DIRECT_SQL_DEFINITION_ONLY"
+    }
+  ],
+  "pgss": {
+    "rank_start": 3281,
+    "rank_end": 3360,
+    "rank_order": "lifetime total_exec_time DESC; dynamic ranks, NOT gap-free SQL source-word review",
+    "fingerprints": [
+      {
+        "id": "1316338182858427641",
+        "rn": 3281,
+        "rows": 1,
+        "calls": 1,
+        "mean_ms": 0.6798,
+        "total_ms": 0.68
+      },
+      {
+        "id": "-196876050798439093",
+        "rn": 3282,
+        "rows": 45,
+        "calls": 1,
+        "mean_ms": 0.674,
+        "total_ms": 0.674
+      },
+      {
+        "id": "1571400635509103364",
+        "rn": 3283,
+        "rows": 7,
+        "calls": 1,
+        "mean_ms": 0.6712,
+        "total_ms": 0.671
+      },
+      {
+        "id": "-5729245623677063188",
+        "rn": 3284,
+        "rows": 0,
+        "calls": 1,
+        "mean_ms": 0.6699,
+        "total_ms": 0.67
+      },
+      {
+        "id": "3399760740321843409",
+        "rn": 3285,
+        "rows": 1,
+        "calls": 1,
+        "mean_ms": 0.6693,
+        "total_ms": 0.669
+      },
+      {
+        "id": "1778686207726638030",
+        "rn": 3286,
+        "rows": 29,
+        "calls": 1,
+        "mean_ms": 0.6678,
+        "total_ms": 0.668
+      },
+      {
+        "id": "-2884897406635624724",
+        "rn": 3287,
+        "rows": 8,
+        "calls": 1,
+        "mean_ms": 0.6671,
+        "total_ms": 0.667
+      },
+      {
+        "id": "-7178418800933323157",
+        "rn": 3288,
+        "rows": 9,
+        "calls": 1,
+        "mean_ms": 0.666,
+        "total_ms": 0.666
+      },
+      {
+        "id": "2813616073923115122",
+        "rn": 3289,
+        "rows": 1,
+        "calls": 1,
+        "mean_ms": 0.6656,
+        "total_ms": 0.666
+      },
+      {
+        "id": "-4867945875626525360",
+        "rn": 3290,
+        "rows": 18,
+        "calls": 1,
+        "mean_ms": 0.6634,
+        "total_ms": 0.663
+      },
+      {
+        "id": "276404807104509758",
+        "rn": 3291,
+        "rows": 2,
+        "calls": 2,
+        "mean_ms": 0.3312,
+        "total_ms": 0.662
+      },
+      {
+        "id": "11692308483258385",
+        "rn": 3292,
+        "rows": 0,
+        "calls": 1,
+        "mean_ms": 0.6621,
+        "total_ms": 0.662
+      },
+      {
+        "id": "-2540493454119189026",
+        "rn": 3293,
+        "rows": 1,
+        "calls": 1,
+        "mean_ms": 0.662,
+        "total_ms": 0.662
+      },
+      {
+        "id": "4757611819730112932",
+        "rn": 3294,
+        "rows": 1,
+        "calls": 1,
+        "mean_ms": 0.661,
+        "total_ms": 0.661
+      },
+      {
+        "id": "-1724209049801752955",
+        "rn": 3295,
+        "rows": 7,
+        "calls": 7,
+        "mean_ms": 0.0943,
+        "total_ms": 0.66
+      },
+      {
+        "id": "6172879130210956392",
+        "rn": 3296,
+        "rows": 0,
+        "calls": 2,
+        "mean_ms": 0.33,
+        "total_ms": 0.66
+      },
+      {
+        "id": "-9163873184013090601",
+        "rn": 3297,
+        "rows": 0,
+        "calls": 4,
+        "mean_ms": 0.1647,
+        "total_ms": 0.659
+      },
+      {
+        "id": "-3477226523504822960",
+        "rn": 3298,
+        "rows": 1,
+        "calls": 1,
+        "mean_ms": 0.6547,
+        "total_ms": 0.655
+      },
+      {
+        "id": "-347864710441202260",
+        "rn": 3299,
+        "rows": 0,
+        "calls": 1,
+        "mean_ms": 0.6544,
+        "total_ms": 0.654
+      },
+      {
+        "id": "-9089852212615346540",
+        "rn": 3300,
+        "rows": 0,
+        "calls": 2,
+        "mean_ms": 0.3262,
+        "total_ms": 0.652
+      },
+      {
+        "id": "9213900031551115261",
+        "rn": 3301,
+        "rows": 0,
+        "calls": 96,
+        "mean_ms": 0.0068,
+        "total_ms": 0.652
+      },
+      {
+        "id": "3934751013260191924",
+        "rn": 3302,
+        "rows": 8,
+        "calls": 2,
+        "mean_ms": 0.3253,
+        "total_ms": 0.651
+      },
+      {
+        "id": "-8583816324113058754",
+        "rn": 3303,
+        "rows": 0,
+        "calls": 1,
+        "mean_ms": 0.65,
+        "total_ms": 0.65
+      },
+      {
+        "id": "9009372714066008903",
+        "rn": 3304,
+        "rows": 2,
+        "calls": 1,
+        "mean_ms": 0.6497,
+        "total_ms": 0.65
+      },
+      {
+        "id": "1136075812788393298",
+        "rn": 3305,
+        "rows": 1,
+        "calls": 1,
+        "mean_ms": 0.6484,
+        "total_ms": 0.648
+      },
+      {
+        "id": "3650255579948485027",
+        "rn": 3306,
+        "rows": 4,
+        "calls": 4,
+        "mean_ms": 0.1619,
+        "total_ms": 0.648
+      },
+      {
+        "id": "4302005458767410792",
+        "rn": 3307,
+        "rows": 0,
+        "calls": 1,
+        "mean_ms": 0.6474,
+        "total_ms": 0.647
+      },
+      {
+        "id": "-1955580159306935356",
+        "rn": 3308,
+        "rows": 4,
+        "calls": 1,
+        "mean_ms": 0.6458,
+        "total_ms": 0.646
+      },
+      {
+        "id": "-1957876152460456399",
+        "rn": 3309,
+        "rows": 4,
+        "calls": 1,
+        "mean_ms": 0.6454,
+        "total_ms": 0.645
+      },
+      {
+        "id": "1785367901761268630",
+        "rn": 3310,
+        "rows": 0,
+        "calls": 1,
+        "mean_ms": 0.6417,
+        "total_ms": 0.642
+      },
+      {
+        "id": "-8974531333301583912",
+        "rn": 3311,
+        "rows": 7,
+        "calls": 1,
+        "mean_ms": 0.6407,
+        "total_ms": 0.641
+      },
+      {
+        "id": "2182904262063667254",
+        "rn": 3312,
+        "rows": 10,
+        "calls": 10,
+        "mean_ms": 0.0641,
+        "total_ms": 0.641
+      },
+      {
+        "id": "2640669065440092014",
+        "rn": 3313,
+        "rows": 0,
+        "calls": 96,
+        "mean_ms": 0.0067,
+        "total_ms": 0.64
+      },
+      {
+        "id": "-4141324221981929637",
+        "rn": 3314,
+        "rows": 1,
+        "calls": 1,
+        "mean_ms": 0.6375,
+        "total_ms": 0.637
+      },
+      {
+        "id": "-1636729883718371837",
+        "rn": 3315,
+        "rows": 0,
+        "calls": 1,
+        "mean_ms": 0.6373,
+        "total_ms": 0.637
+      },
+      {
+        "id": "5530852199858075793",
+        "rn": 3316,
+        "rows": 3,
+        "calls": 3,
+        "mean_ms": 0.2123,
+        "total_ms": 0.637
+      },
+      {
+        "id": "-6493348271831731635",
+        "rn": 3317,
+        "rows": 5,
+        "calls": 1,
+        "mean_ms": 0.6357,
+        "total_ms": 0.636
+      },
+      {
+        "id": "331837117442537202",
+        "rn": 3318,
+        "rows": 0,
+        "calls": 4,
+        "mean_ms": 0.1588,
+        "total_ms": 0.635
+      },
+      {
+        "id": "-3055984572452574788",
+        "rn": 3319,
+        "rows": 8,
+        "calls": 1,
+        "mean_ms": 0.6339,
+        "total_ms": 0.634
+      },
+      {
+        "id": "-5150938682457855437",
+        "rn": 3320,
+        "rows": 0,
+        "calls": 1,
+        "mean_ms": 0.6338,
+        "total_ms": 0.634
+      },
+      {
+        "id": "-4464792734213249720",
+        "rn": 3321,
+        "rows": 4,
+        "calls": 2,
+        "mean_ms": 0.316,
+        "total_ms": 0.632
+      },
+      {
+        "id": "3623543369039743767",
+        "rn": 3322,
+        "rows": 0,
+        "calls": 1,
+        "mean_ms": 0.6301,
+        "total_ms": 0.63
+      },
+      {
+        "id": "3760858101470734017",
+        "rn": 3323,
+        "rows": 2,
+        "calls": 1,
+        "mean_ms": 0.6278,
+        "total_ms": 0.628
+      },
+      {
+        "id": "2935239154584839348",
+        "rn": 3324,
+        "rows": 5,
+        "calls": 1,
+        "mean_ms": 0.6272,
+        "total_ms": 0.627
+      },
+      {
+        "id": "5594968772732024327",
+        "rn": 3325,
+        "rows": 2,
+        "calls": 1,
+        "mean_ms": 0.6264,
+        "total_ms": 0.626
+      },
+      {
+        "id": "-4533134177973961126",
+        "rn": 3326,
+        "rows": 7,
+        "calls": 7,
+        "mean_ms": 0.0892,
+        "total_ms": 0.624
+      },
+      {
+        "id": "4274397611962072519",
+        "rn": 3327,
+        "rows": 1,
+        "calls": 1,
+        "mean_ms": 0.624,
+        "total_ms": 0.624
+      },
+      {
+        "id": "-1133862001526556927",
+        "rn": 3328,
+        "rows": 0,
+        "calls": 1,
+        "mean_ms": 0.6235,
+        "total_ms": 0.624
+      },
+      {
+        "id": "5449373746044518046",
+        "rn": 3329,
+        "rows": 10,
+        "calls": 2,
+        "mean_ms": 0.3117,
+        "total_ms": 0.623
+      },
+      {
+        "id": "1120539189370977756",
+        "rn": 3330,
+        "rows": 0,
+        "calls": 35,
+        "mean_ms": 0.0178,
+        "total_ms": 0.623
+      },
+      {
+        "id": "7659270061834372029",
+        "rn": 3331,
+        "rows": 8,
+        "calls": 1,
+        "mean_ms": 0.6208,
+        "total_ms": 0.621
+      },
+      {
+        "id": "-8139492057875463461",
+        "rn": 3332,
+        "rows": 0,
+        "calls": 1,
+        "mean_ms": 0.6189,
+        "total_ms": 0.619
+      },
+      {
+        "id": "3649949128851136220",
+        "rn": 3333,
+        "rows": 89,
+        "calls": 89,
+        "mean_ms": 0.0069,
+        "total_ms": 0.618
+      },
+      {
+        "id": "4860438205568080217",
+        "rn": 3334,
+        "rows": 1,
+        "calls": 1,
+        "mean_ms": 0.6176,
+        "total_ms": 0.618
+      },
+      {
+        "id": "-3967964462304781423",
+        "rn": 3335,
+        "rows": 0,
+        "calls": 1,
+        "mean_ms": 0.6174,
+        "total_ms": 0.617
+      },
+      {
+        "id": "2111246739424483410",
+        "rn": 3336,
+        "rows": 1,
+        "calls": 1,
+        "mean_ms": 0.6152,
+        "total_ms": 0.615
+      },
+      {
+        "id": "-989161355705436411",
+        "rn": 3337,
+        "rows": 1,
+        "calls": 1,
+        "mean_ms": 0.6149,
+        "total_ms": 0.615
+      },
+      {
+        "id": "-2336431506287519524",
+        "rn": 3338,
+        "rows": 0,
+        "calls": 1,
+        "mean_ms": 0.6148,
+        "total_ms": 0.615
+      },
+      {
+        "id": "-4721185251099973464",
+        "rn": 3339,
+        "rows": 0,
+        "calls": 1,
+        "mean_ms": 0.6132,
+        "total_ms": 0.613
+      },
+      {
+        "id": "-6326675245318894180",
+        "rn": 3340,
+        "rows": 3,
+        "calls": 1,
+        "mean_ms": 0.6128,
+        "total_ms": 0.613
+      },
+      {
+        "id": "6954267345180262794",
+        "rn": 3341,
+        "rows": 0,
+        "calls": 2,
+        "mean_ms": 0.3063,
+        "total_ms": 0.613
+      },
+      {
+        "id": "-198302172121610814",
+        "rn": 3342,
+        "rows": 0,
+        "calls": 1,
+        "mean_ms": 0.6105,
+        "total_ms": 0.61
+      },
+      {
+        "id": "9062612588989237397",
+        "rn": 3343,
+        "rows": 1,
+        "calls": 1,
+        "mean_ms": 0.6094,
+        "total_ms": 0.609
+      },
+      {
+        "id": "-3456374053486762738",
+        "rn": 3344,
+        "rows": 20,
+        "calls": 20,
+        "mean_ms": 0.0305,
+        "total_ms": 0.609
+      },
+      {
+        "id": "-3772665139483168451",
+        "rn": 3345,
+        "rows": 5,
+        "calls": 1,
+        "mean_ms": 0.6087,
+        "total_ms": 0.609
+      },
+      {
+        "id": "-534330837166724882",
+        "rn": 3346,
+        "rows": 0,
+        "calls": 29,
+        "mean_ms": 0.021,
+        "total_ms": 0.608
+      },
+      {
+        "id": "460875925506695078",
+        "rn": 3347,
+        "rows": 9,
+        "calls": 1,
+        "mean_ms": 0.6065,
+        "total_ms": 0.607
+      },
+      {
+        "id": "3386629105049914217",
+        "rn": 3348,
+        "rows": 1,
+        "calls": 1,
+        "mean_ms": 0.6054,
+        "total_ms": 0.605
+      },
+      {
+        "id": "4691638035242928783",
+        "rn": 3349,
+        "rows": 1,
+        "calls": 1,
+        "mean_ms": 0.6053,
+        "total_ms": 0.605
+      },
+      {
+        "id": "-6172859037582135363",
+        "rn": 3350,
+        "rows": 0,
+        "calls": 9,
+        "mean_ms": 0.0672,
+        "total_ms": 0.605
+      },
+      {
+        "id": "-5686491697492320942",
+        "rn": 3351,
+        "rows": 20,
+        "calls": 20,
+        "mean_ms": 0.0302,
+        "total_ms": 0.605
+      },
+      {
+        "id": "-1340443954786588305",
+        "rn": 3352,
+        "rows": 0,
+        "calls": 96,
+        "mean_ms": 0.0063,
+        "total_ms": 0.604
+      },
+      {
+        "id": "2781749327756785159",
+        "rn": 3353,
+        "rows": 4,
+        "calls": 1,
+        "mean_ms": 0.6033,
+        "total_ms": 0.603
+      },
+      {
+        "id": "-6623293270358405398",
+        "rn": 3354,
+        "rows": 1,
+        "calls": 1,
+        "mean_ms": 0.6013,
+        "total_ms": 0.601
+      },
+      {
+        "id": "-1656599962114980096",
+        "rn": 3355,
+        "rows": 1,
+        "calls": 1,
+        "mean_ms": 0.5983,
+        "total_ms": 0.598
+      },
+      {
+        "id": "-7452259704296374490",
+        "rn": 3356,
+        "rows": 1,
+        "calls": 1,
+        "mean_ms": 0.5933,
+        "total_ms": 0.593
+      },
+      {
+        "id": "-7307275079779926032",
+        "rn": 3357,
+        "rows": 2,
+        "calls": 1,
+        "mean_ms": 0.5899,
+        "total_ms": 0.59
+      },
+      {
+        "id": "6023780422791158005",
+        "rn": 3358,
+        "rows": 0,
+        "calls": 1,
+        "mean_ms": 0.5892,
+        "total_ms": 0.589
+      },
+      {
+        "id": "6953144331931242156",
+        "rn": 3359,
+        "rows": 1,
+        "calls": 1,
+        "mean_ms": 0.5888,
+        "total_ms": 0.589
+      },
+      {
+        "id": "-7181943031641932005",
+        "rn": 3360,
+        "rows": 1,
+        "calls": 1,
+        "mean_ms": 0.5869,
+        "total_ms": 0.587
+      }
+    ],
+    "previous_distinct": 3134,
+    "new_distinct": 74,
+    "overlap": 6,
+    "cumulative_distinct": 3208
+  },
+  "findings": [],
+  "unverified": [
+    "Full GitHub migrations/source parity for these functions",
+    "Isolated query plans/true runtime bottlenecks",
+    "Owner #96 actual signed-in JWT and HTTP acceptance",
+    "Provider-console-only Auth settings/compiled internals",
+    "Universal complete word-level provider review"
+  ],
+  "fixes": "NONE; source/test/CI unchanged",
+  "production_changes": false,
+  "next_exact_cursor": {
+    "pgss_ranks": [
+      3361,
+      3440
+    ],
+    "next_scope": "fresh provider drift, remaining complete routine/source parity, query/index plans, #96 Auth"
+  },
+  "scope_rules": "No sensitive Auth/shot/member rows, raw pgss SQL text or secret values; #267 source-code word review not credited."
+}

@@ -17,7 +17,14 @@ test('#455 missing legacy timestamp never renders a fabricated January 1970 date
   const before=structuredClone(record);
   const html=shotCard(record,{expanded:true});
   assert.match(html,/Date not recorded/);
-  assert.match(html,/aria-label="Toggle details for shot on Date not recorded"/);
+  // The disclosure's native accessible name includes visible measured details
+  // and the literal unknown date, without the old date-only aria-label override.
+  const toggle=html.match(/<button class="shot-toggle"[\s\S]*?<\/button>/)?.[0];
+  assert.ok(toggle,'shot disclosure remains a button');
+  assert.match(toggle,/Date not recorded/);
+  assert.match(toggle,/18\.0g/);
+  assert.match(toggle,/Traditional/);
+  assert.doesNotMatch(toggle,/\saria-label=/);
   assert.doesNotMatch(html,/1\/1\/1970|1\/1\/70/);
   assert.match(html,/Keep original private note/);
   assert.match(html,/Dialed In/);
@@ -30,7 +37,12 @@ test('#455 valid ISO timestamp still renders readable shot date and accessible d
   const formatted=humanDate(timestamp);
   assert.match(formatted,/2026/);
   const html=shotCard(shot(timestamp));
-  assert.ok(html.includes('aria-label="Toggle details for shot on '+formatted+'"'));
+  const toggle=html.match(/<button class="shot-toggle"[\s\S]*?<\/button>/)?.[0];
+  assert.ok(toggle,'dated shot disclosure remains a button');
+  assert.ok(toggle.includes(formatted),'visible date remains in its accessible content');
+  assert.ok(toggle.includes('36.0g'),'original yield remains in its accessible content');
+  assert.ok(toggle.includes('Traditional'),'style distinguishes the native accessible name');
+  assert.doesNotMatch(toggle,/\saria-label=/);
   assert.ok(html.includes('<span class="shot-date">'+formatted+'</span>'));
   assert.doesNotMatch(html,/Date not recorded/);
  }

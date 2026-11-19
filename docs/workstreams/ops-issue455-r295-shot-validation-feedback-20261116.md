@@ -1,0 +1,30 @@
+# Issue #455 R295 — SAFE Log Shot stale validation feedback [skip netlify]
+Date: 2026-11-16 UTC
+
+DIC_PREFLIGHT_VERIFIED development_sha=2cb0d03b90fc3bcc207b58064044f7bb07f4e356 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+## Source, authority and specific reproducible discrepancy
+- Owner #455 Option B authorizes narrow, Locked-compatible source and accessibility correctness with same-commit regression and no Publish.
+- Live immutable development source 2cb0d03b90fc3bcc207b58064044f7bb07f4e356; PREFLIGHT.md Git blob 2fb236bbfa6bac48513eeb3bd157b260853af06d fetched by commit and full raw Git blob exactly equal **before** AGENTS/issues/other providers. Rechecked development/ref and blob immediately before authoring.
+- Original source Git blobs: site/lib/ui.js bdaf4e9292229aeac4b03fc3f9da51c5497d76e5, site/cloud/main.js 28c6f6026d0ff1e6fd6575d3813b76c06a29bb47, research ledger 84079ef73659b6f4d8fb934031384d430a9a9101, release queue 3f2f2f415a5d8d09fde1c97dbab2ec15b329a2b8.
+- Real CloudApp.showLog renders role=alert #shot-validation-feedback. On invalid Save, the error() path populates it and focusShotValidationError marks invalid numeric inputs. Actual CloudApp.input removes aria-invalid and its validation-describedby upon field edits but leaves the original stale error text visible; rating taps already clear the error message. This is source-reproduced, NOT a demonstrated incident on a real user's device.
+- SAFE correction: exported UI helper acknowledgeShotInput checks only a previously locally invalid input and removes that stale local feedback, keeping unrelated noninvalid-input cloud/server errors intact. CloudApp.input invokes helper within #shot only. No changes to rule validation, rating click, five taste entries, taste targets, dose/yield/time/grind/temp values, recommendation engine, setup, versions/calibration, Turbo/Fast-Flow/slow feed, private notes/history, Community or RLS.
+
+## Changed paths and positive/negative regression before CI
+- site/lib/ui.js: new guard for local validation invalid marking, null-safe, preserves unrelated describedby and alert on ordinary valid field.
+- site/cloud/main.js: replace inline numeric input cleanup with tested helper, still only within Log Shot.
+- tests/issue455-r295-shot-validation-feedback.test.mjs: five tests covering invalid field cleared, ordinary input cloud error preserved, other invalid field preserved, null/legacy input guard, and exact CloudApp call-site/validation/five taste intact.
+- docs/audits/issue455-research-source-coverage-20261103.json: append 1 current source, 2 bounded actual-code checks, 1 SAFE proposal; preserve prior 160/491/225 entries; now 161/493/226 on this candidate only.
+- docs/RELEASE_QUEUE.json: append one unique TESTING row, not READY or DEPLOYED. Every prior item/history remains unchanged.
+- This SAME-COMMIT scoped journal carries the newly fetched preflight receipt, negative old call-chain, positive new handling, unknown real-device acceptance and next action.
+
+## Verification / not-yet-run
+- At commit authoring, all five new Node22 assertions, browser/mobile/offline, SQL/privacy/security, governance and full app acceptance are NOT_RUN/PENDING; original603 SKIPPED not PASS; no claimed cup-quality outcomes or real member data investigation. No scientific or numeric-policy change.
+- NEXT: inspect exact PR-head CI; diagnose failures and repair on a new source-bound same-commit journal, nonforce merge only when relevant checks PASS, read back actual merged source/test/ledger/queue/journal blobs and merged CI, then reconcile READY/current status in a separate CI-gated change. Preserve #33/#267/#96 workstream ownership, S019 missing provenance, no provider writes or deployment.
+
+## R295 exact head and merged CI / SAFE development-only READY — 2026-11-16 UTC [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=8593fdc856c4257201a245ea3195921eb0ec4466 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+- Source PR [#2989](https://github.com/Schulzet3/The-Dial-In-Collective/pull/2989), exact reviewed head `9e4eed504a56a150d88fb668395216b17f2d7483`; all six source/test/full-ledger/queue/SAME-COMMIT original journal blobs verified equal exact nonforce merged `8593fdc856c4257201a245ea3195921eb0ec4466`. Original preflight `2cb0d03b90fc3bcc207b58064044f7bb07f4e356`, blob `2fb236bbfa6bac48513eeb3bd157b260853af06d` remains in original code same-commit journal.
+- Exact PR-head Node22/lint [43794463528](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/43794463528) **SUCCESS 5,159 PASS, 0 FAIL, 6 intentional SKIP**; new R295 5/5 PASS. Head [approval 43794463519](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/43794463519), [browser/mobile/offline 43794463500](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/43794463500), [isolated SQL 43794463555](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/43794463555), [security 43794463546](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/43794463546) all SUCCESS.
+- Exact merged [Node22/lint 43794848885](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/43794848885) **SUCCESS 5,159 PASS / 0 FAIL / 6 SKIP**; merged [browser/mobile/offline 43794848874](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/43794848874) and [governance 43794848896](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/43794848896) SUCCESS. Unrelated #33 original241 PR-head [43794463634](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/43794463634) FAIL with its own issue ownership; later merged [43794848871](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/43794848871) SUCCESS. Original603 workflow SKIPPED, not PASS.
+- R295 queue candidate now one unique **READY DEVELOPMENT ONLY**, not production deployed, following exact CI. Source ledger 161 / 493 / 226, zero #267 line-by-line credit. No actual member validation, better-cup claim, numeric/Locked policy, new capture, Auth/Edge/SQL/production, provider write or Netlify deployment. S019 inaccessible remains unreviewed.

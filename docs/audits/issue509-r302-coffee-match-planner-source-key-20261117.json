@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R302",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "exact_initial_development_sha": "52928f3437ea44bc5943757fd7f1d98051cb54c0",
+    "verified_preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "sha_1_rechecked_before_write": "52928f3437ea44bc5943757fd7f1d98051cb54c0",
+    "blob_git_hash_verified_from_full_5532_byte_content": true
+  },
+  "owner_focus": "Bugs, dead/redundant code, obsolete source and performance first; safeguards intact",
+  "readonly_semantic_scope": "Current coffee matching/confirmation/submission SQL interactions, source-path collision existing unshipped fix, actual catalog shape and synthetic planner evidence",
+  "provider": {
+    "project_status": "ACTIVE_HEALTHY",
+    "postgres": "17.11.0.003",
+    "production_reads_only": true,
+    "applied_migrations_last_known": 69,
+    "edge_functions_active": 5
+  },
+  "complete_function_source_rereviews": [
+    {
+      "signature": "private.dic_find_coffee_matches(p jsonb)",
+      "md5": "b4b845d29ccb65ac7922109dc89816b6",
+      "characters": 6135,
+      "prior_semantic_coverage": "R263; no first-time credit",
+      "verdict": "Candidate CTE scans currently verified unmerged coffees and ranks by normalized brand/name, requested release/origin/process and trusted URL; ambiguous cases remain Pending"
+    },
+    {
+      "signature": "private.dic_confirm_coffee_existing(mid uuid,p jsonb)",
+      "md5": "0fcc44bb8a05f46e87694d3474eb7c23",
+      "characters": 3239,
+      "prior_semantic_coverage": "Existing #509 baseline; no first-time credit",
+      "verdict": "Admitted-owner idempotent confirmation checks roaster/name/release/origin before linking; no new reproduced defect"
+    },
+    {
+      "signature": "private.dic_submit_coffee_auto(mid uuid,p jsonb)",
+      "md5": "e2b11c83a686a5a9949699cd23b52e13",
+      "characters": 3771,
+      "prior_semantic_coverage": "R263; no first-time credit",
+      "verdict": "Owner-scoped mutation reuses unambiguous verified coffee or creates pending and requests confirmation; source-only provenance status intact"
+    },
+    {
+      "signature": "private.dic_source_key(value text)",
+      "md5": "07e0ef286246fdae29b9151018296f79",
+      "characters": 981,
+      "prior_semantic_coverage": "R263/R264/R278; no first-time credit",
+      "verdict": "Historical lowercase-path collision remains production until approved Publish; existing unpublished source-only migration preserves path case"
+    }
+  ],
+  "catalog_aggregate": {
+    "public_coffees_rows": 9,
+    "verified_active_unmerged_coffees": 9,
+    "public_coffee_sources_rows": 11,
+    "verified_page_sources": 3,
+    "distinct_verified_page_urls": 3,
+    "distinct_normalized_verified_page_keys": 3,
+    "normalized_collision_groups": 0
+  },
+  "planner": {
+    "query_type": "EXPLAIN FORMAT JSON only, synthetic Roaster Alpha / Example Espresso predicates, not function EXPLAIN ANALYZE, not a real API call",
+    "relation": "public.coffees",
+    "node": "Index Scan",
+    "used_index": "coffees_merge_idx",
+    "index_condition": "merged_into_id IS NULL",
+    "filter": "verification_state verified, normalized roaster/name similarity",
+    "startup_cost": 0.14,
+    "total_cost": 4.38,
+    "estimated_rows": 1,
+    "pg_stat_user_functions_rows": 0,
+    "track_functions": "none",
+    "actual_latency": "UNVERIFIED"
+  },
+  "current_indexes": {
+    "coffees": [
+      "coffees_group_idx",
+      "coffees_merge_idx",
+      "coffees_pkey"
+    ],
+    "coffee_sources": [
+      "coffee_sources_pkey",
+      "sources_coffee_idx"
+    ]
+  },
+  "known_source_drift": {
+    "path": "supabase/migrations/20261115124500_dic_source_key_path_case_guard.sql",
+    "source_blob_sha": "72d24dca72d1171ea832b26c0ebe080f2ad858c5",
+    "status": "SOURCE_ONLY_UNPUBLISHED; DO NOT REINSTALL_OR_REPEAT",
+    "active_provider_md5": "07e0ef286246fdae29b9151018296f79"
+  },
+  "decision": {
+    "new_verified_bugs": 0,
+    "new_first_time_function_words": 0,
+    "index_change_justified": false,
+    "source_fix_justified_this_run": false,
+    "reason": "Actual verified catalog is nine rows, synthetic planner chooses existing index; no measured latency and no current normalized verified-page collision. A speculative duplicate expression/trigram index or deletion would not be evidence-based."
+  },
+  "limits": [
+    "SQL performance may change with catalog growth; planner cost is not elapsed time",
+    "Private member/shot/notes/auth identities not inspected",
+    "Compiled provider/native routines and dashboard-only settings remain UNVERIFIED",
+    "R264 URL path-case mismatch is known and fixed only in development",
+    "Queue #3086 remains TESTING despite exact push CI success; do not promote without isolation/#33/#96 acceptance"
+  ],
+  "next": "Move to next genuinely unreviewed or changed provider definition/source-dependent contract; when catalog grows, retest normalized matcher plan with real estimates; reconcile source-key TESTING via existing #509 queue after isolated #33 acceptance. Do not repeat already-credit-reviewed functions or R301 exact CI.",
+  "live_writes": {
+    "production_provider": 0,
+    "github_application_code": 0,
+    "tests_or_workflows": 0,
+    "publish_or_release": 0
+  }
+}

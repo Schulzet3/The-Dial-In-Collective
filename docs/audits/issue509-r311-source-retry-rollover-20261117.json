@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 311,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight_development_sha": "4c3fead238a57e338f45055b123cb66786afaaca",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "live_provider": {
+    "function": "public.dic_source_claim(uuid)",
+    "body_md5": "68bc86486e485565d4273daf3655e0d3",
+    "full_definition_chars": 2348,
+    "consumer": "dic-verify-coffee ACTIVE Edge v10, privileged.rpc('dic_source_claim')",
+    "current_attempt_rows": 0,
+    "production_changed": false
+  },
+  "diagnosis": "The 15-minute retry rule is subordinated to a 24-hour window predicate, so a recent attempt can be allowed immediately after the daily window expires.",
+  "read_only_proof": {
+    "window_age": "24h+1s",
+    "last_attempt_age": "30s",
+    "attempts": 3,
+    "current_predicate_rejects": false,
+    "correct_predicate_rejects": true,
+    "actual_incident": "NOT_ESTABLISHED"
+  },
+  "source_fix": {
+    "migration": "supabase/migrations/20261117133000_dic_source_retry_rollover_cooldown.sql",
+    "rollback_only_test": "supabase/tests/source_worker_auth_and_admission.sql",
+    "same_commit_journal": "docs/workstreams/issue-509.md",
+    "permission_change": false,
+    "historical_migrations_modified": false
+  },
+  "semantic_review": {
+    "direct_current_function_body": true,
+    "characters": 2348,
+    "baseline_first_time_credit": 0
+  },
+  "ci": "PENDING_PR_HEAD_POSTGRESQL17_NODE22_GOVERNANCE",
+  "release_queue_status": "TESTING",
+  "hosted_auth": "#96_UNVERIFIED",
+  "production_writes": 0,
+  "baseline": "IN_PROGRESS",
+  "next": "Inspect PR-head isolated PostgreSQL17, SQL/JWT, Node22, governance and applicable browser checks. Correct failures, then nonforce merge [skip netlify]; exact merged-source source/CI evidence before READY."
+}

@@ -1,0 +1,1452 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "V11DR",
+  "date_utc": "2026-11-16",
+  "track": "STRICT_V2_PINNED_CURRENT_EXECUTABLE",
+  "reviewer": "Direct numbered AI source semantic interpretation, not independent human signoff",
+  "preflight": {
+    "development_sha": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "content_verified": true
+  },
+  "source": {
+    "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+    "path": "scripts/audit/coffee-frozen-ci.py",
+    "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+    "first_line": 2305,
+    "last_line": 2349,
+    "line_count": 45
+  },
+  "preceding_receipt": "S2-DISJOINT-CURRENT-C2-2250-2304-20261116-V11DQ.json",
+  "per_line": [
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2305,
+      "literal": "        def test_reviewed_changes_require_exact_all_score_dictionaries(self):",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Defines exact count dictionary schema negative test for each scoring family.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2305,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2321,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2306,
+      "literal": "            with tempfile.TemporaryDirectory() as temporary:",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Creates isolated temporary fixture root.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2306,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2322,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2307,
+      "literal": "                root = Path(temporary).resolve()",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Resolves fixture root to absolute path.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2307,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2323,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2308,
+      "literal": "                manifest, material, expected, index, *_rest = self._review_fixture(root)",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Loads reviewed-change synthetic manifest/material and expected case index.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2308,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2324,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2309,
+      "literal": "                for metric in (\"canonical\", \"supplementary_retention\"):",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Loops canonical and supplementary_retention count dictionaries independently.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2309,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2325,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2310,
+      "literal": "                    for mutation in (\"value\", \"missing\", \"extra\", \"boolean\"):",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Loops wrong value, missing key, extra key, boolean type mutations.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2310,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2326,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2311,
+      "literal": "                        bad = json.loads(json.dumps(manifest))",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Deep-clones manifest to isolate per-scoring-family corruption.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2311,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2327,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2312,
+      "literal": "                        if mutation == \"value\":",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Selects changed-count-value branch.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2312,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2328,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2313,
+      "literal": "                            bad[\"expected_counts\"][metric][\"cases\"] -= 1",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Decrements expected cases, testing exact count equality.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2313,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2329,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2314,
+      "literal": "                        elif mutation == \"missing\":",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Selects missing-required-count branch.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2314,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2330,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2315,
+      "literal": "                            del bad[\"expected_counts\"][metric][\"cases\"]",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Deletes mandatory cases key from expected count dictionary.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2315,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2331,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2316,
+      "literal": "                        elif mutation == \"extra\":",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Selects unexpected extra count branch.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2316,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2332,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2317,
+      "literal": "                            bad[\"expected_counts\"][metric][\"unknown\"] = 0",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Adds unknown key to dictionary, testing no permissive additional properties.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2317,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2333,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2318,
+      "literal": "                        else:",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Selects boolean type substitution branch.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2318,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2334,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2319,
+      "literal": "                            bad[\"expected_counts\"][metric][\"cases\"] = True",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Replaces integer cases count with True, testing Python bool-as-int ambiguity.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2319,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2335,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2320,
+      "literal": "                        with self.subTest(metric=metric, mutation=mutation), self.assertRaises(ValueError):",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Labels count-family/mutation subtest and requires ValueError.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2320,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2336,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2321,
+      "literal": "                            verify_reviewed_changes(bad, material, root, expected, index, \"789\")",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Runs reviewer verifier against malformed expected count dictionary.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2321,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2337,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2322,
+      "literal": "",
+      "classification": "nonexecuting_blank",
+      "individual_semantic_interpretation": "Blank physical separator between tests.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2322,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2338,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2323,
+      "literal": "        def test_reviewed_changes_reject_missing_or_nonfailed_prior_run_provenance(self):",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Defines negative test of missing or nonfailed prior workflow run provenance.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2323,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2339,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2324,
+      "literal": "            with tempfile.TemporaryDirectory() as temporary:",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Creates disposable temp fixture scope for run proof.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2324,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2340,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2325,
+      "literal": "                root = Path(temporary).resolve()",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Resolves temporary root canonical path.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2325,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2341,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2326,
+      "literal": "                manifest, material, expected, index, *_rest = self._review_fixture(root)",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Loads original reviewed-change manifest/material and expected index.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2326,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2342,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2327,
+      "literal": "                mutations = (",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Begins run provenance field/value corruption tuple.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2327,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2343,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2328,
+      "literal": "                    (\"run_id\", 789), (\"run_id\", True), (\"run_attempt\", 0), (\"conclusion\", \"SUCCESS\"),",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Tests run_id numeric instead of exact string, bool ID, zero attempt and false SUCCESS conclusion.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2328,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2344,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2329,
+      "literal": "                    (\"benchmark_status\", \"PASS\"), (\"source_commit\", \"0\" * 40),",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Tests false PASS benchmark and altered source_commit SHA.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2329,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2345,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2330,
+      "literal": "                    (\"workflow_path\", \".github/workflows/other.yml\"),",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Tests mismatched workflow_path identity.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2330,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2346,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2331,
+      "literal": "                    (\"completed_at\", \"2020-01-03T00:00:00+00:00\"))",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Tests substituted completion timestamp chronology.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2331,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2347,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2332,
+      "literal": "                for key, value in mutations:",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Iterates each run provenance mutation.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2332,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2348,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2333,
+      "literal": "                    bad = json.loads(json.dumps(manifest))",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Deep-copies manifest before tampering given field.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2333,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2349,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2334,
+      "literal": "                    bad[\"first_observed_run\"][key] = value",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Overwrites first_observed_run field with invalid value.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2334,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2350,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2335,
+      "literal": "                    with self.subTest(key=key, value=value), self.assertRaises(ValueError):",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Names field/value subtest and expects ValueError.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2335,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2351,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2336,
+      "literal": "                        verify_reviewed_changes(bad, material, root, expected, index, \"789\")",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Calls verify_reviewed_changes against false prior run provenance.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2336,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2352,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2337,
+      "literal": "                for mutation in (\"missing_artifact\", \"changed_material_hash\", \"changed_material_size\", \"not_independent\"):",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Iterates missing artifact, changed review hash/size and not-independent review claims.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2337,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2353,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2338,
+      "literal": "                    bad = json.loads(json.dumps(manifest))",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Clones manifest for each separate provenance mutation.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2338,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2354,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2339,
+      "literal": "                    if mutation == \"missing_artifact\":",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Branches into absent review artifact check.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2339,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2355,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2340,
+      "literal": "                        del bad[\"first_observed_run\"][\"artifacts\"][\"exports\"]",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Deletes required exports artifact from first observed run.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2340,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2356,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2341,
+      "literal": "                    elif mutation == \"changed_material_hash\":",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Branches into material SHA256 corruption.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2341,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2357,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2342,
+      "literal": "                        bad[\"first_observed_run\"][\"artifacts\"][\"review_material\"][\"sha256\"] = \"f\" * 64",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Replaces review_material hash with forged 64 f characters.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2342,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2358,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2343,
+      "literal": "                    elif mutation == \"changed_material_size\":",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Branches into review material byte size corruption.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2343,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2359,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2344,
+      "literal": "                        bad[\"first_observed_run\"][\"artifacts\"][\"review_material\"][\"bytes\"] += 1",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Adds one to material byte count, testing exact size pin.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2344,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2360,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2345,
+      "literal": "                    else:",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Selects independent-source-review flag corruption.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2345,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2361,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2346,
+      "literal": "                        bad[\"review\"][\"independent_source_review\"] = False",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Marks review.independent_source_review false, must be rejected.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2346,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2362,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2347,
+      "literal": "                    with self.subTest(mutation=mutation), self.assertRaises(ValueError):",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Labels mutation case and asserts strict ValueError.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2347,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2363,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2348,
+      "literal": "                        verify_reviewed_changes(bad, material, root, expected, index, \"789\")",
+      "classification": "python_source_test_assertion_or_fixture",
+      "individual_semantic_interpretation": "Runs verifier on invalid artifact/independence state.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2348,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2364,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2349,
+      "literal": "",
+      "classification": "nonexecuting_blank",
+      "individual_semantic_interpretation": "Blank physical spacer after completed provenance test.",
+      "quality_assessment": "Explicit synthetic validation of exact count-shape and original failed-run/artifact provenance, not standalone test execution proof.",
+      "bug_security_privacy_performance_assessment": "Negative tests are designed to prevent misleading original603 review claims, bool-as-int count ambiguity, false run SUCCESS, forged SHA/size, missing artifacts and false independent review flag; no actual code run, production provider or member effect.",
+      "dead_obsolete_assessment": "Active pinned Python integrity-test source, no proven dead logic or safe deletion.",
+      "duplicate_assessment": "Count and run provenance mutation variants exercise independent acceptance contracts, not established duplicate tests.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2349,
+        "exact_literal_match": true
+      },
+      "live_counterpart": {
+        "commit": "e89319655440c57127bdf8a1cfcb76f19265abb6",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2365,
+        "exact_literal_match": true,
+        "full_post_pin_drift_reviewed": false
+      },
+      "testability": "Run focused Python unittest, compare changed and unchanged paths under real original603 acceptance; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No failure reproduced or test removal established; retain evidence provenance checks.",
+      "locked_fit": "Original603 603-case immutable oracle/scorer and honest provenance, verified-source gate, explicit owner approval, no private/provider data mutation."
+    }
+  ],
+  "first_original_F001_revalidation": {
+    "strict_S2_001_41_line_literal_match": 41,
+    "additional_credit": 0
+  },
+  "legacy_R2_C2_provisional": true,
+  "verification": {
+    "source_literal_lines": 45,
+    "unique_contiguous_1_based_positions": true,
+    "preceding_line": 2304,
+    "exact_live_line_shift": 16,
+    "live_source_blob": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+    "full_live_delta_reviewed": false,
+    "python_tests_run": false
+  },
+  "findings": [
+    {
+      "classification": "BOUNDED_GOVERNANCE_TEST_REVIEW_ONLY",
+      "detail": "Tests canonical/supplementary exact count dictionary schema rejects bool-as-int and extra/missing keys; no real execution proof."
+    },
+    {
+      "classification": "FAILED_RUN_PROVENANCE_TEST_REVIEW_ONLY",
+      "detail": "Tests prior observed failure provenance and artifacts reject synthetic SUCCESS/PASS, mismatched workflow, invalid hash/size and independence false; cannot count as live run passed."
+    }
+  ],
+  "software_tests": "NOT_RUN_DOCS_ONLY",
+  "source_ci": "PENDING",
+  "provider": "NOT_APPLICABLE",
+  "next": {
+    "frozen_F215_line": 5267,
+    "pinned_C48_line": 2350,
+    "issue267_complete": false
+  }
+}

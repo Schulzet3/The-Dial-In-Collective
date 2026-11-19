@@ -1,0 +1,1039 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R328",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight_initial_development_sha": "cb972e74dd6dac301604dc1d4df815b257c41636",
+  "prewrite_development_sha": "cb972e74dd6dac301604dc1d4df815b257c41636",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "main_sha": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+  "release_production_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5",
+  "provider_observed_utc": "2026-11-18 06:50:05.517653+00",
+  "stats_reset": "2026-10-09 11:11:31.487298+00",
+  "scope": {
+    "complete_sanitized_sql_queries": 42,
+    "top_historical_administration": 26,
+    "historical_app_explain_queries": 16,
+    "original_sql_characters": 26284,
+    "sanitized_sql_characters": 23476,
+    "quoted_original_literals": "EXCLUDED",
+    "original_comments": "STRIPPED_SERVER_SIDE",
+    "app_current_source_word_credit": 0
+  },
+  "findings": {
+    "app_defect_reproduced": false,
+    "new_or_unused_index_change_justified": false,
+    "retired_invite_table": null,
+    "retired_invite_app_functions": 0,
+    "retired_invite_app_views": 0,
+    "two_historical_audit_self_query_temp_blocks": 108580,
+    "two_historical_audit_self_query_temp_mib": 848,
+    "self_audit_churn_not_proven_member_bottleneck": true,
+    "visible_history_global_timestamp_index": "POTENTIAL_FUTURE_SCALE_ONLY_NO_CURRENT_LATENCY_EVIDENCE",
+    "lock_waiters": 0
+  },
+  "index_definitions": [
+    {
+      "relation": "public.account_preferences",
+      "index": "account_active_setup_idx",
+      "complete_sql": "CREATE INDEX account_active_setup_idx ON public.account_preferences USING btree (owner_id, active_setup_id)",
+      "estimated_live_rows": 5,
+      "scan_count": 316
+    },
+    {
+      "relation": "public.account_preferences",
+      "index": "account_preferences_pkey",
+      "complete_sql": "CREATE UNIQUE INDEX account_preferences_pkey ON public.account_preferences USING btree (owner_id)",
+      "estimated_live_rows": 5,
+      "scan_count": 0
+    },
+    {
+      "relation": "public.coffees",
+      "index": "coffees_group_idx",
+      "complete_sql": "CREATE INDEX coffees_group_idx ON public.coffees USING btree (group_id)",
+      "estimated_live_rows": 9,
+      "scan_count": 0
+    },
+    {
+      "relation": "public.coffees",
+      "index": "coffees_merge_idx",
+      "complete_sql": "CREATE INDEX coffees_merge_idx ON public.coffees USING btree (merged_into_id)",
+      "estimated_live_rows": 9,
+      "scan_count": 456
+    },
+    {
+      "relation": "public.coffees",
+      "index": "coffees_pkey",
+      "complete_sql": "CREATE UNIQUE INDEX coffees_pkey ON public.coffees USING btree (id)",
+      "estimated_live_rows": 9,
+      "scan_count": 12716
+    },
+    {
+      "relation": "public.library_entries",
+      "index": "library_coffee_idx",
+      "complete_sql": "CREATE INDEX library_coffee_idx ON public.library_entries USING btree (coffee_id)",
+      "estimated_live_rows": 10,
+      "scan_count": 0
+    },
+    {
+      "relation": "public.library_entries",
+      "index": "library_coffee_once_idx",
+      "complete_sql": "CREATE UNIQUE INDEX library_coffee_once_idx ON public.library_entries USING btree (owner_id, coffee_id) WHERE (coffee_id IS NOT NULL)",
+      "estimated_live_rows": 10,
+      "scan_count": 308
+    },
+    {
+      "relation": "public.library_entries",
+      "index": "library_entries_owner_id_id_key",
+      "complete_sql": "CREATE UNIQUE INDEX library_entries_owner_id_id_key ON public.library_entries USING btree (owner_id, id)",
+      "estimated_live_rows": 10,
+      "scan_count": 780
+    },
+    {
+      "relation": "public.library_entries",
+      "index": "library_entries_pkey",
+      "complete_sql": "CREATE UNIQUE INDEX library_entries_pkey ON public.library_entries USING btree (id)",
+      "estimated_live_rows": 10,
+      "scan_count": 3
+    },
+    {
+      "relation": "public.library_entries",
+      "index": "library_submission_once_idx",
+      "complete_sql": "CREATE UNIQUE INDEX library_submission_once_idx ON public.library_entries USING btree (owner_id, submission_id) WHERE (submission_id IS NOT NULL)",
+      "estimated_live_rows": 10,
+      "scan_count": 1
+    },
+    {
+      "relation": "public.recipe_preferences",
+      "index": "preference_current_family_idx",
+      "complete_sql": "CREATE INDEX preference_current_family_idx ON public.recipe_preferences USING btree (owner_id, library_entry_id, style, current_family_id)",
+      "estimated_live_rows": 4,
+      "scan_count": 30
+    },
+    {
+      "relation": "public.recipe_preferences",
+      "index": "preference_reference_family_idx",
+      "complete_sql": "CREATE INDEX preference_reference_family_idx ON public.recipe_preferences USING btree (owner_id, library_entry_id, style, reference_family_id)",
+      "estimated_live_rows": 4,
+      "scan_count": 21
+    },
+    {
+      "relation": "public.recipe_preferences",
+      "index": "preferred_example_idx",
+      "complete_sql": "CREATE INDEX preferred_example_idx ON public.recipe_preferences USING btree (owner_id, setup_id, setup_version_id, library_entry_id, style, favorite_shot_id)",
+      "estimated_live_rows": 4,
+      "scan_count": 4859
+    },
+    {
+      "relation": "public.recipe_preferences",
+      "index": "recipe_preferences_pkey",
+      "complete_sql": "CREATE UNIQUE INDEX recipe_preferences_pkey ON public.recipe_preferences USING btree (owner_id, setup_id, setup_version_id, library_entry_id, style)",
+      "estimated_live_rows": 4,
+      "scan_count": 26
+    },
+    {
+      "relation": "public.shots",
+      "index": "shot_bag_idx",
+      "complete_sql": "CREATE INDEX shot_bag_idx ON public.shots USING btree (owner_id, library_entry_id, bag_id)",
+      "estimated_live_rows": 27,
+      "scan_count": 0
+    },
+    {
+      "relation": "public.shots",
+      "index": "shot_basket_idx",
+      "complete_sql": "CREATE INDEX shot_basket_idx ON public.shots USING btree (owner_id, setup_id, basket_version_id)",
+      "estimated_live_rows": 27,
+      "scan_count": 0
+    },
+    {
+      "relation": "public.shots",
+      "index": "shot_calibration_idx",
+      "complete_sql": "CREATE INDEX shot_calibration_idx ON public.shots USING btree (owner_id, setup_id, calibration_id)",
+      "estimated_live_rows": 27,
+      "scan_count": 0
+    },
+    {
+      "relation": "public.shots",
+      "index": "shot_family_idx",
+      "complete_sql": "CREATE INDEX shot_family_idx ON public.shots USING btree (owner_id, library_entry_id, style, personal_family_id)",
+      "estimated_live_rows": 27,
+      "scan_count": 4227
+    },
+    {
+      "relation": "public.shots",
+      "index": "shot_legacy_once_idx",
+      "complete_sql": "CREATE UNIQUE INDEX shot_legacy_once_idx ON public.shots USING btree (owner_id, legacy_id) WHERE (legacy_id IS NOT NULL)",
+      "estimated_live_rows": 27,
+      "scan_count": 4
+    },
+    {
+      "relation": "public.shots",
+      "index": "shot_library_time_idx",
+      "complete_sql": "CREATE INDEX shot_library_time_idx ON public.shots USING btree (owner_id, library_entry_id, pulled_at DESC)",
+      "estimated_live_rows": 27,
+      "scan_count": 52
+    },
+    {
+      "relation": "public.shots",
+      "index": "shots_owner_id_id_key",
+      "complete_sql": "CREATE UNIQUE INDEX shots_owner_id_id_key ON public.shots USING btree (owner_id, id)",
+      "estimated_live_rows": 27,
+      "scan_count": 1704
+    },
+    {
+      "relation": "public.shots",
+      "index": "shots_owner_id_setup_id_setup_version_id_library_entry_id_s_key",
+      "complete_sql": "CREATE UNIQUE INDEX shots_owner_id_setup_id_setup_version_id_library_entry_id_s_key ON public.shots USING btree (owner_id, setup_id, setup_version_id, library_entry_id, style, id)",
+      "estimated_live_rows": 27,
+      "scan_count": 2
+    },
+    {
+      "relation": "public.shots",
+      "index": "shots_pkey",
+      "complete_sql": "CREATE UNIQUE INDEX shots_pkey ON public.shots USING btree (id)",
+      "estimated_live_rows": 27,
+      "scan_count": 164
+    },
+    {
+      "relation": "public.workspace_coffees",
+      "index": "workspace_coffee_basket_idx",
+      "complete_sql": "CREATE INDEX workspace_coffee_basket_idx ON public.workspace_coffees USING btree (owner_id, setup_id, basket_version_id)",
+      "estimated_live_rows": 6,
+      "scan_count": 0
+    },
+    {
+      "relation": "public.workspace_coffees",
+      "index": "workspace_coffee_library_idx",
+      "complete_sql": "CREATE INDEX workspace_coffee_library_idx ON public.workspace_coffees USING btree (owner_id, library_entry_id)",
+      "estimated_live_rows": 6,
+      "scan_count": 1
+    },
+    {
+      "relation": "public.workspace_coffees",
+      "index": "workspace_coffees_pkey",
+      "complete_sql": "CREATE UNIQUE INDEX workspace_coffees_pkey ON public.workspace_coffees USING btree (owner_id, setup_id, setup_version_id, library_entry_id)",
+      "estimated_live_rows": 6,
+      "scan_count": 24
+    },
+    {
+      "relation": "public.workspace_coffees",
+      "index": "workspace_recent_idx",
+      "complete_sql": "CREATE INDEX workspace_recent_idx ON public.workspace_coffees USING btree (owner_id, setup_id, setup_version_id, last_logged_at DESC)",
+      "estimated_live_rows": 6,
+      "scan_count": 293
+    }
+  ],
+  "statements": [
+    {
+      "role": "postgres",
+      "queryid": "-6208388078200157674",
+      "raw_query_md5": "5e288e0c3ddcd3730546f6a254303ed0",
+      "raw_chars": 979,
+      "sanitized_chars": 979,
+      "exact_sanitized_reviewed_range": [
+        1,
+        979
+      ],
+      "cumulative_calls": 92,
+      "total_ms": "2468.677",
+      "mean_ms": "26.833",
+      "max_ms": "80.242",
+      "temp_blks_written": 0,
+      "classification": "SYSTEM_CATALOG_OR_AUDIT",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "SELECT\na.attrelid,\na.attnum,\na.attname,\na.attstattarget,\na.attstorage,\nt.typstorage,\na.attnotnull,\na.atthasdef,\na.attisdropped,\na.attlen,\na.attalign,\na.attislocal,\npg_catalog.format_type(t.oid, a.atttypmod) AS atttypname,\narray_to_string(a.attoptions, $1) AS attoptions,\nCASE WHEN a.attcollation <> t.typcollation THEN a.attcollation ELSE $2 END AS attcollation,\npg_catalog.array_to_string(ARRAY(SELECT pg_catalog.quote_ident(option_name) || $3 || pg_catalog.quote_literal(option_value) FROM pg_catalog.pg_options_to_table(attfdwoptions) ORDER BY option_name), $4) AS attfdwoptions,\na.attcompression AS attcompression,\na.attidentity,\nCASE WHEN a.atthasmissing AND NOT a.attisdropped THEN a.attmissingval ELSE $5 END AS attmissingval,\na.attgenerated\nFROM unnest($6::pg_catalog.oid[]) AS src(tbloid)\nJOIN pg_catalog.pg_attribute a ON (src.tbloid = a.attrelid) LEFT JOIN pg_catalog.pg_type t ON (a.atttypid = t.oid)\nWHERE a.attnum > $7::pg_catalog.int2\nORDER BY a.attrelid, a.attnum"
+    },
+    {
+      "role": "postgres",
+      "queryid": "-5872223316394589106",
+      "raw_query_md5": "453f723708686dab485e15734ce837e0",
+      "raw_chars": 115,
+      "sanitized_chars": 115,
+      "exact_sanitized_reviewed_range": [
+        1,
+        115
+      ],
+      "cumulative_calls": 101,
+      "total_ms": "671.601",
+      "mean_ms": "6.650",
+      "max_ms": "14.639",
+      "temp_blks_written": 0,
+      "classification": "SYSTEM_CATALOG_OR_AUDIT",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "SELECT tableoid, oid, rulename, ev_class AS ruletable, ev_type, is_instead, ev_enabled FROM pg_rewrite ORDER BY oid"
+    },
+    {
+      "role": "postgres",
+      "queryid": "-5605407158977367921",
+      "raw_query_md5": "da786abcd173226de9cb5145a59a101f",
+      "raw_chars": 223,
+      "sanitized_chars": 119,
+      "exact_sanitized_reviewed_range": [
+        1,
+        119
+      ],
+      "cumulative_calls": 2,
+      "total_ms": "3.472",
+      "mean_ms": "1.736",
+      "max_ms": "2.623",
+      "temp_blks_written": 0,
+      "classification": "HISTORICAL_EXPLAIN_ONLY",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "EXPLAIN (FORMAT JSON, COSTS TRUE) SELECT owner_id FROM private.invite_redemptions WHERE invite_id=$1::uuid LIMIT $2\n\n\n\n"
+    },
+    {
+      "role": "postgres",
+      "queryid": "-5489859045222137025",
+      "raw_query_md5": "33ce0dbb25761aa6a7db7009652f7950",
+      "raw_chars": 213,
+      "sanitized_chars": 109,
+      "exact_sanitized_reviewed_range": [
+        1,
+        109
+      ],
+      "cumulative_calls": 2,
+      "total_ms": "6.908",
+      "mean_ms": "3.454",
+      "max_ms": "6.320",
+      "temp_blks_written": 0,
+      "classification": "HISTORICAL_EXPLAIN_ONLY",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "EXPLAIN (FORMAT JSON, COSTS TRUE) SELECT id FROM public.library_entries WHERE coffee_id=$1::uuid LIMIT $2\n\n\n\n"
+    },
+    {
+      "role": "postgres",
+      "queryid": "-5404638503422857894",
+      "raw_query_md5": "76b967cc70c7290308be00d41a65ffce",
+      "raw_chars": 1640,
+      "sanitized_chars": 1536,
+      "exact_sanitized_reviewed_range": [
+        1,
+        1536
+      ],
+      "cumulative_calls": 11,
+      "total_ms": "579.779",
+      "mean_ms": "52.707",
+      "max_ms": "92.408",
+      "temp_blks_written": 0,
+      "classification": "SYSTEM_CATALOG_OR_AUDIT",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "WITH source AS (SELECT row_number() OVER(ORDER BY n.nspname,o.oprname,o.oid) AS ordinal,o.oid,o.oprname,n.nspname,o.oprkind,o.oprcanmerge,o.oprcanhash,o.oprleft::regtype::text AS left_type,o.oprright::regtype::text AS right_type,o.oprresult::regtype::text AS result_type,o.oprcode::regprocedure::text AS callable, pn.nspname AS callable_schema,p.provolatile,p.proparallel,p.prosecdef,p.proisstrict,p.pronargs,p.prorettype::regtype::text AS function_return_type,CASE WHEN o.oprkind=$1 THEN p.pronargs=$2 AND p.proargtypes[$3]=o.oprleft AND p.proargtypes[$4]=o.oprright WHEN o.oprkind=$5 THEN p.pronargs=$6 AND p.proargtypes[$7]=o.oprright WHEN o.oprkind=$8 THEN p.pronargs=$9 AND p.proargtypes[$10]=o.oprleft ELSE $11 END AS args_match, p.prorettype=o.oprresult AS return_match,CASE WHEN o.oprcom=$12 THEN $13 ELSE co.oprcom=o.oid END AS commutator_reciprocal, CASE WHEN o.oprnegate=$14 THEN $15 ELSE no.oprnegate=o.oid END AS negator_reciprocal,row_to_json(o)::text AS full_catalog_tuple,md5(row_to_json(o)::text) AS raw_md5 FROM pg_catalog.pg_operator o JOIN pg_catalog.pg_namespace n ON n.oid=o.oprnamespace JOIN pg_catalog.pg_proc p ON p.oid=o.oprcode JOIN pg_catalog.pg_namespace pn ON pn.oid=p.pronamespace LEFT JOIN pg_catalog.pg_operator co ON co.oid=o.oprcom LEFT JOIN pg_catalog.pg_operator no ON no.oid=o.oprnegate)\nSELECT jsonb_build_object($16,(SELECT count(*) FROM source),$17,clock_timestamp(),$18,coalesce(jsonb_agg(to_jsonb(s) ORDER BY ordinal),$19::jsonb)) AS receipt FROM source s WHERE ordinal BETWEEN $20 AND $21\n\n\n\n"
+    },
+    {
+      "role": "postgres",
+      "queryid": "-5233935798360213203",
+      "raw_query_md5": "906361d227012195c77669640d668a12",
+      "raw_chars": 311,
+      "sanitized_chars": 207,
+      "exact_sanitized_reviewed_range": [
+        1,
+        207
+      ],
+      "cumulative_calls": 2,
+      "total_ms": "6.593",
+      "mean_ms": "3.297",
+      "max_ms": "5.669",
+      "temp_blks_written": 0,
+      "classification": "HISTORICAL_EXPLAIN_ONLY",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "EXPLAIN (FORMAT JSON, COSTS TRUE) SELECT library_entry_id FROM public.workspace_coffees WHERE owner_id=auth.uid() AND setup_id=$1::uuid AND setup_version_id=$2::uuid ORDER BY last_logged_at DESC LIMIT $3\n\n\n\n"
+    },
+    {
+      "role": "postgres",
+      "queryid": "-4923639340595492245",
+      "raw_query_md5": "962415471c3e9d95a6b8015fc1eb1aad",
+      "raw_chars": 254,
+      "sanitized_chars": 150,
+      "exact_sanitized_reviewed_range": [
+        1,
+        150
+      ],
+      "cumulative_calls": 2,
+      "total_ms": "2.401",
+      "mean_ms": "1.201",
+      "max_ms": "1.207",
+      "temp_blks_written": 0,
+      "classification": "HISTORICAL_EXPLAIN_ONLY",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "EXPLAIN (FORMAT JSON, COSTS TRUE) SELECT id FROM public.shots WHERE owner_id=auth.uid() AND library_entry_id=$1::uuid AND bag_id=$2::uuid LIMIT $3\n\n\n\n"
+    },
+    {
+      "role": "postgres",
+      "queryid": "-4798715406345248451",
+      "raw_query_md5": "5866bff5c21d6886bfaa3b08c29e5cd3",
+      "raw_chars": 210,
+      "sanitized_chars": 106,
+      "exact_sanitized_reviewed_range": [
+        1,
+        106
+      ],
+      "cumulative_calls": 2,
+      "total_ms": "1.223",
+      "mean_ms": "0.612",
+      "max_ms": "0.637",
+      "temp_blks_written": 0,
+      "classification": "HISTORICAL_EXPLAIN_ONLY",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "EXPLAIN (FORMAT JSON, COSTS TRUE) SELECT id FROM public.coffees WHERE merged_into_id=$1::uuid LIMIT $2\n\n\n\n"
+    },
+    {
+      "role": "postgres",
+      "queryid": "-4773942125248906365",
+      "raw_query_md5": "df067e938075ba589c795d300f14240e",
+      "raw_chars": 470,
+      "sanitized_chars": 366,
+      "exact_sanitized_reviewed_range": [
+        1,
+        366
+      ],
+      "cumulative_calls": 20,
+      "total_ms": "928.258",
+      "mean_ms": "46.413",
+      "max_ms": "171.162",
+      "temp_blks_written": 0,
+      "classification": "SYSTEM_CATALOG_OR_AUDIT",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "select n.nspname as schema, p.proname as name, pg_get_function_identity_arguments(p.oid) as args, md5(pg_get_functiondef(p.oid)) as hash, length(pg_get_functiondef(p.oid)) as chars from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname in ($1,$2) and p.prokind in ($3,$4) order by n.nspname,p.proname,pg_get_function_identity_arguments(p.oid)\n\n\n\n"
+    },
+    {
+      "role": "postgres",
+      "queryid": "-4477714306312185396",
+      "raw_query_md5": "05d3d23cfc7b9c5a02344652117e1260",
+      "raw_chars": 253,
+      "sanitized_chars": 149,
+      "exact_sanitized_reviewed_range": [
+        1,
+        149
+      ],
+      "cumulative_calls": 2,
+      "total_ms": "3.738",
+      "mean_ms": "1.869",
+      "max_ms": "2.963",
+      "temp_blks_written": 0,
+      "classification": "HISTORICAL_EXPLAIN_ONLY",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "EXPLAIN (FORMAT JSON, COSTS TRUE) SELECT owner_id FROM public.account_preferences WHERE owner_id=auth.uid() AND active_setup_id=$1::uuid LIMIT $2\n\n\n\n"
+    },
+    {
+      "role": "postgres",
+      "queryid": "-4387401820208908788",
+      "raw_query_md5": "0b427332ef35c007b4f3455fb8e89e39",
+      "raw_chars": 279,
+      "sanitized_chars": 175,
+      "exact_sanitized_reviewed_range": [
+        1,
+        175
+      ],
+      "cumulative_calls": 2,
+      "total_ms": "2.451",
+      "mean_ms": "1.226",
+      "max_ms": "1.255",
+      "temp_blks_written": 0,
+      "classification": "HISTORICAL_EXPLAIN_ONLY",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "EXPLAIN (FORMAT JSON, COSTS TRUE) SELECT id FROM public.shots WHERE owner_id=auth.uid() AND library_entry_id=$1::uuid AND style=$2 AND personal_family_id=$3::uuid LIMIT $4\n\n\n\n"
+    },
+    {
+      "role": "postgres",
+      "queryid": "-3853304512339224630",
+      "raw_query_md5": "8634b9681e5a8c5dc8f56bf4c37a69d8",
+      "raw_chars": 113,
+      "sanitized_chars": 113,
+      "exact_sanitized_reviewed_range": [
+        1,
+        113
+      ],
+      "cumulative_calls": 101,
+      "total_ms": "3066.061",
+      "mean_ms": "30.357",
+      "max_ms": "54.528",
+      "temp_blks_written": 0,
+      "classification": "SYSTEM_CATALOG_OR_AUDIT",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "SELECT description, classoid, objoid, objsubid FROM pg_catalog.pg_description ORDER BY classoid, objoid, objsubid"
+    },
+    {
+      "role": "postgres",
+      "queryid": "-2647655532108368607",
+      "raw_query_md5": "ae75381d38b754549c487c75ea1cdddb",
+      "raw_chars": 389,
+      "sanitized_chars": 389,
+      "exact_sanitized_reviewed_range": [
+        1,
+        389
+      ],
+      "cumulative_calls": 29,
+      "total_ms": "13588.906",
+      "mean_ms": "468.583",
+      "max_ms": "2248.512",
+      "temp_blks_written": 0,
+      "classification": "PLATFORM_EXTENSION_METADATA",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "SELECT\n  e.name,\n  n.nspname AS schema,\n  e.default_version,\n  x.extversion AS installed_version,\n  e.comment,\n  ev.schema AS default_version_schema\nFROM\n  pg_available_extensions e\n  LEFT JOIN pg_extension x ON e.name = x.extname\n  LEFT JOIN pg_namespace n ON x.extnamespace = n.oid\n  LEFT JOIN pg_available_extension_versions ev\n    ON ev.name = e.name AND ev.version = e.default_version"
+    },
+    {
+      "role": "postgres",
+      "queryid": "-2631782271885077778",
+      "raw_query_md5": "db635c365551b4d638d78d6063b445d8",
+      "raw_chars": 257,
+      "sanitized_chars": 153,
+      "exact_sanitized_reviewed_range": [
+        1,
+        153
+      ],
+      "cumulative_calls": 2,
+      "total_ms": "2.464",
+      "mean_ms": "1.232",
+      "max_ms": "1.262",
+      "temp_blks_written": 0,
+      "classification": "HISTORICAL_EXPLAIN_ONLY",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "EXPLAIN (FORMAT JSON, COSTS TRUE) SELECT id FROM public.shots WHERE owner_id=auth.uid() AND setup_id=$1::uuid AND basket_version_id=$2::uuid LIMIT $3\n\n\n\n"
+    },
+    {
+      "role": "postgres",
+      "queryid": "-2418333602650654252",
+      "raw_query_md5": "70f0e053205267ed5ff02cb6495acb3e",
+      "raw_chars": 307,
+      "sanitized_chars": 203,
+      "exact_sanitized_reviewed_range": [
+        1,
+        203
+      ],
+      "cumulative_calls": 2,
+      "total_ms": "2.002",
+      "mean_ms": "1.001",
+      "max_ms": "1.002",
+      "temp_blks_written": 0,
+      "classification": "HISTORICAL_EXPLAIN_ONLY",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "EXPLAIN (FORMAT JSON, COSTS TRUE) SELECT favorite_shot_id FROM public.recipe_preferences WHERE owner_id=auth.uid() AND library_entry_id=$1::uuid AND style=$2 AND reference_family_id=$3::uuid LIMIT $4\n\n\n\n"
+    },
+    {
+      "role": "postgres",
+      "queryid": "-1824739645507651398",
+      "raw_query_md5": "652db018772d2e735f02cdf63c5e1914",
+      "raw_chars": 1009,
+      "sanitized_chars": 905,
+      "exact_sanitized_reviewed_range": [
+        1,
+        905
+      ],
+      "cumulative_calls": 25,
+      "total_ms": "609.831",
+      "mean_ms": "24.393",
+      "max_ms": "162.369",
+      "temp_blks_written": 0,
+      "classification": "MIGRATION_INVENTORY",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "WITH app AS (SELECT n.nspname,p.oid,p.proname,pg_get_functiondef(p.oid) AS def FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname IN ($1,$2)) SELECT jsonb_build_object($3,now(),$4,(SELECT count(*) FROM app),$5,(SELECT md5(string_agg(nspname||$6||proname||$7||md5(def),$8 ORDER BY nspname,proname,oid)) FROM app),$9,(SELECT count(*) FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname IN ($10,$11) AND c.relkind IN ($12,$13)),$14,(SELECT count(*) FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname IN ($15,$16) AND c.relkind IN ($17,$18)),$19,(SELECT count(*) FROM pg_policies WHERE schemaname IN ($20,$21)),$22,(SELECT count(*) FROM supabase_migrations.schema_migrations),$23,(SELECT to_regclass($24)::text),$25,(SELECT to_regclass($26)::text),$27,(SELECT to_regclass($28)::text),$29,(SELECT to_regclass($30)::text)) AS evidence\n\n\n\n"
+    },
+    {
+      "role": "postgres",
+      "queryid": "-1782829772144454983",
+      "raw_query_md5": "02b70971fc420ee2cc879bd80d7996f5",
+      "raw_chars": 1609,
+      "sanitized_chars": 1609,
+      "exact_sanitized_reviewed_range": [
+        1,
+        1609
+      ],
+      "cumulative_calls": 41,
+      "total_ms": "1043.043",
+      "mean_ms": "25.440",
+      "max_ms": "38.768",
+      "temp_blks_written": 0,
+      "classification": "SYSTEM_CATALOG_OR_AUDIT",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "WITH f AS (SELECT row_number() OVER (ORDER BY p.proname COLLATE \"C\",pg_get_function_identity_arguments(p.oid) COLLATE \"C\",p.oid) ordinal,p.oid,p.proname,pg_get_function_identity_arguments(p.oid) args,p.prokind,l.lanname lang,p.prosrc,p.prosecdef,p.proleakproof,p.provolatile,p.proparallel,p.proisstrict,coalesce(p.proacl::text,$1) acl,p.proowner FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace JOIN pg_language l ON l.oid=p.prolang WHERE n.nspname=$2) SELECT ordinal,oid,proname,args,prokind,lang,prosecdef,proleakproof,provolatile,proparallel,proisstrict,acl,pg_get_userbyid(proowner) owner,CASE WHEN prokind=$3 THEN $4||prosrc ELSE pg_get_functiondef(oid) END declaration,md5(CASE WHEN prokind=$5 THEN $6||prosrc ELSE pg_get_functiondef(oid) END) source_md5,has_function_privilege($7,oid,$8) anon_execute_catalog,has_function_privilege($9,oid,$10) authenticated_execute_catalog, CASE WHEN prokind=$11 THEN (SELECT jsonb_build_object($12,a.aggtransfn::regprocedure::text,$13,CASE WHEN a.aggfinalfn=$14 THEN $15 ELSE a.aggfinalfn::regprocedure::text END,$16,CASE WHEN a.aggcombinefn=$17 THEN $18 ELSE a.aggcombinefn::regprocedure::text END,$19,CASE WHEN a.aggserialfn=$20 THEN $21 ELSE a.aggserialfn::regprocedure::text END,$22,CASE WHEN a.aggdeserialfn=$23 THEN $24 ELSE a.aggdeserialfn::regprocedure::text END,$25,CASE WHEN a.aggmfinalfn=$26 THEN $27 ELSE a.aggmfinalfn::regprocedure::text END,$28,a.aggtranstype::regtype::text,$29,a.agginitval,$30,a.aggkind) FROM pg_aggregate a WHERE a.aggfnoid=oid) ELSE $31 END aggregate_configuration FROM f WHERE ordinal BETWEEN $32 AND $33 ORDER BY ordinal"
+    },
+    {
+      "role": "postgres",
+      "queryid": "-1312789120828613748",
+      "raw_query_md5": "5101ae88a3a14924dc7609cf58a32855",
+      "raw_chars": 250,
+      "sanitized_chars": 146,
+      "exact_sanitized_reviewed_range": [
+        1,
+        146
+      ],
+      "cumulative_calls": 2,
+      "total_ms": "2.317",
+      "mean_ms": "1.159",
+      "max_ms": "1.175",
+      "temp_blks_written": 0,
+      "classification": "HISTORICAL_EXPLAIN_ONLY",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "EXPLAIN (FORMAT JSON, COSTS TRUE) SELECT id FROM public.shots WHERE owner_id=auth.uid() AND hidden_at IS NULL ORDER BY pulled_at DESC LIMIT $1\n\n\n\n"
+    },
+    {
+      "role": "postgres",
+      "queryid": "-1221626970329596504",
+      "raw_query_md5": "dc9ae2f2f7824d76c09ebad38dc9af2e",
+      "raw_chars": 159,
+      "sanitized_chars": 159,
+      "exact_sanitized_reviewed_range": [
+        1,
+        159
+      ],
+      "cumulative_calls": 101,
+      "total_ms": "1207.438",
+      "mean_ms": "11.955",
+      "max_ms": "34.405",
+      "temp_blks_written": 0,
+      "classification": "SYSTEM_CATALOG_OR_AUDIT",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "SELECT conrelid, confrelid FROM pg_constraint JOIN pg_depend ON (objid = confrelid) WHERE contype = $1 AND refclassid = $2::regclass AND classid = $3::regclass"
+    },
+    {
+      "role": "postgres",
+      "queryid": "-985663203708294994",
+      "raw_query_md5": "c5f6e25215aa303afdbb9ed5be2cdb40",
+      "raw_chars": 1214,
+      "sanitized_chars": 1214,
+      "exact_sanitized_reviewed_range": [
+        1,
+        1214
+      ],
+      "cumulative_calls": 21,
+      "total_ms": "1034.854",
+      "mean_ms": "49.279",
+      "max_ms": "70.734",
+      "temp_blks_written": 31437,
+      "classification": "HISTORICAL_SELF_AUDIT_TELEMETRY",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "WITH p AS (SELECT s.queryid::text AS query_fingerprint,s.dbid::text AS db_oid,s.userid::text AS role_oid,s.toplevel,s.calls,s.rows,round(s.total_exec_time::numeric,$1)::text AS total_ms,round(s.mean_exec_time::numeric,$2)::text AS mean_ms,round(s.max_exec_time::numeric,$3)::text AS max_ms,s.shared_blks_hit,s.shared_blks_read,s.shared_blks_dirtied,s.shared_blks_written,s.temp_blks_read,s.temp_blks_written,round(s.shared_blk_read_time::numeric,$4)::text AS block_read_ms,round(s.shared_blk_write_time::numeric,$5)::text AS block_write_ms FROM pg_stat_statements s WHERE s.queryid IS NOT NULL AND (s.queryid::text,s.dbid::text,s.userid::text,s.toplevel::text) > ($6,$7,$8,$9) ORDER BY s.queryid::text,s.dbid::text,s.userid::text,s.toplevel::text LIMIT $10) SELECT (SELECT stats_reset::text FROM pg_stat_statements_info) AS stats_reset,(SELECT count(*)::int FROM pg_stat_statements WHERE queryid IS NOT NULL) AS total,clock_timestamp()::text AS observed_at,(SELECT count(*)::int FROM pg_stat_statements s WHERE (s.queryid::text,s.dbid::text,s.userid::text,s.toplevel::text)=($11,$12,$13,$14)) AS anchor_count,coalesce(jsonb_agg(to_jsonb(p)) FILTER (WHERE p.query_fingerprint IS NOT NULL),$15::jsonb) AS rows FROM p"
+    },
+    {
+      "role": "postgres",
+      "queryid": "-240627913431884143",
+      "raw_query_md5": "d97bbcc3be7548928e91d08274585e6a",
+      "raw_chars": 305,
+      "sanitized_chars": 201,
+      "exact_sanitized_reviewed_range": [
+        1,
+        201
+      ],
+      "cumulative_calls": 2,
+      "total_ms": "6.911",
+      "mean_ms": "3.455",
+      "max_ms": "5.895",
+      "temp_blks_written": 0,
+      "classification": "HISTORICAL_EXPLAIN_ONLY",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "EXPLAIN (FORMAT JSON, COSTS TRUE) SELECT favorite_shot_id FROM public.recipe_preferences WHERE owner_id=auth.uid() AND library_entry_id=$1::uuid AND style=$2 AND current_family_id=$3::uuid LIMIT $4\n\n\n\n"
+    },
+    {
+      "role": "postgres",
+      "queryid": "20480436307344519",
+      "raw_query_md5": "c75798965ba8b294e96536f7cd3c72da",
+      "raw_chars": 254,
+      "sanitized_chars": 150,
+      "exact_sanitized_reviewed_range": [
+        1,
+        150
+      ],
+      "cumulative_calls": 2,
+      "total_ms": "2.484",
+      "mean_ms": "1.242",
+      "max_ms": "1.273",
+      "temp_blks_written": 0,
+      "classification": "HISTORICAL_EXPLAIN_ONLY",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "EXPLAIN (FORMAT JSON, COSTS TRUE) SELECT id FROM public.shots WHERE owner_id=auth.uid() AND setup_id=$1::uuid AND calibration_id=$2::uuid LIMIT $3\n\n\n\n"
+    },
+    {
+      "role": "postgres",
+      "queryid": "388579271005311726",
+      "raw_query_md5": "fd89fb2605289e0f698c7d6d5d90e787",
+      "raw_chars": 653,
+      "sanitized_chars": 653,
+      "exact_sanitized_reviewed_range": [
+        1,
+        653
+      ],
+      "cumulative_calls": 101,
+      "total_ms": "1320.769",
+      "mean_ms": "13.077",
+      "max_ms": "22.984",
+      "temp_blks_written": 0,
+      "classification": "SYSTEM_CATALOG_OR_AUDIT",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "SELECT classid, objid, refclassid, refobjid, deptype FROM pg_depend WHERE deptype != $1 AND deptype != $2\nUNION ALL\nSELECT $3::regclass AS classid, amopfamily AS objid, refclassid, refobjid, deptype FROM pg_depend d, pg_amop o WHERE deptype NOT IN ($4, $5, $6) AND classid = $7::regclass AND objid = o.oid AND NOT (refclassid = $8::regclass AND amopfamily = refobjid)\nUNION ALL\nSELECT $9::regclass AS classid, amprocfamily AS objid, refclassid, refobjid, deptype FROM pg_depend d, pg_amproc p WHERE deptype NOT IN ($10, $11, $12) AND classid = $13::regclass AND objid = p.oid AND NOT (refclassid = $14::regclass AND amprocfamily = refobjid)\nORDER BY 1,2"
+    },
+    {
+      "role": "postgres",
+      "queryid": "507729363691324350",
+      "raw_query_md5": "c1f229e81f11c76b6a19792098d0cdab",
+      "raw_chars": 283,
+      "sanitized_chars": 179,
+      "exact_sanitized_reviewed_range": [
+        1,
+        179
+      ],
+      "cumulative_calls": 2,
+      "total_ms": "1.955",
+      "mean_ms": "0.978",
+      "max_ms": "0.979",
+      "temp_blks_written": 0,
+      "classification": "HISTORICAL_EXPLAIN_ONLY",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "EXPLAIN (FORMAT JSON, COSTS TRUE) SELECT library_entry_id FROM public.workspace_coffees WHERE owner_id=auth.uid() AND setup_id=$1::uuid AND basket_version_id=$2::uuid LIMIT $3\n\n\n\n"
+    },
+    {
+      "role": "postgres",
+      "queryid": "943707143881798460",
+      "raw_query_md5": "2101b557f6c047c5d5a940da1fae145c",
+      "raw_chars": 1152,
+      "sanitized_chars": 1048,
+      "exact_sanitized_reviewed_range": [
+        1,
+        1048
+      ],
+      "cumulative_calls": 11,
+      "total_ms": "1037.510",
+      "mean_ms": "94.319",
+      "max_ms": "151.926",
+      "temp_blks_written": 0,
+      "classification": "SYSTEM_CATALOG_OR_AUDIT",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "WITH ordered AS (SELECT row_number() OVER (ORDER BY n.nspname COLLATE \"C\",c.relname COLLATE \"C\",r.rulename COLLATE \"C\",r.oid) AS ordinal,n.nspname AS schema_name,c.relname AS relation_name,c.relkind::text AS relation_kind,c.reloptions,c.relrowsecurity,r.oid AS rule_oid,r.rulename,r.ev_type::text AS event_type,r.ev_enabled::text AS enabled,r.is_instead,pg_get_userbyid(c.relowner) AS relation_owner,pg_get_ruledef(r.oid,$1) AS source_sql,md5(pg_get_ruledef(r.oid,$2)) AS source_md5,md5(to_jsonb(r)::text) AS raw_md5,length(to_jsonb(r)::text) AS raw_json_characters,has_schema_privilege($3,n.oid,$4) AS anon_schema_usage,has_table_privilege($5,c.oid,$6) AS anon_select,has_table_privilege($7,c.oid,$8) AS anon_update,has_schema_privilege($9,n.oid,$10) AS auth_schema_usage,has_table_privilege($11,c.oid,$12) AS auth_select,has_table_privilege($13,c.oid,$14) AS auth_update FROM pg_rewrite r JOIN pg_class c ON c.oid=r.ev_class JOIN pg_namespace n ON n.oid=c.relnamespace) SELECT * FROM ordered WHERE ordinal BETWEEN $15 AND $16 ORDER BY ordinal\n\n\n\n"
+    },
+    {
+      "role": "postgres",
+      "queryid": "1021617269061216704",
+      "raw_query_md5": "3224cf53bf58a61475b459f621ba0443",
+      "raw_chars": 356,
+      "sanitized_chars": 252,
+      "exact_sanitized_reviewed_range": [
+        1,
+        252
+      ],
+      "cumulative_calls": 2,
+      "total_ms": "2.117",
+      "mean_ms": "1.059",
+      "max_ms": "1.105",
+      "temp_blks_written": 0,
+      "classification": "HISTORICAL_EXPLAIN_ONLY",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "EXPLAIN (FORMAT JSON, COSTS TRUE) SELECT favorite_shot_id FROM public.recipe_preferences WHERE owner_id=auth.uid() AND setup_id=$1::uuid AND setup_version_id=$2::uuid AND library_entry_id=$3::uuid AND style=$4 AND favorite_shot_id=$5::uuid LIMIT $6\n\n\n\n"
+    },
+    {
+      "role": "postgres",
+      "queryid": "1389798904427321193",
+      "raw_query_md5": "fe8f35852917c128b0a5ad0e38307f46",
+      "raw_chars": 1512,
+      "sanitized_chars": 1512,
+      "exact_sanitized_reviewed_range": [
+        1,
+        1512
+      ],
+      "cumulative_calls": 101,
+      "total_ms": "2911.113",
+      "mean_ms": "28.823",
+      "max_ms": "57.110",
+      "temp_blks_written": 0,
+      "classification": "SYSTEM_CATALOG_OR_AUDIT",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "SELECT c.tableoid, c.oid, c.relname, c.relnamespace, c.relkind, c.reltype, c.relowner, c.relchecks, c.relhasindex, c.relhasrules, c.relpages, c.relhastriggers, c.relpersistence, c.reloftype, c.relacl, acldefault(CASE WHEN c.relkind = $1 THEN $2::\"char\" ELSE $3::\"char\" END, c.relowner) AS acldefault, CASE WHEN c.relkind = $4 THEN (SELECT ftserver FROM pg_catalog.pg_foreign_table WHERE ftrelid = c.oid) ELSE $5 END AS foreignserver, c.relfrozenxid, tc.relfrozenxid AS tfrozenxid, tc.oid AS toid, tc.relpages AS toastpages, tc.reloptions AS toast_reloptions, d.refobjid AS owning_tab, d.refobjsubid AS owning_col, tsp.spcname AS reltablespace, $6 AS relhasoids, c.relispopulated, c.relreplident, c.relrowsecurity, c.relforcerowsecurity, c.relminmxid, tc.relminmxid AS tminmxid, array_remove(array_remove(c.reloptions,$7),$8) AS reloptions, CASE WHEN $9 = ANY (c.reloptions) THEN $10::text WHEN $11 = ANY (c.reloptions) THEN $12::text ELSE $13 END AS checkoption, am.amname, (d.deptype = $14) IS TRUE AS is_identity_sequence, c.relispartition AS ispartition \nFROM pg_class c\nLEFT JOIN pg_depend d ON (c.relkind = $15 AND d.classid = $16::regclass AND d.objid = c.oid AND d.objsubid = $17 AND d.refclassid = $18::regclass AND d.deptype IN ($19, $20))\nLEFT JOIN pg_tablespace tsp ON (tsp.oid = c.reltablespace)\nLEFT JOIN pg_am am ON (c.relam = am.oid)\nLEFT JOIN pg_class tc ON (c.reltoastrelid = tc.oid AND tc.relkind = $21 AND c.relkind <> $22)\nWHERE c.relkind IN ($23, $24, $25, $26, $27, $28, $29)\nORDER BY c.oid"
+    },
+    {
+      "role": "postgres",
+      "queryid": "1795822111904855936",
+      "raw_query_md5": "ca9dcd5c5f97530eb80b694c2ae72c71",
+      "raw_chars": 785,
+      "sanitized_chars": 785,
+      "exact_sanitized_reviewed_range": [
+        1,
+        785
+      ],
+      "cumulative_calls": 101,
+      "total_ms": "5691.464",
+      "mean_ms": "56.351",
+      "max_ms": "126.828",
+      "temp_blks_written": 0,
+      "classification": "SYSTEM_CATALOG_OR_AUDIT",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "SELECT p.tableoid, p.oid, p.proname, p.prolang, p.pronargs, p.proargtypes, p.prorettype, p.proacl, acldefault($1, p.proowner) AS acldefault, p.pronamespace, p.proowner FROM pg_proc p LEFT JOIN pg_init_privs pip ON (p.oid = pip.objoid AND pip.classoid = $2::regclass AND pip.objsubid = $3) WHERE p.prokind <> $4\n  AND NOT EXISTS (SELECT $5 FROM pg_depend WHERE classid = $6::regclass AND objid = p.oid AND deptype = $7)\n  AND (\n  pronamespace != (SELECT oid FROM pg_namespace WHERE nspname = $8)\n  OR EXISTS (SELECT $9 FROM pg_cast\n  WHERE pg_cast.oid > $10 \n  AND p.oid = pg_cast.castfunc)\n  OR EXISTS (SELECT $11 FROM pg_transform\n  WHERE pg_transform.oid > $12 AND \n  (p.oid = pg_transform.trffromsql\n  OR p.oid = pg_transform.trftosql))\n  OR p.proacl IS DISTINCT FROM pip.initprivs)"
+    },
+    {
+      "role": "postgres",
+      "queryid": "2198408845594085208",
+      "raw_query_md5": "ecac2ddc8fa0d50d1d66f80ddc6b3c52",
+      "raw_chars": 223,
+      "sanitized_chars": 223,
+      "exact_sanitized_reviewed_range": [
+        1,
+        223
+      ],
+      "cumulative_calls": 101,
+      "total_ms": "1662.454",
+      "mean_ms": "16.460",
+      "max_ms": "48.730",
+      "temp_blks_written": 0,
+      "classification": "SYSTEM_CATALOG_OR_AUDIT",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "SELECT a.tableoid, a.oid, adrelid, adnum, pg_catalog.pg_get_expr(adbin, adrelid) AS adsrc\nFROM unnest($1::pg_catalog.oid[]) AS src(tbloid)\nJOIN pg_catalog.pg_attrdef a ON (src.tbloid = a.adrelid)\nORDER BY a.adrelid, a.adnum"
+    },
+    {
+      "role": "postgres",
+      "queryid": "3580345057670158550",
+      "raw_query_md5": "823ac39ba99199d5f04a74dbf11c6f40",
+      "raw_chars": 188,
+      "sanitized_chars": 84,
+      "exact_sanitized_reviewed_range": [
+        1,
+        84
+      ],
+      "cumulative_calls": 540,
+      "total_ms": "1539.547",
+      "mean_ms": "2.851",
+      "max_ms": "11.949",
+      "temp_blks_written": 0,
+      "classification": "MIGRATION_INVENTORY",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "select version, name from supabase_migrations.schema_migrations order by version\n\n\n\n"
+    },
+    {
+      "role": "postgres",
+      "queryid": "3811097392025773740",
+      "raw_query_md5": "1a6507bd3d92679653ef96b7e3e80c50",
+      "raw_chars": 1142,
+      "sanitized_chars": 1038,
+      "exact_sanitized_reviewed_range": [
+        1,
+        1038
+      ],
+      "cumulative_calls": 14,
+      "total_ms": "5513.291",
+      "mean_ms": "393.807",
+      "max_ms": "613.187",
+      "temp_blks_written": 0,
+      "classification": "SYSTEM_CATALOG_OR_AUDIT",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "with attrs as (select row_number() over(order by n.nspname,c.oid,a.attnum) as ordinal,\nn.nspname as schema_name,c.relname as view_name,c.oid::text as view_oid,a.attnum,a.attname,\nformat_type(a.atttypid,a.atttypmod) as format_type,to_jsonb(a) as raw_tuple,\nmd5(to_jsonb(a)::text || $1 || md5(pg_get_viewdef(c.oid,$2))) as signature_md5,\nmd5(pg_get_viewdef(c.oid,$3)) as view_sql_md5,\nhas_schema_privilege($4,n.oid,$5) as anon_schema_usage,\nhas_schema_privilege($6,n.oid,$7) as member_schema_usage,\nhas_table_privilege($8,c.oid,$9) as anon_view_select,\nhas_table_privilege($10,c.oid,$11) as member_view_select,\nhas_column_privilege($12,c.oid,a.attnum,$13) as anon_col_select,\nhas_column_privilege($14,c.oid,a.attnum,$15) as member_col_select\nfrom pg_catalog.pg_attribute a join pg_catalog.pg_class c on c.oid=a.attrelid join pg_catalog.pg_namespace n on n.oid=c.relnamespace\nwhere a.attnum>$16 and not a.attisdropped and c.relkind in ($17,$18) and n.nspname <> $19)\nselect * from attrs where ordinal between $20 and $21 order by ordinal\n\n\n\n"
+    },
+    {
+      "role": "postgres",
+      "queryid": "4231681690601413654",
+      "raw_query_md5": "4e6b1888febfe1d4cf5772aa47c23c2f",
+      "raw_chars": 1074,
+      "sanitized_chars": 1074,
+      "exact_sanitized_reviewed_range": [
+        1,
+        1074
+      ],
+      "cumulative_calls": 53,
+      "total_ms": "11864.988",
+      "mean_ms": "223.868",
+      "max_ms": "312.298",
+      "temp_blks_written": 89966,
+      "classification": "HISTORICAL_SELF_AUDIT_TELEMETRY",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "WITH ranked AS (\n SELECT row_number() over (ORDER BY s.total_exec_time DESC,s.queryid) AS ordinal,\n s.queryid::text AS queryid, r.rolname AS role_name, s.calls,\n round(s.mean_exec_time::numeric,$1) AS mean_ms,\n round(s.total_exec_time::numeric,$2) AS total_ms,\n round(s.max_exec_time::numeric,$3) AS max_ms,\n s.shared_blks_hit, s.shared_blks_read, s.temp_blks_written, s.temp_blks_read,\n s.rows, CASE WHEN ltrim(s.query) ILIKE $4 THEN $5\n WHEN ltrim(s.query) ILIKE $6 THEN $7\n WHEN ltrim(s.query) ILIKE $8 THEN $9\n WHEN ltrim(s.query) ILIKE $10 THEN $11\n WHEN ltrim(s.query) ILIKE $12 THEN $13 ELSE $14 END kind,\n lower((regexp_match(s.query,$15,$16))[$17]) AS dic_identifier\n FROM pg_stat_statements s\n LEFT JOIN pg_roles r ON r.oid=s.userid\n WHERE s.calls>$18\n), selected AS (SELECT * FROM ranked WHERE ordinal BETWEEN $19 AND $20)\nSELECT jsonb_build_object($21,now(),$22,(SELECT stats_reset FROM pg_stat_statements_info),\n$23,(SELECT count(*) FROM pg_stat_statements WHERE calls>$24),\n$25,(SELECT jsonb_agg(to_jsonb(selected) ORDER BY ordinal) FROM selected)) AS evidence"
+    },
+    {
+      "role": "postgres",
+      "queryid": "4238235473499619474",
+      "raw_query_md5": "c4e19bd3efbc9e6de338266c6b1eb2a3",
+      "raw_chars": 1055,
+      "sanitized_chars": 951,
+      "exact_sanitized_reviewed_range": [
+        1,
+        951
+      ],
+      "cumulative_calls": 17,
+      "total_ms": "3548.929",
+      "mean_ms": "208.761",
+      "max_ms": "230.489",
+      "temp_blks_written": 18614,
+      "classification": "HISTORICAL_SELF_AUDIT_TELEMETRY",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "WITH ranked AS (SELECT row_number() OVER (ORDER BY s.total_exec_time DESC,s.queryid) ordinal,s.queryid::text queryid,r.rolname role_name,s.calls,round(s.mean_exec_time::numeric,$1) mean_ms,round(s.total_exec_time::numeric,$2) total_ms,round(s.max_exec_time::numeric,$3) max_ms,s.shared_blks_hit,s.shared_blks_read,s.temp_blks_written,s.temp_blks_read,s.rows,CASE WHEN ltrim(s.query) ILIKE $4 THEN $5 WHEN ltrim(s.query) ILIKE $6 THEN $7 WHEN ltrim(s.query) ILIKE $8 THEN $9 WHEN ltrim(s.query) ILIKE $10 THEN $11 WHEN ltrim(s.query) ILIKE $12 THEN $13 ELSE $14 END kind,lower((regexp_match(s.query,$15,$16))[$17]) dic_identifier FROM pg_stat_statements s LEFT JOIN pg_roles r ON r.oid=s.userid WHERE s.calls>$18) SELECT jsonb_build_object($19,now(),$20,(SELECT stats_reset FROM pg_stat_statements_info),$21,(SELECT count(*) FROM ranked),$22,(SELECT jsonb_agg(to_jsonb(r) ORDER BY ordinal) FROM ranked r WHERE ordinal BETWEEN $23 AND $24)) evidence\n\n\n\n"
+    },
+    {
+      "role": "postgres",
+      "queryid": "4318842391321595108",
+      "raw_query_md5": "0e718a5a71951db9e1835012bdccc70c",
+      "raw_chars": 1567,
+      "sanitized_chars": 1463,
+      "exact_sanitized_reviewed_range": [
+        1,
+        1463
+      ],
+      "cumulative_calls": 24,
+      "total_ms": "768.474",
+      "mean_ms": "32.020",
+      "max_ms": "38.513",
+      "temp_blks_written": 0,
+      "classification": "SYSTEM_CATALOG_OR_AUDIT",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "WITH o AS (SELECT row_number() OVER (ORDER BY n.nspname,c.relname,a.attnum,c.oid)::int ordinal,n.nspname schema_name,c.relname relation_name,c.oid::text relation_oid,c.relkind::text relkind,a.attnum,a.attname column_name,a.atttypid::text type_oid,format_type(a.atttypid,a.atttypmod) formatted_type,a.attlen,a.attbyval,a.attalign::text attalign,a.attstorage::text attstorage,a.attcompression::text compression,a.attnotnull,a.atthasdef,a.atthasmissing,(a.attmissingval IS NOT NULL) has_missing_value,a.attidentity::text identity,a.attgenerated::text generated,a.attisdropped,a.attislocal,a.attinhcount,a.attstattarget,a.attndims,a.atttypmod,a.attcollation::text collation_oid,a.attacl::text column_acl,(a.attoptions IS NOT NULL) has_column_options,(a.attfdwoptions IS NOT NULL) has_foreign_options,(t.oid IS NOT NULL) type_exists,(a.attcollation=$1 OR cl.oid IS NOT NULL) collation_exists,(d.oid IS NOT NULL) default_catalog_present FROM pg_attribute a JOIN pg_class c ON c.oid=a.attrelid JOIN pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_type t ON t.oid=a.atttypid LEFT JOIN pg_collation cl ON cl.oid=a.attcollation LEFT JOIN pg_attrdef d ON d.adrelid=a.attrelid AND d.adnum=a.attnum WHERE a.attnum>$2 AND NOT a.attisdropped), s AS (SELECT * FROM o WHERE ordinal BETWEEN $3 AND $4) SELECT jsonb_build_object($5,(SELECT count(*) FROM o),$6,(SELECT jsonb_agg(to_jsonb(s)||jsonb_build_object($7,md5(to_jsonb(s)::text)) ORDER BY ordinal) FROM s)) AS receipt\n\n\n\n"
+    },
+    {
+      "role": "postgres",
+      "queryid": "5070159525517563844",
+      "raw_query_md5": "ec839da398359094fc8280f0d14d189b",
+      "raw_chars": 204,
+      "sanitized_chars": 100,
+      "exact_sanitized_reviewed_range": [
+        1,
+        100
+      ],
+      "cumulative_calls": 2,
+      "total_ms": "5.197",
+      "mean_ms": "2.599",
+      "max_ms": "4.547",
+      "temp_blks_written": 0,
+      "classification": "HISTORICAL_EXPLAIN_ONLY",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "EXPLAIN (FORMAT JSON, COSTS TRUE) SELECT id FROM public.coffees WHERE group_id=$1::uuid LIMIT $2\n\n\n\n"
+    },
+    {
+      "role": "postgres",
+      "queryid": "5414334918816697247",
+      "raw_query_md5": "54fe2cb067cf95c9e0e77469737e8f25",
+      "raw_chars": 258,
+      "sanitized_chars": 154,
+      "exact_sanitized_reviewed_range": [
+        1,
+        154
+      ],
+      "cumulative_calls": 2,
+      "total_ms": "2.535",
+      "mean_ms": "1.267",
+      "max_ms": "1.346",
+      "temp_blks_written": 0,
+      "classification": "HISTORICAL_EXPLAIN_ONLY",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "EXPLAIN (FORMAT JSON, COSTS TRUE) SELECT id FROM public.shots WHERE owner_id=auth.uid() AND library_entry_id=$1::uuid ORDER BY pulled_at DESC LIMIT $2\n\n\n\n"
+    },
+    {
+      "role": "postgres",
+      "queryid": "6673090574049499554",
+      "raw_query_md5": "d074b154e2c75c2a01fb9892a7fb546b",
+      "raw_chars": 420,
+      "sanitized_chars": 420,
+      "exact_sanitized_reviewed_range": [
+        1,
+        420
+      ],
+      "cumulative_calls": 18,
+      "total_ms": "1112.466",
+      "mean_ms": "61.804",
+      "max_ms": "67.554",
+      "temp_blks_written": 0,
+      "classification": "SYSTEM_CATALOG_OR_AUDIT",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "SELECT c.relname AS name,md5(pg_get_viewdef(c.oid,$1)) AS md5,length(pg_get_viewdef(c.oid,$2)) AS chars,pg_get_viewdef(c.oid,$3) AS definition,pg_get_userbyid(c.relowner) AS owner,has_table_privilege($4,c.oid,$5) AS anon_select,has_table_privilege($6,c.oid,$7) AS authenticated_select FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname=$8 AND c.relkind=$9 ORDER BY c.relname OFFSET $10 LIMIT $11"
+    },
+    {
+      "role": "postgres",
+      "queryid": "6729547082994863720",
+      "raw_query_md5": "36fd49d9d1889d0b810fb7e0dd5e4a6a",
+      "raw_chars": 287,
+      "sanitized_chars": 183,
+      "exact_sanitized_reviewed_range": [
+        1,
+        183
+      ],
+      "cumulative_calls": 10,
+      "total_ms": "760.701",
+      "mean_ms": "76.070",
+      "max_ms": "80.769",
+      "temp_blks_written": 0,
+      "classification": "SYSTEM_CATALOG_OR_AUDIT",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "SELECT count(*) AS total, md5(string_agg(p.oid::text||$1||md5(to_jsonb(p)::text),$2 ORDER BY p.oid)) AS fingerprint FROM pg_catalog.pg_proc p WHERE p.pronamespace=$3::regnamespace\n\n\n\n"
+    },
+    {
+      "role": "postgres",
+      "queryid": "6908682427559685386",
+      "raw_query_md5": "4caa8764a33c403e023dba6efb5e7368",
+      "raw_chars": 1362,
+      "sanitized_chars": 1362,
+      "exact_sanitized_reviewed_range": [
+        1,
+        1362
+      ],
+      "cumulative_calls": 101,
+      "total_ms": "2179.801",
+      "mean_ms": "21.582",
+      "max_ms": "30.629",
+      "temp_blks_written": 0,
+      "classification": "SYSTEM_CATALOG_OR_AUDIT",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "SELECT t.tableoid, t.oid, i.indrelid, t.relname AS indexname, pg_catalog.pg_get_indexdef(i.indexrelid) AS indexdef, i.indkey, i.indisclustered, c.contype, c.conname, c.condeferrable, c.condeferred, c.tableoid AS contableoid, c.oid AS conoid, pg_catalog.pg_get_constraintdef(c.oid, $1) AS condef, (SELECT spcname FROM pg_catalog.pg_tablespace s WHERE s.oid = t.reltablespace) AS tablespace, t.reloptions AS indreloptions, i.indisreplident, inh.inhparent AS parentidx, i.indnkeyatts AS indnkeyatts, i.indnatts AS indnatts, (SELECT pg_catalog.array_agg(attnum ORDER BY attnum)   FROM pg_catalog.pg_attribute   WHERE attrelid = i.indexrelid AND     attstattarget >= $2) AS indstatcols, (SELECT pg_catalog.array_agg(attstattarget ORDER BY attnum)   FROM pg_catalog.pg_attribute   WHERE attrelid = i.indexrelid AND     attstattarget >= $3) AS indstatvals, i.indnullsnotdistinct FROM unnest($4::pg_catalog.oid[]) AS src(tbloid)\nJOIN pg_catalog.pg_index i ON (src.tbloid = i.indrelid) JOIN pg_catalog.pg_class t ON (t.oid = i.indexrelid) JOIN pg_catalog.pg_class t2 ON (t2.oid = i.indrelid) LEFT JOIN pg_catalog.pg_constraint c ON (i.indrelid = c.conrelid AND i.indexrelid = c.conindid AND c.contype IN ($5,$6,$7)) LEFT JOIN pg_catalog.pg_inherits inh ON (inh.inhrelid = indexrelid) WHERE (i.indisvalid OR t2.relkind = $8) AND i.indisready ORDER BY i.indrelid, indexname"
+    },
+    {
+      "role": "postgres",
+      "queryid": "7318359561385170287",
+      "raw_query_md5": "03d19e705d93421c103abc6b28e4f263",
+      "raw_chars": 88,
+      "sanitized_chars": 88,
+      "exact_sanitized_reviewed_range": [
+        1,
+        88
+      ],
+      "cumulative_calls": 101,
+      "total_ms": "962.718",
+      "mean_ms": "9.532",
+      "max_ms": "18.368",
+      "temp_blks_written": 0,
+      "classification": "SYSTEM_CATALOG_OR_AUDIT",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "SELECT tableoid, oid, collname, collnamespace, collowner, collencoding FROM pg_collation"
+    },
+    {
+      "role": "postgres",
+      "queryid": "8189937652372678201",
+      "raw_query_md5": "31a7690a300fc6824aecdfe049d60bf8",
+      "raw_chars": 1940,
+      "sanitized_chars": 1836,
+      "exact_sanitized_reviewed_range": [
+        1,
+        1836
+      ],
+      "cumulative_calls": 34,
+      "total_ms": "909.562",
+      "mean_ms": "26.752",
+      "max_ms": "143.319",
+      "temp_blks_written": 0,
+      "classification": "SYSTEM_CATALOG_OR_AUDIT",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "WITH f AS (\n SELECT row_number() OVER(ORDER BY p.proname COLLATE \"C\",pg_get_function_identity_arguments(p.oid) COLLATE \"C\",p.oid) ordinal,\n p.oid,p.proname,pg_get_function_identity_arguments(p.oid) args,p.prokind,l.lanname lang,p.prosrc,\n p.prosecdef,p.proleakproof,p.provolatile,p.proparallel,p.proisstrict,coalesce(p.proacl::text,$1) acl,p.proowner\n FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace\n JOIN pg_language l ON l.oid=p.prolang WHERE n.nspname=$2\n), defs AS (\n SELECT ordinal,oid,proname,args,prokind,lang,prosecdef,proleakproof,provolatile,proparallel,proisstrict,acl,\n pg_get_userbyid(proowner) owner,\n CASE WHEN prokind=$3 THEN $4||prosrc ELSE pg_get_functiondef(oid) END declaration,\n CASE WHEN prokind=$5 THEN (\n SELECT jsonb_build_object($6,a.aggtransfn::regprocedure::text,\n $7,CASE WHEN a.aggfinalfn=$8 THEN $9 ELSE a.aggfinalfn::regprocedure::text END,\n $10,CASE WHEN a.aggcombinefn=$11 THEN $12 ELSE a.aggcombinefn::regprocedure::text END,\n $13,CASE WHEN a.aggserialfn=$14 THEN $15 ELSE a.aggserialfn::regprocedure::text END,\n $16,CASE WHEN a.aggdeserialfn=$17 THEN $18 ELSE a.aggdeserialfn::regprocedure::text END,\n $19,CASE WHEN a.aggmfinalfn=$20 THEN $21 ELSE a.aggmfinalfn::regprocedure::text END,\n $22,a.aggtranstype::regtype::text,$23,a.agginitval,$24,a.aggkind,$25,proparallel) FROM pg_aggregate a WHERE a.aggfnoid=oid)\n ELSE $26 END aggregate_configuration,\n has_function_privilege($27,oid,$28) anon_execute_catalog,\n has_function_privilege($29,oid,$30) authenticated_execute_catalog\n FROM f WHERE ordinal BETWEEN $31 AND $32\n) SELECT ordinal,oid,proname,args,prokind,lang,prosecdef,proleakproof,provolatile,proparallel,proisstrict,acl,owner,\n declaration,md5(declaration) declaration_md5,aggregate_configuration,\n anon_execute_catalog,authenticated_execute_catalog FROM defs ORDER BY ordinal\n\n\n\n"
+    },
+    {
+      "role": "postgres",
+      "queryid": "8688123793471819058",
+      "raw_query_md5": "370cbf8aa579ba999138811df725b8e9",
+      "raw_chars": 922,
+      "sanitized_chars": 818,
+      "exact_sanitized_reviewed_range": [
+        1,
+        818
+      ],
+      "cumulative_calls": 24,
+      "total_ms": "1447.467",
+      "mean_ms": "60.311",
+      "max_ms": "101.032",
+      "temp_blks_written": 0,
+      "classification": "SYSTEM_CATALOG_OR_AUDIT",
+      "verdict": "Reviewed complete safe SQL shape; historical management/introspection, not a proven active app defect or safe object deletion",
+      "complete_sanitized_sql": "WITH r AS (SELECT row_number() OVER(ORDER BY d.classoid,d.objoid,d.objsubid) rn,c.relname catalog,d.classoid,d.objoid,d.objsubid,d.description,pg_identify_object(d.classoid,d.objoid,d.objsubid)::text object_identity,(pg_identify_object(d.classoid,d.objoid,d.objsubid)).schema object_schema,md5(jsonb_build_array(d.classoid::text,d.objoid::text,d.objsubid,d.description)::text) source_md5,p.prosecdef security_definer,p.provolatile volatility,p.proparallel parallel FROM pg_catalog.pg_description d LEFT JOIN pg_catalog.pg_class c ON c.oid=d.classoid LEFT JOIN pg_catalog.pg_proc p ON d.classoid=$1::regclass AND p.oid=d.objoid) SELECT rn,catalog,objoid::text object_oid,objsubid,description,object_identity,object_schema,source_md5,security_definer,volatility,parallel FROM r WHERE rn BETWEEN $2 AND $3 ORDER BY rn\n\n\n\n"
+    }
+  ],
+  "not_reviewed": [
+    "Excluded quoted-literal statements",
+    "Original source comments stripped",
+    "Hosted Auth & console controls",
+    "Compiled functions and true real-member latency"
+  ],
+  "baseline": "IN_PROGRESS",
+  "previous_source_fixes": "TESTING",
+  "source_test_ci_changes": 0,
+  "new_ci_runs": 0,
+  "provider_writes": 0,
+  "published": false,
+  "next": "Changed/unreviewed provider source or proved app issue; do not recredit 42 R328 SQL query IDs."
+}

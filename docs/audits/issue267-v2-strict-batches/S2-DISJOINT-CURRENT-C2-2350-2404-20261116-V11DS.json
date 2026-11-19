@@ -1,0 +1,1762 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "V11DS",
+  "date_utc": "2026-11-16",
+  "track": "STRICT_V2_PINNED_CURRENT_EXECUTABLE",
+  "reviewer": "AI literal numbered source per-line interpretation, NOT human certification",
+  "preflight": {
+    "development_sha": "562c97dac97ab53da3d5e93f49ea691762059e74",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "content_verified": true
+  },
+  "source": {
+    "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+    "path": "scripts/audit/coffee-frozen-ci.py",
+    "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+    "first_line": 2350,
+    "last_line": 2404,
+    "line_count": 55
+  },
+  "preceding_receipt": "S2-DISJOINT-CURRENT-C2-2305-2349-20261116-V11DR.json",
+  "per_line": [
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2350,
+      "literal": "        def test_reviewed_changes_require_original_literal_or_frozen_oracle_quotes(self):",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Defines test requiring source quotation from immutable literal or frozen oracle.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2350,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2366,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2351,
+      "literal": "            with tempfile.TemporaryDirectory() as temporary:",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Creates isolated temporary directory for source quote fixture.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2351,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2367,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2352,
+      "literal": "                root = Path(temporary).resolve()",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Resolves fixture root.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2352,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2368,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2353,
+      "literal": "                manifest, material, expected, index, *_rest = self._review_fixture(root)",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Loads manifest, expected source and case index.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2353,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2369,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2354,
+      "literal": "                evidence = manifest[\"changes\"][0][\"source_evidence\"][0]",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Selects first captured source evidence from approved change.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2354,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2370,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2355,
+      "literal": "                oracle_evidence = {**evidence, \"quote_basis\": \"frozen_oracle\"}",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Clones evidence changing quote_basis to frozen_oracle.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2355,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2371,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2356,
+      "literal": "                verify_reviewed_source_quote(root, expected, index, \"case-0000\", oracle_evidence)",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Valid frozen_oracle evidence is accepted for case-0000.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2356,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2372,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2357,
+      "literal": "                for key, value in ((\"capture_file\", \"../page.html\"), (\"capture_id\", \"wrong\"),",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Begins adversarial source quote metadata combinations, first directory traversal and wrong capture ID.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2357,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2373,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2358,
+      "literal": "                                   (\"capture_sha256\", \"f\" * 64), (\"quote\", \"Absent source quotation\"),",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Tests forged SHA256 digest and absent quote string.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2358,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2374,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2359,
+      "literal": "                                   (\"capture_source_url\", \"https://other.test/product\"),",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Tests provenance URL pointing to a different external site.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2359,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2375,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2360,
+      "literal": "                                   (\"quote_basis\", \"new_current_web_page\")):",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Tests disallowed new_current_web_page basis instead of frozen-original authority.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2360,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2376,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2361,
+      "literal": "                    with self.subTest(key=key), self.assertRaises(ValueError):",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Names source-evidence field subtest and expects ValueError.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2361,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2377,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2362,
+      "literal": "                        verify_reviewed_source_quote(root, expected, index, \"case-0000\", {**evidence, key: value})",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Verifies each tampered evidence field fails strict quote provenance.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2362,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2378,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2363,
+      "literal": "                with self.assertRaises(ValueError):",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Expects error when valid oracle basis carries false quote.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2363,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2379,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2364,
+      "literal": "                    verify_reviewed_source_quote(root, expected, index, \"case-0000\",",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Calls oracle quote verifier with selected case evidence.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2364,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2380,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2365,
+      "literal": "                                                 {**oracle_evidence, \"quote\": \"Not in frozen oracle\"})",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Supplies invented text absent from immutable oracle, requiring rejection.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2365,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2381,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2366,
+      "literal": "                for evidence_list in ([], [evidence, evidence]):",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Iterates empty source evidence and duplicate same-evidence entry cases.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2366,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2382,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2367,
+      "literal": "                    bad = json.loads(json.dumps(manifest))",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Deep-clones approved-change manifest per evidence list mutation.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2367,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2383,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2368,
+      "literal": "                    bad[\"changes\"][0][\"source_evidence\"] = evidence_list",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Replaces source evidence with missing or repeated items.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2368,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2384,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2369,
+      "literal": "                    with self.subTest(quote_count=len(evidence_list)), self.assertRaises(ValueError):",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Names quote-count subtest and expects ValueError.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2369,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2385,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2370,
+      "literal": "                        verify_reviewed_changes(bad, material, root, expected, index, \"789\")",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Calls strict reviewed-change verifier against missing/duplicate evidence.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2370,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2386,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2371,
+      "literal": "",
+      "classification": "nonexecuting_blank",
+      "individual_semantic_interpretation": "Blank separator before capture mutation test.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2371,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2387,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2372,
+      "literal": "        def test_reviewed_source_quote_rejects_mutated_capture_packet_and_linked_directory(self):",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Defines source quote rejection on mutated source capture, packet, and linked case directory.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2372,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2388,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2373,
+      "literal": "            for mutation in (\"capture\", \"packet\", \"linked_directory\"):",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Iterates three independent source integrity mutation types.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2373,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2389,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2374,
+      "literal": "                with tempfile.TemporaryDirectory() as temporary:",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Creates fresh temporary workspace for each case.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2374,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2390,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2375,
+      "literal": "                    root = Path(temporary).resolve()",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Resolves fixture root.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2375,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2391,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2376,
+      "literal": "                    manifest, _material, expected, index, *_rest = self._review_fixture(root)",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Loads immutable capture/packet fixture and expected case index.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2376,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2392,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2377,
+      "literal": "                    folder = root / \"cases/case-0000\"",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Selects case-0000 directory under tests/cases.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2377,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2393,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2378,
+      "literal": "                    if mutation == \"capture\":",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Selects capture contents mutation variant.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2378,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2394,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2379,
+      "literal": "                        (folder / \"page.html\").write_text(\"Mutated original source\", encoding=\"utf-8\")",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Overwrites captured page.html with false source text.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2379,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2395,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2380,
+      "literal": "                    elif mutation == \"packet\":",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Selects packet metadata mutation variant.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2380,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2396,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2381,
+      "literal": "                        (folder / \"source-packet.json\").write_text(\"{}\", encoding=\"utf-8\")",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Overwrites source-packet.json with empty JSON.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2381,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2397,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2382,
+      "literal": "                    else:",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Selects linked-directory path escape variant.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2382,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2398,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2383,
+      "literal": "                        moved = root / \"linked-source\"",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Targets alternate linked-source sibling directory.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2383,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2399,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2384,
+      "literal": "                        folder.rename(moved)",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Renames real case folder outside trusted pathname.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2384,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2400,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2385,
+      "literal": "                        folder.symlink_to(moved, target_is_directory=True)",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Symlinks case folder name to moved directory to test directory traversal detection.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2385,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2401,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2386,
+      "literal": "                    with self.subTest(mutation=mutation), self.assertRaises(ValueError):",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Labels mutation subtest and requires ValueError.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2386,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2402,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2387,
+      "literal": "                        verify_reviewed_source_quote(root, expected, index, \"case-0000\",",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Calls quote verifier on mutated source/packet/path.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2387,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2403,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2388,
+      "literal": "                                                     manifest[\"changes\"][0][\"source_evidence\"][0])",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Provides manifest's original source evidence for consistency check.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2388,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2404,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2389,
+      "literal": "",
+      "classification": "nonexecuting_blank",
+      "individual_semantic_interpretation": "Blank separator before losses/offline acceptance test.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2389,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2405,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2390,
+      "literal": "        def test_reviewed_changes_cannot_waive_losses_exports_or_offline_failures(self):",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Defines negative test ensuring reviewed changes cannot waive losses, exports or offline failures.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2390,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2406,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2391,
+      "literal": "            with tempfile.TemporaryDirectory() as temporary:",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Creates isolated temporary fixture for change blocker test.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2391,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2407,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2392,
+      "literal": "                root = Path(temporary).resolve()",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Resolves fixture root path.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2392,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2408,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2393,
+      "literal": "                manifest, material, expected, index, _old, _current, exports = self._review_fixture(root)",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Loads manifest/review material/case index and export evidence.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2393,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2409,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2394,
+      "literal": "                accepted = verify_reviewed_changes(manifest, material, root, expected, index, \"789\")",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Verifies synthetic reviewed changes to produce approved material reference.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2394,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2410,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2395,
+      "literal": "                helper = {\"passed\": 603, \"failures\": [], \"attempted_external_operations\": []}",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Supplies synthetic 603 passed with zero failures/external operations; NOT actual benchmark execution.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2395,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2411,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2396,
+      "literal": "                for exact, retained in (([{\"case_id\": \"case-0000\"}], []), ([], [{\"case_id\": \"case-0000\"}])):",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Iterates nonempty unapproved exact loss and retention loss cases.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2396,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2412,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2397,
+      "literal": "                    self.assertTrue(benchmark_change_blockers(material, accepted, exact, retained, exports, helper))",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Asserts benchmark blocker nonempty for loss or retention change despite approved source.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2397,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2413,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2398,
+      "literal": "                for patch in ({\"exports\": 602}, {\"download_clicks\": 602},",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Iterates export-count, download click-count, and export-error mutations.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2398,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2414,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2399,
+      "literal": "                              {\"errors\": [{\"case_id\": \"case-0000\", \"kind\": \"export_failed\"}]}):",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Includes synthetic export_failed error entry.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2399,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2415,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2400,
+      "literal": "                    self.assertTrue(benchmark_change_blockers(material, accepted, [], [], {**exports, **patch}, helper))",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Asserts export count/click/error changes create blockers.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2400,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2416,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2401,
+      "literal": "                for patch in ({\"passed\": 602}, {\"failures\": [{\"case_id\": \"case-0000\"}]},",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Iterates decreased passed count, failed case, external operation attempt.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2401,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2417,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2402,
+      "literal": "                              {\"attempted_external_operations\": [\"socket.connect\"]}):",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Includes prohibited socket.connect in synthetic helper result.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2402,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2418,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2403,
+      "literal": "                    self.assertTrue(benchmark_change_blockers(material, accepted, [], [], exports, {**helper, **patch}))",
+      "classification": "python_unit_test_fixture_or_assertion",
+      "individual_semantic_interpretation": "Asserts blocker remains for passing count reduction, failures or attempted network use.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2403,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2419,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    },
+    {
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "line": 2404,
+      "literal": "",
+      "classification": "nonexecuting_blank",
+      "individual_semantic_interpretation": "Blank separator between original603 integrity tests.",
+      "quality_assessment": "Original-capture/quote/packet and 603 export/offline integrity negative-case assertion; preserve independently scoped strict verification contract.",
+      "bug_security_privacy_performance_assessment": "Negative tests guard against forged provenance, symlink/directory traversal, unknown quoted facts, false acceptance of source loss, export mismatch, network call attempts. No production actions and no executed test PASS demonstrated.",
+      "dead_obsolete_assessment": "Current pinned source is a source-evidence safety test, not proved unreachable or removable.",
+      "duplicate_assessment": "Separate quote/packet/source path attacks and loss/export/offline blockers; no demonstrated redundant branch.",
+      "pinned_counterpart": {
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "line": 2404,
+        "exact_literal_match": true
+      },
+      "observed_live_counterpart": {
+        "commit": "562c97dac97ab53da3d5e93f49ea691762059e74",
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2420,
+        "exact_literal_match": true,
+        "full_post_pin_drift_credit": false
+      },
+      "testability": "Focused Python unit and true 603 oracle/capture/export test on exact source; NOT_RUN_DOCS_ONLY.",
+      "fix_removal_opportunity": "No reproduced current bug, keep guardrails and original source intact.",
+      "locked_fit": "Protect original603 source quote/archive/call/export integrity, no member/Community/offline data mutation and #33/#96 ownership preserved."
+    }
+  ],
+  "first_original_F001_revalidation": {
+    "strict_S2_001_literals_matched": 41,
+    "new_credit": 0
+  },
+  "older_R2_C2_grouped_status": "provisional",
+  "verification": {
+    "direct_literals": 55,
+    "contiguous_unique_1based": true,
+    "previous_end": 2349,
+    "live_offset": 16,
+    "live_blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+    "full_post_pin_live_delta_reviewed": false,
+    "python_test_executed": false
+  },
+  "findings": [
+    {
+      "classification": "SOURCE_EVIDENCE_SPOOFING_TEST_REVIEW_ONLY",
+      "details": "Negative cases reject forged capture, packet, symlink case folder, false frozen oracle quote and missing/duplicate evidence; no Python execution."
+    },
+    {
+      "classification": "RETAINED_OUTPUTS_AND_OFFLINE_TEST_REVIEW_ONLY",
+      "details": "Synthetic helper inputs assert 603, exports and downloads, loss handling and no socket attempts are hard blockers. Not real 603 benchmark PASS."
+    }
+  ],
+  "software_tests": "NOT_RUN_DOCS_ONLY",
+  "source_ci": "PENDING",
+  "provider": "NOT_APPLICABLE",
+  "next": {
+    "frozen_F215_line": 5329,
+    "pinned_C48_line": 2405,
+    "issue267_complete": false
+  }
+}

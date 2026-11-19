@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R344",
+  "date_utc": "2026-11-18",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "7494cdfb9de5b698c881199706c884b982acbf94",
+    "blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "immutable_file_blob_readback_equal": true
+  },
+  "github_refs": {
+    "main": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release_production": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+  },
+  "live_provider": {
+    "supabase_status": "ACTIVE_HEALTHY",
+    "postgres": "17.11.0.003",
+    "production_sql_data_auth_storage_edge_config_writes": 0,
+    "netlify_site": "153277f2-e19e-4862-b9a6-f2e18ccde271",
+    "netlify_current_ready_deploy_id": "6af9551c6515ddfa3786f76e",
+    "netlify_published_at": "2026-11-15T06:46:06.231Z",
+    "netlify_deploy_source_commit": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5",
+    "netlify_function": "coffee-url-preview",
+    "route": "POST /api/coffee-preview",
+    "function_runtime": "nodejs22.x",
+    "runtime_bundle_digest": "7de1f6fe766b0259b186887e80a9d0c6522d16b5fe9eeb81a88826399d65dde1",
+    "bundle_bytes_downloaded": false
+  },
+  "semantic_review": {
+    "published_source": "netlify/functions/coffee-url-preview.mjs",
+    "release_blob": "b982650d78920f77342f5ac78dce91ca394094cc",
+    "development_blob": "b982650d78920f77342f5ac78dce91ca394094cc",
+    "complete_source_chars_directly_read": 12485,
+    "complete_source_lines_directly_read": 193,
+    "full_range": "1-193",
+    "actual_sql_calls": [
+      "public.dic_session_status()",
+      "public.dic_preview_preflight(p_cached=true)",
+      "public.dic_preview_cached_verified(p_source_url)",
+      "public.dic_preview_preflight(p_cached=false)",
+      "public.dic_preview_complete(p_ticket)"
+    ],
+    "legacy_service_role_wrapper_called": false,
+    "auth_session_and_admission_check": true,
+    "cache_cooldown_and_uncached_12_per_24h_two_phase": true,
+    "admin_ticket_sql_unlimited": true,
+    "source_deadline_ms": 15000,
+    "member_privacy_preserved": true,
+    "source_url_guard_active": true,
+    "source_deployment_source_commit_bound": true,
+    "source_bundle_byte_identity_unverified": true,
+    "other_netlify_function_complete_texts_scanned_for_preview_rpc_mentions": [
+      {
+        "path": "netlify/functions/dic-admin-push-poll.mjs",
+        "blob": "b66290a682861b8150d06efd2d0c2195828b2425",
+        "chars": 4982,
+        "matched": 0
+      },
+      {
+        "path": "netlify/functions/dic-admin-push.mjs",
+        "blob": "c7b9dc20eb20049e5a80c3f0ad1706bbee1f8d8c",
+        "chars": 5984,
+        "matched": 0
+      },
+      {
+        "path": "netlify/functions/dic-member-approval-poll.mjs",
+        "blob": "df881a82ed2f0b96461430fd98ea103d05090f26",
+        "chars": 1106,
+        "matched": 0
+      },
+      {
+        "path": "netlify/functions/dic-owner-drive-connect.mjs",
+        "blob": "2b9fbf151127c09db4eb9275d2e548b2e6afa9c6",
+        "chars": 19872,
+        "matched": 0
+      }
+    ],
+    "other_function_review_method": "literal_dependency_match_only_not_full_semantic_credit",
+    "existing_live_sql_md5": {
+      "public.dic_preview_preflight(boolean)": "395d4a717122f9feb5ae04ac3c5a1d6a",
+      "public.dic_preview_complete(uuid)": "95324ba674010588a74507024c12ef91",
+      "public.dic_preview_cached_verified(text)": "86a08b5ae97f89c13b8c727ebdd0c50f",
+      "public.dic_url_preview_claim(uuid)": "25b95f9449aeb73cc1937f880358c22f",
+      "private.dic_shared_preview_claim(uuid)": "8d8c9c371ecdb320dd03cbae2ab4c2dd"
+    },
+    "source_fresh_live_sql_readback": true
+  },
+  "runtime_evidence": {
+    "netlify_function_name_counts_approx_last_24h": {
+      "dic-member-approval-poll": 290,
+      "dic-admin-push-poll": 289,
+      "coffee-url-preview": 0
+    },
+    "scope": "Boun​ded Netlify aggregate; absence of preview requests is not proof of globally absent consumers",
+    "pg_stat_statements_cumulative_matching_signatures": [
+      {
+        "operation": "cached_verified",
+        "role": "authenticated",
+        "calls": 13
+      },
+      {
+        "operation": "legacy_service_preview_claim",
+        "role": "postgres",
+        "calls": 7
+      },
+      {
+        "operation": "two_phase_complete",
+        "role": "authenticated",
+        "calls": 9
+      },
+      {
+        "operation": "two_phase_preflight",
+        "role": "authenticated",
+        "calls": 16
+      }
+    ],
+    "stats_not_last_24h": true,
+    "no_client_member_records_or_secrets_read": true
+  },
+  "classification": [
+    {
+      "object": "netlify/functions/coffee-url-preview.mjs",
+      "state": "ACTIVE_DEPLOYED_SOURCE",
+      "reason": "The current published route uses two-phase Supabase preview RPCs; no legacy service_role claim."
+    },
+    {
+      "object": "private.dic_url_preview_attempts",
+      "state": "LEGACY_ACTIVE",
+      "reason": "Current two-phase quota and cooldown routines consume this table."
+    },
+    {
+      "object": "private.dic_shared_preview_claim",
+      "state": "LEGACY_ACTIVE",
+      "reason": "Live public.dic_claim_universal_preview and retained wrapper reference it."
+    },
+    {
+      "object": "public.dic_url_preview_claim(uuid)",
+      "state": "LEGACY_ACTIVE_COMPATIBILITY_NOT_PROVEN_UNUSED",
+      "reason": "Not called by five current deployed Netlify functions or retired Edge POST, but external/historical callers not exhaustively excluded; retain SQL."
+    },
+    {
+      "object": "dic-preview-coffee Edge",
+      "state": "ACTIVE_DEPLOYED_COMPAT_TOMBSTONE",
+      "reason": "Prior R342/R343 complete deployed v7 source proves POST 410; no current universal extractor."
+    }
+  ],
+  "false_bug_excluded": {
+    "claim": "elevation_m would be numeric causing completePreview() string gate to miss complete catalog",
+    "catalog_type": "public.coffees.elevation_m text",
+    "status": "NOT_A_BUG; live information_schema refutes numerical type assumption"
+  },
+  "migration_provenance": "Supabase 20261113195659 vs immutable 20261113050000 filename mapping remains UNVERIFIED, not claimed exact",
+  "outcome": {
+    "new_reproduced_app_defect": false,
+    "justified_live_sql_removal": false,
+    "development_source_changes": 0,
+    "documentation_only": true,
+    "CI": "NOT_RUN_NOT_PASS",
+    "release_queue": "UNCHANGED_TESTING",
+    "baseline": "IN_PROGRESS",
+    "first_time_supabase_provider_words_credit": 0,
+    "issue267_source_line_credit": 0,
+    "owner_alert": false
+  },
+  "next_exact_cursor": "First changed/new or not-yet-directly-semantically-reviewed Supabase provider definition by existing ledger, excluding unchanged R343 SQL; verify any actual external consumer before proposing retirement of public.dic_url_preview_claim."
+}

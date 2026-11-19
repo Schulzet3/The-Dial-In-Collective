@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R360",
+  "date_utc": "2026-11-19",
+  "preflight_development_sha": "eac9b0b803a7209ddfd836369ad7e26f2afa1896",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "provider_ref": "azviqqejypsefzilgonr",
+  "database": "PostgreSQL 17.11.0.003",
+  "provider_status": "ACTIVE_HEALTHY",
+  "live_full_source": {
+    "name": "private.refresh_personal_family(uuid)",
+    "characters": 2134,
+    "md5": "e6a15e6de21f56345479574cc575cf95",
+    "range": "1-end",
+    "review": "Recalculate eligible green unhidden shot evidence; derived 0-count retired, 1 candidate, >=2 personally_confirmed; no additional confirmed defect"
+  },
+  "constraints": "personal_recipe_families CHECK statistics JSON object and evidence_state enum; no custom family triggers; shots have no DELETE refresh trigger, repaired in separate R359 development source",
+  "read_only_integrity": {
+    "families": 6,
+    "stale_count": 1,
+    "stored_count": 6,
+    "eligible_count": 4,
+    "evidence_state_mismatch": 0,
+    "historical_cause": "UNVERIFIED"
+  },
+  "fix": {
+    "migration": "supabase/migrations/20261119120000_dic_reconcile_stale_personal_family_stats.sql",
+    "migration_blob": "8b66a860e6dba420c447d0c9de13d7e69e53879c",
+    "pre_fixture": "supabase/tests/family_statistics_historical_reconcile_pre.sql",
+    "pre_fixture_blob": "2573be7360c184b33fa6f44609e18d7e25c60178",
+    "post_fixture": "supabase/tests/family_statistics_historical_reconcile_post.sql",
+    "post_fixture_blob": "a64c72781017301d4b547842099f09c8a01e25d9",
+    "runner": "scripts/audit/isolated-sql-regression.sh",
+    "runner_blob": "32e169dda9f3a297656198b9a7e60a48322fdb86",
+    "behavior": "Only existing mismatched derived stats recalculated with approved refresh function; no historical shot/identity/Current deletion"
+  },
+  "ci": "PENDING_PR_HEAD_NOT_RUN",
+  "first_time_provider_words": 0,
+  "issue267_line_credit": 0,
+  "production_writes": 0,
+  "published": false,
+  "queue": "TESTING",
+  "full_baseline": "IN_PROGRESS",
+  "next": "Run isolated PG17 literal source fixture and all applicable exact-source CI; repair if failed, integrate nonforce with skip-netlify; independently assess new unreviewed provider definitions"
+}

@@ -1,0 +1,12 @@
+# Issue #33 R269 — original603 523-525 selected Millcreek current seller review (DEVELOPMENT ONLY)
+
+DIC_PREFLIGHT_VERIFIED development_sha=2ed96d394f012384e0f38cc90a0afd2d338f8bfa preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+## Initial atomic source/CI/test/journal changes [skip netlify]
+- Owner-authorized Issue #33 bounded current selected official source accuracy, not a release/production/member operation. Verified exact preflight at development 2ed96d394f012384e0f38cc90a0afd2d338f8bfa and independently fetched complete identical Git blob 2fb236bbfa6bac48513eeb3bd157b260853af06d before scope/source/CI.
+- Recovered current #33 OPEN, prior R268 merged #520-522, separated #267 historical V2 and #96 signed-in security. Prior #531 Nativo Tranquilo already selected-source verified, so avoid duplication. #481-482 seller unavailable separate PR #3092. Other open #504 documentation work does not overlap these new paths.
+- Original603 case #523 Guatemalan official https://www.millcreekcoffee.com/products/guatemalan prints Light, Washed, dark chocolate/citrus. #524 Kona https://www.millcreekcoffee.com/products/kona prints contradictory medium roasted narrative and Roast Type Medium Light, keep canonical roast blank/conflicted; notes nutty, earthy, citrus and Washed. #525 Mexican https://www.millcreekcoffee.com/products/mexican prints Light, Washed, citrus/toffee/dark cocoa. Public rendered source only at authoring, not raw byte/actual current parser certification.
+- Atomic four files: this SAME-COMMIT receipt, five positive/negative Node tests, isolated guarded official public HTTPS workflow, strict byte/identity/parser/Add Coffee/Source Review afterproof. Missing source or selected H1, changed seller/lot, roast inconsistency or unsupported field must remain reviewable. No runtime parser changes unless a real defect is reproduced.
+- Original frozen 603 coffees / 201 roasters / 1,197 captures, CSV Git blob 3e0d3036ea727de091f304f538c6de2dfcaa10d6, oracle and scorer unchanged. This is not individual manual certification of all 603.
+- Initial state PR-head and merged CI NOT_RUN; follow actual GitHub jobs. No READY queue item for evidence-only work. Issue #33 OPEN / overall IN_PROGRESS. Next: diagnose actual PR-head source/test failures, fix and retest, nonforce merge only after genuine checks, read back exact merged source/CI and checkpoint Issue #33.
+- No Netlify publication, production SQL/Auth/Edge/provider/member writes, paid services, secrets, forced history, backups, schedule or owner-alert policy changes.

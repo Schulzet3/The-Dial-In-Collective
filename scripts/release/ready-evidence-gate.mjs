@@ -6,6 +6,7 @@ import {resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {assessReadyEvidence,preflightReadyBatch,PRODUCTION_CHECKS} from './release-reliability.mjs';
 import {deployableChangedPaths,queueSchemaErrors} from './release-queue.mjs';
+import {githubBatchEvidenceReaders} from './github-live-evidence-batch.mjs';
 const SHA=/^[a-f0-9]{40}$/;
 const REPO='Schulzet3/The-Dial-In-Collective';
 const RUN_URL=/^https:\/\/github\.com\/Schulzet3\/The-Dial-In-Collective\/actions\/runs\/([1-9][0-9]*)\/job\/([1-9][0-9]*)$/;
@@ -100,7 +101,13 @@ export async function verifyReadyItems({queue,items,loadRun,loadChecks,sourceObj
    verified.push({id:item.id,merged_sha:item.merged_source_sha,
     ci_source_sha:chosen.sha,risk_tier:chosen.risk.tier,checks:PRODUCTION_CHECKS,
     source_drift_paths:sourceDriftPaths});
-  }catch(e){errors.push(prefix+String(e.message||e));}
+  }catch(e){
+   const detail=String(e.message||e);
+   errors.push(prefix+detail);
+   // A persistent GitHub API read failure denies the entire batch. Avoid
+   // hammering dozens of READY items with the same unavailable CI token.
+   if(detail.startsWith('Read-only GitHub CI /'))break;
+  }
  }
  if(candidateChangedPaths!==undefined){
   const batch=preflightReadyBatch(queue,items,{publishedSourceSha,candidateSha,
@@ -110,14 +117,22 @@ export async function verifyReadyItems({queue,items,loadRun,loadChecks,sourceObj
  }
  return {ready:errors.length===0,errors,verified};
 }
-export async function githubReleaseReaders(token,{request=globalThis.fetch}={}){
+const TRANSIENT_GITHUB_READ_HTTP=new Set([403,429,502,503,504]);
+export async function githubReleaseReaders(token,{request=globalThis.fetch,
+ sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms))}={}){
  if(typeof token!=='string'||!token)throw Error('Read-only GitHub CI token unavailable');
  const get=async path=>{
-  const response=await request('https://api.github.com/repos/'+REPO+path,{
-   headers:{Authorization:'Bearer '+token,Accept:'application/vnd.github+json',
-    'X-GitHub-Api-Version':'2022-11-28'}});
-  if(!response?.ok)throw Error('Read-only GitHub CI '+path.split('?')[0]+' HTTP '+String(response?.status));
-  return response.json();
+  // Retry read-only GET responses briefly; still require the actual live
+  // completed successful run and exact source-bound checks before approval.
+  for(let attempt=0;attempt<3;attempt++){
+   const response=await request('https://api.github.com/repos/'+REPO+path,{
+    headers:{Authorization:'Bearer '+token,Accept:'application/vnd.github+json',
+     'X-GitHub-Api-Version':'2022-11-28'}});
+   if(response?.ok)return response.json();
+   if(attempt===2||!TRANSIENT_GITHUB_READ_HTTP.has(response?.status))
+    throw Error('Read-only GitHub CI '+path.split('?')[0]+' HTTP '+String(response?.status));
+   await sleep(attempt===0?250:1000);
+  }
  };
  return {
   loadRun:async id=>get('/actions/runs/'+id),
@@ -159,9 +174,17 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const queue=JSON.parse(readFileSync(new URL('../../docs/RELEASE_QUEUE.json',import.meta.url),'utf8'));
   const items=(queue.items||[]).filter(x=>x.state==='READY');
   const readers=await githubReleaseReaders(process.env.GITHUB_TOKEN);
+  // Live, fail-closed GraphQL batches replace hundreds of GitHub Actions
+  // REST GETs on every PR/push. Do not cache a PASS or relax check integrity.
+  const batch=githubBatchEvidenceReaders(process.env.GITHUB_TOKEN);
+  const runIds=[...new Set(items.flatMap(item=>item.ci_runs||[]))].sort((a,b)=>a-b);
+  const liveRuns=await batch.loadRuns(runIds);
+  const sourceShas=[...new Set([...liveRuns.values()].map(run=>run.head_sha))].sort();
+  const liveChecks=await batch.loadChecksBatch(sourceShas);
   const git=localReadyGitReaders();
-  const report=await verifyReadyItems({queue,items,...readers,...git,
-   currentSourceSha:git.currentSourceSha()});
+  const report=await verifyReadyItems({queue,items,...readers,
+   loadRun:async id=>liveRuns.get(id),loadChecks:async sha=>liveChecks.get(sha),
+   ...git,currentSourceSha:git.currentSourceSha()});
   if(!report.ready)throw Error(report.errors.join(' | ').slice(0,4000));
   const drifted=report.verified.filter(x=>x.source_drift_paths.length);
   console.log('[READY evidence] VERIFIED '+report.verified.length+

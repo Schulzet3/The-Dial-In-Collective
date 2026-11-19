@@ -1,0 +1,760 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 261,
+  "project_ref": "azviqqejypsefzilgonr",
+  "initial_preflight_sha": "e32cd3c1bf54abff3f8e993aa932dcd55182979a",
+  "prewrite_development_sha": "e32cd3c1bf54abff3f8e993aa932dcd55182979a",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "provider_snapshot": {
+    "snapshot": "2026-11-15 08:43:37.390906+00",
+    "app_functions": 114,
+    "app_tables": 52,
+    "app_tables_without_rls": 0,
+    "policies": 41,
+    "migration_records": 69,
+    "pgss_ids": 4758,
+    "pgss_reset": "2026-10-09 11:11:31.487298+00"
+  },
+  "complete_live_sql_definitions": [
+    {
+      "signature": "private.dic_admin_review_signup(p_member_id uuid, p_action text, p_expected_state text)",
+      "full_sql": "CREATE OR REPLACE FUNCTION private.dic_admin_review_signup(p_member_id uuid, p_action text, p_expected_state text DEFAULT 'pending'::text)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare actor uuid:=auth.uid(); member private.beta_members; verified boolean;\nbegin\n perform private.require_member();\n if actor is null or not private.is_admin() then\n  raise exception using errcode='42501',message='Administrator required.';\n end if;\n if p_member_id is null or p_member_id=actor or p_action is null or p_action not in ('approve','reject')\n  or p_expected_state is distinct from 'pending' then\n  raise exception using errcode='22023',message='Invalid signup review.';\n end if;\n if exists(select 1 from private.app_admins where owner_id=p_member_id) then\n  raise exception using errcode='42501',message='Administrator protected.';\n end if;\n select * into member from private.beta_members where owner_id=p_member_id for update;\n if not found then\n  raise exception using errcode='22023',message='Account unavailable.';\n end if;\n -- A repeat click or concurrent reviewer must be safely rejected as stale.\n if member.signup_review_state <> p_expected_state or\n    member.admitted_at is not null or member.enabled then\n  return jsonb_build_object('ok',false,'code','stale_review');\n end if;\n select u.email_confirmed_at is not null into verified\n from auth.users u where u.id=p_member_id;\n if p_action='approve' and verified is distinct from true then\n  return jsonb_build_object('ok',false,'code','verify_email_first');\n end if;\n update private.beta_members set\n   signup_review_state=case when p_action='approve' then 'approved' else 'rejected' end,\n   enabled=(p_action='approve'),\n   admitted_at=case when p_action='approve' then now() else null end\n where owner_id=p_member_id;\n insert into private.dic_signup_review_events(member_id,actor_id,action,previous_state)\n values(p_member_id,actor,p_action,member.signup_review_state);\n return jsonb_build_object('ok',true,'decision',p_action,'member_id',p_member_id);\nend $function$\n",
+      "md5": "7e0d3bf10542694b60177fcfa9c6f7be",
+      "chars": 2073,
+      "security_definer": true,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "auth_execute": true,
+      "service_execute": false,
+      "review_range_chars": [
+        1,
+        2073
+      ],
+      "verdict": "COMPLETE_DIRECT_LIVE_SQL_SEMANTIC_REVIEW_NO_NEW_CONFIRMED_DEFECT",
+      "assessment": "Requires admitted Admin, prohibits self/admin review and stale state, checks email verification and atomically records decision; no unapproved live action"
+    },
+    {
+      "signature": "private.dic_admin_signup_requests(p_offset integer, p_limit integer)",
+      "full_sql": "CREATE OR REPLACE FUNCTION private.dic_admin_signup_requests(p_offset integer DEFAULT 0, p_limit integer DEFAULT 50)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare total bigint; listing jsonb;\nbegin\n perform private.require_member();\n if auth.uid() is null or not private.is_admin() then\n  raise exception using errcode='42501', message='Administrator required.';\n end if;\n if p_offset is null or p_offset<0 or p_offset>1000000\n    or p_limit is null or p_limit<1 or p_limit>50 then\n  raise exception using errcode='22023',message='Invalid paging.';\n end if;\n select count(*) into total from private.beta_members m\n where m.admitted_at is null and m.signup_review_state='pending';\n select coalesce(jsonb_agg(v.record order by v.created_at,v.id),'[]'::jsonb) into listing\n from (select m.owner_id as id,u.created_at,\n   jsonb_build_object(\n    'id',m.owner_id,'email',left(coalesce(u.email,''),254),\n    'created_at',u.created_at,'email_verified',u.email_confirmed_at is not null,\n    'review_state',m.signup_review_state\n   ) as record\n   from private.beta_members m join auth.users u on u.id=m.owner_id\n   where m.admitted_at is null and m.signup_review_state='pending'\n   order by u.created_at,m.owner_id limit p_limit offset p_offset) v;\n return jsonb_build_object('total',total,'offset',p_offset,'items',coalesce(listing,'[]'::jsonb));\nend $function$\n",
+      "md5": "663c13571f70bb29b6a4351e8e6a45eb",
+      "chars": 1411,
+      "security_definer": true,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "auth_execute": true,
+      "service_execute": false,
+      "review_range_chars": [
+        1,
+        1411
+      ],
+      "verdict": "COMPLETE_DIRECT_LIVE_SQL_SEMANTIC_REVIEW_NO_NEW_CONFIRMED_DEFECT",
+      "assessment": "Admin-only bounded pagination of pending, unadmitted signups; email addresses remain server-side Admin output; no identity rows read by this audit"
+    },
+    {
+      "signature": "public.dic_admin_push_claim_poll()",
+      "full_sql": "CREATE OR REPLACE FUNCTION public.dic_admin_push_claim_poll()\n RETURNS boolean\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare won boolean;\nbegin\n update private.dic_admin_push_runtime set last_polled_at=now()\n where singleton=true\n   and (last_polled_at is null or last_polled_at<=now()-interval '4 minutes')\n returning true into won;\n return coalesce(won,false);\nend;\n$function$\n",
+      "md5": "e3bbf384effe7e29b5cffd89135c0666",
+      "chars": 414,
+      "security_definer": true,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "auth_execute": false,
+      "service_execute": true,
+      "review_range_chars": [
+        1,
+        414
+      ],
+      "verdict": "COMPLETE_DIRECT_LIVE_SQL_SEMANTIC_REVIEW_NO_NEW_CONFIRMED_DEFECT",
+      "assessment": "Service-only four-minute poll lease; no direct signed-in/anonymous EXECUTE"
+    },
+    {
+      "signature": "public.dic_admin_push_runtime_keys()",
+      "full_sql": "CREATE OR REPLACE FUNCTION public.dic_admin_push_runtime_keys()\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare info jsonb;\nbegin\n select jsonb_build_object('publicKey',r.vapid_public,'privateKey',d.decrypted_secret)\n into info from private.dic_admin_push_runtime r\n join vault.decrypted_secrets d on d.id=r.vault_secret_id\n where r.singleton=true;\n return info;\nend;\n$function$\n",
+      "md5": "16fd1cc2a0cbf0110cd253e661c4cdef",
+      "chars": 427,
+      "security_definer": true,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "auth_execute": false,
+      "service_execute": true,
+      "review_range_chars": [
+        1,
+        427
+      ],
+      "verdict": "COMPLETE_DIRECT_LIVE_SQL_SEMANTIC_REVIEW_NO_NEW_CONFIRMED_DEFECT",
+      "assessment": "Service-only SECURITY DEFINER retrieves VAPID key material from Vault; this audit read SQL code only, not any actual secret"
+    },
+    {
+      "signature": "public.dic_admin_push_snapshot()",
+      "full_sql": "CREATE OR REPLACE FUNCTION public.dic_admin_push_snapshot()\n RETURNS jsonb\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\n select jsonb_build_object(\n  'admin_ids',coalesce((\n   select jsonb_agg(a.owner_id order by a.owner_id)\n   from private.app_admins a join private.beta_members m on m.owner_id=a.owner_id\n   where m.admitted_at is not null and m.enabled\n  ),'[]'::jsonb),\n  'tokens',coalesce((\n   select jsonb_agg(t.token order by t.token)\n   from (\n    select 'signup:'||m.owner_id::text as token\n    from private.beta_members m\n    join auth.users u on u.id=m.owner_id\n    where m.admitted_at is null and m.signup_review_state='pending'\n      and u.email_confirmed_at is not null\n    union\n    select 'coffee:'||s.id::text from public.coffee_submissions s\n      where s.status in ('pending','conflict')\n    union\n    select 'delete:'||op.id::text from private.dic_admin_account_delete_operations op\n      where op.phase<>'completed'\n   ) t\n  ),'[]'::jsonb)\n );\n$function$\n",
+      "md5": "c6c2c674fa8358a3dd4946a3c0f9d8ed",
+      "chars": 1007,
+      "security_definer": true,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "auth_execute": false,
+      "service_execute": true,
+      "review_range_chars": [
+        1,
+        1007
+      ],
+      "verdict": "COMPLETE_DIRECT_LIVE_SQL_SEMANTIC_REVIEW_NO_NEW_CONFIRMED_DEFECT",
+      "assessment": "Service-only pending token/Admin ID snapshot; externally opaque and not a direct member API"
+    },
+    {
+      "signature": "public.dic_member_approval_claim(p_channel text, p_limit integer)",
+      "full_sql": "CREATE OR REPLACE FUNCTION public.dic_member_approval_claim(p_channel text, p_limit integer DEFAULT 20)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare batches jsonb;\nbegin\n if p_channel not in ('email','push') or p_channel is null or\n    p_limit is null or p_limit not between 1 and 20 then\n  raise exception using errcode='22023',message='Invalid delivery channel/limit';\n end if;\n with chosen as (\n  select d.event_id,d.channel\n  from private.dic_member_approval_deliveries d\n  join private.beta_members m on m.owner_id=d.member_id\n  join auth.users u on u.id=d.member_id\n  where d.channel=p_channel and m.signup_review_state='approved'\n   and m.enabled and m.admitted_at is not null\n   and u.email_confirmed_at is not null\n   and ((d.state='pending' and d.next_attempt_at<=now())\n    or (d.state='sending' and d.lease_until < now()))\n  order by d.event_id limit p_limit for update of d skip locked\n ), claimed as (\n  update private.dic_member_approval_deliveries d\n  set state='sending',attempt_count=d.attempt_count+1,\n      claim_token=gen_random_uuid(),lease_until=now()+interval '2 minutes'\n  from chosen c where d.event_id=c.event_id and d.channel=c.channel\n  returning d.event_id,d.member_id,d.claim_token\n )\n select coalesce(jsonb_agg(jsonb_build_object(\n   'eventId',c.event_id,'claimToken',c.claim_token,\n   'email',case when p_channel='email' then left(u.email,254) else null end,\n   'endpoints',case when p_channel='push' then (\n    select coalesce(jsonb_agg(jsonb_build_object('hash',s.endpoint_hash,'endpoint',s.endpoint)),'[]'::jsonb)\n    from public.dic_member_approval_push_subscriptions s\n    where s.owner_id=c.member_id and s.expires_at>now()\n      and s.last_sent_event_id<c.event_id\n   ) else '[]'::jsonb end\n  ) order by c.event_id),'[]'::jsonb) into batches\n from claimed c join auth.users u on u.id=c.member_id;\n return batches;\nend $function$\n",
+      "md5": "b0d1e8d2622852b6b930def5c8a171d9",
+      "chars": 1920,
+      "security_definer": true,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "auth_execute": false,
+      "service_execute": true,
+      "review_range_chars": [
+        1,
+        1920
+      ],
+      "verdict": "COMPLETE_DIRECT_LIVE_SQL_SEMANTIC_REVIEW_NO_NEW_CONFIRMED_DEFECT",
+      "assessment": "Service-only SELECT FOR UPDATE SKIP LOCKED with verified/admitted/approved gating and two-minute claim lease; private recipient fields not queried by audit"
+    },
+    {
+      "signature": "public.dic_member_approval_claim_poll()",
+      "full_sql": "CREATE OR REPLACE FUNCTION public.dic_member_approval_claim_poll()\n RETURNS boolean\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n update private.dic_member_approval_poll_gate set last_polled_at=now()\n where singleton=true and last_polled_at < now()-interval '4 minutes';\n return found;\nend $function$\n",
+      "md5": "b94ddc2223993aa7685faf482d3871e4",
+      "chars": 335,
+      "security_definer": true,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "auth_execute": false,
+      "service_execute": true,
+      "review_range_chars": [
+        1,
+        335
+      ],
+      "verdict": "COMPLETE_DIRECT_LIVE_SQL_SEMANTIC_REVIEW_NO_NEW_CONFIRMED_DEFECT",
+      "assessment": "Service-only four-minute poll gate; no direct client EXECUTE"
+    },
+    {
+      "signature": "public.dic_member_approval_finish(p_event_id bigint, p_channel text, p_claim_token uuid, p_outcome text)",
+      "full_sql": "CREATE OR REPLACE FUNCTION public.dic_member_approval_finish(p_event_id bigint, p_channel text, p_claim_token uuid, p_outcome text)\n RETURNS boolean\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n if p_channel not in ('email','push') or p_outcome not in ('sent','skipped','retry')\n   or p_claim_token is null or p_event_id is null then\n  raise exception using errcode='22023',message='Invalid delivery receipt';\n end if;\n update private.dic_member_approval_deliveries d\n set state=case when p_outcome='retry' then 'pending' else p_outcome end,\n     claim_token=null,lease_until=null,\n     completed_at=case when p_outcome='retry' then null else now() end,\n     next_attempt_at=case when p_outcome='retry' then\n       now()+least(60,power(2,least(d.attempt_count,5))::integer)*interval '1 minute'\n       else d.next_attempt_at end\n where d.event_id=p_event_id and d.channel=p_channel and\n   d.state='sending' and d.claim_token=p_claim_token;\n return found;\nend $function$\n",
+      "md5": "e92ba8e17ab274bcab1a564475d16f28",
+      "chars": 1003,
+      "security_definer": true,
+      "settings": [
+        "search_path=\"\""
+      ],
+      "anon_execute": false,
+      "auth_execute": false,
+      "service_execute": true,
+      "review_range_chars": [
+        1,
+        1003
+      ],
+      "verdict": "COMPLETE_DIRECT_LIVE_SQL_SEMANTIC_REVIEW_NO_NEW_CONFIRMED_DEFECT",
+      "assessment": "Service-only token-matched delivery receipt, checked outcome, bounded exponential retry and terminal states; no delivery attempted"
+    }
+  ],
+  "complete_source_characters": 8590,
+  "additional_rls_policy_check": {
+    "private_beta_members": "PERMISSIVE no_client_access roles anon/authenticated ALL USING false WITH CHECK false",
+    "other_reviewed_push_delivery_tables": "no client-facing RLS policies; SECURITY DEFINER functions checked for service-only EXECUTE"
+  },
+  "numeric_pgss_rank_range": [
+    2881,
+    2960
+  ],
+  "numeric_fingerprints": [
+    {
+      "rn": 2881,
+      "queryid": "3755008925469172086",
+      "calls": 1,
+      "total_ms": "1.196",
+      "mean_ms": "1.196"
+    },
+    {
+      "rn": 2882,
+      "queryid": "-1950070583254109020",
+      "calls": 1,
+      "total_ms": "1.195",
+      "mean_ms": "1.195"
+    },
+    {
+      "rn": 2883,
+      "queryid": "-5985353477273754121",
+      "calls": 1,
+      "total_ms": "1.195",
+      "mean_ms": "1.195"
+    },
+    {
+      "rn": 2884,
+      "queryid": "-7109151264209210573",
+      "calls": 1,
+      "total_ms": "1.193",
+      "mean_ms": "1.193"
+    },
+    {
+      "rn": 2885,
+      "queryid": "3620046127983288653",
+      "calls": 1,
+      "total_ms": "1.193",
+      "mean_ms": "1.193"
+    },
+    {
+      "rn": 2886,
+      "queryid": "3880994358143263645",
+      "calls": 1,
+      "total_ms": "1.192",
+      "mean_ms": "1.192"
+    },
+    {
+      "rn": 2887,
+      "queryid": "3835841614370060261",
+      "calls": 1,
+      "total_ms": "1.191",
+      "mean_ms": "1.191"
+    },
+    {
+      "rn": 2888,
+      "queryid": "-6894044307708721093",
+      "calls": 1,
+      "total_ms": "1.187",
+      "mean_ms": "1.187"
+    },
+    {
+      "rn": 2889,
+      "queryid": "7444009885598533388",
+      "calls": 1,
+      "total_ms": "1.186",
+      "mean_ms": "1.186"
+    },
+    {
+      "rn": 2890,
+      "queryid": "2431448735114247553",
+      "calls": 1,
+      "total_ms": "1.185",
+      "mean_ms": "1.185"
+    },
+    {
+      "rn": 2891,
+      "queryid": "-8488462528824200418",
+      "calls": 2,
+      "total_ms": "1.185",
+      "mean_ms": "0.593"
+    },
+    {
+      "rn": 2892,
+      "queryid": "3632438881666536564",
+      "calls": 2,
+      "total_ms": "1.184",
+      "mean_ms": "0.592"
+    },
+    {
+      "rn": 2893,
+      "queryid": "-1204879018245718368",
+      "calls": 1,
+      "total_ms": "1.184",
+      "mean_ms": "1.184"
+    },
+    {
+      "rn": 2894,
+      "queryid": "639416390384591847",
+      "calls": 1,
+      "total_ms": "1.181",
+      "mean_ms": "1.181"
+    },
+    {
+      "rn": 2895,
+      "queryid": "-8291549909270867669",
+      "calls": 1,
+      "total_ms": "1.181",
+      "mean_ms": "1.181"
+    },
+    {
+      "rn": 2896,
+      "queryid": "-3005413709914103144",
+      "calls": 1,
+      "total_ms": "1.181",
+      "mean_ms": "1.181"
+    },
+    {
+      "rn": 2897,
+      "queryid": "1460308055096616338",
+      "calls": 1,
+      "total_ms": "1.178",
+      "mean_ms": "1.178"
+    },
+    {
+      "rn": 2898,
+      "queryid": "8815282596470662200",
+      "calls": 1,
+      "total_ms": "1.178",
+      "mean_ms": "1.178"
+    },
+    {
+      "rn": 2899,
+      "queryid": "-8359637477929528646",
+      "calls": 1,
+      "total_ms": "1.175",
+      "mean_ms": "1.175"
+    },
+    {
+      "rn": 2900,
+      "queryid": "-1186524274581675756",
+      "calls": 1,
+      "total_ms": "1.173",
+      "mean_ms": "1.173"
+    },
+    {
+      "rn": 2901,
+      "queryid": "7307947599370954110",
+      "calls": 3,
+      "total_ms": "1.171",
+      "mean_ms": "0.390"
+    },
+    {
+      "rn": 2902,
+      "queryid": "4993484082889997936",
+      "calls": 10,
+      "total_ms": "1.171",
+      "mean_ms": "0.117"
+    },
+    {
+      "rn": 2903,
+      "queryid": "-4663983059739666973",
+      "calls": 1,
+      "total_ms": "1.171",
+      "mean_ms": "1.171"
+    },
+    {
+      "rn": 2904,
+      "queryid": "4336314689208999793",
+      "calls": 1,
+      "total_ms": "1.168",
+      "mean_ms": "1.168"
+    },
+    {
+      "rn": 2905,
+      "queryid": "985824911088357259",
+      "calls": 1,
+      "total_ms": "1.167",
+      "mean_ms": "1.167"
+    },
+    {
+      "rn": 2906,
+      "queryid": "5551852432814064871",
+      "calls": 3,
+      "total_ms": "1.161",
+      "mean_ms": "0.387"
+    },
+    {
+      "rn": 2907,
+      "queryid": "-5154295520184938",
+      "calls": 1,
+      "total_ms": "1.161",
+      "mean_ms": "1.161"
+    },
+    {
+      "rn": 2908,
+      "queryid": "-7462038799464878896",
+      "calls": 1,
+      "total_ms": "1.159",
+      "mean_ms": "1.159"
+    },
+    {
+      "rn": 2909,
+      "queryid": "6799851727974659437",
+      "calls": 9,
+      "total_ms": "1.158",
+      "mean_ms": "0.129"
+    },
+    {
+      "rn": 2910,
+      "queryid": "5961860424660528598",
+      "calls": 1,
+      "total_ms": "1.158",
+      "mean_ms": "1.158"
+    },
+    {
+      "rn": 2911,
+      "queryid": "-3436805039563838742",
+      "calls": 96,
+      "total_ms": "1.154",
+      "mean_ms": "0.012"
+    },
+    {
+      "rn": 2912,
+      "queryid": "-3127809353478428537",
+      "calls": 1,
+      "total_ms": "1.146",
+      "mean_ms": "1.146"
+    },
+    {
+      "rn": 2913,
+      "queryid": "1926603223177201622",
+      "calls": 1,
+      "total_ms": "1.145",
+      "mean_ms": "1.145"
+    },
+    {
+      "rn": 2914,
+      "queryid": "-1847798711413396301",
+      "calls": 1,
+      "total_ms": "1.138",
+      "mean_ms": "1.138"
+    },
+    {
+      "rn": 2915,
+      "queryid": "3399693800640480588",
+      "calls": 1,
+      "total_ms": "1.133",
+      "mean_ms": "1.133"
+    },
+    {
+      "rn": 2916,
+      "queryid": "-5063601268949503710",
+      "calls": 4,
+      "total_ms": "1.129",
+      "mean_ms": "0.282"
+    },
+    {
+      "rn": 2917,
+      "queryid": "1365615997250684653",
+      "calls": 9,
+      "total_ms": "1.129",
+      "mean_ms": "0.125"
+    },
+    {
+      "rn": 2918,
+      "queryid": "4776079653119758439",
+      "calls": 2,
+      "total_ms": "1.128",
+      "mean_ms": "0.564"
+    },
+    {
+      "rn": 2919,
+      "queryid": "-2194539374421570769",
+      "calls": 1,
+      "total_ms": "1.127",
+      "mean_ms": "1.127"
+    },
+    {
+      "rn": 2920,
+      "queryid": "-3074484300859977236",
+      "calls": 10,
+      "total_ms": "1.126",
+      "mean_ms": "0.113"
+    },
+    {
+      "rn": 2921,
+      "queryid": "8314003886620829366",
+      "calls": 1,
+      "total_ms": "1.125",
+      "mean_ms": "1.125"
+    },
+    {
+      "rn": 2922,
+      "queryid": "935629795897668010",
+      "calls": 1,
+      "total_ms": "1.123",
+      "mean_ms": "1.123"
+    },
+    {
+      "rn": 2923,
+      "queryid": "8296956989346604315",
+      "calls": 1,
+      "total_ms": "1.123",
+      "mean_ms": "1.123"
+    },
+    {
+      "rn": 2924,
+      "queryid": "-2677655506036360235",
+      "calls": 1,
+      "total_ms": "1.123",
+      "mean_ms": "1.123"
+    },
+    {
+      "rn": 2925,
+      "queryid": "-6043779782928981855",
+      "calls": 1,
+      "total_ms": "1.121",
+      "mean_ms": "1.121"
+    },
+    {
+      "rn": 2926,
+      "queryid": "-4573180286011632363",
+      "calls": 1,
+      "total_ms": "1.121",
+      "mean_ms": "1.121"
+    },
+    {
+      "rn": 2927,
+      "queryid": "747598299154584573",
+      "calls": 1,
+      "total_ms": "1.120",
+      "mean_ms": "1.120"
+    },
+    {
+      "rn": 2928,
+      "queryid": "-5119804642548548302",
+      "calls": 1,
+      "total_ms": "1.120",
+      "mean_ms": "1.120"
+    },
+    {
+      "rn": 2929,
+      "queryid": "8718115236841962535",
+      "calls": 6,
+      "total_ms": "1.118",
+      "mean_ms": "0.186"
+    },
+    {
+      "rn": 2930,
+      "queryid": "-567714764613963185",
+      "calls": 1,
+      "total_ms": "1.118",
+      "mean_ms": "1.118"
+    },
+    {
+      "rn": 2931,
+      "queryid": "-4844059313103519909",
+      "calls": 3,
+      "total_ms": "1.118",
+      "mean_ms": "0.373"
+    },
+    {
+      "rn": 2932,
+      "queryid": "3509818139159817039",
+      "calls": 1,
+      "total_ms": "1.117",
+      "mean_ms": "1.117"
+    },
+    {
+      "rn": 2933,
+      "queryid": "-6804480657602717567",
+      "calls": 4,
+      "total_ms": "1.115",
+      "mean_ms": "0.279"
+    },
+    {
+      "rn": 2934,
+      "queryid": "1697724620400411695",
+      "calls": 96,
+      "total_ms": "1.114",
+      "mean_ms": "0.012"
+    },
+    {
+      "rn": 2935,
+      "queryid": "-5062976769350982656",
+      "calls": 1,
+      "total_ms": "1.112",
+      "mean_ms": "1.112"
+    },
+    {
+      "rn": 2936,
+      "queryid": "-2955278495739474069",
+      "calls": 12,
+      "total_ms": "1.112",
+      "mean_ms": "0.093"
+    },
+    {
+      "rn": 2937,
+      "queryid": "2572743367137166085",
+      "calls": 1,
+      "total_ms": "1.110",
+      "mean_ms": "1.110"
+    },
+    {
+      "rn": 2938,
+      "queryid": "-1618913746794187808",
+      "calls": 1,
+      "total_ms": "1.109",
+      "mean_ms": "1.109"
+    },
+    {
+      "rn": 2939,
+      "queryid": "3116537856294273936",
+      "calls": 1,
+      "total_ms": "1.107",
+      "mean_ms": "1.107"
+    },
+    {
+      "rn": 2940,
+      "queryid": "387687720927794185",
+      "calls": 2,
+      "total_ms": "1.107",
+      "mean_ms": "0.553"
+    },
+    {
+      "rn": 2941,
+      "queryid": "-6194014770723038448",
+      "calls": 1,
+      "total_ms": "1.103",
+      "mean_ms": "1.103"
+    },
+    {
+      "rn": 2942,
+      "queryid": "-3226333840957476074",
+      "calls": 1,
+      "total_ms": "1.103",
+      "mean_ms": "1.103"
+    },
+    {
+      "rn": 2943,
+      "queryid": "-3379718941465499932",
+      "calls": 10,
+      "total_ms": "1.100",
+      "mean_ms": "0.110"
+    },
+    {
+      "rn": 2944,
+      "queryid": "5085193002689782785",
+      "calls": 1,
+      "total_ms": "1.099",
+      "mean_ms": "1.099"
+    },
+    {
+      "rn": 2945,
+      "queryid": "-5228581731880715393",
+      "calls": 1,
+      "total_ms": "1.099",
+      "mean_ms": "1.099"
+    },
+    {
+      "rn": 2946,
+      "queryid": "7712278632815208924",
+      "calls": 1,
+      "total_ms": "1.098",
+      "mean_ms": "1.098"
+    },
+    {
+      "rn": 2947,
+      "queryid": "-5028073873751841192",
+      "calls": 1,
+      "total_ms": "1.098",
+      "mean_ms": "1.098"
+    },
+    {
+      "rn": 2948,
+      "queryid": "-2921369359925748912",
+      "calls": 1,
+      "total_ms": "1.096",
+      "mean_ms": "1.096"
+    },
+    {
+      "rn": 2949,
+      "queryid": "-1495213714776878716",
+      "calls": 2,
+      "total_ms": "1.096",
+      "mean_ms": "0.548"
+    },
+    {
+      "rn": 2950,
+      "queryid": "-6245076194334515011",
+      "calls": 10,
+      "total_ms": "1.093",
+      "mean_ms": "0.109"
+    },
+    {
+      "rn": 2951,
+      "queryid": "-2808810814622144745",
+      "calls": 1,
+      "total_ms": "1.092",
+      "mean_ms": "1.092"
+    },
+    {
+      "rn": 2952,
+      "queryid": "-3481473977549677891",
+      "calls": 2,
+      "total_ms": "1.092",
+      "mean_ms": "0.546"
+    },
+    {
+      "rn": 2953,
+      "queryid": "-272576949305325780",
+      "calls": 1,
+      "total_ms": "1.090",
+      "mean_ms": "1.090"
+    },
+    {
+      "rn": 2954,
+      "queryid": "-6723119578605364336",
+      "calls": 1,
+      "total_ms": "1.088",
+      "mean_ms": "1.088"
+    },
+    {
+      "rn": 2955,
+      "queryid": "-2717459197502251303",
+      "calls": 1,
+      "total_ms": "1.088",
+      "mean_ms": "1.088"
+    },
+    {
+      "rn": 2956,
+      "queryid": "8035982265043325815",
+      "calls": 1,
+      "total_ms": "1.084",
+      "mean_ms": "1.084"
+    },
+    {
+      "rn": 2957,
+      "queryid": "-2075266123622113622",
+      "calls": 1,
+      "total_ms": "1.079",
+      "mean_ms": "1.079"
+    },
+    {
+      "rn": 2958,
+      "queryid": "1154103887495367517",
+      "calls": 1,
+      "total_ms": "1.078",
+      "mean_ms": "1.078"
+    },
+    {
+      "rn": 2959,
+      "queryid": "6327717230704505364",
+      "calls": 96,
+      "total_ms": "1.077",
+      "mean_ms": "0.011"
+    },
+    {
+      "rn": 2960,
+      "queryid": "-9132222061020359025",
+      "calls": 1,
+      "total_ms": "1.076",
+      "mean_ms": "1.076"
+    }
+  ],
+  "previous_distinct": 2766,
+  "new_distinct": 75,
+  "overlap": 5,
+  "cumulative_distinct": 2841,
+  "pgss_limit": "Lifetime numeric query IDs only; dynamically sorted snapshot. Does not establish gap-free historical SQL text review, current-hour latency or safe index removal.",
+  "new_confirmed_defects": 0,
+  "justified_deletions": 0,
+  "baseline_complete": false,
+  "unverified": [
+    "#96 true signed-in JWT/HTTP and real notification delivery",
+    "Provider console-only Auth settings/secrets",
+    "Current complete source isolation for existing four TESTING fixes",
+    "Global source-level review and all provider object definitions"
+  ],
+  "privacy": "No Auth/member/shot/note records, email addresses, key material, raw log entries or pg_stat_statements.query were accessed.",
+  "next": "Provider drift and numeric pgss ranks 2961–3040; remaining nonapp definitions and migration-source/Edge parity. Preserve #96 ownership."
+}

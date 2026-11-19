@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "312b",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight_development_sha": "fc50184b2bf14aabb82f881f70a8f526454120f3",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "parent_checkpoint_sha": "9e110edbb08dfc3095c5bf0c074516d512321e67",
+  "object": "private.dic_admin_dashboard_read()",
+  "definition_md5": "5fa33bbe05e8408c1c2fe1b82d73a8ee",
+  "definition_chars": 2901,
+  "read_range_chars": [
+    1,
+    2901
+  ],
+  "full_body_semantically_inspected": true,
+  "source_migration": "supabase/migrations/20261110020500_dic_admin_signup_approval_retire_invites.sql",
+  "source_git_blob": "fea285d31190b996160d7672c1d90887f3d0c647",
+  "source_live_equal_after_pg_get_functiondef_terminator_normalization": true,
+  "consumers": [
+    {
+      "path": "site/admin/main.js",
+      "blob": "f0c158ae7b57277ab99551ce7bca94438bce6919",
+      "role": "summary counts, badge/attention counter and fallback"
+    },
+    {
+      "path": "site/admin/view.js",
+      "blob": "f2a80e85fc9820814b2e175119424e863a75105c",
+      "role": "count labels and selective disclosure"
+    }
+  ],
+  "read_only_aggregates": {
+    "active_accounts": 6,
+    "pending_accounts": 0,
+    "pending_verified_accounts": 0,
+    "queue_total": 0,
+    "shot_records": 27,
+    "unfinished_deletions": 0
+  },
+  "verdict": "Admin guard and bounded queue top 50 align with UI separate pagination; backup status expressly external; count aggregate consistent. No reproducible drift, bug or justified deletion. Hosted JWT Admin call not performed.",
+  "first_time_word_credit": 0,
+  "baseline": "IN_PROGRESS",
+  "new_ci": "NOT_RUN",
+  "source_test_ci_changes": 0,
+  "production_changes": 0,
+  "next": "Resume first current unmatched SQL definition requiring new semantic review, reconcile historical receipts without duplicate credit; source-specific fixes only on reproduction."
+}

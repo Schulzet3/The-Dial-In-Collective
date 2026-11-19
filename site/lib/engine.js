@@ -24,7 +24,18 @@ export function baseline(coffee,style,dose,preferences='') {
  const index=roastIndex(coffee.roastLevel),r=index<0?roastIndex('Medium'):index;
  let ratio=RATIOS[style]?.[r]??2;let time=TIMES[style]?.[r>=roastIndex('Medium-Dark')?1:0]||[25,32];let temp=TEMPS[r];
  const reasons=[];const pref=readPreference(preferences);
- if(style==='Traditional'&&coffee.roasterRecipe?.ratio>0){ratio=ratio*.35+coffee.roasterRecipe.ratio*.65;reasons.push('Starting ratio informed by the roaster recipe.');}
+ if(style==='Traditional'&&coffee.roasterRecipe?.ratio>0){
+  // Source-provided ratios may be malformed or unsuitable for this basket.
+  // Apply existing Log Shot yield bounds, including the existing preference
+  // nudge; do not invent a new ratio or taste target.
+  const candidate=ratio*.35+Number(coffee.roasterRecipe.ratio)*.65;
+  const prefStep=pref==='clarity'?.15:pref==='body'?-.15:0;
+  const proposedYield=(candidate+prefStep)*dose;
+  if(Number.isFinite(proposedYield)&&
+     proposedYield>=CONFIG.bounds.yieldG[0]&&proposedYield<=CONFIG.bounds.yieldG[1]){
+   ratio=candidate;reasons.push('Starting ratio informed by the roaster recipe.');
+  }else reasons.push('Roaster ratio not usable at this basket dose; using the roast/style starting point.');
+ }
  if(pref&&style!=='Custom'){ratio+=pref==='clarity'?.15:-.15;reasons.push(`Ratio nudged by your preference for ${pref}.`);}
  if(index<0)reasons.push('Roast level unknown; Medium is a recipe fallback, not a coffee fact.');
  return {doseG:dose,ratio:{low:Math.max(.8,ratio-CONFIG.rangeHalfWidth),high:ratio+CONFIG.rangeHalfWidth,center:ratio},time:{low:time[0],high:time[1],center:mean(time)},tempC:temp,reasons,source:'Starting recommendation',observations:0,familyId:null,established:false};
@@ -521,7 +532,10 @@ export function recommendation(s,coffeeId,options={}) {
   // Imported non-green feedback must also be valid on its ORIGINAL recorded
   // grinder calibration. A corrupted newer snapshot stays in private History,
   // but cannot replace an older valid measured shot's next-shot advice.
-  const last=familyEvidenceShots(s,measuredRecipeShots(s.shots)).filter(sh=>!sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&sh.basketId===basket.id&&sh.feedMode===feed&&sh.calibrationId===v.calibrationId&&
+  // A newer physically valid but incompletely rated archival row cannot
+  // displace an older genuinely rated shot as the source of next-shot advice.
+  // Preserve its original measurements, notes and missing ratings in History.
+  const last=familyEvidenceShots(s,measuredRecipeShots(s.shots)).filter(sh=>tastesComplete(sh.tasteScales)&&!sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&sh.basketId===basket.id&&sh.feedMode===feed&&sh.calibrationId===v.calibrationId&&
    finite(sh.grindSetting)&&sh.grindSetting>=v.grinderMin&&sh.grindSetting<=v.grinderMax&&
    (sh.tempC==null||validRecordedTemperature(sh.tempC))&&
    typeof sh.timestamp==='string'&&sh.timestamp.trim()&&Number.isFinite(Date.parse(sh.timestamp))).sort((a,b)=>Date.parse(b.timestamp)-Date.parse(a.timestamp))[0];
@@ -600,22 +614,39 @@ export function recommendation(s,coffeeId,options={}) {
    rec.source=diagnostic?'Your last measured shot (preparation check)':'Adjustment from your latest taste rating';
    rec.diagnosticOnly=diagnostic;
    rec.doseG=a.next?.doseG??last.doseG;
+   // Preserve exact original dose precision only when no new dose is proposed.
+   rec.measuredDoseUnchanged=finite(rec.doseG)&&finite(last.doseG)&&
+    Math.abs(rec.doseG-last.doseG)<=1e-8;
    rec.tempC=a.next?.tempC??last.tempC??null;
    rec.grind={value:a.next?.grindSetting??last.grindSetting,
     source:diagnostic?'Last measured grind; no change suggested':'Next setting to try',proven:false};
    const nextYield=a.next?.yieldCenter??last.yieldG;
+   // Only NEW yield targets use the existing tenth-gram recipe convention.
+   // On grind/temperature/preparation-only advice the yield is the original
+   // measured control, not a second proposal. Preserve its recorded precision.
+   const originalYieldUnchanged=finite(nextYield)&&finite(last.yieldG)&&
+    Math.abs(nextYield-last.yieldG)<=1e-8;
+   const displayYield=originalYieldUnchanged?Number(last.yieldG):round(nextYield);
    // An inclusive 200 g next-shot target is loggable, but an unclamped
    // +/-1 g display band would promise a 201 g upper limit. Apply the same
    // already-approved input bounds to the displayed band, not to History.
    const [minYield,maxYield]=CONFIG.bounds.yieldG;
-   rec.yield={low:clamp(round(nextYield-1),minYield,maxYield),
-    high:clamp(round(nextYield+1),minYield,maxYield),center:round(nextYield)};
+   rec.yield={low:clamp(round(displayYield-1),minYield,maxYield),
+    high:clamp(round(displayYield+1),minYield,maxYield),center:displayYield};
    rec.ratio={low:rec.yield.low/rec.doseG,high:rec.yield.high/rec.doseG,center:rec.yield.center/rec.doseG};
   }
  }
  // Every recommendation is a selectable tenth inside this setup's actual
  // espresso range. The guard also protects older measurements and fallbacks.
- if(rec.grind&&finite(rec.grind.value))rec.grind.value=clamp(round(rec.grind.value),v.grinderMin,v.grinderMax);
+ // A yield-only adjustment or preparation check displays the original measured
+ // grind, which may legitimately have more than one decimal place. Only NEW
+ // proposed grind controls use the owner's rounded tenth convention.
+ // The latest usable actual was already checked against the active range.
+ const unchangedMeasuredGrind=last&&rec.grind&&finite(rec.grind.value)&&
+  (rec.source==='Adjustment from your latest taste rating'||rec.diagnosticOnly)&&
+  Math.abs(rec.grind.value-last.grindSetting)<=1e-8;
+ if(rec.grind&&finite(rec.grind.value)&&!unchangedMeasuredGrind)
+  rec.grind.value=clamp(round(rec.grind.value),v.grinderMin,v.grinderMax);
  if(!rec.established&&!rec.diagnosticOnly&&!rec.grind?.proven&&finite(rec.grind?.value)&&rec.source!=='Adjustment from your latest taste rating'){
   const step=grindStep(v);
   // A calibrated starting search band is NOT a statistical confidence interval.
@@ -829,9 +860,22 @@ function nextAdviceRaw(s,shot,rec) {
 // which retains the last shot's setting even when history used an old range.
 export function nextAdvice(s,shot,rec){
  const advice=nextAdviceRaw(s,shot,rec),v=activeVersion(s);
- if(!v||!advice?.next||!finite(advice.next.grindSetting))return advice;
- return {...advice,next:{...advice.next,
-  grindSetting:clamp(round(advice.next.grindSetting),v.grinderMin,v.grinderMax)}};
+ if(!v||!advice?.next)return advice;
+ // A historical or imported actual grind may fall outside the CURRENT
+ // espresso range. Keep that measurement intact; do not silently clamp
+ // an unchanged grind into a SECOND, contradictory proposed adjustment.
+ if(!finite(shot?.grindSetting)||!finite(advice.next.grindSetting))
+  return {title:'Review your recorded grind',text:'The original grind measurement is not usable for a next-shot adjustment. Keep this shot in History and confirm your setup before trying another change.',next:null};
+ if(shot.grindSetting<v.grinderMin||shot.grindSetting>v.grinderMax)
+  return {title:'Review your grinder espresso range',text:'This recorded grind falls outside the current setup espresso range. Keep your measured shot and confirm the range before trying a single next-shot change.',next:null};
+ // An unchanged actual setting is not a NEW grind recommendation. Preserve
+ // its exact measured precision when recommending yield or temperature.
+ // Only a genuinely changed grinder target is rounded/clamped to the
+ // owner's 0.1-precision, in-range new-grind guidance rule.
+ const unchanged=Math.abs(advice.next.grindSetting-shot.grindSetting)<=1e-8;
+ const target=unchanged?shot.grindSetting:
+  clamp(round(advice.next.grindSetting),v.grinderMin,v.grinderMax);
+ return {...advice,next:{...advice.next,grindSetting:target}};
 }
 export function isExtreme(s,shot) {
  // Incomplete imported measurements remain in History, but cannot establish

@@ -14,6 +14,8 @@ import {extractCoffeeBlendEvidence} from '../../src/server/coffee-blend-evidence
 import {sameHandleCollectionAlternate,identicalCurrentSelectedTitle} from './issue33-selected-public-alternate.mjs';
 import {requiredFocusedSourceFailures} from './issue33-focused-source-acceptance.mjs';
 import {selectedShopifyCurrentVisibleIdentity} from './issue33-shopify-current-visible-identity.mjs';
+import {selectedShopifyPurchaseH3Identity} from './issue33-shopify-selected-product-h3.mjs';
+import {selectedShopifyTrackedOfferH2Identity} from './issue33-shopify-tracked-offer-h2.mjs';
 import {selectedProductHeadings,selectedProductFormH2,selectedProductPurchaseRootH2,selectedSchemaProductOfferH2} from './issue33-selected-product-heading.mjs';
 import {selectedElementorWooCommerceH2} from './issue33-elementor-woocommerce-h2.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../../site/cloud/coffee-url-autofill.js';
@@ -84,7 +86,7 @@ for(const target of targets){
    r.html_sha256=sha(res.html);r.html_bytes=Buffer.byteLength(res.html,'utf8');
    const selected=productMarkup(res.html);
    r.selected_h1=selectedProductHeadings(selected);
-   r.selected_form_h2=selectedProductFormH2(selected);
+   r.selected_form_h2=selectedProductFormH2(selected,{source_url:r.final_url});
    r.selected_schema_offer_h2=selectedSchemaProductOfferH2(res.html,{source_url:r.final_url});
    r.selected_page_h2=selectedProductPurchaseRootH2(res.html);
    r.selected_elementor_h2=selectedElementorWooCommerceH2(res.html,{source_url:r.final_url});
@@ -104,8 +106,12 @@ for(const target of targets){
    r.selected_embedded_product_identity=(!r.selected_h1_present_in_scoped_html&&
      !r.selected_form_h2.length&&!r.selected_page_h2.length&&
      !r.selected_elementor_h2.length)
-     ?selectedShopifyCurrentVisibleIdentity(res.html,{
-       source_url:r.final_url,expected_name:target.Coffee,parsed_name:p?.fields?.name}):null;
+     ? (selectedShopifyCurrentVisibleIdentity(res.html,{
+       source_url:r.final_url,expected_name:target.Coffee,parsed_name:p?.fields?.name}) ||
+      selectedShopifyPurchaseH3Identity(res.html,{
+       source_url:r.final_url,expected_name:target.Coffee,parsed_name:p?.fields?.name}) ||
+      selectedShopifyTrackedOfferH2Identity(res.html,{
+       source_url:r.final_url,expected_name:target.Coffee,parsed_name:p?.fields?.name})) :null;
    r.selected_heading_identity_verified=r.selected_h1_present_in_scoped_html
      ?r.selected_h1.some(h=>identicalCurrentSelectedTitle(target.Coffee,h,p?.fields?.name))
      :r.selected_form_h2.length

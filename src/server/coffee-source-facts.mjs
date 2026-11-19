@@ -782,7 +782,7 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
   const title=plain(semanticPage.slice(node.headEnd,node.contentEnd),100);
   if(/\b(?:espresso|filter|pour.?over|v60|aeropress|french press|brew|coffee details|specifications)\b/i.test(title))semanticControls.set(target,title);
  }
- const semanticBlocked=new Set(),semanticHeadings=[],semanticSections=[];
+ const semanticBlocked=new Set(),semanticHeadings=[],semanticSections=[],semanticCaptionAnchors=[];
  for(let i=0;i<semanticNodes.length;i++){
   const node=semanticNodes[i];
   if(BLOCKED.has(node.tag)||semanticBlocked.has(node.parent))semanticBlocked.add(i);
@@ -797,7 +797,16 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
   const owned=semanticControls.get(attrs.id)||(/\bguide-body\b/.test(attrs.class||'')?semanticControls.get(attrs['data-guide']):'');
   const inherited=owned||semanticPanelSections.get(node.parent)||'';
   if(inherited)semanticPanelSections.set(i,inherited);
-  semanticSections.push([node.start,inherited||semanticHeadings.filter(Boolean).join(' / ').slice(0,100)]);
+  const section=inherited||semanticHeadings.filter(Boolean).join(' / ').slice(0,100);
+  semanticSections.push([node.start,section]);
+  // Semantic field spans can start at an outer row wrapper before its own
+  // heading. Preserve the matched literal caption's OWN source-review section.
+  if(!semanticBlocked.has(i)&&/^h[2-6]$/.test(node.tag)&&node.contentEnd-node.headEnd<=2000){
+   const caption=plain(semanticPage.slice(node.headEnd,node.contentEnd),101);
+   if(caption&&caption.length<=100)semanticCaptionAnchors.push({
+    start:node.start,end:node.end,caption:normalized(caption),section
+   });
+  }
  }
  const semanticSectionAt=start=>{
   let low=0,high=semanticSections.length;
@@ -828,7 +837,11 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
   return field;
  };
  for(const fact of semantic.facts){
-  const section=semanticSectionAt(fact.start);
+  const caption=normalized(String(fact.label||'').replace(/[:：]\s*$/u,''));
+  const matched=semanticCaptionAnchors.filter(anchor=>anchor.start>=fact.start&&
+   anchor.end<=fact.end&&anchor.caption===caption);
+  // Ambiguous headings retain the prior bounded offset attribution.
+  const section=matched.length===1?matched[0].section:semanticSectionAt(fact.start);
   result.add(fact.label,fact.value,sourceReviewField(fact.label,fact.value,fact.kind,section),section);
  }
  // Definition lists and tables preserve unfamiliar labels, units and values.
@@ -862,7 +875,20 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
     if(nodes[siblings[j]].tag!=='dd')break;
     if(text(siblings[j]))values.push(text(siblings[j]));
    }
-   if(labelLike(text(i))&&values.length){const label=text(i),value=values.join(', ');result.add(label,value,sourceReviewField(label,value,coffeeFieldKey(label),sections.get(i)),sections.get(i));}
+   if(labelLike(text(i))&&values.length){
+    const label=text(i),value=values.join(', '),field=coffeeFieldKey(label),section=sections.get(i);
+    // A direct selected "We hear" value can end in a linked music track.
+    // Keep the original source review wording but do not count the same
+    // <dt>/<dd> row as an incompatible second taste-list when the semantic
+    // scanner independently parsed its preceding direct unlinked flavors.
+    const dd=values.length===1?nodes[siblings[index+1]]:null;
+    const raw=dd?html.slice(dd.start,dd.end):'';
+    const music=field==='tasting_notes'&&normalized(label)==='we hear'&&
+     /<a\b(?=[^>]{0,800}\bhref=["']https:\/\/(?:www\.)?(?:youtube\.com|youtu\.be|open\.spotify\.com|music\.apple\.com)\/)[^>]{0,800}>[^<>]{1,60}<\/a>\s*<\/dd>/iu.test(raw);
+    const selected=music&&semantic.facts.some(fact=>fact.kind==='tasting_notes'&&
+     normalized(fact.label)==='we hear'&&value.startsWith(fact.value+', '));
+    result.add(label,value,selected?undefined:sourceReviewField(label,value,field,section),section);
+   }
   }
   if(!CONTENT.has(node.tag)||!text(i))continue;
   const childList=children.get(i)||[];

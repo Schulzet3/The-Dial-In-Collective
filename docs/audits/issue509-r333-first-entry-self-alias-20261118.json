@@ -1,0 +1,52 @@
+{
+  "run": "R333",
+  "date_utc": "2026-11-18",
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "19180403495416d296ab743d016192056541bc45",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "git_blob_content_equal": true
+  },
+  "git_refs_at_start": {
+    "development": "19180403495416d296ab743d016192056541bc45",
+    "main": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+  },
+  "live_provider": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.11",
+    "function": "private.dic_link_pending_coffee(uuid,uuid,text,jsonb)",
+    "full_source_characters": 3954,
+    "source_md5": "140c211a4bfef175b041c037561a1e37",
+    "direct_semantic_review": "R331 full 1-3954; R333 targeted post-UPDATE stale target recheck, zero duplicate first-time word credit",
+    "alias_rows": 0,
+    "first_entry_rows": 9,
+    "synthetic_old_and_new_keys_distinct": true,
+    "source_live_unchanged": true
+  },
+  "bug": {
+    "id": "R331-B",
+    "status": "REPRODUCIBLE_FUTURE_PATH",
+    "description": "An older Pending first-entry name is promoted to canonical, but PL/pgSQL target row still carries old name. Later alias INSERT compares incoming name to stale target, storing new canonical name as an alias of itself.",
+    "real_member_impact": "NOT_ESTABLISHED; zero live aliases",
+    "consumer_check": "private.dic_link_pending_coffee is used by confirmed merge and canonical reuse; first-entry precedence and later distinct alternate aliases preserved",
+    "fix": "UPDATE public.coffees ... RETURNING * INTO target makes following alias conditional compare to current name; prior old name explicitly stored before rename"
+  },
+  "changes": {
+    "migration": "supabase/migrations/20261118114600_dic_first_entry_no_self_alias.sql",
+    "test": "supabase/tests/coffee_first_entry_no_self_alias.sql",
+    "runner": "scripts/audit/isolated-sql-regression.sh",
+    "journal": "docs/workstreams/issue-509.md",
+    "queue": "docs/RELEASE_QUEUE.json",
+    "ledger": "docs/audits/issue509-r333-first-entry-self-alias-20261118.json"
+  },
+  "acceptance": {
+    "isolated_postgres17": "PENDING",
+    "relevant_ci": "PENDING",
+    "merged_development_sha": null,
+    "release_queue": "TESTING",
+    "production": "READ_ONLY_UNCHANGED"
+  },
+  "next": "Check PR-head isolated SQL and authorization regression on exact commit, fix any failing fixture, integrate nonforce only after scoped checks; separately test R331-A suggestion-only alias lookup."
+}

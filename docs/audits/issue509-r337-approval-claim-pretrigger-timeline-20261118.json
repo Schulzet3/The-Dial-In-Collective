@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R337",
+  "date_utc": "2026-11-18",
+  "preflight": {
+    "initial_sha": "494e7ef84f1b447abdf4059eea02ee8562e2bdec",
+    "prewrite_sha": "6475faea3f42f6a7570b2aceb71833d5e4ca9201",
+    "blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "verified": true
+  },
+  "provider": {
+    "project": "azviqqejypsefzilgonr",
+    "status": "ACTIVE_HEALTHY",
+    "version": "17.11.0.003",
+    "writes": 0
+  },
+  "git": {
+    "main": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+  },
+  "fully_read_current_sql_sources": [
+    {
+      "signature": "public.dic_member_approval_claim(text,integer)",
+      "characters": 1920,
+      "definition_md5": "b0d1e8d2622852b6b930def5c8a171d9",
+      "reviewed_1_based_character_range": [
+        1,
+        1920
+      ],
+      "semantic_verdict": "Eligible approved/verified delivery claim, row lock SKIP LOCKED, two-minute token lease",
+      "first_time_word_credit": 0,
+      "prior_review": "docs/audits/issue509-r307-approval-delivery-crosslayer-20261117.json"
+    },
+    {
+      "signature": "public.dic_member_approval_finish(bigint,text,uuid,text)",
+      "characters": 1003,
+      "definition_md5": "e92ba8e17ab274bcab1a564475d16f28",
+      "reviewed_1_based_character_range": [
+        1,
+        1003
+      ],
+      "semantic_verdict": "Matching event/channel/token and retry backoff, previously known NULL validation bug",
+      "first_time_word_credit": 0,
+      "prior_review": "docs/audits/issue509-r307-approval-delivery-crosslayer-20261117.json"
+    },
+    {
+      "signature": "public.dic_member_approval_claim_poll()",
+      "characters": 335,
+      "definition_md5": "b94ddc2223993aa7685faf482d3871e4",
+      "reviewed_1_based_character_range": [
+        1,
+        335
+      ],
+      "semantic_verdict": "Four-minute global service poll gate",
+      "first_time_word_credit": 0,
+      "prior_review": "docs/audits/issue509-r307-approval-delivery-crosslayer-20261117.json"
+    },
+    {
+      "signature": "private.dic_enqueue_member_approval_notices()",
+      "characters": 460,
+      "definition_md5": "36defca729c42b4ec35d4d2a4e1cfea5",
+      "reviewed_1_based_character_range": [
+        1,
+        460
+      ],
+      "semantic_verdict": "AFTER INSERT approval event producer, email and push, no historical backfill",
+      "first_time_word_credit": 0,
+      "prior_review": "docs/audits/issue509-r307-approval-delivery-crosslayer-20261117.json"
+    }
+  ],
+  "live_aggregates": {
+    "approve_events": 1,
+    "approve_event_date": "2026-11-12T13:00:50.272925Z",
+    "delivery_rows": 0,
+    "pending_due": 0,
+    "expired_sending": 0,
+    "push_subscriptions": 0,
+    "active_subscriptions": 0
+  },
+  "timeline": {
+    "applied_approval_notice_migration_version": "20261112180144",
+    "migration_source": "supabase/migrations/20261112135900_dic_member_approval_notices.sql",
+    "migration_blob": "ce17e3801d8d4e100e8ec1fb95fa5a723ad3a7a4",
+    "no_historical_backfill": true,
+    "interpretation": "Approval predates recorded migration version; zero delivery rows consistent with intended no backfill. Version is not reliable proof of exact installation time. No verified present failed notice."
+  },
+  "known_gap": {
+    "live_finish_null_outcome_guard_evaluates_null": true,
+    "already_fixed_in_development": "supabase/migrations/20261114195000_dic_member_approval_finish_null_receipts.sql",
+    "fix_blob": "dea27e959e052b06bc032f4522d91312eea779eb",
+    "regression_test": "supabase/tests/member_approval_finish_null_receipts.sql",
+    "test_blob": "c64159bfa48d17a840c5f88551ff0ad1f2a058d1",
+    "production_applied": false,
+    "queue": "TESTING",
+    "new_finding": false
+  },
+  "planner": {
+    "nonexecuting_explain_only": true,
+    "chosen_index": "dic_member_approval_claim_idx",
+    "total_estimated_cost": 5.34,
+    "verified_bottleneck": false
+  },
+  "cross_layer": {
+    "broker_core_git_blob": "1bc82c0c0f7e90bb86dd7da895c18f9c4e015c5a",
+    "netlify_poll_git_blob": "df881a82ed2f0b96461430fd98ea103d05090f26",
+    "poll_schedule": "*/5 * * * *",
+    "actual_email_or_push_receipt": "UNVERIFIED"
+  },
+  "result": {
+    "new_bug": 0,
+    "new_safe_fix": 0,
+    "new_first_time_words": 0,
+    "issue267_line_credit": 0,
+    "source_test_ci_changes": 0,
+    "provider_writes": 0,
+    "queue_promotion": 0,
+    "baseline": "IN_PROGRESS"
+  },
+  "next_exact_cursor": "private.dic_member_approval_poll_gate singleton DDL/state; then genuinely changed or unreviewed provider definitions; no duplicate source credit"
+}

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "run": "R335",
+  "date_utc": "2026-11-18",
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "d10e6e48742d1a43110ec331be9294d24510fcff",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "verified_via_immutable_git_blob": true
+  },
+  "provider": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.11.0.003",
+    "live_matcher_md5": "b4b845d29ccb65ac7922109dc89816b6",
+    "live_confirm_md5": "0fcc44bb8a05f46e87694d3474eb7c23",
+    "live_alias_rows_at_R334": 0,
+    "writes": 0
+  },
+  "semantic_finding": "R334-A latent alias not read by candidate nor explicit confirmation; synthetic only",
+  "scope": {
+    "migration": "supabase/migrations/20261118140000_dic_coffee_alias_suggestion_confirm.sql",
+    "test": "supabase/tests/coffee_historical_alias_suggestion_confirm.sql",
+    "runner": "scripts/audit/isolated-sql-regression.sh",
+    "source_branch": "fix/issue509-alias-gates-r335-20261118",
+    "safety": "alias-only suggestion rank 3, exact_id null, explicit member confirmation guarded, cross-roaster/lot/origin blocked; historical source untouched"
+  },
+  "coverage": {
+    "new_first_time_provider_words": 0,
+    "code_line_review_credit_for_267": 0
+  },
+  "tests": {
+    "isolated_postgresql17": "PENDING",
+    "signed_jwt": "PENDING",
+    "node22": "PENDING",
+    "cloud_browser": "PENDING",
+    "approval": "PENDING",
+    "published": "NOT_APPLICABLE"
+  },
+  "queue": "TESTING",
+  "baseline": "IN_PROGRESS",
+  "next": "Run exact PR-head CI, repair failures and safely integrate; production read-only."
+}

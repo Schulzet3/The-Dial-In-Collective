@@ -44,7 +44,13 @@ function attributesOf(node,page){
  return attributes;
 }
 function shortFlavorList(raw,clean,{allowSingle=false}={}){
- const text=clean(raw,401).trim(),body=text.replace(/[.]$/,'');
+ // A trailing sky/time-of-day metaphor after a literal flavor is not an
+ // independently identifiable cup descriptor. Preserve the source prose
+ // separately; only the canonical sensory candidate excludes that scene.
+ const original=clean(raw,401).trim();
+ const text=original.replace(/(?:,\s*|\s+and\s+)(?:the\s+)?(?:sunrise|sunset)\s*[.!?]?$/iu,'').trim(),
+  body=text.replace(/[.]$/,'');
+ if(/^(?:sunrise|sunset)$/iu.test(text))return '';
  if(text.length<2||text.length>350||/\b(?:masl|variet(?:y|ies|al)|farm(?:ers?)?|producers?|co-?op|elevation|process|processing|fermented|fermentation|washed|anaerobic|carbonic|maceration|relationship|espresso|coffee in|brew time|roast level|subscribe|shipping|sourcing|quantity|order|purchase|grind|brewing|recipe|certified|certifications?|fair trade|harvest competition)\b/i.test(text))return '';
  if(/\b(?:roasted coffee|whole beans?|ground coffee|each and every bean|each bean|every bean|(?:final|finished) brew|notes?|roast|decaf|pair perfectly|zoom|hover|expand|collapse|caption|click|swipe|navigation|every sip|each sip)\b/i.test(text)||
   /\b(?:not|never|without|allowing|walking|reminding|giving|bringing|bridging|finishing|preserving|resulting|delivering|expect|dance|dances|pair|pairs)\b/i.test(text)||
@@ -73,6 +79,10 @@ const noteKey=value=>[...new Set(noteParts(value))].sort().join('|');
 const plainClean=(value,max=1000)=>String(value||'').replace(/<[^<>]{0,2000}>/g,' ').replace(/&amp;/gi,'&').replace(/&(?:nbsp|#160);/gi,' ').replace(/\s+/g,' ').trim().slice(0,max);
 export function normalizeExplicitCoffeeTastingNotes(value,{allowProse=false}={}){
  let text=unconditionalFlavorPrefix(plainClean(value,401));
+ // Selected tasting prose can append a separate generic sales invitation.
+ // Retain the complete merchant source in source_facts; only remove a
+ // closed conditional recommendation sentence from canonical sensory.
+ text=text.replace(/\s+If you love [^.!?]{3,180}\bcoffee in general,\s*this is (?:a|the) (?:great|perfect|ideal|wonderful) coffee for you[.!?]?$/iu,'').trim();
  if(!text||/\b(?:hypothetical(?:ly)?|fictional)\b/i.test(text))return '';
  // A merchant may put a list bullet immediately after the printed field label.
  // This helper is used only once that label/role has already been established.

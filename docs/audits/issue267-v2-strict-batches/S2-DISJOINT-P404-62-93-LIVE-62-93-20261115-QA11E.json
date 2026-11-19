@@ -1,0 +1,942 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "QA11E",
+  "date_utc": "2026-11-15",
+  "preflight": {
+    "development_sha": "86edc158ab7b9038d57ea810a20bc3300983762a",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d"
+  },
+  "original_pinned": {
+    "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+    "file_index": "P404",
+    "path": "tests/read-only-account-acceptance.test.mjs",
+    "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+    "total_lines": 93,
+    "first_line": 62,
+    "last_line": 93
+  },
+  "actual_live": {
+    "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+    "path": "tests/read-only-account-acceptance.test.mjs",
+    "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+    "first_line": 62,
+    "last_line": 93,
+    "byte_identical_pinned": true
+  },
+  "preceding_receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-P404-1-61-LIVE-1-61-20261115-QA11D.json",
+  "frozen_lines_newly_credited": 0,
+  "pinned_lines_newly_credited": 32,
+  "live_line_positions_directly_checked": 32,
+  "nonoverlap": true,
+  "limited_findings": [
+    {
+      "classification": "ASSURANCE_BOUNDARY",
+      "risk": "Synthetic VM/fetch assertions do not independently establish real hosted Auth, RLS, response secrecy or device outcomes",
+      "disposition": "No runtime defect reproduced, defer actual signed-in acceptance to Issue #96"
+    }
+  ],
+  "test_status": "NOT_RUN_DOCS_ONLY",
+  "merged_source_ci": "PENDING",
+  "app_code_changes": false,
+  "provider_changes": false,
+  "per_line": [
+    {
+      "line": 62,
+      "source_text": "test('admin submission review is outside owner-isolation scope; member exposure still fails',async()=>{",
+      "inspection_classification": "test",
+      "behavior": "Begin Admin submission privilege exception and member-isolation negative test",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "Synthetic rather than genuine Admin RLS",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 62,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 62,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 63,
+      "source_text": " const admin=fixture({role:'admin'});const a=await run(admin.env,admin.loadConfig);",
+      "inspection_classification": "setup",
+      "behavior": "Invoke helper with Admin synthetic role and foreign submission available",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "Real server-role authorization is separate",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 63,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 63,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 64,
+      "source_text": " const adminCheck=a.checks.find(x=>x.name==='foreign_owner_read:coffee_submissions');",
+      "inspection_classification": "setup",
+      "behavior": "Locate named Admin foreign-owner submissions result",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "Test must inspect targeted check, not aggregate",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 64,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 64,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 65,
+      "source_text": " assert.equal(adminCheck.result,'NOT_APPLICABLE');assert.equal(adminCheck.outcome,'ADMIN_REVIEW_ACCESS');assert.equal(adminCheck.observed_rows,1);",
+      "inspection_classification": "assertion",
+      "behavior": "Require NOT_APPLICABLE/Admin-review-access and exactly one foreign submission",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "Avoid classifying intentional Admin review as isolation PASS",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 65,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 65,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 66,
+      "source_text": " const member=fixture({role:'member',leak:'submission'});const m=await run(member.env,member.loadConfig);",
+      "inspection_classification": "setup",
+      "behavior": "Inject foreign submission into Member fixture and execute checks",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "Member read must not inherit Admin review rights",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 66,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 66,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 67,
+      "source_text": " const memberCheck=m.checks.find(x=>x.name==='foreign_owner_read:coffee_submissions');",
+      "inspection_classification": "setup",
+      "behavior": "Locate named Member foreign-owner submissions result",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "Fails if expected test check missing",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 67,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 67,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 68,
+      "source_text": " assert.equal(memberCheck.result,'FAIL');assert.equal(memberCheck.observed_rows,1);assert.ok(m.summary.failed>0);",
+      "inspection_classification": "assertion",
+      "behavior": "Require FAIL with one exposed row and failed summary",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "Detection of simulated member data leak",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 68,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 68,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 69,
+      "source_text": " assert.ok(!JSON.stringify(m).includes(other));",
+      "inspection_classification": "assertion",
+      "behavior": "Require foreign UUID redacted from failure report",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "Protect report from raw cross-owner identifiers",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 69,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 69,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 70,
+      "source_text": "});",
+      "inspection_classification": "closure",
+      "behavior": "Close Admin-vs-member submission exception test",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "No production data read",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 70,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 70,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 71,
+      "source_text": "test('foreign personal/table/held rows and schema or value leaks fail without leaking values',async()=>{",
+      "inspection_classification": "test",
+      "behavior": "Start private/held/Community/identity leakage negative scenarios",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "Fixture coverage not a hosted privacy verification",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 71,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 71,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 72,
+      "source_text": " for(const leak of ['personal','foreign','held','community','email','identity']){",
+      "inspection_classification": "loop",
+      "behavior": "Iterate personal/foreign/held/community/email/identity adversarial cases",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "Six distinct controlled failure modes, not exhaustive attack surface",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 72,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 72,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 73,
+      "source_text": "  const f=fixture({leak});const report=await run(f.env,f.loadConfig);",
+      "inspection_classification": "setup",
+      "behavior": "Invoke fixture under each injected leak",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "No actual Auth or network request",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 73,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 73,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 74,
+      "source_text": "  assert.ok(report.summary.failed>0,leak);",
+      "inspection_classification": "assertion",
+      "behavior": "Require each injected leak to increase failed count",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "Prevents false success under simulated disclosure",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 74,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 74,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 75,
+      "source_text": "  const output=JSON.stringify(report);for(const secret of [uid,other,token,email])assert.ok(!output.includes(secret));",
+      "inspection_classification": "assertion",
+      "behavior": "Check redaction of UUIDs, token and email after every failure",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "Never print genuine secrets",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 75,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 75,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 76,
+      "source_text": " }",
+      "inspection_classification": "closure",
+      "behavior": "Close each-leak iteration",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "Loop terminates before final test closure",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 76,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 76,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 77,
+      "source_text": "});",
+      "inspection_classification": "closure",
+      "behavior": "Close leak-case test",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "No current provider assurance inferred",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 77,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 77,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 78,
+      "source_text": "test('wrong role and stale token stop rather than testing a different account',async()=>{",
+      "inspection_classification": "test",
+      "behavior": "Begin wrong-role and expired-token early-gate regression",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "Prevent checks under wrong account",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 78,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 78,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 79,
+      "source_text": " const f=fixture({serverRole:'member'});const report=await run(f.env,f.loadConfig);",
+      "inspection_classification": "setup",
+      "behavior": "Supply Admin client expectation but Member server role",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "Server role should override local prompt",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 79,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 79,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 80,
+      "source_text": " assert.equal(report.checks.at(-1).result,'FAIL');assert.equal(f.requests.length,2);",
+      "inspection_classification": "assertion",
+      "behavior": "Require role failure after two identity/status calls",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "No downstream private probes after mismatch",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 80,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 80,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 81,
+      "source_text": " const expired=fixture({expired:true});await assert.rejects(run(expired.env,expired.loadConfig),/SIGN_IN_OR_REFRESH_FIRST/);assert.equal(expired.requests.length,0);",
+      "inspection_classification": "assertion",
+      "behavior": "Expired session must reject before any request",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "Local timestamp gating is not live token revocation proof",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 81,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 81,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 82,
+      "source_text": "});",
+      "inspection_classification": "closure",
+      "behavior": "Close role/stale-token regression",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "No provider mutation",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 82,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 82,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 83,
+      "source_text": "test('transport failures and wrong error classes are never PASS denials',async()=>{",
+      "inspection_classification": "test",
+      "behavior": "Start transport and denial error classification negative cases",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "Transport failures must not count as RLS denials",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 83,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 83,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 84,
+      "source_text": " const f=fixture({role:'member',denyCode:'PGRST202'});const report=await run(f.env,f.loadConfig);",
+      "inspection_classification": "setup",
+      "behavior": "Simulate PGRST202 instead of expected 42501",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "Wrong SQLSTATE must be reported as failure",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 84,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 84,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 85,
+      "source_text": " assert.ok(report.summary.failed>=8);",
+      "inspection_classification": "assertion",
+      "behavior": "Require at least eight failed denied-route checks",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "Threshold is fixture-bounded, not full database audit",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 85,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 85,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 86,
+      "source_text": " const t=fixture({transport:true});const failed=await run(t.env,t.loadConfig);",
+      "inspection_classification": "setup",
+      "behavior": "Inject transport exception and obtain redacted QA report",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "No raw exception content should leak",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 86,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 86,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 87,
+      "source_text": " assert.equal(failed.checks[0].result,'FAIL');assert.equal(failed.checks[0].error_class,'TRANSPORT_ERROR');",
+      "inspection_classification": "assertion",
+      "behavior": "Require FAIL and TRANSPORT_ERROR instead of authorization PASS",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "Network outage must never be evidence of denial",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 87,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 87,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 88,
+      "source_text": " assert.ok(!JSON.stringify(failed).includes(token));",
+      "inspection_classification": "assertion",
+      "behavior": "Require synthetic bearer absent from transport-failure report",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "Redaction on thrown error",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 88,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 88,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 89,
+      "source_text": "});",
+      "inspection_classification": "closure",
+      "behavior": "Close error-class and transport test",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "Hosted network response not verified",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 89,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 89,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 90,
+      "source_text": "test('wrong origin or project blocks all authenticated requests',async()=>{",
+      "inspection_classification": "test",
+      "behavior": "Begin strict origin/project configuration guard test",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "Misconfigured origin may expose credentials",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 90,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 90,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 91,
+      "source_text": " const f=fixture();f.env.location.origin='https://other.invalid';await assert.rejects(run(f.env,f.loadConfig),/WRONG_ORIGIN/);assert.equal(f.requests.length,0);",
+      "inspection_classification": "assertion",
+      "behavior": "Wrong browser origin must throw before requests",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "Early guard protects Auth session",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 91,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 91,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 92,
+      "source_text": " const g=fixture();await assert.rejects(run(g.env,async()=>({CLOUD_CONFIG:{supabaseUrl:'https://other.invalid',publishableKey:'public'}})),/WRONG_PROJECT/);assert.equal(g.requests.length,0);",
+      "inspection_classification": "assertion",
+      "behavior": "Wrong Supabase project must throw before requests",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "Prevent cross-project credential use",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 92,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 92,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    },
+    {
+      "line": 93,
+      "source_text": "});",
+      "inspection_classification": "closure",
+      "behavior": "Close origin/project guard test",
+      "quality": "Direct source-line assessment in enclosing fixture, error/result and corresponding test contract; deterministic synthetic coverage, not hosted proof",
+      "risk_security_privacy_performance": "No real browser navigation",
+      "dead_obsolete": "No obsolete/dead test case proven; contract still relevant to genuine accepted roles",
+      "redundant_duplicate": "Separate scenario, assertion or control-flow closure; safe removal not shown",
+      "pinned_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 93,
+        "exact_text_match": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/read-only-account-acceptance.test.mjs",
+        "commit": "86edc158ab7b9038d57ea810a20bc3300983762a",
+        "blob_sha": "444feda0e63524e5e577203a09d7c18560c9a08d",
+        "line": 93,
+        "exact_text_match": true
+      },
+      "testability": "Node22 node --test tests/read-only-account-acceptance.test.mjs; actual #96 signed-in Admin/member and SQL/RLS remain independently required; NOT_RUN_DOCS_ONLY",
+      "improvement_opportunity": "Retain evidence, only expand or change if concrete current failure reproduced",
+      "locked_fit": "Read-only Auth, admitted roles, member privacy, Community DTO redaction and no production writes",
+      "disposition": "RETAIN_WITH_ACTUAL_PROVIDER_ASSURANCE_UNVERIFIED",
+      "review_method": "Direct numbered AI source inspection, not human certification"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import {SCALES,tasteSeverity,tasteLabel,tempDisplay,CONFIG,finite} from './constants.js';
+import {SCALES,tasteSeverity,tasteLabel,tempDisplay,tempInput,CONFIG,finite,tastesComplete} from './constants.js';
 export const e = x => String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const paths={
  signout:'M9 4H4v16h5m5-12 4 4-4 4m-6-4h10',
@@ -51,10 +51,17 @@ const numericMeasurement=v=>typeof v==='number'?Number.isFinite(v):
  typeof v==='string'&&v.trim()!==''&&Number.isFinite(Number(v));
 export const fmt=(v,places=1)=>numericMeasurement(v)?Number(v).toFixed(places):'\u2014';
 export const range=(v,unit='')=>`${fmt(v.low)}<span class="range-dash">\u2013</span>${fmt(v.high)}${unit?` <span class="unit">${unit}</span>`:''}`;
+// UI must not silently round the unchanged measured grinder control into a
+// second change while showing yield-only or preparation-only guidance.
+// New recommendations still use their existing 0.1 output precision.
+const fmtMeasuredControl=v=>numericMeasurement(v)&&
+ Math.abs(Number(v)*10-Math.round(Number(v)*10))>1e-8?String(Number(v)):fmt(v);
 export function recipeGrid(rec,showTemp=false,unit='F') {
  if(!rec)return '';
+ // Imported/legacy setup units are untrusted. Match the approved F/C physical display boundary.
+ const safeUnit=unit==='C'?'C':'F';
  const stat=(label,value,sub,ico)=>`<div class="metric"><div class="metric-label">${icon(ico,15)} ${label}</div><div class="metric-value">${value}</div>${sub?`<div class="metric-sub">${sub}</div>`:''}</div>`;
- return `<div class="recipe-grid">${stat('Dose',`${fmt(rec.doseG)} <span class="unit">g</span>`,'Basket-based','scale')}${stat('Yield',range(rec.yield,'g'),`Center ${fmt(rec.yield.center)} g \u00b7 1:${fmt(rec.ratio.center,2)}`,'drop')}${stat('Time',range(rec.time,'s'),`Center ${fmt(rec.time.center)} s`,'clock')}${stat('Grind',rec.grind.range?range(rec.grind.range):fmt(rec.grind.value),`${rec.grind.range?`Try ${fmt(rec.grind.value)} · `:''}${e(rec.grind.source)}`,'settings')}${showTemp?stat('Temperature',`${tempDisplay(rec.tempC,unit)}<span class="unit">\u00b0${unit}</span>`,'','thermometer'):''}</div>`;
+ return `<div class="recipe-grid">${stat('Dose',`${rec.measuredDoseUnchanged?fmtMeasuredControl(rec.doseG):fmt(rec.doseG)} <span class="unit">g</span>`,'Basket-based','scale')}${stat('Yield',range(rec.yield,'g'),`Center ${rec.source==='Adjustment from your latest taste rating'||rec.diagnosticOnly?fmtMeasuredControl(rec.yield.center):fmt(rec.yield.center)} g \u00b7 1:${fmt(rec.ratio.center,2)}`,'drop')}${stat('Time',range(rec.time,'s'),`Center ${fmt(rec.time.center)} s`,'clock')}${stat('Grind',rec.grind.range?range(rec.grind.range):(rec.source==='Adjustment from your latest taste rating'||rec.diagnosticOnly?fmtMeasuredControl(rec.grind.value):fmt(rec.grind.value)),`${rec.grind.range?`Try ${fmt(rec.grind.value)} · `:''}${e(rec.grind.source)}`,'settings')}${showTemp?stat('Temperature',`${tempDisplay(rec.tempC,safeUnit)}<span class="unit">\u00b0${safeUnit}</span>`,'','thermometer'):''}</div>`;
 }
 
 // Show before → after only for one measured, controllable adjustment.
@@ -71,14 +78,20 @@ export function nextShotAdjustment(advice,shot,showTemp=false,unit='F'){
  }
  if(changes.length!==1)return null;
  const key=changes[0];if(key==='tempC'&&(!showTemp||!Number.isFinite(shot.tempC)))return null;
+ // A real difference can still round to one identical visible setting;
+ // never display an impossible 158 → 158 °F (or 70 → 70 °C) arrow.
  const names={grindSetting:'Grind',yieldCenter:'Yield',tempC:'Temperature',doseG:'Dose'};
- const units={grindSetting:'',yieldCenter:'g',tempC:`°${unit}`,doseG:'g'};
- const format=n=>key==='tempC'?String(tempDisplay(n,unit)):fmt(n);
+ // Imported/legacy unit labels must never misstate a temperature adjustment.
+ const safeUnit=unit==='C'?'C':'F';
+ const units={grindSetting:'',yieldCenter:'g',tempC:`°${safeUnit}`,doseG:'g'};
+ const format=(n,isOriginal=false)=>key==='tempC'?String(tempDisplay(n,safeUnit)):key==='grindSetting'?fmtMeasuredControl(n):(key==='yieldCenter'||key==='doseG')&&isOriginal?fmtMeasuredControl(n):fmt(n);
  const controls=[['doseG','dose'],['grindSetting','grind'],['yieldCenter','yield'],['tempC','temperature']];
  const unchanged=controls.filter(([k])=>k!==key&&(k!=='tempC'||(showTemp&&Number.isFinite(shot.tempC)))).map(([,name])=>name);
  const keep=unchanged.length===3?`${unchanged[0]}, ${unchanged[1]}, and ${unchanged[2]}`:
   unchanged.length===2?`${unchanged[0]} and ${unchanged[1]}`:unchanged.join('');
- return {label:names[key],before:format(before[key]),after:format(next[key]),unit:units[key],keep};
+ const displayedBefore=format(before[key],true),displayedAfter=format(next[key]);
+ if(displayedBefore===displayedAfter)return null;
+ return {label:names[key],before:displayedBefore,after:displayedAfter,unit:units[key],keep};
 }
 export function nextShotTitle(advice){
  if(advice?.title==='Try a little finer')return 'Try grinding slightly finer';
@@ -90,12 +103,28 @@ export function nextShotGuidance(advice,shot,showTemp=false,unit='F'){
  // Whether a numeric arrow is possible or not, never conceal a supplied
  // source/uncertainty note. Keep the original textual guidance as fallback.
  const note=advice?.evidenceNote?'<p class="next-shot-evidence">'+e(advice.evidenceNote)+'</p>':'';
- if(!adjustment)return `<p class="helper next-shot-original-advice">${e(advice?.text||'')}</p>${note}`;
+ if(!adjustment){
+  // A clipped near-floor suggestion can disappear under approved whole-degree
+  // F/C display rounding; don't repeat an inaccurate full-degree claim.
+  const target=advice?.next,original=shot&&{grindSetting:shot.grindSetting,yieldCenter:shot.yieldG,doseG:shot.doseG};
+  const displayUnit=unit==='C'?'C':'F';
+  const tinyTemperatureStep=showTemp&&Number.isFinite(shot?.tempC)&&Number.isFinite(target?.tempC)&&
+   Math.abs(shot.tempC-target.tempC)>1e-8&&
+   tempDisplay(shot.tempC,displayUnit)===tempDisplay(target.tempC,displayUnit)&&
+   ['grindSetting','yieldCenter','doseG'].every(key=>target[key]==null||
+    (Number.isFinite(target[key])&&Number.isFinite(original?.[key])&&Math.abs(target[key]-original[key])<=1e-8));
+  const wording=tinyTemperatureStep?
+   'The suggested temperature difference is smaller than one displayed degree. Keep your logged measurements unchanged and check whether your machine can make that small adjustment before trying it.':
+   advice?.text||'';
+  return `<p class="helper next-shot-original-advice">${e(wording)}</p>${note}`;
+ }
  const {label,before,after,unit:measure,keep}=adjustment;
  const spoken=e(`${label} from ${before} to ${after}${measure?' '+measure:''}`);
  const source=advice?.text?.includes('Sized from your own comparable adjustments.')?
   '<p class="next-shot-evidence">Adjustment sized from your comparable shots.</p>':'';
- return `<div class="next-shot-change" role="group" aria-label="${spoken}"><span class="next-shot-variable">${e(label)}</span><span class="next-shot-number">${e(before)}</span><span class="next-shot-arrow" aria-hidden="true">→</span><span class="next-shot-number">${e(after)}</span>${measure?`<span class="next-shot-unit">${e(measure)}</span>`:''}</div><p class="next-shot-keep">Keep ${e(keep)} unchanged.</p>${source}${note}`;
+ // The numeric arrow supplements the engine's coaching; it must not replace it.
+ const coaching=advice?.text?'<p class="helper next-shot-coaching">'+e(advice.text)+'</p>':'';
+ return `<div class="next-shot-change" role="group" aria-label="${spoken}"><span class="next-shot-variable">${e(label)}</span><span class="next-shot-number">${e(before)}</span><span class="next-shot-arrow" aria-hidden="true">→</span><span class="next-shot-number">${e(after)}</span>${measure?`<span class="next-shot-unit">${e(measure)}</span>`:''}</div><p class="next-shot-keep">Keep ${e(keep)} unchanged.</p>${coaching}${source}${note}`;
 }
 
 
@@ -110,6 +139,9 @@ export function lastRecipeContextShot(shots,coffeeId,recipe,version){
   if(!sh||sh.hidden||sh.coffeeId!==coffeeId||sh.setupVersionId!==version.id||
    sh.calibrationId!==version.calibrationId||sh.style!==recipe.style||
    sh.basketId!==recipe.basketId||sh.feedMode!==recipe.feedMode||
+   // An incomplete imported rating stays in History but must not displace
+   // the newest genuinely five-rated shot used for actionable feedback.
+   !tastesComplete(sh.tasteScales)||
    typeof sh.timestamp!=='string'||!sh.timestamp.trim())continue;
   // Different ISO offsets must be compared as actual instants. Preserve
   // legacy undated/malformed shots without making them current feedback.
@@ -125,6 +157,12 @@ export function lastRecipeContextShot(shots,coffeeId,recipe,version){
    (finite(version.grinderMax)&&sh.grindSetting>version.grinderMax)||
    (sh.tempC!=null&&(!finite(sh.tempC)||
     sh.tempC<CONFIG.bounds.tempC[0]||sh.tempC>CONFIG.bounds.tempC[1])))continue;
+  // A present-day calibration cannot validate an imported shot against its
+  // explicitly recorded ORIGINAL grinder limits. Keep that shot in History.
+  const oldMin=sh.snapshot?.grinderMin,oldMax=sh.snapshot?.grinderMax;
+  if((finite(oldMin)&&finite(oldMax)&&oldMax<=oldMin)||
+     (finite(oldMin)&&sh.grindSetting<oldMin)||
+     (finite(oldMax)&&sh.grindSetting>oldMax))continue;
   if(at>latestInstant){latest=sh;latestInstant=at;}
  }
  return latest;
@@ -137,7 +175,8 @@ export function chips(t){
  return `<div class="taste-chips">${SCALES.map(sc=>{
   const value=t?.[sc.key],rated=hasRecordedTaste(value);
   const label=sc.label==='Astringency / Dryness'?'Dryness':sc.label;
-  const extra=!rated?': Not rated':sc.ideal===3&&value!==3?`: ${tasteLabel(sc,value)}`:'';
+  // Every recorded taste needs its readable value, not just a severity color.
+  const extra=!rated?': Not rated':`: ${tasteLabel(sc,value)}`;
   return `<span class="taste-chip ${rated?`severity-${tasteSeverity(sc,value)}`:'is-unrated'}">${e(label)}${e(extra)}</span>`;
  }).join('')}</div>`;
 }
@@ -185,6 +224,63 @@ export function updateTasteSelection(ratings,key,value) {
  return true;
 }
 
+// Do not falsely mark an edited measurement or note as corrected while its
+// current value still violates the SAME existing model Save bounds. Keep the
+// original alert and aria-invalid until the member actually fixes it.
+// Temperature display units are explicitly provided by the existing Log form.
+function unresolvedShotField(target){
+ if(typeof target.value!=='string')return false;
+ const value=target.value,name=target.name;
+ if(name==='notes')return Array.from(value).length>16000;
+ // Optional temperature is entered in the member's displayed F/C unit,
+ // while the existing model Save boundary is 70-100 degrees C.
+ // Do not dismiss a flagged error when the unit cannot be established.
+ if(name==='temperature'){
+  const trimmed=value.trim();
+  if(!trimmed)return false;
+  const unit=target.dataset?.temperatureUnit;
+  if(unit!=='F'&&unit!=='C')return true;
+  const c=tempInput(trimmed,unit),[low,high]=CONFIG.bounds.tempC;
+  return c==null||c<low||c>high;
+ }
+ if(!['doseG','yieldG','timeS','grindSetting'].includes(name))return false;
+ const trimmed=value.trim();
+ if(!trimmed||!Number.isFinite(Number(trimmed)))return true;
+ const n=Number(trimmed);
+ if(name==='grindSetting')return n<0;
+ const [low,high]=CONFIG.bounds[name];
+ return n<low||n>high;
+}
+// An edited field invalidates its old local Save validation summary. Ordinary
+// inputs must not dismiss unrelated cloud/sync errors, and other fields' status
+// is left intact until the member corrects or submits those fields.
+export function acknowledgeShotInput(target,feedback){
+ if(!target)return false;
+ const invalid=target.getAttribute?.('aria-invalid')==='true';
+ if(invalid&&unresolvedShotField(target))return true;
+ target.removeAttribute?.('aria-invalid');
+ if(target.getAttribute?.('aria-describedby')==='shot-validation-feedback')
+  target.removeAttribute?.('aria-describedby');
+ const form=target.closest?.('form');
+ if(invalid&&feedback&&typeof form?.querySelector==='function'&&
+    !form.querySelector('[aria-invalid="true"]'))feedback.textContent='';
+ return invalid;
+}
+// A rating tap can fix one missing taste while other marked invalid fields
+// remain unresolved. Retain the shared alert until the final flagged control
+// is corrected. A routine tap must never dismiss a cloud/sync error.
+export function acknowledgeShotRating(group,feedback){
+ if(!group)return false;
+ const invalid=group.getAttribute?.('aria-invalid')==='true';
+ group.removeAttribute?.('aria-invalid');
+ if(group.getAttribute?.('aria-describedby')==='shot-validation-feedback')
+  group.removeAttribute?.('aria-describedby');
+ const form=group.closest?.('form');
+ if(invalid&&feedback&&typeof form?.querySelector==='function'&&
+    !form.querySelector('[aria-invalid="true"]'))feedback.textContent='';
+ return invalid;
+}
+
 // Model validation remains authoritative. Move focus to the first invalid
 // measurement or missing sensory choice only after submit buttons are reenabled.
 export function focusShotValidationError(form,errors,tastes={}) {
@@ -220,13 +316,35 @@ export function focusShotValidationError(form,errors,tastes={}) {
  return true;
 }
 
+// History must show the ORIGINAL recorded measurements, not subtly rounded
+// recommendations. Reuse the established scalar formatting guard; do not
+// mutate archived dose/yield/time/grind values or invent absent readings.
 export function shotSummary(sh,unit='F') {
  const dose=numericMeasurement(sh.doseG)?Number(sh.doseG):NaN;
  const yieldG=numericMeasurement(sh.yieldG)?Number(sh.yieldG):NaN;
  const ratio=Number.isFinite(dose)&&dose>0&&Number.isFinite(yieldG)&&yieldG>0?` \u00b7 1:${fmt(yieldG/dose,2)}`:'';
- const temperature=numericMeasurement(sh.tempC)?` \u00b7 ${tempDisplay(sh.tempC,unit)}\u00b0${unit}`:'';
- const grind=numericMeasurement(sh.grindSetting)?` \u00b7 Grind ${fmt(sh.grindSetting)}`:'';
- return `<span class="shot-numbers">${fmt(sh.doseG)}g \u2192 ${fmt(sh.yieldG)}g${ratio} \u00b7 ${fmt(sh.timeS)}s${temperature}${grind}</span>`;
+  // Archived unit labels are untrusted; never interpolate arbitrary HTML or invent a physical unit.
+  const safeUnit=unit==='C'?'C':'F';
+ const temperature=numericMeasurement(sh.tempC)?` \u00b7 ${tempDisplay(sh.tempC,safeUnit)}\u00b0${safeUnit}`:'';
+ const grind=numericMeasurement(sh.grindSetting)?` \u00b7 Grind ${fmtMeasuredControl(sh.grindSetting)}`:'';
+ return `<span class="shot-numbers">${fmtMeasuredControl(sh.doseG)}g \u2192 ${fmtMeasuredControl(sh.yieldG)}g${ratio} \u00b7 ${fmtMeasuredControl(sh.timeS)}s${temperature}${grind}</span>`;
 }
-export const humanDate=d=>{if(typeof d!=='string'||!d.trim())return '';try{const date=new Date(d);return Number.isNaN(date.getTime())?'':date.toLocaleDateString('en-US',{month:'numeric',day:'numeric',year:'numeric'});}catch{return '';}};
+// An archived YYYY-MM-DD carries a calendar date, not a UTC instant.
+// Parsing it with new Date(dateOnly) shifts a real Nov 5 to Nov 4 in
+// America/Denver. Keep offset-bearing shot timestamps on the existing
+// local-instant display path and reject impossible legacy calendar dates.
+export const humanDate=d=>{
+ if(typeof d!=='string'||!d.trim())return '';
+ const calendar=d.trim();
+ if(/^\d{4}-\d{2}-\d{2}$/.test(calendar)){
+  const validated=new Date(calendar+'T12:00:00Z');
+  if(!Number.isFinite(validated.getTime())||validated.toISOString().slice(0,10)!==calendar)return '';
+  const [year,month,day]=calendar.split('-');
+  return Number(month)+'/'+Number(day)+'/'+year;
+ }
+ try{
+  const date=new Date(d);
+  return Number.isNaN(date.getTime())?'':date.toLocaleDateString('en-US',{month:'numeric',day:'numeric',year:'numeric'});
+ }catch{return '';}
+};
 export const previewNotice=()=>`<div class="preview-note">${icon('eye',16)}<div><strong>Design preview</strong><span>Fictional sample data. Nothing is shared, synced or sent to an account.</span></div></div>`;

@@ -84,6 +84,7 @@ function communityReleaseSection(release,ordinal,revision,incomplete){
  </section>`;
 }
 function communityShotRow({sh,index},revision){
+ const shotCount=num(sh.shot_count),contributorCount=num(sh.contributor_count);
  const ratings=[['Extraction',sh.extraction],['Body',sh.body],['Clarity',sh.clarity],
   ['Sweetness',sh.sweetness],['Dryness',sh.astringency]];
  const shotKey=`community-shot:${revision}:${index}:${communityCoffeeKey(sh)}`;
@@ -101,8 +102,8 @@ function communityShotRow({sh,index},revision){
    <div class="community-rating-grid">
     ${ratings.map(([label,value])=>`<div><strong>${e(value)}</strong><span>${label}</span></div>`).join('')}
    </div>
-   <p class="helper">${num(sh.shot_count)} qualifying shots · ${num(sh.contributor_count)} contributors for this exact coffee and style.</p>
-   <p class="helper">${e(confidence(num(sh.contributor_count),num(sh.shot_count)))} · Based on sample size, not a guarantee of extraction quality.</p>
+   <p class="helper">${shotCount} qualifying ${shotCount===1?'shot':'shots'} · ${contributorCount} ${contributorCount===1?'contributor':'contributors'} for this exact coffee and style.</p>
+   <p class="helper">${e(confidence(contributorCount,shotCount))} · Based on sample size, not a guarantee of extraction quality.</p>
   </div>
  </details>`;
 }

@@ -1,0 +1,71 @@
+{
+  "issue": 509,
+  "run": "R350",
+  "date_utc": "2026-11-19",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight_development_sha": "325985acf8df4d432fb284b8add036ad25223536",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "source_snapshot_development_sha": "cd0ab1f294bb5e15809592f210b5b69dc761ff49",
+  "main_sha": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+  "release_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5",
+  "status": "IN_PROGRESS",
+  "provider": "ACTIVE_HEALTHY_PG17_11",
+  "production_read_only": true,
+  "scope": "FOCUSED_CROSS_LAYER_SEMANTIC_RECHECK_NO_REVIEW_RECREDIT",
+  "sql_complete_definitions_read": [
+    "private.dic_admin_review_coffee",
+    "private.dic_link_pending_coffee",
+    "private.dic_edit_my_coffee",
+    "private.dic_find_coffee_matches",
+    "private.dic_submit_coffee_auto",
+    "private.dic_admin_edit_record",
+    "private.dic_admin_delete_record",
+    "private.dic_review_community_shot",
+    "private.rename_setup",
+    "private.dic_confirm_coffee_existing",
+    "private.dic_member_retry_pending_approval"
+  ],
+  "reconciled_existing_source_fixes": [
+    {
+      "finding": "R310 Admin merge SQL UNKNOWN for malformed normalized name",
+      "live_md5": "cb5c264aceb9699a498177f3f6861783",
+      "exact_synthetic_null_test": "name_reject=NULL; branch IF UNKNOWN",
+      "development_migration": "supabase/migrations/20261117130000_dic_admin_merge_null_normalized_name_guard.sql",
+      "migration_blob_sha": "7bc866ec985f9706abcbe10d900728a1bb6dc991",
+      "test": "supabase/tests/admin_coffee_review.sql",
+      "test_blob_sha": "080e37931406845eae8e8f8e0430b3046ab616c1",
+      "new_patch_required": false
+    },
+    {
+      "finding": "R333 stale original-name response on earlier-submission precedence",
+      "live_function_chars": 3954,
+      "development_migration": "supabase/migrations/20261118114600_dic_first_entry_no_self_alias.sql",
+      "migration_blob_sha": "6a34eff579b75e70eabca1b6c7ca99ecb2292d9d",
+      "test": "supabase/tests/coffee_first_entry_no_self_alias.sql",
+      "test_blob_sha": "52afd0ebfc7ace8d9274ecd4ed2357ed54f91cf2",
+      "new_patch_required": false
+    }
+  ],
+  "new_consumer_review": {
+    "client": "site/cloud/client.js",
+    "client_blob_sha": "08e1ac1f2610dca9fad162272c8e3c7ea56566a5",
+    "main": "site/cloud/main.js",
+    "rpc": "dic_edit_my_coffee",
+    "full_form_fields_sent": true,
+    "explicit_url_clear_supported": true,
+    "external_partial_clients": "UNVERIFIED",
+    "reproduced_new_bug": false
+  },
+  "live_schema_nullability": {
+    "public.shots.revision": "NOT_NULL",
+    "private.contribution_links.source_revision": "NOT_NULL"
+  },
+  "index_statistics": "CUMULATIVE_ONLY_NOT_PROOF_OF_UNUSED",
+  "first_time_provider_source_words": 0,
+  "issue267_source_lines": 0,
+  "new_app_test_ci_writes": 0,
+  "ci": "NOT_RUN_DOCS_ONLY",
+  "unapplied_fixes": "DEVELOPMENT_ONLY_NO_PUBLISH",
+  "no_production_or_backup_or_schedule_changes": true,
+  "next": "First genuinely new/changed/unreviewed live definition and its consumers; partial external edit API only if caller evidenced"
+}

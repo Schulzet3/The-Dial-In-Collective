@@ -1,0 +1,22 @@
+# #455 R321 — Date-only Shot History local timezone shift (November 17, 2026 UTC)
+
+DIC_PREFLIGHT_VERIFIED development_sha=6b6df2a9b4b48e1e1f23b34cb14756b76dfe6e94 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+**Owner authority and route:** #455 Option B SAFE Locked-compatible UX and correctness only; immutable development 6b6df2a9b4b48e1e1f23b34cb14756b76dfe6e94 and exact Git blob 2fb236bbfa6bac48513eeb3bd157b260853af06d independently fetched and byte-matched BEFORE AGENTS, journal, source or provider reads. AGENTS, CONTEXT_ENTRYPOINT, Master Spec, Decision Ledger, approval matrix, release queue, source register, #455/335/267/33/96 and concurrent PRs consulted. Main 3b372215ac7ccfd6db406f27090706e8cb8f3e80 and release 0f3641b4fff07e2a88d7747e621304ec2cf0ead5 read only. No Publish authorization.
+
+**Reproduced deterministic negative:** exact UI source blob af8ab0a07198e88f503a80b68ebb1aff1d56fac7 humanDate('2026-11-05') uses new Date() and toLocaleDateString; America/Denver real runtime prints 11/4/2026 despite the date-only historic calendar input 2026-11-05. It is not a new runtime taste policy or a claim that a real member encountered the defect. Existing shot-history-date-display test covers malformed timestamps and offset ISO but not date-only local timezone; do not duplicate #267's historical source-line audit.
+
+**Narrow SAFE change:** branch feature/455-r321-history-calendar-date-20261117; only site/lib/ui.js date-only YYYY-MM-DD formatting honors original calendar date, validates genuine month/day/leap date and rejects impossible records without fabricating a date. Offset-bearing ISO timestamps continue to represent local instants using existing formatting, including cross-midnight offsets. No original shot/timestamp/measurement/notes/five tastes changes; no server storage, member data, styles, grinder calibration, feeding, recommendation targets, Community, RLS, Auth, offline/outbox, SQL or provider writes.
+
+**SAME-COMMIT scope:** site/lib/ui.js; tests/issue455-r321-history-calendar-date.test.mjs (three bounded Node22 synthetic positive/negative tests, each original shot immutable); docs/RELEASE_QUEUE.json (only one new TESTING item, preserve 396 original entries/187 histories); this journal with a **NEW** required source-bound preflight line. Exactly four paths, no deletions. Pre-commit negative local Node runtime was executed on the matching native Date behavior; complete new source CI **NOT YET RUN**, no PASS/READY/DEPLOYED claim. Frozen 603 and #267 V2 literal review NOT_RUN/zero credit.
+
+**Next:** create same-branch code/test/queue/journal commit [skip netlify], read back Git blobs/PR head, execute appropriate risk-proportionate Node22, UI/Chromium/mobile/offline and governance checks (and only applicable SQL/security unchanged), repair failures with fresh preflight same-commit receipts, nonforce [skip netlify] merge after CI and concurrent ref recheck. Only after source and merged CI reconciled, update ledger/CURRENT_STATUS/queue READY under a separate reviewed docs PR. Original October29 ZIP and standalone S019 PDF bytes remain unverified; no numeric efficacy claim or member data experiment.
+
+
+## R321 final exact-source merge and docs reconciliation — 2026-11-17 UTC [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=9474daa7526a68cd65301e7c08bf2ca65360c274 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+#3132 nonforce source merge 145076b4ce7808faf10971636c05b9e28ca2e883 with four head=merge SHA blobs: UI e8b6b1de2412f7626517b60c3edf36b1aecea975, three synthetic tests dbb463984c42325f2390d8a87ca0cfa7282353a1, TESTING queue 3e0b08e8c10c8c5510661db769545c49b91dcd57, SAME-COMMIT journal 211ec0479621f7dd61d3ae701cb2e7e4cdd8118e. R321 tests 4785-4787 PASS, exact PR-head + merge Node22 5351 PASS/0 FAIL/6 intentional SKIP, head/merged cloud/Chromium/mobile/offline/approval SUCCESS; head isolated SQL/security SUCCESS. Frozen603 SKIPPED not PASS; distinct #33 original241 conditional head failure noted and merged #33 R171 SUCCESS, not a #455 scope change.
+
+Docs-only PR reconciles 1 R321 TESTING -> READY DEV-only with CI IDs, preserves 396 prior queue items and 187 histories; source ledger 185/553/249; CURRENT_STATUS and journal. At authoring docs PR/CI/merge pending, not PASS. No science policy, member data, provider operations or deployment. Original S019/October29 original bytes still unverified, #267 direct semantic credit 0.

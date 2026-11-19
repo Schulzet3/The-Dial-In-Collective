@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R310c",
+  "date_utc": "2026-11-17",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight_initial_development_sha": "5b550401e86c0aa563fc3b64d6b01acf9cacbe19",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "scope": "Fix stale CI/merge documentation for prior verified Admin merge NULL normalized key defect; no new product source writes or baseline SQL credit",
+  "pr": 3160,
+  "pr_head_sha": "942c3d1b7051553ccd9c5795d2db2412418c56e7",
+  "merged_sha": "66e2d2ec5cf9450e4b11c809ccbe260b0511f5e2",
+  "git_source_blobs": {
+    "migration": "7bc866ec985f9706abcbe10d900728a1bb6dc991",
+    "test": "080e37931406845eae8e8f8e0430b3046ab616c1"
+  },
+  "blob_parity": "EXACT PR head, merged, current development",
+  "pr_head": {
+    "workflows_success": [
+      44089410666,
+      44089410741,
+      44089410668,
+      44089410812,
+      44089410714,
+      44089410674
+    ],
+    "sql_job": 134060303130
+  },
+  "merged_source": {
+    "workflows_success": [
+      44090275709,
+      44090275784,
+      44090275602,
+      44090275737,
+      44090275667
+    ],
+    "sql_job": 134063294515,
+    "log": "Applied 20261117130000 in isolated PostgreSQL and ran admin_coffee_review.sql; SQL/JWT/backup steps SUCCESS"
+  },
+  "preserved_initial_failures": {
+    "sql_run": 44088964914,
+    "reason": "Missing explicit merged_source_sha null queue schema repaired",
+    "approval_run": 44088964885
+  },
+  "production_read_only": {
+    "health": "ACTIVE_HEALTHY",
+    "postgres_version": "17.11.0.003",
+    "old_function_md5": "cb5c264aceb9699a498177f3f6861783",
+    "old_function_chars": 4526,
+    "new_migration_applied": 0,
+    "pending_conflict_total": 0,
+    "records_extracted": 0
+  },
+  "new_tests_started": 0,
+  "new_first_time_semantic_credit": 0,
+  "production_writes": 0,
+  "queue_item": "DIC-Q-509-admin-merge-null-normalized-name",
+  "queue_status": "TESTING",
+  "baseline": "IN_PROGRESS",
+  "unverified": [
+    "Hosted #96 Auth role acceptance",
+    "Independent source-isolated release candidate"
+  ],
+  "next": "Directly inspect new/changed or as-yet-unreviewed provider source and compare consumers; avoid duplicated credits. No release."
+}

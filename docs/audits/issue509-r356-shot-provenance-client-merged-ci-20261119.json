@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R356",
+  "date_utc": "2026-11-19",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "bfe2b0eb9356af9dc7d2f105354c583e0ad51d6d",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e"
+  },
+  "review": {
+    "scope": "Complete live SQL trigger and state snapshot semantics, immutable hardware preservation, real client editing/visibility consumers, bounded aggregate integrity; no member/private rows",
+    "definitions": [
+      {
+        "signature": "private.capture_equipment_snapshot()",
+        "chars": 1166,
+        "md5": "90c66b59638b48d360e9fd949db63707",
+        "range": "1-1166",
+        "actual_trigger": "BEFORE INSERT public.shots ENABLED",
+        "verdict": "Same-owner hardware/basket/grinder context captured into immutable original shot; original migration intent confirmed"
+      },
+      {
+        "signature": "private.protect_shot_provenance()",
+        "chars": 683,
+        "md5": "9700d82ba097c7eba83b76135acbdac1",
+        "range": "1-683",
+        "actual_trigger": "BEFORE UPDATE public.shots ENABLED",
+        "verdict": "Immutable original hardware and snapshot; notes/rating edits do not change original shot identity"
+      },
+      {
+        "signature": "private.read_personal_state()",
+        "chars": 2339,
+        "md5": "037d248b67cc3e8490c1689d3200990f",
+        "range": "1-2339",
+        "verdict": "Owner-scoped shared MVCC snapshot includes historical hidden/archived rows for reconciliation; client filters hidden visible coffees"
+      }
+    ],
+    "total_complete_source_chars": 4188,
+    "provider_aggregate": {
+      "shots": 27,
+      "legacy_import": 14,
+      "five_snapshot_keys": 27,
+      "empty_snapshots": 0,
+      "nonlegacy_basket_dose_mismatch": 0,
+      "nonlegacy_grinder_min_mismatch": 0,
+      "nonlegacy_grinder_max_mismatch": 0,
+      "archived_setups": 0,
+      "hidden_coffees": 0,
+      "hidden_shots": 0
+    },
+    "github_sources": {
+      "migration": {
+        "path": "supabase/migrations/20261012015600_dic_shots_recipes_community.sql",
+        "blob": "15a832e8cdae53090c8d61e7b1131d7ab8a4ad74"
+      },
+      "cloud_main_blob": "30f5e6a90a4e59a9c5cc6bea6ef3d7642d6028c1",
+      "cloud_mapping_blob": "acbfad05f6c197f3884054f8709ea5bc2e7c9ad0",
+      "model_blob": "baafc8fa64fa3e359d8e42094e41c5d72a3b22df",
+      "outbox_blob": "d3072a74cb2b484d476f1a93703dd1f474c15b3b"
+    },
+    "latent": "Archived setup appears in hydrated switch list yet server refuses selection; no actual archived rows and no approved current archive action: historical UI mismatch needs isolated compatibility acceptance before fix",
+    "first_time_provider_word_credit": 0,
+    "issue267_code_line_credit": 0,
+    "confirmed_new_defect": false
+  },
+  "ci": {
+    "merged_fix_sha": "5d99767db18ead26f7d9b0e358a5b6a7dfc8f206",
+    "push_workflows_success": [
+      44482734154,
+      44482734247,
+      44482734209,
+      44482734345
+    ],
+    "exact_merged_commit_checks_success": [
+      "approval",
+      "validate",
+      "cloud-tests",
+      "mobile-browser-qa",
+      "exact-selected"
+    ],
+    "readback": "GITHUB_2026-11-19_SUCCESS",
+    "fresh_ci_rerun": false
+  },
+  "status": {
+    "audit": "IN_PROGRESS",
+    "queue": "TESTING_NOT_READY",
+    "production_writes": 0,
+    "source_test_ci_writes": 0,
+    "owner_alert": false
+  },
+  "next": "First genuinely new/changed/unreviewed live provider definition; isolated archived-setup active-consumer compatibility review; exact source isolation before READY"
+}

@@ -1,0 +1,231 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "round": "R299",
+  "development_source_sha": "c51b507f325064a7438f7cb00d00c0b536aaa80c",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "project_ref": "azviqqejypsefzilgonr",
+  "provider_status": "ACTIVE_HEALTHY",
+  "review_scope": "Full source inspection of 4 auth and 13 storage SQL helper definitions, deployed Edge broker core versus GitHub source, and read-only synthetic scalar helper checks.",
+  "baseline_status": "IN_PROGRESS",
+  "baseline_credit": "Coverage of 17 complete functions this run, NOT yet unique-first-time credit without historical ledger reconciliation; no claim all provider words reviewed.",
+  "definitions": [
+    {
+      "schema": "auth",
+      "signature": "email()",
+      "length_chars": 280,
+      "provider_definition_md5": "bf3569f4ae1c7e250e74daf51d0311c7",
+      "full_source_inspected": true,
+      "disposition": "RETAIN_PLATFORM_MANAGED",
+      "semantic_review": "Platform-managed stable request-scoped JWT email accessor; no application code deletion."
+    },
+    {
+      "schema": "auth",
+      "signature": "jwt()",
+      "length_chars": 265,
+      "provider_definition_md5": "20054548ba2003f61a6bcb472175700b",
+      "full_source_inspected": true,
+      "disposition": "RETAIN_PLATFORM_MANAGED",
+      "semantic_review": "Platform-managed stable request-scoped JWT claims accessor; retain."
+    },
+    {
+      "schema": "auth",
+      "signature": "role()",
+      "length_chars": 277,
+      "provider_definition_md5": "8a3e05459e07e0633d43c6fba2a2cdf4",
+      "full_source_inspected": true,
+      "disposition": "RETAIN_PLATFORM_MANAGED",
+      "semantic_review": "Live platform role accessor; four active preview RPCs call alongside uid/member checks. Legacy active, not safe to drop."
+    },
+    {
+      "schema": "auth",
+      "signature": "uid()",
+      "length_chars": 274,
+      "provider_definition_md5": "ea3b41bf29e2ad573067939329aa088e",
+      "full_source_inspected": true,
+      "disposition": "RETAIN_PLATFORM_MANAGED",
+      "semantic_review": "Platform JWT UUID subject accessor, required for application owner/member identity; retain."
+    },
+    {
+      "schema": "storage",
+      "signature": "allow_any_operation(expected_operations text[])",
+      "length_chars": 791,
+      "provider_definition_md5": "ccefb34283c346cc88e224d075bd5312",
+      "full_source_inspected": true,
+      "disposition": "RETAIN_PLATFORM_MANAGED",
+      "semantic_review": "Normalizes optional storage. prefixes and matches expected request-operation set; distinct public API."
+    },
+    {
+      "schema": "storage",
+      "signature": "allow_only_operation(expected_operation text)",
+      "length_chars": 773,
+      "provider_definition_md5": "e2f7d55adc027df69ec4b42c6c08f50f",
+      "full_source_inspected": true,
+      "disposition": "RETAIN_PLATFORM_MANAGED",
+      "semantic_review": "Checks one expected storage operation using same prefix normalization; distinct signature, no proven removable duplicate."
+    },
+    {
+      "schema": "storage",
+      "signature": "can_insert_object(bucketid text, name text, owner uuid, metadata jsonb)",
+      "length_chars": 433,
+      "provider_definition_md5": "73733c9319875273d5937b05d68a7930",
+      "full_source_inspected": true,
+      "disposition": "RETAIN_PLATFORM_MANAGED",
+      "semantic_review": "Managed permission probe intentionally raises PT200 after attempted insert to roll back; never invoked here."
+    },
+    {
+      "schema": "storage",
+      "signature": "enforce_bucket_lifecycle_service_role()",
+      "length_chars": 655,
+      "provider_definition_md5": "b4b21fec5ffef02e74e2477049138937",
+      "full_source_inspected": true,
+      "disposition": "RETAIN_PLATFORM_MANAGED",
+      "semantic_review": "Managed lifecycle service-role trigger guard; not obsolete application code."
+    },
+    {
+      "schema": "storage",
+      "signature": "enforce_bucket_name_length()",
+      "length_chars": 309,
+      "provider_definition_md5": "11b3bd509f6b254ec1cd859e712e8c78",
+      "full_source_inspected": true,
+      "disposition": "RETAIN_PLATFORM_MANAGED",
+      "semantic_review": "Managed 100-char bucket-name limit; no live buckets, still platform-managed."
+    },
+    {
+      "schema": "storage",
+      "signature": "enforce_versioning_status_transition()",
+      "length_chars": 539,
+      "provider_definition_md5": "47dc86fbd138d125125250b28b31d7ff",
+      "full_source_inspected": true,
+      "disposition": "RETAIN_PLATFORM_MANAGED",
+      "semantic_review": "Managed bucket version transition guard; retain."
+    },
+    {
+      "schema": "storage",
+      "signature": "extension(name text)",
+      "length_chars": 515,
+      "provider_definition_md5": "75d83971130753081a84c3270878d8e7",
+      "full_source_inspected": true,
+      "disposition": "RETAIN_PLATFORM_MANAGED",
+      "semantic_review": "Immutable final-suffix helper, synthetic folder/file.tar.gz -> gz."
+    },
+    {
+      "schema": "storage",
+      "signature": "filename(name text)",
+      "length_chars": 255,
+      "provider_definition_md5": "0e8171709dc2934861de959d743ff809",
+      "full_source_inspected": true,
+      "disposition": "RETAIN_PLATFORM_MANAGED",
+      "semantic_review": "Immutable basename helper, synthetic folder/file.tar.gz -> file.tar.gz."
+    },
+    {
+      "schema": "storage",
+      "signature": "foldername(name text)",
+      "length_chars": 356,
+      "provider_definition_md5": "93671af66e1fe108a56068ad4137d001",
+      "full_source_inspected": true,
+      "disposition": "RETAIN_PLATFORM_MANAGED",
+      "semantic_review": "Immutable directory segments helper, synthetic folder/file.tar.gz -> [folder]."
+    },
+    {
+      "schema": "storage",
+      "signature": "get_common_prefix(p_key text, p_prefix text, p_delimiter text)",
+      "length_chars": 486,
+      "provider_definition_md5": "0dc62b74fb855d4f504f50f900f93927",
+      "full_source_inspected": true,
+      "disposition": "RETAIN_PLATFORM_MANAGED",
+      "semantic_review": "Delimiter-aware prefix helper, synthetic folder/a/b.txt -> folder/a/ given folder/."
+    },
+    {
+      "schema": "storage",
+      "signature": "operation()",
+      "length_chars": 178,
+      "provider_definition_md5": "0720a7c3d1b49f9a8eee19e90d73bb97",
+      "full_source_inspected": true,
+      "disposition": "RETAIN_PLATFORM_MANAGED",
+      "semantic_review": "Reads storage.operation GUC; synthetic no-HTTP context returns no matching operation."
+    },
+    {
+      "schema": "storage",
+      "signature": "update_updated_at_column()",
+      "length_chars": 178,
+      "provider_definition_md5": "bfecc08a6034296258f0c3e10193076c",
+      "full_source_inspected": true,
+      "disposition": "RETAIN_PLATFORM_MANAGED",
+      "semantic_review": "Managed timestamp trigger, not invoked."
+    },
+    {
+      "schema": "storage",
+      "signature": "wake_lifecycle_state()",
+      "length_chars": 360,
+      "provider_definition_md5": "326028b9d567ca2de47e9ecf67a4553b",
+      "full_source_inspected": true,
+      "disposition": "RETAIN_PLATFORM_MANAGED",
+      "semantic_review": "Managed lifecycle trigger delegating to reconciliation, not invoked."
+    }
+  ],
+  "definition_count": 17,
+  "total_function_chars": 6924,
+  "edge_source_checks": [
+    {
+      "slug": "dic-admin-push-broker",
+      "provider_version": 3,
+      "verify_jwt": false,
+      "provider_sha256": "ca7ce5f9b80bf6984a7517e9f3ef1750fa856b75557136817ccc040dc5635382",
+      "file": "core.mjs",
+      "characters": 9706,
+      "development_git_blob_sha": "e1a467cc0bb9d94ea824953eec88aaf8d6c428dd",
+      "exact_deployed_development_core_bytes": true,
+      "review": "Read full deployed broker core and its matching development core; inspected subscription state, service-only deliveries, polling/retry and push JWT construction. Shared VAPID helper concepts are duplicated across separate broker modules, but deletion/extraction requires tested consumer equivalence; no safe source change justified."
+    },
+    {
+      "slug": "dic-member-approval-broker",
+      "provider_version": 1,
+      "verify_jwt": false,
+      "provider_sha256": "263f36326fa00934a4c7cfb7ecc6e3df9872e9b4f0395ef1326455d9bb2bded7",
+      "file": "core.mjs",
+      "characters": 11751,
+      "development_git_blob_sha": "1bc82c0c0f7e90bb86dd7da895c18f9c4e015c5a",
+      "exact_deployed_development_core_bytes": true,
+      "review": "Read full deployed broker core and its matching development core; inspected subscription state, service-only deliveries, polling/retry and push JWT construction. Shared VAPID helper concepts are duplicated across separate broker modules, but deletion/extraction requires tested consumer equivalence; no safe source change justified."
+    }
+  ],
+  "synthetic_scalar_results": {
+    "filename": "file.tar.gz",
+    "extension": "gz",
+    "folder": [
+      "folder"
+    ],
+    "prefix": "folder/a/",
+    "allow_only_without_storage_context": false,
+    "auth_uid_without_user_context": null
+  },
+  "catalog_evidence": {
+    "storage_buckets": 0,
+    "storage_objects": 0,
+    "storage_policies": 0,
+    "app_auth_role_function_calls": 4,
+    "app_storage_definition_references": 1,
+    "realtime_app_publication_tables": [],
+    "caution": "Zero current usage is not sufficient proof to delete platform-managed objects, live app aliases or historical migrations."
+  },
+  "findings": {
+    "new_reproducible_app_bug_count": 0,
+    "justified_deletions": 0,
+    "existing_unpublished_community_producer_search_bug": "PR #3086 is merged development only; exact merged-source push CI unverified; keep TESTING."
+  },
+  "tests": {
+    "read_only_synthetic_scalar": "PASS",
+    "isolated_postgres": "NOT_RUN_NO_CODE_CHANGE",
+    "node22": "NOT_RUN_NO_CODE_CHANGE",
+    "exact_source_ci": "NOT_CLAIMED"
+  },
+  "changes": {
+    "production": false,
+    "app_code": false,
+    "tests": false,
+    "workflows": false,
+    "receipt_only": true
+  },
+  "next": "Reconcile historical per-object ledger credit; direct full-source review of next unreviewed platform definitions; verify exact merged-source push CI through a non-PR-only Actions run endpoint."
+}

@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R301",
+  "project_ref": "azviqqejypsefzilgonr",
+  "scope": "Resolve duplicate direct semantic audit credit in R300; independently verify exact merged-source push Actions jobs for #3086",
+  "preflight": {
+    "development_sha": "65a5d5bef299c1986a7dad15a9509ea2c550c03d",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "blob_bytes_verified": true
+  },
+  "source_prior": {
+    "r221": {
+      "path": "docs/audits/issue509-storage-lifecycle-complete-provider-source-2026-11-13-run221.json",
+      "blob": "2d4c602a2f992c0b135a81dd7ddbaef03d9f2504",
+      "first_time_storage_functions": 5,
+      "first_time_storage_tables": 2
+    },
+    "r239": {
+      "path": "docs/audits/issue509-pgss-realtime-raw-filter-drift-2026-11-14-run239-rank1121-1200.json",
+      "blob": "e8504dfaaf85dc939719e86bcd8ae997c64e916b",
+      "first_time_realtime_filters_hash": 1
+    },
+    "r300": {
+      "path": "docs/audits/issue509-r300-storage-realtime-new-definitions-20261117.json",
+      "blob": "485f6ff6f2d6c1a202e5f6343e46fd16feb37abb",
+      "claimed_new_sources": 4,
+      "claimed_new_chars": 6576,
+      "claimed_new_tables": 2
+    }
+  },
+  "exact_current_provider_catalog_readback": {
+    "project_status": "ACTIVE_HEALTHY",
+    "postgres": "17.11.0.003",
+    "readonly": true,
+    "functions": [
+      {
+        "signature": "storage.delete_lifecycle_objects(object_ids uuid[])",
+        "md5": "b9737ba9f65ae16796874a5ff3b82a33",
+        "chars": 2327,
+        "first_direct": "R221"
+      },
+      {
+        "signature": "storage.protect_active_lifecycle_states()",
+        "md5": "fce9d03398ec222c77feec887c25c384",
+        "chars": 1016,
+        "first_direct": "R221"
+      },
+      {
+        "signature": "storage.reconcile_lifecycle_state(target_bucket_id text, policy_changed boolean)",
+        "md5": "271a57ecfb24df02a5d9100c2a801323",
+        "chars": 2912,
+        "first_direct": "R221"
+      },
+      {
+        "signature": "realtime.filters_hash(filters realtime.user_defined_filter[])",
+        "md5": "224d7075f0e9ccb1178b20e9d8eb4962",
+        "chars": 321,
+        "first_direct": "R239"
+      }
+    ],
+    "stored_migrations": 69,
+    "latest_version": "20261113195659"
+  },
+  "correction": {
+    "first_time_semantic_function_bodies_r300_corrected": 0,
+    "first_time_characters_r300_corrected": 0,
+    "first_time_storage_tables_r300_corrected": 0,
+    "duplicate_claims_removed_from_cumulative_credit": {
+      "functions": 4,
+      "characters": 6576,
+      "tables": 2
+    },
+    "historical_receipts_preserved": true,
+    "full_baseline_complete": false,
+    "source_hashes_match_prior": true,
+    "note": "The R300 direct rereview remains useful and valid; only its first-time accounting was incorrect. R221 and R239 retain original unique review credit."
+  },
+  "exact_merged_ci_3086": {
+    "merged_source_sha": "c155d54fd16c49ecb8744a1c1bb1c7181491790b",
+    "event": "push",
+    "five_workflow_runs": [
+      {
+        "id": 43974714497,
+        "name": "DIC isolated SQL release regression",
+        "job": "sql",
+        "conclusion": "success"
+      },
+      {
+        "id": 43974711815,
+        "name": "DIC approval, implementation and continuity contract",
+        "job": "approval",
+        "conclusion": "success"
+      },
+      {
+        "id": 43974711818,
+        "name": "DIC Issue33 R171 original241 Buesaco current selected disagreement",
+        "job": "exact-selected",
+        "conclusion": "success"
+      },
+      {
+        "id": 43974711837,
+        "name": "DIC cloud UX regression checks",
+        "jobs": [
+          "mobile-browser-qa",
+          "cloud-tests"
+        ],
+        "conclusion": "success"
+      },
+      {
+        "id": 43974711820,
+        "name": "DIC cloud app build and tests",
+        "job": "validate",
+        "conclusion": "success"
+      }
+    ],
+    "all_six_jobs_complete_success": true,
+    "all_jobs_exact_head_sha": true,
+    "source": "GitHub REST repository Actions runs?head_sha and per-run jobs (not PR-only fetch)",
+    "rerun": false,
+    "queue": "TESTING retained until other issue-specific READY criteria and source isolation are established"
+  },
+  "live_provider_mutations": 0,
+  "github_runtime_code_changes": 0,
+  "source_tests_rerun": false,
+  "baseline": "IN_PROGRESS",
+  "owner_notification": "NO_ACTION_REQUIRED",
+  "next": "Advance genuinely unreviewed/changed provider definitions and dependency-backed cleanup; reuse five exact-SHA #3086 CI receipts, then reconcile queue only after outstanding #33/#96 and source-isolation requirements. No production changes."
+}

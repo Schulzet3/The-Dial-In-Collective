@@ -1146,14 +1146,14 @@
     ]
   },
   "coverage": {
-    "current_scope": "APP_SQL_FUNCTIONS_99_99; APP_TABLE_DEFINITION_COMPONENTS_46_46; ALL_9_ACCESSIBLE_DEPLOYED_EDGE_FILE_VARIANTS_DIRECTLY_REVIEWED; STORAGE_PROVIDER_19_19_SQL_DIRECT; REALTIME_PROVIDER_18_18_SQL_DIRECT; PGBOUNCER1_VAULT5_EXTENSIONS90_FULL_VISIBLE_DECLARATIONS",
+    "current_scope": "CURRENT LIVE: 114/114 application SQL function signatures reconciled to full-body receipts (R314); 52/52 current application-table definition components reconciled (R297/R301); 69/69 current provider-stored SQL migration statements previously reviewed; 5 active Edge deployments, 9 accessible file variants directly reviewed. Full all-provider word audit still IN_PROGRESS; original 99-function/46-table manifest is historical, not today's total.",
     "semantic_reviewed_functions": 99,
     "total_application_functions": 99,
     "source_characters_semantically_read": 207402,
     "source_whitespace_tokens_semantically_read": 16880,
     "total_source_characters": 207402,
     "next_function_ordinal": null,
-    "next_object": "Full live migration SQL #1/54 direct semantic and exact-source identity review; hosted Auth/API with #96; compiled native and console-only UNVERIFIED",
+    "next_object": "FIRST genuinely new/changed or unreviewed live Supabase provider definition after R347/R348; if none, next independently reproduced member/Edge SQL bug or measurable bottleneck. Full hosted/console-only Auth and compiled/native behavior UNVERIFIED. Preserve immutable originals and #96/#267 boundaries; never restart migration #1/54.",
     "other_objects": "99/99 application SQL function definitions, 46/46 application table catalog definitions, 9/9 accessible deployed Edge file variants complete; platform/vendor SQL, Auth/Storage/cron/Realtime, migration drift, external dependency calls, performance and limits still incomplete; platform table definitions auth27/storage8/realtime3 direct review complete; platform functions, other tables, database migration SQL bodies still unverified; additional provider catalog review supabase_migrations(1 table), vault(1 table+1 view), extensions(2 views), without secret records",
     "platform_objects": "DIRECT_PROVIDER_CATALOG_TABLES_AUTH27_STORAGE8_REALTIME3_SUPABASE_MIGRATIONS1_VAULT1=40_TABLES; DIRECT_VIEWS_VAULT1_EXTENSIONS2=3; DIRECT_PROVIDER_SQL_FUNCTION_BODIES_42_OF_42_AUTH4_GRAPHQL1_STORAGE19_REALTIME18",
     "edge_function_sources_reviewed": 11,
@@ -1166,7 +1166,20 @@
       "domains": "5/5 DIRECT DECLARATION",
       "receipt": "docs/audits/issue509-information-schema-full-direct-review-2026-11-10-run154.json"
     },
-    "stored_migrations_sql": "69/69 current provider-stored SQL migration statements directly semantically reviewed, source-identical to mapped immutable Git migration files. Last new 3=40734 chars Run241. New development-only migration #509 not applied."
+    "stored_migrations_sql": "69/69 current provider-stored SQL migration statements directly semantically reviewed, source-identical to mapped immutable Git migration files. Last new 3=40734 chars Run241. New development-only migration #509 not applied.",
+    "current_app_table_component_review_verified_from_reconciled_receipts": "52/52 visible current app table components; 41 reused original + 3 direct R290 + 8 new R297; compiled/native/hosted and provider-wide all-word audit NOT complete",
+    "currentness_readback_run348": {
+      "project_ref": "azviqqejypsefzilgonr",
+      "current_functions": 114,
+      "current_tables": 52,
+      "applied_migrations": 69,
+      "current_edge_deployments": 5,
+      "original_frozen_functions": 99,
+      "exact_function_differential": "22 added, 17 changed, 7 absent, 75 unchanged vs frozen",
+      "provenance": "R308+R314 direct complete current receipts, fresh R348 MD5/signature recheck",
+      "first_time_word_credit": 0,
+      "notes": "Original coverage.semantic_reviewed_functions=99 and total_application_functions=99 record frozen 99-item intake, never silently overwritten."
+    }
   },
   "reviews": [
     {
@@ -4282,6 +4295,605 @@
       "new_defects": 0,
       "production_writes": 0,
       "next": "pgss 2641-2720; provider definition and source-parity continuation"
+    },
+    {
+      "run": 263,
+      "prewrite_source_sha": "64e31b5f4e30d108c61eb8353ecc27449164ad39",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt_path": "docs/audits/issue509-coffee-source-admin-edge-parity-pgss-2026-11-15-run263-rank3041-3120.json",
+      "receipt_git_blob": "e767b80b3c74b754dea9379ba6a1ee98acfb88ba",
+      "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-15-run263.json",
+      "index_git_blob": "c4e9d8e93bf05f7d1cb1f1ac096a39e092cfba38",
+      "numeric_distinct": 2989,
+      "current_sql_definition_bodies": 7,
+      "source_chars": 16499,
+      "new_defects": 0,
+      "production_writes": 0,
+      "next": "3121-3200 and case-sensitive URL source normalization isolated check"
+    },
+    {
+      "run": "2026-11-15 UTC R264",
+      "source_sha": "dfc00b2e5b74b43e098e1947917af93dba3da367",
+      "prewrite_sha": "dfc00b2e5b74b43e098e1947917af93dba3da367",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "reviewed_sql_functions": 6,
+      "reviewed_chars": 9410,
+      "new_integrity_risk": "Source path case normalization collision reproduced read-only",
+      "affected_member_data": "UNVERIFIED",
+      "pgss_rank_range": [
+        3121,
+        3200
+      ],
+      "new_distinct": 71,
+      "cumulative_distinct": 3060,
+      "provider_writes": 0,
+      "next": "pgss 3201-3280; isolated URL-key correction tests and migration, remaining direct definitions and exact source parity"
+    },
+    {
+      "run": 271,
+      "preflight_development_sha": "360a581b96ffe0db1b040927942ceb2e0135ac86",
+      "prewrite_sha": "072fb9aac1cd9a54b5b8c5c3f2e781a8b12ce72f",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt_path": "docs/audits/issue509-r271-source-preview-legacy-pgss-20261115.json",
+      "full_live_definitions": 13,
+      "full_source_chars": 16247,
+      "edge_tombstone_source_parity": true,
+      "pgss_new_distinct": 69,
+      "pgss_total_distinct": 3555,
+      "production_writes": 0,
+      "next": "3761-3840 provider SQL/source parity"
+    },
+    {
+      "run": "R275 Nov15 2026 22:48Z",
+      "source_sha": "8ea4efb32cc9fa448ba176ac03efbc3c7eff6293",
+      "preflight_blob": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r275-source-gates-legacy-pgss-20261115.json",
+      "functions": 10,
+      "full_definition_characters": 28463,
+      "complete_policies": 17,
+      "complete_triggers": 12,
+      "pgss_4001_4080_new_distinct": 71,
+      "pgss_cumulative_distinct": 3836,
+      "provider_writes": 0,
+      "code_changes": 0,
+      "verified_new_defects": 0,
+      "next": "pgss 4081-4160; new/changed provider definitions; isolated canonical-name test; #96 Auth"
+    },
+    {
+      "run": "R276 Nov15 2026 23:42Z",
+      "source_sha": "d413819de5ef5fcb336001184dd198932d7e8321",
+      "prewrite_sha": "d413819de5ef5fcb336001184dd198932d7e8321",
+      "preflight_blob": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r276-coffee-identity-source-parity-pgss-20261115.json",
+      "complete_functions": 10,
+      "full_definition_chars": 33064,
+      "complete_policies": 6,
+      "complete_triggers": 6,
+      "pgss_4081_4160_new_distinct": 72,
+      "pgss_cumulative_distinct": 3908,
+      "provider_writes": 0,
+      "code_changes": 0,
+      "confirmed_new_defects": 0,
+      "next": "numeric pgss 4161–4240; provider Edge and migration parity; isolated canonical-name fixture; #96 Auth"
+    },
+    {
+      "run": "R282 Nov16 2026",
+      "source_sha": "273148a2f98d6fdcda0674e7c57a64f894d065fd",
+      "preflight_blob": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r282-edge-parity-pgss-20261116.json",
+      "edge_paths_direct_parity": 11,
+      "known_mismatch": 1,
+      "pgss_4561_4640_new": 74,
+      "pgss_cumulative_distinct": 4333,
+      "provider_writes": 0,
+      "new_confirmed_defects": 0,
+      "next": "numeric 4641-4720; canonical name regression"
+    },
+    {
+      "run": "R283 Nov16 2026",
+      "source_sha": "09a387f9db79466e112f1e6e98d959381e66c7de",
+      "preflight_blob": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r283-push-subscription-acl-pgss-20261116.json",
+      "complete_public_tables": 2,
+      "complete_service_broker_source_chars": 1920,
+      "numeric_new": 70,
+      "numeric_cumulative": 4403,
+      "provider_writes": 0,
+      "confirmed_new_defects": 0,
+      "next": "numeric 4721-4800; remaining provider source; isolated canonical name"
+    },
+    {
+      "run": "R291 Nov16 2026",
+      "source_sha": "84c261657912d922623fe7285f763ecec3ad7934",
+      "preflight_blob": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r291-admin-delete-parity-20261116.json",
+      "reviewed_sql_definitions": 12,
+      "reviewed_sql_chars": 24155,
+      "source_body_parity": 2,
+      "FKs": 30,
+      "triggers": 14,
+      "first_time_credit": 0,
+      "pgss_count": 4789,
+      "provider_writes": 0,
+      "new_confirmed_defects": 0,
+      "next": "Inspect first changed/new or not-yet-semantically-reviewed provider function/definition after R290, with exact Git migration source parity. Retry numeric ranks 4961-5040 only if pg_stat_statements has enough live rows. Coordinate #96 hosted Auth and #33 canonical response downstream contract."
+    },
+    {
+      "run": "R293 Nov16 2026",
+      "source_sha": "a28c9bc38f20cfaf8e7194a816d7994a72f3962f",
+      "preflight_blob": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r293-signup-roaster-push-parity-20261116.json",
+      "reviewed_full_sql_definitions": 6,
+      "source_parity": 6,
+      "sql_chars": 6995,
+      "first_time_credit": 0,
+      "pgss_visible": 4807,
+      "pgss_cumulative_distinct_retained": 4604,
+      "provider_writes": 0,
+      "new_confirmed_defects": 0,
+      "next": "First new or unreviewed provider definition; numeric pgss ranks 4961-5040 if accessible; #33/#96 acceptance unverified"
+    },
+    {
+      "run": "R294 Nov16 2026",
+      "source_sha": "510bc9d7d6b53d3d1fc0de3d92e7de7f20b276a2",
+      "preflight_blob": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r294-additional-import-credential-key-guard-20261116.json",
+      "confirmed_source_level_credential_guard_gap": 1,
+      "synthetic_key_probe_only": true,
+      "first_time_word_credit": 0,
+      "production_writes": 0,
+      "source_status": "TESTING",
+      "next": "Isolated PostgreSQL17 exact-source test, nonforce development merge, readback CI; no production publication"
+    },
+    {
+      "run": "R294b Nov16 2026",
+      "source_sha": "0395c1bf45a9be5e0944fbbb6e9bf23917bf6976",
+      "preflight_blob": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r294b-credential-guard-merge-exact-ci-20261116.json",
+      "pr_merged": 3073,
+      "synthetic_pg17_verified": true,
+      "pr_head_checks_passed": 8,
+      "push_node_cancelled": true,
+      "baseline": "IN_PROGRESS",
+      "provider_writes": 0,
+      "next": "Descendant exact CI readback / #96 hosted Auth / first new provider definition"
+    },
+    {
+      "run": "R295 Nov16 2026",
+      "source_sha": "c98e27203197038e9203c064419b0d6e5d90a0ff",
+      "preflight_blob": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r295-retired-api-and-notification-function-review-20261116.json",
+      "receipt_blob_sha": "6bb5036f7154c0372b3b384f0a985dbddffbe37b",
+      "full_current_function_sources_semantically_rereviewed": 13,
+      "source_characters_rereviewed": 18654,
+      "retired_sql_view_name_pattern_scanned": 261,
+      "deprecated_symbol_hits": 0,
+      "new_first_time_baseline_word_credit": 0,
+      "provider_writes": 0,
+      "source_functional_changes": 0,
+      "tests_run": 0,
+      "verdict": "NO_NEW_CONFIRMED_DEFECT; NO_SAFE_DROP_PROVEN; LOW_BENEFIT_UNION_DISTINCT_SIMPLIFICATION_ONLY",
+      "baseline": "IN_PROGRESS",
+      "next": "Review first new/changed/unreviewed live provider definition and dependency-backed cleanup; old pgss range only if visible"
+    },
+    {
+      "run": "R297 Nov16 2026",
+      "source_sha": "c557fd4e42c1dbc010a49323aa9a0f7fb8f569b9",
+      "preflight_blob": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r297-app-table-definition-reconciliation-20261116.json",
+      "first_time_app_table_definitions_reviewed": 8,
+      "visible_current_table_components_reviewed_total": 52,
+      "first_time_function_word_credit": 0,
+      "confirmed_safe_deletions": 0,
+      "production_writes": 0,
+      "baseline": "IN_PROGRESS",
+      "next": "Exact merged CI for #3086 and new/unreviewed provider definitions."
+    },
+    {
+      "run": "R303 Nov17 2026",
+      "preflight_development_sha": "e92b15de8c0032eb528b8df801a10e5025aed4e6",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r303-green-shot-community-projection-contract-20261117.json",
+      "cross_object_provider_definitions_rereviewed": 5,
+      "incremental_unique_definitions": 0,
+      "new_verified_defect": false,
+      "proven_no_change_green_reentry_contract": true,
+      "provider_writes": 0,
+      "source_edits": 0,
+      "next": "Changed/new/unreviewed provider definition; preserve baseline IN_PROGRESS"
+    },
+    {
+      "run": "R306 Nov17 2026",
+      "preflight_sha": "56fd78529a9eefe5cd7acc182b3b16dda85ce5bd",
+      "prewrite_sha": "6cebce9b608eca191ea8bc3c909124836f41f1ae",
+      "receipt": "docs/audits/issue509-r306-community-queue-hotpath-20261117.json",
+      "corrected_queue": "DIC-Q-509-community-producer-search-parity",
+      "merged_ci_5_runs_6_jobs_success": true,
+      "new_unique_definition_coverage": 0,
+      "provider_writes": 0,
+      "confirmed_new_app_bugs": 0,
+      "next": "First truly new/changed provider definition or unreconciled provider word-range, and #509 source-isolation/#33/#96 acceptance. Avoid re-reviewing unchanged SQL or pg_stat_statements-only fingerprints; no duplicate CI."
+    },
+    {
+      "run": "R310 Nov17 2026",
+      "preflight_development_sha": "b5c25ff3fb71709d2f2b29edd38964f8521a7efa",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r310-admin-merge-null-normalized-name-20261117.json",
+      "confirmed_new_correctness_defect": "Admin merge NULL-normalized name may bypass mismatch predicate",
+      "source_only_fix": true,
+      "first_time_word_credit": 0,
+      "production_writes": 0,
+      "baseline": "IN_PROGRESS"
+    },
+    {
+      "run": "R311 Nov17 2026",
+      "preflight_sha": "4c3fead238a57e338f45055b123cb66786afaaca",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r311-source-retry-rollover-20261117.json",
+      "new_latent_defect": "15min worker retry bypass at 24h window reset",
+      "source_only_fix": true,
+      "new_unique_word_credit": 0,
+      "production_writes": 0,
+      "next": "Exact source-bound CI then nonforce merge; isolate candidate and #96 hosted Auth before READY."
+    },
+    {
+      "run": "R311b Nov17 2026",
+      "preflight_sha": "4c3fead238a57e338f45055b123cb66786afaaca",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "pr": 3162,
+      "original_sql_run": 44092868139,
+      "original_sql": "FAILED_SYNTHETIC_BETA_MEMBERS_DUPLICATE_KEY",
+      "test_only_repair": "ON_CONFLICT_POST_AUTH_TRIGGER",
+      "new_ci": "PENDING",
+      "production_writes": 0
+    },
+    {
+      "run": "R311c Nov17 2026",
+      "receipt": "docs/audits/issue509-r311c-source-retry-merged-ci-20261117.json",
+      "preflight_sha": "2069fda2279dbe02ec8f2766348bb8123a483e73",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "pr": 3162,
+      "merged_sha": "2069fda2279dbe02ec8f2766348bb8123a483e73",
+      "pr_head_checks": "6_WORKFLOWS_7_JOBS_SUCCESS",
+      "merged_checks": "5_WORKFLOWS_6_JOBS_SUCCESS",
+      "queue": "TESTING",
+      "production_writes": 0,
+      "next": "Provider next genuinely unreviewed/changed object, #96 hosted acceptance and source-isolated candidate if applicable"
+    },
+    {
+      "run": "R310c Nov17 2026",
+      "preflight_sha": "5b550401e86c0aa563fc3b64d6b01acf9cacbe19",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r310c-admin-merge-merged-ci-20261117.json",
+      "pr": 3160,
+      "merged_sha": "66e2d2ec5cf9450e4b11c809ccbe260b0511f5e2",
+      "pr_head_success_workflows": 6,
+      "merged_success_workflows": 5,
+      "first_time_word_credit": 0,
+      "production_writes": 0,
+      "queue": "TESTING",
+      "next": "First genuinely unreviewed/current-changed provider definition; hosted acceptance not verified."
+    },
+    {
+      "run": "R313 Nov17 2026",
+      "preflight_sha": "21096ed89cbba7e45cfeaef06b22a13d85ceeb60",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r313-broker-source-parity-telemetry-20261117.json",
+      "full_deployed_edge_chars": 21887,
+      "files_source_exact_release": 4,
+      "admin_broker_requests_24h": 287,
+      "approval_broker_requests_24h": 288,
+      "observed_4xx_5xx": 0,
+      "first_time_word_credit": 0,
+      "production_writes": 0,
+      "new_verified_defects": 0,
+      "baseline": "IN_PROGRESS",
+      "next": "Reconcile current 114 SQL signatures against historical full direct coverage receipts; inspect first unreviewed current provider definition."
+    },
+    {
+      "run": "R314 Nov17 2026",
+      "preflight_sha": "96d73f22205aa3ff879b1f6e030756a637e810f3",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r314-app-function-current-source-reconciliation-20261117.json",
+      "current_app_sql_source_coverage": "114_OF_114_CURRENT_MD5_RECONCILED",
+      "two_direct_full_bodies_chars": 19570,
+      "new_first_time_duplicate_credit": 0,
+      "known_unpublished_null_guard": "ALREADY_IN_SOURCE_NOT_NEW",
+      "new_defects": 0,
+      "production_writes": 0,
+      "baseline": "IN_PROGRESS",
+      "next": "First genuinely changed/unreviewed nonapp provider definition; hosted provider console UNVERIFIED."
+    },
+    {
+      "run": "R318 Nov17 2026",
+      "preflight_sha": "4cddd5987544c36edfd3a7cf5617cf316b7a441a",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r318-retired-table-integrity-crosschecks-20261117.json",
+      "live_tables": 52,
+      "retired_table_ref_check": 5,
+      "matched_development_retirement_migration_count": 2,
+      "integrity_owner_categories": 11,
+      "violations": 0,
+      "first_time_word_credit": 0,
+      "production_writes": 0,
+      "new_verified_defects": 0,
+      "baseline": "IN_PROGRESS",
+      "next": "Resume with first genuinely changed/unreviewed provider definition or reproducible application bottleneck; no recrediting unchanged SQL; full hosted #96 and compiled/console surfaces remain unverified"
+    },
+    {
+      "run": "R320 Nov17 2026",
+      "preflight_sha": "5466fc5becb7476ab856c834deae3f3a0e35ace1",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r320-postgrest-workload-sql-retired-invite-20261117.json",
+      "selected_complete_sanitized_query_texts": 22,
+      "three_full_preview_routines": 3,
+      "retired_invite_stats_historical_not_live": true,
+      "new_verified_defects": 0,
+      "production_writes": 0,
+      "baseline": "IN_PROGRESS",
+      "next": "New/changed provider source or unreviewed query text"
+    },
+    {
+      "run": "R321 Nov17 2026",
+      "preflight_sha": "370fcedd3f817d3e8bfca1dcc63ff69dff5671f9",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r321-rare-postgrest-workload-20261117.json",
+      "unreviewed_low_frequency_statements_direct": 42,
+      "original_normalized_sql_characters": 28726,
+      "retired_invitation_rpc_historical": 3,
+      "new_verified_defects": 0,
+      "provider_writes": 0,
+      "baseline": "IN_PROGRESS",
+      "next": "Changed/unreviewed provider source or proven functional bottleneck, hosted Auth UNVERIFIED"
+    },
+    {
+      "run": "R331 Nov18 2026",
+      "preflight_sha": "18b9975da3dbf5819cbbd5561a6592c5f2803a01",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r331-coffee-alias-matcher-consumer-semantic-20261118.json",
+      "full_sources_rereviewed": 6,
+      "first_time_source_credit": 0,
+      "latent_alias_contract_gap": true,
+      "live_alias_rows": 0,
+      "production_writes": 0,
+      "baseline": "IN_PROGRESS",
+      "next": "Synthetic isolated alias-matcher fixture; check dependencies before any new migration."
+    },
+    {
+      "run": "R334 Nov18 2026",
+      "preflight_sha": "37f2817b6e75f9289a7bd359b6fd02c5ab1c681a",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r334-coffee-alias-endtoend-gates-20261118.json",
+      "synthetic_readonly_cases": 5,
+      "alias_only_similarity": 0.318182,
+      "current_matcher_threshold": 0.43,
+      "current_confirm_threshold": 0.6,
+      "latent_dual_gate_gap": true,
+      "live_alias_rows": 0,
+      "new_provider_word_credit": 0,
+      "provider_writes": 0,
+      "source_test_ci_writes": 0,
+      "baseline": "IN_PROGRESS",
+      "next": "Disposable PG17 admitted-member alias candidate plus explicit confirmation with cross-roaster/lot/origin negatives; fix only in development with exact-source tests."
+    },
+    {
+      "run": "R335b Nov18 2026",
+      "preflight_sha": "7795d5a356e2afc27420e3fb86d7eae3316c13dc",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "merged_sha": "7795d5a356e2afc27420e3fb86d7eae3316c13dc",
+      "receipt": "docs/audits/issue509-r335b-alias-merge-ci-20261118.json",
+      "pr": 3273,
+      "ci_required_successes": 5,
+      "new_provider_word_credit": 0,
+      "production_writes": 0,
+      "queue": "TESTING",
+      "baseline": "IN_PROGRESS",
+      "next": "Continue #509 provider review, #96 Auth and isolated release evidence."
+    },
+    {
+      "run": "R336 Nov18 2026",
+      "preflight_sha": "14f7a639ea5974d19bd10e75675f5dbf42ad0037",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r336-community-browse-broker-runtime-20261118.json",
+      "edge_release_file_parity": 4,
+      "complete_sql_chars": 7171,
+      "complete_edge_chars": 21887,
+      "log_window_edge_200": 577,
+      "first_time_provider_source_credit": 0,
+      "production_writes": 0,
+      "source_test_ci_writes": 0,
+      "baseline": "IN_PROGRESS",
+      "next": "public.dic_member_approval_claim(p_channel text,p_limit integer) character 1"
+    },
+    {
+      "run": "R346 Nov18 2026",
+      "preflight_sha": "e3977c442ffebb65f66fd7cc64ffbfab263b7e20",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r346-migration-remap-community-metrics-20261118.json",
+      "migration_mapping_exact": true,
+      "full_semantic_comparison_objects": 4,
+      "new_provider_source_credit": 0,
+      "prod_writes": 0,
+      "baseline": "IN_PROGRESS",
+      "next": "Trace the actual release/development caller and intended merged-coffee behavior for public.dic_community_evidence_counts(uuid,text); isolate rollback PG17 merged-ID fixture only if product contract confirms mismatch, otherwise proceed to next changed/unreviewed provider object. Keep #96 hosted Auth independently UNVERIFIED."
+    },
+    {
+      "run": "R347 Nov18 2026",
+      "preflight_sha": "915994396ea9e9289919939adc6b27f7d17bfb51",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r347-community-counts-invariant-20261118.json",
+      "counts_merged_mismatch": "REFUTED",
+      "client_sources_checked": 3,
+      "first_time_provider_word_credit": 0,
+      "prod_writes": 0,
+      "baseline": "IN_PROGRESS",
+      "next": "Continue to next changed/unreviewed provider definition; check other consumers only with real evidence, preserve #96 hosted Auth and console-only UNVERIFIED."
+    },
+    {
+      "run": "R348 Nov18 2026 Denver / Nov19 UTC",
+      "preflight_sha": "071294b383f941e175c774a516c06b1c79535b64",
+      "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "receipt": "docs/audits/issue509-r348-current-manifest-log-triage-20261118.json",
+      "corrected_stale_current_scope": true,
+      "live_app_functions": 114,
+      "live_app_tables": 52,
+      "provider_migrations": 69,
+      "active_edges": 5,
+      "management_api_select_error_counts": 19,
+      "new_semantic_word_credit": 0,
+      "provider_writes": 0,
+      "baseline": "IN_PROGRESS",
+      "next": "Next new/changed/unreviewed live definition, corroborate true app bug before source edits; source tests and release TESTING unchanged."
+    },
+    {
+      "run": "R353 Nov19 2026 UTC",
+      "preflight_sha": "152e55eb1b88fa6631ec79f2e7c7be93ed71ba73",
+      "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "receipt": "docs/audits/issue509-r353-admin-pagination-consumer-20261119.json",
+      "current_functions_directly_reread": 6,
+      "current_definition_chars": 15201,
+      "first_time_provider_words": 0,
+      "issue267_code_lines": 0,
+      "provider_writes": 0,
+      "new_bug": false,
+      "baseline": "IN_PROGRESS",
+      "next": "private.dic_admin_access_overview() complete definition starting at character 1: compare account overview/paging fallback and released UI, then first newly changed/unreviewed provider object"
+    },
+    {
+      "run": "R354 Nov19 2026 UTC",
+      "preflight_sha": "54247af05c93268b8421e4e562a89fa6286b5101",
+      "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "receipt": "docs/audits/issue509-r354-admin-search-recovery-20261119.json",
+      "reviewed_definitions": 9,
+      "current_definition_chars": 13689,
+      "first_time_provider_words": 0,
+      "issue267_code_lines": 0,
+      "verified_new_defect": true,
+      "source_fix": "PR_PENDING_TESTING",
+      "provider_writes": 0,
+      "baseline": "IN_PROGRESS",
+      "next": "private.dic_admin_account_delete_operations object constraints/trigger and Edge retry-path consumers at complete source character 1, assess genuinely unreviewed/changed objects"
+    },
+    {
+      "run": "R354a Nov19 2026 UTC",
+      "preflight_sha": "54247af05c93268b8421e4e562a89fa6286b5101",
+      "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "receipt": "docs/audits/issue509-r354a-admin-search-fallback-20261119.json",
+      "parent_pr_commit": "bf499dfc07a0e3c4cb7c4cc190389ecece5bcaf1",
+      "search_error_fallback_masked": true,
+      "first_time_provider_words": 0,
+      "issue267_code_lines": 0,
+      "provider_writes": 0,
+      "baseline": "IN_PROGRESS",
+      "ci": "PENDING",
+      "release": "TESTING"
+    },
+    {
+      "run": "R355 2026-11-19 UTC",
+      "preflight_sha": "32741c1809bf76b7eca69b09d242deca935fdb2d",
+      "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "receipt": "docs/audits/issue509-r355-workspace-mutation-provider-semantic-20261119.json",
+      "fully_reviewed_definitions": 5,
+      "current_definition_chars": 20725,
+      "first_time_provider_words": 0,
+      "issue267_code_lines": 0,
+      "confirmed_new_bug": false,
+      "development_fix_merged": "5d99767db18ead26f7d9b0e358a5b6a7dfc8f206",
+      "pr": 3384,
+      "pr_head_source_checks": "FIVE_APPLICABLE_SUCCESS_EXACT_HEAD",
+      "merged_push_ci": "UNVERIFIED",
+      "queue": "TESTING",
+      "prod_writes": 0,
+      "next": "Admin merged-source CI; verify hidden/archived offline mutation contract before any source patch; next genuinely unseen/changed live definition."
+    },
+    {
+      "run": "R357 2026-11-19 UTC",
+      "preflight_sha": "2bb1a0f85cf9c815294533e44531b901c06cf659",
+      "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "reviewed_complete_definitions_reread": 3,
+      "read_current_chars": 10515,
+      "first_time_provider_words": 0,
+      "issue267_line_credit": 0,
+      "findings": "Dormant archived-setup UI/server mismatch; no current archive producer or impacted rows; no safe patch",
+      "source_test_ci": "UNCHANGED_NOT_RUN",
+      "provider_writes": 0,
+      "release": "TESTING_UNCHANGED",
+      "baseline": "IN_PROGRESS",
+      "next": "First genuinely new/changed/unreviewed provider definition or reproducible active behavior defect; archive pathway only if supported data producer emerges; do not remove historical setups or alter production."
+    },
+    {
+      "run": "R358 Nov19 2026",
+      "source_sha": "8a45f21cbbd4526dade5ae12d7fe450ca6c551be",
+      "receipt": "docs/audits/issue509-r358-admin-shot-family-lifecycle-20261119.json",
+      "semantic_reassessment": "Admin delete family refresh crosslayer",
+      "new_function_word_credit": 0,
+      "existing_stale_family_count": 1,
+      "source_candidate": "supabase/migrations/20261119105000_dic_admin_shot_delete_family_refresh.sql",
+      "ci": "PENDING",
+      "provider_writes": 0,
+      "baseline": "IN_PROGRESS"
+    },
+    {
+      "run": "R359",
+      "date": "2026-11-19",
+      "development_sha": "9b97754c7a80d988947657978ec7cad1af9ed3ae",
+      "preflight_development_sha": "8a45f21cbbd4526dade5ae12d7fe450ca6c551be",
+      "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "receipt": "docs/audits/issue509-r359-admin-shot-delete-merge-20261119.json",
+      "merged_pr": 3399,
+      "full_live_sql_definitions": 2,
+      "first_time_word_credit": 0,
+      "issue267_line_credit": 0,
+      "provider_writes": 0,
+      "ci": "MERGED_CHECKS_PENDING",
+      "release": "TESTING",
+      "baseline": "IN_PROGRESS",
+      "next": "Merged exact CI/possible source-only historical stale family backfill, then new provider definitions"
+    },
+    {
+      "run": "R359b",
+      "date": "2026-11-19",
+      "preflight_development_sha": "8a45f21cbbd4526dade5ae12d7fe450ca6c551be",
+      "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "source_sha": "9b97754c7a80d988947657978ec7cad1af9ed3ae",
+      "pr": 3399,
+      "receipt": "docs/audits/issue509-r359b-admin-shot-merge-ci-20261119.json",
+      "merged_exact_source_applicable_ci": "6_PASS",
+      "unrelated_issue33": "FAIL",
+      "production_writes": 0,
+      "queue": "TESTING",
+      "baseline": "IN_PROGRESS",
+      "next": "Historical family mismatch and new provider definitions"
+    },
+    {
+      "run": "R360",
+      "date": "2026-11-19",
+      "preflight_development_sha": "eac9b0b803a7209ddfd836369ad7e26f2afa1896",
+      "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "receipt": "docs/audits/issue509-r360-stale-family-derived-backfill-20261119.json",
+      "source_migration": "supabase/migrations/20261119120000_dic_reconcile_stale_personal_family_stats.sql",
+      "provider_writes": 0,
+      "first_time_word_credit": 0,
+      "issue267_line_credit": 0,
+      "ci": "PR_HEAD_PENDING",
+      "release": "TESTING",
+      "baseline": "IN_PROGRESS",
+      "next": "Exact PG17 fixture/Node22/browser/approval then nonforce integration, provider novel source"
+    },
+    {
+      "run": "R360a",
+      "date": "2026-11-19",
+      "preflight_development_sha": "5eca094cf069b820e9cbfd927f7dc6469e2e84fa",
+      "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "pr": 3405,
+      "prior_head": "df7679becf8eab421327932fccc7b80403afdf9b",
+      "receipt": "docs/audits/issue509-r360a-sql-dispatch-coverage-repair-20261119.json",
+      "ci": "NEW_HEAD_PENDING",
+      "repair": "exact bundled SQL dispatcher fixture recognition",
+      "source_migration_unchanged": true,
+      "provider_writes": 0,
+      "release": "TESTING",
+      "baseline": "IN_PROGRESS"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -21112,5 +21724,3302 @@
     "functional_ci": "NOT_RUN_DOCS_ONLY",
     "baseline_complete": false,
     "next": "fresh provider drift and numeric ranks 2721–2800; continue full provider definition/source parity"
+  },
+  "provider_pgss_community_projection_run260": {
+    "preflight_development_sha": "318f3388ecfab67e0b592ab54955242d8bdff036",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "provider_snapshot": {
+      "observed_at": "2026-11-15 07:53:57.493649+00",
+      "app_tables": 52,
+      "rls_disabled": 0,
+      "app_functions": 114,
+      "app_policies": 41,
+      "migrations": 69,
+      "pgss_rows": 4752,
+      "stats_reset": "2026-10-09 11:11:31.487298+00"
+    },
+    "receipt_path": "docs/audits/issue509-community-projection-pgss-2026-11-15-run260-rank2801-2880.json",
+    "complete_source_characters": 17295,
+    "complete_definitions": [
+      {
+        "signature": "private.dic_backfill_library_contributions(p_owner uuid, p_entry uuid, p_canonical uuid)",
+        "md5": "424a5c87c53165a918f7094bf67d25bb",
+        "chars": 2360,
+        "reviewed_range": [
+          1,
+          2360
+        ],
+        "verdict": "Verified-canonical source backfill skips withdrawn; creates missing Community projections only for green linked owner shots; no direct client permission."
+      },
+      {
+        "signature": "private.dic_on_community_coffee_verification()",
+        "md5": "cefee7b991e40185eadbacde89def3aa",
+        "chars": 1065,
+        "reviewed_range": [
+          1,
+          1065
+        ],
+        "verdict": "Coffee verification changes skip withdrawn rows and review pending only; no revival."
+      },
+      {
+        "signature": "private.project_shot()",
+        "md5": "79e6fd0668fa4502c8785b3e92a14a61",
+        "chars": 3045,
+        "reviewed_range": [
+          1,
+          3045
+        ],
+        "verdict": "Shot audit and project trigger withdraw non-green, reenter pending on material corrected green; generated is_dialed_in derives solely from measured fields included in change comparison."
+      },
+      {
+        "signature": "public.dic_browse_community_shots(p_limit integer, p_offset integer)",
+        "md5": "edcc2c6a9fb24b3455a446d964a2ed2d",
+        "chars": 3222,
+        "reviewed_range": [
+          1,
+          3222
+        ],
+        "verdict": "Admitted-member boundary and bounded sanitized verified-eligible Community list; no identities in result; cohort count performance not measured."
+      },
+      {
+        "signature": "public.dic_community_recommendation_evidence(p_library_entry_id uuid, p_style text)",
+        "md5": "085f92a3814dce624e5b9a3759e893ef",
+        "chars": 6171,
+        "reviewed_range": [
+          1,
+          6171
+        ],
+        "verdict": "Owner library entry, verified/unmerged coffee and known style required; own contribution excluded; contributor-group weighting avoids repeated-person inflation."
+      },
+      {
+        "signature": "public.dic_confirm_community_outlier(p_shot_id uuid, p_expected_revision bigint)",
+        "md5": "0657114255a0375b7f3fc502f780aa54",
+        "chars": 1432,
+        "reviewed_range": [
+          1,
+          1432
+        ],
+        "verdict": "Outlier confirmation requires owner shot current revision plus held extreme_outlier reason; source review rerun under lock."
+      }
+    ],
+    "complete_shot_trigger_definitions": 6,
+    "is_dialed_in_generated_verified": true,
+    "prior_fix_exact_ci": [
+      {
+        "name": "approval",
+        "run_id": 43687160492,
+        "status": "SUCCESS",
+        "source_sha": "fa7d0ff7e0302ddd35c9dd1b0b02f2d34996a2ee"
+      },
+      {
+        "name": "isolated SQL",
+        "run_id": 43687160505,
+        "status": "SUCCESS",
+        "source_sha": "fa7d0ff7e0302ddd35c9dd1b0b02f2d34996a2ee"
+      },
+      {
+        "name": "Node22",
+        "run_id": 43687160491,
+        "status": "SUCCESS",
+        "source_sha": "fa7d0ff7e0302ddd35c9dd1b0b02f2d34996a2ee"
+      },
+      {
+        "name": "cloud/mobile",
+        "run_id": 43687160456,
+        "status": "SUCCESS",
+        "source_sha": "fa7d0ff7e0302ddd35c9dd1b0b02f2d34996a2ee"
+      }
+    ],
+    "numeric_pgss_range": [
+      2801,
+      2880
+    ],
+    "new_distinct": 80,
+    "overlap": 0,
+    "cumulative_distinct": 2766,
+    "baseline_complete": false,
+    "next": "2881–2960"
+  },
+  "provider_pgss_approval_delivery_run261": {
+    "preflight_development_sha": "e32cd3c1bf54abff3f8e993aa932dcd55182979a",
+    "prewrite_development_sha": "e32cd3c1bf54abff3f8e993aa932dcd55182979a",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "provider_snapshot": {
+      "snapshot": "2026-11-15 08:43:37.390906+00",
+      "app_functions": 114,
+      "app_tables": 52,
+      "app_tables_without_rls": 0,
+      "policies": 41,
+      "migration_records": 69,
+      "pgss_ids": 4758,
+      "pgss_reset": "2026-10-09 11:11:31.487298+00"
+    },
+    "receipt_path": "docs/audits/issue509-approval-delivery-pgss-2026-11-15-run261-rank2881-2960.json",
+    "receipt_blob_sha": "01f407fb55a0c5d58ed038adf7389d795db80b11",
+    "reviewed_complete_definitions": [
+      {
+        "signature": "private.dic_admin_review_signup(p_member_id uuid, p_action text, p_expected_state text)",
+        "md5": "7e0d3bf10542694b60177fcfa9c6f7be",
+        "chars": 2073,
+        "range": [
+          1,
+          2073
+        ]
+      },
+      {
+        "signature": "private.dic_admin_signup_requests(p_offset integer, p_limit integer)",
+        "md5": "663c13571f70bb29b6a4351e8e6a45eb",
+        "chars": 1411,
+        "range": [
+          1,
+          1411
+        ]
+      },
+      {
+        "signature": "public.dic_admin_push_claim_poll()",
+        "md5": "e3bbf384effe7e29b5cffd89135c0666",
+        "chars": 414,
+        "range": [
+          1,
+          414
+        ]
+      },
+      {
+        "signature": "public.dic_admin_push_runtime_keys()",
+        "md5": "16fd1cc2a0cbf0110cd253e661c4cdef",
+        "chars": 427,
+        "range": [
+          1,
+          427
+        ]
+      },
+      {
+        "signature": "public.dic_admin_push_snapshot()",
+        "md5": "c6c2c674fa8358a3dd4946a3c0f9d8ed",
+        "chars": 1007,
+        "range": [
+          1,
+          1007
+        ]
+      },
+      {
+        "signature": "public.dic_member_approval_claim(p_channel text, p_limit integer)",
+        "md5": "b0d1e8d2622852b6b930def5c8a171d9",
+        "chars": 1920,
+        "range": [
+          1,
+          1920
+        ]
+      },
+      {
+        "signature": "public.dic_member_approval_claim_poll()",
+        "md5": "b94ddc2223993aa7685faf482d3871e4",
+        "chars": 335,
+        "range": [
+          1,
+          335
+        ]
+      },
+      {
+        "signature": "public.dic_member_approval_finish(p_event_id bigint, p_channel text, p_claim_token uuid, p_outcome text)",
+        "md5": "e92ba8e17ab274bcab1a564475d16f28",
+        "chars": 1003,
+        "range": [
+          1,
+          1003
+        ]
+      }
+    ],
+    "complete_source_characters": 8590,
+    "security_boundary": "Five service-only public SQL methods, two authenticated Admin-only private SQL methods, one additional service-only method; all eight security-definer with empty search_path; no secret content read",
+    "pgss_range": [
+      2881,
+      2960
+    ],
+    "new_distinct": 75,
+    "overlap": 5,
+    "cumulative_distinct": 2841,
+    "baseline_complete": false,
+    "next_pgss_range": [
+      2961,
+      3040
+    ],
+    "status": "IN_PROGRESS_NO_PRODUCTION_WRITES"
+  },
+  "provider_source_identity_edge_pgss_run263": {
+    "receipt_path": "docs/audits/issue509-coffee-source-admin-edge-parity-pgss-2026-11-15-run263-rank3041-3120.json",
+    "receipt_blob_sha": "e767b80b3c74b754dea9379ba6a1ee98acfb88ba",
+    "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-15-run263.json",
+    "index_blob_sha": "c4e9d8e93bf05f7d1cb1f1ac096a39e092cfba38",
+    "provider": {
+      "observed_at": "2026-11-15 10:45:29.481824+00",
+      "app_tables": 52,
+      "rls_off": 0,
+      "app_functions": 114,
+      "policies": 41,
+      "migrations": 69,
+      "pgss_count": 4772,
+      "stats_reset": "2026-10-09 11:11:31.487298+00"
+    },
+    "sql_definitions": [
+      {
+        "signature": "private.dic_admin_set_member_access(p_member_id uuid, p_enabled boolean)",
+        "md5": "d7a339f277e9da0d8393d5efcdbc0e89",
+        "line_range": [
+          1,
+          44
+        ],
+        "verdict": "SECDEF admin-only; protects admins/self and in-flight deletion, admission and verified-email restoration, logs access events; real signed-in test #96-owned."
+      },
+      {
+        "signature": "private.dic_find_coffee_matches(p jsonb)",
+        "md5": "b4b845d29ccb65ac7922109dc89816b6",
+        "line_range": [
+          1,
+          118
+        ],
+        "verdict": "Admitted member; bounded request; evaluated verified active coffee and checked official sources, release labels, unique exact match; fuzzy alternatives await confirmation. Full-table similarity scan may scale; plan UNVERIFIED."
+      },
+      {
+        "signature": "private.dic_source_key(value text)",
+        "md5": "07e0ef286246fdae29b9151018296f79",
+        "line_range": [
+          1,
+          27
+        ],
+        "verdict": "Removes URL tracking params, lowercases host/path and retained query; potentially collapses case-sensitive source path identities. Needs isolated collision proof and approved #33 source usage before changes."
+      },
+      {
+        "signature": "private.dic_submit_coffee_auto(mid uuid, p jsonb)",
+        "md5": "e2b11c83a686a5a9949699cd23b52e13",
+        "line_range": [
+          1,
+          66
+        ],
+        "verdict": "Owner-scoped idempotent mutation; exact verified match reuse; ambiguous fuzzy candidate stays Pending; true new candidates auto-promoted under existing approval; provenance stored."
+      },
+      {
+        "signature": "private.dic_verified_roaster_page_proof(roaster_name text)",
+        "md5": "7ce32408a61728294ad667a9c985f5da",
+        "line_range": [
+          1,
+          36
+        ],
+        "verdict": "Checks recent verified roaster pages and active official-source attestations, returns null on domain conflict, does not gate universal URL preview; source attestation LEGACY ACTIVE."
+      },
+      {
+        "signature": "public.dic_admin_approve_own_coffee(submission_id uuid)",
+        "md5": "dad5489e9916e30aef63110f7b666954",
+        "line_range": [
+          1,
+          10
+        ],
+        "verdict": "Requires Admin via private.is_admin() before delegated canonical promotion; no anonymous EXECUTE."
+      },
+      {
+        "signature": "public.dic_admin_push_bootstrap_key(p_public_key text, p_private_key text)",
+        "md5": "637217a555887f78d812deb347455e4d",
+        "line_range": [
+          1,
+          23
+        ],
+        "verdict": "SECDEF service-role only, advisory lock and Vault persistence of VAPID secret, no secret return, no actual key retrieved."
+      }
+    ],
+    "edge_source_parity": [
+      {
+        "path": "supabase/functions/dic-admin-push-broker/index.ts",
+        "git_blob": "7c7a851f510dd5c21409cd8b9f6560b059dd64fd",
+        "live_source_byte_equal": true
+      },
+      {
+        "path": "supabase/functions/dic-admin-push-broker/core.mjs",
+        "git_blob": "e1a467cc0bb9d94ea824953eec88aaf8d6c428dd",
+        "live_source_byte_equal": true
+      },
+      {
+        "path": "supabase/functions/dic-member-approval-broker/index.ts",
+        "git_blob": "046781fa56426c761ded24679000212549999ba0",
+        "live_source_byte_equal": true
+      },
+      {
+        "path": "supabase/functions/dic-member-approval-broker/core.mjs",
+        "git_blob": "1bc82c0c0f7e90bb86dd7da895c18f9c4e015c5a",
+        "live_source_byte_equal": true
+      }
+    ],
+    "pgss_rank_range": [
+      3041,
+      3120
+    ],
+    "new_fingerprints": 71,
+    "cumulative_distinct": 2989,
+    "possible_issues": [
+      "URL path case collision, UNVERIFIED"
+    ],
+    "status": "BASELINE_IN_PROGRESS",
+    "next": "3121-3200, source isolation/URL collision, full provider parity"
+  },
+  "provider_preview_source_case_collision_pgss_run264": {
+    "receipt_path": "docs/audits/issue509-preview-and-path-collision-pgss-2026-11-15-run264-rank3121-3200.json",
+    "receipt_blob_sha": "5a173b179e77f73b42e00213098768f00f0d05a0",
+    "index_path": "docs/audits/issue509-pgss-cumulative-index-2026-11-15-run264.json",
+    "index_blob_sha": "d72670af7079bcf1e4aa7f50d47e10cd392cce58",
+    "preflight_development_sha": "dfc00b2e5b74b43e098e1947917af93dba3da367",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "live_sql_bodies": 6,
+    "live_sql_chars": 9410,
+    "source_collision": "LITERAL_SQL_REPRODUCED_NO_PRIVATE_ROWS",
+    "impacted_records": "UNVERIFIED",
+    "pgss_rank_range": [
+      3121,
+      3200
+    ],
+    "new_distinct": 71,
+    "cumulative_distinct": 3060,
+    "fix_status": "IN_PROGRESS_ISOLATED_TEST_NEEDED",
+    "next": "pgss 3201-3280; isolated URL-key correction tests and migration, remaining direct definitions and exact source parity"
+  },
+  "provider_mutation_import_rls_pgss_run268": {
+    "observed_at": "2026-11-15 15:44:56.801635+00",
+    "preflight_development_sha": "a591bb946799d4927a39adeeb3dc8435b60aed33",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt": "docs/audits/issue509-r268-import-mutation-rls-pgss-20261115.json",
+    "receipt_blob_sha": "7b5458282f27cfe7e4d81a004e3fa054daba0697",
+    "complete_live_function_bodies": 12,
+    "complete_live_function_characters": 34051,
+    "complete_rls_policies": 10,
+    "trigger_definitions": 3,
+    "pgss_rank_range": [
+      3441,
+      3520
+    ],
+    "new_distinct": 66,
+    "cumulative_distinct": 3346,
+    "status": "IN_PROGRESS",
+    "next": "pgss 3521-3600, remain provider full SQL/Edge migration source parity and #96 real Auth acceptance; no production writes"
+  },
+  "provider_community_provenance_pgss_run269": {
+    "preflight_development_sha": "87617d54c3e10c507b3ffa1081eef9e9b82e4991",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "provider_observed_at": "2026-11-15 16:46:31.605069+00",
+    "receipt_path": "docs/audits/issue509-r269-community-provenance-pgss-20261115.json",
+    "receipt_blob_sha": "984fd1a380b9a0bb6066e626f6719aaaf93c85f7",
+    "complete_live_sql_bodies": 8,
+    "complete_live_sql_characters": 15809,
+    "complete_rls_policy_expressions": 7,
+    "complete_trigger_definitions": 12,
+    "pgss_rank_range": [
+      3521,
+      3600
+    ],
+    "new_numeric_distinct": 74,
+    "cumulative_numeric_distinct": 3420,
+    "status": "IN_PROGRESS_NO_PRODUCTION_WRITES",
+    "next": "numeric ranks 3601-3680; provider full definitions, migration/source parity, #96 authentic session controls"
+  },
+  "provider_preview_source_review_run271": {
+    "preflight_development_sha": "360a581b96ffe0db1b040927942ceb2e0135ac86",
+    "prewrite_development_sha": "072fb9aac1cd9a54b5b8c5c3f2e781a8b12ce72f",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt_path": "docs/audits/issue509-r271-source-preview-legacy-pgss-20261115.json",
+    "reviewed_full_function_count": 13,
+    "source_chars": 16247,
+    "edge_tombstone_byte_parity": true,
+    "pgss_rank_range": [
+      3681,
+      3760
+    ],
+    "new_distinct": 69,
+    "cumulative_distinct": 3555,
+    "source_case_fix": "TESTING_NOT_PRODUCTION",
+    "legacy_archive_indexes": "HISTORICAL_NAMES_ON_ARCHIVE_RELATIONS",
+    "status": "IN_PROGRESS",
+    "next": "pgss 3761-3840; remaining provider definition/source parity and #96 real JWT"
+  },
+  "provider_coffee_identity_rls_pgss_run272": {
+    "preflight_development_sha": "f1671399792d5c2466fafc9f07a47ffa06c8ed31",
+    "prewrite_development_sha": "f1671399792d5c2466fafc9f07a47ffa06c8ed31",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "provider_observed_at": "2026-11-15 19:52:53.297066+00",
+    "receipt_path": "docs/audits/issue509-r272-coffee-identity-rls-pgss-20261115.json",
+    "receipt_blob_sha": "b10f55edbfff18c3718be520f07bb554225c5c29",
+    "complete_function_bodies": 10,
+    "source_chars": 20227,
+    "rls_policies": 9,
+    "trigger_definitions": 6,
+    "pgss_rank_range": [
+      3761,
+      3840
+    ],
+    "new_distinct": 69,
+    "overlap": 11,
+    "cumulative_distinct": 3624,
+    "candidate": "STALE_CANONICAL_NAME_RESPONSE_UNVERIFIED_IN_ISOLATED_TEST",
+    "status": "IN_PROGRESS_NO_PRODUCTION_WRITES",
+    "next": "pgss ranks 3841-3920; isolated canonical response contract; full provider/source parity"
+  },
+  "provider_community_quality_policy_pgss_run273": {
+    "preflight_development_sha": "411ece34cd606714fb59a3043216f9a365f3b6ad",
+    "prewrite_development_sha": "6f58cc2daa62af6d34891b3471fe5d8f36caee81",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "provider_observed_at": "2026-11-15 20:44:45.985491+00",
+    "receipt_path": "docs/audits/issue509-r273-community-review-policy-pgss-20261115.json",
+    "receipt_blob_sha": "99b27db41b064a3d2b9e89b5016a7570e5283210",
+    "complete_live_sql_bodies": 12,
+    "definition_characters": 19023,
+    "rls_policies": 12,
+    "trigger_definitions": 10,
+    "pgss_rank_range": [
+      3841,
+      3920
+    ],
+    "new_distinct": 71,
+    "overlap": 9,
+    "cumulative_distinct": 3695,
+    "candidate": "STALE_CANONICAL_NAME_RESPONSE_ISOLATED_REGRESSION_UNVERIFIED",
+    "status": "IN_PROGRESS_NO_PRODUCTION_WRITES",
+    "next": "pgss 3921-4000; isolated canonical name contract test; remaining provider full SQL and migration/source parity; #96 genuine Auth"
+  },
+  "provider_admin_delete_rls_pgss_run274": {
+    "preflight_development_sha": "dcec8e30e057b17ea7931a845deed67718c0cf8f",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_development_sha": "dcec8e30e057b17ea7931a845deed67718c0cf8f",
+    "provider_observed_at": "2026-11-15 21:50:49.040165+00",
+    "receipt_path": "docs/audits/issue509-r274-admin-delete-rls-pgss-20261115.json",
+    "receipt_blob_sha": "1517c29dcbdd86dc3ec8aafe1afa74d7ea20a3e9",
+    "reviewed_complete_functions": 8,
+    "complete_function_literal_characters": 20834,
+    "complete_rls_policy_expressions": 9,
+    "complete_trigger_definitions": 8,
+    "pgss_rank_range": [
+      3921,
+      4000
+    ],
+    "new_numeric_distinct": 70,
+    "overlap": 10,
+    "cumulative_numeric_distinct": 3765,
+    "pgss_sql_text_reviewed": false,
+    "auth_real_session": "UNVERIFIED_ISSUE_96",
+    "stale_canonical_response_candidate": "UNVERIFIED_ISOLATED_POSTGRES_REGRESSION",
+    "status": "IN_PROGRESS_NO_PRODUCTION_WRITES",
+    "next": "pgss numeric ranks 4001-4080; remaining provider/Edge/migration direct source parity; isolated canonical name fixture and #96 authorization"
+  },
+  "provider_source_gates_legacy_pgss_run275": {
+    "run": 275,
+    "initial_preflight_sha": "8ea4efb32cc9fa448ba176ac03efbc3c7eff6293",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "source_write_commit": "f2357e1a5aa1484cd7a863357f958e33084d7bba",
+    "source_receipt": "docs/audits/issue509-r275-source-gates-legacy-pgss-20261115.json",
+    "source_receipt_blob_sha": "a2b29e8e209cee34fa285e4342bb165f5dbf1490",
+    "provider_observed_at": "2026-11-15 22:48:27.275415+00",
+    "complete_sql_definitions": 10,
+    "complete_sql_characters": 28463,
+    "policy_expressions": 17,
+    "trigger_bindings": 12,
+    "pgss_rank_range": [
+      4001,
+      4080
+    ],
+    "new_distinct": 71,
+    "overlap": 9,
+    "cumulative_distinct": 3836,
+    "rls_no_policy_private_tables_effective_client_grants": "11 PRIVATE TABLES DENY ANON/AUTH SELECT/INSERT; LIVE_AUTH_UNVERIFIED",
+    "new_confirmed_defects": 0,
+    "justified_deletions": 0,
+    "github_code_test_ci_changes": 0,
+    "production_writes": 0,
+    "state": "IN_PROGRESS_NO_PRODUCTION_WRITES",
+    "next": "Numeric ranks 4081–4160, remaining full provider definitions/source parity, isolated canonical-name PostgreSQL regression #33, signed-in #96 Auth"
+  },
+  "provider_coffee_identity_source_parity_pgss_run276": {
+    "initial_source_sha": "d413819de5ef5fcb336001184dd198932d7e8321",
+    "prewrite_sha": "d413819de5ef5fcb336001184dd198932d7e8321",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "provider_observed_at": "2026-11-15 23:42:56.966955+00",
+    "receipt_path": "docs/audits/issue509-r276-coffee-identity-source-parity-pgss-20261115.json",
+    "receipt_blob_sha": "ddb985dcb5a190f075eee8dac604c004eb333000",
+    "full_live_sql_definitions": 10,
+    "full_sql_chars": 33064,
+    "complete_policies": 6,
+    "complete_triggers": 6,
+    "pgss_rank_range": [
+      4081,
+      4160
+    ],
+    "new_distinct": 72,
+    "cumulative_distinct": 3908,
+    "source_case_fix": "DEVELOPMENT_ONLY_TESTING",
+    "old_pending_canonical_name": "ISOLATED_REGRESSION_UNVERIFIED",
+    "production_writes": 0,
+    "status": "IN_PROGRESS_NO_PRODUCTION_CHANGES",
+    "next": "pgss numeric 4161–4240 and remaining provider/source parity"
+  },
+  "provider_platform_storage_realtime_drift_run277": {
+    "run": 277,
+    "source_sha": "d9c1c29fbaa9547473c017822cc06ff25fa8bd03",
+    "prewrite_sha": "e523931169f2bfb29965429a5671b160ac41cfc6",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt_path": "docs/audits/issue509-r277-platform-storage-realtime-drift-pgss-20261116.json",
+    "receipt_blob_sha": "0fd670e398d1b747ba2ba4db384929e5040698ea",
+    "observed_at": "2026-11-16 00:46:34.608933+00",
+    "vendor_functions_previous": 48,
+    "vendor_functions_current": 54,
+    "new_vendor_function_definitions": 6,
+    "changed_vendor_function_definitions": 2,
+    "direct_full_sql_definitions": 8,
+    "definition_characters": 25102,
+    "new_storage_tables": 2,
+    "new_storage_columns": 18,
+    "new_storage_constraints": 7,
+    "new_storage_indexes": 4,
+    "trigger_bindings": 11,
+    "storage_bucket_count": 0,
+    "realtime_subscription_count": 0,
+    "rls_acl_on_new_tables": "ON_NO_ANON_AUTH_SELECT_OR_INSERT",
+    "pgss_rank_range": [
+      4161,
+      4240
+    ],
+    "numeric_new_distinct": 63,
+    "numeric_overlap": 17,
+    "numeric_cumulative": 3971,
+    "confirmed_new_security_bug": false,
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "numeric 4241-4320, vendor attribution and source parity; isolated PostgreSQL canonical response regression and #96 Auth"
+  },
+  "provider_canonical_name_acl_numeric_logs_run278": {
+    "run": 278,
+    "preflight_development_sha": "910f29a8d0fcc48a70af5126bdfc2739eb523732",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_head": "f346f85c26288b1114702ac828256386eacc21da",
+    "observed_at": "2026-11-16 01:48:39.354496+00",
+    "receipt_path": "docs/audits/issue509-r278-canonical-source-rls-pgss-logs-20261116.json",
+    "receipt_blob_sha": "538499d649aaa0f2f3f2581649acea184aeebd6a",
+    "complete_live_function_definitions": [
+      {
+        "signature": "private.dic_link_pending_coffee(uuid,uuid,text,jsonb)",
+        "md5": "140c211a4bfef175b041c037561a1e37",
+        "source_chars": 3954
+      },
+      {
+        "signature": "private.dic_source_key(text)",
+        "md5": "07e0ef286246fdae29b9151018296f79",
+        "source_chars": 981
+      }
+    ],
+    "complete_rls_policy_expressions": 4,
+    "effective_acl_relations": 6,
+    "pgss_rank_range": [
+      4241,
+      4320
+    ],
+    "new_numeric_distinct": 67,
+    "overlap": 13,
+    "cumulative_distinct": 4038,
+    "aggregated_log_services": 8,
+    "canonical_response": "ISOLATED_POSTGRES_REGRESSION_UNVERIFIED",
+    "source_key_fix": "TESTING_UNDEPLOYED",
+    "baseline": "IN_PROGRESS",
+    "next": "numeric 4321-4400; isolated canonical-name test, remaining provider-source parity and #96 Auth"
+  },
+  "provider_fk_index_dossier_pgss_run279": {
+    "preflight_development_sha": "37fe578a45378c4d1cd7b81081deef37bdd86bb3",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "provider_observed_at": "2026-11-16 02:43:20.421882+00",
+    "receipt_path": "docs/audits/issue509-r279-fk-dossier-pgss-20261116.json",
+    "fk_constraints_directly_reviewed": 14,
+    "complete_fk_ddl": 14,
+    "existing_index_definitions_reviewed": true,
+    "estimated_rows_max": 13,
+    "source_migration_blobs": [
+      {
+        "path": "supabase/migrations/20261112135900_dic_member_approval_notices.sql",
+        "blob": "ce17e3801d8d4e100e8ec1fb95fa5a723ad3a7a4"
+      },
+      {
+        "path": "supabase/migrations/20261113050000_dic_retire_roaster_directory.sql",
+        "blob": "10775c86bf88e61160fdc66d35c65698638742d6"
+      },
+      {
+        "path": "supabase/migrations/20261109152500_dic_admin_invite_account_delete.sql",
+        "blob": "bd80a9f6a17b4535f52caf77548eaa568d9b0b25"
+      }
+    ],
+    "pgss_numeric_rank_range": [
+      4321,
+      4400
+    ],
+    "new_numeric_distinct": 74,
+    "overlap": 6,
+    "cumulative_numeric_distinct": 4112,
+    "new_confirmed_defects": 0,
+    "production_writes": 0,
+    "status": "IN_PROGRESS_NO_PRODUCTION_WRITES",
+    "next": "Numeric pgss ranks 4401-4480; finish unreviewed complete provider definitions/parity, isolated canonical-name fixture when disposable PostgreSQL available, coordinate #96 actual JWT/Auth"
+  },
+  "provider_broker_service_boundary_pgss_run280": {
+    "run": 280,
+    "initial_preflight_development_sha": "fc6496d07b3126d24e12462808a5b2c7071773ed",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "ledger_prewrite_branch_sha": "db3aadce633462f503dcfc975ff4ff0d16300f8b",
+    "receipt_path": "docs/audits/issue509-r280-broker-service-boundary-pgss-20261116.json",
+    "receipt_git_blob": "d3f54f8d9efdd305a46448c77223ac38673f1636",
+    "observed_at": "2026-11-16 03:47:26.977331+00",
+    "provider_project_ref": "azviqqejypsefzilgonr",
+    "full_live_sql_definitions": 8,
+    "complete_sql_characters": 6497,
+    "complete_hosted_edge_files": 4,
+    "source_chars": 21887,
+    "source_byte_equal_all": true,
+    "source_jwt_false_with_app_auth_brokers": 2,
+    "service_only_public_rpc_functions": 7,
+    "numeric_ranks": [
+      4401,
+      4480
+    ],
+    "numeric_rows": 80,
+    "new_distinct": 73,
+    "overlap": 7,
+    "cumulative_distinct": 4185,
+    "new_confirmed_defects": 0,
+    "source_changes": 0,
+    "production_writes": 0,
+    "source_tests": "NOT_RUN",
+    "provider_baseline_complete": false,
+    "next": "pgss ranks 4481-4560; remaining provider/source parity, isolated old Pending canonical-name SQL fixture, coordinate #96 real Auth JWT"
+  },
+  "provider_unused_index_parity_pgss_run281": {
+    "run": 281,
+    "preflight_development_sha": "9b55051298d518a4076b4c30a520476dbf605b22",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_development_sha": "9b55051298d518a4076b4c30a520476dbf605b22",
+    "receipt_path": "docs/audits/issue509-r281-unused-index-parity-pgss-20261116.json",
+    "receipt_blob_sha": "a257d19354d7638d24bb5fc42ee5077f7cb14fa9",
+    "provider_observed_at": "2026-11-16 04:47:24.611606+00",
+    "full_live_index_ddl_directly_reviewed": 8,
+    "live_index_ddl_characters": 784,
+    "source_migrations_byte_equal_to_release": 3,
+    "stored_sql_source_characters": 36143,
+    "advisor_unused_index_count": 8,
+    "index_removals_justified": 0,
+    "numeric_pgss_rank_range": [
+      4481,
+      4560
+    ],
+    "numeric_observations": 80,
+    "new_distinct": 74,
+    "overlap": 6,
+    "cumulative_numeric_distinct": 4259,
+    "baseline": "IN_PROGRESS",
+    "source_fix": "TESTING_UNPUBLISHED",
+    "canonical_name": "ISOLATED_POSTGRES_UNVERIFIED",
+    "provider_writes": 0,
+    "next": "Numeric pgss 4561–4640; changed/unreviewed provider definitions; disposable PG canonical-name #33; real signed-in #96 Auth"
+  },
+  "provider_edge_pgss_recheck_run282": {
+    "run": 282,
+    "preflight_development_sha": "273148a2f98d6fdcda0674e7c57a64f894d065fd",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_development_sha": "273148a2f98d6fdcda0674e7c57a64f894d065fd",
+    "receipt_path": "docs/audits/issue509-r282-edge-parity-pgss-20261116.json",
+    "receipt_blob_sha": "62984fd1ceed30d61d1263888d5218d9670f31c0",
+    "edge_active": 5,
+    "edge_file_occurrences": 12,
+    "unique_edge_paths": 11,
+    "exact_source_paths": 10,
+    "previously_known_older_deployed_helper_paths": 1,
+    "numeric_rank_range": [
+      4561,
+      4640
+    ],
+    "numeric_observations": 80,
+    "first_time_numeric_ids": 74,
+    "overlap": 6,
+    "cumulative_numeric_distinct": 4333,
+    "new_confirmed_defects": 0,
+    "provider_writes": 0,
+    "source_tests": "NOT_RUN",
+    "baseline": "IN_PROGRESS",
+    "next": "numeric pgss 4641–4720; canonical-name isolated PostgreSQL; #96 genuine Auth"
+  },
+  "provider_public_push_acl_pgss_run283": {
+    "run": 283,
+    "preflight_development_sha": "09a387f9db79466e112f1e6e98d959381e66c7de",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_development_sha": "09a387f9db79466e112f1e6e98d959381e66c7de",
+    "receipt_path": "docs/audits/issue509-r283-push-subscription-acl-pgss-20261116.json",
+    "complete_public_tables": 2,
+    "complete_columns": 15,
+    "complete_constraints": 10,
+    "complete_indexes": 4,
+    "complete_service_broker_source_chars": 1920,
+    "pgss_range": [
+      4641,
+      4720
+    ],
+    "new_distinct": 70,
+    "overlap": 10,
+    "cumulative_distinct": 4403,
+    "confirmed_defects": 0,
+    "provider_writes": 0,
+    "source_code_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "pgss 4721-4800"
+  },
+  "provider_auth_realtime_storage_vault_run287": {
+    "preflight_development_sha": "a4f58a695f284792c57c76220ba92c17c24c44fa",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "provider_observed_at": "2026-11-16 13:58:52.26145+00",
+    "receipt_path": "docs/audits/issue509-r287-platform-auth-realtime-storage-vault-pgss-20261116.json",
+    "receipt_blob_sha": "ac4b96a67aa2a9cd34e25416ea2adf9b92d9fd89",
+    "receipt_commit": "97822233e8f564a3b453b2d3261ace5d430936bb",
+    "full_current_platform_functions_reviewed": 17,
+    "full_source_characters": 15465,
+    "complete_trigger_definitions": 11,
+    "complete_table_policy_privilege_configs": 4,
+    "requested_numeric_pgss_rank_range": [
+      4961,
+      5040
+    ],
+    "new_rank_entries_reviewed": 0,
+    "previous_distinct_ids_preserved": 4604,
+    "visible_pgss_entries_at_run_end": 4761,
+    "pgss_earlier_same_run": 4991,
+    "pgss_shift": "UNEXPLAINED_MONITOR_NO_RESET_OR_DEFECT_ASSERTION",
+    "new_confirmed_app_defects": 0,
+    "production_writes": 0,
+    "code_test_ci_edits": 0,
+    "status": "IN_PROGRESS_NO_PRODUCTION_CHANGES",
+    "next": "Current provider platform/source parity and isolated canonical_name regression; retry 4961–5040 only when ranking has reached those entries"
+  },
+  "provider_canonical_name_response_run288": {
+    "status": "SOURCE_AND_SYNTHETIC_REGRESSION_STAGED_TESTING_NOT_READY",
+    "project_ref": "azviqqejypsefzilgonr",
+    "preflight_development_sha": "92a1a80be5c01cae138404c27c8e5f2ccb2941d7",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "live_function": "private.dic_link_pending_coffee(uuid,uuid,text,jsonb)",
+    "live_function_md5": "140c211a4bfef175b041c037561a1e37",
+    "complete_current_live_definition_characters": 3954,
+    "prior_source_semantic_review": "REVIEWED_PREVIOUSLY_NO_NEW_WORD_CREDIT",
+    "issue": "Older Pending wins first-entry display name, PL/pgSQL target row snapshot retains old name; returned canonical_name is stale",
+    "provider_safe_read": "SELECT function definition, catalog and privileges only; no private member rows, passwords, raw queries, production DML",
+    "regression": "disposable PostgreSQL17 dic_ci synthetic older/later Pending, aliases, first entry, library identity and unchanged shots",
+    "migration": "supabase/migrations/20261116151600_dic_pending_canonical_name_response.sql",
+    "test": "supabase/tests/pending_canonical_name_response.sql",
+    "runner": "scripts/audit/isolated-sql-regression.sh",
+    "receipt": "docs/audits/issue509-r288-canonical-response-source-ci-staging-20261116.json",
+    "ci": "NOT_RUN_YET",
+    "production_writes": 0,
+    "source_status": "TESTING",
+    "numeric_pgss_rank_cursor": "4961-5040 PENDING count 4765 below requested range",
+    "next": "Open PR, verify exact source-bound isolated SQL and applicable CI; repair failures before safe merge; coordinate #33 and #96; production never changed"
+  },
+  "provider_pending_canonical_response_run289": {
+    "receipt_path": "docs/audits/issue509-r289-merged-pending-response-provider-20261116.json",
+    "preflight_development_sha": "e3506e5dcd2ca1f5c28a97e8f895c96eb0028a95",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_sha": "e50727444db83e76a02a037c7575a995707a585f",
+    "merged_sha": "e50727444db83e76a02a037c7575a995707a585f",
+    "pr": 3048,
+    "provider_current_function_md5": "140c211a4bfef175b041c037561a1e37",
+    "reviewed_complete_function_sources": 5,
+    "complete_source_chars": 25881,
+    "first_time_word_credit": 0,
+    "ci": {
+      "sql": {
+        "id": 43901492065,
+        "conclusion": "SUCCESS"
+      },
+      "approval": {
+        "id": 43901492003,
+        "conclusion": "SUCCESS"
+      },
+      "node": {
+        "id": 43901492706,
+        "status": "IN_PROGRESS"
+      },
+      "browser": {
+        "id": 43901492764,
+        "status": "IN_PROGRESS"
+      },
+      "coffee_python": {
+        "id": 43901492455,
+        "conclusion": "SUCCESS"
+      },
+      "original_source_probe": "SKIPPED_NOT_PASS"
+    },
+    "visible_pgss_count": 4768,
+    "previous_unique_numeric_fingerprints": 4604,
+    "production_writes": 0,
+    "overall": "IN_PROGRESS_QUEUE_TESTING",
+    "next": "Recheck both exact merged-source Node/browser workflows, close #509 source-bound queue blockers with #33 contract and #96 Auth, continue first unreviewed provider definitions; 4961-5040 only if stats available"
+  },
+  "provider_journal_rotation_run289b": {
+    "receipt_path": "docs/audits/issue509-r289b-journal-rotation-20261116.json",
+    "archive_path": "docs/workstreams/issue-509-history-through-r289-20261116.md",
+    "archive_blob_sha": "839a60cfeca41fe8bbe07006d80f14e9eb079907",
+    "original_characters": 1048358,
+    "active_characters": 8497,
+    "fully_preserved": true,
+    "preflight_development_sha": "e3506e5dcd2ca1f5c28a97e8f895c96eb0028a95",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS"
+  },
+  "provider_merged_canonical_ci_run289c": {
+    "receipt_path": "docs/audits/issue509-r289c-merged-ci-complete-20261116.json",
+    "preflight_development_sha": "e3506e5dcd2ca1f5c28a97e8f895c96eb0028a95",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "merged_source_sha": "e50727444db83e76a02a037c7575a995707a585f",
+    "completed_success_checks": 6,
+    "skipped_not_pass": 1,
+    "source_queue_status": "TESTING_NOT_READY",
+    "provider_writes": 0,
+    "baseline": "IN_PROGRESS"
+  },
+  "provider_roaster_archive_semantic_run290": {
+    "receipt_path": "docs/audits/issue509-r290-roaster-archive-alias-definitions-20261116.json",
+    "preflight_development_sha": "3d6148e23a891f351e1181ed145d48b902739fae",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "complete_live_sql_functions": 8,
+    "complete_sql_chars": 28892,
+    "complete_live_table_structures": 4,
+    "columns": 20,
+    "constraints": 19,
+    "indexes": 5,
+    "policies": 3,
+    "pgss_count": 4776,
+    "unavailable_ranks": [
+      4961,
+      5040
+    ],
+    "cumulative_numeric_distinct_retained": 4604,
+    "first_time_coverage_credit": 0,
+    "production_writes": 0,
+    "new_confirmed_defects": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Directly review current private.dic_admin_delete_preview and dic_admin_delete_record full changed function definitions plus source parity, then remaining unreviewed current provider objects; monitor next pgss numeric 4961-5040 only if count grows; coordinate #33/#96 downstream acceptance."
+  },
+  "provider_admin_delete_source_parity_run291": {
+    "receipt_path": "docs/audits/issue509-r291-admin-delete-parity-20261116.json",
+    "preflight_development_sha": "84c261657912d922623fe7285f763ecec3ad7934",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_development_sha": "84c261657912d922623fe7285f763ecec3ad7934",
+    "complete_live_sql_definitions": 12,
+    "complete_literal_characters": 24155,
+    "complete_fk_definitions": 30,
+    "complete_relevant_trigger_definitions": 14,
+    "source_body_matches_migration": 2,
+    "new_first_time_coverage_credit": 0,
+    "pgss_count": 4789,
+    "cumulative_numeric_distinct_retained": 4604,
+    "new_confirmed_defects": 0,
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Inspect first changed/new or not-yet-semantically-reviewed provider function/definition after R290, with exact Git migration source parity. Retry numeric ranks 4961-5040 only if pg_stat_statements has enough live rows. Coordinate #96 hosted Auth and #33 canonical response downstream contract."
+  },
+  "provider_service_brokers_account_run292": {
+    "receipt_path": "docs/audits/issue509-r292-service-brokers-account-lifecycle-20261116.json",
+    "preflight_development_sha": "ef2707442fdb194ebb70fc45b50634c9a06c2201",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_development_sha": "ef2707442fdb194ebb70fc45b50634c9a06c2201",
+    "live_full_function_definitions": 12,
+    "full_sql_chars": 16652,
+    "related_table_columns": 34,
+    "related_tables": 5,
+    "deployed_edge_file_source_parity": 1,
+    "unique_numeric_pgss_credit": 0,
+    "pgss_rows": 4793,
+    "cumulative_numeric_distinct_retained": 4604,
+    "new_confirmed_defects": 0,
+    "production_writes": 0,
+    "new_first_time_definition_credit": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Unreviewed/changed provider definitions and source parity; pgss 4961-5040 only when visible; #96 hosted Auth and #33 downstream acceptance."
+  },
+  "provider_signup_roaster_push_source_parity_run293": {
+    "receipt_path": "docs/audits/issue509-r293-signup-roaster-push-parity-20261116.json",
+    "preflight_development_sha": "a28c9bc38f20cfaf8e7194a816d7994a72f3962f",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_sha": "98a6381eba4bde3d5b5d8e838dbcee3f418e4489",
+    "complete_live_sql_definitions": 6,
+    "complete_sql_chars": 6995,
+    "exact_migration_body_parity": 6,
+    "first_time_coverage_credit": 0,
+    "pgss_visible": 4807,
+    "prior_distinct_pgss_retained": 4604,
+    "production_writes": 0,
+    "source_or_test_writes": 0,
+    "new_confirmed_defects": 0,
+    "baseline": "IN_PROGRESS"
+  },
+  "provider_import_additional_credential_key_guard_run294": {
+    "receipt_path": "docs/audits/issue509-r294-additional-import-credential-key-guard-20261116.json",
+    "preflight_development_sha": "510bc9d7d6b53d3d1fc0de3d92e7de7f20b276a2",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "observed_pgss": 4808,
+    "prior_distinct_retained": 4604,
+    "live_import_md5": "2af6a48d0fe80841fcc27c1f1d5532e3",
+    "confirmed_source_level_guard_gap": true,
+    "first_time_word_credit": 0,
+    "production_writes": 0,
+    "source_status": "TESTING",
+    "next": "Source-bound isolated SQL test and exact PR CI before development merge; hosted privacy risk remains unproven actual exposure"
+  },
+  "provider_import_additional_credential_key_guard_merged_run294b": {
+    "receipt_path": "docs/audits/issue509-r294b-credential-guard-merge-exact-ci-20261116.json",
+    "preflight_development_sha": "0395c1bf45a9be5e0944fbbb6e9bf23917bf6976",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "merged_source_sha": "8f11d1b8c93cf6255dfa43de095a48ace95f5dcb",
+    "pr": 3073,
+    "pr_applicable_ci_passed": 8,
+    "merge_push_completed_success": 5,
+    "merge_push_node": "CANCELLED_NOT_PASS",
+    "source_blobs_unchanged": true,
+    "provider_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "queue": "TESTING"
+  },
+  "provider_legacy_sql_dependency_cleanup_run295": {
+    "receipt": "docs/audits/issue509-r295-retired-api-and-notification-function-review-20261116.json",
+    "development_preflight_sha": "c98e27203197038e9203c064419b0d6e5d90a0ff",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "full_sql_function_bodies_reread": 13,
+    "full_sql_characters_reread": 18654,
+    "retired_route_symbols_checked": [
+      "dic_roaster_directory",
+      "dic_roaster_aliases",
+      "dic_roaster_preview_target",
+      "redeem_beta_invite",
+      "dic_admin_issue_invite",
+      "dic_admin_revoke_invite"
+    ],
+    "current_function_view_pattern_scan_count": 261,
+    "retired_name_match_count": 0,
+    "active_alias_attestation_match_count": 2,
+    "archived_table_dependency_categories": [
+      "pg_attrdef",
+      "pg_class",
+      "pg_constraint",
+      "pg_policy",
+      "pg_type"
+    ],
+    "indexes_and_defaults_inspected": 11,
+    "first_time_word_credit": 0,
+    "provider_writes": 0,
+    "status": "IN_PROGRESS",
+    "note": "Word-level baseline is not enlarged by a grep/call-name scan or unchanged re-review; R295 is a cross-object dependency/no-unjustified-removal proof."
+  },
+  "provider_community_search_producer_parity_run296": {
+    "receipt": "docs/audits/issue509-r296-community-search-producer-parity-20261116.json",
+    "development_preflight_sha": "994ce316683a5b0678524749e8dcac575955c612",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "live_function": "public.dic_search_community_shots(text,text,integer,integer)",
+    "live_function_md5": "1124d2bbfec7f47d38d06ceb2e049fe4",
+    "live_source_characters": 3949,
+    "stored_migration_version": "20261023014715",
+    "stored_migration_md5": "12ba67d185f584af4357673fe29be38e",
+    "source_migration": "supabase/migrations/20261116224000_dic_community_search_producer_parity.sql",
+    "regression": "supabase/tests/community_quality_integrity.sql",
+    "first_time_semantic_word_credit": 0,
+    "synthetic_probe": "total_matches=true page_matches=false",
+    "status": "TESTING",
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Exact source PG17/Node22/approval CI; nonforce merge only if PASS; no deploy"
+  },
+  "provider_app_table_catalog_direct_review_run297": {
+    "status": "CURRENT_VISIBLE_APP_TABLE_CATALOG_COMPONENTS_52_52_FROM_DISTINCT_DIRECT_RECEIPTS_FULL_PROVIDER_BASELINE_IN_PROGRESS",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_preflight_development_sha": "c557fd4e42c1dbc010a49323aa9a0f7fb8f569b9",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt_path": "docs/audits/issue509-r297-app-table-definition-reconciliation-20261116.json",
+    "receipt_blob_sha": "df2e2a4b867accaf9348cc362ec8f4ed21757681",
+    "live_table_count": 52,
+    "original_legacy_catalog_count": 46,
+    "original_live_table_count": 41,
+    "original_removed_table_count": 5,
+    "new_since_original": 11,
+    "new_since_original_prior_R290_reviewed": 3,
+    "first_time_complete_visible_definition_component_tables_reviewed": 8,
+    "table_names": [
+      "private.dic_admin_account_delete_operations",
+      "private.dic_admin_push_runtime",
+      "private.dic_member_approval_deliveries",
+      "private.dic_member_approval_poll_gate",
+      "private.dic_official_source_attestations",
+      "private.dic_signup_review_events",
+      "public.dic_admin_push_subscriptions",
+      "public.dic_member_approval_push_subscriptions"
+    ],
+    "complete_visible_definition_components": {
+      "columns": 54,
+      "constraints": 32,
+      "indexes": 12,
+      "policies": 1,
+      "triggers": 1,
+      "hashed_catalog_characters": 7364
+    },
+    "full_current_app_table_catalog_component_coverage": 52,
+    "source_code_review_not_recredited": true,
+    "confirmed_new_defects": 0,
+    "safe_deletions": 0,
+    "prod_writes": 0,
+    "tests_run": "NOT_APPLICABLE_DOCS_ONLY",
+    "exact_pr_head_ci_3086": "SIX_APPLICABLE_SUCCESS_INCLUDING_NODE22",
+    "exact_merged_push_ci_3086": "UNVERIFIED",
+    "next": "Current changed/new provider definitions, source/drift, exact merged workflow CI for PR3086, unverified native and hosted surfaces. Numeric pgss 4961-5040 only if provider count reaches threshold."
+  },
+  "provider_rpc_catalog_crosscheck_run298": {
+    "status": "IN_PROGRESS_NO_NEW_BASELINE_WORD_CREDIT",
+    "project_ref": "azviqqejypsefzilgonr",
+    "preflight_development_sha": "9d337c0cff19022b269bdd95d3d95ef63cbf31d5",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "live_development_parent_sha_at_write": "b7d9b7500b1a9fc6a03be7361a472046ceede504",
+    "main_sha": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "production_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5",
+    "provider_status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.11.0.003",
+    "live_application_function_count": 114,
+    "historical_manifest_count": 99,
+    "current_vs_historical": {
+      "new_signatures": 22,
+      "same_signature_md5_changed": 17,
+      "removed_signatures": 7,
+      "qualifier": "STRUCTURAL_DRIFT_REFERENCE_NOT_PROOF_OF_UNAPPROVED_CHANGE"
+    },
+    "complete_sql_semantic_rereads": {
+      "public_admin_sql_wrappers": {
+        "count": 6,
+        "chars": 1614
+      },
+      "preview_sources": {
+        "count": 5,
+        "chars": 7951
+      },
+      "community_browse_search_recommendation": {
+        "count": 3,
+        "chars": 13342
+      },
+      "admin_search": {
+        "count": 1,
+        "chars": 7574
+      },
+      "signup_and_retry": {
+        "count": 3,
+        "chars": 5650
+      },
+      "member_approval_enqueue": {
+        "count": 1,
+        "chars": 460
+      },
+      "pg_catalog_views": {
+        "count": 4,
+        "chars": 2524
+      },
+      "sum_chars": 39115,
+      "first_time_word_credit": 0,
+      "notes": "Cross-functional parity/dependency review; earlier hash-bound source receipts already cover these definitions."
+    },
+    "ruled_out": [
+      "shot_notes one-to-one join by PRIMARY KEY(owner_id,shot_id)",
+      "dic_coffee_first_entry one-to-one coffee join by PRIMARY KEY(coffee_id)",
+      "SQL wrapper private-schema USAGE denial inference false: authenticated has USAGE (checked live catalog)"
+    ],
+    "confirmed_new_bugs": 0,
+    "safe_deletions": 0,
+    "known_unpublished_bug": "Community producer-only total/page mismatch remains live; #3086 merged source correction c155d54fd16c49ecb8744a1c1bb1c7181491790b",
+    "merged_CI": "UNVERIFIED_PR_ONLY_GITHUB_CONNECTOR_RETURNED_NO_RUNS_NOT_PASS",
+    "queue": "TESTING_NOT_READY",
+    "prod_writes": 0,
+    "tests_run": "NONE_READ_ONLY_CATALOG_ONLY",
+    "issue509_journal": "docs/workstreams/issue-509.md",
+    "next": "Verify #3086 exact merged-source Actions push jobs when available, then inspect actually changed/unreviewed provider definitions and source parity; no duplication or owner alert on routine unchanged work."
+  },
+  "provider_storage_realtime_lifecycle_source_review_run300": {
+    "status": "FOUR_NEW_CURRENT_PLATFORM_SQL_BODIES_DIRECT_FULL_REVIEW_PLUS_CHANGED_REALTIME_APPLY_RLS_AND_TWO_NEW_STORAGE_TABLE_COMPONENTS",
+    "development_preflight_sha": "68b67264734cb9451e015a60a33fb6a8ca7a1ad9",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt_path": "docs/audits/issue509-r300-storage-realtime-new-definitions-20261117.json",
+    "receipt_commit_sha": "d023e695576afa33a3fcfef5938427bcd130f217",
+    "receipt_blob_sha": "485f6ff6f2d6c1a202e5f6343e46fd16feb37abb",
+    "storage_current_sql": "24/24 WITH HISTORIC+R299+R300 FULL SOURCE",
+    "realtime_current_sql": "19/19 WITH HISTORIC+R300 FULL SOURCE",
+    "new_first_time_full_function_names": [
+      "storage.delete_lifecycle_objects",
+      "storage.protect_active_lifecycle_states",
+      "storage.reconcile_lifecycle_state",
+      "realtime.filters_hash"
+    ],
+    "new_first_time_complete_sql_chars": 6576,
+    "changed_definition_full_review": [
+      "realtime.apply_rls"
+    ],
+    "changed_source_chars": 16972,
+    "new_full_table_component_names": [
+      "storage.bucket_lifecycle_states",
+      "storage.lifecycle_abandoned_artifacts"
+    ],
+    "new_table_component_counts": {
+      "columns": 18,
+      "constraints": 7,
+      "indexes": 4,
+      "policies": 0,
+      "triggers": 0
+    },
+    "source_only": true,
+    "proven_new_app_defect": false,
+    "removal_justified": false,
+    "provider_rows_read_private": 0,
+    "provider_writes": 0,
+    "git_app_source_edits": 0,
+    "ci_pass_claims": 0,
+    "queue_status": "UNCHANGED_TESTING_NOT_READY",
+    "audit_baseline_complete": false,
+    "unverified": [
+      "hosted Auth/Storage API runtime",
+      "compiled provider internals",
+      "#3086 exact merged-source push Actions jobs"
+    ],
+    "next": "Next genuinely unreviewed or changed provider definition or source drift; reconcile #3086 exact merged-source GitHub push CI without PR-only assumptions"
+  },
+  "provider_coverage_deduplication_run301": {
+    "status": "R300_FIRST_TIME_CREDIT_CORRECTED_BY_PRIOR_R221_R239_EXACT_BLOBS",
+    "receipt_path": "docs/audits/issue509-r301-coverage-dedup-ci-20261117.json",
+    "preflight_development_sha": "65a5d5bef299c1986a7dad15a9509ea2c550c03d",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "r300_prior_new_sources_claim": 4,
+    "r300_corrected_new_sources": 0,
+    "r300_prior_first_time_characters_claim": 6576,
+    "r300_corrected_first_time_characters": 0,
+    "r300_prior_new_tables_claim": 2,
+    "r300_corrected_first_time_tables": 0,
+    "first_time_storage_sql_provenance": "R221 five of five new Storage SQL functions; exact four repeated hashes verified live",
+    "first_time_realtime_filters_hash_provenance": "R239 source MD5 224d7075f0e9ccb1178b20e9d8eb4962",
+    "historical_r300_receipt_kept_intact": true,
+    "exact_merge_sha": "c155d54fd16c49ecb8744a1c1bb1c7181491790b",
+    "exact_push_runs_success": [
+      43974714497,
+      43974711815,
+      43974711818,
+      43974711837,
+      43974711820
+    ],
+    "exact_push_jobs": "6/6 completed success at merged SHA",
+    "source_queue_status": "TESTING; no READY claim",
+    "provider_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Source-bound READY requirements plus unreviewed changed provider definitions."
+  },
+  "provider_coffee_matching_planner_run302": {
+    "status": "READ_ONLY_FUNCTIONAL_MATCHING_QUERY_PLAN_AND_COLLISION_SCOPE_REVIEW_NO_NEW_BUG",
+    "receipt_path": "docs/audits/issue509-r302-coffee-match-planner-source-key-20261117.json",
+    "receipt_blob_sha": "a73b65bf672adf2d0acfe1a959fff5409ec67f55",
+    "preflight_development_sha": "52928f3437ea44bc5943757fd7f1d98051cb54c0",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "reviewed_complete_current_provider_sql_definitions": 4,
+    "reviewed_sql_chars": 14126,
+    "first_time_semantic_source_credit": 0,
+    "source_md5s": {
+      "private.dic_find_coffee_matches": "b4b845d29ccb65ac7922109dc89816b6",
+      "private.dic_confirm_coffee_existing": "0fcc44bb8a05f46e87694d3474eb7c23",
+      "private.dic_submit_coffee_auto": "e2b11c83a686a5a9949699cd23b52e13",
+      "private.dic_source_key": "07e0ef286246fdae29b9151018296f79"
+    },
+    "catalog": {
+      "coffees": 9,
+      "active_verified_coffees": 9,
+      "coffee_sources": 11,
+      "roaster_page_sources": 3,
+      "distinct_normalized_roaster_page_keys": 3,
+      "source_collision_groups": 0
+    },
+    "matching_candidate_planner": {
+      "synthetic_query": true,
+      "explain_analyze": false,
+      "index_used": "coffees_merge_idx",
+      "cost_start": 0.14,
+      "cost_total": 4.38,
+      "estimated_rows": 1,
+      "real_latency": "UNVERIFIED",
+      "track_functions": "none"
+    },
+    "known_path_case_fix": {
+      "migration": "supabase/migrations/20261115124500_dic_source_key_path_case_guard.sql",
+      "git_blob": "72d24dca72d1171ea832b26c0ebe080f2ad858c5",
+      "production": "UNPUBLISHED",
+      "source": "EXISTING_FIX_DO_NOT_DUPLICATE"
+    },
+    "source_queue_status": "TESTING_NOT_READY",
+    "source_isolation_and_hosted_acceptance": "UNVERIFIED",
+    "confirmed_new_defects": 0,
+    "safe_index_changes": 0,
+    "safe_deletions": 0,
+    "production_writes": 0,
+    "new_ci": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Next genuinely changed/unreviewed provider definition or consumer contract; catalog expansion should trigger recheck of matcher planner. Do not credit repeated SQL or alter source-key/Community queue without required acceptance evidence."
+  },
+  "provider_generated_green_projection_run303": {
+    "run": 303,
+    "preflight_development_sha": "e92b15de8c0032eb528b8df801a10e5025aed4e6",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt_path": "docs/audits/issue509-r303-green-shot-community-projection-contract-20261117.json",
+    "source_definitions_directly_re_reviewed": 5,
+    "source_characters_rereviewed": 13737,
+    "new_first_time_source_characters": 0,
+    "new_first_time_definitions": 0,
+    "catalog_generated_expression_verified": true,
+    "trigger_chain_verified": true,
+    "synthetic_transition_results": "3_CASES_PASS_READ_ONLY",
+    "confirmed_defects": 0,
+    "justified_deletions": 0,
+    "production_writes": 0,
+    "source_changes": 0,
+    "existing_sql_regression_test_blob": "80c49e9e2a3a3e5c3be89660ff624864d487b25e",
+    "new_ci_or_tests": "NOT_RUN",
+    "baseline_complete": false,
+    "next_cursor": "First changed/new or demonstrably unreviewed provider definition; no first-time credit for five rereads"
+  },
+  "provider_community_canonical_browse_consistency_run304": {
+    "run": "R304",
+    "receipt": "docs/audits/issue509-r304-community-canonical-browse-count-20261117.json",
+    "prewrite_sha": "678d124b893c7c70b6384e25c902cc1bebd6fab9",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "reviewed_current_sql_definitions": 4,
+    "first_time_source_credit": 0,
+    "eligible_community_shots": 13,
+    "eligible_without_link": 0,
+    "eligible_with_multiple_links": 0,
+    "merged_verified_impossible_by_catalog_check": true,
+    "verified_live_defect": 0,
+    "justified_drop": 0,
+    "production_writes": 0,
+    "code_and_ci_changes": 0,
+    "status": "IN_PROGRESS",
+    "next": "First changed/unreviewed provider code or reproducible core-loop error, no reread credit"
+  },
+  "provider_member_coffee_url_admin_search_run305": {
+    "run": 305,
+    "date_utc": "2026-11-17",
+    "preflight_development_sha": "6b6df2a9b4b48e1e1f23b34cb14756b76dfe6e94",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt": "docs/audits/issue509-r305-member-coffee-url-admin-search-contract-20261117.json",
+    "receipt_blob_sha": "c7969affbbe5f732087615c4960c1525d17d288c",
+    "current_source_head_before_ledger_update": "3d7c8e4085eb2a5ed5dbcc26e605fc089ab0af74",
+    "app_sql_definitions_fully_re_reviewed": 5,
+    "new_first_time_app_source_characters": 0,
+    "frontend_contract_files_inspected": 4,
+    "admin_filtered_join_fanout_groups": 5,
+    "admin_filtered_join_fanout_pass": 5,
+    "member_edit_omitted_url_live_client_reproduced": false,
+    "external_direct_rpc_clients_verified": false,
+    "new_confirmed_defects": 0,
+    "justified_deletions": 0,
+    "code_changes": 0,
+    "new_ci": 0,
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Changed or previously unreviewed actual provider definition; prove consumers/repro before fix; preserve #96/#33/queue acceptance."
+  },
+  "provider_community_queue_hotpath_run306": {
+    "schema_version": 1,
+    "issue": 509,
+    "run": "R306",
+    "date_utc": "2026-11-17",
+    "project_ref": "azviqqejypsefzilgonr",
+    "preflight": {
+      "initial_development_sha": "56fd78529a9eefe5cd7acc182b3b16dda85ce5bd",
+      "prewrite_development_sha": "6cebce9b608eca191ea8bc3c909124836f41f1ae",
+      "blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+      "immutable_file_verified": true
+    },
+    "branches": {
+      "main": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+      "release_production": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+    },
+    "provider": {
+      "status": "ACTIVE_HEALTHY",
+      "postgres": "17.11.0.003",
+      "production_read_only": true,
+      "live_search_md5": "1124d2bbfec7f47d38d06ceb2e049fe4",
+      "live_search_chars": 3949,
+      "migration_20261116224000_applied": false
+    },
+    "semantic_cross_layer_review": {
+      "sql_full_sources": [
+        {
+          "signature": "private.read_personal_state()",
+          "md5": "037d248b67cc3e8490c1689d3200990f",
+          "chars": 2339
+        },
+        {
+          "signature": "public.dic_read_personal_state()",
+          "md5": "811aee397f3505117fcc38715e09af94"
+        },
+        {
+          "signature": "private.session_status()",
+          "md5": "0aa8e57bb4846aac7dd8e3b6c0cf690c"
+        },
+        {
+          "signature": "public.dic_session_status()",
+          "md5": "742e5bd0fc8544807886b514d95d6688"
+        },
+        {
+          "signature": "private.is_member()",
+          "md5": "e406adb7ba7c86dcb000cb089b2693d1"
+        },
+        {
+          "signature": "public.dic_my_community_outliers()",
+          "md5": "312b59594de640adacb12ab0aa0d18e4"
+        }
+      ],
+      "active_caller": {
+        "path": "site/cloud/main.js",
+        "blob": "0a5274ec660ad435b499d58c9b5985ae400f37ea",
+        "status_visible_poll_seconds": 30,
+        "heavy_personal_sync_seconds": 180
+      },
+      "adapter": {
+        "path": "site/cloud/client.js",
+        "blob": "08e1ac1f2610dca9fad162272c8e3c7ea56566a5"
+      },
+      "personal_state_queried_owner_table_counts": 15,
+      "owner_indexed_table_counts": 15,
+      "current_shots_aggregate": {
+        "total": 27,
+        "distinct_owner_groups": 2,
+        "max_per_owner": 19
+      },
+      "current_library_aggregate": {
+        "total": 10,
+        "distinct_owner_groups": 3,
+        "max_per_owner": 6
+      },
+      "first_time_semantic_function_word_credit": 0
+    },
+    "performance_observations": {
+      "pgss_reset": "2026-10-09 11:11:31.487298+00",
+      "personal_state": {
+        "queryid": "1725044562985116050",
+        "calls": 4787,
+        "total_ms": 73163.1,
+        "mean_ms": 15.28,
+        "max_ms": 1566.4,
+        "temp_blocks": 0
+      },
+      "admin_push_poll": {
+        "queryid": "-7990357377309318073",
+        "calls": 1524,
+        "total_ms": 18901.4,
+        "mean_ms": 12.4
+      },
+      "member_approval_poll": {
+        "queryid": "-4828288663145051522",
+        "calls": 1329,
+        "total_ms": 15415.2,
+        "mean_ms": 11.6
+      },
+      "audit_rank_window": {
+        "queryid": "4231681690601413654",
+        "calls": 53,
+        "total_ms": 11865,
+        "mean_ms": 223.87,
+        "temp_blocks_written": 89966,
+        "temp_mib_at_8k_page": 702.859375
+      }
+    },
+    "performance_verdict": "Full personal-state aggregation reread and 15/15 owner-prefixed indexes checked. Live payload limited to aggregate 27 shots / 10 library records; 15.28 ms historical mean is not sufficient to justify a change. Separate audit pg_stat_statements ranked-window query shows 89,966 cumulative temp blocks (~702.9 MiB) since Oct 9; avoid wide unbounded ranking/sorting in future audit queries and prefer bounded keyset/limit. Does not prove an app runtime bug.",
+    "queue_correction": {
+      "id": "DIC-Q-509-community-producer-search-parity",
+      "prior": {
+        "state": "TESTING",
+        "pr": null,
+        "merged_source_sha": null,
+        "ci_runs": [],
+        "blockers": [
+          "SQL functional/Node22/governance exact-source CI PENDING. No READY before all required checks.",
+          "No production publication authorized; live function stays unchanged."
+        ]
+      },
+      "new": {
+        "state": "TESTING",
+        "pr": 3086,
+        "merged_source_sha": "c155d54fd16c49ecb8744a1c1bb1c7181491790b",
+        "ci_runs": [
+          43974714497,
+          43974711815,
+          43974711818,
+          43974711837,
+          43974711820
+        ],
+        "blockers": [
+          "Independent source-isolated release-candidate acceptance, #33 Community/extractor compatibility and applicable #96 live Auth/privacy boundaries remain UNVERIFIED; development-only TESTING, not READY.",
+          "Owner has not authorized Publish; production live SQL remains unmodified. This is not a missing CI blocker."
+        ]
+      },
+      "source_blob": "4d4fc469de4dc5ee4d55f7b15ab35f80e6809ac2",
+      "exact_merged_actions_all_six_jobs_success": true
+    },
+    "tests": {
+      "new_tests": "NONE_DOCS_ONLY",
+      "reused_CI": "5 PUSH WORKFLOWS AT c155d54 SUCCESS",
+      "auth_session": "NOT_RUN",
+      "isolated_sql": "PRIOR_PASS_NOT_REEXECUTED"
+    },
+    "new_app_bugs": 0,
+    "new_safe_sql_deletions": 0,
+    "github_code_changes": 0,
+    "production_provider_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "First truly new/changed provider definition or unreconciled provider word-range, and #509 source-isolation/#33/#96 acceptance. Avoid re-reviewing unchanged SQL or pg_stat_statements-only fingerprints; no duplicate CI.",
+    "receipt_path": "docs/audits/issue509-r306-community-queue-hotpath-20261117.json"
+  },
+  "provider_approval_delivery_crosslayer_run307": {
+    "run": 307,
+    "receipt": "docs/audits/issue509-r307-approval-delivery-crosslayer-20261117.json",
+    "preflight_development_sha": "cebdd9e7b5c67521df54c6b0d95dda8e05fc7b6a",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "fully_reviewed_sql_definitions": 11,
+    "full_sql_chars": 9464,
+    "edge_files": 2,
+    "edge_complete_chars": 11929,
+    "edge_release_parity": true,
+    "synthetic_null_guard_prior_known": true,
+    "first_time_word_credit": 0,
+    "new_defects": 0,
+    "new_deletions": 0,
+    "provider_writes": 0,
+    "queue_status": "TESTING_UNCHANGED",
+    "baseline": "IN_PROGRESS",
+    "next": "First genuine changed/unreviewed provider definition; source-isolated testing of existing #509 fixes."
+  },
+  "provider_current_function_manifest_reconciliation_run308": {
+    "run": 308,
+    "receipt": "docs/audits/issue509-r308-current-function-manifest-admin-lifecycle-20261117.json",
+    "preflight_sha": "d491f7b0ee12c3d16eaf6e721ea6a12b79319767",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_sha": "d491f7b0ee12c3d16eaf6e721ea6a12b79319767",
+    "historical_manifest_count": 99,
+    "live_app_function_signatures": 114,
+    "new_since_historical": 22,
+    "changed_since_historical": 17,
+    "absent_historical": 7,
+    "unchanged_since_historical": 75,
+    "admin_crosslayer_fully_reread_definitions": 7,
+    "admin_crosslayer_full_sql_chars": 13213,
+    "first_time_source_word_credit": 0,
+    "provider_writes": 0,
+    "source_test_ci_changes": 0,
+    "baseline": "IN_PROGRESS",
+    "status": "HISTORICAL_LEDGER_CURRENTNESS_CORRECTED_WITH_R308_RECEIPT",
+    "next": "Per-object verify genuinely unreviewed live SQL and caller/provider drift; no 114-of-114 semantic completion assertion"
+  },
+  "provider_shared_preview_rollover_run309": {
+    "run": 309,
+    "receipt_path": "docs/audits/issue509-r309-preview-rollover-cooldown-20261117.json",
+    "preflight_sha": "00fd25e70cf3375e4b0c5effc3a29cc261d46fc5",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "provider_source_chars_fully_reread": 5367,
+    "first_time_word_credit": 0,
+    "new_confirmed_bugs": 1,
+    "read_only_repro": "ALLOWED_OLD_BRANCH despite 3s cooldown",
+    "source_migration": "supabase/migrations/20261117114500_dic_shared_preview_rollover_cooldown.sql",
+    "source_test": "supabase/tests/universal_url_preview.sql",
+    "source_state": "TESTING_CI_PENDING",
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Verify exact PR-head isolated PostgreSQL and relevant CI, no live DDL."
+  },
+  "provider_shared_preview_rollover_merge_run309b": {
+    "receipt_path": "docs/audits/issue509-r309b-preview-rollover-merged-ci-20261117.json",
+    "preflight_sha": "156cb8d52defdc6d40c993f42e9f1de5bf5e87dd",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "pr": 3154,
+    "pr_head_sha": "12bdea41b49d0b4e558da11c2a6829e56e0e6c5a",
+    "merged_sha": "849d89650006c545dc86045a947bb39e1d081146",
+    "successful_prhead_jobs": 7,
+    "successful_merged_push_workflows": 5,
+    "source_regressions": "DISCONNECTED_SQL_NODE22_GOVERNANCE_CLOUD_SUCCESS",
+    "first_time_word_credit": 0,
+    "production_writes": 0,
+    "queue": "TESTING",
+    "baseline": "IN_PROGRESS",
+    "next": "First genuinely unreviewed or changed provider definition; candidate isolation and #96 hosted Auth if required."
+  },
+  "provider_admin_merge_null_normalized_name_run310": {
+    "receipt_path": "docs/audits/issue509-r310-admin-merge-null-normalized-name-20261117.json",
+    "preflight_sha": "b5c25ff3fb71709d2f2b29edd38964f8521a7efa",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "live_md5": "cb5c264aceb9699a498177f3f6861783",
+    "live_full_source_chars": 4526,
+    "reproduced_three_valued_logic": true,
+    "new_unique_word_credit": 0,
+    "source_migration": "supabase/migrations/20261117130000_dic_admin_merge_null_normalized_name_guard.sql",
+    "source_test": "supabase/tests/admin_coffee_review.sql",
+    "status": "TESTING",
+    "live_provider_changes": 0
+  },
+  "provider_source_claim_rollover_run311": {
+    "receipt_path": "docs/audits/issue509-r311-source-retry-rollover-20261117.json",
+    "preflight_sha": "4c3fead238a57e338f45055b123cb66786afaaca",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "sql_md5": "68bc86486e485565d4273daf3655e0d3",
+    "sql_chars": 2348,
+    "synthetic_reproduction": true,
+    "source_fix": "supabase/migrations/20261117133000_dic_source_retry_rollover_cooldown.sql",
+    "status": "TESTING_CI_PENDING",
+    "first_time_word_credit": 0,
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS"
+  },
+  "provider_source_claim_rollover_merge_run311c": {
+    "receipt_path": "docs/audits/issue509-r311c-source-retry-merged-ci-20261117.json",
+    "preflight_sha": "2069fda2279dbe02ec8f2766348bb8123a483e73",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "pr": 3162,
+    "head_sha": "6f271a49ee5904a78250a826bdfd1dce4d4843ad",
+    "merged_sha": "2069fda2279dbe02ec8f2766348bb8123a483e73",
+    "pr_head_success_workflows": 6,
+    "merged_source_success_workflows": 5,
+    "sql_blob": "6fed54555a82d78080873c886cf1c46df46caa8d",
+    "test_blob": "7a4c4d370f8cf8085d32084141758ffa2f78c40b",
+    "ci_runs": [
+      44094073644,
+      44094074023,
+      44094073714,
+      44094073782,
+      44094073651
+    ],
+    "first_time_word_credit": 0,
+    "production_writes": 0,
+    "queue": "TESTING",
+    "baseline": "IN_PROGRESS"
+  },
+  "provider_admin_merge_ci_closure_run310c": {
+    "receipt_path": "docs/audits/issue509-r310c-admin-merge-merged-ci-20261117.json",
+    "preflight_sha": "5b550401e86c0aa563fc3b64d6b01acf9cacbe19",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "pr": 3160,
+    "pr_head_sha": "942c3d1b7051553ccd9c5795d2db2412418c56e7",
+    "merged_sha": "66e2d2ec5cf9450e4b11c809ccbe260b0511f5e2",
+    "pr_head_workflows_success": 6,
+    "merged_source_workflows_success": 5,
+    "migration_blob": "7bc866ec985f9706abcbe10d900728a1bb6dc991",
+    "test_blob": "080e37931406845eae8e8f8e0430b3046ab616c1",
+    "first_time_word_credit": 0,
+    "production_writes": 0,
+    "queue": "TESTING",
+    "baseline": "IN_PROGRESS"
+  },
+  "provider_account_deletion_semantic_run312": {
+    "receipt_path": "docs/audits/issue509-r312-account-delete-crosslayer-20261117.json",
+    "preflight_development_sha": "fc50184b2bf14aabb82f881f70a8f526454120f3",
+    "preflight_git_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "complete_sql_definitions": 9,
+    "complete_source_chars": 11672,
+    "edge_source_chars": 6973,
+    "edge_source_parity": true,
+    "first_time_word_credit": 0,
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Compare historical receipts before credit; direct-review private.dic_admin_dashboard_read and exact consumers."
+  },
+  "provider_admin_dashboard_run312b": {
+    "receipt_path": "docs/audits/issue509-r312b-admin-dashboard-20261117.json",
+    "preflight_development_sha": "fc50184b2bf14aabb82f881f70a8f526454120f3",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "definition_md5": "5fa33bbe05e8408c1c2fe1b82d73a8ee",
+    "source_chars": 2901,
+    "source_migration_blob": "fea285d31190b996160d7672c1d90887f3d0c647",
+    "parity": true,
+    "first_time_word_credit": 0,
+    "baseline": "IN_PROGRESS"
+  },
+  "provider_edge_broker_semantic_run313": {
+    "receipt_path": "docs/audits/issue509-r313-broker-source-parity-telemetry-20261117.json",
+    "preflight_sha": "21096ed89cbba7e45cfeaef06b22a13d85ceeb60",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "complete_provider_files": 4,
+    "complete_source_chars": 21887,
+    "release_blob_parity": "4_OF_4_EXACT",
+    "bounded_24h_calls": 575,
+    "http_errors_4xx_5xx": 0,
+    "first_time_word_credit": 0,
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS"
+  },
+  "provider_current_app_function_full_receipt_reconciliation_run314": {
+    "run": 314,
+    "receipt_path": "docs/audits/issue509-r314-app-function-current-source-reconciliation-20261117.json",
+    "preflight_development_sha": "96d73f22205aa3ff879b1f6e030756a637e810f3",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "current_live_app_sql_functions": 114,
+    "unchanged_original_exact_hash_and_reviewed": 75,
+    "added_exact_hash_complete_body_receipt": 22,
+    "changed_exact_hash_complete_body_receipt": 17,
+    "new_complete_current_body_reads": 2,
+    "new_direct_body_characters": 19570,
+    "first_time_duplicate_coverage_credit": 0,
+    "full_provider_baseline": "IN_PROGRESS",
+    "no_new_defect_or_source_change": true,
+    "provider_writes": 0,
+    "queue_state": "NOT_UPDATED_QUEUE_CURRENT_CONTENT_UNVERIFIED",
+    "next": "First genuinely changed/new/unreviewed nonapp provider object and remaining source-isolated acceptance, no restart."
+  },
+  "provider_current_storage_realtime_vault_table_semantics_run316": {
+    "status": "CURRENT_COMPLETE_VISIBLE_TABLE_CATALOG_COMPONENT_REVIEW_NO_DUPLICATE_BASELINE_CREDIT",
+    "project_ref": "azviqqejypsefzilgonr",
+    "preflight_initial_sha": "377303eedd136ceeec0ecc47645400bfcea100d4",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_development_sha": "22704f26a5fc9eebe158f3bc99b7ed7138548c65",
+    "receipt_path": "docs/audits/issue509-r316-storage-realtime-vault-table-catalog-20261117.json",
+    "receipt_blob_sha": "5c55e8b5591e4d8b4c6987326ddd042a00df7310",
+    "previous_source_commit": "ee76002755d963da6a445458a4e31f786cdb53d5",
+    "scoped_journal_commit": "22704f26a5fc9eebe158f3bc99b7ed7138548c65",
+    "current_schema_tables": 14,
+    "by_schema": {
+      "storage": 10,
+      "realtime": 3,
+      "vault": 1
+    },
+    "complete_normalized_visible_characters": 33698,
+    "component_counts": {
+      "columns": 121,
+      "constraints": 32,
+      "indexes": 34,
+      "triggers": 12,
+      "policies": 0
+    },
+    "per_object_canonical_md5": [
+      {
+        "name": "realtime.messages",
+        "md5": "e7e74029c8c9d333ae1a417a3e30c602",
+        "length": 2537
+      },
+      {
+        "name": "realtime.schema_migrations",
+        "md5": "319c9745038faf9395b06dde2c0dfb19",
+        "length": 869
+      },
+      {
+        "name": "realtime.subscription",
+        "md5": "5ad006e42bc672e498e9fdc68dc98997",
+        "length": 2662
+      },
+      {
+        "name": "storage.bucket_lifecycle_states",
+        "md5": "8988cbb7e9b71b9b05c1637d5240a7a4",
+        "length": 3401
+      },
+      {
+        "name": "storage.buckets",
+        "md5": "09cd14a2d5d3d67151477f799d095c02",
+        "length": 5433
+      },
+      {
+        "name": "storage.buckets_analytics",
+        "md5": "8e511db2f394f985025c1553abd69e83",
+        "length": 1772
+      },
+      {
+        "name": "storage.buckets_vectors",
+        "md5": "4b9cd78ce50b144cc0c0524879ead2a6",
+        "length": 1140
+      },
+      {
+        "name": "storage.lifecycle_abandoned_artifacts",
+        "md5": "5e0a2c08f58a6158d10971130d7bc9f5",
+        "length": 1509
+      },
+      {
+        "name": "storage.migrations",
+        "md5": "efb414d3f3489ff1a07de5c1fbdbb34c",
+        "length": 1339
+      },
+      {
+        "name": "storage.objects",
+        "md5": "7f41745297dab3d43f09455c48f5cc37",
+        "length": 4845
+      },
+      {
+        "name": "storage.s3_multipart_uploads",
+        "md5": "cdb80d756d96e511a1e60825b5c075f4",
+        "length": 2168
+      },
+      {
+        "name": "storage.s3_multipart_uploads_parts",
+        "md5": "6ef45dd9c696031cdfbeed10ea3569c1",
+        "length": 2164
+      },
+      {
+        "name": "storage.vector_indexes",
+        "md5": "c76b1ec5671b84987233aecde5c6a4cc",
+        "length": 2072
+      },
+      {
+        "name": "vault.secrets",
+        "md5": "157507a835ed658a4a07927b3ec42eee",
+        "length": 1787
+      }
+    ],
+    "first_time_semantic_credit": 0,
+    "reason_no_recredit": "Already separately evidenced R221/R239/R300 and prior provider catalog receipts. Current MD5 is normalized on newly collected field set; no unsupported drift inference.",
+    "confirmed_new_defect": 0,
+    "safe_deletions": 0,
+    "github_code_edits": 0,
+    "ci_runs": 0,
+    "provider_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "queue": "NO_CHANGE_EXISTING_FIXES_TESTING",
+    "unverified": [
+      "Managed native/worker runtime",
+      "Hosted realtime.subscription Data API exposure #96",
+      "Provider dashboard Auth and Vault C implementations"
+    ],
+    "next": "First truly changed/new/unreviewed accessible provider object; otherwise evidence-based application SQL/Edge bottleneck path; preserve R221/R300 receipts and #96 ownership."
+  },
+  "provider_live_hotpath_poll_retired_preview_run317": {
+    "run": 317,
+    "as_of_utc": "2026-11-17",
+    "project_ref": "azviqqejypsefzilgonr",
+    "preflight_development_sha": "9e33775d5611e1a355d4ca6ef7d0842906f6d057",
+    "preflight_git_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "main_sha": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5",
+    "receipt_path": "docs/audits/issue509-r317-hotpath-poll-retired-preview-20261117.json",
+    "sql_function_bodies_reread": 7,
+    "sql_source_characters": 15777,
+    "first_time_word_credit": 0,
+    "observations": {
+      "personal_state": {
+        "queryid": "1725044562985116050",
+        "calls": 4787,
+        "total_ms": 73163.07,
+        "mean_ms": 15.28,
+        "max_ms": 1566.38,
+        "shared_hits": 8403391,
+        "shared_reads": 0,
+        "temp_blocks": 0,
+        "previous_r223_calls": 4753,
+        "previous_r223_total_ms": 71625.4
+      },
+      "coffee_matching": {
+        "queryid": "-4904269737613224597",
+        "calls": 41,
+        "total_ms": 2537.4,
+        "mean_ms": 61.89,
+        "max_ms": 223.63,
+        "verified_coffees": 9,
+        "official_sources": 3
+      },
+      "pgss_reset": "2026-10-09 11:11:31.487298+00",
+      "pgss_dealloc": 6,
+      "poll_gate": {
+        "admin_last_polled_at_nullable": true,
+        "admin_function_handles_null": true,
+        "member_last_polled_at_nullable": false,
+        "member_default": "-infinity",
+        "singleton_rows_each": 1,
+        "current_null_values": 0,
+        "waiting_locks": 0
+      },
+      "retired_edge": {
+        "slug": "dic-preview-coffee",
+        "version": 7,
+        "verify_jwt": true,
+        "chars": 1533,
+        "byte_equal_to_release": true,
+        "release_git_blob": "df18de8eb7562eeb95e8e335ef791f615903a46e",
+        "live_behavior": "authenticated 410 retirement tombstone",
+        "current_client_routing": "Netlify /api/coffee-preview plus optional dic_find_coffee_matches"
+      }
+    },
+    "verified_source_consumer_files": {
+      "site/cloud/client.js": "08e1ac1f2610dca9fad162272c8e3c7ea56566a5",
+      "site/cloud/main.js": "54de6067d02965ba36ab5e5863baac86c8afbb4e"
+    },
+    "no_first_time_coverage_reason": "Full function bodies already reviewed in R223/R302/R313 and previous provider ledger; new bound cross-layer comparison/quantitative read only.",
+    "reproducible_new_defects": 0,
+    "justified_code_fix": 0,
+    "code_test_ci_changes": 0,
+    "production_writes": 0,
+    "ci_runs": 0,
+    "queue": "UNCHANGED_TESTING",
+    "baseline": "IN_PROGRESS",
+    "unverified": [
+      "Hosted #96 Auth and recipient acceptance",
+      "Compiled provider binaries and provider-console-only settings",
+      "Complete provider word-level baseline"
+    ],
+    "next": "First genuinely unreviewed/new/changed provider definition or reproducible measured regression; retain no production write/no publish and owner-action-only alert boundary."
+  },
+  "provider_retired_schema_integrity_run318": {
+    "preflight_development_sha": "4cddd5987544c36edfd3a7cf5617cf316b7a441a",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "observed_at": "2026-11-17T20:56:31.720Z",
+    "receipt_path": "docs/audits/issue509-r318-retired-table-integrity-crosschecks-20261117.json",
+    "live_application_tables": 52,
+    "retired_original_tables": [
+      "private.beta_invites",
+      "private.invite_attempts",
+      "private.invite_redemptions",
+      "private.dic_roaster_aliases",
+      "private.dic_roaster_directory"
+    ],
+    "legacy_current_sql_mentions_each": 0,
+    "immutable_retirement_migration_blobs": [
+      {
+        "path": "supabase/migrations/20261110020500_dic_admin_signup_approval_retire_invites.sql",
+        "blob": "fea285d31190b996160d7672c1d90887f3d0c647"
+      },
+      {
+        "path": "supabase/migrations/20261113050000_dic_retire_roaster_directory.sql",
+        "blob": "10775c86bf88e61160fdc66d35c65698638742d6"
+      }
+    ],
+    "complete_current_signup_sql_chars": 3484,
+    "observed_shot_count": 27,
+    "owner_link_categories": 11,
+    "owner_link_failures": 0,
+    "observed_coffees": 9,
+    "merge_or_orphan_failures": 0,
+    "first_time_source_word_credit": 0,
+    "new_confirmed_defects": 0,
+    "production_writes": 0,
+    "code_test_ci_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "queue": "UNCHANGED_TESTING",
+    "next": "Resume with first genuinely changed/unreviewed provider definition or reproducible application bottleneck; no recrediting unchanged SQL; full hosted #96 and compiled/console surfaces remain unverified"
+  },
+  "provider_migration_wrapper_redundancy_run319": {
+    "run": "R319 Nov17 2026",
+    "preflight_development_sha": "8a9c5502ccfee5ae077c33b4c934ebb779fc9612",
+    "prewrite_parent_sha": "8a9c5502ccfee5ae077c33b4c934ebb779fc9612",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt": "docs/audits/issue509-r319-migration-identity-admin-rpc-equivalence-20261117.json",
+    "live_migration_records": 69,
+    "release_migrations": 68,
+    "development_migrations": 79,
+    "duplicate_live_stored_sql_versions": 2,
+    "duplicate_sql_source_byte_equal": true,
+    "source_unpublished_migrations": 11,
+    "identical_current_app_wrapper_pairs": 1,
+    "current_live_consumer_verified": true,
+    "production_writes": 0,
+    "new_defects": 0,
+    "first_time_unchanged_word_credit": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Inspect first live new/changed object vs R314/R315/R316/R318 manifests; otherwise identify a reproducible active member/admin query or Edge regression before development-only correction; no repeated unchanged function reading."
+  },
+  "provider_postgrest_workload_text_semantics_run320": {
+    "run": "R320",
+    "original_preflight_development_sha": "5466fc5becb7476ab856c834deae3f3a0e35ace1",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prewrite_sha": "5466fc5becb7476ab856c834deae3f3a0e35ace1",
+    "receipt_path": "docs/audits/issue509-r320-postgrest-workload-sql-retired-invite-20261117.json",
+    "selected_query_count": 22,
+    "original_sql_characters": 14286,
+    "literal_redaction": true,
+    "three_complete_preview_sql_characters": 4736,
+    "retired_invite_historical_stats_only": true,
+    "current_routine_absent": true,
+    "no_first_time_source_code_line_credit": true,
+    "new_verified_app_defects": 0,
+    "justified_deletions": 0,
+    "provider_writes": 0,
+    "source_code_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "First new/changed definition or first unreviewed normalized PostgREST query outside the 22 scoped queryid+role+MD5 identities, e.g. calls<10/nonfiltered roles; keep exact identity keys and avoid historic-row=active-call fallacy. Hosted Auth, console and compiled-provider implementations UNVERIFIED."
+  },
+  "provider_rare_postgrest_workload_semantics_run321": {
+    "run": "R321",
+    "preflight_development_sha": "370fcedd3f817d3e8bfca1dcc63ff69dff5671f9",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt_path": "docs/audits/issue509-r321-rare-postgrest-workload-20261117.json",
+    "normalized_sql_statements": 42,
+    "original_sql_characters": 28726,
+    "query_identity": "role+queryid+MD5",
+    "retired_invite_rpc_names": [
+      "dic_admin_issue_invite",
+      "dic_admin_delete_invite",
+      "dic_admin_revoke_invite"
+    ],
+    "source_code_credit": 0,
+    "new_verified_defects": 0,
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Complete scoped rare PostgREST normalized-statement cohort 42/42; next genuinely new/changed provider definition, non-PostgREST workload SQL not already credited, or independently reproduced user-impacting bottleneck. Avoid re-review for its own sake."
+  },
+  "provider_nonpostgrest_workload_semantics_run322": {
+    "run": "R322",
+    "preflight_development_sha": "ee2d587cb847460330b7256c7667bee46c9dc39c",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt_path": "docs/audits/issue509-r322-nonpostgrest-workload-20261118.json",
+    "normalized_sql_statements": 41,
+    "original_sql_characters": 32060,
+    "role_counts": {
+      "authenticator": 18,
+      "authenticated": 18,
+      "service_role": 2,
+      "anon": 3
+    },
+    "semantic_categories": {
+      "POSTGREST_TIMEZONE_METADATA": 1,
+      "POSTGREST_METADATA_DISCOVERY": 10,
+      "TRANSPORT_GUC_INITIALIZATION": 4,
+      "SESSION_CONTROL": 12,
+      "HISTORICAL_ROLE_BOUND_INTEGRATION_OR_AUDIT_QUERY": 14
+    },
+    "pgss_reset_utc": "2026-10-09 11:11:31.487298+00",
+    "first_time_source_or_app_object_credit": 0,
+    "reproduced_app_defects": 0,
+    "github_app_code_or_test_writes": 0,
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "First genuinely changed/unreviewed provider definition or independent reproducible app/Edge bottleneck; account for prior complete receipts, do not repeat unchanged session/proxy SQL."
+  },
+  "provider_verify_edge_bundle_drift_run323": {
+    "run": "R323",
+    "preflight_initial_sha": "0482fa8b4b66c7264fd3b18e86bb20ece2e194d1",
+    "prewrite_sha": "6e5126afb35c4e4050817fe50a45fb88e52f4f91",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt_path": "docs/audits/issue509-r323-verify-edge-source-drift-20261118.json",
+    "edge_slug": "dic-verify-coffee",
+    "edge_deployed_version": 10,
+    "deployed_files_full_read": 5,
+    "deployed_source_characters": 24829,
+    "release_equal_files": 4,
+    "release_drift_files": 1,
+    "legacy_deployed_helper_git_blob": "e07319a5cfe5bb96cdf4891563b493bf2abb2f0e",
+    "release_corrected_helper_blob": "c731e22fc2a05b1559b4619cd05e0deb24ddbcc5",
+    "existing_fix_issue": 33,
+    "regression": "node22_synthetic_quoted_delimiter_two_cases_PASS_not_hosted",
+    "first_time_baseline_credits": 0,
+    "verified_live_member_incident": false,
+    "action": "BLOCKED_PENDING_SEPARATE_OWNER_PUBLISH_AUTHORIZATION; NO_PRODUCTION_WRITES",
+    "baseline": "IN_PROGRESS"
+  },
+  "provider_verify_edge_bundle_drift_run323_correction": {
+    "run": "R323b",
+    "corrects": "provider_verify_edge_bundle_drift_run323",
+    "prior_discovery": "R47 2026-11-06 docs/audits/issue509-edge-shared-parser-and-io-delta-20261106-run47.json",
+    "issue33_prior_handoff": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33#issuecomment-6692645252",
+    "novelty": "KNOWN_UNCHANGED_VERIFIER_DRIFT_NOT_NEW_INCIDENT_OR_ALERT",
+    "observed_provider_delta": "Former dic-preview-coffee v4 shared scanner removed by retired v7 410 tombstone, no scanner import; dic-verify-coffee v10 still stale",
+    "verify_stale_helper_blob": "e07319a5cfe5bb96cdf4891563b493bf2abb2f0e",
+    "released_source_blob": "c731e22fc2a05b1559b4619cd05e0deb24ddbcc5",
+    "parser_fix_owner": 33,
+    "source_fix_already_exists": true,
+    "production_writes": 0,
+    "new_ci": 0,
+    "new_credited_word_count": 0,
+    "baseline": "IN_PROGRESS",
+    "owner_alert": "NO_QUALIFYING_NEW_MATERIAL_PROBLEM",
+    "next": "Resume genuinely unreviewed or changed provider definition; preserve existing #33 publish boundary"
+  },
+  "provider_storage_admin_pooler_sql_run324": {
+    "run": "R324",
+    "initial_preflight_development_sha": "e507e27280d10ccb6810553cf9c8cdc551349ef6",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "provider": "azviqqejypsefzilgonr",
+    "receipt_path": "docs/audits/issue509-r324-storage-admin-pgbouncer-sql-20261118.json",
+    "receipt_blob_sha": "0aeb7c5b5799add055d4f94f404ec657a5672ab6",
+    "full_historical_workload_sql_texts_directly_reviewed": 45,
+    "original_sql_characters": 8399,
+    "by_role": {
+      "pgbouncer": 2,
+      "supabase_storage_admin": 43
+    },
+    "storage_admin_remaining_sql_variants": 98,
+    "cumulative_since": "2026-10-09",
+    "read_only_catalog_facts": {
+      "storage_buckets": 0,
+      "storage_objects": 0,
+      "storage_multipart_uploads": 0,
+      "retired_storage_get_size_by_bucket_live": false,
+      "active_app_sql_callers_of_retired_helper": 0,
+      "seven_related_indexes_valid": true
+    },
+    "historical_ddl_is_live_object_source_credit": false,
+    "first_time_application_function_table_source_credit": 0,
+    "reproduced_app_defects": 0,
+    "new_code_test_ci": 0,
+    "production_writes": 0,
+    "release_queue_changes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Exclude 43 current R324 supabase_storage_admin SQL queryids; inspect next 98 unmatched with active-app relevance first; preserve prior current-function coverage and verified managed objects."
+  },
+  "provider_storage_admin_fullsql_run325": {
+    "run": "R325",
+    "preflight_development_sha": "4ebb7f6556a41085ddb3524f7fce9d780f0050fc",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "project": "azviqqejypsefzilgonr",
+    "receipt_path": "docs/audits/issue509-r325-storage-admin-workload-fullsql-20261118.json",
+    "receipt_blob_sha": "85cca54f1256d080db865349d9be1112380a59c0",
+    "complete_current_storage_admin_query_count": 142,
+    "previous_r324": 43,
+    "new_r325": 99,
+    "new_original_sql_characters": 132761,
+    "first_time_application_function_source_credit": 0,
+    "latest_managed_listing_body_exactly_equal_live": true,
+    "live_storage_bucket_count": 0,
+    "live_storage_object_count": 0,
+    "live_multipart_count": 0,
+    "live_lifecycle_state_count": 0,
+    "new_reproducible_defects": 0,
+    "provider_writes": 0,
+    "ci_runs": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "First changed/unreviewed live provider definition or reproducible app bottleneck; skip already credited managed one-call SQL."
+  },
+  "provider_auth_admin_sql_workload_run326": {
+    "run": "R326",
+    "preflight_development_sha": "8be0b0bff0764c7fce06f3df3dd8393d83c22fde",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "project_ref": "azviqqejypsefzilgonr",
+    "receipt_path": "docs/audits/issue509-r326-auth-admin-workload-20261118.json",
+    "cohort_role": "supabase_auth_admin",
+    "queryid_count": 202,
+    "sanitized_full_sql_shape_reviewed_count": 202,
+    "original_text_characters": 48997,
+    "redacted_literal_source_not_reviewed": true,
+    "one_call": 148,
+    "repeated": 54,
+    "recorded_source_hashes": 202,
+    "original_unredacted_word_credit": 0,
+    "app_live_definition_first_time_credit": 0,
+    "live_index_crosscheck": 33,
+    "all_crosschecked_indexes_valid": true,
+    "cumulative_sql_calls": 8429,
+    "new_reproducible_app_defects": 0,
+    "provider_writes": 0,
+    "new_ci": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "supabase_admin normalized SQL cohort 1/166 after current-identity/preexisting-receipt recheck; changed/unreviewed app semantics take priority."
+  },
+  "provider_supabase_admin_workload_run327": {
+    "run": "R327",
+    "preflight_development_sha": "6c985ed1f8027d3bb91017a6eaaccc31030b448f",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "provider_project_ref": "azviqqejypsefzilgonr",
+    "receipt_path": "docs/audits/issue509-r327-supabase-admin-workload-20261118.json",
+    "receipt_blob_sha": "c1934b22a3dc434668b62458f118470c6c46e747",
+    "queryid_count": 166,
+    "cumulative_calls": 19381,
+    "original_sql_characters": 97027,
+    "sanitized_sql_characters": 74083,
+    "original_source_md5_per_item": true,
+    "literal_sensitive_raw_word_credit": 0,
+    "one_call_historical_or_managed": 122,
+    "repeat_managed": 44,
+    "live_realtime_indexes": 6,
+    "live_realtime_routines_crosschecked": 6,
+    "ensure_rls_event_trigger_enabled": true,
+    "live_realtime_subscriptions": 0,
+    "live_realtime_messages": 0,
+    "live_published_app_tables": 0,
+    "source_classification": "HISTORICAL_OR_OPERATIONAL_NORMALIZED_SQL_NOT_NEW_LIVE_APPLICATION_OBJECT_DEFINITIONS",
+    "first_time_current_application_sql_source_credit": 0,
+    "provider_writes": 0,
+    "source_test_ci_writes": 0,
+    "reproduced_app_defects": 0,
+    "justified_object_deletions": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Source-bound genuinely new/changed provider definition or member-path regression; dedup prior postgres pgss receipts before assigning new credit."
+  },
+  "provider_postgres_workload_semantics_run328": {
+    "run": "R328",
+    "preflight_initial_development_sha": "cb972e74dd6dac301604dc1d4df815b257c41636",
+    "prewrite_development_sha": "cb972e74dd6dac301604dc1d4df815b257c41636",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "project_ref": "azviqqejypsefzilgonr",
+    "receipt_path": "docs/audits/issue509-r328-postgres-top-sql-explain-semantic-20261118.json",
+    "reviewed_safe_complete_sql_queries": 42,
+    "original_sql_characters": 26284,
+    "sanitized_sql_characters": 23476,
+    "historical_explain_queryids": 16,
+    "administrative_or_catalog_queryids": 26,
+    "full_index_definitions_crosschecked": 27,
+    "retired_invitation_relation_current_refs": 0,
+    "top_self_audit_temp_blocks": 108580,
+    "current_application_function_source_word_credit": 0,
+    "original_comment_or_literal_word_credit": 0,
+    "new_proven_app_defects": 0,
+    "source_test_ci_writes": 0,
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Next unreviewed/changed provider definition or reproduced app bottleneck; exclude these 42 SQL identities from new postgres cohort."
+  },
+  "provider_postgres_recurring_safe_shapes_run329": {
+    "run": "R329",
+    "preflight_initial_development_sha": "ea2bf4f7bacf1bf98b4e9ed6e6d349f807ba0060",
+    "prewrite_development_sha": "ea2bf4f7bacf1bf98b4e9ed6e6d349f807ba0060",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "project_ref": "azviqqejypsefzilgonr",
+    "receipt_path": "docs/audits/issue509-r329-postgres-recurring-safe-source-20261118.json",
+    "reviewed_complete_original_normalized_sql_queryids": 89,
+    "full_original_text_characters": 27223,
+    "raw_md5_and_exact_range_per_statement": true,
+    "prior_R328_queryids_excluded": 42,
+    "prior_other_receipts_dedup_complete": false,
+    "first_time_coverage_credit": 0,
+    "current_app_sql_definition_credit": 0,
+    "retired_relations_checked": 4,
+    "current_live_alias_consumers": 2,
+    "new_reproducible_app_defects": 0,
+    "justified_source_fixes": 0,
+    "source_test_ci_writes": 0,
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Deduplicate 89 normalized postgres queryids against earlier run receipts before claiming first-time workload coverage; prioritize genuinely changed/unreviewed live DB/Edge definitions or reproducible member-path bug."
+  },
+  "provider_community_recommendation_runtime_run330": {
+    "run": "R330",
+    "review_type": "CURRENT_READ_ONLY_CROSS_LAYER_RPC_SEMANTIC_DEPENDENCIES_AND_OBSERVED_SQL_PERFORMANCE",
+    "preflight_development_sha": "283c714824079d92f10f04535c52010e81d3d992",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "project_ref": "azviqqejypsefzilgonr",
+    "receipt_path": "docs/audits/issue509-r330-community-recommendation-runtime-20261118.json",
+    "sql_functions_directly_reread": 2,
+    "full_source_characters": 6865,
+    "related_index_ddl_reviewed": 28,
+    "related_table_aggregate_stats_reviewed": 7,
+    "authenticated_rpc_queryid": "2669020654105127862",
+    "rpc_calls_cumulative": 130,
+    "rpc_sql_mean_ms": 21.554,
+    "rpc_sql_max_ms": 112.771,
+    "rpc_temp_blocks": 0,
+    "independent_contributor_filter_verified": true,
+    "personal_family_server_provenance_verified": true,
+    "indexes_valid_and_ready": true,
+    "measured_scaling_defect": false,
+    "new_reproducible_bugs": 0,
+    "justified_deletions": 0,
+    "first_time_source_word_credit": 0,
+    "source_test_ci_edits": 0,
+    "new_ci_claims": 0,
+    "provider_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "queue": "UNCHANGED_PRIOR_FIXES_TESTING_UNRECERTIFIED",
+    "unverified": [
+      "Member end-to-end latency/scaling",
+      "Hosted Auth and provider console-only/native implementations"
+    ],
+    "next": "Genuinely changed/unreviewed provider definition or reproduced member-path defect; avoid duplicate unchanged-object and telemetry credits"
+  },
+  "provider_alias_match_semantics_run331": {
+    "run": "R331",
+    "preflight_development_sha": "18b9975da3dbf5819cbbd5561a6592c5f2803a01",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "reviewed_live_function_sources": 6,
+    "reexamined_source_chars": 21459,
+    "first_time_source_word_credit": 0,
+    "table_catalog_full": true,
+    "edge_bundles_checked": 5,
+    "edge_literal_alias_consumers": 0,
+    "live_sql_alias_writers": 1,
+    "live_sql_alias_deleters": 1,
+    "live_sql_alias_readers": 0,
+    "live_alias_rows": 0,
+    "live_first_entry_rows": 9,
+    "synthetic_similarity": 0.318182,
+    "matcher_similarity_threshold": 0.43,
+    "latent_gap": "ALIASES_NOT_CONSIDERED_BY_CANDIDATE_MATCHER_NO_EXISTING_MEMBER_REPRODUCTION",
+    "potential_self_alias": "OLDER_PENDING_RENAME_ONLY_NO_CURRENT_ROWS",
+    "receipt_path": "docs/audits/issue509-r331-coffee-alias-matcher-consumer-semantic-20261118.json",
+    "source_test_ci_writes": 0,
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Isolated PG17 admitted synthetic alias fixture; preserve explicit confirmation and #33/#96 ownership; don't drop live table."
+  },
+  "provider_confirm_name_null_guard_run332": {
+    "run": "R332",
+    "preflight_development_sha": "1f76f17ebef10c7caad69616fcbecd370a11d96a",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "provider_synthetic_null_guard_reproduction": true,
+    "live_fn_md5": "0fcc44bb8a05f46e87694d3474eb7c23",
+    "source_chars_reexamined": 3239,
+    "first_time_live_definition_words": 0,
+    "developer_fix_candidate": true,
+    "isolated_pg17_sql_ci": "PENDING",
+    "publication": "NOT_AUTHORIZED",
+    "receipt_path": "docs/audits/issue509-r332-confirm-null-name-guard-20261118.json",
+    "baseline": "IN_PROGRESS",
+    "next": "Verify new regression on isolated PG17 source-bound PR; fix failures before integration; preserve alias source classification"
+  },
+  "provider_confirm_name_null_guard_run332a": {
+    "run": "R332a",
+    "parent_head": "e6634db4217ae446555d321719ada1fa0ae23ea1",
+    "development_preflight_sha": "1f76f17ebef10c7caad69616fcbecd370a11d96a",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "prior_sql_run": 44289071815,
+    "prior_sql_result": "FAILED_SYNTHETIC_DUPLICATE_BETA_MEMBER_TRIGGER",
+    "prior_approval_run": 44289071927,
+    "prior_approval_result": "FAILED_MISSING_TRACKED_TESTING_ITEM",
+    "repaired_fixture": "ON_CONFLICT_OWNER_ID",
+    "queue_item": "DIC-Q-509-confirm-coffee-null-name",
+    "state": "TESTING_PENDING_NEW_EXACT_SOURCE_CI",
+    "no_provider_writes": true,
+    "first_time_provider_word_credit": 0,
+    "next": "PR #3258 exact-source rerun, repair failures, then nonforce integration"
+  },
+  "provider_confirm_name_null_guard_run332b": {
+    "run": "R332b",
+    "preflight_development_sha": "d516ae8a1e51b436331391b9cbb4683250704020",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "pr": 3258,
+    "merged_sha": "d516ae8a1e51b436331391b9cbb4683250704020",
+    "merge_method": "NONFORCE_SKIP_NETLIFY",
+    "migration_blob": "b8b9aa2e49ba6fe673207db926a393937b35e3d0",
+    "test_blob": "afd1640a6514abbe8b4779fbcc052ed1ea5f99c7",
+    "source_bound_pr_success_runs": [
+      44289525367,
+      44289525161,
+      44289525347,
+      44289525196,
+      44289526091
+    ],
+    "source_bound_merged_success_runs": [
+      44290199681,
+      44290199427,
+      44290199501,
+      44290199544,
+      44290199542
+    ],
+    "unrelated_source_failure": {
+      "issue": 33,
+      "run_pr": 44289525218,
+      "run_push": 44290199558,
+      "reason": "External current product page unavailable for original241 selected fields"
+    },
+    "live_source_md5": "0fcc44bb8a05f46e87694d3474eb7c23",
+    "migration_applied": false,
+    "queue": "TESTING",
+    "provider_writes": 0,
+    "first_time_provider_words": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Isolated PG17 alias suggestion-only consumer tests and source-isolated candidate; no auto-publish"
+  },
+  "provider_alias_confirmation_gate_run334": {
+    "run": "R334",
+    "preflight_development_sha": "37f2817b6e75f9289a7bd359b6fd02c5ab1c681a",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "project_ref": "azviqqejypsefzilgonr",
+    "provider_status": "ACTIVE_HEALTHY",
+    "postgres": "17.11",
+    "live_matcher_md5": "b4b845d29ccb65ac7922109dc89816b6",
+    "live_confirm_md5": "0fcc44bb8a05f46e87694d3474eb7c23",
+    "live_alias_writer_md5": "140c211a4bfef175b041c037561a1e37",
+    "safe_synthetic_comparisons": 5,
+    "alias_exact_similarity": 0.318182,
+    "matcher_name_gate": false,
+    "explicit_confirm_name_gate": false,
+    "canonical_control_passes": true,
+    "cross_roaster_lot_origin_negatives_exercised": true,
+    "live_alias_rows": 0,
+    "live_first_entries": 9,
+    "live_verified_active_coffees": 9,
+    "nov18_development_migrations_applied_production": 0,
+    "source_review_repeat_no_first_time_credit": true,
+    "missing_disposable_db_test": "UNVERIFIED",
+    "no_auto_link_alias_only_requirement": true,
+    "receipt": "docs/audits/issue509-r334-coffee-alias-endtoend-gates-20261118.json",
+    "github_source_test_ci_writes": 0,
+    "production_writes": 0,
+    "publication": "NOT_AUTHORIZED",
+    "queue": "PREVIOUS_TESTING_UNCHANGED",
+    "baseline": "IN_PROGRESS",
+    "next": "Isolated PG17 alias-driven suggestion AND explicit member confirmation regression; only then consider additive two-function safe fix."
+  },
+  "provider_alias_suggestion_manual_confirm_run335": {
+    "receipt_path": "docs/audits/issue509-r335-alias-gate-development-fix-20261118.json",
+    "preflight_development_sha": "d10e6e48742d1a43110ec331be9294d24510fcff",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "source_migration": "supabase/migrations/20261118140000_dic_coffee_alias_suggestion_confirm.sql",
+    "source_regression": "supabase/tests/coffee_historical_alias_suggestion_confirm.sql",
+    "source_status": "TESTING_CI_PENDING",
+    "provider_definition_first_time_words": 0,
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS"
+  },
+  "provider_alias_suggestion_manual_confirm_run335b": {
+    "receipt_path": "docs/audits/issue509-r335b-alias-merge-ci-20261118.json",
+    "merge_sha": "7795d5a356e2afc27420e3fb86d7eae3316c13dc",
+    "preflight_development_sha": "7795d5a356e2afc27420e3fb86d7eae3316c13dc",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "pr": 3273,
+    "source_ci_successes": [
+      44318819118,
+      44318818689,
+      44318819195,
+      44318818842,
+      44318818676
+    ],
+    "sql_regression_executed": true,
+    "provider_unchanged": true,
+    "first_time_provider_word_credit": 0,
+    "queue_state": "TESTING",
+    "baseline": "IN_PROGRESS"
+  },
+  "provider_community_browse_and_broker_runtime_run336": {
+    "run": "R336",
+    "receipt_path": "docs/audits/issue509-r336-community-browse-broker-runtime-20261118.json",
+    "preflight_development_sha": "14f7a639ea5974d19bd10e75675f5dbf42ad0037",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "full_sql_definitions": 2,
+    "sql_characters": 7171,
+    "complete_edge_files": 4,
+    "edge_characters": 21887,
+    "release_git_byte_parity": true,
+    "related_index_ddl": 9,
+    "bounded_log_window": "2026-11-17T14:00Z/2026-11-18T14:00Z",
+    "member_broker_http200": 289,
+    "admin_broker_http200": 288,
+    "postgres_errors_role": "postgres",
+    "cumulative_authenticated_matching_sql_calls": 27,
+    "no_reproduced_defect": true,
+    "new_provider_word_credit": 0,
+    "issue267_line_credit": 0,
+    "code_test_ci_changes": 0,
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "queue": "PRIOR_FIXES_TESTING",
+    "next": "public.dic_member_approval_claim(p_channel text,p_limit integer), char 1; verify finish/claim per outcome without private rows"
+  },
+  "provider_approval_claim_pretrigger_reconciliation_run337": {
+    "run": "R337",
+    "receipt_path": "docs/audits/issue509-r337-approval-claim-pretrigger-timeline-20261118.json",
+    "preflight_sha": "6475faea3f42f6a7570b2aceb71833d5e4ca9201",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "complete_sources": 4,
+    "reviewed_characters": 3718,
+    "first_time_word_credit": 0,
+    "approved_events": 1,
+    "deliveries": 0,
+    "push_subscriptions": 0,
+    "index_used": "dic_member_approval_claim_idx",
+    "known_null_fix": "TESTING_NOT_PUBLISHED",
+    "provider_writes": 0,
+    "code_test_ci_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "private.dic_member_approval_poll_gate singleton DDL/state"
+  },
+  "provider_member_approval_poll_gate_run338": {
+    "run": "R338",
+    "receipt_path": "docs/audits/issue509-r338-member-approval-poll-gate-20261118.json",
+    "preflight_development_sha": "22ea586a454cd4a61fa4ce0e3bd2ac349e3082a4",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "provider_status": "ACTIVE_HEALTHY",
+    "object": "private.dic_member_approval_poll_gate",
+    "full_columns": 2,
+    "constraints": 2,
+    "indexes": 1,
+    "current_rows": 1,
+    "complete_poll_sql_chars": 335,
+    "sql_md5": "b94ddc2223993aa7685faf482d3871e4",
+    "observed_poll_calls": 1701,
+    "observed_poll_mean_ms": 12.095,
+    "first_time_word_credit": 0,
+    "new_bug": 0,
+    "git_app_changes": 0,
+    "provider_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "changed/new distinct provider object or independent member-flow repro"
+  },
+  "provider_legacy_private_hide_action_run339": {
+    "run": "R339",
+    "receipt_path": "docs/audits/issue509-r339-legacy-private-hide-action-20261118.json",
+    "preflight_development_sha": "7a3c82c9064da6052145f311b41a2ae69fc85aac",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "provider_project": "azviqqejypsefzilgonr",
+    "full_live_definition_characters": 10881,
+    "definition_md5": "d1050c2ee3b2896c6fbd8b90bdba9052",
+    "retired_action": "hide_shot",
+    "active_core_function_retained": true,
+    "legacy_handler_chars": 630,
+    "verified_public_boundary": "public.dic_apply_client_change rejects before any mutation",
+    "source_changes": [
+      "supabase/migrations/20261118164500_dic_remove_legacy_private_hide_shot_handler.sql",
+      "supabase/tests/legacy_private_hide_shot_retirement.sql",
+      "scripts/audit/isolated-sql-regression.sh"
+    ],
+    "source_tests": "PENDING",
+    "first_time_provider_word_credit": 0,
+    "baseline": "IN_PROGRESS",
+    "provider_writes": 0,
+    "next": "Exact-source PR PostgreSQL17/Node22/governance before merge; resume changed/unreviewed provider object; no publication"
+  },
+  "provider_private_hide_handler_source_closure_run339b": {
+    "run": "R339b",
+    "date_utc": "2026-11-18",
+    "preflight_development_sha": "52b34214fcfc08286891ae59d3042a358a3013b3",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "verified_preflight_git_blob_content": true,
+    "project_ref": "azviqqejypsefzilgonr",
+    "project_status": "ACTIVE_HEALTHY",
+    "full_live_production_private_mutate_md5": "d1050c2ee3b2896c6fbd8b90bdba9052",
+    "live_pg_get_functiondef_chars": 10881,
+    "development_migration": "supabase/migrations/20261118164500_dic_remove_legacy_private_hide_shot_handler.sql",
+    "migration_blob_sha": "c2e96a9cc52e15568ad9177c73c2cf8044720387",
+    "complete_development_function_chars": 10240,
+    "diff_proof": "Full proposed CREATE OR REPLACE SQL is byte-identical to full live pg_get_functiondef after exactly removing the hide_shot allowlist entry and the unreachable branch and normalizing the final terminator",
+    "removed_live_source_chars": 641,
+    "retained_live_actions": [
+      "create_setup",
+      "save_preferences",
+      "submit_coffee",
+      "add_verified_coffee",
+      "save_shot"
+    ],
+    "pr": 3287,
+    "pr_head_sha": "835883b0180d6bb1e7ff3ec2293fafd9f09643f7",
+    "integrated_merge_sha": "97661eb98275008510ef0125e978e18bd7ed2466",
+    "merged_with_skip_netlify": true,
+    "exact_pr_head_success_runs": {
+      "isolated_sql_pg17": 44353919644,
+      "approval": 44353919819,
+      "node22": 44353919625,
+      "cloud_browser": 44353919564,
+      "python": 44353919571
+    },
+    "unrelated_issue33_original_selected_failure": 44353919626,
+    "exact_merged_push_ci": "NOT_DIRECTLY_ENUMERATED_BY_AVAILABLE_GITHUB_CONNECTOR_NO_NEW_CLAIM",
+    "source_test_ci_edits_this_run": 0,
+    "first_time_provider_function_word_credit": 0,
+    "issue267_source_line_credit": 0,
+    "live_migration_applied": false,
+    "live_old_handler_still_present": true,
+    "hidden_shots_aggregate": 0,
+    "auditor_originated_failed_probe": "SQLSTATE 42703 when incorrectly querying nonexistent public.community_shots.hidden_at; discarded and repeated narrower safe SELECT successfully. Not an application error.",
+    "new_application_bug": 0,
+    "provider_mutations": 0,
+    "production_publish": "NOT_AUTHORIZED",
+    "release_queue_item": "DIC-Q-509-retire-internal-hide-shot",
+    "release_queue_status": "TESTING_NOT_READY",
+    "baseline": "IN_PROGRESS",
+    "next": "Check merged-push exact-source workflow via supported run listing when available; continue genuinely changed/unreviewed live Supabase object, preserve no double-credit; host #96 candidate member acceptance remains unverified"
+  },
+  "provider_recommendation_unique_controls_run340": {
+    "run": "R340",
+    "date_utc": "2026-11-18",
+    "receipt_path": "docs/audits/issue509-r340-recommendation-unique-controls-20261118.json",
+    "preflight_development_sha": "42fc49e946b213b86f21ff78eb8bbd864b58d07e",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "project_ref": "azviqqejypsefzilgonr",
+    "provider": "ACTIVE_HEALTHY_PG17.11_READ_ONLY",
+    "function": "private.dic_capture_recommendation_context()",
+    "complete_live_function_chars": 1760,
+    "live_function_md5": "962e12faeac2a7b5a671bd837c6c5c41",
+    "prior_sql_semantic_review_reused": true,
+    "first_time_provider_words_credited": 0,
+    "github_code_line_267_credit": 0,
+    "six_safe_synthetic_cases_reviewed": 6,
+    "invalid_duplicate_controls_silently_accepted_in_current_production": true,
+    "issue": "Repeated allowed controls are accepted even though provenance is an unordered unique set and can mislabel private historical shot attribution; no proven real member occurrence",
+    "source_migration": "supabase/migrations/20261118180000_dic_recommendation_unique_controls.sql",
+    "regression": "supabase/tests/recommendation_unique_controls.sql",
+    "runner": "scripts/audit/isolated-sql-regression.sh",
+    "queue": "DIC-Q-509-recommendation-unique-controls",
+    "release": "TESTING_NOT_READY",
+    "exact_source_ci": "PENDING",
+    "no_provider_writes": true,
+    "no_production_publish": true,
+    "baseline": "IN_PROGRESS",
+    "next": "Validate PR-head exact source isolated PG17 + Node22/browser/approval; merge nonforce only after success; continue next changed/unreviewed provider definition"
+  },
+  "provider_community_outlier_null_revision_run341": {
+    "run": "R341",
+    "date_utc": "2026-11-18",
+    "preflight_development_sha": "9f7b9787dddcdef52143045023862f3cbb1bd1f7",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_signature": "public.dic_confirm_community_outlier(uuid,bigint)",
+    "full_source_characters": 1432,
+    "live_definition_md5": "0657114255a0375b7f3fc502f780aa54",
+    "reviewed_chars": [
+      1,
+      1432
+    ],
+    "previous_complete_review_reused": true,
+    "bug": "NULL p_expected_revision bypasses revision conflict via SQL three-value NULL in PLpgSQL IF",
+    "synthetic_read_only_cases": [
+      {
+        "given": null,
+        "old_rejects": false,
+        "fixed_rejects": true
+      },
+      {
+        "given": 1,
+        "old_rejects": false,
+        "fixed_rejects": false
+      },
+      {
+        "given": 2,
+        "old_rejects": true,
+        "fixed_rejects": true
+      }
+    ],
+    "actual_member_incident": "NOT_ESTABLISHED",
+    "official_ui_sends_revision": true,
+    "source_migration": "supabase/migrations/20261118181500_dic_community_outlier_null_revision_guard.sql",
+    "test": "supabase/tests/community_outlier_null_revision.sql",
+    "runner": "scripts/audit/isolated-sql-regression.sh",
+    "semantic_delta": "<> to IS DISTINCT FROM",
+    "ci": "NOT_YET_RUN",
+    "queue": "NOT_READY_PENDING_TESTS",
+    "baseline": "IN_PROGRESS",
+    "production_writes": 0,
+    "first_time_provider_word_credit": 0,
+    "issue267_source_line_credit": 0,
+    "next": "Run exact PR-head isolated PG17/Node22/browser/approval, repair, safe nonforce integration; hosted #96 acceptance remains unverified"
+  },
+  "provider_roaster_retirement_dependency_run342": {
+    "run": "R342",
+    "date_utc": "2026-11-18",
+    "preflight_development_sha": "dce0d5c46e6ba2b180d69c829d2734f21b5fb5bf",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt": "docs/audits/issue509-r342-roaster-retirement-classification-20261118.json",
+    "project_ref": "azviqqejypsefzilgonr",
+    "tables_full_catalog_reviewed": 5,
+    "columns": 26,
+    "constraints": 23,
+    "indexes": 6,
+    "rls_enabled": 5,
+    "policies": 4,
+    "full_live_sql_functions": 4,
+    "source_chars": 4134,
+    "retired": [
+      "private.dic_roaster_directory",
+      "private.dic_roaster_aliases",
+      "public.dic_roaster_preview_target"
+    ],
+    "historical_archived": [
+      "private.dic_roaster_identity_provenance_archive",
+      "private.dic_roaster_alias_provenance_archive"
+    ],
+    "legacy_active": [
+      "private.dic_roaster_name_aliases",
+      "private.dic_official_source_attestations"
+    ],
+    "active_zero_rows_with_consumers": [
+      "private.dic_coffee_aliases"
+    ],
+    "edge_tombstone": "dic-preview-coffee version 7 410 retained ACTIVE deployment",
+    "active_verified_source_worker": "dic-verify-coffee version 10 and public.dic_source_check_target",
+    "applied_migration_version": "20261113195659",
+    "github_migration_filename_version": "20261113050000",
+    "migration_mapping": "UNVERIFIED",
+    "first_time_provider_words_credited": 0,
+    "issue267_lines_credited": 0,
+    "source_changes": 0,
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "private.dic_url_preview_attempts plus public.dic_url_preview_claim complete definitions and caller runtime; do not retire without proof"
+  },
+  "provider_preview_budget_runtime_run343": {
+    "run": "R343",
+    "date_utc": "2026-11-18",
+    "preflight_development_sha": "ff48ef70807737e910aad47c1d3999e584c140f9",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt": "docs/audits/issue509-r343-preview-budget-consumer-runtime-20261118.json",
+    "project_ref": "azviqqejypsefzilgonr",
+    "target": "private.dic_url_preview_attempts and public.dic_url_preview_claim",
+    "full_live_sql_function_sources": 6,
+    "source_chars": 8364,
+    "table_columns": 6,
+    "constraints": 3,
+    "indexes": 1,
+    "policies": 1,
+    "live_quota_rows_aggregate": 3,
+    "active_sql_consumers": 5,
+    "legacy_edge_tombstone": "dic-preview-coffee v7 exact Git release byte parity, POST 410",
+    "perf": "PK Index Scan estimated 2.38; no confirmed bottleneck",
+    "unverified": "Netlify universal-preview external caller path; timestamp-to-file migration mapping",
+    "classification": "LEGACY ACTIVE SQL state/worker compat; do not drop",
+    "finding": "No verified current app defect or safe removal; absent recent worker usage is not a no-consumer proof",
+    "first_time_provider_words_credited": 0,
+    "issue267_lines_credited": 0,
+    "source_changes": 0,
+    "production_writes": 0,
+    "ci": "NOT_RUN",
+    "baseline": "IN_PROGRESS",
+    "next": "source-bound Netlify /api/coffee-preview actual consumers and first changed/unreviewed provider definition"
+  },
+  "provider_netlify_preview_consumer_run344": {
+    "receipt_path": "docs/audits/issue509-r344-live-preview-consumer-20261118.json",
+    "preflight_development_sha": "7494cdfb9de5b698c881199706c884b982acbf94",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "release_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5",
+    "netlify_deploy": "6af9551c6515ddfa3786f76e",
+    "live_sql_md5_count": 5,
+    "complete_published_handler_source_chars": 12485,
+    "other_deployed_functions_scanned_for_rpc_only": 4,
+    "legacy_worker_claim_used_by_current_deployed_netlify": false,
+    "proven_all_external_consumers_absent": false,
+    "reproduced_bug": false,
+    "safe_source_fix": false,
+    "provider_writes": 0,
+    "first_time_provider_word_credit": 0,
+    "issue267_line_credit": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "First changed/new or not-yet-directly-semantically-reviewed Supabase provider definition by existing ledger, excluding unchanged R343 SQL; verify any actual external consumer before proposing retirement of public.dic_url_preview_claim."
+  },
+  "provider_admin_normalized_identity_run345": {
+    "run": "R345",
+    "date_utc": "2026-11-18",
+    "preflight_development_sha": "9ef9e69b8586313e1efe38fc9680766d1e67ea14",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "project_ref": "azviqqejypsefzilgonr",
+    "receipt": "docs/audits/issue509-r345-admin-normalized-identity-20261118.json",
+    "live_function": "private.dic_admin_edit_record(uuid,bigint,jsonb,text,text)",
+    "complete_source_chars": 13186,
+    "live_source_md5": "290b98b6bb6f99a1afb73b13ff315b12",
+    "valid_synthetic_cases": 4,
+    "current_bug": "Punctuation-only admin approved name/roaster normalizes to NULL and bypasses duplicate identity check",
+    "actual_member_incident": "UNVERIFIED",
+    "source_fix_migration": "supabase/migrations/20261118214500_dic_admin_edit_normalized_identity_guard.sql",
+    "regression": "supabase/tests/admin_edit_normalized_identity_guard.sql",
+    "runner": "scripts/audit/isolated-sql-regression.sh",
+    "status": "STAGED_DEVELOPMENT_TESTING_NO_PROVIDER_WRITES",
+    "ci": "PENDING",
+    "first_time_provider_word_credit": 0,
+    "issue267_line_credit": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Exact PR-head CI then safe development integration if all applicable checks pass; no live migration or publish."
+  },
+  "provider_admin_normalized_identity_run345b_merge": {
+    "run": "R345b",
+    "date_utc": "2026-11-18",
+    "receipt": "docs/audits/issue509-r345b-merged-source-ci-20261118.json",
+    "preflight_development_sha": "e958c3acace0d908a4464b5cf95c0405510a1c8b",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "merged_development_sha": "e958c3acace0d908a4464b5cf95c0405510a1c8b",
+    "pr": 3313,
+    "original_source_blobs_exact": true,
+    "pr_head_ci": "ALL_7_APPLICABLE_SUCCESS_FROZEN603_SKIPPED",
+    "merged_sql_pg17": 44406406158,
+    "merged_sql_status": "SUCCESS",
+    "merged_approval": 44406406187,
+    "merged_approval_status": "SUCCESS",
+    "external_issue33_selected241": {
+      "run": 44406406174,
+      "status": "FAILED_EXTERNAL_SOURCE_UNAVAILABLE",
+      "html_bytes": 0,
+      "synthetic": "16_OF_16_PASS",
+      "owner_issue": 33
+    },
+    "merged_node": "IN_PROGRESS",
+    "merged_cloud_browser": "IN_PROGRESS",
+    "production_migration": "NOT_APPLIED",
+    "first_time_provider_word_credit": 0,
+    "issue267_line_credit": 0,
+    "queue": "DIC-Q-509-admin-normalized-identity",
+    "state": "TESTING",
+    "baseline": "IN_PROGRESS",
+    "next": "Merged Node22/browser readback and #33 official seller source fetch status; preserve #509 no-publish."
+  },
+  "provider_migration_mapping_community_runtime_run346": {
+    "run": "R346",
+    "preflight_development_sha": "e3977c442ffebb65f66fd7cc64ffbfab263b7e20",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt": "docs/audits/issue509-r346-migration-remap-community-metrics-20261118.json",
+    "provider_version": "20261113195659",
+    "release_file": "supabase/migrations/20261113050000_dic_retire_roaster_directory.sql",
+    "release_blob_sha": "10775c86bf88e61160fdc66d35c65698638742d6",
+    "full_sql_chars": 25326,
+    "stored_git_bytes_exact": true,
+    "mapping_resolved": true,
+    "full_sql_definition_review_characters": 15757,
+    "first_time_provider_source_credit": 0,
+    "issue267_line_credit": 0,
+    "community_counts_consumer_contract": "UNVERIFIED_POTENTIAL_MERGED_ID_DISCREPANCY_NO_AFFECTED_CURRENT_ROWS",
+    "exact_merged_source_ci": "FIVE_APPLICABLE_SUCCESS_EXCEPT_UNRELATED_ISSUE33_EXTERNAL_FETCH_FAILURE",
+    "state": "IN_PROGRESS",
+    "prod_writes": 0,
+    "code_test_ci_writes": 0,
+    "next": "Trace the actual release/development caller and intended merged-coffee behavior for public.dic_community_evidence_counts(uuid,text); isolate rollback PG17 merged-ID fixture only if product contract confirms mismatch, otherwise proceed to next changed/unreviewed provider object. Keep #96 hosted Auth independently UNVERIFIED."
+  },
+  "provider_community_counts_invariant_run347": {
+    "run": "R347",
+    "preflight_development_sha": "915994396ea9e9289919939adc6b27f7d17bfb51",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt": "docs/audits/issue509-r347-community-counts-invariant-20261118.json",
+    "counts_md5": "1bddea7e3160c0282bea1d6e74d1fbaf",
+    "trigger_md5": "cefee7b991e40185eadbacde89def3aa",
+    "coffee_constraint_validated": true,
+    "conclusion": "R346_MISMATCH_REFUTED_BY_ENFORCED_INVARIANT",
+    "current_app_call_found": false,
+    "external_consumers_proven_absent": false,
+    "first_time_provider_words": 0,
+    "issue267_lines": 0,
+    "prod_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Continue to next changed/unreviewed provider definition; check other consumers only with real evidence, preserve #96 hosted Auth and console-only UNVERIFIED."
+  },
+  "provider_current_manifest_log_triage_run348": {
+    "run": "R348",
+    "preflight_development_sha": "071294b383f941e175c774a516c06b1c79535b64",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "receipt": "docs/audits/issue509-r348-current-manifest-log-triage-20261118.json",
+    "current_functions": 114,
+    "current_tables": 52,
+    "provider_migrations": 69,
+    "edge_deployments": 5,
+    "frozen_delta": {
+      "added": 22,
+      "changed": 17,
+      "absent": 7,
+      "unchanged": 75
+    },
+    "last24h_pg_errors": 19,
+    "management_select_errors": 19,
+    "edge_http200": 2304,
+    "edge_entries": 2304,
+    "first_time_provider_words": 0,
+    "issue267_line_credit": 0,
+    "app_code_test_ci_changes": 0,
+    "provider_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "First actually changed/new/unreviewed live provider definition; hosting/Auth/compiled UNVERIFIED. No automated deploy."
+  },
+  "provider_community_projection_admin_review_run349": {
+    "run": "R349",
+    "receipt_path": "docs/audits/issue509-r349-community-transition-admin-overview-20261118.json",
+    "preflight_development_sha": "cac322e186599fac40007757a67a898da6507780",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "provider_status": "ACTIVE_HEALTHY_PG17.11",
+    "provider_read_only": true,
+    "fully_read_current_definitions": 11,
+    "full_source_characters": 22304,
+    "community_quality_count": {
+      "eligible": 13,
+      "held": 0,
+      "pending": 0,
+      "withdrawn": 0
+    },
+    "is_dialed_in_generated_proof": "Clarity 4->5 changes project_shot.changed expression; retained projection may reenter pending_quality; no fix needed",
+    "current_review_definition_md5": "c5aea4d32aa8027a39d80341feade406",
+    "development_only_recheck_guard": "20261115065000_dic_community_withdrawn_recheck_guard.sql",
+    "new_bug_proven": false,
+    "first_time_provider_word_credit": 0,
+    "issue267_source_line_credit": 0,
+    "ci": "NOT_RUN_DOCS_ONLY",
+    "source_writes": 0,
+    "provider_writes": 0,
+    "release": "TESTING_UNCHANGED",
+    "baseline": "IN_PROGRESS",
+    "next": "First changed/new/unreviewed definition; if none, cross-source Admin consumer and paging semantics; hosted/unpublished status UNVERIFIED"
+  },
+  "provider_merge_response_and_edit_form_semantics_run350": {
+    "run": "R350",
+    "receipt": "docs/audits/issue509-r350-sql-client-source-invariants-20261119.json",
+    "preflight_development_sha": "325985acf8df4d432fb284b8add036ad25223536",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "source_snapshot": "cd0ab1f294bb5e15809592f210b5b69dc761ff49",
+    "live_admin_review_sql_md5": "cb5c264aceb9699a498177f3f6861783",
+    "live_edit_my_coffee_md5": "5a52eee42d3427ccbad8b7272ff8df90",
+    "known_production_issues_reconciled_to_already_tested_development_migrations": 2,
+    "new_bug_confirmed": false,
+    "first_time_provider_words": 0,
+    "issue267_lines": 0,
+    "ci": "NOT_RUN_DOCS_ONLY",
+    "new_code_fix": 0,
+    "provider_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "First genuinely changed/new/unreviewed provider definition"
+  },
+  "provider_first_style_decaf_context_run351": {
+    "run": "R351",
+    "receipt": "docs/audits/issue509-r351-first-style-decaf-context-20261119.json",
+    "receipt_commit": "6411fc201bf6411211499cd6ac4d5062cafac13c",
+    "preflight_development_sha": "75efa8d6e62a34e32b7557d83a66f5a0aa496c9a",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "project_ref": "azviqqejypsefzilgonr",
+    "complete_live_sql_definitions": 4,
+    "fully_semantically_read_characters": 4147,
+    "related_triggers": 2,
+    "claim_table_columns": 3,
+    "claim_table_constraints": 3,
+    "claim_table_indexes": 1,
+    "claim_row_count_aggregate": 2,
+    "auth_claim_calls_cumulative": 8,
+    "source_consumer_dev_main_blob": "30f5e6a90a4e59a9c5cc6bea6ef3d7642d6028c1",
+    "source_consumer_release_main_blob": "28c6f6026d0ff1e6fd6575d3813b76c06a29bb47",
+    "legacy_claim_rpc": "LOCKED_COMPATIBILITY_RETAIN",
+    "nov8_locked_ui_repeat_until_first_shot": true,
+    "client_wrapper": "POTENTIAL_UNUSED_CURRENT_UI_ONLY_FULL_DEPENDENCY_NOT_PROVEN",
+    "decaf_trigger": "ACTIVE_FIRST_APPROVAL",
+    "recommendation_trigger": "PREVIOUS_R340_DEVELOPMENT_ONLY_FIX_TESTING",
+    "new_verified_bug": false,
+    "first_time_provider_words": 0,
+    "issue267_source_lines": 0,
+    "app_code_test_ci_writes": 0,
+    "prod_writes": 0,
+    "ci": "NOT_RUN_DOCS_ONLY",
+    "audit": "IN_PROGRESS",
+    "next": "First new/changed or genuinely unreviewed provider definition and proof of broader first-style client wrapper consumers before any JS-only cleanup; no SQL/RPC/table removal per owner Locked supersession"
+  },
+  "provider_native_import_family_integrity_run352": {
+    "run": "R352",
+    "date_utc": "2026-11-19",
+    "receipt": "docs/audits/issue509-r352-native-import-family-integrity-20261119.json",
+    "receipt_commit": "8c3e11479ae425154e54c4ef3216e105cdf987f7",
+    "journal_commit": "8c2fb19de9cb37ba21bef37347f6b09c94070f39",
+    "preflight_development_sha": "3bd7a865e46a3eb099f5041954f05fee50a7d81c",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "provider_ref": "azviqqejypsefzilgonr",
+    "full_sql_definitions": 7,
+    "sql_definition_chars": 25892,
+    "live_source_md5": {
+      "private.apply_prototype_import": "2af6a48d0fe80841fcc27c1f1d5532e3",
+      "private.import_operation": "b684a6af862302d9d4bb7c212208f5e0",
+      "private.import_id": "d8dacedebb77db30037b10ee1bac97aa",
+      "private.refresh_personal_family": "e6a15e6de21f56345479574cc575cf95"
+    },
+    "composite_family_owner_coffee_style_fk_validated": 2,
+    "live_cross_family_mismatch_aggregate": 0,
+    "import_batches_aggregate": 1,
+    "legacy_shots_aggregate": 14,
+    "existing_source_test_blob": "9dfa08baf6e69f88a3524596e134e4112c753555",
+    "cumulative_authenticated_import_calls": 4,
+    "mean_exec_ms": 166.85,
+    "max_exec_ms": 362.8,
+    "temp_blocks": 0,
+    "new_confirmed_bug": false,
+    "new_source_fix": false,
+    "first_time_provider_word_credit": 0,
+    "issue267_source_line_credit": 0,
+    "source_test_ci_changes": 0,
+    "ci": "NOT_RUN_DOCS_ONLY",
+    "provider_production_writes": 0,
+    "queue": "TESTING_UNCHANGED",
+    "baseline": "IN_PROGRESS",
+    "next": "private.dic_admin_records(p_kind text,p_offset integer,p_limit integer) full source character 1; Admin pagination client/planner semantics unless provider changes. Hosted/compiled UNVERIFIED."
+  },
+  "provider_admin_pagination_contract_run353": {
+    "run": "R353",
+    "receipt": "docs/audits/issue509-r353-admin-pagination-consumer-20261119.json",
+    "preflight_development_sha": "152e55eb1b88fa6631ec79f2e7c7be93ed71ba73",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "complete_sources": [
+      {
+        "signature": "private.dic_admin_records(text,integer,integer)",
+        "source_md5": "6976e717b7c5cbb34d8e3c41bc2aeba2",
+        "characters": 5386,
+        "range": "1-5386"
+      },
+      {
+        "signature": "dic_admin_records(text,integer,integer)",
+        "source_md5": "bfdf280c85fdf95c72bd2f7f545659b1",
+        "characters": 266,
+        "range": "1-266"
+      },
+      {
+        "signature": "private.dic_admin_search_records(text,text,integer,integer)",
+        "source_md5": "253a3fe2fe1e1e65f61b5a71a2063fdd",
+        "characters": 7574,
+        "range": "1-7574"
+      },
+      {
+        "signature": "dic_admin_search_records(text,text,integer,integer)",
+        "source_md5": "de9c08308b98e3de0d7d1db084dae375",
+        "characters": 302,
+        "range": "1-302"
+      },
+      {
+        "signature": "private.dic_admin_signup_requests(integer,integer)",
+        "source_md5": "663c13571f70bb29b6a4351e8e6a45eb",
+        "characters": 1411,
+        "range": "1-1411"
+      },
+      {
+        "signature": "dic_admin_signup_requests(integer,integer)",
+        "source_md5": "ab3a82cfe5d926fa485c39b153aa701e",
+        "characters": 262,
+        "range": "1-262"
+      }
+    ],
+    "source_consumers": {
+      "site/admin/main.js": "f0c158ae7b57277ab99551ce7bca94438bce6919",
+      "site/admin/view.js": "f2a80e85fc9820814b2e175119424e863a75105c",
+      "site/admin/records.js": "cba19eb6448b42f158134d09e6d39a16127eb717"
+    },
+    "first_time_provider_words": 0,
+    "issue267_lines": 0,
+    "production_writes": 0,
+    "source_test_ci_writes": 0,
+    "verified_new_defect": false,
+    "baseline": "IN_PROGRESS",
+    "next": "private.dic_admin_access_overview() complete definition starting at character 1: compare account overview/paging fallback and released UI, then first newly changed/unreviewed provider object"
+  },
+  "provider_admin_recovery_search_run354": {
+    "preflight_sha": "54247af05c93268b8421e4e562a89fa6286b5101",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "receipt": "docs/audits/issue509-r354-admin-search-recovery-20261119.json",
+    "functions": [
+      {
+        "signature": "private.dic_admin_access_overview()",
+        "md5": "e377ac910af0115040ad8f881cb01bfc",
+        "characters": 1432,
+        "range": "1-1432"
+      },
+      {
+        "signature": "private.dic_admin_account_delete_finish(p_operation_id uuid, p_actor_id uuid)",
+        "md5": "51cd64deed985a9ddf622926b8784a84",
+        "characters": 2492,
+        "range": "1-2492"
+      },
+      {
+        "signature": "private.dic_admin_account_delete_prepare(p_operation_id uuid, p_actor_id uuid)",
+        "md5": "6e7e0589cbda1bc5023771724ce8b77f",
+        "characters": 3899,
+        "range": "1-3899"
+      },
+      {
+        "signature": "private.dic_admin_account_delete_request(p_member_id uuid, p_community_mode text, p_expected_impact jsonb)",
+        "md5": "b91e425cd94b4c749b28adf8fd0b96a1",
+        "characters": 1949,
+        "range": "1-1949"
+      },
+      {
+        "signature": "private.dic_admin_dashboard_read()",
+        "md5": "5fa33bbe05e8408c1c2fe1b82d73a8ee",
+        "characters": 2901,
+        "range": "1-2901"
+      },
+      {
+        "signature": "public.dic_admin_access_overview()",
+        "md5": "15ea6e60d84362b6fa32f9f40f567df8",
+        "characters": 192,
+        "range": "1-192"
+      },
+      {
+        "signature": "public.dic_admin_account_delete_finish(p_operation_id uuid, p_actor_id uuid)",
+        "md5": "2fc16586443318c1594d1939544920dd",
+        "characters": 257,
+        "range": "1-257"
+      },
+      {
+        "signature": "public.dic_admin_account_delete_prepare(p_operation_id uuid, p_actor_id uuid)",
+        "md5": "a0c67fbfbbfd122a8e16596c79333092",
+        "characters": 259,
+        "range": "1-259"
+      },
+      {
+        "signature": "public.dic_admin_account_delete_request(p_member_id uuid, p_community_mode text, p_expected_impact jsonb)",
+        "md5": "779f19212d19ebbfb88f2a859fd92c21",
+        "characters": 308,
+        "range": "1-308"
+      }
+    ],
+    "client_development_blob": "f0c158ae7b57277ab99551ce7bca94438bce6919",
+    "release_client_blob": "f0c158ae7b57277ab99551ce7bca94438bce6919",
+    "source_correction": "Admin search no longer suppresses pending account deletion recovery",
+    "provider_writes": 0,
+    "first_time_provider_words": 0,
+    "issue267_lines": 0,
+    "state": "TESTING",
+    "search_error_fallback_masked": true
+  },
+  "provider_mutation_workspace_semantic_run355": {
+    "run": "R355",
+    "receipt": "docs/audits/issue509-r355-workspace-mutation-provider-semantic-20261119.json",
+    "preflight_development_sha": "32741c1809bf76b7eca69b09d242deca935fdb2d",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "full_sql_chars": 20725,
+    "reviewed_sources": 5,
+    "sql_hashes": {
+      "private_mutate": "d1050c2ee3b2896c6fbd8b90bdba9052",
+      "private_mutate_workspace": "f3eb1b5086e4396625f3efa38f4c9165",
+      "private_rename_setup": "d5efbc70d20f75d6e3aeea4b64ab078b",
+      "private_required_revision": "d14d1f80af2c73f953a37818f8488ca0",
+      "public_dic_apply_client_change": "da434f17a21539d72ebb8fc04c13f214"
+    },
+    "archived_setups": 0,
+    "hidden_library_entries": 0,
+    "workspace_hidden_archived_links": 0,
+    "confirmed_new_bug": false,
+    "latent_inactive_record_guard_contract": "UNVERIFIED_NO_AFFECTED_ROWS_NO_UNAPPROVED_FIX",
+    "first_time_provider_words": 0,
+    "issue267_line_credit": 0,
+    "merged_fix_sha": "5d99767db18ead26f7d9b0e358a5b6a7dfc8f206",
+    "pr": 3384,
+    "pr_head_checks": [
+      44475620395,
+      44475620379,
+      44475620356,
+      44475620466,
+      44475620450
+    ],
+    "merged_push_ci": "UNVERIFIED",
+    "queue": "TESTING",
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Admin merged-source CI; verify hidden/archived offline mutation contract before any source patch; next genuinely unseen/changed live definition."
+  },
+  "provider_immutable_shot_provenance_ci_run356": {
+    "run": "R356",
+    "receipt_path": "docs/audits/issue509-r356-shot-provenance-client-merged-ci-20261119.json",
+    "preflight_development_sha": "bfe2b0eb9356af9dc7d2f105354c583e0ad51d6d",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "live_full_functions": 3,
+    "complete_source_chars": 4188,
+    "source_md5": [
+      "90c66b59638b48d360e9fd949db63707",
+      "9700d82ba097c7eba83b76135acbdac1",
+      "037d248b67cc3e8490c1689d3200990f"
+    ],
+    "live_27_snapshots_with_five_keys": 27,
+    "nonlegacy_mismatch_counts": 0,
+    "hidden_archived_cohorts": 0,
+    "first_time_provider_word_credit": 0,
+    "issue267_line_credit": 0,
+    "merged_fix_sha": "5d99767db18ead26f7d9b0e358a5b6a7dfc8f206",
+    "merged_push_success": [
+      44482734154,
+      44482734247,
+      44482734209,
+      44482734345
+    ],
+    "queue": "TESTING_NOT_READY",
+    "baseline": "IN_PROGRESS",
+    "provider_writes": 0,
+    "next": "First changed/unreviewed live provider definition or isolated historically archived setup UI behavior proof"
+  },
+  "provider_archived_setup_crosslayer_run357": {
+    "run": "R357",
+    "project_ref": "azviqqejypsefzilgonr",
+    "preflight_development_sha": "2bb1a0f85cf9c815294533e44531b901c06cf659",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "scope": "Archived setup selector/server mutation eligibility, immutable historical imports; read-only provider and exact Git source",
+    "provider": {
+      "status": "ACTIVE_HEALTHY",
+      "postgres": "17.11.0.003",
+      "applied_migrations": 69,
+      "edge_deployments": 5,
+      "production_writes": 0
+    },
+    "current_app_source_sha": "2bb1a0f85cf9c815294533e44531b901c06cf659",
+    "main_sha": "0bace905e6436eb67afd22db61d747539a8dab11",
+    "release_sha": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5",
+    "complete_rereviewed_sql": [
+      {
+        "signature": "private.mutate_workspace(uuid,text,jsonb)",
+        "chars": 6384,
+        "md5": "f3eb1b5086e4396625f3efa38f4c9165",
+        "range": "1-6384",
+        "disposition": "select_setup rejects archived setups; set_style and make_current enforce owner/version but not archived_at; no affected rows; already R355 full-covered"
+      },
+      {
+        "signature": "private.rename_setup(uuid,jsonb)",
+        "chars": 1792,
+        "md5": "d5efbc70d20f75d6e3aeea4b64ab078b",
+        "range": "1-1792",
+        "disposition": "rename_setup rejects archived setups; already R355 full-covered"
+      },
+      {
+        "signature": "private.read_personal_state()",
+        "chars": 2339,
+        "md5": "037d248b67cc3e8490c1689d3200990f",
+        "range": "1-2339",
+        "disposition": "deliberately returns archived setup rows for historical state; already R356 full-covered"
+      }
+    ],
+    "other_review": {
+      "signature": "private.apply_prototype_import(uuid,jsonb)",
+      "chars": 16445,
+      "md5": "2af6a48d0fe80841fcc27c1f1d5532e3",
+      "coverage": "relevant setup/archive/import branches inspected, NOT new complete-source credit",
+      "observation": "one fresh imported setup inserted without archived_at; does not create archived setup state"
+    },
+    "live_setup_ddl": {
+      "archived_at": "nullable timestamptz",
+      "triggers": [
+        "bump_revision BEFORE UPDATE"
+      ],
+      "constraints": [
+        "setup_active_version_fk",
+        "setups_name_check",
+        "setups_owner_id_fkey",
+        "setups_owner_id_id_key",
+        "setups_pkey",
+        "setups_revision_check"
+      ]
+    },
+    "live_aggregate_counts": {
+      "setups_total": 4,
+      "setups_archived": 0,
+      "active_preference_archived": 0,
+      "archived_workspace_coffees": 0,
+      "archived_setup_shots": 0,
+      "hidden_entries": 0
+    },
+    "source_evidence": [
+      {
+        "path": "site/cloud/mapping.js",
+        "dev_blob": "acbfad05f6c197f3884054f8709ea5bc2e7c9ad0",
+        "release_blob": "acbfad05f6c197f3884054f8709ea5bc2e7c9ad0",
+        "line": 31,
+        "assessment": "Hydrates all setups but does not carry archived_at into local setup state"
+      },
+      {
+        "path": "site/cloud/main.js",
+        "dev_blob": "30f5e6a90a4e59a9c5cc6bea6ef3d7642d6028c1",
+        "release_blob": "28c6f6026d0ff1e6fd6575d3813b76c06a29bb47",
+        "dev_line": 1070,
+        "release_line": 1058,
+        "assessment": "Both published and development switch controls list all hydrated setups, with Use and Rename actions"
+      }
+    ],
+    "verdict": "DORMANT_POTENTIAL_CLIENT_SERVER_MISMATCH_NOT_CONFIRMED_LIVE_BUG",
+    "semantic_result": "An archived setup returned by personal state would appear selectable/renameable while two server mutations deny it. No archived records currently exist; current approved importer creates a nonarchived setup; no current reachable archive producer was proved. Do not remove archived history, add speculative SQL behavior, or claim impacted members. Confirm upstream archive producer and synthetic UI acceptance before any patch.",
+    "coverage": {
+      "first_time_provider_source_words": 0,
+      "issue267_original_code_line_credit": 0,
+      "all_provider_baseline": "IN_PROGRESS",
+      "unverified": [
+        "actual historical archived UI scenario",
+        "external/direct SQL writers",
+        "provider console/hosted Auth settings"
+      ]
+    },
+    "tests": "NOT_RUN_DOCS_ONLY; no new CI PASS",
+    "release_queue": "EXISTING_509_ITEMS_TESTING_UNCHANGED",
+    "no_publish": true,
+    "next": "First genuinely new/changed/unreviewed provider definition or reproducible active behavior defect; archive pathway only if supported data producer emerges; do not remove historical setups or alter production."
+  },
+  "provider_admin_shot_delete_family_lifecycle_run358": {
+    "preflight_development_sha": "8a45f21cbbd4526dade5ae12d7fe450ca6c551be",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "provider_ref": "azviqqejypsefzilgonr",
+    "receipt_path": "docs/audits/issue509-r358-admin-shot-family-lifecycle-20261119.json",
+    "live_function_bodies_complete": 6,
+    "first_time_word_credit": 0,
+    "issue267_line_credit": 0,
+    "read_only_current_stale_family_aggregate": {
+      "stale_families": 1,
+      "total": 6,
+      "stored": 6,
+      "actual": 4,
+      "cause": "UNVERIFIED"
+    },
+    "source_migration": "supabase/migrations/20261119105000_dic_admin_shot_delete_family_refresh.sql",
+    "source_test": "supabase/tests/admin_shot_delete_family_refresh.sql",
+    "source_runner": "scripts/audit/isolated-sql-regression.sh",
+    "status": "TESTING_EXACT_CI_PENDING_NOT_DEPLOYED",
+    "provider_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Exact candidate PG17, source-bound CI and safe nonforce merge; separately assess existing stale family without production writes."
+  },
+  "provider_admin_shot_delete_family_merge_run359": {
+    "preflight_development_sha": "8a45f21cbbd4526dade5ae12d7fe450ca6c551be",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "merged_sha": "9b97754c7a80d988947657978ec7cad1af9ed3ae",
+    "receipt": "docs/audits/issue509-r359-admin-shot-delete-merge-20261119.json",
+    "pr": 3399,
+    "full_sql_sources": {
+      "private_dic_admin_account_delete_finish": {
+        "md5": "51cd64deed985a9ddf622926b8784a84",
+        "characters": 2492,
+        "range": "1-end"
+      },
+      "private_dic_admin_account_delete_impact": {
+        "md5": "a20e399d6c87c60be0661c80a17728d4",
+        "characters": 1588,
+        "range": "1-end"
+      }
+    },
+    "new_sql_words": 0,
+    "issue267_line_credit": 0,
+    "foreign_key_semantics": "Account owner delete cascade removes both shot and family, other nonshot paths preserved",
+    "ci": "PENDING_MERGED",
+    "missing_ci": [
+      "validate"
+    ],
+    "release_queue": "TESTING",
+    "provider_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Separate safe stale family reconciliation and new/changed provider definitions"
+  },
+  "provider_admin_shot_delete_family_merge_ci_run359b": {
+    "preflight_development_sha": "8a45f21cbbd4526dade5ae12d7fe450ca6c551be",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "source_merged_sha": "9b97754c7a80d988947657978ec7cad1af9ed3ae",
+    "receipt": "docs/audits/issue509-r359b-admin-shot-merge-ci-20261119.json",
+    "ci_jobs_pass": [
+      "approval",
+      "sql",
+      "validate",
+      "cloud-tests",
+      "mobile-browser-qa",
+      "python-audit"
+    ],
+    "issue33_selected": "FAILED_UNRELATED",
+    "merged_source_status": "VERIFIED",
+    "release_status": "TESTING_NOT_READY",
+    "provider_writes": 0,
+    "first_time_sql_source_word_credit": 0,
+    "issue267_source_line_credit": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "New/changed provider definitions, separately prove safe historical stale count repair"
+  },
+  "provider_stale_family_reconciliation_run360": {
+    "families": 6,
+    "stale_count": 1,
+    "stored_count": 6,
+    "eligible_count": 4,
+    "evidence_state_mismatch": 0,
+    "historical_cause": "UNVERIFIED",
+    "preflight_development_sha": "eac9b0b803a7209ddfd836369ad7e26f2afa1896",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "provider_sql_source": {
+      "name": "private.refresh_personal_family(uuid)",
+      "characters": 2134,
+      "md5": "e6a15e6de21f56345479574cc575cf95",
+      "range": "1-end",
+      "review": "Recalculate eligible green unhidden shot evidence; derived 0-count retired, 1 candidate, >=2 personally_confirmed; no additional confirmed defect"
+    },
+    "scope": "future one-shot derived statistics only",
+    "migration": "supabase/migrations/20261119120000_dic_reconcile_stale_personal_family_stats.sql",
+    "migration_git_blob": "8b66a860e6dba420c447d0c9de13d7e69e53879c",
+    "test_pre": "supabase/tests/family_statistics_historical_reconcile_pre.sql",
+    "test_post": "supabase/tests/family_statistics_historical_reconcile_post.sql",
+    "provider_writes": 0,
+    "first_time_source_credit": 0,
+    "status": "TESTING_NO_CI_YET",
+    "exact_next": "Verify PR-head source-isolated PG17 and check new provider metadata/definitions"
+  },
+  "provider_stale_family_reconciliation_run360a": {
+    "preflight_development_sha": "5eca094cf069b820e9cbfd927f7dc6469e2e84fa",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "previous_head": "df7679becf8eab421327932fccc7b80403afdf9b",
+    "receipt": "docs/audits/issue509-r360a-sql-dispatch-coverage-repair-20261119.json",
+    "sql_ci_44518244434": "SUCCESS",
+    "node_44518244549": "FAILED_FIXTURE_EXPECTATION",
+    "new_head": "PENDING",
+    "production_writes": 0
+  },
+  "provider_complete_family_statistics_run361": {
+    "run": 361,
+    "preflight_development_sha": "15895eb1c5223d183c45af334109566329aff682",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "project_ref": "azviqqejypsefzilgonr",
+    "scope": "Full derived-field equality comparison to complete live estimator across all six current family aggregates; no individual user records",
+    "receipt": "docs/audits/issue509-r361-complete-family-derived-statistics-20261119.json",
+    "families": 6,
+    "count_mismatch": 1,
+    "full_stats_mismatch": 6,
+    "extra_count_correct_mismatch": 5,
+    "source_migration": "supabase/migrations/20261119122000_dic_reconcile_all_personal_family_derived_stats.sql",
+    "fixture": "supabase/tests/family_statistics_complete_reconcile_post.sql",
+    "source_status": "PR_CANDIDATE_TESTING",
+    "first_time_provider_word_credit": 0,
+    "issue267_line_credit": 0,
+    "provider_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "exact_next": "Verify exact-source tests and nonforce merge before any READY claim"
   }
 }

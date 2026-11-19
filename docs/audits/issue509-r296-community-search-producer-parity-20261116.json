@@ -1,0 +1,24 @@
+{
+  "issue": 509,
+  "run": "R296",
+  "date_utc": "2026-11-16",
+  "project": "azviqqejypsefzilgonr",
+  "development_preflight_sha": "994ce316683a5b0678524749e8dcac575955c612",
+  "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "source": "Full live public.dic_search_community_shots definition 3949 characters MD5 1124d2bbfec7f47d38d06ceb2e049fe4",
+  "stored": "Full applied provider migration version 20261023014715 4592 characters MD5 12ba67d185f584af4357673fe29be38e; identical original GitHub SQL blob e1155cb019adf4b66b460f413aaae107c2d3fa40",
+  "defect": "Live count includes coffee.producer but its paged-row filter omits it; producer-only search returns count>0 and empty page despite original applied migration having matching predicates.",
+  "proof": {
+    "synthetic_sql_result": "total_matches=true, page_matches=false; corrected deterministic sample after first sample-setup typo",
+    "private_data_read": false
+  },
+  "fix": "supabase/migrations/20261116224000_dic_community_search_producer_parity.sql",
+  "regression": "supabase/tests/community_quality_integrity.sql",
+  "regression_expectation": "Existing isolated PostgreSQL 17 dic_ci verified samples: Farm One 7 shots; Farm Two 1 shot; both total and rows match",
+  "status": "TESTING_PENDING_CI",
+  "first_time_semantic_word_credit": 0,
+  "baseline": "IN_PROGRESS",
+  "provider_writes": 0,
+  "production_release_authorized": false,
+  "next": "Run exact-source PR-head isolated SQL/Node22 CI, repair if failed; safely merge and reconcile queue; no production changes."
+}

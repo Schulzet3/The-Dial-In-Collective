@@ -1,0 +1,109 @@
+{
+  "run": "R345b",
+  "date_utc": "2026-11-18",
+  "issue": 509,
+  "preflight_initial_development_sha": "9ef9e69b8586313e1efe38fc9680766d1e67ea14",
+  "preflight_live_recheck_development_sha": "e958c3acace0d908a4464b5cf95c0405510a1c8b",
+  "preflight_file_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+  "preflight_content_verified_again": true,
+  "project_ref": "azviqqejypsefzilgonr",
+  "source_pr": 3313,
+  "source_pr_head": "355163e3b312497fcf5d44f4cb150b075f3e2f4b",
+  "development_merged_sha": "e958c3acace0d908a4464b5cf95c0405510a1c8b",
+  "source_blob_readback_all_seven_identical": true,
+  "source_gate_changes": "Only two NULL normalized name/roaster identity checks in complete private.dic_admin_edit_record; new migration and rollback-only regression test; no historical migration rewrite",
+  "pr_head_ci": [
+    {
+      "name": "isolated_pg17_jwt",
+      "run": 44405688486,
+      "conclusion": "SUCCESS",
+      "focused_test": "PASS punctuation-only name/roaster refused, valid admin edits/audits retained, no personal shot changes; rollback"
+    },
+    {
+      "name": "node22_lint_build",
+      "run": 44405688429,
+      "conclusion": "SUCCESS"
+    },
+    {
+      "name": "cloud_browser",
+      "run": 44405688319,
+      "conclusion": "SUCCESS"
+    },
+    {
+      "name": "python",
+      "run": 44405688229,
+      "conclusion": "SUCCESS"
+    },
+    {
+      "name": "approval",
+      "run": 44405688202,
+      "conclusion": "SUCCESS"
+    },
+    {
+      "name": "issue33_selected241",
+      "run": 44405688298,
+      "conclusion": "SUCCESS"
+    },
+    {
+      "name": "issue33_selected251",
+      "run": 44405688390,
+      "conclusion": "SUCCESS"
+    },
+    {
+      "name": "frozen_corpus",
+      "run": 44405688303,
+      "conclusion": "SKIPPED_NOT_PASS"
+    }
+  ],
+  "merged_push_ci_snapshot": [
+    {
+      "name": "isolated_pg17",
+      "run": 44406406158,
+      "conclusion": "SUCCESS"
+    },
+    {
+      "name": "python",
+      "run": 44406406077,
+      "conclusion": "SUCCESS"
+    },
+    {
+      "name": "approval",
+      "run": 44406406187,
+      "conclusion": "SUCCESS"
+    },
+    {
+      "name": "issue33_exact_selected_241",
+      "run": 44406406174,
+      "conclusion": "FAILURE",
+      "reason": "required_official_source_not_fetched",
+      "html_bytes": 0,
+      "synthetic_tests": "16/16 PASS",
+      "issue_ownership": "#33"
+    },
+    {
+      "name": "node22",
+      "run": 44406406167,
+      "conclusion": "IN_PROGRESS_AT_CHECKPOINT"
+    },
+    {
+      "name": "cloud_browser",
+      "run": 44406406236,
+      "conclusion": "IN_PROGRESS_AT_CHECKPOINT"
+    },
+    {
+      "name": "public_source_probe",
+      "run": 44406406046,
+      "conclusion": "SKIPPED_NOT_PASS"
+    }
+  ],
+  "finding_status": "REPRODUCED_FIXED_IN_DEVELOPMENT_ONLY",
+  "release_queue": "DIC-Q-509-admin-normalized-identity",
+  "queue_state": "TESTING",
+  "baseline": "IN_PROGRESS",
+  "security_no_regression": "PR-head and merged isolated SQL/JWT/approval PASS; no hosted admin acceptance",
+  "production_writes": 0,
+  "no_publish": true,
+  "first_time_provider_word_credit": 0,
+  "issue267_line_credit": 0,
+  "next": "Check full merged-push CI; coordinate reproducible #33 source-fetch UNAVAILABLE without touching #33 ownership; then move only to release acceptance TESTING/READY with all approvals; no deploy."
+}

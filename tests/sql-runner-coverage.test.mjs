@@ -40,33 +40,93 @@ exit 99
     GITHUB_RUN_ID:'dispatch-test',GITHUB_RUN_ATTEMPT:'1',DIC_SQL_DISPATCH_TRACE:trace}
   });
   const migrations=files('supabase/migrations'),allSuites=files('supabase/tests');
-  // Two independently unfinished #509 regressions are meaningful ONLY with
-  // their corresponding migration. Never certify absent schema as tested.
+  // SQL regressions are applicable only if the exact paired migration was
+  // staged. A NOT_APPLICABLE record is NOT PASS and must be explicit.
   const migrationBoundSuites={
-   'supabase/tests/recommendation_context_null_controls.sql':
-     'supabase/migrations/20261114115000_dic_recommendation_context_null_control_guard.sql',
-   'supabase/tests/pending_coffee_null_guards.sql':
-     'supabase/migrations/20261114135500_dic_promote_pending_coffee_null_flags.sql'
+   'supabase/tests/recommendation_context_null_controls.sql':[
+    '20261114115000_dic_recommendation_context_null_control_guard.sql','recommendation_context_null_controls'],
+   'supabase/tests/pending_coffee_null_guards.sql':[
+    '20261114135500_dic_promote_pending_coffee_null_flags.sql','pending_coffee_null_guards'],
+   'supabase/tests/member_approval_finish_null_receipts.sql':[
+    '20261114195000_dic_member_approval_finish_null_receipts.sql','member_approval_finish_null_receipts'],
+   'supabase/tests/pending_canonical_name_response.sql':[
+    '20261116151600_dic_pending_canonical_name_response.sql','pending_canonical_name_response'],
+   'supabase/tests/import_additional_credential_keys.sql':[
+    '20261116210000_dic_import_additional_credential_keys.sql','import_additional_credential_keys'],
+   'supabase/tests/coffee_confirm_null_name_guard.sql':[
+    '20261118113500_dic_confirm_coffee_null_name_guard.sql','coffee_confirm_null_name_guard'],
+   'supabase/tests/coffee_first_entry_no_self_alias.sql':[
+    '20261118114600_dic_first_entry_no_self_alias.sql','coffee_first_entry_no_self_alias'],
+   'supabase/tests/coffee_historical_alias_suggestion_confirm.sql':[
+    '20261118140000_dic_coffee_alias_suggestion_confirm.sql','historical alias'],
+   'supabase/tests/legacy_private_hide_shot_retirement.sql':[
+    '20261118164500_dic_remove_legacy_private_hide_shot_handler.sql','legacy internal Hide Shot retirement'],
+   'supabase/tests/recommendation_unique_controls.sql':[
+    '20261118180000_dic_recommendation_unique_controls.sql','recommendation unique-controls'],
+   'supabase/tests/community_outlier_null_revision.sql':[
+    '20261118181500_dic_community_outlier_null_revision_guard.sql','outlier NULL revision'],
+   'supabase/tests/admin_edit_normalized_identity_guard.sql':[
+    '20261118214500_dic_admin_edit_normalized_identity_guard.sql','admin normalized identity guard']
   };
-  const suites=allSuites.filter(path=>
-    !migrationBoundSuites[path]||migrations.includes(migrationBoundSuites[path]));
-  for(const [suite,migration] of Object.entries(migrationBoundSuites)){
-   const suiteName=suite.split('/').at(-1).slice(0,-4);
-   assert.equal(
-    output.includes('NOT_APPLICABLE: #509 '+suiteName+'; migration excluded'),
-    !migrations.includes(migration),
-    'source-bound SQL test must report NOT_APPLICABLE iff its migration is absent');
+  const applicable=path=>!Object.hasOwn(migrationBoundSuites,path)||
+    migrations.includes('supabase/migrations/'+migrationBoundSuites[path][0]);
+  // R360 streams the literal migration between two rollback-only fixture
+  // halves as ONE psql transaction. These halves must not be executed alone.
+  const reconcileMigration='supabase/migrations/20261119120000_dic_reconcile_stale_personal_family_stats.sql';
+  const reconcileParts=[
+   'supabase/tests/family_statistics_historical_reconcile_pre.sql',
+   reconcileMigration,
+   'supabase/tests/family_statistics_historical_reconcile_post.sql'
+  ];
+  const stagedReconcile=migrations.includes(reconcileMigration);
+  const completeMigration='supabase/migrations/20261119122000_dic_reconcile_all_personal_family_derived_stats.sql';
+  const completeParts=[reconcileParts[0],completeMigration,
+    'supabase/tests/family_statistics_complete_reconcile_post.sql'];
+  const stagedComplete=migrations.includes(completeMigration);
+  const standaloneParts=new Set([reconcileParts[0],reconcileParts[2],completeParts[2]]);
+  const suites=allSuites.filter(path=>!standaloneParts.has(path)).filter(applicable);
+  for(const [suite,[migration,skipLabel]] of Object.entries(migrationBoundSuites)){
+   const exists=migrations.includes('supabase/migrations/'+migration);
+   assert.equal(output.includes('NOT_APPLICABLE: #509 '+skipLabel+'; migration excluded'),!exists,
+    suite+' must be NOT_APPLICABLE iff its exact schema migration is absent');
   }
   const expected=['tests/sql/bootstrap.sql',...migrations,'tests/sql/owner-fixture.sql',...suites];
   const byHash=new Map(expected.map(path=>[digest(path),path]));
-  assert.equal(byHash.size,expected.length,'SQL fixtures must have distinct traceable content');
+  const streamToken='R360_SYNTHETIC_STALE_RECONCILIATION_TRANSACTION';
+  if(stagedReconcile){
+   const bytes=Buffer.concat(reconcileParts.map(path=>readFileSync(join(root,path))));
+   byHash.set(createHash('sha256').update(bytes).digest('hex'),streamToken);
+  }
+  const completeToken='R361_COMPLETE_DERIVED_STATISTICS_TRANSACTION';
+  if(stagedComplete){
+   const bytes=Buffer.concat(completeParts.map(path=>readFileSync(join(root,path))));
+   byHash.set(createHash('sha256').update(bytes).digest('hex'),completeToken);
+  }
+  assert.equal(byHash.size,expected.length+(stagedReconcile?1:0)+(stagedComplete?1:0),
+   'SQL fixtures and bundled R360/R361 transactions must have distinct traceable content');
   const observed=readFileSync(trace,'utf8').trim().split('\n').map(line=>{
    const hash=line.split(/\s+/)[0];
    assert.ok(byHash.has(hash),'runner dispatched an unexpected SQL file');
    return byHash.get(hash);
   });
-  assert.deepEqual(observed.slice().sort(),expected.slice().sort(),
-   'every migration and regression must be dispatched exactly once');
+  assert.deepEqual(observed.filter(path=>path!==streamToken&&path!==completeToken).slice().sort(),expected.slice().sort(),
+   'every migration and standalone regression must be dispatched exactly once');
+  assert.equal(observed.filter(path=>path===streamToken).length,stagedReconcile?1:0,
+   'the exact R360 migration+rollback fixture must run once iff staged');
+  if(stagedReconcile){
+   const i=observed.indexOf(reconcileMigration);
+   assert.ok(i>0,'R360 must be applied after historical migrations');
+   assert.equal(observed[i-1],streamToken,
+    'the literal migration must be tested in its rollback fixture immediately before application');
+  }
+  assert.equal(observed.filter(path=>path===completeToken).length,stagedComplete?1:0,
+   'the exact R361 full-derived migration+rollback fixture must run once iff staged');
+  if(stagedComplete){
+   const i=observed.indexOf(completeMigration);
+   assert.ok(i>observed.indexOf(reconcileMigration),'R361 must apply after R360');
+   assert.equal(observed[i-1],completeToken,
+    'the literal R361 migration must be tested in rollback immediately before application');
+  }
   assert.equal(observed[0],'tests/sql/bootstrap.sql');
   for(let index=1;index<migrations.length;index++)
    assert.ok(observed.indexOf(migrations[index-1])<observed.indexOf(migrations[index]),

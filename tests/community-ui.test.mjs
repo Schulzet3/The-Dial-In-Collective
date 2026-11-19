@@ -26,7 +26,7 @@ test('Community page renders server-sanitized counts and measurements with progr
  assert.match(html,/49\.8g/);
  assert.match(html,/21\.1s/);
  assert.match(html,/1:2\.77/);
- assert.match(html,/1 qualifying shots · 1 contributors/);
+ assert.match(html,/1 qualifying shot · 1 contributor/);
  assert.match(html,/Early Data/);
  assert.match(html,/community-rating-grid/);
  assert.match(html,/aria-label="Filter Community shots by style"/);
@@ -34,6 +34,20 @@ test('Community page renders server-sanitized counts and measurements with progr
  const filtered=communityPage({shots:[row],total:1,style:'Traditional'});
  assert.match(filtered,/No loaded shots match this coffee/);
  assert.doesNotMatch(filtered,/<article class="community-card"/);
+});
+
+test('Community count labels use correct singular/plural for zero, one, and mixed counts',()=>{
+ const cases=[
+  [0,0,'0 qualifying shots · 0 contributors'],
+  [1,1,'1 qualifying shot · 1 contributor'],
+  [2,1,'2 qualifying shots · 1 contributor'],
+  [1,2,'1 qualifying shot · 2 contributors'],
+  [2,3,'2 qualifying shots · 3 contributors']
+ ];
+ for(const [shot_count,contributor_count,expected] of cases){
+  const html=communityPage({shots:[{...row,shot_count,contributor_count}],total:1});
+  assert.ok(html.includes(expected+' for this exact coffee and style.'),expected);
+ }
 });
 
 test('Community page safely escapes metadata strings and never outputs source identifiers',()=>{
@@ -159,8 +173,8 @@ test('two distinct canonical releases stay within one named coffee but never sha
  const sections=html.split('<section class="community-release"').slice(1);
  assert.equal((sections[0].match(/class="shot community-shot"/g)||[]).length,2);
  assert.equal((sections[1].match(/class="shot community-shot"/g)||[]).length,1);
- assert.match(sections[0],/2 qualifying shots · 1 contributors/);
- assert.match(sections[1],/1 qualifying shots · 1 contributors/);
+ assert.match(sections[0],/2 qualifying shots · 1 contributor/);
+ assert.match(sections[1],/1 qualifying shot · 1 contributor/);
  assert.doesNotMatch(html,/class="community-release"[^>]*\sopen[\s>]/);
  assert.doesNotMatch(html,/class="shot community-shot"[^>]*\sopen[\s>]/);
  assert.doesNotMatch(html,/data-id="a{64}"|data-id="b{64}"/);

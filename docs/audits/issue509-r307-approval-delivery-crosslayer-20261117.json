@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R307",
+  "date_utc": "2026-11-17",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "cebdd9e7b5c67521df54c6b0d95dda8e05fc7b6a",
+    "blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "immutable_bytes_sha1_verified": true
+  },
+  "branches": {
+    "main": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release_production": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+  },
+  "provider": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.11.0.003",
+    "read_only": true
+  },
+  "complete_sql_definitions": [
+    {
+      "signature": "private.dic_admin_review_signup(p_member_id uuid, p_action text, p_expected_state text)",
+      "definition_md5": "7e0d3bf10542694b60177fcfa9c6f7be",
+      "full_source_characters": 2073,
+      "direct_complete_sql_review": true,
+      "first_time_coverage": false
+    },
+    {
+      "signature": "private.dic_enqueue_member_approval_notices()",
+      "definition_md5": "36defca729c42b4ec35d4d2a4e1cfea5",
+      "full_source_characters": 460,
+      "direct_complete_sql_review": true,
+      "first_time_coverage": false
+    },
+    {
+      "signature": "private.session_status()",
+      "definition_md5": "0aa8e57bb4846aac7dd8e3b6c0cf690c",
+      "full_source_characters": 729,
+      "direct_complete_sql_review": true,
+      "first_time_coverage": false
+    },
+    {
+      "signature": "public.dic_admin_push_bootstrap_key(p_public_key text, p_private_key text)",
+      "definition_md5": "637217a555887f78d812deb347455e4d",
+      "full_source_characters": 931,
+      "direct_complete_sql_review": true,
+      "first_time_coverage": false
+    },
+    {
+      "signature": "public.dic_admin_push_claim_poll()",
+      "definition_md5": "e3bbf384effe7e29b5cffd89135c0666",
+      "full_source_characters": 414,
+      "direct_complete_sql_review": true,
+      "first_time_coverage": false
+    },
+    {
+      "signature": "public.dic_admin_push_runtime_keys()",
+      "definition_md5": "16fd1cc2a0cbf0110cd253e661c4cdef",
+      "full_source_characters": 427,
+      "direct_complete_sql_review": true,
+      "first_time_coverage": false
+    },
+    {
+      "signature": "public.dic_admin_push_snapshot()",
+      "definition_md5": "c6c2c674fa8358a3dd4946a3c0f9d8ed",
+      "full_source_characters": 1007,
+      "direct_complete_sql_review": true,
+      "first_time_coverage": false
+    },
+    {
+      "signature": "public.dic_member_approval_claim(p_channel text, p_limit integer)",
+      "definition_md5": "b0d1e8d2622852b6b930def5c8a171d9",
+      "full_source_characters": 1920,
+      "direct_complete_sql_review": true,
+      "first_time_coverage": false
+    },
+    {
+      "signature": "public.dic_member_approval_claim_poll()",
+      "definition_md5": "b94ddc2223993aa7685faf482d3871e4",
+      "full_source_characters": 335,
+      "direct_complete_sql_review": true,
+      "first_time_coverage": false
+    },
+    {
+      "signature": "public.dic_member_approval_finish(p_event_id bigint, p_channel text, p_claim_token uuid, p_outcome text)",
+      "definition_md5": "e92ba8e17ab274bcab1a564475d16f28",
+      "full_source_characters": 1003,
+      "direct_complete_sql_review": true,
+      "first_time_coverage": false
+    },
+    {
+      "signature": "public.dic_session_status()",
+      "definition_md5": "742e5bd0fc8544807886b514d95d6688",
+      "full_source_characters": 165,
+      "direct_complete_sql_review": true,
+      "first_time_coverage": false
+    }
+  ],
+  "complete_sql_chars": 9464,
+  "edge": {
+    "slug": "dic-member-approval-broker",
+    "version": 1,
+    "status": "ACTIVE",
+    "verify_jwt": false,
+    "core_mjs_chars": 11751,
+    "index_ts_chars": 178,
+    "release_core_blob": "1bc82c0c0f7e90bb86dd7da895c18f9c4e015c5a",
+    "deployed_core_exact_release_and_development": true,
+    "deployed_index_exact_release": true,
+    "source_review": "DIRECT_COMPLETE_BOTH_DEPLOYED_SOURCE_FILES"
+  },
+  "client_consumer": {
+    "approval_push_js_blob": "64862133a5395a15c203d5b2886a35af80792a65",
+    "member_ui_blob": "0a5274ec660ad435b499d58c9b5985ae400f37ea",
+    "rpc_adapter_blob": "08e1ac1f2610dca9fad162272c8e3c7ea56566a5",
+    "pending_identity_checks_read": true,
+    "site_visitor_browser_test": "NOT_RUN"
+  },
+  "live_metadata_aggregate": {
+    "member_approval_poll_gate_rows": 1,
+    "approval_deliveries_rows": 0,
+    "pending_deliveries": 0,
+    "expired_sending": 0,
+    "approval_push_subscriptions": 0,
+    "admin_push_runtime_rows": 1,
+    "admin_push_poll_gate_rows": 1,
+    "delivery_claim_index_exists": true,
+    "push_owner_index_exists": true
+  },
+  "synthetic_validation": {
+    "live_null_channel_or_outcome_in_old_receipt_predicate": "NULL_SQL_IF_DOES_NOT_REJECT",
+    "development_additive_migration_path": "supabase/migrations/20261114195000_dic_member_approval_finish_null_receipts.sql",
+    "development_migration_blob": "dea27e959e052b06bc032f4522d91312eea779eb",
+    "source_corrected_null_flags": "TRUE_REJECT",
+    "actual_live_delivery_attempt": "NOT_TESTED_0_QUEUED",
+    "classification": "PREVIOUSLY_KNOWN_TESTING_FIX_NOT_NEW_ALERT"
+  },
+  "findings": {
+    "new_reproducible_app_bug": 0,
+    "justified_deletions": 0,
+    "first_time_sql_word_credit": 0,
+    "new_integrated_fix": 0,
+    "provider_writes": 0,
+    "source_test_ci_writes": 0,
+    "production_publication": 0
+  },
+  "ci": {
+    "new_tests_or_ci": "NOT_RUN",
+    "existing_queue_status": "TESTING_UNCHANGED",
+    "hosted_auth_and_notification_delivery": "UNVERIFIED"
+  },
+  "baseline": "IN_PROGRESS",
+  "next": "First genuinely changed/new provider definition, then source-isolated existing #509 TESTING migrations and original #96 hosted acceptance; no repeat unchanged platform review"
+}
