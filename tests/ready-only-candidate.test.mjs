@@ -5,6 +5,7 @@ import {planReadyOnlyCandidate,validateReadyOnlyCandidate,CANDIDATE_KIND,
  CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH,REVIEWED_WORKFLOW_TEST,discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,assertCandidateRelativeImports,
  assertCandidateStaticNamedExports} from '../scripts/release/ready-only-candidate.mjs';
 import {classifyReleaseRisk} from '../scripts/release/release-reliability.mjs';
+import {deriveProactivePinPaths} from '../scripts/release/prevalidate-ready-queue.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40),D='d'.repeat(40);
 const one={id:'DIC-Q-100',issue:100,title:'READY card',state:'READY',
  owner_source:'https://github.com/example/repo/issues/100',merged_source_sha:D,
@@ -476,4 +477,35 @@ test('#2169 generator ESM exports pass frozen-source preflight, absent symbols s
  files['site/main.js']="import {rawElements,missingSymbol} from './html-scan.mjs';";
  assert.throws(()=>assertCandidateStaticNamedExports(['site/main.js'],args),
   /Missing static relative module export.*missingSymbol/);
+});
+
+
+test('#3347 proactive prepublish pin discovery preserves exact frozen byte proof',()=>{
+ const overlap={...unfinished,id:'DIC-Q-103',issue:103,scope_paths:['site/card.js']};
+ const queue={...q,items:[one,unfinished,overlap]};
+ const same=(sha,path)=>path==='site/card.js'?
+  (sha===D||sha===B?'100644:'+'f'.repeat(40):'100644:'+'a'.repeat(40)):null;
+ const data={developmentSourceSha:B,changedPaths:opts.developmentChangedPaths,
+  sourceObjectAt:same,isAncestor:ancestor};
+ assert.deepEqual(deriveProactivePinPaths(queue,data),[],
+  'a never-merged queue label does not demand an unnecessary candidate pin');
+ assert.deepEqual(deriveProactivePinPaths(queue,{...data,
+  sourceObjectAt:(sha,path)=>sha===B&&path==='site/card.js'?
+   '100644:'+'e'.repeat(40):same(sha,path)}),['site/card.js'],
+  'real later unready file bytes must retain reviewed READY isolation');
+ assert.deepEqual(deriveProactivePinPaths({...queue,
+  items:[one,unfinished,{...overlap,merged_source_sha:D}]},data),['site/card.js'],
+  'a genuinely merged competitor still needs explicit isolation review');
+ assert.throws(()=>deriveProactivePinPaths(queue,{...data,isAncestor:()=>{throw Error('missing object');}}),
+  /missing object/,'unverifiable ancestry fails closed');
+});
+test('#3347 prepublish probe is a nonpublisher and runs no five-CI or Netlify actions',()=>{
+ const source=readFileSync('scripts/release/prevalidate-ready-queue.mjs','utf8');
+ const workflow=readFileSync('.github/workflows/dic-ready-prepublish-source.yml','utf8');
+ assert.match(source,/createLocalRef:false/);
+ assert.doesNotMatch(source,/git\(\['push'/);
+ assert.doesNotMatch(source,/GenUI\.openUrl|netlify\.com\/api|publishSingleUse/);
+ assert.match(workflow,/contents: read/);
+ assert.match(workflow,/node scripts\/release\/prevalidate-ready-queue\.mjs/);
+ assert.doesNotMatch(workflow,/NETLIFY_AUTH_TOKEN|SUPABASE_SERVICE_ROLE|release\/production:refs\/heads/);
 });

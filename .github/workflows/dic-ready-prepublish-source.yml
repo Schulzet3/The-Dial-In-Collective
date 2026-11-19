@@ -1,0 +1,33 @@
+name: DIC proactive READY source isolation rehearsal (nonpublisher)
+# Owner #3347 explicitly permits nonpublishing proactive source preflight.
+# No production branch, release grant, database or Netlify provider access.
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/release/prevalidate-ready-queue.mjs
+      - .github/workflows/dic-ready-prepublish-source.yml
+permissions:
+  contents: read
+concurrency:
+  group: dic-ready-prepublish-source
+  cancel-in-progress: true
+jobs:
+  source-rehearsal:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Fetch exact development and published refs without provider writes
+        run: |
+          git fetch --no-tags origin '+refs/heads/development/backend-foundation:refs/remotes/origin/development/backend-foundation' '+refs/heads/release/production:refs/remotes/origin/release/production'
+      - name: Rehearse exact READY-only source isolation, exports and exclusions without staging a ref
+        run: node scripts/release/prevalidate-ready-queue.mjs
