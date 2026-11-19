@@ -1,0 +1,54 @@
+name: DIC Issue33 R332 original157 exact selected source
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r332-original157.yml
+      - scripts/audit/issue33-r332-original157-check.mjs
+      - tests/coffee-issue33-r332-original157.test.mjs
+      - docs/workstreams/ops-issue33-r332-original157-20261119.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r332-original157.yml
+      - scripts/audit/issue33-r332-original157-check.mjs
+      - tests/coffee-issue33-r332-original157.test.mjs
+      - docs/workstreams/ops-issue33-r332-original157-20261119.md
+permissions:
+  contents: read
+jobs:
+  original157-current-source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Nine focused positive and hostile parser/selected-source tests
+        run: node --test tests/coffee-issue33-r332-original157.test.mjs
+      - name: Bounded single selected official public HTTPS extraction
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '157'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r332
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Strict real raw HTML SHA selected H1 parser and UI afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r332
+          DIC_R332_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_R332_EVENT_SHA: ${{ github.sha }}
+          DIC_R332_VERIFY: '1'
+        run: node scripts/audit/issue33-r332-original157-check.mjs
+      - name: Ephemeral current official source diagnostics
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r332-original157
+          path: /tmp/dic33-r332/
+          retention-days: 1
+          if-no-files-found: warn
