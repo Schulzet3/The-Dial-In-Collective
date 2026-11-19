@@ -1,8 +1,8 @@
 // Owner-authorized nonpublishing READY pre-certification (#3347).
-// Dry-run stages only disposable local Git objects. The Actions token cannot
-// change workflow files or trigger downstream push CI. Hosted --push writes a
-// workflow-neutral TRANSPORT ref only; a separate authorized connector actor
-// must restore exact published workflow objects and start candidate CI.
+// Hosted receipt mode only builds/verifies ephemeral local Git candidate bytes.
+// No GitHub Actions token branch writes: GitHub rejects workflow changes and
+// GITHUB_TOKEN push does NOT trigger downstream candidate CI. An authorized
+// GitHub connector reconstructs a tree with identical Git mode/blob objects.
 // It never stages a production ref, creates a grant or contacts Netlify.
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
@@ -12,6 +12,7 @@ import {resolve,join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {stageReadyOnlyCandidate} from './stage-ready-only-candidate.mjs';
 import {deployableChangedPaths,queueSchemaErrors} from './release-queue.mjs';
+import {CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH} from './ready-only-candidate.mjs';
 const SHA=/^[a-f0-9]{40}$/;
 const REPO='Schulzet3/The-Dial-In-Collective';
 const sorted=xs=>[...new Set(xs)].sort();
@@ -80,10 +81,59 @@ export function neutralWorkflowTransportCommit({repoDir=process.cwd(),developmen
   return {transport_sha:commit,transport_tree_sha:tree};
  }finally{rmSync(tmp,{recursive:true,force:true});}
 }
+// Strict, reproducible no-write source receipt. Every changed blob and deletion
+// comes from the staging Git tree, not a guessed README or queue label.
+// Connector finalization must independently reconstruct and compare tree SHA.
+export function candidateTreeReceipt({repoDir=process.cwd(),developmentSourceSha,staged}={}){
+ if(!SHA.test(developmentSourceSha||'')||!SHA.test(staged?.candidate_sha||'')||
+   typeof staged?.manifest!=='object')throw Error('No verified staged source receipt');
+ const git=(args,{trim=true}={})=>{
+  const value=execFileSync('git',args,{cwd:repoDir,encoding:'utf8',
+   timeout:45000,maxBuffer:12*1024*1024,stdio:['ignore','pipe','pipe']});
+  return trim?value.trim():value;
+ };
+ const paths=git(['diff','--name-only','--no-renames',developmentSourceSha,
+  staged.candidate_sha]).split(/\r?\n/).filter(Boolean);
+ if(!paths.includes(CANDIDATE_RECEIPT_PATH)||
+    !paths.includes(CANDIDATE_JOURNAL_PATH)||new Set(paths).size!==paths.length)
+  throw Error('Candidate source receipt and journal not staged');
+ const delta_entries=paths.map(path=>{
+  if(!/^[A-Za-z0-9_.\/-]+$/.test(path)||path.includes('..'))
+   throw Error('Invalid candidate source diff path');
+  const matches=git(['ls-tree','-z',staged.candidate_sha,'--',path],{trim:false})
+   .split('\0').filter(Boolean);
+  if(!matches.length)return {path,mode:null,sha:null};
+  if(matches.length!==1)throw Error('Ambiguous candidate source diff path');
+  const entry=/^(100644|100755) blob ([a-f0-9]{40})\t(.+)$/.exec(matches[0]);
+  if(!entry||entry[3]!==path)throw Error('Unverifiable candidate source blob');
+  return {path,mode:entry[1],sha:entry[2]};
+ });
+ const manifest=JSON.parse(git(['show',staged.candidate_sha+':'+CANDIDATE_RECEIPT_PATH]));
+ if(JSON.stringify(manifest)!==JSON.stringify(staged.manifest))
+  throw Error('Manifest differs from staged source');
+ const journalFrom=git(['show',developmentSourceSha+':'+CANDIDATE_JOURNAL_PATH],{trim:false});
+ const journalTo=git(['show',staged.candidate_sha+':'+CANDIDATE_JOURNAL_PATH],{trim:false});
+ const prefix=journalFrom.trimEnd();
+ if(!journalTo.startsWith(prefix))throw Error('Candidate journal is not derived from source');
+ const journal_append=journalTo.slice(prefix.length);
+ if(!journal_append.startsWith('\n\n## READY-only source candidate'))
+  throw Error('Unexpected source-bound candidate journal appendix');
+ const tree_sha=git(['rev-parse',staged.candidate_sha+'^{tree}']);
+ if(!SHA.test(tree_sha))throw Error('Candidate Git tree SHA not available');
+ return {status:'LOCAL_TREE_RECEIPT_NO_REMOTE_CANDIDATE',
+  development_source_sha:developmentSourceSha,
+  published_source_sha:manifest.published_source_sha,
+  candidate_branch:manifest.candidate_branch,
+  expected_tree_sha:tree_sha,
+  candidate_local_sha:staged.candidate_sha,
+  manifest,delta_entries,journal_append};
+}
+
 export function prevalidateReadySource({
- repoDir=process.cwd(),developmentSourceSha,push=false,expectedHostedEnv=process.env
+ repoDir=process.cwd(),developmentSourceSha,push=false,receipt=false,expectedHostedEnv=process.env
 }={}){
  if(!SHA.test(developmentSourceSha||''))throw Error('Exact development source SHA required');
+ if(push)throw Error('Actions ref push prohibited; use --receipt then trusted GitHub connector');
  const git=(args,{trim=true}={})=>{
   const value=execFileSync('git',args,{cwd:repoDir,encoding:'utf8',
    timeout:45000,maxBuffer:8*1024*1024,stdio:['ignore','pipe','pipe']});
@@ -119,6 +169,7 @@ export function prevalidateReadySource({
  }
  const staged=stageReadyOnlyCandidate({repoDir,developmentSourceSha,
   selectedIds:ids,pinnedReadyPaths:pins,branch,createLocalRef:false});
+ if(receipt)return candidateTreeReceipt({repoDir,developmentSourceSha,staged});
  const transport=push?neutralWorkflowTransportCommit({repoDir,developmentSourceSha,
   candidateSha:staged.candidate_sha,
   workflowPaths:staged.manifest.restored_unpublished_workflow_paths}):null;
@@ -148,10 +199,10 @@ export function prevalidateReadySource({
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  try{
   const [source,mode]=process.argv.slice(2);
-  if(!SHA.test(source||'')||!['--dry-run','--push'].includes(mode)||
+  if(!SHA.test(source||'')||!['--dry-run','--receipt'].includes(mode)||
      process.argv.length!==4)
-   throw Error('Usage: precertify-ready-source.mjs <dev SHA> --dry-run|--push');
-  const outcome=prevalidateReadySource({developmentSourceSha:source,push:mode==='--push'});
+   throw Error('Usage: precertify-ready-source.mjs <dev SHA> --dry-run|--receipt');
+  const outcome=prevalidateReadySource({developmentSourceSha:source,receipt:mode==='--receipt'});
   console.log('[DIC READY pre-certification] '+JSON.stringify(outcome));
  }catch(e){console.error('[DIC READY pre-certification] HOLD: '+e.message);process.exitCode=2;}
 }
