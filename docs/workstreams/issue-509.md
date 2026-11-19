@@ -1,3 +1,15 @@
+# Issue #509 — R358 Admin shot-delete family reconciliation [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=8a45f21cbbd4526dade5ae12d7fe450ca6c551be preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**November 19, 2026 UTC; Supabase production READ-ONLY.** Direct complete source semantic review of live `private.dic_admin_delete_record`, `dic_admin_delete_preview`, `classify_personal_shot`, `refresh_personal_family`, `project_shot`, `dic_on_library_coffee_change`; full bodies, hashes and dependencies in [R358 immutable receipt](../audits/issue509-r358-admin-shot-family-lifecycle-20261119.json). Confirmed functional defect: Admin's allowed single-shot deletion clears favorite and deletes the shot, but no DELETE trigger or follow-on SQL refreshes the surviving personal family, leaving stale statistics/evidence; Current may reference an empty family. Read-only production aggregates: **27 shots / 13 with personal family, 6 families, 1 existing stale count (stored 6 versus 4 eligible), 0 currently unsupported Current selections**. Cause of preexisting discrepancy is **UNVERIFIED**; do not infer a real Admin incident or disclose member rows.
+
+**Development-only safe repair candidate:** new additive `supabase/migrations/20261119105000_dic_admin_shot_delete_family_refresh.sql` refreshes only the deleted shot's family after delete and clears Current only when zero eligible matching shots remain. Existing Admin authorization, revision/impact confirmation, favorite clearing, audit receipts, protected Community history and other delete branches are preserved; no historical migrations edited. New `supabase/tests/admin_shot_delete_family_refresh.sql` synthetic rollback-only `dic_ci` PostgreSQL17 regression covers two-to-one-to-zero, candidate/retired state, continued valid Current, last-shot Current clearing, favorite and audit. Isolated runner gates test on migration presence. **CI PENDING, TESTING not READY**, no hosted/private-session acceptance claim. The one existing stale family needs a separately validated correction at an explicitly owner-authorized future Publish; this forward-only patch does not mutate production data.
+
+First-time SQL word credit **0** (prior full-body receipts), #267 GitHub code-line credit **0**; exhaustive provider baseline **IN_PROGRESS**. No Supabase production SQL/data/Auth/Edge/Storage/config, deployment, release, backup, billing, schedule or alert change. Next: exact candidate PostgreSQL17/Node22/approval tests, nonforce source integration after PASS, source readback; continue unreviewed/changed provider objects. No premature completeness or deployment claim.
+
+---
+
 # Issue #509 — R357 archived setup provider/client eligibility contract [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=2bb1a0f85cf9c815294533e44531b901c06cf659 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e

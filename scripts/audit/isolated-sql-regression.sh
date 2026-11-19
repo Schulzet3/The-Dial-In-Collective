@@ -112,4 +112,10 @@ if [[ -f supabase/migrations/20261118214500_dic_admin_edit_normalized_identity_g
 else
   echo "NOT_APPLICABLE: #509 admin normalized identity guard; migration excluded from tested source"
 fi
+if [[ -f supabase/migrations/20261119105000_dic_admin_shot_delete_family_refresh.sql ]]; then
+  echo "Running admin_shot_delete_family_refresh"
+  run_sql supabase/tests/admin_shot_delete_family_refresh.sql
+else
+  echo "NOT_APPLICABLE: #509 Admin shot-family refresh; migration excluded from tested source"
+fi
 echo 'PASS: all checked-in migrations and SQL suites, including staged import/setup, cross-account and source-worker authorization and first-style owner isolation regressions; no hosted connection.'

@@ -4820,6 +4820,18 @@
       "release": "TESTING_UNCHANGED",
       "baseline": "IN_PROGRESS",
       "next": "First genuinely new/changed/unreviewed provider definition or reproducible active behavior defect; archive pathway only if supported data producer emerges; do not remove historical setups or alter production."
+    },
+    {
+      "run": "R358 Nov19 2026",
+      "source_sha": "8a45f21cbbd4526dade5ae12d7fe450ca6c551be",
+      "receipt": "docs/audits/issue509-r358-admin-shot-family-lifecycle-20261119.json",
+      "semantic_reassessment": "Admin delete family refresh crosslayer",
+      "new_function_word_credit": 0,
+      "existing_stale_family_count": 1,
+      "source_candidate": "supabase/migrations/20261119105000_dic_admin_shot_delete_family_refresh.sql",
+      "ci": "PENDING",
+      "provider_writes": 0,
+      "baseline": "IN_PROGRESS"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -24816,5 +24828,28 @@
     "release_queue": "EXISTING_509_ITEMS_TESTING_UNCHANGED",
     "no_publish": true,
     "next": "First genuinely new/changed/unreviewed provider definition or reproducible active behavior defect; archive pathway only if supported data producer emerges; do not remove historical setups or alter production."
+  },
+  "provider_admin_shot_delete_family_lifecycle_run358": {
+    "preflight_development_sha": "8a45f21cbbd4526dade5ae12d7fe450ca6c551be",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "provider_ref": "azviqqejypsefzilgonr",
+    "receipt_path": "docs/audits/issue509-r358-admin-shot-family-lifecycle-20261119.json",
+    "live_function_bodies_complete": 6,
+    "first_time_word_credit": 0,
+    "issue267_line_credit": 0,
+    "read_only_current_stale_family_aggregate": {
+      "stale_families": 1,
+      "total": 6,
+      "stored": 6,
+      "actual": 4,
+      "cause": "UNVERIFIED"
+    },
+    "source_migration": "supabase/migrations/20261119105000_dic_admin_shot_delete_family_refresh.sql",
+    "source_test": "supabase/tests/admin_shot_delete_family_refresh.sql",
+    "source_runner": "scripts/audit/isolated-sql-regression.sh",
+    "status": "TESTING_EXACT_CI_PENDING_NOT_DEPLOYED",
+    "provider_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Exact candidate PG17, source-bound CI and safe nonforce merge; separately assess existing stale family without production writes."
   }
 }
