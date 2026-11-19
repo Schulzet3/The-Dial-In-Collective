@@ -34,7 +34,9 @@ if(process.env.DIC_R334_VERIFY==='1'){
  const errors=[],need=(condition,reason)=>{if(!condition)errors.push(reason)};
  let report;try{report=JSON.parse(readFileSync(join(dir,'focused-current-evidence.json'),'utf8'))}catch{errors.push('missing_case_report')}
  need(JSON.stringify(report?.case_numbers)==='[163]'&&report?.records?.length===1,'only_original163');
- need(report?.original603_register_sha256==='2b086a56b2ba0b837fe6d6ab0fbca2f469fb23c18ee353','frozen_register_sha');
+ const immutableOriginal603Path='docs/audits/issue33-original603-source-level-adjudication-20261029.csv';
+ need(execFileSync('git',['rev-parse','HEAD:'+immutableOriginal603Path],{encoding:'utf8'}).trim()==='3e0d3036ea727de091f304f538c6de2dfcaa10d6','unchanged_frozen_original603_git_blob');
+ need(report?.original603_register_sha256===sha(readFileSync(new URL('../../'+immutableOriginal603Path,import.meta.url))),'frozen_register_SHA256_matches_checkout_bytes');
  need(report?.original_corpus_modified===false&&report?.manual_certified===0&&report?.production_operations===0,'no_frozen_changes_false_manual_or_production');
  need(report?.source_sha===process.env.DIC_R334_EVENT_SHA,'event_commit_identity');
  need(execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim()===process.env.DIC_R334_HEAD_SHA,'exact_checkout_head');
@@ -50,7 +52,7 @@ if(process.env.DIC_R334_VERIFY==='1'){
  need(f.process==='Washed','green_washed_separate_from_EA');
  need(f.roast_level==='Medium','selected_roast_not_educational');
  need(['caldas','colombia'].every(x=>norm(f.origin).includes(x)),'direct_selected_origin');
- need(['1600'].every(x=>norm(f.elevation_m).includes(x)),'direct_selected_elevation');
+ need(/(?:^|\s)(?:1600|1 600)(?:\s|$)/.test(norm(f.elevation_m)),'parsed_selected_1600m_elevation');
  need(['typica','castillo'].every(x=>norm(f.variety).includes(x)),'direct_selected_variety');
  need(['lemon','cherry','balanced'].every(x=>norm(f.tasting_notes).includes(x)),'selected_flavor_notes');
  need(!f.producer&&!f.release_label,'no_unpublished_farmer_or_release');
