@@ -1,10 +1,14 @@
 // Owner-authorized nonpublishing READY pre-certification (#3347).
-// Dry-run stages only disposable local Git objects; --push creates a new
-// release-candidates/ ref for the EXISTING five source-bound CI jobs.
+// Dry-run stages only disposable local Git objects. The Actions token cannot
+// change workflow files or trigger downstream push CI. Hosted --push writes a
+// workflow-neutral TRANSPORT ref only; a separate authorized connector actor
+// must restore exact published workflow objects and start candidate CI.
 // It never stages a production ref, creates a grant or contacts Netlify.
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
-import {resolve} from 'node:path';
+import {mkdtempSync,rmSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {resolve,join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {stageReadyOnlyCandidate} from './stage-ready-only-candidate.mjs';
 import {deployableChangedPaths,queueSchemaErrors} from './release-queue.mjs';
@@ -40,6 +44,42 @@ export function frozenReadyBranch(queue,items){
  const hash=createHash('sha256').update(identity).digest('hex').slice(0,20);
  return 'release-candidates/ready3347-'+hash;
 }
+// Transport is a Git object transfer ONLY. The final candidate is never
+// published from this transport SHA; its exact reviewed workflows are restored
+// by a different write-authorized actor before the five official CI jobs.
+export function neutralWorkflowTransportCommit({repoDir=process.cwd(),developmentSourceSha,
+ candidateSha,workflowPaths=[]}={}){
+ if(!SHA.test(developmentSourceSha||'')||!SHA.test(candidateSha||'')||
+    !Array.isArray(workflowPaths)||workflowPaths.some(path=>
+     typeof path!=='string'||!/^\\.github\\/workflows\\/[A-Za-z0-9_.\\/-]+\\.ya?ml$/.test(path))||
+    new Set(workflowPaths).size!==workflowPaths.length)
+  throw Error('Unsafe transport Git refs or workflow inventory');
+ const tmp=mkdtempSync(join(tmpdir(),'dic-ready-transport-'));
+ try{
+  const env={...process.env,GIT_INDEX_FILE:join(tmp,'index'),
+   GIT_AUTHOR_NAME:'DIC READY transport',GIT_AUTHOR_EMAIL:'ready-transport@users.noreply.github.com',
+   GIT_COMMITTER_NAME:'DIC READY transport',GIT_COMMITTER_EMAIL:'ready-transport@users.noreply.github.com'};
+  const git=(args,{trim=true}={})=>{
+   const value=execFileSync('git',args,{cwd:repoDir,env,encoding:'utf8',
+    timeout:45000,maxBuffer:8*1024*1024});return trim?value.trim():value;
+  };
+  git(['read-tree',candidateSha]);
+  for(const path of workflowPaths){
+   const entries=git(['ls-tree','-z',developmentSourceSha,'--',path],{trim:false})
+    .split('\\0').filter(Boolean);
+   if(entries.length>1)throw Error('Ambiguous workflow transport tree entry');
+   if(!entries.length){git(['update-index','--force-remove','--',path]);continue;}
+   const m=/^(100644|100755) blob ([a-f0-9]{40})\\t(.+)$/.exec(entries[0]);
+   if(!m||m[3]!==path)throw Error('Unsafe development workflow blob');
+   git(['update-index','--add','--cacheinfo',m[1],m[2],path]);
+  }
+  const tree=git(['write-tree']);
+  const commit=git(['commit-tree',tree,'-p',developmentSourceSha,'-m',
+   'Transport exact READY source for connector workflow restoration [skip netlify]']);
+  if(!SHA.test(commit))throw Error('Unable to create reviewed transport commit');
+  return {transport_sha:commit,transport_tree_sha:tree};
+ }finally{rmSync(tmp,{recursive:true,force:true});}
+}
 export function prevalidateReadySource({
  repoDir=process.cwd(),developmentSourceSha,push=false,expectedHostedEnv=process.env
 }={}){
@@ -60,7 +100,8 @@ export function prevalidateReadySource({
  const changePaths=git(['diff','--name-only','--no-renames',published,developmentSourceSha])
   .split(/\r?\n/).filter(Boolean);
  const pins=requiredReadyPins(queue,ids,changePaths);
- const remoteRef='refs/heads/'+branch;
+ const transportBranch=branch.replace('release-candidates/','ready-transports/');
+ const remoteRef='refs/heads/'+transportBranch;
  if(push){
   if(expectedHostedEnv.GITHUB_ACTIONS!=='true'||
      expectedHostedEnv.GITHUB_REF!=='refs/heads/main'||
@@ -68,8 +109,8 @@ export function prevalidateReadySource({
      expectedHostedEnv.DIC_READY_PRECERTIFICATION!=='YES')
    throw Error('READY candidate push is only authorized in guarded main CI');
   const remote=git(['ls-remote','--heads','origin',remoteRef]).split(/\s+/)[0];
-  if(SHA.test(remote||''))return {status:'EXISTING_CANDIDATE_UNVERIFIED',
-   branch,candidate_sha:remote,count:ids.length,pins};
+  if(SHA.test(remote||''))return {status:'EXISTING_TRANSPORT_NOT_CANDIDATE_CI',
+   branch,transport_branch:transportBranch,transport_sha:remote,count:ids.length,pins};
   if(remote)throw Error('Unexpected existing candidate ref');
   const live=git(['ls-remote','--heads','origin','refs/heads/development/backend-foundation'])
    .split(/\s+/)[0];
@@ -78,6 +119,9 @@ export function prevalidateReadySource({
  }
  const staged=stageReadyOnlyCandidate({repoDir,developmentSourceSha,
   selectedIds:ids,pinnedReadyPaths:pins,branch,createLocalRef:false});
+ const transport=push?neutralWorkflowTransportCommit({repoDir,developmentSourceSha,
+  candidateSha:staged.candidate_sha,
+  workflowPaths:staged.manifest.restored_unpublished_workflow_paths}):null;
  if(push){
   const before=git(['ls-remote','--heads','origin','refs/heads/development/backend-foundation'])
    .split(/\s+/)[0];
@@ -86,8 +130,10 @@ export function prevalidateReadySource({
   const after=git(['ls-remote','--heads','origin',remoteRef]).split(/\s+/)[0];
   if(after!==staged.candidate_sha)throw Error('Candidate Git ref readback mismatch');
  }
- return {status:push?'CANDIDATE_CI_PENDING':'LOCAL_SOURCE_PREFLIGHT_PASS',
-  branch,candidate_sha:staged.candidate_sha,count:ids.length,
+ return {status:push?'TRANSPORT_READY_AWAITING_CONNECTOR':'LOCAL_SOURCE_PREFLIGHT_PASS',
+  branch,candidate_sha:staged.candidate_sha,
+  transport_branch:push?transportBranch:null,transport_sha:transport?.transport_sha||null,
+  count:ids.length,
   pins,restored:staged.plan.restored_paths,
   published_source_sha:published,development_source_sha:developmentSourceSha};
 }
