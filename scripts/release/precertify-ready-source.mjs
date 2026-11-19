@@ -16,7 +16,8 @@ export function selectedReadyItems(queue){
  if(failures.length)throw Error('READY queue schema HOLD: '+failures.slice(0,5).join('; '));
  return (queue.items||[]).filter(x=>x.state==='READY').sort((a,b)=>a.id.localeCompare(b.id));
 }
-export function requiredReadyPins(queue,ids,developmentChangedPaths){
+export function requiredReadyPins(queue,ids,developmentChangedPaths,{
+ developmentSourceSha,sourceObjectAt,isAncestor}={}){
  if(!Array.isArray(developmentChangedPaths)||!Array.isArray(ids)||
     ids.some(x=>typeof x!=='string')||new Set(ids).size!==ids.length)
   throw Error('READY pin source/selection unavailable');
@@ -26,13 +27,30 @@ export function requiredReadyPins(queue,ids,developmentChangedPaths){
   throw Error('Selected READY item not source-certified in current queue');
  return deployableChangedPaths(developmentChangedPaths).filter(path=>{
   const owners=(queue.items||[]).filter(item=>item.scope_paths?.includes(path));
-  return owners.some(item=>selected.has(item.id)&&item.state==='READY')&&
-   owners.some(item=>!selected.has(item.id)&&item.state!=='DEPLOYED');
+  const chosen=owners.filter(i=>selected.has(i.id)&&i.state==='READY');
+  const competing=owners.filter(i=>!selected.has(i.id)&&i.state!=='DEPLOYED');
+  if(!chosen.length||!competing.length)return false;
+  // Exact-byte parity is the ONLY safe reason to skip a never-merged issue's
+  // stale shared-file queue label. Otherwise require the real READY pin.
+  if(SHA.test(developmentSourceSha||'')&&typeof sourceObjectAt==='function'&&
+     typeof isAncestor==='function'&&
+     competing.every(i=>i.state!=='READY'&&!SHA.test(i.merged_source_sha||''))){
+   try{
+    const tips=chosen.filter(tip=>chosen.every(owner=>owner===tip||
+     isAncestor(owner.merged_source_sha,tip.merged_source_sha)===true));
+    if(tips.length===1){
+     const frozen=sourceObjectAt(tips[0].merged_source_sha,path);
+     if(frozen&&frozen===sourceObjectAt(developmentSourceSha,path))return false;
+    }
+   }catch{throw Error('Precert READY source ancestry/parity unavailable: '+path);}
+  }
+  return true; // actual mixed source, unknown proof or merged competitor: pin/HOLD
  });
 }
 export function frozenReadyBranch(queue,items){
  if(!items.length)throw Error('Cannot freeze an empty READY batch');
  const identity=JSON.stringify({
+  stage_contract:'READY3347-SAME-COMMIT-PREFLIGHT-V2',
   base:queue.published_base?.tested_source_sha,
   selected:items.map(i=>[i.id,i.merged_source_sha,sorted(i.scope_paths||[]),
    sorted(i.ci_runs||[])])
@@ -59,7 +77,21 @@ export function prevalidateReadySource({
  if(!SHA.test(published))throw Error('Missing published tested source');
  const changePaths=git(['diff','--name-only','--no-renames',published,developmentSourceSha])
   .split(/\r?\n/).filter(Boolean);
- const pins=requiredReadyPins(queue,ids,changePaths);
+ const sourceObjectAt=(ref,path)=>{
+  const rows=git(['ls-tree','-z',ref,'--',path],{trim:false}).split('\0').filter(Boolean);
+  if(!rows.length)return null;
+  if(rows.length!==1)throw Error('Ambiguous READY source object: '+path);
+  const m=/^(100644|100755) blob ([a-f0-9]{40})\t(.+)$/.exec(rows[0]);
+  if(!m||m[3]!==path)throw Error('Unexpected READY source object: '+path);
+  return m[1]+':'+m[2];
+ };
+ const isAncestor=(a,b)=>{
+  if(!SHA.test(a||'')||!SHA.test(b||''))throw Error('Unverified READY merge ancestry');
+  try{git(['merge-base','--is-ancestor',a,b]);return true;}
+  catch(e){if(e.status===1)return false;throw Error('Git merge ancestry unavailable');}
+ };
+ const pins=requiredReadyPins(queue,ids,changePaths,{
+  developmentSourceSha,sourceObjectAt,isAncestor});
  const remoteRef='refs/heads/'+branch;
  if(push){
   if(expectedHostedEnv.GITHUB_ACTIONS!=='true'||
