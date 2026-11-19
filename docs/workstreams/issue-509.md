@@ -1,3 +1,13 @@
+# Issue #509 — R354 Admin search no longer hides unfinished deletion retry [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=54247af05c93268b8421e4e562a89fa6286b5101 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**November 19, 2026 UTC; production STRICTLY READ-ONLY.** Confirmed latent Admin account deletion recovery UI defect: while account search was active, the client suppressed dic_admin_access_overview entirely and substituted an empty object. The SQL RPC owns pending_deletions, and renderAdminAccessPanel renders Retry Completion exclusively from this field; thus pending recovery actions disappeared during search even though account paging worked. Live pending operations=0, so no current member incident inferred. Fix loads overview whenever Accounts disclosure is expanded, independent of search, while searched page remains authoritative; no SQL/provider or privacy boundary changes. Complete live definitions, MD5 hashes, precise full character ranges, protected dashboard/preview/request/prepare/finish behavior, current published JS consumers and source-bound reproducer are recorded in [R354 immutable receipt](../audits/issue509-r354-admin-search-recovery-20261119.json). Confirmed live admitted members=6, active delete operations=0, missing admitted Auth identities=0 (aggregate only). Previously reviewed definitions receive **zero first-time provider word credit**, #267 source audit **zero source-line credit**.
+
+Development-only PR candidate: a single Admin client behavioral line and a focused Node22 source+view test, plus this SAME-COMMIT scoped journal/structured ledger/queue TESTING intake. The pending-recovery panel stays visible while filtered account pages remain authoritative; all Auth/admin guards unchanged. Exact PR-head CI **PENDING**, no READY/DEPLOYED/merged claim, no GitHub release/main or Supabase production write, no migrations/Edge changes, no backup/billing/schedule/alert modifications. Next: run exact-source relevant PR checks, repair if necessary, [skip netlify] nonforce integrate only after PASS, read back merged SHA; then inspect next new/changed provider SQL or Edge definition and delivery retry consumers.
+
+---
+
 # Issue #509 — R353 Admin pagination/search/signup SQL and consumer audit [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=152e55eb1b88fa6631ec79f2e7c7be93ed71ba73 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e

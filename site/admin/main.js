@@ -74,10 +74,11 @@ async function start(){
     // The summary is always current; private listings are loaded only for
     // operator-expanded sections. Accounts share one disclosure; signup requests have their own review panel.
     const kinds=[...new Set([...openSections].flatMap(kindsForSection))];
+    // Account search filters paged results, not unfinished deletion recovery actions.
     const loadAccess=openSections.has('accounts');
     const [dashboard,nextAccess,nextSignups,...pages]=await Promise.all([
      adminRpc('dic_admin_dashboard'),
-     loadAccess?(searchText?Promise.resolve({members:[],members_total:0}):adminRpc('dic_admin_access_overview')):Promise.resolve(null),
+     loadAccess?adminRpc('dic_admin_access_overview'):Promise.resolve(null),
       adminRpc('dic_admin_signup_requests',{p_offset:signupOffset,p_limit:50}),
      ...kinds.map(async kind=>{
       try{

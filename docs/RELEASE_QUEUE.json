@@ -16760,6 +16760,30 @@
       "blockers": [],
       "notes": "READY DEVELOPMENT ONLY / NOT DEPLOYED. Existing yield entry bounds 5-200g reused, external roaster metadata preserved. No numeric taste optimum, five-scale/sensory changes, changed history, single-control next-shot policy, grinder/style/feed or privacy changes. No observed empirical espresso outcome.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-admin-search-recovery-visible",
+      "issue": 509,
+      "title": "Preserve unfinished account-deletion Retry Completion during Admin account search",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/admin/main.js"
+      ],
+      "owner_source": "Issue #509 owner-authorized dev-only behavior correction; DIC_PREFLIGHT_VERIFIED development_sha=54247af05c93268b8421e4e562a89fa6286b5101 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "tests": [
+        "Direct full live Supabase overview SQL and dependent Admin deletion functions; client and published UI consumer; zero pending production deletions at audit",
+        "Deterministic defect: search suppressed overview RPC, removing pending_deletions despite paged account response",
+        "Targeted Node22 source+view regression added; PR-head full relevant CI PENDING"
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact PR-head and merged source-dependent Node22/browser/approval tests must pass before integration",
+        "Release-isolated candidate and genuine hosted acceptance unverified; status TESTING",
+        "Production update requires separate explicit owner Publish"
+      ],
+      "notes": "One additional admin-only RPC when Accounts is expanded during a search; account search results continue to take precedence over overview fallback. No live provider change or member-record read.",
+      "production_deployed": false
     }
   ],
   "history": [
