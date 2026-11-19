@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R352",
+  "date_utc": "2026-11-19",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "3bd7a865e46a3eb099f5041954f05fee50a7d81c",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "immutable_fetch_verified": true
+  },
+  "branches": {
+    "main": "3b372215ac7ccfd6db406f27090706e8cb8f3e80",
+    "release": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+  },
+  "scope": "Live production readonly semantically revisited full import transaction/lineage and current GitHub rollback test; no original #267 source-line or first-time previously reviewed provider-word credit",
+  "full_provider_function_definitions": [
+    {
+      "signature": "private.apply_prototype_import(u uuid, doc jsonb)",
+      "source_md5": "2af6a48d0fe80841fcc27c1f1d5532e3",
+      "source_chars": 16445,
+      "complete_definition": "CREATE OR REPLACE FUNCTION private.apply_prototype_import(u uuid, doc jsonb)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare\n d jsonb:=doc->'data'; st jsonb; v jsonb; w jsonb; c jsonb; b jsonb; g jsonb; f jsonb; sh jsonb; p jsonb; t jsonb; x jsonb;\n sid uuid; vid uuid; lid uuid; bid uuid; bvid uuid; gid uuid; fid uuid; shotid uuid; subid uuid; bagid uuid; currentid uuid;\n source_key text; k text; target_style text; rc integer; missing_grind integer:=0; unknown_feed integer:=0; green_count integer:=0;\n result jsonb; snapshot jsonb;\nbegin\n if jsonb_typeof(doc) is distinct from 'object' or doc->>'format' is distinct from 'the-dial-in-collective-prototype-backup'\n    or jsonb_typeof(d) is distinct from 'object' or d->>'schemaVersion' is distinct from '1' or d->>'mode' is distinct from 'personal'\n    or octet_length(doc::text)>2097152 then\n  raise exception using errcode='22023',message='Choose a personal prototype backup (schema 1), at most 2 MB.';\n end if;\n -- Do not archive credentials accidentally embedded in a file.\n if exists(with recursive nodes(k,val) as (\n  select ''::text,doc union all\n  select z.key,z.value from nodes n cross join lateral (\n   select key,value from jsonb_each(case when jsonb_typeof(n.val)='object' then n.val else '{}' end)\n   union all\n   select '',value from jsonb_array_elements(case when jsonb_typeof(n.val)='array' then n.val else '[]' end)\n  ) z\n ) select 1 from nodes where lower(regexp_replace(nodes.k,'[^[:alnum:]]','','g')) in ('apikey','password','accesstoken','refreshtoken','servicerolekey','secretkey') and nodes.val not in ('null'::jsonb,'\"\"'::jsonb)) then\n  raise exception using errcode='22023',message='This backup contains a credential field. Export a credentials-free backup first.';\n end if;\n foreach k in array array['setups','coffees','shots','families'] loop\n  if jsonb_typeof(d->k) is distinct from 'array' then raise exception using errcode='22023',message='The backup is missing a required record list.'; end if;\n end loop;\n if jsonb_array_length(d->'setups')<>1 or jsonb_array_length(d->'coffees') not between 1 and 100\n    or jsonb_array_length(d->'shots')>2000 or jsonb_array_length(d->'families')>500 then\n  raise exception using errcode='22023',message='This first importer supports one setup, up to 100 coffees and 2000 shots. Nothing was imported.';\n end if;\n if d ? 'experiments' then\n  if jsonb_typeof(d->'experiments') is distinct from 'array' then\n   raise exception using errcode='22023',message='Retired Experiment archive is malformed. Keep the original backup; nothing was imported.';\n  end if;\n  if jsonb_array_length(d->'experiments')<>0 then\n   raise exception using errcode='22023',message='Retired Experiment records cannot be imported without loss. Keep the original backup; nothing was imported.';\n  end if;\n end if;\n if exists (\n  select 1 from jsonb_array_elements(d->'shots') as shot_data(value)\n  where (shot_data.value ? 'experimentId' and shot_data.value->'experimentId' <> 'null'::jsonb)\n     or (shot_data.value ? 'experiment_id' and shot_data.value->'experiment_id' <> 'null'::jsonb)\n ) then\n  raise exception using errcode='22023',message='Retired Experiment shot links require archival recovery. Keep the original backup; nothing was imported.';\n end if;\n st:=d->'setups'->0;\n if jsonb_typeof(st->'versions') is distinct from 'array' or jsonb_array_length(st->'versions')<>1 then\n  raise exception using errcode='22023',message='Backups with multiple hardware versions need the next migration adapter. Nothing was imported.';\n end if;\n v:=st->'versions'->0; w:=st->'workspaces'->(v->>'id');\n if st->>'activeVersionId' is distinct from v->>'id' or d->>'activeSetupId' is distinct from st->>'id' or jsonb_typeof(w) is distinct from 'object' then\n  raise exception using errcode='22023',message='The active workspace references are incomplete.';\n end if;\n if jsonb_typeof(v->'baskets') is distinct from 'array' or jsonb_array_length(v->'baskets') not between 1 and 30\n    or jsonb_typeof(v->'calibrations') is distinct from 'array' or jsonb_array_length(v->'calibrations') not between 1 and 50 then\n  raise exception using errcode='22023',message='Basket and grinder calibration history is required.';\n end if;\n if exists(select 1 from public.setups where owner_id=u) or exists(select 1 from public.library_entries where owner_id=u)\n    or exists(select 1 from public.shots where owner_id=u) then\n  raise exception using errcode='22023',message='This first import requires an empty cloud workspace. Existing data will not be replaced or merged automatically.';\n end if;\n foreach k in array array['coffees','shots','families'] loop\n  if exists(select 1 from jsonb_array_elements(d->k) a group by a->>'id' having count(*)>1)\n     or exists(select 1 from jsonb_array_elements(d->k) a where jsonb_typeof(a) is distinct from 'object' or coalesce(length(a->>'id'),0) not between 1 and 200) then\n   raise exception using errcode='22023',message='Duplicate or missing record IDs in the backup. Nothing was imported.';\n  end if;\n end loop;\n sid:=private.import_id(u,'setup',st->>'id'); vid:=private.import_id(u,'version',v->>'id');\n insert into public.setups(id,owner_id,name,created_at) values(sid,u,st->>'name',coalesce((st->>'createdAt')::timestamptz,(v->>'createdAt')::timestamptz,now()));\n insert into public.setup_versions(id,owner_id,setup_id,label,machine_model,grinder_model,burr_set,created_at)\n values(vid,u,sid,coalesce(v->>'label','Imported equipment'),nullif(v->>'machine',''),nullif(v->>'grinder',''),nullif(v->>'burrs',''),(v->>'createdAt')::timestamptz);\n for g in select value from jsonb_array_elements(v->'calibrations') loop\n  gid:=private.import_id(u,'calibration',g->>'id');\n  insert into public.grinder_calibrations(id,owner_id,setup_id,grinder_model,burr_set,finest_setting,coarsest_setting,created_at)\n  values(gid,u,sid,nullif(v->>'grinder',''),nullif(v->>'burrs',''),(g->>'min')::numeric,(g->>'max')::numeric,coalesce((g->>'at')::timestamptz,(v->>'createdAt')::timestamptz));\n end loop;\n for b in select value from jsonb_array_elements(v->'baskets') loop\n  bid:=private.import_id(u,'basket',b->>'id');bvid:=private.import_id(u,'basket_version',b->>'id');\n  insert into public.baskets(id,owner_id,setup_id,name,archived_at) values(bid,u,sid,b->>'name',case when (b->>'archived')::boolean then now() end);\n  insert into public.basket_versions(id,owner_id,setup_id,basket_id,basket_dose_g,model,created_at)\n  values(bvid,u,sid,bid,(b->>'doseG')::numeric,nullif(b->>'model',''),coalesce((b->>'createdAt')::timestamptz,(v->>'createdAt')::timestamptz));\n end loop;\n update public.setups set active_version_id=vid where id=sid;\n insert into public.setup_preferences(owner_id,setup_id,setup_version_id,calibration_id,default_basket_version_id,track_temperature,track_slow_feed,multiple_baskets,slow_feed,temperature_unit)\n values(u,sid,vid,private.import_id(u,'calibration',v->>'calibrationId'),private.import_id(u,'basket_version',v->>'defaultBasketId'),\n coalesce((v->'advanced'->>'temperature')::boolean,false),coalesce((v->'advanced'->>'slowFeed')::boolean,false),coalesce((v->'advanced'->>'baskets')::boolean,false),\n coalesce((v->>'slowFeed')::boolean,false),coalesce(v->>'tempUnit','F'));\n for c in select value from jsonb_array_elements(d->'coffees') loop\n  lid:=private.import_id(u,'coffee',c->>'id');subid:=private.import_id(u,'submission',c->>'id');\n  -- Only coffee facts, not bags or personal history, are sent for catalog review.\n  insert into public.coffee_submissions(id,owner_id,proposed_data,source_url,created_at)\n  values(subid,u,jsonb_build_object('name',c->>'name','roaster',c->>'roaster','origin',c->>'origin','elevation_m',c->>'elevationM',\n   'roast_level',nullif(c->>'roastLevel',''),'roastLevelSource',c->>'roastLevelSource','roastLevelBasis',c->>'roastLevelBasis',\n   'process',c->>'process','variety',c->>'variety','producer',c->>'producer','tasting_notes',c->>'tastingNotes',\n   'summary',c->>'summary','espressoNotes',c->>'espressoNotes','roaster_recipe',c->'roasterRecipe','release_label',c->>'release'),nullif(c->>'roasterUrl',''),(c->>'createdAt')::timestamptz);\n  if coalesce(length(btrim(c->>'name')),0) not between 1 and 200 or coalesce(length(btrim(c->>'roaster')),0) not between 1 and 200 then\n   raise exception using errcode='22023',message='Each coffee needs a name and roaster.';\n  end if;\n  insert into public.library_entries(id,owner_id,submission_id,hidden_at,created_at)\n  values(lid,u,subid,case when (c->>'hidden')::boolean then now() end,(c->>'createdAt')::timestamptz);\n  if jsonb_typeof(c->'bags') is distinct from 'array' or jsonb_array_length(c->'bags')>100 then raise exception using errcode='22023',message='Invalid bag list.'; end if;\n  for b in select value from jsonb_array_elements(c->'bags') loop\n   bagid:=private.import_id(u,'bag',(c->>'id')||':'||(b->>'id'));\n   insert into public.bags(id,owner_id,library_entry_id,roast_date,frozen,archived_at)\n   values(bagid,u,lid,nullif(b->>'roastDate','')::date,coalesce((b->>'frozen')::boolean,false),case when (b->>'archived')::boolean then now() end);\n  end loop;\n end loop;\n for f in select value from jsonb_array_elements(d->'families') loop\n  insert into public.personal_recipe_families(id,owner_id,library_entry_id,style,statistics,estimator_version,created_at)\n  values(private.import_id(u,'family',f->>'id'),u,private.import_id(u,'coffee',f->>'coffeeId'),f->>'style','{}','prototype_import_v1',(f->>'createdAt')::timestamptz);\n end loop;\n for sh in select value from jsonb_array_elements(d->'shots') order by value->>'timestamp',value->>'id' loop\n  if sh->>'setupId' is distinct from st->>'id' or sh->>'setupVersionId' is distinct from v->>'id' or sh->>'experimentId' is not null then\n   raise exception using errcode='22023',message='A shot has an unsupported equipment or experiment reference.';\n  end if;\n  foreach k in array array['doseG','yieldG','timeS'] loop\n   if jsonb_typeof(sh->k) is distinct from 'number' then raise exception using errcode='22023',message='Dose, yield and time must be recorded numbers.'; end if;\n  end loop;\n  foreach k in array array['grindSetting','tempC'] loop\n   if sh->>k is not null and jsonb_typeof(sh->k) is distinct from 'number' then raise exception using errcode='22023',message='Optional measurements must be numbers or null, not text.'; end if;\n  end loop;\n  t:=sh->'tasteScales';\n  foreach k in array array['extraction','body','clarity','sweetness','astringency'] loop\n   if jsonb_typeof(t->k) is distinct from 'number' or (t->>k)::numeric<>trunc((t->>k)::numeric) or (t->>k)::numeric not between 1 and 5 then\n    raise exception using errcode='22023',message='Historical shots need five recorded integer taste ratings. No ratings were invented.';\n   end if;\n  end loop;\n  snapshot:=sh->'snapshot';\n  select value into b from jsonb_array_elements(v->'baskets') where value->>'id'=sh->>'basketId';\n  select value into g from jsonb_array_elements(v->'calibrations') where value->>'id'=sh->>'calibrationId';\n  if b is null or g is null or jsonb_typeof(snapshot) is distinct from 'object'\n   or (snapshot->>'basketDoseG')::numeric is distinct from (b->>'doseG')::numeric\n   or (snapshot->>'grinderMin')::numeric is distinct from (g->>'min')::numeric\n   or (snapshot->>'grinderMax')::numeric is distinct from (g->>'max')::numeric\n   or nullif(snapshot->>'machine','') is distinct from nullif(v->>'machine','')\n   or nullif(snapshot->>'grinder','') is distinct from nullif(v->>'grinder','')\n   or nullif(snapshot->>'burrs','') is distinct from nullif(v->>'burrs','') then\n   raise exception using errcode='22023',message='A historical equipment snapshot differs from its version. Nothing was imported; this file needs a version-aware review.';\n  end if;\n  lid:=private.import_id(u,'coffee',sh->>'coffeeId');shotid:=private.import_id(u,'shot',coalesce(sh->>'legacyId',sh->>'id'));\n  fid:=case when sh->>'familyId' is not null then private.import_id(u,'family',sh->>'familyId') end;\n  if not ((t->>'extraction')::int=3 and (t->>'body')::int=3 and (t->>'clarity')::int=5 and (t->>'sweetness')::int=5 and (t->>'astringency')::int=1) then fid:=null; end if;\n  insert into public.shots(id,owner_id,library_entry_id,setup_id,setup_version_id,basket_version_id,calibration_id,bag_id,personal_family_id,style,pulled_at,\n   dose_g,yield_g,time_s,grind_setting,temperature_c,feed_mode,extraction,body,clarity,sweetness,astringency,equipment_snapshot,legacy_import,legacy_id,hidden_at)\n  values(shotid,u,lid,sid,vid,private.import_id(u,'basket_version',sh->>'basketId'),private.import_id(u,'calibration',sh->>'calibrationId'),\n   case when sh->>'bagId' is not null then private.import_id(u,'bag',(sh->>'coffeeId')||':'||(sh->>'bagId')) end,fid,sh->>'style',(sh->>'timestamp')::timestamptz,\n   (sh->>'doseG')::numeric,(sh->>'yieldG')::numeric,(sh->>'timeS')::numeric,(sh->>'grindSetting')::numeric,(sh->>'tempC')::numeric,coalesce(sh->>'feedMode','unknown'),\n   (t->>'extraction')::smallint,(t->>'body')::smallint,(t->>'clarity')::smallint,(t->>'sweetness')::smallint,(t->>'astringency')::smallint,'{}',true,coalesce(sh->>'legacyId',sh->>'id'),\n   case when (sh->>'hidden')::boolean then now() end);\n  insert into public.shot_notes(owner_id,shot_id,notes) values(u,shotid,coalesce(sh->>'notes',''));\n  if sh->>'grindSetting' is null then missing_grind:=missing_grind+1; end if;\n  if sh->>'feedMode' is null or sh->>'feedMode'='unknown' then unknown_feed:=unknown_feed+1; end if;\n end loop;\n for f in select value from jsonb_array_elements(d->'families') loop\n  perform private.refresh_personal_family(private.import_id(u,'family',f->>'id'));\n end loop;\n -- No style/time reclassification. Families with missing membership are not fabricated.\n if exists(select 1 from public.shots where owner_id=u and is_dialed_in and personal_family_id is null) then\n  raise exception using errcode='22023',message='A successful shot is missing its recipe family. This file needs a family mapping review.';\n end if;\n for c in select value from jsonb_array_elements(d->'coffees') loop\n  lid:=private.import_id(u,'coffee',c->>'id');p:=w->'coffees'->(c->>'id');\n  if jsonb_typeof(p) is distinct from 'object' then raise exception using errcode='22023',message='A coffee is missing its workspace preferences.'; end if;\n  insert into public.workspace_coffees(owner_id,setup_id,setup_version_id,library_entry_id,selected_style,basket_version_id,last_logged_at)\n  values(u,sid,vid,lid,p->>'style',case when p->>'basketId' is not null then private.import_id(u,'basket_version',p->>'basketId') end,\n   (select max(pulled_at) from public.shots where owner_id=u and library_entry_id=lid));\n  for target_style,source_key in select key,value from jsonb_each_text(coalesce(p->'currentFamilies','{}')) loop\n   fid:=private.import_id(u,'family',source_key);\n   if not exists(select 1 from public.shots where owner_id=u and library_entry_id=lid and setup_version_id=vid and shots.style=target_style and is_dialed_in and hidden_at is null and personal_family_id=fid) then\n    raise exception using errcode='22023',message='A Current Recipe is not supported by a successful shot on this setup.';\n   end if;\n   insert into public.recipe_preferences(owner_id,setup_id,setup_version_id,library_entry_id,style,current_family_id)\n   values(u,sid,vid,lid,target_style,fid);\n  end loop;\n end loop;\n currentid:=case when w->>'currentCoffeeId' is not null then private.import_id(u,'coffee',w->>'currentCoffeeId') end;\n if currentid is not null and not exists(select 1 from public.shots where owner_id=u and library_entry_id=currentid) then\n  raise exception using errcode='22023',message='An unlogged coffee cannot become Current during import.';\n end if;\n insert into public.workspace_state(owner_id,setup_id,setup_version_id,current_library_entry_id) values(u,sid,vid,currentid);\n update public.account_preferences set theme=d->>'theme',tasting_preferences=coalesce(d->>'preferences',''),active_setup_id=sid where owner_id=u;\n select count(*) into green_count from public.shots where owner_id=u and is_dialed_in;\n result:=jsonb_build_object('coffees',jsonb_array_length(d->'coffees'),'shots',jsonb_array_length(d->'shots'),'families',jsonb_array_length(d->'families'),\n  'setups',1,'dialedInShots',green_count,'missingGrind',missing_grind,'unknownFeed',unknown_feed,'currentCoffee',w->>'currentCoffeeId',\n  'sharedRecordsPublished',0,'archivePreserved',true);\n return result;\nend $function$\n",
+      "reviewed_characters": [
+        1,
+        16445
+      ],
+      "review_verdict": "ACTIVE_FIRST_EMPTY_WORKSPACE_TRANSACTIONAL_IMPORT; rejects retired Experiment dependencies and unsupported equipment snapshots; green family provenance subject to validated compound FK",
+      "complete_source_read": true
+    },
+    {
+      "signature": "private.classify_personal_shot(shotid uuid)",
+      "source_md5": "5183deb46474c10468638cef08d2bd05",
+      "source_chars": 3219,
+      "complete_definition": "CREATE OR REPLACE FUNCTION private.classify_personal_shot(shotid uuid)\n RETURNS void\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare s public.shots; fid uuid; previous uuid;\nbegin\n select * into strict s from public.shots where id=shotid;\n previous:=s.personal_family_id;\n -- Only an eligible green, visible shot can remain an explicit saved favorite.\n -- The stored shot ID is never redirected to another shot.\n if s.hidden_at is not null or not s.is_dialed_in then\n  update public.recipe_preferences p set favorite_shot_id=null\n   where p.owner_id=s.owner_id and p.favorite_shot_id=s.id;\n end if;\n if s.hidden_at is not null then\n  if previous is not null then perform private.refresh_personal_family(previous); end if;\n else\n  if s.is_dialed_in then\n   select f.id into fid from public.personal_recipe_families f\n    where f.owner_id=s.owner_id and f.library_entry_id=s.library_entry_id\n     and f.style=s.style and f.evidence_state<>'retired'\n     and abs(coalesce((f.statistics->'ratio'->>'center')::numeric,s.ratio)-s.ratio)<=.25\n    order by abs(coalesce((f.statistics->'ratio'->>'center')::numeric,s.ratio)-s.ratio),f.created_at,f.id\n    limit 1;\n   if fid is null then\n    insert into public.personal_recipe_families(owner_id,library_entry_id,style,statistics,estimator_version)\n     values(s.owner_id,s.library_entry_id,s.style,\n       jsonb_build_object('count',0,'ratio',jsonb_build_object('center',s.ratio)),\n       'ratio_cluster_v1') returning id into fid;\n   end if;\n  end if;\n  if s.personal_family_id is distinct from fid then\n   update public.shots set personal_family_id=fid where id=shotid;\n  end if;\n  if previous is not null then perform private.refresh_personal_family(previous); end if;\n  if fid is not null then\n   perform private.refresh_personal_family(fid);\n   insert into public.recipe_preferences(owner_id,setup_id,setup_version_id,library_entry_id,style,current_family_id)\n    values(s.owner_id,s.setup_id,s.setup_version_id,s.library_entry_id,s.style,fid)\n    on conflict(owner_id,setup_id,setup_version_id,library_entry_id,style)\n    do update set current_family_id=coalesce(public.recipe_preferences.current_family_id,excluded.current_family_id);\n   -- A manually selected example that is corrected into another eligible\n   -- family remains the same deliberately selected example, not an auto choice.\n   update public.recipe_preferences p set current_family_id=fid\n    where p.owner_id=s.owner_id and p.favorite_shot_id=s.id\n     and p.setup_version_id=s.setup_version_id\n     and p.library_entry_id=s.library_entry_id and p.style=s.style\n     and p.current_family_id is distinct from fid;\n  end if;\n end if;\n -- Retire unsupported Current only after family refresh.\n update public.recipe_preferences p set current_family_id=null\n  where p.owner_id=s.owner_id and p.library_entry_id=s.library_entry_id\n   and p.current_family_id is not null and not exists(\n    select 1 from public.shots x\n     where x.owner_id=p.owner_id and x.setup_version_id=p.setup_version_id\n      and x.library_entry_id=p.library_entry_id and x.style=p.style\n      and x.personal_family_id=p.current_family_id and x.is_dialed_in\n      and x.hidden_at is null);\nend $function$\n",
+      "reviewed_characters": [
+        1,
+        3219
+      ],
+      "review_verdict": "ACTIVE_STYLE_COFFEE_SCOPED_FAMILY_SELECTION_AND_FAVORITE_REPAIR",
+      "complete_source_read": true
+    },
+    {
+      "signature": "private.import_id(u uuid, kind text, source_id text)",
+      "source_md5": "d8dacedebb77db30037b10ee1bac97aa",
+      "source_chars": 436,
+      "complete_definition": "CREATE OR REPLACE FUNCTION private.import_id(u uuid, kind text, source_id text)\n RETURNS uuid\n LANGUAGE plpgsql\n IMMUTABLE\n SET search_path TO ''\nAS $function$\nbegin\n if source_id is null or length(source_id) not between 1 and 200 then\n  raise exception using errcode='22023',message='Every imported record needs a stable source ID.';\n end if;\n return md5(u::text || ':dic-import-v1:' || kind || ':' || source_id)::uuid;\nend $function$\n",
+      "reviewed_characters": [
+        1,
+        436
+      ],
+      "review_verdict": "ACTIVE_OWNER_AND_KIND_SCOPED_DETERMINISTIC_UUID; duplicate ids fail atomically",
+      "complete_source_read": true
+    },
+    {
+      "signature": "private.import_operation(expected_owner uuid, doc jsonb, save boolean, review_hash text, recovery_saved boolean)",
+      "source_md5": "b684a6af862302d9d4bb7c212208f5e0",
+      "source_chars": 3124,
+      "complete_definition": "CREATE OR REPLACE FUNCTION private.import_operation(expected_owner uuid, doc jsonb, save boolean, review_hash text, recovery_saved boolean)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare u uuid:=private.require_member(); h text; result jsonb; existing private.import_batches; before_state jsonb; gate boolean;\nbegin\n if expected_owner is null or expected_owner is distinct from u then raise exception using errcode='42501',message='Account changed; re-open Import Backup.'; end if;\n if doc is null or octet_length(doc::text)>2097152 then raise exception using errcode='22023',message='Choose a backup no larger than 2 MB.'; end if;\n perform pg_advisory_xact_lock(hashtextextended(u::text,9311));\n h:=encode(sha256(convert_to(doc::text,'UTF8')),'hex');\n select * into existing from private.import_batches where owner_id=u and source_hash=h;\n if found then return existing.result || jsonb_build_object('alreadyImported',true,'reviewHash',h,'canImport',false); end if;\n select coalesce(saves_enabled and (\n      recovery_verified_at is not null OR (\n        owner_only_exception_owner_id=u\n        and owner_only_exception_approved_at is not null\n        and owner_only_exception_expires_at>clock_timestamp()\n      )),false) into gate from private.import_control where singleton;\n if save then\n  if not coalesce(gate,false) then return jsonb_build_object('ok',false,'code','recovery_required','message','Import is locked until the cloud backup and recovery check is completed. Preview is available now.'); end if;\n  if review_hash is distinct from h or recovery_saved is distinct from true then raise exception using errcode='22023',message='Review this exact file and save the recovery copy before importing.'; end if;\n  before_state:=private.read_personal_state();\n  result:=private.apply_prototype_import(u,doc) || jsonb_build_object('ok',true,'imported',true);\n  insert into private.import_batches(owner_id,source_hash,source_document,before_state,result) values(u,h,doc,before_state,result);\n  -- One successful owner-only exception commit closes the gate atomically.\n  -- Full hosted recovery, when actually verified, uses the original normal gate.\n  update private.import_control\n     set saves_enabled=false,\n         owner_only_exception_owner_id=null,\n         owner_only_exception_approved_at=null,\n         owner_only_exception_expires_at=null\n   where singleton and recovery_verified_at is null\n     and owner_only_exception_owner_id=u;\n  return result || jsonb_build_object('reviewHash',h);\n end if;\n -- Exceptions are a PostgreSQL subtransaction: no preview records are committed.\n begin\n  result:=private.apply_prototype_import(u,doc);\n  raise exception using errcode='PZ001',message='preview_rollback';\n exception when sqlstate 'PZ001' then null;\n end;\n return result || jsonb_build_object('ok',true,'imported',false,'alreadyImported',false,'reviewHash',h,'canImport',coalesce(gate,false),\n  'blockReason',case when not coalesce(gate,false) then 'Cloud backup and recovery verification is still pending. Preview changes nothing.' else null end);\nend $function$\n",
+      "reviewed_characters": [
+        1,
+        3124
+      ],
+      "review_verdict": "ACTIVE_PER_MEMBER_ADVISORY_LOCK_AND_EXACT_BACKUP_HASH_GATE; previews rollback within subtransaction and commits require recovery acknowledgement",
+      "complete_source_read": true
+    },
+    {
+      "signature": "private.refresh_personal_family(fid uuid)",
+      "source_md5": "e6a15e6de21f56345479574cc575cf95",
+      "source_chars": 2134,
+      "complete_definition": "CREATE OR REPLACE FUNCTION private.refresh_personal_family(fid uuid)\n RETURNS void\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare\n n integer; rlo numeric; rhi numeric; rc numeric;\n tlo numeric; thi numeric; tc numeric; data jsonb;\n same_ratio_variation boolean;\nbegin\n select count(*) into n from public.shots where personal_family_id=fid and is_dialed_in and hidden_at is null;\n if n=0 then\n  update public.personal_recipe_families\n   set statistics='{\"count\":0}'::jsonb,evidence_state='retired' where id=fid;\n  return;\n end if;\n select\n  case when n>=12 then percentile_cont(.1) within group(order by ratio) else min(ratio) end,\n  case when n>=12 then percentile_cont(.9) within group(order by ratio) else max(ratio) end,\n  case when n>=12 then percentile_cont(.1) within group(order by time_s) else min(time_s) end,\n  case when n>=12 then percentile_cont(.9) within group(order by time_s) else max(time_s) end\n into rlo,rhi,tlo,thi\n from public.shots where personal_family_id=fid and is_dialed_in and hidden_at is null;\n select avg(ratio) filter(where n<12 or ratio between rlo and rhi),\n        avg(time_s) filter(where n<12 or time_s between tlo and thi)\n into rc,tc\n from public.shots where personal_family_id=fid and is_dialed_in and hidden_at is null;\n select count(distinct ratio)=1 and\n   (count(distinct time_s)>1 or count(distinct coalesce(temperature_c,-999))>1)\n into same_ratio_variation\n from public.shots where personal_family_id=fid and is_dialed_in and hidden_at is null;\n data:=jsonb_build_object(\n  'count',n,\n  'ratio',jsonb_build_object('low',rlo,'high',rhi,'center',rc),\n  'time',jsonb_build_object('low',tlo,'high',thi,'center',tc),\n  'rangeMethod',case when n>=12 then 'p10_p90' else 'observed' end,\n  'evidenceScope','ratio_only',\n  'sameRatioNonRatioVariation',coalesce(same_ratio_variation,false),\n  'nonRatioSignificance',case when same_ratio_variation then 'unproven' else 'not_indicated' end\n );\n update public.personal_recipe_families\n  set statistics=data,evidence_state=case when n>=2 then 'personally_confirmed' else 'candidate' end\n  where id=fid;\nend $function$\n",
+      "reviewed_characters": [
+        1,
+        2134
+      ],
+      "review_verdict": "ACTIVE_RECOMPUTES_FAMILY_STATISTICS_ON_ROLLBACK_SAFE_COHORT",
+      "complete_source_read": true
+    },
+    {
+      "signature": "public.dic_commit_import(expected_owner uuid, backup jsonb, review_hash text, recovery_saved boolean)",
+      "source_md5": "13e59d7da1efb928dc307f90a2e08dca",
+      "source_chars": 295,
+      "complete_definition": "CREATE OR REPLACE FUNCTION public.dic_commit_import(expected_owner uuid, backup jsonb, review_hash text, recovery_saved boolean)\n RETURNS jsonb\n LANGUAGE sql\n SET search_path TO ''\nAS $function$\n select private.import_operation(expected_owner,backup,true,review_hash,recovery_saved);\n$function$\n",
+      "reviewed_characters": [
+        1,
+        295
+      ],
+      "review_verdict": "ACTIVE_AUTHENTICATED_PUBLIC_COMMIT_WRAPPER",
+      "complete_source_read": true
+    },
+    {
+      "signature": "public.dic_preview_import(expected_owner uuid, backup jsonb)",
+      "source_md5": "001e3dd5b495ca6d1fd096bf35a473dd",
+      "source_chars": 239,
+      "complete_definition": "CREATE OR REPLACE FUNCTION public.dic_preview_import(expected_owner uuid, backup jsonb)\n RETURNS jsonb\n LANGUAGE sql\n SET search_path TO ''\nAS $function$\n select private.import_operation(expected_owner,backup,false,null,false);\n$function$\n",
+      "reviewed_characters": [
+        1,
+        239
+      ],
+      "review_verdict": "ACTIVE_AUTHENTICATED_PUBLIC_PREVIEW_WRAPPER",
+      "complete_source_read": true
+    }
+  ],
+  "dependency_proofs": {
+    "validated_foreign_keys": [
+      {
+        "table": "public.shots",
+        "name": "shots_owner_id_library_entry_id_style_personal_family_id_fkey",
+        "ddl": "FOREIGN KEY (owner_id, library_entry_id, style, personal_family_id) REFERENCES personal_recipe_families(owner_id, library_entry_id, style, id)",
+        "validated": true
+      },
+      {
+        "table": "public.recipe_preferences",
+        "name": "recipe_preferences_owner_id_library_entry_id_style_current_fkey",
+        "ddl": "FOREIGN KEY (owner_id, library_entry_id, style, current_family_id) REFERENCES personal_recipe_families(owner_id, library_entry_id, style, id)",
+        "validated": true
+      }
+    ],
+    "reason": "The apparent malformed-backup cross-coffee/style family misassignment is actively rejected by enforced composite FKs; do not manufacture a migration."
+  },
+  "safe_aggregates": {
+    "import_batches": 1,
+    "personal_recipe_families": 6,
+    "legacy_import_shots": 14,
+    "live_cross_family_mismatch": 0,
+    "import_rpc_authenticated_cumulative_calls": 4,
+    "import_rpc_authenticated_weighted_mean_ms": 166.85,
+    "import_rpc_authenticated_max_ms": 362.8,
+    "import_rpc_authenticated_temp_blocks_written": 0,
+    "query_window": "CUMULATIVE_NOT_RECENT; no provider DML or raw member records"
+  },
+  "source_bound_existing_test": {
+    "path": "supabase/tests/native_import.sql",
+    "git_blob": "9dfa08baf6e69f88a3524596e134e4112c753555",
+    "source_characters": 12862,
+    "cases_read": "3-shot preview, owner mismatch, null owner, recovery gate, exact hash, idempotent retry, credential rejection, unsupported Experiment, rollback-safe restoration, pending/anon rejection",
+    "ci": "NOT_RERUN; no claim of fresh passing evidence"
+  },
+  "current_consumer": {
+    "path": "site/cloud/client.js",
+    "git_blob": "08e1ac1f2610dca9fad162272c8e3c7ea56566a5",
+    "apis": [
+      "previewImport",
+      "commitImport"
+    ],
+    "note": "Wrapper calls public dic_preview_import/dic_commit_import; released/current UI and external consumers outside selected files remain UNVERIFIED"
+  },
+  "findings": {
+    "new_confirmed_bug": false,
+    "proven_deletion": false,
+    "measured_bottleneck": false,
+    "one_candidate_refuted": "Cross-style or cross-coffee family assignment rejected by VALIDATED composite FK",
+    "live_member_incident": "NOT_ESTABLISHED"
+  },
+  "coverage": {
+    "complete_live_sql_functions": 7,
+    "total_complete_function_chars": 25892,
+    "prior_review_reused": true,
+    "first_time_provider_word_credit": 0,
+    "issue267_original_current_line_credit": 0,
+    "baseline": "IN_PROGRESS"
+  },
+  "write_boundary": {
+    "app_source_test_ci_changes": 0,
+    "production_sql_data_auth_edge_storage_config_changes": 0,
+    "release_publish": 0,
+    "backup_billing_schedule_alert_changes": 0,
+    "new_ci": "NOT_RUN_DOCS_ONLY",
+    "queue_status": "UNCHANGED_TESTING"
+  },
+  "unverified": [
+    "Native compiled provider code, provider-console-only Auth settings, all external import callers, hosted #96 end-user acceptance"
+  ],
+  "next": "First current changed/new provider definition if one appears; otherwise private.dic_admin_records(p_kind text,p_offset integer,p_limit integer) character 1: pagination/consumer aggregate semantics with complete source, current Admin UI and read-only planner before any change."
+}
