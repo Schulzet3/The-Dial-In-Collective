@@ -4849,6 +4849,21 @@
       "release": "TESTING",
       "baseline": "IN_PROGRESS",
       "next": "Merged exact CI/possible source-only historical stale family backfill, then new provider definitions"
+    },
+    {
+      "run": "R359b",
+      "date": "2026-11-19",
+      "preflight_development_sha": "8a45f21cbbd4526dade5ae12d7fe450ca6c551be",
+      "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "source_sha": "9b97754c7a80d988947657978ec7cad1af9ed3ae",
+      "pr": 3399,
+      "receipt": "docs/audits/issue509-r359b-admin-shot-merge-ci-20261119.json",
+      "merged_exact_source_applicable_ci": "6_PASS",
+      "unrelated_issue33": "FAIL",
+      "production_writes": 0,
+      "queue": "TESTING",
+      "baseline": "IN_PROGRESS",
+      "next": "Historical family mismatch and new provider definitions"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -24898,5 +24913,27 @@
     "provider_writes": 0,
     "baseline": "IN_PROGRESS",
     "next": "Separate safe stale family reconciliation and new/changed provider definitions"
+  },
+  "provider_admin_shot_delete_family_merge_ci_run359b": {
+    "preflight_development_sha": "8a45f21cbbd4526dade5ae12d7fe450ca6c551be",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "source_merged_sha": "9b97754c7a80d988947657978ec7cad1af9ed3ae",
+    "receipt": "docs/audits/issue509-r359b-admin-shot-merge-ci-20261119.json",
+    "ci_jobs_pass": [
+      "approval",
+      "sql",
+      "validate",
+      "cloud-tests",
+      "mobile-browser-qa",
+      "python-audit"
+    ],
+    "issue33_selected": "FAILED_UNRELATED",
+    "merged_source_status": "VERIFIED",
+    "release_status": "TESTING_NOT_READY",
+    "provider_writes": 0,
+    "first_time_sql_source_word_credit": 0,
+    "issue267_source_line_credit": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "New/changed provider definitions, separately prove safe historical stale count repair"
   }
 }
