@@ -45,6 +45,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/release/ready-evidence-gate.mjs
+      - name: Require frozen five-job CI before any READY promotion (owner #3347)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node --test tests/ready-promotion-gate.test.mjs
+          node scripts/release/ready-promotion-gate.mjs
       - name: Audit EVERY pushed commit, including docs-only and earlier commits in batch
         env:
           DIC_BASE_SHA: ${{ github.event.before || github.event.pull_request.base.sha }}
