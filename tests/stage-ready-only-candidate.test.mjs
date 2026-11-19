@@ -17,6 +17,7 @@ function fixture(){
  git('config','user.name','DIC candidate fixture');git('config','user.email','fixture@example.com');
  write('site/card.js','published card\n');
  write('src/server/extractor.mjs','published extractor\n');
+ write('docs/ai/PREFLIGHT.md','# Mandatory starting point for EVERY DIC task\nFixture parent preflight.\n');
  write('docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md','# Fixture journal\n');
  write('docs/RELEASE_QUEUE.json',JSON.stringify(qBase,null,2)+'\n');
  git('add','-A');git('commit','-qm','Published synthetic baseline [skip netlify]');
@@ -59,8 +60,23 @@ test('real Git staging restores only unfinished code, preserves READY content an
   assert.deepEqual(manifest.restored_to_published_paths,['src/server/extractor.mjs']);
   assert.match(f.git('log','-1','--format=%B',sha),/\[skip netlify\]/);
   assert.match(f.git('show',sha+':docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md'),/not published/);
+  const candidateJournal=f.git('show',sha+':docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md');
+  const sourcePreflightBlob=f.git('rev-parse',f.development+':docs/ai/PREFLIGHT.md');
+  assert.ok(candidateJournal.includes('DIC_PREFLIGHT_VERIFIED development_sha='+f.development+
+   ' preflight_blob_sha='+sourcePreflightBlob),'new candidate journal must cite exact preflight Git blob');
+
   assert.equal(f.git('rev-parse','development/backend-foundation'),f.development,'staging never rewrites development');
   assert.throws(()=>stage(f),/update-ref|already exists/,'cannot silently duplicate a candidate ref');
+ }finally{rmSync(f.root,{recursive:true,force:true});}
+});
+test('#3347 missing development preflight source fails closed before candidate ref',()=>{
+ const f=fixture();
+ try{
+  f.git('rm','docs/ai/PREFLIGHT.md');
+  f.git('commit','-qm','Remove fixture preflight [skip netlify]');
+  f.development=f.git('rev-parse','HEAD');
+  assert.throws(()=>stage(f,'missing-preflight'),/source preflight object missing/);
+  assert.throws(()=>f.git('rev-parse','release-candidates/missing-preflight'));
  }finally{rmSync(f.root,{recursive:true,force:true});}
 });
 test('real staging refuses an unready change to the same READY file',()=>{

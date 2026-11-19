@@ -65,13 +65,11 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
   selectedReadyItems:plan.ready_items});
  const restoredSqlTests=discoverRestoredUnreadySqlTests({
   queue,restoredPaths:plan.restored_paths,publishedSourceSha,developmentSourceSha,
-  sourceObjectAt,selectedReadyItems:plan.ready_items,
-  developmentChangedPaths:developmentPaths
+  sourceObjectAt,selectedReadyItems:plan.ready_items,developmentChangedPaths:developmentPaths
  });
  const restoredCoffeeTests=discoverRestoredUnreadyCoffeeTests({
   queue,restoredPaths:plan.restored_paths,publishedSourceSha,developmentSourceSha,
-  sourceObjectAt,selectedReadyItems:plan.ready_items,
-  developmentChangedPaths:developmentPaths
+  sourceObjectAt,selectedReadyItems:plan.ready_items,developmentChangedPaths:developmentPaths
  });
  const unpublishedTests=discoverExcludedUnreadyTests({queue,selectedIds:plan.selected_ids,
   restoredPaths:plan.restored_paths,pinnedReadyPaths:plan.pinned_ready_paths,
@@ -110,9 +108,9 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    git(['update-index','--force-remove','--',path],{env});
   for(const path of [...restoredSqlTests,...restoredCoffeeTests]){
    const object=sourceObjectAt(publishedSourceSha,path);
-   if(!object)throw Error('Reviewed published SQL regression missing: '+path);
-   const [mode,sha]=object.split(':');
-   git(['update-index','--add','--cacheinfo',mode,sha,path],{env});
+   if(object){const [mode,sha]=object.split(':');
+    git(['update-index','--add','--cacheinfo',mode,sha,path],{env});}
+   else git(['update-index','--force-remove','--',path],{env});
   }
   for(const path of compatibleAuditSupport)
    git(['update-index','--add','--cacheinfo','100644',
@@ -129,16 +127,28 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    excluded_unpublished_workflow_test_paths:workflowOnlyTests,
    excluded_unready_test_paths:unpublishedTests,
    publication_authorized:false};
+  // New candidate Git commits change code/workflows, so carry a fresh
+  // exact-parent journal receipt validated by approval continuity.
+  let preflightBlob,preflightText;
+  try{
+   preflightBlob=git(['rev-parse','--verify',developmentSourceSha+':docs/ai/PREFLIGHT.md']);
+   preflightText=git(['show',developmentSourceSha+':docs/ai/PREFLIGHT.md'],{trim:false});
+  }catch{throw Error('Candidate staging HOLD: source preflight object missing from exact development parent');}
+  if(!SHA.test(preflightBlob)||!preflightText.startsWith('# Mandatory starting point for EVERY DIC task'))
+   throw Error('Candidate staging HOLD: invalid exact development preflight source/blob');
   const originalJournal=git(['show',developmentSourceSha+':'+CANDIDATE_JOURNAL_PATH],{trim:false});
-  const journal=originalJournal.trimEnd()+'\n\n## READY-only source candidate (not published)\n'+
+  const journal=originalJournal.trimEnd()+'\n\n'+
+   'DIC_PREFLIGHT_VERIFIED development_sha='+developmentSourceSha+
+   ' preflight_blob_sha='+preflightBlob+
+   '\n\n## READY-only source candidate (not published)\n'+
    '- Development parent: '+developmentSourceSha+'\n'+
    '- Published baseline: '+publishedSourceSha+'\n'+
    '- Selected READY IDs: '+plan.selected_ids.join(', ')+'\n'+
    '- Restored unfinished paths: '+(plan.restored_paths.join(', ')||'(none)')+'\n'+
    '- Pinned READY mixed-source paths: '+(plan.pinned_ready_paths.join(', ')||'(none)')+'\n'+
    '- Restored previously reviewed compatible audit helper: '+(compatibleAuditSupport.join(', ')||'(none)')+'\n'+
-   '- Restored published SQL regression for unready migrations: '+(restoredSqlTests.join(', ')||'(none)')+'\n'+
-   '- Restored original coffee tests for unready source: '+(restoredCoffeeTests.join(', ')||'(none)')+'\n'+
+   '- Restored published SQL regression files for unready migrations: '+(restoredSqlTests.join(', ')||'(none)')+'\n'+
+   '- Restored published coffee identity regressions for unready parser: '+(restoredCoffeeTests.join(', ')||'(none)')+'\n'+
    '- Restored development-only GitHub workflows to published bytes: '+(unpublishedWorkflows.join(', ')||'(none)')+'\n'+
    '- Omitted exact reviewed workflow-only, unpublished tests: '+(workflowOnlyTests.join(', ')||'(none)')+'\n'+
    '- Omitted source-bound unready issue tests: '+(unpublishedTests.join(', ')||'(none)')+'\n'+
