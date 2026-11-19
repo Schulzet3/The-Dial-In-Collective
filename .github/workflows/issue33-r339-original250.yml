@@ -35,7 +35,6 @@ jobs:
         env:
           DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '250'
           DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r339
-          DIC_ISSUE33_FOCUSED_CURRENT_ALTERNATE_URL: https://orleanscoffee.com/product/colombia-supremo-bucaramanga-coffee/
         run: node scripts/audit/issue33-original603-focused-source-review.mjs
       - name: Strict selected H1 HTML hash actual parser and Add Coffee afterproof
         if: always()
