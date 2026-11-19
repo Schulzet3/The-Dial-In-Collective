@@ -79,6 +79,57 @@ export function discoverReviewedRestoredSqlTests({queue,restoredPaths,publishedS
  return [spec.path];
 }
 
+// Existing coffee tests were changed in exactly the same unfinished #33 R232
+// merge as their runtime. Restore complete LAST-PUBLISHED test bytes when
+// that runtime is deliberately restored, never delete/skip these regressions.
+export const REVIEWED_R232_COFFEE_TEST=Object.freeze({
+ item:'DIC-Q-33-r232-selected-annual-release-role',issue:33,
+ merge:'b585b9cf646da868e6c7c8871289c82f6d96e6ca',
+ runtime:'src/server/coffee-identity-evidence.mjs',
+ oldRuntime:'c43e128ea1eb61d09dbaad4ce6a926eedcbe9e83',
+ newRuntime:'a75ec662fec764f41982bcbb3bbfb2798f7c5b1d',
+ testBlobs:Object.freeze({
+  'tests/coffee-corpus-identity-regressions.test.mjs':Object.freeze({
+   old:'7269450ec113a605499c694bea1a53cf7bcb03cf',
+   newer:'d9e9ea3f27b12a0f44fc40ababdc2e4c319e3cee'}),
+  'tests/universal-coffee-preview.test.mjs':Object.freeze({
+   old:'8c49e473dbcb978860881654ff59e9d3224539a5',
+   newer:'306c7d79f07f800f73ffc575b90ed881b57b8d67'})
+ })
+});
+export function discoverReviewedRestoredR232CoffeeTests({queue,restoredPaths,
+ publishedSourceSha,developmentSourceSha,sourceObjectAt,selectedReadyItems=[]}={}){
+ const s=REVIEWED_R232_COFFEE_TEST;
+ if(!restoredPaths?.includes(s.runtime))return [];
+ if(typeof sourceObjectAt!=='function'||!Array.isArray(selectedReadyItems))
+  throw Error('R232 frozen coffee source proof unavailable');
+ const owner=queue?.items?.find(i=>i.id===s.item);
+ const obj=(sha,path)=>sourceObjectAt(sha,path);
+ if(owner?.issue!==s.issue||owner.state!=='TESTING'||
+    (owner.merged_source_sha!==null&&owner.merged_source_sha!==undefined)||
+    owner.scope_paths?.length!==1||owner.scope_paths[0]!==s.runtime||
+    obj(publishedSourceSha,s.runtime)!=='100644:'+s.oldRuntime||
+    obj(developmentSourceSha,s.runtime)!=='100644:'+s.newRuntime||
+    obj(s.merge,s.runtime)!=='100644:'+s.newRuntime||
+    obj(s.merge+'^',s.runtime)!=='100644:'+s.oldRuntime)
+  throw Error('Unready R232 owner or runtime provenance mismatch');
+ const paths=Object.keys(s.testBlobs).sort();
+ for(const path of paths){
+  const proof=s.testBlobs[path];
+  if(obj(publishedSourceSha,path)!=='100644:'+proof.old||
+     obj(developmentSourceSha,path)!=='100644:'+proof.newer||
+     obj(s.merge,path)!=='100644:'+proof.newer||
+     obj(s.merge+'^',path)!=='100644:'+proof.old)
+   throw Error('R232 historical test Git object changed: '+path);
+  for(const item of selectedReadyItems){
+   if(!SHA.test(item.merged_source_sha||'')||
+      obj(item.merged_source_sha,path)!==obj(item.merged_source_sha+'^',path))
+    throw Error('Selected READY merge edited R232 test: '+path);
+  }
+ }
+ return paths;
+}
+
 const REVIEWED_OWNER_DRIVE_TEST=Object.freeze({
  path:'tests/dic-owner-drive-connect.test.mjs',
  runtime:'netlify/functions/dic-owner-drive-connect.mjs',
@@ -524,17 +575,24 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
    if(path!==REVIEWED_COMPATIBLE_AUDIT_SUPPORT.path||
       sourceObjectAt(candidateSha,path)!=='100644:'+REVIEWED_COMPATIBLE_AUDIT_SUPPORT.historicalBlobSha)
      reject('Historical audit helper was not restored to exact independent reviewed bytes');
- const restoredSqlTests=manifest.restored_to_published_unready_test_paths||[];
- const expectedRestoredSqlTests=discoverReviewedRestoredSqlTests({
-  queue,restoredPaths:plan.restored_paths,publishedSourceSha,
+ const restoredTests=manifest.restored_to_published_unready_test_paths||[];
+ const sqlTests=discoverReviewedRestoredSqlTests({queue,
+  restoredPaths:plan.restored_paths,publishedSourceSha,
   developmentSourceSha:manifest.development_source_sha,sourceObjectAt,
   selectedReadyItems:plan.ready_items});
- if(!Array.isArray(restoredSqlTests)||!equal(restoredSqlTests,expectedRestoredSqlTests))
-  reject('Restored unfinished SQL tests differ from exact reviewed source/ownership');
- for(const path of restoredSqlTests)
-  if(path!==REVIEWED_SOURCE_PATH_CASE_SQL_TEST.path||
+ const coffeeTests=discoverReviewedRestoredR232CoffeeTests({queue,
+  restoredPaths:plan.restored_paths,publishedSourceSha,
+  developmentSourceSha:manifest.development_source_sha,sourceObjectAt,
+  selectedReadyItems:plan.ready_items});
+ const approvedTests=[...sqlTests,...coffeeTests].sort();
+ if(!Array.isArray(restoredTests)||!equal(restoredTests,approvedTests))
+  reject('Restored existing unfinished tests differ from exact reviewed source/ownership');
+ for(const path of restoredTests){
+  if(!approvedTests.includes(path)||!Object.hasOwn(REVIEWED_R232_COFFEE_TEST.testBlobs,path)&&
+      path!==REVIEWED_SOURCE_PATH_CASE_SQL_TEST.path||
      sourceObjectAt(candidateSha,path)!==sourceObjectAt(publishedSourceSha,path))
-   reject('Unready SQL test not restored to exact published Git object');
+   reject('Original complete regression suite not restored to exact published Git object: '+path);
+ }
  const excludedTests=manifest.excluded_unready_test_paths||[];
  if(excludedTests.some(path=>compatibleAuditSupport.includes(path)))
    reject('A reviewed compatible helper cannot be simultaneously excluded');
@@ -594,7 +652,7 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
     reject('Cannot exclude a test introduced or modified by an approved READY merge: '+path);
   }
  }
- const allowed=[...plan.restored_paths,...plan.pinned_ready_paths,...compatibleAuditSupport,...restoredSqlTests,...excludedTests,...workflowOnlyTests,...frozenWorkflows,CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH];
+ const allowed=[...plan.restored_paths,...plan.pinned_ready_paths,...compatibleAuditSupport,...restoredTests,...excludedTests,...workflowOnlyTests,...frozenWorkflows,CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH];
  if(!equal(stagedCommitChangedPaths||[],allowed))
   reject('Candidate staging commit changes unrelated paths or lacks same-commit journal');
  for(const path of plan.restored_paths)
@@ -618,7 +676,7 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
  }
  return {ready:true,errors:[],deployable_paths:plan.included_paths,
   ready_items:plan.ready_items,other_items:plan.other_items,
-  excluded_paths:plan.restored_paths,pinned_ready_paths:plan.pinned_ready_paths,restored_compatible_audit_support_paths:compatibleAuditSupport,restored_to_published_unready_test_paths:restoredSqlTests,excluded_unready_test_paths:excludedTests,excluded_unpublished_workflow_test_paths:workflowOnlyTests,
+  excluded_paths:plan.restored_paths,pinned_ready_paths:plan.pinned_ready_paths,restored_compatible_audit_support_paths:compatibleAuditSupport,restored_to_published_unready_test_paths:restoredTests,excluded_unready_test_paths:excludedTests,excluded_unpublished_workflow_test_paths:workflowOnlyTests,
   development_source_sha:manifest.development_source_sha,
   candidate_source_sha:candidateSha};
 }

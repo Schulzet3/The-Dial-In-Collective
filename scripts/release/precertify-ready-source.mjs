@@ -54,7 +54,7 @@ export function requiredReadyPins(queue,ids,developmentChangedPaths,{
 export function frozenReadyBranch(queue,items){
  if(!items.length)throw Error('Cannot freeze an empty READY batch');
  const identity=JSON.stringify({
-  stage_contract:'READY3347-SAME-COMMIT-PREFLIGHT-V2',
+  stage_contract:'READY3347-FROZEN-R232-TESTS-V3',
   base:queue.published_base?.tested_source_sha,
   selected:items.map(i=>[i.id,i.merged_source_sha,sorted(i.scope_paths||[]),
    sorted(i.ci_runs||[])])
