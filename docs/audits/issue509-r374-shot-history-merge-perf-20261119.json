@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R374",
+  "date_utc": "2026-11-19",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "b659d526d91bb45af0f04318a925f47bec4b63b7",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "git_blob_sha1_byte_verified": true,
+    "bytes": 5718
+  },
+  "source": {
+    "pr": 3460,
+    "expected_head": "acf3be0f95c0b19ef5542a1a46e820c6e30e595f",
+    "merged_development_sha": "a788b3e31c2e1f0d7921a52f67a9035d3eda5a6a",
+    "merge_commit_skip_netlify": true,
+    "merged_blob_parity": {
+      "site/cloud/mapping.js": "acbed6bd0f02cb7e626374a22cbeba1ab187ec2a",
+      "tests/issue509-shot-order.test.mjs": "5449e8e6aff1a2b0e0f57cee669a9518d2c139cf",
+      "docs/audits/issue509-r373-shot-partition-order-ci-repair-20261119.json": "9cbe9de8274dfe0b3ff54ab1304e105c0365c8ff"
+    },
+    "bug": "Same-instant History order nondeterminism; regression repair retains order across unrelated coffee/style partitions"
+  },
+  "pr_head_checks": {
+    "all_applicable_success": true,
+    "success": [
+      44632533921,
+      44632534107,
+      44632533919,
+      44632534071,
+      44632533924,
+      44632533969,
+      44632533926
+    ],
+    "skipped_not_pass": [
+      44632533912
+    ]
+  },
+  "merged_source_checks": "NOT_YET_OBSERVED: GitHub connector lists PR-triggered runs only; do not infer push CI from PR-head",
+  "provider": {
+    "read_only": true,
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.11.0.003",
+    "migration_count": 69,
+    "latest_migration": "20261113195659",
+    "deployed_edge_count": 5,
+    "deployed_edge_versions": {
+      "dic-delete-member-account": 4,
+      "dic-admin-push-broker": 3,
+      "dic-preview-coffee": 7,
+      "dic-member-approval-broker": 1,
+      "dic-verify-coffee": 10
+    },
+    "publication": {
+      "name": "supabase_realtime",
+      "all_tables": false,
+      "published_tables": 0,
+      "replication_slots": 0
+    },
+    "extension_count": 7,
+    "cron_schema_objects": 0,
+    "stats": {
+      "authenticated_read_personal_state": {
+        "queryid": "1725044562985116050",
+        "calls": 4789,
+        "mean_ms": 15.292,
+        "max_ms": 1566.38,
+        "shared_blks_hit": 8405598,
+        "shared_blks_read": 0,
+        "temp_blks_written": 0
+      },
+      "postgres_catalog_maintenance": {
+        "queryid": "4231681690601413654",
+        "calls": 53,
+        "mean_ms": 223.868,
+        "temp_blks_written": 89966
+      }
+    }
+  },
+  "verdict": "Current cumulative telemetry and publication metadata directly examined. No independently demonstrated new member-facing bottleneck; historical postgres catalog temp usage not misattributed to application. No new verified provider-definition word credit. No changes to production SQL/data/Auth/Storage/Edge/config.",
+  "first_time_provider_words": 0,
+  "issue267_source_lines": 0,
+  "release": "TESTING; independent source isolation / #3347 acceptance and merged-source CI unverified",
+  "baseline": "IN_PROGRESS",
+  "next": "Verify exact merged-source push checks without treating PR-only CI as merged pass; resume first new or previously unreviewed provider object (including console-only UNVERIFIED), compare actual deployment/source before any cleanup; preserve #96/#267/#504 boundaries."
+}
