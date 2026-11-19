@@ -8,6 +8,39 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-r366-programmatic-use-recommendation-validation",
+      "issue": 455,
+      "pr": 3410,
+      "title": "Clear stale Log Shot aria-invalid and validation feedback after Use Recommendation fills a valid grind or temperature",
+      "state": "READY",
+      "merged_source_sha": "24577743c6a2f24922677d7df607c63b6d0d6823",
+      "scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "owner_source": "Issue #455 Option B owner-safe Locked-compatible accessibility/reliability fix, not a new numerical target, research rule or owner-held product presentation decision. DIC_PREFLIGHT_VERIFIED development_sha=1def2c9d6573297c406192b413ffc3e7620ffe7a preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e; original source 30f5e6a90a4e59a9c5cc6bea6ef3d7642d6028c1; unchanged existing U.acknowledgeShotInput helper af983c5a8b39d5003e1e9b69638be24e7d7c9d11.",
+      "tests": [
+        "Reproduced source-level old invalid-input after Save then programmatic Use Recommendation: corrected value previously retained invalid semantics because .value assignment does not fire input event.",
+        "Positive synthetic CloudApp R366 five cases: programmatic grind correction, remaining invalid dose, F/C programmatic temperature correction, remaining invalid grind, unrelated cloud/sync errors; all 5/5 PASS on exact head and merge in Node22 logs.",
+        "Actual PR head Node22 test suite 5704 total / 5698 PASS / 6 SKIP / 0 FAIL; R366 test cases 5127-5131 PASS. PR-head Chromium/mobile/offline/a11y, governance, security, applicable isolated SQL, shared dependency COMPLETED SUCCESS.",
+        "Actual merged source Node22 44527377725 same counts and R366 5/5; merged Chromium/mobile/offline/a11y 44527377723, approval 44527377726, shared dependency 44527377766 COMPLETED SUCCESS. Frozen original coffee corpus SKIPPED (not PASS)."
+      ],
+      "ci_runs": [
+        44526627008,
+        44526626992,
+        44526627075,
+        44526627060,
+        44526626974,
+        44526627100,
+        44527377725,
+        44527377723,
+        44527377726,
+        44527377766
+      ],
+      "blockers": [],
+      "notes": "READY DEVELOPMENT ONLY / NOT DEPLOYED. Same-commit preflight journal and changed blobs verified. No new data collection, empirical espresso outcome, numeric target or Locked choice, no original measurement/notes/history/privacy change, production SQL/Auth/member/Netlify writes or release permission. R365 post-success feedback disclosure remains separate owner-decision-held. F001-F027 research-only boundaries unchanged; S019 still not located.",
+      "production_deployed": false
+    },
+    {
       "id": "DIC-Q-33-r313-original42-own-caption-source-review",
       "issue": 33,
       "pr": 3326,
@@ -19695,6 +19728,15 @@
       "source_sha": "3697e1c09355ea7453247888588ca9b7401750ee",
       "production_deployed": false,
       "evidence": "Narrow R309 generic source_access_challenge class READY development after nonforce PR3308 exact merge 3697e1c09355ea7453247888588ca9b7401750ee and 4/4 blob parity; head Node4050 PASS 44398236947, merged Node4050 PASS 44398896964, merged cloud/mobile 44398896668 and approval 44398896543 SUCCESS. Historical original #148/independent #241 LIVE merchant access challenges remain unresolved; #241 official merged 44398896658 FAILED and frozen603 SKIPPED. DIC_PREFLIGHT_VERIFIED development_sha=eb5d01c3cc0f68970e7c3a31ef1bdaf620d5aeb6 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d; no deployment or original603 completion."
+    },
+    {
+      "date": "2026-11-19",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r366-programmatic-use-recommendation-validation",
+      "state": "READY",
+      "source_sha": "24577743c6a2f24922677d7df607c63b6d0d6823",
+      "production_deployed": false,
+      "evidence": "SAFE R366 PR #3410 nonforce merged 24577743c6a2f24922677d7df607c63b6d0d6823, 3/3 source/test/journal Git blob readback exact: 5f0fa268dedec7c81ca73bbc0c1592e70d5cee3c, de393571ca572a8d9d89b26ed9ce06ae9124cbeb, 38c83a6a1a4ba6b59e6e20c468ee6c2ae80e53c1. PR-head Node22 44526627008 5704 tests/5698 PASS/6 SKIP/0 FAIL with five focused R366 PASS; browser/mobile/offline/a11y 44526626992, approval 44526627075, SQL 44526627060, security 44526626974, shared dependency 44526627100 COMPLETED SUCCESS. Exact merged-source Node22 44527377725 5704/5698 PASS/6 SKIP/0 FAIL and five R366 PASS, real browser/offline 44527377723, approval 44527377726, shared dependency 44527377766 COMPLETED SUCCESS. Corpus workflow SKIPPED not PASS. Prefight first 1521edf9c6a81ce80253a217dcf08d5c0b0b5f83 blob 3742fed0176c809b115320c698a0e8b1675b2d3e; updated second prewrite development 1def2c9d6573297c406192b413ffc3e7620ffe7a same immutable blob before source/test commit. READY only for development, never deployed."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
