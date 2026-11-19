@@ -44,6 +44,17 @@ must(!/decaf|blueberr|praline|antioxidant/i.test(String(f.tasting_notes||'')),
 must(!f.decaffeination_method&&!f.release_label,'no_unpublished_decaf_or_lot');
 must(!/medium|dark/i.test(String(f.roast_level||'')),'no_related_roast_tier');
 must(!(r.seo_fallback_fields||[]).includes('tasting_notes'),'no_seo_taste_fallback');
+// Correct canonical fields are not sufficient: Source Review must cite
+// each exact selected profile caption, not its preceding unrelated row.
+for(const [field,value,heading] of [
+ ['origin','Honduras','Country of Origin'],
+ ['producer','Flor del Cafe','Producer'],
+ ['process','Washed','Processing Method']
+]){
+ const rows=(r.source_facts||[]).filter(f=>f.field===field&&f.value===value);
+ must(rows.some(f=>String(f.section||'').includes(heading)),
+  'current_selected_own_source_heading_'+field);
+}
 const again=extractPublicCoffeeFacts(html,{source_url:url});
 must(again?.ok===true&&again?.fields?.name===f.name,'replayed_actual_parser');
 const out={passed:errors.length===0,errors,checkout_sha:process.env.DIC_R313_CHECKOUT_SHA,event_sha:process.env.DIC_R313_EVENT_SHA,

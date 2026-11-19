@@ -56,3 +56,18 @@ test('R313 substitution warning never certifies lot, wrong identity and absent p
   [{...good,selected_heading_identity_verified:false}],[{...good,add_coffee_ui_rendered:false}]])
   assert.ok(requiredFocusedSourceFailures([42],bad).length>0);
 });
+
+test('R313 source review semantic profile facts identify their OWN captions',()=>{
+ const p=extractPublicCoffeeFacts(html(),{source_url:url});
+ assert.equal(p.ok,true);
+ for(const [field,value,heading] of [
+  ['origin','Honduras','Country of Origin'],
+  ['producer','Flor del Cafe','Producer'],
+  ['process','Washed','Processing Method']
+ ]){
+  const rows=(p.source_facts||[]).filter(f=>f.field===field&&f.value===value);
+  assert.ok(rows.length>0,'review evidence for '+field);
+  assert.ok(rows.some(f=>String(f.section||'').includes(heading)),
+   'source review heading '+heading+' must follow matched own fact');
+ }
+});
