@@ -29,7 +29,7 @@ function request(op,payload={},auth=true){
 }
 function fixture({status={authenticated:true,emailVerified:true,admitted:false,
  approvalState:'pending',admin:false},secrets={},claims=true,
- pushItems=[{hash:ENDPOINT_HASH,endpoint:ENDPOINT}],foreign=null}={}){
+ pushItems=[{hash:ENDPOINT_HASH,endpoint:ENDPOINT}],foreign=null,pushStatus=201}={}){
  const calls=[],receipts=[],sentEmails=[],sentPush=[],rows=[];
  const env=name=>({...defaults,...secrets})[name]??null;
  const fetcher=async(url,opts={})=>{
@@ -58,7 +58,7 @@ function fixture({status={authenticated:true,emailVerified:true,admitted:false,
    sentEmails.push({options:opts,body:JSON.parse(opts.body)});
    return Response.json({id:'email-provider-id-123456789'});
   }
-  if(url===ENDPOINT){sentPush.push(opts);return Response.json({}, {status:201});}
+  if(url===ENDPOINT){sentPush.push(opts);return Response.json({}, {status:pushStatus});}
   throw Error('Unexpected external test request: '+url);
  };
  return {broker:createMemberApprovalBroker({env,fetcher,now:()=>1794500000000}),
@@ -142,6 +142,20 @@ test('duplicate cron claim sends no email or push',async()=>{
  const res=await f.broker(request('poll',{},false));
  assert.deepEqual(await res.json(),{ok:true,handled:0});
  assert.equal(f.sentEmails.length+f.sentPush.length,0);
+});
+
+test('retired 404/410 push endpoints are removed but do not produce a false sent receipt',async()=>{
+ for(const pushStatus of [404,410]){
+  const f=fixture({pushStatus});
+  const res=await f.broker(request('poll',{},false));
+  assert.equal(res.status,200);
+  assert.deepEqual(await res.json(),{ok:true,handled:2});
+  assert.equal(f.sentPush.length,1);
+  assert.equal(f.rows.filter(x=>x.method==='DELETE').length,1);
+  assert.equal(f.rows.some(x=>x.method==='PATCH'),false);
+  assert.deepEqual(f.receipts.map(x=>[x.p_channel,x.p_outcome]).sort(),
+   [['email','sent'],['push','skipped']]);
+ }
 });
 
 test('schema: member endpoints are service-only and only real verified Admin approval creates both receipts',()=>{

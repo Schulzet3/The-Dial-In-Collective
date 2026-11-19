@@ -189,13 +189,17 @@ export function createMemberApprovalBroker({
            await fingerprint(ep.endpoint)!==ep.hash)throw Error('Malformed endpoint');
          const result=await sendPush(ep.endpoint,key);
          const route=SUBS+'?endpoint_hash=eq.'+ep.hash;
-         if(result.gone)await rest(route,{method:'DELETE'});
-         else if(result.ok)await rest(route,{method:'PATCH',prefer:'return=minimal',
-          body:{last_sent_event_id:eventId,updated_at:new Date(now()).toISOString()}});
-         else throw Error('Push provider did not accept the message');
+         // A gone endpoint is retired, not an acknowledged delivery.
+         if(result.gone){await rest(route,{method:'DELETE'});return 'gone';}
+         if(result.ok){
+          await rest(route,{method:'PATCH',prefer:'return=minimal',
+           body:{last_sent_event_id:eventId,updated_at:new Date(now()).toISOString()}});
+          return 'accepted';
+         }
+         throw Error('Push provider did not accept the message');
         }));
         if(checks.some(c=>c.status==='rejected'))throw Error('Some devices not acknowledged');
-        outcome='sent';
+        outcome=checks.some(c=>c.status==='fulfilled'&&c.value==='accepted')?'sent':'skipped';
        }
       }
      }catch{/* Do not log member email, push endpoint, tokens, or secrets. */}

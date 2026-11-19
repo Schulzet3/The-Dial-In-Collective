@@ -17203,6 +17203,30 @@
       ],
       "notes": "Future-only CREATE OR REPLACE preserves all earlier migrations, Auth, Community, immutable history and other function branches; release unchanged.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-member-approval-gone-push-receipt",
+      "issue": 509,
+      "pr": null,
+      "title": "Record retired member approval push endpoints as skipped rather than falsely sent",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/functions/dic-member-approval-broker/core.mjs"
+      ],
+      "owner_source": "Owner issue #509 autonomous provider semantic audit, cross-layer SQL-Edge contract; DIC_PREFLIGHT_VERIFIED development_sha=31972dfeb87624ea5a8b3192c4bc88255e061ccf preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e. Coordinate still-open #2258 real delivery verification; production read-only.",
+      "tests": [
+        "Exact deployed Edge v1 core.mjs byte-identical to immutable GitHub development before fix; on a push 404/410 the prior code deleted the endpoint, fulfilled Promise.allSettled and returned sent even with zero accepted providers.",
+        "Direct complete live public.dic_member_approval_claim/claim_poll/finish definitions; 0 live member approval deliveries and 0 push subscriptions (no member incident claimed).",
+        "New isolated Node22 test mocks each 404/410, validates endpoint DELETE and zero PATCH, skipped push acknowledgement and separate successful email; 2xx unchanged.",
+        "Exact-source Node22/cloud/approval CI PENDING; independent candidate source isolation and #96/#2258 physical acceptance UNVERIFIED."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source PR-head/merged applicable CI PENDING; source-isolated #3347 READY certification UNVERIFIED; no Publish permission"
+      ],
+      "notes": "No production SQL/Edge/Auth/Storage/config/data changes. Existing migration/identity/event IDs remain unchanged; no extra user notification.",
+      "production_deployed": false
     }
   ],
   "history": [

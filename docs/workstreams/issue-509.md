@@ -1,3 +1,17 @@
+# Issue #509 — R369 dormant member approval push delivery-receipt correction [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=31972dfeb87624ea5a8b3192c4bc88255e061ccf preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-19 UTC; production STRICTLY READ-ONLY.** Immutable live GitHub PREFLIGHT file content matches Git blob before other documents/providers. Supabase `azviqqejypsefzilgonr` ACTIVE_HEALTHY PostgreSQL17.11; 69 applied migrations and five active Edge functions. PR #3445 merged-source Node22 workflow run 44590982169 latest job validate **SUCCESS**, closing R368 pending CI; source queue still TESTING, not independently #3347 READY-certified.
+
+**Direct semantic behavior review:** Actual deployed `dic-member-approval-broker` v1 core.mjs (11,751 chars) was byte-identical to Git source blob `1bc82c0c0f7e90bb86dd7da895c18f9c4e015c5a` before fix. Inspected complete `public.dic_member_approval_claim` (1,920 chars, MD5 b0d1e8d2), `dic_member_approval_claim_poll` (335 chars, b94ddc22), and `dic_member_approval_finish` (1,003 chars, e92ba8e1), plus live Edge broker/Admin broker/deletion handlers and active consumer. A web-push endpoint returning **404 or 410** was removed from subscription storage but the fulfilled Promise was counted as **sent**, even if zero endpoints accepted; SQL explicitly accepts a distinct `skipped` outcome. Live read-only safe aggregates: **zero** delivery events, zero opted-in subscriptions; this is a source-reproduced **dormant incorrect receipt**, not a confirmed real-user incident or physical-device delivery proof. All source definitions have earlier direct review receipts: **0 first-time provider words and 0 #267 lines** credited.
+
+**Development-only proposed fix:** On 404/410, remove endpoint and return `gone`; on 2xx provider acceptance return `accepted`; after settled attempts report `sent` only if at least one accepted, otherwise `skipped`; preserve existing retry on any failed device, independently successful email, recipient privacy, SQL functions, database migrations and real user behavior. New disconnected synthetic Node22 test covers both 404/410, no false PATCH and independent email receipt. SAME-COMMIT journal/preflight, structured [R369 receipt](../audits/issue509-r369-member-approval-gone-receipt-20261119.json), append-only ledger and TESTING queue entry. **CI PENDING** until exact-source PR checks; no claim of READY, DEPLOYED, or true inbox/handset acceptance. Coordinate #2258, #96, #267; no live provider writes, publishing, billing, backups, schedule or alert changes. Baseline **IN_PROGRESS**.
+
+**Next:** Verify PR-head exact-source Node22, approval and applicable cloud/browser checks; repair failures; safe nonforce [skip netlify] integrate, independently verify merged-source results. Then resume truly new/changed provider objects. Avoid repeating completed Storage/platform review.
+
+---
+
 # Issue #509 — R368 R367 fix safely merged; current Storage corpus crosschecked [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=ac8b82ee9fbca4c3ea2c5b3dc854c2bab3ea919e preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
