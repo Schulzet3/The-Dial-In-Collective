@@ -17179,6 +17179,30 @@
       ],
       "notes": "Sort compatible calibrations by created_at and id before legacy fallback only; preserves immutable calibration IDs, history, private shots/notes, offline queue, and explicit calibration selection. No SQL or production changes. PR #3432 nonforce [skip netlify] merged at db2372f7c15e8c6aabf1468ffb6df18b6c8da873; source/test blobs match passing PR head.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-admin-completed-delete-retry-count",
+      "issue": 509,
+      "title": "Return stored Community removal count on completed Admin deletion retry",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261119175000_dic_admin_delete_completed_retry_count.sql"
+      ],
+      "owner_source": "Issue #509 R367; DIC_PREFLIGHT_VERIFIED development_sha=96a848fde0011f48adede2be289d2f5bbdd97626 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e. Reproducible dormant SQL-Edge contract mismatch; no affected current production operations.",
+      "tests": [
+        "Current live SQL complete prepare/finish and Edge v4 exact source comparison reproduced omission and default-zero path; full source reviewed before in R312",
+        "Disposable PG17 synthetic completed operation with saved community_removed=2, no member data or Auth deletion; actual hosted CI PENDING",
+        "Conditional NOT_APPLICABLE SQL runner when this TESTING migration is intentionally omitted from a READY candidate; Node22 SQL dispatcher paired"
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source isolated PostgreSQL17, Node22 and approval checks PENDING, not PASS",
+        "Unmerged development PR / exact-source merged checks and #3347 candidate isolation not yet completed",
+        "New owner Publish required before any Supabase migration; real #96 acceptance unverified"
+      ],
+      "notes": "Future-only CREATE OR REPLACE preserves all earlier migrations, Auth, Community, immutable history and other function branches; release unchanged.",
+      "production_deployed": false
     }
   ],
   "history": [

@@ -66,7 +66,9 @@ exit 99
    'supabase/tests/community_outlier_null_revision.sql':[
     '20261118181500_dic_community_outlier_null_revision_guard.sql','outlier NULL revision'],
    'supabase/tests/admin_edit_normalized_identity_guard.sql':[
-    '20261118214500_dic_admin_edit_normalized_identity_guard.sql','admin normalized identity guard']
+    '20261118214500_dic_admin_edit_normalized_identity_guard.sql','admin normalized identity guard'],
+   'supabase/tests/admin_account_delete_completed_receipt.sql':[
+    '20261119175000_dic_admin_delete_completed_retry_count.sql','completed account deletion count']
   };
   const applicable=path=>!Object.hasOwn(migrationBoundSuites,path)||
     migrations.includes('supabase/migrations/'+migrationBoundSuites[path][0]);
