@@ -52,3 +52,13 @@ test('#209 navigation and unrelated card cannot fabricate a producer or varietal
  const p=extractPublicCoffeeFacts(page(),{source_url:chosen209.url});
  assert.ok(!p.fields?.producer&&!p.fields?.variety,JSON.stringify(p));
 });
+
+test('#209 multiple related cards cannot restore missing own decaf method or Huila region',()=>{
+ const body=own.replace('decaffeinated using the Ethyl Acetate process','decaffeinated using an undisclosed method')
+  .replace('Process EA Decaf','Process not disclosed').replace('Region Huila','Region not disclosed');
+ const related='<aside class="related-products"><p>Region Huila</p><p>Process EA Decaf</p></aside>'+
+  '<aside class="product-recommendations">Decaffeinated using Ethyl Acetate. Region Huila.</aside>';
+ const s=source209(page(body,related));
+ assert.equal(s.direct.ea,false,'related products cannot supply the selected EA method');
+ assert.equal(s.direct.huila,false,'related products cannot supply selected growing region');
+});

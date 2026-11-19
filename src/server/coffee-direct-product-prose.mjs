@@ -1,4 +1,5 @@
 import {selectedSchemaProductOfferH2} from './coffee-selected-offer-h2.mjs';
+// R165 source acceptance requires selected-seller-own direct prose; reject unrelated card attribution.
 // Direct exact-selected-product prose credits. No network access, no roaster-specific rules.
 // Exact official 77-page selected-source replay gate: never equate a parsed HTML page with a certified owner field.
 import {productCoffeeProse} from './coffee-product-prose.mjs';
