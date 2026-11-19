@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {frozenReadyBranch,requiredReadyPins,selectedReadyItems,
- prevalidateReadySource,neutralWorkflowTransportCommit} from '../scripts/release/precertify-ready-source.mjs';
+ prevalidateReadySource,neutralWorkflowTransportCommit,candidateTreeReceipt} from '../scripts/release/precertify-ready-source.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40);
 const one={id:'DIC-Q-100',issue:100,title:'ready',owner_source:'owner approval',
  state:'READY',merged_source_sha:B,scope_paths:['site/main.js'],
@@ -82,4 +82,11 @@ test('#3347 transport carries exact candidate app bytes but NEVER mutates workfl
   assert.throws(()=>neutralWorkflowTransportCommit({repoDir:dir,developmentSourceSha:dev,
    candidateSha:candidate,workflowPaths:['../../.github/workflows/ci.yml']}),/Unsafe transport/);
  }finally{rmSync(dir,{recursive:true,force:true});}
+});
+
+// Source staging has additional full Git fixture tests; read-only export must
+// deny missing local candidate objects rather than invent a certified tree.
+test('#3347 connector source receipt fail-closes absent staged tree and no Actions push',()=>{
+ assert.throws(()=>candidateTreeReceipt({developmentSourceSha:'a'.repeat(40),staged:{candidate_sha:'b'.repeat(40)}}),/No verified staged/);
+ assert.throws(()=>prevalidateReadySource({developmentSourceSha:'a'.repeat(40),push:true}),/Actions ref push prohibited/);
 });
