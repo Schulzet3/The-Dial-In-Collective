@@ -56,7 +56,7 @@ test('#3347 no candidate can be pushed without authenticated CI main context',()
 });
 
 import {execFileSync} from 'node:child_process';
-import {mkdtempSync,mkdirSync,rmSync,writeFileSync} from 'node:fs';
+import {mkdtempSync,mkdirSync,rmSync,writeFileSync,readFileSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 test('#3347 transport carries exact candidate app bytes but NEVER mutates workflow files',()=>{
@@ -99,4 +99,16 @@ test('#3347 candidate read-only receipt requires the exact NEW dev parent prefli
  assert.throws(()=>assertReadyCandidateJournalReceipt(exact,{developmentSourceSha:A,preflightBlob:C}),/missing exact NEW/);
  assert.throws(()=>assertReadyCandidateJournalReceipt(exact,{developmentSourceSha:B,preflightBlob:A}),/missing exact NEW/);
  assert.throws(()=>assertReadyCandidateJournalReceipt(exact,{developmentSourceSha:'invalid',preflightBlob:C}),/Unverifiable/);
+});
+
+test('#3347 main workflow pushes to changed controller source trigger read-only recertification',()=>{
+ const workflow=readFileSync(new URL('../.github/workflows/dic-ready-precertification.yml',import.meta.url),'utf8');
+ for(const p of ['.github/workflows/dic-ready-precertification.yml',
+  'scripts/release/precertify-ready-source.mjs',
+  'scripts/release/stage-ready-only-candidate.mjs',
+  'scripts/release/ready-only-candidate.mjs'])
+  assert.ok(workflow.includes("'"+p+"'"),'missing controller trigger: '+p);
+ assert.match(workflow,/permissions:\s*\n  contents: read\s*\n  actions: read\s*\n  checks: read/);
+ assert.match(workflow,/node scripts\/release\/precertify-ready-source.mjs/);
+ assert.doesNotMatch(workflow,/git push|deploy to netlify|POST.*publish/i);
 });
