@@ -1096,3 +1096,8 @@ DIC_PREFLIGHT_VERIFIED development_sha=a0f5a975dd89cb1b524ae6d518efd6fa3330890e 
 ## 2026-11-19 UTC — #3342 reconcile concurrent #3347 main preflight staging [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=a0f5a975dd89cb1b524ae6d518efd6fa3330890e preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
 - Main independently advanced with #3347 staged-candidate source preflight receipt before this PR merged. Retain its exact new candidate local preflight validation and appended ops journal alongside the separately reviewed #3342 SQL/coffee test-source isolation correction. Nonforce two-parent reconciliation; no production publisher trigger, SQL/Auth/member/provider writes.
+
+
+## 2026-11-19 UTC — candidate SQL restore respects already-reviewed absent support exclusions [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=2f571c1071cdbc49e3fb013c3775aad80669c5ce preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+- PR #3362 exact main check 44464175468 FAILED 1/221 (220 PASS), existing #2837 disposable Git fixture: the new SQL restoration classified the separately governed, publication-absent `supabase/tests/member_approval_finish_null_receipts.sql` test as a restoration, even though the prior reviewed strict `excluded_unready_test_paths` gate already deletes it with its own TESTING migration. Fix only that collision by filtering source-proven separately excluded regression tests through `reviewedUnreadySupport` before the exact R265 source restorations. No weakening of SQL/ready/source checks or provider writes; retest exact PR and merge.

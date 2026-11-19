@@ -276,7 +276,12 @@ export function discoverRestoredUnreadySqlTests({queue,restoredPaths,
  developmentChangedPaths=[]}={}){
  if(!Array.isArray(restoredPaths)||!Array.isArray(selectedReadyItems)||
     !Array.isArray(developmentChangedPaths)||typeof sourceObjectAt!=='function')return [];
- const paths=developmentChangedPaths.filter(p=>p.startsWith('supabase/tests/')&&p.endsWith('.sql')).sort();
+ // Already-proven absent, issue-owned regression files are removed by the
+ // established strict excluded_unready_test_paths gate. Never restore them
+ // simultaneously through this newer published-test restoration exception.
+ const paths=developmentChangedPaths.filter(p=>p.startsWith('supabase/tests/')&&p.endsWith('.sql')&&
+  !reviewedUnreadySupport(p,{queue,restoredPaths,publishedSourceSha,
+   developmentSourceSha,sourceObjectAt})).sort();
  if(!paths.length)return [];
  if(paths.some(p=>!REVIEWED_SQL_BASELINE_TESTS.some(r=>r.path===p)))
   throw Error('New unreviewed SQL regression must not be excluded');
