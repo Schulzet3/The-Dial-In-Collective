@@ -2,6 +2,9 @@ name: DIC proactive READY candidate pre-certification
 # Owner #3347 explicit supersession: pre-test immutable READY source without publishing.
 # Does NOT create a production grant, main request, Netlify build or provider write.
 on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/dic-ready-precertification.yml']
   workflow_run:
     workflows: ['DIC approval, implementation and continuity contract']
     types: [completed]

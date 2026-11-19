@@ -1052,3 +1052,8 @@ DIC_PREFLIGHT_VERIFIED development_sha=ceabd3bd2545bee1e74f48dc1c973d8ff4177ac1 
 - No claimed outcome yet: verify PR-head and main merged acceptance, candidate push/CI, source candidate and approvals before calling release prevalidated. New owner policy supersession to be recorded on BOTH development Locked authority files and prospectively wired into the READY promotion gate. Issue #3347 remains open until that reconciliation and batch test succeeds.
 
 - #3349 concurrent exact READY blob parity main fixes were independently integrated before this nonforce rebase; this commit preserves them. Earlier PR #3351 now obsolete, exact new PR CI and main merge readback required.
+
+## November 19 2026 UTC — #3347 one-time self-triggered nonproduction validation [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=ceabd3bd2545bee1e74f48dc1c973d8ff4177ac1 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+- Owner wants the READY core problem fixed now, not deferred to the next hourly schedule. Add an exact workflow-file-only main push trigger to the pre-certification workflow so this one CI-only installation invokes source freezing immediately after nonforce merge. Existing successful development approval, scheduled bounded recovery and workflow_run triggers remain; no app release, one-use grant, Netlify build, provider/data writes, manual GitHub task for owner or broader main push trigger.
+- Exact first pre-certification run and its five candidate source checks must be observed before making a READY claim; pending or failed are HOLD.
