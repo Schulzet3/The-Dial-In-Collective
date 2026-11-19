@@ -4923,6 +4923,21 @@
       "issue267_line_credit": 0,
       "release": "TESTING",
       "baseline": "IN_PROGRESS"
+    },
+    {
+      "run": "R364",
+      "date": "2026-11-19",
+      "preflight_development_sha": "e9084a8ed0c8372c58b46a1de94eb4e72909f323",
+      "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "receipt": "docs/audits/issue509-r364-community-consistency-merge-ci-20261119.json",
+      "source_merge_sha": "9fa94afbee78f04598ac112b6fdb3b6d13c954d2",
+      "ci": "SIX_ACTUAL_MERGED_SOURCE_SUCCESS",
+      "provider": "THIRTEEN_COMMUNITY_PROJECTIONS_ALL_INTEGRITY_GUARDS_PASS",
+      "provider_writes": 0,
+      "first_time_provider_words": 0,
+      "issue267_line_credit": 0,
+      "release": "TESTING",
+      "baseline": "IN_PROGRESS"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -25152,5 +25167,38 @@
     "release": "TESTING",
     "next": "Exact merged-source CI readback, source-isolated READY acceptance; continue new/changed provider objects and review conditional verified-merged Community path with synthetic test if applicable",
     "receipt": "docs/audits/issue509-r363-classify-merge-community-20261119.json"
+  },
+  "provider_community_consistency_run364": {
+    "preflight_development_sha": "e9084a8ed0c8372c58b46a1de94eb4e72909f323",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "receipt": "docs/audits/issue509-r364-community-consistency-merge-ci-20261119.json",
+    "merged_sha": "9fa94afbee78f04598ac112b6fdb3b6d13c954d2",
+    "actual_merged_source_ci": {
+      "sql_postgresql17": 44537361346,
+      "node22": 44537361281,
+      "cloud_browser": 44537361386,
+      "approval": 44537361387,
+      "python": 44537361290,
+      "issue33_selected": 44537361392
+    },
+    "source_migration_blob": "a677aeb63935a70fc42a76290c8f570349a2180e",
+    "read_only_integrity": {
+      "total": 13,
+      "eligible": 13,
+      "held": 0,
+      "withdrawn": 0,
+      "eligible_unverified_or_merged": 0,
+      "eligible_review_mismatch": 0,
+      "eligible_stale_revision": 0,
+      "eligible_not_green": 0,
+      "eligible_detached": 0
+    },
+    "provider_migrations": 69,
+    "not_applied_r360_r361_r362": true,
+    "source_review_credited_words": 0,
+    "issue267_line_credit": 0,
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "release": "TESTING"
   }
 }

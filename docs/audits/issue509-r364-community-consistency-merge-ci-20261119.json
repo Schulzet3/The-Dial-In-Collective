@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R364",
+  "date_utc": "2026-11-19",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight_development_sha": "e9084a8ed0c8372c58b46a1de94eb4e72909f323",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "source_pr": 3411,
+  "source_merge_sha": "9fa94afbee78f04598ac112b6fdb3b6d13c954d2",
+  "source_head_sha": "c0e0963ce348e4ad0f499acf67f081efefe1e977",
+  "exact_merged_source_workflows": {
+    "sql_postgresql17": {
+      "run_id": 44537361346,
+      "conclusion": "success",
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44537361346"
+    },
+    "node22": {
+      "run_id": 44537361281,
+      "conclusion": "success",
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44537361281"
+    },
+    "cloud_browser": {
+      "run_id": 44537361386,
+      "conclusion": "success",
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44537361386"
+    },
+    "approval": {
+      "run_id": 44537361387,
+      "conclusion": "success",
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44537361387"
+    },
+    "python": {
+      "run_id": 44537361290,
+      "conclusion": "success",
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44537361290"
+    },
+    "issue33_selected": {
+      "run_id": 44537361392,
+      "conclusion": "success",
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44537361392"
+    }
+  },
+  "skipped_not_pass": [
+    "DIC controlled public roaster source probe"
+  ],
+  "verified_equal_blobs": {
+    "supabase/migrations/20261119133000_dic_classify_family_refresh_single_pass.sql": "a677aeb63935a70fc42a76290c8f570349a2180e",
+    "supabase/tests/personal_family_refresh_single_pass_post.sql": "a04c6e40693577caec79d2678d155786bcfd26da"
+  },
+  "provider": {
+    "health": "ACTIVE_HEALTHY",
+    "postgres": "17.11.0.003",
+    "read_only": true,
+    "applied_migrations": 69,
+    "unapplied_r360_r361_r362": 3,
+    "live_classify_md5": "5183deb46474c10468638cef08d2bd05",
+    "community_integrity_counts": {
+      "total": 13,
+      "eligible": 13,
+      "held": 0,
+      "withdrawn": 0,
+      "eligible_unverified_or_merged": 0,
+      "eligible_review_mismatch": 0,
+      "eligible_stale_revision": 0,
+      "eligible_not_green": 0,
+      "eligible_detached": 0
+    },
+    "complete_definitions_rechecked": [
+      "private.dic_on_community_coffee_verification()",
+      "private.dic_review_community_shot(uuid)",
+      "public.dic_community_recommendation_evidence(uuid,text)",
+      "public.dic_confirm_community_outlier(uuid,bigint)",
+      "public.dic_browse_community_shots(integer,integer)",
+      "public.dic_search_community_shots(text,text,integer,integer)"
+    ],
+    "constraints_and_trigger": "coffees_check1 enforces merged state paired with merged_into_id; AFTER UPDATE verification trigger + browse/search/rec recommendation reviewed; no current invalid state"
+  },
+  "finding": "No newly proven defect or consumer-safe deletion; no unverified merged-eligible projection; no new code fix justified",
+  "first_time_provider_words": 0,
+  "issue267_source_lines": 0,
+  "production_writes": 0,
+  "release": "TESTING",
+  "baseline": "IN_PROGRESS",
+  "next_cursor": "first genuinely new/changed live object after R364; otherwise unreviewed vendor/provider definition or a reproducible measured bottleneck; candidate isolation and READY evidence separately UNVERIFIED"
+}
