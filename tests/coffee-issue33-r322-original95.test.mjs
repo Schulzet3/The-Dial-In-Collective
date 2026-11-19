@@ -62,3 +62,12 @@ test('R322 actual selected official source gate fails closed on unavailable/mism
   [{...good,add_coffee_ui_rendered:false}],[{...good,source_review_rendered:false}]])
   assert.ok(requiredFocusedSourceFailures([95],bad).length>0);
 });
+
+test('R322 an explicit Producer caption is stronger than a Farm fallback and prose grower',()=>{
+ const p=parse(direct+'<p>Producer: Cooperativa Nueva Vida</p>');
+ assert.equal(p.ok,true); assert.equal(p.fields.producer,'Cooperativa Nueva Vida');
+});
+test('R322 earlier-lot grower does not overwrite the current Farm when current grower unknown',()=>{
+ const p=parse('<p>Last year Faiber Bolanos was the coffee producer; this lot does not name its grower.</p>');
+ assert.equal(p.ok,true); assert.notEqual(p.fields.producer,'Faiber Bolanos');
+});

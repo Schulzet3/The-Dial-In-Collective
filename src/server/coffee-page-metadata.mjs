@@ -1629,6 +1629,18 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
         (namedEstateFarmMatches||namedCurrentFarmGrower)))){
    addField(fields,'Producer',directSelected.producer);narrativeProducerByFields.add(fields);
   }
+  // The separately labeled Farm is a place, not the named person who grows
+  // the selected coffee. A unique selected-current narrative credit can
+  // replace only a Farm fallback, not an explicit Producer or a conflict.
+  const namedCurrentNarrativeGrower=narrative.details?.named_producer||'';
+  if(namedCurrentNarrativeGrower&&namedEstateFarm&&
+     producerEvidenceByFields.get(fields)==='farm'&&
+     keyOf(namedCurrentNarrativeGrower)!==keyOf(namedEstateFarm)&&
+     !conflicts.has('producer')&&
+     (!directSelected.producer||keyOf(directSelected.producer)===keyOf(namedCurrentNarrativeGrower))){
+   addField(fields,'Producer',namedCurrentNarrativeGrower);
+   narrativeProducerByFields.add(fields);
+  }
   if(directSelected.roast_level&&!fields.roast_level&&!conflicts.has('roast_level'))
    addField(fields,'Roast Level',directSelected.roast_level);
   if(directSelected.tasting_notes&&!fields.tasting_notes&&!conflicts.has('tasting_notes'))
