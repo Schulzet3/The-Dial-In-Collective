@@ -5020,6 +5020,21 @@
       "production_writes": 0,
       "release": "TESTING",
       "baseline": "IN_PROGRESS"
+    },
+    {
+      "run": "R373",
+      "date": "2026-11-19",
+      "preflight_development_sha": "8fefa77f1d89b8e76559b75455cc8e9548626f07",
+      "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "receipt_path": "docs/audits/issue509-r373-shot-partition-order-ci-repair-20261119.json",
+      "code_path": "site/cloud/mapping.js",
+      "test_path": "tests/issue509-shot-order.test.mjs",
+      "first_time_provider_words": 0,
+      "issue267_source_lines": 0,
+      "source_ci": "PENDING_NEW_HEAD",
+      "production_writes": 0,
+      "release": "TESTING",
+      "baseline": "IN_PROGRESS"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -25549,5 +25564,22 @@
     "baseline": "IN_PROGRESS",
     "queue": "TESTING",
     "next": "Exact PR-head CI then safe nonforce [skip netlify] integrate if all applicable SUCCESS"
+  },
+  "provider_shot_partition_ci_repair_run373": {
+    "run": "R373",
+    "provider": "private.read_personal_state() full text reread",
+    "provider_sql_md5": "037d248b67cc3e8490c1689d3200990f",
+    "source_findings": "PR #3460 old head broke cross-coffee/style equal-instant History order; 210 and 6000-shot existing Node22 regressions failed",
+    "fix": "Stable sort only within setup/version/coffee/style/instant and new test",
+    "old_pr_head": "e8a3406fdde5e6816b3f41265ebc9f793822b439",
+    "old_node22_run": 44625441386,
+    "old_node22_failed": 2,
+    "independent_issue33_vendor_challenge_run": 44625441344,
+    "first_time_provider_words": 0,
+    "issue267_source_lines": 0,
+    "production_writes": 0,
+    "release": "TESTING",
+    "baseline": "IN_PROGRESS",
+    "receipt_path": "docs/audits/issue509-r373-shot-partition-order-ci-repair-20261119.json"
   }
 }

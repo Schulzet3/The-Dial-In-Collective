@@ -31,3 +31,19 @@ test('#509 hydrate preserves old malformed and hidden shots while ordering valid
  assert.equal(state.shots[0].hidden,true);
  assert.equal(state.shots.length,3);
 });
+
+test('#509 equal-clock rows in different advice partitions preserve History positions',()=>{
+ const raw=rawFixture();
+ raw.shots=[
+  rawShot({id:'z-other',pulled_at:TIME,library_entry_id:'another-coffee'}),
+  rawShot({id:'z-main',pulled_at:TIME}),
+  rawShot({id:'a-style',pulled_at:TIME,style:'Traditional'}),
+  rawShot({id:'a-main',pulled_at:TIME}),
+  rawShot({id:'a-other',pulled_at:TIME,library_entry_id:'another-coffee'})
+ ];
+ const original=structuredClone(raw);
+ const state=hydrate(raw);
+ assert.deepEqual(state.shots.map(x=>x.id),['a-other','a-main','a-style','z-main','z-other'],
+  'only same setup/version/coffee/style/instant positions may exchange');
+ assert.deepEqual(raw,original,'hydration must never mutate server history');
+});

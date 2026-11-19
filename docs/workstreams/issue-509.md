@@ -1,3 +1,15 @@
+# Issue #509 — R373 shot-tie scope regression repaired; CI pending [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=8fefa77f1d89b8e76559b75455cc8e9548626f07 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-19 UTC.** Immutable live PREFLIGHT Git blob and bytes matched before source/provider reads. PR #3460 prior head `e8a3406fdde5e6816b3f41265ebc9f793822b439` exact Node22 [44625441386](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44625441386): **5792 PASS, 2 FAIL, 6 SKIPPED**. Both failing 210/6000-shot historical-order regressions were caused by R371b sorting shots with identical timestamps **across unrelated coffees/styles**. Their original SQL row positions must remain stable; only same setup/version, coffee, style, parsed instant compete for the same latest-advice slot. New helper restricts deterministic ID ties to that partition, retaining all other History positions and malformed/hidden/notes/offline behavior. Added partition-crossing synthetic regression without changing the owner #267 source-review ledger. At this commit exact-source PR-head CI **PENDING, not PASS**; PR unmerged and release **TESTING**. Separate #33 Original241 workflow [44625441344](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44625441344) failed on vendor official site access challenge; no #509 source fix claimed for a different owner.
+
+**Provider direct readback:** Full current `private.read_personal_state()` SQL again confirms `jsonb_agg(... ORDER BY pulled_at)`, MD5 `037d248b67cc3e8490c1689d3200990f`. Read-only schema contract confirms all five partition columns, 9 indexes and one primary key on `public.shots`. SQL previously credited in R370/R371; **0 new first-time provider words, 0 #267 lines**. Existing full Supabase baseline IN_PROGRESS, hosted/console-only behavior UNVERIFIED. No production SQL/data/Auth/Storage/Edge/config, release/Publish, billing, backups, schedule or notification changes.
+
+[Structured R373 evidence](../audits/issue509-r373-shot-partition-order-ci-repair-20261119.json). **Next:** Verify Node22/browser/approval/SQL exact new PR head; handle #33 external vendor challenge with its separate owner; only safe nonforce explicit merge [skip netlify] after all applicable checks PASS, read back merged-source CI, continue genuinely new semantic provider work.
+
+---
+
 # Issue #509 — R372 R371b syntax CI repair, read-only import/Edge/performance semantic increment [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=1b4cc1857e47104b45d4f5c202e5eae10f7ec300 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e

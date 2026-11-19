@@ -6,24 +6,32 @@ const rows=(raw,key)=>Array.isArray(raw?.[key])?raw[key]:[];
 // First-match and row-order semantics stay intact; lookups no longer scan every dataset repeatedly.
 const groupBy=(items,key)=>{const result=new Map();for(const item of items){const k=item[key];if(!result.has(k))result.set(k,[]);result.get(k).push(item);}return result;};
 const firstBy=(items,key)=>{const result=new Map();for(const item of items)if(!result.has(item[key]))result.set(item[key],item);return result;};
-// SQL shot rows already have a chronological transport order. Only stabilize
-// identical instants; moving distinct dates would alter visible History ordering.
+// Preserve History's SQL row positions. Equal instants only affect latest
+// advice when they share the same setup version, coffee and shot style.
+// Stabilize ties *within* that advice partition, not across different coffees
+// or styles (which broke established 210/6000-shot History-order contracts).
+const shotAdviceTieKey=sh=>{
+ const time=Date.parse(sh.pulled_at||'');
+ return Number.isFinite(time)
+  ?JSON.stringify([sh.setup_id,sh.setup_version_id,sh.library_entry_id,sh.style,time])
+  :null;
+};
 const stableShotTies=items=>{
  const groups=new Map(),positions=new Map();
  for(const sh of items){
-  const time=Date.parse(sh.pulled_at||'');
-  if(!Number.isFinite(time))continue;
-  if(!groups.has(time))groups.set(time,[]);
-  groups.get(time).push(sh);
+  const key=shotAdviceTieKey(sh);
+  if(key===null)continue;
+  if(!groups.has(key))groups.set(key,[]);
+  groups.get(key).push(sh);
  }
  for(const group of groups.values())if(group.length>1)
   group.sort((a,b)=>String(a.id||'').localeCompare(String(b.id||'')));
  return items.map(sh=>{
-  const time=Date.parse(sh.pulled_at||'');
-  if(!Number.isFinite(time))return sh;
-  const pos=positions.get(time)||0;
-  positions.set(time,pos+1);
-  return groups.get(time)[pos];
+  const key=shotAdviceTieKey(sh);
+  if(key===null)return sh;
+  const pos=positions.get(key)||0;
+  positions.set(key,pos+1);
+  return groups.get(key)[pos];
  });
 };
 // SQL jsonb_agg order is unspecified for calibrations; use chronology before the legacy fallback.
