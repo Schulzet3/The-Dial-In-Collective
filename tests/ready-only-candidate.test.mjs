@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {planReadyOnlyCandidate,validateReadyOnlyCandidate,CANDIDATE_KIND,
- CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH,REVIEWED_WORKFLOW_TEST,discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,assertCandidateRelativeImports,
+ CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH,REVIEWED_WORKFLOW_TEST,REVIEWED_R319_WORKFLOW_TEST,discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,assertCandidateRelativeImports,
  assertCandidateStaticNamedExports,discoverReviewedRestoredSqlTests,REVIEWED_SOURCE_PATH_CASE_SQL_TEST,REVIEWED_UNREADY_SQL_SUITE,discoverReviewedRestoredR232CoffeeTests,REVIEWED_R232_COFFEE_TEST} from '../scripts/release/ready-only-candidate.mjs';
 import {classifyReleaseRisk} from '../scripts/release/release-reliability.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40),D='d'.repeat(40);
@@ -562,4 +562,23 @@ test('#3342 frozen SQL suite restores only exact unpublished source-bound tests'
  assert.throws(()=>discoverReviewedRestoredSqlTests({...args,
   sourceObjectAt:(r,path)=>r===ready&&path===spec.path?'100644:'+('d'.repeat(40)):read(r,path)}),
   /Selected READY merge modified/);
+});
+
+test('#3342 R319 workflow-only test is excluded only when its exact workflow is restored',()=>{
+ const x=REVIEWED_R319_WORKFLOW_TEST;
+ const pub='a'.repeat(40),dev='b'.repeat(40);
+ const m=new Map([
+  [dev+':'+x.path,'100644:'+x.sourceBlob],
+  [dev+':'+x.restoredWorkflow,'100644:'+x.workflowBlob],
+  [x.sourceMerge+':'+x.path,'100644:'+x.sourceBlob],
+  [x.sourceMerge+':'+x.restoredWorkflow,'100644:'+x.workflowBlob]
+ ]);
+ const read=(ref,path)=>m.get(ref+':'+path)??null;
+ const args={publishedSourceSha:pub,developmentSourceSha:dev,
+  restoredWorkflows:[x.restoredWorkflow],sourceObjectAt:read};
+ assert.deepEqual(discoverReviewedWorkflowTestExclusions(args),[x.path]);
+ assert.deepEqual(discoverReviewedWorkflowTestExclusions({...args,restoredWorkflows:[]}),[]);
+ assert.throws(()=>discoverReviewedWorkflowTestExclusions({...args,
+  sourceObjectAt:(ref,path)=>ref===x.sourceMerge+'^'&&path===x.path?
+   '100644:'+('f'.repeat(40)):read(ref,path)}),/R319 workflow-only test source provenance/);
 });
