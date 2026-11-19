@@ -1,3 +1,15 @@
+## November 19, 2026 UTC — #455 R362 F015–F018 claim-level and community-effectiveness evidence [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=bfe2b0eb9356af9dc7d2f105354c583e0ad51d6d preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**Authority/source:** owner Option B SAFE research-only. Live dev bfe2b0eb9356af9dc7d2f105354c583e0ad51d6d and complete immutable preflight blob 3742fed0176c809b115320c698a0e8b1675b2d3e independently verified first. Prewrite scoped journal blob 71f1a70b5c871b5a4d00512cedd9c7967a49ecf7. October 29 private Drive ZIP 66,421 bytes SHA256 7d562a4536cf4f79bfa17898672ff6a2ec30aa6c1147e7a33f3d06017776bf1d fetched/verified again. Original F015–F018 `findings.json` and S018/S020 `sources.json` hashes, original S020 2019 arXiv author HTML §§III–IV and exact engine/community source blobs checked; [bounded analysis](../research/issue455-r362-f015-f018-community-outcomes-20261119.md).
+
+**Findings/decision:** F015 per-contributor weight bounded 1–2 but uncalibrated; F016 one contributor stays Early Data, ten become Strong Confidence by owner heuristics, not statistical validation; F017 recommendation → followup success has no causal/consent evidence; F018 S020 original authors Liu/Xu/Yan and apparel/music item-click ranking experiments provide NO espresso efficacy or taste confidence evidence. No app defect demonstrated. Scoped prospective voluntary same-coffee/setup/style/grinder/feed single-change, accepted-action and all-five next-shot design recorded as DESIGN ONLY. Existing canonical counts 202 sources / 612 checks / 267 proposals unchanged, no duplicate original. No new model/policy/data/CI claim. S019 standalone remains unavailable; #267 audit line credit 0.
+
+**Changed in same docs-only source commit:** `docs/research/issue455-r362-f015-f018-community-outcomes-20261119.md` and `docs/workstreams/issue-455.md`. No application code/test/CI, Locked taste or heuristic changes, no new telemetry/member/provider/publish/production/backup/schedule/alert/visibility changes. Node/browser/SQL/Auth/privacy suites NOT RUN (not PASS); PR-head governance and merge source verification PENDING at source authoring. **Next:** verify exact PR-head governance, nonforce [skip netlify] integration and merged file hashes; reconcile issue checkpoint and resume another unreviewed claim/corroborated UX gap. Do not label READY or deployed.
+
+---
+
 ## November 19, 2026 UTC — #455 R357 exact merged-source CI and READY reconciliation [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=5c520f423f594db546d1e559c1482fed616b2d89 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
