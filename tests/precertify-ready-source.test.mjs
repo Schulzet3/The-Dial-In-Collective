@@ -42,11 +42,11 @@ test('#3347 transport carries exact candidate app bytes but NEVER mutates workfl
  const file=(p,s)=>{mkdirSync(join(dir,p.slice(0,p.lastIndexOf('/'))),{recursive:true});writeFileSync(join(dir,p),s);};
  try{
   git('init','-q');git('config','user.email','test@example.com');git('config','user.name','test');
-  file('.github/workflows/ci.yml','name: older\\n');file('site/main.js','published');
+  file('.github/workflows/ci.yml','name: older\n');file('site/main.js','published');
   git('add','-A');git('commit','-qm','published');const pub=git('rev-parse','HEAD');
-  file('.github/workflows/ci.yml','name: new\\n');file('site/main.js','ready-app');
+  file('.github/workflows/ci.yml','name: new\n');file('site/main.js','ready-app');
   git('add','-A');git('commit','-qm','development');const dev=git('rev-parse','HEAD');
-  file('.github/workflows/ci.yml','name: older\\n');
+  file('.github/workflows/ci.yml','name: older\n');
   git('add','-A');git('commit','-qm','candidate');const candidate=git('rev-parse','HEAD');
   const x=neutralWorkflowTransportCommit({repoDir:dir,developmentSourceSha:dev,candidateSha:candidate,
    workflowPaths:['.github/workflows/ci.yml']});

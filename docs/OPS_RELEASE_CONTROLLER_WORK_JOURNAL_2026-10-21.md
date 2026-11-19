@@ -1067,3 +1067,7 @@ DIC_PREFLIGHT_VERIFIED development_sha=95ace6fb15211db4135180b3e874c0c705a7c412 
 ## 2026-11-19 #3347 transport code correction before initial PR CI [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=95ace6fb15211db4135180b3e874c0c705a7c412 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
 - Narrow correction while assembling the transport implementation: normalize incorrectly double-escaped regex/string literals in new workflow-path Git lookup, and ensure guarded push/remote readback uses transport_sha rather than frozen final candidate_sha. Add redacted remote rejection diagnostics, preserving fail-closed CI-only behavior. No production or provider write. Verify the final source and hosted main acceptance; do not repeat the earlier failed candidate push without this repaired exact commit.
+
+## November 19 #3347 transport fixture literal correction [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=a0f5a975dd89cb1b524ae6d518efd6fa3330890e preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+- Initial PR-head main test run 44463440979 correctly FAILED 1/217 tests: new disposable Git transport fixture accidentally wrote a backslash+n literal to synthetic workflow YAML, while assertion expected a trimmed newline. Source transport behavior and 216 other tests passed; fix fixture to write actual newline (no production/functional change), rerun exact new PR-head CI. Original failed run retained as FAIL, not reinterpreted as PASS.
