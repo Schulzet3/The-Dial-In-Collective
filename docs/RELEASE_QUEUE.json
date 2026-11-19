@@ -17238,6 +17238,29 @@
       ],
       "notes": "No production SQL/Edge/Auth/Storage/config/data changes. Existing migration/identity/event IDs remain unchanged; no extra user notification.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-shot-timestamp-determinism",
+      "issue": 509,
+      "pr": 3460,
+      "title": "Deterministic latest-shot hydration for identical timestamp instants",
+      "state": "TESTING",
+      "scope_paths": [
+        "site/cloud/mapping.js"
+      ],
+      "owner_source": "Issue #509 development-only; preflight development_sha=3801618fdf3fd2a6979d5b6a90b780b3f4f4ddd1, preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "tests": [
+        "Read-only full live SQL and source mapping: pulled_at-only ORDER BY leaves equal-instant order unspecified.",
+        "Synthetic Node22 reversed and offset-equivalent shot order plus malformed hidden history preservation; CI PENDING."
+      ],
+      "blockers": [
+        "Exact PR-head tests/Node22/browser, SQL workflow and approval must pass; initial approval run 44622212830 FAILED solely because new queue entry omitted required keys and included nondeployable tests path; this docs-only correction addresses that finding.",
+        "Postmerge exact-source CI and independent #3347 source-isolated READY certification pending.",
+        "No Publish permission or live provider write."
+      ],
+      "production_deployed": false,
+      "merged_source_sha": null,
+      "ci_runs": []
     }
   ],
   "history": [

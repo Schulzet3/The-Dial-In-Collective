@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R372",
+  "date_utc": "2026-11-19",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "1b4cc1857e47104b45d4f5c202e5eae10f7ec300",
+    "blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "immutable_content_verified": true
+  },
+  "github": {
+    "pr": 3460,
+    "prior_pr_head": "9b3cd03b0c98f679da900e35c16c69a321b78fc0",
+    "fix_path": "site/cloud/mapping.js",
+    "prior_failed_ci": [
+      {
+        "run": 44622860799,
+        "check": "validate",
+        "failures": 121,
+        "cause": "mapping.js:20 omitted outer parenthesis"
+      },
+      {
+        "run": 44622860782,
+        "check": "mobile-browser-qa",
+        "cause": "site failed to mount due to syntax error"
+      }
+    ],
+    "new_ci": "PENDING",
+    "prior_3452_merged_node_run": 44612256444,
+    "prior_3452_merged_node": "SUCCESS"
+  },
+  "semantic": {
+    "sql_full_body": "private.apply_prototype_import(uuid,jsonb)",
+    "sql_chars": 16445,
+    "sql_md5": "2af6a48d0fe80841fcc27c1f1d5532e3",
+    "related_complete_trigger_source": [
+      "private.capture_equipment_snapshot",
+      "private.project_shot",
+      "private.protect_shot_provenance",
+      "private.dic_capture_recommendation_context",
+      "private.remember_feed_condition",
+      "private.dic_backfill_library_contributions"
+    ],
+    "edge": "dic-admin-push-broker",
+    "edge_version": 3,
+    "edge_chars": 9958,
+    "aggregate": {
+      "legacy_shots": 14,
+      "legacy_dialed_in": 8,
+      "legacy_canonical": 14,
+      "legacy_community_linked": 8,
+      "pending_submissions": 0
+    },
+    "performance_advisor_missing_fk": 14,
+    "referenced_tables_row_estimates_range": "0-13",
+    "new_confirmed_bottleneck": false,
+    "first_time_provider_words": 0,
+    "issue267_lines": 0
+  },
+  "provider": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.11.0.003",
+    "migrations": 69,
+    "active_edge": 5,
+    "production_writes": 0
+  },
+  "baseline": "IN_PROGRESS",
+  "queue": "TESTING",
+  "owner_action_needed": false,
+  "next": "Exact PR-head CI retry, safe nonforce merge only on all applicable SUCCESS; no publish"
+}

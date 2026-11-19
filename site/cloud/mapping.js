@@ -6,6 +6,34 @@ const rows=(raw,key)=>Array.isArray(raw?.[key])?raw[key]:[];
 // First-match and row-order semantics stay intact; lookups no longer scan every dataset repeatedly.
 const groupBy=(items,key)=>{const result=new Map();for(const item of items){const k=item[key];if(!result.has(k))result.set(k,[]);result.get(k).push(item);}return result;};
 const firstBy=(items,key)=>{const result=new Map();for(const item of items)if(!result.has(item[key]))result.set(item[key],item);return result;};
+// Preserve History's SQL row positions. Equal instants only affect latest
+// advice when they share the same setup version, coffee and shot style.
+// Stabilize ties *within* that advice partition, not across different coffees
+// or styles (which broke established 210/6000-shot History-order contracts).
+const shotAdviceTieKey=sh=>{
+ const time=Date.parse(sh.pulled_at||'');
+ return Number.isFinite(time)
+  ?JSON.stringify([sh.setup_id,sh.setup_version_id,sh.library_entry_id,sh.style,time])
+  :null;
+};
+const stableShotTies=items=>{
+ const groups=new Map(),positions=new Map();
+ for(const sh of items){
+  const key=shotAdviceTieKey(sh);
+  if(key===null)continue;
+  if(!groups.has(key))groups.set(key,[]);
+  groups.get(key).push(sh);
+ }
+ for(const group of groups.values())if(group.length>1)
+  group.sort((a,b)=>String(a.id||'').localeCompare(String(b.id||'')));
+ return items.map(sh=>{
+  const key=shotAdviceTieKey(sh);
+  if(key===null)return sh;
+  const pos=positions.get(key)||0;
+  positions.set(key,pos+1);
+  return groups.get(key)[pos];
+ });
+};
 // SQL jsonb_agg order is unspecified for calibrations; use chronology before the legacy fallback.
 const byCalibrationAge=(a,b)=>{
  const aParsed=Date.parse(a.created_at||''),bParsed=Date.parse(b.created_at||'');
@@ -48,7 +76,7 @@ export function hydrate(raw){
  s.families=rows(raw,'families').map(f=>({id:f.id,coffeeId:f.library_entry_id,style:f.style,seedRatio:number(f.statistics?.ratio?.center),createdAt:f.created_at}));
  const setupById=firstBy(s.setups,'id'),versionsBySetupId=new Map();
  for(const setup of s.setups)if(!versionsBySetupId.has(setup.id))versionsBySetupId.set(setup.id,firstBy(setup.versions,'id'));
- for(const sh of rows(raw,'shots')){
+ for(const sh of stableShotTies(rows(raw,'shots'))){
   const old=sh.equipment_snapshot||{},setup=setupById.get(sh.setup_id),version=versionsBySetupId.get(sh.setup_id)?.get(sh.setup_version_id);
   // A historical server success flag cannot promote missing or invalid taste ratings.
   // This conservative client-only eligibility check never rewrites the original row.

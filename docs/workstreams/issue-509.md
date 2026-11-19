@@ -1,3 +1,57 @@
+# Issue #509 — R373 shot-tie scope regression repaired; CI pending [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=8fefa77f1d89b8e76559b75455cc8e9548626f07 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-19 UTC.** Immutable live PREFLIGHT Git blob and bytes matched before source/provider reads. PR #3460 prior head `e8a3406fdde5e6816b3f41265ebc9f793822b439` exact Node22 [44625441386](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44625441386): **5792 PASS, 2 FAIL, 6 SKIPPED**. Both failing 210/6000-shot historical-order regressions were caused by R371b sorting shots with identical timestamps **across unrelated coffees/styles**. Their original SQL row positions must remain stable; only same setup/version, coffee, style, parsed instant compete for the same latest-advice slot. New helper restricts deterministic ID ties to that partition, retaining all other History positions and malformed/hidden/notes/offline behavior. Added partition-crossing synthetic regression without changing the owner #267 source-review ledger. At this commit exact-source PR-head CI **PENDING, not PASS**; PR unmerged and release **TESTING**. Separate #33 Original241 workflow [44625441344](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44625441344) failed on vendor official site access challenge; no #509 source fix claimed for a different owner.
+
+**Provider direct readback:** Full current `private.read_personal_state()` SQL again confirms `jsonb_agg(... ORDER BY pulled_at)`, MD5 `037d248b67cc3e8490c1689d3200990f`. Read-only schema contract confirms all five partition columns, 9 indexes and one primary key on `public.shots`. SQL previously credited in R370/R371; **0 new first-time provider words, 0 #267 lines**. Existing full Supabase baseline IN_PROGRESS, hosted/console-only behavior UNVERIFIED. No production SQL/data/Auth/Storage/Edge/config, release/Publish, billing, backups, schedule or notification changes.
+
+[Structured R373 evidence](../audits/issue509-r373-shot-partition-order-ci-repair-20261119.json). **Next:** Verify Node22/browser/approval/SQL exact new PR head; handle #33 external vendor challenge with its separate owner; only safe nonforce explicit merge [skip netlify] after all applicable checks PASS, read back merged-source CI, continue genuinely new semantic provider work.
+
+---
+
+# Issue #509 — R372 R371b syntax CI repair, read-only import/Edge/performance semantic increment [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=1b4cc1857e47104b45d4f5c202e5eae10f7ec300 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-19 UTC; production STRICTLY READ-ONLY.** Immutable preflight verified at the recorded development SHA before all source/provider reads. Current #509 PR #3460 head `9b3cd03b0c98f679da900e35c16c69a321b78fc0` CI failed in two exact-source jobs: Node22 validate 44622860799 (5,086 PASS, **121 FAIL**, 6 SKIPPED), browser 44622860782 (welcome view absent). Both failures share **one reproducible source syntax error** in `site/cloud/mapping.js:20`: `group.sort((a,b)=>String(a.id||'').localeCompare(String(b.id||''));` omitted the outer `sort` closing parenthesis introduced in unmerged R371b. This same-commit source-only correction restores that parenthesis, preserving the R371b equal-instant-only ordering contract, all non-tied historical orders and existing tests. **New exact PR-head CI is PENDING; do not merge or count prior failed checks PASS**. Queue remains TESTING, no READY or Publish.
+
+**Independent read-only Supabase semantic review:** ACTIVE_HEALTHY PG17.11; 69 applied migrations, five deployed Edge Functions. Re-read the complete live `private.apply_prototype_import(uuid,jsonb)` 16,445-char SQL body (MD5 `2af6a48d0fe80841fcc27c1f1d5532e3`), plus 5 exact public.shots trigger definitions and `private.dic_backfill_library_contributions`, and full `dic-admin-push-broker` v3 9,958-character two-file source. Checked current call/trigger ordering, recovery snapshots, historical shot semantics and Community linking. Aggregate-only production: 14 legacy shots, eight Dialed In, 14 canonical links, eight Community links, no pending coffee submissions; no observed data-integrity issue or justification for additional migration. Performance advisors' 14 unindexed foreign keys were reconciled to 10 tiny private tables (0–13 estimated live rows), actual existing indexes and scan data; no proven bottleneck or safe index deletion. Original complete SQL/Edge definitions previously reviewed; **zero first-time provider word or #267 source-line credit**. No Auth identities, raw user records or credentials accessed. Previous PR #3452 merged-source Node22 run 44612256444 now independently SUCCESS; its exact five applicable merged checks are SUCCESS; independent source-isolated #3347 readiness and real hosted #96 recipient acceptance still UNVERIFIED.
+
+**Boundaries:** No Supabase SQL/data/Auth/Storage/Edge/config write, deployment, historical migration editing, release, billing, backup, schedule or alert change. **Baseline IN_PROGRESS**, PR #3460 TESTING. Evidence: [R372 receipt](../audits/issue509-r372-shot-tie-syntax-ci-repair-20261119.json), structured append-only ledger and [PR #3460](https://github.com/Schulzet3/The-Dial-In-Collective/pull/3460). **Next:** inspect new exact PR-head Node22/cloud/browser/SQL/approval results; repair failures, recheck concurrent development and safely nonforce merge with merge-commit [skip netlify] only after all applicable checks SUCCESS, then read back exact merged-source CI. Continue genuinely unreviewed changed provider definitions; no repeat word credit.
+
+---
+
+# Issue #509 — R371b preserve untied History order; repair browser acceptance [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=1b4cc1857e47104b45d4f5c202e5eae10f7ec300 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-19 UTC; source/test only, production READ-ONLY.** Exact old PR #3460 head `dc3142aa2d873e7839cf9c80a140e50dbe702cdd` browser run [44622212777](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44622212777) **FAILED** at `tests/browser/visual_review.py:189` ("light: non-green shot generates next-shot guidance"). The browser's synthetic seed puts newest `review-a` first and clones `s.shots[0]` when checking cross-coffee guidance. R371 initially sorted **all** shot instants ascending and changed the seed row to older Traditional `review-c`, affecting existing UI/History behavior. This is a **genuine nonregression bug caused by our unmerged proposal**, not a production incident.
+
+Narrow same-commit repair: only reorder within identical parsed-instant groups by stable shot ID, preserving original positions of distinct instants and invalid legacy rows, plus revised regression ensuring distinct History input order remains intact. Timestamp-equivalent offsets are still deterministic, no shot dropped, no SQL/Edge/provider changes. New R371b structured receipt and append-only ledger; queue TESTING unchanged. Initial approval CI failure [44622212830](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44622212830) was separately fixed by R371a queue schema repair. **New head CI PENDING**; do not merge or claim READY until exact-source Node22, cloud/browser, approval and applicable SQL tests pass. Next: verify newly triggered checks, repair if needed, safely nonforce integrate [skip netlify] then merged-source checks. Full provider baseline IN_PROGRESS.
+
+---
+
+# Issue #509 — R371a queue intake schema repair (PR #3460) [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=1b4cc1857e47104b45d4f5c202e5eae10f7ec300 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-19 UTC.** Exact-source PR #3460 head `dc3142aa2d873e7839cf9c80a140e50dbe702cdd` approval run [44622212830](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44622212830) **FAILED** release queue schema intake only: missing explicit `merged_source_sha:null` and `ci_runs:[]`, plus a test file incorrectly included among deployable `scope_paths`. No source code or test failure is inferred from the queue gate. Narrow docs-only same-commit repair: set null for unmerged source SHA, PR #3460, only `site/cloud/mapping.js` in runtime paths, explicit CI array, retain TESTING; preserve all 435 preexisting queue items and history. No READY/DEPLOYED claim. See [R371a receipt](../audits/issue509-r371a-queue-intake-repair-20261119.json). Node22/browser and other applicable head checks remain PENDING/IN_PROGRESS until readback. Current Supabase provider unmodified; baseline IN_PROGRESS. Next verify new exact-source PR head approval + tests before merge.
+
+---
+
+# Issue #509 — R371 equal-instant personal shot snapshot determinism [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=3801618fdf3fd2a6979d5b6a90b780b3f4f4ddd1 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-19 UTC; development-only, Supabase READ-ONLY.** Independently retrieved live branch and exact PREFLIGHT.md Git blob before all provider/GitHub source reads. Live Supabase ACTIVE_HEALTHY PostgreSQL17.11. Full private.read_personal_state() SQL shows shots aggregated with ORDER BY pulled_at but no tie key; current hydrate preserves row order, and timestamp-only stable sorting in advice paths can select different latest-shot observations for tied instants. Same absolute instant with different timezone offsets also needs stable ordering. A count-only live aggregate found **0 duplicate groups**; this is a synthetic reproducible **dormant correctness risk, not a confirmed member incident**. Current mapping source was independently read at 3801618fdf3fd2a6979d5b6a90b780b3f4f4ddd1, blob 50e06be496d8729cef34e0b07069b3c84b527b23. No provider code or SQL was changed, and **0 first-time provider words/#267 lines** were credited.
+
+Development-only fix on proposed PR branch: sort snapshot shots by parsed instant then stable ID before hydration; preserve all rows/history, hidden state, user behavior and offline outboxes. Synthetic Node22 regression tests reverse tied rows and retain malformed hidden historical shots. Scope: site/cloud/mapping.js, tests/issue509-shot-order.test.mjs; structured receipt docs/audits/issue509-r371-equal-instant-shot-order-20261119.json, append-only object ledger and queue **TESTING**, not READY. **Exact-source CI PENDING**; no claim of passing checks or production deployment. Last R370 merged Node22 (run 44612256444) independently read back **SUCCESS**, other three exact merged-push workflows SUCCESS. Read-only Admin push SQL+Edge poll semantic recheck found 1 eligible admin, 1 subscription and 0 pending tokens; no additional confirmed defect. Full provider baseline IN_PROGRESS; console-only/native settings UNVERIFIED.
+
+**Next:** verify PR-head Node22, browser and approval CI, repair failures and safely integrate nonforce [skip netlify] only after all applicable checks; then continue first genuinely new/unreviewed provider definition. No backup, billing, publication, Supabase, schedule, or owner notification change.
+
+---
+
 # Issue #509 — R370 approval-push fix merged; live snapshot RPC workload review [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=1ef9978ab4bad0c7af0adf922530378df98622f4 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
