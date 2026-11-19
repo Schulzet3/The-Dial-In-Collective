@@ -71,3 +71,10 @@ test('R322 earlier-lot grower does not overwrite the current Farm when current g
  const p=parse('<p>Last year Faiber Bolanos was the coffee producer; this lot does not name its grower.</p>');
  assert.equal(p.ok,true); assert.notEqual(p.fields.producer,'Faiber Bolanos');
 });
+
+test('R322 a washing station is not a named human grower even beside a Farm-labeled cooperative',()=>{
+ const p=extractPublicCoffeeFacts('<html><body><main><article class="product"><h1>Ethiopia Worka Sakaro</h1><p>Farm: Worka Sakaro Producers Cooperative</p><p>This coffee from the Worka Sakaro Washing Station is a great example.</p></article></main></body></html>',
+ {source_url:'https://roadmapcoffeeworks.com/products/ethiopia-worka-sakaro-anaerobic'});
+ assert.equal(p.ok,true);
+ assert.equal(p.fields.producer,'Worka Sakaro Producers Cooperative');
+});

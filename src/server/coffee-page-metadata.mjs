@@ -1633,7 +1633,17 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   // the selected coffee. A unique selected-current narrative credit can
   // replace only a Farm fallback, not an explicit Producer or a conflict.
   const namedCurrentNarrativeGrower=narrative.details?.named_producer||'';
-  if(namedCurrentNarrativeGrower&&namedEstateFarm&&
+  // Station/cooperative context may surface a separate narrative producer
+  // candidate but must not displace an explicit named Farm. Require an
+  // affirmative present-tense *person* producer sentence on this product.
+  const namedCurrentHumanClaim=namedCurrentNarrativeGrower&&
+   !/\b(?:washing\s+station|processing\s+station|mill|factory|co-?op(?:erative)?|association|collective|group|station)\b/iu.test(namedCurrentNarrativeGrower)&&
+   productCoffeeProse(canonicalProduct,clean).some(block=>{
+    if(block.educational||!block.text.startsWith(namedCurrentNarrativeGrower+' is '))return false;
+    return /^(?:a|an|the)\s+(?:(?:first|second|third|fourth|fifth|[1-5](?:st|nd|rd|th))[ -]generation\s+)?(?:coffee\s+)?(?:producer|farmer|grower)\b/iu.test(
+     block.text.slice(namedCurrentNarrativeGrower.length+4));
+   });
+  if(namedCurrentHumanClaim&&namedEstateFarm&&
      producerEvidenceByFields.get(fields)==='farm'&&
      keyOf(namedCurrentNarrativeGrower)!==keyOf(namedEstateFarm)&&
      !conflicts.has('producer')&&
