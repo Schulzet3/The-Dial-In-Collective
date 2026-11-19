@@ -4,6 +4,30 @@ import {selectedCoffeeContextRoles} from './coffee-selected-context-roles.mjs';
 import {selectedDirectProductCredits,selectedNamedCurrentDecafEvidence,selectedCurrentDecafSpecMethodEvidence,selectedFormTitleWaterDecafEvidence} from './coffee-direct-product-prose.mjs';
 import {rawElements,removeElements,removeComments} from '../../supabase/functions/_shared/html-scan.mjs';
 import {isRecurringCoffeeHarvestWindow,isGenericCoffeeLotLabel} from '../../supabase/functions/_shared/coffee-release-label.mjs';
+// Current selected product-specific project team name discrepancy, never global SEO.
+const word="[\\p{Lu}][\\p{L}\\p{M}'’.-]{1,34}";
+const person=word+"(?:\\s+"+word+"){1,2}";
+const team=new RegExp("^("+person+")\\s+(?:and|&)\\s+("+person+")$","u");
+const leaders=new RegExp("\\b(?:project|team)\\s+(?:is\\s+)?led\\s+by\\s+("+person+")\\s+(?:and|&)\\s+("+person+")(?=\\s*(?:[,.;]|\\bwho\\b|\\bbuilt\\b))","u");
+const norm=s=>String(s||'').normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase().replace(/[^a-z]+/g,' ').trim();
+const first=s=>norm(s).split(' ')[0]||'';
+export function selectedProducerTeamNameDisagreement(selectedHtml,{producer,clean}={}){
+ if(typeof selectedHtml!=='string'||typeof producer!=='string'||typeof clean!=='function')return null;
+ const label=producer.trim(),pair=team.exec(label);if(!pair||label.length>180)return null;
+ for(const block of productCoffeeProse(selectedHtml,clean)){
+  if(block.educational||!block.text||block.text.length>2500)continue;
+  const match=leaders.exec(block.text);if(!match)continue;
+  const before=[pair[1],pair[2]],after=[match[1],match[2]];
+  for(const [a,b] of [[0,1],[1,0]]){
+   if(norm(before[a])!==norm(after[a]))continue;
+   if(first(before[b])!==first(after[b])||norm(before[b])===norm(after[b]))continue;
+   if(first(before[b])===first(before[a]))continue;
+   return {label,narrative:after.join(' and ')};
+  }
+ }
+ return null;
+}
+
 // Best-effort facts from arbitrary PUBLIC coffee pages. This is NOT official
 // roaster verification and never promotes a canonical record.
 import {extractRoastVisualEvidence,normalizeRoastLabel,roastLabelHint} from './roast-level-evidence.mjs';
@@ -3247,6 +3271,26 @@ if(fields.origin&&!conflicts.has('origin')){
     'Count-only selected Farm caption; named supplier not published');
    delete fields.producer;
   }
+ }
+ // Exact selected Producer caption and own project co-leader can disagree
+ // about the same named co-lead; neither surname gets silently certified.
+ const namedTeamDisagreement=fields.producer&&!conflicts.has('producer')
+  ?selectedProducerTeamNameDisagreement(canonicalProduct,{producer:fields.producer,clean}):null;
+ if(namedTeamDisagreement){
+  rememberCoffeeReviewCandidate(fields,'producer',namedTeamDisagreement.label,
+   'Exact selected Producer caption; surname unconfirmed');
+  rememberCoffeeReviewCandidate(fields,'producer',namedTeamDisagreement.narrative,
+   'Exact selected project co-leaders; surname unconfirmed');
+  conflicts.add('producer');delete fields.producer;delete roaster_details.named_producer;
+  producer_review_note=[producer_review_note,
+   'Selected Producer caption and same-coffee project team disagree on a co-lead surname. Confirm Producer manually.']
+   .filter(Boolean).join(' | ').slice(0,1100);
+  for(const fact of source_facts)if(fact.field==='producer')fact.conflicting=true;
+  if(source_facts.length<384)source_facts.push({
+   field:'producer_context',label:'Current selected project co-leaders (review only)',
+   value:namedTeamDisagreement.narrative,source_url,source_type:'html',
+   section:'Direct selected Producer caption vs same selected project team story',conflicting:true
+  });
  }
  // The selected co-op/farm narrative and direct Farm/Region label disagree
  // on district. Preserve both raw claims, but choose neither automatically.
