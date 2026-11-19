@@ -42,3 +42,16 @@ test('R327 decorative image without literal tasting icon cannot label fields',()
  const own=selectedIconLabeledCoffeeSpecs(html,{name,clean});
  assert.deepEqual(own.notes,[]);assert.deepEqual(own.methods,[]);
 });
+
+test('R327 multi-line two-sentence icon profile defers to complete literal parser',()=>{
+ const html=fixture('<h4><img src="/Tasting_Notes_16x16.png">Honey, Raspberry, Almond. <br>Syrupy Body, Tangy Acidity, Sweet.</h4>');
+ assert.deepEqual(selectedIconLabeledCoffeeSpecs(html,{name,clean}).notes,[]);
+ const parsed=extractPublicCoffeeFacts(html,{source_url:url});
+ assert.equal(parsed.fields.tasting_notes,'Honey, Raspberry, Almond. Syrupy Body, Tangy Acidity, Sweet.');
+ assert.ok(!parsed.conflicts?.includes('tasting_notes'));
+});
+test('R327 single continuous comma list with a soft break remains usable icon evidence',()=>{
+ const html=fixture('<h4><img src="/Tasting_Notes_16x16.png">Bergamot, Red Fruit,<br>Cola, Peach, Caramel</h4>');
+ const direct=selectedIconLabeledCoffeeSpecs(html,{name,clean});
+ assert.deepEqual(direct.notes,['Bergamot, Red Fruit, Cola, Peach, Caramel']);
+});

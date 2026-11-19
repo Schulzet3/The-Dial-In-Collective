@@ -22,6 +22,10 @@ export function selectedIconLabeledCoffeeSpecs(html,{name='',clean}={}){
   if(images.length!==1)continue;
   const icon=images[0].split('?')[0].toLowerCase();
   if(/(?:^|\/)tasting[_-]?notes?[_-]?\d+x\d+\.(?:png|svg|webp)$/iu.test(icon)){
+   // A deliberate line break between complete sentences may be one larger
+   // merchant sensory profile. Let the existing full-literal reader handle
+   // it instead of promoting only the first clause as a shorter override.
+   if(/<br\b/iu.test(b.html)&&/[.!?]\s+\S/u.test(b.text))continue;
    const first=b.text.split(/[.!?]/u)[0].trim(),parts=first.split(/\s*,\s*/u);
    if(parts.length<3||parts.length>8||parts.some(x=>x.length<2||x.length>45||
      /\b(?:process|brew|roast|origin|price|producer|decaf|offer|method)\b/iu.test(x)))continue;
