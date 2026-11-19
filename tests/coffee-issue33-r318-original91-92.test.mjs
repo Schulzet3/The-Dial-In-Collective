@@ -5,6 +5,7 @@ import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 import {productMarkup} from '../src/server/coffee-product-scope.mjs';
 import {selectedProductHeadings} from '../scripts/audit/issue33-selected-product-heading.mjs';
 import {requiredFocusedSourceFailures} from '../scripts/audit/issue33-focused-source-acceptance.mjs';
+import {selectedSellerNativeRoastTag} from '../scripts/audit/issue33-r318-selected-shopify-tag.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../site/cloud/coffee-url-autofill.js';
 const base='https://darkcanyon-coffee.com/collections/best-sellers/products/';
 const page=(name,description,extra='',meta='')=>'<html><head><meta property="og:site_name" content="Dark Canyon Coffee Company">'+meta+'</head><body><main><article class="product"><h1>'+name+'</h1><p>'+description+'</p><section><h2>Roast Level</h2><p>Light Medium Dark</p></section></article></main>'+extra+'</body></html>';
@@ -60,4 +61,21 @@ test('R318 Add Coffee stays a noncommitting preview; Source Review and selected 
  for(const bad of [[],[good(91),{...good(92),status:'UNAVAILABLE'}],[good(91),{...good(92),selected_heading_identity_verified:false}],
   [{...good(91),source_review_rendered:false},good(92)]])
   assert.ok(requiredFocusedSourceFailures([91,92],bad).length>0);
+});
+
+test('R318 exact seller-owned selected Shopify Medium tag is valid only with matching title, ID, vendor and handle',()=>{
+ const native=(title='Fireside Favorite',vendor='Dark Canyon Coffee Company',id='7478546497649',handle='fireside-favorite',tags=['Graham Cracker','Medium Roast'])=>
+  'var meta = {"product":{"id":'+id+',"gid":"shopify","vendor":"'+vendor+'","type":"Flavored","handle":"'+handle+'"}};'+
+  '"product":{"title":"'+title+'","vendor":"'+vendor+'","id":"'+id+'"};'+
+  '_ALConfig.product = { "id": '+id+', "tags": '+JSON.stringify(tags)+', "variants": [] };';
+ const context={name:'Fireside Favorite',roaster:'Dark Canyon Coffee Company',source_url:base+'fireside-favorite'};
+ assert.equal(selectedSellerNativeRoastTag(native(),context)?.value,'Medium');
+ for(const sample of [native('Highlander Grogg'),native('Fireside Favorite','Sibling Roastery'),
+  native('Fireside Favorite','Dark Canyon Coffee Company','7478546595953'),
+  native('Fireside Favorite','Dark Canyon Coffee Company','7478546497649','highlander-grogg'),
+  native('Fireside Favorite','Dark Canyon Coffee Company','7478546497649','fireside-favorite',[]),
+  native('Fireside Favorite','Dark Canyon Coffee Company','7478546497649','fireside-favorite',['Light Roast','Medium Roast'])])
+  assert.equal(selectedSellerNativeRoastTag(sample,context),null);
+ const fake=native().replace('_ALConfig.product = { "id": 7478546497649','_ALConfig.product = { "id": 1234567890');
+ assert.equal(selectedSellerNativeRoastTag(fake,context),null);
 });

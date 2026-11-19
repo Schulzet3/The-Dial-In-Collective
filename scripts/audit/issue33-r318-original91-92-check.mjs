@@ -9,6 +9,7 @@ import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mj
 import {selectedProductHeadings} from './issue33-selected-product-heading.mjs';
 import {identicalCurrentSelectedTitle} from './issue33-selected-public-alternate.mjs';
 import {requiredFocusedSourceFailures} from './issue33-focused-source-acceptance.mjs';
+import {selectedSellerNativeRoastTag} from './issue33-r318-selected-shopify-tag.mjs';
 const dir=process.env.DIC_ISSUE33_FOCUSED_PUBLIC_DIR||'/tmp/dic33-r318', errors=[];
 const cases=[{number:91,name:'Fireside Favorite',url:'https://darkcanyon-coffee.com/collections/best-sellers/products/fireside-favorite',tokens:['graham cracker','cinnamon','vanilla','hazelnut']},
  {number:92,name:'Highlander Grogg',url:'https://darkcanyon-coffee.com/collections/best-sellers/products/highlander-grogg',tokens:['butterscotch','french vanilla','irish']}];
@@ -39,15 +40,18 @@ for(const c of cases){
  must(!f.decaffeination_method,'available_decaf_variant_not_method_'+c.number);
  must(!/blueberry|peach|cranberry|mango/i.test(String(f.tasting_notes||'')),'sibling_flavors_excluded_'+c.number);
  must(!(r.seo_fallback_fields||[]).includes('tasting_notes'),'no_seo_tasting_'+c.number);
- // "Light Medium Dark" is an unselected three-choice gauge. A source-owned
- // selected roast label (if any) needs separately verified exact identity.
- const ownLiteralSelectedRoast=/\b(?:medium|dark|light)(?:-dark)?\s+roast\b/i.test(body);
- if(f.roast_level&&!ownLiteralSelectedRoast)
-  errors.push('unattributed_roast_label_requires_selected_source_review_'+c.number);
+ // The selected Shopify native Product ID/title/vendor/handle must join to the
+ // merchant's OWN same-ID _ALConfig.product roast tag (not sibling/menu/gift).
+ // The visible Light/Medium/Dark ruler alone is ambiguous, but the native
+ // seller's product-owned literal "Medium Roast" is an explicit source claim.
+ const ownedTag=selectedSellerNativeRoastTag(html,{
+  name:c.name,roaster:'Dark Canyon Coffee Company',source_url:c.url});
+ must(ownedTag?.value==='Medium'&&f.roast_level==='Medium',
+  'same_selected_shopify_medium_roast_source_contract_'+c.number);
  const replay=extractPublicCoffeeFacts(html,{source_url:r.final_url||c.url});
  must(replay?.ok===true&&replay.fields?.name===f.name,'actual_source_replay_'+c.number);
  readings.push({number:c.number,url:c.url,final_url:r.final_url,bytes:r.html_bytes,sha256:r.html_sha256,
-  headings:heads,fields:f,roast_claim_literal_in_selected_text:ownLiteralSelectedRoast,
+  headings:heads,fields:f,selected_shopify_product_roast_evidence:ownedTag,
   conflicts:r.conflicts||[],seo_fallback_fields:r.seo_fallback_fields||[]});
 }
 const verdict={passed:errors.length===0,errors,event_sha:process.env.DIC_R318_EVENT_SHA,

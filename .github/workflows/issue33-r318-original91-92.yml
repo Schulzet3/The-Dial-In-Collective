@@ -7,6 +7,7 @@ on:
       - scripts/audit/issue33-r318-original91-92-check.mjs
       - .github/workflows/issue33-r318-original91-92.yml
       - docs/workstreams/ops-issue33-r318-original91-92-20261119.md
+      - scripts/audit/issue33-r318-selected-shopify-tag.mjs
   push:
     branches: [development/backend-foundation]
     paths:
@@ -14,6 +15,7 @@ on:
       - scripts/audit/issue33-r318-original91-92-check.mjs
       - .github/workflows/issue33-r318-original91-92.yml
       - docs/workstreams/ops-issue33-r318-original91-92-20261119.md
+      - scripts/audit/issue33-r318-selected-shopify-tag.mjs
 permissions:
   contents: read
 jobs:
@@ -28,7 +30,7 @@ jobs:
       - uses: actions/setup-node@v7.1.0
         with:
           node-version: '22'
-      - name: Five real-parser positive and adversarial tests
+      - name: Six real-parser positive and adversarial tests
         run: node --test tests/coffee-issue33-r318-original91-92.test.mjs
       - name: Two exact original selected guarded public HTTPS URLs
         if: always()
