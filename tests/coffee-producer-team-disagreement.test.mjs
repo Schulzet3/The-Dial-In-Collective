@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {selectedProducerTeamNameDisagreement as disagree} from '../src/server/coffee-producer-team-disagreement.mjs';
+import {selectedProducerTeamNameDisagreement as disagree} from '../src/server/coffee-page-metadata.mjs';
 const selected=text=>'<main><article class="product"><h1>Granos A Cielo</h1><p>'+text+'</p></article></main>';
 const clean=s=>String(s).replace(/<[^<>]*>/g,' ').replace(/\s+/g,' ').trim();
 const label='Hazel Arias and Nelsyn Yoseles';
