@@ -1,0 +1,58 @@
+name: DIC proactive READY candidate pre-certification
+# Owner #3347 explicit supersession: pre-test immutable READY source without publishing.
+# Does NOT create a production grant, main request, Netlify build or provider write.
+on:
+  workflow_run:
+    workflows: ['DIC approval, implementation and continuity contract']
+    types: [completed]
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+  checks: read
+concurrency:
+  group: dic-ready-precertification
+  cancel-in-progress: false
+jobs:
+  precertify-source:
+    if: github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'development/backend-foundation')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Verify live development and source bound approved queue transition
+        id: source
+        shell: bash
+        env:
+          EVENT: ${{ github.event_name }}
+          EVENT_HEAD: ${{ github.event.workflow_run.head_sha || '' }}
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin development/backend-foundation
+          head_sha="$(git rev-parse refs/remotes/origin/development/backend-foundation)"
+          if [ "$EVENT" = "workflow_run" ]; then
+            if [ "$head_sha" != "$EVENT_HEAD" ]; then
+              echo 'Source moved; newer run owns pre-certification'
+              exit 0
+            fi
+            if ! git diff --name-only "$head_sha^" "$head_sha" -- docs/RELEASE_QUEUE.json | grep -Fxq 'docs/RELEASE_QUEUE.json'; then
+              echo 'No READY queue update; no candidate CI needed'
+              exit 0
+            fi
+          fi
+          echo "development_sha=$head_sha" >> "$GITHUB_OUTPUT"
+      - name: Freeze source-isolated READY bytes and start five exact-source CI jobs
+        if: steps.source.outputs.development_sha != ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DIC_READY_PRECERTIFICATION: 'YES'
+        run: node scripts/release/precertify-ready-source.mjs "${{ steps.source.outputs.development_sha }}" --push
