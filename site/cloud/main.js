@@ -1048,7 +1048,11 @@ class CloudApp {
     const r=E.recommendation(this.state,this.logCoffee,{style:this.draft.style,basketId:this.draft.basketId,feedMode:this.draft.feedMode});
     const control=a==='use-grind'?'grind':'temperature';
     if(control==='grind'){
-     sheet.querySelector('[name=grindSetting]').value=r.grind.value;
+     const grindInput=sheet.querySelector('[name=grindSetting]');
+     grindInput.value=r.grind.value;
+     // Programmatic input.value assignments do not fire an input event.
+     // Acknowledge only the resolved local Save error, preserving other errors.
+     U.acknowledgeShotInput(grindInput,sheet.querySelector('#shot-validation-feedback'));
      this.appliedRecommendationValues.grind=String(r.grind.value);
     }
     else{
@@ -1056,6 +1060,7 @@ class CloudApp {
       const temperatureInput=sheet.querySelector('[name=temperature]');
       if(temperatureInput){
        temperatureInput.value=C.tempDisplay(r.tempC,this.logUnit);
+      U.acknowledgeShotInput(temperatureInput,sheet.querySelector('#shot-validation-feedback'));
        this.appliedRecommendationValues.temperature=String(temperatureInput.value);
        // Explicitly using the recommended value replaces the historical
        // prefill; its cross-style provenance no longer describes this value.
