@@ -16813,6 +16813,28 @@
       ],
       "notes": "#509 R358 source-only; preserve family history, Community, favorite/Current and authorization; no publication.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-stale-family-statistics-reconcile",
+      "issue": 509,
+      "title": "Reconcile historical stale derived personal recipe-family evidence counts",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261119120000_dic_reconcile_stale_personal_family_stats.sql"
+      ],
+      "owner_source": "Issue #509 owner-authorized development-only stale family repair; verified preflight eac9b0b803a7209ddfd836369ad7e26f2afa1896/3742fed0176c809b115320c698a0e8b1675b2d3e, R360 live catalog and aggregate receipt",
+      "tests": [
+        "Current READ-ONLY aggregate: 1/6 family counts stale (6 stored versus 4 eligible); cause unverified",
+        "PG17 disconnected synthetic transaction streams EXACT migration between setup/assertions; preserves favorite, shots, notes, unaffected family; CI pending"
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "PR-head exact-source PG17, Node22, browser, approval/continuity checks pending; NOT READY",
+        "Release-isolated source and owner-authorized new Publish required before production migration; live discrepancy unchanged"
+      ],
+      "notes": "One-time idempotent derived-statistics-only repair via existing approved refresh_personal_family; preserves complete history and personal state; [skip netlify]",
+      "production_deployed": false
     }
   ],
   "history": [

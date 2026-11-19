@@ -1,3 +1,15 @@
+# Issue #509 — R360 historical stale personal-family statistics source-only repair [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=eac9b0b803a7209ddfd836369ad7e26f2afa1896 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-19 UTC; production READ-ONLY.** Direct complete live `private.refresh_personal_family(uuid)` source (2,134 characters, MD5 `e6a15e6de21f56345479574cc575cf95`) and dependent family/shot/check/trigger definitions semantically reconciled against prior R358/R359 and full owner contract; no duplicate first-time SQL-word or #267 line credit. Safe bounded aggregates reconfirm **1/6** families with stale derived statistics: stored 6, eligible visible green shots 4, evidence state otherwise consistent, historical cause UNVERIFIED. Zero private member/shot/note/Auth identity records exported.
+
+**Development-only future-publication backfill:** additive `supabase/migrations/20261119120000_dic_reconcile_stale_personal_family_stats.sql` runs existing approved `private.refresh_personal_family` only on family IDs whose JSON `count` disagrees with eligible live shot count. Rebuilds derived count/ratio/time/evidence only; never deletes/rewrites shots, families, IDs, notes, favorites, or Current. No migration applied to production during this audit. Two synthetic fixture halves stream the **literal migration** inside a rollback-only isolated PostgreSQL 17 `dic_ci` transaction, then normal migration application; exact-source checks pending, NOT PASS. Conditional history/source-isolation preserved. Existing forward-only Admin single-shot delete protection is independent.
+
+Audit evidence `docs/audits/issue509-r360-stale-family-derived-backfill-20261119.json`; append-only ledger R360. Queue `DIC-Q-509-stale-family-statistics-reconcile` **TESTING**, never READY without exact-source PG17/Node22/browser/approval and source-isolated release validation. Existing historical discrepancy remains live until separately owner-authorized Publish, and no live DML is permitted now. Baseline IN_PROGRESS; next exact work: inspect genuinely changed/unreviewed provider definition and check source-bound CI, repair/merge only after complete applicable PASS. No production/release/backup/billing/schedule/alert changes.
+
+---
+
 # Issue #509 — R359b all six applicable merged-source jobs PASS, unrelated #33 selected FAIL [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=8a45f21cbbd4526dade5ae12d7fe450ca6c551be preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e

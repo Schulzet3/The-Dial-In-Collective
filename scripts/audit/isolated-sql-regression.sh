@@ -16,6 +16,14 @@ run_sql() { docker exec -i "$DIC_SQL_CONTAINER" psql -X -v ON_ERROR_STOP=1 -U po
 run_sql tests/sql/bootstrap.sql
 for migration in supabase/migrations/*.sql; do
   echo "Applying $migration to isolated PostgreSQL"
+  # R360: test the literal one-shot migration against synthetic stale state
+  # inside a single disconnected dic_ci transaction before normal application.
+  if [[ "$migration" == *20261119120000_dic_reconcile_stale_personal_family_stats.sql ]]; then
+    echo "Running actual family statistics historical reconciliation fixture"
+    cat supabase/tests/family_statistics_historical_reconcile_pre.sql "$migration" \
+      supabase/tests/family_statistics_historical_reconcile_post.sql \
+      | docker exec -i "$DIC_SQL_CONTAINER" psql -X -v ON_ERROR_STOP=1 -U postgres -d dic_ci
+  fi
   run_sql "$migration"
   # Historical suites run at the schema boundary they were written to protect.
   # Later migrations intentionally replace some of those permissions/gates.
