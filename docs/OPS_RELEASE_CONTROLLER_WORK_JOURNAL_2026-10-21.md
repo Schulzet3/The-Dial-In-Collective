@@ -1127,3 +1127,15 @@ DIC_PREFLIGHT_VERIFIED development_sha=e9084a8ed0c8372c58b46a1de94eb4e72909f323 
 ## November 19, 2026 UTC — #3424 correct synthetic missing-CI test assertion [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=e9084a8ed0c8372c58b46a1de94eb4e72909f323 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
 - Original repair PR #3425 head 70450867175fabe8ac5e54b2e83e2133c71bf19e exact main test 44548675451 FAILED one new regression assertion: the deliberately unverified second synthetic co-owner rightfully reports missing recorded CI statuses, while test had incorrectly prohibited ALL missing-status errors. Actual fix must HOLD those legitimate errors. Remove ONLY overbroad assertion; keep fail-closed first fetch/403/exhausted tests and no fabricated co-selected overlap expectation. No source release/app/provider change. Retest exact amended PR CI before merging.
+
+
+## DIC-20261119-READY42-10 source-frozen recovery controller request [skip netlify]
+- Release ID: DIC-20261119-READY42-10
+- Tested source: 7a5b27d342c6c49bd75e8d1e4cb164a76bd2c174
+- Mode: publish
+- Exact owner November 19 request: 'Publish everything READY in the queue'. This authorizes the SAME original frozen 42 READY item IDs only after original -09 failed before claim, not a new batch or future release.
+- Ref leases main=f9c18692807c15825fe6c8be855861ab44fcc4ac; development=cb9c0be5fbdea42eff19683ae5625672841996c2; release=0f3641b4fff07e2a88d7747e621304ec2cf0ead5.
+- Frozen candidate branch release-candidates/ready3347-f6ef3aeb428347afeea4; 42 IDs source-scope proof, manifest blob b94a676cdafdf28adbf4bd152b92f14ba1766f0d. Five exact candidate GitHub SUCCESS: approval 44533340195, validate 44533339821, cloud/mobile 44533339872, SQL 44533339833, 1 build. SQL migrations 68 identical between published and candidate, migration risk none.
+- Dev grant DIC-20261119-READY42-10 nonforce merged cb9c0be5fbdea42eff19683ae5625672841996c2 with approval run 44549551848 SUCCESS. Main #3425 repair merged f9c18692807c15825fe6c8be855861ab44fcc4ac, exact merged CI 44549040734 SUCCESS. Previous controller 44546780180 failed BEFORE release claim due CI GET transient + misleading batch error cascade, previous -09 never consumed and MUST NOT be replayed.
+- Recovery proof: GitHub backup 44351355897 artifact 14448167874 verified encrypted SHA-256 a52b9d48040a5ccbf6c17081478c78b93931cf8f1d399f16f3739316126b83ec; Drive private file 1v97OIDazEqtGS0a_zWOB0JNs0sXbPSQn in owner-only folder, 32,054,255 bytes. Snapshot Nov18 16:48:20Z, archived 16:48:41Z, verified 16:49:16Z; most recent sampled live-write 2026-11-15 18:08:11Z.
+- This is one guarded main request only; NOT a deployed receipt. No force, no duplicate grant, no extra test/build, no producer/SQL/Auth/member/provider mutation. Verify exact controller run, one release ref claim, one Netlify Git-connected build and current READY deployment source before any DEPLOYED assertion.
