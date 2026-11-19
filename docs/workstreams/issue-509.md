@@ -1,3 +1,11 @@
+# Issue #509 — R353 Admin pagination/search/signup SQL and consumer audit [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=152e55eb1b88fa6631ec79f2e7c7be93ed71ba73 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**November 19, 2026 UTC; production strictly READ-ONLY.** Directly semantically reread the full six live private/public `dic_admin_records`, `dic_admin_search_records`, and `dic_admin_signup_requests` SQL sources (15201 characters, per-definition MD5, complete 1-end range and entire source in [R353 structured receipt](../audits/issue509-r353-admin-pagination-consumer-20261119.json)). Current `site/admin/main.js`, `view.js`, `records.js` exact blobs are also byte-identical to the published release. Protected Admin caller uses server-side 50-row paging and resets offset on search/clear; count/page filters match; timestamp+UUID orders are stable; unique shot-note/first-entry/member joins prevent duplicate rows. Nonexecuting EXPLAIN Sort/Seq Scan total costs 4.68, 1.08, 1.12 at just 27 shots, zero pending, six admitted accounts; no proven indexing bottleneck. Broad cumulative pg_stat_statements match 9 shapes, 148 calls, total 702.01ms, max 32.76ms, zero temp blocks; NOT an exact recent-RPC latency measurement. Search intentionally/existingly omits some optional displayed metadata; desired full-field search is **UNVERIFIED** without explicit contract, not a confirmed bug. Zero new first-time provider words or #267 source lines. No safe fix/removal justified; no source/test/CI or provider/release/queue/backup/schedule/alert changes; CI NOT_RUN docs-only, baseline **IN_PROGRESS**, #509 fixes remain **TESTING**. **Next exact cursor:** `private.dic_admin_access_overview()` character 1, correlate account overview with Admin account pagination; prioritize genuinely changed/unreviewed definitions. No owner action.
+
+---
+
 # Issue #509 — R352 native prototype import restore and family lineage [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=3bd7a865e46a3eb099f5041954f05fee50a7d81c preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
