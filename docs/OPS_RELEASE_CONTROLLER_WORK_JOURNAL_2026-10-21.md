@@ -1020,3 +1020,26 @@ DIC_PREFLIGHT_VERIFIED development_sha=bc30979c36bb74a3537d061516e225b37766dc23 
 ## 2026-11-15 #28 PR #2949 first hosted CI test-fixture false positive corrected [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=e6d68ed26485d389d8d5b101691f04d2ca1febef preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
 - Exact PR-head a6136a38f624d7ac14eed7737cbea6a7855a4147 hosted main acceptance run 43757971157 FAILED in focused source policy test because the static negative assertion matched the workflow COMMENT "No pg_dump", not a YAML step or executed command. This is a test-only false positive; no real backup, Drive/provider or app code change happened. Corrected assertion inspects executable YAML text excluding comments, with all original forbidden operations still checked and unchanged. Retest at exact new branch head; do not call first CI PASS or retry identical suite.
+
+
+## November 19, 2026 — #3347 READY source-owner overlap false-positive prevention [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=647aa39cfc4b784561545506ce2f191edf828af9 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+- Owner scope: make READY genuinely publishable without last-minute source-isolation surprises; this narrow main-only gate correction does not stage, certify or publish a candidate, grant authorization, change production or remove privacy/recovery checks.
+- Evidence: dev approval 44460771215 exact-source SUCCESS, but 39 individually certified READY entries included 29 with later source drift requiring isolation; issue #3347 tracks full prospective readiness.
+- Correct main preflight planner: tracked IN_PROGRESS/TESTING record with NULL/unmerged SHA can no longer falsely require a READY/unready same-file pin when no corresponding merge exists in the development ancestry. A genuinely merged non-READY competing owner still requires exact reviewed-source pin and full later validation; unknown ancestry HOLDs. Any changed READY blob still rejected by stage before creating a ref. Existing owner scope and one-use release gates unchanged.
+- Paths: scripts/release/ready-only-candidate.mjs; tests/ready-only-candidate.test.mjs; this same-commit journal. Targeted Node tests and exact main CI required; no test or publication claimed PASS before readback. Next: resolve #2837 stale conflicting draft PRs, improve prepublish full-batch gating and record Locked #457 supersession in both canonical files before prospective auto-certification.
+
+
+## November 19, 2026 — #3347 focused CI failure and restoration fix [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=647aa39cfc4b784561545506ce2f191edf828af9 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+- PR #3349 initial exact-source run 44461732854 FAILED: 186 PASS, 27 FAIL; root cause was accidentally excluding unmerged unfinished-only changed paths from the candidate restoration set, not a production fault. Preserve the original conservative behavior for all unselected/unfinished-only changed paths by restoring them to published bytes even without a merged commit. Narrow the unmerged-owner false-positive exemption to a path that is ALSO explicitly owned by selected READY work. Actual merged unready competitors remain guarded by ancestry and pin; unknown ancestry HOLD. Retest the full existing main controller acceptance, no Netlify/provider/production action.
+
+
+## November 19, 2026 — #3347 exact READY blob parity, not unmerged label assumptions [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=647aa39cfc4b784561545506ce2f191edf828af9 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+- Second exact CI run 44461850330 FAILED 207 PASS / 6 FAIL because existing tests require true mixed-source holds even when an unfinished queue entry has a null merge SHA. The conservative base branch is restored. Waive only a genuinely stale unmerged queue-record overlap if a Git object reader proves current development bytes equal the unique chronological selected READY merged blob; no reader, real drift, ambiguous ancestry, any merged competitor, or a changed source still blocks or requires an exact review pin. Real disposable-Git acceptance tests for harmless label vs harmful edit. No Netlify/production/provider action; exact main CI required before nonforce merge.
+
+
+## November 19, 2026 — #3347 final disposable-Git fixture preservation [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=023f9cbd0ecc3779fff3f65ab441865fa1ef43b9 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+- Third exact main PR run 44462085118: 212 PASS, 1 FAIL. Test fixture for unmerged shared-file owner erroneously *overwrote* the existing unfinished extractor owner's scope, leaving a real changed extractor file untracked. Correct fixture by adding a separate never-merged issue for the shared READY file while retaining the unfinished extractor source owner. Strict untracked-file denial stays unchanged; this is test-only repair. Rerun existing suite once at new exact head; no provider/production changes.

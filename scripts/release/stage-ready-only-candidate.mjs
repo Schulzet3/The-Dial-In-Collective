@@ -57,7 +57,7 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
   publishedSourceSha,developmentSourceSha,restoredWorkflows:unpublishedWorkflows,sourceObjectAt
  });
  const plan=planReadyOnlyCandidate(queue,{publishedSourceSha,developmentSourceSha,
-  selectedIds,pinnedReadyPaths,developmentChangedPaths:developmentPaths,isAncestor:ancestor});
+  selectedIds,pinnedReadyPaths,developmentChangedPaths:developmentPaths,isAncestor:ancestor,sourceObjectAt});
  if(!plan.ready)throw Error('READY-only staging HOLD: '+plan.errors.join('; '));
  const compatibleAuditSupport=discoverCompatibleAuditSupport({queue,
   restoredPaths:plan.restored_paths,pinnedReadyPaths:plan.pinned_ready_paths,

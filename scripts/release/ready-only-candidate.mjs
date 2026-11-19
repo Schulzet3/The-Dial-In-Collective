@@ -237,7 +237,7 @@ export function assertCandidateStaticNamedExports(paths,{readSource,hasPath}={})
 }
 
 export function planReadyOnlyCandidate(queue,{publishedSourceSha,developmentSourceSha,
- selectedIds,developmentChangedPaths,pinnedReadyPaths=[],isAncestor}={}){
+ selectedIds,developmentChangedPaths,pinnedReadyPaths=[],isAncestor,sourceObjectAt}={}){
  const errors=queueSchemaErrors(queue);
  if(!SHA.test(publishedSourceSha||'')||!SHA.test(developmentSourceSha||'')||
     typeof isAncestor!=='function')errors.push('Missing source anchors/ancestry');
@@ -281,9 +281,24 @@ export function planReadyOnlyCandidate(queue,{publishedSourceSha,developmentSour
   if(!owners.length||(!chosen.length&&!competing.length))
    errors.push('Untracked or DEPLOYED-only unpublished deployable source: '+path);
   else if(chosen.length&&competing.length){
-   // Mixed READY/unready source is publishable ONLY when explicitly pinned to
-   // exact selected READY merged blob, independently verified below.
-   if(!wantedPins.has(path))errors.push('READY/unready or unselected overlap cannot be isolated: '+path);
+   // An unmerged issue record can share READY ownership without containing
+   // any different bytes. Skip its pin ONLY on exact unique READY frozen-blob
+   // parity against current development; never rely on an unmerged label alone.
+   const unmergedOnly=competing.every(i=>i.state!=='READY'&&!SHA.test(i.merged_source_sha||''));
+   let noActualOverlap=false;
+   if(unmergedOnly&&typeof sourceObjectAt==='function'){
+    try{
+     const tips=chosen.filter(tip=>chosen.every(owner=>owner===tip||
+      isAncestor(owner.merged_source_sha,tip.merged_source_sha)===true));
+     if(tips.length===1){
+      const frozen=sourceObjectAt(tips[0].merged_source_sha,path);
+      noActualOverlap=!!frozen&&frozen===sourceObjectAt(developmentSourceSha,path);
+     }
+    }catch{errors.push('Cannot verify exact READY owner source parity: '+path);}
+   }
+   if(noActualOverlap&&!wantedPins.has(path))included.push(path);
+   else if(!wantedPins.has(path))
+    errors.push('READY/unready or unselected overlap cannot be isolated: '+path);
    else{included.push(path);pinned.push(path);}
   }
   else if(chosen.length){
@@ -409,7 +424,7 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
  const plan=planReadyOnlyCandidate(queue,{
   publishedSourceSha,developmentSourceSha:manifest.development_source_sha,
   selectedIds:manifest.selected_ready_item_ids,
-  pinnedReadyPaths:manifest.pinned_to_ready_paths||[],developmentChangedPaths,isAncestor});
+  pinnedReadyPaths:manifest.pinned_to_ready_paths||[],developmentChangedPaths,isAncestor,sourceObjectAt});
  if(!plan.ready)reject(plan.errors.join('; '));
  if(!manifest.risk_classification||
     JSON.stringify(manifest.risk_classification)!==JSON.stringify(classifyReleaseRisk(plan.included_paths)))

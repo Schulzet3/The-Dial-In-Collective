@@ -73,14 +73,24 @@ test('real staging refuses an unready change to the same READY file',()=>{
   assert.throws(()=>f.git('rev-parse','release-candidates/post-ready-denied'));
  }finally{rmSync(f.root,{recursive:true,force:true});}
 });
-test('real staging refuses READY versus unready same-file overlap',()=>{
+test('#3347 real Git staging checks unmerged overlapping label against exact READY bytes',()=>{
  const f=fixture();
  try{
-  f.queue.items[1].scope_paths=['site/card.js'];
+  // Preserve existing unfinished extractor ownership; add a separate
+  // never-merged issue's stale card label rather than erase a real owner.
+  f.queue.items.push({...f.queue.items[1],id:'DIC-Q-102',issue:102,
+   scope_paths:['site/card.js']});
   f.write('docs/RELEASE_QUEUE.json',JSON.stringify(f.queue,null,2)+'\n');
-  f.git('add','-A');f.git('commit','-qm','Track unready same-file overlap [skip netlify]');
+  f.git('add','-A');f.git('commit','-qm','Track unmerged same-file queue label [skip netlify]');
   f.development=f.git('rev-parse','HEAD');
-  assert.throws(()=>stage(f,'overlap-denied'),/overlap/);
+  const prepared=stage(f,'overlap-frozen-parity');
+  assert.deepEqual(prepared.plan.pinned_ready_paths,[]);
+  assert.equal(f.git('show',prepared.candidate_sha+':site/card.js'),'new READY card');
+  assert.equal(f.git('show',prepared.candidate_sha+':src/server/extractor.mjs'),'published extractor');
+  f.write('site/card.js','unready conflicting new edit\n');
+  f.git('add','-A');f.git('commit','-qm','Real unready later edit [skip netlify]');
+  f.development=f.git('rev-parse','HEAD');
+  assert.throws(()=>stage(f,'overlap-real-drift-denied'),/overlap/);
  }finally{rmSync(f.root,{recursive:true,force:true});}
 });
 test('zero READY items never creates a staging ref',()=>{
