@@ -1,3 +1,17 @@
+# Issue #509 — R357 archived setup provider/client eligibility contract [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=2bb1a0f85cf9c815294533e44531b901c06cf659 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**November 19, 2026 UTC; production READ-ONLY.** Cross-checked live PostgreSQL 17.11 against the released and development client for archived equipment setup behavior. Complete rereview of `private.mutate_workspace` (6,384 chars, MD5 `f3eb1b5086e4396625f3efa38f4c9165`), `private.rename_setup` (1,792, `d5efbc70d20f75d6e3aeea4b64ab078b`), `private.read_personal_state` (2,339, `037d248b67cc3e8490c1689d3200990f`); full **1-to-end** range each, but all were already reviewed in prior #509 receipts (**0** new first-time SQL words). Inspected archived-setup branch of 16,445-char `private.apply_prototype_import` (MD5 `2af6a48d0fe80841fcc27c1f1d5532e3`; **partial semantic revisit only**). Read all six current `public.setups` constraints, revision trigger and `archived_at` declaration. The import creates one fresh, nonarchived setup; no current member-facing archive action was proved. Aggregate-only counts: 4 setups, **0** archived; 0 archived account-active pointers, workspace coffees or shots, and 0 hidden entries.
+
+**Novel conditional dependency finding, NOT a confirmed live member defect:** `private.read_personal_state` intentionally includes archived rows for history; release/development `site/cloud/mapping.js` both omit `archived_at` from hydrated setup metadata; `site/cloud/main.js` switch offers **Use/Rename** on every hydrated row. The SQL `select_setup` and `rename_setup` explicitly reject archived rows. Thus historical archived rows could display nonfunctional controls, but **none currently exists** and no supported import creates one. Do not delete history, change server eligibility, or claim an incident. Target a synthetic client fixture only if a real archive producer/contract is established; no speculative fix.
+
+**Exact source:** development `site/cloud/mapping.js` blob `acbfad05` = release same, `site/cloud/main.js` development `30f5e6a9`, release `28c6f602` (identical switch semantics). Live provider 69 migrations and 5 Edge deployments; no identified new source drift or measured bottleneck. [Append-only structured R357 object-level evidence](../audits/issue509-supabase-object-ledger.json) key `provider_archived_setup_crosslayer_run357`, committed `ccf67467ba82236e5c44ec686cd13f2b114bf8e7`. No new source/test/CI, no suite rerun (NOT_RUN), no queue promotion (existing fixes TESTING), no production SQL/data/Auth/Storage/Edge/config changes, migration, release/publish, backup/billing, schedule or alert modifications. Full accessible baseline **IN_PROGRESS**, #267 source line credit **0**; hosted/console-only provider settings remain UNVERIFIED.
+
+**Next:** first genuinely new/changed/unreviewed provider definition or reproducible active functional/performance defect; revisit archived selectors only with proven archive producer and isolated compatibility evidence. No new owner-action alert.
+
+---
+
 # Issue #509 — R356 immutable shot snapshot/provenance, hidden/archive clients, merged-push CI [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=bfe2b0eb9356af9dc7d2f105354c583e0ad51d6d preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
