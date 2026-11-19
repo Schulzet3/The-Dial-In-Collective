@@ -1,3 +1,15 @@
+# Issue #509 — R371 equal-instant personal shot snapshot determinism [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=3801618fdf3fd2a6979d5b6a90b780b3f4f4ddd1 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-19 UTC; development-only, Supabase READ-ONLY.** Independently retrieved live branch and exact PREFLIGHT.md Git blob before all provider/GitHub source reads. Live Supabase ACTIVE_HEALTHY PostgreSQL17.11. Full private.read_personal_state() SQL shows shots aggregated with ORDER BY pulled_at but no tie key; current hydrate preserves row order, and timestamp-only stable sorting in advice paths can select different latest-shot observations for tied instants. Same absolute instant with different timezone offsets also needs stable ordering. A count-only live aggregate found **0 duplicate groups**; this is a synthetic reproducible **dormant correctness risk, not a confirmed member incident**. Current mapping source was independently read at 3801618fdf3fd2a6979d5b6a90b780b3f4f4ddd1, blob 50e06be496d8729cef34e0b07069b3c84b527b23. No provider code or SQL was changed, and **0 first-time provider words/#267 lines** were credited.
+
+Development-only fix on proposed PR branch: sort snapshot shots by parsed instant then stable ID before hydration; preserve all rows/history, hidden state, user behavior and offline outboxes. Synthetic Node22 regression tests reverse tied rows and retain malformed hidden historical shots. Scope: site/cloud/mapping.js, tests/issue509-shot-order.test.mjs; structured receipt docs/audits/issue509-r371-equal-instant-shot-order-20261119.json, append-only object ledger and queue **TESTING**, not READY. **Exact-source CI PENDING**; no claim of passing checks or production deployment. Last R370 merged Node22 (run 44612256444) independently read back **SUCCESS**, other three exact merged-push workflows SUCCESS. Read-only Admin push SQL+Edge poll semantic recheck found 1 eligible admin, 1 subscription and 0 pending tokens; no additional confirmed defect. Full provider baseline IN_PROGRESS; console-only/native settings UNVERIFIED.
+
+**Next:** verify PR-head Node22, browser and approval CI, repair failures and safely integrate nonforce [skip netlify] only after all applicable checks; then continue first genuinely new/unreviewed provider definition. No backup, billing, publication, Supabase, schedule, or owner notification change.
+
+---
+
 # Issue #509 — R370 approval-push fix merged; live snapshot RPC workload review [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=1ef9978ab4bad0c7af0adf922530378df98622f4 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e

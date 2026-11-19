@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R371",
+  "date_utc": "2026-11-19",
+  "scope": "DEVELOPMENT_SOURCE_ONLY_NO_PUBLISH",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "3801618fdf3fd2a6979d5b6a90b780b3f4f4ddd1",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "verified_immutable_git_blob": true
+  },
+  "source": {
+    "base_branch": "development/backend-foundation",
+    "base_sha": "3801618fdf3fd2a6979d5b6a90b780b3f4f4ddd1",
+    "baseline_mapping_blob": "50e06be496d8729cef34e0b07069b3c84b527b23",
+    "code_path": "site/cloud/mapping.js",
+    "test_path": "tests/issue509-shot-order.test.mjs"
+  },
+  "provider": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.11.0.003",
+    "live_sql": "private.read_personal_state() full 2339 chars; JSON shot aggregate orders by pulled_at only, no id tie",
+    "live_sql_md5": "037d248b67cc3e8490c1689d3200990f",
+    "exact_duplicate_time_aggregate": {
+      "duplicate_groups": 0,
+      "tied_shots": 0,
+      "largest_group": 0
+    },
+    "admin_push_crosscheck": {
+      "functions_directly_read": 4,
+      "edge": "dic-admin-push-broker v3 full current source",
+      "eligible_admins": 1,
+      "subscriptions": 1,
+      "pending_event_tokens": 0,
+      "verified_bug": false
+    },
+    "production_writes": 0,
+    "first_time_provider_words": 0,
+    "issue267_lines_credited": 0
+  },
+  "finding": {
+    "kind": "DORMANT_DETERMINISM_BUG",
+    "evidence": "ORDER BY pulled_at has unspecified equal-instant row order. Hydration preserves received order and engine latest-shot and advice selection uses stable timestamp-only sorts. Two historical shots at same instant can yield order-dependent latest advice.",
+    "member_incident_confirmed": false
+  },
+  "fix": {
+    "scope": "Source-only deterministic chronological+id ordering before hydrating snapshot shots; preserve IDs, timestamps, hidden/history, offline outbox and server SQL",
+    "tests": "Synthetic Node22 equal-instants reverse-order fixture plus historical malformed/hidden preservation; exact-source hosted CI pending"
+  },
+  "status": "TESTING",
+  "baseline": "IN_PROGRESS",
+  "release": "NOT_READY_NOT_DEPLOYED",
+  "next": "Run exact PR head Node22 and relevant browser/approval checks; repair if needed, nonforce merge with skip netlify only when passing; source-isolated #3347 certification separate; continue unreviewed/new provider objects."
+}

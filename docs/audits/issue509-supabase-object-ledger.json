@@ -25478,5 +25478,25 @@
     "measured_bottleneck_confirmed": false,
     "production_writes": 0,
     "baseline": "IN_PROGRESS"
+  },
+  "provider_equal_instant_shot_order_run371": {
+    "receipt": "docs/audits/issue509-r371-equal-instant-shot-order-20261119.json",
+    "preflight_development_sha": "3801618fdf3fd2a6979d5b6a90b780b3f4f4ddd1",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "provider_sql": "private.read_personal_state() ORDER BY pulled_at lacks deterministic tie key",
+    "sql_md5": "037d248b67cc3e8490c1689d3200990f",
+    "reviewed_edge": "dic-admin-push-broker v3 and four live push RPCs; no confirmed bug",
+    "current_duplicate_groups": 0,
+    "first_time_provider_words": 0,
+    "issue267_lines": 0,
+    "finding": "Dormant equal-instant shot hydration and latest advice order variability",
+    "source_paths": [
+      "site/cloud/mapping.js",
+      "tests/issue509-shot-order.test.mjs"
+    ],
+    "ci": "PENDING",
+    "queue": "TESTING",
+    "production_writes": 0,
+    "full_baseline": "IN_PROGRESS"
   }
 }

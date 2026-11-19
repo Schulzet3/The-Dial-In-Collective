@@ -6,6 +6,14 @@ const rows=(raw,key)=>Array.isArray(raw?.[key])?raw[key]:[];
 // First-match and row-order semantics stay intact; lookups no longer scan every dataset repeatedly.
 const groupBy=(items,key)=>{const result=new Map();for(const item of items){const k=item[key];if(!result.has(k))result.set(k,[]);result.get(k).push(item);}return result;};
 const firstBy=(items,key)=>{const result=new Map();for(const item of items)if(!result.has(item[key]))result.set(item[key],item);return result;};
+// Snapshot shot rows can share an instant; Postgres ORDER BY pulled_at has no tie guarantee.
+// Make hydration and downstream stable-sort latest-shot advice independent of row delivery order.
+const byShotAge=(a,b)=>{
+ const at=Date.parse(a.pulled_at||''),bt=Date.parse(b.pulled_at||'');
+ if(Number.isFinite(at)&&Number.isFinite(bt)&&at!==bt)return at-bt;
+ if(Number.isFinite(at)!==Number.isFinite(bt))return Number.isFinite(at)?1:-1;
+ return String(a.id||'').localeCompare(String(b.id||''));
+};
 // SQL jsonb_agg order is unspecified for calibrations; use chronology before the legacy fallback.
 const byCalibrationAge=(a,b)=>{
  const aParsed=Date.parse(a.created_at||''),bParsed=Date.parse(b.created_at||'');
@@ -48,7 +56,7 @@ export function hydrate(raw){
  s.families=rows(raw,'families').map(f=>({id:f.id,coffeeId:f.library_entry_id,style:f.style,seedRatio:number(f.statistics?.ratio?.center),createdAt:f.created_at}));
  const setupById=firstBy(s.setups,'id'),versionsBySetupId=new Map();
  for(const setup of s.setups)if(!versionsBySetupId.has(setup.id))versionsBySetupId.set(setup.id,firstBy(setup.versions,'id'));
- for(const sh of rows(raw,'shots')){
+ for(const sh of [...rows(raw,'shots')].sort(byShotAge)){
   const old=sh.equipment_snapshot||{},setup=setupById.get(sh.setup_id),version=versionsBySetupId.get(sh.setup_id)?.get(sh.setup_version_id);
   // A historical server success flag cannot promote missing or invalid taste ratings.
   // This conservative client-only eligibility check never rewrites the original row.
