@@ -27,7 +27,7 @@ const readings=[];
 for(const c of cases){
  const r=report?.records?.find(x=>x.number===c.number)||{},f=r.current_fields||{};
  must(r.official_url===c.url&&!r.alternate_url_attempted,'exact_original_url_'+c.number);
- let bytes;try{bytes=readFileSync(join(dir,'case-'+c.number+'.html'))}catch(e){errors.push('missing_raw_'+c.number)}
+ let bytes;try{bytes=readFileSync(join(dir,'case-'+c.number+'.html'))}catch{errors.push('missing_raw_'+c.number)}
  const html=bytes?.toString('utf8')||'',selected=productMarkup(html),heads=selectedProductHeadings(selected);
  const body=selected.replace(/<(?:script|style|nav|footer)\b[^>]*>[\s\S]*?<\/(?:script|style|nav|footer)>/gi,' ')
   .replace(/<[^>]{0,2000}>/g,' ').replace(/&(?:amp|nbsp|#39);/gi,' ').replace(/\s+/g,' ').toLowerCase();
