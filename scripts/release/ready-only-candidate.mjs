@@ -55,6 +55,10 @@ export function discoverReviewedRestoredSqlTests({queue,restoredPaths,publishedS
  if(typeof sourceObjectAt!=='function'||!Array.isArray(restoredPaths)||
     !Array.isArray(selectedReadyItems))
   throw Error('SQL test restoration provenance unavailable');
+ // No migration is being excluded, so there is no migration-specific SQL
+ // fixture to restore. Synthetic READY-only tests legitimately have no SQL.
+ if(!restoredPaths.some(path=>path.startsWith('supabase/migrations/')))
+  return [];
  const restored=[];
  const same=(ref,path,blob)=>sourceObjectAt(ref,path)===(blob?'100644:'+blob:null);
  const readyUnchanged=path=>{
