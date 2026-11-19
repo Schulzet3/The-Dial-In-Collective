@@ -179,7 +179,7 @@ test('isolated owner release excludes ONLY exact new tests of unselected frozen 
 });
 
 test('unready same-file overlap blocks even if another READY item covers the path',()=>{
- const overlapping={...unfinished,merged_source_sha:D,scope_paths:['site/card.js']};
+ const overlapping={...unfinished,scope_paths:['site/card.js']};
  const p=planReadyOnlyCandidate({...q,items:[one,overlapping]},opts);
  assert.equal(p.ready,false);
  assert.match(p.errors.join(' '),/overlap/);
@@ -187,9 +187,19 @@ test('unready same-file overlap blocks even if another READY item covers the pat
 test('#3347 unmerged tracked overlap does not create a false READY publication pin',()=>{
  const neverMerged={...unfinished,id:'DIC-Q-103',issue:103,
   merged_source_sha:null,scope_paths:['site/card.js']};
- const planned=planReadyOnlyCandidate({...q,items:[one,unfinished,neverMerged]},opts);
+ const sameFrozen=(ref,path)=>path==='site/card.js'?
+  (ref===B||ref===D?'100644:'+'e'.repeat(40):'100644:'+'a'.repeat(40)):null;
+ const input={...opts,sourceObjectAt:sameFrozen};
+ const planned=planReadyOnlyCandidate({...q,items:[one,unfinished,neverMerged]},input);
  assert.equal(planned.ready,true,planned.errors.join('; '));
  assert.deepEqual(planned.pinned_ready_paths,[]);
+ const drift=planReadyOnlyCandidate({...q,items:[one,unfinished,neverMerged]},{
+  ...input,sourceObjectAt:(ref,path)=>ref===B&&path==='site/card.js'?
+   '100644:'+'f'.repeat(40):sameFrozen(ref,path)});
+ assert.equal(drift.ready,false,'actual unready byte drift still requires explicit pin');
+ assert.match(drift.errors.join('; '),/overlap/);
+ assert.equal(planReadyOnlyCandidate({...q,items:[one,unfinished,neverMerged]},opts).ready,false,
+  'missing exact object reader must never waive overlap');
 });
 test('#3347 actual merged unready overlapping READY source still HOLDs until pinned',()=>{
  const merged={...unfinished,id:'DIC-Q-103',issue:103,
