@@ -84,3 +84,13 @@ test('selected offer proof rejects sibling, related, site nav and ambiguous root
   '<nav>'+chosen+'</nav>',
  ])assert.deepEqual(selectedSchemaProductOfferH2(hostile,{source_url:url}),[], 'bad H2 source admission');
 });
+
+test('R215 selected offer rejects duplicated exact-product URL metadata even with matching cart',()=>{
+ const url=selected[2].url;
+ const html='<main><div itemscope itemtype="http://schema.org/Product" class="product">'+
+  '<meta itemprop="url" content="'+url+'"><meta itemprop="url" content="'+url+'">'+
+  '<div itemprop="offers"><header class="product-title"><h2 itemprop="name">'+selected[2].name+
+  '</h2></header><form action="/cart/add"></form></div></div></main>';
+ assert.deepEqual(selectedSchemaProductOfferH2(html,{source_url:url}),[],
+  'ambiguous duplicate source URL must not imply verified selected identity');
+});
