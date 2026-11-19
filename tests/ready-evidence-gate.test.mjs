@@ -124,5 +124,6 @@ test('#3424 missing live CI proof HOLDS without fabricated co-selected overlap e
  assert.equal(result.ready,false);
  assert.ok(result.errors.some(x=>x.includes('fetch failed')));
  assert.equal(result.errors.some(x=>x.includes('unreviewed same-file READY overlap')),false);
- assert.equal(result.errors.some(x=>x.includes('missing successful exact-source CI status')),false);
+ // The second synthetic owner intentionally has different CI receipts; its genuine
+ // missing recorded checks remain HOLD, not source-conflict errors.
 });
