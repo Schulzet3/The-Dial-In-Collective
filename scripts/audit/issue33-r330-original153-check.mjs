@@ -12,24 +12,24 @@ const url='https://hilltreeroastery.com/products/mexico-nayarit-natural-anaerobi
 const name='MEXICO NAYARIT NATURAL ANAEROBIC DRAGON';
 const dir=process.env.DIC_ISSUE33_FOCUSED_PUBLIC_DIR||'/tmp/dic33-r330';
 const sha=v=>createHash('sha256').update(v).digest('hex');
-const norm=v=>String(v||'').normalize('NFKD').replace(/\\p{M}/gu,'').toLowerCase().replace(/[^a-z0-9]+/gu,' ').trim();
+const norm=v=>String(v||'').normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase().replace(/[^a-z0-9]+/gu,' ').trim();
 export function selected153(html){
  const scoped=productMarkup(String(html||''));
  const headings=selectedProductHeadings(scoped);
  // Preserve product forms, but remove menus, generic sidebars, SEO and other products.
- const own=scoped.replace(/<(script|style|noscript|template|nav|aside|footer|header|select)\\b[^>]*>[\\s\\S]*?<\\/\\1>/gi,' ')
-  .replace(/<!--[\\s\\S]*?-->/g,' ').replace(/<[^>]{0,2500}>/g,' ')
-  .replace(/&(?:nbsp|amp);/gi,' ').replace(/\\s+/g,' ');
+ const own=scoped.replace(/<(script|style|noscript|template|nav|aside|footer|header|select)\b[^>]*>[\s\S]*?<\/\1>/gi,' ')
+  .replace(/<!--[\s\S]*?-->/g,' ').replace(/<[^>]{0,2500}>/g,' ')
+  .replace(/&(?:nbsp|amp);/gi,' ').replace(/\s+/g,' ');
  const n=norm(own);
  return {headings,exact:headings.some(h=>norm(h)===norm(name)),
-  labeledFlavor:/\\bflavor raspberry winey cinnamon orange\\b/.test(n),
-  bodyMedium:/\\bbody medium\\b/.test(n),
-  ownAnaerobic:/\\bprocess natural anaerobic dragon\\b/.test(n),
-  ownLightRoast:/\\broast light\\b/.test(n),
-  ownOrigin:/\\borigin tepic nayarit mexico\\b/.test(n),
-  ownElevation:/\\belevation 1 400 meters\\b/.test(n),
-  genericSmallholders:/\\bproducers various smallholders\\b/.test(n),
-  ownVarieties:/\\bvarieties caturra bourbon\\b/.test(n)};
+  labeledFlavor:/\bflavor raspberry winey cinnamon orange\b/.test(n),
+  bodyMedium:/\bbody medium\b/.test(n),
+  ownAnaerobic:/\bprocess natural anaerobic dragon\b/.test(n),
+  ownLightRoast:/\broast light\b/.test(n),
+  ownOrigin:/\borigin tepic nayarit mexico\b/.test(n),
+  ownElevation:/\belevation 1 400 meters\b/.test(n),
+  genericSmallholders:/\bproducers various smallholders\b/.test(n),
+  ownVarieties:/\bvarieties caturra bourbon\b/.test(n)};
 }
 if(process.env.DIC_R330_VERIFY==='1'){
  const errors=[],need=(v,k)=>{if(!v)errors.push(k)};
@@ -61,7 +61,7 @@ if(process.env.DIC_R330_VERIFY==='1'){
   event_sha:process.env.DIC_R330_EVENT_SHA,checkout_sha:process.env.DIC_R330_HEAD_SHA,
   case:153,source:{url,headings:d.headings,html_sha256:r.html_sha256,html_bytes:r.html_bytes,direct:d,
   parsed:f,conflicts:r.conflicts||[],seo_fallback_fields:r.seo_fallback_fields||[]}};
- writeFileSync(join(dir,'r330-afterproof.json'),JSON.stringify(out,null,2)+'\\n');
+ writeFileSync(join(dir,'r330-afterproof.json'),JSON.stringify(out,null,2)+'\n');
  console.log('[DIC33 R330 ORIGINAL153] '+JSON.stringify(out));
  if(errors.length)process.exitCode=1;
 }
