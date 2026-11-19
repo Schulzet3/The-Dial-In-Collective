@@ -30,6 +30,14 @@ test('R329 source explicitly says Anaerobic Natural, not washed or water-decaf',
  const p=parsed(fixture());assert.equal(p.ok,true);assert.notEqual(p.fields?.process,'Washed');
  assert.ok(!p.fields?.decaffeination_method);
 });
+test('R329 form-wrapped selected official coffee description remains in own product scope',()=>{
+ const wrapped='<html><main><article class="product"><h1>'+name+'</h1><form class="product-form"><div class="product__description">'+details+'</div></form></article></main></html>';
+ const selected=selected152(wrapped);
+ for(const key of ['ownFlavor','labeledProcess','labeledLightRoast','lightToMediumBody','sourceOrigin','sourceSmallholders','sourceHeirloom','sourceElevation'])assert.equal(selected[key],true,key);
+});
+test('R329 unidentified smallholders are not a fabricated named farmer',()=>{
+ const p=parsed(fixture());assert.equal(p.ok,true);assert.ok(!p.fields?.producer);
+});
 test('R329 missing own process stays unsubstantiated by unrelated SEO',()=>{
  const s=selected152(fixture('<p>Roast: Light</p>',name,'<aside><p>PROCESS: Anaerobic Natural</p></aside>'));
  assert.equal(s.labeledProcess,false);

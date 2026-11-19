@@ -16,7 +16,7 @@ const norm=s=>String(s||'').normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase(
 export function selected152(html){
  const scoped=productMarkup(String(html||''));
  const headings=selectedProductHeadings(scoped);
- const own=scoped.replace(/<(?:script|style|noscript|template|nav|aside|footer|header|form|select)\b[^>]*>[\s\S]*?<\/(?:script|style|noscript|template|nav|aside|footer|header|form|select)>/gi,' ')
+ const own=scoped.replace(/<(?:script|style|noscript|template|nav|aside|footer|header|select)\b[^>]*>[\s\S]*?<\/(?:script|style|noscript|template|nav|aside|footer|header|form|select)>/gi,' ')
   .replace(/<!--[\s\S]*?-->/g,' ').replace(/<[^>]{0,2500}>/g,' ').replace(/&(?:nbsp|amp);/gi,' ').replace(/\s+/g,' ');
  const n=norm(own);
  return {
@@ -52,7 +52,7 @@ if(process.env.DIC_R329_VERIFY==='1'){
  need(f.roast_level==='Light','labeled_light_roast_not_medium_body');
  need(['strawberry','blackberry','toffee','chocolate'].every(x=>norm(f.tasting_notes).includes(x)),'all_own_notes');
  need(norm(f.origin).includes('ethiopia'),'direct_origin_country');
- need(norm(f.producer).includes('smallholder'),'producer_organizational_role_not_invented_person');
+ need(!f.producer&&Array.isArray(r.source_facts)&&r.source_facts.some(x=>x.field==='producer'&&norm(x.value).includes('various smallholder farmers')),'anonymous_growers_reviewable_not_named_producer');
  need(norm(f.variety).includes('heirloom'),'direct_variety');
  need(!f.decaffeination_method&&!f.release_label,'no_unpublished_decaf_or_release');
  need(!(r.seo_fallback_fields||[]).some(x=>['origin','producer','variety','process','roast_level','tasting_notes'].includes(x)),'no_seo_loan');
