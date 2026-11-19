@@ -17207,10 +17207,10 @@
     {
       "id": "DIC-Q-509-member-approval-gone-push-receipt",
       "issue": 509,
-      "pr": null,
+      "pr": 3452,
       "title": "Record retired member approval push endpoints as skipped rather than falsely sent",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "d2b99b7972512989a829a6406a201ad8d9ab264e",
       "scope_paths": [
         "supabase/functions/dic-member-approval-broker/core.mjs"
       ],
@@ -17219,11 +17219,22 @@
         "Exact deployed Edge v1 core.mjs byte-identical to immutable GitHub development before fix; on a push 404/410 the prior code deleted the endpoint, fulfilled Promise.allSettled and returned sent even with zero accepted providers.",
         "Direct complete live public.dic_member_approval_claim/claim_poll/finish definitions; 0 live member approval deliveries and 0 push subscriptions (no member incident claimed).",
         "New isolated Node22 test mocks each 404/410, validates endpoint DELETE and zero PATCH, skipped push acknowledgement and separate successful email; 2xx unchanged.",
-        "Exact-source Node22/cloud/approval CI PENDING; independent candidate source isolation and #96/#2258 physical acceptance UNVERIFIED."
+        "PR #3452 tested head 26b3d74da619e9584ab644322df7365610b58fad all applicable Node22, browser, SQL workflow, approval, security and selected #33 workflows SUCCESS; original frozen corpus SKIPPED. Exact merged source d2b99b7972512989a829a6406a201ad8d9ab264e status: some workflows IN_PROGRESS (not PASS)."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        44602832336,
+        44602832355,
+        44602832163,
+        44602832499,
+        44602832351,
+        44602832140,
+        44602832041,
+        44612256397,
+        44612256441,
+        44612256428
+      ],
       "blockers": [
-        "Exact-source PR-head/merged applicable CI PENDING; source-isolated #3347 READY certification UNVERIFIED; no Publish permission"
+        "Exact merged-source applicable Node22/browser CI IN_PROGRESS; independently isolated #3347 READY certification UNVERIFIED; #2258/#96 genuine delivery acceptance UNVERIFIED; no Publish permission"
       ],
       "notes": "No production SQL/Edge/Auth/Storage/config/data changes. Existing migration/identity/event IDs remain unchanged; no extra user notification.",
       "production_deployed": false

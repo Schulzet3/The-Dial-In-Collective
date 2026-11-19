@@ -1,0 +1,108 @@
+{
+  "run": "R370",
+  "date_utc": "2026-11-19",
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "1ef9978ab4bad0c7af0adf922530378df98622f4",
+    "blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "verified_immutable_git_blob": true
+  },
+  "github": {
+    "development_before_documentation": "d2b99b7972512989a829a6406a201ad8d9ab264e",
+    "merged_pr": 3452,
+    "pr_head": "26b3d74da619e9584ab644322df7365610b58fad",
+    "merge_sha": "d2b99b7972512989a829a6406a201ad8d9ab264e",
+    "merge_parents": [
+      "f9f42b0d13e89ebc78aa50f2c6e2823d5ada7ab2",
+      "26b3d74da619e9584ab644322df7365610b58fad"
+    ],
+    "merge_commit_skip_netlify": true,
+    "merged_edge_core_blob": "113ffd9ac7bc45839a0566da8837edd22352adf2",
+    "merged_test_blob": "9ebf20df39d311d8d743ee6eb8b7b443584ec712"
+  },
+  "source_ci": {
+    "pr_head_successful_runs": [
+      44602832336,
+      44602832355,
+      44602832163,
+      44602832499,
+      44602832351,
+      44602832140,
+      44602832041
+    ],
+    "pr_head_frozen_corpus": "SKIPPED_NOT_PASS",
+    "merged_runs": [
+      {
+        "id": 44612256444,
+        "name": "DIC cloud app build and tests",
+        "status": "in_progress",
+        "conclusion": null
+      },
+      {
+        "id": 44612256397,
+        "name": "DIC Issue33 R171 original241 Buesaco current selected disagreement",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 44612256441,
+        "name": "DIC approval, implementation and continuity contract",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 44612256428,
+        "name": "DIC cloud UX regression checks",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "exact_merged_status": "TESTING_until_all_applicable_success",
+    "readback_time_utc": "2026-11-19T20:46:00Z_APPROX_NOT_A_PROVIDER_TIMESTAMP"
+  },
+  "provider": {
+    "active_status": "ACTIVE_HEALTHY",
+    "pg_version": "17.11.0.003",
+    "deployed_edge_functions": 5,
+    "applied_migrations": 69,
+    "production_writes": 0,
+    "source_deployment": "DIFF_EXPECTED_DEVELOPMENT_ONLY"
+  },
+  "semantic_increment": {
+    "observed_hot_rpc": "public.dic_read_personal_state() -> private.read_personal_state()",
+    "full_live_sql_bodies_directly_reviewed": [
+      "private.read_personal_state()",
+      "public.dic_read_personal_state()"
+    ],
+    "body_md5": [
+      "037d248b67cc3e8490c1689d3200990f",
+      "811aee397f3505117fcc38715e09af94"
+    ],
+    "first_time_sql_words": 0,
+    "cumulative_pg_stat_statements": {
+      "queryid": "1725044562985116050",
+      "role": "authenticated",
+      "calls": 4789,
+      "total_exec_time_ms": 73232.9,
+      "mean_exec_time_ms": 15.29,
+      "max_exec_time_ms": 1566.38,
+      "shared_buffers_hit": 8405598,
+      "temp_blocks": 0
+    },
+    "db_owner_index_reconciliation": {
+      "owner_scoped_personal_state_tables_checked": 15,
+      "valid_first_owner_id_key_index_in_every_checked_table": true,
+      "statistics_are_cumulative": true,
+      "seq_scans_on_small_tables_not_proof_of_bug": true
+    },
+    "finding": "Hot snapshot RPC was measured but no independently reproducible missing-index or stable bottleneck established; preserve current one-snapshot/private-data contract. No speculative SQL change."
+  },
+  "coverage": "FULL_BASELINE_IN_PROGRESS",
+  "release": "TESTING",
+  "candidate_isolation": "UNVERIFIED",
+  "privacy_auth_genuine_acceptance": "UNVERIFIED",
+  "user_incident": "NONE_PROVEN",
+  "owner_alert": "NONE_NEW",
+  "next": "Verify remaining exact merged-source Node22/browser runs. Continue first genuinely unreviewed/changed provider SQL/Edge object and source-isolated #3347 candidate validation. Do not publish."
+}

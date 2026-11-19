@@ -5003,6 +5003,23 @@
       "release": "TESTING",
       "first_time_provider_words": 0,
       "baseline": "IN_PROGRESS"
+    },
+    {
+      "run": "R370",
+      "date": "2026-11-19",
+      "preflight_development_sha": "1ef9978ab4bad0c7af0adf922530378df98622f4",
+      "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "receipt_path": "docs/audits/issue509-r370-member-approval-merge-rpc-telemetry-20261119.json",
+      "merged_source_sha": "d2b99b7972512989a829a6406a201ad8d9ab264e",
+      "pr": 3452,
+      "pr_head_applicable_ci": "PASS",
+      "merged_ci": "IN_PROGRESS",
+      "provider_read": "two existing full SQL definitions plus cumulative read-state telemetry and 15 owner-index contracts",
+      "first_time_provider_words": 0,
+      "issue267_source_lines": 0,
+      "production_writes": 0,
+      "release": "TESTING",
+      "baseline": "IN_PROGRESS"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -25441,5 +25458,25 @@
     "release": "TESTING",
     "full_baseline": "IN_PROGRESS",
     "next_cursor": "Run exact PR-head Node22/cloud/browser/approval on source+test; nonforce integrate after PASS, then merged source/queue check; resume first genuinely unreviewed/changed provider object."
+  },
+  "provider_member_approval_merge_perf_run370": {
+    "preflight_development_sha": "1ef9978ab4bad0c7af0adf922530378df98622f4",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "receipt": "docs/audits/issue509-r370-member-approval-merge-rpc-telemetry-20261119.json",
+    "merge": "d2b99b7972512989a829a6406a201ad8d9ab264e",
+    "provider_reads": "read-only",
+    "sql": [
+      "private.read_personal_state()",
+      "public.dic_read_personal_state()"
+    ],
+    "first_time_provider_words": 0,
+    "queryid": "1725044562985116050",
+    "calls": 4789,
+    "mean_ms": 15.29,
+    "max_ms": 1566.38,
+    "owner_id_first_key_valid_indexes": 15,
+    "measured_bottleneck_confirmed": false,
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS"
   }
 }
