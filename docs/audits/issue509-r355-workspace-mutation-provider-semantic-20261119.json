@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R355",
+  "date_utc": "2026-11-19",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "32741c1809bf76b7eca69b09d242deca935fdb2d",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "git_blob_sha1_independently_recomputed": true
+  },
+  "review": {
+    "scope": "Live SQL implementation of authenticated offline mutations and workspace preference/selection semantics, bounded aggregation and current structural constraints; production READ_ONLY",
+    "functions": [
+      {
+        "signature": "private.mutate(uuid,text,jsonb)",
+        "chars": 10881,
+        "md5": "d1050c2ee3b2896c6fbd8b90bdba9052",
+        "range": "1-10881",
+        "verdict": "Receipt idempotency and owned revisions checked; legacy hide_shot internal handler remains LIVE in production, but public wrapper explicitly refuses it; retirement requires separate eventual publication"
+      },
+      {
+        "signature": "private.mutate_workspace(uuid,text,jsonb)",
+        "chars": 6384,
+        "md5": "f3eb1b5086e4396625f3efa38f4c9165",
+        "range": "1-6384",
+        "verdict": "Owner locking, expected revisions, styles and all-green family constraints checked; set_style omits archived_at/hidden_at filters and make_current omits archived_at: latent contract/consumer question only"
+      },
+      {
+        "signature": "private.rename_setup(uuid,jsonb)",
+        "chars": 1792,
+        "md5": "d5efbc70d20f75d6e3aeea4b64ab078b",
+        "range": "1-1792",
+        "verdict": "Positive expected revision, ownership and idempotency/receipt guard preserved"
+      },
+      {
+        "signature": "private.required_revision(jsonb)",
+        "chars": 382,
+        "md5": "d14d1f80af2c73f953a37818f8488ca0",
+        "range": "1-382",
+        "verdict": "Strict positive decimal revision, caller handles bigint cast errors"
+      },
+      {
+        "signature": "public.dic_apply_client_change(uuid,uuid,text,jsonb)",
+        "chars": 1286,
+        "md5": "da434f17a21539d72ebb8fc04c13f214",
+        "range": "1-1286",
+        "verdict": "Auth expected-owner exact-match before mutation and retired hide_shot refusal; no direct provider invocation"
+      }
+    ],
+    "total_definition_chars": 20725,
+    "aggregates": {
+      "setups": 4,
+      "archived_setups": 0,
+      "library_entries": 10,
+      "hidden_library_entries": 0,
+      "shots": 27,
+      "hidden_shots": 0,
+      "workspace_coffees": 6,
+      "workspace_archived_setup_links": 0,
+      "workspace_hidden_library_links": 0
+    },
+    "provenance": "complete live pg_get_functiondef output; direct pg_constraint + pg_indexes; read-only counts",
+    "pgss": {
+      "shape": "query containing dic_apply_client_change",
+      "dominant_calls": 74,
+      "dominant_mean_ms": 51.99,
+      "dominant_max_ms": 470.1,
+      "dominant_temp_blocks_written": 0,
+      "telemetry": "cumulative; not a proven bottleneck"
+    },
+    "first_time_provider_word_credit": 0,
+    "issue267_code_line_credit": 0,
+    "unverified": "Exact frontend/offline consumer behavior for mutations to subsequently archived setup or hidden library entry; server accepts owned IDs without these status predicates, but no current affected rows or approved removal contract proven",
+    "confirmed_new_defect": false,
+    "production_writes": 0
+  },
+  "fix": {
+    "pr": 3384,
+    "pr_head_sha": "614e9ed2eb8db3cac1067a4a33fbc08b392123e0",
+    "merged_sha": "5d99767db18ead26f7d9b0e358a5b6a7dfc8f206",
+    "source_blobs_verified_equal": true,
+    "pr_head_checks_success": [
+      44475620395,
+      44475620379,
+      44475620356,
+      44475620450,
+      44475620466
+    ],
+    "unrelated_issue33_run_failed": 44475620584,
+    "merged_push_ci": "NOT_YET_VERIFIED",
+    "queue": "TESTING_NOT_READY",
+    "production": "UNCHANGED"
+  },
+  "baseline": "IN_PROGRESS",
+  "next": "Verify actual merged-source CI; then source/client and isolated fixture semantics for archived/hidden workspace operations before any new migration; continue truly unreviewed/changed live object cursor."
+}
