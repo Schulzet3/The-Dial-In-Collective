@@ -12626,28 +12626,34 @@
       "run_id": "R455-355",
       "next": "Verify source-bound hosted docs PR approval; nonforce merge only after exact PR-head checks pass and concurrent development/source paths are rechecked. Verify merge blobs and exact merged push approval; then resume a different source or reproducible UX bug. The research ZIP and S019 primary remain inaccessible.",
       "owner_approval_now_required": false
+    },
+    {
+      "run_id": "R455-357",
+      "next": "Verify exact PR-head workflows; repair failures, nonforce merge with explicit [skip netlify] merge message only if all applicable checks pass and paths remain unchanged. Reconcile release queue and issue #455, never deploy.",
+      "owner_approval_now_required": false
     }
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-356",
+    "run_id": "R455-357",
     "date": "2026-11-19",
-    "development_preflight_sha": "cac322e186599fac40007757a67a898da6507780",
+    "development_preflight_sha": "739cb591ba5b2bb04f14ad44d6f2fa748b710fe4",
     "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
-    "prewrite_canonical_blob_sha": "74aa1f5f8882a00428e2c425038090d7c36a4fe9",
+    "source_engine_blob_sha": "90c55379be60a252a2026e01bb3d786b66c49aef",
+    "prewrite_canonical_blob_sha": "5f5ae676344a68afdf20f5e800bbca61571c3ae2",
     "source_counts": {
       "sources": 202,
       "evidence_checks": 612,
-      "proposals": 266
+      "proposals": 267
     },
-    "research_status": "NEW_ORIGINAL_GIACALONE_2020_COFFEE_EXPERT_FRENCH_PRESS_RATER_CONSTRUCT_WITH_SOURCE_EDITION_AND_INTER_RATER_LIMITS; NO_DIC_FIVE_RATING_EFFICACY",
-    "runtime_changed": false,
+    "research_status": "NO_NEW_SCIENTIFIC_CLAIM; SOURCE_BOUND_SYNTHETIC_MEASUREMENT_VALIDITY_FIX; EXISTING_202_SOURCE_REVIEWS_REUSED",
+    "runtime_changed": "PROPOSED_DEV_ONLY_NOT_MERGED",
     "numeric_policy_changed": false,
-    "tests_run": "NONE (docs-only; original published study author-manuscript statistical crosscheck)",
-    "ci_verified": "NOT_RUN_AT_AUTHORING; PR_HEAD_AND_MERGED_UNVERIFIED",
+    "tests_run": "Direct source-bound JS negative/positive reproduction; Node22 tests hosted NOT YET RUN",
+    "ci_verified": "PR_HEAD_NOT_YET_OBSERVED; MERGED_NOT_APPLICABLE",
     "production_deployed": false,
     "github267_literal_review_credit": 0,
     "owner_approval_now_required": false,
-    "next": "Verify exact PR-head governance then nonforce [skip netlify] merge if CI completed successful, branch and path concurrency clean; verify merged blobs and source-bound push CI, checkpoint Issue #455. Resume distinct primary research or reproduced SAFE shot UX; source VORecord and raw ratings remain unverified."
+    "next": "Verify exact PR-head workflows; repair failures, nonforce merge with explicit [skip netlify] merge message only if all applicable checks pass and paths remain unchanged. Reconcile release queue and issue #455, never deploy."
   },
   "policy_decisions_resolved": [
     {
@@ -19080,6 +19086,33 @@
       "release_queue_status": "NOT_APPLICABLE_NO_READY",
       "github267_literal_review_credit": 0,
       "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-R357-ROASTER-PRIOR-UNLOGGABLE-YIELD",
+      "date": "2026-11-19",
+      "severity": "P2_POTENTIAL_UNLOGGABLE_STARTING_RECIPE_INPUT_INTEGRITY",
+      "finding": "At current source site/lib/engine.js blob 90c55379be60a252a2026e01bb3d786b66c49aef, an exaggerated external roasterRecipe.ratio=100 with an 18g Medium Traditional basket generates a source-blended 1182.6g suggested output, outside already-approved 5-200g measurable Log Shot bounds. ratio=100000 generates 1170012.6g. This is a synthetic original-source reproduction; real user incidence unverified.",
+      "original_source": {
+        "type": "GITHUB_LIVE_CODE",
+        "path": "site/lib/engine.js",
+        "git_blob_sha": "90c55379be60a252a2026e01bb3d786b66c49aef",
+        "factual_status": "REPRODUCED_IN_SOURCE_BOUND_SYNTHETIC_STATE; NO_EMPIRICAL_ESPRESSO_CUP_TEST"
+      },
+      "current_locked": "Existing CONFIG.bounds.yieldG=[5,200] Log Shot measurements; Traditional roaster prior remains optional and only one controllable next-shot adjustment, five taste ratings, actual data/history, independent shot styles and no new numeric optimum.",
+      "proposed_change": "SAFE existing-bounds check before adopting external roaster numeric ratio, including existing +/-.15 preference nudge; otherwise retain normal roast/style starting recipe and original roaster source. Do not change owner-approved 5g next-shot heuristic.",
+      "files": [
+        "site/lib/engine.js",
+        "tests/issue455-r357-roaster-yield-bounds.test.mjs",
+        "docs/workstreams/issue-455.md",
+        "docs/audits/issue455-research-source-coverage-20261103.json"
+      ],
+      "test_plan": "Four focused Node22 negative/positive synthetic tests; hosted source-bound Node22/lint/browser/security/SQL/approval as applicable; no production or member reads.",
+      "authority": "Owner Option B Locked-safe correctness fixes, Issue #455; Master Specification RECOMMENDATION-SINGLE-INTENTIONAL-CHANGE-20261019 and existing measured yield validation bounds",
+      "approval_required_for_behavior_change": false,
+      "implementation": "CODE_AND_TEST_PR_CANDIDATE_NOT_MERGED",
+      "release_queue_status": "IN_PROGRESS_NOT_READY_NOT_DEPLOYED",
+      "github267_literal_review_credit": 0,
+      "owner_approval_now_required": false
     }
   ],
   "changeScope": {

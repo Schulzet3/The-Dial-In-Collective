@@ -24,7 +24,18 @@ export function baseline(coffee,style,dose,preferences='') {
  const index=roastIndex(coffee.roastLevel),r=index<0?roastIndex('Medium'):index;
  let ratio=RATIOS[style]?.[r]??2;let time=TIMES[style]?.[r>=roastIndex('Medium-Dark')?1:0]||[25,32];let temp=TEMPS[r];
  const reasons=[];const pref=readPreference(preferences);
- if(style==='Traditional'&&coffee.roasterRecipe?.ratio>0){ratio=ratio*.35+coffee.roasterRecipe.ratio*.65;reasons.push('Starting ratio informed by the roaster recipe.');}
+ if(style==='Traditional'&&coffee.roasterRecipe?.ratio>0){
+  // Source-provided ratios may be malformed or unsuitable for this basket.
+  // Apply existing Log Shot yield bounds, including the existing preference
+  // nudge; do not invent a new ratio or taste target.
+  const candidate=ratio*.35+Number(coffee.roasterRecipe.ratio)*.65;
+  const prefStep=pref==='clarity'?.15:pref==='body'?-.15:0;
+  const proposedYield=(candidate+prefStep)*dose;
+  if(Number.isFinite(proposedYield)&&
+     proposedYield>=CONFIG.bounds.yieldG[0]&&proposedYield<=CONFIG.bounds.yieldG[1]){
+   ratio=candidate;reasons.push('Starting ratio informed by the roaster recipe.');
+  }else reasons.push('Roaster ratio not usable at this basket dose; using the roast/style starting point.');
+ }
  if(pref&&style!=='Custom'){ratio+=pref==='clarity'?.15:-.15;reasons.push(`Ratio nudged by your preference for ${pref}.`);}
  if(index<0)reasons.push('Roast level unknown; Medium is a recipe fallback, not a coffee fact.');
  return {doseG:dose,ratio:{low:Math.max(.8,ratio-CONFIG.rangeHalfWidth),high:ratio+CONFIG.rangeHalfWidth,center:ratio},time:{low:time[0],high:time[1],center:mean(time)},tempC:temp,reasons,source:'Starting recommendation',observations:0,familyId:null,established:false};
