@@ -502,7 +502,7 @@ test('#3342 source-bound SQL test restoration retains published guard while excl
   /independently attributable/);
  assert.throws(()=>discoverReviewedRestoredSqlTests({...args,sourceObjectAt:(ref,path)=>
   ref===pub&&path===spec.path?'100644:'+('e'.repeat(40)):lookup(ref,path)}),
-  /published SQL identity test blob/);
+  /published SQL identity test blob/i);
  assert.throws(()=>discoverReviewedRestoredSqlTests({...args,sourceObjectAt:(ref,path)=>
   ref===chosen&&path===spec.path?'100644:'+('f'.repeat(40)):lookup(ref,path)}),
   /Selected READY merge modified/);
