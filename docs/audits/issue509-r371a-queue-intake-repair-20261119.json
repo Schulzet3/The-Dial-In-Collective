@@ -1,0 +1,20 @@
+{
+  "run": "R371a",
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "1b4cc1857e47104b45d4f5c202e5eae10f7ec300",
+    "blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "byte_verified": true
+  },
+  "pr": 3460,
+  "prior_head": "dc3142aa2d873e7839cf9c80a140e50dbe702cdd",
+  "prior_approval_run": 44622212830,
+  "prior_approval_conclusion": "FAIL",
+  "actual_failure": "Queue schema intake only: invalid merged source SHA (missing), nondeployable test path, missing ci_runs array",
+  "repair": "Explicit merged_source_sha=null; ci_runs=[]; scope_paths only site/cloud/mapping.js; preserve TESTING without inventing merged source",
+  "source_files_modified": 0,
+  "sql_provider_writes": 0,
+  "owner_publish": false,
+  "next": "New PR-head approval, Node22 and browser checks; repair genuine failures before merge."
+}

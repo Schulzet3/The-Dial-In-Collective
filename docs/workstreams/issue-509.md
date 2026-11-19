@@ -1,3 +1,11 @@
+# Issue #509 — R371a queue intake schema repair (PR #3460) [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=1b4cc1857e47104b45d4f5c202e5eae10f7ec300 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-19 UTC.** Exact-source PR #3460 head `dc3142aa2d873e7839cf9c80a140e50dbe702cdd` approval run [44622212830](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44622212830) **FAILED** release queue schema intake only: missing explicit `merged_source_sha:null` and `ci_runs:[]`, plus a test file incorrectly included among deployable `scope_paths`. No source code or test failure is inferred from the queue gate. Narrow docs-only same-commit repair: set null for unmerged source SHA, PR #3460, only `site/cloud/mapping.js` in runtime paths, explicit CI array, retain TESTING; preserve all 435 preexisting queue items and history. No READY/DEPLOYED claim. See [R371a receipt](../audits/issue509-r371a-queue-intake-repair-20261119.json). Node22/browser and other applicable head checks remain PENDING/IN_PROGRESS until readback. Current Supabase provider unmodified; baseline IN_PROGRESS. Next verify new exact-source PR head approval + tests before merge.
+
+---
+
 # Issue #509 — R371 equal-instant personal shot snapshot determinism [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=3801618fdf3fd2a6979d5b6a90b780b3f4f4ddd1 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
