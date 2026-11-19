@@ -15,7 +15,7 @@ Read [CONTEXT_ENTRYPOINT.md](CONTEXT_ENTRYPOINT.md) **after this preflight** for
 - **Any substantive development:** current `AGENTS.md`, relevant scoped GitHub journal and issue/PR, `docs/CURRENT_STATUS.md`, `docs/MASTER_SPECIFICATION.md`, `docs/DECISION_LEDGER.json`, `docs/APPROVAL_COVERAGE_MATRIX.json`, `docs/RELEASE_QUEUE.json`, actual branch SHA and exact applicable CI. Inspect concurrent/incomplete work first.
 - **Questions/status/brainstorming:** use only necessary live topic evidence and owner decisions; answer without unauthorized edits or a full repository reread.
 - **Backup/recovery:** use `main` and #28 recovery/Drive evidence, preserving encrypted archives, key privacy and verified restore prerequisites.
-- **Publication (only on NEW owner `Publish`):** read the live queue, #417/#457/#2169 runbook, Nov 6 incident, current Git refs, five exact-source CI checks, grant, main push-controller and Netlify READY/current. No preparation, staging, grant or production write from a development-only request.
+- **Publication (only on NEW owner `Publish`):** read the live queue, #417/#457/#2169 runbook, Nov 6 incident, current Git refs, five exact-source CI checks, grant, main push-controller and Netlify READY/current. No production grant, release request or publication write from a development-only request. **Owner #3347 narrowly permits early nonpublishing READY-only source isolation and exact candidate CI** to establish readiness; publication still requires a NEW explicit Publish.
 - **Audits/research:** follow scoped #33/#267/#455/#504/#508/#509 ledgers, provenance and privacy boundaries; metadata inventory is not semantic proof.
 
 ## 2. Approve the actual action, not a guessed process
