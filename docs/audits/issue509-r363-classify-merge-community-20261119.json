@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R363",
+  "date_utc": "2026-11-19",
+  "preflight_development_sha": "bc5e03764d37ee97b9e75cb34a2a995a26a57d57",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "provider_ref": "azviqqejypsefzilgonr",
+  "provider_status": "ACTIVE_HEALTHY",
+  "postgres": "17.11",
+  "scope": "Resolve PR #3411 source integration after concurrent #455/267/33 changes and independent read-only Community producer/consumer semantic crosscheck",
+  "source_pr": 3411,
+  "source_head": "c0e0963ce348e4ad0f499acf67f081efefe1e977",
+  "verified_pr_head_workflows": {
+    "pg17": 44527638741,
+    "node22": 44527638844,
+    "cloud_ux_browser": 44527638794,
+    "approval": 44527638637,
+    "python": 44527638852,
+    "status": "SUCCESS",
+    "frozen_corpus": "SKIPPED_NOT_PASS"
+  },
+  "source_code": "supabase/migrations/20261119133000_dic_classify_family_refresh_single_pass.sql",
+  "provider_review": [
+    {
+      "name": "private.dic_on_community_coffee_verification()",
+      "chars": 1065,
+      "md5": "cefee7b991e40185eadbacde89def3aa"
+    },
+    {
+      "name": "private.dic_on_library_coffee_change()",
+      "chars": 347,
+      "md5": "b6cbc45072b0e9f8ebb511b2eca3895f"
+    },
+    {
+      "name": "private.dic_recheck_after_link()",
+      "chars": 251,
+      "md5": "9fc3b44ef631cb87bc0b40e689c123b8"
+    },
+    {
+      "name": "private.dic_backfill_library_contributions(uuid,uuid,uuid)",
+      "chars": 2360,
+      "md5": "424a5c87c53165a918f7094bf67d25bb"
+    },
+    {
+      "name": "private.dic_review_community_shot(uuid)",
+      "chars": 7734,
+      "md5": "c5aea4d32aa8027a39d80341feade406"
+    },
+    {
+      "name": "public.dic_community_recommendation_evidence(uuid,text)",
+      "chars": 6171,
+      "md5": "085f92a3814dce624e5b9a3759e893ef"
+    }
+  ],
+  "complete_sql_characters_directly_read": 17928,
+  "review_verdict": "No new confirmed live Community defect; conditional merged coffee review path requires source/consumer proof before change",
+  "read_only_aggregate": {
+    "merged_coffees": 0,
+    "merged_still_verified": 0,
+    "eligible_on_merged_coffee": 0,
+    "total_community_shots": 13,
+    "contribution_links": 13
+  },
+  "first_time_word_credit": 0,
+  "issue267_source_line_credit": 0,
+  "provider_writes": 0,
+  "baseline": "IN_PROGRESS",
+  "release": "TESTING",
+  "next": "Exact merged-source CI readback, source-isolated READY acceptance; continue new/changed provider objects and review conditional verified-merged Community path with synthetic test if applicable"
+}

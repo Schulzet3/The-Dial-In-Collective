@@ -83,7 +83,10 @@ exit 99
   const completeParts=[reconcileParts[0],completeMigration,
     'supabase/tests/family_statistics_complete_reconcile_post.sql'];
   const stagedComplete=migrations.includes(completeMigration);
-  const standaloneParts=new Set([reconcileParts[0],reconcileParts[2],completeParts[2]]);
+  const singlePassMigration='supabase/migrations/20261119133000_dic_classify_family_refresh_single_pass.sql';
+  const singlePassParts=[reconcileParts[0],'supabase/tests/personal_family_refresh_single_pass_post.sql'];
+  const stagedSinglePass=migrations.includes(singlePassMigration);
+  const standaloneParts=new Set([reconcileParts[0],reconcileParts[2],completeParts[2],singlePassParts[1]]);
   const suites=allSuites.filter(path=>!standaloneParts.has(path)).filter(applicable);
   for(const [suite,[migration,skipLabel]] of Object.entries(migrationBoundSuites)){
    const exists=migrations.includes('supabase/migrations/'+migration);
@@ -102,14 +105,19 @@ exit 99
    const bytes=Buffer.concat(completeParts.map(path=>readFileSync(join(root,path))));
    byHash.set(createHash('sha256').update(bytes).digest('hex'),completeToken);
   }
-  assert.equal(byHash.size,expected.length+(stagedReconcile?1:0)+(stagedComplete?1:0),
-   'SQL fixtures and bundled R360/R361 transactions must have distinct traceable content');
+  const singlePassToken='R362_PERSONAL_FAMILY_REFRESH_SINGLE_PASS_TRANSACTION';
+  if(stagedSinglePass){
+   const bytes=Buffer.concat(singlePassParts.map(path=>readFileSync(join(root,path))));
+   byHash.set(createHash('sha256').update(bytes).digest('hex'),singlePassToken);
+  }
+  assert.equal(byHash.size,expected.length+(stagedReconcile?1:0)+(stagedComplete?1:0)+(stagedSinglePass?1:0),
+   'SQL fixtures and bundled R360/R361/R362 transactions must have distinct traceable content');
   const observed=readFileSync(trace,'utf8').trim().split('\n').map(line=>{
    const hash=line.split(/\s+/)[0];
    assert.ok(byHash.has(hash),'runner dispatched an unexpected SQL file');
    return byHash.get(hash);
   });
-  assert.deepEqual(observed.filter(path=>path!==streamToken&&path!==completeToken).slice().sort(),expected.slice().sort(),
+  assert.deepEqual(observed.filter(path=>path!==streamToken&&path!==completeToken&&path!==singlePassToken).slice().sort(),expected.slice().sort(),
    'every migration and standalone regression must be dispatched exactly once');
   assert.equal(observed.filter(path=>path===streamToken).length,stagedReconcile?1:0,
    'the exact R360 migration+rollback fixture must run once iff staged');
@@ -126,6 +134,12 @@ exit 99
    assert.ok(i>observed.indexOf(reconcileMigration),'R361 must apply after R360');
    assert.equal(observed[i-1],completeToken,
     'the literal R361 migration must be tested in rollback immediately before application');
+  }
+  assert.equal(observed.filter(path=>path===singlePassToken).length,stagedSinglePass?1:0,
+   'the R362 source-bounded single-refresh regression must run once iff staged');
+  if(stagedSinglePass){
+   const i=observed.indexOf(singlePassMigration);
+   assert.equal(observed[i+1],singlePassToken,'R362 fixture must run after its replacement migration');
   }
   assert.equal(observed[0],'tests/sql/bootstrap.sql');
   for(let index=1;index<migrations.length;index++)

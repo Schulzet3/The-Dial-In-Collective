@@ -16903,6 +16903,36 @@
       ],
       "notes": "Original 603 rows/201 roasters/1197 captures, frozen CSV/oracle/scorer untouched. No production, Netlify publication, main/release, SQL/Edge/Auth/provider/member writes, purchase, secrets, schedule/alert/backup or forced history. Queue item TESTING is development only. Other queue entries remain byte-for-byte identical.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-classify-family-single-refresh",
+      "issue": 509,
+      "pr": 3411,
+      "title": "Eliminate duplicate personal-family refresh for same-family shot corrections",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261119133000_dic_classify_family_refresh_single_pass.sql"
+      ],
+      "owner_source": "Issue #509 autonomous provider review; DIC_PREFLIGHT_VERIFIED development_sha=1def2c9d6573297c406192b413ffc3e7620ffe7a preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "tests": [
+        "Complete live SQL 3219 chars MD5 5183deb46474c10468638cef08d2bd05 and direct ordinary/Admin caller path show duplicate same-family refresh; 13 eligible linked shots from safe aggregate.",
+        "Rollback-only isolated PostgreSQL17 fixture with update-counter on same-family reclassification staged; exact-source CI PENDING.",
+        "Exact PR-head c0e0963ce348e4ad0f499acf67f081efefe1e977: PostgreSQL17, Node22/cloud build, cloud UX/browser, approval/continuity and Python workflows SUCCESS; frozen corpus SKIPPED (not PASS)."
+      ],
+      "ci_runs": [
+        44527638741,
+        44527638844,
+        44527638794,
+        44527638637,
+        44527638852
+      ],
+      "blockers": [
+        "Merged-push exact-source checks and independent READY candidate source isolation not yet verified.",
+        "Host/device-specific #96 acceptance UNVERIFIED where applicable; NEW owner Publish required for production migration."
+      ],
+      "notes": "Only skip redundant previous-family refresh when previous=fid; moved, hidden, non-green, Current/favorite and historical rows preserved. Production read-only.",
+      "production_deployed": false
     }
   ],
   "history": [
@@ -19769,6 +19799,20 @@
       "source_sha": "24577743c6a2f24922677d7df607c63b6d0d6823",
       "production_deployed": false,
       "evidence": "SAFE R366 PR #3410 nonforce merged 24577743c6a2f24922677d7df607c63b6d0d6823, 3/3 source/test/journal Git blob readback exact: 5f0fa268dedec7c81ca73bbc0c1592e70d5cee3c, de393571ca572a8d9d89b26ed9ce06ae9124cbeb, 38c83a6a1a4ba6b59e6e20c468ee6c2ae80e53c1. PR-head Node22 44526627008 5704 tests/5698 PASS/6 SKIP/0 FAIL with five focused R366 PASS; browser/mobile/offline/a11y 44526626992, approval 44526627075, SQL 44526627060, security 44526626974, shared dependency 44526627100 COMPLETED SUCCESS. Exact merged-source Node22 44527377725 5704/5698 PASS/6 SKIP/0 FAIL and five R366 PASS, real browser/offline 44527377723, approval 44527377726, shared dependency 44527377766 COMPLETED SUCCESS. Corpus workflow SKIPPED not PASS. Prefight first 1521edf9c6a81ce80253a217dcf08d5c0b0b5f83 blob 3742fed0176c809b115320c698a0e8b1675b2d3e; updated second prewrite development 1def2c9d6573297c406192b413ffc3e7620ffe7a same immutable blob before source/test commit. READY only for development, never deployed."
+    },
+    {
+      "date": "2026-11-18",
+      "issue": 509,
+      "item_id": "DIC-Q-33-r309-source-html-challenge-classification",
+      "state": "READY",
+      "source_sha": "3697e1c09355ea7453247888588ca9b7401750ee",
+      "production_deployed": false,
+      "evidence": "Narrow R309 generic source_access_challenge class READY development after nonforce PR3308 exact merge 3697e1c09355ea7453247888588ca9b7401750ee and 4/4 blob parity; head Node4050 PASS 44398236947, merged Node4050 PASS 44398896964, merged cloud/mobile 44398896668 and approval 44398896543 SUCCESS. Historical original #148/independent #241 LIVE merchant access challenges remain unresolved; #241 official merged 44398896658 FAILED and frozen603 SKIPPED. DIC_PREFLIGHT_VERIFIED development_sha=eb5d01c3cc0f68970e7c3a31ef1bdaf620d5aeb6 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d; no deployment or original603 completion.",
+      "at": "2026-11-19",
+      "id": "DIC-Q-509-classify-family-single-refresh",
+      "source": "PR #3411 exact head c0e0963; manual nonforce two-parent integration to development pending",
+      "status": "TESTING",
+      "production": false
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"

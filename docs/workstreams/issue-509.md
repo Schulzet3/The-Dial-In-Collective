@@ -1,3 +1,27 @@
+# Issue #509 — R363 R362 optimization CI closure, concurrent queue-preserving integration [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=3697dc73dd30659d4bcc743e339b1d0142f2792a preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+DIC_PREFLIGHT_VERIFIED development_sha=bc5e03764d37ee97b9e75cb34a2a995a26a57d57 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-19 UTC; Supabase production READ-ONLY.** Immutable Git preflight verified. PR #3411 exact original head `c0e0963ce348e4ad0f499acf67f081efefe1e977` completed all five applicable PR workflows **SUCCESS**: PostgreSQL17 44527638741, Node22/cloud build 44527638844, cloud UX/browser 44527638794, approval/continuity 44527638637, Python 44527638852. Frozen corpus SKIPPED, not PASS. Latest development advanced seven disjoint #267/#33/#455/ops commits beyond PR base; queue had separate changes, so source integration must preserve both rather than overwrite; merge-source CI remains pending. The safe source migration remains future-Publish only; release TESTING.
+
+**Additional direct provider semantic crosscheck:** all six complete live Community producer/reviewer/recommendation SQL definitions (17,928 characters total) inspected, with exact per-definition hashes in [R363 receipt](../audits/issue509-r363-classify-merge-community-20261119.json). Producer backfill requires verified canonical; reviewer validates shot revision/source/quality, and recommendation excludes same-member contributions. Read-only aggregate: 13 Community shots and 13 links, **zero** merged coffee records or eligible merged-coffee projections. A conditional verified-but-merged case is NOT a demonstrated live defect, do not prune/change without dependency and synthetic acceptance. All were previously audited, so **0 first-time provider words / #267 lines** credited. No member identity, notes or shot records exported; no live DML/DDL or deploy.
+
+**Next:** verify safe nonforce integration SHA, identical source/test blobs, and exact merged-source CI; independently candidate-certify before any READY. Baseline IN_PROGRESS; production/backup/schedule/notification policy unchanged.
+
+---
+
+# Issue #509 — R362 avoid duplicate family refresh for unchanged classification [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=1def2c9d6573297c406192b413ffc3e7620ffe7a preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-19 UTC; production READ-ONLY.** Full live `private.classify_personal_shot(uuid)` 3,219-character source MD5 5183deb46474c10468638cef08d2bd05 and callers `private.mutate` / `private.dic_admin_edit_record` show an eligible re-rating/correction staying in the same existing family runs `refresh_personal_family(previous)` and `refresh_personal_family(fid)` for the identical ID. That duplicates aggregate scans and derived-row writes; current aggregate 13/27 shots eligible/linked. No timed bottleneck or real user incident claimed. Preserve hidden, non-green, moved-family and preference behavior.
+
+**Development-only scoped optimization:** additive future-Publish migration `supabase/migrations/20261119133000_dic_classify_family_refresh_single_pass.sql` skips only the redundant previous-family call when `previous=fid`; original immutable SQL untouched. New disposable PG17 rollback-only test counts family-row UPDATE events under a known-green same-family reclassification while confirming original Current/Favorite and counts, with exact SQL-dispatch trace assertions and NOT_APPLICABLE when migration excluded. New queue item TESTING; CI PENDING, not READY or DEPLOYED. Structured [R362 receipt](../audits/issue509-r362-classify-single-refresh-20261119.json), append-only ledger, same-commit preflight. First-time provider word count 0 (#267 source-line credit 0). No Supabase writes, publish, billing/backup/schedule/alert changes. Next: PR-head exact-source CI, repair/merge nonforce only after PASS; independently inspect merged-source CI and queue isolation.
+
+---
+
 # Issue #509 — R361 complete family derived-range and metadata repair [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=15895eb1c5223d183c45af334109566329aff682 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
