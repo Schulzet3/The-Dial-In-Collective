@@ -257,6 +257,21 @@ function selectedCurrentContinuingCultivator(name,line){
  return credited&&continued&&cultivated?named[1]+' '+named[2]:'';
 }
 
+// A present-tense, exact selected product may identify its own counted local
+// smallholder growers. The identity is a group, never a named person or mill.
+const UNSPECIFIC_GROWER_SUBJECTS=new Set(['coffee','coffees','beans','espresso','blend','roast','origin','organic','ethiopia','kenya','colombia','brazil','peru','mexico','uganda','rwanda','honduras','guatemala','indonesia','nicaragua','panama','natural','washed']);
+function selectedCurrentCountedGrowers(name,line){
+ if(typeof line!=='string'||line.length>700||/\b(?:formerly|previously|historically|prior (?:year|lot|harvest)|last (?:year|season)|another (?:coffee|lot|product)|other coffees?|different (?:coffee|lot)|unrelated|not produced|is no longer)\b/iu.test(line))return '';
+ const titleTokens=new Set(fold(name).split(/\s+/u)),credits=new Set();
+ const pattern=/(?:^|[.!?]\s+)([\p{Lu}][\p{L}\p{M}'’\-]{4,40})\s+is produced by\s+([1-9]\d{1,3})\s+small[ -]?holder farmers in\s+([\p{Lu}][\p{L}\p{M}'’\-]{2,35}(?:\s+[\p{Lu}][\p{L}\p{M}'’\-]{2,35}){0,2})(?=[.!?,;]|\s|$)/gu;
+ for(const match of line.matchAll(pattern)){
+  const subject=fold(match[1]);
+  if(titleTokens.has(subject)&&!UNSPECIFIC_GROWER_SUBJECTS.has(subject))
+   credits.add(match[2]+' smallholder farmers in '+match[3]);
+ }
+ return credits.size===1?[...credits][0]:'';
+}
+
 export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html,source_url=''}={}){
  if(typeof html!=='string'||html.length>2_000_000||!name||typeof clean!=='function')return {};
  const blocks=productCoffeeProse(html,clean);
@@ -285,7 +300,7 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
    !MIXED_CAFFEINE_DIRECT_IDENTITY.test(b.text)&&
    !NONCURRENT_DECAF_METHOD.test(b.text));
  const organizations=new Set(),farms=new Set(),sensory=new Set(),literals=new Set(),roasts=new Set();
- const namedEstateGrowers=new Map(),namedCurrentCultivators=new Set();
+ const namedEstateGrowers=new Map(),namedCurrentCultivators=new Set(),countedGrowers=new Set();
  const releases=new Set(),decafEvidence=new Set();
  let decafEvidenceOverflow=false;
  // A current selected coffee's exact H1 can itself identify the water
@@ -382,6 +397,8 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
   if(b.tag==='p'){
    const grower=selectedCurrentContinuingCultivator(name,line);
    if(grower)namedCurrentCultivators.add(grower);
+   const counted=selectedCurrentCountedGrowers(name,line);
+   if(counted)countedGrowers.add(counted);
   }
   // An unambiguous same-paragraph current selected bean antecedent makes
   // the subsequent pronoun refer to THIS named decaf, not another offering.
@@ -670,6 +687,8 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
   out.producer=[...namedCurrentCultivators][0];
   out.named_current_cultivator_producer=true;
  }
+ // Only one verified exact-H1 selected grower group may autofill literal producer.
+ if(!out.producer&&countedGrowers.size===1)out.producer=[...countedGrowers][0];
  if(!out.producer&&farms.size===1){
   const farm='Finca '+[...farms][0];
   if(body.some(b=>b.text.includes(farm))){out.producer=farm;out.farm=farm;}

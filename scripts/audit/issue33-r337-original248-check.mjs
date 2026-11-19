@@ -59,6 +59,7 @@ if(process.env.DIC_R337_VERIFY==='1'){
  // or name from another product cannot be promoted to this coffee's producer.
  const producer=norm(f.producer);
  need(!producer||(/smallholder farmers/.test(producer)&&/wanja kersa/.test(producer)),'producer_only_exact_collective_or_blank');
+ need(norm(f.producer)==='579 smallholder farmers in wanja kersa','direct_exact_selected_counted_grower_collective');
  need(!f.decaffeination_method,'merchant_generic_caffeine_widget_is_not_decaftreatment');
  need(!(r.seo_fallback_fields||[]).some(x=>['producer','process','roast_level','variety','tasting_notes','decaffeination_method'].includes(x)),'no_foreign_or_generic_seo_source');
  need(!(r.conflicts||[]).length,'selected_canonical_conflicts_unresolved');

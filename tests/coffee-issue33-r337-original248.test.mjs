@@ -25,6 +25,24 @@ test('R337 unrelated guide 0mg caffeine must not fabricate decaffeination',()=>{
  const p=extractPublicCoffeeFacts(page(own+'<p class="guide">Caffeine 0mg / 12oz</p>'),{source_url:url});
  assert.equal(p.ok,true);assert.ok(!p.fields?.decaffeination_method);
 });
+test('R337 current own product credits exact counted farmer group, not mill',()=>{
+ const p=extractPublicCoffeeFacts(page(),{source_url:url});
+ assert.equal(p.ok,true);
+ assert.equal(p.fields?.producer,'579 smallholder farmers in Wanja Kersa');
+});
+test('R337 other selected Onyx coffee cannot borrow Yukro grower group',()=>{
+ const p=extractPublicCoffeeFacts(page(own,'Mexico Finca Santa Cruz Gesha'),{source_url:'https://onyxcoffeelab.com/products/mexico-finca-santa-cruz-gesha'});
+ assert.equal(p.ok,true);assert.ok(!p.fields?.producer);
+});
+test('R337 no historical, negated or generic geography grower credit',()=>{
+ for(const value of ['Yukro was produced by 579 smallholder farmers in Wanja Kersa.',
+  'Yukro is no longer produced by 579 smallholder farmers in Wanja Kersa.',
+  'Yukro washing station is supplied by local farmers.',
+  'Ethiopia is produced by 579 smallholder farmers in Wanja Kersa.']){
+  const p=extractPublicCoffeeFacts(page(value),{source_url:url});
+  assert.equal(p.ok,true);assert.ok(!p.fields?.producer,value);
+ }
+});
 test('R337 station versus farmer distinction is not a grower group',()=>{
  const r=selected248(page('<p>Yukro washing station processes coffee.</p>'));
  assert.equal(r.ownGrowerGroup,false);
