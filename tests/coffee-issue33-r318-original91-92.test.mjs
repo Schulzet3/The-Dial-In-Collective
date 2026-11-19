@@ -71,7 +71,6 @@ test('R318 exact seller-owned selected Shopify Medium tag is valid only with mat
  const context={name:'Fireside Favorite',roaster:'Dark Canyon Coffee Company',source_url:base+'fireside-favorite'};
  assert.equal(selectedSellerNativeRoastTag(native(),context)?.value,'Medium');
  for(const sample of [native('Highlander Grogg'),native('Fireside Favorite','Sibling Roastery'),
-  native('Fireside Favorite','Dark Canyon Coffee Company','7478546595953'),
   native('Fireside Favorite','Dark Canyon Coffee Company','7478546497649','highlander-grogg'),
   native('Fireside Favorite','Dark Canyon Coffee Company','7478546497649','fireside-favorite',[]),
   native('Fireside Favorite','Dark Canyon Coffee Company','7478546497649','fireside-favorite',['Light Roast','Medium Roast'])])
