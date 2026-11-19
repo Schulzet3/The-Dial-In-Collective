@@ -25200,5 +25200,28 @@
     "production_writes": 0,
     "baseline": "IN_PROGRESS",
     "release": "TESTING"
+  },
+  "provider_calibration_order_run365": {
+    "preflight_development_sha": "943c3f66c9999bf8b4da23d84f491f3b45e3fb00",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "receipt": "docs/audits/issue509-r365-calibration-order-20261119.json",
+    "provider_complete_definition": {
+      "object": "private.read_personal_state()",
+      "pg_get_functiondef_chars": 2339,
+      "md5": "037d248b67cc3e8490c1689d3200990f",
+      "semantics": "calibrations JSON aggregate has no ORDER BY; consumer fallback assumes last row is latest"
+    },
+    "nullable_preference": true,
+    "live_versions": 4,
+    "live_null_selected": 0,
+    "live_ambiguous_fallback": 0,
+    "synthetic_reproducible": true,
+    "fix": "chronologically sort compatible calibration snapshots before existing fallback with stable id tie break",
+    "fix_state": "TESTING_PR_HEAD_PENDING",
+    "first_time_provider_words": 0,
+    "issue267_source_line_credit": 0,
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Check PR-head source-bound CI, preserve #455 ownership and disjoint source changes; nonforce [skip netlify] merge only after applicable PASS, verify merged-source CI; continue first unreviewed provider object"
   }
 }
