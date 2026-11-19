@@ -25528,5 +25528,26 @@
     "queue": "TESTING",
     "baseline": "IN_PROGRESS",
     "receipt": "docs/audits/issue509-r371b-browser-history-order-repair-20261119.json"
+  },
+  "provider_r372_shot_tie_syntax_ci_repair": {
+    "run": "R372",
+    "preflight_development_sha": "1b4cc1857e47104b45d4f5c202e5eae10f7ec300",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "receipt": "docs/audits/issue509-r372-shot-tie-syntax-ci-repair-20261119.json",
+    "issue": 509,
+    "pr": 3460,
+    "source_bug": "Missing outer ) in equal-instant shot mapping group.sort caused 121 Node22 failures and browser mount timeout",
+    "source_repaired": true,
+    "previous_fail_runs": [
+      44622860799,
+      44622860782
+    ],
+    "new_ci": "PENDING",
+    "provider": "READ_ONLY",
+    "first_time_provider_words": 0,
+    "issue267_line_credit": 0,
+    "baseline": "IN_PROGRESS",
+    "queue": "TESTING",
+    "next": "Exact PR-head CI then safe nonforce [skip netlify] integrate if all applicable SUCCESS"
   }
 }

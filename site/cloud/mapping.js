@@ -17,7 +17,7 @@ const stableShotTies=items=>{
   groups.get(time).push(sh);
  }
  for(const group of groups.values())if(group.length>1)
-  group.sort((a,b)=>String(a.id||'').localeCompare(String(b.id||''));
+  group.sort((a,b)=>String(a.id||'').localeCompare(String(b.id||'')));
  return items.map(sh=>{
   const time=Date.parse(sh.pulled_at||'');
   if(!Number.isFinite(time))return sh;
