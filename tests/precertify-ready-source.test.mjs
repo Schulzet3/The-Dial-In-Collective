@@ -37,8 +37,11 @@ test('#3347 pre-certification skips only source-proven unmerged same-file labels
  assert.deepEqual(requiredReadyPins({...queue,items:[one,{...unmerged,merged_source_sha:B}]},
   [one.id],['site/main.js'],exact),['site/main.js'],
   'merged competing change never receives unmerged-label exception');
- assert.throws(()=>requiredReadyPins(queue,[one.id],['site/main.js'],
-  {...exact,isAncestor:()=>{throw Error('missing commit');}}),/ancestry\/parity unavailable/);
+ const second={...one,id:'DIC-Q-102',issue:102,merged_source_sha:C};
+ assert.throws(()=>requiredReadyPins({...queue,items:[one,second,unmerged]},
+  [one.id,second.id],['site/main.js'],
+  {...exact,isAncestor:()=>{throw Error('missing commit');}}),/ancestry\/parity unavailable/,
+  'ambiguously ordered co-selected READY merges must fail closed');
 });
 test('#3347 candidate name is stable across unready changes, but changes with READY bytes',()=>{
  const b=frozenReadyBranch(q,[one]);
