@@ -17149,21 +17149,30 @@
       "issue": 509,
       "title": "Deterministic compatible historical grinder-calibration fallback",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "db2372f7c15e8c6aabf1468ffb6df18b6c8da873",
       "scope_paths": [
         "site/cloud/mapping.js"
       ],
       "owner_source": "Issue #509 development-only R365; DIC_PREFLIGHT_VERIFIED development_sha=943c3f66c9999bf8b4da23d84f491f3b45e3fb00 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e",
       "tests": [
         "Live full personal-state SQL: unordered calibration JSON aggregate; setup_preferences.calibration_id nullable; existing four versions have no NULL selections; current production incident not established",
-        "Two synthetic Node22 regression cases staged for reverse SQL order, timezone-equal and undated rows, and explicit pinned calibration; exact PR-head and merged-source CI PENDING"
+        "Two synthetic Node22 regression cases staged for reverse SQL order, timezone-equal and undated rows, and explicit pinned calibration; exact PR-head and merged-source CI PENDING",
+        "Exact PR-head Node22, cloud/browser, approval, source-security, relevant #33 and hosted SQL workflow completed SUCCESS; the SQL test job was NOT_APPLICABLE for unchanged database source."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        44560107294,
+        44560107370,
+        44560107362,
+        44560107411,
+        44560107420,
+        44560107318,
+        44560107763
+      ],
       "blockers": [
-        "Exact PR-head source-bound Node22/cloud, browser and approval checks not yet PASS",
-        "Independent #3347 source-isolated candidate CI and future owner Publish required before production application update"
+        "Merged-source exact Node22 and cloud/mobile-browser workflows still IN_PROGRESS; do not claim PASS or READY.",
+        "Independent #3347 source-isolated candidate validation and a future owner Publish required before any production change."
       ],
-      "notes": "Sort compatible calibrations by created_at and id before legacy fallback only; preserves immutable calibration IDs, history, private shots/notes, offline queue, and explicit calibration selection. No SQL or production changes.",
+      "notes": "Sort compatible calibrations by created_at and id before legacy fallback only; preserves immutable calibration IDs, history, private shots/notes, offline queue, and explicit calibration selection. No SQL or production changes. PR #3432 nonforce [skip netlify] merged at db2372f7c15e8c6aabf1468ffb6df18b6c8da873; source/test blobs match passing PR head.",
       "production_deployed": false
     }
   ],
