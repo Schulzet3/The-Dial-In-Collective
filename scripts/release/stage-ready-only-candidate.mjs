@@ -8,7 +8,7 @@ import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 import {CANDIDATE_KIND,CANDIDATE_JOURNAL_PATH,CANDIDATE_RECEIPT_PATH,
  planReadyOnlyCandidate,validateReadyOnlyCandidate,workflowChangedPaths,
- discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,discoverCompatibleAuditSupport,REVIEWED_COMPATIBLE_AUDIT_SUPPORT,
+ discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,discoverCompatibleAuditSupport,discoverReviewedRestoredSqlTests,REVIEWED_COMPATIBLE_AUDIT_SUPPORT,
  assertCandidateRelativeImports,assertCandidateStaticNamedExports} from './ready-only-candidate.mjs';
 import {classifyReleaseRisk} from './release-reliability.mjs';
 const SHA=/^[a-f0-9]{40}$/;
@@ -67,6 +67,10 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
   restoredPaths:plan.restored_paths,pinnedReadyPaths:plan.pinned_ready_paths,
   publishedSourceSha,developmentSourceSha,changedPaths:developmentPaths,sourceObjectAt,
   compatibleAuditSupportPaths:compatibleAuditSupport});
+ const restoredSqlTests=discoverReviewedRestoredSqlTests({
+  queue,restoredPaths:plan.restored_paths,publishedSourceSha,
+  developmentSourceSha,sourceObjectAt,selectedReadyItems:plan.ready_items
+ });
  // A later untracked same-file edit must not be smuggled under a READY scope.
  for(const path of plan.included_paths){
   const owners=plan.ready_items.filter(i=>i.scope_paths.includes(path));
@@ -101,6 +105,12 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
   for(const path of compatibleAuditSupport)
    git(['update-index','--add','--cacheinfo','100644',
      REVIEWED_COMPATIBLE_AUDIT_SUPPORT.historicalBlobSha,path],{env});
+  for(const path of restoredSqlTests){
+   const object=sourceObjectAt(publishedSourceSha,path);
+   if(!object)throw Error('Reviewed published SQL test object unavailable: '+path);
+   const [mode,sha]=object.split(':');
+   git(['update-index','--add','--cacheinfo',mode,sha,path],{env});
+  }
   const manifest={schema_version:1,kind:CANDIDATE_KIND,candidate_branch:branch,
    development_source_sha:developmentSourceSha,published_source_sha:publishedSourceSha,
    selected_ready_item_ids:plan.selected_ids,risk_classification:classifyReleaseRisk(plan.included_paths),
@@ -110,6 +120,7 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    restored_unpublished_workflow_paths:unpublishedWorkflows,
    excluded_unpublished_workflow_test_paths:workflowOnlyTests,
    excluded_unready_test_paths:unpublishedTests,
+   restored_to_published_unready_test_paths:restoredSqlTests,
    publication_authorized:false};
   // New candidate Git commits change code/workflows, so carry a fresh
   // exact-parent journal receipt validated by approval continuity.
@@ -134,6 +145,7 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    '- Restored development-only GitHub workflows to published bytes: '+(unpublishedWorkflows.join(', ')||'(none)')+'\n'+
    '- Omitted exact reviewed workflow-only, unpublished tests: '+(workflowOnlyTests.join(', ')||'(none)')+'\n'+
    '- Omitted source-bound unready issue tests: '+(unpublishedTests.join(', ')||'(none)')+'\n'+
+   '- Restored last-published SQL test after excluding unfinished source-key migration: '+(restoredSqlTests.join(', ')||'(none)')+'\n'+
    '- Exact candidate CI and separate owner publication authorization required. No production claim.\n';
   for(const [path,content] of [[CANDIDATE_RECEIPT_PATH,JSON.stringify(manifest,null,2)+'\n'],
    [CANDIDATE_JOURNAL_PATH,journal]]){
