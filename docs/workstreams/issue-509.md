@@ -1,3 +1,15 @@
+# Issue #509 — R352 native prototype import restore and family lineage [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=3bd7a865e46a3eb099f5041954f05fee50a7d81c preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+
+**November 18 Denver / November 19 UTC, provider strictly READ-ONLY.** Directly reread all 7 entire current live SQL definitions (25,892 characters, exact per-source MD5 and 1-end ranges preserved in [R352 structured receipt](../audits/issue509-r352-native-import-family-integrity-20261119.json)): private apply_prototype_import, import_operation, import_id, refresh_personal_family, classify_personal_shot and public dic_preview_import/dic_commit_import. Compared real Git `site/cloud/client.js` import RPC wrappers (blob `08e1ac1f`) and complete `supabase/tests/native_import.sql` (blob `9dfa08ba`); verified preview runs in an exception subtransaction, commit binds exact reviewed JSON hash and recovery gate, expected owner enforced, idempotent receipt, retired Experiment rejection and no destructive replacement of a populated cloud workspace.
+
+**New semantic dependency proof, not a new bug:** A malformed backup cross-coffee or cross-style personal-family reference is rejected by current VALIDATED four-column `shots_owner_id_library_entry_id_style_personal_family_id_fkey`; Current-family selections likewise require matching owner/coffee/style under VALIDATED `recipe_preferences_owner_id_library_entry_id_style_current_fkey`. No ad hoc guard migration or data rewrite justified. Aggregate-only readback: one private import batch, 14 legacy-import shots, six personal families, **zero** cross-family mismatches. Cumulative authenticated import query shape four calls, 166.85ms weighted mean/362.80ms max, zero temporary blocks; these sparse historical stats do NOT prove a production bottleneck or fresh traffic. Existing rollback-only `native_import.sql` covers preview/commit/recovery/owner separation/idempotent replay, but no fresh CI was run or claimed. Seven definitions were previously credited: first-time provider words **0**, #267 code lines **0**.
+
+Read-back Git receipt [8c3e1147](https://github.com/Schulzet3/The-Dial-In-Collective/commit/8c3e11479ae425154e54c4ef3216e105cdf987f7), full SQL source/hash and dependency proof; no source/test/CI, release queue or production SQL/data/Auth/Storage/Edge/config change, publish, backup, billing, scheduling or alert changes. Existing repairs remain TESTING, exhaustive baseline **IN_PROGRESS**, external/hosted Auth and compiled behavior UNVERIFIED. **Exact next semantic cursor:** `private.dic_admin_records(p_kind text,p_offset integer,p_limit integer)` character 1; assess full bounded pagination SQL and current Admin consumer/planner behavior unless a changed/new provider definition supersedes. No owner-action alert.
+
+---
+
 # Issue #509 — R351 first-shot legacy RPC, decaf and recommendation provenance semantic audit [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=75efa8d6e62a34e32b7557d83a66f5a0aa496c9a preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
