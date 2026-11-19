@@ -35,8 +35,10 @@ test('R329 form-wrapped selected official coffee description remains in own prod
  const selected=selected152(wrapped);
  for(const key of ['ownFlavor','labeledProcess','labeledLightRoast','lightToMediumBody','sourceOrigin','sourceSmallholders','sourceHeirloom','sourceElevation'])assert.equal(selected[key],true,key);
 });
-test('R329 unidentified smallholders are not a fabricated named farmer',()=>{
- const p=parsed(fixture());assert.equal(p.ok,true);assert.ok(!p.fields?.producer);
+test('R329 synthetic unnamed smallholder selected description must not borrow sidebar named producer',()=>{
+ const s=selected152(fixture());assert.equal(s.sourceSmallholders,true);
+ const p=parsed(fixture(details,name,'<aside>Other coffee Producer: John Doe</aside>'));
+ assert.equal(p.ok,true);assert.notEqual(p.fields?.producer,'John Doe');
 });
 test('R329 missing own process stays unsubstantiated by unrelated SEO',()=>{
  const s=selected152(fixture('<p>Roast: Light</p>',name,'<aside><p>PROCESS: Anaerobic Natural</p></aside>'));
