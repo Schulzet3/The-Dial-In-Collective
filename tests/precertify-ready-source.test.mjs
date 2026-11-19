@@ -20,6 +20,26 @@ test('#3347 source-bound READY pins exactly the genuine READY/unready shared pat
  assert.throws(()=>requiredReadyPins(q,[notReady.id],['site/main.js']),/not source-certified/);
  assert.throws(()=>requiredReadyPins(q,[one.id,one.id],['site/main.js']),/source\/selection unavailable/);
 });
+test('#3347 pre-certification skips only source-proven unmerged same-file labels',()=>{
+ const unmerged={...notReady,merged_source_sha:null};
+ const queue={...q,items:[one,unmerged]};
+ const frozen='100644:'+'e'.repeat(40),changed='100644:'+'f'.repeat(40);
+ const at=(ref,path)=>path==='site/main.js'?
+  (ref===B||ref===C?frozen:null):null;
+ const exact={developmentSourceSha:C,sourceObjectAt:at,isAncestor:(a,b)=>a===B&&b===C};
+ assert.deepEqual(requiredReadyPins(queue,[one.id],
+  ['site/main.js','src/server/unready.mjs'],exact),[]);
+ assert.deepEqual(requiredReadyPins(queue,[one.id],['site/main.js'],
+  {...exact,sourceObjectAt:(ref,path)=>ref===C&&path==='site/main.js'?changed:at(ref,path)}),
+  ['site/main.js'],'real post-READY edit must still require exact isolation pin');
+ assert.deepEqual(requiredReadyPins(queue,[one.id],['site/main.js']),
+  ['site/main.js'],'no Git object reader must never waive pin');
+ assert.deepEqual(requiredReadyPins({...queue,items:[one,{...unmerged,merged_source_sha:B}]},
+  [one.id],['site/main.js'],exact),['site/main.js'],
+  'merged competing change never receives unmerged-label exception');
+ assert.throws(()=>requiredReadyPins(queue,[one.id],['site/main.js'],
+  {...exact,isAncestor:()=>{throw Error('missing commit');}}),/ancestry\/parity unavailable/);
+});
 test('#3347 candidate name is stable across unready changes, but changes with READY bytes',()=>{
  const b=frozenReadyBranch(q,[one]);
  assert.match(b,/^release-candidates\/ready3347-[a-f0-9]{20}$/);

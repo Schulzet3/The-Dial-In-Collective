@@ -1052,3 +1052,9 @@ DIC_PREFLIGHT_VERIFIED development_sha=ceabd3bd2545bee1e74f48dc1c973d8ff4177ac1 
 - No claimed outcome yet: verify PR-head and main merged acceptance, candidate push/CI, source candidate and approvals before calling release prevalidated. New owner policy supersession to be recorded on BOTH development Locked authority files and prospectively wired into the READY promotion gate. Issue #3347 remains open until that reconciliation and batch test succeeds.
 
 - #3349 concurrent exact READY blob parity main fixes were independently integrated before this nonforce rebase; this commit preserves them. Earlier PR #3351 now obsolete, exact new PR CI and main merge readback required.
+
+
+## November 19, 2026 — #3347 proactive READY pre-certification exact byte parity correction [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=ceabd3bd2545bee1e74f48dc1c973d8ff4177ac1 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d
+- Concurrent same-scope source pre-certification PR #3354 merged f0e5ec9b9cf09ea5cbed9cec7a4a383417f76db4 and exact main CI 44462538404 SUCCESS. Duplicate PR #3355 closed without merge. Source code review found requiredReadyPins blindly auto-pinned all shared-file ownership labels, undoing #3349's tested exact READY blob-parity exception: a never-merged queued issue whose file bytes are identical to the approved READY merge could create a false HOLD.
+- Narrow repair: optional real Git source-object and selected chronological ancestry evidence skips pin only if every competing owner is unmerged and development file exactly matches unique reviewed READY merge blob. Missing or ambiguous data, merged competing owner, later changed bytes or absent reader continues to require pin/HOLD. Wired to existing #3354 pre-certification runner, no workflow duplication, no grant, publication, provider/DB/Netlify writes. Added focused negative regression tests; exact main CI and nonforce merge required before PASS.
