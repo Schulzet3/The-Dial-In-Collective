@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {planReadyOnlyCandidate,validateReadyOnlyCandidate,CANDIDATE_KIND,
- CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH,REVIEWED_WORKFLOW_TEST,discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,assertCandidateRelativeImports,
+ CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH,REVIEWED_WORKFLOW_TEST,discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,discoverRestoredUnreadySqlTests,REVIEWED_UNREADY_SQL_TEST,assertCandidateRelativeImports,
  assertCandidateStaticNamedExports} from '../scripts/release/ready-only-candidate.mjs';
 import {classifyReleaseRisk} from '../scripts/release/release-reliability.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40),D='d'.repeat(40);
@@ -476,4 +476,34 @@ test('#2169 generator ESM exports pass frozen-source preflight, absent symbols s
  files['site/main.js']="import {rawElements,missingSymbol} from './html-scan.mjs';";
  assert.throws(()=>assertCandidateStaticNamedExports(['site/main.js'],args),
   /Missing static relative module export.*missingSymbol/);
+});
+
+test('#3342 SQL protected regression restores only with source-proven excluded TESTING #509 R265',()=>{
+ const s=REVIEWED_UNREADY_SQL_TEST;
+ const owner={id:s.itemId,issue:509,state:'TESTING',
+  merged_source_sha:s.sourceSha,scope_paths:[s.migration]};
+ const chosen={...one,merged_source_sha:D};
+ const objects=new Map([
+  [A+':'+s.path,'100644:'+s.publishedBlob],
+  [B+':'+s.path,'100644:'+s.unreadyBlob],
+  [s.sourceSha+':'+s.path,'100644:'+s.unreadyBlob],
+  [s.sourceSha+'^:'+s.path,'100644:'+s.publishedBlob],
+  [B+':'+s.migration,'100644:'+'1'.repeat(40)],
+  [D+':'+s.path,'100644:'+s.unreadyBlob],
+  [D+'^:'+s.path,'100644:'+s.unreadyBlob]
+ ]);
+ const read=(ref,path)=>objects.get(ref+':'+path)||null;
+ const args={queue:{...q,items:[chosen,owner]},restoredPaths:[s.migration],
+  publishedSourceSha:A,developmentSourceSha:B,sourceObjectAt:read,
+  selectedReadyItems:[chosen]};
+ assert.deepEqual(discoverRestoredUnreadySqlTests(args),[s.path]);
+ assert.deepEqual(discoverRestoredUnreadySqlTests({...args,
+  queue:{...q,items:[chosen,{...owner,state:'READY'}]}}),[]);
+ assert.deepEqual(discoverRestoredUnreadySqlTests({...args,restoredPaths:[]}),[]);
+ assert.throws(()=>discoverRestoredUnreadySqlTests({...args,
+  sourceObjectAt:(ref,path)=>ref===A&&path===s.path?'100644:'+'f'.repeat(40):read(ref,path)}),
+  /Published SQL regression differs/);
+ assert.throws(()=>discoverRestoredUnreadySqlTests({...args,
+  sourceObjectAt:(ref,path)=>ref===D&&path===s.path?'100644:'+'f'.repeat(40):read(ref,path)}),
+  /Selected READY item changed/);
 });
