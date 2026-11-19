@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R358",
+  "date_utc": "2026-11-19",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "8a45f21cbbd4526dade5ae12d7fe450ca6c551be",
+    "blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "verified_git_content_sha": true
+  },
+  "branches": {
+    "main": "0bace905e6436eb67afd22db61d747539a8dab11",
+    "release": "0f3641b4fff07e2a88d7747e621304ec2cf0ead5"
+  },
+  "objective": "Admin single-shot deletion must reaggregate and retire empty personal recipe families and clear unsupported Current without changing historical records, contributions or nonshot deletion paths",
+  "complete_live_source_read": [
+    {
+      "signature": "private.dic_admin_delete_record(text,uuid,bigint,jsonb)",
+      "source_md5": "39b6e1a4fc51c2ce8121ef34d2067b51",
+      "characters": 4109,
+      "reviewed_range": "1-end"
+    },
+    {
+      "signature": "private.dic_admin_delete_preview(text,uuid)",
+      "source_md5": "83f516f852832cdf06f44b34339bbc0d",
+      "characters": 4078,
+      "reviewed_range": "1-end"
+    },
+    {
+      "signature": "private.classify_personal_shot(uuid)",
+      "source_md5": "5183deb46474c10468638cef08d2bd05",
+      "characters": 3219,
+      "reviewed_range": "1-end"
+    },
+    {
+      "signature": "private.refresh_personal_family(uuid)",
+      "source_md5": "e6a15e6de21f56345479574cc575cf95",
+      "characters": 2134,
+      "reviewed_range": "1-end"
+    },
+    {
+      "signature": "private.project_shot()",
+      "source_md5": "79e6fd0668fa4502c8785b3e92a14a61",
+      "reviewed_range": "1-end"
+    },
+    {
+      "signature": "private.dic_on_library_coffee_change()",
+      "source_md5": "b6cbc45072b0e9f8ebb511b2eca3895f",
+      "reviewed_range": "1-end"
+    }
+  ],
+  "crosslayer": "Admin delete shot path manually clears favorite, then deletes public.shots but does not call refresh_personal_family; no DELETE triggers on shots; supported clean-up occurs in classify_personal_shot for mutation/edits only. Dependent family/preferences FK constraints permit retained stale current statistics. Contribution link intentionally SET NULL on deleted shot; protected historical Community remains.",
+  "safe_live_aggregate": {
+    "shots": 27,
+    "shots_with_family": 13,
+    "families_total": 6,
+    "families_with_stale_stored_count": 1,
+    "stale_cohort": {
+      "count": 1,
+      "stored_count": 6,
+      "eligible_live_count": 4,
+      "classification": "personally_confirmed"
+    },
+    "unsupported_current_preferences": 0,
+    "prematurely_confirmed_families": 0
+  },
+  "causality_limit": "The one preexisting family count discrepancy is verified, but its cause is unknown. No private identities, personal rows, shot/notes, raw Auth logs, or member data were read; no production DML.",
+  "source_baseline": {
+    "path": "supabase/migrations/20261110194500_dic_admin_delete_null_kind_guard.sql",
+    "git_blob_sha": "897263ae87ad0844456ac690b09efd56b67f5fd2",
+    "live_body_matched_source_prior_R291": true
+  },
+  "fix": {
+    "source_migration": "supabase/migrations/20261119105000_dic_admin_shot_delete_family_refresh.sql",
+    "regression": "supabase/tests/admin_shot_delete_family_refresh.sql",
+    "runner": "scripts/audit/isolated-sql-regression.sh",
+    "scope": "development-only additive function replacement, no historical migration edits; after deletion refresh family and clear only invalid Current",
+    "existing_live_inconsistency": "NOT repaired by this forward-only change; requires separate source-bound safe correction and future explicit owner Publish"
+  },
+  "tests": {
+    "disposable_pg17": "PENDING",
+    "node22": "PENDING",
+    "browser": "PENDING_IF_APPLICABLE",
+    "approval": "PENDING",
+    "source_bound_ci": "PENDING",
+    "note": "Do not treat blob creation or PR as passing CI"
+  },
+  "privacy": "Source and synthetic rollback-only test; no direct production SQL/data/Auth/Storage/Edge/config writes",
+  "coverage": {
+    "first_time_provider_words": 0,
+    "reason": "Hash-bound live functions were reviewed in earlier receipts; new cross-layer semantic invariant/aggregate readback",
+    "issue267_code_line_credit": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "Run exact PR-head isolated PG17/Node22/approval CI, fix failures, merge nonforce, read back; then safely assess existing one-family discrepancy and first changed/new provider object."
+  },
+  "state": "TESTING_NOT_DEPLOYED"
+}

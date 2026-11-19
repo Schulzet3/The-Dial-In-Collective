@@ -16790,6 +16790,29 @@
       ],
       "notes": "One additional admin-only RPC when Accounts is expanded during a search; account search results continue to take precedence over overview fallback. No live provider change or member-record read. [skip netlify] PR #3384 nonforce merged from source-tested 614e9ed2 into 5d99767d. Other #33 selected-source fetch failure 44475620584 is unrelated. No provider writes.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-admin-shot-delete-family-refresh",
+      "issue": 509,
+      "title": "Recalculate personal recipe family and Current after Admin deletes a shot",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261119105000_dic_admin_shot_delete_family_refresh.sql"
+      ],
+      "owner_source": "Owner #509 production-read-only exhaustive DB audit; immutable preflight 8a45f21cbbd4526dade5ae12d7fe450ca6c551be/3742fed0176c809b115320c698a0e8b1675b2d3e; R358 complete live SQL/aggregate receipt.",
+      "tests": [
+        "Read-only observed 1/6 stored family statistics counts stale (stored 6, eligible 4); cause unverified, no private rows retrieved.",
+        "Source-path deletion lacks family refresh; no public.shots DELETE trigger; specific synthetic rollback-only SQL fixture added.",
+        "Exact-source disposable PostgreSQL17/JWT, Node22, approval and applicable cloud/browser CI PENDING; no success inferred."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Await source-bound PR-head disposable PG17 and applicable CI, nonforce integration/readback.",
+        "The existing production mismatch is unchanged and requires separately accepted repair and a NEW owner Publish; no automatic live data write."
+      ],
+      "notes": "#509 R358 source-only; preserve family history, Community, favorite/Current and authorization; no publication.",
+      "production_deployed": false
     }
   ],
   "history": [

@@ -1,3 +1,31 @@
+# Issue #509 — R358c synthetic Admin RLS-safe revision fixture [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=8a45f21cbbd4526dade5ae12d7fe450ca6c551be preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**November 19, 2026 UTC, PR #3399 candidate repair only.** Exact PR-head PostgreSQL17 SQL run [44510293969](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44510293969) FAILED only in the new synthetic test at `Invalid delete confirmation`: the synthetic Admin's authenticated role cannot directly SELECT another member's `public.shots.revision` under RLS, so its local expected revision was NULL. The Admin's authorized SECURITY DEFINER preview is otherwise correct. The test now obtains the fixture shot revision before `SET LOCAL ROLE authenticated`, then invokes the real authenticated Admin preview/record wrappers. This preserves RLS and is NOT a production or source SQL change. Previous fixture green-score correction R358b was effective. New head requires ALL new exact-source CI, past failing run is not PASS. Queue TESTING, baseline IN_PROGRESS, production unchanged.
+
+---
+
+# Issue #509 — R358b synthetic green-cohort test correction [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=8a45f21cbbd4526dade5ae12d7fe450ca6c551be preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**November 19, 2026 UTC; same PR #3399, no production writes.** Exact PR-head PostgreSQL17 run [44510036266](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44510036266) FAILED at the new isolated fixture: two synthetic shots were scored 3/3/3/3/3 and therefore not green, so they could not enter a personal family. Earlier migrations and checks passed through the targeted new suite; this is **synthetic test setup**, not a demonstrated regression of the production Admin fix. Changed only the two fake shot scores to proven eligible 3/3/5/5/1, matching existing `recipe_family_lifecycle.sql` positive fixture. Full rerun of all applicable exact-new-head checks REQUIRED; prior failed SHA cannot be called PASS. Main source, migration and prod unchanged. R358 read-only 1-of-6 stale-family integrity finding and unknown historical cause remain unchanged. Audit IN_PROGRESS, release TESTING; next verify new exact-source SQL, Node22, browser and approval.
+
+---
+
+# Issue #509 — R358 Admin shot-delete family reconciliation [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=8a45f21cbbd4526dade5ae12d7fe450ca6c551be preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**November 19, 2026 UTC; Supabase production READ-ONLY.** Direct complete source semantic review of live `private.dic_admin_delete_record`, `dic_admin_delete_preview`, `classify_personal_shot`, `refresh_personal_family`, `project_shot`, `dic_on_library_coffee_change`; full bodies, hashes and dependencies in [R358 immutable receipt](../audits/issue509-r358-admin-shot-family-lifecycle-20261119.json). Confirmed functional defect: Admin's allowed single-shot deletion clears favorite and deletes the shot, but no DELETE trigger or follow-on SQL refreshes the surviving personal family, leaving stale statistics/evidence; Current may reference an empty family. Read-only production aggregates: **27 shots / 13 with personal family, 6 families, 1 existing stale count (stored 6 versus 4 eligible), 0 currently unsupported Current selections**. Cause of preexisting discrepancy is **UNVERIFIED**; do not infer a real Admin incident or disclose member rows.
+
+**Development-only safe repair candidate:** new additive `supabase/migrations/20261119105000_dic_admin_shot_delete_family_refresh.sql` refreshes only the deleted shot's family after delete and clears Current only when zero eligible matching shots remain. Existing Admin authorization, revision/impact confirmation, favorite clearing, audit receipts, protected Community history and other delete branches are preserved; no historical migrations edited. New `supabase/tests/admin_shot_delete_family_refresh.sql` synthetic rollback-only `dic_ci` PostgreSQL17 regression covers two-to-one-to-zero, candidate/retired state, continued valid Current, last-shot Current clearing, favorite and audit. Isolated runner gates test on migration presence. **CI PENDING, TESTING not READY**, no hosted/private-session acceptance claim. The one existing stale family needs a separately validated correction at an explicitly owner-authorized future Publish; this forward-only patch does not mutate production data.
+
+First-time SQL word credit **0** (prior full-body receipts), #267 GitHub code-line credit **0**; exhaustive provider baseline **IN_PROGRESS**. No Supabase production SQL/data/Auth/Edge/Storage/config, deployment, release, backup, billing, schedule or alert change. Next: exact candidate PostgreSQL17/Node22/approval tests, nonforce source integration after PASS, source readback; continue unreviewed/changed provider objects. No premature completeness or deployment claim.
+
+---
+
 # Issue #509 — R357 archived setup provider/client eligibility contract [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=2bb1a0f85cf9c815294533e44531b901c06cf659 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
