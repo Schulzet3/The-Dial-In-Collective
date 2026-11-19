@@ -111,8 +111,20 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    excluded_unpublished_workflow_test_paths:workflowOnlyTests,
    excluded_unready_test_paths:unpublishedTests,
    publication_authorized:false};
+  // New candidate Git commits change code/workflows, so carry a fresh
+  // exact-parent journal receipt validated by approval continuity.
+  let preflightBlob,preflightText;
+  try{
+   preflightBlob=git(['rev-parse','--verify',developmentSourceSha+':docs/ai/PREFLIGHT.md']);
+   preflightText=git(['show',developmentSourceSha+':docs/ai/PREFLIGHT.md'],{trim:false});
+  }catch{throw Error('Candidate staging HOLD: source preflight object missing from exact development parent');}
+  if(!SHA.test(preflightBlob)||!preflightText.startsWith('# Mandatory starting point for EVERY DIC task'))
+   throw Error('Candidate staging HOLD: invalid exact development preflight source/blob');
   const originalJournal=git(['show',developmentSourceSha+':'+CANDIDATE_JOURNAL_PATH],{trim:false});
-  const journal=originalJournal.trimEnd()+'\n\n## READY-only source candidate (not published)\n'+
+  const journal=originalJournal.trimEnd()+'\n\n'+
+   'DIC_PREFLIGHT_VERIFIED development_sha='+developmentSourceSha+
+   ' preflight_blob_sha='+preflightBlob+
+   '\n\n## READY-only source candidate (not published)\n'+
    '- Development parent: '+developmentSourceSha+'\n'+
    '- Published baseline: '+publishedSourceSha+'\n'+
    '- Selected READY IDs: '+plan.selected_ids.join(', ')+'\n'+

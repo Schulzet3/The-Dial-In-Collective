@@ -1071,3 +1071,9 @@ DIC_PREFLIGHT_VERIFIED development_sha=95ace6fb15211db4135180b3e874c0c705a7c412 
 ## November 19 #3347 transport fixture literal correction [skip netlify]
 DIC_PREFLIGHT_VERIFIED development_sha=a0f5a975dd89cb1b524ae6d518efd6fa3330890e preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
 - Initial PR-head main test run 44463440979 correctly FAILED 1/217 tests: new disposable Git transport fixture accidentally wrote a backslash+n literal to synthetic workflow YAML, while assertion expected a trimmed newline. Source transport behavior and 216 other tests passed; fix fixture to write actual newline (no production/functional change), rerun exact new PR-head CI. Original failed run retained as FAIL, not reinterpreted as PASS.
+
+
+## November 19, 2026 — #3347 reconcile concurrent READY transport with stage preflight v2 [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=a0f5a975dd89cb1b524ae6d518efd6fa3330890e preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+- Nonforce merge of exact prior PR #3364 head 9d8a2dfb03d537acbe376656c975622f908e412e with independently merged main PR #3361 transport d326e93fe9a052789b0030b820b7046bc83aa3d1. Preserve all #3361 workflow-neutral transport logic/connector handoff; no second workflow, force, Netlify, provider write, grant or publication.
+- #3364 prior source PR CI 44463650113 SUCCESS (218 main controller test cases PASS, zero FAIL), but main advanced concurrently. First-parent reconciliation includes all tested source preflight line fix in scripts/release/stage-ready-only-candidate.mjs, negative real Git fixture, pre-cert exact READY blob parity exception, deterministic V2 candidate source identity, and #3361 transport/test acceptance. This merge requires fresh exact-SHA PR CI and postmerge main CI to PASS before READY. GitHub issue #3347 tracks the independent SQL case-distinct path HOLD (first frozen candidate 63121945). Continue nonpublishing candidate tests, never hide SQL failure.
