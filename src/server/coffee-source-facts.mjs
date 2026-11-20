@@ -673,6 +673,17 @@ function addInlineWooVariations(html,nodes,blocked,result,source_url){
  }
 }
 
+// A storefront can animate a title one glyph at a time ("F i n c a" /
+ // "S a n t a"). These are literal fragments, not a Producer attribution.
+const fragmentedCoffeeLetters=value=>/^(?:[\p{L}]\s+){2,}[\p{L}]$/u.test(String(value||'').trim());
+// A bare place/name beneath a generic Harvest heading is not a crop year,
+// release or lot. Keep the raw heading and value for review, not a typed fact.
+const unqualifiedHarvestHeading=value=>{
+ const text=String(value||'').trim();
+ return /^[\p{Lu}][\p{L}\p{M}.'’–-]{2,50}(?:\s+[\p{Lu}][\p{L}\p{M}.'’–-]{2,50}){0,2}$/u.test(text)&&
+  !/^(?:january|february|march|april|may|june|july|august|september|october|november|december|spring|summer|autumn|fall|winter|limited|reserve|lot|edition|release|crop)\b/i.test(text);
+};
+
 // A complete selected-source review may merge several representations of one
 // Shopify product (visible HTML, chosen JSON, and preserved prose). Normalize
 // *review field attribution* only after those sources have merged: otherwise a
@@ -689,6 +700,10 @@ export function reconcileSelectedCoffeeReviewActorRoles(facts,{source_url,select
  const methods=facts.filter(f=>eligible(f)&&f.field==='process'&&normLabel(f)==='process').map(f=>normalized(f.value));
  for(const fact of facts){
   if(!eligible(fact))continue;
+  // Do not mark animated title letters as a grower or generic educational
+  // Harvest geography as a selected release. Preserve their actual raw text.
+  if(fact.field==='producer'&&(fragmentedCoffeeLetters(fact.label)||fragmentedCoffeeLetters(fact.value)))delete fact.field;
+  if(fact.field==='release_label'&&normLabel(fact)==='harvest'&&unqualifiedHarvestHeading(fact.value))delete fact.field;
   // Retain the raw Farm value/label but do not misattribute it as Producer.
   if(fact.field==='producer'&&normLabel(fact)==='farm'&&
      (labeledGrower||(distinctSelectedFarm&&normalized(fact.value)===normalized(selected_farm))))delete fact.field;
@@ -830,6 +845,11 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
    /^(?:swiss|mountain)[ -]?water(?:[ -]?process)?$/iu.test(String(value).trim())&&
    /\bdecaf(?:feinated|feination)?\b/iu.test(String(section)))return undefined;
   const caption=normalized(label).replace(/\s*[|:：]\s*$/u,'');
+  // Both rows were observed in exact #249 Onyx selected HTML: an animated
+  // "F i n c a: S a n t a" and an educational "Harvest: Mexico".
+  // Neither is a producer or release; retain the seller's literal row.
+  if(field==='producer'&&(fragmentedCoffeeLetters(label)||fragmentedCoffeeLetters(value)))return undefined;
+  if(field==='release_label'&&caption==='harvest'&&unqualifiedHarvestHeading(value))return undefined;
   if(field==='producer'&&caption==='farm'&&hasLabeledGrower)return undefined;
   if(field==='process'&&caption==='processing'&&selectedProcessMethods.length&&!selectedProcessMethods.includes(normalized(value))&&
    /^[\p{Lu}][\p{L}\p{M}.'’-]*(?:\s+[\p{Lu}][\p{L}\p{M}.'’-]*){0,4}$/u.test(value)&&
