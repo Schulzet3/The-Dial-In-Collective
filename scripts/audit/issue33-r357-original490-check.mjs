@@ -48,7 +48,11 @@ if(process.env.DIC_R357_VERIFY==='1'){
  check(own.badge==='Next Level'&&r.selected_price_badge==='Next Level'&&
     f.release_label==='Next Level'&&r.selected_price_badge_accepted===true,'selected_price_badge_to_release_field');
  check(norm(f.origin).includes('ecuador'),'direct_selected_ecuador');
- check(norm(f.process).includes('natural'),'current_source_natural_process');
+ // Owner-approved canonical Process selector intentionally maps explicitly
+ // combined Anaerobic Natural to Anaerobic; selected own source still records Natural.
+ check(own.ownProcess&&norm(f.process)==='anaerobic','selected_anaerobic_natural_to_approved_coarse_category');
+ check(norm(f.roast_level)==='light'&&own.ownRoast,'explicit_current_selected_light_roast');
+ check(['leopoldo andrade','ligia merizalde'].every(s=>norm(f.producer).includes(s)),'both_direct_selected_named_producers');
  check(['natural wine','cacao','cherry cordial'].every(s=>norm(f.tasting_notes).includes(s)),'all_direct_selected_sensory_notes');
  check(!f.decaffeination_method,'no_invented_decaf');
  check(!(r.seo_fallback_fields||[]).some(k=>['release_label','name','origin','process','tasting_notes'].includes(k)),'no_meta_menu_related_product_backfill');

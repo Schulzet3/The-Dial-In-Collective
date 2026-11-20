@@ -53,3 +53,9 @@ test('R357 source guard rejects unavailable, wrong identity, missing UI and reje
   {...good,selected_price_badge_accepted:false}])
   assert.ok(requiredFocusedSourceFailures([490],[bad]).length>0);
 });
+
+test('R357 selected Anaerobic Natural retains direct literal while approved Process category is Anaerobic',()=>{
+ const x=selected490(page());assert.equal(x.ownProcess,true);
+ const p=extractPublicCoffeeFacts(page(),{source_url:selectedUrl});
+ assert.equal(p.ok,true);assert.equal(p.fields?.process,'Anaerobic');
+});
