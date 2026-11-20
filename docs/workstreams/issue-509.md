@@ -1,3 +1,15 @@
+# Issue #509 R395 — PostgreSQL numeric, overlap, advisory-lock and catalog declarations [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=7ffa669be06890df4ca0bf8250f58c9d211237ba preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-20 UTC.** Mandatory-first immutable SHA and Git blob verified. Project `azviqqejypsefzilgonr` ACTIVE_HEALTHY, PostgreSQL 17.11. Production read-only; no provider SQL/data/Auth/Edge/Storage/config, backup, billing, schedule, publication or Netlify writes. Live `main=57adc419ed4b106e158435b465971f5986537b41`, `release/production=07f054f6470b2ae36b36faef8fb9a8161dd3bfb5` observed.
+
+**New semantic review:** full exposed `pg_catalog` f/p/w ranks **1721–1920 / 3162**, **200 complete SQL/ABI declarations / 36240 actual DDL characters**, types {"internal":187,"sql":13}. Per-OID entire DDL texts, exact MD5 and 1-end ranges, SQL-body semantics, verdicts and native implementation **UNVERIFIED** in [R395 append-only ledger](../audits/issue509-r395-pg-catalog-numeric-overlap-advisory-20261120.json). Zero #267 code lines credited. Real consumers: 19 public + one extension numeric columns; nine non-system routines use transaction-scoped `pg_advisory_xact_lock`, none invoked. Numeric money cast STABLE, `numeric_pl_pg_lsn` operand reversal correct; full `obj_description` and typed OVERLAPS SQL bodies reviewed, timezone-dependent variants STABLE. No proved dead/redundant object, DIC bug, or measured performance bottleneck; zero numeric-column indexes alone insufficient to justify creating/dropping one. `pg_backup_start/stop`, advisory primitives, `pg_cancel_backend` were only definition-read, never invoked.
+
+**Status:** full baseline **IN_PROGRESS**, contiguous pg_catalog f/p/w **1920/3162**, **157** separate aggregates pending. Docs-only audit receipt; new source CI NOT_APPLICABLE; no READY/DEPLOYED or existing TESTING state promotion. Next exact cursor: rank **1921**, `pg_catalog.pg_config()` OID **3400**, character 1. Preserve owner-action-only notification policy.
+
+---
+
 # Issue #509 R394 — PostgreSQL log, multirange and network declarations [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=3754f0342a5c5656864e2ec3b63f43a6bd746f17 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
