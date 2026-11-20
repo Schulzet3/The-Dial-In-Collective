@@ -1,0 +1,692 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch": "V13U",
+  "authority": "DEVELOPMENT_ONLY_NO_PUBLISH",
+  "preflight": {
+    "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "full_content_compared": true
+  },
+  "strict_method": "60 immutable original physical lines directly read and individually annotated; V1, provisional 5451/6462, S2-143 central 7635/9318 not promoted or counted again",
+  "post_pin_drift": "INCOMPLETE",
+  "tests": {
+    "immutable_blob_and_literals": "PASS_60_OF_60",
+    "runtime": "NOT_RUN_DOCS_ONLY",
+    "provider": "NOT_APPLICABLE"
+  },
+  "track": "PINNED_CURRENT_V2_DIRECT",
+  "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+  "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+  "source_parts": [
+    {
+      "index": 57,
+      "path": "scripts/audit/issue161-full-source-review.mjs",
+      "blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "start_line": 54,
+      "end_line": 75,
+      "original_physical_lines": 75,
+      "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8"
+    },
+    {
+      "index": 58,
+      "path": "scripts/audit/issue267-coverage-contract.mjs",
+      "blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "start_line": 1,
+      "end_line": 8,
+      "original_physical_lines": 121,
+      "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b"
+    }
+  ],
+  "new_direct_lines": 30,
+  "previous_receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C57-24-53-20261119-V13T.json",
+  "raw_blob_parity_verified": true,
+  "live_blob_parity_verified": true,
+  "findings": [
+    {
+      "severity": "INFORMATIONAL",
+      "path": "scripts/audit/issue161-full-source-review.mjs",
+      "line": 56,
+      "description": "line:0 in generated binary finding is file-level sentinel only."
+    },
+    {
+      "severity": "INFORMATIONAL",
+      "path": "scripts/audit/issue267-coverage-contract.mjs",
+      "line": 1,
+      "description": "Arithmetic-only coverage contract cannot certify semantic review."
+    }
+  ],
+  "per_line": [
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 54,
+      "source_literal": "   binaryFiles++;",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Increment count of binary tracked files, not textual semantic lines.",
+      "quality_bug_security_privacy_performance": "Local audit helper; possible coverage, path/report or fixture nuance, not reproduced app flaw.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue161-full-source-review.mjs",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Syntax/fixture check using text, disguised binary and critical-count probes; NOT_RUN.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 55,
+      "source_literal": "   if(/\\.(?:js|mjs|cjs|ts|tsx|jsx|json|sql|md|yml|yaml|sh|py|css|html)$/.test(path)){",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Conditionally flag binary bytes when path extension denotes source text.",
+      "quality_bug_security_privacy_performance": "Local audit helper; possible coverage, path/report or fixture nuance, not reproduced app flaw.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue161-full-source-review.mjs",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Syntax/fixture check using text, disguised binary and critical-count probes; NOT_RUN.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 56,
+      "source_literal": "    findings.push({path,line:0,rule:'unexpected_binary_source',risk:'critical'});",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Create critical unexpected_binary_source file-level finding; line0 is sentinel, not physical line.",
+      "quality_bug_security_privacy_performance": "Critical candidate flag uses line 0 file sentinel; not a physical reviewed line.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue161-full-source-review.mjs",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Isolated unexpected-binary fixture must emit line:0 finding without new line credit.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 57,
+      "source_literal": "    entry.findings++;counts.unexpected_binary_source=(counts.unexpected_binary_source||0)+1;",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Increment entry/global counts for binary source alert.",
+      "quality_bug_security_privacy_performance": "Local audit helper; possible coverage, path/report or fixture nuance, not reproduced app flaw.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue161-full-source-review.mjs",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Syntax/fixture check using text, disguised binary and critical-count probes; NOT_RUN.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 58,
+      "source_literal": "   }",
+      "inspection_class": "mechanically_trivial_direct_read",
+      "behavior": "Close extension-specific unexpected-binary conditional.",
+      "quality_bug_security_privacy_performance": "Local audit helper; possible coverage, path/report or fixture nuance, not reproduced app flaw.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue161-full-source-review.mjs",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Syntax/fixture check using text, disguised binary and critical-count probes; NOT_RUN.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 59,
+      "source_literal": "  }",
+      "inspection_class": "mechanically_trivial_direct_read",
+      "behavior": "Close binary branch of file scanner.",
+      "quality_bug_security_privacy_performance": "Local audit helper; possible coverage, path/report or fixture nuance, not reproduced app flaw.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue161-full-source-review.mjs",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Syntax/fixture check using text, disguised binary and critical-count probes; NOT_RUN.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 60,
+      "source_literal": "  files.push(entry);",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Append file entry to audited file array; report metadata, not raw secrets.",
+      "quality_bug_security_privacy_performance": "Local audit helper; possible coverage, path/report or fixture nuance, not reproduced app flaw.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue161-full-source-review.mjs",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Syntax/fixture check using text, disguised binary and critical-count probes; NOT_RUN.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 61,
+      "source_literal": " }",
+      "inspection_class": "mechanically_trivial_direct_read",
+      "behavior": "Close tracked-files loop.",
+      "quality_bug_security_privacy_performance": "Local audit helper; possible coverage, path/report or fixture nuance, not reproduced app flaw.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue161-full-source-review.mjs",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Syntax/fixture check using text, disguised binary and critical-count probes; NOT_RUN.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 62,
+      "source_literal": " return {schema_version:1,source_sha:sourceSha,tree_sha:treeSha,method:'Every tracked byte read. Every valid UTF-8 source line pattern screened. No source text or matched secret values in report. Findings need source-aware human review; not manual line-by-line certification.',",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Return method disclosure: all tracked bytes/patterns screened, not source-aware human certification.",
+      "quality_bug_security_privacy_performance": "Method itself disclaims semantic review; regex/byte scan is not a privacy/security PASS.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue161-full-source-review.mjs",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Syntax/fixture check using text, disguised binary and critical-count probes; NOT_RUN.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 63,
+      "source_literal": " totals:{tracked_files:files.length,total_bytes:totalBytes,text_files:textFiles,text_lines:textLines,binary_files:binaryFiles,invalid_json_files:invalidJSON,critical_candidates:findings.filter(x=>x.risk==='critical').length,review_candidates:findings.filter(x=>x.risk==='review').length},patterns:counts,files,findings};",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Return totals and pattern findings with critical/review candidate filters.",
+      "quality_bug_security_privacy_performance": "Local audit helper; possible coverage, path/report or fixture nuance, not reproduced app flaw.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue161-full-source-review.mjs",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Syntax/fixture check using text, disguised binary and critical-count probes; NOT_RUN.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 64,
+      "source_literal": "}",
+      "inspection_class": "mechanically_trivial_direct_read",
+      "behavior": "Close runAudit helper.",
+      "quality_bug_security_privacy_performance": "Local audit helper; possible coverage, path/report or fixture nuance, not reproduced app flaw.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue161-full-source-review.mjs",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Syntax/fixture check using text, disguised binary and critical-count probes; NOT_RUN.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 65,
+      "source_literal": "function main(){",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Declare direct-invocation CLI main.",
+      "quality_bug_security_privacy_performance": "Local audit helper; possible coverage, path/report or fixture nuance, not reproduced app flaw.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue161-full-source-review.mjs",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Syntax/fixture check using text, disguised binary and critical-count probes; NOT_RUN.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 66,
+      "source_literal": " const paths=execFileSync('git',['ls-files','-z'],{encoding:'utf8'}).split('\\0').filter(Boolean);",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Get tracked file paths via NUL-delimited git ls-files; child-process argv avoids shell interpolation.",
+      "quality_bug_security_privacy_performance": "Local audit helper; possible coverage, path/report or fixture nuance, not reproduced app flaw.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue161-full-source-review.mjs",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Synthetic temp checkout direct-CLI/import tests and report privacy scan; not run for this docs-only batch.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 67,
+      "source_literal": " const sourceSha=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Read current checkout HEAD SHA; does not inherently equal pinned historical source.",
+      "quality_bug_security_privacy_performance": "Local audit helper; possible coverage, path/report or fixture nuance, not reproduced app flaw.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue161-full-source-review.mjs",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Synthetic temp checkout direct-CLI/import tests and report privacy scan; not run for this docs-only batch.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 68,
+      "source_literal": " const treeSha=execFileSync('git',['rev-parse','HEAD^{tree}'],{encoding:'utf8'}).trim();",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Read current checkout HEAD tree SHA independently of HEAD commit.",
+      "quality_bug_security_privacy_performance": "Local audit helper; possible coverage, path/report or fixture nuance, not reproduced app flaw.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue161-full-source-review.mjs",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Synthetic temp checkout direct-CLI/import tests and report privacy scan; not run for this docs-only batch.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 69,
+      "source_literal": " const report=runAudit({paths,sourceSha,treeSha});",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Pass paths and source identities to runAudit; scanner remains candidate-only.",
+      "quality_bug_security_privacy_performance": "Local audit helper; possible coverage, path/report or fixture nuance, not reproduced app flaw.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue161-full-source-review.mjs",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Synthetic temp checkout direct-CLI/import tests and report privacy scan; not run for this docs-only batch.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 70,
+      "source_literal": " mkdirSync('qa_artifacts/issue161',{recursive:true});",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Create local qa_artifacts/issue161 output directory.",
+      "quality_bug_security_privacy_performance": "Local audit helper; possible coverage, path/report or fixture nuance, not reproduced app flaw.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue161-full-source-review.mjs",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Synthetic temp checkout direct-CLI/import tests and report privacy scan; not run for this docs-only batch.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 71,
+      "source_literal": " writeFileSync('qa_artifacts/issue161/full-tracked-source-line-audit.json',JSON.stringify(report,null,2)+'\\n');",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Write JSON audit report locally with trailing newline, path metadata and no matched secret body.",
+      "quality_bug_security_privacy_performance": "Local audit helper; possible coverage, path/report or fixture nuance, not reproduced app flaw.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue161-full-source-review.mjs",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Synthetic temp checkout direct-CLI/import tests and report privacy scan; not run for this docs-only batch.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 72,
+      "source_literal": " console.log('[Issue161 all tracked source] '+JSON.stringify({sourceSha,treeSha,...report.totals,patternCounts:report.patterns}));",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Print aggregate source/tree/totals/pattern counts to console.",
+      "quality_bug_security_privacy_performance": "Local audit helper; possible coverage, path/report or fixture nuance, not reproduced app flaw.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue161-full-source-review.mjs",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Synthetic temp checkout direct-CLI/import tests and report privacy scan; not run for this docs-only batch.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 73,
+      "source_literal": " if(report.totals.critical_candidates)process.exitCode=2;",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Return process exit status 2 on critical candidates; does not remediate findings.",
+      "quality_bug_security_privacy_performance": "Local audit helper; possible coverage, path/report or fixture nuance, not reproduced app flaw.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue161-full-source-review.mjs",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Synthetic temp checkout direct-CLI/import tests and report privacy scan; not run for this docs-only batch.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 74,
+      "source_literal": "}",
+      "inspection_class": "mechanically_trivial_direct_read",
+      "behavior": "Close CLI main.",
+      "quality_bug_security_privacy_performance": "Local audit helper; possible coverage, path/report or fixture nuance, not reproduced app flaw.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue161-full-source-review.mjs",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Synthetic temp checkout direct-CLI/import tests and report privacy scan; not run for this docs-only batch.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 75,
+      "source_literal": "if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url))main();",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Execute main only when argv path resolves to this module URL; imports should not write.",
+      "quality_bug_security_privacy_performance": "Local audit helper; possible coverage, path/report or fixture nuance, not reproduced app flaw.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue161-full-source-review.mjs",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Synthetic temp checkout direct-CLI/import tests and report privacy scan; not run for this docs-only batch.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 1,
+      "source_literal": "// Issue #267: audit arithmetic only. Never certify semantic review through this script.",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Comment explicitly restricts script to audit arithmetic rather than semantic certification.",
+      "quality_bug_security_privacy_performance": "Validator arithmetic is not semantic certification; standalone helper not evaluated in this batch.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Validate original source/tree/totals and interval overlap rejection using negative fixtures; NOT_RUN_DOCS_ONLY.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 2,
+      "source_literal": "import {readFileSync} from 'node:fs';",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Import filesystem readFileSync for local JSON sources.",
+      "quality_bug_security_privacy_performance": "Validator arithmetic is not semantic certification; standalone helper not evaluated in this batch.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Validate original source/tree/totals and interval overlap rejection using negative fixtures; NOT_RUN_DOCS_ONLY.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 3,
+      "source_literal": "import {fileURLToPath} from 'node:url';",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Import fileURLToPath to resolve module path on direct invocation.",
+      "quality_bug_security_privacy_performance": "Validator arithmetic is not semantic certification; standalone helper not evaluated in this batch.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Validate original source/tree/totals and interval overlap rejection using negative fixtures; NOT_RUN_DOCS_ONLY.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 4,
+      "source_literal": "",
+      "inspection_class": "mechanically_trivial_direct_read",
+      "behavior": "Blank boundary between imports and frozen constants.",
+      "quality_bug_security_privacy_performance": "Validator arithmetic is not semantic certification; standalone helper not evaluated in this batch.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Validate original source/tree/totals and interval overlap rejection using negative fixtures; NOT_RUN_DOCS_ONLY.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 5,
+      "source_literal": "const SOURCE='abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9';",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Freeze original historical source SHA for source-identity validation.",
+      "quality_bug_security_privacy_performance": "Validator arithmetic is not semantic certification; standalone helper not evaluated in this batch.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Validate original source/tree/totals and interval overlap rejection using negative fixtures; NOT_RUN_DOCS_ONLY.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 6,
+      "source_literal": "const TREE='c54ade64eca30946df8858297578a172f5cf6fa8';",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Freeze original historical tree SHA separately from commit.",
+      "quality_bug_security_privacy_performance": "Validator arithmetic is not semantic certification; standalone helper not evaluated in this batch.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Validate original source/tree/totals and interval overlap rejection using negative fixtures; NOT_RUN_DOCS_ONLY.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 7,
+      "source_literal": "const TOTALS={files:757,text:754,binary:3,lines:579961,bytes:32436318};",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Freeze manifest counts: 757 tracked, 754 UTF8, 3 binary, 579961 text lines and 32436318 bytes.",
+      "quality_bug_security_privacy_performance": "Validator arithmetic is not semantic certification; standalone helper not evaluated in this batch.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Validate original source/tree/totals and interval overlap rejection using negative fixtures; NOT_RUN_DOCS_ONLY.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 8,
+      "source_literal": "const key=r=>r.path+':'+r.first_line+'-'+r.last_line;",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Construct interval identity key from path/first_line/last_line; key alone does not prove non-overlap.",
+      "quality_bug_security_privacy_performance": "Validator arithmetic is not semantic certification; standalone helper not evaluated in this batch.",
+      "dead_obsolete_duplicate": "No proven obsolete/dead branch; source is unchanged at pinned and selected live commits; do not delete without tests.",
+      "counterpart_or_absence": {
+        "development_sha": "74d0f758e284a2b1909862669900f24ea8fa4f57",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 audit metadata; #96 Auth/privacy hosted acceptance separate"
+      },
+      "testability_remediation_opportunity": "Validate original source/tree/totals and interval overlap rejection using negative fixtures; NOT_RUN_DOCS_ONLY.",
+      "locked_fit": "Preserve Locked original603/captures/scorer, private records, Auth/privacy, Community, offline, archives; DEVELOPMENT ONLY without Publish/production/provider changes."
+    }
+  ],
+  "next_source": "C58:9"
+}
