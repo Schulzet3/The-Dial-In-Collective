@@ -13,6 +13,10 @@ export const selectedUrl='https://www.kindercoffeelab.com/products/avalon-light-
 export const selectedName='Munsinger Light Roast';
 export const norm=v=>String(v||'').normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
 const hash=x=>createHash('sha256').update(x).digest('hex');
+// Two contradictory selected-product notes must remain both blank and flagged.
+// A conflict flag cannot excuse silently populated canonical tasting notes.
+export const selected508ConflictHeld=(fields={},conflicts=[])=>
+ !String(fields?.tasting_notes??'').trim()&&Array.isArray(conflicts)&&conflicts.includes('tasting_notes');
 export function selected508(html){
  const own=productMarkup(String(html||'')),headings=selectedProductHeadings(own);
  const s=norm(own.replace(/<(script|style|noscript|template|nav|aside|footer|header)\b[^>]*>[\s\S]*?<\/\1>/gi,' ')
@@ -38,13 +42,14 @@ if(process.env.DIC_R359_VERIFY==='1'){
  check(norm(f.roast_level)==='light'&&norm(f.process)==='washed','selected_roast_process');
  check(norm(f.origin).includes('peru')&&norm(f.origin).includes('cajamarca'),'selected_origin');
  check(!f.producer&&!f.decaffeination_method,'no_grower_or_decaf_invention');
- check(!f.tasting_notes||(r.conflicts||[]).includes('tasting_notes'),'competing_selected_notes_not_silently_merged');
+ check(selected508ConflictHeld(f,r.conflicts),'competing_selected_notes_blank_and_explicit_conflict');
  check(!(r.seo_fallback_fields||[]).includes('tasting_notes'),'no_legacy_slug_or_SEO_sensory');
  check(e.manual_certified===0&&e.original_corpus_modified===false&&e.production_operations===0,'frozen_corpus_no_provider_writes');
  check(execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim()===process.env.DIC_R359_HEAD_SHA&&
  e.source_sha===process.env.DIC_R359_EVENT_SHA&&process.env.GITHUB_SHA===process.env.DIC_R359_EVENT_SHA,'event_source_parity');
  check(execFileSync('git',['rev-parse','HEAD:docs/audits/issue33-original603-source-level-adjudication-20261029.csv'],{encoding:'utf8'}).trim()==='3e0d3036ea727de091f304f538c6de2dfcaa10d6','unchanged_original_CSV_blob');
  const p=extractPublicCoffeeFacts(html,{source_url:r.final_url||selectedUrl});
+ check(selected508ConflictHeld(p?.fields,p?.conflicts),'actual_current_parser_notes_blank_with_explicit_conflict');
  check(p?.ok===true&&norm(p.fields?.name)===norm(selectedName)&&
   coffeeUrlPreviewMarkup(p).includes('coffee-url-preview')&&
   coffeeSourceReviewSnapshot({...p,source_url:r.final_url||selectedUrl})?.type==='coffee_source_review',
