@@ -1,3 +1,17 @@
+# Issue #509 R398 — core PostgreSQL point through SP-GiST definitions and slow-query attribution [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=f1abec04dccfdf410ab9c9895b72fd365e238a14 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-20 UTC.** Immutable live development preflight blob independently content-verified. Supabase `azviqqejypsefzilgonr` ACTIVE_HEALTHY PostgreSQL 17.11; production **READ-ONLY**. Main `57adc419ed4b106e158435b465971f5986537b41`; release/production `07f054f6470b2ae36b36faef8fb9a8161dd3bfb5` separately observed. No provider, publication, backup, billing or schedule writes.
+
+**New direct semantic provider review:** all **300** complete exposed `pg_catalog` f/p/w declarations ranks **2321–2620 of 3162**, **53,334/53,334 DDL characters**; 289 internal ABIs, 5 C ABIs, **6 full SQL bodies**. Each OID, full actual SQL/DDL, MD5, range 1–end, distinct semantic verdict and native-source UNVERIFIED limit recorded in [R398 immutable append-only ledger](../audits/issue509-r398-pg-catalog-point-through-spgist-20261120.json). Reviewed geometric, range/GiST, reg* OID types, regular expression overloads, SQL/XML, hashing, SP-GiST, RLS-introspection and sequence/session setters, plus all six complete SQL wrappers. State mutators inspected only, NEVER invoked. Zero non-system geometry columns or SP-GiST indexes, but core native overloads are not removable because app consumers are absent.
+
+**New useful performance attribution:** identified the two R397 high-mean cumulative fingerprints via *normalized-query structure only*, without raw query or private data: `4231681690601413654` is a `WITH` aggregate over `pg_stat_statements` (53 calls, 223.868ms mean, 89966 temp blocks); `1554751528326282872` is a `WITH` catalog/`information_schema` introspection aggregate (27 calls, 557.622ms mean, 1685894 shared-buffer hits). Statistics were cumulative since **2026-10-09 11:11:31 UTC**, not current request latency. These are **observability/metadata statements rather than business-table workload**; caller remains UNVERIFIED. Do not claim DIC app bottleneck or add indexes based on either. No newly reproduced application defect or safe deletion.
+
+**State:** baseline **IN_PROGRESS**, contiguous catalog coverage now **2620/3162**, separate 157 aggregate declarations still pending; no code/test/CI edits, new CI **NOT_APPLICABLE**, no #267 source-line credit, no READY/DEPLOYED assertion. **Next exact cursor:** rank **2621** `pg_catalog.spg_quad_leaf_consistent(internal, internal)` OID **4022**, character 1. Existing hourly schedule and owner-action notification policy retained.
+
+---
+
 # Issue #509 R397 — pg_catalog stats, WAL, text-search and PL/pgSQL exposed declarations [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=5845795587873d16dfbc79c4a964120aea38d844 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
