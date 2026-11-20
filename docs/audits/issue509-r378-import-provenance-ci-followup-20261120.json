@@ -1,0 +1,161 @@
+{
+  "run": "R378",
+  "date_utc": "2026-11-20",
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "authority": "development-only #509; no provider writes",
+  "preflight": {
+    "branch": "development/backend-foundation",
+    "source_sha": "b6ab7bf8214818890b76b435e56464dcb320bcb5",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "immutable_file_and_git_blob_byte_equal": true
+  },
+  "branches": {
+    "main": "57adc419ed4b106e158435b465971f5986537b41",
+    "release_production": "07f054f6470b2ae36b36faef8fb9a8161dd3bfb5"
+  },
+  "provider": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.11.0.003",
+    "edge_functions": 5,
+    "source": "live read-only Supabase project metadata and pg_get_functiondef"
+  },
+  "complete_live_sql_objects_directly_read": [
+    {
+      "signature": "private.apply_prototype_import(u uuid, doc jsonb)",
+      "source_chars": 16445,
+      "pg_get_functiondef_md5": "2af6a48d0fe80841fcc27c1f1d5532e3",
+      "read_range": "1-16445 characters",
+      "review": "complete definition inspected in provider; unchanged prior baseline, 0 first-time words"
+    },
+    {
+      "signature": "private.capture_equipment_snapshot()",
+      "source_chars": 1166,
+      "pg_get_functiondef_md5": "90c66b59638b48d360e9fd949db63707",
+      "read_range": "1-1166 characters",
+      "review": "complete definition inspected in provider; unchanged prior baseline, 0 first-time words"
+    },
+    {
+      "signature": "private.dic_backfill_library_contributions(p_owner uuid, p_entry uuid, p_canonical uuid)",
+      "source_chars": 2360,
+      "pg_get_functiondef_md5": "424a5c87c53165a918f7094bf67d25bb",
+      "read_range": "1-2360 characters",
+      "review": "complete definition inspected in provider; unchanged prior baseline, 0 first-time words"
+    },
+    {
+      "signature": "private.dic_recheck_after_link()",
+      "source_chars": 251,
+      "pg_get_functiondef_md5": "9fc3b44ef631cb87bc0b40e689c123b8",
+      "read_range": "1-251 characters",
+      "review": "complete definition inspected in provider; unchanged prior baseline, 0 first-time words"
+    },
+    {
+      "signature": "private.dic_review_community_shot(p_id uuid)",
+      "source_chars": 7734,
+      "pg_get_functiondef_md5": "c5aea4d32aa8027a39d80341feade406",
+      "read_range": "1-7734 characters",
+      "review": "complete definition inspected in provider; unchanged prior baseline, 0 first-time words"
+    },
+    {
+      "signature": "private.dic_submit_coffee_auto(mid uuid, p jsonb)",
+      "source_chars": 3771,
+      "pg_get_functiondef_md5": "e2b11c83a686a5a9949699cd23b52e13",
+      "read_range": "1-3771 characters",
+      "review": "complete definition inspected in provider; unchanged prior baseline, 0 first-time words"
+    },
+    {
+      "signature": "private.import_operation(expected_owner uuid, doc jsonb, save boolean, review_hash text, recovery_saved boolean)",
+      "source_chars": 3124,
+      "pg_get_functiondef_md5": "b684a6af862302d9d4bb7c212208f5e0",
+      "read_range": "1-3124 characters",
+      "review": "complete definition inspected in provider; unchanged prior baseline, 0 first-time words"
+    },
+    {
+      "signature": "private.project_shot()",
+      "source_chars": 3045,
+      "pg_get_functiondef_md5": "79e6fd0668fa4502c8785b3e92a14a61",
+      "read_range": "1-3045 characters",
+      "review": "complete definition inspected in provider; unchanged prior baseline, 0 first-time words"
+    },
+    {
+      "signature": "private.protect_shot_provenance()",
+      "source_chars": 683,
+      "pg_get_functiondef_md5": "9700d82ba097c7eba83b76135acbdac1",
+      "read_range": "1-683 characters",
+      "review": "complete definition inspected in provider; unchanged prior baseline, 0 first-time words"
+    },
+    {
+      "signature": "private.refresh_personal_family(fid uuid)",
+      "source_chars": 2134,
+      "pg_get_functiondef_md5": "e6a15e6de21f56345479574cc575cf95",
+      "read_range": "1-2134 characters",
+      "review": "complete definition inspected in provider; unchanged prior baseline, 0 first-time words"
+    },
+    {
+      "signature": "private.remember_feed_condition()",
+      "source_chars": 702,
+      "pg_get_functiondef_md5": "417b99a5145e27b5941b504d1d7509c1",
+      "read_range": "1-702 characters",
+      "review": "complete definition inspected in provider; unchanged prior baseline, 0 first-time words"
+    },
+    {
+      "signature": "public.dic_commit_import(expected_owner uuid, backup jsonb, review_hash text, recovery_saved boolean)",
+      "source_chars": 295,
+      "pg_get_functiondef_md5": "13e59d7da1efb928dc307f90a2e08dca",
+      "read_range": "1-295 characters",
+      "review": "complete definition inspected in provider; unchanged prior baseline, 0 first-time words"
+    },
+    {
+      "signature": "public.dic_preview_import(expected_owner uuid, backup jsonb)",
+      "source_chars": 239,
+      "pg_get_functiondef_md5": "001e3dd5b495ca6d1fd096bf35a473dd",
+      "read_range": "1-239 characters",
+      "review": "complete definition inspected in provider; unchanged prior baseline, 0 first-time words"
+    }
+  ],
+  "complete_sql_characters_reviewed": 41949,
+  "semantic_verdicts": [
+    "Import is limited deliberately to a personal schema-1 document <=2MB, one setup/version, 100 coffees, 2000 shots, 500 families; retired Experiment records rejected without silent loss.",
+    "Preview calls import inside a caught PostgreSQL exception block, so all preview INSERTs are rolled back; a reviewed identical-file hash and positive recovery gate are required before save.",
+    "Source document is stored only in the private import batch table; existing saved member workspace is not overwritten by first importer. No private row content read in this audit.",
+    "Historical shot snapshot arrives as validation input; BEFORE INSERT capture_equipment_snapshot reconstructs immutable persisted equipment snapshot, and protect_shot_provenance prevents subsequent accidental hardware/coffee reassignment.",
+    "Imported shots are tagged legacy_import, and remember_feed_condition explicitly skips their feed preference mutation, so textual import timestamp iteration cannot itself alter remembered slow-feed setting.",
+    "Coffee submission remains private/pending until separate verification. Canonical verification backfill checks dialed-in rating; existing hidden-shot behavior is historical compatibility needing product evidence before any cleanup, not inferred as a defect.",
+    "Read-only production aggregates: 1 import batch, 14 legacy import shots, 0 hidden shots, 0 hidden green shots, 0 hidden linked green shots, 0 verified submissions. No demonstrated live hidden Community anomaly.",
+    "No verified new reproducible incorrect behavior or measured bottleneck from these already-reviewed SQL bodies, so no speculative rewrite or index deletion."
+  ],
+  "ci_followup": {
+    "merged_commit": "afd799a98475d253a896a45f2dacd432f9964c88",
+    "approval_run": 44663957436,
+    "approval_result": "SUCCESS",
+    "browser_run": 44663957497,
+    "browser_jobs": [
+      "cloud-tests SUCCESS",
+      "mobile-browser-qa SUCCESS"
+    ],
+    "node22_run": 44663957447,
+    "node22_job_result": "CANCELLED",
+    "node22_steps": "Full checked-in Node tests succeeded; lint step cancelled. Therefore whole Node22 workflow is not PASS.",
+    "exact_source_certification": "NOT_COMPLETE",
+    "source_fix": "R377 already integrated in development; no duplicate patch",
+    "release": "TESTING"
+  },
+  "coverage": {
+    "new_provider_word_credit": 0,
+    "issue267_code_line_credit": 0,
+    "exhaustive_baseline": "IN_PROGRESS",
+    "provider_only_objects_semantically_crossreviewed": 13
+  },
+  "writes": {
+    "production_sql_data_auth_storage_edge_config": 0,
+    "source_code_tests_workflows": 0,
+    "publication": 0,
+    "backups_billing_schedule": 0
+  },
+  "limitations": [
+    "No actual import performance sample; historical rows not inspected.",
+    "Hosted Auth/API/Vault console settings and native managed behavior UNVERIFIED.",
+    "Node22 cancelled workflow does not constitute successful exact merged-source check."
+  ],
+  "next_cursor": "First genuinely new/changed or not-yet-completely-reviewed provider object; investigate new semantic defect or measured app bottleneck. Independently source-verify Node22 cancellation successor rather than count cancelled as PASS; candidate #3347 and hosted #96 remain pending."
+}
