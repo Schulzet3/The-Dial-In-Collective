@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {selected508,selectedUrl,selectedName,norm} from '../scripts/audit/issue33-r359-original508-check.mjs';
+import {selected508,selectedUrl,selectedName,norm,selected508ConflictHeld} from '../scripts/audit/issue33-r359-original508-check.mjs';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 import {requiredFocusedSourceFailures} from '../scripts/audit/issue33-focused-source-acceptance.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../site/cloud/coffee-url-autofill.js';
@@ -45,4 +45,21 @@ test('R359 current parser preview and review remain no-save',()=>{
  const p=extractPublicCoffeeFacts(html(),{source_url:selectedUrl});
  assert.equal(p.ok,true);assert.match(coffeeUrlPreviewMarkup(p),/coffee-url-preview/);
  assert.equal(coffeeSourceReviewSnapshot({...p,source_url:selectedUrl})?.type,'coffee_source_review');
+});
+
+test('R363 conflicting selected literal notes must yield blank canonical and explicit conflict',()=>{
+ assert.equal(selected508ConflictHeld({tasting_notes:null},['tasting_notes']),true);
+ assert.equal(selected508ConflictHeld({tasting_notes:'  '},['tasting_notes']),true);
+ for(const fields of [{tasting_notes:'Red Fruit, Candy, Grapefruit'},
+  {tasting_notes:'Red Grape, Fruity, Sugar-Like Sweetness, Citrus Acidity'},
+  {tasting_notes:'Both selected lists combined'}]){
+  assert.equal(selected508ConflictHeld(fields,['tasting_notes']),false,
+   'a conflict flag does not legitimize populated canonical sensory notes');
+ }
+});
+test('R363 missing or unrelated conflict markers never certify contradictory selected notes',()=>{
+ assert.equal(selected508ConflictHeld({tasting_notes:null},[]),false);
+ assert.equal(selected508ConflictHeld({tasting_notes:null},['roast_level']),false);
+ assert.equal(selected508ConflictHeld({tasting_notes:null},undefined),false);
+ assert.equal(selected508ConflictHeld({tasting_notes:null},'tasting_notes'),false);
 });
