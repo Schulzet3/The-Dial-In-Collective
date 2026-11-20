@@ -26,7 +26,7 @@ test('R353 sibling/SEO/footer facts excluded from selected product facts',()=>{
  assert.equal(s.exact,true);assert.equal(s.guji,false);assert.equal(s.natural,false);assert.equal(s.notes,false);
 });
 test('R353 selected Natural is not inferred merely from floating and drying cherries',()=>{
- const p=extractPublicCoffeeFacts(page('<p>Guji zone Ethiopia. Cherries float and dry on raised beds.</p>'),{source_url:selectedUrl});
+ const p=extractPublicCoffeeFacts(page('<p>Guji zone Ethiopia. Cherries float and dry on raised beds.</p>','ETHIOPIA GUJI ORGANIC DAMBI UDDO COFFEE'),{source_url:'https://mbingomountaincoffee.com/products/guji-dambi-uddo-coffee'});
  assert.equal(p.ok,true);assert.notEqual(norm(p.fields?.process),'natural');
 });
 test('R353 Body Light and Acidity Medium cannot be treated as a roast level',()=>{
