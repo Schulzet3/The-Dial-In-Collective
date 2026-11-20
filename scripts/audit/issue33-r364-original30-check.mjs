@@ -23,10 +23,11 @@ export function selected30(html){
    variety:body.includes('catuai')&&body.includes('caturra'),
    growers:['julia vega rodriguez','olman cruz vega','ricardo chavez garita','juan bautista mejia rojas'].every(s=>body.includes(s)),
    grade:body.includes('quality grade gold collection'),
+   tier:body.includes('our gold collection is reserved')&&body.includes('we selected el poeta for this tier'),
    elevationInconsistent:/5 200 feet.*1 100 masl/.test(body)};
 }
 export function unsafeUnsupportedValues(fields={},conflicts=[]){
- return Boolean(fields.roast_level||fields.release_label||fields.elevation_m)||
+ return Boolean(fields.roast_level||fields.elevation_m)||fields.release_label!=='Gold Collection'||
   !Array.isArray(conflicts)||!conflicts.includes('elevation_m');
 }
 if(process.env.DIC_R364_VERIFY==='1'){
@@ -41,10 +42,10 @@ if(process.env.DIC_R364_VERIFY==='1'){
  check(buf?.length>1000&&r.html_bytes===buf?.length&&r.html_sha256===digest(buf||''),'raw_source_sha256');
  check(source.identity&&r.selected_heading_identity_verified&&norm(f.name)===norm(selectedName),'current_selected_H1_not_recycled_Guatemala');
  check(source.notes&&source.origin&&source.process&&source.variety&&source.growers,'current_direct_selected_fields');
- check(source.grade&&source.elevationInconsistent,'direct_ambiguous_grade_and_altitude');
+ check(source.grade&&source.tier&&source.elevationInconsistent,'direct_selected_corroborated_named_tier_and_ambiguous_altitude');
  check(norm(f.process)==='washed'&&norm(f.origin).includes('costa rica'),'current_origin_process');
  check(['brown sugar','hibiscus','raspberry','honey'].every(v=>norm(f.tasting_notes).includes(v)),'four_direct_selected_flavors');
- check(!unsafeUnsupportedValues(f,r.conflicts),'no_roast_from_related_menu_no_grade_as_release_no_arbitrary_altitude');
+ check(!unsafeUnsupportedValues(f,r.conflicts),'own_Gold_Collection_tier_kept_no_related_roast_no_arbitrary_altitude');
  check(!(r.seo_fallback_fields||[]).includes('tasting_notes'),'no_unrelated_SEO_flavors');
  check(e.manual_certified===0&&!e.original_corpus_modified&&e.production_operations===0,'original603_not_certified_or_mutated');
  check(execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim()===process.env.DIC_R364_HEAD_SHA &&
@@ -55,7 +56,7 @@ if(process.env.DIC_R364_VERIFY==='1'){
   coffeeUrlPreviewMarkup(p).includes('coffee-url-preview')&&
   coffeeSourceReviewSnapshot({...p,source_url:r.final_url||selectedUrl})?.type==='coffee_source_review',
   'actual_current_parser_Add_Coffee_Source_Review_no_save');
- check(!unsafeUnsupportedValues(p.fields,p.conflicts),'current_parser_withholds_unsupported_grade_roast_conflicting_altitude');
+ check(!unsafeUnsupportedValues(p.fields,p.conflicts),'current_parser_keeps_own_tier_and_withholds_unsupported_roast_and_altitude');
  const output={passed:!errors.length,errors,source_sha:process.env.DIC_R364_HEAD_SHA,event_sha:process.env.DIC_R364_EVENT_SHA,
   current_selected:source,raw_html_bytes:buf?.length||0,raw_html_sha256:buf?digest(buf):null,
   fields:f,conflicts:r.conflicts||[],parser_fields:p?.fields||{},parser_conflicts:p?.conflicts||[],
