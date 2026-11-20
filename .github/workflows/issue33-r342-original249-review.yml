@@ -1,0 +1,56 @@
+name: DIC Issue33 R342 original249 Source Review role evidence
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r342-original249-review.yml
+      - src/server/coffee-source-facts.mjs
+      - scripts/audit/issue33-r342-original249-review-check.mjs
+      - tests/coffee-issue33-r342-original249-review.test.mjs
+      - docs/workstreams/ops-issue33-r342-original249-review-20261119.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r342-original249-review.yml
+      - src/server/coffee-source-facts.mjs
+      - scripts/audit/issue33-r342-original249-review-check.mjs
+      - tests/coffee-issue33-r342-original249-review.test.mjs
+      - docs/workstreams/ops-issue33-r342-original249-review-20261119.md
+permissions:
+  contents: read
+jobs:
+  original249-review-roles:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Targeted positive and adversarial Source Review tests
+        run: node --test tests/coffee-issue33-r342-original249-review.test.mjs
+      - name: Guarded first-party exact original249 public source
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '249'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r342
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Selected raw HTML H1 parser and review afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r342
+          DIC_R342_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_R342_EVENT_SHA: ${{ github.sha }}
+          DIC_R342_VERIFY: '1'
+        run: node scripts/audit/issue33-r342-original249-review-check.mjs
+      - name: One-day public-only evidence bundle
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r342-original249-review
+          path: /tmp/dic33-r342/
+          retention-days: 1
+          if-no-files-found: warn
