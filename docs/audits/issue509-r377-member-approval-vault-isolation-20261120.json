@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R377",
+  "date_utc": "2026-11-20",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "0a08e269a919110a0beaaef253be1e9dfb38775d",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "byte_match": true
+  },
+  "base_tree_sha": "9ebb56cb3b31638bce91e24a580d9991d395a79e",
+  "source": {
+    "core": "supabase/functions/dic-member-approval-broker/core.mjs",
+    "previous_blob": "113ffd9ac7bc45839a0566da8837edd22352adf2",
+    "test": "tests/issue2258-member-approval-notices.test.mjs",
+    "previous_test_blob": "9ebf20df39d311d8d743ee6eb8b7b443584ec712"
+  },
+  "finding": "Unconditional polling of Vault push keys blocks independent approval email on a failing key RPC; zero-device polls need not read Vault",
+  "fix": "Lazy memoized push-only key retrieval and independent email continuation",
+  "tests": [
+    "503 key endpoint => push RETRY, Resend email SENT",
+    "zero push endpoints => Vault not called, push SKIPPED and email SENT"
+  ],
+  "provider": {
+    "name": "The Dial In Collective",
+    "ref": "azviqqejypsefzilgonr",
+    "status": "ACTIVE_HEALTHY",
+    "read_only": true,
+    "edge_broker_version": 1
+  },
+  "source_ci": "PENDING_UNOBSERVED",
+  "production_changes": 0,
+  "first_time_provider_words": 0,
+  "issue267_line_credit": 0,
+  "release": "TESTING",
+  "baseline": "IN_PROGRESS"
+}

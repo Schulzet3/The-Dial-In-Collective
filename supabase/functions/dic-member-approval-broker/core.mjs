@@ -142,7 +142,9 @@ export function createMemberApprovalBroker({
    if(Object.keys(input).length!==1)return denied(400);
    if(await rpc('dic_member_approval_claim_poll')!==true)return reply({ok:true,handled:0});
    let handled=0,failed=0,unconfigured=false;
-   const key=await keys();
+   // Push-only signing keys must not block independent approval emails.
+   let pollKeyPromise;
+   const pollKeys=()=>pollKeyPromise??=keys();
    const sendPush=async(endpoint,keyData)=>{
     const safe=safeEndpoint(endpoint);if(!safe)throw Error('Untrusted endpoint');
     const auth=await vapidAuthorization(safe,keyData,now);
@@ -183,6 +185,7 @@ export function createMemberApprovalBroker({
        if(!Array.isArray(endpoints)||endpoints.length>3)throw Error('Invalid device list');
        if(!endpoints.length)outcome='skipped';
        else {
+        const key=await pollKeys();
         if(!key)throw Error('Vault key unavailable');
         const checks=await Promise.allSettled(endpoints.map(async ep=>{
          if(!HASH.test(String(ep?.hash||''))||!safeEndpoint(ep?.endpoint)||

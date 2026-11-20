@@ -1,3 +1,13 @@
+# Issue #509 — R377 independent approval-email delivery survives Vault outage; development TESTING [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=0a08e269a919110a0beaaef253be1e9dfb38775d preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-20 UTC.** Verified live development ref and immutable PREFLIGHT Git blob/content before all other GitHub/provider reads. Confirmed Supabase ACTIVE_HEALTHY PG17.11; current broker ACTIVE v1 and existing #2258 Locked separation of approval email and opted-in push. Directly reviewed complete deployed/development broker logic and synthetic test fixture. **Correctness repair prepared for isolated GitHub development PR only**: remove unconditional poll-time Vault signing-key RPC, lazily memoize push key retrieval only for nonempty device batches. Vault HTTP 503 now yields push RETRY while independent Resend email still sends/acknowledges. Zero-device push is SKIPPED with no Vault read. New isolated Node22 regressions assert both failure and empty-device paths. Preserve idempotency, service-only credentials, no member data in push, real-member assurance delegated to #2258/#96. Pre-existing deployed source is still unfixed; no production deployment or SQL/Auth/Storage modifications.
+
+**Proof stage:** source/test/ledger and this NEW exact preflight receipt are in one proposed Git tree based on `0a08e269a919110a0beaaef253be1e9dfb38775d`. Exact-source GitHub CI and PR integration PENDING, never report PASS/READY from an untested commit; queue stays TESTING. R376 error classified as dormant correctness bug, not observed live incident. No first-time provider word or #267 original/current code-line audit credit; previously reviewed broker body changed only in proposed source. Full baseline IN_PROGRESS. Next inspect PR-head Node22/approval/SQL/browser, repair failures before nonforce merge; continue truly new provider semantic coverage and candidate #3347 isolation. No owner action required.
+
+---
+
 # Issue #509 — R376 approval-notice Vault dependency correctness review; code fix TESTING NOT STAGED [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=7b35b2d5c6d7d5f72abb59b6d93227c7f961791d preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
