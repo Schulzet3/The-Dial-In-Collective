@@ -1,3 +1,11 @@
+# Issue #509 R386b — repair mandatory app-source release-queue intake [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=33ec76a7fb73a5057c4c3d075729ca0262e999c1 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-20 UTC.** Read back exact GitHub PR #3504 head `117ac0464a8b508757af09c23033b10e86c94e21`, initial approval job [44730707746](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44730707746) FAILED only because the new `supabase/functions/dic-admin-push-broker/core.mjs` source was not yet represented in `docs/RELEASE_QUEUE.json`. Recovered all 440 preexisting entries without mutation and inserted a single independent **TESTING** intake `DIC-Q-509-r386-admin-push-lazy-vault`, linking the R383 diagnostic, R386 source/test blobs, applicable exact-source CI and remaining #3347 nonpublishing certification. Initial failure remains recorded as FAIL; recheck successor PR-head checks before merger. This is a metadata/journal-only repair, **no source/test file changes in this commit**. Production read-only/unmodified; no publication, provider, backup, schedule, billing or owner notification policy change.
+
+---
+
 # Issue #509 R386 — pg_catalog full exposed declarations and Admin push Vault no-op fix [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=33ec76a7fb73a5057c4c3d075729ca0262e999c1 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e

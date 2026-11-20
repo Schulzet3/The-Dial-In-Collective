@@ -8,6 +8,36 @@
   },
   "items": [
     {
+      "id": "DIC-Q-509-r386-admin-push-lazy-vault",
+      "issue": 509,
+      "pr": 3504,
+      "title": "Skip unnecessary Vault signing-key lookup on no-op Admin Web Push polls",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/functions/dic-admin-push-broker/core.mjs"
+      ],
+      "owner_source": "Issue #509 R383/R386 autonomous development-only repair; DIC_PREFLIGHT_VERIFIED development_sha=33ec76a7fb73a5057c4c3d075729ca0262e999c1 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e; source blob e1a467cc0bb9d94ea824953eec88aaf8d6c428dd",
+      "tests": [
+        "Read-only full live Supabase Edge core.mjs 9706 chars equal immutable source; no-op polls still read Vault unconditionally, allowing transient key RPC failure to abort otherwise-actionless scans. No live failure induced or observed.",
+        "PR #3504 initial head 117ac0464a8b508757af09c23033b10e86c94e21 has four focused synthetic Node22 regression cases for no-op under Vault failure, concurrent three-device delivery, actionable Vault 503 and missing-key retry; exact-source Node22/browser checks PENDING.",
+        "Initial PR-head governance run 44730707746 FAILED only on missing queue intake for changed Edge core.mjs; this TESTING entry fixes intake. A new exact-source governance pass is mandatory, do not relabel the first failure.",
+        "Initial PR-head source-security run 44730707823 SUCCESS and isolated SQL run 44730707891 SUCCESS; frozen coffee corpus 44730707749 SKIPPED and is not PASS."
+      ],
+      "ci_runs": [
+        44730707746,
+        44730707823,
+        44730707891,
+        44730707749
+      ],
+      "blockers": [
+        "Corrected PR-head Node22/lint, cloud/browser, approval/governance and applicable exact-source checks must complete SUCCESS before nonforce merge and merged-source readback.",
+        "Independent #3347 release candidate source isolation/certification and separate owner Publish required; production Supabase Edge remains unchanged."
+      ],
+      "notes": "Development-only safe correction; no historical migration, Auth/RLS/Storage, user records, provider keys, production SQL/Edge/config/data, publication, backup or billable branch changes. Existing #1938 real-device acceptance remains UNVERIFIED.",
+      "production_deployed": false
+    },
+    {
       "id": "DIC-Q-455-r381-recommendation-copy-accessible-names",
       "issue": 455,
       "pr": 3473,
