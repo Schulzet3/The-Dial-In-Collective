@@ -5,9 +5,10 @@ import https from 'node:https';
 import {createHash} from 'node:crypto';
 import {mkdirSync,writeFileSync} from 'node:fs';
 import {join,resolve} from 'node:path';
-import {safeCoffeeUrl,guardedLookup,fetchPublicCoffeeHtml,fetchPublicCoffeeJson,MAX_HTML_BYTES,MAX_PRODUCT_RETRY_BYTES} from '../../src/server/coffee-url-guard.mjs';
+import {safeCoffeeUrl,guardedLookup,fetchPublicCoffeeHtml,MAX_HTML_BYTES,MAX_PRODUCT_RETRY_BYTES} from '../../src/server/coffee-url-guard.mjs';
 import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
 import {selectedProductHeadings} from './issue33-selected-product-heading.mjs';
+import {source241} from './issue33-r171-241-check.mjs';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../../site/cloud/coffee-url-autofill.js';
 
@@ -19,6 +20,7 @@ const norm=x=>String(x??'').normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase(
 export function classify241Transport({original={},canonical={}}={}){
  const match=x=>x.ok===true&&x.selected_identity===true&&x.parser_ok===true&&
   x.add_coffee_rendered===true&&x.source_review_rendered===true&&
+  x.selected_sensory_verified===true&&
   /^[0-9a-f]{64}$/.test(x.html_sha256||'')&&Number(x.html_bytes)>0;
  return match(original)||match(canonical)?'CURRENT_SELECTED_PRIMARY_HTML_AND_PARSER_OBSERVED':'UNAVAILABLE_NO_PRIMARY_PROOF';
 }
@@ -46,11 +48,14 @@ async function headRedirect(){
  });
 }
 async function htmlProbe(url,label,dir){
- const r=await fetchPublicCoffeeHtml(url,{maxBytes:MAX_PRODUCT_RETRY_BYTES});
+ // Suppress automatic redirects: original GET, canonical GET and first-party Store GET
+ // each consume exactly ONE bounded network request. No challenge bypass.
+ const r=await fetchPublicCoffeeHtml(url,{maxBytes:MAX_PRODUCT_RETRY_BYTES},0);
  if(!r?.ok)return {ok:false,reason:r?.reason||'source_unavailable'};
  const html=r.html||'',source=r.source_url||url;
  const selected=selectedProductHeadings(productMarkup(html));
  const identity=selected.length===1&&norm(selected[0])==='buesaco';
+ const seller=identity?source241(html):null;
  let parser,preview=false,review=false;
  if(identity){
   try{
@@ -62,16 +67,23 @@ async function htmlProbe(url,label,dir){
    }
   }catch{parser={ok:false,reason:'parser_or_review_exception'}}
  }
+ const conflict=(parser?.conflicts||[]).some(x=>(typeof x==='string'?x:(x?.field||x?.key))==='tasting_notes');
+ const sensory=!!seller?.identity&&!!seller?.distinct_selected_lists&&
+   Object.values(seller.direct||{}).every(Boolean)&&conflict&&
+   !parser?.fields?.tasting_notes&&!parser?.fields?.espresso_recipe&&
+   norm(parser?.fields?.process)==='washed';
  const summary={ok:true,source_url:source,html_bytes:Buffer.byteLength(html,'utf8'),
   html_sha256:hash(html),selected_h1:selected.slice(0,2),selected_identity:identity,
   parser_ok:parser?.ok===true,parser_reason:parser?.reason||null,
   add_coffee_rendered:preview,source_review_rendered:review,
+  selected_sensory_verified:sensory,selected_conflicts:identity?parser?.conflicts||[]:[],
   canonical_fields:identity&&parser?.ok===true?parser.fields||{}:{}};
  if(identity)writeFileSync(join(dir,label+'.html'),html,'utf8');
  return summary;
 }
 async function storeProbe(){
- const r=await fetchPublicCoffeeJson(STORE,{maxBytes:MAX_HTML_BYTES});
+ // One JSON GET, no redirect following and no use as selected HTML.
+ const r=await fetchPublicCoffeeHtml(STORE,{maxBytes:MAX_HTML_BYTES,responseType:'json'},0);
  if(!r?.ok)return {ok:false,reason:r?.reason||'store_unavailable'};
  try{
   const j=JSON.parse(r.json||'null'),items=Array.isArray(j)?j:[];
