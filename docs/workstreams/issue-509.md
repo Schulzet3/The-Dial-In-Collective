@@ -1,3 +1,17 @@
+# Issue #509 R394 — PostgreSQL log, multirange and network declarations [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=3754f0342a5c5656864e2ec3b63f43a6bd746f17 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-20 UTC.** Independently verified mandatory immutable development preflight, project `azviqqejypsefzilgonr` ACTIVE_HEALTHY PG17.11. Production database strictly READ ONLY; no SQL DDL/DML/Edge/Auth/Storage/config/backup/publish change. Main `57adc419ed4b106e158435b465971f5986537b41`; release/production `07f054f6470b2ae36b36faef8fb9a8161dd3bfb5` independently read.
+
+**New exact provider review:** Continuously advanced `pg_catalog` f/p/w ranks **1521–1720 of 3162**, **200/200 complete exposed DDL declarations**, **36612/36612 actual SQL definition characters**, full texts, per-object identities/OIDs, MD5, exact 1-end character ranges, semantics, flags, native compiled limitations and verdicts in [R394 append-only audit ledger](../audits/issue509-r394-pg-catalog-log-multirange-network-20261120.json). **2 full LANGUAGE SQL bodies; 183 native internal and 15 C external ABI declarations**; compiled implementation source **UNVERIFIED** and not credited. **Zero #267 source-code lines.**
+
+**New semantic checks:** `log10(numeric)` delegates to numeric log base 10, two-arg `lpad` delegates to space-filled three-arg form. `make_timestamptz` both with and without explicit-zone argument are correctly marked STABLE; `nextval` is VOLATILE with sequence mutation and was not invoked; `loread/lowrite` never called. `multirange_*` typed operators/aggregate helpers/GiST ABI, `macaddr*` comparisons and `mic_to_*` C encoding conversions are PostgreSQL core; no demonstrated DIC bug, unused removable object, or measurable performance flaw. Live read-only consumer aggregate: 8 sequences, 2 inet/cidr columns in Auth, 5 bytea and 203 date/time columns; 0 macaddr/money/range/multirange application columns is insufficient proof of no indirect consumers. C/internal implementations are not available for binary-level inspection. No fabricated word-level audit of native implementation.
+
+**State:** Full provider-wide baseline **IN_PROGRESS**. No source/test/CI edits; newly run CI NOT_APPLICABLE; previously merged Admin-push lazy-Vault source change remains under prior TESTING release controls, no fresh READY/DEPLOYED assertion. No new material owner-action blocker/risk. Queue/status on inaccessible huge GitHub files left UNVERIFIED, not changed. **Next exact new catalog cursor: rank 1721, first character 1; separate 157 aggregates remain pending.** Keep hourly schedule and owner-action alert policy.
+
+---
+
 # Issue #509 R393 — PostgreSQL integer/JSON/large-object exposed definitions [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=5fd194cf7d01282643c01601b5d014160eedfb72 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
