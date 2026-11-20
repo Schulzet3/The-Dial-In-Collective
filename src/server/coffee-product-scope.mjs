@@ -47,7 +47,8 @@ const isNavigation=(node,attrs)=>/^(?:navigation|menubar|menu)$/i.test(attrs.rol
 // The product body may be nested beside a div.breadcrumbs rather than <nav>.
 // Exclude only bounded, explicitly named breadcrumb wrappers, never the product.
 const isBreadcrumb=(node,attrs)=>['div','section','ol','ul','aside'].includes(node.tag)&&
- (/(?:^|[\\t\\n\\f\\r ])(?:breadcrumb|breadcrumbs|woocommerce-breadcrumb)(?:$|[\\t\\n\\f\\r ])/i.test(attrs.class||'')||
+ (String(attrs.class||'').split(/\s+/).some(value=>
+   /^(?:breadcrumb|breadcrumbs|woocommerce-breadcrumb)$/i.test(value))||
   /^breadcrumbs?$/i.test(attrs.role||'')||
   /^breadcrumbs?$/i.test(attrs['aria-label']||''));
 const isProductCostAside=(node,attrs)=>node.tag==='aside'&&

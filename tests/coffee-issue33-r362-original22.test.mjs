@@ -57,3 +57,11 @@ test('R362 current selected direct Roast Level outranks unrelated Light Roast na
  const p=extractPublicCoffeeFacts(html(selectedName,direct+'<p>Roast Level: Dark</p>'),{source_url:selectedUrl});
  assert.equal(p.ok,true);assert.equal(p.fields?.roast_level,'Dark');
 });
+
+test('R362 multi-class selected-product breadcrumb also stays out of canonical source scope',()=>{
+ const marked=html().replace('class="breadcrumbs"','class="layout breadcrumbs mobile"');
+ const p=extractPublicCoffeeFacts(marked,{source_url:selectedUrl});
+ assert.equal(p.ok,true);
+ assert.equal(p.fields?.roast_level,undefined);
+ assert.equal(norm(p.fields?.name),norm(selectedName));
+});
