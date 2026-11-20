@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "scope": "Issue #33 original603 #295 selected current product bounded semantic evidence only",
+  "date_utc": "2026-11-20",
+  "owner_permission": "Development-only selected public HTTPS source review; no release/provider writes",
+  "first_preflight": {
+    "development_sha": "cad942e5ccec3e113510d28b75532813d7ae34a0",
+    "preflight_git_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e"
+  },
+  "exact_git": {
+    "pull_request": 3478,
+    "head": "f0f93d8acb814004ea3bf025c5ae7807c71f90ec",
+    "merged": "91de71af165a246a00a23fa7ed3a3219725cf5ac",
+    "frozen_csv_git_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6"
+  },
+  "official_selected_source": {
+    "url": "https://seldoviaroastingco.com/products/gentle-cove",
+    "selected_h1": [
+      "Gentle Cove",
+      "Gentle Cove Decaf"
+    ],
+    "html_bytes": 270072,
+    "merged_html_sha256": "72dca1aac8cedf5607e31030ce2c5a20ee9b6ca08acafc4f8b98e1e0c034c388",
+    "merged_artifact_id": 14600748503,
+    "merged_artifact_zip_sha256": "05ad0327177499d7459dfd852639f50d54c85047ab0367708546598f8617c20e",
+    "evidence_json_sha256": "8310bd194d4e0f98984b11c5e381d1b3481c344870af8e8ea5275771c8e26000",
+    "afterproof_json_sha256": "c49abd12169cdebe88d9ccf9d65a7029109c09a4ff72e333ad52af0c94cbcdb1",
+    "artifact_retention_days": 1,
+    "source_fetch": "bounded_guarded_public_official_https",
+    "afterproof_passed": true,
+    "afterproof_errors": [],
+    "selected_current_fields": {
+      "name": "Gentle Cove",
+      "roaster": "Seldovia Roasting Co.",
+      "origin": "South America",
+      "roast_level": "Medium",
+      "tasting_notes": "Smooth body with a soft, rounded feel, Light caramel sweetness, Gentle cocoa finish, Balanced and comforting from start to finish"
+    },
+    "direct_selected_literal_roles": [
+      "Flavor Notes",
+      "Roast Level: Medium",
+      "Gentle Cove Decaf",
+      "two South American beans"
+    ],
+    "no_supported_value": [
+      "specific countries/origins for blend components",
+      "green processing",
+      "named decaffeination method",
+      "producer",
+      "variety",
+      "current harvest/lot"
+    ],
+    "interpretation": [
+      "Light caramel sweetness is a sensory adjective not a Light roast",
+      "materials/care/shipping are not coffee data",
+      "two South American beans are insufficient for component identities",
+      "no speculative sugar/water/EA decaf process",
+      "customer must explicitly Add Coffee; preview and source review do not save"
+    ]
+  },
+  "CI": {
+    "initial_red": {
+      "workflow_run": 44672055220,
+      "overall": "FAILURE",
+      "synthetic": {
+        "pass": 5,
+        "fail": 3
+      },
+      "actual_guarded_official_afterproof_passed": true,
+      "root_cause": "synthetic nested secondary H1 made a provisional invalid product fixture; real source has correct distinct selected H1s"
+    },
+    "corrected_PR_head": {
+      "run_source": 44672189649,
+      "focused_tests_pass": 8,
+      "focused_tests_fail": 0,
+      "source_afterproof_pass": true,
+      "node_run": 44672189594,
+      "node_pass": 5835,
+      "node_fail": 0,
+      "node_intentional_skip": 6,
+      "cloud_mobile_run": 44672189722,
+      "approval_run": 44672189617,
+      "isolated_sql_run": 44672189724,
+      "python_run": 44672189641,
+      "imported_source_run": 44672189643
+    },
+    "merged": {
+      "source_run": 44673018201,
+      "source_status": "SUCCESS",
+      "focused_tests_pass": 8,
+      "focused_tests_fail": 0,
+      "node_run": 44673018197,
+      "node_status": "SUCCESS",
+      "node_pass": 5835,
+      "node_fail": 0,
+      "node_intentional_skip": 6,
+      "lint": "PASS",
+      "mobile_cloud_run": 44673018338,
+      "mobile_cloud_status": "SUCCESS",
+      "approval_run": 44673018224,
+      "approval_status": "SUCCESS",
+      "python_run": 44673018321,
+      "python_status": "SUCCESS",
+      "imported_source_run": 44673018328,
+      "imported_source_status": "SUCCESS"
+    },
+    "frozen_original603_job": "SKIPPED (not a PASS or individual certification)"
+  },
+  "limits": {
+    "current_sale_lot_certified": false,
+    "all_603_manually_semantically_certified": false,
+    "signed_in_GoTrue_or_real_device_test": false,
+    "production_or_provider_writes": 0,
+    "queue_ready_promotion": false,
+    "issue33_still_open": true
+  },
+  "next": "Independently adjudicate next disjoint current official selected-product cases (#296/#297 are candidates; check concurrent work first), source identity/lot exceptions, source review blanks; only change current parser on independently reproduced defect."
+}
