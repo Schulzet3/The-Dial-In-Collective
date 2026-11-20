@@ -42,7 +42,7 @@ if(process.env.DIC_R344_VERIFY==='1'){
  check(!f.roast_level&&!f.producer&&!f.decaffeination_method,'no_tea_body_to_roast_or_unpublished_producer_decaf');
  check(!(r.seo_fallback_fields||[]).some(k=>['name','origin','process','variety','tasting_notes'].includes(k)),'no_SEO_backfill_of_selected_facts');
  check(evidence.manual_certified===0&&evidence.original_corpus_modified===false&&evidence.production_operations===0,'no_global_certification_or_provider_ops');
- check(execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim()===process.env.DIC_R344_HEAD_SHA&&evidence.source_sha===process.env.DIC_R344_HEAD_SHA&&process.env.GITHUB_SHA===process.env.DIC_R344_EVENT_SHA,'exact_PR_head_checkout_and_event_sha');
+ check(execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim()===process.env.DIC_R344_HEAD_SHA&&evidence.source_sha===process.env.DIC_R344_EVENT_SHA&&process.env.GITHUB_SHA===process.env.DIC_R344_EVENT_SHA,'exact_PR_head_checkout_and_event_sha');
  check(execFileSync('git',['rev-parse','HEAD:docs/audits/issue33-original603-source-level-adjudication-20261029.csv'],{encoding:'utf8'}).trim()==='3e0d3036ea727de091f304f538c6de2dfcaa10d6','frozen_csv_git_blob');
  const parsed=extractPublicCoffeeFacts(raw,{source_url:r.final_url||selectedUrl});
  check(parsed?.ok===true&&norm(parsed.fields?.name)===norm(selectedName),'actual_current_parser');
