@@ -17519,24 +17519,39 @@
       "issue": 509,
       "title": "Avoid Vault key lookup for idle Admin push polls; cache one lookup for actionable devices",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "cbbe8bc71fdc0a8ad492cbc77cf97c7367f31d72",
       "scope_paths": [
         "supabase/functions/dic-admin-push-broker/core.mjs"
       ],
       "owner_source": "Issue #509 R383 validated live source; R388 development fix. DIC_PREFLIGHT_VERIFIED development_sha=f2daba164a6c6c003c1261576b4a0e7b21dcbb12 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e. Production Edge unchanged.",
       "tests": [
-        "R383 full deployed Edge v3 source verified equal to development pre-fix; unnecessary keys RPC before no-op subscription snapshot confirmed.",
-        "New isolated synthetic Node22 regressions for no-action/revoked/no-token polls without keys, two-device single-key lookup, actionable Vault outage and absent-key retries.",
-        "Exact PR-head Node22/lint/build, browser, approval/continuity and source relevant checks PENDING; merged-source and #3347 isolated READY five-check acceptance NOT VERIFIED."
+        "R383: production Edge v3 source verified byte-equal to pre-fix blob e1a467cc0bb9d94ea824953eec88aaf8d6c428dd; on idle polls Vault RPC unnecessarily executed before no-action gate.",
+        "R388: five isolated synthetic Node22 regression cases, code+tests+journal+TESTING queue atomically committed at PR head 8a06bf4a; R388a repaired false-positive fixture token scanning at eff7c549 with same-commit journal.",
+        "Exact PR #3511 final head eff7c5497d690f6435fdaa55b6356494f16a5c7f: Node22/build 44740390715 SUCCESS, browser/cloud 44740390517 SUCCESS, approval 44740390582 SUCCESS, isolated SQL 44740390516 SUCCESS, source security 44740390548 SUCCESS, #33 selected241 44740390634 SUCCESS, #33 selected251 44740390504 SUCCESS. Frozen original603 44740390567 SKIPPED (not PASS).",
+        "Nonforce explicit [skip netlify] squash merged into development cbbe8bc71fdc0a8ad492cbc77cf97c7367f31d72: source blob 94027e63493e720bc137b43e0d468741b780d92b and test blob 4d2f213b91b1d0f31b73b0df1aef28fcb2d412ec exactly match passed PR head.",
+        "Exact merged-source approval 44741312042, browser 44741312030, Node22/build 44741312123 SUCCESS. Concurrent #33 original241 44741312173 FAILED from external official site source_access_challenge, not app-code assertion; independent owner #33 follow-up. Actual live Supabase Edge dic-admin-push-broker remains v3 bundle ca7ce5f9, old source, no deployment."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        44740390715,
+        44740390517,
+        44740390582,
+        44740390516,
+        44740390548,
+        44740390634,
+        44740390504,
+        44740390567,
+        44741312042,
+        44741312030,
+        44741312123,
+        44741312173
+      ],
       "blockers": [
-        "All applicable exact-source PR-head CI and development nonforce merge, merged-source checks not yet passed.",
-        "Source-isolated nonpublishing READY candidate five checks and #96 real handset delivery remain UNVERIFIED.",
-        "New explicit owner Publish required for any production Edge deployment."
+        "Not yet independently frozen and source-isolated under #3347 nonpublishing READY-candidate five-check gate; do not promote from TESTING based on PR-head success or isolated merged job success.",
+        "Production Edge remains v3; no owner Publish grant. Separate #1938 genuine handset delivery acceptance remains UNVERIFIED; #33 selected-source live access challenge separately owned."
       ],
-      "notes": "Only defers Vault runtime-key read until unseen action tokens require VAPID signing. Maintains Admin manage bootstrap, no private payload, per-owner retirement and retryable failed pushes.",
-      "production_deployed": false
+      "notes": "Dev source fix safely merged only; no live Supabase SQL/Edge/Auth/Storage/config/data mutations. Nonapp #33 selected241 merged-source run 44741312173 failed source_access_challenge though same selected workflow passed PR-head 44740390634. Never waive source truth or treat external-source unavailability as application bug.",
+      "production_deployed": false,
+      "pr": 3511
     }
   ],
   "history": [
