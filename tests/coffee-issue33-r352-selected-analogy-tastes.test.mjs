@@ -68,3 +68,15 @@ test('R354 decaf-site geography alone cannot establish green-coffee provenance',
  assert.match(labeledOrigin.fields.origin||'',/Colombia/i,'independent selected origin survives');
  assert.equal(labeledOrigin.fields.decaffeination_method,'Sugar Process');
 });
+
+test('R354 unmasked selected decaf treatment remains without false growing origin',()=>{
+ const method='This coffee is decaffeinated at origin in Colombia using a chemical-free process our roaster loosely attempted to translate as “sugar process”.';
+ const current=parse(markup({description:method,origins:[],location:'',json:false}));
+ assert.equal(current.ok,true);
+ assert.equal(current.fields.decaffeination_method,'Sugar Process');
+ assert.equal(current.fields.origin,undefined);
+ assert.equal(current.fields.process,undefined);
+ const related=parse(markup({description:'Our current coffee has no method published.',origins:[],location:'',json:false,
+  extra:'<aside><h2>Related coffees</h2><p>'+method+'</p></aside>'}));
+ assert.equal(related.fields.decaffeination_method,undefined);
+});

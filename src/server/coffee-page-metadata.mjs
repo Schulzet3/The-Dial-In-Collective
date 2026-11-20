@@ -2508,10 +2508,18 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  // sentence when canonical identity/geography filtering drops its description.
  // Bounded product scope supplies an exact H1; this does not restore raw SEO,
  // general coffee claims, other coffee facts or uncertain bean processing.
+ // Independently selected original H1-bounded seller description can
+ // supply the decaf method even after decaf plant geography is masked
+ // from the growing-origin parsing view. Never return its site country
+ // to the origin field or borrow SEO or another product.
+ const unmaskedSelectedDecaf=selectedDirectProductCredits(product,{
+  name:fields.name,clean,optionHtml:html,source_url
+ }).decaffeination_method_evidence||[];
  const namedDecafStatements=selectedNamedCurrentDecafEvidence(product,{name:fields.name,clean});
  const selectedDecafStatements=[...new Set([
   ...(Array.isArray(directSelected.decaffeination_method_evidence)?
    directSelected.decaffeination_method_evidence:[]),
+  ...unmaskedSelectedDecaf,
   ...namedDecafStatements,
   ...selectedFormTitleWaterDecafEvidence(product,{name:fields.name,clean}),
   ...selectedIconSpecs.methods
