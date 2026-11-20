@@ -10,3 +10,10 @@ DIC_PREFLIGHT_VERIFIED development_sha=f209b6f2341a1058e2d392725427b7139459c7c4 
 - Positive/negative real CloudApp fixture regression authored for live status, copy, manual edit/feed invalidation and five-taste preservation; Node22 tests NOT RUN at commit creation. Applicable Node22/lint/build, real Chromium/mobile/offline/a11y, isolated SQL/Auth/privacy and governance PENDING until exact-source checks observed; NO false PASS or improved espresso claim.
 - Queue item DIC-Q-455-r390-recommendation-copy-live-status TESTING DEVELOPMENT ONLY; NOT READY, NOT DEPLOYED. No production, provider, Netlify, source release, SQL/Auth/member, backup, Git visibility, schedule or owner alert changes. Separate S019 original PDF still unavailable and #455 inventory incomplete; #267/#33/#96 retain ownership.
 - Next: observe exact PR-head tests, fix failures, non-force integrate only on complete applicable CI, read back merge SHA/blobs and exact merged-source checks, reconcile current status and #455 issue/ledger as justified. No publish.
+
+## R390 governance correction (docs-only continuation; same feature branch) [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=33ec76a7fb73a5057c4c3d075729ca0262e999c1 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+- Initial PR-head approval 44730104685 failed [DIC queue] HOLD: missing explicit nullable merged_source_sha and empty ci_runs array in TESTING queue row, not an app test failure. Source/test/UI/style Git blobs are unchanged from 30b1a2219ef31f4a0f5242309d446089c7a376d9; preserve failed run as FAILED (never PASS).
+- Corrected queue entry schema with merged_source_sha:null, ci_runs:[], pr:3503, retained TESTING/PENDING; need exact corrected-head governance and all applicable source-bound CI before merge, then downstream merged checks. No user-facing/Locked/provider/release change.
