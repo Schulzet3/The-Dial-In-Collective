@@ -6,7 +6,7 @@ import {requiredFocusedSourceFailures} from '../scripts/audit/issue33-focused-so
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../site/cloud/coffee-url-autofill.js';
 const own='<h2>House Blend</h2><h3>Flavor Notes</h3><p>Smooth, medium body</p>'+
  '<p>Light, fruit-sweet lift</p><p>Soft cocoa and toasted nut</p><p>Clean, balanced finish</p>'+
- '<h3>Roast Level</h3><p>Medium, balanced and approachable.</p><h3>Materials + Care</h3><p>Premium fabrics and shipping.</p>';
+ '<h3>Roast Level</h3><p>Medium, balanced and approachable.</p><p>Roast Level: Medium</p><h3>Materials + Care</h3><p>Premium fabrics and shipping.</p>';
 const page=(body=own,title=selectedName,elsewhere='')=>'<html><head><title>Other Coffee Dark Swiss Water</title></head><body>'+
  '<nav>Roast Level: Dark; Producer: Another Estate; Origin: Peru</nav><main><article class="product"><h1>'+title+
  '</h1><div class="product__description">'+body+'</div></article></main>'+elsewhere+
