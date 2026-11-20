@@ -20,7 +20,7 @@ export function selected509(html){
  return {headings,exact:headings.length===1&&norm(headings[0])===norm(selectedName),
   first:s.includes('notes dark chocolate cooked cranberry tobacco'),
   second:(s.match(/notes dark chocolate cooked cranberry tobacco/g)||[]).length>=2,
-  light:s.includes('roast type dark roast'),
+  dark:s.includes('roast type dark roast'),
   origin:s.includes('country region mexico cristal'),washed:s.includes('process washed')};
 }
 if(process.env.DIC_R360_VERIFY==='1'){
@@ -34,7 +34,7 @@ if(process.env.DIC_R360_VERIFY==='1'){
  check(r.official_url===selectedUrl&&r.status==='FETCHED'&&!r.alternate_url_attempted,'exact_original_url');
  check(buf?.length>1000&&r.html_bytes===buf?.length&&r.html_sha256===hash(buf||''),'raw_html_sha256');
  check(own.exact&&r.selected_heading_identity_verified===true&&norm(f.name)===norm(selectedName),'St_Germain_H1_over_retired_Kraken_slug');
- check(own.first&&own.second&&own.light&&own.origin&&own.washed,'two_direct_selected_notes_plus_specs');
+ check(own.first&&own.second&&own.dark&&own.origin&&own.washed,'two_direct_selected_notes_plus_specs');
  check(norm(f.roast_level)==='dark'&&norm(f.process)==='washed','selected_roast_process');
  check(norm(f.origin).includes('mexico')&&norm(f.origin).includes('cristal'),'selected_origin');
  check(!f.producer&&!f.decaffeination_method,'no_grower_or_decaf_invention');

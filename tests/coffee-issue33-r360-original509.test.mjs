@@ -12,7 +12,7 @@ const html=(name=selectedName,body=first+second,other='')=>'<html><head><title>K
  '</div></article></main>'+other+'<footer>Retired Kraken</footer></body></html>';
 test('R360 selected current St Germain H1 and two matching direct Notes captions',()=>{
  const r=selected509(html());assert.equal(r.exact,true);assert.equal(r.first,true);assert.equal(r.second,true);
- assert.equal(r.light,true);assert.equal(r.origin,true);assert.equal(r.washed,true);
+ assert.equal(r.dark,true);assert.equal(r.origin,true);assert.equal(r.washed,true);
 });
 test('R360 recycled Kraken slug and SEO title cannot replace selected St Germain',()=>{
  const p=extractPublicCoffeeFacts(html(),{source_url:selectedUrl});
