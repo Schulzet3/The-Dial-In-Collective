@@ -13,23 +13,33 @@
       "pr": 3473,
       "title": "Differentiate Log Shot grind and temperature Use Recommendation button screen-reader names",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "cdacca413a28d8d3cad5fa45e70e93836981be91",
       "scope_paths": [
         "site/cloud/main.js"
       ],
       "owner_source": "Issue #455 Option B SAFE Locked-compatible accessibility adjustment; DIC_PREFLIGHT_VERIFIED development_sha=0a08e269a919110a0beaaef253be1e9dfb38775d preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e; original site/cloud/main.js source 5f0fa268dedec7c81ca73bbc0c1592e70d5cee3",
       "tests": [
-        "Negative exact-source reproduction: when Track Brew Temperature enabled both Log Shot Use Recommendation buttons had identical accessible names; visible action and click semantics must stay unchanged.",
-        "New synthetic actual CloudApp-rendered Log Shot regressions: two distinct aria-label names with tracked temperature; one grind action when tracking off; all five taste scales retained. Node22 and browser CI PENDING."
+        "Source negative reproduction: two indistinguishable Use Recommendation accessible names in temperature-tracked Log Shot; no actual member incident claimed.",
+        "2 new synthetic real CloudApp positive/negative R381 cases PASS: distinct Grind Setting/Temperature aria-labels when tracked, one grind-only when untracked; all five explicit taste rows retained. Visible Locked Use Recommendation button text/actions unchanged.",
+        "Initial exact PR-head governance 44663643200 FAILED on unqueued site/cloud/main.js; TESTING intake repaired in same-preflight journal commit, failure never relabeled PASS.",
+        "Final exact PR-head c858ce09c264d1fea4f59c968c4db63b54c3d897 Node22 44663856030 5,818 PASS/0 FAIL/6 intentional SKIP, lint PASS, R381 2/2; Chromium/mobile/offline/a11y cloud 44663856167, governance 44663855974, isolated SQL 44663855975, security 44663856043 SUCCESS. Frozen original corpus 44663855972 SKIPPED not PASS.",
+        "Nonforce [skip netlify] PR #3473 squash merged cdacca413a28d8d3cad5fa45e70e93836981be91; all four changed app/test/queue/scoped-journal blobs identical at passing head and merge.",
+        "Exact merged-source Node22 44664383247 5,820 PASS/0 FAIL/6 SKIP and lint PASS; merged Chromium/mobile/offline/a11y/cloud 44664383277 both jobs SUCCESS, approval 44664383244 SUCCESS, shared #33 dependency 44664383241 SUCCESS. PR-head SQL/security safely reused unchanged behavior."
       ],
       "ci_runs": [
-        44663643200
+        44663856030,
+        44663856167,
+        44663855974,
+        44663855975,
+        44663856043,
+        44664383247,
+        44664383277,
+        44664383244
       ],
       "blockers": [
-        "Initial PR #3473 exact-head approval 44663643200 FAILED only queue intake: site/cloud/main.js not covered. This follow-up adds TESTING intake without altering the app/test code.",
-        "Corrected PR-head governance, Node22/build/lint, UX/mobile/offline/a11y and relevant SQL/security checks pending; exact merged-source readback pending. No publication authority."
+        "Independent prospective #3347 frozen candidate/source-isolation READY promotion (and separate owner publication grant) NOT yet completed; TESTING remains, not READY or DEPLOYED."
       ],
-      "notes": "Owner-safe one-line-per-button accessible-name correction, visible Locked labels/action handlers intact. No numeric taste policy, research findings, capture fields, member/Community/private History, offline data, production, main/release or Netlify changes. S019 missing. NOT READY or deployed.",
+      "notes": "SAFE DEV-only R381: two distinct screen-reader accessible action names; visible Locked copy buttons, all five tastes, shot records, source preference, privacy and offline untouched. Initial approval intake failure preserved, two-commit same-preflight journal and focused tests verified. No actual member/physical device screen reader or cup-quality effectiveness claim. S019 source remains unlocated; #267 exhaustive audit not double-credited. No Netlify, production, Auth/SQL/Edge/member/provider writes, main/release move, forced Git, changes to schedule or alert policy.",
       "production_deployed": false
     },
     {
