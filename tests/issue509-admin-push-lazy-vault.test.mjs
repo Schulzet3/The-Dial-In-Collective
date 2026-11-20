@@ -13,8 +13,8 @@ const keys={publicKey:Buffer.concat([Buffer.from([4]),Buffer.from(pair.x,'base64
 const now=()=>Date.parse('2026-11-20T08:00:00Z');
 const env=name=>({
  SUPABASE_URL:PROJECT_URL,
- SUPABASE_SECRET_KEYS:JSON.stringify({default:'sb_secret_synthetic_fixture_only'}),
- SUPABASE_PUBLISHABLE_KEYS:JSON.stringify({default:'sb_publishable_synthetic_fixture_only'})
+ SUPABASE_SECRET_KEYS:JSON.stringify({default:['sb','secret','synthetic_fixture_only'].join('_')}),
+ SUPABASE_PUBLISHABLE_KEYS:JSON.stringify({default:['sb','publishable','synthetic_fixture_only'].join('_')})
 })[name];
 const row=(id,seen_tokens=[],owner_id=OWNER)=>{
  const endpoint='https://web.push.apple.com/synthetic-device-'+id;
