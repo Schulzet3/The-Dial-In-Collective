@@ -17356,6 +17356,29 @@
       ],
       "notes": "Only original603 #249 selected source-review evidence role correction. Exact source, provenance, chosen coffee, explicit Add Coffee, private member state/offline and Auth unchanged. Frozen original 603/201/1197, original CSV SHA 3e0d3036ea727de091f304f538c6de2dfcaa10d6, scorer/oracle untouched. #267 V2/#96 separate; no Netlify, SQL/Edge/Auth/provider/member production writes, spend, force or automation changes. Safe merged dev-only fix PR #3468 exact 74d0f758e284a2b1909862669900f24ea8fa4f57; source fact literal retention and canonical selected identity proven. Current followed-on development d962e2214561e4b6579c4c9bde6cfb18f1bf248f is one nonoverlapping #267 V2 docs-only descendant. Two earlier interim failure receipts retained; no source changes after verified merge.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-workspace-inactive-selection-guards",
+      "issue": 509,
+      "title": "Disallow archived or hidden workspace and Make Current selection",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261120044500_dic_workspace_inactive_selection_guards.sql"
+      ],
+      "owner_source": "Issue #509 R379; DIC_PREFLIGHT_VERIFIED development_sha=a652cdc9a1ec65713cd929f4d7e5d88ce66a878e preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "tests": [
+        "Live full function and 31 relevant constraints and 5 triggers prove inactive flags omitted; 0 affected current rows in read-only aggregates.",
+        "Synthetic admitted-user PostgreSQL17 rollback regression staged, exact-source CI PENDING."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source PG17, Node22, approval and browser CI not yet observed.",
+        "Unmerged development source and separate #3347 source-isolated candidate certification/hosted #96 acceptance UNVERIFIED.",
+        "New owner Publish needed before production SQL change."
+      ],
+      "notes": "Narrow additive migration; preserve history, Auth, offline mutation receipts and Community; zero confirmed production member incident.",
+      "production_deployed": false
     }
   ],
   "history": [
@@ -20740,6 +20763,14 @@
       "delivered_netlify_deploy_id": "6aff0fa6e0d841054dea5dcd",
       "at": "2026-11-19T15:03:22.533Z",
       "evidence": "Owner READY42 publication DIC-20261119-READY42-10; exact 5 candidate CI SUCCESS, GitHub controller 44549967646 SUCCESS, one nonforce release commit 07f054f6470b2ae36b36faef8fb9a8161dd3bfb5, independent Netlify READY/current deploy 6aff0fa6e0d841054dea5dcd; no SQL migration or unready items."
+    },
+    {
+      "date": "2026-11-20",
+      "issue": 509,
+      "item_id": "DIC-Q-509-workspace-inactive-selection-guards",
+      "state": "TESTING",
+      "production_deployed": false,
+      "evidence": "R379 full provider semantic review and development-only source + PostgreSQL17 rollback regression staged; CI pending."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
