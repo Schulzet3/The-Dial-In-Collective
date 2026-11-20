@@ -17440,7 +17440,7 @@
       "id": "DIC-Q-455-r390-recommendation-copy-live-status",
       "issue": 455,
       "title": "Announce copied Log Shot recommendations to assistive technology without changing settings or measured shots",
-      "state": "READY",
+      "state": "TESTING",
       "scope_paths": [
         "site/cloud/main.js",
         "site/visual.css"
@@ -17455,10 +17455,13 @@
         "At first corrected PR-head: real Chromium/mobile/offline/a11y 44730300549, isolated SQL 44730300490, security 44730300483, and governance 44730300850 COMPLETED SUCCESS; frozen603 44730300539 SKIPPED not PASS. Final revised head CI PENDING.",
         "Final exact PR head c0a66fa6c58ddb30984a8f2bfeda3f0ca4ff5156 Node22/build/lint 44730993862 SUCCESS: 5,882 tests, 5,876 PASS, 0 FAIL, 6 intentional SKIP; R390 #182 and R295 #5183 both PASS, no member exposure measured.",
         "Final exact PR head real Chromium/mobile/offline/accessibility 44730993930, SQL 44730994085, security 44730993870 and governance 44730994019 all COMPLETED SUCCESS. Frozen original coffee corpus 44730993955 SKIPPED not PASS.",
-        "Non-force [skip netlify] PR #3503 squash merged bd9623a6d2ffd8c716e7b1ebd314d2e6f5d11bf9; exact five changed Git blobs byte-identical at PR head and merge. Merge source Node22/lint 44731626990 SUCCESS (5,876 PASS/0 FAIL/6 SKIP, same R390 #182 and R295 #5183 PASS), browser/offline/a11y 44731627046 SUCCESS and governance 44731627124 SUCCESS. SQL/security PR head apply to identical reviewed deployable/source/test blobs; no live provider writes."
+        "Non-force [skip netlify] PR #3503 squash merged bd9623a6d2ffd8c716e7b1ebd314d2e6f5d11bf9; exact five changed Git blobs byte-identical at PR head and merge. Merge source Node22/lint 44731626990 SUCCESS (5,876 PASS/0 FAIL/6 SKIP, same R390 #182 and R295 #5183 PASS), browser/offline/a11y 44731627046 SUCCESS and governance 44731627124 SUCCESS. SQL/security PR head apply to identical reviewed deployable/source/test blobs; no live provider writes.",
+        "Docs-only PR #3505 original head 5149ed572fd09416938e036e762e80bfc5505d93 approval workflow 44732371137 FAILED ready-promotion-gate: missing docs/READY_BATCH_CERTIFICATION.json. Queue intake and source certification PASS, but source-certified is NOT READY; no false pass or unauthorized candidate freeze."
       ],
-      "blockers": [],
-      "notes": "Development-only safe presentation change; no numeric targets, history, member data, learning or privacy changes. No publication, provider or production actions.\nREADY DEVELOPMENT ONLY after source-exact tests, browser/a11y and merged CI. NOT PUBLISHED, NOT production verified, no espresso cup-quality or physical screen-reader outcome claim. WAI-ARIA live-region semantics independently checked; no new data collection or policy.",
+      "blockers": [
+        "Current release governance requires owner-frozen READY_BATCH_CERTIFICATION.json and five-job candidate CI for READY promotion; no such certificate exists and #455 has no authority to create/freeze/publish a release candidate. Source-specific PR/merged CI remain independently successful."
+      ],
+      "notes": "Development-only safe presentation change; no numeric targets, history, member data, learning or privacy changes. No publication, provider or production actions.\nREADY DEVELOPMENT ONLY after source-exact tests, browser/a11y and merged CI. NOT PUBLISHED, NOT production verified, no espresso cup-quality or physical screen-reader outcome claim. WAI-ARIA live-region semantics independently checked; no new data collection or policy.\nSUPERSEDED: READY attempt in earlier branch commit was rejected by frozen candidate governance; TESTING/source-certified ONLY pending separate owner-frozen release validation. Does not block merged development fix.",
       "merged_source_sha": "bd9623a6d2ffd8c716e7b1ebd314d2e6f5d11bf9",
       "ci_runs": [
         44730993862,
