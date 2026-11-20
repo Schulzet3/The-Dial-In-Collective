@@ -1,3 +1,17 @@
+# Issue #509 R399 - core PostgreSQL SP-GiST through XPath exposed declarations [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=8f6d03ef8da44a63c0642993a248b13ba36fb8be preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+2026-11-20 UTC: immutable-first live SHA/blob verified. Live Supabase azviqqejypsefzilgonr ACTIVE_HEALTHY PostgreSQL 17.11, production strictly READ-ONLY. Main 57adc419ed4b106e158435b465971f5986537b41, release/production 07f054f6470b2ae36b36faef8fb9a8161dd3bfb5. No provider, release, backup or schedule writes.
+
+New complete direct semantic review: all 542 complete exposed pg_catalog f/p/w definitions ranks 2621-3162/3162 (101685 exact DDL characters, 503 internal, 29 C and 10 full SQL bodies). Every OID, source MD5, signature, literal entire DDL, 1-end range and verdict in [append-only R399 ledger](../audits/issue509-r399-pg-catalog-spgist-through-xpath-20261120.json). PostgreSQL native compiled implementations UNVERIFIED and no #267 GitHub source-line credit. Catalog exposed f/p/w declarations are now 3162/3162, but full Supabase baseline is IN_PROGRESS, not COMPLETE.
+
+Semantic findings: STABLE timezone-sensitive date/time cast vs IMMUTABLE timezone-independent/explicit-offset SQL wrappers checked; full ts_debug and XPath wrappers reviewed. Built-in text-search, UUID, XML, SP-GiST, binary and transaction API are server-owned, not proven dead. Live database metadata: 220 text, 199 UUID, 193 timestamptz, 44 jsonb, 18 varchar, 9 timestamp and 2 date columns; btree 251, hash 3, GIN/SP-GiST 0. No new proven DIC error, safe removal or app performance defect. No code/test/CI edits; new CI NOT_APPLICABLE. Current release readiness NOT_REVALIDATED.
+
+Exact next unreviewed provider cursor: pg_catalog aggregate definitions rank 1/157 sorted by proname and OID, from first character, then outstanding provider surface definitions. Production unchanged; existing hourly schedule and owner-action-only notifications preserved.
+
+---
+
 # Issue #509 R398 — core PostgreSQL point through SP-GiST definitions and slow-query attribution [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=f1abec04dccfdf410ab9c9895b72fd365e238a14 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
