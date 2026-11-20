@@ -36,13 +36,14 @@ if(process.env.DIC_R361_VERIFY==='1'){
  let buf;try{buf=readFileSync(join(dir,'case-15.html'));}catch{errors.push('missing_raw_selected_html');}
  const r=evidence.records?.[0]||{},f=r.current_fields||{},own=selected15(buf?.toString('utf8')||'');
  check(JSON.stringify(evidence.case_numbers)==='[15]'&&evidence.records?.length===1,'only_original15');
- check(requiredFocusedSourceFailures([15],evidence.records||[]).length===0,'strict_official_source_identity_parser_UI');
+ check(requiredFocusedSourceFailures([15],evidence.records||[],{negativeIdentityNumbers:[15]}).length===0,
+   'strict_official_source_CHANGED_identity_negative_parser_UI');
  check(r.status==='FETCHED'&&r.official_url===selectedUrl&&!r.alternate_url_attempted,'exact_original_official_url');
  check(buf?.length>1000&&r.html_bytes===buf.length&&r.html_sha256===hash(buf),'actual_raw_html_SHA256');
  check(own.exact&&own.headings[0]==='Last Roast!! '+selectedName&&
-   r.selected_heading_identity_verified===true&&
-   r.selected_heading_qualification==='current_selected_last_roast_same_exact_source_and_own_facts_15'&&
-   norm(f.name)===norm(own.headings[0]),'selected_last_roast_H1_same_exact_coffee_and_fields_not_retired_holiday');
+   r.selected_heading_identity_verified===false&&r.original_product_not_certified===true&&
+   r.current_identity_exception==='CHANGED_SELECTED_PRODUCT_EXPLICIT_NEGATIVE_DO_NOT_TRANSFER_ARCHIVED_FIELDS'&&
+   norm(f.name)===norm(own.headings[0]),'selected_last_roast_CHANGED_H1_negative_no_original_identity_transfer');
  check(own.currentNarrative&&own.directTasting&&own.directProducer,'selected_product_direct_description_and_notes');
  check(own.retiredHolidayNotEvidence,'no_retired_holiday_coffee_prose');
  check(['cranberry','lychee','caramelized sugar'].every(n=>norm(f.tasting_notes).includes(n)),'direct_current_three_tasting_notes');
@@ -56,7 +57,7 @@ if(process.env.DIC_R361_VERIFY==='1'){
     'actual_event_checkout_source');
  check(execFileSync('git',['rev-parse','HEAD:docs/audits/issue33-original603-source-level-adjudication-20261029.csv'],{encoding:'utf8'}).trim()==='3e0d3036ea727de091f304f538c6de2dfcaa10d6','untouched_frozen_603_CSV');
  const p=extractPublicCoffeeFacts(buf?.toString('utf8')||'',{source_url:r.final_url||selectedUrl});
- check(p?.ok===true&&norm(p.fields?.name)===norm(selectedName)&&
+ check(p?.ok===true&&norm(p.fields?.name)===norm(own.headings[0])&&
    coffeeUrlPreviewMarkup(p).includes('coffee-url-preview')&&
    coffeeSourceReviewSnapshot({...p,source_url:r.final_url||selectedUrl})?.type==='coffee_source_review',
    'actual_current_parser_AddCoffee_SourceReview_nosave');

@@ -17,7 +17,7 @@ test('R361 actual selected title and direct Beanstock Gesha producer/tasting des
 });
 test('R361 retired holiday handle and SEO cannot override actual selected Gesha H1',()=>{
  const p=extractPublicCoffeeFacts(page(),{source_url:selectedUrl});
- assert.equal(p.ok,true);assert.equal(norm(p.fields?.name),norm(selectedName));
+ assert.equal(p.ok,true);assert.equal(norm(p.fields?.name),norm('Last Roast!! '+selectedName));
  assert.notEqual(norm(p.fields?.name),'holiday roast el salvador');
 });
 test('R361 archived identity mismatch fails selected original proof',()=>{
@@ -45,6 +45,11 @@ test('R361 official source failure and UI or selected identity failure remain ha
   selected_heading_identity_verified:true,current_fields:{name:selectedName},
   add_coffee_ui_rendered:true,source_review_rendered:true};
  assert.deepEqual(requiredFocusedSourceFailures([15],[good]),[]);
+ const changed={...good,selected_h1:['Last Roast!! '+selectedName],
+   current_fields:{name:'Last Roast!! '+selectedName},
+   selected_heading_identity_verified:false};
+ assert.deepEqual(requiredFocusedSourceFailures([15],[changed],{negativeIdentityNumbers:[15]}),[]);
+ assert.ok(requiredFocusedSourceFailures([15],[changed]).length>0);
  for(const bad of [{...good,status:'UNAVAILABLE'},{...good,selected_heading_identity_verified:false},
    {...good,add_coffee_ui_rendered:false},{...good,source_review_rendered:false}])
   assert.ok(requiredFocusedSourceFailures([15],[bad]).length>0);

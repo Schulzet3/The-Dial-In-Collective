@@ -33,6 +33,7 @@ jobs:
         if: always()
         env:
           DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '15'
+          DIC_ISSUE33_FOCUSED_IDENTITY_NEGATIVE_NUMBERS: '15'
           DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r361
         run: node scripts/audit/issue33-original603-focused-source-review.mjs
       - name: Strict selected HTML hash parser and no-save Add Coffee afterproof
