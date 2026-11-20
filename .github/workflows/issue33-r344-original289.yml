@@ -22,6 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7.0.1
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
       - uses: actions/setup-node@v7.1.0
         with:
@@ -38,6 +39,8 @@ jobs:
         if: always()
         env:
           DIC_R344_VERIFY: '1'
+          DIC_R344_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_R344_EVENT_SHA: ${{ github.sha }}
           DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r344
         run: node scripts/audit/issue33-r344-original289-check.mjs
       - name: Retain 1 day official source hashes and diagnostic files
