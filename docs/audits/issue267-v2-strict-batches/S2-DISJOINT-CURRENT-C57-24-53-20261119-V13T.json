@@ -1,0 +1,615 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch": "V13T-20261119-C57",
+  "scope": "DEVELOPMENT_ONLY_NO_PUBLISH",
+  "track": "PINNED_EXECUTABLE_V2_DIRECT_REVIEW",
+  "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+  "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+  "manifest_index_1_based": 57,
+  "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+  "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+  "original_file_physical_lines": 75,
+  "start_line": 24,
+  "end_line": 53,
+  "new_direct_lines": 30,
+  "previous_receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C56-34-40-C57-1-23-20261119-V13S.json",
+  "preflight": {
+    "development_sha": "feca27428481015da33ca64379489e69970e3275",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "byte_for_byte_verified": true
+  },
+  "raw_blob_parity_verified": true,
+  "exact_current_blob_parity": true,
+  "findings": [
+    {
+      "severity": "LOW_POTENTIAL_UNREPRODUCED",
+      "source_line": 27,
+      "description": "classify(path,bytes) does not use path; retained API; no current dead-code removal without callers/test proof."
+    },
+    {
+      "severity": "INFORMATIONAL",
+      "source_line": 51,
+      "description": "invalid_json findings use file-level sentinel line 0 rather than source physical line; exclude sentinel from direct review coverage."
+    }
+  ],
+  "per_line": [
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 24,
+      "source_literal": "export function scanLine(line){",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Exports the line regex screener for reuse by callers.",
+      "quality_bug_security_privacy_performance": "Candidate-pattern scan only, never semantic assurance.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "scanLine export, later runAudit line46."
+      },
+      "testability_remediation_opportunity": "Unit-test individual security-pattern cases and false positives.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 25,
+      "source_literal": " return patterns.filter(rule=>rule.re.test(line)).map(rule=>({rule:rule.id,risk:rule.risk}));",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Applies each static pattern to one source literal and returns only matched risk IDs/severity.",
+      "quality_bug_security_privacy_performance": "Regex alerts omit source text, reducing secret-value disclosure; finite rules miss novel patterns.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "Prior lines10–21 static patterns; later line46 and 47 consume."
+      },
+      "testability_remediation_opportunity": "Boundary, escaping, no-match and multiline false-negative fixtures.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 26,
+      "source_literal": "}",
+      "inspection_class": "structural_direct_read",
+      "behavior": "Closes scanLine.",
+      "quality_bug_security_privacy_performance": "Syntax-only boundary, no independent vulnerability.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "Part of preceding scanLine declaration."
+      },
+      "testability_remediation_opportunity": "Parsing/Node22 module import check.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 27,
+      "source_literal": "export function classify(path,bytes){",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Declares exported classify(path,bytes) byte classifier.",
+      "quality_bug_security_privacy_performance": "Path argument is unused within body; caller stability matters before any cleanup.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "runAudit line38 uses classify(path,bytes)."
+      },
+      "testability_remediation_opportunity": "Check direct calls and optional signature refactor with tests, not blind deletion.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 28,
+      "source_literal": " if(bytes.includes(0))return {text:false,encoding:'nul_binary'};",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Treats any NUL byte as binary rather than text.",
+      "quality_bug_security_privacy_performance": "NUL in legitimate text causes conservative binary classification, not a secret leak.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "classify path caller line38."
+      },
+      "testability_remediation_opportunity": "Test UTF-8 NUL-containing input classification.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 29,
+      "source_literal": " try{return {text:true,encoding:'utf8',value:new TextDecoder('utf-8',{fatal:true}).decode(bytes)};}",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Strict fatal UTF-8 decode returns text content for valid bytes.",
+      "quality_bug_security_privacy_performance": "Fatal decoding avoids replacement-character loss but rejects malformed UTF-8; Node22 TextDecoder available.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "classify returns value consumed at line42."
+      },
+      "testability_remediation_opportunity": "Feed valid ASCII/non-ASCII and malformed UTF-8 vectors.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 30,
+      "source_literal": " catch{return {text:false,encoding:'non_utf8_binary'};}",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "On decode failure labels input non_utf8_binary.",
+      "quality_bug_security_privacy_performance": "Broad catch can mask non-decoding errors; no current failure reproduced.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "Paired with line29 fatal decoder."
+      },
+      "testability_remediation_opportunity": "Negative malformed UTF-8 test; observe exception vs classification.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 31,
+      "source_literal": "}",
+      "inspection_class": "structural_direct_read",
+      "behavior": "Closes classify.",
+      "quality_bug_security_privacy_performance": "Structural boundary; no behavior beyond branch completion.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "Proceeds to runAudit."
+      },
+      "testability_remediation_opportunity": "Module syntax check.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 32,
+      "source_literal": "export function runAudit({paths,read=(path)=>readFileSync(path),stat=(path)=>lstatSync(path),sourceSha,treeSha}){",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Exports runAudit with injectable read/stat and source/tree SHA tags.",
+      "quality_bug_security_privacy_performance": "Default filesystem readers permit direct tracked source reads; tests must use synthetic paths, no member data.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "readFileSync/lstatSync imports and main invocation line69."
+      },
+      "testability_remediation_opportunity": "Inject mock filesystem to test classification and avoid touching secrets.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 33,
+      "source_literal": " const files=[],findings=[],counts={};",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Initializes arrays for per-file records, candidate hits and rule counters.",
+      "quality_bug_security_privacy_performance": "No raw secret values accumulated except in temporary process bytes; report needs only rules.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "runAudit final result line67."
+      },
+      "testability_remediation_opportunity": "Assert report excludes matched secret strings.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 34,
+      "source_literal": " let textLines=0,textFiles=0,binaryFiles=0,totalBytes=0,invalidJSON=0;",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Initializes source/byte/JSON error accumulators.",
+      "quality_bug_security_privacy_performance": "Counts are inventory metrics, not semantic line coverage.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "runAudit output totals line67."
+      },
+      "testability_remediation_opportunity": "Check expected aggregate count on a tiny fixture.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 35,
+      "source_literal": " for(const path of paths){",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Iterates all supplied tracked paths.",
+      "quality_bug_security_privacy_performance": "Full inventory costs proportional to total tracked bytes/paths; no semantic credit from iteration.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "Main git ls-files paths line69."
+      },
+      "testability_remediation_opportunity": "Test multiple files incl binary and malformed JSON.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 36,
+      "source_literal": "  const fileStat=stat(path);",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Uses injected lstat to inspect each path.",
+      "quality_bug_security_privacy_performance": "Rejects symlinks indirectly through following line; avoids following hidden file references.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "Stat injectable parameter line32."
+      },
+      "testability_remediation_opportunity": "Fixture simulating symlink or directory stat.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 37,
+      "source_literal": "  if(!fileStat.isFile())throw Error('Nonregular tracked file requires separate handling: '+path);",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Fails on nonregular tracked entry.",
+      "quality_bug_security_privacy_performance": "Preserves explicit handling of symlinks/submodules rather than silently reading them; exception not a security pass.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "lstat line36, scanner fails closed."
+      },
+      "testability_remediation_opportunity": "Negative test isFile false and confirm no contents read.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 38,
+      "source_literal": "  const bytes=read(path),kind=classify(path,bytes);totalBytes+=bytes.length;",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Reads bytes, classifies and increments total byte count.",
+      "quality_bug_security_privacy_performance": "Reading all tracked source may be heavy; no file-size guard here; source bytes not serialized into report.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "classify lines27–30 and hash entry line39."
+      },
+      "testability_remediation_opportunity": "Synthetic byte fixtures and total length accounting.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 39,
+      "source_literal": "  const entry={path,sha256:sha256(bytes),bytes:bytes.length,kind:kind.encoding,lines:0,findings:0};",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Builds per-path SHA256, byte length, encoding, line and finding counters.",
+      "quality_bug_security_privacy_performance": "Hash is integrity metadata not verification of authorization or source semantics.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "sha256 helper line10; final files return line67."
+      },
+      "testability_remediation_opportunity": "Check SHA256 reference fixture and public-file path handling.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 40,
+      "source_literal": "  if(kind.text){",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Branches on text classification.",
+      "quality_bug_security_privacy_performance": "Text and binary paths must not be conflated.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "Lines28–30 classify."
+      },
+      "testability_remediation_opportunity": "Valid/invalid UTF-8 fixture.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 41,
+      "source_literal": "   textFiles++;",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Increments valid text-file count.",
+      "quality_bug_security_privacy_performance": "Includes zero-length text file if decoder succeeds; totals are bookkeeping only.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "Aggregate counts line67."
+      },
+      "testability_remediation_opportunity": "Empty-file fixture count.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 42,
+      "source_literal": "   const lines=kind.value.split(/\\r\\n|\\n|\\r/);",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Splits decoded text on CRLF, LF or CR.",
+      "quality_bug_security_privacy_performance": "Supports cross-platform newline bytes; physical-line accounting must match manifest convention.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "Decoded value from classify line29."
+      },
+      "testability_remediation_opportunity": "CRLF/LF/CR mixed and Unicode text fixture.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 43,
+      "source_literal": "   if(lines.at(-1)==='')lines.pop();",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Removes the final empty split element for newline-terminated text.",
+      "quality_bug_security_privacy_performance": "Avoids an artificial trailing physical line; for empty bytes, removes sole empty element, yielding zero lines.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "Split result line42."
+      },
+      "testability_remediation_opportunity": "Test empty, one newline and no terminal newline.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 44,
+      "source_literal": "   entry.lines=lines.length;textLines+=lines.length;",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Stores physical line count per file and increments total.",
+      "quality_bug_security_privacy_performance": "This only counts lines; not reviewer semantically inspected lines.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "Entry line39 and totals line67."
+      },
+      "testability_remediation_opportunity": "Assert totals with line43 trailing behavior.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 45,
+      "source_literal": "   for(let i=0;i<lines.length;i++){",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Iterates every physical decoded text line for rule pattern scan.",
+      "quality_bug_security_privacy_performance": "Full-pass keyword screening can be slower on large archives and is not manual review.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "scanLine line46."
+      },
+      "testability_remediation_opportunity": "Multi-line fixture asserts each index scanned once.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 46,
+      "source_literal": "    const found=scanLine(lines[i]);",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Screens one numbered line against static rules.",
+      "quality_bug_security_privacy_performance": "Cross-line secrets and obfuscation escape line-isolated regex; no semantic certification.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "scanLine export line24."
+      },
+      "testability_remediation_opportunity": "Negative cross-line/obfuscated risk fixture; do not present as zero vulnerability.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 47,
+      "source_literal": "    for(const hit of found){findings.push({path,line:i+1,...hit});entry.findings++;counts[hit.rule]=(counts[hit.rule]||0)+1;}",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Emits findings with 1-based path/line and rule/risk; increments per-file/per-rule counts.",
+      "quality_bug_security_privacy_performance": "Only identifiers retained, not matched secret values; candidates may be false positives; no user sign-off.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "Consumed line46 found hits."
+      },
+      "testability_remediation_opportunity": "Assert 1-based offsets, risk labels, counts, sanitized output.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 48,
+      "source_literal": "   }",
+      "inspection_class": "structural_direct_read",
+      "behavior": "Closes text-line iteration.",
+      "quality_bug_security_privacy_performance": "Control boundary; no independent finding.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "Line45 for-loop."
+      },
+      "testability_remediation_opportunity": "Node parse/test iteration boundaries.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 49,
+      "source_literal": "   if(path.endsWith('.json')){",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Enables JSON parse check by lowercase .json filename.",
+      "quality_bug_security_privacy_performance": "Suffix case-sensitive; uppercase .JSON not checked, scope may be intentional.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "Text path line40."
+      },
+      "testability_remediation_opportunity": "Fixture with JSON and malformed JSON; consider case behavior only if required.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 50,
+      "source_literal": "    try{JSON.parse(kind.value);}",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Attempts JSON.parse on original UTF-8 text.",
+      "quality_bug_security_privacy_performance": "Reads entire JSON in memory; some large audit artifacts may stress memory, not a reproduced current defect.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "kind.value derived line29."
+      },
+      "testability_remediation_opportunity": "Synthetic large/invalid valid JSON fixtures; benchmark if optimization proposed.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 51,
+      "source_literal": "    catch{findings.push({path,line:0,rule:'invalid_json',risk:'review'});entry.findings++;invalidJSON++;counts.invalid_json=(counts.invalid_json||0)+1;}",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Records malformed JSON as review candidate with source line 0.",
+      "quality_bug_security_privacy_performance": "Line0 is FILE-LEVEL validation sentinel, not a physical source line; do not count as semantic line reviewed.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "JSON parse line50; aggregated counts line67."
+      },
+      "testability_remediation_opportunity": "Assert invalidJSON increments, no raw invalid contents in output.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 52,
+      "source_literal": "   }",
+      "inspection_class": "structural_direct_read",
+      "behavior": "Closes JSON conditional.",
+      "quality_bug_security_privacy_performance": "Structural close, no security assertion.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "Within text branch line40."
+      },
+      "testability_remediation_opportunity": "Syntax check only.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    },
+    {
+      "immutable_path": "scripts/audit/issue161-full-source-review.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "line": 53,
+      "source_literal": "  }else{",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Begins binary-file handling else branch.",
+      "quality_bug_security_privacy_performance": "Binary files require separate asset hash/inventory, not text-line semantic credit.",
+      "dead_obsolete_duplicate": "No proven dead path on pinned-to-live exact blob; unused path argument at line27 is a potential low-risk cleanup candidate only, not a reproduced defect or deletion approval.",
+      "counterpart_or_absence": {
+        "live_development_sha": "feca27428481015da33ca64379489e69970e3275",
+        "live_blob_sha": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+        "exact_live_blob_parity": true,
+        "caller_or_related_source": "classify lines28–30, binary counters line54."
+      },
+      "testability_remediation_opportunity": "Synthetic NUL and malformed UTF-8 fixture.",
+      "locked_fit": "Audit-only scanner does not certify product security; #96 owns live Auth/privacy, #267 owns semantic review; preserve source, no unapproved production/provider, data or archival changes."
+    }
+  ],
+  "coverage_policy": "Line-specific direct reading, separate pinned source path/blob/1-based literal; legacy R2/C2 and strict S2-143 preserved; post-pin drift still incomplete.",
+  "tests": {
+    "immutable_literal_30_of_30": "PASS",
+    "runtime": "NOT_RUN_DOCS_ONLY",
+    "provider_readback": "NOT_APPLICABLE"
+  },
+  "next_position": "C57 line54"
+}
