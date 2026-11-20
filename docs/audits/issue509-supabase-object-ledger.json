@@ -5066,6 +5066,21 @@
       "baseline": "IN_PROGRESS",
       "dormant_bug": "Vault failure disables unrelated approval email even with no push recipients",
       "next": "Atomic same-commit source/test/journal fix and isolated CI; changed/unreviewed provider semantic audit"
+    },
+    {
+      "run": "R379",
+      "date": "2026-11-20",
+      "preflight_development_sha": "a652cdc9a1ec65713cd929f4d7e5d88ce66a878e",
+      "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "receipt_path": "docs/audits/issue509-r379-workspace-inactive-selection-20261120.json",
+      "provider_function": "private.mutate_workspace(mid uuid, action text, p jsonb)",
+      "first_time_provider_words": 0,
+      "issue267_source_lines": 0,
+      "source_ci": "PENDING",
+      "provider_writes": 0,
+      "release": "TESTING",
+      "baseline": "IN_PROGRESS",
+      "next": "Verify exact PR-head checks, repair and nonforce integrate only on PASS; #3347 candidate and #96 hosted acceptance separate"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -25786,5 +25801,38 @@
     "baseline": "IN_PROGRESS",
     "release": "TESTING",
     "next_cursor": "Changed/unreviewed live provider definitions; exact-source successful Node22 successor or hold; #3347 isolated candidate and #96 hosted proofs UNVERIFIED"
+  },
+  "provider_workspace_inactive_selection_guards_run379": {
+    "schema_version": 1,
+    "issue": 509,
+    "run": "R379",
+    "date_utc": "2026-11-20",
+    "project_ref": "azviqqejypsefzilgonr",
+    "preflight_development_sha": "a652cdc9a1ec65713cd929f4d7e5d88ce66a878e",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "live_function": "private.mutate_workspace(mid uuid, action text, p jsonb)",
+    "live_definition_md5": "f3eb1b5086e4396625f3efa38f4c9165",
+    "full_source_chars": 6384,
+    "method": "DIRECT_COMPLETE_PROVIDER_PG_GET_FUNCTIONDEF_AND_CATALOG_SEMANTIC",
+    "finding": "Archived setups and hidden library entries are not checked in set_style and make_current, so prior valid stale offline/History action can choose an inactive reference; no FK/trigger closes the lifecycle guard.",
+    "actual_affected_counts": {
+      "archived_setups": 0,
+      "hidden_library_entries": 0,
+      "archived_workspace_links": 0,
+      "hidden_workspace_links": 0,
+      "hidden_recipe_preferences": 0
+    },
+    "scope": "Reject only new inactive selections, preserve existing records, Community, historical shots/families/notes, mutation receipts, offline, RLS and all applied migrations",
+    "migration": "supabase/migrations/20261120044500_dic_workspace_inactive_selection_guards.sql",
+    "regression": "supabase/tests/workspace_inactive_selection_guards.sql",
+    "runner": "scripts/audit/isolated-sql-regression.sh",
+    "provider_writes": 0,
+    "first_time_provider_words": 0,
+    "issue267_source_lines": 0,
+    "source_ci": "PENDING_EXACT_PR_HEAD_PG17_NODE22_BROWSER_APPROVAL_SECURITY",
+    "queue": "TESTING",
+    "full_baseline": "IN_PROGRESS",
+    "owner_publish": "NOT_AUTHORIZED",
+    "next": "Verify exact PR-head checks, repair and nonforce integrate only on PASS; #3347 candidate and #96 hosted acceptance separate"
   }
 }

@@ -146,4 +146,11 @@ if [[ -f supabase/migrations/20261119175000_dic_admin_delete_completed_retry_cou
 else
   echo "NOT_APPLICABLE: #509 completed account deletion count; migration excluded from tested source"
 fi
+# #509 R379: development migration must be present for the matching synthetic regression.
+if [[ -f supabase/migrations/20261120044500_dic_workspace_inactive_selection_guards.sql ]]; then
+  echo "Running workspace_inactive_selection_guards"
+  run_sql supabase/tests/workspace_inactive_selection_guards.sql
+else
+  echo "NOT_APPLICABLE: #509 inactive workspace selection; migration excluded from tested source"
+fi
 echo 'PASS: all checked-in migrations and SQL suites, including staged import/setup, cross-account and source-worker authorization and first-style owner isolation regressions; no hosted connection.'
