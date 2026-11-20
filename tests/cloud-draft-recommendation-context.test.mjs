@@ -9,11 +9,13 @@ import {basketDoseAdvisory} from '../site/cloud/dose-advisory.js';
 
 let form;
 const reference={innerHTML:''};
+const copiedStatus={textContent:''};
 const sheet={
  close(){},
  querySelector(selector){
   if(selector==='#shot')return form;
   if(selector==='#log-reference')return reference;
+  if(selector==='#shot-recommendation-feedback')return copiedStatus;
   const name=selector.match(/^\[name=(\w+)\]$/)?.[1];
   return name?form.elements[name]:null;
  }
@@ -33,6 +35,7 @@ function bindForm(draft){
  elements.slowFeed={checked:draft.feedMode==='slow'};
  form={elements};
  reference.innerHTML='';
+ copiedStatus.textContent='';
 }
 async function firstShotFixture(){
  const raw=rawFixture();
@@ -161,4 +164,30 @@ test('editing historical shots never repeats basket advice or changes historical
   assert.equal(r.writes[0].payload.expected_revision,7);
   assert.equal('basket_version_id' in r.writes[0].payload,false);
  }
+});
+
+test('Log Shot politely announces copied controls, not as errors, preserving all five tastes',async()=>{
+ const {app}=await firstShotFixture();
+ let markup='';
+ app.show=(_title,html)=>{markup=html;};
+ app.showLog('coffee');
+ assert.match(markup,/id="shot-recommendation-feedback"[^>]*role="status"[^>]*aria-live="polite"/);
+ assert.doesNotMatch(markup,/role="alert" id="shot-recommendation-feedback"/);
+ bindForm(app.draft);
+ const originalTastes=structuredClone(app.draft.tasteScales);
+ await click(app,'use-grind');
+ assert.equal(copiedStatus.textContent,'Grind Setting copied: '+form.elements.grindSetting.value+'.');
+ await click(app,'use-temp');
+ assert.equal(copiedStatus.textContent,'Temperature copied: '+form.elements.temperature.value+' degrees Celsius.');
+ assert.deepEqual(app.draft.tasteScales,originalTastes);
+ const manual={name:'grindSetting',value:form.elements.grindSetting.value,closest:q=>q==='#shot'?form:null};
+ app.input({target:manual});
+ assert.equal(copiedStatus.textContent,'','manual edits clear stale copy confirmation');
+ await click(app,'use-grind');
+ assert.match(copiedStatus.textContent,/Grind Setting copied/);
+ form.elements.slowFeed.checked=true;
+ app.change({target:{name:'slowFeed',closest:()=>null}});
+ assert.equal(copiedStatus.textContent,'','feed-mode context change clears stale status');
+ assert.equal(app.draft.recommendationContext,null);
+ assert.deepEqual(app.draft.tasteScales,originalTastes);
 });

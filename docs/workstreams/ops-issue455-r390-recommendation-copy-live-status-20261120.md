@@ -1,0 +1,28 @@
+# #455 R390 — Accessible confirmation when Use Recommendation copies a value [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=f209b6f2341a1058e2d392725427b7139459c7c4 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+- Authority: #455 owner Option B SAFE Locked-compatible Log Shot accessibility; no espresso policy, data collection or Publish authorization.
+- Immutable preflight: development f209b6f2341a1058e2d392725427b7139459c7c4, complete docs/ai/PREFLIGHT.md blob 3742fed0176c809b115320c698a0e8b1675b2d3e, independent Git blob parity verified before project sources; branch rechecked immediately before writing. Main 57adc419ed4b106e158435b465971f5986537b41, release/production 07f054f6470b2ae36b36faef8fb9a8161dd3bfb5 read-only.
+- Negative source reproduction: source site/cloud/main.js Git blob 0475afd3c525aec103e4969d730804ae9f908e1c, actual use-grind/use-temp click handler updates input.value programmatically without firing an input event or updating a live-region confirmation. R381 already names the individual buttons but did not announce the copied value. Actual member/screen-reader incidence unverified. Current real CloudApp fixture blob a2218f85796f67d298b0ef5d06a980eaa92860ed, visual CSS blob dec7e6de88a43a1a5a44b64cc5425a7e61895e4f.
+- Same-commit paths: site/cloud/main.js, site/visual.css, tests/cloud-draft-recommendation-context.test.mjs, docs/RELEASE_QUEUE.json, this scoped journal. Pre-render polite role=status and aria-live=polite, announce existing copied grind/temperature without focus changes; clear only stale copied-status text on manual field input or a changed Slow Feed, no error live-region reuse. Visual hiding retains accessibility tree, not display:none. TextContent escapes untrusted content.
+- Locked fit: no alteration of five taste inputs, approved single-change advice, measured shot, notes/private history, recommendation source, style/feed controls, numeric targets, calibration, community, Auth/RLS, offline data or learned effects.
+- Positive/negative real CloudApp fixture regression authored for live status, copy, manual edit/feed invalidation and five-taste preservation; Node22 tests NOT RUN at commit creation. Applicable Node22/lint/build, real Chromium/mobile/offline/a11y, isolated SQL/Auth/privacy and governance PENDING until exact-source checks observed; NO false PASS or improved espresso claim.
+- Queue item DIC-Q-455-r390-recommendation-copy-live-status TESTING DEVELOPMENT ONLY; NOT READY, NOT DEPLOYED. No production, provider, Netlify, source release, SQL/Auth/member, backup, Git visibility, schedule or owner alert changes. Separate S019 original PDF still unavailable and #455 inventory incomplete; #267/#33/#96 retain ownership.
+- Next: observe exact PR-head tests, fix failures, non-force integrate only on complete applicable CI, read back merge SHA/blobs and exact merged-source checks, reconcile current status and #455 issue/ledger as justified. No publish.
+
+## R390 governance correction (docs-only continuation; same feature branch) [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=33ec76a7fb73a5057c4c3d075729ca0262e999c1 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+- Initial PR-head approval 44730104685 failed [DIC queue] HOLD: missing explicit nullable merged_source_sha and empty ci_runs array in TESTING queue row, not an app test failure. Source/test/UI/style Git blobs are unchanged from 30b1a2219ef31f4a0f5242309d446089c7a376d9; preserve failed run as FAILED (never PASS).
+- Corrected queue entry schema with merged_source_sha:null, ci_runs:[], pr:3503, retained TESTING/PENDING; need exact corrected-head governance and all applicable source-bound CI before merge, then downstream merged checks. No user-facing/Locked/provider/release change.
+
+## R390 exact-source Node22 regression correction [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=33ec76a7fb73a5057c4c3d075729ca0262e999c1 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+- Negative: first corrected PR-head 9f2dd86f569f00170a2f15eb53a4c03f089f07cc Node22/build workflow 44730300406 FAILED: 5882 tests, 5875 passed, 1 failed, 6 intentionally skipped. This failure is NOT PASS and not a deployment condition. New R390 true CloudApp positive/negative regression #182 PASSED. Existing R295 test #5183 checks exact contiguous original input handler string, which our adjacent status guard had changed. Test's semantic contract remains correct; no reason to weaken it or change Locked behavior.
+- Source-bound repair: preserve verbatim original R295 validation acknowledgement handler and append separate scoped grind/temperature copy-status clearing guard. Two same-scope DOM closest checks are harmless; a separate guard preserves both historical contract and new R390 behavior. Source site/cloud/main.js prior Git blob 1fc82b776752d99dd4595e942af29a2cf5baa20e, existing R295 test left unchanged, real R390 test unchanged. No change to numeric policy or member/history data.
+- Initial corrected-head real Chromium/mobile/offline/a11y 44730300549, SQL 44730300490, security 44730300483, governance 44730300850 SUCCESS; initial node FAIL retained in queue. New corrected source exact Node22/browser/SQL/security/governance still PENDING; no false Ready/Deploy. 48 research-pack reference cases not app CI.
+- Next: require exact new source-head Node22 positive/negative and relevant hosted statuses SUCCESS before non-force merge [skip netlify], then merged SHA/CI readback and queue reconciliation. S019 remains unavailable; no owner alert required for resolved source-only test-assertion mismatch.
