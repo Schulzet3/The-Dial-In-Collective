@@ -1,3 +1,17 @@
+# Issue #509 R381 extension native declarations + provider event-trigger word review [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=9a132eeba5aabe646662333699b5a318ee3fd76f preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-20 UTC.** Retrieved current development Git SHA and verified exact immutable PREFLIGHT.md blob/bytes before any AGENTS, issue, repository or provider reads. Rechecked the branch and same first-parent tree before this documentation-only atomic development commit. Live Supabase azviqqejypsefzilgonr ACTIVE_HEALTHY PostgreSQL17.11; production SQL/data/Auth/Storage/Edge/config strictly read-only.
+
+**New complete directly examined exposed SQL definitions:** all **90/90 `extensions` routines; 25,659 characters** of SQL declarations. Six full platform PL/pgSQL event-trigger sources (cron/net grants, PostgREST DDL/drop schema cache notices, GraphQL wrapper and placeholder) and 84 complete native C *SQL declarations only*. Native compiled C instructions are **INACCESSIBLE / UNVERIFIED**, never counted as full binary code review. Independently verified six enabled event-trigger handlers, five current extension versions, module ownership, ACL/dependency surface, ten `pg_trgm` operators and two GiST/GIN opclasses; no unsupported 'unused' inference from missing dependencies. Full 1–end ranges, MD5, literal accessible DDL, per-object semantic verdict and limitations in [R381 receipt](../audits/issue509-r381-extension-source-review-20261120.json). First-time accessible extension DDL credit 25659 characters, **0 #267 GitHub source lines**. No reproduced fixable application defect, verified safe deletion, or measured platform performance regression in this provider-owned group; no speculative modifications.
+
+**Earlier fix #3481 merged-source readback:** exact source `3df9ad1e767ee82e9d28e089d375611b510af9ac` has **six successful** source-push workflows: Node22 [44683296350](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44683296350), isolated PG17 [44683296599](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44683296599), approval [44683296472](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44683296472), cloud/browser [44683296313](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44683296313), Python [44683296380](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44683296380), issue33 selected [44683296352](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44683296352). Probe [44683296379](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44683296379) SKIPPED, **not PASS**. No duplicate tests triggered. This does NOT satisfy independent #3347 READY candidate isolation or authorize Publish; #509 release stays TESTING.
+
+**Remaining:** Full all-provider word baseline IN_PROGRESS. Next precise coverage cursor: after `extensions` functions 90/90, review `extensions` operator family membership/pg_amop strategy items (10 operators and 2 opclasses only catalog-reviewed today), then earliest still-unreviewed provider object in ledger. Preserve #504/#267/#96/#33/#455 scopes, immutable migrations, archives, retired-directory evidence and hourly alerts. No owner action or production change.
+
+---
+
 # Issue #509 R380 workspace inactive selection PR merge + Vault/PgBouncer semantic review [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=009fef2109432d799d0796e268a92e247ffbb0c5 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
