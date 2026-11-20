@@ -1,3 +1,17 @@
+# Issue #509 R396 — pg_catalog configuration, replication, catalog and WAL declarations [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=4eba1624018ffa378d63d15b24b5f6ab92a74c3f preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-20 UTC.** Immutable development preflight Git blob independently content-verified. Production Supabase `azviqqejypsefzilgonr` ACTIVE_HEALTHY PG17.11 **READ-ONLY**; no live SQL/data/Auth/Storage/Edge/config, publication, backup, billing or schedule writes. Main `57adc419ed4b106e158435b465971f5986537b41`; release/production `07f054f6470b2ae36b36faef8fb9a8161dd3bfb5` observed.
+
+**New semantic review:** 200/200 complete accessible `pg_catalog` f/p/w declarations, ranks **1921–2120/3162**, **42211/42211 full DDL characters** (199 internal native ABIs, one full LANGUAGE SQL body). Exact full text, OID, signature, MD5, source range, per-object semantics, native limitation and verdict recorded in [append-only R396 ledger](../audits/issue509-r396-pg-catalog-config-replication-20261120.json). Core native compiled source remains **UNVERIFIED**; #267 GitHub source-line credit zero. One-argument `pg_relation_size` SQL wrapper correctly selects `'main'` fork. Replication create/copy/drop, `pg_logical_slot_get_*`, server read/list, `pg_notify` and config/role utilities were **never executed**.
+
+**Read-only app/dependency crosschecks:** one publication with zero expanded tables, zero replication slots/subscriptions, seven enabled event triggers, one non-system partitioned table, no current lock waiter or ungranted lock; no DIC-owned function source references `pg_notify`, `pg_get_functiondef`, `pg_relation_size`, `pg_logical_emit_message`, or `pg_replication_origin_*` (simple source search is **not** dependency proof). No verified new app defect, dead/unused object or measured bottleneck; no speculative live change.
+
+**Status:** provider-wide baseline **IN_PROGRESS**; contiguous exposed `pg_catalog` functions **2120/3162**, 157 aggregates separately pending; no new source/test/CI writes (CI NOT_APPLICABLE); no READY/DEPLOYED promotion. Full CURRENT_STATUS/RELEASE_QUEUE connector text inaccessible this run, current release readiness UNVERIFIED. Next exact unreviewed cursor: rank **2121**, `pg_catalog.pg_replication_origin_oid(text)`, OID **6005**, char 1. Existing hourly schedule and owner-action-only notification policy unchanged.
+
+---
+
 # Issue #509 R395 — PostgreSQL numeric, overlap, advisory-lock and catalog declarations [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=7ffa669be06890df4ca0bf8250f58c9d211237ba preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
