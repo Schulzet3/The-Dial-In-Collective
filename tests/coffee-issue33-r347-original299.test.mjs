@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {selected299,selectedName,selectedUrl,norm} from '../scripts/audit/issue33-r347-original299-check.mjs';
+import {selected299,selected299OwnTags,selectedName,selectedUrl,norm} from '../scripts/audit/issue33-r347-original299-check.mjs';
+import {withoutRepeatedCoffeeOriginSuffix} from '../src/server/coffee-fact-compatibility.mjs';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 import {requiredFocusedSourceFailures} from '../scripts/audit/issue33-focused-source-acceptance.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../site/cloud/coffee-url-autofill.js';
@@ -49,4 +50,30 @@ test('R347 required original source identity and UI failures cannot be green',()
   {...good,add_coffee_ui_rendered:false},{...good,source_review_rendered:false}]){
   assert.ok(requiredFocusedSourceFailures([299],[bad]).length>0);
  }
+});
+
+// R347 RED-FIRST REAL GITHUB RUN 44685623135: current official selected product
+// explicitly publishes process/roast in its product_json tags even though
+// its prose only says "water-friendly"; do not call those direct facts inferred.
+test('R347 exact selected product JSON tags support Washed and Medium; generic SEO cannot',()=>{
+ const exact=selected299OwnTags([{label:'Published product tags',source_type:'product_json',value:'["Brazil","medium roast coffee","Washed Coffee"]'}]);
+ assert.deepEqual(exact,{washed:true,medium:true});
+ assert.deepEqual(selected299OwnTags([{label:'Published product tags',source_type:'html',value:'["medium roast coffee","Washed Coffee"]'}]),{washed:false,medium:false});
+ assert.deepEqual(selected299OwnTags([{label:'Product category tags',source_type:'product_json',value:'["medium roast coffee","Washed Coffee"]'}]),{washed:false,medium:false});
+ assert.deepEqual(selected299OwnTags([{label:'Published product tags',source_type:'product_json',value:'invalid-json'}]),{washed:false,medium:false});
+});
+test('R347 exact selected named locality does not repeat contradictory broad directional country',()=>{
+ assert.equal(withoutRepeatedCoffeeOriginSuffix('North Eastern Brazil, Minas Gerais, Brazil'),'Minas Gerais, Brazil');
+ assert.equal(withoutRepeatedCoffeeOriginSuffix('South Brazil, São Paulo, Brazil'),'São Paulo, Brazil');
+});
+test('R347 preserve distinct countries, blends and unqualified geographic regions',()=>{
+ for(const source of [
+  'North Eastern Brazil, Minas Gerais, Peru',
+  'North Eastern Brazil, Minas Gerais, Colombia',
+  'South Brazil, Brazil',
+  'North Eastern Brazil, Minas Gerais, Brazil, Peru',
+  'North Eastern Brazil, Coffee Blend, Brazil',
+  'South East Asia, Java, Indonesia',
+  'Minas Gerais, Brazil, Espírito Santo'
+ ])assert.equal(withoutRepeatedCoffeeOriginSuffix(source),source);
 });

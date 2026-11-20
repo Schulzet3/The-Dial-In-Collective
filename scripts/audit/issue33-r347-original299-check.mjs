@@ -13,6 +13,17 @@ export const selectedUrl='https://sextantcoffee.com/products/the-windsor-sextant
 export const selectedName='The Windsor - Brazil Coffee';
 export const norm=v=>String(v||'').normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
 const sha=v=>createHash('sha256').update(v).digest('hex');
+// Explicit currently selected product JSON tags are product-specific second-tier
+// evidence, NOT merchant nav/SEO or an inference from "water-friendly" prose.
+export function selected299OwnTags(facts){
+ const row=(facts||[]).find(f=>f.label==='Published product tags'&&f.source_type==='product_json');
+ let tags=[];try{tags=JSON.parse(row?.value||'[]');}catch{}
+ if(!Array.isArray(tags))tags=[];
+ return {
+  washed:tags.some(s=>norm(s)==='washed coffee'),
+  medium:tags.some(s=>norm(s)==='medium roast coffee')
+ };
+}
 export function selected299(html){
  const own=productMarkup(String(html||''));
  const headings=selectedProductHeadings(own);
@@ -38,8 +49,9 @@ if(process.env.DIC_R347_VERIFY==='1'){
  check(r.archived_coffee===selectedName&&selected.exact&&norm(f.name)===norm(selectedName),'current_exact_selected_H1');
  check(selected.ownDescription&&selected.ownEspressoContext,'current_selected_description_wording');
  check(!selected.literalProcess&&!selected.literalRoast,'source_did_not_silently_add_a_labeled_process_or_roast');
- check(!f.process,'do_not_convert_water_friendly_processing_to_Washed');
- check(!f.roast_level,'do_not_invent_Medium_roast_from_other_context');
+ const ownTags=selected299OwnTags(r.source_facts);
+ check(ownTags.washed&&norm(f.process)==='washed','explicit_exact_selected_product_Washed_Coffee_tag');
+ check(ownTags.medium&&norm(f.roast_level)==='medium','explicit_exact_selected_product_Medium_roast_tag');
  check(!f.producer||!/highly knowledgeable|multi.generational|brazilian family/i.test(f.producer),'unnamed_family_not_nominated_as_named_producer');
  check(['cherry','milk chocolate'].every(x=>norm(f.tasting_notes).includes(x)),'unqualified_cherry_milk_chocolate_preserved');
  check(!/north eastern brazil.*minas gerais.*brazil/i.test(norm(f.origin)),'no_concatenated_contradictory_geographic_origin');
@@ -55,7 +67,7 @@ if(process.env.DIC_R347_VERIFY==='1'){
  const out={passed:errors.length===0,errors,source_sha:process.env.DIC_R347_HEAD_SHA,event_sha:process.env.DIC_R347_EVENT_SHA,
   original_number:299,official_url:r.official_url,final_url:r.final_url||null,selected_h1:selected.headings,
   real_html_bytes:bytes?.length||0,real_html_sha256:bytes?sha(bytes):null,selected,
-  fields:f,conflicts:r.conflicts||[],source_facts:(r.source_facts||[]).slice(0,30),
+  fields:f,selected_product_tag_proof:selected299OwnTags(r.source_facts),conflicts:r.conflicts||[],source_facts:(r.source_facts||[]).slice(0,30),
   actual_member_save:false,present_lot_certified:false,all603_certified:false,production_operations:0};
  writeFileSync(join(dir,'r347-original299-afterproof.json'),JSON.stringify(out,null,2)+'\n');
  console.log('[DIC33 R347] '+JSON.stringify(out));

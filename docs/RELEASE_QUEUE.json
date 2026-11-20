@@ -17388,6 +17388,32 @@
       ],
       "notes": "R380 readback: explicit nonforce [skip netlify] PR #3481 merge 3df9ad1e, exact migration/fixture/runner blobs unchanged from tested PR head. Historical migrations untouched; production read-only.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-33-r347-original299-directions-source",
+      "issue": 33,
+      "pr": 3485,
+      "title": "Preserve product-own Washed/Medium specs and remove duplicate compass-qualified country in selected original #299 origin",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-fact-compatibility.mjs"
+      ],
+      "owner_source": "Issue #33 R347 original603 #299 exact https://sextantcoffee.com/products/the-windsor-sextant-coffee; DIC_PREFLIGHT_VERIFIED development_sha=932d8c0fff78c6f2d346728f56af84344f159ab9 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e; R347 same-commit scoped journal",
+      "tests": [
+        "Initial live red source 44685623135: 8/8 synthetic and official H1 559744 bytes SHA256 de7ec3fb9aaa66a8fa66232e83a99bcd1166e6f09dd33662d9df4d4695591c9e; afterproof FAILED 3: two false tag-ignorant assertions and real duplicate country origin.",
+        "Real exact product_json tag 'medium roast coffee'/'Washed Coffee' is valid selected second-tier proof; direct prose 'water-friendly' alone does not prove process.",
+        "New conservative generic direction-country/locality-country presentation correction and disjoint positive/negative exact source and metadata/adversarial tests; amended exact PR-head CI PENDING."
+      ],
+      "ci_runs": [
+        44685623135
+      ],
+      "blockers": [
+        "Corrected exact PR-head applicable CI and fresh raw first-party official source afterproof pending.",
+        "Nonforce reviewed merge, exact merged-source CI, independent #3347 source-isolated READY certification and original603 semantic acceptance not yet complete."
+      ],
+      "notes": "Never infer merchant-wide SEO/menu, present lot/harvest, signed-in user save or 603 individual certification. DEVELOPMENT only; no production Netlify, provider/member/SQL/Auth writes, forced history, release or schedule changes.",
+      "production_deployed": false
     }
   ],
   "history": [
