@@ -1,0 +1,687 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch": "V13W",
+  "authority": "DEVELOPMENT_ONLY_NO_PUBLISH",
+  "preflight": {
+    "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "exact_content_verified": true
+  },
+  "strict_method": "Each physical literal separately fetched/read from immutable Git path/blob and individually inspected for source behavior, quality/security/privacy/performance, obsolescence, counterpart, test and Locked fit; no inventory-only semantic credit.",
+  "post_pin_drift": "INCOMPLETE_FULL_LIVE_TREE",
+  "tests": {
+    "source_line_literals": "PASS_30_OF_30",
+    "direct_source_read": "PERFORMED",
+    "runtime_node22": "NOT_RUN_DOCS_ONLY",
+    "browser_mobile_offline": "NOT_RUN_DOCS_ONLY",
+    "sql_auth_rls": "NOT_RUN_DOCS_ONLY",
+    "provider": "NOT_APPLICABLE",
+    "pr_head_ci": "PENDING_AT_AUTHORING",
+    "merged_ci": "PENDING_AT_AUTHORING"
+  },
+  "track": "PINNED_CURRENT_V2_DIRECT",
+  "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+  "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+  "source_ranges": [
+    {
+      "manifest_index_1_based": 58,
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "start_line": 39,
+      "end_line": 68,
+      "line_count": 30
+    }
+  ],
+  "new_direct_lines": 30,
+  "previous_receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C58-9-38-20261119-V13V.json",
+  "integrity": {
+    "raw_blob_parity_verified": true,
+    "live_blob_parity_verified": true,
+    "nonoverlap_against_v13v": true,
+    "central_S2_143_lines_C58_39_60_already_prior_reviewed_no_unique_recredit": true
+  },
+  "findings": [
+    {
+      "severity": "INFORMATIONAL",
+      "description": "Validator verifies historical interval arithmetic, not per-line semantic proof. Earlier central S2 direct C58:39–60 may overlap historical coverage; no unique historical credit attributed."
+    }
+  ],
+  "per_line": [
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 39,
+      "source_literal": "  const binary=file.source_kind==='binary';",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Sets binary flag from ledger file source_kind",
+      "quality_bug_security_privacy_performance": "Self-reported kind may diverge from exact source bytes",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Negative test misclassified binary records",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 40,
+      "source_literal": "  if(binary){binaryFiles++;if(src.kind==='utf8'||src.line_count!==0)add('Bad binary classification '+file.path);}",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Counts binary files; rejects UTF-8 or nonzero inventory text lines for binary",
+      "quality_bug_security_privacy_performance": "Binary content hashes are not semantically analyzed by counting",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Test binary with spoofed utf8/line_count",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 41,
+      "source_literal": "  else{textFiles++;sourceLines+=src.line_count;if(src.kind!=='utf8')add('Bad UTF8 classification '+file.path);}",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Counts UTF-8 source lines; rejects non-UTF8 inventory kind",
+      "quality_bug_security_privacy_performance": "Byte-level UTF-8 classification must be separately grounded",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Test text file with mismatched source kind",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 42,
+      "source_literal": "  const audit=file.reviewed_ranges||[],pending=file.remaining_ranges||[];",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Defaults reviewed and remaining ranges to empty arrays",
+      "quality_bug_security_privacy_performance": "Absent arrays become empty rather than an explicit missing-array failure",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Negative test omitted arrays against file coverage",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 43,
+      "source_literal": "  if(!Array.isArray(audit)||!Array.isArray(pending)){add('Missing interval arrays '+file.path);continue;}",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Rejects non-array reviewed/pending interval fields",
+      "quality_bug_security_privacy_performance": "Empty defaults allowed, but invalid types are detected",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Test null/string/object range values",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 44,
+      "source_literal": "  if(binary&&(audit.length||pending.length)){add('Binary has text ranges '+file.path);continue;}",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Rejects binary range claims and skips subsequent interval scan",
+      "quality_bug_security_privacy_performance": "Cannot grant semantic binary review from text ranges",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Test binary with review intervals",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 45,
+      "source_literal": "  const intervals=[",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Begins merged interval array from reviewed and pending ranges",
+      "quality_bug_security_privacy_performance": "Correctness depends on exact range source and metadata trust",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Test mixed reviewed and pending ranges",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 46,
+      "source_literal": "   ...audit.map(r=>({...r,reviewed:true})),",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Spreads reviewed ranges and tags reviewed true",
+      "quality_bug_security_privacy_performance": "A flag cannot independently prove human/AI line-specific semantic read",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Feed unverifiable reviewed metadata and confirm only arithmetic is attested",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 47,
+      "source_literal": "   ...pending.map(r=>({...r,reviewed:false}))",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Spreads pending ranges and tags reviewed false",
+      "quality_bug_security_privacy_performance": "Pending remains unreviewed; no PASS implied",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Assert pending is not counted reviewed",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 48,
+      "source_literal": "  ].sort((a,b)=>a.first_line-b.first_line);",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Sorts combined intervals by their starting line",
+      "quality_bug_security_privacy_performance": "Tie order may vary but subsequent cursor rejects overlaps",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Test equal starts and reversed interval arrays",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 49,
+      "source_literal": "  let cursor=1,localReview=0,localRemaining=0;",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Initializes physical cursor at 1 and local review/unreviewed counters zero",
+      "quality_bug_security_privacy_performance": "Required first-line coverage, not semantic meaning verification",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Test first interval starts at line 2",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 50,
+      "source_literal": "  for(const part of intervals){",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Iterates all intervals for this file",
+      "quality_bug_security_privacy_performance": "No per-line source literals read in this loop",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Ensure empty intervals on nonempty file cause incomplete coverage error",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 51,
+      "source_literal": "   if(!positive(part.first_line)||!positive(part.last_line)||",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Requires positive integer starting and ending line numbers",
+      "quality_bug_security_privacy_performance": "JS safe-integer guard blocks noninteger/zero/negative starts",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Test NaN/float/zero/negative bounds",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 52,
+      "source_literal": "      part.last_line<part.first_line||part.first_line!==cursor||",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Requires last>=first and exact cursor start, blocking gaps and overlap",
+      "quality_bug_security_privacy_performance": "Arithmetic only; meaningful substantive review cannot be inferred",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Test overlap, gap, inverted bounds",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 53,
+      "source_literal": "      part.last_line>src.line_count){add('Gap or overlap '+file.path+' at '+cursor);break;}",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Requires end<=source count; emits error then breaks",
+      "quality_bug_security_privacy_performance": "Break leaves later intervals unchecked; final coverage still errors",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Test out-of-bound final interval",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 54,
+      "source_literal": "   if(part.reviewed){",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Branches for reviewed interval accounting",
+      "quality_bug_security_privacy_performance": "A reviewed classification is an input assertion not independent proof",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Trace reviewed range receipt hashes independently",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 55,
+      "source_literal": "    if(part.line_count!==count(part)||part.method!=='ai_assisted_direct_line_by_line_semantic_read'||",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Requires reported line_count and exact ai_assisted direct-review method label",
+      "quality_bug_security_privacy_performance": "A string-label equality cannot prove actual per-line inspection",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Feed counterfeit method label and check validator limitations",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 56,
+      "source_literal": "       !/^B\\d{3}$/.test(part.batch_id||''))add('Unqualified semantic interval '+file.path);",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Requires reviewed batch id B plus exactly three digits",
+      "quality_bug_security_privacy_performance": "Future naming beyond B999 would fail; current protocol uses separate strict S2 evidence",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Test malformed batch id in historical validator only",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 57,
+      "source_literal": "    const k=key({...part,path:file.path});",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Builds path/range key for reviewed interval",
+      "quality_bug_security_privacy_performance": "String concatenation of path/line pair is deterministic but not cryptographic evidence",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Test exact path/range collisions",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 58,
+      "source_literal": "    if(ledgerReview.has(k))add('Duplicate reviewed interval '+k);",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Flags duplicate exact reviewed interval key",
+      "quality_bug_security_privacy_performance": "Partial-overlap ranges handled by cursor, exact key duplicates separately flagged",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Test duplicate intervals",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 59,
+      "source_literal": "    ledgerReview.set(k,part.batch_id);",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Stores reviewed interval batch ID by key",
+      "quality_bug_security_privacy_performance": "Stores declaration, not original exact literal or semantic quality",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Cross-verify batch source blob independently",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 60,
+      "source_literal": "    localReview+=count(part);",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Adds reviewed interval physical line count",
+      "quality_bug_security_privacy_performance": "Potential count inflation if input receipt falsely claims review; validator expressly arithmetic-only",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Compare independent original physical literals",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 61,
+      "source_literal": "   }else{",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Branches to unreviewed range case",
+      "quality_bug_security_privacy_performance": "Maintains status distinction",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Test mixed reviewed and pending ranges",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 62,
+      "source_literal": "    if(part.status!=='UNREVIEWED')add('Misclassified remaining range '+file.path);",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Requires pending part status UNREVIEWED",
+      "quality_bug_security_privacy_performance": "Case-sensitive status prevents silent upgrade of pending",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Test wrong pending status",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 63,
+      "source_literal": "    localRemaining+=count(part);",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Adds unreviewed physical range length to remaining",
+      "quality_bug_security_privacy_performance": "Maintains denominator but does not read missing code",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Cross-check remaining with immutable denominator",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 64,
+      "source_literal": "   }",
+      "inspection_class": "mechanically_trivial_direct_read",
+      "behavior": "Closes reviewed/pending branch",
+      "quality_bug_security_privacy_performance": "Mechanical code delimiter",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Lint/parser covers syntax only",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 65,
+      "source_literal": "   cursor=part.last_line+1;",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Moves physical cursor to one past current interval end",
+      "quality_bug_security_privacy_performance": "Ensures contiguous full-file partition across intervals",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Test adjacent intervals and EOF boundary",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 66,
+      "source_literal": "  }",
+      "inspection_class": "mechanically_trivial_direct_read",
+      "behavior": "Closes interval loop",
+      "quality_bug_security_privacy_performance": "Mechanical code delimiter",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "No behavioral test needed beyond range fixtures",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 67,
+      "source_literal": "  if(cursor!==src.line_count+1)add('Incomplete original line coverage '+file.path);",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Checks final cursor equals last source line plus one",
+      "quality_bug_security_privacy_performance": "Rejects tail not accounted for but not false semantic certification",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Test trailing unreviewed gap",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    },
+    {
+      "immutable_path": "scripts/audit/issue267-coverage-contract.mjs",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "source_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "line": 68,
+      "source_literal": "  if(audit.length&&pending.length){partial++;if(file.coverage!=='PARTIAL_AI_ASSISTED_DIRECT_SEMANTIC_REVIEW')add('Wrong partial status '+file.path);}",
+      "inspection_class": "substantive_direct_semantic_read",
+      "behavior": "Increments partially-covered file count and requires exact partial coverage label when both lists present",
+      "quality_bug_security_privacy_performance": "Categorizes files by input intervals; no direct semantic proof",
+      "dead_obsolete_duplicate": "Current historical source pin; no deletion without reproduced live fault and tests",
+      "counterpart_or_absence": {
+        "development_sha": "e95d2b6a55bb79d75bbda2c5689c55f3c61e70e1",
+        "live_path": "scripts/audit/issue267-coverage-contract.mjs",
+        "live_blob_sha": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+        "whole_blob_equal": true,
+        "related_owner": "#267 source audit; arithmetic contract cannot sign semantic review"
+      },
+      "testability_remediation_opportunity": "Test partial file classification and coverage typo",
+      "locked_fit": "Preserve immutable source, first-line audit, exact nonoverlap, member/privacy data, locked release gates; source-count arithmetic is not semantic verification."
+    }
+  ],
+  "next_source": {
+    "manifest_index_1_based": 58,
+    "path": "scripts/audit/issue267-coverage-contract.mjs",
+    "line": 69
+  }
+}
