@@ -5081,6 +5081,25 @@
       "release": "TESTING",
       "baseline": "IN_PROGRESS",
       "next": "Verify exact PR-head checks, repair and nonforce integrate only on PASS; #3347 candidate and #96 hosted acceptance separate"
+    },
+    {
+      "run": "R380",
+      "date": "2026-11-20",
+      "preflight_development_sha": "009fef2109432d799d0796e268a92e247ffbb0c5",
+      "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "receipt_path": "docs/audits/issue509-r380-workspace-merge-vault-pgbouncer-20261120.json",
+      "pr": 3481,
+      "merged_source_sha": "3df9ad1e767ee82e9d28e089d375611b510af9ac",
+      "pr_head_ci_success": 7,
+      "pr_head_ci_skipped": 1,
+      "new_provider_objects_semantically_reviewed": 6,
+      "first_time_exposed_source_ddl_characters": 3079,
+      "native_compiled_words_unverified": true,
+      "issue267_source_lines": 0,
+      "production_writes": 0,
+      "release": "TESTING",
+      "baseline": "IN_PROGRESS",
+      "next": "Exact merged-source CI; unreviewed extensions SQL declarations and native-implementation access boundaries."
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -25834,5 +25853,27 @@
     "full_baseline": "IN_PROGRESS",
     "owner_publish": "NOT_AUTHORIZED",
     "next": "Verify exact PR-head checks, repair and nonforce integrate only on PASS; #3347 candidate and #96 hosted acceptance separate"
+  },
+  "provider_vault_pgbouncer_full_text_run380": {
+    "run": "R380",
+    "date": "2026-11-20",
+    "preflight_development_sha": "009fef2109432d799d0796e268a92e247ffbb0c5",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "receipt_path": "docs/audits/issue509-r380-workspace-merge-vault-pgbouncer-20261120.json",
+    "scope": "Provider-owned pgbouncer.get_auth 1 + vault 5",
+    "exposed_functions_directly_read": 6,
+    "exposed_sql_ddl_chars": 3079,
+    "full_plpgsql_bodies": 3,
+    "native_c_function_declarations": 3,
+    "native_c_implementations": "INACCESSIBLE",
+    "no_sensitive_rows": true,
+    "provider_writes": 0,
+    "findings": "Unused new_key_id parameters (create/update) and decrypted_secret initializer (update); no safe provider-owned change or measured bottleneck. PgBouncer auth external consumer unobservable via SQL pg_depend.",
+    "first_time_definition_ddl_chars": 3079,
+    "issue267_source_line_credit": 0,
+    "pr3481_nonforce_merged": "3df9ad1e767ee82e9d28e089d375611b510af9ac",
+    "release": "TESTING",
+    "baseline": "IN_PROGRESS",
+    "next_cursor": "extensions SQL function declarations (unreviewed), or independently changed provider source; no compiled C completeness claim."
   }
 }
