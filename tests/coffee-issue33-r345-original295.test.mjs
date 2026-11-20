@@ -4,7 +4,7 @@ import {selected295,selectedName,selectedUrl,norm} from '../scripts/audit/issue3
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 import {requiredFocusedSourceFailures} from '../scripts/audit/issue33-focused-source-acceptance.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../site/cloud/coffee-url-autofill.js';
-const own='<h1>Gentle Cove Decaf</h1><p>This decaf is calm and easy, made from a pair of South American beans that naturally lean sweet and smooth. Full flavor, no caffeine, and nothing harsh.</p>'+
+const own='<h2>Gentle Cove Decaf</h2><p>This decaf is calm and easy, made from a pair of South American beans that naturally lean sweet and smooth. Full flavor, no caffeine, and nothing harsh.</p>'+
  '<h3>Flavor Notes</h3><p>• Smooth body with a soft, rounded feel</p><p>• Light caramel sweetness</p>'+
  '<p>• Gentle cocoa finish</p><p>• Balanced and comforting from start to finish</p>'+
  '<h3>Roast Level</h3><p>Medium, keeping things warm, sweet, and approachable.</p>'+
