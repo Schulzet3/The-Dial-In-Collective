@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R384",
+  "date_utc": "2026-11-20",
+  "authority": "SUPABASE_AUDIT_PRODUCTION_READ_ONLY_DEVELOPMENT_DOCS_ONLY",
+  "preflight": {
+    "development_sha": "fa2946e532361163be19aad8e08ca78231b8ad08",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "source_at_immutable_sha": true
+  },
+  "project_ref": "azviqqejypsefzilgonr",
+  "method": "DIRECT_FULL_LIVE_PG_GET_FUNCTIONDEF_PER_SOURCE_LITERAL_SEMANTIC_REVIEW_AND_MD5",
+  "source_counts": {
+    "complete_definitions": 15,
+    "first_time": 13,
+    "changed_full_rereview": 2,
+    "first_time_chars": 22393,
+    "changed_chars": 3163,
+    "total_chars": 25556,
+    "issue267_source_lines_credited": 0
+  },
+  "complete_source": [
+    {
+      "identity": "realtime.authorize(role_name text, topic_name text, claims text, sub text, headers text, read_extensions text[], write_extensions text[], OUT read_allowed boolean[], OUT write_allowed boolean[])",
+      "source_chars": 2508,
+      "source_md5": "27bcad064e30f42a3909b45f9d8567fe",
+      "complete_source_range": "characters 1-2508",
+      "source_text": "CREATE OR REPLACE FUNCTION realtime.authorize(role_name text, topic_name text, claims text, sub text, headers text, read_extensions text[], write_extensions text[], OUT read_allowed boolean[], OUT write_allowed boolean[])\n RETURNS record\n LANGUAGE plpgsql\nAS $function$\ndeclare\n  probe_ids uuid[];\n  probe_inserted_at timestamp := now() at time zone 'utc';\n  visible_ids uuid[];\n  ext text;\n  allowed boolean;\nbegin\n  -- The probe inserts are rolled back, but they still give the transaction an xid, so it ends\n  -- in a commit. Nothing durable was written, so skip waiting on the WAL flush and sync standbys.\n  -- Set outside the block below, whose rollback would undo it.\n  perform set_config('synchronous_commit', 'off', true);\n\n  -- The RAISE at the end of this block rolls back everything in it.\n  begin\n    probe_ids := array(select gen_random_uuid() from unnest(read_extensions));\n\n    insert into realtime.messages (id, topic, extension, inserted_at, updated_at)\n    select p.id, topic_name, p.extension, probe_inserted_at, probe_inserted_at\n    from unnest(probe_ids, read_extensions) as p(id, extension);\n\n    perform set_config('role', role_name, true),\n            set_config('realtime.topic', topic_name, true),\n            set_config('request.jwt.claims', claims, true),\n            set_config('request.jwt.claim.sub', sub, true),\n            set_config('request.jwt.claim.role', role_name, true),\n            set_config('request.headers', headers, true);\n\n    -- One lookup for every probe, by the full primary key. Skipped without probes, so the\n    -- SELECT policies are not planned for a write.\n    if cardinality(probe_ids) > 0 then\n      visible_ids := array(\n        select m.id\n        from realtime.messages m\n        where m.inserted_at = probe_inserted_at\n          and m.id = any(probe_ids));\n    end if;\n\n    read_allowed := array(\n      select p.id = any(visible_ids)\n      from unnest(probe_ids) with ordinality as p(id, n)\n      order by p.n);\n\n    write_allowed := '{}';\n\n    foreach ext in array write_extensions loop\n      begin\n        insert into realtime.messages (topic, extension, inserted_at, updated_at)\n        values (topic_name, ext, now() at time zone 'utc', now() at time zone 'utc');\n\n        allowed := true;\n      exception when insufficient_privilege then\n        allowed := false;\n      end;\n\n      write_allowed := write_allowed || allowed;\n    end loop;\n\n    raise sqlstate 'RTA01';\n  exception when sqlstate 'RTA01' then\n    null;\n  end;\nend;\n$function$\n",
+      "review_type": "CHANGED_DEFINITION_REREVIEW",
+      "semantic_interpretation": "Changed provider-owned authorization probe: inserts read probes and write probes inside nested PL/pgSQL exception block then raises RTA01 to rollback all probes. Transaction-local synchronous_commit off precedes the rollback block. No real audience permission verified by catalog source alone.",
+      "verdict": "NO_REPRODUCED_DIC_APP_DEFECT_OR_SAFE_PROVIDER_DELETION; PLATFORM_OWNED",
+      "source_executed": false
+    },
+    {
+      "identity": "realtime.filters_hash(filters realtime.user_defined_filter[])",
+      "source_chars": 321,
+      "source_md5": "224d7075f0e9ccb1178b20e9d8eb4962",
+      "complete_source_range": "characters 1-321",
+      "source_text": "CREATE OR REPLACE FUNCTION realtime.filters_hash(filters realtime.user_defined_filter[])\n RETURNS bytea\n LANGUAGE sql\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$\n  select pg_catalog.int8send(pg_catalog.hash_array_extended(filters, 0))\n      || pg_catalog.int8send(pg_catalog.hash_array_extended(filters, 1))\n$function$\n",
+      "review_type": "FIRST_TIME_COMPLETE_SQL_SOURCE_REVIEW",
+      "semantic_interpretation": "Two independent seeded array-hash values concatenated as 16 bytes for subscription/filter identity; native catalog hash is external, no application event delivery inferred.",
+      "verdict": "NO_REPRODUCED_DIC_APP_DEFECT_OR_SAFE_PROVIDER_DELETION; PLATFORM_OWNED",
+      "source_executed": false
+    },
+    {
+      "identity": "storage.delete_lifecycle_objects(object_ids uuid[])",
+      "source_chars": 2327,
+      "source_md5": "b9737ba9f65ae16796874a5ff3b82a33",
+      "complete_source_range": "characters 1-2327",
+      "source_text": "CREATE OR REPLACE FUNCTION storage.delete_lifecycle_objects(object_ids uuid[])\n RETURNS TABLE(id uuid, is_delete_marker boolean, metadata jsonb)\n LANGUAGE plpgsql\nAS $function$\nDECLARE\n    object_id uuid;\n    deleted_row storage.objects%ROWTYPE;\n    deleted_ids uuid[];\n    deleted_markers boolean[];\n    deleted_metadata jsonb[];\n    bulk_deleted boolean := false;\nBEGIN\n    -- Surface pre-existing deferred violations instead of treating them as blocked rows.\n    SET CONSTRAINTS ALL IMMEDIATE;\n    PERFORM set_config('storage.allow_delete_query', 'true', true);\n\n    -- One subxact keeps the subxid cache from overflowing; rows return only once it commits.\n    BEGIN\n        WITH deleted AS (\n            DELETE FROM storage.objects AS object_row\n              WHERE object_row.id = ANY(object_ids) AND object_row.archived_at IS NOT NULL\n              RETURNING object_row.id, object_row.is_delete_marker, object_row.metadata\n        )\n        SELECT array_agg(deleted.id), array_agg(deleted.is_delete_marker), array_agg(deleted.metadata)\n          INTO deleted_ids, deleted_markers, deleted_metadata\n          FROM deleted;\n        bulk_deleted := true;\n    EXCEPTION\n        WHEN OTHERS THEN\n            -- User triggers may use insufficient_privilege to block a row.\n            IF SQLSTATE <> '42501' AND left(SQLSTATE, 2) IN ('08', '40', '42', '53', '55', '57', '58', 'XX') THEN\n                RAISE;\n            END IF;\n    END;\n    IF bulk_deleted THEN\n        RETURN QUERY SELECT * FROM unnest(deleted_ids, deleted_markers, deleted_metadata);\n        RETURN;\n    END IF;\n\n    FOREACH object_id IN ARRAY object_ids LOOP\n        BEGIN\n            DELETE FROM storage.objects AS object_row\n              WHERE object_row.id = object_id AND object_row.archived_at IS NOT NULL\n              RETURNING object_row.* INTO deleted_row;\n            IF FOUND THEN\n                id := deleted_row.id;\n                is_delete_marker := deleted_row.is_delete_marker;\n                metadata := deleted_row.metadata;\n                RETURN NEXT;\n            END IF;\n        EXCEPTION\n            WHEN OTHERS THEN\n                IF SQLSTATE <> '42501' AND left(SQLSTATE, 2) IN ('08', '40', '42', '53', '55', '57', '58', 'XX') THEN\n                    RAISE;\n                END IF;\n        END;\n    END LOOP;\nEND;\n$function$\n",
+      "review_type": "FIRST_TIME_COMPLETE_SQL_SOURCE_REVIEW",
+      "semantic_interpretation": "Archived objects only, bulk-delete in subtransaction with row-by-row fallback on enumerated trigger failure codes. Could delete real objects if called; definition inspected but never executed; no storage rows presently.",
+      "verdict": "NO_REPRODUCED_DIC_APP_DEFECT_OR_SAFE_PROVIDER_DELETION; PLATFORM_OWNED",
+      "source_executed": false
+    },
+    {
+      "identity": "storage.enforce_bucket_lifecycle_service_role()",
+      "source_chars": 655,
+      "source_md5": "b4b21fec5ffef02e74e2477049138937",
+      "complete_source_range": "characters 1-655",
+      "source_text": "CREATE OR REPLACE FUNCTION storage.enforce_bucket_lifecycle_service_role()\n RETURNS trigger\n LANGUAGE plpgsql\n SET search_path TO 'pg_catalog'\nAS $function$\nBEGIN\n  IF current_user::text IS DISTINCT FROM TG_ARGV[0] THEN\n    -- Keep this check AFTER caller RLS accepts the proposed row. The API\n    -- recognizes this exact signal after rolling back its permission probe.\n    RAISE EXCEPTION 'bucket control columns may only be changed by the configured storage service role'\n      USING ERRCODE = 'PST01',\n            SCHEMA = TG_TABLE_SCHEMA,\n            TABLE = TG_TABLE_NAME,\n            CONSTRAINT = TG_NAME;\n  END IF;\n\n  RETURN NULL;\nEND;\n$function$\n",
+      "review_type": "CHANGED_DEFINITION_REREVIEW",
+      "semantic_interpretation": "Changed provider-owned AFTER UPDATE trigger; service-role current_user check signals PST01 after RLS acceptance. Trigger attached to lifecycle column updates.",
+      "verdict": "NO_REPRODUCED_DIC_APP_DEFECT_OR_SAFE_PROVIDER_DELETION; PLATFORM_OWNED",
+      "source_executed": false
+    },
+    {
+      "identity": "storage.enforce_versioning_status_transition()",
+      "source_chars": 539,
+      "source_md5": "47dc86fbd138d125125250b28b31d7ff",
+      "complete_source_range": "characters 1-539",
+      "source_text": "CREATE OR REPLACE FUNCTION storage.enforce_versioning_status_transition()\n RETURNS trigger\n LANGUAGE plpgsql\nAS $function$\nBEGIN\n    IF NEW.versioning_status = OLD.versioning_status THEN\n        RETURN NEW;\n    END IF;\n\n    IF NEW.versioning_status = 'DISABLED' OR\n       (OLD.versioning_status = 'DISABLED' AND NEW.versioning_status = 'SUSPENDED') THEN\n        RAISE EXCEPTION 'Cannot transition bucket versioning status from % to %',\n            OLD.versioning_status, NEW.versioning_status;\n    END IF;\n\n    RETURN NEW;\nEND;\n$function$\n",
+      "review_type": "FIRST_TIME_COMPLETE_SQL_SOURCE_REVIEW",
+      "semantic_interpretation": "BEFORE UPDATE trigger rejects versioning DISABLED transitions and DISABLED to SUSPENDED; preserves versioned objects' lifecycle contract.",
+      "verdict": "NO_REPRODUCED_DIC_APP_DEFECT_OR_SAFE_PROVIDER_DELETION; PLATFORM_OWNED",
+      "source_executed": false
+    },
+    {
+      "identity": "storage.list_multipart_uploads_with_delimiter(bucket_id text, prefix_param text, delimiter_param text, max_keys integer, next_key_token text, next_upload_token text, raw_prefix_param text)",
+      "source_chars": 2378,
+      "source_md5": "961eef74f03a12751abf768384b84371",
+      "complete_source_range": "characters 1-2378",
+      "source_text": "CREATE OR REPLACE FUNCTION storage.list_multipart_uploads_with_delimiter(bucket_id text, prefix_param text, delimiter_param text, max_keys integer DEFAULT 100, next_key_token text DEFAULT ''::text, next_upload_token text DEFAULT ''::text, raw_prefix_param text DEFAULT NULL::text)\n RETURNS TABLE(key text, id text, created_at timestamp with time zone)\n LANGUAGE sql\n STABLE\nAS $function$\nWITH candidates AS (\n    SELECT\n        upload.key AS object_key,\n        CASE\n            WHEN position($3 IN substring(upload.key FROM length(coalesce($7, $2)) + 1)) > 0\n            THEN left(\n                upload.key,\n                length(coalesce($7, $2))\n                    + position($3 IN substring(upload.key FROM length(coalesce($7, $2)) + 1))\n                    + length($3) - 1\n            )\n            ELSE upload.key\n        END AS result_key,\n        upload.id,\n        upload.created_at,\n        position($3 IN substring(upload.key FROM length(coalesce($7, $2)) + 1)) > 0 AS is_common_prefix\n    FROM storage.s3_multipart_uploads AS upload\n    WHERE upload.bucket_id = $1\n      AND upload.key COLLATE \"C\" LIKE $2 || '%'\n), filtered AS (\n    SELECT candidate.*\n    FROM candidates AS candidate\n    WHERE $5 = ''\n       OR candidate.result_key COLLATE \"C\" > $5\n       OR (\n           candidate.result_key COLLATE \"C\" = $5\n           AND NOT candidate.is_common_prefix\n           AND $6 <> ''\n           -- A completed or aborted marker repeats the remaining same-key uploads.\n           AND COALESCE(\n               (candidate.created_at, candidate.id COLLATE \"C\") > (\n                   SELECT marker.created_at, marker.id COLLATE \"C\"\n                   FROM storage.s3_multipart_uploads AS marker\n                   WHERE marker.bucket_id = $1\n                     AND marker.key COLLATE \"C\" = $5\n                     AND marker.id = $6\n               ),\n               TRUE\n           )\n       )\n), ranked AS (\n    SELECT\n        filtered.*,\n        row_number() OVER (\n            PARTITION BY filtered.result_key COLLATE \"C\"\n            ORDER BY filtered.created_at, filtered.id COLLATE \"C\"\n        ) AS prefix_rank\n    FROM filtered\n)\nSELECT ranked.result_key, ranked.id, ranked.created_at\nFROM ranked\nWHERE NOT ranked.is_common_prefix OR ranked.prefix_rank = 1\nORDER BY ranked.result_key COLLATE \"C\", ranked.created_at, ranked.id COLLATE \"C\"\nLIMIT $4;\n$function$\n",
+      "review_type": "FIRST_TIME_COMPLETE_SQL_SOURCE_REVIEW",
+      "semantic_interpretation": "Filters bucket/key prefix, generates delimiter common prefixes, keyset timestamp/ID cursor and deterministic C collation; external Storage API consumer, zero multipart uploads.",
+      "verdict": "NO_REPRODUCED_DIC_APP_DEFECT_OR_SAFE_PROVIDER_DELETION; PLATFORM_OWNED",
+      "source_executed": false
+    },
+    {
+      "identity": "storage.operation()",
+      "source_chars": 178,
+      "source_md5": "0720a7c3d1b49f9a8eee19e90d73bb97",
+      "complete_source_range": "characters 1-178",
+      "source_text": "CREATE OR REPLACE FUNCTION storage.operation()\n RETURNS text\n LANGUAGE plpgsql\n STABLE\nAS $function$\nBEGIN\n    RETURN current_setting('storage.operation', true);\nEND;\n$function$\n",
+      "review_type": "FIRST_TIME_COMPLETE_SQL_SOURCE_REVIEW",
+      "semantic_interpretation": "Returns transaction request storage.operation GUC, no side effects; provider context helper.",
+      "verdict": "NO_REPRODUCED_DIC_APP_DEFECT_OR_SAFE_PROVIDER_DELETION; PLATFORM_OWNED",
+      "source_executed": false
+    },
+    {
+      "identity": "storage.protect_active_lifecycle_states()",
+      "source_chars": 1016,
+      "source_md5": "fce9d03398ec222c77feec887c25c384",
+      "complete_source_range": "characters 1-1016",
+      "source_text": "CREATE OR REPLACE FUNCTION storage.protect_active_lifecycle_states()\n RETURNS trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO 'pg_catalog'\nAS $function$\nBEGIN\n    IF EXISTS (\n        SELECT 1 FROM storage.bucket_lifecycle_states\n        WHERE bucket_id = OLD.id\n          AND NOT (\n              continuation IS NULL\n              OR (continuation @> '{\"continuationVersion\": 1}' AND continuation #> '{batch,inFlight}' IS NULL)\n          )\n    ) THEN\n        RAISE EXCEPTION 'update or delete on table \"buckets\" violates foreign key constraint \"bucket_lifecycle_states_bucket_id_fkey\" on table \"bucket_lifecycle_states\"'\n            USING ERRCODE = 'foreign_key_violation',\n                  DETAIL = format('Key (id)=(%s) is still referenced from table \"bucket_lifecycle_states\".', OLD.id),\n                  SCHEMA = 'storage',\n                  TABLE = 'bucket_lifecycle_states',\n                  CONSTRAINT = 'bucket_lifecycle_states_bucket_id_fkey';\n    END IF;\n    RETURN OLD;\nEND;\n$function$\n",
+      "review_type": "FIRST_TIME_COMPLETE_SQL_SOURCE_REVIEW",
+      "semantic_interpretation": "BEFORE DELETE bucket guard rejects active/in-flight lifecycle continuation with explicit foreign-key-like SQLSTATE. Does not run on ordinary bucket updates.",
+      "verdict": "NO_REPRODUCED_DIC_APP_DEFECT_OR_SAFE_PROVIDER_DELETION; PLATFORM_OWNED",
+      "source_executed": false
+    },
+    {
+      "identity": "storage.protect_bucket_control_columns()",
+      "source_chars": 1858,
+      "source_md5": "7c31ae406e2f6281ead4009fff69fc68",
+      "complete_source_range": "characters 1-1858",
+      "source_text": "CREATE OR REPLACE FUNCTION storage.protect_bucket_control_columns()\n RETURNS trigger\n LANGUAGE plpgsql\n SET search_path TO 'pg_catalog'\nAS $function$\nDECLARE\n  configuration_changed boolean;\nBEGIN\n  IF TG_OP = 'INSERT' THEN\n    IF NEW.lifecycle_configuration IS NOT NULL\n       OR NEW.lifecycle_configuration_generation IS NOT NULL THEN\n      IF NOT pg_has_role(current_user, TG_ARGV[0], 'MEMBER') THEN\n        RAISE EXCEPTION 'only members of the configured storage service role may insert lifecycle policy state'\n          USING ERRCODE = '42501',\n                HINT = format(\n                  'Insert with both lifecycle columns NULL and configure lifecycle through the Storage API afterward, or insert as a member of %I.',\n                  TG_ARGV[0]\n                );\n      END IF;\n    END IF;\n\n    RETURN NEW;\n  END IF;\n\n  configuration_changed =\n    OLD.lifecycle_configuration IS DISTINCT FROM NEW.lifecycle_configuration\n    OR OLD.lifecycle_configuration_generation IS DISTINCT FROM NEW.lifecycle_configuration_generation;\n\n  IF NOT configuration_changed THEN\n    RETURN NEW;\n  END IF;\n\n  IF NEW.type IS DISTINCT FROM 'STANDARD' THEN\n    RAISE EXCEPTION 'bucket versioning and lifecycle controls require a Standard bucket'\n      USING ERRCODE = '0A000';\n  END IF;\n\n  IF NEW.lifecycle_configuration IS NULL\n     AND NEW.lifecycle_configuration_generation IS NULL THEN\n    RETURN NEW;\n  END IF;\n\n  IF NEW.lifecycle_configuration IS NULL\n     OR NEW.lifecycle_configuration_generation IS NULL\n     OR OLD.lifecycle_configuration IS NOT DISTINCT FROM NEW.lifecycle_configuration\n     OR OLD.lifecycle_configuration_generation IS NOT DISTINCT FROM NEW.lifecycle_configuration_generation THEN\n    RAISE EXCEPTION 'a changed lifecycle policy requires a new non-null generation'\n      USING ERRCODE = '22023';\n  END IF;\n\n  RETURN NEW;\nEND;\n$function$\n",
+      "review_type": "FIRST_TIME_COMPLETE_SQL_SOURCE_REVIEW",
+      "semantic_interpretation": "INSERT guard for lifecycle state/service role; UPDATE validates standard bucket, paired configuration/generation changes; separate AFTER role trigger enforces update authority.",
+      "verdict": "NO_REPRODUCED_DIC_APP_DEFECT_OR_SAFE_PROVIDER_DELETION; PLATFORM_OWNED",
+      "source_executed": false
+    },
+    {
+      "identity": "storage.protect_delete()",
+      "source_chars": 535,
+      "source_md5": "4371ae544fb1ef704f9c5d42265ac324",
+      "complete_source_range": "characters 1-535",
+      "source_text": "CREATE OR REPLACE FUNCTION storage.protect_delete()\n RETURNS trigger\n LANGUAGE plpgsql\nAS $function$\nBEGIN\n    -- Check if storage.allow_delete_query is set to 'true'\n    IF COALESCE(current_setting('storage.allow_delete_query', true), 'false') != 'true' THEN\n        RAISE EXCEPTION 'Direct deletion from storage tables is not allowed. Use the Storage API instead.'\n            USING HINT = 'This prevents accidental data loss from orphaned objects.',\n                  ERRCODE = '42501';\n    END IF;\n    RETURN NULL;\nEND;\n$function$\n",
+      "review_type": "FIRST_TIME_COMPLETE_SQL_SOURCE_REVIEW",
+      "semantic_interpretation": "Statement trigger blocks direct storage bucket/object DELETE without explicit storage.allow_delete_query flag; platform Storage API may set flag, absence of direct pg_depend does not prove dead.",
+      "verdict": "NO_REPRODUCED_DIC_APP_DEFECT_OR_SAFE_PROVIDER_DELETION; PLATFORM_OWNED",
+      "source_executed": false
+    },
+    {
+      "identity": "storage.reconcile_lifecycle_state(target_bucket_id text, policy_changed boolean)",
+      "source_chars": 2912,
+      "source_md5": "271a57ecfb24df02a5d9100c2a801323",
+      "complete_source_range": "characters 1-2912",
+      "source_text": "CREATE OR REPLACE FUNCTION storage.reconcile_lifecycle_state(target_bucket_id text, policy_changed boolean)\n RETURNS void\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO 'pg_catalog'\nAS $function$\nDECLARE\n    bucket storage.buckets%ROWTYPE;\n    active boolean;\n    idle boolean;\n    state_generation uuid;\nBEGIN\n    SELECT * INTO bucket FROM storage.buckets WHERE id = target_bucket_id FOR NO KEY UPDATE;\n    IF NOT FOUND THEN\n        RETURN;\n    END IF;\n\n    SELECT continuation IS NULL OR (\n               continuation @> '{\"continuationVersion\": 1}'\n               AND continuation #> '{batch,inFlight}' IS NULL\n           ), generation\n    INTO idle, state_generation\n    FROM storage.bucket_lifecycle_states\n    WHERE bucket_id = target_bucket_id\n    FOR UPDATE;\n\n    IF bucket.lifecycle_configuration IS NULL THEN\n        DELETE FROM storage.bucket_lifecycle_states\n        WHERE bucket_id = target_bucket_id\n          AND idle IS TRUE;\n\n        UPDATE storage.bucket_lifecycle_states\n        SET next_run_at = clock_timestamp(), updated_at = clock_timestamp()\n        WHERE bucket_id = target_bucket_id\n          AND idle IS NOT TRUE;\n        RETURN;\n    END IF;\n\n    active := bucket.versioning_status <> 'DISABLED'\n        AND bucket.lifecycle_configuration @> '{\"rules\":[{\"status\":\"Enabled\"}]}'::jsonb;\n\n    -- The state row records the generation it was reconciled with so callers need not detect\n    -- policy changes. Rows without a recorded generation keep their work.\n    policy_changed := policy_changed OR (\n        state_generation IS NOT NULL AND state_generation <> bucket.lifecycle_configuration_generation\n    );\n\n    INSERT INTO storage.bucket_lifecycle_states AS state (bucket_id, generation, next_run_at)\n    VALUES (bucket.id, bucket.lifecycle_configuration_generation, CASE WHEN active THEN clock_timestamp() END)\n    ON CONFLICT (bucket_id) DO UPDATE\n    SET next_run_at = CASE\n            WHEN policy_changed THEN\n                CASE WHEN active OR idle IS NOT TRUE THEN clock_timestamp() END\n            ELSE EXCLUDED.next_run_at\n        END,\n        generation = EXCLUDED.generation,\n        claim_id = CASE WHEN policy_changed AND idle IS TRUE\n                        THEN NULL ELSE state.claim_id END,\n        claim_until = CASE WHEN policy_changed AND idle IS TRUE\n                           THEN NULL ELSE state.claim_until END,\n        continuation = CASE WHEN policy_changed AND idle IS TRUE\n                            THEN NULL ELSE state.continuation END,\n        failure_count = CASE WHEN policy_changed AND idle IS TRUE\n                             THEN 0 ELSE state.failure_count END,\n        last_error = CASE WHEN policy_changed AND idle IS TRUE\n                          THEN NULL ELSE state.last_error END,\n        updated_at = clock_timestamp()\n    WHERE policy_changed OR (state.next_run_at IS NULL AND EXCLUDED.next_run_at IS NOT NULL);\nEND;\n$function$\n",
+      "review_type": "FIRST_TIME_COMPLETE_SQL_SOURCE_REVIEW",
+      "semantic_interpretation": "Locks bucket and state; removes idle state when policy absent, schedules active/in-flight work and resets claims only on idle changed generation; DML function inspected only.",
+      "verdict": "NO_REPRODUCED_DIC_APP_DEFECT_OR_SAFE_PROVIDER_DELETION; PLATFORM_OWNED",
+      "source_executed": false
+    },
+    {
+      "identity": "storage.search_by_timestamp(p_prefix text, p_bucket_id text, p_limit integer, p_level integer, p_start_after text, p_sort_order text, p_sort_column text, p_sort_column_after text, noncurrent_versions text, delete_markers text, p_start_after_version text)",
+      "source_chars": 6929,
+      "source_md5": "323c4e2739e9c9bcfc082f7f14289338",
+      "complete_source_range": "characters 1-6929",
+      "source_text": "CREATE OR REPLACE FUNCTION storage.search_by_timestamp(p_prefix text, p_bucket_id text, p_limit integer, p_level integer, p_start_after text, p_sort_order text, p_sort_column text, p_sort_column_after text, noncurrent_versions text DEFAULT 'exclude'::text, delete_markers text DEFAULT 'exclude'::text, p_start_after_version text DEFAULT ''::text)\n RETURNS TABLE(key text, name text, id uuid, updated_at timestamp with time zone, created_at timestamp with time zone, last_accessed_at timestamp with time zone, metadata jsonb, version text, archived_at timestamp with time zone, is_delete_marker boolean, is_versioned boolean)\n LANGUAGE plpgsql\n STABLE\nAS $function$\nDECLARE\n    v_cursor_op text;\n    v_query text;\n    v_prefix text;\n    v_prefix_pattern text;\n    v_sort_order text;\n    v_sort_column text;\n    v_version_tiebreak text;\nBEGIN\n    v_prefix := coalesce(p_prefix, '');\n    -- Keep the raw prefix for common-prefix calculations and escape only LIKE metacharacters.\n    v_prefix_pattern := replace(v_prefix, chr(92), chr(92) || chr(92));\n    v_prefix_pattern := replace(v_prefix_pattern, '%', chr(92) || '%');\n    v_prefix_pattern := replace(v_prefix_pattern, '_', chr(92) || '_');\n\n    -- COALESCE first: NULL NOT IN (...) evaluates to NULL (not TRUE), so a\n    -- bare NOT IN check silently leaves an explicit NULL argument unreset.\n    noncurrent_versions := COALESCE(noncurrent_versions, 'exclude');\n    delete_markers := COALESCE(delete_markers, 'exclude');\n    IF noncurrent_versions NOT IN ('exclude', 'only', 'include') THEN\n        noncurrent_versions := 'exclude';\n    END IF;\n    IF delete_markers NOT IN ('exclude', 'only', 'include') THEN\n        delete_markers := 'exclude';\n    END IF;\n\n    -- $9 is only populated in multi-row mode; it's always '' otherwise, so\n    -- only use each row's real version as a tiebreak in multi-row mode.\n    v_version_tiebreak := CASE WHEN noncurrent_versions IN ('only', 'include') THEN 'COALESCE(version, '''')' ELSE '''''' END;\n\n    -- Defense-in-depth: this function is independently reachable and must\n    -- not trust p_sort_order/p_sort_column to already be validated by a\n    -- caller. Normalize to the same strict allow-list storage.search_v2\n    -- uses before interpolating anything into dynamic SQL below.\n    v_sort_order := lower(coalesce(p_sort_order, 'asc'));\n    IF v_sort_order NOT IN ('asc', 'desc') THEN\n        v_sort_order := 'asc';\n    END IF;\n\n    v_sort_column := lower(coalesce(p_sort_column, 'updated_at'));\n    IF v_sort_column NOT IN ('updated_at', 'created_at') THEN\n        v_sort_column := 'updated_at';\n    END IF;\n\n    IF v_sort_order = 'asc' THEN\n        v_cursor_op := '>';\n    ELSE\n        v_cursor_op := '<';\n    END IF;\n\n    v_query := format($sql$\n        WITH raw_objects AS (\n            SELECT\n                o.name AS obj_name,\n                o.id AS obj_id,\n                o.updated_at AS obj_updated_at,\n                o.created_at AS obj_created_at,\n                o.last_accessed_at AS obj_last_accessed_at,\n                o.metadata AS obj_metadata,\n                o.version AS obj_version,\n                o.archived_at AS obj_archived_at,\n                o.is_delete_marker AS obj_is_delete_marker,\n                o.is_versioned AS obj_is_versioned,\n                storage.get_common_prefix(o.name, $1, '/') AS common_prefix\n            FROM storage.objects o\n            WHERE o.bucket_id = $2\n              AND o.name COLLATE \"C\" LIKE $10 || '%%'\n              AND ($7 != 'exclude' OR o.archived_at IS NULL)\n              AND ($7 != 'only' OR o.archived_at IS NOT NULL)\n              AND ($8 != 'exclude' OR NOT o.is_delete_marker)\n              AND ($8 != 'only' OR o.is_delete_marker)\n        ),\n        -- Aggregate common prefixes (folders)\n        -- Both created_at and updated_at use MIN(obj_created_at) to match the old prefixes table behavior\n        aggregated_prefixes AS (\n            SELECT\n                common_prefix AS name,\n                NULL::uuid AS id,\n                MIN(obj_created_at) AS updated_at,\n                MIN(obj_created_at) AS created_at,\n                NULL::timestamptz AS last_accessed_at,\n                NULL::jsonb AS metadata,\n                NULL::text AS version,\n                NULL::timestamptz AS archived_at,\n                NULL::boolean AS is_delete_marker,\n                NULL::boolean AS is_versioned,\n                TRUE AS is_prefix\n            FROM raw_objects\n            WHERE common_prefix IS NOT NULL\n            GROUP BY common_prefix\n        ),\n        leaf_objects AS (\n            SELECT\n                obj_name AS name,\n                obj_id AS id,\n                obj_updated_at AS updated_at,\n                obj_created_at AS created_at,\n                obj_last_accessed_at AS last_accessed_at,\n                obj_metadata AS metadata,\n                obj_version AS version,\n                obj_archived_at AS archived_at,\n                obj_is_delete_marker AS is_delete_marker,\n                obj_is_versioned AS is_versioned,\n                FALSE AS is_prefix\n            FROM raw_objects\n            WHERE common_prefix IS NULL\n        ),\n        combined AS (\n            SELECT * FROM aggregated_prefixes\n            UNION ALL\n            SELECT * FROM leaf_objects\n        ),\n        filtered AS (\n            SELECT *\n            FROM combined\n            WHERE (\n                $5 = ''\n                OR ROW(\n                    COALESCE(date_trunc('milliseconds', %I), 'epoch'::timestamptz),\n                    name COLLATE \"C\",\n                    %s\n                ) %s ROW(\n                    -- truncated the same way as the stored value above\n                    date_trunc('milliseconds', COALESCE(NULLIF($6, '')::timestamptz, 'epoch'::timestamptz)),\n                    $5,\n                    $9\n                )\n            )\n        )\n        SELECT\n            split_part(name, '/', $3) AS key,\n            name,\n            id,\n            updated_at,\n            created_at,\n            last_accessed_at,\n            metadata,\n            version,\n            archived_at,\n            is_delete_marker,\n            is_versioned\n        FROM filtered\n        ORDER BY\n            COALESCE(date_trunc('milliseconds', %I), 'epoch'::timestamptz) %s,\n            name COLLATE \"C\" %s,\n            COALESCE(version, '') %s\n        LIMIT $4\n    $sql$,\n        v_sort_column,\n        v_version_tiebreak,\n        v_cursor_op,\n        v_sort_column,\n        v_sort_order,\n        v_sort_order,\n        v_sort_order\n    );\n\n    -- version is the third tiebreak component for two versions of the same\n    -- key tying on both timestamp and name (see filtered CTE / ORDER BY above)\n    RETURN QUERY EXECUTE v_query\n    USING v_prefix, p_bucket_id, p_level, p_limit, p_start_after, p_sort_column_after, noncurrent_versions, delete_markers, coalesce(p_start_after_version, ''), v_prefix_pattern;\nEND;\n$function$\n",
+      "review_type": "FIRST_TIME_COMPLETE_SQL_SOURCE_REVIEW",
+      "semantic_interpretation": "Dynamic timestamp-keyset pagination; validates order and sort identifiers, escapes LIKE prefix, normalizes include/exclude and uses name/version deterministic tie-breaking. Potential full-bucket aggregation is provider-owned with zero objects; no measured bottleneck.",
+      "verdict": "NO_REPRODUCED_DIC_APP_DEFECT_OR_SAFE_PROVIDER_DELETION; PLATFORM_OWNED",
+      "source_executed": false
+    },
+    {
+      "identity": "storage.search_v2(prefix text, bucket_name text, limits integer, levels integer, start_after text, sort_order text, sort_column text, sort_column_after text, noncurrent_versions text, delete_markers text, start_after_archived_at timestamp with time zone, start_after_version text, start_after_is_continuation boolean)",
+      "source_chars": 2862,
+      "source_md5": "7a010a87c94770b1c8f0b49a616082f4",
+      "complete_source_range": "characters 1-2862",
+      "source_text": "CREATE OR REPLACE FUNCTION storage.search_v2(prefix text, bucket_name text, limits integer DEFAULT 100, levels integer DEFAULT 1, start_after text DEFAULT ''::text, sort_order text DEFAULT 'asc'::text, sort_column text DEFAULT 'name'::text, sort_column_after text DEFAULT ''::text, noncurrent_versions text DEFAULT 'exclude'::text, delete_markers text DEFAULT 'exclude'::text, start_after_archived_at timestamp with time zone DEFAULT NULL::timestamp with time zone, start_after_version text DEFAULT ''::text, start_after_is_continuation boolean DEFAULT false)\n RETURNS TABLE(key text, name text, id uuid, updated_at timestamp with time zone, created_at timestamp with time zone, last_accessed_at timestamp with time zone, metadata jsonb, version text, archived_at timestamp with time zone, is_delete_marker boolean, is_versioned boolean)\n LANGUAGE plpgsql\n STABLE\nAS $function$\nDECLARE\n    v_sort_col text;\n    v_sort_ord text;\n    v_limit int;\nBEGIN\n    -- Cap limit to maximum of 1500 records\n    v_limit := LEAST(coalesce(limits, 100), 1500);\n\n    -- Validate and normalize sort_order\n    v_sort_ord := lower(coalesce(sort_order, 'asc'));\n    IF v_sort_ord NOT IN ('asc', 'desc') THEN\n        v_sort_ord := 'asc';\n    END IF;\n\n    -- Validate and normalize sort_column\n    v_sort_col := lower(coalesce(sort_column, 'name'));\n    IF v_sort_col NOT IN ('name', 'updated_at', 'created_at') THEN\n        v_sort_col := 'name';\n    END IF;\n\n    -- Route to appropriate implementation\n    IF v_sort_col = 'name' THEN\n        -- Use list_objects_with_delimiter for name sorting (most efficient: O(k * log n))\n        RETURN QUERY\n        SELECT\n            split_part(l.name, '/', levels) AS key,\n            l.name AS name,\n            l.id,\n            l.updated_at,\n            l.created_at,\n            l.last_accessed_at,\n            l.metadata,\n            l.version,\n            l.archived_at,\n            l.is_delete_marker,\n            l.is_versioned\n        FROM storage.list_objects_with_delimiter(\n            bucket_name,\n            coalesce(prefix, ''),\n            '/',\n            v_limit,\n            CASE WHEN start_after_is_continuation THEN '' ELSE start_after END,\n            CASE WHEN start_after_is_continuation THEN start_after ELSE '' END,\n            v_sort_ord,\n            noncurrent_versions,\n            delete_markers,\n            start_after_archived_at,\n            start_after_version\n        ) l;\n    ELSE\n        -- Use aggregation approach for timestamp sorting\n        -- Not efficient for large datasets but supports correct pagination\n        RETURN QUERY SELECT * FROM storage.search_by_timestamp(\n            prefix, bucket_name, v_limit, levels, start_after,\n            v_sort_ord, v_sort_col, sort_column_after,\n            noncurrent_versions, delete_markers, start_after_version\n        );\n    END IF;\nEND;\n$function$\n",
+      "review_type": "FIRST_TIME_COMPLETE_SQL_SOURCE_REVIEW",
+      "semantic_interpretation": "Routes normalized timestamp versus name pagination, caps max page at 1500, sends delimiter queries to list_objects_with_delimiter; dependent helper's 32,892-char SQL still unreviewed.",
+      "verdict": "NO_REPRODUCED_DIC_APP_DEFECT_OR_SAFE_PROVIDER_DELETION; PLATFORM_OWNED",
+      "source_executed": false
+    },
+    {
+      "identity": "storage.update_updated_at_column()",
+      "source_chars": 178,
+      "source_md5": "bfecc08a6034296258f0c3e10193076c",
+      "complete_source_range": "characters 1-178",
+      "source_text": "CREATE OR REPLACE FUNCTION storage.update_updated_at_column()\n RETURNS trigger\n LANGUAGE plpgsql\nAS $function$\nBEGIN\n    NEW.updated_at = now();\n    RETURN NEW; \nEND;\n$function$\n",
+      "review_type": "FIRST_TIME_COMPLETE_SQL_SOURCE_REVIEW",
+      "semantic_interpretation": "BEFORE UPDATE trigger advances updated_at to transaction timestamp on storage.objects.",
+      "verdict": "NO_REPRODUCED_DIC_APP_DEFECT_OR_SAFE_PROVIDER_DELETION; PLATFORM_OWNED",
+      "source_executed": false
+    },
+    {
+      "identity": "storage.wake_lifecycle_state()",
+      "source_chars": 360,
+      "source_md5": "326028b9d567ca2de47e9ecf67a4553b",
+      "complete_source_range": "characters 1-360",
+      "source_text": "CREATE OR REPLACE FUNCTION storage.wake_lifecycle_state()\n RETURNS trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO 'pg_catalog'\nAS $function$\nBEGIN\n    IF TG_OP = 'INSERT' AND NEW.lifecycle_configuration IS NULL THEN\n        RETURN NEW;\n    END IF;\n\n    PERFORM storage.reconcile_lifecycle_state(NEW.id, false);\n    RETURN NEW;\nEND;\n$function$\n",
+      "review_type": "FIRST_TIME_COMPLETE_SQL_SOURCE_REVIEW",
+      "semantic_interpretation": "After bucket policy/versioning trigger calls reconcile_lifecycle_state; skips new buckets without a lifecycle configuration.",
+      "verdict": "NO_REPRODUCED_DIC_APP_DEFECT_OR_SAFE_PROVIDER_DELETION; PLATFORM_OWNED",
+      "source_executed": false
+    }
+  ],
+  "cross_dependencies": {
+    "storage_buckets": 0,
+    "storage_objects": 0,
+    "storage_lifecycle_states": 0,
+    "storage_multipart_uploads": 0,
+    "storage_triggers_read": 11,
+    "notes": "Live read-only count and trigger catalog checks; zero rows do NOT imply no external Storage API consumers or permission for removal."
+  },
+  "findings": [
+    "New provider-controlled lifecycle/versioning Storage routines and Realtime filter hash appear relative to older platform source-baseline; retain and classify as platform-owned.",
+    "Updated realtime.authorize and storage.enforce_bucket_lifecycle_service_role definitions semantically reviewed; no standalone proven DIC regression or permission to modify provider routines.",
+    "Unnecessary Vault lookup on zero-action admin push polls remains a development-only candidate from R383, unmodified this run because GitHub atomic source/test/same-commit journal capability remains unproven."
+  ],
+  "remaining_exact_cursor": [
+    "storage.list_objects_with_delimiter: chars 1-32892",
+    "storage.search: chars 1-31522",
+    "realtime.apply_rls: chars 1-16972"
+  ],
+  "availability_limits": [
+    "Native Postgres compiled C internals",
+    "Provider console-only settings and external Storage API call traces",
+    "Actual real-device push delivery acceptance"
+  ],
+  "production_provider_writes": 0,
+  "github_source_test_ci_writes": 0,
+  "baseline": "IN_PROGRESS",
+  "release": "TESTING",
+  "next": "Continue exact unreviewed full SQL source with same-commit journal on code writes only if safe atomic Git tree SHA available; no production change or READY promotion."
+}
