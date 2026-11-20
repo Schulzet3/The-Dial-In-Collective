@@ -1,3 +1,17 @@
+# Issue #509 — R378 personal prototype import full semantic cross-layer verification and merged CI cancellation [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=b6ab7bf8214818890b76b435e56464dcb320bcb5 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-20 UTC; production strictly READ-ONLY.** Verified immutable GitHub preflight and byte-identical Git blob before AGENTS, issue, sources or provider queries; main `57adc419`, release `07f054f6`. Live Supabase `azviqqejypsefzilgonr` ACTIVE_HEALTHY PostgreSQL 17.11. Directly read **13 complete actual SQL function bodies (41,949 characters)** covering personal prototype import admission/save/preview, source-to-immutable shot snapshot, Community backfill, receipt hash/idempotency and old slow-feed compatibility. Per-object signature, MD5, exact full 1–end character range and semantic verdict recorded in [R378 immutable receipt](../audits/issue509-r378-import-provenance-ci-followup-20261120.json). All 13 definitions had previous baseline coverage, thus **0 first-time provider words** and **0 #267 source lines**. The import-preview exception subtransaction rolls back writes; save requires source hash and recovery gate; first importer preserves the original archive and rejects unsupported Experiment records, does not silently merge an existing workspace. Snapshot is validated then reconstructed by BEFORE INSERT and protected from reassignment; legacy imports skip slow-feed recent-shot memory. No unintended mutation or proven measured bottleneck discovered.
+
+Aggregate-only provider evidence: **1 prior import batch, 14 legacy-import shots; 0 hidden shots, 0 hidden successful/Community-linked shots, 0 verified coffee submissions**. No private member/shot/note/Auth rows or credentials read. Historical hidden-shot/Community-preservation semantics are NOT grounds for speculative pruning absent a proven consumer/owner contract; no safe code/delete change warranted.
+
+**New CI readback of prior R377 source fix:** exact merged `afd799a98475d253a896a45f2dacd432f9964c88` approval [44663957436](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44663957436) SUCCESS, cloud+mobile browser [44663957497](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44663957497) SUCCESS. Node22 [44663957447](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44663957447) **CANCELLED during lint**, although its checked-in Node test step passed. Do **not** relabel CANCELLED as CI PASS, source READY or deployed; source patch remains development-integrated, release **TESTING** pending matching successor CI or approved source-bound completion. No duplicated full suite triggered. Baseline **IN_PROGRESS**; #3347 candidate certification and genuine #96 hosted delivery still UNVERIFIED. No production SQL/data/Auth/Storage/Edge/config, Netlify, backup/billing or schedule changes.
+
+**Next exact scope:** newly changed/unreviewed provider source or concrete app/Edge behavior/performance defect. Read matching-successor source-bound Node22 and current source blobs before any queue promotion; otherwise hold TESTING. Keep #504/#267/#96/#33/#455 ownership and original migrations unchanged.
+
+---
+
 # Issue #509 — R377 independent approval-email delivery survives Vault outage; development TESTING [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=0a08e269a919110a0beaaef253be1e9dfb38775d preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
