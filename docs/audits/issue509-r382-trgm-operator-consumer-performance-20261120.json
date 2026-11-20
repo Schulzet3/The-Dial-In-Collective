@@ -1,0 +1,395 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R382",
+  "date_utc": "2026-11-20",
+  "preflight": {
+    "development_sha": "5578b2a58000066ddee46dd42ca86a2766e34c81",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e"
+  },
+  "project": "azviqqejypsefzilgonr",
+  "read_only": true,
+  "scope": "Direct complete semantic pg_trgm operator-strategy/support bindings versus DIC current matcher and active index/legacy consumers; R56-R65 tuple coverage reused",
+  "catalog": {
+    "operator_strategies": {
+      "reviewed": 19,
+      "total": 19,
+      "rows": [
+        {
+          "access_method": "gin",
+          "opclass": "gin_trgm_ops",
+          "strategy": 1,
+          "purpose": "s",
+          "left_type": "text",
+          "right_type": "text",
+          "operator": "%",
+          "implementation": "similarity_op(text,text)"
+        },
+        {
+          "access_method": "gin",
+          "opclass": "gin_trgm_ops",
+          "strategy": 3,
+          "purpose": "s",
+          "left_type": "text",
+          "right_type": "text",
+          "operator": "~~",
+          "implementation": "textlike(text,text)"
+        },
+        {
+          "access_method": "gin",
+          "opclass": "gin_trgm_ops",
+          "strategy": 4,
+          "purpose": "s",
+          "left_type": "text",
+          "right_type": "text",
+          "operator": "~~*",
+          "implementation": "texticlike(text,text)"
+        },
+        {
+          "access_method": "gin",
+          "opclass": "gin_trgm_ops",
+          "strategy": 5,
+          "purpose": "s",
+          "left_type": "text",
+          "right_type": "text",
+          "operator": "~",
+          "implementation": "textregexeq(text,text)"
+        },
+        {
+          "access_method": "gin",
+          "opclass": "gin_trgm_ops",
+          "strategy": 6,
+          "purpose": "s",
+          "left_type": "text",
+          "right_type": "text",
+          "operator": "~*",
+          "implementation": "texticregexeq(text,text)"
+        },
+        {
+          "access_method": "gin",
+          "opclass": "gin_trgm_ops",
+          "strategy": 7,
+          "purpose": "s",
+          "left_type": "text",
+          "right_type": "text",
+          "operator": "%>",
+          "implementation": "word_similarity_commutator_op(text,text)"
+        },
+        {
+          "access_method": "gin",
+          "opclass": "gin_trgm_ops",
+          "strategy": 9,
+          "purpose": "s",
+          "left_type": "text",
+          "right_type": "text",
+          "operator": "%>>",
+          "implementation": "strict_word_similarity_commutator_op(text,text)"
+        },
+        {
+          "access_method": "gin",
+          "opclass": "gin_trgm_ops",
+          "strategy": 11,
+          "purpose": "s",
+          "left_type": "text",
+          "right_type": "text",
+          "operator": "=",
+          "implementation": "texteq(text,text)"
+        },
+        {
+          "access_method": "gist",
+          "opclass": "gist_trgm_ops",
+          "strategy": 1,
+          "purpose": "s",
+          "left_type": "text",
+          "right_type": "text",
+          "operator": "%",
+          "implementation": "similarity_op(text,text)"
+        },
+        {
+          "access_method": "gist",
+          "opclass": "gist_trgm_ops",
+          "strategy": 2,
+          "purpose": "o",
+          "left_type": "text",
+          "right_type": "text",
+          "operator": "<->",
+          "implementation": "similarity_dist(text,text)"
+        },
+        {
+          "access_method": "gist",
+          "opclass": "gist_trgm_ops",
+          "strategy": 3,
+          "purpose": "s",
+          "left_type": "text",
+          "right_type": "text",
+          "operator": "~~",
+          "implementation": "textlike(text,text)"
+        },
+        {
+          "access_method": "gist",
+          "opclass": "gist_trgm_ops",
+          "strategy": 4,
+          "purpose": "s",
+          "left_type": "text",
+          "right_type": "text",
+          "operator": "~~*",
+          "implementation": "texticlike(text,text)"
+        },
+        {
+          "access_method": "gist",
+          "opclass": "gist_trgm_ops",
+          "strategy": 5,
+          "purpose": "s",
+          "left_type": "text",
+          "right_type": "text",
+          "operator": "~",
+          "implementation": "textregexeq(text,text)"
+        },
+        {
+          "access_method": "gist",
+          "opclass": "gist_trgm_ops",
+          "strategy": 6,
+          "purpose": "s",
+          "left_type": "text",
+          "right_type": "text",
+          "operator": "~*",
+          "implementation": "texticregexeq(text,text)"
+        },
+        {
+          "access_method": "gist",
+          "opclass": "gist_trgm_ops",
+          "strategy": 7,
+          "purpose": "s",
+          "left_type": "text",
+          "right_type": "text",
+          "operator": "%>",
+          "implementation": "word_similarity_commutator_op(text,text)"
+        },
+        {
+          "access_method": "gist",
+          "opclass": "gist_trgm_ops",
+          "strategy": 8,
+          "purpose": "o",
+          "left_type": "text",
+          "right_type": "text",
+          "operator": "<->>",
+          "implementation": "word_similarity_dist_commutator_op(text,text)"
+        },
+        {
+          "access_method": "gist",
+          "opclass": "gist_trgm_ops",
+          "strategy": 9,
+          "purpose": "s",
+          "left_type": "text",
+          "right_type": "text",
+          "operator": "%>>",
+          "implementation": "strict_word_similarity_commutator_op(text,text)"
+        },
+        {
+          "access_method": "gist",
+          "opclass": "gist_trgm_ops",
+          "strategy": 10,
+          "purpose": "o",
+          "left_type": "text",
+          "right_type": "text",
+          "operator": "<->>>",
+          "implementation": "strict_word_similarity_dist_commutator_op(text,text)"
+        },
+        {
+          "access_method": "gist",
+          "opclass": "gist_trgm_ops",
+          "strategy": 11,
+          "purpose": "s",
+          "left_type": "text",
+          "right_type": "text",
+          "operator": "=",
+          "implementation": "texteq(text,text)"
+        }
+      ]
+    },
+    "support_procedures": {
+      "reviewed": 14,
+      "total": 14,
+      "rows": [
+        {
+          "access_method": "gin",
+          "opclass": "gin_trgm_ops",
+          "support_number": 1,
+          "left_type": "text",
+          "right_type": "text",
+          "implementation": "btint4cmp(integer,integer)"
+        },
+        {
+          "access_method": "gin",
+          "opclass": "gin_trgm_ops",
+          "support_number": 2,
+          "left_type": "text",
+          "right_type": "text",
+          "implementation": "gin_extract_value_trgm(text,internal)"
+        },
+        {
+          "access_method": "gin",
+          "opclass": "gin_trgm_ops",
+          "support_number": 3,
+          "left_type": "text",
+          "right_type": "text",
+          "implementation": "gin_extract_query_trgm(text,internal,smallint,internal,internal,internal,internal)"
+        },
+        {
+          "access_method": "gin",
+          "opclass": "gin_trgm_ops",
+          "support_number": 4,
+          "left_type": "text",
+          "right_type": "text",
+          "implementation": "gin_trgm_consistent(internal,smallint,text,integer,internal,internal,internal,internal)"
+        },
+        {
+          "access_method": "gin",
+          "opclass": "gin_trgm_ops",
+          "support_number": 6,
+          "left_type": "text",
+          "right_type": "text",
+          "implementation": "gin_trgm_triconsistent(internal,smallint,text,integer,internal,internal,internal)"
+        },
+        {
+          "access_method": "gist",
+          "opclass": "gist_trgm_ops",
+          "support_number": 1,
+          "left_type": "text",
+          "right_type": "text",
+          "implementation": "gtrgm_consistent(internal,text,smallint,oid,internal)"
+        },
+        {
+          "access_method": "gist",
+          "opclass": "gist_trgm_ops",
+          "support_number": 2,
+          "left_type": "text",
+          "right_type": "text",
+          "implementation": "gtrgm_union(internal,internal)"
+        },
+        {
+          "access_method": "gist",
+          "opclass": "gist_trgm_ops",
+          "support_number": 3,
+          "left_type": "text",
+          "right_type": "text",
+          "implementation": "gtrgm_compress(internal)"
+        },
+        {
+          "access_method": "gist",
+          "opclass": "gist_trgm_ops",
+          "support_number": 4,
+          "left_type": "text",
+          "right_type": "text",
+          "implementation": "gtrgm_decompress(internal)"
+        },
+        {
+          "access_method": "gist",
+          "opclass": "gist_trgm_ops",
+          "support_number": 5,
+          "left_type": "text",
+          "right_type": "text",
+          "implementation": "gtrgm_penalty(internal,internal,internal)"
+        },
+        {
+          "access_method": "gist",
+          "opclass": "gist_trgm_ops",
+          "support_number": 6,
+          "left_type": "text",
+          "right_type": "text",
+          "implementation": "gtrgm_picksplit(internal,internal)"
+        },
+        {
+          "access_method": "gist",
+          "opclass": "gist_trgm_ops",
+          "support_number": 7,
+          "left_type": "text",
+          "right_type": "text",
+          "implementation": "gtrgm_same(gtrgm,gtrgm,internal)"
+        },
+        {
+          "access_method": "gist",
+          "opclass": "gist_trgm_ops",
+          "support_number": 8,
+          "left_type": "text",
+          "right_type": "text",
+          "implementation": "gtrgm_distance(internal,text,smallint,oid,internal)"
+        },
+        {
+          "access_method": "gist",
+          "opclass": "gist_trgm_ops",
+          "support_number": 10,
+          "left_type": "text",
+          "right_type": "text",
+          "implementation": "gtrgm_options(internal)"
+        }
+      ]
+    }
+  },
+  "full_live_function_source_reexamined": [
+    {
+      "signature": "private.dic_find_coffee_matches(jsonb)",
+      "length": 6135,
+      "md5": "b4b845d29ccb65ac7922109dc89816b6"
+    },
+    {
+      "signature": "private.dic_confirm_coffee_existing(uuid,jsonb)",
+      "length": 3239,
+      "md5": "0fcc44bb8a05f46e87694d3474eb7c23"
+    },
+    {
+      "signature": "private.dic_coffee_key(text)",
+      "length": 251,
+      "md5": "8f6840ddd7e530e311c096591c01ce15"
+    }
+  ],
+  "semantic_verdict": [
+    "GIN pg_trgm supports index-search operators only; GiST additionally supports three KNN/distance ORDER BY strategies. All 14 support routine declarations point to provider native compiled routines whose C source is unavailable.",
+    "Current private.dic_find_coffee_matches uses scalar extensions.similarity() on canonicalized fields rather than an indexable similarity operator: existing index families cannot automatically accelerate it; source-level rewrite and benchmarks would be needed.",
+    "Zero existing pg_trgm indexes; nine active verified coffee rows and eleven coffee_sources rows. No credible current index bottleneck or safe redundant index deletion.",
+    "LEGACY ACTIVE roaster aliases (4 entries, 357 cumulative primary-key index scans) remain used; zero coffee alias rows are not proof the identity/alias table is dead, given source consumer in 20261118140000 Git development migration.",
+    "Live source null-normalized-name confirmation behavior is a known development-fixed but unreleased issue (migrations 20261118113500 + 20261118140000); not a new defect or deployment claim.",
+    "Cumulative pg_stat_statements text-match fingerprint 30ec19996396 includes 41 calls at mean 61.888/max 223.633ms, 31600 shared buffer hits, zero disk reads/temp writes; this is not a fresh, attributable member endpoint benchmark. No measured bottleneck established."
+  ],
+  "safe_provider_counts": {
+    "active_verified_coffees": 9,
+    "coffee_source_rows": 11,
+    "coffee_alias_rows": 0,
+    "roaster_alias_rows": 4,
+    "trgm_index_count": 0,
+    "roaster_alias_pkey_cumulative_scans": 357,
+    "applied_migrations": 69,
+    "active_edge": 5,
+    "notebooks": 0,
+    "supabase_dev_branches": 0
+  },
+  "historical_semantic_receipts": [
+    "R56-R60 964/964 pg_amop",
+    "R61-R62 710/710 pg_amproc",
+    "R63 opclasses 179/179",
+    "R65 operators 809/809",
+    "R381 extension SQL functions 90/90"
+  ],
+  "coverage": {
+    "cross_layer_operator_mappings": 19,
+    "cross_layer_support_mappings": 14,
+    "new_first_time_provider_words": 0,
+    "issue267_new_code_lines": 0
+  },
+  "findings": {
+    "new_confirmed_defects": 0,
+    "justified_safe_deletions": 0,
+    "measured_current_bottlenecks": 0,
+    "github_source_fixes": 0,
+    "production_writes": 0
+  },
+  "unverified": [
+    "Native compiled C implementation",
+    "Provider-console-only Auth/runtime/secret settings",
+    "Exact real member request latency attribution",
+    "Source-isolated READY release candidate"
+  ],
+  "status": "IN_PROGRESS",
+  "release": "TESTING",
+  "next_cursor": "Next genuinely new/unreviewed live provider definition or reproduced application/Edge/SQL correctness defect; maintain R56-R65 and R381 original receipts; no native or hosted completion claims."
+}

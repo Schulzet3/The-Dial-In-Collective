@@ -1,3 +1,15 @@
+# Issue #509 R382 pg_trgm operator and consumer semantic closeout [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=5578b2a58000066ddee46dd42ca86a2766e34c81 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-20 UTC.** Live development preflight immutable blob verified before all other source/provider reads; `main=57adc419`, `release/production=07f054f6`. Supabase `azviqqejypsefzilgonr` ACTIVE_HEALTHY PG17.11 strictly read-only. Direct semantic crosscheck of all **19/19** extensions GiST/GIN pg_trgm operator strategy memberships, **14/14** support bindings (5 GIN, 9 GiST), and complete live SQL of `private.dic_find_coffee_matches` (6,135 chars, MD5 b4b845d2), `private.dic_confirm_coffee_existing` (3,239, MD5 0fcc44bb), and `private.dic_coffee_key` (251, MD5 8f6840dd). Exact operator/procedure/strategy tuples, method classification and consumer evidence in [R382 structured receipt](../audits/issue509-r382-trgm-operator-consumer-performance-20261120.json). R56–R65/R381 field review reused, **0 first-time provider words / 0 #267 source lines**; new semantic work is the operator/indexability/dependency/actual-consumer check.
+
+GIN has only search strategies, GiST also KNN distance ORDER BY strategies; app matcher calls scalar `extensions.similarity()` (not indexable pg_trgm operators). Current DB: 0 trigram indexes, 9 active verified coffees, 11 coffee sources, 4 **LEGACY ACTIVE** roaster aliases, 0 coffee alias rows. Roaster alias PK has 357 cumulative scans; do not retire matching aliases or drop empty-but-source-consumed coffee-alias PK. `pg_stat_statements` text-match fingerprint 30ec19996396: 41 cumulative calls, 61.888ms mean, 223.633ms max, 31,600 buffer hits, 0 disk reads/temp blocks. **Not** a fresh or proven member-path benchmark; no verified bottleneck/justified deletion/new bug. Existing development-only null-name and historical-alias fixes remain unreleased, not duplicated. Five Edge deployments active, 69 applied migrations, zero hosted notebooks or Supabase branches.
+
+No source/test/CI changes, production SQL/data/Auth/Storage/Edge/config writes, publication, billing, backups, schedule or notification changes. GitHub connector returns empty content for oversized CURRENT_STATUS/RELEASE_QUEUE; queue stays **TESTING**, no new READY claims. Native C and console-only surfaces remain UNVERIFIED; exhaustive baseline **IN_PROGRESS**. **Next cursor:** after 19/19 strategy and 14/14 support semantics, next changed/unreviewed provider source or independently proven functional defect (do not recount unchanged catalog tuples).
+
+---
+
 # Issue #509 R381 extension native declarations + provider event-trigger word review [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=9a132eeba5aabe646662333699b5a318ee3fd76f preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
