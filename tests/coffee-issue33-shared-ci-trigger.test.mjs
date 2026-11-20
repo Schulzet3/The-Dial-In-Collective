@@ -17,7 +17,7 @@ test('shared parser and Add Coffee changes trigger bounded offline selected-sour
   ])assert.equal(yaml.split("- '"+source+"'").length-1,2,source+' must trigger PR and push');
   assert.match(yaml,/pull_request:[\s\S]*?branches: \[development\/backend-foundation\]/);
   assert.match(yaml,/push:[\s\S]*?branches: \[development\/backend-foundation\]/);
-  for(const n of ['r315-original63','r316-original71','r317-original79-80','r318-original91-92','r330-original153','r332-original157'])
+  for(const n of ['r315-original63','r316-original71','r317-original79-80','r318-original91-92','r330-original153','r332-original157','r345-original295','r346-original296','r347-original299','r352-selected-analogy-tastes'])
     assert.ok(yaml.includes('tests/coffee-issue33-'+n+'.test.mjs'),n+' test included');
 });
 test('dependency-aware trigger checks exact source and never triggers live HTTP or frozen603',()=>{
@@ -39,4 +39,14 @@ test('actual Add Coffee UI import chain remains covered by narrow shared depende
  for(const source of ['site/lib/ui.js','site/lib/constants.js','site/cloud/coffee-match-ui.js'])
   assert.equal(yaml.split("- '"+source+"'").length-1,2,source+' must trigger both PR and push');
  assert.doesNotMatch(yaml,/issue33-original603-focused-source-review|DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS|workflow_dispatch:|schedule:/);
+});
+
+test('N508-075 latest selected source tests have both PR/push triggers and stay offline',()=>{
+ for(const n of ['r345-original295','r346-original296','r347-original299','r352-selected-analogy-tastes']){
+  const path='tests/coffee-issue33-'+n+'.test.mjs';
+  assert.equal(yaml.split("- '"+path+"'").length-1,2,path+' must trigger on PR and push');
+  assert.ok(yaml.includes('            '+path),path+' must actually run');
+ }
+ assert.equal(yaml.split('node --test').length-1,1,'one bounded Node test invocation');
+ assert.doesNotMatch(yaml,/DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS|focused-source-review\.mjs|workflow_dispatch:|schedule:/);
 });

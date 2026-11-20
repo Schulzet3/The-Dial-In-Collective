@@ -25919,5 +25919,38 @@
     "release": "TESTING",
     "baseline": "IN_PROGRESS",
     "next": "Next new/unreviewed/changed provider definition or proven application defect"
+  },
+  "provider_admin_push_noop_vault_run383": {
+    "run": "R383",
+    "date_utc": "2026-11-20",
+    "project_ref": "azviqqejypsefzilgonr",
+    "preflight_development_sha": "0a0536fa51b44931f9158167d7bd851ae831aa80",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "receipt": "docs/audits/issue509-r383-admin-push-noop-vault-20261120.json",
+    "reviewed_object": "Supabase deployed dic-admin-push-broker Edge v3 core.mjs",
+    "complete_source_characters": 9706,
+    "complete_range": "1-9706",
+    "deployed_source_equal_github": true,
+    "github_source_blob": "e1a467cc0bb9d94ea824953eec88aaf8d6c428dd",
+    "source_bundle_sha256": "ca7ce5f9b80bf6984a7517e9f3ef1750fa856b75557136817ccc040dc5635382",
+    "finding": "Unconditional Vault runtime key RPC before no-action snapshot/subscriptions on every acquired admin poll; avoidable dependency and latency on no-op run",
+    "proof": "Full live Edge source, matching exact GitHub blob, service_role cumulative normalized pg_stat_statements safe aggregates and nonidentifying 1-row admin subscription count",
+    "admin_subscriptions": 1,
+    "active": 1,
+    "updated_past_24h": 0,
+    "key_rpc_cumulative_calls": 4580,
+    "key_rpc_mean_ms": 4.64,
+    "attributable_runtime_cost": "UNVERIFIED",
+    "incident": "NOT_CONFIRMED",
+    "source_fix": "NOT_STAGED_ATOMIC_TREE_BASE_UNAVAILABLE",
+    "next_safe_fix": "Lazy memoized per-request VAPID keys only for new tokens; isolated Node22 no-op/active/error/endpoint regression and same-commit scoped journal/ledger/queue, exact-source CI, nonforce integration; no live provider write",
+    "new_first_time_provider_words": 0,
+    "issue267_source_lines": 0,
+    "production_writes": 0,
+    "release": "TESTING",
+    "baseline": "IN_PROGRESS"
   }
+,
+  "provider_storage_realtime_r384": {"run":"R384","date":"2026-11-20","receipt":"docs/audits/issue509-r384-storage-realtime-semantic-review-20261120.json","full_sources":15,"first_time_sources":13,"first_time_chars":22393,"changed_reexamined":2,"total_chars":25556,"storage_triggers":11,"storage_buckets_objects_states_uploads":0,"provider_writes":0,"issue267_lines":0,"next_cursor":"storage.list_objects_with_delimiter:1-32892","source_fix":"NOT_STAGED","baseline":"IN_PROGRESS","release":"TESTING"},
+  "r385_receipt": "docs/audits/issue509-r385-large-storage-realtime-semantic-review-20261120.json"
 }

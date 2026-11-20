@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R383",
+  "date_utc": "2026-11-20",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "0a0536fa51b44931f9158167d7bd851ae831aa80",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "independent_content_match": true
+  },
+  "branch_sha": {
+    "development": "0a0536fa51b44931f9158167d7bd851ae831aa80",
+    "main": "57adc419ed4b106e158435b465971f5986537b41",
+    "release_production": "07f054f6470b2ae36b36faef8fb9a8161dd3bfb5"
+  },
+  "review": {
+    "object": "Supabase Edge dic-admin-push-broker v3 core.mjs",
+    "fully_reviewed_accessible_source_characters": 9706,
+    "source_range": "core.mjs characters 1-9706",
+    "github_blob_sha": "e1a467cc0bb9d94ea824953eec88aaf8d6c428dd",
+    "source_equal_deployed": true,
+    "edge_bundle_sha256": "ca7ce5f9b80bf6984a7517e9f3ef1750fa856b75557136817ccc040dc5635382",
+    "new_first_time_provider_words": 0,
+    "issue267_source_lines": 0
+  },
+  "diagnosis": {
+    "type": "UNNECESSARY_VAULT_READ_ON_NOOP_ADMIN_POLL",
+    "verified_from": "Full deployed Edge core.mjs and immutable GitHub source parity",
+    "facts": [
+      "After successful dic_admin_push_claim_poll(), poll unconditionally awaits rpc/dic_admin_push_runtime_keys before it reads the action snapshot or subscriptions.",
+      "The push private key is only required by signedPush when there are new unseen action tokens; no-action checks and obsolete-subscription retirement require no private key.",
+      "An unnecessary Vault RPC can add latency and cause a 503 on an otherwise no-op poll if the key RPC fails. A live Vault failure was not observed or induced."
+    ],
+    "severity": "LOW_POTENTIAL_LATENCY_AND_AVAILABILITY_NOT_AN_INCIDENT",
+    "proven_production_incident": false,
+    "unverified": [
+      "Actual key RPC error frequency and attributable latency",
+      "Genuine Apple delivery and real-device acceptance"
+    ]
+  },
+  "safe_aggregates": {
+    "admin_subscriptions_total": 1,
+    "admin_subscriptions_not_expired": 1,
+    "ever_sent": 1,
+    "changed_within_last_24h": 0,
+    "pg_stat_statements_cumulative": {
+      "runtime_keys_calls": 4580,
+      "runtime_keys_mean_ms": 4.64,
+      "claim_poll_calls": 4382,
+      "claim_poll_mean_ms": 4.68,
+      "snapshot_calls": 2383
+    },
+    "caveat": "Historical cumulative telemetry cannot attribute all calls to this Edge route or prove per-hour bottleneck."
+  },
+  "proposed_development_only_fix": "Lazy memoized getKey() only inside added-token send path; preserve manage GET/POST ensureKeys, no-key retry semantics, keyset pagination, role checks and no-private-payload delivery. Isolated Node22 synthetic tests for zero/new tokens, Vault error, multiple devices, revoked endpoints and successful signing; relevant CI before integration.",
+  "source_or_test_writes": "NOT_PERFORMED: connector lacks current commit tree SHA required for safe atomic source/test/SAME-COMMIT journal edit; create_tree rejects commit-SHA base (422). Do not use sequential contents API for source/test edits.",
+  "baseline": "IN_PROGRESS",
+  "release": "TESTING",
+  "production_provider_writes": 0,
+  "next": "Obtain current Git tree SHA or an atomic multi-file commit capability, implement the narrowly scoped source/test/same-commit journal fix, run exact-source Node22/browser/approval CI; otherwise continue new provider semantics and verify no change in production."
+}
