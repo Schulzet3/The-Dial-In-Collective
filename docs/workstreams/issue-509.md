@@ -1,3 +1,15 @@
+# Issue #509 R383 — admin push no-op Vault dependency, fully reviewed deployed Edge [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=0a0536fa51b44931f9158167d7bd851ae831aa80 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-20 UTC.** Mandatory immutable preflight independently verified; main `57adc419`, release/production `07f054f6`. Provider `azviqqejypsefzilgonr` ACTIVE_HEALTHY PG17.11, production READ-ONLY. Directly semantically reexamined all **9,706 characters** of deployed `dic-admin-push-broker` v3 `core.mjs` and its actual subscription, claim, snapshot and Vault call sequence. Deployed source is byte-equal to immutable GitHub blob `e1a467cc0bb9d94ea824953eec88aaf8d6c428dd`; bundle SHA256 `ca7ce5f9...`. **0 first-time provider words**, **0 #267 source lines** credited.
+
+**Verified latent no-op performance/availability inefficiency:** after an acquired poll, `rpc/dic_admin_push_runtime_keys` is always invoked **before** checking actionable snapshot/subscriptions, although only `signedPush` for newly unseen tokens needs Vault keys. Thus a no-action poll unnecessarily fetches decrypted keys internally and a transient Vault failure can turn such no-op work into 503. Never expose keys; no Vault failure was observed/induced. Safe aggregate evidence: **1** nonexpired admin subscription, **1** ever-sent, **0** rows updated in 24 hours; cumulative key-RPC **4,580 calls / 4.64ms mean**, claim **4,382 / 4.68ms**, snapshot **2,383**. Those cumulative figures are **not attributable per-hour latency, actual outage, or proof of cost impact**. No member identifiers, subscription endpoints, action tokens or secrets inspected or logged.
+
+**Next safe source fix:** lazily/memoize Vault retrieval only when `added.length>0` and actual signed push is needed, preserving manage/key bootstrap, retries, role gates, keyset pagination, endpoint retirement and no private payload. Add issue509-scoped synthetic Node22 regressions for zero and actionable tokens, Vault exception, multiple devices and endpoint cleanup. No code/test/CI Git writes were made this run because atomic source/test/SAME-COMMIT journal tree construction could not be established: connector exposes no current commit tree SHA; `create_tree` with commit-SHA base was rejected 422. Never bypass same-commit governance with sequential contents writes. Source fix **NOT_STAGED**, no CI PASS or READY claim. Source review + safe GitHub-only structured receipt [R383](../audits/issue509-r383-admin-push-noop-vault-20261120.json) recorded.
+
+Release **TESTING**, full baseline **IN_PROGRESS**, #1938 real-device approval UNVERIFIED. No production SQL/Edge/Auth/Storage/config/data, deploy, migrations, billing, backup, schedule or publication writes. Next continue genuinely new provider semantic review and seek atomic Git commit capability for scoped fix, then exact-source CI. No owner action or changed alert required.
+
 # Issue #509 R382 pg_trgm operator and consumer semantic closeout [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=5578b2a58000066ddee46dd42ca86a2766e34c81 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
