@@ -1,0 +1,436 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "R386",
+  "date_utc": "2026-11-20",
+  "project_ref": "azviqqejypsefzilgonr",
+  "preflight": {
+    "development_sha": "33ec76a7fb73a5057c4c3d075729ca0262e999c1",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "blob_content_verified": true
+  },
+  "provider": {
+    "status": "ACTIVE_HEALTHY",
+    "version": "17.11.0.003",
+    "production_read_only": true
+  },
+  "scope": {
+    "pg_catalog_total_catalog_routines": 3319,
+    "source_retrieval": "pg_get_functiondef; direct entire exposed declarations; no binary source",
+    "full_declarations_reviewed": 35,
+    "characters": 5921,
+    "first": "pg_catalog.RI_FKey_cascade_del()",
+    "last": "pg_catalog.age(timestamp without time zone, timestamp without time zone)",
+    "no_issue267_line_credit": true
+  },
+  "objects": [
+    {
+      "oid": 1646,
+      "identity": "pg_catalog.RI_FKey_cascade_del()",
+      "lang": "internal",
+      "md5": "370af44ecc509ef17eb22b658ab8a6cb",
+      "complete_exposed_definition": true,
+      "range": "characters 1-163",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.\"RI_FKey_cascade_del\"()\n RETURNS trigger\n LANGUAGE internal\n PARALLEL SAFE STRICT\nAS $function$RI_FKey_cascade_del$function$\n",
+      "verdict": "PostgreSQL native FK action/check trigger; integral to referential consistency; do not drop.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 1647,
+      "identity": "pg_catalog.RI_FKey_cascade_upd()",
+      "lang": "internal",
+      "md5": "610a97fbfebd02e6b87f28a3ffd8012b",
+      "complete_exposed_definition": true,
+      "range": "characters 1-163",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.\"RI_FKey_cascade_upd\"()\n RETURNS trigger\n LANGUAGE internal\n PARALLEL SAFE STRICT\nAS $function$RI_FKey_cascade_upd$function$\n",
+      "verdict": "PostgreSQL native FK action/check trigger; integral to referential consistency; do not drop.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 1644,
+      "identity": "pg_catalog.RI_FKey_check_ins()",
+      "lang": "internal",
+      "md5": "1d61f37aa5d841868619bc5213e05cb7",
+      "complete_exposed_definition": true,
+      "range": "characters 1-159",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.\"RI_FKey_check_ins\"()\n RETURNS trigger\n LANGUAGE internal\n PARALLEL SAFE STRICT\nAS $function$RI_FKey_check_ins$function$\n",
+      "verdict": "PostgreSQL native FK action/check trigger; integral to referential consistency; do not drop.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 1645,
+      "identity": "pg_catalog.RI_FKey_check_upd()",
+      "lang": "internal",
+      "md5": "91f3ff61ee7527b0688ce1a1f11db752",
+      "complete_exposed_definition": true,
+      "range": "characters 1-159",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.\"RI_FKey_check_upd\"()\n RETURNS trigger\n LANGUAGE internal\n PARALLEL SAFE STRICT\nAS $function$RI_FKey_check_upd$function$\n",
+      "verdict": "PostgreSQL native FK action/check trigger; integral to referential consistency; do not drop.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 1654,
+      "identity": "pg_catalog.RI_FKey_noaction_del()",
+      "lang": "internal",
+      "md5": "5a194f0246aa6165fe2ca738a1586a15",
+      "complete_exposed_definition": true,
+      "range": "characters 1-165",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.\"RI_FKey_noaction_del\"()\n RETURNS trigger\n LANGUAGE internal\n PARALLEL SAFE STRICT\nAS $function$RI_FKey_noaction_del$function$\n",
+      "verdict": "PostgreSQL native FK action/check trigger; integral to referential consistency; do not drop.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 1655,
+      "identity": "pg_catalog.RI_FKey_noaction_upd()",
+      "lang": "internal",
+      "md5": "dae4248018b89ad39b9bd38c0eaa5a54",
+      "complete_exposed_definition": true,
+      "range": "characters 1-165",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.\"RI_FKey_noaction_upd\"()\n RETURNS trigger\n LANGUAGE internal\n PARALLEL SAFE STRICT\nAS $function$RI_FKey_noaction_upd$function$\n",
+      "verdict": "PostgreSQL native FK action/check trigger; integral to referential consistency; do not drop.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 1648,
+      "identity": "pg_catalog.RI_FKey_restrict_del()",
+      "lang": "internal",
+      "md5": "253aa1f96333ac2ce5f05cd227965091",
+      "complete_exposed_definition": true,
+      "range": "characters 1-165",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.\"RI_FKey_restrict_del\"()\n RETURNS trigger\n LANGUAGE internal\n PARALLEL SAFE STRICT\nAS $function$RI_FKey_restrict_del$function$\n",
+      "verdict": "PostgreSQL native FK action/check trigger; integral to referential consistency; do not drop.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 1649,
+      "identity": "pg_catalog.RI_FKey_restrict_upd()",
+      "lang": "internal",
+      "md5": "ae4abbe8c54285e2a554d485e55f999f",
+      "complete_exposed_definition": true,
+      "range": "characters 1-165",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.\"RI_FKey_restrict_upd\"()\n RETURNS trigger\n LANGUAGE internal\n PARALLEL SAFE STRICT\nAS $function$RI_FKey_restrict_upd$function$\n",
+      "verdict": "PostgreSQL native FK action/check trigger; integral to referential consistency; do not drop.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 1652,
+      "identity": "pg_catalog.RI_FKey_setdefault_del()",
+      "lang": "internal",
+      "md5": "c991936c58cf9e4d29a0491050b52cd2",
+      "complete_exposed_definition": true,
+      "range": "characters 1-169",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.\"RI_FKey_setdefault_del\"()\n RETURNS trigger\n LANGUAGE internal\n PARALLEL SAFE STRICT\nAS $function$RI_FKey_setdefault_del$function$\n",
+      "verdict": "PostgreSQL native FK action/check trigger; integral to referential consistency; do not drop.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 1653,
+      "identity": "pg_catalog.RI_FKey_setdefault_upd()",
+      "lang": "internal",
+      "md5": "f68edd091013e61abd0a2b8881835a40",
+      "complete_exposed_definition": true,
+      "range": "characters 1-169",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.\"RI_FKey_setdefault_upd\"()\n RETURNS trigger\n LANGUAGE internal\n PARALLEL SAFE STRICT\nAS $function$RI_FKey_setdefault_upd$function$\n",
+      "verdict": "PostgreSQL native FK action/check trigger; integral to referential consistency; do not drop.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 1650,
+      "identity": "pg_catalog.RI_FKey_setnull_del()",
+      "lang": "internal",
+      "md5": "1c38b71d4bcb1bebb247fb6d1c518e23",
+      "complete_exposed_definition": true,
+      "range": "characters 1-163",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.\"RI_FKey_setnull_del\"()\n RETURNS trigger\n LANGUAGE internal\n PARALLEL SAFE STRICT\nAS $function$RI_FKey_setnull_del$function$\n",
+      "verdict": "PostgreSQL native FK action/check trigger; integral to referential consistency; do not drop.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 1651,
+      "identity": "pg_catalog.RI_FKey_setnull_upd()",
+      "lang": "internal",
+      "md5": "2496c1477e1242c82a7e7b726e2c1e0f",
+      "complete_exposed_definition": true,
+      "range": "characters 1-163",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.\"RI_FKey_setnull_upd\"()\n RETURNS trigger\n LANGUAGE internal\n PARALLEL SAFE STRICT\nAS $function$RI_FKey_setnull_upd$function$\n",
+      "verdict": "PostgreSQL native FK action/check trigger; integral to referential consistency; do not drop.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 599,
+      "identity": "pg_catalog.abbrev(cidr)",
+      "lang": "internal",
+      "md5": "a8e3ed3b5ba99bfda46e7fd5472ebc07",
+      "complete_exposed_definition": true,
+      "range": "characters 1-151",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.abbrev(cidr)\n RETURNS text\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$cidr_abbrev$function$\n",
+      "verdict": "Native cidr/inet abbreviation overload; distinct argument type.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 598,
+      "identity": "pg_catalog.abbrev(inet)",
+      "lang": "internal",
+      "md5": "396c7e24299d322bed17cc99bc0c070a",
+      "complete_exposed_definition": true,
+      "range": "characters 1-151",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.abbrev(inet)\n RETURNS text\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$inet_abbrev$function$\n",
+      "verdict": "Native cidr/inet abbreviation overload; distinct argument type.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 1396,
+      "identity": "pg_catalog.abs(bigint)",
+      "lang": "internal",
+      "md5": "e80665d0fd0ac6e42f186bd79f405d60",
+      "complete_exposed_definition": true,
+      "range": "characters 1-148",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.abs(bigint)\n RETURNS bigint\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$int8abs$function$\n",
+      "verdict": "Native absolute-value implementation with typed numeric overload; preserve.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 1395,
+      "identity": "pg_catalog.abs(double precision)",
+      "lang": "internal",
+      "md5": "2771f32fe65a9ca6c86427ead4783b8b",
+      "complete_exposed_definition": true,
+      "range": "characters 1-170",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.abs(double precision)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$float8abs$function$\n",
+      "verdict": "Native absolute-value implementation with typed numeric overload; preserve.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 1397,
+      "identity": "pg_catalog.abs(integer)",
+      "lang": "internal",
+      "md5": "aed35e279ea9184e1652757d33ae797a",
+      "complete_exposed_definition": true,
+      "range": "characters 1-150",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.abs(integer)\n RETURNS integer\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$int4abs$function$\n",
+      "verdict": "Native absolute-value implementation with typed numeric overload; preserve.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 1705,
+      "identity": "pg_catalog.abs(numeric)",
+      "lang": "internal",
+      "md5": "9832eab3400b2444895daa0a58340922",
+      "complete_exposed_definition": true,
+      "range": "characters 1-154",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.abs(numeric)\n RETURNS numeric\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$numeric_abs$function$\n",
+      "verdict": "Native absolute-value implementation with typed numeric overload; preserve.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 1394,
+      "identity": "pg_catalog.abs(real)",
+      "lang": "internal",
+      "md5": "f19f0a6fdc09a6cea2ef83d001c7a3ec",
+      "complete_exposed_definition": true,
+      "range": "characters 1-146",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.abs(real)\n RETURNS real\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$float4abs$function$\n",
+      "verdict": "Native absolute-value implementation with typed numeric overload; preserve.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 1398,
+      "identity": "pg_catalog.abs(smallint)",
+      "lang": "internal",
+      "md5": "07a1417d910a6ad7d4f98c33d71dcd64",
+      "complete_exposed_definition": true,
+      "range": "characters 1-152",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.abs(smallint)\n RETURNS smallint\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$int2abs$function$\n",
+      "verdict": "Native absolute-value implementation with typed numeric overload; preserve.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 1037,
+      "identity": "pg_catalog.aclcontains(aclitem[], aclitem)",
+      "lang": "internal",
+      "md5": "7cc68669e2dd2ae55c3e8d4b9fb5ed1e",
+      "complete_exposed_definition": true,
+      "range": "characters 1-173",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.aclcontains(aclitem[], aclitem)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$aclcontains$function$\n",
+      "verdict": "PostgreSQL core ACL read/write parser or expander; platform permission semantics; preserve.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 3943,
+      "identity": "pg_catalog.acldefault(\"char\", oid)",
+      "lang": "internal",
+      "md5": "260285bc024a7f14357bbb62557fd5b9",
+      "complete_exposed_definition": true,
+      "range": "characters 1-170",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.acldefault(\"char\", oid)\n RETURNS aclitem[]\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$acldefault_sql$function$\n",
+      "verdict": "PostgreSQL core ACL read/write parser or expander; platform permission semantics; preserve.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 1689,
+      "identity": "pg_catalog.aclexplode(acl aclitem[], OUT grantor oid, OUT grantee oid, OUT privilege_type text, OUT is_grantable boolean)",
+      "lang": "internal",
+      "md5": "0c6e51e6c34d9c2a04154e8cbe0abd2d",
+      "complete_exposed_definition": true,
+      "range": "characters 1-261",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.aclexplode(acl aclitem[], OUT grantor oid, OUT grantee oid, OUT privilege_type text, OUT is_grantable boolean)\n RETURNS SETOF record\n LANGUAGE internal\n STABLE PARALLEL SAFE STRICT ROWS 10\nAS $function$aclexplode$function$\n",
+      "verdict": "PostgreSQL core ACL read/write parser or expander; platform permission semantics; preserve.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 1035,
+      "identity": "pg_catalog.aclinsert(aclitem[], aclitem)",
+      "lang": "internal",
+      "md5": "d1d3b8c4eba14a7393efad3d09d9d86f",
+      "complete_exposed_definition": true,
+      "range": "characters 1-171",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.aclinsert(aclitem[], aclitem)\n RETURNS aclitem[]\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$aclinsert$function$\n",
+      "verdict": "PostgreSQL core ACL read/write parser or expander; platform permission semantics; preserve.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 1062,
+      "identity": "pg_catalog.aclitemeq(aclitem, aclitem)",
+      "lang": "internal",
+      "md5": "0fcce80bc8ab2585810fc5920239d7db",
+      "complete_exposed_definition": true,
+      "range": "characters 1-168",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.aclitemeq(aclitem, aclitem)\n RETURNS boolean\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$aclitem_eq$function$\n",
+      "verdict": "PostgreSQL core ACL read/write parser or expander; platform permission semantics; preserve.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 1031,
+      "identity": "pg_catalog.aclitemin(cstring)",
+      "lang": "internal",
+      "md5": "e5eb64fa66f65fbc7b454035662caf41",
+      "complete_exposed_definition": true,
+      "range": "characters 1-155",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.aclitemin(cstring)\n RETURNS aclitem\n LANGUAGE internal\n STABLE PARALLEL SAFE STRICT\nAS $function$aclitemin$function$\n",
+      "verdict": "PostgreSQL core ACL read/write parser or expander; platform permission semantics; preserve.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 1032,
+      "identity": "pg_catalog.aclitemout(aclitem)",
+      "lang": "internal",
+      "md5": "dbb22dfef47f49e8306c4721436353d4",
+      "complete_exposed_definition": true,
+      "range": "characters 1-157",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.aclitemout(aclitem)\n RETURNS cstring\n LANGUAGE internal\n STABLE PARALLEL SAFE STRICT\nAS $function$aclitemout$function$\n",
+      "verdict": "PostgreSQL core ACL read/write parser or expander; platform permission semantics; preserve.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 1036,
+      "identity": "pg_catalog.aclremove(aclitem[], aclitem)",
+      "lang": "internal",
+      "md5": "b344723352928c0e748aa6ebf645c076",
+      "complete_exposed_definition": true,
+      "range": "characters 1-171",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.aclremove(aclitem[], aclitem)\n RETURNS aclitem[]\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$aclremove$function$\n",
+      "verdict": "PostgreSQL core ACL read/write parser or expander; platform permission semantics; preserve.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 1601,
+      "identity": "pg_catalog.acos(double precision)",
+      "lang": "internal",
+      "md5": "0325a0d8267eb41f46c5186acdeb9a73",
+      "complete_exposed_definition": true,
+      "range": "characters 1-167",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.acos(double precision)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$dacos$function$\n",
+      "verdict": "Native math primitive, not application-owned; preserve.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 2732,
+      "identity": "pg_catalog.acosd(double precision)",
+      "lang": "internal",
+      "md5": "bea66d5f1341abf81551c3c214b59f2e",
+      "complete_exposed_definition": true,
+      "range": "characters 1-169",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.acosd(double precision)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$dacosd$function$\n",
+      "verdict": "Native math primitive, not application-owned; preserve.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 2466,
+      "identity": "pg_catalog.acosh(double precision)",
+      "lang": "internal",
+      "md5": "69a8b2744b105571f047884f45c85e4e",
+      "complete_exposed_definition": true,
+      "range": "characters 1-169",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.acosh(double precision)\n RETURNS double precision\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$dacosh$function$\n",
+      "verdict": "Native math primitive, not application-owned; preserve.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 1386,
+      "identity": "pg_catalog.age(timestamp with time zone)",
+      "lang": "sql",
+      "md5": "1edb1628aeea9ea499cf0a054b7e6195",
+      "complete_exposed_definition": true,
+      "range": "characters 1-193",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.age(timestamp with time zone)\n RETURNS interval\n LANGUAGE sql\n STABLE PARALLEL SAFE STRICT COST 1\nRETURN age((CURRENT_DATE)::timestamp with time zone, $1)\n",
+      "verdict": "Calendar-aware age overload; one-argument CURRENT_DATE SQL wrapper or two-argument native implementation; preserve.",
+      "native_implementation": "FULL_SQL_WRAPPER_REVIEWED"
+    },
+    {
+      "oid": 1199,
+      "identity": "pg_catalog.age(timestamp with time zone, timestamp with time zone)",
+      "lang": "internal",
+      "md5": "a6c9b90dfef04e941b03b9df83cd1b42",
+      "complete_exposed_definition": true,
+      "range": "characters 1-202",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.age(timestamp with time zone, timestamp with time zone)\n RETURNS interval\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$timestamptz_age$function$\n",
+      "verdict": "Calendar-aware age overload; one-argument CURRENT_DATE SQL wrapper or two-argument native implementation; preserve.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    },
+    {
+      "oid": 2059,
+      "identity": "pg_catalog.age(timestamp without time zone)",
+      "lang": "sql",
+      "md5": "9b456c4d0a2d98c22aa5172651edc6d3",
+      "complete_exposed_definition": true,
+      "range": "characters 1-199",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.age(timestamp without time zone)\n RETURNS interval\n LANGUAGE sql\n STABLE PARALLEL SAFE STRICT COST 1\nRETURN age((CURRENT_DATE)::timestamp without time zone, $1)\n",
+      "verdict": "Calendar-aware age overload; one-argument CURRENT_DATE SQL wrapper or two-argument native implementation; preserve.",
+      "native_implementation": "FULL_SQL_WRAPPER_REVIEWED"
+    },
+    {
+      "oid": 2058,
+      "identity": "pg_catalog.age(timestamp without time zone, timestamp without time zone)",
+      "lang": "internal",
+      "md5": "67aad248a79a6a125329f48a1f450d61",
+      "complete_exposed_definition": true,
+      "range": "characters 1-206",
+      "definition": "CREATE OR REPLACE FUNCTION pg_catalog.age(timestamp without time zone, timestamp without time zone)\n RETURNS interval\n LANGUAGE internal\n IMMUTABLE PARALLEL SAFE STRICT\nAS $function$timestamp_age$function$\n",
+      "verdict": "Calendar-aware age overload; one-argument CURRENT_DATE SQL wrapper or two-argument native implementation; preserve.",
+      "native_implementation": "UNVERIFIED_BINARY_UNEXPOSED"
+    }
+  ],
+  "next_cursor": {
+    "identity": "pg_catalog.age(xid)",
+    "oid": 1181,
+    "range": "characters 1-149"
+  },
+  "findings": [
+    "No verified safe system object deletions.",
+    "Confirmed R383 unnecessary no-op Vault RPC now addressed in staged GitHub source only."
+  ],
+  "source_fix": {
+    "path": "supabase/functions/dic-admin-push-broker/core.mjs",
+    "prior_blob_sha": "e1a467cc0bb9d94ea824953eec88aaf8d6c428dd",
+    "description": "Lazy memoized Vault read only for new-token push; preserve no-key retry and endpoint retirement",
+    "tests": "tests/issue1938-edge-broker.test.mjs",
+    "new_test_cases": 4,
+    "status": "TESTING_NOT_DEPLOYED"
+  },
+  "unverified": [
+    "Native PostgreSQL implementation C/binary",
+    "Production delivery behavior until publish",
+    "Measured actual latency benefit"
+  ],
+  "production_provider_writes": 0
+}

@@ -1,3 +1,13 @@
+# Issue #509 R386 — pg_catalog full exposed declarations and Admin push Vault no-op fix [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=33ec76a7fb73a5057c4c3d075729ca0262e999c1 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-20 UTC.** Retrieved immutable development PREFLIGHT.md before other GitHub/provider reads; separately fetched and matched its Git blob. Main `57adc419`, release/production `07f054f6`. Supabase `azviqqejypsefzilgonr` ACTIVE_HEALTHY PostgreSQL17.11, production READ-ONLY. Direct semantic review of **35 newly traversed pg_catalog SQL declarations (5921 total characters)**, all accessible characters 1–end and MD5 per object recorded in [R386 full-source audit receipt](../audits/issue509-r386-pg-catalog-and-admin-push-lazy-key-20261120.json). Covers RI foreign-key enforcement, inet/cidr abbreviations, numeric overloads, ACL primitives, trigonometric functions and calendar age wrappers. No justified vendor object deletions or verified new bottlenecks. Native internal code bodies remain UNVERIFIED; zero #267 GitHub source lines credited. **Next cursor:** `pg_catalog.age(xid)` OID1181 characters 1–149 among `pg_catalog` ordinary functions (aggregates tracked separately).
+
+**Issue #509 development-only fix staged, release TESTING:** R383 confirmed the Admin push broker always consulted Vault before discovering whether any tokens required push. This commit defers and memoizes `dic_admin_push_runtime_keys` to actionable `added.length>0` rows; no-op scans and revoked device removal operate when Vault unavailable. New synthetic Node22 regression cases: no-op/revocation under Vault 503, multi-device shared key, actionable Vault 503 with no false receipts, missing keys with retry. Existing bootstrap/manage, private key custody, signing, pagination and no-private-payload boundaries retained. Requires PR-head and merged-source exact-source Node22/cloud/approval CI before READY; no published change or production provider writes. No new owner action or alert.
+
+---
+
 # Issue #509 R383 — admin push no-op Vault dependency, fully reviewed deployed Edge [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=0a0536fa51b44931f9158167d7bd851ae831aa80 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
