@@ -1023,7 +1023,15 @@ function canonicalIdentityScope(fields,raw,source_type='html'){
  // Direct selected origin labels, actual country/region claims and genuine
  // competing geography remain intact and continue through conflict gates.
  const ownGeography=raw.replace(/\b(?:it(?:\s+is|[’']s)|this\s+(?:is|coffee\s+is))\s+(?:(?:the|a)\s+)?kind\s+of\s+(?:North|South|Central|Latin)\s+American\s+coffee\s+(?:you|that)\s+[^.!?<>]{6,160}\.(?=\s|<|$)/giu,match=>' '.repeat(match.length));
- const scoped=isolateCoffeeIdentityCohorts(withoutEducationalCoffeeGeography(ownGeography,{clean}),{name:fields.name});
+ // The site at which a coffee was decaffeinated does not, by itself,
+ // establish where its green beans were grown. Quarantine only that country
+ // phrase; preserve raw bytes elsewhere, character offsets and direct
+ // independently printed origin labels / farming claims.
+ const decafSitePattern=new RegExp('\\bdecaffeinated\\s+(at\\s+origin\\s+in\\s+(?:'+
+  [...ORIGIN_COUNTRIES].sort((a,b)=>b.length-a.length).join('|')+'))\\b','giu');
+ const growingView=ownGeography.replace(decafSitePattern,(claim,site)=>
+  claim.replace(site,' '.repeat(site.length)));
+ const scoped=isolateCoffeeIdentityCohorts(withoutEducationalCoffeeGeography(growingView,{clean}),{name:fields.name});
  if(scoped.origin)addField(fields,'Origin',scoped.origin);
  if(scoped.truncated)identityScopeTruncatedByFields.add(fields);
  const retained=identityQuarantinesByFields.get(fields)||[];

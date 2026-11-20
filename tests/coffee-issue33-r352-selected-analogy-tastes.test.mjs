@@ -57,3 +57,14 @@ test('R352 no invented roast, cherry process, producer or lot',()=>{
  assert.equal(p.fields.process,undefined);assert.equal(p.fields.producer,undefined);
  assert.equal(p.fields.release_label,undefined);
 });
+
+test('R354 decaf-site geography alone cannot establish green-coffee provenance',()=>{
+ const sentence='This coffee is decaffeinated at origin in Colombia using a process they called "sugar process".';
+ const noGrowingSource=parse(markup({description:sentence,origins:[],location:'',json:false}));
+ assert.equal(noGrowingSource.ok,true);
+ assert.equal(noGrowingSource.fields.decaffeination_method,'Sugar Process');
+ assert.equal(noGrowingSource.fields.origin,undefined);
+ const labeledOrigin=parse(markup({description:sentence,origins:['Colombia'],location:'',json:false}));
+ assert.match(labeledOrigin.fields.origin||'',/Colombia/i,'independent selected origin survives');
+ assert.equal(labeledOrigin.fields.decaffeination_method,'Sugar Process');
+});
