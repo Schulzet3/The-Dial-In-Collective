@@ -25726,5 +25726,35 @@
     "release": "TESTING",
     "current_reviewed_baseline": "114/114 current application SQL functions and 52/52 application table components reconciled from prior receipts, 69/69 provider-stored migrations previously reviewed, 5 Edge deployed functions; no new first-time complete-word credit",
     "next_cursor": "First genuinely new/changed or previously unreviewed live provider object; source-only R376 broker error-isolation fix when safe atomic GitHub tree+same-commit scoped journal path available, then Node22/isolated CI"
+  },
+  "provider_member_approval_vault_isolation_run377": {
+    "run": "R377",
+    "date_utc": "2026-11-20",
+    "issue": 509,
+    "project_ref": "azviqqejypsefzilgonr",
+    "preflight_development_sha": "0a08e269a919110a0beaaef253be1e9dfb38775d",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "preflight_content_matches_git_blob": true,
+    "base_tree_sha": "9ebb56cb3b31638bce91e24a580d9991d395a79e",
+    "provider_read_only": true,
+    "provider_status": "ACTIVE_HEALTHY",
+    "production_broker": "dic-member-approval-broker v1 unchanged",
+    "source_path": "supabase/functions/dic-member-approval-broker/core.mjs",
+    "old_core_blob": "113ffd9ac7bc45839a0566da8837edd22352adf2",
+    "old_test_blob": "9ebf20df39d311d8d743ee6eb8b7b443584ec712",
+    "finding": "Vault keys RPC must not block independent Resend email even with no push subscriptions",
+    "fix": "Lazy, in-poll memoized keys request only when push batch has nonempty endpoint list; push failures RETRY, email independent",
+    "regressions": [
+      "Vault RPC 503 with valid push endpoint => push RETRY, email SENT, one Vault RPC",
+      "No push endpoints with Vault unavailable => push SKIPPED, email SENT, zero Vault RPC"
+    ],
+    "validation": "PR_HEAD_CI_NOT_YET_OBSERVED",
+    "real_incident": "NOT_ESTABLISHED",
+    "production_changes": 0,
+    "first_time_provider_word_credit": 0,
+    "issue267_source_line_credit": 0,
+    "baseline": "IN_PROGRESS",
+    "release": "TESTING",
+    "next_cursor": "Verify exact PR-head Node22/approval/SQL/browser then nonforce integrate on verified passing evidence; resume first new/unreviewed provider definition"
   }
 }

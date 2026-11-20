@@ -29,14 +29,15 @@ function request(op,payload={},auth=true){
 }
 function fixture({status={authenticated:true,emailVerified:true,admitted:false,
  approvalState:'pending',admin:false},secrets={},claims=true,
- pushItems=[{hash:ENDPOINT_HASH,endpoint:ENDPOINT}],foreign=null,pushStatus=201}={}){
+ pushItems=[{hash:ENDPOINT_HASH,endpoint:ENDPOINT}],foreign=null,pushStatus=201,vaultStatus=200}={}){
  const calls=[],receipts=[],sentEmails=[],sentPush=[],rows=[];
  const env=name=>({...defaults,...secrets})[name]??null;
  const fetcher=async(url,opts={})=>{
   calls.push({url,method:opts.method,body:opts.body,headers:opts.headers});
   if(url===PROJECT+'/auth/v1/user')return Response.json({id:MEMBER});
   if(url===PROJECT+'/rest/v1/rpc/dic_session_status')return Response.json(status);
-  if(url.endsWith('/rpc/dic_admin_push_runtime_keys'))return Response.json(keys);
+  if(url.endsWith('/rpc/dic_admin_push_runtime_keys'))return Response.json(
+   vaultStatus===200?keys:{error:'vault_unavailable'},{status:vaultStatus});
   if(url.endsWith('/rpc/dic_member_approval_claim_poll'))return Response.json(claims);
   if(url.endsWith('/rpc/dic_member_approval_claim')){
    const channel=JSON.parse(opts.body).p_channel;
@@ -130,6 +131,28 @@ test('no subscribed device is skipped rather than generating fabricated push del
  assert.equal(f.sentPush.length,0);
  assert.ok(f.receipts.some(r=>r.p_channel==='push'&&r.p_outcome==='skipped'));
 });
+test('Vault key RPC failure retries only push while independent approval email is sent',async()=>{
+ const f=fixture({vaultStatus:503});
+ const response=await f.broker(request('poll',{},false));
+ assert.equal(response.status,503);
+ assert.equal(f.sentEmails.length,1);
+ assert.equal(f.sentPush.length,0);
+ assert.deepEqual(f.receipts.map(r=>[r.p_channel,r.p_outcome]).sort(),
+  [['email','sent'],['push','retry']]);
+ assert.equal(f.calls.filter(c=>c.url?.endsWith('/rpc/dic_admin_push_runtime_keys')).length,1);
+});
+
+test('zero-device approval poll skips Vault lookup, still emails even if Vault is unavailable',async()=>{
+ const f=fixture({vaultStatus:503,pushItems:[]});
+ const response=await f.broker(request('poll',{},false));
+ assert.equal(response.status,200);
+ assert.deepEqual(await response.json(),{ok:true,handled:2});
+ assert.equal(f.calls.some(c=>c.url?.endsWith('/rpc/dic_admin_push_runtime_keys')),false);
+ assert.equal(f.sentEmails.length,1);
+ assert.deepEqual(f.receipts.map(r=>[r.p_channel,r.p_outcome]).sort(),
+  [['email','sent'],['push','skipped']]);
+});
+
 test('failed provider remains retryable and caller cannot select an email recipient/event',async()=>{
  const f=fixture({pushItems:[{hash:'not-a-hash',endpoint:ENDPOINT}]});
  assert.equal((await f.broker(request('poll',{recipient:'victim@fixture.invalid'},false))).status,400);
