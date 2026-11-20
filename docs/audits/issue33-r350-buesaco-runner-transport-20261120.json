@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "case": 241,
+  "scope": "DEVELOPMENT_ONLY",
+  "date_utc": "2026-11-20",
+  "status": "INTERMITTENT_OFFICIAL_RUNNER_SOURCE_CHALLENGE_MERGED_AFTERPROOF_BLOCKED",
+  "preflight": {
+    "first_branch_sha": "f93539802139ffd1f0e0031a5b9e354467d3753c",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "postmerge_documentation_base_sha": "5e6401d30290ac29c499fadbfc529ea1a3276948"
+  },
+  "pr": {
+    "number": 3495,
+    "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/3495",
+    "merged_sha": "5e6401d30290ac29c499fadbfc529ea1a3276948",
+    "nonforce": true,
+    "reviewed_four_file_blobs_match": true
+  },
+  "official_primary": {
+    "original_url": "https://novocoffee.com/product/buesaco",
+    "canonical_url": "https://novocoffee.com/product/buesaco/",
+    "canonical_head_redirect_status": 301,
+    "canonical_host_same_origin": true,
+    "pr_head_run": 44708692433,
+    "pr_source_checkout_sha": "4955727b34757872792c2a3ee70c21cc2bfea740",
+    "pr_selected_h1": "Buesaco",
+    "pr_raw_html_bytes": 231583,
+    "pr_html_sha256": "e5ea22c207b6dce7f5126bf623c5c710997d268c319dbc4061ec626ce64ffae6",
+    "pr_html_source_zip_artifact_id": 14615723035,
+    "pr_zip_sha256": "823732c8e1349b3c6e5419e15137c3092f91e1bac193894165eb0dad64f3695d",
+    "pr_parser_ok": true,
+    "pr_source_review_ok": true,
+    "pr_add_coffee_preview_ok": true,
+    "pr_canonical_fields": {
+      "name": "Buesaco",
+      "roaster": "Novo Coffee",
+      "process": "Washed",
+      "variety": "Castillo, Caturra, Colombia",
+      "elevation_m": "2100m",
+      "origin": "Buesaco, Colombia",
+      "producer": "Smallholder Farms"
+    },
+    "pr_source_notes": [
+      "Tangerine, Maple, Hazelnut",
+      "Cherry, Tangerine, Nougat"
+    ],
+    "pr_conflicts": [
+      "tasting_notes"
+    ],
+    "pr_canonical_tasting_notes_withheld": true,
+    "pr_espresso_recipe_withheld": true,
+    "merged_run": 44709442886,
+    "merged_result": "FAILURE",
+    "merged_canonical_get_reason": "source_access_challenge",
+    "merged_current_html_bytes": 0,
+    "merged_selected_h1": null,
+    "merged_parser_evaluated": false,
+    "merged_zip_artifact_id": 14616138624,
+    "merged_zip_sha256": "de2e84a06f3ad13d3452e4fd15ef72f971c0b5e7394391162bab5805479ac636",
+    "first_party_store_api_url": "https://novocoffee.com/wp-json/wc/store/v1/products?slug=buesaco",
+    "store_exact_match_count": 1,
+    "store_json_sha256": "e36a6e31c66978a2175faa322627c2e802c33b9f7513d3c8aabd34619f95aae6",
+    "store_cannot_certify_primary_html": true
+  },
+  "tests": {
+    "synthetic_cases": 4,
+    "pr_current_runner": "SUCCESS",
+    "merged_current_runner": "FAILURE_SOURCE_ACCESS_CHALLENGE",
+    "pr_node_pass": 5859,
+    "pr_node_fail": 0,
+    "pr_node_skip": 6,
+    "pr_node_run": 44708692560,
+    "merged_node_pass": 5859,
+    "merged_node_fail": 0,
+    "merged_node_skip": 6,
+    "merged_node_run": 44709443295,
+    "pr_cloud_mobile": "SUCCESS",
+    "merged_cloud_mobile": "SUCCESS",
+    "merged_approval": "SUCCESS",
+    "merged_python": "SUCCESS",
+    "merged_offline_shared": "SUCCESS",
+    "full_frozen603": "SKIPPED_NOT_PASS",
+    "source_transport_fix": "NOT_JUSTIFIED_EXTERNAL_INTERMITTENT_CHALLENGE"
+  },
+  "frozen_original": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "mutated": false,
+    "oracle_modified": false,
+    "scorer_modified": false,
+    "manual_603_certified": false
+  },
+  "queue": {
+    "blob_sha": "eb001f3b7b6f77dc8123100caedbb129bcdbc757",
+    "changed": false,
+    "ready_promotion": false
+  },
+  "production": {
+    "publish": false,
+    "netlify": false,
+    "sql": false,
+    "edge": false,
+    "auth": false,
+    "member_data": false,
+    "provider_writes": false,
+    "paid": false
+  },
+  "next": "Treat this exact merged current source as UNAVAILABLE; do not rerun blocked network blindly or infer selected fields from auxiliary API. Continue disjoint original603 manual/semantic cases; only change generic transport if independently reproducible safe defect, with atomic journal + CI. Issue #33 OPEN."
+}
