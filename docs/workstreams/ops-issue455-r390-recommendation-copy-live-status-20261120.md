@@ -17,3 +17,12 @@ DIC_PREFLIGHT_VERIFIED development_sha=33ec76a7fb73a5057c4c3d075729ca0262e999c1 
 
 - Initial PR-head approval 44730104685 failed [DIC queue] HOLD: missing explicit nullable merged_source_sha and empty ci_runs array in TESTING queue row, not an app test failure. Source/test/UI/style Git blobs are unchanged from 30b1a2219ef31f4a0f5242309d446089c7a376d9; preserve failed run as FAILED (never PASS).
 - Corrected queue entry schema with merged_source_sha:null, ci_runs:[], pr:3503, retained TESTING/PENDING; need exact corrected-head governance and all applicable source-bound CI before merge, then downstream merged checks. No user-facing/Locked/provider/release change.
+
+## R390 exact-source Node22 regression correction [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=33ec76a7fb73a5057c4c3d075729ca0262e999c1 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+- Negative: first corrected PR-head 9f2dd86f569f00170a2f15eb53a4c03f089f07cc Node22/build workflow 44730300406 FAILED: 5882 tests, 5875 passed, 1 failed, 6 intentionally skipped. This failure is NOT PASS and not a deployment condition. New R390 true CloudApp positive/negative regression #182 PASSED. Existing R295 test #5183 checks exact contiguous original input handler string, which our adjacent status guard had changed. Test's semantic contract remains correct; no reason to weaken it or change Locked behavior.
+- Source-bound repair: preserve verbatim original R295 validation acknowledgement handler and append separate scoped grind/temperature copy-status clearing guard. Two same-scope DOM closest checks are harmless; a separate guard preserves both historical contract and new R390 behavior. Source site/cloud/main.js prior Git blob 1fc82b776752d99dd4595e942af29a2cf5baa20e, existing R295 test left unchanged, real R390 test unchanged. No change to numeric policy or member/history data.
+- Initial corrected-head real Chromium/mobile/offline/a11y 44730300549, SQL 44730300490, security 44730300483, governance 44730300850 SUCCESS; initial node FAIL retained in queue. New corrected source exact Node22/browser/SQL/security/governance still PENDING; no false Ready/Deploy. 48 research-pack reference cases not app CI.
+- Next: require exact new source-head Node22 positive/negative and relevant hosted statuses SUCCESS before non-force merge [skip netlify], then merged SHA/CI readback and queue reconciliation. S019 remains unavailable; no owner alert required for resolved source-only test-assertion mismatch.
