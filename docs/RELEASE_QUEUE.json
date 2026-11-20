@@ -17362,22 +17362,31 @@
       "issue": 509,
       "title": "Disallow archived or hidden workspace and Make Current selection",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "3df9ad1e767ee82e9d28e089d375611b510af9ac",
       "scope_paths": [
         "supabase/migrations/20261120044500_dic_workspace_inactive_selection_guards.sql"
       ],
       "owner_source": "Issue #509 R379; DIC_PREFLIGHT_VERIFIED development_sha=a652cdc9a1ec65713cd929f4d7e5d88ce66a878e preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e",
       "tests": [
-        "Live full function and 31 relevant constraints and 5 triggers prove inactive flags omitted; 0 affected current rows in read-only aggregates.",
-        "Synthetic admitted-user PostgreSQL17 rollback regression staged, exact-source CI PENDING."
+        "Full live SQL + setup/library/workspace FK and trigger semantics; zero affected archived/hidden current rows (provider SELECT-only).",
+        "PR #3481 head 13744267: isolated PostgreSQL17 rollback fixture PASS: active style/Current, archived+hidden refusal, immutable historical shot retained.",
+        "Exact PR-head Node22, approval, browser, SQL, Python and 2 selected #33 checks SUCCESS (7 applicable), frozen original corpus SKIPPED."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        44677474159,
+        44677474078,
+        44677474097,
+        44677474105,
+        44677474173,
+        44677474190,
+        44677474192
+      ],
       "blockers": [
-        "Exact-source PG17, Node22, approval and browser CI not yet observed.",
-        "Unmerged development source and separate #3347 source-isolated candidate certification/hosted #96 acceptance UNVERIFIED.",
-        "New owner Publish needed before production SQL change."
+        "Merged-development-push exact-source CI not observed; PR-head success is distinct.",
+        "Separate #3347 isolated READY candidate five exact-source checks and #96 genuine hosted member acceptance remain UNVERIFIED.",
+        "A NEW owner Publish is required for any production SQL/Edge/app change."
       ],
-      "notes": "Narrow additive migration; preserve history, Auth, offline mutation receipts and Community; zero confirmed production member incident.",
+      "notes": "R380 readback: explicit nonforce [skip netlify] PR #3481 merge 3df9ad1e, exact migration/fixture/runner blobs unchanged from tested PR head. Historical migrations untouched; production read-only.",
       "production_deployed": false
     }
   ],
@@ -20771,6 +20780,15 @@
       "state": "TESTING",
       "production_deployed": false,
       "evidence": "R379 full provider semantic review and development-only source + PostgreSQL17 rollback regression staged; CI pending."
+    },
+    {
+      "date": "2026-11-20",
+      "issue": 509,
+      "item_id": "DIC-Q-509-workspace-inactive-selection-guards",
+      "state": "TESTING",
+      "merged_source_sha": "3df9ad1e767ee82e9d28e089d375611b510af9ac",
+      "production_deployed": false,
+      "evidence": "R380: source-fixed archived/hidden workspace actions merged via PR #3481 [skip netlify]; 7 applicable exact PR-head workflows success incl isolated PG17 rollback fixture; frozen original corpus SKIPPED. Merged-source CI and isolated #3347 READY candidate/hosted #96 remain UNVERIFIED; no production write."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
