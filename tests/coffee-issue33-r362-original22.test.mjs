@@ -10,7 +10,7 @@ const direct='<h2>A rich and incredibly sweet cup, with fruit-forward notes of r
  '<p>Harvest: December - April</p>';
 const html=(name=selectedName,body=direct,other='')=>'<html><head><title>Light Roast Organic Specialty Coffee — shop</title></head><body>'+
  '<nav>Menu Light Roast Organic Specialty Coffee; Other Beans: Dark Chocolate</nav>'+
- '<main><article class="product"><h1>'+name+'</h1><div class="product__description">'+body+'</div></article></main>'+
+ '<main><div class="breadcrumbs"><a href="/">Home</a><a href="/collections/light-roast-organic-specialty-coffee">Light Roast Organic Specialty Coffee</a><span>'+name+'</span></div><article class="product"><h1>'+name+'</h1><div class="product__description">'+body+'</div></article></main>'+
  other+'<footer>Other seasonal products</footer></body></html>';
 test('R362 exact own H1 and direct sensory/process/varietal/altitude/harvest facts',()=>{
  const s=selected22(html());assert.equal(s.identity,true);assert.equal(s.notes,true);assert.equal(s.natural,true);
@@ -46,4 +46,14 @@ test('R362 current parser and no-save UI contracts exist for selected product',(
  assert.equal(p.ok,true);assert.equal(norm(p.fields?.name),norm(selectedName));
  assert.match(coffeeUrlPreviewMarkup(p),/coffee-url-preview/);
  assert.equal(coffeeSourceReviewSnapshot({...p,source_url:selectedUrl})?.type,'coffee_source_review');
+});
+
+test('R362 selected parser excludes named collection breadcrumb, preserving no unsupported roast',()=>{
+ const p=extractPublicCoffeeFacts(html(),{source_url:selectedUrl});
+ assert.equal(p.ok,true);assert.equal(norm(p.fields?.name),norm(selectedName));
+ assert.equal(p.fields?.roast_level,undefined);
+});
+test('R362 current selected direct Roast Level outranks unrelated Light Roast navigation',()=>{
+ const p=extractPublicCoffeeFacts(html(selectedName,direct+'<p>Roast Level: Dark</p>'),{source_url:selectedUrl});
+ assert.equal(p.ok,true);assert.equal(p.fields?.roast_level,'Dark');
 });
