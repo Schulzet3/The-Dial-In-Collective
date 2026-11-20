@@ -6,13 +6,14 @@ import {requiredFocusedSourceFailures} from '../scripts/audit/issue33-focused-so
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../site/cloud/coffee-url-autofill.js';
 const desc='<p>You asked and we answered -- a Gesha from our 2026 Good Food Awards producer, Lisandro Cardenas! Bursting with notes of cranberry and lychee with additional sweet notes of caramelized sugar.</p>'+
  '<p>A coffee-producer son, Lisandro has been around coffee his whole life and said he inherited being a producer from his father.</p>';
-const page=(title=selectedName,body=desc,extra='')=>'<html><head><title>Holiday Roast El Salvador Pacamara Black Honey | old stale SEO</title></head><body>'+
+const page=(title='Last Roast!! '+selectedName,body=desc,extra='')=>'<html><head><title>Holiday Roast El Salvador Pacamara Black Honey | old stale SEO</title></head><body>'+
  '<nav>El Salvador Holiday Roast</nav><main><article class="product"><h1>'+title+'</h1>'+
  '<div class="product__description">'+body+'</div></article>'+extra+'</main><footer>Old holiday coffee</footer></body></html>';
 test('R361 actual selected title and direct Beanstock Gesha producer/tasting description are required',()=>{
  const r=selected15(page());
  assert.equal(r.exact,true);assert.equal(r.currentNarrative,true);assert.equal(r.directTasting,true);
  assert.equal(r.directProducer,true);assert.equal(r.retiredHolidayNotEvidence,true);
+ assert.equal(r.headings[0],'Last Roast!! '+selectedName);
 });
 test('R361 retired holiday handle and SEO cannot override actual selected Gesha H1',()=>{
  const p=extractPublicCoffeeFacts(page(),{source_url:selectedUrl});
@@ -21,6 +22,8 @@ test('R361 retired holiday handle and SEO cannot override actual selected Gesha 
 });
 test('R361 archived identity mismatch fails selected original proof',()=>{
  assert.equal(selected15(page('El Salvador Pacamara Black Honey')).exact,false);
+ assert.equal(selected15(page('Last Roast!! El Salvador Pacamara Black Honey')).exact,false);
+ assert.equal(selected15(page('Last Roast!! '+selectedName+' (New Lot)')).exact,false);
 });
 test('R361 other-coffee notes in related cards never establish current direct flavor',()=>{
  const other='<aside><h2>Other product</h2><p>Notes of cranberry and lychee with caramelized sugar</p></aside>';

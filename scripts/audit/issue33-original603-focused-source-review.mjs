@@ -139,6 +139,33 @@ for(const target of targets){
        String(p.fields?.tasting_notes||'').includes(x))&&
      !p.fields?.roast_level&&!p.fields?.decaffeination_method&&
      (p.conflicts||[]).length===0;
+   // Original #15 exact CURRENT Beanstock product adds a visible "Last Roast!!"
+   // availability marker to an otherwise same-identity Gesha. This is NOT a
+   // generic name-prefix waiver: require this original official URL, exactly
+   // one selected H1, selected-only narrative, matching parser/name, producer,
+   // origin, process, cultivar and full direct tasting facts. Another coffee,
+   // stale SEO, release-year inference or mismatched lot remains unverified.
+   const selected15Text=r.number===15?selected.replace(/<[^>]{0,2500}>/gu,' ').replace(/\s+/gu,' ').toLowerCase():'';
+   const qualified15=r.number===15&&
+     r.official_url==='https://beanstockcoffee.com/products/last-roast-holiday-roast-2-el-salvador-finca-los-angeles-pacamara-black-honey-process-copy'&&
+     !r.alternate_url_attempted&&r.selected_h1.length===1&&
+     r.selected_h1[0]==='Last Roast!! Colombia Gesha Natural Lisandro Cardenas Finca Las Brisas'&&
+     p?.ok===true&&p.fields?.name===r.selected_h1[0]&&
+     p.fields?.origin==='Colombia'&&p.fields?.process==='Natural'&&
+     p.fields?.variety==='Gesha'&&p.fields?.producer==='Lisandro Cardenas'&&
+     ['cranberry','lychee','caramelized sugar'].every(s=>
+       String(p.fields?.tasting_notes||'').toLowerCase().includes(s))&&
+     selected15Text.includes('you asked and we answered')&&
+     selected15Text.includes('gesha from our 2026 good food awards producer')&&
+     selected15Text.includes('notes of cranberry and lychee')&&
+     selected15Text.includes('caramelized sugar')&&
+     selected15Text.includes('inherited being a producer')&&
+     !p.fields?.roast_level&&!p.fields?.decaffeination_method&&
+     !p.fields?.release_label&&(p.conflicts||[]).length===0;
+   if(qualified15&&!r.selected_heading_identity_verified){
+     r.selected_heading_identity_verified=true;
+     r.selected_heading_qualification='current_selected_last_roast_same_exact_source_and_own_facts_15';
+   }
    if(qualified122&&!r.selected_heading_identity_verified){
      r.selected_heading_identity_verified=true;
      r.selected_heading_qualification='current_selected_final_batch_same_exact_source_and_own_facts_122';

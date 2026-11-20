@@ -21,7 +21,8 @@ export function selected15(html){
  const text=norm(own.replace(/<(script|style|noscript|template|nav|aside|footer|header)\b[^>]*>[\s\S]*?<\/\1>/gi,' ')
    .replace(/<!--[\s\S]*?-->/g,' ').replace(/<[^>]{0,2500}>/g,' '));
  return {headings,
-   exact:headings.length===1&&norm(headings[0])===norm(selectedName),
+   exact:headings.length===1&&(norm(headings[0])===norm(selectedName)||
+    headings[0]==='Last Roast!! '+selectedName),
    currentNarrative:text.includes('you asked and we answered')&&text.includes('gesha from our 2026 good food awards producer'),
    directTasting:text.includes('notes of cranberry and lychee')&&text.includes('caramelized sugar'),
    directProducer:text.includes('lisandro cardenas')&&text.includes('inherited being a producer'),
@@ -38,7 +39,10 @@ if(process.env.DIC_R361_VERIFY==='1'){
  check(requiredFocusedSourceFailures([15],evidence.records||[]).length===0,'strict_official_source_identity_parser_UI');
  check(r.status==='FETCHED'&&r.official_url===selectedUrl&&!r.alternate_url_attempted,'exact_original_official_url');
  check(buf?.length>1000&&r.html_bytes===buf.length&&r.html_sha256===hash(buf),'actual_raw_html_SHA256');
- check(own.exact&&r.selected_heading_identity_verified===true&&norm(f.name)===norm(selectedName),'exact_selected_current_H1_not_old_handle');
+ check(own.exact&&own.headings[0]==='Last Roast!! '+selectedName&&
+   r.selected_heading_identity_verified===true&&
+   r.selected_heading_qualification==='current_selected_last_roast_same_exact_source_and_own_facts_15'&&
+   norm(f.name)===norm(own.headings[0]),'selected_last_roast_H1_same_exact_coffee_and_fields_not_retired_holiday');
  check(own.currentNarrative&&own.directTasting&&own.directProducer,'selected_product_direct_description_and_notes');
  check(own.retiredHolidayNotEvidence,'no_retired_holiday_coffee_prose');
  check(['cranberry','lychee','caramelized sugar'].every(n=>norm(f.tasting_notes).includes(n)),'direct_current_three_tasting_notes');
