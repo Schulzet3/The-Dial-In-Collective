@@ -17586,7 +17586,7 @@
       "pr": 3536,
       "title": "Clarify that a one-shot successful recipe range is still a preliminary personal window",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "6290cf1a6a87dc7452615933f8f1765eddcf9997",
       "scope_paths": [
         "site/lib/ui.js"
       ],
@@ -17594,13 +17594,25 @@
       "tests": [
         "Pre-fix exact site/lib/ui.js recipeGrid displayed one-shot estimated success band without showing n=1 uncertainty; approved five sensory targets and recipe selection unchanged.",
         "PR-head 816759e66b349b9a8fe46d65fdaa1970191729af added four synthetic hydrated Log Shot/recipeGrid positive and negative tests; tests pending exact CI until final head.",
-        "Initial PR-head governance run 44814701834 FAILED only due missing mandatory TESTING queue intake for site/lib/ui.js; repaired in this queue+journal commit. Failed run retained as diagnostic, not passing evidence."
+        "Initial PR-head governance run 44814701834 FAILED only due missing mandatory TESTING queue intake for site/lib/ui.js; repaired in this queue+journal commit. Failed run retained as diagnostic, not passing evidence.",
+        "Final exact PR head 45239ba7a9f9f5e52924e9f86312d2cb08f5674d Node22/build 44815110063 SUCCESS (5,953 PASS / 0 FAIL / 6 intentionally SKIPPED; all 4 new R400 tests PASS), Chromium/mobile/offline/a11y 44815110005 SUCCESS, SQL 44815110152 SUCCESS, security 44815109962 SUCCESS, approval 44815110029 SUCCESS. Original603 44815110002 SKIPPED, not PASS.",
+        "Nonforce explicit [skip netlify] PR #3536 squash merge 6290cf1a6a87dc7452615933f8f1765eddcf9997: reviewed UI, new regression, research memo, same-commit journal and queue Git blobs read back identical to PR head; no other paths.",
+        "Exact merged-source push Node22/build 44815836435 SUCCESS (5,953 PASS / 0 FAIL / 6 intentional SKIP), Chromium/mobile/offline/a11y + cloud 44815836339 SUCCESS, approval/governance 44815836507 SUCCESS; #33 shared-dependency 44815836439 and selected original241 44815836404 also SUCCESS. SQL and security exact PR-head files unchanged at merge; no production-provider verification."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        44815110063,
+        44815110005,
+        44815110152,
+        44815109962,
+        44815110029,
+        44815836435,
+        44815836339,
+        44815836507
+      ],
       "blockers": [
         "Exact final head and merged source Node22/browser/mobile/offline/accessibility, SQL/security and approval CI must complete and be verified; no new isolated frozen five-check READY candidate certificate under #3347."
       ],
-      "notes": "Development-only UX presentation. One real rated five-green local shot remains valid; explain unverified range reliability without imposing numeric threshold, new capture, history edit, Community change or product-policy change. No Publish/deploy or empirical cup-quality claim.",
+      "notes": "Development-only UX presentation. One real rated five-green local shot remains valid; explain unverified range reliability without imposing numeric threshold, new capture, history edit, Community change or product-policy change. No Publish/deploy or empirical cup-quality claim.\nR400 MERGED development only, PR #3536; source and test bytes unchanged, exact PR-head five SUCCESS checks and merged Node/browser/approval SUCCESS. State remains TESTING until #3347 independent frozen candidate certificate; not READY or production.",
       "production_deployed": false
     }
   ],
