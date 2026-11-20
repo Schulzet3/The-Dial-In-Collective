@@ -5035,6 +5035,21 @@
       "production_writes": 0,
       "release": "TESTING",
       "baseline": "IN_PROGRESS"
+    },
+    {
+      "run": "R375",
+      "date": "2026-11-20",
+      "preflight_development_sha": "7da1ed83c98c9646e478c81e4d53c0250621bbb0",
+      "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "receipt_path": "docs/audits/issue509-r375-community-withdrawn-source-ci-closeout-20261120.json",
+      "queue_item": "DIC-Q-509-community-withdrawn-recheck-guard",
+      "sql_ci_verified": 44632533924,
+      "first_time_provider_words": 0,
+      "issue267_source_lines": 0,
+      "source_code_test_ci_changes": 0,
+      "production_writes": 0,
+      "release": "TESTING",
+      "baseline": "IN_PROGRESS"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -25617,5 +25632,37 @@
     "release": "TESTING",
     "baseline": "IN_PROGRESS",
     "next": "Exact merged-push CI, source-isolated #3347 acceptance, first genuinely new/unreviewed provider semantic object/bug; maintain read-only production."
+  },
+  "provider_community_withdrawn_ci_closeout_run375": {
+    "preflight_development_sha": "7da1ed83c98c9646e478c81e4d53c0250621bbb0",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "receipt": "docs/audits/issue509-r375-community-withdrawn-source-ci-closeout-20261120.json",
+    "git_parent_sha": "d6edb19ec1d760f0ab0a53aac2ea32ff74b0f0c8",
+    "issue509_queue_item": "DIC-Q-509-community-withdrawn-recheck-guard",
+    "source_fix_blob": "d629d2f0cbd6c9f291a8b4538340c1de549f04a1",
+    "sql_fixture_blob": "80c49e9e2a3a3e5c3be89660ff624864d487b25e",
+    "ci_sql_job": 135942643052,
+    "sql_run": 44632533924,
+    "sql_result": "SUCCESS",
+    "applicable_pr_head_success": [
+      44632533924,
+      44632533926,
+      44632533969,
+      44632534071,
+      44632533919
+    ],
+    "merged_success": [
+      44640068720,
+      44640068703,
+      44640068642
+    ],
+    "live_withdrawn_unverified_count": 0,
+    "verified_unpublished_fix": true,
+    "first_time_provider_words": 0,
+    "issue267_lines": 0,
+    "production_writes": 0,
+    "release": "TESTING",
+    "baseline": "IN_PROGRESS",
+    "next": "Independent frozen candidate #3347 five exact tests and #96 hosted real-member assurance; require a NEW owner Publish for production. Next: first changed/new or previously unreviewed provider definition, app/Edge correctness or measurable bottleneck, never recredit unchanged bodies."
   }
 }
