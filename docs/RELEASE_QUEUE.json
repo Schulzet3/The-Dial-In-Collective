@@ -17513,6 +17513,30 @@
       ],
       "notes": "Only selected original603 coffee #298. Existing source facts and same-selected identity, old frozen 603/201/1197, original frozen CSV, scorer/oracle unchanged. Comparative cup prose is reviewable original merchant text but not growing provenance. Other READY/DEPLOYED queue items unchanged.\nR354 narrowly READY only for current exact original #298 Walia selected-product origin+three literal tastes+seller-described decaffeination with other unproven fields blank. Frozen 603 semantic and source-lot review unfinished, original #297 and #241 source-access exceptions and other original-source failures remain separately OPEN; #267 V2 and #96 security separate. READY is NOT a release/PUBLISH grant; production_deployed remains false. Preserve original frozen 603/201/1197 CSV/scorer/oracle and all other release states.\n2026-11-20 corrective supersession: TESTING / NOT_READY (previous READY label lacked docs/READY_BATCH_CERTIFICATION.json and incorrectly included historical FAILED CI runs). The successful merged source/test evidence remains valid for this narrow parser fix but cannot establish BATCH_RELEASE_READY without a frozen nonpublishing exact candidate with all five SUCCESS checks.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-509-admin-push-lazy-vault-poll",
+      "issue": 509,
+      "title": "Avoid Vault key lookup for idle Admin push polls; cache one lookup for actionable devices",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/functions/dic-admin-push-broker/core.mjs"
+      ],
+      "owner_source": "Issue #509 R383 validated live source; R388 development fix. DIC_PREFLIGHT_VERIFIED development_sha=f2daba164a6c6c003c1261576b4a0e7b21dcbb12 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e. Production Edge unchanged.",
+      "tests": [
+        "R383 full deployed Edge v3 source verified equal to development pre-fix; unnecessary keys RPC before no-op subscription snapshot confirmed.",
+        "New isolated synthetic Node22 regressions for no-action/revoked/no-token polls without keys, two-device single-key lookup, actionable Vault outage and absent-key retries.",
+        "Exact PR-head Node22/lint/build, browser, approval/continuity and source relevant checks PENDING; merged-source and #3347 isolated READY five-check acceptance NOT VERIFIED."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "All applicable exact-source PR-head CI and development nonforce merge, merged-source checks not yet passed.",
+        "Source-isolated nonpublishing READY candidate five checks and #96 real handset delivery remain UNVERIFIED.",
+        "New explicit owner Publish required for any production Edge deployment."
+      ],
+      "notes": "Only defers Vault runtime-key read until unseen action tokens require VAPID signing. Maintains Admin manage bootstrap, no private payload, per-owner retirement and retryable failed pushes.",
+      "production_deployed": false
     }
   ],
   "history": [
