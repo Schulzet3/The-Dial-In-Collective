@@ -1,3 +1,19 @@
+# Issue #509 R393 — PostgreSQL integer/JSON/large-object exposed definitions [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=5fd194cf7d01282643c01601b5d014160eedfb72 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-20 UTC.** Mandatory first live development SHA and same immutable PREFLIGHT.md verified via Git blob before any other content/provider reads. Supabase project `azviqqejypsefzilgonr` ACTIVE_HEALTHY PG 17.11; all SQL **read-only**, no live production writes. Independently recovered main `57adc419ed4b106e158435b465971f5986537b41`, release/production `07f054f6470b2ae36b36faef8fb9a8161dd3bfb5`; #509 and prior R392 precise cursor.
+
+**New direct SQL-definition semantic audit:** `pg_catalog` f/p/w ranks **1121–1520 / 3162**, **400/400 full exposed declarations**, **70868/70868 SQL-definition characters**, 374 internal, 18 C, and **8 full LANGUAGE SQL bodies** (not just inventory). Every object independently recorded with OID, signature, source MD5, exact complete literal DDL, full character 1–end range, purpose, semantic assessment, limits and verdict in [append-only R393 ledger](../audits/issue509-r393-pg-catalog-integer-json-large-objects-20261120.json). Native compiled implementation inaccessible and **UNVERIFIED**; 0 #267 repository-code source-line credit.
+
+**Behavior and dependency evidence:** typed int4/int8 mixed-width arithmetic, casts, aggregation/series states, range constructors, interval/date/time operators, JSON/JSONB construction and aggregation, JSONPath timezone-sensitive variants, encoding converters, native LIKE/geometry/window/math and large-object operations. Seven SQL typed-addition wrappers use `RETURN ($2 + $1)`; `log(numeric)` uses `RETURN log((10)::numeric,$1)`. Timezone-dependent `interval_pl_timestamptz` STABLE differs intentionally from IMMUTABLE plain timestamp/date addition. Native `lo_*` includes dangerous import/export; **definitions only, never invoked**. Read-only catalog consumer evidence: 44 jsonb columns, 1 json, 74 integer, 2 date, 2 oid/lo-like, 0 interval or integer-range, 0 live GIN indexes. Absence of a direct column, consumer or index does not prove PostgreSQL internals dead. No new confirmed application error, justified deletion, measured bottleneck, source drift or warranted code change in these platform-owned objects.
+
+**Boundaries/status:** no code/test/CI/queue updates or new CI-PASS/READY/DEPLOYED claims; previously fixed Admin push remains source-only under prior TESTING gate, no production Edge changes. #2389 is live GitHub CLOSED/COMPLETE (not an active-retirement blocker), historical migrations and aliases still preserved. CURRENT_STATUS and RELEASE_QUEUE fetch text were empty through connector, so current queue readiness is **UNVERIFIED**, no status changed. Entire accessible provider baseline **IN_PROGRESS**. No Auth/member/shot/note contents, private identities, secrets or raw sensitive logs inspected; no SQL DML/DDL, publication, billing, backups or automation changes.
+
+**Next exact unreviewed cursor:** `pg_catalog.log10(numeric)` OID 1481, catalog f/p/w rank **1521**, first character 1, with remaining 1642 f/p/w and 157 separate aggregate declarations pending. Continue new direct provider semantic review; never conflate C ABI DDL with compiled implementation.
+
+---
+
 # Issue #509 R386 — PostgreSQL catalog exposed-definition semantic review [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=bd9623a6d2ffd8c716e7b1ebd314d2e6f5d11bf9 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
