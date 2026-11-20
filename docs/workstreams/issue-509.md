@@ -1,3 +1,17 @@
+# Issue #509 R397 — pg_catalog stats, WAL, text-search and PL/pgSQL exposed declarations [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=5845795587873d16dfbc79c4a964120aea38d844 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-20 UTC.** Retrieved development SHA before immutable PREFLIGHT.md and verified its Git blob; project azviqqejypsefzilgonr ACTIVE_HEALTHY PostgreSQL 17.11; production **READ-ONLY**. Main and release/production refs separately retrieved; no production, backup, publication or schedule changes.
+
+**NEW direct provider semantic review:** catalog f/p/w ranks **2121–2320 of 3162**, 200 complete exposed DDL declarations (43707 actual characters; 195 internal, 3 C, 2 complete SQL wrappers); full text, OID, MD5, exact 1–end range, meaning, verdict and native implementation **UNVERIFIED** for each row in [R397 append-only structured receipt](../audits/issue509-r397-pg-catalog-stats-wal-20261120.json). No #267 GitHub source-line credit. Sleep helper SQL bodies use clock_timestamp and pg_sleep; NEVER invoked. Native stats/WAL/replication/lock/file/config functions were definition-read only, not executed or removable app objects.
+
+**NEW performance triage:** 52 app public/private tables total 3,284,992 bytes; estimated 394 live and 865 dead tuples. Cumulative 4,945 statement fingerprints include 12 with ≥20 calls and >50 ms mean; queryid `4231681690601413654` (53 calls, 223.868 ms mean, 89,966 temp blocks) and `1554751528326282872` (27 calls, 557.622 ms mean, 1,685,894 buffer hits) are **UNATTRIBUTED** without query/source/period verification, so do not assert app slowness or modify indexes. No current lock waiters. These are safe next attribution targets, not verified bugs. No member/Auth/private rows, credentials, raw query text or log dumps accessed.
+
+**State:** baseline **IN_PROGRESS**, catalog contiguous exposed f/p/w now **2320/3162**, 157 separate aggregate declarations still pending; no new proven bug, safe deletion or justified development code change. Docs-only GitHub source checkpoint, new CI NOT_APPLICABLE, release readiness UNVERIFIED; no production or queue changes. **Next exact cursor:** rank **2321**, `pg_catalog.point(box)` OID **1534**, first character 1. Preserve owner-action alerts and existing hourly schedule.
+
+---
+
 # Issue #509 R396 — pg_catalog configuration, replication, catalog and WAL declarations [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=4eba1624018ffa378d63d15b24b5f6ab92a74c3f preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
