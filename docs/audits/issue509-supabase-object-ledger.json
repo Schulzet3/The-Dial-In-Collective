@@ -25949,7 +25949,63 @@
     "production_writes": 0,
     "release": "TESTING",
     "baseline": "IN_PROGRESS"
+  },
+  "provider_storage_realtime_r384": {
+    "run": "R384",
+    "date": "2026-11-20",
+    "receipt": "docs/audits/issue509-r384-storage-realtime-semantic-review-20261120.json",
+    "full_sources": 15,
+    "first_time_sources": 13,
+    "first_time_chars": 22393,
+    "changed_reexamined": 2,
+    "total_chars": 25556,
+    "storage_triggers": 11,
+    "storage_buckets_objects_states_uploads": 0,
+    "provider_writes": 0,
+    "issue267_lines": 0,
+    "next_cursor": "storage.list_objects_with_delimiter:1-32892",
+    "source_fix": "NOT_STAGED",
+    "baseline": "IN_PROGRESS",
+    "release": "TESTING"
+  },
+  "provider_large_storage_realtime_run385": {
+    "run": "R385",
+    "date_utc": "2026-11-20",
+    "preflight_branch_sha": "dc78c366b20efecfb3068a5b626854fcc3a456d8",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "project_ref": "azviqqejypsefzilgonr",
+    "receipt": "docs/audits/issue509-r385-large-storage-realtime-semantic-review-20261120.json",
+    "sources": [
+      {
+        "identity": "storage.list_objects_with_delimiter",
+        "chars": 32892,
+        "md5": "7747efec8583d78cd01449d9b99cd2eb",
+        "reviewed": "1-32892"
+      },
+      {
+        "identity": "storage.search",
+        "chars": 31522,
+        "md5": "fed15c85bb96faaa21ec40176026a0fd",
+        "reviewed": "1-31522"
+      },
+      {
+        "identity": "realtime.apply_rls",
+        "chars": 16972,
+        "md5": "0692f127b26cc5843c85852b03a1299a",
+        "reviewed": "1-16972"
+      }
+    ],
+    "first_time_semantic_definitions": 3,
+    "first_time_source_chars": 81386,
+    "zero_storage_buckets_objects_multipart_and_realtime_subscriptions": true,
+    "verified_new_app_bugs": 0,
+    "justified_vendor_deletions": 0,
+    "source_fix": "R383_ADMIN_PUSH_NOT_STAGED",
+    "provider_writes": 0,
+    "source_test_ci_writes": 0,
+    "issue267_code_lines_credited": 0,
+    "full_baseline": "IN_PROGRESS",
+    "release": "TESTING",
+    "next_cursor": "pg_catalog.RI_FKey_cascade_del() OID 1646 chars 1-163 then remaining unreviewed pg_catalog in proname/identity order"
   }
-,
-  "provider_storage_realtime_r384": {"run":"R384","date":"2026-11-20","receipt":"docs/audits/issue509-r384-storage-realtime-semantic-review-20261120.json","full_sources":15,"first_time_sources":13,"first_time_chars":22393,"changed_reexamined":2,"total_chars":25556,"storage_triggers":11,"storage_buckets_objects_states_uploads":0,"provider_writes":0,"issue267_lines":0,"next_cursor":"storage.list_objects_with_delimiter:1-32892","source_fix":"NOT_STAGED","baseline":"IN_PROGRESS","release":"TESTING"}
 }
