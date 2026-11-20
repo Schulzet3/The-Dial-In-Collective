@@ -16,14 +16,18 @@ const env=k=>({
  SUPABASE_SECRET_KEYS:JSON.stringify({default:['sb','secret','synthetic_fixture_only'].join('_')}),
  SUPABASE_PUBLISHABLE_KEYS:JSON.stringify({default:['sb','publishable','synthetic_fixture_only'].join('_')})
 })[k];
-function harness({admin=true,firstPoll=true,rows=[],tokens=[token]}={}){
+function harness({admin=true,firstPoll=true,rows=[],tokens=[token],keyMode='ok'}={}){
  const data=new Map(rows.map(x=>[x.endpoint_hash,{...x}])),calls=[],pushes=[];
  let claimed=!firstPoll,storedKey={publicKey:pub,privateKey:privateKeyValue};
  const fetcher=async(url,options={})=>{
   calls.push({url,method:options.method||'GET',headers:options.headers});
   if(url===PROJECT_URL+'/auth/v1/user')return Response.json({id:user});
   if(url.endsWith('/rpc/dic_session_status'))return Response.json({authenticated:true,admitted:true,admin});
-  if(url.endsWith('/rpc/dic_admin_push_runtime_keys'))return Response.json(storedKey);
+  if(url.endsWith('/rpc/dic_admin_push_runtime_keys')){
+   if(keyMode==='error')return new Response('unavailable',{status:503});
+   if(keyMode==='missing')return Response.json(null);
+   return Response.json(storedKey);
+  }
   if(url.endsWith('/rpc/dic_admin_push_claim_poll')){const win=!claimed;claimed=true;return Response.json(win);}
   if(url.endsWith('/rpc/dic_admin_push_snapshot'))return Response.json({admin_ids:[user],tokens});
   if(url.includes('/dic_admin_push_subscriptions?')){
@@ -103,5 +107,44 @@ test('poll endpoint cannot accept arbitrary ops and never returns protected rows
  assert.equal((await h.call({op:'snapshot'})).status,403);
  assert.equal((await h.call({op:'poll',debug:true})).status,400);
  assert.equal((await h.call({op:'manage',method:'GET'})).status,403);
+ assert.equal(h.pushes.length,0);
+});
+
+test('no-op poll and revoked-device retirement never depend on Vault availability',async()=>{
+ const alreadySeen=row(71,[token]),revoked=row(72,[token],other);
+ const h=harness({rows:[alreadySeen,revoked],keyMode:'error'});
+ const r=await h.call({op:'poll'});
+ assert.equal(r.status,200);assert.deepEqual(await r.json(),{ok:true});
+ assert.equal(h.calls.filter(x=>x.url.endsWith('/rpc/dic_admin_push_runtime_keys')).length,0);
+ assert.equal(h.pushes.length,0);
+ assert.deepEqual(h.data.get(alreadySeen.endpoint_hash).seen_tokens,[token]);
+ assert.equal(h.data.has(revoked.endpoint_hash),false);
+});
+test('actionable multi-device poll fetches Vault signing key only once',async()=>{
+ const devices=[row(73),row(74),row(75)];
+ const h=harness({rows:devices});
+ const r=await h.call({op:'poll'});
+ assert.equal(r.status,200);assert.deepEqual(await r.json(),{ok:true});
+ assert.equal(h.calls.filter(x=>x.url.endsWith('/rpc/dic_admin_push_runtime_keys')).length,1);
+ assert.equal(h.pushes.length,3);
+ assert.ok(h.pushes.every(x=>x.body===undefined));
+ for(const device of devices)assert.deepEqual(h.data.get(device.endpoint_hash).seen_tokens,[token]);
+});
+test('actionable Vault failure preserves unsent tokens, retires revoked rows, and returns failure',async()=>{
+ const pending=row(76),revoked=row(77,[],other);
+ const h=harness({rows:[pending,revoked],keyMode:'error'});
+ const r=await h.call({op:'poll'});
+ assert.equal(r.status,503);
+ assert.equal(h.calls.filter(x=>x.url.endsWith('/rpc/dic_admin_push_runtime_keys')).length,1);
+ assert.deepEqual(h.data.get(pending.endpoint_hash).seen_tokens,[]);
+ assert.equal(h.data.has(revoked.endpoint_hash),false);
+ assert.equal(h.pushes.length,0);
+});
+test('missing Vault signing key leaves actionable tokens pending without false delivery receipts',async()=>{
+ const pending=row(78),h=harness({rows:[pending],keyMode:'missing'});
+ const r=await h.call({op:'poll'});
+ assert.equal(r.status,200);assert.deepEqual(await r.json(),{ok:true});
+ assert.equal(h.calls.filter(x=>x.url.endsWith('/rpc/dic_admin_push_runtime_keys')).length,1);
+ assert.deepEqual(h.data.get(pending.endpoint_hash).seen_tokens,[]);
  assert.equal(h.pushes.length,0);
 });

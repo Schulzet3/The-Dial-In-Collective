@@ -1,3 +1,21 @@
+# Issue #509 R386b — repair mandatory app-source release-queue intake [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=33ec76a7fb73a5057c4c3d075729ca0262e999c1 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-20 UTC.** Read back exact GitHub PR #3504 head `117ac0464a8b508757af09c23033b10e86c94e21`, initial approval job [44730707746](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/44730707746) FAILED only because the new `supabase/functions/dic-admin-push-broker/core.mjs` source was not yet represented in `docs/RELEASE_QUEUE.json`. Recovered all 440 preexisting entries without mutation and inserted a single independent **TESTING** intake `DIC-Q-509-r386-admin-push-lazy-vault`, linking the R383 diagnostic, R386 source/test blobs, applicable exact-source CI and remaining #3347 nonpublishing certification. Initial failure remains recorded as FAIL; recheck successor PR-head checks before merger. This is a metadata/journal-only repair, **no source/test file changes in this commit**. Production read-only/unmodified; no publication, provider, backup, schedule, billing or owner notification policy change.
+
+---
+
+# Issue #509 R386 — pg_catalog full exposed declarations and Admin push Vault no-op fix [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=33ec76a7fb73a5057c4c3d075729ca0262e999c1 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-20 UTC.** Retrieved immutable development PREFLIGHT.md before other GitHub/provider reads; separately fetched and matched its Git blob. Main `57adc419`, release/production `07f054f6`. Supabase `azviqqejypsefzilgonr` ACTIVE_HEALTHY PostgreSQL17.11, production READ-ONLY. Direct semantic review of **35 newly traversed pg_catalog SQL declarations (5921 total characters)**, all accessible characters 1–end and MD5 per object recorded in [R386 full-source audit receipt](../audits/issue509-r386-pg-catalog-and-admin-push-lazy-key-20261120.json). Covers RI foreign-key enforcement, inet/cidr abbreviations, numeric overloads, ACL primitives, trigonometric functions and calendar age wrappers. No justified vendor object deletions or verified new bottlenecks. Native internal code bodies remain UNVERIFIED; zero #267 GitHub source lines credited. **Next cursor:** `pg_catalog.age(xid)` OID1181 characters 1–149 among `pg_catalog` ordinary functions (aggregates tracked separately).
+
+**Issue #509 development-only fix staged, release TESTING:** R383 confirmed the Admin push broker always consulted Vault before discovering whether any tokens required push. This commit defers and memoizes `dic_admin_push_runtime_keys` to actionable `added.length>0` rows; no-op scans and revoked device removal operate when Vault unavailable. New synthetic Node22 regression cases: no-op/revocation under Vault 503, multi-device shared key, actionable Vault 503 with no false receipts, missing keys with retry. Existing bootstrap/manage, private key custody, signing, pagination and no-private-payload boundaries retained. Requires PR-head and merged-source exact-source Node22/cloud/approval CI before READY; no published change or production provider writes. No new owner action or alert.
+
+---
+
 # Issue #509 R383 — admin push no-op Vault dependency, fully reviewed deployed Edge [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=0a0536fa51b44931f9158167d7bd851ae831aa80 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
