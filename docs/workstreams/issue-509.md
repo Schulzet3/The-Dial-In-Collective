@@ -1,3 +1,17 @@
+# Issue #509 R404 — completed exposed PostgreSQL core operator catalog 541–799/799 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=e42b553838e1e017dbd500a51eca79868b941dc2 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+2026-11-21 UTC. Immutable live development PREFLIGHT and Git blob independently content-verified. Supabase azviqqejypsefzilgonr ACTIVE_HEALTHY PG 17.11 production READ-ONLY.
+
+**New substantive semantic review:** full last **259/259** PostgreSQL core pg_operator declarations ranks **541–799/799**, **213900/213900 literal characters**, every source/MD5/OID/1–end character range, individual typed behavior, 256 internal plus **3 complete SQL bodies** and diagnostics in [append-only R404 ledger](../audits/issue509-r404-pg-catalog-operators-ranks541-799-20261121.json). Catalog now **799/799 complete exposed operator declarations**; no claim to review compiled native implementations or inaccessible original CREATE OPERATOR SQL. 0 #267 source-code lines credited.
+
+**Semantics:** > / >= typed ordering distinct from geometry/range/network/bitshift >>; JSONB key operators ?, ?&, ?| and JSONPath @?; ACL/array/JSONB/tsquery/range @> containment; spatial/text-search/JSONPath @@; regex / LIKE / pattern-family operators; JSONB/tsquery/text/array concatenation; deprecated-native geometry and FTS aliases retained. Actual complete SQL wrappers: path_contain_pt reverses operands to on_ppath, while textanycat and anytextcat explicitly cast polymorphic operand to pg_catalog.text; correct STABLE/STRICT declarations. Checked 174 reciprocal commutators, 144 negators, 385 index operator-family links; no broken references. No verified new DIC app bug, safe deletion or measured business-query bottleneck.
+
+**State:** provider-wide baseline IN_PROGRESS, new source/test/CI NOT_APPLICABLE (docs-only GitHub checkpoint). No READY/DEPLOYED promotion. No Supabase SQL/data/Auth/Edge/Storage/config, migrations, releases, backups, billing or scheduling writes. **Next unreviewed cursor:** pg_catalog.pg_opclass rank **1/177**, aclitem_ops OID 10059, hash access method, character 1. Owner-action-only alerts/hourly cadence unchanged.
+
+---
+
 # Issue #509 R403 — direct PostgreSQL core operator definitions 421–540/799 [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=e2b4fdb0f8809fe0a4ff92f4a0f130c43a77f677 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
