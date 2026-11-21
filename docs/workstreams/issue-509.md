@@ -1,3 +1,13 @@
+# Issue #509 R417 — full live application column defaults and generated expressions (142/142) [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=9cbf214671a0c55aae39102377ada8285385045f preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-21 UTC.** Verified live immutable preflight plus Git blob. Read-only project `azviqqejypsefzilgonr` remains PostgreSQL 17.11.0.003. Directly reviewed **142/142** current private/public `pg_attrdef` expressions (**46 private, 96 public**), with each column type, nullability, full expression text, MD5, rank, range and per-object KEEP semantic assessment in [R417 append-only ledger](../audits/issue509-r417-app-column-defaults-generated-20261121.json). Counts: **20 UUID generators**, **63 now() timestamps**, **2 auth.uid() owner defaults**, and **3 STORED generated columns**. Ratios for `public.shots` and `public.community_shots` divide yield by dose; inspected both complete current CHECK lists confirming `dose_g >= 5`, preventing division-by-zero for accepted rows. `shots.is_dialed_in` computes the five required ideal taste values, whereas `community_shots` uses CHECK constraints; not a redundant materialization. `auth.uid()` ownership remains identity/RLS dependent and subject to #96 tests, not re-certified here. Timestamp defaults initialize INSERT values; no automatic UPDATE claim.
+
+No provable defect, unused default or safe removal from these declarations. Full source-migration match, dynamic caller verification, native internals and other-schema defaults are **UNVERIFIED**. Repeated literals across different tables encode separate behavior, not cleanup justification. Docs-only same-commit scoped journal+ledger, `[skip netlify]`, focused source CI **NOT_APPLICABLE**. No production/provider writes, code/test/CI modifications, releases, backups, billing, schedule or owner-alert change. Baseline **IN_PROGRESS**; READY/DEPLOYED **NOT_REVALIDATED**. **Next index cursor:** `auth` namespace, first index OID sorted ascending (112 total auth, from R416 count). Or continue unreviewed other-schema defaults with separate bounded receipts. No owner-action alert.
+
+---
+
 # Issue #509 R416 — full private/public application index declarations (106/106) [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=38c275c437302c25977b3203758dcf8f1237b70c preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
