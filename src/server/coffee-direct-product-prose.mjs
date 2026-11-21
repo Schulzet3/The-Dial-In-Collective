@@ -431,11 +431,11 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
    line.slice(Math.max(0,caneDerivative.index-250),caneDerivative.index):'';
   if(decafOnlyCoffee(name)&&b.tag==='p'&&!b.educational&&line.length<=650&&
      caneDerivativeClaim&&
-     /\\b(?:this|our)\\b[^.!?]{0,120}\\bdecaf(?:feinated)?\\b/iu.test(ownDecafAntecedent)&&
-     !/\\b(?:not\\s+(?:a\\s+)?decaf(?:feinated)?|never\\s+decaf(?:feinated)?)\\b/iu.test(ownDecafAntecedent)&&
+     /\b(?:this|our)\b[^.!?]{0,120}\bdecaf(?:feinated)?\b/iu.test(ownDecafAntecedent)&&
+     !/\b(?:not\s+(?:a\s+)?decaf(?:feinated)?|never\s+decaf(?:feinated)?)\b/iu.test(ownDecafAntecedent)&&
      !NONCURRENT_DECAF_METHOD.test(line)&&
      !/^(?:faq|frequently asked questions|decaf process education)$/iu.test(String(b.section||'').trim())&&
-     !/\\b(?:not|never|without|instead of|rather than|unlike)\\b/iu.test(caneDerivativeClaim)&&
+     !/\b(?:not|never|without|instead of|rather than|unlike)\b/iu.test(caneDerivativeClaim)&&
      inferDecaffeinationMethod({name,selectedMethod:caneDerivativeClaim})==='Sugar Process'&&
      !decafEvidence.has(caneDerivativeClaim)){
    if(decafEvidence.size<4)decafEvidence.add(caneDerivativeClaim);
