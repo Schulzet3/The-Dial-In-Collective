@@ -18,6 +18,10 @@ const CURRENT_SELECTED_OWN_CANE_WATER_DECAF=/^(?:this|our)\s+(?:naturally\s+)?de
 // Direct selected full-decaf caffeine-removal prose, NOT green Natural processing.
 // Do not infer EA solvent or transfer a general roaster page/sibling's treatment.
 const CURRENT_SELECTED_BEAN_CANE_REMOVAL=/^we['’]ve\s+stripped\s+this\s+bean\s+of\s+its\s+caffeine\s+content\s+through\s+a\s+natural\s+sugar[ -]?cane\s+process\b/iu;
+// Direct selected-decaf testimonial may state that THE caffeine-removal process
+// uses a sugar-cane derivative after naming THIS decaf in the same paragraph.
+// Never infer a specific solvent, green-processing method, or generic FAQ fact.
+const CURRENT_SELECTED_CANE_DERIVATIVE_DECAF=/(?:^|[.!?]\s+)(the\s+decaffeination\s+(?:process|method)\s+uses\s+(?:a|the)\s+derivative\s+of\s+sugar[ -]?cane\b)/iu;
 // A current decaf's actual product description sometimes states its method in
 // a prose sentence rather than a labeled spec (Leap Coffee's Swiss Water page).
 // Accept direct, selected-product usage or a narrow current decaf process
@@ -416,6 +420,25 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
      inferDecaffeinationMethod({name,selectedMethod:ownCane})==='Sugar Process'&&
      !decafEvidence.has(ownCane)){
    if(decafEvidence.size<4)decafEvidence.add(ownCane);
+   else decafEvidenceOverflow=true;
+  }
+  // A chosen full-decaf's own "Why We Love It" description can first say
+  // "This ... decaf" and then "The decaffeination process uses a derivative
+  // of sugar cane". A prior/sibling/FAQ/SEO sentence is not this evidence.
+  const caneDerivative=line.match(CURRENT_SELECTED_CANE_DERIVATIVE_DECAF);
+  const caneDerivativeClaim=caneDerivative?.[1]||'';
+  const ownDecafAntecedent=caneDerivative?
+   line.slice(Math.max(0,caneDerivative.index-250),caneDerivative.index):'';
+  if(decafOnlyCoffee(name)&&b.tag==='p'&&!b.educational&&line.length<=650&&
+     caneDerivativeClaim&&
+     /\b(?:this|our)\b[^.!?]{0,120}\bdecaf(?:feinated)?\b/iu.test(ownDecafAntecedent)&&
+     !/\b(?:not\s+(?:a\s+)?decaf(?:feinated)?|never\s+decaf(?:feinated)?)\b/iu.test(ownDecafAntecedent)&&
+     !NONCURRENT_DECAF_METHOD.test(line)&&
+     !/^(?:faq|frequently asked questions|decaf process education)$/iu.test(String(b.section||'').trim())&&
+     !/\b(?:not|never|without|instead of|rather than|unlike)\b/iu.test(caneDerivativeClaim)&&
+     inferDecaffeinationMethod({name,selectedMethod:caneDerivativeClaim})==='Sugar Process'&&
+     !decafEvidence.has(caneDerivativeClaim)){
+   if(decafEvidence.size<4)decafEvidence.add(caneDerivativeClaim);
    else decafEvidenceOverflow=true;
   }
   // The selected current full-decaf product's own affirmative caffeine-removal
