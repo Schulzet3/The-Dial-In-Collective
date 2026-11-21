@@ -1,3 +1,21 @@
+# Issue #509 R429 — PostgreSQL runtime, statistics and replication views 80–142 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=cc439d908ad71fc3ec5baae7d1f6eb4e04d4fe5b preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+2026-11-21 UTC. Immutable live branch PREFLIGHT bytes independently verified against Git SHA-1 blob BEFORE AGENTS, issue or provider reads. Connected Supabase `azviqqejypsefzilgonr` ACTIVE_HEALTHY PostgreSQL 17.11.0.003, **PRODUCTION READ-ONLY**.
+
+**New substantive semantic review:** resumed exactly at prior R428 rank 80 `pg_locks` OID 12073; directly reviewed **63/63 complete exposed `pg_catalog.pg_class` views** through rank 142 `pg_wait_events` OID 12347, including **38,005/38,005 complete view-SQL characters, 644 column declarations and 152,132 selected catalog-projection characters**. Each actual view SQL, column/default/type, ACL, RLS, options, identity, full source, provider JSONB MD5, exact 1-end character coverage and individual behavior/consumer verdict are in append-only [R429 ledger](../audits/issue509-r429-pg-catalog-runtime-views-ranks80-142-20261121.json), Git blob 22caa4bd3555748f1fcbde4c7f047d4342113148. `pg_catalog.pg_class` non-index **142/142** combined with R427/R428, **NOT** a complete provider baseline or original PostgreSQL CREATE scripts/native binaries; #267 original/current source-line credit **zero**.
+
+**Behavior and dependency assessment:** `pg_stat_all_*`, `pg_stat_user_*`, `pg_stat_sys_*`, `pg_stat_xact_*` and `pg_statio_*` differ intentionally by relation scope, transaction lifetime and disk/cache counters; not duplicate DIC code. WAL sender/receiver and logical replication diagnostic views have separate purpose and accessible compiled helpers remain **UNVERIFIED**. `pg_seclabels` has distinct UNION branches by object class. `pg_user_mappings` masks FDW options except under privilege predicates. Only *definitions* read for `pg_stat_activity` query text, `pg_stat_wal_receiver` conninfo, settings, HBA/ident and mapping views; no credential, member, Auth user, private record or query text rows retrieved.
+
+**Safe performance triage:** read-only aggregate snapshot yielded **0** ungranted locks, lock-wait sessions, >60-second idle transactions, inactive replication slots, subscriptions, active vacuums/index builds, foreign user mappings and recorded database deadlocks. Historical database temp IO totals **78,047 temp files / 259,075,795,265 bytes** since `2026-10-02` reset; `pg_stat_statements` temp blocks attributed to generic DB role `postgres` **525,768**, while Auth/service/admin grouped roles showed none. These counters cover mixed backend workloads, resets differ, and no SQL/member text was read: **DIC bottleneck attribution UNVERIFIED**, do not claim app bug or index action from aggregate counts.
+
+**Result:** no new reproducible DIC bug, proven dead object, safe deletion, or justified app-source fix in this PostgreSQL-core range. Source/test/CI **unchanged**, new exact-source CI **NOT_APPLICABLE**, not PASS; current release READY/DEPLOYED **NOT_REVALIDATED**. Docs-only ledger commit [`502f145e`](https://github.com/Schulzet3/The-Dial-In-Collective/commit/502f145e916b1c03c39279c7ff0314ec5930f379) read back; scoped journal updated in a **second docs-only nonforce commit** (no code/test/CI edit requiring same-commit receipt), avoiding an unsupported atomic-tree claim. No production SQL/data/Auth/Storage/Edge/config/migration, deployment, publication, backup, billing, schedule or owner-alert policy change. Baseline **IN_PROGRESS**.
+
+**Exact next unreviewed cursor:** `pg_toast.pg_class` `relkind='t'`, rank **1/119**, `pg_toast.pg_toast_2620` OID **2336**, owner `pg_catalog.pg_trigger`, first definition character. Original PostgreSQL bootstrap/native binary implementation remains UNVERIFIED; preserve per-object coverage and avoid reading TOAST payload rows. No owner action.
+
+---
+
 # Issue #509 R428 — pg_catalog core relations 31–79 [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=02155b2f02c4949abb2d0c8140f26e8120235f08 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
