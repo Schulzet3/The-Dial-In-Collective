@@ -514,6 +514,26 @@ export function recommendation(s,coffeeId,options={}) {
    sh.style!=='Custom'&&RATIOS[sh.style]&&crossStyleControlsUsable(s,sh,v));
   if(other.length){const r=roastIndex(c.roastLevel)<0?roastIndex('Medium'):roastIndex(c.roastLevel);const residual=mean(other.map(sh=>sh.yieldG/sh.doseG-RATIOS[sh.style][r]));const bias=clamp(residual*.2,-.15,.15);for(const k of ['low','high','center'])rec.ratio[k]+=bias;rec.reasons.push('Small ratio adjustment informed by your other styles; time and grind stay style-specific.');}
  }
+ // A real success from one basket can project an unloggable yield at
+ // another valid dose. Keep its original ratings, history and chosen family
+ // intact; fall back only for the inapplicable CURRENT starting card.
+ // Existing Log Shot limits are entry constraints, not scientific ratio optima.
+ if(chosen&&style!=='Custom'){
+  const projectedYield=round(rec.ratio.center*rec.doseG);
+  const [minYield,maxYield]=CONFIG.bounds.yieldG;
+  if(!finite(projectedYield)||projectedYield<minYield||projectedYield>maxYield){
+   const start=baseline(c,style,basket.doseG,s.preferences);
+   rec.ratio=start.ratio;
+   rec.time=start.time;
+   rec.source='Starting recommendation';
+   rec.familyId=null;
+   rec.observations=0;
+   rec.established=false;
+   delete rec.familySelection;
+   rec.reasons=start.reasons;
+   rec.basketCompatibilityNote='Your saved successful recipe cannot be used at this basket dose within the Log Shot yield range. Showing a starting estimate; your saved shot is unchanged.';
+  }
+ }
  rec.grind=grindGuidance(s,c,style,basket,feed,rec.familyId);
  rec.tempC=temperatureGuidance(s,c,style,v,rec.tempC,rec.familyId);
  rec.style=style;rec.basketId=basket.id;rec.feedMode=feed;
