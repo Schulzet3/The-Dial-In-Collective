@@ -1,0 +1,446 @@
+{
+  "schema_version": 1,
+  "issue": 504,
+  "batch": "G1-391",
+  "review_status": "SOURCE_ONLY_NOT_CENTRALLY_INTEGRATED",
+  "preflight": {
+    "first_development_sha": "9d0bd047388f72e3dc52c44e8b3f536e314fbe8d",
+    "first_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "prewrite_development_sha": "9d0bd047388f72e3dc52c44e8b3f536e314fbe8d",
+    "prewrite_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "whole_immutable_blob_verified": true
+  },
+  "source_method": "Native GitHub REST full TITLE and BODY, directly read all original words; no sampling/AST",
+  "word_definition": "Unicode nonwhitespace runs (\\S+)",
+  "metrics": {
+    "original_prs": 8,
+    "title_words": 84,
+    "body_words": 674,
+    "all_original_words": 758,
+    "all_title_LF_body_utf8_bytes": 6816,
+    "completed_to_archive": [
+      2702,
+      2703,
+      2704,
+      2705,
+      2706,
+      2707,
+      2708,
+      2709
+    ]
+  },
+  "reviewed_original_record_ids": [
+    2702,
+    2703,
+    2704,
+    2705,
+    2706,
+    2707,
+    2708,
+    2709
+  ],
+  "records": [
+    {
+      "github_record_id": "PR#2702",
+      "native_pr_id": 5312516322,
+      "native_node_id": "PR_kwDOUMrfDs8AAAABPKaQ4g",
+      "number": 2702,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2702",
+      "original_title": "docs(#267): disjoint pinned P433 1–43 and live test helper semantic review [skip netlify]",
+      "original_body": "Development-only Issue #267 append-only semantic evidence. Directly reviewed pinned P433 `tests/ux-refinements.test.mjs` lines 1–43 at immutable `9707553a64f88127826e8f5b2b36cd0651296e83`, blob `a6a0fb7886fbe2cbbeb72b82e25de9799f258461`; independently classified one added live-only helper line 10, blob `ad3ed946b22b8924657e6bda5b550e47ff7a1898`. Exact 43 old-to-live source literals checked, line-specific nine dimensions/risks/Locked decisions recorded, no earlier provisional summary credit or frozen F194 overlap. F001 original 41/41 independently checked against S2-001 with zero duplicate credit. Attached new scoped work journal includes exact preflight immutable branch/blob. No app/tests/workflows/SQL/provider edits, no deployment or READY; full coverage/CI still incomplete. Scope limited to two new docs files so current F194 worker is not overwritten. Regression gap regarding equal/invalid timestamps remains hypothesis only. Source commit `08d147a74c3ae1474b7f059bbe65e8998f4f8ab0`. [skip netlify]",
+      "source_version": {
+        "updated_at": "2026-11-14T14:50:22Z",
+        "created_at": "2026-11-14T14:49:25Z",
+        "state": "closed",
+        "draft": false,
+        "merged": true,
+        "merged_at": "2026-11-14T14:50:22Z",
+        "closed_at": "2026-11-14T14:50:22Z",
+        "base_ref": "development/backend-foundation",
+        "base_sha": "35958e11025418fcf3fb1e4890a04ae04a385c7c",
+        "head_ref": "audit/issue267-p433-001-043-r11-20261114",
+        "head_sha": "08d147a74c3ae1474b7f059bbe65e8998f4f8ab0",
+        "merge_sha": "991478a525ed9e49f125d7c1d52f64880cf517d0"
+      },
+      "inclusive_title_words": [
+        1,
+        13
+      ],
+      "inclusive_body_words": [
+        1,
+        107
+      ],
+      "inclusive_body_physical_lines": [
+        1,
+        1
+      ],
+      "title_words": 13,
+      "body_words": 107,
+      "title_LF_body_utf8_bytes": 1107,
+      "semantic_review": {
+        "owner": "#267",
+        "reviewed_directly": true,
+        "context": "Entire native original PR TITLE and BODY direct semantic reading only; no source-code, comments, or CI audit credit",
+        "finding": "Pinned P433 1-43 and distinct current helper line were historically reviewed, with F001 revalidation without duplicate credit; timestamp-order concern explicitly hypothetical.",
+        "disposition": "PRESERVE_DELEGATED_267_NO_504_CODE_CREDIT",
+        "risk": "No new independently reproduced in-scope current executable defect or safe deletion from metadata alone",
+        "safe_action": "ARCHIVE_CLOSED_MERGED_TITLE_ONLY_AFTER_ORIGINAL_SEAL"
+      },
+      "excluded": "PR comments/reviews/threads/diffs, source/CI/artifacts remain uncovered"
+    },
+    {
+      "github_record_id": "PR#2703",
+      "native_pr_id": 5312548284,
+      "native_node_id": "PR_kwDOUMrfDs8AAAABPKcNvA",
+      "number": 2703,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2703",
+      "original_title": "test(#267): guard required shot-history radar and audit P433 44–62 [skip netlify]",
+      "original_body": "Issue #267 approved development-only test hardening, plus 19 unique original pinned-current P433 source lines 44–62 with direct line-specific review and live counterpart/deletion mapping. **Reproduced test-assertion weakness, not application defect:** prior `indexOf('class=\"radar\"')` relative comparisons can pass if radar is absent (`-1`); add `assert.match(html,/class=\"radar\"/)` before order checks. Current app `shotCard` invokes `ui.radar`, so no reported UI regression. Previous redundant `shot-actions` assertion was already removed; no second deletion. Same-commit scoped journal includes exact verified development SHA `991478a525ed9e49f125d7c1d52f64880cf517d0` and immutable preflight blob `2fb236bbfa6bac48513eeb3bd157b260853af06d`. Original pinned test SHA `a6a0fb7886fbe2cbbeb72b82e25de9799f258461`, prechange live blob `ad3ed946b22b8924657e6bda5b550e47ff7a1898`, proposed test blob `0a7253cbad9dc17332a153028a1b4d4fd75d12d1`. Node22/approval PR-head and merged checks needed. Local clone failed DNS, no local suite claimed. No SQL/Auth/provider/data/deploy, no READY.",
+      "source_version": {
+        "updated_at": "2026-11-14T14:56:51Z",
+        "created_at": "2026-11-14T14:52:41Z",
+        "state": "closed",
+        "draft": false,
+        "merged": true,
+        "merged_at": "2026-11-14T14:56:51Z",
+        "closed_at": "2026-11-14T14:56:51Z",
+        "base_ref": "development/backend-foundation",
+        "base_sha": "991478a525ed9e49f125d7c1d52f64880cf517d0",
+        "head_ref": "audit/issue267-p433-044-062-r11b-20261114",
+        "head_sha": "4bb23d5f3f51122313709248e5126663ce4c6387",
+        "merge_sha": "dfda3cfa88f650670f08b7f87f9339cdd4e8ce19"
+      },
+      "inclusive_title_words": [
+        1,
+        11
+      ],
+      "inclusive_body_words": [
+        1,
+        110
+      ],
+      "inclusive_body_physical_lines": [
+        1,
+        1
+      ],
+      "title_words": 11,
+      "body_words": 110,
+      "title_LF_body_utf8_bytes": 1168,
+      "semantic_review": {
+        "owner": "#267",
+        "reviewed_directly": true,
+        "context": "Entire native original PR TITLE and BODY direct semantic reading only; no source-code, comments, or CI audit credit",
+        "finding": "Historical weak radar-present test assertion reproduced and reportedly hardened; no real app missing-radar regression proven. Current test result requires source-specific reproduction.",
+        "disposition": "PRESERVE_HISTORICAL_TEST_FIX_NO_504_CODE_CREDIT",
+        "risk": "No new independently reproduced in-scope current executable defect or safe deletion from metadata alone",
+        "safe_action": "ARCHIVE_CLOSED_MERGED_TITLE_ONLY_AFTER_ORIGINAL_SEAL"
+      },
+      "excluded": "PR comments/reviews/threads/diffs, source/CI/artifacts remain uncovered"
+    },
+    {
+      "github_record_id": "PR#2704",
+      "native_pr_id": 5312713904,
+      "native_node_id": "PR_kwDOUMrfDs8AAAABPKmUsA",
+      "number": 2704,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2704",
+      "original_title": "test(#33): source-bound original603 #299 Windsor anonymous grower guard [skip netlify]",
+      "original_body": "DEVELOPMENT ONLY. R201 original #299 `https://sextantcoffee.com/products/the-windsor-sextant-coffee`: current selected official named coffee, anonymous family (not a named producer), literal cherry/milk chocolate; guarded real parser/source/add-coffee review and four hostile/positive regression tests. Frozen 603/201/1197 CSV/oracle/scorer untouched; current parser defect not yet asserted. Same-commit preflight receipt in `docs/workstreams/ops-issue33-r201-299-20261114.md` binds development `dfda3cfa88f650670f08b7f87f9339cdd4e8ce19` and blob `2fb236bbfa6bac48513eeb3bd157b260853af06d`. Await exact-head hosted tests, repair any genuine defect before safe nonforce merge. No deployment, production/provider/member/backup changes; Issue #33 stays OPEN.",
+      "source_version": {
+        "updated_at": "2026-11-14T15:16:40Z",
+        "created_at": "2026-11-14T15:07:34Z",
+        "state": "closed",
+        "draft": false,
+        "merged": true,
+        "merged_at": "2026-11-14T15:16:40Z",
+        "closed_at": "2026-11-14T15:16:40Z",
+        "base_ref": "development/backend-foundation",
+        "base_sha": "dfda3cfa88f650670f08b7f87f9339cdd4e8ce19",
+        "head_ref": "audit/issue33-r201-original299-20261114",
+        "head_sha": "8002dfe9ebad5a5a3b8e5a4594f3bc2ada58b203",
+        "merge_sha": "ad7a7ffb0f94b4d706774867dcb9eb402b6bef26"
+      },
+      "inclusive_title_words": [
+        1,
+        10
+      ],
+      "inclusive_body_words": [
+        1,
+        70
+      ],
+      "inclusive_body_physical_lines": [
+        1,
+        1
+      ],
+      "title_words": 10,
+      "body_words": 70,
+      "title_LF_body_utf8_bytes": 842,
+      "semantic_review": {
+        "owner": "#33",
+        "reviewed_directly": true,
+        "context": "Entire native original PR TITLE and BODY direct semantic reading only; no source-code, comments, or CI audit credit",
+        "finding": "Selected original603 #299 current official Windsor anonymous-producer and tasting guard. Four selected tests cannot certify all 603 or other live URLs; #33 owns implementation.",
+        "disposition": "PRESERVE_DELEGATED_33_SELECTED_CASE",
+        "risk": "No new independently reproduced in-scope current executable defect or safe deletion from metadata alone",
+        "safe_action": "ARCHIVE_CLOSED_MERGED_TITLE_ONLY_AFTER_ORIGINAL_SEAL"
+      },
+      "excluded": "PR comments/reviews/threads/diffs, source/CI/artifacts remain uncovered"
+    },
+    {
+      "github_record_id": "PR#2705",
+      "native_pr_id": 5312852315,
+      "native_node_id": "PR_kwDOUMrfDs8AAAABPKuxWw",
+      "number": 2705,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2705",
+      "original_title": "docs(#267): audit pinned P433 63-138 line-by-line [skip netlify]",
+      "original_body": "## Authority and bounds\nDevelopment-only #267; no publication. Live preflight ad7a7ffb0f94b4d706774867dcb9eb402b6bef26 blob 2fb236bbfa6bac48513eeb3bd157b260853af06d verified before reads and writes. 76 unique original P433 test lines (63-138), one-to-one source literals and live counterpart, prior P433:1-62 receipt parity checked. Revalidates F001 initial without new credit. Same proposed PR includes append-only structured per-line receipt and scoped preflight journal; squash merge must put both in ONE merge commit.\n\nNo code or provider writes, no functional test claims. Next P433:139. Risk: no new proven app defect; historical Settings test weakness already corrected live. Please validate exact PR-head governance and merged-source CI separately.",
+      "source_version": {
+        "updated_at": "2026-11-14T15:20:30Z",
+        "created_at": "2026-11-14T15:19:43Z",
+        "state": "closed",
+        "draft": false,
+        "merged": true,
+        "merged_at": "2026-11-14T15:20:30Z",
+        "closed_at": "2026-11-14T15:20:30Z",
+        "base_ref": "development/backend-foundation",
+        "base_sha": "ad7a7ffb0f94b4d706774867dcb9eb402b6bef26",
+        "head_ref": "work/issue267-p433-063-138-r11c-20261114",
+        "head_sha": "9e05e06065064270fb4c4c33a996789a9ab0dc35",
+        "merge_sha": "89f27d453f7849f816bc64dfa673063506e0c38e"
+      },
+      "inclusive_title_words": [
+        1,
+        8
+      ],
+      "inclusive_body_words": [
+        1,
+        96
+      ],
+      "inclusive_body_physical_lines": [
+        1,
+        4
+      ],
+      "title_words": 8,
+      "body_words": 96,
+      "title_LF_body_utf8_bytes": 821,
+      "semantic_review": {
+        "owner": "#267",
+        "reviewed_directly": true,
+        "context": "Entire native original PR TITLE and BODY direct semantic reading only; no source-code, comments, or CI audit credit",
+        "finding": "P433 63-138 76 pinned lines reviewed historically; original audit metadata is not new direct source-line validation or global completion.",
+        "disposition": "PRESERVE_DELEGATED_267_NO_504_CODE_CREDIT",
+        "risk": "No new independently reproduced in-scope current executable defect or safe deletion from metadata alone",
+        "safe_action": "ARCHIVE_CLOSED_MERGED_TITLE_ONLY_AFTER_ORIGINAL_SEAL"
+      },
+      "excluded": "PR comments/reviews/threads/diffs, source/CI/artifacts remain uncovered"
+    },
+    {
+      "github_record_id": "PR#2706",
+      "native_pr_id": 5312874961,
+      "native_node_id": "PR_kwDOUMrfDs8AAAABPKwJ0Q",
+      "number": 2706,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2706",
+      "original_title": "docs(#267): complete P433 196/196 strict pinned review [skip netlify]",
+      "original_body": "Issue #267 development-only 58 unique P433:139-196 lines with per-line direct semantic source evidence, literal blob a6a0fb7886fbe2cbbeb72b82e25de9799f258461, exact current counterpart and same-squash-commit journal preflight 89f27d453f7849f816bc64dfa673063506e0c38e / 2fb236bbfa6bac48513eeb3bd157b260853af06d. Independent source readback of R11C 63-138. Four disjoint receipts now provisionally span all P433 196 pinned test positions, not global proof. The pinned URL product-page helper (line194) is explicitly superseded by newer Locked universal public HTTPS Any roaster copy, already in live source. No code/provider changes or functional tests; governance needs exact PR-head and merged-source checks. No deployment.",
+      "source_version": {
+        "updated_at": "2026-11-14T15:23:02Z",
+        "created_at": "2026-11-14T15:21:39Z",
+        "state": "closed",
+        "draft": false,
+        "merged": true,
+        "merged_at": "2026-11-14T15:23:01Z",
+        "closed_at": "2026-11-14T15:23:02Z",
+        "base_ref": "development/backend-foundation",
+        "base_sha": "89f27d453f7849f816bc64dfa673063506e0c38e",
+        "head_ref": "work/issue267-p433-139-196-r11d-20261114",
+        "head_sha": "93b9d025051d7d9d7946e4a3eba8b59314bda788",
+        "merge_sha": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5"
+      },
+      "inclusive_title_words": [
+        1,
+        9
+      ],
+      "inclusive_body_words": [
+        1,
+        84
+      ],
+      "inclusive_body_physical_lines": [
+        1,
+        1
+      ],
+      "title_words": 9,
+      "body_words": 84,
+      "title_LF_body_utf8_bytes": 793,
+      "semantic_review": {
+        "owner": "#267",
+        "reviewed_directly": true,
+        "context": "Entire native original PR TITLE and BODY direct semantic reading only; no source-code, comments, or CI audit credit",
+        "finding": "P433 139-196 58 pinned lines, prior sections sum to historical 196/196 provisional; deprecated URL helper superseded by later universal HTTPS policy, do not rewrite live URL code here.",
+        "disposition": "PRESERVE_DELEGATED_267_NO_504_CODE_CREDIT",
+        "risk": "No new independently reproduced in-scope current executable defect or safe deletion from metadata alone",
+        "safe_action": "ARCHIVE_CLOSED_MERGED_TITLE_ONLY_AFTER_ORIGINAL_SEAL"
+      },
+      "excluded": "PR comments/reviews/threads/diffs, source/CI/artifacts remain uncovered"
+    },
+    {
+      "github_record_id": "PR#2707",
+      "native_pr_id": 5312905423,
+      "native_node_id": "PR_kwDOUMrfDs8AAAABPKyAzw",
+      "number": 2707,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2707",
+      "original_title": "docs(#267): P434 entire 34 pinned + 18 live source lines [skip netlify]",
+      "original_body": "Issue #267 development only. Mandatory preflight at live 0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5, Git blob 2fb236bbfa6bac48513eeb3bd157b260853af06d, verified exact content. Direct individual AI semantic review immutable pinned P434 34/34 original source positions (blob 02365c6841e4e7f904e38833f2b0e036366f35ab) plus separately 18 post-pin added executable test positions, current live blob 21a7e6cc102f0bba590b52fb4f5066a772aba293. P434 old position 22 weak positional Admin guard has already been fixed in current test; real #96 Auth is not claimed. Prior F001 original lines 1–41 revalidated no extra credit. Append-only JSON + same-squash-commit preflight journal; governance PR-head/merged-source checks required. No app/test/production/provider edit or deployment. Next P435:1.",
+      "source_version": {
+        "updated_at": "2026-11-14T15:24:59Z",
+        "created_at": "2026-11-14T15:24:16Z",
+        "state": "closed",
+        "draft": false,
+        "merged": true,
+        "merged_at": "2026-11-14T15:24:59Z",
+        "closed_at": "2026-11-14T15:24:59Z",
+        "base_ref": "development/backend-foundation",
+        "base_sha": "0f01c8cbe774b54b92d1c1baa5c807ae0e7171d5",
+        "head_ref": "work/issue267-p434-all-lines-r11e-20261114",
+        "head_sha": "cb06f10f3ae3cba9ff2b840fa25f75650250dff2",
+        "merge_sha": "bb6a10ac93076da75e6f95d83a3ea18f5e0b895e"
+      },
+      "inclusive_title_words": [
+        1,
+        12
+      ],
+      "inclusive_body_words": [
+        1,
+        88
+      ],
+      "inclusive_body_physical_lines": [
+        1,
+        1
+      ],
+      "title_words": 12,
+      "body_words": 88,
+      "title_LF_body_utf8_bytes": 858,
+      "semantic_review": {
+        "owner": "#267",
+        "reviewed_directly": true,
+        "context": "Entire native original PR TITLE and BODY direct semantic reading only; no source-code, comments, or CI audit credit",
+        "finding": "P434 34 pinned plus 18 new postpin lines, old weak Admin test assertion corrected in current test; no live #96 Auth acceptance inferred.",
+        "disposition": "PRESERVE_DELEGATED_267_NO_504_CODE_CREDIT",
+        "risk": "No new independently reproduced in-scope current executable defect or safe deletion from metadata alone",
+        "safe_action": "ARCHIVE_CLOSED_MERGED_TITLE_ONLY_AFTER_ORIGINAL_SEAL"
+      },
+      "excluded": "PR comments/reviews/threads/diffs, source/CI/artifacts remain uncovered"
+    },
+    {
+      "github_record_id": "PR#2708",
+      "native_pr_id": 5312931086,
+      "native_node_id": "PR_kwDOUMrfDs8AAAABPKzlDg",
+      "number": 2708,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2708",
+      "original_title": "docs(#267): P435 29 pinned +18 postpin test lines [skip netlify]",
+      "original_body": "Development-only Issue #267; verified immutable preflight dev bb6a10ac93076da75e6f95d83a3ea18f5e0b895e, Git blob 2fb236bbfa6bac48513eeb3bd157b260853af06d. 29 directly AI-reviewed original P435 physical lines, 18 distinct added live source lines; original weak comment-only weekly QA test already corrected in current test source, no active backup failure claim. Source-bound receipt and same-squash-commit journal; PR-head and merged-source governance must be checked. No app/provider/production/deployment edits. Next P436:1.",
+      "source_version": {
+        "updated_at": "2026-11-14T15:27:11Z",
+        "created_at": "2026-11-14T15:26:26Z",
+        "state": "closed",
+        "draft": false,
+        "merged": true,
+        "merged_at": "2026-11-14T15:27:11Z",
+        "closed_at": "2026-11-14T15:27:11Z",
+        "base_ref": "development/backend-foundation",
+        "base_sha": "bb6a10ac93076da75e6f95d83a3ea18f5e0b895e",
+        "head_ref": "work/issue267-p435-r11f-20261114",
+        "head_sha": "788ec8bcd577ddf777e3838b31a78259591e866a",
+        "merge_sha": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976"
+      },
+      "inclusive_title_words": [
+        1,
+        10
+      ],
+      "inclusive_body_words": [
+        1,
+        58
+      ],
+      "inclusive_body_physical_lines": [
+        1,
+        1
+      ],
+      "title_words": 10,
+      "body_words": 58,
+      "title_LF_body_utf8_bytes": 591,
+      "semantic_review": {
+        "owner": "#267",
+        "reviewed_directly": true,
+        "context": "Entire native original PR TITLE and BODY direct semantic reading only; no source-code, comments, or CI audit credit",
+        "finding": "P435 29 pinned plus 18 postpin lines, earlier comment-only QA test assertion corrected; current backup/provider proof not established by metadata.",
+        "disposition": "PRESERVE_DELEGATED_267_NO_504_CODE_CREDIT",
+        "risk": "No new independently reproduced in-scope current executable defect or safe deletion from metadata alone",
+        "safe_action": "ARCHIVE_CLOSED_MERGED_TITLE_ONLY_AFTER_ORIGINAL_SEAL"
+      },
+      "excluded": "PR comments/reviews/threads/diffs, source/CI/artifacts remain uncovered"
+    },
+    {
+      "github_record_id": "PR#2709",
+      "native_pr_id": 5312954813,
+      "native_node_id": "PR_kwDOUMrfDs8AAAABPK1BvQ",
+      "number": 2709,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2709",
+      "original_title": "docs(#267): finish pinned P436 59 lines with live drift [skip netlify]",
+      "original_body": "Mandatory immutable preflight dev b285c461ae32441fe70a5bf2f98b17b3d3bc7976 blob 2fb236bbfa6bac48513eeb3bd157b260853af06d verified. Direct source-bound detailed review 59 pinned P436 original lines and 14 separate postpin live additions in workflow-reconciliation test; original pinned first-coffee once-only assertion superseded explicitly Nov8, live corrected. No new app defect, provider/SQL/backup/production write or publish. Same-merge-commit scoped journal and append-only per-line receipt. Exact governance must succeed before merge. Issue #267 remains OPEN.",
+      "source_version": {
+        "updated_at": "2026-11-14T15:29:16Z",
+        "created_at": "2026-11-14T15:28:32Z",
+        "state": "closed",
+        "draft": false,
+        "merged": true,
+        "merged_at": "2026-11-14T15:29:15Z",
+        "closed_at": "2026-11-14T15:29:15Z",
+        "base_ref": "development/backend-foundation",
+        "base_sha": "b285c461ae32441fe70a5bf2f98b17b3d3bc7976",
+        "head_ref": "work/issue267-p436-r11g-20261114",
+        "head_sha": "a969ee770e4ddf71acba035dc28ac78479a64fc8",
+        "merge_sha": "6c961bfbd6796baf83062040c3cda23b383bcce1"
+      },
+      "inclusive_title_words": [
+        1,
+        11
+      ],
+      "inclusive_body_words": [
+        1,
+        61
+      ],
+      "inclusive_body_physical_lines": [
+        1,
+        1
+      ],
+      "title_words": 11,
+      "body_words": 61,
+      "title_LF_body_utf8_bytes": 636,
+      "semantic_review": {
+        "owner": "#267",
+        "reviewed_directly": true,
+        "context": "Entire native original PR TITLE and BODY direct semantic reading only; no source-code, comments, or CI audit credit",
+        "finding": "P436 59 pinned plus 14 postpin lines, prior first-coffee once-only assertion superseded Nov8; not present global app coverage or current regression proof.",
+        "disposition": "PRESERVE_DELEGATED_267_NO_504_CODE_CREDIT",
+        "risk": "No new independently reproduced in-scope current executable defect or safe deletion from metadata alone",
+        "safe_action": "ARCHIVE_CLOSED_MERGED_TITLE_ONLY_AFTER_ORIGINAL_SEAL"
+      },
+      "excluded": "PR comments/reviews/threads/diffs, source/CI/artifacts remain uncovered"
+    }
+  ],
+  "delegated_267_crosscheck": {
+    "receipt_blob": "59883231bc394a0f14c5c188906f5481f90c8989",
+    "frozen_blob": "0eefed42962849ba446571095b3d8dd72d74fe6b",
+    "source": "docs/audits/2026-10-21-link-replacements.json",
+    "lines": [
+      427,
+      428
+    ],
+    "individual_fields": 18,
+    "exact_literals": [
+      "      \"file\": \"docs/archive/DOCUMENTATION_INDEX_SNAPSHOT_BEFORE_GLOBAL_RECONCILIATION_2026-10-19.md\",",
+      "      \"old_target\": \"CLOUD_OWNER_TEST_CHECKPOINT.md\","
+    ],
+    "matched": "2/2",
+    "live_source_blob_equal": true,
+    "code_credit_for_504": 0
+  },
+  "excluded": "PR discussions/reviews/diffs and source code, issue comments, Actions jobs/logs/artifacts, releases/tags/trees/binaries, provider records and all other unreviewed surfaces"
+}
