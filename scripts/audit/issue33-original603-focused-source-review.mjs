@@ -160,7 +160,7 @@ for(const target of targets){
     // actual Add Coffee review note in bounded source diagnostics. A same-
     // identity SEO note is an unverified fallback, not a direct sensory fact.
     r.seo_fallback_fields=Array.isArray(p.seo_fallback_fields)?p.seo_fallback_fields.slice(0,16):[];
-    r.metadata_review_notice_rendered=coffeeUrlPreviewMarkup(p).includes('Verify metadata-only suggestions:');
+    r.metadata_review_notice_rendered=coffeeUrlPreviewMarkup(p).includes('metadata-only suggestions:');
     if(negativeIdentityNumbers.includes(r.number)){
      r.original_product_not_certified=true;
      r.current_identity_exception='CHANGED_SELECTED_PRODUCT_EXPLICIT_NEGATIVE_DO_NOT_TRANSFER_ARCHIVED_FIELDS';
