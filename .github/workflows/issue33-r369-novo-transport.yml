@@ -1,0 +1,46 @@
+name: DIC Issue33 R369 Novo runner transport diagnosis ONLY
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r369-novo-transport.yml
+      - scripts/audit/issue33-r369-novo-transport.mjs
+      - tests/coffee-issue33-r369-novo-transport.test.mjs
+      - docs/workstreams/ops-issue33-r369-novo-transport-20261120.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r369-novo-transport.yml
+      - scripts/audit/issue33-r369-novo-transport.mjs
+      - tests/coffee-issue33-r369-novo-transport.test.mjs
+permissions:
+  contents: read
+jobs:
+  classify-transport-not-source-acceptance:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Six offline falsification regressions
+        run: node --test tests/coffee-issue33-r369-novo-transport.test.mjs
+      - name: Bounded original, canonical and first-party Store HTTPS (NOT original241 PASS)
+        env:
+          DIC_R369_RUN: '1'
+          DIC_R369_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_R369_EVENT: ${{ github.sha }}
+          DIC_R369_DIR: /tmp/dic33-r369
+        run: node scripts/audit/issue33-r369-novo-transport.mjs
+      - name: One-day public transport metadata only
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r369-novo-transport-not-certification
+          path: /tmp/dic33-r369/diagnosis.json
+          retention-days: 1
+          if-no-files-found: warn
