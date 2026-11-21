@@ -10,10 +10,10 @@
     {
       "id": "DIC-Q-455-r415-grinder-tenth-boundary",
       "issue": 455,
-      "pr": null,
+      "pr": 3584,
       "title": "Prevent non-tenth or unchanged next-shot grind recommendations at fractional espresso-range boundaries",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "a106ceca5fa55dedede482a69a46bf8d8fce982e",
       "scope_paths": [
         "site/lib/engine.js"
       ],
@@ -24,13 +24,26 @@
         "Checks never change original shot/notes/ratings or more than one controllable setting; no empirical improved-coffee claim.",
         "Initial PR-head approval/governance run 44890733910 FAILED solely queue schema: scope_paths included focused test, but this field allows only deployable application files; corrected to exact site/lib/engine.js. Original failure NOT PASS.",
         "First corrected queue PR-head Node22/build run 44890831812 FAILED 6,019 PASS/1 FAIL/6 SKIP: existing grinder17-history-guard.test.mjs required out-of-active-range review, but nth-grid guard inadvertently allowed no-next yield fallback. Prior six R415 cases passed; failure preserved, never PASS.",
-        "Third commit restores existing out-of-range historical review in grinder-change branch and adds seventh negative. New PR-head CI PENDING, not PASS."
+        "Third commit restores existing out-of-range historical review in grinder-change branch and adds seventh negative. New PR-head CI PENDING, not PASS.",
+        "Final exact PR #3584 head 229b5372810c2939c9295e000395fc5033a8c6b2: Node22/lint/build 44891313136 SUCCESS (6,021 PASS / 0 FAIL / 6 intentional SKIP; seven new R415 cases PASS); cloud/mobile/browser/offline/a11y 44891313137 SUCCESS; approval/continuity 44891313112, source security 44891313105 and isolated SQL 44891313143 SUCCESS. Frozen corpus 44891313107 SKIPPED, NOT PASS.",
+        "Nonforce [skip netlify] squash merged PR #3584 at a106ceca5fa55dedede482a69a46bf8d8fce982e; exact four engine/test/queue/journal Git blobs match final PR-head, only these 4 files changed on merge.",
+        "Exact merged-source push Node22/lint/build 44891714792 SUCCESS 6,021 PASS/0 FAIL/6 SKIP with seven new R415 PASS; cloud/browser/mobile/offline/a11y 44891714732 SUCCESS; governance 44891714736 SUCCESS; shared #33 44891714740 SUCCESS. Isolated SQL/security PR-head unchanged source; no production or actual taste trial."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        44891313105,
+        44891313112,
+        44891313136,
+        44891313137,
+        44891313143,
+        44891714736,
+        44891714732,
+        44891714792,
+        44891714740
+      ],
       "blockers": [
-        "Exact PR-head Node22, cloud/browser/mobile/offline and approval/governance checks NOT YET RUN; independent #3347 five-check frozen release candidate absent. TESTING only."
+        "Independent #3347 owner-Locked frozen release-candidate source-isolation and five exact candidate successful checks still UNVERIFIED. Development merged and tested, but queue remains TESTING (NOT READY / NOT DEPLOYED); no owner Publish authorized."
       ],
-      "notes": "No speculative science, new product numeric policy, member data, provider/SQL/Auth/Edge changes or Publish. Existing approved yield fallback when no valid tenth grind target.",
+      "notes": "R415 exact current code safe single-control grind-boundary correction merged nonforce on PR #3584, a106ceca5fa55dedede482a69a46bf8d8fce982e, original historical out-of-range safety preserved. Prior CI failures governance 44890733910 and Node22 44890831812 were diagnosed/fixed, never relabeled PASS. Seven negative/positive synthetic regression cases PASS exact PR and merged-source Node22; no real-world espresso efficacy claim. Site engine/test/history privacy, five tastes, all-green and missing rating semantics preserved. No release/production/member/provider change.",
       "production_deployed": false
     },
     {
