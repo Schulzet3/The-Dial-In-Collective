@@ -65,6 +65,10 @@ function selectedNamedWaterProcessed(name,line){
 
 const CURRENT_SELECTED_DIRECT_DECAFFEINATED_WATER=/^decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?(?:swiss|mountain)[ -]?water\s+process\b/iu;
 const CURRENT_SELECTED_BEANS_WATER_DECAF=/^(?:these|our|this)\s+(?:(?:[\p{L}\p{M}-]+|&)\s+){0,12}beans\s+(?:are|were)\s+(?:naturally\s+)?decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?['"‘’]?(?:swiss|mountain)[\s-]?water['"‘’]?(?:\s+process)?\b/iu;
+// Exact current chosen full-decaf direct prose: "This coffee from Mexico
+// underwent its decaffination process using the Swiss Water Process".
+// Bind named country to exact selected H1; never infer producing geography.
+const CURRENT_SELECTED_COUNTRY_WATER_DECAF=/^this\s+coffee\s+from\s+([\p{L}\p{M}][\p{L}\p{M}.'’ -]{1,55}?)\s+underwent\s+its\s+decaff(?:ein|in)ation\s+(?:process|method)\s+(?:using|with|via)\s+(?:the\s+)?(?:swiss|mountain)[ -]?water\s+process\b/iu;
 const CURRENT_SELECTED_OUR_WATER_DECAF=/(?:^|[.!?]\s+)using\s+the\s+(?:swiss|mountain)[\s-]?water\s+process,\s+our\s+decaf\s+uses\b(?:[^.!?]|\d\.\d){0,240}\bcaffeine[\s-]?free\b/iu;
 const NONCURRENT_DECAF_METHOD=/\b(?:previous(?:ly)?|formerly|historically|typically|generally|other coffees?|another coffee|last year|prior (?:lot|harvest))\b/iu;
 // An exact chosen full-decaf SW title can be abbreviated while the own
@@ -620,6 +624,22 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
      !decafEvidence.has(line)){
    if(decafEvidence.size<4)decafEvidence.add(line);
    else decafEvidenceOverflow=true;
+  }
+  // Named exact-country selected full-decaf's OWN present water treatment;
+  // the source may misspell decaffeination, but must name this H1's country.
+  const ownCountryWater=line.match(CURRENT_SELECTED_COUNTRY_WATER_DECAF);
+  const countryClaim=ownCountryWater?.[0]||'';
+  const claimCountry=fold(ownCountryWater?.[1]||'');
+  if(decafOnlyCoffee(name)&&b.tag==='p'&&!b.educational&&line.length<=1000&&
+     countryClaim&&claimCountry.length>=3&&
+     (' '+selected+' ').includes(' '+claimCountry+' ')&&
+     !NONCURRENT_DECAF_METHOD.test(line)&&
+     !/^(?:faq|frequently asked questions|common questions|decaf process education)$/iu.test(String(b.section||'').trim())&&
+     !/\b(?:not|never|without|instead of|rather than|unlike|hypothetical)\b/iu.test(line)&&
+     inferDecaffeinationMethod({name,selectedMethod:line})==='Water Process'&&
+     !decafEvidence.has(countryClaim)){
+    if(decafEvidence.size<4)decafEvidence.add(countryClaim);
+    else decafEvidenceOverflow=true;
   }
   // A decaf identity plus a current selected-product sentence is required.
   // Reuse the conservative method classifier; if multiple incompatible
