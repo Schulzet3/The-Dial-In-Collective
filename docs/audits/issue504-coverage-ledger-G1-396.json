@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "issue": 504,
+  "batch": "G1-396",
+  "status": "IN_PROGRESS_TESTING_SOURCE_ONLY_NOT_INTEGRATED",
+  "immutable_preflight": {
+    "development_sha": "7e4ff817ce9965019410e2686e34f493d943e3c8",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+    "entire_file_equal_raw_git_blob": true,
+    "development_ref_rechecked": "7e4ff817ce9965019410e2686e34f493d943e3c8"
+  },
+  "read_only_branches": {
+    "main": "57adc419ed4b106e158435b465971f5986537b41",
+    "release_production": "07f054f6470b2ae36b36faef8fb9a8161dd3bfb5"
+  },
+  "central_canonical_ledger_blob": "a8846375f2ad5a0fc261b04d3c63ef0f1b51f1fc",
+  "central_canonical": {
+    "batches": 226,
+    "original_github_records": 1548,
+    "original_github_words": 327503,
+    "original_file_lines": 7919,
+    "original_file_words": 60754
+  },
+  "previous_conditional": {
+    "batch": "G1-395",
+    "final_commit": "cac2070cd69d0d86e26c9b70bc8a53a64fc7beec",
+    "ledger_blob": "692d4028c8eb4013d988a3c1dc5a47ecbeccfff0",
+    "next_original_pr": 2742
+  },
+  "conditional_new": {
+    "records": 8,
+    "original_words": 599,
+    "title_words": 75,
+    "body_words": 524,
+    "first_pr": 2742,
+    "last_pr": 2749,
+    "receipt_path": "docs/audits/issue504-review-G1-396.json",
+    "receipt_git_blob": "d386b57b52102f6af04337ed32dc78f1fb99a015",
+    "canonical_addition": 0
+  },
+  "original_receipt_seal_commit": "cd6e0afb5cc3e618ebaa767d86259e8f059951d0",
+  "original_title_archives_after_seal": [
+    2742,
+    2743,
+    2744,
+    2745,
+    2746,
+    2747,
+    2748,
+    2749
+  ],
+  "full_native_readbacks": "8/8 all fields title/body/head/base/merge_sha/state/draft/merged_at exact",
+  "archive_prefix_words_excluded": 24,
+  "independent_delegated_267": {
+    "frozen_live_source_blob": "0eefed42962849ba446571095b3d8dd72d74fe6b",
+    "strict_semantic_receipt_blob": "59883231bc394a0f14c5c188906f5481f90c8989",
+    "source_path": "docs/audits/2026-10-21-link-replacements.json",
+    "original_physical_lines": [
+      437,
+      438
+    ],
+    "literal_matches": 2,
+    "semantic_line_records": 2,
+    "credited_to_504": 0,
+    "global_completion": "UNPROVEN"
+  },
+  "ci_triage": {
+    "new_material_failure_run": 44883066423,
+    "job": 136782361423,
+    "head_sha": "1b4fbcafbe0e7d81457a4054af1667b15c1d8cd2",
+    "owner_pr": 3579,
+    "failed_test": "dependency-aware trigger checks exact source and never triggers live HTTP or frozen603",
+    "failure_kind": "DETERMINISTIC_SOURCE_TEST_FALSE_POSITIVE",
+    "proof": "test excludes regex /workflow_dispatch:|schedule:|netlify|secrets\\./i but actual workflow contains legitimate netlify/functions/coffee-url-preview.mjs dependency in paths; 212/213 tests PASS at failing SHA",
+    "later_pr_exact_source_run": 44883155065,
+    "later_pr_sha": "fe73b76dc300efdbcc76c146576781cfcae73cad",
+    "later_push_exact_source_run": 44883547413,
+    "later_push_sha": "859fe6d98147c162538cf902d646dd8052c79c0d",
+    "both_later_result": "SUCCESS on their distinct sources only",
+    "rerun": "NONE - NOT TRANSIENT; owner #33, do not overlap"
+  },
+  "negative_tests": "No independently reproduced #504-owned current app defect or dependency-proven unused active file/workflow; no deletion or Locked change justified.",
+  "functional_tests": "NOT_RUN_DOCS_ONLY_NOT_PASS",
+  "isolated_branch_ci": "NOT_RUN_NOT_PASS",
+  "provider": "NOT_APPLICABLE",
+  "blocked_predecessor": "#2112 CLOSED UNMERGED and G1-227+ ordered predecessor integration unresolved, so no unilateral canonical promotion",
+  "next_canonical_pr": 1375,
+  "next_untouched_original_pr": 2750,
+  "review_next": "Original native PR #2750 TITLE word1–EOF then complete BODY; skip issue-only numbers but do not count non-PR",
+  "scope_remaining": "Full PR conversations/reviews/threads/diffs, issues/comments, Actions logs/jobs/artifact manifests, releases/tags/commits/trees/binaries, historical RELEASE_QUEUE original suffix, drift and #267 global frozen/current/postpin proof",
+  "safety": "No executable source/test/workflow/queue/Locked changes, no main/release movement, publication, Netlify, provider, live SQL/Auth/Edge/member, backup, force push, visibility, schedules or alert policy change."
+}
