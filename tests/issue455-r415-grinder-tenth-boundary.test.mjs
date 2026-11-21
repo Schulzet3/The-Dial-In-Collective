@@ -59,3 +59,11 @@ test('R415 missing fifth rating never produces adjustment',()=>{
  assert.match(advice.title,/finish your taste ratings/i);
  assert.equal(advice.next,null);
 });
+
+test('R415 existing out-of-range historical grind retains exact review guidance',()=>{
+ const {advice,shot}=check({min:2.5,max:3.5,grind:8,timeS:10,extraction:2});
+ assert.match(advice.title,/review your grinder espresso range/i);
+ assert.match(advice.text,/outside the current setup espresso range/i);
+ assert.equal(advice.next,null);
+ assert.equal(shot.grindSetting,8);
+});

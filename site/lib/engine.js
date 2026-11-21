@@ -851,6 +851,10 @@ function nextAdviceRaw(s,shot,rec) {
  const direction=t.extraction<3?'finer':t.extraction>3?'coarser':null;
  if(t.astringency>=3 || t.clarity<=2) return {title:'Check evenness first',text:'Try distributing the grounds more evenly while keeping tamp and recipe settings unchanged. Dryness or muddled flavors can have more than one cause.',kind:'diagnostic',next:null};
  if((direction==='finer'&&fast)||(direction==='coarser'&&slow)){
+  // Preserve historical out-of-range guidance before the tenth-step fallback.
+  // Original calibrated measurements are never silently changed.
+  if(finite(shot.grindSetting)&&(shot.grindSetting<v.grinderMin||shot.grindSetting>v.grinderMax))
+   return {title:'Review your grinder espresso range',text:'This recorded grind falls outside the current setup espresso range. Keep your measured shot and confirm the range before trying a single next-shot change.',next:null};
   // The response of another bean is not a calibrated response for this coffee.
   // Roast/processing/PSD and puck permeability can differ even on one grinder.
   // Use the existing bounded fixed step when this exact coffee has too few
