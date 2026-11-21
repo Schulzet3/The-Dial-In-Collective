@@ -46,7 +46,7 @@ test('negated, prior, other-coffee and hypothetical claims fail closed',()=>{
  ])assert.equal(parse(name,t).fields.decaffeination_method,undefined,t);
 });
 test('opposing directly selected Sugar Process claim withholds method',()=>{
- const r=parse(name,own+'<p><strong>Decaffeination:</strong> Sugar Cane Process</p>');
+ const r=parse(name,own+'</p><p><strong>Decaffeination:</strong> Sugar Cane Process</p><p>');
  assert.equal(r.fields.decaffeination_method,undefined,JSON.stringify(r.fields));
 });
 test('absent selected H1 cannot grant method',()=>{
