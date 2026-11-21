@@ -1,3 +1,15 @@
+# Issue #509 R414 — PostgreSQL native full-text search 615 catalog records [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=7699aaa3cf9b977c839cc7ad2ea73340208a7b8e preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-21 UTC.** After independently verified immutable preflight, resumed directly beyond R413. `pg_transform` had **0** eligible built-in rows. Directly reviewed the full **1** parser + **5** templates + **29** dictionaries + **29** configurations and all **551** lexical token→dictionary mappings: **615/615 exposed records**, **51301 catalog/handler characters**. Source and provider MD5, exact 1–end reviewed ranges, object semantic class and verdict in [64-object receipt](../audits/issue509-r414-pg-ts-parser-template-dict-config-20261121.json), plus three append-only mapping ledgers (ranks 1–200, 201–400, 401–551 in `docs/audits/`).
+
+Verified 29 configurations each map 19 token categories, all seq=1; zero duplicate mapping keys, dangling dictionary/template/parser refs. `simple` uses simple lexizer; 28 language stemmers use Snowball with distinct language/stopword options. Hindi/Russian configurations intentionally route ASCII word/hyphen tokens through `english_stem` while native-script words use their own stemmers; not redundant definitions. Five callback functions of default parser and two handlers per template were read as provider-exposed declarations. Project has **0 non-system tsvector columns**, which is **not** proof that dynamic full-text usage is absent. Compiled C/internal bodies and external Snowball/stopword files are **UNVERIFIED**; zero #267 source-line credit. Initial `regtsparser` name-cast test failed because that type does not exist; corrected by reading `ts_token_type(oid)` signature and resolving the parser's OID; 23 token kinds inspected. No newly confirmed application defect, justified deletion or measured bottleneck.
+
+Docs-only same-commit append-only ledger+journal; app source/migrations/tests/CI unchanged, exact-source CI **NOT_APPLICABLE**, READY/DEPLOYED **NOT_REVALIDATED**, baseline **IN_PROGRESS**. Production SQL/data/Auth/Storage/Edge/config, release, backups, billing and schedule unchanged. Next unreviewed catalog family: `pg_catalog.pg_am`, rank **1** character 1 (verify count/order first). Preserve owner-action-only alerts and hourly schedule.
+
+---
+
 # Issue #509 R413 — pg_catalog encoding conversions 128/128 [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=7699aaa3cf9b977c839cc7ad2ea73340208a7b8e preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
