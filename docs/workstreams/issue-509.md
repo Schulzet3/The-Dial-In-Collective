@@ -1,3 +1,17 @@
+# Issue #509 R430 — complete 119 TOAST parents and 3 Realtime composite relation definitions [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=d2995c205070966aa2aa203c1fcd9a5a321c6da5 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+2026-11-21 UTC, live Supabase azviqqejypsefzilgonr PostgreSQL 17.11, **PRODUCTION READ-ONLY**. Verified immutable GitHub preflight before other authority/providers. Resumed exact R429 cursor `pg_toast.pg_class` rank 1 OID 2336. Direct semantic review of **119/119 full accessible pg_toast relation catalog projections**, **121,894 literal catalog characters**, three chunk attributes and complete unique index DDL each, per-OID MD5, 1–end range, parent/schema/owner, lifetime and verdict in append-only [R430 ledger](../audits/issue509-r430-toast-and-realtime-composites-20261121.json). Confirmed **0 orphaned TOAST parents, 0 parent/owner mismatches, 0 invalid/missing/nonunique chunk indexes, 0 missing standard attributes, 0 tables without TOAST-capable parent fields** by independent read-only aggregate SQL. All managed chunks must be retained, even when `reltuples=-1` or zero pages; the 11 mapped bootstrap relfilenodes and 9 global tablespaces are PostgreSQL engine metadata, not unused DIC tables. 36 pg_catalog, 4 information_schema, 37 managed-service, 42 DIC application parents.
+
+Additionally directly reviewed **3/3 live Realtime composite relation/type projections**, **3,270 characters**, full column types/definitions and dependencies: `user_defined_filter` is consumed by `realtime.subscription.filters[]`; `wal_rls` is returned by `realtime.apply_rls(jsonb,integer)`; `wal_column` has no direct static SQL type consumer found, but hosted WAL decoding/managed calls UNVERIFIED, so no deletion. R430 ledger preserves exact per-type text, hashes and evidence. The two archived roaster-provenance parents remain **HISTORICAL/ARCHIVED**; `dic_roaster_name_aliases` and `dic_official_source_attestations` stay **LEGACY ACTIVE** and never gate retired directory URL preview.
+
+Together with R421–R429 and R416/R418/R419, provider `pg_class` **non-index relation catalog projection route is 438/438**; this is **NOT** full Supabase object/word/source coverage. Index route separately completed earlier, do not double-credit. Native PostgreSQL C routines, original bootstrap SQL, managed service source consumers and remaining provider surfaces stay UNVERIFIED. No new reproducible DIC bug, safe cleanup or measured bottleneck; no source/test/CI edits (**new exact-source CI NOT_APPLICABLE**, not PASS), no queue READY or deployment revalidation. No production SQL/data/Auth/Storage/Edge/config writes, migrations, publication, backups, billing or schedule changes. #267 source-code review credit zero. Full baseline **IN_PROGRESS**.
+
+**Next exact unreviewed cursor:** `pg_catalog.pg_attribute` full tuple projection ordered by (`attrelid,attnum`) with `attnum>0`, rank **1/4181**, relation `pg_catalog.pg_foreign_data_wrapper_oid_index` OID **112**, attribute **oid** `attnum=1`, first source character; full catalog tuple semantics go beyond the prior per-relation selected attribute fields. Then continue remaining provider surfaces and app/Edge drift/bug work. No owner decision/alert indicated.
+
+---
+
 # Issue #509 R429 — PostgreSQL runtime, statistics and replication views 80–142 [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=cc439d908ad71fc3ec5baae7d1f6eb4e04d4fe5b preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
