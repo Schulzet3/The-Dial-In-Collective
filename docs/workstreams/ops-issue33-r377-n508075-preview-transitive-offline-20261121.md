@@ -13,3 +13,7 @@ Files: `.github/workflows/issue33-shared-parser-regressions.yml` (offline, one e
 
 ## Status and next executable action
 At commit creation: code/test/CI review and hosted exact-head CI PENDING; do not treat not-started, SKIPPED or failures as PASS. Recheck concurrent development head, safely nonforce merge only on completed applicable green checks, compare all changed Git blobs and verify exact merged shared offline/Node/lint/approval checks. Record CI outcomes in #33 and #508 without claiming N508-075 fully resolved. Queue, approval matrix, status and release states unchanged; parent #33 OPEN. Next unrelated original603 official selected source exception or additional real missed transitive dependency adjudication after this patch.
+
+## R377b same-branch red-first repair before PR CI [skip netlify]
+DIC_PREFLIGHT_VERIFIED development_sha=f6a041053c58f9b25bf6e0304f894a83ee2e6071 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+The initial branch commit contained a malformed overescaped route-assertion regex in the newly added static test (would fail syntax parsing). Corrected it to a source-literal `includes` assertion before any PR CI or merge; existing workflow/source untouched. This was a pre-CI authoring defect, not a runtime Netlify bug or a passing test. Await independently observed exact source CI and merge.

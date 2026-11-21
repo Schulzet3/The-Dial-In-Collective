@@ -120,7 +120,7 @@ test('N508-075 R377 actual Netlify URL preview and transitive admission/request 
   assert.match(roleTest,/createPreviewHandler/,'actual handler exercised with injected API and HTML');
   assert.match(roleTest,/apiFetch=async/,'no account or live product fetch in this job');
   assert.doesNotMatch(roleTest,/\bfetch\s*\(/,'no direct public HTTPS/member network request');
-  assert.match(readFileSync(new URL('../site/cloud/client.js',import.meta.url),'utf8'),/previewPath='\\/api\\/coffee-preview'/);
+  assert.ok(readFileSync(new URL('../site/cloud/client.js',import.meta.url),'utf8').includes("previewPath='/api/coffee-preview'"),'actual client route preserved');
   assert.equal(yaml.split('node --test').length-1,1,'a single bounded offline Node invocation');
   assert.doesNotMatch(yaml,/DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS|focused-source-review\.mjs|workflow_dispatch:|schedule:/);
 });
