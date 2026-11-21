@@ -1,0 +1,414 @@
+{
+  "schema_version": 1,
+  "issue": 504,
+  "batch": "G1-394",
+  "status": "DIRECT_SEMANTIC_METADATA_REVIEW_SOURCE_ONLY",
+  "source_ref": {
+    "branch": "development/backend-foundation",
+    "sha": "5601ec1e529173ee4dbb4d7ae5ef80db7eea48cd",
+    "preflight_path": "docs/ai/PREFLIGHT.md",
+    "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e"
+  },
+  "review_scope": "Every ORIGINAL native PR title and full body of PR #2726–#2733 (1-based complete field ranges); eight distinct metadata records, direct individual semantic review. Not comments/reviews/threads/patches/jobs/source lines.",
+  "count_method": "Unicode whitespace-delimited words (trim+split /\\s+/u), UTF8 bytes of each original title + LF + original body; any later archive title prefix excluded",
+  "totals": {
+    "records": 8,
+    "title_words": 79,
+    "body_words": 824,
+    "utf8_bytes": 8349,
+    "original_words": 903
+  },
+  "predecessor": "G1-393 #2718–2725 fully reviewed; next originally untouched #2726. #2112 CLOSED UNMERGED prevents central canonical credit",
+  "independent_267": {
+    "receipt_blob_sha": "59883231bc394a0f14c5c188906f5481f90c8989",
+    "frozen_and_live_source_blob_sha": "0eefed42962849ba446571095b3d8dd72d74fe6b",
+    "path": "docs/audits/2026-10-21-link-replacements.json",
+    "physical_lines": [
+      433,
+      434
+    ],
+    "literal_matches": 2,
+    "semantic_fields_checked": true,
+    "new_code_line_credit": 0,
+    "global_complete": false
+  },
+  "records": [
+    {
+      "github_pr_number": 2726,
+      "github_id": 5313874866,
+      "github_node_id": "PR_kwDOUMrfDs8AAAABPLtLsg",
+      "endpoint": "https://api.github.com/repos/Schulzet3/The-Dial-In-Collective/pulls/2726",
+      "version_updated_at": "2026-11-14T16:54:59Z",
+      "created_at": "2026-11-14T16:54:26Z",
+      "original_title": "docs(#267): D2-040/041 direct immutable ZIP test source review [skip netlify]",
+      "original_body": "## #267 development-only D2 exact-source audit\n\nDirect AI individual semantic review of 67 original post-pin source lines: `tests/immutable-dist.test.py` **44** (Git blob `3c7e7c14db41df7aac68a63407f8df29390ead98`) and `tests/immutable-dist-manifest.test.py` **23** (Git blob `ca1991e4976041fb92f9b22b1933060b20ef9b31`). Both confirmed absent at frozen pinned current `9707553a64f88127826e8f5b2b36cd0651296e83`; their per-line original source literal/number/behavior/risks/counterpart, Locked fit, testing and disposition were verified against immutable live Git blobs. 8/8 isolated Python 3.13 unit tests PASS with exact SHA-matched source and implementation files; this does not mean production or hosted application acceptance.\n\nAppend-only receipts D2-040 and D2-041, D2-only ledger **1,461→1,528** actual physical post-pin lines and **39→41** fully reviewed new files, and SAME-COMMIT journal `docs/workstreams/issue-267-D2-040-041-immutable-zip-tests-20261114.md` with `DIC_PREFLIGHT_VERIFIED development_sha=18be0586921fc572178df6929ecd7a98278dd710 preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d`.\n\nNo application/test code changed, no provider, SQL/Auth, original603, member/shot/Community, backup or production change. PR-head governance/merged-source checks must actually pass before claiming integration. Frozen/current source inventories, live drift and owner review remain incomplete; #267 OPEN, no READY or deploy. [skip netlify]",
+      "original_title_1_based_word_range": [
+        1,
+        10
+      ],
+      "original_body_1_based_word_range": [
+        1,
+        142
+      ],
+      "original_title_line_range": [
+        1,
+        1
+      ],
+      "original_body_line_range": [
+        1,
+        7
+      ],
+      "original_title_words": 10,
+      "original_body_words": 142,
+      "original_title_LF_body_utf8_bytes": 1538,
+      "source_refs": {
+        "head_sha": "96ee53ca9f780d2067d127af13c47b7165d6ab22",
+        "base_sha": "18be0586921fc572178df6929ecd7a98278dd710",
+        "merge_commit_sha": "e33132c1531871a5ac3b7be07657d2e5c77e70ee"
+      },
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-11-14T16:54:58Z",
+      "comments_reported": 0,
+      "review_comments_reported": 0,
+      "semantic_review": {
+        "scope": "#267 immutable ZIP test helpers, 44+23 post-pin lines; eight Python tests claimed passing, not an app or hosted acceptance",
+        "finding": "Historical delegated #267 post-pin unit-test semantic review. No #504 duplicate source-line credit; Python 3.13 8/8 stated in original, not freshly reproduced.",
+        "disposition": "RETAIN_HISTORICAL_CLOSE_TITLE",
+        "security_privacy": "No new privacy/security fault proven by PR title/body alone; source, tests and CI require separate exact-bound review",
+        "naming_complexity_obsolescence": "Historical evidence or test documentation remains referentially useful; no proven unreachable current artifact",
+        "locked_fit": "Do not supersede Locked product, release, backup, or provider rules from these historical descriptions"
+      }
+    },
+    {
+      "github_pr_number": 2727,
+      "github_id": 5313902825,
+      "github_node_id": "PR_kwDOUMrfDs8AAAABPLu46Q",
+      "endpoint": "https://api.github.com/repos/Schulzet3/The-Dial-In-Collective/pulls/2727",
+      "version_updated_at": "2026-11-14T16:58:12Z",
+      "created_at": "2026-11-14T16:57:22Z",
+      "original_title": "docs(#267): D2-042 28 post-pin narrative restore helper lines [skip netlify]",
+      "original_body": "Development-only Issue #267 post-pin audit of all 28 actual source lines of `tests/helpers/release-published-restoration.mjs` at source blob `f0622af83742adb9b838f334fb10e01512375b56`, pinned commit `9707553a64f88127826e8f5b2b36cd0651296e83` ABSENT. Source-bound per-line literal/behavior/quality/risk/dead/duplicate/counterpart/testing/improvement/Locked fit receipt D2-042, prior Nov5 23-line helper compared with current 28-line Git-and-queue dynamic verification. No active bug confirmed, no code or provider/production/SQL/Auth data edits.\n\nUpdated D2-only ledger **1,528 → 1,556 distinct post-pin physical lines; 41 → 42 complete added files**. SAME-COMMIT scoped journal records `DIC_PREFLIGHT_VERIFIED development_sha=e33132c1531871a5ac3b7be07657d2e5c77e70ee preflight_blob_sha=2fb236bbfa6bac48513eeb3bd157b260853af06d`. Full historical/current/postpin reconciliation is NOT complete, no READY or Deploy. PR-head/merged-source governance pending until exact evidence. No Node/browser/Auth/provider tests run for docs-only evidence. [skip netlify]",
+      "original_title_1_based_word_range": [
+        1,
+        10
+      ],
+      "original_body_1_based_word_range": [
+        1,
+        96
+      ],
+      "original_title_line_range": [
+        1,
+        1
+      ],
+      "original_body_line_range": [
+        1,
+        3
+      ],
+      "original_title_words": 10,
+      "original_body_words": 96,
+      "original_title_LF_body_utf8_bytes": 1135,
+      "source_refs": {
+        "head_sha": "dc29ab410ac12ad9496bcc8c6906299878a33279",
+        "base_sha": "e33132c1531871a5ac3b7be07657d2e5c77e70ee",
+        "merge_commit_sha": "7eb031071baa4360282b7e900abff4bcbfdbf5ba"
+      },
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-11-14T16:58:12Z",
+      "comments_reported": 0,
+      "review_comments_reported": 0,
+      "semantic_review": {
+        "scope": "#267 28-line post-pin release-published restoration helper, git/queue dynamic verification",
+        "finding": "A source-bound narrative about post-pin helper versus older 23-line form. Not provider publication proof or live production restoration; code ownership #267.",
+        "disposition": "RETAIN_HISTORICAL_CLOSE_TITLE",
+        "security_privacy": "No new privacy/security fault proven by PR title/body alone; source, tests and CI require separate exact-bound review",
+        "naming_complexity_obsolescence": "Historical evidence or test documentation remains referentially useful; no proven unreachable current artifact",
+        "locked_fit": "Do not supersede Locked product, release, backup, or provider rules from these historical descriptions"
+      }
+    },
+    {
+      "github_pr_number": 2728,
+      "github_id": 5313928032,
+      "github_node_id": "PR_kwDOUMrfDs8AAAABPLwbYA",
+      "endpoint": "https://api.github.com/repos/Schulzet3/The-Dial-In-Collective/pulls/2728",
+      "version_updated_at": "2026-11-14T17:00:43Z",
+      "created_at": "2026-11-14T17:00:00Z",
+      "original_title": "docs(#267): D2-043 36 Netlify digest test source lines [skip netlify]",
+      "original_body": "Issue #267 development-only new-after-pin code audit. Direct source-bound AI inspection of every physical line (1–36) of `tests/netlify-digest-deploy.test.mjs`, Git blob `e5c81e505c94e8b6001e9f4a48ea696b7d147a6e`, absent at pinned executable SHA `9707553a64f88127826e8f5b2b36cd0651296e83`. Historical Nov5 blob unchanged, but no prior D2 direct source receipt. Nine mandatory semantic dimensions per line in new D2-043 receipt.\n\nTrace immutable Netlify digest adapter D2-008. Mock fetcher and fake ZIP illustrate bounded test-only SHA1/256, static/function request and deny-before-network checks, **NOT actual provider publication**. Later Locked Git-connected sole publisher #417/#457 controls; no active source bug or safe deletion established. No app/test/CI source, SQL/Auth, provider, production or original603 changes.\n\nAppend-only D2 ledger 1,556 → **1,592** post-pin physical lines and 42 → **43** complete new files. SAME-COMMIT journal `docs/workstreams/issue-267-D2-043-netlify-digest-test-20261114.md` includes immutable preflight `development_sha=7eb031071baa4360282b7e900abff4bcbfdbf5ba` / blob `2fb236bbfa6bac48513eeb3bd157b260853af06d`. Docs-only functional Node/browser/SQL/Auth/provider tests NOT_RUN, exact PR-head/merged governance to verify. #267 OPEN, 100% global coverage and live drift unresolved. No READY/Deploy. [skip netlify]",
+      "original_title_1_based_word_range": [
+        1,
+        10
+      ],
+      "original_body_1_based_word_range": [
+        1,
+        144
+      ],
+      "original_title_line_range": [
+        1,
+        1
+      ],
+      "original_body_line_range": [
+        1,
+        5
+      ],
+      "original_title_words": 10,
+      "original_body_words": 144,
+      "original_title_LF_body_utf8_bytes": 1429,
+      "source_refs": {
+        "head_sha": "36938c4ca2b3bced093e8b4bf9df825b051aa067",
+        "base_sha": "7eb031071baa4360282b7e900abff4bcbfdbf5ba",
+        "merge_commit_sha": "faa4c10c5fe533a5817c83550b689ed8e6ef84b5"
+      },
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-11-14T17:00:43Z",
+      "comments_reported": 0,
+      "review_comments_reported": 0,
+      "semantic_review": {
+        "scope": "#267 36-line Netlify digest test, mock fetcher / fake ZIP",
+        "finding": "Historical test-only digest assertions do not certify Netlify deployment or current publication. Filename/test is not dead merely because provider behavior is simulated.",
+        "disposition": "RETAIN_HISTORICAL_CLOSE_TITLE",
+        "security_privacy": "No new privacy/security fault proven by PR title/body alone; source, tests and CI require separate exact-bound review",
+        "naming_complexity_obsolescence": "Historical evidence or test documentation remains referentially useful; no proven unreachable current artifact",
+        "locked_fit": "Do not supersede Locked product, release, backup, or provider rules from these historical descriptions"
+      }
+    },
+    {
+      "github_pr_number": 2729,
+      "github_id": 5313991359,
+      "github_node_id": "PR_kwDOUMrfDs8AAAABPL0Svw",
+      "endpoint": "https://api.github.com/repos/Schulzet3/The-Dial-In-Collective/pulls/2729",
+      "version_updated_at": "2026-11-14T17:13:13Z",
+      "created_at": "2026-11-14T17:06:13Z",
+      "original_title": "test(issue33): R203 original #301/#302 current Broad Porch selected source [skip netlify]",
+      "original_body": "Development-only Issue #33 original603 #301/#302. Adds five focused actual-parser/hostile identity regressions and a bounded guarded exact official selected public source workflow, raw HTML SHA provenance, Add Coffee and Source Review check, plus immutable PREFLIGHT receipt in same-commit scoped journal. No runtime code changed, no frozen CSV/oracle/scorer edits, no provider/production operations. **Diagnostic until real PR-head CI proves selected facts; neither entire 603 nor browser-member acceptance claimed.** Resolve any failure before safe nonforce merge; separate Issue #267/#96 ownership unchanged.",
+      "original_title_1_based_word_range": [
+        1,
+        11
+      ],
+      "original_body_1_based_word_range": [
+        1,
+        77
+      ],
+      "original_title_line_range": [
+        1,
+        1
+      ],
+      "original_body_line_range": [
+        1,
+        1
+      ],
+      "original_title_words": 11,
+      "original_body_words": 77,
+      "original_title_LF_body_utf8_bytes": 701,
+      "source_refs": {
+        "head_sha": "03dc11803892b119c8fdc727280c11f862edbfd5",
+        "base_sha": "faa4c10c5fe533a5817c83550b689ed8e6ef84b5",
+        "merge_commit_sha": "4098579ab19f61659f8ce1dc3e53c32eb00220c6"
+      },
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-11-14T17:13:13Z",
+      "comments_reported": 0,
+      "review_comments_reported": 0,
+      "semantic_review": {
+        "scope": "#33 Broad Porch original603 #301/#302 guarded selected source diagnostics",
+        "finding": "Initial diagnostic explicitly pending real PR-head evidence; later follow-up #2730 states repair and passing merged tests. Preserve causal history; this PR does not prove all 603 or current provider state.",
+        "disposition": "RETAIN_HISTORICAL_CLOSE_TITLE",
+        "security_privacy": "No new privacy/security fault proven by PR title/body alone; source, tests and CI require separate exact-bound review",
+        "naming_complexity_obsolescence": "Historical evidence or test documentation remains referentially useful; no proven unreachable current artifact",
+        "locked_fit": "Do not supersede Locked product, release, backup, or provider rules from these historical descriptions"
+      }
+    },
+    {
+      "github_pr_number": 2730,
+      "github_id": 5314117004,
+      "github_node_id": "PR_kwDOUMrfDs8AAAABPL79jA",
+      "endpoint": "https://api.github.com/repos/Schulzet3/The-Dial-In-Collective/pulls/2730",
+      "version_updated_at": "2026-11-14T17:23:23Z",
+      "created_at": "2026-11-14T17:18:34Z",
+      "original_title": "docs(issue33): R203 original #301/#302 merged official source proof [skip netlify]",
+      "original_body": "Documentation-only postflight for nonforce merged R203 PR #2729. Records immutable preflight, four changed blob parity, exact selected current original 301/302 official HTML hashes and current parser, positive/hostile and merged CI (4,851 PASS/0 FAIL/6 intentional SKIP), initial synthetic failure and safe fixture repair, and full frozen603 SKIPPED—not false certification. Adds permanent audit JSON, appends scoped journal, reconciles current status. No runtime code, queue, frozen corpus/oracle/scorer, provider, publication or member changes. Issue #33 stays OPEN. Merge with explicit `[skip netlify]` only after CI.",
+      "original_title_1_based_word_range": [
+        1,
+        10
+      ],
+      "original_body_1_based_word_range": [
+        1,
+        81
+      ],
+      "original_title_line_range": [
+        1,
+        1
+      ],
+      "original_body_line_range": [
+        1,
+        1
+      ],
+      "original_title_words": 10,
+      "original_body_words": 81,
+      "original_title_LF_body_utf8_bytes": 705,
+      "source_refs": {
+        "head_sha": "65fc69ce0e9feecb7cd5b07c314430d51d65dcca",
+        "base_sha": "4098579ab19f61659f8ce1dc3e53c32eb00220c6",
+        "merge_commit_sha": "ec80501ce4f4ce582a14f260e61e487a1960e4af"
+      },
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-11-14T17:23:23Z",
+      "comments_reported": 0,
+      "review_comments_reported": 0,
+      "semantic_review": {
+        "scope": "#33 postflight proof for merged #2729 including 4851 pass and six intentional skipped tests",
+        "finding": "Claims source-bound selected-official HTML and merged CI; six skipped cases are not PASS and complete original603 remains unresolved. Historical evidence, not a new #504 fix.",
+        "disposition": "RETAIN_HISTORICAL_CLOSE_TITLE",
+        "security_privacy": "No new privacy/security fault proven by PR title/body alone; source, tests and CI require separate exact-bound review",
+        "naming_complexity_obsolescence": "Historical evidence or test documentation remains referentially useful; no proven unreachable current artifact",
+        "locked_fit": "Do not supersede Locked product, release, backup, or provider rules from these historical descriptions"
+      }
+    },
+    {
+      "github_pr_number": 2731,
+      "github_id": 5314143101,
+      "github_node_id": "PR_kwDOUMrfDs8AAAABPL9jfQ",
+      "endpoint": "https://api.github.com/repos/Schulzet3/The-Dial-In-Collective/pulls/2731",
+      "version_updated_at": "2026-11-14T17:22:10Z",
+      "created_at": "2026-11-14T17:21:15Z",
+      "original_title": "docs(#267): D2-045 direct 96-line post-pin test audit [skip netlify]",
+      "original_body": "Development-only #267. At live development 4098579ab19f61659f8ce1dc3e53c32eb00220c6 verified immutable PREFLIGHT Git blob 2fb236bbfa6bac48513eeb3bd157b260853af06d. Three documentation-only commits to squash into SAME-COMMIT scoped journal, 96 exact source-bound individual semantic records and append-only canonical D2 ledger. File tests/netlify-draft-transaction.test.mjs original current blob cc9885b0f694a926a8402e46c00385f82cd29658; pinned current absent (404). D2 1,592 -> 1,688 original distinct post-pin lines, files 43 -> 44. F001 original 41 revalidated without duplicate credit; no frozen/pinned added. Mock-only direct API tests are NOT a live Netlify proof; Locked #417/#457 sole Git publisher preserved. No app/test/CI/SQL/Auth/provider/member/backup/production/Netlify/deploy/READY changes. Functional tests NOT_RUN_DOCS_ONLY; actual PR-head and merged-source governance required. Issue remains OPEN.",
+      "original_title_1_based_word_range": [
+        1,
+        9
+      ],
+      "original_body_1_based_word_range": [
+        1,
+        95
+      ],
+      "original_title_line_range": [
+        1,
+        1
+      ],
+      "original_body_line_range": [
+        1,
+        1
+      ],
+      "original_title_words": 9,
+      "original_body_words": 95,
+      "original_title_LF_body_utf8_bytes": 983,
+      "source_refs": {
+        "head_sha": "d05a60410c0a177bacbd8921ee575234876cdcca",
+        "base_sha": "4098579ab19f61659f8ce1dc3e53c32eb00220c6",
+        "merge_commit_sha": "7ef1587a7b519b0ce4aa9b53a454b64701d90fc6"
+      },
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-11-14T17:22:10Z",
+      "comments_reported": 0,
+      "review_comments_reported": 0,
+      "semantic_review": {
+        "scope": "#267 96-line Netlify draft-transaction mock test",
+        "finding": "Post-pin per-line audit with historical 1592→1688 count is delegated evidence, not full frozen/current audit. Mock-only API tests are not live provider proof.",
+        "disposition": "RETAIN_HISTORICAL_CLOSE_TITLE",
+        "security_privacy": "No new privacy/security fault proven by PR title/body alone; source, tests and CI require separate exact-bound review",
+        "naming_complexity_obsolescence": "Historical evidence or test documentation remains referentially useful; no proven unreachable current artifact",
+        "locked_fit": "Do not supersede Locked product, release, backup, or provider rules from these historical descriptions"
+      }
+    },
+    {
+      "github_pr_number": 2732,
+      "github_id": 5314306651,
+      "github_node_id": "PR_kwDOUMrfDs8AAAABPMHiWw",
+      "endpoint": "https://api.github.com/repos/Schulzet3/The-Dial-In-Collective/pulls/2732",
+      "version_updated_at": "2026-11-14T17:37:59Z",
+      "created_at": "2026-11-14T17:37:59Z",
+      "original_title": "Issue #504 G1-256: original historical PR #1609–1616 audit [skip netlify]",
+      "original_body": "Documentation-only, no deployment. Eight distinct historical PRs #1609–1616 fully reviewed at original title/body: **945 words, 8,182 UTF8 bytes**. Immutable receipt, conditional ledger and scoped same-commit preflight journal are committed together at `2bf92eb1642e48b045cb0bedc15b276c0c92720f` (all three Git-file/blob readbacks matched). Independent #267 source literal validation 3/3, zero #504 code credit. New deterministic #33 R203 focused test failure triaged, not retried or overwritten. Central merged #504 baseline G1-186; G1-187–255 predecessor drafts not fully integrated. DRAFT only; do not merge/count as central until safely reconciled. Next PR #1617. No runtime/queue/SQL/Auth/provider/production changes; functional tests NOT_RUN_DOCS_ONLY; exact-head CI pending.",
+      "original_title_1_based_word_range": [
+        1,
+        10
+      ],
+      "original_body_1_based_word_range": [
+        1,
+        92
+      ],
+      "original_title_line_range": [
+        1,
+        1
+      ],
+      "original_body_line_range": [
+        1,
+        1
+      ],
+      "original_title_words": 10,
+      "original_body_words": 92,
+      "original_title_LF_body_utf8_bytes": 861,
+      "source_refs": {
+        "head_sha": "2bf92eb1642e48b045cb0bedc15b276c0c92720f",
+        "base_sha": "ec80501ce4f4ce582a14f260e61e487a1960e4af",
+        "merge_commit_sha": "ba1fa07efa8a30b601798b07bd4637e4126add89"
+      },
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "comments_reported": 0,
+      "review_comments_reported": 0,
+      "semantic_review": {
+        "scope": "#504 G1-256 conditional original PR #1609–1616 words",
+        "finding": "OPEN DRAFT predecessor; its 945 claimed original words are not this batch's credit, and must not be integrated/archived from metadata alone. #2112 and predecessor integration outstanding.",
+        "disposition": "PRESERVE_OPEN_DRAFT_UNCHANGED",
+        "security_privacy": "No new privacy/security fault proven by PR title/body alone; source, tests and CI require separate exact-bound review",
+        "naming_complexity_obsolescence": "Historical evidence or test documentation remains referentially useful; no proven unreachable current artifact",
+        "locked_fit": "Do not supersede Locked product, release, backup, or provider rules from these historical descriptions"
+      }
+    },
+    {
+      "github_pr_number": 2733,
+      "github_id": 5314339390,
+      "github_node_id": "PR_kwDOUMrfDs8AAAABPMJiPg",
+      "endpoint": "https://api.github.com/repos/Schulzet3/The-Dial-In-Collective/pulls/2733",
+      "version_updated_at": "2026-11-14T17:42:05Z",
+      "created_at": "2026-11-14T17:41:22Z",
+      "original_title": "docs(issue455): R262 first-party espresso percolation model evidence [skip netlify]",
+      "original_body": "Issue #455 bounded original research evidence (development-only). Independent full publisher HTML methods/results/limitations review of Angeloni et al. 2023 DOI 10.3390/app13042688: two-blend controlled chemical/model findings are NOT tested personal next-shot five-taste success or transferable universal optima. Adds exactly one new distinct source, three bounded claim checks, one research-only P3 proposal; canonical source totals 147/422/210. Verified immutable PREFLIGHT at development ec80501ce4f4ce582a14f260e61e487a1960e4af/blob 2fb236bbfa6bac48513eeb3bd157b260853af06d; SAME-COMMIT scoped journal. Diff exactly two docs, no app/tests/CI/provider/queue/Locked/production/publication changes. Required: docs-only governance success, nonforce merge with explicit actual merge [skip netlify], exact merged blobs/CI source-bound verification. Do not deploy. S019 still inaccessible. #267 literal credit zero.",
+      "original_title_1_based_word_range": [
+        1,
+        9
+      ],
+      "original_body_1_based_word_range": [
+        1,
+        97
+      ],
+      "original_title_line_range": [
+        1,
+        1
+      ],
+      "original_body_line_range": [
+        1,
+        1
+      ],
+      "original_title_words": 9,
+      "original_body_words": 97,
+      "original_title_LF_body_utf8_bytes": 997,
+      "source_refs": {
+        "head_sha": "6c4701b9613698acf87057e9cd961b3103a2b243",
+        "base_sha": "ec80501ce4f4ce582a14f260e61e487a1960e4af",
+        "merge_commit_sha": "52d75b695e5215a50616abe65b3a034736af60d6"
+      },
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-11-14T17:42:04Z",
+      "comments_reported": 0,
+      "review_comments_reported": 0,
+      "semantic_review": {
+        "scope": "#455 Angeloni et al. 2023 DOI 10.3390/app13042688 coffee model literature",
+        "finding": "Two-blend controlled results limit transfer to personalized shots or universal optima. Separate #455 owner; research-only P3 is not a Locked product decision.",
+        "disposition": "RETAIN_HISTORICAL_CLOSE_TITLE",
+        "security_privacy": "No new privacy/security fault proven by PR title/body alone; source, tests and CI require separate exact-bound review",
+        "naming_complexity_obsolescence": "Historical evidence or test documentation remains referentially useful; no proven unreachable current artifact",
+        "locked_fit": "Do not supersede Locked product, release, backup, or provider rules from these historical descriptions"
+      }
+    }
+  ],
+  "remaining": "Original PR #2734 title word 1–EOF and complete body next. G1-187 #2112 and G1-227+ source-only receipts pending ordered integration. PR comments/reviews/diffs, issues, Actions logs/artifacts, commits/branches/tags/releases, source trees/binaries, queue suffix and delegated #267 still incomplete."
+}
