@@ -13,12 +13,17 @@ import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../../site/clou
 const url='https://brickhouseroasters.com/products/descafeinado';
 const name='Descafeinado';
 const hash=x=>createHash('sha256').update(x).digest('hex');
+// N508-119: remove complete nonproduct elements; the closing-tag backreference
+// must refer to the CAPTURED opening tag, not a noncapturing alternation.
+export function selected41DirectBody(own){
+ return String(own||'').replace(/<(script|style|noscript|nav|aside|header|footer)\b[^>]*>[\s\S]*?<\/\1>/gi,' ')
+  .replace(/<[^>]{0,2000}>/g,' ').replace(/&(?:rsquo|ldquo|rdquo|nbsp);/gi,' ')
+  .replace(/\s+/g,' ').trim();
+}
 export function selected41(html,parsed_name=''){
  const own=productMarkup(String(html||''));
  const h1=selectedProductHeadings(own);
- const body=own.replace(/<(?:script|style|noscript|nav|aside|header|footer)\b[^>]*>[\s\S]*?<\/\1>/gi,' ')
-  .replace(/<[^>]{0,2000}>/g,' ').replace(/&(?:rsquo|ldquo|rdquo|nbsp);/gi,' ')
-  .replace(/\s+/g,' ').trim();
+ const body=selected41DirectBody(own);
  const hero=selectedShopifyPageFlyH3Identity(html,{source_url:url,expected_name:name,parsed_name});
  return {h1,hero,identity:(h1.length===1&&h1[0]===name)||Boolean(hero?.selected_title===name),
   currentCaneRemoval:/we[’']ve stripped this bean of its caffeine content through a natural sugar cane process/i.test(body),
