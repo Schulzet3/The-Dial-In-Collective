@@ -17807,10 +17807,10 @@
     {
       "id": "DIC-Q-455-r417-measured-grind-precision",
       "issue": 455,
-      "pr": null,
+      "pr": 3594,
       "title": "Preserve original fractional grinder settings in new, offline and edited shot measurements",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "763966530e9b7bdc7d99f36a977e57018dc97fbf",
       "scope_paths": [
         "site/lib/engine.js",
         "site/cloud/mapping.js"
@@ -17819,13 +17819,26 @@
       "tests": [
         "Four synthetic actual-module positive/negative R417 regressions authored; hosted Node22, browser/mobile/offline/a11y, SQL, security and governance pending (NOT PASS).",
         "Cloud shotPayload, local offline save, original history, edits, all five tastes, notes, idempotent replay, true zero/tenths and missing fifth covered in authored tests.",
-        "Recommendation 0.1 adjustment grid remains unchanged; no real member or espresso quality evidence."
+        "Recommendation 0.1 adjustment grid remains unchanged; no real member or espresso quality evidence.",
+        "Exact final PR-head 5121232800ea813e4c83385daad067d1e93eab17 Node22/lint/build 44901492974 SUCCESS: 6,031 PASS / 0 FAIL / 6 intentional SKIP, four R417 regression cases PASS. Browser/mobile/offline/a11y 44901493094, governance 44901493078, isolated SQL 44901492976 and security 44901493051 SUCCESS. Original initial head also passed, no duplicate rerun credited.",
+        "Nonforce [skip netlify] squash PR #3594 merged at 763966530e9b7bdc7d99f36a977e57018dc97fbf; first-parent exactly five intended paths, zero unrelated paths/deletions. All five final source/test/queue/journal Git blobs match final PR head.",
+        "Exact merged-source push Node22/lint/build 44901977584 SUCCESS: 6,031 PASS / 0 FAIL / 6 intentional SKIP; 4/4 R417 PASS. Browser/mobile/offline/a11y 44901977647, governance 44901977590, exact selected 44901977565 SUCCESS. SQL and security were independently SUCCESS at final PR head; not rerun on merged push. Frozen603 intentionally SKIPPED, NOT PASS."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        44901492974,
+        44901493094,
+        44901493078,
+        44901492976,
+        44901493051,
+        44901977584,
+        44901977647,
+        44901977590,
+        44901977565
+      ],
       "blockers": [
-        "Exact source PR-head and merged CI not yet PASS; independent #3347 release candidate isolation and five successful checks pending. TESTING, not READY."
+        "Issue #3347 independent frozen release-candidate isolation and five exact certified nonpublishing candidate checks remain UNVERIFIED, no owner Publish approval. State TESTING, never READY or DEPLOYED."
       ],
-      "notes": "Actual entered non-tenth measured grind was rounded by shotPayload/saveShot/editShot despite precision-capable SQL. Narrow SAFE integrity correction; original measured shots preserved. No publish/provider writes.",
+      "notes": "R417 SAFE measured-data integrity fix source-bound and nonforce merged PR #3594 763966530e9b7bdc7d99f36a977e57018dc97fbf. New cloud, offline and edited grinder measurements preserve original fractional dial rather than silently rounding to tenths; legacy advice precision and Locked policy unaffected. All 4 synthetic cases PASS, full Node22 merged source 6031 PASS/0 FAIL/6 SKIP, browser/mobile/offline/a11y, governance, PR-head isolated SQL/security PASS; no real espresso improvement claim, production/provider/member write or deployment.",
       "production_deployed": false
     }
   ],
