@@ -1,3 +1,17 @@
+# Issue #509 R424/R424b — Auth/Storage/Realtime/Vault relation semantics [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=c853405e14e5374977602bec6a73d2f36e1817d3 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+2026-11-21 UTC; connected Supabase production strictly READ-ONLY, PostgreSQL 17.11. Continued after R421/R422 private/public relation catalog completion and R423 dependency check. Direct semantic review of **45 newly unreviewed provider relations**: **28 Auth** (27 tables/1 owned sequence; 92139 full selected JSONB catalog characters) plus **17 managed service relations** (10 Storage, 4 Realtime, 1 supabase_migrations and 2 Vault incl. full privileged view definition; 42822 characters). Per-object OID, complete selected column/default/generated/constraint/policy/trigger/sequence/view text, ACL/owner/index/inbound-FK references, exact MD5 and [1,end] ranges and individual verdict in append-only [R424](../audits/issue509-r424-auth-provider-relations-20261121.json) and [R424b](../audits/issue509-r424b-service-provider-relations-20261121.json). Existing physical index sources already independently R418/R419 reviewed; no #267 code-line credit.
+
+**New reproducible upstream Auth validation defects, zero observed configured users:** The convalidated=true CHECK constraints named "resource_id not empty" on auth.sso_providers OID 16794 and "metadata_url not empty" on auth.saml_providers OID 16818 use optional_col = NULL::text OR char_length(optional_col) > 0. On an empty string they yield SQL NULL, not FALSE, so CHECK accepts the invalid empty string. Reproduced by constant-only SELECT; no DML. Read-only aggregate counts at this checkpoint: zero SSO providers, zero SAML providers, zero custom OAuth providers. No member/customer impact evidenced. This is managed upstream Auth schema, not DIC-owned: preserve Auth/production and do not author a DIC destructive migration. R418 redundant identifier index candidate also retained. Coordinate with #96 only if upstream/actual SSO consumption makes repair actionable; no owner decision now.
+
+Different Auth user/session/PKCE/MFA/WebAuthn/SCIM records, Storage bucket/multipart/version/lifecycle families, Realtime partitions/subscription claims, migration histories and Vault secret ciphertext/decryption view have distinct contracts. Vault definition inspected without querying its rows or secrets. Managed migration source, compiled binaries, platform callers, console-only Auth/Storage configs and full runtime source parity UNVERIFIED. No confirmed DIC app-side bug or safe platform object removal justified.
+
+No app code, migration, tests or CI edits: exact-source new CI NOT_APPLICABLE (not PASS). No new READY/DEPLOYED verification. Provider-wide baseline IN_PROGRESS. No production SQL/data/Storage/Auth/Edge/Vault/config write, publication, backups, billing or schedule/alert changes. **Next exact cursor:** extensions.pg_class view rank 1/2 OID 16407 char 1; then information_schema/pg_catalog relation definitions. Preserve hourly work and owner-action-only alert policy.
+
+---
+
 # Issue #509 R423 — targeted source-to-live consumer proof [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=742a041a903db00bace7b19994e23835e3ff6fd9 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e

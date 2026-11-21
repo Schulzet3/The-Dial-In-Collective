@@ -1,0 +1,2458 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "round": "R424b",
+  "project_id": "azviqqejypsefzilgonr",
+  "preflight_development_sha": "c853405e14e5374977602bec6a73d2f36e1817d3",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "provider": "Supabase PostgreSQL 17.11.0.003",
+  "read_only": true,
+  "scope": "storage 10 + realtime 4 + supabase_migrations 1 + vault 2 relation/view definitions",
+  "reviewed": 17,
+  "total": 17,
+  "full_selected_catalog_projection_characters": 42822,
+  "source_measurement": "PostgreSQL md5(projection::text) and char_length(projection::text) on jsonb catalog projection",
+  "limits": [
+    "All selected catalog fields, columns, constraints, triggers, policies, index references, inbound FK, ACL, sequence parameters and views are read, but not claim of original CREATE TABLE/VIEW scripts or compiled native source.",
+    "Physical CREATE INDEX source already independently covered by R418/R419, not recredited.",
+    "Platform runtime/dynamic upstream consumers and console-only settings unverified.",
+    "No identities, Auth user/shot rows, credentials, stored object records, secrets or sequence counters read.",
+    "No #267 original/current source line credit."
+  ],
+  "next_cursor": "extensions.pg_class views rank 1/2 OID 16407, then information_schema and pg_catalog relation definitions",
+  "entries": [
+    {
+      "rank": 1,
+      "oid": 17505,
+      "identity": "realtime.messages",
+      "projection_md5": "87dd3d73285159d9f43534f330957534",
+      "reviewed_character_range": "1-2881",
+      "projection_characters": 2881,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Partitioned broadcast messages, UTC wall-clock defaults, payload XOR NOT VALID",
+      "catalog_projection": {
+        "acl": "{supabase_realtime_admin=arwdDxtm/supabase_realtime_admin,postgres=a*r*wdDxtm/supabase_realtime_admin,dashboard_user=arwdDxtm/supabase_realtime_admin,anon=arw/supabase_realtime_admin,authenticated=arw/supabase_realtime_admin,service_role=arw/supabase_realtime_admin}",
+        "oid": "17505",
+        "rls": true,
+        "kind": "p",
+        "name": "messages",
+        "owner": "supabase_realtime_admin",
+        "pages": 0,
+        "schema": "realtime",
+        "columns": [
+          {
+            "name": "topic",
+            "type": "text",
+            "attnum": 1,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "extension",
+            "type": "text",
+            "attnum": 2,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "payload",
+            "type": "jsonb",
+            "attnum": 3,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "event",
+            "type": "text",
+            "attnum": 4,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "private",
+            "type": "boolean",
+            "attnum": 5,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": "false"
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp without time zone",
+            "attnum": 6,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "timezone('utc'::text, clock_timestamp())"
+          },
+          {
+            "name": "inserted_at",
+            "type": "timestamp without time zone",
+            "attnum": 7,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "timezone('utc'::text, clock_timestamp())"
+          },
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 8,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "gen_random_uuid()"
+          },
+          {
+            "name": "binary_payload",
+            "type": "bytea",
+            "attnum": 9,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "skip_broadcast",
+            "type": "boolean",
+            "attnum": 10,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "false"
+          },
+          {
+            "name": "expires_at",
+            "type": "timestamp without time zone",
+            "attnum": 11,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "realtime.messages_pkey",
+          "realtime.messages_replay_index"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "messages_payload_exclusive",
+            "type": "c",
+            "validated": false,
+            "definition": "CHECK (payload IS NULL OR binary_payload IS NULL) NOT VALID"
+          },
+          {
+            "name": "messages_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id, inserted_at)"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 2,
+      "oid": 17513,
+      "identity": "realtime.schema_migrations",
+      "projection_md5": "0f140698c8bd0f8ea9816b90dc402116",
+      "reviewed_character_range": "1-915",
+      "projection_characters": 915,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Realtime service migration history",
+      "catalog_projection": {
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin}",
+        "oid": "17513",
+        "rls": false,
+        "kind": "r",
+        "name": "schema_migrations",
+        "owner": "supabase_admin",
+        "pages": 1,
+        "schema": "realtime",
+        "columns": [
+          {
+            "name": "version",
+            "type": "bigint",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "inserted_at",
+            "type": "timestamp(0) without time zone",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": "now()"
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "realtime.schema_migrations_pkey"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "schema_migrations_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (version)"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": 89,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 3,
+      "oid": 17516,
+      "identity": "realtime.subscription",
+      "projection_md5": "9cf13c10d72aad0da8c44b7bd21753ea",
+      "reviewed_character_range": "1-2827",
+      "projection_characters": 2827,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Subscription filters, generated claim role and validation trigger",
+      "catalog_projection": {
+        "acl": "{supabase_realtime_admin=arwdDxtm/supabase_realtime_admin,postgres=arwdDxtm/supabase_realtime_admin,dashboard_user=arwdDxtm/supabase_realtime_admin,anon=r/supabase_realtime_admin,authenticated=r/supabase_realtime_admin,service_role=r/supabase_realtime_admin}",
+        "oid": "17516",
+        "rls": false,
+        "kind": "r",
+        "name": "subscription",
+        "owner": "supabase_realtime_admin",
+        "pages": 0,
+        "schema": "realtime",
+        "columns": [
+          {
+            "name": "id",
+            "type": "bigint",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "a",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "subscription_id",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "entity",
+            "type": "regclass",
+            "attnum": 3,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "filters",
+            "type": "realtime.user_defined_filter[]",
+            "attnum": 4,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "'{}'::realtime.user_defined_filter[]"
+          },
+          {
+            "name": "claims",
+            "type": "jsonb",
+            "attnum": 5,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "claims_role",
+            "type": "regrole",
+            "attnum": 6,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "s",
+            "default_expr": "realtime.to_regrole((claims ->> 'role'::text))"
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp without time zone",
+            "attnum": 7,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "timezone('utc'::text, now())"
+          },
+          {
+            "name": "action_filter",
+            "type": "text",
+            "attnum": 8,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": "'*'::text"
+          },
+          {
+            "name": "selected_columns",
+            "type": "text[]",
+            "attnum": 9,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [
+          "CREATE TRIGGER tr_check_filters BEFORE INSERT OR UPDATE ON realtime.subscription FOR EACH ROW EXECUTE FUNCTION realtime.subscription_check_filters()"
+        ],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "realtime.pk_subscription",
+          "realtime.ix_realtime_subscription_entity",
+          "realtime.subscription_subscription_id_entity_filters_hash_key"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "pk_subscription",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "subscription_action_filter_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (action_filter = ANY (ARRAY['*'::text, 'INSERT'::text, 'UPDATE'::text, 'DELETE'::text]))"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 4,
+      "oid": 17526,
+      "identity": "realtime.subscription_id_seq",
+      "projection_md5": "27e093109bd71c08289701dfa406938d",
+      "reviewed_character_range": "1-1243",
+      "projection_characters": 1243,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Identity sequence for Realtime subscription",
+      "catalog_projection": {
+        "acl": "{supabase_realtime_admin=rwU/supabase_realtime_admin,postgres=rwU/supabase_realtime_admin,dashboard_user=rwU/supabase_realtime_admin,anon=U/supabase_realtime_admin,authenticated=U/supabase_realtime_admin,service_role=U/supabase_realtime_admin}",
+        "oid": "17526",
+        "rls": false,
+        "kind": "S",
+        "name": "subscription_id_seq",
+        "owner": "supabase_realtime_admin",
+        "pages": 1,
+        "schema": "realtime",
+        "columns": [
+          {
+            "name": "last_value",
+            "type": "bigint",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "log_cnt",
+            "type": "bigint",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "is_called",
+            "type": "boolean",
+            "attnum": 3,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": {
+          "max": "9223372036854775807",
+          "min": "1",
+          "type": "bigint",
+          "cache": "1",
+          "cycle": false,
+          "start": "1",
+          "increment": "1"
+        },
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [],
+        "reloptions": null,
+        "constraints": [],
+        "persistence": "p",
+        "estimated_rows": 1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 5,
+      "oid": 17262,
+      "identity": "storage.migrations",
+      "projection_md5": "6271089a4e488d02d3ef3c8821e574c6",
+      "reviewed_character_range": "1-1331",
+      "projection_characters": 1331,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Storage service migration ledger",
+      "catalog_projection": {
+        "acl": null,
+        "oid": "17262",
+        "rls": true,
+        "kind": "r",
+        "name": "migrations",
+        "owner": "supabase_storage_admin",
+        "pages": 1,
+        "schema": "storage",
+        "columns": [
+          {
+            "name": "id",
+            "type": "integer",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "name",
+            "type": "character varying(100)",
+            "attnum": 2,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "hash",
+            "type": "character varying(40)",
+            "attnum": 3,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "executed_at",
+            "type": "timestamp without time zone",
+            "attnum": 4,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": "CURRENT_TIMESTAMP"
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "storage.migrations_pkey",
+          "storage.migrations_name_key"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "migrations_name_key",
+            "type": "u",
+            "validated": true,
+            "definition": "UNIQUE (name)"
+          },
+          {
+            "name": "migrations_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": 73,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 6,
+      "oid": 17270,
+      "identity": "storage.buckets",
+      "projection_md5": "69c92bd37c23881a4f5cf19b033a0be4",
+      "reviewed_character_range": "1-6819",
+      "projection_characters": 6819,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Standard storage bucket ACL/versioning and lifecycle trigger controls",
+      "catalog_projection": {
+        "acl": "{supabase_storage_admin=a*r*w*d*D*x*t*m*/supabase_storage_admin,service_role=arwdDxtm/supabase_storage_admin,authenticated=arwd/supabase_storage_admin,anon=arwd/supabase_storage_admin,postgres=a*r*w*d*D*x*t*m*/supabase_storage_admin}",
+        "oid": "17270",
+        "rls": true,
+        "kind": "r",
+        "name": "buckets",
+        "owner": "supabase_storage_admin",
+        "pages": 0,
+        "schema": "storage",
+        "columns": [
+          {
+            "name": "id",
+            "type": "text",
+            "attnum": 1,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "name",
+            "type": "text",
+            "attnum": 2,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "owner",
+            "type": "uuid",
+            "attnum": 3,
+            "comment": "Field is deprecated, use owner_id instead",
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 4,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": "now()"
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "attnum": 5,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": "now()"
+          },
+          {
+            "name": "public",
+            "type": "boolean",
+            "attnum": 6,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": "false"
+          },
+          {
+            "name": "avif_autodetection",
+            "type": "boolean",
+            "attnum": 7,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": "false"
+          },
+          {
+            "name": "file_size_limit",
+            "type": "bigint",
+            "attnum": 8,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "allowed_mime_types",
+            "type": "text[]",
+            "attnum": 9,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "owner_id",
+            "type": "text",
+            "attnum": 10,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "type",
+            "type": "storage.buckettype",
+            "attnum": 11,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "'STANDARD'::storage.buckettype"
+          },
+          {
+            "name": "versioning_status",
+            "type": "text",
+            "attnum": 12,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "'DISABLED'::text"
+          },
+          {
+            "name": "lifecycle_configuration",
+            "type": "jsonb",
+            "attnum": 13,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "lifecycle_configuration_generation",
+            "type": "uuid",
+            "attnum": 14,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [
+          "CREATE TRIGGER enforce_bucket_name_length_trigger BEFORE INSERT OR UPDATE OF name ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.enforce_bucket_name_length()",
+          "CREATE TRIGGER enforce_versioning_status_transition BEFORE UPDATE OF versioning_status ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.enforce_versioning_status_transition()",
+          "CREATE TRIGGER protect_active_lifecycle_states BEFORE DELETE ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.protect_active_lifecycle_states()",
+          "CREATE TRIGGER protect_bucket_control_insert BEFORE INSERT ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.protect_bucket_control_columns('service_role')",
+          "CREATE TRIGGER protect_bucket_control_update BEFORE UPDATE OF lifecycle_configuration, lifecycle_configuration_generation ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.protect_bucket_control_columns()",
+          "CREATE TRIGGER protect_bucket_control_update_role AFTER UPDATE OF lifecycle_configuration, lifecycle_configuration_generation ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.enforce_bucket_lifecycle_service_role('service_role')",
+          "CREATE TRIGGER protect_buckets_delete BEFORE DELETE ON storage.buckets FOR EACH STATEMENT EXECUTE FUNCTION storage.protect_delete()",
+          "CREATE TRIGGER wake_lifecycle_on_policy_write AFTER INSERT OR UPDATE OF lifecycle_configuration_generation ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.wake_lifecycle_state()",
+          "CREATE TRIGGER wake_lifecycle_on_versioning_enable AFTER UPDATE OF versioning_status ON storage.buckets FOR EACH ROW WHEN (new.lifecycle_configuration IS NOT NULL) EXECUTE FUNCTION storage.wake_lifecycle_state()"
+        ],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [
+          {
+            "name": "bucket_lifecycle_states_bucket_id_fkey",
+            "source": "storage.bucket_lifecycle_states",
+            "definition": "FOREIGN KEY (bucket_id) REFERENCES storage.buckets(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "objects_bucketId_fkey",
+            "source": "storage.objects",
+            "definition": "FOREIGN KEY (bucket_id) REFERENCES storage.buckets(id)"
+          },
+          {
+            "name": "s3_multipart_uploads_bucket_id_fkey",
+            "source": "storage.s3_multipart_uploads",
+            "definition": "FOREIGN KEY (bucket_id) REFERENCES storage.buckets(id)"
+          },
+          {
+            "name": "s3_multipart_uploads_parts_bucket_id_fkey",
+            "source": "storage.s3_multipart_uploads_parts",
+            "definition": "FOREIGN KEY (bucket_id) REFERENCES storage.buckets(id)"
+          }
+        ],
+        "index_refs": [
+          "storage.buckets_pkey",
+          "storage.bname"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "buckets_lifecycle_configuration_pair_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK ((lifecycle_configuration IS NULL) = (lifecycle_configuration_generation IS NULL))"
+          },
+          {
+            "name": "buckets_lifecycle_configuration_shape_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (lifecycle_configuration IS NULL OR jsonb_typeof(lifecycle_configuration) = 'object'::text AND lifecycle_configuration ? 'rules'::text AND\nCASE\n    WHEN jsonb_typeof(lifecycle_configuration -> 'rules'::text) = 'array'::text THEN jsonb_array_length(lifecycle_configuration -> 'rules'::text) >= 1 AND jsonb_array_length(lifecycle_configuration -> 'rules'::text) <= 1000\n    ELSE false\nEND)"
+          },
+          {
+            "name": "buckets_lifecycle_configuration_standard_only_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (type = 'STANDARD'::storage.buckettype OR lifecycle_configuration IS NULL AND lifecycle_configuration_generation IS NULL)"
+          },
+          {
+            "name": "buckets_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "buckets_versioning_standard_only_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (type = 'STANDARD'::storage.buckettype OR versioning_status = 'DISABLED'::text)"
+          },
+          {
+            "name": "buckets_versioning_status_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (versioning_status = ANY (ARRAY['DISABLED'::text, 'ENABLED'::text, 'SUSPENDED'::text]))"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 7,
+      "oid": 17280,
+      "identity": "storage.objects",
+      "projection_md5": "9cbb0d1a23ea939c1cfaf6aee1117431",
+      "reviewed_character_range": "1-4064",
+      "projection_characters": 4064,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Versioned object namespace; path tokens and archive/delete markers",
+      "catalog_projection": {
+        "acl": "{supabase_storage_admin=a*r*w*d*D*x*t*m*/supabase_storage_admin,service_role=arwdDxtm/supabase_storage_admin,authenticated=arwd/supabase_storage_admin,anon=arwd/supabase_storage_admin,postgres=a*r*w*d*D*x*t*m*/supabase_storage_admin}",
+        "oid": "17280",
+        "rls": true,
+        "kind": "r",
+        "name": "objects",
+        "owner": "supabase_storage_admin",
+        "pages": 0,
+        "schema": "storage",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "gen_random_uuid()"
+          },
+          {
+            "name": "bucket_id",
+            "type": "text",
+            "attnum": 2,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "name",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "owner",
+            "type": "uuid",
+            "attnum": 4,
+            "comment": "Field is deprecated, use owner_id instead",
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 5,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": "now()"
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "attnum": 6,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": "now()"
+          },
+          {
+            "name": "last_accessed_at",
+            "type": "timestamp with time zone",
+            "attnum": 7,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": "now()"
+          },
+          {
+            "name": "metadata",
+            "type": "jsonb",
+            "attnum": 8,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "path_tokens",
+            "type": "text[]",
+            "attnum": 9,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "s",
+            "default_expr": "string_to_array(name, '/'::text)"
+          },
+          {
+            "name": "version",
+            "type": "text",
+            "attnum": 10,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "owner_id",
+            "type": "text",
+            "attnum": 11,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "user_metadata",
+            "type": "jsonb",
+            "attnum": 12,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "archived_at",
+            "type": "timestamp with time zone",
+            "attnum": 13,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "is_delete_marker",
+            "type": "boolean",
+            "attnum": 14,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "false"
+          },
+          {
+            "name": "is_versioned",
+            "type": "boolean",
+            "attnum": 15,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "false"
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [
+          "CREATE TRIGGER protect_objects_delete BEFORE DELETE ON storage.objects FOR EACH STATEMENT EXECUTE FUNCTION storage.protect_delete()",
+          "CREATE TRIGGER update_objects_updated_at BEFORE UPDATE ON storage.objects FOR EACH ROW EXECUTE FUNCTION storage.update_updated_at_column()"
+        ],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "storage.objects_pkey",
+          "storage.name_prefix_search",
+          "storage.idx_objects_bucket_id_name",
+          "storage.idx_objects_bucket_id_name_lower",
+          "storage.objects_bucket_id_name_version_key",
+          "storage.idx_objects_current_version",
+          "storage.idx_objects_null_version",
+          "storage.idx_objects_delete_markers",
+          "storage.objects_archived_order_uq",
+          "storage.objects_archived_due_idx"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "objects_bucketId_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (bucket_id) REFERENCES storage.buckets(id)"
+          },
+          {
+            "name": "objects_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 8,
+      "oid": 17329,
+      "identity": "storage.s3_multipart_uploads",
+      "projection_md5": "ae3726558ca74202b3bbbfa3fb7bab08",
+      "reviewed_character_range": "1-2717",
+      "projection_characters": 2717,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "S3 multipart upload header and ownership/version",
+      "catalog_projection": {
+        "acl": "{supabase_storage_admin=arwdDxtm/supabase_storage_admin,service_role=arwdDxtm/supabase_storage_admin,authenticated=r/supabase_storage_admin,anon=r/supabase_storage_admin}",
+        "oid": "17329",
+        "rls": true,
+        "kind": "r",
+        "name": "s3_multipart_uploads",
+        "owner": "supabase_storage_admin",
+        "pages": 0,
+        "schema": "storage",
+        "columns": [
+          {
+            "name": "id",
+            "type": "text",
+            "attnum": 1,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "in_progress_size",
+            "type": "bigint",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "0"
+          },
+          {
+            "name": "upload_signature",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "bucket_id",
+            "type": "text",
+            "attnum": 4,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "key",
+            "type": "text",
+            "attnum": 5,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "version",
+            "type": "text",
+            "attnum": 6,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "owner_id",
+            "type": "text",
+            "attnum": 7,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 8,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "now()"
+          },
+          {
+            "name": "user_metadata",
+            "type": "jsonb",
+            "attnum": 9,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "metadata",
+            "type": "jsonb",
+            "attnum": 10,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [
+          {
+            "name": "s3_multipart_uploads_parts_upload_id_fkey",
+            "source": "storage.s3_multipart_uploads_parts",
+            "definition": "FOREIGN KEY (upload_id) REFERENCES storage.s3_multipart_uploads(id) ON DELETE CASCADE"
+          }
+        ],
+        "index_refs": [
+          "storage.s3_multipart_uploads_pkey",
+          "storage.idx_multipart_uploads_list"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "s3_multipart_uploads_bucket_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (bucket_id) REFERENCES storage.buckets(id)"
+          },
+          {
+            "name": "s3_multipart_uploads_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 9,
+      "oid": 17343,
+      "identity": "storage.s3_multipart_uploads_parts",
+      "projection_md5": "2799b7238b0c460134973bff630d87f7",
+      "reviewed_character_range": "1-2682",
+      "projection_characters": 2682,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Multipart upload chunk linkage and cascade",
+      "catalog_projection": {
+        "acl": "{supabase_storage_admin=arwdDxtm/supabase_storage_admin,service_role=arwdDxtm/supabase_storage_admin,authenticated=r/supabase_storage_admin,anon=r/supabase_storage_admin}",
+        "oid": "17343",
+        "rls": true,
+        "kind": "r",
+        "name": "s3_multipart_uploads_parts",
+        "owner": "supabase_storage_admin",
+        "pages": 0,
+        "schema": "storage",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "gen_random_uuid()"
+          },
+          {
+            "name": "upload_id",
+            "type": "text",
+            "attnum": 2,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "size",
+            "type": "bigint",
+            "attnum": 3,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "0"
+          },
+          {
+            "name": "part_number",
+            "type": "integer",
+            "attnum": 4,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "bucket_id",
+            "type": "text",
+            "attnum": 5,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "key",
+            "type": "text",
+            "attnum": 6,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "etag",
+            "type": "text",
+            "attnum": 7,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "owner_id",
+            "type": "text",
+            "attnum": 8,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "version",
+            "type": "text",
+            "attnum": 9,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 10,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "now()"
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "storage.s3_multipart_uploads_parts_pkey"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "s3_multipart_uploads_parts_bucket_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (bucket_id) REFERENCES storage.buckets(id)"
+          },
+          {
+            "name": "s3_multipart_uploads_parts_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          },
+          {
+            "name": "s3_multipart_uploads_parts_upload_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (upload_id) REFERENCES storage.s3_multipart_uploads(id) ON DELETE CASCADE"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 10,
+      "oid": 17390,
+      "identity": "storage.buckets_analytics",
+      "projection_md5": "5f0d2f3df0a02475aa0d44906d83ba7e",
+      "reviewed_character_range": "1-1980",
+      "projection_characters": 1980,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Distinct analytics/Iceberg bucket metadata",
+      "catalog_projection": {
+        "acl": "{supabase_storage_admin=arwdDxtm/supabase_storage_admin,service_role=arwdDxtm/supabase_storage_admin,authenticated=arwd/supabase_storage_admin,anon=arwd/supabase_storage_admin}",
+        "oid": "17390",
+        "rls": true,
+        "kind": "r",
+        "name": "buckets_analytics",
+        "owner": "supabase_storage_admin",
+        "pages": 0,
+        "schema": "storage",
+        "columns": [
+          {
+            "name": "name",
+            "type": "text",
+            "attnum": 1,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "type",
+            "type": "storage.buckettype",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "'ANALYTICS'::storage.buckettype"
+          },
+          {
+            "name": "format",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "'ICEBERG'::text"
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 4,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "now()"
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "attnum": 5,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "now()"
+          },
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 6,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "gen_random_uuid()"
+          },
+          {
+            "name": "deleted_at",
+            "type": "timestamp with time zone",
+            "attnum": 7,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "storage.buckets_analytics_pkey",
+          "storage.buckets_analytics_unique_name_idx"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "buckets_analytics_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 11,
+      "oid": 17404,
+      "identity": "storage.buckets_vectors",
+      "projection_md5": "c605b1423bd451df76440b2103d38889",
+      "reviewed_character_range": "1-1553",
+      "projection_characters": 1553,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Separate vector bucket definitions",
+      "catalog_projection": {
+        "acl": "{supabase_storage_admin=arwdDxtm/supabase_storage_admin,service_role=r/supabase_storage_admin,anon=r/supabase_storage_admin,authenticated=r/supabase_storage_admin}",
+        "oid": "17404",
+        "rls": true,
+        "kind": "r",
+        "name": "buckets_vectors",
+        "owner": "supabase_storage_admin",
+        "pages": 0,
+        "schema": "storage",
+        "columns": [
+          {
+            "name": "id",
+            "type": "text",
+            "attnum": 1,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "type",
+            "type": "storage.buckettype",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "'VECTOR'::storage.buckettype"
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 3,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "now()"
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "attnum": 4,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "now()"
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [
+          {
+            "name": "vector_indexes_bucket_id_fkey",
+            "source": "storage.vector_indexes",
+            "definition": "FOREIGN KEY (bucket_id) REFERENCES storage.buckets_vectors(id)"
+          }
+        ],
+        "index_refs": [
+          "storage.buckets_vectors_pkey"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "buckets_vectors_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 12,
+      "oid": 17417,
+      "identity": "storage.vector_indexes",
+      "projection_md5": "ce21e243035e21a0afe6d0c99372f2f8",
+      "reviewed_character_range": "1-2385",
+      "projection_characters": 2385,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Vector index configuration, not native pg_index",
+      "catalog_projection": {
+        "acl": "{supabase_storage_admin=arwdDxtm/supabase_storage_admin,service_role=r/supabase_storage_admin,anon=r/supabase_storage_admin,authenticated=r/supabase_storage_admin}",
+        "oid": "17417",
+        "rls": true,
+        "kind": "r",
+        "name": "vector_indexes",
+        "owner": "supabase_storage_admin",
+        "pages": 0,
+        "schema": "storage",
+        "columns": [
+          {
+            "name": "id",
+            "type": "text",
+            "attnum": 1,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "gen_random_uuid()"
+          },
+          {
+            "name": "name",
+            "type": "text",
+            "attnum": 2,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "bucket_id",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "data_type",
+            "type": "text",
+            "attnum": 4,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "dimension",
+            "type": "integer",
+            "attnum": 5,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "distance_metric",
+            "type": "text",
+            "attnum": 6,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "metadata_configuration",
+            "type": "jsonb",
+            "attnum": 7,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 8,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "now()"
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "attnum": 9,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "now()"
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "storage.vector_indexes_pkey",
+          "storage.vector_indexes_name_bucket_id_idx"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "vector_indexes_bucket_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (bucket_id) REFERENCES storage.buckets_vectors(id)"
+          },
+          {
+            "name": "vector_indexes_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 13,
+      "oid": 20537,
+      "identity": "storage.bucket_lifecycle_states",
+      "projection_md5": "195073affd9a8c7328406831c05e8bdf",
+      "reviewed_character_range": "1-3843",
+      "projection_characters": 3843,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Lifecycle lease/retry/continuation state",
+      "catalog_projection": {
+        "acl": "{supabase_storage_admin=arwdDxtm/supabase_storage_admin,service_role=arwdDxtm/supabase_storage_admin,postgres=r/supabase_storage_admin}",
+        "oid": "20537",
+        "rls": true,
+        "kind": "r",
+        "name": "bucket_lifecycle_states",
+        "owner": "supabase_storage_admin",
+        "pages": 0,
+        "schema": "storage",
+        "columns": [
+          {
+            "name": "bucket_id",
+            "type": "text",
+            "attnum": 1,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "generation",
+            "type": "uuid",
+            "attnum": 2,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "next_run_at",
+            "type": "timestamp with time zone",
+            "attnum": 3,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "claim_id",
+            "type": "uuid",
+            "attnum": 4,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "claim_until",
+            "type": "timestamp with time zone",
+            "attnum": 5,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "continuation",
+            "type": "jsonb",
+            "attnum": 6,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "last_started_at",
+            "type": "timestamp with time zone",
+            "attnum": 7,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "last_completed_at",
+            "type": "timestamp with time zone",
+            "attnum": 8,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "last_success_at",
+            "type": "timestamp with time zone",
+            "attnum": 9,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "last_result",
+            "type": "jsonb",
+            "attnum": 10,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "failure_count",
+            "type": "integer",
+            "attnum": 11,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "0"
+          },
+          {
+            "name": "last_error",
+            "type": "jsonb",
+            "attnum": 12,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "attnum": 13,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "now()"
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "storage.bucket_lifecycle_states_pkey",
+          "storage.bucket_lifecycle_states_due_idx"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "bucket_lifecycle_continuation_object_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (continuation IS NULL OR jsonb_typeof(continuation) = 'object'::text)"
+          },
+          {
+            "name": "bucket_lifecycle_failure_count_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (failure_count >= 0)"
+          },
+          {
+            "name": "bucket_lifecycle_last_result_object_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (last_result IS NULL OR jsonb_typeof(last_result) = 'object'::text)"
+          },
+          {
+            "name": "bucket_lifecycle_recovery_due_check",
+            "type": "c",
+            "validated": true,
+            "definition": "CHECK (next_run_at IS NOT NULL OR NOT jsonb_path_exists(COALESCE(continuation, '{}'::jsonb), '$.\"batch\".\"inFlight\"'::jsonpath))"
+          },
+          {
+            "name": "bucket_lifecycle_states_bucket_id_fkey",
+            "type": "f",
+            "validated": true,
+            "definition": "FOREIGN KEY (bucket_id) REFERENCES storage.buckets(id) ON DELETE CASCADE"
+          },
+          {
+            "name": "bucket_lifecycle_states_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (bucket_id)"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 14,
+      "oid": 20565,
+      "identity": "storage.lifecycle_abandoned_artifacts",
+      "projection_md5": "9b8b175154c01424678992e5ddb8c677",
+      "reviewed_character_range": "1-1575",
+      "projection_characters": 1575,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Abandoned lifecycle artifacts and composite key",
+      "catalog_projection": {
+        "acl": "{supabase_storage_admin=arwdDxtm/supabase_storage_admin,service_role=arwdDxtm/supabase_storage_admin,postgres=r/supabase_storage_admin}",
+        "oid": "20565",
+        "rls": true,
+        "kind": "r",
+        "name": "lifecycle_abandoned_artifacts",
+        "owner": "supabase_storage_admin",
+        "pages": 0,
+        "schema": "storage",
+        "columns": [
+          {
+            "name": "bucket_id",
+            "type": "text",
+            "attnum": 1,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "key",
+            "type": "text",
+            "attnum": 2,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "name",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "version",
+            "type": "text",
+            "attnum": 4,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "attempted_at",
+            "type": "timestamp with time zone",
+            "attnum": 5,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "now()"
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "storage.lifecycle_abandoned_artifacts_pkey",
+          "storage.lifecycle_abandoned_artifacts_attempted_at_idx"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "lifecycle_abandoned_artifacts_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (bucket_id, key)"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 15,
+      "oid": 17606,
+      "identity": "supabase_migrations.schema_migrations",
+      "projection_md5": "2a6a57bb1ddec3a44ef5c5cd766ac70a",
+      "reviewed_character_range": "1-1684",
+      "projection_characters": 1684,
+      "verdict": "KEEP_PLATFORM_ACTIVE_OR_HISTORICAL",
+      "semantic_assessment": "Applied database migration history, not app runtime table",
+      "catalog_projection": {
+        "acl": null,
+        "oid": "17606",
+        "rls": false,
+        "kind": "r",
+        "name": "schema_migrations",
+        "owner": "postgres",
+        "pages": 4,
+        "schema": "supabase_migrations",
+        "columns": [
+          {
+            "name": "version",
+            "type": "text",
+            "attnum": 1,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "statements",
+            "type": "text[]",
+            "attnum": 2,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "name",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_by",
+            "type": "text",
+            "attnum": 4,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "idempotency_key",
+            "type": "text",
+            "attnum": 5,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "rollback",
+            "type": "text[]",
+            "attnum": 6,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "supabase_migrations.schema_migrations_pkey",
+          "supabase_migrations.schema_migrations_idempotency_key_key"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "schema_migrations_idempotency_key_key",
+            "type": "u",
+            "validated": true,
+            "definition": "UNIQUE (idempotency_key)"
+          },
+          {
+            "name": "schema_migrations_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (version)"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": 51,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 16,
+      "oid": 16612,
+      "identity": "vault.secrets",
+      "projection_md5": "001252d509d793197ae77e7488dd44b4",
+      "reviewed_character_range": "1-1990",
+      "projection_characters": 1990,
+      "verdict": "KEEP_RESTRICTED_PLATFORM",
+      "semantic_assessment": "Encrypted Vault source definition only; no secret values read",
+      "catalog_projection": {
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,postgres=r*d*D*x*/supabase_admin,service_role=rd/supabase_admin}",
+        "oid": "16612",
+        "rls": false,
+        "kind": "r",
+        "name": "secrets",
+        "owner": "supabase_admin",
+        "pages": 0,
+        "schema": "vault",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "gen_random_uuid()"
+          },
+          {
+            "name": "name",
+            "type": "text",
+            "attnum": 2,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "description",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "''::text"
+          },
+          {
+            "name": "secret",
+            "type": "text",
+            "attnum": 4,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "key_id",
+            "type": "uuid",
+            "attnum": 5,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "nonce",
+            "type": "bytea",
+            "attnum": 6,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": "vault._crypto_aead_det_noncegen()"
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 7,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "CURRENT_TIMESTAMP"
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "attnum": 8,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": false,
+            "generated": "",
+            "default_expr": "CURRENT_TIMESTAMP"
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [
+          "vault.secrets_pkey",
+          "vault.secrets_name_idx"
+        ],
+        "reloptions": null,
+        "constraints": [
+          {
+            "name": "secrets_pkey",
+            "type": "p",
+            "validated": true,
+            "definition": "PRIMARY KEY (id)"
+          }
+        ],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": null
+      }
+    },
+    {
+      "rank": 17,
+      "oid": 16625,
+      "identity": "vault.decrypted_secrets",
+      "projection_md5": "4caccb8a9624912bfa4dc8edafd2ffb3",
+      "reviewed_character_range": "1-2333",
+      "projection_characters": 2333,
+      "verdict": "KEEP_RESTRICTED_PLATFORM",
+      "semantic_assessment": "Full decryption view SQL read without running SELECT or reading secrets",
+      "catalog_projection": {
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,postgres=r*d*D*x*/supabase_admin,service_role=rd/supabase_admin}",
+        "oid": "16625",
+        "rls": false,
+        "kind": "v",
+        "name": "decrypted_secrets",
+        "owner": "supabase_admin",
+        "pages": 0,
+        "schema": "vault",
+        "columns": [
+          {
+            "name": "id",
+            "type": "uuid",
+            "attnum": 1,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "name",
+            "type": "text",
+            "attnum": 2,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "description",
+            "type": "text",
+            "attnum": 3,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "secret",
+            "type": "text",
+            "attnum": 4,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "decrypted_secret",
+            "type": "text",
+            "attnum": 5,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "key_id",
+            "type": "uuid",
+            "attnum": 6,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "nonce",
+            "type": "bytea",
+            "attnum": 7,
+            "comment": null,
+            "storage": "x",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "attnum": 8,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          },
+          {
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "attnum": 9,
+            "comment": null,
+            "storage": "p",
+            "identity": "",
+            "nullable": true,
+            "generated": "",
+            "default_expr": null
+          }
+        ],
+        "policies": [],
+        "sequence": null,
+        "triggers": [],
+        "force_rls": false,
+        "partition": false,
+        "inbound_fk": [],
+        "index_refs": [],
+        "reloptions": null,
+        "constraints": [],
+        "persistence": "p",
+        "estimated_rows": -1,
+        "view_definition": " SELECT id,\n    name,\n    description,\n    secret,\n    convert_from(vault._crypto_aead_det_decrypt(message => decode(secret, 'base64'::text), additional => convert_to(id::text, 'utf8'::name), key_id => 0::bigint, context => '\\x7067736f6469756d'::bytea, nonce => nonce), 'utf8'::name) AS decrypted_secret,\n    key_id,\n    nonce,\n    created_at,\n    updated_at\n   FROM vault.secrets s;"
+      }
+    }
+  ]
+}
