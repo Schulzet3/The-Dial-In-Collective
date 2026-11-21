@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "V13BJ",
+  "append_only": true,
+  "previous_batch_index": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-INDEX-V13BI-20261121.json",
+  "development_prewrite_sha": "fbe9ce2642bd4dba0c410dd569b70308a16291f2",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "review_method": "AI_DIRECT_PER_PHYSICAL_LINE_LITERAL_SEMANTIC_NOT_HUMAN",
+  "tracks": [
+    {
+      "track": "frozen_historical_v2",
+      "manifest_index": 220,
+      "path": "docs/audits/application_pass2_tests.json",
+      "source_blob_sha": "beadec4119aa655da3ff6333a80f93bc867b7eb4",
+      "first_line": 467,
+      "last_line": 496,
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F220-467-496-20261121-V13BJ.json"
+    },
+    {
+      "track": "pinned_executable_v2",
+      "manifest_index": 69,
+      "path": "scripts/audit/security-inventory.mjs",
+      "source_blob_sha": "7ce0c8bd0540deb50034f9f8c4a950312324e50c",
+      "first_line": 3,
+      "last_line": 27,
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C69-3-27-20261121-V13BJ.json"
+    },
+    {
+      "track": "pinned_executable_v2",
+      "manifest_index": 70,
+      "path": "scripts/audit/site-integrity.mjs",
+      "source_blob_sha": "da27e07d71cf34e5fcf790cf8a6f32dd16032436",
+      "first_line": 1,
+      "last_line": 5,
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C70-1-5-20261121-V13BJ.json"
+    }
+  ],
+  "source_line_counts": {
+    "frozen_new": 30,
+    "pinned_new": 30,
+    "prior_revalidated": 60,
+    "total_new": 60,
+    "overlap": 0
+  },
+  "original_blob_parity": "PASS_3_SOURCE_FILES_MATCHED_INDEPENDENT_GIT_BLOBS",
+  "archived_json_parse": "PASS",
+  "pinned_live_parity": "C69_LIVE_DIFFERENT_C70_LIVE_DIFFERENT",
+  "findings": [
+    {
+      "severity": "INVENTORY",
+      "source": "scripts/audit/security-inventory.mjs",
+      "pinned_blob": "7ce0c8bd0540deb50034f9f8c4a950312324e50c",
+      "live_blob": "b260d40f1b6d5b47d3f5f4f8f3afa8262b3ce412",
+      "disposition": "LIVE_DELTA_NOT_REVIEWED_NOT_CREDITED"
+    },
+    {
+      "severity": "INVENTORY",
+      "source": "scripts/audit/site-integrity.mjs",
+      "pinned_blob": "da27e07d71cf34e5fcf790cf8a6f32dd16032436",
+      "live_blob": "ab52d84a6e75acdda9aee0fc508915e29d720334",
+      "disposition": "LIVE_DELTA_NOT_REVIEWED_NOT_CREDITED"
+    }
+  ],
+  "tests": {
+    "new_literal": "PASS_60",
+    "prior_literal": "PASS_60",
+    "complete_blob_parity": "PASS_3",
+    "archived_json_parse": "PASS",
+    "pr_head_ci": "PENDING",
+    "merged_push_ci": "PENDING",
+    "runtime": "NOT_RUN_DOCS_ONLY"
+  },
+  "provider_readback": "NOT_APPLICABLE",
+  "new_application_fixes": 0,
+  "original603_unchanged": true,
+  "provisional_r2_c2_preserved": "5451_6462_NO_BLIND_CREDIT",
+  "older_s2_preserved": "7635_9318_NO_BLIND_CREDIT",
+  "post_pin_drift": "INCOMPLETE",
+  "nontext_assets": "INCOMPLETE",
+  "full_audit_complete": false,
+  "next_source": {
+    "frozen": {
+      "manifest_index": 220,
+      "path": "docs/audits/application_pass2_tests.json",
+      "line": 497
+    },
+    "pinned": {
+      "manifest_index": 70,
+      "path": "scripts/audit/site-integrity.mjs",
+      "line": 6
+    }
+  }
+}
