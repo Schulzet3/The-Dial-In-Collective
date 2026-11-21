@@ -1,0 +1,60 @@
+# Bounded #33 original603 #241 first-party runner diagnosis ONLY; no acceptance, publish or secrets.
+name: DIC 33 R393 Novo transport diagnosis
+on:
+  pull_request:
+    branches:
+      - development/backend-foundation
+    paths:
+      - 'scripts/audit/issue33-r393-novo-transport.mjs'
+      - '.github/workflows/issue33-r393-novo-transport.yml'
+  push:
+    branches:
+      - development/backend-foundation
+    paths:
+      - 'scripts/audit/issue33-r393-novo-transport.mjs'
+      - '.github/workflows/issue33-r393-novo-transport.yml'
+permissions:
+  contents: read
+jobs:
+  bounded-original241:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Validate diagnostic syntax
+        run: node --check scripts/audit/issue33-r393-novo-transport.mjs
+      - name: Guarded canonical, first-party challenge and Store API diagnosis
+        run: node scripts/audit/issue33-r393-novo-transport.mjs
+        env:
+          DIC_ISSUE33_R393_DIR: /tmp/dic33-r393
+      # Strict current selected product acceptance is an independent HARD gate;
+      # the transport diagnostic's 200 / JSON does not satisfy it.
+      - name: Exact original603 #241 selected official HTML parser and unsaved UI
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '241'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r393-strict
+      - name: Strict selected Buesaco conflicting-sensory afterproof
+        run: node scripts/audit/issue33-r171-241-check.mjs
+        env:
+          DIC_ISSUE33_R171_VERIFY: '1'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r393-strict
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: dic33-r393-novo-strict
+          path: /tmp/dic33-r393-strict/
+          if-no-files-found: warn
+          retention-days: 1
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: dic33-r393-novo-transport
+          path: /tmp/dic33-r393/
+          if-no-files-found: warn
+          retention-days: 1
