@@ -1,3 +1,15 @@
+# Issue #509 R409 — complete exposed PostgreSQL pg_type array declarations 1–120/469 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=0d103269a6b176ecbb93bb7e85b10da20f218a38 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-21 UTC.** Live immutable GitHub development PREFLIGHT.md and Git blob content verified before task sources. Provider `azviqqejypsefzilgonr` independently ACTIVE_HEALTHY on PostgreSQL 17.11.0.003; **all production access read-only**. Branch source preflight `0d103269a6b176ecbb93bb7e85b10da20f218a38`, blob `3742fed0176c809b115320c698a0e8b1675b2d3e`.
+
+**New substantive catalog assessment:** `pg_catalog.pg_type` ranks **1–120/469**, `80861` complete provider-exposed canonical catalog tuple characters, one provider MD5, full literal, character range 1–end, typed element, reciprocal array OID, native array I/O/typmod/subscript handlers, non-system direct column consumer count and per-type semantic/disposition in [append-only R409 ledger](../audits/issue509-r409-pg-catalog-types-ranks1-120-20261121.json). **120/120** are built-in typed arrays; every element-array reciprocal and native handler is consistent. **0** observed non-system direct column consumers, which is NOT proof of absence of dynamic or provider callers. Checked `_box` semicolon delimiter, `_bit/_bpchar/_numeric/_interval` element typmods, `_bpchar/_name` collations, distinct JSON/JSONB/JSONPath and range/multirange types, and system catalog row arrays. No reproducible DIC bug, broken catalog reference, or justified deletion in this slice. Original `CREATE TYPE` SQL and native C implementation remain **UNVERIFIED**; no issue #267 source-line credit.
+
+**Change/evidence:** atomic Git tree for append-only R409 ledger and this scoped journal only. Application code, SQL migrations, tests, CI and release queue **unchanged**; new source-bound CI **NOT_APPLICABLE**, READY/DEPLOYED state **NOT_REVALIDATED**. No production provider, billing, branch, backup, or publication changes. Full provider baseline **IN_PROGRESS**. **Next unreviewed catalog cursor:** `pg_catalog.pg_type` rank **121/469**, `_pg_stat_all_tables` OID `12143`, character 1. Continue provider-owned semantics and cross-source drift when observed. Hourly cadence and owner-action-only alert policy preserved.
+
+---
+
 # Issue #509 R408 — complete exposed PostgreSQL core cast catalogue 229/229 and roaster usage crosscheck [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=5601ec1e529173ee4dbb4d7ae5ef80db7eea48cd preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
