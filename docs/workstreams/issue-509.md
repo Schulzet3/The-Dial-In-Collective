@@ -1,3 +1,13 @@
+# Issue #509 R426 — complete information_schema views 39–69/69 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=9f8d1da3599b37c335963632f543bf700eb1bd69 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+2026-11-21 UTC. Independently verified current immutable GitHub preflight before any topic/provider read. Live project azviqqejypsefzilgonr, PostgreSQL 17.11, strictly read-only. Resumed precisely at `information_schema.table_privileges` OID 13473 rank 39, semantically read complete exposed SQL for **31/31 newly unreviewed views** through `user_mappings` OID 13611 rank 69 (**41,932 SQL characters**, every source char 1–end); SQL/MD5, role/ACL, full column metadata, constraints/index counts, source ranges, per-object consumer intent and verdict in append-only [R426 ledger](../audits/issue509-r426-information-schema-relations-ranks39-69-20261121.json). **Cumulative `information_schema.pg_class` route complete 69/69** when combined with earlier R425b 38/69, not entire Supabase baseline.
+
+Semantic checks: grant projections preserve owner/grantee/enabled-role visibility; `views` exposes definitions only to eligible owner role; trigger, rewrite dependency and DTD views are distinct SQL-standard introspection; `user_mapping_options` redacts options from unrelated/nonprivileged roles. Independent aggregate-only cross-check found **0 registered FDWs, servers, foreign tables, mappings and transforms**; core views remain necessary PostgreSQL metadata surface and not DIC source redundancy. No reproducible DIC application defect, justified deletion or measured performance fix in this segment; compiled implementations and original PostgreSQL bootstrap remain **UNVERIFIED**. Zero #267 code-line credit.
+
+No application code/test/CI edits (new exact-source CI **NOT_APPLICABLE**, not PASS), provider writes, migrations, Auth/Storage/Edge/config, backup, billing, release, publish or schedule changes. Existing source fixes and queue status **NOT_REVALIDATED**, no READY/DEPLOYED claim. Full baseline **IN_PROGRESS**. **Exact next cursor:** `pg_catalog.pg_class` rank 1/142, OID 826, first character, with fresh ranked-OID verification before advancing. Owner-action notification not warranted.
+
 # Issue #509 R425/R425b — extension statistics and information_schema views [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=f1667e176c7ac9becf6cd5d4553daab76295a744 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
