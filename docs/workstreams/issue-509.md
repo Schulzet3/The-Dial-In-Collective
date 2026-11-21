@@ -1,3 +1,17 @@
+# Issue #509 R403 — direct PostgreSQL core operator definitions 421–540/799 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=e2b4fdb0f8809fe0a4ff92f4a0f130c43a77f677 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+2026-11-21 UTC. Immutable-first development/PREFLIGHT Git blob verified. Supabase azviqqejypsefzilgonr ACTIVE_HEALTHY PostgreSQL 17.11; production strictly READ-ONLY.
+
+**New semantic review:** 120/120 complete exposed pg_catalog.pg_operator canonical catalog literals, ranks **421–540/799**, **98569/98569 source characters**, per-object OID, full literal, provider MD5, 1–end source range, typed semantic review and verdict in [R403 append-only ledger](../audits/issue509-r403-pg-catalog-operators-ranks421-540-20261121.json). Groups: <> 43, <@ 20, <^ 2, = 55; all 120 internal native ABI declarations, compiled implementation and original CREATE OPERATOR source UNVERIFIED; 0 #267 code-line credit.
+
+**Consumer/semantic checks:** 112 reciprocal commutator links, 93 reciprocal negator links and 213 pg_amop operator-class memberships, zero broken links. Circle/box equality and circle inequality are by area; point <@ on open path differs from closed geometry; core point <^ is deprecated but not removable DIC code; SQL typed temporal comparisons and array/JSONB/range containment are not redundant. Runtime/dynamic callers unproven absent. No reproducible new application bug, justified deletion or proven app-query bottleneck.
+
+Docs-only same-commit checkpoint; new source/test/CI NOT_APPLICABLE; queue and published status NOT_REVALIDATED. No Supabase production SQL/data/Auth/Storage/Edge/config, migration, publication, backup, billing or schedule writes. Baseline IN_PROGRESS. **Next exact cursor:** rank 541/799, =(pg_lsn,pg_lsn) OID 3222, character 1. Hourly and owner-action-only alert policy preserved.
+
+---
+
 # Issue #509 R402 — new direct PostgreSQL core operator definitions 221–420/799 [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=2f4677a9629cbeda569218e38a7931b2b36e4b32 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
