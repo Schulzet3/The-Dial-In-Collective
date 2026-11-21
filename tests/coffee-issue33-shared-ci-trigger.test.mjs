@@ -26,7 +26,8 @@ test('dependency-aware trigger checks exact source and never triggers live HTTP 
   assert.match(yaml,/persist-credentials: false/);
   assert.match(yaml,/node-version: '22'/);
   assert.doesNotMatch(yaml,/^\s*run:.*issue33-original603-focused-source-review/m);
-  assert.doesNotMatch(yaml,/workflow_dispatch:|schedule:|netlify|secrets\./i);
+  // A Netlify SOURCE PATH is allowed; actual Netlify deploy/build commands remain forbidden.
+  assert.doesNotMatch(yaml,/workflow_dispatch:|schedule:|\bnetlify\s+(?:deploy|build)|secrets\./i);
 });
 
 test('actual Add Coffee UI import chain remains covered by narrow shared dependency triggers',()=>{
