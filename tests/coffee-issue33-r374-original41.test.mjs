@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../site/cloud/coffee-url-autofill.js';
 import {selectedShopifyPageFlyH3Identity} from '../scripts/audit/issue33-shopify-pagefly-h3.mjs';
+import {selected41,selected41DirectBody} from '../scripts/audit/issue33-r374-original41-check.mjs';
 import {requiredFocusedSourceFailures} from '../scripts/audit/issue33-focused-source-acceptance.mjs';
 const url='https://brickhouseroasters.com/products/descafeinado';
 const name='Descafeinado';
@@ -91,4 +92,21 @@ test('PageFly H3 current selected exact product own paragraph feeds method witho
  assert.equal(missing.fields.decaffeination_method,undefined,'related sibling own cane method must not transfer');
  const wrongPage=extractPublicCoffeeFacts(page(cane),{source_url:'https://coffee.example/products/other'});
  assert.equal(wrongPage.fields.decaffeination_method,undefined,'unmatched source URL must not claim current method');
+});
+
+test('N508-119 exact diagnostic scrub excludes nonproduct header/navigation and keeps selected description',()=>{
+ const injected='We’ve stripped this bean of its caffeine content through a natural sugar cane process';
+ for(const tag of ['header','nav','footer','aside','script','style','noscript']){
+  const contaminated='<'+tag+' class="wrapper"><p>'+injected+'</p></'+tag+'><p>Selected description unavailable.</p>';
+  const onlySelected=selected41DirectBody(contaminated);
+  assert.doesNotMatch(onlySelected,/stripped this bean/i,tag+' unrelated field must be removed as one element');
+  assert.match(onlySelected,/Selected description unavailable/i,'selected body retained');
+ }
+ assert.match(selected41DirectBody('<article><p>'+injected+'</p></article>'),/stripped this bean/i,
+  'current own product paragraph must remain eligible');
+ const current=selected41(html(),name);
+ assert.equal(current.identity,true);
+ assert.equal(current.currentCaneRemoval,true,'real selected own method must be retained');
+ const leaked=selected41(html(name,'Dark Colombian coffee, method unpublished.','<header>'+injected+'</header>'),name);
+ assert.equal(leaked.currentCaneRemoval,false,'unrelated header cannot be taken as current own treatment');
 });
