@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "V13BG",
+  "append_only": true,
+  "previous_batch_index": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-INDEX-V13BF-20261121.json",
+  "development_prewrite_sha": "6ac058002441597759c806655df5fa8eefd5a640",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "review_method": "DIRECT_AI_PER_LINE_IMMUTABLE_LITERAL_SEMANTICS_NOT_HUMAN",
+  "tracks": [
+    {
+      "track": "frozen_historical_v2",
+      "manifest_index": 220,
+      "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+      "tree_sha": "c54ade64eca30946df8858297578a172f5cf6fa8",
+      "path": "docs/audits/application_pass2_tests.json",
+      "source_blob_sha": "beadec4119aa655da3ff6333a80f93bc867b7eb4",
+      "range": "377-406",
+      "lines": 30,
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F220-377-406-20261121-V13BG.json"
+    },
+    {
+      "track": "pinned_executable_v2",
+      "manifest_index": 67,
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "path": "scripts/audit/provider-security-probes.py",
+      "source_blob_sha": "0f7c09be4f017fa7bed78d4d57fd3a24cf93a022",
+      "range": "74-102",
+      "lines": 29,
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C67-74-102-20261121-V13BG.json"
+    },
+    {
+      "track": "pinned_executable_v2",
+      "manifest_index": 68,
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "path": "scripts/audit/public-product-endpoint-probe.mjs",
+      "source_blob_sha": "68b72e56ab6d2429011ae180477abfe25a8c0a87",
+      "range": "1-1",
+      "lines": 1,
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C68-1-1-20261121-V13BG.json"
+    }
+  ],
+  "source_line_counts": {
+    "frozen_new": 30,
+    "pinned_new": 30,
+    "prior_revalidated": 60,
+    "total_new": 60,
+    "overlap": 0
+  },
+  "original_blob_parity": "F220_C67_C68_GIT_FILE_SHA_AND_FULL_SOURCE_VERIFIED",
+  "archived_json_parse": "PASS",
+  "pinned_live_parity": "C67_C68_EXACT_MATCH_AT_PREWRITE_DEV",
+  "findings": [
+    {
+      "id": "V13BG-01",
+      "severity": "LOW_UNREPRODUCED",
+      "scope": "scripts/audit/provider-security-probes.py",
+      "lines": "77-78",
+      "disposition": "Triage gateway ordering only; conflicting invalid token means negative status may not isolate CORS/content-type checks; #96 overlap."
+    },
+    {
+      "id": "V13BG-02",
+      "severity": "LOW_UNREPRODUCED",
+      "scope": "scripts/audit/provider-security-probes.py",
+      "lines": "89-92",
+      "disposition": "Legacy 410 tombstone and auth gateway status precedence must be independently tested; no current provider defect asserted."
+    }
+  ],
+  "tests": {
+    "immutable_line_literals": "PASS_60_NEW_60_PREVIOUS",
+    "git_sha": "PASS_3_ORIGINAL_FILES",
+    "archived_json_parse": "PASS",
+    "pr_head_actions": "PENDING_BEFORE_PR",
+    "merged_push_actions": "PENDING_BEFORE_MERGE",
+    "node22_lint_build_original603_browser_mobile_offline_sql_auth_rls_performance": "NOT_RUN_DOCS_ONLY"
+  },
+  "provider_readback": "NOT_APPLICABLE",
+  "new_application_fixes": 0,
+  "original603_unchanged": true,
+  "v1_preserved": true,
+  "provisional_r2_c2_preserved": "5451_6462_NO_BLIND_CREDIT",
+  "older_s2_historical_totals_unchanged": "7635_9318_NO_BLIND_CREDIT",
+  "post_pin_drift": "INCOMPLETE",
+  "nontext_assets": "INCOMPLETE",
+  "full_audit_complete": false,
+  "next_source": {
+    "frozen_manifest_index": 220,
+    "frozen_path": "docs/audits/application_pass2_tests.json",
+    "frozen_line": 407,
+    "pinned_manifest_index": 68,
+    "pinned_path": "scripts/audit/public-product-endpoint-probe.mjs",
+    "pinned_line": 2
+  }
+}
