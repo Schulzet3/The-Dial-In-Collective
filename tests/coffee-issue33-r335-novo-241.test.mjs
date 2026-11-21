@@ -6,6 +6,15 @@ import {isCoffeeSourceAccessChallenge} from '../src/server/coffee-url-guard.mjs'
 const selected={fetched:true,source_url:canonical,html_bytes:1040,html_sha256:'a'.repeat(64),h1:['Buesaco'],
  parsed:{name:'Buesaco',process:'Washed'},parser_ok:true,add_coffee_ui:true,
  source_review_ui:true,conflicts_count:0,conflicts:[]};
+const sensoryEvidence={
+ selected_notes_source_facts:[
+  {label:'TASTING NOTES',value:'Cherry, Tangerine, Nougat',section:'Description / Harvest Details',conflicting:true},
+  {label:'Current selected directly corroborated prose flavor conflict',value:'Tangerine, Maple, Hazelnut',
+   section:'Exact selected H1 and own-product paragraphs',conflicting:true}],
+ conflict_options:{tasting_notes:[
+  {value:'Cherry, Tangerine, Nougat',label:'TASTING NOTES'},
+  {value:'Tangerine, Maple, Hazelnut',label:'Selected current hero and named narrative'}]}
+};
 test('R335 only exact official original/canonical routes are selected',()=>{
  assert.equal(exactNovo241Url(original),true);assert.equal(exactNovo241Url(canonical),true);
  for(const url of [storeApi,'https://another-coffee.com/product/buesaco/','https://novocoffee.com/product/other/','https://novocoffee.com/product/buesaco/?x=1','http://novocoffee.com/product/buesaco/'])
@@ -38,11 +47,36 @@ test('R335 source with unrelated footer H1 or contradictory selected H1 cannot p
 });
 
 test('R335 selected hero versus harvest notes remain BLANK and reviewable, not a field PASS',()=>{
- const selectedConflict={...selected,conflicts:['tasting_notes'],conflicts_count:1,
+ const selectedConflict={...selected,...sensoryEvidence,conflicts:['tasting_notes'],conflicts_count:1,
   parsed:{name:'Buesaco',origin:'Buesaco, Colombia',process:'Washed',tasting_notes:undefined}};
  const report=evaluateSelected241(selectedConflict);
  assert.equal(report.accepted,true);assert.equal(report.classification,'EXACT_SELECTED_SOURCE_TASTING_CONFLICT_REVIEW');
  assert.equal(report.manual_semantic_certified,false);
  assert.equal(evaluateSelected241({...selectedConflict,parsed:{...selectedConflict.parsed,tasting_notes:'Cherry, Tangerine, Nougat'}}).accepted,false);
  assert.equal(evaluateSelected241({...selectedConflict,conflicts:['tasting_notes','producer']}).accepted,false);
+});
+
+test('R370 missing, duplicate or unsupported selected sensory provenance never false-certifies a conflict flag',()=>{
+ const base={...selected,...sensoryEvidence,conflicts:['tasting_notes'],conflicts_count:1,
+  parsed:{name:'Buesaco',process:'Washed'}};
+ assert.equal(evaluateSelected241(base).accepted,true);
+ for(const negative of [
+  {selected_notes_source_facts:undefined},
+  {selected_notes_source_facts:[sensoryEvidence.selected_notes_source_facts[0]]},
+  {selected_notes_source_facts:[sensoryEvidence.selected_notes_source_facts[0],sensoryEvidence.selected_notes_source_facts[0]]},
+  {selected_notes_source_facts:[sensoryEvidence.selected_notes_source_facts[0],
+    {...sensoryEvidence.selected_notes_source_facts[1],conflicting:false}]},
+  {selected_notes_source_facts:[sensoryEvidence.selected_notes_source_facts[0],
+    {...sensoryEvidence.selected_notes_source_facts[1],section:''}]},
+  {conflict_options:{tasting_notes:[sensoryEvidence.conflict_options.tasting_notes[0]]}},
+  {conflict_options:{}}
+ ])assert.equal(evaluateSelected241({...base,...negative}).accepted,false,JSON.stringify(negative));
+});
+test('R370 two current competing selected lists cannot silently PASS with omitted conflict or canonical taste',()=>{
+ const base={...selected,...sensoryEvidence,conflicts:['tasting_notes'],conflicts_count:1,
+  parsed:{name:'Buesaco',process:'Washed'}};
+ for(const bad of [{conflicts:[],conflicts_count:0},
+  {parsed:{...base.parsed,tasting_notes:'Cherry, Tangerine, Nougat'}},
+  {conflicts:['origin'],conflicts_count:1}])
+  assert.equal(evaluateSelected241({...base,...bad}).accepted,false,JSON.stringify(bad));
 });
