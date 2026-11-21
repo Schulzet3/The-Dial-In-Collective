@@ -53,7 +53,7 @@ test('N508-075 latest selected source tests have both PR/push triggers and stay 
 
 test('N508-075 R367 recent selected original603 adversarial cases run offline on shared-source changes',()=>{
   const recent=['r357-original490','r358-original501','r359-original508','r360-original509',
-    'r361-original15','r362-original22','r364-original30','r365-original37','r366-original38'];
+    'r361-original15','r362-original22','r364-original30','r365-original37','r366-original38','r368-original39'];
   for(const id of recent){
     const file='tests/coffee-issue33-'+id+'.test.mjs';
     assert.equal(yaml.split("- '"+file+"'").length-1,2,file+' must trigger on PR and push');
