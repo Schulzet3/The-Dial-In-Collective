@@ -1,3 +1,15 @@
+# Issue #509 R416 — full private/public application index declarations (106/106) [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=38c275c437302c25977b3203758dcf8f1237b70c preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-21 UTC.** Immutable GitHub preflight verified against the Git blob before any project/provider read. Live Supabase `azviqqejypsefzilgonr` ACTIVE_HEALTHY PostgreSQL 17.11.0.003; **PRODUCTION READ-ONLY**. Reviewed the full exposed `CREATE INDEX` definition text and metadata for **106 distinct application indexes** (**35 private + 71 public**; **52 primary**, **72 unique**, **5 partial**, **0 invalid/not ready**; 11211 definition characters). Per-OID full text, MD5, precise character coverage, predicate, tenant/consumer semantics, FK dependencies, dated scan telemetry and KEEP verdict: [R416 append-only ledger](../audits/issue509-r416-public-private-indexes-20261121.json). Stats reset `2026-10-02 18:01:15.201525+00`; scans and row estimates are not safe-removal evidence.
+
+**Semantic findings:** No exact duplicate physical index definitions/keys in these app schemas. Composite owner-scoped unique indexes support real multi-column FKs (e.g. shot notes, favorite shot, setup/basket and recipe relations), so overlapping key prefixes are not redundancy proof. Nonzero historical scans support continued access paths; zero scans do NOT establish an object is dead. Archived roaster provenance retains historic indexes/foreign-key evidence, not a live approved-roaster directory entitlement. Initial diagnostic join to all `pg_constraint` rows multiplied 106 distinct index OIDs to 160 rows because referencing FKs share their target index; corrected to correlated FK aggregates before any coverage credit or ledger write. No reproducible app bug, justified deletion or source fix derived from these definitions. Exact migration/source drift and complete dynamic consumer proof remain **UNVERIFIED**, native compiled implementations unavailable. Other schemas' **391 index definitions** not credited by this receipt.
+
+**Changes:** docs-only append-only ledger + same-commit scoped journal, `[skip netlify]`; no app source, migrations, tests, CI, Netlify, billing, backup, release or production changes. New exact-source CI **NOT_APPLICABLE**, READY/DEPLOYED **NOT_REVALIDATED**, full baseline **IN_PROGRESS**. **Next unreviewed index cursor:** `pg_catalog.pg_index`, auth schema, rank 1 by index relation OID, after checking prior scoped receipts. No owner decision needed.
+
+---
+
 # Issue #509 R415 — PostgreSQL access methods, languages, ranges, event triggers, rewrite rules and constraints [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=85a7711984d395ec3e5bd97f8500862247354d90 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
