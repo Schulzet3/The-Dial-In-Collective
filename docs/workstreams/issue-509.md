@@ -1,3 +1,13 @@
+# Issue #509 R412a — resolved unicode collation false-positive [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=7e4ff817ce9965019410e2686e34f493d943e3c8 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-21 UTC.** Corrected the R412 generic ICU name-pattern check without altering the literal 861-object ledger. Provider `pg_catalog.unicode` OID 963 is the PostgreSQL 17 SQL-standard **Unicode collation** with `colllocale='und'`, not a malformed ICU locale. PostgreSQL 17 [standard collation documentation](https://www.postgresql.org/docs/17/collation.html) explicitly states `unicode` has the same behavior as `und-x-icu`. Read-only provider comparison found both version/actual `153.121`, both deterministic; the default database version also matches. R412's **single automatic flag is a documented native alias, not a defect**; **0 actionable catalog anomalies** remain after classification. The two collations retain separate PostgreSQL object identities; neither deletion nor source repair is justified.
+
+Append-only correction receipt: [docs/audits/issue509-r412a-pg-collation-unicode-alias-resolution-20261121.json](../audits/issue509-r412a-pg-collation-unicode-alias-resolution-20261121.json). Full provider baseline **IN_PROGRESS** and native binary/CREATE COLLATION text **UNVERIFIED**. Next unreviewed `pg_catalog.pg_conversion` 1/128; no code/test/CI changes, production writes, release/backup/billing/schedule action, or READY/DEPLOYED revalidation. Existing owner-action-only alerts unchanged.
+
+---
+
 # Issue #509 R412 — complete exposed PostgreSQL collation catalogue 861/861 [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=7e4ff817ce9965019410e2686e34f493d943e3c8 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
