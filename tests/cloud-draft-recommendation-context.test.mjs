@@ -191,3 +191,49 @@ test('Log Shot politely announces copied controls, not as errors, preserving all
  assert.equal(app.draft.recommendationContext,null);
  assert.deepEqual(app.draft.tasteScales,originalTastes);
 });
+
+test('Log Shot does not copy or attribute a missing temperature as a recommendation',async()=>{
+ const raw=rawFixture();
+ raw.workspaceCoffees[0].selected_style='Turbo';
+ Object.assign(raw.setupPreferences[0],{track_temperature:true,track_slow_feed:true,temperature_unit:'C'});
+ raw.shots=[rawShot({id:'missing-temp-feedback',style:'Turbo',feed_mode:'standard',temperature_c:null,
+  is_dialed_in:false,personal_family_id:null,extraction:3,body:3,clarity:4,sweetness:5,astringency:1})];
+ const app=new CloudApp({},{});
+ app.identity={id:OWNER};app.status={admitted:true};app.raw=raw;app.state=hydrate(raw);
+ app.error=error=>{throw error;};
+ const rec=E.recommendation(app.state,'coffee',{style:'Turbo',feedMode:'standard'});
+ assert.equal(rec.tempC,null,'the actual recent rated shot has no measured temperature');
+ let markup='';
+ app.show=(_title,html)=>{markup=html;};
+ app.showLog('coffee');
+ const tempButton=markup.match(/<button\b[^>]*data-action="use-temp"[^>]*>/)?.[0];
+ assert.ok(tempButton,'temperature action is rendered when tracking is enabled');
+ assert.match(tempButton,/\bdisabled\b/,'unavailable recommendation cannot be copied from Log Shot');
+ bindForm(app.draft);
+ const ratings=structuredClone(app.draft.tasteScales);
+ await click(app,'use-temp'); // defensive guard also rejects direct activation
+ assert.match(copiedStatus.textContent,/No temperature recommendation is available/);
+ assert.equal(form.elements.temperature.value,'');
+ assert.equal(app.draft.recommendationContext,null,'no fictional accepted temperature action');
+ assert.deepEqual(app.draft.tasteScales,ratings,'all five ratings remain unchanged');
+});
+test('Log Shot keeps valid starting-temperature copy enabled',async()=>{
+ const raw=rawFixture();
+ raw.workspaceCoffees[0].selected_style='Turbo';
+ Object.assign(raw.setupPreferences[0],{track_temperature:true,temperature_unit:'C'});
+ const app=new CloudApp({},{});
+ app.identity={id:OWNER};app.status={admitted:true};app.raw=raw;app.state=hydrate(raw);
+ app.error=error=>{throw error;};
+ const rec=E.recommendation(app.state,'coffee',{style:'Turbo'});
+ assert.ok(Number.isFinite(rec.tempC));
+ let markup='';
+ app.show=(_title,html)=>{markup=html;};
+ app.showLog('coffee');
+ const tempButton=markup.match(/<button\b[^>]*data-action="use-temp"[^>]*>/)?.[0];
+ assert.ok(tempButton);
+ assert.doesNotMatch(tempButton,/\bdisabled\b/,'valid starting temperature remains available');
+ bindForm(app.draft);
+ await click(app,'use-temp');
+ assert.equal(Number(form.elements.temperature.value),rec.tempC);
+ assert.deepEqual(app.draft.recommendationContext.used_controls,['temperature']);
+});
