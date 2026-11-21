@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "V13BB",
+  "append_only": true,
+  "development_prewrite_sha": "1fc454ef51e32b237160571ad34ad94f68a2b059",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "review_method": "DIRECT_AI_PER_LINE_IMMUTABLE_LITERAL_AND_SEMANTICS_NOT_HUMAN",
+  "tracks": [
+    {
+      "track": "frozen_historical",
+      "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+      "source_tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+      "manifest_index_1_based": 220,
+      "path": "docs/audits/application_pass2_tests.json",
+      "blob_sha": "beadec4119aa655da3ff6333a80f93bc867b7eb4",
+      "first_line": 227,
+      "last_line": 256,
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F220-227-256-20261121-V13BB.json"
+    },
+    {
+      "track": "pinned_executable",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "manifest_index_1_based": 65,
+      "path": "scripts/audit/issue33-recent-ready-live-probe.mjs",
+      "blob_sha": "006e799d3da3fd444295bfa9b38376f377192d40",
+      "first_line": 336,
+      "last_line": 365,
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C65-336-365-20261121-V13BB.json"
+    }
+  ],
+  "source_line_counts": {
+    "new_frozen": 30,
+    "new_pinned": 30,
+    "previous_exact_reverified": 60
+  },
+  "original_blob_parity": "PASS_2_OF_2",
+  "archived_json_parse": "PASS",
+  "live_pinned_same_blob": "PASS",
+  "finding_dispositions": [
+    {
+      "line_refs": [
+        "C65:350",
+        "C65:358"
+      ],
+      "type": "ASSURANCE_PROVENANCE_BOUNDARY",
+      "severity": "LOW",
+      "observed": "SOURCE_CONFIRMED_NOT_CURRENT_RUNTIME_DEFECT",
+      "resolution": "TRIAGE; no speculative fix; GITHUB_SHA may be unknown, no-credentials flag hardcoded"
+    },
+    {
+      "line_refs": [
+        "C65:347",
+        "C65:363"
+      ],
+      "type": "PERFORMANCE_AND_LOCAL_FILE_HYPOTHESES",
+      "severity": "LOW",
+      "observed": "NOT_REPRODUCED_OR_BENCHMARKED",
+      "resolution": "NO_CODE_EDIT"
+    }
+  ],
+  "runtime_tests": "NOT_RUN_DOCS_ONLY",
+  "provider_readback": "NOT_APPLICABLE",
+  "new_application_fixes": 0,
+  "original603_unchanged": true,
+  "v1_preserved": true,
+  "provisional_r2_c2_preserved": true,
+  "older_s2_historical_totals_unchanged": true,
+  "post_pin_drift": "INCOMPLETE",
+  "nontext_assets": "INCOMPLETE",
+  "full_audit_complete": false,
+  "next_source": {
+    "frozen": "F220:257",
+    "pinned": "C65:366"
+  }
+}
