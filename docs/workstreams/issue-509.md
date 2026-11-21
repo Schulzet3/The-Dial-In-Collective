@@ -1,3 +1,17 @@
+# Issue #509 R408 — complete exposed PostgreSQL core cast catalogue 229/229 and roaster usage crosscheck [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=5601ec1e529173ee4dbb4d7ae5ef80db7eea48cd preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-21 UTC.** Retrieved live development commit and verified immutable PREFLIGHT.md bytes against its Git blob before any other task source. Development prewrite `5601ec1e529173ee4dbb4d7ae5ef80db7eea48cd`, after ledger commit `ecd03664942c1c14fb72c538c4a455dede2b745d`. Connected Supabase project `azviqqejypsefzilgonr` ACTIVE_HEALTHY, PostgreSQL 17.11.0.003, read-only only.
+
+**New complete direct cast catalogue assessment:** `pg_catalog.pg_cast` pg_catalog-to-pg_catalog **229/229**, source/target type/OID ordering, **66578 exposed canonical catalogue characters**. Every complete exposed literal, GitHub-stored SQL MD5, 1–end range, cast context, conversion method, implementation procedure/type and per-item semantic assessment in [append-only R408 literal ledger](../audits/issue509-r408-pg-catalog-casts-ranks1-229-20261121.json). 117 implicit, 77 assignment, 35 explicit; 160 function, 64 binary-compatible, 5 input/output. All 229 distinct typed pairs and function/method references checked. Full SQL-standard `polygon(circle)` implementation `RETURN polygon(12, $1)` included verbatim. Distinct numeric narrowing, time zone, geometry, JSON/XML, catalog-ID and no-function cast semantics are **not** deletable duplicate code. Native compiled implementations and original CREATE CAST SQL are **UNVERIFIED**.
+
+**App/legacy source evidence:** Directly inspected full live definitions of `private.dic_roaster_key(text)`, `private.dic_canonical_roaster_key(text)`, and `private.dic_verified_roaster_page_proof(text)` with literal hashes. Function-reference inventory includes coffee matching/admin-review/pending promotion and `public.dic_source_check_target` callers. Canonical roaster aliases and verified official-source attestations remain **LEGACY ACTIVE** as identity/source-evidence behavior; directory URL gating is separately retired and this is **not** a safe cleanup. Referencing caller definitions were not fully reviewed. No new reproduced app defect or measured app-query bottleneck; zero #267 code-line review credit.
+
+Docs-only separate ledger and journal commits (connector contents API); code/test/CI **NONE**, new CI **NOT_APPLICABLE**. No READY/DEPLOYED revalidation or promotion; full provider baseline **IN_PROGRESS**. No production SQL/data/Edge/Auth/Storage/config, migrations, releases, billing, backups, branches or schedule changes. **Next unreviewed catalogue cursor:** `pg_catalog.pg_type` rank **1/469** sorted typname/OID, char 1; prioritize changed DIC-owned provider semantics if new drift appears. Existing owner-action-only notifications remain.
+
+---
+
 # Issue #509 R407 — complete directly exposed PostgreSQL operator-family catalogue 146/146 [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=c2babaf506b9f7484ccd88a8ba4e831e84179b4d preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
