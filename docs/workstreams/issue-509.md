@@ -1,3 +1,21 @@
+# Issue #509 R418/R418b — 148 live Auth/service index definitions [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=66a3ca2e3136fd739664e7544aa5aac64b1d1be2 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-21 UTC.** FIRST verified live GitHub development SHA `66a3ca2e3136fd739664e7544aa5aac64b1d1be2` and immutable `docs/ai/PREFLIGHT.md`; independently computed matching Git blob `3742fed0176c809b115320c698a0e8b1675b2d3e` before AGENTS, any other document or provider. Main `57adc419ed4b106e158435b465971f5986537b41`, release/production `07f054f6470b2ae36b36faef8fb9a8161dd3bfb5`. Supabase `azviqqejypsefzilgonr` independently `ACTIVE_HEALTHY`, PostgreSQL `17.11.0.003`, **READ ONLY**, metadata only, no Auth identities/member/shot/note/secret values read.
+
+**New direct semantic coverage 148/148 full exposed CREATE INDEX definitions (15,094 literal characters),** each unique OID, full literal, provider MD5, range [1,end], method/key/condition, typed behavior, dependencies/scan telemetry and per-object verdict:
+- [Auth 112/112 audit ledger](../audits/issue509-r418-auth-indexes-ranks1-112-20261121.json), **11,075 chars**, 54 unique, 27 PK, 17 partial, 28 with nonzero recorded scans, zero invalid; docs-only Git commit `3130553e0c0e16ff497d8f422ef93cb48165b956`, read-back blob `0a17d39fa640a123c1a5293a9aaf4bea3fe5bbbb`.
+- [Realtime, Storage, migrations, Vault 36/36 audit ledger](../audits/issue509-r418b-other-provider-indexes-ranks1-36-20261121.json), **4,019 chars**, 6 realtime, 26 storage, 2 supabase_migrations, 2 vault; 26 unique, 15 PK, 9 partial, 6 with nonzero recorded scans, zero invalid; commit `8f9018d0f744a86724134bea26311afd89e5f268`, read-back blob `29d69302ccae1ef355f77cd4e9adce91ed0c0a27`.
+
+**Verified physical duplicate-key candidate (NO Auth DDL):** `auth.custom_oauth_providers_identifier_key` (OID 17120) is a UNIQUE constraint-backed B-tree on `identifier`; `auth.custom_oauth_providers_identifier_idx` (OID 17122) is a nonunique, unbound B-tree with identical key/operator class/collation/order/predicate (none). Each physically occupies **8,192 bytes**, zero recorded scans. The UNIQUE index supports identical equality lookup and enforces additional uniqueness, but both are **platform-managed Auth objects**; upstream Auth migration/upgrade ownership and dynamic query consumers are UNVERIFIED. **Do not drop either or create a DIC Auth migration.** #96 owns Auth acceptance; this is an evidence-backed cleanup candidate, not a proven safely actionable production change or urgent owner decision.
+
+**No unsupported deletions:** Auth SSO/email predicates, OAuth/SAML/SCIM uniqueness, hashed token paths, Realtime parent-only partition indexes vs replay/hashed subscription, Storage COLLATE C vs lower(name), version, current/archive/delete-marker, migrations and Vault unique predicates have distinct semantics. Zero scans alone does not prove disuse. No new reproducible DIC application defect, source/SQL drift confirmation or measured bottleneck; provider-native binaries, original upstream migration DDL and complete hosted callers **UNVERIFIED**. No #267 GitHub code-line credit.
+
+**Checkpoint:** Only two append-only docs ledgers and this docs-only scoped journal changed; every blob and Git commit read back, nonforce `[skip netlify]`. No application/SQL migration/Edge code, test or CI changed: new exact-source CI **NOT_APPLICABLE**, not PASS. READY/DEPLOYED **NOT_REVALIDATED**. No production SQL/data/Auth/Storage/Edge/config, backups, release, Netlify, billing, branch purchase, schedule or alert changes. Full provider-wide baseline **IN_PROGRESS**. Current physical index count 497: app private/public previously 106, this run Auth 112 + other provider 36, cumulative **254/497** for this particular index route. Next exact unreviewed physical indexes: **`pg_catalog.pg_index` rank 1/124, index relation OID ascending, char 1**, then **`pg_toast` rank 1/119**. Keep hourly task and owner-action-only alerts unchanged.
+
+---
+
 # Issue #509 R417 — full live application column defaults and generated expressions (142/142) [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=9cbf214671a0c55aae39102377ada8285385045f preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
