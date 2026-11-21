@@ -1,3 +1,17 @@
+# Issue #509 R433 — direct semantic inspection of PostgreSQL attributes 881–1280 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=9cb4c18e1632d4f2317f1726597ea75ba760fc42 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+2026-11-21 UTC. Immutable preflight verified first at development 9cb4c18e1632d4f2317f1726597ea75ba760fc42; rechecked branch/head and same Git blob before nonforce write (base 9cb4c18e1632d4f2317f1726597ea75ba760fc42). Live Supabase azviqqejypsefzilgonr ACTIVE_HEALTHY/PostgreSQL 17.11; production **READ-ONLY**. Resumed exact R432 rank 881 `pg_toast.pg_toast_1260.chunk_data` OID 4175 attnum 3, audited **400/400 additional complete catalog tuple definitions** through rank 1280 `pg_catalog.pg_stat_sys_tables.seq_scan` OID 12152 attnum 4. Direct metadata texts **203,964 characters**, **74 relations**, pg_catalog 362 and pg_toast 38; 22 TOAST, 37 index, 44 base catalog, 297 catalog-view fields. Every exact full tuple, MD5, type/attribute number, 1–end covered character range, purpose/retention verdict is preserved in append-only [R433 ledger](../audits/issue509-r433-pg-attribute-ranks881-1280-20261121.json).
+
+Semantic review includes replication origin/publication/subscription linkage keys, managed TOAST storage and chunk indexes, parameter ACL and role-grant indexes, masked role/user dictionary outputs, relation/policy/index/statistics introspection, runtime settings metadata, diagnostic lock/transaction views, and distinctions between cumulative and transaction-local table statistics. Those are PostgreSQL-managed contracts, **not proven redundant DIC code**. `pg_subscription.subconninfo`, role password columns, settings and prepared-query text were read as **field definitions only**; no actual values, Auth identities, member shots/notes or sensitive logs. Independent live read-only invariant query verified **0 physical type/alignment conflicts, dropped/missing/default/identity fields, invalid/unready index attributes or orphan TOAST parents** in this range. Original PostgreSQL bootstrap/native executable code and remaining provider definitions remain **UNVERIFIED**; #267 current/source-code-line credit **zero**.
+
+No reproducible DIC app bug, proven unused object or justified source deletion/optimization in this segment, hence **no app/test/CI changes** and new exact-source CI **NOT_APPLICABLE (not PASS)**. Full provider baseline **IN_PROGRESS**; cumulative `pg_attribute` route **1280/4181**. READY/DEPLOYED status **NOT_REVALIDATED**. No production/provider DB, Edge, Auth, Storage/config, migration, release, publication, backup, billing, schedule or alert-policy writes.
+
+**Next exact cursor:** `pg_catalog.pg_stat_sys_tables.last_seq_scan` relation OID **12152**, attnum **5**, rank **1281/4181**, character **1**. Continue provider semantic review and safe app-level defect investigation; no new owner decision or actionable changed risk.
+
+---
+
 # Issue #509 R432 — direct semantic inspection of PostgreSQL attribute definitions 481–880 [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=cb70f113626dfb1fc90238a4129fd6b2dd9f43f6 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
