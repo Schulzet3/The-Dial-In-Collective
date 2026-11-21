@@ -10,10 +10,10 @@
     {
       "id": "DIC-Q-455-r405-cross-basket-yield-eligibility",
       "issue": 455,
-      "pr": null,
+      "pr": 3554,
       "title": "Avoid displaying unloggable cross-basket saved-recipe yield centers",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "997b3c5d50f3a3d25999ddaf2f10044c906abcb7",
       "scope_paths": [
         "site/lib/engine.js",
         "site/lib/ui.js",
@@ -23,13 +23,26 @@
       "tests": [
         "R404 static negative made actual source-runtime V8 repro R405: original 18g/108g Lungo success transferred to 40g basket yielded 240g, outside Log Shot 200g upper bound. V8 local preview is NOT hosted Node22 CI.",
         "7 synthetic new Node22 negative/positive regressions target this Log Shot/recipeGrid/overview code; initial 44851691432 Node22 FAILED solely due stale R119 title assertion (5987 PASS/1 FAIL/6 SKIP), corrected by focused R119 assertion. Superseded draft 44852112541 approval/governance FAILED due malformed extra feature_prior_sha field; clean nonforce one-commit PR preflight and source-bound CI PENDING, not PASS.",
-        "No numeric policy, source research, historical shots, manually selected family, taste ratings, provider or production writes."
+        "No numeric policy, source research, historical shots, manually selected family, taste ratings, provider or production writes.",
+        "Clean exact PR-head e07ac735b9b43f4b3c14de14993d8ade54f75c37: Node22/build 44852360558 SUCCESS (5,989 PASS/0 FAIL/6 intentional SKIP; all seven R405 cases PASS), Chromium/mobile/offline/a11y/cloud 44852360641 SUCCESS, isolated SQL 44852360524 SUCCESS, source security 44852360546 SUCCESS, approval/governance 44852360548 SUCCESS (1 commit, 1 same-commit preflight receipt). Frozen original corpus 44852360551 SKIPPED, not PASS.",
+        "Nonforce [skip netlify] squash PR #3554 merged 997b3c5d50f3a3d25999ddaf2f10044c906abcb7: seven exact feature/test/queue/journal Git blobs read back identical at merged SHA; GitHub PR merged readback matched; development-only.",
+        "Exact merged-source push 44852797862 Node22/build SUCCESS (5,989 PASS/0 FAIL/6 intentional SKIP, seven new R405 PASS), 44852797881 Chromium/mobile/offline/a11y/cloud SUCCESS, 44852797845 approval/governance SUCCESS, 44852797867 shared #33 dependency SUCCESS. PR-head SQL/security source bytes unchanged at merged source; no live production/provider validation."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        44852360558,
+        44852360641,
+        44852360524,
+        44852360546,
+        44852360548,
+        44852797862,
+        44852797881,
+        44852797845,
+        44852797867
+      ],
       "blockers": [
-        "Exact PR-head and merged-source applicable hosted CI not yet read back; independent prospective #3347 frozen READY candidate certification remains required."
+        "Independent prospective source-isolated #3347 five-check frozen candidate READY certification absent. This merged development item remains TESTING / NOT READY / NOT DEPLOYED; separate owner publication permission required."
       ],
-      "notes": "Development-only P2 display correctness, source entry bound 5-200g; no new science target, consent, member data, publication or empirical cup-quality outcome.",
+      "notes": "Development-only P2 display correctness, source entry bound 5-200g; no new science target, consent, member data, publication or empirical cup-quality outcome.\nR405 NONFORCE MERGED DEVELOPMENT ONLY on PR #3554, 997b3c5d50f3a3d25999ddaf2f10044c906abcb7; exactly seven source/test/journal/queue blobs match passing head. Prior draft PR #3553 CLOSED without merge, preserved failure 44851691432 (one stale R119 static test) and governance 44852112541 (malformed receipt); corrected via clean single source-bound commit. No empirical espresso outcome, no new numeric prior/policy, new member data, telemetry, production, Netlify or live SQL/Auth/Edge/provider operations.",
       "production_deployed": false
     },
     {
