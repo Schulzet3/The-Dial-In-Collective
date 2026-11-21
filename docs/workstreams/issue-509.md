@@ -1,3 +1,17 @@
+# Issue #509 R411 — completed entire exposed pg_catalog.pg_type 469/469 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=06b1b25c2613aacb092ddc26f9887887dbbbd720 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-21 UTC.** Live development ref and immutable PREFLIGHT.md Git blob reverified. Supabase `azviqqejypsefzilgonr` independently ACTIVE_HEALTHY PostgreSQL 17.11.0.003, SQL strictly **READ-ONLY**.
+
+**New direct semantic review:** `pg_catalog.pg_type` remaining ranks **241–469/469**, 148035 exposed provider canonical tuple characters, full per-type literal/provider MD5/1–end range and typed semantic assessment in [append-only R411 ledger](../audits/issue509-r411-pg-catalog-types-ranks241-469-20261121.json). Type-kind/category counts: b/I 2, b/G 6, p/P 12, b/D 5, m/R 6, r/R 6, b/N 19, b/U 17, b/A 2, b/T 1, b/S 3, c/C 142, b/Z 6, p/X 1, b/V 1. Validated all composite row types ↔ pg_class relation/array OIDs; each native range/multirange subtype and inverse pairing; all native scalar ↔ array reciprocal pointers when declared; actual PostgreSQL I/O/typsubscript handlers. **Zero broken exposed catalog links**. 807 direct non-system column references (including active coffee/shots/setup identities and values); consumer samples and counts stored, not claimed a complete audit of every caller. `json`/`jsonb`/`jsonpath`, geometric raw subscript types, poly/OID/reg identifiers, range/multirange, PostgreSQL internal serialized types and handler pseudo-types are behaviorally distinct. No verified DIC bug or safe removal.
+
+**Catalog milestone:** With R409 and R410, the `pg_catalog.pg_type` **469/469 exposed catalog tuples are now recorded and typed-assessed**, but original `CREATE TYPE` DDL, compiled native C bodies and dynamic runtime callers remain **UNVERIFIED**. This is NOT a complete provider-wide or native-source word audit, which remains **IN_PROGRESS**. No #267 GitHub line-review credit.
+
+**Changes:** append-only R411 literal ledger and scoped journal only, atomic nonforce Git commit `[skip netlify]`. No app/SQL migrations/tests/CI/release queue changes, new exact-source CI **NOT_APPLICABLE**, current READY/DEPLOYED **NOT_REVALIDATED**. No production, Auth, Storage, Edge, backup, billing, release or schedule changes. **Next unreviewed catalogue cursor** `pg_catalog.pg_collation` rank **1/861** `pg_catalog.C (OID 950)`, character 1; prioritize new DIC-owned provider drift if any. Existing hourly/owner-action-only alert policy unchanged.
+
+---
+
 # Issue #509 R410 — directly reviewed PostgreSQL pg_type ranks 121–240/469 [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=f5109ae200ad8c6e763e6af1fd2822c0a9980fbc preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
