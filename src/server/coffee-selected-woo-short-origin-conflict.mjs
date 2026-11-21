@@ -38,7 +38,7 @@ export function selectedWooShortOriginConflict(html,{name='',origin='',producer=
  const shorts=nodes.filter(n=>n.tag==='div'&&visible(n)&&n.parent===title.parent&&
   String(coffeeHtmlAttributes(n.attributes).class||'').split(/\s+/u)
    .includes('woocommerce-product-details__short-description')&&
-  n.start>title.end&&n.start-title.end<14000&&
+  n.start>=title.end&&n.start-title.end<14000&&
   n.contentEnd-n.headEnd<40000);
  if(shorts.length!==1)return null;
  const idx=nodes.indexOf(shorts[0]);

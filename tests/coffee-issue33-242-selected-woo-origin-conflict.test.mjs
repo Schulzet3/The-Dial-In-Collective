@@ -40,8 +40,9 @@ test('actual parser retains both literals, withholds origin, leaves process and 
  assert.ok(q.conflicts?.includes('origin'),JSON.stringify(q));
  assert.match(JSON.stringify(q.conflict_options||{}),/Geed, Ethiopia/);
  assert.match(JSON.stringify(q.conflict_options||{}),/GEDEB, ETHIOPIA/);
- assert.ok(q.source_facts?.some(f=>f.conflicting&&f.field==='origin_context'&&
-  /GEDEB, ETHIOPIA/.test(f.value)),JSON.stringify(q));
+ assert.ok(q.source_facts?.some(f=>f.conflicting&&f.field==='origin'&&
+  /Geed, Ethiopia/.test(f.value)),JSON.stringify(q));
+ assert.ok(q.conflict_options?.origin?.some(x=>/GEDEB, ETHIOPIA/.test(x.value)),JSON.stringify(q));
  assert.equal(q.fields.process,'Washed');
  assert.equal(q.fields.producer,'Neguesse Debela');
  assert.ok(coffeeUrlPreviewMarkup(q));
