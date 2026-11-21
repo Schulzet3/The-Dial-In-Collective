@@ -205,7 +205,15 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
   const current=qual.filter(sh=>sh.calibrationId===v.calibrationId&&
    sh.grindSetting>=v.grinderMin&&sh.grindSetting<=v.grinderMax),same=current.filter(sh=>sh.coffeeId===c.id&&(!familyId||sh.familyId===familyId));
  const basketHits=same.filter(sh=>sh.basketId===basket.id);
- if(basketHits.length)return {value:round(quantile(basketHits.map(sh=>sh.grindSetting),.5)),source:'Your successful setting',proven:true};
+ if(basketHits.length){
+  const observed=basketHits.map(sh=>sh.grindSetting);
+  const value=round(quantile(observed,.5));
+  // Rounded/median references are estimates unless their displayed dial value
+  // was actually measured in a qualifying five-green same-basket shot.
+  const proven=observed.some(setting=>Math.abs(setting-value)<=1e-8);
+  return {value,source:proven?'Your successful setting':
+   'Estimated from your successful shots (rounded)',proven};
+ }
  if(same.length)return {value:round(quantile(same.map(sh=>sh.grindSetting),.5)),source:'Reference from your other basket or setup',proven:false};
  const cross=qual.filter(sh=>sh.coffeeId===c.id&&sh.setupVersionId!==v.id&&(!familyId||sh.familyId===familyId));
  // A matching grinder/burr set does not mean the stored dial number is on

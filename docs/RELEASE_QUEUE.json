@@ -8,6 +8,30 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-r419-successful-grind-provenance",
+      "issue": 455,
+      "pr": null,
+      "title": "Distinguish actually successful grinder dial values from rounded or unmeasured median starting estimates",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "owner_source": "Issue #455 Option B SAFE source-provenance correction; DIC_PREFLIGHT_VERIFIED development_sha=66a3ca2e3136fd739664e7544aa5aac64b1d1be2 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e; actual code blob 8b5e97e78e12d9a0479b1a912b47ba940f3b4975; research-only Oct29 ZIP checksum exact.",
+      "tests": [
+        "R419 actual-four-module V8 7 negative/positive scenarios PASS only in isolated in-memory patched simulation; not Node22/hosted CI.",
+        "Eight source-bound synthetic Node22 regressions authored; pending execution, no PASS assumed.",
+        "Existing exact merged R415 grinder tenth-boundary tests preserved; avoid unrelated redundant suites."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Run and verify exact source-bound Node22/lint/build, relevant browser/offline/mobile accessibility, governance and risk-appropriate CI; diagnose and repair failures before nonforce merge.",
+        "Owner-Locked #3347 five exact candidate checks and source isolation required before READY; do not deploy without new Publish."
+      ],
+      "notes": "Only source-evidence labeling/provenance for recorded success versus rounded median differs. Preserve five tastes, original shot/notes/history, current-grinder calibration, separate espresso styles and feed, one-control advice. No member experiments, production, main/release or Netlify changes.",
+      "production_deployed": false
+    },
+    {
       "id": "DIC-Q-33-r380b-original242-woo-conflicting-region",
       "issue": 33,
       "pr": 3591,
