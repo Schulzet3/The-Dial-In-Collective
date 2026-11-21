@@ -1,3 +1,15 @@
+# Issue #509 R420 — 105 managed provider column expressions [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=9ad8f8eb9ed9d14af6b6a710af1259ff32665898 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-21 UTC; production read-only.** Verified immutable GitHub preflight file and Git blob at this development SHA. Continued exact unreviewed `pg_attrdef` cursor after R419/R419b. Directly inspected and semantically reviewed **105/105 complete provider column default/generated expressions, 1,471/1,471 literal characters**: **auth 57, realtime 10, storage 33, vault 5**. Each row's unique OID, table/column/type, full `pg_get_expr` text, PostgreSQL MD5, inspected 1–end range, GENERATED/identity/NULL flags and individual semantic disposition is in append-only `docs/audits/issue509-r420-managed-column-defaults-ranks1-105-20261121.json`. **Seven stored-generated expressions** cover Auth confirmed-at and identity/SCIM projections, Realtime signed-role conversion and Storage path tokens.
+
+Semantic check: Realtime `clock_timestamp()` differs from transaction-scoped `now()`; UTC normalization for its timestamp-without-zone fields is deliberate. Live inspector session `TimeZone=UTC` (not proof every client/connection uses UTC); provider Auth `one_time_tokens` and Realtime migrations expose `timestamp without time zone DEFAULT now()`, so their cross-session timezone semantics remain **UNVERIFIED**, not a reproduced application failure. OAuth short expiry, generated lowercasing/identity data, versioning disabled until configured, typed bucket modes, Vault nonce generation and provider protocol defaults are intentional and not safe to remove from app source. No verified new app bug, stale DIC instruction, dependency-proven unused object or bottleneck from this range; upstream provider migration source, dynamic consumers and executable native behavior **UNVERIFIED**.
+
+All 105 provider default definitions directly covered; provider-wide baseline **IN_PROGRESS**, no #267 code-line audit credit. No code/test/CI edits (new CI **NOT_APPLICABLE**, not PASS), no READY/DEPLOYED claim, no provider/production SQL/Auth/Storage/Edge/data/config, publication, backup, billing or schedule changes. **Next exact route:** `private.pg_class` rank **1/34** OID **17616**, then `public.pg_class` rank **1/24** OID **17702**, ordered ascending OID within schema; investigate DIC-owned relation behavior, dependencies, obsolete names and drift. Owner-action-only notifications unchanged.
+
+---
+
 # Issue #509 R419/R419b — full PostgreSQL catalog and TOAST indexes [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=5e7c23c34a087d988104127f1b8820b8e3a4a373 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
