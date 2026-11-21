@@ -1,0 +1,319 @@
+{
+  "schema_version": 1,
+  "issue": 504,
+  "batch": "G1-389",
+  "review_status": "SOURCE_ONLY_NOT_CENTRALLY_INTEGRATED",
+  "source_development_sha": "cef0495a230cfc57b199030cc71a05c54635891f",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "source_method": "GET native GitHub original PR title/full body; each field word 1-EOF, not AST/sampling",
+  "word_definition": "Unicode whitespace",
+  "metrics": {
+    "original_prs": 8,
+    "title_words": 76,
+    "body_words": 1472,
+    "all_original_words": 1548,
+    "all_title_LF_body_utf8_bytes": 14398,
+    "completed_to_archive": [
+      2686,
+      2687,
+      2688,
+      2690,
+      2691,
+      2692,
+      2693
+    ]
+  },
+  "reviewed_original_record_ids": [
+    2686,
+    2687,
+    2688,
+    2689,
+    2690,
+    2691,
+    2692,
+    2693
+  ],
+  "records": [
+    {
+      "number": 2686,
+      "native_id": 5311488026,
+      "node_id": "PR_kwDOUMrfDs8AAAABPJbgGg",
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2686",
+      "created_at": "2026-11-14T13:01:31Z",
+      "updated_at": "2026-11-14T13:36:03Z",
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-11-14T13:36:03Z",
+      "head_sha": "e46c92bd624cac54673cd713e16537a5272c68b7",
+      "base_sha": "a93ac17d10b0eeebb346122d6f2106ff372e0f8b",
+      "merge_commit_sha": "d0b450db85f0c25b05fc65007de639852436ff66",
+      "original_title": "[Privacy] Discreet public policy page for owner-only Google Drive OAuth",
+      "original_body": "## Owner-approved BUILD — NOT authorized for production publication\n\nA publicly reachable privacy-policy page is **required for Google OAuth Branding**. Page **must be deployed eventually**, but this draft PR **must not be deployed now** without the project's separate owner `Publish` command and existing release gating. Preserve all pending unrelated app work.\n\n### Exact implementation\n- URL after authorized release: `https://app.dialincollective.com/privacy/`\n- Homepage footer adds **11px muted**, underlined, keyboard-accessible `Privacy` link; visible to signed-in and signed-out users, not background-colored/hidden\n- Self-contained `site/privacy.html` includes app-account/shot/community processing, backup encryption, owner's conditional `drive.file` integration, retention, third-party service references, and contact\n- Build emits `dist/privacy/index.html` and strict generated asset allowlist recognizes it\n- Focused `tests/privacy-policy.test.mjs`; changes in `site/cloud/main.js`, `site/styles.css`, `site/privacy.html`, `build_cloud.mjs`, `scripts/audit/site-integrity.mjs` only\n- Dedicated **IN_PROGRESS** queue entry `DIC-Q-28-owner-oauth-privacy-policy-20261114`; no READY or DEPLOYED claim\n\n### Source-bound PR verification at d97d3a1ec1fdc3cd1880ac05741556a0c35f0b6b\n- **SUCCESS** cloud app build/tests 43597779170, cloud UX 43597779210, isolated SQL 43597779175, source security 43597779167, coffee Python 43597779139\n- **FAIL** approval/continuity 43597779195: prior unrelated `DIC-Q-509-recommendation-context-null-control-guard` has no complete five-check exact-source READY evidence. Do not weaken this guard or silently change the unrelated queue item to enable this PR\n- **PASS** intake-tracking portion of approval job, 13 tracked deployable paths; original frozen corpus job 43597779186 SKIPPED (not PASS)\n- The new docs-only final checkpoint commit requires fresh CI/readback if an updated PR-head status is claimed. No live provider acceptance claimed.\n\n### Full permanent handoff and release plan\n[docs/workstreams/ops-privacy-oauth-20261114.md](https://github.com/Schulzet3/The-Dial-In-Collective/blob/feature/owner-oauth-privacy-page-20261114/docs/workstreams/ops-privacy-oauth-20261114.md) includes the original approval scope, precise changed paths, all test receipts, failed unrelated gate, unchanged production state, required owner review of public contact/privacy wording, compliant OAuth Branding values, complete existing release-controller process, external unauthenticated URL checks, one-time Google authorization, independent GitHub/Drive smoke test, and immutable backup-preservation requirements.\n\n### Hard outstanding gates\n1. Review public `schulzet3@gmail.com` contact and legal text for suitability/accuracy.\n2. Resolve the unrelated #509 READY evidence failure in its own authorized workstream, rebase/reconcile concurrent changes and verify exact-source CI/merge.\n3. Only when source is READY and owner later says **Publish**, use the existing single-use READY-only publication controller; independently verify Netlify READY/current, real public URL/redirect and footer access.\n4. Complete OAuth Branding using existing Cloud project; verify actual live authorization and Drive folder, then implement **separate** staged backup courier PR #2684. Keep Apps Script and all prior ciphertext until new delivery is proven.\n\n**NO Netlify production deployment, Google OAuth configuration, database/Auth/member changes, secret writes, new scheduled backup, or Drive archive deletion performed.**",
+      "title_words": 10,
+      "body_words": 395,
+      "title_word_range": [
+        1,
+        10
+      ],
+      "body_word_range": [
+        1,
+        395
+      ],
+      "body_line_range": [
+        1,
+        28
+      ],
+      "whole_title_newline_body_utf8_bytes": 3618,
+      "issue_comments_not_semantically_reviewed": 1,
+      "review_comments_not_semantically_reviewed": 0,
+      "semantic_disposition": "#28 OAuth privacy: historical public legal/contact review requirement, deploy only under explicit owner Publish; current public URL, contact acceptance and OAuth/Drive unverified.",
+      "historical_title_action": "ARCHIVE_COMPLETED_AFTER_ORIGINAL_SEAL"
+    },
+    {
+      "number": 2687,
+      "native_id": 5311600557,
+      "node_id": "PR_kwDOUMrfDs8AAAABPJiXrQ",
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2687",
+      "created_at": "2026-11-14T13:15:30Z",
+      "updated_at": "2026-11-14T14:23:44Z",
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-11-14T14:23:44Z",
+      "head_sha": "c4590978918927fefe8b0e435b92ce644cd4eb2d",
+      "base_sha": "0e56e6ff501f7b3bc4078d6c98441e399f9c95db",
+      "merge_commit_sha": "da82140a846e526e35f5827fd605d1ef13e7f7c9",
+      "original_title": "docs(#267): strict frozen F194 2217–2330, 114 original lines [skip netlify]",
+      "original_body": "Development-only source-evidence continuation on original PR (nonforce). T19 54 original frozen F194 positions 2217–2270 retained once, with original immutable receipt SHA f667fc16ab8cdca1a3c14f6cd535477406b326d5; added disjoint T20 60 positions 2271–2330, new receipt blob 2c8e5c0832843c6123e4d8f9984481313df2b473, corresponding T20 journal 34bfba45a3c65295d6ac5190e538692cc0a8550f. Both original source path docs/audits/2026-10-21-requirement-traceability.json commit abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9 blob a94447e07cb31623c68c834f800889f9c2f79bfd. New head c4590978918927fefe8b0e435b92ce644cd4eb2d first parent verified live development cfc601bf33b1a302f154298087c58d5c50c5ff61 second parent original PR head 6c6df745202748e8db0120a971bb5d9e1b223f4a, using nonforce fast-forward. Mandatory source preflight blob 2fb236bbfa6bac48513eeb3bd157b260853af06d, same-commit renewed journal line. S2-001 F001 41/41 and predecessor T19 54/54 literal source revalidated at no duplicate credit. No source/test/provider/member/SQL/production/Netlify changes; no app tests claimed. Previous #509 queue evidence blocker was repaired in its own issue; new PR-head CI must actually succeed before any merge and merged-source checks require separate readback. #267 OPEN, NEXT F194:2331; pinned-current and live drift global coverage remain incomplete.",
+      "title_words": 10,
+      "body_words": 131,
+      "title_word_range": [
+        1,
+        10
+      ],
+      "body_word_range": [
+        1,
+        131
+      ],
+      "body_line_range": [
+        1,
+        1
+      ],
+      "whole_title_newline_body_utf8_bytes": 1425,
+      "issue_comments_not_semantically_reviewed": 0,
+      "review_comments_not_semantically_reviewed": 0,
+      "semantic_disposition": "#267 T19/T20 F194 strict audit: delegated frozen source, no #504 line credit; historical CI forecasts not PASS.",
+      "historical_title_action": "ARCHIVE_COMPLETED_AFTER_ORIGINAL_SEAL"
+    },
+    {
+      "number": 2688,
+      "native_id": 5311711374,
+      "node_id": "PR_kwDOUMrfDs8AAAABPJpIjg",
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2688",
+      "created_at": "2026-11-14T13:30:09Z",
+      "updated_at": "2026-11-14T13:31:06Z",
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-11-14T13:31:06Z",
+      "head_sha": "f9c3bc241919aa6985cd68d3586bfd9d0f0990b7",
+      "base_sha": "0e56e6ff501f7b3bc4078d6c98441e399f9c95db",
+      "merge_commit_sha": "a93ac17d10b0eeebb346122d6f2106ff372e0f8b",
+      "original_title": "[Operations #509] Correct invalid READY evidence before privacy-page integration",
+      "original_body": "## Purpose: restore the existing strict five-check release gate without bypassing it\n\nWhile preparing owner-approved privacy policy PR #2686 for future release, the immutable GitHub READY gate correctly rejected #509's previously recorded READY status. This is a genuine **provenance and certification defect**, not a UI/privacy-policy defect.\n\n**Direct Git evidence:** the SQL migration was introduced by `7607c69f62f65979079fd02a0d25f4b7653a2303` (actual first-parent changed deployable SQL); the previously recorded `merged_source_sha=0cd5054c6684a63062daf794e33ea265daf5ce66` changed only a test and journal. The cited SQL/build/approval CI successes occur on different source SHAs. The original READY label therefore failed the unmodified source/test and five-check invariant.\n\n**Narrow reversible correction:**\n- Change only `DIC-Q-509-recommendation-context-null-control-guard`: READY → TESTING, correct migration introduction SHA, and record explicit blockers. Preserve all previous CI receipts and issue progress.\n- Append exact-source preflight receipt and complete diagnosis to `docs/workstreams/issue-509.md` in the same commit.\n- No SQL, runtime, tests, other queue states, production, Supabase provider, Netlify, backup, or user-data modification.\n- To restore READY in the future #509 owner workstream, obtain **one verified exact-source five-check set with identical migration/test blobs**. No arbitrary downgrade of valid ready work and no weakening of safeguards.\n\n**This PR does not deploy or publish**. Merge only after source-bound governance checks pass; merge commit message must include `[skip netlify]`.",
+      "title_words": 9,
+      "body_words": 202,
+      "title_word_range": [
+        1,
+        9
+      ],
+      "body_word_range": [
+        1,
+        202
+      ],
+      "body_line_range": [
+        1,
+        13
+      ],
+      "whole_title_newline_body_utf8_bytes": 1711,
+      "issue_comments_not_semantically_reviewed": 0,
+      "review_comments_not_semantically_reviewed": 0,
+      "semantic_disposition": "#509 queue provenance: historically detected SQL migration SHA vs test-only SHA mismatch; corrected READY to TESTING, no current status assumption.",
+      "historical_title_action": "ARCHIVE_COMPLETED_AFTER_ORIGINAL_SEAL"
+    },
+    {
+      "number": 2689,
+      "native_id": 5311764301,
+      "node_id": "PR_kwDOUMrfDs8AAAABPJsXTQ",
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2689",
+      "created_at": "2026-11-14T13:37:04Z",
+      "updated_at": "2026-11-14T13:37:04Z",
+      "state": "open",
+      "draft": true,
+      "merged_at": null,
+      "head_sha": "9b66fcee88035359a6e01715234ffb6a318faba3",
+      "base_sha": "d0b450db85f0c25b05fc65007de639852436ff66",
+      "merge_commit_sha": "72fe70d0c2b266a30ec66f1d3050c1640d8abc9b",
+      "original_title": "docs(issue504): G1-252 original PR #1575–1582 audit [skip netlify]",
+      "original_body": "Issue #504 development-only bounded GitHub original metadata semantic review. 8 full historical PR title/body objects, 943 words, 8,295 UTF-8 bytes. Includes immutable full literals and per-field SHA1, conditional coverage ledger, same-commit preflight-attested scoped journal. Archived completed PR #1575 title with REST readback; independently verified #267 three strict original source literals without duplicate code credit. Two prior exact-job CI failures are deterministic #509 READY-evidence holds; no retry. Source parent was immutable preflight-verified a93ac17d10b0eeebb346122d6f2106ff372e0f8b; concurrent development advanced after evidence creation, so this is DRAFT/UNMERGED, **do not merge over concurrent work**. Central merged #504 ledger remains G1-186, root predecessor #2112 unresolved. No runtime, queue, provider, release, or deployment change. Next original PR #1583. [skip netlify]",
+      "title_words": 8,
+      "body_words": 112,
+      "title_word_range": [
+        1,
+        8
+      ],
+      "body_word_range": [
+        1,
+        112
+      ],
+      "body_line_range": [
+        1,
+        1
+      ],
+      "whole_title_newline_body_utf8_bytes": 973,
+      "issue_comments_not_semantically_reviewed": 0,
+      "review_comments_not_semantically_reviewed": 0,
+      "semantic_disposition": "#504 G1-252 draft evidence: OPEN DRAFT, unmerged conditional historic audit; no original words double counted, preserve unchanged title.",
+      "historical_title_action": "PRESERVE_OPEN_DRAFT"
+    },
+    {
+      "number": 2690,
+      "native_id": 5311773926,
+      "node_id": "PR_kwDOUMrfDs8AAAABPJs85g",
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2690",
+      "created_at": "2026-11-14T13:38:17Z",
+      "updated_at": "2026-11-14T13:39:05Z",
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-11-14T13:39:05Z",
+      "head_sha": "7b972a81639f17796e792247786b2e45c7acfd81",
+      "base_sha": "d81d355fb5d0cddf4733e947df67bf554923d932",
+      "merge_commit_sha": "f5fef01063852179abf82adee4f57398796e85d3",
+      "original_title": "[Operations #28] Source-certify discreet privacy policy READY for owner-only Publish",
+      "original_body": "## Scope: source READY only; NO Netlify publication\n\nOwner requested **get the privacy policy READY and let another chat deploy**. This is the release-queue certification and full handoff after [privacy source PR #2686](https://github.com/Schulzet3/The-Dial-In-Collective/pull/2686) safely merged into development as `d0b450db85f0c25b05fc65007de639852436ff66`.\n\n### Exact evidence and no-code-drift receipt\n- Source test SHA `e46c92bd624cac54673cd713e16537a5272c68b7`, original PR #2686.\n- Five required GitHub statuses ALL **SUCCESS** on this exact source: [approval 43600235102](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/43600235102), [validate 43600235024](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/43600235024), [cloud+mobile 43600235015](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/43600235015), [sql 43600235065](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/43600235065).\n- GitHub independently read **identical Git blob SHAs** on six source/tests between tested e46c92 and merged d0b450: 4 deployable paths, site-integrity script, privacy-policy test.\n- Promotes only `DIC-Q-28-owner-oauth-privacy-policy-20261114` `IN_PROGRESS → READY`, records true merged SHA and four exact CI runs, blockers=[], production_deployed=false.\n- #509 incorrectly READY was corrected to **TESTING** in separately reviewed/merged [#2688](https://github.com/Schulzet3/The-Dial-In-Collective/pull/2688). No #509 SQL or other queue state touched by this PR.\n\n### Documentation\nAdds [READY-to-Publish handoff](https://github.com/Schulzet3/The-Dial-In-Collective/blob/ops/issue28-privacy-ready-handoff-20261114/docs/handoffs/DIC_PRIVACY_POLICY_READY_FOR_SEPARATE_PUBLISH_20261114.md), updates CURRENT_STATUS top checkpoint and same-commit [scoped journal](https://github.com/Schulzet3/The-Dial-In-Collective/blob/ops/issue28-privacy-ready-handoff-20261114/docs/workstreams/ops-privacy-oauth-20261114.md) with live PREFLIGHT SHA/blob.\n\n**No app/test/build/scripts modification in this PR, no Netlify, Supabase, Google Cloud, Drive, Secrets, backups or member writes.**\n\n### Future owner-controlled publication\nOnly after **new explicit Publish** authorization, use the existing READY-only isolated release controller to select **only this item**, excluding #509 TESTING and all unfinished features. Independently verify Netlify READY/current and unauthenticated HTTPS 200 policy at `https://app.dialincollective.com/privacy/`, public homepage link, no auth redirect, correct policy HTML. Then proceed separately with original Google OAuth project Branding. This PR does not trigger that process.",
+      "title_words": 10,
+      "body_words": 236,
+      "title_word_range": [
+        1,
+        10
+      ],
+      "body_word_range": [
+        1,
+        236
+      ],
+      "body_line_range": [
+        1,
+        18
+      ],
+      "whole_title_newline_body_utf8_bytes": 2750,
+      "issue_comments_not_semantically_reviewed": 0,
+      "review_comments_not_semantically_reviewed": 0,
+      "semantic_disposition": "#28 historic READY privacy policy source handoff, not provider deployment; separately later publish authority necessary and current queue not confirmed.",
+      "historical_title_action": "ARCHIVE_COMPLETED_AFTER_ORIGINAL_SEAL"
+    },
+    {
+      "number": 2691,
+      "native_id": 5311808418,
+      "node_id": "PR_kwDOUMrfDs8AAAABPJvDog",
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2691",
+      "created_at": "2026-11-14T13:42:24Z",
+      "updated_at": "2026-11-14T13:43:28Z",
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-11-14T13:43:28Z",
+      "head_sha": "da3dc90d65a71f2ab57fff3ed642398f88d77117",
+      "base_sha": "f5fef01063852179abf82adee4f57398796e85d3",
+      "merge_commit_sha": "517fdd185d7b9463cc6a89c00e536ddd50b8838a",
+      "original_title": "docs(#455): R258 published mouthcoating/body evidence boundary [skip netlify]",
+      "original_body": "## R455-258 — research-only two-document source-bound increment\n\nPreflight before any source reads and immediately before writes: `development/backend-foundation` `f5fef01063852179abf82adee4f57398796e85d3` and full independent Git blob `docs/ai/PREFLIGHT.md` `2fb236bbfa6bac48513eeb3bd157b260853af06d`; new standalone receipt in the same-commit scoped journal. Parent `f5fef...`, candidate `da3dc90d65a71f2ab57fff3ed642398f88d77117`.\n\nOriginal study: Linne et al. (2023), Food Research International, DOI 10.1016/j.foodres.2023.113167, directly read original author abstract at https://pubmed.ncbi.nlm.nih.gov/37689920/ . Distinguishes body tactile features, subtle 3-CQA/4-CQA mouthcoating and inverse concentration response under studied conditions; no personalized five-taste next-shot efficacy, universal correction or confirmed salivary mechanism. Full text and underlying raw data inaccessible. Source ledger appended **1 source, 3 atomic checks, 1 P3 research-only proposal** (144/413/207 → candidate 145/416/208) with no alteration to prior entries. Original S019 remains inaccessible.\n\nOnly `docs/audits/issue455-research-source-coverage-20261103.json` Git blob `18f18c4b8c9de20d81ccd04777db235c7c8b40c0` and `docs/workstreams/ops-issue455-r258-body-mouthcoating-primary-20261114.md` blob `cfc75c3a252d60710ed3e37c8f145f613c243da5` added/updated. No code/tests/CI, five tastes, Locked requirements, release queue, production, Netlify, Supabase/Auth/Edge/member, telemetry or deployment changes; #267 literal line credit zero. JSON round-trip + prior-record preservation/unique ID checks passed in construction; hosted checks NOT YET RUN. Applicable GitHub governance must pass before nonforce merge. `[skip netlify]` required in actual merge message too.\n\nIssue #455 remains OPEN; no owner decision on this evidence-only record.",
+      "title_words": 8,
+      "body_words": 186,
+      "title_word_range": [
+        1,
+        8
+      ],
+      "body_word_range": [
+        1,
+        186
+      ],
+      "body_line_range": [
+        1,
+        9
+      ],
+      "whole_title_newline_body_utf8_bytes": 1919,
+      "issue_comments_not_semantically_reviewed": 0,
+      "review_comments_not_semantically_reviewed": 0,
+      "semantic_disposition": "#455 author abstract mouthcoating source: not full paper/raw data or validated personalized five-taste recommendation; research owner retains.",
+      "historical_title_action": "ARCHIVE_COMPLETED_AFTER_ORIGINAL_SEAL"
+    },
+    {
+      "number": 2692,
+      "native_id": 5311985588,
+      "node_id": "PR_kwDOUMrfDs8AAAABPJ53tA",
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2692",
+      "created_at": "2026-11-14T13:58:58Z",
+      "updated_at": "2026-11-14T14:02:51Z",
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-11-14T14:02:51Z",
+      "head_sha": "16f2ba68838e8f648de27c3eef0edb6243aac97e",
+      "base_sha": "19b06f1a890ac26c9f8b9f13ce6c3a4634c85615",
+      "merge_commit_sha": "99a380b3d6b6e65b8f66aa95742ef150cd64d47a",
+      "original_title": "test(#33): R200 original603 #294 selected current Seeds source [skip netlify]",
+      "original_body": "Issue #33 R200 DEVELOPMENT ONLY. Immutable preflight development `19b06f1a890ac26c9f8b9f13ce6c3a4634c85615`, PREFLIGHT Git blob `2fb236bbfa6bac48513eeb3bd157b260853af06d`, new SAME-COMMIT scoped journal receipt. Fresh selected official Seeds coffee #294 `Top Shelf Series: Colombia Alejandro Ruiz` at https://seedscoffee.com/products/top-shelf-series-colombia-alejandro-ruiz : selected direct literal Alejandro Ruiz, Huila Colombia, natural processed Caturra, Star Fruit and Guava, two contextual farms. Add four selected actual parser/hostile sibling+SEO regressions, bounded guarded exact chosen official HTTPS current H1/parser/Add Coffee/Source Review test, original immutable register SHA and independent raw source afterproof; no app runtime change, no new queue READY, no 603 manual certification. First tests/CI are PENDING. All 603/201/1197 frozen evidence, oracle, scorer, original CSV untouched. No deployment, provider/production/member/Auth/SQL/Edge writes. Keep parent #33 OPEN, #267 V2/#96 separate; safely merge only after exact-head CI and recheck latest upstream.",
+      "title_words": 10,
+      "body_words": 123,
+      "title_word_range": [
+        1,
+        10
+      ],
+      "body_word_range": [
+        1,
+        123
+      ],
+      "body_line_range": [
+        1,
+        1
+      ],
+      "whole_title_newline_body_utf8_bytes": 1159,
+      "issue_comments_not_semantically_reviewed": 0,
+      "review_comments_not_semantically_reviewed": 0,
+      "semantic_disposition": "#33 selected Seeds original603 #294 parser/test proposal: does not certify entire 603 or allow global frozen SKIPPED counted PASS.",
+      "historical_title_action": "ARCHIVE_COMPLETED_AFTER_ORIGINAL_SEAL"
+    },
+    {
+      "number": 2693,
+      "native_id": 5312092014,
+      "node_id": "PR_kwDOUMrfDs8AAAABPKAXbg",
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2693",
+      "created_at": "2026-11-14T14:08:51Z",
+      "updated_at": "2026-11-14T14:13:34Z",
+      "state": "closed",
+      "draft": false,
+      "merged_at": "2026-11-14T14:13:34Z",
+      "head_sha": "fdc3472f001943bd341d402789689a9f36d6871e",
+      "base_sha": "99a380b3d6b6e65b8f66aa95742ef150cd64d47a",
+      "merge_commit_sha": "cfc601bf33b1a302f154298087c58d5c50c5ff61",
+      "original_title": "docs(#33): R200 exact selected Seeds #294 merged source evidence [skip netlify]",
+      "original_body": "Permanent development-only R200 evidence for already safely merged source/test PR #2692 at `99a380b3d6b6e65b8f66aa95742ef150cd64d47a`. Adds independently verified exact merged source evidence JSON with downloaded ZIP and raw HTML hashes, full exact PR-head and merged CI receipts, scoped R200 journal postflight, and top current-status checkpoint. No app/source/test/workflow changes in this documentation PR, no release/queue changes, no provider writes. Original 603/201/1197 CSV/oracle/scorer intact. `#33` stays OPEN; global frozen603 SKIPPED. Fresh live dev preflight for docs `99a380b3d6b6e65b8f66aa95742ef150cd64d47a` / Git blob `2fb236bbfa6bac48513eeb3bd157b260853af06d`. Preserve concurrent branches; nonforce merge after checked approval. [skip netlify]",
+      "title_words": 11,
+      "body_words": 87,
+      "title_word_range": [
+        1,
+        11
+      ],
+      "body_word_range": [
+        1,
+        87
+      ],
+      "body_line_range": [
+        1,
+        1
+      ],
+      "whole_title_newline_body_utf8_bytes": 843,
+      "issue_comments_not_semantically_reviewed": 0,
+      "review_comments_not_semantically_reviewed": 0,
+      "semantic_disposition": "#33 Seeds #294 historic merged-source evidence only: not current HTTPS access proof and not independent #504 code credit.",
+      "historical_title_action": "ARCHIVE_COMPLETED_AFTER_ORIGINAL_SEAL"
+    }
+  ],
+  "excluded": "Comments/reviews/threads/diffs/changed source/CI and previous original metadata never credited here"
+}
