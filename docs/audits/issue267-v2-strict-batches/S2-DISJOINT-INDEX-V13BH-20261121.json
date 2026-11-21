@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "V13BH",
+  "append_only": true,
+  "previous_batch_index": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-INDEX-V13BG-20261121.json",
+  "development_prewrite_sha": "7a3311ace3e0497b2abce1b121943db1f94b98dc",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "review_method": "DIRECT_AI_PER_LINE_IMMUTABLE_LITERAL_SEMANTICS_NOT_HUMAN",
+  "tracks": [
+    {
+      "track": "frozen_historical_v2",
+      "manifest_index": 220,
+      "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+      "tree_sha": "c54ade64eca30946df8858297578a172f5cf6fa8",
+      "path": "docs/audits/application_pass2_tests.json",
+      "source_blob_sha": "beadec4119aa655da3ff6333a80f93bc867b7eb4",
+      "range": "407-436",
+      "lines": 30,
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F220-407-436-20261121-V13BH.json"
+    },
+    {
+      "track": "pinned_executable_v2",
+      "manifest_index": 68,
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "path": "scripts/audit/public-product-endpoint-probe.mjs",
+      "source_blob_sha": "68b72e56ab6d2429011ae180477abfe25a8c0a87",
+      "range": "2-31",
+      "lines": 30,
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C68-2-31-20261121-V13BH.json"
+    }
+  ],
+  "source_line_counts": {
+    "frozen_new": 30,
+    "pinned_new": 30,
+    "prior_revalidated": 60,
+    "total_new": 60,
+    "overlap": 0
+  },
+  "original_blob_parity": "F220_C68_ACTUAL_GIT_BLOB_EQUAL_FULL_SOURCE",
+  "archived_json_parse": "PASS",
+  "pinned_live_parity": "C68_EXACT_MATCH_AT_DEVELOPMENT_SHA",
+  "findings": [
+    {
+      "id": "V13BH-01",
+      "severity": "LOW_NOT_REPRODUCED",
+      "scope": "scripts/audit/public-product-endpoint-probe.mjs",
+      "lines": "24-25",
+      "disposition": "String preview field values truncated but nonstring nested values retain shape in public diagnostic; mock bounded output to reproduce before any fix. No current private data exposure or source misattribution confirmed."
+    }
+  ],
+  "tests": {
+    "immutable_line_literals": "PASS_60_NEW_60_PRIOR",
+    "git_sha": "PASS_2_FULL_ORIGINAL_FILES",
+    "archived_json_parse": "PASS",
+    "pr_head_actions": "PENDING_BEFORE_PR",
+    "merged_push_actions": "PENDING_BEFORE_MERGE",
+    "node22_lint_build_original603_browser_mobile_offline_sql_auth_rls_performance": "NOT_RUN_DOCS_ONLY"
+  },
+  "provider_readback": "NOT_APPLICABLE",
+  "new_application_fixes": 0,
+  "original603_unchanged": true,
+  "v1_preserved": true,
+  "provisional_r2_c2_preserved": "5451_6462_NO_BLIND_CREDIT",
+  "older_s2_historical_totals_unchanged": "7635_9318_NO_BLIND_CREDIT",
+  "post_pin_drift": "INCOMPLETE",
+  "nontext_assets": "INCOMPLETE",
+  "full_audit_complete": false,
+  "next_source": {
+    "frozen_manifest_index": 220,
+    "frozen_path": "docs/audits/application_pass2_tests.json",
+    "frozen_line": 437,
+    "pinned_manifest_index": 68,
+    "pinned_path": "scripts/audit/public-product-endpoint-probe.mjs",
+    "pinned_line": 32
+  }
+}
