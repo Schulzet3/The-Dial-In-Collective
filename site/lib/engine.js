@@ -860,8 +860,12 @@ function nextAdviceRaw(s,shot,rec) {
    x.feedMode===shot.feedMode&&x.style===shot.style&&x.basketId===shot.basketId);
   const sens=learnSensitivity(exact,v);
   let move=step;if(sens){move=Math.max(.1,round(Math.min(step*4,Math.abs((rec.time.center-shot.timeS)/sens.secondsPerUnit))));}
-  const val=clamp(round(shot.grindSetting+(direction==='finer'?-move:move)),v.grinderMin,v.grinderMax);
-  if(val!==shot.grindSetting)return {title:`Try a little ${direction}`,text:`Try grind ${val.toFixed(1)}. Keep dose and yield similar, then taste again.${sens?' Sized from your own comparable adjustments.':''}`,next:{grindSetting:val,yieldCenter:shot.yieldG}};
+  // A NEW grind target must be a genuine tenth-precision movement inside
+  // the owner's espresso range; clamping to a fractional endpoint can make
+  // the advice a no-op or recommend an unenterable grinder setting.
+  const val=round(shot.grindSetting+(direction==='finer'?-move:move));
+  const moves=direction==='finer'?val<shot.grindSetting:val>shot.grindSetting;
+  if(moves&&val>=v.grinderMin&&val<=v.grinderMax)return {title:`Try a little ${direction}`,text:`Try grind ${val.toFixed(1)}. Keep dose and yield similar, then taste again.${sens?' Sized from your own comparable adjustments.':''}`,next:{grindSetting:val,yieldCenter:shot.yieldG}};
  }
  if(t.extraction!==3){
   const center=yieldTarget(shot,t.extraction<3?1:-1);

@@ -1,0 +1,17 @@
+# #455 R415 — in-range tenth grinder correction, same-commit code/test/queue intake
+
+DIC_PREFLIGHT_VERIFIED development_sha=7699aaa3cf9b977c839cc7ad2ea73340208a7b8e preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**Authority:** Issue #455 Option B owner-approved independently reproduced SAFE Locked-compatible fix, no Publish. Preflight complete at development 7699aaa3cf9b977c839cc7ad2ea73340208a7b8e and independently byte-equal Git blob 3742fed0176c809b115320c698a0e8b1675b2d3e before scoped issue/AGENTS/Drive. Rechecked branch SHA before source edits. Other refs read-only: main 57adc419ed4b106e158435b465971f5986537b41 and release/production 07f054f6470b2ae36b36faef8fb9a8161dd3bfb5.
+
+**Original source:** `site/lib/engine.js` blob bdec2d5c00783cc0394667cae112e9a0ad9f2c98, queue full Git blob 68ef828f734463e4b04d2a13b32ebf7bb40fda45 recovered as 1,955,289 UTF-8 characters after GitHub Contents API returned empty body. R414 actual four-module execution verified misleading fractional-floor finer no-op and fractional-ceiling half-step, and an in-memory one-branch guard on six cases; NOT hosted Node22 CI and not actual measured-cup improvement.
+
+**Code:** Only allow a changed, 0.1-grid grind target if it moves in the intended finer/coarser direction and is itself inside the recorded calibrated espresso range. Otherwise the already approved nextAdviceRaw yield advice runs. Do not clamp a proposed tenth to an unenterable fractional endpoint. Preserve five ratings, measured shot/notes/history, missing ratings, all-green success, one changed controllable setting, style, feed and calibration identity. No new science, temperature policy, endpoints or telemetry.
+
+**Tests:** Added `tests/issue455-r415-grinder-tenth-boundary.test.mjs` with six synthetic negative/positive cases using actual `blankState/createSetup/activeVersion/nextAdvice`: floor 0.15/0.2 finer => yield 41; ceiling 2.55/2.5 coarser => yield 31; 0.15–0.25 narrow => yield 41; feasible 0.3→0.2; complete five-green success; missing fifth rating. Checks before/after original state/shot/notes, at most ONE real control changed, and changed grind decimal tenth in range. **AT AUTHORING: tests authored, NOT RUN; Node22/browser/mobile/offline/a11y/CI NOT PASS.**
+
+**Queue:** New `DIC-Q-455-r415-grinder-tenth-boundary` TESTING entry prepended without changing other 448 items. Exact queue original Git blob 68ef828f734463e4b04d2a13b32ebf7bb40fda45; queue write is the full valid original parsed JSON with exactly one new item, formatted identically. `docs/CURRENT_STATUS.md`, source register and approval matrix unchanged pending exact CI/READY. #267 physical-line audit not duplicated, #33/#96 separate. S019 and real prospective taste outcomes not independently available.
+
+**Files changed in SAME COMMIT:** `site/lib/engine.js`, `tests/issue455-r415-grinder-tenth-boundary.test.mjs`, `docs/RELEASE_QUEUE.json`, this scoped journal. No production, main/release move, Netlify/SQL/Auth/Edge/provider/member writes, secrets, purchases, backups, history deletion, force Git, schedule or alert change. No release or READY claim.
+
+**Next:** Verify PR-head Node22, targeted mobile/browser/offline/accessibility and governance; diagnose/retest failures. Merge nonforce only if required checks successful, with [skip netlify] merge title/message and exact-source integrity readback; reconcile #455 and queue afterwards. [skip netlify]
