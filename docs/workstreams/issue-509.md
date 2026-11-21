@@ -1,3 +1,23 @@
+# Issue #509 R415 — PostgreSQL access methods, languages, ranges, event triggers, rewrite rules and constraints [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=85a7711984d395ec3e5bd97f8500862247354d90 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-21 UTC.** Mandatory-first live development SHA and immutable `docs/ai/PREFLIGHT.md` content were independently compared with the Git blob before any other project documents or provider access. The live production Supabase project `azviqqejypsefzilgonr` remained **ACTIVE_HEALTHY**, PostgreSQL **17.11.0.003**, **READ-ONLY**. Recovered actual main/release refs, Issue #509 and previous R414 exact unreviewed `pg_catalog.pg_am` cursor.
+
+Completed **214 new direct full exposed-definition semantic reviews** across native PostgreSQL catalogs: **7/7** `pg_am` access-method handler definitions, **4/4** `pg_language` language handler/validator mappings, **6/6** `pg_range` canonicalizer/subtype-difference definitions, **7/7** `pg_event_trigger` complete trigger-handler bodies, **80/80** `pg_catalog.pg_rewrite` full SQL rules (**58,516** exposed rule characters, including 78 native view SELECT rewrites and 2 `pg_settings` update rules), and **110/110** `pg_catalog.pg_constraint` complete PRIMARY/UNIQUE definitions (**2,755** characters, 62 PK and 48 UNIQUE). Every inspected object has identity, full exposed catalog definition/handler source, provider MD5 or literal, character review range, typed purpose/consumer/dependency context and per-object KEEP disposition in these append-only ledgers:
+
+- [R415 access methods/languages/ranges/event triggers](../audits/issue509-r415-pg-am-languages-ranges-eventtriggers-20261121.json) created at GitHub docs-only commit `733c8b1eab7de02f116f97d1c4568efa363f4779`.
+- [R415 native rewrite rules](../audits/issue509-r415-pg-catalog-rewrite-ranks1-80-20261121.json) created at `2b513a195a64a591d0a1bf26df8104ed4db4d649`.
+- [R415 native constraints](../audits/issue509-r415-pg-catalog-constraints-ranks1-110-20261121.json) created at `a2bee644d9ea411d9cf02653b6d9f49bf6880a78`.
+
+**Semantic review:** 249 currently installed B-tree physical indexes plus two additional B-tree index-class relations, three hash indexes and 93 non-system heap relations substantiate active native access methods; zero installed GIN/GiST/BRIN/SP-GiST indexes is not safe-removal evidence. PL/pgSQL and SQL validators are distinct from native and C bindings; discrete ranges normalize boundaries while continuous ranges do not. Provider event triggers enforce RLS on public table DDL, handle installed extension compatibility and refresh PostgREST schema cache. The native `pg_stats` views protect RLS/owner-scoped statistic exposure; `pg_user_mappings` conditionally protects mapping options; the `pg_settings` rewrite rules are legitimately distinct. Catalog primary and unique keys, including repeated `PRIMARY KEY (oid)` across different relations, are separate identity guarantees rather than redundant indexes. **No new reproducible DIC application bug, measured app bottleneck, verified source drift or justified safe deletion from these provider-native categories.** PostgreSQL C/internal binary implementations and original authored CREATE text beyond exposed reconstructed definitions remain **UNVERIFIED**. Zero #267 GitHub code-source lines credited.
+
+All three commits were **documentation ledgers only** using `[skip netlify]`; there were **no source/test/CI changes** and new exact-source tests are **NOT_APPLICABLE**, not falsely PASS. No GitHub source-code repair was warranted by these native findings; do not change production SQL, Auth, Storage, Edge, data or config. No publication, backup, billing, scheduling or notification-policy change. READY/current DEPLOYED status **NOT_REVALIDATED**; entire exhaustive provider baseline **IN_PROGRESS**.
+
+**Next exact unreviewed provider route:** enumerate remaining `pg_catalog` metadata/definitions not separately credited (e.g. index, column default and relation-definition surfaces), then review rank **1** and contiguous full exposed range of whichever catalog is genuinely unreviewed after checking the append-only ledgers; prioritize changed DIC-owned provider objects if material drift appears. No owner-action alert.
+
+---
+
 # Issue #509 R414 — PostgreSQL native full-text search 615 catalog records [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=7699aaa3cf9b977c839cc7ad2ea73340208a7b8e preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
