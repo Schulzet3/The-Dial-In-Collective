@@ -1,0 +1,5891 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "round": "R428",
+  "date_utc": "2026-11-21",
+  "project": "azviqqejypsefzilgonr",
+  "provider": "Supabase PostgreSQL 17.11.0.003",
+  "production_read_only": true,
+  "preflight_development_sha": "02155b2f02c4949abb2d0c8140f26e8120235f08",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "route": "pg_catalog.pg_class non-index relations, ranks 31-79 of 142 in OID order",
+  "newly_reviewed": 49,
+  "core_catalog_tables_reviewed": 34,
+  "core_catalog_views_reviewed": 15,
+  "route_total": 142,
+  "cumulative_route_reviewed": 79,
+  "table_definition_exposure": "COMPLETE_ACCESSIBLE_CATALOG_PROJECTION_NOT_ORIGINAL_POSTGRESQL_BOOTSTRAP_DDL",
+  "catalog_projection_json_characters": 97114,
+  "columns_reviewed": 391,
+  "full_index_definitions": 61,
+  "constraint_expressions": 58,
+  "view_source_characters": 14673,
+  "original_bootstrap_source": "UNVERIFIED",
+  "native_compiled_source": "UNVERIFIED",
+  "private_records_read": false,
+  "github267_code_line_credit": 0,
+  "source_bound_ci": "NOT_APPLICABLE_DOCS_ONLY",
+  "app_fix": "NONE_JUSTIFIED_FROM_THIS_SEGMENT",
+  "production_metadata_crosscheck": {
+    "publications": 1,
+    "publication_name": "supabase_realtime",
+    "publication_table_count": 0,
+    "subscriptions": 0,
+    "replication_origins": 0,
+    "foreign_tables": 0,
+    "partitioned_tables": 1,
+    "app_client_source_direct_postgres_changes_usage_in_2_known_cloud_entrypoints": "NOT_FOUND_NOT_EXHAUSTIVE"
+  },
+  "verdict": "KEEP_SYSTEM_CATALOGS_NO_REPRODUCED_DIC_BUG",
+  "entries": [
+    {
+      "rank": 31,
+      "oid": 2616,
+      "identity": "pg_catalog.pg_opclass",
+      "relation_kind": "r",
+      "provider_projection_md5": "bd2508f783f518c28276fd27fecd1bc2",
+      "reviewed_character_range": "1-1931",
+      "serialized_projection_characters": 1931,
+      "semantic_review": "Access-method operator-class mapping retains namespace, family, input/key type and default selector; two unique lookup keys distinct.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "2616",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_opclass",
+        "rank": 31,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "opcmethod",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "opcname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "opcnamespace",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "opcowner",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "opcfamily",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "opcintype",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "opcdefault",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 9,
+            "name": "opckeytype",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_opclass_am_name_nsp_index ON pg_catalog.pg_opclass USING btree (opcmethod, opcname, opcnamespace)",
+          "CREATE UNIQUE INDEX pg_opclass_oid_index ON pg_catalog.pg_opclass USING btree (oid)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_opclass_am_name_nsp_index",
+            "definition": "UNIQUE (opcmethod, opcname, opcnamespace)"
+          },
+          {
+            "name": "pg_opclass_oid_index",
+            "definition": "PRIMARY KEY (oid)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 32,
+      "oid": 2617,
+      "identity": "pg_catalog.pg_operator",
+      "relation_kind": "r",
+      "provider_projection_md5": "6095a3de5ea039c856b0e8ff6ebdff57",
+      "reviewed_character_range": "1-2794",
+      "serialized_projection_characters": 2794,
+      "semantic_review": "Named operator signature stores operand/result types, implementation, commutator/negator and planner selectivity hooks; unique signature and OID distinct.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "2617",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_operator",
+        "rank": 32,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "oprname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "oprnamespace",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "oprowner",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "oprkind",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "oprcanmerge",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "oprcanhash",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "oprleft",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 9,
+            "name": "oprright",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 10,
+            "name": "oprresult",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 11,
+            "name": "oprcom",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 12,
+            "name": "oprnegate",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 13,
+            "name": "oprcode",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 14,
+            "name": "oprrest",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 15,
+            "name": "oprjoin",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_operator_oid_index ON pg_catalog.pg_operator USING btree (oid)",
+          "CREATE UNIQUE INDEX pg_operator_oprname_l_r_n_index ON pg_catalog.pg_operator USING btree (oprname, oprleft, oprright, oprnamespace)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_operator_oid_index",
+            "definition": "PRIMARY KEY (oid)"
+          },
+          {
+            "name": "pg_operator_oprname_l_r_n_index",
+            "definition": "UNIQUE (oprname, oprleft, oprright, oprnamespace)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 33,
+      "oid": 2618,
+      "identity": "pg_catalog.pg_rewrite",
+      "relation_kind": "r",
+      "provider_projection_md5": "1aa123116abf1cf8d245f005ae30ebec",
+      "reviewed_character_range": "1-1790",
+      "serialized_projection_characters": 1790,
+      "semantic_review": "Rewrite-rule event/action syntax trees keyed by relation/name; engine-dependent view and rule support, not unused application source.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "2618",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_rewrite",
+        "rank": 33,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "rulename",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "ev_class",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "ev_type",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "ev_enabled",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "is_instead",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "ev_qual",
+            "type": "pg_node_tree",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "ev_action",
+            "type": "pg_node_tree",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_rewrite_oid_index ON pg_catalog.pg_rewrite USING btree (oid)",
+          "CREATE UNIQUE INDEX pg_rewrite_rel_rulename_index ON pg_catalog.pg_rewrite USING btree (ev_class, rulename)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_rewrite_oid_index",
+            "definition": "PRIMARY KEY (oid)"
+          },
+          {
+            "name": "pg_rewrite_rel_rulename_index",
+            "definition": "UNIQUE (ev_class, rulename)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 34,
+      "oid": 2619,
+      "identity": "pg_catalog.pg_statistic",
+      "relation_kind": "r",
+      "provider_projection_md5": "da43bc6fcf841c4651fffa313f7be6ec",
+      "reviewed_character_range": "1-4887",
+      "serialized_projection_characters": 4887,
+      "semantic_review": "Planner per-column statistics with five histograms/MCV slots and inherited split; not member rows, not deletable analytics fluff.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin"
+        ],
+        "oid": "2619",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_statistic",
+        "rank": 34,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "starelid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "staattnum",
+            "type": "smallint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "stainherit",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "stanullfrac",
+            "type": "real",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "stawidth",
+            "type": "integer",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "stadistinct",
+            "type": "real",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "stakind1",
+            "type": "smallint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "stakind2",
+            "type": "smallint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 9,
+            "name": "stakind3",
+            "type": "smallint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 10,
+            "name": "stakind4",
+            "type": "smallint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 11,
+            "name": "stakind5",
+            "type": "smallint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 12,
+            "name": "staop1",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 13,
+            "name": "staop2",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 14,
+            "name": "staop3",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 15,
+            "name": "staop4",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 16,
+            "name": "staop5",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 17,
+            "name": "stacoll1",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 18,
+            "name": "stacoll2",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 19,
+            "name": "stacoll3",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 20,
+            "name": "stacoll4",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 21,
+            "name": "stacoll5",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 22,
+            "name": "stanumbers1",
+            "type": "real[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 23,
+            "name": "stanumbers2",
+            "type": "real[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 24,
+            "name": "stanumbers3",
+            "type": "real[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 25,
+            "name": "stanumbers4",
+            "type": "real[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 26,
+            "name": "stanumbers5",
+            "type": "real[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 27,
+            "name": "stavalues1",
+            "type": "anyarray",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 28,
+            "name": "stavalues2",
+            "type": "anyarray",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 29,
+            "name": "stavalues3",
+            "type": "anyarray",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 30,
+            "name": "stavalues4",
+            "type": "anyarray",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 31,
+            "name": "stavalues5",
+            "type": "anyarray",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_statistic_relid_att_inh_index ON pg_catalog.pg_statistic USING btree (starelid, staattnum, stainherit)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_statistic_relid_att_inh_index",
+            "definition": "PRIMARY KEY (starelid, staattnum, stainherit)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 35,
+      "oid": 2620,
+      "identity": "pg_catalog.pg_trigger",
+      "relation_kind": "r",
+      "provider_projection_md5": "e74d6fdf850ddb2f9f2c9f11aa8298ce",
+      "reviewed_character_range": "1-3428",
+      "serialized_projection_characters": 3428,
+      "semantic_review": "Trigger function OID, timings, internal/constraint flags and transition table options; relation/name and constraint lookup indexes serve different access.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "2620",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_trigger",
+        "rank": 35,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "tgrelid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "tgparentid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "tgname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "tgfoid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "tgtype",
+            "type": "smallint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "tgenabled",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "tgisinternal",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 9,
+            "name": "tgconstrrelid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 10,
+            "name": "tgconstrindid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 11,
+            "name": "tgconstraint",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 12,
+            "name": "tgdeferrable",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 13,
+            "name": "tginitdeferred",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 14,
+            "name": "tgnargs",
+            "type": "smallint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 15,
+            "name": "tgattr",
+            "type": "int2vector",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 16,
+            "name": "tgargs",
+            "type": "bytea",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 17,
+            "name": "tgqual",
+            "type": "pg_node_tree",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 18,
+            "name": "tgoldtable",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 19,
+            "name": "tgnewtable",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE INDEX pg_trigger_tgconstraint_index ON pg_catalog.pg_trigger USING btree (tgconstraint)",
+          "CREATE UNIQUE INDEX pg_trigger_tgrelid_tgname_index ON pg_catalog.pg_trigger USING btree (tgrelid, tgname)",
+          "CREATE UNIQUE INDEX pg_trigger_oid_index ON pg_catalog.pg_trigger USING btree (oid)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_trigger_tgrelid_tgname_index",
+            "definition": "UNIQUE (tgrelid, tgname)"
+          },
+          {
+            "name": "pg_trigger_oid_index",
+            "definition": "PRIMARY KEY (oid)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 36,
+      "oid": 2753,
+      "identity": "pg_catalog.pg_opfamily",
+      "relation_kind": "r",
+      "provider_projection_md5": "38070c786db03478e464902ada7881be",
+      "reviewed_character_range": "1-1384",
+      "serialized_projection_characters": 1384,
+      "semantic_review": "Operator-family index-method/name/namespace identity needed for compatible operator classes.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "2753",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_opfamily",
+        "rank": 36,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "opfmethod",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "opfname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "opfnamespace",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "opfowner",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_opfamily_am_name_nsp_index ON pg_catalog.pg_opfamily USING btree (opfmethod, opfname, opfnamespace)",
+          "CREATE UNIQUE INDEX pg_opfamily_oid_index ON pg_catalog.pg_opfamily USING btree (oid)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_opfamily_am_name_nsp_index",
+            "definition": "UNIQUE (opfmethod, opfname, opfnamespace)"
+          },
+          {
+            "name": "pg_opfamily_oid_index",
+            "definition": "PRIMARY KEY (oid)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 37,
+      "oid": 2964,
+      "identity": "pg_catalog.pg_db_role_setting",
+      "relation_kind": "r",
+      "provider_projection_md5": "5bf405b80937787ad3bb5dc1cdac0eb1",
+      "reviewed_character_range": "1-975",
+      "serialized_projection_characters": 975,
+      "semantic_review": "Per-database/per-role GUC override array keyed by both IDs; only definition inspected, not values.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "2964",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_db_role_setting",
+        "rank": 37,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "setdatabase",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "setrole",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "setconfig",
+            "type": "text[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_db_role_setting_databaseid_rol_index ON pg_catalog.pg_db_role_setting USING btree (setdatabase, setrole)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_db_role_setting_databaseid_rol_index",
+            "definition": "PRIMARY KEY (setdatabase, setrole)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 38,
+      "oid": 2995,
+      "identity": "pg_catalog.pg_largeobject_metadata",
+      "relation_kind": "r",
+      "provider_projection_md5": "dd44c78580d508df60758247bffa7ad6",
+      "reviewed_character_range": "1-932",
+      "serialized_projection_characters": 932,
+      "semantic_review": "Large-object ownership and ACL metadata keyed by OID; no LO contents or private rows read.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "2995",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_largeobject_metadata",
+        "rank": 38,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "lomowner",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "lomacl",
+            "type": "aclitem[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_largeobject_metadata_oid_index ON pg_catalog.pg_largeobject_metadata USING btree (oid)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_largeobject_metadata_oid_index",
+            "definition": "PRIMARY KEY (oid)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 39,
+      "oid": 3079,
+      "identity": "pg_catalog.pg_extension",
+      "relation_kind": "r",
+      "provider_projection_md5": "af51587cf1b2c238e145d5a3b0c46e84",
+      "reviewed_character_range": "1-1759",
+      "serialized_projection_characters": 1759,
+      "semantic_review": "Installed extension version, namespace, owner and update configuration needed to track extension state.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "3079",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_extension",
+        "rank": 39,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "extname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "extowner",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "extnamespace",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "extrelocatable",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "extversion",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "extconfig",
+            "type": "oid[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "extcondition",
+            "type": "text[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_extension_oid_index ON pg_catalog.pg_extension USING btree (oid)",
+          "CREATE UNIQUE INDEX pg_extension_name_index ON pg_catalog.pg_extension USING btree (extname)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_extension_oid_index",
+            "definition": "PRIMARY KEY (oid)"
+          },
+          {
+            "name": "pg_extension_name_index",
+            "definition": "UNIQUE (extname)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 40,
+      "oid": 3118,
+      "identity": "pg_catalog.pg_foreign_table",
+      "relation_kind": "r",
+      "provider_projection_md5": "73954fce18f607cee88f4e3d4d4e2dca",
+      "reviewed_character_range": "1-920",
+      "serialized_projection_characters": 920,
+      "semantic_review": "Foreign-table relation/server/options metadata; aggregate live foreign-table count zero but engine infrastructure remains.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "3118",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_foreign_table",
+        "rank": 40,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "ftrelid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "ftserver",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "ftoptions",
+            "type": "text[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_foreign_table_relid_index ON pg_catalog.pg_foreign_table USING btree (ftrelid)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_foreign_table_relid_index",
+            "definition": "PRIMARY KEY (ftrelid)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 41,
+      "oid": 3256,
+      "identity": "pg_catalog.pg_policy",
+      "relation_kind": "r",
+      "provider_projection_md5": "c0efe88b97f7b4b4d5231b104dafffb0",
+      "reviewed_character_range": "1-1790",
+      "serialized_projection_characters": 1790,
+      "semantic_review": "RLS policy name, command, role list, USING/WITH CHECK parse-tree storage; both relation/name and OID identities required.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "3256",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_policy",
+        "rank": 41,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "polname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "polrelid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "polcmd",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "polpermissive",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "polroles",
+            "type": "oid[]",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "polqual",
+            "type": "pg_node_tree",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "polwithcheck",
+            "type": "pg_node_tree",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_policy_oid_index ON pg_catalog.pg_policy USING btree (oid)",
+          "CREATE UNIQUE INDEX pg_policy_polrelid_polname_index ON pg_catalog.pg_policy USING btree (polrelid, polname)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_policy_oid_index",
+            "definition": "PRIMARY KEY (oid)"
+          },
+          {
+            "name": "pg_policy_polrelid_polname_index",
+            "definition": "UNIQUE (polrelid, polname)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 42,
+      "oid": 3350,
+      "identity": "pg_catalog.pg_partitioned_table",
+      "relation_kind": "r",
+      "provider_projection_md5": "781e456362f30db3b8b7f198eff732d9",
+      "reviewed_character_range": "1-1675",
+      "serialized_projection_characters": 1675,
+      "semantic_review": "Partition-key strategy/attribute/opclass/collation/expression storage; live catalog count one, engine-owned.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "3350",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_partitioned_table",
+        "rank": 42,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "partrelid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "partstrat",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "partnatts",
+            "type": "smallint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "partdefid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "partattrs",
+            "type": "int2vector",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "partclass",
+            "type": "oidvector",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "partcollation",
+            "type": "oidvector",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "partexprs",
+            "type": "pg_node_tree",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_partitioned_table_partrelid_index ON pg_catalog.pg_partitioned_table USING btree (partrelid)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_partitioned_table_partrelid_index",
+            "definition": "PRIMARY KEY (partrelid)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 43,
+      "oid": 3381,
+      "identity": "pg_catalog.pg_statistic_ext",
+      "relation_kind": "r",
+      "provider_projection_md5": "2a366585f12229b7e046a6fbc640df40",
+      "reviewed_character_range": "1-2058",
+      "serialized_projection_characters": 2058,
+      "semantic_review": "Extended-statistics definition with columns/expressions, per-relation and qualified name indexes.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "3381",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_statistic_ext",
+        "rank": 43,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "stxrelid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "stxname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "stxnamespace",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "stxowner",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "stxkeys",
+            "type": "int2vector",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "stxstattarget",
+            "type": "smallint",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "stxkind",
+            "type": "\"char\"[]",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 9,
+            "name": "stxexprs",
+            "type": "pg_node_tree",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE INDEX pg_statistic_ext_relid_index ON pg_catalog.pg_statistic_ext USING btree (stxrelid)",
+          "CREATE UNIQUE INDEX pg_statistic_ext_oid_index ON pg_catalog.pg_statistic_ext USING btree (oid)",
+          "CREATE UNIQUE INDEX pg_statistic_ext_name_index ON pg_catalog.pg_statistic_ext USING btree (stxname, stxnamespace)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_statistic_ext_oid_index",
+            "definition": "PRIMARY KEY (oid)"
+          },
+          {
+            "name": "pg_statistic_ext_name_index",
+            "definition": "UNIQUE (stxname, stxnamespace)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 44,
+      "oid": 3394,
+      "identity": "pg_catalog.pg_init_privs",
+      "relation_kind": "r",
+      "provider_projection_md5": "4db56d415b235045a53ecae33146c028",
+      "reviewed_character_range": "1-1228",
+      "serialized_projection_characters": 1228,
+      "semantic_review": "Initial privilege restoration baseline keyed by object/class/subobject; needed for extension/grant audit.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "3394",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_init_privs",
+        "rank": 44,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "objoid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "classoid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "objsubid",
+            "type": "integer",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "privtype",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "initprivs",
+            "type": "aclitem[]",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_init_privs_o_c_o_index ON pg_catalog.pg_init_privs USING btree (objoid, classoid, objsubid)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_init_privs_o_c_o_index",
+            "definition": "PRIMARY KEY (objoid, classoid, objsubid)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 45,
+      "oid": 3429,
+      "identity": "pg_catalog.pg_statistic_ext_data",
+      "relation_kind": "r",
+      "provider_projection_md5": "ab53bacc0ce32d7a5f02e06e97e476c7",
+      "reviewed_character_range": "1-1418",
+      "serialized_projection_characters": 1418,
+      "semantic_review": "Extended-statistics data with multi-column dependencies, MCV and per-expression stats; distinct from declarations.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin"
+        ],
+        "oid": "3429",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_statistic_ext_data",
+        "rank": 45,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "stxoid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "stxdinherit",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "stxdndistinct",
+            "type": "pg_ndistinct",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "stxddependencies",
+            "type": "pg_dependencies",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "stxdmcv",
+            "type": "pg_mcv_list",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "stxdexpr",
+            "type": "pg_statistic[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_statistic_ext_data_stxoid_inh_index ON pg_catalog.pg_statistic_ext_data USING btree (stxoid, stxdinherit)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_statistic_ext_data_stxoid_inh_index",
+            "definition": "PRIMARY KEY (stxoid, stxdinherit)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 46,
+      "oid": 3456,
+      "identity": "pg_catalog.pg_collation",
+      "relation_kind": "r",
+      "provider_projection_md5": "12ce4fda53a34a2728b583fb002f56d0",
+      "reviewed_character_range": "1-2415",
+      "serialized_projection_characters": 2415,
+      "semantic_review": "Provider, locale, determinism, encoding, ICU rules/version with encoding-sensitive uniqueness, engine collation contract.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "3456",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_collation",
+        "rank": 46,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "collname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "collnamespace",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "collowner",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "collprovider",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "collisdeterministic",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "collencoding",
+            "type": "integer",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "collcollate",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 9,
+            "name": "collctype",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 10,
+            "name": "colllocale",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 11,
+            "name": "collicurules",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 12,
+            "name": "collversion",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_collation_oid_index ON pg_catalog.pg_collation USING btree (oid)",
+          "CREATE UNIQUE INDEX pg_collation_name_enc_nsp_index ON pg_catalog.pg_collation USING btree (collname, collencoding, collnamespace)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_collation_name_enc_nsp_index",
+            "definition": "UNIQUE (collname, collencoding, collnamespace)"
+          },
+          {
+            "name": "pg_collation_oid_index",
+            "definition": "PRIMARY KEY (oid)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 47,
+      "oid": 3466,
+      "identity": "pg_catalog.pg_event_trigger",
+      "relation_kind": "r",
+      "provider_projection_md5": "a544f002d20eea9ddeb60f3801b4cf00",
+      "reviewed_character_range": "1-1638",
+      "serialized_projection_characters": 1638,
+      "semantic_review": "DDL event trigger event/function/tag and enabled state, per-name and OID uniqueness.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "3466",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_event_trigger",
+        "rank": 47,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "evtname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "evtevent",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "evtowner",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "evtfoid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "evtenabled",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "evttags",
+            "type": "text[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_event_trigger_evtname_index ON pg_catalog.pg_event_trigger USING btree (evtname)",
+          "CREATE UNIQUE INDEX pg_event_trigger_oid_index ON pg_catalog.pg_event_trigger USING btree (oid)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_event_trigger_evtname_index",
+            "definition": "UNIQUE (evtname)"
+          },
+          {
+            "name": "pg_event_trigger_oid_index",
+            "definition": "PRIMARY KEY (oid)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 48,
+      "oid": 3501,
+      "identity": "pg_catalog.pg_enum",
+      "relation_kind": "r",
+      "provider_projection_md5": "687e00f80cd965e6e4f2e2b5690033d1",
+      "reviewed_character_range": "1-1408",
+      "serialized_projection_characters": 1408,
+      "semantic_review": "Enum type, sort order and label uniqueness; three separate unique keys needed for lookup/order.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "3501",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_enum",
+        "rank": 48,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "enumtypid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "enumsortorder",
+            "type": "real",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "enumlabel",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_enum_oid_index ON pg_catalog.pg_enum USING btree (oid)",
+          "CREATE UNIQUE INDEX pg_enum_typid_label_index ON pg_catalog.pg_enum USING btree (enumtypid, enumlabel)",
+          "CREATE UNIQUE INDEX pg_enum_typid_sortorder_index ON pg_catalog.pg_enum USING btree (enumtypid, enumsortorder)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_enum_oid_index",
+            "definition": "PRIMARY KEY (oid)"
+          },
+          {
+            "name": "pg_enum_typid_label_index",
+            "definition": "UNIQUE (enumtypid, enumlabel)"
+          },
+          {
+            "name": "pg_enum_typid_sortorder_index",
+            "definition": "UNIQUE (enumtypid, enumsortorder)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 49,
+      "oid": 3541,
+      "identity": "pg_catalog.pg_range",
+      "relation_kind": "r",
+      "provider_projection_md5": "89e29bdf71e8b033f385f2ff038d73ef",
+      "reviewed_character_range": "1-1647",
+      "serialized_projection_characters": 1647,
+      "semantic_review": "Range/multirange type mapping, subtype and comparator canonicalization functions; distinct from ordinary type catalog.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "3541",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_range",
+        "rank": 49,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "rngtypid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "rngsubtype",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "rngmultitypid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "rngcollation",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "rngsubopc",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "rngcanonical",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "rngsubdiff",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_range_rngmultitypid_index ON pg_catalog.pg_range USING btree (rngmultitypid)",
+          "CREATE UNIQUE INDEX pg_range_rngtypid_index ON pg_catalog.pg_range USING btree (rngtypid)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_range_rngtypid_index",
+            "definition": "PRIMARY KEY (rngtypid)"
+          },
+          {
+            "name": "pg_range_rngmultitypid_index",
+            "definition": "UNIQUE (rngmultitypid)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 50,
+      "oid": 3576,
+      "identity": "pg_catalog.pg_transform",
+      "relation_kind": "r",
+      "provider_projection_md5": "270f812b66a83e5e8c839cccecdde869",
+      "reviewed_character_range": "1-1358",
+      "serialized_projection_characters": 1358,
+      "semantic_review": "Data type/language transform functions keyed by type+language; no registered transforms in prior aggregate.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "3576",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_transform",
+        "rank": 50,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "trftype",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "trflang",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "trffromsql",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "trftosql",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_transform_oid_index ON pg_catalog.pg_transform USING btree (oid)",
+          "CREATE UNIQUE INDEX pg_transform_type_lang_index ON pg_catalog.pg_transform USING btree (trftype, trflang)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_transform_oid_index",
+            "definition": "PRIMARY KEY (oid)"
+          },
+          {
+            "name": "pg_transform_type_lang_index",
+            "definition": "UNIQUE (trftype, trflang)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 51,
+      "oid": 3592,
+      "identity": "pg_catalog.pg_shseclabel",
+      "relation_kind": "r",
+      "provider_projection_md5": "39148176cde0993683312e8f6daded49",
+      "reviewed_character_range": "1-1077",
+      "serialized_projection_characters": 1077,
+      "semantic_review": "Shared-object security labels keyed by object,class,provider; distinct shared vs local scope.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "3592",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_shseclabel",
+        "rank": 51,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "objoid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "classoid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "provider",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "label",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_shseclabel_object_index ON pg_catalog.pg_shseclabel USING btree (objoid, classoid, provider)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_shseclabel_object_index",
+            "definition": "PRIMARY KEY (objoid, classoid, provider)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 52,
+      "oid": 3596,
+      "identity": "pg_catalog.pg_seclabel",
+      "relation_kind": "r",
+      "provider_projection_md5": "43eaa42168af18d3a5e6faa48e770178",
+      "reviewed_character_range": "1-1229",
+      "serialized_projection_characters": 1229,
+      "semantic_review": "Database-local object/subobject security labels including provider; separate from shared labels.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "3596",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_seclabel",
+        "rank": 52,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "objoid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "classoid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "objsubid",
+            "type": "integer",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "provider",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "label",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_seclabel_object_index ON pg_catalog.pg_seclabel USING btree (objoid, classoid, objsubid, provider)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_seclabel_object_index",
+            "definition": "PRIMARY KEY (objoid, classoid, objsubid, provider)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 53,
+      "oid": 3600,
+      "identity": "pg_catalog.pg_ts_dict",
+      "relation_kind": "r",
+      "provider_projection_md5": "a77f9c91d8cb0acc6c841a7008f741a5",
+      "reviewed_character_range": "1-1503",
+      "serialized_projection_characters": 1503,
+      "semantic_review": "Full-text search dictionary template and optional init settings keyed by namespace/name.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "3600",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_ts_dict",
+        "rank": 53,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "dictname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "dictnamespace",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "dictowner",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "dicttemplate",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "dictinitoption",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_ts_dict_dictname_index ON pg_catalog.pg_ts_dict USING btree (dictname, dictnamespace)",
+          "CREATE UNIQUE INDEX pg_ts_dict_oid_index ON pg_catalog.pg_ts_dict USING btree (oid)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_ts_dict_dictname_index",
+            "definition": "UNIQUE (dictname, dictnamespace)"
+          },
+          {
+            "name": "pg_ts_dict_oid_index",
+            "definition": "PRIMARY KEY (oid)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 54,
+      "oid": 3601,
+      "identity": "pg_catalog.pg_ts_parser",
+      "relation_kind": "r",
+      "provider_projection_md5": "242794366196c9529f56f0d014aec878",
+      "reviewed_character_range": "1-1791",
+      "serialized_projection_characters": 1791,
+      "semantic_review": "Text-search parser start/token/end/headline/lextype hooks keyed by namespace/name.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "3601",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_ts_parser",
+        "rank": 54,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "prsname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "prsnamespace",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "prsstart",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "prstoken",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "prsend",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "prsheadline",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "prslextype",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_ts_parser_prsname_index ON pg_catalog.pg_ts_parser USING btree (prsname, prsnamespace)",
+          "CREATE UNIQUE INDEX pg_ts_parser_oid_index ON pg_catalog.pg_ts_parser USING btree (oid)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_ts_parser_prsname_index",
+            "definition": "UNIQUE (prsname, prsnamespace)"
+          },
+          {
+            "name": "pg_ts_parser_oid_index",
+            "definition": "PRIMARY KEY (oid)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 55,
+      "oid": 3602,
+      "identity": "pg_catalog.pg_ts_config",
+      "relation_kind": "r",
+      "provider_projection_md5": "95edd01c158fcb0a6b3dea01953b5809",
+      "reviewed_character_range": "1-1361",
+      "serialized_projection_characters": 1361,
+      "semantic_review": "Text-search configuration to parser mapping keyed by namespace/name.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "3602",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_ts_config",
+        "rank": 55,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "cfgname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "cfgnamespace",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "cfgowner",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "cfgparser",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_ts_config_cfgname_index ON pg_catalog.pg_ts_config USING btree (cfgname, cfgnamespace)",
+          "CREATE UNIQUE INDEX pg_ts_config_oid_index ON pg_catalog.pg_ts_config USING btree (oid)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_ts_config_cfgname_index",
+            "definition": "UNIQUE (cfgname, cfgnamespace)"
+          },
+          {
+            "name": "pg_ts_config_oid_index",
+            "definition": "PRIMARY KEY (oid)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 56,
+      "oid": 3603,
+      "identity": "pg_catalog.pg_ts_config_map",
+      "relation_kind": "r",
+      "provider_projection_md5": "66d51db1937607a194e1107a9ba31076",
+      "reviewed_character_range": "1-1095",
+      "serialized_projection_characters": 1095,
+      "semantic_review": "Ordered token-type dictionary mapping; composite key includes mapping sequence, not redundant to config.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "3603",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_ts_config_map",
+        "rank": 56,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "mapcfg",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "maptokentype",
+            "type": "integer",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "mapseqno",
+            "type": "integer",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "mapdict",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_ts_config_map_index ON pg_catalog.pg_ts_config_map USING btree (mapcfg, maptokentype, mapseqno)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_ts_config_map_index",
+            "definition": "PRIMARY KEY (mapcfg, maptokentype, mapseqno)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 57,
+      "oid": 3764,
+      "identity": "pg_catalog.pg_ts_template",
+      "relation_kind": "r",
+      "provider_projection_md5": "620698aa39ee0ca1fb3d8f49446a23f3",
+      "reviewed_character_range": "1-1392",
+      "serialized_projection_characters": 1392,
+      "semantic_review": "Text-search template init/lexize function pointers by qualified template name.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "3764",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_ts_template",
+        "rank": 57,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "tmplname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "tmplnamespace",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "tmplinit",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "tmpllexize",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_ts_template_tmplname_index ON pg_catalog.pg_ts_template USING btree (tmplname, tmplnamespace)",
+          "CREATE UNIQUE INDEX pg_ts_template_oid_index ON pg_catalog.pg_ts_template USING btree (oid)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_ts_template_tmplname_index",
+            "definition": "UNIQUE (tmplname, tmplnamespace)"
+          },
+          {
+            "name": "pg_ts_template_oid_index",
+            "definition": "PRIMARY KEY (oid)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 58,
+      "oid": 6000,
+      "identity": "pg_catalog.pg_replication_origin",
+      "relation_kind": "r",
+      "provider_projection_md5": "e0509c7fcff79c900e77e9999055ddfa",
+      "reviewed_character_range": "1-1000",
+      "serialized_projection_characters": 1000,
+      "semantic_review": "Logical replication origin ID/name unique keys; zero origins in live bounded aggregate, catalog remains core.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "6000",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_replication_origin",
+        "rank": 58,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "roident",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "roname",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_replication_origin_roiident_index ON pg_catalog.pg_replication_origin USING btree (roident)",
+          "CREATE UNIQUE INDEX pg_replication_origin_roname_index ON pg_catalog.pg_replication_origin USING btree (roname)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_replication_origin_roiident_index",
+            "definition": "PRIMARY KEY (roident)"
+          },
+          {
+            "name": "pg_replication_origin_roname_index",
+            "definition": "UNIQUE (roname)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 59,
+      "oid": 6100,
+      "identity": "pg_catalog.pg_subscription",
+      "relation_kind": "r",
+      "provider_projection_md5": "9e9042a76184afcd30a0ff3afda84d7c",
+      "reviewed_character_range": "1-3227",
+      "serialized_projection_characters": 3227,
+      "semantic_review": "Subscription connection settings and worker options; only column definitions inspected, NOT subconninfo values; live subscriptions zero.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin"
+        ],
+        "oid": "6100",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_subscription",
+        "rank": 59,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "subdbid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "subskiplsn",
+            "type": "pg_lsn",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "subname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "subowner",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "subenabled",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "subbinary",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "substream",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 9,
+            "name": "subtwophasestate",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 10,
+            "name": "subdisableonerr",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 11,
+            "name": "subpasswordrequired",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 12,
+            "name": "subrunasowner",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 13,
+            "name": "subfailover",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 14,
+            "name": "subconninfo",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 15,
+            "name": "subslotname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 16,
+            "name": "subsynccommit",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 17,
+            "name": "subpublications",
+            "type": "text[]",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 18,
+            "name": "suborigin",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_subscription_oid_index ON pg_catalog.pg_subscription USING btree (oid)",
+          "CREATE UNIQUE INDEX pg_subscription_subname_index ON pg_catalog.pg_subscription USING btree (subdbid, subname)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_subscription_oid_index",
+            "definition": "PRIMARY KEY (oid)"
+          },
+          {
+            "name": "pg_subscription_subname_index",
+            "definition": "UNIQUE (subdbid, subname)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 60,
+      "oid": 6102,
+      "identity": "pg_catalog.pg_subscription_rel",
+      "relation_kind": "r",
+      "provider_projection_md5": "eb88166e203acb2a1b356d3172725b28",
+      "reviewed_character_range": "1-1111",
+      "serialized_projection_characters": 1111,
+      "semantic_review": "Subscription-to-relation sync state and LSN keyed by relation/subscription; live subscriptions zero.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "6102",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_subscription_rel",
+        "rank": 60,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "srsubid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "srrelid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "srsubstate",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "srsublsn",
+            "type": "pg_lsn",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_subscription_rel_srrelid_srsubid_index ON pg_catalog.pg_subscription_rel USING btree (srrelid, srsubid)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_subscription_rel_srrelid_srsubid_index",
+            "definition": "PRIMARY KEY (srrelid, srsubid)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 61,
+      "oid": 6104,
+      "identity": "pg_catalog.pg_publication",
+      "relation_kind": "r",
+      "provider_projection_md5": "d512626d7b834fdfa4cca2f3fd59433e",
+      "reviewed_character_range": "1-1922",
+      "serialized_projection_characters": 1922,
+      "semantic_review": "Publication flags for insert/update/delete/truncate and root behavior; live supabase_realtime publication has zero tables, no demonstrated app Postgres Changes consumer.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "6104",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_publication",
+        "rank": 61,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "pubname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "pubowner",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "puballtables",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "pubinsert",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "pubupdate",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "pubdelete",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "pubtruncate",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 9,
+            "name": "pubviaroot",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_publication_oid_index ON pg_catalog.pg_publication USING btree (oid)",
+          "CREATE UNIQUE INDEX pg_publication_pubname_index ON pg_catalog.pg_publication USING btree (pubname)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_publication_oid_index",
+            "definition": "PRIMARY KEY (oid)"
+          },
+          {
+            "name": "pg_publication_pubname_index",
+            "definition": "UNIQUE (pubname)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 62,
+      "oid": 6106,
+      "identity": "pg_catalog.pg_publication_rel",
+      "relation_kind": "r",
+      "provider_projection_md5": "8d4b50a9284f725433008b00f669c5c1",
+      "reviewed_character_range": "1-1521",
+      "serialized_projection_characters": 1521,
+      "semantic_review": "Relation-membership with optional row filter/attribute subset and two lookup patterns; zero live publication tables.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "6106",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_publication_rel",
+        "rank": 62,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "prpubid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "prrelid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "prqual",
+            "type": "pg_node_tree",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "prattrs",
+            "type": "int2vector",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_publication_rel_oid_index ON pg_catalog.pg_publication_rel USING btree (oid)",
+          "CREATE UNIQUE INDEX pg_publication_rel_prrelid_prpubid_index ON pg_catalog.pg_publication_rel USING btree (prrelid, prpubid)",
+          "CREATE INDEX pg_publication_rel_prpubid_index ON pg_catalog.pg_publication_rel USING btree (prpubid)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_publication_rel_oid_index",
+            "definition": "PRIMARY KEY (oid)"
+          },
+          {
+            "name": "pg_publication_rel_prrelid_prpubid_index",
+            "definition": "UNIQUE (prrelid, prpubid)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 63,
+      "oid": 6237,
+      "identity": "pg_catalog.pg_publication_namespace",
+      "relation_kind": "r",
+      "provider_projection_md5": "b236c5a8450e7205ea883f98cb9e6447",
+      "reviewed_character_range": "1-1172",
+      "serialized_projection_characters": 1172,
+      "semantic_review": "Schema-level publication membership distinct from per-relation membership; zero published table output.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "6237",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_publication_namespace",
+        "rank": 63,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "pnpubid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "pnnspid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_publication_namespace_oid_index ON pg_catalog.pg_publication_namespace USING btree (oid)",
+          "CREATE UNIQUE INDEX pg_publication_namespace_pnnspid_pnpubid_index ON pg_catalog.pg_publication_namespace USING btree (pnnspid, pnpubid)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_publication_namespace_oid_index",
+            "definition": "PRIMARY KEY (oid)"
+          },
+          {
+            "name": "pg_publication_namespace_pnnspid_pnpubid_index",
+            "definition": "UNIQUE (pnnspid, pnpubid)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 64,
+      "oid": 6243,
+      "identity": "pg_catalog.pg_parameter_acl",
+      "relation_kind": "r",
+      "provider_projection_md5": "1f83482170464121153de2bd6032de1a",
+      "reviewed_character_range": "1-1089",
+      "serialized_projection_characters": 1089,
+      "semantic_review": "Server parameter grants keyed by parameter name, separate from role/database GUC settings.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "6243",
+        "rls": false,
+        "kind": "r",
+        "name": "pg_parameter_acl",
+        "rank": 64,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "parname",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "paracl",
+            "type": "aclitem[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_parameter_acl_parname_index ON pg_catalog.pg_parameter_acl USING btree (parname)",
+          "CREATE UNIQUE INDEX pg_parameter_acl_oid_index ON pg_catalog.pg_parameter_acl USING btree (oid)"
+        ],
+        "options": null,
+        "parents": [],
+        "view_sql": null,
+        "force_rls": false,
+        "constraints": [
+          {
+            "name": "pg_parameter_acl_parname_index",
+            "definition": "UNIQUE (parname)"
+          },
+          {
+            "name": "pg_parameter_acl_oid_index",
+            "definition": "PRIMARY KEY (oid)"
+          }
+        ],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 65,
+      "oid": 12000,
+      "identity": "pg_catalog.pg_roles",
+      "relation_kind": "v",
+      "provider_projection_md5": "b18119e5f2926e7d9ba9213d6d88af35",
+      "reviewed_character_range": "1-2674",
+      "serialized_projection_characters": 2674,
+      "semantic_review": "pg_roles view deliberately masks rolpassword and exposes role permissions plus database-zero settings; only view definition read.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "12000",
+        "rls": false,
+        "kind": "v",
+        "name": "pg_roles",
+        "rank": 65,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "rolname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "rolsuper",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "rolinherit",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "rolcreaterole",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "rolcreatedb",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "rolcanlogin",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "rolreplication",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "rolconnlimit",
+            "type": "integer",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 9,
+            "name": "rolpassword",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 10,
+            "name": "rolvaliduntil",
+            "type": "timestamp with time zone",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 11,
+            "name": "rolbypassrls",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 12,
+            "name": "rolconfig",
+            "type": "text[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 13,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [],
+        "options": null,
+        "parents": [],
+        "view_sql": " SELECT pg_authid.rolname,\n    pg_authid.rolsuper,\n    pg_authid.rolinherit,\n    pg_authid.rolcreaterole,\n    pg_authid.rolcreatedb,\n    pg_authid.rolcanlogin,\n    pg_authid.rolreplication,\n    pg_authid.rolconnlimit,\n    '********'::text AS rolpassword,\n    pg_authid.rolvaliduntil,\n    pg_authid.rolbypassrls,\n    s.setconfig AS rolconfig,\n    pg_authid.oid\n   FROM pg_authid\n     LEFT JOIN pg_db_role_setting s ON pg_authid.oid = s.setrole AND s.setdatabase = 0::oid;",
+        "force_rls": false,
+        "constraints": [],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 66,
+      "oid": 12005,
+      "identity": "pg_catalog.pg_shadow",
+      "relation_kind": "v",
+      "provider_projection_md5": "a7f744fa5bd6d791a3b543b7d5d690d0",
+      "reviewed_character_range": "1-2066",
+      "serialized_projection_characters": 2066,
+      "semantic_review": "pg_shadow filters login roles and defines an unmasked passwd column; privileged source definition only, NO role rows or password values fetched.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin"
+        ],
+        "oid": "12005",
+        "rls": false,
+        "kind": "v",
+        "name": "pg_shadow",
+        "rank": 66,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "usename",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "usesysid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "usecreatedb",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "usesuper",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "userepl",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "usebypassrls",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "passwd",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "valuntil",
+            "type": "timestamp with time zone",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 9,
+            "name": "useconfig",
+            "type": "text[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [],
+        "options": null,
+        "parents": [],
+        "view_sql": " SELECT pg_authid.rolname AS usename,\n    pg_authid.oid AS usesysid,\n    pg_authid.rolcreatedb AS usecreatedb,\n    pg_authid.rolsuper AS usesuper,\n    pg_authid.rolreplication AS userepl,\n    pg_authid.rolbypassrls AS usebypassrls,\n    pg_authid.rolpassword AS passwd,\n    pg_authid.rolvaliduntil AS valuntil,\n    s.setconfig AS useconfig\n   FROM pg_authid\n     LEFT JOIN pg_db_role_setting s ON pg_authid.oid = s.setrole AND s.setdatabase = 0::oid\n  WHERE pg_authid.rolcanlogin;",
+        "force_rls": false,
+        "constraints": [],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 67,
+      "oid": 12010,
+      "identity": "pg_catalog.pg_group",
+      "relation_kind": "v",
+      "provider_projection_md5": "37184f8c3ccbeea3665da9d9bf4a09a6",
+      "reviewed_character_range": "1-966",
+      "serialized_projection_characters": 966,
+      "semantic_review": "pg_group derives non-login group roles and member OIDs through pg_auth_members, distinct from pg_roles.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "12010",
+        "rls": false,
+        "kind": "v",
+        "name": "pg_group",
+        "rank": 67,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "groname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "grosysid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "grolist",
+            "type": "oid[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [],
+        "options": null,
+        "parents": [],
+        "view_sql": " SELECT rolname AS groname,\n    oid AS grosysid,\n    ARRAY( SELECT pg_auth_members.member\n           FROM pg_auth_members\n          WHERE pg_auth_members.roleid = pg_authid.oid) AS grolist\n   FROM pg_authid\n  WHERE NOT rolcanlogin;",
+        "force_rls": false,
+        "constraints": [],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 68,
+      "oid": 12014,
+      "identity": "pg_catalog.pg_user",
+      "relation_kind": "v",
+      "provider_projection_md5": "2e40af411fe1fb969fc061035d7e4c84",
+      "reviewed_character_range": "1-1775",
+      "serialized_projection_characters": 1775,
+      "semantic_review": "pg_user masks passwd after sourcing pg_shadow, preserving traditional login-user introspection without password values.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "12014",
+        "rls": false,
+        "kind": "v",
+        "name": "pg_user",
+        "rank": 68,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "usename",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "usesysid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "usecreatedb",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "usesuper",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "userepl",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "usebypassrls",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "passwd",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "valuntil",
+            "type": "timestamp with time zone",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 9,
+            "name": "useconfig",
+            "type": "text[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [],
+        "options": null,
+        "parents": [],
+        "view_sql": " SELECT usename,\n    usesysid,\n    usecreatedb,\n    usesuper,\n    userepl,\n    usebypassrls,\n    '********'::text AS passwd,\n    valuntil,\n    useconfig\n   FROM pg_shadow;",
+        "force_rls": false,
+        "constraints": [],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 69,
+      "oid": 12018,
+      "identity": "pg_catalog.pg_policies",
+      "relation_kind": "v",
+      "provider_projection_md5": "6bb7542871195472b351d334a738a3bf",
+      "reviewed_character_range": "1-2549",
+      "serialized_projection_characters": 2549,
+      "semantic_review": "pg_policies deparses policy roles/commands/USING/WITH CHECK, maps public-role OID 0; introspection view, not an alternate enforcement path.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "12018",
+        "rls": false,
+        "kind": "v",
+        "name": "pg_policies",
+        "rank": 69,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "schemaname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "tablename",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "policyname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "permissive",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "roles",
+            "type": "name[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "cmd",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "qual",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "with_check",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [],
+        "options": null,
+        "parents": [],
+        "view_sql": " SELECT n.nspname AS schemaname,\n    c.relname AS tablename,\n    pol.polname AS policyname,\n        CASE\n            WHEN pol.polpermissive THEN 'PERMISSIVE'::text\n            ELSE 'RESTRICTIVE'::text\n        END AS permissive,\n        CASE\n            WHEN pol.polroles = '{0}'::oid[] THEN string_to_array('public'::text, ''::text)::name[]\n            ELSE ARRAY( SELECT pg_authid.rolname\n               FROM pg_authid\n              WHERE pg_authid.oid = ANY (pol.polroles)\n              ORDER BY pg_authid.rolname)\n        END AS roles,\n        CASE pol.polcmd\n            WHEN 'r'::\"char\" THEN 'SELECT'::text\n            WHEN 'a'::\"char\" THEN 'INSERT'::text\n            WHEN 'w'::\"char\" THEN 'UPDATE'::text\n            WHEN 'd'::\"char\" THEN 'DELETE'::text\n            WHEN '*'::\"char\" THEN 'ALL'::text\n            ELSE NULL::text\n        END AS cmd,\n    pg_get_expr(pol.polqual, pol.polrelid) AS qual,\n    pg_get_expr(pol.polwithcheck, pol.polrelid) AS with_check\n   FROM pg_policy pol\n     JOIN pg_class c ON c.oid = pol.polrelid\n     LEFT JOIN pg_namespace n ON n.oid = c.relnamespace;",
+        "force_rls": false,
+        "constraints": [],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 70,
+      "oid": 12023,
+      "identity": "pg_catalog.pg_rules",
+      "relation_kind": "v",
+      "provider_projection_md5": "a4851c1bd67720bcface262295148a00",
+      "reviewed_character_range": "1-1156",
+      "serialized_projection_characters": 1156,
+      "semantic_review": "pg_rules deparses non-_RETURN rewrite rules, intentionally excludes view backing rules.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "12023",
+        "rls": false,
+        "kind": "v",
+        "name": "pg_rules",
+        "rank": 70,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "schemaname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "tablename",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "rulename",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "definition",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [],
+        "options": null,
+        "parents": [],
+        "view_sql": " SELECT n.nspname AS schemaname,\n    c.relname AS tablename,\n    r.rulename,\n    pg_get_ruledef(r.oid) AS definition\n   FROM pg_rewrite r\n     JOIN pg_class c ON c.oid = r.ev_class\n     LEFT JOIN pg_namespace n ON n.oid = c.relnamespace\n  WHERE r.rulename <> '_RETURN'::name;",
+        "force_rls": false,
+        "constraints": [],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 71,
+      "oid": 12028,
+      "identity": "pg_catalog.pg_views",
+      "relation_kind": "v",
+      "provider_projection_md5": "14459150065c4590c23040132566c009",
+      "reviewed_character_range": "1-1135",
+      "serialized_projection_characters": 1135,
+      "semantic_review": "pg_views projects owning schema/name, owner and pg_get_viewdef, distinct from pg_rules.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "12028",
+        "rls": false,
+        "kind": "v",
+        "name": "pg_views",
+        "rank": 71,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "schemaname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "viewname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "viewowner",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "definition",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [],
+        "options": null,
+        "parents": [],
+        "view_sql": " SELECT n.nspname AS schemaname,\n    c.relname AS viewname,\n    pg_get_userbyid(c.relowner) AS viewowner,\n    pg_get_viewdef(c.oid) AS definition\n   FROM pg_class c\n     LEFT JOIN pg_namespace n ON n.oid = c.relnamespace\n  WHERE c.relkind = 'v'::\"char\";",
+        "force_rls": false,
+        "constraints": [],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 72,
+      "oid": 12033,
+      "identity": "pg_catalog.pg_tables",
+      "relation_kind": "v",
+      "provider_projection_md5": "620a1414ee78795399b459c38fc97158",
+      "reviewed_character_range": "1-1929",
+      "serialized_projection_characters": 1929,
+      "semantic_review": "pg_tables includes ordinary and partitioned tables and index/rule/trigger/RLS flags, not views.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "12033",
+        "rls": false,
+        "kind": "v",
+        "name": "pg_tables",
+        "rank": 72,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "schemaname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "tablename",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "tableowner",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "tablespace",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "hasindexes",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "hasrules",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "hastriggers",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "rowsecurity",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [],
+        "options": null,
+        "parents": [],
+        "view_sql": " SELECT n.nspname AS schemaname,\n    c.relname AS tablename,\n    pg_get_userbyid(c.relowner) AS tableowner,\n    t.spcname AS tablespace,\n    c.relhasindex AS hasindexes,\n    c.relhasrules AS hasrules,\n    c.relhastriggers AS hastriggers,\n    c.relrowsecurity AS rowsecurity\n   FROM pg_class c\n     LEFT JOIN pg_namespace n ON n.oid = c.relnamespace\n     LEFT JOIN pg_tablespace t ON t.oid = c.reltablespace\n  WHERE c.relkind = ANY (ARRAY['r'::\"char\", 'p'::\"char\"]);",
+        "force_rls": false,
+        "constraints": [],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 73,
+      "oid": 12038,
+      "identity": "pg_catalog.pg_matviews",
+      "relation_kind": "v",
+      "provider_projection_md5": "cc3425539f89c327305d32a42960ba78",
+      "reviewed_character_range": "1-1738",
+      "serialized_projection_characters": 1738,
+      "semantic_review": "pg_matviews includes materialized definition and population state, distinct from regular views.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "12038",
+        "rls": false,
+        "kind": "v",
+        "name": "pg_matviews",
+        "rank": 73,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "schemaname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "matviewname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "matviewowner",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "tablespace",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "hasindexes",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "ispopulated",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "definition",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [],
+        "options": null,
+        "parents": [],
+        "view_sql": " SELECT n.nspname AS schemaname,\n    c.relname AS matviewname,\n    pg_get_userbyid(c.relowner) AS matviewowner,\n    t.spcname AS tablespace,\n    c.relhasindex AS hasindexes,\n    c.relispopulated AS ispopulated,\n    pg_get_viewdef(c.oid) AS definition\n   FROM pg_class c\n     LEFT JOIN pg_namespace n ON n.oid = c.relnamespace\n     LEFT JOIN pg_tablespace t ON t.oid = c.reltablespace\n  WHERE c.relkind = 'm'::\"char\";",
+        "force_rls": false,
+        "constraints": [],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 74,
+      "oid": 12043,
+      "identity": "pg_catalog.pg_indexes",
+      "relation_kind": "v",
+      "provider_projection_md5": "71b08caee09835ce031e77e4a540de74",
+      "reviewed_character_range": "1-1542",
+      "serialized_projection_characters": 1542,
+      "semantic_review": "pg_indexes links tables/indexes and full pg_get_indexdef, includes ordinary/materialized/partitioned tables.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "12043",
+        "rls": false,
+        "kind": "v",
+        "name": "pg_indexes",
+        "rank": 74,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "schemaname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "tablename",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "indexname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "tablespace",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "indexdef",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [],
+        "options": null,
+        "parents": [],
+        "view_sql": " SELECT n.nspname AS schemaname,\n    c.relname AS tablename,\n    i.relname AS indexname,\n    t.spcname AS tablespace,\n    pg_get_indexdef(i.oid) AS indexdef\n   FROM pg_index x\n     JOIN pg_class c ON c.oid = x.indrelid\n     JOIN pg_class i ON i.oid = x.indexrelid\n     LEFT JOIN pg_namespace n ON n.oid = c.relnamespace\n     LEFT JOIN pg_tablespace t ON t.oid = i.reltablespace\n  WHERE (c.relkind = ANY (ARRAY['r'::\"char\", 'm'::\"char\", 'p'::\"char\"])) AND (i.relkind = ANY (ARRAY['i'::\"char\", 'I'::\"char\"]));",
+        "force_rls": false,
+        "constraints": [],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 75,
+      "oid": 12048,
+      "identity": "pg_catalog.pg_sequences",
+      "relation_kind": "v",
+      "provider_projection_md5": "6d21652ea7e499e0841b4609b380f658",
+      "reviewed_character_range": "1-2603",
+      "serialized_projection_characters": 2603,
+      "semantic_review": "pg_sequences metadata plus last_value only after has_sequence_privilege, no sequence values queried.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "12048",
+        "rls": false,
+        "kind": "v",
+        "name": "pg_sequences",
+        "rank": 75,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "schemaname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "sequencename",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "sequenceowner",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "data_type",
+            "type": "regtype",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "start_value",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "min_value",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "max_value",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "increment_by",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 9,
+            "name": "cycle",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 10,
+            "name": "cache_size",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 11,
+            "name": "last_value",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [],
+        "options": null,
+        "parents": [],
+        "view_sql": " SELECT n.nspname AS schemaname,\n    c.relname AS sequencename,\n    pg_get_userbyid(c.relowner) AS sequenceowner,\n    s.seqtypid::regtype AS data_type,\n    s.seqstart AS start_value,\n    s.seqmin AS min_value,\n    s.seqmax AS max_value,\n    s.seqincrement AS increment_by,\n    s.seqcycle AS cycle,\n    s.seqcache AS cache_size,\n        CASE\n            WHEN has_sequence_privilege(c.oid, 'SELECT,USAGE'::text) THEN pg_sequence_last_value(c.oid::regclass)\n            ELSE NULL::bigint\n        END AS last_value\n   FROM pg_sequence s\n     JOIN pg_class c ON c.oid = s.seqrelid\n     LEFT JOIN pg_namespace n ON n.oid = c.relnamespace\n  WHERE NOT pg_is_other_temp_schema(n.oid) AND c.relkind = 'S'::\"char\";",
+        "force_rls": false,
+        "constraints": [],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 76,
+      "oid": 12053,
+      "identity": "pg_catalog.pg_stats",
+      "relation_kind": "v",
+      "provider_projection_md5": "33fbc6d2d83f953ff05efccca1cc90e6",
+      "reviewed_character_range": "1-6807",
+      "serialized_projection_characters": 6807,
+      "semantic_review": "pg_stats decodes five stats slots into MCV/histogram/correlation and guards SELECT privilege and active RLS; no stats rows read.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "12053",
+        "rls": false,
+        "kind": "v",
+        "name": "pg_stats",
+        "rank": 76,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "schemaname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "tablename",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "attname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "inherited",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "null_frac",
+            "type": "real",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "avg_width",
+            "type": "integer",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "n_distinct",
+            "type": "real",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "most_common_vals",
+            "type": "anyarray",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 9,
+            "name": "most_common_freqs",
+            "type": "real[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 10,
+            "name": "histogram_bounds",
+            "type": "anyarray",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 11,
+            "name": "correlation",
+            "type": "real",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 12,
+            "name": "most_common_elems",
+            "type": "anyarray",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 13,
+            "name": "most_common_elem_freqs",
+            "type": "real[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 14,
+            "name": "elem_count_histogram",
+            "type": "real[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 15,
+            "name": "range_length_histogram",
+            "type": "anyarray",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 16,
+            "name": "range_empty_frac",
+            "type": "real",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 17,
+            "name": "range_bounds_histogram",
+            "type": "anyarray",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [],
+        "options": [
+          "security_barrier=true"
+        ],
+        "parents": [],
+        "view_sql": " SELECT n.nspname AS schemaname,\n    c.relname AS tablename,\n    a.attname,\n    s.stainherit AS inherited,\n    s.stanullfrac AS null_frac,\n    s.stawidth AS avg_width,\n    s.stadistinct AS n_distinct,\n        CASE\n            WHEN s.stakind1 = 1 THEN s.stavalues1\n            WHEN s.stakind2 = 1 THEN s.stavalues2\n            WHEN s.stakind3 = 1 THEN s.stavalues3\n            WHEN s.stakind4 = 1 THEN s.stavalues4\n            WHEN s.stakind5 = 1 THEN s.stavalues5\n            ELSE NULL::anyarray\n        END AS most_common_vals,\n        CASE\n            WHEN s.stakind1 = 1 THEN s.stanumbers1\n            WHEN s.stakind2 = 1 THEN s.stanumbers2\n            WHEN s.stakind3 = 1 THEN s.stanumbers3\n            WHEN s.stakind4 = 1 THEN s.stanumbers4\n            WHEN s.stakind5 = 1 THEN s.stanumbers5\n            ELSE NULL::real[]\n        END AS most_common_freqs,\n        CASE\n            WHEN s.stakind1 = 2 THEN s.stavalues1\n            WHEN s.stakind2 = 2 THEN s.stavalues2\n            WHEN s.stakind3 = 2 THEN s.stavalues3\n            WHEN s.stakind4 = 2 THEN s.stavalues4\n            WHEN s.stakind5 = 2 THEN s.stavalues5\n            ELSE NULL::anyarray\n        END AS histogram_bounds,\n        CASE\n            WHEN s.stakind1 = 3 THEN s.stanumbers1[1]\n            WHEN s.stakind2 = 3 THEN s.stanumbers2[1]\n            WHEN s.stakind3 = 3 THEN s.stanumbers3[1]\n            WHEN s.stakind4 = 3 THEN s.stanumbers4[1]\n            WHEN s.stakind5 = 3 THEN s.stanumbers5[1]\n            ELSE NULL::real\n        END AS correlation,\n        CASE\n            WHEN s.stakind1 = 4 THEN s.stavalues1\n            WHEN s.stakind2 = 4 THEN s.stavalues2\n            WHEN s.stakind3 = 4 THEN s.stavalues3\n            WHEN s.stakind4 = 4 THEN s.stavalues4\n            WHEN s.stakind5 = 4 THEN s.stavalues5\n            ELSE NULL::anyarray\n        END AS most_common_elems,\n        CASE\n            WHEN s.stakind1 = 4 THEN s.stanumbers1\n            WHEN s.stakind2 = 4 THEN s.stanumbers2\n            WHEN s.stakind3 = 4 THEN s.stanumbers3\n            WHEN s.stakind4 = 4 THEN s.stanumbers4\n            WHEN s.stakind5 = 4 THEN s.stanumbers5\n            ELSE NULL::real[]\n        END AS most_common_elem_freqs,\n        CASE\n            WHEN s.stakind1 = 5 THEN s.stanumbers1\n            WHEN s.stakind2 = 5 THEN s.stanumbers2\n            WHEN s.stakind3 = 5 THEN s.stanumbers3\n            WHEN s.stakind4 = 5 THEN s.stanumbers4\n            WHEN s.stakind5 = 5 THEN s.stanumbers5\n            ELSE NULL::real[]\n        END AS elem_count_histogram,\n        CASE\n            WHEN s.stakind1 = 6 THEN s.stavalues1\n            WHEN s.stakind2 = 6 THEN s.stavalues2\n            WHEN s.stakind3 = 6 THEN s.stavalues3\n            WHEN s.stakind4 = 6 THEN s.stavalues4\n            WHEN s.stakind5 = 6 THEN s.stavalues5\n            ELSE NULL::anyarray\n        END AS range_length_histogram,\n        CASE\n            WHEN s.stakind1 = 6 THEN s.stanumbers1[1]\n            WHEN s.stakind2 = 6 THEN s.stanumbers2[1]\n            WHEN s.stakind3 = 6 THEN s.stanumbers3[1]\n            WHEN s.stakind4 = 6 THEN s.stanumbers4[1]\n            WHEN s.stakind5 = 6 THEN s.stanumbers5[1]\n            ELSE NULL::real\n        END AS range_empty_frac,\n        CASE\n            WHEN s.stakind1 = 7 THEN s.stavalues1\n            WHEN s.stakind2 = 7 THEN s.stavalues2\n            WHEN s.stakind3 = 7 THEN s.stavalues3\n            WHEN s.stakind4 = 7 THEN s.stavalues4\n            WHEN s.stakind5 = 7 THEN s.stavalues5\n            ELSE NULL::anyarray\n        END AS range_bounds_histogram\n   FROM pg_statistic s\n     JOIN pg_class c ON c.oid = s.starelid\n     JOIN pg_attribute a ON c.oid = a.attrelid AND a.attnum = s.staattnum\n     LEFT JOIN pg_namespace n ON n.oid = c.relnamespace\n  WHERE NOT a.attisdropped AND has_column_privilege(c.oid, a.attnum, 'select'::text) AND (c.relrowsecurity = false OR NOT row_security_active(c.oid));",
+        "force_rls": false,
+        "constraints": [],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 77,
+      "oid": 12058,
+      "identity": "pg_catalog.pg_stats_ext",
+      "relation_kind": "v",
+      "provider_projection_md5": "8c39683901cd58854d685a5ca0faa904",
+      "reviewed_character_range": "1-4094",
+      "serialized_projection_characters": 4094,
+      "semantic_review": "pg_stats_ext decodes dependency/n-distinct/MCV data only with owner role and RLS guard; source definition only.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "12058",
+        "rls": false,
+        "kind": "v",
+        "name": "pg_stats_ext",
+        "rank": 77,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "schemaname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "tablename",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "statistics_schemaname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "statistics_name",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "statistics_owner",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "attnames",
+            "type": "name[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "exprs",
+            "type": "text[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "kinds",
+            "type": "\"char\"[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 9,
+            "name": "inherited",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 10,
+            "name": "n_distinct",
+            "type": "pg_ndistinct",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 11,
+            "name": "dependencies",
+            "type": "pg_dependencies",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 12,
+            "name": "most_common_vals",
+            "type": "text[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 13,
+            "name": "most_common_val_nulls",
+            "type": "boolean[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 14,
+            "name": "most_common_freqs",
+            "type": "double precision[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 15,
+            "name": "most_common_base_freqs",
+            "type": "double precision[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [],
+        "options": [
+          "security_barrier=true"
+        ],
+        "parents": [],
+        "view_sql": " SELECT cn.nspname AS schemaname,\n    c.relname AS tablename,\n    sn.nspname AS statistics_schemaname,\n    s.stxname AS statistics_name,\n    pg_get_userbyid(s.stxowner) AS statistics_owner,\n    ( SELECT array_agg(a.attname ORDER BY a.attnum) AS array_agg\n           FROM unnest(s.stxkeys) k(k)\n             JOIN pg_attribute a ON a.attrelid = s.stxrelid AND a.attnum = k.k) AS attnames,\n    pg_get_statisticsobjdef_expressions(s.oid) AS exprs,\n    s.stxkind AS kinds,\n    sd.stxdinherit AS inherited,\n    sd.stxdndistinct AS n_distinct,\n    sd.stxddependencies AS dependencies,\n    m.most_common_vals,\n    m.most_common_val_nulls,\n    m.most_common_freqs,\n    m.most_common_base_freqs\n   FROM pg_statistic_ext s\n     JOIN pg_class c ON c.oid = s.stxrelid\n     JOIN pg_statistic_ext_data sd ON s.oid = sd.stxoid\n     LEFT JOIN pg_namespace cn ON cn.oid = c.relnamespace\n     LEFT JOIN pg_namespace sn ON sn.oid = s.stxnamespace\n     LEFT JOIN LATERAL ( SELECT array_agg(pg_mcv_list_items.\"values\") AS most_common_vals,\n            array_agg(pg_mcv_list_items.nulls) AS most_common_val_nulls,\n            array_agg(pg_mcv_list_items.frequency) AS most_common_freqs,\n            array_agg(pg_mcv_list_items.base_frequency) AS most_common_base_freqs\n           FROM pg_mcv_list_items(sd.stxdmcv) pg_mcv_list_items(index, \"values\", nulls, frequency, base_frequency)) m ON sd.stxdmcv IS NOT NULL\n  WHERE pg_has_role(c.relowner, 'USAGE'::text) AND (c.relrowsecurity = false OR NOT row_security_active(c.oid));",
+        "force_rls": false,
+        "constraints": [],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 78,
+      "oid": 12063,
+      "identity": "pg_catalog.pg_stats_ext_exprs",
+      "relation_kind": "v",
+      "provider_projection_md5": "b05167b1f7fa82ad1f3916b712239c16",
+      "reviewed_character_range": "1-6578",
+      "serialized_projection_characters": 6578,
+      "semantic_review": "pg_stats_ext_exprs unnests expression statistics with owner/RLS guard, distinct expression-oriented analysis.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "12063",
+        "rls": false,
+        "kind": "v",
+        "name": "pg_stats_ext_exprs",
+        "rank": 78,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "schemaname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "tablename",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "statistics_schemaname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "statistics_name",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "statistics_owner",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "expr",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "inherited",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "null_frac",
+            "type": "real",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 9,
+            "name": "avg_width",
+            "type": "integer",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 10,
+            "name": "n_distinct",
+            "type": "real",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 11,
+            "name": "most_common_vals",
+            "type": "anyarray",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 12,
+            "name": "most_common_freqs",
+            "type": "real[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 13,
+            "name": "histogram_bounds",
+            "type": "anyarray",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 14,
+            "name": "correlation",
+            "type": "real",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 15,
+            "name": "most_common_elems",
+            "type": "anyarray",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 16,
+            "name": "most_common_elem_freqs",
+            "type": "real[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 17,
+            "name": "elem_count_histogram",
+            "type": "real[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [],
+        "options": [
+          "security_barrier=true"
+        ],
+        "parents": [],
+        "view_sql": " SELECT cn.nspname AS schemaname,\n    c.relname AS tablename,\n    sn.nspname AS statistics_schemaname,\n    s.stxname AS statistics_name,\n    pg_get_userbyid(s.stxowner) AS statistics_owner,\n    stat.expr,\n    sd.stxdinherit AS inherited,\n    (stat.a).stanullfrac AS null_frac,\n    (stat.a).stawidth AS avg_width,\n    (stat.a).stadistinct AS n_distinct,\n        CASE\n            WHEN (stat.a).stakind1 = 1 THEN (stat.a).stavalues1\n            WHEN (stat.a).stakind2 = 1 THEN (stat.a).stavalues2\n            WHEN (stat.a).stakind3 = 1 THEN (stat.a).stavalues3\n            WHEN (stat.a).stakind4 = 1 THEN (stat.a).stavalues4\n            WHEN (stat.a).stakind5 = 1 THEN (stat.a).stavalues5\n            ELSE NULL::anyarray\n        END AS most_common_vals,\n        CASE\n            WHEN (stat.a).stakind1 = 1 THEN (stat.a).stanumbers1\n            WHEN (stat.a).stakind2 = 1 THEN (stat.a).stanumbers2\n            WHEN (stat.a).stakind3 = 1 THEN (stat.a).stanumbers3\n            WHEN (stat.a).stakind4 = 1 THEN (stat.a).stanumbers4\n            WHEN (stat.a).stakind5 = 1 THEN (stat.a).stanumbers5\n            ELSE NULL::real[]\n        END AS most_common_freqs,\n        CASE\n            WHEN (stat.a).stakind1 = 2 THEN (stat.a).stavalues1\n            WHEN (stat.a).stakind2 = 2 THEN (stat.a).stavalues2\n            WHEN (stat.a).stakind3 = 2 THEN (stat.a).stavalues3\n            WHEN (stat.a).stakind4 = 2 THEN (stat.a).stavalues4\n            WHEN (stat.a).stakind5 = 2 THEN (stat.a).stavalues5\n            ELSE NULL::anyarray\n        END AS histogram_bounds,\n        CASE\n            WHEN (stat.a).stakind1 = 3 THEN (stat.a).stanumbers1[1]\n            WHEN (stat.a).stakind2 = 3 THEN (stat.a).stanumbers2[1]\n            WHEN (stat.a).stakind3 = 3 THEN (stat.a).stanumbers3[1]\n            WHEN (stat.a).stakind4 = 3 THEN (stat.a).stanumbers4[1]\n            WHEN (stat.a).stakind5 = 3 THEN (stat.a).stanumbers5[1]\n            ELSE NULL::real\n        END AS correlation,\n        CASE\n            WHEN (stat.a).stakind1 = 4 THEN (stat.a).stavalues1\n            WHEN (stat.a).stakind2 = 4 THEN (stat.a).stavalues2\n            WHEN (stat.a).stakind3 = 4 THEN (stat.a).stavalues3\n            WHEN (stat.a).stakind4 = 4 THEN (stat.a).stavalues4\n            WHEN (stat.a).stakind5 = 4 THEN (stat.a).stavalues5\n            ELSE NULL::anyarray\n        END AS most_common_elems,\n        CASE\n            WHEN (stat.a).stakind1 = 4 THEN (stat.a).stanumbers1\n            WHEN (stat.a).stakind2 = 4 THEN (stat.a).stanumbers2\n            WHEN (stat.a).stakind3 = 4 THEN (stat.a).stanumbers3\n            WHEN (stat.a).stakind4 = 4 THEN (stat.a).stanumbers4\n            WHEN (stat.a).stakind5 = 4 THEN (stat.a).stanumbers5\n            ELSE NULL::real[]\n        END AS most_common_elem_freqs,\n        CASE\n            WHEN (stat.a).stakind1 = 5 THEN (stat.a).stanumbers1\n            WHEN (stat.a).stakind2 = 5 THEN (stat.a).stanumbers2\n            WHEN (stat.a).stakind3 = 5 THEN (stat.a).stanumbers3\n            WHEN (stat.a).stakind4 = 5 THEN (stat.a).stanumbers4\n            WHEN (stat.a).stakind5 = 5 THEN (stat.a).stanumbers5\n            ELSE NULL::real[]\n        END AS elem_count_histogram\n   FROM pg_statistic_ext s\n     JOIN pg_class c ON c.oid = s.stxrelid\n     LEFT JOIN pg_statistic_ext_data sd ON s.oid = sd.stxoid\n     LEFT JOIN pg_namespace cn ON cn.oid = c.relnamespace\n     LEFT JOIN pg_namespace sn ON sn.oid = s.stxnamespace\n     JOIN LATERAL ( SELECT unnest(pg_get_statisticsobjdef_expressions(s.oid)) AS expr,\n            unnest(sd.stxdexpr) AS a) stat ON stat.expr IS NOT NULL\n  WHERE pg_has_role(c.relowner, 'USAGE'::text) AND (c.relrowsecurity = false OR NOT row_security_active(c.oid));",
+        "force_rls": false,
+        "constraints": [],
+        "object_description": null
+      }
+    },
+    {
+      "rank": 79,
+      "oid": 12068,
+      "identity": "pg_catalog.pg_publication_tables",
+      "relation_kind": "v",
+      "provider_projection_md5": "a0a89ca3af8a1a9f1ee4513610c16cc7",
+      "reviewed_character_range": "1-1577",
+      "serialized_projection_characters": 1577,
+      "semantic_review": "pg_publication_tables expands publication membership and deparses column list and row filter; current supabase_realtime has zero rows.",
+      "verdict": "KEEP_CORE_POSTGRESQL_SYSTEM_OBJECT",
+      "source": {
+        "acl": [
+          "supabase_admin=arwdDxtm/supabase_admin",
+          "=r/supabase_admin"
+        ],
+        "oid": "12068",
+        "rls": false,
+        "kind": "v",
+        "name": "pg_publication_tables",
+        "rank": 79,
+        "owner": "supabase_admin",
+        "columns": [
+          {
+            "num": 1,
+            "name": "pubname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "schemaname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "tablename",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "attnames",
+            "type": "name[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "rowfilter",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [],
+        "options": null,
+        "parents": [],
+        "view_sql": " SELECT p.pubname,\n    n.nspname AS schemaname,\n    c.relname AS tablename,\n    ( SELECT array_agg(a.attname ORDER BY a.attnum) AS array_agg\n           FROM pg_attribute a\n          WHERE a.attrelid = gpt.relid AND (a.attnum = ANY (gpt.attrs::smallint[]))) AS attnames,\n    pg_get_expr(gpt.qual, gpt.relid) AS rowfilter\n   FROM pg_publication p,\n    LATERAL pg_get_publication_tables(VARIADIC ARRAY[p.pubname::text]) gpt(pubid, relid, attrs, qual),\n    pg_class c\n     JOIN pg_namespace n ON n.oid = c.relnamespace\n  WHERE c.oid = gpt.relid;",
+        "force_rls": false,
+        "constraints": [],
+        "object_description": null
+      }
+    }
+  ],
+  "notes": [
+    "Column metadata, full index DDL, constraint expressions, ACL, RLS state and view SQL are preserved per object as a provider JSONB source projection; MD5 and char counts refer to PostgreSQL JSONB text output.",
+    "Only catalog definitions were selected for pg_shadow and pg_subscription; no password, connection strings, member rows, notes or private storage selected.",
+    "Empty Realtime publication is a metadata observation, NOT a verified defect or evidence of an unused provider feature; consumer review of two known cloud entrypoints is nonexhaustive.",
+    "Original upstream PostgreSQL bootstrap/native executable implementations remain inaccessible; baseline is not complete.",
+    "No code/test/CI, production data, Auth, Storage, Edge, configuration, deployment, billing or backup changes."
+  ],
+  "next_cursor": "pg_catalog.pg_class non-index rank 80/142 pg_locks OID 12073 char 1"
+}
