@@ -514,11 +514,11 @@ export function recommendation(s,coffeeId,options={}) {
    sh.style!=='Custom'&&RATIOS[sh.style]&&crossStyleControlsUsable(s,sh,v));
   if(other.length){const r=roastIndex(c.roastLevel)<0?roastIndex('Medium'):roastIndex(c.roastLevel);const residual=mean(other.map(sh=>sh.yieldG/sh.doseG-RATIOS[sh.style][r]));const bias=clamp(residual*.2,-.15,.15);for(const k of ['low','high','center'])rec.ratio[k]+=bias;rec.reasons.push('Small ratio adjustment informed by your other styles; time and grind stay style-specific.');}
  }
- // A real success from one basket can project an unloggable yield at
- // another valid dose. Keep its original ratings, history and chosen family
- // intact; fall back only for the inapplicable CURRENT starting card.
- // Existing Log Shot limits are entry constraints, not scientific ratio optima.
- if(chosen&&style!=='Custom'){
+ // Personal families, similar-coffee and Community references may project an
+ // unloggable starting yield onto another valid basket. Reuse Log Shot entry
+ // bounds, never invent a numeric ratio optimum or rewrite original evidence.
+ if(style!=='Custom'){
+  const wasChosenFamily=!!chosen;
   const projectedYield=round(rec.ratio.center*rec.doseG);
   const [minYield,maxYield]=CONFIG.bounds.yieldG;
   if(!finite(projectedYield)||projectedYield<minYield||projectedYield>maxYield){
@@ -530,8 +530,13 @@ export function recommendation(s,coffeeId,options={}) {
    rec.observations=0;
    rec.established=false;
    delete rec.familySelection;
+   delete rec.communityEvidence;
+   delete rec.turboFallback;
    rec.reasons=start.reasons;
-   rec.basketCompatibilityNote='Your saved successful recipe cannot be used at this basket dose within the Log Shot yield range. Showing a starting estimate; your saved shot is unchanged.';
+   if(wasChosenFamily)
+    rec.basketCompatibilityNote='Your saved successful recipe cannot be used at this basket dose within the Log Shot yield range. Showing a starting estimate; your saved shot is unchanged.';
+   else
+    rec.startingCompatibilityNote='This tentative starting reference exceeds the Log Shot yield range at this basket dose. Showing the roast/style starting estimate instead.';
   }
  }
  rec.grind=grindGuidance(s,c,style,basket,feed,rec.familyId);
