@@ -8,6 +8,32 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-r415-grinder-tenth-boundary",
+      "issue": 455,
+      "pr": null,
+      "title": "Prevent non-tenth or unchanged next-shot grind recommendations at fractional espresso-range boundaries",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "owner_source": "Owner #455 Option B independently reproduced SAFE correction; DIC_PREFLIGHT_VERIFIED development_sha=7699aaa3cf9b977c839cc7ad2ea73340208a7b8e preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e; original engine bdec2d5c00783cc0394667cae112e9a0ad9f2c98 and queue 68ef828f734463e4b04d2a13b32ebf7bb40fda45",
+      "tests": [
+        "R414 actual JavaScript four-module six-case negative reproduction and in-memory guard (NOT hosted CI).",
+        "R415 six new synthetic actual-module Node22 test cases authored: fractional floor and ceiling, narrow range, valid tenth, five green, fifth missing; PR-head CI not yet run.",
+        "Checks never change original shot/notes/ratings or more than one controllable setting; no empirical improved-coffee claim.",
+        "Initial PR-head approval/governance run 44890733910 FAILED solely queue schema: scope_paths included focused test, but this field allows only deployable application files; corrected to exact site/lib/engine.js. Original failure NOT PASS.",
+        "First corrected queue PR-head Node22/build run 44890831812 FAILED 6,019 PASS/1 FAIL/6 SKIP: existing grinder17-history-guard.test.mjs required out-of-active-range review, but nth-grid guard inadvertently allowed no-next yield fallback. Prior six R415 cases passed; failure preserved, never PASS.",
+        "Third commit restores existing out-of-range historical review in grinder-change branch and adds seventh negative. New PR-head CI PENDING, not PASS."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact PR-head Node22, cloud/browser/mobile/offline and approval/governance checks NOT YET RUN; independent #3347 five-check frozen release candidate absent. TESTING only."
+      ],
+      "notes": "No speculative science, new product numeric policy, member data, provider/SQL/Auth/Edge changes or Publish. Existing approved yield fallback when no valid tenth grind target.",
+      "production_deployed": false
+    },
+    {
       "id": "DIC-Q-455-r405-cross-basket-yield-eligibility",
       "issue": 455,
       "pr": 3554,
