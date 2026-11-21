@@ -1,3 +1,17 @@
+# Issue #509 R410 — directly reviewed PostgreSQL pg_type ranks 121–240/469 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=f5109ae200ad8c6e763e6af1fd2822c0a9980fbc preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-21 UTC.** Rechecked live development immutable PREFLIGHT.md at `f5109ae200ad8c6e763e6af1fd2822c0a9980fbc` (Git blob `3742fed0176c809b115320c698a0e8b1675b2d3e`). Supabase project `azviqqejypsefzilgonr` ACTIVE_HEALTHY PostgreSQL 17.11.0.003; all catalog queries **READ-ONLY**.
+
+**New complete direct semantic review:** `pg_catalog.pg_type` **ranks 121–240/469** with **80470** complete exposed catalog-literal characters, every row/provider MD5/1–end range plus typed component references, native handlers, storage, polymorphism and actual catalog consumer columns in [append-only R410 ledger](../audits/issue509-r410-pg-catalog-types-ranks121-240-20261121.json). **100** native typed arrays including the special `_record` pseudo-array, **12** polymorphic pseudo types (`any*` / `anycompatible*`), **8** native scalar types. 100/100 typed arrays have matching reverse type references/array handler definitions; 8/8 scalars have reciprocal array pointers; no exposed catalog mismatch. `box` uses geometric raw-array point subscripting, not a redundant `box[]`. `anycompatible*` and older `any*` type families serve different polymorphic resolution contracts.
+
+**Actual dependencies:** 48 non-system typed-column consumers for these 120 definitions: `text[]` 8 (Auth, Storage, Realtime, migrations), `uuid[]` 1 (`private.dic_admin_account_delete_operations.contributor_ids`), `bool` 34 (including shot/setup/coffee flags), `bytea` 5 (binary provider payload/credential metadata). Catalog metadata only, **no user rows/identities/secret values read**. No DIC application bug or unused-object removal proved in this slice. Original CREATE TYPE SQL, native compiled bodies and dynamic SQL consumers **UNVERIFIED**; zero #267 code-line credit.
+
+**State:** only append-only ledger and scoped journal changed in one nonforce Git commit. No code, migrations, tests, CI or queue change; new exact-source CI **NOT_APPLICABLE** and READY/DEPLOYED **NOT_REVALIDATED**. Production unchanged, full baseline **IN_PROGRESS**. **Next exact unreviewed cursor** `pg_catalog.pg_type` rank **241/469** `cidr` OID 650, char 1. Hourly scheduling and owner-action-only alert policy unchanged.
+
+---
+
 # Issue #509 R409 — complete exposed PostgreSQL pg_type array declarations 1–120/469 [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=0d103269a6b176ecbb93bb7e85b10da20f218a38 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
