@@ -84,3 +84,23 @@ test('R411 negative: original donor is not silently relabeled as same-coffee fam
  assert.deepEqual(s.shots[0].tasteScales,green);
  assert.deepEqual(s,before);
 });
+
+test('R411b current-basket rated next-shot advice clears obsolete tentative starting compatibility notice',()=>{
+ const s=state({donorRatio:10}),v=activeVersion(s);
+ s.shots.push({id:'current-actual',coffeeId:'coffee',setupVersionId:v.id,
+  calibrationId:v.calibrationId,basketId:'basket-b',style:'Lungo',
+  feedMode:'standard',familyId:null,doseG:40,yieldG:120,timeS:36,
+  grindSetting:1.2,tempC:93,timestamp:'2026-11-20T12:01:00Z',
+  hidden:false,dialedIn:false,
+  notes:'Keep actual current shot and original donor notes private',
+  tasteScales:{...green,sweetness:4}});
+ const before=structuredClone(s),r=recommendation(s,'coffee',{
+  style:'Lungo',basketId:'basket-b',feedMode:'standard'});
+ assert.equal(r.source,'Adjustment from your latest taste rating');
+ assert.equal(r.yield.center,125,'use same existing one-control next-yield advice');
+ assert.equal(r.doseG,40);
+ assert.equal(r.startingCompatibilityNote,undefined,'do not claim next-shot advice is a starting estimate');
+ assert.equal(r.inapplicableFamilyWithCurrentFeedback,true,'overview heading must reflect measured advice');
+ assert.doesNotMatch(recipeGrid(r),/tentative starting reference exceeds/i);
+ assert.deepEqual(s,before,'both shots, all five ratings and notes unchanged');
+});
