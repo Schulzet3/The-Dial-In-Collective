@@ -1,3 +1,15 @@
+# Issue #509 R425/R425b — extension statistics and information_schema views [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=f1667e176c7ac9becf6cd5d4553daab76295a744 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+2026-11-21 UTC. Immutable branch-pinned preflight read and independently Git-blob content matched. Production Supabase `azviqqejypsefzilgonr` PostgreSQL 17.11 **READ ONLY**. Resumed at `extensions.pg_class` OID 16407. **40 newly directly reviewed provider relation definitions**: all **2/2 extensions views** (1,960 full SQL characters) and **38/69 information_schema** objects (34 complete view SQL definitions, 60,704 SQL characters, and 4 metadata base-table column/constraint/index projections). Each complete SELECT source, provider MD5, role/ACL, field definitions, source range and per-object semantic verdict recorded in append-only [R425](../audits/issue509-r425-extensions-statistics-views-20261121.json) and [R425b](../audits/issue509-r425b-information-schema-relations-ranks1-38-20261121.json). No original bootstrap CREATE source or compiled C source claim; #267 line-credit zero.
+
+Application metadata parity: `pg_attribute` vs `information_schema.columns`, **409/409 public/private fields**, **0 missing**, **0 identity/generated mismatches** (schema metadata queries only). Full information_schema definitions show distinct, privilege-filtered catalog-introspection responsibilities; not DIC redundant app objects. Two extension views delegate to native stats functions; read no query text. Read-only statement aggregate since 2026-10-09 reset: 4,896 statement entries, 201,725 calls, 568,512.14 execution ms, 525,151 temp blocks written **across mixed workloads**; not a proven DIC-specific bottleneck or justified change. No newly reproducible DIC defect or proven safe cleanup in this ordered range.
+
+No app code/test/CI modification, new exact-source CI **NOT_APPLICABLE** (not PASS), no queue/READY/DEPLOYED revalidation. Production SQL/data/Auth/Storage/Edge/config, migrations, releases, backups and schedules untouched. Overall provider baseline **IN_PROGRESS**. **Next exact cursor** `information_schema.pg_class` rank **39/69**, `information_schema.table_privileges` OID **13473**, char 1; then `pg_catalog.pg_class` rank 1/142 OID 826. Owner-only actionable notifications remain unchanged.
+
+---
+
 # Issue #509 R424/R424b — Auth/Storage/Realtime/Vault relation semantics [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=c853405e14e5374977602bec6a73d2f36e1817d3 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
