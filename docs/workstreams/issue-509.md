@@ -1,3 +1,15 @@
+# Issue #509 R431 — direct semantic review of pg_attribute rows 1–480 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=7ab0b3760e01069ca9f3d89d94601aab0ba5a893 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+2026-11-21 UTC. Independently Git SHA-1-verified the immutable preflight blob before reading scope/provider. Live Supabase project `azviqqejypsefzilgonr` PostgreSQL 17.11.0.003 ACTIVE_HEALTHY. **Production STRICTLY READ-ONLY.** Resumed R430 exact cursor `pg_catalog.pg_attribute`, rank 1/4181, OID 112, attnum 1. Read complete catalog attribute tuple text **480/480 newly unreviewed records, 243,159 catalog-source characters**, from 66 distinct relations; 475 pg_catalog and 5 pg_toast fields. Per-column source text, full provider MD5, OID/attnum/name/type, character range 1–end, and individual semantic retention verdict in [immutable R431 ledger](../audits/issue509-r431-pg-attribute-ranks1-480-20261121.json), committed in `6c11b1aced01900fe8127fed3512ab4606c5a4af`. Read-back first 36 ledger lines, including review count and preflight receipt, verified at branch head before journal update.
+
+Semantics: reviewed core catalog columns governing roles, types, functions, relations, statistics, dependencies, triggers and index key layouts, as well as TOAST chunk/lookup fields. Internal catalog index keys differ from ordinary table constraints by design; not evidence of unused/redundant DIC indexes. Independent catalog invariant query: **480/480 physical type length/pass-by-value mappings agree with pg_type; 0 dropped/missing-value/invalid-attnum/default/identity/generated fields**. Full retained tuples are catalog metadata, not row contents; no role credentials, Auth identities, shots, notes or log text were queried. All reviewed objects remain necessary system metadata; no reproducible DIC application defect, proven unused object or justified deletion in this bounded range. Original bootstrap DDL/native binary implementations, external callers, remaining 3,701 pg_attribute fields and all other incomplete provider routes still UNVERIFIED. Do not credit #267 code line review.
+
+No application code/test/CI changes, so new exact-source CI **NOT_APPLICABLE** (not PASS). READY/DEPLOYED and release queue **NOT_REVALIDATED**. No provider SQL/data/Auth/Storage/Edge/config writes, migration, backup, billing, deployment, publication, schedule or notification-policy change. Full baseline **IN_PROGRESS**. **Next exact cursor:** `pg_catalog.pg_attribute` rank **481/4181**, `pg_catalog.pg_constraint_conrelid_contypid_conname_index` OID **2665**, `conrelid` attnum **1**, first character. No new actionable owner issue.
+
+---
+
 # Issue #509 R430 — complete 119 TOAST parents and 3 Realtime composite relation definitions [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=d2995c205070966aa2aa203c1fcd9a5a321c6da5 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
