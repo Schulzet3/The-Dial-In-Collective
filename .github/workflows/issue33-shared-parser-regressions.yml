@@ -14,8 +14,13 @@ on:
       - 'site/lib/ui.js'
       - 'site/lib/constants.js'
       - 'site/cloud/main.js'
+      - 'site/cloud/client.js'
+      - 'netlify/functions/coffee-url-preview.mjs'
       - 'supabase/functions/_shared/html-scan.mjs'
       - 'supabase/functions/_shared/coffee-release-label.mjs'
+      - 'supabase/functions/_shared/request-budget.mjs'
+      - 'supabase/functions/dic-preview-coffee/index.ts'
+      - 'supabase/migrations/20261113043000_dic_admin_preview_unlimited_member_15s.sql'
       - 'scripts/audit/issue33-*.mjs'
       - 'tests/coffee-issue33-r31*.test.mjs'
       - 'tests/coffee-issue33-r345-original295.test.mjs'
@@ -37,6 +42,7 @@ on:
       - 'tests/coffee-issue33-r374-original41.test.mjs'
       - 'tests/coffee-issue33-r112-558.test.mjs'
       - 'tests/coffee-issue33-r335-novo-241.test.mjs'
+      - 'tests/coffee-preview-role-policy.test.mjs'
       - 'tests/coffee-issue33-shared-ci-trigger.test.mjs'
       - '.github/workflows/issue33-shared-parser-regressions.yml'
       - 'docs/workstreams/ops-issue33-r319-shared-parser-ci-20261119.md'
@@ -52,8 +58,13 @@ on:
       - 'site/lib/ui.js'
       - 'site/lib/constants.js'
       - 'site/cloud/main.js'
+      - 'site/cloud/client.js'
+      - 'netlify/functions/coffee-url-preview.mjs'
       - 'supabase/functions/_shared/html-scan.mjs'
       - 'supabase/functions/_shared/coffee-release-label.mjs'
+      - 'supabase/functions/_shared/request-budget.mjs'
+      - 'supabase/functions/dic-preview-coffee/index.ts'
+      - 'supabase/migrations/20261113043000_dic_admin_preview_unlimited_member_15s.sql'
       - 'scripts/audit/issue33-*.mjs'
       - 'tests/coffee-issue33-r31*.test.mjs'
       - 'tests/coffee-issue33-r345-original295.test.mjs'
@@ -75,6 +86,7 @@ on:
       - 'tests/coffee-issue33-r374-original41.test.mjs'
       - 'tests/coffee-issue33-r112-558.test.mjs'
       - 'tests/coffee-issue33-r335-novo-241.test.mjs'
+      - 'tests/coffee-preview-role-policy.test.mjs'
       - 'tests/coffee-issue33-shared-ci-trigger.test.mjs'
       - '.github/workflows/issue33-shared-parser-regressions.yml'
       - 'docs/workstreams/ops-issue33-r319-shared-parser-ci-20261119.md'
@@ -128,4 +140,5 @@ jobs:
             tests/coffee-issue33-r368-original39.test.mjs \
             tests/coffee-issue33-r374-original41.test.mjs \
             tests/coffee-issue33-r112-558.test.mjs \
-            tests/coffee-issue33-r335-novo-241.test.mjs
+            tests/coffee-issue33-r335-novo-241.test.mjs \
+            tests/coffee-preview-role-policy.test.mjs
