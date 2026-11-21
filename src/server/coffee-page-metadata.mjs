@@ -43,6 +43,7 @@ import {interpretAgtron,agtronExplanation} from './agtron-roast.mjs';
 import {extractSelectedNextCoffeeProduct} from './coffee-next-selected-product.mjs';
 import {extractSelectedReactRouterCoffeeHydration} from './coffee-react-router-hydration.mjs';
 import {selectedCoffeeHeroFacts,selectedCurrentOriginCaption,hasIncompatibleCurrentTastingList} from './coffee-selected-product-hero.mjs';
+import {selectedWooShortOriginConflict} from './coffee-selected-woo-short-origin-conflict.mjs';
 import {selectedCurrentCorroboratedHeroNotesConflict,selectedCurrentRepeatedProseNotesConflict} from './coffee-selected-hero-notes-conflict.mjs';
 import {COFFEE_FIELD_ALIASES,extractSemanticCoffeeSpecs,withoutEducationalCoffeeGeography} from './coffee-semantic-specs.mjs';
 import {equivalentCoffeeVarieties,compatibleGenericCoffeeVarieties,explicitCoffeeVarietyRefinement,coffeeOriginParts,compatibleCoffeeOrigins,isCoffeeBroadOrigin,orderExplicitCoffeeOriginTuple,withoutRepeatedCoffeeOriginSuffix} from './coffee-fact-compatibility.mjs';
@@ -3382,6 +3383,30 @@ if(fields.origin&&!conflicts.has('origin')){
   ])if(source_facts.length<384)source_facts.push({
    field:'origin_context',label,value,source_url,source_type:'html',
    section:'Contradictory exact selected-product districts; member review',conflicting:true
+  });
+ }
+
+ // The same selected current Woo product can contradict its own Location
+ // label in the directly printed producer/region H5 (#242 original603).
+ // Neither a misspelling guess nor an SEO title can decide the region.
+ const shortOriginConflict=fields.origin&&!conflicts.has('origin')&&fields.producer
+  ?selectedWooShortOriginConflict(canonicalProduct,{
+   name:fields.name,origin:fields.origin,producer:fields.producer,source_facts,clean
+  }):null;
+ if(shortOriginConflict){
+  rememberCoffeeReviewCandidate(fields,'origin',shortOriginConflict.spec,
+   'Exact selected Location specification (disputed)');
+  rememberCoffeeReviewCandidate(fields,'origin',shortOriginConflict.hero,
+   'Selected current producer/region H5 (disputed)');
+  conflicts.add('origin');delete fields.origin;
+  for(const fact of source_facts)if(fact.field==='origin'&&
+   /^location$/iu.test(String(fact.label||'').trim())&&
+   keyOf(fact.value)===keyOf(shortOriginConflict.spec))fact.conflicting=true;
+  if(source_facts.length<384)source_facts.push({
+   field:'origin_context',label:'Selected short-description region (disputed)',
+   value:shortOriginConflict.hero,source_url,source_type:'html',
+   section:'Same selected product short-description vs Location specification',
+   conflicting:true
   });
  }
 
