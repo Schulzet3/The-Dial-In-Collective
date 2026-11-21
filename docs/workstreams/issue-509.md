@@ -1,3 +1,15 @@
+# Issue #509 R400 — full exposed PostgreSQL aggregate catalog semantic review [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=19af81bef828684eaea592cf2df785f49db4ec5e preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+2026-11-21 UTC. Verified live development commit, immutable PREFLIGHT bytes and Git blob. Connected Supabase azviqqejypsefzilgonr ACTIVE_HEALTHY PostgreSQL 17.11; production strictly READ-ONLY. Resumed precisely at R399 cursor `pg_catalog` aggregate rank 1/157, sorted proname/OID. Directly reviewed **all 157/157 full accessible `pg_proc` plus `pg_aggregate` catalog records and descriptions**, totaling **200150 exact PostgreSQL-canonical catalog characters**, with every OID, complete literal text, provider MD5, 1–end range, typed transition/final/moving/combine semantics and per-object verdict in [R400 append-only ledger](../audits/issue509-r400-pg-catalog-all-aggregates-20261121.json). Counts: 146 normal, 7 ordered-set and 4 hypothetical-set. PostgreSQL does not expose original CREATE AGGREGATE DDL via pg_get_functiondef; compiled native component implementations remain UNVERIFIED. Zero #267 source-line audit credit.
+
+Semantic findings: Boolean `every` and `bool_and`, `stddev` and `stddev_samp`, `variance` and `var_samp` intentionally alias; NULL-strict and unique-key JSON constructors differ materially; sample vs population, scalar vs array, range union vs intersection, ordered vs hypothetical percentile/rank, count(expr) vs count(*) and typed sum widening are not safe duplicates. Live catalog shows zero explicit normal/auto `pg_depend` edges to aggregate OIDs, NOT proof of absent runtime SQL consumers. No reproduced DIC application defect, justified aggregate deletion or measured bottleneck. No code/test/CI changes; new CI NOT_APPLICABLE. Existing release queue/current READY state NOT_REVALIDATED (oversized provider/connector files); no READY or DEPLOYED claim.
+
+Baseline remains IN_PROGRESS across other provider surfaces. **Next first unreviewed candidate cursor:** `pg_catalog.pg_operator`, rank 1/799 by oprname/OID, `!!(-,tsquery)` OID 3682, char 1; prioritize any newly changed DIC-owned definitions ahead of unchanged core system operators. No production SQL/data/Auth/Storage/Edge/config, migration, publication, backup, billing or schedule changes; preserve owner-action-only notification policy.
+
+---
+
 # Issue #509 R399 - core PostgreSQL SP-GiST through XPath exposed declarations [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=8f6d03ef8da44a63c0642993a248b13ba36fb8be preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
