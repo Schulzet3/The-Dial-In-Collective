@@ -80,3 +80,18 @@ test('R370 two current competing selected lists cannot silently PASS with omitte
   {conflicts:['origin'],conflicts_count:1}])
   assert.equal(evaluateSelected241({...base,...bad}).accepted,false,JSON.stringify(bad));
 });
+
+test('R371 fetched access challenge or challenge reason cannot certify selected source or member review',()=>{
+ const selectedConflict={...selected,...sensoryEvidence,conflicts:['tasting_notes'],conflicts_count:1,
+  parsed:{name:'Buesaco',origin:'Buesaco, Colombia',process:'Washed',tasting_notes:undefined}};
+ for(const base of [selected,selectedConflict]){
+  assert.equal(evaluateSelected241(base).accepted,true);
+  for(const challenged of [{...base,access_challenge:true},{...base,reason:'source_access_challenge'}]){
+   const report=evaluateSelected241(challenged);
+   assert.equal(report.accepted,false);
+   assert.equal(report.classification,'SELECTED_SOURCE_UNVERIFIED');
+   assert.equal(report.manual_semantic_certified,false);
+  }
+  assert.equal(evaluateSelected241({...base,access_challenge:false,reason:''}).accepted,true);
+ }
+});
