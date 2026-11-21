@@ -1,0 +1,4470 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "round": "R427",
+  "date_utc": "2026-11-21",
+  "project": "azviqqejypsefzilgonr",
+  "provider": "Supabase PostgreSQL 17.11.0.003",
+  "production_read_only": true,
+  "preflight_development_sha": "9f8d1da3599b37c335963632f543bf700eb1bd69",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "source_branch": "development/backend-foundation",
+  "route": "pg_catalog.pg_class non-index relations, ranks 1-30 of 142 in OID order",
+  "newly_reviewed": 30,
+  "route_total": 142,
+  "table_definition_exposure": "COMPLETE_ACCESSIBLE_CATALOG_PROJECTION_NOT_ORIGINAL_POSTGRESQL_BOOTSTRAP_DDL",
+  "catalog_projection_json_characters": 60571,
+  "columns_reviewed": 342,
+  "full_index_definitions": 63,
+  "constraint_expressions": 52,
+  "original_bootstrap_source": "UNVERIFIED",
+  "native_compiled_source": "UNVERIFIED",
+  "private_records_read": false,
+  "github267_code_line_credit": 0,
+  "source_bound_ci": "NOT_APPLICABLE_DOCS_ONLY",
+  "app_fix": "NONE_JUSTIFIED_FROM_THIS_SEGMENT",
+  "verdict": "KEEP_CORE_POSTGRESQL_CATALOGS",
+  "entries": [
+    {
+      "rank": 1,
+      "oid": 826,
+      "identity": "pg_catalog.pg_default_acl",
+      "provider_projection_md5": "a4e3d63d0035cb67639ca7eb2f33acab",
+      "reviewed_character_range": "1-1266",
+      "serialized_projection_characters": 1266,
+      "semantic_review": "Default object privileges indexed by role, namespace and object type; preserves ALTER DEFAULT PRIVILEGES lookup.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 1,
+        "oid": 826,
+        "name": "pg_default_acl",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "defaclrole",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "defaclnamespace",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "defaclobjtype",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "defaclacl",
+            "type": "aclitem[]",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_default_acl_role_nsp_obj_index ON pg_catalog.pg_default_acl USING btree (defaclrole, defaclnamespace, defaclobjtype)",
+          "CREATE UNIQUE INDEX pg_default_acl_oid_index ON pg_catalog.pg_default_acl USING btree (oid)"
+        ],
+        "constraints": [
+          "UNIQUE (defaclrole, defaclnamespace, defaclobjtype)",
+          "PRIMARY KEY (oid)"
+        ],
+        "triggers": null,
+        "provider_projection_md5": "a4e3d63d0035cb67639ca7eb2f33acab"
+      }
+    },
+    {
+      "rank": 2,
+      "oid": 1213,
+      "identity": "pg_catalog.pg_tablespace",
+      "provider_projection_md5": "36def0746137dd30c565882d68c22594",
+      "reviewed_character_range": "1-1172",
+      "serialized_projection_characters": 1172,
+      "semantic_review": "Shared tablespace names/owners/ACL/options; unique OID and name support.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 2,
+        "oid": 1213,
+        "name": "pg_tablespace",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "spcname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "spcowner",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "spcacl",
+            "type": "aclitem[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "spcoptions",
+            "type": "text[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_tablespace_oid_index ON pg_catalog.pg_tablespace USING btree (oid)",
+          "CREATE UNIQUE INDEX pg_tablespace_spcname_index ON pg_catalog.pg_tablespace USING btree (spcname)"
+        ],
+        "constraints": [
+          "PRIMARY KEY (oid)",
+          "UNIQUE (spcname)"
+        ],
+        "triggers": null,
+        "provider_projection_md5": "36def0746137dd30c565882d68c22594"
+      }
+    },
+    {
+      "rank": 3,
+      "oid": 1214,
+      "identity": "pg_catalog.pg_shdepend",
+      "provider_projection_md5": "dddd8e9653828648b4bec89094989f6b",
+      "reviewed_character_range": "1-1395",
+      "serialized_projection_characters": 1395,
+      "semantic_review": "Cross-database dependencies indexed by depender and referenced shared object; no safe app-level replacement.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 3,
+        "oid": 1214,
+        "name": "pg_shdepend",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "dbid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "classid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "objid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "objsubid",
+            "type": "integer",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "refclassid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "refobjid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "deptype",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE INDEX pg_shdepend_depender_index ON pg_catalog.pg_shdepend USING btree (dbid, classid, objid, objsubid)",
+          "CREATE INDEX pg_shdepend_reference_index ON pg_catalog.pg_shdepend USING btree (refclassid, refobjid)"
+        ],
+        "constraints": null,
+        "triggers": null,
+        "provider_projection_md5": "dddd8e9653828648b4bec89094989f6b"
+      }
+    },
+    {
+      "rank": 4,
+      "oid": 1247,
+      "identity": "pg_catalog.pg_type",
+      "provider_projection_md5": "a1ba23190252b3af24bea35d5f45867e",
+      "reviewed_character_range": "1-4570",
+      "serialized_projection_characters": 4570,
+      "semantic_review": "PostgreSQL type registry storing subtype I/O, alignment, array, collation, domain and ACL metadata; dual uniqueness enforced.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 4,
+        "oid": 1247,
+        "name": "pg_type",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "typname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "typnamespace",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "typowner",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "typlen",
+            "type": "smallint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "typbyval",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "typtype",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "typcategory",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 9,
+            "name": "typispreferred",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 10,
+            "name": "typisdefined",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 11,
+            "name": "typdelim",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 12,
+            "name": "typrelid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 13,
+            "name": "typsubscript",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 14,
+            "name": "typelem",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 15,
+            "name": "typarray",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 16,
+            "name": "typinput",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 17,
+            "name": "typoutput",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 18,
+            "name": "typreceive",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 19,
+            "name": "typsend",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 20,
+            "name": "typmodin",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 21,
+            "name": "typmodout",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 22,
+            "name": "typanalyze",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 23,
+            "name": "typalign",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 24,
+            "name": "typstorage",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 25,
+            "name": "typnotnull",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 26,
+            "name": "typbasetype",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 27,
+            "name": "typtypmod",
+            "type": "integer",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 28,
+            "name": "typndims",
+            "type": "integer",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 29,
+            "name": "typcollation",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 30,
+            "name": "typdefaultbin",
+            "type": "pg_node_tree",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 31,
+            "name": "typdefault",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 32,
+            "name": "typacl",
+            "type": "aclitem[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_type_oid_index ON pg_catalog.pg_type USING btree (oid)",
+          "CREATE UNIQUE INDEX pg_type_typname_nsp_index ON pg_catalog.pg_type USING btree (typname, typnamespace)"
+        ],
+        "constraints": [
+          "PRIMARY KEY (oid)",
+          "UNIQUE (typname, typnamespace)"
+        ],
+        "triggers": null,
+        "provider_projection_md5": "a1ba23190252b3af24bea35d5f45867e"
+      }
+    },
+    {
+      "rank": 5,
+      "oid": 1249,
+      "identity": "pg_catalog.pg_attribute",
+      "provider_projection_md5": "5609fdd010162345f1c5e5df0a0ea042",
+      "reviewed_character_range": "1-3913",
+      "serialized_projection_characters": 3913,
+      "semantic_review": "Column registry, physical type/collation/storage, identity/default/attmissing representation; relation/name and relation/number unique indexes.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 5,
+        "oid": 1249,
+        "name": "pg_attribute",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "attrelid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "attname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "atttypid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "attlen",
+            "type": "smallint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "attnum",
+            "type": "smallint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "attcacheoff",
+            "type": "integer",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "atttypmod",
+            "type": "integer",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "attndims",
+            "type": "smallint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 9,
+            "name": "attbyval",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 10,
+            "name": "attalign",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 11,
+            "name": "attstorage",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 12,
+            "name": "attcompression",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 13,
+            "name": "attnotnull",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 14,
+            "name": "atthasdef",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 15,
+            "name": "atthasmissing",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 16,
+            "name": "attidentity",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 17,
+            "name": "attgenerated",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 18,
+            "name": "attisdropped",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 19,
+            "name": "attislocal",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 20,
+            "name": "attinhcount",
+            "type": "smallint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 21,
+            "name": "attcollation",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 22,
+            "name": "attstattarget",
+            "type": "smallint",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 23,
+            "name": "attacl",
+            "type": "aclitem[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 24,
+            "name": "attoptions",
+            "type": "text[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 25,
+            "name": "attfdwoptions",
+            "type": "text[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 26,
+            "name": "attmissingval",
+            "type": "anyarray",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_attribute_relid_attnam_index ON pg_catalog.pg_attribute USING btree (attrelid, attname)",
+          "CREATE UNIQUE INDEX pg_attribute_relid_attnum_index ON pg_catalog.pg_attribute USING btree (attrelid, attnum)"
+        ],
+        "constraints": [
+          "UNIQUE (attrelid, attname)",
+          "PRIMARY KEY (attrelid, attnum)"
+        ],
+        "triggers": null,
+        "provider_projection_md5": "5609fdd010162345f1c5e5df0a0ea042"
+      }
+    },
+    {
+      "rank": 6,
+      "oid": 1255,
+      "identity": "pg_catalog.pg_proc",
+      "provider_projection_md5": "dc05fcbda3831d8c38d04473c574197e",
+      "reviewed_character_range": "1-4370",
+      "serialized_projection_characters": 4370,
+      "semantic_review": "Function catalog with signatures, language, volatility, security-definer flag, SQL/native body pointers; unique signature identity.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 6,
+        "oid": 1255,
+        "name": "pg_proc",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "proname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "pronamespace",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "proowner",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "prolang",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "procost",
+            "type": "real",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "prorows",
+            "type": "real",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "provariadic",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 9,
+            "name": "prosupport",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 10,
+            "name": "prokind",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 11,
+            "name": "prosecdef",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 12,
+            "name": "proleakproof",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 13,
+            "name": "proisstrict",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 14,
+            "name": "proretset",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 15,
+            "name": "provolatile",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 16,
+            "name": "proparallel",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 17,
+            "name": "pronargs",
+            "type": "smallint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 18,
+            "name": "pronargdefaults",
+            "type": "smallint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 19,
+            "name": "prorettype",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 20,
+            "name": "proargtypes",
+            "type": "oidvector",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 21,
+            "name": "proallargtypes",
+            "type": "oid[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 22,
+            "name": "proargmodes",
+            "type": "\"char\"[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 23,
+            "name": "proargnames",
+            "type": "text[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 24,
+            "name": "proargdefaults",
+            "type": "pg_node_tree",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 25,
+            "name": "protrftypes",
+            "type": "oid[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 26,
+            "name": "prosrc",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 27,
+            "name": "probin",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 28,
+            "name": "prosqlbody",
+            "type": "pg_node_tree",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 29,
+            "name": "proconfig",
+            "type": "text[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 30,
+            "name": "proacl",
+            "type": "aclitem[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_proc_oid_index ON pg_catalog.pg_proc USING btree (oid)",
+          "CREATE UNIQUE INDEX pg_proc_proname_args_nsp_index ON pg_catalog.pg_proc USING btree (proname, proargtypes, pronamespace)"
+        ],
+        "constraints": [
+          "PRIMARY KEY (oid)",
+          "UNIQUE (proname, proargtypes, pronamespace)"
+        ],
+        "triggers": null,
+        "provider_projection_md5": "dc05fcbda3831d8c38d04473c574197e"
+      }
+    },
+    {
+      "rank": 7,
+      "oid": 1259,
+      "identity": "pg_catalog.pg_class",
+      "provider_projection_md5": "04bdf30b224f41b6a0066ccc256b6c31",
+      "reviewed_character_range": "1-4848",
+      "serialized_projection_characters": 4848,
+      "semantic_review": "Relation registry with ownership, persistence, RLS flags, index/TOAST, relfilenode and planner statistics; OID/name indexes.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 7,
+        "oid": 1259,
+        "name": "pg_class",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "relname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "relnamespace",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "reltype",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "reloftype",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "relowner",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "relam",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "relfilenode",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 9,
+            "name": "reltablespace",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 10,
+            "name": "relpages",
+            "type": "integer",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 11,
+            "name": "reltuples",
+            "type": "real",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 12,
+            "name": "relallvisible",
+            "type": "integer",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 13,
+            "name": "reltoastrelid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 14,
+            "name": "relhasindex",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 15,
+            "name": "relisshared",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 16,
+            "name": "relpersistence",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 17,
+            "name": "relkind",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 18,
+            "name": "relnatts",
+            "type": "smallint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 19,
+            "name": "relchecks",
+            "type": "smallint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 20,
+            "name": "relhasrules",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 21,
+            "name": "relhastriggers",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 22,
+            "name": "relhassubclass",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 23,
+            "name": "relrowsecurity",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 24,
+            "name": "relforcerowsecurity",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 25,
+            "name": "relispopulated",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 26,
+            "name": "relreplident",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 27,
+            "name": "relispartition",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 28,
+            "name": "relrewrite",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 29,
+            "name": "relfrozenxid",
+            "type": "xid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 30,
+            "name": "relminmxid",
+            "type": "xid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 31,
+            "name": "relacl",
+            "type": "aclitem[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 32,
+            "name": "reloptions",
+            "type": "text[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 33,
+            "name": "relpartbound",
+            "type": "pg_node_tree",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_class_oid_index ON pg_catalog.pg_class USING btree (oid)",
+          "CREATE UNIQUE INDEX pg_class_relname_nsp_index ON pg_catalog.pg_class USING btree (relname, relnamespace)",
+          "CREATE INDEX pg_class_tblspc_relfilenode_index ON pg_catalog.pg_class USING btree (reltablespace, relfilenode)"
+        ],
+        "constraints": [
+          "PRIMARY KEY (oid)",
+          "UNIQUE (relname, relnamespace)"
+        ],
+        "triggers": null,
+        "provider_projection_md5": "04bdf30b224f41b6a0066ccc256b6c31"
+      }
+    },
+    {
+      "rank": 8,
+      "oid": 1260,
+      "identity": "pg_catalog.pg_authid",
+      "provider_projection_md5": "538f58410b91f2e38ce5a2fc91515f8a",
+      "reviewed_character_range": "1-2057",
+      "serialized_projection_characters": 2057,
+      "semantic_review": "Privileged role registry includes password-hash column definition, NOT any role records/password values; restricted catalog ACL.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 8,
+        "oid": 1260,
+        "name": "pg_authid",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "rolname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "rolsuper",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "rolinherit",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "rolcreaterole",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "rolcreatedb",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "rolcanlogin",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "rolreplication",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 9,
+            "name": "rolbypassrls",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 10,
+            "name": "rolconnlimit",
+            "type": "integer",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 11,
+            "name": "rolpassword",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 12,
+            "name": "rolvaliduntil",
+            "type": "timestamp with time zone",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_authid_rolname_index ON pg_catalog.pg_authid USING btree (rolname)",
+          "CREATE UNIQUE INDEX pg_authid_oid_index ON pg_catalog.pg_authid USING btree (oid)"
+        ],
+        "constraints": [
+          "UNIQUE (rolname)",
+          "PRIMARY KEY (oid)"
+        ],
+        "triggers": null,
+        "provider_projection_md5": "538f58410b91f2e38ce5a2fc91515f8a"
+      }
+    },
+    {
+      "rank": 9,
+      "oid": 1261,
+      "identity": "pg_catalog.pg_auth_members",
+      "provider_projection_md5": "f049447f3f49b3b1fab8e9ba36991512",
+      "reviewed_character_range": "1-1722",
+      "serialized_projection_characters": 1722,
+      "semantic_review": "Role membership graph with grantor and independent admin/inherit/set rights; dual unique membership ordering plus grantor lookup.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 9,
+        "oid": 1261,
+        "name": "pg_auth_members",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "roleid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "member",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "grantor",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "admin_option",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "inherit_option",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "set_option",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_auth_members_role_member_index ON pg_catalog.pg_auth_members USING btree (roleid, member, grantor)",
+          "CREATE UNIQUE INDEX pg_auth_members_member_role_index ON pg_catalog.pg_auth_members USING btree (member, roleid, grantor)",
+          "CREATE INDEX pg_auth_members_grantor_index ON pg_catalog.pg_auth_members USING btree (grantor)",
+          "CREATE UNIQUE INDEX pg_auth_members_oid_index ON pg_catalog.pg_auth_members USING btree (oid)"
+        ],
+        "constraints": [
+          "PRIMARY KEY (oid)",
+          "UNIQUE (roleid, member, grantor)",
+          "UNIQUE (member, roleid, grantor)"
+        ],
+        "triggers": null,
+        "provider_projection_md5": "f049447f3f49b3b1fab8e9ba36991512"
+      }
+    },
+    {
+      "rank": 10,
+      "oid": 1262,
+      "identity": "pg_catalog.pg_database",
+      "provider_projection_md5": "b70df27d1fda366f18b26969a5614a00",
+      "reviewed_character_range": "1-2805",
+      "serialized_projection_characters": 2805,
+      "semantic_review": "Database registry with encoding, locale/ICU, connection controls and template flags; database-name and OID uniqueness.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 10,
+        "oid": 1262,
+        "name": "pg_database",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "datname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "datdba",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "encoding",
+            "type": "integer",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "datlocprovider",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "datistemplate",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "datallowconn",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "dathasloginevt",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 9,
+            "name": "datconnlimit",
+            "type": "integer",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 10,
+            "name": "datfrozenxid",
+            "type": "xid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 11,
+            "name": "datminmxid",
+            "type": "xid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 12,
+            "name": "dattablespace",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 13,
+            "name": "datcollate",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 14,
+            "name": "datctype",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 15,
+            "name": "datlocale",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 16,
+            "name": "daticurules",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 17,
+            "name": "datcollversion",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 18,
+            "name": "datacl",
+            "type": "aclitem[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_database_datname_index ON pg_catalog.pg_database USING btree (datname)",
+          "CREATE UNIQUE INDEX pg_database_oid_index ON pg_catalog.pg_database USING btree (oid)"
+        ],
+        "constraints": [
+          "UNIQUE (datname)",
+          "PRIMARY KEY (oid)"
+        ],
+        "triggers": null,
+        "provider_projection_md5": "b70df27d1fda366f18b26969a5614a00"
+      }
+    },
+    {
+      "rank": 11,
+      "oid": 1417,
+      "identity": "pg_catalog.pg_foreign_server",
+      "provider_projection_md5": "9f4f6f6c952459e74366afe2520dc654",
+      "reviewed_character_range": "1-1553",
+      "serialized_projection_characters": 1553,
+      "semantic_review": "Foreign-server definitions, owner/FDW relationship and ACL/options with distinct name/OID uniqueness.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 11,
+        "oid": 1417,
+        "name": "pg_foreign_server",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "srvname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "srvowner",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "srvfdw",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "srvtype",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "srvversion",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "srvacl",
+            "type": "aclitem[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "srvoptions",
+            "type": "text[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_foreign_server_oid_index ON pg_catalog.pg_foreign_server USING btree (oid)",
+          "CREATE UNIQUE INDEX pg_foreign_server_name_index ON pg_catalog.pg_foreign_server USING btree (srvname)"
+        ],
+        "constraints": [
+          "PRIMARY KEY (oid)",
+          "UNIQUE (srvname)"
+        ],
+        "triggers": null,
+        "provider_projection_md5": "9f4f6f6c952459e74366afe2520dc654"
+      }
+    },
+    {
+      "rank": 12,
+      "oid": 1418,
+      "identity": "pg_catalog.pg_user_mapping",
+      "provider_projection_md5": "55e9109b697f8906e4226fc5c1c4c80e",
+      "reviewed_character_range": "1-1059",
+      "serialized_projection_characters": 1059,
+      "semantic_review": "Privileged foreign-user-mapping registry including options column definition only; restricted catalog ACL and user/server uniqueness.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 12,
+        "oid": 1418,
+        "name": "pg_user_mapping",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "umuser",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "umserver",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "umoptions",
+            "type": "text[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_user_mapping_oid_index ON pg_catalog.pg_user_mapping USING btree (oid)",
+          "CREATE UNIQUE INDEX pg_user_mapping_user_server_index ON pg_catalog.pg_user_mapping USING btree (umuser, umserver)"
+        ],
+        "constraints": [
+          "PRIMARY KEY (oid)",
+          "UNIQUE (umuser, umserver)"
+        ],
+        "triggers": null,
+        "provider_projection_md5": "55e9109b697f8906e4226fc5c1c4c80e"
+      }
+    },
+    {
+      "rank": 13,
+      "oid": 2224,
+      "identity": "pg_catalog.pg_sequence",
+      "provider_projection_md5": "eee29d03b84aa2dd18adf0b50f68ae8c",
+      "reviewed_character_range": "1-1436",
+      "serialized_projection_characters": 1436,
+      "semantic_review": "Sequence parameters for bounds/increment/cache/cycle keyed by owning sequence OID.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 13,
+        "oid": 2224,
+        "name": "pg_sequence",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "seqrelid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "seqtypid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "seqstart",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "seqincrement",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "seqmax",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "seqmin",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "seqcache",
+            "type": "bigint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "seqcycle",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_sequence_seqrelid_index ON pg_catalog.pg_sequence USING btree (seqrelid)"
+        ],
+        "constraints": [
+          "PRIMARY KEY (seqrelid)"
+        ],
+        "triggers": null,
+        "provider_projection_md5": "eee29d03b84aa2dd18adf0b50f68ae8c"
+      }
+    },
+    {
+      "rank": 14,
+      "oid": 2328,
+      "identity": "pg_catalog.pg_foreign_data_wrapper",
+      "provider_projection_md5": "40dd876bab79f6215e54bdcdbf3270e1",
+      "reviewed_character_range": "1-1466",
+      "serialized_projection_characters": 1466,
+      "semantic_review": "Foreign-data-wrapper handlers, validators, owner/options and ACL with name/OID uniqueness.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 14,
+        "oid": 2328,
+        "name": "pg_foreign_data_wrapper",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "fdwname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "fdwowner",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "fdwhandler",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "fdwvalidator",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "fdwacl",
+            "type": "aclitem[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "fdwoptions",
+            "type": "text[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_foreign_data_wrapper_oid_index ON pg_catalog.pg_foreign_data_wrapper USING btree (oid)",
+          "CREATE UNIQUE INDEX pg_foreign_data_wrapper_name_index ON pg_catalog.pg_foreign_data_wrapper USING btree (fdwname)"
+        ],
+        "constraints": [
+          "PRIMARY KEY (oid)",
+          "UNIQUE (fdwname)"
+        ],
+        "triggers": null,
+        "provider_projection_md5": "40dd876bab79f6215e54bdcdbf3270e1"
+      }
+    },
+    {
+      "rank": 15,
+      "oid": 2396,
+      "identity": "pg_catalog.pg_shdescription",
+      "provider_projection_md5": "713fd5361b4f1f1218c52f29e8ba0c2f",
+      "reviewed_character_range": "1-845",
+      "serialized_projection_characters": 845,
+      "semantic_review": "Shared-object description catalog, cross-database OID/class key.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 15,
+        "oid": 2396,
+        "name": "pg_shdescription",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "objoid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "classoid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "description",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_shdescription_o_c_index ON pg_catalog.pg_shdescription USING btree (objoid, classoid)"
+        ],
+        "constraints": [
+          "PRIMARY KEY (objoid, classoid)"
+        ],
+        "triggers": null,
+        "provider_projection_md5": "713fd5361b4f1f1218c52f29e8ba0c2f"
+      }
+    },
+    {
+      "rank": 16,
+      "oid": 2600,
+      "identity": "pg_catalog.pg_aggregate",
+      "provider_projection_md5": "78be2597312ba354db231cdbc7fc2135",
+      "reviewed_character_range": "1-3271",
+      "serialized_projection_characters": 3271,
+      "semantic_review": "Aggregate transition/final/combine/serial/inverse support callbacks, state types and initializers; function OID keyed.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 16,
+        "oid": 2600,
+        "name": "pg_aggregate",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "aggfnoid",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "aggkind",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "aggnumdirectargs",
+            "type": "smallint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "aggtransfn",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "aggfinalfn",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "aggcombinefn",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "aggserialfn",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "aggdeserialfn",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 9,
+            "name": "aggmtransfn",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 10,
+            "name": "aggminvtransfn",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 11,
+            "name": "aggmfinalfn",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 12,
+            "name": "aggfinalextra",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 13,
+            "name": "aggmfinalextra",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 14,
+            "name": "aggfinalmodify",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 15,
+            "name": "aggmfinalmodify",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 16,
+            "name": "aggsortop",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 17,
+            "name": "aggtranstype",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 18,
+            "name": "aggtransspace",
+            "type": "integer",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 19,
+            "name": "aggmtranstype",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 20,
+            "name": "aggmtransspace",
+            "type": "integer",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 21,
+            "name": "agginitval",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 22,
+            "name": "aggminitval",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_aggregate_fnoid_index ON pg_catalog.pg_aggregate USING btree (aggfnoid)"
+        ],
+        "constraints": [
+          "PRIMARY KEY (aggfnoid)"
+        ],
+        "triggers": null,
+        "provider_projection_md5": "78be2597312ba354db231cdbc7fc2135"
+      }
+    },
+    {
+      "rank": 17,
+      "oid": 2601,
+      "identity": "pg_catalog.pg_am",
+      "provider_projection_md5": "166093c2fe839e3354932114c9fdbde9",
+      "reviewed_character_range": "1-1004",
+      "serialized_projection_characters": 1004,
+      "semantic_review": "Access-method registry of names, handler entrypoints and method type; name and OID uniqueness.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 17,
+        "oid": 2601,
+        "name": "pg_am",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "amname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "amhandler",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "amtype",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_am_name_index ON pg_catalog.pg_am USING btree (amname)",
+          "CREATE UNIQUE INDEX pg_am_oid_index ON pg_catalog.pg_am USING btree (oid)"
+        ],
+        "constraints": [
+          "UNIQUE (amname)",
+          "PRIMARY KEY (oid)"
+        ],
+        "triggers": null,
+        "provider_projection_md5": "166093c2fe839e3354932114c9fdbde9"
+      }
+    },
+    {
+      "rank": 18,
+      "oid": 2602,
+      "identity": "pg_catalog.pg_amop",
+      "provider_projection_md5": "7582230d9981aa3b954bde67f9aebf5b",
+      "reviewed_character_range": "1-1898",
+      "serialized_projection_characters": 1898,
+      "semantic_review": "Access-method operator strategy catalog, op-family and signature uniqueness with operator-purpose uniqueness.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 18,
+        "oid": 2602,
+        "name": "pg_amop",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "amopfamily",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "amoplefttype",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "amoprighttype",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "amopstrategy",
+            "type": "smallint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "amoppurpose",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "amopopr",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "amopmethod",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 9,
+            "name": "amopsortfamily",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_amop_fam_strat_index ON pg_catalog.pg_amop USING btree (amopfamily, amoplefttype, amoprighttype, amopstrategy)",
+          "CREATE UNIQUE INDEX pg_amop_opr_fam_index ON pg_catalog.pg_amop USING btree (amopopr, amoppurpose, amopfamily)",
+          "CREATE UNIQUE INDEX pg_amop_oid_index ON pg_catalog.pg_amop USING btree (oid)"
+        ],
+        "constraints": [
+          "UNIQUE (amopfamily, amoplefttype, amoprighttype, amopstrategy)",
+          "UNIQUE (amopopr, amoppurpose, amopfamily)",
+          "PRIMARY KEY (oid)"
+        ],
+        "triggers": null,
+        "provider_projection_md5": "7582230d9981aa3b954bde67f9aebf5b"
+      }
+    },
+    {
+      "rank": 19,
+      "oid": 2603,
+      "identity": "pg_catalog.pg_amproc",
+      "provider_projection_md5": "ac2219556f66300c2ea97567ac7439fb",
+      "reviewed_character_range": "1-1386",
+      "serialized_projection_characters": 1386,
+      "semantic_review": "Access-method support procedure mapping by family, argument types and support number.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 19,
+        "oid": 2603,
+        "name": "pg_amproc",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "amprocfamily",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "amproclefttype",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "amprocrighttype",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "amprocnum",
+            "type": "smallint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "amproc",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_amproc_fam_proc_index ON pg_catalog.pg_amproc USING btree (amprocfamily, amproclefttype, amprocrighttype, amprocnum)",
+          "CREATE UNIQUE INDEX pg_amproc_oid_index ON pg_catalog.pg_amproc USING btree (oid)"
+        ],
+        "constraints": [
+          "UNIQUE (amprocfamily, amproclefttype, amprocrighttype, amprocnum)",
+          "PRIMARY KEY (oid)"
+        ],
+        "triggers": null,
+        "provider_projection_md5": "ac2219556f66300c2ea97567ac7439fb"
+      }
+    },
+    {
+      "rank": 20,
+      "oid": 2604,
+      "identity": "pg_catalog.pg_attrdef",
+      "provider_projection_md5": "21e1ca723ff8a800b3e0862abd7f0510",
+      "reviewed_character_range": "1-1054",
+      "serialized_projection_characters": 1054,
+      "semantic_review": "Column default/generated expression storage by relation/attribute, expression node-tree, two uniqueness keys.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 20,
+        "oid": 2604,
+        "name": "pg_attrdef",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "adrelid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "adnum",
+            "type": "smallint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "adbin",
+            "type": "pg_node_tree",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_attrdef_adrelid_adnum_index ON pg_catalog.pg_attrdef USING btree (adrelid, adnum)",
+          "CREATE UNIQUE INDEX pg_attrdef_oid_index ON pg_catalog.pg_attrdef USING btree (oid)"
+        ],
+        "constraints": [
+          "UNIQUE (adrelid, adnum)",
+          "PRIMARY KEY (oid)"
+        ],
+        "triggers": null,
+        "provider_projection_md5": "21e1ca723ff8a800b3e0862abd7f0510"
+      }
+    },
+    {
+      "rank": 21,
+      "oid": 2605,
+      "identity": "pg_catalog.pg_cast",
+      "provider_projection_md5": "d6ff405daf3b7ece66977cebbe142b43",
+      "reviewed_character_range": "1-1307",
+      "serialized_projection_characters": 1307,
+      "semantic_review": "Cast registry with source/target, cast function, implicit/assignment context and implementation method.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 21,
+        "oid": 2605,
+        "name": "pg_cast",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "castsource",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "casttarget",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "castfunc",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "castcontext",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "castmethod",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_cast_oid_index ON pg_catalog.pg_cast USING btree (oid)",
+          "CREATE UNIQUE INDEX pg_cast_source_target_index ON pg_catalog.pg_cast USING btree (castsource, casttarget)"
+        ],
+        "constraints": [
+          "PRIMARY KEY (oid)",
+          "UNIQUE (castsource, casttarget)"
+        ],
+        "triggers": null,
+        "provider_projection_md5": "d6ff405daf3b7ece66977cebbe142b43"
+      }
+    },
+    {
+      "rank": 22,
+      "oid": 2606,
+      "identity": "pg_catalog.pg_constraint",
+      "provider_projection_md5": "248165829f80ab170cca10695698dbb3",
+      "reviewed_character_range": "1-4199",
+      "serialized_projection_characters": 4199,
+      "semantic_review": "Constraint metadata for PK/FK/check/exclusion, validation/deferral, parent partition link and update/delete rules; distinct catalog indexes.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 22,
+        "oid": 2606,
+        "name": "pg_constraint",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "conname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "connamespace",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "contype",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "condeferrable",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "condeferred",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "convalidated",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "conrelid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 9,
+            "name": "contypid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 10,
+            "name": "conindid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 11,
+            "name": "conparentid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 12,
+            "name": "confrelid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 13,
+            "name": "confupdtype",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 14,
+            "name": "confdeltype",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 15,
+            "name": "confmatchtype",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 16,
+            "name": "conislocal",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 17,
+            "name": "coninhcount",
+            "type": "smallint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 18,
+            "name": "connoinherit",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 19,
+            "name": "conkey",
+            "type": "smallint[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 20,
+            "name": "confkey",
+            "type": "smallint[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 21,
+            "name": "conpfeqop",
+            "type": "oid[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 22,
+            "name": "conppeqop",
+            "type": "oid[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 23,
+            "name": "conffeqop",
+            "type": "oid[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 24,
+            "name": "confdelsetcols",
+            "type": "smallint[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 25,
+            "name": "conexclop",
+            "type": "oid[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 26,
+            "name": "conbin",
+            "type": "pg_node_tree",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE INDEX pg_constraint_conparentid_index ON pg_catalog.pg_constraint USING btree (conparentid)",
+          "CREATE INDEX pg_constraint_conname_nsp_index ON pg_catalog.pg_constraint USING btree (conname, connamespace)",
+          "CREATE UNIQUE INDEX pg_constraint_conrelid_contypid_conname_index ON pg_catalog.pg_constraint USING btree (conrelid, contypid, conname)",
+          "CREATE INDEX pg_constraint_contypid_index ON pg_catalog.pg_constraint USING btree (contypid)",
+          "CREATE UNIQUE INDEX pg_constraint_oid_index ON pg_catalog.pg_constraint USING btree (oid)"
+        ],
+        "constraints": [
+          "UNIQUE (conrelid, contypid, conname)",
+          "PRIMARY KEY (oid)"
+        ],
+        "triggers": null,
+        "provider_projection_md5": "248165829f80ab170cca10695698dbb3"
+      }
+    },
+    {
+      "rank": 23,
+      "oid": 2607,
+      "identity": "pg_catalog.pg_conversion",
+      "provider_projection_md5": "117c15b7f297877fc5ce46a278ed77ae",
+      "reviewed_character_range": "1-1784",
+      "serialized_projection_characters": 1784,
+      "semantic_review": "Character-encoding conversion declarations, owner/source/target encoding/default and handler; name and conversion-lookup indexes.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 23,
+        "oid": 2607,
+        "name": "pg_conversion",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "conname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "connamespace",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "conowner",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "conforencoding",
+            "type": "integer",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "contoencoding",
+            "type": "integer",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "conproc",
+            "type": "regproc",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "condefault",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_conversion_default_index ON pg_catalog.pg_conversion USING btree (connamespace, conforencoding, contoencoding, oid)",
+          "CREATE UNIQUE INDEX pg_conversion_name_nsp_index ON pg_catalog.pg_conversion USING btree (conname, connamespace)",
+          "CREATE UNIQUE INDEX pg_conversion_oid_index ON pg_catalog.pg_conversion USING btree (oid)"
+        ],
+        "constraints": [
+          "UNIQUE (connamespace, conforencoding, contoencoding, oid)",
+          "UNIQUE (conname, connamespace)",
+          "PRIMARY KEY (oid)"
+        ],
+        "triggers": null,
+        "provider_projection_md5": "117c15b7f297877fc5ce46a278ed77ae"
+      }
+    },
+    {
+      "rank": 24,
+      "oid": 2608,
+      "identity": "pg_catalog.pg_depend",
+      "provider_projection_md5": "2eece9a5bce7fad35192df99c2597189",
+      "reviewed_character_range": "1-1404",
+      "serialized_projection_characters": 1404,
+      "semantic_review": "Database-local dependency catalog indexed in both dependent and referenced directions.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 24,
+        "oid": 2608,
+        "name": "pg_depend",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "classid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "objid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "objsubid",
+            "type": "integer",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "refclassid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "refobjid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "refobjsubid",
+            "type": "integer",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "deptype",
+            "type": "\"char\"",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE INDEX pg_depend_depender_index ON pg_catalog.pg_depend USING btree (classid, objid, objsubid)",
+          "CREATE INDEX pg_depend_reference_index ON pg_catalog.pg_depend USING btree (refclassid, refobjid, refobjsubid)"
+        ],
+        "constraints": null,
+        "triggers": null,
+        "provider_projection_md5": "2eece9a5bce7fad35192df99c2597189"
+      }
+    },
+    {
+      "rank": 25,
+      "oid": 2609,
+      "identity": "pg_catalog.pg_description",
+      "provider_projection_md5": "3afcbfcf021d31f90c2e99d310986923",
+      "reviewed_character_range": "1-985",
+      "serialized_projection_characters": 985,
+      "semantic_review": "Catalog object and column descriptions indexed by object/class/subobject.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 25,
+        "oid": 2609,
+        "name": "pg_description",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "objoid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "classoid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "objsubid",
+            "type": "integer",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "description",
+            "type": "text",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_description_o_c_o_index ON pg_catalog.pg_description USING btree (objoid, classoid, objsubid)"
+        ],
+        "constraints": [
+          "PRIMARY KEY (objoid, classoid, objsubid)"
+        ],
+        "triggers": null,
+        "provider_projection_md5": "3afcbfcf021d31f90c2e99d310986923"
+      }
+    },
+    {
+      "rank": 26,
+      "oid": 2610,
+      "identity": "pg_catalog.pg_index",
+      "provider_projection_md5": "9168f4086d92513d6adfb5ff87f50756",
+      "reviewed_character_range": "1-3227",
+      "serialized_projection_characters": 3227,
+      "semantic_review": "Index relationship registry including uniqueness, readiness, validity, null distinctness, expressions/predicate and column mapping.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 26,
+        "oid": 2610,
+        "name": "pg_index",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "indexrelid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "indrelid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "indnatts",
+            "type": "smallint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "indnkeyatts",
+            "type": "smallint",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "indisunique",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "indnullsnotdistinct",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "indisprimary",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "indisexclusion",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 9,
+            "name": "indimmediate",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 10,
+            "name": "indisclustered",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 11,
+            "name": "indisvalid",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 12,
+            "name": "indcheckxmin",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 13,
+            "name": "indisready",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 14,
+            "name": "indislive",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 15,
+            "name": "indisreplident",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 16,
+            "name": "indkey",
+            "type": "int2vector",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 17,
+            "name": "indcollation",
+            "type": "oidvector",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 18,
+            "name": "indclass",
+            "type": "oidvector",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 19,
+            "name": "indoption",
+            "type": "int2vector",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 20,
+            "name": "indexprs",
+            "type": "pg_node_tree",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 21,
+            "name": "indpred",
+            "type": "pg_node_tree",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE INDEX pg_index_indrelid_index ON pg_catalog.pg_index USING btree (indrelid)",
+          "CREATE UNIQUE INDEX pg_index_indexrelid_index ON pg_catalog.pg_index USING btree (indexrelid)"
+        ],
+        "constraints": [
+          "PRIMARY KEY (indexrelid)"
+        ],
+        "triggers": null,
+        "provider_projection_md5": "9168f4086d92513d6adfb5ff87f50756"
+      }
+    },
+    {
+      "rank": 27,
+      "oid": 2611,
+      "identity": "pg_catalog.pg_inherits",
+      "provider_projection_md5": "9dd758d6dc31ab3c2deeab9f1d59fc0a",
+      "reviewed_character_range": "1-1067",
+      "serialized_projection_characters": 1067,
+      "semantic_review": "Inheritance/partition membership, sequence and detach-pending state with parent lookup.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 27,
+        "oid": 2611,
+        "name": "pg_inherits",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "inhrelid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "inhparent",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "inhseqno",
+            "type": "integer",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "inhdetachpending",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE INDEX pg_inherits_parent_index ON pg_catalog.pg_inherits USING btree (inhparent)",
+          "CREATE UNIQUE INDEX pg_inherits_relid_seqno_index ON pg_catalog.pg_inherits USING btree (inhrelid, inhseqno)"
+        ],
+        "constraints": [
+          "PRIMARY KEY (inhrelid, inhseqno)"
+        ],
+        "triggers": null,
+        "provider_projection_md5": "9dd758d6dc31ab3c2deeab9f1d59fc0a"
+      }
+    },
+    {
+      "rank": 28,
+      "oid": 2612,
+      "identity": "pg_catalog.pg_language",
+      "provider_projection_md5": "03e40fa2f33b78010e50dde75ff31867",
+      "reviewed_character_range": "1-1655",
+      "serialized_projection_characters": 1655,
+      "semantic_review": "Procedural language registry, handler/validator/trusted flag and ACL by name/OID.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 28,
+        "oid": 2612,
+        "name": "pg_language",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "lanname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "lanowner",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "lanispl",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 5,
+            "name": "lanpltrusted",
+            "type": "boolean",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 6,
+            "name": "lanplcallfoid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 7,
+            "name": "laninline",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 8,
+            "name": "lanvalidator",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 9,
+            "name": "lanacl",
+            "type": "aclitem[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_language_name_index ON pg_catalog.pg_language USING btree (lanname)",
+          "CREATE UNIQUE INDEX pg_language_oid_index ON pg_catalog.pg_language USING btree (oid)"
+        ],
+        "constraints": [
+          "UNIQUE (lanname)",
+          "PRIMARY KEY (oid)"
+        ],
+        "triggers": null,
+        "provider_projection_md5": "03e40fa2f33b78010e50dde75ff31867"
+      }
+    },
+    {
+      "rank": 29,
+      "oid": 2613,
+      "identity": "pg_catalog.pg_largeobject",
+      "provider_projection_md5": "9adfce61c01e99bda9644043b0fee3ac",
+      "reviewed_character_range": "1-811",
+      "serialized_projection_characters": 811,
+      "semantic_review": "Privileged large-object page storage schema only (no page bytes read), composite object/page PK.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 29,
+        "oid": 2613,
+        "name": "pg_largeobject",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "loid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "pageno",
+            "type": "integer",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "data",
+            "type": "bytea",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_largeobject_loid_pn_index ON pg_catalog.pg_largeobject USING btree (loid, pageno)"
+        ],
+        "constraints": [
+          "PRIMARY KEY (loid, pageno)"
+        ],
+        "triggers": null,
+        "provider_projection_md5": "9adfce61c01e99bda9644043b0fee3ac"
+      }
+    },
+    {
+      "rank": 30,
+      "oid": 2615,
+      "identity": "pg_catalog.pg_namespace",
+      "provider_projection_md5": "ad41f1f06162c66e2c5b14eb24454647",
+      "reviewed_character_range": "1-1042",
+      "serialized_projection_characters": 1042,
+      "semantic_review": "Namespace registry and owners/ACL; schema name and OID uniqueness.",
+      "verdict": "KEEP_CORE_CATALOG_NOT_DIC_APP_DEAD_CODE",
+      "source": {
+        "rank": 30,
+        "oid": 2615,
+        "name": "pg_namespace",
+        "kind": "r",
+        "owner": "supabase_admin",
+        "acl": "{supabase_admin=arwdDxtm/supabase_admin,=r/supabase_admin}",
+        "options": null,
+        "rls": false,
+        "force_rls": false,
+        "object_description": null,
+        "columns": [
+          {
+            "num": 1,
+            "name": "oid",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 2,
+            "name": "nspname",
+            "type": "name",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 3,
+            "name": "nspowner",
+            "type": "oid",
+            "default": null,
+            "identity": "",
+            "required": true,
+            "generated": "",
+            "description": null
+          },
+          {
+            "num": 4,
+            "name": "nspacl",
+            "type": "aclitem[]",
+            "default": null,
+            "identity": "",
+            "required": false,
+            "generated": "",
+            "description": null
+          }
+        ],
+        "indexes": [
+          "CREATE UNIQUE INDEX pg_namespace_nspname_index ON pg_catalog.pg_namespace USING btree (nspname)",
+          "CREATE UNIQUE INDEX pg_namespace_oid_index ON pg_catalog.pg_namespace USING btree (oid)"
+        ],
+        "constraints": [
+          "UNIQUE (nspname)",
+          "PRIMARY KEY (oid)"
+        ],
+        "triggers": null,
+        "provider_projection_md5": "ad41f1f06162c66e2c5b14eb24454647"
+      }
+    }
+  ],
+  "notes": [
+    "All accessible 30 table column declarations, defaults, catalog comments, ACL, PK/unique constraints and full index DDL read; raw table tuples never selected.",
+    "Restricted pg_authid/pg_user_mapping/pg_largeobject schema only; no role-password, foreign credential or large-object/member bytes accessed.",
+    "Most system catalog tables are PostgreSQL internal and cannot be safely pruned by DIC development source.",
+    "This is not full PostgreSQL original CREATE TABLE bootstrap or native compiled implementation verification.",
+    "No production DDL, DML, Auth, Storage, Edge, backups or deployment."
+  ],
+  "next_cursor": "pg_catalog.pg_class non-index rank 31/142, pg_opclass OID 2616, char 1"
+}

@@ -1,3 +1,11 @@
+# Issue #509 R427 — first 30 pg_catalog core relations [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=9f8d1da3599b37c335963632f543bf700eb1bd69 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+2026-11-21 UTC. Continued immediately after R426 with fresh read-only `pg_catalog.pg_class` non-index inventory **142 total**, OID order. Directly reviewed **30/30 new system catalog relation projections** ranks 1–30, `pg_default_acl` OID 826 through `pg_namespace` OID 2615: **342 named/typed/nullability/default/identity column declarations, 63 complete index SQL definitions, 52 constraint expressions**, table/column comments, owners, ACL/RLS/reloptions and catalog identity, **60,571 selected serialized catalog characters**. Every table has a provider MD5 of selected JSONB projection and char 1–end per-object semantic determination in append-only [R427](../audits/issue509-r427-pg-catalog-core-relations-ranks1-30-20261121.json). Original PostgreSQL internal CREATE scripts and native compiled code remain **UNVERIFIED**; system catalog projection is not source-bootstrap certification.
+
+The **core type/function/relation/constraint/index/dependency metadata** are mutually dependent PostgreSQL engine catalogs; uniqueness, dependency direction and relation metadata are purposeful rather than DIC redundant objects. `pg_authid`, `pg_user_mapping` and `pg_largeobject` inspected ONLY by column schema, never any role password, credential, or content rows. No reproduced application bug, safe deletion or measured bottleneck; no source/test/CI changes (CI NOT_APPLICABLE, not PASS), no #267 source credit, no production SQL/data/Auth/Storage/Edge/config/backup/deployment/publication writes. Full provider baseline **IN_PROGRESS**. Prior queue/READY/DEPLOYED **NOT_REVALIDATED**. **Next exact cursor:** `pg_catalog.pg_class` non-index rank 31/142 `pg_opclass` OID 2616, first character. Hourly schedule and owner-action-only alert unchanged.
+
 # Issue #509 R426 — complete information_schema views 39–69/69 [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=9f8d1da3599b37c335963632f543bf700eb1bd69 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
