@@ -14,6 +14,9 @@ const fold=v=>String(v||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toL
 // process utilizing sugar cane and water." This is a DECAFFEINATION method,
 // never evidence of green Natural processing, EA solvent or Swiss Water.
 const CURRENT_SELECTED_OWN_CANE_WATER_DECAF=/^(?:this|our)\s+(?:naturally\s+)?decaf(?:feinated)?\s+coffee\s+(?:undergoes|uses)\s+(?:an?\s+)?(?:unique\s+|natural\s+)?decaffeination\s+(?:process|method)\s+(?:utilizing|using|with|via)\s+sugar[ -]?cane\s+and\s+water\b/iu;
+// Direct selected full-decaf caffeine-removal prose, NOT green Natural processing.
+// Do not infer EA solvent or transfer a general roaster page/sibling's treatment.
+const CURRENT_SELECTED_BEAN_CANE_REMOVAL=/^we['’]ve\s+stripped\s+this\s+bean\s+of\s+its\s+caffeine\s+content\s+through\s+a\s+natural\s+sugar[ -]?cane\s+process\b/iu;
 // A current decaf's actual product description sometimes states its method in
 // a prose sentence rather than a labeled spec (Leap Coffee's Swiss Water page).
 // Accept direct, selected-product usage or a narrow current decaf process
@@ -407,6 +410,18 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
      !decafEvidence.has(ownCane)){
    if(decafEvidence.size<4)decafEvidence.add(ownCane);
    else decafEvidenceOverflow=true;
+  }
+  // The selected current full-decaf product's own affirmative caffeine-removal
+  // paragraph, with hard source/identity and education/negation restrictions.
+  const caneRemoval=line.match(CURRENT_SELECTED_BEAN_CANE_REMOVAL)?.[0]||'';
+  if(decafOnlyCoffee(name)&&b.tag==='p'&&!b.educational&&line.length<=650&&
+     caneRemoval&&!NONCURRENT_DECAF_METHOD.test(line)&&
+     !/^(?:faq|frequently asked questions|decaf process education)$/iu.test(String(b.section||'').trim())&&
+     !/\b(?:not|never|without|instead of|rather than|unlike)\b/iu.test(caneRemoval)&&
+     inferDecaffeinationMethod({name,selectedMethod:caneRemoval})==='Sugar Process'&&
+     !decafEvidence.has(caneRemoval)){
+    if(decafEvidence.size<4)decafEvidence.add(caneRemoval);
+    else decafEvidenceOverflow=true;
   }
   // Direct selected decaf evidence, never general educational background.
   if(selectedUnnamedDecafIdentity&&line.length<=240&&

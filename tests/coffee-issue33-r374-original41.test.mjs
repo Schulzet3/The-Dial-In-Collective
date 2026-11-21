@@ -48,3 +48,10 @@ test('required official source access/H1/parser/no-save UI stays fail-closed',()
   {add_coffee_ui_rendered:false},{source_review_rendered:false}])
   assert.ok(requiredFocusedSourceFailures([41],[{...good,...diff}]).length>0);
 });
+
+test('Spanish descafeinado is explicit full-decaf identity, but regular Spanish coffee cannot inherit method',()=>{
+ const selected=parsed(name);
+ assert.equal(selected.fields.decaffeination_method,'Sugar Process');
+ const regular=parsed('Colombia Tueste Oscuro',cane);
+ assert.equal(regular.fields.decaffeination_method,undefined);
+});
