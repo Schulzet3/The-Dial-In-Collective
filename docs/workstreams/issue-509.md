@@ -1,3 +1,15 @@
+# Issue #509 R401 — direct PostgreSQL core operator definitions 1–220/799 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=cef0495a230cfc57b199030cc71a05c54635891f preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+2026-11-21 UTC. Mandatory immutable development PREFLIGHT Git blob matched byte-for-byte, project azviqqejypsefzilgonr ACTIVE_HEALTHY PostgreSQL 17.11; production strictly READ-ONLY. Continued from exact R400 cursor, directly reviewed **220/220 complete exposed pg_catalog.pg_operator definition catalog texts** ranks **1–220 of 799** (provider canonical characters **144868/144868**), including all underlying function bindings, typed results, descriptions and SQL implementation text where exposed. Every OID, source MD5, exact full catalog literal, 1–end character range, individual typed semantic verdict and operator link/dependency diagnostics in [append-only R401 ledger](../audits/issue509-r401-pg-catalog-operators-ranks1-220-20261121.json). Compiled native bodies and original CREATE OPERATOR SQL are UNVERIFIED. No #267 source-line credit.
+
+**Semantic review:** For 220 typed operators, no broken referenced functions or reciprocal commutator/negator links (98 commutators, 19 negators); 10 SQL and 210 internal implementations. Overloaded symbols are not safe duplicates: `&&` is tsquery AND versus range/array/network/geometry overlap; `*` may be numeric multiply, geometric transform or range intersection; `+` and `-` include interval/timezone, JSONB deletion and ACL semantics. JSON `#>`/`#>>` and `->`/`->>` distinguish typed result; LIKE/regex respect case sensitivity. No direct noncore class dependency edges discovered here, **NOT** absence of runtime/extension/operator-class consumers. No new reproduced DIC app bug, justified operator deletion, drift or measured app bottleneck.
+
+No code/test/CI changes (new CI NOT_APPLICABLE); release READY/published current status NOT_REVALIDATED. GitHub change is docs-only; no production migration/SQL data/Auth/Storage/Edge/config/provider writes, publication, backup or schedule change. Entire baseline IN_PROGRESS. **Next precise unreviewed cursor:** pg_catalog.pg_operator rank 221/799, `/(integer,integer)`, OID 528, char 1. Owner-action-only notification policy unchanged.
+
+---
+
 # Issue #509 R400 — full exposed PostgreSQL aggregate catalog semantic review [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=19af81bef828684eaea592cf2df785f49db4ec5e preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
