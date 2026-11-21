@@ -632,8 +632,9 @@ export function recommendation(s,coffeeId,options={}) {
   if(a.next||a.kind==='diagnostic'){
    // Actual current-basket rated feedback supersedes a starting fallback.
    // Do not describe a measured next-shot adjustment as a starting estimate.
-   if(rec.basketCompatibilityNote){
+   if(rec.basketCompatibilityNote||rec.startingCompatibilityNote){
     delete rec.basketCompatibilityNote;
+    delete rec.startingCompatibilityNote;
     rec.inapplicableFamilyWithCurrentFeedback=true;
    }
    // An applied next-shot adjustment keeps every other measured control

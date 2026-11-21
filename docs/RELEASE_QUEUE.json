@@ -17703,10 +17703,10 @@
     {
       "id": "DIC-Q-455-r411-nonpersonal-starting-yield-boundary",
       "issue": 455,
-      "pr": null,
+      "pr": 3573,
       "title": "Guard unloggable tentative similar-coffee and Community starting yields",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "3945a7353dadf81e7702170dde58cb95241e5782",
       "scope_paths": [
         "site/lib/engine.js",
         "site/lib/ui.js"
@@ -17714,14 +17714,24 @@
       "owner_source": "Issue #455 owner Option B SAFE; DIC_PREFLIGHT_VERIFIED development_sha=5601ec1e529173ee4dbb4d7ae5ef80db7eea48cd preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e",
       "tests": [
         "Seven synthetic real-module Node22 negative/positive regressions; source-bound hosted CI PENDING, not PASS.",
-        "R405 previously passing, unchanged family evidence; do not infer real member or coffee quality outcomes."
+        "R405 previously passing, unchanged family evidence; do not infer real member or coffee quality outcomes.",
+        "Original PR #3573 exact head 2723a6aa11d428342cc38cd365f1a79c06e26ea4: Node22 validate 44877437731 SUCCESS; mobile/cloud/offline/a11y 44877437714 SUCCESS, SQL 44877437643, security 44877437661, approval/governance 44877437723 SUCCESS; original603 SKIPPED not PASS. Exact merge 3945a7353dadf81e7702170dde58cb95241e5782 all five original blobs matched; merged Node still IN_PROGRESS at R411b authoring.",
+        "R411b adds an eighth synthetic next-shot feedback override case; correct obsolete tentative starting note only when current measured advice wins. New source-bound CI PENDING, not PASS."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        44877437731,
+        44877437714,
+        44877437643,
+        44877437661,
+        44877437723,
+        44877731831,
+        44877731812
+      ],
       "blockers": [
         "Exact-head and postmerge applicable Node22/browser/offline/security/SQL/governance checks not yet verified.",
         "Owner #3347 five-job frozen candidate release prevalidation not yet certified; TESTING, NOT READY."
       ],
-      "notes": "Development only; current approved 5–200g shot bounds, baseline ratios, five ratings, immutable donor and Community evidence, original successful family distinction. No policy, telemetry, deployment or member-data changes.",
+      "notes": "Development only; current approved 5–200g shot bounds, baseline ratios, five ratings, immutable donor and Community evidence, original successful family distinction. No policy, telemetry, deployment or member-data changes.\nR411b regression case and source guard supersede stale compatibility notice on valid current-basket measured next-shot advice; source SHA 3945a7353dadf81e7702170dde58cb95241e5782 new CI pending.",
       "production_deployed": false
     }
   ],
