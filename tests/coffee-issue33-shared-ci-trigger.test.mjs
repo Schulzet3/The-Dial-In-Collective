@@ -125,3 +125,22 @@ test('N508-075 R377 actual Netlify URL preview and transitive admission/request 
   assert.equal(yaml.split('node --test').length-1,1,'a single bounded offline Node invocation');
   assert.doesNotMatch(yaml,/DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS|focused-source-review\.mjs|workflow_dispatch:|schedule:/);
 });
+
+test('R381b #508 N508-075 partial ICONIK offline coverage without weakening strict case-specific real source',()=>{
+ const source='tests/coffee-issue33-r207-original310-312.test.mjs';
+ const scoped=readFileSync(new URL('../.github/workflows/issue33-r207-original310-312.yml',import.meta.url),'utf8');
+ assert.equal(yaml.split("- '"+source+"'").length-1,2,'shared offline PR and push trigger the actual selected case regression');
+ assert.ok(yaml.includes('            '+source),'single offline job executes original #310–312 positive and hostile cases');
+ const offline=readFileSync(new URL('../'+source,import.meta.url),'utf8');
+ assert.match(offline,/extractPublicCoffeeFacts/,'the test invokes the actual parser');
+ assert.doesNotMatch(offline,/\bfetch\s*\(|\bhttps?\.request\s*\(/,'the shared regression makes no live public product calls');
+ assert.match(scoped,/^\s*-\s+src\/server\/coffee-page-metadata\.mjs\s*$/m,'R381b retains R207 strict live-source trigger; broader fanout remains an OPEN #508 case');
+ for(const owned of [
+  '.github/workflows/issue33-r207-original310-312.yml',
+  'scripts/audit/issue33-r207-original310-312-check.mjs',
+  source
+ ])assert.equal(scoped.split('      - '+owned+'\n').length-1,2,'direct per-case changes still dispatch bounded real-source PR/push '+owned);
+ assert.match(scoped,/DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '310,311,312'/,'directly selected case keeps strict official-source acceptance');
+ assert.equal(yaml.split('node --test').length-1,1,'no duplicate or networked job');
+ assert.doesNotMatch(yaml,/DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS|focused-source-review\.mjs|workflow_dispatch:|schedule:/);
+});
