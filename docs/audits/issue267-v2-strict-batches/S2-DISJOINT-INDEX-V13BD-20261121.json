@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "V13BD",
+  "append_only": true,
+  "development_prewrite_sha": "21288fc8c9dd9bebddc425a0afc988f76a3d4236",
+  "preflight_blob_sha": "3742fed0176c809b115320c698a0e8b1675b2d3e",
+  "review_method": "DIRECT_AI_PER_LINE_IMMUTABLE_LITERAL_AND_SEMANTICS_NOT_HUMAN",
+  "tracks": [
+    {
+      "track": "frozen_historical_v2",
+      "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+      "source_tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+      "manifest_index_1_based": 220,
+      "path": "docs/audits/application_pass2_tests.json",
+      "source_blob_sha": "beadec4119aa655da3ff6333a80f93bc867b7eb4",
+      "first_line": 287,
+      "last_line": 316,
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F220-287-316-20261121-V13BD.json",
+      "receipt_blob_sha": "27a5d648e4ed0c2ea12426a77210d40b4b1d9c0f"
+    },
+    {
+      "track": "pinned_executable_v2",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "manifest_index_1_based": 66,
+      "path": "scripts/audit/measure-stage.mjs",
+      "source_blob_sha": "85216a94af17a71d95197dffe5530ddce43d4230",
+      "first_line": 21,
+      "last_line": 37,
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C66-21-37-20261121-V13BD.json",
+      "receipt_blob_sha": "99dde3dbe6bbd54feafd2ac347375962cebea855"
+    },
+    {
+      "track": "pinned_executable_v2",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "source_tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "manifest_index_1_based": 67,
+      "path": "scripts/audit/provider-security-probes.py",
+      "source_blob_sha": "0f7c09be4f017fa7bed78d4d57fd3a24cf93a022",
+      "first_line": 1,
+      "last_line": 13,
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-CURRENT-C67-1-13-20261121-V13BD.json",
+      "receipt_blob_sha": "fe4b91af6aad869c2bb7001b6a4f3c10e5a3af05"
+    }
+  ],
+  "source_line_counts": {
+    "frozen": 30,
+    "pinned": 30,
+    "total_new": 60,
+    "previous_receipts_independently_revalidated": 60
+  },
+  "original_blob_parity": "PASS_3_COMPLETE_SOURCE_FILES_SEPARATELY_FETCHED",
+  "archived_json_parse": "PASS",
+  "pinned_live_parity": "PASS_C66_C67_SAME_BLOB_AS_LIVE_DEVELOPMENT",
+  "findings": [
+    {
+      "area": "CI measure-stage exported direct-call parser boundary",
+      "severity": "LOW_NOT_REPRODUCED",
+      "disposition": "RETAIN_NO_SPECULATIVE_FIX; inspect actual callers and focused error/path cases later"
+    },
+    {
+      "area": "Archival Community/adaptive extractor/size checks",
+      "severity": "HISTORICAL_ONLY",
+      "disposition": "RETAIN_ARCHIVE_NO_CURRENT_TEST_PASS"
+    },
+    {
+      "area": "Public provider security probe Python imports/header",
+      "severity": "SOURCE_ONLY",
+      "disposition": "RETAIN_NO_HOSTED_READ; #96 owns Auth/privacy"
+    }
+  ],
+  "tests": {
+    "immutable_source_and_blob_match": "PASS",
+    "per_line_immutable_literal_equality": "PASS_60_OF_60",
+    "previous_receipt_source_validation": "PASS_60_OF_60",
+    "historical_json_parse": "PASS",
+    "runtime_tests": "NOT_RUN_DOCS_ONLY",
+    "node22": "NOT_RUN_DOCS_ONLY",
+    "browser_offline_sql_auth": "NOT_RUN_DOCS_ONLY",
+    "github_ci": "PENDING_AT_JOURNAL_WRITE"
+  },
+  "provider_readback": "NOT_APPLICABLE",
+  "new_application_fixes": 0,
+  "original603_unchanged": true,
+  "v1_preserved": true,
+  "provisional_r2_c2_preserved": "5451/6462_UNCHANGED_NOT_BLIND_CREDIT",
+  "older_s2_historical_totals_unchanged": "7635/9318_UNCHANGED_NOT_BLIND_CREDIT",
+  "post_pin_drift": "INCOMPLETE",
+  "nontext_assets": "INCOMPLETE",
+  "full_audit_complete": false,
+  "next_source": {
+    "frozen_manifest_index": 220,
+    "frozen_path": "docs/audits/application_pass2_tests.json",
+    "frozen_line": 317,
+    "pinned_manifest_index": 67,
+    "pinned_path": "scripts/audit/provider-security-probes.py",
+    "pinned_line": 14
+  }
+}
