@@ -1,3 +1,15 @@
+# Issue #509 R413 — pg_catalog encoding conversions 128/128 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=7699aaa3cf9b977c839cc7ad2ea73340208a7b8e preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-21 UTC.** First read current development ref and immutable PREFLIGHT.md bytes, verified exact Git blob; live project `azviqqejypsefzilgonr` ACTIVE_HEALTHY PostgreSQL 17.11.0.003, strictly READ-ONLY. Directly semantically reviewed all **128/128** exposed PostgreSQL core encoding-conversion catalog tuples, reconstructed declarations (marked as reconstructions, not original CREATE statements), and full exposed C handler declarations: **71620 accessible characters**. Complete per-object OIDs, encoding pair, default flag, handler, canonical tuple text, provider MD5, 1–end coverage, semantic classification and disposition are in [R413 append-only ledger](../audits/issue509-r413-pg-catalog-conversions-ranks1-128-20261121.json).
+
+Validated **128 unique default directional encoding pairs**, **84 distinct C handlers**, zero absent/incorrect handler signatures. Reviewed BIG5/EUC/Japanese/Korean/Chinese, ISO-8859, Cyrillic/KOI8, Windows and UTF8/MULE_INTERNAL paths. Shared ISO and Windows conversion handlers are parameterized for different encodings, **not** unused duplicate app code. Project database encoding is UTF8. Zero `pg_depend` conversion→proc rows does **not** prove unreferenced native pinned system objects. No reproducible DIC error, safe native removal, or measured app bottleneck. Native compiled implementation, original CREATE CONVERSION source and dynamic callers remain **UNVERIFIED**; no #267 code-line credit.
+
+Docs-only atomic ledger+journal change; no app source/migrations/test/CI changes, new exact-source CI **NOT_APPLICABLE**. Production SQL/data/Auth/Storage/Edge/config/release/backup/billing/schedule **unchanged**; READY/DEPLOYED **NOT_REVALIDATED**, baseline **IN_PROGRESS**. Exact next catalog route: check available `pg_catalog.pg_transform` count, then rank **1** character 1 (or subsequent unreviewed catalog category if empty). Existing hourly schedule/owner-action-only alert policy preserved.
+
+---
+
 # Issue #509 R412a — resolved unicode collation false-positive [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=7e4ff817ce9965019410e2686e34f493d943e3c8 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
