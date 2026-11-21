@@ -1,3 +1,15 @@
+# Issue #509 R419/R419b — full PostgreSQL catalog and TOAST indexes [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=5e7c23c34a087d988104127f1b8820b8e3a4a373 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-21 UTC; production read-only.** Live GitHub preflight verified at immutable development SHA and Git blob; connected Supabase project `azviqqejypsefzilgonr` ACTIVE_HEALTHY, PostgreSQL 17.11. Resumed #509 R418 exact next cursor and directly semantically reviewed **243 additional complete exposed CREATE INDEX definitions**, `pg_catalog.pg_index` **124/124 (12,631 characters)** and `pg_toast.pg_index` **119/119 (11,945 characters)**; combined **24,576/24,576 literal chars**. Each individual full `pg_get_indexdef` DDL, OID, provider MD5, exact character 1–end range, owner/TOAST dependencies, usage metrics, semantic purpose and disposition is preserved in `docs/audits/issue509-r419-pg-catalog-indexes-ranks1-124-20261121.json` and `docs/audits/issue509-r419b-pg-toast-indexes-ranks1-119-20261121.json` (append-only, no preceding ledger modified).
+
+**Findings:** All **243 valid/ready**. Catalog: **110 constraint-backed, 14 nonunique**; distinct OID/name and typed overload identity, forward/reverse dependency, role membership and publication keys each have different purpose. TOAST: **119 unique PRIMARY (chunk_id, chunk_seq) indexes**, one per **119 parent-owned physical TOAST tables**, zero unmapped. Repeated index key SQL across *different tables* is not redundancy. Neither absent scans nor similar key prefixes justify removal. PostgreSQL native compiled behavior and original bootstrap scripts remain **UNVERIFIED**. No reproduced DIC application bug, justified deletion, measured bottleneck or development source fix in this reviewed range. Prior public/private/auth/realtime/storage/migrations/vault R416-R418 receipts plus this R419 establish exposed-definition coverage for **497/497 physical indexes**, not a complete provider-wide or native-source review. Zero #267 GitHub original/current line credit.
+
+No code/test/CI edit; new exact-source CI **NOT_APPLICABLE**, not PASS. READY/DEPLOYED/provider publication **NOT_REVALIDATED**. No production SQL/data/Auth/Storage/Edge/config, migration, release, backups, billing or schedule changes. Full baseline **IN_PROGRESS**. **Next exact unreviewed cursor:** `auth.pg_attrdef` rank **1/57**, followed by realtime **1/10**, storage **1/33**, vault **1/5** and unreviewed relation definitions. Owner-action-only alerts unchanged.
+
+---
+
 # Issue #509 R418/R418b — 148 live Auth/service index definitions [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=66a3ca2e3136fd739664e7544aa5aac64b1d1be2 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
