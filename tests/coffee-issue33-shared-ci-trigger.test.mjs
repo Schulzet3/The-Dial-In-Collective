@@ -68,3 +68,22 @@ test('N508-075 R367 recent selected original603 adversarial cases run offline on
   assert.equal(yaml.split('node --test').length-1,1,'single bounded offline invocation');
   assert.doesNotMatch(yaml,/DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS|focused-source-review\.mjs|workflow_dispatch:|schedule:/);
 });
+
+test('N508-075 R372 historically skipped selected #558/#241 synthetic contracts run on shared changes',()=>{
+ const legacy=['r112-558','r335-novo-241'];
+ for(const id of legacy){
+  const file='tests/coffee-issue33-'+id+'.test.mjs';
+  assert.equal(yaml.split("- '"+file+"'").length-1,2,'must trigger PR and push: '+file);
+  assert.ok(yaml.includes('            '+file),'must run offline in the single shared job: '+file);
+  const body=readFileSync(new URL('../'+file,import.meta.url),'utf8');
+  assert.doesNotMatch(body,/\bfetch\s*\(|\bhttps?\.request\s*\(/,'synthetic tests must not fetch HTTP: '+file);
+ }
+ const guard=readFileSync(new URL('../scripts/audit/issue33-r335-novo-241-transport.mjs',import.meta.url),'utf8');
+ assert.match(guard,/if\(process\.env\.DIC_R335_RUN==='1'\)await diagnose\(\)/,'live Novo diagnostic must stay opt-in');
+ const selected=readFileSync(new URL('../tests/coffee-issue33-r112-558.test.mjs',import.meta.url),'utf8');
+ assert.match(selected,/extractPublicCoffeeFacts/,'original #558 uses real parser with no HTTP');
+ const novo=readFileSync(new URL('../tests/coffee-issue33-r335-novo-241.test.mjs',import.meta.url),'utf8');
+ assert.match(novo,/isCoffeeSourceAccessChallenge/,'original #241 challenge guard exercised');
+ assert.equal(yaml.split('node --test').length-1,1,'no duplicated live HTTP jobs');
+ assert.doesNotMatch(yaml,/DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS|focused-source-review\.mjs|workflow_dispatch:|schedule:/);
+});
