@@ -17851,6 +17851,31 @@
       ],
       "notes": "Actual entered non-tenth measured grind was rounded by shotPayload/saveShot/editShot despite precision-capable SQL. Narrow SAFE integrity correction; original measured shots preserved. No publish/provider writes.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-r421-grind-reference-grid",
+      "issue": 455,
+      "pr": null,
+      "title": "Constrain fractional grinder starting reference and band to selectable calibrated one-tenths; abstain if none",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js",
+        "site/cloud/main.js"
+      ],
+      "owner_source": "Issue #455 Option B SAFE user-visible correctness; DIC_PREFLIGHT_VERIFIED development_sha=1b1162a7d6d34154a4082f31422f36258120dab9 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e; R420 actual-module negative and positive reproduction in ops-issue455-r420-grind-reference-grid-evidence-20261121.md",
+      "tests": [
+        "R420 actual-module four-source V8 reproduced fractional 2.55 -> invalid 2.6 band, not full app CI.",
+        "Nine new synthetic Node22 regression cases authored for grid edge/no-grid/other basket/provenance/five tastes/Turbo Fast-Flow/Slow Feed/UI guard. Hosted results PENDING, not PASS.",
+        "Risk-proportionate Node22/lint/build, cloud/browser/mobile/offline/a11y and approval/continuity must pass on exact PR head; verify exact merged source later. SQL/Auth unchanged; do not infer PASS from SKIPPED."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-head source tests and CI not yet verified; no merge until applicable checks pass.",
+        "Merged-source checks and #3347 frozen-candidate five status proof not verified. TESTING NOT READY, never deploy without NEW Publish."
+      ],
+      "notes": "Preserves original measured shot, five tastes, notes, privacy, distinct styles and feed, calibration history, prior R415/R417/R419 safeguards; no numeric optima or empirical taste claims. No production/member/provider writes.",
+      "production_deployed": false
     }
   ],
   "history": [
