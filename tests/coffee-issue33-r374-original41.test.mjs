@@ -3,6 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../site/cloud/coffee-url-autofill.js';
+import {selectedShopifyPageFlyH3Identity} from '../scripts/audit/issue33-shopify-pagefly-h3.mjs';
 import {requiredFocusedSourceFailures} from '../scripts/audit/issue33-focused-source-acceptance.mjs';
 const url='https://brickhouseroasters.com/products/descafeinado';
 const name='Descafeinado';
@@ -54,4 +55,24 @@ test('Spanish descafeinado is explicit full-decaf identity, but regular Spanish 
  assert.equal(selected.fields.decaffeination_method,'Sugar Process');
  const regular=parsed('Colombia Tueste Oscuro',cane);
  assert.equal(regular.fields.decaffeination_method,undefined);
+});
+
+test('PageFly H3 must be tracker/product-id/cart-form exact; recommendation/SEO/wrong product never qualifies',()=>{
+ const id='5039969009700',url='https://brickhouseroasters.com/products/descafeinado';
+ const tracker='<script id="__st">var __st={"p":"product","rtyp":"product","rid":5039969009700,"pageurl":"brickhouseroasters.com/products/descafeinado"};</script>';
+ const form=(title=name,nid=id,href='')=>'<div data-pf-type="ProductBox" data-product-id="'+nid+'"><form id="product_form_'+nid+'" class="pf-product-form" action="/cart/add"><input name="form_type" value="product"><input name="product-id" value="'+nid+'"><h3 data-pf-type="ProductTitle" data-product-type="title" data-product-id="'+nid+'"'+(href?' data-href="'+href+'"':'')+'>'+title+'</h3></form></div>';
+ const page=(hero,tail='',tr=tracker)=>'<html><head><meta property="og:title" content="Descafeinado Decaf Coffee, Colombia"></head><body>'+tr+hero+tail+'</body></html>';
+ const args={source_url:url,expected_name:name,parsed_name:'Descafeinado Decaf Coffee, Colombia'};
+ const valid=page(form(name),form('Related Coffee','3456789','/products/related-coffee'));
+ assert.equal(selectedShopifyPageFlyH3Identity(valid,args)?.selected_title,name);
+ for(const bad of [
+  page(form('Wrong Coffee')),
+  page(form(name,id,'/products/descafeinado')),
+  page(form(name,'7777777')),
+  page(form(name),form(name)),
+  page(form(name),'',''),
+  page(form(name),'','<script id="__st">var __st={"p":"product","rtyp":"product","rid":8,"pageurl":"brickhouseroasters.com/products/descafeinado"};</script>'),
+ ])assert.equal(selectedShopifyPageFlyH3Identity(bad,args),null,'unverified purchase identity');
+ assert.equal(selectedShopifyPageFlyH3Identity(valid,{...args,parsed_name:'Different Coffee'}),null);
+ assert.equal(selectedShopifyPageFlyH3Identity(valid,{...args,source_url:'https://another.example/products/descafeinado'}),null);
 });
