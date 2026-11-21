@@ -1,0 +1,53 @@
+name: DIC Issue33 R374 original41 exact current selected decaf diagnostic
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r374-original41.yml
+      - scripts/audit/issue33-r374-original41-check.mjs
+      - tests/coffee-issue33-r374-original41.test.mjs
+      - docs/workstreams/ops-issue33-r374-original41-20261121.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r374-original41.yml
+      - scripts/audit/issue33-r374-original41-check.mjs
+      - tests/coffee-issue33-r374-original41.test.mjs
+permissions:
+  contents: read
+jobs:
+  selected-source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Red-first selected-source sugarcane positive and hostile synthetic contracts
+        run: node --test tests/coffee-issue33-r374-original41.test.mjs
+      - name: Actual guarded HTTPS original41 official source, parser and no-save UI
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '41'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r374
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: SHA-bound original41 selected first-party direct-source diagnostic
+        if: always()
+        env:
+          DIC_R374_VERIFY: '1'
+          DIC_R374_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_R374_EVENT_SHA: ${{ github.sha }}
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r374
+        run: node scripts/audit/issue33-r374-original41-check.mjs
+      - name: Preserve bounded one-day public selected-source evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r374-original41
+          path: /tmp/dic33-r374/
+          retention-days: 1
+          if-no-files-found: warn
