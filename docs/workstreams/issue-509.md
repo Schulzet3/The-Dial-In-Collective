@@ -1,3 +1,17 @@
+# Issue #509 R432 — direct semantic inspection of PostgreSQL attribute definitions 481–880 [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=cb70f113626dfb1fc90238a4129fd6b2dd9f43f6 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+2026-11-21 UTC. Independently Git SHA-1-verified immutable `docs/ai/PREFLIGHT.md` content before any other GitHub documents or Supabase tools. Live project `azviqqejypsefzilgonr` ACTIVE_HEALTHY / PostgreSQL 17.11.0.003, **PRODUCTION STRICTLY READ-ONLY**. Resumed R431 exact `pg_attribute` rank **481/4181**, `pg_catalog.pg_constraint_conrelid_contypid_conname_index.conrelid`, relation OID 2665, first character. Directly examined actual column names, SQL types, physical attribute fields and PostgreSQL relation purposes for **400/400 new full live catalog attribute tuples** (202,390 literal JSONB tuple characters, 155 relations). Preserved entire provider tuple text, MD5 per object, inclusive 1–end character coverage and individually classified semantic retention in immutable append-only [R432 ledger](../audits/issue509-r432-pg-attribute-ranks481-880-20261121.json), Git commit `826603557841ae8f8fd0953ac6749fa610dad692`.
+
+**Semantic assessment:** 263 pg_catalog and 137 pg_toast attributes; 187 catalog/TOAST lookup-index attributes, 130 PostgreSQL core catalog fields, 83 TOAST chunk fields. Independently verified full provider tuples against physical types and PostgreSQL index/TOAST dependencies: **0** physical length/pass-by-value/alignment inconsistencies, dropped/missing-value attributes, mismatched default metadata, identity/generated flags, invalid/unready/unregistered index fields, or orphan TOAST parents. Catalog metadata spans constraint, dependency, role, statistics, RLS policy, extension, collation, language, text search, partition, event-trigger and metadata lookup primitives. Their similarly named OID and alternate-order indexes fulfill distinct engine contracts, not proven duplicate DIC business logic. No data rows, role secrets, Auth identities, private shots/notes, credentials or sensitive logs retrieved.
+
+**Finding/disposition:** This bounded *PostgreSQL managed* catalog range establishes **no reproducible DIC app defect**, deletion candidate with verified absent consumers, source/deployment drift, or attributable bottleneck. No GitHub code/test/CI changes or safe source patch justified; new exact-source CI **NOT_APPLICABLE**, **not PASS**. READY/DEPLOYED state and queue **NOT_REVALIDATED**. No #267 source-code line credit; source bootstrap SQL, native compiled PostgreSQL internals and remaining provider surfaces **UNVERIFIED**. Full baseline **IN_PROGRESS**; cumulative this attribute route **880/4181**, 3,301 unreviewed.
+
+**Next exact cursor:** `pg_toast.pg_toast_1260.chunk_data`, relation OID **4175**, attnum **3**, `pg_attribute` rank **881/4181**, character **1** (independently checked ranks 880–882). Continue strict rank-ordered attribute inspection, then unfinished provider objects, and prioritize actual app/Edge semantic defects whenever supported by evidence. No production SQL/data/Auth/Storage/Edge/config, migration, backup, billing, deployment, publication, scheduling or owner-alert-policy writes. No new owner-action decision or newly changed material problem.
+
+---
+
 # Issue #509 R431 — direct semantic review of pg_attribute rows 1–480 [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=7ab0b3760e01069ca9f3d89d94601aab0ba5a893 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
