@@ -1,3 +1,15 @@
+# Issue #509 R423 — targeted source-to-live consumer proof [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=742a041a903db00bace7b19994e23835e3ff6fd9 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-21 UTC; production read-only.** After R421/R422 complete private/public table/sequence `pg_class` catalog review, semantically cross-checked **five complete live provider RPC/SQL definitions**, **16467 source characters** (per-OID signature, full exposed text MD5, 1–end ranges and EXECUTE status in [R423 targeted evidence](../audits/issue509-r423-dependent-rpc-recheck-20261121.json)). This is a **targeted dependency recheck, NOT five new baseline functions credited**. Source Git blobs current at `5256574e0c479c85467232bb6d7258be0129fd26`: `site/cloud/main.js` `bc16dd47e0a18800c4e9accc88748d74df7987b3`, `site/cloud/client.js` `08e1ac1f2610dca9fad162272c8e3c7ea56566a5`, Locked `docs/DECISION_LEDGER.json` `4358554c0ad0678bacaa93ae357c391d42c97bec`.
+
+**Resolved candidates safely:** `private.import_control` is live-consumed by `private.import_operation`, which verifies time-bounded owner exception via `clock_timestamp()`; not unused or a reproduced static-CHECK bug. `private.dic_first_style_prompt_seen` is still written by live `private.dic_claim_first_style_prompt_impl`; authenticated public `dic_claim_first_style_prompt` RPC and current `site/cloud/client.js` helper exist. Yet the November 8 Locked first-shot UX repeats guidance until a shot, and current `site/cloud/main.js` has no direct claim-helper invocation. This is **legacy potentially obsolete UI call path**, but external clients/queued calls are UNVERIFIED; DO NOT drop provider table/RPC solely on lack of current UI use; coordinate source-side removal with #267 and prove all consumers. `private.mutate` retains `hide_shot` internal logic by **explicit owner DEFERRED** Locked `UX-DEFER-PRIVATE-HIDE-SHOT-RETIREMENT-20261021`; live public `dic_apply_client_change` rejects it before dispatch and `authenticated` lacks direct private EXECUTE. Never silently delete the deferred branch or historical `shots.hidden_at` data; not a new authorization request.
+
+No new reproducible application bug, safe justified deletion or source/provider drift requiring repair. Exact-source new CI **NOT_APPLICABLE**, not PASS, READY/DEPLOYED **NOT_REVALIDATED**; no provider SQL/data/Auth/Storage/Edge/config, test/CI/code, publication, billing, backup, alert or schedule changes. Full baseline **IN_PROGRESS**; #267 line-credit zero. **Next:** identify next unreviewed provider `pg_class` schema/OID in full #509 audit inventory; preserve R421 private 34/34 + R422 public 24/24 source-bound receipts. Keep hourly owner-action-only alerts.
+
+---
+
 # Issue #509 R422 — 24 public application table relations [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=742a041a903db00bace7b19994e23835e3ff6fd9 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
