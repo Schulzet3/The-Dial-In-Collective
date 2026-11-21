@@ -40,7 +40,8 @@ export function evaluateSelected241(record){
  const notesReview=conflicts.length===1&&conflicts[0]==='tasting_notes'&&
   !f.tasting_notes&&sourceBoundConflict;
  const allowed=(conflicts.length===0&&!sourceBoundConflict)||notesReview;
- const valid=Boolean(record?.fetched&&record?.html_bytes>0&&/^[0-9a-f]{64}$/.test(record?.html_sha256||'')&&
+ const valid=Boolean(record?.fetched&&record?.access_challenge!==true&&
+  record?.reason!=='source_access_challenge'&&record?.html_bytes>0&&/^[0-9a-f]{64}$/.test(record?.html_sha256||'')&&
   exactNovo241Url(record?.source_url)&&match&&record?.parser_ok&&record?.add_coffee_ui&&
   record?.source_review_ui&&allowed);
  return {accepted:valid,classification:valid?(notesReview?'EXACT_SELECTED_SOURCE_TASTING_CONFLICT_REVIEW':'EXACT_SELECTED_SOURCE_VERIFIED'):
