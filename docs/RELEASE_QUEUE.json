@@ -17803,6 +17803,30 @@
       ],
       "notes": "Development only; current approved 5–200g shot bounds, baseline ratios, five ratings, immutable donor and Community evidence, original successful family distinction. No policy, telemetry, deployment or member-data changes.\nR411b regression case and source guard supersede stale compatibility notice on valid current-basket measured next-shot advice; source SHA 3945a7353dadf81e7702170dde58cb95241e5782 new CI pending.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-r417-measured-grind-precision",
+      "issue": 455,
+      "pr": null,
+      "title": "Preserve original fractional grinder settings in new, offline and edited shot measurements",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js",
+        "site/cloud/mapping.js"
+      ],
+      "owner_source": "Owner Issue #455 Option B SAFE; DIC_PREFLIGHT_VERIFIED development_sha=38c275c437302c25977b3203758dcf8f1237b70c preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e; source engine 12f036ff2286c3e041d5ebf2a81c56ead6928c5c, mapping acbed6bd0f02cb7e626374a22cbeba1ab187ec2a",
+      "tests": [
+        "Four synthetic actual-module positive/negative R417 regressions authored; hosted Node22, browser/mobile/offline/a11y, SQL, security and governance pending (NOT PASS).",
+        "Cloud shotPayload, local offline save, original history, edits, all five tastes, notes, idempotent replay, true zero/tenths and missing fifth covered in authored tests.",
+        "Recommendation 0.1 adjustment grid remains unchanged; no real member or espresso quality evidence."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact source PR-head and merged CI not yet PASS; independent #3347 release candidate isolation and five successful checks pending. TESTING, not READY."
+      ],
+      "notes": "Actual entered non-tenth measured grind was rounded by shotPayload/saveShot/editShot despite precision-capable SQL. Narrow SAFE integrity correction; original measured shots preserved. No publish/provider writes.",
+      "production_deployed": false
     }
   ],
   "history": [
