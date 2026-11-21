@@ -1,3 +1,15 @@
+# Issue #509 R422 — 24 public application table relations [skip netlify]
+
+DIC_PREFLIGHT_VERIFIED development_sha=742a041a903db00bace7b19994e23835e3ff6fd9 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
+
+**2026-11-21 UTC; production read-only.** Exact immutable first GitHub preflight verified and Git blob content matched before any provider. Continued after R421 `private.pg_class` 34/34. Directly reviewed all **24/24 public application table `pg_class` objects** from rank 1 OID 17702 to rank 24 OID 20575; **109209 provider-catalog serialized characters** covering full exposed column types/defaults/generated expressions, constraints and checks, policy conditions, trigger DDL, index/PK/FK references, inbound FK dependencies, current physical metadata and per-relation source MD5. Individual inspected rank, [1,end] range, behavior and KEEP/limitations in [R422 append-only ledger](../audits/issue509-r422-public-relations-20261121.json). Combined R421+R422: **58/58 private/public pg_class table/sequence objects**, not all GitHub migrations, system catalog tuples, core code/native compiled SQL or provider-wide baseline.
+
+**Semantics reviewed:** personal shot `ratio = yield_g / dose_g` is bounded by `dose_g >= 5`; five taste scores and `is_dialed_in` are separate from detached eligible Community projection, preserving privacy and quality history. Composite same-owner/setup/version/library/style FKs protect recipe examples; setup/basket/calibration historical immutable versions and bag freeze/archival are separately justified. Canonical pending→verified coffee sources and first submissions remain distinct. Six supported styles include Fast-Flow. Admin Web Push subscriptions and member approval push subscriptions implement different event/caller flows, not redundant tables. The `shots.hidden_at` retained historical field and `coffee_sources.source_url` historical HTTP-compatible constraint need source/runtime consumer proof before any further retirement/restriction; no deletion based on name/row estimate alone.
+
+No new independently reproduced DIC bug, proven unused object, exact-source drift or measured bottleneck from these declarations. Complete original CREATE TABLE migrations and executable native bodies **UNVERIFIED** in this range. No production SQL/data/Auth/Storage/Edge/config, source code/test/CI, backups, billing, release, schedule or publication changes. Exact-source new CI **NOT_APPLICABLE**, not PASS; READY/DEPLOYED **NOT_REVALIDATED**; #267 line credit zero. Baseline **IN_PROGRESS**. **Next:** consult full #509 inventory for exact next unreviewed `pg_class` provider schema/object after private/public; do not reset completed cursors, then prioritize consumer/deployment drift and performance evidence. Owner-action-only notifications unchanged.
+
+---
+
 # Issue #509 R421 — 34 private application relations [skip netlify]
 
 DIC_PREFLIGHT_VERIFIED development_sha=742a041a903db00bace7b19994e23835e3ff6fd9 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e
