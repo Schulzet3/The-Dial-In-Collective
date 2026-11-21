@@ -20,14 +20,26 @@ export function exactNovo241Url(input){
  const u=safeCoffeeUrl(input);
  return Boolean(u&&u.hostname==='novocoffee.com'&&!u.search&&(u.pathname==='/product/buesaco'||u.pathname==='/product/buesaco/'));
 }
+export function selected241NotesConflictProvenance(record){
+ const facts=Array.isArray(record?.selected_notes_source_facts)?record.selected_notes_source_facts:[];
+ const choices=Array.isArray(record?.conflict_options?.tasting_notes)?record.conflict_options.tasting_notes:[];
+ const direct=new Set(facts.filter(x=>x?.conflicting===true&&
+  typeof x?.label==='string'&&x.label.trim()&&typeof x?.section==='string'&&x.section.trim()&&
+  typeof x?.value==='string'&&x.value.trim()).map(x=>norm(x.value)));
+ const review=new Set(choices.filter(x=>typeof x?.value==='string'&&x.value.trim()).map(x=>norm(x.value)));
+ return direct.size>=2&&review.size>=2&&[...direct].every(x=>review.has(x));
+}
 export function evaluateSelected241(record){
  const f=record?.parsed||{};
  const match=record?.h1?.length===1&&norm(record.h1[0])==='buesaco'&&norm(f.name)==='buesaco';
  const conflicts=record?.conflicts||[];
- // The official product has competing selected hero and labeled harvest sensory lists.
- // Current parser correctly withholds such a field, while other direct fields remain testable.
- const notesReview=conflicts.length===1&&conflicts[0]==='tasting_notes'&&!f.tasting_notes;
- const allowed=conflicts.length===0||notesReview;
+ // A reported conflict flag and blank canonical field alone cannot certify the
+ // two CURRENT selected product sensory alternatives. Both source-bound labels
+ // and both matching member-review options must independently survive parsing.
+ const sourceBoundConflict=selected241NotesConflictProvenance(record);
+ const notesReview=conflicts.length===1&&conflicts[0]==='tasting_notes'&&
+  !f.tasting_notes&&sourceBoundConflict;
+ const allowed=(conflicts.length===0&&!sourceBoundConflict)||notesReview;
  const valid=Boolean(record?.fetched&&record?.html_bytes>0&&/^[0-9a-f]{64}$/.test(record?.html_sha256||'')&&
   exactNovo241Url(record?.source_url)&&match&&record?.parser_ok&&record?.add_coffee_ui&&
   record?.source_review_ui&&allowed);
