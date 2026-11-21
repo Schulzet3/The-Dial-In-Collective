@@ -8,6 +8,31 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-r405-cross-basket-yield-eligibility",
+      "issue": 455,
+      "pr": null,
+      "title": "Avoid displaying unloggable cross-basket saved-recipe yield centers",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js",
+        "site/lib/ui.js",
+        "site/cloud/main.js"
+      ],
+      "owner_source": "Owner #455 Option B SAFE and immutable DIC_PREFLIGHT_VERIFIED development_sha=a6d2129ad52fc38c5de8d8a7299464697c594327 preflight_blob_sha=3742fed0176c809b115320c698a0e8b1675b2d3e",
+      "tests": [
+        "R404 static negative made actual source-runtime V8 repro R405: original 18g/108g Lungo success transferred to 40g basket yielded 240g, outside Log Shot 200g upper bound. V8 local preview is NOT hosted Node22 CI.",
+        "7 synthetic new Node22 negative/positive regressions target this Log Shot/recipeGrid/overview code; initial 44851691432 Node22 FAILED solely due stale R119 title assertion (5987 PASS/1 FAIL/6 SKIP), corrected by focused R119 assertion. Superseded draft 44852112541 approval/governance FAILED due malformed extra feature_prior_sha field; clean nonforce one-commit PR preflight and source-bound CI PENDING, not PASS.",
+        "No numeric policy, source research, historical shots, manually selected family, taste ratings, provider or production writes."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact PR-head and merged-source applicable hosted CI not yet read back; independent prospective #3347 frozen READY candidate certification remains required."
+      ],
+      "notes": "Development-only P2 display correctness, source entry bound 5-200g; no new science target, consent, member data, publication or empirical cup-quality outcome.",
+      "production_deployed": false
+    },
+    {
       "id": "DIC-Q-33-r362-original22-breadcrumb-roast-scope",
       "issue": 33,
       "pr": 3531,
